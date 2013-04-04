@@ -4,3 +4,4 @@ netbeans/**
 .buildpath/**
 nbproject/**
 vendor/**
+build/**
