@@ -3,6 +3,4 @@ netbeans/**
 .project/**
 .buildpath/**
 nbproject/**
-composer.phar
-composer.lock
 vendor/**
