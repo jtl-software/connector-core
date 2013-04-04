@@ -1,7 +1,7 @@
 netbeans/**
 .settings/**
-.project/**
-.buildpath/**
+.project
+.buildpath
 nbproject/**
 vendor/**
 build/**
