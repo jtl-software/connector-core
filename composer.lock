@@ -7,7 +7,7 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.jtl-software.de:jtl-software-gmbh/jtlcore.git",
-                "reference": "ac20864864b2a1f1c332ab78a1b754299a27b2ac"
+                "reference": "69602278eca96713dc6cee50ea5944ff0eba2508"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -25,9 +25,10 @@
             },
             "authors": [
                 {
-                    "name": "Daniel Böhmer",
-                    "email": "daniel.boehmer@jtl-software.de",
-                    "homepage": "http://www.jtl-software.de"
+                    "name": "JTL Software GmbH",
+                    "email": "info@jtl-software.de",
+                    "homepage": "http://www.jtl-software.de",
+                    "role": "Founder"
                 }
             ],
             "description": "jtlCore PHP 5.3 Library and Classes",
@@ -37,7 +38,7 @@
                 "jtl",
                 "library"
             ],
-            "time": "2013-04-04 09:09:29"
+            "time": "2013-04-04 09:46:28"
         }
     ],
     "packages-dev": [
