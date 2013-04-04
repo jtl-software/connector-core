@@ -2,3 +2,6 @@ netbeans/**
 .settings/**
 .project/**
 .buildpath/**
+nbproject/**
+composer.phar
+composer.lock
