@@ -1,5 +1,5 @@
 {
-    "name": "jtlConnector",
+    "name": "jtl/Connector",
     "type": "APP",
     "description": "jtlConnector PHP 5.3 Library and Classes",
     "keywords": ["jtl", "Connector"],
@@ -21,12 +21,13 @@
         }
     },
     "require": {
-        "jtlCore": "dev-master"
+        "php": ">=5.3.0",
+        "jtl/Core": "dev-master"
     },
     "minimum-stability": "dev",
     "autoload": {
         "psr-0": {
-            "jtl/Connector": "src/"
+            "jtl\\Connector": "src/"
         }
     }
 }
