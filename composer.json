@@ -1,10 +1,10 @@
 {
-    "name": "jtl/connector",
+    "name": "jtlConnector",
     "type": "APP",
-    "description": "JTL Connector",
-    "keywords": ["jtl", "connector"],
+    "description": "jtlConnector PHP 5.3 Library and Classes",
+    "keywords": ["jtl", "Connector"],
     "homepage": "http://www.jtl-software.de",
-    "license": "MIT",
+    "license": "GPL",
     "authors": [
         {
             "name": "JTL Software GmbH",
@@ -14,19 +14,19 @@
         }
     ],
     "repositories": {
-        "jtl/Core": {
+        "jtlCore": {
             "type": "git",
             "url": "git@gitlab.jtl-software.de:jtl-software-gmbh/jtlcore.git",
             "reference": "develop"
         }
     },
     "require": {
-        "jtl/core": "dev-master"
+        "jtlCore": "dev-master"
     },
     "minimum-stability": "dev",
     "autoload": {
         "psr-0": {
-            "jtl/connector": "src/"
+            "jtl/Connector": "src/"
         }
     }
 }
