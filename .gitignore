@@ -6,3 +6,4 @@ nbproject/**
 vendor/**
 build/**
 composer.lock
+composer.phar
