@@ -7,6 +7,7 @@
 namespace jtl\Connector\Application;
 
 use \jtl\Core\Application\Application as CoreApplication;
+use \jtl\Core\Exception\RpcException as RpcException;
 
 /**
  * Application Class
@@ -22,7 +23,12 @@ class Application extends CoreApplication
      */
 	public function run()
 	{
-		
+		if (isset($_POST["jtlrpc"]))
+		{
+			
+		}
+		else
+		    throw new RpcException("test");
 	}
 }
 ?>
