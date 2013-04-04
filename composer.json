@@ -1,0 +1,51 @@
+{
+    "name": "amr/api.karopartner",
+    "type": "API",
+    "description": "KaroPartner API for PHP 5.3.x",
+    "keywords": ["api", "karopartner", "amr"],
+    "homepage": "http://www.karopartner.de",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "David Spickers",
+            "email": "d.spickers@dsp-devel.de",
+            "homepage": "http://www.dsp-devel.de",
+            "role": "Developer"
+        }
+    ],
+    "repositories": {
+        "dsp": {
+            "type": "git",
+            "url": "git@dspdevel.de:dsp.git",
+            "reference": "develop"
+        }
+    },
+    "require": {
+        "silex/silex": "dev-master",
+        "symfony/validator": "dev-master",
+        "monolog/monolog": "dev-master",
+        "dsp/dsp": "dev-master"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": {
+            "doggenherz": "src/"
+        }
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "rm -rf ./log/",
+            "mkdir ./log",
+            "chmod -R 777 ./log",
+            "chmod -R 777 ./storages"
+        ],
+        "post-install-cmd": [
+            "rm -rf ./log/",
+            "mkdir ./log",
+            "chmod -R 777 ./log",
+            "chmod -R 777 ./storages"
+        ]
+    }
+}
+
+
