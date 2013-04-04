@@ -27,7 +27,7 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-0": {
-            "jtl\\Connector": "src/"
+            "jtl\\Connector\\": "src/"
         }
     }
 }
