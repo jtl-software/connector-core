@@ -24,7 +24,7 @@ function exception_handler(\Exception $exception)
     $response = new ResponsePacket();
     $response->setError($error)->setJsonrpc("2.0");
     
-    echo Json::encode($response->getPublic(array()));
+    echo Json::encode($response->getPublic());
     exit();
 }
 
