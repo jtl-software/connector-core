@@ -8,7 +8,8 @@ namespace jtl\Connector\Application;
 
 use \jtl\Core\Application\Application as CoreApplication;
 use \jtl\Core\Exception\RpcException;
-use \jtl\Core\Http\Request;
+use \jtl\Core\Rpc\Handler;
+use \jtl\Core\Rpc\RequestPacket;
 
 /**
  * Application Class
@@ -24,14 +25,10 @@ class Application extends CoreApplication
      */
 	public function run()
 	{
-	    $jtlrpc = Request::get();
-	    
-		if ($jtlrpc !== null)
-		{
-			
-		}
-		else
-		    throw new RpcException("No jtlrpc data received");
+	    // Rpc Request	    
+		$requestpacket = new RequestPacket();
+		$requestpacket->prepare();
+		$requestpacket->validate();
 	}
 }
 ?>

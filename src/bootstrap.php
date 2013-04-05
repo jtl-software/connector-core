@@ -22,7 +22,7 @@ function exception_handler(\Exception $exception)
     	->setMessage($exception->getMessage());
     
     $response = new ResponsePacket();
-    $response->setError($error)->setJsonrpc("2.0");
+    $response->setError($error)->setJtlrpc("2.0");
     
     echo Json::encode($response->getPublic());
     exit();
