@@ -10,6 +10,7 @@ use \jtl\Core\Application\Application as CoreApplication;
 use \jtl\Core\Exception\RpcException;
 use \jtl\Core\Rpc\Handler;
 use \jtl\Core\Rpc\RequestPacket;
+use \jtl\Core\Rpc\ResponsePacket;
 use \jtl\Core\Http\Response;
 
 /**
@@ -44,12 +45,20 @@ class Application extends CoreApplication
 			if ($endpointconnector->canHandle($requestpacket->getMethod()))
 			{
 			    $responsepacket = $endpointconnector->handle($requestpacket->getId(), $requestpacket->getMethod(), $requestpacket->getParams());
-			    $responsepacket->validate();
 			    
-			    Response::send($responsepacket);
+			    if (get_class($responsepacket) == "jtl\\Core\\Rpc\\ResponsePacket")
+			    {
+			    	$responsepacket->validate();
+			    	Response::send($responsepacket);
+			    }
+			    else
+			        throw new RpcException("Internal error", -32603);
 			    break;
 			}
 		}
+		
+		// Could not be handled
+		throw new RpcException("Method not found", -32601);
 	}
 	
 	
