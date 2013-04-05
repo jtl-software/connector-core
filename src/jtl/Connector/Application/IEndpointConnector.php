@@ -22,7 +22,7 @@ interface IEndpointConnector
     
     
     /**
-     * @param integer $method
+     * @param integer $id
      * @param string $method
      * @param array $params
      */
