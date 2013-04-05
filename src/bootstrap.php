@@ -6,26 +6,21 @@
 require_once(__DIR__ . "/../vendor/autoload.php");
 
 use \jtl\Connector\Application\Application;
-use \jtl\Core\Serializer\Json;
-use jtl\Core\Rpc\ResponsePacket;
-use jtl\Core\Rpc\Error;
+use \jtl\Core\Rpc\ResponsePacket;
+use \jtl\Core\Rpc\Error;
+use \jtl\Core\Http\Response;
 
 function exception_handler(\Exception $exception) 
-{
-    header('Cache-Control: no-cache, must-revalidate');
-    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-    header('Content-type: application/json');
-    
+{    
     $error = new Error();
     $error->setCode($exception->getCode())
     	->setData("Exception: " . substr(strrchr(get_class($exception), "\\"), 1) . " - File: {$exception->getFile()} - Line: {$exception->getLine()}")
     	->setMessage($exception->getMessage());
     
-    $response = new ResponsePacket();
-    $response->setError($error)->setJtlrpc("2.0");
+    $reponsepacket = new ResponsePacket();
+    $reponsepacket->setError($error)->setJtlrpc("2.0");
     
-    echo Json::encode($response->getPublic());
-    exit();
+    Response::send($reponsepacket);
 }
 
 set_exception_handler('exception_handler');

@@ -10,6 +10,7 @@ use \jtl\Core\Application\Application as CoreApplication;
 use \jtl\Core\Exception\RpcException;
 use \jtl\Core\Rpc\Handler;
 use \jtl\Core\Rpc\RequestPacket;
+use \jtl\Core\Http\Response;
 
 /**
  * Application Class
@@ -38,10 +39,14 @@ class Application extends CoreApplication
 		$requestpacket->prepare();
 		$requestpacket->validate();
 		
-		foreach (self::$_instances as $endpointconnector)
+		foreach (self::$_connectors as $endpointconnector)
 		{
-			if ($endpointconnector->handle($requestpacket->getMethod(), $requestpacket->getParams()))
+			if ($endpointconnector->canHandle($requestpacket->getMethod()))
+			{
+			    $responsepacket = $endpointconnector->handle($requestpacket->getMethod(), $requestpacket->getParams());
+			    Response::send($responsepacket);
 			    break;
+			}
 		}
 	}
 	

@@ -14,6 +14,18 @@ namespace jtl\Connector\Application;
  */
 interface IEndpointConnector
 {
-	public function handle($method, array $params);
+    /**
+     * 
+     * @param string $method
+     */
+    public function canHandle($method);
+    
+    
+    /**
+     * 
+     * @param string $method
+     * @param array $params
+     */
+	public function handle($method, array $params = null);
 }
 ?>
