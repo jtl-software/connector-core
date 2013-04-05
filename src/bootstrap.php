@@ -18,7 +18,7 @@ function exception_handler(\Exception $exception)
     
     $error = new Error();
     $error->setCode($exception->getCode())
-    	->setData("File: {$exception->getFile()} - Line: {$exception->getLine()}")
+    	->setData("Exception: " . substr(strrchr(get_class($exception), "\\"), 1) . " - File: {$exception->getFile()} - Line: {$exception->getLine()}")
     	->setMessage($exception->getMessage());
     
     $response = new ResponsePacket();
