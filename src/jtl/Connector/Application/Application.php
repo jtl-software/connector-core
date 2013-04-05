@@ -20,6 +20,14 @@ use \jtl\Core\Rpc\RequestPacket;
 class Application extends CoreApplication
 {
     /**
+     * List of connected EndpointConnectors
+     * 
+     * @var multiple: IEndpointConnector
+     */
+    protected static $_connectors = array();
+    
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Application\Application::run()
      */
@@ -29,6 +37,25 @@ class Application extends CoreApplication
 		$requestpacket = new RequestPacket();
 		$requestpacket->prepare();
 		$requestpacket->validate();
+		
+		foreach (self::$_instances as $endpointconnector)
+		{
+			if ($endpointconnector->handle($requestpacket->getMethod(), $requestpacket->getParams()))
+			    break;
+		}
+	}
+	
+	
+	/**
+	 * 
+	 * @param IEndpointConnector $endpointconnector
+	 */
+	public static function register(IEndpointConnector $endpointconnector)
+	{
+	    $classname = get_class($endpointconnector);
+	    
+	    if (!isset(self::$_connectors[$classname]))
+			self::$_connectors[$classname] = $endpointconnector;
 	}
 }
 ?>
