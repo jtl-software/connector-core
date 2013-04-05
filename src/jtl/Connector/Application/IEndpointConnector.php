@@ -22,10 +22,10 @@ interface IEndpointConnector
     
     
     /**
-     * 
+     * @param integer $method
      * @param string $method
      * @param array $params
      */
-	public function handle($method, array $params = null);
+	public function handle($id, $method, array $params = null);
 }
 ?>

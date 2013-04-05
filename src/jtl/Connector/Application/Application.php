@@ -43,7 +43,9 @@ class Application extends CoreApplication
 		{
 			if ($endpointconnector->canHandle($requestpacket->getMethod()))
 			{
-			    $responsepacket = $endpointconnector->handle($requestpacket->getMethod(), $requestpacket->getParams());
+			    $responsepacket = $endpointconnector->handle($requestpacket->getId(), $requestpacket->getMethod(), $requestpacket->getParams());
+			    $responsepacket->validate();
+			    
 			    Response::send($responsepacket);
 			    break;
 			}
