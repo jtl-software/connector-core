@@ -24,8 +24,8 @@ interface IEndpointConnector
     /**
      * @param integer $id
      * @param string $method
-     * @param array $params
+     * @param string|array|object $params
      */
-	public function handle($id, $method, array $params = null);
+	public function handle($id, $method, $params = null);
 }
 ?>
