@@ -12,6 +12,7 @@ use \jtl\Core\Rpc\Handler;
 use \jtl\Core\Rpc\RequestPacket;
 use \jtl\Core\Rpc\ResponsePacket;
 use \jtl\Core\Http\Response;
+use \jtl\Core\Authentication\Wawi as WawiAuthentication;
 
 /**
  * Application Class
@@ -34,11 +35,14 @@ class Application extends CoreApplication
      * @see \jtl\Core\Application\Application::run()
      */
 	public function run()
-	{
+	{	    
 	    // Rpc Request	    
 		$requestpacket = new RequestPacket();
 		$requestpacket->prepare();
 		$requestpacket->validate();
+
+		// Authentication
+		WawiAuthentication::validate($requestpacket->getParams());
 		
 		foreach (self::$_connectors as $endpointconnector)
 		{

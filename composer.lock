@@ -7,7 +7,7 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.jtl-software.de:jtl-software-gmbh/jtlcore.git",
-                "reference": "6309e242fc56c6fb5c52b5fcdce366c27954176a"
+                "reference": "ebbc1e54f7013b99094ede4fd4c9053f336205ca"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -38,7 +38,7 @@
                 "jtl",
                 "library"
             ],
-            "time": "2013-04-05 12:42:06"
+            "time": "2013-04-11 12:13:01"
         }
     ],
     "packages-dev": [
