@@ -1,35 +1,40 @@
 {
-    "name": "jtl/Connector",
-    "type": "APP",
-    "description": "jtlConnector PHP 5.3 Library and Classes",
-    "keywords": ["jtl", "Connector"],
-    "homepage": "http://www.jtl-software.de",
-    "license": "GPL",
-    "authors": [
-        {
-            "name": "JTL Software GmbH",
-            "email": "info@jtl-software.de",
-            "homepage": "http://www.jtl-software.de",
-            "role": "Founder"
-        }
-    ],
-    "repositories": {
-        "jtlCore": {
-            "type": "git",
-            "url": "git@gitlab.jtl-software.de:jtl-software-gmbh/jtlcore.git",
-            "reference": "develop"
-        }
-    },
-    "require": {
-        "php": ">=5.3.0",
-        "jtl/Core": "dev-master"
-    },
-    "minimum-stability": "dev",
-    "autoload": {
-        "psr-0": {
-            "jtl\\Connector\\": "src/"
-        }
+  "name": "jtl/connector",
+  "type": "library",
+  "description": "jtlConnector PHP 5.3 Library and Classes",
+  "keywords": ["jtl", "Connector"],
+  "homepage": "http://www.jtl-software.de",
+  "license": "GPL",
+  "authors": [
+    {
+      "name": "JTL Software GmbH",
+      "email": "info@jtl-software.de",
+      "homepage": "http://www.jtl-software.de",
+      "role": "Founder"
     }
+  ],
+  "repositories": [
+    {
+      "type": "git",
+      "url": "git@gitlab.jtl-software.de:jtl-software-gmbh/jtlcore.git",
+      "reference": "origin/master"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0",
+    "jtl/core": "dev-master"
+  },
+  "minimum-stability": "dev",
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  },
+  "autoload": {
+    "psr-0": {
+      "jtl\\Connector\\": "src/"
+    }
+  }
 }
 
 
