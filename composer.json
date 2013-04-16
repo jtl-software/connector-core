@@ -29,6 +29,11 @@
     "psr-0": {
       "jtl\\Connector\\": "src/"
     }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.1.x-dev"
+    }
   }
 }
 
