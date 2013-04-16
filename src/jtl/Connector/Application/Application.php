@@ -40,9 +40,6 @@ class Application extends CoreApplication
 		$requestpacket = new RequestPacket();
 		$requestpacket->prepare();
 		$requestpacket->validate();
-
-		// Authentication
-		WawiAuthentication::validate($requestpacket->getParams());
 		
 		foreach (self::$_connectors as $endpointconnector)
 		{
