@@ -25,14 +25,14 @@
     "jtl/core": "dev-master"
   },
   "minimum-stability": "dev",
-  "autoload": {
-    "psr-0": {
-      "jtl\\Connector\\": "src/"
-    }
-  },
   "extra": {
     "branch-alias": {
       "dev-master": "1.0.x-dev"
+    }
+  },
+  "autoload": {
+    "psr-0": {
+      "jtl\\Connector\\": "src/"
     }
   }
 }
