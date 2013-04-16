@@ -1,5 +1,5 @@
 {
-    "hash": "5086dc9f201335a0d689e5aa107b20ad",
+    "hash": "ad89adf73a03c8a464a7191af1efd5b4",
     "packages": [
         {
             "name": "jtl/core",
@@ -7,7 +7,7 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.jtl-software.de:jtl-software-gmbh/jtlcore.git",
-                "reference": "6c2c9c0b5cfc121461495c1140d6da1c1e249d7f"
+                "reference": "a8bddd8fbe40130e1554fa81de2a1497280669b6"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -15,7 +15,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1.x-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -38,7 +38,7 @@
                 "jtl",
                 "library"
             ],
-            "time": "2013-04-16 08:09:46"
+            "time": "2013-04-16 14:19:18"
         }
     ],
     "packages-dev": [

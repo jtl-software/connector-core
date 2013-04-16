@@ -9,7 +9,7 @@ namespace jtl\Connector\Base;
 
 use \jtl\Connector\Application\IEndpointConnector;
 use \jtl\Core\Utilities\Singleton;
-use \jtl\Core\Utilities\Config;
+use \jtl\Core\Utilities\Config\Config;
 use \jtl\Core\Exception\ConnectorException;
 
 /**
