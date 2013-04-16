@@ -17,7 +17,7 @@
     "jtlCore": {
       "type": "git",
       "url": "git@gitlab.jtl-software.de:jtl-software-gmbh/jtlcore.git",
-      "reference": "develop"
+      "reference": "origin/master"
     }
   },
   "require": {
