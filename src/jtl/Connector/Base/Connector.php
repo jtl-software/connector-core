@@ -30,7 +30,7 @@ abstract class Connector extends Singleton implements IEndpointConnector
    */
   public function setConfig(Config $config)
   {
-    $this->config = $config->load();
+    $this->config = $config;
   }
 
   /**
