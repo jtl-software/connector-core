@@ -8,6 +8,7 @@
 namespace jtl\Connector\Controller;
 
 use \jtl\Core\Controller\Controller as CoreController;
+use \jtl\Core\Exception\ControllerException;
 
 /**
  * Base Config Controller
@@ -17,6 +18,7 @@ use \jtl\Core\Controller\Controller as CoreController;
  */
 class Config extends CoreController
 {
+
   /**
    * Reads the controller configuration and returns it.
    * 
@@ -24,14 +26,15 @@ class Config extends CoreController
    */
   public function read($params = null)
   {
-    var_dump($this->connector);
-    die();
-    if ($params !== null)
-    {
-      
-    } else
-    {
-      
+    if ($params !== null && count($params) === 1) {
+      $key = $params[0];
+      if (!isset($this->config->{$key})) {
+        throw new ControllerException(sprintf('Can\'t find the configuration for your key "%s"', $key));
+      }
+    }
+    else {
+      return $this->config;
     }
   }
+
 }
