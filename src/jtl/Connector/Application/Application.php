@@ -57,12 +57,12 @@ class Application extends CoreApplication
                 
                 if (get_class($actionresult) == "jtl\\Connector\\Result\\Action")
                 {
-                    // TODO: Build jtl\Core\Rpc\ResponsePacket and send to Client
-                    // $responsepacket = new ResponsePacket();
-                    // Response::send($responsepacket);
-                    
                     if ($actionresult->isHandled())
-                        break;
+                    {
+                        // TODO: Build jtl\Core\Rpc\ResponsePacket and send to Client
+                        // $responsepacket = new ResponsePacket();
+                        // Response::send($responsepacket);
+                    }
                 }
                 else
                     throw new RpcException("Internal error", -32603);                
