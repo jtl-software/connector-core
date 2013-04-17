@@ -15,6 +15,7 @@ use \jtl\Core\Http\Response;
 use \jtl\Core\Authentication\Wawi as WawiAuthentication;
 use \jtl\Core\Utilities\Config\Config;
 use \jtl\Core\Utilities\Config\Json as ConfigJson;
+use \jtl\Connector\Result\Action;
 
 /**
  * Application Class
@@ -94,7 +95,7 @@ class Application extends CoreApplication
      * @return \jtl\Core\Rpc\ResponsePacket
      * @throws \jtl\Core\Exception\RpcException
      */
-    protected function rpcResponse(jtl\Core\Rpc\ResponsePacket $requestpacket, jtl\Connector\Result\Action $actionresult)
+    protected function rpcResponse(RequestPacket $requestpacket, Action $actionresult)
     {
         $responsepacket = new ResponsePacket();
         $responsepacket->setId($requestpacket->getId())
