@@ -26,7 +26,7 @@ abstract class Connector extends Singleton implements IEndpointConnector
   /**
    * Setter connector config.
    * 
-   * @param \jtl\Core\Utilities\Config $config
+   * @param \jtl\Core\Utilities\Config\Config $config
    */
   public function setConfig(Config $config)
   {
