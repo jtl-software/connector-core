@@ -59,9 +59,8 @@ class Application extends CoreApplication
                 {
                     if ($actionresult->isHandled())
                     {
-                        // TODO: Build jtl\Core\Rpc\ResponsePacket and send to Client
-                        // $responsepacket = new ResponsePacket();
-                        // Response::send($responsepacket);
+                        $responsepacket = $this->rpcResponse($requestpacket, $actionresult);
+                        Response::send($responsepacket);
                     }
                 }
                 else
@@ -85,6 +84,28 @@ class Application extends CoreApplication
         if (!isset(self::$_connectors[$classname]))
             self::$_connectors[$classname] = $endpointconnector;
     }
+    
+    
+    /**
+     * Build RPC Reponse Packet
+     * 
+     * @param jtl\Core\Rpc\ResponsePacket $requestpacket
+     * @param jtl\Connector\Result\Action $actionresult
+     * @return \jtl\Core\Rpc\ResponsePacket
+     * @throws \jtl\Core\Exception\RpcException
+     */
+    protected function rpcResponse(jtl\Core\Rpc\ResponsePacket $requestpacket, jtl\Connector\Result\Action $actionresult)
+    {
+        $responsepacket = new ResponsePacket();
+        $responsepacket->setId($requestpacket->getId())
+        	->setJtlrpc($requestpacket->getJtlrpc())
+        	->setResult($actionresult->getResult())
+        	->setError($actionresult->getError());
+        
+        $responsepacket->validate();
+        
+        return $responsepacket;
+    } 
 }
 
 ?>

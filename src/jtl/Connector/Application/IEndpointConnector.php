@@ -25,6 +25,7 @@ interface IEndpointConnector
      * @param integer $id
      * @param string $method
      * @param string|array|object $params
+     * @return \jtl\Connector\Result\Action 
      */
 	public function handle($id, $method, $params = null);
 }
