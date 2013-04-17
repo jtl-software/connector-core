@@ -24,6 +24,14 @@ class Config extends CoreController
    */
   public function read($params = null)
   {
-    //todo: handle params
+    var_dump($this->connector);
+    die();
+    if ($params !== null)
+    {
+      
+    } else
+    {
+      
+    }
   }
 }
