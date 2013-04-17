@@ -60,7 +60,7 @@ class Application extends CoreApplication
                 {
                     if ($actionresult->isHandled())
                     {
-                        $responsepacket = $this->rpcResponse($requestpacket, $actionresult);
+                        $responsepacket = $this->buildRcpResponse($requestpacket, $actionresult);
                         Response::send($responsepacket);
                     }
                 }
@@ -95,7 +95,7 @@ class Application extends CoreApplication
      * @return \jtl\Core\Rpc\ResponsePacket
      * @throws \jtl\Core\Exception\RpcException
      */
-    protected function rpcResponse(RequestPacket $requestpacket, Action $actionresult)
+    protected function buildRcpResponse(RequestPacket $requestpacket, Action $actionresult)
     {
         $responsepacket = new ResponsePacket();
         $responsepacket->setId($requestpacket->getId())
@@ -108,5 +108,4 @@ class Application extends CoreApplication
         return $responsepacket;
     } 
 }
-
 ?>
