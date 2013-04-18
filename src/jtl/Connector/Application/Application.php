@@ -14,7 +14,8 @@ use \jtl\Core\Rpc\ResponsePacket;
 use \jtl\Core\Http\Response;
 use \jtl\Core\Authentication\Wawi as WawiAuthentication;
 use \jtl\Core\Utilities\Config\Config;
-use \jtl\Core\Utilities\Config\Json as ConfigJson;
+use \jtl\Core\Utilities\Config\Loader\Json as ConfigJson;
+use \jtl\Core\Utilities\Config\Loader\System as ConfigSystem;
 use \jtl\Connector\Result\Action;
 
 /**
@@ -45,7 +46,10 @@ class Application extends CoreApplication
         $requestpacket->validate();
         
         // Creates the config instance
-        $config = new Config(new ConfigJson(APP_DIR . '/../config/default.json'));
+        $config = new Config(array(
+          new ConfigJson(APP_DIR . '/../config/default.json'),
+          new ConfigSystem()
+        ));
         
         foreach (self::$_connectors as $endpointconnector) {
             if ($endpointconnector->canHandle($requestpacket->getMethod())) {
