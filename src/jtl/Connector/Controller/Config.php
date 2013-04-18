@@ -1,13 +1,16 @@
 <?php
+
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Application
  */
+
 namespace jtl\Connector\Controller;
 
 use \jtl\Core\Controller\Controller as CoreController;
 use \jtl\Core\Exception\ControllerException;
+use \jtl\Connector\Result\Action;
 
 /**
  * Base Config Controller
@@ -17,6 +20,7 @@ use \jtl\Core\Exception\ControllerException;
  */
 class Config extends CoreController
 {
+
     /**
      * Reads the controller configuration and returns it.
      *
@@ -24,14 +28,18 @@ class Config extends CoreController
      */
     public function read($params = null)
     {
+        $ret = new Action();
+        $param = null;
         if ($params !== null && count($params) === 1) {
-            $key = $params[0];
-            if (!isset($this->config->{$key})) {
-                throw new ControllerException(sprintf('Can\'t find the configuration for your key "%s"', $key));
-            }
+            $param = $params[0];
         }
-        else {
-            return $this->config;
+        try {
+            $ret->setResult($this->getConfig()->retrieve($param));
+            $ret->setHandled(true);
+        } catch (\Exception $e) {
+            $ret->setError($e->getMessage());
         }
+        return $ret;
     }
+
 }
