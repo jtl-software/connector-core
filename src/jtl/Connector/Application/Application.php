@@ -47,7 +47,7 @@ class Application extends CoreApplication
         
         // Creates the config instance
         $config = new Config(array(
-          new ConfigJson(APP_DIR . '/../config/config.json'),
+          new ConfigJson(file_get_contents(APP_DIR . '/../config/config.json')),
           new ConfigSystem()
         ));
         
