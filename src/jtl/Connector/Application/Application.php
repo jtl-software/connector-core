@@ -12,6 +12,7 @@ use \jtl\Core\Rpc\Handler;
 use \jtl\Core\Rpc\Packet;
 use \jtl\Core\Rpc\RequestPacket;
 use \jtl\Core\Rpc\ResponsePacket;
+use \jtl\Core\Rpc\Error;
 use \jtl\Core\Http\Request;
 use \jtl\Core\Http\Response;
 use \jtl\Core\Authentication\Wawi as WawiAuthentication;
@@ -75,10 +76,14 @@ class Application extends CoreApplication
                         $jtlrpcreponses[] = $this->execute($requestpacket, $config, $rpcmode);
                     }
                     catch (RpcException $exc) {
+                        $error = new Error();
+                        $error->setCode($exc->getCode())
+                            ->setMessage($exc->getMessage());
+                        
                         $responsepacket = new ResponsePacket();
                         $responsepacket->setId($requestpacket->getId())
                             ->setJtlrpc($requestpacket->getJtlrpc())
-                            ->setError($exc->getMessage());
+                            ->setError($error);
                         
                         $responsepacket->validate();
                         
@@ -99,7 +104,7 @@ class Application extends CoreApplication
                 $actionresult = $endpointconnector->handle($requestpacket->getId(), $requestpacket->getMethod(), $requestpacket->getParams());
                 if (get_class($actionresult) == "jtl\\Connector\\Result\\Action") {
                     if ($actionresult->isHandled()) {
-                        $responsepacket = $this->buildRcpResponse($requestpacket, $actionresult);
+                        $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
                         
                         if ($rpcmode == Packet::SINGLE_MODE) {
                             Response::send($responsepacket);
@@ -136,7 +141,7 @@ class Application extends CoreApplication
      * @return \jtl\Core\Rpc\ResponsePacket
      * @throws \jtl\Core\Exception\RpcException
      */
-    protected function buildRcpResponse(RequestPacket $requestpacket, Action $actionresult)
+    protected function buildRpcResponse(RequestPacket $requestpacket, Action $actionresult)
     {
         $responsepacket = new ResponsePacket();
         $responsepacket->setId($requestpacket->getId())
