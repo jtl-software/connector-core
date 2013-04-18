@@ -43,15 +43,12 @@ class Application extends CoreApplication
         $requestpacket = new RequestPacket();
         $requestpacket->prepare();
         $requestpacket->validate();
-        
         // Creates the config instance
         $config = new Config(new ConfigJson(APP_DIR . '/../config/default.json'));
-        
         foreach (self::$_connectors as $endpointconnector) {
             if ($endpointconnector->canHandle($requestpacket->getMethod())) {
                 $endpointconnector->setConfig($config);
                 $actionresult = $endpointconnector->handle($requestpacket->getId(), $requestpacket->getMethod(), $requestpacket->getParams());
-                
                 if (get_class($actionresult) == "jtl\\Connector\\Result\\Action") {
                     if ($actionresult->isHandled()) {
                         $responsepacket = $this->buildRcpResponse($requestpacket, $actionresult);
@@ -63,19 +60,17 @@ class Application extends CoreApplication
                 }
             }
         }
-        
         // Could not be handled
         throw new RpcException("Method not found", -32601);
     }
 
     /**
      *
-     * @param IEndpointConnector $endpointconnector            
+     * @param IEndpointConnector $endpointconnector        
      */
     public static function register(IEndpointConnector $endpointconnector)
     {
         $classname = get_class($endpointconnector);
-        
         if (!isset(self::$_connectors[$classname])) {
             self::$_connectors[$classname] = $endpointconnector;
         }
@@ -84,8 +79,8 @@ class Application extends CoreApplication
     /**
      * Build RPC Reponse Packet
      *
-     * @param jtl\Core\Rpc\ResponsePacket $requestpacket            
-     * @param jtl\Connector\Result\Action $actionresult            
+     * @param jtl\Core\Rpc\ResponsePacket $requestpacket        
+     * @param jtl\Connector\Result\Action $actionresult        
      * @return \jtl\Core\Rpc\ResponsePacket
      * @throws \jtl\Core\Exception\RpcException
      */
@@ -96,9 +91,7 @@ class Application extends CoreApplication
             ->setJtlrpc($requestpacket->getJtlrpc())
             ->setResult($actionresult->getResult())
             ->setError($actionresult->getError());
-        
         $responsepacket->validate();
-        
         return $responsepacket;
     }
 }
