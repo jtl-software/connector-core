@@ -9,8 +9,10 @@ namespace jtl\Connector\Application;
 use \jtl\Core\Application\Application as CoreApplication;
 use \jtl\Core\Exception\RpcException;
 use \jtl\Core\Rpc\Handler;
+use \jtl\Core\Rpc\Packet;
 use \jtl\Core\Rpc\RequestPacket;
 use \jtl\Core\Rpc\ResponsePacket;
+use \jtl\Core\Http\Request;
 use \jtl\Core\Http\Response;
 use \jtl\Core\Authentication\Wawi as WawiAuthentication;
 use \jtl\Core\Utilities\Config\Config;
@@ -40,17 +42,57 @@ class Application extends CoreApplication
      */
     public function run()
     {
-        // Rpc Request
-        $requestpacket = new RequestPacket();
-        $requestpacket->prepare();
-        $requestpacket->validate();
+        // RPC Mode
+        $rpcmode = RequestPacket::getMode();
         
         // Creates the config instance
         $config = new Config(array(
-          new ConfigJson(file_get_contents(APP_DIR . '/../config/config.json')),
-          new ConfigSystem()
+            new ConfigJson(file_get_contents(APP_DIR . '/../config/config.json')),
+            new ConfigSystem()
         ));
         
+        switch ($rpcmode) {
+            case Packet::SINGLE_MODE:
+                $requestpacket = new RequestPacket();
+                $requestpacket->prepare();
+                $requestpacket->validate();
+                
+                $this->execute($requestpacket, $config, $rpcmode);
+                
+                // Could not be handled
+                throw new RpcException("Method not found", -32601);
+                break;
+            case Packet::BATCH_MODE:
+                $jtlrpcbatch = Request::get('post', 'jtlrpcbatch');
+                $jtlrpcreponses = array();
+                
+                foreach ($jtlrpcbatch as $jtlrpc) {
+                    try {
+                        $requestpacket = new RequestPacket();
+                        $requestpacket->prepare($jtlrpc);
+                        $requestpacket->validate();
+                        
+                        $jtlrpcreponses[] = $this->execute($requestpacket, $config, $rpcmode);
+                    }
+                    catch (RpcException $exc) {
+                        $responsepacket = new ResponsePacket();
+                        $responsepacket->setId($requestpacket->getId())
+                            ->setJtlrpc($requestpacket->getJtlrpc())
+                            ->setError($exc->getMessage());
+                        
+                        $responsepacket->validate();
+                        
+                        $jtlrpcreponses[] = $responsepacket;
+                    }
+                    
+                    Response::sendAll($jtlrpcreponses);
+                }
+                break;
+        }
+    }
+    
+    protected function execute(RequestPacket $requestpacket, Config $config, $rpcmode)
+    {
         foreach (self::$_connectors as $endpointconnector) {
             if ($endpointconnector->canHandle($requestpacket->getMethod())) {
                 $endpointconnector->setConfig($config);
@@ -58,17 +100,20 @@ class Application extends CoreApplication
                 if (get_class($actionresult) == "jtl\\Connector\\Result\\Action") {
                     if ($actionresult->isHandled()) {
                         $responsepacket = $this->buildRcpResponse($requestpacket, $actionresult);
-                        Response::send($responsepacket);
+                        
+                        if ($rpcmode == Packet::SINGLE_MODE) {
+                            Response::send($responsepacket);
+                        }
+                        else {
+                            return $responsepacket;
+                        }
                     }
                 }
                 else {
                     throw new RpcException("Internal error", -32603);
                 }
             }
-        }
-        
-        // Could not be handled
-        throw new RpcException("Method not found", -32601);
+        } 
     }
 
     /**
@@ -98,6 +143,7 @@ class Application extends CoreApplication
             ->setJtlrpc($requestpacket->getJtlrpc())
             ->setResult($actionresult->getResult())
             ->setError($actionresult->getError());
+        
         $responsepacket->validate();
         
         return $responsepacket;
