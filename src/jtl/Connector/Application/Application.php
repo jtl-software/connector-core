@@ -6,6 +6,8 @@
  */
 namespace jtl\Connector\Application;
 
+use jtl\Core\Serializer\Json;
+
 use \jtl\Core\Application\Application as CoreApplication;
 use \jtl\Core\Exception\RpcException;
 use \jtl\Core\Rpc\Handler;
@@ -43,8 +45,8 @@ class Application extends CoreApplication
      */
     public function run()
     {
-        // RPC Mode
-        $rpcmode = RequestPacket::getMode();
+        $requestpackets = Packet::prepare();
+        $rpcmode = is_object($requestpackets) ? Packet::SINGLE_MODE : Packet::BATCH_MODE;
         
         // Creates the config instance
         $config = new Config(array(
@@ -53,26 +55,17 @@ class Application extends CoreApplication
         ));
         
         switch ($rpcmode) {
-            case Packet::SINGLE_MODE:
-                $requestpacket = new RequestPacket();
-                $requestpacket->prepare();
-                $requestpacket->validate();
-                
-                $this->execute($requestpacket, $config, $rpcmode);
+            case Packet::SINGLE_MODE:                
+                $this->execute($requestpackets, $config, $rpcmode);
                 
                 // Could not be handled
                 throw new RpcException("Method not found", -32601);
                 break;
-            case Packet::BATCH_MODE:
-                $jtlrpcbatch = Request::get('post', 'jtlrpcbatch');
+            case Packet::BATCH_MODE:                
                 $jtlrpcreponses = array();
                 
-                foreach ($jtlrpcbatch as $jtlrpc) {
-                    try {
-                        $requestpacket = new RequestPacket();
-                        $requestpacket->prepare($jtlrpc);
-                        $requestpacket->validate();
-                        
+                foreach ($requestpackets as $requestpacket) {
+                    try {                        
                         $jtlrpcreponses[] = $this->execute($requestpacket, $config, $rpcmode);
                     }
                     catch (RpcException $exc) {
@@ -96,6 +89,15 @@ class Application extends CoreApplication
         }
     }
     
+    /**
+     * Execute RPC Method
+     * 
+     * @param RequestPacket $requestpacket
+     * @param Config $config
+     * @param integer $rpcmode
+     * @throws RpcException
+     * @return \jtl\Core\Rpc\ResponsePacket
+     */
     protected function execute(RequestPacket $requestpacket, Config $config, $rpcmode)
     {
         foreach (self::$_connectors as $endpointconnector) {
