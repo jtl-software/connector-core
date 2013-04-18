@@ -55,7 +55,9 @@ class Application extends CoreApplication
         ));
         
         switch ($rpcmode) {
-            case Packet::SINGLE_MODE:                
+            case Packet::SINGLE_MODE:
+                $requestpackets->validate();
+                
                 $this->execute($requestpackets, $config, $rpcmode);
                 
                 // Could not be handled
@@ -65,7 +67,8 @@ class Application extends CoreApplication
                 $jtlrpcreponses = array();
                 
                 foreach ($requestpackets as $requestpacket) {
-                    try {                        
+                    try {       
+                        $requestpacket->validate();
                         $jtlrpcreponses[] = $this->execute($requestpacket, $config, $rpcmode);
                     }
                     catch (RpcException $exc) {
