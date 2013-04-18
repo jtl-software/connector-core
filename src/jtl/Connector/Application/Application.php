@@ -43,8 +43,10 @@ class Application extends CoreApplication
         $requestpacket = new RequestPacket();
         $requestpacket->prepare();
         $requestpacket->validate();
+        
         // Creates the config instance
         $config = new Config(new ConfigJson(APP_DIR . '/../config/default.json'));
+        
         foreach (self::$_connectors as $endpointconnector) {
             if ($endpointconnector->canHandle($requestpacket->getMethod())) {
                 $endpointconnector->setConfig($config);
@@ -60,6 +62,7 @@ class Application extends CoreApplication
                 }
             }
         }
+        
         // Could not be handled
         throw new RpcException("Method not found", -32601);
     }
@@ -92,6 +95,7 @@ class Application extends CoreApplication
             ->setResult($actionresult->getResult())
             ->setError($actionresult->getError());
         $responsepacket->validate();
+        
         return $responsepacket;
     }
 }
