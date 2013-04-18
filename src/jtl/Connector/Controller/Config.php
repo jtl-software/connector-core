@@ -11,6 +11,7 @@ namespace jtl\Connector\Controller;
 use \jtl\Core\Controller\Controller as CoreController;
 use \jtl\Core\Exception\ControllerException;
 use \jtl\Connector\Result\Action;
+use \jtl\Core\Rpc\Error;
 
 /**
  * Base Config Controller
@@ -37,7 +38,10 @@ class Config extends CoreController
             $ret->setResult($this->getConfig()->retrieve($param));
             $ret->setHandled(true);
         } catch (\Exception $e) {
-            $ret->setError($e->getMessage());
+            $err = new Error();
+            $err->setCode($e->getCode());
+            $err->setMessage($e->getMessage());
+            $ret->setError($err);
         }
         return $ret;
     }
