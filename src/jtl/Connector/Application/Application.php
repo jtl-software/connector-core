@@ -58,47 +58,10 @@ class Application extends CoreApplication
         
         switch ($rpcmode) {
             case Packet::SINGLE_MODE:
-                $requestpackets->validate();
-                
-                try {
-                    $this->execute($requestpackets, $config, $rpcmode);
-                }
-                catch (RpcException $exc) {
-                    $error = new Error();
-                    $error->setCode($exc->getCode())
-                        ->setMessage($exc->getMessage());
-                    
-                    $responsepacket = new ResponsePacket();
-                    $responsepacket->setId($requestpackets->getId())
-                        ->setJtlrpc($requestpackets->getJtlrpc())
-                        ->setError($error);
-                    
-                    Response::send($responsepacket);
-                }
+                $this->runSingle($requestpackets, $config, $rpcmode);
                 break;
             case Packet::BATCH_MODE:
-                $jtlrpcreponses = array();
-                
-                foreach ($requestpackets as $requestpacket) {
-                    try {
-                        $requestpacket->validate();
-                        $jtlrpcreponses[] = $this->execute($requestpacket, $config, $rpcmode);
-                    }
-                    catch (RpcException $exc) {
-                        $error = new Error();
-                        $error->setCode($exc->getCode())
-                            ->setMessage($exc->getMessage());
-                        
-                        $responsepacket = new ResponsePacket();
-                        $responsepacket->setId($requestpacket->getId())
-                            ->setJtlrpc($requestpacket->getJtlrpc())
-                            ->setError($error);
-                                                
-                        $jtlrpcreponses[] = $responsepacket;
-                    }
-                }
-                
-                Response::sendAll($jtlrpcreponses);
+                $this->runBatch($requestpackets, $config, $rpcmode);
                 break;
         }
     }
@@ -149,6 +112,67 @@ class Application extends CoreApplication
         if (!isset(self::$_connectors[$classname])) {
             self::$_connectors[$classname] = $endpointconnector;
         }
+    }
+    
+    /**
+     * Single Mode
+     * 
+     * @param ResponsePacket $requestpacket
+     * @param Config $config
+     * @param integer $rpcmode
+     */
+    protected function runSingle(ResponsePacket $requestpacket, Config $config, $rpcmode)
+    {
+        $requestpacket->validate();
+        
+        try {
+            $this->execute($requestpacket, $config, $rpcmode);
+        }
+        catch (RpcException $exc) {
+            $error = new Error();
+            $error->setCode($exc->getCode())
+            ->setMessage($exc->getMessage());
+        
+            $responsepacket = new ResponsePacket();
+            $responsepacket->setId($requestpacket->getId())
+                ->setJtlrpc($requestpacket->getJtlrpc())
+                ->setError($error);
+        
+            Response::send($responsepacket);
+        }
+    }
+    
+    /**
+     * Batch Mode
+     * 
+     * @param array $requestpackets
+     * @param Config $config
+     * @param integer $rpcmode
+     */
+    protected function runBatch(array $requestpackets, Config $config, $rpcmode)
+    {
+        $jtlrpcreponses = array();
+        
+        foreach ($requestpackets as $requestpacket) {
+            try {
+                $requestpacket->validate();
+                $jtlrpcreponses[] = $this->execute($requestpacket, $config, $rpcmode);
+            }
+            catch (RpcException $exc) {
+                $error = new Error();
+                $error->setCode($exc->getCode())
+                ->setMessage($exc->getMessage());
+        
+                $responsepacket = new ResponsePacket();
+                $responsepacket->setId($requestpacket->getId())
+                ->setJtlrpc($requestpacket->getJtlrpc())
+                ->setError($error);
+        
+                $jtlrpcreponses[] = $responsepacket;
+            }
+        }
+        
+        Response::sendAll($jtlrpcreponses);
     }
 
     /**
