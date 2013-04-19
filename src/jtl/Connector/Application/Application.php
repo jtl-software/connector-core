@@ -45,7 +45,8 @@ class Application extends CoreApplication
      */
     public function run()
     {
-        $requestpackets = Packet::prepare();
+        $jtlrpc = Request::handle();
+        $requestpackets = RequestPacket::build($jtlrpc);
                 
         $rpcmode = is_object($requestpackets) ? Packet::SINGLE_MODE : Packet::BATCH_MODE;
                 
