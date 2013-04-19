@@ -44,8 +44,8 @@ class Application extends CoreApplication
      * @see \jtl\Core\Application\Application::run()
      */
     public function run()
-    {        
-        $requestpackets = Packet::prepare();        
+    {
+        $requestpackets = Packet::prepare();
         $rpcmode = is_object($requestpackets) ? Packet::SINGLE_MODE : Packet::BATCH_MODE;
                 
         // Creates the config instance
@@ -63,11 +63,11 @@ class Application extends CoreApplication
                 // Could not be handled
                 throw new RpcException("Method not found", -32601);
                 break;
-            case Packet::BATCH_MODE:                
+            case Packet::BATCH_MODE:
                 $jtlrpcreponses = array();
                 
                 foreach ($requestpackets as $requestpacket) {
-                    try {       
+                    try {
                         $requestpacket->validate();
                         $jtlrpcreponses[] = $this->execute($requestpacket, $config, $rpcmode);
                     }
@@ -141,8 +141,8 @@ class Application extends CoreApplication
     /**
      * Build RPC Reponse Packet
      *
-     * @param jtl\Core\Rpc\ResponsePacket $requestpacket        
-     * @param jtl\Connector\Result\Action $actionresult        
+     * @param \jtl\Core\Rpc\ResponsePacket $requestpacket        
+     * @param \jtl\Connector\Result\Action $actionresult        
      * @return \jtl\Core\Rpc\ResponsePacket
      * @throws \jtl\Core\Exception\RpcException
      */
