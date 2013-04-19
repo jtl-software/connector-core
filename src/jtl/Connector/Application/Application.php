@@ -46,6 +46,7 @@ class Application extends CoreApplication
     public function run()
     {
         $requestpackets = Packet::prepare();
+                
         $rpcmode = is_object($requestpackets) ? Packet::SINGLE_MODE : Packet::BATCH_MODE;
                 
         // Creates the config instance
@@ -55,7 +56,7 @@ class Application extends CoreApplication
         ));
         
         switch ($rpcmode) {
-            case Packet::SINGLE_MODE:                
+            case Packet::SINGLE_MODE:
                 $requestpackets->validate();
                 
                 try {
@@ -73,9 +74,6 @@ class Application extends CoreApplication
                     
                     Response::send($responsepacket);
                 }
-                
-                // Could not be handled
-                throw new RpcException("Method not found", -32601);
                 break;
             case Packet::BATCH_MODE:
                 $jtlrpcreponses = array();
