@@ -55,10 +55,24 @@ class Application extends CoreApplication
         ));
         
         switch ($rpcmode) {
-            case Packet::SINGLE_MODE:
+            case Packet::SINGLE_MODE:                
                 $requestpackets->validate();
                 
-                $this->execute($requestpackets, $config, $rpcmode);
+                try {
+                    $this->execute($requestpackets, $config, $rpcmode);
+                }
+                catch (RpcException $exc) {
+                    $error = new Error();
+                    $error->setCode($exc->getCode())
+                        ->setMessage($exc->getMessage());
+                    
+                    $responsepacket = new ResponsePacket();
+                    $responsepacket->setId($requestpackets->getId())
+                        ->setJtlrpc($requestpackets->getJtlrpc())
+                        ->setError($error);
+                    
+                    Response::send($responsepacket);
+                }
                 
                 // Could not be handled
                 throw new RpcException("Method not found", -32601);
@@ -147,7 +161,7 @@ class Application extends CoreApplication
      * @throws \jtl\Core\Exception\RpcException
      */
     protected function buildRpcResponse(RequestPacket $requestpacket, Action $actionresult)
-    {
+    {        
         $responsepacket = new ResponsePacket();
         $responsepacket->setId($requestpacket->getId())
             ->setJtlrpc($requestpacket->getJtlrpc())
