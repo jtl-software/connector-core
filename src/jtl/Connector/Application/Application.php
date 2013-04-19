@@ -121,7 +121,7 @@ class Application extends CoreApplication
      * @param Config $config
      * @param integer $rpcmode
      */
-    protected function runSingle(ResponsePacket $requestpacket, Config $config, $rpcmode)
+    protected function runSingle(RequestPacket $requestpacket, Config $config, $rpcmode)
     {
         $requestpacket->validate();
         
