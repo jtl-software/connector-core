@@ -44,10 +44,10 @@ class Application extends CoreApplication
      * @see \jtl\Core\Application\Application::run()
      */
     public function run()
-    {
-        $requestpackets = Packet::prepare();
+    {        
+        $requestpackets = Packet::prepare();        
         $rpcmode = is_object($requestpackets) ? Packet::SINGLE_MODE : Packet::BATCH_MODE;
-        
+                
         // Creates the config instance
         $config = new Config(array(
             new ConfigJson(file_get_contents(APP_DIR . '/../config/config.json')),
@@ -80,14 +80,12 @@ class Application extends CoreApplication
                         $responsepacket->setId($requestpacket->getId())
                             ->setJtlrpc($requestpacket->getJtlrpc())
                             ->setError($error);
-                        
-                        $responsepacket->validate();
-                        
+                                                
                         $jtlrpcreponses[] = $responsepacket;
                     }
-                    
-                    Response::sendAll($jtlrpcreponses);
                 }
+                
+                Response::sendAll($jtlrpcreponses);
                 break;
         }
     }
@@ -123,7 +121,9 @@ class Application extends CoreApplication
                     throw new RpcException("Internal error", -32603);
                 }
             }
-        } 
+        }
+        
+        throw new RpcException("Method not found", -32601);
     }
 
     /**

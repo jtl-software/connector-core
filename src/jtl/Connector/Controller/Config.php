@@ -28,14 +28,10 @@ class Config extends CoreController
      * @param mixed $params            
      */
     public function read($params = null)
-    {
+    {        
         $ret = new Action();
-        $param = null;
-        if ($params !== null && count($params) === 1) {
-            $param = $params[0];
-        }
         try {
-            $ret->setResult($this->getConfig()->retrieve($param));
+            $ret->setResult($this->getConfig()->retrieve($params));
             $ret->setHandled(true);
         } catch (\Exception $e) {
             $err = new Error();
