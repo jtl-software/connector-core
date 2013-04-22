@@ -126,11 +126,7 @@ class Application extends CoreApplication
     protected function runSingle(RequestPacket $requestpacket, Config $config, $rpcmode)
     {
         $requestpacket->validate();
-        
-        list ($controller, $action) = explode(".", $requestpacket->getMethod());
-        if (!Schema::validateAction(CONNECTOR_DIR . "schema/{$controller}/params/{$action}.json", $requestpacket->getParams())) {
-            throw new SchemaException("Method ({$requestpacket->getMethod()}) could not be validated");
-        }
+        $this->runActionValidation($requestpacket);
         
         try {
             $this->execute($requestpacket, $config, $rpcmode);
@@ -163,6 +159,7 @@ class Application extends CoreApplication
         foreach ($requestpackets as $requestpacket) {
             try {
                 $requestpacket->validate();
+                $this->runActionValidation($requestpacket);
                 $jtlrpcreponses[] = $this->execute($requestpacket, $config, $rpcmode);
             }
             catch (RpcException $exc) {
@@ -201,6 +198,20 @@ class Application extends CoreApplication
         $responsepacket->validate();
         
         return $responsepacket;
+    }
+    
+    /**
+     * Validate Action
+     * 
+     * @param RequestPacket $requestpacket
+     * @throws SchemaException
+     */
+    protected function runActionValidation(RequestPacket $requestpacket)
+    {
+        list ($controller, $action) = explode(".", $requestpacket->getMethod());
+        if (!Schema::validateAction(CONNECTOR_DIR . "schema/{$controller}/params/{$action}.json", $requestpacket->getParams())) {
+            throw new SchemaException("Method ({$requestpacket->getMethod()}) could not be validated");
+        }
     }
 }
 ?>
