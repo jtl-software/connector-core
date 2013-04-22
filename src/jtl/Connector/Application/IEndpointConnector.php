@@ -27,5 +27,19 @@ interface IEndpointConnector
      * @return \jtl\Connector\Result\Action
      */
     public function handle($id, $method, $params = null);
+    
+    /**
+     * Controller Getter
+     * 
+     * @return string
+     */
+    public function getController();
+    
+    /**
+     * Action Getter
+     * 
+     * @return string
+     */
+    public function getAction();
 }
 ?>

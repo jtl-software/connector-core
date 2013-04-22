@@ -10,6 +10,7 @@ use jtl\Core\Serializer\Json;
 
 use \jtl\Core\Application\Application as CoreApplication;
 use \jtl\Core\Exception\RpcException;
+use \jtl\Core\Exception\SchemaException;
 use \jtl\Core\Rpc\Handler;
 use \jtl\Core\Rpc\Packet;
 use \jtl\Core\Rpc\RequestPacket;
@@ -22,6 +23,7 @@ use \jtl\Core\Utilities\Config\Config;
 use \jtl\Core\Utilities\Config\Loader\Json as ConfigJson;
 use \jtl\Core\Utilities\Config\Loader\System as ConfigSystem;
 use \jtl\Connector\Result\Action;
+use \jtl\Core\Validator\Schema;
 
 /**
  * Application Class
@@ -79,6 +81,11 @@ class Application extends CoreApplication
     {
         foreach (self::$_connectors as $endpointconnector) {
             if ($endpointconnector->canHandle($requestpacket->getMethod())) {
+                
+                // TODO: JSON Validation
+                if (!Schema::validateAction($endpointconnector->getController(), $endpointconnector->getAction(), $requestpacket->getParams()));
+                    throw new SchemaException("Action {$endpointconnector->getAction()} could not be validated");
+                
                 $endpointconnector->setConfig($config);
                 $actionresult = $endpointconnector->handle($requestpacket->getId(), $requestpacket->getMethod(), $requestpacket->getParams());
                 if (get_class($actionresult) == "jtl\\Connector\\Result\\Action") {
