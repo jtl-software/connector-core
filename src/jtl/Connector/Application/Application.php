@@ -80,9 +80,7 @@ class Application extends CoreApplication
     protected function execute(RequestPacket $requestpacket, Config $config, $rpcmode)
     {
         foreach (self::$_connectors as $endpointconnector) {
-            if ($endpointconnector->canHandle($requestpacket->getMethod())) {
-                
-                // TODO: JSON Validation
+            if ($endpointconnector->canHandle($requestpacket->getMethod())) {                
                 list ($controller, $action) = explode(".", $requestpacket->getMethod());
                 if (!Schema::validateAction($controller, $action, $requestpacket->getParams())) {
                     throw new SchemaException("Method ({$requestpacket->getMethod()}) could not be validated");
