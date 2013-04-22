@@ -83,8 +83,10 @@ class Application extends CoreApplication
             if ($endpointconnector->canHandle($requestpacket->getMethod())) {
                 
                 // TODO: JSON Validation
-                if (!Schema::validateAction($endpointconnector->getController(), $endpointconnector->getAction(), $requestpacket->getParams()));
-                    throw new SchemaException("Action {$endpointconnector->getAction()} could not be validated");
+                list ($controller, $action) = explode(".", $requestpacket->getMethod());
+                if (!Schema::validateAction($controller, $action, $requestpacket->getParams())) {
+                    throw new SchemaException("Method ({$requestpacket->getMethod()}) could not be validated");
+                }
                 
                 $endpointconnector->setConfig($config);
                 $actionresult = $endpointconnector->handle($requestpacket->getId(), $requestpacket->getMethod(), $requestpacket->getParams());
