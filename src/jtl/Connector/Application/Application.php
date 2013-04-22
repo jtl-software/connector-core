@@ -10,7 +10,6 @@ use jtl\Core\Serializer\Json;
 
 use \jtl\Core\Application\Application as CoreApplication;
 use \jtl\Core\Exception\RpcException;
-use \jtl\Core\Exception\SchemaException;
 use \jtl\Core\Rpc\Handler;
 use \jtl\Core\Rpc\Packet;
 use \jtl\Core\Rpc\RequestPacket;
@@ -24,6 +23,7 @@ use \jtl\Core\Utilities\Config\Loader\Json as ConfigJson;
 use \jtl\Core\Utilities\Config\Loader\System as ConfigSystem;
 use \jtl\Connector\Result\Action;
 use \jtl\Core\Validator\Schema;
+use \jtl\Core\Exception\SchemaException;
 
 /**
  * Application Class
@@ -80,12 +80,7 @@ class Application extends CoreApplication
     protected function execute(RequestPacket $requestpacket, Config $config, $rpcmode)
     {
         foreach (self::$_connectors as $endpointconnector) {
-            if ($endpointconnector->canHandle($requestpacket->getMethod())) {                
-                list ($controller, $action) = explode(".", $requestpacket->getMethod());
-                if (!Schema::validateAction($controller, $action, $requestpacket->getParams())) {
-                    throw new SchemaException("Method ({$requestpacket->getMethod()}) could not be validated");
-                }
-                
+            if ($endpointconnector->canHandle($requestpacket->getMethod())) {
                 $endpointconnector->setConfig($config);
                 $actionresult = $endpointconnector->handle($requestpacket->getId(), $requestpacket->getMethod(), $requestpacket->getParams());
                 if (get_class($actionresult) == "jtl\\Connector\\Result\\Action") {
@@ -131,6 +126,11 @@ class Application extends CoreApplication
     protected function runSingle(RequestPacket $requestpacket, Config $config, $rpcmode)
     {
         $requestpacket->validate();
+        
+        list ($controller, $action) = explode(".", $requestpacket->getMethod());
+        if (!Schema::validateAction(CONNECTOR_DIR . "schema/{$controller}/params/{$action}.json", $requestpacket->getParams())) {
+            throw new SchemaException("Method ({$requestpacket->getMethod()}) could not be validated");
+        }
         
         try {
             $this->execute($requestpacket, $config, $rpcmode);
