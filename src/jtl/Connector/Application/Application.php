@@ -25,6 +25,8 @@ use \jtl\Connector\Result\Action;
 use \jtl\Core\Validator\Schema;
 use \jtl\Core\Exception\SchemaException;
 use \jtl\Core\Validator\ValidationException;
+use \jtl\Core\Database\Sqlite3;
+use \jtl\Connector\Session\Session;
 
 /**
  * Application Class
@@ -40,6 +42,13 @@ class Application extends CoreApplication
      * @var multiple: IEndpointConnector
      */
     protected static $_connectors = array();
+    
+    /**
+     * Global Session
+     * 
+     * @var \jtl\Connector\Session\Session
+     */
+    public static $session;
 
     /**
      * (non-PHPdoc)
@@ -49,10 +58,14 @@ class Application extends CoreApplication
     public function run()
     {
         $jtlrpc = Request::handle();
+        $sessionId = Request::getSession();
         $requestpackets = RequestPacket::build($jtlrpc);
                 
         $rpcmode = is_object($requestpackets) ? Packet::SINGLE_MODE : Packet::BATCH_MODE;
                 
+        // Start Session
+        $this->startSession($sessionId);
+        
         // Creates the config instance
         $config = new Config(array(
             new ConfigJson(APP_DIR . '/../config/config.json'),
@@ -216,6 +229,21 @@ class Application extends CoreApplication
         }
         catch (ValidationException $exc) {
             throw new SchemaException($exc->getMessage());
+        }
+    }
+    
+    /**
+     * Starting Session
+     * 
+     * @throws \jtl\Core\Exception\DatabaseException
+     */
+    protected function startSession($sessionId = null)
+    {
+        if (self::$session === null) {
+            $sqlite3 = Sqlite3::getInstance();
+            $sqlite3->connect(array("location" => CONNECTOR_DIR . "db/connector.s3db"));
+        
+            self::$session = new Session($sqlite3, $sessionId);
         }
     }
 }

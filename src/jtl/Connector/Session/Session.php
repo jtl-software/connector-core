@@ -2,9 +2,9 @@
 /**
  * 
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Application
+ * @package jtl\Connector\Session
  */
-namespace jtl\Connector\Application;
+namespace jtl\Connector\Session;
 
 use \jtl\Core\Session\Handler as CoreHandler;
 
