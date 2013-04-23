@@ -24,6 +24,7 @@ use \jtl\Core\Utilities\Config\Loader\System as ConfigSystem;
 use \jtl\Connector\Result\Action;
 use \jtl\Core\Validator\Schema;
 use \jtl\Core\Exception\SchemaException;
+use \jtl\Core\Validator\ValidationException;
 
 /**
  * Application Class
@@ -209,8 +210,12 @@ class Application extends CoreApplication
     protected function runActionValidation(RequestPacket $requestpacket)
     {
         list ($controller, $action) = explode(".", $requestpacket->getMethod());
-        if (!Schema::validateAction(CONNECTOR_DIR . "schema/{$controller}/params/{$action}.json", $requestpacket->getParams())) {
-            throw new SchemaException("Method ({$requestpacket->getMethod()}) could not be validated");
+        
+        try {
+            Schema::validateAction(CONNECTOR_DIR . "schema/{$controller}/params/{$action}.json", $requestpacket->getParams());
+        }
+        catch (ValidationException $exc) {
+            throw new SchemaException($exc->getMessage());
         }
     }
 }
