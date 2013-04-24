@@ -17,14 +17,14 @@ use \jtl\Core\Exception\ConnectorException;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-abstract class Connector extends Singleton implements IEndpointConnector
+class Connector extends Singleton implements IEndpointConnector
 {
     protected $config;
 
     /**
      * Setter connector config.
      *
-     * @param \jtl\Core\Utilities\Config\Config $config            
+     * @param \jtl\Core\Utilities\Config\Config $config
      */
     public function setConfig(Config $config)
     {
@@ -44,6 +44,39 @@ abstract class Connector extends Singleton implements IEndpointConnector
         }
         return $this->config;
     }
+    
+    /**
+     * (non-PHPdoc)
+     * 
+     * @see \jtl\Connector\Application\IEndpointConnector::canHandle()
+     */
+    public function canHandle($method)
+    {        
+        if (preg_match("/core.[a-z0-9]{3,}[.]{1}[a-z0-9]{3,}/", $method) === 1) {
+            list ($core, $controller, $action) = explode(".", $method);
+            
+            $controller = ucfirst($controller);
+            $class = "\\jtl\\Connector\\Controller\\{$controller}";
+            if (class_exists($class)) {
+                $this->_controller = $class::getInstance();
+                $this->_action = $action;
+            
+                return method_exists($this->_controller, $action);
+            }
+        }
+        
+        return false;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * 
+     * @see \jtl\Connector\Application\IEndpointConnector::handle()
+     */
+    public function handle($id, $method, $params = null)
+    {
+        $this->_controller->setConfig($this->getConfig());
+        return $this->_controller->{$this->_action}($params);
+    }
 }
-
 ?>
