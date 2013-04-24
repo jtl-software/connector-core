@@ -27,6 +27,7 @@ use \jtl\Core\Exception\SchemaException;
 use \jtl\Core\Validator\ValidationException;
 use \jtl\Core\Database\Sqlite3;
 use \jtl\Connector\Session\Session;
+use \jtl\Connector\Base\Connector;
 
 /**
  * Application Class
@@ -93,6 +94,24 @@ class Application extends CoreApplication
      */
     protected function execute(RequestPacket $requestpacket, Config $config, $rpcmode)
     {
+        // Core Connector
+        $coreconnector = Connector::getInstance();
+        if ($coreconnector->canHandle($requestpacket->getMethod())) {
+            $coreconnector->setConfig($config);
+            $actionresult = $coreconnector->handle($requestpacket->getId(), $requestpacket->getMethod(), $requestpacket->getParams());
+            if ($actionresult->isHandled()) {
+                $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
+                
+                if ($rpcmode == Packet::SINGLE_MODE) {
+                    Response::send($responsepacket);
+                }
+                else {
+                    return $responsepacket;
+                }
+            }
+        }
+        
+        // Endpoint Connector
         foreach (self::$_connectors as $endpointconnector) {
             if ($endpointconnector->canHandle($requestpacket->getMethod())) {
                 $endpointconnector->setConfig($config);

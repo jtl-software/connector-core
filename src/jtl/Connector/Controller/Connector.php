@@ -73,9 +73,13 @@ class Connector extends CoreController
     {
         // TODO: do auth
         
-        $action = new Action();
+        $action = new Action();        
         if (Application::$session !== null) {
-            $action->setResult(Application::$session)
+            $session = new \stdClass();
+            $session->sessionId = Application::$session->getSessionId();
+            $session->lifetime = Application::$session->getLifetime();
+            
+            $action->setResult($session)
                 ->setHandled(true);
         }
         else {
