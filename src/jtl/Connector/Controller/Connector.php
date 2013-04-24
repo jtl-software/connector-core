@@ -1,5 +1,4 @@
 <?php
-
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
@@ -12,6 +11,7 @@ use \jtl\Core\Controller\Controller as CoreController;
 use \jtl\Core\Exception\ControllerException;
 use \jtl\Connector\Result\Action;
 use \jtl\Core\Rpc\Error;
+use \jtl\Connector\Application\Application;
 
 /**
  * Base Config Controller
@@ -21,7 +21,6 @@ use \jtl\Core\Rpc\Error;
  */
 class Connector extends CoreController
 {
-
     /**
      * Initialize the connector.
      *
@@ -41,6 +40,7 @@ class Connector extends CoreController
         }
         return $ret;
     }
+    
     /**
      * Returns the connector features.
      * 
@@ -63,4 +63,29 @@ class Connector extends CoreController
         return $ret;
     }
 
+    /**
+     * Returns the connector auth action
+     * 
+     * @param mixed $params
+     * @return \jtl\Connector\Result\Action
+     */
+    public function auth($params)
+    {
+        // TODO: do auth
+        
+        $action = new Action();
+        if (Application::$session !== null) {
+            $action->setResult(Application::$session)
+                ->setHandled(true);
+        }
+        else {
+            $error = new Error();
+            $error->setCode(789)
+                ->setMessage("Could not get any Session");
+            $action->setError($error);
+        }
+        
+        return $action;
+    }
 }
+?>
