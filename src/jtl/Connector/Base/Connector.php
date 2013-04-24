@@ -52,7 +52,7 @@ class Connector extends Singleton implements IEndpointConnector
      */
     public function canHandle($method)
     {        
-        if (preg_match("/[a-z0-9]{3,}[.]{1}[a-z0-9]{3,}[.]{1}[a-z0-9]{3,}/", $method) === 1) {
+        if (preg_match("/core.[a-z0-9]{3,}[.]{1}[a-z0-9]{3,}/", $method) === 1) {
             list ($core, $controller, $action) = explode(".", $method);
             
             $controller = ucfirst($controller);
