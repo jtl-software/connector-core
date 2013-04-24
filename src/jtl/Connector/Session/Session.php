@@ -16,9 +16,5 @@ use \jtl\Core\Session\Handler as CoreHandler;
  */
 class Session extends CoreHandler
 {
-    public function start()
-    {
-        
-    }
 }
 ?>
