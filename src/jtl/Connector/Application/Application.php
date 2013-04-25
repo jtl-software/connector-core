@@ -58,7 +58,7 @@ class Application extends CoreApplication
      * @see \jtl\Core\Application\Application::run()
      */
     public function run()
-    {
+    {        
         $jtlrpc = Request::handle();
         $sessionId = Request::getSession();
         $requestpackets = RequestPacket::build($jtlrpc);
