@@ -1,0 +1,63 @@
+<project name="jtlConnector" default="build">
+ 
+    <description>
+        Hudson CI - build file for jtlConnector
+ 
+        This file must be copied to:
+        $HUDSON_HOME/jobs/jtlCore/workspace/build.xml
+         
+        See http://www.jtl-software.de/ for further informations.
+    </description>
+ 
+    <target name="clean">
+        <delete dir="${basedir}/build"/>
+    </target>
+     
+    <target name="prepare">
+        <mkdir dir="${basedir}/build/api"/>
+        <mkdir dir="${basedir}/build/code-browser"/>
+        <mkdir dir="${basedir}/build/coverage"/>
+        <mkdir dir="${basedir}/build/logs"/>
+        <mkdir dir="${basedir}/build/artifacts"/>
+    </target>
+    
+    <!-- Composer updates -->
+    <target name="composer">
+        <exec dir="${basedir}" executable="php">
+            <arg line="composer.phar update"/>
+        </exec>
+    </target>
+    
+    <!-- phpcpd: Copy and Paste Detection -->
+    <target name="phpcpd">
+        <exec dir="${basedir}" executable="phpcpd">
+            <arg line="--exclude tests --log-pmd build/logs/pmd-cpd.xml src"/>
+        </exec>
+    </target>
+     
+    <!-- pDepend: Static Code Analysis -->
+    <target name="pdepend">
+        <exec dir="${basedir}" executable="pdepend">
+            <arg line="--jdepend-xml=build/logs/jdepend.xml src"/>
+        </exec>
+    </target>
+  
+    <!-- phpcs: Code Sniffer -->
+    <target name="phpcs">
+        <exec dir="${basedir}" executable="phpcs"
+              output="${basedir}/build/logs/checkstyle.xml">
+            <arg line=" --standard=ZEND --ignore=tests/* --report=checkstyle src"/>
+        </exec>
+    </target>
+     
+    <!-- phpUnit: Unit Test Framework for PHP -->
+    <target name="phpunit">
+        <exec dir="${basedir}" executable="phpunit" failonerror="true">
+            <arg line="--configuration phpunit.xml" />
+        </exec>
+    </target>
+ 
+    <!-- All Tasks in their correct order -->
+    <target name="build" depends="clean,prepare,composer,phpcs,pdepend,phpunit" />
+ 
+</project>

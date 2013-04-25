@@ -10,8 +10,4 @@ class ApplicationTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue(true, 'Dude we\'re fucked true != true :-(');
     }
 
-    public function testWriteTests() {
-        $this->assertTrue(false, 'You need to write Unit Test\'s for your Application!');
-    }
-
 }
