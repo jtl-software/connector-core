@@ -6,10 +6,11 @@
  */
 namespace jtl\Connector\Application;
 
-use jtl\Core\Serializer\Json;
 
+use \jtl\Core\Serializer\Json;
 use \jtl\Core\Application\Application as CoreApplication;
 use \jtl\Core\Exception\RpcException;
+use \jtl\Core\Exception\SessionException;
 use \jtl\Core\Rpc\Handler;
 use \jtl\Core\Rpc\Packet;
 use \jtl\Core\Rpc\RequestPacket;
@@ -65,7 +66,7 @@ class Application extends CoreApplication
         $rpcmode = is_object($requestpackets) ? Packet::SINGLE_MODE : Packet::BATCH_MODE;
                 
         // Start Session
-        $this->startSession($sessionId);
+        $this->startSession($sessionId, $requestpackets->getMethod());
         
         // Creates the config instance
         $config = new Config(array(
@@ -255,15 +256,17 @@ class Application extends CoreApplication
      * Starting Session
      * 
      * @throws \jtl\Core\Exception\DatabaseException
+     * @throws \jtl\Core\Exception\SessionException
      */
-    protected function startSession($sessionId = null)
+    protected function startSession($sessionId = null, $method)
     {
-        if (self::$session === null) {
-            $sqlite3 = Sqlite3::getInstance();
-            $sqlite3->connect(array("location" => CONNECTOR_DIR . "db/connector.s3db"));
+        if ($sessionId === null && $method != "core.connector.auth")
+            throw new SessionException("No session");
         
-            self::$session = new Session($sqlite3, $sessionId);
-        }
+        $sqlite3 = Sqlite3::getInstance();
+        $sqlite3->connect(array("location" => CONNECTOR_DIR . "db/connector.s3db"));
+    
+        self::$session = new Session($sqlite3, $sessionId);
     }
 }
 ?>
