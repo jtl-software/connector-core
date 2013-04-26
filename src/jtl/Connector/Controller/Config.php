@@ -1,5 +1,4 @@
 <?php
-
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
@@ -21,7 +20,6 @@ use \jtl\Core\Rpc\Error;
  */
 class Config extends CoreController
 {
-
     /**
      * Reads the controller configuration and returns it.
      *
@@ -41,6 +39,7 @@ class Config extends CoreController
         }
         return $ret;
     }
+    
     /**
      * Writes the controller configuration and returns the result.
      * 
@@ -60,5 +59,4 @@ class Config extends CoreController
         }
         return $ret;
     }
-
 }
