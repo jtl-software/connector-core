@@ -8,6 +8,7 @@ namespace jtl\Connector\Base;
 
 use \jtl\Connector\Application\IEndpointConnector;
 use \jtl\Core\Utilities\Singleton;
+use \jtl\Core\Utilities\RpcMethod;
 use \jtl\Core\Utilities\Config\Config;
 use \jtl\Core\Exception\ConnectorException;
 
@@ -52,16 +53,16 @@ class Connector extends Singleton implements IEndpointConnector
      */
     public function canHandle($method)
     {        
-        if (preg_match("/core.[a-z0-9]{3,}[.]{1}[a-z0-9]{3,}/", $method) === 1) {
-            list ($core, $controller, $action) = explode(".", $method);
+        if (RpcMethod::isMethod($method, true)) {
+            $obj = RpcMethod::splitMethod($method, true);
             
-            $controller = ucfirst($controller);
+            $controller = ucfirst($obj->controller);
             $class = "\\jtl\\Connector\\Controller\\{$controller}";
             if (class_exists($class)) {
                 $this->_controller = $class::getInstance();
-                $this->_action = $action;
+                $this->_action = $obj->action;
             
-                return method_exists($this->_controller, $action);
+                return method_exists($this->_controller, $this->_action);
             }
         }
         
