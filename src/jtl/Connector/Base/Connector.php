@@ -53,8 +53,8 @@ class Connector extends Singleton implements IEndpointConnector
      */
     public function canHandle($method)
     {        
-        if (RpcMethod::isMethod($method)) {
-            $obj = RpcMethod::splitMethod($method);
+        if (RpcMethod::isMethod($method, true)) {
+            $obj = RpcMethod::splitMethod($method, true);
             $controller = RpcMethod::buildController($obj->controller);
             
             $class = "\\jtl\\Connector\\Controller\\{$controller}";
