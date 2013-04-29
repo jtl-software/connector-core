@@ -113,11 +113,13 @@ class Application extends CoreApplication
         }
         
         // Endpoint Connector
+        $exists = false;
         foreach (self::$_connectors as $endpointconnector) {
             if ($endpointconnector->canHandle($requestpacket->getMethod())) {
                 $endpointconnector->setConfig($config);
                 $actionresult = $endpointconnector->handle($requestpacket->getId(), $requestpacket->getMethod(), $requestpacket->getParams());
                 if (get_class($actionresult) == "jtl\\Connector\\Result\\Action") {
+                    $exists = true;
                     if ($actionresult->isHandled()) {
                         $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
                         
@@ -135,7 +137,12 @@ class Application extends CoreApplication
             }
         }
         
-        throw new RpcException("Method not found", -32601);
+        if ($exists) {
+            throw new RpcException("Method could not be handled", -32000);
+        }
+        else {
+            throw new RpcException("Method not found", -32601);
+        }
     }
 
     /**
