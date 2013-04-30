@@ -28,6 +28,11 @@ abstract class Product extends Model
     protected $_name;
     
     /**
+     * @var string
+     */
+    protected $_sku;
+    
+    /**
      * @param int $id
      * @return \jtl\Connector\Model\Product
      */
@@ -61,6 +66,24 @@ abstract class Product extends Model
     public function getName()
     {
         return $this->_name;
+    }
+    
+    /**
+     * @param string $sku
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setSku($sku)
+    {
+        $this->_sku = substr($sku, 0, 255);
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getSku()
+    {
+        return $this->_sku;
     }
     
     /**
