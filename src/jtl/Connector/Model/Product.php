@@ -268,6 +268,11 @@ abstract class Product extends Model
     protected $_bestBefore;
     
     /**
+     * @var string
+     */
+    protected $_sku;
+    
+    /**
      * @param int $id
      * @return \jtl\Connector\Model\Product
      */
@@ -1165,6 +1170,24 @@ abstract class Product extends Model
     public function getBestBefore()
     {
         return $this->_bestBefore;
+    }
+    
+    /**
+     * @param string $sku
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setSku($sku)
+    {
+        $this->_sku = substr($sku, 0, 255);
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getSku()
+    {
+        return $this->_sku;
     }
     
     /**
