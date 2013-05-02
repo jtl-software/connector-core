@@ -85,6 +85,9 @@
         },
         "created": {
             "type": "string"
+        },
+        "paymentModuleId": {
+            "type": "string"
         }
     },
     "required": [

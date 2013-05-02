@@ -11,6 +11,9 @@
         "foreignKey": {
             "type": "int"
         },
+        "isMainImage": {
+            "type": "bool"
+        },
         "filename": {
             "type": "string"
         },

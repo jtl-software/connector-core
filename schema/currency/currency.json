@@ -25,6 +25,9 @@
         },
         "delimiterCent": {
             "type": "string"
+        },
+        "delimiterThousand": {
+            "type": "string"
         }
     },
     "required": [

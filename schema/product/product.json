@@ -89,6 +89,9 @@
         "created": {
             "type": "string"
         },
+        "availableFrom": {
+            "type": "string"
+        },
         "manufacturerNumber": {
             "type": "string"
         },

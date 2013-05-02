@@ -3,7 +3,7 @@
     "type": "object",
     "properties": {
         "languageIso": {
-            "type": "int"
+            "type": "string"
         },
         "categoryId": {
             "type": "int"
