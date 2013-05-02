@@ -16,97 +16,97 @@ use \jtl\Core\Validator\Schema;
 abstract class Product extends Model
 {
     /**
-     * @var int
+     * @var 
      */
     protected $_id;
     
     /**
-     * @var int
+     * @var 
      */
     protected $_masterProductId;
     
     /**
-     * @var int
+     * @var 
      */
     protected $_manufacturerId;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_deliveryStatusId;
     
     /**
-     * @var int
+     * @var 
      */
     protected $_unitId;
     
     /**
-     * @var int
+     * @var 
      */
     protected $_basePriceUnitId;
     
     /**
-     * @var int
+     * @var 
      */
     protected $_taxClassId;
     
     /**
-     * @var int
+     * @var 
      */
     protected $_shippingClassId;
     
     /**
-     * @var string
+     * @var 
      */
     protected $_sku;
     
     /**
-     * @var string
+     * @var int
      */
     protected $_note;
     
     /**
-     * @var double
+     * @var 
      */
     protected $_stockLevel;
     
     /**
-     * @var double
+     * @var 
      */
     protected $_vat;
     
     /**
-     * @var double
+     * @var 
      */
     protected $_minimumOrderQuantity;
     
     /**
-     * @var string
+     * @var 
      */
     protected $_ean;
     
     /**
-     * @var string
+     * @var 
      */
     protected $_isTopProduct;
     
     /**
-     * @var double
+     * @var 
      */
     protected $_productWeight;
     
     /**
-     * @var double
+     * @var 
      */
     protected $_shippingWeight;
     
     /**
-     * @var string
+     * @var 
      */
     protected $_isNew;
     
     /**
-     * @var double
+     * @var 
      */
     protected $_recommendedRetailPrice;
     
@@ -116,7 +116,7 @@ abstract class Product extends Model
     protected $_considerStock;
     
     /**
-     * @var string
+     * @var 
      */
     protected $_permitNegativeStock;
     
@@ -126,12 +126,12 @@ abstract class Product extends Model
     protected $_considerVariationStock;
     
     /**
-     * @var string
+     * @var 
      */
     protected $_isDivisible;
     
     /**
-     * @var double
+     * @var 
      */
     protected $_packagingUnit;
     
@@ -141,17 +141,17 @@ abstract class Product extends Model
     protected $_considerBasePrice;
     
     /**
-     * @var double
+     * @var 
      */
     protected $_basePriceValue;
     
     /**
-     * @var string
+     * @var int
      */
     protected $_keywords;
     
     /**
-     * @var int
+     * @var 
      */
     protected $_sort;
     
@@ -161,117 +161,112 @@ abstract class Product extends Model
     protected $_created;
     
     /**
-     * @var string
-     */
-    protected $_availableFrom;
-    
-    /**
-     * @var string
+     * @var 
      */
     protected $_manufacturerNumber;
     
     /**
-     * @var string
+     * @var 
      */
     protected $_serialNumber;
     
     /**
-     * @var string
+     * @var 
      */
     protected $_isbn;
     
     /**
-     * @var string
+     * @var 
      */
     protected $_asin;
     
     /**
-     * @var string
+     * @var 
      */
     protected $_unNumber;
     
     /**
-     * @var string
+     * @var 
      */
     protected $_hazardIdNumber;
     
     /**
-     * @var string
+     * @var 
      */
     protected $_taric;
     
     /**
-     * @var int
+     * @var 
      */
     protected $_isMasterProduct;
     
     /**
-     * @var double
+     * @var 
      */
     protected $_takeOffQuantity;
     
     /**
-     * @var int
+     * @var 
      */
     protected $_setArticleId;
     
     /**
-     * @var string
+     * @var 
      */
     protected $_upc;
     
     /**
-     * @var string
+     * @var 
      */
     protected $_originCountry;
     
     /**
-     * @var string
+     * @var 
      */
     protected $_epid;
     
     /**
-     * @var int
+     * @var 
      */
     protected $_productTypeId;
     
     /**
-     * @var double
+     * @var 
      */
     protected $_inflowQuantity;
     
     /**
-     * @var string
+     * @var 
      */
     protected $_inflowDate;
     
     /**
-     * @var double
+     * @var 
      */
     protected $_supplierStockLevel;
     
     /**
-     * @var double
+     * @var 
      */
     protected $_supplierDeliveryTime;
     
     /**
-     * @var string
+     * @var 
      */
     protected $_bestBefore;
     
     /**
-     * @param int $id
+     * @param  $id
      * @return \jtl\Connector\Model\Product
      */
     public function setId($id)
     {
-        $this->_id = (int)$id;
+        $this->_id = ()$id;
         return $this;
     }
     
     /**
-     * @return int
+     * @return 
      */
     public function getId()
     {
@@ -279,17 +274,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param int $masterProductId
+     * @param  $masterProductId
      * @return \jtl\Connector\Model\Product
      */
     public function setMasterProductId($masterProductId)
     {
-        $this->_masterProductId = (int)$masterProductId;
+        $this->_masterProductId = ()$masterProductId;
         return $this;
     }
     
     /**
-     * @return int
+     * @return 
      */
     public function getMasterProductId()
     {
@@ -297,17 +292,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param int $manufacturerId
+     * @param  $manufacturerId
      * @return \jtl\Connector\Model\Product
      */
     public function setManufacturerId($manufacturerId)
     {
-        $this->_manufacturerId = (int)$manufacturerId;
+        $this->_manufacturerId = ()$manufacturerId;
         return $this;
     }
     
     /**
-     * @return int
+     * @return 
      */
     public function getManufacturerId()
     {
@@ -315,17 +310,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param int $deliveryStatusId
+     * @param string $deliveryStatusId
      * @return \jtl\Connector\Model\Product
      */
     public function setDeliveryStatusId($deliveryStatusId)
     {
-        $this->_deliveryStatusId = (int)$deliveryStatusId;
+        $this->_deliveryStatusId = (string)$deliveryStatusId;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getDeliveryStatusId()
     {
@@ -333,17 +328,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param int $unitId
+     * @param  $unitId
      * @return \jtl\Connector\Model\Product
      */
     public function setUnitId($unitId)
     {
-        $this->_unitId = (int)$unitId;
+        $this->_unitId = ()$unitId;
         return $this;
     }
     
     /**
-     * @return int
+     * @return 
      */
     public function getUnitId()
     {
@@ -351,17 +346,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param int $basePriceUnitId
+     * @param  $basePriceUnitId
      * @return \jtl\Connector\Model\Product
      */
     public function setBasePriceUnitId($basePriceUnitId)
     {
-        $this->_basePriceUnitId = (int)$basePriceUnitId;
+        $this->_basePriceUnitId = ()$basePriceUnitId;
         return $this;
     }
     
     /**
-     * @return int
+     * @return 
      */
     public function getBasePriceUnitId()
     {
@@ -369,17 +364,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param int $taxClassId
+     * @param  $taxClassId
      * @return \jtl\Connector\Model\Product
      */
     public function setTaxClassId($taxClassId)
     {
-        $this->_taxClassId = (int)$taxClassId;
+        $this->_taxClassId = ()$taxClassId;
         return $this;
     }
     
     /**
-     * @return int
+     * @return 
      */
     public function getTaxClassId()
     {
@@ -387,17 +382,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param int $shippingClassId
+     * @param  $shippingClassId
      * @return \jtl\Connector\Model\Product
      */
     public function setShippingClassId($shippingClassId)
     {
-        $this->_shippingClassId = (int)$shippingClassId;
+        $this->_shippingClassId = ()$shippingClassId;
         return $this;
     }
     
     /**
-     * @return int
+     * @return 
      */
     public function getShippingClassId()
     {
@@ -405,17 +400,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param string $sku
+     * @param  $sku
      * @return \jtl\Connector\Model\Product
      */
     public function setSku($sku)
     {
-        $this->_sku = (string)$sku;
+        $this->_sku = ()$sku;
         return $this;
     }
     
     /**
-     * @return string
+     * @return 
      */
     public function getSku()
     {
@@ -423,17 +418,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param string $note
+     * @param int $note
      * @return \jtl\Connector\Model\Product
      */
     public function setNote($note)
     {
-        $this->_note = (string)$note;
+        $this->_note = (int)$note;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getNote()
     {
@@ -441,17 +436,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param double $stockLevel
+     * @param  $stockLevel
      * @return \jtl\Connector\Model\Product
      */
     public function setStockLevel($stockLevel)
     {
-        $this->_stockLevel = (double)$stockLevel;
+        $this->_stockLevel = ()$stockLevel;
         return $this;
     }
     
     /**
-     * @return double
+     * @return 
      */
     public function getStockLevel()
     {
@@ -459,17 +454,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param double $vat
+     * @param  $vat
      * @return \jtl\Connector\Model\Product
      */
     public function setVat($vat)
     {
-        $this->_vat = (double)$vat;
+        $this->_vat = ()$vat;
         return $this;
     }
     
     /**
-     * @return double
+     * @return 
      */
     public function getVat()
     {
@@ -477,17 +472,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param double $minimumOrderQuantity
+     * @param  $minimumOrderQuantity
      * @return \jtl\Connector\Model\Product
      */
     public function setMinimumOrderQuantity($minimumOrderQuantity)
     {
-        $this->_minimumOrderQuantity = (double)$minimumOrderQuantity;
+        $this->_minimumOrderQuantity = ()$minimumOrderQuantity;
         return $this;
     }
     
     /**
-     * @return double
+     * @return 
      */
     public function getMinimumOrderQuantity()
     {
@@ -495,17 +490,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param string $ean
+     * @param  $ean
      * @return \jtl\Connector\Model\Product
      */
     public function setEan($ean)
     {
-        $this->_ean = (string)$ean;
+        $this->_ean = ()$ean;
         return $this;
     }
     
     /**
-     * @return string
+     * @return 
      */
     public function getEan()
     {
@@ -513,17 +508,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param string $isTopProduct
+     * @param  $isTopProduct
      * @return \jtl\Connector\Model\Product
      */
     public function setIsTopProduct($isTopProduct)
     {
-        $this->_isTopProduct = (string)$isTopProduct;
+        $this->_isTopProduct = ()$isTopProduct;
         return $this;
     }
     
     /**
-     * @return string
+     * @return 
      */
     public function getIsTopProduct()
     {
@@ -531,17 +526,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param double $productWeight
+     * @param  $productWeight
      * @return \jtl\Connector\Model\Product
      */
     public function setProductWeight($productWeight)
     {
-        $this->_productWeight = (double)$productWeight;
+        $this->_productWeight = ()$productWeight;
         return $this;
     }
     
     /**
-     * @return double
+     * @return 
      */
     public function getProductWeight()
     {
@@ -549,17 +544,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param double $shippingWeight
+     * @param  $shippingWeight
      * @return \jtl\Connector\Model\Product
      */
     public function setShippingWeight($shippingWeight)
     {
-        $this->_shippingWeight = (double)$shippingWeight;
+        $this->_shippingWeight = ()$shippingWeight;
         return $this;
     }
     
     /**
-     * @return double
+     * @return 
      */
     public function getShippingWeight()
     {
@@ -567,17 +562,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param string $isNew
+     * @param  $isNew
      * @return \jtl\Connector\Model\Product
      */
     public function setIsNew($isNew)
     {
-        $this->_isNew = (string)$isNew;
+        $this->_isNew = ()$isNew;
         return $this;
     }
     
     /**
-     * @return string
+     * @return 
      */
     public function getIsNew()
     {
@@ -585,17 +580,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param double $recommendedRetailPrice
+     * @param  $recommendedRetailPrice
      * @return \jtl\Connector\Model\Product
      */
     public function setRecommendedRetailPrice($recommendedRetailPrice)
     {
-        $this->_recommendedRetailPrice = (double)$recommendedRetailPrice;
+        $this->_recommendedRetailPrice = ()$recommendedRetailPrice;
         return $this;
     }
     
     /**
-     * @return double
+     * @return 
      */
     public function getRecommendedRetailPrice()
     {
@@ -621,17 +616,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param string $permitNegativeStock
+     * @param  $permitNegativeStock
      * @return \jtl\Connector\Model\Product
      */
     public function setPermitNegativeStock($permitNegativeStock)
     {
-        $this->_permitNegativeStock = (string)$permitNegativeStock;
+        $this->_permitNegativeStock = ()$permitNegativeStock;
         return $this;
     }
     
     /**
-     * @return string
+     * @return 
      */
     public function getPermitNegativeStock()
     {
@@ -657,17 +652,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param string $isDivisible
+     * @param  $isDivisible
      * @return \jtl\Connector\Model\Product
      */
     public function setIsDivisible($isDivisible)
     {
-        $this->_isDivisible = (string)$isDivisible;
+        $this->_isDivisible = ()$isDivisible;
         return $this;
     }
     
     /**
-     * @return string
+     * @return 
      */
     public function getIsDivisible()
     {
@@ -675,17 +670,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param double $packagingUnit
+     * @param  $packagingUnit
      * @return \jtl\Connector\Model\Product
      */
     public function setPackagingUnit($packagingUnit)
     {
-        $this->_packagingUnit = (double)$packagingUnit;
+        $this->_packagingUnit = ()$packagingUnit;
         return $this;
     }
     
     /**
-     * @return double
+     * @return 
      */
     public function getPackagingUnit()
     {
@@ -711,17 +706,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param double $basePriceValue
+     * @param  $basePriceValue
      * @return \jtl\Connector\Model\Product
      */
     public function setBasePriceValue($basePriceValue)
     {
-        $this->_basePriceValue = (double)$basePriceValue;
+        $this->_basePriceValue = ()$basePriceValue;
         return $this;
     }
     
     /**
-     * @return double
+     * @return 
      */
     public function getBasePriceValue()
     {
@@ -729,17 +724,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param string $keywords
+     * @param int $keywords
      * @return \jtl\Connector\Model\Product
      */
     public function setKeywords($keywords)
     {
-        $this->_keywords = (string)$keywords;
+        $this->_keywords = (int)$keywords;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getKeywords()
     {
@@ -747,17 +742,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param int $sort
+     * @param  $sort
      * @return \jtl\Connector\Model\Product
      */
     public function setSort($sort)
     {
-        $this->_sort = (int)$sort;
+        $this->_sort = ()$sort;
         return $this;
     }
     
     /**
-     * @return int
+     * @return 
      */
     public function getSort()
     {
@@ -783,35 +778,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param string $availableFrom
-     * @return \jtl\Connector\Model\Product
-     */
-    public function setAvailableFrom($availableFrom)
-    {
-        $this->_availableFrom = (string)$availableFrom;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getAvailableFrom()
-    {
-        return $this->_availableFrom;
-    }
-    
-    /**
-     * @param string $manufacturerNumber
+     * @param  $manufacturerNumber
      * @return \jtl\Connector\Model\Product
      */
     public function setManufacturerNumber($manufacturerNumber)
     {
-        $this->_manufacturerNumber = (string)$manufacturerNumber;
+        $this->_manufacturerNumber = ()$manufacturerNumber;
         return $this;
     }
     
     /**
-     * @return string
+     * @return 
      */
     public function getManufacturerNumber()
     {
@@ -819,17 +796,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param string $serialNumber
+     * @param  $serialNumber
      * @return \jtl\Connector\Model\Product
      */
     public function setSerialNumber($serialNumber)
     {
-        $this->_serialNumber = (string)$serialNumber;
+        $this->_serialNumber = ()$serialNumber;
         return $this;
     }
     
     /**
-     * @return string
+     * @return 
      */
     public function getSerialNumber()
     {
@@ -837,17 +814,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param string $isbn
+     * @param  $isbn
      * @return \jtl\Connector\Model\Product
      */
     public function setIsbn($isbn)
     {
-        $this->_isbn = (string)$isbn;
+        $this->_isbn = ()$isbn;
         return $this;
     }
     
     /**
-     * @return string
+     * @return 
      */
     public function getIsbn()
     {
@@ -855,17 +832,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param string $asin
+     * @param  $asin
      * @return \jtl\Connector\Model\Product
      */
     public function setAsin($asin)
     {
-        $this->_asin = (string)$asin;
+        $this->_asin = ()$asin;
         return $this;
     }
     
     /**
-     * @return string
+     * @return 
      */
     public function getAsin()
     {
@@ -873,17 +850,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param string $unNumber
+     * @param  $unNumber
      * @return \jtl\Connector\Model\Product
      */
     public function setUnNumber($unNumber)
     {
-        $this->_unNumber = (string)$unNumber;
+        $this->_unNumber = ()$unNumber;
         return $this;
     }
     
     /**
-     * @return string
+     * @return 
      */
     public function getUnNumber()
     {
@@ -891,17 +868,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param string $hazardIdNumber
+     * @param  $hazardIdNumber
      * @return \jtl\Connector\Model\Product
      */
     public function setHazardIdNumber($hazardIdNumber)
     {
-        $this->_hazardIdNumber = (string)$hazardIdNumber;
+        $this->_hazardIdNumber = ()$hazardIdNumber;
         return $this;
     }
     
     /**
-     * @return string
+     * @return 
      */
     public function getHazardIdNumber()
     {
@@ -909,17 +886,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param string $taric
+     * @param  $taric
      * @return \jtl\Connector\Model\Product
      */
     public function setTaric($taric)
     {
-        $this->_taric = (string)$taric;
+        $this->_taric = ()$taric;
         return $this;
     }
     
     /**
-     * @return string
+     * @return 
      */
     public function getTaric()
     {
@@ -927,17 +904,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param int $isMasterProduct
+     * @param  $isMasterProduct
      * @return \jtl\Connector\Model\Product
      */
     public function setIsMasterProduct($isMasterProduct)
     {
-        $this->_isMasterProduct = (int)$isMasterProduct;
+        $this->_isMasterProduct = ()$isMasterProduct;
         return $this;
     }
     
     /**
-     * @return int
+     * @return 
      */
     public function getIsMasterProduct()
     {
@@ -945,17 +922,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param double $takeOffQuantity
+     * @param  $takeOffQuantity
      * @return \jtl\Connector\Model\Product
      */
     public function setTakeOffQuantity($takeOffQuantity)
     {
-        $this->_takeOffQuantity = (double)$takeOffQuantity;
+        $this->_takeOffQuantity = ()$takeOffQuantity;
         return $this;
     }
     
     /**
-     * @return double
+     * @return 
      */
     public function getTakeOffQuantity()
     {
@@ -963,17 +940,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param int $setArticleId
+     * @param  $setArticleId
      * @return \jtl\Connector\Model\Product
      */
     public function setSetArticleId($setArticleId)
     {
-        $this->_setArticleId = (int)$setArticleId;
+        $this->_setArticleId = ()$setArticleId;
         return $this;
     }
     
     /**
-     * @return int
+     * @return 
      */
     public function getSetArticleId()
     {
@@ -981,17 +958,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param string $upc
+     * @param  $upc
      * @return \jtl\Connector\Model\Product
      */
     public function setUpc($upc)
     {
-        $this->_upc = (string)$upc;
+        $this->_upc = ()$upc;
         return $this;
     }
     
     /**
-     * @return string
+     * @return 
      */
     public function getUpc()
     {
@@ -999,17 +976,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param string $originCountry
+     * @param  $originCountry
      * @return \jtl\Connector\Model\Product
      */
     public function setOriginCountry($originCountry)
     {
-        $this->_originCountry = (string)$originCountry;
+        $this->_originCountry = ()$originCountry;
         return $this;
     }
     
     /**
-     * @return string
+     * @return 
      */
     public function getOriginCountry()
     {
@@ -1017,17 +994,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param string $epid
+     * @param  $epid
      * @return \jtl\Connector\Model\Product
      */
     public function setEpid($epid)
     {
-        $this->_epid = (string)$epid;
+        $this->_epid = ()$epid;
         return $this;
     }
     
     /**
-     * @return string
+     * @return 
      */
     public function getEpid()
     {
@@ -1035,17 +1012,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param int $productTypeId
+     * @param  $productTypeId
      * @return \jtl\Connector\Model\Product
      */
     public function setProductTypeId($productTypeId)
     {
-        $this->_productTypeId = (int)$productTypeId;
+        $this->_productTypeId = ()$productTypeId;
         return $this;
     }
     
     /**
-     * @return int
+     * @return 
      */
     public function getProductTypeId()
     {
@@ -1053,17 +1030,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param double $inflowQuantity
+     * @param  $inflowQuantity
      * @return \jtl\Connector\Model\Product
      */
     public function setInflowQuantity($inflowQuantity)
     {
-        $this->_inflowQuantity = (double)$inflowQuantity;
+        $this->_inflowQuantity = ()$inflowQuantity;
         return $this;
     }
     
     /**
-     * @return double
+     * @return 
      */
     public function getInflowQuantity()
     {
@@ -1071,17 +1048,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param string $inflowDate
+     * @param  $inflowDate
      * @return \jtl\Connector\Model\Product
      */
     public function setInflowDate($inflowDate)
     {
-        $this->_inflowDate = (string)$inflowDate;
+        $this->_inflowDate = ()$inflowDate;
         return $this;
     }
     
     /**
-     * @return string
+     * @return 
      */
     public function getInflowDate()
     {
@@ -1089,17 +1066,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param double $supplierStockLevel
+     * @param  $supplierStockLevel
      * @return \jtl\Connector\Model\Product
      */
     public function setSupplierStockLevel($supplierStockLevel)
     {
-        $this->_supplierStockLevel = (double)$supplierStockLevel;
+        $this->_supplierStockLevel = ()$supplierStockLevel;
         return $this;
     }
     
     /**
-     * @return double
+     * @return 
      */
     public function getSupplierStockLevel()
     {
@@ -1107,17 +1084,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param double $supplierDeliveryTime
+     * @param  $supplierDeliveryTime
      * @return \jtl\Connector\Model\Product
      */
     public function setSupplierDeliveryTime($supplierDeliveryTime)
     {
-        $this->_supplierDeliveryTime = (double)$supplierDeliveryTime;
+        $this->_supplierDeliveryTime = ()$supplierDeliveryTime;
         return $this;
     }
     
     /**
-     * @return double
+     * @return 
      */
     public function getSupplierDeliveryTime()
     {
@@ -1125,17 +1102,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param string $bestBefore
+     * @param  $bestBefore
      * @return \jtl\Connector\Model\Product
      */
     public function setBestBefore($bestBefore)
     {
-        $this->_bestBefore = (string)$bestBefore;
+        $this->_bestBefore = ()$bestBefore;
         return $this;
     }
     
     /**
-     * @return string
+     * @return 
      */
     public function getBestBefore()
     {
@@ -1148,7 +1125,7 @@ abstract class Product extends Model
      */
     public function validate()
     {
-        return Schema::validateModel(CONNECTOR_DIR . "schema/product/product.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/Product/Product.json", $this->getPublic(array()));
     }
 }
 ?>

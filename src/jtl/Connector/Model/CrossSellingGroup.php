@@ -1,0 +1,119 @@
+<?php
+/**
+ * @copyright 2010-2013 JTL-Software GmbH
+ * @package jtl\Connector\Model
+ */
+
+namespace jtl\Connector\Model;
+
+use \jtl\Core\Model\Model;
+use \jtl\Core\Validator\Schema;
+
+/**
+ * CrossSellingGroup Model
+ * @access public
+ */
+abstract class CrossSellingGroup extends Model
+{
+    /**
+     * @var 
+     */
+    protected $_id;
+    
+    /**
+     * @var 
+     */
+    protected $_languageIso;
+    
+    /**
+     * @var int
+     */
+    protected $_name;
+    
+    /**
+     * @var string
+     */
+    protected $_description;
+    
+    /**
+     * @param  $id
+     * @return \jtl\Connector\Model\CrossSellingGroup
+     */
+    public function setId($id)
+    {
+        $this->_id = ()$id;
+        return $this;
+    }
+    
+    /**
+     * @return 
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param  $languageIso
+     * @return \jtl\Connector\Model\CrossSellingGroup
+     */
+    public function setLanguageIso($languageIso)
+    {
+        $this->_languageIso = ()$languageIso;
+        return $this;
+    }
+    
+    /**
+     * @return 
+     */
+    public function getLanguageIso()
+    {
+        return $this->_languageIso;
+    }
+    
+    /**
+     * @param int $name
+     * @return \jtl\Connector\Model\CrossSellingGroup
+     */
+    public function setName($name)
+    {
+        $this->_name = (int)$name;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+    
+    /**
+     * @param string $description
+     * @return \jtl\Connector\Model\CrossSellingGroup
+     */
+    public function setDescription($description)
+    {
+        $this->_description = (string)$description;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->_description;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\Model::validate()
+     */
+    public function validate()
+    {
+        Schema::validateModel(CONNECTOR_DIR . "schema/CrossSellingGroup/CrossSellingGroup.json", $this->getPublic(array()));
+    }
+}
+?>
