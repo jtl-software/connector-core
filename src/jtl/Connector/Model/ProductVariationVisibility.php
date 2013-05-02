@@ -10,10 +10,10 @@ use \jtl\Core\Model\Model;
 use \jtl\Core\Validator\Schema;
 
 /**
- * CategoryVisibility  Model
+ * ProductVariationVisibility Model
  * @access public
  */
-abstract class CategoryVisibility  extends Model
+abstract class ProductVariationVisibility extends Model
 {
     /**
      * @var int
@@ -23,11 +23,11 @@ abstract class CategoryVisibility  extends Model
     /**
      * @var int
      */
-    protected $_categoryId;
+    protected $_productVariationId;
     
     /**
      * @param int $customerGroupId
-     * @return \jtl\Connector\Model\CategoryVisibility 
+     * @return \jtl\Connector\Model\ProductVariationVisibility
      */
     public function setCustomerGroupId($customerGroupId)
     {
@@ -44,21 +44,21 @@ abstract class CategoryVisibility  extends Model
     }
     
     /**
-     * @param int $categoryId
-     * @return \jtl\Connector\Model\CategoryVisibility 
+     * @param int $productVariationId
+     * @return \jtl\Connector\Model\ProductVariationVisibility
      */
-    public function setCategoryId($categoryId)
+    public function setProductVariationId($productVariationId)
     {
-        $this->_categoryId = (int)$categoryId;
+        $this->_productVariationId = (int)$productVariationId;
         return $this;
     }
     
     /**
      * @return int
      */
-    public function getCategoryId()
+    public function getProductVariationId()
     {
-        return $this->_categoryId;
+        return $this->_productVariationId;
     }
     
     /**
@@ -67,7 +67,7 @@ abstract class CategoryVisibility  extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/categoryvisibility /categoryvisibility .json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/productvariationvisibility/productvariationvisibility.json", $this->getPublic(array()));
     }
 }
 ?>

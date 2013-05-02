@@ -10,10 +10,10 @@ use \jtl\Core\Model\Model;
 use \jtl\Core\Validator\Schema;
 
 /**
- * DeliveryNotePos  Model
+ * DeliveryNotePos Model
  * @access public
  */
-abstract class DeliveryNotePos  extends Model
+abstract class DeliveryNotePos extends Model
 {
     /**
      * @var int
@@ -52,7 +52,7 @@ abstract class DeliveryNotePos  extends Model
     
     /**
      * @param int $id
-     * @return \jtl\Connector\Model\DeliveryNotePos 
+     * @return \jtl\Connector\Model\DeliveryNotePos
      */
     public function setId($id)
     {
@@ -70,7 +70,7 @@ abstract class DeliveryNotePos  extends Model
     
     /**
      * @param int $orderPosition
-     * @return \jtl\Connector\Model\DeliveryNotePos 
+     * @return \jtl\Connector\Model\DeliveryNotePos
      */
     public function setOrderPosition($orderPosition)
     {
@@ -88,7 +88,7 @@ abstract class DeliveryNotePos  extends Model
     
     /**
      * @param double $quantity
-     * @return \jtl\Connector\Model\DeliveryNotePos 
+     * @return \jtl\Connector\Model\DeliveryNotePos
      */
     public function setQuantity($quantity)
     {
@@ -106,7 +106,7 @@ abstract class DeliveryNotePos  extends Model
     
     /**
      * @param int $stock
-     * @return \jtl\Connector\Model\DeliveryNotePos 
+     * @return \jtl\Connector\Model\DeliveryNotePos
      */
     public function setStock($stock)
     {
@@ -124,7 +124,7 @@ abstract class DeliveryNotePos  extends Model
     
     /**
      * @param string $serialNumber
-     * @return \jtl\Connector\Model\DeliveryNotePos 
+     * @return \jtl\Connector\Model\DeliveryNotePos
      */
     public function setSerialNumber($serialNumber)
     {
@@ -142,7 +142,7 @@ abstract class DeliveryNotePos  extends Model
     
     /**
      * @param string $batchNumber
-     * @return \jtl\Connector\Model\DeliveryNotePos 
+     * @return \jtl\Connector\Model\DeliveryNotePos
      */
     public function setBatchNumber($batchNumber)
     {
@@ -160,7 +160,7 @@ abstract class DeliveryNotePos  extends Model
     
     /**
      * @param string $bestBefore
-     * @return \jtl\Connector\Model\DeliveryNotePos 
+     * @return \jtl\Connector\Model\DeliveryNotePos
      */
     public function setBestBefore($bestBefore)
     {
@@ -182,7 +182,7 @@ abstract class DeliveryNotePos  extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/deliverynotepos /deliverynotepos .json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/deliverynotepos/deliverynotepos.json", $this->getPublic(array()));
     }
 }
 ?>
