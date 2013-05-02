@@ -163,6 +163,11 @@ abstract class Product extends Model
     /**
      * @var string
      */
+    protected $_availableFrom;
+    
+    /**
+     * @var string
+     */
     protected $_manufacturerNumber;
     
     /**
@@ -775,6 +780,24 @@ abstract class Product extends Model
     public function getCreated()
     {
         return $this->_created;
+    }
+    
+    /**
+     * @param string $availableFrom
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setAvailableFrom($availableFrom)
+    {
+        $this->_availableFrom = (string)$availableFrom;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getAvailableFrom()
+    {
+        return $this->_availableFrom;
     }
     
     /**

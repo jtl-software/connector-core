@@ -16,7 +16,7 @@ use \jtl\Core\Validator\Schema;
 abstract class CategoryI18n extends Model
 {
     /**
-     * @var int
+     * @var string
      */
     protected $_languageIso;
     
@@ -41,17 +41,17 @@ abstract class CategoryI18n extends Model
     protected $_description;
     
     /**
-     * @param int $languageIso
+     * @param string $languageIso
      * @return \jtl\Connector\Model\CategoryI18n
      */
     public function setLanguageIso($languageIso)
     {
-        $this->_languageIso = (int)$languageIso;
+        $this->_languageIso = (string)$languageIso;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getLanguageIso()
     {

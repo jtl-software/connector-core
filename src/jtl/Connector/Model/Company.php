@@ -36,7 +36,7 @@ abstract class Company extends Model
     protected $_street;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_streetNumber;
     
@@ -188,17 +188,17 @@ abstract class Company extends Model
     }
     
     /**
-     * @param int $streetNumber
+     * @param string $streetNumber
      * @return \jtl\Connector\Model\Company
      */
     public function setStreetNumber($streetNumber)
     {
-        $this->_streetNumber = (int)$streetNumber;
+        $this->_streetNumber = (string)$streetNumber;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getStreetNumber()
     {

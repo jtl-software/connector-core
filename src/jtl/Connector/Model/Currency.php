@@ -56,6 +56,11 @@ abstract class Currency extends Model
     protected $_delimiterCent;
     
     /**
+     * @var string
+     */
+    protected $_delimiterThousand;
+    
+    /**
      * @param int $id
      * @return \jtl\Connector\Model\Currency
      */
@@ -197,6 +202,24 @@ abstract class Currency extends Model
     public function getDelimiterCent()
     {
         return $this->_delimiterCent;
+    }
+    
+    /**
+     * @param string $delimiterThousand
+     * @return \jtl\Connector\Model\Currency
+     */
+    public function setDelimiterThousand($delimiterThousand)
+    {
+        $this->_delimiterThousand = (string)$delimiterThousand;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getDelimiterThousand()
+    {
+        return $this->_delimiterThousand;
     }
     
     /**

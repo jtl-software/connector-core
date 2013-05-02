@@ -156,9 +156,9 @@ abstract class CustomerOrder extends Model
     protected $_created;
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_paymentMethodId;
+    protected $_paymentModuleId;
     
     /**
      * @param int $id
@@ -665,21 +665,21 @@ abstract class CustomerOrder extends Model
     }
     
     /**
-     * @param int $paymentMethodId
+     * @param string $paymentModuleId
      * @return \jtl\Connector\Model\CustomerOrder
      */
-    public function setPaymentMethodId($paymentMethodId)
+    public function setPaymentModuleId($paymentModuleId)
     {
-        $this->_paymentMethodId = (int)$paymentMethodId;
+        $this->_paymentModuleId = (string)$paymentModuleId;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
-    public function getPaymentMethodId()
+    public function getPaymentModuleId()
     {
-        return $this->_paymentMethodId;
+        return $this->_paymentModuleId;
     }
     
     /**

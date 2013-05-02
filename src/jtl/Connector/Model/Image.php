@@ -31,6 +31,11 @@ abstract class Image extends Model
     protected $_foreignKey;
     
     /**
+     * @var bool
+     */
+    protected $_isMainImage;
+    
+    /**
      * @var string
      */
     protected $_filename;
@@ -92,6 +97,24 @@ abstract class Image extends Model
     public function getForeignKey()
     {
         return $this->_foreignKey;
+    }
+    
+    /**
+     * @param bool $isMainImage
+     * @return \jtl\Connector\Model\Image
+     */
+    public function setIsMainImage($isMainImage)
+    {
+        $this->_isMainImage = (bool)$isMainImage;
+        return $this;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function getIsMainImage()
+    {
+        return $this->_isMainImage;
     }
     
     /**
