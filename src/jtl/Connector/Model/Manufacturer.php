@@ -16,42 +16,42 @@ use \jtl\Core\Validator\Schema;
 abstract class Manufacturer extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_name;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_www;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_sort;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_url;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\Manufacturer
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -59,17 +59,17 @@ abstract class Manufacturer extends Model
     }
     
     /**
-     * @param int $name
+     * @param string $name
      * @return \jtl\Connector\Model\Manufacturer
      */
     public function setName($name)
     {
-        $this->_name = (int)$name;
+        $this->_name = (string)$name;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getName()
     {
@@ -77,17 +77,17 @@ abstract class Manufacturer extends Model
     }
     
     /**
-     * @param  $www
+     * @param string $www
      * @return \jtl\Connector\Model\Manufacturer
      */
     public function setWww($www)
     {
-        $this->_www = ()$www;
+        $this->_www = (string)$www;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getWww()
     {
@@ -95,17 +95,17 @@ abstract class Manufacturer extends Model
     }
     
     /**
-     * @param  $sort
+     * @param int $sort
      * @return \jtl\Connector\Model\Manufacturer
      */
     public function setSort($sort)
     {
-        $this->_sort = ()$sort;
+        $this->_sort = (int)$sort;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getSort()
     {
@@ -113,17 +113,17 @@ abstract class Manufacturer extends Model
     }
     
     /**
-     * @param  $url
+     * @param string $url
      * @return \jtl\Connector\Model\Manufacturer
      */
     public function setUrl($url)
     {
-        $this->_url = ()$url;
+        $this->_url = (string)$url;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getUrl()
     {

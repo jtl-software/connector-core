@@ -16,37 +16,37 @@ use \jtl\Core\Validator\Schema;
 abstract class CustomerGroupAttr extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var string
+     * @var int
      */
     protected $_customerGroupId;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_key;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_value;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\CustomerGroupAttr
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -54,17 +54,17 @@ abstract class CustomerGroupAttr extends Model
     }
     
     /**
-     * @param string $customerGroupId
+     * @param int $customerGroupId
      * @return \jtl\Connector\Model\CustomerGroupAttr
      */
     public function setCustomerGroupId($customerGroupId)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
+        $this->_customerGroupId = (int)$customerGroupId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getCustomerGroupId()
     {
@@ -72,17 +72,17 @@ abstract class CustomerGroupAttr extends Model
     }
     
     /**
-     * @param int $key
+     * @param string $key
      * @return \jtl\Connector\Model\CustomerGroupAttr
      */
     public function setKey($key)
     {
-        $this->_key = (int)$key;
+        $this->_key = (string)$key;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getKey()
     {
@@ -90,17 +90,17 @@ abstract class CustomerGroupAttr extends Model
     }
     
     /**
-     * @param  $value
+     * @param string $value
      * @return \jtl\Connector\Model\CustomerGroupAttr
      */
     public function setValue($value)
     {
-        $this->_value = ()$value;
+        $this->_value = (string)$value;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getValue()
     {

@@ -16,17 +16,17 @@ use \jtl\Core\Validator\Schema;
 abstract class CrossSellingGroup extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_languageIso;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_name;
     
@@ -36,17 +36,17 @@ abstract class CrossSellingGroup extends Model
     protected $_description;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\CrossSellingGroup
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -54,17 +54,17 @@ abstract class CrossSellingGroup extends Model
     }
     
     /**
-     * @param  $languageIso
+     * @param int $languageIso
      * @return \jtl\Connector\Model\CrossSellingGroup
      */
     public function setLanguageIso($languageIso)
     {
-        $this->_languageIso = ()$languageIso;
+        $this->_languageIso = (int)$languageIso;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getLanguageIso()
     {
@@ -72,17 +72,17 @@ abstract class CrossSellingGroup extends Model
     }
     
     /**
-     * @param int $name
+     * @param string $name
      * @return \jtl\Connector\Model\CrossSellingGroup
      */
     public function setName($name)
     {
-        $this->_name = (int)$name;
+        $this->_name = (string)$name;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getName()
     {

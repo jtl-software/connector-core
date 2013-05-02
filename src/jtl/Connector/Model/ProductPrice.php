@@ -16,37 +16,37 @@ use \jtl\Core\Validator\Schema;
 abstract class ProductPrice extends Model
 {
     /**
-     * @var string
+     * @var int
      */
     protected $_customerGroupId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_productId;
     
     /**
-     * @var int
+     * @var double
      */
     protected $_netPrice;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_quantity;
     
     /**
-     * @param string $customerGroupId
+     * @param int $customerGroupId
      * @return \jtl\Connector\Model\ProductPrice
      */
     public function setCustomerGroupId($customerGroupId)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
+        $this->_customerGroupId = (int)$customerGroupId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getCustomerGroupId()
     {
@@ -54,17 +54,17 @@ abstract class ProductPrice extends Model
     }
     
     /**
-     * @param  $productId
+     * @param int $productId
      * @return \jtl\Connector\Model\ProductPrice
      */
     public function setProductId($productId)
     {
-        $this->_productId = ()$productId;
+        $this->_productId = (int)$productId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductId()
     {
@@ -72,17 +72,17 @@ abstract class ProductPrice extends Model
     }
     
     /**
-     * @param int $netPrice
+     * @param double $netPrice
      * @return \jtl\Connector\Model\ProductPrice
      */
     public function setNetPrice($netPrice)
     {
-        $this->_netPrice = (int)$netPrice;
+        $this->_netPrice = (double)$netPrice;
         return $this;
     }
     
     /**
-     * @return int
+     * @return double
      */
     public function getNetPrice()
     {
@@ -90,17 +90,17 @@ abstract class ProductPrice extends Model
     }
     
     /**
-     * @param  $quantity
+     * @param int $quantity
      * @return \jtl\Connector\Model\ProductPrice
      */
     public function setQuantity($quantity)
     {
-        $this->_quantity = ()$quantity;
+        $this->_quantity = (int)$quantity;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getQuantity()
     {

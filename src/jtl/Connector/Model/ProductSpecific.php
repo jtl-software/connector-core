@@ -16,32 +16,32 @@ use \jtl\Core\Validator\Schema;
 abstract class ProductSpecific extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_specificValueId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_productId;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\ProductSpecific
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -49,17 +49,17 @@ abstract class ProductSpecific extends Model
     }
     
     /**
-     * @param  $specificValueId
+     * @param int $specificValueId
      * @return \jtl\Connector\Model\ProductSpecific
      */
     public function setSpecificValueId($specificValueId)
     {
-        $this->_specificValueId = ()$specificValueId;
+        $this->_specificValueId = (int)$specificValueId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getSpecificValueId()
     {
@@ -67,17 +67,17 @@ abstract class ProductSpecific extends Model
     }
     
     /**
-     * @param  $productId
+     * @param int $productId
      * @return \jtl\Connector\Model\ProductSpecific
      */
     public function setProductId($productId)
     {
-        $this->_productId = ()$productId;
+        $this->_productId = (int)$productId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductId()
     {

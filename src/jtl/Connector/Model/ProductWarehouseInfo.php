@@ -16,37 +16,37 @@ use \jtl\Core\Validator\Schema;
 abstract class ProductWarehouseInfo extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_productId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_warehouseId;
     
     /**
-     * @var 
+     * @var double
      */
     protected $_stockLevel;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_inflowDate;
     
     /**
-     * @param  $productId
+     * @param int $productId
      * @return \jtl\Connector\Model\ProductWarehouseInfo
      */
     public function setProductId($productId)
     {
-        $this->_productId = ()$productId;
+        $this->_productId = (int)$productId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductId()
     {
@@ -54,17 +54,17 @@ abstract class ProductWarehouseInfo extends Model
     }
     
     /**
-     * @param  $warehouseId
+     * @param int $warehouseId
      * @return \jtl\Connector\Model\ProductWarehouseInfo
      */
     public function setWarehouseId($warehouseId)
     {
-        $this->_warehouseId = ()$warehouseId;
+        $this->_warehouseId = (int)$warehouseId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getWarehouseId()
     {
@@ -72,17 +72,17 @@ abstract class ProductWarehouseInfo extends Model
     }
     
     /**
-     * @param  $stockLevel
+     * @param double $stockLevel
      * @return \jtl\Connector\Model\ProductWarehouseInfo
      */
     public function setStockLevel($stockLevel)
     {
-        $this->_stockLevel = ()$stockLevel;
+        $this->_stockLevel = (double)$stockLevel;
         return $this;
     }
     
     /**
-     * @return 
+     * @return double
      */
     public function getStockLevel()
     {
@@ -90,17 +90,17 @@ abstract class ProductWarehouseInfo extends Model
     }
     
     /**
-     * @param  $inflowDate
+     * @param string $inflowDate
      * @return \jtl\Connector\Model\ProductWarehouseInfo
      */
     public function setInflowDate($inflowDate)
     {
-        $this->_inflowDate = ()$inflowDate;
+        $this->_inflowDate = (string)$inflowDate;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getInflowDate()
     {

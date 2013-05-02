@@ -16,22 +16,22 @@ use \jtl\Core\Validator\Schema;
 abstract class ProductI18n extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_languageIso;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_productId;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_name;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_url;
     
@@ -41,22 +41,22 @@ abstract class ProductI18n extends Model
     protected $_description;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_shortDescription;
     
     /**
-     * @param  $languageIso
+     * @param int $languageIso
      * @return \jtl\Connector\Model\ProductI18n
      */
     public function setLanguageIso($languageIso)
     {
-        $this->_languageIso = ()$languageIso;
+        $this->_languageIso = (int)$languageIso;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getLanguageIso()
     {
@@ -64,17 +64,17 @@ abstract class ProductI18n extends Model
     }
     
     /**
-     * @param  $productId
+     * @param int $productId
      * @return \jtl\Connector\Model\ProductI18n
      */
     public function setProductId($productId)
     {
-        $this->_productId = ()$productId;
+        $this->_productId = (int)$productId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductId()
     {
@@ -82,17 +82,17 @@ abstract class ProductI18n extends Model
     }
     
     /**
-     * @param int $name
+     * @param string $name
      * @return \jtl\Connector\Model\ProductI18n
      */
     public function setName($name)
     {
-        $this->_name = (int)$name;
+        $this->_name = (string)$name;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getName()
     {
@@ -100,17 +100,17 @@ abstract class ProductI18n extends Model
     }
     
     /**
-     * @param  $url
+     * @param string $url
      * @return \jtl\Connector\Model\ProductI18n
      */
     public function setUrl($url)
     {
-        $this->_url = ()$url;
+        $this->_url = (string)$url;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getUrl()
     {
@@ -136,17 +136,17 @@ abstract class ProductI18n extends Model
     }
     
     /**
-     * @param  $shortDescription
+     * @param string $shortDescription
      * @return \jtl\Connector\Model\ProductI18n
      */
     public function setShortDescription($shortDescription)
     {
-        $this->_shortDescription = ()$shortDescription;
+        $this->_shortDescription = (string)$shortDescription;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getShortDescription()
     {

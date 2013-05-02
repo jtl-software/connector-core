@@ -16,127 +16,127 @@ use \jtl\Core\Validator\Schema;
 abstract class CustomerOrderPosition extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
-    
-    /**
-     * @var 
-     */
-    protected $_externalOrderPosition;
-    
-    /**
-     * @var 
-     */
-    protected $_basketId;
-    
-    /**
-     * @var 
-     */
-    protected $_productId;
-    
-    /**
-     * @var 
-     */
-    protected $_shippingClassId;
     
     /**
      * @var int
      */
+    protected $_externalOrderPosition;
+    
+    /**
+     * @var int
+     */
+    protected $_basketId;
+    
+    /**
+     * @var int
+     */
+    protected $_productId;
+    
+    /**
+     * @var int
+     */
+    protected $_shippingClassId;
+    
+    /**
+     * @var string
+     */
     protected $_name;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_sku;
     
     /**
-     * @var 
+     * @var double
      */
     protected $_singlePrice;
     
     /**
-     * @var 
+     * @var double
      */
     protected $_price;
     
     /**
-     * @var 
+     * @var double
      */
     protected $_vat;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_quantity;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_type;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_unique;
     
     /**
-     * @var string
+     * @var int
      */
     protected $_configItemId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var string
+     * @var int
      */
     protected $_customerOrderPositionId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_productVariationId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_productVariationValueId;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_productVariationName;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_productVariationValueName;
     
     /**
-     * @var double
+     * @var string
      */
     protected $_freeField;
     
     /**
-     * @var 
+     * @var double
      */
     protected $_surcharge;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -144,17 +144,17 @@ abstract class CustomerOrderPosition extends Model
     }
     
     /**
-     * @param  $externalOrderPosition
+     * @param int $externalOrderPosition
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setExternalOrderPosition($externalOrderPosition)
     {
-        $this->_externalOrderPosition = ()$externalOrderPosition;
+        $this->_externalOrderPosition = (int)$externalOrderPosition;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getExternalOrderPosition()
     {
@@ -162,17 +162,17 @@ abstract class CustomerOrderPosition extends Model
     }
     
     /**
-     * @param  $basketId
+     * @param int $basketId
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setBasketId($basketId)
     {
-        $this->_basketId = ()$basketId;
+        $this->_basketId = (int)$basketId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getBasketId()
     {
@@ -180,17 +180,17 @@ abstract class CustomerOrderPosition extends Model
     }
     
     /**
-     * @param  $productId
+     * @param int $productId
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setProductId($productId)
     {
-        $this->_productId = ()$productId;
+        $this->_productId = (int)$productId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductId()
     {
@@ -198,17 +198,17 @@ abstract class CustomerOrderPosition extends Model
     }
     
     /**
-     * @param  $shippingClassId
+     * @param int $shippingClassId
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setShippingClassId($shippingClassId)
     {
-        $this->_shippingClassId = ()$shippingClassId;
+        $this->_shippingClassId = (int)$shippingClassId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getShippingClassId()
     {
@@ -216,17 +216,17 @@ abstract class CustomerOrderPosition extends Model
     }
     
     /**
-     * @param int $name
+     * @param string $name
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setName($name)
     {
-        $this->_name = (int)$name;
+        $this->_name = (string)$name;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getName()
     {
@@ -234,17 +234,17 @@ abstract class CustomerOrderPosition extends Model
     }
     
     /**
-     * @param  $sku
+     * @param string $sku
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setSku($sku)
     {
-        $this->_sku = ()$sku;
+        $this->_sku = (string)$sku;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getSku()
     {
@@ -252,17 +252,17 @@ abstract class CustomerOrderPosition extends Model
     }
     
     /**
-     * @param  $singlePrice
+     * @param double $singlePrice
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setSinglePrice($singlePrice)
     {
-        $this->_singlePrice = ()$singlePrice;
+        $this->_singlePrice = (double)$singlePrice;
         return $this;
     }
     
     /**
-     * @return 
+     * @return double
      */
     public function getSinglePrice()
     {
@@ -270,17 +270,17 @@ abstract class CustomerOrderPosition extends Model
     }
     
     /**
-     * @param  $price
+     * @param double $price
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setPrice($price)
     {
-        $this->_price = ()$price;
+        $this->_price = (double)$price;
         return $this;
     }
     
     /**
-     * @return 
+     * @return double
      */
     public function getPrice()
     {
@@ -288,17 +288,17 @@ abstract class CustomerOrderPosition extends Model
     }
     
     /**
-     * @param  $vat
+     * @param double $vat
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setVat($vat)
     {
-        $this->_vat = ()$vat;
+        $this->_vat = (double)$vat;
         return $this;
     }
     
     /**
-     * @return 
+     * @return double
      */
     public function getVat()
     {
@@ -306,17 +306,17 @@ abstract class CustomerOrderPosition extends Model
     }
     
     /**
-     * @param  $quantity
+     * @param int $quantity
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setQuantity($quantity)
     {
-        $this->_quantity = ()$quantity;
+        $this->_quantity = (int)$quantity;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getQuantity()
     {
@@ -324,17 +324,17 @@ abstract class CustomerOrderPosition extends Model
     }
     
     /**
-     * @param  $type
+     * @param int $type
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setType($type)
     {
-        $this->_type = ()$type;
+        $this->_type = (int)$type;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getType()
     {
@@ -342,17 +342,17 @@ abstract class CustomerOrderPosition extends Model
     }
     
     /**
-     * @param  $unique
+     * @param string $unique
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setUnique($unique)
     {
-        $this->_unique = ()$unique;
+        $this->_unique = (string)$unique;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getUnique()
     {
@@ -360,17 +360,17 @@ abstract class CustomerOrderPosition extends Model
     }
     
     /**
-     * @param string $configItemId
+     * @param int $configItemId
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setConfigItemId($configItemId)
     {
-        $this->_configItemId = (string)$configItemId;
+        $this->_configItemId = (int)$configItemId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getConfigItemId()
     {
@@ -378,17 +378,17 @@ abstract class CustomerOrderPosition extends Model
     }
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -396,17 +396,17 @@ abstract class CustomerOrderPosition extends Model
     }
     
     /**
-     * @param string $customerOrderPositionId
+     * @param int $customerOrderPositionId
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setCustomerOrderPositionId($customerOrderPositionId)
     {
-        $this->_customerOrderPositionId = (string)$customerOrderPositionId;
+        $this->_customerOrderPositionId = (int)$customerOrderPositionId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getCustomerOrderPositionId()
     {
@@ -414,17 +414,17 @@ abstract class CustomerOrderPosition extends Model
     }
     
     /**
-     * @param  $productVariationId
+     * @param int $productVariationId
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setProductVariationId($productVariationId)
     {
-        $this->_productVariationId = ()$productVariationId;
+        $this->_productVariationId = (int)$productVariationId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductVariationId()
     {
@@ -432,17 +432,17 @@ abstract class CustomerOrderPosition extends Model
     }
     
     /**
-     * @param  $productVariationValueId
+     * @param int $productVariationValueId
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setProductVariationValueId($productVariationValueId)
     {
-        $this->_productVariationValueId = ()$productVariationValueId;
+        $this->_productVariationValueId = (int)$productVariationValueId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductVariationValueId()
     {
@@ -450,17 +450,17 @@ abstract class CustomerOrderPosition extends Model
     }
     
     /**
-     * @param  $productVariationName
+     * @param string $productVariationName
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setProductVariationName($productVariationName)
     {
-        $this->_productVariationName = ()$productVariationName;
+        $this->_productVariationName = (string)$productVariationName;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getProductVariationName()
     {
@@ -468,17 +468,17 @@ abstract class CustomerOrderPosition extends Model
     }
     
     /**
-     * @param  $productVariationValueName
+     * @param string $productVariationValueName
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setProductVariationValueName($productVariationValueName)
     {
-        $this->_productVariationValueName = ()$productVariationValueName;
+        $this->_productVariationValueName = (string)$productVariationValueName;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getProductVariationValueName()
     {
@@ -486,17 +486,17 @@ abstract class CustomerOrderPosition extends Model
     }
     
     /**
-     * @param double $freeField
+     * @param string $freeField
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setFreeField($freeField)
     {
-        $this->_freeField = (double)$freeField;
+        $this->_freeField = (string)$freeField;
         return $this;
     }
     
     /**
-     * @return double
+     * @return string
      */
     public function getFreeField()
     {
@@ -504,17 +504,17 @@ abstract class CustomerOrderPosition extends Model
     }
     
     /**
-     * @param  $surcharge
+     * @param double $surcharge
      * @return \jtl\Connector\Model\CustomerOrderPosition
      */
     public function setSurcharge($surcharge)
     {
-        $this->_surcharge = ()$surcharge;
+        $this->_surcharge = (double)$surcharge;
         return $this;
     }
     
     /**
-     * @return 
+     * @return double
      */
     public function getSurcharge()
     {

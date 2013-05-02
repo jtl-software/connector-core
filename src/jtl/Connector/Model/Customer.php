@@ -16,37 +16,17 @@ use \jtl\Core\Validator\Schema;
 abstract class Customer extends Model
 {
     /**
-     * @var 
-     */
-    protected $_activateCustomer;
-    
-    /**
-     * @var string
-     */
-    protected $_createAccountPassword;
-    
-    /**
-     * @var string
-     */
-    protected $_deleteAccounts;
-    
-    /**
-     * @var 
-     */
-    protected $_setAccountCredit;
-    
-    /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var string
+     * @var int
      */
     protected $_customerGroupId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_languageIso;
     
@@ -56,27 +36,27 @@ abstract class Customer extends Model
     protected $_customerNumber;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_password;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_salutation;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_title;
     
     /**
-     * @var double
+     * @var string
      */
     protected $_firstName;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_lastName;
     
@@ -86,22 +66,22 @@ abstract class Customer extends Model
     protected $_company;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_street;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_streetNumber;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_extraAddressLine;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_zipCode;
     
@@ -111,7 +91,7 @@ abstract class Customer extends Model
     protected $_city;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_state;
     
@@ -121,57 +101,57 @@ abstract class Customer extends Model
     protected $_country;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_phone;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_mobile;
     
     /**
-     * @var double
+     * @var string
      */
     protected $_fax;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_eMail;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_vatNumber;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_www;
     
     /**
-     * @var 
+     * @var double
      */
     protected $_accountCredit;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_newsletter;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_birthday;
     
     /**
-     * @var string
+     * @var double
      */
     protected $_discount;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_origin;
     
@@ -181,109 +161,37 @@ abstract class Customer extends Model
     protected $_created;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_modified;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_isActive;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_isFetched;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_hasCustomerAccount;
     
     /**
-     * @param  $activateCustomer
-     * @return \jtl\Connector\Model\Customer
-     */
-    public function setActivateCustomer($activateCustomer)
-    {
-        $this->_activateCustomer = ()$activateCustomer;
-        return $this;
-    }
-    
-    /**
-     * @return 
-     */
-    public function getActivateCustomer()
-    {
-        return $this->_activateCustomer;
-    }
-    
-    /**
-     * @param string $createAccountPassword
-     * @return \jtl\Connector\Model\Customer
-     */
-    public function setCreateAccountPassword($createAccountPassword)
-    {
-        $this->_createAccountPassword = (string)$createAccountPassword;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getCreateAccountPassword()
-    {
-        return $this->_createAccountPassword;
-    }
-    
-    /**
-     * @param string $deleteAccounts
-     * @return \jtl\Connector\Model\Customer
-     */
-    public function setDeleteAccounts($deleteAccounts)
-    {
-        $this->_deleteAccounts = (string)$deleteAccounts;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getDeleteAccounts()
-    {
-        return $this->_deleteAccounts;
-    }
-    
-    /**
-     * @param  $setAccountCredit
-     * @return \jtl\Connector\Model\Customer
-     */
-    public function setSetAccountCredit($setAccountCredit)
-    {
-        $this->_setAccountCredit = ()$setAccountCredit;
-        return $this;
-    }
-    
-    /**
-     * @return 
-     */
-    public function getSetAccountCredit()
-    {
-        return $this->_setAccountCredit;
-    }
-    
-    /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\Customer
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -291,17 +199,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param string $customerGroupId
+     * @param int $customerGroupId
      * @return \jtl\Connector\Model\Customer
      */
     public function setCustomerGroupId($customerGroupId)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
+        $this->_customerGroupId = (int)$customerGroupId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getCustomerGroupId()
     {
@@ -309,17 +217,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $languageIso
+     * @param int $languageIso
      * @return \jtl\Connector\Model\Customer
      */
     public function setLanguageIso($languageIso)
     {
-        $this->_languageIso = ()$languageIso;
+        $this->_languageIso = (int)$languageIso;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getLanguageIso()
     {
@@ -345,17 +253,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $password
+     * @param string $password
      * @return \jtl\Connector\Model\Customer
      */
     public function setPassword($password)
     {
-        $this->_password = ()$password;
+        $this->_password = (string)$password;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getPassword()
     {
@@ -363,17 +271,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $salutation
+     * @param string $salutation
      * @return \jtl\Connector\Model\Customer
      */
     public function setSalutation($salutation)
     {
-        $this->_salutation = ()$salutation;
+        $this->_salutation = (string)$salutation;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getSalutation()
     {
@@ -381,17 +289,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $title
+     * @param string $title
      * @return \jtl\Connector\Model\Customer
      */
     public function setTitle($title)
     {
-        $this->_title = ()$title;
+        $this->_title = (string)$title;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getTitle()
     {
@@ -399,17 +307,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param double $firstName
+     * @param string $firstName
      * @return \jtl\Connector\Model\Customer
      */
     public function setFirstName($firstName)
     {
-        $this->_firstName = (double)$firstName;
+        $this->_firstName = (string)$firstName;
         return $this;
     }
     
     /**
-     * @return double
+     * @return string
      */
     public function getFirstName()
     {
@@ -417,17 +325,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $lastName
+     * @param string $lastName
      * @return \jtl\Connector\Model\Customer
      */
     public function setLastName($lastName)
     {
-        $this->_lastName = ()$lastName;
+        $this->_lastName = (string)$lastName;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getLastName()
     {
@@ -453,17 +361,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $street
+     * @param string $street
      * @return \jtl\Connector\Model\Customer
      */
     public function setStreet($street)
     {
-        $this->_street = ()$street;
+        $this->_street = (string)$street;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getStreet()
     {
@@ -471,17 +379,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $streetNumber
+     * @param string $streetNumber
      * @return \jtl\Connector\Model\Customer
      */
     public function setStreetNumber($streetNumber)
     {
-        $this->_streetNumber = ()$streetNumber;
+        $this->_streetNumber = (string)$streetNumber;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getStreetNumber()
     {
@@ -489,17 +397,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $extraAddressLine
+     * @param string $extraAddressLine
      * @return \jtl\Connector\Model\Customer
      */
     public function setExtraAddressLine($extraAddressLine)
     {
-        $this->_extraAddressLine = ()$extraAddressLine;
+        $this->_extraAddressLine = (string)$extraAddressLine;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getExtraAddressLine()
     {
@@ -507,17 +415,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $zipCode
+     * @param string $zipCode
      * @return \jtl\Connector\Model\Customer
      */
     public function setZipCode($zipCode)
     {
-        $this->_zipCode = ()$zipCode;
+        $this->_zipCode = (string)$zipCode;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getZipCode()
     {
@@ -543,17 +451,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $state
+     * @param string $state
      * @return \jtl\Connector\Model\Customer
      */
     public function setState($state)
     {
-        $this->_state = ()$state;
+        $this->_state = (string)$state;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getState()
     {
@@ -579,17 +487,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $phone
+     * @param string $phone
      * @return \jtl\Connector\Model\Customer
      */
     public function setPhone($phone)
     {
-        $this->_phone = ()$phone;
+        $this->_phone = (string)$phone;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getPhone()
     {
@@ -597,17 +505,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $mobile
+     * @param string $mobile
      * @return \jtl\Connector\Model\Customer
      */
     public function setMobile($mobile)
     {
-        $this->_mobile = ()$mobile;
+        $this->_mobile = (string)$mobile;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getMobile()
     {
@@ -615,17 +523,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param double $fax
+     * @param string $fax
      * @return \jtl\Connector\Model\Customer
      */
     public function setFax($fax)
     {
-        $this->_fax = (double)$fax;
+        $this->_fax = (string)$fax;
         return $this;
     }
     
     /**
-     * @return double
+     * @return string
      */
     public function getFax()
     {
@@ -633,17 +541,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $eMail
+     * @param string $eMail
      * @return \jtl\Connector\Model\Customer
      */
     public function setEMail($eMail)
     {
-        $this->_eMail = ()$eMail;
+        $this->_eMail = (string)$eMail;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getEMail()
     {
@@ -651,17 +559,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $vatNumber
+     * @param string $vatNumber
      * @return \jtl\Connector\Model\Customer
      */
     public function setVatNumber($vatNumber)
     {
-        $this->_vatNumber = ()$vatNumber;
+        $this->_vatNumber = (string)$vatNumber;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getVatNumber()
     {
@@ -669,17 +577,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $www
+     * @param string $www
      * @return \jtl\Connector\Model\Customer
      */
     public function setWww($www)
     {
-        $this->_www = ()$www;
+        $this->_www = (string)$www;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getWww()
     {
@@ -687,17 +595,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $accountCredit
+     * @param double $accountCredit
      * @return \jtl\Connector\Model\Customer
      */
     public function setAccountCredit($accountCredit)
     {
-        $this->_accountCredit = ()$accountCredit;
+        $this->_accountCredit = (double)$accountCredit;
         return $this;
     }
     
     /**
-     * @return 
+     * @return double
      */
     public function getAccountCredit()
     {
@@ -705,17 +613,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param int $newsletter
+     * @param string $newsletter
      * @return \jtl\Connector\Model\Customer
      */
     public function setNewsletter($newsletter)
     {
-        $this->_newsletter = (int)$newsletter;
+        $this->_newsletter = (string)$newsletter;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getNewsletter()
     {
@@ -723,17 +631,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $birthday
+     * @param string $birthday
      * @return \jtl\Connector\Model\Customer
      */
     public function setBirthday($birthday)
     {
-        $this->_birthday = ()$birthday;
+        $this->_birthday = (string)$birthday;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getBirthday()
     {
@@ -741,17 +649,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param string $discount
+     * @param double $discount
      * @return \jtl\Connector\Model\Customer
      */
     public function setDiscount($discount)
     {
-        $this->_discount = (string)$discount;
+        $this->_discount = (double)$discount;
         return $this;
     }
     
     /**
-     * @return string
+     * @return double
      */
     public function getDiscount()
     {
@@ -759,17 +667,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $origin
+     * @param string $origin
      * @return \jtl\Connector\Model\Customer
      */
     public function setOrigin($origin)
     {
-        $this->_origin = ()$origin;
+        $this->_origin = (string)$origin;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getOrigin()
     {
@@ -795,17 +703,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $modified
+     * @param string $modified
      * @return \jtl\Connector\Model\Customer
      */
     public function setModified($modified)
     {
-        $this->_modified = ()$modified;
+        $this->_modified = (string)$modified;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getModified()
     {
@@ -813,17 +721,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $isActive
+     * @param string $isActive
      * @return \jtl\Connector\Model\Customer
      */
     public function setIsActive($isActive)
     {
-        $this->_isActive = ()$isActive;
+        $this->_isActive = (string)$isActive;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getIsActive()
     {
@@ -831,17 +739,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $isFetched
+     * @param string $isFetched
      * @return \jtl\Connector\Model\Customer
      */
     public function setIsFetched($isFetched)
     {
-        $this->_isFetched = ()$isFetched;
+        $this->_isFetched = (string)$isFetched;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getIsFetched()
     {
@@ -849,17 +757,17 @@ abstract class Customer extends Model
     }
     
     /**
-     * @param  $hasCustomerAccount
+     * @param int $hasCustomerAccount
      * @return \jtl\Connector\Model\Customer
      */
     public function setHasCustomerAccount($hasCustomerAccount)
     {
-        $this->_hasCustomerAccount = ()$hasCustomerAccount;
+        $this->_hasCustomerAccount = (int)$hasCustomerAccount;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getHasCustomerAccount()
     {

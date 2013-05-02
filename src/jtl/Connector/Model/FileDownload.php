@@ -16,37 +16,37 @@ use \jtl\Core\Validator\Schema;
 abstract class FileDownload extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_identificationString;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_path;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_previewPath;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_maxDownloads;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_maxDays;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_sort;
     
@@ -56,17 +56,17 @@ abstract class FileDownload extends Model
     protected $_created;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\FileDownload
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -74,17 +74,17 @@ abstract class FileDownload extends Model
     }
     
     /**
-     * @param  $identificationString
+     * @param string $identificationString
      * @return \jtl\Connector\Model\FileDownload
      */
     public function setIdentificationString($identificationString)
     {
-        $this->_identificationString = ()$identificationString;
+        $this->_identificationString = (string)$identificationString;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getIdentificationString()
     {
@@ -92,17 +92,17 @@ abstract class FileDownload extends Model
     }
     
     /**
-     * @param  $path
+     * @param string $path
      * @return \jtl\Connector\Model\FileDownload
      */
     public function setPath($path)
     {
-        $this->_path = ()$path;
+        $this->_path = (string)$path;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getPath()
     {
@@ -110,17 +110,17 @@ abstract class FileDownload extends Model
     }
     
     /**
-     * @param  $previewPath
+     * @param string $previewPath
      * @return \jtl\Connector\Model\FileDownload
      */
     public function setPreviewPath($previewPath)
     {
-        $this->_previewPath = ()$previewPath;
+        $this->_previewPath = (string)$previewPath;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getPreviewPath()
     {
@@ -128,17 +128,17 @@ abstract class FileDownload extends Model
     }
     
     /**
-     * @param  $maxDownloads
+     * @param int $maxDownloads
      * @return \jtl\Connector\Model\FileDownload
      */
     public function setMaxDownloads($maxDownloads)
     {
-        $this->_maxDownloads = ()$maxDownloads;
+        $this->_maxDownloads = (int)$maxDownloads;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getMaxDownloads()
     {
@@ -146,17 +146,17 @@ abstract class FileDownload extends Model
     }
     
     /**
-     * @param  $maxDays
+     * @param int $maxDays
      * @return \jtl\Connector\Model\FileDownload
      */
     public function setMaxDays($maxDays)
     {
-        $this->_maxDays = ()$maxDays;
+        $this->_maxDays = (int)$maxDays;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getMaxDays()
     {
@@ -164,17 +164,17 @@ abstract class FileDownload extends Model
     }
     
     /**
-     * @param  $sort
+     * @param int $sort
      * @return \jtl\Connector\Model\FileDownload
      */
     public function setSort($sort)
     {
-        $this->_sort = ()$sort;
+        $this->_sort = (int)$sort;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getSort()
     {

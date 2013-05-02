@@ -16,27 +16,27 @@ use \jtl\Core\Validator\Schema;
 abstract class TaxZone extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_name;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\TaxZone
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -44,17 +44,17 @@ abstract class TaxZone extends Model
     }
     
     /**
-     * @param int $name
+     * @param string $name
      * @return \jtl\Connector\Model\TaxZone
      */
     public function setName($name)
     {
-        $this->_name = (int)$name;
+        $this->_name = (string)$name;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getName()
     {

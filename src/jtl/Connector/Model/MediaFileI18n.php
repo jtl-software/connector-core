@@ -16,17 +16,17 @@ use \jtl\Core\Validator\Schema;
 abstract class MediaFileI18n extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_mediaFileId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_languageIso;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_name;
     
@@ -36,17 +36,17 @@ abstract class MediaFileI18n extends Model
     protected $_description;
     
     /**
-     * @param  $mediaFileId
+     * @param int $mediaFileId
      * @return \jtl\Connector\Model\MediaFileI18n
      */
     public function setMediaFileId($mediaFileId)
     {
-        $this->_mediaFileId = ()$mediaFileId;
+        $this->_mediaFileId = (int)$mediaFileId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getMediaFileId()
     {
@@ -54,17 +54,17 @@ abstract class MediaFileI18n extends Model
     }
     
     /**
-     * @param  $languageIso
+     * @param int $languageIso
      * @return \jtl\Connector\Model\MediaFileI18n
      */
     public function setLanguageIso($languageIso)
     {
-        $this->_languageIso = ()$languageIso;
+        $this->_languageIso = (int)$languageIso;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getLanguageIso()
     {
@@ -72,17 +72,17 @@ abstract class MediaFileI18n extends Model
     }
     
     /**
-     * @param int $name
+     * @param string $name
      * @return \jtl\Connector\Model\MediaFileI18n
      */
     public function setName($name)
     {
-        $this->_name = (int)$name;
+        $this->_name = (string)$name;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getName()
     {

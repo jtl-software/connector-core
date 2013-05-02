@@ -16,32 +16,32 @@ use \jtl\Core\Validator\Schema;
 abstract class Product2Category extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var string
+     * @var int
      */
     protected $_categoryId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_productId;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\Product2Category
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -49,17 +49,17 @@ abstract class Product2Category extends Model
     }
     
     /**
-     * @param string $categoryId
+     * @param int $categoryId
      * @return \jtl\Connector\Model\Product2Category
      */
     public function setCategoryId($categoryId)
     {
-        $this->_categoryId = (string)$categoryId;
+        $this->_categoryId = (int)$categoryId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getCategoryId()
     {
@@ -67,17 +67,17 @@ abstract class Product2Category extends Model
     }
     
     /**
-     * @param  $productId
+     * @param int $productId
      * @return \jtl\Connector\Model\Product2Category
      */
     public function setProductId($productId)
     {
-        $this->_productId = ()$productId;
+        $this->_productId = (int)$productId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductId()
     {

@@ -16,37 +16,37 @@ use \jtl\Core\Validator\Schema;
 abstract class ProductAttr extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_productId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_sort;
     
     /**
-     * @var 
+     * @var double
      */
     protected $_isVisible;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\ProductAttr
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -54,17 +54,17 @@ abstract class ProductAttr extends Model
     }
     
     /**
-     * @param  $productId
+     * @param int $productId
      * @return \jtl\Connector\Model\ProductAttr
      */
     public function setProductId($productId)
     {
-        $this->_productId = ()$productId;
+        $this->_productId = (int)$productId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductId()
     {
@@ -72,17 +72,17 @@ abstract class ProductAttr extends Model
     }
     
     /**
-     * @param  $sort
+     * @param int $sort
      * @return \jtl\Connector\Model\ProductAttr
      */
     public function setSort($sort)
     {
-        $this->_sort = ()$sort;
+        $this->_sort = (int)$sort;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getSort()
     {
@@ -90,17 +90,17 @@ abstract class ProductAttr extends Model
     }
     
     /**
-     * @param  $isVisible
+     * @param double $isVisible
      * @return \jtl\Connector\Model\ProductAttr
      */
     public function setIsVisible($isVisible)
     {
-        $this->_isVisible = ()$isVisible;
+        $this->_isVisible = (double)$isVisible;
         return $this;
     }
     
     /**
-     * @return 
+     * @return double
      */
     public function getIsVisible()
     {

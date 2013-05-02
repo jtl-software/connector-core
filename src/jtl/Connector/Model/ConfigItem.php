@@ -16,92 +16,92 @@ use \jtl\Core\Validator\Schema;
 abstract class ConfigItem extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var string
+     * @var int
      */
     protected $_configGroupId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_productId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_type;
     
     /**
-     * @var 
+     * @var bool
      */
     protected $_isPreSelected;
     
     /**
-     * @var 
+     * @var bool
      */
     protected $_isRecommended;
     
     /**
-     * @var 
+     * @var bool
      */
     protected $_useProductName;
     
     /**
-     * @var 
+     * @var bool
      */
     protected $_useProductPrice;
     
     /**
-     * @var 
+     * @var bool
      */
     protected $_showDiscount;
     
     /**
-     * @var 
+     * @var bool
      */
     protected $_showSurcharge;
     
     /**
-     * @var 
+     * @var bool
      */
     protected $_ignoreMultiplier;
     
     /**
-     * @var 
+     * @var double
      */
     protected $_minQuantity;
     
     /**
-     * @var 
+     * @var double
      */
     protected $_maxQuantity;
     
     /**
-     * @var 
+     * @var double
      */
     protected $_initialQuantity;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_sort;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -109,17 +109,17 @@ abstract class ConfigItem extends Model
     }
     
     /**
-     * @param string $configGroupId
+     * @param int $configGroupId
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function setConfigGroupId($configGroupId)
     {
-        $this->_configGroupId = (string)$configGroupId;
+        $this->_configGroupId = (int)$configGroupId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getConfigGroupId()
     {
@@ -127,17 +127,17 @@ abstract class ConfigItem extends Model
     }
     
     /**
-     * @param  $productId
+     * @param int $productId
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function setProductId($productId)
     {
-        $this->_productId = ()$productId;
+        $this->_productId = (int)$productId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductId()
     {
@@ -145,17 +145,17 @@ abstract class ConfigItem extends Model
     }
     
     /**
-     * @param  $type
+     * @param int $type
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function setType($type)
     {
-        $this->_type = ()$type;
+        $this->_type = (int)$type;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getType()
     {
@@ -163,17 +163,17 @@ abstract class ConfigItem extends Model
     }
     
     /**
-     * @param  $isPreSelected
+     * @param bool $isPreSelected
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function setIsPreSelected($isPreSelected)
     {
-        $this->_isPreSelected = ()$isPreSelected;
+        $this->_isPreSelected = (bool)$isPreSelected;
         return $this;
     }
     
     /**
-     * @return 
+     * @return bool
      */
     public function getIsPreSelected()
     {
@@ -181,17 +181,17 @@ abstract class ConfigItem extends Model
     }
     
     /**
-     * @param  $isRecommended
+     * @param bool $isRecommended
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function setIsRecommended($isRecommended)
     {
-        $this->_isRecommended = ()$isRecommended;
+        $this->_isRecommended = (bool)$isRecommended;
         return $this;
     }
     
     /**
-     * @return 
+     * @return bool
      */
     public function getIsRecommended()
     {
@@ -199,17 +199,17 @@ abstract class ConfigItem extends Model
     }
     
     /**
-     * @param  $useProductName
+     * @param bool $useProductName
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function setUseProductName($useProductName)
     {
-        $this->_useProductName = ()$useProductName;
+        $this->_useProductName = (bool)$useProductName;
         return $this;
     }
     
     /**
-     * @return 
+     * @return bool
      */
     public function getUseProductName()
     {
@@ -217,17 +217,17 @@ abstract class ConfigItem extends Model
     }
     
     /**
-     * @param  $useProductPrice
+     * @param bool $useProductPrice
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function setUseProductPrice($useProductPrice)
     {
-        $this->_useProductPrice = ()$useProductPrice;
+        $this->_useProductPrice = (bool)$useProductPrice;
         return $this;
     }
     
     /**
-     * @return 
+     * @return bool
      */
     public function getUseProductPrice()
     {
@@ -235,17 +235,17 @@ abstract class ConfigItem extends Model
     }
     
     /**
-     * @param  $showDiscount
+     * @param bool $showDiscount
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function setShowDiscount($showDiscount)
     {
-        $this->_showDiscount = ()$showDiscount;
+        $this->_showDiscount = (bool)$showDiscount;
         return $this;
     }
     
     /**
-     * @return 
+     * @return bool
      */
     public function getShowDiscount()
     {
@@ -253,17 +253,17 @@ abstract class ConfigItem extends Model
     }
     
     /**
-     * @param  $showSurcharge
+     * @param bool $showSurcharge
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function setShowSurcharge($showSurcharge)
     {
-        $this->_showSurcharge = ()$showSurcharge;
+        $this->_showSurcharge = (bool)$showSurcharge;
         return $this;
     }
     
     /**
-     * @return 
+     * @return bool
      */
     public function getShowSurcharge()
     {
@@ -271,17 +271,17 @@ abstract class ConfigItem extends Model
     }
     
     /**
-     * @param  $ignoreMultiplier
+     * @param bool $ignoreMultiplier
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function setIgnoreMultiplier($ignoreMultiplier)
     {
-        $this->_ignoreMultiplier = ()$ignoreMultiplier;
+        $this->_ignoreMultiplier = (bool)$ignoreMultiplier;
         return $this;
     }
     
     /**
-     * @return 
+     * @return bool
      */
     public function getIgnoreMultiplier()
     {
@@ -289,17 +289,17 @@ abstract class ConfigItem extends Model
     }
     
     /**
-     * @param  $minQuantity
+     * @param double $minQuantity
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function setMinQuantity($minQuantity)
     {
-        $this->_minQuantity = ()$minQuantity;
+        $this->_minQuantity = (double)$minQuantity;
         return $this;
     }
     
     /**
-     * @return 
+     * @return double
      */
     public function getMinQuantity()
     {
@@ -307,17 +307,17 @@ abstract class ConfigItem extends Model
     }
     
     /**
-     * @param  $maxQuantity
+     * @param double $maxQuantity
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function setMaxQuantity($maxQuantity)
     {
-        $this->_maxQuantity = ()$maxQuantity;
+        $this->_maxQuantity = (double)$maxQuantity;
         return $this;
     }
     
     /**
-     * @return 
+     * @return double
      */
     public function getMaxQuantity()
     {
@@ -325,17 +325,17 @@ abstract class ConfigItem extends Model
     }
     
     /**
-     * @param  $initialQuantity
+     * @param double $initialQuantity
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function setInitialQuantity($initialQuantity)
     {
-        $this->_initialQuantity = ()$initialQuantity;
+        $this->_initialQuantity = (double)$initialQuantity;
         return $this;
     }
     
     /**
-     * @return 
+     * @return double
      */
     public function getInitialQuantity()
     {
@@ -343,17 +343,17 @@ abstract class ConfigItem extends Model
     }
     
     /**
-     * @param  $sort
+     * @param int $sort
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function setSort($sort)
     {
-        $this->_sort = ()$sort;
+        $this->_sort = (int)$sort;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getSort()
     {

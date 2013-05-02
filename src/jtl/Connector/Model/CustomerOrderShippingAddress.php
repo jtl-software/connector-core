@@ -16,32 +16,32 @@ use \jtl\Core\Validator\Schema;
 abstract class CustomerOrderShippingAddress extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var string
+     * @var int
      */
     protected $_customerId;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_salutation;
     
     /**
-     * @var double
+     * @var string
      */
     protected $_firstName;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_lastName;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_title;
     
@@ -51,27 +51,27 @@ abstract class CustomerOrderShippingAddress extends Model
     protected $_company;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_extraAddressLine;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_street;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_streetNumber;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_extraAddressLine;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_zipCode;
     
@@ -81,7 +81,7 @@ abstract class CustomerOrderShippingAddress extends Model
     protected $_city;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_state;
     
@@ -91,37 +91,37 @@ abstract class CustomerOrderShippingAddress extends Model
     protected $_country;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_phone;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_mobile;
     
     /**
-     * @var double
+     * @var string
      */
     protected $_fax;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_eMail;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -129,17 +129,17 @@ abstract class CustomerOrderShippingAddress extends Model
     }
     
     /**
-     * @param string $customerId
+     * @param int $customerId
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
      */
     public function setCustomerId($customerId)
     {
-        $this->_customerId = (string)$customerId;
+        $this->_customerId = (int)$customerId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getCustomerId()
     {
@@ -147,17 +147,17 @@ abstract class CustomerOrderShippingAddress extends Model
     }
     
     /**
-     * @param  $salutation
+     * @param string $salutation
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
      */
     public function setSalutation($salutation)
     {
-        $this->_salutation = ()$salutation;
+        $this->_salutation = (string)$salutation;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getSalutation()
     {
@@ -165,17 +165,17 @@ abstract class CustomerOrderShippingAddress extends Model
     }
     
     /**
-     * @param double $firstName
+     * @param string $firstName
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
      */
     public function setFirstName($firstName)
     {
-        $this->_firstName = (double)$firstName;
+        $this->_firstName = (string)$firstName;
         return $this;
     }
     
     /**
-     * @return double
+     * @return string
      */
     public function getFirstName()
     {
@@ -183,17 +183,17 @@ abstract class CustomerOrderShippingAddress extends Model
     }
     
     /**
-     * @param  $lastName
+     * @param string $lastName
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
      */
     public function setLastName($lastName)
     {
-        $this->_lastName = ()$lastName;
+        $this->_lastName = (string)$lastName;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getLastName()
     {
@@ -201,17 +201,17 @@ abstract class CustomerOrderShippingAddress extends Model
     }
     
     /**
-     * @param  $title
+     * @param string $title
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
      */
     public function setTitle($title)
     {
-        $this->_title = ()$title;
+        $this->_title = (string)$title;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getTitle()
     {
@@ -237,17 +237,17 @@ abstract class CustomerOrderShippingAddress extends Model
     }
     
     /**
-     * @param  $extraAddressLine
+     * @param string $extraAddressLine
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
      */
     public function setExtraAddressLine($extraAddressLine)
     {
-        $this->_extraAddressLine = ()$extraAddressLine;
+        $this->_extraAddressLine = (string)$extraAddressLine;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getExtraAddressLine()
     {
@@ -255,17 +255,17 @@ abstract class CustomerOrderShippingAddress extends Model
     }
     
     /**
-     * @param  $street
+     * @param string $street
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
      */
     public function setStreet($street)
     {
-        $this->_street = ()$street;
+        $this->_street = (string)$street;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getStreet()
     {
@@ -273,17 +273,17 @@ abstract class CustomerOrderShippingAddress extends Model
     }
     
     /**
-     * @param  $streetNumber
+     * @param string $streetNumber
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
      */
     public function setStreetNumber($streetNumber)
     {
-        $this->_streetNumber = ()$streetNumber;
+        $this->_streetNumber = (string)$streetNumber;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getStreetNumber()
     {
@@ -291,17 +291,17 @@ abstract class CustomerOrderShippingAddress extends Model
     }
     
     /**
-     * @param  $extraAddressLine
+     * @param string $extraAddressLine
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
      */
     public function setExtraAddressLine($extraAddressLine)
     {
-        $this->_extraAddressLine = ()$extraAddressLine;
+        $this->_extraAddressLine = (string)$extraAddressLine;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getExtraAddressLine()
     {
@@ -309,17 +309,17 @@ abstract class CustomerOrderShippingAddress extends Model
     }
     
     /**
-     * @param  $zipCode
+     * @param string $zipCode
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
      */
     public function setZipCode($zipCode)
     {
-        $this->_zipCode = ()$zipCode;
+        $this->_zipCode = (string)$zipCode;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getZipCode()
     {
@@ -345,17 +345,17 @@ abstract class CustomerOrderShippingAddress extends Model
     }
     
     /**
-     * @param  $state
+     * @param string $state
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
      */
     public function setState($state)
     {
-        $this->_state = ()$state;
+        $this->_state = (string)$state;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getState()
     {
@@ -381,17 +381,17 @@ abstract class CustomerOrderShippingAddress extends Model
     }
     
     /**
-     * @param  $phone
+     * @param string $phone
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
      */
     public function setPhone($phone)
     {
-        $this->_phone = ()$phone;
+        $this->_phone = (string)$phone;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getPhone()
     {
@@ -399,17 +399,17 @@ abstract class CustomerOrderShippingAddress extends Model
     }
     
     /**
-     * @param  $mobile
+     * @param string $mobile
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
      */
     public function setMobile($mobile)
     {
-        $this->_mobile = ()$mobile;
+        $this->_mobile = (string)$mobile;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getMobile()
     {
@@ -417,17 +417,17 @@ abstract class CustomerOrderShippingAddress extends Model
     }
     
     /**
-     * @param double $fax
+     * @param string $fax
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
      */
     public function setFax($fax)
     {
-        $this->_fax = (double)$fax;
+        $this->_fax = (string)$fax;
         return $this;
     }
     
     /**
-     * @return double
+     * @return string
      */
     public function getFax()
     {
@@ -435,17 +435,17 @@ abstract class CustomerOrderShippingAddress extends Model
     }
     
     /**
-     * @param  $eMail
+     * @param string $eMail
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
      */
     public function setEMail($eMail)
     {
-        $this->_eMail = ()$eMail;
+        $this->_eMail = (string)$eMail;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getEMail()
     {

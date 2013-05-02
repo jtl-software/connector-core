@@ -16,22 +16,22 @@ use \jtl\Core\Validator\Schema;
 abstract class Currency extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_name;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_iso;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_nameHtml;
     
@@ -56,17 +56,17 @@ abstract class Currency extends Model
     protected $_delimiterCent;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\Currency
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -74,17 +74,17 @@ abstract class Currency extends Model
     }
     
     /**
-     * @param int $name
+     * @param string $name
      * @return \jtl\Connector\Model\Currency
      */
     public function setName($name)
     {
-        $this->_name = (int)$name;
+        $this->_name = (string)$name;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getName()
     {
@@ -92,17 +92,17 @@ abstract class Currency extends Model
     }
     
     /**
-     * @param  $iso
+     * @param string $iso
      * @return \jtl\Connector\Model\Currency
      */
     public function setIso($iso)
     {
-        $this->_iso = ()$iso;
+        $this->_iso = (string)$iso;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getIso()
     {
@@ -110,17 +110,17 @@ abstract class Currency extends Model
     }
     
     /**
-     * @param int $nameHtml
+     * @param string $nameHtml
      * @return \jtl\Connector\Model\Currency
      */
     public function setNameHtml($nameHtml)
     {
-        $this->_nameHtml = (int)$nameHtml;
+        $this->_nameHtml = (string)$nameHtml;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getNameHtml()
     {

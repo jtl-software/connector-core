@@ -16,17 +16,17 @@ use \jtl\Core\Validator\Schema;
 abstract class FileDownloadI18n extends Model
 {
     /**
-     * @var double
+     * @var int
      */
     protected $_fileDownloadId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_languageIso;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_name;
     
@@ -36,17 +36,17 @@ abstract class FileDownloadI18n extends Model
     protected $_description;
     
     /**
-     * @param double $fileDownloadId
+     * @param int $fileDownloadId
      * @return \jtl\Connector\Model\FileDownloadI18n
      */
     public function setFileDownloadId($fileDownloadId)
     {
-        $this->_fileDownloadId = (double)$fileDownloadId;
+        $this->_fileDownloadId = (int)$fileDownloadId;
         return $this;
     }
     
     /**
-     * @return double
+     * @return int
      */
     public function getFileDownloadId()
     {
@@ -54,17 +54,17 @@ abstract class FileDownloadI18n extends Model
     }
     
     /**
-     * @param  $languageIso
+     * @param int $languageIso
      * @return \jtl\Connector\Model\FileDownloadI18n
      */
     public function setLanguageIso($languageIso)
     {
-        $this->_languageIso = ()$languageIso;
+        $this->_languageIso = (int)$languageIso;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getLanguageIso()
     {
@@ -72,17 +72,17 @@ abstract class FileDownloadI18n extends Model
     }
     
     /**
-     * @param int $name
+     * @param string $name
      * @return \jtl\Connector\Model\FileDownloadI18n
      */
     public function setName($name)
     {
-        $this->_name = (int)$name;
+        $this->_name = (string)$name;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getName()
     {

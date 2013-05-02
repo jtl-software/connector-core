@@ -16,17 +16,17 @@ use \jtl\Core\Validator\Schema;
 abstract class DeliveryNote extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var string
+     * @var int
      */
     protected $_customerOrderId;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_note;
     
@@ -36,27 +36,27 @@ abstract class DeliveryNote extends Model
     protected $_created;
     
     /**
-     * @var double
+     * @var int
      */
     protected $_fulfillment;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_status;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\DeliveryNote
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -64,17 +64,17 @@ abstract class DeliveryNote extends Model
     }
     
     /**
-     * @param string $customerOrderId
+     * @param int $customerOrderId
      * @return \jtl\Connector\Model\DeliveryNote
      */
     public function setCustomerOrderId($customerOrderId)
     {
-        $this->_customerOrderId = (string)$customerOrderId;
+        $this->_customerOrderId = (int)$customerOrderId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getCustomerOrderId()
     {
@@ -82,17 +82,17 @@ abstract class DeliveryNote extends Model
     }
     
     /**
-     * @param int $note
+     * @param string $note
      * @return \jtl\Connector\Model\DeliveryNote
      */
     public function setNote($note)
     {
-        $this->_note = (int)$note;
+        $this->_note = (string)$note;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getNote()
     {
@@ -118,17 +118,17 @@ abstract class DeliveryNote extends Model
     }
     
     /**
-     * @param double $fulfillment
+     * @param int $fulfillment
      * @return \jtl\Connector\Model\DeliveryNote
      */
     public function setFulfillment($fulfillment)
     {
-        $this->_fulfillment = (double)$fulfillment;
+        $this->_fulfillment = (int)$fulfillment;
         return $this;
     }
     
     /**
-     * @return double
+     * @return int
      */
     public function getFulfillment()
     {
@@ -136,17 +136,17 @@ abstract class DeliveryNote extends Model
     }
     
     /**
-     * @param  $status
+     * @param int $status
      * @return \jtl\Connector\Model\DeliveryNote
      */
     public function setStatus($status)
     {
-        $this->_status = ()$status;
+        $this->_status = (int)$status;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getStatus()
     {

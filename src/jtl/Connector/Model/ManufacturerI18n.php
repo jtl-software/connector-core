@@ -16,12 +16,12 @@ use \jtl\Core\Validator\Schema;
 abstract class ManufacturerI18n extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_manufacturerId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_languageIso;
     
@@ -31,32 +31,32 @@ abstract class ManufacturerI18n extends Model
     protected $_description;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_metaDescription;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_metaKeywords;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_titleTag;
     
     /**
-     * @param  $manufacturerId
+     * @param int $manufacturerId
      * @return \jtl\Connector\Model\ManufacturerI18n
      */
     public function setManufacturerId($manufacturerId)
     {
-        $this->_manufacturerId = ()$manufacturerId;
+        $this->_manufacturerId = (int)$manufacturerId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getManufacturerId()
     {
@@ -64,17 +64,17 @@ abstract class ManufacturerI18n extends Model
     }
     
     /**
-     * @param  $languageIso
+     * @param int $languageIso
      * @return \jtl\Connector\Model\ManufacturerI18n
      */
     public function setLanguageIso($languageIso)
     {
-        $this->_languageIso = ()$languageIso;
+        $this->_languageIso = (int)$languageIso;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getLanguageIso()
     {
@@ -100,17 +100,17 @@ abstract class ManufacturerI18n extends Model
     }
     
     /**
-     * @param  $metaDescription
+     * @param string $metaDescription
      * @return \jtl\Connector\Model\ManufacturerI18n
      */
     public function setMetaDescription($metaDescription)
     {
-        $this->_metaDescription = ()$metaDescription;
+        $this->_metaDescription = (string)$metaDescription;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getMetaDescription()
     {
@@ -118,17 +118,17 @@ abstract class ManufacturerI18n extends Model
     }
     
     /**
-     * @param  $metaKeywords
+     * @param string $metaKeywords
      * @return \jtl\Connector\Model\ManufacturerI18n
      */
     public function setMetaKeywords($metaKeywords)
     {
-        $this->_metaKeywords = ()$metaKeywords;
+        $this->_metaKeywords = (string)$metaKeywords;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getMetaKeywords()
     {
@@ -136,17 +136,17 @@ abstract class ManufacturerI18n extends Model
     }
     
     /**
-     * @param  $titleTag
+     * @param string $titleTag
      * @return \jtl\Connector\Model\ManufacturerI18n
      */
     public function setTitleTag($titleTag)
     {
-        $this->_titleTag = ()$titleTag;
+        $this->_titleTag = (string)$titleTag;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getTitleTag()
     {

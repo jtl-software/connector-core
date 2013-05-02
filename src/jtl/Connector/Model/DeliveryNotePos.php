@@ -16,52 +16,52 @@ use \jtl\Core\Validator\Schema;
 abstract class DeliveryNotePos extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_orderPosition;
     
     /**
-     * @var 
+     * @var double
      */
     protected $_quantity;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_stock;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_serialNumber;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_batchNumber;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_bestBefore;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\DeliveryNotePos
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -69,17 +69,17 @@ abstract class DeliveryNotePos extends Model
     }
     
     /**
-     * @param  $orderPosition
+     * @param int $orderPosition
      * @return \jtl\Connector\Model\DeliveryNotePos
      */
     public function setOrderPosition($orderPosition)
     {
-        $this->_orderPosition = ()$orderPosition;
+        $this->_orderPosition = (int)$orderPosition;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getOrderPosition()
     {
@@ -87,17 +87,17 @@ abstract class DeliveryNotePos extends Model
     }
     
     /**
-     * @param  $quantity
+     * @param double $quantity
      * @return \jtl\Connector\Model\DeliveryNotePos
      */
     public function setQuantity($quantity)
     {
-        $this->_quantity = ()$quantity;
+        $this->_quantity = (double)$quantity;
         return $this;
     }
     
     /**
-     * @return 
+     * @return double
      */
     public function getQuantity()
     {
@@ -105,17 +105,17 @@ abstract class DeliveryNotePos extends Model
     }
     
     /**
-     * @param  $stock
+     * @param int $stock
      * @return \jtl\Connector\Model\DeliveryNotePos
      */
     public function setStock($stock)
     {
-        $this->_stock = ()$stock;
+        $this->_stock = (int)$stock;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getStock()
     {
@@ -123,17 +123,17 @@ abstract class DeliveryNotePos extends Model
     }
     
     /**
-     * @param  $serialNumber
+     * @param string $serialNumber
      * @return \jtl\Connector\Model\DeliveryNotePos
      */
     public function setSerialNumber($serialNumber)
     {
-        $this->_serialNumber = ()$serialNumber;
+        $this->_serialNumber = (string)$serialNumber;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getSerialNumber()
     {
@@ -141,17 +141,17 @@ abstract class DeliveryNotePos extends Model
     }
     
     /**
-     * @param  $batchNumber
+     * @param string $batchNumber
      * @return \jtl\Connector\Model\DeliveryNotePos
      */
     public function setBatchNumber($batchNumber)
     {
-        $this->_batchNumber = ()$batchNumber;
+        $this->_batchNumber = (string)$batchNumber;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getBatchNumber()
     {
@@ -159,17 +159,17 @@ abstract class DeliveryNotePos extends Model
     }
     
     /**
-     * @param  $bestBefore
+     * @param string $bestBefore
      * @return \jtl\Connector\Model\DeliveryNotePos
      */
     public function setBestBefore($bestBefore)
     {
-        $this->_bestBefore = ()$bestBefore;
+        $this->_bestBefore = (string)$bestBefore;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getBestBefore()
     {

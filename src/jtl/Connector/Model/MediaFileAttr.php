@@ -16,42 +16,42 @@ use \jtl\Core\Validator\Schema;
 abstract class MediaFileAttr extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_mediaFileAttr;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_mediaFileId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_languageISO;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_name;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_value;
     
     /**
-     * @param  $mediaFileAttr
+     * @param int $mediaFileAttr
      * @return \jtl\Connector\Model\MediaFileAttr
      */
     public function setMediaFileAttr($mediaFileAttr)
     {
-        $this->_mediaFileAttr = ()$mediaFileAttr;
+        $this->_mediaFileAttr = (int)$mediaFileAttr;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getMediaFileAttr()
     {
@@ -59,17 +59,17 @@ abstract class MediaFileAttr extends Model
     }
     
     /**
-     * @param  $mediaFileId
+     * @param int $mediaFileId
      * @return \jtl\Connector\Model\MediaFileAttr
      */
     public function setMediaFileId($mediaFileId)
     {
-        $this->_mediaFileId = ()$mediaFileId;
+        $this->_mediaFileId = (int)$mediaFileId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getMediaFileId()
     {
@@ -77,17 +77,17 @@ abstract class MediaFileAttr extends Model
     }
     
     /**
-     * @param  $languageISO
+     * @param int $languageISO
      * @return \jtl\Connector\Model\MediaFileAttr
      */
     public function setLanguageISO($languageISO)
     {
-        $this->_languageISO = ()$languageISO;
+        $this->_languageISO = (int)$languageISO;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getLanguageISO()
     {
@@ -95,17 +95,17 @@ abstract class MediaFileAttr extends Model
     }
     
     /**
-     * @param int $name
+     * @param string $name
      * @return \jtl\Connector\Model\MediaFileAttr
      */
     public function setName($name)
     {
-        $this->_name = (int)$name;
+        $this->_name = (string)$name;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getName()
     {
@@ -113,17 +113,17 @@ abstract class MediaFileAttr extends Model
     }
     
     /**
-     * @param  $value
+     * @param string $value
      * @return \jtl\Connector\Model\MediaFileAttr
      */
     public function setValue($value)
     {
-        $this->_value = ()$value;
+        $this->_value = (string)$value;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getValue()
     {

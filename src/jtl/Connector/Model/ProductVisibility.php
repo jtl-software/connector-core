@@ -16,27 +16,27 @@ use \jtl\Core\Validator\Schema;
 abstract class ProductVisibility extends Model
 {
     /**
-     * @var string
+     * @var int
      */
     protected $_customerGroupId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_productId;
     
     /**
-     * @param string $customerGroupId
+     * @param int $customerGroupId
      * @return \jtl\Connector\Model\ProductVisibility
      */
     public function setCustomerGroupId($customerGroupId)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
+        $this->_customerGroupId = (int)$customerGroupId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getCustomerGroupId()
     {
@@ -44,17 +44,17 @@ abstract class ProductVisibility extends Model
     }
     
     /**
-     * @param  $productId
+     * @param int $productId
      * @return \jtl\Connector\Model\ProductVisibility
      */
     public function setProductId($productId)
     {
-        $this->_productId = ()$productId;
+        $this->_productId = (int)$productId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductId()
     {

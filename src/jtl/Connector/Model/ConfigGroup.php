@@ -16,32 +16,32 @@ use \jtl\Core\Validator\Schema;
 abstract class ConfigGroup extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_imagePath;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_minimumSelection;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_maximumSelection;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_type;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_sort;
     
@@ -51,17 +51,17 @@ abstract class ConfigGroup extends Model
     protected $_comment;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -69,17 +69,17 @@ abstract class ConfigGroup extends Model
     }
     
     /**
-     * @param  $imagePath
+     * @param string $imagePath
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function setImagePath($imagePath)
     {
-        $this->_imagePath = ()$imagePath;
+        $this->_imagePath = (string)$imagePath;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getImagePath()
     {
@@ -87,17 +87,17 @@ abstract class ConfigGroup extends Model
     }
     
     /**
-     * @param  $minimumSelection
+     * @param int $minimumSelection
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function setMinimumSelection($minimumSelection)
     {
-        $this->_minimumSelection = ()$minimumSelection;
+        $this->_minimumSelection = (int)$minimumSelection;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getMinimumSelection()
     {
@@ -105,17 +105,17 @@ abstract class ConfigGroup extends Model
     }
     
     /**
-     * @param  $maximumSelection
+     * @param int $maximumSelection
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function setMaximumSelection($maximumSelection)
     {
-        $this->_maximumSelection = ()$maximumSelection;
+        $this->_maximumSelection = (int)$maximumSelection;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getMaximumSelection()
     {
@@ -123,17 +123,17 @@ abstract class ConfigGroup extends Model
     }
     
     /**
-     * @param  $type
+     * @param int $type
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function setType($type)
     {
-        $this->_type = ()$type;
+        $this->_type = (int)$type;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getType()
     {
@@ -141,17 +141,17 @@ abstract class ConfigGroup extends Model
     }
     
     /**
-     * @param  $sort
+     * @param int $sort
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function setSort($sort)
     {
-        $this->_sort = ()$sort;
+        $this->_sort = (int)$sort;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getSort()
     {

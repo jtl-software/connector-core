@@ -16,32 +16,32 @@ use \jtl\Core\Validator\Schema;
 abstract class ProductVarCombination extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_productId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_productVariationId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_productVariationValueId;
     
     /**
-     * @param  $productId
+     * @param int $productId
      * @return \jtl\Connector\Model\ProductVarCombination
      */
     public function setProductId($productId)
     {
-        $this->_productId = ()$productId;
+        $this->_productId = (int)$productId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductId()
     {
@@ -49,17 +49,17 @@ abstract class ProductVarCombination extends Model
     }
     
     /**
-     * @param  $productVariationId
+     * @param int $productVariationId
      * @return \jtl\Connector\Model\ProductVarCombination
      */
     public function setProductVariationId($productVariationId)
     {
-        $this->_productVariationId = ()$productVariationId;
+        $this->_productVariationId = (int)$productVariationId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductVariationId()
     {
@@ -67,17 +67,17 @@ abstract class ProductVarCombination extends Model
     }
     
     /**
-     * @param  $productVariationValueId
+     * @param int $productVariationValueId
      * @return \jtl\Connector\Model\ProductVarCombination
      */
     public function setProductVariationValueId($productVariationValueId)
     {
-        $this->_productVariationValueId = ()$productVariationValueId;
+        $this->_productVariationValueId = (int)$productVariationValueId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductVariationValueId()
     {

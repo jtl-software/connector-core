@@ -16,27 +16,27 @@ use \jtl\Core\Validator\Schema;
 abstract class CategoryVisibility extends Model
 {
     /**
-     * @var string
+     * @var int
      */
     protected $_customerGroupId;
     
     /**
-     * @var string
+     * @var int
      */
     protected $_categoryId;
     
     /**
-     * @param string $customerGroupId
+     * @param int $customerGroupId
      * @return \jtl\Connector\Model\CategoryVisibility
      */
     public function setCustomerGroupId($customerGroupId)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
+        $this->_customerGroupId = (int)$customerGroupId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getCustomerGroupId()
     {
@@ -44,17 +44,17 @@ abstract class CategoryVisibility extends Model
     }
     
     /**
-     * @param string $categoryId
+     * @param int $categoryId
      * @return \jtl\Connector\Model\CategoryVisibility
      */
     public function setCategoryId($categoryId)
     {
-        $this->_categoryId = (string)$categoryId;
+        $this->_categoryId = (int)$categoryId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getCategoryId()
     {

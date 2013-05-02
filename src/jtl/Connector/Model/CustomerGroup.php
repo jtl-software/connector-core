@@ -16,17 +16,17 @@ use \jtl\Core\Validator\Schema;
 abstract class CustomerGroup extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_name;
     
     /**
-     * @var string
+     * @var double
      */
     protected $_discount;
     
@@ -36,27 +36,27 @@ abstract class CustomerGroup extends Model
     protected $_default;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_shopLogin;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_shopNetPrice;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\CustomerGroup
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -64,17 +64,17 @@ abstract class CustomerGroup extends Model
     }
     
     /**
-     * @param int $name
+     * @param string $name
      * @return \jtl\Connector\Model\CustomerGroup
      */
     public function setName($name)
     {
-        $this->_name = (int)$name;
+        $this->_name = (string)$name;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getName()
     {
@@ -82,17 +82,17 @@ abstract class CustomerGroup extends Model
     }
     
     /**
-     * @param string $discount
+     * @param double $discount
      * @return \jtl\Connector\Model\CustomerGroup
      */
     public function setDiscount($discount)
     {
-        $this->_discount = (string)$discount;
+        $this->_discount = (double)$discount;
         return $this;
     }
     
     /**
-     * @return string
+     * @return double
      */
     public function getDiscount()
     {
@@ -118,17 +118,17 @@ abstract class CustomerGroup extends Model
     }
     
     /**
-     * @param  $shopLogin
+     * @param string $shopLogin
      * @return \jtl\Connector\Model\CustomerGroup
      */
     public function setShopLogin($shopLogin)
     {
-        $this->_shopLogin = ()$shopLogin;
+        $this->_shopLogin = (string)$shopLogin;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getShopLogin()
     {
@@ -136,17 +136,17 @@ abstract class CustomerGroup extends Model
     }
     
     /**
-     * @param  $shopNetPrice
+     * @param int $shopNetPrice
      * @return \jtl\Connector\Model\CustomerGroup
      */
     public function setShopNetPrice($shopNetPrice)
     {
-        $this->_shopNetPrice = ()$shopNetPrice;
+        $this->_shopNetPrice = (int)$shopNetPrice;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getShopNetPrice()
     {

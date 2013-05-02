@@ -16,42 +16,42 @@ use \jtl\Core\Validator\Schema;
 abstract class TaxRate extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_taxZoneId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_taxClassId;
     
     /**
-     * @var 
+     * @var double
      */
     protected $_taxRate;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_priority;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\TaxRate
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -59,17 +59,17 @@ abstract class TaxRate extends Model
     }
     
     /**
-     * @param  $taxZoneId
+     * @param int $taxZoneId
      * @return \jtl\Connector\Model\TaxRate
      */
     public function setTaxZoneId($taxZoneId)
     {
-        $this->_taxZoneId = ()$taxZoneId;
+        $this->_taxZoneId = (int)$taxZoneId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getTaxZoneId()
     {
@@ -77,17 +77,17 @@ abstract class TaxRate extends Model
     }
     
     /**
-     * @param  $taxClassId
+     * @param int $taxClassId
      * @return \jtl\Connector\Model\TaxRate
      */
     public function setTaxClassId($taxClassId)
     {
-        $this->_taxClassId = ()$taxClassId;
+        $this->_taxClassId = (int)$taxClassId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getTaxClassId()
     {
@@ -95,17 +95,17 @@ abstract class TaxRate extends Model
     }
     
     /**
-     * @param  $taxRate
+     * @param double $taxRate
      * @return \jtl\Connector\Model\TaxRate
      */
     public function setTaxRate($taxRate)
     {
-        $this->_taxRate = ()$taxRate;
+        $this->_taxRate = (double)$taxRate;
         return $this;
     }
     
     /**
-     * @return 
+     * @return double
      */
     public function getTaxRate()
     {
@@ -113,17 +113,17 @@ abstract class TaxRate extends Model
     }
     
     /**
-     * @param  $priority
+     * @param int $priority
      * @return \jtl\Connector\Model\TaxRate
      */
     public function setPriority($priority)
     {
-        $this->_priority = ()$priority;
+        $this->_priority = (int)$priority;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getPriority()
     {

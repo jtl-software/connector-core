@@ -16,47 +16,47 @@ use \jtl\Core\Validator\Schema;
 abstract class ProductSpecialPrice extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_productId;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_isActive;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_activeFrom;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_activeUntil;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_quantityLimit;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\ProductSpecialPrice
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -64,17 +64,17 @@ abstract class ProductSpecialPrice extends Model
     }
     
     /**
-     * @param  $productId
+     * @param int $productId
      * @return \jtl\Connector\Model\ProductSpecialPrice
      */
     public function setProductId($productId)
     {
-        $this->_productId = ()$productId;
+        $this->_productId = (int)$productId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductId()
     {
@@ -82,17 +82,17 @@ abstract class ProductSpecialPrice extends Model
     }
     
     /**
-     * @param  $isActive
+     * @param string $isActive
      * @return \jtl\Connector\Model\ProductSpecialPrice
      */
     public function setIsActive($isActive)
     {
-        $this->_isActive = ()$isActive;
+        $this->_isActive = (string)$isActive;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getIsActive()
     {
@@ -100,17 +100,17 @@ abstract class ProductSpecialPrice extends Model
     }
     
     /**
-     * @param  $activeFrom
+     * @param string $activeFrom
      * @return \jtl\Connector\Model\ProductSpecialPrice
      */
     public function setActiveFrom($activeFrom)
     {
-        $this->_activeFrom = ()$activeFrom;
+        $this->_activeFrom = (string)$activeFrom;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getActiveFrom()
     {
@@ -118,17 +118,17 @@ abstract class ProductSpecialPrice extends Model
     }
     
     /**
-     * @param  $activeUntil
+     * @param string $activeUntil
      * @return \jtl\Connector\Model\ProductSpecialPrice
      */
     public function setActiveUntil($activeUntil)
     {
-        $this->_activeUntil = ()$activeUntil;
+        $this->_activeUntil = (string)$activeUntil;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getActiveUntil()
     {
@@ -136,17 +136,17 @@ abstract class ProductSpecialPrice extends Model
     }
     
     /**
-     * @param  $quantityLimit
+     * @param int $quantityLimit
      * @return \jtl\Connector\Model\ProductSpecialPrice
      */
     public function setQuantityLimit($quantityLimit)
     {
-        $this->_quantityLimit = ()$quantityLimit;
+        $this->_quantityLimit = (int)$quantityLimit;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getQuantityLimit()
     {

@@ -16,32 +16,32 @@ use \jtl\Core\Validator\Schema;
 abstract class SetArticle extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_productId;
     
     /**
-     * @var 
+     * @var double
      */
     protected $_quantity;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\SetArticle
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -49,17 +49,17 @@ abstract class SetArticle extends Model
     }
     
     /**
-     * @param  $productId
+     * @param int $productId
      * @return \jtl\Connector\Model\SetArticle
      */
     public function setProductId($productId)
     {
-        $this->_productId = ()$productId;
+        $this->_productId = (int)$productId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductId()
     {
@@ -67,17 +67,17 @@ abstract class SetArticle extends Model
     }
     
     /**
-     * @param  $quantity
+     * @param double $quantity
      * @return \jtl\Connector\Model\SetArticle
      */
     public function setQuantity($quantity)
     {
-        $this->_quantity = ()$quantity;
+        $this->_quantity = (double)$quantity;
         return $this;
     }
     
     /**
-     * @return 
+     * @return double
      */
     public function getQuantity()
     {

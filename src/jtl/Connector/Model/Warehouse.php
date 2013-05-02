@@ -16,22 +16,22 @@ use \jtl\Core\Validator\Schema;
 abstract class Warehouse extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\Warehouse
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {

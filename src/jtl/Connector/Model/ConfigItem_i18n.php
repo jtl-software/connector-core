@@ -16,17 +16,17 @@ use \jtl\Core\Validator\Schema;
 abstract class ConfigItem_i18n extends Model
 {
     /**
-     * @var string
+     * @var int
      */
     protected $_configItemId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_languageIso;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_name;
     
@@ -36,17 +36,17 @@ abstract class ConfigItem_i18n extends Model
     protected $_description;
     
     /**
-     * @param string $configItemId
+     * @param int $configItemId
      * @return \jtl\Connector\Model\ConfigItem_i18n
      */
     public function setConfigItemId($configItemId)
     {
-        $this->_configItemId = (string)$configItemId;
+        $this->_configItemId = (int)$configItemId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getConfigItemId()
     {
@@ -54,17 +54,17 @@ abstract class ConfigItem_i18n extends Model
     }
     
     /**
-     * @param  $languageIso
+     * @param int $languageIso
      * @return \jtl\Connector\Model\ConfigItem_i18n
      */
     public function setLanguageIso($languageIso)
     {
-        $this->_languageIso = ()$languageIso;
+        $this->_languageIso = (int)$languageIso;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getLanguageIso()
     {
@@ -72,17 +72,17 @@ abstract class ConfigItem_i18n extends Model
     }
     
     /**
-     * @param int $name
+     * @param string $name
      * @return \jtl\Connector\Model\ConfigItem_i18n
      */
     public function setName($name)
     {
-        $this->_name = (int)$name;
+        $this->_name = (string)$name;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getName()
     {

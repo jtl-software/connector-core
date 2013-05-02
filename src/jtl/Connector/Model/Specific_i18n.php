@@ -16,32 +16,32 @@ use \jtl\Core\Validator\Schema;
 abstract class Specific_i18n extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_languageIso;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_specificId;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_name;
     
     /**
-     * @param  $languageIso
+     * @param int $languageIso
      * @return \jtl\Connector\Model\Specific_i18n
      */
     public function setLanguageIso($languageIso)
     {
-        $this->_languageIso = ()$languageIso;
+        $this->_languageIso = (int)$languageIso;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getLanguageIso()
     {
@@ -49,17 +49,17 @@ abstract class Specific_i18n extends Model
     }
     
     /**
-     * @param  $specificId
+     * @param int $specificId
      * @return \jtl\Connector\Model\Specific_i18n
      */
     public function setSpecificId($specificId)
     {
-        $this->_specificId = ()$specificId;
+        $this->_specificId = (int)$specificId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getSpecificId()
     {
@@ -67,17 +67,17 @@ abstract class Specific_i18n extends Model
     }
     
     /**
-     * @param int $name
+     * @param string $name
      * @return \jtl\Connector\Model\Specific_i18n
      */
     public function setName($name)
     {
-        $this->_name = (int)$name;
+        $this->_name = (string)$name;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getName()
     {

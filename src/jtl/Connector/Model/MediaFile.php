@@ -16,52 +16,52 @@ use \jtl\Core\Validator\Schema;
 abstract class MediaFile extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_productId;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_path;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_url;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_mediaFileCategory;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_type;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_sort;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\MediaFile
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -69,17 +69,17 @@ abstract class MediaFile extends Model
     }
     
     /**
-     * @param  $productId
+     * @param int $productId
      * @return \jtl\Connector\Model\MediaFile
      */
     public function setProductId($productId)
     {
-        $this->_productId = ()$productId;
+        $this->_productId = (int)$productId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductId()
     {
@@ -87,17 +87,17 @@ abstract class MediaFile extends Model
     }
     
     /**
-     * @param  $path
+     * @param string $path
      * @return \jtl\Connector\Model\MediaFile
      */
     public function setPath($path)
     {
-        $this->_path = ()$path;
+        $this->_path = (string)$path;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getPath()
     {
@@ -105,17 +105,17 @@ abstract class MediaFile extends Model
     }
     
     /**
-     * @param  $url
+     * @param string $url
      * @return \jtl\Connector\Model\MediaFile
      */
     public function setUrl($url)
     {
-        $this->_url = ()$url;
+        $this->_url = (string)$url;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getUrl()
     {
@@ -123,17 +123,17 @@ abstract class MediaFile extends Model
     }
     
     /**
-     * @param  $mediaFileCategory
+     * @param string $mediaFileCategory
      * @return \jtl\Connector\Model\MediaFile
      */
     public function setMediaFileCategory($mediaFileCategory)
     {
-        $this->_mediaFileCategory = ()$mediaFileCategory;
+        $this->_mediaFileCategory = (string)$mediaFileCategory;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getMediaFileCategory()
     {
@@ -141,17 +141,17 @@ abstract class MediaFile extends Model
     }
     
     /**
-     * @param  $type
+     * @param string $type
      * @return \jtl\Connector\Model\MediaFile
      */
     public function setType($type)
     {
-        $this->_type = ()$type;
+        $this->_type = (string)$type;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getType()
     {
@@ -159,17 +159,17 @@ abstract class MediaFile extends Model
     }
     
     /**
-     * @param  $sort
+     * @param int $sort
      * @return \jtl\Connector\Model\MediaFile
      */
     public function setSort($sort)
     {
-        $this->_sort = ()$sort;
+        $this->_sort = (int)$sort;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getSort()
     {

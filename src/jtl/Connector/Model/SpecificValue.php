@@ -16,37 +16,37 @@ use \jtl\Core\Validator\Schema;
 abstract class SpecificValue extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_specificId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_sort;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_languageIso;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_specificValueId;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_value;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_url;
     
@@ -56,32 +56,32 @@ abstract class SpecificValue extends Model
     protected $_description;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_metaDescription;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_metaKeywords;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_titleTag;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\SpecificValue
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -89,17 +89,17 @@ abstract class SpecificValue extends Model
     }
     
     /**
-     * @param  $specificId
+     * @param int $specificId
      * @return \jtl\Connector\Model\SpecificValue
      */
     public function setSpecificId($specificId)
     {
-        $this->_specificId = ()$specificId;
+        $this->_specificId = (int)$specificId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getSpecificId()
     {
@@ -107,17 +107,17 @@ abstract class SpecificValue extends Model
     }
     
     /**
-     * @param  $sort
+     * @param int $sort
      * @return \jtl\Connector\Model\SpecificValue
      */
     public function setSort($sort)
     {
-        $this->_sort = ()$sort;
+        $this->_sort = (int)$sort;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getSort()
     {
@@ -125,17 +125,17 @@ abstract class SpecificValue extends Model
     }
     
     /**
-     * @param  $languageIso
+     * @param int $languageIso
      * @return \jtl\Connector\Model\SpecificValue
      */
     public function setLanguageIso($languageIso)
     {
-        $this->_languageIso = ()$languageIso;
+        $this->_languageIso = (int)$languageIso;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getLanguageIso()
     {
@@ -143,17 +143,17 @@ abstract class SpecificValue extends Model
     }
     
     /**
-     * @param  $specificValueId
+     * @param int $specificValueId
      * @return \jtl\Connector\Model\SpecificValue
      */
     public function setSpecificValueId($specificValueId)
     {
-        $this->_specificValueId = ()$specificValueId;
+        $this->_specificValueId = (int)$specificValueId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getSpecificValueId()
     {
@@ -161,17 +161,17 @@ abstract class SpecificValue extends Model
     }
     
     /**
-     * @param  $value
+     * @param string $value
      * @return \jtl\Connector\Model\SpecificValue
      */
     public function setValue($value)
     {
-        $this->_value = ()$value;
+        $this->_value = (string)$value;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getValue()
     {
@@ -179,17 +179,17 @@ abstract class SpecificValue extends Model
     }
     
     /**
-     * @param  $url
+     * @param string $url
      * @return \jtl\Connector\Model\SpecificValue
      */
     public function setUrl($url)
     {
-        $this->_url = ()$url;
+        $this->_url = (string)$url;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getUrl()
     {
@@ -215,17 +215,17 @@ abstract class SpecificValue extends Model
     }
     
     /**
-     * @param  $metaDescription
+     * @param string $metaDescription
      * @return \jtl\Connector\Model\SpecificValue
      */
     public function setMetaDescription($metaDescription)
     {
-        $this->_metaDescription = ()$metaDescription;
+        $this->_metaDescription = (string)$metaDescription;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getMetaDescription()
     {
@@ -233,17 +233,17 @@ abstract class SpecificValue extends Model
     }
     
     /**
-     * @param  $metaKeywords
+     * @param string $metaKeywords
      * @return \jtl\Connector\Model\SpecificValue
      */
     public function setMetaKeywords($metaKeywords)
     {
-        $this->_metaKeywords = ()$metaKeywords;
+        $this->_metaKeywords = (string)$metaKeywords;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getMetaKeywords()
     {
@@ -251,17 +251,17 @@ abstract class SpecificValue extends Model
     }
     
     /**
-     * @param  $titleTag
+     * @param string $titleTag
      * @return \jtl\Connector\Model\SpecificValue
      */
     public function setTitleTag($titleTag)
     {
-        $this->_titleTag = ()$titleTag;
+        $this->_titleTag = (string)$titleTag;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getTitleTag()
     {

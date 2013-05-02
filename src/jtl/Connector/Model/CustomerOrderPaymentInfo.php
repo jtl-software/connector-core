@@ -16,42 +16,42 @@ use \jtl\Core\Validator\Schema;
 abstract class CustomerOrderPaymentInfo extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_shippingMethodId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_basketId;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_bankAccount;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_bankCode;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_accountHolder;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_accountNumber;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_iban;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_bic;
     
@@ -66,17 +66,17 @@ abstract class CustomerOrderPaymentInfo extends Model
     protected $_cvv;
     
     /**
-     * @param  $shippingMethodId
+     * @param int $shippingMethodId
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setShippingMethodId($shippingMethodId)
     {
-        $this->_shippingMethodId = ()$shippingMethodId;
+        $this->_shippingMethodId = (int)$shippingMethodId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getShippingMethodId()
     {
@@ -84,17 +84,17 @@ abstract class CustomerOrderPaymentInfo extends Model
     }
     
     /**
-     * @param  $basketId
+     * @param int $basketId
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setBasketId($basketId)
     {
-        $this->_basketId = ()$basketId;
+        $this->_basketId = (int)$basketId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getBasketId()
     {
@@ -102,17 +102,17 @@ abstract class CustomerOrderPaymentInfo extends Model
     }
     
     /**
-     * @param  $bankAccount
+     * @param string $bankAccount
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setBankAccount($bankAccount)
     {
-        $this->_bankAccount = ()$bankAccount;
+        $this->_bankAccount = (string)$bankAccount;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getBankAccount()
     {
@@ -120,17 +120,17 @@ abstract class CustomerOrderPaymentInfo extends Model
     }
     
     /**
-     * @param  $bankCode
+     * @param string $bankCode
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setBankCode($bankCode)
     {
-        $this->_bankCode = ()$bankCode;
+        $this->_bankCode = (string)$bankCode;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getBankCode()
     {
@@ -138,17 +138,17 @@ abstract class CustomerOrderPaymentInfo extends Model
     }
     
     /**
-     * @param  $accountHolder
+     * @param string $accountHolder
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setAccountHolder($accountHolder)
     {
-        $this->_accountHolder = ()$accountHolder;
+        $this->_accountHolder = (string)$accountHolder;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getAccountHolder()
     {
@@ -156,17 +156,17 @@ abstract class CustomerOrderPaymentInfo extends Model
     }
     
     /**
-     * @param  $accountNumber
+     * @param string $accountNumber
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setAccountNumber($accountNumber)
     {
-        $this->_accountNumber = ()$accountNumber;
+        $this->_accountNumber = (string)$accountNumber;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getAccountNumber()
     {
@@ -174,17 +174,17 @@ abstract class CustomerOrderPaymentInfo extends Model
     }
     
     /**
-     * @param  $iban
+     * @param string $iban
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setIban($iban)
     {
-        $this->_iban = ()$iban;
+        $this->_iban = (string)$iban;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getIban()
     {
@@ -192,17 +192,17 @@ abstract class CustomerOrderPaymentInfo extends Model
     }
     
     /**
-     * @param  $bic
+     * @param string $bic
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setBic($bic)
     {
-        $this->_bic = ()$bic;
+        $this->_bic = (string)$bic;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getBic()
     {

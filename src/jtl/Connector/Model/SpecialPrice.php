@@ -16,32 +16,32 @@ use \jtl\Core\Validator\Schema;
 abstract class SpecialPrice extends Model
 {
     /**
-     * @var string
+     * @var int
      */
     protected $_customerGroupId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_productSpecialPriceId;
     
     /**
-     * @var 
+     * @var double
      */
     protected $_priceNet;
     
     /**
-     * @param string $customerGroupId
+     * @param int $customerGroupId
      * @return \jtl\Connector\Model\SpecialPrice
      */
     public function setCustomerGroupId($customerGroupId)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
+        $this->_customerGroupId = (int)$customerGroupId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getCustomerGroupId()
     {
@@ -49,17 +49,17 @@ abstract class SpecialPrice extends Model
     }
     
     /**
-     * @param  $productSpecialPriceId
+     * @param int $productSpecialPriceId
      * @return \jtl\Connector\Model\SpecialPrice
      */
     public function setProductSpecialPriceId($productSpecialPriceId)
     {
-        $this->_productSpecialPriceId = ()$productSpecialPriceId;
+        $this->_productSpecialPriceId = (int)$productSpecialPriceId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductSpecialPriceId()
     {
@@ -67,17 +67,17 @@ abstract class SpecialPrice extends Model
     }
     
     /**
-     * @param  $priceNet
+     * @param double $priceNet
      * @return \jtl\Connector\Model\SpecialPrice
      */
     public function setPriceNet($priceNet)
     {
-        $this->_priceNet = ()$priceNet;
+        $this->_priceNet = (double)$priceNet;
         return $this;
     }
     
     /**
-     * @return 
+     * @return double
      */
     public function getPriceNet()
     {

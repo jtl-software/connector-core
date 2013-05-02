@@ -16,32 +16,32 @@ use \jtl\Core\Validator\Schema;
 abstract class CategoryCustomerGroup extends Model
 {
     /**
-     * @var string
+     * @var int
      */
     protected $_customerGroupId;
     
     /**
-     * @var string
+     * @var int
      */
     protected $_categoryId;
     
     /**
-     * @var string
+     * @var double
      */
     protected $_discount;
     
     /**
-     * @param string $customerGroupId
+     * @param int $customerGroupId
      * @return \jtl\Connector\Model\CategoryCustomerGroup
      */
     public function setCustomerGroupId($customerGroupId)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
+        $this->_customerGroupId = (int)$customerGroupId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getCustomerGroupId()
     {
@@ -49,17 +49,17 @@ abstract class CategoryCustomerGroup extends Model
     }
     
     /**
-     * @param string $categoryId
+     * @param int $categoryId
      * @return \jtl\Connector\Model\CategoryCustomerGroup
      */
     public function setCategoryId($categoryId)
     {
-        $this->_categoryId = (string)$categoryId;
+        $this->_categoryId = (int)$categoryId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getCategoryId()
     {
@@ -67,17 +67,17 @@ abstract class CategoryCustomerGroup extends Model
     }
     
     /**
-     * @param string $discount
+     * @param double $discount
      * @return \jtl\Connector\Model\CategoryCustomerGroup
      */
     public function setDiscount($discount)
     {
-        $this->_discount = (string)$discount;
+        $this->_discount = (double)$discount;
         return $this;
     }
     
     /**
-     * @return string
+     * @return double
      */
     public function getDiscount()
     {

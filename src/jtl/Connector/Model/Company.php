@@ -16,32 +16,32 @@ use \jtl\Core\Validator\Schema;
 abstract class Company extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_name;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_businessman;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_street;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_streetNumber;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_zipCode;
     
@@ -56,77 +56,77 @@ abstract class Company extends Model
     protected $_country;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_phone;
     
     /**
-     * @var double
+     * @var string
      */
     protected $_fax;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_eMail;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_www;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_bankCode;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_accountNumber;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_bankAccount;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_accountHolder;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_vatNumber;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_taxIdNumber;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_iban;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_bic;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\Company
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -134,17 +134,17 @@ abstract class Company extends Model
     }
     
     /**
-     * @param int $name
+     * @param string $name
      * @return \jtl\Connector\Model\Company
      */
     public function setName($name)
     {
-        $this->_name = (int)$name;
+        $this->_name = (string)$name;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getName()
     {
@@ -152,17 +152,17 @@ abstract class Company extends Model
     }
     
     /**
-     * @param  $businessman
+     * @param string $businessman
      * @return \jtl\Connector\Model\Company
      */
     public function setBusinessman($businessman)
     {
-        $this->_businessman = ()$businessman;
+        $this->_businessman = (string)$businessman;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getBusinessman()
     {
@@ -170,17 +170,17 @@ abstract class Company extends Model
     }
     
     /**
-     * @param  $street
+     * @param string $street
      * @return \jtl\Connector\Model\Company
      */
     public function setStreet($street)
     {
-        $this->_street = ()$street;
+        $this->_street = (string)$street;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getStreet()
     {
@@ -188,17 +188,17 @@ abstract class Company extends Model
     }
     
     /**
-     * @param  $streetNumber
+     * @param int $streetNumber
      * @return \jtl\Connector\Model\Company
      */
     public function setStreetNumber($streetNumber)
     {
-        $this->_streetNumber = ()$streetNumber;
+        $this->_streetNumber = (int)$streetNumber;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getStreetNumber()
     {
@@ -206,17 +206,17 @@ abstract class Company extends Model
     }
     
     /**
-     * @param  $zipCode
+     * @param string $zipCode
      * @return \jtl\Connector\Model\Company
      */
     public function setZipCode($zipCode)
     {
-        $this->_zipCode = ()$zipCode;
+        $this->_zipCode = (string)$zipCode;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getZipCode()
     {
@@ -260,17 +260,17 @@ abstract class Company extends Model
     }
     
     /**
-     * @param  $phone
+     * @param string $phone
      * @return \jtl\Connector\Model\Company
      */
     public function setPhone($phone)
     {
-        $this->_phone = ()$phone;
+        $this->_phone = (string)$phone;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getPhone()
     {
@@ -278,17 +278,17 @@ abstract class Company extends Model
     }
     
     /**
-     * @param double $fax
+     * @param string $fax
      * @return \jtl\Connector\Model\Company
      */
     public function setFax($fax)
     {
-        $this->_fax = (double)$fax;
+        $this->_fax = (string)$fax;
         return $this;
     }
     
     /**
-     * @return double
+     * @return string
      */
     public function getFax()
     {
@@ -296,17 +296,17 @@ abstract class Company extends Model
     }
     
     /**
-     * @param  $eMail
+     * @param string $eMail
      * @return \jtl\Connector\Model\Company
      */
     public function setEMail($eMail)
     {
-        $this->_eMail = ()$eMail;
+        $this->_eMail = (string)$eMail;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getEMail()
     {
@@ -314,17 +314,17 @@ abstract class Company extends Model
     }
     
     /**
-     * @param  $www
+     * @param string $www
      * @return \jtl\Connector\Model\Company
      */
     public function setWww($www)
     {
-        $this->_www = ()$www;
+        $this->_www = (string)$www;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getWww()
     {
@@ -332,17 +332,17 @@ abstract class Company extends Model
     }
     
     /**
-     * @param  $bankCode
+     * @param string $bankCode
      * @return \jtl\Connector\Model\Company
      */
     public function setBankCode($bankCode)
     {
-        $this->_bankCode = ()$bankCode;
+        $this->_bankCode = (string)$bankCode;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getBankCode()
     {
@@ -350,17 +350,17 @@ abstract class Company extends Model
     }
     
     /**
-     * @param  $accountNumber
+     * @param string $accountNumber
      * @return \jtl\Connector\Model\Company
      */
     public function setAccountNumber($accountNumber)
     {
-        $this->_accountNumber = ()$accountNumber;
+        $this->_accountNumber = (string)$accountNumber;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getAccountNumber()
     {
@@ -368,17 +368,17 @@ abstract class Company extends Model
     }
     
     /**
-     * @param  $bankAccount
+     * @param string $bankAccount
      * @return \jtl\Connector\Model\Company
      */
     public function setBankAccount($bankAccount)
     {
-        $this->_bankAccount = ()$bankAccount;
+        $this->_bankAccount = (string)$bankAccount;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getBankAccount()
     {
@@ -386,17 +386,17 @@ abstract class Company extends Model
     }
     
     /**
-     * @param  $accountHolder
+     * @param string $accountHolder
      * @return \jtl\Connector\Model\Company
      */
     public function setAccountHolder($accountHolder)
     {
-        $this->_accountHolder = ()$accountHolder;
+        $this->_accountHolder = (string)$accountHolder;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getAccountHolder()
     {
@@ -404,17 +404,17 @@ abstract class Company extends Model
     }
     
     /**
-     * @param  $vatNumber
+     * @param string $vatNumber
      * @return \jtl\Connector\Model\Company
      */
     public function setVatNumber($vatNumber)
     {
-        $this->_vatNumber = ()$vatNumber;
+        $this->_vatNumber = (string)$vatNumber;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getVatNumber()
     {
@@ -422,17 +422,17 @@ abstract class Company extends Model
     }
     
     /**
-     * @param  $taxIdNumber
+     * @param string $taxIdNumber
      * @return \jtl\Connector\Model\Company
      */
     public function setTaxIdNumber($taxIdNumber)
     {
-        $this->_taxIdNumber = ()$taxIdNumber;
+        $this->_taxIdNumber = (string)$taxIdNumber;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getTaxIdNumber()
     {
@@ -440,17 +440,17 @@ abstract class Company extends Model
     }
     
     /**
-     * @param  $iban
+     * @param string $iban
      * @return \jtl\Connector\Model\Company
      */
     public function setIban($iban)
     {
-        $this->_iban = ()$iban;
+        $this->_iban = (string)$iban;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getIban()
     {
@@ -458,17 +458,17 @@ abstract class Company extends Model
     }
     
     /**
-     * @param  $bic
+     * @param string $bic
      * @return \jtl\Connector\Model\Company
      */
     public function setBic($bic)
     {
-        $this->_bic = ()$bic;
+        $this->_bic = (string)$bic;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getBic()
     {

@@ -16,42 +16,42 @@ use \jtl\Core\Validator\Schema;
 abstract class CategoryAttr extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var string
+     * @var int
      */
     protected $_categoryId;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_languageIso;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_name;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_value;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\CategoryAttr
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -59,17 +59,17 @@ abstract class CategoryAttr extends Model
     }
     
     /**
-     * @param string $categoryId
+     * @param int $categoryId
      * @return \jtl\Connector\Model\CategoryAttr
      */
     public function setCategoryId($categoryId)
     {
-        $this->_categoryId = (string)$categoryId;
+        $this->_categoryId = (int)$categoryId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getCategoryId()
     {
@@ -77,17 +77,17 @@ abstract class CategoryAttr extends Model
     }
     
     /**
-     * @param  $languageIso
+     * @param string $languageIso
      * @return \jtl\Connector\Model\CategoryAttr
      */
     public function setLanguageIso($languageIso)
     {
-        $this->_languageIso = ()$languageIso;
+        $this->_languageIso = (string)$languageIso;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getLanguageIso()
     {
@@ -95,17 +95,17 @@ abstract class CategoryAttr extends Model
     }
     
     /**
-     * @param int $name
+     * @param string $name
      * @return \jtl\Connector\Model\CategoryAttr
      */
     public function setName($name)
     {
-        $this->_name = (int)$name;
+        $this->_name = (string)$name;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getName()
     {
@@ -113,17 +113,17 @@ abstract class CategoryAttr extends Model
     }
     
     /**
-     * @param  $value
+     * @param string $value
      * @return \jtl\Connector\Model\CategoryAttr
      */
     public function setValue($value)
     {
-        $this->_value = ()$value;
+        $this->_value = (string)$value;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getValue()
     {

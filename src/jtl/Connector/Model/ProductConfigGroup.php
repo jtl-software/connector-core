@@ -16,32 +16,32 @@ use \jtl\Core\Validator\Schema;
 abstract class ProductConfigGroup extends Model
 {
     /**
-     * @var string
+     * @var int
      */
     protected $_configGroupId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_productId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_sort;
     
     /**
-     * @param string $configGroupId
+     * @param int $configGroupId
      * @return \jtl\Connector\Model\ProductConfigGroup
      */
     public function setConfigGroupId($configGroupId)
     {
-        $this->_configGroupId = (string)$configGroupId;
+        $this->_configGroupId = (int)$configGroupId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getConfigGroupId()
     {
@@ -49,17 +49,17 @@ abstract class ProductConfigGroup extends Model
     }
     
     /**
-     * @param  $productId
+     * @param int $productId
      * @return \jtl\Connector\Model\ProductConfigGroup
      */
     public function setProductId($productId)
     {
-        $this->_productId = ()$productId;
+        $this->_productId = (int)$productId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductId()
     {
@@ -67,17 +67,17 @@ abstract class ProductConfigGroup extends Model
     }
     
     /**
-     * @param  $sort
+     * @param int $sort
      * @return \jtl\Connector\Model\ProductConfigGroup
      */
     public function setSort($sort)
     {
-        $this->_sort = ()$sort;
+        $this->_sort = (int)$sort;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getSort()
     {

@@ -16,12 +16,12 @@ use \jtl\Core\Validator\Schema;
 abstract class TaxClass extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_name;
     
@@ -31,17 +31,17 @@ abstract class TaxClass extends Model
     protected $_default;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\TaxClass
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -49,17 +49,17 @@ abstract class TaxClass extends Model
     }
     
     /**
-     * @param int $name
+     * @param string $name
      * @return \jtl\Connector\Model\TaxClass
      */
     public function setName($name)
     {
-        $this->_name = (int)$name;
+        $this->_name = (string)$name;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getName()
     {

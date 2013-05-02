@@ -16,37 +16,37 @@ use \jtl\Core\Validator\Schema;
 abstract class ProductAttrI18n extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_languageIso;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_productAttrId;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_name;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_value;
     
     /**
-     * @param  $languageIso
+     * @param int $languageIso
      * @return \jtl\Connector\Model\ProductAttrI18n
      */
     public function setLanguageIso($languageIso)
     {
-        $this->_languageIso = ()$languageIso;
+        $this->_languageIso = (int)$languageIso;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getLanguageIso()
     {
@@ -54,17 +54,17 @@ abstract class ProductAttrI18n extends Model
     }
     
     /**
-     * @param  $productAttrId
+     * @param int $productAttrId
      * @return \jtl\Connector\Model\ProductAttrI18n
      */
     public function setProductAttrId($productAttrId)
     {
-        $this->_productAttrId = ()$productAttrId;
+        $this->_productAttrId = (int)$productAttrId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductAttrId()
     {
@@ -72,17 +72,17 @@ abstract class ProductAttrI18n extends Model
     }
     
     /**
-     * @param int $name
+     * @param string $name
      * @return \jtl\Connector\Model\ProductAttrI18n
      */
     public function setName($name)
     {
-        $this->_name = (int)$name;
+        $this->_name = (string)$name;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getName()
     {
@@ -90,17 +90,17 @@ abstract class ProductAttrI18n extends Model
     }
     
     /**
-     * @param  $value
+     * @param string $value
      * @return \jtl\Connector\Model\ProductAttrI18n
      */
     public function setValue($value)
     {
-        $this->_value = ()$value;
+        $this->_value = (string)$value;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getValue()
     {

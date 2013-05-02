@@ -16,22 +16,22 @@ use \jtl\Core\Validator\Schema;
 abstract class Shipment extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_logistic;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_logisticURL;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_identCode;
     
@@ -41,22 +41,22 @@ abstract class Shipment extends Model
     protected $_created;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_note;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\Shipment
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -64,17 +64,17 @@ abstract class Shipment extends Model
     }
     
     /**
-     * @param  $logistic
+     * @param string $logistic
      * @return \jtl\Connector\Model\Shipment
      */
     public function setLogistic($logistic)
     {
-        $this->_logistic = ()$logistic;
+        $this->_logistic = (string)$logistic;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getLogistic()
     {
@@ -82,17 +82,17 @@ abstract class Shipment extends Model
     }
     
     /**
-     * @param  $logisticURL
+     * @param string $logisticURL
      * @return \jtl\Connector\Model\Shipment
      */
     public function setLogisticURL($logisticURL)
     {
-        $this->_logisticURL = ()$logisticURL;
+        $this->_logisticURL = (string)$logisticURL;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getLogisticURL()
     {
@@ -100,17 +100,17 @@ abstract class Shipment extends Model
     }
     
     /**
-     * @param  $identCode
+     * @param string $identCode
      * @return \jtl\Connector\Model\Shipment
      */
     public function setIdentCode($identCode)
     {
-        $this->_identCode = ()$identCode;
+        $this->_identCode = (string)$identCode;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getIdentCode()
     {
@@ -136,17 +136,17 @@ abstract class Shipment extends Model
     }
     
     /**
-     * @param int $note
+     * @param string $note
      * @return \jtl\Connector\Model\Shipment
      */
     public function setNote($note)
     {
-        $this->_note = (int)$note;
+        $this->_note = (string)$note;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getNote()
     {

@@ -16,42 +16,42 @@ use \jtl\Core\Validator\Schema;
 abstract class Image extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_relationType;
     
     /**
-     * @var double
+     * @var int
      */
     protected $_foreignKey;
     
     /**
-     * @var double
+     * @var string
      */
     protected $_filename;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_sort;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\Image
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -59,17 +59,17 @@ abstract class Image extends Model
     }
     
     /**
-     * @param  $relationType
+     * @param string $relationType
      * @return \jtl\Connector\Model\Image
      */
     public function setRelationType($relationType)
     {
-        $this->_relationType = ()$relationType;
+        $this->_relationType = (string)$relationType;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getRelationType()
     {
@@ -77,17 +77,17 @@ abstract class Image extends Model
     }
     
     /**
-     * @param double $foreignKey
+     * @param int $foreignKey
      * @return \jtl\Connector\Model\Image
      */
     public function setForeignKey($foreignKey)
     {
-        $this->_foreignKey = (double)$foreignKey;
+        $this->_foreignKey = (int)$foreignKey;
         return $this;
     }
     
     /**
-     * @return double
+     * @return int
      */
     public function getForeignKey()
     {
@@ -95,17 +95,17 @@ abstract class Image extends Model
     }
     
     /**
-     * @param double $filename
+     * @param string $filename
      * @return \jtl\Connector\Model\Image
      */
     public function setFilename($filename)
     {
-        $this->_filename = (double)$filename;
+        $this->_filename = (string)$filename;
         return $this;
     }
     
     /**
-     * @return double
+     * @return string
      */
     public function getFilename()
     {
@@ -113,17 +113,17 @@ abstract class Image extends Model
     }
     
     /**
-     * @param  $sort
+     * @param int $sort
      * @return \jtl\Connector\Model\Image
      */
     public function setSort($sort)
     {
-        $this->_sort = ()$sort;
+        $this->_sort = (int)$sort;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getSort()
     {

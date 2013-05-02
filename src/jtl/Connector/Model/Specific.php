@@ -16,42 +16,42 @@ use \jtl\Core\Validator\Schema;
 abstract class Specific extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_sort;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_global;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_name;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_type;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\Specific
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -59,17 +59,17 @@ abstract class Specific extends Model
     }
     
     /**
-     * @param  $sort
+     * @param int $sort
      * @return \jtl\Connector\Model\Specific
      */
     public function setSort($sort)
     {
-        $this->_sort = ()$sort;
+        $this->_sort = (int)$sort;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getSort()
     {
@@ -77,17 +77,17 @@ abstract class Specific extends Model
     }
     
     /**
-     * @param  $global
+     * @param int $global
      * @return \jtl\Connector\Model\Specific
      */
     public function setGlobal($global)
     {
-        $this->_global = ()$global;
+        $this->_global = (int)$global;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getGlobal()
     {
@@ -95,17 +95,17 @@ abstract class Specific extends Model
     }
     
     /**
-     * @param int $name
+     * @param string $name
      * @return \jtl\Connector\Model\Specific
      */
     public function setName($name)
     {
-        $this->_name = (int)$name;
+        $this->_name = (string)$name;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getName()
     {
@@ -113,17 +113,17 @@ abstract class Specific extends Model
     }
     
     /**
-     * @param  $type
+     * @param string $type
      * @return \jtl\Connector\Model\Specific
      */
     public function setType($type)
     {
-        $this->_type = ()$type;
+        $this->_type = (string)$type;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getType()
     {

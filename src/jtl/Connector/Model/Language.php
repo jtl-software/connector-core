@@ -16,52 +16,52 @@ use \jtl\Core\Validator\Schema;
 abstract class Language extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_nameEnglish;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_nameGerman;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_languageIso;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_isDefault;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_isConnectorDefault;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_isWawiDefault;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\Language
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -69,17 +69,17 @@ abstract class Language extends Model
     }
     
     /**
-     * @param int $nameEnglish
+     * @param string $nameEnglish
      * @return \jtl\Connector\Model\Language
      */
     public function setNameEnglish($nameEnglish)
     {
-        $this->_nameEnglish = (int)$nameEnglish;
+        $this->_nameEnglish = (string)$nameEnglish;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getNameEnglish()
     {
@@ -87,17 +87,17 @@ abstract class Language extends Model
     }
     
     /**
-     * @param int $nameGerman
+     * @param string $nameGerman
      * @return \jtl\Connector\Model\Language
      */
     public function setNameGerman($nameGerman)
     {
-        $this->_nameGerman = (int)$nameGerman;
+        $this->_nameGerman = (string)$nameGerman;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getNameGerman()
     {
@@ -105,17 +105,17 @@ abstract class Language extends Model
     }
     
     /**
-     * @param  $languageIso
+     * @param string $languageIso
      * @return \jtl\Connector\Model\Language
      */
     public function setLanguageIso($languageIso)
     {
-        $this->_languageIso = ()$languageIso;
+        $this->_languageIso = (string)$languageIso;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getLanguageIso()
     {
@@ -123,17 +123,17 @@ abstract class Language extends Model
     }
     
     /**
-     * @param  $isDefault
+     * @param string $isDefault
      * @return \jtl\Connector\Model\Language
      */
     public function setIsDefault($isDefault)
     {
-        $this->_isDefault = ()$isDefault;
+        $this->_isDefault = (string)$isDefault;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getIsDefault()
     {
@@ -141,17 +141,17 @@ abstract class Language extends Model
     }
     
     /**
-     * @param  $isConnectorDefault
+     * @param string $isConnectorDefault
      * @return \jtl\Connector\Model\Language
      */
     public function setIsConnectorDefault($isConnectorDefault)
     {
-        $this->_isConnectorDefault = ()$isConnectorDefault;
+        $this->_isConnectorDefault = (string)$isConnectorDefault;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getIsConnectorDefault()
     {
@@ -159,17 +159,17 @@ abstract class Language extends Model
     }
     
     /**
-     * @param  $isWawiDefault
+     * @param string $isWawiDefault
      * @return \jtl\Connector\Model\Language
      */
     public function setIsWawiDefault($isWawiDefault)
     {
-        $this->_isWawiDefault = ()$isWawiDefault;
+        $this->_isWawiDefault = (string)$isWawiDefault;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getIsWawiDefault()
     {

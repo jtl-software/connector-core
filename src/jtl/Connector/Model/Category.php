@@ -16,32 +16,32 @@ use \jtl\Core\Validator\Schema;
 abstract class Category extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_parentCategoryId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_sort;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\Category
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -49,17 +49,17 @@ abstract class Category extends Model
     }
     
     /**
-     * @param  $parentCategoryId
+     * @param int $parentCategoryId
      * @return \jtl\Connector\Model\Category
      */
     public function setParentCategoryId($parentCategoryId)
     {
-        $this->_parentCategoryId = ()$parentCategoryId;
+        $this->_parentCategoryId = (int)$parentCategoryId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getParentCategoryId()
     {
@@ -67,17 +67,17 @@ abstract class Category extends Model
     }
     
     /**
-     * @param  $sort
+     * @param int $sort
      * @return \jtl\Connector\Model\Category
      */
     public function setSort($sort)
     {
-        $this->_sort = ()$sort;
+        $this->_sort = (int)$sort;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getSort()
     {

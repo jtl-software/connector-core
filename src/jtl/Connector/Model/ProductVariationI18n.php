@@ -16,32 +16,32 @@ use \jtl\Core\Validator\Schema;
 abstract class ProductVariationI18n extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_languageIso;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_productVariationId;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_name;
     
     /**
-     * @param  $languageIso
+     * @param int $languageIso
      * @return \jtl\Connector\Model\ProductVariationI18n
      */
     public function setLanguageIso($languageIso)
     {
-        $this->_languageIso = ()$languageIso;
+        $this->_languageIso = (int)$languageIso;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getLanguageIso()
     {
@@ -49,17 +49,17 @@ abstract class ProductVariationI18n extends Model
     }
     
     /**
-     * @param  $productVariationId
+     * @param int $productVariationId
      * @return \jtl\Connector\Model\ProductVariationI18n
      */
     public function setProductVariationId($productVariationId)
     {
-        $this->_productVariationId = ()$productVariationId;
+        $this->_productVariationId = (int)$productVariationId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductVariationId()
     {
@@ -67,17 +67,17 @@ abstract class ProductVariationI18n extends Model
     }
     
     /**
-     * @param int $name
+     * @param string $name
      * @return \jtl\Connector\Model\ProductVariationI18n
      */
     public function setName($name)
     {
-        $this->_name = (int)$name;
+        $this->_name = (string)$name;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getName()
     {

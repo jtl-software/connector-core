@@ -16,37 +16,37 @@ use \jtl\Core\Validator\Schema;
 abstract class CrossSelling extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var string
+     * @var int
      */
     protected $_crossSellingProductId;
     
     /**
-     * @var string
+     * @var int
      */
     protected $_crossSellingGroupId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_productId;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\CrossSelling
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -54,17 +54,17 @@ abstract class CrossSelling extends Model
     }
     
     /**
-     * @param string $crossSellingProductId
+     * @param int $crossSellingProductId
      * @return \jtl\Connector\Model\CrossSelling
      */
     public function setCrossSellingProductId($crossSellingProductId)
     {
-        $this->_crossSellingProductId = (string)$crossSellingProductId;
+        $this->_crossSellingProductId = (int)$crossSellingProductId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getCrossSellingProductId()
     {
@@ -72,17 +72,17 @@ abstract class CrossSelling extends Model
     }
     
     /**
-     * @param string $crossSellingGroupId
+     * @param int $crossSellingGroupId
      * @return \jtl\Connector\Model\CrossSelling
      */
     public function setCrossSellingGroupId($crossSellingGroupId)
     {
-        $this->_crossSellingGroupId = (string)$crossSellingGroupId;
+        $this->_crossSellingGroupId = (int)$crossSellingGroupId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getCrossSellingGroupId()
     {
@@ -90,17 +90,17 @@ abstract class CrossSelling extends Model
     }
     
     /**
-     * @param  $productId
+     * @param int $productId
      * @return \jtl\Connector\Model\CrossSelling
      */
     public function setProductId($productId)
     {
-        $this->_productId = ()$productId;
+        $this->_productId = (int)$productId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductId()
     {

@@ -16,102 +16,102 @@ use \jtl\Core\Validator\Schema;
 abstract class ProductVariationValue extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_id;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_productVariationId;
     
     /**
-     * @var 
+     * @var double
      */
     protected $_extraWeight;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_sku;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_sort;
     
     /**
-     * @var 
+     * @var double
      */
     protected $_stockLevel;
     
     /**
-     * @var 
+     * @var double
      */
     protected $_packagingUnitId;
     
     /**
-     * @var 
+     * @var int
      */
     protected $_languageIso;
     
     /**
-     * @var 
+     * @var int
+     */
+    protected $_productVariationValueId;
+    
+    /**
+     * @var string
+     */
+    protected $_name;
+    
+    /**
+     * @var int
+     */
+    protected $_customerGroupId;
+    
+    /**
+     * @var int
+     */
+    protected $_productVariationValueId;
+    
+    /**
+     * @var double
+     */
+    protected $_extraChargeNet;
+    
+    /**
+     * @var int
+     */
+    protected $_customerGroupId;
+    
+    /**
+     * @var int
      */
     protected $_productVariationValueId;
     
     /**
      * @var int
      */
-    protected $_name;
-    
-    /**
-     * @var string
-     */
-    protected $_customerGroupId;
-    
-    /**
-     * @var 
-     */
     protected $_productVariationValueId;
     
     /**
-     * @var 
-     */
-    protected $_extraChargeNet;
-    
-    /**
-     * @var string
-     */
-    protected $_customerGroupId;
-    
-    /**
-     * @var 
-     */
-    protected $_productVariationValueId;
-    
-    /**
-     * @var 
-     */
-    protected $_productVariationValueId;
-    
-    /**
-     * @var 
+     * @var int
      */
     protected $_productVariationValueTargetId;
     
     /**
-     * @param  $id
+     * @param int $id
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setId($id)
     {
-        $this->_id = ()$id;
+        $this->_id = (int)$id;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getId()
     {
@@ -119,17 +119,17 @@ abstract class ProductVariationValue extends Model
     }
     
     /**
-     * @param  $productVariationId
+     * @param int $productVariationId
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setProductVariationId($productVariationId)
     {
-        $this->_productVariationId = ()$productVariationId;
+        $this->_productVariationId = (int)$productVariationId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductVariationId()
     {
@@ -137,17 +137,17 @@ abstract class ProductVariationValue extends Model
     }
     
     /**
-     * @param  $extraWeight
+     * @param double $extraWeight
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setExtraWeight($extraWeight)
     {
-        $this->_extraWeight = ()$extraWeight;
+        $this->_extraWeight = (double)$extraWeight;
         return $this;
     }
     
     /**
-     * @return 
+     * @return double
      */
     public function getExtraWeight()
     {
@@ -155,17 +155,17 @@ abstract class ProductVariationValue extends Model
     }
     
     /**
-     * @param  $sku
+     * @param string $sku
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setSku($sku)
     {
-        $this->_sku = ()$sku;
+        $this->_sku = (string)$sku;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getSku()
     {
@@ -173,17 +173,17 @@ abstract class ProductVariationValue extends Model
     }
     
     /**
-     * @param  $sort
+     * @param int $sort
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setSort($sort)
     {
-        $this->_sort = ()$sort;
+        $this->_sort = (int)$sort;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getSort()
     {
@@ -191,17 +191,17 @@ abstract class ProductVariationValue extends Model
     }
     
     /**
-     * @param  $stockLevel
+     * @param double $stockLevel
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setStockLevel($stockLevel)
     {
-        $this->_stockLevel = ()$stockLevel;
+        $this->_stockLevel = (double)$stockLevel;
         return $this;
     }
     
     /**
-     * @return 
+     * @return double
      */
     public function getStockLevel()
     {
@@ -209,17 +209,17 @@ abstract class ProductVariationValue extends Model
     }
     
     /**
-     * @param  $packagingUnitId
+     * @param double $packagingUnitId
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setPackagingUnitId($packagingUnitId)
     {
-        $this->_packagingUnitId = ()$packagingUnitId;
+        $this->_packagingUnitId = (double)$packagingUnitId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return double
      */
     public function getPackagingUnitId()
     {
@@ -227,17 +227,17 @@ abstract class ProductVariationValue extends Model
     }
     
     /**
-     * @param  $languageIso
+     * @param int $languageIso
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setLanguageIso($languageIso)
     {
-        $this->_languageIso = ()$languageIso;
+        $this->_languageIso = (int)$languageIso;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getLanguageIso()
     {
@@ -245,17 +245,17 @@ abstract class ProductVariationValue extends Model
     }
     
     /**
-     * @param  $productVariationValueId
+     * @param int $productVariationValueId
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setProductVariationValueId($productVariationValueId)
     {
-        $this->_productVariationValueId = ()$productVariationValueId;
+        $this->_productVariationValueId = (int)$productVariationValueId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductVariationValueId()
     {
@@ -263,17 +263,17 @@ abstract class ProductVariationValue extends Model
     }
     
     /**
-     * @param int $name
+     * @param string $name
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setName($name)
     {
-        $this->_name = (int)$name;
+        $this->_name = (string)$name;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getName()
     {
@@ -281,17 +281,17 @@ abstract class ProductVariationValue extends Model
     }
     
     /**
-     * @param string $customerGroupId
+     * @param int $customerGroupId
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setCustomerGroupId($customerGroupId)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
+        $this->_customerGroupId = (int)$customerGroupId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getCustomerGroupId()
     {
@@ -299,17 +299,17 @@ abstract class ProductVariationValue extends Model
     }
     
     /**
-     * @param  $productVariationValueId
+     * @param int $productVariationValueId
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setProductVariationValueId($productVariationValueId)
     {
-        $this->_productVariationValueId = ()$productVariationValueId;
+        $this->_productVariationValueId = (int)$productVariationValueId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductVariationValueId()
     {
@@ -317,17 +317,17 @@ abstract class ProductVariationValue extends Model
     }
     
     /**
-     * @param  $extraChargeNet
+     * @param double $extraChargeNet
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setExtraChargeNet($extraChargeNet)
     {
-        $this->_extraChargeNet = ()$extraChargeNet;
+        $this->_extraChargeNet = (double)$extraChargeNet;
         return $this;
     }
     
     /**
-     * @return 
+     * @return double
      */
     public function getExtraChargeNet()
     {
@@ -335,17 +335,17 @@ abstract class ProductVariationValue extends Model
     }
     
     /**
-     * @param string $customerGroupId
+     * @param int $customerGroupId
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setCustomerGroupId($customerGroupId)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
+        $this->_customerGroupId = (int)$customerGroupId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getCustomerGroupId()
     {
@@ -353,17 +353,17 @@ abstract class ProductVariationValue extends Model
     }
     
     /**
-     * @param  $productVariationValueId
+     * @param int $productVariationValueId
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setProductVariationValueId($productVariationValueId)
     {
-        $this->_productVariationValueId = ()$productVariationValueId;
+        $this->_productVariationValueId = (int)$productVariationValueId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductVariationValueId()
     {
@@ -371,17 +371,17 @@ abstract class ProductVariationValue extends Model
     }
     
     /**
-     * @param  $productVariationValueId
+     * @param int $productVariationValueId
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setProductVariationValueId($productVariationValueId)
     {
-        $this->_productVariationValueId = ()$productVariationValueId;
+        $this->_productVariationValueId = (int)$productVariationValueId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductVariationValueId()
     {
@@ -389,17 +389,17 @@ abstract class ProductVariationValue extends Model
     }
     
     /**
-     * @param  $productVariationValueTargetId
+     * @param int $productVariationValueTargetId
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setProductVariationValueTargetId($productVariationValueTargetId)
     {
-        $this->_productVariationValueTargetId = ()$productVariationValueTargetId;
+        $this->_productVariationValueTargetId = (int)$productVariationValueTargetId;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getProductVariationValueTargetId()
     {

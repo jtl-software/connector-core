@@ -16,22 +16,22 @@ use \jtl\Core\Validator\Schema;
 abstract class CategoryI18n extends Model
 {
     /**
-     * @var 
+     * @var int
      */
     protected $_languageIso;
     
     /**
-     * @var string
+     * @var int
      */
     protected $_categoryId;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_name;
     
     /**
-     * @var 
+     * @var string
      */
     protected $_url;
     
@@ -41,17 +41,17 @@ abstract class CategoryI18n extends Model
     protected $_description;
     
     /**
-     * @param  $languageIso
+     * @param int $languageIso
      * @return \jtl\Connector\Model\CategoryI18n
      */
     public function setLanguageIso($languageIso)
     {
-        $this->_languageIso = ()$languageIso;
+        $this->_languageIso = (int)$languageIso;
         return $this;
     }
     
     /**
-     * @return 
+     * @return int
      */
     public function getLanguageIso()
     {
@@ -59,17 +59,17 @@ abstract class CategoryI18n extends Model
     }
     
     /**
-     * @param string $categoryId
+     * @param int $categoryId
      * @return \jtl\Connector\Model\CategoryI18n
      */
     public function setCategoryId($categoryId)
     {
-        $this->_categoryId = (string)$categoryId;
+        $this->_categoryId = (int)$categoryId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return int
      */
     public function getCategoryId()
     {
@@ -77,17 +77,17 @@ abstract class CategoryI18n extends Model
     }
     
     /**
-     * @param int $name
+     * @param string $name
      * @return \jtl\Connector\Model\CategoryI18n
      */
     public function setName($name)
     {
-        $this->_name = (int)$name;
+        $this->_name = (string)$name;
         return $this;
     }
     
     /**
-     * @return int
+     * @return string
      */
     public function getName()
     {
@@ -95,17 +95,17 @@ abstract class CategoryI18n extends Model
     }
     
     /**
-     * @param  $url
+     * @param string $url
      * @return \jtl\Connector\Model\CategoryI18n
      */
     public function setUrl($url)
     {
-        $this->_url = ()$url;
+        $this->_url = (string)$url;
         return $this;
     }
     
     /**
-     * @return 
+     * @return string
      */
     public function getUrl()
     {
