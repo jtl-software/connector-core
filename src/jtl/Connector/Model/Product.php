@@ -138,11 +138,6 @@ abstract class Product extends Model
     protected $_packagingUnit;
     
     /**
-     * @var double
-     */
-    protected $_price;
-    
-    /**
      * @var string
      */
     protected $_considerBasePrice;
@@ -258,7 +253,7 @@ abstract class Product extends Model
     protected $_supplierStockLevel;
     
     /**
-     * @var int
+     * @var double
      */
     protected $_supplierDeliveryTime;
     
@@ -700,24 +695,6 @@ abstract class Product extends Model
     }
     
     /**
-     * @param double $price
-     * @return \jtl\Connector\Model\Product
-     */
-    public function setPrice($price)
-    {
-        $this->_price = (double)$price;
-        return $this;
-    }
-    
-    /**
-     * @return double
-     */
-    public function getPrice()
-    {
-        return $this->_price;
-    }
-    
-    /**
      * @param string $considerBasePrice
      * @return \jtl\Connector\Model\Product
      */
@@ -1132,17 +1109,17 @@ abstract class Product extends Model
     }
     
     /**
-     * @param int $supplierDeliveryTime
+     * @param double $supplierDeliveryTime
      * @return \jtl\Connector\Model\Product
      */
     public function setSupplierDeliveryTime($supplierDeliveryTime)
     {
-        $this->_supplierDeliveryTime = (int)$supplierDeliveryTime;
+        $this->_supplierDeliveryTime = (double)$supplierDeliveryTime;
         return $this;
     }
     
     /**
-     * @return int
+     * @return double
      */
     public function getSupplierDeliveryTime()
     {
