@@ -1,0 +1,38 @@
+{
+    "title": "CustomerOrderPaymentInfo Model",
+    "type": "object",
+    "properties": {
+        "shippingMethodId": {
+            "type": "int"
+        },
+        "basketId": {
+            "type": "int"
+        },
+        "bankAccount": {
+            "type": "string"
+        },
+        "bankCode": {
+            "type": "string"
+        },
+        "accountHolder": {
+            "type": "string"
+        },
+        "accountNumber": {
+            "type": "string"
+        },
+        "iban": {
+            "type": "string"
+        },
+        "bic": {
+            "type": "string"
+        },
+        "creditCardNumber": {
+            "type": "string"
+        },
+        "cvv": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

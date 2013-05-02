@@ -1,0 +1,26 @@
+{
+    "title": "ProductI18n Model",
+    "type": "object",
+    "properties": {
+        "languageIso": {
+            "type": "int"
+        },
+        "productId": {
+            "type": "int"
+        },
+        "name": {
+            "type": "string"
+        },
+        "url": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "shortDescription": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

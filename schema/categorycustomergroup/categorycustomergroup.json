@@ -1,0 +1,17 @@
+{
+    "title": "CategoryCustomerGroup Model",
+    "type": "object",
+    "properties": {
+        "customerGroupId": {
+            "type": "int"
+        },
+        "categoryId": {
+            "type": "int"
+        },
+        "discount": {
+            "type": "double"
+        }
+    },
+    "required": [
+    ]
+}

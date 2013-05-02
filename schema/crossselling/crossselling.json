@@ -1,0 +1,20 @@
+{
+    "title": "CrossSelling Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "crossSellingProductId": {
+            "type": "int"
+        },
+        "crossSellingGroupId": {
+            "type": "int"
+        },
+        "productId": {
+            "type": "int"
+        }
+    },
+    "required": [
+    ]
+}

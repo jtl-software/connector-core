@@ -1,0 +1,62 @@
+{
+    "title": "CustomerOrderBillingAddress Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "customer": {
+            "type": "int"
+        },
+        "salutation": {
+            "type": "string"
+        },
+        "firstName": {
+            "type": "string"
+        },
+        "lastName": {
+            "type": "string"
+        },
+        "title": {
+            "type": "string"
+        },
+        "company": {
+            "type": "string"
+        },
+        "extraAddressLine": {
+            "type": "string"
+        },
+        "street": {
+            "type": "string"
+        },
+        "streetNumber": {
+            "type": "string"
+        },
+        "zipCode": {
+            "type": "string"
+        },
+        "city": {
+            "type": "string"
+        },
+        "state": {
+            "type": "string"
+        },
+        "country": {
+            "type": "string"
+        },
+        "phone": {
+            "type": "string"
+        },
+        "mobile": {
+            "type": "string"
+        },
+        "fax": {
+            "type": "string"
+        },
+        "eMail": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

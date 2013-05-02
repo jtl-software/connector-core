@@ -1,0 +1,29 @@
+{
+    "title": "ConfigGroup Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "imagePath": {
+            "type": "string"
+        },
+        "minimumSelection": {
+            "type": "int"
+        },
+        "maximumSelection": {
+            "type": "int"
+        },
+        "type": {
+            "type": "int"
+        },
+        "sort": {
+            "type": "int"
+        },
+        "comment": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

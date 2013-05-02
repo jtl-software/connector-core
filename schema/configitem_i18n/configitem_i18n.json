@@ -1,0 +1,20 @@
+{
+    "title": "ConfigItem_i18n Model",
+    "type": "object",
+    "properties": {
+        "configItemId": {
+            "type": "int"
+        },
+        "languageIso": {
+            "type": "int"
+        },
+        "name": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

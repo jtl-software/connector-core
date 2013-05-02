@@ -1,0 +1,17 @@
+{
+    "title": "Product2Category Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "categoryId": {
+            "type": "int"
+        },
+        "productId": {
+            "type": "int"
+        }
+    },
+    "required": [
+    ]
+}

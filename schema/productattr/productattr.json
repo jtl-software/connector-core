@@ -1,0 +1,20 @@
+{
+    "title": "ProductAttr Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "productId": {
+            "type": "int"
+        },
+        "sort": {
+            "type": "int"
+        },
+        "isVisible": {
+            "type": "double"
+        }
+    },
+    "required": [
+    ]
+}

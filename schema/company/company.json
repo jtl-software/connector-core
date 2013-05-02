@@ -1,0 +1,68 @@
+{
+    "title": "Company Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "name": {
+            "type": "string"
+        },
+        "businessman": {
+            "type": "string"
+        },
+        "street": {
+            "type": "string"
+        },
+        "streetNumber": {
+            "type": "int"
+        },
+        "zipCode": {
+            "type": "string"
+        },
+        "city": {
+            "type": "string"
+        },
+        "country": {
+            "type": "string"
+        },
+        "phone": {
+            "type": "string"
+        },
+        "fax": {
+            "type": "string"
+        },
+        "eMail": {
+            "type": "string"
+        },
+        "www": {
+            "type": "string"
+        },
+        "bankCode": {
+            "type": "string"
+        },
+        "accountNumber": {
+            "type": "string"
+        },
+        "bankAccount": {
+            "type": "string"
+        },
+        "accountHolder": {
+            "type": "string"
+        },
+        "vatNumber": {
+            "type": "string"
+        },
+        "taxIdNumber": {
+            "type": "string"
+        },
+        "iban": {
+            "type": "string"
+        },
+        "bic": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "title": "DeliveryNote Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "customerOrderId": {
+            "type": "int"
+        },
+        "note": {
+            "type": "string"
+        },
+        "created": {
+            "type": "string"
+        },
+        "fulfillment": {
+            "type": "int"
+        },
+        "status": {
+            "type": "int"
+        }
+    },
+    "required": [
+    ]
+}

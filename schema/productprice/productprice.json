@@ -1,0 +1,20 @@
+{
+    "title": "ProductPrice Model",
+    "type": "object",
+    "properties": {
+        "customerGroupId": {
+            "type": "int"
+        },
+        "productId": {
+            "type": "int"
+        },
+        "netPrice": {
+            "type": "double"
+        },
+        "quantity": {
+            "type": "int"
+        }
+    },
+    "required": [
+    ]
+}

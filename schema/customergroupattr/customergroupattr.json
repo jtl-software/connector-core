@@ -1,0 +1,20 @@
+{
+    "title": "CustomerGroupAttr Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "customerGroupId": {
+            "type": "int"
+        },
+        "key": {
+            "type": "string"
+        },
+        "value": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}
