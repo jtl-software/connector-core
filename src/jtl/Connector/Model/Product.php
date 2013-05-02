@@ -1151,7 +1151,9 @@ abstract class Product extends Model
     public function validate()
     {
         try {
-            Schema::validateAction(CONNECTOR_DIR . "schema/product/product.json", $this->getPublic(array()));
+            if (file_exists(CONNECTOR_DIR . "schema/product/product.json")) {
+                Schema::validateAction(CONNECTOR_DIR . "schema/product/product.json", $this->getPublic(array()));
+            }
         }
         catch (ValidationException $exc) {
             throw new SchemaException($exc->getMessage());
