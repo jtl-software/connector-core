@@ -159,7 +159,7 @@ abstract class ProductI18n extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/ProductI18n/ProductI18n.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/producti18n/producti18n.json", $this->getPublic(array()));
     }
 }
 ?>

@@ -90,7 +90,7 @@ abstract class TaxClass extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/TaxClass/TaxClass.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/taxclass/taxclass.json", $this->getPublic(array()));
     }
 }
 ?>

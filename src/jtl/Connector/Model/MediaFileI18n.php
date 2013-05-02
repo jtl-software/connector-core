@@ -113,7 +113,7 @@ abstract class MediaFileI18n extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/MediaFileI18n/MediaFileI18n.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/mediafilei18n/mediafilei18n.json", $this->getPublic(array()));
     }
 }
 ?>

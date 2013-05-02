@@ -90,7 +90,7 @@ abstract class DeliveryStatus extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/DeliveryStatus/DeliveryStatus.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/deliverystatus/deliverystatus.json", $this->getPublic(array()));
     }
 }
 ?>

@@ -113,7 +113,7 @@ abstract class ProductWarehouseInfo extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/ProductWarehouseInfo/ProductWarehouseInfo.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/productwarehouseinfo/productwarehouseinfo.json", $this->getPublic(array()));
     }
 }
 ?>

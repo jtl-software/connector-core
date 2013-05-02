@@ -688,7 +688,7 @@ abstract class CustomerOrder extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/CustomerOrder/CustomerOrder.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/customerorder/customerorder.json", $this->getPublic(array()));
     }
 }
 ?>

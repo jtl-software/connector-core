@@ -1,5 +1,5 @@
 {
-    "title": "Specific_i18n Model",
+    "title": "SpecificI18n Model",
     "type": "object",
     "properties": {
         "languageIso": {

@@ -136,7 +136,7 @@ abstract class TaxRate extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/TaxRate/TaxRate.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/taxrate/taxrate.json", $this->getPublic(array()));
     }
 }
 ?>

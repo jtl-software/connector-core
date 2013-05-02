@@ -159,7 +159,7 @@ abstract class DeliveryNote extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/DeliveryNote/DeliveryNote.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/deliverynote/deliverynote.json", $this->getPublic(array()));
     }
 }
 ?>

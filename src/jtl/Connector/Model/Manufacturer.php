@@ -136,7 +136,7 @@ abstract class Manufacturer extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/Manufacturer/Manufacturer.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/manufacturer/manufacturer.json", $this->getPublic(array()));
     }
 }
 ?>

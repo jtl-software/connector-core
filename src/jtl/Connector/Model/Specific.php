@@ -136,7 +136,7 @@ abstract class Specific extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/Specific/Specific.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/specific/specific.json", $this->getPublic(array()));
     }
 }
 ?>

@@ -159,7 +159,7 @@ abstract class CustomerGroup extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/CustomerGroup/CustomerGroup.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/customergroup/customergroup.json", $this->getPublic(array()));
     }
 }
 ?>

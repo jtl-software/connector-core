@@ -159,7 +159,7 @@ abstract class ManufacturerI18n extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/ManufacturerI18n/ManufacturerI18n.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/manufactureri18n/manufactureri18n.json", $this->getPublic(array()));
     }
 }
 ?>

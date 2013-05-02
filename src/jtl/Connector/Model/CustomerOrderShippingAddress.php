@@ -458,7 +458,7 @@ abstract class CustomerOrderShippingAddress extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/CustomerOrderShippingAddress/CustomerOrderShippingAddress.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/customerordershippingaddress/customerordershippingaddress.json", $this->getPublic(array()));
     }
 }
 ?>

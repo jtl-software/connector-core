@@ -90,7 +90,7 @@ abstract class ProductVarCombination extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/ProductVarCombination/ProductVarCombination.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/productvarcombination/productvarcombination.json", $this->getPublic(array()));
     }
 }
 ?>

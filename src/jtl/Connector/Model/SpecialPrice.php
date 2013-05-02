@@ -90,7 +90,7 @@ abstract class SpecialPrice extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/SpecialPrice/SpecialPrice.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/specialprice/specialprice.json", $this->getPublic(array()));
     }
 }
 ?>

@@ -67,7 +67,7 @@ abstract class ProductType extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/ProductType/ProductType.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/producttype/producttype.json", $this->getPublic(array()));
     }
 }
 ?>

@@ -136,7 +136,7 @@ abstract class CategoryI18n extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/CategoryI18n/CategoryI18n.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/categoryi18n/categoryi18n.json", $this->getPublic(array()));
     }
 }
 ?>

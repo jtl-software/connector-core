@@ -1,5 +1,5 @@
 {
-    "title": "DeliveryNotePos Model",
+    "title": "DeliveryNotePos  Model",
     "type": "object",
     "properties": {
         "id": {

@@ -113,7 +113,7 @@ abstract class CustomerGroupAttr extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/CustomerGroupAttr/CustomerGroupAttr.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/customergroupattr/customergroupattr.json", $this->getPublic(array()));
     }
 }
 ?>

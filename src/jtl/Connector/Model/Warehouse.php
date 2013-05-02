@@ -44,7 +44,7 @@ abstract class Warehouse extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/Warehouse/Warehouse.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/warehouse/warehouse.json", $this->getPublic(array()));
     }
 }
 ?>

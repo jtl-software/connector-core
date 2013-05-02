@@ -159,7 +159,7 @@ abstract class Image extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/Image/Image.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/image/image.json", $this->getPublic(array()));
     }
 }
 ?>

@@ -67,7 +67,7 @@ abstract class CategoryVisibility extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/CategoryVisibility/CategoryVisibility.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/categoryvisibility/categoryvisibility.json", $this->getPublic(array()));
     }
 }
 ?>

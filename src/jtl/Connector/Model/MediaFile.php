@@ -182,7 +182,7 @@ abstract class MediaFile extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/MediaFile/MediaFile.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/mediafile/mediafile.json", $this->getPublic(array()));
     }
 }
 ?>

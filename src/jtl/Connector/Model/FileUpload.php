@@ -159,7 +159,7 @@ abstract class FileUpload extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/FileUpload/FileUpload.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/fileupload/fileupload.json", $this->getPublic(array()));
     }
 }
 ?>

@@ -90,7 +90,7 @@ abstract class CustomerGroupI18n extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/CustomerGroupI18n/CustomerGroupI18n.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/customergroupi18n/customergroupi18n.json", $this->getPublic(array()));
     }
 }
 ?>

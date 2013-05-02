@@ -366,7 +366,7 @@ abstract class ConfigItem extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/ConfigItem/ConfigItem.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/configitem/configitem.json", $this->getPublic(array()));
     }
 }
 ?>

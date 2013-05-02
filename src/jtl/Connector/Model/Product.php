@@ -1148,7 +1148,7 @@ abstract class Product extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/Product/Product.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/product/product.json", $this->getPublic(array()));
     }
 }
 ?>

@@ -113,7 +113,7 @@ abstract class FileDownloadI18n extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/FileDownloadI18n/FileDownloadI18n.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/filedownloadi18n/filedownloadi18n.json", $this->getPublic(array()));
     }
 }
 ?>

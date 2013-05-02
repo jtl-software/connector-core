@@ -67,7 +67,7 @@ abstract class TaxZone extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/TaxZone/TaxZone.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/taxzone/taxzone.json", $this->getPublic(array()));
     }
 }
 ?>

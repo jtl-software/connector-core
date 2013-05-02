@@ -90,7 +90,7 @@ abstract class ProductSpecific extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/ProductSpecific/ProductSpecific.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/productspecific/productspecific.json", $this->getPublic(array()));
     }
 }
 ?>

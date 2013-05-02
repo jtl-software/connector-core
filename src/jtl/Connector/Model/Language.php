@@ -182,7 +182,7 @@ abstract class Language extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/Language/Language.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/language/language.json", $this->getPublic(array()));
     }
 }
 ?>

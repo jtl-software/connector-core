@@ -251,7 +251,7 @@ abstract class CustomerOrderPaymentInfo extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/CustomerOrderPaymentInfo/CustomerOrderPaymentInfo.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/customerorderpaymentinfo/customerorderpaymentinfo.json", $this->getPublic(array()));
     }
 }
 ?>

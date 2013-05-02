@@ -182,7 +182,7 @@ abstract class ConfigGroup extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/ConfigGroup/ConfigGroup.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/configgroup/configgroup.json", $this->getPublic(array()));
     }
 }
 ?>

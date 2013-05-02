@@ -113,7 +113,7 @@ abstract class CrossSellingGroup extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/CrossSellingGroup/CrossSellingGroup.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/crosssellinggroup/crosssellinggroup.json", $this->getPublic(array()));
     }
 }
 ?>

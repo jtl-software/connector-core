@@ -90,7 +90,7 @@ abstract class Category extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/Category/Category.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/category/category.json", $this->getPublic(array()));
     }
 }
 ?>

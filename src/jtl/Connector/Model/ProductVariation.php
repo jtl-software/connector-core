@@ -159,7 +159,7 @@ abstract class ProductVariation extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/ProductVariation/ProductVariation.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/productvariation/productvariation.json", $this->getPublic(array()));
     }
 }
 ?>

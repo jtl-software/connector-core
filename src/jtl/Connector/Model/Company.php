@@ -481,7 +481,7 @@ abstract class Company extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/Company/Company.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/company/company.json", $this->getPublic(array()));
     }
 }
 ?>

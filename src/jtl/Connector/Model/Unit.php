@@ -90,7 +90,7 @@ abstract class Unit extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/Unit/Unit.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/unit/unit.json", $this->getPublic(array()));
     }
 }
 ?>

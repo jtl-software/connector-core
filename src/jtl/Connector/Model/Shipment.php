@@ -159,7 +159,7 @@ abstract class Shipment extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/Shipment/Shipment.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/shipment/shipment.json", $this->getPublic(array()));
     }
 }
 ?>

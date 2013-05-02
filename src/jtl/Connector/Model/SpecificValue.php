@@ -274,7 +274,7 @@ abstract class SpecificValue extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/SpecificValue/SpecificValue.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/specificvalue/specificvalue.json", $this->getPublic(array()));
     }
 }
 ?>

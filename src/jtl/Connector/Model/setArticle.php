@@ -90,7 +90,7 @@ abstract class SetArticle extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/setArticle/setArticle.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/setarticle/setarticle.json", $this->getPublic(array()));
     }
 }
 ?>

@@ -228,7 +228,7 @@ abstract class Currency extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/Currency/Currency.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/currency/currency.json", $this->getPublic(array()));
     }
 }
 ?>

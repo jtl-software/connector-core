@@ -136,7 +136,7 @@ abstract class MediaFileAttr extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/MediaFileAttr/MediaFileAttr.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/mediafileattr/mediafileattr.json", $this->getPublic(array()));
     }
 }
 ?>

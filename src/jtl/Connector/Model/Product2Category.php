@@ -90,7 +90,7 @@ abstract class Product2Category extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/Product2Category/Product2Category.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/product2category/product2category.json", $this->getPublic(array()));
     }
 }
 ?>

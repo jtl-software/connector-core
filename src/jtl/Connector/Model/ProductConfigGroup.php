@@ -90,7 +90,7 @@ abstract class ProductConfigGroup extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/ProductConfigGroup/ProductConfigGroup.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/productconfiggroup/productconfiggroup.json", $this->getPublic(array()));
     }
 }
 ?>

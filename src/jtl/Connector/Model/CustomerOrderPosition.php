@@ -527,7 +527,7 @@ abstract class CustomerOrderPosition extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/CustomerOrderPosition/CustomerOrderPosition.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/customerorderposition/customerorderposition.json", $this->getPublic(array()));
     }
 }
 ?>

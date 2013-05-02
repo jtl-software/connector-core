@@ -159,7 +159,7 @@ abstract class ProductSpecialPrice extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/ProductSpecialPrice/ProductSpecialPrice.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/productspecialprice/productspecialprice.json", $this->getPublic(array()));
     }
 }
 ?>

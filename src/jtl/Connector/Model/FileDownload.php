@@ -205,7 +205,7 @@ abstract class FileDownload extends Model
      */
     public function validate()
     {
-        Schema::validateModel(CONNECTOR_DIR . "schema/FileDownload/FileDownload.json", $this->getPublic(array()));
+        Schema::validateModel(CONNECTOR_DIR . "schema/filedownload/filedownload.json", $this->getPublic(array()));
     }
 }
 ?>
