@@ -1,0 +1,20 @@
+{
+    "title": "ProductWarehouseInfo Model",
+    "type": "object",
+    "properties": {
+        "productId": {
+            "type": "int"
+        },
+        "warehouseId": {
+            "type": "int"
+        },
+        "stockLevel": {
+            "type": "double"
+        },
+        "inflowDate": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

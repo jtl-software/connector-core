@@ -1,0 +1,53 @@
+{
+    "title": "ConfigItem Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "configGroupId": {
+            "type": "int"
+        },
+        "productId": {
+            "type": "int"
+        },
+        "type": {
+            "type": "int"
+        },
+        "isPreSelected": {
+            "type": "bool"
+        },
+        "isRecommended": {
+            "type": "bool"
+        },
+        "useProductName": {
+            "type": "bool"
+        },
+        "useProductPrice": {
+            "type": "bool"
+        },
+        "showDiscount": {
+            "type": "bool"
+        },
+        "showSurcharge": {
+            "type": "bool"
+        },
+        "ignoreMultiplier": {
+            "type": "bool"
+        },
+        "minQuantity": {
+            "type": "double"
+        },
+        "maxQuantity": {
+            "type": "double"
+        },
+        "initialQuantity": {
+            "type": "double"
+        },
+        "sort": {
+            "type": "int"
+        }
+    },
+    "required": [
+    ]
+}

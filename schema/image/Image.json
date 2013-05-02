@@ -1,0 +1,23 @@
+{
+    "title": "Image Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "relationType": {
+            "type": "string"
+        },
+        "foreignKey": {
+            "type": "int"
+        },
+        "filename": {
+            "type": "string"
+        },
+        "sort": {
+            "type": "int"
+        }
+    },
+    "required": [
+    ]
+}

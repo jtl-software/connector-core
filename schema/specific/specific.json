@@ -1,0 +1,23 @@
+{
+    "title": "Specific Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "sort": {
+            "type": "int"
+        },
+        "global": {
+            "type": "int"
+        },
+        "name": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

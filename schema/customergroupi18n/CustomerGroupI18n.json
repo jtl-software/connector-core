@@ -1,0 +1,17 @@
+{
+    "title": "CustomerGroupI18n Model",
+    "type": "object",
+    "properties": {
+        "languageIso": {
+            "type": "int"
+        },
+        "customerGroupId": {
+            "type": "int"
+        },
+        "name": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

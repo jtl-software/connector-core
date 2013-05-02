@@ -1,0 +1,17 @@
+{
+    "title": "TaxClass Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "name": {
+            "type": "string"
+        },
+        "default": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

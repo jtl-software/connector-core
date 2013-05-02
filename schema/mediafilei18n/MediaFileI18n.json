@@ -1,0 +1,20 @@
+{
+    "title": "MediaFileI18n Model",
+    "type": "object",
+    "properties": {
+        "mediaFileId": {
+            "type": "int"
+        },
+        "languageIso": {
+            "type": "int"
+        },
+        "name": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

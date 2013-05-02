@@ -1,0 +1,20 @@
+{
+    "title": "ProductAttrI18n Model",
+    "type": "object",
+    "properties": {
+        "languageIso": {
+            "type": "int"
+        },
+        "productAttrId": {
+            "type": "int"
+        },
+        "name": {
+            "type": "string"
+        },
+        "value": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

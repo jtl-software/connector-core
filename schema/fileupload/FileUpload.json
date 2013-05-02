@@ -1,0 +1,26 @@
+{
+    "title": "FileUpload Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "productId": {
+            "type": "int"
+        },
+        "name": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "fileType": {
+            "type": "string"
+        },
+        "required": {
+            "type": "int"
+        }
+    },
+    "required": [
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "title": "Category Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "parentCategoryId": {
+            "type": "int"
+        },
+        "sort": {
+            "type": "int"
+        }
+    },
+    "required": [
+    ]
+}

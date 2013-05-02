@@ -1,0 +1,47 @@
+{
+    "title": "ProductVariationValue Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "productVariationId": {
+            "type": "int"
+        },
+        "extraWeight": {
+            "type": "double"
+        },
+        "sku": {
+            "type": "string"
+        },
+        "sort": {
+            "type": "int"
+        },
+        "stockLevel": {
+            "type": "double"
+        },
+        "packagingUnitId": {
+            "type": "double"
+        },
+        "languageIso": {
+            "type": "int"
+        },
+        "productVariationValueId": {
+            "type": "int"
+        },
+        "name": {
+            "type": "string"
+        },
+        "customerGroupId": {
+            "type": "int"
+        },
+        "extraChargeNet": {
+            "type": "double"
+        },
+        "productVariationValueTargetId": {
+            "type": "int"
+        }
+    },
+    "required": [
+    ]
+}

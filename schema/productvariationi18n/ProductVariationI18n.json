@@ -1,0 +1,17 @@
+{
+    "title": "ProductVariationI18n Model",
+    "type": "object",
+    "properties": {
+        "languageIso": {
+            "type": "int"
+        },
+        "productVariationId": {
+            "type": "int"
+        },
+        "name": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

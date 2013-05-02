@@ -1,0 +1,92 @@
+{
+    "title": "CustomerOrder Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "basketId": {
+            "type": "int"
+        },
+        "customerId": {
+            "type": "int"
+        },
+        "shippingAddressId": {
+            "type": "int"
+        },
+        "billingAddressId": {
+            "type": "int"
+        },
+        "paymentMethodId": {
+            "type": "int"
+        },
+        "shippingMethodId": {
+            "type": "int"
+        },
+        "languageIso": {
+            "type": "int"
+        },
+        "currencyIso": {
+            "type": "int"
+        },
+        "paymentMethodType": {
+            "type": "int"
+        },
+        "credit": {
+            "type": "double"
+        },
+        "totalSum": {
+            "type": "double"
+        },
+        "session": {
+            "type": "string"
+        },
+        "shippingMethodName": {
+            "type": "string"
+        },
+        "paymentMethodName": {
+            "type": "string"
+        },
+        "orderNumber": {
+            "type": "string"
+        },
+        "shippingInfo": {
+            "type": "string"
+        },
+        "shippingDate": {
+            "type": "string"
+        },
+        "paymentDate": {
+            "type": "string"
+        },
+        "ratingNotificationDate": {
+            "type": "string"
+        },
+        "tracking": {
+            "type": "string"
+        },
+        "note": {
+            "type": "string"
+        },
+        "logistic": {
+            "type": "string"
+        },
+        "trackingURL": {
+            "type": "string"
+        },
+        "ip": {
+            "type": "string"
+        },
+        "isFetched": {
+            "type": "string"
+        },
+        "status": {
+            "type": "string"
+        },
+        "created": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "title": "CategoryVisibility Model",
+    "type": "object",
+    "properties": {
+        "customerGroupId": {
+            "type": "int"
+        },
+        "categoryId": {
+            "type": "int"
+        }
+    },
+    "required": [
+    ]
+}

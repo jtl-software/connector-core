@@ -1,0 +1,107 @@
+{
+    "title": "Customer Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "customerGroupId": {
+            "type": "int"
+        },
+        "languageIso": {
+            "type": "int"
+        },
+        "customerNumber": {
+            "type": "string"
+        },
+        "password": {
+            "type": "string"
+        },
+        "salutation": {
+            "type": "string"
+        },
+        "title": {
+            "type": "string"
+        },
+        "firstName": {
+            "type": "string"
+        },
+        "lastName": {
+            "type": "string"
+        },
+        "company": {
+            "type": "string"
+        },
+        "street": {
+            "type": "string"
+        },
+        "streetNumber": {
+            "type": "string"
+        },
+        "extraAddressLine": {
+            "type": "string"
+        },
+        "zipCode": {
+            "type": "string"
+        },
+        "city": {
+            "type": "string"
+        },
+        "state": {
+            "type": "string"
+        },
+        "country": {
+            "type": "string"
+        },
+        "phone": {
+            "type": "string"
+        },
+        "mobile": {
+            "type": "string"
+        },
+        "fax": {
+            "type": "string"
+        },
+        "eMail": {
+            "type": "string"
+        },
+        "vatNumber": {
+            "type": "string"
+        },
+        "www": {
+            "type": "string"
+        },
+        "accountCredit": {
+            "type": "double"
+        },
+        "newsletter": {
+            "type": "string"
+        },
+        "birthday": {
+            "type": "string"
+        },
+        "discount": {
+            "type": "double"
+        },
+        "origin": {
+            "type": "string"
+        },
+        "created": {
+            "type": "string"
+        },
+        "modified": {
+            "type": "string"
+        },
+        "isActive": {
+            "type": "string"
+        },
+        "isFetched": {
+            "type": "string"
+        },
+        "hasCustomerAccount": {
+            "type": "int"
+        }
+    },
+    "required": [
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "title": "DeliveryNotePos Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "orderPosition": {
+            "type": "int"
+        },
+        "quantity": {
+            "type": "double"
+        },
+        "stock": {
+            "type": "int"
+        },
+        "serialNumber": {
+            "type": "string"
+        },
+        "batchNumber": {
+            "type": "string"
+        },
+        "bestBefore": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

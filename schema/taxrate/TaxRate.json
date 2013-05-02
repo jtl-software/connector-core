@@ -1,0 +1,23 @@
+{
+    "title": "TaxRate Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "taxZoneId": {
+            "type": "int"
+        },
+        "taxClassId": {
+            "type": "int"
+        },
+        "taxRate": {
+            "type": "double"
+        },
+        "priority": {
+            "type": "int"
+        }
+    },
+    "required": [
+    ]
+}

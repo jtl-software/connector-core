@@ -1,0 +1,26 @@
+{
+    "title": "ManufacturerI18n Model",
+    "type": "object",
+    "properties": {
+        "manufacturerId": {
+            "type": "int"
+        },
+        "languageIso": {
+            "type": "int"
+        },
+        "description": {
+            "type": "string"
+        },
+        "metaDescription": {
+            "type": "string"
+        },
+        "metaKeywords": {
+            "type": "string"
+        },
+        "titleTag": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

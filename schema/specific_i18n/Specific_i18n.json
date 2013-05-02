@@ -1,0 +1,17 @@
+{
+    "title": "Specific_i18n Model",
+    "type": "object",
+    "properties": {
+        "languageIso": {
+            "type": "int"
+        },
+        "specificId": {
+            "type": "int"
+        },
+        "name": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

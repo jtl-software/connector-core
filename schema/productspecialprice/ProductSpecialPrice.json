@@ -1,0 +1,26 @@
+{
+    "title": "ProductSpecialPrice Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "productId": {
+            "type": "int"
+        },
+        "isActive": {
+            "type": "string"
+        },
+        "activeFrom": {
+            "type": "string"
+        },
+        "activeUntil": {
+            "type": "string"
+        },
+        "quantityLimit": {
+            "type": "int"
+        }
+    },
+    "required": [
+    ]
+}

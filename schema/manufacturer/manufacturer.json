@@ -1,0 +1,23 @@
+{
+    "title": "Manufacturer Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "name": {
+            "type": "string"
+        },
+        "www": {
+            "type": "string"
+        },
+        "sort": {
+            "type": "int"
+        },
+        "url": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "title": "ProductVarCombination Model",
+    "type": "object",
+    "properties": {
+        "productId": {
+            "type": "int"
+        },
+        "productVariationId": {
+            "type": "int"
+        },
+        "productVariationValueId": {
+            "type": "int"
+        }
+    },
+    "required": [
+    ]
+}

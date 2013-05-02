@@ -1,0 +1,23 @@
+{
+    "title": "CategoryI18n Model",
+    "type": "object",
+    "properties": {
+        "languageIso": {
+            "type": "int"
+        },
+        "categoryId": {
+            "type": "int"
+        },
+        "name": {
+            "type": "string"
+        },
+        "url": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

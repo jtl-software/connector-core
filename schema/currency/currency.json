@@ -1,0 +1,32 @@
+{
+    "title": "Currency Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "name": {
+            "type": "string"
+        },
+        "iso": {
+            "type": "string"
+        },
+        "nameHtml": {
+            "type": "string"
+        },
+        "factor": {
+            "type": "double"
+        },
+        "default": {
+            "type": "string"
+        },
+        "currencySignBeforeValue": {
+            "type": "string"
+        },
+        "delimiterCent": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

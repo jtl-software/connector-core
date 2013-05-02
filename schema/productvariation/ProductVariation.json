@@ -1,0 +1,26 @@
+{
+    "title": "ProductVariation Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "productId": {
+            "type": "int"
+        },
+        "name": {
+            "type": "string"
+        },
+        "isSelectable": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string"
+        },
+        "sort": {
+            "type": "int"
+        }
+    },
+    "required": [
+    ]
+}

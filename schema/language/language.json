@@ -1,0 +1,29 @@
+{
+    "title": "Language Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "nameEnglish": {
+            "type": "string"
+        },
+        "nameGerman": {
+            "type": "string"
+        },
+        "languageIso": {
+            "type": "string"
+        },
+        "isDefault": {
+            "type": "string"
+        },
+        "isConnectorDefault": {
+            "type": "string"
+        },
+        "isWawiDefault": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

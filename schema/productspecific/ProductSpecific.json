@@ -1,0 +1,17 @@
+{
+    "title": "ProductSpecific Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "specificValueId": {
+            "type": "int"
+        },
+        "productId": {
+            "type": "int"
+        }
+    },
+    "required": [
+    ]
+}

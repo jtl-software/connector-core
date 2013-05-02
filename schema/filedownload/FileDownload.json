@@ -1,0 +1,32 @@
+{
+    "title": "FileDownload Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "int"
+        },
+        "identificationString": {
+            "type": "string"
+        },
+        "path": {
+            "type": "string"
+        },
+        "previewPath": {
+            "type": "string"
+        },
+        "maxDownloads": {
+            "type": "int"
+        },
+        "maxDays": {
+            "type": "int"
+        },
+        "sort": {
+            "type": "int"
+        },
+        "created": {
+            "type": "string"
+        }
+    },
+    "required": [
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "title": "ProductVisibility Model",
+    "type": "object",
+    "properties": {
+        "customerGroupId": {
+            "type": "int"
+        },
+        "productId": {
+            "type": "int"
+        }
+    },
+    "required": [
+    ]
+}
