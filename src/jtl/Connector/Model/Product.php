@@ -7,8 +7,6 @@
 namespace jtl\Connector\Model;
 
 use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\ValidationException;
-use \jtl\Core\Exception\SchemaException;
 use \jtl\Core\Validator\Schema;
 
 /**
@@ -1150,14 +1148,7 @@ abstract class Product extends Model
      */
     public function validate()
     {
-        try {
-            if (file_exists(CONNECTOR_DIR . "schema/product/product.json")) {
-                Schema::validateAction(CONNECTOR_DIR . "schema/product/product.json", $this->getPublic(array()));
-            }
-        }
-        catch (ValidationException $exc) {
-            throw new SchemaException($exc->getMessage());
-        }
+        return Schema::validateModel(CONNECTOR_DIR . "schema/product/product.json", $this->getPublic(array()));
     }
 }
 ?>
