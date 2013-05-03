@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerGroup Model
  * @access public
  */
-abstract class CustomerGroup extends Model
+abstract class CustomerGroup extends DataModel
 {
     /**
      * @var int
@@ -62,7 +61,6 @@ abstract class CustomerGroup extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\CustomerGroup
@@ -80,7 +78,6 @@ abstract class CustomerGroup extends Model
     {
         return $this->_name;
     }
-    
     /**
      * @param double $discount
      * @return \jtl\Connector\Model\CustomerGroup
@@ -98,7 +95,6 @@ abstract class CustomerGroup extends Model
     {
         return $this->_discount;
     }
-    
     /**
      * @param string $default
      * @return \jtl\Connector\Model\CustomerGroup
@@ -116,7 +112,6 @@ abstract class CustomerGroup extends Model
     {
         return $this->_default;
     }
-    
     /**
      * @param string $shopLogin
      * @return \jtl\Connector\Model\CustomerGroup
@@ -134,7 +129,6 @@ abstract class CustomerGroup extends Model
     {
         return $this->_shopLogin;
     }
-    
     /**
      * @param int $shopNetPrice
      * @return \jtl\Connector\Model\CustomerGroup
@@ -151,15 +145,6 @@ abstract class CustomerGroup extends Model
     public function getShopNetPrice()
     {
         return $this->_shopNetPrice;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/customergroup/customergroup.json", $this->getPublic(array()));
     }
 }
 ?>

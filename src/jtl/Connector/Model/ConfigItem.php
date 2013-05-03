@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * ConfigItem Model
  * @access public
  */
-abstract class ConfigItem extends Model
+abstract class ConfigItem extends DataModel
 {
     /**
      * @var int
@@ -107,7 +106,6 @@ abstract class ConfigItem extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $configGroupId
      * @return \jtl\Connector\Model\ConfigItem
@@ -125,7 +123,6 @@ abstract class ConfigItem extends Model
     {
         return $this->_configGroupId;
     }
-    
     /**
      * @param int $productId
      * @return \jtl\Connector\Model\ConfigItem
@@ -143,7 +140,6 @@ abstract class ConfigItem extends Model
     {
         return $this->_productId;
     }
-    
     /**
      * @param int $type
      * @return \jtl\Connector\Model\ConfigItem
@@ -161,7 +157,6 @@ abstract class ConfigItem extends Model
     {
         return $this->_type;
     }
-    
     /**
      * @param bool $isPreSelected
      * @return \jtl\Connector\Model\ConfigItem
@@ -179,7 +174,6 @@ abstract class ConfigItem extends Model
     {
         return $this->_isPreSelected;
     }
-    
     /**
      * @param bool $isRecommended
      * @return \jtl\Connector\Model\ConfigItem
@@ -197,7 +191,6 @@ abstract class ConfigItem extends Model
     {
         return $this->_isRecommended;
     }
-    
     /**
      * @param bool $useProductName
      * @return \jtl\Connector\Model\ConfigItem
@@ -215,7 +208,6 @@ abstract class ConfigItem extends Model
     {
         return $this->_useProductName;
     }
-    
     /**
      * @param bool $useProductPrice
      * @return \jtl\Connector\Model\ConfigItem
@@ -233,7 +225,6 @@ abstract class ConfigItem extends Model
     {
         return $this->_useProductPrice;
     }
-    
     /**
      * @param bool $showDiscount
      * @return \jtl\Connector\Model\ConfigItem
@@ -251,7 +242,6 @@ abstract class ConfigItem extends Model
     {
         return $this->_showDiscount;
     }
-    
     /**
      * @param bool $showSurcharge
      * @return \jtl\Connector\Model\ConfigItem
@@ -269,7 +259,6 @@ abstract class ConfigItem extends Model
     {
         return $this->_showSurcharge;
     }
-    
     /**
      * @param bool $ignoreMultiplier
      * @return \jtl\Connector\Model\ConfigItem
@@ -287,7 +276,6 @@ abstract class ConfigItem extends Model
     {
         return $this->_ignoreMultiplier;
     }
-    
     /**
      * @param double $minQuantity
      * @return \jtl\Connector\Model\ConfigItem
@@ -305,7 +293,6 @@ abstract class ConfigItem extends Model
     {
         return $this->_minQuantity;
     }
-    
     /**
      * @param double $maxQuantity
      * @return \jtl\Connector\Model\ConfigItem
@@ -323,7 +310,6 @@ abstract class ConfigItem extends Model
     {
         return $this->_maxQuantity;
     }
-    
     /**
      * @param double $initialQuantity
      * @return \jtl\Connector\Model\ConfigItem
@@ -341,7 +327,6 @@ abstract class ConfigItem extends Model
     {
         return $this->_initialQuantity;
     }
-    
     /**
      * @param int $sort
      * @return \jtl\Connector\Model\ConfigItem
@@ -358,15 +343,6 @@ abstract class ConfigItem extends Model
     public function getSort()
     {
         return $this->_sort;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/configitem/configitem.json", $this->getPublic(array()));
     }
 }
 ?>

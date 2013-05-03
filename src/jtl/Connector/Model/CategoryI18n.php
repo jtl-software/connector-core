@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * CategoryI18n Model
  * @access public
  */
-abstract class CategoryI18n extends Model
+abstract class CategoryI18n extends DataModel
 {
     /**
      * @var string
@@ -57,7 +56,6 @@ abstract class CategoryI18n extends Model
     {
         return $this->_languageIso;
     }
-    
     /**
      * @param int $categoryId
      * @return \jtl\Connector\Model\CategoryI18n
@@ -75,7 +73,6 @@ abstract class CategoryI18n extends Model
     {
         return $this->_categoryId;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\CategoryI18n
@@ -93,7 +90,6 @@ abstract class CategoryI18n extends Model
     {
         return $this->_name;
     }
-    
     /**
      * @param string $url
      * @return \jtl\Connector\Model\CategoryI18n
@@ -111,7 +107,6 @@ abstract class CategoryI18n extends Model
     {
         return $this->_url;
     }
-    
     /**
      * @param string $description
      * @return \jtl\Connector\Model\CategoryI18n
@@ -128,15 +123,6 @@ abstract class CategoryI18n extends Model
     public function getDescription()
     {
         return $this->_description;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/categoryi18n/categoryi18n.json", $this->getPublic(array()));
     }
 }
 ?>

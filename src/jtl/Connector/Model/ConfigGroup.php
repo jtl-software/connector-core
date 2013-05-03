@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * ConfigGroup Model
  * @access public
  */
-abstract class ConfigGroup extends Model
+abstract class ConfigGroup extends DataModel
 {
     /**
      * @var int
@@ -67,7 +66,6 @@ abstract class ConfigGroup extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param string $imagePath
      * @return \jtl\Connector\Model\ConfigGroup
@@ -85,7 +83,6 @@ abstract class ConfigGroup extends Model
     {
         return $this->_imagePath;
     }
-    
     /**
      * @param int $minimumSelection
      * @return \jtl\Connector\Model\ConfigGroup
@@ -103,7 +100,6 @@ abstract class ConfigGroup extends Model
     {
         return $this->_minimumSelection;
     }
-    
     /**
      * @param int $maximumSelection
      * @return \jtl\Connector\Model\ConfigGroup
@@ -121,7 +117,6 @@ abstract class ConfigGroup extends Model
     {
         return $this->_maximumSelection;
     }
-    
     /**
      * @param int $type
      * @return \jtl\Connector\Model\ConfigGroup
@@ -139,7 +134,6 @@ abstract class ConfigGroup extends Model
     {
         return $this->_type;
     }
-    
     /**
      * @param int $sort
      * @return \jtl\Connector\Model\ConfigGroup
@@ -157,7 +151,6 @@ abstract class ConfigGroup extends Model
     {
         return $this->_sort;
     }
-    
     /**
      * @param string $comment
      * @return \jtl\Connector\Model\ConfigGroup
@@ -174,15 +167,6 @@ abstract class ConfigGroup extends Model
     public function getComment()
     {
         return $this->_comment;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/configgroup/configgroup.json", $this->getPublic(array()));
     }
 }
 ?>

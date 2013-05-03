@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * MediaFileAttr Model
  * @access public
  */
-abstract class MediaFileAttr extends Model
+abstract class MediaFileAttr extends DataModel
 {
     /**
      * @var int
@@ -57,7 +56,6 @@ abstract class MediaFileAttr extends Model
     {
         return $this->_mediaFileAttr;
     }
-    
     /**
      * @param int $mediaFileId
      * @return \jtl\Connector\Model\MediaFileAttr
@@ -75,7 +73,6 @@ abstract class MediaFileAttr extends Model
     {
         return $this->_mediaFileId;
     }
-    
     /**
      * @param int $languageISO
      * @return \jtl\Connector\Model\MediaFileAttr
@@ -93,7 +90,6 @@ abstract class MediaFileAttr extends Model
     {
         return $this->_languageISO;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\MediaFileAttr
@@ -111,7 +107,6 @@ abstract class MediaFileAttr extends Model
     {
         return $this->_name;
     }
-    
     /**
      * @param string $value
      * @return \jtl\Connector\Model\MediaFileAttr
@@ -128,15 +123,6 @@ abstract class MediaFileAttr extends Model
     public function getValue()
     {
         return $this->_value;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/mediafileattr/mediafileattr.json", $this->getPublic(array()));
     }
 }
 ?>

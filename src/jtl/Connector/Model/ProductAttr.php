@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * ProductAttr Model
  * @access public
  */
-abstract class ProductAttr extends Model
+abstract class ProductAttr extends DataModel
 {
     /**
      * @var int
@@ -52,7 +51,6 @@ abstract class ProductAttr extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $productId
      * @return \jtl\Connector\Model\ProductAttr
@@ -70,7 +68,6 @@ abstract class ProductAttr extends Model
     {
         return $this->_productId;
     }
-    
     /**
      * @param int $sort
      * @return \jtl\Connector\Model\ProductAttr
@@ -88,7 +85,6 @@ abstract class ProductAttr extends Model
     {
         return $this->_sort;
     }
-    
     /**
      * @param double $isVisible
      * @return \jtl\Connector\Model\ProductAttr
@@ -105,15 +101,6 @@ abstract class ProductAttr extends Model
     public function getIsVisible()
     {
         return $this->_isVisible;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/productattr/productattr.json", $this->getPublic(array()));
     }
 }
 ?>

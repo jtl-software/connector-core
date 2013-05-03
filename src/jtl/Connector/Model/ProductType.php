@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * ProductType Model
  * @access public
  */
-abstract class ProductType extends Model
+abstract class ProductType extends DataModel
 {
     /**
      * @var int
@@ -42,7 +41,6 @@ abstract class ProductType extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\ProductType
@@ -59,15 +57,6 @@ abstract class ProductType extends Model
     public function getName()
     {
         return $this->_name;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/producttype/producttype.json", $this->getPublic(array()));
     }
 }
 ?>

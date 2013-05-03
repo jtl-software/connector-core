@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * TaxZone Model
  * @access public
  */
-abstract class TaxZone extends Model
+abstract class TaxZone extends DataModel
 {
     /**
      * @var int
@@ -42,7 +41,6 @@ abstract class TaxZone extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\TaxZone
@@ -59,15 +57,6 @@ abstract class TaxZone extends Model
     public function getName()
     {
         return $this->_name;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/taxzone/taxzone.json", $this->getPublic(array()));
     }
 }
 ?>

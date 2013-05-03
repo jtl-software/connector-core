@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * Language Model
  * @access public
  */
-abstract class Language extends Model
+abstract class Language extends DataModel
 {
     /**
      * @var int
@@ -67,7 +66,6 @@ abstract class Language extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param string $nameEnglish
      * @return \jtl\Connector\Model\Language
@@ -85,7 +83,6 @@ abstract class Language extends Model
     {
         return $this->_nameEnglish;
     }
-    
     /**
      * @param string $nameGerman
      * @return \jtl\Connector\Model\Language
@@ -103,7 +100,6 @@ abstract class Language extends Model
     {
         return $this->_nameGerman;
     }
-    
     /**
      * @param string $languageIso
      * @return \jtl\Connector\Model\Language
@@ -121,7 +117,6 @@ abstract class Language extends Model
     {
         return $this->_languageIso;
     }
-    
     /**
      * @param string $isDefault
      * @return \jtl\Connector\Model\Language
@@ -139,7 +134,6 @@ abstract class Language extends Model
     {
         return $this->_isDefault;
     }
-    
     /**
      * @param string $isConnectorDefault
      * @return \jtl\Connector\Model\Language
@@ -157,7 +151,6 @@ abstract class Language extends Model
     {
         return $this->_isConnectorDefault;
     }
-    
     /**
      * @param string $isWawiDefault
      * @return \jtl\Connector\Model\Language
@@ -174,15 +167,6 @@ abstract class Language extends Model
     public function getIsWawiDefault()
     {
         return $this->_isWawiDefault;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/language/language.json", $this->getPublic(array()));
     }
 }
 ?>

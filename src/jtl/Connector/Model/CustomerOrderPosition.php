@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerOrderPosition Model
  * @access public
  */
-abstract class CustomerOrderPosition extends Model
+abstract class CustomerOrderPosition extends DataModel
 {
     /**
      * @var int
@@ -142,7 +141,6 @@ abstract class CustomerOrderPosition extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $externalOrderPosition
      * @return \jtl\Connector\Model\CustomerOrderPosition
@@ -160,7 +158,6 @@ abstract class CustomerOrderPosition extends Model
     {
         return $this->_externalOrderPosition;
     }
-    
     /**
      * @param int $basketId
      * @return \jtl\Connector\Model\CustomerOrderPosition
@@ -178,7 +175,6 @@ abstract class CustomerOrderPosition extends Model
     {
         return $this->_basketId;
     }
-    
     /**
      * @param int $productId
      * @return \jtl\Connector\Model\CustomerOrderPosition
@@ -196,7 +192,6 @@ abstract class CustomerOrderPosition extends Model
     {
         return $this->_productId;
     }
-    
     /**
      * @param int $shippingClassId
      * @return \jtl\Connector\Model\CustomerOrderPosition
@@ -214,7 +209,6 @@ abstract class CustomerOrderPosition extends Model
     {
         return $this->_shippingClassId;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\CustomerOrderPosition
@@ -232,7 +226,6 @@ abstract class CustomerOrderPosition extends Model
     {
         return $this->_name;
     }
-    
     /**
      * @param string $sku
      * @return \jtl\Connector\Model\CustomerOrderPosition
@@ -250,7 +243,6 @@ abstract class CustomerOrderPosition extends Model
     {
         return $this->_sku;
     }
-    
     /**
      * @param double $singlePrice
      * @return \jtl\Connector\Model\CustomerOrderPosition
@@ -268,7 +260,6 @@ abstract class CustomerOrderPosition extends Model
     {
         return $this->_singlePrice;
     }
-    
     /**
      * @param double $price
      * @return \jtl\Connector\Model\CustomerOrderPosition
@@ -286,7 +277,6 @@ abstract class CustomerOrderPosition extends Model
     {
         return $this->_price;
     }
-    
     /**
      * @param double $vat
      * @return \jtl\Connector\Model\CustomerOrderPosition
@@ -304,7 +294,6 @@ abstract class CustomerOrderPosition extends Model
     {
         return $this->_vat;
     }
-    
     /**
      * @param int $quantity
      * @return \jtl\Connector\Model\CustomerOrderPosition
@@ -322,7 +311,6 @@ abstract class CustomerOrderPosition extends Model
     {
         return $this->_quantity;
     }
-    
     /**
      * @param int $type
      * @return \jtl\Connector\Model\CustomerOrderPosition
@@ -340,7 +328,6 @@ abstract class CustomerOrderPosition extends Model
     {
         return $this->_type;
     }
-    
     /**
      * @param string $unique
      * @return \jtl\Connector\Model\CustomerOrderPosition
@@ -358,7 +345,6 @@ abstract class CustomerOrderPosition extends Model
     {
         return $this->_unique;
     }
-    
     /**
      * @param int $configItemId
      * @return \jtl\Connector\Model\CustomerOrderPosition
@@ -376,7 +362,6 @@ abstract class CustomerOrderPosition extends Model
     {
         return $this->_configItemId;
     }
-    
     /**
      * @param int $id
      * @return \jtl\Connector\Model\CustomerOrderPosition
@@ -394,7 +379,6 @@ abstract class CustomerOrderPosition extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $customerOrderPositionId
      * @return \jtl\Connector\Model\CustomerOrderPosition
@@ -412,7 +396,6 @@ abstract class CustomerOrderPosition extends Model
     {
         return $this->_customerOrderPositionId;
     }
-    
     /**
      * @param int $productVariationId
      * @return \jtl\Connector\Model\CustomerOrderPosition
@@ -430,7 +413,6 @@ abstract class CustomerOrderPosition extends Model
     {
         return $this->_productVariationId;
     }
-    
     /**
      * @param int $productVariationValueId
      * @return \jtl\Connector\Model\CustomerOrderPosition
@@ -448,7 +430,6 @@ abstract class CustomerOrderPosition extends Model
     {
         return $this->_productVariationValueId;
     }
-    
     /**
      * @param string $productVariationName
      * @return \jtl\Connector\Model\CustomerOrderPosition
@@ -466,7 +447,6 @@ abstract class CustomerOrderPosition extends Model
     {
         return $this->_productVariationName;
     }
-    
     /**
      * @param string $productVariationValueName
      * @return \jtl\Connector\Model\CustomerOrderPosition
@@ -484,7 +464,6 @@ abstract class CustomerOrderPosition extends Model
     {
         return $this->_productVariationValueName;
     }
-    
     /**
      * @param string $freeField
      * @return \jtl\Connector\Model\CustomerOrderPosition
@@ -502,7 +481,6 @@ abstract class CustomerOrderPosition extends Model
     {
         return $this->_freeField;
     }
-    
     /**
      * @param double $surcharge
      * @return \jtl\Connector\Model\CustomerOrderPosition
@@ -519,15 +497,6 @@ abstract class CustomerOrderPosition extends Model
     public function getSurcharge()
     {
         return $this->_surcharge;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/customerorderposition/customerorderposition.json", $this->getPublic(array()));
     }
 }
 ?>

@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerOrderShippingAddress Model
  * @access public
  */
-abstract class CustomerOrderShippingAddress extends Model
+abstract class CustomerOrderShippingAddress extends DataModel
 {
     /**
      * @var int
@@ -127,7 +126,6 @@ abstract class CustomerOrderShippingAddress extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $customerId
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
@@ -145,7 +143,6 @@ abstract class CustomerOrderShippingAddress extends Model
     {
         return $this->_customerId;
     }
-    
     /**
      * @param string $salutation
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
@@ -163,7 +160,6 @@ abstract class CustomerOrderShippingAddress extends Model
     {
         return $this->_salutation;
     }
-    
     /**
      * @param string $firstName
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
@@ -181,7 +177,6 @@ abstract class CustomerOrderShippingAddress extends Model
     {
         return $this->_firstName;
     }
-    
     /**
      * @param string $lastName
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
@@ -199,7 +194,6 @@ abstract class CustomerOrderShippingAddress extends Model
     {
         return $this->_lastName;
     }
-    
     /**
      * @param string $title
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
@@ -217,7 +211,6 @@ abstract class CustomerOrderShippingAddress extends Model
     {
         return $this->_title;
     }
-    
     /**
      * @param string $company
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
@@ -235,7 +228,6 @@ abstract class CustomerOrderShippingAddress extends Model
     {
         return $this->_company;
     }
-    
     /**
      * @param string $extraAddressLine
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
@@ -253,7 +245,6 @@ abstract class CustomerOrderShippingAddress extends Model
     {
         return $this->_extraAddressLine;
     }
-    
     /**
      * @param string $street
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
@@ -271,7 +262,6 @@ abstract class CustomerOrderShippingAddress extends Model
     {
         return $this->_street;
     }
-    
     /**
      * @param string $streetNumber
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
@@ -289,7 +279,6 @@ abstract class CustomerOrderShippingAddress extends Model
     {
         return $this->_streetNumber;
     }
-    
     /**
      * @param string $extraAddressLine
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
@@ -307,7 +296,6 @@ abstract class CustomerOrderShippingAddress extends Model
     {
         return $this->_extraAddressLine;
     }
-    
     /**
      * @param string $zipCode
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
@@ -325,7 +313,6 @@ abstract class CustomerOrderShippingAddress extends Model
     {
         return $this->_zipCode;
     }
-    
     /**
      * @param string $city
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
@@ -343,7 +330,6 @@ abstract class CustomerOrderShippingAddress extends Model
     {
         return $this->_city;
     }
-    
     /**
      * @param string $state
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
@@ -361,7 +347,6 @@ abstract class CustomerOrderShippingAddress extends Model
     {
         return $this->_state;
     }
-    
     /**
      * @param string $country
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
@@ -379,7 +364,6 @@ abstract class CustomerOrderShippingAddress extends Model
     {
         return $this->_country;
     }
-    
     /**
      * @param string $phone
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
@@ -397,7 +381,6 @@ abstract class CustomerOrderShippingAddress extends Model
     {
         return $this->_phone;
     }
-    
     /**
      * @param string $mobile
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
@@ -415,7 +398,6 @@ abstract class CustomerOrderShippingAddress extends Model
     {
         return $this->_mobile;
     }
-    
     /**
      * @param string $fax
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
@@ -433,7 +415,6 @@ abstract class CustomerOrderShippingAddress extends Model
     {
         return $this->_fax;
     }
-    
     /**
      * @param string $eMail
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
@@ -450,15 +431,6 @@ abstract class CustomerOrderShippingAddress extends Model
     public function getEMail()
     {
         return $this->_eMail;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/customerordershippingaddress/customerordershippingaddress.json", $this->getPublic(array()));
     }
 }
 ?>

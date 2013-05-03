@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * DeliveryNote Model
  * @access public
  */
-abstract class DeliveryNote extends Model
+abstract class DeliveryNote extends DataModel
 {
     /**
      * @var int
@@ -62,7 +61,6 @@ abstract class DeliveryNote extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $customerOrderId
      * @return \jtl\Connector\Model\DeliveryNote
@@ -80,7 +78,6 @@ abstract class DeliveryNote extends Model
     {
         return $this->_customerOrderId;
     }
-    
     /**
      * @param string $note
      * @return \jtl\Connector\Model\DeliveryNote
@@ -98,7 +95,6 @@ abstract class DeliveryNote extends Model
     {
         return $this->_note;
     }
-    
     /**
      * @param string $created
      * @return \jtl\Connector\Model\DeliveryNote
@@ -116,7 +112,6 @@ abstract class DeliveryNote extends Model
     {
         return $this->_created;
     }
-    
     /**
      * @param int $fulfillment
      * @return \jtl\Connector\Model\DeliveryNote
@@ -134,7 +129,6 @@ abstract class DeliveryNote extends Model
     {
         return $this->_fulfillment;
     }
-    
     /**
      * @param int $status
      * @return \jtl\Connector\Model\DeliveryNote
@@ -151,15 +145,6 @@ abstract class DeliveryNote extends Model
     public function getStatus()
     {
         return $this->_status;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/deliverynote/deliverynote.json", $this->getPublic(array()));
     }
 }
 ?>

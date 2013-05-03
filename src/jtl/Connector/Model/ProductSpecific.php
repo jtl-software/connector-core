@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * ProductSpecific Model
  * @access public
  */
-abstract class ProductSpecific extends Model
+abstract class ProductSpecific extends DataModel
 {
     /**
      * @var int
@@ -47,7 +46,6 @@ abstract class ProductSpecific extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $specificValueId
      * @return \jtl\Connector\Model\ProductSpecific
@@ -65,7 +63,6 @@ abstract class ProductSpecific extends Model
     {
         return $this->_specificValueId;
     }
-    
     /**
      * @param int $productId
      * @return \jtl\Connector\Model\ProductSpecific
@@ -82,15 +79,6 @@ abstract class ProductSpecific extends Model
     public function getProductId()
     {
         return $this->_productId;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/productspecific/productspecific.json", $this->getPublic(array()));
     }
 }
 ?>

@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * SetArticle Model
  * @access public
  */
-abstract class SetArticle extends Model
+abstract class SetArticle extends DataModel
 {
     /**
      * @var int
@@ -47,7 +46,6 @@ abstract class SetArticle extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $productId
      * @return \jtl\Connector\Model\SetArticle
@@ -65,7 +63,6 @@ abstract class SetArticle extends Model
     {
         return $this->_productId;
     }
-    
     /**
      * @param double $quantity
      * @return \jtl\Connector\Model\SetArticle
@@ -82,15 +79,6 @@ abstract class SetArticle extends Model
     public function getQuantity()
     {
         return $this->_quantity;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/setarticle/setarticle.json", $this->getPublic(array()));
     }
 }
 ?>

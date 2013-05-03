@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * ProductI18n Model
  * @access public
  */
-abstract class ProductI18n extends Model
+abstract class ProductI18n extends DataModel
 {
     /**
      * @var int
@@ -62,7 +61,6 @@ abstract class ProductI18n extends Model
     {
         return $this->_languageIso;
     }
-    
     /**
      * @param int $productId
      * @return \jtl\Connector\Model\ProductI18n
@@ -80,7 +78,6 @@ abstract class ProductI18n extends Model
     {
         return $this->_productId;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\ProductI18n
@@ -98,7 +95,6 @@ abstract class ProductI18n extends Model
     {
         return $this->_name;
     }
-    
     /**
      * @param string $url
      * @return \jtl\Connector\Model\ProductI18n
@@ -116,7 +112,6 @@ abstract class ProductI18n extends Model
     {
         return $this->_url;
     }
-    
     /**
      * @param string $description
      * @return \jtl\Connector\Model\ProductI18n
@@ -134,7 +129,6 @@ abstract class ProductI18n extends Model
     {
         return $this->_description;
     }
-    
     /**
      * @param string $shortDescription
      * @return \jtl\Connector\Model\ProductI18n
@@ -151,15 +145,6 @@ abstract class ProductI18n extends Model
     public function getShortDescription()
     {
         return $this->_shortDescription;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/producti18n/producti18n.json", $this->getPublic(array()));
     }
 }
 ?>

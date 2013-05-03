@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * FileUpload Model
  * @access public
  */
-abstract class FileUpload extends Model
+abstract class FileUpload extends DataModel
 {
     /**
      * @var int
@@ -62,7 +61,6 @@ abstract class FileUpload extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $productId
      * @return \jtl\Connector\Model\FileUpload
@@ -80,7 +78,6 @@ abstract class FileUpload extends Model
     {
         return $this->_productId;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\FileUpload
@@ -98,7 +95,6 @@ abstract class FileUpload extends Model
     {
         return $this->_name;
     }
-    
     /**
      * @param string $description
      * @return \jtl\Connector\Model\FileUpload
@@ -116,7 +112,6 @@ abstract class FileUpload extends Model
     {
         return $this->_description;
     }
-    
     /**
      * @param string $fileType
      * @return \jtl\Connector\Model\FileUpload
@@ -134,7 +129,6 @@ abstract class FileUpload extends Model
     {
         return $this->_fileType;
     }
-    
     /**
      * @param int $required
      * @return \jtl\Connector\Model\FileUpload
@@ -151,15 +145,6 @@ abstract class FileUpload extends Model
     public function getRequired()
     {
         return $this->_required;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/fileupload/fileupload.json", $this->getPublic(array()));
     }
 }
 ?>

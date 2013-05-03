@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * CrossSellingGroup Model
  * @access public
  */
-abstract class CrossSellingGroup extends Model
+abstract class CrossSellingGroup extends DataModel
 {
     /**
      * @var int
@@ -52,7 +51,6 @@ abstract class CrossSellingGroup extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $languageIso
      * @return \jtl\Connector\Model\CrossSellingGroup
@@ -70,7 +68,6 @@ abstract class CrossSellingGroup extends Model
     {
         return $this->_languageIso;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\CrossSellingGroup
@@ -88,7 +85,6 @@ abstract class CrossSellingGroup extends Model
     {
         return $this->_name;
     }
-    
     /**
      * @param string $description
      * @return \jtl\Connector\Model\CrossSellingGroup
@@ -105,15 +101,6 @@ abstract class CrossSellingGroup extends Model
     public function getDescription()
     {
         return $this->_description;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/crosssellinggroup/crosssellinggroup.json", $this->getPublic(array()));
     }
 }
 ?>

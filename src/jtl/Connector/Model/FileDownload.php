@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * FileDownload Model
  * @access public
  */
-abstract class FileDownload extends Model
+abstract class FileDownload extends DataModel
 {
     /**
      * @var int
@@ -72,7 +71,6 @@ abstract class FileDownload extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param string $identificationString
      * @return \jtl\Connector\Model\FileDownload
@@ -90,7 +88,6 @@ abstract class FileDownload extends Model
     {
         return $this->_identificationString;
     }
-    
     /**
      * @param string $path
      * @return \jtl\Connector\Model\FileDownload
@@ -108,7 +105,6 @@ abstract class FileDownload extends Model
     {
         return $this->_path;
     }
-    
     /**
      * @param string $previewPath
      * @return \jtl\Connector\Model\FileDownload
@@ -126,7 +122,6 @@ abstract class FileDownload extends Model
     {
         return $this->_previewPath;
     }
-    
     /**
      * @param int $maxDownloads
      * @return \jtl\Connector\Model\FileDownload
@@ -144,7 +139,6 @@ abstract class FileDownload extends Model
     {
         return $this->_maxDownloads;
     }
-    
     /**
      * @param int $maxDays
      * @return \jtl\Connector\Model\FileDownload
@@ -162,7 +156,6 @@ abstract class FileDownload extends Model
     {
         return $this->_maxDays;
     }
-    
     /**
      * @param int $sort
      * @return \jtl\Connector\Model\FileDownload
@@ -180,7 +173,6 @@ abstract class FileDownload extends Model
     {
         return $this->_sort;
     }
-    
     /**
      * @param string $created
      * @return \jtl\Connector\Model\FileDownload
@@ -197,15 +189,6 @@ abstract class FileDownload extends Model
     public function getCreated()
     {
         return $this->_created;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/filedownload/filedownload.json", $this->getPublic(array()));
     }
 }
 ?>

@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * ProductVarCombination Model
  * @access public
  */
-abstract class ProductVarCombination extends Model
+abstract class ProductVarCombination extends DataModel
 {
     /**
      * @var int
@@ -47,7 +46,6 @@ abstract class ProductVarCombination extends Model
     {
         return $this->_productId;
     }
-    
     /**
      * @param int $productVariationId
      * @return \jtl\Connector\Model\ProductVarCombination
@@ -65,7 +63,6 @@ abstract class ProductVarCombination extends Model
     {
         return $this->_productVariationId;
     }
-    
     /**
      * @param int $productVariationValueId
      * @return \jtl\Connector\Model\ProductVarCombination
@@ -82,15 +79,6 @@ abstract class ProductVarCombination extends Model
     public function getProductVariationValueId()
     {
         return $this->_productVariationValueId;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/productvarcombination/productvarcombination.json", $this->getPublic(array()));
     }
 }
 ?>

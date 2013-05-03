@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * ProductWarehouseInfo Model
  * @access public
  */
-abstract class ProductWarehouseInfo extends Model
+abstract class ProductWarehouseInfo extends DataModel
 {
     /**
      * @var int
@@ -52,7 +51,6 @@ abstract class ProductWarehouseInfo extends Model
     {
         return $this->_productId;
     }
-    
     /**
      * @param int $warehouseId
      * @return \jtl\Connector\Model\ProductWarehouseInfo
@@ -70,7 +68,6 @@ abstract class ProductWarehouseInfo extends Model
     {
         return $this->_warehouseId;
     }
-    
     /**
      * @param double $stockLevel
      * @return \jtl\Connector\Model\ProductWarehouseInfo
@@ -88,7 +85,6 @@ abstract class ProductWarehouseInfo extends Model
     {
         return $this->_stockLevel;
     }
-    
     /**
      * @param string $inflowDate
      * @return \jtl\Connector\Model\ProductWarehouseInfo
@@ -105,15 +101,6 @@ abstract class ProductWarehouseInfo extends Model
     public function getInflowDate()
     {
         return $this->_inflowDate;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/productwarehouseinfo/productwarehouseinfo.json", $this->getPublic(array()));
     }
 }
 ?>

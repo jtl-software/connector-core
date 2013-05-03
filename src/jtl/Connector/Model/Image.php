@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * Image Model
  * @access public
  */
-abstract class Image extends Model
+abstract class Image extends DataModel
 {
     /**
      * @var int
@@ -62,7 +61,6 @@ abstract class Image extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param string $relationType
      * @return \jtl\Connector\Model\Image
@@ -80,7 +78,6 @@ abstract class Image extends Model
     {
         return $this->_relationType;
     }
-    
     /**
      * @param int $foreignKey
      * @return \jtl\Connector\Model\Image
@@ -98,7 +95,6 @@ abstract class Image extends Model
     {
         return $this->_foreignKey;
     }
-    
     /**
      * @param bool $isMainImage
      * @return \jtl\Connector\Model\Image
@@ -116,7 +112,6 @@ abstract class Image extends Model
     {
         return $this->_isMainImage;
     }
-    
     /**
      * @param string $filename
      * @return \jtl\Connector\Model\Image
@@ -134,7 +129,6 @@ abstract class Image extends Model
     {
         return $this->_filename;
     }
-    
     /**
      * @param int $sort
      * @return \jtl\Connector\Model\Image
@@ -151,15 +145,6 @@ abstract class Image extends Model
     public function getSort()
     {
         return $this->_sort;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/image/image.json", $this->getPublic(array()));
     }
 }
 ?>

@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * ProductConfigGroup Model
  * @access public
  */
-abstract class ProductConfigGroup extends Model
+abstract class ProductConfigGroup extends DataModel
 {
     /**
      * @var int
@@ -47,7 +46,6 @@ abstract class ProductConfigGroup extends Model
     {
         return $this->_configGroupId;
     }
-    
     /**
      * @param int $productId
      * @return \jtl\Connector\Model\ProductConfigGroup
@@ -65,7 +63,6 @@ abstract class ProductConfigGroup extends Model
     {
         return $this->_productId;
     }
-    
     /**
      * @param int $sort
      * @return \jtl\Connector\Model\ProductConfigGroup
@@ -82,15 +79,6 @@ abstract class ProductConfigGroup extends Model
     public function getSort()
     {
         return $this->_sort;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/productconfiggroup/productconfiggroup.json", $this->getPublic(array()));
     }
 }
 ?>

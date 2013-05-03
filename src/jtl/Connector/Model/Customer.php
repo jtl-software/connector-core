@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * Customer Model
  * @access public
  */
-abstract class Customer extends Model
+abstract class Customer extends DataModel
 {
     /**
      * @var int
@@ -197,7 +196,6 @@ abstract class Customer extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $customerGroupId
      * @return \jtl\Connector\Model\Customer
@@ -215,7 +213,6 @@ abstract class Customer extends Model
     {
         return $this->_customerGroupId;
     }
-    
     /**
      * @param int $languageIso
      * @return \jtl\Connector\Model\Customer
@@ -233,7 +230,6 @@ abstract class Customer extends Model
     {
         return $this->_languageIso;
     }
-    
     /**
      * @param string $customerNumber
      * @return \jtl\Connector\Model\Customer
@@ -251,7 +247,6 @@ abstract class Customer extends Model
     {
         return $this->_customerNumber;
     }
-    
     /**
      * @param string $password
      * @return \jtl\Connector\Model\Customer
@@ -269,7 +264,6 @@ abstract class Customer extends Model
     {
         return $this->_password;
     }
-    
     /**
      * @param string $salutation
      * @return \jtl\Connector\Model\Customer
@@ -287,7 +281,6 @@ abstract class Customer extends Model
     {
         return $this->_salutation;
     }
-    
     /**
      * @param string $title
      * @return \jtl\Connector\Model\Customer
@@ -305,7 +298,6 @@ abstract class Customer extends Model
     {
         return $this->_title;
     }
-    
     /**
      * @param string $firstName
      * @return \jtl\Connector\Model\Customer
@@ -323,7 +315,6 @@ abstract class Customer extends Model
     {
         return $this->_firstName;
     }
-    
     /**
      * @param string $lastName
      * @return \jtl\Connector\Model\Customer
@@ -341,7 +332,6 @@ abstract class Customer extends Model
     {
         return $this->_lastName;
     }
-    
     /**
      * @param string $company
      * @return \jtl\Connector\Model\Customer
@@ -359,7 +349,6 @@ abstract class Customer extends Model
     {
         return $this->_company;
     }
-    
     /**
      * @param string $street
      * @return \jtl\Connector\Model\Customer
@@ -377,7 +366,6 @@ abstract class Customer extends Model
     {
         return $this->_street;
     }
-    
     /**
      * @param string $streetNumber
      * @return \jtl\Connector\Model\Customer
@@ -395,7 +383,6 @@ abstract class Customer extends Model
     {
         return $this->_streetNumber;
     }
-    
     /**
      * @param string $extraAddressLine
      * @return \jtl\Connector\Model\Customer
@@ -413,7 +400,6 @@ abstract class Customer extends Model
     {
         return $this->_extraAddressLine;
     }
-    
     /**
      * @param string $zipCode
      * @return \jtl\Connector\Model\Customer
@@ -431,7 +417,6 @@ abstract class Customer extends Model
     {
         return $this->_zipCode;
     }
-    
     /**
      * @param string $city
      * @return \jtl\Connector\Model\Customer
@@ -449,7 +434,6 @@ abstract class Customer extends Model
     {
         return $this->_city;
     }
-    
     /**
      * @param string $state
      * @return \jtl\Connector\Model\Customer
@@ -467,7 +451,6 @@ abstract class Customer extends Model
     {
         return $this->_state;
     }
-    
     /**
      * @param string $country
      * @return \jtl\Connector\Model\Customer
@@ -485,7 +468,6 @@ abstract class Customer extends Model
     {
         return $this->_country;
     }
-    
     /**
      * @param string $phone
      * @return \jtl\Connector\Model\Customer
@@ -503,7 +485,6 @@ abstract class Customer extends Model
     {
         return $this->_phone;
     }
-    
     /**
      * @param string $mobile
      * @return \jtl\Connector\Model\Customer
@@ -521,7 +502,6 @@ abstract class Customer extends Model
     {
         return $this->_mobile;
     }
-    
     /**
      * @param string $fax
      * @return \jtl\Connector\Model\Customer
@@ -539,7 +519,6 @@ abstract class Customer extends Model
     {
         return $this->_fax;
     }
-    
     /**
      * @param string $eMail
      * @return \jtl\Connector\Model\Customer
@@ -557,7 +536,6 @@ abstract class Customer extends Model
     {
         return $this->_eMail;
     }
-    
     /**
      * @param string $vatNumber
      * @return \jtl\Connector\Model\Customer
@@ -575,7 +553,6 @@ abstract class Customer extends Model
     {
         return $this->_vatNumber;
     }
-    
     /**
      * @param string $www
      * @return \jtl\Connector\Model\Customer
@@ -593,7 +570,6 @@ abstract class Customer extends Model
     {
         return $this->_www;
     }
-    
     /**
      * @param double $accountCredit
      * @return \jtl\Connector\Model\Customer
@@ -611,7 +587,6 @@ abstract class Customer extends Model
     {
         return $this->_accountCredit;
     }
-    
     /**
      * @param string $newsletter
      * @return \jtl\Connector\Model\Customer
@@ -629,7 +604,6 @@ abstract class Customer extends Model
     {
         return $this->_newsletter;
     }
-    
     /**
      * @param string $birthday
      * @return \jtl\Connector\Model\Customer
@@ -647,7 +621,6 @@ abstract class Customer extends Model
     {
         return $this->_birthday;
     }
-    
     /**
      * @param double $discount
      * @return \jtl\Connector\Model\Customer
@@ -665,7 +638,6 @@ abstract class Customer extends Model
     {
         return $this->_discount;
     }
-    
     /**
      * @param string $origin
      * @return \jtl\Connector\Model\Customer
@@ -683,7 +655,6 @@ abstract class Customer extends Model
     {
         return $this->_origin;
     }
-    
     /**
      * @param string $created
      * @return \jtl\Connector\Model\Customer
@@ -701,7 +672,6 @@ abstract class Customer extends Model
     {
         return $this->_created;
     }
-    
     /**
      * @param string $modified
      * @return \jtl\Connector\Model\Customer
@@ -719,7 +689,6 @@ abstract class Customer extends Model
     {
         return $this->_modified;
     }
-    
     /**
      * @param string $isActive
      * @return \jtl\Connector\Model\Customer
@@ -737,7 +706,6 @@ abstract class Customer extends Model
     {
         return $this->_isActive;
     }
-    
     /**
      * @param string $isFetched
      * @return \jtl\Connector\Model\Customer
@@ -755,7 +723,6 @@ abstract class Customer extends Model
     {
         return $this->_isFetched;
     }
-    
     /**
      * @param int $hasCustomerAccount
      * @return \jtl\Connector\Model\Customer
@@ -772,15 +739,6 @@ abstract class Customer extends Model
     public function getHasCustomerAccount()
     {
         return $this->_hasCustomerAccount;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/customer/customer.json", $this->getPublic(array()));
     }
 }
 ?>

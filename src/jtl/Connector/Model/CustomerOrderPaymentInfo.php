@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerOrderPaymentInfo Model
  * @access public
  */
-abstract class CustomerOrderPaymentInfo extends Model
+abstract class CustomerOrderPaymentInfo extends DataModel
 {
     /**
      * @var int
@@ -82,7 +81,6 @@ abstract class CustomerOrderPaymentInfo extends Model
     {
         return $this->_shippingMethodId;
     }
-    
     /**
      * @param int $basketId
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
@@ -100,7 +98,6 @@ abstract class CustomerOrderPaymentInfo extends Model
     {
         return $this->_basketId;
     }
-    
     /**
      * @param string $bankAccount
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
@@ -118,7 +115,6 @@ abstract class CustomerOrderPaymentInfo extends Model
     {
         return $this->_bankAccount;
     }
-    
     /**
      * @param string $bankCode
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
@@ -136,7 +132,6 @@ abstract class CustomerOrderPaymentInfo extends Model
     {
         return $this->_bankCode;
     }
-    
     /**
      * @param string $accountHolder
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
@@ -154,7 +149,6 @@ abstract class CustomerOrderPaymentInfo extends Model
     {
         return $this->_accountHolder;
     }
-    
     /**
      * @param string $accountNumber
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
@@ -172,7 +166,6 @@ abstract class CustomerOrderPaymentInfo extends Model
     {
         return $this->_accountNumber;
     }
-    
     /**
      * @param string $iban
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
@@ -190,7 +183,6 @@ abstract class CustomerOrderPaymentInfo extends Model
     {
         return $this->_iban;
     }
-    
     /**
      * @param string $bic
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
@@ -208,7 +200,6 @@ abstract class CustomerOrderPaymentInfo extends Model
     {
         return $this->_bic;
     }
-    
     /**
      * @param string $creditCardNumber
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
@@ -226,7 +217,6 @@ abstract class CustomerOrderPaymentInfo extends Model
     {
         return $this->_creditCardNumber;
     }
-    
     /**
      * @param string $cvv
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
@@ -243,15 +233,6 @@ abstract class CustomerOrderPaymentInfo extends Model
     public function getCvv()
     {
         return $this->_cvv;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/customerorderpaymentinfo/customerorderpaymentinfo.json", $this->getPublic(array()));
     }
 }
 ?>

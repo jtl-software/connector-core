@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * Warehouse Model
  * @access public
  */
-abstract class Warehouse extends Model
+abstract class Warehouse extends DataModel
 {
     /**
      * @var int
@@ -36,15 +35,6 @@ abstract class Warehouse extends Model
     public function getId()
     {
         return $this->_id;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/warehouse/warehouse.json", $this->getPublic(array()));
     }
 }
 ?>

@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * ProductVariationI18n Model
  * @access public
  */
-abstract class ProductVariationI18n extends Model
+abstract class ProductVariationI18n extends DataModel
 {
     /**
      * @var int
@@ -47,7 +46,6 @@ abstract class ProductVariationI18n extends Model
     {
         return $this->_languageIso;
     }
-    
     /**
      * @param int $productVariationId
      * @return \jtl\Connector\Model\ProductVariationI18n
@@ -65,7 +63,6 @@ abstract class ProductVariationI18n extends Model
     {
         return $this->_productVariationId;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\ProductVariationI18n
@@ -82,15 +79,6 @@ abstract class ProductVariationI18n extends Model
     public function getName()
     {
         return $this->_name;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/productvariationi18n/productvariationi18n.json", $this->getPublic(array()));
     }
 }
 ?>

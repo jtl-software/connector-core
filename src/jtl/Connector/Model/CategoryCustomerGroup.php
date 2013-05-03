@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * CategoryCustomerGroup Model
  * @access public
  */
-abstract class CategoryCustomerGroup extends Model
+abstract class CategoryCustomerGroup extends DataModel
 {
     /**
      * @var int
@@ -47,7 +46,6 @@ abstract class CategoryCustomerGroup extends Model
     {
         return $this->_customerGroupId;
     }
-    
     /**
      * @param int $categoryId
      * @return \jtl\Connector\Model\CategoryCustomerGroup
@@ -65,7 +63,6 @@ abstract class CategoryCustomerGroup extends Model
     {
         return $this->_categoryId;
     }
-    
     /**
      * @param double $discount
      * @return \jtl\Connector\Model\CategoryCustomerGroup
@@ -82,15 +79,6 @@ abstract class CategoryCustomerGroup extends Model
     public function getDiscount()
     {
         return $this->_discount;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/categorycustomergroup/categorycustomergroup.json", $this->getPublic(array()));
     }
 }
 ?>

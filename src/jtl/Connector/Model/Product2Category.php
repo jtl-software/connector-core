@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * Product2Category Model
  * @access public
  */
-abstract class Product2Category extends Model
+abstract class Product2Category extends DataModel
 {
     /**
      * @var int
@@ -47,7 +46,6 @@ abstract class Product2Category extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $categoryId
      * @return \jtl\Connector\Model\Product2Category
@@ -65,7 +63,6 @@ abstract class Product2Category extends Model
     {
         return $this->_categoryId;
     }
-    
     /**
      * @param int $productId
      * @return \jtl\Connector\Model\Product2Category
@@ -82,15 +79,6 @@ abstract class Product2Category extends Model
     public function getProductId()
     {
         return $this->_productId;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/product2category/product2category.json", $this->getPublic(array()));
     }
 }
 ?>

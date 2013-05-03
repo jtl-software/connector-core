@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * TaxRate Model
  * @access public
  */
-abstract class TaxRate extends Model
+abstract class TaxRate extends DataModel
 {
     /**
      * @var int
@@ -57,7 +56,6 @@ abstract class TaxRate extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $taxZoneId
      * @return \jtl\Connector\Model\TaxRate
@@ -75,7 +73,6 @@ abstract class TaxRate extends Model
     {
         return $this->_taxZoneId;
     }
-    
     /**
      * @param int $taxClassId
      * @return \jtl\Connector\Model\TaxRate
@@ -93,7 +90,6 @@ abstract class TaxRate extends Model
     {
         return $this->_taxClassId;
     }
-    
     /**
      * @param double $taxRate
      * @return \jtl\Connector\Model\TaxRate
@@ -111,7 +107,6 @@ abstract class TaxRate extends Model
     {
         return $this->_taxRate;
     }
-    
     /**
      * @param int $priority
      * @return \jtl\Connector\Model\TaxRate
@@ -128,15 +123,6 @@ abstract class TaxRate extends Model
     public function getPriority()
     {
         return $this->_priority;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/taxrate/taxrate.json", $this->getPublic(array()));
     }
 }
 ?>

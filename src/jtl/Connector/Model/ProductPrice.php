@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * ProductPrice Model
  * @access public
  */
-abstract class ProductPrice extends Model
+abstract class ProductPrice extends DataModel
 {
     /**
      * @var int
@@ -52,7 +51,6 @@ abstract class ProductPrice extends Model
     {
         return $this->_customerGroupId;
     }
-    
     /**
      * @param int $productId
      * @return \jtl\Connector\Model\ProductPrice
@@ -70,7 +68,6 @@ abstract class ProductPrice extends Model
     {
         return $this->_productId;
     }
-    
     /**
      * @param double $netPrice
      * @return \jtl\Connector\Model\ProductPrice
@@ -88,7 +85,6 @@ abstract class ProductPrice extends Model
     {
         return $this->_netPrice;
     }
-    
     /**
      * @param int $quantity
      * @return \jtl\Connector\Model\ProductPrice
@@ -105,15 +101,6 @@ abstract class ProductPrice extends Model
     public function getQuantity()
     {
         return $this->_quantity;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/productprice/productprice.json", $this->getPublic(array()));
     }
 }
 ?>

@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * Product Model
  * @access public
  */
-abstract class Product extends Model
+abstract class Product extends DataModel
 {
     /**
      * @var int
@@ -1140,15 +1139,6 @@ abstract class Product extends Model
     public function getBestBefore()
     {
         return $this->_bestBefore;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/product/product.json", $this->getPublic(array()));
     }
 }
 ?>

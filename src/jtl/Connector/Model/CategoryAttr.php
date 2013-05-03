@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * CategoryAttr Model
  * @access public
  */
-abstract class CategoryAttr extends Model
+abstract class CategoryAttr extends DataModel
 {
     /**
      * @var int
@@ -57,7 +56,6 @@ abstract class CategoryAttr extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $categoryId
      * @return \jtl\Connector\Model\CategoryAttr
@@ -75,7 +73,6 @@ abstract class CategoryAttr extends Model
     {
         return $this->_categoryId;
     }
-    
     /**
      * @param string $languageIso
      * @return \jtl\Connector\Model\CategoryAttr
@@ -93,7 +90,6 @@ abstract class CategoryAttr extends Model
     {
         return $this->_languageIso;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\CategoryAttr
@@ -111,7 +107,6 @@ abstract class CategoryAttr extends Model
     {
         return $this->_name;
     }
-    
     /**
      * @param string $value
      * @return \jtl\Connector\Model\CategoryAttr
@@ -128,15 +123,6 @@ abstract class CategoryAttr extends Model
     public function getValue()
     {
         return $this->_value;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/categoryattr/categoryattr.json", $this->getPublic(array()));
     }
 }
 ?>

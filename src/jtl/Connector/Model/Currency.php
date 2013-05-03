@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * Currency Model
  * @access public
  */
-abstract class Currency extends Model
+abstract class Currency extends DataModel
 {
     /**
      * @var int
@@ -77,7 +76,6 @@ abstract class Currency extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\Currency
@@ -95,7 +93,6 @@ abstract class Currency extends Model
     {
         return $this->_name;
     }
-    
     /**
      * @param string $iso
      * @return \jtl\Connector\Model\Currency
@@ -113,7 +110,6 @@ abstract class Currency extends Model
     {
         return $this->_iso;
     }
-    
     /**
      * @param string $nameHtml
      * @return \jtl\Connector\Model\Currency
@@ -131,7 +127,6 @@ abstract class Currency extends Model
     {
         return $this->_nameHtml;
     }
-    
     /**
      * @param double $factor
      * @return \jtl\Connector\Model\Currency
@@ -149,7 +144,6 @@ abstract class Currency extends Model
     {
         return $this->_factor;
     }
-    
     /**
      * @param string $default
      * @return \jtl\Connector\Model\Currency
@@ -167,7 +161,6 @@ abstract class Currency extends Model
     {
         return $this->_default;
     }
-    
     /**
      * @param string $currencySignBeforeValue
      * @return \jtl\Connector\Model\Currency
@@ -185,7 +178,6 @@ abstract class Currency extends Model
     {
         return $this->_currencySignBeforeValue;
     }
-    
     /**
      * @param string $delimiterCent
      * @return \jtl\Connector\Model\Currency
@@ -203,7 +195,6 @@ abstract class Currency extends Model
     {
         return $this->_delimiterCent;
     }
-    
     /**
      * @param string $delimiterThousand
      * @return \jtl\Connector\Model\Currency
@@ -220,15 +211,6 @@ abstract class Currency extends Model
     public function getDelimiterThousand()
     {
         return $this->_delimiterThousand;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/currency/currency.json", $this->getPublic(array()));
     }
 }
 ?>

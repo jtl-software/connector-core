@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * Category Model
  * @access public
  */
-abstract class Category extends Model
+abstract class Category extends DataModel
 {
     /**
      * @var int
@@ -47,7 +46,6 @@ abstract class Category extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $parentCategoryId
      * @return \jtl\Connector\Model\Category
@@ -65,7 +63,6 @@ abstract class Category extends Model
     {
         return $this->_parentCategoryId;
     }
-    
     /**
      * @param int $sort
      * @return \jtl\Connector\Model\Category
@@ -82,15 +79,6 @@ abstract class Category extends Model
     public function getSort()
     {
         return $this->_sort;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/category/category.json", $this->getPublic(array()));
     }
 }
 ?>

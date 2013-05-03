@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * Company Model
  * @access public
  */
-abstract class Company extends Model
+abstract class Company extends DataModel
 {
     /**
      * @var int
@@ -132,7 +131,6 @@ abstract class Company extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\Company
@@ -150,7 +148,6 @@ abstract class Company extends Model
     {
         return $this->_name;
     }
-    
     /**
      * @param string $businessman
      * @return \jtl\Connector\Model\Company
@@ -168,7 +165,6 @@ abstract class Company extends Model
     {
         return $this->_businessman;
     }
-    
     /**
      * @param string $street
      * @return \jtl\Connector\Model\Company
@@ -186,7 +182,6 @@ abstract class Company extends Model
     {
         return $this->_street;
     }
-    
     /**
      * @param string $streetNumber
      * @return \jtl\Connector\Model\Company
@@ -204,7 +199,6 @@ abstract class Company extends Model
     {
         return $this->_streetNumber;
     }
-    
     /**
      * @param string $zipCode
      * @return \jtl\Connector\Model\Company
@@ -222,7 +216,6 @@ abstract class Company extends Model
     {
         return $this->_zipCode;
     }
-    
     /**
      * @param string $city
      * @return \jtl\Connector\Model\Company
@@ -240,7 +233,6 @@ abstract class Company extends Model
     {
         return $this->_city;
     }
-    
     /**
      * @param string $country
      * @return \jtl\Connector\Model\Company
@@ -258,7 +250,6 @@ abstract class Company extends Model
     {
         return $this->_country;
     }
-    
     /**
      * @param string $phone
      * @return \jtl\Connector\Model\Company
@@ -276,7 +267,6 @@ abstract class Company extends Model
     {
         return $this->_phone;
     }
-    
     /**
      * @param string $fax
      * @return \jtl\Connector\Model\Company
@@ -294,7 +284,6 @@ abstract class Company extends Model
     {
         return $this->_fax;
     }
-    
     /**
      * @param string $eMail
      * @return \jtl\Connector\Model\Company
@@ -312,7 +301,6 @@ abstract class Company extends Model
     {
         return $this->_eMail;
     }
-    
     /**
      * @param string $www
      * @return \jtl\Connector\Model\Company
@@ -330,7 +318,6 @@ abstract class Company extends Model
     {
         return $this->_www;
     }
-    
     /**
      * @param string $bankCode
      * @return \jtl\Connector\Model\Company
@@ -348,7 +335,6 @@ abstract class Company extends Model
     {
         return $this->_bankCode;
     }
-    
     /**
      * @param string $accountNumber
      * @return \jtl\Connector\Model\Company
@@ -366,7 +352,6 @@ abstract class Company extends Model
     {
         return $this->_accountNumber;
     }
-    
     /**
      * @param string $bankAccount
      * @return \jtl\Connector\Model\Company
@@ -384,7 +369,6 @@ abstract class Company extends Model
     {
         return $this->_bankAccount;
     }
-    
     /**
      * @param string $accountHolder
      * @return \jtl\Connector\Model\Company
@@ -402,7 +386,6 @@ abstract class Company extends Model
     {
         return $this->_accountHolder;
     }
-    
     /**
      * @param string $vatNumber
      * @return \jtl\Connector\Model\Company
@@ -420,7 +403,6 @@ abstract class Company extends Model
     {
         return $this->_vatNumber;
     }
-    
     /**
      * @param string $taxIdNumber
      * @return \jtl\Connector\Model\Company
@@ -438,7 +420,6 @@ abstract class Company extends Model
     {
         return $this->_taxIdNumber;
     }
-    
     /**
      * @param string $iban
      * @return \jtl\Connector\Model\Company
@@ -456,7 +437,6 @@ abstract class Company extends Model
     {
         return $this->_iban;
     }
-    
     /**
      * @param string $bic
      * @return \jtl\Connector\Model\Company
@@ -473,15 +453,6 @@ abstract class Company extends Model
     public function getBic()
     {
         return $this->_bic;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/company/company.json", $this->getPublic(array()));
     }
 }
 ?>

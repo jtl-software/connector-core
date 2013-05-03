@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * ConfigItemI18n Model
  * @access public
  */
-abstract class ConfigItemI18n extends Model
+abstract class ConfigItemI18n extends DataModel
 {
     /**
      * @var int
@@ -52,7 +51,6 @@ abstract class ConfigItemI18n extends Model
     {
         return $this->_configItemId;
     }
-    
     /**
      * @param int $languageIso
      * @return \jtl\Connector\Model\ConfigItemI18n
@@ -70,7 +68,6 @@ abstract class ConfigItemI18n extends Model
     {
         return $this->_languageIso;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\ConfigItemI18n
@@ -88,7 +85,6 @@ abstract class ConfigItemI18n extends Model
     {
         return $this->_name;
     }
-    
     /**
      * @param string $description
      * @return \jtl\Connector\Model\ConfigItemI18n
@@ -105,15 +101,6 @@ abstract class ConfigItemI18n extends Model
     public function getDescription()
     {
         return $this->_description;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/configitemi18n/configitemi18n.json", $this->getPublic(array()));
     }
 }
 ?>

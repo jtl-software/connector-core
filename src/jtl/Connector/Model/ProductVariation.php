@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * ProductVariation Model
  * @access public
  */
-abstract class ProductVariation extends Model
+abstract class ProductVariation extends DataModel
 {
     /**
      * @var int
@@ -62,7 +61,6 @@ abstract class ProductVariation extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $productId
      * @return \jtl\Connector\Model\ProductVariation
@@ -80,7 +78,6 @@ abstract class ProductVariation extends Model
     {
         return $this->_productId;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\ProductVariation
@@ -98,7 +95,6 @@ abstract class ProductVariation extends Model
     {
         return $this->_name;
     }
-    
     /**
      * @param string $isSelectable
      * @return \jtl\Connector\Model\ProductVariation
@@ -116,7 +112,6 @@ abstract class ProductVariation extends Model
     {
         return $this->_isSelectable;
     }
-    
     /**
      * @param string $type
      * @return \jtl\Connector\Model\ProductVariation
@@ -134,7 +129,6 @@ abstract class ProductVariation extends Model
     {
         return $this->_type;
     }
-    
     /**
      * @param int $sort
      * @return \jtl\Connector\Model\ProductVariation
@@ -151,15 +145,6 @@ abstract class ProductVariation extends Model
     public function getSort()
     {
         return $this->_sort;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/productvariation/productvariation.json", $this->getPublic(array()));
     }
 }
 ?>

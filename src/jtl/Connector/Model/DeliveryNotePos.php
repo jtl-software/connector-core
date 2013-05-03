@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * DeliveryNotePos Model
  * @access public
  */
-abstract class DeliveryNotePos extends Model
+abstract class DeliveryNotePos extends DataModel
 {
     /**
      * @var int
@@ -67,7 +66,6 @@ abstract class DeliveryNotePos extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $orderPosition
      * @return \jtl\Connector\Model\DeliveryNotePos
@@ -85,7 +83,6 @@ abstract class DeliveryNotePos extends Model
     {
         return $this->_orderPosition;
     }
-    
     /**
      * @param double $quantity
      * @return \jtl\Connector\Model\DeliveryNotePos
@@ -103,7 +100,6 @@ abstract class DeliveryNotePos extends Model
     {
         return $this->_quantity;
     }
-    
     /**
      * @param int $stock
      * @return \jtl\Connector\Model\DeliveryNotePos
@@ -121,7 +117,6 @@ abstract class DeliveryNotePos extends Model
     {
         return $this->_stock;
     }
-    
     /**
      * @param string $serialNumber
      * @return \jtl\Connector\Model\DeliveryNotePos
@@ -139,7 +134,6 @@ abstract class DeliveryNotePos extends Model
     {
         return $this->_serialNumber;
     }
-    
     /**
      * @param string $batchNumber
      * @return \jtl\Connector\Model\DeliveryNotePos
@@ -157,7 +151,6 @@ abstract class DeliveryNotePos extends Model
     {
         return $this->_batchNumber;
     }
-    
     /**
      * @param string $bestBefore
      * @return \jtl\Connector\Model\DeliveryNotePos
@@ -174,15 +167,6 @@ abstract class DeliveryNotePos extends Model
     public function getBestBefore()
     {
         return $this->_bestBefore;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/deliverynotepos/deliverynotepos.json", $this->getPublic(array()));
     }
 }
 ?>

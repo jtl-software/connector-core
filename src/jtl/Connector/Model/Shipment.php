@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * Shipment Model
  * @access public
  */
-abstract class Shipment extends Model
+abstract class Shipment extends DataModel
 {
     /**
      * @var int
@@ -62,7 +61,6 @@ abstract class Shipment extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param string $logistic
      * @return \jtl\Connector\Model\Shipment
@@ -80,7 +78,6 @@ abstract class Shipment extends Model
     {
         return $this->_logistic;
     }
-    
     /**
      * @param string $logisticURL
      * @return \jtl\Connector\Model\Shipment
@@ -98,7 +95,6 @@ abstract class Shipment extends Model
     {
         return $this->_logisticURL;
     }
-    
     /**
      * @param string $identCode
      * @return \jtl\Connector\Model\Shipment
@@ -116,7 +112,6 @@ abstract class Shipment extends Model
     {
         return $this->_identCode;
     }
-    
     /**
      * @param string $created
      * @return \jtl\Connector\Model\Shipment
@@ -134,7 +129,6 @@ abstract class Shipment extends Model
     {
         return $this->_created;
     }
-    
     /**
      * @param string $note
      * @return \jtl\Connector\Model\Shipment
@@ -151,15 +145,6 @@ abstract class Shipment extends Model
     public function getNote()
     {
         return $this->_note;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/shipment/shipment.json", $this->getPublic(array()));
     }
 }
 ?>

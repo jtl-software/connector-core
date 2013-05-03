@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * CategoryVisibility Model
  * @access public
  */
-abstract class CategoryVisibility extends Model
+abstract class CategoryVisibility extends DataModel
 {
     /**
      * @var int
@@ -42,7 +41,6 @@ abstract class CategoryVisibility extends Model
     {
         return $this->_customerGroupId;
     }
-    
     /**
      * @param int $categoryId
      * @return \jtl\Connector\Model\CategoryVisibility
@@ -59,15 +57,6 @@ abstract class CategoryVisibility extends Model
     public function getCategoryId()
     {
         return $this->_categoryId;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/categoryvisibility/categoryvisibility.json", $this->getPublic(array()));
     }
 }
 ?>

@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * ProductVariationValue Model
  * @access public
  */
-abstract class ProductVariationValue extends Model
+abstract class ProductVariationValue extends DataModel
 {
     /**
      * @var int
@@ -117,7 +116,6 @@ abstract class ProductVariationValue extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $productVariationId
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -135,7 +133,6 @@ abstract class ProductVariationValue extends Model
     {
         return $this->_productVariationId;
     }
-    
     /**
      * @param double $extraWeight
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -153,7 +150,6 @@ abstract class ProductVariationValue extends Model
     {
         return $this->_extraWeight;
     }
-    
     /**
      * @param string $sku
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -171,7 +167,6 @@ abstract class ProductVariationValue extends Model
     {
         return $this->_sku;
     }
-    
     /**
      * @param int $sort
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -189,7 +184,6 @@ abstract class ProductVariationValue extends Model
     {
         return $this->_sort;
     }
-    
     /**
      * @param double $stockLevel
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -207,7 +201,6 @@ abstract class ProductVariationValue extends Model
     {
         return $this->_stockLevel;
     }
-    
     /**
      * @param double $packagingUnitId
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -225,7 +218,6 @@ abstract class ProductVariationValue extends Model
     {
         return $this->_packagingUnitId;
     }
-    
     /**
      * @param int $languageIso
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -243,7 +235,6 @@ abstract class ProductVariationValue extends Model
     {
         return $this->_languageIso;
     }
-    
     /**
      * @param int $productVariationValueId
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -261,7 +252,6 @@ abstract class ProductVariationValue extends Model
     {
         return $this->_productVariationValueId;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -279,7 +269,6 @@ abstract class ProductVariationValue extends Model
     {
         return $this->_name;
     }
-    
     /**
      * @param int $customerGroupId
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -297,7 +286,6 @@ abstract class ProductVariationValue extends Model
     {
         return $this->_customerGroupId;
     }
-    
     /**
      * @param int $productVariationValueId
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -315,7 +303,6 @@ abstract class ProductVariationValue extends Model
     {
         return $this->_productVariationValueId;
     }
-    
     /**
      * @param double $extraChargeNet
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -333,7 +320,6 @@ abstract class ProductVariationValue extends Model
     {
         return $this->_extraChargeNet;
     }
-    
     /**
      * @param int $customerGroupId
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -351,7 +337,6 @@ abstract class ProductVariationValue extends Model
     {
         return $this->_customerGroupId;
     }
-    
     /**
      * @param int $productVariationValueId
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -369,7 +354,6 @@ abstract class ProductVariationValue extends Model
     {
         return $this->_productVariationValueId;
     }
-    
     /**
      * @param int $productVariationValueId
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -387,7 +371,6 @@ abstract class ProductVariationValue extends Model
     {
         return $this->_productVariationValueId;
     }
-    
     /**
      * @param int $productVariationValueTargetId
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -404,15 +387,6 @@ abstract class ProductVariationValue extends Model
     public function getProductVariationValueTargetId()
     {
         return $this->_productVariationValueTargetId;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/productvariationvalue/productvariationvalue.json", $this->getPublic(array()));
     }
 }
 ?>

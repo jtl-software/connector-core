@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerOrder Model
  * @access public
  */
-abstract class CustomerOrder extends Model
+abstract class CustomerOrder extends DataModel
 {
     /**
      * @var int
@@ -177,7 +176,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $basketId
      * @return \jtl\Connector\Model\CustomerOrder
@@ -195,7 +193,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_basketId;
     }
-    
     /**
      * @param int $customerId
      * @return \jtl\Connector\Model\CustomerOrder
@@ -213,7 +210,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_customerId;
     }
-    
     /**
      * @param int $shippingAddressId
      * @return \jtl\Connector\Model\CustomerOrder
@@ -231,7 +227,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_shippingAddressId;
     }
-    
     /**
      * @param int $billingAddressId
      * @return \jtl\Connector\Model\CustomerOrder
@@ -249,7 +244,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_billingAddressId;
     }
-    
     /**
      * @param int $paymentMethodId
      * @return \jtl\Connector\Model\CustomerOrder
@@ -267,7 +261,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_paymentMethodId;
     }
-    
     /**
      * @param int $shippingMethodId
      * @return \jtl\Connector\Model\CustomerOrder
@@ -285,7 +278,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_shippingMethodId;
     }
-    
     /**
      * @param int $languageIso
      * @return \jtl\Connector\Model\CustomerOrder
@@ -303,7 +295,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_languageIso;
     }
-    
     /**
      * @param int $currencyIso
      * @return \jtl\Connector\Model\CustomerOrder
@@ -321,7 +312,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_currencyIso;
     }
-    
     /**
      * @param int $paymentMethodType
      * @return \jtl\Connector\Model\CustomerOrder
@@ -339,7 +329,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_paymentMethodType;
     }
-    
     /**
      * @param double $credit
      * @return \jtl\Connector\Model\CustomerOrder
@@ -357,7 +346,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_credit;
     }
-    
     /**
      * @param double $totalSum
      * @return \jtl\Connector\Model\CustomerOrder
@@ -375,7 +363,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_totalSum;
     }
-    
     /**
      * @param string $session
      * @return \jtl\Connector\Model\CustomerOrder
@@ -393,7 +380,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_session;
     }
-    
     /**
      * @param string $shippingMethodName
      * @return \jtl\Connector\Model\CustomerOrder
@@ -411,7 +397,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_shippingMethodName;
     }
-    
     /**
      * @param string $paymentMethodName
      * @return \jtl\Connector\Model\CustomerOrder
@@ -429,7 +414,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_paymentMethodName;
     }
-    
     /**
      * @param string $orderNumber
      * @return \jtl\Connector\Model\CustomerOrder
@@ -447,7 +431,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_orderNumber;
     }
-    
     /**
      * @param string $shippingInfo
      * @return \jtl\Connector\Model\CustomerOrder
@@ -465,7 +448,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_shippingInfo;
     }
-    
     /**
      * @param string $shippingDate
      * @return \jtl\Connector\Model\CustomerOrder
@@ -483,7 +465,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_shippingDate;
     }
-    
     /**
      * @param string $paymentDate
      * @return \jtl\Connector\Model\CustomerOrder
@@ -501,7 +482,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_paymentDate;
     }
-    
     /**
      * @param string $ratingNotificationDate
      * @return \jtl\Connector\Model\CustomerOrder
@@ -519,7 +499,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_ratingNotificationDate;
     }
-    
     /**
      * @param string $tracking
      * @return \jtl\Connector\Model\CustomerOrder
@@ -537,7 +516,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_tracking;
     }
-    
     /**
      * @param string $note
      * @return \jtl\Connector\Model\CustomerOrder
@@ -555,7 +533,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_note;
     }
-    
     /**
      * @param string $logistic
      * @return \jtl\Connector\Model\CustomerOrder
@@ -573,7 +550,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_logistic;
     }
-    
     /**
      * @param string $trackingURL
      * @return \jtl\Connector\Model\CustomerOrder
@@ -591,7 +567,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_trackingURL;
     }
-    
     /**
      * @param string $ip
      * @return \jtl\Connector\Model\CustomerOrder
@@ -609,7 +584,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_ip;
     }
-    
     /**
      * @param string $isFetched
      * @return \jtl\Connector\Model\CustomerOrder
@@ -627,7 +601,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_isFetched;
     }
-    
     /**
      * @param string $status
      * @return \jtl\Connector\Model\CustomerOrder
@@ -645,7 +618,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_status;
     }
-    
     /**
      * @param string $created
      * @return \jtl\Connector\Model\CustomerOrder
@@ -663,7 +635,6 @@ abstract class CustomerOrder extends Model
     {
         return $this->_created;
     }
-    
     /**
      * @param string $paymentModuleId
      * @return \jtl\Connector\Model\CustomerOrder
@@ -680,15 +651,6 @@ abstract class CustomerOrder extends Model
     public function getPaymentModuleId()
     {
         return $this->_paymentModuleId;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/customerorder/customerorder.json", $this->getPublic(array()));
     }
 }
 ?>

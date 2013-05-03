@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerGroupAttr Model
  * @access public
  */
-abstract class CustomerGroupAttr extends Model
+abstract class CustomerGroupAttr extends DataModel
 {
     /**
      * @var int
@@ -52,7 +51,6 @@ abstract class CustomerGroupAttr extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $customerGroupId
      * @return \jtl\Connector\Model\CustomerGroupAttr
@@ -70,7 +68,6 @@ abstract class CustomerGroupAttr extends Model
     {
         return $this->_customerGroupId;
     }
-    
     /**
      * @param string $key
      * @return \jtl\Connector\Model\CustomerGroupAttr
@@ -88,7 +85,6 @@ abstract class CustomerGroupAttr extends Model
     {
         return $this->_key;
     }
-    
     /**
      * @param string $value
      * @return \jtl\Connector\Model\CustomerGroupAttr
@@ -105,15 +101,6 @@ abstract class CustomerGroupAttr extends Model
     public function getValue()
     {
         return $this->_value;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/customergroupattr/customergroupattr.json", $this->getPublic(array()));
     }
 }
 ?>

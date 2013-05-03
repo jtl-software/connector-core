@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * Specific Model
  * @access public
  */
-abstract class Specific extends Model
+abstract class Specific extends DataModel
 {
     /**
      * @var int
@@ -57,7 +56,6 @@ abstract class Specific extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $sort
      * @return \jtl\Connector\Model\Specific
@@ -75,7 +73,6 @@ abstract class Specific extends Model
     {
         return $this->_sort;
     }
-    
     /**
      * @param int $global
      * @return \jtl\Connector\Model\Specific
@@ -93,7 +90,6 @@ abstract class Specific extends Model
     {
         return $this->_global;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\Specific
@@ -111,7 +107,6 @@ abstract class Specific extends Model
     {
         return $this->_name;
     }
-    
     /**
      * @param string $type
      * @return \jtl\Connector\Model\Specific
@@ -128,15 +123,6 @@ abstract class Specific extends Model
     public function getType()
     {
         return $this->_type;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/specific/specific.json", $this->getPublic(array()));
     }
 }
 ?>

@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * Manufacturer Model
  * @access public
  */
-abstract class Manufacturer extends Model
+abstract class Manufacturer extends DataModel
 {
     /**
      * @var int
@@ -57,7 +56,6 @@ abstract class Manufacturer extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\Manufacturer
@@ -75,7 +73,6 @@ abstract class Manufacturer extends Model
     {
         return $this->_name;
     }
-    
     /**
      * @param string $www
      * @return \jtl\Connector\Model\Manufacturer
@@ -93,7 +90,6 @@ abstract class Manufacturer extends Model
     {
         return $this->_www;
     }
-    
     /**
      * @param int $sort
      * @return \jtl\Connector\Model\Manufacturer
@@ -111,7 +107,6 @@ abstract class Manufacturer extends Model
     {
         return $this->_sort;
     }
-    
     /**
      * @param string $url
      * @return \jtl\Connector\Model\Manufacturer
@@ -128,15 +123,6 @@ abstract class Manufacturer extends Model
     public function getUrl()
     {
         return $this->_url;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/manufacturer/manufacturer.json", $this->getPublic(array()));
     }
 }
 ?>

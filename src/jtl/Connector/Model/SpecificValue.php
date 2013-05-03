@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * SpecificValue Model
  * @access public
  */
-abstract class SpecificValue extends Model
+abstract class SpecificValue extends DataModel
 {
     /**
      * @var int
@@ -87,7 +86,6 @@ abstract class SpecificValue extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $specificId
      * @return \jtl\Connector\Model\SpecificValue
@@ -105,7 +103,6 @@ abstract class SpecificValue extends Model
     {
         return $this->_specificId;
     }
-    
     /**
      * @param int $sort
      * @return \jtl\Connector\Model\SpecificValue
@@ -123,7 +120,6 @@ abstract class SpecificValue extends Model
     {
         return $this->_sort;
     }
-    
     /**
      * @param int $languageIso
      * @return \jtl\Connector\Model\SpecificValue
@@ -141,7 +137,6 @@ abstract class SpecificValue extends Model
     {
         return $this->_languageIso;
     }
-    
     /**
      * @param int $specificValueId
      * @return \jtl\Connector\Model\SpecificValue
@@ -159,7 +154,6 @@ abstract class SpecificValue extends Model
     {
         return $this->_specificValueId;
     }
-    
     /**
      * @param string $value
      * @return \jtl\Connector\Model\SpecificValue
@@ -177,7 +171,6 @@ abstract class SpecificValue extends Model
     {
         return $this->_value;
     }
-    
     /**
      * @param string $url
      * @return \jtl\Connector\Model\SpecificValue
@@ -195,7 +188,6 @@ abstract class SpecificValue extends Model
     {
         return $this->_url;
     }
-    
     /**
      * @param string $description
      * @return \jtl\Connector\Model\SpecificValue
@@ -213,7 +205,6 @@ abstract class SpecificValue extends Model
     {
         return $this->_description;
     }
-    
     /**
      * @param string $metaDescription
      * @return \jtl\Connector\Model\SpecificValue
@@ -231,7 +222,6 @@ abstract class SpecificValue extends Model
     {
         return $this->_metaDescription;
     }
-    
     /**
      * @param string $metaKeywords
      * @return \jtl\Connector\Model\SpecificValue
@@ -249,7 +239,6 @@ abstract class SpecificValue extends Model
     {
         return $this->_metaKeywords;
     }
-    
     /**
      * @param string $titleTag
      * @return \jtl\Connector\Model\SpecificValue
@@ -266,15 +255,6 @@ abstract class SpecificValue extends Model
     public function getTitleTag()
     {
         return $this->_titleTag;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/specificvalue/specificvalue.json", $this->getPublic(array()));
     }
 }
 ?>

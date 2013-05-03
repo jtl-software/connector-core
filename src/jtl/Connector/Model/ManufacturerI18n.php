@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * ManufacturerI18n Model
  * @access public
  */
-abstract class ManufacturerI18n extends Model
+abstract class ManufacturerI18n extends DataModel
 {
     /**
      * @var int
@@ -62,7 +61,6 @@ abstract class ManufacturerI18n extends Model
     {
         return $this->_manufacturerId;
     }
-    
     /**
      * @param int $languageIso
      * @return \jtl\Connector\Model\ManufacturerI18n
@@ -80,7 +78,6 @@ abstract class ManufacturerI18n extends Model
     {
         return $this->_languageIso;
     }
-    
     /**
      * @param string $description
      * @return \jtl\Connector\Model\ManufacturerI18n
@@ -98,7 +95,6 @@ abstract class ManufacturerI18n extends Model
     {
         return $this->_description;
     }
-    
     /**
      * @param string $metaDescription
      * @return \jtl\Connector\Model\ManufacturerI18n
@@ -116,7 +112,6 @@ abstract class ManufacturerI18n extends Model
     {
         return $this->_metaDescription;
     }
-    
     /**
      * @param string $metaKeywords
      * @return \jtl\Connector\Model\ManufacturerI18n
@@ -134,7 +129,6 @@ abstract class ManufacturerI18n extends Model
     {
         return $this->_metaKeywords;
     }
-    
     /**
      * @param string $titleTag
      * @return \jtl\Connector\Model\ManufacturerI18n
@@ -151,15 +145,6 @@ abstract class ManufacturerI18n extends Model
     public function getTitleTag()
     {
         return $this->_titleTag;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/manufactureri18n/manufactureri18n.json", $this->getPublic(array()));
     }
 }
 ?>

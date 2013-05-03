@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * Unit Model
  * @access public
  */
-abstract class Unit extends Model
+abstract class Unit extends DataModel
 {
     /**
      * @var int
@@ -47,7 +46,6 @@ abstract class Unit extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $languageIso
      * @return \jtl\Connector\Model\Unit
@@ -65,7 +63,6 @@ abstract class Unit extends Model
     {
         return $this->_languageIso;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\Unit
@@ -82,15 +79,6 @@ abstract class Unit extends Model
     public function getName()
     {
         return $this->_name;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/unit/unit.json", $this->getPublic(array()));
     }
 }
 ?>

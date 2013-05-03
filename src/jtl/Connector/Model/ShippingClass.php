@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * ShippingClass Model
  * @access public
  */
-abstract class ShippingClass extends Model
+abstract class ShippingClass extends DataModel
 {
     /**
      * @var int
@@ -42,7 +41,6 @@ abstract class ShippingClass extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\ShippingClass
@@ -59,15 +57,6 @@ abstract class ShippingClass extends Model
     public function getName()
     {
         return $this->_name;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/shippingclass/shippingclass.json", $this->getPublic(array()));
     }
 }
 ?>

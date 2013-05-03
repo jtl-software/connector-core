@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * MediaFile Model
  * @access public
  */
-abstract class MediaFile extends Model
+abstract class MediaFile extends DataModel
 {
     /**
      * @var int
@@ -67,7 +66,6 @@ abstract class MediaFile extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $productId
      * @return \jtl\Connector\Model\MediaFile
@@ -85,7 +83,6 @@ abstract class MediaFile extends Model
     {
         return $this->_productId;
     }
-    
     /**
      * @param string $path
      * @return \jtl\Connector\Model\MediaFile
@@ -103,7 +100,6 @@ abstract class MediaFile extends Model
     {
         return $this->_path;
     }
-    
     /**
      * @param string $url
      * @return \jtl\Connector\Model\MediaFile
@@ -121,7 +117,6 @@ abstract class MediaFile extends Model
     {
         return $this->_url;
     }
-    
     /**
      * @param string $mediaFileCategory
      * @return \jtl\Connector\Model\MediaFile
@@ -139,7 +134,6 @@ abstract class MediaFile extends Model
     {
         return $this->_mediaFileCategory;
     }
-    
     /**
      * @param string $type
      * @return \jtl\Connector\Model\MediaFile
@@ -157,7 +151,6 @@ abstract class MediaFile extends Model
     {
         return $this->_type;
     }
-    
     /**
      * @param int $sort
      * @return \jtl\Connector\Model\MediaFile
@@ -174,15 +167,6 @@ abstract class MediaFile extends Model
     public function getSort()
     {
         return $this->_sort;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/mediafile/mediafile.json", $this->getPublic(array()));
     }
 }
 ?>

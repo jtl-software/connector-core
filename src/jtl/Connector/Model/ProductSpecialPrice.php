@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * ProductSpecialPrice Model
  * @access public
  */
-abstract class ProductSpecialPrice extends Model
+abstract class ProductSpecialPrice extends DataModel
 {
     /**
      * @var int
@@ -62,7 +61,6 @@ abstract class ProductSpecialPrice extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param int $productId
      * @return \jtl\Connector\Model\ProductSpecialPrice
@@ -80,7 +78,6 @@ abstract class ProductSpecialPrice extends Model
     {
         return $this->_productId;
     }
-    
     /**
      * @param string $isActive
      * @return \jtl\Connector\Model\ProductSpecialPrice
@@ -98,7 +95,6 @@ abstract class ProductSpecialPrice extends Model
     {
         return $this->_isActive;
     }
-    
     /**
      * @param string $activeFrom
      * @return \jtl\Connector\Model\ProductSpecialPrice
@@ -116,7 +112,6 @@ abstract class ProductSpecialPrice extends Model
     {
         return $this->_activeFrom;
     }
-    
     /**
      * @param string $activeUntil
      * @return \jtl\Connector\Model\ProductSpecialPrice
@@ -134,7 +129,6 @@ abstract class ProductSpecialPrice extends Model
     {
         return $this->_activeUntil;
     }
-    
     /**
      * @param int $quantityLimit
      * @return \jtl\Connector\Model\ProductSpecialPrice
@@ -151,15 +145,6 @@ abstract class ProductSpecialPrice extends Model
     public function getQuantityLimit()
     {
         return $this->_quantityLimit;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/productspecialprice/productspecialprice.json", $this->getPublic(array()));
     }
 }
 ?>

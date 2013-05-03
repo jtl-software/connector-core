@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * SpecialPrice Model
  * @access public
  */
-abstract class SpecialPrice extends Model
+abstract class SpecialPrice extends DataModel
 {
     /**
      * @var int
@@ -47,7 +46,6 @@ abstract class SpecialPrice extends Model
     {
         return $this->_customerGroupId;
     }
-    
     /**
      * @param int $productSpecialPriceId
      * @return \jtl\Connector\Model\SpecialPrice
@@ -65,7 +63,6 @@ abstract class SpecialPrice extends Model
     {
         return $this->_productSpecialPriceId;
     }
-    
     /**
      * @param double $priceNet
      * @return \jtl\Connector\Model\SpecialPrice
@@ -82,15 +79,6 @@ abstract class SpecialPrice extends Model
     public function getPriceNet()
     {
         return $this->_priceNet;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/specialprice/specialprice.json", $this->getPublic(array()));
     }
 }
 ?>

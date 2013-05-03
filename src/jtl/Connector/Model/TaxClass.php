@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * TaxClass Model
  * @access public
  */
-abstract class TaxClass extends Model
+abstract class TaxClass extends DataModel
 {
     /**
      * @var int
@@ -47,7 +46,6 @@ abstract class TaxClass extends Model
     {
         return $this->_id;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\TaxClass
@@ -65,7 +63,6 @@ abstract class TaxClass extends Model
     {
         return $this->_name;
     }
-    
     /**
      * @param string $default
      * @return \jtl\Connector\Model\TaxClass
@@ -82,15 +79,6 @@ abstract class TaxClass extends Model
     public function getDefault()
     {
         return $this->_default;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/taxclass/taxclass.json", $this->getPublic(array()));
     }
 }
 ?>

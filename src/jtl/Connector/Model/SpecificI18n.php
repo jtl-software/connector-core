@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * SpecificI18n Model
  * @access public
  */
-abstract class SpecificI18n extends Model
+abstract class SpecificI18n extends DataModel
 {
     /**
      * @var int
@@ -47,7 +46,6 @@ abstract class SpecificI18n extends Model
     {
         return $this->_languageIso;
     }
-    
     /**
      * @param int $specificId
      * @return \jtl\Connector\Model\SpecificI18n
@@ -65,7 +63,6 @@ abstract class SpecificI18n extends Model
     {
         return $this->_specificId;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\SpecificI18n
@@ -82,15 +79,6 @@ abstract class SpecificI18n extends Model
     public function getName()
     {
         return $this->_name;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/specifici18n/specifici18n.json", $this->getPublic(array()));
     }
 }
 ?>

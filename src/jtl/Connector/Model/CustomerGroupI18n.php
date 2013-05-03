@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerGroupI18n Model
  * @access public
  */
-abstract class CustomerGroupI18n extends Model
+abstract class CustomerGroupI18n extends DataModel
 {
     /**
      * @var int
@@ -47,7 +46,6 @@ abstract class CustomerGroupI18n extends Model
     {
         return $this->_languageIso;
     }
-    
     /**
      * @param int $customerGroupId
      * @return \jtl\Connector\Model\CustomerGroupI18n
@@ -65,7 +63,6 @@ abstract class CustomerGroupI18n extends Model
     {
         return $this->_customerGroupId;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\CustomerGroupI18n
@@ -82,15 +79,6 @@ abstract class CustomerGroupI18n extends Model
     public function getName()
     {
         return $this->_name;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/customergroupi18n/customergroupi18n.json", $this->getPublic(array()));
     }
 }
 ?>

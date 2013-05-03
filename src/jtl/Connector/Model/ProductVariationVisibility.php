@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * ProductVariationVisibility Model
  * @access public
  */
-abstract class ProductVariationVisibility extends Model
+abstract class ProductVariationVisibility extends DataModel
 {
     /**
      * @var int
@@ -42,7 +41,6 @@ abstract class ProductVariationVisibility extends Model
     {
         return $this->_customerGroupId;
     }
-    
     /**
      * @param int $productVariationId
      * @return \jtl\Connector\Model\ProductVariationVisibility
@@ -59,15 +57,6 @@ abstract class ProductVariationVisibility extends Model
     public function getProductVariationId()
     {
         return $this->_productVariationId;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/productvariationvisibility/productvariationvisibility.json", $this->getPublic(array()));
     }
 }
 ?>

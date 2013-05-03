@@ -6,14 +6,13 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\Model;
-use \jtl\Core\Validator\Schema;
+use \jtl\Core\Model\DataModel;
 
 /**
  * ProductAttrI18n Model
  * @access public
  */
-abstract class ProductAttrI18n extends Model
+abstract class ProductAttrI18n extends DataModel
 {
     /**
      * @var int
@@ -52,7 +51,6 @@ abstract class ProductAttrI18n extends Model
     {
         return $this->_languageIso;
     }
-    
     /**
      * @param int $productAttrId
      * @return \jtl\Connector\Model\ProductAttrI18n
@@ -70,7 +68,6 @@ abstract class ProductAttrI18n extends Model
     {
         return $this->_productAttrId;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\ProductAttrI18n
@@ -88,7 +85,6 @@ abstract class ProductAttrI18n extends Model
     {
         return $this->_name;
     }
-    
     /**
      * @param string $value
      * @return \jtl\Connector\Model\ProductAttrI18n
@@ -105,15 +101,6 @@ abstract class ProductAttrI18n extends Model
     public function getValue()
     {
         return $this->_value;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\Model::validate()
-     */
-    public function validate()
-    {
-        Schema::validateModel(CONNECTOR_DIR . "schema/productattri18n/productattri18n.json", $this->getPublic(array()));
     }
 }
 ?>
