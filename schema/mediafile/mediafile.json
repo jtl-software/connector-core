@@ -3,25 +3,46 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "productId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "path": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "url": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "mediaFileCategory": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "type": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "sort": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         }
     },
     "required": [

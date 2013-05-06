@@ -3,16 +3,28 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "productId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "sort": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "isVisible": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ]
         }
     },
     "required": [

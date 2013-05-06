@@ -3,25 +3,46 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "nameEnglish": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "nameGerman": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "languageIso": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "isDefault": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "isConnectorDefault": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "isWawiDefault": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         }
     },
     "required": [

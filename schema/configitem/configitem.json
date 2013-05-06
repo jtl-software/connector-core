@@ -3,49 +3,94 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "configGroupId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "productId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "type": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "isPreSelected": {
-            "type": "bool"
+            "type": [
+                "bool",
+                "null"
+            ]
         },
         "isRecommended": {
-            "type": "bool"
+            "type": [
+                "bool",
+                "null"
+            ]
         },
         "useProductName": {
-            "type": "bool"
+            "type": [
+                "bool",
+                "null"
+            ]
         },
         "useProductPrice": {
-            "type": "bool"
+            "type": [
+                "bool",
+                "null"
+            ]
         },
         "showDiscount": {
-            "type": "bool"
+            "type": [
+                "bool",
+                "null"
+            ]
         },
         "showSurcharge": {
-            "type": "bool"
+            "type": [
+                "bool",
+                "null"
+            ]
         },
         "ignoreMultiplier": {
-            "type": "bool"
+            "type": [
+                "bool",
+                "null"
+            ]
         },
         "minQuantity": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ]
         },
         "maxQuantity": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ]
         },
         "initialQuantity": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ]
         },
         "sort": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         }
     },
     "required": [

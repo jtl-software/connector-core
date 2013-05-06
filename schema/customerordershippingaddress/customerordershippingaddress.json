@@ -3,58 +3,112 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "customerId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "salutation": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "firstName": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "lastName": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "title": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "company": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "extraAddressLine": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "street": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "streetNumber": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "zipCode": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "city": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "state": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "country": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "phone": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "mobile": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "fax": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "eMail": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         }
     },
     "required": [

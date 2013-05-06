@@ -3,19 +3,34 @@
     "type": "object",
     "properties": {
         "mediaFileAttr": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "mediaFileId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "languageISO": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "name": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "value": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         }
     },
     "required": [

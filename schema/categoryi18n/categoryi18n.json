@@ -3,19 +3,34 @@
     "type": "object",
     "properties": {
         "languageIso": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "categoryId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "name": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "url": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "description": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         }
     },
     "required": [

@@ -3,34 +3,64 @@
     "type": "object",
     "properties": {
         "shippingMethodId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "basketId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "bankAccount": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "bankCode": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "accountHolder": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "accountNumber": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "iban": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "bic": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "creditCardNumber": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "cvv": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         }
     },
     "required": [

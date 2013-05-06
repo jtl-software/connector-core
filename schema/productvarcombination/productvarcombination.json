@@ -3,13 +3,22 @@
     "type": "object",
     "properties": {
         "productId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "productVariationId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "productVariationValueId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         }
     },
     "required": [

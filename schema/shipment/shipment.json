@@ -3,22 +3,40 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "logistic": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "logisticURL": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "identCode": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "created": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "note": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         }
     },
     "required": [

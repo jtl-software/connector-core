@@ -3,19 +3,34 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "taxZoneId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "taxClassId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "taxRate": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ]
         },
         "priority": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         }
     },
     "required": [

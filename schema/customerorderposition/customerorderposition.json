@@ -3,67 +3,130 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "externalOrderPosition": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "basketId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "productId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "shippingClassId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "name": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "sku": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "singlePrice": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ]
         },
         "price": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ]
         },
         "vat": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ]
         },
         "quantity": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "type": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "unique": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "configItemId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "customerOrderPositionId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "productVariationId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "productVariationValueId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "productVariationName": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "productVariationValueName": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "freeField": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "surcharge": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ]
         }
     },
     "required": [

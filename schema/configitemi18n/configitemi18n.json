@@ -3,16 +3,28 @@
     "type": "object",
     "properties": {
         "configItemId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "languageIso": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "name": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "description": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         }
     },
     "required": [

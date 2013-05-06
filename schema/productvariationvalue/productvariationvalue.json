@@ -3,43 +3,82 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "productVariationId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "extraWeight": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ]
         },
         "sku": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "sort": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "stockLevel": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ]
         },
         "packagingUnitId": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ]
         },
         "languageIso": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "productVariationValueId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "name": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "customerGroupId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         },
         "extraChargeNet": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ]
         },
         "productVariationValueTargetId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ]
         }
     },
     "required": [
