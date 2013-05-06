@@ -3,52 +3,28 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "identificationString": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "path": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "previewPath": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "maxDownloads": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "maxDays": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "sort": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "created": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         }
     },
     "required": [

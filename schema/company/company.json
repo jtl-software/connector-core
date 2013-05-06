@@ -3,124 +3,64 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "name": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "businessman": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "street": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "streetNumber": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "zipCode": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "city": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "country": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "phone": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "fax": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "eMail": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "www": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "bankCode": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "accountNumber": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "bankAccount": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "accountHolder": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "vatNumber": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "taxIdNumber": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "iban": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "bic": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         }
     },
     "required": [

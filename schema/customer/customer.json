@@ -3,202 +3,103 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "customerGroupId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "languageIso": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "customerNumber": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "password": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "salutation": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "title": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "firstName": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "lastName": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "company": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "street": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "streetNumber": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "extraAddressLine": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "zipCode": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "city": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "state": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "country": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "phone": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "mobile": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "fax": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "eMail": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "vatNumber": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "www": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "accountCredit": {
-            "type": [
-                "double",
-                "null"
-            ]
+            "type": "double"
         },
         "newsletter": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "birthday": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "discount": {
-            "type": [
-                "double",
-                "null"
-            ]
+            "type": "double"
         },
         "origin": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "created": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "modified": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "isActive": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "isFetched": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "hasCustomerAccount": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         }
     },
     "required": [

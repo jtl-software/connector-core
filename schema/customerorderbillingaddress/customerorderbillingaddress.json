@@ -3,112 +3,58 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "customer": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "salutation": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "firstName": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "lastName": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "title": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "company": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "extraAddressLine": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "street": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "streetNumber": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "zipCode": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "city": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "state": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "country": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "phone": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "mobile": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "fax": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "eMail": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         }
     },
     "required": [

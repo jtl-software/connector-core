@@ -3,22 +3,13 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "name": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "default": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         }
     },
     "required": [

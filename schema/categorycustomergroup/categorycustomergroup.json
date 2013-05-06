@@ -3,22 +3,13 @@
     "type": "object",
     "properties": {
         "customerGroupId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "categoryId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "discount": {
-            "type": [
-                "double",
-                "null"
-            ]
+            "type": "double"
         }
     },
     "required": [

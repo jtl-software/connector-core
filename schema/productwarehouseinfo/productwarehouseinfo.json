@@ -3,28 +3,16 @@
     "type": "object",
     "properties": {
         "productId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "warehouseId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "stockLevel": {
-            "type": [
-                "double",
-                "null"
-            ]
+            "type": "double"
         },
         "inflowDate": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         }
     },
     "required": [

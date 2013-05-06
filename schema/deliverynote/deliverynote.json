@@ -3,40 +3,22 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "customerOrderId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "note": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "created": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "fulfillment": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "status": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         }
     },
     "required": [

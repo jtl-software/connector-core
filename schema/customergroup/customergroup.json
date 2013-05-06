@@ -3,40 +3,22 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "name": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "discount": {
-            "type": [
-                "double",
-                "null"
-            ]
+            "type": "double"
         },
         "default": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "shopLogin": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "shopNetPrice": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         }
     },
     "required": [

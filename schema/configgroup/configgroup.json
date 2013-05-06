@@ -3,46 +3,25 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "imagePath": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "minimumSelection": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "maximumSelection": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "type": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "sort": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "comment": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         }
     },
     "required": [

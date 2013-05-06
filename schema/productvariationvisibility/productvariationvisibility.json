@@ -3,16 +3,10 @@
     "type": "object",
     "properties": {
         "customerGroupId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "productVariationId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         }
     },
     "required": [

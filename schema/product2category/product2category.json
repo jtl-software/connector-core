@@ -3,22 +3,13 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "categoryId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "productId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         }
     },
     "required": [

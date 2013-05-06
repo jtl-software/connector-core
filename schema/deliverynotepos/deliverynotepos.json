@@ -3,46 +3,25 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "orderPosition": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "quantity": {
-            "type": [
-                "double",
-                "null"
-            ]
+            "type": "double"
         },
         "stock": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "serialNumber": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "batchNumber": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "bestBefore": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         }
     },
     "required": [

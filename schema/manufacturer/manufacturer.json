@@ -3,34 +3,19 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "name": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "www": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "sort": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "url": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         }
     },
     "required": [

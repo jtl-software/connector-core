@@ -3,40 +3,22 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "productId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "name": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "isSelectable": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "type": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "sort": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         }
     },
     "required": [

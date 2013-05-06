@@ -3,22 +3,13 @@
     "type": "object",
     "properties": {
         "languageIso": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "specificId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "name": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         }
     },
     "required": [

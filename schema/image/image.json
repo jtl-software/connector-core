@@ -3,40 +3,22 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "relationType": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "foreignKey": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "isMainImage": {
-            "type": [
-                "bool",
-                "null"
-            ]
+            "type": "bool"
         },
         "filename": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "sort": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         }
     },
     "required": [

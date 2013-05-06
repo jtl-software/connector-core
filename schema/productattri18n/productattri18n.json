@@ -3,28 +3,16 @@
     "type": "object",
     "properties": {
         "languageIso": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "productAttrId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "name": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "value": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         }
     },
     "required": [

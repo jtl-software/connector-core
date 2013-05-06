@@ -3,178 +3,91 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "basketId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "customerId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "shippingAddressId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "billingAddressId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "paymentMethodId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "shippingMethodId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "languageIso": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "currencyIso": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "paymentMethodType": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "credit": {
-            "type": [
-                "double",
-                "null"
-            ]
+            "type": "double"
         },
         "totalSum": {
-            "type": [
-                "double",
-                "null"
-            ]
+            "type": "double"
         },
         "session": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "shippingMethodName": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "paymentMethodName": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "orderNumber": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "shippingInfo": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "shippingDate": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "paymentDate": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "ratingNotificationDate": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "tracking": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "note": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "logistic": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "trackingURL": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "ip": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "isFetched": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "status": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "created": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "paymentModuleId": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         }
     },
     "required": [

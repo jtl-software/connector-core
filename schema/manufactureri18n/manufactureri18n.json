@@ -3,40 +3,22 @@
     "type": "object",
     "properties": {
         "manufacturerId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "languageIso": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "description": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "metaDescription": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "metaKeywords": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "titleTag": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         }
     },
     "required": [

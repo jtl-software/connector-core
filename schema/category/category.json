@@ -3,22 +3,13 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "parentCategoryId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "sort": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         }
     },
     "required": [

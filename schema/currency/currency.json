@@ -3,58 +3,31 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "name": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "iso": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "nameHtml": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "factor": {
-            "type": [
-                "double",
-                "null"
-            ]
+            "type": "double"
         },
         "default": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "currencySignBeforeValue": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "delimiterCent": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "delimiterThousand": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         }
     },
     "required": [

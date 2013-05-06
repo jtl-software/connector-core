@@ -3,28 +3,16 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "crossSellingProductId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "crossSellingGroupId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "productId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         }
     },
     "required": [

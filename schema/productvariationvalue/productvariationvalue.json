@@ -3,82 +3,43 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "productVariationId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "extraWeight": {
-            "type": [
-                "double",
-                "null"
-            ]
+            "type": "double"
         },
         "sku": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "sort": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "stockLevel": {
-            "type": [
-                "double",
-                "null"
-            ]
+            "type": "double"
         },
         "packagingUnitId": {
-            "type": [
-                "double",
-                "null"
-            ]
+            "type": "double"
         },
         "languageIso": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "productVariationValueId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "name": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "type": "string"
         },
         "customerGroupId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         },
         "extraChargeNet": {
-            "type": [
-                "double",
-                "null"
-            ]
+            "type": "double"
         },
         "productVariationValueTargetId": {
-            "type": [
-                "int",
-                "null"
-            ]
+            "type": "int"
         }
     },
     "required": [
