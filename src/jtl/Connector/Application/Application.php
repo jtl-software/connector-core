@@ -272,8 +272,9 @@ class Application extends CoreApplication
      */
     protected function startSession($sessionId = null, $method)
     {
-        if ($sessionId === null && $method !== null && $method != "core.connector.auth")
+        if ($sessionId === null && $method !== null && $method != "core.connector.auth") {
             throw new SessionException("No session");
+		}
         
         $sqlite3 = Sqlite3::getInstance();
         $sqlite3->connect(array("location" => CONNECTOR_DIR . "db/connector.s3db"));
