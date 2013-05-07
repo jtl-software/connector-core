@@ -59,14 +59,19 @@ class Application extends CoreApplication
      */
     public function run()
     {        
-        $jtlrpc = Request::handle();
+        $jtlrpc = Request::handle();        
         $sessionId = Request::getSession();
         $requestpackets = RequestPacket::build($jtlrpc);
                 
         $rpcmode = is_object($requestpackets) ? Packet::SINGLE_MODE : Packet::BATCH_MODE;
                 
         // Start Session
-        $this->startSession($sessionId, $requestpackets->getMethod());
+        $method = null;
+        if ($rpcmode == Packet::SINGLE_MODE) {
+            $method = $requestpackets->getMethod();
+        }
+        
+        $this->startSession($sessionId, $method);
         
         // Creates the config instance
         $config = new Config(array(
@@ -115,8 +120,8 @@ class Application extends CoreApplication
         // Endpoint Connector
         $exists = false;
         foreach (self::$_connectors as $endpointconnector) {
-            if ($endpointconnector->canHandle($requestpacket->getMethod())) {
-                $endpointconnector->setConfig($config);
+            if ($endpointconnector->canHandle($requestpacket->getMethod())) {                
+                $endpointconnector->setConfig($config);                
                 $actionresult = $endpointconnector->handle($requestpacket->getId(), $requestpacket->getMethod(), $requestpacket->getParams());
                 if (get_class($actionresult) == "jtl\\Connector\\Result\\Action") {
                     $exists = true;
@@ -267,7 +272,7 @@ class Application extends CoreApplication
      */
     protected function startSession($sessionId = null, $method)
     {
-        if ($sessionId === null && $method != "core.connector.auth")
+        if ($sessionId === null && $method !== null && $method != "core.connector.auth")
             throw new SessionException("No session");
         
         $sqlite3 = Sqlite3::getInstance();

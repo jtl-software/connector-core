@@ -3,151 +3,347 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         },
         "masterProductId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         },
         "manufacturerId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         },
         "deliveryStatusId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         },
         "unitId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         },
         "basePriceUnitId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         },
         "taxClassId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         },
         "shippingClassId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         },
         "sku": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "note": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "stockLevel": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
         },
         "vat": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
         },
         "minimumOrderQuantity": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
         },
         "ean": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "isTopProduct": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "productWeight": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
         },
         "shippingWeight": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
         },
         "isNew": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "recommendedRetailPrice": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
         },
         "considerStock": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "permitNegativeStock": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "considerVariationStock": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "isDivisible": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "packagingUnit": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
         },
         "considerBasePrice": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "basePriceValue": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
         },
         "keywords": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "sort": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         },
         "created": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "availableFrom": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "manufacturerNumber": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "serialNumber": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "isbn": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "asin": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "unNumber": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "hazardIdNumber": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "taric": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "isMasterProduct": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         },
         "takeOffQuantity": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
         },
         "setArticleId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         },
         "upc": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "originCountry": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "epid": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "productTypeId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         },
         "inflowQuantity": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
         },
         "inflowDate": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "supplierStockLevel": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
         },
         "supplierDeliveryTime": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
         },
         "bestBefore": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         }
     },
     "required": [

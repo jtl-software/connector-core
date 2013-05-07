@@ -75,7 +75,7 @@ class Connector extends Singleton implements IEndpointConnector
      * @see \jtl\Connector\Application\IEndpointConnector::handle()
      */
     public function handle($id, $method, $params = null)
-    {
+    {        
         $this->_controller->setConfig($this->getConfig());
         return $this->_controller->{$this->_action}($params);
     }
