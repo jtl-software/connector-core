@@ -65,174 +65,43 @@ abstract class CustomerOrderPaymentInfo extends DataModel
     protected $_cvv;
     
     /**
-     * @param int $shippingMethodId
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     * CustomerOrderPaymentInfo Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setShippingMethodId($shippingMethodId)
+    public function __set($name, $value)
     {
-        $this->_shippingMethodId = (int)$shippingMethodId;
-        return $this;
+        switch ($name) {
+            case "_shippingMethodId":
+            case "_basketId":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_bankAccount":
+            case "_bankCode":
+            case "_accountHolder":
+            case "_accountNumber":
+            case "_iban":
+            case "_bic":
+            case "_creditCardNumber":
+            case "_cvv":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * CustomerOrderPaymentInfo Getter
+     *
+     * @param string $name
      */
-    public function getShippingMethodId()
+    public function __get($name)
     {
-        return $this->_shippingMethodId;
-    }
-    /**
-     * @param int $basketId
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setBasketId($basketId)
-    {
-        $this->_basketId = (int)$basketId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getBasketId()
-    {
-        return $this->_basketId;
-    }
-    /**
-     * @param string $bankAccount
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setBankAccount($bankAccount)
-    {
-        $this->_bankAccount = (string)$bankAccount;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getBankAccount()
-    {
-        return $this->_bankAccount;
-    }
-    /**
-     * @param string $bankCode
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setBankCode($bankCode)
-    {
-        $this->_bankCode = (string)$bankCode;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getBankCode()
-    {
-        return $this->_bankCode;
-    }
-    /**
-     * @param string $accountHolder
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setAccountHolder($accountHolder)
-    {
-        $this->_accountHolder = (string)$accountHolder;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getAccountHolder()
-    {
-        return $this->_accountHolder;
-    }
-    /**
-     * @param string $accountNumber
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setAccountNumber($accountNumber)
-    {
-        $this->_accountNumber = (string)$accountNumber;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getAccountNumber()
-    {
-        return $this->_accountNumber;
-    }
-    /**
-     * @param string $iban
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setIban($iban)
-    {
-        $this->_iban = (string)$iban;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getIban()
-    {
-        return $this->_iban;
-    }
-    /**
-     * @param string $bic
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setBic($bic)
-    {
-        $this->_bic = (string)$bic;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getBic()
-    {
-        return $this->_bic;
-    }
-    /**
-     * @param string $creditCardNumber
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setCreditCardNumber($creditCardNumber)
-    {
-        $this->_creditCardNumber = (string)$creditCardNumber;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getCreditCardNumber()
-    {
-        return $this->_creditCardNumber;
-    }
-    /**
-     * @param string $cvv
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setCvv($cvv)
-    {
-        $this->_cvv = (string)$cvv;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getCvv()
-    {
-        return $this->_cvv;
+        return $this->$name;
     }
 }
 ?>

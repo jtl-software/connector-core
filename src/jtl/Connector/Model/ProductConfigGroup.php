@@ -30,55 +30,32 @@ abstract class ProductConfigGroup extends DataModel
     protected $_sort;
     
     /**
-     * @param int $configGroupId
-     * @return \jtl\Connector\Model\ProductConfigGroup
+     * ProductConfigGroup Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setConfigGroupId($configGroupId)
+    public function __set($name, $value)
     {
-        $this->_configGroupId = (int)$configGroupId;
-        return $this;
+        switch ($name) {
+            case "_configGroupId":
+            case "_productId":
+            case "_sort":
+            
+                $this->$name = (int)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * ProductConfigGroup Getter
+     *
+     * @param string $name
      */
-    public function getConfigGroupId()
+    public function __get($name)
     {
-        return $this->_configGroupId;
-    }
-    /**
-     * @param int $productId
-     * @return \jtl\Connector\Model\ProductConfigGroup
-     */
-    public function setProductId($productId)
-    {
-        $this->_productId = (int)$productId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductId()
-    {
-        return $this->_productId;
-    }
-    /**
-     * @param int $sort
-     * @return \jtl\Connector\Model\ProductConfigGroup
-     */
-    public function setSort($sort)
-    {
-        $this->_sort = (int)$sort;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getSort()
-    {
-        return $this->_sort;
+        return $this->$name;
     }
 }
 ?>

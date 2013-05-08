@@ -30,55 +30,36 @@ abstract class SetArticle extends DataModel
     protected $_quantity;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\SetArticle
+     * SetArticle Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setId($id)
+    public function __set($name, $value)
     {
-        $this->_id = (int)$id;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_productId":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_quantity":
+            
+                $this->$name = (double)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * SetArticle Getter
+     *
+     * @param string $name
      */
-    public function getId()
+    public function __get($name)
     {
-        return $this->_id;
-    }
-    /**
-     * @param int $productId
-     * @return \jtl\Connector\Model\SetArticle
-     */
-    public function setProductId($productId)
-    {
-        $this->_productId = (int)$productId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductId()
-    {
-        return $this->_productId;
-    }
-    /**
-     * @param double $quantity
-     * @return \jtl\Connector\Model\SetArticle
-     */
-    public function setQuantity($quantity)
-    {
-        $this->_quantity = (double)$quantity;
-        return $this;
-    }
-    
-    /**
-     * @return double
-     */
-    public function getQuantity()
-    {
-        return $this->_quantity;
+        return $this->$name;
     }
 }
 ?>

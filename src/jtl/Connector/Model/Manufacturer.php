@@ -40,89 +40,38 @@ abstract class Manufacturer extends DataModel
     protected $_url;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\Manufacturer
-     */
-    public function setId($id)
-    {
-        $this->_id = (int)$id;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
+     * Manufacturer Setter
+     *
      * @param string $name
-     * @return \jtl\Connector\Model\Manufacturer
+     * @param string $value
      */
-    public function setName($name)
+    public function __set($name, $value)
     {
-        $this->_name = (string)$name;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_sort":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_name":
+            case "_www":
+            case "_url":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return string
+     * Manufacturer Getter
+     *
+     * @param string $name
      */
-    public function getName()
+    public function __get($name)
     {
-        return $this->_name;
-    }
-    /**
-     * @param string $www
-     * @return \jtl\Connector\Model\Manufacturer
-     */
-    public function setWww($www)
-    {
-        $this->_www = (string)$www;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getWww()
-    {
-        return $this->_www;
-    }
-    /**
-     * @param int $sort
-     * @return \jtl\Connector\Model\Manufacturer
-     */
-    public function setSort($sort)
-    {
-        $this->_sort = (int)$sort;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getSort()
-    {
-        return $this->_sort;
-    }
-    /**
-     * @param string $url
-     * @return \jtl\Connector\Model\Manufacturer
-     */
-    public function setUrl($url)
-    {
-        $this->_url = (string)$url;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->_url;
+        return $this->$name;
     }
 }
 ?>

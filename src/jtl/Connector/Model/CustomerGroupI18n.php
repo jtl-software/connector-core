@@ -30,55 +30,36 @@ abstract class CustomerGroupI18n extends DataModel
     protected $_name;
     
     /**
-     * @param int $languageIso
-     * @return \jtl\Connector\Model\CustomerGroupI18n
-     */
-    public function setLanguageIso($languageIso)
-    {
-        $this->_languageIso = (int)$languageIso;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getLanguageIso()
-    {
-        return $this->_languageIso;
-    }
-    /**
-     * @param int $customerGroupId
-     * @return \jtl\Connector\Model\CustomerGroupI18n
-     */
-    public function setCustomerGroupId($customerGroupId)
-    {
-        $this->_customerGroupId = (int)$customerGroupId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getCustomerGroupId()
-    {
-        return $this->_customerGroupId;
-    }
-    /**
+     * CustomerGroupI18n Setter
+     *
      * @param string $name
-     * @return \jtl\Connector\Model\CustomerGroupI18n
+     * @param string $value
      */
-    public function setName($name)
+    public function __set($name, $value)
     {
-        $this->_name = (string)$name;
-        return $this;
+        switch ($name) {
+            case "_languageIso":
+            case "_customerGroupId":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_name":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return string
+     * CustomerGroupI18n Getter
+     *
+     * @param string $name
      */
-    public function getName()
+    public function __get($name)
     {
-        return $this->_name;
+        return $this->$name;
     }
 }
 ?>

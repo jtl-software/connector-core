@@ -35,72 +35,37 @@ abstract class ConfigItemI18n extends DataModel
     protected $_description;
     
     /**
-     * @param int $configItemId
-     * @return \jtl\Connector\Model\ConfigItemI18n
-     */
-    public function setConfigItemId($configItemId)
-    {
-        $this->_configItemId = (int)$configItemId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getConfigItemId()
-    {
-        return $this->_configItemId;
-    }
-    /**
-     * @param int $languageIso
-     * @return \jtl\Connector\Model\ConfigItemI18n
-     */
-    public function setLanguageIso($languageIso)
-    {
-        $this->_languageIso = (int)$languageIso;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getLanguageIso()
-    {
-        return $this->_languageIso;
-    }
-    /**
+     * ConfigItemI18n Setter
+     *
      * @param string $name
-     * @return \jtl\Connector\Model\ConfigItemI18n
+     * @param string $value
      */
-    public function setName($name)
+    public function __set($name, $value)
     {
-        $this->_name = (string)$name;
-        return $this;
+        switch ($name) {
+            case "_configItemId":
+            case "_languageIso":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_name":
+            case "_description":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return string
+     * ConfigItemI18n Getter
+     *
+     * @param string $name
      */
-    public function getName()
+    public function __get($name)
     {
-        return $this->_name;
-    }
-    /**
-     * @param string $description
-     * @return \jtl\Connector\Model\ConfigItemI18n
-     */
-    public function setDescription($description)
-    {
-        $this->_description = (string)$description;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->_description;
+        return $this->$name;
     }
 }
 ?>

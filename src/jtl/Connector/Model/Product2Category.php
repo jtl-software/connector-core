@@ -30,55 +30,32 @@ abstract class Product2Category extends DataModel
     protected $_productId;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\Product2Category
+     * Product2Category Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setId($id)
+    public function __set($name, $value)
     {
-        $this->_id = (int)$id;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_categoryId":
+            case "_productId":
+            
+                $this->$name = (int)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * Product2Category Getter
+     *
+     * @param string $name
      */
-    public function getId()
+    public function __get($name)
     {
-        return $this->_id;
-    }
-    /**
-     * @param int $categoryId
-     * @return \jtl\Connector\Model\Product2Category
-     */
-    public function setCategoryId($categoryId)
-    {
-        $this->_categoryId = (int)$categoryId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getCategoryId()
-    {
-        return $this->_categoryId;
-    }
-    /**
-     * @param int $productId
-     * @return \jtl\Connector\Model\Product2Category
-     */
-    public function setProductId($productId)
-    {
-        $this->_productId = (int)$productId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductId()
-    {
-        return $this->_productId;
+        return $this->$name;
     }
 }
 ?>

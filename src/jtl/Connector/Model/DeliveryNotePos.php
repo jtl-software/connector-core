@@ -50,123 +50,44 @@ abstract class DeliveryNotePos extends DataModel
     protected $_bestBefore;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\DeliveryNotePos
+     * DeliveryNotePos Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setId($id)
+    public function __set($name, $value)
     {
-        $this->_id = (int)$id;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_orderPosition":
+            case "_stock":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_quantity":
+            
+                $this->$name = (double)$value;
+                break;
+        
+            case "_serialNumber":
+            case "_batchNumber":
+            case "_bestBefore":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * DeliveryNotePos Getter
+     *
+     * @param string $name
      */
-    public function getId()
+    public function __get($name)
     {
-        return $this->_id;
-    }
-    /**
-     * @param int $orderPosition
-     * @return \jtl\Connector\Model\DeliveryNotePos
-     */
-    public function setOrderPosition($orderPosition)
-    {
-        $this->_orderPosition = (int)$orderPosition;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getOrderPosition()
-    {
-        return $this->_orderPosition;
-    }
-    /**
-     * @param double $quantity
-     * @return \jtl\Connector\Model\DeliveryNotePos
-     */
-    public function setQuantity($quantity)
-    {
-        $this->_quantity = (double)$quantity;
-        return $this;
-    }
-    
-    /**
-     * @return double
-     */
-    public function getQuantity()
-    {
-        return $this->_quantity;
-    }
-    /**
-     * @param int $stock
-     * @return \jtl\Connector\Model\DeliveryNotePos
-     */
-    public function setStock($stock)
-    {
-        $this->_stock = (int)$stock;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getStock()
-    {
-        return $this->_stock;
-    }
-    /**
-     * @param string $serialNumber
-     * @return \jtl\Connector\Model\DeliveryNotePos
-     */
-    public function setSerialNumber($serialNumber)
-    {
-        $this->_serialNumber = (string)$serialNumber;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getSerialNumber()
-    {
-        return $this->_serialNumber;
-    }
-    /**
-     * @param string $batchNumber
-     * @return \jtl\Connector\Model\DeliveryNotePos
-     */
-    public function setBatchNumber($batchNumber)
-    {
-        $this->_batchNumber = (string)$batchNumber;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getBatchNumber()
-    {
-        return $this->_batchNumber;
-    }
-    /**
-     * @param string $bestBefore
-     * @return \jtl\Connector\Model\DeliveryNotePos
-     */
-    public function setBestBefore($bestBefore)
-    {
-        $this->_bestBefore = (string)$bestBefore;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getBestBefore()
-    {
-        return $this->_bestBefore;
+        return $this->$name;
     }
 }
 ?>

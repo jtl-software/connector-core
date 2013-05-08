@@ -45,106 +45,39 @@ abstract class Shipment extends DataModel
     protected $_note;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\Shipment
+     * Shipment Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setId($id)
+    public function __set($name, $value)
     {
-        $this->_id = (int)$id;
-        return $this;
+        switch ($name) {
+            case "_id":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_logistic":
+            case "_logisticURL":
+            case "_identCode":
+            case "_created":
+            case "_note":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * Shipment Getter
+     *
+     * @param string $name
      */
-    public function getId()
+    public function __get($name)
     {
-        return $this->_id;
-    }
-    /**
-     * @param string $logistic
-     * @return \jtl\Connector\Model\Shipment
-     */
-    public function setLogistic($logistic)
-    {
-        $this->_logistic = (string)$logistic;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getLogistic()
-    {
-        return $this->_logistic;
-    }
-    /**
-     * @param string $logisticURL
-     * @return \jtl\Connector\Model\Shipment
-     */
-    public function setLogisticURL($logisticURL)
-    {
-        $this->_logisticURL = (string)$logisticURL;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getLogisticURL()
-    {
-        return $this->_logisticURL;
-    }
-    /**
-     * @param string $identCode
-     * @return \jtl\Connector\Model\Shipment
-     */
-    public function setIdentCode($identCode)
-    {
-        $this->_identCode = (string)$identCode;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getIdentCode()
-    {
-        return $this->_identCode;
-    }
-    /**
-     * @param string $created
-     * @return \jtl\Connector\Model\Shipment
-     */
-    public function setCreated($created)
-    {
-        $this->_created = (string)$created;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getCreated()
-    {
-        return $this->_created;
-    }
-    /**
-     * @param string $note
-     * @return \jtl\Connector\Model\Shipment
-     */
-    public function setNote($note)
-    {
-        $this->_note = (string)$note;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getNote()
-    {
-        return $this->_note;
+        return $this->$name;
     }
 }
 ?>

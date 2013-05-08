@@ -70,191 +70,44 @@ abstract class SpecificValue extends DataModel
     protected $_titleTag;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\SpecificValue
-     */
-    public function setId($id)
-    {
-        $this->_id = (int)$id;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param int $specificId
-     * @return \jtl\Connector\Model\SpecificValue
-     */
-    public function setSpecificId($specificId)
-    {
-        $this->_specificId = (int)$specificId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getSpecificId()
-    {
-        return $this->_specificId;
-    }
-    /**
-     * @param int $sort
-     * @return \jtl\Connector\Model\SpecificValue
-     */
-    public function setSort($sort)
-    {
-        $this->_sort = (int)$sort;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getSort()
-    {
-        return $this->_sort;
-    }
-    /**
-     * @param int $languageIso
-     * @return \jtl\Connector\Model\SpecificValue
-     */
-    public function setLanguageIso($languageIso)
-    {
-        $this->_languageIso = (int)$languageIso;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getLanguageIso()
-    {
-        return $this->_languageIso;
-    }
-    /**
-     * @param int $specificValueId
-     * @return \jtl\Connector\Model\SpecificValue
-     */
-    public function setSpecificValueId($specificValueId)
-    {
-        $this->_specificValueId = (int)$specificValueId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getSpecificValueId()
-    {
-        return $this->_specificValueId;
-    }
-    /**
+     * SpecificValue Setter
+     *
+     * @param string $name
      * @param string $value
-     * @return \jtl\Connector\Model\SpecificValue
      */
-    public function setValue($value)
+    public function __set($name, $value)
     {
-        $this->_value = (string)$value;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_specificId":
+            case "_sort":
+            case "_languageIso":
+            case "_specificValueId":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_value":
+            case "_url":
+            case "_description":
+            case "_metaDescription":
+            case "_metaKeywords":
+            case "_titleTag":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return string
+     * SpecificValue Getter
+     *
+     * @param string $name
      */
-    public function getValue()
+    public function __get($name)
     {
-        return $this->_value;
-    }
-    /**
-     * @param string $url
-     * @return \jtl\Connector\Model\SpecificValue
-     */
-    public function setUrl($url)
-    {
-        $this->_url = (string)$url;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->_url;
-    }
-    /**
-     * @param string $description
-     * @return \jtl\Connector\Model\SpecificValue
-     */
-    public function setDescription($description)
-    {
-        $this->_description = (string)$description;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->_description;
-    }
-    /**
-     * @param string $metaDescription
-     * @return \jtl\Connector\Model\SpecificValue
-     */
-    public function setMetaDescription($metaDescription)
-    {
-        $this->_metaDescription = (string)$metaDescription;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getMetaDescription()
-    {
-        return $this->_metaDescription;
-    }
-    /**
-     * @param string $metaKeywords
-     * @return \jtl\Connector\Model\SpecificValue
-     */
-    public function setMetaKeywords($metaKeywords)
-    {
-        $this->_metaKeywords = (string)$metaKeywords;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getMetaKeywords()
-    {
-        return $this->_metaKeywords;
-    }
-    /**
-     * @param string $titleTag
-     * @return \jtl\Connector\Model\SpecificValue
-     */
-    public function setTitleTag($titleTag)
-    {
-        $this->_titleTag = (string)$titleTag;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getTitleTag()
-    {
-        return $this->_titleTag;
+        return $this->$name;
     }
 }
 ?>

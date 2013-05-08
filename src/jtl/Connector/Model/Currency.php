@@ -60,157 +60,46 @@ abstract class Currency extends DataModel
     protected $_delimiterThousand;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\Currency
-     */
-    public function setId($id)
-    {
-        $this->_id = (int)$id;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
+     * Currency Setter
+     *
      * @param string $name
-     * @return \jtl\Connector\Model\Currency
+     * @param string $value
      */
-    public function setName($name)
+    public function __set($name, $value)
     {
-        $this->_name = (string)$name;
-        return $this;
+        switch ($name) {
+            case "_id":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_name":
+            case "_iso":
+            case "_nameHtml":
+            case "_default":
+            case "_currencySignBeforeValue":
+            case "_delimiterCent":
+            case "_delimiterThousand":
+            
+                $this->$name = (string)$value;
+                break;
+        
+            case "_factor":
+            
+                $this->$name = (double)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return string
+     * Currency Getter
+     *
+     * @param string $name
      */
-    public function getName()
+    public function __get($name)
     {
-        return $this->_name;
-    }
-    /**
-     * @param string $iso
-     * @return \jtl\Connector\Model\Currency
-     */
-    public function setIso($iso)
-    {
-        $this->_iso = (string)$iso;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getIso()
-    {
-        return $this->_iso;
-    }
-    /**
-     * @param string $nameHtml
-     * @return \jtl\Connector\Model\Currency
-     */
-    public function setNameHtml($nameHtml)
-    {
-        $this->_nameHtml = (string)$nameHtml;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getNameHtml()
-    {
-        return $this->_nameHtml;
-    }
-    /**
-     * @param double $factor
-     * @return \jtl\Connector\Model\Currency
-     */
-    public function setFactor($factor)
-    {
-        $this->_factor = (double)$factor;
-        return $this;
-    }
-    
-    /**
-     * @return double
-     */
-    public function getFactor()
-    {
-        return $this->_factor;
-    }
-    /**
-     * @param string $default
-     * @return \jtl\Connector\Model\Currency
-     */
-    public function setDefault($default)
-    {
-        $this->_default = (string)$default;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getDefault()
-    {
-        return $this->_default;
-    }
-    /**
-     * @param string $currencySignBeforeValue
-     * @return \jtl\Connector\Model\Currency
-     */
-    public function setCurrencySignBeforeValue($currencySignBeforeValue)
-    {
-        $this->_currencySignBeforeValue = (string)$currencySignBeforeValue;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getCurrencySignBeforeValue()
-    {
-        return $this->_currencySignBeforeValue;
-    }
-    /**
-     * @param string $delimiterCent
-     * @return \jtl\Connector\Model\Currency
-     */
-    public function setDelimiterCent($delimiterCent)
-    {
-        $this->_delimiterCent = (string)$delimiterCent;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getDelimiterCent()
-    {
-        return $this->_delimiterCent;
-    }
-    /**
-     * @param string $delimiterThousand
-     * @return \jtl\Connector\Model\Currency
-     */
-    public function setDelimiterThousand($delimiterThousand)
-    {
-        $this->_delimiterThousand = (string)$delimiterThousand;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getDelimiterThousand()
-    {
-        return $this->_delimiterThousand;
+        return $this->$name;
     }
 }
 ?>

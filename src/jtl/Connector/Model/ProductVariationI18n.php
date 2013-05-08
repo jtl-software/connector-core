@@ -30,55 +30,36 @@ abstract class ProductVariationI18n extends DataModel
     protected $_name;
     
     /**
-     * @param int $languageIso
-     * @return \jtl\Connector\Model\ProductVariationI18n
-     */
-    public function setLanguageIso($languageIso)
-    {
-        $this->_languageIso = (int)$languageIso;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getLanguageIso()
-    {
-        return $this->_languageIso;
-    }
-    /**
-     * @param int $productVariationId
-     * @return \jtl\Connector\Model\ProductVariationI18n
-     */
-    public function setProductVariationId($productVariationId)
-    {
-        $this->_productVariationId = (int)$productVariationId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductVariationId()
-    {
-        return $this->_productVariationId;
-    }
-    /**
+     * ProductVariationI18n Setter
+     *
      * @param string $name
-     * @return \jtl\Connector\Model\ProductVariationI18n
+     * @param string $value
      */
-    public function setName($name)
+    public function __set($name, $value)
     {
-        $this->_name = (string)$name;
-        return $this;
+        switch ($name) {
+            case "_languageIso":
+            case "_productVariationId":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_name":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return string
+     * ProductVariationI18n Getter
+     *
+     * @param string $name
      */
-    public function getName()
+    public function __get($name)
     {
-        return $this->_name;
+        return $this->$name;
     }
 }
 ?>

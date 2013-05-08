@@ -35,72 +35,37 @@ abstract class ProductAttrI18n extends DataModel
     protected $_value;
     
     /**
-     * @param int $languageIso
-     * @return \jtl\Connector\Model\ProductAttrI18n
-     */
-    public function setLanguageIso($languageIso)
-    {
-        $this->_languageIso = (int)$languageIso;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getLanguageIso()
-    {
-        return $this->_languageIso;
-    }
-    /**
-     * @param int $productAttrId
-     * @return \jtl\Connector\Model\ProductAttrI18n
-     */
-    public function setProductAttrId($productAttrId)
-    {
-        $this->_productAttrId = (int)$productAttrId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductAttrId()
-    {
-        return $this->_productAttrId;
-    }
-    /**
+     * ProductAttrI18n Setter
+     *
      * @param string $name
-     * @return \jtl\Connector\Model\ProductAttrI18n
-     */
-    public function setName($name)
-    {
-        $this->_name = (string)$name;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-    /**
      * @param string $value
-     * @return \jtl\Connector\Model\ProductAttrI18n
      */
-    public function setValue($value)
+    public function __set($name, $value)
     {
-        $this->_value = (string)$value;
-        return $this;
+        switch ($name) {
+            case "_languageIso":
+            case "_productAttrId":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_name":
+            case "_value":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return string
+     * ProductAttrI18n Getter
+     *
+     * @param string $name
      */
-    public function getValue()
+    public function __get($name)
     {
-        return $this->_value;
+        return $this->$name;
     }
 }
 ?>

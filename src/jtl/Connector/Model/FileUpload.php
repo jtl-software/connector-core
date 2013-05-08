@@ -45,106 +45,39 @@ abstract class FileUpload extends DataModel
     protected $_required;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\FileUpload
-     */
-    public function setId($id)
-    {
-        $this->_id = (int)$id;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param int $productId
-     * @return \jtl\Connector\Model\FileUpload
-     */
-    public function setProductId($productId)
-    {
-        $this->_productId = (int)$productId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductId()
-    {
-        return $this->_productId;
-    }
-    /**
+     * FileUpload Setter
+     *
      * @param string $name
-     * @return \jtl\Connector\Model\FileUpload
+     * @param string $value
      */
-    public function setName($name)
+    public function __set($name, $value)
     {
-        $this->_name = (string)$name;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_productId":
+            case "_required":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_name":
+            case "_description":
+            case "_fileType":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return string
+     * FileUpload Getter
+     *
+     * @param string $name
      */
-    public function getName()
+    public function __get($name)
     {
-        return $this->_name;
-    }
-    /**
-     * @param string $description
-     * @return \jtl\Connector\Model\FileUpload
-     */
-    public function setDescription($description)
-    {
-        $this->_description = (string)$description;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->_description;
-    }
-    /**
-     * @param string $fileType
-     * @return \jtl\Connector\Model\FileUpload
-     */
-    public function setFileType($fileType)
-    {
-        $this->_fileType = (string)$fileType;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getFileType()
-    {
-        return $this->_fileType;
-    }
-    /**
-     * @param int $required
-     * @return \jtl\Connector\Model\FileUpload
-     */
-    public function setRequired($required)
-    {
-        $this->_required = (int)$required;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getRequired()
-    {
-        return $this->_required;
+        return $this->$name;
     }
 }
 ?>

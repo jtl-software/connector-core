@@ -40,89 +40,38 @@ abstract class TaxRate extends DataModel
     protected $_priority;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\TaxRate
+     * TaxRate Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setId($id)
+    public function __set($name, $value)
     {
-        $this->_id = (int)$id;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_taxZoneId":
+            case "_taxClassId":
+            case "_priority":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_taxRate":
+            
+                $this->$name = (double)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * TaxRate Getter
+     *
+     * @param string $name
      */
-    public function getId()
+    public function __get($name)
     {
-        return $this->_id;
-    }
-    /**
-     * @param int $taxZoneId
-     * @return \jtl\Connector\Model\TaxRate
-     */
-    public function setTaxZoneId($taxZoneId)
-    {
-        $this->_taxZoneId = (int)$taxZoneId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getTaxZoneId()
-    {
-        return $this->_taxZoneId;
-    }
-    /**
-     * @param int $taxClassId
-     * @return \jtl\Connector\Model\TaxRate
-     */
-    public function setTaxClassId($taxClassId)
-    {
-        $this->_taxClassId = (int)$taxClassId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getTaxClassId()
-    {
-        return $this->_taxClassId;
-    }
-    /**
-     * @param double $taxRate
-     * @return \jtl\Connector\Model\TaxRate
-     */
-    public function setTaxRate($taxRate)
-    {
-        $this->_taxRate = (double)$taxRate;
-        return $this;
-    }
-    
-    /**
-     * @return double
-     */
-    public function getTaxRate()
-    {
-        return $this->_taxRate;
-    }
-    /**
-     * @param int $priority
-     * @return \jtl\Connector\Model\TaxRate
-     */
-    public function setPriority($priority)
-    {
-        $this->_priority = (int)$priority;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getPriority()
-    {
-        return $this->_priority;
+        return $this->$name;
     }
 }
 ?>

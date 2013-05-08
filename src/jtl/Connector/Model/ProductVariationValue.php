@@ -100,293 +100,54 @@ abstract class ProductVariationValue extends DataModel
     protected $_productVariationValueTargetId;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\ProductVariationValue
-     */
-    public function setId($id)
-    {
-        $this->_id = (int)$id;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param int $productVariationId
-     * @return \jtl\Connector\Model\ProductVariationValue
-     */
-    public function setProductVariationId($productVariationId)
-    {
-        $this->_productVariationId = (int)$productVariationId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductVariationId()
-    {
-        return $this->_productVariationId;
-    }
-    /**
-     * @param double $extraWeight
-     * @return \jtl\Connector\Model\ProductVariationValue
-     */
-    public function setExtraWeight($extraWeight)
-    {
-        $this->_extraWeight = (double)$extraWeight;
-        return $this;
-    }
-    
-    /**
-     * @return double
-     */
-    public function getExtraWeight()
-    {
-        return $this->_extraWeight;
-    }
-    /**
-     * @param string $sku
-     * @return \jtl\Connector\Model\ProductVariationValue
-     */
-    public function setSku($sku)
-    {
-        $this->_sku = (string)$sku;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getSku()
-    {
-        return $this->_sku;
-    }
-    /**
-     * @param int $sort
-     * @return \jtl\Connector\Model\ProductVariationValue
-     */
-    public function setSort($sort)
-    {
-        $this->_sort = (int)$sort;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getSort()
-    {
-        return $this->_sort;
-    }
-    /**
-     * @param double $stockLevel
-     * @return \jtl\Connector\Model\ProductVariationValue
-     */
-    public function setStockLevel($stockLevel)
-    {
-        $this->_stockLevel = (double)$stockLevel;
-        return $this;
-    }
-    
-    /**
-     * @return double
-     */
-    public function getStockLevel()
-    {
-        return $this->_stockLevel;
-    }
-    /**
-     * @param double $packagingUnitId
-     * @return \jtl\Connector\Model\ProductVariationValue
-     */
-    public function setPackagingUnitId($packagingUnitId)
-    {
-        $this->_packagingUnitId = (double)$packagingUnitId;
-        return $this;
-    }
-    
-    /**
-     * @return double
-     */
-    public function getPackagingUnitId()
-    {
-        return $this->_packagingUnitId;
-    }
-    /**
-     * @param int $languageIso
-     * @return \jtl\Connector\Model\ProductVariationValue
-     */
-    public function setLanguageIso($languageIso)
-    {
-        $this->_languageIso = (int)$languageIso;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getLanguageIso()
-    {
-        return $this->_languageIso;
-    }
-    /**
-     * @param int $productVariationValueId
-     * @return \jtl\Connector\Model\ProductVariationValue
-     */
-    public function setProductVariationValueId($productVariationValueId)
-    {
-        $this->_productVariationValueId = (int)$productVariationValueId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductVariationValueId()
-    {
-        return $this->_productVariationValueId;
-    }
-    /**
+     * ProductVariationValue Setter
+     *
      * @param string $name
-     * @return \jtl\Connector\Model\ProductVariationValue
+     * @param string $value
      */
-    public function setName($name)
+    public function __set($name, $value)
     {
-        $this->_name = (string)$name;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_productVariationId":
+            case "_sort":
+            case "_languageIso":
+            case "_productVariationValueId":
+            case "_customerGroupId":
+            case "_productVariationValueId":
+            case "_customerGroupId":
+            case "_productVariationValueId":
+            case "_productVariationValueId":
+            case "_productVariationValueTargetId":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_extraWeight":
+            case "_stockLevel":
+            case "_packagingUnitId":
+            case "_extraChargeNet":
+            
+                $this->$name = (double)$value;
+                break;
+        
+            case "_sku":
+            case "_name":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return string
+     * ProductVariationValue Getter
+     *
+     * @param string $name
      */
-    public function getName()
+    public function __get($name)
     {
-        return $this->_name;
-    }
-    /**
-     * @param int $customerGroupId
-     * @return \jtl\Connector\Model\ProductVariationValue
-     */
-    public function setCustomerGroupId($customerGroupId)
-    {
-        $this->_customerGroupId = (int)$customerGroupId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getCustomerGroupId()
-    {
-        return $this->_customerGroupId;
-    }
-    /**
-     * @param int $productVariationValueId
-     * @return \jtl\Connector\Model\ProductVariationValue
-     */
-    public function setProductVariationValueId($productVariationValueId)
-    {
-        $this->_productVariationValueId = (int)$productVariationValueId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductVariationValueId()
-    {
-        return $this->_productVariationValueId;
-    }
-    /**
-     * @param double $extraChargeNet
-     * @return \jtl\Connector\Model\ProductVariationValue
-     */
-    public function setExtraChargeNet($extraChargeNet)
-    {
-        $this->_extraChargeNet = (double)$extraChargeNet;
-        return $this;
-    }
-    
-    /**
-     * @return double
-     */
-    public function getExtraChargeNet()
-    {
-        return $this->_extraChargeNet;
-    }
-    /**
-     * @param int $customerGroupId
-     * @return \jtl\Connector\Model\ProductVariationValue
-     */
-    public function setCustomerGroupId($customerGroupId)
-    {
-        $this->_customerGroupId = (int)$customerGroupId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getCustomerGroupId()
-    {
-        return $this->_customerGroupId;
-    }
-    /**
-     * @param int $productVariationValueId
-     * @return \jtl\Connector\Model\ProductVariationValue
-     */
-    public function setProductVariationValueId($productVariationValueId)
-    {
-        $this->_productVariationValueId = (int)$productVariationValueId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductVariationValueId()
-    {
-        return $this->_productVariationValueId;
-    }
-    /**
-     * @param int $productVariationValueId
-     * @return \jtl\Connector\Model\ProductVariationValue
-     */
-    public function setProductVariationValueId($productVariationValueId)
-    {
-        $this->_productVariationValueId = (int)$productVariationValueId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductVariationValueId()
-    {
-        return $this->_productVariationValueId;
-    }
-    /**
-     * @param int $productVariationValueTargetId
-     * @return \jtl\Connector\Model\ProductVariationValue
-     */
-    public function setProductVariationValueTargetId($productVariationValueTargetId)
-    {
-        $this->_productVariationValueTargetId = (int)$productVariationValueTargetId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductVariationValueTargetId()
-    {
-        return $this->_productVariationValueTargetId;
+        return $this->$name;
     }
 }
 ?>

@@ -45,106 +45,39 @@ abstract class ProductI18n extends DataModel
     protected $_shortDescription;
     
     /**
-     * @param int $languageIso
-     * @return \jtl\Connector\Model\ProductI18n
-     */
-    public function setLanguageIso($languageIso)
-    {
-        $this->_languageIso = (int)$languageIso;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getLanguageIso()
-    {
-        return $this->_languageIso;
-    }
-    /**
-     * @param int $productId
-     * @return \jtl\Connector\Model\ProductI18n
-     */
-    public function setProductId($productId)
-    {
-        $this->_productId = (int)$productId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductId()
-    {
-        return $this->_productId;
-    }
-    /**
+     * ProductI18n Setter
+     *
      * @param string $name
-     * @return \jtl\Connector\Model\ProductI18n
+     * @param string $value
      */
-    public function setName($name)
+    public function __set($name, $value)
     {
-        $this->_name = (string)$name;
-        return $this;
+        switch ($name) {
+            case "_languageIso":
+            case "_productId":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_name":
+            case "_url":
+            case "_description":
+            case "_shortDescription":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return string
+     * ProductI18n Getter
+     *
+     * @param string $name
      */
-    public function getName()
+    public function __get($name)
     {
-        return $this->_name;
-    }
-    /**
-     * @param string $url
-     * @return \jtl\Connector\Model\ProductI18n
-     */
-    public function setUrl($url)
-    {
-        $this->_url = (string)$url;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->_url;
-    }
-    /**
-     * @param string $description
-     * @return \jtl\Connector\Model\ProductI18n
-     */
-    public function setDescription($description)
-    {
-        $this->_description = (string)$description;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->_description;
-    }
-    /**
-     * @param string $shortDescription
-     * @return \jtl\Connector\Model\ProductI18n
-     */
-    public function setShortDescription($shortDescription)
-    {
-        $this->_shortDescription = (string)$shortDescription;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getShortDescription()
-    {
-        return $this->_shortDescription;
+        return $this->$name;
     }
 }
 ?>

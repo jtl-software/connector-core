@@ -50,123 +50,40 @@ abstract class MediaFile extends DataModel
     protected $_sort;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\MediaFile
+     * MediaFile Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setId($id)
+    public function __set($name, $value)
     {
-        $this->_id = (int)$id;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_productId":
+            case "_sort":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_path":
+            case "_url":
+            case "_mediaFileCategory":
+            case "_type":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * MediaFile Getter
+     *
+     * @param string $name
      */
-    public function getId()
+    public function __get($name)
     {
-        return $this->_id;
-    }
-    /**
-     * @param int $productId
-     * @return \jtl\Connector\Model\MediaFile
-     */
-    public function setProductId($productId)
-    {
-        $this->_productId = (int)$productId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductId()
-    {
-        return $this->_productId;
-    }
-    /**
-     * @param string $path
-     * @return \jtl\Connector\Model\MediaFile
-     */
-    public function setPath($path)
-    {
-        $this->_path = (string)$path;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->_path;
-    }
-    /**
-     * @param string $url
-     * @return \jtl\Connector\Model\MediaFile
-     */
-    public function setUrl($url)
-    {
-        $this->_url = (string)$url;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->_url;
-    }
-    /**
-     * @param string $mediaFileCategory
-     * @return \jtl\Connector\Model\MediaFile
-     */
-    public function setMediaFileCategory($mediaFileCategory)
-    {
-        $this->_mediaFileCategory = (string)$mediaFileCategory;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getMediaFileCategory()
-    {
-        return $this->_mediaFileCategory;
-    }
-    /**
-     * @param string $type
-     * @return \jtl\Connector\Model\MediaFile
-     */
-    public function setType($type)
-    {
-        $this->_type = (string)$type;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->_type;
-    }
-    /**
-     * @param int $sort
-     * @return \jtl\Connector\Model\MediaFile
-     */
-    public function setSort($sort)
-    {
-        $this->_sort = (int)$sort;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getSort()
-    {
-        return $this->_sort;
+        return $this->$name;
     }
 }
 ?>

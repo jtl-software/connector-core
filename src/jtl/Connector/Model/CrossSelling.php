@@ -35,72 +35,33 @@ abstract class CrossSelling extends DataModel
     protected $_productId;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\CrossSelling
+     * CrossSelling Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setId($id)
+    public function __set($name, $value)
     {
-        $this->_id = (int)$id;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_crossSellingProductId":
+            case "_crossSellingGroupId":
+            case "_productId":
+            
+                $this->$name = (int)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * CrossSelling Getter
+     *
+     * @param string $name
      */
-    public function getId()
+    public function __get($name)
     {
-        return $this->_id;
-    }
-    /**
-     * @param int $crossSellingProductId
-     * @return \jtl\Connector\Model\CrossSelling
-     */
-    public function setCrossSellingProductId($crossSellingProductId)
-    {
-        $this->_crossSellingProductId = (int)$crossSellingProductId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getCrossSellingProductId()
-    {
-        return $this->_crossSellingProductId;
-    }
-    /**
-     * @param int $crossSellingGroupId
-     * @return \jtl\Connector\Model\CrossSelling
-     */
-    public function setCrossSellingGroupId($crossSellingGroupId)
-    {
-        $this->_crossSellingGroupId = (int)$crossSellingGroupId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getCrossSellingGroupId()
-    {
-        return $this->_crossSellingGroupId;
-    }
-    /**
-     * @param int $productId
-     * @return \jtl\Connector\Model\CrossSelling
-     */
-    public function setProductId($productId)
-    {
-        $this->_productId = (int)$productId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductId()
-    {
-        return $this->_productId;
+        return $this->$name;
     }
 }
 ?>

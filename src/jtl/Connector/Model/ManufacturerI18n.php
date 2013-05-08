@@ -45,106 +45,39 @@ abstract class ManufacturerI18n extends DataModel
     protected $_titleTag;
     
     /**
-     * @param int $manufacturerId
-     * @return \jtl\Connector\Model\ManufacturerI18n
+     * ManufacturerI18n Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setManufacturerId($manufacturerId)
+    public function __set($name, $value)
     {
-        $this->_manufacturerId = (int)$manufacturerId;
-        return $this;
+        switch ($name) {
+            case "_manufacturerId":
+            case "_languageIso":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_description":
+            case "_metaDescription":
+            case "_metaKeywords":
+            case "_titleTag":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * ManufacturerI18n Getter
+     *
+     * @param string $name
      */
-    public function getManufacturerId()
+    public function __get($name)
     {
-        return $this->_manufacturerId;
-    }
-    /**
-     * @param int $languageIso
-     * @return \jtl\Connector\Model\ManufacturerI18n
-     */
-    public function setLanguageIso($languageIso)
-    {
-        $this->_languageIso = (int)$languageIso;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getLanguageIso()
-    {
-        return $this->_languageIso;
-    }
-    /**
-     * @param string $description
-     * @return \jtl\Connector\Model\ManufacturerI18n
-     */
-    public function setDescription($description)
-    {
-        $this->_description = (string)$description;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->_description;
-    }
-    /**
-     * @param string $metaDescription
-     * @return \jtl\Connector\Model\ManufacturerI18n
-     */
-    public function setMetaDescription($metaDescription)
-    {
-        $this->_metaDescription = (string)$metaDescription;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getMetaDescription()
-    {
-        return $this->_metaDescription;
-    }
-    /**
-     * @param string $metaKeywords
-     * @return \jtl\Connector\Model\ManufacturerI18n
-     */
-    public function setMetaKeywords($metaKeywords)
-    {
-        $this->_metaKeywords = (string)$metaKeywords;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getMetaKeywords()
-    {
-        return $this->_metaKeywords;
-    }
-    /**
-     * @param string $titleTag
-     * @return \jtl\Connector\Model\ManufacturerI18n
-     */
-    public function setTitleTag($titleTag)
-    {
-        $this->_titleTag = (string)$titleTag;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getTitleTag()
-    {
-        return $this->_titleTag;
+        return $this->$name;
     }
 }
 ?>

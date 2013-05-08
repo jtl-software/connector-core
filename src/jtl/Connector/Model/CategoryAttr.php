@@ -40,89 +40,38 @@ abstract class CategoryAttr extends DataModel
     protected $_value;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\CategoryAttr
-     */
-    public function setId($id)
-    {
-        $this->_id = (int)$id;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param int $categoryId
-     * @return \jtl\Connector\Model\CategoryAttr
-     */
-    public function setCategoryId($categoryId)
-    {
-        $this->_categoryId = (int)$categoryId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getCategoryId()
-    {
-        return $this->_categoryId;
-    }
-    /**
-     * @param string $languageIso
-     * @return \jtl\Connector\Model\CategoryAttr
-     */
-    public function setLanguageIso($languageIso)
-    {
-        $this->_languageIso = (string)$languageIso;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getLanguageIso()
-    {
-        return $this->_languageIso;
-    }
-    /**
+     * CategoryAttr Setter
+     *
      * @param string $name
-     * @return \jtl\Connector\Model\CategoryAttr
-     */
-    public function setName($name)
-    {
-        $this->_name = (string)$name;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-    /**
      * @param string $value
-     * @return \jtl\Connector\Model\CategoryAttr
      */
-    public function setValue($value)
+    public function __set($name, $value)
     {
-        $this->_value = (string)$value;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_categoryId":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_languageIso":
+            case "_name":
+            case "_value":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return string
+     * CategoryAttr Getter
+     *
+     * @param string $name
      */
-    public function getValue()
+    public function __get($name)
     {
-        return $this->_value;
+        return $this->$name;
     }
 }
 ?>

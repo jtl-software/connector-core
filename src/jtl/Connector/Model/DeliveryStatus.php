@@ -30,55 +30,36 @@ abstract class DeliveryStatus extends DataModel
     protected $_name;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\DeliveryStatus
-     */
-    public function setId($id)
-    {
-        $this->_id = (int)$id;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param int $languageIso
-     * @return \jtl\Connector\Model\DeliveryStatus
-     */
-    public function setLanguageIso($languageIso)
-    {
-        $this->_languageIso = (int)$languageIso;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getLanguageIso()
-    {
-        return $this->_languageIso;
-    }
-    /**
+     * DeliveryStatus Setter
+     *
      * @param string $name
-     * @return \jtl\Connector\Model\DeliveryStatus
+     * @param string $value
      */
-    public function setName($name)
+    public function __set($name, $value)
     {
-        $this->_name = (string)$name;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_languageIso":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_name":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return string
+     * DeliveryStatus Getter
+     *
+     * @param string $name
      */
-    public function getName()
+    public function __get($name)
     {
-        return $this->_name;
+        return $this->$name;
     }
 }
 ?>

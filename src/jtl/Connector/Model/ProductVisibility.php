@@ -25,38 +25,31 @@ abstract class ProductVisibility extends DataModel
     protected $_productId;
     
     /**
-     * @param int $customerGroupId
-     * @return \jtl\Connector\Model\ProductVisibility
+     * ProductVisibility Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setCustomerGroupId($customerGroupId)
+    public function __set($name, $value)
     {
-        $this->_customerGroupId = (int)$customerGroupId;
-        return $this;
+        switch ($name) {
+            case "_customerGroupId":
+            case "_productId":
+            
+                $this->$name = (int)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * ProductVisibility Getter
+     *
+     * @param string $name
      */
-    public function getCustomerGroupId()
+    public function __get($name)
     {
-        return $this->_customerGroupId;
-    }
-    /**
-     * @param int $productId
-     * @return \jtl\Connector\Model\ProductVisibility
-     */
-    public function setProductId($productId)
-    {
-        $this->_productId = (int)$productId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductId()
-    {
-        return $this->_productId;
+        return $this->$name;
     }
 }
 ?>

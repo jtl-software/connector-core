@@ -125,378 +125,59 @@ abstract class CustomerOrderPosition extends DataModel
     protected $_surcharge;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\CustomerOrderPosition
-     */
-    public function setId($id)
-    {
-        $this->_id = (int)$id;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param int $externalOrderPosition
-     * @return \jtl\Connector\Model\CustomerOrderPosition
-     */
-    public function setExternalOrderPosition($externalOrderPosition)
-    {
-        $this->_externalOrderPosition = (int)$externalOrderPosition;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getExternalOrderPosition()
-    {
-        return $this->_externalOrderPosition;
-    }
-    /**
-     * @param int $basketId
-     * @return \jtl\Connector\Model\CustomerOrderPosition
-     */
-    public function setBasketId($basketId)
-    {
-        $this->_basketId = (int)$basketId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getBasketId()
-    {
-        return $this->_basketId;
-    }
-    /**
-     * @param int $productId
-     * @return \jtl\Connector\Model\CustomerOrderPosition
-     */
-    public function setProductId($productId)
-    {
-        $this->_productId = (int)$productId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductId()
-    {
-        return $this->_productId;
-    }
-    /**
-     * @param int $shippingClassId
-     * @return \jtl\Connector\Model\CustomerOrderPosition
-     */
-    public function setShippingClassId($shippingClassId)
-    {
-        $this->_shippingClassId = (int)$shippingClassId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getShippingClassId()
-    {
-        return $this->_shippingClassId;
-    }
-    /**
+     * CustomerOrderPosition Setter
+     *
      * @param string $name
-     * @return \jtl\Connector\Model\CustomerOrderPosition
+     * @param string $value
      */
-    public function setName($name)
+    public function __set($name, $value)
     {
-        $this->_name = (string)$name;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_externalOrderPosition":
+            case "_basketId":
+            case "_productId":
+            case "_shippingClassId":
+            case "_quantity":
+            case "_type":
+            case "_configItemId":
+            case "_id":
+            case "_customerOrderPositionId":
+            case "_productVariationId":
+            case "_productVariationValueId":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_name":
+            case "_sku":
+            case "_unique":
+            case "_productVariationName":
+            case "_productVariationValueName":
+            case "_freeField":
+            
+                $this->$name = (string)$value;
+                break;
+        
+            case "_singlePrice":
+            case "_price":
+            case "_vat":
+            case "_surcharge":
+            
+                $this->$name = (double)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return string
+     * CustomerOrderPosition Getter
+     *
+     * @param string $name
      */
-    public function getName()
+    public function __get($name)
     {
-        return $this->_name;
-    }
-    /**
-     * @param string $sku
-     * @return \jtl\Connector\Model\CustomerOrderPosition
-     */
-    public function setSku($sku)
-    {
-        $this->_sku = (string)$sku;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getSku()
-    {
-        return $this->_sku;
-    }
-    /**
-     * @param double $singlePrice
-     * @return \jtl\Connector\Model\CustomerOrderPosition
-     */
-    public function setSinglePrice($singlePrice)
-    {
-        $this->_singlePrice = (double)$singlePrice;
-        return $this;
-    }
-    
-    /**
-     * @return double
-     */
-    public function getSinglePrice()
-    {
-        return $this->_singlePrice;
-    }
-    /**
-     * @param double $price
-     * @return \jtl\Connector\Model\CustomerOrderPosition
-     */
-    public function setPrice($price)
-    {
-        $this->_price = (double)$price;
-        return $this;
-    }
-    
-    /**
-     * @return double
-     */
-    public function getPrice()
-    {
-        return $this->_price;
-    }
-    /**
-     * @param double $vat
-     * @return \jtl\Connector\Model\CustomerOrderPosition
-     */
-    public function setVat($vat)
-    {
-        $this->_vat = (double)$vat;
-        return $this;
-    }
-    
-    /**
-     * @return double
-     */
-    public function getVat()
-    {
-        return $this->_vat;
-    }
-    /**
-     * @param int $quantity
-     * @return \jtl\Connector\Model\CustomerOrderPosition
-     */
-    public function setQuantity($quantity)
-    {
-        $this->_quantity = (int)$quantity;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getQuantity()
-    {
-        return $this->_quantity;
-    }
-    /**
-     * @param int $type
-     * @return \jtl\Connector\Model\CustomerOrderPosition
-     */
-    public function setType($type)
-    {
-        $this->_type = (int)$type;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getType()
-    {
-        return $this->_type;
-    }
-    /**
-     * @param string $unique
-     * @return \jtl\Connector\Model\CustomerOrderPosition
-     */
-    public function setUnique($unique)
-    {
-        $this->_unique = (string)$unique;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getUnique()
-    {
-        return $this->_unique;
-    }
-    /**
-     * @param int $configItemId
-     * @return \jtl\Connector\Model\CustomerOrderPosition
-     */
-    public function setConfigItemId($configItemId)
-    {
-        $this->_configItemId = (int)$configItemId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getConfigItemId()
-    {
-        return $this->_configItemId;
-    }
-    /**
-     * @param int $id
-     * @return \jtl\Connector\Model\CustomerOrderPosition
-     */
-    public function setId($id)
-    {
-        $this->_id = (int)$id;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param int $customerOrderPositionId
-     * @return \jtl\Connector\Model\CustomerOrderPosition
-     */
-    public function setCustomerOrderPositionId($customerOrderPositionId)
-    {
-        $this->_customerOrderPositionId = (int)$customerOrderPositionId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getCustomerOrderPositionId()
-    {
-        return $this->_customerOrderPositionId;
-    }
-    /**
-     * @param int $productVariationId
-     * @return \jtl\Connector\Model\CustomerOrderPosition
-     */
-    public function setProductVariationId($productVariationId)
-    {
-        $this->_productVariationId = (int)$productVariationId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductVariationId()
-    {
-        return $this->_productVariationId;
-    }
-    /**
-     * @param int $productVariationValueId
-     * @return \jtl\Connector\Model\CustomerOrderPosition
-     */
-    public function setProductVariationValueId($productVariationValueId)
-    {
-        $this->_productVariationValueId = (int)$productVariationValueId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductVariationValueId()
-    {
-        return $this->_productVariationValueId;
-    }
-    /**
-     * @param string $productVariationName
-     * @return \jtl\Connector\Model\CustomerOrderPosition
-     */
-    public function setProductVariationName($productVariationName)
-    {
-        $this->_productVariationName = (string)$productVariationName;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getProductVariationName()
-    {
-        return $this->_productVariationName;
-    }
-    /**
-     * @param string $productVariationValueName
-     * @return \jtl\Connector\Model\CustomerOrderPosition
-     */
-    public function setProductVariationValueName($productVariationValueName)
-    {
-        $this->_productVariationValueName = (string)$productVariationValueName;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getProductVariationValueName()
-    {
-        return $this->_productVariationValueName;
-    }
-    /**
-     * @param string $freeField
-     * @return \jtl\Connector\Model\CustomerOrderPosition
-     */
-    public function setFreeField($freeField)
-    {
-        $this->_freeField = (string)$freeField;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getFreeField()
-    {
-        return $this->_freeField;
-    }
-    /**
-     * @param double $surcharge
-     * @return \jtl\Connector\Model\CustomerOrderPosition
-     */
-    public function setSurcharge($surcharge)
-    {
-        $this->_surcharge = (double)$surcharge;
-        return $this;
-    }
-    
-    /**
-     * @return double
-     */
-    public function getSurcharge()
-    {
-        return $this->_surcharge;
+        return $this->$name;
     }
 }
 ?>

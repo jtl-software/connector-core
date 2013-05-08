@@ -35,72 +35,37 @@ abstract class CustomerGroupAttr extends DataModel
     protected $_value;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\CustomerGroupAttr
-     */
-    public function setId($id)
-    {
-        $this->_id = (int)$id;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param int $customerGroupId
-     * @return \jtl\Connector\Model\CustomerGroupAttr
-     */
-    public function setCustomerGroupId($customerGroupId)
-    {
-        $this->_customerGroupId = (int)$customerGroupId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getCustomerGroupId()
-    {
-        return $this->_customerGroupId;
-    }
-    /**
-     * @param string $key
-     * @return \jtl\Connector\Model\CustomerGroupAttr
-     */
-    public function setKey($key)
-    {
-        $this->_key = (string)$key;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getKey()
-    {
-        return $this->_key;
-    }
-    /**
+     * CustomerGroupAttr Setter
+     *
+     * @param string $name
      * @param string $value
-     * @return \jtl\Connector\Model\CustomerGroupAttr
      */
-    public function setValue($value)
+    public function __set($name, $value)
     {
-        $this->_value = (string)$value;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_customerGroupId":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_key":
+            case "_value":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return string
+     * CustomerGroupAttr Getter
+     *
+     * @param string $name
      */
-    public function getValue()
+    public function __get($name)
     {
-        return $this->_value;
+        return $this->$name;
     }
 }
 ?>

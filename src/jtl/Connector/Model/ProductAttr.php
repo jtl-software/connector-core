@@ -35,72 +35,37 @@ abstract class ProductAttr extends DataModel
     protected $_isVisible;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\ProductAttr
+     * ProductAttr Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setId($id)
+    public function __set($name, $value)
     {
-        $this->_id = (int)$id;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_productId":
+            case "_sort":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_isVisible":
+            
+                $this->$name = (double)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * ProductAttr Getter
+     *
+     * @param string $name
      */
-    public function getId()
+    public function __get($name)
     {
-        return $this->_id;
-    }
-    /**
-     * @param int $productId
-     * @return \jtl\Connector\Model\ProductAttr
-     */
-    public function setProductId($productId)
-    {
-        $this->_productId = (int)$productId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductId()
-    {
-        return $this->_productId;
-    }
-    /**
-     * @param int $sort
-     * @return \jtl\Connector\Model\ProductAttr
-     */
-    public function setSort($sort)
-    {
-        $this->_sort = (int)$sort;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getSort()
-    {
-        return $this->_sort;
-    }
-    /**
-     * @param double $isVisible
-     * @return \jtl\Connector\Model\ProductAttr
-     */
-    public function setIsVisible($isVisible)
-    {
-        $this->_isVisible = (double)$isVisible;
-        return $this;
-    }
-    
-    /**
-     * @return double
-     */
-    public function getIsVisible()
-    {
-        return $this->_isVisible;
+        return $this->$name;
     }
 }
 ?>

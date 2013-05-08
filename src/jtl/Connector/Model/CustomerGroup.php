@@ -45,106 +45,43 @@ abstract class CustomerGroup extends DataModel
     protected $_shopNetPrice;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\CustomerGroup
-     */
-    public function setId($id)
-    {
-        $this->_id = (int)$id;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
+     * CustomerGroup Setter
+     *
      * @param string $name
-     * @return \jtl\Connector\Model\CustomerGroup
+     * @param string $value
      */
-    public function setName($name)
+    public function __set($name, $value)
     {
-        $this->_name = (string)$name;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_shopNetPrice":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_name":
+            case "_default":
+            case "_shopLogin":
+            
+                $this->$name = (string)$value;
+                break;
+        
+            case "_discount":
+            
+                $this->$name = (double)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return string
+     * CustomerGroup Getter
+     *
+     * @param string $name
      */
-    public function getName()
+    public function __get($name)
     {
-        return $this->_name;
-    }
-    /**
-     * @param double $discount
-     * @return \jtl\Connector\Model\CustomerGroup
-     */
-    public function setDiscount($discount)
-    {
-        $this->_discount = (double)$discount;
-        return $this;
-    }
-    
-    /**
-     * @return double
-     */
-    public function getDiscount()
-    {
-        return $this->_discount;
-    }
-    /**
-     * @param string $default
-     * @return \jtl\Connector\Model\CustomerGroup
-     */
-    public function setDefault($default)
-    {
-        $this->_default = (string)$default;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getDefault()
-    {
-        return $this->_default;
-    }
-    /**
-     * @param string $shopLogin
-     * @return \jtl\Connector\Model\CustomerGroup
-     */
-    public function setShopLogin($shopLogin)
-    {
-        $this->_shopLogin = (string)$shopLogin;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getShopLogin()
-    {
-        return $this->_shopLogin;
-    }
-    /**
-     * @param int $shopNetPrice
-     * @return \jtl\Connector\Model\CustomerGroup
-     */
-    public function setShopNetPrice($shopNetPrice)
-    {
-        $this->_shopNetPrice = (int)$shopNetPrice;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getShopNetPrice()
-    {
-        return $this->_shopNetPrice;
+        return $this->$name;
     }
 }
 ?>

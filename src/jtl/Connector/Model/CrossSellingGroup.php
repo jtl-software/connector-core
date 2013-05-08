@@ -35,72 +35,37 @@ abstract class CrossSellingGroup extends DataModel
     protected $_description;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\CrossSellingGroup
-     */
-    public function setId($id)
-    {
-        $this->_id = (int)$id;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param int $languageIso
-     * @return \jtl\Connector\Model\CrossSellingGroup
-     */
-    public function setLanguageIso($languageIso)
-    {
-        $this->_languageIso = (int)$languageIso;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getLanguageIso()
-    {
-        return $this->_languageIso;
-    }
-    /**
+     * CrossSellingGroup Setter
+     *
      * @param string $name
-     * @return \jtl\Connector\Model\CrossSellingGroup
+     * @param string $value
      */
-    public function setName($name)
+    public function __set($name, $value)
     {
-        $this->_name = (string)$name;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_languageIso":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_name":
+            case "_description":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return string
+     * CrossSellingGroup Getter
+     *
+     * @param string $name
      */
-    public function getName()
+    public function __get($name)
     {
-        return $this->_name;
-    }
-    /**
-     * @param string $description
-     * @return \jtl\Connector\Model\CrossSellingGroup
-     */
-    public function setDescription($description)
-    {
-        $this->_description = (string)$description;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->_description;
+        return $this->$name;
     }
 }
 ?>

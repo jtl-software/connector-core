@@ -110,327 +110,52 @@ abstract class CustomerOrderBillingAddress extends DataModel
     protected $_eMail;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
+     * CustomerOrderBillingAddress Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setId($id)
+    public function __set($name, $value)
     {
-        $this->_id = (int)$id;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_customer":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_salutation":
+            case "_firstName":
+            case "_lastName":
+            case "_title":
+            case "_company":
+            case "_extraAddressLine":
+            case "_street":
+            case "_streetNumber":
+            case "_extraAddressLine":
+            case "_zipCode":
+            case "_city":
+            case "_state":
+            case "_country":
+            case "_phone":
+            case "_mobile":
+            case "_fax":
+            case "_eMail":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * CustomerOrderBillingAddress Getter
+     *
+     * @param string $name
      */
-    public function getId()
+    public function __get($name)
     {
-        return $this->_id;
-    }
-    /**
-     * @param int $customer
-     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     */
-    public function setCustomer($customer)
-    {
-        $this->_customer = (int)$customer;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getCustomer()
-    {
-        return $this->_customer;
-    }
-    /**
-     * @param string $salutation
-     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     */
-    public function setSalutation($salutation)
-    {
-        $this->_salutation = (string)$salutation;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getSalutation()
-    {
-        return $this->_salutation;
-    }
-    /**
-     * @param string $firstName
-     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     */
-    public function setFirstName($firstName)
-    {
-        $this->_firstName = (string)$firstName;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getFirstName()
-    {
-        return $this->_firstName;
-    }
-    /**
-     * @param string $lastName
-     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     */
-    public function setLastName($lastName)
-    {
-        $this->_lastName = (string)$lastName;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getLastName()
-    {
-        return $this->_lastName;
-    }
-    /**
-     * @param string $title
-     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     */
-    public function setTitle($title)
-    {
-        $this->_title = (string)$title;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->_title;
-    }
-    /**
-     * @param string $company
-     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     */
-    public function setCompany($company)
-    {
-        $this->_company = (string)$company;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getCompany()
-    {
-        return $this->_company;
-    }
-    /**
-     * @param string $extraAddressLine
-     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     */
-    public function setExtraAddressLine($extraAddressLine)
-    {
-        $this->_extraAddressLine = (string)$extraAddressLine;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getExtraAddressLine()
-    {
-        return $this->_extraAddressLine;
-    }
-    /**
-     * @param string $street
-     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     */
-    public function setStreet($street)
-    {
-        $this->_street = (string)$street;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getStreet()
-    {
-        return $this->_street;
-    }
-    /**
-     * @param string $streetNumber
-     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     */
-    public function setStreetNumber($streetNumber)
-    {
-        $this->_streetNumber = (string)$streetNumber;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getStreetNumber()
-    {
-        return $this->_streetNumber;
-    }
-    /**
-     * @param string $extraAddressLine
-     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     */
-    public function setExtraAddressLine($extraAddressLine)
-    {
-        $this->_extraAddressLine = (string)$extraAddressLine;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getExtraAddressLine()
-    {
-        return $this->_extraAddressLine;
-    }
-    /**
-     * @param string $zipCode
-     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     */
-    public function setZipCode($zipCode)
-    {
-        $this->_zipCode = (string)$zipCode;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getZipCode()
-    {
-        return $this->_zipCode;
-    }
-    /**
-     * @param string $city
-     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     */
-    public function setCity($city)
-    {
-        $this->_city = (string)$city;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getCity()
-    {
-        return $this->_city;
-    }
-    /**
-     * @param string $state
-     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     */
-    public function setState($state)
-    {
-        $this->_state = (string)$state;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getState()
-    {
-        return $this->_state;
-    }
-    /**
-     * @param string $country
-     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     */
-    public function setCountry($country)
-    {
-        $this->_country = (string)$country;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getCountry()
-    {
-        return $this->_country;
-    }
-    /**
-     * @param string $phone
-     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     */
-    public function setPhone($phone)
-    {
-        $this->_phone = (string)$phone;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getPhone()
-    {
-        return $this->_phone;
-    }
-    /**
-     * @param string $mobile
-     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     */
-    public function setMobile($mobile)
-    {
-        $this->_mobile = (string)$mobile;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getMobile()
-    {
-        return $this->_mobile;
-    }
-    /**
-     * @param string $fax
-     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     */
-    public function setFax($fax)
-    {
-        $this->_fax = (string)$fax;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getFax()
-    {
-        return $this->_fax;
-    }
-    /**
-     * @param string $eMail
-     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     */
-    public function setEMail($eMail)
-    {
-        $this->_eMail = (string)$eMail;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getEMail()
-    {
-        return $this->_eMail;
+        return $this->$name;
     }
 }
 ?>

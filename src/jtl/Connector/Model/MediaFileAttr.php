@@ -40,89 +40,38 @@ abstract class MediaFileAttr extends DataModel
     protected $_value;
     
     /**
-     * @param int $mediaFileAttr
-     * @return \jtl\Connector\Model\MediaFileAttr
-     */
-    public function setMediaFileAttr($mediaFileAttr)
-    {
-        $this->_mediaFileAttr = (int)$mediaFileAttr;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getMediaFileAttr()
-    {
-        return $this->_mediaFileAttr;
-    }
-    /**
-     * @param int $mediaFileId
-     * @return \jtl\Connector\Model\MediaFileAttr
-     */
-    public function setMediaFileId($mediaFileId)
-    {
-        $this->_mediaFileId = (int)$mediaFileId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getMediaFileId()
-    {
-        return $this->_mediaFileId;
-    }
-    /**
-     * @param int $languageISO
-     * @return \jtl\Connector\Model\MediaFileAttr
-     */
-    public function setLanguageISO($languageISO)
-    {
-        $this->_languageISO = (int)$languageISO;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getLanguageISO()
-    {
-        return $this->_languageISO;
-    }
-    /**
+     * MediaFileAttr Setter
+     *
      * @param string $name
-     * @return \jtl\Connector\Model\MediaFileAttr
-     */
-    public function setName($name)
-    {
-        $this->_name = (string)$name;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-    /**
      * @param string $value
-     * @return \jtl\Connector\Model\MediaFileAttr
      */
-    public function setValue($value)
+    public function __set($name, $value)
     {
-        $this->_value = (string)$value;
-        return $this;
+        switch ($name) {
+            case "_mediaFileAttr":
+            case "_mediaFileId":
+            case "_languageISO":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_name":
+            case "_value":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return string
+     * MediaFileAttr Getter
+     *
+     * @param string $name
      */
-    public function getValue()
+    public function __get($name)
     {
-        return $this->_value;
+        return $this->$name;
     }
 }
 ?>

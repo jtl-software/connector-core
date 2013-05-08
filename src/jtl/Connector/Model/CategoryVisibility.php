@@ -25,38 +25,31 @@ abstract class CategoryVisibility extends DataModel
     protected $_categoryId;
     
     /**
-     * @param int $customerGroupId
-     * @return \jtl\Connector\Model\CategoryVisibility
+     * CategoryVisibility Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setCustomerGroupId($customerGroupId)
+    public function __set($name, $value)
     {
-        $this->_customerGroupId = (int)$customerGroupId;
-        return $this;
+        switch ($name) {
+            case "_customerGroupId":
+            case "_categoryId":
+            
+                $this->$name = (int)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * CategoryVisibility Getter
+     *
+     * @param string $name
      */
-    public function getCustomerGroupId()
+    public function __get($name)
     {
-        return $this->_customerGroupId;
-    }
-    /**
-     * @param int $categoryId
-     * @return \jtl\Connector\Model\CategoryVisibility
-     */
-    public function setCategoryId($categoryId)
-    {
-        $this->_categoryId = (int)$categoryId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getCategoryId()
-    {
-        return $this->_categoryId;
+        return $this->$name;
     }
 }
 ?>

@@ -45,106 +45,39 @@ abstract class ProductSpecialPrice extends DataModel
     protected $_quantityLimit;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\ProductSpecialPrice
+     * ProductSpecialPrice Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setId($id)
+    public function __set($name, $value)
     {
-        $this->_id = (int)$id;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_productId":
+            case "_quantityLimit":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_isActive":
+            case "_activeFrom":
+            case "_activeUntil":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * ProductSpecialPrice Getter
+     *
+     * @param string $name
      */
-    public function getId()
+    public function __get($name)
     {
-        return $this->_id;
-    }
-    /**
-     * @param int $productId
-     * @return \jtl\Connector\Model\ProductSpecialPrice
-     */
-    public function setProductId($productId)
-    {
-        $this->_productId = (int)$productId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductId()
-    {
-        return $this->_productId;
-    }
-    /**
-     * @param string $isActive
-     * @return \jtl\Connector\Model\ProductSpecialPrice
-     */
-    public function setIsActive($isActive)
-    {
-        $this->_isActive = (string)$isActive;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getIsActive()
-    {
-        return $this->_isActive;
-    }
-    /**
-     * @param string $activeFrom
-     * @return \jtl\Connector\Model\ProductSpecialPrice
-     */
-    public function setActiveFrom($activeFrom)
-    {
-        $this->_activeFrom = (string)$activeFrom;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getActiveFrom()
-    {
-        return $this->_activeFrom;
-    }
-    /**
-     * @param string $activeUntil
-     * @return \jtl\Connector\Model\ProductSpecialPrice
-     */
-    public function setActiveUntil($activeUntil)
-    {
-        $this->_activeUntil = (string)$activeUntil;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getActiveUntil()
-    {
-        return $this->_activeUntil;
-    }
-    /**
-     * @param int $quantityLimit
-     * @return \jtl\Connector\Model\ProductSpecialPrice
-     */
-    public function setQuantityLimit($quantityLimit)
-    {
-        $this->_quantityLimit = (int)$quantityLimit;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getQuantityLimit()
-    {
-        return $this->_quantityLimit;
+        return $this->$name;
     }
 }
 ?>

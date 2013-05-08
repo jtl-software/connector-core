@@ -30,55 +30,36 @@ abstract class SpecificI18n extends DataModel
     protected $_name;
     
     /**
-     * @param int $languageIso
-     * @return \jtl\Connector\Model\SpecificI18n
-     */
-    public function setLanguageIso($languageIso)
-    {
-        $this->_languageIso = (int)$languageIso;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getLanguageIso()
-    {
-        return $this->_languageIso;
-    }
-    /**
-     * @param int $specificId
-     * @return \jtl\Connector\Model\SpecificI18n
-     */
-    public function setSpecificId($specificId)
-    {
-        $this->_specificId = (int)$specificId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getSpecificId()
-    {
-        return $this->_specificId;
-    }
-    /**
+     * SpecificI18n Setter
+     *
      * @param string $name
-     * @return \jtl\Connector\Model\SpecificI18n
+     * @param string $value
      */
-    public function setName($name)
+    public function __set($name, $value)
     {
-        $this->_name = (string)$name;
-        return $this;
+        switch ($name) {
+            case "_languageIso":
+            case "_specificId":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_name":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return string
+     * SpecificI18n Getter
+     *
+     * @param string $name
      */
-    public function getName()
+    public function __get($name)
     {
-        return $this->_name;
+        return $this->$name;
     }
 }
 ?>

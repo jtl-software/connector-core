@@ -30,55 +30,36 @@ abstract class SpecialPrice extends DataModel
     protected $_priceNet;
     
     /**
-     * @param int $customerGroupId
-     * @return \jtl\Connector\Model\SpecialPrice
+     * SpecialPrice Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setCustomerGroupId($customerGroupId)
+    public function __set($name, $value)
     {
-        $this->_customerGroupId = (int)$customerGroupId;
-        return $this;
+        switch ($name) {
+            case "_customerGroupId":
+            case "_productSpecialPriceId":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_priceNet":
+            
+                $this->$name = (double)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * SpecialPrice Getter
+     *
+     * @param string $name
      */
-    public function getCustomerGroupId()
+    public function __get($name)
     {
-        return $this->_customerGroupId;
-    }
-    /**
-     * @param int $productSpecialPriceId
-     * @return \jtl\Connector\Model\SpecialPrice
-     */
-    public function setProductSpecialPriceId($productSpecialPriceId)
-    {
-        $this->_productSpecialPriceId = (int)$productSpecialPriceId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductSpecialPriceId()
-    {
-        return $this->_productSpecialPriceId;
-    }
-    /**
-     * @param double $priceNet
-     * @return \jtl\Connector\Model\SpecialPrice
-     */
-    public function setPriceNet($priceNet)
-    {
-        $this->_priceNet = (double)$priceNet;
-        return $this;
-    }
-    
-    /**
-     * @return double
-     */
-    public function getPriceNet()
-    {
-        return $this->_priceNet;
+        return $this->$name;
     }
 }
 ?>

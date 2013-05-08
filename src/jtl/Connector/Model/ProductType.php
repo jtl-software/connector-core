@@ -25,38 +25,35 @@ abstract class ProductType extends DataModel
     protected $_name;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\ProductType
-     */
-    public function setId($id)
-    {
-        $this->_id = (int)$id;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
+     * ProductType Setter
+     *
      * @param string $name
-     * @return \jtl\Connector\Model\ProductType
+     * @param string $value
      */
-    public function setName($name)
+    public function __set($name, $value)
     {
-        $this->_name = (string)$name;
-        return $this;
+        switch ($name) {
+            case "_id":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_name":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return string
+     * ProductType Getter
+     *
+     * @param string $name
      */
-    public function getName()
+    public function __get($name)
     {
-        return $this->_name;
+        return $this->$name;
     }
 }
 ?>

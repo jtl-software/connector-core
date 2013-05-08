@@ -20,21 +20,30 @@ abstract class Warehouse extends DataModel
     protected $_id;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\Warehouse
+     * Warehouse Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setId($id)
+    public function __set($name, $value)
     {
-        $this->_id = (int)$id;
-        return $this;
+        switch ($name) {
+            case "_id":
+            
+                $this->$name = (int)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * Warehouse Getter
+     *
+     * @param string $name
      */
-    public function getId()
+    public function __get($name)
     {
-        return $this->_id;
+        return $this->$name;
     }
 }
 ?>

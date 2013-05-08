@@ -30,55 +30,32 @@ abstract class Category extends DataModel
     protected $_sort;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\Category
+     * Category Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setId($id)
+    public function __set($name, $value)
     {
-        $this->_id = (int)$id;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_parentCategoryId":
+            case "_sort":
+            
+                $this->$name = (int)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * Category Getter
+     *
+     * @param string $name
      */
-    public function getId()
+    public function __get($name)
     {
-        return $this->_id;
-    }
-    /**
-     * @param int $parentCategoryId
-     * @return \jtl\Connector\Model\Category
-     */
-    public function setParentCategoryId($parentCategoryId)
-    {
-        $this->_parentCategoryId = (int)$parentCategoryId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getParentCategoryId()
-    {
-        return $this->_parentCategoryId;
-    }
-    /**
-     * @param int $sort
-     * @return \jtl\Connector\Model\Category
-     */
-    public function setSort($sort)
-    {
-        $this->_sort = (int)$sort;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getSort()
-    {
-        return $this->_sort;
+        return $this->$name;
     }
 }
 ?>

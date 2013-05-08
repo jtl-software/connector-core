@@ -50,123 +50,40 @@ abstract class Language extends DataModel
     protected $_isWawiDefault;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\Language
+     * Language Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setId($id)
+    public function __set($name, $value)
     {
-        $this->_id = (int)$id;
-        return $this;
+        switch ($name) {
+            case "_id":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_nameEnglish":
+            case "_nameGerman":
+            case "_languageIso":
+            case "_isDefault":
+            case "_isConnectorDefault":
+            case "_isWawiDefault":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * Language Getter
+     *
+     * @param string $name
      */
-    public function getId()
+    public function __get($name)
     {
-        return $this->_id;
-    }
-    /**
-     * @param string $nameEnglish
-     * @return \jtl\Connector\Model\Language
-     */
-    public function setNameEnglish($nameEnglish)
-    {
-        $this->_nameEnglish = (string)$nameEnglish;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getNameEnglish()
-    {
-        return $this->_nameEnglish;
-    }
-    /**
-     * @param string $nameGerman
-     * @return \jtl\Connector\Model\Language
-     */
-    public function setNameGerman($nameGerman)
-    {
-        $this->_nameGerman = (string)$nameGerman;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getNameGerman()
-    {
-        return $this->_nameGerman;
-    }
-    /**
-     * @param string $languageIso
-     * @return \jtl\Connector\Model\Language
-     */
-    public function setLanguageIso($languageIso)
-    {
-        $this->_languageIso = (string)$languageIso;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getLanguageIso()
-    {
-        return $this->_languageIso;
-    }
-    /**
-     * @param string $isDefault
-     * @return \jtl\Connector\Model\Language
-     */
-    public function setIsDefault($isDefault)
-    {
-        $this->_isDefault = (string)$isDefault;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getIsDefault()
-    {
-        return $this->_isDefault;
-    }
-    /**
-     * @param string $isConnectorDefault
-     * @return \jtl\Connector\Model\Language
-     */
-    public function setIsConnectorDefault($isConnectorDefault)
-    {
-        $this->_isConnectorDefault = (string)$isConnectorDefault;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getIsConnectorDefault()
-    {
-        return $this->_isConnectorDefault;
-    }
-    /**
-     * @param string $isWawiDefault
-     * @return \jtl\Connector\Model\Language
-     */
-    public function setIsWawiDefault($isWawiDefault)
-    {
-        $this->_isWawiDefault = (string)$isWawiDefault;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getIsWawiDefault()
-    {
-        return $this->_isWawiDefault;
+        return $this->$name;
     }
 }
 ?>

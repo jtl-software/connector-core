@@ -45,106 +45,39 @@ abstract class DeliveryNote extends DataModel
     protected $_status;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\DeliveryNote
+     * DeliveryNote Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setId($id)
+    public function __set($name, $value)
     {
-        $this->_id = (int)$id;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_customerOrderId":
+            case "_fulfillment":
+            case "_status":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_note":
+            case "_created":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * DeliveryNote Getter
+     *
+     * @param string $name
      */
-    public function getId()
+    public function __get($name)
     {
-        return $this->_id;
-    }
-    /**
-     * @param int $customerOrderId
-     * @return \jtl\Connector\Model\DeliveryNote
-     */
-    public function setCustomerOrderId($customerOrderId)
-    {
-        $this->_customerOrderId = (int)$customerOrderId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getCustomerOrderId()
-    {
-        return $this->_customerOrderId;
-    }
-    /**
-     * @param string $note
-     * @return \jtl\Connector\Model\DeliveryNote
-     */
-    public function setNote($note)
-    {
-        $this->_note = (string)$note;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getNote()
-    {
-        return $this->_note;
-    }
-    /**
-     * @param string $created
-     * @return \jtl\Connector\Model\DeliveryNote
-     */
-    public function setCreated($created)
-    {
-        $this->_created = (string)$created;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getCreated()
-    {
-        return $this->_created;
-    }
-    /**
-     * @param int $fulfillment
-     * @return \jtl\Connector\Model\DeliveryNote
-     */
-    public function setFulfillment($fulfillment)
-    {
-        $this->_fulfillment = (int)$fulfillment;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getFulfillment()
-    {
-        return $this->_fulfillment;
-    }
-    /**
-     * @param int $status
-     * @return \jtl\Connector\Model\DeliveryNote
-     */
-    public function setStatus($status)
-    {
-        $this->_status = (int)$status;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getStatus()
-    {
-        return $this->_status;
+        return $this->$name;
     }
 }
 ?>

@@ -45,106 +45,43 @@ abstract class Image extends DataModel
     protected $_sort;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\Image
+     * Image Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setId($id)
+    public function __set($name, $value)
     {
-        $this->_id = (int)$id;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_foreignKey":
+            case "_sort":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_relationType":
+            case "_filename":
+            
+                $this->$name = (string)$value;
+                break;
+        
+            case "_isMainImage":
+            
+                $this->$name = (bool)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * Image Getter
+     *
+     * @param string $name
      */
-    public function getId()
+    public function __get($name)
     {
-        return $this->_id;
-    }
-    /**
-     * @param string $relationType
-     * @return \jtl\Connector\Model\Image
-     */
-    public function setRelationType($relationType)
-    {
-        $this->_relationType = (string)$relationType;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getRelationType()
-    {
-        return $this->_relationType;
-    }
-    /**
-     * @param int $foreignKey
-     * @return \jtl\Connector\Model\Image
-     */
-    public function setForeignKey($foreignKey)
-    {
-        $this->_foreignKey = (int)$foreignKey;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getForeignKey()
-    {
-        return $this->_foreignKey;
-    }
-    /**
-     * @param bool $isMainImage
-     * @return \jtl\Connector\Model\Image
-     */
-    public function setIsMainImage($isMainImage)
-    {
-        $this->_isMainImage = (bool)$isMainImage;
-        return $this;
-    }
-    
-    /**
-     * @return bool
-     */
-    public function getIsMainImage()
-    {
-        return $this->_isMainImage;
-    }
-    /**
-     * @param string $filename
-     * @return \jtl\Connector\Model\Image
-     */
-    public function setFilename($filename)
-    {
-        $this->_filename = (string)$filename;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getFilename()
-    {
-        return $this->_filename;
-    }
-    /**
-     * @param int $sort
-     * @return \jtl\Connector\Model\Image
-     */
-    public function setSort($sort)
-    {
-        $this->_sort = (int)$sort;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getSort()
-    {
-        return $this->_sort;
+        return $this->$name;
     }
 }
 ?>

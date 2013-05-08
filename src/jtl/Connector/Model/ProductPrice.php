@@ -35,72 +35,37 @@ abstract class ProductPrice extends DataModel
     protected $_quantity;
     
     /**
-     * @param int $customerGroupId
-     * @return \jtl\Connector\Model\ProductPrice
+     * ProductPrice Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setCustomerGroupId($customerGroupId)
+    public function __set($name, $value)
     {
-        $this->_customerGroupId = (int)$customerGroupId;
-        return $this;
+        switch ($name) {
+            case "_customerGroupId":
+            case "_productId":
+            case "_quantity":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_netPrice":
+            
+                $this->$name = (double)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * ProductPrice Getter
+     *
+     * @param string $name
      */
-    public function getCustomerGroupId()
+    public function __get($name)
     {
-        return $this->_customerGroupId;
-    }
-    /**
-     * @param int $productId
-     * @return \jtl\Connector\Model\ProductPrice
-     */
-    public function setProductId($productId)
-    {
-        $this->_productId = (int)$productId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductId()
-    {
-        return $this->_productId;
-    }
-    /**
-     * @param double $netPrice
-     * @return \jtl\Connector\Model\ProductPrice
-     */
-    public function setNetPrice($netPrice)
-    {
-        $this->_netPrice = (double)$netPrice;
-        return $this;
-    }
-    
-    /**
-     * @return double
-     */
-    public function getNetPrice()
-    {
-        return $this->_netPrice;
-    }
-    /**
-     * @param int $quantity
-     * @return \jtl\Connector\Model\ProductPrice
-     */
-    public function setQuantity($quantity)
-    {
-        $this->_quantity = (int)$quantity;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getQuantity()
-    {
-        return $this->_quantity;
+        return $this->$name;
     }
 }
 ?>

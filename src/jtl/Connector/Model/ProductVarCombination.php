@@ -30,55 +30,32 @@ abstract class ProductVarCombination extends DataModel
     protected $_productVariationValueId;
     
     /**
-     * @param int $productId
-     * @return \jtl\Connector\Model\ProductVarCombination
+     * ProductVarCombination Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setProductId($productId)
+    public function __set($name, $value)
     {
-        $this->_productId = (int)$productId;
-        return $this;
+        switch ($name) {
+            case "_productId":
+            case "_productVariationId":
+            case "_productVariationValueId":
+            
+                $this->$name = (int)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * ProductVarCombination Getter
+     *
+     * @param string $name
      */
-    public function getProductId()
+    public function __get($name)
     {
-        return $this->_productId;
-    }
-    /**
-     * @param int $productVariationId
-     * @return \jtl\Connector\Model\ProductVarCombination
-     */
-    public function setProductVariationId($productVariationId)
-    {
-        $this->_productVariationId = (int)$productVariationId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductVariationId()
-    {
-        return $this->_productVariationId;
-    }
-    /**
-     * @param int $productVariationValueId
-     * @return \jtl\Connector\Model\ProductVarCombination
-     */
-    public function setProductVariationValueId($productVariationValueId)
-    {
-        $this->_productVariationValueId = (int)$productVariationValueId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getProductVariationValueId()
-    {
-        return $this->_productVariationValueId;
+        return $this->$name;
     }
 }
 ?>

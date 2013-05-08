@@ -35,72 +35,41 @@ abstract class ProductWarehouseInfo extends DataModel
     protected $_inflowDate;
     
     /**
-     * @param int $productId
-     * @return \jtl\Connector\Model\ProductWarehouseInfo
+     * ProductWarehouseInfo Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setProductId($productId)
+    public function __set($name, $value)
     {
-        $this->_productId = (int)$productId;
-        return $this;
+        switch ($name) {
+            case "_productId":
+            case "_warehouseId":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_stockLevel":
+            
+                $this->$name = (double)$value;
+                break;
+        
+            case "_inflowDate":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * ProductWarehouseInfo Getter
+     *
+     * @param string $name
      */
-    public function getProductId()
+    public function __get($name)
     {
-        return $this->_productId;
-    }
-    /**
-     * @param int $warehouseId
-     * @return \jtl\Connector\Model\ProductWarehouseInfo
-     */
-    public function setWarehouseId($warehouseId)
-    {
-        $this->_warehouseId = (int)$warehouseId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getWarehouseId()
-    {
-        return $this->_warehouseId;
-    }
-    /**
-     * @param double $stockLevel
-     * @return \jtl\Connector\Model\ProductWarehouseInfo
-     */
-    public function setStockLevel($stockLevel)
-    {
-        $this->_stockLevel = (double)$stockLevel;
-        return $this;
-    }
-    
-    /**
-     * @return double
-     */
-    public function getStockLevel()
-    {
-        return $this->_stockLevel;
-    }
-    /**
-     * @param string $inflowDate
-     * @return \jtl\Connector\Model\ProductWarehouseInfo
-     */
-    public function setInflowDate($inflowDate)
-    {
-        $this->_inflowDate = (string)$inflowDate;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getInflowDate()
-    {
-        return $this->_inflowDate;
+        return $this->$name;
     }
 }
 ?>

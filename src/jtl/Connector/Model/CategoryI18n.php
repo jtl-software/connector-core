@@ -40,89 +40,38 @@ abstract class CategoryI18n extends DataModel
     protected $_description;
     
     /**
-     * @param string $languageIso
-     * @return \jtl\Connector\Model\CategoryI18n
-     */
-    public function setLanguageIso($languageIso)
-    {
-        $this->_languageIso = (string)$languageIso;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getLanguageIso()
-    {
-        return $this->_languageIso;
-    }
-    /**
-     * @param int $categoryId
-     * @return \jtl\Connector\Model\CategoryI18n
-     */
-    public function setCategoryId($categoryId)
-    {
-        $this->_categoryId = (int)$categoryId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getCategoryId()
-    {
-        return $this->_categoryId;
-    }
-    /**
+     * CategoryI18n Setter
+     *
      * @param string $name
-     * @return \jtl\Connector\Model\CategoryI18n
+     * @param string $value
      */
-    public function setName($name)
+    public function __set($name, $value)
     {
-        $this->_name = (string)$name;
-        return $this;
+        switch ($name) {
+            case "_languageIso":
+            case "_name":
+            case "_url":
+            case "_description":
+            
+                $this->$name = (string)$value;
+                break;
+        
+            case "_categoryId":
+            
+                $this->$name = (int)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return string
+     * CategoryI18n Getter
+     *
+     * @param string $name
      */
-    public function getName()
+    public function __get($name)
     {
-        return $this->_name;
-    }
-    /**
-     * @param string $url
-     * @return \jtl\Connector\Model\CategoryI18n
-     */
-    public function setUrl($url)
-    {
-        $this->_url = (string)$url;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->_url;
-    }
-    /**
-     * @param string $description
-     * @return \jtl\Connector\Model\CategoryI18n
-     */
-    public function setDescription($description)
-    {
-        $this->_description = (string)$description;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->_description;
+        return $this->$name;
     }
 }
 ?>

@@ -30,55 +30,36 @@ abstract class CategoryCustomerGroup extends DataModel
     protected $_discount;
     
     /**
-     * @param int $customerGroupId
-     * @return \jtl\Connector\Model\CategoryCustomerGroup
+     * CategoryCustomerGroup Setter
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setCustomerGroupId($customerGroupId)
+    public function __set($name, $value)
     {
-        $this->_customerGroupId = (int)$customerGroupId;
-        return $this;
+        switch ($name) {
+            case "_customerGroupId":
+            case "_categoryId":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_discount":
+            
+                $this->$name = (double)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return int
+     * CategoryCustomerGroup Getter
+     *
+     * @param string $name
      */
-    public function getCustomerGroupId()
+    public function __get($name)
     {
-        return $this->_customerGroupId;
-    }
-    /**
-     * @param int $categoryId
-     * @return \jtl\Connector\Model\CategoryCustomerGroup
-     */
-    public function setCategoryId($categoryId)
-    {
-        $this->_categoryId = (int)$categoryId;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getCategoryId()
-    {
-        return $this->_categoryId;
-    }
-    /**
-     * @param double $discount
-     * @return \jtl\Connector\Model\CategoryCustomerGroup
-     */
-    public function setDiscount($discount)
-    {
-        $this->_discount = (double)$discount;
-        return $this;
-    }
-    
-    /**
-     * @return double
-     */
-    public function getDiscount()
-    {
-        return $this->_discount;
+        return $this->$name;
     }
 }
 ?>

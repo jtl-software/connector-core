@@ -40,89 +40,38 @@ abstract class Specific extends DataModel
     protected $_type;
     
     /**
-     * @param int $id
-     * @return \jtl\Connector\Model\Specific
-     */
-    public function setId($id)
-    {
-        $this->_id = (int)$id;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param int $sort
-     * @return \jtl\Connector\Model\Specific
-     */
-    public function setSort($sort)
-    {
-        $this->_sort = (int)$sort;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getSort()
-    {
-        return $this->_sort;
-    }
-    /**
-     * @param int $global
-     * @return \jtl\Connector\Model\Specific
-     */
-    public function setGlobal($global)
-    {
-        $this->_global = (int)$global;
-        return $this;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getGlobal()
-    {
-        return $this->_global;
-    }
-    /**
+     * Specific Setter
+     *
      * @param string $name
-     * @return \jtl\Connector\Model\Specific
+     * @param string $value
      */
-    public function setName($name)
+    public function __set($name, $value)
     {
-        $this->_name = (string)$name;
-        return $this;
+        switch ($name) {
+            case "_id":
+            case "_sort":
+            case "_global":
+            
+                $this->$name = (int)$value;
+                break;
+        
+            case "_name":
+            case "_type":
+            
+                $this->$name = (string)$value;
+                break;
+        
+        }
     }
     
     /**
-     * @return string
+     * Specific Getter
+     *
+     * @param string $name
      */
-    public function getName()
+    public function __get($name)
     {
-        return $this->_name;
-    }
-    /**
-     * @param string $type
-     * @return \jtl\Connector\Model\Specific
-     */
-    public function setType($type)
-    {
-        $this->_type = (string)$type;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->_type;
+        return $this->$name;
     }
 }
 ?>
