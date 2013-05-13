@@ -1,4 +1,4 @@
 {
 	"title": "Read Action Schema",
-	"type": "string"
+	"type": "array"
 }

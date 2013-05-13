@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
@@ -20,19 +21,41 @@ use \jtl\Core\Rpc\Error;
  */
 class Config extends CoreController
 {
+
     /**
      * Reads the controller configuration and returns it.
      *
-     * @param mixed $params Can be empty or not defined and a string.
+     * @param mixed $params An array of parameters to read
      */
     public function read($params = null)
     {
         $ret = new Action();
         try {
-            $ret->setResult($this->getConfig()->read($params));
+            $ret->setResult($this->getConfig()->reads($params));
             $ret->setHandled(true);
         } catch (\Exception $e) {
+            $ret->setHandled($e->jtl);
+            $err = new Error();
+            $err->setCode($e->getCode());
+            $err->setMessage($e->getMessage());
+            $ret->setError($err);
+        }
+        return $ret;
+    }
+
+    /**
+     * Writes the controller configuration and returns the result.
+     * 
+     * @param mixed $params An array of parameters to write
+     */
+    public function write($params = null)
+    {
+        $ret = new Action();
+        try {
+            $ret->setResult($this->getConfig()->writes($params));
             $ret->setHandled(true);
+        } catch (\Exception $e) {
+            $ret->setHandled($e->jtl);
             $err = new Error();
             $err->setCode($e->getCode());
             $err->setMessage($e->getMessage());
@@ -41,23 +64,5 @@ class Config extends CoreController
         return $ret;
     }
     
-    /**
-     * Writes the controller configuration and returns the result.
-     * 
-     * @param mixed $params Can be empty or not defined and a string.
-     */
-    public function write($params = null)
-    {
-        $ret = new Action();
-        try {
-            $ret->setResult($this->getConfig()->write($params));
-            $ret->setHandled(true);
-        } catch (\Exception $e) {
-            $err = new Error();
-            $err->setCode($e->getCode());
-            $err->setMessage($e->getMessage());
-            $ret->setError($err);
-        }
-        return $ret;
-    }
+
 }
