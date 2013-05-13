@@ -20,6 +20,11 @@ abstract class Shipment extends DataModel
     protected $_id;
     
     /**
+     * @var int
+     */
+    protected $_deliveryNoteId;
+    
+    /**
      * @var string
      */
     protected $_logistic;
@@ -35,7 +40,7 @@ abstract class Shipment extends DataModel
     protected $_identCode;
     
     /**
-     * @var string
+     * @var int
      */
     protected $_created;
     
@@ -54,6 +59,8 @@ abstract class Shipment extends DataModel
     {
         switch ($name) {
             case "_id":
+            case "_deliveryNoteId":
+            case "_created":
             
                 $this->$name = (int)$value;
                 break;
@@ -61,7 +68,6 @@ abstract class Shipment extends DataModel
             case "_logistic":
             case "_logisticURL":
             case "_identCode":
-            case "_created":
             case "_note":
             
                 $this->$name = (string)$value;

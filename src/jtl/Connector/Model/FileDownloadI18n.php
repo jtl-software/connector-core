@@ -20,7 +20,7 @@ abstract class FileDownloadI18n extends DataModel
     protected $_fileDownloadId;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_languageIso;
     
@@ -44,11 +44,11 @@ abstract class FileDownloadI18n extends DataModel
     {
         switch ($name) {
             case "_fileDownloadId":
-            case "_languageIso":
             
                 $this->$name = (int)$value;
                 break;
         
+            case "_languageIso":
             case "_name":
             case "_description":
             

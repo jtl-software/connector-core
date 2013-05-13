@@ -3,18 +3,41 @@
     "type": "object",
     "properties": {
         "productId": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "warehouseId": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "stockLevel": {
-            "type": "double"
+            "type": [
+                "double"
+            ],
+            "optional": false
+        },
+        "inflowQuantity": {
+            "type": [
+                "double"
+            ],
+            "optional": false
         },
         "inflowDate": {
-            "type": "string"
+            "type": [
+                "string"
+            ],
+            "optional": false
         }
     },
     "required": [
+        "productId",
+        "warehouseId",
+        "stockLevel",
+        "inflowQuantity",
+        "inflowDate"
     ]
 }

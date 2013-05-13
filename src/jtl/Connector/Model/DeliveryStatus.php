@@ -20,7 +20,7 @@ abstract class DeliveryStatus extends DataModel
     protected $_id;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_languageIso;
     
@@ -39,11 +39,11 @@ abstract class DeliveryStatus extends DataModel
     {
         switch ($name) {
             case "_id":
-            case "_languageIso":
             
                 $this->$name = (int)$value;
                 break;
         
+            case "_languageIso":
             case "_name":
             
                 $this->$name = (string)$value;

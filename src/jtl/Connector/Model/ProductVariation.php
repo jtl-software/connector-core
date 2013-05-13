@@ -17,7 +17,7 @@ abstract class ProductVariation extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
@@ -30,7 +30,7 @@ abstract class ProductVariation extends DataModel
     protected $_name;
     
     /**
-     * @var string
+     * @var bool
      */
     protected $_isSelectable;
     
@@ -61,10 +61,14 @@ abstract class ProductVariation extends DataModel
                 break;
         
             case "_name":
-            case "_isSelectable":
             case "_type":
             
                 $this->$name = (string)$value;
+                break;
+        
+            case "_isSelectable":
+            
+                $this->$name = (bool)$value;
                 break;
         
         }

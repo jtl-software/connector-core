@@ -3,21 +3,41 @@
     "type": "object",
     "properties": {
         "mediaFileAttr": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "mediaFileId": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
-        "languageISO": {
-            "type": "int"
+        "languageIso": {
+            "type": [
+                "string"
+            ],
+            "optional": false
         },
         "name": {
-            "type": "string"
+            "type": [
+                "string"
+            ],
+            "optional": false
         },
         "value": {
-            "type": "string"
+            "type": [
+                "string"
+            ],
+            "optional": false
         }
     },
     "required": [
+        "mediaFileAttr",
+        "mediaFileId",
+        "languageIso",
+        "name",
+        "value"
     ]
 }

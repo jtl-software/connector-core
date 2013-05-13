@@ -3,15 +3,27 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "languageIso": {
-            "type": "int"
+            "type": [
+                "string"
+            ],
+            "optional": false
         },
         "name": {
-            "type": "string"
+            "type": [
+                "string"
+            ],
+            "optional": false
         }
     },
     "required": [
+        "id",
+        "languageIso",
+        "name"
     ]
 }

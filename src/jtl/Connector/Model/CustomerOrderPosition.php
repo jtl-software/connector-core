@@ -85,46 +85,6 @@ abstract class CustomerOrderPosition extends DataModel
     protected $_configItemId;
     
     /**
-     * @var int
-     */
-    protected $_id;
-    
-    /**
-     * @var int
-     */
-    protected $_customerOrderPositionId;
-    
-    /**
-     * @var int
-     */
-    protected $_productVariationId;
-    
-    /**
-     * @var int
-     */
-    protected $_productVariationValueId;
-    
-    /**
-     * @var string
-     */
-    protected $_productVariationName;
-    
-    /**
-     * @var string
-     */
-    protected $_productVariationValueName;
-    
-    /**
-     * @var string
-     */
-    protected $_freeField;
-    
-    /**
-     * @var double
-     */
-    protected $_surcharge;
-    
-    /**
      * CustomerOrderPosition Setter
      *
      * @param string $name
@@ -141,10 +101,6 @@ abstract class CustomerOrderPosition extends DataModel
             case "_quantity":
             case "_type":
             case "_configItemId":
-            case "_id":
-            case "_customerOrderPositionId":
-            case "_productVariationId":
-            case "_productVariationValueId":
             
                 $this->$name = (int)$value;
                 break;
@@ -152,9 +108,6 @@ abstract class CustomerOrderPosition extends DataModel
             case "_name":
             case "_sku":
             case "_unique":
-            case "_productVariationName":
-            case "_productVariationValueName":
-            case "_freeField":
             
                 $this->$name = (string)$value;
                 break;
@@ -162,7 +115,6 @@ abstract class CustomerOrderPosition extends DataModel
             case "_singlePrice":
             case "_price":
             case "_vat":
-            case "_surcharge":
             
                 $this->$name = (double)$value;
                 break;

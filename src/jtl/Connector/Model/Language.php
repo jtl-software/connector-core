@@ -35,19 +35,19 @@ abstract class Language extends DataModel
     protected $_languageIso;
     
     /**
-     * @var string
+     * @var bool
      */
-    protected $_isDefault;
+    protected $_isDefault = false;
     
     /**
-     * @var string
+     * @var bool
      */
-    protected $_isConnectorDefault;
+    protected $_isConnectorDefault = bool;
     
     /**
-     * @var string
+     * @var false
      */
-    protected $_isWawiDefault;
+    protected $_isWawiDefault = false;
     
     /**
      * Language Setter
@@ -66,11 +66,19 @@ abstract class Language extends DataModel
             case "_nameEnglish":
             case "_nameGerman":
             case "_languageIso":
-            case "_isDefault":
-            case "_isConnectorDefault":
-            case "_isWawiDefault":
             
                 $this->$name = (string)$value;
+                break;
+        
+            case "_isDefault":
+            case "_isConnectorDefault":
+            
+                $this->$name = (bool)$value;
+                break;
+        
+            case "_isWawiDefault":
+            
+                $this->$name = (false)$value;
                 break;
         
         }

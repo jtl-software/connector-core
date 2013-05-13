@@ -37,52 +37,52 @@ abstract class ConfigItem extends DataModel
     /**
      * @var bool
      */
-    protected $_isPreSelected;
+    protected $_isPreSelected = false;
     
     /**
      * @var bool
      */
-    protected $_isRecommended;
+    protected $_isRecommended = false;
     
     /**
      * @var bool
      */
-    protected $_useProductName;
+    protected $_useProductName = false;
     
     /**
      * @var bool
      */
-    protected $_useProductPrice;
+    protected $_useProductPrice = false;
     
     /**
      * @var bool
      */
-    protected $_showDiscount;
+    protected $_showDiscount = True;
     
     /**
      * @var bool
      */
-    protected $_showSurcharge;
+    protected $_showSurcharge = False;
     
     /**
      * @var bool
      */
-    protected $_ignoreMultiplier;
+    protected $_ignoreMultiplier = False;
     
     /**
      * @var double
      */
-    protected $_minQuantity;
+    protected $_minQuantity = 0;
     
     /**
      * @var double
      */
-    protected $_maxQuantity;
+    protected $_maxQuantity = 0;
     
     /**
      * @var double
      */
-    protected $_initialQuantity;
+    protected $_initialQuantity = 1;
     
     /**
      * @var int

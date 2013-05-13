@@ -3,15 +3,27 @@
     "type": "object",
     "properties": {
         "productId": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "productVariationId": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "productVariationValueId": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         }
     },
     "required": [
+        "productId",
+        "productVariationId",
+        "productVariationValueId"
     ]
 }

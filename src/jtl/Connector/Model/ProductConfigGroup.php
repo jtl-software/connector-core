@@ -17,17 +17,17 @@ abstract class ProductConfigGroup extends DataModel
     /**
      * @var int
      */
-    protected $_configGroupId;
+    protected $_configGroupId = 0;
     
     /**
      * @var int
      */
-    protected $_productId;
+    protected $_productId = 0;
     
     /**
      * @var int
      */
-    protected $_sort;
+    protected $_sort = 0;
     
     /**
      * ProductConfigGroup Setter

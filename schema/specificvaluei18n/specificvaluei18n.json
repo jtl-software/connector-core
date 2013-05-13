@@ -1,0 +1,64 @@
+{
+    "title": "SpecificValueI18n Model",
+    "type": "object",
+    "properties": {
+        "languageIso": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        },
+        "specificValueId": {
+            "type": [
+                "int"
+            ],
+            "optional": false
+        },
+        "value": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
+        },
+        "url": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        },
+        "description": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        },
+        "metaDescription": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        },
+        "metaKeywords": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        },
+        "titleTag": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        }
+    },
+    "required": [
+        "languageIso",
+        "specificValueId",
+        "url",
+        "description",
+        "metaDescription",
+        "metaKeywords",
+        "titleTag"
+    ]
+}

@@ -30,46 +30,6 @@ abstract class SpecificValue extends DataModel
     protected $_sort;
     
     /**
-     * @var int
-     */
-    protected $_languageIso;
-    
-    /**
-     * @var int
-     */
-    protected $_specificValueId;
-    
-    /**
-     * @var string
-     */
-    protected $_value;
-    
-    /**
-     * @var string
-     */
-    protected $_url;
-    
-    /**
-     * @var string
-     */
-    protected $_description;
-    
-    /**
-     * @var string
-     */
-    protected $_metaDescription;
-    
-    /**
-     * @var string
-     */
-    protected $_metaKeywords;
-    
-    /**
-     * @var string
-     */
-    protected $_titleTag;
-    
-    /**
      * SpecificValue Setter
      *
      * @param string $name
@@ -81,20 +41,8 @@ abstract class SpecificValue extends DataModel
             case "_id":
             case "_specificId":
             case "_sort":
-            case "_languageIso":
-            case "_specificValueId":
             
                 $this->$name = (int)$value;
-                break;
-        
-            case "_value":
-            case "_url":
-            case "_description":
-            case "_metaDescription":
-            case "_metaKeywords":
-            case "_titleTag":
-            
-                $this->$name = (string)$value;
                 break;
         
         }

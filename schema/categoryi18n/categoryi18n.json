@@ -3,21 +3,62 @@
     "type": "object",
     "properties": {
         "languageIso": {
-            "type": "string"
+            "type": [
+                "string"
+            ],
+            "optional": false
         },
         "categoryId": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "name": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "url": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "description": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
+        },
+        "metaDescription": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
+        },
+        "metaKeywords": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
+        },
+        "titleTag": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         }
     },
     "required": [
+        "languageIso",
+        "categoryId"
     ]
 }

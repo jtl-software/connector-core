@@ -17,7 +17,7 @@ abstract class Warehouse extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * Warehouse Setter

@@ -3,39 +3,27 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "specificId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         },
         "sort": {
-            "type": "int"
-        },
-        "languageIso": {
-            "type": "int"
-        },
-        "specificValueId": {
-            "type": "int"
-        },
-        "value": {
-            "type": "string"
-        },
-        "url": {
-            "type": "string"
-        },
-        "description": {
-            "type": "string"
-        },
-        "metaDescription": {
-            "type": "string"
-        },
-        "metaKeywords": {
-            "type": "string"
-        },
-        "titleTag": {
-            "type": "string"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         }
     },
     "required": [
+        "id"
     ]
 }

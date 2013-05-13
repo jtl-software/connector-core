@@ -3,18 +3,34 @@
     "type": "object",
     "properties": {
         "fileDownloadId": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "languageIso": {
-            "type": "int"
+            "type": [
+                "string"
+            ],
+            "optional": false
         },
         "name": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "description": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         }
     },
     "required": [
+        "fileDownloadId",
+        "languageIso"
     ]
 }

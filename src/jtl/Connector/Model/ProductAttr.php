@@ -30,7 +30,7 @@ abstract class ProductAttr extends DataModel
     protected $_sort;
     
     /**
-     * @var double
+     * @var bool
      */
     protected $_isVisible;
     
@@ -52,7 +52,7 @@ abstract class ProductAttr extends DataModel
         
             case "_isVisible":
             
-                $this->$name = (double)$value;
+                $this->$name = (bool)$value;
                 break;
         
         }

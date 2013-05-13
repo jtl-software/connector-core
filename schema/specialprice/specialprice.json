@@ -3,15 +3,27 @@
     "type": "object",
     "properties": {
         "customerGroupId": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "productSpecialPriceId": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "priceNet": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
         }
     },
     "required": [
+        "customerGroupId",
+        "productSpecialPriceId"
     ]
 }

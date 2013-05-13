@@ -17,10 +17,10 @@ abstract class Unit extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_languageIso;
     
@@ -39,11 +39,11 @@ abstract class Unit extends DataModel
     {
         switch ($name) {
             case "_id":
-            case "_languageIso":
             
                 $this->$name = (int)$value;
                 break;
         
+            case "_languageIso":
             case "_name":
             
                 $this->$name = (string)$value;
