@@ -127,7 +127,6 @@ class Application extends CoreApplication
                     $exists = true;
                     if ($actionresult->isHandled()) {
                         $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
-                        
                         if ($rpcmode == Packet::SINGLE_MODE) {
                             Response::send($responsepacket);
                         }
