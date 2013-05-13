@@ -1,0 +1,29 @@
+{
+    "title": "ProductVariationValueExtraCharge Model",
+    "type": "object",
+    "properties": {
+        "customerGroupId": {
+            "type": [
+                "int"
+            ],
+            "optional": false
+        },
+        "productVariationValueId": {
+            "type": [
+                "int"
+            ],
+            "optional": false
+        },
+        "extraChargeNet": {
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
+        }
+    },
+    "required": [
+        "customerGroupId",
+        "productVariationValueId"
+    ]
+}

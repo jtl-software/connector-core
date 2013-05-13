@@ -3,24 +3,55 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
+        },
+        "deliveryNoteId": {
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "logistic": {
-            "type": "string"
+            "type": [
+                "string"
+            ],
+            "optional": false
         },
         "logisticURL": {
-            "type": "string"
+            "type": [
+                "string"
+            ],
+            "optional": false
         },
         "identCode": {
-            "type": "string"
+            "type": [
+                "string"
+            ],
+            "optional": false
         },
         "created": {
-            "type": "string"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "note": {
-            "type": "string"
+            "type": [
+                "string"
+            ],
+            "optional": false
         }
     },
     "required": [
+        "id",
+        "deliveryNoteId",
+        "logistic",
+        "logisticURL",
+        "identCode",
+        "created",
+        "note"
     ]
 }

@@ -3,15 +3,27 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "productId": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "quantity": {
-            "type": "double"
+            "type": [
+                "double"
+            ],
+            "optional": false
         }
     },
     "required": [
+        "id",
+        "productId",
+        "quantity"
     ]
 }

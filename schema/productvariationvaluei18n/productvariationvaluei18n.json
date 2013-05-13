@@ -1,0 +1,29 @@
+{
+    "title": "ProductVariationValueI18n Model",
+    "type": "object",
+    "properties": {
+        "languageIso": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        },
+        "productVariationValueId": {
+            "type": [
+                "int"
+            ],
+            "optional": false
+        },
+        "name": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
+        }
+    },
+    "required": [
+        "languageIso",
+        "productVariationValueId"
+    ]
+}

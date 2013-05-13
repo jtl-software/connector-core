@@ -3,15 +3,27 @@
     "type": "object",
     "properties": {
         "languageIso": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "customerGroupId": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "name": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         }
     },
     "required": [
+        "languageIso",
+        "customerGroupId"
     ]
 }

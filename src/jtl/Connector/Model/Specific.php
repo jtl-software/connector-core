@@ -27,7 +27,7 @@ abstract class Specific extends DataModel
     /**
      * @var int
      */
-    protected $_global;
+    protected $_global = 0;
     
     /**
      * @var string

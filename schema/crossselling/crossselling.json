@@ -3,18 +3,34 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "crossSellingProductId": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "crossSellingGroupId": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "productId": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         }
     },
     "required": [
+        "id",
+        "crossSellingProductId",
+        "crossSellingGroupId",
+        "productId"
     ]
 }

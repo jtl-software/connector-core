@@ -3,9 +3,13 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         }
     },
     "required": [
+        "id"
     ]
 }

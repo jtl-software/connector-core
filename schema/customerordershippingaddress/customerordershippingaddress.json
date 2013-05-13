@@ -3,60 +3,132 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "customerId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         },
         "salutation": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "firstName": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "lastName": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "title": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "company": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "extraAddressLine": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "street": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "streetNumber": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "zipCode": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "city": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "state": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "country": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "phone": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "mobile": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "fax": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "eMail": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         }
     },
     "required": [
+        "id"
     ]
 }

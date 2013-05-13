@@ -40,9 +40,9 @@ abstract class CustomerGroup extends DataModel
     protected $_shopLogin;
     
     /**
-     * @var int
+     * @var bool
      */
-    protected $_shopNetPrice;
+    protected $_shopNetPrice = False;
     
     /**
      * CustomerGroup Setter
@@ -54,7 +54,6 @@ abstract class CustomerGroup extends DataModel
     {
         switch ($name) {
             case "_id":
-            case "_shopNetPrice":
             
                 $this->$name = (int)$value;
                 break;
@@ -69,6 +68,11 @@ abstract class CustomerGroup extends DataModel
             case "_discount":
             
                 $this->$name = (double)$value;
+                break;
+        
+            case "_shopNetPrice":
+            
+                $this->$name = (bool)$value;
                 break;
         
         }

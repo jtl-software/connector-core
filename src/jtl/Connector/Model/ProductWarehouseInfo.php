@@ -30,6 +30,11 @@ abstract class ProductWarehouseInfo extends DataModel
     protected $_stockLevel;
     
     /**
+     * @var double
+     */
+    protected $_inflowQuantity;
+    
+    /**
      * @var string
      */
     protected $_inflowDate;
@@ -50,6 +55,7 @@ abstract class ProductWarehouseInfo extends DataModel
                 break;
         
             case "_stockLevel":
+            case "_inflowQuantity":
             
                 $this->$name = (double)$value;
                 break;

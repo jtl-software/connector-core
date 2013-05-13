@@ -3,24 +3,48 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "relationType": {
-            "type": "string"
+            "type": [
+                "string"
+            ],
+            "optional": false
         },
         "foreignKey": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         },
         "isMainImage": {
-            "type": "bool"
+            "type": [
+                "bool",
+                "null"
+            ],
+            "optional": true
         },
         "filename": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "sort": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         }
     },
     "required": [
+        "id",
+        "relationType"
     ]
 }

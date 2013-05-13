@@ -40,6 +40,21 @@ abstract class CategoryI18n extends DataModel
     protected $_description;
     
     /**
+     * @var string
+     */
+    protected $_metaDescription;
+    
+    /**
+     * @var string
+     */
+    protected $_metaKeywords;
+    
+    /**
+     * @var string
+     */
+    protected $_titleTag;
+    
+    /**
      * CategoryI18n Setter
      *
      * @param string $name
@@ -52,6 +67,9 @@ abstract class CategoryI18n extends DataModel
             case "_name":
             case "_url":
             case "_description":
+            case "_metaDescription":
+            case "_metaKeywords":
+            case "_titleTag":
             
                 $this->$name = (string)$value;
                 break;

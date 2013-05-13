@@ -17,7 +17,7 @@ abstract class TaxZone extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var string

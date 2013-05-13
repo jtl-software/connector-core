@@ -3,24 +3,48 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "productId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         },
         "name": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "isSelectable": {
-            "type": "string"
+            "type": [
+                "bool",
+                "null"
+            ],
+            "optional": true
         },
         "type": {
-            "type": "string"
+            "type": [
+                "string"
+            ],
+            "optional": false
         },
         "sort": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         }
     },
     "required": [
+        "id",
+        "type",
+        "sort"
     ]
 }

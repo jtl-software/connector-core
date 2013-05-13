@@ -3,24 +3,48 @@
     "type": "object",
     "properties": {
         "languageIso": {
-            "type": "int"
+            "type": [
+                "string"
+            ],
+            "optional": false
         },
         "productId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         },
         "name": {
-            "type": "string"
+            "type": [
+                "string"
+            ],
+            "optional": false
         },
         "url": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "description": {
-            "type": "string"
+            "type": [
+                "string"
+            ],
+            "optional": false
         },
         "shortDescription": {
-            "type": "string"
+            "type": [
+                "string"
+            ],
+            "optional": false
         }
     },
     "required": [
+        "languageIso",
+        "name",
+        "description",
+        "shortDescription"
     ]
 }

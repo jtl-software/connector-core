@@ -3,45 +3,55 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "productVariationId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         },
         "extraWeight": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
         },
         "sku": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "sort": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         },
         "stockLevel": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
         },
         "packagingUnitId": {
-            "type": "double"
-        },
-        "languageIso": {
-            "type": "int"
-        },
-        "productVariationValueId": {
-            "type": "int"
-        },
-        "name": {
-            "type": "string"
-        },
-        "customerGroupId": {
-            "type": "int"
-        },
-        "extraChargeNet": {
-            "type": "double"
-        },
-        "productVariationValueTargetId": {
-            "type": "int"
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
         }
     },
     "required": [
+        "id"
     ]
 }

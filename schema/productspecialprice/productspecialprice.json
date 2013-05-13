@@ -3,24 +3,62 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "productId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         },
         "isActive": {
-            "type": "string"
+            "type": [
+                "bool"
+            ],
+            "optional": false
         },
         "activeFrom": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "activeUntil": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         },
         "quantityLimit": {
-            "type": "int"
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
+        },
+        "considerQuantityLimit": {
+            "type": [
+                "bool",
+                "null"
+            ],
+            "optional": true
+        },
+        "considerDateLimit": {
+            "type": [
+                "bool",
+                "null"
+            ],
+            "optional": true
         }
     },
     "required": [
+        "id",
+        "isActive"
     ]
 }

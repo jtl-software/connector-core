@@ -3,15 +3,27 @@
     "type": "object",
     "properties": {
         "configGroupId": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "productId": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "sort": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         }
     },
     "required": [
+        "configGroupId",
+        "productId",
+        "sort"
     ]
 }

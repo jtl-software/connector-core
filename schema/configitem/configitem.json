@@ -3,51 +3,111 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "configGroupId": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "productId": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         },
         "type": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "isPreSelected": {
-            "type": "bool"
+            "type": [
+                "bool",
+                "null"
+            ],
+            "optional": true
         },
         "isRecommended": {
-            "type": "bool"
+            "type": [
+                "bool",
+                "null"
+            ],
+            "optional": true
         },
         "useProductName": {
-            "type": "bool"
+            "type": [
+                "bool",
+                "null"
+            ],
+            "optional": true
         },
         "useProductPrice": {
-            "type": "bool"
+            "type": [
+                "bool",
+                "null"
+            ],
+            "optional": true
         },
         "showDiscount": {
-            "type": "bool"
+            "type": [
+                "bool",
+                "null"
+            ],
+            "optional": true
         },
         "showSurcharge": {
-            "type": "bool"
+            "type": [
+                "bool",
+                "null"
+            ],
+            "optional": true
         },
         "ignoreMultiplier": {
-            "type": "bool"
+            "type": [
+                "bool",
+                "null"
+            ],
+            "optional": true
         },
         "minQuantity": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
         },
         "maxQuantity": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
         },
         "initialQuantity": {
-            "type": "double"
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
         },
         "sort": {
-            "type": "int"
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
         }
     },
     "required": [
+        "id",
+        "configGroupId",
+        "type"
     ]
 }

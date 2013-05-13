@@ -42,22 +42,22 @@ abstract class Currency extends DataModel
     /**
      * @var string
      */
-    protected $_default;
+    protected $_default = "False";
     
     /**
      * @var string
      */
-    protected $_currencySignBeforeValue;
+    protected $_currencySignBeforeValue = "False";
     
     /**
      * @var string
      */
-    protected $_delimiterCent;
+    protected $_delimiterCent = ",";
     
     /**
      * @var string
      */
-    protected $_delimiterThousand;
+    protected $_delimiterThousand = ".";
     
     /**
      * Currency Setter

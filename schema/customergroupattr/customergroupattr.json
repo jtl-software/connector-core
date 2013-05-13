@@ -3,18 +3,34 @@
     "type": "object",
     "properties": {
         "id": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "customerGroupId": {
-            "type": "int"
+            "type": [
+                "int"
+            ],
+            "optional": false
         },
         "key": {
-            "type": "string"
+            "type": [
+                "string"
+            ],
+            "optional": false
         },
         "value": {
-            "type": "string"
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
         }
     },
     "required": [
+        "id",
+        "customerGroupId",
+        "key"
     ]
 }

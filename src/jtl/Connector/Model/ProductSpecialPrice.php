@@ -17,15 +17,15 @@ abstract class ProductSpecialPrice extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_productId;
+    protected $_productId = 0;
     
     /**
-     * @var string
+     * @var bool
      */
     protected $_isActive;
     
@@ -40,9 +40,19 @@ abstract class ProductSpecialPrice extends DataModel
     protected $_activeUntil;
     
     /**
-     * @var int
+     * @var double
      */
     protected $_quantityLimit;
+    
+    /**
+     * @var bool
+     */
+    protected $_considerQuantityLimit;
+    
+    /**
+     * @var bool
+     */
+    protected $_considerDateLimit;
     
     /**
      * ProductSpecialPrice Setter
@@ -55,16 +65,26 @@ abstract class ProductSpecialPrice extends DataModel
         switch ($name) {
             case "_id":
             case "_productId":
-            case "_quantityLimit":
             
                 $this->$name = (int)$value;
                 break;
         
             case "_isActive":
+            case "_considerQuantityLimit":
+            case "_considerDateLimit":
+            
+                $this->$name = (bool)$value;
+                break;
+        
             case "_activeFrom":
             case "_activeUntil":
             
                 $this->$name = (string)$value;
+                break;
+        
+            case "_quantityLimit":
+            
+                $this->$name = (double)$value;
                 break;
         
         }

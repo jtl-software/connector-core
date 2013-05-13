@@ -17,10 +17,10 @@ abstract class ManufacturerI18n extends DataModel
     /**
      * @var int
      */
-    protected $_manufacturerId;
+    protected $_manufacturerId = 0;
     
     /**
-     * @var int
+     * @var string
      */
     protected $_languageIso;
     
@@ -54,11 +54,11 @@ abstract class ManufacturerI18n extends DataModel
     {
         switch ($name) {
             case "_manufacturerId":
-            case "_languageIso":
             
                 $this->$name = (int)$value;
                 break;
         
+            case "_languageIso":
             case "_description":
             case "_metaDescription":
             case "_metaKeywords":

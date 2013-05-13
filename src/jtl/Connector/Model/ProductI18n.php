@@ -15,14 +15,14 @@ use \jtl\Core\Model\DataModel;
 abstract class ProductI18n extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
     protected $_languageIso;
     
     /**
      * @var int
      */
-    protected $_productId;
+    protected $_productId = 0;
     
     /**
      * @var string
@@ -54,17 +54,17 @@ abstract class ProductI18n extends DataModel
     {
         switch ($name) {
             case "_languageIso":
-            case "_productId":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_name":
             case "_url":
             case "_description":
             case "_shortDescription":
             
                 $this->$name = (string)$value;
+                break;
+        
+            case "_productId":
+            
+                $this->$name = (int)$value;
                 break;
         
         }

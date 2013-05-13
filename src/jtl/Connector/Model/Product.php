@@ -17,42 +17,42 @@ abstract class Product extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_masterProductId;
+    protected $_masterProductId = 0;
     
     /**
      * @var int
      */
-    protected $_manufacturerId;
+    protected $_manufacturerId = 0;
     
     /**
      * @var int
      */
-    protected $_deliveryStatusId;
+    protected $_deliveryStatusId = 0;
     
     /**
      * @var int
      */
-    protected $_unitId;
+    protected $_unitId = 0;
     
     /**
      * @var int
      */
-    protected $_basePriceUnitId;
+    protected $_basePriceUnitId = 0;
     
     /**
      * @var int
      */
-    protected $_taxClassId;
+    protected $_taxClassId = 0;
     
     /**
      * @var int
      */
-    protected $_shippingClassId;
+    protected $_shippingClassId = 0;
     
     /**
      * @var string
@@ -67,7 +67,7 @@ abstract class Product extends DataModel
     /**
      * @var double
      */
-    protected $_stockLevel;
+    protected $_stockLevel = 0;
     
     /**
      * @var double
@@ -85,22 +85,22 @@ abstract class Product extends DataModel
     protected $_ean;
     
     /**
-     * @var string
+     * @var bool
      */
     protected $_isTopProduct;
     
     /**
      * @var double
      */
-    protected $_productWeight;
+    protected $_productWeight = 0;
     
     /**
      * @var double
      */
-    protected $_shippingWeight;
+    protected $_shippingWeight = 0;
     
     /**
-     * @var string
+     * @var bool
      */
     protected $_isNew;
     
@@ -110,32 +110,32 @@ abstract class Product extends DataModel
     protected $_recommendedRetailPrice;
     
     /**
-     * @var string
+     * @var bool
      */
     protected $_considerStock;
     
     /**
-     * @var string
+     * @var bool
      */
     protected $_permitNegativeStock;
     
     /**
-     * @var string
+     * @var bool
      */
     protected $_considerVariationStock;
     
     /**
-     * @var string
+     * @var bool
      */
     protected $_isDivisible;
     
     /**
      * @var double
      */
-    protected $_packagingUnit;
+    protected $_packagingUnit = 1;
     
     /**
-     * @var string
+     * @var bool
      */
     protected $_considerBasePrice;
     
@@ -152,17 +152,17 @@ abstract class Product extends DataModel
     /**
      * @var int
      */
-    protected $_sort;
+    protected $_sort = 0;
     
     /**
      * @var string
      */
-    protected $_created;
+    protected $_created = "0000-00-00";
     
     /**
      * @var string
      */
-    protected $_availableFrom;
+    protected $_availableFrom = "0000-00-00";
     
     /**
      * @var string
@@ -200,7 +200,7 @@ abstract class Product extends DataModel
     protected $_taric;
     
     /**
-     * @var int
+     * @var bool
      */
     protected $_isMasterProduct;
     
@@ -212,7 +212,7 @@ abstract class Product extends DataModel
     /**
      * @var int
      */
-    protected $_setArticleId;
+    protected $_setArticleId = 0;
     
     /**
      * @var string
@@ -232,7 +232,7 @@ abstract class Product extends DataModel
     /**
      * @var int
      */
-    protected $_productTypeId;
+    protected $_productTypeId = 0;
     
     /**
      * @var double
@@ -277,7 +277,6 @@ abstract class Product extends DataModel
             case "_taxClassId":
             case "_shippingClassId":
             case "_sort":
-            case "_isMasterProduct":
             case "_setArticleId":
             case "_productTypeId":
             
@@ -287,13 +286,6 @@ abstract class Product extends DataModel
             case "_sku":
             case "_note":
             case "_ean":
-            case "_isTopProduct":
-            case "_isNew":
-            case "_considerStock":
-            case "_permitNegativeStock":
-            case "_considerVariationStock":
-            case "_isDivisible":
-            case "_considerBasePrice":
             case "_keywords":
             case "_created":
             case "_availableFrom":
@@ -327,6 +319,18 @@ abstract class Product extends DataModel
             case "_supplierDeliveryTime":
             
                 $this->$name = (double)$value;
+                break;
+        
+            case "_isTopProduct":
+            case "_isNew":
+            case "_considerStock":
+            case "_permitNegativeStock":
+            case "_considerVariationStock":
+            case "_isDivisible":
+            case "_considerBasePrice":
+            case "_isMasterProduct":
+            
+                $this->$name = (bool)$value;
                 break;
         
         }

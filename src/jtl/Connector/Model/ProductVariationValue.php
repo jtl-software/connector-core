@@ -17,7 +17,7 @@ abstract class ProductVariationValue extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
@@ -37,7 +37,7 @@ abstract class ProductVariationValue extends DataModel
     /**
      * @var int
      */
-    protected $_sort;
+    protected $_sort = 0;
     
     /**
      * @var double
@@ -47,57 +47,7 @@ abstract class ProductVariationValue extends DataModel
     /**
      * @var double
      */
-    protected $_packagingUnitId;
-    
-    /**
-     * @var int
-     */
-    protected $_languageIso;
-    
-    /**
-     * @var int
-     */
-    protected $_productVariationValueId;
-    
-    /**
-     * @var string
-     */
-    protected $_name;
-    
-    /**
-     * @var int
-     */
-    protected $_customerGroupId;
-    
-    /**
-     * @var int
-     */
-    protected $_productVariationValueId;
-    
-    /**
-     * @var double
-     */
-    protected $_extraChargeNet;
-    
-    /**
-     * @var int
-     */
-    protected $_customerGroupId;
-    
-    /**
-     * @var int
-     */
-    protected $_productVariationValueId;
-    
-    /**
-     * @var int
-     */
-    protected $_productVariationValueId;
-    
-    /**
-     * @var int
-     */
-    protected $_productVariationValueTargetId;
+    protected $_packagingUnitId = 1.0;
     
     /**
      * ProductVariationValue Setter
@@ -111,14 +61,6 @@ abstract class ProductVariationValue extends DataModel
             case "_id":
             case "_productVariationId":
             case "_sort":
-            case "_languageIso":
-            case "_productVariationValueId":
-            case "_customerGroupId":
-            case "_productVariationValueId":
-            case "_customerGroupId":
-            case "_productVariationValueId":
-            case "_productVariationValueId":
-            case "_productVariationValueTargetId":
             
                 $this->$name = (int)$value;
                 break;
@@ -126,13 +68,11 @@ abstract class ProductVariationValue extends DataModel
             case "_extraWeight":
             case "_stockLevel":
             case "_packagingUnitId":
-            case "_extraChargeNet":
             
                 $this->$name = (double)$value;
                 break;
         
             case "_sku":
-            case "_name":
             
                 $this->$name = (string)$value;
                 break;

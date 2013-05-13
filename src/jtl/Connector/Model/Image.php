@@ -22,7 +22,7 @@ abstract class Image extends DataModel
     /**
      * @var string
      */
-    protected $_relationType;
+    protected $_relationType = "product";
     
     /**
      * @var int
@@ -32,7 +32,7 @@ abstract class Image extends DataModel
     /**
      * @var bool
      */
-    protected $_isMainImage;
+    protected $_isMainImage = true;
     
     /**
      * @var string
