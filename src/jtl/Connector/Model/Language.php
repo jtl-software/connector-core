@@ -74,11 +74,7 @@ abstract class Language extends DataModel
             case "_isConnectorDefault":
             
                 $this->$name = (bool)$value;
-                break;
-        
-            case "_isWawiDefault":
-            
-                $this->$name = (false)$value;
+                $this->$name = (bool)$value;
                 break;
         
         }
