@@ -34,7 +34,13 @@ class Config extends CoreController
             $ret->setResult($this->getConfig()->reads($params));
             $ret->setHandled(true);
         } catch (\Exception $e) {
-            $ret->setHandled($e->jtl);
+            if (isset($e->jtl))
+            {
+                $ret->setHandled($e->jtl);
+            } else
+            {
+                $ret->setHandled(false);
+            }
             $err = new Error();
             $err->setCode($e->getCode());
             $err->setMessage($e->getMessage());
