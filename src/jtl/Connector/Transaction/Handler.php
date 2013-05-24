@@ -10,7 +10,9 @@ use \jtl\Core\Rpc\RequestPacket;
 use \jtl\Core\Exception\TransactionException;
 use \jtl\Core\Rpc\Error;
 use \jtl\Core\Utilities\RpcMethod;
+use \jtl\Core\ModelAdapter\MainAdapter;
 use \jtl\Connector\Result\Action;
+use \jtl\Connector\ModelAdapter;
 
 /**
  * Transaction Handler Class
@@ -39,7 +41,6 @@ class Handler
     /**
      * 
      * @param \jtl\Core\Rpc\RequestPacket $requestpacket
-     * @throws \jtl\Core\Exception\TransactionException
      * @return \jtl\Connector\Result\Action
      */
     public static function insert(RequestPacket $requestpacket)
@@ -56,11 +57,26 @@ class Handler
                         $_SESSION["trans"] = array();
                     }
                     
-                    if (!isset($_SESSION["trans"][$obj->controller])) {
-                        $_SESSION["trans"][$obj->controller] = array();
+                    $type = MainAdapter::allocate($obj->controller);
+                    if ($type === null) {
+                        throw new TransactionException("Could not find any Adapter for Controller ({$obj->controller})");
                     }
                     
-                    $_SESSION["trans"][$obj->controller][$trid] = $requestpacket->getParams();
+                    if (!isset($_SESSION["trans"][$type])) {
+                        $_SESSION["trans"][$type] = array();
+                    }
+                    
+                    if (!isset($_SESSION["trans"][$type][$trid])) {
+                        $adapter = "{$type}Adapter";
+                        $class = "\\jtl\\Connector\\ModelAdapter\\{$adapter}";
+                        if (class_exists($class)) {
+                            $_SESSION["trans"][$type][$trid] = new $adapter();
+                            $_SESSION["trans"][$type][$trid]->add($obj->controller, $requestpacket->getParams());
+                        }
+                        else {
+                            throw new TransactionException("ModelAdapter {$type}Adapter does not exist");
+                        }
+                    } 
                 }
                 else {
                     throw new TransactionException("Transaction Id is empty");
