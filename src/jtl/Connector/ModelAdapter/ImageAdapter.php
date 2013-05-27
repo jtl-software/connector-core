@@ -55,5 +55,41 @@ class ImageAdapter implements IModelAdapter
 
         return false;
     }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\ModelAdapter\IModelAdapter::insert()
+     */
+    public function insert()
+    {
+        foreach ($this->items as $item) {
+            $getter = "_" . lcfirst($item);
+            $mapper = "{$item}Mapper";
+            $mapper = $mapper::getInstance();
+            $result = $mapper->deleteSave($this->$getter);
+
+            if ($result->getErrno() > 0) {
+                throw new DatabaseException($result->getError(), $result->getErrno());
+            }
+        }
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\ModelAdapter\IModelAdapter::isComplete()
+     */
+    public function isComplete()
+    {
+        $complete = true;
+        foreach ($this->items as $item) {
+            $getter = "_" . lcfirst($item);
+            if ($this->$getter === null) {
+                $complete = false;
+                break;
+            }
+        }
+
+        return $complete;
+    }
 }
 ?>

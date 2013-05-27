@@ -96,5 +96,48 @@ class Handler
         
         return $action;
     }
+    
+    /**
+     * Get Transaction Adapter
+     * 
+     * @param string $controller
+     * @param string $trid
+     * @throws \jtl\Core\Exception\TransactionException
+     * @return \jtl\Connector\ModelAdapter
+     */
+    public static function getAdapter($controller, $trid)
+    {
+        $type = MainAdapter::allocate($controller);
+        if ($type === null) {
+            throw new TransactionException("Could not find any Adapter for Controller ({$controller})");
+        }
+        
+        if (!isset($_SESSION["trans"][$type])) {
+            throw new TransactionException("Could not find any Transaction Session for Controller ({$controller}) and Type ({$type})");
+        }
+        
+        if (!isset($_SESSION["trans"][$type][$trid])) {
+            throw new TransactionException("Could not find any Transaction Session for Id ({$trid}) and Controller ({$controller}) and Type ({$type})");
+        }
+        
+        return $_SESSION["trans"][$type][$trid];
+    }
+    
+    /**
+     * Checks if controller is a maincontroller
+     * 
+     * @param string $controller
+     * @throws \jtl\Core\Exception\TransactionException
+     * @return boolean
+     */
+    public static function isMain($controller)
+    {
+        $type = MainAdapter::allocate($controller);
+        if ($type === null) {
+            throw new TransactionException("Could not find any Adapter for Controller ({$controller})");
+        }
+        
+        return ($controller == $type);
+    }
 }
 ?>

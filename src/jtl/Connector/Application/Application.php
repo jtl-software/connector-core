@@ -104,7 +104,7 @@ class Application extends CoreApplication
      */
     protected function execute(RequestPacket $requestpacket, Config $config, $rpcmode)
     {
-        if (!RpcMethod::isMethod($requestpacket->getMethod(), true)) {
+        if (!RpcMethod::isMethod($requestpacket->getMethod())) {
             throw new RpcException("Invalid Request", -32600);
         }
         
@@ -114,7 +114,7 @@ class Application extends CoreApplication
         $coreconnector->setMethod($method);
         if ($method->isCore() && $coreconnector->canHandle()) {
             $coreconnector->setConfig($config);
-            $actionresult = $coreconnector->handle($requestpacket->getId(), $requestpacket->getParams());
+            $actionresult = $coreconnector->handle($requestpacket);
             if ($actionresult->isHandled()) {
                 $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
                 
@@ -149,7 +149,7 @@ class Application extends CoreApplication
                 }
                 
                 $endpointconnector->setConfig($config);
-                $actionresult = $endpointconnector->handle($requestpacket->getId(), $requestpacket->getParams());
+                $actionresult = $endpointconnector->handle($requestpacket);
                 if (get_class($actionresult) == "jtl\\Connector\\Result\\Action") {
                     $exists = true;
                     if ($actionresult->isHandled()) {

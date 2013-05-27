@@ -6,6 +6,7 @@
  */
 namespace jtl\Connector\Base;
 
+use \jtl\Core\Rpc\RequestPacket;
 use \jtl\Connector\Application\IEndpointConnector;
 use \jtl\Core\Utilities\Singleton;
 use \jtl\Core\Utilities\RpcMethod;
@@ -95,11 +96,12 @@ class Connector extends Singleton implements IEndpointConnector
      * 
      * @see \jtl\Connector\Application\IEndpointConnector::handle()
      */
-    public function handle($id, $params = null)
+    public function handle(RequestPacket $requestpacket)
     {        
         $this->_controller->setConfig($this->getConfig());
+        $this->_controller->setMethod($this->getMethod());
         
-        return $this->_controller->{$this->_action}($params);
+        return $this->_controller->{$this->_action}($requestpacket->getParams());
     }
 }
 ?>

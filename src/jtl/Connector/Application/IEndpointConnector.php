@@ -6,6 +6,8 @@
  */
 namespace jtl\Connector\Application;
 
+use \jtl\Core\Rpc\RequestPacket;
+
 /**
  *
  * @access public
@@ -19,11 +21,10 @@ interface IEndpointConnector
     public function canHandle();
 
     /**
-     *
-     * @param integer $id
-     * @param string|array|object $params            
-     * @return \jtl\Connector\Result\Action
+     * Controller handle
+     * 
+     * @param \jtl\Core\Rpc\RequestPacket $requestpacket
      */
-    public function handle($id, $params = null);
+    public function handle(RequestPacket $requestpacket);
 }
 ?>
