@@ -12,7 +12,7 @@ use \jtl\Core\Model\DataModel;
  * ProductPrice Model
  * @access public
  */
-abstract class ProductPrice extends DataModel
+class ProductPrice extends DataModel
 {
     /**
      * @var int
@@ -66,6 +66,15 @@ abstract class ProductPrice extends DataModel
     public function __get($name)
     {
         return $this->$name;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
+    {
+    
     }
 }
 ?>

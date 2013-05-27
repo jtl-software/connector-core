@@ -12,7 +12,7 @@ use \jtl\Core\Model\DataModel;
  * Company Model
  * @access public
  */
-abstract class Company extends DataModel
+class Company extends DataModel
 {
     /**
      * @var int
@@ -162,6 +162,15 @@ abstract class Company extends DataModel
     public function __get($name)
     {
         return $this->$name;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
+    {
+    
     }
 }
 ?>

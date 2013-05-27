@@ -12,7 +12,7 @@ use \jtl\Core\Model\DataModel;
  * CustomerGroupI18n Model
  * @access public
  */
-abstract class CustomerGroupI18n extends DataModel
+class CustomerGroupI18n extends DataModel
 {
     /**
      * @var int
@@ -60,6 +60,15 @@ abstract class CustomerGroupI18n extends DataModel
     public function __get($name)
     {
         return $this->$name;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
+    {
+    
     }
 }
 ?>

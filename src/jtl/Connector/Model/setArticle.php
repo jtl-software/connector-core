@@ -12,7 +12,7 @@ use \jtl\Core\Model\DataModel;
  * SetArticle Model
  * @access public
  */
-abstract class SetArticle extends DataModel
+class SetArticle extends DataModel
 {
     /**
      * @var int
@@ -60,6 +60,15 @@ abstract class SetArticle extends DataModel
     public function __get($name)
     {
         return $this->$name;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
+    {
+    
     }
 }
 ?>

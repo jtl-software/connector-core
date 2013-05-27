@@ -12,7 +12,7 @@ use \jtl\Core\Model\DataModel;
  * Currency Model
  * @access public
  */
-abstract class Currency extends DataModel
+class Currency extends DataModel
 {
     /**
      * @var int
@@ -100,6 +100,15 @@ abstract class Currency extends DataModel
     public function __get($name)
     {
         return $this->$name;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
+    {
+    
     }
 }
 ?>

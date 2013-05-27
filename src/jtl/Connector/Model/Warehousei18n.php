@@ -9,23 +9,23 @@ namespace jtl\Connector\Model;
 use \jtl\Core\Model\DataModel;
 
 /**
- * Warehousei18n Model
+ * WarehouseI18n Model
  * @access public
  */
-abstract class Warehousei18n extends DataModel
+class WarehouseI18n extends DataModel
 {
     /**
      * @var int
      */
-    protected $_id = 0;
+    protected $_id;
     
     /**
      * @var string
      */
-    protected $_name = "0";
+    protected $_name;
     
     /**
-     * Warehousei18n Setter
+     * WarehouseI18n Setter
      *
      * @param string $name
      * @param string $value
@@ -47,13 +47,22 @@ abstract class Warehousei18n extends DataModel
     }
     
     /**
-     * Warehousei18n Getter
+     * WarehouseI18n Getter
      *
      * @param string $name
      */
     public function __get($name)
     {
         return $this->$name;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
+    {
+    
     }
 }
 ?>

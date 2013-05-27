@@ -49,7 +49,7 @@ class Handler
         $action = new Action();
         $action->setHandled(true);
         try {
-            if ($_SESSION) {
+            if ($_SESSION !== null) {
                 $method = RpcMethod::splitMethod($requestpacket->getMethod());
                 $trid = $requestpacket->getGlobals()->getTransaction()->getId();
                 
@@ -67,12 +67,19 @@ class Handler
                         $_SESSION["trans"][$type] = array();
                     }
                     
-                    if (!isset($_SESSION["trans"][$type][$trid])) {
+                    if (isset($_SESSION["trans"][$type][$trid])) {
+                        $result = $_SESSION["trans"][$type][$trid]->add($method->getController(), $requestpacket->getParams());
+                        
+                        $action->setResult($result);
+                    }
+                    else {
                         $adapter = "{$type}Adapter";
                         $class = "\\jtl\\Connector\\ModelAdapter\\{$adapter}";
                         if (class_exists($class)) {
-                            $_SESSION["trans"][$type][$trid] = new $adapter();
-                            $_SESSION["trans"][$type][$trid]->add($method->getController(), $requestpacket->getParams());
+                            $_SESSION["trans"][$type][$trid] = new $class();
+                            $result = $_SESSION["trans"][$type][$trid]->add($method->getController(), $requestpacket->getParams());
+                            
+                            $action->setResult($result);
                         }
                         else {
                             throw new TransactionException("ModelAdapter {$type}Adapter does not exist");

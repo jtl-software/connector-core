@@ -12,7 +12,7 @@ use \jtl\Core\Model\DataModel;
  * MediaFileAttr Model
  * @access public
  */
-abstract class MediaFileAttr extends DataModel
+class MediaFileAttr extends DataModel
 {
     /**
      * @var int
@@ -72,6 +72,15 @@ abstract class MediaFileAttr extends DataModel
     public function __get($name)
     {
         return $this->$name;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
+    {
+    
     }
 }
 ?>

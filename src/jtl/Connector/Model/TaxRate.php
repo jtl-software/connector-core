@@ -12,7 +12,7 @@ use \jtl\Core\Model\DataModel;
  * TaxRate Model
  * @access public
  */
-abstract class TaxRate extends DataModel
+class TaxRate extends DataModel
 {
     /**
      * @var int
@@ -72,6 +72,15 @@ abstract class TaxRate extends DataModel
     public function __get($name)
     {
         return $this->$name;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
+    {
+    
     }
 }
 ?>

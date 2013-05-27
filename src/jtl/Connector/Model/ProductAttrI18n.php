@@ -12,7 +12,7 @@ use \jtl\Core\Model\DataModel;
  * ProductAttrI18n Model
  * @access public
  */
-abstract class ProductAttrI18n extends DataModel
+class ProductAttrI18n extends DataModel
 {
     /**
      * @var string
@@ -66,6 +66,15 @@ abstract class ProductAttrI18n extends DataModel
     public function __get($name)
     {
         return $this->$name;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
+    {
+    
     }
 }
 ?>

@@ -12,7 +12,7 @@ use \jtl\Core\Model\DataModel;
  * Language Model
  * @access public
  */
-abstract class Language extends DataModel
+class Language extends DataModel
 {
     /**
      * @var int
@@ -74,7 +74,11 @@ abstract class Language extends DataModel
             case "_isConnectorDefault":
             
                 $this->$name = (bool)$value;
-                $this->$name = (bool)$value;
+                break;
+        
+            case "_isWawiDefault":
+            
+                $this->$name = (false)$value;
                 break;
         
         }
@@ -88,6 +92,15 @@ abstract class Language extends DataModel
     public function __get($name)
     {
         return $this->$name;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
+    {
+    
     }
 }
 ?>

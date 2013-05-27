@@ -12,7 +12,7 @@ use \jtl\Core\Model\DataModel;
  * TaxZone Model
  * @access public
  */
-abstract class TaxZone extends DataModel
+class TaxZone extends DataModel
 {
     /**
      * @var int
@@ -54,6 +54,15 @@ abstract class TaxZone extends DataModel
     public function __get($name)
     {
         return $this->$name;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
+    {
+    
     }
 }
 ?>

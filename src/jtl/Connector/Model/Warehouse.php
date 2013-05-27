@@ -12,7 +12,7 @@ use \jtl\Core\Model\DataModel;
  * Warehouse Model
  * @access public
  */
-abstract class Warehouse extends DataModel
+class Warehouse extends DataModel
 {
     /**
      * @var int
@@ -44,6 +44,15 @@ abstract class Warehouse extends DataModel
     public function __get($name)
     {
         return $this->$name;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
+    {
+    
     }
 }
 ?>

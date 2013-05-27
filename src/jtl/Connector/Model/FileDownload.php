@@ -12,7 +12,7 @@ use \jtl\Core\Model\DataModel;
  * FileDownload Model
  * @access public
  */
-abstract class FileDownload extends DataModel
+class FileDownload extends DataModel
 {
     /**
      * @var int
@@ -90,6 +90,15 @@ abstract class FileDownload extends DataModel
     public function __get($name)
     {
         return $this->$name;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
+    {
+    
     }
 }
 ?>

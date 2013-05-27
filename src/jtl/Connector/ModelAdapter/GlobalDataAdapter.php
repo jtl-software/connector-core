@@ -408,8 +408,9 @@ class GlobalDataAdapter implements IModelAdapter
             $type = $this->items[$type];
             $class = "\\jtl\\Connector\\Model\\{$type}";
             if (class_exists($class)) {
-                $model = new $type();
+                $model = new $class();
                 $model->setOptions($object);
+                $model->validate();
                 $setter = "_" . lcfirst($type);
 
                 $this->$setter = $model;
@@ -437,6 +438,8 @@ class GlobalDataAdapter implements IModelAdapter
                 throw new DatabaseException($result->getError(), $result->getErrno());
             }
         }
+        
+        return true;
     }
 
     /**

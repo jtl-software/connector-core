@@ -12,7 +12,7 @@ use \jtl\Core\Model\DataModel;
  * CustomerOrderShippingAddress Model
  * @access public
  */
-abstract class CustomerOrderShippingAddress extends DataModel
+class CustomerOrderShippingAddress extends DataModel
 {
     /**
      * @var int
@@ -156,6 +156,15 @@ abstract class CustomerOrderShippingAddress extends DataModel
     public function __get($name)
     {
         return $this->$name;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
+    {
+    
     }
 }
 ?>

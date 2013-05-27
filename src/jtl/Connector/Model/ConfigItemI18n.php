@@ -12,7 +12,7 @@ use \jtl\Core\Model\DataModel;
  * ConfigItemI18n Model
  * @access public
  */
-abstract class ConfigItemI18n extends DataModel
+class ConfigItemI18n extends DataModel
 {
     /**
      * @var int
@@ -66,6 +66,15 @@ abstract class ConfigItemI18n extends DataModel
     public function __get($name)
     {
         return $this->$name;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
+    {
+    
     }
 }
 ?>

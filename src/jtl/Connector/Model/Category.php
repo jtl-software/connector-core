@@ -12,7 +12,7 @@ use \jtl\Core\Model\DataModel;
  * Category Model
  * @access public
  */
-abstract class Category extends DataModel
+class Category extends DataModel
 {
     /**
      * @var int
@@ -56,6 +56,15 @@ abstract class Category extends DataModel
     public function __get($name)
     {
         return $this->$name;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
+    {
+    
     }
 }
 ?>

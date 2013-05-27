@@ -12,7 +12,7 @@ use \jtl\Core\Model\DataModel;
  * DeliveryNote Model
  * @access public
  */
-abstract class DeliveryNote extends DataModel
+class DeliveryNote extends DataModel
 {
     /**
      * @var int
@@ -78,6 +78,15 @@ abstract class DeliveryNote extends DataModel
     public function __get($name)
     {
         return $this->$name;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
+    {
+    
     }
 }
 ?>
