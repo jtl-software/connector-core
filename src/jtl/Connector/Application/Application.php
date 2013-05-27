@@ -104,6 +104,10 @@ class Application extends CoreApplication
      */
     protected function execute(RequestPacket $requestpacket, Config $config, $rpcmode)
     {
+        if (!RpcMethod::isMethod($requestpacket->getMethod(), true)) {
+            throw new RpcException("Invalid Request", -32600);
+        }
+        
         // Core Connector
         $coreconnector = Connector::getInstance();
         $method = RpcMethod::splitMethod($requestpacket->getMethod());
