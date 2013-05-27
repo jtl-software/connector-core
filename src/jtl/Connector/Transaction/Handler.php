@@ -30,6 +30,7 @@ class Handler
         if ($requestpacket->getGlobals() !== null) {
             if ($requestpacket->getGlobals()->getTransaction() !== null) {
                 if ($requestpacket->getGlobals()->getTransaction()->getId() !== null) {
+                    
                     return true;
                 }
             }
@@ -49,7 +50,7 @@ class Handler
         $action->setHandled(true);
         try {
             if ($_SESSION) {
-                $obj = RpcMethod::splitMethod($requestpacket->getMethod());
+                $method = RpcMethod::splitMethod($requestpacket->getMethod());
                 $trid = $requestpacket->getGlobals()->getTransaction()->getId();
                 
                 if ($trid !== null && intval($trid) > 0) {
@@ -57,9 +58,9 @@ class Handler
                         $_SESSION["trans"] = array();
                     }
                     
-                    $type = MainAdapter::allocate($obj->controller);
+                    $type = MainAdapter::allocate($method->getController());
                     if ($type === null) {
-                        throw new TransactionException("Could not find any Adapter for Controller ({$obj->controller})");
+                        throw new TransactionException("Could not find any Adapter for Controller ({$method->getController()})");
                     }
                     
                     if (!isset($_SESSION["trans"][$type])) {
@@ -71,7 +72,7 @@ class Handler
                         $class = "\\jtl\\Connector\\ModelAdapter\\{$adapter}";
                         if (class_exists($class)) {
                             $_SESSION["trans"][$type][$trid] = new $adapter();
-                            $_SESSION["trans"][$type][$trid]->add($obj->controller, $requestpacket->getParams());
+                            $_SESSION["trans"][$type][$trid]->add($method->getController(), $requestpacket->getParams());
                         }
                         else {
                             throw new TransactionException("ModelAdapter {$type}Adapter does not exist");

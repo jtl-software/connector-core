@@ -11,6 +11,7 @@ use \jtl\Core\Utilities\Singleton;
 use \jtl\Core\Utilities\RpcMethod;
 use \jtl\Core\Utilities\Config\Config;
 use \jtl\Core\Exception\ConnectorException;
+use \jtl\Core\Rpc\Method;
 
 /**
  * Base Connector
@@ -20,7 +21,8 @@ use \jtl\Core\Exception\ConnectorException;
  */
 class Connector extends Singleton implements IEndpointConnector
 {
-    protected $config;
+    protected $_config;
+    protected $_method;
 
     /**
      * Setter connector config.
@@ -29,7 +31,7 @@ class Connector extends Singleton implements IEndpointConnector
      */
     public function setConfig(Config $config)
     {
-        $this->config = $config;
+        $this->_config = $config;
     }
 
     /**
@@ -40,10 +42,32 @@ class Connector extends Singleton implements IEndpointConnector
      */
     public function getConfig()
     {
-        if (empty($this->config)) {
+        if (empty($this->_config)) {
             throw new ConnectorException('The connector configuration is not set!');
         }
-        return $this->config;
+        return $this->_config;
+    }
+    
+    /**
+     * Method Setter
+     *
+     * @param \jtl\Core\Rpc\Method $method
+     * @return \jtl\Core\Controller\Controller
+     */
+    public function setMethod(Method $method)
+    {
+        $this->_method = $method;
+        return $this;
+    }
+    
+    /**
+     * Method Getter
+     *
+     * @return \jtl\Core\Rpc\Method
+     */
+    public function getMethod()
+    {
+        return $this->_method;
     }
     
     /**
@@ -51,19 +75,16 @@ class Connector extends Singleton implements IEndpointConnector
      * 
      * @see \jtl\Connector\Application\IEndpointConnector::canHandle()
      */
-    public function canHandle($method)
+    public function canHandle()
     {        
-        if (RpcMethod::isMethod($method, true)) {
-            $obj = RpcMethod::splitMethod($method, true);
-            $controller = RpcMethod::buildController($obj->controller);
-            
-            $class = "\\jtl\\Connector\\Controller\\{$controller}";
-            if (class_exists($class)) {
-                $this->_controller = $class::getInstance();
-                $this->_action = $obj->action;
-            
-                return method_exists($this->_controller, $this->_action);
-            }
+        $controller = RpcMethod::buildController($this->getMethod()->getController());
+        
+        $class = "\\jtl\\Connector\\Controller\\{$controller}";
+        if (class_exists($class)) {
+            $this->_controller = $class::getInstance();
+            $this->_action = $this->getMethod()->getAction();
+        
+            return method_exists($this->_controller, $this->_action);
         }
         
         return false;
@@ -74,9 +95,10 @@ class Connector extends Singleton implements IEndpointConnector
      * 
      * @see \jtl\Connector\Application\IEndpointConnector::handle()
      */
-    public function handle($id, $method, $params = null)
+    public function handle($id, $params = null)
     {        
         $this->_controller->setConfig($this->getConfig());
+        
         return $this->_controller->{$this->_action}($params);
     }
 }

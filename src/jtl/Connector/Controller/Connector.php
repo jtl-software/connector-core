@@ -22,6 +22,33 @@ use \jtl\Connector\Application\Application;
 class Connector extends CoreController
 {
     /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Controller\IController::push()
+     */
+    public function push($params)
+    {
+        // Not yet implemented
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Controller\IController::pull()
+     */
+    public function pull($params)
+    {
+        // Not yet implemented
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Controller\IController::delete()
+     */
+    public function delete($params)
+    {
+        // Not yet implemented
+    }
+    
+    /**
      * Initialize the connector.
      *
      * @param mixed $params Can be empty or not defined and a string.

@@ -29,6 +29,7 @@ use \jtl\Core\Validator\Schema;
 use \jtl\Core\Exception\SchemaException;
 use \jtl\Core\Validator\ValidationException;
 use \jtl\Core\Database\Sqlite3;
+use \jtl\Core\Utilities\RpcMethod;
 use \jtl\Connector\Session\Session;
 use \jtl\Connector\Base\Connector;
 use \jtl\Connector\Transaction\Handler as TransactionHandler;
@@ -105,9 +106,11 @@ class Application extends CoreApplication
     {
         // Core Connector
         $coreconnector = Connector::getInstance();
-        if ($coreconnector->canHandle($requestpacket->getMethod())) {
+        $method = RpcMethod::splitMethod($requestpacket->getMethod());
+        $coreconnector->setMethod($method);
+        if ($method->isCore() && $coreconnector->canHandle()) {
             $coreconnector->setConfig($config);
-            $actionresult = $coreconnector->handle($requestpacket->getId(), $requestpacket->getMethod(), $requestpacket->getParams());
+            $actionresult = $coreconnector->handle($requestpacket->getId(), $requestpacket->getParams());
             if ($actionresult->isHandled()) {
                 $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
                 
@@ -123,23 +126,26 @@ class Application extends CoreApplication
         // Endpoint Connector
         $exists = false;
         foreach (self::$_connectors as $endpointconnector) {
-            if ($endpointconnector->canHandle($requestpacket->getMethod())) {
+            $endpointconnector->setMethod($method);
+            if ($endpointconnector->canHandle()) {
                 
                 // Transaction                
                 if (TransactionHandler::exists($requestpacket)) {
-                    $actionresult = TransactionHandler::insert($requestpacket);
-                    $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
-                    
-                    if ($rpcmode == Packet::SINGLE_MODE) {
-                        Response::send($responsepacket);
-                    }
-                    else {
-                        return $responsepacket;
+                    if (!$method->isCommit()) {
+                        $actionresult = TransactionHandler::insert($requestpacket);
+                        $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
+                        
+                        if ($rpcmode == Packet::SINGLE_MODE) {
+                            Response::send($responsepacket);
+                        }
+                        else {
+                            return $responsepacket;
+                        }
                     }
                 }
                 
                 $endpointconnector->setConfig($config);
-                $actionresult = $endpointconnector->handle($requestpacket->getId(), $requestpacket->getMethod(), $requestpacket->getParams());
+                $actionresult = $endpointconnector->handle($requestpacket->getId(), $requestpacket->getParams());
                 if (get_class($actionresult) == "jtl\\Connector\\Result\\Action") {
                     $exists = true;
                     if ($actionresult->isHandled()) {

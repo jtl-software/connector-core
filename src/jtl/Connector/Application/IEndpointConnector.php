@@ -14,18 +14,16 @@ namespace jtl\Connector\Application;
 interface IEndpointConnector
 {
     /**
-     *
-     * @param string $method            
+     * Checks whether or not a method can be handled
      */
-    public function canHandle($method);
+    public function canHandle();
 
     /**
      *
-     * @param integer $id            
-     * @param string $method            
+     * @param integer $id
      * @param string|array|object $params            
      * @return \jtl\Connector\Result\Action
      */
-    public function handle($id, $method, $params = null);
+    public function handle($id, $params = null);
 }
 ?>
