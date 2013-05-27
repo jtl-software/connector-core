@@ -8,6 +8,7 @@ namespace jtl\Connector\ModelAdapter;
 
 use \jtl\Core\ModelAdapter\IModelAdapter;
 use \jtl\Connector\Model;
+use \jtl\Core\Exception\DatabaseException;
 
 /**
  * CustomerOrder Adapter Class
