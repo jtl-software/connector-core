@@ -11,10 +11,10 @@ use \jtl\Connector\Model;
 use \jtl\Core\Exception\DatabaseException;
 
 /**
- * Global Adapter Class
+ * GlobalData Adapter Class
  * @access public
  */
-class GlobalAdapter implements IModelAdapter
+class GlobalDataAdapter implements IModelAdapter
 {
     /**
      * @var \jtl\Connector\Model\company
