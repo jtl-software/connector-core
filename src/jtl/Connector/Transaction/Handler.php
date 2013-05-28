@@ -6,6 +6,7 @@
 
 namespace jtl\Connector\Transaction;
 
+use jtl\Core\Result\Transaction as TransactionResult;
 use \jtl\Core\Rpc\RequestPacket;
 use \jtl\Core\Exception\TransactionException;
 use \jtl\Core\Rpc\Error;
@@ -67,19 +68,31 @@ class Handler
                         $_SESSION["trans"][$type] = array();
                     }
                     
-                    if (isset($_SESSION["trans"][$type][$trid])) {
-                        $result = $_SESSION["trans"][$type][$trid]->add($method->getController(), $requestpacket->getParams());
-                        
-                        $action->setResult($result);
+                    if (isset($_SESSION["trans"][$type][$trid])) {                        
+                        $result = new TransactionResult();
+                        $result->setTransactionId($trid);
+                        if ($_SESSION["trans"][$type][$trid]->add($method->getController(), $requestpacket->getParams())) {
+                            $action->setResult($result->getPublic());
+                        }
+                        else {
+                            throw new TransactionException("Model is not a part of type ({$type}) or class not found");
+                        }
                     }
                     else {
                         $adapter = "{$type}Adapter";
                         $class = "\\jtl\\Connector\\ModelAdapter\\{$adapter}";
                         if (class_exists($class)) {
                             $_SESSION["trans"][$type][$trid] = new $class();
-                            $result = $_SESSION["trans"][$type][$trid]->add($method->getController(), $requestpacket->getParams());
                             
-                            $action->setResult($result);
+                            $result = new TransactionResult();
+                            $result->setTransactionId($trid);
+                            
+                            if ($_SESSION["trans"][$type][$trid]->add($method->getController(), $requestpacket->getParams())) {
+                                $action->setResult($result->getPublic());
+                            }
+                            else {
+                                throw new TransactionException("Model is not a part of type ({$type}) or class not found");
+                            }    
                         }
                         else {
                             throw new TransactionException("ModelAdapter {$type}Adapter does not exist");
@@ -144,7 +157,7 @@ class Handler
             throw new TransactionException("Could not find any Adapter for Controller ({$controller})");
         }
         
-        return ($controller == $type);
+        return (strtolower($controller) == strtolower($type));
     }
 }
 ?>
