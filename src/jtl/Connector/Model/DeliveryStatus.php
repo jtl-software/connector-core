@@ -22,7 +22,7 @@ class DeliveryStatus extends DataModel
     /**
      * @var string
      */
-    protected $_languageIso;
+    protected $_localeName;
     
     /**
      * @var string
@@ -43,7 +43,7 @@ class DeliveryStatus extends DataModel
                 $this->$name = (int)$value;
                 break;
         
-            case "_languageIso":
+            case "_localeName":
             case "_name":
             
                 $this->$name = (string)$value;

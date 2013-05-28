@@ -15,9 +15,9 @@ use \jtl\Core\Model\DataModel;
 class CustomerGroupI18n extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_languageIso;
+    protected $_localeName;
     
     /**
      * @var int
@@ -38,15 +38,15 @@ class CustomerGroupI18n extends DataModel
     public function __set($name, $value)
     {
         switch ($name) {
-            case "_languageIso":
-            case "_customerGroupId":
-            
-                $this->$name = (int)$value;
-                break;
-        
+            case "_localeName":
             case "_name":
             
                 $this->$name = (string)$value;
+                break;
+        
+            case "_customerGroupId":
+            
+                $this->$name = (int)$value;
                 break;
         
         }

@@ -32,7 +32,7 @@ class Language extends DataModel
     /**
      * @var string
      */
-    protected $_languageIso;
+    protected $_localeName;
     
     /**
      * @var bool
@@ -45,7 +45,7 @@ class Language extends DataModel
     protected $_isConnectorDefault = bool;
     
     /**
-     * @var false
+     * @var bool
      */
     protected $_isWawiDefault = false;
     
@@ -65,7 +65,7 @@ class Language extends DataModel
         
             case "_nameEnglish":
             case "_nameGerman":
-            case "_languageIso":
+            case "_localeName":
             
                 $this->$name = (string)$value;
                 break;
@@ -73,7 +73,7 @@ class Language extends DataModel
             case "_isDefault":
             case "_isConnectorDefault":
             case "_isWawiDefault":
-                
+            
                 $this->$name = (bool)$value;
                 break;
         

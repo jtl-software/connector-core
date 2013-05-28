@@ -20,9 +20,9 @@ class CrossSellingGroup extends DataModel
     protected $_id;
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_languageIso;
+    protected $_localeName;
     
     /**
      * @var string
@@ -44,11 +44,11 @@ class CrossSellingGroup extends DataModel
     {
         switch ($name) {
             case "_id":
-            case "_languageIso":
             
                 $this->$name = (int)$value;
                 break;
         
+            case "_localeName":
             case "_name":
             case "_description":
             

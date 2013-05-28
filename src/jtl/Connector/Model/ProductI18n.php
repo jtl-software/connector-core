@@ -17,7 +17,7 @@ class ProductI18n extends DataModel
     /**
      * @var string
      */
-    protected $_languageIso;
+    protected $_localeName;
     
     /**
      * @var int
@@ -53,7 +53,7 @@ class ProductI18n extends DataModel
     public function __set($name, $value)
     {
         switch ($name) {
-            case "_languageIso":
+            case "_localeName":
             case "_name":
             case "_url":
             case "_description":

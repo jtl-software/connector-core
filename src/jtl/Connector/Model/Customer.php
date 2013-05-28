@@ -25,9 +25,9 @@ class Customer extends DataModel
     protected $_customerGroupId;
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_languageIso;
+    protected $_localeName;
     
     /**
      * @var string
@@ -190,12 +190,12 @@ class Customer extends DataModel
         switch ($name) {
             case "_id":
             case "_customerGroupId":
-            case "_languageIso":
             case "_hasCustomerAccount":
             
                 $this->$name = (int)$value;
                 break;
         
+            case "_localeName":
             case "_customerNumber":
             case "_password":
             case "_salutation":

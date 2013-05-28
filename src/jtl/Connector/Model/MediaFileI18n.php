@@ -22,7 +22,7 @@ class MediaFileI18n extends DataModel
     /**
      * @var string
      */
-    protected $_languageIso;
+    protected $_localeName;
     
     /**
      * @var string
@@ -48,7 +48,7 @@ class MediaFileI18n extends DataModel
                 $this->$name = (int)$value;
                 break;
         
-            case "_languageIso":
+            case "_localeName":
             case "_name":
             case "_description":
             

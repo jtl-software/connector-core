@@ -27,7 +27,7 @@ class CategoryAttr extends DataModel
     /**
      * @var string
      */
-    protected $_languageIso;
+    protected $_localeName;
     
     /**
      * @var string
@@ -54,7 +54,7 @@ class CategoryAttr extends DataModel
                 $this->$name = (int)$value;
                 break;
         
-            case "_languageIso":
+            case "_localeName":
             case "_name":
             case "_value":
             

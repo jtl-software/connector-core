@@ -50,9 +50,9 @@ class CustomerOrder extends DataModel
     protected $_shippingMethodId;
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_languageIso;
+    protected $_localeName;
     
     /**
      * @var int
@@ -175,19 +175,13 @@ class CustomerOrder extends DataModel
             case "_billingAddressId":
             case "_paymentMethodId":
             case "_shippingMethodId":
-            case "_languageIso":
             case "_currencyIso":
             case "_paymentMethodType":
             
                 $this->$name = (int)$value;
                 break;
         
-            case "_credit":
-            case "_totalSum":
-            
-                $this->$name = (double)$value;
-                break;
-        
+            case "_localeName":
             case "_session":
             case "_shippingMethodName":
             case "_paymentMethodName":
@@ -207,6 +201,12 @@ class CustomerOrder extends DataModel
             case "_paymentModuleId":
             
                 $this->$name = (string)$value;
+                break;
+        
+            case "_credit":
+            case "_totalSum":
+            
+                $this->$name = (double)$value;
                 break;
         
         }

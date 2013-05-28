@@ -20,9 +20,9 @@ class ConfigItemI18n extends DataModel
     protected $_configItemId;
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_languageIso;
+    protected $_localeName;
     
     /**
      * @var string
@@ -44,11 +44,11 @@ class ConfigItemI18n extends DataModel
     {
         switch ($name) {
             case "_configItemId":
-            case "_languageIso":
             
                 $this->$name = (int)$value;
                 break;
         
+            case "_localeName":
             case "_name":
             case "_description":
             
