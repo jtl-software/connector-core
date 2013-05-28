@@ -23,22 +23,21 @@ class Config extends CoreController
 {
 
     /**
-     * Reads the controller configuration and returns it.
+     * Returns the controller configuration and returns it.
      *
      * @param mixed $params An array of parameters to read
      */
-    public function read($params = null)
+    public function pull($params = null)
     {
         $ret = new Action();
         try {
             $ret->setResult($this->getConfig()->reads($params));
             $ret->setHandled(true);
         } catch (\Exception $e) {
-            if (isset($e->jtl))
-            {
+            if (isset($e->jtl)) {
                 $ret->setHandled($e->jtl);
-            } else
-            {
+            }
+            else {
                 $ret->setHandled(false);
             }
             $err = new Error();
@@ -54,7 +53,7 @@ class Config extends CoreController
      * 
      * @param mixed $params An array of parameters to write
      */
-    public function write($params = null)
+    public function push($params = null)
     {
         $ret = new Action();
         try {
@@ -69,6 +68,15 @@ class Config extends CoreController
         }
         return $ret;
     }
-    
+
+    /**
+     * Delete is not needed.
+     * 
+     * @param mixed $params An array of parameters to write
+     */
+    public function delete($params = null)
+    {
+        return $params;
+    }
 
 }
