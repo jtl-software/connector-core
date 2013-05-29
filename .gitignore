@@ -4,7 +4,8 @@ netbeans/**
 .buildpath
 nbproject/**
 vendor/**
-build/**
+build/build/**
+build/coverage/**
 composer.lock
 composer.phar
 update-parents.sh
