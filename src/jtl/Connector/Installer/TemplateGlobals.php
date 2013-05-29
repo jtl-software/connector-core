@@ -22,7 +22,7 @@ class TemplateGlobals extends \Twig_Extension
     public function getGlobals()
     {
         return array(
-            'app_base' => INSTALLER_BASE_URI
+            'app_base' => __DIR__ . '/../../../../install'
         );
     }
 }
