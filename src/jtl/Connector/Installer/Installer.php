@@ -40,7 +40,15 @@ class Installer extends CoreApplication
      * @var int
      */
     protected $_currentStep = 1;
-    
+
+    /**
+     * Gettext text domain for this installer. Should be overwritten by the
+     * child implementation
+     *
+     * @var string
+     */
+    protected $_textDomain = 'jtl-connector';
+
     /**
      * @return array
      */
@@ -107,14 +115,14 @@ class Installer extends CoreApplication
             $langs = I18nUtils::getAcceptedLanguages();
             
             foreach ($langs as $lang => $priority) {
-                if (file_exists(INSTALLER_DIR . '/i18n/' . $lang . '/LC_MESSAGES/magento-connector.mo')) {
+                if (file_exists(INSTALLER_DIR . '/i18n/' . $lang . '/LC_MESSAGES/' . $this->_textDomain . '.mo')) {
                     putenv(sprintf('LC_ALL=%s', $lang));
                     setlocale(LC_ALL, $lang);
-                    
-                    bindtextdomain('magento-connector', INSTALLER_DIR . '/i18n/nocache');
-                    bindtextdomain('magento-connector', INSTALLER_DIR . '/i18n');
-                    bind_textdomain_codeset('magento-connector', 'UTF-8');
-                    textdomain('magento-connector');
+
+                    bindtextdomain($this->_textDomain, INSTALLER_DIR . '/i18n/nocache');
+                    bindtextdomain($this->_textDomain, INSTALLER_DIR . '/i18n');
+                    bind_textdomain_codeset($this->_textDomain, 'UTF-8');
+                    textdomain($this->_textDomain);
 
                     break;
                 }
