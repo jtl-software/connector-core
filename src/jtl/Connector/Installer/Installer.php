@@ -136,7 +136,10 @@ class Installer extends CoreApplication
         ));
 
         // Initialize Twig environment
-        $tplLoader = new \Twig_Loader_Filesystem(INSTALLER_DIR . '/templates/');
+        $tplLoader = new \Twig_Loader_Filesystem(array(
+            INSTALLER_DIR  . '/templates/',
+            APP_DIR . '/layout/templates/'
+        ));
         static::$twig = new \Twig_Environment($tplLoader, array(
           'cache' => $tmpDir,
           'auto_reload' => true
