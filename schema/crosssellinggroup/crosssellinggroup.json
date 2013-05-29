@@ -8,9 +8,9 @@
             ],
             "optional": false
         },
-        "languageIso": {
+        "localeName": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
@@ -31,6 +31,6 @@
     },
     "required": [
         "id",
-        "languageIso"
+        "localeName"
     ]
 }

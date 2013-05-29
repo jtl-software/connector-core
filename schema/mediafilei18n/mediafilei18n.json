@@ -8,7 +8,7 @@
             ],
             "optional": false
         },
-        "languageIso": {
+        "localeName": {
             "type": [
                 "string"
             ],
@@ -29,7 +29,7 @@
     },
     "required": [
         "mediaFileId",
-        "languageIso",
+        "localeName",
         "name",
         "description"
     ]

@@ -2,9 +2,9 @@
     "title": "CustomerGroupI18n Model",
     "type": "object",
     "properties": {
-        "languageIso": {
+        "localeName": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
@@ -23,7 +23,7 @@
         }
     },
     "required": [
-        "languageIso",
+        "localeName",
         "customerGroupId"
     ]
 }

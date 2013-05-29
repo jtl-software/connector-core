@@ -8,7 +8,7 @@
             ],
             "optional": false
         },
-        "languageIso": {
+        "localeName": {
             "type": [
                 "string"
             ],
@@ -31,6 +31,6 @@
     },
     "required": [
         "fileDownloadId",
-        "languageIso"
+        "localeName"
     ]
 }

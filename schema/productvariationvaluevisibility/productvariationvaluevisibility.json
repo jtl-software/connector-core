@@ -1,10 +1,10 @@
 {
-    "title": "ProductVariationValueI18n Model",
+    "title": "ProductVariationValueVisibility Model",
     "type": "object",
     "properties": {
-        "localeName": {
+        "customerGroupId": {
             "type": [
-                "string"
+                "int"
             ],
             "optional": false
         },
@@ -13,17 +13,10 @@
                 "int"
             ],
             "optional": false
-        },
-        "name": {
-            "type": [
-                "string",
-                "null"
-            ],
-            "optional": true
         }
     },
     "required": [
-        "localeName",
+        "customerGroupId",
         "productVariationValueId"
     ]
 }

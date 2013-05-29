@@ -52,7 +52,7 @@ class CustomerOrderShippingAddress extends DataModel
     /**
      * @var string
      */
-    protected $_extraAddressLine;
+    protected $_deliveryInstruction;
     
     /**
      * @var string
@@ -129,7 +129,7 @@ class CustomerOrderShippingAddress extends DataModel
             case "_lastName":
             case "_title":
             case "_company":
-            case "_extraAddressLine":
+            case "_deliveryInstruction":
             case "_street":
             case "_streetNumber":
             case "_extraAddressLine":

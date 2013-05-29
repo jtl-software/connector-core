@@ -1,43 +1,43 @@
 {
-    "title": "CategoryAttr Model",
+    "title": "ConfigItemPrice Model",
     "type": "object",
     "properties": {
-        "id": {
+        "configItemId": {
             "type": [
                 "int"
             ],
             "optional": false
         },
-        "categoryId": {
+        "customerGroupId": {
             "type": [
                 "int"
             ],
             "optional": false
         },
-        "localeName": {
+        "taxClassId": {
             "type": [
-                "string",
+                "int",
                 "null"
             ],
             "optional": true
         },
-        "name": {
+        "price": {
             "type": [
-                "string",
+                "float",
                 "null"
             ],
             "optional": true
         },
-        "value": {
+        "type": {
             "type": [
-                "string",
+                "int",
                 "null"
             ],
             "optional": true
         }
     },
     "required": [
-        "id",
-        "categoryId"
+        "configItemId",
+        "customerGroupId"
     ]
 }

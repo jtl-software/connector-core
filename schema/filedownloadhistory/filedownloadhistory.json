@@ -1,43 +1,43 @@
 {
-    "title": "MediaFileAttr Model",
+    "title": "FileDownloadHistory Model",
     "type": "object",
     "properties": {
-        "mediaFileAttr": {
+        "id": {
             "type": [
                 "int"
             ],
             "optional": false
         },
-        "mediaFileId": {
+        "fileDownloadId": {
             "type": [
                 "int"
             ],
             "optional": false
         },
-        "localeName": {
+        "customerId": {
             "type": [
-                "string"
+                "int"
             ],
             "optional": false
         },
-        "name": {
+        "customerOrderId": {
             "type": [
-                "string"
+                "int",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
-        "value": {
+        "created": {
             "type": [
-                "string"
+                "string",
+                "null"
             ],
-            "optional": false
+            "optional": true
         }
     },
     "required": [
-        "mediaFileAttr",
-        "mediaFileId",
-        "localeName",
-        "name",
-        "value"
+        "id",
+        "fileDownloadId",
+        "customerId"
     ]
 }

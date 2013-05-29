@@ -8,7 +8,7 @@
             ],
             "optional": false
         },
-        "languageIso": {
+        "localeName": {
             "type": [
                 "string"
             ],
@@ -41,7 +41,7 @@
     },
     "required": [
         "manufacturerId",
-        "languageIso",
+        "localeName",
         "description",
         "metaDescription",
         "metaKeywords",

@@ -2,7 +2,7 @@
     "title": "CategoryI18n Model",
     "type": "object",
     "properties": {
-        "languageIso": {
+        "localeName": {
             "type": [
                 "string"
             ],
@@ -58,7 +58,7 @@
         }
     },
     "required": [
-        "languageIso",
+        "localeName",
         "categoryId"
     ]
 }

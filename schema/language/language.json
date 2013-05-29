@@ -22,7 +22,7 @@
             ],
             "optional": true
         },
-        "languageIso": {
+        "localeName": {
             "type": [
                 "string",
                 "null"
@@ -45,7 +45,7 @@
         },
         "isWawiDefault": {
             "type": [
-                "false",
+                "bool",
                 "null"
             ],
             "optional": true

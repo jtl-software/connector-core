@@ -1,5 +1,5 @@
 {
-    "title": "Warehousei18n Model",
+    "title": "WarehouseI18n Model",
     "type": "object",
     "properties": {
         "id": {

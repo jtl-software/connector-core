@@ -49,7 +49,7 @@
             ],
             "optional": true
         },
-        "extraAddressLine": {
+        "deliveryInstruction": {
             "type": [
                 "string",
                 "null"
@@ -64,6 +64,13 @@
             "optional": true
         },
         "streetNumber": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
+        },
+        "extraAddressLine": {
             "type": [
                 "string",
                 "null"

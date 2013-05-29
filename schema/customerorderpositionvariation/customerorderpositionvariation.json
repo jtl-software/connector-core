@@ -1,64 +1,64 @@
 {
-    "title": "SpecificValueI18n Model",
+    "title": "CustomerOrderPositionVariation Model",
     "type": "object",
     "properties": {
-        "localeName": {
-            "type": [
-                "string"
-            ],
-            "optional": false
-        },
-        "specificValueId": {
+        "id": {
             "type": [
                 "int"
             ],
             "optional": false
         },
-        "value": {
+        "customerOrderPositionId": {
             "type": [
-                "string",
+                "int"
+            ],
+            "optional": false
+        },
+        "productVariationId": {
+            "type": [
+                "int"
+            ],
+            "optional": false
+        },
+        "productVariationValueId": {
+            "type": [
+                "int"
+            ],
+            "optional": false
+        },
+        "productVariationName": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        },
+        "productVariationValueName": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        },
+        "freeField": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        },
+        "surcharge": {
+            "type": [
+                "double",
                 "null"
             ],
             "optional": true
-        },
-        "url": {
-            "type": [
-                "string"
-            ],
-            "optional": false
-        },
-        "description": {
-            "type": [
-                "string"
-            ],
-            "optional": false
-        },
-        "metaDescription": {
-            "type": [
-                "string"
-            ],
-            "optional": false
-        },
-        "metaKeywords": {
-            "type": [
-                "string"
-            ],
-            "optional": false
-        },
-        "titleTag": {
-            "type": [
-                "string"
-            ],
-            "optional": false
         }
     },
     "required": [
-        "localeName",
-        "specificValueId",
-        "url",
-        "description",
-        "metaDescription",
-        "metaKeywords",
-        "titleTag"
+        "id",
+        "customerOrderPositionId",
+        "productVariationId",
+        "productVariationValueId",
+        "productVariationName",
+        "productVariationValueName",
+        "freeField"
     ]
 }

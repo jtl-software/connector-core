@@ -1,25 +1,24 @@
 {
-    "title": "ProductAttrI18n Model",
+    "title": "CustomerAttr Model",
     "type": "object",
     "properties": {
-        "localeName": {
-            "type": [
-                "string"
-            ],
-            "optional": false
-        },
-        "productAttrId": {
+        "id": {
             "type": [
                 "int"
             ],
             "optional": false
         },
-        "name": {
+        "customerId": {
             "type": [
-                "string",
-                "null"
+                "int"
             ],
-            "optional": true
+            "optional": false
+        },
+        "key": {
+            "type": [
+                "string"
+            ],
+            "optional": false
         },
         "value": {
             "type": [
@@ -29,8 +28,9 @@
         }
     },
     "required": [
-        "localeName",
-        "productAttrId",
+        "id",
+        "customerId",
+        "key",
         "value"
     ]
 }

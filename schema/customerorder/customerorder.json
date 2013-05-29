@@ -50,9 +50,9 @@
             ],
             "optional": true
         },
-        "languageIso": {
+        "localeName": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true

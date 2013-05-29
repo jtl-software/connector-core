@@ -1,16 +1,16 @@
 {
-    "title": "ProductAttrI18n Model",
+    "title": "ConfigGroupI18n Model",
     "type": "object",
     "properties": {
-        "localeName": {
+        "configGroupId": {
             "type": [
-                "string"
+                "int"
             ],
             "optional": false
         },
-        "productAttrId": {
+        "localeName": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
@@ -21,16 +21,16 @@
             ],
             "optional": true
         },
-        "value": {
+        "description": {
             "type": [
-                "string"
+                "string",
+                "null"
             ],
-            "optional": false
+            "optional": true
         }
     },
     "required": [
-        "localeName",
-        "productAttrId",
-        "value"
+        "configGroupId",
+        "localeName"
     ]
 }

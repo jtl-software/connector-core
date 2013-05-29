@@ -2,7 +2,7 @@
     "title": "SpecificI18n Model",
     "type": "object",
     "properties": {
-        "languageIso": {
+        "localeName": {
             "type": [
                 "string"
             ],
@@ -23,7 +23,7 @@
         }
     },
     "required": [
-        "languageIso",
+        "localeName",
         "specificId"
     ]
 }
