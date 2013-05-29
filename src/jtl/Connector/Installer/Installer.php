@@ -7,9 +7,9 @@
 namespace jtl\Connector\Installer;
 
 use \jtl\Core\Application\Application as CoreApplication;
-use \jtl\Core\Utilities\Config\Config as ConnectorConfig;
-use \jtl\Core\Utilities\Config\Loader\Json as ConfigJson;
-use \jtl\Core\Utilities\Config\Loader\System as ConfigSystem;
+use \jtl\Core\Config\Config as ConnectorConfig;
+use \jtl\Core\Config\Loader\Json as ConfigJson;
+use \jtl\Core\Config\Loader\System as ConfigSystem;
 use \jtl\Core\Utilities\HttpRequest;
 
 /**
