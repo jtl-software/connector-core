@@ -10,7 +10,7 @@ use \jtl\Core\Rpc\RequestPacket;
 use \jtl\Connector\Application\IEndpointConnector;
 use \jtl\Core\Utilities\Singleton;
 use \jtl\Core\Utilities\RpcMethod;
-use \jtl\Core\Utilities\Config\Config;
+use \jtl\Core\Config\Config;
 use \jtl\Core\Exception\ConnectorException;
 use \jtl\Core\Rpc\Method;
 
@@ -28,7 +28,7 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * Setter connector config.
      *
-     * @param \jtl\Core\Utilities\Config\Config $config
+     * @param \jtl\Core\Config\Config $config
      */
     public function setConfig(Config $config)
     {
