@@ -5,10 +5,10 @@
  * @package jtl\Connector\Shop3
  */
 
-namespace jtl\Connector\Utilities\Config\Loader;
+namespace jtl\Connector\Config\Loader;
 
 use jtl\Core\Exception\ConfigException;
-use jtl\Core\Utilities\Config\Loader\Base as BaseLoader;
+use jtl\Core\Config\Loader\Base as BaseLoader;
 
 /**
  * Shop3 Imageproperty class.
