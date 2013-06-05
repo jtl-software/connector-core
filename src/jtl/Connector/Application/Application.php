@@ -282,7 +282,7 @@ class Application extends CoreApplication
     {
         list ($controller, $action) = explode(".", $requestpacket->getMethod());
         
-        try {
+        try {            
             Schema::validateAction(CONNECTOR_DIR . "schema/{$controller}/params/{$action}.json", $requestpacket->getParams());
         }
         catch (ValidationException $exc) {
