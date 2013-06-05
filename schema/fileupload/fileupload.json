@@ -35,9 +35,9 @@
             ],
             "optional": true
         },
-        "required": {
+        "isRequired": {
             "type": [
-                "int",
+                "bool",
                 "null"
             ],
             "optional": true

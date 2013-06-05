@@ -40,9 +40,9 @@ class FileUpload extends DataModel
     protected $_fileType;
     
     /**
-     * @var int
+     * @var bool
      */
-    protected $_required;
+    protected $_isRequired;
     
     /**
      * FileUpload Setter
@@ -55,7 +55,6 @@ class FileUpload extends DataModel
         switch ($name) {
             case "_id":
             case "_productId":
-            case "_required":
             
                 $this->$name = (int)$value;
                 break;
@@ -65,6 +64,11 @@ class FileUpload extends DataModel
             case "_fileType":
             
                 $this->$name = (string)$value;
+                break;
+        
+            case "_isRequired":
+            
+                $this->$name = (bool)$value;
                 break;
         
         }
