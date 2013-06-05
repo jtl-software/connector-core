@@ -42,7 +42,7 @@ class Language extends DataModel
     /**
      * @var bool
      */
-    protected $_isConnectorDefault = bool;
+    protected $_isConnectorDefault = false;
     
     /**
      * @var bool
