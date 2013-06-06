@@ -199,6 +199,7 @@ class Application extends CoreApplication
     {
         $requestpacket->validate();
         $this->runActionValidation($requestpacket);
+        $this->runModelValidation($requestpacket);
         
         try {
             $this->execute($requestpacket, $config, $rpcmode);
@@ -232,6 +233,7 @@ class Application extends CoreApplication
             try {
                 $requestpacket->validate();
                 $this->runActionValidation($requestpacket);
+                $this->runModelValidation($requestpacket);
                 $jtlrpcreponses[] = $this->execute($requestpacket, $config, $rpcmode);
             }
             catch (RpcException $exc) {
@@ -280,13 +282,35 @@ class Application extends CoreApplication
      */
     protected function runActionValidation(RequestPacket $requestpacket)
     {
-        list ($controller, $action) = explode(".", $requestpacket->getMethod());
+        $method = RpcMethod::splitMethod($requestpacket->getMethod());
         
         try {            
-            Schema::validateAction(CONNECTOR_DIR . "schema/{$controller}/params/{$action}.json", $requestpacket->getParams());
+            Schema::validateAction(CONNECTOR_DIR . "schema/{$method->getController()}/params/{$method->getAction()}.json", $requestpacket->getParams());
         }
         catch (ValidationException $exc) {
             throw new SchemaException($exc->getMessage());
+        }
+    }
+    
+    /**
+     * Validate Model
+     * 
+     * @param string $controller
+     * @throws SchemaException
+     */
+    protected function runModelValidation(RequestPacket $requestpacket)
+    {
+        $method = RpcMethod::splitMethod($requestpacket->getMethod());
+        
+        if ($method->getAction() == "push") {
+            $controller = str_replace("_", "", $method->getController());
+            
+            try {
+                Schema::validateAction(CONNECTOR_DIR . "schema/{$controller}/{$controller}.json", $requestpacket->getParams());
+            }
+            catch (ValidationException $exc) {
+                throw new SchemaException($exc->getMessage());
+            }
         }
     }
     
