@@ -14,5 +14,5 @@ namespace jtl\Connector\Feature\Feature;
  */
 Interface IFeature
 {
-    public function getName();
+    
 }

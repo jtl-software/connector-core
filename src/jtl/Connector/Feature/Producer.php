@@ -4,20 +4,42 @@ namespace jtl\Connector\Feature;
 
 use jtl\Connector\Feature\Importer\IImporter;
 use jtl\Connector\Feature\Exception\Producer as ExceptionProducer;
+use jtl\Connector\Feature\Manager;
+use jtl\Connector\Feature\Feature\Feature;
+use jtl\Connector\Feature\Group\Image as GroupImage;
+use jtl\Connector\Feature\Group\Standard as GroupStandard;
 
 class Producer
 {
 
     const FEATURES_KEY = 'features';
-    const TYPE_FEATURE = 1;
-    const TYPE_GROUP = 2;
 
     protected $_importer;
     protected $_importer_data;
     protected $_features;
+    protected $_active_group;
     protected $_groups;
     protected $_methods;
+    protected $_parameters;
+    protected $_methods_cmp_str;
+    protected $_parameters_cmp_str;
     protected $_layers;
+    protected $_manager;
+
+    public function __construct(Manager $manager = null)
+    {
+        $this->_manager = $manager;
+    }
+
+    public function setManager(Manager $manager)
+    {
+        $this->_manager = $manager;
+    }
+
+    public function getManager()
+    {
+        return $this->_manager;
+    }
 
     public function getGroups()
     {
@@ -76,61 +98,87 @@ class Producer
 
     protected function extractLayers()
     {
-        foreach ($this->_importer_data as $key => $value) {
+        $methods = $this->_manager->getMethods();
+        if (empty($methods)) {
+            throw new ExceptionProducer('Unable to extract layers, methods missing!');
+        }
+        $this->_methods = array_keys($methods);
+        asort($this->_methods);
+        $this->_methods_cmp_str = implode(':', $this->_methods);
+
+        $parameters = $this->_manager->getParameters();
+        if (empty($parameters)) {
+            throw new ExceptionProducer('Unable to extract layers, parameters missing!');
+        }
+        $this->_parameters = $parameters;
+        asort($this->_parameters);
+        $this->_parameters_cmp_str = implode(':', $this->_parameters);
+
+        asort($this->_importer_data);
+        foreach ($this->_importer_data as $key => &$value) {
             $this->extractLayer($key, $value);
         }
     }
 
-    protected function extractLayer($key, $layer)
+    protected function extractLayer($key, $layer, $nested = 0)
     {
+        $nested++;
         if (is_array($layer)) {
-            $next_key = key($layer);
-            $next_values = $layer[$next_key];
-            var_dump($next_key);
-            var_dump($next_values);
-            
-            die();
-
-            if (key($layer))
-            $m = array(
-              array('pull', 'push'), 
-              array('pull', 'push')
-            );
-            $p = array(
-              array('supported', 'comment'),
-              array('comment', 'comment')
-            );
-            $k = array_keys($layer);
-            
-            var_dump($layer);
-            
-            $is_feature = $m[0] == $k || $m[1] == $k;
-            $is_method = $p[0] == $k || $p[1] == $k;
-            $is_parameter = !$is_feature && !$is_method;
-            
-            $is_feature = $m[0] == $k || $m[1] == $k;
-            $is_parameter = $p[0] == $k || $p[1] == $k;
-            
-            var_dump($m);
-            var_dump($k);
-            var_dump($m == $k);
-            if (true)
-            {
-                var_dump($k);
-                die('method');
-            } else if ($p == $k)
-            {
-                die('parameter');
-            } else
-            {
-                die('group');
+            $n_keys = array_keys($layer);
+            asort($n_keys);
+            if (implode(':', $n_keys) == $this->_methods_cmp_str) { //Feature
+                return $this->addFeature($key, $layer);
             }
-            $this->_layers[] = $layer;
-        } 
-        
-        var_dump($key);
-        var_dump($layer);
-        die();
+            else { //Group
+                $this->addGroup($key, $layer);
+                foreach ($layer as $key => $value) {
+                    $this->extractLayer($key, $value, $nested);
+                }
+            }
+        }
+    }
+
+    protected function addFeature($name, array $methods)
+    {
+        $feature = new Feature($name);
+        foreach ($methods as $method => $parameters) {
+            $feature->addMethod($this->createMethod($method, $parameters));
+        }
+        $this->_features[] = $feature;
+        return $feature;
+    }
+
+    protected function addGroup($name, $value)
+    {
+        $class = '\\jtl\\Connector\\Feature\\Group\\' . ucfirst(strtolower($name));
+        if (class_exists($class)) {
+            $group = new $class($value);
+            $this->_active_group[] = $group;
+            $this->_groups[] = $group;
+        }
+        else {
+            $group = new GroupStandard($name);
+            $this->_active_group[] = $group;
+            $this->_groups[] = $group;
+        }
+        return $this->_active_group;
+    }
+
+    protected function createMethod($method, array $params)
+    {
+        $class = '\\jtl\\Connector\\Feature\\Method\\' . ucfirst(strtolower($method));
+        if (!class_exists($class)) {
+            throw new ExceptionProducer(sprintf('The method "%s" doesn\'t exist', $method));
+        }
+        $obj = new $class($method);
+        foreach ($params as $name => $value) {
+            $setter = 'set' . ucfirst(strtolower($name));
+            if (!method_exists($obj, $setter)) {
+                throw new ExceptionProducer(sprintf('The method "%s" doesn\'t exist in class "%s"', $setter, $method));
+            }
+            call_user_method($setter, $obj, $value);
+        }
+        return $obj;
     }
 
 }

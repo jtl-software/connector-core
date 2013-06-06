@@ -5,14 +5,14 @@
  * @package jtl\Connector\Feature
  */
 
-namespace jtl\Connector\Feature\Writer;
+namespace jtl\Connector\Feature\Exporter;
 
 /**
- * Writer Interface
+ * Export interface
  * 
  * @author David Spickers <david.spickers@jtl-software.de>
  */
-interface IWriter
+interface IExporter
 {
 
     public function load($array);

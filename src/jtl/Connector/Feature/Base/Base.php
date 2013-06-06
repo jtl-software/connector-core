@@ -57,23 +57,25 @@ abstract class Base
     }
 
     /**
-     * Dynamically returning all class constants supported.
+     * Returning all class constants supported.
      * 
      * @param string $prefix
      * @param bool $only_keys
      * @param int $char_len
      * @return mixed
      */
-    public function retrieveConstants($prefix, $only_keys = true, $char_len = 3)
+    public function retrieveConstants($prefix = '', $only_keys = true, $char_len = 3)
     {
         $consts = array();
         $rc = new \ReflectionClass($this);
         $bconsts = $rc->getConstants();
         unset($rc);
-        if (!empty($bconsts)) {
-            foreach ($bconsts as $key => $value) {
-                if (substr($key, 0, $char_len) === $prefix) {
-                    $consts[$key] = $value;
+        if (empty($prefix) && !$only_keys) {
+            if (!empty($bconsts)) {
+                foreach ($bconsts as $key => $value) {
+                    if (substr($key, 0, $char_len) === $prefix) {
+                        $consts[$key] = $value;
+                    }
                 }
             }
         }

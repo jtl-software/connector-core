@@ -5,13 +5,15 @@
  * @package jtl\Connector\Feature
  */
 
-namespace jtl\Connector\Feature\Group;
+namespace jtl\Connector\Feature\Exception;
 
 /**
- * Group Interface
- * 
+ * Basic method exception.
+ *
+ * @access public
  * @author David Spickers <david.spickers@jtl-software.de>
  */
-Interface IGroup
+class Method extends \RuntimeException
 {
+    
 }
