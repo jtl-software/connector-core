@@ -20,16 +20,7 @@ abstract class Base
      * @var string
      */
     protected $_name;
-
-    /**
-     * Create the instance.
-     * 
-     * @param string $name A name as string.
-     */
-    public function __construct($name = '')
-    {
-        $this->_name = $name;
-    }
+    protected $_classes;
 
     /**
      * Returns the name.
@@ -83,6 +74,21 @@ abstract class Base
             return array_keys($consts);
         }
         return $consts;
+    }
+
+    /**
+     * Returns all declared classes.
+     * We need this way, because the autoloader will try to include the class
+     * file if we use "class_exists" or similar functions.
+     * 
+     * @return array
+     */
+    public function getClasses()
+    {
+        if (!isset($this->_classes)) {
+            $this->_classes = get_declared_classes();
+        }
+        return $this->_classes;
     }
 
 }

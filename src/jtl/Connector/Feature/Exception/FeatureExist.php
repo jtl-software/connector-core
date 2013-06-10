@@ -15,7 +15,7 @@ namespace jtl\Connector\Feature\Exception;
 class ExistFeature extends \RuntimeException
 {
 
-    public function __construct($feature, $code = 0, $previous = null)
+    function __construct($feature, $code = 0, $previous = null)
     {
         parent::__construct(sprintf('The feature "%s" already exists', $feature), $code, $previous);
     }

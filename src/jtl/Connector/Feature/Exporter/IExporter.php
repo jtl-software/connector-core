@@ -15,5 +15,10 @@ namespace jtl\Connector\Feature\Exporter;
 interface IExporter
 {
 
-    public function load($array);
+    /**
+     * Should export the given array into the specified Format.
+     * 
+     * @param array $array The features object array.
+     */
+    public function export($array);
 }

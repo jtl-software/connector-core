@@ -15,13 +15,10 @@ namespace jtl\Connector\Feature\Method;
 interface IMethod
 {
 
+    /**
+     * Returns the name of a method.
+     * 
+     * @return string
+     */
     public function getName();
-
-    public function isSupported();
-
-    public function setSupported($b);
-
-    public function getComment();
-
-    public function setComment($c);
 }

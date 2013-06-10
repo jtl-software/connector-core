@@ -2,100 +2,49 @@
 
 namespace jtl\Connector\Feature;
 
-use jtl\Connector\Feature\Importer\IImporter;
-use jtl\Connector\Feature\Exception\Producer as ExceptionProducer;
-use jtl\Connector\Feature\Manager;
-use jtl\Connector\Feature\Feature\Feature;
-use jtl\Connector\Feature\Group\Image as GroupImage;
-use jtl\Connector\Feature\Group\Standard as GroupStandard;
+use jtl\Connector\Feature\Base\Producer as BaseProducer;
 
-class Producer
+class Producer extends BaseProducer
 {
 
-    const FEATURES_KEY = 'features';
-
-    protected $_importer;
-    protected $_importer_data;
-    protected $_features;
-    protected $_active_group;
-    protected $_groups;
-    protected $_methods;
-    protected $_parameters;
-    protected $_methods_cmp_str;
-    protected $_parameters_cmp_str;
-    protected $_layers;
-    protected $_manager;
-
-    public function __construct(Manager $manager = null)
+    /**
+     * Will start the load process inside of the importer and validates the datas
+     * that will be returned by this method.
+     * 
+     * @throws ExceptionProducer If the datas param contains no array, is empty,
+     * or doesn't contain the feature key we need to inform the caller about
+     * the inconsistency. 
+     */
+    protected function loadAndValidate()
     {
-        $this->_manager = $manager;
-    }
-
-    public function setManager(Manager $manager)
-    {
-        $this->_manager = $manager;
-    }
-
-    public function getManager()
-    {
-        return $this->_manager;
-    }
-
-    public function getGroups()
-    {
-        return $this->_groups;
-    }
-
-    public function getFeatures()
-    {
-        return $this->_features;
-    }
-
-    public function getMethods()
-    {
-        return $this->_methods;
-    }
-
-    public function import(IImporter $importer)
-    {
-        $this->_importer = $importer;
-        return $this->parse();
-    }
-
-    public function export(IWriter $writer)
-    {
-        return $writer->load(array(
-            self::FEATURES_KEY => $this->_importer_data
-        ));
-    }
-
-    public function transform(IImporter $from, IWriter $to)
-    {
-        $this->import($from);
-        $this->export($to);
-    }
-
-    protected function validate()
-    {
-        $datas = $this->_importer->dump();
+        $datas = $this->_importer->load();
         if (empty($datas)) {
             throw new ExceptionProducer(sprintf('The importer "%s" is unable to serve your request', $this->_importer->getName()));
         }
         if (!is_array($datas)) {
             throw new ExceptionProducer(sprintf('The importer "%s" served invalid datas: %s ', $this->_importer->getName(), var_export($datas, true)));
         }
-        if (!array_key_exists(self::FEATURES_KEY, $datas)) {
+        if (!isset($datas[self::FEATURES_KEY])) {
             throw new ExceptionProducer(sprintf('Can\'t find "%s" as a key for your datas', self::FEATURES_KEY));
         }
         $this->_importer_data = $datas[self::FEATURES_KEY];
     }
 
+    /**
+     * Loads the importer, validation and extracting of the datas.
+     */
     protected function parse()
     {
-        $this->validate();
+        $this->loadAndValidate();
         $this->extractLayers();
     }
 
+    /**
+     * Extracts the different layers, methods and parameters.
+     * 
+     * @throws ExceptionProducer If there are no methods or parameters, we need 
+     * to notify the caller about the inconsistency.
+     */
     protected function extractLayers()
     {
         $methods = $this->_manager->getMethods();
@@ -120,65 +69,33 @@ class Producer
         }
     }
 
-    protected function extractLayer($key, $layer, $nested = 0)
+    /**
+     * Extracts the actual layer with a given key, manage the parent and adds 
+     * (if found) features, groups and childrens to the producer.
+     * 
+     * @param string $key The actual key inside of the feature array.
+     * @param mixed $layer The data.
+     * @param type $parent If there is a active group, all children will be added
+     * to the parent.
+     */
+    protected function extractLayer($key, &$layer, $parent = null)
     {
-        $nested++;
         if (is_array($layer)) {
             $n_keys = array_keys($layer);
             asort($n_keys);
             if (implode(':', $n_keys) == $this->_methods_cmp_str) { //Feature
-                return $this->addFeature($key, $layer);
+                $child = $this->addFeature($key, $layer);
             }
             else { //Group
-                $this->addGroup($key, $layer);
-                foreach ($layer as $key => $value) {
-                    $this->extractLayer($key, $value, $nested);
+                $child = $this->addGroup($key, $layer);
+                foreach ($layer as $fkey => $value) {
+                    $this->extractLayer($fkey, $value, $child);
                 }
             }
         }
-    }
-
-    protected function addFeature($name, array $methods)
-    {
-        $feature = new Feature($name);
-        foreach ($methods as $method => $parameters) {
-            $feature->addMethod($this->createMethod($method, $parameters));
+        if (isset($child) && !empty($parent)) {
+            $parent->addChildren($child);
         }
-        $this->_features[] = $feature;
-        return $feature;
-    }
-
-    protected function addGroup($name, $value)
-    {
-        $class = '\\jtl\\Connector\\Feature\\Group\\' . ucfirst(strtolower($name));
-        if (class_exists($class)) {
-            $group = new $class($value);
-            $this->_active_group[] = $group;
-            $this->_groups[] = $group;
-        }
-        else {
-            $group = new GroupStandard($name);
-            $this->_active_group[] = $group;
-            $this->_groups[] = $group;
-        }
-        return $this->_active_group;
-    }
-
-    protected function createMethod($method, array $params)
-    {
-        $class = '\\jtl\\Connector\\Feature\\Method\\' . ucfirst(strtolower($method));
-        if (!class_exists($class)) {
-            throw new ExceptionProducer(sprintf('The method "%s" doesn\'t exist', $method));
-        }
-        $obj = new $class($method);
-        foreach ($params as $name => $value) {
-            $setter = 'set' . ucfirst(strtolower($name));
-            if (!method_exists($obj, $setter)) {
-                throw new ExceptionProducer(sprintf('The method "%s" doesn\'t exist in class "%s"', $setter, $method));
-            }
-            call_user_method($setter, $obj, $value);
-        }
-        return $obj;
     }
 
 }
