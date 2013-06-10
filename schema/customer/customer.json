@@ -85,6 +85,13 @@
             ],
             "optional": true
         },
+        "deliveryInstruction": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
+        },
         "extraAddressLine": {
             "type": [
                 "string",

@@ -77,6 +77,11 @@ class Customer extends DataModel
     /**
      * @var string
      */
+    protected $_deliveryInstruction;
+    
+    /**
+     * @var string
+     */
     protected $_extraAddressLine;
     
     /**
@@ -205,6 +210,7 @@ class Customer extends DataModel
             case "_company":
             case "_street":
             case "_streetNumber":
+            case "_deliveryInstruction":
             case "_extraAddressLine":
             case "_zipCode":
             case "_city":
