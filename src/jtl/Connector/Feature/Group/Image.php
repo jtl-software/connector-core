@@ -35,7 +35,7 @@ class Image extends BaseGroup
      */
     function __construct(array &$params)
     {
-        $this>name = 'Image';
+        $this->name = 'Image';
         if (array_key_exists('relationTypes', $params)) {
             $this->_relation_types = $params['relationTypes'];
             unset($params['relationTypes']);
