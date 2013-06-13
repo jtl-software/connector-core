@@ -42,13 +42,6 @@
                 "null"
             ],
             "optional": true
-        },
-        "isWawiDefault": {
-            "type": [
-                "bool",
-                "null"
-            ],
-            "optional": true
         }
     },
     "required": [

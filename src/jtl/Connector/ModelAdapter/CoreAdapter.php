@@ -41,26 +41,6 @@ abstract class CoreAdapter implements IModelAdapter
     
     /**
      * (non-PHPdoc)
-     * @see \jtl\Core\ModelAdapter\IModelAdapter::insert()
-     */
-    public function insert()
-    {
-        foreach ($this->items as $item) {
-            $getter = "_" . lcfirst($item);
-            $mapper = "{$item}Mapper";
-            $mapper = $mapper::getInstance();
-            $result = $mapper->deleteSave($this->$getter);
-    
-            if ($result->getErrno() > 0) {
-                throw new DatabaseException($result->getError(), $result->getErrno());
-            }
-        }
-    
-        return true;
-    }
-    
-    /**
-     * (non-PHPdoc)
      * @see \jtl\Core\ModelAdapter\IModelAdapter::isComplete()
      */
     public function isComplete()

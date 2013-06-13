@@ -45,11 +45,6 @@ class Language extends DataModel
     protected $_isConnectorDefault = false;
     
     /**
-     * @var bool
-     */
-    protected $_isWawiDefault = false;
-    
-    /**
      * Language Setter
      *
      * @param string $name
@@ -72,7 +67,6 @@ class Language extends DataModel
         
             case "_isDefault":
             case "_isConnectorDefault":
-            case "_isWawiDefault":
             
                 $this->$name = (bool)$value;
                 break;
