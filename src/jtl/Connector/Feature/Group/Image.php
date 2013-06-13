@@ -1,24 +1,52 @@
 <?php
 
+/**
+ * @copyright 2010-2013 JTL-Software GmbH
+ * @package jtl\Connector\Feature
+ */
+
 namespace jtl\Connector\Feature\Group;
 
 use jtl\Connector\Feature\Group\IGroup;
 use jtl\Connector\Feature\Group\Base as BaseGroup;
 
+/**
+ * Special image group, that supports additional parameters inside of the params 
+ * array.
+ * 
+ * @author David Spickers <david.spickers@jtl-software.de>
+ */
 class Image extends BaseGroup
 {
 
-    protected $_relation_types;
+    /**
+     * @var array
+     */
+    protected $_relation_types = array();
 
-    public function __construct(array &$params)
+    /**
+     * Creates the instance, parses the params and will look for relation types.
+     * 
+     * If there is the entry with the key "relationTypes" inside of this array,
+     * all relations will be extracted and saved in the _relation_types array.
+     * 
+     * @param array $params The features array entry of the image feature as 
+     * reference.
+     */
+    function __construct(array &$params)
     {
+        $this->name = 'Image';
         if (array_key_exists('relationTypes', $params)) {
             $this->_relation_types = $params['relationTypes'];
             unset($params['relationTypes']);
         }
-        parent::__construct('Image');
     }
 
+    /**
+     * Returns the relations.
+     * 
+     * @return array
+     */
     public function getRelations()
     {
         return $this->_relation_types;

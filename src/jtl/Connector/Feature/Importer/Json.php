@@ -33,27 +33,30 @@ class Json extends BaseImporter
     /**
      * Creates the instance.
      * 
-     * @param string $file The full filename of a JSON config file
+     * @param string $file The full filename of a JSON file that will be read
+     * inside of the load method.
      */
-    public function __construct($json_file)
+    function __construct($json_file)
     {
         $this->file = $json_file;
     }
 
     /**
-     * Dumps the feature file.
+     * Reads the feature file defined in the constructor and uses the JSON 
+     * serializer to return all datas as associative array.
      * 
-     * @return type
+     * @return array
      * @throws ExceptionImporter
      */
-    public function dump()
+    public function load()
     {
-        if (!is_file($this->file)) {
-            throw new ExceptionImporter(sprintf('Unable to load your file "%s"', $this->file));
-        }
-        $content = file_get_contents($this->file);
-        if ($content === false) {
-            throw new ExceptionImporter(sprintf('Unable to read file content from file "%s"', $this->file));
+        try {
+            $content = file_get_contents($this->file);
+            if ($content === false) {
+                throw new ExceptionImporter(sprintf('Unable to read file content from file "%s"', $this->file));
+            }
+        } catch (\Exception $e) {
+            throw new ExceptionImporter(sprintf('Unable to load your file "%s", message "%s"', $this->file, $e->getMessage()));
         }
         return SerializerJson::decode($content, true);
     }

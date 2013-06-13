@@ -14,4 +14,5 @@ namespace jtl\Connector\Feature\Group;
  */
 Interface IGroup
 {
+    
 }
