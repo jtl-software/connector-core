@@ -6,7 +6,6 @@
 
 namespace jtl\Connector\Application;
 
-
 use jtl\Core\Rpc\Transaction;
 
 use \jtl\Core\Serializer\Json;
