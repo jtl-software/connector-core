@@ -170,12 +170,12 @@ class Customer extends DataModel
     protected $_modified;
     
     /**
-     * @var string
+     * @var bool
      */
     protected $_isActive;
     
     /**
-     * @var string
+     * @var bool
      */
     protected $_isFetched;
     
@@ -227,8 +227,6 @@ class Customer extends DataModel
             case "_origin":
             case "_created":
             case "_modified":
-            case "_isActive":
-            case "_isFetched":
             
                 $this->$name = (string)$value;
                 break;
@@ -237,6 +235,12 @@ class Customer extends DataModel
             case "_discount":
             
                 $this->$name = (double)$value;
+                break;
+        
+            case "_isActive":
+            case "_isFetched":
+            
+                $this->$name = (bool)$value;
                 break;
         
         }

@@ -220,14 +220,14 @@
         },
         "isActive": {
             "type": [
-                "string",
+                "bool",
                 "null"
             ],
             "optional": true
         },
         "isFetched": {
             "type": [
-                "string",
+                "bool",
                 "null"
             ],
             "optional": true

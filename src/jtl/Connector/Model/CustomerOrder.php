@@ -140,7 +140,7 @@ class CustomerOrder extends DataModel
     protected $_ip;
     
     /**
-     * @var string
+     * @var bool
      */
     protected $_isFetched;
     
@@ -195,7 +195,6 @@ class CustomerOrder extends DataModel
             case "_logistic":
             case "_trackingURL":
             case "_ip":
-            case "_isFetched":
             case "_status":
             case "_created":
             case "_paymentModuleId":
@@ -207,6 +206,11 @@ class CustomerOrder extends DataModel
             case "_totalSum":
             
                 $this->$name = (double)$value;
+                break;
+        
+            case "_isFetched":
+            
+                $this->$name = (bool)$value;
                 break;
         
         }

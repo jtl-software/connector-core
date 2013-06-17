@@ -178,7 +178,7 @@
         },
         "isFetched": {
             "type": [
-                "string",
+                "bool",
                 "null"
             ],
             "optional": true
