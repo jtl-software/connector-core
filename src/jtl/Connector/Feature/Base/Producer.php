@@ -171,7 +171,7 @@ abstract class Producer extends Baseclass implements IProducer
      */
     public function export(IExporter $exporter)
     {
-        return $exporter->load(array(
+        return $exporter->export(array(
             self::FEATURES_KEY => $this->_importer_data
         ));
     }
