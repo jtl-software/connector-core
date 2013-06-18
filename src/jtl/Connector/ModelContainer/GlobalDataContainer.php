@@ -13,152 +13,152 @@ namespace jtl\Connector\ModelContainer;
 class GlobalDataContainer extends CoreContainer
 {
     /**
-     * @var \jtl\Connector\Model\company[]
+     * @var \jtl\Connector\Model\Company[]
      */
     protected $_companies;
     
     /**
-     * @var \jtl\Connector\Model\language[]
+     * @var \jtl\Connector\Model\Language[]
      */
     protected $_languages;
     
     /**
-     * @var \jtl\Connector\Model\currency[]
+     * @var \jtl\Connector\Model\Currency[]
      */
     protected $_currencies;
     
     /**
-     * @var \jtl\Connector\Model\customerGroup[]
+     * @var \jtl\Connector\Model\CustomerGroup[]
      */
     protected $_customerGroups;
     
     /**
-     * @var \jtl\Connector\Model\customerGroupI18n[]
+     * @var \jtl\Connector\Model\CustomerGroupI18n[]
      */
     protected $_customerGroupI18ns;
     
     /**
-     * @var \jtl\Connector\Model\customerGroupAttr[]
+     * @var \jtl\Connector\Model\CustomerGroupAttr[]
      */
     protected $_customerGroupAttrs;
     
     /**
-     * @var \jtl\Connector\Model\deliveryStatus[]
+     * @var \jtl\Connector\Model\DeliveryStatus[]
      */
     protected $_deliveryStatuss;
     
     /**
-     * @var \jtl\Connector\Model\crossSellingGroup[]
+     * @var \jtl\Connector\Model\CrossSellingGroup[]
      */
     protected $_crossSellingGroups;
     
     /**
-     * @var \jtl\Connector\Model\unit[]
+     * @var \jtl\Connector\Model\Unit[]
      */
     protected $_units;
     
     /**
-     * @var \jtl\Connector\Model\taxZone[]
+     * @var \jtl\Connector\Model\TaxZone[]
      */
     protected $_taxZones;
     
     /**
-     * @var \jtl\Connector\Model\taxClass[]
+     * @var \jtl\Connector\Model\TaxClass[]
      */
     protected $_taxClasss;
     
     /**
-     * @var \jtl\Connector\Model\taxRate[]
+     * @var \jtl\Connector\Model\TaxRate[]
      */
     protected $_taxRates;
     
     /**
-     * @var \jtl\Connector\Model\shippingClass[]
+     * @var \jtl\Connector\Model\ShippingClass[]
      */
     protected $_shippingClasss;
     
     /**
-     * @var \jtl\Connector\Model\warehouse[]
+     * @var \jtl\Connector\Model\Warehouse[]
      */
     protected $_warehouses;
     
     /**
-     * @var \jtl\Connector\Model\warehouseI18n[]
+     * @var \jtl\Connector\Model\WarehouseI18n[]
      */
     protected $_warehouseI18ns;
     
     /**
-     * @var \jtl\Connector\Model\productType[]
+     * @var \jtl\Connector\Model\ProductType[]
      */
     protected $_productTypes;
     
     /**
-     * @var \jtl\Connector\Model\manufacturer[]
+     * @var \jtl\Connector\Model\Manufacturer[]
      */
     protected $_manufacturers;
     
     /**
-     * @var \jtl\Connector\Model\manufacturerI18n[]
+     * @var \jtl\Connector\Model\ManufacturerI18n[]
      */
     protected $_manufacturerI18ns;
     
     /**
-     * @var \jtl\Connector\Model\specific[]
+     * @var \jtl\Connector\Model\Specific[]
      */
     protected $_specifics;
     
     /**
-     * @var \jtl\Connector\Model\specificI18n[]
+     * @var \jtl\Connector\Model\SpecificI18n[]
      */
     protected $_specificI18ns;
     
     /**
-     * @var \jtl\Connector\Model\specificValue[]
+     * @var \jtl\Connector\Model\SpecificValue[]
      */
     protected $_specificValues;
     
     /**
-     * @var \jtl\Connector\Model\specificValueI18n[]
+     * @var \jtl\Connector\Model\SpecificValueI18n[]
      */
     protected $_specificValueI18ns;
     
     /**
-     * @var \jtl\Connector\Model\configGroup[]
+     * @var \jtl\Connector\Model\ConfigGroup[]
      */
     protected $_configGroups;
     
     /**
-     * @var \jtl\Connector\Model\configGroupI18n[]
+     * @var \jtl\Connector\Model\ConfigGroupI18n[]
      */
     protected $_configGroupI18ns;
     
     /**
-     * @var \jtl\Connector\Model\configItem[]
+     * @var \jtl\Connector\Model\ConfigItem[]
      */
     protected $_configItems;
     
     /**
-     * @var \jtl\Connector\Model\configItemI18n[]
+     * @var \jtl\Connector\Model\ConfigItemI18n[]
      */
     protected $_configItemI18ns;
     
     /**
-     * @var \jtl\Connector\Model\configItemPrice[]
+     * @var \jtl\Connector\Model\ConfigItemPrice[]
      */
     protected $_configItemPrices;
     
     /**
-     * @var \jtl\Connector\Model\fileDownloadI18n[]
+     * @var \jtl\Connector\Model\FileDownloadI18n[]
      */
     protected $_fileDownloadI18ns;
     
     /**
-     * @var \jtl\Connector\Model\fileDownloadHistory[]
+     * @var \jtl\Connector\Model\FileDownloadHistory[]
      */
     protected $_fileDownloadHistories;
         
     /**
-     * @return array \jtl\Connector\Model\company
+     * @return array \jtl\Connector\Model\Company
      */
     public function getCompanies()
     {
@@ -166,7 +166,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\language
+     * @return array \jtl\Connector\Model\Language
      */
     public function getLanguages()
     {
@@ -174,7 +174,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\currency
+     * @return array \jtl\Connector\Model\Currency
      */
     public function getCurrencies()
     {
@@ -182,7 +182,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\customerGroup
+     * @return array \jtl\Connector\Model\CustomerGroup
      */
     public function getCustomerGroups()
     {
@@ -190,7 +190,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\customerGroupI18n
+     * @return array \jtl\Connector\Model\CustomerGroupI18n
      */
     public function getCustomerGroupI18ns()
     {
@@ -198,7 +198,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\customerGroupAttr
+     * @return array \jtl\Connector\Model\CustomerGroupAttr
      */
     public function getCustomerGroupAttrs()
     {
@@ -206,7 +206,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\deliveryStatus
+     * @return array \jtl\Connector\Model\DeliveryStatus
      */
     public function getDeliveryStatuss()
     {
@@ -214,7 +214,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\crossSellingGroup
+     * @return array \jtl\Connector\Model\CrossSellingGroup
      */
     public function getCrossSellingGroups()
     {
@@ -222,7 +222,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\unit
+     * @return array \jtl\Connector\Model\Unit
      */
     public function getUnits()
     {
@@ -230,7 +230,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\taxZone
+     * @return array \jtl\Connector\Model\TaxZone
      */
     public function getTaxZones()
     {
@@ -238,7 +238,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\taxClass
+     * @return array \jtl\Connector\Model\TaxClass
      */
     public function getTaxClasss()
     {
@@ -246,7 +246,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\taxRate
+     * @return array \jtl\Connector\Model\TaxRate
      */
     public function getTaxRates()
     {
@@ -254,7 +254,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\shippingClass
+     * @return array \jtl\Connector\Model\ShippingClass
      */
     public function getShippingClasss()
     {
@@ -262,7 +262,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\warehouse
+     * @return array \jtl\Connector\Model\Warehouse
      */
     public function getWarehouses()
     {
@@ -270,7 +270,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\warehouseI18n
+     * @return array \jtl\Connector\Model\WarehouseI18n
      */
     public function getWarehouseI18ns()
     {
@@ -278,7 +278,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\productType
+     * @return array \jtl\Connector\Model\ProductType
      */
     public function getProductTypes()
     {
@@ -286,7 +286,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\manufacturer
+     * @return array \jtl\Connector\Model\Manufacturer
      */
     public function getManufacturers()
     {
@@ -294,7 +294,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\manufacturerI18n
+     * @return array \jtl\Connector\Model\ManufacturerI18n
      */
     public function getManufacturerI18ns()
     {
@@ -302,7 +302,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\specific
+     * @return array \jtl\Connector\Model\Specific
      */
     public function getSpecifics()
     {
@@ -310,7 +310,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\specificI18n
+     * @return array \jtl\Connector\Model\SpecificI18n
      */
     public function getSpecificI18ns()
     {
@@ -318,7 +318,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\specificValue
+     * @return array \jtl\Connector\Model\SpecificValue
      */
     public function getSpecificValues()
     {
@@ -326,7 +326,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\specificValueI18n
+     * @return array \jtl\Connector\Model\SpecificValueI18n
      */
     public function getSpecificValueI18ns()
     {
@@ -334,7 +334,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\configGroup
+     * @return array \jtl\Connector\Model\ConfigGroup
      */
     public function getConfigGroups()
     {
@@ -342,7 +342,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\configGroupI18n
+     * @return array \jtl\Connector\Model\ConfigGroupI18n
      */
     public function getConfigGroupI18ns()
     {
@@ -350,7 +350,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\configItem
+     * @return array \jtl\Connector\Model\ConfigItem
      */
     public function getConfigItems()
     {
@@ -358,7 +358,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\configItemI18n
+     * @return array \jtl\Connector\Model\ConfigItemI18n
      */
     public function getConfigItemI18ns()
     {
@@ -366,7 +366,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\configItemPrice
+     * @return array \jtl\Connector\Model\ConfigItemPrice
      */
     public function getConfigItemPrices()
     {
@@ -374,7 +374,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\fileDownloadI18n
+     * @return array \jtl\Connector\Model\FileDownloadI18n
      */
     public function getFileDownloadI18ns()
     {
@@ -382,7 +382,7 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\fileDownloadHistory
+     * @return array \jtl\Connector\Model\FileDownloadHistory
      */
     public function getFileDownloadHistories()
     {
@@ -390,9 +390,9 @@ class GlobalDataContainer extends CoreContainer
     }
         
     public $items = array(
-        "company" => array("Compani", "Companies"),
+        "company" => array("Company", "Companies"),
         "language" => array("Language", "Languages"),
-        "currency" => array("Currenci", "Currencies"),
+        "currency" => array("Currency", "Currencies"),
         "customergroup" => array("CustomerGroup", "CustomerGroups"),
         "customergroupi18n" => array("CustomerGroupI18n", "CustomerGroupI18ns"),
         "customergroupattr" => array("CustomerGroupAttr", "CustomerGroupAttrs"),
@@ -418,7 +418,7 @@ class GlobalDataContainer extends CoreContainer
         "configitemi18n" => array("ConfigItemI18n", "ConfigItemI18ns"),
         "configitemprice" => array("ConfigItemPrice", "ConfigItemPrices"),
         "filedownloadi18n" => array("FileDownloadI18n", "FileDownloadI18ns"),
-        "filedownloadhistory" => array("FileDownloadHistori", "FileDownloadHistories")
+        "filedownloadhistory" => array("FileDownloadHistory", "FileDownloadHistories")
     );
 }
 ?>

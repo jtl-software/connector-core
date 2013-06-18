@@ -54,7 +54,7 @@ class Handler
                 $method = RpcMethod::splitMethod($requestpacket->getMethod());
                 $trid = $requestpacket->getGlobals()->getTransaction()->getId();
                 
-                if ($trid !== null && intval($trid) > 0) {
+                if ($trid !== null && strlen($trid) > 0) {
                     if (!isset($_SESSION["trans"])) {
                         $_SESSION["trans"] = array();
                     }

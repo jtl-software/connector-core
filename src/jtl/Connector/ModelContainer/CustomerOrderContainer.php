@@ -13,42 +13,42 @@ namespace jtl\Connector\ModelContainer;
 class CustomerOrderContainer extends CoreContainer
 {
     /**
-     * @var \jtl\Connector\Model\customerOrder[]
+     * @var \jtl\Connector\Model\CustomerOrder[]
      */
     protected $_customerOrders;
     
     /**
-     * @var \jtl\Connector\Model\customerOrderAttr[]
+     * @var \jtl\Connector\Model\CustomerOrderAttr[]
      */
     protected $_customerOrderAttrs;
     
     /**
-     * @var \jtl\Connector\Model\customerOrderPosition[]
+     * @var \jtl\Connector\Model\CustomerOrderPosition[]
      */
     protected $_customerOrderPositions;
     
     /**
-     * @var \jtl\Connector\Model\customerOrderPositionVariation[]
+     * @var \jtl\Connector\Model\CustomerOrderPositionVariation[]
      */
     protected $_customerOrderPositionVariations;
     
     /**
-     * @var \jtl\Connector\Model\customerOrderPaymentInfo[]
+     * @var \jtl\Connector\Model\CustomerOrderPaymentInfo[]
      */
     protected $_customerOrderPaymentInfos;
     
     /**
-     * @var \jtl\Connector\Model\customerOrderShippingAddress[]
+     * @var \jtl\Connector\Model\CustomerOrderShippingAddress[]
      */
     protected $_customerOrderShippingAddresss;
     
     /**
-     * @var \jtl\Connector\Model\customerOrderBillingAddress[]
+     * @var \jtl\Connector\Model\CustomerOrderBillingAddress[]
      */
     protected $_customerOrderBillingAddresss;
         
     /**
-     * @return array \jtl\Connector\Model\customerOrder
+     * @return array \jtl\Connector\Model\CustomerOrder
      */
     public function getCustomerOrders()
     {
@@ -56,7 +56,7 @@ class CustomerOrderContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\customerOrderAttr
+     * @return array \jtl\Connector\Model\CustomerOrderAttr
      */
     public function getCustomerOrderAttrs()
     {
@@ -64,7 +64,7 @@ class CustomerOrderContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\customerOrderPosition
+     * @return array \jtl\Connector\Model\CustomerOrderPosition
      */
     public function getCustomerOrderPositions()
     {
@@ -72,7 +72,7 @@ class CustomerOrderContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\customerOrderPositionVariation
+     * @return array \jtl\Connector\Model\CustomerOrderPositionVariation
      */
     public function getCustomerOrderPositionVariations()
     {
@@ -80,7 +80,7 @@ class CustomerOrderContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\customerOrderPaymentInfo
+     * @return array \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function getCustomerOrderPaymentInfos()
     {
@@ -88,7 +88,7 @@ class CustomerOrderContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\customerOrderShippingAddress
+     * @return array \jtl\Connector\Model\CustomerOrderShippingAddress
      */
     public function getCustomerOrderShippingAddresss()
     {
@@ -96,7 +96,7 @@ class CustomerOrderContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\customerOrderBillingAddress
+     * @return array \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function getCustomerOrderBillingAddresss()
     {
