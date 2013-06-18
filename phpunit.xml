@@ -13,7 +13,7 @@
 >
     <testsuites>
         <testsuite name="JTL Connector Testsuite">
-            <directory>tests/jtlconnector/</directory>
+            <directory>tests/</directory>
         </testsuite>
     </testsuites>
     <filter>

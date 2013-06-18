@@ -12,7 +12,7 @@ namespace jtl\Connector\Feature\Exception;
  * @access public
  * @author David Spickers <david.spickers@jtl-software.de>
  */
-class ExistFeature extends \RuntimeException
+class FeatureExist extends \RuntimeException
 {
 
     function __construct($feature, $code = 0, $previous = null)

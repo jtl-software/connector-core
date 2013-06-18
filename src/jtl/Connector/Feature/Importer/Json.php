@@ -28,7 +28,7 @@ class Json extends BaseImporter
     /**
      * @var string
      */
-    protected $name = 'Json';
+    protected $_name = 'Json';
 
     /**
      * Creates the instance.
@@ -52,9 +52,6 @@ class Json extends BaseImporter
     {
         try {
             $content = file_get_contents($this->file);
-            if ($content === false) {
-                throw new ExceptionImporter(sprintf('Unable to read file content from file "%s"', $this->file));
-            }
         } catch (\Exception $e) {
             throw new ExceptionImporter(sprintf('Unable to load your file "%s", message "%s"', $this->file, $e->getMessage()));
         }

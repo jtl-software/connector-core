@@ -19,6 +19,8 @@ use jtl\Connector\Feature\Group\Base as BaseGroup;
 class Image extends BaseGroup
 {
 
+    const RELATIONS_KEY_NAME = 'relationTypes';
+
     /**
      * @var array
      */
@@ -36,9 +38,9 @@ class Image extends BaseGroup
     function __construct(array &$params)
     {
         $this->name = 'Image';
-        if (array_key_exists('relationTypes', $params)) {
-            $this->_relation_types = $params['relationTypes'];
-            unset($params['relationTypes']);
+        if (array_key_exists(self::RELATIONS_KEY_NAME, $params)) {
+            $this->_relation_types = $params[self::RELATIONS_KEY_NAME];
+            unset($params[self::RELATIONS_KEY_NAME]);
         }
     }
 

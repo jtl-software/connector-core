@@ -93,6 +93,8 @@ abstract class Producer extends Baseclass implements IProducer
         $this->_manager = $manager;
     }
 
+    abstract protected function parse();
+
     /**
      * Sets the manager.
      * 
@@ -219,17 +221,15 @@ abstract class Producer extends Baseclass implements IProducer
      */
     protected function addGroup($name, &$value)
     {
-        $class = '\\jtl\\Connector\\Feature\\Group\\' . $name;
+        $class = 'jtl\\Connector\\Feature\\Group\\' . ucfirst($name);
         if (in_array($class, $this->getClasses())) {
             $group = new $class($value);
-            $this->_active_group = $group;
-            $this->_groups[] = $group;
         }
         else {
             $group = new GroupStandard($name);
-            $this->_active_group = $group;
-            $this->_groups[] = $group;
         }
+        $this->_active_group = $group;
+        $this->_groups[] = $group;
         return $group;
     }
 
@@ -251,7 +251,9 @@ abstract class Producer extends Baseclass implements IProducer
                 $obj->{$name} = $value;
             }
         } catch (\Exception $e) {
+            // @codeCoverageIgnoreStart
             throw new ExceptionProducer(sprintf('The method "%s" doesn\'t exist, message "%s"', $method, $e->getMessage()));
+            // @codeCoverageIgnoreEnd
         }
         return $obj;
     }
