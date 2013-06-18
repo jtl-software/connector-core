@@ -13,17 +13,17 @@ namespace jtl\Connector\ModelContainer;
 class CustomerContainer extends CoreContainer
 {
     /**
-     * @var \jtl\Connector\Model\customer[]
+     * @var \jtl\Connector\Model\Customer[]
      */
     protected $_customers;
     
     /**
-     * @var \jtl\Connector\Model\customerAttr[]
+     * @var \jtl\Connector\Model\CustomerAttr[]
      */
     protected $_customerAttrs;
         
     /**
-     * @return array \jtl\Connector\Model\customer
+     * @return array \jtl\Connector\Model\Customer
      */
     public function getCustomers()
     {
@@ -31,7 +31,7 @@ class CustomerContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\customerAttr
+     * @return array \jtl\Connector\Model\CustomerAttr
      */
     public function getCustomerAttrs()
     {

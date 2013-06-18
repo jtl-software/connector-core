@@ -13,12 +13,12 @@ namespace jtl\Connector\ModelContainer;
 class ImageContainer extends CoreContainer
 {
     /**
-     * @var \jtl\Connector\Model\image[]
+     * @var \jtl\Connector\Model\Image[]
      */
     protected $_images;
         
     /**
-     * @return array \jtl\Connector\Model\image
+     * @return array \jtl\Connector\Model\Image
      */
     public function getImages()
     {

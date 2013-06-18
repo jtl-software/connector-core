@@ -13,22 +13,22 @@ namespace jtl\Connector\ModelContainer;
 class DeliveryNoteContainer extends CoreContainer
 {
     /**
-     * @var \jtl\Connector\Model\deliveryNote[]
+     * @var \jtl\Connector\Model\DeliveryNote[]
      */
     protected $_deliveryNotes;
     
     /**
-     * @var \jtl\Connector\Model\deliveryNotePos[]
+     * @var \jtl\Connector\Model\DeliveryNotePos[]
      */
     protected $_deliveryNotePoss;
     
     /**
-     * @var \jtl\Connector\Model\shipment[]
+     * @var \jtl\Connector\Model\Shipment[]
      */
     protected $_shipments;
         
     /**
-     * @return array \jtl\Connector\Model\deliveryNote
+     * @return array \jtl\Connector\Model\DeliveryNote
      */
     public function getDeliveryNotes()
     {
@@ -36,7 +36,7 @@ class DeliveryNoteContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\deliveryNotePos
+     * @return array \jtl\Connector\Model\DeliveryNotePos
      */
     public function getDeliveryNotePoss()
     {
@@ -44,7 +44,7 @@ class DeliveryNoteContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\shipment
+     * @return array \jtl\Connector\Model\Shipment
      */
     public function getShipments()
     {

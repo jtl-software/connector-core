@@ -13,32 +13,32 @@ namespace jtl\Connector\ModelContainer;
 class CategoryContainer extends CoreContainer
 {
     /**
-     * @var \jtl\Connector\Model\category[]
+     * @var \jtl\Connector\Model\Category[]
      */
     protected $_categories;
     
     /**
-     * @var \jtl\Connector\Model\categoryI18n[]
+     * @var \jtl\Connector\Model\CategoryI18n[]
      */
     protected $_categoryI18ns;
     
     /**
-     * @var \jtl\Connector\Model\categoryAttr[]
+     * @var \jtl\Connector\Model\CategoryAttr[]
      */
     protected $_categoryAttrs;
     
     /**
-     * @var \jtl\Connector\Model\categoryVisibility[]
+     * @var \jtl\Connector\Model\CategoryVisibility[]
      */
     protected $_categoryVisibilities;
     
     /**
-     * @var \jtl\Connector\Model\categoryCustomerGroup[]
+     * @var \jtl\Connector\Model\CategoryCustomerGroup[]
      */
     protected $_categoryCustomerGroups;
         
     /**
-     * @return array \jtl\Connector\Model\category
+     * @return array \jtl\Connector\Model\Category
      */
     public function getCategories()
     {
@@ -46,7 +46,7 @@ class CategoryContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\categoryI18n
+     * @return array \jtl\Connector\Model\CategoryI18n
      */
     public function getCategoryI18ns()
     {
@@ -54,7 +54,7 @@ class CategoryContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\categoryAttr
+     * @return array \jtl\Connector\Model\CategoryAttr
      */
     public function getCategoryAttrs()
     {
@@ -62,7 +62,7 @@ class CategoryContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\categoryVisibility
+     * @return array \jtl\Connector\Model\CategoryVisibility
      */
     public function getCategoryVisibilities()
     {
@@ -70,7 +70,7 @@ class CategoryContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\categoryCustomerGroup
+     * @return array \jtl\Connector\Model\CategoryCustomerGroup
      */
     public function getCategoryCustomerGroups()
     {
@@ -78,10 +78,10 @@ class CategoryContainer extends CoreContainer
     }
         
     public $items = array(
-        "category" => array("Categori", "Categories"),
+        "category" => array("Category", "Categories"),
         "categoryi18n" => array("CategoryI18n", "CategoryI18ns"),
         "categoryattr" => array("CategoryAttr", "CategoryAttrs"),
-        "categoryvisibility" => array("CategoryVisibiliti", "CategoryVisibilities"),
+        "categoryvisibility" => array("CategoryVisibility", "CategoryVisibilities"),
         "categorycustomergroup" => array("CategoryCustomerGroup", "CategoryCustomerGroups")
     );
 }

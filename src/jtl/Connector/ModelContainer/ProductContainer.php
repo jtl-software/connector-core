@@ -13,137 +13,137 @@ namespace jtl\Connector\ModelContainer;
 class ProductContainer extends CoreContainer
 {
     /**
-     * @var \jtl\Connector\Model\fileDownload[]
+     * @var \jtl\Connector\Model\FileDownload[]
      */
     protected $_fileDownloads;
     
     /**
-     * @var \jtl\Connector\Model\product[]
+     * @var \jtl\Connector\Model\Product[]
      */
     protected $_products;
     
     /**
-     * @var \jtl\Connector\Model\productI18n[]
+     * @var \jtl\Connector\Model\ProductI18n[]
      */
     protected $_productI18ns;
     
     /**
-     * @var \jtl\Connector\Model\productPrice[]
+     * @var \jtl\Connector\Model\ProductPrice[]
      */
     protected $_productPrices;
     
     /**
-     * @var \jtl\Connector\Model\productSpecialPrice[]
+     * @var \jtl\Connector\Model\ProductSpecialPrice[]
      */
     protected $_productSpecialPrices;
     
     /**
-     * @var \jtl\Connector\Model\product2Category[]
+     * @var \jtl\Connector\Model\Product2Category[]
      */
     protected $_product2Categories;
     
     /**
-     * @var \jtl\Connector\Model\productAttr[]
+     * @var \jtl\Connector\Model\ProductAttr[]
      */
     protected $_productAttrs;
     
     /**
-     * @var \jtl\Connector\Model\productAttrI18n[]
+     * @var \jtl\Connector\Model\ProductAttrI18n[]
      */
     protected $_productAttrI18ns;
     
     /**
-     * @var \jtl\Connector\Model\productVariation[]
+     * @var \jtl\Connector\Model\ProductVariation[]
      */
     protected $_productVariations;
     
     /**
-     * @var \jtl\Connector\Model\productVariationI18n[]
+     * @var \jtl\Connector\Model\ProductVariationI18n[]
      */
     protected $_productVariationI18ns;
     
     /**
-     * @var \jtl\Connector\Model\productVariationVisibility[]
+     * @var \jtl\Connector\Model\ProductVariationVisibility[]
      */
     protected $_productVariationVisibilities;
     
     /**
-     * @var \jtl\Connector\Model\productVariationValue[]
+     * @var \jtl\Connector\Model\ProductVariationValue[]
      */
     protected $_productVariationValues;
     
     /**
-     * @var \jtl\Connector\Model\productVariationValueI18n[]
+     * @var \jtl\Connector\Model\ProductVariationValueI18n[]
      */
     protected $_productVariationValueI18ns;
     
     /**
-     * @var \jtl\Connector\Model\productVariationValueExtraCharge[]
+     * @var \jtl\Connector\Model\ProductVariationValueExtraCharge[]
      */
     protected $_productVariationValueExtraCharges;
     
     /**
-     * @var \jtl\Connector\Model\productVariationValueVisibility[]
+     * @var \jtl\Connector\Model\ProductVariationValueVisibility[]
      */
     protected $_productVariationValueVisibilities;
     
     /**
-     * @var \jtl\Connector\Model\productVariationValueDependency[]
+     * @var \jtl\Connector\Model\ProductVariationValueDependency[]
      */
     protected $_productVariationValueDependencies;
     
     /**
-     * @var \jtl\Connector\Model\productVarCombination[]
+     * @var \jtl\Connector\Model\ProductVarCombination[]
      */
     protected $_productVarCombinations;
     
     /**
-     * @var \jtl\Connector\Model\crossSelling[]
+     * @var \jtl\Connector\Model\CrossSelling[]
      */
     protected $_crossSellings;
     
     /**
-     * @var \jtl\Connector\Model\productSpecific[]
+     * @var \jtl\Connector\Model\ProductSpecific[]
      */
     protected $_productSpecifics;
     
     /**
-     * @var \jtl\Connector\Model\mediaFile[]
+     * @var \jtl\Connector\Model\MediaFile[]
      */
     protected $_mediaFiles;
     
     /**
-     * @var \jtl\Connector\Model\mediaFileI18n[]
+     * @var \jtl\Connector\Model\MediaFileI18n[]
      */
     protected $_mediaFileI18ns;
     
     /**
-     * @var \jtl\Connector\Model\mediaFileAttr[]
+     * @var \jtl\Connector\Model\MediaFileAttr[]
      */
     protected $_mediaFileAttrs;
     
     /**
-     * @var \jtl\Connector\Model\setArticle[]
+     * @var \jtl\Connector\Model\SetArticle[]
      */
     protected $_setArticles;
     
     /**
-     * @var \jtl\Connector\Model\fileUpload[]
+     * @var \jtl\Connector\Model\FileUpload[]
      */
     protected $_fileUploads;
     
     /**
-     * @var \jtl\Connector\Model\productWarehouseInfo[]
+     * @var \jtl\Connector\Model\ProductWarehouseInfo[]
      */
     protected $_productWarehouseInfos;
     
     /**
-     * @var \jtl\Connector\Model\productConfigGroup[]
+     * @var \jtl\Connector\Model\ProductConfigGroup[]
      */
     protected $_productConfigGroups;
         
     /**
-     * @return array \jtl\Connector\Model\fileDownload
+     * @return array \jtl\Connector\Model\FileDownload
      */
     public function getFileDownloads()
     {
@@ -151,7 +151,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\product
+     * @return array \jtl\Connector\Model\Product
      */
     public function getProducts()
     {
@@ -159,7 +159,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\productI18n
+     * @return array \jtl\Connector\Model\ProductI18n
      */
     public function getProductI18ns()
     {
@@ -167,7 +167,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\productPrice
+     * @return array \jtl\Connector\Model\ProductPrice
      */
     public function getProductPrices()
     {
@@ -175,7 +175,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\productSpecialPrice
+     * @return array \jtl\Connector\Model\ProductSpecialPrice
      */
     public function getProductSpecialPrices()
     {
@@ -183,7 +183,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\product2Category
+     * @return array \jtl\Connector\Model\Product2Category
      */
     public function getProduct2Categories()
     {
@@ -191,7 +191,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\productAttr
+     * @return array \jtl\Connector\Model\ProductAttr
      */
     public function getProductAttrs()
     {
@@ -199,7 +199,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\productAttrI18n
+     * @return array \jtl\Connector\Model\ProductAttrI18n
      */
     public function getProductAttrI18ns()
     {
@@ -207,7 +207,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\productVariation
+     * @return array \jtl\Connector\Model\ProductVariation
      */
     public function getProductVariations()
     {
@@ -215,7 +215,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\productVariationI18n
+     * @return array \jtl\Connector\Model\ProductVariationI18n
      */
     public function getProductVariationI18ns()
     {
@@ -223,7 +223,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\productVariationVisibility
+     * @return array \jtl\Connector\Model\ProductVariationVisibility
      */
     public function getProductVariationVisibilities()
     {
@@ -231,7 +231,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\productVariationValue
+     * @return array \jtl\Connector\Model\ProductVariationValue
      */
     public function getProductVariationValues()
     {
@@ -239,7 +239,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\productVariationValueI18n
+     * @return array \jtl\Connector\Model\ProductVariationValueI18n
      */
     public function getProductVariationValueI18ns()
     {
@@ -247,7 +247,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\productVariationValueExtraCharge
+     * @return array \jtl\Connector\Model\ProductVariationValueExtraCharge
      */
     public function getProductVariationValueExtraCharges()
     {
@@ -255,7 +255,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\productVariationValueVisibility
+     * @return array \jtl\Connector\Model\ProductVariationValueVisibility
      */
     public function getProductVariationValueVisibilities()
     {
@@ -263,7 +263,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\productVariationValueDependency
+     * @return array \jtl\Connector\Model\ProductVariationValueDependency
      */
     public function getProductVariationValueDependencies()
     {
@@ -271,7 +271,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\productVarCombination
+     * @return array \jtl\Connector\Model\ProductVarCombination
      */
     public function getProductVarCombinations()
     {
@@ -279,7 +279,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\crossSelling
+     * @return array \jtl\Connector\Model\CrossSelling
      */
     public function getCrossSellings()
     {
@@ -287,7 +287,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\productSpecific
+     * @return array \jtl\Connector\Model\ProductSpecific
      */
     public function getProductSpecifics()
     {
@@ -295,7 +295,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\mediaFile
+     * @return array \jtl\Connector\Model\MediaFile
      */
     public function getMediaFiles()
     {
@@ -303,7 +303,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\mediaFileI18n
+     * @return array \jtl\Connector\Model\MediaFileI18n
      */
     public function getMediaFileI18ns()
     {
@@ -311,7 +311,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\mediaFileAttr
+     * @return array \jtl\Connector\Model\MediaFileAttr
      */
     public function getMediaFileAttrs()
     {
@@ -319,7 +319,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\setArticle
+     * @return array \jtl\Connector\Model\SetArticle
      */
     public function getSetArticles()
     {
@@ -327,7 +327,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\fileUpload
+     * @return array \jtl\Connector\Model\FileUpload
      */
     public function getFileUploads()
     {
@@ -335,7 +335,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\productWarehouseInfo
+     * @return array \jtl\Connector\Model\ProductWarehouseInfo
      */
     public function getProductWarehouseInfos()
     {
@@ -343,7 +343,7 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\productConfigGroup
+     * @return array \jtl\Connector\Model\ProductConfigGroup
      */
     public function getProductConfigGroups()
     {
@@ -356,17 +356,17 @@ class ProductContainer extends CoreContainer
         "producti18n" => array("ProductI18n", "ProductI18ns"),
         "productprice" => array("ProductPrice", "ProductPrices"),
         "productspecialprice" => array("ProductSpecialPrice", "ProductSpecialPrices"),
-        "product2category" => array("Product2Categori", "Product2Categories"),
+        "product2category" => array("Product2Category", "Product2Categories"),
         "productattr" => array("ProductAttr", "ProductAttrs"),
         "productattri18n" => array("ProductAttrI18n", "ProductAttrI18ns"),
         "productvariation" => array("ProductVariation", "ProductVariations"),
         "productvariationi18n" => array("ProductVariationI18n", "ProductVariationI18ns"),
-        "productvariationvisibility" => array("ProductVariationVisibiliti", "ProductVariationVisibilities"),
+        "productvariationvisibility" => array("ProductVariationVisibility", "ProductVariationVisibilities"),
         "productvariationvalue" => array("ProductVariationValue", "ProductVariationValues"),
         "productvariationvaluei18n" => array("ProductVariationValueI18n", "ProductVariationValueI18ns"),
         "productvariationvalueextracharge" => array("ProductVariationValueExtraCharge", "ProductVariationValueExtraCharges"),
-        "productvariationvaluevisibility" => array("ProductVariationValueVisibiliti", "ProductVariationValueVisibilities"),
-        "productvariationvaluedependency" => array("ProductVariationValueDependenci", "ProductVariationValueDependencies"),
+        "productvariationvaluevisibility" => array("ProductVariationValueVisibility", "ProductVariationValueVisibilities"),
+        "productvariationvaluedependency" => array("ProductVariationValueDependency", "ProductVariationValueDependencies"),
         "productvarcombination" => array("ProductVarCombination", "ProductVarCombinations"),
         "crossselling" => array("CrossSelling", "CrossSellings"),
         "productspecific" => array("ProductSpecific", "ProductSpecifics"),
