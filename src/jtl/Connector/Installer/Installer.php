@@ -96,6 +96,11 @@ class Installer extends CoreApplication
         $stepObject = new $class($this);
         $stepObject->run();
     }
+    
+    public final function advance()
+    {
+        header('Location: ' . $this->stepUrl($this->currentStep() + 1));
+    }
 
     public final function run()
     {
