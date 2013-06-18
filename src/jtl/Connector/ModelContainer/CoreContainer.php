@@ -1,36 +1,40 @@
 <?php
 /**
  * @copyright JTL-Software GmbH
- * @package jtl\Connector\ModelAdapter
+ * @package jtl\Connector\ModelContainer
  */
 
-namespace jtl\Connector\ModelAdapter;
+namespace jtl\Connector\ModelContainer;
 
-use \jtl\Core\ModelAdapter\IModelAdapter;
+use \jtl\Core\ModelContainer\IModelContainer;
 use \jtl\Core\Exception\DatabaseException;
 
 /**
- * Core Adapter Class
+ * Core Container Class
  */
-abstract class CoreAdapter implements IModelAdapter
-{
+abstract class CoreContainer implements IModelContainer
+{    
     /**
      * (non-PHPdoc)
-     * @see \jtl\Core\ModelAdapter\IModelAdapter::add()
+     * @see \jtl\Core\ModelContainer\IModelContainer::add()
      */
     public function add($type, $object)
     {
         $type = strtolower($type);
         if (isset($this->items[$type])) {
-            $type = $this->items[$type];
-            $class = "\\jtl\\Connector\\Model\\{$type}";
+            $modelclass = $this->items[$type][0];
+            $class = "\\jtl\\Connector\\Model\\{$modelclass}";
             if (class_exists($class)) {
                 $model = new $class();
                 $model->setOptions($object);
                 $model->validate();
-                $setter = "_" . lcfirst($type);
+                $setter = "_" . lcfirst($this->items[$type][1]);
     
-                $this->$setter = $model;
+                if ($this->$setter === null) {
+                    $this->$setter = array();
+                }
+                
+                array_push($this->$setter, $model);
     
                 return true;
             }
@@ -41,13 +45,13 @@ abstract class CoreAdapter implements IModelAdapter
     
     /**
      * (non-PHPdoc)
-     * @see \jtl\Core\ModelAdapter\IModelAdapter::isComplete()
+     * @see \jtl\Core\ModelContainer\IModelContainer::isComplete()
      */
     public function isComplete()
     {
         $complete = true;
-        foreach ($this->items as $item) {
-            $getter = "_" . lcfirst($item);
+        foreach ($this->items as $items) {
+            $getter = "_" . lcfirst($items[1]);
             if ($this->$getter === null) {
                 $complete = false;
                 break;

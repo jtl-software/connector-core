@@ -11,9 +11,9 @@ use \jtl\Core\Rpc\RequestPacket;
 use \jtl\Core\Exception\TransactionException;
 use \jtl\Core\Rpc\Error;
 use \jtl\Core\Utilities\RpcMethod;
-use \jtl\Core\ModelAdapter\MainAdapter;
+use \jtl\Core\ModelContainer\MainContainer;
 use \jtl\Connector\Result\Action;
-use \jtl\Connector\ModelAdapter;
+use \jtl\Connector\ModelContainer;
 
 /**
  * Transaction Handler Class
@@ -59,9 +59,9 @@ class Handler
                         $_SESSION["trans"] = array();
                     }
                     
-                    $type = MainAdapter::allocate($method->getController());
+                    $type = MainContainer::allocate($method->getController());
                     if ($type === null) {
-                        throw new TransactionException("Could not find any Adapter for Controller ({$method->getController()})");
+                        throw new TransactionException("Could not find any Container for Controller ({$method->getController()})");
                     }
                     
                     if (!isset($_SESSION["trans"][$type])) {
@@ -79,8 +79,8 @@ class Handler
                         }
                     }
                     else {
-                        $adapter = "{$type}Adapter";
-                        $class = "\\jtl\\Connector\\ModelAdapter\\{$adapter}";
+                        $container = "{$type}Container";
+                        $class = "\\jtl\\Connector\\ModelContainer\\{$container}";
                         if (class_exists($class)) {
                             $_SESSION["trans"][$type][$trid] = new $class();
                             
@@ -95,7 +95,7 @@ class Handler
                             }    
                         }
                         else {
-                            throw new TransactionException("ModelAdapter {$type}Adapter does not exist");
+                            throw new TransactionException("ModelContainer {$type}Container does not exist");
                         }
                     } 
                 }
@@ -118,18 +118,18 @@ class Handler
     }
     
     /**
-     * Get Transaction Adapter
+     * Get Transaction Container
      * 
      * @param string $controller
      * @param string $trid
      * @throws \jtl\Core\Exception\TransactionException
-     * @return \jtl\Connector\ModelAdapter
+     * @return \jtl\Connector\ModelContainer
      */
-    public static function getAdapter($controller, $trid)
+    public static function getContainer($controller, $trid)
     {
-        $type = MainAdapter::allocate($controller);
+        $type = MainContainer::allocate($controller);
         if ($type === null) {
-            throw new TransactionException("Could not find any Adapter for Controller ({$controller})");
+            throw new TransactionException("Could not find any Container for Controller ({$controller})");
         }
         
         if (!isset($_SESSION["trans"][$type])) {
@@ -152,9 +152,9 @@ class Handler
      */
     public static function isMain($controller)
     {
-        $type = MainAdapter::allocate($controller);
+        $type = MainContainer::allocate($controller);
         if ($type === null) {
-            throw new TransactionException("Could not find any Adapter for Controller ({$controller})");
+            throw new TransactionException("Could not find any Container for Controller ({$controller})");
         }
         
         return (strtolower($controller) == strtolower($type));
