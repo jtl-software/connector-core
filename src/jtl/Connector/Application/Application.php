@@ -102,7 +102,7 @@ class Application extends CoreApplication
      * @return \jtl\Core\Rpc\ResponsePacket
      */
     protected function execute(RequestPacket $requestpacket, Config $config, $rpcmode)
-    {
+    {        
         if (!RpcMethod::isMethod($requestpacket->getMethod())) {
             throw new RpcException("Invalid Request", -32600);
         }

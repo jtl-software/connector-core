@@ -1,9 +1,9 @@
 <?php
 /**
- * 
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Session
  */
+
 namespace jtl\Connector\Session;
 
 use \jtl\Core\Session\Handler as CoreHandler;
@@ -14,7 +14,7 @@ use \jtl\Core\Session\Handler as CoreHandler;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-class Session extends CoreHandler
+final class Session extends CoreHandler
 {
 }
 ?>

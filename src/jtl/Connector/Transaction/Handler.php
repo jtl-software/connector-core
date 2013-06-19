@@ -18,7 +18,7 @@ use \jtl\Connector\ModelContainer;
 /**
  * Transaction Handler Class
  */
-class Handler
+final class Handler
 {
     /**
      * Checks if a Transaction exists
