@@ -3,6 +3,7 @@
 namespace jtl\Connector\Feature;
 
 use jtl\Connector\Feature\Base\Producer as BaseProducer;
+use jtl\Connector\Feature\Exception\Producer as ExceptionProducer;
 
 class Producer extends BaseProducer
 {
@@ -17,6 +18,10 @@ class Producer extends BaseProducer
      */
     protected function loadAndValidate()
     {
+        if (empty($this->_importer))
+        {
+            throw new ExceptionProducer('Importer missing!');
+        }
         $datas = $this->_importer->load();
         if (empty($datas)) {
             throw new ExceptionProducer(sprintf('The importer "%s" is unable to serve your request', $this->_importer->getName()));
@@ -33,7 +38,7 @@ class Producer extends BaseProducer
     /**
      * Loads the importer, validation and extracting of the datas.
      */
-    protected function parse()
+    public function parse()
     {
         $this->loadAndValidate();
         $this->extractLayers();

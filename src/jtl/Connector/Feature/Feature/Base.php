@@ -36,7 +36,7 @@ abstract class Base extends BaseClass implements IFeature
     public function addMethod(IMethod $method)
     {
         if ($this->existsMethod($method->getName())) {
-            throw new ExceptionMethod(sprintf('The method "%s" already exists in feature "%s"', $name, $this->_name));
+            throw new ExceptionMethod(sprintf('The method "%s" already exists in feature "%s"', $method->getName(), $this->_name));
         }
         $this->_methods[$method->getName()] = $method;
     }
@@ -78,7 +78,9 @@ abstract class Base extends BaseClass implements IFeature
      */
     public function getMethod($name)
     {
-        $this->checkMethod($name, true);
+        if (!$this->existsMethod($name)) {
+            throw new ExceptionMethod(sprintf('The method "%s" doesn\'t exist in feature "%s"', $name, $this->_name));
+        }
         return $this->_methods[$name];
     }
 

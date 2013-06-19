@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="JTL Connector Testsuite" tests="35" assertions="58" failures="0" errors="0" time="0.102681">
+    <testsuite name="ApplicationTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Application/ApplicationTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.001272">
+      <testcase name="testDefault" class="ApplicationTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Application/ApplicationTest.php" line="9" assertions="1" time="0.001272"/>
+    </testsuite>
+    <testsuite name="BaseTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Base/BaseclassTest.php" tests="1" assertions="2" failures="0" errors="0" time="0.006479">
+      <testcase name="testSetName" class="BaseTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Base/BaseclassTest.php" line="20" assertions="2" time="0.006479"/>
+    </testsuite>
+    <testsuite name="FeatureExistTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Exception/FeatureExistTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.001555">
+      <testcase name="testDefault" class="FeatureExistTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Exception/FeatureExistTest.php" line="10" assertions="1" time="0.001555"/>
+    </testsuite>
+    <testsuite name="WawiTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Exporter/WawiTest.php" tests="1" assertions="3" failures="0" errors="0" time="0.005475">
+      <testcase name="testExport" class="WawiTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Exporter/WawiTest.php" line="33" assertions="3" time="0.005475"/>
+    </testsuite>
+    <testsuite name="FeatureTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Feature/FeatureTest.php" tests="5" assertions="4" failures="0" errors="0" time="0.004360">
+      <testcase name="testAddMethod" class="FeatureTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Feature/FeatureTest.php" line="17" assertions="1" time="0.001455"/>
+      <testcase name="testAddExistingMethod" class="FeatureTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Feature/FeatureTest.php" line="27" assertions="1" time="0.000994"/>
+      <testcase name="testGetNotexistingMethod" class="FeatureTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Feature/FeatureTest.php" line="37" assertions="1" time="0.000706"/>
+      <testcase name="testDelMethod" class="FeatureTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Feature/FeatureTest.php" line="42" assertions="0" time="0.000528"/>
+      <testcase name="testDelNotexistingMethod" class="FeatureTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Feature/FeatureTest.php" line="52" assertions="1" time="0.000677"/>
+    </testsuite>
+    <testsuite name="ImageTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Group/ImageTest.php" tests="2" assertions="5" failures="0" errors="0" time="0.005683">
+      <testcase name="testGetRelations" class="ImageTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Group/ImageTest.php" line="23" assertions="3" time="0.004368"/>
+      <testcase name="testChildrens" class="ImageTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Group/ImageTest.php" line="32" assertions="2" time="0.001315"/>
+    </testsuite>
+    <testsuite name="JsonTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Importer/JsonTest.php" tests="3" assertions="4" failures="0" errors="0" time="0.009807">
+      <testcase name="testDefaults" class="JsonTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Importer/JsonTest.php" line="44" assertions="2" time="0.001707"/>
+      <testcase name="testLoad" class="JsonTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Importer/JsonTest.php" line="51" assertions="1" time="0.006091"/>
+      <testcase name="testLoadException" class="JsonTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Importer/JsonTest.php" line="59" assertions="1" time="0.002009"/>
+    </testsuite>
+    <testsuite name="ManagerTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/ManagerTest.php" tests="7" assertions="13" failures="0" errors="0" time="0.034264">
+      <testcase name="testDefaults" class="ManagerTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/ManagerTest.php" line="23" assertions="2" time="0.006351"/>
+      <testcase name="testRegisterParameters" class="ManagerTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/ManagerTest.php" line="32" assertions="2" time="0.003634"/>
+      <testcase name="testRegisterMethods" class="ManagerTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/ManagerTest.php" line="52" assertions="2" time="0.003493"/>
+      <testcase name="testCheckProducer" class="ManagerTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/ManagerTest.php" line="72" assertions="1" time="0.002349"/>
+      <testcase name="testImport" class="ManagerTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/ManagerTest.php" line="84" assertions="2" time="0.009693"/>
+      <testcase name="testExport" class="ManagerTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/ManagerTest.php" line="100" assertions="2" time="0.003106"/>
+      <testcase name="testTransform" class="ManagerTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/ManagerTest.php" line="116" assertions="2" time="0.005638"/>
+    </testsuite>
+    <testsuite name="MethodTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Method/BaseTest.php" tests="2" assertions="3" failures="0" errors="0" time="0.001584">
+      <testcase name="testIsSupported" class="MethodTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Method/BaseTest.php" line="21" assertions="2" time="0.000741"/>
+      <testcase name="testComment" class="MethodTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/Method/BaseTest.php" line="28" assertions="1" time="0.000843"/>
+    </testsuite>
+    <testsuite name="ProducerTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/ProducerTest.php" tests="12" assertions="22" failures="0" errors="0" time="0.032202">
+      <testcase name="testParseWithoutImporter" class="ProducerTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/ProducerTest.php" line="69" assertions="1" time="0.001600"/>
+      <testcase name="testImportEmptyLoad" class="ProducerTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/ProducerTest.php" line="77" assertions="2" time="0.002498"/>
+      <testcase name="testImportNoArrayLoad" class="ProducerTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/ProducerTest.php" line="88" assertions="2" time="0.002504"/>
+      <testcase name="testImportNoFeatureKeyLoad" class="ProducerTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/ProducerTest.php" line="99" assertions="2" time="0.002488"/>
+      <testcase name="testImportOk" class="ProducerTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/ProducerTest.php" line="107" assertions="1" time="0.003993"/>
+      <testcase name="testExportOk" class="ProducerTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/ProducerTest.php" line="115" assertions="0" time="0.001185"/>
+      <testcase name="testExtractLayersNoMethods" class="ProducerTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/ProducerTest.php" line="124" assertions="2" time="0.002608"/>
+      <testcase name="testExtractLayersNoParameters" class="ProducerTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/ProducerTest.php" line="138" assertions="2" time="0.002699"/>
+      <testcase name="testGetManager" class="ProducerTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/ProducerTest.php" line="148" assertions="1" time="0.001467"/>
+      <testcase name="testGetGroups" class="ProducerTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/ProducerTest.php" line="153" assertions="3" time="0.003744"/>
+      <testcase name="testGetFeatures" class="ProducerTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/ProducerTest.php" line="164" assertions="3" time="0.003704"/>
+      <testcase name="testGetMethods" class="ProducerTest" file="/home/dsp/Projects/jtlconnector/tests/jtltest/Connector/Feature/ProducerTest.php" line="175" assertions="3" time="0.003712"/>
+    </testsuite>
+  </testsuite>
+</testsuites>

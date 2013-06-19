@@ -46,11 +46,10 @@ final class Manager extends BaseClass
     function __construct(Producer $producer = null)
     {
         $this->name = 'Manager';
-        if (empty($producer)) {
-            $producer = new Producer();
+        if (!empty($producer)) {
+            $this->_producer = $producer;
+            $this->_producer->setManager($this);
         }
-        $producer->setManager($this);
-        $this->_producer = $producer;
     }
 
     /**
@@ -187,7 +186,7 @@ final class Manager extends BaseClass
     protected function checkProducer($type = 'Import')
     {
         if (empty($this->_producer)) {
-            throw new ExceptionManager(sprintf('%s not possible, producer missing!'));
+            throw new ExceptionManager(sprintf('%s not possible, producer missing!', $type));
         }
     }
 
@@ -234,6 +233,7 @@ final class Manager extends BaseClass
      */
     public function transform(IImporter $from, IExporter $to)
     {
+        $this->checkProducer('Transform');
         return $this->_producer->transform($from, $to);
     }
 
