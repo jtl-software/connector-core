@@ -62,7 +62,7 @@ class Application extends CoreApplication
      */
     public function run()
     {        
-        $jtlrpc = Request::handle();
+        $jtlrpc = Request::handle();        
         $sessionId = Request::getSession();
         $requestpackets = RequestPacket::build($jtlrpc);
                 
@@ -201,10 +201,23 @@ class Application extends CoreApplication
         $this->runActionValidation($requestpacket);
         $this->runModelValidation($requestpacket);
         
+        // Image?
+        $filename = null;
+        if ($requestpacket->getMethod() == "image.push") {
+            $filename = Request::handleFileupload();
+            if ($filename !== null) {
+                $image = $requestpacket->getParams();
+                $image->filename = $filename;
+                $requestpacket->setParams($image);
+            }
+        }
+        
         try {
             $this->execute($requestpacket, $config, $rpcmode);
+            $this->deleteFile($filename);
         }
         catch (RpcException $exc) {
+            $this->deleteFile($filename);
             $error = new Error();
             $error->setCode($exc->getCode())
                 ->setMessage($exc->getMessage());
@@ -330,6 +343,19 @@ class Application extends CoreApplication
         $sqlite3->connect(array("location" => CONNECTOR_DIR . "db/connector.s3db"));
     
         self::$session = new Session($sqlite3, $sessionId);
+    }
+    
+    /**
+     * 
+     * @param unknown_type $filename
+     */
+    protected function deleteFile($filename)
+    {
+        if ($filename !== null) {
+            return @unlink($filename);
+        }
+        
+        return false;
     }
 }
 ?>
