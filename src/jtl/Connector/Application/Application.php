@@ -214,10 +214,12 @@ class Application extends CoreApplication
         
         try {
             $this->execute($requestpacket, $config, $rpcmode);
-            $this->deleteFile($filename);
+            
+            Request::deleteFileupload($filename);
         }
         catch (RpcException $exc) {
-            $this->deleteFile($filename);
+            Request::deleteFileupload($filename);
+            
             $error = new Error();
             $error->setCode($exc->getCode())
                 ->setMessage($exc->getMessage());
@@ -343,19 +345,6 @@ class Application extends CoreApplication
         $sqlite3->connect(array("location" => CONNECTOR_DIR . "db/connector.s3db"));
     
         self::$session = new Session($sqlite3, $sessionId);
-    }
-    
-    /**
-     * 
-     * @param unknown_type $filename
-     */
-    protected function deleteFile($filename)
-    {
-        if ($filename !== null) {
-            return @unlink($filename);
-        }
-        
-        return false;
     }
 }
 ?>
