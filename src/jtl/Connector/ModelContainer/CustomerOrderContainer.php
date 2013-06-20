@@ -104,13 +104,13 @@ class CustomerOrderContainer extends CoreContainer
     }
         
     public $items = array(
-        "customerorder" => array("CustomerOrder", "CustomerOrders"),
-        "customerorderattr" => array("CustomerOrderAttr", "CustomerOrderAttrs"),
-        "customerorderposition" => array("CustomerOrderPosition", "CustomerOrderPositions"),
-        "customerorderpositionvariation" => array("CustomerOrderPositionVariation", "CustomerOrderPositionVariations"),
-        "customerorderpaymentinfo" => array("CustomerOrderPaymentInfo", "CustomerOrderPaymentInfos"),
-        "customerordershippingaddress" => array("CustomerOrderShippingAddress", "CustomerOrderShippingAddresss"),
-        "customerorderbillingaddress" => array("CustomerOrderBillingAddress", "CustomerOrderBillingAddresss")
+        "customer_order" => array("CustomerOrder", "CustomerOrders"),
+        "customer_order_attr" => array("CustomerOrderAttr", "CustomerOrderAttrs"),
+        "customer_order_position" => array("CustomerOrderPosition", "CustomerOrderPositions"),
+        "customer_order_position_variation" => array("CustomerOrderPositionVariation", "CustomerOrderPositionVariations"),
+        "customer_order_payment_info" => array("CustomerOrderPaymentInfo", "CustomerOrderPaymentInfos"),
+        "customer_order_shipping_address" => array("CustomerOrderShippingAddress", "CustomerOrderShippingAddresss"),
+        "customer_order_billing_address" => array("CustomerOrderBillingAddress", "CustomerOrderBillingAddresss")
     );
 }
 ?>

@@ -40,7 +40,7 @@ class CustomerContainer extends CoreContainer
         
     public $items = array(
         "customer" => array("Customer", "Customers"),
-        "customerattr" => array("CustomerAttr", "CustomerAttrs")
+        "customer_attr" => array("CustomerAttr", "CustomerAttrs")
     );
 }
 ?>

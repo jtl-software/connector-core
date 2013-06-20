@@ -52,8 +52,8 @@ class DeliveryNoteContainer extends CoreContainer
     }
         
     public $items = array(
-        "deliverynote" => array("DeliveryNote", "DeliveryNotes"),
-        "deliverynotepos" => array("DeliveryNotePos", "DeliveryNotePoss"),
+        "delivery_note" => array("DeliveryNote", "DeliveryNotes"),
+        "delivery_note_pos" => array("DeliveryNotePos", "DeliveryNotePoss"),
         "shipment" => array("Shipment", "Shipments")
     );
 }

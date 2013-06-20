@@ -79,10 +79,10 @@ class CategoryContainer extends CoreContainer
         
     public $items = array(
         "category" => array("Category", "Categories"),
-        "categoryi18n" => array("CategoryI18n", "CategoryI18ns"),
-        "categoryattr" => array("CategoryAttr", "CategoryAttrs"),
-        "categoryvisibility" => array("CategoryVisibility", "CategoryVisibilities"),
-        "categorycustomergroup" => array("CategoryCustomerGroup", "CategoryCustomerGroups")
+        "category_i18n" => array("CategoryI18n", "CategoryI18ns"),
+        "category_attr" => array("CategoryAttr", "CategoryAttrs"),
+        "category_visibility" => array("CategoryVisibility", "CategoryVisibilities"),
+        "category_customer_group" => array("CategoryCustomerGroup", "CategoryCustomerGroups")
     );
 }
 ?>
