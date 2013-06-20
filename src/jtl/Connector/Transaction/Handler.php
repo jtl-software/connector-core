@@ -14,6 +14,7 @@ use \jtl\Core\Utilities\RpcMethod;
 use \jtl\Core\ModelContainer\MainContainer;
 use \jtl\Connector\Result\Action;
 use \jtl\Connector\ModelContainer;
+use \jtl\Connector\Session\SessionHelper;
 
 /**
  * Transaction Handler Class
@@ -51,12 +52,13 @@ final class Handler
         $action->setHandled(true);
         try {
             if ($_SESSION !== null) {
+                $session = new SessionHelper("core");
                 $method = RpcMethod::splitMethod($requestpacket->getMethod());
                 $trid = $requestpacket->getGlobals()->getTransaction()->getId();
                 
                 if ($trid !== null && strlen($trid) > 0) {
-                    if (!isset($_SESSION["trans"])) {
-                        $_SESSION["trans"] = array();
+                    if ($session->trans === null) {
+                        $session->trans = array();
                     }
                     
                     $type = MainContainer::allocate($method->getController());
@@ -64,14 +66,14 @@ final class Handler
                         throw new TransactionException("Could not find any Container for Controller ({$method->getController()})");
                     }
                     
-                    if (!isset($_SESSION["trans"][$type])) {
-                        $_SESSION["trans"][$type] = array();
+                    if (!isset($session->trans[$type])) {
+                        $session->trans[$type] = array();
                     }
                     
-                    if (isset($_SESSION["trans"][$type][$trid])) {                        
+                    if (isset($session->trans[$type][$trid])) {                        
                         $result = new TransactionResult();
                         $result->setTransactionId($trid);
-                        if ($_SESSION["trans"][$type][$trid]->add($method->getController(), $requestpacket->getParams())) {
+                        if ($session->trans[$type][$trid]->add($method->getController(), $requestpacket->getParams())) {
                             $action->setResult($result->getPublic());
                         }
                         else {
@@ -82,12 +84,12 @@ final class Handler
                         $container = "{$type}Container";
                         $class = "\\jtl\\Connector\\ModelContainer\\{$container}";
                         if (class_exists($class)) {
-                            $_SESSION["trans"][$type][$trid] = new $class();
+                            $session->trans[$type][$trid] = new $class();
                             
                             $result = new TransactionResult();
                             $result->setTransactionId($trid);
                             
-                            if ($_SESSION["trans"][$type][$trid]->add($method->getController(), $requestpacket->getParams())) {
+                            if ($session->trans[$type][$trid]->add($method->getController(), $requestpacket->getParams())) {
                                 $action->setResult($result->getPublic());
                             }
                             else {
@@ -127,20 +129,22 @@ final class Handler
      */
     public static function getContainer($controller, $trid)
     {
+        $session = new SessionHelper("core");
+        
         $type = MainContainer::allocate($controller);
         if ($type === null) {
             throw new TransactionException("Could not find any Container for Controller ({$controller})");
         }
         
-        if (!isset($_SESSION["trans"][$type])) {
+        if ($session->trans === null || !isset($session->trans[$type])) {
             throw new TransactionException("Could not find any Transaction Session for Controller ({$controller}) and Type ({$type})");
         }
         
-        if (!isset($_SESSION["trans"][$type][$trid])) {
+        if ($session->trans === null || !isset($session->trans[$type][$trid])) {
             throw new TransactionException("Could not find any Transaction Session for Id ({$trid}) and Controller ({$controller}) and Type ({$type})");
         }
         
-        return $_SESSION["trans"][$type][$trid];
+        return $session->trans[$type][$trid];
     }
     
     /**

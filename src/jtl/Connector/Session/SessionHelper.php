@@ -12,6 +12,12 @@ class SessionHelper
 {
     protected $_namespace;
     
+    /**
+     * Constructor
+     * 
+     * @param string $namespace
+     * @throws \jtl\Core\Exception\SessionException
+     */
     public function __construct($namespace = "default")
     {
         if ($namespace === "") {
@@ -29,26 +35,76 @@ class SessionHelper
         $this->_namespace = $namespace;
     }
     
+    /**
+     * Magic Set
+     * 
+     * @param string $name
+     * @param mixed $value
+     * @throws \jtl\Core\Exception\SessionException
+     */
     public function __set($name, $value)
-    {
+    {        
         if ($name === null || $name === "") {
             throw new SessionException("The '{$name}' key must be a non-empty string");
         }
         
+        $name = (string)$name;
         $_SESSION[$this->_namespace][$name] = $value;
     }
     
-    public function __get($name)
-    {
+    /**
+     * Magic Get
+     * 
+     * @param string $name
+     * @throws \jtl\Core\Exception\SessionException
+     * @return NULL
+     */
+    public function & __get($name)
+    {        
         if ($name === null || $name === "") {
             throw new SessionException("The '{$name}' key must be a non-empty string");
         }
         
+        $name = (string)$name;
         if (isset($_SESSION[$this->_namespace][$name])) {
             return $_SESSION[$this->_namespace][$name];
         }
         
         return null;
+    }
+    
+    /**
+     * Magic Isset
+     * 
+     * @param string $name
+     * @throws \jtl\Core\Exception\SessionException
+     */
+    public function __isset($name)
+    {
+        if ($name === null || $name === "") {
+            throw new SessionException("The '{$name}' key must be a non-empty string");
+        }
+        
+        $name = (string)$name;
+        
+        return isset($_SESSION[$this->_namespace][$name]);
+    }
+    
+    /**
+     * Magic Unset
+     * @param string $name
+     * @throws \jtl\Core\Exception\SessionException
+     */
+    public function __unset($name)
+    {
+        if ($name === null || $name === "") {
+            throw new SessionException("The '{$name}' key must be a non-empty string");
+        }
+        
+        $name = (string)$name;
+        if (isset($_SESSION[$this->_namespace][$name])) {
+            unset($_SESSION[$this->_namespace][$name]);
+        }
     }
 }
 ?>
