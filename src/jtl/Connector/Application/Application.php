@@ -61,7 +61,7 @@ class Application extends CoreApplication
      * @see \jtl\Core\Application\Application::run()
      */
     public function run()
-    {        
+    {
         $jtlrpc = Request::handle();        
         $sessionId = Request::getSession();
         $requestpackets = RequestPacket::build($jtlrpc);
@@ -215,10 +215,10 @@ class Application extends CoreApplication
         try {
             $this->execute($requestpacket, $config, $rpcmode);
             
-            Request::deleteFileupload($filename);
+//            Request::deleteFileupload($filename);
         }
         catch (RpcException $exc) {
-            Request::deleteFileupload($filename);
+//            Request::deleteFileupload($filename);
             
             $error = new Error();
             $error->setCode($exc->getCode())
