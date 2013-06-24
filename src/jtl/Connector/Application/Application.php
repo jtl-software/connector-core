@@ -334,15 +334,15 @@ class Application extends CoreApplication
     protected function startConfiguration()
     {
         // Creates the config instance
-        $json = new ConfigJson(APP_DIR . '/../config/config.json');
+        $json = new ConfigJson(realpath(APP_DIR . '/../config/') . '/config.json');
         $values = $json->reads();
         $exts = array();
-        $root = dirname(__DIR__);
+        $root = dirname($_SERVER['SCRIPT_FILENAME']);
         if (!isset($values['platform_root'])) { //Shop directory
-            $exts['platform_root'] = $root . '/../../';
+            $exts['platform_root'] = realpath($root . '/../../');
         }
         if (!isset($values['connector_root'])) { //Connector directory
-            $exts['connector_root'] = $root . '/../';
+            $exts['connector_root'] = realpath($root . '/../');
         }
         if (!empty($exts)) {
             $json->writes($exts);
@@ -370,4 +370,5 @@ class Application extends CoreApplication
     }
 
 }
+
 ?>
