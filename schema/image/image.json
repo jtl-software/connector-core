@@ -8,6 +8,13 @@
             ],
             "optional": false
         },
+        "masterImageId": {
+            "type": [
+                "int",
+                "null"
+            ],
+            "optional": true
+        },
         "relationType": {
             "type": [
                 "string"
@@ -17,13 +24,6 @@
         "foreignKey": {
             "type": [
                 "int",
-                "null"
-            ],
-            "optional": true
-        },
-        "isMainImage": {
-            "type": [
-                "bool",
                 "null"
             ],
             "optional": true

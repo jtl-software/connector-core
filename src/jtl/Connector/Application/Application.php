@@ -62,7 +62,7 @@ class Application extends CoreApplication
      */
     public function run()
     {        
-        $jtlrpc = Request::handle();        
+        $jtlrpc = Request::handle();
         $sessionId = Request::getSession();
         $requestpackets = RequestPacket::build($jtlrpc);
                 
@@ -197,7 +197,7 @@ class Application extends CoreApplication
      */
     protected function runSingle(RequestPacket $requestpacket, Config $config, $rpcmode)
     {
-        $requestpacket->validate();
+        $requestpacket->validate();        
         $this->runActionValidation($requestpacket);
         $this->runModelValidation($requestpacket);
         

@@ -20,6 +20,11 @@ class Image extends DataModel
     protected $_id;
     
     /**
+     * @var int
+     */
+    protected $_masterImageId;
+    
+    /**
      * @var string
      */
     protected $_relationType = "product";
@@ -28,11 +33,6 @@ class Image extends DataModel
      * @var int
      */
     protected $_foreignKey;
-    
-    /**
-     * @var bool
-     */
-    protected $_isMainImage = true;
     
     /**
      * @var string
@@ -54,6 +54,7 @@ class Image extends DataModel
     {
         switch ($name) {
             case "_id":
+            case "_masterImageId":
             case "_foreignKey":
             case "_sort":
             
@@ -64,11 +65,6 @@ class Image extends DataModel
             case "_filename":
             
                 $this->$name = (string)$value;
-                break;
-        
-            case "_isMainImage":
-            
-                $this->$name = (bool)$value;
                 break;
         
         }

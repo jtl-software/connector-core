@@ -104,7 +104,6 @@ abstract class Image extends BaseLoader
         if (!$this->existsImage($type)) {
             throw new ConfigException(sprintf('Can\'t delete the image with type "%s", because it doesn\'t exist', $type));
         }
-        unset($this->data['platform']['image'][$type]);
     }
 
     /**
