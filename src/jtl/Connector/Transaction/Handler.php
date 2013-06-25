@@ -57,7 +57,7 @@ final class Handler
                 $trid = $requestpacket->getGlobals()->getTransaction()->getId();
                 
                 if ($trid !== null && strlen($trid) > 0) {
-                    if ($session->trans === null) {
+                    if (!isset($session->trans)) {
                         $session->trans = array();
                     }
                     
