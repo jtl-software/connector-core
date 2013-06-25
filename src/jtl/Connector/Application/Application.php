@@ -218,18 +218,19 @@ class Application extends CoreApplication
         try {
             $this->execute($requestpacket, $config, $rpcmode);
 
-//            Request::deleteFileupload($filename);
-        } catch (RpcException $exc) {
-//            Request::deleteFileupload($filename);
+            Request::deleteFileupload($filename);
+        } 
+        catch (RpcException $exc) {
+            Request::deleteFileupload($filename);
 
             $error = new Error();
             $error->setCode($exc->getCode())
-              ->setMessage($exc->getMessage());
+                ->setMessage($exc->getMessage());
 
             $responsepacket = new ResponsePacket();
             $responsepacket->setId($requestpacket->getId())
-              ->setJtlrpc($requestpacket->getJtlrpc())
-              ->setError($error);
+                ->setJtlrpc($requestpacket->getJtlrpc())
+                ->setError($error);
 
             Response::send($responsepacket);
         }
