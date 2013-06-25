@@ -42,23 +42,5 @@ abstract class CoreContainer implements IModelContainer
     
         return false;
     }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\ModelContainer\IModelContainer::isComplete()
-     */
-    public function isComplete()
-    {
-        $complete = true;
-        foreach ($this->items as $items) {
-            $getter = "_" . lcfirst($items[1]);
-            if ($this->$getter === null) {
-                $complete = false;
-                break;
-            }
-        }
-    
-        return $complete;
-    }
 }
 ?>
