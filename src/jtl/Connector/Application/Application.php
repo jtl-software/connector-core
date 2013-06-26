@@ -336,17 +336,18 @@ class Application extends CoreApplication
     {
         // Creates the config instance
         $json = new ConfigJson(realpath(APP_DIR . '/../config/') . '/config.json');
+        $json->beforeRead();
         $values = $json->reads();
         $exts = array();
         $root = dirname($_SERVER['SCRIPT_FILENAME']);
         if (!isset($values['platform_root'])) { //Shop directory
-            $exts['platform_root'] = realpath($root . '/../../');
+            $values['platform_root'] = realpath($root . '/../../');
         }
         if (!isset($values['connector_root'])) { //Connector directory
-            $exts['connector_root'] = realpath($root . '/../');
+            $values['connector_root'] = realpath($root . '/../');
         }
         if (!empty($exts)) {
-            $json->writes($exts);
+            $json->writes($values);
         }
         //We need to change the order of the loader
         $this->config = new Config(array($json, new ConfigSystem()));
