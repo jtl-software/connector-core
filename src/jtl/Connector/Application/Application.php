@@ -104,7 +104,7 @@ class Application extends CoreApplication
      * @throws RpcException
      * @return \jtl\Core\Rpc\ResponsePacket
      */
-    protected function execute(RequestPacket $requestpacket, Config $config, $rpcmode)
+    protected function execute(RequestPacket $requestpacket, Config $config, $rpcmode, $imagePath = null)
     {
         if (!RpcMethod::isMethod($requestpacket->getMethod())) {
             throw new RpcException("Invalid Request", -32600);
@@ -153,8 +153,9 @@ class Application extends CoreApplication
 
                 $endpointconnector->setConfig($config);
                 $actionresult = $endpointconnector->handle($requestpacket);
+                Request::deleteFileupload($imagePath);
                 if (get_class($actionresult) == "jtl\\Connector\\Result\\Action") {
-                    $exists = true;
+                    $exists = true;                    
                     if ($actionresult->isHandled()) {
                         $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
                         if ($rpcmode == Packet::SINGLE_MODE) {
@@ -205,23 +206,21 @@ class Application extends CoreApplication
         $this->runModelValidation($requestpacket);
 
         // Image?
-        $filename = null;
+        $imagePath = null;
         if ($requestpacket->getMethod() == "image.push") {
-            $filename = Request::handleFileupload();
-            if ($filename !== null) {
+            $imagePath = Request::handleFileupload();
+            if ($imagePath !== null) {
                 $image = $requestpacket->getParams();
-                $image->filename = $filename;
+                $image->filename = $imagePath;
                 $requestpacket->setParams($image);
             }
         }
 
         try {
-            $this->execute($requestpacket, $config, $rpcmode);
-
-            Request::deleteFileupload($filename);
+            $this->execute($requestpacket, $config, $rpcmode, $imagePath);
         } 
         catch (RpcException $exc) {
-            Request::deleteFileupload($filename);
+            Request::deleteFileupload($imagePath);
 
             $error = new Error();
             $error->setCode($exc->getCode())
