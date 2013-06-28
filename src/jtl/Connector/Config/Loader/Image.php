@@ -7,8 +7,8 @@
 
 namespace jtl\Connector\Config\Loader;
 
-use jtl\Core\Exception\ConfigException;
-use jtl\Core\Config\Loader\Base as BaseLoader;
+use \jtl\Core\Exception\ConfigException;
+use \jtl\Core\Config\Loader\Base as BaseLoader;
 
 /**
  * Shop3 Imageproperty class.
@@ -59,7 +59,7 @@ abstract class Image extends BaseLoader
           'platform' => array()
         );
     }
-
+    
     /**
      * Adds a image to the data array.
      * 
