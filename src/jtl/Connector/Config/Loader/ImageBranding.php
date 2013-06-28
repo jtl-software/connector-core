@@ -17,15 +17,8 @@ use jtl\Core\Config\Loader\Base as BaseLoader;
  * @author David Spickers <david.spickers@jtl-software.de>
  */
 abstract class ImageBranding extends BaseLoader
-{
-    //Connector
+{    
     const GROUP_ALL = 0;
-    const GROUP_PRODUCT = 'product';
-    const GROUP_CATEGORY = 'category';
-    const GROUP_PRODUCT_VARIATION_VALUE = 'productVariationValue';
-    const GROUP_SPECIFIC = 'specific';
-    const GROUP_SPECIFIC_VALUE = 'specificValue';
-    const GROUP_MANUFACTURER = 'manufacturer';
     
     /**
      * @var jtl\Core\Database\Mysql
