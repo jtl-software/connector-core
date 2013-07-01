@@ -201,7 +201,7 @@ class Application extends CoreApplication
      */
     protected function runSingle(RequestPacket $requestpacket, Config $config, $rpcmode)
     {
-        $requestpacket->validate();        
+        $requestpacket->validate();
         $this->runActionValidation($requestpacket);
         $this->runModelValidation($requestpacket);
 
