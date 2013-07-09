@@ -71,6 +71,6 @@ abstract class InstallerStep
             'page_next_step_url'    => $this->_installer->stepUrl($this->_installer->currentStep() + 1)
         );
         
-        echo Installer::$twig->render($this->_template . '.html.twig', $templateParams);
+        echo Installer::$twig->render($this->_template . '.html.twig', array_merge($templateParams, $this->_data));
     }
 }
