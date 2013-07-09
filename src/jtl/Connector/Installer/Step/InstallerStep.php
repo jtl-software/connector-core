@@ -23,7 +23,7 @@ abstract class InstallerStep
      * 
      * @var array
      */
-    private $_data;
+    private $_data = array();
     
     /**
      * Installer object
