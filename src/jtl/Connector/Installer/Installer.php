@@ -147,8 +147,10 @@ class Installer extends CoreApplication
         ));
         static::$twig = new \Twig_Environment($tplLoader, array(
           'cache' => $tmpDir,
+		  'debug' => true,
           'auto_reload' => true
         ));
+        static::$twig->addExtension(new \Twig_Extension_Debug());
         static::$twig->addExtension(new \Twig_Extensions_Extension_I18n());
         static::$twig->addExtension(new TemplateGlobals());
 
