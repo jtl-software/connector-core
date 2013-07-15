@@ -18,14 +18,15 @@ use \jtl\Core\Database\Mysql;
  * @author David Spickers <david.spickers@jtl-software.de>
  */
 abstract class ImageBranding extends BaseLoader
-{    
+{
+
     const GROUP_ALL = 0;
-    
+
     /**
      * @var jtl\Core\Database\Mysql
      */
     protected $db;
-    
+
     /**
      * @var array
      */
@@ -35,7 +36,7 @@ abstract class ImageBranding extends BaseLoader
      * @var array
      */
     protected $_brandingsettings = array();
-    
+
     /**
      * Constructor.
      * 
@@ -43,7 +44,20 @@ abstract class ImageBranding extends BaseLoader
      */
     public function __construct()
     {
-        $this->db = Mysql::getInstance();
+        $this->checkDb();
     }
-    
+
+    /**
+     * Checks if the database connection is empty.
+     * 
+     * @throws ConfigException
+     */
+    public function checkDb()
+    {
+        $this->db = Mysql::getInstance();
+        if (empty($this->db)) {
+            throw new ConfigException('Unable to retrieve database instance', 100);
+        }
+    }
+
 }
