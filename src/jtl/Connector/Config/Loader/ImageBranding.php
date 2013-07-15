@@ -9,6 +9,7 @@ namespace jtl\Connector\Config\Loader;
 
 use jtl\Core\Exception\ConfigException;
 use jtl\Core\Config\Loader\Base as BaseLoader;
+use \jtl\Core\Database\Mysql;
 
 /**
  * Shop3 Imagebranding class.
