@@ -153,7 +153,11 @@ class Application extends CoreApplication
 
                 $endpointconnector->setConfig($config);
                 $actionresult = $endpointconnector->handle($requestpacket);
-                Request::deleteFileupload($imagePath);
+                
+                if ($requestpacket->getMethod() == "image.push") {
+                    Request::deleteFileupload($imagePath);
+                }
+                
                 if (get_class($actionresult) == "jtl\\Connector\\Result\\Action") {
                     $exists = true;
                     if ($actionresult->isHandled()) {
@@ -219,7 +223,10 @@ class Application extends CoreApplication
         try {
             $this->execute($requestpacket, $config, $rpcmode, $imagePath);
         } catch (RpcException $exc) {
-            Request::deleteFileupload($imagePath);
+            
+            if ($requestpacket->getMethod() == "image.push") {
+                Request::deleteFileupload($imagePath);
+            }
 
             $error = new Error();
             $error->setCode($exc->getCode())
