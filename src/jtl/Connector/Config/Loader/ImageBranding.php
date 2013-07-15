@@ -39,12 +39,10 @@ abstract class ImageBranding extends BaseLoader
      * Constructor.
      * 
      * This loader needs database access.
-     * 
-     * @param \jtl\Core\Database\Mysql $mysql
      */
-    public function __construct(Mysql $mysql)
+    public function __construct()
     {
-        $this->db = $mysql;
+        $this->db = Mysql::getInstance();
     }
     
 }
