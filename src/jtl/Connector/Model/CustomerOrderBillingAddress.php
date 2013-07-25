@@ -87,7 +87,7 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @var string
      */
-    protected $_country;
+    protected $_countryIso;
     
     /**
      * @var string
@@ -136,7 +136,7 @@ class CustomerOrderBillingAddress extends DataModel
             case "_zipCode":
             case "_city":
             case "_state":
-            case "_country":
+            case "_countryIso":
             case "_phone":
             case "_mobile":
             case "_fax":

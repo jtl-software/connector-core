@@ -99,7 +99,7 @@
             ],
             "optional": true
         },
-        "country": {
+        "countryIso": {
             "type": [
                 "string",
                 "null"
