@@ -9,33 +9,33 @@ namespace jtl\Connector\Model;
 use \jtl\Core\Model\DataModel;
 
 /**
- * ProductAttrI18n Model
+ * ProductFunctionAttr Model
  * @access public
  */
-class ProductAttrI18n extends DataModel
+class ProductFunctionAttr extends DataModel
 {
     /**
-     * @var string
+     * @var int
      */
-    protected $_localeName;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_productAttrId = 0;
+    protected $_productId = 0;
     
     /**
      * @var string
      */
-    protected $_key;
+    protected $_key = "0";
     
     /**
      * @var string
      */
-    protected $_value;
+    protected $_value = "0";
     
     /**
-     * ProductAttrI18n Setter
+     * ProductFunctionAttr Setter
      *
      * @param string $name
      * @param string $value
@@ -43,23 +43,23 @@ class ProductAttrI18n extends DataModel
     public function __set($name, $value)
     {
         switch ($name) {
-            case "_localeName":
+            case "_id":
+            case "_productId":
+            
+                $this->$name = (int)$value;
+                break;
+        
             case "_key":
             case "_value":
             
                 $this->$name = (string)$value;
                 break;
         
-            case "_productAttrId":
-            
-                $this->$name = (int)$value;
-                break;
-        
         }
     }
     
     /**
-     * ProductAttrI18n Getter
+     * ProductFunctionAttr Getter
      *
      * @param string $name
      */

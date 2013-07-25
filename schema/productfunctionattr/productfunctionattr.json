@@ -1,5 +1,5 @@
 {
-    "title": "ProductAttr Model",
+    "title": "ProductFunctionAttr Model",
     "type": "object",
     "properties": {
         "id": {
@@ -10,20 +10,27 @@
         },
         "productId": {
             "type": [
-                "int",
+                "int"
+            ],
+            "optional": false
+        },
+        "key": {
+            "type": [
+                "string",
                 "null"
             ],
             "optional": true
         },
-        "sort": {
+        "value": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true
         }
     },
     "required": [
-        "id"
+        "id",
+        "productId"
     ]
 }

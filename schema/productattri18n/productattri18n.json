@@ -14,7 +14,7 @@
             ],
             "optional": false
         },
-        "name": {
+        "key": {
             "type": [
                 "string",
                 "null"

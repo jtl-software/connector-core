@@ -30,11 +30,6 @@ class ProductAttr extends DataModel
     protected $_sort;
     
     /**
-     * @var bool
-     */
-    protected $_isVisible;
-    
-    /**
      * ProductAttr Setter
      *
      * @param string $name
@@ -48,11 +43,6 @@ class ProductAttr extends DataModel
             case "_sort":
             
                 $this->$name = (int)$value;
-                break;
-        
-            case "_isVisible":
-            
-                $this->$name = (bool)$value;
                 break;
         
         }

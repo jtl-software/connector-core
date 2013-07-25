@@ -53,6 +53,11 @@ class ProductContainer extends CoreContainer
     protected $_productAttrI18ns;
     
     /**
+     * @var \jtl\Connector\Model\ProductFunctionAttr[]
+     */
+    protected $_productFunctionAttrs;
+    
+    /**
      * @var \jtl\Connector\Model\ProductVariation[]
      */
     protected $_productVariations;
@@ -204,6 +209,14 @@ class ProductContainer extends CoreContainer
     public function getProductAttrI18ns()
     {
         return $this->_productAttrI18ns;
+    }
+        
+    /**
+     * @return array \jtl\Connector\Model\ProductFunctionAttr
+     */
+    public function getProductFunctionAttrs()
+    {
+        return $this->_productFunctionAttrs;
     }
         
     /**
@@ -359,6 +372,7 @@ class ProductContainer extends CoreContainer
         "product2_category" => array("Product2Category", "Product2Categories"),
         "product_attr" => array("ProductAttr", "ProductAttrs"),
         "product_attr_i18n" => array("ProductAttrI18n", "ProductAttrI18ns"),
+        "product_function_attr" => array("ProductFunctionAttr", "ProductFunctionAttrs"),
         "product_variation" => array("ProductVariation", "ProductVariations"),
         "product_variation_i18n" => array("ProductVariationI18n", "ProductVariationI18ns"),
         "product_variation_visibility" => array("ProductVariationVisibility", "ProductVariationVisibilities"),
