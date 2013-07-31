@@ -16,7 +16,7 @@ use \jtl\Core\Database\Mysql;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-abstract class EmailLoader extends BaseLoader
+abstract class Email extends BaseLoader
 {
     /**
      * @var jtl\Core\Database\Mysql
