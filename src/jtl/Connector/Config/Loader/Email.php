@@ -21,7 +21,7 @@ abstract class Email extends BaseLoader
     /**
      * @var jtl\Core\Database\Mysql
      */
-    protected $db;
+    protected $_db;
     
     /**
      * Constructor.
@@ -40,8 +40,8 @@ abstract class Email extends BaseLoader
      */
     public function checkDb()
     {
-        $this->db = Mysql::getInstance();
-        if (empty($this->db)) {
+        $this->_db = Mysql::getInstance();
+        if (empty($this->_db)) {
             throw new ConfigException('Unable to retrieve database instance', 100);
         }
     }

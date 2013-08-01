@@ -342,6 +342,7 @@ class Application extends CoreApplication
         if (!isset(self::$session)) {
             throw new \RuntimeException('Session not initialized');
         }
+
         if (isset($this->config)) {
             $this->config = $this->config;
             $json = $this->config->getLoader('Json');
@@ -353,25 +354,30 @@ class Application extends CoreApplication
               new ConfigSystem()
             ));
         }
+
         $json->beforeRead();
         $values = $json->reads();
         $exts = array();
         $root = dirname($_SERVER['SCRIPT_FILENAME']);
+
         if (!isset($values['platform_root'])) { //Shop directory
             $exts['platform_root'] = realpath($root . '/../../');
             if (substr($exts['platform_root'], -1) == '/') {
                 $exts['platform_root'] = substr($exts['platform_root'], 0, strlen($exts['platform_root']));
             }
         }
+
         if (!isset($values['connector_root'])) { //Connector directory
             $exts['connector_root'] = realpath($root . '/../');
             if (substr($exts['connector_root'], -1) == '/') {
                 $exts['connector_root'] = substr($exts['connector_root'], 0, strlen($exts['connector_root']));
             }
         }
+
         if (!empty($exts)) {
             $json->writes($exts);
         }
+
         //We need to change the order of the loader
         $this->config = new Config(array($json, new ConfigSystem()));
     }
@@ -393,7 +399,5 @@ class Application extends CoreApplication
 
         self::$session = new Session($sqlite3, $sessionId);
     }
-
 }
-
 ?>
