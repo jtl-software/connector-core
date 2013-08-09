@@ -98,9 +98,22 @@ class Connector extends CoreController
      */
     public function auth($params)
     {
-        // TODO: do auth
-        
-        $action = new Action();        
+        $authToken = $params->auth_token;
+        $configuredAuthToken = $this->getConfig()->read('auth_token');
+
+        $action = new Action();
+        if ($authToken !== $configuredAuthToken) {
+            // Set 'handled' flag because the call actually IS handled
+            $action->setHandled(true);
+
+            $error = new Error();
+            $error->setCode(790);
+            $error->setMessage("Could not authenticate access to the connector");
+            $action->setError($error);
+            return $action;
+        }
+
+
         if (Application::$session !== null) {
             $session = new \stdClass();
             $session->sessionId = Application::$session->getSessionId();
