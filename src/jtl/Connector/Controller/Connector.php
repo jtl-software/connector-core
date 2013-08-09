@@ -78,7 +78,7 @@ class Connector extends CoreController
         $ret = new Action();
         try {
             //@todo: irgend ne supertolle feature list methode
-            $features = array(); 
+            $features = array();
             $ret->setResult($features);
             $ret->setHandled(true);
         } catch (\Exception $e) {
