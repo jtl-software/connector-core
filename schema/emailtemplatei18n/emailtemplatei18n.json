@@ -1,0 +1,57 @@
+{
+    "title": "EmailTemplateI18n Model",
+    "type": "object",
+    "properties": {
+        "emailTemplateId": {
+            "type": [
+                "int"
+            ],
+            "optional": false
+        },
+        "localeName": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        },
+        "description": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
+        },
+        "contentHtml": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        },
+        "contentText": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        },
+        "pdf": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        },
+        "filename": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        }
+    },
+    "required": [
+        "emailTemplateId",
+        "localeName",
+        "contentHtml",
+        "contentText",
+        "pdf",
+        "filename"
+    ]
+}

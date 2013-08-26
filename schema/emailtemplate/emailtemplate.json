@@ -1,0 +1,85 @@
+{
+    "title": "EmailTemplate Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": [
+                "int"
+            ],
+            "optional": false
+        },
+        "name": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
+        },
+        "description": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        },
+        "emailType": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
+        },
+        "moduleId": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
+        },
+        "filename": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        },
+        "isActive": {
+            "type": [
+                "bool",
+                "null"
+            ],
+            "optional": true
+        },
+        "isOii": {
+            "type": [
+                "bool"
+            ],
+            "optional": false
+        },
+        "isAgb": {
+            "type": [
+                "bool"
+            ],
+            "optional": false
+        },
+        "isWrb": {
+            "type": [
+                "bool"
+            ],
+            "optional": false
+        },
+        "error": {
+            "type": [
+                "int"
+            ],
+            "optional": false
+        }
+    },
+    "required": [
+        "id",
+        "description",
+        "filename",
+        "isOii",
+        "isAgb",
+        "isWrb",
+        "error"
+    ]
+}
