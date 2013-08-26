@@ -91,6 +91,35 @@ class Connector extends CoreController
     }
 
     /**
+     * Parse HTTP digest request
+     * @param  string $str HTTP Digest request data
+     * @return array|false
+     */
+    protected function parseHttpDigest($str)
+    {
+        $requiredParts = array(
+            'nonce' => true,
+            'nc' => true,
+            'cnonce' => true,
+            'qop' => true,
+            'username' => true,
+            'uri' => true,
+            'response' => true
+        );
+
+        $data = array();
+        $key = implode('|', array_keys($requiredParts));
+
+        preg_match_all('@(' . $key . ')=(?:([\'"])([^\2]+?)\2|([^\s,]+))@', $str, $matches, PREG_SET_ORDER);
+        foreach ($matches as $m) {
+            $data[$m[1]] = $m[3] ? $m[3] : $m[4];
+            unset($requiredParts[$m[1]]);
+        }
+
+        return $requiredParts ? false : $data;
+    }
+
+    /**
      * Returns the connector auth action
      * 
      * @param mixed $params
@@ -98,11 +127,34 @@ class Connector extends CoreController
      */
     public function auth($params)
     {
-        $authToken = $params->auth_token;
+        $realm = 'JTL-Connector';
+
         $configuredAuthToken = $this->getConfig()->read('auth_token');
 
+        // Check if authentication data arrived
+        if (empty($_SERVER['PHP_AUTH_DIGEST'])) {
+            $nonce = uniqid();
+
+            header('HTTP/1.1 401 Unauthorized');
+            header('WWW-Authenticate: Digest realm="' . $realm . '", qop="auth", nonce="' . $nonce . '", opaque="' . md5($realm). '"');
+            exit;
+        }
+
+        // Check if we have valid authentication data
+        if (!($data = $this->parseHttpDigest($_SERVER['PHP_AUTH_DIGEST'])) || ($data['username'] !== 'sync')) {
+            header('HTTP/1.1 403 Forbidden');
+            exit;
+        }
+
+        // Check credentials against stored auth_token
+        $a1 = md5($data['username'] . ':' . $realm . ':' . $configuredAuthToken);
+        $a2 = md5($_SERVER['REQUEST_METHOD'] . ':' . $data['uri']);
+        $validResponse = md5($a1 . ':' . $data['nonce'] . ':' . $data['nc'] . ':' . $data['cnonce'] . ':' . $data['qop'] . ':' . $a2);
+
+
         $action = new Action();
-        if ($authToken !== $configuredAuthToken) {
+        // If credentials are not valid, return appropriate response
+        if ($data['response'] !== $validResponse) {
             // Set 'handled' flag because the call actually IS handled
             $action->setHandled(true);
 
@@ -112,7 +164,6 @@ class Connector extends CoreController
             $action->setError($error);
             return $action;
         }
-
 
         if (Application::$session !== null) {
             $session = new \stdClass();
