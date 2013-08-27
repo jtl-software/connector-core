@@ -141,7 +141,7 @@ class Connector extends CoreController
         }
 
         // Check if we have valid authentication data
-        if (!($data = $this->parseHttpDigest($_SERVER['PHP_AUTH_DIGEST'])) || ($data['username'] !== 'sync')) {
+        if (!($data = $this->parseHttpDigest($_SERVER['PHP_AUTH_DIGEST'])) || ($data['username'] !== 'jtl')) {
             header('HTTP/1.1 403 Forbidden');
             exit;
         }
