@@ -27,7 +27,7 @@ class EmailTemplateI18n extends DataModel
     /**
      * @var string
      */
-    protected $_description;
+    protected $_subject;
     
     /**
      * @var string
@@ -64,7 +64,7 @@ class EmailTemplateI18n extends DataModel
                 break;
         
             case "_localeName":
-            case "_description":
+            case "_subject":
             case "_contentHtml":
             case "_contentText":
             case "_pdf":
