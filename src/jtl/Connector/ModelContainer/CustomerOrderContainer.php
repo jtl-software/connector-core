@@ -109,8 +109,8 @@ class CustomerOrderContainer extends CoreContainer
         "customer_order_position" => array("CustomerOrderPosition", "CustomerOrderPositions"),
         "customer_order_position_variation" => array("CustomerOrderPositionVariation", "CustomerOrderPositionVariations"),
         "customer_order_payment_info" => array("CustomerOrderPaymentInfo", "CustomerOrderPaymentInfos"),
-        "customer_order_shipping_address" => array("CustomerOrderShippingAddress", "CustomerOrderShippingAddresss"),
-        "customer_order_billing_address" => array("CustomerOrderBillingAddress", "CustomerOrderBillingAddresss")
+        "customer_order_shipping_address" => array("CustomerOrderShippingAddress", "CustomerOrderShippingAddresses"),
+        "customer_order_billing_address" => array("CustomerOrderBillingAddress", "CustomerOrderBillingAddresses")
     );
 }
 ?>
