@@ -40,12 +40,12 @@ class CustomerOrderContainer extends CoreContainer
     /**
      * @var \jtl\Connector\Model\CustomerOrderShippingAddress[]
      */
-    protected $_customerOrderShippingAddresss;
+    protected $_customerOrderShippingAddresses;
     
     /**
      * @var \jtl\Connector\Model\CustomerOrderBillingAddress[]
      */
-    protected $_customerOrderBillingAddresss;
+    protected $_customerOrderBillingAddresses;
         
     /**
      * @return array \jtl\Connector\Model\CustomerOrder
@@ -90,17 +90,17 @@ class CustomerOrderContainer extends CoreContainer
     /**
      * @return array \jtl\Connector\Model\CustomerOrderShippingAddress
      */
-    public function getCustomerOrderShippingAddresss()
+    public function getCustomerOrderShippingAddresses()
     {
-        return $this->_customerOrderShippingAddresss;
+        return $this->_customerOrderShippingAddresses;
     }
         
     /**
      * @return array \jtl\Connector\Model\CustomerOrderBillingAddress
      */
-    public function getCustomerOrderBillingAddresss()
+    public function getCustomerOrderBillingAddresses()
     {
-        return $this->_customerOrderBillingAddresss;
+        return $this->_customerOrderBillingAddresses;
     }
         
     public $items = array(
