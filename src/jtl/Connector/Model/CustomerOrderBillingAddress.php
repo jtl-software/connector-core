@@ -22,7 +22,7 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @var int
      */
-    protected $_customer;
+    protected $_customerId;
     
     /**
      * @var string
@@ -119,7 +119,7 @@ class CustomerOrderBillingAddress extends DataModel
     {
         switch ($name) {
             case "_id":
-            case "_customer":
+            case "_customerId":
             
                 $this->$name = (int)$value;
                 break;
