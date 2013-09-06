@@ -17,12 +17,12 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @var int
      */
-    protected $_shippingMethodId;
+    protected $_id;
     
     /**
      * @var int
      */
-    protected $_basketId;
+    protected $_customerOrderId;
     
     /**
      * @var string
@@ -62,7 +62,22 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @var string
      */
-    protected $_cvv;
+    protected $_creditCardVerificationNumber;
+    
+    /**
+     * @var string
+     */
+    protected $_creditCardExpiration;
+    
+    /**
+     * @var string
+     */
+    protected $_creditCardType;
+    
+    /**
+     * @var string
+     */
+    protected $_creditCardHolder;
     
     /**
      * CustomerOrderPaymentInfo Setter
@@ -73,8 +88,8 @@ class CustomerOrderPaymentInfo extends DataModel
     public function __set($name, $value)
     {
         switch ($name) {
-            case "_shippingMethodId":
-            case "_basketId":
+            case "_id":
+            case "_customerOrderId":
             
                 $this->$name = (int)$value;
                 break;
@@ -86,7 +101,10 @@ class CustomerOrderPaymentInfo extends DataModel
             case "_iban":
             case "_bic":
             case "_creditCardNumber":
-            case "_cvv":
+            case "_creditCardVerificationNumber":
+            case "_creditCardExpiration":
+            case "_creditCardType":
+            case "_creditCardHolder":
             
                 $this->$name = (string)$value;
                 break;

@@ -22,22 +22,17 @@ class CustomerOrderPosition extends DataModel
     /**
      * @var int
      */
-    protected $_externalOrderPosition;
-    
-    /**
-     * @var int
-     */
-    protected $_basketId;
-    
-    /**
-     * @var int
-     */
     protected $_productId;
     
     /**
      * @var int
      */
     protected $_shippingClassId;
+    
+    /**
+     * @var int
+     */
+    protected $_customerOrderId;
     
     /**
      * @var string
@@ -94,10 +89,9 @@ class CustomerOrderPosition extends DataModel
     {
         switch ($name) {
             case "_id":
-            case "_externalOrderPosition":
-            case "_basketId":
             case "_productId":
             case "_shippingClassId":
+            case "_customerOrderId":
             case "_quantity":
             case "_type":
             case "_configItemId":

@@ -22,11 +22,6 @@ class CustomerOrder extends DataModel
     /**
      * @var int
      */
-    protected $_basketId;
-    
-    /**
-     * @var int
-     */
     protected $_customerId;
     
     /**
@@ -169,7 +164,6 @@ class CustomerOrder extends DataModel
     {
         switch ($name) {
             case "_id":
-            case "_basketId":
             case "_customerId":
             case "_shippingAddressId":
             case "_billingAddressId":
@@ -187,6 +181,9 @@ class CustomerOrder extends DataModel
             case "_paymentMethodName":
             case "_orderNumber":
             case "_shippingInfo":
+            case "_shippingDate":
+            case "_paymentDate":
+            case "_ratingNotificationDate":
             case "_tracking":
             case "_note":
             case "_logistic":
@@ -197,13 +194,6 @@ class CustomerOrder extends DataModel
             case "_paymentModuleId":
             
                 $this->$name = (string)$value;
-                break;
-
-            case "_shippingDate":
-            case "_paymentDate":
-            case "_ratingNotificationDate":
-            
-                $this->$name = (strlen($value) > 0) ? (string)$value : NULL;
                 break;
         
             case "_credit":
