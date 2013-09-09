@@ -44,6 +44,22 @@ abstract class CoreContainer implements IModelContainer
     }
 
     /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\ModelContainer\IModelContainer::get()
+     */
+    public function get($type)
+    {
+        $type = strtolower($type);
+        if (isset($this->items[$type])) {
+            $getter = "_" . lcfirst($this->items[$type][1]);
+
+            return $this->$getter;
+        }
+
+        return false;
+    }
+
+    /**
      * Convert the Container and SubItems into stdClass Object
      *
      * @param array $excludes            
