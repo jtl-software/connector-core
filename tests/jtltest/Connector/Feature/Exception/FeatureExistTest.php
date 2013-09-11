@@ -1,6 +1,6 @@
 <?php
 
-use jtl\Connector\Feature\Exception\FeatureExist as ExceptionFeatureExists;
+use \jtl\Connector\Feature\Exception\FeatureExist as ExceptionFeatureExists;
 
 class FeatureExistTest extends PHPUnit_Framework_TestCase {
 

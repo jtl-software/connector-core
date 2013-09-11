@@ -1,8 +1,8 @@
 <?php
 
-use jtl\Connector\Feature\Producer;
-use jtl\Connector\Feature\Manager;
-use jtl\Connector\Feature\Exporter\Wawi;
+use \jtl\Connector\Feature\Producer;
+use \jtl\Connector\Feature\Manager;
+use \jtl\Connector\Feature\Exporter\Wawi;
 
 class ProducerTest extends PHPUnit_Framework_TestCase
 {

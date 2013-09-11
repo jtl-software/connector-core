@@ -12,10 +12,10 @@ use \jtl\Core\Controller\Controller as CoreController;
 use \jtl\Core\Exception\ControllerException;
 use \jtl\Connector\Result\Action;
 use \jtl\Core\Rpc\Error;
-use jtl\Connector\Feature\Manager;
-use jtl\Connector\Feature\Producer;
-use jtl\Connector\Feature\Importer\Json as JsonImporter;
-use jtl\Connector\Feature\Exporter\Wawi as WawiExporter;
+use \jtl\Connector\Feature\Manager;
+use \jtl\Connector\Feature\Producer;
+use \jtl\Connector\Feature\Importer\Json as JsonImporter;
+use \jtl\Connector\Feature\Exporter\Wawi as WawiExporter;
 
 /**
  * Base Features Controller

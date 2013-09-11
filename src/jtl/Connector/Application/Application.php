@@ -9,7 +9,7 @@
 
 namespace jtl\Connector\Application;
 
-use jtl\Core\Rpc\Transaction;
+use \jtl\Core\Rpc\Transaction;
 use \jtl\Core\Serializer\Json;
 use \jtl\Core\Application\Application as CoreApplication;
 use \jtl\Core\Exception\RpcException;

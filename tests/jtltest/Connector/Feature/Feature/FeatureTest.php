@@ -1,7 +1,7 @@
 <?php
 
-use jtl\Connector\Feature\Feature\Feature;
-use jtl\Connector\Feature\Method\Pull;
+use \jtl\Connector\Feature\Feature\Feature;
+use \jtl\Connector\Feature\Method\Pull;
 
 class FeatureTest extends PHPUnit_Framework_TestCase
 {

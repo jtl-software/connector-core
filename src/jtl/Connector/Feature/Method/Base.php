@@ -8,8 +8,8 @@
 
 namespace jtl\Connector\Feature\Method;
 
-use jtl\Connector\Feature\Base\Base as BaseClass;
-use jtl\Connector\Feature\Method\IMethod;
+use \jtl\Connector\Feature\Base\Base as BaseClass;
+use \jtl\Connector\Feature\Method\IMethod;
 
 /**
  * Base method class.

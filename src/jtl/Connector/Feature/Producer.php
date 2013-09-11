@@ -2,8 +2,8 @@
 
 namespace jtl\Connector\Feature;
 
-use jtl\Connector\Feature\Base\Producer as BaseProducer;
-use jtl\Connector\Feature\Exception\Producer as ExceptionProducer;
+use \jtl\Connector\Feature\Base\Producer as BaseProducer;
+use \jtl\Connector\Feature\Exception\Producer as ExceptionProducer;
 
 class Producer extends BaseProducer
 {

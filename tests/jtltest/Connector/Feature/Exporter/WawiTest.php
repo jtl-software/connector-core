@@ -1,6 +1,6 @@
 <?php
 
-use jtl\Connector\Feature\Exporter\Wawi as WawiExporter;
+use \jtl\Connector\Feature\Exporter\Wawi as WawiExporter;
 
 class WawiTest extends PHPUnit_Framework_TestCase
 {

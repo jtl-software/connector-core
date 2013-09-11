@@ -1,6 +1,6 @@
 <?php
 
-use jtl\Connector\Feature\Method\Base as BaseMethod;
+use \jtl\Connector\Feature\Method\Base as BaseMethod;
 
 class MethodGuffle extends BaseMethod
 {

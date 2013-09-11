@@ -7,8 +7,8 @@
 
 namespace jtl\Connector\Feature\Exporter;
 
-use jtl\Connector\Feature\Base\Base as BaseClass;
-use jtl\Connector\Feature\Exporter\IExporter;
+use \jtl\Connector\Feature\Base\Base as BaseClass;
+use \jtl\Connector\Feature\Exporter\IExporter;
 
 /**
  * Base exporter class.

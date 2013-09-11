@@ -7,10 +7,10 @@
 
 namespace jtl\Connector\Feature\Feature;
 
-use jtl\Connector\Feature\Feature\IFeature;
-use jtl\Connector\Feature\Exception\Method as ExceptionMethod;
-use jtl\Connector\Feature\Base\Base as BaseClass;
-use jtl\Connector\Feature\Method\IMethod;
+use \jtl\Connector\Feature\Feature\IFeature;
+use \jtl\Connector\Feature\Exception\Method as ExceptionMethod;
+use \jtl\Connector\Feature\Base\Base as BaseClass;
+use \jtl\Connector\Feature\Method\IMethod;
 
 /**
  * Basic feature class.

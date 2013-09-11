@@ -7,8 +7,8 @@
 
 namespace jtl\Connector\Feature\Importer;
 
-use jtl\Connector\Feature\Base\Base as BaseClass;
-use jtl\Connector\Feature\Importer\IImporter;
+use \jtl\Connector\Feature\Base\Base as BaseClass;
+use \jtl\Connector\Feature\Importer\IImporter;
 
 /**
  * Base importer class.

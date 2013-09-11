@@ -1,6 +1,6 @@
 <?php
 
-use jtl\Connector\Feature\Base\Base as BaseClass;
+use \jtl\Connector\Feature\Base\Base as BaseClass;
 
 class FapFapFap extends BaseClass
 {

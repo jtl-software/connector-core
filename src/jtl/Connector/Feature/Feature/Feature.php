@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Feature\Feature;
 
-use jtl\Connector\Feature\Feature\Base as BaseFeature;
+use \jtl\Connector\Feature\Feature\Base as BaseFeature;
 
 /**
  * Standard feature class.

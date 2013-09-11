@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Feature\Exporter;
 
-use jtl\Connector\Feature\Exporter\Base as BaseExporter;
+use \jtl\Connector\Feature\Exporter\Base as BaseExporter;
 
 /**
  * Wawi exporter class

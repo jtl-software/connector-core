@@ -1,6 +1,6 @@
 <?php
 
-use jtl\Connector\Feature\Manager;
+use \jtl\Connector\Feature\Manager;
 
 class ManagerTest extends PHPUnit_Framework_TestCase
 {

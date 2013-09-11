@@ -7,8 +7,8 @@
 
 namespace jtl\Connector\Feature\Group;
 
-use jtl\Connector\Feature\Group\IGroup;
-use jtl\Connector\Feature\Group\Base as BaseGroup;
+use \jtl\Connector\Feature\Group\IGroup;
+use \jtl\Connector\Feature\Group\Base as BaseGroup;
 
 /**
  * Special image group, that supports additional parameters inside of the params 

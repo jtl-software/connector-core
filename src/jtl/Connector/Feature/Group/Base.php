@@ -7,8 +7,8 @@
 
 namespace jtl\Connector\Feature\Group;
 
-use jtl\Connector\Feature\Group\IGroup;
-use jtl\Connector\Feature\Base\Base as BaseClass;
+use \jtl\Connector\Feature\Group\IGroup;
+use \jtl\Connector\Feature\Base\Base as BaseClass;
 
 /**
  * Basic group class.

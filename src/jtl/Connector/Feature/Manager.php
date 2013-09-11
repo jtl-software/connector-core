@@ -7,11 +7,11 @@
 
 namespace jtl\Connector\Feature;
 
-use jtl\Connector\Feature\Base\Base as BaseClass;
-use jtl\Connector\Feature\Exception\Manager as ExceptionManager;
-use jtl\Connector\Feature\Producer;
-use jtl\Connector\Feature\Importer\IImporter;
-use jtl\Connector\Feature\Exporter\IExporter;
+use \jtl\Connector\Feature\Base\Base as BaseClass;
+use \jtl\Connector\Feature\Exception\Manager as ExceptionManager;
+use \jtl\Connector\Feature\Producer;
+use \jtl\Connector\Feature\Importer\IImporter;
+use \jtl\Connector\Feature\Exporter\IExporter;
 
 /**
  * Manager class for the feature parser of the famous JTL connector.

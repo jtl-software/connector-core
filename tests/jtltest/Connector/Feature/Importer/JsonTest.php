@@ -2,7 +2,7 @@
 
 require_once 'vfsStream/vfsStream.php';
 
-use jtl\Connector\Feature\Importer\Json as JsonImporter;
+use \jtl\Connector\Feature\Importer\Json as JsonImporter;
 
 class JsonTest extends PHPUnit_Framework_TestCase
 {

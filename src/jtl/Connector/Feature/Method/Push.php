@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Feature\Method;
 
-use jtl\Connector\Feature\Method\Base as BaseMethod;
+use \jtl\Connector\Feature\Method\Base as BaseMethod;
 
 /**
  * Push method.

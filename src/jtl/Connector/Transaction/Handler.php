@@ -6,7 +6,7 @@
 
 namespace jtl\Connector\Transaction;
 
-use jtl\Core\Result\Transaction as TransactionResult;
+use \jtl\Core\Result\Transaction as TransactionResult;
 use \jtl\Core\Rpc\RequestPacket;
 use \jtl\Core\Exception\TransactionException;
 use \jtl\Core\Rpc\Error;

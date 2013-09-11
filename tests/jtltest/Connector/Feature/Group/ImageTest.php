@@ -1,6 +1,6 @@
 <?php
 
-use jtl\Connector\Feature\Group\Image;
+use \jtl\Connector\Feature\Group\Image;
 
 class ImageTest extends PHPUnit_Framework_TestCase
 {
