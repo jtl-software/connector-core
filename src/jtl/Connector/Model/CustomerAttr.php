@@ -59,16 +59,6 @@ class CustomerAttr extends DataModel
     }
     
     /**
-     * CustomerAttr Getter
-     *
-     * @param string $name
-     */
-    public function __get($name)
-    {
-        return $this->$name;
-    }
-    
-    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 

@@ -53,16 +53,6 @@ class ProductVariationI18n extends DataModel
     }
     
     /**
-     * ProductVariationI18n Getter
-     *
-     * @param string $name
-     */
-    public function __get($name)
-    {
-        return $this->$name;
-    }
-    
-    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
