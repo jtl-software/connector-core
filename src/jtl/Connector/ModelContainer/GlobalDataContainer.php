@@ -417,8 +417,8 @@ class GlobalDataContainer extends CoreContainer
         "config_item" => array("ConfigItem", "ConfigItems"),
         "config_item_i18n" => array("ConfigItemI18n", "ConfigItemI18ns"),
         "config_item_price" => array("ConfigItemPrice", "ConfigItemPrices"),
-        "file_download_i18n" => array("FileDownloadI18n", "FileDownloadI18ns"),
-        "file_download_history" => array("FileDownloadHistory", "FileDownloadHistories")
+        "file_download" => array("FileDownload", "FileDownloads"),
+        "file_download_i18n" => array("FileDownloadI18n", "FileDownloadI18ns")
     );
 }
 ?>

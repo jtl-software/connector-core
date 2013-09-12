@@ -180,7 +180,7 @@ class Customer extends DataModel
     protected $_isFetched;
     
     /**
-     * @var int
+     * @var bool
      */
     protected $_hasCustomerAccount;
     
@@ -195,7 +195,6 @@ class Customer extends DataModel
         switch ($name) {
             case "_id":
             case "_customerGroupId":
-            case "_hasCustomerAccount":
             
                 $this->$name = (int)$value;
                 break;
@@ -239,6 +238,7 @@ class Customer extends DataModel
         
             case "_isActive":
             case "_isFetched":
+            case "_hasCustomerAccount":
             
                 $this->$name = (bool)$value;
                 break;

@@ -364,7 +364,7 @@ class ProductContainer extends CoreContainer
     }
         
     public $items = array(
-        "file_download" => array("FileDownload", "FileDownloads"),
+        "product_file_download" => array("ProductFileDownload", "ProductFileDownloads"),
         "product" => array("Product", "Products"),
         "product_i18n" => array("ProductI18n", "ProductI18ns"),
         "product_price" => array("ProductPrice", "ProductPrices"),
