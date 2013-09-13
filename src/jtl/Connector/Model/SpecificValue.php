@@ -42,7 +42,9 @@ class SpecificValue extends DataModel
             case "_specificId":
             case "_sort":
             
-                $this->$name = (int)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (int)$value;                
+                }
                 break;
         
         }

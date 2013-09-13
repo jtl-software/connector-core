@@ -42,7 +42,9 @@ class ProductAttr extends DataModel
             case "_productId":
             case "_sort":
             
-                $this->$name = (int)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (int)$value;                
+                }
                 break;
         
         }

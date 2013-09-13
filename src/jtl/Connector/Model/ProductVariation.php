@@ -57,18 +57,24 @@ class ProductVariation extends DataModel
             case "_productId":
             case "_sort":
             
-                $this->$name = (int)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (int)$value;                
+                }
                 break;
         
             case "_name":
             case "_type":
             
-                $this->$name = (string)$value;
+                if (strlen(trim($value)) > 0) {
+                    $this->$name = (string)$value;
+                }
                 break;
         
             case "_isSelectable":
             
-                $this->$name = (bool)$value;
+                if (is_bool($value)) {
+                    $this->$name = (bool)$value;
+                }
                 break;
         
         }

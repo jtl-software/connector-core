@@ -70,7 +70,9 @@ class Currency extends DataModel
         switch ($name) {
             case "_id":
             
-                $this->$name = (int)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (int)$value;                
+                }
                 break;
         
             case "_name":
@@ -81,12 +83,16 @@ class Currency extends DataModel
             case "_delimiterCent":
             case "_delimiterThousand":
             
-                $this->$name = (string)$value;
+                if (strlen(trim($value)) > 0) {
+                    $this->$name = (string)$value;
+                }
                 break;
         
             case "_factor":
             
-                $this->$name = (double)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (double)$value;                
+                }
                 break;
         
         }

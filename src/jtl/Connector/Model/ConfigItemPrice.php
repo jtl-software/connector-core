@@ -53,12 +53,16 @@ class ConfigItemPrice extends DataModel
             case "_taxClassId":
             case "_type":
             
-                $this->$name = (int)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (int)$value;                
+                }
                 break;
         
             case "_price":
             
-                $this->$name = (float)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (float)$value;
+                }
                 break;
         
         }

@@ -172,7 +172,9 @@ class CustomerOrder extends DataModel
             case "_currencyIso":
             case "_paymentMethodType":
             
-                $this->$name = (int)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (int)$value;                
+                }
                 break;
         
             case "_localeName":
@@ -193,18 +195,24 @@ class CustomerOrder extends DataModel
             case "_created":
             case "_paymentModuleId":
             
-                $this->$name = (string)$value;
+                if (strlen(trim($value)) > 0) {
+                    $this->$name = (string)$value;
+                }
                 break;
         
             case "_credit":
             case "_totalSum":
             
-                $this->$name = (double)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (double)$value;                
+                }
                 break;
         
             case "_isFetched":
             
-                $this->$name = (bool)$value;
+                if (is_bool($value)) {
+                    $this->$name = (bool)$value;
+                }
                 break;
         
         }

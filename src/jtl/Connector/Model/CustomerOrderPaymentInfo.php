@@ -91,7 +91,9 @@ class CustomerOrderPaymentInfo extends DataModel
             case "_id":
             case "_customerOrderId":
             
-                $this->$name = (int)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (int)$value;                
+                }
                 break;
         
             case "_bankAccount":
@@ -106,7 +108,9 @@ class CustomerOrderPaymentInfo extends DataModel
             case "_creditCardType":
             case "_creditCardHolder":
             
-                $this->$name = (string)$value;
+                if (strlen(trim($value)) > 0) {
+                    $this->$name = (string)$value;
+                }
                 break;
         
         }

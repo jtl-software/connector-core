@@ -280,7 +280,9 @@ class Product extends DataModel
             case "_setArticleId":
             case "_productTypeId":
             
-                $this->$name = (int)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (int)$value;                
+                }
                 break;
         
             case "_sku":
@@ -302,7 +304,9 @@ class Product extends DataModel
             case "_inflowDate":
             case "_bestBefore":
             
-                $this->$name = (string)$value;
+                if (strlen(trim($value)) > 0) {
+                    $this->$name = (string)$value;
+                }
                 break;
         
             case "_stockLevel":
@@ -318,7 +322,9 @@ class Product extends DataModel
             case "_supplierStockLevel":
             case "_supplierDeliveryTime":
             
-                $this->$name = (double)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (double)$value;                
+                }
                 break;
         
             case "_isTopProduct":
@@ -330,7 +336,9 @@ class Product extends DataModel
             case "_considerBasePrice":
             case "_isMasterProduct":
             
-                $this->$name = (bool)$value;
+                if (is_bool($value)) {
+                    $this->$name = (bool)$value;
+                }
                 break;
         
         }

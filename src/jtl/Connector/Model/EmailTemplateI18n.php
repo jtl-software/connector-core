@@ -60,7 +60,9 @@ class EmailTemplateI18n extends DataModel
         switch ($name) {
             case "_emailTemplateId":
             
-                $this->$name = (int)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (int)$value;                
+                }
                 break;
         
             case "_localeName":
@@ -70,7 +72,9 @@ class EmailTemplateI18n extends DataModel
             case "_pdf":
             case "_filename":
             
-                $this->$name = (string)$value;
+                if (strlen(trim($value)) > 0) {
+                    $this->$name = (string)$value;
+                }
                 break;
         
         }

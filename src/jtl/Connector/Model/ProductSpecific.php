@@ -42,7 +42,9 @@ class ProductSpecific extends DataModel
             case "_specificValueId":
             case "_productId":
             
-                $this->$name = (int)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (int)$value;                
+                }
                 break;
         
         }

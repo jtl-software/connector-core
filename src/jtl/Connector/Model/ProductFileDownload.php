@@ -36,7 +36,9 @@ class ProductFileDownload extends DataModel
             case "_productId":
             case "_fileDownloadId":
             
-                $this->$name = (int)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (int)$value;                
+                }
                 break;
         
         }

@@ -41,12 +41,16 @@ class CategoryCustomerGroup extends DataModel
             case "_customerGroupId":
             case "_categoryId":
             
-                $this->$name = (int)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (int)$value;                
+                }
                 break;
         
             case "_discount":
             
-                $this->$name = (double)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (double)$value;                
+                }
                 break;
         
         }

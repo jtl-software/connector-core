@@ -81,7 +81,9 @@ class EmailTemplate extends DataModel
             case "_id":
             case "_error":
             
-                $this->$name = (int)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (int)$value;                
+                }
                 break;
         
             case "_name":
@@ -90,7 +92,9 @@ class EmailTemplate extends DataModel
             case "_moduleId":
             case "_filename":
             
-                $this->$name = (string)$value;
+                if (strlen(trim($value)) > 0) {
+                    $this->$name = (string)$value;
+                }
                 break;
         
             case "_isActive":
@@ -98,7 +102,9 @@ class EmailTemplate extends DataModel
             case "_isAgb":
             case "_isWrb":
             
-                $this->$name = (bool)$value;
+                if (is_bool($value)) {
+                    $this->$name = (bool)$value;
+                }
                 break;
         
         }

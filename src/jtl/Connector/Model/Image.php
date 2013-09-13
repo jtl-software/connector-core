@@ -58,13 +58,17 @@ class Image extends DataModel
             case "_foreignKey":
             case "_sort":
             
-                $this->$name = (int)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (int)$value;                
+                }
                 break;
         
             case "_relationType":
             case "_filename":
             
-                $this->$name = (string)$value;
+                if (strlen(trim($value)) > 0) {
+                    $this->$name = (string)$value;
+                }
                 break;
         
         }

@@ -30,7 +30,9 @@ class Warehouse extends DataModel
         switch ($name) {
             case "_id":
             
-                $this->$name = (int)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (int)$value;                
+                }
                 break;
         
         }

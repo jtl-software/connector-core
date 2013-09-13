@@ -42,7 +42,9 @@ class Product2Category extends DataModel
             case "_categoryId":
             case "_productId":
             
-                $this->$name = (int)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (int)$value;                
+                }
                 break;
         
         }

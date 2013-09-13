@@ -196,7 +196,9 @@ class Customer extends DataModel
             case "_id":
             case "_customerGroupId":
             
-                $this->$name = (int)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (int)$value;                
+                }
                 break;
         
             case "_localeName":
@@ -226,13 +228,17 @@ class Customer extends DataModel
             case "_created":
             case "_modified":
             
-                $this->$name = (string)$value;
+                if (strlen(trim($value)) > 0) {
+                    $this->$name = (string)$value;
+                }
                 break;
         
             case "_accountCredit":
             case "_discount":
             
-                $this->$name = (double)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (double)$value;                
+                }
                 break;
         
             case "_hasNewsletterSubscription":
@@ -240,7 +246,9 @@ class Customer extends DataModel
             case "_isFetched":
             case "_hasCustomerAccount":
             
-                $this->$name = (bool)$value;
+                if (is_bool($value)) {
+                    $this->$name = (bool)$value;
+                }
                 break;
         
         }

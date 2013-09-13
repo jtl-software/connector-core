@@ -62,7 +62,9 @@ class MediaFile extends DataModel
             case "_productId":
             case "_sort":
             
-                $this->$name = (int)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (int)$value;                
+                }
                 break;
         
             case "_path":
@@ -70,7 +72,9 @@ class MediaFile extends DataModel
             case "_mediaFileCategory":
             case "_type":
             
-                $this->$name = (string)$value;
+                if (strlen(trim($value)) > 0) {
+                    $this->$name = (string)$value;
+                }
                 break;
         
         }

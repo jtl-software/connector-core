@@ -68,19 +68,25 @@ class CustomerOrderPositionVariation extends DataModel
             case "_productVariationId":
             case "_productVariationValueId":
             
-                $this->$name = (int)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (int)$value;                
+                }
                 break;
         
             case "_productVariationName":
             case "_productVariationValueName":
             case "_freeField":
             
-                $this->$name = (string)$value;
+                if (strlen(trim($value)) > 0) {
+                    $this->$name = (string)$value;
+                }
                 break;
         
             case "_surcharge":
             
-                $this->$name = (double)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (double)$value;                
+                }
                 break;
         
         }

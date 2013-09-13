@@ -121,7 +121,9 @@ class CustomerOrderBillingAddress extends DataModel
             case "_id":
             case "_customerId":
             
-                $this->$name = (int)$value;
+                if (is_numeric($value)) {
+                    $this->$name = (int)$value;                
+                }
                 break;
         
             case "_salutation":
@@ -142,7 +144,9 @@ class CustomerOrderBillingAddress extends DataModel
             case "_fax":
             case "_eMail":
             
-                $this->$name = (string)$value;
+                if (strlen(trim($value)) > 0) {
+                    $this->$name = (string)$value;
+                }
                 break;
         
         }
