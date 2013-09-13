@@ -176,9 +176,9 @@
             ],
             "optional": true
         },
-        "newsletter": {
+        "hasNewsletterSubscription": {
             "type": [
-                "string",
+                "bool",
                 "null"
             ],
             "optional": true
@@ -234,7 +234,7 @@
         },
         "hasCustomerAccount": {
             "type": [
-                "int",
+                "bool",
                 "null"
             ],
             "optional": true

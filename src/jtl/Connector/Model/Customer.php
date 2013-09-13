@@ -140,9 +140,9 @@ class Customer extends DataModel
     protected $_accountCredit;
     
     /**
-     * @var string
+     * @var bool
      */
-    protected $_newsletter;
+    protected $_hasNewsletterSubscription;
     
     /**
      * @var string
@@ -221,7 +221,6 @@ class Customer extends DataModel
             case "_eMail":
             case "_vatNumber":
             case "_www":
-            case "_newsletter":
             case "_birthday":
             case "_origin":
             case "_created":
@@ -236,6 +235,7 @@ class Customer extends DataModel
                 $this->$name = (double)$value;
                 break;
         
+            case "_hasNewsletterSubscription":
             case "_isActive":
             case "_isFetched":
             case "_hasCustomerAccount":
