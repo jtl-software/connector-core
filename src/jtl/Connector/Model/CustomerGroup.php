@@ -35,11 +35,6 @@ class CustomerGroup extends DataModel
     protected $_default;
     
     /**
-     * @var string
-     */
-    protected $_shopLogin;
-    
-    /**
      * @var bool
      */
     protected $_shopNetPrice = False;
@@ -60,7 +55,6 @@ class CustomerGroup extends DataModel
         
             case "_name":
             case "_default":
-            case "_shopLogin":
             
                 $this->$name = (string)$value;
                 break;

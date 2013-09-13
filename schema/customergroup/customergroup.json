@@ -29,13 +29,6 @@
             ],
             "optional": true
         },
-        "shopLogin": {
-            "type": [
-                "string",
-                "null"
-            ],
-            "optional": true
-        },
         "shopNetPrice": {
             "type": [
                 "bool",
