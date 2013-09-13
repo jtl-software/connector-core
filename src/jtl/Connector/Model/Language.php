@@ -69,7 +69,7 @@ class Language extends DataModel
             case "_nameGerman":
             case "_localeName":
             
-                if (strlen(trim($value)) > 0) {
+                if (is_string($value) && strlen(trim($value)) > 0) {
                     $this->$name = (string)$value;
                 }
                 break;

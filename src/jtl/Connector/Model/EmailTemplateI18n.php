@@ -77,7 +77,7 @@ class EmailTemplateI18n extends DataModel
             case "_pdf":
             case "_filename":
             
-                if (strlen(trim($value)) > 0) {
+                if (is_string($value) && strlen(trim($value)) > 0) {
                     $this->$name = (string)$value;
                 }
                 break;

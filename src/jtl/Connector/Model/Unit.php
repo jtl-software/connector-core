@@ -53,7 +53,7 @@ class Unit extends DataModel
             case "_localeName":
             case "_name":
             
-                if (strlen(trim($value)) > 0) {
+                if (is_string($value) && strlen(trim($value)) > 0) {
                     $this->$name = (string)$value;
                 }
                 break;

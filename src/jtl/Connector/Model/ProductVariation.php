@@ -70,7 +70,7 @@ class ProductVariation extends DataModel
             case "_name":
             case "_type":
             
-                if (strlen(trim($value)) > 0) {
+                if (is_string($value) && strlen(trim($value)) > 0) {
                     $this->$name = (string)$value;
                 }
                 break;
