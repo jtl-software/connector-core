@@ -18,7 +18,7 @@ abstract class CoreContainer implements IModelContainer
      * (non-PHPdoc)
      * @see \jtl\Core\ModelContainer\IModelContainer::add()
      */
-    public function add($type, $object)
+    public function add($type, $object, $useValidation = true)
     {
         $type = strtolower($type);
         if (isset($this->items[$type])) {
@@ -27,7 +27,9 @@ abstract class CoreContainer implements IModelContainer
             if (class_exists($class)) {
                 $model = new $class();
                 $model->setOptions($object);
-                $model->validate();
+                if ($useValidation) {
+                    $model->validate();
+                }
                 $setter = "_" . lcfirst($this->items[$type][1]);
     
                 if ($this->$setter === null) {

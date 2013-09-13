@@ -47,6 +47,11 @@ class CustomerGroup extends DataModel
      */
     public function __set($name, $value)
     {
+        if ($value === null) {
+            $this->$name = null;
+            return;
+        }
+        
         switch ($name) {
             case "_id":
             
