@@ -63,9 +63,7 @@ class DeliveryNote extends DataModel
             case "_fulfillment":
             case "_status":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_note":

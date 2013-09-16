@@ -50,9 +50,7 @@ class FileDownloadI18n extends DataModel
         switch ($name) {
             case "_fileDownloadId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_localeName":

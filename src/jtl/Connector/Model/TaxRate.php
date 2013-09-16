@@ -58,16 +58,12 @@ class TaxRate extends DataModel
             case "_taxClassId":
             case "_priority":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_taxRate":
             
-                if (is_numeric($value)) {
-                    $this->$name = (double)$value;                
-                }
+                $this->$name = (double)$value;
                 break;
         
         }

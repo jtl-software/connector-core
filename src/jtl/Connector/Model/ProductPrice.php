@@ -52,16 +52,12 @@ class ProductPrice extends DataModel
             case "_productId":
             case "_quantity":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_netPrice":
             
-                if (is_numeric($value)) {
-                    $this->$name = (double)$value;                
-                }
+                $this->$name = (double)$value;
                 break;
         
         }

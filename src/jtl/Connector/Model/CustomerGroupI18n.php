@@ -53,9 +53,7 @@ class CustomerGroupI18n extends DataModel
         
             case "_customerGroupId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
         }

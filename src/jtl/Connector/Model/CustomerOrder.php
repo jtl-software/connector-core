@@ -177,9 +177,7 @@ class CustomerOrder extends DataModel
             case "_currencyIso":
             case "_paymentMethodType":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_localeName":
@@ -208,9 +206,7 @@ class CustomerOrder extends DataModel
             case "_credit":
             case "_totalSum":
             
-                if (is_numeric($value)) {
-                    $this->$name = (double)$value;                
-                }
+                $this->$name = (double)$value;
                 break;
         
             case "_isFetched":

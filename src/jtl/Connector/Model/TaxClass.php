@@ -45,9 +45,7 @@ class TaxClass extends DataModel
         switch ($name) {
             case "_id":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_name":

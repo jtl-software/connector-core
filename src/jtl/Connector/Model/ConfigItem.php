@@ -109,9 +109,7 @@ class ConfigItem extends DataModel
             case "_type":
             case "_sort":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_isPreSelected":
@@ -131,9 +129,7 @@ class ConfigItem extends DataModel
             case "_maxQuantity":
             case "_initialQuantity":
             
-                if (is_numeric($value)) {
-                    $this->$name = (double)$value;                
-                }
+                $this->$name = (double)$value;
                 break;
         
         }

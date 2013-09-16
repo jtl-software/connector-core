@@ -285,9 +285,7 @@ class Product extends DataModel
             case "_setArticleId":
             case "_productTypeId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_sku":
@@ -327,9 +325,7 @@ class Product extends DataModel
             case "_supplierStockLevel":
             case "_supplierDeliveryTime":
             
-                if (is_numeric($value)) {
-                    $this->$name = (double)$value;                
-                }
+                $this->$name = (double)$value;
                 break;
         
             case "_isTopProduct":

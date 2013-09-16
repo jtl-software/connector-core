@@ -51,9 +51,7 @@ class CustomerGroupAttr extends DataModel
             case "_id":
             case "_customerGroupId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_key":

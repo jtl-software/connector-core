@@ -83,9 +83,7 @@ class CategoryI18n extends DataModel
         
             case "_categoryId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
         }

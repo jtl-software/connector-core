@@ -50,9 +50,7 @@ class ConfigItemI18n extends DataModel
         switch ($name) {
             case "_configItemId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_localeName":

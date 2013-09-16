@@ -86,9 +86,7 @@ class EmailTemplate extends DataModel
             case "_id":
             case "_error":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_name":

@@ -83,9 +83,7 @@ class SpecificValueI18n extends DataModel
         
             case "_specificValueId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
         }

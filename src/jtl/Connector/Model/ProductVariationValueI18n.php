@@ -53,9 +53,7 @@ class ProductVariationValueI18n extends DataModel
         
             case "_productVariationValueId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
         }

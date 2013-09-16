@@ -56,17 +56,13 @@ class ProductWarehouseInfo extends DataModel
             case "_productId":
             case "_warehouseId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_stockLevel":
             case "_inflowQuantity":
             
-                if (is_numeric($value)) {
-                    $this->$name = (double)$value;                
-                }
+                $this->$name = (double)$value;
                 break;
         
             case "_inflowDate":

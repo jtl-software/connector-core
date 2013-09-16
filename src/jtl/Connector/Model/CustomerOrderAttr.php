@@ -51,9 +51,7 @@ class CustomerOrderAttr extends DataModel
             case "_id":
             case "_customerOrderId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_key":

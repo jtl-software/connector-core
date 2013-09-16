@@ -53,9 +53,7 @@ class CrossSelling extends DataModel
             case "_crossSellingGroupId":
             case "_productId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
         }

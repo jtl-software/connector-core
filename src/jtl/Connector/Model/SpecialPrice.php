@@ -46,16 +46,12 @@ class SpecialPrice extends DataModel
             case "_customerGroupId":
             case "_productSpecialPriceId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_priceNet":
             
-                if (is_numeric($value)) {
-                    $this->$name = (double)$value;                
-                }
+                $this->$name = (double)$value;
                 break;
         
         }

@@ -71,9 +71,7 @@ class ProductSpecialPrice extends DataModel
             case "_id":
             case "_productId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_isActive":
@@ -95,9 +93,7 @@ class ProductSpecialPrice extends DataModel
         
             case "_quantityLimit":
             
-                if (is_numeric($value)) {
-                    $this->$name = (double)$value;                
-                }
+                $this->$name = (double)$value;
                 break;
         
         }

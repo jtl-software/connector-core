@@ -59,9 +59,7 @@ class ProductAttrI18n extends DataModel
         
             case "_productAttrId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
         }

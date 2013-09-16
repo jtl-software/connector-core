@@ -56,9 +56,7 @@ class Manufacturer extends DataModel
             case "_id":
             case "_sort":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_name":

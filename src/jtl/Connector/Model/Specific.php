@@ -57,9 +57,7 @@ class Specific extends DataModel
             case "_sort":
             case "_global":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_name":

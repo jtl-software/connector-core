@@ -46,16 +46,12 @@ class ProductVariationValueExtraCharge extends DataModel
             case "_customerGroupId":
             case "_productVariationValueId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_extraChargeNet":
             
-                if (is_numeric($value)) {
-                    $this->$name = (double)$value;                
-                }
+                $this->$name = (double)$value;
                 break;
         
         }

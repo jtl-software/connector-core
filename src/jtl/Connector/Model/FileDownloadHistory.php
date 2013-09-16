@@ -58,9 +58,7 @@ class FileDownloadHistory extends DataModel
             case "_customerId":
             case "_customerOrderId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_created":

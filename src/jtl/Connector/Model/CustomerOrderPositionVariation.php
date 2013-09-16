@@ -73,9 +73,7 @@ class CustomerOrderPositionVariation extends DataModel
             case "_productVariationId":
             case "_productVariationValueId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_productVariationName":
@@ -89,9 +87,7 @@ class CustomerOrderPositionVariation extends DataModel
         
             case "_surcharge":
             
-                if (is_numeric($value)) {
-                    $this->$name = (double)$value;                
-                }
+                $this->$name = (double)$value;
                 break;
         
         }

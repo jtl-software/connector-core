@@ -55,9 +55,7 @@ class CustomerGroup extends DataModel
         switch ($name) {
             case "_id":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_name":
@@ -70,9 +68,7 @@ class CustomerGroup extends DataModel
         
             case "_discount":
             
-                if (is_numeric($value)) {
-                    $this->$name = (double)$value;                
-                }
+                $this->$name = (double)$value;
                 break;
         
             case "_shopNetPrice":

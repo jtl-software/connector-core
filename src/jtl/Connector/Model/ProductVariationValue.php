@@ -67,18 +67,14 @@ class ProductVariationValue extends DataModel
             case "_productVariationId":
             case "_sort":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_extraWeight":
             case "_stockLevel":
             case "_packagingUnitId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (double)$value;                
-                }
+                $this->$name = (double)$value;
                 break;
         
             case "_sku":

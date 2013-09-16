@@ -67,9 +67,7 @@ class Shipment extends DataModel
             case "_deliveryNoteId":
             case "_created":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_logistic":

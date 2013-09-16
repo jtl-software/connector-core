@@ -41,9 +41,7 @@ class ProductVariationValueDependency extends DataModel
             case "_productVariationValueId":
             case "_productVariationValueTargetId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
         }

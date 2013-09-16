@@ -56,9 +56,7 @@ class CategoryAttr extends DataModel
             case "_id":
             case "_categoryId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_localeName":

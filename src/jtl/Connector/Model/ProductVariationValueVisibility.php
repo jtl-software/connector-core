@@ -41,9 +41,7 @@ class ProductVariationValueVisibility extends DataModel
             case "_customerGroupId":
             case "_productVariationValueId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
         }

@@ -101,9 +101,7 @@ class CustomerOrderPosition extends DataModel
             case "_type":
             case "_configItemId":
             
-                if (is_numeric($value)) {
-                    $this->$name = (int)$value;                
-                }
+                $this->$name = (int)$value;
                 break;
         
             case "_name":
@@ -119,9 +117,7 @@ class CustomerOrderPosition extends DataModel
             case "_price":
             case "_vat":
             
-                if (is_numeric($value)) {
-                    $this->$name = (double)$value;                
-                }
+                $this->$name = (double)$value;
                 break;
         
         }
