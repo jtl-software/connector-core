@@ -10,7 +10,7 @@ namespace jtl\Connector\ModelContainer;
  * GlobalData Container Class
  * @access public
  */
-class GlobalDataContainer extends CoreContainer
+class GlobalContainer extends CoreContainer
 {
     /**
      * @var \jtl\Connector\Model\Company[]
