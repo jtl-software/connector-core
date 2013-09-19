@@ -30,14 +30,14 @@ class CustomerGroup extends DataModel
     protected $_discount;
     
     /**
-     * @var string
+     * @var bool
      */
-    protected $_default;
+    protected $_isDefault;
     
     /**
      * @var bool
      */
-    protected $_shopNetPrice = False;
+    protected $_applyNetPrice = False;
     
     /**
      * CustomerGroup Setter
@@ -59,7 +59,6 @@ class CustomerGroup extends DataModel
                 break;
         
             case "_name":
-            case "_default":
             
                 if (is_string($value) && strlen(trim($value)) > 0) {
                     $this->$name = (string)$value;
@@ -71,7 +70,8 @@ class CustomerGroup extends DataModel
                 $this->$name = (double)$value;
                 break;
         
-            case "_shopNetPrice":
+            case "_isDefault":
+            case "_applyNetPrice":
             
                 if (is_bool($value)) {
                     $this->$name = (bool)$value;

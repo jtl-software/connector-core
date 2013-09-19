@@ -36,16 +36,16 @@
             ],
             "optional": true
         },
-        "default": {
+        "isDefault": {
             "type": [
-                "string",
+                "bool",
                 "null"
             ],
             "optional": true
         },
-        "currencySignBeforeValue": {
+        "hasCurrencySignBeforeValue": {
             "type": [
-                "string",
+                "bool",
                 "null"
             ],
             "optional": true

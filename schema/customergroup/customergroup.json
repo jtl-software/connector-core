@@ -22,14 +22,14 @@
             ],
             "optional": true
         },
-        "default": {
+        "isDefault": {
             "type": [
-                "string",
+                "bool",
                 "null"
             ],
             "optional": true
         },
-        "shopNetPrice": {
+        "applyNetPrice": {
             "type": [
                 "bool",
                 "null"

@@ -40,14 +40,14 @@ class Currency extends DataModel
     protected $_factor;
     
     /**
-     * @var string
+     * @var bool
      */
-    protected $_default = "False";
+    protected $_isDefault = False;
     
     /**
-     * @var string
+     * @var bool
      */
-    protected $_currencySignBeforeValue = "False";
+    protected $_hasCurrencySignBeforeValue = False;
     
     /**
      * @var string
@@ -81,8 +81,6 @@ class Currency extends DataModel
             case "_name":
             case "_iso":
             case "_nameHtml":
-            case "_default":
-            case "_currencySignBeforeValue":
             case "_delimiterCent":
             case "_delimiterThousand":
             
@@ -94,6 +92,14 @@ class Currency extends DataModel
             case "_factor":
             
                 $this->$name = (double)$value;
+                break;
+        
+            case "_isDefault":
+            case "_hasCurrencySignBeforeValue":
+            
+                if (is_bool($value)) {
+                    $this->$name = (bool)$value;
+                }
                 break;
         
         }
