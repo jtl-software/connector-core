@@ -2,13 +2,6 @@
     "title": "Company Model",
     "type": "object",
     "properties": {
-        "id": {
-            "type": [
-                "int",
-                "null"
-            ],
-            "optional": true
-        },
         "name": {
             "type": [
                 "string"

@@ -25,9 +25,9 @@ class TaxClass extends DataModel
     protected $_name;
     
     /**
-     * @var string
+     * @var bool
      */
-    protected $_default;
+    protected $_isDefault;
     
     /**
      * TaxClass Setter
@@ -49,10 +49,16 @@ class TaxClass extends DataModel
                 break;
         
             case "_name":
-            case "_default":
             
                 if (is_string($value) && strlen(trim($value)) > 0) {
                     $this->$name = (string)$value;
+                }
+                break;
+        
+            case "_isDefault":
+            
+                if (is_bool($value)) {
+                    $this->$name = (bool)$value;
                 }
                 break;
         

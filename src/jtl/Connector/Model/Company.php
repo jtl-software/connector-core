@@ -15,11 +15,6 @@ use \jtl\Core\Model\DataModel;
 class Company extends DataModel
 {
     /**
-     * @var int
-     */
-    protected $_id;
-    
-    /**
      * @var string
      */
     protected $_name;
@@ -128,11 +123,6 @@ class Company extends DataModel
         }
         
         switch ($name) {
-            case "_id":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_name":
             case "_businessman":
             case "_street":
