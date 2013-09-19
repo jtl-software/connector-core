@@ -47,12 +47,12 @@ class ConfigItem extends DataModel
     /**
      * @var bool
      */
-    protected $_useProductName = false;
+    protected $_inheritProductName = false;
     
     /**
      * @var bool
      */
-    protected $_useProductPrice = false;
+    protected $_inheritProductPrice = false;
     
     /**
      * @var bool
@@ -114,8 +114,8 @@ class ConfigItem extends DataModel
         
             case "_isPreSelected":
             case "_isRecommended":
-            case "_useProductName":
-            case "_useProductPrice":
+            case "_inheritProductName":
+            case "_inheritProductPrice":
             case "_showDiscount":
             case "_showSurcharge":
             case "_ignoreMultiplier":

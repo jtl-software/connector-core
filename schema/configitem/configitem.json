@@ -41,14 +41,14 @@
             ],
             "optional": true
         },
-        "useProductName": {
+        "inheritProductName": {
             "type": [
                 "bool",
                 "null"
             ],
             "optional": true
         },
-        "useProductPrice": {
+        "inheritProductPrice": {
             "type": [
                 "bool",
                 "null"
