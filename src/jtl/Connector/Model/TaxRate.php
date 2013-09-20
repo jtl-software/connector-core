@@ -32,7 +32,7 @@ class TaxRate extends DataModel
     /**
      * @var double
      */
-    protected $_taxRate;
+    protected $_rate;
     
     /**
      * @var int
@@ -61,7 +61,7 @@ class TaxRate extends DataModel
                 $this->$name = (int)$value;
                 break;
         
-            case "_taxRate":
+            case "_rate":
             
                 $this->$name = (double)$value;
                 break;

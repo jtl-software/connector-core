@@ -22,7 +22,7 @@
             ],
             "optional": true
         },
-        "taxRate": {
+        "rate": {
             "type": [
                 "double",
                 "null"
