@@ -47,6 +47,15 @@ class Connector extends CoreController
     {
         // Not yet implemented
     }
+
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Core\Controller\IController::statistic()
+     */
+    public function statistic($params)
+    {
+        // Not yet implemented
+    }
     
     /**
      * Initialize the connector.
