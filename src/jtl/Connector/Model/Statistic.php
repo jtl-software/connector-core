@@ -17,7 +17,12 @@ class Statistic extends DataModel
     /**
      * @var int
      */
-    protected $_count;
+    protected $_available;
+
+    /**
+     * @var int
+     */
+    protected $_pending;
 
     /**
      * @var string
@@ -38,7 +43,8 @@ class Statistic extends DataModel
         }
 
         switch ($name) {
-            case "_count":
+            case "_available":
+            case "_pending":
             
                 $this->$name = (int)$value;
                 break;
