@@ -17,32 +17,32 @@ class DeliveryNote extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_customerOrderId;
+    protected $_customerOrderId = 0;
     
     /**
      * @var string
      */
-    protected $_note;
+    protected $_note = '';
     
     /**
      * @var string
      */
-    protected $_created;
+    protected $_created = '';
     
     /**
      * @var int
      */
-    protected $_fulfillment;
+    protected $_fulfillment = 0;
     
     /**
      * @var int
      */
-    protected $_status;
+    protected $_status = 0;
     
     /**
      * DeliveryNote Setter
@@ -69,9 +69,7 @@ class DeliveryNote extends DataModel
             case "_note":
             case "_created":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

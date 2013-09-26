@@ -17,12 +17,12 @@ class Specific extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_sort;
+    protected $_sort = 0;
     
     /**
      * @var int
@@ -32,12 +32,12 @@ class Specific extends DataModel
     /**
      * @var string
      */
-    protected $_name;
+    protected $_name = '';
     
     /**
      * @var string
      */
-    protected $_type;
+    protected $_type = '';
     
     /**
      * Specific Setter
@@ -63,9 +63,7 @@ class Specific extends DataModel
             case "_name":
             case "_type":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

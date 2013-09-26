@@ -17,32 +17,32 @@ class FileUpload extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_productId;
+    protected $_productId = 0;
     
     /**
      * @var string
      */
-    protected $_name;
+    protected $_name = '';
     
     /**
      * @var string
      */
-    protected $_description;
+    protected $_description = '';
     
     /**
      * @var string
      */
-    protected $_fileType;
+    protected $_fileType = '';
     
     /**
      * @var bool
      */
-    protected $_isRequired;
+    protected $_isRequired = false;
     
     /**
      * FileUpload Setter
@@ -68,16 +68,12 @@ class FileUpload extends DataModel
             case "_description":
             case "_fileType":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
             case "_isRequired":
             
-                if (is_bool($value)) {
-                    $this->$name = (bool)$value;
-                }
+                $this->$name = (bool)$value;
                 break;
         
         }

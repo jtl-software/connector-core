@@ -17,12 +17,12 @@ class ProductType extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var string
      */
-    protected $_name;
+    protected $_name = '';
     
     /**
      * ProductType Setter
@@ -45,9 +45,7 @@ class ProductType extends DataModel
         
             case "_name":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

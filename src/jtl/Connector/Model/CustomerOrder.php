@@ -17,142 +17,142 @@ class CustomerOrder extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_customerId;
+    protected $_customerId = 0;
     
     /**
      * @var int
      */
-    protected $_shippingAddressId;
+    protected $_shippingAddressId = 0;
     
     /**
      * @var int
      */
-    protected $_billingAddressId;
+    protected $_billingAddressId = 0;
     
     /**
      * @var int
      */
-    protected $_paymentMethodId;
+    protected $_paymentMethodId = 0;
     
     /**
      * @var int
      */
-    protected $_shippingMethodId;
+    protected $_shippingMethodId = 0;
     
     /**
      * @var string
      */
-    protected $_localeName;
+    protected $_localeName = '';
     
     /**
      * @var int
      */
-    protected $_currencyIso;
+    protected $_currencyIso = 0;
     
     /**
      * @var int
      */
-    protected $_paymentMethodType;
+    protected $_paymentMethodType = 0;
     
     /**
      * @var double
      */
-    protected $_credit;
+    protected $_credit = 0.0;
     
     /**
      * @var double
      */
-    protected $_totalSum;
+    protected $_totalSum = 0.0;
     
     /**
      * @var string
      */
-    protected $_session;
+    protected $_session = '';
     
     /**
      * @var string
      */
-    protected $_shippingMethodName;
+    protected $_shippingMethodName = '';
     
     /**
      * @var string
      */
-    protected $_paymentMethodName;
+    protected $_paymentMethodName = '';
     
     /**
      * @var string
      */
-    protected $_orderNumber;
+    protected $_orderNumber = '';
     
     /**
      * @var string
      */
-    protected $_shippingInfo;
+    protected $_shippingInfo = '';
     
     /**
      * @var string
      */
-    protected $_shippingDate;
+    protected $_shippingDate = '';
     
     /**
      * @var string
      */
-    protected $_paymentDate;
+    protected $_paymentDate = '';
     
     /**
      * @var string
      */
-    protected $_ratingNotificationDate;
+    protected $_ratingNotificationDate = '';
     
     /**
      * @var string
      */
-    protected $_tracking;
+    protected $_tracking = '';
     
     /**
      * @var string
      */
-    protected $_note;
+    protected $_note = '';
     
     /**
      * @var string
      */
-    protected $_logistic;
+    protected $_logistic = '';
     
     /**
      * @var string
      */
-    protected $_trackingURL;
+    protected $_trackingURL = '';
     
     /**
      * @var string
      */
-    protected $_ip;
+    protected $_ip = '';
     
     /**
      * @var bool
      */
-    protected $_isFetched;
+    protected $_isFetched = false;
     
     /**
      * @var string
      */
-    protected $_status;
+    protected $_status = '';
     
     /**
      * @var string
      */
-    protected $_created;
+    protected $_created = '';
     
     /**
      * @var string
      */
-    protected $_paymentModuleId;
+    protected $_paymentModuleId = '';
     
     /**
      * CustomerOrder Setter
@@ -198,9 +198,7 @@ class CustomerOrder extends DataModel
             case "_created":
             case "_paymentModuleId":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
             case "_credit":
@@ -211,9 +209,7 @@ class CustomerOrder extends DataModel
         
             case "_isFetched":
             
-                if (is_bool($value)) {
-                    $this->$name = (bool)$value;
-                }
+                $this->$name = (bool)$value;
                 break;
         
         }

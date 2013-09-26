@@ -27,12 +27,12 @@ class ProductPrice extends DataModel
     /**
      * @var double
      */
-    protected $_netPrice;
+    protected $_netPrice = 0.0;
     
     /**
      * @var int
      */
-    protected $_quantity;
+    protected $_quantity = 0;
     
     /**
      * ProductPrice Setter

@@ -57,12 +57,12 @@ class Product extends DataModel
     /**
      * @var string
      */
-    protected $_sku;
+    protected $_sku = '';
     
     /**
      * @var string
      */
-    protected $_note;
+    protected $_note = '';
     
     /**
      * @var double
@@ -72,22 +72,22 @@ class Product extends DataModel
     /**
      * @var double
      */
-    protected $_vat;
+    protected $_vat = 0.0;
     
     /**
      * @var double
      */
-    protected $_minimumOrderQuantity;
+    protected $_minimumOrderQuantity = 0.0;
     
     /**
      * @var string
      */
-    protected $_ean;
+    protected $_ean = '';
     
     /**
      * @var bool
      */
-    protected $_isTopProduct;
+    protected $_isTopProduct = false;
     
     /**
      * @var double
@@ -102,32 +102,32 @@ class Product extends DataModel
     /**
      * @var bool
      */
-    protected $_isNew;
+    protected $_isNew = false;
     
     /**
      * @var double
      */
-    protected $_recommendedRetailPrice;
+    protected $_recommendedRetailPrice = 0.0;
     
     /**
      * @var bool
      */
-    protected $_considerStock;
+    protected $_considerStock = false;
     
     /**
      * @var bool
      */
-    protected $_permitNegativeStock;
+    protected $_permitNegativeStock = false;
     
     /**
      * @var bool
      */
-    protected $_considerVariationStock;
+    protected $_considerVariationStock = false;
     
     /**
      * @var bool
      */
-    protected $_isDivisible;
+    protected $_isDivisible = false;
     
     /**
      * @var double
@@ -137,17 +137,17 @@ class Product extends DataModel
     /**
      * @var bool
      */
-    protected $_considerBasePrice;
+    protected $_considerBasePrice = false;
     
     /**
      * @var double
      */
-    protected $_basePriceValue;
+    protected $_basePriceValue = 0.0;
     
     /**
      * @var string
      */
-    protected $_keywords;
+    protected $_keywords = '';
     
     /**
      * @var int
@@ -167,47 +167,47 @@ class Product extends DataModel
     /**
      * @var string
      */
-    protected $_manufacturerNumber;
+    protected $_manufacturerNumber = '';
     
     /**
      * @var string
      */
-    protected $_serialNumber;
+    protected $_serialNumber = '';
     
     /**
      * @var string
      */
-    protected $_isbn;
+    protected $_isbn = '';
     
     /**
      * @var string
      */
-    protected $_asin;
+    protected $_asin = '';
     
     /**
      * @var string
      */
-    protected $_unNumber;
+    protected $_unNumber = '';
     
     /**
      * @var string
      */
-    protected $_hazardIdNumber;
+    protected $_hazardIdNumber = '';
     
     /**
      * @var string
      */
-    protected $_taric;
+    protected $_taric = '';
     
     /**
      * @var bool
      */
-    protected $_isMasterProduct;
+    protected $_isMasterProduct = false;
     
     /**
      * @var double
      */
-    protected $_takeOffQuantity;
+    protected $_takeOffQuantity = 0.0;
     
     /**
      * @var int
@@ -217,17 +217,17 @@ class Product extends DataModel
     /**
      * @var string
      */
-    protected $_upc;
+    protected $_upc = '';
     
     /**
      * @var string
      */
-    protected $_originCountry;
+    protected $_originCountry = '';
     
     /**
      * @var string
      */
-    protected $_epid;
+    protected $_epid = '';
     
     /**
      * @var int
@@ -237,27 +237,27 @@ class Product extends DataModel
     /**
      * @var double
      */
-    protected $_inflowQuantity;
+    protected $_inflowQuantity = 0.0;
     
     /**
      * @var string
      */
-    protected $_inflowDate;
+    protected $_inflowDate = '';
     
     /**
      * @var double
      */
-    protected $_supplierStockLevel;
+    protected $_supplierStockLevel = 0.0;
     
     /**
      * @var double
      */
-    protected $_supplierDeliveryTime;
+    protected $_supplierDeliveryTime = 0.0;
     
     /**
      * @var string
      */
-    protected $_bestBefore;
+    protected $_bestBefore = '';
     
     /**
      * Product Setter
@@ -307,9 +307,7 @@ class Product extends DataModel
             case "_inflowDate":
             case "_bestBefore":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
             case "_stockLevel":
@@ -337,9 +335,7 @@ class Product extends DataModel
             case "_considerBasePrice":
             case "_isMasterProduct":
             
-                if (is_bool($value)) {
-                    $this->$name = (bool)$value;
-                }
+                $this->$name = (bool)$value;
                 break;
         
         }

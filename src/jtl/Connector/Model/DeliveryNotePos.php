@@ -17,37 +17,37 @@ class DeliveryNotePos extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_orderPosition;
+    protected $_orderPosition = 0;
     
     /**
      * @var double
      */
-    protected $_quantity;
+    protected $_quantity = 0.0;
     
     /**
      * @var int
      */
-    protected $_stock;
+    protected $_stock = 0;
     
     /**
      * @var string
      */
-    protected $_serialNumber;
+    protected $_serialNumber = '';
     
     /**
      * @var string
      */
-    protected $_batchNumber;
+    protected $_batchNumber = '';
     
     /**
      * @var string
      */
-    protected $_bestBefore;
+    protected $_bestBefore = '';
     
     /**
      * DeliveryNotePos Setter
@@ -79,9 +79,7 @@ class DeliveryNotePos extends DataModel
             case "_batchNumber":
             case "_bestBefore":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

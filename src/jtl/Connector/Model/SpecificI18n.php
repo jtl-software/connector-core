@@ -17,7 +17,7 @@ class SpecificI18n extends DataModel
     /**
      * @var string
      */
-    protected $_localeName;
+    protected $_localeName = '';
     
     /**
      * @var int
@@ -27,7 +27,7 @@ class SpecificI18n extends DataModel
     /**
      * @var string
      */
-    protected $_name;
+    protected $_name = '';
     
     /**
      * SpecificI18n Setter
@@ -46,9 +46,7 @@ class SpecificI18n extends DataModel
             case "_localeName":
             case "_name":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
             case "_specificId":

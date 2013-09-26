@@ -17,37 +17,37 @@ class ConfigGroup extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var string
      */
-    protected $_imagePath;
+    protected $_imagePath = '';
     
     /**
      * @var int
      */
-    protected $_minimumSelection;
+    protected $_minimumSelection = 0;
     
     /**
      * @var int
      */
-    protected $_maximumSelection;
+    protected $_maximumSelection = 0;
     
     /**
      * @var int
      */
-    protected $_type;
+    protected $_type = 0;
     
     /**
      * @var int
      */
-    protected $_sort;
+    protected $_sort = 0;
     
     /**
      * @var string
      */
-    protected $_comment;
+    protected $_comment = '';
     
     /**
      * ConfigGroup Setter
@@ -75,9 +75,7 @@ class ConfigGroup extends DataModel
             case "_imagePath":
             case "_comment":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

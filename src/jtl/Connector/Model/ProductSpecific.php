@@ -17,17 +17,17 @@ class ProductSpecific extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_specificValueId;
+    protected $_specificValueId = 0;
     
     /**
      * @var int
      */
-    protected $_productId;
+    protected $_productId = 0;
     
     /**
      * ProductSpecific Setter

@@ -22,7 +22,7 @@ class ProductVariationValueDependency extends DataModel
     /**
      * @var int
      */
-    protected $_productVariationValueTargetId;
+    protected $_productVariationValueTargetId = 0;
     
     /**
      * ProductVariationValueDependency Setter

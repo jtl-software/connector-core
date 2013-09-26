@@ -27,7 +27,7 @@ class ProductVariationValueExtraCharge extends DataModel
     /**
      * @var double
      */
-    protected $_extraChargeNet;
+    protected $_extraChargeNet = 0.0;
     
     /**
      * ProductVariationValueExtraCharge Setter

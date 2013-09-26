@@ -17,27 +17,27 @@ class ProductWarehouseInfo extends DataModel
     /**
      * @var int
      */
-    protected $_productId;
+    protected $_productId = 0;
     
     /**
      * @var int
      */
-    protected $_warehouseId;
+    protected $_warehouseId = 0;
     
     /**
      * @var double
      */
-    protected $_stockLevel;
+    protected $_stockLevel = 0.0;
     
     /**
      * @var double
      */
-    protected $_inflowQuantity;
+    protected $_inflowQuantity = 0.0;
     
     /**
      * @var string
      */
-    protected $_inflowDate;
+    protected $_inflowDate = '';
     
     /**
      * ProductWarehouseInfo Setter
@@ -67,9 +67,7 @@ class ProductWarehouseInfo extends DataModel
         
             case "_inflowDate":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

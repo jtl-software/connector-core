@@ -17,17 +17,17 @@ class ProductAttr extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_productId;
+    protected $_productId = 0;
     
     /**
      * @var int
      */
-    protected $_sort;
+    protected $_sort = 0;
     
     /**
      * ProductAttr Setter

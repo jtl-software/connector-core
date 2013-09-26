@@ -17,17 +17,17 @@ class ConfigItemPrice extends DataModel
     /**
      * @var int
      */
-    protected $_configItemId;
+    protected $_configItemId = 0;
     
     /**
      * @var int
      */
-    protected $_customerGroupId;
+    protected $_customerGroupId = 0;
     
     /**
      * @var int
      */
-    protected $_taxClassId;
+    protected $_taxClassId = 0;
     
     /**
      * @var float
@@ -37,7 +37,7 @@ class ConfigItemPrice extends DataModel
     /**
      * @var int
      */
-    protected $_type;
+    protected $_type = 0;
     
     /**
      * ConfigItemPrice Setter

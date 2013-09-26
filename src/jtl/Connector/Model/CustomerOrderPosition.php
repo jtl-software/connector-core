@@ -17,67 +17,67 @@ class CustomerOrderPosition extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_productId;
+    protected $_productId = 0;
     
     /**
      * @var int
      */
-    protected $_shippingClassId;
+    protected $_shippingClassId = 0;
     
     /**
      * @var int
      */
-    protected $_customerOrderId;
+    protected $_customerOrderId = 0;
     
     /**
      * @var string
      */
-    protected $_name;
+    protected $_name = '';
     
     /**
      * @var string
      */
-    protected $_sku;
+    protected $_sku = '';
     
     /**
      * @var double
      */
-    protected $_singlePrice;
+    protected $_singlePrice = 0.0;
     
     /**
      * @var double
      */
-    protected $_price;
+    protected $_price = 0.0;
     
     /**
      * @var double
      */
-    protected $_vat;
+    protected $_vat = 0.0;
     
     /**
      * @var int
      */
-    protected $_quantity;
+    protected $_quantity = 0;
     
     /**
      * @var int
      */
-    protected $_type;
+    protected $_type = 0;
     
     /**
      * @var string
      */
-    protected $_unique;
+    protected $_unique = '';
     
     /**
      * @var int
      */
-    protected $_configItemId;
+    protected $_configItemId = 0;
     
     /**
      * CustomerOrderPosition Setter
@@ -108,9 +108,7 @@ class CustomerOrderPosition extends DataModel
             case "_sku":
             case "_unique":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
             case "_singlePrice":

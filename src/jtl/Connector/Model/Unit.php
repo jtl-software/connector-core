@@ -22,12 +22,12 @@ class Unit extends DataModel
     /**
      * @var string
      */
-    protected $_localeName;
+    protected $_localeName = '';
     
     /**
      * @var string
      */
-    protected $_name;
+    protected $_name = '';
     
     /**
      * Unit Setter
@@ -51,9 +51,7 @@ class Unit extends DataModel
             case "_localeName":
             case "_name":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

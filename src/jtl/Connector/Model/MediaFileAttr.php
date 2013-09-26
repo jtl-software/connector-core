@@ -27,17 +27,17 @@ class MediaFileAttr extends DataModel
     /**
      * @var string
      */
-    protected $_localeName;
+    protected $_localeName = '';
     
     /**
      * @var string
      */
-    protected $_name;
+    protected $_name = '';
     
     /**
      * @var string
      */
-    protected $_value;
+    protected $_value = '';
     
     /**
      * MediaFileAttr Setter
@@ -63,9 +63,7 @@ class MediaFileAttr extends DataModel
             case "_name":
             case "_value":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

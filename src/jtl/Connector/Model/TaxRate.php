@@ -22,22 +22,22 @@ class TaxRate extends DataModel
     /**
      * @var int
      */
-    protected $_taxZoneId;
+    protected $_taxZoneId = 0;
     
     /**
      * @var int
      */
-    protected $_taxClassId;
+    protected $_taxClassId = 0;
     
     /**
      * @var double
      */
-    protected $_rate;
+    protected $_rate = 0.0;
     
     /**
      * @var int
      */
-    protected $_priority;
+    protected $_priority = 0;
     
     /**
      * TaxRate Setter

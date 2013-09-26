@@ -27,27 +27,27 @@ class MediaFile extends DataModel
     /**
      * @var string
      */
-    protected $_path;
+    protected $_path = '';
     
     /**
      * @var string
      */
-    protected $_url;
+    protected $_url = '';
     
     /**
      * @var string
      */
-    protected $_mediaFileCategory;
+    protected $_mediaFileCategory = '';
     
     /**
      * @var string
      */
-    protected $_type;
+    protected $_type = '';
     
     /**
      * @var int
      */
-    protected $_sort;
+    protected $_sort = 0;
     
     /**
      * MediaFile Setter
@@ -75,9 +75,7 @@ class MediaFile extends DataModel
             case "_mediaFileCategory":
             case "_type":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

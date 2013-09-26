@@ -17,172 +17,172 @@ class Customer extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_customerGroupId;
+    protected $_customerGroupId = 0;
     
     /**
      * @var string
      */
-    protected $_localeName;
+    protected $_localeName = '';
     
     /**
      * @var string
      */
-    protected $_customerNumber;
+    protected $_customerNumber = '';
     
     /**
      * @var string
      */
-    protected $_password;
+    protected $_password = '';
     
     /**
      * @var string
      */
-    protected $_salutation;
+    protected $_salutation = '';
     
     /**
      * @var string
      */
-    protected $_title;
+    protected $_title = '';
     
     /**
      * @var string
      */
-    protected $_firstName;
+    protected $_firstName = '';
     
     /**
      * @var string
      */
-    protected $_lastName;
+    protected $_lastName = '';
     
     /**
      * @var string
      */
-    protected $_company;
+    protected $_company = '';
     
     /**
      * @var string
      */
-    protected $_street;
+    protected $_street = '';
     
     /**
      * @var string
      */
-    protected $_streetNumber;
+    protected $_streetNumber = '';
     
     /**
      * @var string
      */
-    protected $_deliveryInstruction;
+    protected $_deliveryInstruction = '';
     
     /**
      * @var string
      */
-    protected $_extraAddressLine;
+    protected $_extraAddressLine = '';
     
     /**
      * @var string
      */
-    protected $_zipCode;
+    protected $_zipCode = '';
     
     /**
      * @var string
      */
-    protected $_city;
+    protected $_city = '';
     
     /**
      * @var string
      */
-    protected $_state;
+    protected $_state = '';
     
     /**
      * @var string
      */
-    protected $_countryIso;
+    protected $_countryIso = '';
     
     /**
      * @var string
      */
-    protected $_phone;
+    protected $_phone = '';
     
     /**
      * @var string
      */
-    protected $_mobile;
+    protected $_mobile = '';
     
     /**
      * @var string
      */
-    protected $_fax;
+    protected $_fax = '';
     
     /**
      * @var string
      */
-    protected $_eMail;
+    protected $_eMail = '';
     
     /**
      * @var string
      */
-    protected $_vatNumber;
+    protected $_vatNumber = '';
     
     /**
      * @var string
      */
-    protected $_www;
+    protected $_www = '';
     
     /**
      * @var double
      */
-    protected $_accountCredit;
+    protected $_accountCredit = 0.0;
     
     /**
      * @var bool
      */
-    protected $_hasNewsletterSubscription;
+    protected $_hasNewsletterSubscription = false;
     
     /**
      * @var string
      */
-    protected $_birthday;
+    protected $_birthday = '';
     
     /**
      * @var double
      */
-    protected $_discount;
+    protected $_discount = 0.0;
     
     /**
      * @var string
      */
-    protected $_origin;
+    protected $_origin = '';
     
     /**
      * @var string
      */
-    protected $_created;
+    protected $_created = '';
     
     /**
      * @var string
      */
-    protected $_modified;
+    protected $_modified = '';
     
     /**
      * @var bool
      */
-    protected $_isActive;
+    protected $_isActive = false;
     
     /**
      * @var bool
      */
-    protected $_isFetched;
+    protected $_isFetched = false;
     
     /**
      * @var bool
      */
-    protected $_hasCustomerAccount;
+    protected $_hasCustomerAccount = false;
     
     /**
      * Customer Setter
@@ -231,9 +231,7 @@ class Customer extends DataModel
             case "_created":
             case "_modified":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
             case "_accountCredit":
@@ -247,9 +245,7 @@ class Customer extends DataModel
             case "_isFetched":
             case "_hasCustomerAccount":
             
-                if (is_bool($value)) {
-                    $this->$name = (bool)$value;
-                }
+                $this->$name = (bool)$value;
                 break;
         
         }

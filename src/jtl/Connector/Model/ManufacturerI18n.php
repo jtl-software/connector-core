@@ -22,27 +22,27 @@ class ManufacturerI18n extends DataModel
     /**
      * @var string
      */
-    protected $_localeName;
+    protected $_localeName = '';
     
     /**
      * @var string
      */
-    protected $_description;
+    protected $_description = '';
     
     /**
      * @var string
      */
-    protected $_metaDescription;
+    protected $_metaDescription = '';
     
     /**
      * @var string
      */
-    protected $_metaKeywords;
+    protected $_metaKeywords = '';
     
     /**
      * @var string
      */
-    protected $_titleTag;
+    protected $_titleTag = '';
     
     /**
      * ManufacturerI18n Setter
@@ -69,9 +69,7 @@ class ManufacturerI18n extends DataModel
             case "_metaKeywords":
             case "_titleTag":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

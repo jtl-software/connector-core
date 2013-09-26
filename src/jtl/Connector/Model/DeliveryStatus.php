@@ -17,17 +17,17 @@ class DeliveryStatus extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var string
      */
-    protected $_localeName;
+    protected $_localeName = '';
     
     /**
      * @var string
      */
-    protected $_name;
+    protected $_name = '';
     
     /**
      * DeliveryStatus Setter
@@ -51,9 +51,7 @@ class DeliveryStatus extends DataModel
             case "_localeName":
             case "_name":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

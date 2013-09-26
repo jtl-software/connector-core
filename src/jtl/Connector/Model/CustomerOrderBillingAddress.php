@@ -17,97 +17,97 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_customerId;
+    protected $_customerId = 0;
     
     /**
      * @var string
      */
-    protected $_salutation;
+    protected $_salutation = '';
     
     /**
      * @var string
      */
-    protected $_firstName;
+    protected $_firstName = '';
     
     /**
      * @var string
      */
-    protected $_lastName;
+    protected $_lastName = '';
     
     /**
      * @var string
      */
-    protected $_title;
+    protected $_title = '';
     
     /**
      * @var string
      */
-    protected $_company;
+    protected $_company = '';
     
     /**
      * @var string
      */
-    protected $_deliveryInstruction;
+    protected $_deliveryInstruction = '';
     
     /**
      * @var string
      */
-    protected $_street;
+    protected $_street = '';
     
     /**
      * @var string
      */
-    protected $_streetNumber;
+    protected $_streetNumber = '';
     
     /**
      * @var string
      */
-    protected $_extraAddressLine;
+    protected $_extraAddressLine = '';
     
     /**
      * @var string
      */
-    protected $_zipCode;
+    protected $_zipCode = '';
     
     /**
      * @var string
      */
-    protected $_city;
+    protected $_city = '';
     
     /**
      * @var string
      */
-    protected $_state;
+    protected $_state = '';
     
     /**
      * @var string
      */
-    protected $_countryIso;
+    protected $_countryIso = '';
     
     /**
      * @var string
      */
-    protected $_phone;
+    protected $_phone = '';
     
     /**
      * @var string
      */
-    protected $_mobile;
+    protected $_mobile = '';
     
     /**
      * @var string
      */
-    protected $_fax;
+    protected $_fax = '';
     
     /**
      * @var string
      */
-    protected $_eMail;
+    protected $_eMail = '';
     
     /**
      * CustomerOrderBillingAddress Setter
@@ -147,9 +147,7 @@ class CustomerOrderBillingAddress extends DataModel
             case "_fax":
             case "_eMail":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

@@ -17,97 +17,97 @@ class Company extends DataModel
     /**
      * @var string
      */
-    protected $_name;
+    protected $_name = '';
     
     /**
      * @var string
      */
-    protected $_businessman;
+    protected $_businessman = '';
     
     /**
      * @var string
      */
-    protected $_street;
+    protected $_street = '';
     
     /**
      * @var string
      */
-    protected $_streetNumber;
+    protected $_streetNumber = '';
     
     /**
      * @var string
      */
-    protected $_zipCode;
+    protected $_zipCode = '';
     
     /**
      * @var string
      */
-    protected $_city;
+    protected $_city = '';
     
     /**
      * @var string
      */
-    protected $_country;
+    protected $_country = '';
     
     /**
      * @var string
      */
-    protected $_phone;
+    protected $_phone = '';
     
     /**
      * @var string
      */
-    protected $_fax;
+    protected $_fax = '';
     
     /**
      * @var string
      */
-    protected $_eMail;
+    protected $_eMail = '';
     
     /**
      * @var string
      */
-    protected $_www;
+    protected $_www = '';
     
     /**
      * @var string
      */
-    protected $_bankCode;
+    protected $_bankCode = '';
     
     /**
      * @var string
      */
-    protected $_accountNumber;
+    protected $_accountNumber = '';
     
     /**
      * @var string
      */
-    protected $_bankAccount;
+    protected $_bankAccount = '';
     
     /**
      * @var string
      */
-    protected $_accountHolder;
+    protected $_accountHolder = '';
     
     /**
      * @var string
      */
-    protected $_vatNumber;
+    protected $_vatNumber = '';
     
     /**
      * @var string
      */
-    protected $_taxIdNumber;
+    protected $_taxIdNumber = '';
     
     /**
      * @var string
      */
-    protected $_iban;
+    protected $_iban = '';
     
     /**
      * @var string
      */
-    protected $_bic;
+    protected $_bic = '';
     
     /**
      * Company Setter
@@ -143,9 +143,7 @@ class Company extends DataModel
             case "_iban":
             case "_bic":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

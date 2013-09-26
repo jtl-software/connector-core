@@ -17,27 +17,27 @@ class Manufacturer extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var string
      */
-    protected $_name;
+    protected $_name = '';
     
     /**
      * @var string
      */
-    protected $_www;
+    protected $_www = '';
     
     /**
      * @var int
      */
-    protected $_sort;
+    protected $_sort = 0;
     
     /**
      * @var string
      */
-    protected $_url;
+    protected $_url = '';
     
     /**
      * Manufacturer Setter
@@ -63,9 +63,7 @@ class Manufacturer extends DataModel
             case "_www":
             case "_url":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

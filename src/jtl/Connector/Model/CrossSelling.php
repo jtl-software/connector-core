@@ -17,22 +17,22 @@ class CrossSelling extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_crossSellingProductId;
+    protected $_crossSellingProductId = 0;
     
     /**
      * @var int
      */
-    protected $_crossSellingGroupId;
+    protected $_crossSellingGroupId = 0;
     
     /**
      * @var int
      */
-    protected $_productId;
+    protected $_productId = 0;
     
     /**
      * CrossSelling Setter

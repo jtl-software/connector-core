@@ -17,17 +17,17 @@ class CustomerGroupI18n extends DataModel
     /**
      * @var string
      */
-    protected $_localeName;
+    protected $_localeName = '';
     
     /**
      * @var int
      */
-    protected $_customerGroupId;
+    protected $_customerGroupId = 0;
     
     /**
      * @var string
      */
-    protected $_name;
+    protected $_name = '';
     
     /**
      * CustomerGroupI18n Setter
@@ -46,9 +46,7 @@ class CustomerGroupI18n extends DataModel
             case "_localeName":
             case "_name":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
             case "_customerGroupId":

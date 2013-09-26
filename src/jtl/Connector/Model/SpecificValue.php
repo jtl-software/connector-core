@@ -17,17 +17,17 @@ class SpecificValue extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_specificId;
+    protected $_specificId = 0;
     
     /**
      * @var int
      */
-    protected $_sort;
+    protected $_sort = 0;
     
     /**
      * SpecificValue Setter

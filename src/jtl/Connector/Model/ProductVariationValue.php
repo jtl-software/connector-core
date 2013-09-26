@@ -22,17 +22,17 @@ class ProductVariationValue extends DataModel
     /**
      * @var int
      */
-    protected $_productVariationId;
+    protected $_productVariationId = 0;
     
     /**
      * @var double
      */
-    protected $_extraWeight;
+    protected $_extraWeight = 0.0;
     
     /**
      * @var string
      */
-    protected $_sku;
+    protected $_sku = '';
     
     /**
      * @var int
@@ -42,7 +42,7 @@ class ProductVariationValue extends DataModel
     /**
      * @var double
      */
-    protected $_stockLevel;
+    protected $_stockLevel = 0.0;
     
     /**
      * @var double
@@ -79,9 +79,7 @@ class ProductVariationValue extends DataModel
         
             case "_sku":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

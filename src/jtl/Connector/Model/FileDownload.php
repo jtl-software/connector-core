@@ -17,42 +17,42 @@ class FileDownload extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var string
      */
-    protected $_identificationString;
+    protected $_identificationString = '';
     
     /**
      * @var string
      */
-    protected $_path;
+    protected $_path = '';
     
     /**
      * @var string
      */
-    protected $_previewPath;
+    protected $_previewPath = '';
     
     /**
      * @var int
      */
-    protected $_maxDownloads;
+    protected $_maxDownloads = 0;
     
     /**
      * @var int
      */
-    protected $_maxDays;
+    protected $_maxDays = 0;
     
     /**
      * @var int
      */
-    protected $_sort;
+    protected $_sort = 0;
     
     /**
      * @var string
      */
-    protected $_created;
+    protected $_created = '';
     
     /**
      * FileDownload Setter
@@ -81,9 +81,7 @@ class FileDownload extends DataModel
             case "_previewPath":
             case "_created":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

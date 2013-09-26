@@ -17,17 +17,17 @@ class CategoryCustomerGroup extends DataModel
     /**
      * @var int
      */
-    protected $_customerGroupId;
+    protected $_customerGroupId = 0;
     
     /**
      * @var int
      */
-    protected $_categoryId;
+    protected $_categoryId = 0;
     
     /**
      * @var double
      */
-    protected $_discount;
+    protected $_discount = 0.0;
     
     /**
      * CategoryCustomerGroup Setter

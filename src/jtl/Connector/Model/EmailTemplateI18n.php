@@ -17,37 +17,37 @@ class EmailTemplateI18n extends DataModel
     /**
      * @var int
      */
-    protected $_emailTemplateId;
+    protected $_emailTemplateId = 0;
     
     /**
      * @var string
      */
-    protected $_localeName;
+    protected $_localeName = '';
     
     /**
      * @var string
      */
-    protected $_subject;
+    protected $_subject = '';
     
     /**
      * @var string
      */
-    protected $_contentHtml;
+    protected $_contentHtml = '';
     
     /**
      * @var string
      */
-    protected $_contentText;
+    protected $_contentText = '';
     
     /**
      * @var string
      */
-    protected $_pdf;
+    protected $_pdf = '';
     
     /**
      * @var string
      */
-    protected $_filename;
+    protected $_filename = '';
     
     /**
      * EmailTemplateI18n Setter
@@ -75,9 +75,7 @@ class EmailTemplateI18n extends DataModel
             case "_pdf":
             case "_filename":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

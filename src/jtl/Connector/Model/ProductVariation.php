@@ -22,27 +22,27 @@ class ProductVariation extends DataModel
     /**
      * @var int
      */
-    protected $_productId;
+    protected $_productId = 0;
     
     /**
      * @var string
      */
-    protected $_name;
+    protected $_name = '';
     
     /**
      * @var bool
      */
-    protected $_isSelectable;
+    protected $_isSelectable = false;
     
     /**
      * @var string
      */
-    protected $_type;
+    protected $_type = '';
     
     /**
      * @var int
      */
-    protected $_sort;
+    protected $_sort = 0;
     
     /**
      * ProductVariation Setter
@@ -68,16 +68,12 @@ class ProductVariation extends DataModel
             case "_name":
             case "_type":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
             case "_isSelectable":
             
-                if (is_bool($value)) {
-                    $this->$name = (bool)$value;
-                }
+                $this->$name = (bool)$value;
                 break;
         
         }

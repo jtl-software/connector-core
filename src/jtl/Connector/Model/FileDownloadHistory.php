@@ -17,27 +17,27 @@ class FileDownloadHistory extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_fileDownloadId;
+    protected $_fileDownloadId = 0;
     
     /**
      * @var int
      */
-    protected $_customerId;
+    protected $_customerId = 0;
     
     /**
      * @var int
      */
-    protected $_customerOrderId;
+    protected $_customerOrderId = 0;
     
     /**
      * @var string
      */
-    protected $_created;
+    protected $_created = '';
     
     /**
      * FileDownloadHistory Setter
@@ -63,9 +63,7 @@ class FileDownloadHistory extends DataModel
         
             case "_created":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

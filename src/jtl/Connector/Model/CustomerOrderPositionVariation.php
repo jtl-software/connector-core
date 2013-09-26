@@ -17,42 +17,42 @@ class CustomerOrderPositionVariation extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_customerOrderPositionId;
+    protected $_customerOrderPositionId = 0;
     
     /**
      * @var int
      */
-    protected $_productVariationId;
+    protected $_productVariationId = 0;
     
     /**
      * @var int
      */
-    protected $_productVariationValueId;
+    protected $_productVariationValueId = 0;
     
     /**
      * @var string
      */
-    protected $_productVariationName;
+    protected $_productVariationName = '';
     
     /**
      * @var string
      */
-    protected $_productVariationValueName;
+    protected $_productVariationValueName = '';
     
     /**
      * @var string
      */
-    protected $_freeField;
+    protected $_freeField = '';
     
     /**
      * @var double
      */
-    protected $_surcharge;
+    protected $_surcharge = 0.0;
     
     /**
      * CustomerOrderPositionVariation Setter
@@ -80,9 +80,7 @@ class CustomerOrderPositionVariation extends DataModel
             case "_productVariationValueName":
             case "_freeField":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
             case "_surcharge":

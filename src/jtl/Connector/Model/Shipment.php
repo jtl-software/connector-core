@@ -17,37 +17,37 @@ class Shipment extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_deliveryNoteId;
+    protected $_deliveryNoteId = 0;
     
     /**
      * @var string
      */
-    protected $_logistic;
+    protected $_logistic = '';
     
     /**
      * @var string
      */
-    protected $_logisticURL;
+    protected $_logisticURL = '';
     
     /**
      * @var string
      */
-    protected $_identCode;
+    protected $_identCode = '';
     
     /**
      * @var int
      */
-    protected $_created;
+    protected $_created = 0;
     
     /**
      * @var string
      */
-    protected $_note;
+    protected $_note = '';
     
     /**
      * Shipment Setter
@@ -75,9 +75,7 @@ class Shipment extends DataModel
             case "_identCode":
             case "_note":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

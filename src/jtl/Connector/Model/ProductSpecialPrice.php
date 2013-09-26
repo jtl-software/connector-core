@@ -27,32 +27,32 @@ class ProductSpecialPrice extends DataModel
     /**
      * @var bool
      */
-    protected $_isActive;
+    protected $_isActive = false;
     
     /**
      * @var string
      */
-    protected $_activeFrom;
+    protected $_activeFrom = '';
     
     /**
      * @var string
      */
-    protected $_activeUntil;
+    protected $_activeUntil = '';
     
     /**
      * @var double
      */
-    protected $_quantityLimit;
+    protected $_quantityLimit = 0.0;
     
     /**
      * @var bool
      */
-    protected $_considerQuantityLimit;
+    protected $_considerQuantityLimit = false;
     
     /**
      * @var bool
      */
-    protected $_considerDateLimit;
+    protected $_considerDateLimit = false;
     
     /**
      * ProductSpecialPrice Setter
@@ -78,17 +78,13 @@ class ProductSpecialPrice extends DataModel
             case "_considerQuantityLimit":
             case "_considerDateLimit":
             
-                if (is_bool($value)) {
-                    $this->$name = (bool)$value;
-                }
+                $this->$name = (bool)$value;
                 break;
         
             case "_activeFrom":
             case "_activeUntil":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
             case "_quantityLimit":

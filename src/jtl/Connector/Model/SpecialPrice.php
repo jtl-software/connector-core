@@ -27,7 +27,7 @@ class SpecialPrice extends DataModel
     /**
      * @var double
      */
-    protected $_priceNet;
+    protected $_priceNet = 0.0;
     
     /**
      * SpecialPrice Setter

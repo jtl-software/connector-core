@@ -17,22 +17,22 @@ class ConfigItemI18n extends DataModel
     /**
      * @var int
      */
-    protected $_configItemId;
+    protected $_configItemId = 0;
     
     /**
      * @var string
      */
-    protected $_localeName;
+    protected $_localeName = '';
     
     /**
      * @var string
      */
-    protected $_name;
+    protected $_name = '';
     
     /**
      * @var string
      */
-    protected $_description;
+    protected $_description = '';
     
     /**
      * ConfigItemI18n Setter
@@ -57,9 +57,7 @@ class ConfigItemI18n extends DataModel
             case "_name":
             case "_description":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

@@ -17,67 +17,67 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_customerOrderId;
+    protected $_customerOrderId = 0;
     
     /**
      * @var string
      */
-    protected $_bankAccount;
+    protected $_bankAccount = '';
     
     /**
      * @var string
      */
-    protected $_bankCode;
+    protected $_bankCode = '';
     
     /**
      * @var string
      */
-    protected $_accountHolder;
+    protected $_accountHolder = '';
     
     /**
      * @var string
      */
-    protected $_accountNumber;
+    protected $_accountNumber = '';
     
     /**
      * @var string
      */
-    protected $_iban;
+    protected $_iban = '';
     
     /**
      * @var string
      */
-    protected $_bic;
+    protected $_bic = '';
     
     /**
      * @var string
      */
-    protected $_creditCardNumber;
+    protected $_creditCardNumber = '';
     
     /**
      * @var string
      */
-    protected $_creditCardVerificationNumber;
+    protected $_creditCardVerificationNumber = '';
     
     /**
      * @var string
      */
-    protected $_creditCardExpiration;
+    protected $_creditCardExpiration = '';
     
     /**
      * @var string
      */
-    protected $_creditCardType;
+    protected $_creditCardType = '';
     
     /**
      * @var string
      */
-    protected $_creditCardHolder;
+    protected $_creditCardHolder = '';
     
     /**
      * CustomerOrderPaymentInfo Setter
@@ -111,9 +111,7 @@ class CustomerOrderPaymentInfo extends DataModel
             case "_creditCardType":
             case "_creditCardHolder":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

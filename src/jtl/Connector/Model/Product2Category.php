@@ -22,12 +22,12 @@ class Product2Category extends DataModel
     /**
      * @var int
      */
-    protected $_categoryId;
+    protected $_categoryId = 0;
     
     /**
      * @var int
      */
-    protected $_productId;
+    protected $_productId = 0;
     
     /**
      * Product2Category Setter

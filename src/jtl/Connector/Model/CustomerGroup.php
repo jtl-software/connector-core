@@ -17,22 +17,22 @@ class CustomerGroup extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var string
      */
-    protected $_name;
+    protected $_name = '';
     
     /**
      * @var double
      */
-    protected $_discount;
+    protected $_discount = 0.0;
     
     /**
      * @var bool
      */
-    protected $_isDefault;
+    protected $_isDefault = false;
     
     /**
      * @var bool
@@ -60,9 +60,7 @@ class CustomerGroup extends DataModel
         
             case "_name":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
             case "_discount":
@@ -73,9 +71,7 @@ class CustomerGroup extends DataModel
             case "_isDefault":
             case "_applyNetPrice":
             
-                if (is_bool($value)) {
-                    $this->$name = (bool)$value;
-                }
+                $this->$name = (bool)$value;
                 break;
         
         }

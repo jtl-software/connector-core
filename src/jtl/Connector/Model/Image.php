@@ -17,12 +17,12 @@ class Image extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_masterImageId;
+    protected $_masterImageId = 0;
     
     /**
      * @var string
@@ -32,17 +32,17 @@ class Image extends DataModel
     /**
      * @var int
      */
-    protected $_foreignKey;
+    protected $_foreignKey = 0;
     
     /**
      * @var string
      */
-    protected $_filename;
+    protected $_filename = '';
     
     /**
      * @var int
      */
-    protected $_sort;
+    protected $_sort = 0;
     
     /**
      * Image Setter
@@ -69,9 +69,7 @@ class Image extends DataModel
             case "_relationType":
             case "_filename":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

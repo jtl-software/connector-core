@@ -17,57 +17,57 @@ class EmailTemplate extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var string
      */
-    protected $_name;
+    protected $_name = '';
     
     /**
      * @var string
      */
-    protected $_description;
+    protected $_description = '';
     
     /**
      * @var string
      */
-    protected $_emailType;
+    protected $_emailType = '';
     
     /**
      * @var string
      */
-    protected $_moduleId;
+    protected $_moduleId = '';
     
     /**
      * @var string
      */
-    protected $_filename;
+    protected $_filename = '';
     
     /**
      * @var bool
      */
-    protected $_isActive;
+    protected $_isActive = false;
     
     /**
      * @var bool
      */
-    protected $_isOii;
+    protected $_isOii = false;
     
     /**
      * @var bool
      */
-    protected $_isAgb;
+    protected $_isAgb = false;
     
     /**
      * @var bool
      */
-    protected $_isWrb;
+    protected $_isWrb = false;
     
     /**
      * @var int
      */
-    protected $_error;
+    protected $_error = 0;
     
     /**
      * EmailTemplate Setter
@@ -95,9 +95,7 @@ class EmailTemplate extends DataModel
             case "_moduleId":
             case "_filename":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
             case "_isActive":
@@ -105,9 +103,7 @@ class EmailTemplate extends DataModel
             case "_isAgb":
             case "_isWrb":
             
-                if (is_bool($value)) {
-                    $this->$name = (bool)$value;
-                }
+                $this->$name = (bool)$value;
                 break;
         
         }

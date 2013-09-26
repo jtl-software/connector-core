@@ -17,22 +17,22 @@ class ConfigItem extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_configGroupId;
+    protected $_configGroupId = 0;
     
     /**
      * @var int
      */
-    protected $_productId;
+    protected $_productId = 0;
     
     /**
      * @var int
      */
-    protected $_type;
+    protected $_type = 0;
     
     /**
      * @var bool
@@ -87,7 +87,7 @@ class ConfigItem extends DataModel
     /**
      * @var int
      */
-    protected $_sort;
+    protected $_sort = 0;
     
     /**
      * ConfigItem Setter
@@ -120,9 +120,7 @@ class ConfigItem extends DataModel
             case "_showSurcharge":
             case "_ignoreMultiplier":
             
-                if (is_bool($value)) {
-                    $this->$name = (bool)$value;
-                }
+                $this->$name = (bool)$value;
                 break;
         
             case "_minQuantity":

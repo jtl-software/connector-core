@@ -57,9 +57,7 @@ class ProductFunctionAttr extends DataModel
             case "_key":
             case "_value":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

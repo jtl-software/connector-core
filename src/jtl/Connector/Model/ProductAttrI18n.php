@@ -17,7 +17,7 @@ class ProductAttrI18n extends DataModel
     /**
      * @var string
      */
-    protected $_localeName;
+    protected $_localeName = '';
     
     /**
      * @var int
@@ -27,12 +27,12 @@ class ProductAttrI18n extends DataModel
     /**
      * @var string
      */
-    protected $_key;
+    protected $_key = '';
     
     /**
      * @var string
      */
-    protected $_value;
+    protected $_value = '';
     
     /**
      * ProductAttrI18n Setter
@@ -52,9 +52,7 @@ class ProductAttrI18n extends DataModel
             case "_key":
             case "_value":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
             case "_productAttrId":

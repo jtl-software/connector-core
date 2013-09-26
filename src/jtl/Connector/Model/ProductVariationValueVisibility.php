@@ -17,12 +17,12 @@ class ProductVariationValueVisibility extends DataModel
     /**
      * @var int
      */
-    protected $_customerGroupId;
+    protected $_customerGroupId = 0;
     
     /**
      * @var int
      */
-    protected $_productVariationValueId;
+    protected $_productVariationValueId = 0;
     
     /**
      * ProductVariationValueVisibility Setter

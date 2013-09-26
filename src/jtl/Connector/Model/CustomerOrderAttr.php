@@ -17,22 +17,22 @@ class CustomerOrderAttr extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var int
      */
-    protected $_customerOrderId;
+    protected $_customerOrderId = 0;
     
     /**
      * @var string
      */
-    protected $_key;
+    protected $_key = '';
     
     /**
      * @var string
      */
-    protected $_value;
+    protected $_value = '';
     
     /**
      * CustomerOrderAttr Setter
@@ -57,9 +57,7 @@ class CustomerOrderAttr extends DataModel
             case "_key":
             case "_value":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
         }

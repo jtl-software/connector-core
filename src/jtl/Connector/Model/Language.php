@@ -17,22 +17,22 @@ class Language extends DataModel
     /**
      * @var int
      */
-    protected $_id;
+    protected $_id = 0;
     
     /**
      * @var string
      */
-    protected $_nameEnglish;
+    protected $_nameEnglish = '';
     
     /**
      * @var string
      */
-    protected $_nameGerman;
+    protected $_nameGerman = '';
     
     /**
      * @var string
      */
-    protected $_localeName;
+    protected $_localeName = '';
     
     /**
      * @var bool
@@ -67,17 +67,13 @@ class Language extends DataModel
             case "_nameGerman":
             case "_localeName":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
             case "_isDefault":
             case "_isConnectorDefault":
             
-                if (is_bool($value)) {
-                    $this->$name = (bool)$value;
-                }
+                $this->$name = (bool)$value;
                 break;
         
         }

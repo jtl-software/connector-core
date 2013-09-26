@@ -17,7 +17,7 @@ class ProductI18n extends DataModel
     /**
      * @var string
      */
-    protected $_localeName;
+    protected $_localeName = '';
     
     /**
      * @var int
@@ -27,22 +27,22 @@ class ProductI18n extends DataModel
     /**
      * @var string
      */
-    protected $_name;
+    protected $_name = '';
     
     /**
      * @var string
      */
-    protected $_url;
+    protected $_url = '';
     
     /**
      * @var string
      */
-    protected $_description;
+    protected $_description = '';
     
     /**
      * @var string
      */
-    protected $_shortDescription;
+    protected $_shortDescription = '';
     
     /**
      * ProductI18n Setter
@@ -64,9 +64,7 @@ class ProductI18n extends DataModel
             case "_description":
             case "_shortDescription":
             
-                if (is_string($value) && strlen(trim($value)) > 0) {
-                    $this->$name = (string)$value;
-                }
+                $this->$name = (string)$value;
                 break;
         
             case "_productId":
