@@ -87,4 +87,8 @@ class Feature extends CoreController
         return $ret;
     }
 
+    public function statistic($params)
+    {
+        
+    }
 }
