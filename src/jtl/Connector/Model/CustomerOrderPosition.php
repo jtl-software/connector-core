@@ -47,11 +47,6 @@ class CustomerOrderPosition extends DataModel
     /**
      * @var double
      */
-    protected $_singlePrice = 0.0;
-    
-    /**
-     * @var double
-     */
     protected $_price = 0.0;
     
     /**
@@ -111,7 +106,6 @@ class CustomerOrderPosition extends DataModel
                 $this->$name = (string)$value;
                 break;
         
-            case "_singlePrice":
             case "_price":
             case "_vat":
             
