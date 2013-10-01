@@ -8,13 +8,6 @@
             ],
             "optional": false
         },
-        "basketId": {
-            "type": [
-                "int",
-                "null"
-            ],
-            "optional": true
-        },
         "customerId": {
             "type": [
                 "int",
@@ -30,13 +23,6 @@
             "optional": true
         },
         "billingAddressId": {
-            "type": [
-                "int",
-                "null"
-            ],
-            "optional": true
-        },
-        "paymentMethodId": {
             "type": [
                 "int",
                 "null"
@@ -64,9 +50,9 @@
             ],
             "optional": true
         },
-        "paymentMethodType": {
+        "estimatedDeliveryDate": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true
@@ -93,13 +79,6 @@
             "optional": true
         },
         "shippingMethodName": {
-            "type": [
-                "string",
-                "null"
-            ],
-            "optional": true
-        },
-        "paymentMethodName": {
             "type": [
                 "string",
                 "null"
