@@ -130,11 +130,6 @@ class Product extends DataModel
     protected $_isDivisible = false;
     
     /**
-     * @var double
-     */
-    protected $_packagingUnit = 1;
-    
-    /**
      * @var bool
      */
     protected $_considerBasePrice = false;
@@ -316,7 +311,6 @@ class Product extends DataModel
             case "_productWeight":
             case "_shippingWeight":
             case "_recommendedRetailPrice":
-            case "_packagingUnit":
             case "_basePriceValue":
             case "_takeOffQuantity":
             case "_inflowQuantity":

@@ -152,13 +152,6 @@
             ],
             "optional": false
         },
-        "packagingUnit": {
-            "type": [
-                "double",
-                "null"
-            ],
-            "optional": true
-        },
         "considerBasePrice": {
             "type": [
                 "bool",
