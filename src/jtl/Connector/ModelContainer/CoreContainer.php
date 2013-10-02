@@ -62,6 +62,34 @@ abstract class CoreContainer implements IModelContainer
     }
 
     /**
+     * Updates every object from type $type with given property values
+     *
+     * @param string $type
+     * @param multiple: mixed
+     * @return bool
+     */
+    public function update($type, array $kvs)
+    {
+        $type = strtolower($type);
+        if (isset($this->items[$type]) && $kvs !== null && count($kvs) > 0) {
+            $getter = "_" . lcfirst($this->items[$type][1]);
+
+            $objs = $this->$getter;
+            if ($objs !== null) {
+                foreach ($objs as $obj) {
+                    foreach ($kvs as $key => $value) {
+                        $obj->$key = $value;
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Convert the Container and SubItems into stdClass Object
      *
      * @param array $excludes            
