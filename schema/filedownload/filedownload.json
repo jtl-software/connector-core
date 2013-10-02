@@ -9,13 +9,6 @@
             ],
             "optional": true
         },
-        "identificationString": {
-            "type": [
-                "string",
-                "null"
-            ],
-            "optional": true
-        },
         "path": {
             "type": [
                 "string",

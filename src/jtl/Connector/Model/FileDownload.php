@@ -22,11 +22,6 @@ class FileDownload extends DataModel
     /**
      * @var string
      */
-    protected $_identificationString = '';
-    
-    /**
-     * @var string
-     */
     protected $_path = '';
     
     /**
@@ -75,8 +70,7 @@ class FileDownload extends DataModel
             
                 $this->$name = (int)$value;
                 break;
-        
-            case "_identificationString":
+                
             case "_path":
             case "_previewPath":
             case "_created":
