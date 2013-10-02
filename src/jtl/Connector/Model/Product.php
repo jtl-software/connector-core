@@ -15,244 +15,244 @@ use \jtl\Core\Model\DataModel;
 class Product extends DataModel
 {
     /**
-     * @var int
+     * @var int Unique id
      */
     protected $_id = 0;
     
     /**
-     * @var int
+     * @var int Id des Master-Artikels (bei Variationskombinationen)
      */
     protected $_masterProductId = 0;
     
     /**
-     * @var int
+     * @var int Hersteller-Id
      */
     protected $_manufacturerId = 0;
     
     /**
-     * @var int
+     * @var int Lieferstatus-Id
      */
     protected $_deliveryStatusId = 0;
     
     /**
-     * @var int
+     * @var int Artikeleinheit-Id
      */
     protected $_unitId = 0;
     
     /**
-     * @var int
+     * @var int Artikelgrundpreis-Id
      */
     protected $_basePriceUnitId = 0;
     
     /**
-     * @var int
+     * @var int Steuerklassen Id
      */
     protected $_taxClassId = 0;
     
     /**
-     * @var int
+     * @var int Versandklassen Id
      */
     protected $_shippingClassId = 0;
     
     /**
-     * @var string
+     * @var string Artikelnummer (SKU / Stock Keeping Unit)
      */
     protected $_sku = '';
     
     /**
-     * @var string
+     * @var string interne Artikelnotiz
      */
     protected $_note = '';
     
     /**
-     * @var double
+     * @var double Lagerbestand
      */
     protected $_stockLevel = 0;
     
     /**
-     * @var double
+     * @var double Umsatzsteuer in Prozent
      */
     protected $_vat = 0.0;
     
     /**
-     * @var double
+     * @var double Mindestbestellmenge
      */
     protected $_minimumOrderQuantity = 0.0;
     
     /**
-     * @var string
+     * @var string EAN / Barcode
      */
     protected $_ean = '';
     
     /**
-     * @var bool
+     * @var bool gibt an, ob es sich um ein Top-Produkt (Kennzeichnung in JTL-Wawi) handelt
      */
     protected $_isTopProduct = false;
     
     /**
-     * @var double
+     * @var double Artikelgewicht
      */
     protected $_productWeight = 0;
     
     /**
-     * @var double
+     * @var double Versandgewicht
      */
     protected $_shippingWeight = 0;
     
     /**
-     * @var bool
+     * @var bool gibt an, ob es sich um ein neues Produkt (Kennzeichnung in JTL-Wawi) handelt
      */
     protected $_isNew = false;
     
     /**
-     * @var double
+     * @var double Unverbindliche Preisempfehlung des Herstellers (Bruttopreis)
      */
     protected $_recommendedRetailPrice = 0.0;
     
     /**
-     * @var bool
+     * @var bool Lagerbestand beachten
      */
     protected $_considerStock = false;
     
     /**
-     * @var bool
+     * @var bool Überverkäufe (negativen Lagerbestand) erlauben
      */
     protected $_permitNegativeStock = false;
     
     /**
-     * @var bool
+     * @var bool Lagerbestand in Variationen beachten
      */
     protected $_considerVariationStock = false;
     
     /**
-     * @var bool
+     * @var bool Produktmenge teilbar. true, wenn auch Dezimalwerte als Bestellmengen erlaubt sind. false, wenn nur ganzzahlige Mengen von dem Produkt gekauft werden dürfen. 
      */
     protected $_isDivisible = false;
     
     /**
-     * @var bool
+     * @var bool Grundpreis beachten
      */
     protected $_considerBasePrice = false;
     
     /**
-     * @var double
+     * @var double Grundpreis Faktor = Verkaufsmenge / Grundpreismenge. Beispiel: Ein Produkt, das in einer Verkaufsmenge von 250g verkauft wird, muss den Grundpreis für 100g ausweisen: 250 / 100 = 2.5
      */
     protected $_basePriceValue = 0.0;
     
     /**
-     * @var string
+     * @var string Suchbegriffe (nicht mehrsprachig!). Vorwiegend für internationale Synonyme nutzen
      */
     protected $_keywords = '';
     
     /**
-     * @var int
+     * @var int Sortiernummer für Positionierung nach Sortiernummer in Artikellisten
      */
     protected $_sort = 0;
     
     /**
-     * @var string
+     * @var string Erstellungsdatum
      */
     protected $_created = "0000-00-00";
     
     /**
-     * @var string
+     * @var string Erscheinungsdatum (in der Regel für vorbestellbare Artikel z.B. Blu-Rays)
      */
     protected $_availableFrom = "0000-00-00";
     
     /**
-     * @var string
+     * @var string Herstellernummer (HAN)
      */
     protected $_manufacturerNumber = '';
     
     /**
-     * @var string
+     * @var string Seriennummer
      */
     protected $_serialNumber = '';
     
     /**
-     * @var string
+     * @var string ISBN
      */
     protected $_isbn = '';
     
     /**
-     * @var string
+     * @var string ASIN
      */
     protected $_asin = '';
     
     /**
-     * @var string
+     * @var string UN-Nummer / Stoffnummer
      */
     protected $_unNumber = '';
     
     /**
-     * @var string
+     * @var string Gefahrnummer / Kemler-Zahl
      */
     protected $_hazardIdNumber = '';
     
     /**
-     * @var string
+     * @var string Zolltarifnummer (TARIC)
      */
     protected $_taric = '';
     
     /**
-     * @var bool
+     * @var bool True, wenn andere Produkte über MasterProductId auf diesen Artikel referenzieren. 
      */
     protected $_isMasterProduct = false;
     
     /**
-     * @var double
+     * @var double Abnahmeintervall. Das Produkt kann nur in Mengen, die durch das Abnahmeintervall teilbar sind, erworben werden. 
      */
     protected $_takeOffQuantity = 0.0;
     
     /**
-     * @var int
+     * @var int Stücklisten Id. Darf die gleiche Id wie Product.id nutzen. 
      */
     protected $_setArticleId = 0;
     
     /**
-     * @var string
+     * @var string Universal Product Code (UPC)
      */
     protected $_upc = '';
     
     /**
-     * @var string
+     * @var string Herkunftsland
      */
     protected $_originCountry = '';
     
     /**
-     * @var string
+     * @var string Ebay Item Part Number (ePID)
      */
     protected $_epid = '';
     
     /**
-     * @var int
+     * @var int Warengruppen-Id
      */
     protected $_productTypeId = 0;
     
     /**
-     * @var double
+     * @var double Menge im Zulauf
      */
     protected $_inflowQuantity = 0.0;
     
     /**
-     * @var string
+     * @var string voraussichtliches Zulaufdatum
      */
     protected $_inflowDate = '';
     
     /**
-     * @var double
+     * @var double Lieferantenlagerbestand des Standard-Lieferanten
      */
     protected $_supplierStockLevel = 0.0;
     
     /**
-     * @var double
+     * @var double Lieferzeit des Standard-Lieferanten
      */
     protected $_supplierDeliveryTime = 0.0;
     
     /**
-     * @var string
+     * @var string Mindesthaltbarkeitsdatum
      */
-    protected $_bestBefore = '';
+    protected $_bestBefore = '0000-00-00';
     
     /**
      * Product Setter
