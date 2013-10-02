@@ -15,197 +15,199 @@ use \jtl\Core\Model\DataModel;
 class Product extends DataModel
 {
     /**
-     * @var int Unique id
+     * @var int unique id
      */
     protected $_id = 0;
     
     /**
-     * @var int Id des Master-Artikels (bei Variationskombinationen)
+     * @var int Master product id
      */
     protected $_masterProductId = 0;
     
     /**
-     * @var int Hersteller-Id
+     * @var int Manufacturer id
      */
     protected $_manufacturerId = 0;
     
     /**
-     * @var int Lieferstatus-Id
+     * @var int Delivery status id
      */
     protected $_deliveryStatusId = 0;
     
     /**
-     * @var int Artikeleinheit-Id
+     * @var int Unit id
      */
     protected $_unitId = 0;
     
     /**
-     * @var int Artikelgrundpreis-Id
+     * @var int Unit id for base price
      */
     protected $_basePriceUnitId = 0;
     
     /**
-     * @var int Steuerklassen Id
+     * @var int Tax class id 
      */
     protected $_taxClassId = 0;
     
     /**
-     * @var int Versandklassen Id
+     * @var int shipping class id
      */
     protected $_shippingClassId = 0;
     
     /**
-     * @var string Artikelnummer (SKU / Stock Keeping Unit)
+     * @var string stock keeping unit
      */
     protected $_sku = '';
     
     /**
-     * @var string interne Artikelnotiz
+     * @var string internal note
      */
     protected $_note = '';
     
     /**
-     * @var double Lagerbestand
+     * @var double Stock level
      */
     protected $_stockLevel = 0;
     
     /**
-     * @var double Umsatzsteuer in Prozent
+     * @var double Tax on the purchase Price / Value added tax (VAT)
      */
     protected $_vat = 0.0;
     
     /**
-     * @var double Mindestbestellmenge
+     * @var double Minimum order quantity
      */
     protected $_minimumOrderQuantity = 0.0;
     
     /**
-     * @var string EAN / Barcode
+     * @var string European article number (EAN)
      */
     protected $_ean = '';
     
     /**
-     * @var bool gibt an, ob es sich um ein Top-Produkt (Kennzeichnung in JTL-Wawi) handelt
+     * @var bool Flag for top product
      */
     protected $_isTopProduct = false;
     
     /**
-     * @var double Artikelgewicht
+     * @var double Product weight
      */
     protected $_productWeight = 0;
     
     /**
-     * @var double Versandgewicht
+     * @var double Shipping weight
      */
     protected $_shippingWeight = 0;
     
     /**
-     * @var bool gibt an, ob es sich um ein neues Produkt (Kennzeichnung in JTL-Wawi) handelt
+     * @var bool Flag for new products
      */
     protected $_isNew = false;
     
     /**
-     * @var double Unverbindliche Preisempfehlung des Herstellers (Bruttopreis)
+     * @var double Recommended retail price
      */
     protected $_recommendedRetailPrice = 0.0;
     
     /**
-     * @var bool Lagerbestand beachten
+     * @var bool Consider stock level
      */
     protected $_considerStock = false;
     
     /**
-     * @var bool Überverkäufe (negativen Lagerbestand) erlauben
+     * @var bool Permit oversale when stockLevel is 0 and product considers stock
      */
     protected $_permitNegativeStock = false;
     
     /**
-     * @var bool Lagerbestand in Variationen beachten
+     * @var bool Consider stock level in variations
      */
     protected $_considerVariationStock = false;
     
     /**
-     * @var bool Produktmenge teilbar. true, wenn auch Dezimalwerte als Bestellmengen erlaubt sind. false, wenn nur ganzzahlige Mengen von dem Produkt gekauft werden dürfen. 
+     * @var bool Flag divisible product. Set to true to allow non-integer quantities for product-purchase. Set to false to only allow integer quantities. 
      */
     protected $_isDivisible = false;
     
     /**
-     * @var bool Grundpreis beachten
+     * @var bool Consider base price. Base price is only considered and displayed if value is true. 
      */
     protected $_considerBasePrice = false;
     
     /**
-     * @var double Grundpreis Faktor = Verkaufsmenge / Grundpreismenge. Beispiel: Ein Produkt, das in einer Verkaufsmenge von 250g verkauft wird, muss den Grundpreis für 100g ausweisen: 250 / 100 = 2.5
+     * @var double Base price value. Calculate Base price value by dividing total filling quantity by base price filling quantity. E.g.: 250g / 100g = 2.5. 
      */
     protected $_basePriceValue = 0.0;
     
     /**
-     * @var string Suchbegriffe (nicht mehrsprachig!). Vorwiegend für internationale Synonyme nutzen
+     * @var string Keywords (not multilingual). Use keywords for international names and synonyms.
      */
     protected $_keywords = '';
     
     /**
-     * @var int Sortiernummer für Positionierung nach Sortiernummer in Artikellisten
+     * @var int Sort order number
      */
     protected $_sort = 0;
     
     /**
-     * @var string Erstellungsdatum
+     * @var string Date created
      */
     protected $_created = "0000-00-00";
     
     /**
-     * @var string Erscheinungsdatum (in der Regel für vorbestellbare Artikel z.B. Blu-Rays)
+     * @var string publication date, when product becomes available
      */
     protected $_availableFrom = "0000-00-00";
     
     /**
-     * @var string Herstellernummer (HAN)
+     * @var string Manufacturer number (HAN)
      */
     protected $_manufacturerNumber = '';
     
     /**
-     * @var string Seriennummer
+     * @var string Serial Number
      */
     protected $_serialNumber = '';
     
     /**
-     * @var string ISBN
+     * @var string International Standard Book Number (ISBN)
      */
     protected $_isbn = '';
     
     /**
-     * @var string ASIN
+     * @var string Amazon Standard Identification Number (ASIN)
      */
     protected $_asin = '';
     
     /**
-     * @var string UN-Nummer / Stoffnummer
+     * @var string UN number / UN ID (four digit number to identify hazardous substances)
      */
     protected $_unNumber = '';
     
     /**
-     * @var string Gefahrnummer / Kemler-Zahl
+     * @var string Hazard identification number
+     * @link http://de.wikipedia.org/wiki/Liste_der_Nummern_zur_Kennzeichnung_der_Gefahr
      */
     protected $_hazardIdNumber = '';
     
     /**
-     * @var string Zolltarifnummer (TARIC)
+     * @var string TARIC code
+     * @see http://en.wikipedia.org/wiki/TARIC_code
      */
     protected $_taric = '';
     
     /**
-     * @var bool True, wenn andere Produkte über MasterProductId auf diesen Artikel referenzieren. 
+     * @var bool flag whether or not other products reference this product by masterProductId
      */
     protected $_isMasterProduct = false;
     
     /**
-     * @var double Abnahmeintervall. Das Produkt kann nur in Mengen, die durch das Abnahmeintervall teilbar sind, erworben werden. 
+     * @var double Take off quantity. Product can only be purchased in quantities that are divisible by the specified takeOffQuantity. 
      */
     protected $_takeOffQuantity = 0.0;
     
     /**
-     * @var int Stücklisten Id. Darf die gleiche Id wie Product.id nutzen. 
+     * @var int Set article id / bill of materials id 
      */
     protected $_setArticleId = 0;
     
@@ -215,7 +217,7 @@ class Product extends DataModel
     protected $_upc = '';
     
     /**
-     * @var string Herkunftsland
+     * @var string Country of origin
      */
     protected $_originCountry = '';
     
@@ -225,32 +227,32 @@ class Product extends DataModel
     protected $_epid = '';
     
     /**
-     * @var int Warengruppen-Id
+     * @var int Product type id
      */
     protected $_productTypeId = 0;
     
     /**
-     * @var double Menge im Zulauf
+     * @var double Inflow quantity. The inflow quantity that will arrive on $inflowDate.
      */
     protected $_inflowQuantity = 0.0;
     
     /**
-     * @var string voraussichtliches Zulaufdatum
+     * @var string Estimated inflow date
      */
     protected $_inflowDate = '';
     
     /**
-     * @var double Lieferantenlagerbestand des Standard-Lieferanten
+     * @var double Stock level of main supplier
      */
     protected $_supplierStockLevel = 0.0;
     
     /**
-     * @var double Lieferzeit des Standard-Lieferanten
+     * @var double Delivery time of main supplier
      */
     protected $_supplierDeliveryTime = 0.0;
     
     /**
-     * @var string Mindesthaltbarkeitsdatum
+     * @var string Best-before date
      */
     protected $_bestBefore = '0000-00-00';
     
