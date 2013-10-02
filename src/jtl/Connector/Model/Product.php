@@ -192,7 +192,7 @@ class Product extends DataModel
     
     /**
      * @var string TARIC code
-     * @see http://en.wikipedia.org/wiki/TARIC_code
+     * @link http://en.wikipedia.org/wiki/TARIC_code
      */
     protected $_taric = '';
     
