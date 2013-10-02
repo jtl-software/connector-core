@@ -15,7 +15,7 @@ use \jtl\Core\Model\DataModel;
 class Product extends DataModel
 {
     /**
-     * @var int unique id
+     * @var int Unique id
      */
     protected $_id = 0;
     
@@ -50,17 +50,17 @@ class Product extends DataModel
     protected $_taxClassId = 0;
     
     /**
-     * @var int shipping class id
+     * @var int Shipping class id
      */
     protected $_shippingClassId = 0;
     
     /**
-     * @var string stock keeping unit
+     * @var string Stock keeping unit
      */
     protected $_sku = '';
     
     /**
-     * @var string internal note
+     * @var string Internal note
      */
     protected $_note = '';
     
@@ -197,7 +197,7 @@ class Product extends DataModel
     protected $_taric = '';
     
     /**
-     * @var bool flag whether or not other products reference this product by masterProductId
+     * @var bool Flag whether or not other products reference this product by masterProductId
      */
     protected $_isMasterProduct = false;
     
