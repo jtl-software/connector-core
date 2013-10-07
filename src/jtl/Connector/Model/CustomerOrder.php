@@ -45,9 +45,9 @@ class CustomerOrder extends DataModel
     protected $_localeName = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_currencyIso = 0;
+    protected $_currencyIso = '';
     
     /**
      * @var string
@@ -162,13 +162,13 @@ class CustomerOrder extends DataModel
             case "_customerId":
             case "_shippingAddressId":
             case "_billingAddressId":
-            case "_shippingMethodId":
-            case "_currencyIso":
+            case "_shippingMethodId":            
             
                 $this->$name = (int)$value;
                 break;
         
             case "_localeName":
+            case "_currencyIso":
             case "_estimatedDeliveryDate":
             case "_session":
             case "_shippingMethodName":

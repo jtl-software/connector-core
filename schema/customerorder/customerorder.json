@@ -45,7 +45,7 @@
         },
         "currencyIso": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true
