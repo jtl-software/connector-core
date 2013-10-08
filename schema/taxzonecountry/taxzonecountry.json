@@ -1,0 +1,29 @@
+{
+    "title": "TaxZoneCountry Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        },
+        "taxZoneId": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        },
+        "countryIso": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        }
+    },
+    "required": [
+        "id",
+        "taxZoneId",
+        "countryIso"
+    ]
+}
