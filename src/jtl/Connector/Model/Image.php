@@ -15,14 +15,14 @@ use \jtl\Core\Model\DataModel;
 class Image extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_masterImageId = 0;
+    protected $_masterImageId = '';
     
     /**
      * @var string
@@ -60,16 +60,16 @@ class Image extends DataModel
         switch ($name) {
             case "_id":
             case "_masterImageId":
-            case "_foreignKey":
-            case "_sort":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_relationType":
             case "_filename":
             
                 $this->$name = (string)$value;
+                break;
+        
+            case "_foreignKey":
+            case "_sort":
+            
+                $this->$name = (int)$value;
                 break;
         
         }

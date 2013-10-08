@@ -4,28 +4,28 @@
     "properties": {
         "id": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true
         },
         "productId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true
         },
         "shippingClassId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true
         },
         "customerOrderId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true
@@ -81,7 +81,7 @@
         },
         "configItemId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true

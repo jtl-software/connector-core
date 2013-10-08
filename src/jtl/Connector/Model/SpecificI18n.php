@@ -20,9 +20,9 @@ class SpecificI18n extends DataModel
     protected $_localeName = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_specificId = 0;
+    protected $_specificId = '';
     
     /**
      * @var string
@@ -44,14 +44,10 @@ class SpecificI18n extends DataModel
         
         switch ($name) {
             case "_localeName":
+            case "_specificId":
             case "_name":
             
                 $this->$name = (string)$value;
-                break;
-        
-            case "_specificId":
-            
-                $this->$name = (int)$value;
                 break;
         
         }

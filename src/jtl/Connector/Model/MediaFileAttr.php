@@ -20,9 +20,9 @@ class MediaFileAttr extends DataModel
     protected $_mediaFileAttr = 0;
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_mediaFileId = 0;
+    protected $_mediaFileId = '';
     
     /**
      * @var string
@@ -54,11 +54,11 @@ class MediaFileAttr extends DataModel
         
         switch ($name) {
             case "_mediaFileAttr":
-            case "_mediaFileId":
             
                 $this->$name = (int)$value;
                 break;
         
+            case "_mediaFileId":
             case "_localeName":
             case "_name":
             case "_value":

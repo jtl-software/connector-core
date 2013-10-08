@@ -4,13 +4,13 @@
     "properties": {
         "id": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "parentCategoryId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true

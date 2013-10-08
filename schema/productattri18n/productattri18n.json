@@ -10,7 +10,7 @@
         },
         "productAttrId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },

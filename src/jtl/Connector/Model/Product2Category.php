@@ -15,19 +15,19 @@ use \jtl\Core\Model\DataModel;
 class Product2Category extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_categoryId = 0;
+    protected $_categoryId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_productId = 0;
+    protected $_productId = '';
     
     /**
      * Product2Category Setter
@@ -47,7 +47,7 @@ class Product2Category extends DataModel
             case "_categoryId":
             case "_productId":
             
-                $this->$name = (int)$value;
+                $this->$name = (string)$value;
                 break;
         
         }

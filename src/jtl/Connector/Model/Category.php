@@ -15,14 +15,14 @@ use \jtl\Core\Model\DataModel;
 class Category extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_parentCategoryId = 0;
+    protected $_parentCategoryId = '';
     
     /**
      * @var int
@@ -45,6 +45,10 @@ class Category extends DataModel
         switch ($name) {
             case "_id":
             case "_parentCategoryId":
+            
+                $this->$name = (string)$value;
+                break;
+        
             case "_sort":
             
                 $this->$name = (int)$value;

@@ -15,14 +15,14 @@ use \jtl\Core\Model\DataModel;
 class ProductWarehouseInfo extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_productId = 0;
+    protected $_productId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_warehouseId = 0;
+    protected $_warehouseId = '';
     
     /**
      * @var double
@@ -55,19 +55,15 @@ class ProductWarehouseInfo extends DataModel
         switch ($name) {
             case "_productId":
             case "_warehouseId":
+            case "_inflowDate":
             
-                $this->$name = (int)$value;
+                $this->$name = (string)$value;
                 break;
         
             case "_stockLevel":
             case "_inflowQuantity":
             
                 $this->$name = (double)$value;
-                break;
-        
-            case "_inflowDate":
-            
-                $this->$name = (string)$value;
                 break;
         
         }

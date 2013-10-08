@@ -4,13 +4,13 @@
     "properties": {
         "productId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "fileDownloadId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         }

@@ -10,7 +10,7 @@
         },
         "specificValueId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },

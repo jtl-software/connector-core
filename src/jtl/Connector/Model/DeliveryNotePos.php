@@ -15,9 +15,9 @@ use \jtl\Core\Model\DataModel;
 class DeliveryNotePos extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
      * @var int
@@ -64,6 +64,13 @@ class DeliveryNotePos extends DataModel
         
         switch ($name) {
             case "_id":
+            case "_serialNumber":
+            case "_batchNumber":
+            case "_bestBefore":
+            
+                $this->$name = (string)$value;
+                break;
+        
             case "_orderPosition":
             case "_stock":
             
@@ -73,13 +80,6 @@ class DeliveryNotePos extends DataModel
             case "_quantity":
             
                 $this->$name = (double)$value;
-                break;
-        
-            case "_serialNumber":
-            case "_batchNumber":
-            case "_bestBefore":
-            
-                $this->$name = (string)$value;
                 break;
         
         }

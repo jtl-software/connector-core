@@ -4,50 +4,50 @@
     "properties": {
         "id": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "masterProductId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "manufacturerId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "deliveryStatusId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "unitId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "basePriceUnitId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true
         },
         "taxClassId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "shippingClassId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
@@ -128,7 +128,7 @@
         },
         "considerStock": {
             "type": [
-                "bool"
+                "string"
             ],
             "optional": false
         },
@@ -141,7 +141,7 @@
         },
         "considerVariationStock": {
             "type": [
-                "bool",
+                "string",
                 "null"
             ],
             "optional": true
@@ -154,7 +154,7 @@
         },
         "considerBasePrice": {
             "type": [
-                "bool",
+                "string",
                 "null"
             ],
             "optional": true
@@ -254,7 +254,7 @@
         },
         "setArticleId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
@@ -281,7 +281,7 @@
         },
         "productTypeId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },

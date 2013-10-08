@@ -15,9 +15,9 @@ use \jtl\Core\Model\DataModel;
 class Specific extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
      * @var int
@@ -54,16 +54,16 @@ class Specific extends DataModel
         
         switch ($name) {
             case "_id":
-            case "_sort":
-            case "_global":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_name":
             case "_type":
             
                 $this->$name = (string)$value;
+                break;
+        
+            case "_sort":
+            case "_global":
+            
+                $this->$name = (int)$value;
                 break;
         
         }

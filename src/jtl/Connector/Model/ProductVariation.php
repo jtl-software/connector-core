@@ -15,14 +15,14 @@ use \jtl\Core\Model\DataModel;
 class ProductVariation extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_productId = 0;
+    protected $_productId = '';
     
     /**
      * @var string
@@ -60,11 +60,6 @@ class ProductVariation extends DataModel
         switch ($name) {
             case "_id":
             case "_productId":
-            case "_sort":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_name":
             case "_type":
             
@@ -74,6 +69,11 @@ class ProductVariation extends DataModel
             case "_isSelectable":
             
                 $this->$name = (bool)$value;
+                break;
+        
+            case "_sort":
+            
+                $this->$name = (int)$value;
                 break;
         
         }

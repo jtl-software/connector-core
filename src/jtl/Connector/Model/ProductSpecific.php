@@ -15,19 +15,19 @@ use \jtl\Core\Model\DataModel;
 class ProductSpecific extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_specificValueId = 0;
+    protected $_specificValueId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_productId = 0;
+    protected $_productId = '';
     
     /**
      * ProductSpecific Setter
@@ -47,7 +47,7 @@ class ProductSpecific extends DataModel
             case "_specificValueId":
             case "_productId":
             
-                $this->$name = (int)$value;
+                $this->$name = (string)$value;
                 break;
         
         }

@@ -4,21 +4,21 @@
     "properties": {
         "id": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true
         },
         "specificValueId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true
         },
         "productId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true

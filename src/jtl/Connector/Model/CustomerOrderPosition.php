@@ -15,24 +15,24 @@ use \jtl\Core\Model\DataModel;
 class CustomerOrderPosition extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_productId = 0;
+    protected $_productId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_shippingClassId = 0;
+    protected $_shippingClassId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_customerOrderId = 0;
+    protected $_customerOrderId = '';
     
     /**
      * @var string
@@ -70,9 +70,9 @@ class CustomerOrderPosition extends DataModel
     protected $_unique = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_configItemId = 0;
+    protected $_configItemId = '';
     
     /**
      * CustomerOrderPosition Setter
@@ -92,16 +92,10 @@ class CustomerOrderPosition extends DataModel
             case "_productId":
             case "_shippingClassId":
             case "_customerOrderId":
-            case "_quantity":
-            case "_type":
-            case "_configItemId":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_name":
             case "_sku":
             case "_unique":
+            case "_configItemId":
             
                 $this->$name = (string)$value;
                 break;
@@ -110,6 +104,12 @@ class CustomerOrderPosition extends DataModel
             case "_vat":
             
                 $this->$name = (double)$value;
+                break;
+        
+            case "_quantity":
+            case "_type":
+            
+                $this->$name = (int)$value;
                 break;
         
         }

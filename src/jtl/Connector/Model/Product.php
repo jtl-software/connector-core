@@ -15,246 +15,244 @@ use \jtl\Core\Model\DataModel;
 class Product extends DataModel
 {
     /**
-     * @var int Unique id
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int Master product id
+     * @var string
      */
-    protected $_masterProductId = 0;
+    protected $_masterProductId = '';
     
     /**
-     * @var int Manufacturer id
+     * @var string
      */
-    protected $_manufacturerId = 0;
+    protected $_manufacturerId = '';
     
     /**
-     * @var int Delivery status id
+     * @var string
      */
-    protected $_deliveryStatusId = 0;
+    protected $_deliveryStatusId = '';
     
     /**
-     * @var int Unit id
+     * @var string
      */
-    protected $_unitId = 0;
+    protected $_unitId = '';
     
     /**
-     * @var int Unit id for base price
+     * @var string
      */
-    protected $_basePriceUnitId = 0;
+    protected $_basePriceUnitId = '';
     
     /**
-     * @var int Tax class id 
+     * @var string
      */
-    protected $_taxClassId = 0;
+    protected $_taxClassId = '';
     
     /**
-     * @var int Shipping class id
+     * @var string
      */
-    protected $_shippingClassId = 0;
+    protected $_shippingClassId = '';
     
     /**
-     * @var string Stock keeping unit
+     * @var string
      */
     protected $_sku = '';
     
     /**
-     * @var string Internal note
+     * @var string
      */
     protected $_note = '';
     
     /**
-     * @var double Stock level
+     * @var double
      */
     protected $_stockLevel = 0;
     
     /**
-     * @var double Tax on the purchase Price / Value added tax (VAT)
+     * @var double
      */
     protected $_vat = 0.0;
     
     /**
-     * @var double Minimum order quantity
+     * @var double
      */
     protected $_minimumOrderQuantity = 0.0;
     
     /**
-     * @var string European article number (EAN)
+     * @var string
      */
     protected $_ean = '';
     
     /**
-     * @var bool Flag for top product
+     * @var bool
      */
     protected $_isTopProduct = false;
     
     /**
-     * @var double Product weight
+     * @var double
      */
     protected $_productWeight = 0;
     
     /**
-     * @var double Shipping weight
+     * @var double
      */
     protected $_shippingWeight = 0;
     
     /**
-     * @var bool Flag for new products
+     * @var bool
      */
     protected $_isNew = false;
     
     /**
-     * @var double Recommended retail price
+     * @var double
      */
     protected $_recommendedRetailPrice = 0.0;
     
     /**
-     * @var bool Consider stock level
+     * @var string
      */
-    protected $_considerStock = false;
+    protected $_considerStock = '';
     
     /**
-     * @var bool Permit oversale when stockLevel is 0 and product considers stock
+     * @var bool
      */
     protected $_permitNegativeStock = false;
     
     /**
-     * @var bool Consider stock level in variations
+     * @var string
      */
-    protected $_considerVariationStock = false;
+    protected $_considerVariationStock = '';
     
     /**
-     * @var bool Flag divisible product. Set to true to allow non-integer quantities for product-purchase. Set to false to only allow integer quantities. 
+     * @var bool
      */
     protected $_isDivisible = false;
     
     /**
-     * @var bool Consider base price. Base price is only considered and displayed if value is true. 
+     * @var string
      */
-    protected $_considerBasePrice = false;
+    protected $_considerBasePrice = '';
     
     /**
-     * @var double Base price value. Calculate Base price value by dividing total filling quantity by base price filling quantity. E.g.: 250g / 100g = 2.5. 
+     * @var double
      */
     protected $_basePriceValue = 0.0;
     
     /**
-     * @var string Keywords (not multilingual). Use keywords for international names and synonyms.
+     * @var string
      */
     protected $_keywords = '';
     
     /**
-     * @var int Sort order number
+     * @var int
      */
     protected $_sort = 0;
     
     /**
-     * @var string Date created
+     * @var string
      */
     protected $_created = "0000-00-00";
     
     /**
-     * @var string publication date, when product becomes available
+     * @var string
      */
     protected $_availableFrom = "0000-00-00";
     
     /**
-     * @var string Manufacturer number (HAN)
+     * @var string
      */
     protected $_manufacturerNumber = '';
     
     /**
-     * @var string Serial Number
+     * @var string
      */
     protected $_serialNumber = '';
     
     /**
-     * @var string International Standard Book Number (ISBN)
+     * @var string
      */
     protected $_isbn = '';
     
     /**
-     * @var string Amazon Standard Identification Number (ASIN)
+     * @var string
      */
     protected $_asin = '';
     
     /**
-     * @var string UN number / UN ID (four digit number to identify hazardous substances)
+     * @var string
      */
     protected $_unNumber = '';
     
     /**
-     * @var string Hazard identification number
-     * @link http://de.wikipedia.org/wiki/Liste_der_Nummern_zur_Kennzeichnung_der_Gefahr
+     * @var string
      */
     protected $_hazardIdNumber = '';
     
     /**
-     * @var string TARIC code
-     * @link http://en.wikipedia.org/wiki/TARIC_code
+     * @var string
      */
     protected $_taric = '';
     
     /**
-     * @var bool Flag whether or not other products reference this product by masterProductId
+     * @var bool
      */
     protected $_isMasterProduct = false;
     
     /**
-     * @var double Take off quantity. Product can only be purchased in quantities that are divisible by the specified takeOffQuantity. 
+     * @var double
      */
     protected $_takeOffQuantity = 0.0;
     
     /**
-     * @var int Set article id / bill of materials id 
+     * @var string
      */
-    protected $_setArticleId = 0;
+    protected $_setArticleId = '';
     
     /**
-     * @var string Universal Product Code (UPC)
+     * @var string
      */
     protected $_upc = '';
     
     /**
-     * @var string Country of origin
+     * @var string
      */
     protected $_originCountry = '';
     
     /**
-     * @var string Ebay Item Part Number (ePID)
+     * @var string
      */
     protected $_epid = '';
     
     /**
-     * @var int Product type id
+     * @var string
      */
-    protected $_productTypeId = 0;
+    protected $_productTypeId = '';
     
     /**
-     * @var double Inflow quantity. The inflow quantity that will arrive on $inflowDate.
+     * @var double
      */
     protected $_inflowQuantity = 0.0;
     
     /**
-     * @var string Estimated inflow date
+     * @var string
      */
     protected $_inflowDate = '';
     
     /**
-     * @var double Stock level of main supplier
+     * @var double
      */
     protected $_supplierStockLevel = 0.0;
     
     /**
-     * @var double Delivery time of main supplier
+     * @var double
      */
     protected $_supplierDeliveryTime = 0.0;
     
     /**
-     * @var string Best-before date
+     * @var string
      */
-    protected $_bestBefore = '0000-00-00';
+    protected $_bestBefore = '';
     
     /**
      * Product Setter
@@ -278,16 +276,12 @@ class Product extends DataModel
             case "_basePriceUnitId":
             case "_taxClassId":
             case "_shippingClassId":
-            case "_sort":
-            case "_setArticleId":
-            case "_productTypeId":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_sku":
             case "_note":
             case "_ean":
+            case "_considerStock":
+            case "_considerVariationStock":
+            case "_considerBasePrice":
             case "_keywords":
             case "_created":
             case "_availableFrom":
@@ -298,9 +292,11 @@ class Product extends DataModel
             case "_unNumber":
             case "_hazardIdNumber":
             case "_taric":
+            case "_setArticleId":
             case "_upc":
             case "_originCountry":
             case "_epid":
+            case "_productTypeId":
             case "_inflowDate":
             case "_bestBefore":
             
@@ -324,14 +320,16 @@ class Product extends DataModel
         
             case "_isTopProduct":
             case "_isNew":
-            case "_considerStock":
             case "_permitNegativeStock":
-            case "_considerVariationStock":
             case "_isDivisible":
-            case "_considerBasePrice":
             case "_isMasterProduct":
             
                 $this->$name = (bool)$value;
+                break;
+        
+            case "_sort":
+            
+                $this->$name = (int)$value;
                 break;
         
         }

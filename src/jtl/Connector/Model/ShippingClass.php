@@ -15,9 +15,9 @@ use \jtl\Core\Model\DataModel;
 class ShippingClass extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
      * @var string
@@ -39,10 +39,6 @@ class ShippingClass extends DataModel
         
         switch ($name) {
             case "_id":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_name":
             
                 $this->$name = (string)$value;

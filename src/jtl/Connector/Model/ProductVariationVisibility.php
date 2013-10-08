@@ -15,14 +15,14 @@ use \jtl\Core\Model\DataModel;
 class ProductVariationVisibility extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_customerGroupId = 0;
+    protected $_customerGroupId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_productVariationId = 0;
+    protected $_productVariationId = '';
     
     /**
      * ProductVariationVisibility Setter
@@ -41,7 +41,7 @@ class ProductVariationVisibility extends DataModel
             case "_customerGroupId":
             case "_productVariationId":
             
-                $this->$name = (int)$value;
+                $this->$name = (string)$value;
                 break;
         
         }

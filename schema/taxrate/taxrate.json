@@ -4,20 +4,20 @@
     "properties": {
         "id": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "taxZoneId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true
         },
         "taxClassId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true

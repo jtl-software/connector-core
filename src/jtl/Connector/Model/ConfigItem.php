@@ -15,19 +15,19 @@ use \jtl\Core\Model\DataModel;
 class ConfigItem extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_configGroupId = 0;
+    protected $_configGroupId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_productId = 0;
+    protected $_productId = '';
     
     /**
      * @var int
@@ -106,6 +106,10 @@ class ConfigItem extends DataModel
             case "_id":
             case "_configGroupId":
             case "_productId":
+            
+                $this->$name = (string)$value;
+                break;
+        
             case "_type":
             case "_sort":
             

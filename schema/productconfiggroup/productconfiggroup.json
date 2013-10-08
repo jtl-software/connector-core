@@ -2,15 +2,21 @@
     "title": "ProductConfigGroup Model",
     "type": "object",
     "properties": {
+        "id": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        },
         "configGroupId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "productId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
@@ -22,6 +28,7 @@
         }
     },
     "required": [
+        "id",
         "configGroupId",
         "productId",
         "sort"

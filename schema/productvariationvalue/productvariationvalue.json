@@ -4,13 +4,13 @@
     "properties": {
         "id": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "productVariationId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true
@@ -45,7 +45,7 @@
         },
         "packagingUnitId": {
             "type": [
-                "double",
+                "string",
                 "null"
             ],
             "optional": true

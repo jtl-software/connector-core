@@ -4,13 +4,13 @@
     "properties": {
         "customerGroupId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "productVariationValueId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         }

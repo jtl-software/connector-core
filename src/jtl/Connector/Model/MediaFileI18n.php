@@ -15,9 +15,9 @@ use \jtl\Core\Model\DataModel;
 class MediaFileI18n extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_mediaFileId = 0;
+    protected $_mediaFileId = '';
     
     /**
      * @var string
@@ -49,10 +49,6 @@ class MediaFileI18n extends DataModel
         
         switch ($name) {
             case "_mediaFileId":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_localeName":
             case "_name":
             case "_description":

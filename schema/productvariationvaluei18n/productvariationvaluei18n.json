@@ -10,7 +10,7 @@
         },
         "productVariationValueId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },

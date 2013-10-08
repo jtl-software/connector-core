@@ -15,9 +15,9 @@ use \jtl\Core\Model\DataModel;
 class Currency extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
      * @var string
@@ -74,10 +74,6 @@ class Currency extends DataModel
         
         switch ($name) {
             case "_id":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_name":
             case "_iso":
             case "_nameHtml":

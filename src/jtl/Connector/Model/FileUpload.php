@@ -15,14 +15,14 @@ use \jtl\Core\Model\DataModel;
 class FileUpload extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_productId = 0;
+    protected $_productId = '';
     
     /**
      * @var string
@@ -60,10 +60,6 @@ class FileUpload extends DataModel
         switch ($name) {
             case "_id":
             case "_productId":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_name":
             case "_description":
             case "_fileType":

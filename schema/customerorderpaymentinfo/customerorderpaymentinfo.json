@@ -2,19 +2,17 @@
     "title": "CustomerOrderPaymentInfo Model",
     "type": "object",
     "properties": {
-        "shippingMethodId": {
+        "id": {
             "type": [
-                "int",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
-        "basketId": {
+        "customerOrderId": {
             "type": [
-                "int",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "bankAccount": {
             "type": [
@@ -65,7 +63,28 @@
             ],
             "optional": true
         },
-        "cvv": {
+        "creditCardVerificationNumber": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
+        },
+        "creditCardExpiration": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
+        },
+        "creditCardType": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
+        },
+        "creditCardHolder": {
             "type": [
                 "string",
                 "null"
@@ -74,5 +93,7 @@
         }
     },
     "required": [
+        "id",
+        "customerOrderId"
     ]
 }

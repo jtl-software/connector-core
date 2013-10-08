@@ -20,9 +20,9 @@ class ProductAttrI18n extends DataModel
     protected $_localeName = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_productAttrId = 0;
+    protected $_productAttrId = '';
     
     /**
      * @var string
@@ -49,15 +49,11 @@ class ProductAttrI18n extends DataModel
         
         switch ($name) {
             case "_localeName":
+            case "_productAttrId":
             case "_key":
             case "_value":
             
                 $this->$name = (string)$value;
-                break;
-        
-            case "_productAttrId":
-            
-                $this->$name = (int)$value;
                 break;
         
         }

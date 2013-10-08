@@ -10,7 +10,7 @@
         },
         "specificId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },

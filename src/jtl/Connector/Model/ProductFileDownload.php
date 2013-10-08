@@ -15,14 +15,14 @@ use \jtl\Core\Model\DataModel;
 class ProductFileDownload extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_productId = 0;
+    protected $_productId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_fileDownloadId = 0;
+    protected $_fileDownloadId = '';
     
     /**
      * ProductFileDownload Setter
@@ -41,7 +41,7 @@ class ProductFileDownload extends DataModel
             case "_productId":
             case "_fileDownloadId":
             
-                $this->$name = (int)$value;
+                $this->$name = (string)$value;
                 break;
         
         }

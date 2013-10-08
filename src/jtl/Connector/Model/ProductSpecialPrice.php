@@ -15,14 +15,14 @@ use \jtl\Core\Model\DataModel;
 class ProductSpecialPrice extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_productId = 0;
+    protected $_productId = '';
     
     /**
      * @var bool
@@ -45,14 +45,14 @@ class ProductSpecialPrice extends DataModel
     protected $_quantityLimit = 0.0;
     
     /**
-     * @var bool
+     * @var string
      */
-    protected $_considerQuantityLimit = false;
+    protected $_considerQuantityLimit = '';
     
     /**
-     * @var bool
+     * @var string
      */
-    protected $_considerDateLimit = false;
+    protected $_considerDateLimit = '';
     
     /**
      * ProductSpecialPrice Setter
@@ -70,21 +70,17 @@ class ProductSpecialPrice extends DataModel
         switch ($name) {
             case "_id":
             case "_productId":
-            
-                $this->$name = (int)$value;
-                break;
-        
-            case "_isActive":
+            case "_activeFrom":
+            case "_activeUntil":
             case "_considerQuantityLimit":
             case "_considerDateLimit":
             
-                $this->$name = (bool)$value;
+                $this->$name = (string)$value;
                 break;
         
-            case "_activeFrom":
-            case "_activeUntil":
+            case "_isActive":
             
-                $this->$name = (string)$value;
+                $this->$name = (bool)$value;
                 break;
         
             case "_quantityLimit":

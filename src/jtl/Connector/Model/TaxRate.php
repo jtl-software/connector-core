@@ -15,19 +15,19 @@ use \jtl\Core\Model\DataModel;
 class TaxRate extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_taxZoneId = 0;
+    protected $_taxZoneId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_taxClassId = 0;
+    protected $_taxClassId = '';
     
     /**
      * @var double
@@ -56,14 +56,18 @@ class TaxRate extends DataModel
             case "_id":
             case "_taxZoneId":
             case "_taxClassId":
-            case "_priority":
             
-                $this->$name = (int)$value;
+                $this->$name = (string)$value;
                 break;
         
             case "_rate":
             
                 $this->$name = (double)$value;
+                break;
+        
+            case "_priority":
+            
+                $this->$name = (int)$value;
                 break;
         
         }

@@ -15,9 +15,9 @@ use \jtl\Core\Model\DataModel;
 class EmailTemplateI18n extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_emailTemplateId = 0;
+    protected $_emailTemplateId = '';
     
     /**
      * @var string
@@ -64,10 +64,6 @@ class EmailTemplateI18n extends DataModel
         
         switch ($name) {
             case "_emailTemplateId":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_localeName":
             case "_subject":
             case "_contentHtml":

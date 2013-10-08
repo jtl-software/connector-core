@@ -15,9 +15,9 @@ use \jtl\Core\Model\DataModel;
 class Warehouse extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
      * Warehouse Setter
@@ -35,7 +35,7 @@ class Warehouse extends DataModel
         switch ($name) {
             case "_id":
             
-                $this->$name = (int)$value;
+                $this->$name = (string)$value;
                 break;
         
         }

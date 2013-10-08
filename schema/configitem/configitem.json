@@ -4,19 +4,19 @@
     "properties": {
         "id": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "configGroupId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "productId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true

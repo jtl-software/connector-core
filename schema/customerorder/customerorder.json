@@ -4,34 +4,34 @@
     "properties": {
         "id": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "customerId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true
         },
         "shippingAddressId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true
         },
         "billingAddressId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true
         },
         "shippingMethodId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true

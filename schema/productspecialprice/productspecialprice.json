@@ -4,13 +4,13 @@
     "properties": {
         "id": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "productId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true
@@ -44,14 +44,14 @@
         },
         "considerQuantityLimit": {
             "type": [
-                "bool",
+                "string",
                 "null"
             ],
             "optional": true
         },
         "considerDateLimit": {
             "type": [
-                "bool",
+                "string",
                 "null"
             ],
             "optional": true

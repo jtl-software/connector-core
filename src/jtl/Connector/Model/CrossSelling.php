@@ -15,24 +15,24 @@ use \jtl\Core\Model\DataModel;
 class CrossSelling extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_crossSellingProductId = 0;
+    protected $_crossSellingProductId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_crossSellingGroupId = 0;
+    protected $_crossSellingGroupId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_productId = 0;
+    protected $_productId = '';
     
     /**
      * CrossSelling Setter
@@ -53,7 +53,7 @@ class CrossSelling extends DataModel
             case "_crossSellingGroupId":
             case "_productId":
             
-                $this->$name = (int)$value;
+                $this->$name = (string)$value;
                 break;
         
         }

@@ -15,14 +15,14 @@ use \jtl\Core\Model\DataModel;
 class CustomerOrderBillingAddress extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_customerId = 0;
+    protected $_customerId = '';
     
     /**
      * @var string
@@ -125,10 +125,6 @@ class CustomerOrderBillingAddress extends DataModel
         switch ($name) {
             case "_id":
             case "_customerId":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_salutation":
             case "_firstName":
             case "_lastName":

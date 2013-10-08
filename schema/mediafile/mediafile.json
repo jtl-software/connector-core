@@ -4,13 +4,13 @@
     "properties": {
         "id": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "productId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },

@@ -15,19 +15,19 @@ use \jtl\Core\Model\DataModel;
 class ConfigItemPrice extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_configItemId = 0;
+    protected $_configItemId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_customerGroupId = 0;
+    protected $_customerGroupId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_taxClassId = 0;
+    protected $_taxClassId = '';
     
     /**
      * @var float
@@ -56,14 +56,18 @@ class ConfigItemPrice extends DataModel
             case "_configItemId":
             case "_customerGroupId":
             case "_taxClassId":
-            case "_type":
             
-                $this->$name = (int)$value;
+                $this->$name = (string)$value;
                 break;
         
             case "_price":
             
                 $this->$name = (float)$value;
+                break;
+        
+            case "_type":
+            
+                $this->$name = (int)$value;
                 break;
         
         }

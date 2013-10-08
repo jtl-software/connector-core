@@ -4,20 +4,20 @@
     "properties": {
         "id": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "categoryId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true
         },
         "productId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true

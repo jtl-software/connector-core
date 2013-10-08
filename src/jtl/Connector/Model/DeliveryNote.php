@@ -15,14 +15,14 @@ use \jtl\Core\Model\DataModel;
 class DeliveryNote extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_customerOrderId = 0;
+    protected $_customerOrderId = '';
     
     /**
      * @var string
@@ -60,16 +60,16 @@ class DeliveryNote extends DataModel
         switch ($name) {
             case "_id":
             case "_customerOrderId":
-            case "_fulfillment":
-            case "_status":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_note":
             case "_created":
             
                 $this->$name = (string)$value;
+                break;
+        
+            case "_fulfillment":
+            case "_status":
+            
+                $this->$name = (int)$value;
                 break;
         
         }

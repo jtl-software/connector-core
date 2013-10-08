@@ -15,14 +15,14 @@ use \jtl\Core\Model\DataModel;
 class MediaFile extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_productId = 0;
+    protected $_productId = '';
     
     /**
      * @var string
@@ -65,17 +65,17 @@ class MediaFile extends DataModel
         switch ($name) {
             case "_id":
             case "_productId":
-            case "_sort":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_path":
             case "_url":
             case "_mediaFileCategory":
             case "_type":
             
                 $this->$name = (string)$value;
+                break;
+        
+            case "_sort":
+            
+                $this->$name = (int)$value;
                 break;
         
         }

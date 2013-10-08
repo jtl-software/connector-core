@@ -15,14 +15,14 @@ use \jtl\Core\Model\DataModel;
 class ProductPrice extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_customerGroupId = 0;
+    protected $_customerGroupId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_productId = 0;
+    protected $_productId = '';
     
     /**
      * @var double
@@ -50,14 +50,18 @@ class ProductPrice extends DataModel
         switch ($name) {
             case "_customerGroupId":
             case "_productId":
-            case "_quantity":
             
-                $this->$name = (int)$value;
+                $this->$name = (string)$value;
                 break;
         
             case "_netPrice":
             
                 $this->$name = (double)$value;
+                break;
+        
+            case "_quantity":
+            
+                $this->$name = (int)$value;
                 break;
         
         }

@@ -4,25 +4,25 @@
     "properties": {
         "id": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "fileDownloadId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "customerId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "customerOrderId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true

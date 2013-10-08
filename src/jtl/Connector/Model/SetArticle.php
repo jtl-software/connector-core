@@ -15,14 +15,14 @@ use \jtl\Core\Model\DataModel;
 class SetArticle extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_productId = 0;
+    protected $_productId = '';
     
     /**
      * @var double
@@ -46,7 +46,7 @@ class SetArticle extends DataModel
             case "_id":
             case "_productId":
             
-                $this->$name = (int)$value;
+                $this->$name = (string)$value;
                 break;
         
             case "_quantity":

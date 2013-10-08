@@ -15,14 +15,14 @@ use \jtl\Core\Model\DataModel;
 class ProductVariationValue extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_productVariationId = 0;
+    protected $_productVariationId = '';
     
     /**
      * @var double
@@ -45,9 +45,9 @@ class ProductVariationValue extends DataModel
     protected $_stockLevel = 0.0;
     
     /**
-     * @var double
+     * @var string
      */
-    protected $_packagingUnitId = 1.0;
+    protected $_packagingUnitId = '';
     
     /**
      * ProductVariationValue Setter
@@ -65,21 +65,21 @@ class ProductVariationValue extends DataModel
         switch ($name) {
             case "_id":
             case "_productVariationId":
-            case "_sort":
+            case "_sku":
+            case "_packagingUnitId":
             
-                $this->$name = (int)$value;
+                $this->$name = (string)$value;
                 break;
         
             case "_extraWeight":
             case "_stockLevel":
-            case "_packagingUnitId":
             
                 $this->$name = (double)$value;
                 break;
         
-            case "_sku":
+            case "_sort":
             
-                $this->$name = (string)$value;
+                $this->$name = (int)$value;
                 break;
         
         }

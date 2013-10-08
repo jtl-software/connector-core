@@ -20,9 +20,9 @@ class CategoryI18n extends DataModel
     protected $_localeName = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_categoryId = 0;
+    protected $_categoryId = '';
     
     /**
      * @var string
@@ -69,6 +69,7 @@ class CategoryI18n extends DataModel
         
         switch ($name) {
             case "_localeName":
+            case "_categoryId":
             case "_name":
             case "_url":
             case "_description":
@@ -77,11 +78,6 @@ class CategoryI18n extends DataModel
             case "_titleTag":
             
                 $this->$name = (string)$value;
-                break;
-        
-            case "_categoryId":
-            
-                $this->$name = (int)$value;
                 break;
         
         }

@@ -4,25 +4,25 @@
     "properties": {
         "id": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "customerOrderPositionId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "productVariationId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "productVariationValueId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },

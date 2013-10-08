@@ -4,14 +4,14 @@
     "properties": {
         "productVariationValueId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true
         },
         "productVariationValueTargetId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true

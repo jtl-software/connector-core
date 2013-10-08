@@ -15,14 +15,14 @@ use \jtl\Core\Model\DataModel;
 class CustomerGroupAttr extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_customerGroupId = 0;
+    protected $_customerGroupId = '';
     
     /**
      * @var string
@@ -50,10 +50,6 @@ class CustomerGroupAttr extends DataModel
         switch ($name) {
             case "_id":
             case "_customerGroupId":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_key":
             case "_value":
             

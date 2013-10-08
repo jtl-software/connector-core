@@ -20,9 +20,9 @@ class ProductVariationI18n extends DataModel
     protected $_localeName = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_productVariationId = 0;
+    protected $_productVariationId = '';
     
     /**
      * @var string
@@ -44,14 +44,10 @@ class ProductVariationI18n extends DataModel
         
         switch ($name) {
             case "_localeName":
+            case "_productVariationId":
             case "_name":
             
                 $this->$name = (string)$value;
-                break;
-        
-            case "_productVariationId":
-            
-                $this->$name = (int)$value;
                 break;
         
         }

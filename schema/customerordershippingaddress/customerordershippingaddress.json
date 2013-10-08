@@ -4,16 +4,16 @@
     "properties": {
         "id": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "customerId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
-            "optional": false
+            "optional": true
         },
         "salutation": {
             "type": [
@@ -136,7 +136,6 @@
         }
     },
     "required": [
-        "id",
-        "customerId"
+        "id"
     ]
 }

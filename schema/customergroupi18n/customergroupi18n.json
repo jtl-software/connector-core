@@ -10,7 +10,7 @@
         },
         "customerGroupId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },

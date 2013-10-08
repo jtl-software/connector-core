@@ -15,9 +15,9 @@ use \jtl\Core\Model\DataModel;
 class FileDownloadI18n extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_fileDownloadId = 0;
+    protected $_fileDownloadId = '';
     
     /**
      * @var string
@@ -49,10 +49,6 @@ class FileDownloadI18n extends DataModel
         
         switch ($name) {
             case "_fileDownloadId":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_localeName":
             case "_name":
             case "_description":

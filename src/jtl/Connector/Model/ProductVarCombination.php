@@ -15,19 +15,19 @@ use \jtl\Core\Model\DataModel;
 class ProductVarCombination extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_productId = 0;
+    protected $_productId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_productVariationId = 0;
+    protected $_productVariationId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_productVariationValueId = 0;
+    protected $_productVariationValueId = '';
     
     /**
      * ProductVarCombination Setter
@@ -47,7 +47,7 @@ class ProductVarCombination extends DataModel
             case "_productVariationId":
             case "_productVariationValueId":
             
-                $this->$name = (int)$value;
+                $this->$name = (string)$value;
                 break;
         
         }

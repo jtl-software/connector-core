@@ -4,19 +4,19 @@
     "properties": {
         "configItemId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "customerGroupId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "taxClassId": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true

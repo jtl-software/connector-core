@@ -10,7 +10,7 @@
         },
         "mediaFileId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },

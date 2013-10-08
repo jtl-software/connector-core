@@ -15,24 +15,24 @@ use \jtl\Core\Model\DataModel;
 class CustomerOrderPositionVariation extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_customerOrderPositionId = 0;
+    protected $_customerOrderPositionId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_productVariationId = 0;
+    protected $_productVariationId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_productVariationValueId = 0;
+    protected $_productVariationValueId = '';
     
     /**
      * @var string
@@ -72,10 +72,6 @@ class CustomerOrderPositionVariation extends DataModel
             case "_customerOrderPositionId":
             case "_productVariationId":
             case "_productVariationValueId":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_productVariationName":
             case "_productVariationValueName":
             case "_freeField":

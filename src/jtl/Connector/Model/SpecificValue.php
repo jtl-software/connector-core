@@ -15,14 +15,14 @@ use \jtl\Core\Model\DataModel;
 class SpecificValue extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_specificId = 0;
+    protected $_specificId = '';
     
     /**
      * @var int
@@ -45,6 +45,10 @@ class SpecificValue extends DataModel
         switch ($name) {
             case "_id":
             case "_specificId":
+            
+                $this->$name = (string)$value;
+                break;
+        
             case "_sort":
             
                 $this->$name = (int)$value;

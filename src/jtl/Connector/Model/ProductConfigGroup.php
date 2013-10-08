@@ -15,14 +15,19 @@ use \jtl\Core\Model\DataModel;
 class ProductConfigGroup extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_configGroupId = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_productId = 0;
+    protected $_configGroupId = '';
+    
+    /**
+     * @var string
+     */
+    protected $_productId = '';
     
     /**
      * @var int
@@ -43,8 +48,13 @@ class ProductConfigGroup extends DataModel
         }
         
         switch ($name) {
+            case "_id":
             case "_configGroupId":
             case "_productId":
+            
+                $this->$name = (string)$value;
+                break;
+        
             case "_sort":
             
                 $this->$name = (int)$value;

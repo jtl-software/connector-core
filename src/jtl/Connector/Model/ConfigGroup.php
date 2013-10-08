@@ -15,9 +15,9 @@ use \jtl\Core\Model\DataModel;
 class ConfigGroup extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
      * @var string
@@ -64,18 +64,18 @@ class ConfigGroup extends DataModel
         
         switch ($name) {
             case "_id":
+            case "_imagePath":
+            case "_comment":
+            
+                $this->$name = (string)$value;
+                break;
+        
             case "_minimumSelection":
             case "_maximumSelection":
             case "_type":
             case "_sort":
             
                 $this->$name = (int)$value;
-                break;
-        
-            case "_imagePath":
-            case "_comment":
-            
-                $this->$name = (string)$value;
                 break;
         
         }

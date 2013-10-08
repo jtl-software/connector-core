@@ -15,14 +15,14 @@ use \jtl\Core\Model\DataModel;
 class Customer extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_customerGroupId = 0;
+    protected $_customerGroupId = '';
     
     /**
      * @var string
@@ -200,10 +200,6 @@ class Customer extends DataModel
         switch ($name) {
             case "_id":
             case "_customerGroupId":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_localeName":
             case "_customerNumber":
             case "_password":

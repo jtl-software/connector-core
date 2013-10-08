@@ -15,29 +15,29 @@ use \jtl\Core\Model\DataModel;
 class CustomerOrder extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_customerId = 0;
+    protected $_customerId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_shippingAddressId = 0;
+    protected $_shippingAddressId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_billingAddressId = 0;
+    protected $_billingAddressId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_shippingMethodId = 0;
+    protected $_shippingMethodId = '';
     
     /**
      * @var string
@@ -162,11 +162,7 @@ class CustomerOrder extends DataModel
             case "_customerId":
             case "_shippingAddressId":
             case "_billingAddressId":
-            case "_shippingMethodId":            
-            
-                $this->$name = (int)$value;
-                break;
-        
+            case "_shippingMethodId":
             case "_localeName":
             case "_currencyIso":
             case "_estimatedDeliveryDate":

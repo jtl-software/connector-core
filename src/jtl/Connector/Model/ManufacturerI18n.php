@@ -15,9 +15,9 @@ use \jtl\Core\Model\DataModel;
 class ManufacturerI18n extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_manufacturerId = 0;
+    protected $_manufacturerId = '';
     
     /**
      * @var string
@@ -59,10 +59,6 @@ class ManufacturerI18n extends DataModel
         
         switch ($name) {
             case "_manufacturerId":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_localeName":
             case "_description":
             case "_metaDescription":

@@ -15,9 +15,9 @@ use \jtl\Core\Model\DataModel;
 class Language extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
      * @var string
@@ -59,10 +59,6 @@ class Language extends DataModel
         
         switch ($name) {
             case "_id":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_nameEnglish":
             case "_nameGerman":
             case "_localeName":

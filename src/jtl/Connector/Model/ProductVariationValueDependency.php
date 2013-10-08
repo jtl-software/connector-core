@@ -15,14 +15,14 @@ use \jtl\Core\Model\DataModel;
 class ProductVariationValueDependency extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_productVariationValueId = 0;
+    protected $_productVariationValueId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_productVariationValueTargetId = 0;
+    protected $_productVariationValueTargetId = '';
     
     /**
      * ProductVariationValueDependency Setter
@@ -41,7 +41,7 @@ class ProductVariationValueDependency extends DataModel
             case "_productVariationValueId":
             case "_productVariationValueTargetId":
             
-                $this->$name = (int)$value;
+                $this->$name = (string)$value;
                 break;
         
         }

@@ -15,14 +15,14 @@ use \jtl\Core\Model\DataModel;
 class CategoryCustomerGroup extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_customerGroupId = 0;
+    protected $_customerGroupId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_categoryId = 0;
+    protected $_categoryId = '';
     
     /**
      * @var double
@@ -46,7 +46,7 @@ class CategoryCustomerGroup extends DataModel
             case "_customerGroupId":
             case "_categoryId":
             
-                $this->$name = (int)$value;
+                $this->$name = (string)$value;
                 break;
         
             case "_discount":

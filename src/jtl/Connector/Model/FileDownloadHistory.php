@@ -15,24 +15,24 @@ use \jtl\Core\Model\DataModel;
 class FileDownloadHistory extends DataModel
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $_id = 0;
+    protected $_id = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_fileDownloadId = 0;
+    protected $_fileDownloadId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_customerId = 0;
+    protected $_customerId = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_customerOrderId = 0;
+    protected $_customerOrderId = '';
     
     /**
      * @var string
@@ -57,10 +57,6 @@ class FileDownloadHistory extends DataModel
             case "_fileDownloadId":
             case "_customerId":
             case "_customerOrderId":
-            
-                $this->$name = (int)$value;
-                break;
-        
             case "_created":
             
                 $this->$name = (string)$value;

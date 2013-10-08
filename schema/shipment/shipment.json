@@ -4,13 +4,13 @@
     "properties": {
         "id": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "deliveryNoteId": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },

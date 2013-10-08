@@ -20,9 +20,9 @@ class CustomerGroupI18n extends DataModel
     protected $_localeName = '';
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_customerGroupId = 0;
+    protected $_customerGroupId = '';
     
     /**
      * @var string
@@ -44,14 +44,10 @@ class CustomerGroupI18n extends DataModel
         
         switch ($name) {
             case "_localeName":
+            case "_customerGroupId":
             case "_name":
             
                 $this->$name = (string)$value;
-                break;
-        
-            case "_customerGroupId":
-            
-                $this->$name = (int)$value;
                 break;
         
         }
