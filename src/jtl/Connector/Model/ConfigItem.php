@@ -97,43 +97,45 @@ class ConfigItem extends DataModel
      */
     public function __set($name, $value)
     {
-        if ($value === null) {
-            $this->$name = null;
-            return;
-        }
+        if (property_exists($this, $name)) {
+            if ($value === null) {
+                $this->$name = null;
+                return;
+            }
         
-        switch ($name) {
-            case "_id":
-            case "_configGroupId":
-            case "_productId":
+            switch ($name) {
+                case "_id":
+                case "_configGroupId":
+                case "_productId":
+                
+                    $this->$name = (string)$value;
+                    break;
             
-                $this->$name = (string)$value;
-                break;
-        
-            case "_type":
-            case "_sort":
+                case "_type":
+                case "_sort":
+                
+                    $this->$name = (int)$value;
+                    break;
             
-                $this->$name = (int)$value;
-                break;
-        
-            case "_isPreSelected":
-            case "_isRecommended":
-            case "_inheritProductName":
-            case "_inheritProductPrice":
-            case "_showDiscount":
-            case "_showSurcharge":
-            case "_ignoreMultiplier":
+                case "_isPreSelected":
+                case "_isRecommended":
+                case "_inheritProductName":
+                case "_inheritProductPrice":
+                case "_showDiscount":
+                case "_showSurcharge":
+                case "_ignoreMultiplier":
+                
+                    $this->$name = (bool)$value;
+                    break;
             
-                $this->$name = (bool)$value;
-                break;
-        
-            case "_minQuantity":
-            case "_maxQuantity":
-            case "_initialQuantity":
+                case "_minQuantity":
+                case "_maxQuantity":
+                case "_initialQuantity":
+                
+                    $this->$name = (double)$value;
+                    break;
             
-                $this->$name = (double)$value;
-                break;
-        
+            }
         }
     }
     

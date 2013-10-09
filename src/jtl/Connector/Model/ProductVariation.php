@@ -52,30 +52,32 @@ class ProductVariation extends DataModel
      */
     public function __set($name, $value)
     {
-        if ($value === null) {
-            $this->$name = null;
-            return;
-        }
+        if (property_exists($this, $name)) {
+            if ($value === null) {
+                $this->$name = null;
+                return;
+            }
         
-        switch ($name) {
-            case "_id":
-            case "_productId":
-            case "_name":
-            case "_type":
+            switch ($name) {
+                case "_id":
+                case "_productId":
+                case "_name":
+                case "_type":
+                
+                    $this->$name = (string)$value;
+                    break;
             
-                $this->$name = (string)$value;
-                break;
-        
-            case "_isSelectable":
+                case "_isSelectable":
+                
+                    $this->$name = (bool)$value;
+                    break;
             
-                $this->$name = (bool)$value;
-                break;
-        
-            case "_sort":
+                case "_sort":
+                
+                    $this->$name = (int)$value;
+                    break;
             
-                $this->$name = (int)$value;
-                break;
-        
+            }
         }
     }
     

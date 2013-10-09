@@ -47,21 +47,23 @@ class CategoryAttr extends DataModel
      */
     public function __set($name, $value)
     {
-        if ($value === null) {
-            $this->$name = null;
-            return;
-        }
+        if (property_exists($this, $name)) {
+            if ($value === null) {
+                $this->$name = null;
+                return;
+            }
         
-        switch ($name) {
-            case "_id":
-            case "_categoryId":
-            case "_localeName":
-            case "_name":
-            case "_value":
+            switch ($name) {
+                case "_id":
+                case "_categoryId":
+                case "_localeName":
+                case "_name":
+                case "_value":
+                
+                    $this->$name = (string)$value;
+                    break;
             
-                $this->$name = (string)$value;
-                break;
-        
+            }
         }
     }
     

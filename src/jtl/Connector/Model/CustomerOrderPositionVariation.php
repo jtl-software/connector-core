@@ -62,28 +62,30 @@ class CustomerOrderPositionVariation extends DataModel
      */
     public function __set($name, $value)
     {
-        if ($value === null) {
-            $this->$name = null;
-            return;
-        }
+        if (property_exists($this, $name)) {
+            if ($value === null) {
+                $this->$name = null;
+                return;
+            }
         
-        switch ($name) {
-            case "_id":
-            case "_customerOrderPositionId":
-            case "_productVariationId":
-            case "_productVariationValueId":
-            case "_productVariationName":
-            case "_productVariationValueName":
-            case "_freeField":
+            switch ($name) {
+                case "_id":
+                case "_customerOrderPositionId":
+                case "_productVariationId":
+                case "_productVariationValueId":
+                case "_productVariationName":
+                case "_productVariationValueName":
+                case "_freeField":
+                
+                    $this->$name = (string)$value;
+                    break;
             
-                $this->$name = (string)$value;
-                break;
-        
-            case "_surcharge":
+                case "_surcharge":
+                
+                    $this->$name = (double)$value;
+                    break;
             
-                $this->$name = (double)$value;
-                break;
-        
+            }
         }
     }
     

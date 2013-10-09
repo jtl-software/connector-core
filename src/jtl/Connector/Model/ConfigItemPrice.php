@@ -47,29 +47,31 @@ class ConfigItemPrice extends DataModel
      */
     public function __set($name, $value)
     {
-        if ($value === null) {
-            $this->$name = null;
-            return;
-        }
+        if (property_exists($this, $name)) {
+            if ($value === null) {
+                $this->$name = null;
+                return;
+            }
         
-        switch ($name) {
-            case "_configItemId":
-            case "_customerGroupId":
-            case "_taxClassId":
+            switch ($name) {
+                case "_configItemId":
+                case "_customerGroupId":
+                case "_taxClassId":
+                
+                    $this->$name = (string)$value;
+                    break;
             
-                $this->$name = (string)$value;
-                break;
-        
-            case "_price":
+                case "_price":
+                
+                    $this->$name = (float)$value;
+                    break;
             
-                $this->$name = (float)$value;
-                break;
-        
-            case "_type":
+                case "_type":
+                
+                    $this->$name = (int)$value;
+                    break;
             
-                $this->$name = (int)$value;
-                break;
-        
+            }
         }
     }
     

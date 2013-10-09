@@ -42,28 +42,30 @@ class ProductPrice extends DataModel
      */
     public function __set($name, $value)
     {
-        if ($value === null) {
-            $this->$name = null;
-            return;
-        }
+        if (property_exists($this, $name)) {
+            if ($value === null) {
+                $this->$name = null;
+                return;
+            }
         
-        switch ($name) {
-            case "_customerGroupId":
-            case "_productId":
+            switch ($name) {
+                case "_customerGroupId":
+                case "_productId":
+                
+                    $this->$name = (string)$value;
+                    break;
             
-                $this->$name = (string)$value;
-                break;
-        
-            case "_netPrice":
+                case "_netPrice":
+                
+                    $this->$name = (double)$value;
+                    break;
             
-                $this->$name = (double)$value;
-                break;
-        
-            case "_quantity":
+                case "_quantity":
+                
+                    $this->$name = (int)$value;
+                    break;
             
-                $this->$name = (int)$value;
-                break;
-        
+            }
         }
     }
     

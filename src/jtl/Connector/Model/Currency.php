@@ -67,33 +67,35 @@ class Currency extends DataModel
      */
     public function __set($name, $value)
     {
-        if ($value === null) {
-            $this->$name = null;
-            return;
-        }
+        if (property_exists($this, $name)) {
+            if ($value === null) {
+                $this->$name = null;
+                return;
+            }
         
-        switch ($name) {
-            case "_id":
-            case "_name":
-            case "_iso":
-            case "_nameHtml":
-            case "_delimiterCent":
-            case "_delimiterThousand":
+            switch ($name) {
+                case "_id":
+                case "_name":
+                case "_iso":
+                case "_nameHtml":
+                case "_delimiterCent":
+                case "_delimiterThousand":
+                
+                    $this->$name = (string)$value;
+                    break;
             
-                $this->$name = (string)$value;
-                break;
-        
-            case "_factor":
+                case "_factor":
+                
+                    $this->$name = (double)$value;
+                    break;
             
-                $this->$name = (double)$value;
-                break;
-        
-            case "_isDefault":
-            case "_hasCurrencySignBeforeValue":
+                case "_isDefault":
+                case "_hasCurrencySignBeforeValue":
+                
+                    $this->$name = (bool)$value;
+                    break;
             
-                $this->$name = (bool)$value;
-                break;
-        
+            }
         }
     }
     

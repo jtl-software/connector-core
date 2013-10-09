@@ -77,35 +77,37 @@ class EmailTemplate extends DataModel
      */
     public function __set($name, $value)
     {
-        if ($value === null) {
-            $this->$name = null;
-            return;
-        }
+        if (property_exists($this, $name)) {
+            if ($value === null) {
+                $this->$name = null;
+                return;
+            }
         
-        switch ($name) {
-            case "_id":
-            case "_name":
-            case "_description":
-            case "_emailType":
-            case "_moduleId":
-            case "_filename":
+            switch ($name) {
+                case "_id":
+                case "_name":
+                case "_description":
+                case "_emailType":
+                case "_moduleId":
+                case "_filename":
+                
+                    $this->$name = (string)$value;
+                    break;
             
-                $this->$name = (string)$value;
-                break;
-        
-            case "_isActive":
-            case "_isOii":
-            case "_isAgb":
-            case "_isWrb":
+                case "_isActive":
+                case "_isOii":
+                case "_isAgb":
+                case "_isWrb":
+                
+                    $this->$name = (bool)$value;
+                    break;
             
-                $this->$name = (bool)$value;
-                break;
-        
-            case "_error":
+                case "_error":
+                
+                    $this->$name = (int)$value;
+                    break;
             
-                $this->$name = (int)$value;
-                break;
-        
+            }
         }
     }
     

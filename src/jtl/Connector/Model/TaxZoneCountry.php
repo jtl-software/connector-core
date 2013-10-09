@@ -37,19 +37,21 @@ class TaxZoneCountry extends DataModel
      */
     public function __set($name, $value)
     {
-        if ($value === null) {
-            $this->$name = null;
-            return;
-        }
+        if (property_exists($this, $name)) {
+            if ($value === null) {
+                $this->$name = null;
+                return;
+            }
         
-        switch ($name) {
-            case "_id":
-            case "_taxZoneId":
-            case "_countryIso":
+            switch ($name) {
+                case "_id":
+                case "_taxZoneId":
+                case "_countryIso":
+                
+                    $this->$name = (string)$value;
+                    break;
             
-                $this->$name = (string)$value;
-                break;
-        
+            }
         }
     }
     

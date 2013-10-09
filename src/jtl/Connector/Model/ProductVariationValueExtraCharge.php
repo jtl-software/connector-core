@@ -37,23 +37,25 @@ class ProductVariationValueExtraCharge extends DataModel
      */
     public function __set($name, $value)
     {
-        if ($value === null) {
-            $this->$name = null;
-            return;
-        }
+        if (property_exists($this, $name)) {
+            if ($value === null) {
+                $this->$name = null;
+                return;
+            }
         
-        switch ($name) {
-            case "_customerGroupId":
-            case "_productVariationValueId":
+            switch ($name) {
+                case "_customerGroupId":
+                case "_productVariationValueId":
+                
+                    $this->$name = (string)$value;
+                    break;
             
-                $this->$name = (string)$value;
-                break;
-        
-            case "_extraChargeNet":
+                case "_extraChargeNet":
+                
+                    $this->$name = (double)$value;
+                    break;
             
-                $this->$name = (double)$value;
-                break;
-        
+            }
         }
     }
     

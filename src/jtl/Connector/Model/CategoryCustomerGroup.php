@@ -37,23 +37,25 @@ class CategoryCustomerGroup extends DataModel
      */
     public function __set($name, $value)
     {
-        if ($value === null) {
-            $this->$name = null;
-            return;
-        }
+        if (property_exists($this, $name)) {
+            if ($value === null) {
+                $this->$name = null;
+                return;
+            }
         
-        switch ($name) {
-            case "_customerGroupId":
-            case "_categoryId":
+            switch ($name) {
+                case "_customerGroupId":
+                case "_categoryId":
+                
+                    $this->$name = (string)$value;
+                    break;
             
-                $this->$name = (string)$value;
-                break;
-        
-            case "_discount":
+                case "_discount":
+                
+                    $this->$name = (double)$value;
+                    break;
             
-                $this->$name = (double)$value;
-                break;
-        
+            }
         }
     }
     

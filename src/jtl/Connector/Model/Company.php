@@ -117,35 +117,37 @@ class Company extends DataModel
      */
     public function __set($name, $value)
     {
-        if ($value === null) {
-            $this->$name = null;
-            return;
-        }
+        if (property_exists($this, $name)) {
+            if ($value === null) {
+                $this->$name = null;
+                return;
+            }
         
-        switch ($name) {
-            case "_name":
-            case "_businessman":
-            case "_street":
-            case "_streetNumber":
-            case "_zipCode":
-            case "_city":
-            case "_country":
-            case "_phone":
-            case "_fax":
-            case "_eMail":
-            case "_www":
-            case "_bankCode":
-            case "_accountNumber":
-            case "_bankAccount":
-            case "_accountHolder":
-            case "_vatNumber":
-            case "_taxIdNumber":
-            case "_iban":
-            case "_bic":
+            switch ($name) {
+                case "_name":
+                case "_businessman":
+                case "_street":
+                case "_streetNumber":
+                case "_zipCode":
+                case "_city":
+                case "_country":
+                case "_phone":
+                case "_fax":
+                case "_eMail":
+                case "_www":
+                case "_bankCode":
+                case "_accountNumber":
+                case "_bankAccount":
+                case "_accountHolder":
+                case "_vatNumber":
+                case "_taxIdNumber":
+                case "_iban":
+                case "_bic":
+                
+                    $this->$name = (string)$value;
+                    break;
             
-                $this->$name = (string)$value;
-                break;
-        
+            }
         }
     }
     

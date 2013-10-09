@@ -52,26 +52,28 @@ class DeliveryNote extends DataModel
      */
     public function __set($name, $value)
     {
-        if ($value === null) {
-            $this->$name = null;
-            return;
-        }
+        if (property_exists($this, $name)) {
+            if ($value === null) {
+                $this->$name = null;
+                return;
+            }
         
-        switch ($name) {
-            case "_id":
-            case "_customerOrderId":
-            case "_note":
-            case "_created":
+            switch ($name) {
+                case "_id":
+                case "_customerOrderId":
+                case "_note":
+                case "_created":
+                
+                    $this->$name = (string)$value;
+                    break;
             
-                $this->$name = (string)$value;
-                break;
-        
-            case "_fulfillment":
-            case "_status":
+                case "_fulfillment":
+                case "_status":
+                
+                    $this->$name = (int)$value;
+                    break;
             
-                $this->$name = (int)$value;
-                break;
-        
+            }
         }
     }
     

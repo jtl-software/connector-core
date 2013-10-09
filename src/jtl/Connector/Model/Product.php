@@ -262,76 +262,78 @@ class Product extends DataModel
      */
     public function __set($name, $value)
     {
-        if ($value === null) {
-            $this->$name = null;
-            return;
-        }
+        if (property_exists($this, $name)) {
+            if ($value === null) {
+                $this->$name = null;
+                return;
+            }
         
-        switch ($name) {
-            case "_id":
-            case "_masterProductId":
-            case "_manufacturerId":
-            case "_deliveryStatusId":
-            case "_unitId":
-            case "_basePriceUnitId":
-            case "_taxClassId":
-            case "_shippingClassId":
-            case "_sku":
-            case "_note":
-            case "_ean":
-            case "_considerStock":
-            case "_considerVariationStock":
-            case "_considerBasePrice":
-            case "_keywords":
-            case "_created":
-            case "_availableFrom":
-            case "_manufacturerNumber":
-            case "_serialNumber":
-            case "_isbn":
-            case "_asin":
-            case "_unNumber":
-            case "_hazardIdNumber":
-            case "_taric":
-            case "_setArticleId":
-            case "_upc":
-            case "_originCountry":
-            case "_epid":
-            case "_productTypeId":
-            case "_inflowDate":
-            case "_bestBefore":
+            switch ($name) {
+                case "_id":
+                case "_masterProductId":
+                case "_manufacturerId":
+                case "_deliveryStatusId":
+                case "_unitId":
+                case "_basePriceUnitId":
+                case "_taxClassId":
+                case "_shippingClassId":
+                case "_sku":
+                case "_note":
+                case "_ean":
+                case "_considerStock":
+                case "_considerVariationStock":
+                case "_considerBasePrice":
+                case "_keywords":
+                case "_created":
+                case "_availableFrom":
+                case "_manufacturerNumber":
+                case "_serialNumber":
+                case "_isbn":
+                case "_asin":
+                case "_unNumber":
+                case "_hazardIdNumber":
+                case "_taric":
+                case "_setArticleId":
+                case "_upc":
+                case "_originCountry":
+                case "_epid":
+                case "_productTypeId":
+                case "_inflowDate":
+                case "_bestBefore":
+                
+                    $this->$name = (string)$value;
+                    break;
             
-                $this->$name = (string)$value;
-                break;
-        
-            case "_stockLevel":
-            case "_vat":
-            case "_minimumOrderQuantity":
-            case "_productWeight":
-            case "_shippingWeight":
-            case "_recommendedRetailPrice":
-            case "_basePriceValue":
-            case "_takeOffQuantity":
-            case "_inflowQuantity":
-            case "_supplierStockLevel":
-            case "_supplierDeliveryTime":
+                case "_stockLevel":
+                case "_vat":
+                case "_minimumOrderQuantity":
+                case "_productWeight":
+                case "_shippingWeight":
+                case "_recommendedRetailPrice":
+                case "_basePriceValue":
+                case "_takeOffQuantity":
+                case "_inflowQuantity":
+                case "_supplierStockLevel":
+                case "_supplierDeliveryTime":
+                
+                    $this->$name = (double)$value;
+                    break;
             
-                $this->$name = (double)$value;
-                break;
-        
-            case "_isTopProduct":
-            case "_isNew":
-            case "_permitNegativeStock":
-            case "_isDivisible":
-            case "_isMasterProduct":
+                case "_isTopProduct":
+                case "_isNew":
+                case "_permitNegativeStock":
+                case "_isDivisible":
+                case "_isMasterProduct":
+                
+                    $this->$name = (bool)$value;
+                    break;
             
-                $this->$name = (bool)$value;
-                break;
-        
-            case "_sort":
+                case "_sort":
+                
+                    $this->$name = (int)$value;
+                    break;
             
-                $this->$name = (int)$value;
-                break;
-        
+            }
         }
     }
     

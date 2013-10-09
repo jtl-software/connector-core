@@ -57,31 +57,33 @@ class DeliveryNotePos extends DataModel
      */
     public function __set($name, $value)
     {
-        if ($value === null) {
-            $this->$name = null;
-            return;
-        }
+        if (property_exists($this, $name)) {
+            if ($value === null) {
+                $this->$name = null;
+                return;
+            }
         
-        switch ($name) {
-            case "_id":
-            case "_serialNumber":
-            case "_batchNumber":
-            case "_bestBefore":
+            switch ($name) {
+                case "_id":
+                case "_serialNumber":
+                case "_batchNumber":
+                case "_bestBefore":
+                
+                    $this->$name = (string)$value;
+                    break;
             
-                $this->$name = (string)$value;
-                break;
-        
-            case "_orderPosition":
-            case "_stock":
+                case "_orderPosition":
+                case "_stock":
+                
+                    $this->$name = (int)$value;
+                    break;
             
-                $this->$name = (int)$value;
-                break;
-        
-            case "_quantity":
+                case "_quantity":
+                
+                    $this->$name = (double)$value;
+                    break;
             
-                $this->$name = (double)$value;
-                break;
-        
+            }
         }
     }
     

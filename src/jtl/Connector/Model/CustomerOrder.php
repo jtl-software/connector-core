@@ -152,50 +152,52 @@ class CustomerOrder extends DataModel
      */
     public function __set($name, $value)
     {
-        if ($value === null) {
-            $this->$name = null;
-            return;
-        }
+        if (property_exists($this, $name)) {
+            if ($value === null) {
+                $this->$name = null;
+                return;
+            }
         
-        switch ($name) {
-            case "_id":
-            case "_customerId":
-            case "_shippingAddressId":
-            case "_billingAddressId":
-            case "_shippingMethodId":
-            case "_localeName":
-            case "_currencyIso":
-            case "_estimatedDeliveryDate":
-            case "_session":
-            case "_shippingMethodName":
-            case "_orderNumber":
-            case "_shippingInfo":
-            case "_shippingDate":
-            case "_paymentDate":
-            case "_ratingNotificationDate":
-            case "_tracking":
-            case "_note":
-            case "_logistic":
-            case "_trackingURL":
-            case "_ip":
-            case "_status":
-            case "_created":
-            case "_paymentModuleId":
+            switch ($name) {
+                case "_id":
+                case "_customerId":
+                case "_shippingAddressId":
+                case "_billingAddressId":
+                case "_shippingMethodId":
+                case "_localeName":
+                case "_currencyIso":
+                case "_estimatedDeliveryDate":
+                case "_session":
+                case "_shippingMethodName":
+                case "_orderNumber":
+                case "_shippingInfo":
+                case "_shippingDate":
+                case "_paymentDate":
+                case "_ratingNotificationDate":
+                case "_tracking":
+                case "_note":
+                case "_logistic":
+                case "_trackingURL":
+                case "_ip":
+                case "_status":
+                case "_created":
+                case "_paymentModuleId":
+                
+                    $this->$name = (string)$value;
+                    break;
             
-                $this->$name = (string)$value;
-                break;
-        
-            case "_credit":
-            case "_totalSum":
+                case "_credit":
+                case "_totalSum":
+                
+                    $this->$name = (double)$value;
+                    break;
             
-                $this->$name = (double)$value;
-                break;
-        
-            case "_isFetched":
+                case "_isFetched":
+                
+                    $this->$name = (bool)$value;
+                    break;
             
-                $this->$name = (bool)$value;
-                break;
-        
+            }
         }
     }
     

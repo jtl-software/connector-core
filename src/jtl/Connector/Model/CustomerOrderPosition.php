@@ -82,36 +82,38 @@ class CustomerOrderPosition extends DataModel
      */
     public function __set($name, $value)
     {
-        if ($value === null) {
-            $this->$name = null;
-            return;
-        }
+        if (property_exists($this, $name)) {
+            if ($value === null) {
+                $this->$name = null;
+                return;
+            }
         
-        switch ($name) {
-            case "_id":
-            case "_productId":
-            case "_shippingClassId":
-            case "_customerOrderId":
-            case "_name":
-            case "_sku":
-            case "_unique":
-            case "_configItemId":
+            switch ($name) {
+                case "_id":
+                case "_productId":
+                case "_shippingClassId":
+                case "_customerOrderId":
+                case "_name":
+                case "_sku":
+                case "_unique":
+                case "_configItemId":
+                
+                    $this->$name = (string)$value;
+                    break;
             
-                $this->$name = (string)$value;
-                break;
-        
-            case "_price":
-            case "_vat":
+                case "_price":
+                case "_vat":
+                
+                    $this->$name = (double)$value;
+                    break;
             
-                $this->$name = (double)$value;
-                break;
-        
-            case "_quantity":
-            case "_type":
+                case "_quantity":
+                case "_type":
+                
+                    $this->$name = (int)$value;
+                    break;
             
-                $this->$name = (int)$value;
-                break;
-        
+            }
         }
     }
     

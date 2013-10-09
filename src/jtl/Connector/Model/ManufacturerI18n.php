@@ -52,22 +52,24 @@ class ManufacturerI18n extends DataModel
      */
     public function __set($name, $value)
     {
-        if ($value === null) {
-            $this->$name = null;
-            return;
-        }
+        if (property_exists($this, $name)) {
+            if ($value === null) {
+                $this->$name = null;
+                return;
+            }
         
-        switch ($name) {
-            case "_manufacturerId":
-            case "_localeName":
-            case "_description":
-            case "_metaDescription":
-            case "_metaKeywords":
-            case "_titleTag":
+            switch ($name) {
+                case "_manufacturerId":
+                case "_localeName":
+                case "_description":
+                case "_metaDescription":
+                case "_metaKeywords":
+                case "_titleTag":
+                
+                    $this->$name = (string)$value;
+                    break;
             
-                $this->$name = (string)$value;
-                break;
-        
+            }
         }
     }
     

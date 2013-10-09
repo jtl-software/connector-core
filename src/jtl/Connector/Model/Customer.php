@@ -192,58 +192,60 @@ class Customer extends DataModel
      */
     public function __set($name, $value)
     {
-        if ($value === null) {
-            $this->$name = null;
-            return;
-        }
+        if (property_exists($this, $name)) {
+            if ($value === null) {
+                $this->$name = null;
+                return;
+            }
         
-        switch ($name) {
-            case "_id":
-            case "_customerGroupId":
-            case "_localeName":
-            case "_customerNumber":
-            case "_password":
-            case "_salutation":
-            case "_title":
-            case "_firstName":
-            case "_lastName":
-            case "_company":
-            case "_street":
-            case "_streetNumber":
-            case "_deliveryInstruction":
-            case "_extraAddressLine":
-            case "_zipCode":
-            case "_city":
-            case "_state":
-            case "_countryIso":
-            case "_phone":
-            case "_mobile":
-            case "_fax":
-            case "_eMail":
-            case "_vatNumber":
-            case "_www":
-            case "_birthday":
-            case "_origin":
-            case "_created":
-            case "_modified":
+            switch ($name) {
+                case "_id":
+                case "_customerGroupId":
+                case "_localeName":
+                case "_customerNumber":
+                case "_password":
+                case "_salutation":
+                case "_title":
+                case "_firstName":
+                case "_lastName":
+                case "_company":
+                case "_street":
+                case "_streetNumber":
+                case "_deliveryInstruction":
+                case "_extraAddressLine":
+                case "_zipCode":
+                case "_city":
+                case "_state":
+                case "_countryIso":
+                case "_phone":
+                case "_mobile":
+                case "_fax":
+                case "_eMail":
+                case "_vatNumber":
+                case "_www":
+                case "_birthday":
+                case "_origin":
+                case "_created":
+                case "_modified":
+                
+                    $this->$name = (string)$value;
+                    break;
             
-                $this->$name = (string)$value;
-                break;
-        
-            case "_accountCredit":
-            case "_discount":
+                case "_accountCredit":
+                case "_discount":
+                
+                    $this->$name = (double)$value;
+                    break;
             
-                $this->$name = (double)$value;
-                break;
-        
-            case "_hasNewsletterSubscription":
-            case "_isActive":
-            case "_isFetched":
-            case "_hasCustomerAccount":
+                case "_hasNewsletterSubscription":
+                case "_isActive":
+                case "_isFetched":
+                case "_hasCustomerAccount":
+                
+                    $this->$name = (bool)$value;
+                    break;
             
-                $this->$name = (bool)$value;
-                break;
-        
+            }
         }
     }
     
