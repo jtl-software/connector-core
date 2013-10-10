@@ -10,102 +10,103 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Company Model
+ * Provides company address and bank details
  * @access public
  */
 class Company extends DataModel
 {
     /**
-     * @var string
+     * @var string Company name
      */
     protected $_name = '';
     
     /**
-     * @var string
+     * @var string Company businessman / entrepreneur
      */
     protected $_businessman = '';
     
     /**
-     * @var string
+     * @var string Street
      */
     protected $_street = '';
     
     /**
-     * @var string
+     * @var string Street number
      */
     protected $_streetNumber = '';
     
     /**
-     * @var string
+     * @var string Zip code / postcode
      */
     protected $_zipCode = '';
     
     /**
-     * @var string
+     * @var string City
      */
     protected $_city = '';
     
     /**
-     * @var string
+     * @var string Country
      */
     protected $_country = '';
     
     /**
-     * @var string
+     * @var string Phone number
      */
     protected $_phone = '';
     
     /**
-     * @var string
+     * @var string Fax number
      */
     protected $_fax = '';
     
     /**
-     * @var string
+     * @var string Company E-Mail address
      */
     protected $_eMail = '';
     
     /**
-     * @var string
+     * @var string Company website
      */
     protected $_www = '';
     
     /**
-     * @var string
+     * @var string Bank code number
      */
     protected $_bankCode = '';
     
     /**
-     * @var string
+     * @var string Bank account number
      */
     protected $_accountNumber = '';
     
     /**
-     * @var string
+     * @var string Bank Name e.g. "Deutsche Bank"
      */
     protected $_bankAccount = '';
     
     /**
-     * @var string
+     * @var string Bank account holder name e.g. "John Doe"
      */
     protected $_accountHolder = '';
     
     /**
-     * @var string
+     * @var string VAT registration number (german: USt-ID)
      */
     protected $_vatNumber = '';
     
     /**
-     * @var string
+     * @var string Tax id number (german: Steuernummer)
      */
     protected $_taxIdNumber = '';
     
     /**
-     * @var string
+     * @var string International Bank Account Number (IBAN) 
      */
     protected $_iban = '';
     
     /**
-     * @var string
+     * @var string Bank Identifier Code (BIC)
      */
     protected $_bic = '';
     

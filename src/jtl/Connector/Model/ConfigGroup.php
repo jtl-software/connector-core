@@ -10,27 +10,28 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ConfigGroup Model
+ * A config group holds custom settings that are applied for the group or configItems in the group
  * @access public
  */
 class ConfigGroup extends DataModel
 {
     /**
-     * @var string
+     * @var string Unique id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string Image file path 
      */
     protected $_imagePath = '';
     
     /**
-     * @var int
+     * @var int Minimum number of items customers have choose/check in this group
      */
     protected $_minimumSelection = 0;
     
     /**
-     * @var int
+     * @var int Maximum number of items customers can choose/check in this group
      */
     protected $_maximumSelection = 0;
     

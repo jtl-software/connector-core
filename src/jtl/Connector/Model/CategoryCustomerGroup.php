@@ -15,17 +15,17 @@ use \jtl\Core\Model\DataModel;
 class CategoryCustomerGroup extends DataModel
 {
     /**
-     * @var string
+     * @var string Customer group id
      */
     protected $_customerGroupId = "0";
     
     /**
-     * @var string
+     * @var string Category id
      */
     protected $_categoryId = "0";
     
     /**
-     * @var double
+     * @var double Discount on products in specified $_categoryId for $_customerGroupId
      */
     protected $_discount = 0.0;
     
