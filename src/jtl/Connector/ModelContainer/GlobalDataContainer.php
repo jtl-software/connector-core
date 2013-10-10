@@ -61,7 +61,7 @@ class GlobalDataContainer extends CoreContainer
      * @var \jtl\Connector\Model\TaxZone[]
      */
     protected $_taxZones;
-
+    
     /**
      * @var \jtl\Connector\Model\TaxZoneCountry[]
      */
@@ -98,36 +98,6 @@ class GlobalDataContainer extends CoreContainer
     protected $_productTypes;
     
     /**
-     * @var \jtl\Connector\Model\Manufacturer[]
-     */
-    protected $_manufacturers;
-    
-    /**
-     * @var \jtl\Connector\Model\ManufacturerI18n[]
-     */
-    protected $_manufacturerI18ns;
-    
-    /**
-     * @var \jtl\Connector\Model\Specific[]
-     */
-    protected $_specifics;
-    
-    /**
-     * @var \jtl\Connector\Model\SpecificI18n[]
-     */
-    protected $_specificI18ns;
-    
-    /**
-     * @var \jtl\Connector\Model\SpecificValue[]
-     */
-    protected $_specificValues;
-    
-    /**
-     * @var \jtl\Connector\Model\SpecificValueI18n[]
-     */
-    protected $_specificValueI18ns;
-    
-    /**
      * @var \jtl\Connector\Model\ConfigGroup[]
      */
     protected $_configGroups;
@@ -153,14 +123,14 @@ class GlobalDataContainer extends CoreContainer
     protected $_configItemPrices;
     
     /**
+     * @var \jtl\Connector\Model\FileDownload[]
+     */
+    protected $_fileDownloads;
+    
+    /**
      * @var \jtl\Connector\Model\FileDownloadI18n[]
      */
     protected $_fileDownloadI18ns;
-    
-    /**
-     * @var \jtl\Connector\Model\FileDownloadHistory[]
-     */
-    protected $_fileDownloadHistories;
         
     /**
      * @return array \jtl\Connector\Model\Company
@@ -241,7 +211,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_taxZones;
     }
-
+        
     /**
      * @return array \jtl\Connector\Model\TaxZoneCountry
      */
@@ -299,54 +269,6 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\Manufacturer
-     */
-    public function getManufacturers()
-    {
-        return $this->_manufacturers;
-    }
-        
-    /**
-     * @return array \jtl\Connector\Model\ManufacturerI18n
-     */
-    public function getManufacturerI18ns()
-    {
-        return $this->_manufacturerI18ns;
-    }
-        
-    /**
-     * @return array \jtl\Connector\Model\Specific
-     */
-    public function getSpecifics()
-    {
-        return $this->_specifics;
-    }
-        
-    /**
-     * @return array \jtl\Connector\Model\SpecificI18n
-     */
-    public function getSpecificI18ns()
-    {
-        return $this->_specificI18ns;
-    }
-        
-    /**
-     * @return array \jtl\Connector\Model\SpecificValue
-     */
-    public function getSpecificValues()
-    {
-        return $this->_specificValues;
-    }
-        
-    /**
-     * @return array \jtl\Connector\Model\SpecificValueI18n
-     */
-    public function getSpecificValueI18ns()
-    {
-        return $this->_specificValueI18ns;
-    }
-        
-    /**
      * @return array \jtl\Connector\Model\ConfigGroup
      */
     public function getConfigGroups()
@@ -387,19 +309,19 @@ class GlobalDataContainer extends CoreContainer
     }
         
     /**
+     * @return array \jtl\Connector\Model\FileDownload
+     */
+    public function getFileDownloads()
+    {
+        return $this->_fileDownloads;
+    }
+        
+    /**
      * @return array \jtl\Connector\Model\FileDownloadI18n
      */
     public function getFileDownloadI18ns()
     {
         return $this->_fileDownloadI18ns;
-    }
-        
-    /**
-     * @return array \jtl\Connector\Model\FileDownloadHistory
-     */
-    public function getFileDownloadHistories()
-    {
-        return $this->_fileDownloadHistories;
     }
         
     public $items = array(
@@ -420,12 +342,6 @@ class GlobalDataContainer extends CoreContainer
         "warehouse" => array("Warehouse", "Warehouses"),
         "warehouse_i18n" => array("WarehouseI18n", "WarehouseI18ns"),
         "product_type" => array("ProductType", "ProductTypes"),
-        "manufacturer" => array("Manufacturer", "Manufacturers"),
-        "manufacturer_i18n" => array("ManufacturerI18n", "ManufacturerI18ns"),
-        "specific" => array("Specific", "Specifics"),
-        "specific_i18n" => array("SpecificI18n", "SpecificI18ns"),
-        "specific_value" => array("SpecificValue", "SpecificValues"),
-        "specific_value_i18n" => array("SpecificValueI18n", "SpecificValueI18ns"),
         "config_group" => array("ConfigGroup", "ConfigGroups"),
         "config_group_i18n" => array("ConfigGroupI18n", "ConfigGroupI18ns"),
         "config_item" => array("ConfigItem", "ConfigItems"),

@@ -13,9 +13,9 @@ namespace jtl\Connector\ModelContainer;
 class ProductContainer extends CoreContainer
 {
     /**
-     * @var \jtl\Connector\Model\FileDownload[]
+     * @var \jtl\Connector\Model\ProductFileDownload[]
      */
-    protected $_fileDownloads;
+    protected $_productFileDownloads;
     
     /**
      * @var \jtl\Connector\Model\Product[]
@@ -148,11 +148,11 @@ class ProductContainer extends CoreContainer
     protected $_productConfigGroups;
         
     /**
-     * @return array \jtl\Connector\Model\FileDownload
+     * @return array \jtl\Connector\Model\ProductFileDownload
      */
-    public function getFileDownloads()
+    public function getProductFileDownloads()
     {
-        return $this->_fileDownloads;
+        return $this->_productFileDownloads;
     }
         
     /**
