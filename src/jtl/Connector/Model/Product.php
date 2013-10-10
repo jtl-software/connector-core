@@ -137,7 +137,7 @@ class Product extends DataModel
     /**
      * @var double
      */
-    protected $_basePriceValue = 0.0;
+    protected $_basePriceDivisor = 0.0;
     
     /**
      * @var string
@@ -310,7 +310,7 @@ class Product extends DataModel
                 case "_productWeight":
                 case "_shippingWeight":
                 case "_recommendedRetailPrice":
-                case "_basePriceValue":
+                case "_basePriceDivisor":
                 case "_takeOffQuantity":
                 case "_inflowQuantity":
                 case "_supplierStockLevel":
