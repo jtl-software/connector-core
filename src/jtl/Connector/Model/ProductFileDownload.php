@@ -17,12 +17,12 @@ class ProductFileDownload extends DataModel
     /**
      * @var string
      */
-    protected $_productId = '';
+    protected $_productId = "0";
     
     /**
      * @var string
      */
-    protected $_fileDownloadId = '';
+    protected $_fileDownloadId = "0";
     
     /**
      * ProductFileDownload Setter

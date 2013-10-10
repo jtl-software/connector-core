@@ -17,12 +17,12 @@ class CustomerAttr extends DataModel
     /**
      * @var string
      */
-    protected $_id = '';
+    protected $_id = "0";
     
     /**
      * @var string
      */
-    protected $_customerId = '';
+    protected $_customerId = "0";
     
     /**
      * @var string

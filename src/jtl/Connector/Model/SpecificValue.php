@@ -17,12 +17,12 @@ class SpecificValue extends DataModel
     /**
      * @var string
      */
-    protected $_id = '';
+    protected $_id = "0";
     
     /**
      * @var string
      */
-    protected $_specificId = '';
+    protected $_specificId = "0";
     
     /**
      * @var int

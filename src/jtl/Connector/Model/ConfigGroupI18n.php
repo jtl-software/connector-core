@@ -17,7 +17,7 @@ class ConfigGroupI18n extends DataModel
     /**
      * @var string
      */
-    protected $_configGroupId = '';
+    protected $_configGroupId = "0";
     
     /**
      * @var string

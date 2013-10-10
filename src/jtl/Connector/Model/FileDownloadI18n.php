@@ -17,7 +17,7 @@ class FileDownloadI18n extends DataModel
     /**
      * @var string
      */
-    protected $_fileDownloadId = '';
+    protected $_fileDownloadId = "0";
     
     /**
      * @var string

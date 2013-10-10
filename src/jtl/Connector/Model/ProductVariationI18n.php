@@ -22,7 +22,7 @@ class ProductVariationI18n extends DataModel
     /**
      * @var string
      */
-    protected $_productVariationId = '';
+    protected $_productVariationId = "0";
     
     /**
      * @var string

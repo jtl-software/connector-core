@@ -17,17 +17,17 @@ class ConfigItemPrice extends DataModel
     /**
      * @var string
      */
-    protected $_configItemId = '';
+    protected $_configItemId = "0";
     
     /**
      * @var string
      */
-    protected $_customerGroupId = '';
+    protected $_customerGroupId = "0";
     
     /**
      * @var string
      */
-    protected $_taxClassId = '';
+    protected $_taxClassId = "0";
     
     /**
      * @var float

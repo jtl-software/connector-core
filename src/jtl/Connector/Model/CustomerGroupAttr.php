@@ -17,12 +17,12 @@ class CustomerGroupAttr extends DataModel
     /**
      * @var string
      */
-    protected $_id = '';
+    protected $_id = "0";
     
     /**
      * @var string
      */
-    protected $_customerGroupId = '';
+    protected $_customerGroupId = "0";
     
     /**
      * @var string

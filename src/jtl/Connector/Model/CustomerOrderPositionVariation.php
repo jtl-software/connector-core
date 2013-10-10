@@ -17,22 +17,22 @@ class CustomerOrderPositionVariation extends DataModel
     /**
      * @var string
      */
-    protected $_id = '';
+    protected $_id = "0";
     
     /**
      * @var string
      */
-    protected $_customerOrderPositionId = '';
+    protected $_customerOrderPositionId = "0";
     
     /**
      * @var string
      */
-    protected $_productVariationId = '';
+    protected $_productVariationId = "0";
     
     /**
      * @var string
      */
-    protected $_productVariationValueId = '';
+    protected $_productVariationValueId = "0";
     
     /**
      * @var string

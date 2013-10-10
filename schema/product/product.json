@@ -128,7 +128,7 @@
         },
         "considerStock": {
             "type": [
-                "string"
+                "bool"
             ],
             "optional": false
         },
@@ -141,7 +141,7 @@
         },
         "considerVariationStock": {
             "type": [
-                "string",
+                "bool",
                 "null"
             ],
             "optional": true
@@ -154,7 +154,7 @@
         },
         "considerBasePrice": {
             "type": [
-                "string",
+                "bool",
                 "null"
             ],
             "optional": true

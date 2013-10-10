@@ -17,12 +17,12 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @var string
      */
-    protected $_id = '';
+    protected $_id = "0";
     
     /**
      * @var string
      */
-    protected $_customerOrderId = '';
+    protected $_customerOrderId = "0";
     
     /**
      * @var string

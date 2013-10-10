@@ -17,7 +17,7 @@ class ConfigItemI18n extends DataModel
     /**
      * @var string
      */
-    protected $_configItemId = '';
+    protected $_configItemId = "0";
     
     /**
      * @var string

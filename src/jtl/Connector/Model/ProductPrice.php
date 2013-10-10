@@ -17,12 +17,12 @@ class ProductPrice extends DataModel
     /**
      * @var string
      */
-    protected $_customerGroupId = '';
+    protected $_customerGroupId = "0";
     
     /**
      * @var string
      */
-    protected $_productId = '';
+    protected $_productId = "0";
     
     /**
      * @var double

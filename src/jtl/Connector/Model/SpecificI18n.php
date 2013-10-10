@@ -22,7 +22,7 @@ class SpecificI18n extends DataModel
     /**
      * @var string
      */
-    protected $_specificId = '';
+    protected $_specificId = "0";
     
     /**
      * @var string

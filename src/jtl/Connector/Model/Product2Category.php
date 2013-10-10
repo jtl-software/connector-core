@@ -17,17 +17,17 @@ class Product2Category extends DataModel
     /**
      * @var string
      */
-    protected $_id = '';
+    protected $_id = "0";
     
     /**
      * @var string
      */
-    protected $_categoryId = '';
+    protected $_categoryId = "0";
     
     /**
      * @var string
      */
-    protected $_productId = '';
+    protected $_productId = "0";
     
     /**
      * Product2Category Setter

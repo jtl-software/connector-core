@@ -17,12 +17,12 @@ class Category extends DataModel
     /**
      * @var string
      */
-    protected $_id = '';
+    protected $_id = "0";
     
     /**
      * @var string
      */
-    protected $_parentCategoryId = '';
+    protected $_parentCategoryId = "0";
     
     /**
      * @var int

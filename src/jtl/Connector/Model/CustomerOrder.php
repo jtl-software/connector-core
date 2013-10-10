@@ -17,27 +17,27 @@ class CustomerOrder extends DataModel
     /**
      * @var string
      */
-    protected $_id = '';
+    protected $_id = "0";
     
     /**
      * @var string
      */
-    protected $_customerId = '';
+    protected $_customerId = "0";
     
     /**
      * @var string
      */
-    protected $_shippingAddressId = '';
+    protected $_shippingAddressId = "0";
     
     /**
      * @var string
      */
-    protected $_billingAddressId = '';
+    protected $_billingAddressId = "0";
     
     /**
      * @var string
      */
-    protected $_shippingMethodId = '';
+    protected $_shippingMethodId = "0";
     
     /**
      * @var string
@@ -142,7 +142,7 @@ class CustomerOrder extends DataModel
     /**
      * @var string
      */
-    protected $_paymentModuleId = '';
+    protected $_paymentModuleId = "0";
     
     /**
      * CustomerOrder Setter

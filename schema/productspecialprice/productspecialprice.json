@@ -44,14 +44,14 @@
         },
         "considerQuantityLimit": {
             "type": [
-                "string",
+                "bool",
                 "null"
             ],
             "optional": true
         },
         "considerDateLimit": {
             "type": [
-                "string",
+                "bool",
                 "null"
             ],
             "optional": true

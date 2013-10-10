@@ -17,17 +17,17 @@ class TaxRate extends DataModel
     /**
      * @var string
      */
-    protected $_id = '';
+    protected $_id = "0";
     
     /**
      * @var string
      */
-    protected $_taxZoneId = '';
+    protected $_taxZoneId = "0";
     
     /**
      * @var string
      */
-    protected $_taxClassId = '';
+    protected $_taxClassId = "0";
     
     /**
      * @var double

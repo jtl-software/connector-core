@@ -17,12 +17,12 @@ class ProductVariationValue extends DataModel
     /**
      * @var string
      */
-    protected $_id = '';
+    protected $_id = "0";
     
     /**
      * @var string
      */
-    protected $_productVariationId = '';
+    protected $_productVariationId = "0";
     
     /**
      * @var double
@@ -47,7 +47,7 @@ class ProductVariationValue extends DataModel
     /**
      * @var string
      */
-    protected $_packagingUnitId = '';
+    protected $_packagingUnitId = "0";
     
     /**
      * ProductVariationValue Setter

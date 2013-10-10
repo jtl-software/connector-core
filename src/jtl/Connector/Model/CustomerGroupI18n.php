@@ -22,7 +22,7 @@ class CustomerGroupI18n extends DataModel
     /**
      * @var string
      */
-    protected $_customerGroupId = '';
+    protected $_customerGroupId = "0";
     
     /**
      * @var string

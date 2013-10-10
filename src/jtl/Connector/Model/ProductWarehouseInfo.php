@@ -17,12 +17,12 @@ class ProductWarehouseInfo extends DataModel
     /**
      * @var string
      */
-    protected $_productId = '';
+    protected $_productId = "0";
     
     /**
      * @var string
      */
-    protected $_warehouseId = '';
+    protected $_warehouseId = "0";
     
     /**
      * @var double

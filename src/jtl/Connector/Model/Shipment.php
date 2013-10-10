@@ -17,12 +17,12 @@ class Shipment extends DataModel
     /**
      * @var string
      */
-    protected $_id = '';
+    protected $_id = "0";
     
     /**
      * @var string
      */
-    protected $_deliveryNoteId = '';
+    protected $_deliveryNoteId = "0";
     
     /**
      * @var string

@@ -17,7 +17,7 @@ class EmailTemplate extends DataModel
     /**
      * @var string
      */
-    protected $_id = '';
+    protected $_id = "0";
     
     /**
      * @var string
@@ -37,7 +37,7 @@ class EmailTemplate extends DataModel
     /**
      * @var string
      */
-    protected $_moduleId = '';
+    protected $_moduleId = "0";
     
     /**
      * @var string

@@ -17,12 +17,12 @@ class SpecialPrice extends DataModel
     /**
      * @var string
      */
-    protected $_customerGroupId = '';
+    protected $_customerGroupId = "0";
     
     /**
      * @var string
      */
-    protected $_productSpecialPriceId = '';
+    protected $_productSpecialPriceId = "0";
     
     /**
      * @var double

@@ -17,12 +17,12 @@ class Image extends DataModel
     /**
      * @var string
      */
-    protected $_id = '';
+    protected $_id = "0";
     
     /**
      * @var string
      */
-    protected $_masterImageId = '';
+    protected $_masterImageId = "0";
     
     /**
      * @var string

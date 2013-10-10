@@ -22,7 +22,7 @@ class MediaFileAttr extends DataModel
     /**
      * @var string
      */
-    protected $_mediaFileId = '';
+    protected $_mediaFileId = "0";
     
     /**
      * @var string

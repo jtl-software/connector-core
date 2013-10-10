@@ -17,22 +17,22 @@ class CustomerOrderPosition extends DataModel
     /**
      * @var string
      */
-    protected $_id = '';
+    protected $_id = "0";
     
     /**
      * @var string
      */
-    protected $_productId = '';
+    protected $_productId = "0";
     
     /**
      * @var string
      */
-    protected $_shippingClassId = '';
+    protected $_shippingClassId = "0";
     
     /**
      * @var string
      */
-    protected $_customerOrderId = '';
+    protected $_customerOrderId = "0";
     
     /**
      * @var string
@@ -72,7 +72,7 @@ class CustomerOrderPosition extends DataModel
     /**
      * @var string
      */
-    protected $_configItemId = '';
+    protected $_configItemId = "0";
     
     /**
      * CustomerOrderPosition Setter

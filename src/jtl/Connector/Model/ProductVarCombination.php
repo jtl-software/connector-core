@@ -17,17 +17,17 @@ class ProductVarCombination extends DataModel
     /**
      * @var string
      */
-    protected $_productId = '';
+    protected $_productId = "0";
     
     /**
      * @var string
      */
-    protected $_productVariationId = '';
+    protected $_productVariationId = "0";
     
     /**
      * @var string
      */
-    protected $_productVariationValueId = '';
+    protected $_productVariationValueId = "0";
     
     /**
      * ProductVarCombination Setter

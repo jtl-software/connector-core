@@ -17,12 +17,12 @@ class CategoryCustomerGroup extends DataModel
     /**
      * @var string
      */
-    protected $_customerGroupId = '';
+    protected $_customerGroupId = "0";
     
     /**
      * @var string
      */
-    protected $_categoryId = '';
+    protected $_categoryId = "0";
     
     /**
      * @var double
