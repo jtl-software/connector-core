@@ -90,6 +90,11 @@ class ConfigItem extends DataModel
     protected $_sort = 0;
     
     /**
+     * @var double
+     */
+    protected $_vat = 0.0;
+    
+    /**
      * ConfigItem Setter
      *
      * @param string $name
@@ -131,6 +136,7 @@ class ConfigItem extends DataModel
                 case "_minQuantity":
                 case "_maxQuantity":
                 case "_initialQuantity":
+                case "_vat":
                 
                     $this->$name = (double)$value;
                     break;

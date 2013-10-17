@@ -103,6 +103,13 @@
                 "null"
             ],
             "optional": true
+        },
+        "vat": {
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true
         }
     },
     "required": [

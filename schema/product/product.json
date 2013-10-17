@@ -39,12 +39,6 @@
             ],
             "optional": true
         },
-        "taxClassId": {
-            "type": [
-                "string"
-            ],
-            "optional": false
-        },
         "shippingClassId": {
             "type": [
                 "string"
@@ -325,7 +319,6 @@
         "manufacturerId",
         "deliveryStatusId",
         "unitId",
-        "taxClassId",
         "shippingClassId",
         "productWeight",
         "shippingWeight",

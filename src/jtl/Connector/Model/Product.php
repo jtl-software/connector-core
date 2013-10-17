@@ -47,11 +47,6 @@ class Product extends DataModel
     /**
      * @var string
      */
-    protected $_taxClassId = "0";
-    
-    /**
-     * @var string
-     */
     protected $_shippingClassId = "0";
     
     /**
@@ -275,7 +270,6 @@ class Product extends DataModel
                 case "_deliveryStatusId":
                 case "_unitId":
                 case "_basePriceUnitId":
-                case "_taxClassId":
                 case "_shippingClassId":
                 case "_sku":
                 case "_note":

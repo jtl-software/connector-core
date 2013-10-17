@@ -14,13 +14,6 @@
             ],
             "optional": false
         },
-        "taxClassId": {
-            "type": [
-                "string",
-                "null"
-            ],
-            "optional": true
-        },
         "price": {
             "type": [
                 "float",

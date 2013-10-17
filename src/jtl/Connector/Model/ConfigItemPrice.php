@@ -25,11 +25,6 @@ class ConfigItemPrice extends DataModel
     protected $_customerGroupId = "0";
     
     /**
-     * @var string
-     */
-    protected $_taxClassId = "0";
-    
-    /**
      * @var float
      */
     protected $_price;
@@ -56,7 +51,6 @@ class ConfigItemPrice extends DataModel
             switch ($name) {
                 case "_configItemId":
                 case "_customerGroupId":
-                case "_taxClassId":
                 
                     $this->$name = (string)$value;
                     break;
