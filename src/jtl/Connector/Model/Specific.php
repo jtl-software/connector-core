@@ -28,12 +28,7 @@ class Specific extends DataModel
      * @var int
      */
     protected $_global = 0;
-    
-    /**
-     * @var string
-     */
-    protected $_name = '';
-    
+
     /**
      * @var string
      */
@@ -55,7 +50,6 @@ class Specific extends DataModel
         
             switch ($name) {
                 case "_id":
-                case "_name":
                 case "_type":
                 
                     $this->$name = (string)$value;

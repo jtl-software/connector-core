@@ -22,13 +22,6 @@
             ],
             "optional": true
         },
-        "name": {
-            "type": [
-                "string",
-                "null"
-            ],
-            "optional": true
-        },
         "type": {
             "type": [
                 "string"
