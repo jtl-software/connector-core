@@ -10,32 +10,33 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CategoryAttr Model
+ * Holds monolingual attribute
  * @access public
  */
 class CategoryAttr extends DataModel
 {
     /**
-     * @var string
+     * @var string Unique id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string Category id
      */
     protected $_categoryId = "0";
     
     /**
-     * @var string
+     * @var string Locale name
      */
     protected $_localeName = '';
     
     /**
-     * @var string
+     * @var string Attribute key name
      */
     protected $_name = '';
     
     /**
-     * @var string
+     * @var string Attribute value
      */
     protected $_value = '';
     
