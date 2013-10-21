@@ -67,7 +67,7 @@
         },
         "type": {
             "type": [
-                "int",
+                "string",
                 "null"
             ],
             "optional": true

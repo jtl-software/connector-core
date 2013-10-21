@@ -1,0 +1,43 @@
+{
+    "title": "CategoryFunctionAttr Model",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        },
+        "categoryId": {
+            "type": [
+                "string"
+            ],
+            "optional": false
+        },
+        "localeName": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
+        },
+        "name": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
+        },
+        "value": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
+        }
+    },
+    "required": [
+        "id",
+        "categoryId"
+    ]
+}

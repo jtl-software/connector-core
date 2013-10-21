@@ -60,9 +60,9 @@ class CustomerOrderPosition extends DataModel
     protected $_quantity = 0;
     
     /**
-     * @var int
+     * @var string
      */
-    protected $_type = 0;
+    protected $_type = '';
     
     /**
      * @var string
@@ -97,6 +97,7 @@ class CustomerOrderPosition extends DataModel
                 case "_sku":
                 case "_unique":
                 case "_configItemId":
+				case "_type":
                 
                     $this->$name = (string)$value;
                     break;
@@ -108,7 +109,6 @@ class CustomerOrderPosition extends DataModel
                     break;
             
                 case "_quantity":
-                case "_type":
                 
                     $this->$name = (int)$value;
                     break;
