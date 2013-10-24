@@ -21,9 +21,16 @@
                 "null"
             ],
             "optional": true
+        },
+        "level": {
+            "type": [
+                "int"
+            ],
+            "optional": false
         }
     },
     "required": [
-        "id"
+        "id",
+        "level"
     ]
 }

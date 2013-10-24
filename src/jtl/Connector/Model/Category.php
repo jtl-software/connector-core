@@ -15,19 +15,24 @@ use \jtl\Core\Model\DataModel;
 class Category extends DataModel
 {
     /**
-     * @var string Unique id
+     * @var string
      */
     protected $_id = "0";
     
     /**
-     * @var string Parent category id
+     * @var string
      */
     protected $_parentCategoryId = "0";
     
     /**
-     * @var int Sort order number
+     * @var int
      */
     protected $_sort = 0;
+    
+    /**
+     * @var int
+     */
+    protected $_level = 1;
     
     /**
      * Category Setter
@@ -51,6 +56,7 @@ class Category extends DataModel
                     break;
             
                 case "_sort":
+                case "_level":
                 
                     $this->$name = (int)$value;
                     break;

@@ -22,13 +22,6 @@
             ],
             "optional": true
         },
-        "isSelectable": {
-            "type": [
-                "bool",
-                "null"
-            ],
-            "optional": true
-        },
         "type": {
             "type": [
                 "string"

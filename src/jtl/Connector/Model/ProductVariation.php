@@ -30,11 +30,6 @@ class ProductVariation extends DataModel
     protected $_name = '';
     
     /**
-     * @var bool
-     */
-    protected $_isSelectable = false;
-    
-    /**
      * @var string
      */
     protected $_type = '';
@@ -65,11 +60,6 @@ class ProductVariation extends DataModel
                 case "_type":
                 
                     $this->$name = (string)$value;
-                    break;
-            
-                case "_isSelectable":
-                
-                    $this->$name = (bool)$value;
                     break;
             
                 case "_sort":
