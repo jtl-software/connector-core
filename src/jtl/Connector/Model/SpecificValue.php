@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * SpecificValue Model
+ * 
+ *
  * @access public
  */
 class SpecificValue extends DataModel

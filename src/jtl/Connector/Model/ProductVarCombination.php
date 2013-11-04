@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductVarCombination Model
+ * 
+ *
  * @access public
  */
 class ProductVarCombination extends DataModel

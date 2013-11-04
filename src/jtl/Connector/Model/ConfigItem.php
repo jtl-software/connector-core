@@ -10,87 +10,90 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ConfigItem Model
+ * A config Item that is displayed in a config Group. 
+Config item can reference to a specific productId to inherit price, name and description. 
+ *
  * @access public
  */
 class ConfigItem extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Required reference to config group id
      */
     protected $_configGroupId = "0";
     
     /**
-     * @var string
+     * @var string - Optional reference to a productId
      */
     protected $_productId = "0";
     
     /**
-     * @var int
+     * @var int - Config item type. 0: Product, 1: Special
      */
     protected $_type = 0;
     
     /**
-     * @var bool
+     * @var bool - Preselect configItem
      */
     protected $_isPreSelected = false;
     
     /**
-     * @var bool
+     * @var bool - Highlight or recommend config item
      */
     protected $_isRecommended = false;
     
     /**
-     * @var bool
+     * @var bool - Inherit product name and description  if productId is set
      */
     protected $_inheritProductName = false;
     
     /**
-     * @var bool
+     * @var bool - Inherit product price of referenced productId
      */
     protected $_inheritProductPrice = false;
     
     /**
-     * @var bool
+     * @var bool - Show discount compared to productId price
      */
     protected $_showDiscount = True;
     
     /**
-     * @var bool
+     * @var bool - Show surcharge compared to productId price
      */
     protected $_showSurcharge = False;
     
     /**
-     * @var bool
+     * @var bool - Ignore multiplier. Quantity of config item will not be increased if product quantity is increased
      */
     protected $_ignoreMultiplier = False;
     
     /**
-     * @var double
+     * @var double - Minimum quantity required to add configItem
      */
     protected $_minQuantity = 0;
     
     /**
-     * @var double
+     * @var double - Maximum allowed quantity
      */
     protected $_maxQuantity = 0;
     
     /**
-     * @var double
+     * @var double - Initial / predefined quantity
      */
     protected $_initialQuantity = 1;
     
     /**
-     * @var int
+     * @var int - Sort order number
      */
     protected $_sort = 0;
     
     /**
-     * @var double
+     * @var double - Value added tax
      */
     protected $_vat = 0.0;
     

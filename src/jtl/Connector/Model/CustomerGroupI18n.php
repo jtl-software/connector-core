@@ -10,22 +10,24 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerGroupI18n Model
+ * Locale specific translation for customer group name
+ *
  * @access public
  */
 class CustomerGroupI18n extends DataModel
 {
     /**
-     * @var string
+     * @var string - Locale name
      */
     protected $_localeName = '';
     
     /**
-     * @var string
+     * @var string - References the customer group
      */
     protected $_customerGroupId = "0";
     
     /**
-     * @var string
+     * @var string - Locale specific customer group name
      */
     protected $_name = '';
     

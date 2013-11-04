@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Warehouse Model
+ * 
+ *
  * @access public
  */
 class Warehouse extends DataModel

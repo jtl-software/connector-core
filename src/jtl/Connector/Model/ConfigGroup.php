@@ -10,42 +10,44 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ConfigGroup Model
+ * Config group holds several configItems and settings
+ *
  * @access public
  */
 class ConfigGroup extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Image file path
      */
     protected $_imagePath = '';
     
     /**
-     * @var int
+     * @var int - Minimum number required selections
      */
     protected $_minimumSelection = 0;
     
     /**
-     * @var int
+     * @var int - Maximum number allowed selections
      */
     protected $_maximumSelection = 0;
     
     /**
-     * @var int
+     * @var int - Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      */
     protected $_type = 0;
     
     /**
-     * @var int
+     * @var int - Sort order number
      */
     protected $_sort = 0;
     
     /**
-     * @var string
+     * @var string - Internal comment to differantiate config groups by comment name
      */
     protected $_comment = '';
     

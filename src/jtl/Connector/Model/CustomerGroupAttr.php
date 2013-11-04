@@ -10,27 +10,29 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerGroupAttr Model
+ * Monolingual customer group attribute
+ *
  * @access public
  */
 class CustomerGroupAttr extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - References a customer group
      */
     protected $_customerGroupId = "0";
     
     /**
-     * @var string
+     * @var string - Attribute key
      */
     protected $_key = '';
     
     /**
-     * @var string
+     * @var string - Attribute value
      */
     protected $_value = '';
     

@@ -10,27 +10,29 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ConfigItemPrice Model
+ * Customer group specific price for config item
+ *
  * @access public
  */
 class ConfigItemPrice extends DataModel
 {
     /**
-     * @var string
+     * @var string - References a config item
      */
     protected $_configItemId = "0";
     
     /**
-     * @var string
+     * @var string - References a customer group
      */
     protected $_customerGroupId = "0";
     
     /**
-     * @var float
+     * @var float - Net price or percental value to add/deduct to/from product price (depending on type). Positive value means surcharge, negative value means discount. Also see configItem.vat for value added tax.
      */
     protected $_price;
     
     /**
-     * @var int
+     * @var int - fixed price (0) or percental price type (1)
      */
     protected $_type = 0;
     

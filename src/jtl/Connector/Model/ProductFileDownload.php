@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductFileDownload Model
+ * 
+ *
  * @access public
  */
 class ProductFileDownload extends DataModel

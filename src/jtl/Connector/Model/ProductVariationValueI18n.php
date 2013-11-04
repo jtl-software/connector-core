@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductVariationValueI18n Model
+ * 
+ *
  * @access public
  */
 class ProductVariationValueI18n extends DataModel

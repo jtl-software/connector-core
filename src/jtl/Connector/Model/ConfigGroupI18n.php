@@ -10,27 +10,29 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ConfigGroupI18n Model
+ * Locale specific translation for configGroup
+ *
  * @access public
  */
 class ConfigGroupI18n extends DataModel
 {
     /**
-     * @var string
+     * @var string - References a config group id
      */
     protected $_configGroupId = "0";
     
     /**
-     * @var string
+     * @var string - Locale Name
      */
     protected $_localeName = '';
     
     /**
-     * @var string
+     * @var string - Config group name
      */
     protected $_name = '';
     
     /**
-     * @var string
+     * @var string - Description (HTML)
      */
     protected $_description = '';
     

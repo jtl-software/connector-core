@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductVariationVisibility Model
+ * 
+ *
  * @access public
  */
 class ProductVariationVisibility extends DataModel

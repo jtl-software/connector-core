@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerOrderBillingAddress Model
+ * 
+ *
  * @access public
  */
 class CustomerOrderBillingAddress extends DataModel

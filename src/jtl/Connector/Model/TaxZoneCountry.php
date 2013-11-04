@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * TaxZoneCountry Model
+ * 
+ *
  * @access public
  */
 class TaxZoneCountry extends DataModel

@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductType Model
+ * 
+ *
  * @access public
  */
 class ProductType extends DataModel

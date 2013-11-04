@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Shipment Model
+ * 
+ *
  * @access public
  */
 class Shipment extends DataModel

@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerOrderPaymentInfo Model
+ * 
+ *
  * @access public
  */
 class CustomerOrderPaymentInfo extends DataModel

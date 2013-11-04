@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * SetArticle Model
+ * 
+ *
  * @access public
  */
 class SetArticle extends DataModel

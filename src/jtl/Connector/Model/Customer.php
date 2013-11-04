@@ -10,177 +10,179 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Customer Model
+ * Holds customer address data and preferences
+ *
  * @access public
  */
 class Customer extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - References a customer group
      */
     protected $_customerGroupId = "0";
     
     /**
-     * @var string
+     * @var string - Locale name preference
      */
     protected $_localeName = '';
     
     /**
-     * @var string
+     * @var string - Customer number set by ERP software
      */
     protected $_customerNumber = '';
     
     /**
-     * @var string
+     * @var string - (Encrypted!) customer password
      */
     protected $_password = '';
     
     /**
-     * @var string
+     * @var string - Salutation (german: "Anrede")
      */
     protected $_salutation = '';
     
     /**
-     * @var string
+     * @var string - Title, e.g. "Prof. Dr."
      */
     protected $_title = '';
     
     /**
-     * @var string
+     * @var string - First name
      */
     protected $_firstName = '';
     
     /**
-     * @var string
+     * @var string - Last name
      */
     protected $_lastName = '';
     
     /**
-     * @var string
+     * @var string - Company name
      */
     protected $_company = '';
     
     /**
-     * @var string
+     * @var string - Street name
      */
     protected $_street = '';
     
     /**
-     * @var string
+     * @var string - Street number
      */
     protected $_streetNumber = '';
     
     /**
-     * @var string
+     * @var string - Delivery instruction e.g. "c/o John Doe"
      */
     protected $_deliveryInstruction = '';
     
     /**
-     * @var string
+     * @var string - Extra address line e.g. "Apartment 2.5"
      */
     protected $_extraAddressLine = '';
     
     /**
-     * @var string
+     * @var string - ZIP / postal code
      */
     protected $_zipCode = '';
     
     /**
-     * @var string
+     * @var string - City
      */
     protected $_city = '';
     
     /**
-     * @var string
+     * @var string - State
      */
     protected $_state = '';
     
     /**
-     * @var string
+     * @var string - Country ISO 3166-2 (2 letter Uppercase)
      */
     protected $_countryIso = '';
     
     /**
-     * @var string
+     * @var string - Phone number
      */
     protected $_phone = '';
     
     /**
-     * @var string
+     * @var string - Mobile phone number
      */
     protected $_mobile = '';
     
     /**
-     * @var string
+     * @var string - Fax number
      */
     protected $_fax = '';
     
     /**
-     * @var string
+     * @var string - E-Mail address
      */
     protected $_eMail = '';
     
     /**
-     * @var string
+     * @var string - VAT number (german "USt-ID")
      */
     protected $_vatNumber = '';
     
     /**
-     * @var string
+     * @var string - WWW address
      */
     protected $_www = '';
     
     /**
-     * @var double
+     * @var double - Credit value on customer account in default currency
      */
     protected $_accountCredit = 0.0;
     
     /**
-     * @var bool
+     * @var bool - Flag if customer receives newsletter
      */
     protected $_hasNewsletterSubscription = false;
     
     /**
-     * @var date
+     * @var date - Date of birth
      */
     protected $_birthday;
     
     /**
-     * @var double
+     * @var double - Percentual discount for customer on all prices
      */
     protected $_discount = 0.0;
     
     /**
-     * @var string
+     * @var string - Customer origin
      */
     protected $_origin = '';
     
     /**
-     * @var string
+     * @var string - Creation date
      */
     protected $_created = '';
     
     /**
-     * @var string
+     * @var string - Last modified date
      */
     protected $_modified = '';
     
     /**
-     * @var bool
+     * @var bool - Flag if customer is active (login allowed)
      */
     protected $_isActive = false;
     
     /**
-     * @var bool
+     * @var bool - Flag if customer is fetched by ERP System
      */
     protected $_isFetched = false;
     
     /**
-     * @var bool
+     * @var bool - persistent customer account
      */
     protected $_hasCustomerAccount = false;
     

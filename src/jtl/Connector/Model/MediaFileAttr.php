@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * MediaFileAttr Model
+ * 
+ *
  * @access public
  */
 class MediaFileAttr extends DataModel

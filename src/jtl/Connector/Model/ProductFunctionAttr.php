@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductFunctionAttr Model
+ * 
+ *
  * @access public
  */
 class ProductFunctionAttr extends DataModel

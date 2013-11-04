@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Language Model
+ * 
+ *
  * @access public
  */
 class Language extends DataModel

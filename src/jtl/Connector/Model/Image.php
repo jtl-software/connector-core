@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Image Model
+ * 
+ *
  * @access public
  */
 class Image extends DataModel

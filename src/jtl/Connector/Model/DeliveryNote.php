@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * DeliveryNote Model
+ * 
+ *
  * @access public
  */
 class DeliveryNote extends DataModel

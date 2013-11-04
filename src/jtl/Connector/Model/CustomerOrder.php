@@ -10,137 +10,139 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerOrder Model
+ * 
+ *
  * @access public
  */
 class CustomerOrder extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - References the customer
      */
     protected $_customerId = "0";
     
     /**
-     * @var string
+     * @var string - References shipping address
      */
     protected $_shippingAddressId = "0";
     
     /**
-     * @var string
+     * @var string - References billing address
      */
     protected $_billingAddressId = "0";
     
     /**
-     * @var string
+     * @var string - Shipping method
      */
     protected $_shippingMethodId = "0";
     
     /**
-     * @var string
+     * @var string - The locale name set when customerOrder was finished
      */
     protected $_localeName = '';
     
     /**
-     * @var string
+     * @var string - The currency ISO set, when customerOrder was finished
      */
     protected $_currencyIso = '';
     
     /**
-     * @var string
+     * @var string - Estimated delivery date set by ERP System
      */
     protected $_estimatedDeliveryDate = '';
     
     /**
-     * @var double
+     * @var double - Customer credit (credit reduces total sum)
      */
     protected $_credit = 0.0;
     
     /**
-     * @var double
+     * @var double - Total sum to pay
      */
     protected $_totalSum = 0.0;
     
     /**
-     * @var string
+     * @var string - Session id or session hash
      */
     protected $_session = '';
     
     /**
-     * @var string
+     * @var string - Shipping method name
      */
     protected $_shippingMethodName = '';
     
     /**
-     * @var string
+     * @var string - Order number (set by ERP System)
      */
     protected $_orderNumber = '';
     
     /**
-     * @var string
+     * @var string - Additional shipping info
      */
     protected $_shippingInfo = '';
     
     /**
-     * @var string
+     * @var string - Shipping date
      */
     protected $_shippingDate = '';
     
     /**
-     * @var string
+     * @var string - Payment date
      */
     protected $_paymentDate = '';
     
     /**
-     * @var string
+     * @var string - Date when customer will receive notification to rate order
      */
     protected $_ratingNotificationDate = '';
     
     /**
-     * @var  
+     * @var   - TrackingID (not Tracking URL)
      */
     protected $_tracking;
     
     /**
-     * @var string
+     * @var string - Additional note
      */
     protected $_note = '';
     
     /**
-     * @var string
+     * @var string - Logistic name
      */
     protected $_logistic = '';
     
     /**
-     * @var string
+     * @var string - Tracking URL
      */
     protected $_trackingURL = '';
     
     /**
-     * @var string
+     * @var string - Customer IP address at the time of checkout. Do not store full IP-Adress (dependent on local laws or regulations)
      */
     protected $_ip = '';
     
     /**
-     * @var bool
+     * @var bool - Flag if customerOrder is fetched by ERP System
      */
     protected $_isFetched = false;
     
     /**
-     * @var string
+     * @var string - Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
      */
     protected $_status = '';
     
     /**
-     * @var string
+     * @var string - Date of creation
      */
     protected $_created = '';
     
     /**
-     * @var string
+     * @var string - Payment module id
      */
     protected $_paymentModuleId = "0";
     

@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * EmailTemplateI18n Model
+ * 
+ *
  * @access public
  */
 class EmailTemplateI18n extends DataModel

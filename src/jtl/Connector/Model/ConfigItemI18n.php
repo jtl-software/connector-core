@@ -10,27 +10,29 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ConfigItemI18n Model
+ * Locale specific translation for config item
+ *
  * @access public
  */
 class ConfigItemI18n extends DataModel
 {
     /**
-     * @var string
+     * @var string - References a config item id
      */
     protected $_configItemId = "0";
     
     /**
-     * @var string
+     * @var string - locale name
      */
     protected $_localeName = '';
     
     /**
-     * @var string
+     * @var string - Config item name. Will be ignored if inheritProductName==true
      */
     protected $_name = '';
     
     /**
-     * @var string
+     * @var string - Description (html). Will be ignored, if inheritProductName==true
      */
     protected $_description = '';
     

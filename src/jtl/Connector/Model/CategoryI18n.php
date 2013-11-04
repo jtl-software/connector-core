@@ -10,47 +10,49 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CategoryI18n Model
+ * Multilingual category data
+ *
  * @access public
  */
 class CategoryI18n extends DataModel
 {
     /**
-     * @var string
+     * @var string - Locale name
      */
     protected $_localeName = '';
     
     /**
-     * @var string
+     * @var string - Category id
      */
     protected $_categoryId = "0";
     
     /**
-     * @var string
+     * @var string - Category name
      */
     protected $_name = '';
     
     /**
-     * @var string
+     * @var string - Category URL
      */
     protected $_url = '';
     
     /**
-     * @var string
+     * @var string - Long Description
      */
     protected $_description = '';
     
     /**
-     * @var string
+     * @var string - Short description used for meta tag description
      */
     protected $_metaDescription = '';
     
     /**
-     * @var string
+     * @var string - Keywords for meta tag keywords
      */
     protected $_metaKeywords = '';
     
     /**
-     * @var string
+     * @var string - Title used for title tag
      */
     protected $_titleTag = '';
     

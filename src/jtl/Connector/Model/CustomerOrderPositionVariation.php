@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerOrderPositionVariation Model
+ * 
+ *
  * @access public
  */
 class CustomerOrderPositionVariation extends DataModel

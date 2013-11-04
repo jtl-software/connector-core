@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * FileUpload Model
+ * 
+ *
  * @access public
  */
 class FileUpload extends DataModel

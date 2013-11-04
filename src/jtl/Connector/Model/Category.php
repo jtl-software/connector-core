@@ -10,27 +10,29 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Category Model
+ * Category model with sort number, link to parent category and level
+ *
  * @access public
  */
 class Category extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Parent category id
      */
     protected $_parentCategoryId = "0";
     
     /**
-     * @var int
+     * @var int - Sort order number
      */
     protected $_sort = 0;
     
     /**
-     * @var int
+     * @var int - Category level (default 1 for first level)
      */
     protected $_level = 0;
     

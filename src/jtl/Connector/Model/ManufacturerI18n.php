@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ManufacturerI18n Model
+ * 
+ *
  * @access public
  */
 class ManufacturerI18n extends DataModel

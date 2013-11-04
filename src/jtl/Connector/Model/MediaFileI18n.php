@@ -10,6 +10,8 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * MediaFileI18n Model
+ * 
+ *
  * @access public
  */
 class MediaFileI18n extends DataModel

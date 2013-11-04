@@ -10,52 +10,54 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Currency Model
+ * Holds currency data
+ *
  * @access public
  */
 class Currency extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Currency name
      */
     protected $_name = '';
     
     /**
-     * @var string
+     * @var string - Currency ISO 4217 (3-letter Uppercase Code)
      */
     protected $_iso = '';
     
     /**
-     * @var string
+     * @var string - Html name e.g. "&euro;"
      */
     protected $_nameHtml = '';
     
     /**
-     * @var double
+     * @var double - Conversion factor to default currency
      */
     protected $_factor = 0.0;
     
     /**
-     * @var bool
+     * @var bool - Default currency
      */
     protected $_isDefault = False;
     
     /**
-     * @var bool
+     * @var bool - Display currency before or after value. Ignore this flag if you have the correct user locale preference. 
      */
     protected $_hasCurrencySignBeforeValue = False;
     
     /**
-     * @var string
+     * @var string - Delimiter char for cent, default=",". Ignore this flag if you have the correct user locale preference.
      */
     protected $_delimiterCent = ",";
     
     /**
-     * @var string
+     * @var string - Delimiter char for thousand. Default=".". Ignore this flag if you have the correct user locale preference.
      */
     protected $_delimiterThousand = ".";
     
