@@ -28,7 +28,7 @@ class Specific extends DataModel
      * @var int
      */
     protected $_global = 0;
-
+    
     /**
      * @var string
      */

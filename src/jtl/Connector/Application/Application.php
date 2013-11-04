@@ -340,7 +340,7 @@ class Application extends CoreApplication
     protected function startConfiguration()
     {
         if (!isset(self::$session)) {
-            throw new \RuntimeException('Session not initialized');
+            throw new SessionException('Session not initialized', -32001);
         }
 
         if (isset($this->config)) {

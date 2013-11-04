@@ -145,9 +145,9 @@ class Customer extends DataModel
     protected $_hasNewsletterSubscription = false;
     
     /**
-     * @var string
+     * @var date
      */
-    protected $_birthday = '';
+    protected $_birthday;
     
     /**
      * @var double
@@ -223,7 +223,6 @@ class Customer extends DataModel
                 case "_eMail":
                 case "_vatNumber":
                 case "_www":
-                case "_birthday":
                 case "_origin":
                 case "_created":
                 case "_modified":
@@ -243,6 +242,11 @@ class Customer extends DataModel
                 case "_hasCustomerAccount":
                 
                     $this->$name = (bool)$value;
+                    break;
+            
+                case "_birthday":
+                
+                    $this->$name = (date)$value;
                     break;
             
             }

@@ -10,103 +10,102 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Company Model
- * Provides company address and bank details
  * @access public
  */
 class Company extends DataModel
 {
     /**
-     * @var string Company name
+     * @var string
      */
     protected $_name = '';
     
     /**
-     * @var string Company businessman / entrepreneur
+     * @var string
      */
     protected $_businessman = '';
     
     /**
-     * @var string Street
+     * @var string
      */
     protected $_street = '';
     
     /**
-     * @var string Street number
+     * @var string
      */
     protected $_streetNumber = '';
     
     /**
-     * @var string Zip code / postcode
+     * @var string
      */
     protected $_zipCode = '';
     
     /**
-     * @var string City
+     * @var string
      */
     protected $_city = '';
     
     /**
-     * @var string Country
+     * @var string
      */
-    protected $_country = '';
+    protected $_countryIso = '';
     
     /**
-     * @var string Phone number
+     * @var string
      */
     protected $_phone = '';
     
     /**
-     * @var string Fax number
+     * @var string
      */
     protected $_fax = '';
     
     /**
-     * @var string Company E-Mail address
+     * @var string
      */
     protected $_eMail = '';
     
     /**
-     * @var string Company website
+     * @var string
      */
     protected $_www = '';
     
     /**
-     * @var string Bank code number
+     * @var string
      */
     protected $_bankCode = '';
     
     /**
-     * @var string Bank account number
+     * @var string
      */
     protected $_accountNumber = '';
     
     /**
-     * @var string Bank Name e.g. "Deutsche Bank"
+     * @var string
      */
-    protected $_bankAccount = '';
+    protected $_bankName = '';
     
     /**
-     * @var string Bank account holder name e.g. "John Doe"
+     * @var string
      */
     protected $_accountHolder = '';
     
     /**
-     * @var string VAT registration number (german: USt-ID)
+     * @var string
      */
     protected $_vatNumber = '';
     
     /**
-     * @var string Tax id number (german: Steuernummer)
+     * @var string
      */
     protected $_taxIdNumber = '';
     
     /**
-     * @var string International Bank Account Number (IBAN) 
+     * @var string
      */
     protected $_iban = '';
     
     /**
-     * @var string Bank Identifier Code (BIC)
+     * @var string
      */
     protected $_bic = '';
     
@@ -131,14 +130,14 @@ class Company extends DataModel
                 case "_streetNumber":
                 case "_zipCode":
                 case "_city":
-                case "_country":
+                case "_countryIso":
                 case "_phone":
                 case "_fax":
                 case "_eMail":
                 case "_www":
                 case "_bankCode":
                 case "_accountNumber":
-                case "_bankAccount":
+                case "_bankName":
                 case "_accountHolder":
                 case "_vatNumber":
                 case "_taxIdNumber":

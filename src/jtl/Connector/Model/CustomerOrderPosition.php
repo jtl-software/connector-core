@@ -95,9 +95,9 @@ class CustomerOrderPosition extends DataModel
                 case "_customerOrderId":
                 case "_name":
                 case "_sku":
+                case "_type":
                 case "_unique":
                 case "_configItemId":
-				case "_type":
                 
                     $this->$name = (string)$value;
                     break;

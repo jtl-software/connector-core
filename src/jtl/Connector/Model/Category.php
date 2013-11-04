@@ -32,7 +32,7 @@ class Category extends DataModel
     /**
      * @var int
      */
-    protected $_level = 1;
+    protected $_level = 0;
     
     /**
      * Category Setter

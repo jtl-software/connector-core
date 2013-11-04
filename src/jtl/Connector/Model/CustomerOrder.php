@@ -100,9 +100,9 @@ class CustomerOrder extends DataModel
     protected $_ratingNotificationDate = '';
     
     /**
-     * @var string
+     * @var  
      */
-    protected $_tracking = '';
+    protected $_tracking;
     
     /**
      * @var string
@@ -174,7 +174,6 @@ class CustomerOrder extends DataModel
                 case "_shippingDate":
                 case "_paymentDate":
                 case "_ratingNotificationDate":
-                case "_tracking":
                 case "_note":
                 case "_logistic":
                 case "_trackingURL":
@@ -190,6 +189,11 @@ class CustomerOrder extends DataModel
                 case "_totalSum":
                 
                     $this->$name = (double)$value;
+                    break;
+            
+                case "_tracking":
+                
+                    $this->$name = ( )$value;
                     break;
             
                 case "_isFetched":
