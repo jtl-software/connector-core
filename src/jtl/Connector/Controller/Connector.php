@@ -166,6 +166,8 @@ class Connector extends CoreController
         $action = new Action();
         // If credentials are not valid, return appropriate response
         if ($data['response'] !== $validResponse) {
+            sleep(2);
+
             // Set 'handled' flag because the call actually IS handled
             $action->setHandled(true);
 
