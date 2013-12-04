@@ -142,8 +142,16 @@ class Connector extends CoreController
 
         $configuredAuthToken = $this->getConfig()->read('auth_token');
 
+        if (function_exists('apache_request_headers')) {
+            $headers = apache_request_headers();
+            $digestData = $headers['Authorization'];
+        }
+        else {
+            $digestData = $_SERVER['PHP_AUTH_DIGEST'];
+        }
+
         // Check if authentication data arrived
-        if (empty($_SERVER['PHP_AUTH_DIGEST'])) {
+        if (is_null($digestData)) {
             $nonce = md5(uniqid());
 
             header('HTTP/1.1 401 Unauthorized');
@@ -152,7 +160,7 @@ class Connector extends CoreController
         }
 
         // Check if we have valid authentication data
-        if (!($data = $this->parseHttpDigest($_SERVER['PHP_AUTH_DIGEST'])) || ($data['username'] !== 'jtl')) {
+        if (!($data = $this->parseHttpDigest($digestData)) || ($data['username'] !== 'jtl')) {
             header('HTTP/1.1 403 Forbidden');
             exit;
         }
