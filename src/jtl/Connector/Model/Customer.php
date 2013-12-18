@@ -228,6 +228,7 @@ class Customer extends DataModel
                 case "_origin":
                 case "_created":
                 case "_modified":
+                case "_birthday":
                 
                     $this->$name = (string)$value;
                     break;
@@ -244,13 +245,7 @@ class Customer extends DataModel
                 case "_hasCustomerAccount":
                 
                     $this->$name = (bool)$value;
-                    break;
-            
-                case "_birthday":
-                
-                    $this->$name = (date)$value;
-                    break;
-            
+                    break;            
             }
         }
     }
