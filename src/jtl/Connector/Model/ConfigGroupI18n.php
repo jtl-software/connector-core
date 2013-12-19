@@ -17,12 +17,12 @@ use \jtl\Core\Model\DataModel;
 class ConfigGroupI18n extends DataModel
 {
     /**
-     * @var string - References a config group id
+     * @var string - Reference to configGroup
      */
     protected $_configGroupId = "0";
     
     /**
-     * @var string - Locale Name
+     * @var string - Locale
      */
     protected $_localeName = '';
     

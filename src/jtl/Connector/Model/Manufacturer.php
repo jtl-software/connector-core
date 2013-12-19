@@ -10,36 +10,36 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Manufacturer Model
- * 
+ * Manufacturer model
  *
  * @access public
  */
 class Manufacturer extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique manufacturer id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Manufacturer name
      */
     protected $_name = '';
     
     /**
-     * @var string
+     * @var string - Manufacturer website URL
      */
     protected $_www = '';
     
     /**
-     * @var int
+     * @var int - Sort number
      */
     protected $_sort = 0;
     
     /**
-     * @var string
+     * @var string - Url path e.g. "Products-manufactured-by-X"
      */
-    protected $_url = '';
+    protected $_urlPath = '';
     
     /**
      * Manufacturer Setter
@@ -59,7 +59,7 @@ class Manufacturer extends DataModel
                 case "_id":
                 case "_name":
                 case "_www":
-                case "_url":
+                case "_urlPath":
                 
                     $this->$name = (string)$value;
                     break;

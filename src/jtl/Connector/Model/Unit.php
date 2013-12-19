@@ -10,24 +10,25 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Unit Model
- * 
+ * Unit model. 
+Specifies product units like "piece", "bottle", "package"
  *
  * @access public
  */
 class Unit extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unit id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string
+     * @var string - Localized unit name
      */
     protected $_name = '';
     

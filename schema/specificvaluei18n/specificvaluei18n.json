@@ -16,12 +16,11 @@
         },
         "value": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
-        "url": {
+        "urlPath": {
             "type": [
                 "string"
             ],
@@ -29,36 +28,37 @@
         },
         "description": {
             "type": [
-                "string"
+                "string",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "metaDescription": {
             "type": [
-                "string"
+                "string",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "metaKeywords": {
             "type": [
-                "string"
+                "string",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "titleTag": {
             "type": [
-                "string"
+                "string",
+                "null"
             ],
-            "optional": false
+            "optional": true
         }
     },
     "required": [
         "localeName",
         "specificValueId",
-        "url",
-        "description",
-        "metaDescription",
-        "metaKeywords",
-        "titleTag"
+        "value",
+        "urlPath"
     ]
 }

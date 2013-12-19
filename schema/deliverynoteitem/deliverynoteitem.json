@@ -1,5 +1,5 @@
 {
-    "title": "CategoryAttr Model",
+    "title": "DeliveryNoteItem Model",
     "type": "object",
     "properties": {
         "id": {
@@ -8,36 +8,57 @@
             ],
             "optional": false
         },
-        "categoryId": {
+        "customerOrderItemId": {
             "type": [
                 "string"
             ],
             "optional": false
         },
-        "localeName": {
+        "quantity": {
+            "type": [
+                "double"
+            ],
+            "optional": false
+        },
+        "warehouseId": {
             "type": [
                 "string",
                 "null"
             ],
             "optional": true
         },
-        "name": {
+        "serialNumber": {
             "type": [
                 "string",
                 "null"
             ],
             "optional": true
         },
-        "value": {
+        "batchNumber": {
             "type": [
                 "string",
                 "null"
             ],
             "optional": true
+        },
+        "bestBefore": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true
+        },
+        "deliveryNoteId": {
+            "type": [
+                "string"
+            ],
+            "optional": false
         }
     },
     "required": [
         "id",
-        "categoryId"
+        "customerOrderItemId",
+        "quantity",
+        "deliveryNoteId"
     ]
 }

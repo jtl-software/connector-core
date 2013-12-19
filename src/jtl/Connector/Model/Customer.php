@@ -17,7 +17,7 @@ use \jtl\Core\Model\DataModel;
 class Customer extends DataModel
 {
     /**
-     * @var string - Unique id
+     * @var string - Unique customer id
      */
     protected $_id = "0";
     
@@ -27,12 +27,12 @@ class Customer extends DataModel
     protected $_customerGroupId = "0";
     
     /**
-     * @var string - Locale name preference
+     * @var string - User locale preference
      */
     protected $_localeName = '';
     
     /**
-     * @var string - Customer number set by ERP software
+     * @var string - Customer number set by JTL-Wawi ERP software
      */
     protected $_customerNumber = '';
     
@@ -70,11 +70,6 @@ class Customer extends DataModel
      * @var string - Street name
      */
     protected $_street = '';
-    
-    /**
-     * @var string - Street number
-     */
-    protected $_streetNumber = '';
     
     /**
      * @var string - Delivery instruction e.g. "c/o John Doe"
@@ -147,9 +142,9 @@ class Customer extends DataModel
     protected $_hasNewsletterSubscription = false;
     
     /**
-     * @var date - Date of birth
+     * @var string - Date of birth
      */
-    protected $_birthday;
+    protected $_birthday = '';
     
     /**
      * @var double - Percentual discount for customer on all prices
@@ -212,7 +207,6 @@ class Customer extends DataModel
                 case "_lastName":
                 case "_company":
                 case "_street":
-                case "_streetNumber":
                 case "_deliveryInstruction":
                 case "_extraAddressLine":
                 case "_zipCode":
@@ -225,10 +219,10 @@ class Customer extends DataModel
                 case "_eMail":
                 case "_vatNumber":
                 case "_www":
+                case "_birthday":
                 case "_origin":
                 case "_created":
                 case "_modified":
-                case "_birthday":
                 
                     $this->$name = (string)$value;
                     break;
@@ -245,7 +239,8 @@ class Customer extends DataModel
                 case "_hasCustomerAccount":
                 
                     $this->$name = (bool)$value;
-                    break;            
+                    break;
+            
             }
         }
     }

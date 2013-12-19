@@ -10,34 +10,29 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductVariation Model
- * 
+ * ProductVariation Model. Each product defines its own variations, so variations are not global  in contrast to specifics. 
  *
  * @access public
  */
 class ProductVariation extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique productVariation id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Reference to product
      */
     protected $_productId = "0";
     
     /**
-     * @var string
-     */
-    protected $_name = '';
-    
-    /**
-     * @var string
+     * @var string - Variation type
      */
     protected $_type = '';
     
     /**
-     * @var int
+     * @var int - Sort number
      */
     protected $_sort = 0;
     
@@ -58,7 +53,6 @@ class ProductVariation extends DataModel
             switch ($name) {
                 case "_id":
                 case "_productId":
-                case "_name":
                 case "_type":
                 
                     $this->$name = (string)$value;

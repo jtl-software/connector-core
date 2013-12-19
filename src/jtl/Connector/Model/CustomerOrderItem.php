@@ -9,75 +9,75 @@ namespace jtl\Connector\Model;
 use \jtl\Core\Model\DataModel;
 
 /**
- * CustomerOrderPosition Model
- * 
+ * CustomerOrderItem Model
+ * Order item in customer order
  *
  * @access public
  */
-class CustomerOrderPosition extends DataModel
+class CustomerOrderItem extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique customerOrderItem id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Reference to product
      */
     protected $_productId = "0";
     
     /**
-     * @var string
+     * @var string - Reference to shippingClass
      */
     protected $_shippingClassId = "0";
     
     /**
-     * @var string
+     * @var string - Reference to customerOrder
      */
     protected $_customerOrderId = "0";
     
     /**
-     * @var string
+     * @var string - Order item name
      */
     protected $_name = '';
     
     /**
-     * @var string
+     * @var string - Stock keeping Unit (unique item identifier)
      */
     protected $_sku = '';
     
     /**
-     * @var double
+     * @var double - Price (net)
      */
     protected $_price = 0.0;
     
     /**
-     * @var double
+     * @var double - Value added tax
      */
     protected $_vat = 0.0;
     
     /**
-     * @var int
+     * @var int - Quantity purchased
      */
     protected $_quantity = 0;
     
     /**
-     * @var string
+     * @var string - Item type e.g. "product" or "shipping"
      */
     protected $_type = '';
     
     /**
-     * @var string
+     * @var string - Unique Hashsum (if item is part of configurable item
      */
     protected $_unique = '';
     
     /**
-     * @var string
+     * @var string - References configItemId (if item is part of a configurable item)
      */
     protected $_configItemId = "0";
     
     /**
-     * CustomerOrderPosition Setter
+     * CustomerOrderItem Setter
      *
      * @param string $name
      * @param string $value

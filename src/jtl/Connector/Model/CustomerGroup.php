@@ -10,14 +10,14 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerGroup Model
- * Customer group settings
+ * Customer group model
  *
  * @access public
  */
 class CustomerGroup extends DataModel
 {
     /**
-     * @var string - Unique id
+     * @var string - Unique customerGroup id
      */
     protected $_id = "0";
     

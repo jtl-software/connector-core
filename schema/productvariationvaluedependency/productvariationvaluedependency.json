@@ -4,19 +4,19 @@
     "properties": {
         "productVariationValueId": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "productVariationValueTargetId": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         }
     },
     "required": [
+        "productVariationValueId",
+        "productVariationValueTargetId"
     ]
 }

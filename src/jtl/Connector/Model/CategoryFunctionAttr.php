@@ -10,26 +10,21 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CategoryFunctionAttr Model
- * Holds monolingual attribute
+ * Monolingual category attribute
  *
  * @access public
  */
 class CategoryFunctionAttr extends DataModel
 {
     /**
-     * @var string - Unique id
+     * @var string - Unique categoryFunctionAttr id
      */
     protected $_id = "0";
     
     /**
-     * @var string - Category id
+     * @var string - Reference to category
      */
     protected $_categoryId = "0";
-    
-    /**
-     * @var string - Locale name
-     */
-    protected $_localeName = '';
     
     /**
      * @var string - Attribute key name
@@ -58,7 +53,6 @@ class CategoryFunctionAttr extends DataModel
             switch ($name) {
                 case "_id":
                 case "_categoryId":
-                case "_localeName":
                 case "_name":
                 case "_value":
                 

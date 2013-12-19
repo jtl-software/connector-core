@@ -17,7 +17,7 @@ use \jtl\Core\Model\DataModel;
 class CrossSelling extends DataModel
 {
     /**
-     * @var string - Unique id
+     * @var string - Unique crossSelling id
      */
     protected $_id = "0";
     

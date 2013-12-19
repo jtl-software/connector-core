@@ -21,7 +21,7 @@
             ],
             "optional": false
         },
-        "url": {
+        "urlPath": {
             "type": [
                 "string",
                 "null"

@@ -10,24 +10,25 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * SetArticle Model
- * 
+ * Define set articles / parts lists. 
+
  *
  * @access public
  */
 class SetArticle extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique setArticle id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Reference to a component / product
      */
     protected $_productId = "0";
     
     /**
-     * @var double
+     * @var double - Component quantity
      */
     protected $_quantity = 0.0;
     

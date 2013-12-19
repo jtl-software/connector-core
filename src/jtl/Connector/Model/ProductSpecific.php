@@ -10,24 +10,25 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductSpecific Model
- * 
+ * ProductSpecific model
+Product specifics are used to assign characteristic product attributes like color or  size... When different products have common specifics, products are similar. 
  *
  * @access public
  */
 class ProductSpecific extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique productSpecific id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Reference to specificValue
      */
     protected $_specificValueId = "0";
     
     /**
-     * @var string
+     * @var string - Reference to product
      */
     protected $_productId = "0";
     

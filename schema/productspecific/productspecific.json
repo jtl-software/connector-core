@@ -4,26 +4,26 @@
     "properties": {
         "id": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "specificValueId": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "productId": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         }
     },
     "required": [
+        "id",
+        "specificValueId",
+        "productId"
     ]
 }

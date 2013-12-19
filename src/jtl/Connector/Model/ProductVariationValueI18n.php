@@ -10,24 +10,24 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductVariationValueI18n Model
- * 
+ * locale specifig productVariationValue name
  *
  * @access public
  */
 class ProductVariationValueI18n extends DataModel
 {
     /**
-     * @var string
+     * @var string - Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string
+     * @var string - Reference to productVariationValue
      */
     protected $_productVariationValueId = "0";
     
     /**
-     * @var string
+     * @var string - Locale specific variationValue name
      */
     protected $_name = "0";
     

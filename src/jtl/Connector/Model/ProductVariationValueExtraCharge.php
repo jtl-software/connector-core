@@ -10,24 +10,24 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductVariationValueExtraCharge Model
- * 
+ * Extra charge for productVariationValue per customerGroup
  *
  * @access public
  */
 class ProductVariationValueExtraCharge extends DataModel
 {
     /**
-     * @var string
+     * @var string - Reference to customerGroup
      */
     protected $_customerGroupId = "0";
     
     /**
-     * @var string
+     * @var string - Reference to productVariationValue
      */
     protected $_productVariationValueId = "0";
     
     /**
-     * @var double
+     * @var double - Extra charge (net)
      */
     protected $_extraChargeNet = 0.0;
     

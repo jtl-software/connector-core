@@ -35,14 +35,14 @@
             ],
             "optional": true
         },
-        "quantityLimit": {
+        "stockLimit": {
             "type": [
                 "double",
                 "null"
             ],
             "optional": true
         },
-        "considerQuantityLimit": {
+        "considerStockLimit": {
             "type": [
                 "bool",
                 "null"

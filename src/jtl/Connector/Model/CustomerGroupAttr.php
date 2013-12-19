@@ -17,12 +17,12 @@ use \jtl\Core\Model\DataModel;
 class CustomerGroupAttr extends DataModel
 {
     /**
-     * @var string - Unique id
+     * @var string - Unique customerGroupAttr id
      */
     protected $_id = "0";
     
     /**
-     * @var string - References a customer group
+     * @var string - Reference to customerGroup
      */
     protected $_customerGroupId = "0";
     

@@ -17,37 +17,37 @@ use \jtl\Core\Model\DataModel;
 class CustomerOrder extends DataModel
 {
     /**
-     * @var string - Unique id
+     * @var string - Unique customerOrder id
      */
     protected $_id = "0";
     
     /**
-     * @var string - References the customer
+     * @var string - Reference to customer
      */
     protected $_customerId = "0";
     
     /**
-     * @var string - References shipping address
+     * @var string - Reference to shippingAddress
      */
     protected $_shippingAddressId = "0";
     
     /**
-     * @var string - References billing address
+     * @var string - Reference to billingAddress
      */
     protected $_billingAddressId = "0";
     
     /**
-     * @var string - Shipping method
+     * @var string - Reference to shippingMethod
      */
     protected $_shippingMethodId = "0";
     
     /**
-     * @var string - The locale name set when customerOrder was finished
+     * @var string - Locale set when customerOrder was finished
      */
     protected $_localeName = '';
     
     /**
-     * @var string - The currency ISO set, when customerOrder was finished
+     * @var string - Currency ISO set, when customerOrder was finished
      */
     protected $_currencyIso = '';
     

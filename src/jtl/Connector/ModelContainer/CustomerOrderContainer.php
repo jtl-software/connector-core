@@ -23,9 +23,9 @@ class CustomerOrderContainer extends CoreContainer
     protected $_customerOrderAttrs;
     
     /**
-     * @var \jtl\Connector\Model\CustomerOrderPosition[]
+     * @var \jtl\Connector\Model\CustomerOrderItem[]
      */
-    protected $_customerOrderPositions;
+    protected $_customerOrderItems;
     
     /**
      * @var \jtl\Connector\Model\CustomerOrderPositionVariation[]
@@ -40,12 +40,12 @@ class CustomerOrderContainer extends CoreContainer
     /**
      * @var \jtl\Connector\Model\CustomerOrderShippingAddress[]
      */
-    protected $_customerOrderShippingAddresses;
+    protected $_customerOrderShippingAddresss;
     
     /**
      * @var \jtl\Connector\Model\CustomerOrderBillingAddress[]
      */
-    protected $_customerOrderBillingAddresses;
+    protected $_customerOrderBillingAddresss;
         
     /**
      * @return array \jtl\Connector\Model\CustomerOrder
@@ -64,11 +64,11 @@ class CustomerOrderContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\CustomerOrderPosition
+     * @return array \jtl\Connector\Model\CustomerOrderItem
      */
-    public function getCustomerOrderPositions()
+    public function getCustomerOrderItems()
     {
-        return $this->_customerOrderPositions;
+        return $this->_customerOrderItems;
     }
         
     /**
@@ -90,27 +90,27 @@ class CustomerOrderContainer extends CoreContainer
     /**
      * @return array \jtl\Connector\Model\CustomerOrderShippingAddress
      */
-    public function getCustomerOrderShippingAddresses()
+    public function getCustomerOrderShippingAddresss()
     {
-        return $this->_customerOrderShippingAddresses;
+        return $this->_customerOrderShippingAddresss;
     }
         
     /**
      * @return array \jtl\Connector\Model\CustomerOrderBillingAddress
      */
-    public function getCustomerOrderBillingAddresses()
+    public function getCustomerOrderBillingAddresss()
     {
-        return $this->_customerOrderBillingAddresses;
+        return $this->_customerOrderBillingAddresss;
     }
         
     public $items = array(
         "customer_order" => array("CustomerOrder", "CustomerOrders"),
         "customer_order_attr" => array("CustomerOrderAttr", "CustomerOrderAttrs"),
-        "customer_order_position" => array("CustomerOrderPosition", "CustomerOrderPositions"),
+        "customer_order_item" => array("CustomerOrderItem", "CustomerOrderItems"),
         "customer_order_position_variation" => array("CustomerOrderPositionVariation", "CustomerOrderPositionVariations"),
         "customer_order_payment_info" => array("CustomerOrderPaymentInfo", "CustomerOrderPaymentInfos"),
-        "customer_order_shipping_address" => array("CustomerOrderShippingAddress", "CustomerOrderShippingAddresses"),
-        "customer_order_billing_address" => array("CustomerOrderBillingAddress", "CustomerOrderBillingAddresses")
+        "customer_order_shipping_address" => array("CustomerOrderShippingAddress", "CustomerOrderShippingAddresss"),
+        "customer_order_billing_address" => array("CustomerOrderBillingAddress", "CustomerOrderBillingAddresss")
     );
 }
 ?>

@@ -14,7 +14,7 @@
             ],
             "optional": false
         },
-        "bankAccount": {
+        "bankName": {
             "type": [
                 "string",
                 "null"

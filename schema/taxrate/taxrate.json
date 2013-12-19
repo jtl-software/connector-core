@@ -10,24 +10,21 @@
         },
         "taxZoneId": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "taxClassId": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "rate": {
             "type": [
-                "double",
-                "null"
+                "double"
             ],
-            "optional": true
+            "optional": false
         },
         "priority": {
             "type": [
@@ -38,6 +35,9 @@
         }
     },
     "required": [
-        "id"
+        "id",
+        "taxZoneId",
+        "taxClassId",
+        "rate"
     ]
 }

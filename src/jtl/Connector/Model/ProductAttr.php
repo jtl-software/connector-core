@@ -10,24 +10,24 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductAttr Model
- * 
+ * Locale specific product attribute
  *
  * @access public
  */
 class ProductAttr extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique productAttr id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Reference to product
      */
     protected $_productId = "0";
     
     /**
-     * @var int
+     * @var int - Sort number
      */
     protected $_sort = 0;
     

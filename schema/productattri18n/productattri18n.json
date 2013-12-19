@@ -16,10 +16,9 @@
         },
         "key": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "value": {
             "type": [
@@ -31,6 +30,7 @@
     "required": [
         "localeName",
         "productAttrId",
+        "key",
         "value"
     ]
 }

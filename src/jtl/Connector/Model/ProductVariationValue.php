@@ -10,44 +10,44 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductVariationValue Model
- * 
+ * Product variation value model. Each product defines its own variations and variation values. 
  *
  * @access public
  */
 class ProductVariationValue extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique productVariationValue id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Reference to productVariation
      */
     protected $_productVariationId = "0";
     
     /**
-     * @var double
+     * @var double - Variation extra weight
      */
     protected $_extraWeight = 0.0;
     
     /**
-     * @var string
+     * @var string - Stock Keeping Unit
      */
     protected $_sku = '';
     
     /**
-     * @var int
+     * @var int - Sort number
      */
     protected $_sort = 0;
     
     /**
-     * @var double
+     * @var double - Stock level
      */
     protected $_stockLevel = 0.0;
     
     /**
-     * @var string
+     * @var string - ToDo:Remove (deprecated)
      */
     protected $_packagingUnitId = "0";
     

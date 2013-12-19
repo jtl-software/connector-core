@@ -17,42 +17,42 @@ use \jtl\Core\Model\DataModel;
 class CustomerOrderPositionVariation extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique customerOrderPositionVariation id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Reference to customerOrderItem
      */
-    protected $_customerOrderPositionId = "0";
+    protected $_customerOrderItemId = "0";
     
     /**
-     * @var string
+     * @var string - Reference to productVariation
      */
     protected $_productVariationId = "0";
     
     /**
-     * @var string
+     * @var string - Reference to productVariationValue
      */
     protected $_productVariationValueId = "0";
     
     /**
-     * @var string
+     * @var string - Variation name e.g. "color"
      */
     protected $_productVariationName = '';
     
     /**
-     * @var string
+     * @var string - Variation value e.g. "red"
      */
     protected $_productVariationValueName = '';
     
     /**
-     * @var string
+     * @var string - Comments 
      */
     protected $_freeField = '';
     
     /**
-     * @var double
+     * @var double - Extra surcharge (added to item price)
      */
     protected $_surcharge = 0.0;
     
@@ -72,7 +72,7 @@ class CustomerOrderPositionVariation extends DataModel
         
             switch ($name) {
                 case "_id":
-                case "_customerOrderPositionId":
+                case "_customerOrderItemId":
                 case "_productVariationId":
                 case "_productVariationValueId":
                 case "_productVariationName":

@@ -10,17 +10,15 @@
         },
         "name": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "iso": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "nameHtml": {
             "type": [
@@ -66,6 +64,8 @@
         }
     },
     "required": [
-        "id"
+        "id",
+        "name",
+        "iso"
     ]
 }

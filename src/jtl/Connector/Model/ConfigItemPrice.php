@@ -10,19 +10,19 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ConfigItemPrice Model
- * Customer group specific price for config item
+ * Customer group price for config item
  *
  * @access public
  */
 class ConfigItemPrice extends DataModel
 {
     /**
-     * @var string - References a config item
+     * @var string - Reference to configItem
      */
     protected $_configItemId = "0";
     
     /**
-     * @var string - References a customer group
+     * @var string - Reference to customerGroup
      */
     protected $_customerGroupId = "0";
     

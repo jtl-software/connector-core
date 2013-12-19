@@ -29,9 +29,9 @@
             ],
             "optional": true
         },
-        "fulfillment": {
+        "isFulfillment": {
             "type": [
-                "int",
+                "bool",
                 "null"
             ],
             "optional": true

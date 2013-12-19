@@ -17,97 +17,92 @@ use \jtl\Core\Model\DataModel;
 class CustomerOrderShippingAddress extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique customerOrderShippingAddress id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Reference to customer
      */
     protected $_customerId = "0";
     
     /**
-     * @var string
+     * @var string - Salutation e.g. "Mr."
      */
     protected $_salutation = '';
     
     /**
-     * @var string
+     * @var string - First name
      */
     protected $_firstName = '';
     
     /**
-     * @var string
+     * @var string - Last name
      */
     protected $_lastName = '';
     
     /**
-     * @var string
+     * @var string - Title e.g. ("Prof. Dr.")
      */
     protected $_title = '';
     
     /**
-     * @var string
+     * @var string - Company name
      */
     protected $_company = '';
     
     /**
-     * @var string
+     * @var string - Delivery instruction e.g. "c/o John Doe"
      */
     protected $_deliveryInstruction = '';
     
     /**
-     * @var string
+     * @var string - Street + streetnumber
      */
     protected $_street = '';
     
     /**
-     * @var string
-     */
-    protected $_streetNumber = '';
-    
-    /**
-     * @var string
+     * @var string - Extra address line e.g. "Apartment 2.5"
      */
     protected $_extraAddressLine = '';
     
     /**
-     * @var string
+     * @var string - Zip / postal code
      */
     protected $_zipCode = '';
     
     /**
-     * @var string
+     * @var string - City
      */
     protected $_city = '';
     
     /**
-     * @var string
+     * @var string - State
      */
     protected $_state = '';
     
     /**
-     * @var string
+     * @var string - Country ISO 3166-2 (2 letter Uppercase)
      */
     protected $_countryIso = '';
     
     /**
-     * @var string
+     * @var string - Phone number
      */
     protected $_phone = '';
     
     /**
-     * @var string
+     * @var string - Mobile phone number
      */
     protected $_mobile = '';
     
     /**
-     * @var string
+     * @var string - Fax number
      */
     protected $_fax = '';
     
     /**
-     * @var string
+     * @var string - E-Mail address
      */
     protected $_eMail = '';
     
@@ -135,7 +130,6 @@ class CustomerOrderShippingAddress extends DataModel
                 case "_company":
                 case "_deliveryInstruction":
                 case "_street":
-                case "_streetNumber":
                 case "_extraAddressLine":
                 case "_zipCode":
                 case "_city":

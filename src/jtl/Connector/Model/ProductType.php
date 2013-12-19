@@ -10,19 +10,19 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductType Model
- * 
+ * ProductType model to classify and group products
  *
  * @access public
  */
 class ProductType extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique productType id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Product type name
      */
     protected $_name = '';
     

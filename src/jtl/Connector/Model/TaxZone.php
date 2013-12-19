@@ -10,19 +10,19 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * TaxZone Model
- * 
+ * Tax zone model (set in JTL-Wawi ERP)
  *
  * @access public
  */
 class TaxZone extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique taxZone id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Tax zone name e.g. "EU Zone"
      */
     protected $_name = '';
     

@@ -42,7 +42,7 @@
             ],
             "optional": true
         },
-        "country": {
+        "countryIso": {
             "type": [
                 "string",
                 "null"
@@ -91,7 +91,7 @@
             ],
             "optional": true
         },
-        "bankAccount": {
+        "bankName": {
             "type": [
                 "string",
                 "null"

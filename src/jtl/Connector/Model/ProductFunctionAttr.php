@@ -10,29 +10,29 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductFunctionAttr Model
- * 
+ * Monolingual product function attribute
  *
  * @access public
  */
 class ProductFunctionAttr extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique productFunctionAttr id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Reference to product
      */
     protected $_productId = "0";
     
     /**
-     * @var string
+     * @var string - Attribute key
      */
     protected $_key = "0";
     
     /**
-     * @var string
+     * @var string - Attribute value
      */
     protected $_value = "0";
     

@@ -8,7 +8,7 @@
             ],
             "optional": false
         },
-        "customerOrderPositionId": {
+        "customerOrderItemId": {
             "type": [
                 "string"
             ],
@@ -40,9 +40,10 @@
         },
         "freeField": {
             "type": [
-                "string"
+                "string",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "surcharge": {
             "type": [
@@ -54,11 +55,10 @@
     },
     "required": [
         "id",
-        "customerOrderPositionId",
+        "customerOrderItemId",
         "productVariationId",
         "productVariationValueId",
         "productVariationName",
-        "productVariationValueName",
-        "freeField"
+        "productVariationValueName"
     ]
 }

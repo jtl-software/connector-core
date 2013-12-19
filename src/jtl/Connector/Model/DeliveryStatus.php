@@ -10,24 +10,24 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * DeliveryStatus Model
- * 
+ * Localized Delivery status text
  *
  * @access public
  */
 class DeliveryStatus extends DataModel
 {
     /**
-     * @var string
+     * @var string - DeliveryStatus id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string
+     * @var string - Localized delivery status text
      */
     protected $_name = '';
     

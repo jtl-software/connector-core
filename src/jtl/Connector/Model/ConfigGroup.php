@@ -17,7 +17,7 @@ use \jtl\Core\Model\DataModel;
 class ConfigGroup extends DataModel
 {
     /**
-     * @var string - Unique id
+     * @var string - Unique configGroup id
      */
     protected $_id = "0";
     

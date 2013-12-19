@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * FileDownloadHistory Model
- * 
+ * ToDo: Remove (deprecated)
  *
  * @access public
  */

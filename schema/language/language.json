@@ -35,13 +35,6 @@
                 "null"
             ],
             "optional": true
-        },
-        "isConnectorDefault": {
-            "type": [
-                "bool",
-                "null"
-            ],
-            "optional": true
         }
     },
     "required": [

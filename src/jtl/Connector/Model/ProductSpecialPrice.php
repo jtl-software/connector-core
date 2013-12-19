@@ -17,42 +17,42 @@ use \jtl\Core\Model\DataModel;
 class ProductSpecialPrice extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique productSpecialPrice id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Reference to product
      */
     protected $_productId = "0";
     
     /**
-     * @var bool
+     * @var bool - Special price is active?
      */
     protected $_isActive = false;
     
     /**
-     * @var string
+     * @var string - Activate special price from date
      */
     protected $_activeFrom = '';
     
     /**
-     * @var string
+     * @var string - Special price active until date
      */
     protected $_activeUntil = '';
     
     /**
-     * @var double
+     * @var double - SpecialPrice active until stock level quantity
      */
-    protected $_quantityLimit = 0.0;
+    protected $_stockLimit = 0.0;
     
     /**
-     * @var bool
+     * @var bool - Consider stockLimit value
      */
-    protected $_considerQuantityLimit = false;
+    protected $_considerStockLimit = false;
     
     /**
-     * @var bool
+     * @var bool - Consider activeFrom/activeUntil date range
      */
     protected $_considerDateLimit = false;
     
@@ -80,13 +80,13 @@ class ProductSpecialPrice extends DataModel
                     break;
             
                 case "_isActive":
-                case "_considerQuantityLimit":
+                case "_considerStockLimit":
                 case "_considerDateLimit":
                 
                     $this->$name = (bool)$value;
                     break;
             
-                case "_quantityLimit":
+                case "_stockLimit":
                 
                     $this->$name = (double)$value;
                     break;

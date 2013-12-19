@@ -10,29 +10,29 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerOrderAttr Model
- * 
+ * Monolingual attribute for a customerorder
  *
  * @access public
  */
 class CustomerOrderAttr extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique customerOrderAttr id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Reference to customerOrder
      */
     protected $_customerOrderId = "0";
     
     /**
-     * @var string
+     * @var string - Attribute key name
      */
     protected $_key = '';
     
     /**
-     * @var string
+     * @var string - Attribute value
      */
     protected $_value = '';
     

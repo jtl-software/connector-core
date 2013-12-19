@@ -10,41 +10,36 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Language Model
- * 
+ * Global language model
  *
  * @access public
  */
 class Language extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique language id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - English term
      */
     protected $_nameEnglish = '';
     
     /**
-     * @var string
+     * @var string - German term
      */
     protected $_nameGerman = '';
     
     /**
-     * @var string
+     * @var string - Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var bool
+     * @var bool - Flag default language for frontend
      */
     protected $_isDefault = false;
-    
-    /**
-     * @var bool
-     */
-    protected $_isConnectorDefault = false;
     
     /**
      * Language Setter
@@ -70,7 +65,6 @@ class Language extends DataModel
                     break;
             
                 case "_isDefault":
-                case "_isConnectorDefault":
                 
                     $this->$name = (bool)$value;
                     break;

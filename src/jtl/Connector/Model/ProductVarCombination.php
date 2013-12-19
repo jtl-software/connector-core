@@ -10,24 +10,24 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductVarCombination Model
- * 
+ * Product to productVariationValue Allocation
  *
  * @access public
  */
 class ProductVarCombination extends DataModel
 {
     /**
-     * @var string
+     * @var string - Reference to product
      */
     protected $_productId = "0";
     
     /**
-     * @var string
+     * @var string - Reference to productVariation
      */
     protected $_productVariationId = "0";
     
     /**
-     * @var string
+     * @var string - Reference to productVariationValue
      */
     protected $_productVariationValueId = "0";
     

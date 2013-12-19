@@ -10,39 +10,39 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Image Model
- * 
+ * Image model
  *
  * @access public
  */
 class Image extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique image id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Reference to master imageId
      */
     protected $_masterImageId = "0";
     
     /**
-     * @var string
+     * @var string - allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
      */
     protected $_relationType = "product";
     
     /**
-     * @var int
+     * @var int - foreign key dependent on relationType
      */
     protected $_foreignKey = 0;
     
     /**
-     * @var string
+     * @var string - Filename or path
      */
     protected $_filename = '';
     
     /**
-     * @var int
+     * @var int - Sort number
      */
     protected $_sort = 0;
     

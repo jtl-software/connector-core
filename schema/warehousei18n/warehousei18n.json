@@ -2,7 +2,7 @@
     "title": "WarehouseI18n Model",
     "type": "object",
     "properties": {
-        "id": {
+        "warehouseId": {
             "type": [
                 "string"
             ],
@@ -17,6 +17,6 @@
         }
     },
     "required": [
-        "id"
+        "warehouseId"
     ]
 }

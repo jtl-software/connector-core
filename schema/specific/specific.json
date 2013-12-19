@@ -15,9 +15,9 @@
             ],
             "optional": true
         },
-        "global": {
+        "isGlobal": {
             "type": [
-                "int",
+                "bool",
                 "null"
             ],
             "optional": true

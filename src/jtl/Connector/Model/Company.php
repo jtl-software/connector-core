@@ -67,7 +67,7 @@ class Company extends DataModel
     protected $_eMail = '';
     
     /**
-     * @var string - Company website
+     * @var string - Company website URL
      */
     protected $_www = '';
     

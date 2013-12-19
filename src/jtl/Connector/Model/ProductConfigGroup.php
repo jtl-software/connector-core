@@ -10,29 +10,29 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductConfigGroup Model
- * 
+ * Product-ConfigGroup Assignment
  *
  * @access public
  */
 class ProductConfigGroup extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique productConfigGroup id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Reference to configGroup
      */
     protected $_configGroupId = "0";
     
     /**
-     * @var string
+     * @var string - Reference to product
      */
     protected $_productId = "0";
     
     /**
-     * @var int
+     * @var int - Sort number
      */
     protected $_sort = 0;
     

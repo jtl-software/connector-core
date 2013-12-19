@@ -10,29 +10,29 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductPrice Model
- * 
+ * Product price model
  *
  * @access public
  */
 class ProductPrice extends DataModel
 {
     /**
-     * @var string
+     * @var string - Reference to customerGroup
      */
     protected $_customerGroupId = "0";
     
     /**
-     * @var string
+     * @var string - Reference to product
      */
     protected $_productId = "0";
     
     /**
-     * @var double
+     * @var double - Price value (net)
      */
     protected $_netPrice = 0.0;
     
     /**
-     * @var int
+     * @var int - Quantity to apply netPrice for. 
      */
     protected $_quantity = 0;
     

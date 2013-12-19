@@ -18,17 +18,17 @@ Config item can reference to a specific productId to inherit price, name and des
 class ConfigItem extends DataModel
 {
     /**
-     * @var string - Unique id
+     * @var string - Unique configItem id
      */
     protected $_id = "0";
     
     /**
-     * @var string - Required reference to config group id
+     * @var string - Reference to configGroup
      */
     protected $_configGroupId = "0";
     
     /**
-     * @var string - Optional reference to a productId
+     * @var string - Reference to product (optional)
      */
     protected $_productId = "0";
     

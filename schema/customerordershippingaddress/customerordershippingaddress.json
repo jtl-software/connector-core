@@ -64,13 +64,6 @@
             ],
             "optional": true
         },
-        "streetNumber": {
-            "type": [
-                "string",
-                "null"
-            ],
-            "optional": true
-        },
         "extraAddressLine": {
             "type": [
                 "string",

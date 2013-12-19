@@ -14,30 +14,23 @@
             ],
             "optional": false
         },
-        "localeName": {
-            "type": [
-                "string",
-                "null"
-            ],
-            "optional": true
-        },
         "name": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "value": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         }
     },
     "required": [
         "id",
-        "categoryId"
+        "categoryId",
+        "name",
+        "value"
     ]
 }

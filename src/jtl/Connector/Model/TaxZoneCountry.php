@@ -10,24 +10,24 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * TaxZoneCountry Model
- * 
+ * TaxZone to Country Allocation (set in JTL-Wawi ERP)
  *
  * @access public
  */
 class TaxZoneCountry extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique taxZoneCountry id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Reference to taxZone
      */
     protected $_taxZoneId = "0";
     
     /**
-     * @var string
+     * @var string - Country ISO 3166-2 (2 letter Uppercase)
      */
     protected $_countryIso = '';
     

@@ -10,44 +10,44 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Shipment Model
- * 
+ * Shipment Model with reference to a deliveryNote
  *
  * @access public
  */
 class Shipment extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique shipment id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Reference to deliveryNote
      */
     protected $_deliveryNoteId = "0";
     
     /**
-     * @var string
+     * @var string - Logistic name
      */
     protected $_logistic = '';
     
     /**
-     * @var string
+     * @var string - Logistic URL
      */
     protected $_logisticURL = '';
     
     /**
-     * @var string
+     * @var string - Identcode
      */
     protected $_identCode = '';
     
     /**
-     * @var int
+     * @var string - Creation date
      */
-    protected $_created = 0;
+    protected $_created = '';
     
     /**
-     * @var string
+     * @var string - Shipment note
      */
     protected $_note = '';
     
@@ -71,14 +71,10 @@ class Shipment extends DataModel
                 case "_logistic":
                 case "_logisticURL":
                 case "_identCode":
+                case "_created":
                 case "_note":
                 
                     $this->$name = (string)$value;
-                    break;
-            
-                case "_created":
-                
-                    $this->$name = (int)$value;
                     break;
             
             }

@@ -10,29 +10,29 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductAttrI18n Model
- * 
+ * Locale specific texts for productAttr
  *
  * @access public
  */
 class ProductAttrI18n extends DataModel
 {
     /**
-     * @var string
+     * @var string - Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string
+     * @var string - Reference to productAttr
      */
     protected $_productAttrId = "0";
     
     /**
-     * @var string
+     * @var string - Attribute key
      */
     protected $_key = '';
     
     /**
-     * @var string
+     * @var string - Attribute value
      */
     protected $_value = '';
     

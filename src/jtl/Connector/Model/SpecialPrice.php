@@ -10,24 +10,24 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * SpecialPrice Model
- * 
+ * special price model
  *
  * @access public
  */
 class SpecialPrice extends DataModel
 {
     /**
-     * @var string
+     * @var string - Reference to customerGroup
      */
     protected $_customerGroupId = "0";
     
     /**
-     * @var string
+     * @var string - Reference to productSpecialPrice
      */
     protected $_productSpecialPriceId = "0";
     
     /**
-     * @var double
+     * @var double - net price value
      */
     protected $_priceNet = 0.0;
     

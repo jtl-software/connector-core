@@ -10,44 +10,44 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * MediaFile Model
- * 
+ * Media file model
  *
  * @access public
  */
 class MediaFile extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique MediaFile id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Reference to product
      */
     protected $_productId = "0";
     
     /**
-     * @var string
+     * @var string - File path
      */
     protected $_path = '';
     
     /**
-     * @var string
+     * @var string - Complete URL
      */
     protected $_url = '';
     
     /**
-     * @var string
+     * @var string - Category name
      */
     protected $_mediaFileCategory = '';
     
     /**
-     * @var string
+     * @var string - Media file type e.g. "pdf"
      */
     protected $_type = '';
     
     /**
-     * @var int
+     * @var int - Sort number
      */
     protected $_sort = 0;
     

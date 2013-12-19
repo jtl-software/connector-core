@@ -10,24 +10,24 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * SpecificValue Model
- * 
+ * Specific value model, e.g. color value "red"
  *
  * @access public
  */
 class SpecificValue extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique specificValue id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Reference to specificId
      */
     protected $_specificId = "0";
     
     /**
-     * @var int
+     * @var int - Sort number
      */
     protected $_sort = 0;
     

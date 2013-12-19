@@ -9,38 +9,25 @@ namespace jtl\Connector\Model;
 use \jtl\Core\Model\DataModel;
 
 /**
- * CategoryAttr Model
+ * ProductVariationInvisibility Model
+ * Specify productVariation to hide from customerGroup
+ *
  * @access public
  */
-class CategoryAttr extends DataModel
+class ProductVariationInvisibility extends DataModel
 {
     /**
-     * @var string
+     * @var string - Reference to customerGroup
      */
-    protected $_id = "0";
+    protected $_customerGroupId = "0";
     
     /**
-     * @var string
+     * @var string - Reference to productVariation
      */
-    protected $_categoryId = "0";
+    protected $_productVariationId = "0";
     
     /**
-     * @var string
-     */
-    protected $_localeName = '';
-    
-    /**
-     * @var string
-     */
-    protected $_name = '';
-    
-    /**
-     * @var string
-     */
-    protected $_value = '';
-    
-    /**
-     * CategoryAttr Setter
+     * ProductVariationInvisibility Setter
      *
      * @param string $name
      * @param string $value
@@ -54,11 +41,8 @@ class CategoryAttr extends DataModel
             }
         
             switch ($name) {
-                case "_id":
-                case "_categoryId":
-                case "_localeName":
-                case "_name":
-                case "_value":
+                case "_customerGroupId":
+                case "_productVariationId":
                 
                     $this->$name = (string)$value;
                     break;

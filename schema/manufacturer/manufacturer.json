@@ -29,7 +29,7 @@
             ],
             "optional": true
         },
-        "url": {
+        "urlPath": {
             "type": [
                 "string",
                 "null"

@@ -10,39 +10,39 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * FileUpload Model
- * 
+ * File upload model
  *
  * @access public
  */
 class FileUpload extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique fileUpload id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Reference to product
      */
     protected $_productId = "0";
     
     /**
-     * @var string
+     * @var string - Filename
      */
     protected $_name = '';
     
     /**
-     * @var string
+     * @var string - File description
      */
     protected $_description = '';
     
     /**
-     * @var string
+     * @var string - Allowed file type
      */
     protected $_fileType = '';
     
     /**
-     * @var bool
+     * @var bool - True if file upload is required to buy product
      */
     protected $_isRequired = false;
     

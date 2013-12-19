@@ -22,36 +22,36 @@
         },
         "logisticURL": {
             "type": [
-                "string"
+                "string",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "identCode": {
             "type": [
-                "string"
+                "string",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "created": {
             "type": [
-                "int"
+                "string"
             ],
             "optional": false
         },
         "note": {
             "type": [
-                "string"
+                "string",
+                "null"
             ],
-            "optional": false
+            "optional": true
         }
     },
     "required": [
         "id",
         "deliveryNoteId",
         "logistic",
-        "logisticURL",
-        "identCode",
-        "created",
-        "note"
+        "created"
     ]
 }

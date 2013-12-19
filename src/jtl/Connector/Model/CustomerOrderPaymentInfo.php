@@ -10,74 +10,74 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerOrderPaymentInfo Model
- * 
+ * Additional payment info for direct debit / banktransfer or payment by credit card. 
  *
  * @access public
  */
 class CustomerOrderPaymentInfo extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique customerOrderPaymentInfo id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Reference to customerOrder
      */
     protected $_customerOrderId = "0";
     
     /**
-     * @var string
+     * @var string - Bank name
      */
-    protected $_bankAccount = '';
+    protected $_bankName = '';
     
     /**
-     * @var string
+     * @var string - Bank code (deprecated in DE since SEPA)
      */
     protected $_bankCode = '';
     
     /**
-     * @var string
+     * @var string - Bank account holder name
      */
     protected $_accountHolder = '';
     
     /**
-     * @var string
+     * @var string - Bank account number (deprecated in DE since SEPA)
      */
     protected $_accountNumber = '';
     
     /**
-     * @var string
+     * @var string - International Bank Account Number (IBAN)
      */
     protected $_iban = '';
     
     /**
-     * @var string
+     * @var string - Bank Identifier Code (BIC)
      */
     protected $_bic = '';
     
     /**
-     * @var string
+     * @var string - Credit card number
      */
     protected $_creditCardNumber = '';
     
     /**
-     * @var string
+     * @var string - Credit card verification number
      */
     protected $_creditCardVerificationNumber = '';
     
     /**
-     * @var string
+     * @var string - Credit card expiration date
      */
     protected $_creditCardExpiration = '';
     
     /**
-     * @var string
+     * @var string - Credit card type (e.g. "visa")
      */
     protected $_creditCardType = '';
     
     /**
-     * @var string
+     * @var string - Credit card holder name
      */
     protected $_creditCardHolder = '';
     
@@ -98,7 +98,7 @@ class CustomerOrderPaymentInfo extends DataModel
             switch ($name) {
                 case "_id":
                 case "_customerOrderId":
-                case "_bankAccount":
+                case "_bankName":
                 case "_bankCode":
                 case "_accountHolder":
                 case "_accountNumber":

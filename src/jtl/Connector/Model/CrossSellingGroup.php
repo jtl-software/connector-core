@@ -10,29 +10,29 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CrossSellingGroup Model
- * Locale specific cross selling group. Can hold several crossSelling items that are linked for cross selling purposes. 
+ * Localized cross selling group. Can hold several crossSelling items that are linked for cross selling purposes. 
  *
  * @access public
  */
 class CrossSellingGroup extends DataModel
 {
     /**
-     * @var string - Cross selling id
+     * @var string - crossSellingGroup id
      */
     protected $_id = "0";
     
     /**
-     * @var string - Locale name
+     * @var string - Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string - Locale specific name
+     * @var string - Localized name
      */
     protected $_name = '';
     
     /**
-     * @var string - Locale specific description
+     * @var string - Localized description
      */
     protected $_description = '';
     

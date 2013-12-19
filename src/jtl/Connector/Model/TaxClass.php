@@ -10,24 +10,24 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * TaxClass Model
- * 
+ * Tax class model (set in JTL-Wawi ERP)
  *
  * @access public
  */
 class TaxClass extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique taxClass id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Tax class name
      */
     protected $_name = '';
     
     /**
-     * @var bool
+     * @var bool - Flag default tax class
      */
     protected $_isDefault = false;
     

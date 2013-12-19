@@ -1,5 +1,5 @@
 {
-    "title": "ProductVariationVisibility Model",
+    "title": "ProductInvisibility Model",
     "type": "object",
     "properties": {
         "customerGroupId": {
@@ -8,7 +8,7 @@
             ],
             "optional": false
         },
-        "productVariationId": {
+        "productId": {
             "type": [
                 "string"
             ],
@@ -17,6 +17,6 @@
     },
     "required": [
         "customerGroupId",
-        "productVariationId"
+        "productId"
     ]
 }

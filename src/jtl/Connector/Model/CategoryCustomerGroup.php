@@ -18,17 +18,17 @@ Set optional discount on category for customergroup.
 class CategoryCustomerGroup extends DataModel
 {
     /**
-     * @var string - Customer group id
+     * @var string - Reference to customerGroup
      */
     protected $_customerGroupId = "0";
     
     /**
-     * @var string - Category id
+     * @var string - Reference to category
      */
     protected $_categoryId = "0";
     
     /**
-     * @var double - Discount on products in specified $_categoryId for $_customerGroupId
+     * @var double - Discount on products in specified categoryId for  customerGroupId
      */
     protected $_discount = 0.0;
     

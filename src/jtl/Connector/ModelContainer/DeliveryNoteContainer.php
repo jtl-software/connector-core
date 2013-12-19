@@ -18,9 +18,9 @@ class DeliveryNoteContainer extends CoreContainer
     protected $_deliveryNotes;
     
     /**
-     * @var \jtl\Connector\Model\DeliveryNotePos[]
+     * @var \jtl\Connector\Model\DeliveryNoteItem[]
      */
-    protected $_deliveryNotePoss;
+    protected $_deliveryNoteItems;
     
     /**
      * @var \jtl\Connector\Model\Shipment[]
@@ -36,11 +36,11 @@ class DeliveryNoteContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\DeliveryNotePos
+     * @return array \jtl\Connector\Model\DeliveryNoteItem
      */
-    public function getDeliveryNotePoss()
+    public function getDeliveryNoteItems()
     {
-        return $this->_deliveryNotePoss;
+        return $this->_deliveryNoteItems;
     }
         
     /**
@@ -53,7 +53,7 @@ class DeliveryNoteContainer extends CoreContainer
         
     public $items = array(
         "delivery_note" => array("DeliveryNote", "DeliveryNotes"),
-        "delivery_note_pos" => array("DeliveryNotePos", "DeliveryNotePoss"),
+        "delivery_note_item" => array("DeliveryNoteItem", "DeliveryNoteItems"),
         "shipment" => array("Shipment", "Shipments")
     );
 }

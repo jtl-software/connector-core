@@ -10,34 +10,34 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductWarehouseInfo Model
- * 
+ * Product to warehouse info association
  *
  * @access public
  */
 class ProductWarehouseInfo extends DataModel
 {
     /**
-     * @var string
+     * @var string - Reference to product
      */
     protected $_productId = "0";
     
     /**
-     * @var string
+     * @var string - Reference to warehouse
      */
     protected $_warehouseId = "0";
     
     /**
-     * @var double
+     * @var double - Product stock level in specified warehouse
      */
     protected $_stockLevel = 0.0;
     
     /**
-     * @var double
+     * @var double - Product inflow quantity for specified warehouse
      */
     protected $_inflowQuantity = 0.0;
     
     /**
-     * @var string
+     * @var string - Product inflow date for specified warehouse
      */
     protected $_inflowDate = '';
     

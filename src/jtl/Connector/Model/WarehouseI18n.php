@@ -10,19 +10,19 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * WarehouseI18n Model
- * 
+ * Localized warehouse name
  *
  * @access public
  */
 class WarehouseI18n extends DataModel
 {
     /**
-     * @var string
+     * @var string - Reference to warehouse
      */
-    protected $_id = "0";
+    protected $_warehouseId = "0";
     
     /**
-     * @var string
+     * @var string - Localized warehouse name
      */
     protected $_name = '';
     
@@ -41,7 +41,7 @@ class WarehouseI18n extends DataModel
             }
         
             switch ($name) {
-                case "_id":
+                case "_warehouseId":
                 case "_name":
                 
                     $this->$name = (string)$value;

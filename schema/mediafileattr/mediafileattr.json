@@ -2,7 +2,7 @@
     "title": "MediaFileAttr Model",
     "type": "object",
     "properties": {
-        "mediaFileAttr": {
+        "id": {
             "type": [
                 "int"
             ],
@@ -34,7 +34,7 @@
         }
     },
     "required": [
-        "mediaFileAttr",
+        "id",
         "mediaFileId",
         "localeName",
         "name",

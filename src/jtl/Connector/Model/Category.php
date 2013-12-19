@@ -17,12 +17,12 @@ use \jtl\Core\Model\DataModel;
 class Category extends DataModel
 {
     /**
-     * @var string - Unique id
+     * @var string - Unique category id
      */
     protected $_id = "0";
     
     /**
-     * @var string - Parent category id
+     * @var string - Reference to parent category id
      */
     protected $_parentCategoryId = "0";
     
@@ -34,7 +34,7 @@ class Category extends DataModel
     /**
      * @var int - Category level (default 1 for first level)
      */
-    protected $_level = 0;
+    protected $_level = 1;
     
     /**
      * Category Setter

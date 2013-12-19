@@ -10,39 +10,39 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * DeliveryNote Model
- * 
+ * A delivery note created for shipment
  *
  * @access public
  */
 class DeliveryNote extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique deliveryNote id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Reference to customerOrder
      */
     protected $_customerOrderId = "0";
     
     /**
-     * @var string
+     * @var string - Text note
      */
     protected $_note = '';
     
     /**
-     * @var string
+     * @var string - Creation date
      */
     protected $_created = '';
     
     /**
-     * @var int
+     * @var bool - True, if delivery ist fulfilled by someone else
      */
-    protected $_fulfillment = 0;
+    protected $_isFulfillment = false;
     
     /**
-     * @var int
+     * @var int - Delivery status
      */
     protected $_status = 0;
     
@@ -69,7 +69,11 @@ class DeliveryNote extends DataModel
                     $this->$name = (string)$value;
                     break;
             
-                case "_fulfillment":
+                case "_isFulfillment":
+                
+                    $this->$name = (bool)$value;
+                    break;
+            
                 case "_status":
                 
                     $this->$name = (int)$value;

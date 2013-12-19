@@ -9,50 +9,55 @@ namespace jtl\Connector\Model;
 use \jtl\Core\Model\DataModel;
 
 /**
- * DeliveryNotePos Model
- * 
+ * DeliveryNoteItem Model
+ * Delivery note item model
  *
  * @access public
  */
-class DeliveryNotePos extends DataModel
+class DeliveryNoteItem extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique deliveryNoteItem id
      */
     protected $_id = "0";
     
     /**
-     * @var int
+     * @var string - Reference to customerOrderItem
      */
-    protected $_orderPosition = 0;
+    protected $_customerOrderItemId = '';
     
     /**
-     * @var double
+     * @var double - Quantity delivered
      */
     protected $_quantity = 0.0;
     
     /**
-     * @var int
+     * @var string - Reference to warehouse
      */
-    protected $_stock = 0;
+    protected $_warehouseId = '';
     
     /**
-     * @var string
+     * @var string - Serial number
      */
     protected $_serialNumber = '';
     
     /**
-     * @var string
+     * @var string - Batch number
      */
     protected $_batchNumber = '';
     
     /**
-     * @var string
+     * @var string - Best before date
      */
     protected $_bestBefore = '';
     
     /**
-     * DeliveryNotePos Setter
+     * @var string - Reference to deliveryNote
+     */
+    protected $_deliveryNoteId = '';
+    
+    /**
+     * DeliveryNoteItem Setter
      *
      * @param string $name
      * @param string $value
@@ -67,17 +72,14 @@ class DeliveryNotePos extends DataModel
         
             switch ($name) {
                 case "_id":
+                case "_customerOrderItemId":
+                case "_warehouseId":
                 case "_serialNumber":
                 case "_batchNumber":
                 case "_bestBefore":
+                case "_deliveryNoteId":
                 
                     $this->$name = (string)$value;
-                    break;
-            
-                case "_orderPosition":
-                case "_stock":
-                
-                    $this->$name = (int)$value;
                     break;
             
                 case "_quantity":

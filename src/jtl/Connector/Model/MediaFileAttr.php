@@ -10,34 +10,34 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * MediaFileAttr Model
- * 
+ * Monolingual mediafile attribute
  *
  * @access public
  */
 class MediaFileAttr extends DataModel
 {
     /**
-     * @var int
+     * @var int - Unique MediaFileAttr id
      */
-    protected $_mediaFileAttr = 0;
+    protected $_id = 0;
     
     /**
-     * @var string
+     * @var string - Reference to mediaFile
      */
     protected $_mediaFileId = "0";
     
     /**
-     * @var string
+     * @var string - Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string
+     * @var string - Attribute name
      */
     protected $_name = '';
     
     /**
-     * @var string
+     * @var string - Attribute value
      */
     protected $_value = '';
     
@@ -56,7 +56,7 @@ class MediaFileAttr extends DataModel
             }
         
             switch ($name) {
-                case "_mediaFileAttr":
+                case "_id":
                 
                     $this->$name = (int)$value;
                     break;

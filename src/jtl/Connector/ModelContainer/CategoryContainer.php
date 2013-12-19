@@ -28,9 +28,9 @@ class CategoryContainer extends CoreContainer
     protected $_categoryAttrs;
     
     /**
-     * @var \jtl\Connector\Model\CategoryVisibility[]
+     * @var \jtl\Connector\Model\CategoryInvisibility[]
      */
-    protected $_categoryVisibilities;
+    protected $_categoryInvisibilities;
     
     /**
      * @var \jtl\Connector\Model\CategoryCustomerGroup[]
@@ -62,11 +62,11 @@ class CategoryContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\CategoryVisibility
+     * @return array \jtl\Connector\Model\CategoryInvisibility
      */
-    public function getCategoryVisibilities()
+    public function getCategoryInvisibilities()
     {
-        return $this->_categoryVisibilities;
+        return $this->_categoryInvisibilities;
     }
         
     /**
@@ -81,7 +81,7 @@ class CategoryContainer extends CoreContainer
         "category" => array("Category", "Categories"),
         "category_i18n" => array("CategoryI18n", "CategoryI18ns"),
         "category_attr" => array("CategoryAttr", "CategoryAttrs"),
-        "category_visibility" => array("CategoryVisibility", "CategoryVisibilities"),
+        "category_invisibility" => array("CategoryInvisibility", "CategoryInvisibilities"),
         "category_customer_group" => array("CategoryCustomerGroup", "CategoryCustomerGroups")
     );
 }

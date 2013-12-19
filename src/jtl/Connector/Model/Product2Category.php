@@ -10,24 +10,24 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Product2Category Model
- * 
+ * Product-Category Allocation
  *
  * @access public
  */
 class Product2Category extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique product2Category id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Reference to category
      */
     protected $_categoryId = "0";
     
     /**
-     * @var string
+     * @var string - Reference to product
      */
     protected $_productId = "0";
     

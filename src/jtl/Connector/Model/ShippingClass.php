@@ -10,19 +10,19 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ShippingClass Model
- * 
+ * Shipping classes are usually defined in JTL-Wawi ERP
  *
  * @access public
  */
 class ShippingClass extends DataModel
 {
     /**
-     * @var string
+     * @var string - Unique shippingClass id
      */
     protected $_id = "0";
     
     /**
-     * @var string
+     * @var string - Shipping class name
      */
     protected $_name = '';
     

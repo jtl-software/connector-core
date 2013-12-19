@@ -53,6 +53,11 @@ class ProductContainer extends CoreContainer
     protected $_productAttrI18ns;
     
     /**
+     * @var \jtl\Connector\Model\ProductInvisibility[]
+     */
+    protected $_productInvisibilities;
+    
+    /**
      * @var \jtl\Connector\Model\ProductFunctionAttr[]
      */
     protected $_productFunctionAttrs;
@@ -68,9 +73,9 @@ class ProductContainer extends CoreContainer
     protected $_productVariationI18ns;
     
     /**
-     * @var \jtl\Connector\Model\ProductVariationVisibility[]
+     * @var \jtl\Connector\Model\ProductVariationInvisibility[]
      */
-    protected $_productVariationVisibilities;
+    protected $_productVariationInvisibilities;
     
     /**
      * @var \jtl\Connector\Model\ProductVariationValue[]
@@ -88,9 +93,9 @@ class ProductContainer extends CoreContainer
     protected $_productVariationValueExtraCharges;
     
     /**
-     * @var \jtl\Connector\Model\ProductVariationValueVisibility[]
+     * @var \jtl\Connector\Model\ProductVariationValueInvisibility[]
      */
-    protected $_productVariationValueVisibilities;
+    protected $_productVariationValueInvisibilities;
     
     /**
      * @var \jtl\Connector\Model\ProductVariationValueDependency[]
@@ -212,6 +217,14 @@ class ProductContainer extends CoreContainer
     }
         
     /**
+     * @return array \jtl\Connector\Model\ProductInvisibility
+     */
+    public function getProductInvisibilities()
+    {
+        return $this->_productInvisibilities;
+    }
+        
+    /**
      * @return array \jtl\Connector\Model\ProductFunctionAttr
      */
     public function getProductFunctionAttrs()
@@ -236,11 +249,11 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\ProductVariationVisibility
+     * @return array \jtl\Connector\Model\ProductVariationInvisibility
      */
-    public function getProductVariationVisibilities()
+    public function getProductVariationInvisibilities()
     {
-        return $this->_productVariationVisibilities;
+        return $this->_productVariationInvisibilities;
     }
         
     /**
@@ -268,11 +281,11 @@ class ProductContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\ProductVariationValueVisibility
+     * @return array \jtl\Connector\Model\ProductVariationValueInvisibility
      */
-    public function getProductVariationValueVisibilities()
+    public function getProductVariationValueInvisibilities()
     {
-        return $this->_productVariationValueVisibilities;
+        return $this->_productVariationValueInvisibilities;
     }
         
     /**
@@ -372,14 +385,15 @@ class ProductContainer extends CoreContainer
         "product2_category" => array("Product2Category", "Product2Categories"),
         "product_attr" => array("ProductAttr", "ProductAttrs"),
         "product_attr_i18n" => array("ProductAttrI18n", "ProductAttrI18ns"),
+        "product_invisibility" => array("ProductInvisibility", "ProductInvisibilities"),
         "product_function_attr" => array("ProductFunctionAttr", "ProductFunctionAttrs"),
         "product_variation" => array("ProductVariation", "ProductVariations"),
         "product_variation_i18n" => array("ProductVariationI18n", "ProductVariationI18ns"),
-        "product_variation_visibility" => array("ProductVariationVisibility", "ProductVariationVisibilities"),
+        "product_variation_invisibility" => array("ProductVariationInvisibility", "ProductVariationInvisibilities"),
         "product_variation_value" => array("ProductVariationValue", "ProductVariationValues"),
         "product_variation_value_i18n" => array("ProductVariationValueI18n", "ProductVariationValueI18ns"),
         "product_variation_value_extra_charge" => array("ProductVariationValueExtraCharge", "ProductVariationValueExtraCharges"),
-        "product_variation_value_visibility" => array("ProductVariationValueVisibility", "ProductVariationValueVisibilities"),
+        "product_variation_value_invisibility" => array("ProductVariationValueInvisibility", "ProductVariationValueInvisibilities"),
         "product_variation_value_dependency" => array("ProductVariationValueDependency", "ProductVariationValueDependencies"),
         "product_var_combination" => array("ProductVarCombination", "ProductVarCombinations"),
         "cross_selling" => array("CrossSelling", "CrossSellings"),

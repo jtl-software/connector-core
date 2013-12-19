@@ -10,14 +10,14 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Currency Model
- * Holds currency data
+ * Currency model
  *
  * @access public
  */
 class Currency extends DataModel
 {
     /**
-     * @var string - Unique id
+     * @var string - Unique currency id
      */
     protected $_id = "0";
     
@@ -42,7 +42,7 @@ class Currency extends DataModel
     protected $_factor = 0.0;
     
     /**
-     * @var bool - Default currency
+     * @var bool - Flag default currency
      */
     protected $_isDefault = False;
     

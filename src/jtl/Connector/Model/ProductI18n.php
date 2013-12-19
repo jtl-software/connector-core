@@ -10,39 +10,39 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductI18n Model
- * 
+ * Locale specific texts for product
  *
  * @access public
  */
 class ProductI18n extends DataModel
 {
     /**
-     * @var string
+     * @var string - locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string
+     * @var string - Reference to product
      */
     protected $_productId = "0";
     
     /**
-     * @var string
+     * @var string - Product name / title
      */
     protected $_name = '';
     
     /**
-     * @var string
+     * @var string - Path of product URL
      */
-    protected $_url = '';
+    protected $_urlPath = '';
     
     /**
-     * @var string
+     * @var string - Product description
      */
     protected $_description = '';
     
     /**
-     * @var string
+     * @var string - Product shortdescription
      */
     protected $_shortDescription = '';
     
@@ -64,7 +64,7 @@ class ProductI18n extends DataModel
                 case "_localeName":
                 case "_productId":
                 case "_name":
-                case "_url":
+                case "_urlPath":
                 case "_description":
                 case "_shortDescription":
                 

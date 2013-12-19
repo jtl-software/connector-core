@@ -10,10 +10,9 @@
         },
         "productVariationId": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "extraWeight": {
             "type": [
@@ -52,6 +51,7 @@
         }
     },
     "required": [
-        "id"
+        "id",
+        "productVariationId"
     ]
 }
