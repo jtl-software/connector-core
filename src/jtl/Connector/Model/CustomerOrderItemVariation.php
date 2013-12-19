@@ -9,15 +9,15 @@ namespace jtl\Connector\Model;
 use \jtl\Core\Model\DataModel;
 
 /**
- * CustomerOrderPositionVariation Model
+ * CustomerOrderItemVariation Model
  * 
  *
  * @access public
  */
-class CustomerOrderPositionVariation extends DataModel
+class CustomerOrderItemVariation extends DataModel
 {
     /**
-     * @var string - Unique customerOrderPositionVariation id
+     * @var string - Unique customerOrderItemVariation id
      */
     protected $_id = "0";
     
@@ -57,7 +57,7 @@ class CustomerOrderPositionVariation extends DataModel
     protected $_surcharge = 0.0;
     
     /**
-     * CustomerOrderPositionVariation Setter
+     * CustomerOrderItemVariation Setter
      *
      * @param string $name
      * @param string $value

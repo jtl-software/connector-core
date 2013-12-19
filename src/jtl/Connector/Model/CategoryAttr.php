@@ -9,25 +9,30 @@ namespace jtl\Connector\Model;
 use \jtl\Core\Model\DataModel;
 
 /**
- * ProductFileDownload Model
- * Product to FileDownload allocation
+ * CategoryAttr Model
+ * Localized category attribute
  *
  * @access public
  */
-class ProductFileDownload extends DataModel
+class CategoryAttr extends DataModel
 {
     /**
-     * @var string - Reference to product
+     * @var string - Unique categoryAttr id
      */
-    protected $_productId = "0";
+    protected $_id = "0";
     
     /**
-     * @var string - Reference to fileDownload
+     * @var string - Reference to category
      */
-    protected $_fileDownloadId = "0";
+    protected $_categoryId = "0";
     
     /**
-     * ProductFileDownload Setter
+     * @var int - Sort number
+     */
+    protected $_sort = 0;
+    
+    /**
+     * CategoryAttr Setter
      *
      * @param string $name
      * @param string $value
@@ -41,10 +46,15 @@ class ProductFileDownload extends DataModel
             }
         
             switch ($name) {
-                case "_productId":
-                case "_fileDownloadId":
+                case "_id":
+                case "_categoryId":
                 
                     $this->$name = (string)$value;
+                    break;
+            
+                case "_sort":
+                
+                    $this->$name = (int)$value;
                     break;
             
             }

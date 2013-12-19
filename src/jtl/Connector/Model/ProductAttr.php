@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductAttr Model
- * Locale specific product attribute
+ * Localized product attribute
  *
  * @access public
  */

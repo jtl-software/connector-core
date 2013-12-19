@@ -28,6 +28,16 @@ class CategoryContainer extends CoreContainer
     protected $_categoryAttrs;
     
     /**
+     * @var \jtl\Connector\Model\CategoryAttrI18n[]
+     */
+    protected $_categoryAttrI18ns;
+    
+    /**
+     * @var \jtl\Connector\Model\CategoryFunctionAttr[]
+     */
+    protected $_categoryFunctionAttrs;
+    
+    /**
      * @var \jtl\Connector\Model\CategoryInvisibility[]
      */
     protected $_categoryInvisibilities;
@@ -62,6 +72,22 @@ class CategoryContainer extends CoreContainer
     }
         
     /**
+     * @return array \jtl\Connector\Model\CategoryAttrI18n
+     */
+    public function getCategoryAttrI18ns()
+    {
+        return $this->_categoryAttrI18ns;
+    }
+        
+    /**
+     * @return array \jtl\Connector\Model\CategoryFunctionAttr
+     */
+    public function getCategoryFunctionAttrs()
+    {
+        return $this->_categoryFunctionAttrs;
+    }
+        
+    /**
      * @return array \jtl\Connector\Model\CategoryInvisibility
      */
     public function getCategoryInvisibilities()
@@ -81,6 +107,8 @@ class CategoryContainer extends CoreContainer
         "category" => array("Category", "Categories"),
         "category_i18n" => array("CategoryI18n", "CategoryI18ns"),
         "category_attr" => array("CategoryAttr", "CategoryAttrs"),
+        "category_attr_i18n" => array("CategoryAttrI18n", "CategoryAttrI18ns"),
+        "category_function_attr" => array("CategoryFunctionAttr", "CategoryFunctionAttrs"),
         "category_invisibility" => array("CategoryInvisibility", "CategoryInvisibilities"),
         "category_customer_group" => array("CategoryCustomerGroup", "CategoryCustomerGroups")
     );

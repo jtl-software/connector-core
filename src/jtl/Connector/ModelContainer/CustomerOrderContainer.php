@@ -28,9 +28,9 @@ class CustomerOrderContainer extends CoreContainer
     protected $_customerOrderItems;
     
     /**
-     * @var \jtl\Connector\Model\CustomerOrderPositionVariation[]
+     * @var \jtl\Connector\Model\CustomerOrderItemVariation[]
      */
-    protected $_customerOrderPositionVariations;
+    protected $_customerOrderItemVariations;
     
     /**
      * @var \jtl\Connector\Model\CustomerOrderPaymentInfo[]
@@ -72,11 +72,11 @@ class CustomerOrderContainer extends CoreContainer
     }
         
     /**
-     * @return array \jtl\Connector\Model\CustomerOrderPositionVariation
+     * @return array \jtl\Connector\Model\CustomerOrderItemVariation
      */
-    public function getCustomerOrderPositionVariations()
+    public function getCustomerOrderItemVariations()
     {
-        return $this->_customerOrderPositionVariations;
+        return $this->_customerOrderItemVariations;
     }
         
     /**
@@ -107,7 +107,7 @@ class CustomerOrderContainer extends CoreContainer
         "customer_order" => array("CustomerOrder", "CustomerOrders"),
         "customer_order_attr" => array("CustomerOrderAttr", "CustomerOrderAttrs"),
         "customer_order_item" => array("CustomerOrderItem", "CustomerOrderItems"),
-        "customer_order_position_variation" => array("CustomerOrderPositionVariation", "CustomerOrderPositionVariations"),
+        "customer_order_item_variation" => array("CustomerOrderItemVariation", "CustomerOrderItemVariations"),
         "customer_order_payment_info" => array("CustomerOrderPaymentInfo", "CustomerOrderPaymentInfos"),
         "customer_order_shipping_address" => array("CustomerOrderShippingAddress", "CustomerOrderShippingAddresss"),
         "customer_order_billing_address" => array("CustomerOrderBillingAddress", "CustomerOrderBillingAddresss")
