@@ -24,6 +24,10 @@
     "php": ">=5.3.0",
     "jtl/core": "dev-master"
   },
+  "require-dev": {
+    "phpdocumentor/phpdocumentor": "2.*",
+    "evert/phpdoc-md" : "dev-master"
+  },
   "minimum-stability": "dev",
   "extra": {
     "branch-alias": {
