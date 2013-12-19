@@ -6,6 +6,7 @@ nbproject/**
 vendor/**
 build/build/**
 build/coverage/**
+cache/**
 composer.lock
 composer.phar
 update-parents.sh
