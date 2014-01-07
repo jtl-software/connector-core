@@ -10,17 +10,15 @@
         },
         "customerGroupId": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "localeName": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "customerNumber": {
             "type": [
@@ -234,6 +232,8 @@
         }
     },
     "required": [
-        "id"
+        "id",
+        "customerGroupId",
+        "localeName"
     ]
 }

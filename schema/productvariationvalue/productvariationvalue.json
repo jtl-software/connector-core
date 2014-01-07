@@ -41,13 +41,6 @@
                 "null"
             ],
             "optional": true
-        },
-        "packagingUnitId": {
-            "type": [
-                "string",
-                "null"
-            ],
-            "optional": true
         }
     },
     "required": [

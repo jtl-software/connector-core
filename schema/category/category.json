@@ -24,13 +24,13 @@
         },
         "level": {
             "type": [
-                "int"
+                "int",
+                "null"
             ],
-            "optional": false
+            "optional": true
         }
     },
     "required": [
-        "id",
-        "level"
+        "id"
     ]
 }

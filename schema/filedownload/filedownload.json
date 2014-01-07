@@ -4,17 +4,15 @@
     "properties": {
         "id": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "path": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "previewPath": {
             "type": [
@@ -53,5 +51,7 @@
         }
     },
     "required": [
+        "id",
+        "path"
     ]
 }

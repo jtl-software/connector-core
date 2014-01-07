@@ -16,10 +16,9 @@
         },
         "price": {
             "type": [
-                "float",
-                "null"
+                "float"
             ],
-            "optional": true
+            "optional": false
         },
         "type": {
             "type": [
@@ -31,6 +30,7 @@
     },
     "required": [
         "configItemId",
-        "customerGroupId"
+        "customerGroupId",
+        "price"
     ]
 }

@@ -106,15 +106,15 @@
         },
         "vat": {
             "type": [
-                "double",
-                "null"
+                "double"
             ],
-            "optional": true
+            "optional": false
         }
     },
     "required": [
         "id",
         "configGroupId",
-        "type"
+        "type",
+        "vat"
     ]
 }

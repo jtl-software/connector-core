@@ -16,28 +16,28 @@
         },
         "stockLevel": {
             "type": [
-                "double"
+                "double",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "inflowQuantity": {
             "type": [
-                "double"
+                "double",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "inflowDate": {
             "type": [
-                "string"
+                "string",
+                "null"
             ],
-            "optional": false
+            "optional": true
         }
     },
     "required": [
         "productId",
-        "warehouseId",
-        "stockLevel",
-        "inflowQuantity",
-        "inflowDate"
+        "warehouseId"
     ]
 }

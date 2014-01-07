@@ -68,10 +68,9 @@
         },
         "vat": {
             "type": [
-                "double",
-                "null"
+                "double"
             ],
-            "optional": true
+            "optional": false
         },
         "minimumOrderQuantity": {
             "type": [
@@ -142,9 +141,10 @@
         },
         "isDivisible": {
             "type": [
-                "bool"
+                "bool",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "considerBasePrice": {
             "type": [
@@ -169,21 +169,24 @@
         },
         "sort": {
             "type": [
-                "int"
+                "int",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "created": {
             "type": [
-                "string"
+                "string",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "availableFrom": {
             "type": [
-                "string"
+                "string",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "manufacturerNumber": {
             "type": [
@@ -236,21 +239,24 @@
         },
         "isMasterProduct": {
             "type": [
-                "bool"
+                "bool",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "takeOffQuantity": {
             "type": [
-                "double"
+                "double",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "setArticleId": {
             "type": [
-                "string"
+                "string",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "upc": {
             "type": [
@@ -275,9 +281,10 @@
         },
         "productTypeId": {
             "type": [
-                "string"
+                "string",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "inflowQuantity": {
             "type": [
@@ -295,15 +302,17 @@
         },
         "supplierStockLevel": {
             "type": [
-                "double"
+                "double",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "supplierDeliveryTime": {
             "type": [
-                "double"
+                "double",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "bestBefore": {
             "type": [
@@ -320,18 +329,9 @@
         "deliveryStatusId",
         "unitId",
         "shippingClassId",
+        "vat",
         "productWeight",
         "shippingWeight",
-        "considerStock",
-        "isDivisible",
-        "sort",
-        "created",
-        "availableFrom",
-        "isMasterProduct",
-        "takeOffQuantity",
-        "setArticleId",
-        "productTypeId",
-        "supplierStockLevel",
-        "supplierDeliveryTime"
+        "considerStock"
     ]
 }

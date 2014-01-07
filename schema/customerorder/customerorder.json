@@ -17,38 +17,33 @@
         },
         "shippingAddressId": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "billingAddressId": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "shippingMethodId": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "localeName": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "currencyIso": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "estimatedDeliveryDate": {
             "type": [
@@ -66,10 +61,9 @@
         },
         "totalSum": {
             "type": [
-                "double",
-                "null"
+                "double"
             ],
-            "optional": true
+            "optional": false
         },
         "session": {
             "type": [
@@ -122,7 +116,7 @@
         },
         "tracking": {
             "type": [
-                " ",
+                "string",
                 "null"
             ],
             "optional": true
@@ -171,10 +165,9 @@
         },
         "created": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "paymentModuleId": {
             "type": [
@@ -185,6 +178,13 @@
         }
     },
     "required": [
-        "id"
+        "id",
+        "shippingAddressId",
+        "billingAddressId",
+        "shippingMethodId",
+        "localeName",
+        "currencyIso",
+        "totalSum",
+        "created"
     ]
 }

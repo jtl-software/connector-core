@@ -16,10 +16,9 @@
         },
         "name": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "urlPath": {
             "type": [
@@ -59,6 +58,7 @@
     },
     "required": [
         "localeName",
-        "categoryId"
+        "categoryId",
+        "name"
     ]
 }

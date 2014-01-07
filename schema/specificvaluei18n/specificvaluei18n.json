@@ -22,9 +22,10 @@
         },
         "urlPath": {
             "type": [
-                "string"
+                "string",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "description": {
             "type": [
@@ -58,7 +59,6 @@
     "required": [
         "localeName",
         "specificValueId",
-        "value",
-        "urlPath"
+        "value"
     ]
 }

@@ -16,10 +16,9 @@
         },
         "name": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "description": {
             "type": [
@@ -31,6 +30,7 @@
     },
     "required": [
         "configGroupId",
-        "localeName"
+        "localeName",
+        "name"
     ]
 }

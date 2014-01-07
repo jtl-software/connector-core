@@ -4,10 +4,9 @@
     "properties": {
         "id": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "productId": {
             "type": [
@@ -32,38 +31,33 @@
         },
         "name": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "sku": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "price": {
             "type": [
-                "double",
-                "null"
+                "double"
             ],
-            "optional": true
+            "optional": false
         },
         "vat": {
             "type": [
-                "double",
-                "null"
+                "double"
             ],
-            "optional": true
+            "optional": false
         },
         "quantity": {
             "type": [
-                "int",
-                "null"
+                "int"
             ],
-            "optional": true
+            "optional": false
         },
         "type": {
             "type": [
@@ -88,5 +82,11 @@
         }
     },
     "required": [
+        "id",
+        "name",
+        "sku",
+        "price",
+        "vat",
+        "quantity"
     ]
 }

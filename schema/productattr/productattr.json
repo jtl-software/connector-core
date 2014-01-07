@@ -10,10 +10,9 @@
         },
         "productId": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "sort": {
             "type": [
@@ -24,6 +23,7 @@
         }
     },
     "required": [
-        "id"
+        "id",
+        "productId"
     ]
 }

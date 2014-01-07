@@ -16,14 +16,14 @@
         },
         "name": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         }
     },
     "required": [
         "localeName",
-        "specificId"
+        "specificId",
+        "name"
     ]
 }

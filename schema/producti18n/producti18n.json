@@ -10,10 +10,9 @@
         },
         "productId": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "name": {
             "type": [
@@ -30,21 +29,22 @@
         },
         "description": {
             "type": [
-                "string"
+                "string",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "shortDescription": {
             "type": [
-                "string"
+                "string",
+                "null"
             ],
-            "optional": false
+            "optional": true
         }
     },
     "required": [
         "localeName",
-        "name",
-        "description",
-        "shortDescription"
+        "productId",
+        "name"
     ]
 }

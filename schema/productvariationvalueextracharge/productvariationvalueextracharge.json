@@ -16,14 +16,14 @@
         },
         "extraChargeNet": {
             "type": [
-                "double",
-                "null"
+                "double"
             ],
-            "optional": true
+            "optional": false
         }
     },
     "required": [
         "customerGroupId",
-        "productVariationValueId"
+        "productVariationValueId",
+        "extraChargeNet"
     ]
 }

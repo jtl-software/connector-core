@@ -10,13 +10,13 @@
         },
         "name": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         }
     },
     "required": [
-        "warehouseId"
+        "warehouseId",
+        "name"
     ]
 }

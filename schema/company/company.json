@@ -17,44 +17,40 @@
         },
         "street": {
             "type": [
+                "string"
+            ],
+            "optional": false
+        },
+        "streetNumber": {
+            "type": [
                 "string",
                 "null"
             ],
             "optional": true
         },
-        "streetNumber": {
+        "zipCode": {
             "type": [
                 "string"
             ],
             "optional": false
         },
-        "zipCode": {
-            "type": [
-                "string",
-                "null"
-            ],
-            "optional": true
-        },
         "city": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "countryIso": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "phone": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "fax": {
             "type": [
@@ -65,10 +61,9 @@
         },
         "eMail": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "www": {
             "type": [
@@ -136,6 +131,11 @@
     },
     "required": [
         "name",
-        "streetNumber"
+        "street",
+        "zipCode",
+        "city",
+        "countryIso",
+        "phone",
+        "eMail"
     ]
 }

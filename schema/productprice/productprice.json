@@ -16,10 +16,9 @@
         },
         "netPrice": {
             "type": [
-                "double",
-                "null"
+                "double"
             ],
-            "optional": true
+            "optional": false
         },
         "quantity": {
             "type": [
@@ -31,6 +30,7 @@
     },
     "required": [
         "customerGroupId",
-        "productId"
+        "productId",
+        "netPrice"
     ]
 }

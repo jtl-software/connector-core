@@ -16,14 +16,14 @@
         },
         "priceNet": {
             "type": [
-                "double",
-                "null"
+                "double"
             ],
-            "optional": true
+            "optional": false
         }
     },
     "required": [
         "customerGroupId",
-        "productSpecialPriceId"
+        "productSpecialPriceId",
+        "priceNet"
     ]
 }

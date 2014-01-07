@@ -10,16 +10,16 @@
         },
         "productId": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "isActive": {
             "type": [
-                "bool"
+                "bool",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "activeFrom": {
             "type": [
@@ -59,6 +59,6 @@
     },
     "required": [
         "id",
-        "isActive"
+        "productId"
     ]
 }

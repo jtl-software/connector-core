@@ -10,10 +10,9 @@
         },
         "nameEnglish": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "nameGerman": {
             "type": [
@@ -24,10 +23,9 @@
         },
         "localeName": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "isDefault": {
             "type": [
@@ -38,6 +36,8 @@
         }
     },
     "required": [
-        "id"
+        "id",
+        "nameEnglish",
+        "localeName"
     ]
 }

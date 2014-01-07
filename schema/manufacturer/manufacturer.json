@@ -10,10 +10,9 @@
         },
         "name": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "optional": true
+            "optional": false
         },
         "www": {
             "type": [
@@ -38,6 +37,7 @@
         }
     },
     "required": [
-        "id"
+        "id",
+        "name"
     ]
 }

@@ -28,9 +28,10 @@
         },
         "mediaFileCategory": {
             "type": [
-                "string"
+                "string",
+                "null"
             ],
-            "optional": false
+            "optional": true
         },
         "type": {
             "type": [
@@ -40,9 +41,10 @@
         },
         "sort": {
             "type": [
-                "int"
+                "int",
+                "null"
             ],
-            "optional": false
+            "optional": true
         }
     },
     "required": [
@@ -50,8 +52,6 @@
         "productId",
         "path",
         "url",
-        "mediaFileCategory",
-        "type",
-        "sort"
+        "type"
     ]
 }
