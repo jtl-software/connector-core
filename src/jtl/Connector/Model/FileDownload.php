@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * FileDownload Model
- * File download model
+ * File download properties. 
  *
  * @access public
  */
@@ -19,7 +19,7 @@ class FileDownload extends DataModel
     /**
      * @var string - Unique fileDownload id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Path to download file
@@ -27,27 +27,27 @@ class FileDownload extends DataModel
     protected $_path = '';
     
     /**
-     * @var string - Path to preview file
+     * @var string - Optional path to preview file
      */
     protected $_previewPath = '';
     
     /**
-     * @var int - Max number of allowed downloads per customer
+     * @var int - Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
      */
     protected $_maxDownloads = 0;
     
     /**
-     * @var int - Max days to allow Download, starting from payment date
+     * @var int - Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
      */
     protected $_maxDays = 0;
     
     /**
-     * @var int - Sort number
+     * @var int - Optional sort number
      */
     protected $_sort = 0;
     
     /**
-     * @var string - Creation date
+     * @var string - Optional creation date
      */
     protected $_created = '';
     

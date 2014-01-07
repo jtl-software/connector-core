@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * MediaFileI18n Model
- * Locale specific mediafile name + description
+ * Locale specific mediafile name + description.
  *
  * @access public
  */
@@ -19,7 +19,7 @@ class MediaFileI18n extends DataModel
     /**
      * @var string - Reference to mediaFile
      */
-    protected $_mediaFileId = "0";
+    protected $_mediaFileId = '';
     
     /**
      * @var string - Locale

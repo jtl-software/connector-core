@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductFileDownload Model
- * Product to FileDownload allocation
+ * Product to FileDownload allocation.
  *
  * @access public
  */
@@ -19,12 +19,12 @@ class ProductFileDownload extends DataModel
     /**
      * @var string - Reference to product
      */
-    protected $_productId = "0";
+    protected $_productId = '';
     
     /**
      * @var string - Reference to fileDownload
      */
-    protected $_fileDownloadId = "0";
+    protected $_fileDownloadId = '';
     
     /**
      * ProductFileDownload Setter

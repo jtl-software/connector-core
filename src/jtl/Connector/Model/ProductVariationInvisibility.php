@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductVariationInvisibility Model
- * Specify productVariation to hide from customerGroup
+ * Specify productVariation to hide from customerGroup.
  *
  * @access public
  */
@@ -19,12 +19,12 @@ class ProductVariationInvisibility extends DataModel
     /**
      * @var string - Reference to customerGroup
      */
-    protected $_customerGroupId = "0";
+    protected $_customerGroupId = '';
     
     /**
      * @var string - Reference to productVariation
      */
-    protected $_productVariationId = "0";
+    protected $_productVariationId = '';
     
     /**
      * ProductVariationInvisibility Setter

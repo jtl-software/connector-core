@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductConfigGroup Model
- * Product-ConfigGroup Assignment
+ * Product-ConfigGroup Assignment.
  *
  * @access public
  */
@@ -19,20 +19,20 @@ class ProductConfigGroup extends DataModel
     /**
      * @var string - Unique productConfigGroup id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to configGroup
      */
-    protected $_configGroupId = "0";
+    protected $_configGroupId = '';
     
     /**
      * @var string - Reference to product
      */
-    protected $_productId = "0";
+    protected $_productId = '';
     
     /**
-     * @var int - Sort number
+     * @var int - Optional sort number
      */
     protected $_sort = 0;
     

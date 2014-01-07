@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductAttrI18n Model
- * Localized key-value-pair for productAttr
+ * Localized key-value-pair for productAttr.
  *
  * @access public
  */
@@ -24,7 +24,7 @@ class ProductAttrI18n extends DataModel
     /**
      * @var string - Reference to productAttr
      */
-    protected $_productAttrId = "0";
+    protected $_productAttrId = '';
     
     /**
      * @var string - Attribute key

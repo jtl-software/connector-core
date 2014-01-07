@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * FileUpload Model
- * File upload model
+ * File upload properties. 
  *
  * @access public
  */
@@ -19,20 +19,20 @@ class FileUpload extends DataModel
     /**
      * @var string - Unique fileUpload id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to product
      */
-    protected $_productId = "0";
+    protected $_productId = '';
     
     /**
-     * @var string - Filename
+     * @var string - Filename specification
      */
     protected $_name = '';
     
     /**
-     * @var string - File description
+     * @var string - Optional file description
      */
     protected $_description = '';
     
@@ -42,7 +42,7 @@ class FileUpload extends DataModel
     protected $_fileType = '';
     
     /**
-     * @var bool - True if file upload is required to buy product
+     * @var bool - Optional flag to force upload before finishing checkout. True if file upload is required to buy product
      */
     protected $_isRequired = false;
     

@@ -10,8 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CategoryCustomerGroup Model
- * Link customergroup with category. 
-Set optional discount on category for customergroup. 
+ * Link customergroup with category. Set optional discount on category for customergroup. 
  *
  * @access public
  */
@@ -20,17 +19,17 @@ class CategoryCustomerGroup extends DataModel
     /**
      * @var string - Reference to customerGroup
      */
-    protected $_customerGroupId = "0";
+    protected $_customerGroupId = '';
     
     /**
      * @var string - Reference to category
      */
-    protected $_categoryId = "0";
+    protected $_categoryId = '';
     
     /**
-     * @var double - Discount on products in specified categoryId for  customerGroupId
+     * @var double - Optional discount on products in specified categoryId for  customerGroupId
      */
-    protected $_discount = 0.0;
+    protected $_discount = 0;
     
     /**
      * CategoryCustomerGroup Setter

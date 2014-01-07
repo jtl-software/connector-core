@@ -10,8 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ConfigItemI18n Model
- * Localized config item name and description
-
+ * Localized config item name and description.
  *
  * @access public
  */
@@ -20,7 +19,7 @@ class ConfigItemI18n extends DataModel
     /**
      * @var string - Reference to configItem
      */
-    protected $_configItemId = "0";
+    protected $_configItemId = '';
     
     /**
      * @var string - Locale

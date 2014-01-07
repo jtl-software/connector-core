@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductVariation Model
- * ProductVariation Model. Each product defines its own variations, so variations are not global  in contrast to specifics. 
+ * ProductVariation Model. Each product defines its own variations, that means  variations are not global  in contrast to specifics. 
  *
  * @access public
  */
@@ -19,20 +19,20 @@ class ProductVariation extends DataModel
     /**
      * @var string - Unique productVariation id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to product
      */
-    protected $_productId = "0";
+    protected $_productId = '';
     
     /**
-     * @var string - Variation type
+     * @var string - Variation type e.g. radio or select
      */
     protected $_type = '';
     
     /**
-     * @var int - Sort number
+     * @var int - Optional sort number
      */
     protected $_sort = 0;
     

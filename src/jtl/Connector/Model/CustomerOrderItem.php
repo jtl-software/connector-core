@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerOrderItem Model
- * Order item in customer order
+ * Order item in customer order.
  *
  * @access public
  */
@@ -19,22 +19,22 @@ class CustomerOrderItem extends DataModel
     /**
      * @var string - Unique customerOrderItem id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to product
      */
-    protected $_productId = "0";
+    protected $_productId = '';
     
     /**
      * @var string - Reference to shippingClass
      */
-    protected $_shippingClassId = "0";
+    protected $_shippingClassId = '';
     
     /**
      * @var string - Reference to customerOrder
      */
-    protected $_customerOrderId = "0";
+    protected $_customerOrderId = '';
     
     /**
      * @var string - Order item name
@@ -67,12 +67,12 @@ class CustomerOrderItem extends DataModel
     protected $_type = '';
     
     /**
-     * @var string - Unique Hashsum (if item is part of configurable item
+     * @var string - Optional unique Hashsum (if item is part of configurable item
      */
     protected $_unique = '';
     
     /**
-     * @var string - References configItemId (if item is part of a configurable item)
+     * @var string - Optional reference to configItemId (if item is part of a configurable item)
      */
     protected $_configItemId = "0";
     

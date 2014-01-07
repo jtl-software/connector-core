@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerGroupI18n Model
- * Localized customer group name
+ * Localized customer group name.
  *
  * @access public
  */
@@ -24,7 +24,7 @@ class CustomerGroupI18n extends DataModel
     /**
      * @var string - Reference to customerGroup
      */
-    protected $_customerGroupId = "0";
+    protected $_customerGroupId = '';
     
     /**
      * @var string - Localized customer group name

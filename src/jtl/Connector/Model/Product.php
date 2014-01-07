@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Product Model
- * Product model
+ * Product properties.
  *
  * @access public
  */
@@ -19,50 +19,50 @@ class Product extends DataModel
     /**
      * @var string - Unique product id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to master product
      */
-    protected $_masterProductId = "0";
+    protected $_masterProductId = '';
     
     /**
      * @var string - Reference to manufacturer
      */
-    protected $_manufacturerId = "0";
+    protected $_manufacturerId = '';
     
     /**
      * @var string - Reference to (current) deliveryStatus
      */
-    protected $_deliveryStatusId = "0";
+    protected $_deliveryStatusId = '';
     
     /**
      * @var string - Reference to unit
      */
-    protected $_unitId = "0";
+    protected $_unitId = '';
     
     /**
-     * @var string - Reference to basePriceUnit
+     * @var string - Optional reference to basePriceUnit
      */
-    protected $_basePriceUnitId = "0";
+    protected $_basePriceUnitId = '';
     
     /**
      * @var string - Reference to shippingClass
      */
-    protected $_shippingClassId = "0";
+    protected $_shippingClassId = '';
     
     /**
-     * @var string - Stock keeping unit identifier
+     * @var string - Optional stock keeping unit identifier
      */
     protected $_sku = '';
     
     /**
-     * @var string - Internal product note
+     * @var string - Optional internal product note
      */
     protected $_note = '';
     
     /**
-     * @var double - Stock (level)
+     * @var double - Optional stock (level)
      */
     protected $_stockLevel = 0;
     
@@ -72,17 +72,17 @@ class Product extends DataModel
     protected $_vat = 0.0;
     
     /**
-     * @var double - minimum quantity needed to purchase product
+     * @var double - Optional minimum quantity needed to purchase product
      */
-    protected $_minimumOrderQuantity = 0.0;
+    protected $_minimumOrderQuantity = 0;
     
     /**
-     * @var string - European Article Number (EAN)
+     * @var string - Optional European Article Number (EAN)
      */
     protected $_ean = '';
     
     /**
-     * @var bool - Flag top product
+     * @var bool - Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
      */
     protected $_isTopProduct = false;
     
@@ -97,52 +97,52 @@ class Product extends DataModel
     protected $_shippingWeight = 0;
     
     /**
-     * @var bool - Flag new product
+     * @var bool - Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
      */
     protected $_isNew = false;
     
     /**
-     * @var double - Recommended retail price (gross) 
+     * @var double - Optional recommended retail price (gross) 
      */
     protected $_recommendedRetailPrice = 0.0;
     
     /**
-     * @var bool - Consider stock level?
+     * @var bool - Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
      */
     protected $_considerStock = false;
     
     /**
-     * @var bool - Permit negative stock / allow overselling
+     * @var bool - Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true. 
      */
     protected $_permitNegativeStock = false;
     
     /**
-     * @var bool - consider stock levels of productVariations
+     * @var bool - Optional: Consider stock levels of productVariations. Same as considerStock but for variations. 
      */
     protected $_considerVariationStock = false;
     
     /**
-     * @var bool - Set to true to allow non-integer quantites for purchase
+     * @var bool - Optional: Set to true to allow non-integer quantites for purchase
      */
     protected $_isDivisible = false;
     
     /**
-     * @var bool - Set to true to display base price / unit pricing measure
+     * @var bool - Optional: Set to true to display base price / unit pricing measure
      */
     protected $_considerBasePrice = false;
     
     /**
-     * @var double - Base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
+     * @var double - Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
      */
     protected $_basePriceDivisor = 0.0;
     
     /**
-     * @var string - Internal keywords and synonyms for product
+     * @var string - Optional internal keywords and synonyms for product
      */
     protected $_keywords = '';
     
     /**
-     * @var int - Sort number
+     * @var int - Optional sort number for product sorting in lists
      */
     protected $_sort = 0;
     
@@ -152,104 +152,104 @@ class Product extends DataModel
     protected $_created = "0000-00-00";
     
     /**
-     * @var string - Available from date
+     * @var string - Optional available from date. Specify a date, upon when product can be purchased. 
      */
     protected $_availableFrom = "0000-00-00";
     
     /**
-     * @var string - Manufacturer number
+     * @var string - Optional manufacturer number
      */
     protected $_manufacturerNumber = '';
     
     /**
-     * @var string - Serial number
+     * @var string - Optional serial number
      */
     protected $_serialNumber = '';
     
     /**
-     * @var string - International Standard Book Number
+     * @var string - Optional International Standard Book Number
      */
     protected $_isbn = '';
     
     /**
-     * @var string - Amazon Standard Identification Number
+     * @var string - Optional Amazon Standard Identification Number
      */
     protected $_asin = '';
     
     /**
-     * @var string - UN number, used to define hazardous properties
+     * @var string - Optional UN number, used to define hazardous properties
      */
     protected $_unNumber = '';
     
     /**
-     * @var string - Hazard identifier, encodes general hazard class und subdivision
+     * @var string - Optional Hazard identifier, encodes general hazard class und subdivision
      */
     protected $_hazardIdNumber = '';
     
     /**
-     * @var string - TARIC
+     * @var string - Optional TARIC
      */
     protected $_taric = '';
     
     /**
-     * @var bool - Flag if product is master product
+     * @var bool - Optional flag if product is master product
      */
     protected $_isMasterProduct = false;
     
     /**
-     * @var double - Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
+     * @var double - Optional: Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      */
     protected $_takeOffQuantity = 0.0;
     
     /**
-     * @var string - Reference to setArticle
+     * @var string - Optional reference to setArticle
      */
-    protected $_setArticleId = "0";
+    protected $_setArticleId = '';
     
     /**
-     * @var string - Universal Product Code
+     * @var string - Optional Universal Product Code
      */
     protected $_upc = '';
     
     /**
-     * @var string - Origin country
+     * @var string - Optional Origin country
      */
     protected $_originCountry = '';
     
     /**
-     * @var string - Ebay product ID
+     * @var string - Optional Ebay product ID
      */
     protected $_epid = '';
     
     /**
-     * @var string - Reference to productType
+     * @var string - Optional reference to productType
      */
-    protected $_productTypeId = "0";
+    protected $_productTypeId = '';
     
     /**
-     * @var double - expected inflow quantity
+     * @var double - Optional expected inflow quantity
      */
     protected $_inflowQuantity = 0.0;
     
     /**
-     * @var string - expected inflow date
+     * @var string - Optional expected inflow date
      */
     protected $_inflowDate = '';
     
     /**
-     * @var double - Supplier stock level for product
+     * @var double - Optional supplier stock level for product
      */
-    protected $_supplierStockLevel = 0.0;
+    protected $_supplierStockLevel = 0;
     
     /**
-     * @var double - Average supplier delivery time in days
+     * @var double - Optional average supplier delivery time in days. Default 0 if no average delivery time is present. 
      */
-    protected $_supplierDeliveryTime = 0.0;
+    protected $_supplierDeliveryTime = 0;
     
     /**
-     * @var string - Best before date
+     * @var string - Optional best before date. Default 0000-00-00 if product has no best-before-date.
      */
-    protected $_bestBefore = '';
+    protected $_bestBefore = "0000-00-00";
     
     /**
      * Product Setter

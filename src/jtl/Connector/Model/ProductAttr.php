@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductAttr Model
- * Localized product attribute
+ * Localized product attribute.
  *
  * @access public
  */
@@ -19,15 +19,15 @@ class ProductAttr extends DataModel
     /**
      * @var string - Unique productAttr id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to product
      */
-    protected $_productId = "0";
+    protected $_productId = '';
     
     /**
-     * @var int - Sort number
+     * @var int - Optional sort number
      */
     protected $_sort = 0;
     

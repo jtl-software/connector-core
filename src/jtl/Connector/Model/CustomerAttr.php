@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerAttr Model
- * Monolingual customer attribute
+ * Monolingual customer attribute.
  *
  * @access public
  */
@@ -19,12 +19,12 @@ class CustomerAttr extends DataModel
     /**
      * @var string - Unique customerAttr id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to customer
      */
-    protected $_customerId = "0";
+    protected $_customerId = '';
     
     /**
      * @var string - Attribute key

@@ -19,15 +19,15 @@ class CategoryAttr extends DataModel
     /**
      * @var string - Unique categoryAttr id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to category
      */
-    protected $_categoryId = "0";
+    protected $_categoryId = '';
     
     /**
-     * @var int - Sort number
+     * @var int - Optional sort number
      */
     protected $_sort = 0;
     

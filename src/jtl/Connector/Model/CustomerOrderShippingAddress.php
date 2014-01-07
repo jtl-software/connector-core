@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerOrderShippingAddress Model
- * 
+ * Shipping Address properties of a customer (order)
  *
  * @access public
  */
@@ -19,12 +19,12 @@ class CustomerOrderShippingAddress extends DataModel
     /**
      * @var string - Unique customerOrderShippingAddress id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to customer
      */
-    protected $_customerId = "0";
+    protected $_customerId = '';
     
     /**
      * @var string - Salutation e.g. "Mr."

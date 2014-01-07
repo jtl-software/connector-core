@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Image Model
- * Image model
+ * Image model.
  *
  * @access public
  */
@@ -19,20 +19,20 @@ class Image extends DataModel
     /**
      * @var string - Unique image id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to master imageId
      */
-    protected $_masterImageId = "0";
+    protected $_masterImageId = '';
     
     /**
-     * @var string - allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
+     * @var string - Allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
      */
     protected $_relationType = "product";
     
     /**
-     * @var int - foreign key dependent on relationType
+     * @var int - Foreign key dependent on relationType
      */
     protected $_foreignKey = 0;
     
@@ -42,7 +42,7 @@ class Image extends DataModel
     protected $_filename = '';
     
     /**
-     * @var int - Sort number
+     * @var int - Optional sort number
      */
     protected $_sort = 0;
     

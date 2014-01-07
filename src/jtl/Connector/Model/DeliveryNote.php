@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * DeliveryNote Model
- * A delivery note created for shipment
+ * A delivery note created for shipment.
  *
  * @access public
  */
@@ -19,15 +19,15 @@ class DeliveryNote extends DataModel
     /**
      * @var string - Unique deliveryNote id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to customerOrder
      */
-    protected $_customerOrderId = "0";
+    protected $_customerOrderId = '';
     
     /**
-     * @var string - Text note
+     * @var string - Optional text note
      */
     protected $_note = '';
     
@@ -37,7 +37,7 @@ class DeliveryNote extends DataModel
     protected $_created = '';
     
     /**
-     * @var bool - True, if delivery ist fulfilled by someone else
+     * @var bool - Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      */
     protected $_isFulfillment = false;
     

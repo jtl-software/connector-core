@@ -19,7 +19,7 @@ class CrossSellingGroup extends DataModel
     /**
      * @var string - crossSellingGroup id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Locale
@@ -32,7 +32,7 @@ class CrossSellingGroup extends DataModel
     protected $_name = '';
     
     /**
-     * @var string - Localized description
+     * @var string - Optional localized description
      */
     protected $_description = '';
     

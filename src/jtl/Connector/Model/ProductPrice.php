@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductPrice Model
- * Product price model
+ * Product price properties.
  *
  * @access public
  */
@@ -19,12 +19,12 @@ class ProductPrice extends DataModel
     /**
      * @var string - Reference to customerGroup
      */
-    protected $_customerGroupId = "0";
+    protected $_customerGroupId = '';
     
     /**
      * @var string - Reference to product
      */
-    protected $_productId = "0";
+    protected $_productId = '';
     
     /**
      * @var double - Price value (net)
@@ -32,9 +32,9 @@ class ProductPrice extends DataModel
     protected $_netPrice = 0.0;
     
     /**
-     * @var int - Quantity to apply netPrice for. 
+     * @var int - Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
      */
-    protected $_quantity = 0;
+    protected $_quantity = 1;
     
     /**
      * ProductPrice Setter

@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * SpecialPrice Model
- * special price model
+ * special price properties to define a net price for a customerGroup.
  *
  * @access public
  */
@@ -19,12 +19,12 @@ class SpecialPrice extends DataModel
     /**
      * @var string - Reference to customerGroup
      */
-    protected $_customerGroupId = "0";
+    protected $_customerGroupId = '';
     
     /**
      * @var string - Reference to productSpecialPrice
      */
-    protected $_productSpecialPriceId = "0";
+    protected $_productSpecialPriceId = '';
     
     /**
      * @var double - net price value

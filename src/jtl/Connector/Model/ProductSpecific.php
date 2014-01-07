@@ -10,8 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductSpecific Model
- * ProductSpecific model
-Product specifics are used to assign characteristic product attributes like color or  size... When different products have common specifics, products are similar. 
+ * Product to specificValue Assignment. Product specifics are used to assign characteristic product attributes like color or  size... When different products have common specifics, products are similar. 
  *
  * @access public
  */
@@ -20,17 +19,17 @@ class ProductSpecific extends DataModel
     /**
      * @var string - Unique productSpecific id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to specificValue
      */
-    protected $_specificValueId = "0";
+    protected $_specificValueId = '';
     
     /**
      * @var string - Reference to product
      */
-    protected $_productId = "0";
+    protected $_productId = '';
     
     /**
      * ProductSpecific Setter

@@ -24,7 +24,7 @@ class ProductI18n extends DataModel
     /**
      * @var string - Reference to product
      */
-    protected $_productId = "0";
+    protected $_productId = '';
     
     /**
      * @var string - Product name / title
@@ -32,17 +32,17 @@ class ProductI18n extends DataModel
     protected $_name = '';
     
     /**
-     * @var string - Path of product URL
+     * @var string - Optional path of product URL
      */
     protected $_urlPath = '';
     
     /**
-     * @var string - Product description
+     * @var string - Optional product description
      */
     protected $_description = '';
     
     /**
-     * @var string - Product shortdescription
+     * @var string - Optional product shortdescription
      */
     protected $_shortDescription = '';
     

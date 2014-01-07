@@ -19,12 +19,12 @@ class Shipment extends DataModel
     /**
      * @var string - Unique shipment id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to deliveryNote
      */
-    protected $_deliveryNoteId = "0";
+    protected $_deliveryNoteId = '';
     
     /**
      * @var string - Logistic name
@@ -32,12 +32,12 @@ class Shipment extends DataModel
     protected $_logistic = '';
     
     /**
-     * @var string - Logistic URL
+     * @var string - Optional Logistic URL
      */
     protected $_logisticURL = '';
     
     /**
-     * @var string - Identcode
+     * @var string - Optional Identcode
      */
     protected $_identCode = '';
     
@@ -47,7 +47,7 @@ class Shipment extends DataModel
     protected $_created = '';
     
     /**
-     * @var string - Shipment note
+     * @var string - Optional shipment note
      */
     protected $_note = '';
     

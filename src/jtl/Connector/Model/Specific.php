@@ -10,9 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Specific Model
- * Specific model.
-Specific is defined as a characteristic product attribute Like "color". 
-Specifics can be used for after-search-filtering. 
+ * Specific is defined as a characteristic product attribute Like "color". Specifics can be used for after-search-filtering. 
  *
  * @access public
  */
@@ -21,15 +19,15 @@ class Specific extends DataModel
     /**
      * @var string - Unique specific id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
-     * @var int - Sort number
+     * @var int - Optional sort number
      */
     protected $_sort = 0;
     
     /**
-     * @var bool - Global specific means the specific can be used like a category (e.g. show all red products in shop)
+     * @var bool - Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      */
     protected $_isGlobal = false;
     

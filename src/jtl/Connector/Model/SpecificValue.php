@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * SpecificValue Model
- * Specific value model, e.g. color value "red"
+ * Specific value properties to define a new specificValue with a sort number. 
  *
  * @access public
  */
@@ -19,15 +19,15 @@ class SpecificValue extends DataModel
     /**
      * @var string - Unique specificValue id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to specificId
      */
-    protected $_specificId = "0";
+    protected $_specificId = '';
     
     /**
-     * @var int - Sort number
+     * @var int - Optional sort number
      */
     protected $_sort = 0;
     

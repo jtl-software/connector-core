@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * MediaFileAttr Model
- * Monolingual mediafile attribute
+ * Monolingual mediafile attribute.
  *
  * @access public
  */
@@ -24,7 +24,7 @@ class MediaFileAttr extends DataModel
     /**
      * @var string - Reference to mediaFile
      */
-    protected $_mediaFileId = "0";
+    protected $_mediaFileId = '';
     
     /**
      * @var string - Locale

@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerOrderItemVariation Model
- * 
+ * customer order item variation
  *
  * @access public
  */
@@ -19,22 +19,22 @@ class CustomerOrderItemVariation extends DataModel
     /**
      * @var string - Unique customerOrderItemVariation id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to customerOrderItem
      */
-    protected $_customerOrderItemId = "0";
+    protected $_customerOrderItemId = '';
     
     /**
      * @var string - Reference to productVariation
      */
-    protected $_productVariationId = "0";
+    protected $_productVariationId = '';
     
     /**
      * @var string - Reference to productVariationValue
      */
-    protected $_productVariationValueId = "0";
+    protected $_productVariationValueId = '';
     
     /**
      * @var string - Variation name e.g. "color"
@@ -47,14 +47,14 @@ class CustomerOrderItemVariation extends DataModel
     protected $_productVariationValueName = '';
     
     /**
-     * @var string - Comments 
+     * @var string - Optional custom text value for variation 
      */
     protected $_freeField = '';
     
     /**
-     * @var double - Extra surcharge (added to item price)
+     * @var double - Optional extra surcharge (added to item price)
      */
-    protected $_surcharge = 0.0;
+    protected $_surcharge = 0;
     
     /**
      * CustomerOrderItemVariation Setter

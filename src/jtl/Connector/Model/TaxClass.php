@@ -19,15 +19,15 @@ class TaxClass extends DataModel
     /**
      * @var string - Unique taxClass id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
-     * @var string - Tax class name
+     * @var string - Optional tax class name
      */
     protected $_name = '';
     
     /**
-     * @var bool - Flag default tax class
+     * @var bool - Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
      */
     protected $_isDefault = false;
     

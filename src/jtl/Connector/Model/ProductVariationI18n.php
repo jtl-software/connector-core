@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductVariationI18n Model
- * Locale specific product variation model
+ * Locale specific product variation properties. 
  *
  * @access public
  */
@@ -24,7 +24,7 @@ class ProductVariationI18n extends DataModel
     /**
      * @var string - Reference to productVariation
      */
-    protected $_productVariationId = "0";
+    protected $_productVariationId = '';
     
     /**
      * @var string - Locale specific variation name

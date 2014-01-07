@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Warehouse Model
- * warehouse model (set in JTL-Wawi ERP)
+ * warehouse model (set in JTL-Wawi ERP).
  *
  * @access public
  */
@@ -19,7 +19,7 @@ class Warehouse extends DataModel
     /**
      * @var string - Unique warehouse id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * Warehouse Setter

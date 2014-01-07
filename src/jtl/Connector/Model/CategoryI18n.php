@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CategoryI18n Model
- * Localized category Model
+ * Localized category properties. localeName, categoryId and a localized name must be set. 
  *
  * @access public
  */
@@ -24,7 +24,7 @@ class CategoryI18n extends DataModel
     /**
      * @var string - Reference to category
      */
-    protected $_categoryId = "0";
+    protected $_categoryId = '';
     
     /**
      * @var string - Localized category name
@@ -32,27 +32,27 @@ class CategoryI18n extends DataModel
     protected $_name = '';
     
     /**
-     * @var string - Localized category URL
+     * @var string - Optional localized category URL
      */
     protected $_urlPath = '';
     
     /**
-     * @var string - Localized Long Description
+     * @var string - Optional localized Long Description
      */
     protected $_description = '';
     
     /**
-     * @var string - Localized  short description used for meta tag description
+     * @var string - Optional localized  short description used for meta tag description
      */
     protected $_metaDescription = '';
     
     /**
-     * @var string - Localized meta tag keywords value
+     * @var string - Optional localized meta tag keywords value
      */
     protected $_metaKeywords = '';
     
     /**
-     * @var string - Localized title tag value
+     * @var string - Optional localized title tag value
      */
     protected $_titleTag = '';
     

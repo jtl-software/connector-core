@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * DeliveryNoteItem Model
- * Delivery note item model
+ * Delivery note item properties.
  *
  * @access public
  */
@@ -19,7 +19,7 @@ class DeliveryNoteItem extends DataModel
     /**
      * @var string - Unique deliveryNoteItem id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to customerOrderItem
@@ -32,22 +32,22 @@ class DeliveryNoteItem extends DataModel
     protected $_quantity = 0.0;
     
     /**
-     * @var string - Reference to warehouse
+     * @var string - Optional reference to warehouse
      */
     protected $_warehouseId = '';
     
     /**
-     * @var string - Serial number
+     * @var string - Optional serial number
      */
     protected $_serialNumber = '';
     
     /**
-     * @var string - Batch number
+     * @var string - Optional batch number
      */
     protected $_batchNumber = '';
     
     /**
-     * @var string - Best before date
+     * @var string - Optional best before date
      */
     protected $_bestBefore = '';
     

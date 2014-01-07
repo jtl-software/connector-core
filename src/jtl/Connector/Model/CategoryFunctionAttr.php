@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CategoryFunctionAttr Model
- * Monolingual category attribute
+ * Monolingual category attribute. All properties must be set. 
  *
  * @access public
  */
@@ -19,12 +19,12 @@ class CategoryFunctionAttr extends DataModel
     /**
      * @var string - Unique categoryFunctionAttr id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to category
      */
-    protected $_categoryId = "0";
+    protected $_categoryId = '';
     
     /**
      * @var string - Attribute key name

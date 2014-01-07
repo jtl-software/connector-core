@@ -10,8 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Unit Model
- * Unit model. 
-Specifies product units like "piece", "bottle", "package"
+ * Specifies product units like "piece", "bottle", "package".
  *
  * @access public
  */
@@ -20,7 +19,7 @@ class Unit extends DataModel
     /**
      * @var string - Unit id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Locale

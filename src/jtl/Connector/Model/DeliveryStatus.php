@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * DeliveryStatus Model
- * Localized Delivery status text
+ * Localized delivery status text. Delivery status is set in the Wawi-ERP. 
  *
  * @access public
  */
@@ -19,7 +19,7 @@ class DeliveryStatus extends DataModel
     /**
      * @var string - DeliveryStatus id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Locale

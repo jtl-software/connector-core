@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Currency Model
- * Currency model
+ * Currency model properties.
  *
  * @access public
  */
@@ -19,7 +19,7 @@ class Currency extends DataModel
     /**
      * @var string - Unique currency id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Currency name
@@ -32,32 +32,32 @@ class Currency extends DataModel
     protected $_iso = '';
     
     /**
-     * @var string - Html name e.g. "&euro;"
+     * @var string - Optional HTML name e.g. "&euro;"
      */
     protected $_nameHtml = '';
     
     /**
-     * @var double - Conversion factor to default currency
+     * @var double - Optional conversion factor to default currency. Default is 1 (equals default currency)
      */
-    protected $_factor = 0.0;
+    protected $_factor = 1;
     
     /**
-     * @var bool - Flag default currency
+     * @var bool - Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default. 
      */
     protected $_isDefault = False;
     
     /**
-     * @var bool - Display currency before or after value. Ignore this flag if you have the correct user locale preference. 
+     * @var bool - Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference. 
      */
     protected $_hasCurrencySignBeforeValue = False;
     
     /**
-     * @var string - Delimiter char for cent, default=",". Ignore this flag if you have the correct user locale preference.
+     * @var string - Optional delimiter char for cent, default=",". Ignore this flag if you have the correct user locale preference.
      */
     protected $_delimiterCent = ",";
     
     /**
-     * @var string - Delimiter char for thousand. Default=".". Ignore this flag if you have the correct user locale preference.
+     * @var string - Optional delimiter char for thousand. Default=".". Ignore this flag if you have the correct user locale preference.
      */
     protected $_delimiterThousand = ".";
     

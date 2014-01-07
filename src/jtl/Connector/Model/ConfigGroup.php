@@ -19,20 +19,20 @@ class ConfigGroup extends DataModel
     /**
      * @var string - Unique configGroup id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
-     * @var string - Image file path
+     * @var string - Optional image file path
      */
     protected $_imagePath = '';
     
     /**
-     * @var int - Minimum number required selections
+     * @var int - Optional minimum number required selections. Default 0 for no minimum requirement. 
      */
     protected $_minimumSelection = 0;
     
     /**
-     * @var int - Maximum number allowed selections
+     * @var int - Optional maximum number allowed selections. Default 0 for no maximum limitation.
      */
     protected $_maximumSelection = 0;
     
@@ -42,12 +42,12 @@ class ConfigGroup extends DataModel
     protected $_type = 0;
     
     /**
-     * @var int - Sort order number
+     * @var int - Optional sort order number
      */
     protected $_sort = 0;
     
     /**
-     * @var string - Internal comment to differantiate config groups by comment name
+     * @var string - Optional internal comment to differantiate config groups by comment name
      */
     protected $_comment = '';
     

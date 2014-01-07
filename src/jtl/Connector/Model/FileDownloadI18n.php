@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * FileDownloadI18n Model
- * I18n model for fileDownload
+ * Localized fileDownload name and  description.
  *
  * @access public
  */
@@ -19,7 +19,7 @@ class FileDownloadI18n extends DataModel
     /**
      * @var string - Reference to fileDownloadId
      */
-    protected $_fileDownloadId = "0";
+    protected $_fileDownloadId = '';
     
     /**
      * @var string - Locale
@@ -32,7 +32,7 @@ class FileDownloadI18n extends DataModel
     protected $_name = '';
     
     /**
-     * @var string - File download description
+     * @var string - Optional File download description
      */
     protected $_description = '';
     

@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerOrder Model
- * 
+ * Customer order properties.
  *
  * @access public
  */
@@ -19,30 +19,30 @@ class CustomerOrder extends DataModel
     /**
      * @var string - Unique customerOrder id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
-     * @var string - Reference to customer
+     * @var string - Optional reference to customer. 
      */
-    protected $_customerId = "0";
+    protected $_customerId = '';
     
     /**
      * @var string - Reference to shippingAddress
      */
-    protected $_shippingAddressId = "0";
+    protected $_shippingAddressId = '';
     
     /**
      * @var string - Reference to billingAddress
      */
-    protected $_billingAddressId = "0";
+    protected $_billingAddressId = '';
     
     /**
      * @var string - Reference to shippingMethod
      */
-    protected $_shippingMethodId = "0";
+    protected $_shippingMethodId = '';
     
     /**
-     * @var string - Locale set when customerOrder was finished
+     * @var string - Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
      */
     protected $_localeName = '';
     
@@ -52,14 +52,14 @@ class CustomerOrder extends DataModel
     protected $_currencyIso = '';
     
     /**
-     * @var string - Estimated delivery date set by ERP System
+     * @var string - Optional Estimated delivery date set by ERP System
      */
     protected $_estimatedDeliveryDate = '';
     
     /**
-     * @var double - Customer credit (credit reduces total sum)
+     * @var double - Optional customer credit (credit reduces total sum)
      */
-    protected $_credit = 0.0;
+    protected $_credit = 0;
     
     /**
      * @var double - Total sum to pay
@@ -67,17 +67,17 @@ class CustomerOrder extends DataModel
     protected $_totalSum = 0.0;
     
     /**
-     * @var string - Session id or session hash
+     * @var string - Optional session id or session hash
      */
     protected $_session = '';
     
     /**
-     * @var string - Shipping method name
+     * @var string - Optional shipping method name
      */
     protected $_shippingMethodName = '';
     
     /**
-     * @var string - Order number (set by ERP System)
+     * @var string - Optional order number (usually set by ERP System later)
      */
     protected $_orderNumber = '';
     
@@ -97,44 +97,44 @@ class CustomerOrder extends DataModel
     protected $_paymentDate = '';
     
     /**
-     * @var string - Date when customer will receive notification to rate order
+     * @var string - Date from when customer will receive notification to rate order
      */
     protected $_ratingNotificationDate = '';
     
     /**
-     * @var   - TrackingID (not Tracking URL)
+     * @var string - Optional TrackingID (not Tracking URL)
      */
-    protected $_tracking;
+    protected $_tracking = '';
     
     /**
-     * @var string - Additional note
+     * @var string - Optional additional note
      */
     protected $_note = '';
     
     /**
-     * @var string - Logistic name
+     * @var string - Optional Logistic name
      */
     protected $_logistic = '';
     
     /**
-     * @var string - Tracking URL
+     * @var string - Optional Tracking URL
      */
     protected $_trackingURL = '';
     
     /**
-     * @var string - Customer IP address at the time of checkout. Do not store full IP-Adress (dependent on local laws or regulations)
+     * @var string - Optional customer IP address at the time of checkout. Do not store full IP-Adress (dependent on local laws or regulations)
      */
     protected $_ip = '';
     
     /**
-     * @var bool - Flag if customerOrder is fetched by ERP System
+     * @var bool - Optional flag, if customerOrder is fetched by ERP System
      */
     protected $_isFetched = false;
     
     /**
      * @var string - Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
      */
-    protected $_status = '';
+    protected $_status = "new";
     
     /**
      * @var string - Date of creation
@@ -142,9 +142,9 @@ class CustomerOrder extends DataModel
     protected $_created = '';
     
     /**
-     * @var string - Payment module id
+     * @var string - Optional payment module id
      */
-    protected $_paymentModuleId = "0";
+    protected $_paymentModuleId = '';
     
     /**
      * CustomerOrder Setter
@@ -176,6 +176,7 @@ class CustomerOrder extends DataModel
                 case "_shippingDate":
                 case "_paymentDate":
                 case "_ratingNotificationDate":
+                case "_tracking":
                 case "_note":
                 case "_logistic":
                 case "_trackingURL":
@@ -191,11 +192,6 @@ class CustomerOrder extends DataModel
                 case "_totalSum":
                 
                     $this->$name = (double)$value;
-                    break;
-            
-                case "_tracking":
-                
-                    $this->$name = ( )$value;
                     break;
             
                 case "_isFetched":

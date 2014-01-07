@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * SpecificValueI18n Model
- * Localized specific value text
+ * Localized specific value text.
  *
  * @access public
  */
@@ -24,7 +24,7 @@ class SpecificValueI18n extends DataModel
     /**
      * @var string - Reference to specificValue
      */
-    protected $_specificValueId = "0";
+    protected $_specificValueId = '';
     
     /**
      * @var string - Localized value
@@ -32,27 +32,27 @@ class SpecificValueI18n extends DataModel
     protected $_value = '';
     
     /**
-     * @var string - Localized URL path
+     * @var string - Optional localized URL path
      */
     protected $_urlPath = '';
     
     /**
-     * @var string - Localized description
+     * @var string - Optional localized description
      */
     protected $_description = '';
     
     /**
-     * @var string - Localized meta description value
+     * @var string - Optional localized meta description value
      */
     protected $_metaDescription = '';
     
     /**
-     * @var string - Localized meta keywords value
+     * @var string - Optional localized meta keywords value
      */
     protected $_metaKeywords = '';
     
     /**
-     * @var string - Localized title tag value
+     * @var string - Optional localized title tag value
      */
     protected $_titleTag = '';
     

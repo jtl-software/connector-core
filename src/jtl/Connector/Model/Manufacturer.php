@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Manufacturer Model
- * Manufacturer model
+ * Manufacturer / brand properties. 
  *
  * @access public
  */
@@ -19,25 +19,25 @@ class Manufacturer extends DataModel
     /**
      * @var string - Unique manufacturer id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
-     * @var string - Manufacturer name
+     * @var string - Manufacturer (brand) name
      */
     protected $_name = '';
     
     /**
-     * @var string - Manufacturer website URL
+     * @var string - Optional manufacturer website URL
      */
     protected $_www = '';
     
     /**
-     * @var int - Sort number
+     * @var int - Optional sort number
      */
     protected $_sort = 0;
     
     /**
-     * @var string - Url path e.g. "Products-manufactured-by-X"
+     * @var string - Optional url path e.g. "Products-manufactured-by-X"
      */
     protected $_urlPath = '';
     

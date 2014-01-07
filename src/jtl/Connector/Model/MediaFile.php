@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * MediaFile Model
- * Media file model
+ * Media file model.
  *
  * @access public
  */
@@ -19,12 +19,12 @@ class MediaFile extends DataModel
     /**
      * @var string - Unique MediaFile id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to product
      */
-    protected $_productId = "0";
+    protected $_productId = '';
     
     /**
      * @var string - File path
@@ -37,7 +37,7 @@ class MediaFile extends DataModel
     protected $_url = '';
     
     /**
-     * @var string - Category name
+     * @var string - Optional media file category name
      */
     protected $_mediaFileCategory = '';
     
@@ -47,7 +47,7 @@ class MediaFile extends DataModel
     protected $_type = '';
     
     /**
-     * @var int - Sort number
+     * @var int - Optional sort number
      */
     protected $_sort = 0;
     

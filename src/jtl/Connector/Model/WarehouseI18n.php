@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * WarehouseI18n Model
- * Localized warehouse name
+ * Localized warehouse name.
  *
  * @access public
  */
@@ -19,7 +19,7 @@ class WarehouseI18n extends DataModel
     /**
      * @var string - Reference to warehouse
      */
-    protected $_warehouseId = "0";
+    protected $_warehouseId = '';
     
     /**
      * @var string - Localized warehouse name

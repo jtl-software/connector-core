@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * SpecificI18n Model
- * Localized name for specific
+ * Localized name for specific.
  *
  * @access public
  */
@@ -24,7 +24,7 @@ class SpecificI18n extends DataModel
     /**
      * @var string - Reference to specific
      */
-    protected $_specificId = "0";
+    protected $_specificId = '';
     
     /**
      * @var string - Localized name

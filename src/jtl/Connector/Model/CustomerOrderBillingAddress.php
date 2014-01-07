@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerOrderBillingAddress Model
- * Billing address of a customer
+ * Billing address of a customer (order)
  *
  * @access public
  */
@@ -19,12 +19,12 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @var string - Unique customerOrderBillingAddress id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to customer
      */
-    protected $_customerId = "0";
+    protected $_customerId = '';
     
     /**
      * @var string - Salutation (german: "Anrede")

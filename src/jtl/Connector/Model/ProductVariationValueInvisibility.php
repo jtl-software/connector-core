@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductVariationValueInvisibility Model
- * Specify productVariationValue to hide from specific customerGroup
+ * Specify productVariationValue to hide from specific customerGroup.
  *
  * @access public
  */

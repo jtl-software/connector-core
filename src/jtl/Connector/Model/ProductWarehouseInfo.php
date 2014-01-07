@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductWarehouseInfo Model
- * Product to warehouse info association
+ * Product to warehouse info association.
  *
  * @access public
  */
@@ -19,27 +19,27 @@ class ProductWarehouseInfo extends DataModel
     /**
      * @var string - Reference to product
      */
-    protected $_productId = "0";
+    protected $_productId = '';
     
     /**
      * @var string - Reference to warehouse
      */
-    protected $_warehouseId = "0";
+    protected $_warehouseId = '';
     
     /**
-     * @var double - Product stock level in specified warehouse
+     * @var double - Optional product stock level in specified warehouse
      */
-    protected $_stockLevel = 0.0;
+    protected $_stockLevel = 0;
     
     /**
-     * @var double - Product inflow quantity for specified warehouse
+     * @var double - Optional product inflow quantity for specified warehouse
      */
-    protected $_inflowQuantity = 0.0;
+    protected $_inflowQuantity = 0;
     
     /**
-     * @var string - Product inflow date for specified warehouse
+     * @var string - Optional product inflow date for specified warehouse
      */
-    protected $_inflowDate = '';
+    protected $_inflowDate = "0000-00-00";
     
     /**
      * ProductWarehouseInfo Setter

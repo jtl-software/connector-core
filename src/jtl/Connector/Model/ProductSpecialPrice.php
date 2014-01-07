@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductSpecialPrice Model
- * 
+ * Special product price properties to specify date and stock limits.
  *
  * @access public
  */
@@ -19,40 +19,40 @@ class ProductSpecialPrice extends DataModel
     /**
      * @var string - Unique productSpecialPrice id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to product
      */
-    protected $_productId = "0";
+    protected $_productId = '';
     
     /**
-     * @var bool - Special price is active?
+     * @var bool - Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match. 
      */
-    protected $_isActive = false;
+    protected $_isActive = true;
     
     /**
-     * @var string - Activate special price from date
+     * @var string - Optional: Activate special price from date
      */
-    protected $_activeFrom = '';
+    protected $_activeFrom = "0000-00-00";
     
     /**
-     * @var string - Special price active until date
+     * @var string - Optional: Special price active until date
      */
-    protected $_activeUntil = '';
+    protected $_activeUntil = "0000-00-00";
     
     /**
-     * @var double - SpecialPrice active until stock level quantity
+     * @var double - Optional: SpecialPrice active until stock level quantity
      */
-    protected $_stockLimit = 0.0;
+    protected $_stockLimit = 0;
     
     /**
-     * @var bool - Consider stockLimit value
+     * @var bool - Optional: Consider stockLimit value. If true, specialPrice will be only active until product stockLevel is greater or equal stockLimit.
      */
     protected $_considerStockLimit = false;
     
     /**
-     * @var bool - Consider activeFrom/activeUntil date range
+     * @var bool - Optional: Consider activeFrom/activeUntil date range. If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
      */
     protected $_considerDateLimit = false;
     

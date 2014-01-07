@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CategoryInvisibility Model
- * Only specify which CustomerGroup is not permitted to view Category
+ * Specifies which CustomerGroup is not permitted to view category.
  *
  * @access public
  */
@@ -19,12 +19,12 @@ class CategoryInvisibility extends DataModel
     /**
      * @var string - Reference to customerGroup that is not allowed to view categoryId
      */
-    protected $_customerGroupId = "0";
+    protected $_customerGroupId = '';
     
     /**
      * @var string - Reference to category to hide from customerGroupId
      */
-    protected $_categoryId = "0";
+    protected $_categoryId = '';
     
     /**
      * CategoryInvisibility Setter

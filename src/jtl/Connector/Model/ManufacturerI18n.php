@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ManufacturerI18n Model
- * Locale specific Text and meta-information for manufacturer
+ * Locale specific text and meta-information for manufacturer.
  *
  * @access public
  */
@@ -19,7 +19,7 @@ class ManufacturerI18n extends DataModel
     /**
      * @var string - Reference to manufacturer
      */
-    protected $_manufacturerId = "0";
+    protected $_manufacturerId = '';
     
     /**
      * @var string - Locale
@@ -27,22 +27,22 @@ class ManufacturerI18n extends DataModel
     protected $_localeName = '';
     
     /**
-     * @var string - Manufacturer description (HTML)
+     * @var string - Optional manufacturer description (HTML)
      */
     protected $_description = '';
     
     /**
-     * @var string - Meta description tag value
+     * @var string - Optional meta description tag value
      */
     protected $_metaDescription = '';
     
     /**
-     * @var string - Meta keywords tag value
+     * @var string - Optional meta keywords tag value
      */
     protected $_metaKeywords = '';
     
     /**
-     * @var string - Title tag value
+     * @var string - Optional title tag value
      */
     protected $_titleTag = '';
     

@@ -19,7 +19,7 @@ class Language extends DataModel
     /**
      * @var string - Unique language id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - English term
@@ -37,7 +37,7 @@ class Language extends DataModel
     protected $_localeName = '';
     
     /**
-     * @var bool - Flag default language for frontend
+     * @var bool - Flag default language for frontend. Exact 1 language must be marked as default.
      */
     protected $_isDefault = false;
     

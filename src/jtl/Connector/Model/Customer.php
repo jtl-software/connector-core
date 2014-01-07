@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * Customer Model
- * Holds customer address data and preferences
+ * Customer address data and preference properties.
  *
  * @access public
  */
@@ -19,12 +19,12 @@ class Customer extends DataModel
     /**
      * @var string - Unique customer id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - References a customer group
      */
-    protected $_customerGroupId = "0";
+    protected $_customerGroupId = '';
     
     /**
      * @var string - User locale preference
@@ -32,12 +32,12 @@ class Customer extends DataModel
     protected $_localeName = '';
     
     /**
-     * @var string - Customer number set by JTL-Wawi ERP software
+     * @var string - Optional customer number set by JTL-Wawi ERP software
      */
     protected $_customerNumber = '';
     
     /**
-     * @var string - (Encrypted!) customer password
+     * @var string - Optional (encrypted!) customer password
      */
     protected $_password = '';
     
@@ -137,7 +137,7 @@ class Customer extends DataModel
     protected $_accountCredit = 0.0;
     
     /**
-     * @var bool - Flag if customer receives newsletter
+     * @var bool - Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
      */
     protected $_hasNewsletterSubscription = false;
     
@@ -167,17 +167,17 @@ class Customer extends DataModel
     protected $_modified = '';
     
     /**
-     * @var bool - Flag if customer is active (login allowed)
+     * @var bool - Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
      */
-    protected $_isActive = false;
+    protected $_isActive = true;
     
     /**
-     * @var bool - Flag if customer is fetched by ERP System
+     * @var bool - Flag if customer is fetched by ERP System. True, if customer is already fetched and must not be fetched again. 
      */
     protected $_isFetched = false;
     
     /**
-     * @var bool - persistent customer account
+     * @var bool - Flag persistent customer account. True, if customer chose to create persistent customer account. False, if customer doesnt want to have his data stored for login-purposes.
      */
     protected $_hasCustomerAccount = false;
     

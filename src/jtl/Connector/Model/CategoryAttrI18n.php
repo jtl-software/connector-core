@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CategoryAttrI18n Model
- * Localized key-value-pair for categoryAttr
+ * Localized key-value-pair for categoryAttr. All properties must be specified. 
  *
  * @access public
  */
@@ -24,7 +24,7 @@ class CategoryAttrI18n extends DataModel
     /**
      * @var string - Reference to categoryAttr
      */
-    protected $_categoryAttrId = "0";
+    protected $_categoryAttrId = '';
     
     /**
      * @var string - Attribute key

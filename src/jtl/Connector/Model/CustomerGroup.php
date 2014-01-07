@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CustomerGroup Model
- * Customer group model
+ * Customer group model.
  *
  * @access public
  */
@@ -19,7 +19,7 @@ class CustomerGroup extends DataModel
     /**
      * @var string - Unique customerGroup id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Customer group name
@@ -27,19 +27,19 @@ class CustomerGroup extends DataModel
     protected $_name = '';
     
     /**
-     * @var double - Percentual discount on all products. Negative Value means surcharge. 
+     * @var double - Optional percentual discount on all products. Negative Value means surcharge. 
      */
-    protected $_discount = 0.0;
+    protected $_discount = 0;
     
     /**
-     * @var bool - Flag default customer group
+     * @var bool - Optional: Flag default customer group
      */
     protected $_isDefault = false;
     
     /**
-     * @var bool - Show net prices default instead of gross prices
+     * @var bool - Optional: Show net prices default instead of gross prices
      */
-    protected $_applyNetPrice = False;
+    protected $_applyNetPrice = false;
     
     /**
      * CustomerGroup Setter

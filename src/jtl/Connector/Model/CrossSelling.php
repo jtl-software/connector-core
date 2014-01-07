@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * CrossSelling Model
- * Link 2 products that are in a common crossSellingGroup
+ * Link 2 products that are in a common crossSellingGroup.
  *
  * @access public
  */
@@ -19,22 +19,22 @@ class CrossSelling extends DataModel
     /**
      * @var string - Unique crossSelling id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
-     * @var string - Product id of the main product
+     * @var string - Reference to product (main product)
      */
-    protected $_crossSellingProductId = "0";
+    protected $_crossSellingProductId = '';
     
     /**
-     * @var string - Cross selling group id
+     * @var string - Reference to crossSellingGroup
      */
-    protected $_crossSellingGroupId = "0";
+    protected $_crossSellingGroupId = '';
     
     /**
-     * @var string - References a productId (the additional cross selling product)
+     * @var string - Reference to product (cross selling product)
      */
-    protected $_productId = "0";
+    protected $_productId = '';
     
     /**
      * CrossSelling Setter

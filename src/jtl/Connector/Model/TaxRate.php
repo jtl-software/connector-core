@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * TaxRate Model
- * Tax rate model (set in JTL-Wawi ERP)
+ * Tax rate model (set in JTL-Wawi ERP).
  *
  * @access public
  */
@@ -19,17 +19,17 @@ class TaxRate extends DataModel
     /**
      * @var string - Unique taxRate id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to taxZone
      */
-    protected $_taxZoneId = "0";
+    protected $_taxZoneId = '';
     
     /**
      * @var string - Reference to taxClass
      */
-    protected $_taxClassId = "0";
+    protected $_taxClassId = '';
     
     /**
      * @var double - Tax rate value e.g. 19.00
@@ -37,7 +37,7 @@ class TaxRate extends DataModel
     protected $_rate = 0.0;
     
     /**
-     * @var int - Higher priority value means higher priority
+     * @var int - Optional priority number. Higher value means higher priority
      */
     protected $_priority = 0;
     

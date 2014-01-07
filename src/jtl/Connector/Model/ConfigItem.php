@@ -10,8 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ConfigItem Model
- * A config Item that is displayed in a config Group. 
-Config item can reference to a specific productId to inherit price, name and description. 
+ * A config Item that is displayed in a config Group. Config item can reference to a specific productId to inherit price, name and description. 
  *
  * @access public
  */
@@ -20,17 +19,17 @@ class ConfigItem extends DataModel
     /**
      * @var string - Unique configItem id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to configGroup
      */
-    protected $_configGroupId = "0";
+    protected $_configGroupId = '';
     
     /**
-     * @var string - Reference to product (optional)
+     * @var string - Optional reference to product
      */
-    protected $_productId = "0";
+    protected $_productId = '';
     
     /**
      * @var int - Config item type. 0: Product, 1: Special
@@ -38,57 +37,57 @@ class ConfigItem extends DataModel
     protected $_type = 0;
     
     /**
-     * @var bool - Preselect configItem
+     * @var bool - Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
      */
     protected $_isPreSelected = false;
     
     /**
-     * @var bool - Highlight or recommend config item
+     * @var bool - Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
      */
     protected $_isRecommended = false;
     
     /**
-     * @var bool - Inherit product name and description  if productId is set
+     * @var bool - Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
      */
     protected $_inheritProductName = false;
     
     /**
-     * @var bool - Inherit product price of referenced productId
+     * @var bool - Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
      */
     protected $_inheritProductPrice = false;
     
     /**
-     * @var bool - Show discount compared to productId price
+     * @var bool - Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
      */
     protected $_showDiscount = True;
     
     /**
-     * @var bool - Show surcharge compared to productId price
+     * @var bool - Optional: Show surcharge compared to productId price.
      */
     protected $_showSurcharge = False;
     
     /**
-     * @var bool - Ignore multiplier. Quantity of config item will not be increased if product quantity is increased
+     * @var bool - Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
      */
     protected $_ignoreMultiplier = False;
     
     /**
-     * @var double - Minimum quantity required to add configItem
+     * @var double - Optional minimum quantity required to add configItem. Default 0 for no minimum quantity. 
      */
     protected $_minQuantity = 0;
     
     /**
-     * @var double - Maximum allowed quantity
+     * @var double - Maximum allowed quantity. Default 0 for no maximum limit. 
      */
     protected $_maxQuantity = 0;
     
     /**
-     * @var double - Initial / predefined quantity
+     * @var double - Optional initial / predefined quantity. Default is one (1) quantity piece. 
      */
     protected $_initialQuantity = 1;
     
     /**
-     * @var int - Sort order number
+     * @var int - Optional sort order number
      */
     protected $_sort = 0;
     

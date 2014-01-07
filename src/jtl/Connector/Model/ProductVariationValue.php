@@ -19,37 +19,32 @@ class ProductVariationValue extends DataModel
     /**
      * @var string - Unique productVariationValue id
      */
-    protected $_id = "0";
+    protected $_id = '';
     
     /**
      * @var string - Reference to productVariation
      */
-    protected $_productVariationId = "0";
+    protected $_productVariationId = '';
     
     /**
-     * @var double - Variation extra weight
+     * @var double - Optional variation extra weight
      */
-    protected $_extraWeight = 0.0;
+    protected $_extraWeight = 0;
     
     /**
-     * @var string - Stock Keeping Unit
+     * @var string - Optional Stock Keeping Unit
      */
     protected $_sku = '';
     
     /**
-     * @var int - Sort number
+     * @var int - Optional sort number
      */
     protected $_sort = 0;
     
     /**
-     * @var double - Stock level
+     * @var double - Optional stock level
      */
     protected $_stockLevel = 0.0;
-    
-    /**
-     * @var string - ToDo:Remove (deprecated)
-     */
-    protected $_packagingUnitId = "0";
     
     /**
      * ProductVariationValue Setter
@@ -69,7 +64,6 @@ class ProductVariationValue extends DataModel
                 case "_id":
                 case "_productVariationId":
                 case "_sku":
-                case "_packagingUnitId":
                 
                     $this->$name = (string)$value;
                     break;

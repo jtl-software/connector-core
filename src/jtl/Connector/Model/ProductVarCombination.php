@@ -10,7 +10,7 @@ use \jtl\Core\Model\DataModel;
 
 /**
  * ProductVarCombination Model
- * Product to productVariationValue Allocation
+ * Product to productVariationValue Allocation.
  *
  * @access public
  */
@@ -19,17 +19,17 @@ class ProductVarCombination extends DataModel
     /**
      * @var string - Reference to product
      */
-    protected $_productId = "0";
+    protected $_productId = '';
     
     /**
      * @var string - Reference to productVariation
      */
-    protected $_productVariationId = "0";
+    protected $_productVariationId = '';
     
     /**
      * @var string - Reference to productVariationValue
      */
-    protected $_productVariationValueId = "0";
+    protected $_productVariationValueId = '';
     
     /**
      * ProductVarCombination Setter
