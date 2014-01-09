@@ -17,6 +17,21 @@ use \jtl\Core\Model\DataModel;
 class DeliveryNote extends DataModel
 {
     /**
+     * @var string - Open deliveryNote status (not processed or shipped yet)
+     */
+    const STATUS_OPEN = 'open';
+    
+    /**
+     * @var string - DeliveryNote Status in progress (not shipped yet)
+     */
+    const STATUS_PROCESSING = 'processing';
+    
+    /**
+     * @var status - DeliveryNote shipped / completed status
+     */
+    const STATUS_COMPLETED = completed;
+    
+    /**
      * @var string - Unique deliveryNote id
      */
     protected $_id = '';

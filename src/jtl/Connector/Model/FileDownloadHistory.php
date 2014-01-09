@@ -19,22 +19,22 @@ class FileDownloadHistory extends DataModel
     /**
      * @var string
      */
-    protected $_id = "0";
+    protected $_id = '0';
     
     /**
      * @var string
      */
-    protected $_fileDownloadId = "0";
+    protected $_fileDownloadId = '0';
     
     /**
      * @var string
      */
-    protected $_customerId = "0";
+    protected $_customerId = '0';
     
     /**
      * @var string
      */
-    protected $_customerOrderId = "0";
+    protected $_customerOrderId = '0';
     
     /**
      * @var string

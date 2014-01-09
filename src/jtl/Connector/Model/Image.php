@@ -29,7 +29,7 @@ class Image extends DataModel
     /**
      * @var string - Allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
      */
-    protected $_relationType = "product";
+    protected $_relationType = 'product';
     
     /**
      * @var int - Foreign key dependent on relationType

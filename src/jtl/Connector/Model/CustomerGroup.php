@@ -22,11 +22,6 @@ class CustomerGroup extends DataModel
     protected $_id = '';
     
     /**
-     * @var string - Customer group name
-     */
-    protected $_name = '';
-    
-    /**
      * @var double - Optional percentual discount on all products. Negative Value means surcharge. 
      */
     protected $_discount = 0;
@@ -57,7 +52,6 @@ class CustomerGroup extends DataModel
         
             switch ($name) {
                 case "_id":
-                case "_name":
                 
                     $this->$name = (string)$value;
                     break;

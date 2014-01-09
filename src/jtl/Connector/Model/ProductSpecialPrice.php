@@ -34,12 +34,12 @@ class ProductSpecialPrice extends DataModel
     /**
      * @var string - Optional: Activate special price from date
      */
-    protected $_activeFrom = "0000-00-00";
+    protected $_activeFrom = '0000-00-00';
     
     /**
      * @var string - Optional: Special price active until date
      */
-    protected $_activeUntil = "0000-00-00";
+    protected $_activeUntil = '0000-00-00';
     
     /**
      * @var double - Optional: SpecialPrice active until stock level quantity

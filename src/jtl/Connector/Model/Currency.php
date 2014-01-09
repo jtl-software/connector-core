@@ -54,12 +54,12 @@ class Currency extends DataModel
     /**
      * @var string - Optional delimiter char for cent, default=",". Ignore this flag if you have the correct user locale preference.
      */
-    protected $_delimiterCent = ",";
+    protected $_delimiterCent = ',';
     
     /**
      * @var string - Optional delimiter char for thousand. Default=".". Ignore this flag if you have the correct user locale preference.
      */
-    protected $_delimiterThousand = ".";
+    protected $_delimiterThousand = '.';
     
     /**
      * Currency Setter

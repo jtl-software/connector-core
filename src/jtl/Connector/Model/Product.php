@@ -149,12 +149,12 @@ class Product extends DataModel
     /**
      * @var string - Creation date
      */
-    protected $_created = "0000-00-00";
+    protected $_created = '0000-00-00';
     
     /**
      * @var string - Optional available from date. Specify a date, upon when product can be purchased. 
      */
-    protected $_availableFrom = "0000-00-00";
+    protected $_availableFrom = '0000-00-00';
     
     /**
      * @var string - Optional manufacturer number
@@ -249,7 +249,7 @@ class Product extends DataModel
     /**
      * @var string - Optional best before date. Default 0000-00-00 if product has no best-before-date.
      */
-    protected $_bestBefore = "0000-00-00";
+    protected $_bestBefore = '0000-00-00';
     
     /**
      * Product Setter

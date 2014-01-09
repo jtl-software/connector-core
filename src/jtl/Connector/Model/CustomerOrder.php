@@ -17,6 +17,51 @@ use \jtl\Core\Model\DataModel;
 class CustomerOrder extends DataModel
 {
     /**
+     * @var string - Initial status for new customerOrder, when customer finished order and order has not yet been payed or fetched
+     */
+    const STATUS_NEW = 'new';
+    
+    /**
+     * @var string - Customer order in process
+     */
+    const STATUS_PROCESSING = 'processing';
+    
+    /**
+     * @var string - Status when order is payed completely
+     */
+    const STATUS_PAYMENT_COMPLETED = 'payment_completed';
+    
+    /**
+     * @var string - Order payed and shipped completely
+     */
+    const STATUS_COMPLETED = 'completed';
+    
+    /**
+     * @var string - Order has been shipped partially
+     */
+    const STATUS_PARTIALLY_SHIPPED = 'partially_shipped';
+    
+    /**
+     * @var string - Cancelled by merchant or customer
+     */
+    const STATUS_CANCELLED = 'cancelled';
+    
+    /**
+     * @var string - New status, when changes have been made to customerOrder (e.g. item quantity change)
+     */
+    const STATUS_UPDATED = 'updated';
+    
+    /**
+     * @var string - Previous status was cancelled, next status is reactivated (similar to new or processing)
+     */
+    const STATUS_REACTIVATED = 'reactivated';
+    
+    /**
+     * @var string - Waiting for payment confirmation. Depending on payment method, a customerOrder with pending_payment will not be processed until payment ist confirmed. 
+     */
+    const STATUS_PENDING_PAYMENT = 'pending_payment';
+    
+    /**
      * @var string - Unique customerOrder id
      */
     protected $_id = '';
@@ -134,7 +179,7 @@ class CustomerOrder extends DataModel
     /**
      * @var string - Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
      */
-    protected $_status = "new";
+    protected $_status = 'new';
     
     /**
      * @var string - Date of creation

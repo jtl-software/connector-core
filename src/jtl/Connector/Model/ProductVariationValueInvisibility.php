@@ -19,12 +19,12 @@ class ProductVariationValueInvisibility extends DataModel
     /**
      * @var string - Reference to customerGroup
      */
-    protected $_customerGroupId = "0";
+    protected $_customerGroupId = '0';
     
     /**
      * @var string - Reference to productVariationValue to hide from customerGroup
      */
-    protected $_productVariationValueId = "0";
+    protected $_productVariationValueId = '0';
     
     /**
      * ProductVariationValueInvisibility Setter

@@ -19,7 +19,7 @@ class EmailTemplateI18n extends DataModel
     /**
      * @var string
      */
-    protected $_emailTemplateId = "0";
+    protected $_emailTemplateId = '0';
     
     /**
      * @var string
