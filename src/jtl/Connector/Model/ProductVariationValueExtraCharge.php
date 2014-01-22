@@ -62,6 +62,60 @@ class ProductVariationValueExtraCharge extends DataModel
     }
     
     /**
+     * @param string $customerGroupId
+     * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
+     */
+    public function setCustomerGroupId($customerGroupId)
+    {
+        $this->_customerGroupId = (string)$customerGroupId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCustomerGroupId()
+    {
+        return $this->_customerGroupId;
+    }
+    
+    /**
+     * @param string $productVariationValueId
+     * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
+     */
+    public function setProductVariationValueId($productVariationValueId)
+    {
+        $this->_productVariationValueId = (string)$productVariationValueId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductVariationValueId()
+    {
+        return $this->_productVariationValueId;
+    }
+    
+    /**
+     * @param double $extraChargeNet
+     * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
+     */
+    public function setExtraChargeNet($extraChargeNet)
+    {
+        $this->_extraChargeNet = (double)$extraChargeNet;
+        return $this;
+    }
+    
+    /**
+     * @return double
+     */
+    public function getExtraChargeNet()
+    {
+        return $this->_extraChargeNet;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -70,4 +124,3 @@ class ProductVariationValueExtraCharge extends DataModel
     
     }
 }
-?>

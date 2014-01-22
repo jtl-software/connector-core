@@ -58,6 +58,60 @@ class TaxZoneCountry extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\TaxZoneCountry
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $taxZoneId
+     * @return \jtl\Connector\Model\TaxZoneCountry
+     */
+    public function setTaxZoneId($taxZoneId)
+    {
+        $this->_taxZoneId = (string)$taxZoneId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getTaxZoneId()
+    {
+        return $this->_taxZoneId;
+    }
+    
+    /**
+     * @param string $countryIso
+     * @return \jtl\Connector\Model\TaxZoneCountry
+     */
+    public function setCountryIso($countryIso)
+    {
+        $this->_countryIso = (string)$countryIso;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCountryIso()
+    {
+        return $this->_countryIso;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -66,4 +120,3 @@ class TaxZoneCountry extends DataModel
     
     }
 }
-?>

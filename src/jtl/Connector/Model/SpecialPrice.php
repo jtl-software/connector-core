@@ -62,6 +62,60 @@ class SpecialPrice extends DataModel
     }
     
     /**
+     * @param string $customerGroupId
+     * @return \jtl\Connector\Model\SpecialPrice
+     */
+    public function setCustomerGroupId($customerGroupId)
+    {
+        $this->_customerGroupId = (string)$customerGroupId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCustomerGroupId()
+    {
+        return $this->_customerGroupId;
+    }
+    
+    /**
+     * @param string $productSpecialPriceId
+     * @return \jtl\Connector\Model\SpecialPrice
+     */
+    public function setProductSpecialPriceId($productSpecialPriceId)
+    {
+        $this->_productSpecialPriceId = (string)$productSpecialPriceId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductSpecialPriceId()
+    {
+        return $this->_productSpecialPriceId;
+    }
+    
+    /**
+     * @param double $priceNet
+     * @return \jtl\Connector\Model\SpecialPrice
+     */
+    public function setPriceNet($priceNet)
+    {
+        $this->_priceNet = (double)$priceNet;
+        return $this;
+    }
+    
+    /**
+     * @return double
+     */
+    public function getPriceNet()
+    {
+        return $this->_priceNet;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -70,4 +124,3 @@ class SpecialPrice extends DataModel
     
     }
 }
-?>

@@ -80,6 +80,114 @@ class FileUpload extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\FileUpload
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $productId
+     * @return \jtl\Connector\Model\FileUpload
+     */
+    public function setProductId($productId)
+    {
+        $this->_productId = (string)$productId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductId()
+    {
+        return $this->_productId;
+    }
+    
+    /**
+     * @param string $name
+     * @return \jtl\Connector\Model\FileUpload
+     */
+    public function setName($name)
+    {
+        $this->_name = (string)$name;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+    
+    /**
+     * @param string $description
+     * @return \jtl\Connector\Model\FileUpload
+     */
+    public function setDescription($description)
+    {
+        $this->_description = (string)$description;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->_description;
+    }
+    
+    /**
+     * @param string $fileType
+     * @return \jtl\Connector\Model\FileUpload
+     */
+    public function setFileType($fileType)
+    {
+        $this->_fileType = (string)$fileType;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getFileType()
+    {
+        return $this->_fileType;
+    }
+    
+    /**
+     * @param bool $isRequired
+     * @return \jtl\Connector\Model\FileUpload
+     */
+    public function setIsRequired($isRequired)
+    {
+        $this->_isRequired = (bool)$isRequired;
+        return $this;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function getIsRequired()
+    {
+        return $this->_isRequired;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -88,4 +196,3 @@ class FileUpload extends DataModel
     
     }
 }
-?>

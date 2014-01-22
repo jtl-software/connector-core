@@ -82,6 +82,132 @@ class Shipment extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\Shipment
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $deliveryNoteId
+     * @return \jtl\Connector\Model\Shipment
+     */
+    public function setDeliveryNoteId($deliveryNoteId)
+    {
+        $this->_deliveryNoteId = (string)$deliveryNoteId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getDeliveryNoteId()
+    {
+        return $this->_deliveryNoteId;
+    }
+    
+    /**
+     * @param string $logistic
+     * @return \jtl\Connector\Model\Shipment
+     */
+    public function setLogistic($logistic)
+    {
+        $this->_logistic = (string)$logistic;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getLogistic()
+    {
+        return $this->_logistic;
+    }
+    
+    /**
+     * @param string $logisticURL
+     * @return \jtl\Connector\Model\Shipment
+     */
+    public function setLogisticURL($logisticURL)
+    {
+        $this->_logisticURL = (string)$logisticURL;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getLogisticURL()
+    {
+        return $this->_logisticURL;
+    }
+    
+    /**
+     * @param string $identCode
+     * @return \jtl\Connector\Model\Shipment
+     */
+    public function setIdentCode($identCode)
+    {
+        $this->_identCode = (string)$identCode;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getIdentCode()
+    {
+        return $this->_identCode;
+    }
+    
+    /**
+     * @param string $created
+     * @return \jtl\Connector\Model\Shipment
+     */
+    public function setCreated($created)
+    {
+        $this->_created = (string)$created;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCreated()
+    {
+        return $this->_created;
+    }
+    
+    /**
+     * @param string $note
+     * @return \jtl\Connector\Model\Shipment
+     */
+    public function setNote($note)
+    {
+        $this->_note = (string)$note;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getNote()
+    {
+        return $this->_note;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -90,4 +216,3 @@ class Shipment extends DataModel
     
     }
 }
-?>

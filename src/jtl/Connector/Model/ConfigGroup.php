@@ -86,6 +86,132 @@ class ConfigGroup extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\ConfigGroup
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $imagePath
+     * @return \jtl\Connector\Model\ConfigGroup
+     */
+    public function setImagePath($imagePath)
+    {
+        $this->_imagePath = (string)$imagePath;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getImagePath()
+    {
+        return $this->_imagePath;
+    }
+    
+    /**
+     * @param int $minimumSelection
+     * @return \jtl\Connector\Model\ConfigGroup
+     */
+    public function setMinimumSelection($minimumSelection)
+    {
+        $this->_minimumSelection = (int)$minimumSelection;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getMinimumSelection()
+    {
+        return $this->_minimumSelection;
+    }
+    
+    /**
+     * @param int $maximumSelection
+     * @return \jtl\Connector\Model\ConfigGroup
+     */
+    public function setMaximumSelection($maximumSelection)
+    {
+        $this->_maximumSelection = (int)$maximumSelection;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getMaximumSelection()
+    {
+        return $this->_maximumSelection;
+    }
+    
+    /**
+     * @param int $type
+     * @return \jtl\Connector\Model\ConfigGroup
+     */
+    public function setType($type)
+    {
+        $this->_type = (int)$type;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->_type;
+    }
+    
+    /**
+     * @param int $sort
+     * @return \jtl\Connector\Model\ConfigGroup
+     */
+    public function setSort($sort)
+    {
+        $this->_sort = (int)$sort;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getSort()
+    {
+        return $this->_sort;
+    }
+    
+    /**
+     * @param string $comment
+     * @return \jtl\Connector\Model\ConfigGroup
+     */
+    public function setComment($comment)
+    {
+        $this->_comment = (string)$comment;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->_comment;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -94,4 +220,3 @@ class ConfigGroup extends DataModel
     
     }
 }
-?>

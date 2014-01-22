@@ -72,6 +72,78 @@ class ProductPrice extends DataModel
     }
     
     /**
+     * @param string $customerGroupId
+     * @return \jtl\Connector\Model\ProductPrice
+     */
+    public function setCustomerGroupId($customerGroupId)
+    {
+        $this->_customerGroupId = (string)$customerGroupId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCustomerGroupId()
+    {
+        return $this->_customerGroupId;
+    }
+    
+    /**
+     * @param string $productId
+     * @return \jtl\Connector\Model\ProductPrice
+     */
+    public function setProductId($productId)
+    {
+        $this->_productId = (string)$productId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductId()
+    {
+        return $this->_productId;
+    }
+    
+    /**
+     * @param double $netPrice
+     * @return \jtl\Connector\Model\ProductPrice
+     */
+    public function setNetPrice($netPrice)
+    {
+        $this->_netPrice = (double)$netPrice;
+        return $this;
+    }
+    
+    /**
+     * @return double
+     */
+    public function getNetPrice()
+    {
+        return $this->_netPrice;
+    }
+    
+    /**
+     * @param int $quantity
+     * @return \jtl\Connector\Model\ProductPrice
+     */
+    public function setQuantity($quantity)
+    {
+        $this->_quantity = (int)$quantity;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getQuantity()
+    {
+        return $this->_quantity;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -80,4 +152,3 @@ class ProductPrice extends DataModel
     
     }
 }
-?>

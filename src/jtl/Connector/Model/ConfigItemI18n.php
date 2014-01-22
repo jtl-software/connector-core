@@ -64,6 +64,78 @@ class ConfigItemI18n extends DataModel
     }
     
     /**
+     * @param string $configItemId
+     * @return \jtl\Connector\Model\ConfigItemI18n
+     */
+    public function setConfigItemId($configItemId)
+    {
+        $this->_configItemId = (string)$configItemId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getConfigItemId()
+    {
+        return $this->_configItemId;
+    }
+    
+    /**
+     * @param string $localeName
+     * @return \jtl\Connector\Model\ConfigItemI18n
+     */
+    public function setLocaleName($localeName)
+    {
+        $this->_localeName = (string)$localeName;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getLocaleName()
+    {
+        return $this->_localeName;
+    }
+    
+    /**
+     * @param string $name
+     * @return \jtl\Connector\Model\ConfigItemI18n
+     */
+    public function setName($name)
+    {
+        $this->_name = (string)$name;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+    
+    /**
+     * @param string $description
+     * @return \jtl\Connector\Model\ConfigItemI18n
+     */
+    public function setDescription($description)
+    {
+        $this->_description = (string)$description;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->_description;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -72,4 +144,3 @@ class ConfigItemI18n extends DataModel
     
     }
 }
-?>

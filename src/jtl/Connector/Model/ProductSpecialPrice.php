@@ -96,6 +96,150 @@ class ProductSpecialPrice extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\ProductSpecialPrice
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $productId
+     * @return \jtl\Connector\Model\ProductSpecialPrice
+     */
+    public function setProductId($productId)
+    {
+        $this->_productId = (string)$productId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductId()
+    {
+        return $this->_productId;
+    }
+    
+    /**
+     * @param bool $isActive
+     * @return \jtl\Connector\Model\ProductSpecialPrice
+     */
+    public function setIsActive($isActive)
+    {
+        $this->_isActive = (bool)$isActive;
+        return $this;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function getIsActive()
+    {
+        return $this->_isActive;
+    }
+    
+    /**
+     * @param string $activeFrom
+     * @return \jtl\Connector\Model\ProductSpecialPrice
+     */
+    public function setActiveFrom($activeFrom)
+    {
+        $this->_activeFrom = (string)$activeFrom;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getActiveFrom()
+    {
+        return $this->_activeFrom;
+    }
+    
+    /**
+     * @param string $activeUntil
+     * @return \jtl\Connector\Model\ProductSpecialPrice
+     */
+    public function setActiveUntil($activeUntil)
+    {
+        $this->_activeUntil = (string)$activeUntil;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getActiveUntil()
+    {
+        return $this->_activeUntil;
+    }
+    
+    /**
+     * @param double $stockLimit
+     * @return \jtl\Connector\Model\ProductSpecialPrice
+     */
+    public function setStockLimit($stockLimit)
+    {
+        $this->_stockLimit = (double)$stockLimit;
+        return $this;
+    }
+    
+    /**
+     * @return double
+     */
+    public function getStockLimit()
+    {
+        return $this->_stockLimit;
+    }
+    
+    /**
+     * @param bool $considerStockLimit
+     * @return \jtl\Connector\Model\ProductSpecialPrice
+     */
+    public function setConsiderStockLimit($considerStockLimit)
+    {
+        $this->_considerStockLimit = (bool)$considerStockLimit;
+        return $this;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function getConsiderStockLimit()
+    {
+        return $this->_considerStockLimit;
+    }
+    
+    /**
+     * @param bool $considerDateLimit
+     * @return \jtl\Connector\Model\ProductSpecialPrice
+     */
+    public function setConsiderDateLimit($considerDateLimit)
+    {
+        $this->_considerDateLimit = (bool)$considerDateLimit;
+        return $this;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function getConsiderDateLimit()
+    {
+        return $this->_considerDateLimit;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -104,4 +248,3 @@ class ProductSpecialPrice extends DataModel
     
     }
 }
-?>

@@ -52,6 +52,42 @@ class ProductFileDownload extends DataModel
     }
     
     /**
+     * @param string $productId
+     * @return \jtl\Connector\Model\ProductFileDownload
+     */
+    public function setProductId($productId)
+    {
+        $this->_productId = (string)$productId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductId()
+    {
+        return $this->_productId;
+    }
+    
+    /**
+     * @param string $fileDownloadId
+     * @return \jtl\Connector\Model\ProductFileDownload
+     */
+    public function setFileDownloadId($fileDownloadId)
+    {
+        $this->_fileDownloadId = (string)$fileDownloadId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getFileDownloadId()
+    {
+        return $this->_fileDownloadId;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -60,4 +96,3 @@ class ProductFileDownload extends DataModel
     
     }
 }
-?>

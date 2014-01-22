@@ -52,6 +52,42 @@ class WarehouseI18n extends DataModel
     }
     
     /**
+     * @param string $warehouseId
+     * @return \jtl\Connector\Model\WarehouseI18n
+     */
+    public function setWarehouseId($warehouseId)
+    {
+        $this->_warehouseId = (string)$warehouseId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getWarehouseId()
+    {
+        return $this->_warehouseId;
+    }
+    
+    /**
+     * @param string $name
+     * @return \jtl\Connector\Model\WarehouseI18n
+     */
+    public function setName($name)
+    {
+        $this->_name = (string)$name;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -60,4 +96,3 @@ class WarehouseI18n extends DataModel
     
     }
 }
-?>

@@ -62,6 +62,60 @@ class SpecificValue extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\SpecificValue
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $specificId
+     * @return \jtl\Connector\Model\SpecificValue
+     */
+    public function setSpecificId($specificId)
+    {
+        $this->_specificId = (string)$specificId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getSpecificId()
+    {
+        return $this->_specificId;
+    }
+    
+    /**
+     * @param int $sort
+     * @return \jtl\Connector\Model\SpecificValue
+     */
+    public function setSort($sort)
+    {
+        $this->_sort = (int)$sort;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getSort()
+    {
+        return $this->_sort;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -70,4 +124,3 @@ class SpecificValue extends DataModel
     
     }
 }
-?>

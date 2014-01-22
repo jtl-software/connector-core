@@ -64,6 +64,78 @@ class CategoryAttrI18n extends DataModel
     }
     
     /**
+     * @param string $localeName
+     * @return \jtl\Connector\Model\CategoryAttrI18n
+     */
+    public function setLocaleName($localeName)
+    {
+        $this->_localeName = (string)$localeName;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getLocaleName()
+    {
+        return $this->_localeName;
+    }
+    
+    /**
+     * @param string $categoryAttrId
+     * @return \jtl\Connector\Model\CategoryAttrI18n
+     */
+    public function setCategoryAttrId($categoryAttrId)
+    {
+        $this->_categoryAttrId = (string)$categoryAttrId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCategoryAttrId()
+    {
+        return $this->_categoryAttrId;
+    }
+    
+    /**
+     * @param string $key
+     * @return \jtl\Connector\Model\CategoryAttrI18n
+     */
+    public function setKey($key)
+    {
+        $this->_key = (string)$key;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getKey()
+    {
+        return $this->_key;
+    }
+    
+    /**
+     * @param string $value
+     * @return \jtl\Connector\Model\CategoryAttrI18n
+     */
+    public function setValue($value)
+    {
+        $this->_value = (string)$value;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->_value;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -72,4 +144,3 @@ class CategoryAttrI18n extends DataModel
     
     }
 }
-?>

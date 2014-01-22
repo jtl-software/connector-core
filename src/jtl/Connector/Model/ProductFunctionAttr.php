@@ -64,6 +64,78 @@ class ProductFunctionAttr extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\ProductFunctionAttr
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $productId
+     * @return \jtl\Connector\Model\ProductFunctionAttr
+     */
+    public function setProductId($productId)
+    {
+        $this->_productId = (string)$productId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductId()
+    {
+        return $this->_productId;
+    }
+    
+    /**
+     * @param string $key
+     * @return \jtl\Connector\Model\ProductFunctionAttr
+     */
+    public function setKey($key)
+    {
+        $this->_key = (string)$key;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getKey()
+    {
+        return $this->_key;
+    }
+    
+    /**
+     * @param string $value
+     * @return \jtl\Connector\Model\ProductFunctionAttr
+     */
+    public function setValue($value)
+    {
+        $this->_value = (string)$value;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->_value;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -72,4 +144,3 @@ class ProductFunctionAttr extends DataModel
     
     }
 }
-?>

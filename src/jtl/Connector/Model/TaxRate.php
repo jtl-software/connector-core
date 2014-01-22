@@ -78,6 +78,96 @@ class TaxRate extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\TaxRate
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $taxZoneId
+     * @return \jtl\Connector\Model\TaxRate
+     */
+    public function setTaxZoneId($taxZoneId)
+    {
+        $this->_taxZoneId = (string)$taxZoneId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getTaxZoneId()
+    {
+        return $this->_taxZoneId;
+    }
+    
+    /**
+     * @param string $taxClassId
+     * @return \jtl\Connector\Model\TaxRate
+     */
+    public function setTaxClassId($taxClassId)
+    {
+        $this->_taxClassId = (string)$taxClassId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getTaxClassId()
+    {
+        return $this->_taxClassId;
+    }
+    
+    /**
+     * @param double $rate
+     * @return \jtl\Connector\Model\TaxRate
+     */
+    public function setRate($rate)
+    {
+        $this->_rate = (double)$rate;
+        return $this;
+    }
+    
+    /**
+     * @return double
+     */
+    public function getRate()
+    {
+        return $this->_rate;
+    }
+    
+    /**
+     * @param int $priority
+     * @return \jtl\Connector\Model\TaxRate
+     */
+    public function setPriority($priority)
+    {
+        $this->_priority = (int)$priority;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getPriority()
+    {
+        return $this->_priority;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -86,4 +176,3 @@ class TaxRate extends DataModel
     
     }
 }
-?>

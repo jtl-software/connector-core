@@ -72,6 +72,78 @@ class Specific extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\Specific
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param int $sort
+     * @return \jtl\Connector\Model\Specific
+     */
+    public function setSort($sort)
+    {
+        $this->_sort = (int)$sort;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getSort()
+    {
+        return $this->_sort;
+    }
+    
+    /**
+     * @param bool $isGlobal
+     * @return \jtl\Connector\Model\Specific
+     */
+    public function setIsGlobal($isGlobal)
+    {
+        $this->_isGlobal = (bool)$isGlobal;
+        return $this;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function getIsGlobal()
+    {
+        return $this->_isGlobal;
+    }
+    
+    /**
+     * @param string $type
+     * @return \jtl\Connector\Model\Specific
+     */
+    public function setType($type)
+    {
+        $this->_type = (string)$type;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->_type;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -80,4 +152,3 @@ class Specific extends DataModel
     
     }
 }
-?>

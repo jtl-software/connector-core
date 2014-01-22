@@ -58,6 +58,60 @@ class ProductSpecific extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\ProductSpecific
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $specificValueId
+     * @return \jtl\Connector\Model\ProductSpecific
+     */
+    public function setSpecificValueId($specificValueId)
+    {
+        $this->_specificValueId = (string)$specificValueId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getSpecificValueId()
+    {
+        return $this->_specificValueId;
+    }
+    
+    /**
+     * @param string $productId
+     * @return \jtl\Connector\Model\ProductSpecific
+     */
+    public function setProductId($productId)
+    {
+        $this->_productId = (string)$productId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductId()
+    {
+        return $this->_productId;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -66,4 +120,3 @@ class ProductSpecific extends DataModel
     
     }
 }
-?>

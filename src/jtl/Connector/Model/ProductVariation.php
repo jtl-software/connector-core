@@ -68,6 +68,78 @@ class ProductVariation extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\ProductVariation
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $productId
+     * @return \jtl\Connector\Model\ProductVariation
+     */
+    public function setProductId($productId)
+    {
+        $this->_productId = (string)$productId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductId()
+    {
+        return $this->_productId;
+    }
+    
+    /**
+     * @param string $type
+     * @return \jtl\Connector\Model\ProductVariation
+     */
+    public function setType($type)
+    {
+        $this->_type = (string)$type;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->_type;
+    }
+    
+    /**
+     * @param int $sort
+     * @return \jtl\Connector\Model\ProductVariation
+     */
+    public function setSort($sort)
+    {
+        $this->_sort = (int)$sort;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getSort()
+    {
+        return $this->_sort;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -76,4 +148,3 @@ class ProductVariation extends DataModel
     
     }
 }
-?>

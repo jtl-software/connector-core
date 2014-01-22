@@ -99,6 +99,114 @@ class DeliveryNote extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\DeliveryNote
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $customerOrderId
+     * @return \jtl\Connector\Model\DeliveryNote
+     */
+    public function setCustomerOrderId($customerOrderId)
+    {
+        $this->_customerOrderId = (string)$customerOrderId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCustomerOrderId()
+    {
+        return $this->_customerOrderId;
+    }
+    
+    /**
+     * @param string $note
+     * @return \jtl\Connector\Model\DeliveryNote
+     */
+    public function setNote($note)
+    {
+        $this->_note = (string)$note;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getNote()
+    {
+        return $this->_note;
+    }
+    
+    /**
+     * @param string $created
+     * @return \jtl\Connector\Model\DeliveryNote
+     */
+    public function setCreated($created)
+    {
+        $this->_created = (string)$created;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCreated()
+    {
+        return $this->_created;
+    }
+    
+    /**
+     * @param bool $isFulfillment
+     * @return \jtl\Connector\Model\DeliveryNote
+     */
+    public function setIsFulfillment($isFulfillment)
+    {
+        $this->_isFulfillment = (bool)$isFulfillment;
+        return $this;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function getIsFulfillment()
+    {
+        return $this->_isFulfillment;
+    }
+    
+    /**
+     * @param int $status
+     * @return \jtl\Connector\Model\DeliveryNote
+     */
+    public function setStatus($status)
+    {
+        $this->_status = (int)$status;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->_status;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -107,4 +215,3 @@ class DeliveryNote extends DataModel
     
     }
 }
-?>

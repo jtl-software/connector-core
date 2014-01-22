@@ -58,6 +58,60 @@ class Product2Category extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\Product2Category
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $categoryId
+     * @return \jtl\Connector\Model\Product2Category
+     */
+    public function setCategoryId($categoryId)
+    {
+        $this->_categoryId = (string)$categoryId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCategoryId()
+    {
+        return $this->_categoryId;
+    }
+    
+    /**
+     * @param string $productId
+     * @return \jtl\Connector\Model\Product2Category
+     */
+    public function setProductId($productId)
+    {
+        $this->_productId = (string)$productId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductId()
+    {
+        return $this->_productId;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -66,4 +120,3 @@ class Product2Category extends DataModel
     
     }
 }
-?>

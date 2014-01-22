@@ -74,6 +74,96 @@ class Language extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\Language
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $nameEnglish
+     * @return \jtl\Connector\Model\Language
+     */
+    public function setNameEnglish($nameEnglish)
+    {
+        $this->_nameEnglish = (string)$nameEnglish;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getNameEnglish()
+    {
+        return $this->_nameEnglish;
+    }
+    
+    /**
+     * @param string $nameGerman
+     * @return \jtl\Connector\Model\Language
+     */
+    public function setNameGerman($nameGerman)
+    {
+        $this->_nameGerman = (string)$nameGerman;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getNameGerman()
+    {
+        return $this->_nameGerman;
+    }
+    
+    /**
+     * @param string $localeName
+     * @return \jtl\Connector\Model\Language
+     */
+    public function setLocaleName($localeName)
+    {
+        $this->_localeName = (string)$localeName;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getLocaleName()
+    {
+        return $this->_localeName;
+    }
+    
+    /**
+     * @param bool $isDefault
+     * @return \jtl\Connector\Model\Language
+     */
+    public function setIsDefault($isDefault)
+    {
+        $this->_isDefault = (bool)$isDefault;
+        return $this;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function getIsDefault()
+    {
+        return $this->_isDefault;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -82,4 +172,3 @@ class Language extends DataModel
     
     }
 }
-?>

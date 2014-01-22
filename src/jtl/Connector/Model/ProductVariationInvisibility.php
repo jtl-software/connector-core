@@ -52,6 +52,42 @@ class ProductVariationInvisibility extends DataModel
     }
     
     /**
+     * @param string $customerGroupId
+     * @return \jtl\Connector\Model\ProductVariationInvisibility
+     */
+    public function setCustomerGroupId($customerGroupId)
+    {
+        $this->_customerGroupId = (string)$customerGroupId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCustomerGroupId()
+    {
+        return $this->_customerGroupId;
+    }
+    
+    /**
+     * @param string $productVariationId
+     * @return \jtl\Connector\Model\ProductVariationInvisibility
+     */
+    public function setProductVariationId($productVariationId)
+    {
+        $this->_productVariationId = (string)$productVariationId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductVariationId()
+    {
+        return $this->_productVariationId;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -60,4 +96,3 @@ class ProductVariationInvisibility extends DataModel
     
     }
 }
-?>

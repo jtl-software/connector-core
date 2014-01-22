@@ -58,6 +58,60 @@ class CustomerGroupI18n extends DataModel
     }
     
     /**
+     * @param string $localeName
+     * @return \jtl\Connector\Model\CustomerGroupI18n
+     */
+    public function setLocaleName($localeName)
+    {
+        $this->_localeName = (string)$localeName;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getLocaleName()
+    {
+        return $this->_localeName;
+    }
+    
+    /**
+     * @param string $customerGroupId
+     * @return \jtl\Connector\Model\CustomerGroupI18n
+     */
+    public function setCustomerGroupId($customerGroupId)
+    {
+        $this->_customerGroupId = (string)$customerGroupId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCustomerGroupId()
+    {
+        return $this->_customerGroupId;
+    }
+    
+    /**
+     * @param string $name
+     * @return \jtl\Connector\Model\CustomerGroupI18n
+     */
+    public function setName($name)
+    {
+        $this->_name = (string)$name;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -66,4 +120,3 @@ class CustomerGroupI18n extends DataModel
     
     }
 }
-?>

@@ -76,6 +76,114 @@ class ManufacturerI18n extends DataModel
     }
     
     /**
+     * @param string $manufacturerId
+     * @return \jtl\Connector\Model\ManufacturerI18n
+     */
+    public function setManufacturerId($manufacturerId)
+    {
+        $this->_manufacturerId = (string)$manufacturerId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getManufacturerId()
+    {
+        return $this->_manufacturerId;
+    }
+    
+    /**
+     * @param string $localeName
+     * @return \jtl\Connector\Model\ManufacturerI18n
+     */
+    public function setLocaleName($localeName)
+    {
+        $this->_localeName = (string)$localeName;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getLocaleName()
+    {
+        return $this->_localeName;
+    }
+    
+    /**
+     * @param string $description
+     * @return \jtl\Connector\Model\ManufacturerI18n
+     */
+    public function setDescription($description)
+    {
+        $this->_description = (string)$description;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->_description;
+    }
+    
+    /**
+     * @param string $metaDescription
+     * @return \jtl\Connector\Model\ManufacturerI18n
+     */
+    public function setMetaDescription($metaDescription)
+    {
+        $this->_metaDescription = (string)$metaDescription;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getMetaDescription()
+    {
+        return $this->_metaDescription;
+    }
+    
+    /**
+     * @param string $metaKeywords
+     * @return \jtl\Connector\Model\ManufacturerI18n
+     */
+    public function setMetaKeywords($metaKeywords)
+    {
+        $this->_metaKeywords = (string)$metaKeywords;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getMetaKeywords()
+    {
+        return $this->_metaKeywords;
+    }
+    
+    /**
+     * @param string $titleTag
+     * @return \jtl\Connector\Model\ManufacturerI18n
+     */
+    public function setTitleTag($titleTag)
+    {
+        $this->_titleTag = (string)$titleTag;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getTitleTag()
+    {
+        return $this->_titleTag;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -84,4 +192,3 @@ class ManufacturerI18n extends DataModel
     
     }
 }
-?>

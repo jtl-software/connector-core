@@ -52,6 +52,42 @@ class ProductInvisibility extends DataModel
     }
     
     /**
+     * @param string $customerGroupId
+     * @return \jtl\Connector\Model\ProductInvisibility
+     */
+    public function setCustomerGroupId($customerGroupId)
+    {
+        $this->_customerGroupId = (string)$customerGroupId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCustomerGroupId()
+    {
+        return $this->_customerGroupId;
+    }
+    
+    /**
+     * @param string $productId
+     * @return \jtl\Connector\Model\ProductInvisibility
+     */
+    public function setProductId($productId)
+    {
+        $this->_productId = (string)$productId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductId()
+    {
+        return $this->_productId;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -60,4 +96,3 @@ class ProductInvisibility extends DataModel
     
     }
 }
-?>

@@ -64,6 +64,78 @@ class MediaFileI18n extends DataModel
     }
     
     /**
+     * @param string $mediaFileId
+     * @return \jtl\Connector\Model\MediaFileI18n
+     */
+    public function setMediaFileId($mediaFileId)
+    {
+        $this->_mediaFileId = (string)$mediaFileId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getMediaFileId()
+    {
+        return $this->_mediaFileId;
+    }
+    
+    /**
+     * @param string $localeName
+     * @return \jtl\Connector\Model\MediaFileI18n
+     */
+    public function setLocaleName($localeName)
+    {
+        $this->_localeName = (string)$localeName;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getLocaleName()
+    {
+        return $this->_localeName;
+    }
+    
+    /**
+     * @param string $name
+     * @return \jtl\Connector\Model\MediaFileI18n
+     */
+    public function setName($name)
+    {
+        $this->_name = (string)$name;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+    
+    /**
+     * @param string $description
+     * @return \jtl\Connector\Model\MediaFileI18n
+     */
+    public function setDescription($description)
+    {
+        $this->_description = (string)$description;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->_description;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -72,4 +144,3 @@ class MediaFileI18n extends DataModel
     
     }
 }
-?>

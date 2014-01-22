@@ -249,6 +249,474 @@ class CustomerOrder extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $customerId
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setCustomerId($customerId)
+    {
+        $this->_customerId = (string)$customerId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCustomerId()
+    {
+        return $this->_customerId;
+    }
+    
+    /**
+     * @param string $shippingAddressId
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setShippingAddressId($shippingAddressId)
+    {
+        $this->_shippingAddressId = (string)$shippingAddressId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getShippingAddressId()
+    {
+        return $this->_shippingAddressId;
+    }
+    
+    /**
+     * @param string $billingAddressId
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setBillingAddressId($billingAddressId)
+    {
+        $this->_billingAddressId = (string)$billingAddressId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getBillingAddressId()
+    {
+        return $this->_billingAddressId;
+    }
+    
+    /**
+     * @param string $shippingMethodId
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setShippingMethodId($shippingMethodId)
+    {
+        $this->_shippingMethodId = (string)$shippingMethodId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getShippingMethodId()
+    {
+        return $this->_shippingMethodId;
+    }
+    
+    /**
+     * @param string $localeName
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setLocaleName($localeName)
+    {
+        $this->_localeName = (string)$localeName;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getLocaleName()
+    {
+        return $this->_localeName;
+    }
+    
+    /**
+     * @param string $currencyIso
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setCurrencyIso($currencyIso)
+    {
+        $this->_currencyIso = (string)$currencyIso;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCurrencyIso()
+    {
+        return $this->_currencyIso;
+    }
+    
+    /**
+     * @param string $estimatedDeliveryDate
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setEstimatedDeliveryDate($estimatedDeliveryDate)
+    {
+        $this->_estimatedDeliveryDate = (string)$estimatedDeliveryDate;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getEstimatedDeliveryDate()
+    {
+        return $this->_estimatedDeliveryDate;
+    }
+    
+    /**
+     * @param double $credit
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setCredit($credit)
+    {
+        $this->_credit = (double)$credit;
+        return $this;
+    }
+    
+    /**
+     * @return double
+     */
+    public function getCredit()
+    {
+        return $this->_credit;
+    }
+    
+    /**
+     * @param double $totalSum
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setTotalSum($totalSum)
+    {
+        $this->_totalSum = (double)$totalSum;
+        return $this;
+    }
+    
+    /**
+     * @return double
+     */
+    public function getTotalSum()
+    {
+        return $this->_totalSum;
+    }
+    
+    /**
+     * @param string $session
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setSession($session)
+    {
+        $this->_session = (string)$session;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getSession()
+    {
+        return $this->_session;
+    }
+    
+    /**
+     * @param string $shippingMethodName
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setShippingMethodName($shippingMethodName)
+    {
+        $this->_shippingMethodName = (string)$shippingMethodName;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getShippingMethodName()
+    {
+        return $this->_shippingMethodName;
+    }
+    
+    /**
+     * @param string $orderNumber
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setOrderNumber($orderNumber)
+    {
+        $this->_orderNumber = (string)$orderNumber;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getOrderNumber()
+    {
+        return $this->_orderNumber;
+    }
+    
+    /**
+     * @param string $shippingInfo
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setShippingInfo($shippingInfo)
+    {
+        $this->_shippingInfo = (string)$shippingInfo;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getShippingInfo()
+    {
+        return $this->_shippingInfo;
+    }
+    
+    /**
+     * @param string $shippingDate
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setShippingDate($shippingDate)
+    {
+        $this->_shippingDate = (string)$shippingDate;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getShippingDate()
+    {
+        return $this->_shippingDate;
+    }
+    
+    /**
+     * @param string $paymentDate
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setPaymentDate($paymentDate)
+    {
+        $this->_paymentDate = (string)$paymentDate;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getPaymentDate()
+    {
+        return $this->_paymentDate;
+    }
+    
+    /**
+     * @param string $ratingNotificationDate
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setRatingNotificationDate($ratingNotificationDate)
+    {
+        $this->_ratingNotificationDate = (string)$ratingNotificationDate;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getRatingNotificationDate()
+    {
+        return $this->_ratingNotificationDate;
+    }
+    
+    /**
+     * @param string $tracking
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setTracking($tracking)
+    {
+        $this->_tracking = (string)$tracking;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getTracking()
+    {
+        return $this->_tracking;
+    }
+    
+    /**
+     * @param string $note
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setNote($note)
+    {
+        $this->_note = (string)$note;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getNote()
+    {
+        return $this->_note;
+    }
+    
+    /**
+     * @param string $logistic
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setLogistic($logistic)
+    {
+        $this->_logistic = (string)$logistic;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getLogistic()
+    {
+        return $this->_logistic;
+    }
+    
+    /**
+     * @param string $trackingURL
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setTrackingURL($trackingURL)
+    {
+        $this->_trackingURL = (string)$trackingURL;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getTrackingURL()
+    {
+        return $this->_trackingURL;
+    }
+    
+    /**
+     * @param string $ip
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setIp($ip)
+    {
+        $this->_ip = (string)$ip;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getIp()
+    {
+        return $this->_ip;
+    }
+    
+    /**
+     * @param bool $isFetched
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setIsFetched($isFetched)
+    {
+        $this->_isFetched = (bool)$isFetched;
+        return $this;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function getIsFetched()
+    {
+        return $this->_isFetched;
+    }
+    
+    /**
+     * @param string $status
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setStatus($status)
+    {
+        $this->_status = (string)$status;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->_status;
+    }
+    
+    /**
+     * @param string $created
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setCreated($created)
+    {
+        $this->_created = (string)$created;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCreated()
+    {
+        return $this->_created;
+    }
+    
+    /**
+     * @param string $paymentModuleId
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setPaymentModuleId($paymentModuleId)
+    {
+        $this->_paymentModuleId = (string)$paymentModuleId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getPaymentModuleId()
+    {
+        return $this->_paymentModuleId;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -257,4 +725,3 @@ class CustomerOrder extends DataModel
     
     }
 }
-?>

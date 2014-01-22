@@ -62,6 +62,60 @@ class CategoryCustomerGroup extends DataModel
     }
     
     /**
+     * @param string $customerGroupId
+     * @return \jtl\Connector\Model\CategoryCustomerGroup
+     */
+    public function setCustomerGroupId($customerGroupId)
+    {
+        $this->_customerGroupId = (string)$customerGroupId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCustomerGroupId()
+    {
+        return $this->_customerGroupId;
+    }
+    
+    /**
+     * @param string $categoryId
+     * @return \jtl\Connector\Model\CategoryCustomerGroup
+     */
+    public function setCategoryId($categoryId)
+    {
+        $this->_categoryId = (string)$categoryId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCategoryId()
+    {
+        return $this->_categoryId;
+    }
+    
+    /**
+     * @param double $discount
+     * @return \jtl\Connector\Model\CategoryCustomerGroup
+     */
+    public function setDiscount($discount)
+    {
+        $this->_discount = (double)$discount;
+        return $this;
+    }
+    
+    /**
+     * @return double
+     */
+    public function getDiscount()
+    {
+        return $this->_discount;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -70,4 +124,3 @@ class CategoryCustomerGroup extends DataModel
     
     }
 }
-?>

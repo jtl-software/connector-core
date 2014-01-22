@@ -68,6 +68,78 @@ class ProductConfigGroup extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\ProductConfigGroup
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $configGroupId
+     * @return \jtl\Connector\Model\ProductConfigGroup
+     */
+    public function setConfigGroupId($configGroupId)
+    {
+        $this->_configGroupId = (string)$configGroupId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getConfigGroupId()
+    {
+        return $this->_configGroupId;
+    }
+    
+    /**
+     * @param string $productId
+     * @return \jtl\Connector\Model\ProductConfigGroup
+     */
+    public function setProductId($productId)
+    {
+        $this->_productId = (string)$productId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductId()
+    {
+        return $this->_productId;
+    }
+    
+    /**
+     * @param int $sort
+     * @return \jtl\Connector\Model\ProductConfigGroup
+     */
+    public function setSort($sort)
+    {
+        $this->_sort = (int)$sort;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getSort()
+    {
+        return $this->_sort;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -76,4 +148,3 @@ class ProductConfigGroup extends DataModel
     
     }
 }
-?>

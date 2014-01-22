@@ -80,6 +80,114 @@ class Image extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\Image
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $masterImageId
+     * @return \jtl\Connector\Model\Image
+     */
+    public function setMasterImageId($masterImageId)
+    {
+        $this->_masterImageId = (string)$masterImageId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getMasterImageId()
+    {
+        return $this->_masterImageId;
+    }
+    
+    /**
+     * @param string $relationType
+     * @return \jtl\Connector\Model\Image
+     */
+    public function setRelationType($relationType)
+    {
+        $this->_relationType = (string)$relationType;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getRelationType()
+    {
+        return $this->_relationType;
+    }
+    
+    /**
+     * @param int $foreignKey
+     * @return \jtl\Connector\Model\Image
+     */
+    public function setForeignKey($foreignKey)
+    {
+        $this->_foreignKey = (int)$foreignKey;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getForeignKey()
+    {
+        return $this->_foreignKey;
+    }
+    
+    /**
+     * @param string $filename
+     * @return \jtl\Connector\Model\Image
+     */
+    public function setFilename($filename)
+    {
+        $this->_filename = (string)$filename;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getFilename()
+    {
+        return $this->_filename;
+    }
+    
+    /**
+     * @param int $sort
+     * @return \jtl\Connector\Model\Image
+     */
+    public function setSort($sort)
+    {
+        $this->_sort = (int)$sort;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getSort()
+    {
+        return $this->_sort;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -88,4 +196,3 @@ class Image extends DataModel
     
     }
 }
-?>

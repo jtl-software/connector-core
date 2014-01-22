@@ -118,6 +118,240 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $customerOrderId
+     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     */
+    public function setCustomerOrderId($customerOrderId)
+    {
+        $this->_customerOrderId = (string)$customerOrderId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCustomerOrderId()
+    {
+        return $this->_customerOrderId;
+    }
+    
+    /**
+     * @param string $bankName
+     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     */
+    public function setBankName($bankName)
+    {
+        $this->_bankName = (string)$bankName;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getBankName()
+    {
+        return $this->_bankName;
+    }
+    
+    /**
+     * @param string $bankCode
+     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     */
+    public function setBankCode($bankCode)
+    {
+        $this->_bankCode = (string)$bankCode;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getBankCode()
+    {
+        return $this->_bankCode;
+    }
+    
+    /**
+     * @param string $accountHolder
+     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     */
+    public function setAccountHolder($accountHolder)
+    {
+        $this->_accountHolder = (string)$accountHolder;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getAccountHolder()
+    {
+        return $this->_accountHolder;
+    }
+    
+    /**
+     * @param string $accountNumber
+     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     */
+    public function setAccountNumber($accountNumber)
+    {
+        $this->_accountNumber = (string)$accountNumber;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getAccountNumber()
+    {
+        return $this->_accountNumber;
+    }
+    
+    /**
+     * @param string $iban
+     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     */
+    public function setIban($iban)
+    {
+        $this->_iban = (string)$iban;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getIban()
+    {
+        return $this->_iban;
+    }
+    
+    /**
+     * @param string $bic
+     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     */
+    public function setBic($bic)
+    {
+        $this->_bic = (string)$bic;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getBic()
+    {
+        return $this->_bic;
+    }
+    
+    /**
+     * @param string $creditCardNumber
+     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     */
+    public function setCreditCardNumber($creditCardNumber)
+    {
+        $this->_creditCardNumber = (string)$creditCardNumber;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCreditCardNumber()
+    {
+        return $this->_creditCardNumber;
+    }
+    
+    /**
+     * @param string $creditCardVerificationNumber
+     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     */
+    public function setCreditCardVerificationNumber($creditCardVerificationNumber)
+    {
+        $this->_creditCardVerificationNumber = (string)$creditCardVerificationNumber;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCreditCardVerificationNumber()
+    {
+        return $this->_creditCardVerificationNumber;
+    }
+    
+    /**
+     * @param string $creditCardExpiration
+     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     */
+    public function setCreditCardExpiration($creditCardExpiration)
+    {
+        $this->_creditCardExpiration = (string)$creditCardExpiration;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCreditCardExpiration()
+    {
+        return $this->_creditCardExpiration;
+    }
+    
+    /**
+     * @param string $creditCardType
+     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     */
+    public function setCreditCardType($creditCardType)
+    {
+        $this->_creditCardType = (string)$creditCardType;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCreditCardType()
+    {
+        return $this->_creditCardType;
+    }
+    
+    /**
+     * @param string $creditCardHolder
+     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     */
+    public function setCreditCardHolder($creditCardHolder)
+    {
+        $this->_creditCardHolder = (string)$creditCardHolder;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCreditCardHolder()
+    {
+        return $this->_creditCardHolder;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -126,4 +360,3 @@ class CustomerOrderPaymentInfo extends DataModel
     
     }
 }
-?>

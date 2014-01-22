@@ -84,6 +84,114 @@ class ProductVariationValue extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\ProductVariationValue
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $productVariationId
+     * @return \jtl\Connector\Model\ProductVariationValue
+     */
+    public function setProductVariationId($productVariationId)
+    {
+        $this->_productVariationId = (string)$productVariationId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductVariationId()
+    {
+        return $this->_productVariationId;
+    }
+    
+    /**
+     * @param double $extraWeight
+     * @return \jtl\Connector\Model\ProductVariationValue
+     */
+    public function setExtraWeight($extraWeight)
+    {
+        $this->_extraWeight = (double)$extraWeight;
+        return $this;
+    }
+    
+    /**
+     * @return double
+     */
+    public function getExtraWeight()
+    {
+        return $this->_extraWeight;
+    }
+    
+    /**
+     * @param string $sku
+     * @return \jtl\Connector\Model\ProductVariationValue
+     */
+    public function setSku($sku)
+    {
+        $this->_sku = (string)$sku;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getSku()
+    {
+        return $this->_sku;
+    }
+    
+    /**
+     * @param int $sort
+     * @return \jtl\Connector\Model\ProductVariationValue
+     */
+    public function setSort($sort)
+    {
+        $this->_sort = (int)$sort;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getSort()
+    {
+        return $this->_sort;
+    }
+    
+    /**
+     * @param double $stockLevel
+     * @return \jtl\Connector\Model\ProductVariationValue
+     */
+    public function setStockLevel($stockLevel)
+    {
+        $this->_stockLevel = (double)$stockLevel;
+        return $this;
+    }
+    
+    /**
+     * @return double
+     */
+    public function getStockLevel()
+    {
+        return $this->_stockLevel;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -92,4 +200,3 @@ class ProductVariationValue extends DataModel
     
     }
 }
-?>

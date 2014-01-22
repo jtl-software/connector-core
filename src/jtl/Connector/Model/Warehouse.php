@@ -46,6 +46,24 @@ class Warehouse extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\Warehouse
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -54,4 +72,3 @@ class Warehouse extends DataModel
     
     }
 }
-?>

@@ -58,6 +58,60 @@ class ProductVariationI18n extends DataModel
     }
     
     /**
+     * @param string $localeName
+     * @return \jtl\Connector\Model\ProductVariationI18n
+     */
+    public function setLocaleName($localeName)
+    {
+        $this->_localeName = (string)$localeName;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getLocaleName()
+    {
+        return $this->_localeName;
+    }
+    
+    /**
+     * @param string $productVariationId
+     * @return \jtl\Connector\Model\ProductVariationI18n
+     */
+    public function setProductVariationId($productVariationId)
+    {
+        $this->_productVariationId = (string)$productVariationId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductVariationId()
+    {
+        return $this->_productVariationId;
+    }
+    
+    /**
+     * @param string $name
+     * @return \jtl\Connector\Model\ProductVariationI18n
+     */
+    public function setName($name)
+    {
+        $this->_name = (string)$name;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -66,4 +120,3 @@ class ProductVariationI18n extends DataModel
     
     }
 }
-?>

@@ -74,6 +74,96 @@ class ProductWarehouseInfo extends DataModel
     }
     
     /**
+     * @param string $productId
+     * @return \jtl\Connector\Model\ProductWarehouseInfo
+     */
+    public function setProductId($productId)
+    {
+        $this->_productId = (string)$productId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductId()
+    {
+        return $this->_productId;
+    }
+    
+    /**
+     * @param string $warehouseId
+     * @return \jtl\Connector\Model\ProductWarehouseInfo
+     */
+    public function setWarehouseId($warehouseId)
+    {
+        $this->_warehouseId = (string)$warehouseId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getWarehouseId()
+    {
+        return $this->_warehouseId;
+    }
+    
+    /**
+     * @param double $stockLevel
+     * @return \jtl\Connector\Model\ProductWarehouseInfo
+     */
+    public function setStockLevel($stockLevel)
+    {
+        $this->_stockLevel = (double)$stockLevel;
+        return $this;
+    }
+    
+    /**
+     * @return double
+     */
+    public function getStockLevel()
+    {
+        return $this->_stockLevel;
+    }
+    
+    /**
+     * @param double $inflowQuantity
+     * @return \jtl\Connector\Model\ProductWarehouseInfo
+     */
+    public function setInflowQuantity($inflowQuantity)
+    {
+        $this->_inflowQuantity = (double)$inflowQuantity;
+        return $this;
+    }
+    
+    /**
+     * @return double
+     */
+    public function getInflowQuantity()
+    {
+        return $this->_inflowQuantity;
+    }
+    
+    /**
+     * @param string $inflowDate
+     * @return \jtl\Connector\Model\ProductWarehouseInfo
+     */
+    public function setInflowDate($inflowDate)
+    {
+        $this->_inflowDate = (string)$inflowDate;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getInflowDate()
+    {
+        return $this->_inflowDate;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -82,4 +172,3 @@ class ProductWarehouseInfo extends DataModel
     
     }
 }
-?>

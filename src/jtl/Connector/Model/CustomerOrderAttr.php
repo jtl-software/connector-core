@@ -64,6 +64,78 @@ class CustomerOrderAttr extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\CustomerOrderAttr
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $customerOrderId
+     * @return \jtl\Connector\Model\CustomerOrderAttr
+     */
+    public function setCustomerOrderId($customerOrderId)
+    {
+        $this->_customerOrderId = (string)$customerOrderId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCustomerOrderId()
+    {
+        return $this->_customerOrderId;
+    }
+    
+    /**
+     * @param string $key
+     * @return \jtl\Connector\Model\CustomerOrderAttr
+     */
+    public function setKey($key)
+    {
+        $this->_key = (string)$key;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getKey()
+    {
+        return $this->_key;
+    }
+    
+    /**
+     * @param string $value
+     * @return \jtl\Connector\Model\CustomerOrderAttr
+     */
+    public function setValue($value)
+    {
+        $this->_value = (string)$value;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->_value;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -72,4 +144,3 @@ class CustomerOrderAttr extends DataModel
     
     }
 }
-?>

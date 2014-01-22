@@ -74,6 +74,96 @@ class Manufacturer extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\Manufacturer
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $name
+     * @return \jtl\Connector\Model\Manufacturer
+     */
+    public function setName($name)
+    {
+        $this->_name = (string)$name;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+    
+    /**
+     * @param string $www
+     * @return \jtl\Connector\Model\Manufacturer
+     */
+    public function setWww($www)
+    {
+        $this->_www = (string)$www;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getWww()
+    {
+        return $this->_www;
+    }
+    
+    /**
+     * @param int $sort
+     * @return \jtl\Connector\Model\Manufacturer
+     */
+    public function setSort($sort)
+    {
+        $this->_sort = (int)$sort;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getSort()
+    {
+        return $this->_sort;
+    }
+    
+    /**
+     * @param string $urlPath
+     * @return \jtl\Connector\Model\Manufacturer
+     */
+    public function setUrlPath($urlPath)
+    {
+        $this->_urlPath = (string)$urlPath;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getUrlPath()
+    {
+        return $this->_urlPath;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -82,4 +172,3 @@ class Manufacturer extends DataModel
     
     }
 }
-?>

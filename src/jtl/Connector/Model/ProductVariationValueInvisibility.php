@@ -19,12 +19,12 @@ class ProductVariationValueInvisibility extends DataModel
     /**
      * @var string - Reference to customerGroup
      */
-    protected $_customerGroupId = '0';
+    protected $_customerGroupId = '';
     
     /**
      * @var string - Reference to productVariationValue to hide from customerGroup
      */
-    protected $_productVariationValueId = '0';
+    protected $_productVariationValueId = '';
     
     /**
      * ProductVariationValueInvisibility Setter
@@ -52,6 +52,42 @@ class ProductVariationValueInvisibility extends DataModel
     }
     
     /**
+     * @param string $customerGroupId
+     * @return \jtl\Connector\Model\ProductVariationValueInvisibility
+     */
+    public function setCustomerGroupId($customerGroupId)
+    {
+        $this->_customerGroupId = (string)$customerGroupId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCustomerGroupId()
+    {
+        return $this->_customerGroupId;
+    }
+    
+    /**
+     * @param string $productVariationValueId
+     * @return \jtl\Connector\Model\ProductVariationValueInvisibility
+     */
+    public function setProductVariationValueId($productVariationValueId)
+    {
+        $this->_productVariationValueId = (string)$productVariationValueId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductVariationValueId()
+    {
+        return $this->_productVariationValueId;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -60,4 +96,3 @@ class ProductVariationValueInvisibility extends DataModel
     
     }
 }
-?>

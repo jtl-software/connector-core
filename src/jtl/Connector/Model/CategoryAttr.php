@@ -62,6 +62,60 @@ class CategoryAttr extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\CategoryAttr
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $categoryId
+     * @return \jtl\Connector\Model\CategoryAttr
+     */
+    public function setCategoryId($categoryId)
+    {
+        $this->_categoryId = (string)$categoryId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCategoryId()
+    {
+        return $this->_categoryId;
+    }
+    
+    /**
+     * @param int $sort
+     * @return \jtl\Connector\Model\CategoryAttr
+     */
+    public function setSort($sort)
+    {
+        $this->_sort = (int)$sort;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getSort()
+    {
+        return $this->_sort;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -70,4 +124,3 @@ class CategoryAttr extends DataModel
     
     }
 }
-?>

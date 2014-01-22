@@ -92,6 +92,150 @@ class CustomerOrderItemVariation extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\CustomerOrderItemVariation
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $customerOrderItemId
+     * @return \jtl\Connector\Model\CustomerOrderItemVariation
+     */
+    public function setCustomerOrderItemId($customerOrderItemId)
+    {
+        $this->_customerOrderItemId = (string)$customerOrderItemId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCustomerOrderItemId()
+    {
+        return $this->_customerOrderItemId;
+    }
+    
+    /**
+     * @param string $productVariationId
+     * @return \jtl\Connector\Model\CustomerOrderItemVariation
+     */
+    public function setProductVariationId($productVariationId)
+    {
+        $this->_productVariationId = (string)$productVariationId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductVariationId()
+    {
+        return $this->_productVariationId;
+    }
+    
+    /**
+     * @param string $productVariationValueId
+     * @return \jtl\Connector\Model\CustomerOrderItemVariation
+     */
+    public function setProductVariationValueId($productVariationValueId)
+    {
+        $this->_productVariationValueId = (string)$productVariationValueId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductVariationValueId()
+    {
+        return $this->_productVariationValueId;
+    }
+    
+    /**
+     * @param string $productVariationName
+     * @return \jtl\Connector\Model\CustomerOrderItemVariation
+     */
+    public function setProductVariationName($productVariationName)
+    {
+        $this->_productVariationName = (string)$productVariationName;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductVariationName()
+    {
+        return $this->_productVariationName;
+    }
+    
+    /**
+     * @param string $productVariationValueName
+     * @return \jtl\Connector\Model\CustomerOrderItemVariation
+     */
+    public function setProductVariationValueName($productVariationValueName)
+    {
+        $this->_productVariationValueName = (string)$productVariationValueName;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductVariationValueName()
+    {
+        return $this->_productVariationValueName;
+    }
+    
+    /**
+     * @param string $freeField
+     * @return \jtl\Connector\Model\CustomerOrderItemVariation
+     */
+    public function setFreeField($freeField)
+    {
+        $this->_freeField = (string)$freeField;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getFreeField()
+    {
+        return $this->_freeField;
+    }
+    
+    /**
+     * @param double $surcharge
+     * @return \jtl\Connector\Model\CustomerOrderItemVariation
+     */
+    public function setSurcharge($surcharge)
+    {
+        $this->_surcharge = (double)$surcharge;
+        return $this;
+    }
+    
+    /**
+     * @return double
+     */
+    public function getSurcharge()
+    {
+        return $this->_surcharge;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -100,4 +244,3 @@ class CustomerOrderItemVariation extends DataModel
     
     }
 }
-?>

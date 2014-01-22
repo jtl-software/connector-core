@@ -34,7 +34,7 @@ class MediaFileAttr extends DataModel
     /**
      * @var string - Attribute name
      */
-    protected $_name = '';
+    protected $_key = '';
     
     /**
      * @var string - Attribute value
@@ -63,7 +63,7 @@ class MediaFileAttr extends DataModel
             
                 case "_mediaFileId":
                 case "_localeName":
-                case "_name":
+                case "_key":
                 case "_value":
                 
                     $this->$name = (string)$value;
@@ -71,6 +71,96 @@ class MediaFileAttr extends DataModel
             
             }
         }
+    }
+    
+    /**
+     * @param int $id
+     * @return \jtl\Connector\Model\MediaFileAttr
+     */
+    public function setId($id)
+    {
+        $this->_id = (int)$id;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $mediaFileId
+     * @return \jtl\Connector\Model\MediaFileAttr
+     */
+    public function setMediaFileId($mediaFileId)
+    {
+        $this->_mediaFileId = (string)$mediaFileId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getMediaFileId()
+    {
+        return $this->_mediaFileId;
+    }
+    
+    /**
+     * @param string $localeName
+     * @return \jtl\Connector\Model\MediaFileAttr
+     */
+    public function setLocaleName($localeName)
+    {
+        $this->_localeName = (string)$localeName;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getLocaleName()
+    {
+        return $this->_localeName;
+    }
+    
+    /**
+     * @param string $key
+     * @return \jtl\Connector\Model\MediaFileAttr
+     */
+    public function setKey($key)
+    {
+        $this->_key = (string)$key;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getKey()
+    {
+        return $this->_key;
+    }
+    
+    /**
+     * @param string $value
+     * @return \jtl\Connector\Model\MediaFileAttr
+     */
+    public function setValue($value)
+    {
+        $this->_value = (string)$value;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->_value;
     }
     
     /**
@@ -82,4 +172,3 @@ class MediaFileAttr extends DataModel
     
     }
 }
-?>

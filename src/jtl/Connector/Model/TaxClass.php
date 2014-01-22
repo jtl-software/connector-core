@@ -62,6 +62,60 @@ class TaxClass extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\TaxClass
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $name
+     * @return \jtl\Connector\Model\TaxClass
+     */
+    public function setName($name)
+    {
+        $this->_name = (string)$name;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+    
+    /**
+     * @param bool $isDefault
+     * @return \jtl\Connector\Model\TaxClass
+     */
+    public function setIsDefault($isDefault)
+    {
+        $this->_isDefault = (bool)$isDefault;
+        return $this;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function getIsDefault()
+    {
+        return $this->_isDefault;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -70,4 +124,3 @@ class TaxClass extends DataModel
     
     }
 }
-?>

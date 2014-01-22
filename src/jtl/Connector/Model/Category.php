@@ -68,6 +68,78 @@ class Category extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\Category
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $parentCategoryId
+     * @return \jtl\Connector\Model\Category
+     */
+    public function setParentCategoryId($parentCategoryId)
+    {
+        $this->_parentCategoryId = (string)$parentCategoryId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getParentCategoryId()
+    {
+        return $this->_parentCategoryId;
+    }
+    
+    /**
+     * @param int $sort
+     * @return \jtl\Connector\Model\Category
+     */
+    public function setSort($sort)
+    {
+        $this->_sort = (int)$sort;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getSort()
+    {
+        return $this->_sort;
+    }
+    
+    /**
+     * @param int $level
+     * @return \jtl\Connector\Model\Category
+     */
+    public function setLevel($level)
+    {
+        $this->_level = (int)$level;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getLevel()
+    {
+        return $this->_level;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -76,4 +148,3 @@ class Category extends DataModel
     
     }
 }
-?>

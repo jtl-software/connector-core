@@ -88,6 +88,150 @@ class SpecificValueI18n extends DataModel
     }
     
     /**
+     * @param string $localeName
+     * @return \jtl\Connector\Model\SpecificValueI18n
+     */
+    public function setLocaleName($localeName)
+    {
+        $this->_localeName = (string)$localeName;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getLocaleName()
+    {
+        return $this->_localeName;
+    }
+    
+    /**
+     * @param string $specificValueId
+     * @return \jtl\Connector\Model\SpecificValueI18n
+     */
+    public function setSpecificValueId($specificValueId)
+    {
+        $this->_specificValueId = (string)$specificValueId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getSpecificValueId()
+    {
+        return $this->_specificValueId;
+    }
+    
+    /**
+     * @param string $value
+     * @return \jtl\Connector\Model\SpecificValueI18n
+     */
+    public function setValue($value)
+    {
+        $this->_value = (string)$value;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->_value;
+    }
+    
+    /**
+     * @param string $urlPath
+     * @return \jtl\Connector\Model\SpecificValueI18n
+     */
+    public function setUrlPath($urlPath)
+    {
+        $this->_urlPath = (string)$urlPath;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getUrlPath()
+    {
+        return $this->_urlPath;
+    }
+    
+    /**
+     * @param string $description
+     * @return \jtl\Connector\Model\SpecificValueI18n
+     */
+    public function setDescription($description)
+    {
+        $this->_description = (string)$description;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->_description;
+    }
+    
+    /**
+     * @param string $metaDescription
+     * @return \jtl\Connector\Model\SpecificValueI18n
+     */
+    public function setMetaDescription($metaDescription)
+    {
+        $this->_metaDescription = (string)$metaDescription;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getMetaDescription()
+    {
+        return $this->_metaDescription;
+    }
+    
+    /**
+     * @param string $metaKeywords
+     * @return \jtl\Connector\Model\SpecificValueI18n
+     */
+    public function setMetaKeywords($metaKeywords)
+    {
+        $this->_metaKeywords = (string)$metaKeywords;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getMetaKeywords()
+    {
+        return $this->_metaKeywords;
+    }
+    
+    /**
+     * @param string $titleTag
+     * @return \jtl\Connector\Model\SpecificValueI18n
+     */
+    public function setTitleTag($titleTag)
+    {
+        $this->_titleTag = (string)$titleTag;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getTitleTag()
+    {
+        return $this->_titleTag;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -96,4 +240,3 @@ class SpecificValueI18n extends DataModel
     
     }
 }
-?>

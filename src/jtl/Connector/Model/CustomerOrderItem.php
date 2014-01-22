@@ -120,6 +120,222 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\CustomerOrderItem
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $productId
+     * @return \jtl\Connector\Model\CustomerOrderItem
+     */
+    public function setProductId($productId)
+    {
+        $this->_productId = (string)$productId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductId()
+    {
+        return $this->_productId;
+    }
+    
+    /**
+     * @param string $shippingClassId
+     * @return \jtl\Connector\Model\CustomerOrderItem
+     */
+    public function setShippingClassId($shippingClassId)
+    {
+        $this->_shippingClassId = (string)$shippingClassId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getShippingClassId()
+    {
+        return $this->_shippingClassId;
+    }
+    
+    /**
+     * @param string $customerOrderId
+     * @return \jtl\Connector\Model\CustomerOrderItem
+     */
+    public function setCustomerOrderId($customerOrderId)
+    {
+        $this->_customerOrderId = (string)$customerOrderId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCustomerOrderId()
+    {
+        return $this->_customerOrderId;
+    }
+    
+    /**
+     * @param string $name
+     * @return \jtl\Connector\Model\CustomerOrderItem
+     */
+    public function setName($name)
+    {
+        $this->_name = (string)$name;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+    
+    /**
+     * @param string $sku
+     * @return \jtl\Connector\Model\CustomerOrderItem
+     */
+    public function setSku($sku)
+    {
+        $this->_sku = (string)$sku;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getSku()
+    {
+        return $this->_sku;
+    }
+    
+    /**
+     * @param double $price
+     * @return \jtl\Connector\Model\CustomerOrderItem
+     */
+    public function setPrice($price)
+    {
+        $this->_price = (double)$price;
+        return $this;
+    }
+    
+    /**
+     * @return double
+     */
+    public function getPrice()
+    {
+        return $this->_price;
+    }
+    
+    /**
+     * @param double $vat
+     * @return \jtl\Connector\Model\CustomerOrderItem
+     */
+    public function setVat($vat)
+    {
+        $this->_vat = (double)$vat;
+        return $this;
+    }
+    
+    /**
+     * @return double
+     */
+    public function getVat()
+    {
+        return $this->_vat;
+    }
+    
+    /**
+     * @param int $quantity
+     * @return \jtl\Connector\Model\CustomerOrderItem
+     */
+    public function setQuantity($quantity)
+    {
+        $this->_quantity = (int)$quantity;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getQuantity()
+    {
+        return $this->_quantity;
+    }
+    
+    /**
+     * @param string $type
+     * @return \jtl\Connector\Model\CustomerOrderItem
+     */
+    public function setType($type)
+    {
+        $this->_type = (string)$type;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->_type;
+    }
+    
+    /**
+     * @param string $unique
+     * @return \jtl\Connector\Model\CustomerOrderItem
+     */
+    public function setUnique($unique)
+    {
+        $this->_unique = (string)$unique;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getUnique()
+    {
+        return $this->_unique;
+    }
+    
+    /**
+     * @param string $configItemId
+     * @return \jtl\Connector\Model\CustomerOrderItem
+     */
+    public function setConfigItemId($configItemId)
+    {
+        $this->_configItemId = (string)$configItemId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getConfigItemId()
+    {
+        return $this->_configItemId;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -128,4 +344,3 @@ class CustomerOrderItem extends DataModel
     
     }
 }
-?>

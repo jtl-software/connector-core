@@ -64,6 +64,78 @@ class CrossSelling extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\CrossSelling
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $crossSellingProductId
+     * @return \jtl\Connector\Model\CrossSelling
+     */
+    public function setCrossSellingProductId($crossSellingProductId)
+    {
+        $this->_crossSellingProductId = (string)$crossSellingProductId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCrossSellingProductId()
+    {
+        return $this->_crossSellingProductId;
+    }
+    
+    /**
+     * @param string $crossSellingGroupId
+     * @return \jtl\Connector\Model\CrossSelling
+     */
+    public function setCrossSellingGroupId($crossSellingGroupId)
+    {
+        $this->_crossSellingGroupId = (string)$crossSellingGroupId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCrossSellingGroupId()
+    {
+        return $this->_crossSellingGroupId;
+    }
+    
+    /**
+     * @param string $productId
+     * @return \jtl\Connector\Model\CrossSelling
+     */
+    public function setProductId($productId)
+    {
+        $this->_productId = (string)$productId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductId()
+    {
+        return $this->_productId;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -72,4 +144,3 @@ class CrossSelling extends DataModel
     
     }
 }
-?>

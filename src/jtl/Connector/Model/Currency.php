@@ -102,6 +102,168 @@ class Currency extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\Currency
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param string $name
+     * @return \jtl\Connector\Model\Currency
+     */
+    public function setName($name)
+    {
+        $this->_name = (string)$name;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+    
+    /**
+     * @param string $iso
+     * @return \jtl\Connector\Model\Currency
+     */
+    public function setIso($iso)
+    {
+        $this->_iso = (string)$iso;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getIso()
+    {
+        return $this->_iso;
+    }
+    
+    /**
+     * @param string $nameHtml
+     * @return \jtl\Connector\Model\Currency
+     */
+    public function setNameHtml($nameHtml)
+    {
+        $this->_nameHtml = (string)$nameHtml;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getNameHtml()
+    {
+        return $this->_nameHtml;
+    }
+    
+    /**
+     * @param double $factor
+     * @return \jtl\Connector\Model\Currency
+     */
+    public function setFactor($factor)
+    {
+        $this->_factor = (double)$factor;
+        return $this;
+    }
+    
+    /**
+     * @return double
+     */
+    public function getFactor()
+    {
+        return $this->_factor;
+    }
+    
+    /**
+     * @param bool $isDefault
+     * @return \jtl\Connector\Model\Currency
+     */
+    public function setIsDefault($isDefault)
+    {
+        $this->_isDefault = (bool)$isDefault;
+        return $this;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function getIsDefault()
+    {
+        return $this->_isDefault;
+    }
+    
+    /**
+     * @param bool $hasCurrencySignBeforeValue
+     * @return \jtl\Connector\Model\Currency
+     */
+    public function setHasCurrencySignBeforeValue($hasCurrencySignBeforeValue)
+    {
+        $this->_hasCurrencySignBeforeValue = (bool)$hasCurrencySignBeforeValue;
+        return $this;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function getHasCurrencySignBeforeValue()
+    {
+        return $this->_hasCurrencySignBeforeValue;
+    }
+    
+    /**
+     * @param string $delimiterCent
+     * @return \jtl\Connector\Model\Currency
+     */
+    public function setDelimiterCent($delimiterCent)
+    {
+        $this->_delimiterCent = (string)$delimiterCent;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getDelimiterCent()
+    {
+        return $this->_delimiterCent;
+    }
+    
+    /**
+     * @param string $delimiterThousand
+     * @return \jtl\Connector\Model\Currency
+     */
+    public function setDelimiterThousand($delimiterThousand)
+    {
+        $this->_delimiterThousand = (string)$delimiterThousand;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getDelimiterThousand()
+    {
+        return $this->_delimiterThousand;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -110,4 +272,3 @@ class Currency extends DataModel
     
     }
 }
-?>

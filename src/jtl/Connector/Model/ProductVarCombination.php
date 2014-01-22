@@ -58,6 +58,60 @@ class ProductVarCombination extends DataModel
     }
     
     /**
+     * @param string $productId
+     * @return \jtl\Connector\Model\ProductVarCombination
+     */
+    public function setProductId($productId)
+    {
+        $this->_productId = (string)$productId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductId()
+    {
+        return $this->_productId;
+    }
+    
+    /**
+     * @param string $productVariationId
+     * @return \jtl\Connector\Model\ProductVarCombination
+     */
+    public function setProductVariationId($productVariationId)
+    {
+        $this->_productVariationId = (string)$productVariationId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductVariationId()
+    {
+        return $this->_productVariationId;
+    }
+    
+    /**
+     * @param string $productVariationValueId
+     * @return \jtl\Connector\Model\ProductVarCombination
+     */
+    public function setProductVariationValueId($productVariationValueId)
+    {
+        $this->_productVariationValueId = (string)$productVariationValueId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getProductVariationValueId()
+    {
+        return $this->_productVariationValueId;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -66,4 +120,3 @@ class ProductVarCombination extends DataModel
     
     }
 }
-?>

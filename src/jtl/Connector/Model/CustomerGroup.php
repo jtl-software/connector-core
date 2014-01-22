@@ -72,6 +72,78 @@ class CustomerGroup extends DataModel
     }
     
     /**
+     * @param string $id
+     * @return \jtl\Connector\Model\CustomerGroup
+     */
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    /**
+     * @param double $discount
+     * @return \jtl\Connector\Model\CustomerGroup
+     */
+    public function setDiscount($discount)
+    {
+        $this->_discount = (double)$discount;
+        return $this;
+    }
+    
+    /**
+     * @return double
+     */
+    public function getDiscount()
+    {
+        return $this->_discount;
+    }
+    
+    /**
+     * @param bool $isDefault
+     * @return \jtl\Connector\Model\CustomerGroup
+     */
+    public function setIsDefault($isDefault)
+    {
+        $this->_isDefault = (bool)$isDefault;
+        return $this;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function getIsDefault()
+    {
+        return $this->_isDefault;
+    }
+    
+    /**
+     * @param bool $applyNetPrice
+     * @return \jtl\Connector\Model\CustomerGroup
+     */
+    public function setApplyNetPrice($applyNetPrice)
+    {
+        $this->_applyNetPrice = (bool)$applyNetPrice;
+        return $this;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function getApplyNetPrice()
+    {
+        return $this->_applyNetPrice;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -80,4 +152,3 @@ class CustomerGroup extends DataModel
     
     }
 }
-?>

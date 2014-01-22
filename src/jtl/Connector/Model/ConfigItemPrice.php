@@ -72,6 +72,78 @@ class ConfigItemPrice extends DataModel
     }
     
     /**
+     * @param string $configItemId
+     * @return \jtl\Connector\Model\ConfigItemPrice
+     */
+    public function setConfigItemId($configItemId)
+    {
+        $this->_configItemId = (string)$configItemId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getConfigItemId()
+    {
+        return $this->_configItemId;
+    }
+    
+    /**
+     * @param string $customerGroupId
+     * @return \jtl\Connector\Model\ConfigItemPrice
+     */
+    public function setCustomerGroupId($customerGroupId)
+    {
+        $this->_customerGroupId = (string)$customerGroupId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCustomerGroupId()
+    {
+        return $this->_customerGroupId;
+    }
+    
+    /**
+     * @param float $price
+     * @return \jtl\Connector\Model\ConfigItemPrice
+     */
+    public function setPrice($price)
+    {
+        $this->_price = (float)$price;
+        return $this;
+    }
+    
+    /**
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->_price;
+    }
+    
+    /**
+     * @param int $type
+     * @return \jtl\Connector\Model\ConfigItemPrice
+     */
+    public function setType($type)
+    {
+        $this->_type = (int)$type;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->_type;
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \jtl\Core\Model\DataModel::map()
      */ 
@@ -80,4 +152,3 @@ class ConfigItemPrice extends DataModel
     
     }
 }
-?>
