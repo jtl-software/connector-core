@@ -17,7 +17,7 @@ use \jtl\Core\Model\DataModel;
 class Warehouse extends DataModel
 {
     /**
-     * @var string - Unique warehouse id
+     * @var string Unique warehouse id
      */
     protected $_id = '';
     
@@ -46,7 +46,7 @@ class Warehouse extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique warehouse id
      * @return \jtl\Connector\Model\Warehouse
      */
     public function setId($id)
@@ -56,7 +56,7 @@ class Warehouse extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique warehouse id
      */
     public function getId()
     {

@@ -17,27 +17,27 @@ use \jtl\Core\Model\DataModel;
 class TaxRate extends DataModel
 {
     /**
-     * @var string - Unique taxRate id
+     * @var string Unique taxRate id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to taxZone
+     * @var string Reference to taxZone
      */
     protected $_taxZoneId = '';
     
     /**
-     * @var string - Reference to taxClass
+     * @var string Reference to taxClass
      */
     protected $_taxClassId = '';
     
     /**
-     * @var double - Tax rate value e.g. 19.00
+     * @var double Tax rate value e.g. 19.00
      */
     protected $_rate = 0.0;
     
     /**
-     * @var int - Optional priority number. Higher value means higher priority
+     * @var int Optional priority number. Higher value means higher priority
      */
     protected $_priority = 0;
     
@@ -78,7 +78,7 @@ class TaxRate extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique taxRate id
      * @return \jtl\Connector\Model\TaxRate
      */
     public function setId($id)
@@ -88,7 +88,7 @@ class TaxRate extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique taxRate id
      */
     public function getId()
     {
@@ -96,7 +96,7 @@ class TaxRate extends DataModel
     }
     
     /**
-     * @param string $taxZoneId
+     * @param string $taxZoneId Reference to taxZone
      * @return \jtl\Connector\Model\TaxRate
      */
     public function setTaxZoneId($taxZoneId)
@@ -106,7 +106,7 @@ class TaxRate extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to taxZone
      */
     public function getTaxZoneId()
     {
@@ -114,7 +114,7 @@ class TaxRate extends DataModel
     }
     
     /**
-     * @param string $taxClassId
+     * @param string $taxClassId Reference to taxClass
      * @return \jtl\Connector\Model\TaxRate
      */
     public function setTaxClassId($taxClassId)
@@ -124,7 +124,7 @@ class TaxRate extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to taxClass
      */
     public function getTaxClassId()
     {
@@ -132,7 +132,7 @@ class TaxRate extends DataModel
     }
     
     /**
-     * @param double $rate
+     * @param double $rate Tax rate value e.g. 19.00
      * @return \jtl\Connector\Model\TaxRate
      */
     public function setRate($rate)
@@ -142,7 +142,7 @@ class TaxRate extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Tax rate value e.g. 19.00
      */
     public function getRate()
     {
@@ -150,7 +150,7 @@ class TaxRate extends DataModel
     }
     
     /**
-     * @param int $priority
+     * @param int $priority Optional priority number. Higher value means higher priority
      * @return \jtl\Connector\Model\TaxRate
      */
     public function setPriority($priority)
@@ -160,7 +160,7 @@ class TaxRate extends DataModel
     }
     
     /**
-     * @return int
+     * @return int Optional priority number. Higher value means higher priority
      */
     public function getPriority()
     {

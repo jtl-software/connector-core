@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class FileDownloadI18n extends DataModel
 {
     /**
-     * @var string - Reference to fileDownloadId
+     * @var string Reference to fileDownloadId
      */
     protected $_fileDownloadId = '';
     
     /**
-     * @var string - Locale
+     * @var string Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string - File download title / name
+     * @var string File download title / name
      */
     protected $_name = '';
     
     /**
-     * @var string - Optional File download description
+     * @var string Optional File download description
      */
     protected $_description = '';
     
@@ -64,7 +64,7 @@ class FileDownloadI18n extends DataModel
     }
     
     /**
-     * @param string $fileDownloadId
+     * @param string $fileDownloadId Reference to fileDownloadId
      * @return \jtl\Connector\Model\FileDownloadI18n
      */
     public function setFileDownloadId($fileDownloadId)
@@ -74,7 +74,7 @@ class FileDownloadI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to fileDownloadId
      */
     public function getFileDownloadId()
     {
@@ -82,7 +82,7 @@ class FileDownloadI18n extends DataModel
     }
     
     /**
-     * @param string $localeName
+     * @param string $localeName Locale
      * @return \jtl\Connector\Model\FileDownloadI18n
      */
     public function setLocaleName($localeName)
@@ -92,7 +92,7 @@ class FileDownloadI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Locale
      */
     public function getLocaleName()
     {
@@ -100,7 +100,7 @@ class FileDownloadI18n extends DataModel
     }
     
     /**
-     * @param string $name
+     * @param string $name File download title / name
      * @return \jtl\Connector\Model\FileDownloadI18n
      */
     public function setName($name)
@@ -110,7 +110,7 @@ class FileDownloadI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string File download title / name
      */
     public function getName()
     {
@@ -118,7 +118,7 @@ class FileDownloadI18n extends DataModel
     }
     
     /**
-     * @param string $description
+     * @param string $description Optional File download description
      * @return \jtl\Connector\Model\FileDownloadI18n
      */
     public function setDescription($description)
@@ -128,7 +128,7 @@ class FileDownloadI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional File download description
      */
     public function getDescription()
     {

@@ -17,37 +17,37 @@ use \jtl\Core\Model\DataModel;
 class MediaFile extends DataModel
 {
     /**
-     * @var string - Unique MediaFile id
+     * @var string Unique MediaFile id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to product
+     * @var string Reference to product
      */
     protected $_productId = '';
     
     /**
-     * @var string - File path
+     * @var string File path
      */
     protected $_path = '';
     
     /**
-     * @var string - Complete URL
+     * @var string Complete URL
      */
     protected $_url = '';
     
     /**
-     * @var string - Optional media file category name
+     * @var string Optional media file category name
      */
     protected $_mediaFileCategory = '';
     
     /**
-     * @var string - Media file type e.g. "pdf"
+     * @var string Media file type e.g. "pdf"
      */
     protected $_type = '';
     
     /**
-     * @var int - Optional sort number
+     * @var int Optional sort number
      */
     protected $_sort = 0;
     
@@ -86,7 +86,7 @@ class MediaFile extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique MediaFile id
      * @return \jtl\Connector\Model\MediaFile
      */
     public function setId($id)
@@ -96,7 +96,7 @@ class MediaFile extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique MediaFile id
      */
     public function getId()
     {
@@ -104,7 +104,7 @@ class MediaFile extends DataModel
     }
     
     /**
-     * @param string $productId
+     * @param string $productId Reference to product
      * @return \jtl\Connector\Model\MediaFile
      */
     public function setProductId($productId)
@@ -114,7 +114,7 @@ class MediaFile extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to product
      */
     public function getProductId()
     {
@@ -122,7 +122,7 @@ class MediaFile extends DataModel
     }
     
     /**
-     * @param string $path
+     * @param string $path File path
      * @return \jtl\Connector\Model\MediaFile
      */
     public function setPath($path)
@@ -132,7 +132,7 @@ class MediaFile extends DataModel
     }
     
     /**
-     * @return string
+     * @return string File path
      */
     public function getPath()
     {
@@ -140,7 +140,7 @@ class MediaFile extends DataModel
     }
     
     /**
-     * @param string $url
+     * @param string $url Complete URL
      * @return \jtl\Connector\Model\MediaFile
      */
     public function setUrl($url)
@@ -150,7 +150,7 @@ class MediaFile extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Complete URL
      */
     public function getUrl()
     {
@@ -158,7 +158,7 @@ class MediaFile extends DataModel
     }
     
     /**
-     * @param string $mediaFileCategory
+     * @param string $mediaFileCategory Optional media file category name
      * @return \jtl\Connector\Model\MediaFile
      */
     public function setMediaFileCategory($mediaFileCategory)
@@ -168,7 +168,7 @@ class MediaFile extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional media file category name
      */
     public function getMediaFileCategory()
     {
@@ -176,7 +176,7 @@ class MediaFile extends DataModel
     }
     
     /**
-     * @param string $type
+     * @param string $type Media file type e.g. "pdf"
      * @return \jtl\Connector\Model\MediaFile
      */
     public function setType($type)
@@ -186,7 +186,7 @@ class MediaFile extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Media file type e.g. "pdf"
      */
     public function getType()
     {
@@ -194,7 +194,7 @@ class MediaFile extends DataModel
     }
     
     /**
-     * @param int $sort
+     * @param int $sort Optional sort number
      * @return \jtl\Connector\Model\MediaFile
      */
     public function setSort($sort)
@@ -204,7 +204,7 @@ class MediaFile extends DataModel
     }
     
     /**
-     * @return int
+     * @return int Optional sort number
      */
     public function getSort()
     {

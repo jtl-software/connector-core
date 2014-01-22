@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class ProductConfigGroup extends DataModel
 {
     /**
-     * @var string - Unique productConfigGroup id
+     * @var string Unique productConfigGroup id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to configGroup
+     * @var string Reference to configGroup
      */
     protected $_configGroupId = '';
     
     /**
-     * @var string - Reference to product
+     * @var string Reference to product
      */
     protected $_productId = '';
     
     /**
-     * @var int - Optional sort number
+     * @var int Optional sort number
      */
     protected $_sort = 0;
     
@@ -68,7 +68,7 @@ class ProductConfigGroup extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique productConfigGroup id
      * @return \jtl\Connector\Model\ProductConfigGroup
      */
     public function setId($id)
@@ -78,7 +78,7 @@ class ProductConfigGroup extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique productConfigGroup id
      */
     public function getId()
     {
@@ -86,7 +86,7 @@ class ProductConfigGroup extends DataModel
     }
     
     /**
-     * @param string $configGroupId
+     * @param string $configGroupId Reference to configGroup
      * @return \jtl\Connector\Model\ProductConfigGroup
      */
     public function setConfigGroupId($configGroupId)
@@ -96,7 +96,7 @@ class ProductConfigGroup extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to configGroup
      */
     public function getConfigGroupId()
     {
@@ -104,7 +104,7 @@ class ProductConfigGroup extends DataModel
     }
     
     /**
-     * @param string $productId
+     * @param string $productId Reference to product
      * @return \jtl\Connector\Model\ProductConfigGroup
      */
     public function setProductId($productId)
@@ -114,7 +114,7 @@ class ProductConfigGroup extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to product
      */
     public function getProductId()
     {
@@ -122,7 +122,7 @@ class ProductConfigGroup extends DataModel
     }
     
     /**
-     * @param int $sort
+     * @param int $sort Optional sort number
      * @return \jtl\Connector\Model\ProductConfigGroup
      */
     public function setSort($sort)
@@ -132,7 +132,7 @@ class ProductConfigGroup extends DataModel
     }
     
     /**
-     * @return int
+     * @return int Optional sort number
      */
     public function getSort()
     {

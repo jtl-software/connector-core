@@ -17,12 +17,12 @@ use \jtl\Core\Model\DataModel;
 class CategoryInvisibility extends DataModel
 {
     /**
-     * @var string - Reference to customerGroup that is not allowed to view categoryId
+     * @var string Reference to customerGroup that is not allowed to view categoryId
      */
     protected $_customerGroupId = '';
     
     /**
-     * @var string - Reference to category to hide from customerGroupId
+     * @var string Reference to category to hide from customerGroupId
      */
     protected $_categoryId = '';
     
@@ -52,7 +52,7 @@ class CategoryInvisibility extends DataModel
     }
     
     /**
-     * @param string $customerGroupId
+     * @param string $customerGroupId Reference to customerGroup that is not allowed to view categoryId
      * @return \jtl\Connector\Model\CategoryInvisibility
      */
     public function setCustomerGroupId($customerGroupId)
@@ -62,7 +62,7 @@ class CategoryInvisibility extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to customerGroup that is not allowed to view categoryId
      */
     public function getCustomerGroupId()
     {
@@ -70,7 +70,7 @@ class CategoryInvisibility extends DataModel
     }
     
     /**
-     * @param string $categoryId
+     * @param string $categoryId Reference to category to hide from customerGroupId
      * @return \jtl\Connector\Model\CategoryInvisibility
      */
     public function setCategoryId($categoryId)
@@ -80,7 +80,7 @@ class CategoryInvisibility extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to category to hide from customerGroupId
      */
     public function getCategoryId()
     {

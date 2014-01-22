@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class Unit extends DataModel
 {
     /**
-     * @var string - Unit id
+     * @var string Unit id
      */
     protected $_id = '';
     
     /**
-     * @var string - Locale
+     * @var string Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string - Localized unit name
+     * @var string Localized unit name
      */
     protected $_name = '';
     
@@ -58,7 +58,7 @@ class Unit extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unit id
      * @return \jtl\Connector\Model\Unit
      */
     public function setId($id)
@@ -68,7 +68,7 @@ class Unit extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unit id
      */
     public function getId()
     {
@@ -76,7 +76,7 @@ class Unit extends DataModel
     }
     
     /**
-     * @param string $localeName
+     * @param string $localeName Locale
      * @return \jtl\Connector\Model\Unit
      */
     public function setLocaleName($localeName)
@@ -86,7 +86,7 @@ class Unit extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Locale
      */
     public function getLocaleName()
     {
@@ -94,7 +94,7 @@ class Unit extends DataModel
     }
     
     /**
-     * @param string $name
+     * @param string $name Localized unit name
      * @return \jtl\Connector\Model\Unit
      */
     public function setName($name)
@@ -104,7 +104,7 @@ class Unit extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Localized unit name
      */
     public function getName()
     {

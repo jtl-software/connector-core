@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class ProductAttr extends DataModel
 {
     /**
-     * @var string - Unique productAttr id
+     * @var string Unique productAttr id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to product
+     * @var string Reference to product
      */
     protected $_productId = '';
     
     /**
-     * @var int - Optional sort number
+     * @var int Optional sort number
      */
     protected $_sort = 0;
     
@@ -62,7 +62,7 @@ class ProductAttr extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique productAttr id
      * @return \jtl\Connector\Model\ProductAttr
      */
     public function setId($id)
@@ -72,7 +72,7 @@ class ProductAttr extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique productAttr id
      */
     public function getId()
     {
@@ -80,7 +80,7 @@ class ProductAttr extends DataModel
     }
     
     /**
-     * @param string $productId
+     * @param string $productId Reference to product
      * @return \jtl\Connector\Model\ProductAttr
      */
     public function setProductId($productId)
@@ -90,7 +90,7 @@ class ProductAttr extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to product
      */
     public function getProductId()
     {
@@ -98,7 +98,7 @@ class ProductAttr extends DataModel
     }
     
     /**
-     * @param int $sort
+     * @param int $sort Optional sort number
      * @return \jtl\Connector\Model\ProductAttr
      */
     public function setSort($sort)
@@ -108,7 +108,7 @@ class ProductAttr extends DataModel
     }
     
     /**
-     * @return int
+     * @return int Optional sort number
      */
     public function getSort()
     {

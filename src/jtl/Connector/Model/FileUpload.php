@@ -17,32 +17,32 @@ use \jtl\Core\Model\DataModel;
 class FileUpload extends DataModel
 {
     /**
-     * @var string - Unique fileUpload id
+     * @var string Unique fileUpload id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to product
+     * @var string Reference to product
      */
     protected $_productId = '';
     
     /**
-     * @var string - Filename specification
+     * @var string Filename specification
      */
     protected $_name = '';
     
     /**
-     * @var string - Optional file description
+     * @var string Optional file description
      */
     protected $_description = '';
     
     /**
-     * @var string - Allowed file type
+     * @var string Allowed file type
      */
     protected $_fileType = '';
     
     /**
-     * @var bool - Optional flag to force upload before finishing checkout. True if file upload is required to buy product
+     * @var bool Optional flag to force upload before finishing checkout. True if file upload is required to buy product
      */
     protected $_isRequired = false;
     
@@ -80,7 +80,7 @@ class FileUpload extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique fileUpload id
      * @return \jtl\Connector\Model\FileUpload
      */
     public function setId($id)
@@ -90,7 +90,7 @@ class FileUpload extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique fileUpload id
      */
     public function getId()
     {
@@ -98,7 +98,7 @@ class FileUpload extends DataModel
     }
     
     /**
-     * @param string $productId
+     * @param string $productId Reference to product
      * @return \jtl\Connector\Model\FileUpload
      */
     public function setProductId($productId)
@@ -108,7 +108,7 @@ class FileUpload extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to product
      */
     public function getProductId()
     {
@@ -116,7 +116,7 @@ class FileUpload extends DataModel
     }
     
     /**
-     * @param string $name
+     * @param string $name Filename specification
      * @return \jtl\Connector\Model\FileUpload
      */
     public function setName($name)
@@ -126,7 +126,7 @@ class FileUpload extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Filename specification
      */
     public function getName()
     {
@@ -134,7 +134,7 @@ class FileUpload extends DataModel
     }
     
     /**
-     * @param string $description
+     * @param string $description Optional file description
      * @return \jtl\Connector\Model\FileUpload
      */
     public function setDescription($description)
@@ -144,7 +144,7 @@ class FileUpload extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional file description
      */
     public function getDescription()
     {
@@ -152,7 +152,7 @@ class FileUpload extends DataModel
     }
     
     /**
-     * @param string $fileType
+     * @param string $fileType Allowed file type
      * @return \jtl\Connector\Model\FileUpload
      */
     public function setFileType($fileType)
@@ -162,7 +162,7 @@ class FileUpload extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Allowed file type
      */
     public function getFileType()
     {
@@ -170,7 +170,7 @@ class FileUpload extends DataModel
     }
     
     /**
-     * @param bool $isRequired
+     * @param bool $isRequired Optional flag to force upload before finishing checkout. True if file upload is required to buy product
      * @return \jtl\Connector\Model\FileUpload
      */
     public function setIsRequired($isRequired)
@@ -180,7 +180,7 @@ class FileUpload extends DataModel
     }
     
     /**
-     * @return bool
+     * @return bool Optional flag to force upload before finishing checkout. True if file upload is required to buy product
      */
     public function getIsRequired()
     {

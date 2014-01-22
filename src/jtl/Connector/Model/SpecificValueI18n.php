@@ -17,42 +17,42 @@ use \jtl\Core\Model\DataModel;
 class SpecificValueI18n extends DataModel
 {
     /**
-     * @var string - locale
+     * @var string locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string - Reference to specificValue
+     * @var string Reference to specificValue
      */
     protected $_specificValueId = '';
     
     /**
-     * @var string - Localized value
+     * @var string Localized value
      */
     protected $_value = '';
     
     /**
-     * @var string - Optional localized URL path
+     * @var string Optional localized URL path
      */
     protected $_urlPath = '';
     
     /**
-     * @var string - Optional localized description
+     * @var string Optional localized description
      */
     protected $_description = '';
     
     /**
-     * @var string - Optional localized meta description value
+     * @var string Optional localized meta description value
      */
     protected $_metaDescription = '';
     
     /**
-     * @var string - Optional localized meta keywords value
+     * @var string Optional localized meta keywords value
      */
     protected $_metaKeywords = '';
     
     /**
-     * @var string - Optional localized title tag value
+     * @var string Optional localized title tag value
      */
     protected $_titleTag = '';
     
@@ -88,7 +88,7 @@ class SpecificValueI18n extends DataModel
     }
     
     /**
-     * @param string $localeName
+     * @param string $localeName locale
      * @return \jtl\Connector\Model\SpecificValueI18n
      */
     public function setLocaleName($localeName)
@@ -98,7 +98,7 @@ class SpecificValueI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string locale
      */
     public function getLocaleName()
     {
@@ -106,7 +106,7 @@ class SpecificValueI18n extends DataModel
     }
     
     /**
-     * @param string $specificValueId
+     * @param string $specificValueId Reference to specificValue
      * @return \jtl\Connector\Model\SpecificValueI18n
      */
     public function setSpecificValueId($specificValueId)
@@ -116,7 +116,7 @@ class SpecificValueI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to specificValue
      */
     public function getSpecificValueId()
     {
@@ -124,7 +124,7 @@ class SpecificValueI18n extends DataModel
     }
     
     /**
-     * @param string $value
+     * @param string $value Localized value
      * @return \jtl\Connector\Model\SpecificValueI18n
      */
     public function setValue($value)
@@ -134,7 +134,7 @@ class SpecificValueI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Localized value
      */
     public function getValue()
     {
@@ -142,7 +142,7 @@ class SpecificValueI18n extends DataModel
     }
     
     /**
-     * @param string $urlPath
+     * @param string $urlPath Optional localized URL path
      * @return \jtl\Connector\Model\SpecificValueI18n
      */
     public function setUrlPath($urlPath)
@@ -152,7 +152,7 @@ class SpecificValueI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional localized URL path
      */
     public function getUrlPath()
     {
@@ -160,7 +160,7 @@ class SpecificValueI18n extends DataModel
     }
     
     /**
-     * @param string $description
+     * @param string $description Optional localized description
      * @return \jtl\Connector\Model\SpecificValueI18n
      */
     public function setDescription($description)
@@ -170,7 +170,7 @@ class SpecificValueI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional localized description
      */
     public function getDescription()
     {
@@ -178,7 +178,7 @@ class SpecificValueI18n extends DataModel
     }
     
     /**
-     * @param string $metaDescription
+     * @param string $metaDescription Optional localized meta description value
      * @return \jtl\Connector\Model\SpecificValueI18n
      */
     public function setMetaDescription($metaDescription)
@@ -188,7 +188,7 @@ class SpecificValueI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional localized meta description value
      */
     public function getMetaDescription()
     {
@@ -196,7 +196,7 @@ class SpecificValueI18n extends DataModel
     }
     
     /**
-     * @param string $metaKeywords
+     * @param string $metaKeywords Optional localized meta keywords value
      * @return \jtl\Connector\Model\SpecificValueI18n
      */
     public function setMetaKeywords($metaKeywords)
@@ -206,7 +206,7 @@ class SpecificValueI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional localized meta keywords value
      */
     public function getMetaKeywords()
     {
@@ -214,7 +214,7 @@ class SpecificValueI18n extends DataModel
     }
     
     /**
-     * @param string $titleTag
+     * @param string $titleTag Optional localized title tag value
      * @return \jtl\Connector\Model\SpecificValueI18n
      */
     public function setTitleTag($titleTag)
@@ -224,7 +224,7 @@ class SpecificValueI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional localized title tag value
      */
     public function getTitleTag()
     {

@@ -32,32 +32,32 @@ class DeliveryNote extends DataModel
     const STATUS_COMPLETED = completed;
     
     /**
-     * @var string - Unique deliveryNote id
+     * @var string Unique deliveryNote id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to customerOrder
+     * @var string Reference to customerOrder
      */
     protected $_customerOrderId = '';
     
     /**
-     * @var string - Optional text note
+     * @var string Optional text note
      */
     protected $_note = '';
     
     /**
-     * @var string - Creation date
+     * @var string Creation date
      */
     protected $_created = '';
     
     /**
-     * @var bool - Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
+     * @var bool Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      */
     protected $_isFulfillment = false;
     
     /**
-     * @var int - Delivery status
+     * @var int Delivery status
      */
     protected $_status = 0;
     
@@ -99,7 +99,7 @@ class DeliveryNote extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique deliveryNote id
      * @return \jtl\Connector\Model\DeliveryNote
      */
     public function setId($id)
@@ -109,7 +109,7 @@ class DeliveryNote extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique deliveryNote id
      */
     public function getId()
     {
@@ -117,7 +117,7 @@ class DeliveryNote extends DataModel
     }
     
     /**
-     * @param string $customerOrderId
+     * @param string $customerOrderId Reference to customerOrder
      * @return \jtl\Connector\Model\DeliveryNote
      */
     public function setCustomerOrderId($customerOrderId)
@@ -127,7 +127,7 @@ class DeliveryNote extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to customerOrder
      */
     public function getCustomerOrderId()
     {
@@ -135,7 +135,7 @@ class DeliveryNote extends DataModel
     }
     
     /**
-     * @param string $note
+     * @param string $note Optional text note
      * @return \jtl\Connector\Model\DeliveryNote
      */
     public function setNote($note)
@@ -145,7 +145,7 @@ class DeliveryNote extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional text note
      */
     public function getNote()
     {
@@ -153,7 +153,7 @@ class DeliveryNote extends DataModel
     }
     
     /**
-     * @param string $created
+     * @param string $created Creation date
      * @return \jtl\Connector\Model\DeliveryNote
      */
     public function setCreated($created)
@@ -163,7 +163,7 @@ class DeliveryNote extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Creation date
      */
     public function getCreated()
     {
@@ -171,7 +171,7 @@ class DeliveryNote extends DataModel
     }
     
     /**
-     * @param bool $isFulfillment
+     * @param bool $isFulfillment Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      * @return \jtl\Connector\Model\DeliveryNote
      */
     public function setIsFulfillment($isFulfillment)
@@ -181,7 +181,7 @@ class DeliveryNote extends DataModel
     }
     
     /**
-     * @return bool
+     * @return bool Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      */
     public function getIsFulfillment()
     {
@@ -189,7 +189,7 @@ class DeliveryNote extends DataModel
     }
     
     /**
-     * @param int $status
+     * @param int $status Delivery status
      * @return \jtl\Connector\Model\DeliveryNote
      */
     public function setStatus($status)
@@ -199,7 +199,7 @@ class DeliveryNote extends DataModel
     }
     
     /**
-     * @return int
+     * @return int Delivery status
      */
     public function getStatus()
     {

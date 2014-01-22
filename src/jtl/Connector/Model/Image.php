@@ -17,32 +17,32 @@ use \jtl\Core\Model\DataModel;
 class Image extends DataModel
 {
     /**
-     * @var string - Unique image id
+     * @var string Unique image id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to master imageId
+     * @var string Reference to master imageId
      */
     protected $_masterImageId = '';
     
     /**
-     * @var string - Allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
+     * @var string Allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
      */
     protected $_relationType = 'product';
     
     /**
-     * @var int - Foreign key dependent on relationType
+     * @var int Foreign key dependent on relationType
      */
     protected $_foreignKey = 0;
     
     /**
-     * @var string - Filename or path
+     * @var string Filename or path
      */
     protected $_filename = '';
     
     /**
-     * @var int - Optional sort number
+     * @var int Optional sort number
      */
     protected $_sort = 0;
     
@@ -80,7 +80,7 @@ class Image extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique image id
      * @return \jtl\Connector\Model\Image
      */
     public function setId($id)
@@ -90,7 +90,7 @@ class Image extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique image id
      */
     public function getId()
     {
@@ -98,7 +98,7 @@ class Image extends DataModel
     }
     
     /**
-     * @param string $masterImageId
+     * @param string $masterImageId Reference to master imageId
      * @return \jtl\Connector\Model\Image
      */
     public function setMasterImageId($masterImageId)
@@ -108,7 +108,7 @@ class Image extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to master imageId
      */
     public function getMasterImageId()
     {
@@ -116,7 +116,7 @@ class Image extends DataModel
     }
     
     /**
-     * @param string $relationType
+     * @param string $relationType Allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
      * @return \jtl\Connector\Model\Image
      */
     public function setRelationType($relationType)
@@ -126,7 +126,7 @@ class Image extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
      */
     public function getRelationType()
     {
@@ -134,7 +134,7 @@ class Image extends DataModel
     }
     
     /**
-     * @param int $foreignKey
+     * @param int $foreignKey Foreign key dependent on relationType
      * @return \jtl\Connector\Model\Image
      */
     public function setForeignKey($foreignKey)
@@ -144,7 +144,7 @@ class Image extends DataModel
     }
     
     /**
-     * @return int
+     * @return int Foreign key dependent on relationType
      */
     public function getForeignKey()
     {
@@ -152,7 +152,7 @@ class Image extends DataModel
     }
     
     /**
-     * @param string $filename
+     * @param string $filename Filename or path
      * @return \jtl\Connector\Model\Image
      */
     public function setFilename($filename)
@@ -162,7 +162,7 @@ class Image extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Filename or path
      */
     public function getFilename()
     {
@@ -170,7 +170,7 @@ class Image extends DataModel
     }
     
     /**
-     * @param int $sort
+     * @param int $sort Optional sort number
      * @return \jtl\Connector\Model\Image
      */
     public function setSort($sort)
@@ -180,7 +180,7 @@ class Image extends DataModel
     }
     
     /**
-     * @return int
+     * @return int Optional sort number
      */
     public function getSort()
     {

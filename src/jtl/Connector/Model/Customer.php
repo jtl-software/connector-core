@@ -17,167 +17,167 @@ use \jtl\Core\Model\DataModel;
 class Customer extends DataModel
 {
     /**
-     * @var string - Unique customer id
+     * @var string Unique customer id
      */
     protected $_id = '';
     
     /**
-     * @var string - References a customer group
+     * @var string References a customer group
      */
     protected $_customerGroupId = '';
     
     /**
-     * @var string - User locale preference
+     * @var string User locale preference
      */
     protected $_localeName = '';
     
     /**
-     * @var string - Optional customer number set by JTL-Wawi ERP software
+     * @var string Optional customer number set by JTL-Wawi ERP software
      */
     protected $_customerNumber = '';
     
     /**
-     * @var string - Optional (encrypted!) customer password
+     * @var string Optional (encrypted!) customer password
      */
     protected $_password = '';
     
     /**
-     * @var string - Salutation (german: "Anrede")
+     * @var string Salutation (german: "Anrede")
      */
     protected $_salutation = '';
     
     /**
-     * @var string - Title, e.g. "Prof. Dr."
+     * @var string Title, e.g. "Prof. Dr."
      */
     protected $_title = '';
     
     /**
-     * @var string - First name
+     * @var string First name
      */
     protected $_firstName = '';
     
     /**
-     * @var string - Last name
+     * @var string Last name
      */
     protected $_lastName = '';
     
     /**
-     * @var string - Company name
+     * @var string Company name
      */
     protected $_company = '';
     
     /**
-     * @var string - Street name
+     * @var string Street name
      */
     protected $_street = '';
     
     /**
-     * @var string - Delivery instruction e.g. "c/o John Doe"
+     * @var string Delivery instruction e.g. "c/o John Doe"
      */
     protected $_deliveryInstruction = '';
     
     /**
-     * @var string - Extra address line e.g. "Apartment 2.5"
+     * @var string Extra address line e.g. "Apartment 2.5"
      */
     protected $_extraAddressLine = '';
     
     /**
-     * @var string - ZIP / postal code
+     * @var string ZIP / postal code
      */
     protected $_zipCode = '';
     
     /**
-     * @var string - City
+     * @var string City
      */
     protected $_city = '';
     
     /**
-     * @var string - State
+     * @var string State
      */
     protected $_state = '';
     
     /**
-     * @var string - Country ISO 3166-2 (2 letter Uppercase)
+     * @var string Country ISO 3166-2 (2 letter Uppercase)
      */
     protected $_countryIso = '';
     
     /**
-     * @var string - Phone number
+     * @var string Phone number
      */
     protected $_phone = '';
     
     /**
-     * @var string - Mobile phone number
+     * @var string Mobile phone number
      */
     protected $_mobile = '';
     
     /**
-     * @var string - Fax number
+     * @var string Fax number
      */
     protected $_fax = '';
     
     /**
-     * @var string - E-Mail address
+     * @var string E-Mail address
      */
     protected $_eMail = '';
     
     /**
-     * @var string - VAT number (german "USt-ID")
+     * @var string VAT number (german "USt-ID")
      */
     protected $_vatNumber = '';
     
     /**
-     * @var string - WWW address
+     * @var string WWW address
      */
     protected $_www = '';
     
     /**
-     * @var double - Credit value on customer account in default currency
+     * @var double Credit value on customer account in default currency
      */
     protected $_accountCredit = 0.0;
     
     /**
-     * @var bool - Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
+     * @var bool Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
      */
     protected $_hasNewsletterSubscription = false;
     
     /**
-     * @var string - Date of birth
+     * @var string Date of birth
      */
     protected $_birthday = '';
     
     /**
-     * @var double - Percentual discount for customer on all prices
+     * @var double Percentual discount for customer on all prices
      */
     protected $_discount = 0.0;
     
     /**
-     * @var string - Customer origin
+     * @var string Customer origin
      */
     protected $_origin = '';
     
     /**
-     * @var string - Creation date
+     * @var string Creation date
      */
     protected $_created = '';
     
     /**
-     * @var string - Last modified date
+     * @var string Last modified date
      */
     protected $_modified = '';
     
     /**
-     * @var bool - Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
+     * @var bool Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
      */
     protected $_isActive = true;
     
     /**
-     * @var bool - Flag if customer is fetched by ERP System. True, if customer is already fetched and must not be fetched again. 
+     * @var bool Flag if customer is fetched by ERP System. True, if customer is already fetched and must not be fetched again. 
      */
     protected $_isFetched = false;
     
     /**
-     * @var bool - Flag persistent customer account. True, if customer chose to create persistent customer account. False, if customer doesnt want to have his data stored for login-purposes.
+     * @var bool Flag persistent customer account. True, if customer chose to create persistent customer account. False, if customer doesnt want to have his data stored for login-purposes.
      */
     protected $_hasCustomerAccount = false;
     
@@ -246,7 +246,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique customer id
      * @return \jtl\Connector\Model\Customer
      */
     public function setId($id)
@@ -256,7 +256,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique customer id
      */
     public function getId()
     {
@@ -264,7 +264,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $customerGroupId
+     * @param string $customerGroupId References a customer group
      * @return \jtl\Connector\Model\Customer
      */
     public function setCustomerGroupId($customerGroupId)
@@ -274,7 +274,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string References a customer group
      */
     public function getCustomerGroupId()
     {
@@ -282,7 +282,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $localeName
+     * @param string $localeName User locale preference
      * @return \jtl\Connector\Model\Customer
      */
     public function setLocaleName($localeName)
@@ -292,7 +292,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string User locale preference
      */
     public function getLocaleName()
     {
@@ -300,7 +300,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $customerNumber
+     * @param string $customerNumber Optional customer number set by JTL-Wawi ERP software
      * @return \jtl\Connector\Model\Customer
      */
     public function setCustomerNumber($customerNumber)
@@ -310,7 +310,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional customer number set by JTL-Wawi ERP software
      */
     public function getCustomerNumber()
     {
@@ -318,7 +318,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $password
+     * @param string $password Optional (encrypted!) customer password
      * @return \jtl\Connector\Model\Customer
      */
     public function setPassword($password)
@@ -328,7 +328,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional (encrypted!) customer password
      */
     public function getPassword()
     {
@@ -336,7 +336,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $salutation
+     * @param string $salutation Salutation (german: "Anrede")
      * @return \jtl\Connector\Model\Customer
      */
     public function setSalutation($salutation)
@@ -346,7 +346,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Salutation (german: "Anrede")
      */
     public function getSalutation()
     {
@@ -354,7 +354,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $title
+     * @param string $title Title, e.g. "Prof. Dr."
      * @return \jtl\Connector\Model\Customer
      */
     public function setTitle($title)
@@ -364,7 +364,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Title, e.g. "Prof. Dr."
      */
     public function getTitle()
     {
@@ -372,7 +372,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $firstName
+     * @param string $firstName First name
      * @return \jtl\Connector\Model\Customer
      */
     public function setFirstName($firstName)
@@ -382,7 +382,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string First name
      */
     public function getFirstName()
     {
@@ -390,7 +390,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $lastName
+     * @param string $lastName Last name
      * @return \jtl\Connector\Model\Customer
      */
     public function setLastName($lastName)
@@ -400,7 +400,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Last name
      */
     public function getLastName()
     {
@@ -408,7 +408,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $company
+     * @param string $company Company name
      * @return \jtl\Connector\Model\Customer
      */
     public function setCompany($company)
@@ -418,7 +418,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Company name
      */
     public function getCompany()
     {
@@ -426,7 +426,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $street
+     * @param string $street Street name
      * @return \jtl\Connector\Model\Customer
      */
     public function setStreet($street)
@@ -436,7 +436,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Street name
      */
     public function getStreet()
     {
@@ -444,7 +444,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $deliveryInstruction
+     * @param string $deliveryInstruction Delivery instruction e.g. "c/o John Doe"
      * @return \jtl\Connector\Model\Customer
      */
     public function setDeliveryInstruction($deliveryInstruction)
@@ -454,7 +454,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Delivery instruction e.g. "c/o John Doe"
      */
     public function getDeliveryInstruction()
     {
@@ -462,7 +462,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $extraAddressLine
+     * @param string $extraAddressLine Extra address line e.g. "Apartment 2.5"
      * @return \jtl\Connector\Model\Customer
      */
     public function setExtraAddressLine($extraAddressLine)
@@ -472,7 +472,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Extra address line e.g. "Apartment 2.5"
      */
     public function getExtraAddressLine()
     {
@@ -480,7 +480,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $zipCode
+     * @param string $zipCode ZIP / postal code
      * @return \jtl\Connector\Model\Customer
      */
     public function setZipCode($zipCode)
@@ -490,7 +490,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string ZIP / postal code
      */
     public function getZipCode()
     {
@@ -498,7 +498,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $city
+     * @param string $city City
      * @return \jtl\Connector\Model\Customer
      */
     public function setCity($city)
@@ -508,7 +508,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string City
      */
     public function getCity()
     {
@@ -516,7 +516,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $state
+     * @param string $state State
      * @return \jtl\Connector\Model\Customer
      */
     public function setState($state)
@@ -526,7 +526,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string State
      */
     public function getState()
     {
@@ -534,7 +534,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $countryIso
+     * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
      * @return \jtl\Connector\Model\Customer
      */
     public function setCountryIso($countryIso)
@@ -544,7 +544,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Country ISO 3166-2 (2 letter Uppercase)
      */
     public function getCountryIso()
     {
@@ -552,7 +552,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $phone
+     * @param string $phone Phone number
      * @return \jtl\Connector\Model\Customer
      */
     public function setPhone($phone)
@@ -562,7 +562,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Phone number
      */
     public function getPhone()
     {
@@ -570,7 +570,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $mobile
+     * @param string $mobile Mobile phone number
      * @return \jtl\Connector\Model\Customer
      */
     public function setMobile($mobile)
@@ -580,7 +580,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Mobile phone number
      */
     public function getMobile()
     {
@@ -588,7 +588,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $fax
+     * @param string $fax Fax number
      * @return \jtl\Connector\Model\Customer
      */
     public function setFax($fax)
@@ -598,7 +598,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Fax number
      */
     public function getFax()
     {
@@ -606,7 +606,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $eMail
+     * @param string $eMail E-Mail address
      * @return \jtl\Connector\Model\Customer
      */
     public function setEMail($eMail)
@@ -616,7 +616,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string E-Mail address
      */
     public function getEMail()
     {
@@ -624,7 +624,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $vatNumber
+     * @param string $vatNumber VAT number (german "USt-ID")
      * @return \jtl\Connector\Model\Customer
      */
     public function setVatNumber($vatNumber)
@@ -634,7 +634,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string VAT number (german "USt-ID")
      */
     public function getVatNumber()
     {
@@ -642,7 +642,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $www
+     * @param string $www WWW address
      * @return \jtl\Connector\Model\Customer
      */
     public function setWww($www)
@@ -652,7 +652,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string WWW address
      */
     public function getWww()
     {
@@ -660,7 +660,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param double $accountCredit
+     * @param double $accountCredit Credit value on customer account in default currency
      * @return \jtl\Connector\Model\Customer
      */
     public function setAccountCredit($accountCredit)
@@ -670,7 +670,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Credit value on customer account in default currency
      */
     public function getAccountCredit()
     {
@@ -678,7 +678,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param bool $hasNewsletterSubscription
+     * @param bool $hasNewsletterSubscription Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
      * @return \jtl\Connector\Model\Customer
      */
     public function setHasNewsletterSubscription($hasNewsletterSubscription)
@@ -688,7 +688,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return bool
+     * @return bool Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
      */
     public function getHasNewsletterSubscription()
     {
@@ -696,7 +696,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $birthday
+     * @param string $birthday Date of birth
      * @return \jtl\Connector\Model\Customer
      */
     public function setBirthday($birthday)
@@ -706,7 +706,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Date of birth
      */
     public function getBirthday()
     {
@@ -714,7 +714,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param double $discount
+     * @param double $discount Percentual discount for customer on all prices
      * @return \jtl\Connector\Model\Customer
      */
     public function setDiscount($discount)
@@ -724,7 +724,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Percentual discount for customer on all prices
      */
     public function getDiscount()
     {
@@ -732,7 +732,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $origin
+     * @param string $origin Customer origin
      * @return \jtl\Connector\Model\Customer
      */
     public function setOrigin($origin)
@@ -742,7 +742,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Customer origin
      */
     public function getOrigin()
     {
@@ -750,7 +750,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $created
+     * @param string $created Creation date
      * @return \jtl\Connector\Model\Customer
      */
     public function setCreated($created)
@@ -760,7 +760,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Creation date
      */
     public function getCreated()
     {
@@ -768,7 +768,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $modified
+     * @param string $modified Last modified date
      * @return \jtl\Connector\Model\Customer
      */
     public function setModified($modified)
@@ -778,7 +778,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Last modified date
      */
     public function getModified()
     {
@@ -786,7 +786,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param bool $isActive
+     * @param bool $isActive Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
      * @return \jtl\Connector\Model\Customer
      */
     public function setIsActive($isActive)
@@ -796,7 +796,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return bool
+     * @return bool Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
      */
     public function getIsActive()
     {
@@ -804,7 +804,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param bool $isFetched
+     * @param bool $isFetched Flag if customer is fetched by ERP System. True, if customer is already fetched and must not be fetched again. 
      * @return \jtl\Connector\Model\Customer
      */
     public function setIsFetched($isFetched)
@@ -814,7 +814,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return bool
+     * @return bool Flag if customer is fetched by ERP System. True, if customer is already fetched and must not be fetched again. 
      */
     public function getIsFetched()
     {
@@ -822,7 +822,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @param bool $hasCustomerAccount
+     * @param bool $hasCustomerAccount Flag persistent customer account. True, if customer chose to create persistent customer account. False, if customer doesnt want to have his data stored for login-purposes.
      * @return \jtl\Connector\Model\Customer
      */
     public function setHasCustomerAccount($hasCustomerAccount)
@@ -832,7 +832,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return bool
+     * @return bool Flag persistent customer account. True, if customer chose to create persistent customer account. False, if customer doesnt want to have his data stored for login-purposes.
      */
     public function getHasCustomerAccount()
     {

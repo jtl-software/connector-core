@@ -17,12 +17,12 @@ use \jtl\Core\Model\DataModel;
 class TaxZone extends DataModel
 {
     /**
-     * @var string - Unique taxZone id
+     * @var string Unique taxZone id
      */
     protected $_id = '';
     
     /**
-     * @var string - Optional tax zone name e.g. "EU Zone"
+     * @var string Optional tax zone name e.g. "EU Zone"
      */
     protected $_name = '';
     
@@ -52,7 +52,7 @@ class TaxZone extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique taxZone id
      * @return \jtl\Connector\Model\TaxZone
      */
     public function setId($id)
@@ -62,7 +62,7 @@ class TaxZone extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique taxZone id
      */
     public function getId()
     {
@@ -70,7 +70,7 @@ class TaxZone extends DataModel
     }
     
     /**
-     * @param string $name
+     * @param string $name Optional tax zone name e.g. "EU Zone"
      * @return \jtl\Connector\Model\TaxZone
      */
     public function setName($name)
@@ -80,7 +80,7 @@ class TaxZone extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional tax zone name e.g. "EU Zone"
      */
     public function getName()
     {

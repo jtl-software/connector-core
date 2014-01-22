@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class SetArticle extends DataModel
 {
     /**
-     * @var string - Unique setArticle id, referenced by product.setArticleId
+     * @var string Unique setArticle id, referenced by product.setArticleId
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to a component / product
+     * @var string Reference to a component / product
      */
     protected $_productId = '';
     
     /**
-     * @var double - Component quantity
+     * @var double Component quantity
      */
     protected $_quantity = 0.0;
     
@@ -62,7 +62,7 @@ class SetArticle extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique setArticle id, referenced by product.setArticleId
      * @return \jtl\Connector\Model\SetArticle
      */
     public function setId($id)
@@ -72,7 +72,7 @@ class SetArticle extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique setArticle id, referenced by product.setArticleId
      */
     public function getId()
     {
@@ -80,7 +80,7 @@ class SetArticle extends DataModel
     }
     
     /**
-     * @param string $productId
+     * @param string $productId Reference to a component / product
      * @return \jtl\Connector\Model\SetArticle
      */
     public function setProductId($productId)
@@ -90,7 +90,7 @@ class SetArticle extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to a component / product
      */
     public function getProductId()
     {
@@ -98,7 +98,7 @@ class SetArticle extends DataModel
     }
     
     /**
-     * @param double $quantity
+     * @param double $quantity Component quantity
      * @return \jtl\Connector\Model\SetArticle
      */
     public function setQuantity($quantity)
@@ -108,7 +108,7 @@ class SetArticle extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Component quantity
      */
     public function getQuantity()
     {

@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class CustomerAttr extends DataModel
 {
     /**
-     * @var string - Unique customerAttr id
+     * @var string Unique customerAttr id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to customer
+     * @var string Reference to customer
      */
     protected $_customerId = '';
     
     /**
-     * @var string - Attribute key
+     * @var string Attribute key
      */
     protected $_key = '';
     
     /**
-     * @var string - Attribute value
+     * @var string Attribute value
      */
     protected $_value = '';
     
@@ -64,7 +64,7 @@ class CustomerAttr extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique customerAttr id
      * @return \jtl\Connector\Model\CustomerAttr
      */
     public function setId($id)
@@ -74,7 +74,7 @@ class CustomerAttr extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique customerAttr id
      */
     public function getId()
     {
@@ -82,7 +82,7 @@ class CustomerAttr extends DataModel
     }
     
     /**
-     * @param string $customerId
+     * @param string $customerId Reference to customer
      * @return \jtl\Connector\Model\CustomerAttr
      */
     public function setCustomerId($customerId)
@@ -92,7 +92,7 @@ class CustomerAttr extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to customer
      */
     public function getCustomerId()
     {
@@ -100,7 +100,7 @@ class CustomerAttr extends DataModel
     }
     
     /**
-     * @param string $key
+     * @param string $key Attribute key
      * @return \jtl\Connector\Model\CustomerAttr
      */
     public function setKey($key)
@@ -110,7 +110,7 @@ class CustomerAttr extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Attribute key
      */
     public function getKey()
     {
@@ -118,7 +118,7 @@ class CustomerAttr extends DataModel
     }
     
     /**
-     * @param string $value
+     * @param string $value Attribute value
      * @return \jtl\Connector\Model\CustomerAttr
      */
     public function setValue($value)
@@ -128,7 +128,7 @@ class CustomerAttr extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Attribute value
      */
     public function getValue()
     {

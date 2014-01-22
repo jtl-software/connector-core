@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class CategoryAttrI18n extends DataModel
 {
     /**
-     * @var string - Locale
+     * @var string Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string - Reference to categoryAttr
+     * @var string Reference to categoryAttr
      */
     protected $_categoryAttrId = '';
     
     /**
-     * @var string - Attribute key
+     * @var string Attribute key
      */
     protected $_key = '';
     
     /**
-     * @var string - Attribute value
+     * @var string Attribute value
      */
     protected $_value = '';
     
@@ -64,7 +64,7 @@ class CategoryAttrI18n extends DataModel
     }
     
     /**
-     * @param string $localeName
+     * @param string $localeName Locale
      * @return \jtl\Connector\Model\CategoryAttrI18n
      */
     public function setLocaleName($localeName)
@@ -74,7 +74,7 @@ class CategoryAttrI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Locale
      */
     public function getLocaleName()
     {
@@ -82,7 +82,7 @@ class CategoryAttrI18n extends DataModel
     }
     
     /**
-     * @param string $categoryAttrId
+     * @param string $categoryAttrId Reference to categoryAttr
      * @return \jtl\Connector\Model\CategoryAttrI18n
      */
     public function setCategoryAttrId($categoryAttrId)
@@ -92,7 +92,7 @@ class CategoryAttrI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to categoryAttr
      */
     public function getCategoryAttrId()
     {
@@ -100,7 +100,7 @@ class CategoryAttrI18n extends DataModel
     }
     
     /**
-     * @param string $key
+     * @param string $key Attribute key
      * @return \jtl\Connector\Model\CategoryAttrI18n
      */
     public function setKey($key)
@@ -110,7 +110,7 @@ class CategoryAttrI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Attribute key
      */
     public function getKey()
     {
@@ -118,7 +118,7 @@ class CategoryAttrI18n extends DataModel
     }
     
     /**
-     * @param string $value
+     * @param string $value Attribute value
      * @return \jtl\Connector\Model\CategoryAttrI18n
      */
     public function setValue($value)
@@ -128,7 +128,7 @@ class CategoryAttrI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Attribute value
      */
     public function getValue()
     {

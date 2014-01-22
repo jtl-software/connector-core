@@ -17,37 +17,37 @@ use \jtl\Core\Model\DataModel;
 class ConfigGroup extends DataModel
 {
     /**
-     * @var string - Unique configGroup id
+     * @var string Unique configGroup id
      */
     protected $_id = '';
     
     /**
-     * @var string - Optional image file path
+     * @var string Optional image file path
      */
     protected $_imagePath = '';
     
     /**
-     * @var int - Optional minimum number required selections. Default 0 for no minimum requirement. 
+     * @var int Optional minimum number required selections. Default 0 for no minimum requirement. 
      */
     protected $_minimumSelection = 0;
     
     /**
-     * @var int - Optional maximum number allowed selections. Default 0 for no maximum limitation.
+     * @var int Optional maximum number allowed selections. Default 0 for no maximum limitation.
      */
     protected $_maximumSelection = 0;
     
     /**
-     * @var int - Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
+     * @var int Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      */
     protected $_type = 0;
     
     /**
-     * @var int - Optional sort order number
+     * @var int Optional sort order number
      */
     protected $_sort = 0;
     
     /**
-     * @var string - Optional internal comment to differantiate config groups by comment name
+     * @var string Optional internal comment to differantiate config groups by comment name
      */
     protected $_comment = '';
     
@@ -86,7 +86,7 @@ class ConfigGroup extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique configGroup id
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function setId($id)
@@ -96,7 +96,7 @@ class ConfigGroup extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique configGroup id
      */
     public function getId()
     {
@@ -104,7 +104,7 @@ class ConfigGroup extends DataModel
     }
     
     /**
-     * @param string $imagePath
+     * @param string $imagePath Optional image file path
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function setImagePath($imagePath)
@@ -114,7 +114,7 @@ class ConfigGroup extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional image file path
      */
     public function getImagePath()
     {
@@ -122,7 +122,7 @@ class ConfigGroup extends DataModel
     }
     
     /**
-     * @param int $minimumSelection
+     * @param int $minimumSelection Optional minimum number required selections. Default 0 for no minimum requirement. 
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function setMinimumSelection($minimumSelection)
@@ -132,7 +132,7 @@ class ConfigGroup extends DataModel
     }
     
     /**
-     * @return int
+     * @return int Optional minimum number required selections. Default 0 for no minimum requirement. 
      */
     public function getMinimumSelection()
     {
@@ -140,7 +140,7 @@ class ConfigGroup extends DataModel
     }
     
     /**
-     * @param int $maximumSelection
+     * @param int $maximumSelection Optional maximum number allowed selections. Default 0 for no maximum limitation.
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function setMaximumSelection($maximumSelection)
@@ -150,7 +150,7 @@ class ConfigGroup extends DataModel
     }
     
     /**
-     * @return int
+     * @return int Optional maximum number allowed selections. Default 0 for no maximum limitation.
      */
     public function getMaximumSelection()
     {
@@ -158,7 +158,7 @@ class ConfigGroup extends DataModel
     }
     
     /**
-     * @param int $type
+     * @param int $type Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function setType($type)
@@ -168,7 +168,7 @@ class ConfigGroup extends DataModel
     }
     
     /**
-     * @return int
+     * @return int Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      */
     public function getType()
     {
@@ -176,7 +176,7 @@ class ConfigGroup extends DataModel
     }
     
     /**
-     * @param int $sort
+     * @param int $sort Optional sort order number
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function setSort($sort)
@@ -186,7 +186,7 @@ class ConfigGroup extends DataModel
     }
     
     /**
-     * @return int
+     * @return int Optional sort order number
      */
     public function getSort()
     {
@@ -194,7 +194,7 @@ class ConfigGroup extends DataModel
     }
     
     /**
-     * @param string $comment
+     * @param string $comment Optional internal comment to differantiate config groups by comment name
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function setComment($comment)
@@ -204,7 +204,7 @@ class ConfigGroup extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional internal comment to differantiate config groups by comment name
      */
     public function getComment()
     {

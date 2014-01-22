@@ -17,12 +17,12 @@ use \jtl\Core\Model\DataModel;
 class ProductFileDownload extends DataModel
 {
     /**
-     * @var string - Reference to product
+     * @var string Reference to product
      */
     protected $_productId = '';
     
     /**
-     * @var string - Reference to fileDownload
+     * @var string Reference to fileDownload
      */
     protected $_fileDownloadId = '';
     
@@ -52,7 +52,7 @@ class ProductFileDownload extends DataModel
     }
     
     /**
-     * @param string $productId
+     * @param string $productId Reference to product
      * @return \jtl\Connector\Model\ProductFileDownload
      */
     public function setProductId($productId)
@@ -62,7 +62,7 @@ class ProductFileDownload extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to product
      */
     public function getProductId()
     {
@@ -70,7 +70,7 @@ class ProductFileDownload extends DataModel
     }
     
     /**
-     * @param string $fileDownloadId
+     * @param string $fileDownloadId Reference to fileDownload
      * @return \jtl\Connector\Model\ProductFileDownload
      */
     public function setFileDownloadId($fileDownloadId)
@@ -80,7 +80,7 @@ class ProductFileDownload extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to fileDownload
      */
     public function getFileDownloadId()
     {

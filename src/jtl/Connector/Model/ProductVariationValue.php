@@ -17,32 +17,32 @@ use \jtl\Core\Model\DataModel;
 class ProductVariationValue extends DataModel
 {
     /**
-     * @var string - Unique productVariationValue id
+     * @var string Unique productVariationValue id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to productVariation
+     * @var string Reference to productVariation
      */
     protected $_productVariationId = '';
     
     /**
-     * @var double - Optional variation extra weight
+     * @var double Optional variation extra weight
      */
     protected $_extraWeight = 0;
     
     /**
-     * @var string - Optional Stock Keeping Unit
+     * @var string Optional Stock Keeping Unit
      */
     protected $_sku = '';
     
     /**
-     * @var int - Optional sort number
+     * @var int Optional sort number
      */
     protected $_sort = 0;
     
     /**
-     * @var double - Optional stock level
+     * @var double Optional stock level
      */
     protected $_stockLevel = 0.0;
     
@@ -84,7 +84,7 @@ class ProductVariationValue extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique productVariationValue id
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setId($id)
@@ -94,7 +94,7 @@ class ProductVariationValue extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique productVariationValue id
      */
     public function getId()
     {
@@ -102,7 +102,7 @@ class ProductVariationValue extends DataModel
     }
     
     /**
-     * @param string $productVariationId
+     * @param string $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setProductVariationId($productVariationId)
@@ -112,7 +112,7 @@ class ProductVariationValue extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to productVariation
      */
     public function getProductVariationId()
     {
@@ -120,7 +120,7 @@ class ProductVariationValue extends DataModel
     }
     
     /**
-     * @param double $extraWeight
+     * @param double $extraWeight Optional variation extra weight
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setExtraWeight($extraWeight)
@@ -130,7 +130,7 @@ class ProductVariationValue extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Optional variation extra weight
      */
     public function getExtraWeight()
     {
@@ -138,7 +138,7 @@ class ProductVariationValue extends DataModel
     }
     
     /**
-     * @param string $sku
+     * @param string $sku Optional Stock Keeping Unit
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setSku($sku)
@@ -148,7 +148,7 @@ class ProductVariationValue extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional Stock Keeping Unit
      */
     public function getSku()
     {
@@ -156,7 +156,7 @@ class ProductVariationValue extends DataModel
     }
     
     /**
-     * @param int $sort
+     * @param int $sort Optional sort number
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setSort($sort)
@@ -166,7 +166,7 @@ class ProductVariationValue extends DataModel
     }
     
     /**
-     * @return int
+     * @return int Optional sort number
      */
     public function getSort()
     {
@@ -174,7 +174,7 @@ class ProductVariationValue extends DataModel
     }
     
     /**
-     * @param double $stockLevel
+     * @param double $stockLevel Optional stock level
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setStockLevel($stockLevel)
@@ -184,7 +184,7 @@ class ProductVariationValue extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Optional stock level
      */
     public function getStockLevel()
     {

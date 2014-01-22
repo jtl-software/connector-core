@@ -17,67 +17,67 @@ use \jtl\Core\Model\DataModel;
 class CustomerOrderPaymentInfo extends DataModel
 {
     /**
-     * @var string - Unique customerOrderPaymentInfo id
+     * @var string Unique customerOrderPaymentInfo id
      */
     protected $_id = '0';
     
     /**
-     * @var string - Reference to customerOrder
+     * @var string Reference to customerOrder
      */
     protected $_customerOrderId = '0';
     
     /**
-     * @var string - Bank name
+     * @var string Bank name
      */
     protected $_bankName = '';
     
     /**
-     * @var string - Bank code (deprecated in DE since SEPA)
+     * @var string Bank code (deprecated in DE since SEPA)
      */
     protected $_bankCode = '';
     
     /**
-     * @var string - Bank account holder name
+     * @var string Bank account holder name
      */
     protected $_accountHolder = '';
     
     /**
-     * @var string - Bank account number (deprecated in DE since SEPA)
+     * @var string Bank account number (deprecated in DE since SEPA)
      */
     protected $_accountNumber = '';
     
     /**
-     * @var string - International Bank Account Number (IBAN)
+     * @var string International Bank Account Number (IBAN)
      */
     protected $_iban = '';
     
     /**
-     * @var string - Bank Identifier Code (BIC)
+     * @var string Bank Identifier Code (BIC)
      */
     protected $_bic = '';
     
     /**
-     * @var string - Credit card number
+     * @var string Credit card number
      */
     protected $_creditCardNumber = '';
     
     /**
-     * @var string - Credit card verification number
+     * @var string Credit card verification number
      */
     protected $_creditCardVerificationNumber = '';
     
     /**
-     * @var string - Credit card expiration date
+     * @var string Credit card expiration date
      */
     protected $_creditCardExpiration = '';
     
     /**
-     * @var string - Credit card type (e.g. "visa")
+     * @var string Credit card type (e.g. "visa")
      */
     protected $_creditCardType = '';
     
     /**
-     * @var string - Credit card holder name
+     * @var string Credit card holder name
      */
     protected $_creditCardHolder = '';
     
@@ -118,7 +118,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique customerOrderPaymentInfo id
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setId($id)
@@ -128,7 +128,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique customerOrderPaymentInfo id
      */
     public function getId()
     {
@@ -136,7 +136,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @param string $customerOrderId
+     * @param string $customerOrderId Reference to customerOrder
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setCustomerOrderId($customerOrderId)
@@ -146,7 +146,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to customerOrder
      */
     public function getCustomerOrderId()
     {
@@ -154,7 +154,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @param string $bankName
+     * @param string $bankName Bank name
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setBankName($bankName)
@@ -164,7 +164,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Bank name
      */
     public function getBankName()
     {
@@ -172,7 +172,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @param string $bankCode
+     * @param string $bankCode Bank code (deprecated in DE since SEPA)
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setBankCode($bankCode)
@@ -182,7 +182,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Bank code (deprecated in DE since SEPA)
      */
     public function getBankCode()
     {
@@ -190,7 +190,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @param string $accountHolder
+     * @param string $accountHolder Bank account holder name
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setAccountHolder($accountHolder)
@@ -200,7 +200,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Bank account holder name
      */
     public function getAccountHolder()
     {
@@ -208,7 +208,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @param string $accountNumber
+     * @param string $accountNumber Bank account number (deprecated in DE since SEPA)
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setAccountNumber($accountNumber)
@@ -218,7 +218,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Bank account number (deprecated in DE since SEPA)
      */
     public function getAccountNumber()
     {
@@ -226,7 +226,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @param string $iban
+     * @param string $iban International Bank Account Number (IBAN)
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setIban($iban)
@@ -236,7 +236,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @return string
+     * @return string International Bank Account Number (IBAN)
      */
     public function getIban()
     {
@@ -244,7 +244,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @param string $bic
+     * @param string $bic Bank Identifier Code (BIC)
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setBic($bic)
@@ -254,7 +254,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Bank Identifier Code (BIC)
      */
     public function getBic()
     {
@@ -262,7 +262,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @param string $creditCardNumber
+     * @param string $creditCardNumber Credit card number
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setCreditCardNumber($creditCardNumber)
@@ -272,7 +272,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Credit card number
      */
     public function getCreditCardNumber()
     {
@@ -280,7 +280,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @param string $creditCardVerificationNumber
+     * @param string $creditCardVerificationNumber Credit card verification number
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setCreditCardVerificationNumber($creditCardVerificationNumber)
@@ -290,7 +290,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Credit card verification number
      */
     public function getCreditCardVerificationNumber()
     {
@@ -298,7 +298,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @param string $creditCardExpiration
+     * @param string $creditCardExpiration Credit card expiration date
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setCreditCardExpiration($creditCardExpiration)
@@ -308,7 +308,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Credit card expiration date
      */
     public function getCreditCardExpiration()
     {
@@ -316,7 +316,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @param string $creditCardType
+     * @param string $creditCardType Credit card type (e.g. "visa")
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setCreditCardType($creditCardType)
@@ -326,7 +326,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Credit card type (e.g. "visa")
      */
     public function getCreditCardType()
     {
@@ -334,7 +334,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @param string $creditCardHolder
+     * @param string $creditCardHolder Credit card holder name
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setCreditCardHolder($creditCardHolder)
@@ -344,7 +344,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Credit card holder name
      */
     public function getCreditCardHolder()
     {

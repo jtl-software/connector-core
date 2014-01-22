@@ -62,132 +62,132 @@ class CustomerOrder extends DataModel
     const STATUS_PENDING_PAYMENT = 'pending_payment';
     
     /**
-     * @var string - Unique customerOrder id
+     * @var string Unique customerOrder id
      */
     protected $_id = '';
     
     /**
-     * @var string - Optional reference to customer. 
+     * @var string Optional reference to customer. 
      */
     protected $_customerId = '';
     
     /**
-     * @var string - Reference to shippingAddress
+     * @var string Reference to shippingAddress
      */
     protected $_shippingAddressId = '';
     
     /**
-     * @var string - Reference to billingAddress
+     * @var string Reference to billingAddress
      */
     protected $_billingAddressId = '';
     
     /**
-     * @var string - Reference to shippingMethod
+     * @var string Reference to shippingMethod
      */
     protected $_shippingMethodId = '';
     
     /**
-     * @var string - Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
+     * @var string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
      */
     protected $_localeName = '';
     
     /**
-     * @var string - Currency ISO set, when customerOrder was finished
+     * @var string Currency ISO set, when customerOrder was finished
      */
     protected $_currencyIso = '';
     
     /**
-     * @var string - Optional Estimated delivery date set by ERP System
+     * @var string Optional Estimated delivery date set by ERP System
      */
     protected $_estimatedDeliveryDate = '';
     
     /**
-     * @var double - Optional customer credit (credit reduces total sum)
+     * @var double Optional customer credit (credit reduces total sum)
      */
     protected $_credit = 0;
     
     /**
-     * @var double - Total sum to pay
+     * @var double Total sum to pay
      */
     protected $_totalSum = 0.0;
     
     /**
-     * @var string - Optional session id or session hash
+     * @var string Optional session id or session hash
      */
     protected $_session = '';
     
     /**
-     * @var string - Optional shipping method name
+     * @var string Optional shipping method name
      */
     protected $_shippingMethodName = '';
     
     /**
-     * @var string - Optional order number (usually set by ERP System later)
+     * @var string Optional order number (usually set by ERP System later)
      */
     protected $_orderNumber = '';
     
     /**
-     * @var string - Additional shipping info
+     * @var string Additional shipping info
      */
     protected $_shippingInfo = '';
     
     /**
-     * @var string - Shipping date
+     * @var string Shipping date
      */
     protected $_shippingDate = '';
     
     /**
-     * @var string - Payment date
+     * @var string Payment date
      */
     protected $_paymentDate = '';
     
     /**
-     * @var string - Date from when customer will receive notification to rate order
+     * @var string Date from when customer will receive notification to rate order
      */
     protected $_ratingNotificationDate = '';
     
     /**
-     * @var string - Optional TrackingID (not Tracking URL)
+     * @var string Optional TrackingID (not Tracking URL)
      */
     protected $_tracking = '';
     
     /**
-     * @var string - Optional additional note
+     * @var string Optional additional note
      */
     protected $_note = '';
     
     /**
-     * @var string - Optional Logistic name
+     * @var string Optional Logistic name
      */
     protected $_logistic = '';
     
     /**
-     * @var string - Optional Tracking URL
+     * @var string Optional Tracking URL
      */
     protected $_trackingURL = '';
     
     /**
-     * @var string - Optional customer IP address at the time of checkout. Do not store full IP-Adress (dependent on local laws or regulations)
+     * @var string Optional customer IP address at the time of checkout. Do not store full IP-Adress (dependent on local laws or regulations)
      */
     protected $_ip = '';
     
     /**
-     * @var bool - Optional flag, if customerOrder is fetched by ERP System
+     * @var bool Optional flag, if customerOrder is fetched by ERP System
      */
     protected $_isFetched = false;
     
     /**
-     * @var string - Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
+     * @var string Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
      */
     protected $_status = 'new';
     
     /**
-     * @var string - Date of creation
+     * @var string Date of creation
      */
     protected $_created = '';
     
     /**
-     * @var string - Optional payment module id
+     * @var string Optional payment module id
      */
     protected $_paymentModuleId = '';
     
@@ -249,7 +249,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique customerOrder id
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setId($id)
@@ -259,7 +259,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique customerOrder id
      */
     public function getId()
     {
@@ -267,7 +267,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $customerId
+     * @param string $customerId Optional reference to customer. 
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setCustomerId($customerId)
@@ -277,7 +277,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional reference to customer. 
      */
     public function getCustomerId()
     {
@@ -285,7 +285,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $shippingAddressId
+     * @param string $shippingAddressId Reference to shippingAddress
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setShippingAddressId($shippingAddressId)
@@ -295,7 +295,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to shippingAddress
      */
     public function getShippingAddressId()
     {
@@ -303,7 +303,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $billingAddressId
+     * @param string $billingAddressId Reference to billingAddress
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setBillingAddressId($billingAddressId)
@@ -313,7 +313,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to billingAddress
      */
     public function getBillingAddressId()
     {
@@ -321,7 +321,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $shippingMethodId
+     * @param string $shippingMethodId Reference to shippingMethod
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setShippingMethodId($shippingMethodId)
@@ -331,7 +331,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to shippingMethod
      */
     public function getShippingMethodId()
     {
@@ -339,7 +339,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $localeName
+     * @param string $localeName Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setLocaleName($localeName)
@@ -349,7 +349,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
      */
     public function getLocaleName()
     {
@@ -357,7 +357,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $currencyIso
+     * @param string $currencyIso Currency ISO set, when customerOrder was finished
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setCurrencyIso($currencyIso)
@@ -367,7 +367,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Currency ISO set, when customerOrder was finished
      */
     public function getCurrencyIso()
     {
@@ -375,7 +375,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $estimatedDeliveryDate
+     * @param string $estimatedDeliveryDate Optional Estimated delivery date set by ERP System
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setEstimatedDeliveryDate($estimatedDeliveryDate)
@@ -385,7 +385,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional Estimated delivery date set by ERP System
      */
     public function getEstimatedDeliveryDate()
     {
@@ -393,7 +393,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param double $credit
+     * @param double $credit Optional customer credit (credit reduces total sum)
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setCredit($credit)
@@ -403,7 +403,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Optional customer credit (credit reduces total sum)
      */
     public function getCredit()
     {
@@ -411,7 +411,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param double $totalSum
+     * @param double $totalSum Total sum to pay
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setTotalSum($totalSum)
@@ -421,7 +421,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Total sum to pay
      */
     public function getTotalSum()
     {
@@ -429,7 +429,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $session
+     * @param string $session Optional session id or session hash
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setSession($session)
@@ -439,7 +439,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional session id or session hash
      */
     public function getSession()
     {
@@ -447,7 +447,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $shippingMethodName
+     * @param string $shippingMethodName Optional shipping method name
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setShippingMethodName($shippingMethodName)
@@ -457,7 +457,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional shipping method name
      */
     public function getShippingMethodName()
     {
@@ -465,7 +465,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $orderNumber
+     * @param string $orderNumber Optional order number (usually set by ERP System later)
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setOrderNumber($orderNumber)
@@ -475,7 +475,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional order number (usually set by ERP System later)
      */
     public function getOrderNumber()
     {
@@ -483,7 +483,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $shippingInfo
+     * @param string $shippingInfo Additional shipping info
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setShippingInfo($shippingInfo)
@@ -493,7 +493,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Additional shipping info
      */
     public function getShippingInfo()
     {
@@ -501,7 +501,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $shippingDate
+     * @param string $shippingDate Shipping date
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setShippingDate($shippingDate)
@@ -511,7 +511,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Shipping date
      */
     public function getShippingDate()
     {
@@ -519,7 +519,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $paymentDate
+     * @param string $paymentDate Payment date
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setPaymentDate($paymentDate)
@@ -529,7 +529,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Payment date
      */
     public function getPaymentDate()
     {
@@ -537,7 +537,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $ratingNotificationDate
+     * @param string $ratingNotificationDate Date from when customer will receive notification to rate order
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setRatingNotificationDate($ratingNotificationDate)
@@ -547,7 +547,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Date from when customer will receive notification to rate order
      */
     public function getRatingNotificationDate()
     {
@@ -555,7 +555,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $tracking
+     * @param string $tracking Optional TrackingID (not Tracking URL)
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setTracking($tracking)
@@ -565,7 +565,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional TrackingID (not Tracking URL)
      */
     public function getTracking()
     {
@@ -573,7 +573,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $note
+     * @param string $note Optional additional note
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setNote($note)
@@ -583,7 +583,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional additional note
      */
     public function getNote()
     {
@@ -591,7 +591,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $logistic
+     * @param string $logistic Optional Logistic name
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setLogistic($logistic)
@@ -601,7 +601,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional Logistic name
      */
     public function getLogistic()
     {
@@ -609,7 +609,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $trackingURL
+     * @param string $trackingURL Optional Tracking URL
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setTrackingURL($trackingURL)
@@ -619,7 +619,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional Tracking URL
      */
     public function getTrackingURL()
     {
@@ -627,7 +627,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $ip
+     * @param string $ip Optional customer IP address at the time of checkout. Do not store full IP-Adress (dependent on local laws or regulations)
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setIp($ip)
@@ -637,7 +637,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional customer IP address at the time of checkout. Do not store full IP-Adress (dependent on local laws or regulations)
      */
     public function getIp()
     {
@@ -645,7 +645,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param bool $isFetched
+     * @param bool $isFetched Optional flag, if customerOrder is fetched by ERP System
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setIsFetched($isFetched)
@@ -655,7 +655,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return bool
+     * @return bool Optional flag, if customerOrder is fetched by ERP System
      */
     public function getIsFetched()
     {
@@ -663,7 +663,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $status
+     * @param string $status Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setStatus($status)
@@ -673,7 +673,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
      */
     public function getStatus()
     {
@@ -681,7 +681,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $created
+     * @param string $created Date of creation
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setCreated($created)
@@ -691,7 +691,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Date of creation
      */
     public function getCreated()
     {
@@ -699,7 +699,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $paymentModuleId
+     * @param string $paymentModuleId Optional payment module id
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setPaymentModuleId($paymentModuleId)
@@ -709,7 +709,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional payment module id
      */
     public function getPaymentModuleId()
     {

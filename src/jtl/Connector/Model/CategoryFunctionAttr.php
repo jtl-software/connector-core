@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class CategoryFunctionAttr extends DataModel
 {
     /**
-     * @var string - Unique categoryFunctionAttr id
+     * @var string Unique categoryFunctionAttr id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to category
+     * @var string Reference to category
      */
     protected $_categoryId = '';
     
     /**
-     * @var string - Attribute key name
+     * @var string Attribute key name
      */
     protected $_name = '';
     
     /**
-     * @var string - Attribute value
+     * @var string Attribute value
      */
     protected $_value = '';
     
@@ -64,7 +64,7 @@ class CategoryFunctionAttr extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique categoryFunctionAttr id
      * @return \jtl\Connector\Model\CategoryFunctionAttr
      */
     public function setId($id)
@@ -74,7 +74,7 @@ class CategoryFunctionAttr extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique categoryFunctionAttr id
      */
     public function getId()
     {
@@ -82,7 +82,7 @@ class CategoryFunctionAttr extends DataModel
     }
     
     /**
-     * @param string $categoryId
+     * @param string $categoryId Reference to category
      * @return \jtl\Connector\Model\CategoryFunctionAttr
      */
     public function setCategoryId($categoryId)
@@ -92,7 +92,7 @@ class CategoryFunctionAttr extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to category
      */
     public function getCategoryId()
     {
@@ -100,7 +100,7 @@ class CategoryFunctionAttr extends DataModel
     }
     
     /**
-     * @param string $name
+     * @param string $name Attribute key name
      * @return \jtl\Connector\Model\CategoryFunctionAttr
      */
     public function setName($name)
@@ -110,7 +110,7 @@ class CategoryFunctionAttr extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Attribute key name
      */
     public function getName()
     {
@@ -118,7 +118,7 @@ class CategoryFunctionAttr extends DataModel
     }
     
     /**
-     * @param string $value
+     * @param string $value Attribute value
      * @return \jtl\Connector\Model\CategoryFunctionAttr
      */
     public function setValue($value)
@@ -128,7 +128,7 @@ class CategoryFunctionAttr extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Attribute value
      */
     public function getValue()
     {

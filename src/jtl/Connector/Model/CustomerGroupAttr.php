@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class CustomerGroupAttr extends DataModel
 {
     /**
-     * @var string - Unique customerGroupAttr id
+     * @var string Unique customerGroupAttr id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to customerGroup
+     * @var string Reference to customerGroup
      */
     protected $_customerGroupId = '';
     
     /**
-     * @var string - Attribute key
+     * @var string Attribute key
      */
     protected $_key = '';
     
     /**
-     * @var string - Attribute value
+     * @var string Attribute value
      */
     protected $_value = '';
     
@@ -64,7 +64,7 @@ class CustomerGroupAttr extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique customerGroupAttr id
      * @return \jtl\Connector\Model\CustomerGroupAttr
      */
     public function setId($id)
@@ -74,7 +74,7 @@ class CustomerGroupAttr extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique customerGroupAttr id
      */
     public function getId()
     {
@@ -82,7 +82,7 @@ class CustomerGroupAttr extends DataModel
     }
     
     /**
-     * @param string $customerGroupId
+     * @param string $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\CustomerGroupAttr
      */
     public function setCustomerGroupId($customerGroupId)
@@ -92,7 +92,7 @@ class CustomerGroupAttr extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to customerGroup
      */
     public function getCustomerGroupId()
     {
@@ -100,7 +100,7 @@ class CustomerGroupAttr extends DataModel
     }
     
     /**
-     * @param string $key
+     * @param string $key Attribute key
      * @return \jtl\Connector\Model\CustomerGroupAttr
      */
     public function setKey($key)
@@ -110,7 +110,7 @@ class CustomerGroupAttr extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Attribute key
      */
     public function getKey()
     {
@@ -118,7 +118,7 @@ class CustomerGroupAttr extends DataModel
     }
     
     /**
-     * @param string $value
+     * @param string $value Attribute value
      * @return \jtl\Connector\Model\CustomerGroupAttr
      */
     public function setValue($value)
@@ -128,7 +128,7 @@ class CustomerGroupAttr extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Attribute value
      */
     public function getValue()
     {

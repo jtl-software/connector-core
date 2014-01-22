@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class CategoryCustomerGroup extends DataModel
 {
     /**
-     * @var string - Reference to customerGroup
+     * @var string Reference to customerGroup
      */
     protected $_customerGroupId = '';
     
     /**
-     * @var string - Reference to category
+     * @var string Reference to category
      */
     protected $_categoryId = '';
     
     /**
-     * @var double - Optional discount on products in specified categoryId for  customerGroupId
+     * @var double Optional discount on products in specified categoryId for  customerGroupId
      */
     protected $_discount = 0;
     
@@ -62,7 +62,7 @@ class CategoryCustomerGroup extends DataModel
     }
     
     /**
-     * @param string $customerGroupId
+     * @param string $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\CategoryCustomerGroup
      */
     public function setCustomerGroupId($customerGroupId)
@@ -72,7 +72,7 @@ class CategoryCustomerGroup extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to customerGroup
      */
     public function getCustomerGroupId()
     {
@@ -80,7 +80,7 @@ class CategoryCustomerGroup extends DataModel
     }
     
     /**
-     * @param string $categoryId
+     * @param string $categoryId Reference to category
      * @return \jtl\Connector\Model\CategoryCustomerGroup
      */
     public function setCategoryId($categoryId)
@@ -90,7 +90,7 @@ class CategoryCustomerGroup extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to category
      */
     public function getCategoryId()
     {
@@ -98,7 +98,7 @@ class CategoryCustomerGroup extends DataModel
     }
     
     /**
-     * @param double $discount
+     * @param double $discount Optional discount on products in specified categoryId for  customerGroupId
      * @return \jtl\Connector\Model\CategoryCustomerGroup
      */
     public function setDiscount($discount)
@@ -108,7 +108,7 @@ class CategoryCustomerGroup extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Optional discount on products in specified categoryId for  customerGroupId
      */
     public function getDiscount()
     {

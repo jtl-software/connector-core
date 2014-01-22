@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class ConfigItemI18n extends DataModel
 {
     /**
-     * @var string - Reference to configItem
+     * @var string Reference to configItem
      */
     protected $_configItemId = '';
     
     /**
-     * @var string - Locale
+     * @var string Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string - Config item name. Will be ignored if inheritProductName==true
+     * @var string Config item name. Will be ignored if inheritProductName==true
      */
     protected $_name = '';
     
     /**
-     * @var string - Description (html). Will be ignored, if inheritProductName==true
+     * @var string Description (html). Will be ignored, if inheritProductName==true
      */
     protected $_description = '';
     
@@ -64,7 +64,7 @@ class ConfigItemI18n extends DataModel
     }
     
     /**
-     * @param string $configItemId
+     * @param string $configItemId Reference to configItem
      * @return \jtl\Connector\Model\ConfigItemI18n
      */
     public function setConfigItemId($configItemId)
@@ -74,7 +74,7 @@ class ConfigItemI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to configItem
      */
     public function getConfigItemId()
     {
@@ -82,7 +82,7 @@ class ConfigItemI18n extends DataModel
     }
     
     /**
-     * @param string $localeName
+     * @param string $localeName Locale
      * @return \jtl\Connector\Model\ConfigItemI18n
      */
     public function setLocaleName($localeName)
@@ -92,7 +92,7 @@ class ConfigItemI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Locale
      */
     public function getLocaleName()
     {
@@ -100,7 +100,7 @@ class ConfigItemI18n extends DataModel
     }
     
     /**
-     * @param string $name
+     * @param string $name Config item name. Will be ignored if inheritProductName==true
      * @return \jtl\Connector\Model\ConfigItemI18n
      */
     public function setName($name)
@@ -110,7 +110,7 @@ class ConfigItemI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Config item name. Will be ignored if inheritProductName==true
      */
     public function getName()
     {
@@ -118,7 +118,7 @@ class ConfigItemI18n extends DataModel
     }
     
     /**
-     * @param string $description
+     * @param string $description Description (html). Will be ignored, if inheritProductName==true
      * @return \jtl\Connector\Model\ConfigItemI18n
      */
     public function setDescription($description)
@@ -128,7 +128,7 @@ class ConfigItemI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Description (html). Will be ignored, if inheritProductName==true
      */
     public function getDescription()
     {

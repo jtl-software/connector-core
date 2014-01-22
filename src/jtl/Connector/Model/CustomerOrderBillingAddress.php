@@ -17,92 +17,92 @@ use \jtl\Core\Model\DataModel;
 class CustomerOrderBillingAddress extends DataModel
 {
     /**
-     * @var string - Unique customerOrderBillingAddress id
+     * @var string Unique customerOrderBillingAddress id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to customer
+     * @var string Reference to customer
      */
     protected $_customerId = '';
     
     /**
-     * @var string - Salutation (german: "Anrede")
+     * @var string Salutation (german: "Anrede")
      */
     protected $_salutation = '';
     
     /**
-     * @var string - First name
+     * @var string First name
      */
     protected $_firstName = '';
     
     /**
-     * @var string - Last name
+     * @var string Last name
      */
     protected $_lastName = '';
     
     /**
-     * @var string - Title (e.g. "Prof. Dr.")
+     * @var string Title (e.g. "Prof. Dr.")
      */
     protected $_title = '';
     
     /**
-     * @var string - Company name
+     * @var string Company name
      */
     protected $_company = '';
     
     /**
-     * @var string - Delivery instruction e.g. "c/o John Doe"
+     * @var string Delivery instruction e.g. "c/o John Doe"
      */
     protected $_deliveryInstruction = '';
     
     /**
-     * @var string - Street + street number
+     * @var string Street + street number
      */
     protected $_street = '';
     
     /**
-     * @var string - Extra address line e.g. "Apartment 2.5"
+     * @var string Extra address line e.g. "Apartment 2.5"
      */
     protected $_extraAddressLine = '';
     
     /**
-     * @var string - Zip / postal code
+     * @var string Zip / postal code
      */
     protected $_zipCode = '';
     
     /**
-     * @var string - City
+     * @var string City
      */
     protected $_city = '';
     
     /**
-     * @var string - State
+     * @var string State
      */
     protected $_state = '';
     
     /**
-     * @var string - Country ISO 3166-2 (2 letter Uppercase)
+     * @var string Country ISO 3166-2 (2 letter Uppercase)
      */
     protected $_countryIso = '';
     
     /**
-     * @var string - Phone number
+     * @var string Phone number
      */
     protected $_phone = '';
     
     /**
-     * @var string - Mobile phone number
+     * @var string Mobile phone number
      */
     protected $_mobile = '';
     
     /**
-     * @var string - Fax number
+     * @var string Fax number
      */
     protected $_fax = '';
     
     /**
-     * @var string - E-Mail address
+     * @var string E-Mail address
      */
     protected $_eMail = '';
     
@@ -148,7 +148,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique customerOrderBillingAddress id
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setId($id)
@@ -158,7 +158,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique customerOrderBillingAddress id
      */
     public function getId()
     {
@@ -166,7 +166,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @param string $customerId
+     * @param string $customerId Reference to customer
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setCustomerId($customerId)
@@ -176,7 +176,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to customer
      */
     public function getCustomerId()
     {
@@ -184,7 +184,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @param string $salutation
+     * @param string $salutation Salutation (german: "Anrede")
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setSalutation($salutation)
@@ -194,7 +194,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Salutation (german: "Anrede")
      */
     public function getSalutation()
     {
@@ -202,7 +202,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @param string $firstName
+     * @param string $firstName First name
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setFirstName($firstName)
@@ -212,7 +212,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @return string
+     * @return string First name
      */
     public function getFirstName()
     {
@@ -220,7 +220,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @param string $lastName
+     * @param string $lastName Last name
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setLastName($lastName)
@@ -230,7 +230,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Last name
      */
     public function getLastName()
     {
@@ -238,7 +238,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @param string $title
+     * @param string $title Title (e.g. "Prof. Dr.")
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setTitle($title)
@@ -248,7 +248,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Title (e.g. "Prof. Dr.")
      */
     public function getTitle()
     {
@@ -256,7 +256,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @param string $company
+     * @param string $company Company name
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setCompany($company)
@@ -266,7 +266,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Company name
      */
     public function getCompany()
     {
@@ -274,7 +274,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @param string $deliveryInstruction
+     * @param string $deliveryInstruction Delivery instruction e.g. "c/o John Doe"
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setDeliveryInstruction($deliveryInstruction)
@@ -284,7 +284,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Delivery instruction e.g. "c/o John Doe"
      */
     public function getDeliveryInstruction()
     {
@@ -292,7 +292,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @param string $street
+     * @param string $street Street + street number
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setStreet($street)
@@ -302,7 +302,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Street + street number
      */
     public function getStreet()
     {
@@ -310,7 +310,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @param string $extraAddressLine
+     * @param string $extraAddressLine Extra address line e.g. "Apartment 2.5"
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setExtraAddressLine($extraAddressLine)
@@ -320,7 +320,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Extra address line e.g. "Apartment 2.5"
      */
     public function getExtraAddressLine()
     {
@@ -328,7 +328,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @param string $zipCode
+     * @param string $zipCode Zip / postal code
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setZipCode($zipCode)
@@ -338,7 +338,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Zip / postal code
      */
     public function getZipCode()
     {
@@ -346,7 +346,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @param string $city
+     * @param string $city City
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setCity($city)
@@ -356,7 +356,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @return string
+     * @return string City
      */
     public function getCity()
     {
@@ -364,7 +364,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @param string $state
+     * @param string $state State
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setState($state)
@@ -374,7 +374,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @return string
+     * @return string State
      */
     public function getState()
     {
@@ -382,7 +382,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @param string $countryIso
+     * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setCountryIso($countryIso)
@@ -392,7 +392,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Country ISO 3166-2 (2 letter Uppercase)
      */
     public function getCountryIso()
     {
@@ -400,7 +400,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @param string $phone
+     * @param string $phone Phone number
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setPhone($phone)
@@ -410,7 +410,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Phone number
      */
     public function getPhone()
     {
@@ -418,7 +418,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @param string $mobile
+     * @param string $mobile Mobile phone number
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setMobile($mobile)
@@ -428,7 +428,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Mobile phone number
      */
     public function getMobile()
     {
@@ -436,7 +436,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @param string $fax
+     * @param string $fax Fax number
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setFax($fax)
@@ -446,7 +446,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Fax number
      */
     public function getFax()
     {
@@ -454,7 +454,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @param string $eMail
+     * @param string $eMail E-Mail address
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setEMail($eMail)
@@ -464,7 +464,7 @@ class CustomerOrderBillingAddress extends DataModel
     }
     
     /**
-     * @return string
+     * @return string E-Mail address
      */
     public function getEMail()
     {

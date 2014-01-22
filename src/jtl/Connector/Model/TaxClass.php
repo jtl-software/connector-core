@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class TaxClass extends DataModel
 {
     /**
-     * @var string - Unique taxClass id
+     * @var string Unique taxClass id
      */
     protected $_id = '';
     
     /**
-     * @var string - Optional tax class name
+     * @var string Optional tax class name
      */
     protected $_name = '';
     
     /**
-     * @var bool - Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
+     * @var bool Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
      */
     protected $_isDefault = false;
     
@@ -62,7 +62,7 @@ class TaxClass extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique taxClass id
      * @return \jtl\Connector\Model\TaxClass
      */
     public function setId($id)
@@ -72,7 +72,7 @@ class TaxClass extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique taxClass id
      */
     public function getId()
     {
@@ -80,7 +80,7 @@ class TaxClass extends DataModel
     }
     
     /**
-     * @param string $name
+     * @param string $name Optional tax class name
      * @return \jtl\Connector\Model\TaxClass
      */
     public function setName($name)
@@ -90,7 +90,7 @@ class TaxClass extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional tax class name
      */
     public function getName()
     {
@@ -98,7 +98,7 @@ class TaxClass extends DataModel
     }
     
     /**
-     * @param bool $isDefault
+     * @param bool $isDefault Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
      * @return \jtl\Connector\Model\TaxClass
      */
     public function setIsDefault($isDefault)
@@ -108,7 +108,7 @@ class TaxClass extends DataModel
     }
     
     /**
-     * @return bool
+     * @return bool Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
      */
     public function getIsDefault()
     {

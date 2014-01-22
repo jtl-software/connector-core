@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class ProductVariationValueExtraCharge extends DataModel
 {
     /**
-     * @var string - Reference to customerGroup
+     * @var string Reference to customerGroup
      */
     protected $_customerGroupId = '';
     
     /**
-     * @var string - Reference to productVariationValue
+     * @var string Reference to productVariationValue
      */
     protected $_productVariationValueId = '';
     
     /**
-     * @var double - Extra charge (net)
+     * @var double Extra charge (net)
      */
     protected $_extraChargeNet = 0.0;
     
@@ -62,7 +62,7 @@ class ProductVariationValueExtraCharge extends DataModel
     }
     
     /**
-     * @param string $customerGroupId
+     * @param string $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
      */
     public function setCustomerGroupId($customerGroupId)
@@ -72,7 +72,7 @@ class ProductVariationValueExtraCharge extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to customerGroup
      */
     public function getCustomerGroupId()
     {
@@ -80,7 +80,7 @@ class ProductVariationValueExtraCharge extends DataModel
     }
     
     /**
-     * @param string $productVariationValueId
+     * @param string $productVariationValueId Reference to productVariationValue
      * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
      */
     public function setProductVariationValueId($productVariationValueId)
@@ -90,7 +90,7 @@ class ProductVariationValueExtraCharge extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to productVariationValue
      */
     public function getProductVariationValueId()
     {
@@ -98,7 +98,7 @@ class ProductVariationValueExtraCharge extends DataModel
     }
     
     /**
-     * @param double $extraChargeNet
+     * @param double $extraChargeNet Extra charge (net)
      * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
      */
     public function setExtraChargeNet($extraChargeNet)
@@ -108,7 +108,7 @@ class ProductVariationValueExtraCharge extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Extra charge (net)
      */
     public function getExtraChargeNet()
     {

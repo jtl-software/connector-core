@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class ProductVarCombination extends DataModel
 {
     /**
-     * @var string - Reference to product
+     * @var string Reference to product
      */
     protected $_productId = '';
     
     /**
-     * @var string - Reference to productVariation
+     * @var string Reference to productVariation
      */
     protected $_productVariationId = '';
     
     /**
-     * @var string - Reference to productVariationValue
+     * @var string Reference to productVariationValue
      */
     protected $_productVariationValueId = '';
     
@@ -58,7 +58,7 @@ class ProductVarCombination extends DataModel
     }
     
     /**
-     * @param string $productId
+     * @param string $productId Reference to product
      * @return \jtl\Connector\Model\ProductVarCombination
      */
     public function setProductId($productId)
@@ -68,7 +68,7 @@ class ProductVarCombination extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to product
      */
     public function getProductId()
     {
@@ -76,7 +76,7 @@ class ProductVarCombination extends DataModel
     }
     
     /**
-     * @param string $productVariationId
+     * @param string $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\ProductVarCombination
      */
     public function setProductVariationId($productVariationId)
@@ -86,7 +86,7 @@ class ProductVarCombination extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to productVariation
      */
     public function getProductVariationId()
     {
@@ -94,7 +94,7 @@ class ProductVarCombination extends DataModel
     }
     
     /**
-     * @param string $productVariationValueId
+     * @param string $productVariationValueId Reference to productVariationValue
      * @return \jtl\Connector\Model\ProductVarCombination
      */
     public function setProductVariationValueId($productVariationValueId)
@@ -104,7 +104,7 @@ class ProductVarCombination extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to productVariationValue
      */
     public function getProductVariationValueId()
     {

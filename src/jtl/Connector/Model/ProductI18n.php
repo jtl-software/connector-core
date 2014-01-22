@@ -17,32 +17,32 @@ use \jtl\Core\Model\DataModel;
 class ProductI18n extends DataModel
 {
     /**
-     * @var string - locale
+     * @var string locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string - Reference to product
+     * @var string Reference to product
      */
     protected $_productId = '';
     
     /**
-     * @var string - Product name / title
+     * @var string Product name / title
      */
     protected $_name = '';
     
     /**
-     * @var string - Optional path of product URL
+     * @var string Optional path of product URL
      */
     protected $_urlPath = '';
     
     /**
-     * @var string - Optional product description
+     * @var string Optional product description
      */
     protected $_description = '';
     
     /**
-     * @var string - Optional product shortdescription
+     * @var string Optional product shortdescription
      */
     protected $_shortDescription = '';
     
@@ -76,7 +76,7 @@ class ProductI18n extends DataModel
     }
     
     /**
-     * @param string $localeName
+     * @param string $localeName locale
      * @return \jtl\Connector\Model\ProductI18n
      */
     public function setLocaleName($localeName)
@@ -86,7 +86,7 @@ class ProductI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string locale
      */
     public function getLocaleName()
     {
@@ -94,7 +94,7 @@ class ProductI18n extends DataModel
     }
     
     /**
-     * @param string $productId
+     * @param string $productId Reference to product
      * @return \jtl\Connector\Model\ProductI18n
      */
     public function setProductId($productId)
@@ -104,7 +104,7 @@ class ProductI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to product
      */
     public function getProductId()
     {
@@ -112,7 +112,7 @@ class ProductI18n extends DataModel
     }
     
     /**
-     * @param string $name
+     * @param string $name Product name / title
      * @return \jtl\Connector\Model\ProductI18n
      */
     public function setName($name)
@@ -122,7 +122,7 @@ class ProductI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Product name / title
      */
     public function getName()
     {
@@ -130,7 +130,7 @@ class ProductI18n extends DataModel
     }
     
     /**
-     * @param string $urlPath
+     * @param string $urlPath Optional path of product URL
      * @return \jtl\Connector\Model\ProductI18n
      */
     public function setUrlPath($urlPath)
@@ -140,7 +140,7 @@ class ProductI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional path of product URL
      */
     public function getUrlPath()
     {
@@ -148,7 +148,7 @@ class ProductI18n extends DataModel
     }
     
     /**
-     * @param string $description
+     * @param string $description Optional product description
      * @return \jtl\Connector\Model\ProductI18n
      */
     public function setDescription($description)
@@ -158,7 +158,7 @@ class ProductI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional product description
      */
     public function getDescription()
     {
@@ -166,7 +166,7 @@ class ProductI18n extends DataModel
     }
     
     /**
-     * @param string $shortDescription
+     * @param string $shortDescription Optional product shortdescription
      * @return \jtl\Connector\Model\ProductI18n
      */
     public function setShortDescription($shortDescription)
@@ -176,7 +176,7 @@ class ProductI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional product shortdescription
      */
     public function getShortDescription()
     {

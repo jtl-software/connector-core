@@ -17,97 +17,97 @@ use \jtl\Core\Model\DataModel;
 class Company extends DataModel
 {
     /**
-     * @var string - Company name
+     * @var string Company name
      */
     protected $_name = '';
     
     /**
-     * @var string - Company businessman / entrepreneur
+     * @var string Company businessman / entrepreneur
      */
     protected $_businessman = '';
     
     /**
-     * @var string - Street
+     * @var string Street
      */
     protected $_street = '';
     
     /**
-     * @var string - Street number
+     * @var string Street number
      */
     protected $_streetNumber = '';
     
     /**
-     * @var string - Zip code / postcode
+     * @var string Zip code / postcode
      */
     protected $_zipCode = '';
     
     /**
-     * @var string - City
+     * @var string City
      */
     protected $_city = '';
     
     /**
-     * @var string - CountryIso
+     * @var string CountryIso
      */
     protected $_countryIso = '';
     
     /**
-     * @var string - Phone number
+     * @var string Phone number
      */
     protected $_phone = '';
     
     /**
-     * @var string - Fax number
+     * @var string Fax number
      */
     protected $_fax = '';
     
     /**
-     * @var string - Company E-Mail address
+     * @var string Company E-Mail address
      */
     protected $_eMail = '';
     
     /**
-     * @var string - Company website URL
+     * @var string Company website URL
      */
     protected $_www = '';
     
     /**
-     * @var string - Bank code number
+     * @var string Bank code number
      */
     protected $_bankCode = '';
     
     /**
-     * @var string - Bank account number
+     * @var string Bank account number
      */
     protected $_accountNumber = '';
     
     /**
-     * @var string - Bank name e.g. "Deutsche Bank"
+     * @var string Bank name e.g. "Deutsche Bank"
      */
     protected $_bankName = '';
     
     /**
-     * @var string - Bank account holder name e.g. "John Doe"
+     * @var string Bank account holder name e.g. "John Doe"
      */
     protected $_accountHolder = '';
     
     /**
-     * @var string - VAT registration number (german: USt-ID)
+     * @var string VAT registration number (german: USt-ID)
      */
     protected $_vatNumber = '';
     
     /**
-     * @var string - Tax id number (german: Steuernummer)
+     * @var string Tax id number (german: Steuernummer)
      */
     protected $_taxIdNumber = '';
     
     /**
-     * @var string - International Bank Account Number (IBAN) 
+     * @var string International Bank Account Number (IBAN) 
      */
     protected $_iban = '';
     
     /**
-     * @var string - Bank Identifier Code (BIC)
+     * @var string Bank Identifier Code (BIC)
      */
     protected $_bic = '';
     
@@ -154,7 +154,7 @@ class Company extends DataModel
     }
     
     /**
-     * @param string $name
+     * @param string $name Company name
      * @return \jtl\Connector\Model\Company
      */
     public function setName($name)
@@ -164,7 +164,7 @@ class Company extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Company name
      */
     public function getName()
     {
@@ -172,7 +172,7 @@ class Company extends DataModel
     }
     
     /**
-     * @param string $businessman
+     * @param string $businessman Company businessman / entrepreneur
      * @return \jtl\Connector\Model\Company
      */
     public function setBusinessman($businessman)
@@ -182,7 +182,7 @@ class Company extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Company businessman / entrepreneur
      */
     public function getBusinessman()
     {
@@ -190,7 +190,7 @@ class Company extends DataModel
     }
     
     /**
-     * @param string $street
+     * @param string $street Street
      * @return \jtl\Connector\Model\Company
      */
     public function setStreet($street)
@@ -200,7 +200,7 @@ class Company extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Street
      */
     public function getStreet()
     {
@@ -208,7 +208,7 @@ class Company extends DataModel
     }
     
     /**
-     * @param string $streetNumber
+     * @param string $streetNumber Street number
      * @return \jtl\Connector\Model\Company
      */
     public function setStreetNumber($streetNumber)
@@ -218,7 +218,7 @@ class Company extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Street number
      */
     public function getStreetNumber()
     {
@@ -226,7 +226,7 @@ class Company extends DataModel
     }
     
     /**
-     * @param string $zipCode
+     * @param string $zipCode Zip code / postcode
      * @return \jtl\Connector\Model\Company
      */
     public function setZipCode($zipCode)
@@ -236,7 +236,7 @@ class Company extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Zip code / postcode
      */
     public function getZipCode()
     {
@@ -244,7 +244,7 @@ class Company extends DataModel
     }
     
     /**
-     * @param string $city
+     * @param string $city City
      * @return \jtl\Connector\Model\Company
      */
     public function setCity($city)
@@ -254,7 +254,7 @@ class Company extends DataModel
     }
     
     /**
-     * @return string
+     * @return string City
      */
     public function getCity()
     {
@@ -262,7 +262,7 @@ class Company extends DataModel
     }
     
     /**
-     * @param string $countryIso
+     * @param string $countryIso CountryIso
      * @return \jtl\Connector\Model\Company
      */
     public function setCountryIso($countryIso)
@@ -272,7 +272,7 @@ class Company extends DataModel
     }
     
     /**
-     * @return string
+     * @return string CountryIso
      */
     public function getCountryIso()
     {
@@ -280,7 +280,7 @@ class Company extends DataModel
     }
     
     /**
-     * @param string $phone
+     * @param string $phone Phone number
      * @return \jtl\Connector\Model\Company
      */
     public function setPhone($phone)
@@ -290,7 +290,7 @@ class Company extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Phone number
      */
     public function getPhone()
     {
@@ -298,7 +298,7 @@ class Company extends DataModel
     }
     
     /**
-     * @param string $fax
+     * @param string $fax Fax number
      * @return \jtl\Connector\Model\Company
      */
     public function setFax($fax)
@@ -308,7 +308,7 @@ class Company extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Fax number
      */
     public function getFax()
     {
@@ -316,7 +316,7 @@ class Company extends DataModel
     }
     
     /**
-     * @param string $eMail
+     * @param string $eMail Company E-Mail address
      * @return \jtl\Connector\Model\Company
      */
     public function setEMail($eMail)
@@ -326,7 +326,7 @@ class Company extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Company E-Mail address
      */
     public function getEMail()
     {
@@ -334,7 +334,7 @@ class Company extends DataModel
     }
     
     /**
-     * @param string $www
+     * @param string $www Company website URL
      * @return \jtl\Connector\Model\Company
      */
     public function setWww($www)
@@ -344,7 +344,7 @@ class Company extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Company website URL
      */
     public function getWww()
     {
@@ -352,7 +352,7 @@ class Company extends DataModel
     }
     
     /**
-     * @param string $bankCode
+     * @param string $bankCode Bank code number
      * @return \jtl\Connector\Model\Company
      */
     public function setBankCode($bankCode)
@@ -362,7 +362,7 @@ class Company extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Bank code number
      */
     public function getBankCode()
     {
@@ -370,7 +370,7 @@ class Company extends DataModel
     }
     
     /**
-     * @param string $accountNumber
+     * @param string $accountNumber Bank account number
      * @return \jtl\Connector\Model\Company
      */
     public function setAccountNumber($accountNumber)
@@ -380,7 +380,7 @@ class Company extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Bank account number
      */
     public function getAccountNumber()
     {
@@ -388,7 +388,7 @@ class Company extends DataModel
     }
     
     /**
-     * @param string $bankName
+     * @param string $bankName Bank name e.g. "Deutsche Bank"
      * @return \jtl\Connector\Model\Company
      */
     public function setBankName($bankName)
@@ -398,7 +398,7 @@ class Company extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Bank name e.g. "Deutsche Bank"
      */
     public function getBankName()
     {
@@ -406,7 +406,7 @@ class Company extends DataModel
     }
     
     /**
-     * @param string $accountHolder
+     * @param string $accountHolder Bank account holder name e.g. "John Doe"
      * @return \jtl\Connector\Model\Company
      */
     public function setAccountHolder($accountHolder)
@@ -416,7 +416,7 @@ class Company extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Bank account holder name e.g. "John Doe"
      */
     public function getAccountHolder()
     {
@@ -424,7 +424,7 @@ class Company extends DataModel
     }
     
     /**
-     * @param string $vatNumber
+     * @param string $vatNumber VAT registration number (german: USt-ID)
      * @return \jtl\Connector\Model\Company
      */
     public function setVatNumber($vatNumber)
@@ -434,7 +434,7 @@ class Company extends DataModel
     }
     
     /**
-     * @return string
+     * @return string VAT registration number (german: USt-ID)
      */
     public function getVatNumber()
     {
@@ -442,7 +442,7 @@ class Company extends DataModel
     }
     
     /**
-     * @param string $taxIdNumber
+     * @param string $taxIdNumber Tax id number (german: Steuernummer)
      * @return \jtl\Connector\Model\Company
      */
     public function setTaxIdNumber($taxIdNumber)
@@ -452,7 +452,7 @@ class Company extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Tax id number (german: Steuernummer)
      */
     public function getTaxIdNumber()
     {
@@ -460,7 +460,7 @@ class Company extends DataModel
     }
     
     /**
-     * @param string $iban
+     * @param string $iban International Bank Account Number (IBAN) 
      * @return \jtl\Connector\Model\Company
      */
     public function setIban($iban)
@@ -470,7 +470,7 @@ class Company extends DataModel
     }
     
     /**
-     * @return string
+     * @return string International Bank Account Number (IBAN) 
      */
     public function getIban()
     {
@@ -478,7 +478,7 @@ class Company extends DataModel
     }
     
     /**
-     * @param string $bic
+     * @param string $bic Bank Identifier Code (BIC)
      * @return \jtl\Connector\Model\Company
      */
     public function setBic($bic)
@@ -488,7 +488,7 @@ class Company extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Bank Identifier Code (BIC)
      */
     public function getBic()
     {

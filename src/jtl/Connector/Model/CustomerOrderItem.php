@@ -17,62 +17,62 @@ use \jtl\Core\Model\DataModel;
 class CustomerOrderItem extends DataModel
 {
     /**
-     * @var string - Unique customerOrderItem id
+     * @var string Unique customerOrderItem id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to product
+     * @var string Reference to product
      */
     protected $_productId = '';
     
     /**
-     * @var string - Reference to shippingClass
+     * @var string Reference to shippingClass
      */
     protected $_shippingClassId = '';
     
     /**
-     * @var string - Reference to customerOrder
+     * @var string Reference to customerOrder
      */
     protected $_customerOrderId = '';
     
     /**
-     * @var string - Order item name
+     * @var string Order item name
      */
     protected $_name = '';
     
     /**
-     * @var string - Stock keeping Unit (unique item identifier)
+     * @var string Stock keeping Unit (unique item identifier)
      */
     protected $_sku = '';
     
     /**
-     * @var double - Price (net)
+     * @var double Price (net)
      */
     protected $_price = 0.0;
     
     /**
-     * @var double - Value added tax
+     * @var double Value added tax
      */
     protected $_vat = 0.0;
     
     /**
-     * @var int - Quantity purchased
+     * @var int Quantity purchased
      */
     protected $_quantity = 0;
     
     /**
-     * @var string - Item type e.g. "product" or "shipping"
+     * @var string Item type e.g. "product" or "shipping"
      */
     protected $_type = '';
     
     /**
-     * @var string - Optional unique Hashsum (if item is part of configurable item
+     * @var string Optional unique Hashsum (if item is part of configurable item
      */
     protected $_unique = '';
     
     /**
-     * @var string - Optional reference to configItemId (if item is part of a configurable item)
+     * @var string Optional reference to configItemId (if item is part of a configurable item)
      */
     protected $_configItemId = '0';
     
@@ -120,7 +120,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique customerOrderItem id
      * @return \jtl\Connector\Model\CustomerOrderItem
      */
     public function setId($id)
@@ -130,7 +130,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique customerOrderItem id
      */
     public function getId()
     {
@@ -138,7 +138,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @param string $productId
+     * @param string $productId Reference to product
      * @return \jtl\Connector\Model\CustomerOrderItem
      */
     public function setProductId($productId)
@@ -148,7 +148,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to product
      */
     public function getProductId()
     {
@@ -156,7 +156,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @param string $shippingClassId
+     * @param string $shippingClassId Reference to shippingClass
      * @return \jtl\Connector\Model\CustomerOrderItem
      */
     public function setShippingClassId($shippingClassId)
@@ -166,7 +166,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to shippingClass
      */
     public function getShippingClassId()
     {
@@ -174,7 +174,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @param string $customerOrderId
+     * @param string $customerOrderId Reference to customerOrder
      * @return \jtl\Connector\Model\CustomerOrderItem
      */
     public function setCustomerOrderId($customerOrderId)
@@ -184,7 +184,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to customerOrder
      */
     public function getCustomerOrderId()
     {
@@ -192,7 +192,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @param string $name
+     * @param string $name Order item name
      * @return \jtl\Connector\Model\CustomerOrderItem
      */
     public function setName($name)
@@ -202,7 +202,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Order item name
      */
     public function getName()
     {
@@ -210,7 +210,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @param string $sku
+     * @param string $sku Stock keeping Unit (unique item identifier)
      * @return \jtl\Connector\Model\CustomerOrderItem
      */
     public function setSku($sku)
@@ -220,7 +220,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Stock keeping Unit (unique item identifier)
      */
     public function getSku()
     {
@@ -228,7 +228,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @param double $price
+     * @param double $price Price (net)
      * @return \jtl\Connector\Model\CustomerOrderItem
      */
     public function setPrice($price)
@@ -238,7 +238,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Price (net)
      */
     public function getPrice()
     {
@@ -246,7 +246,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @param double $vat
+     * @param double $vat Value added tax
      * @return \jtl\Connector\Model\CustomerOrderItem
      */
     public function setVat($vat)
@@ -256,7 +256,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Value added tax
      */
     public function getVat()
     {
@@ -264,7 +264,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @param int $quantity
+     * @param int $quantity Quantity purchased
      * @return \jtl\Connector\Model\CustomerOrderItem
      */
     public function setQuantity($quantity)
@@ -274,7 +274,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @return int
+     * @return int Quantity purchased
      */
     public function getQuantity()
     {
@@ -282,7 +282,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @param string $type
+     * @param string $type Item type e.g. "product" or "shipping"
      * @return \jtl\Connector\Model\CustomerOrderItem
      */
     public function setType($type)
@@ -292,7 +292,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Item type e.g. "product" or "shipping"
      */
     public function getType()
     {
@@ -300,7 +300,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @param string $unique
+     * @param string $unique Optional unique Hashsum (if item is part of configurable item
      * @return \jtl\Connector\Model\CustomerOrderItem
      */
     public function setUnique($unique)
@@ -310,7 +310,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional unique Hashsum (if item is part of configurable item
      */
     public function getUnique()
     {
@@ -318,7 +318,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @param string $configItemId
+     * @param string $configItemId Optional reference to configItemId (if item is part of a configurable item)
      * @return \jtl\Connector\Model\CustomerOrderItem
      */
     public function setConfigItemId($configItemId)
@@ -328,7 +328,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional reference to configItemId (if item is part of a configurable item)
      */
     public function getConfigItemId()
     {

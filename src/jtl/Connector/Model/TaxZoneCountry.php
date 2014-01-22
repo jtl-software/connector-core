@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class TaxZoneCountry extends DataModel
 {
     /**
-     * @var string - Unique taxZoneCountry id
+     * @var string Unique taxZoneCountry id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to taxZone
+     * @var string Reference to taxZone
      */
     protected $_taxZoneId = '';
     
     /**
-     * @var string - Country ISO 3166-2 (2 letter Uppercase)
+     * @var string Country ISO 3166-2 (2 letter Uppercase)
      */
     protected $_countryIso = '';
     
@@ -58,7 +58,7 @@ class TaxZoneCountry extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique taxZoneCountry id
      * @return \jtl\Connector\Model\TaxZoneCountry
      */
     public function setId($id)
@@ -68,7 +68,7 @@ class TaxZoneCountry extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique taxZoneCountry id
      */
     public function getId()
     {
@@ -76,7 +76,7 @@ class TaxZoneCountry extends DataModel
     }
     
     /**
-     * @param string $taxZoneId
+     * @param string $taxZoneId Reference to taxZone
      * @return \jtl\Connector\Model\TaxZoneCountry
      */
     public function setTaxZoneId($taxZoneId)
@@ -86,7 +86,7 @@ class TaxZoneCountry extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to taxZone
      */
     public function getTaxZoneId()
     {
@@ -94,7 +94,7 @@ class TaxZoneCountry extends DataModel
     }
     
     /**
-     * @param string $countryIso
+     * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
      * @return \jtl\Connector\Model\TaxZoneCountry
      */
     public function setCountryIso($countryIso)
@@ -104,7 +104,7 @@ class TaxZoneCountry extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Country ISO 3166-2 (2 letter Uppercase)
      */
     public function getCountryIso()
     {

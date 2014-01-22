@@ -17,12 +17,12 @@ use \jtl\Core\Model\DataModel;
 class ProductType extends DataModel
 {
     /**
-     * @var string - Unique productType id
+     * @var string Unique productType id
      */
     protected $_id = '';
     
     /**
-     * @var string - Optional (internal) product type name
+     * @var string Optional (internal) product type name
      */
     protected $_name = '';
     
@@ -52,7 +52,7 @@ class ProductType extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique productType id
      * @return \jtl\Connector\Model\ProductType
      */
     public function setId($id)
@@ -62,7 +62,7 @@ class ProductType extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique productType id
      */
     public function getId()
     {
@@ -70,7 +70,7 @@ class ProductType extends DataModel
     }
     
     /**
-     * @param string $name
+     * @param string $name Optional (internal) product type name
      * @return \jtl\Connector\Model\ProductType
      */
     public function setName($name)
@@ -80,7 +80,7 @@ class ProductType extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional (internal) product type name
      */
     public function getName()
     {

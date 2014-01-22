@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class CategoryAttr extends DataModel
 {
     /**
-     * @var string - Unique categoryAttr id
+     * @var string Unique categoryAttr id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to category
+     * @var string Reference to category
      */
     protected $_categoryId = '';
     
     /**
-     * @var int - Optional sort number
+     * @var int Optional sort number
      */
     protected $_sort = 0;
     
@@ -62,7 +62,7 @@ class CategoryAttr extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique categoryAttr id
      * @return \jtl\Connector\Model\CategoryAttr
      */
     public function setId($id)
@@ -72,7 +72,7 @@ class CategoryAttr extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique categoryAttr id
      */
     public function getId()
     {
@@ -80,7 +80,7 @@ class CategoryAttr extends DataModel
     }
     
     /**
-     * @param string $categoryId
+     * @param string $categoryId Reference to category
      * @return \jtl\Connector\Model\CategoryAttr
      */
     public function setCategoryId($categoryId)
@@ -90,7 +90,7 @@ class CategoryAttr extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to category
      */
     public function getCategoryId()
     {
@@ -98,7 +98,7 @@ class CategoryAttr extends DataModel
     }
     
     /**
-     * @param int $sort
+     * @param int $sort Optional sort number
      * @return \jtl\Connector\Model\CategoryAttr
      */
     public function setSort($sort)
@@ -108,7 +108,7 @@ class CategoryAttr extends DataModel
     }
     
     /**
-     * @return int
+     * @return int Optional sort number
      */
     public function getSort()
     {

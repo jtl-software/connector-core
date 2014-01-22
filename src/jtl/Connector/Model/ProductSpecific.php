@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class ProductSpecific extends DataModel
 {
     /**
-     * @var string - Unique productSpecific id
+     * @var string Unique productSpecific id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to specificValue
+     * @var string Reference to specificValue
      */
     protected $_specificValueId = '';
     
     /**
-     * @var string - Reference to product
+     * @var string Reference to product
      */
     protected $_productId = '';
     
@@ -58,7 +58,7 @@ class ProductSpecific extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique productSpecific id
      * @return \jtl\Connector\Model\ProductSpecific
      */
     public function setId($id)
@@ -68,7 +68,7 @@ class ProductSpecific extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique productSpecific id
      */
     public function getId()
     {
@@ -76,7 +76,7 @@ class ProductSpecific extends DataModel
     }
     
     /**
-     * @param string $specificValueId
+     * @param string $specificValueId Reference to specificValue
      * @return \jtl\Connector\Model\ProductSpecific
      */
     public function setSpecificValueId($specificValueId)
@@ -86,7 +86,7 @@ class ProductSpecific extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to specificValue
      */
     public function getSpecificValueId()
     {
@@ -94,7 +94,7 @@ class ProductSpecific extends DataModel
     }
     
     /**
-     * @param string $productId
+     * @param string $productId Reference to product
      * @return \jtl\Connector\Model\ProductSpecific
      */
     public function setProductId($productId)
@@ -104,7 +104,7 @@ class ProductSpecific extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to product
      */
     public function getProductId()
     {

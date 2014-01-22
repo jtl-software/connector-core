@@ -17,237 +17,237 @@ use \jtl\Core\Model\DataModel;
 class Product extends DataModel
 {
     /**
-     * @var string - Unique product id
+     * @var string Unique product id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to master product
+     * @var string Reference to master product
      */
     protected $_masterProductId = '';
     
     /**
-     * @var string - Reference to manufacturer
+     * @var string Reference to manufacturer
      */
     protected $_manufacturerId = '';
     
     /**
-     * @var string - Reference to (current) deliveryStatus
+     * @var string Reference to (current) deliveryStatus
      */
     protected $_deliveryStatusId = '';
     
     /**
-     * @var string - Reference to unit
+     * @var string Reference to unit
      */
     protected $_unitId = '';
     
     /**
-     * @var string - Optional reference to basePriceUnit
+     * @var string Optional reference to basePriceUnit
      */
     protected $_basePriceUnitId = '';
     
     /**
-     * @var string - Reference to shippingClass
+     * @var string Reference to shippingClass
      */
     protected $_shippingClassId = '';
     
     /**
-     * @var string - Optional stock keeping unit identifier
+     * @var string Optional stock keeping unit identifier
      */
     protected $_sku = '';
     
     /**
-     * @var string - Optional internal product note
+     * @var string Optional internal product note
      */
     protected $_note = '';
     
     /**
-     * @var double - Optional stock (level)
+     * @var double Optional stock (level)
      */
     protected $_stockLevel = 0;
     
     /**
-     * @var double - Value added tax
+     * @var double Value added tax
      */
     protected $_vat = 0.0;
     
     /**
-     * @var double - Optional minimum quantity needed to purchase product
+     * @var double Optional minimum quantity needed to purchase product
      */
     protected $_minimumOrderQuantity = 0;
     
     /**
-     * @var string - Optional European Article Number (EAN)
+     * @var string Optional European Article Number (EAN)
      */
     protected $_ean = '';
     
     /**
-     * @var bool - Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
+     * @var bool Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
      */
     protected $_isTopProduct = false;
     
     /**
-     * @var double - Productweight exclusive packaging
+     * @var double Productweight exclusive packaging
      */
     protected $_productWeight = 0;
     
     /**
-     * @var double - Productweight inclusive packaging
+     * @var double Productweight inclusive packaging
      */
     protected $_shippingWeight = 0;
     
     /**
-     * @var bool - Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
+     * @var bool Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
      */
     protected $_isNew = false;
     
     /**
-     * @var double - Optional recommended retail price (gross) 
+     * @var double Optional recommended retail price (gross) 
      */
     protected $_recommendedRetailPrice = 0.0;
     
     /**
-     * @var bool - Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
+     * @var bool Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
      */
     protected $_considerStock = false;
     
     /**
-     * @var bool - Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true. 
+     * @var bool Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true. 
      */
     protected $_permitNegativeStock = false;
     
     /**
-     * @var bool - Optional: Consider stock levels of productVariations. Same as considerStock but for variations. 
+     * @var bool Optional: Consider stock levels of productVariations. Same as considerStock but for variations. 
      */
     protected $_considerVariationStock = false;
     
     /**
-     * @var bool - Optional: Set to true to allow non-integer quantites for purchase
+     * @var bool Optional: Set to true to allow non-integer quantites for purchase
      */
     protected $_isDivisible = false;
     
     /**
-     * @var bool - Optional: Set to true to display base price / unit pricing measure
+     * @var bool Optional: Set to true to display base price / unit pricing measure
      */
     protected $_considerBasePrice = false;
     
     /**
-     * @var double - Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
+     * @var double Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
      */
     protected $_basePriceDivisor = 0.0;
     
     /**
-     * @var string - Optional internal keywords and synonyms for product
+     * @var string Optional internal keywords and synonyms for product
      */
     protected $_keywords = '';
     
     /**
-     * @var int - Optional sort number for product sorting in lists
+     * @var int Optional sort number for product sorting in lists
      */
     protected $_sort = 0;
     
     /**
-     * @var string - Creation date
+     * @var string Creation date
      */
     protected $_created = '0000-00-00';
     
     /**
-     * @var string - Optional available from date. Specify a date, upon when product can be purchased. 
+     * @var string Optional available from date. Specify a date, upon when product can be purchased. 
      */
     protected $_availableFrom = '0000-00-00';
     
     /**
-     * @var string - Optional manufacturer number
+     * @var string Optional manufacturer number
      */
     protected $_manufacturerNumber = '';
     
     /**
-     * @var string - Optional serial number
+     * @var string Optional serial number
      */
     protected $_serialNumber = '';
     
     /**
-     * @var string - Optional International Standard Book Number
+     * @var string Optional International Standard Book Number
      */
     protected $_isbn = '';
     
     /**
-     * @var string - Optional Amazon Standard Identification Number
+     * @var string Optional Amazon Standard Identification Number
      */
     protected $_asin = '';
     
     /**
-     * @var string - Optional UN number, used to define hazardous properties
+     * @var string Optional UN number, used to define hazardous properties
      */
     protected $_unNumber = '';
     
     /**
-     * @var string - Optional Hazard identifier, encodes general hazard class und subdivision
+     * @var string Optional Hazard identifier, encodes general hazard class und subdivision
      */
     protected $_hazardIdNumber = '';
     
     /**
-     * @var string - Optional TARIC
+     * @var string Optional TARIC
      */
     protected $_taric = '';
     
     /**
-     * @var bool - Optional flag if product is master product
+     * @var bool Optional flag if product is master product
      */
     protected $_isMasterProduct = false;
     
     /**
-     * @var double - Optional: Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
+     * @var double Optional: Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      */
     protected $_takeOffQuantity = 0.0;
     
     /**
-     * @var string - Optional reference to setArticle
+     * @var string Optional reference to setArticle
      */
     protected $_setArticleId = '';
     
     /**
-     * @var string - Optional Universal Product Code
+     * @var string Optional Universal Product Code
      */
     protected $_upc = '';
     
     /**
-     * @var string - Optional Origin country
+     * @var string Optional Origin country
      */
     protected $_originCountry = '';
     
     /**
-     * @var string - Optional Ebay product ID
+     * @var string Optional Ebay product ID
      */
     protected $_epid = '';
     
     /**
-     * @var string - Optional reference to productType
+     * @var string Optional reference to productType
      */
     protected $_productTypeId = '';
     
     /**
-     * @var double - Optional expected inflow quantity
+     * @var double Optional expected inflow quantity
      */
     protected $_inflowQuantity = 0.0;
     
     /**
-     * @var string - Optional expected inflow date
+     * @var string Optional expected inflow date
      */
     protected $_inflowDate = '';
     
     /**
-     * @var double - Optional supplier stock level for product
+     * @var double Optional supplier stock level for product
      */
     protected $_supplierStockLevel = 0;
     
     /**
-     * @var double - Optional average supplier delivery time in days. Default 0 if no average delivery time is present. 
+     * @var double Optional average supplier delivery time in days. Default 0 if no average delivery time is present. 
      */
     protected $_supplierDeliveryTime = 0;
     
     /**
-     * @var string - Optional best before date. Default 0000-00-00 if product has no best-before-date.
+     * @var string Optional best before date. Default 0000-00-00 if product has no best-before-date.
      */
     protected $_bestBefore = '0000-00-00';
     
@@ -334,7 +334,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique product id
      * @return \jtl\Connector\Model\Product
      */
     public function setId($id)
@@ -344,7 +344,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique product id
      */
     public function getId()
     {
@@ -352,7 +352,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $masterProductId
+     * @param string $masterProductId Reference to master product
      * @return \jtl\Connector\Model\Product
      */
     public function setMasterProductId($masterProductId)
@@ -362,7 +362,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to master product
      */
     public function getMasterProductId()
     {
@@ -370,7 +370,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $manufacturerId
+     * @param string $manufacturerId Reference to manufacturer
      * @return \jtl\Connector\Model\Product
      */
     public function setManufacturerId($manufacturerId)
@@ -380,7 +380,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to manufacturer
      */
     public function getManufacturerId()
     {
@@ -388,7 +388,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $deliveryStatusId
+     * @param string $deliveryStatusId Reference to (current) deliveryStatus
      * @return \jtl\Connector\Model\Product
      */
     public function setDeliveryStatusId($deliveryStatusId)
@@ -398,7 +398,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to (current) deliveryStatus
      */
     public function getDeliveryStatusId()
     {
@@ -406,7 +406,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $unitId
+     * @param string $unitId Reference to unit
      * @return \jtl\Connector\Model\Product
      */
     public function setUnitId($unitId)
@@ -416,7 +416,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to unit
      */
     public function getUnitId()
     {
@@ -424,7 +424,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $basePriceUnitId
+     * @param string $basePriceUnitId Optional reference to basePriceUnit
      * @return \jtl\Connector\Model\Product
      */
     public function setBasePriceUnitId($basePriceUnitId)
@@ -434,7 +434,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional reference to basePriceUnit
      */
     public function getBasePriceUnitId()
     {
@@ -442,7 +442,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $shippingClassId
+     * @param string $shippingClassId Reference to shippingClass
      * @return \jtl\Connector\Model\Product
      */
     public function setShippingClassId($shippingClassId)
@@ -452,7 +452,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to shippingClass
      */
     public function getShippingClassId()
     {
@@ -460,7 +460,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $sku
+     * @param string $sku Optional stock keeping unit identifier
      * @return \jtl\Connector\Model\Product
      */
     public function setSku($sku)
@@ -470,7 +470,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional stock keeping unit identifier
      */
     public function getSku()
     {
@@ -478,7 +478,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $note
+     * @param string $note Optional internal product note
      * @return \jtl\Connector\Model\Product
      */
     public function setNote($note)
@@ -488,7 +488,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional internal product note
      */
     public function getNote()
     {
@@ -496,7 +496,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param double $stockLevel
+     * @param double $stockLevel Optional stock (level)
      * @return \jtl\Connector\Model\Product
      */
     public function setStockLevel($stockLevel)
@@ -506,7 +506,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Optional stock (level)
      */
     public function getStockLevel()
     {
@@ -514,7 +514,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param double $vat
+     * @param double $vat Value added tax
      * @return \jtl\Connector\Model\Product
      */
     public function setVat($vat)
@@ -524,7 +524,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Value added tax
      */
     public function getVat()
     {
@@ -532,7 +532,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param double $minimumOrderQuantity
+     * @param double $minimumOrderQuantity Optional minimum quantity needed to purchase product
      * @return \jtl\Connector\Model\Product
      */
     public function setMinimumOrderQuantity($minimumOrderQuantity)
@@ -542,7 +542,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Optional minimum quantity needed to purchase product
      */
     public function getMinimumOrderQuantity()
     {
@@ -550,7 +550,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $ean
+     * @param string $ean Optional European Article Number (EAN)
      * @return \jtl\Connector\Model\Product
      */
     public function setEan($ean)
@@ -560,7 +560,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional European Article Number (EAN)
      */
     public function getEan()
     {
@@ -568,7 +568,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param bool $isTopProduct
+     * @param bool $isTopProduct Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
      * @return \jtl\Connector\Model\Product
      */
     public function setIsTopProduct($isTopProduct)
@@ -578,7 +578,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return bool
+     * @return bool Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
      */
     public function getIsTopProduct()
     {
@@ -586,7 +586,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param double $productWeight
+     * @param double $productWeight Productweight exclusive packaging
      * @return \jtl\Connector\Model\Product
      */
     public function setProductWeight($productWeight)
@@ -596,7 +596,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Productweight exclusive packaging
      */
     public function getProductWeight()
     {
@@ -604,7 +604,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param double $shippingWeight
+     * @param double $shippingWeight Productweight inclusive packaging
      * @return \jtl\Connector\Model\Product
      */
     public function setShippingWeight($shippingWeight)
@@ -614,7 +614,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Productweight inclusive packaging
      */
     public function getShippingWeight()
     {
@@ -622,7 +622,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param bool $isNew
+     * @param bool $isNew Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
      * @return \jtl\Connector\Model\Product
      */
     public function setIsNew($isNew)
@@ -632,7 +632,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return bool
+     * @return bool Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
      */
     public function getIsNew()
     {
@@ -640,7 +640,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param double $recommendedRetailPrice
+     * @param double $recommendedRetailPrice Optional recommended retail price (gross) 
      * @return \jtl\Connector\Model\Product
      */
     public function setRecommendedRetailPrice($recommendedRetailPrice)
@@ -650,7 +650,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Optional recommended retail price (gross) 
      */
     public function getRecommendedRetailPrice()
     {
@@ -658,7 +658,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param bool $considerStock
+     * @param bool $considerStock Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
      * @return \jtl\Connector\Model\Product
      */
     public function setConsiderStock($considerStock)
@@ -668,7 +668,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return bool
+     * @return bool Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
      */
     public function getConsiderStock()
     {
@@ -676,7 +676,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param bool $permitNegativeStock
+     * @param bool $permitNegativeStock Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true. 
      * @return \jtl\Connector\Model\Product
      */
     public function setPermitNegativeStock($permitNegativeStock)
@@ -686,7 +686,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return bool
+     * @return bool Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true. 
      */
     public function getPermitNegativeStock()
     {
@@ -694,7 +694,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param bool $considerVariationStock
+     * @param bool $considerVariationStock Optional: Consider stock levels of productVariations. Same as considerStock but for variations. 
      * @return \jtl\Connector\Model\Product
      */
     public function setConsiderVariationStock($considerVariationStock)
@@ -704,7 +704,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return bool
+     * @return bool Optional: Consider stock levels of productVariations. Same as considerStock but for variations. 
      */
     public function getConsiderVariationStock()
     {
@@ -712,7 +712,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param bool $isDivisible
+     * @param bool $isDivisible Optional: Set to true to allow non-integer quantites for purchase
      * @return \jtl\Connector\Model\Product
      */
     public function setIsDivisible($isDivisible)
@@ -722,7 +722,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return bool
+     * @return bool Optional: Set to true to allow non-integer quantites for purchase
      */
     public function getIsDivisible()
     {
@@ -730,7 +730,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param bool $considerBasePrice
+     * @param bool $considerBasePrice Optional: Set to true to display base price / unit pricing measure
      * @return \jtl\Connector\Model\Product
      */
     public function setConsiderBasePrice($considerBasePrice)
@@ -740,7 +740,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return bool
+     * @return bool Optional: Set to true to display base price / unit pricing measure
      */
     public function getConsiderBasePrice()
     {
@@ -748,7 +748,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param double $basePriceDivisor
+     * @param double $basePriceDivisor Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
      * @return \jtl\Connector\Model\Product
      */
     public function setBasePriceDivisor($basePriceDivisor)
@@ -758,7 +758,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
      */
     public function getBasePriceDivisor()
     {
@@ -766,7 +766,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $keywords
+     * @param string $keywords Optional internal keywords and synonyms for product
      * @return \jtl\Connector\Model\Product
      */
     public function setKeywords($keywords)
@@ -776,7 +776,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional internal keywords and synonyms for product
      */
     public function getKeywords()
     {
@@ -784,7 +784,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param int $sort
+     * @param int $sort Optional sort number for product sorting in lists
      * @return \jtl\Connector\Model\Product
      */
     public function setSort($sort)
@@ -794,7 +794,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return int
+     * @return int Optional sort number for product sorting in lists
      */
     public function getSort()
     {
@@ -802,7 +802,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $created
+     * @param string $created Creation date
      * @return \jtl\Connector\Model\Product
      */
     public function setCreated($created)
@@ -812,7 +812,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Creation date
      */
     public function getCreated()
     {
@@ -820,7 +820,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $availableFrom
+     * @param string $availableFrom Optional available from date. Specify a date, upon when product can be purchased. 
      * @return \jtl\Connector\Model\Product
      */
     public function setAvailableFrom($availableFrom)
@@ -830,7 +830,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional available from date. Specify a date, upon when product can be purchased. 
      */
     public function getAvailableFrom()
     {
@@ -838,7 +838,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $manufacturerNumber
+     * @param string $manufacturerNumber Optional manufacturer number
      * @return \jtl\Connector\Model\Product
      */
     public function setManufacturerNumber($manufacturerNumber)
@@ -848,7 +848,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional manufacturer number
      */
     public function getManufacturerNumber()
     {
@@ -856,7 +856,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $serialNumber
+     * @param string $serialNumber Optional serial number
      * @return \jtl\Connector\Model\Product
      */
     public function setSerialNumber($serialNumber)
@@ -866,7 +866,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional serial number
      */
     public function getSerialNumber()
     {
@@ -874,7 +874,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $isbn
+     * @param string $isbn Optional International Standard Book Number
      * @return \jtl\Connector\Model\Product
      */
     public function setIsbn($isbn)
@@ -884,7 +884,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional International Standard Book Number
      */
     public function getIsbn()
     {
@@ -892,7 +892,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $asin
+     * @param string $asin Optional Amazon Standard Identification Number
      * @return \jtl\Connector\Model\Product
      */
     public function setAsin($asin)
@@ -902,7 +902,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional Amazon Standard Identification Number
      */
     public function getAsin()
     {
@@ -910,7 +910,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $unNumber
+     * @param string $unNumber Optional UN number, used to define hazardous properties
      * @return \jtl\Connector\Model\Product
      */
     public function setUnNumber($unNumber)
@@ -920,7 +920,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional UN number, used to define hazardous properties
      */
     public function getUnNumber()
     {
@@ -928,7 +928,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $hazardIdNumber
+     * @param string $hazardIdNumber Optional Hazard identifier, encodes general hazard class und subdivision
      * @return \jtl\Connector\Model\Product
      */
     public function setHazardIdNumber($hazardIdNumber)
@@ -938,7 +938,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional Hazard identifier, encodes general hazard class und subdivision
      */
     public function getHazardIdNumber()
     {
@@ -946,7 +946,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $taric
+     * @param string $taric Optional TARIC
      * @return \jtl\Connector\Model\Product
      */
     public function setTaric($taric)
@@ -956,7 +956,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional TARIC
      */
     public function getTaric()
     {
@@ -964,7 +964,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param bool $isMasterProduct
+     * @param bool $isMasterProduct Optional flag if product is master product
      * @return \jtl\Connector\Model\Product
      */
     public function setIsMasterProduct($isMasterProduct)
@@ -974,7 +974,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return bool
+     * @return bool Optional flag if product is master product
      */
     public function getIsMasterProduct()
     {
@@ -982,7 +982,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param double $takeOffQuantity
+     * @param double $takeOffQuantity Optional: Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      * @return \jtl\Connector\Model\Product
      */
     public function setTakeOffQuantity($takeOffQuantity)
@@ -992,7 +992,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Optional: Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      */
     public function getTakeOffQuantity()
     {
@@ -1000,7 +1000,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $setArticleId
+     * @param string $setArticleId Optional reference to setArticle
      * @return \jtl\Connector\Model\Product
      */
     public function setSetArticleId($setArticleId)
@@ -1010,7 +1010,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional reference to setArticle
      */
     public function getSetArticleId()
     {
@@ -1018,7 +1018,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $upc
+     * @param string $upc Optional Universal Product Code
      * @return \jtl\Connector\Model\Product
      */
     public function setUpc($upc)
@@ -1028,7 +1028,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional Universal Product Code
      */
     public function getUpc()
     {
@@ -1036,7 +1036,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $originCountry
+     * @param string $originCountry Optional Origin country
      * @return \jtl\Connector\Model\Product
      */
     public function setOriginCountry($originCountry)
@@ -1046,7 +1046,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional Origin country
      */
     public function getOriginCountry()
     {
@@ -1054,7 +1054,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $epid
+     * @param string $epid Optional Ebay product ID
      * @return \jtl\Connector\Model\Product
      */
     public function setEpid($epid)
@@ -1064,7 +1064,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional Ebay product ID
      */
     public function getEpid()
     {
@@ -1072,7 +1072,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $productTypeId
+     * @param string $productTypeId Optional reference to productType
      * @return \jtl\Connector\Model\Product
      */
     public function setProductTypeId($productTypeId)
@@ -1082,7 +1082,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional reference to productType
      */
     public function getProductTypeId()
     {
@@ -1090,7 +1090,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param double $inflowQuantity
+     * @param double $inflowQuantity Optional expected inflow quantity
      * @return \jtl\Connector\Model\Product
      */
     public function setInflowQuantity($inflowQuantity)
@@ -1100,7 +1100,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Optional expected inflow quantity
      */
     public function getInflowQuantity()
     {
@@ -1108,7 +1108,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $inflowDate
+     * @param string $inflowDate Optional expected inflow date
      * @return \jtl\Connector\Model\Product
      */
     public function setInflowDate($inflowDate)
@@ -1118,7 +1118,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional expected inflow date
      */
     public function getInflowDate()
     {
@@ -1126,7 +1126,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param double $supplierStockLevel
+     * @param double $supplierStockLevel Optional supplier stock level for product
      * @return \jtl\Connector\Model\Product
      */
     public function setSupplierStockLevel($supplierStockLevel)
@@ -1136,7 +1136,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Optional supplier stock level for product
      */
     public function getSupplierStockLevel()
     {
@@ -1144,7 +1144,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param double $supplierDeliveryTime
+     * @param double $supplierDeliveryTime Optional average supplier delivery time in days. Default 0 if no average delivery time is present. 
      * @return \jtl\Connector\Model\Product
      */
     public function setSupplierDeliveryTime($supplierDeliveryTime)
@@ -1154,7 +1154,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Optional average supplier delivery time in days. Default 0 if no average delivery time is present. 
      */
     public function getSupplierDeliveryTime()
     {
@@ -1162,7 +1162,7 @@ class Product extends DataModel
     }
     
     /**
-     * @param string $bestBefore
+     * @param string $bestBefore Optional best before date. Default 0000-00-00 if product has no best-before-date.
      * @return \jtl\Connector\Model\Product
      */
     public function setBestBefore($bestBefore)
@@ -1172,7 +1172,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional best before date. Default 0000-00-00 if product has no best-before-date.
      */
     public function getBestBefore()
     {

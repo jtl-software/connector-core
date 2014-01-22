@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class CustomerGroup extends DataModel
 {
     /**
-     * @var string - Unique customerGroup id
+     * @var string Unique customerGroup id
      */
     protected $_id = '';
     
     /**
-     * @var double - Optional percentual discount on all products. Negative Value means surcharge. 
+     * @var double Optional percentual discount on all products. Negative Value means surcharge. 
      */
     protected $_discount = 0;
     
     /**
-     * @var bool - Optional: Flag default customer group
+     * @var bool Optional: Flag default customer group
      */
     protected $_isDefault = false;
     
     /**
-     * @var bool - Optional: Show net prices default instead of gross prices
+     * @var bool Optional: Show net prices default instead of gross prices
      */
     protected $_applyNetPrice = false;
     
@@ -72,7 +72,7 @@ class CustomerGroup extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique customerGroup id
      * @return \jtl\Connector\Model\CustomerGroup
      */
     public function setId($id)
@@ -82,7 +82,7 @@ class CustomerGroup extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique customerGroup id
      */
     public function getId()
     {
@@ -90,7 +90,7 @@ class CustomerGroup extends DataModel
     }
     
     /**
-     * @param double $discount
+     * @param double $discount Optional percentual discount on all products. Negative Value means surcharge. 
      * @return \jtl\Connector\Model\CustomerGroup
      */
     public function setDiscount($discount)
@@ -100,7 +100,7 @@ class CustomerGroup extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Optional percentual discount on all products. Negative Value means surcharge. 
      */
     public function getDiscount()
     {
@@ -108,7 +108,7 @@ class CustomerGroup extends DataModel
     }
     
     /**
-     * @param bool $isDefault
+     * @param bool $isDefault Optional: Flag default customer group
      * @return \jtl\Connector\Model\CustomerGroup
      */
     public function setIsDefault($isDefault)
@@ -118,7 +118,7 @@ class CustomerGroup extends DataModel
     }
     
     /**
-     * @return bool
+     * @return bool Optional: Flag default customer group
      */
     public function getIsDefault()
     {
@@ -126,7 +126,7 @@ class CustomerGroup extends DataModel
     }
     
     /**
-     * @param bool $applyNetPrice
+     * @param bool $applyNetPrice Optional: Show net prices default instead of gross prices
      * @return \jtl\Connector\Model\CustomerGroup
      */
     public function setApplyNetPrice($applyNetPrice)
@@ -136,7 +136,7 @@ class CustomerGroup extends DataModel
     }
     
     /**
-     * @return bool
+     * @return bool Optional: Show net prices default instead of gross prices
      */
     public function getApplyNetPrice()
     {

@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class Specific extends DataModel
 {
     /**
-     * @var string - Unique specific id
+     * @var string Unique specific id
      */
     protected $_id = '';
     
     /**
-     * @var int - Optional sort number
+     * @var int Optional sort number
      */
     protected $_sort = 0;
     
     /**
-     * @var bool - Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
+     * @var bool Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      */
     protected $_isGlobal = false;
     
     /**
-     * @var string - Specific type (radio, dropdown, image...)
+     * @var string Specific type (radio, dropdown, image...)
      */
     protected $_type = '';
     
@@ -72,7 +72,7 @@ class Specific extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique specific id
      * @return \jtl\Connector\Model\Specific
      */
     public function setId($id)
@@ -82,7 +82,7 @@ class Specific extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique specific id
      */
     public function getId()
     {
@@ -90,7 +90,7 @@ class Specific extends DataModel
     }
     
     /**
-     * @param int $sort
+     * @param int $sort Optional sort number
      * @return \jtl\Connector\Model\Specific
      */
     public function setSort($sort)
@@ -100,7 +100,7 @@ class Specific extends DataModel
     }
     
     /**
-     * @return int
+     * @return int Optional sort number
      */
     public function getSort()
     {
@@ -108,7 +108,7 @@ class Specific extends DataModel
     }
     
     /**
-     * @param bool $isGlobal
+     * @param bool $isGlobal Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      * @return \jtl\Connector\Model\Specific
      */
     public function setIsGlobal($isGlobal)
@@ -118,7 +118,7 @@ class Specific extends DataModel
     }
     
     /**
-     * @return bool
+     * @return bool Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      */
     public function getIsGlobal()
     {
@@ -126,7 +126,7 @@ class Specific extends DataModel
     }
     
     /**
-     * @param string $type
+     * @param string $type Specific type (radio, dropdown, image...)
      * @return \jtl\Connector\Model\Specific
      */
     public function setType($type)
@@ -136,7 +136,7 @@ class Specific extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Specific type (radio, dropdown, image...)
      */
     public function getType()
     {

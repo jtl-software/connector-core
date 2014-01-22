@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class ConfigGroupI18n extends DataModel
 {
     /**
-     * @var string - Reference to configGroup
+     * @var string Reference to configGroup
      */
     protected $_configGroupId = '';
     
     /**
-     * @var string - Locale
+     * @var string Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string - Config group name
+     * @var string Config group name
      */
     protected $_name = '';
     
     /**
-     * @var string - Optional description (HTML)
+     * @var string Optional description (HTML)
      */
     protected $_description = '';
     
@@ -64,7 +64,7 @@ class ConfigGroupI18n extends DataModel
     }
     
     /**
-     * @param string $configGroupId
+     * @param string $configGroupId Reference to configGroup
      * @return \jtl\Connector\Model\ConfigGroupI18n
      */
     public function setConfigGroupId($configGroupId)
@@ -74,7 +74,7 @@ class ConfigGroupI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to configGroup
      */
     public function getConfigGroupId()
     {
@@ -82,7 +82,7 @@ class ConfigGroupI18n extends DataModel
     }
     
     /**
-     * @param string $localeName
+     * @param string $localeName Locale
      * @return \jtl\Connector\Model\ConfigGroupI18n
      */
     public function setLocaleName($localeName)
@@ -92,7 +92,7 @@ class ConfigGroupI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Locale
      */
     public function getLocaleName()
     {
@@ -100,7 +100,7 @@ class ConfigGroupI18n extends DataModel
     }
     
     /**
-     * @param string $name
+     * @param string $name Config group name
      * @return \jtl\Connector\Model\ConfigGroupI18n
      */
     public function setName($name)
@@ -110,7 +110,7 @@ class ConfigGroupI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Config group name
      */
     public function getName()
     {
@@ -118,7 +118,7 @@ class ConfigGroupI18n extends DataModel
     }
     
     /**
-     * @param string $description
+     * @param string $description Optional description (HTML)
      * @return \jtl\Connector\Model\ConfigGroupI18n
      */
     public function setDescription($description)
@@ -128,7 +128,7 @@ class ConfigGroupI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional description (HTML)
      */
     public function getDescription()
     {

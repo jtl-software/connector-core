@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class SpecialPrice extends DataModel
 {
     /**
-     * @var string - Reference to customerGroup
+     * @var string Reference to customerGroup
      */
     protected $_customerGroupId = '';
     
     /**
-     * @var string - Reference to productSpecialPrice
+     * @var string Reference to productSpecialPrice
      */
     protected $_productSpecialPriceId = '';
     
     /**
-     * @var double - net price value
+     * @var double net price value
      */
     protected $_priceNet = 0.0;
     
@@ -62,7 +62,7 @@ class SpecialPrice extends DataModel
     }
     
     /**
-     * @param string $customerGroupId
+     * @param string $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\SpecialPrice
      */
     public function setCustomerGroupId($customerGroupId)
@@ -72,7 +72,7 @@ class SpecialPrice extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to customerGroup
      */
     public function getCustomerGroupId()
     {
@@ -80,7 +80,7 @@ class SpecialPrice extends DataModel
     }
     
     /**
-     * @param string $productSpecialPriceId
+     * @param string $productSpecialPriceId Reference to productSpecialPrice
      * @return \jtl\Connector\Model\SpecialPrice
      */
     public function setProductSpecialPriceId($productSpecialPriceId)
@@ -90,7 +90,7 @@ class SpecialPrice extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to productSpecialPrice
      */
     public function getProductSpecialPriceId()
     {
@@ -98,7 +98,7 @@ class SpecialPrice extends DataModel
     }
     
     /**
-     * @param double $priceNet
+     * @param double $priceNet net price value
      * @return \jtl\Connector\Model\SpecialPrice
      */
     public function setPriceNet($priceNet)
@@ -108,7 +108,7 @@ class SpecialPrice extends DataModel
     }
     
     /**
-     * @return double
+     * @return double net price value
      */
     public function getPriceNet()
     {

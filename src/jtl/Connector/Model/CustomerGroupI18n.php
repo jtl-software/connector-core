@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class CustomerGroupI18n extends DataModel
 {
     /**
-     * @var string - Locale
+     * @var string Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string - Reference to customerGroup
+     * @var string Reference to customerGroup
      */
     protected $_customerGroupId = '';
     
     /**
-     * @var string - Localized customer group name
+     * @var string Localized customer group name
      */
     protected $_name = '';
     
@@ -58,7 +58,7 @@ class CustomerGroupI18n extends DataModel
     }
     
     /**
-     * @param string $localeName
+     * @param string $localeName Locale
      * @return \jtl\Connector\Model\CustomerGroupI18n
      */
     public function setLocaleName($localeName)
@@ -68,7 +68,7 @@ class CustomerGroupI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Locale
      */
     public function getLocaleName()
     {
@@ -76,7 +76,7 @@ class CustomerGroupI18n extends DataModel
     }
     
     /**
-     * @param string $customerGroupId
+     * @param string $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\CustomerGroupI18n
      */
     public function setCustomerGroupId($customerGroupId)
@@ -86,7 +86,7 @@ class CustomerGroupI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to customerGroup
      */
     public function getCustomerGroupId()
     {
@@ -94,7 +94,7 @@ class CustomerGroupI18n extends DataModel
     }
     
     /**
-     * @param string $name
+     * @param string $name Localized customer group name
      * @return \jtl\Connector\Model\CustomerGroupI18n
      */
     public function setName($name)
@@ -104,7 +104,7 @@ class CustomerGroupI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Localized customer group name
      */
     public function getName()
     {

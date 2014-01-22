@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class CrossSelling extends DataModel
 {
     /**
-     * @var string - Unique crossSelling id
+     * @var string Unique crossSelling id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to product (main product)
+     * @var string Reference to product (main product)
      */
     protected $_crossSellingProductId = '';
     
     /**
-     * @var string - Reference to crossSellingGroup
+     * @var string Reference to crossSellingGroup
      */
     protected $_crossSellingGroupId = '';
     
     /**
-     * @var string - Reference to product (cross selling product)
+     * @var string Reference to product (cross selling product)
      */
     protected $_productId = '';
     
@@ -64,7 +64,7 @@ class CrossSelling extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique crossSelling id
      * @return \jtl\Connector\Model\CrossSelling
      */
     public function setId($id)
@@ -74,7 +74,7 @@ class CrossSelling extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique crossSelling id
      */
     public function getId()
     {
@@ -82,7 +82,7 @@ class CrossSelling extends DataModel
     }
     
     /**
-     * @param string $crossSellingProductId
+     * @param string $crossSellingProductId Reference to product (main product)
      * @return \jtl\Connector\Model\CrossSelling
      */
     public function setCrossSellingProductId($crossSellingProductId)
@@ -92,7 +92,7 @@ class CrossSelling extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to product (main product)
      */
     public function getCrossSellingProductId()
     {
@@ -100,7 +100,7 @@ class CrossSelling extends DataModel
     }
     
     /**
-     * @param string $crossSellingGroupId
+     * @param string $crossSellingGroupId Reference to crossSellingGroup
      * @return \jtl\Connector\Model\CrossSelling
      */
     public function setCrossSellingGroupId($crossSellingGroupId)
@@ -110,7 +110,7 @@ class CrossSelling extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to crossSellingGroup
      */
     public function getCrossSellingGroupId()
     {
@@ -118,7 +118,7 @@ class CrossSelling extends DataModel
     }
     
     /**
-     * @param string $productId
+     * @param string $productId Reference to product (cross selling product)
      * @return \jtl\Connector\Model\CrossSelling
      */
     public function setProductId($productId)
@@ -128,7 +128,7 @@ class CrossSelling extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to product (cross selling product)
      */
     public function getProductId()
     {

@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class SpecificI18n extends DataModel
 {
     /**
-     * @var string - Locale
+     * @var string Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string - Reference to specific
+     * @var string Reference to specific
      */
     protected $_specificId = '';
     
     /**
-     * @var string - Localized name
+     * @var string Localized name
      */
     protected $_name = '';
     
@@ -58,7 +58,7 @@ class SpecificI18n extends DataModel
     }
     
     /**
-     * @param string $localeName
+     * @param string $localeName Locale
      * @return \jtl\Connector\Model\SpecificI18n
      */
     public function setLocaleName($localeName)
@@ -68,7 +68,7 @@ class SpecificI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Locale
      */
     public function getLocaleName()
     {
@@ -76,7 +76,7 @@ class SpecificI18n extends DataModel
     }
     
     /**
-     * @param string $specificId
+     * @param string $specificId Reference to specific
      * @return \jtl\Connector\Model\SpecificI18n
      */
     public function setSpecificId($specificId)
@@ -86,7 +86,7 @@ class SpecificI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to specific
      */
     public function getSpecificId()
     {
@@ -94,7 +94,7 @@ class SpecificI18n extends DataModel
     }
     
     /**
-     * @param string $name
+     * @param string $name Localized name
      * @return \jtl\Connector\Model\SpecificI18n
      */
     public function setName($name)
@@ -104,7 +104,7 @@ class SpecificI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Localized name
      */
     public function getName()
     {

@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class ProductAttrI18n extends DataModel
 {
     /**
-     * @var string - Locale
+     * @var string Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string - Reference to productAttr
+     * @var string Reference to productAttr
      */
     protected $_productAttrId = '';
     
     /**
-     * @var string - Attribute key
+     * @var string Attribute key
      */
     protected $_key = '';
     
     /**
-     * @var string - Attribute value
+     * @var string Attribute value
      */
     protected $_value = '';
     
@@ -64,7 +64,7 @@ class ProductAttrI18n extends DataModel
     }
     
     /**
-     * @param string $localeName
+     * @param string $localeName Locale
      * @return \jtl\Connector\Model\ProductAttrI18n
      */
     public function setLocaleName($localeName)
@@ -74,7 +74,7 @@ class ProductAttrI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Locale
      */
     public function getLocaleName()
     {
@@ -82,7 +82,7 @@ class ProductAttrI18n extends DataModel
     }
     
     /**
-     * @param string $productAttrId
+     * @param string $productAttrId Reference to productAttr
      * @return \jtl\Connector\Model\ProductAttrI18n
      */
     public function setProductAttrId($productAttrId)
@@ -92,7 +92,7 @@ class ProductAttrI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to productAttr
      */
     public function getProductAttrId()
     {
@@ -100,7 +100,7 @@ class ProductAttrI18n extends DataModel
     }
     
     /**
-     * @param string $key
+     * @param string $key Attribute key
      * @return \jtl\Connector\Model\ProductAttrI18n
      */
     public function setKey($key)
@@ -110,7 +110,7 @@ class ProductAttrI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Attribute key
      */
     public function getKey()
     {
@@ -118,7 +118,7 @@ class ProductAttrI18n extends DataModel
     }
     
     /**
-     * @param string $value
+     * @param string $value Attribute value
      * @return \jtl\Connector\Model\ProductAttrI18n
      */
     public function setValue($value)
@@ -128,7 +128,7 @@ class ProductAttrI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Attribute value
      */
     public function getValue()
     {

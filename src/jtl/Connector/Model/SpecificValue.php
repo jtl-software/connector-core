@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class SpecificValue extends DataModel
 {
     /**
-     * @var string - Unique specificValue id
+     * @var string Unique specificValue id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to specificId
+     * @var string Reference to specificId
      */
     protected $_specificId = '';
     
     /**
-     * @var int - Optional sort number
+     * @var int Optional sort number
      */
     protected $_sort = 0;
     
@@ -62,7 +62,7 @@ class SpecificValue extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique specificValue id
      * @return \jtl\Connector\Model\SpecificValue
      */
     public function setId($id)
@@ -72,7 +72,7 @@ class SpecificValue extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique specificValue id
      */
     public function getId()
     {
@@ -80,7 +80,7 @@ class SpecificValue extends DataModel
     }
     
     /**
-     * @param string $specificId
+     * @param string $specificId Reference to specificId
      * @return \jtl\Connector\Model\SpecificValue
      */
     public function setSpecificId($specificId)
@@ -90,7 +90,7 @@ class SpecificValue extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to specificId
      */
     public function getSpecificId()
     {
@@ -98,7 +98,7 @@ class SpecificValue extends DataModel
     }
     
     /**
-     * @param int $sort
+     * @param int $sort Optional sort number
      * @return \jtl\Connector\Model\SpecificValue
      */
     public function setSort($sort)
@@ -108,7 +108,7 @@ class SpecificValue extends DataModel
     }
     
     /**
-     * @return int
+     * @return int Optional sort number
      */
     public function getSort()
     {

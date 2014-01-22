@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class ProductVariation extends DataModel
 {
     /**
-     * @var string - Unique productVariation id
+     * @var string Unique productVariation id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to product
+     * @var string Reference to product
      */
     protected $_productId = '';
     
     /**
-     * @var string - Variation type e.g. radio or select
+     * @var string Variation type e.g. radio or select
      */
     protected $_type = '';
     
     /**
-     * @var int - Optional sort number
+     * @var int Optional sort number
      */
     protected $_sort = 0;
     
@@ -68,7 +68,7 @@ class ProductVariation extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique productVariation id
      * @return \jtl\Connector\Model\ProductVariation
      */
     public function setId($id)
@@ -78,7 +78,7 @@ class ProductVariation extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique productVariation id
      */
     public function getId()
     {
@@ -86,7 +86,7 @@ class ProductVariation extends DataModel
     }
     
     /**
-     * @param string $productId
+     * @param string $productId Reference to product
      * @return \jtl\Connector\Model\ProductVariation
      */
     public function setProductId($productId)
@@ -96,7 +96,7 @@ class ProductVariation extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to product
      */
     public function getProductId()
     {
@@ -104,7 +104,7 @@ class ProductVariation extends DataModel
     }
     
     /**
-     * @param string $type
+     * @param string $type Variation type e.g. radio or select
      * @return \jtl\Connector\Model\ProductVariation
      */
     public function setType($type)
@@ -114,7 +114,7 @@ class ProductVariation extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Variation type e.g. radio or select
      */
     public function getType()
     {
@@ -122,7 +122,7 @@ class ProductVariation extends DataModel
     }
     
     /**
-     * @param int $sort
+     * @param int $sort Optional sort number
      * @return \jtl\Connector\Model\ProductVariation
      */
     public function setSort($sort)
@@ -132,7 +132,7 @@ class ProductVariation extends DataModel
     }
     
     /**
-     * @return int
+     * @return int Optional sort number
      */
     public function getSort()
     {

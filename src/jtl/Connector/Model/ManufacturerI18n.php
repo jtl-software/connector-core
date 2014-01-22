@@ -17,32 +17,32 @@ use \jtl\Core\Model\DataModel;
 class ManufacturerI18n extends DataModel
 {
     /**
-     * @var string - Reference to manufacturer
+     * @var string Reference to manufacturer
      */
     protected $_manufacturerId = '';
     
     /**
-     * @var string - Locale
+     * @var string Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string - Optional manufacturer description (HTML)
+     * @var string Optional manufacturer description (HTML)
      */
     protected $_description = '';
     
     /**
-     * @var string - Optional meta description tag value
+     * @var string Optional meta description tag value
      */
     protected $_metaDescription = '';
     
     /**
-     * @var string - Optional meta keywords tag value
+     * @var string Optional meta keywords tag value
      */
     protected $_metaKeywords = '';
     
     /**
-     * @var string - Optional title tag value
+     * @var string Optional title tag value
      */
     protected $_titleTag = '';
     
@@ -76,7 +76,7 @@ class ManufacturerI18n extends DataModel
     }
     
     /**
-     * @param string $manufacturerId
+     * @param string $manufacturerId Reference to manufacturer
      * @return \jtl\Connector\Model\ManufacturerI18n
      */
     public function setManufacturerId($manufacturerId)
@@ -86,7 +86,7 @@ class ManufacturerI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to manufacturer
      */
     public function getManufacturerId()
     {
@@ -94,7 +94,7 @@ class ManufacturerI18n extends DataModel
     }
     
     /**
-     * @param string $localeName
+     * @param string $localeName Locale
      * @return \jtl\Connector\Model\ManufacturerI18n
      */
     public function setLocaleName($localeName)
@@ -104,7 +104,7 @@ class ManufacturerI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Locale
      */
     public function getLocaleName()
     {
@@ -112,7 +112,7 @@ class ManufacturerI18n extends DataModel
     }
     
     /**
-     * @param string $description
+     * @param string $description Optional manufacturer description (HTML)
      * @return \jtl\Connector\Model\ManufacturerI18n
      */
     public function setDescription($description)
@@ -122,7 +122,7 @@ class ManufacturerI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional manufacturer description (HTML)
      */
     public function getDescription()
     {
@@ -130,7 +130,7 @@ class ManufacturerI18n extends DataModel
     }
     
     /**
-     * @param string $metaDescription
+     * @param string $metaDescription Optional meta description tag value
      * @return \jtl\Connector\Model\ManufacturerI18n
      */
     public function setMetaDescription($metaDescription)
@@ -140,7 +140,7 @@ class ManufacturerI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional meta description tag value
      */
     public function getMetaDescription()
     {
@@ -148,7 +148,7 @@ class ManufacturerI18n extends DataModel
     }
     
     /**
-     * @param string $metaKeywords
+     * @param string $metaKeywords Optional meta keywords tag value
      * @return \jtl\Connector\Model\ManufacturerI18n
      */
     public function setMetaKeywords($metaKeywords)
@@ -158,7 +158,7 @@ class ManufacturerI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional meta keywords tag value
      */
     public function getMetaKeywords()
     {
@@ -166,7 +166,7 @@ class ManufacturerI18n extends DataModel
     }
     
     /**
-     * @param string $titleTag
+     * @param string $titleTag Optional title tag value
      * @return \jtl\Connector\Model\ManufacturerI18n
      */
     public function setTitleTag($titleTag)
@@ -176,7 +176,7 @@ class ManufacturerI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional title tag value
      */
     public function getTitleTag()
     {

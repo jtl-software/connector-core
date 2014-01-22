@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class ProductVariationI18n extends DataModel
 {
     /**
-     * @var string - Locale
+     * @var string Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string - Reference to productVariation
+     * @var string Reference to productVariation
      */
     protected $_productVariationId = '';
     
     /**
-     * @var string - Locale specific variation name
+     * @var string Locale specific variation name
      */
     protected $_name = '';
     
@@ -58,7 +58,7 @@ class ProductVariationI18n extends DataModel
     }
     
     /**
-     * @param string $localeName
+     * @param string $localeName Locale
      * @return \jtl\Connector\Model\ProductVariationI18n
      */
     public function setLocaleName($localeName)
@@ -68,7 +68,7 @@ class ProductVariationI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Locale
      */
     public function getLocaleName()
     {
@@ -76,7 +76,7 @@ class ProductVariationI18n extends DataModel
     }
     
     /**
-     * @param string $productVariationId
+     * @param string $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\ProductVariationI18n
      */
     public function setProductVariationId($productVariationId)
@@ -86,7 +86,7 @@ class ProductVariationI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to productVariation
      */
     public function getProductVariationId()
     {
@@ -94,7 +94,7 @@ class ProductVariationI18n extends DataModel
     }
     
     /**
-     * @param string $name
+     * @param string $name Locale specific variation name
      * @return \jtl\Connector\Model\ProductVariationI18n
      */
     public function setName($name)
@@ -104,7 +104,7 @@ class ProductVariationI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Locale specific variation name
      */
     public function getName()
     {

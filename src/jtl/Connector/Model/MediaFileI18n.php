@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class MediaFileI18n extends DataModel
 {
     /**
-     * @var string - Reference to mediaFile
+     * @var string Reference to mediaFile
      */
     protected $_mediaFileId = '';
     
     /**
-     * @var string - Locale
+     * @var string Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string - Locale specific name
+     * @var string Locale specific name
      */
     protected $_name = '';
     
     /**
-     * @var string - Locale specific description
+     * @var string Locale specific description
      */
     protected $_description = '';
     
@@ -64,7 +64,7 @@ class MediaFileI18n extends DataModel
     }
     
     /**
-     * @param string $mediaFileId
+     * @param string $mediaFileId Reference to mediaFile
      * @return \jtl\Connector\Model\MediaFileI18n
      */
     public function setMediaFileId($mediaFileId)
@@ -74,7 +74,7 @@ class MediaFileI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to mediaFile
      */
     public function getMediaFileId()
     {
@@ -82,7 +82,7 @@ class MediaFileI18n extends DataModel
     }
     
     /**
-     * @param string $localeName
+     * @param string $localeName Locale
      * @return \jtl\Connector\Model\MediaFileI18n
      */
     public function setLocaleName($localeName)
@@ -92,7 +92,7 @@ class MediaFileI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Locale
      */
     public function getLocaleName()
     {
@@ -100,7 +100,7 @@ class MediaFileI18n extends DataModel
     }
     
     /**
-     * @param string $name
+     * @param string $name Locale specific name
      * @return \jtl\Connector\Model\MediaFileI18n
      */
     public function setName($name)
@@ -110,7 +110,7 @@ class MediaFileI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Locale specific name
      */
     public function getName()
     {
@@ -118,7 +118,7 @@ class MediaFileI18n extends DataModel
     }
     
     /**
-     * @param string $description
+     * @param string $description Locale specific description
      * @return \jtl\Connector\Model\MediaFileI18n
      */
     public function setDescription($description)
@@ -128,7 +128,7 @@ class MediaFileI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Locale specific description
      */
     public function getDescription()
     {

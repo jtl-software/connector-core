@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class ProductFunctionAttr extends DataModel
 {
     /**
-     * @var string - Unique productFunctionAttr id
+     * @var string Unique productFunctionAttr id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to product
+     * @var string Reference to product
      */
     protected $_productId = '';
     
     /**
-     * @var string - Attribute key
+     * @var string Attribute key
      */
     protected $_key = '';
     
     /**
-     * @var string - Attribute value
+     * @var string Attribute value
      */
     protected $_value = '';
     
@@ -64,7 +64,7 @@ class ProductFunctionAttr extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique productFunctionAttr id
      * @return \jtl\Connector\Model\ProductFunctionAttr
      */
     public function setId($id)
@@ -74,7 +74,7 @@ class ProductFunctionAttr extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique productFunctionAttr id
      */
     public function getId()
     {
@@ -82,7 +82,7 @@ class ProductFunctionAttr extends DataModel
     }
     
     /**
-     * @param string $productId
+     * @param string $productId Reference to product
      * @return \jtl\Connector\Model\ProductFunctionAttr
      */
     public function setProductId($productId)
@@ -92,7 +92,7 @@ class ProductFunctionAttr extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to product
      */
     public function getProductId()
     {
@@ -100,7 +100,7 @@ class ProductFunctionAttr extends DataModel
     }
     
     /**
-     * @param string $key
+     * @param string $key Attribute key
      * @return \jtl\Connector\Model\ProductFunctionAttr
      */
     public function setKey($key)
@@ -110,7 +110,7 @@ class ProductFunctionAttr extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Attribute key
      */
     public function getKey()
     {
@@ -118,7 +118,7 @@ class ProductFunctionAttr extends DataModel
     }
     
     /**
-     * @param string $value
+     * @param string $value Attribute value
      * @return \jtl\Connector\Model\ProductFunctionAttr
      */
     public function setValue($value)
@@ -128,7 +128,7 @@ class ProductFunctionAttr extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Attribute value
      */
     public function getValue()
     {

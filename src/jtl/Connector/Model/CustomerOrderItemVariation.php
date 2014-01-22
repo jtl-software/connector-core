@@ -17,42 +17,42 @@ use \jtl\Core\Model\DataModel;
 class CustomerOrderItemVariation extends DataModel
 {
     /**
-     * @var string - Unique customerOrderItemVariation id
+     * @var string Unique customerOrderItemVariation id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to customerOrderItem
+     * @var string Reference to customerOrderItem
      */
     protected $_customerOrderItemId = '';
     
     /**
-     * @var string - Reference to productVariation
+     * @var string Reference to productVariation
      */
     protected $_productVariationId = '';
     
     /**
-     * @var string - Reference to productVariationValue
+     * @var string Reference to productVariationValue
      */
     protected $_productVariationValueId = '';
     
     /**
-     * @var string - Variation name e.g. "color"
+     * @var string Variation name e.g. "color"
      */
     protected $_productVariationName = '';
     
     /**
-     * @var string - Variation value e.g. "red"
+     * @var string Variation value e.g. "red"
      */
     protected $_productVariationValueName = '';
     
     /**
-     * @var string - Optional custom text value for variation 
+     * @var string Optional custom text value for variation 
      */
     protected $_freeField = '';
     
     /**
-     * @var double - Optional extra surcharge (added to item price)
+     * @var double Optional extra surcharge (added to item price)
      */
     protected $_surcharge = 0;
     
@@ -92,7 +92,7 @@ class CustomerOrderItemVariation extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique customerOrderItemVariation id
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
      */
     public function setId($id)
@@ -102,7 +102,7 @@ class CustomerOrderItemVariation extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique customerOrderItemVariation id
      */
     public function getId()
     {
@@ -110,7 +110,7 @@ class CustomerOrderItemVariation extends DataModel
     }
     
     /**
-     * @param string $customerOrderItemId
+     * @param string $customerOrderItemId Reference to customerOrderItem
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
      */
     public function setCustomerOrderItemId($customerOrderItemId)
@@ -120,7 +120,7 @@ class CustomerOrderItemVariation extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to customerOrderItem
      */
     public function getCustomerOrderItemId()
     {
@@ -128,7 +128,7 @@ class CustomerOrderItemVariation extends DataModel
     }
     
     /**
-     * @param string $productVariationId
+     * @param string $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
      */
     public function setProductVariationId($productVariationId)
@@ -138,7 +138,7 @@ class CustomerOrderItemVariation extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to productVariation
      */
     public function getProductVariationId()
     {
@@ -146,7 +146,7 @@ class CustomerOrderItemVariation extends DataModel
     }
     
     /**
-     * @param string $productVariationValueId
+     * @param string $productVariationValueId Reference to productVariationValue
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
      */
     public function setProductVariationValueId($productVariationValueId)
@@ -156,7 +156,7 @@ class CustomerOrderItemVariation extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to productVariationValue
      */
     public function getProductVariationValueId()
     {
@@ -164,7 +164,7 @@ class CustomerOrderItemVariation extends DataModel
     }
     
     /**
-     * @param string $productVariationName
+     * @param string $productVariationName Variation name e.g. "color"
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
      */
     public function setProductVariationName($productVariationName)
@@ -174,7 +174,7 @@ class CustomerOrderItemVariation extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Variation name e.g. "color"
      */
     public function getProductVariationName()
     {
@@ -182,7 +182,7 @@ class CustomerOrderItemVariation extends DataModel
     }
     
     /**
-     * @param string $productVariationValueName
+     * @param string $productVariationValueName Variation value e.g. "red"
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
      */
     public function setProductVariationValueName($productVariationValueName)
@@ -192,7 +192,7 @@ class CustomerOrderItemVariation extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Variation value e.g. "red"
      */
     public function getProductVariationValueName()
     {
@@ -200,7 +200,7 @@ class CustomerOrderItemVariation extends DataModel
     }
     
     /**
-     * @param string $freeField
+     * @param string $freeField Optional custom text value for variation 
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
      */
     public function setFreeField($freeField)
@@ -210,7 +210,7 @@ class CustomerOrderItemVariation extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional custom text value for variation 
      */
     public function getFreeField()
     {
@@ -218,7 +218,7 @@ class CustomerOrderItemVariation extends DataModel
     }
     
     /**
-     * @param double $surcharge
+     * @param double $surcharge Optional extra surcharge (added to item price)
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
      */
     public function setSurcharge($surcharge)
@@ -228,7 +228,7 @@ class CustomerOrderItemVariation extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Optional extra surcharge (added to item price)
      */
     public function getSurcharge()
     {

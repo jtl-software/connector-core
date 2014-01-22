@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class CrossSellingGroup extends DataModel
 {
     /**
-     * @var string - crossSellingGroup id
+     * @var string crossSellingGroup id
      */
     protected $_id = '';
     
     /**
-     * @var string - Locale
+     * @var string Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string - Localized name
+     * @var string Localized name
      */
     protected $_name = '';
     
     /**
-     * @var string - Optional localized description
+     * @var string Optional localized description
      */
     protected $_description = '';
     
@@ -64,7 +64,7 @@ class CrossSellingGroup extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id crossSellingGroup id
      * @return \jtl\Connector\Model\CrossSellingGroup
      */
     public function setId($id)
@@ -74,7 +74,7 @@ class CrossSellingGroup extends DataModel
     }
     
     /**
-     * @return string
+     * @return string crossSellingGroup id
      */
     public function getId()
     {
@@ -82,7 +82,7 @@ class CrossSellingGroup extends DataModel
     }
     
     /**
-     * @param string $localeName
+     * @param string $localeName Locale
      * @return \jtl\Connector\Model\CrossSellingGroup
      */
     public function setLocaleName($localeName)
@@ -92,7 +92,7 @@ class CrossSellingGroup extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Locale
      */
     public function getLocaleName()
     {
@@ -100,7 +100,7 @@ class CrossSellingGroup extends DataModel
     }
     
     /**
-     * @param string $name
+     * @param string $name Localized name
      * @return \jtl\Connector\Model\CrossSellingGroup
      */
     public function setName($name)
@@ -110,7 +110,7 @@ class CrossSellingGroup extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Localized name
      */
     public function getName()
     {
@@ -118,7 +118,7 @@ class CrossSellingGroup extends DataModel
     }
     
     /**
-     * @param string $description
+     * @param string $description Optional localized description
      * @return \jtl\Connector\Model\CrossSellingGroup
      */
     public function setDescription($description)
@@ -128,7 +128,7 @@ class CrossSellingGroup extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional localized description
      */
     public function getDescription()
     {

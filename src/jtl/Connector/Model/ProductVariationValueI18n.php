@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class ProductVariationValueI18n extends DataModel
 {
     /**
-     * @var string - Locale
+     * @var string Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string - Reference to productVariationValue
+     * @var string Reference to productVariationValue
      */
     protected $_productVariationValueId = '';
     
     /**
-     * @var string - Locale specific variationValue name
+     * @var string Locale specific variationValue name
      */
     protected $_name = '';
     
@@ -58,7 +58,7 @@ class ProductVariationValueI18n extends DataModel
     }
     
     /**
-     * @param string $localeName
+     * @param string $localeName Locale
      * @return \jtl\Connector\Model\ProductVariationValueI18n
      */
     public function setLocaleName($localeName)
@@ -68,7 +68,7 @@ class ProductVariationValueI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Locale
      */
     public function getLocaleName()
     {
@@ -76,7 +76,7 @@ class ProductVariationValueI18n extends DataModel
     }
     
     /**
-     * @param string $productVariationValueId
+     * @param string $productVariationValueId Reference to productVariationValue
      * @return \jtl\Connector\Model\ProductVariationValueI18n
      */
     public function setProductVariationValueId($productVariationValueId)
@@ -86,7 +86,7 @@ class ProductVariationValueI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to productVariationValue
      */
     public function getProductVariationValueId()
     {
@@ -94,7 +94,7 @@ class ProductVariationValueI18n extends DataModel
     }
     
     /**
-     * @param string $name
+     * @param string $name Locale specific variationValue name
      * @return \jtl\Connector\Model\ProductVariationValueI18n
      */
     public function setName($name)
@@ -104,7 +104,7 @@ class ProductVariationValueI18n extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Locale specific variationValue name
      */
     public function getName()
     {

@@ -17,27 +17,27 @@ use \jtl\Core\Model\DataModel;
 class Manufacturer extends DataModel
 {
     /**
-     * @var string - Unique manufacturer id
+     * @var string Unique manufacturer id
      */
     protected $_id = '';
     
     /**
-     * @var string - Manufacturer (brand) name
+     * @var string Manufacturer (brand) name
      */
     protected $_name = '';
     
     /**
-     * @var string - Optional manufacturer website URL
+     * @var string Optional manufacturer website URL
      */
     protected $_www = '';
     
     /**
-     * @var int - Optional sort number
+     * @var int Optional sort number
      */
     protected $_sort = 0;
     
     /**
-     * @var string - Optional url path e.g. "Products-manufactured-by-X"
+     * @var string Optional url path e.g. "Products-manufactured-by-X"
      */
     protected $_urlPath = '';
     
@@ -74,7 +74,7 @@ class Manufacturer extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique manufacturer id
      * @return \jtl\Connector\Model\Manufacturer
      */
     public function setId($id)
@@ -84,7 +84,7 @@ class Manufacturer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique manufacturer id
      */
     public function getId()
     {
@@ -92,7 +92,7 @@ class Manufacturer extends DataModel
     }
     
     /**
-     * @param string $name
+     * @param string $name Manufacturer (brand) name
      * @return \jtl\Connector\Model\Manufacturer
      */
     public function setName($name)
@@ -102,7 +102,7 @@ class Manufacturer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Manufacturer (brand) name
      */
     public function getName()
     {
@@ -110,7 +110,7 @@ class Manufacturer extends DataModel
     }
     
     /**
-     * @param string $www
+     * @param string $www Optional manufacturer website URL
      * @return \jtl\Connector\Model\Manufacturer
      */
     public function setWww($www)
@@ -120,7 +120,7 @@ class Manufacturer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional manufacturer website URL
      */
     public function getWww()
     {
@@ -128,7 +128,7 @@ class Manufacturer extends DataModel
     }
     
     /**
-     * @param int $sort
+     * @param int $sort Optional sort number
      * @return \jtl\Connector\Model\Manufacturer
      */
     public function setSort($sort)
@@ -138,7 +138,7 @@ class Manufacturer extends DataModel
     }
     
     /**
-     * @return int
+     * @return int Optional sort number
      */
     public function getSort()
     {
@@ -146,7 +146,7 @@ class Manufacturer extends DataModel
     }
     
     /**
-     * @param string $urlPath
+     * @param string $urlPath Optional url path e.g. "Products-manufactured-by-X"
      * @return \jtl\Connector\Model\Manufacturer
      */
     public function setUrlPath($urlPath)
@@ -156,7 +156,7 @@ class Manufacturer extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional url path e.g. "Products-manufactured-by-X"
      */
     public function getUrlPath()
     {

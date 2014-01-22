@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class DeliveryStatus extends DataModel
 {
     /**
-     * @var string - DeliveryStatus id
+     * @var string DeliveryStatus id
      */
     protected $_id = '';
     
     /**
-     * @var string - Locale
+     * @var string Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string - Localized delivery status text
+     * @var string Localized delivery status text
      */
     protected $_name = '';
     
@@ -58,7 +58,7 @@ class DeliveryStatus extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id DeliveryStatus id
      * @return \jtl\Connector\Model\DeliveryStatus
      */
     public function setId($id)
@@ -68,7 +68,7 @@ class DeliveryStatus extends DataModel
     }
     
     /**
-     * @return string
+     * @return string DeliveryStatus id
      */
     public function getId()
     {
@@ -76,7 +76,7 @@ class DeliveryStatus extends DataModel
     }
     
     /**
-     * @param string $localeName
+     * @param string $localeName Locale
      * @return \jtl\Connector\Model\DeliveryStatus
      */
     public function setLocaleName($localeName)
@@ -86,7 +86,7 @@ class DeliveryStatus extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Locale
      */
     public function getLocaleName()
     {
@@ -94,7 +94,7 @@ class DeliveryStatus extends DataModel
     }
     
     /**
-     * @param string $name
+     * @param string $name Localized delivery status text
      * @return \jtl\Connector\Model\DeliveryStatus
      */
     public function setName($name)
@@ -104,7 +104,7 @@ class DeliveryStatus extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Localized delivery status text
      */
     public function getName()
     {

@@ -17,27 +17,27 @@ use \jtl\Core\Model\DataModel;
 class ProductWarehouseInfo extends DataModel
 {
     /**
-     * @var string - Reference to product
+     * @var string Reference to product
      */
     protected $_productId = '';
     
     /**
-     * @var string - Reference to warehouse
+     * @var string Reference to warehouse
      */
     protected $_warehouseId = '';
     
     /**
-     * @var double - Optional product stock level in specified warehouse
+     * @var double Optional product stock level in specified warehouse
      */
     protected $_stockLevel = 0;
     
     /**
-     * @var double - Optional product inflow quantity for specified warehouse
+     * @var double Optional product inflow quantity for specified warehouse
      */
     protected $_inflowQuantity = 0;
     
     /**
-     * @var string - Optional product inflow date for specified warehouse
+     * @var string Optional product inflow date for specified warehouse
      */
     protected $_inflowDate = '0000-00-00';
     
@@ -74,7 +74,7 @@ class ProductWarehouseInfo extends DataModel
     }
     
     /**
-     * @param string $productId
+     * @param string $productId Reference to product
      * @return \jtl\Connector\Model\ProductWarehouseInfo
      */
     public function setProductId($productId)
@@ -84,7 +84,7 @@ class ProductWarehouseInfo extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to product
      */
     public function getProductId()
     {
@@ -92,7 +92,7 @@ class ProductWarehouseInfo extends DataModel
     }
     
     /**
-     * @param string $warehouseId
+     * @param string $warehouseId Reference to warehouse
      * @return \jtl\Connector\Model\ProductWarehouseInfo
      */
     public function setWarehouseId($warehouseId)
@@ -102,7 +102,7 @@ class ProductWarehouseInfo extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to warehouse
      */
     public function getWarehouseId()
     {
@@ -110,7 +110,7 @@ class ProductWarehouseInfo extends DataModel
     }
     
     /**
-     * @param double $stockLevel
+     * @param double $stockLevel Optional product stock level in specified warehouse
      * @return \jtl\Connector\Model\ProductWarehouseInfo
      */
     public function setStockLevel($stockLevel)
@@ -120,7 +120,7 @@ class ProductWarehouseInfo extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Optional product stock level in specified warehouse
      */
     public function getStockLevel()
     {
@@ -128,7 +128,7 @@ class ProductWarehouseInfo extends DataModel
     }
     
     /**
-     * @param double $inflowQuantity
+     * @param double $inflowQuantity Optional product inflow quantity for specified warehouse
      * @return \jtl\Connector\Model\ProductWarehouseInfo
      */
     public function setInflowQuantity($inflowQuantity)
@@ -138,7 +138,7 @@ class ProductWarehouseInfo extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Optional product inflow quantity for specified warehouse
      */
     public function getInflowQuantity()
     {
@@ -146,7 +146,7 @@ class ProductWarehouseInfo extends DataModel
     }
     
     /**
-     * @param string $inflowDate
+     * @param string $inflowDate Optional product inflow date for specified warehouse
      * @return \jtl\Connector\Model\ProductWarehouseInfo
      */
     public function setInflowDate($inflowDate)
@@ -156,7 +156,7 @@ class ProductWarehouseInfo extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional product inflow date for specified warehouse
      */
     public function getInflowDate()
     {

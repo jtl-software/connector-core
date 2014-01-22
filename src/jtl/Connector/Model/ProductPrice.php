@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class ProductPrice extends DataModel
 {
     /**
-     * @var string - Reference to customerGroup
+     * @var string Reference to customerGroup
      */
     protected $_customerGroupId = '';
     
     /**
-     * @var string - Reference to product
+     * @var string Reference to product
      */
     protected $_productId = '';
     
     /**
-     * @var double - Price value (net)
+     * @var double Price value (net)
      */
     protected $_netPrice = 0.0;
     
     /**
-     * @var int - Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
+     * @var int Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
      */
     protected $_quantity = 1;
     
@@ -72,7 +72,7 @@ class ProductPrice extends DataModel
     }
     
     /**
-     * @param string $customerGroupId
+     * @param string $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ProductPrice
      */
     public function setCustomerGroupId($customerGroupId)
@@ -82,7 +82,7 @@ class ProductPrice extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to customerGroup
      */
     public function getCustomerGroupId()
     {
@@ -90,7 +90,7 @@ class ProductPrice extends DataModel
     }
     
     /**
-     * @param string $productId
+     * @param string $productId Reference to product
      * @return \jtl\Connector\Model\ProductPrice
      */
     public function setProductId($productId)
@@ -100,7 +100,7 @@ class ProductPrice extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to product
      */
     public function getProductId()
     {
@@ -108,7 +108,7 @@ class ProductPrice extends DataModel
     }
     
     /**
-     * @param double $netPrice
+     * @param double $netPrice Price value (net)
      * @return \jtl\Connector\Model\ProductPrice
      */
     public function setNetPrice($netPrice)
@@ -118,7 +118,7 @@ class ProductPrice extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Price value (net)
      */
     public function getNetPrice()
     {
@@ -126,7 +126,7 @@ class ProductPrice extends DataModel
     }
     
     /**
-     * @param int $quantity
+     * @param int $quantity Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
      * @return \jtl\Connector\Model\ProductPrice
      */
     public function setQuantity($quantity)
@@ -136,7 +136,7 @@ class ProductPrice extends DataModel
     }
     
     /**
-     * @return int
+     * @return int Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
      */
     public function getQuantity()
     {

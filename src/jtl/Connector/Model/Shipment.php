@@ -17,37 +17,37 @@ use \jtl\Core\Model\DataModel;
 class Shipment extends DataModel
 {
     /**
-     * @var string - Unique shipment id
+     * @var string Unique shipment id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to deliveryNote
+     * @var string Reference to deliveryNote
      */
     protected $_deliveryNoteId = '';
     
     /**
-     * @var string - Logistic name
+     * @var string Logistic name
      */
     protected $_logistic = '';
     
     /**
-     * @var string - Optional Logistic URL
+     * @var string Optional Logistic URL
      */
     protected $_logisticURL = '';
     
     /**
-     * @var string - Optional Identcode
+     * @var string Optional Identcode
      */
     protected $_identCode = '';
     
     /**
-     * @var string - Creation date
+     * @var string Creation date
      */
     protected $_created = '';
     
     /**
-     * @var string - Optional shipment note
+     * @var string Optional shipment note
      */
     protected $_note = '';
     
@@ -82,7 +82,7 @@ class Shipment extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique shipment id
      * @return \jtl\Connector\Model\Shipment
      */
     public function setId($id)
@@ -92,7 +92,7 @@ class Shipment extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique shipment id
      */
     public function getId()
     {
@@ -100,7 +100,7 @@ class Shipment extends DataModel
     }
     
     /**
-     * @param string $deliveryNoteId
+     * @param string $deliveryNoteId Reference to deliveryNote
      * @return \jtl\Connector\Model\Shipment
      */
     public function setDeliveryNoteId($deliveryNoteId)
@@ -110,7 +110,7 @@ class Shipment extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to deliveryNote
      */
     public function getDeliveryNoteId()
     {
@@ -118,7 +118,7 @@ class Shipment extends DataModel
     }
     
     /**
-     * @param string $logistic
+     * @param string $logistic Logistic name
      * @return \jtl\Connector\Model\Shipment
      */
     public function setLogistic($logistic)
@@ -128,7 +128,7 @@ class Shipment extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Logistic name
      */
     public function getLogistic()
     {
@@ -136,7 +136,7 @@ class Shipment extends DataModel
     }
     
     /**
-     * @param string $logisticURL
+     * @param string $logisticURL Optional Logistic URL
      * @return \jtl\Connector\Model\Shipment
      */
     public function setLogisticURL($logisticURL)
@@ -146,7 +146,7 @@ class Shipment extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional Logistic URL
      */
     public function getLogisticURL()
     {
@@ -154,7 +154,7 @@ class Shipment extends DataModel
     }
     
     /**
-     * @param string $identCode
+     * @param string $identCode Optional Identcode
      * @return \jtl\Connector\Model\Shipment
      */
     public function setIdentCode($identCode)
@@ -164,7 +164,7 @@ class Shipment extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional Identcode
      */
     public function getIdentCode()
     {
@@ -172,7 +172,7 @@ class Shipment extends DataModel
     }
     
     /**
-     * @param string $created
+     * @param string $created Creation date
      * @return \jtl\Connector\Model\Shipment
      */
     public function setCreated($created)
@@ -182,7 +182,7 @@ class Shipment extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Creation date
      */
     public function getCreated()
     {
@@ -190,7 +190,7 @@ class Shipment extends DataModel
     }
     
     /**
-     * @param string $note
+     * @param string $note Optional shipment note
      * @return \jtl\Connector\Model\Shipment
      */
     public function setNote($note)
@@ -200,7 +200,7 @@ class Shipment extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional shipment note
      */
     public function getNote()
     {

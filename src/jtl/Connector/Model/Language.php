@@ -17,27 +17,27 @@ use \jtl\Core\Model\DataModel;
 class Language extends DataModel
 {
     /**
-     * @var string - Unique language id
+     * @var string Unique language id
      */
     protected $_id = '';
     
     /**
-     * @var string - English term
+     * @var string English term
      */
     protected $_nameEnglish = '';
     
     /**
-     * @var string - German term
+     * @var string German term
      */
     protected $_nameGerman = '';
     
     /**
-     * @var string - Locale
+     * @var string Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var bool - Flag default language for frontend. Exact 1 language must be marked as default.
+     * @var bool Flag default language for frontend. Exact 1 language must be marked as default.
      */
     protected $_isDefault = false;
     
@@ -74,7 +74,7 @@ class Language extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique language id
      * @return \jtl\Connector\Model\Language
      */
     public function setId($id)
@@ -84,7 +84,7 @@ class Language extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique language id
      */
     public function getId()
     {
@@ -92,7 +92,7 @@ class Language extends DataModel
     }
     
     /**
-     * @param string $nameEnglish
+     * @param string $nameEnglish English term
      * @return \jtl\Connector\Model\Language
      */
     public function setNameEnglish($nameEnglish)
@@ -102,7 +102,7 @@ class Language extends DataModel
     }
     
     /**
-     * @return string
+     * @return string English term
      */
     public function getNameEnglish()
     {
@@ -110,7 +110,7 @@ class Language extends DataModel
     }
     
     /**
-     * @param string $nameGerman
+     * @param string $nameGerman German term
      * @return \jtl\Connector\Model\Language
      */
     public function setNameGerman($nameGerman)
@@ -120,7 +120,7 @@ class Language extends DataModel
     }
     
     /**
-     * @return string
+     * @return string German term
      */
     public function getNameGerman()
     {
@@ -128,7 +128,7 @@ class Language extends DataModel
     }
     
     /**
-     * @param string $localeName
+     * @param string $localeName Locale
      * @return \jtl\Connector\Model\Language
      */
     public function setLocaleName($localeName)
@@ -138,7 +138,7 @@ class Language extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Locale
      */
     public function getLocaleName()
     {
@@ -146,7 +146,7 @@ class Language extends DataModel
     }
     
     /**
-     * @param bool $isDefault
+     * @param bool $isDefault Flag default language for frontend. Exact 1 language must be marked as default.
      * @return \jtl\Connector\Model\Language
      */
     public function setIsDefault($isDefault)
@@ -156,7 +156,7 @@ class Language extends DataModel
     }
     
     /**
-     * @return bool
+     * @return bool Flag default language for frontend. Exact 1 language must be marked as default.
      */
     public function getIsDefault()
     {

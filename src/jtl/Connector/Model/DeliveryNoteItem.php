@@ -17,42 +17,42 @@ use \jtl\Core\Model\DataModel;
 class DeliveryNoteItem extends DataModel
 {
     /**
-     * @var string - Unique deliveryNoteItem id
+     * @var string Unique deliveryNoteItem id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to customerOrderItem
+     * @var string Reference to customerOrderItem
      */
     protected $_customerOrderItemId = '';
     
     /**
-     * @var double - Quantity delivered
+     * @var double Quantity delivered
      */
     protected $_quantity = 0.0;
     
     /**
-     * @var string - Optional reference to warehouse
+     * @var string Optional reference to warehouse
      */
     protected $_warehouseId = '';
     
     /**
-     * @var string - Optional serial number
+     * @var string Optional serial number
      */
     protected $_serialNumber = '';
     
     /**
-     * @var string - Optional batch number
+     * @var string Optional batch number
      */
     protected $_batchNumber = '';
     
     /**
-     * @var string - Optional best before date
+     * @var string Optional best before date
      */
     protected $_bestBefore = '';
     
     /**
-     * @var string - Reference to deliveryNote
+     * @var string Reference to deliveryNote
      */
     protected $_deliveryNoteId = '';
     
@@ -92,7 +92,7 @@ class DeliveryNoteItem extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique deliveryNoteItem id
      * @return \jtl\Connector\Model\DeliveryNoteItem
      */
     public function setId($id)
@@ -102,7 +102,7 @@ class DeliveryNoteItem extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique deliveryNoteItem id
      */
     public function getId()
     {
@@ -110,7 +110,7 @@ class DeliveryNoteItem extends DataModel
     }
     
     /**
-     * @param string $customerOrderItemId
+     * @param string $customerOrderItemId Reference to customerOrderItem
      * @return \jtl\Connector\Model\DeliveryNoteItem
      */
     public function setCustomerOrderItemId($customerOrderItemId)
@@ -120,7 +120,7 @@ class DeliveryNoteItem extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to customerOrderItem
      */
     public function getCustomerOrderItemId()
     {
@@ -128,7 +128,7 @@ class DeliveryNoteItem extends DataModel
     }
     
     /**
-     * @param double $quantity
+     * @param double $quantity Quantity delivered
      * @return \jtl\Connector\Model\DeliveryNoteItem
      */
     public function setQuantity($quantity)
@@ -138,7 +138,7 @@ class DeliveryNoteItem extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Quantity delivered
      */
     public function getQuantity()
     {
@@ -146,7 +146,7 @@ class DeliveryNoteItem extends DataModel
     }
     
     /**
-     * @param string $warehouseId
+     * @param string $warehouseId Optional reference to warehouse
      * @return \jtl\Connector\Model\DeliveryNoteItem
      */
     public function setWarehouseId($warehouseId)
@@ -156,7 +156,7 @@ class DeliveryNoteItem extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional reference to warehouse
      */
     public function getWarehouseId()
     {
@@ -164,7 +164,7 @@ class DeliveryNoteItem extends DataModel
     }
     
     /**
-     * @param string $serialNumber
+     * @param string $serialNumber Optional serial number
      * @return \jtl\Connector\Model\DeliveryNoteItem
      */
     public function setSerialNumber($serialNumber)
@@ -174,7 +174,7 @@ class DeliveryNoteItem extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional serial number
      */
     public function getSerialNumber()
     {
@@ -182,7 +182,7 @@ class DeliveryNoteItem extends DataModel
     }
     
     /**
-     * @param string $batchNumber
+     * @param string $batchNumber Optional batch number
      * @return \jtl\Connector\Model\DeliveryNoteItem
      */
     public function setBatchNumber($batchNumber)
@@ -192,7 +192,7 @@ class DeliveryNoteItem extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional batch number
      */
     public function getBatchNumber()
     {
@@ -200,7 +200,7 @@ class DeliveryNoteItem extends DataModel
     }
     
     /**
-     * @param string $bestBefore
+     * @param string $bestBefore Optional best before date
      * @return \jtl\Connector\Model\DeliveryNoteItem
      */
     public function setBestBefore($bestBefore)
@@ -210,7 +210,7 @@ class DeliveryNoteItem extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Optional best before date
      */
     public function getBestBefore()
     {
@@ -218,7 +218,7 @@ class DeliveryNoteItem extends DataModel
     }
     
     /**
-     * @param string $deliveryNoteId
+     * @param string $deliveryNoteId Reference to deliveryNote
      * @return \jtl\Connector\Model\DeliveryNoteItem
      */
     public function setDeliveryNoteId($deliveryNoteId)
@@ -228,7 +228,7 @@ class DeliveryNoteItem extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to deliveryNote
      */
     public function getDeliveryNoteId()
     {

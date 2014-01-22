@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class Product2Category extends DataModel
 {
     /**
-     * @var string - Unique product2Category id
+     * @var string Unique product2Category id
      */
     protected $_id = '';
     
     /**
-     * @var string - Reference to category
+     * @var string Reference to category
      */
     protected $_categoryId = '';
     
     /**
-     * @var string - Reference to product
+     * @var string Reference to product
      */
     protected $_productId = '';
     
@@ -58,7 +58,7 @@ class Product2Category extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param string $id Unique product2Category id
      * @return \jtl\Connector\Model\Product2Category
      */
     public function setId($id)
@@ -68,7 +68,7 @@ class Product2Category extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Unique product2Category id
      */
     public function getId()
     {
@@ -76,7 +76,7 @@ class Product2Category extends DataModel
     }
     
     /**
-     * @param string $categoryId
+     * @param string $categoryId Reference to category
      * @return \jtl\Connector\Model\Product2Category
      */
     public function setCategoryId($categoryId)
@@ -86,7 +86,7 @@ class Product2Category extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to category
      */
     public function getCategoryId()
     {
@@ -94,7 +94,7 @@ class Product2Category extends DataModel
     }
     
     /**
-     * @param string $productId
+     * @param string $productId Reference to product
      * @return \jtl\Connector\Model\Product2Category
      */
     public function setProductId($productId)
@@ -104,7 +104,7 @@ class Product2Category extends DataModel
     }
     
     /**
-     * @return string
+     * @return string Reference to product
      */
     public function getProductId()
     {
