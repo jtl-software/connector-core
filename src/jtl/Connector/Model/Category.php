@@ -84,7 +84,6 @@ class Category extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $parentCategoryId Optional reference to parent category id
      * @return \jtl\Connector\Model\Category
@@ -102,7 +101,6 @@ class Category extends DataModel
     {
         return $this->_parentCategoryId;
     }
-    
     /**
      * @param int $sort Optional sort order number
      * @return \jtl\Connector\Model\Category
@@ -120,7 +118,6 @@ class Category extends DataModel
     {
         return $this->_sort;
     }
-    
     /**
      * @param int $level Optional category level (default 1 for first level)
      * @return \jtl\Connector\Model\Category
@@ -137,14 +134,5 @@ class Category extends DataModel
     public function getLevel()
     {
         return $this->_level;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

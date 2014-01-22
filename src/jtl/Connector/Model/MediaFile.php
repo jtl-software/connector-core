@@ -102,7 +102,6 @@ class MediaFile extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $productId Reference to product
      * @return \jtl\Connector\Model\MediaFile
@@ -120,7 +119,6 @@ class MediaFile extends DataModel
     {
         return $this->_productId;
     }
-    
     /**
      * @param string $path File path
      * @return \jtl\Connector\Model\MediaFile
@@ -138,7 +136,6 @@ class MediaFile extends DataModel
     {
         return $this->_path;
     }
-    
     /**
      * @param string $url Complete URL
      * @return \jtl\Connector\Model\MediaFile
@@ -156,7 +153,6 @@ class MediaFile extends DataModel
     {
         return $this->_url;
     }
-    
     /**
      * @param string $mediaFileCategory Optional media file category name
      * @return \jtl\Connector\Model\MediaFile
@@ -174,7 +170,6 @@ class MediaFile extends DataModel
     {
         return $this->_mediaFileCategory;
     }
-    
     /**
      * @param string $type Media file type e.g. "pdf"
      * @return \jtl\Connector\Model\MediaFile
@@ -192,7 +187,6 @@ class MediaFile extends DataModel
     {
         return $this->_type;
     }
-    
     /**
      * @param int $sort Optional sort number
      * @return \jtl\Connector\Model\MediaFile
@@ -209,14 +203,5 @@ class MediaFile extends DataModel
     public function getSort()
     {
         return $this->_sort;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

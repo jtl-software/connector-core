@@ -80,7 +80,6 @@ class ProductAttrI18n extends DataModel
     {
         return $this->_localeName;
     }
-    
     /**
      * @param string $productAttrId Reference to productAttr
      * @return \jtl\Connector\Model\ProductAttrI18n
@@ -98,7 +97,6 @@ class ProductAttrI18n extends DataModel
     {
         return $this->_productAttrId;
     }
-    
     /**
      * @param string $key Attribute key
      * @return \jtl\Connector\Model\ProductAttrI18n
@@ -116,7 +114,6 @@ class ProductAttrI18n extends DataModel
     {
         return $this->_key;
     }
-    
     /**
      * @param string $value Attribute value
      * @return \jtl\Connector\Model\ProductAttrI18n
@@ -133,14 +130,5 @@ class ProductAttrI18n extends DataModel
     public function getValue()
     {
         return $this->_value;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

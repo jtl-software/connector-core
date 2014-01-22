@@ -74,7 +74,6 @@ class ProductVarCombination extends DataModel
     {
         return $this->_productId;
     }
-    
     /**
      * @param string $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\ProductVarCombination
@@ -92,7 +91,6 @@ class ProductVarCombination extends DataModel
     {
         return $this->_productVariationId;
     }
-    
     /**
      * @param string $productVariationValueId Reference to productVariationValue
      * @return \jtl\Connector\Model\ProductVarCombination
@@ -109,14 +107,5 @@ class ProductVarCombination extends DataModel
     public function getProductVariationValueId()
     {
         return $this->_productVariationValueId;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

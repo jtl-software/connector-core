@@ -80,7 +80,6 @@ class ConfigItemI18n extends DataModel
     {
         return $this->_configItemId;
     }
-    
     /**
      * @param string $localeName Locale
      * @return \jtl\Connector\Model\ConfigItemI18n
@@ -98,7 +97,6 @@ class ConfigItemI18n extends DataModel
     {
         return $this->_localeName;
     }
-    
     /**
      * @param string $name Config item name. Will be ignored if inheritProductName==true
      * @return \jtl\Connector\Model\ConfigItemI18n
@@ -116,7 +114,6 @@ class ConfigItemI18n extends DataModel
     {
         return $this->_name;
     }
-    
     /**
      * @param string $description Description (html). Will be ignored, if inheritProductName==true
      * @return \jtl\Connector\Model\ConfigItemI18n
@@ -133,14 +130,5 @@ class ConfigItemI18n extends DataModel
     public function getDescription()
     {
         return $this->_description;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

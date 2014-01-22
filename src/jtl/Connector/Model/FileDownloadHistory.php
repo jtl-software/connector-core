@@ -86,7 +86,6 @@ class FileDownloadHistory extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $fileDownloadId
      * @return \jtl\Connector\Model\FileDownloadHistory
@@ -104,7 +103,6 @@ class FileDownloadHistory extends DataModel
     {
         return $this->_fileDownloadId;
     }
-    
     /**
      * @param string $customerId
      * @return \jtl\Connector\Model\FileDownloadHistory
@@ -122,7 +120,6 @@ class FileDownloadHistory extends DataModel
     {
         return $this->_customerId;
     }
-    
     /**
      * @param string $customerOrderId
      * @return \jtl\Connector\Model\FileDownloadHistory
@@ -140,7 +137,6 @@ class FileDownloadHistory extends DataModel
     {
         return $this->_customerOrderId;
     }
-    
     /**
      * @param string $created
      * @return \jtl\Connector\Model\FileDownloadHistory
@@ -157,14 +153,5 @@ class FileDownloadHistory extends DataModel
     public function getCreated()
     {
         return $this->_created;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

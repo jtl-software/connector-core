@@ -62,13 +62,4 @@ class Warehouse extends DataModel
     {
         return $this->_id;
     }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
-    }
 }

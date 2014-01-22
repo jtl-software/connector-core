@@ -164,7 +164,6 @@ class ConfigItem extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $configGroupId Reference to configGroup
      * @return \jtl\Connector\Model\ConfigItem
@@ -182,7 +181,6 @@ class ConfigItem extends DataModel
     {
         return $this->_configGroupId;
     }
-    
     /**
      * @param string $productId Optional reference to product
      * @return \jtl\Connector\Model\ConfigItem
@@ -200,7 +198,6 @@ class ConfigItem extends DataModel
     {
         return $this->_productId;
     }
-    
     /**
      * @param int $type Config item type. 0: Product, 1: Special
      * @return \jtl\Connector\Model\ConfigItem
@@ -218,7 +215,6 @@ class ConfigItem extends DataModel
     {
         return $this->_type;
     }
-    
     /**
      * @param bool $isPreSelected Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
      * @return \jtl\Connector\Model\ConfigItem
@@ -236,7 +232,6 @@ class ConfigItem extends DataModel
     {
         return $this->_isPreSelected;
     }
-    
     /**
      * @param bool $isRecommended Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
      * @return \jtl\Connector\Model\ConfigItem
@@ -254,7 +249,6 @@ class ConfigItem extends DataModel
     {
         return $this->_isRecommended;
     }
-    
     /**
      * @param bool $inheritProductName Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
      * @return \jtl\Connector\Model\ConfigItem
@@ -272,7 +266,6 @@ class ConfigItem extends DataModel
     {
         return $this->_inheritProductName;
     }
-    
     /**
      * @param bool $inheritProductPrice Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
      * @return \jtl\Connector\Model\ConfigItem
@@ -290,7 +283,6 @@ class ConfigItem extends DataModel
     {
         return $this->_inheritProductPrice;
     }
-    
     /**
      * @param bool $showDiscount Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
      * @return \jtl\Connector\Model\ConfigItem
@@ -308,7 +300,6 @@ class ConfigItem extends DataModel
     {
         return $this->_showDiscount;
     }
-    
     /**
      * @param bool $showSurcharge Optional: Show surcharge compared to productId price.
      * @return \jtl\Connector\Model\ConfigItem
@@ -326,7 +317,6 @@ class ConfigItem extends DataModel
     {
         return $this->_showSurcharge;
     }
-    
     /**
      * @param bool $ignoreMultiplier Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
      * @return \jtl\Connector\Model\ConfigItem
@@ -344,7 +334,6 @@ class ConfigItem extends DataModel
     {
         return $this->_ignoreMultiplier;
     }
-    
     /**
      * @param double $minQuantity Optional minimum quantity required to add configItem. Default 0 for no minimum quantity. 
      * @return \jtl\Connector\Model\ConfigItem
@@ -362,7 +351,6 @@ class ConfigItem extends DataModel
     {
         return $this->_minQuantity;
     }
-    
     /**
      * @param double $maxQuantity Maximum allowed quantity. Default 0 for no maximum limit. 
      * @return \jtl\Connector\Model\ConfigItem
@@ -380,7 +368,6 @@ class ConfigItem extends DataModel
     {
         return $this->_maxQuantity;
     }
-    
     /**
      * @param double $initialQuantity Optional initial / predefined quantity. Default is one (1) quantity piece. 
      * @return \jtl\Connector\Model\ConfigItem
@@ -398,7 +385,6 @@ class ConfigItem extends DataModel
     {
         return $this->_initialQuantity;
     }
-    
     /**
      * @param int $sort Optional sort order number
      * @return \jtl\Connector\Model\ConfigItem
@@ -416,7 +402,6 @@ class ConfigItem extends DataModel
     {
         return $this->_sort;
     }
-    
     /**
      * @param double $vat Value added tax
      * @return \jtl\Connector\Model\ConfigItem
@@ -433,14 +418,5 @@ class ConfigItem extends DataModel
     public function getVat()
     {
         return $this->_vat;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

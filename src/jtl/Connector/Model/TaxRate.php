@@ -94,7 +94,6 @@ class TaxRate extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $taxZoneId Reference to taxZone
      * @return \jtl\Connector\Model\TaxRate
@@ -112,7 +111,6 @@ class TaxRate extends DataModel
     {
         return $this->_taxZoneId;
     }
-    
     /**
      * @param string $taxClassId Reference to taxClass
      * @return \jtl\Connector\Model\TaxRate
@@ -130,7 +128,6 @@ class TaxRate extends DataModel
     {
         return $this->_taxClassId;
     }
-    
     /**
      * @param double $rate Tax rate value e.g. 19.00
      * @return \jtl\Connector\Model\TaxRate
@@ -148,7 +145,6 @@ class TaxRate extends DataModel
     {
         return $this->_rate;
     }
-    
     /**
      * @param int $priority Optional priority number. Higher value means higher priority
      * @return \jtl\Connector\Model\TaxRate
@@ -165,14 +161,5 @@ class TaxRate extends DataModel
     public function getPriority()
     {
         return $this->_priority;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

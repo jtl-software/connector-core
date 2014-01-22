@@ -80,7 +80,6 @@ class CustomerAttr extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $customerId Reference to customer
      * @return \jtl\Connector\Model\CustomerAttr
@@ -98,7 +97,6 @@ class CustomerAttr extends DataModel
     {
         return $this->_customerId;
     }
-    
     /**
      * @param string $key Attribute key
      * @return \jtl\Connector\Model\CustomerAttr
@@ -116,7 +114,6 @@ class CustomerAttr extends DataModel
     {
         return $this->_key;
     }
-    
     /**
      * @param string $value Attribute value
      * @return \jtl\Connector\Model\CustomerAttr
@@ -133,14 +130,5 @@ class CustomerAttr extends DataModel
     public function getValue()
     {
         return $this->_value;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

@@ -68,7 +68,6 @@ class TaxZone extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $name Optional tax zone name e.g. "EU Zone"
      * @return \jtl\Connector\Model\TaxZone
@@ -85,14 +84,5 @@ class TaxZone extends DataModel
     public function getName()
     {
         return $this->_name;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

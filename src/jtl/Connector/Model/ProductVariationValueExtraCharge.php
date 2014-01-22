@@ -78,7 +78,6 @@ class ProductVariationValueExtraCharge extends DataModel
     {
         return $this->_customerGroupId;
     }
-    
     /**
      * @param string $productVariationValueId Reference to productVariationValue
      * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
@@ -96,7 +95,6 @@ class ProductVariationValueExtraCharge extends DataModel
     {
         return $this->_productVariationValueId;
     }
-    
     /**
      * @param double $extraChargeNet Extra charge (net)
      * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
@@ -113,14 +111,5 @@ class ProductVariationValueExtraCharge extends DataModel
     public function getExtraChargeNet()
     {
         return $this->_extraChargeNet;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

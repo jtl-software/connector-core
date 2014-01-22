@@ -88,7 +88,6 @@ class Specific extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param int $sort Optional sort number
      * @return \jtl\Connector\Model\Specific
@@ -106,7 +105,6 @@ class Specific extends DataModel
     {
         return $this->_sort;
     }
-    
     /**
      * @param bool $isGlobal Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      * @return \jtl\Connector\Model\Specific
@@ -124,7 +122,6 @@ class Specific extends DataModel
     {
         return $this->_isGlobal;
     }
-    
     /**
      * @param string $type Specific type (radio, dropdown, image...)
      * @return \jtl\Connector\Model\Specific
@@ -141,14 +138,5 @@ class Specific extends DataModel
     public function getType()
     {
         return $this->_type;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

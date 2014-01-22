@@ -78,7 +78,6 @@ class TaxClass extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $name Optional tax class name
      * @return \jtl\Connector\Model\TaxClass
@@ -96,7 +95,6 @@ class TaxClass extends DataModel
     {
         return $this->_name;
     }
-    
     /**
      * @param bool $isDefault Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
      * @return \jtl\Connector\Model\TaxClass
@@ -113,14 +111,5 @@ class TaxClass extends DataModel
     public function getIsDefault()
     {
         return $this->_isDefault;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

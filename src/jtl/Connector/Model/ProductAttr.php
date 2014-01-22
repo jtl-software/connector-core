@@ -78,7 +78,6 @@ class ProductAttr extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $productId Reference to product
      * @return \jtl\Connector\Model\ProductAttr
@@ -96,7 +95,6 @@ class ProductAttr extends DataModel
     {
         return $this->_productId;
     }
-    
     /**
      * @param int $sort Optional sort number
      * @return \jtl\Connector\Model\ProductAttr
@@ -113,14 +111,5 @@ class ProductAttr extends DataModel
     public function getSort()
     {
         return $this->_sort;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

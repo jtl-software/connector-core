@@ -78,7 +78,6 @@ class SpecialPrice extends DataModel
     {
         return $this->_customerGroupId;
     }
-    
     /**
      * @param string $productSpecialPriceId Reference to productSpecialPrice
      * @return \jtl\Connector\Model\SpecialPrice
@@ -96,7 +95,6 @@ class SpecialPrice extends DataModel
     {
         return $this->_productSpecialPriceId;
     }
-    
     /**
      * @param double $priceNet net price value
      * @return \jtl\Connector\Model\SpecialPrice
@@ -113,14 +111,5 @@ class SpecialPrice extends DataModel
     public function getPriceNet()
     {
         return $this->_priceNet;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

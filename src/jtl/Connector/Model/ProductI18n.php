@@ -92,7 +92,6 @@ class ProductI18n extends DataModel
     {
         return $this->_localeName;
     }
-    
     /**
      * @param string $productId Reference to product
      * @return \jtl\Connector\Model\ProductI18n
@@ -110,7 +109,6 @@ class ProductI18n extends DataModel
     {
         return $this->_productId;
     }
-    
     /**
      * @param string $name Product name / title
      * @return \jtl\Connector\Model\ProductI18n
@@ -128,7 +126,6 @@ class ProductI18n extends DataModel
     {
         return $this->_name;
     }
-    
     /**
      * @param string $urlPath Optional path of product URL
      * @return \jtl\Connector\Model\ProductI18n
@@ -146,7 +143,6 @@ class ProductI18n extends DataModel
     {
         return $this->_urlPath;
     }
-    
     /**
      * @param string $description Optional product description
      * @return \jtl\Connector\Model\ProductI18n
@@ -164,7 +160,6 @@ class ProductI18n extends DataModel
     {
         return $this->_description;
     }
-    
     /**
      * @param string $shortDescription Optional product shortdescription
      * @return \jtl\Connector\Model\ProductI18n
@@ -181,14 +176,5 @@ class ProductI18n extends DataModel
     public function getShortDescription()
     {
         return $this->_shortDescription;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

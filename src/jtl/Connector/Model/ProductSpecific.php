@@ -74,7 +74,6 @@ class ProductSpecific extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $specificValueId Reference to specificValue
      * @return \jtl\Connector\Model\ProductSpecific
@@ -92,7 +91,6 @@ class ProductSpecific extends DataModel
     {
         return $this->_specificValueId;
     }
-    
     /**
      * @param string $productId Reference to product
      * @return \jtl\Connector\Model\ProductSpecific
@@ -109,14 +107,5 @@ class ProductSpecific extends DataModel
     public function getProductId()
     {
         return $this->_productId;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

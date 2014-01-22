@@ -80,7 +80,6 @@ class CrossSelling extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $crossSellingProductId Reference to product (main product)
      * @return \jtl\Connector\Model\CrossSelling
@@ -98,7 +97,6 @@ class CrossSelling extends DataModel
     {
         return $this->_crossSellingProductId;
     }
-    
     /**
      * @param string $crossSellingGroupId Reference to crossSellingGroup
      * @return \jtl\Connector\Model\CrossSelling
@@ -116,7 +114,6 @@ class CrossSelling extends DataModel
     {
         return $this->_crossSellingGroupId;
     }
-    
     /**
      * @param string $productId Reference to product (cross selling product)
      * @return \jtl\Connector\Model\CrossSelling
@@ -133,14 +130,5 @@ class CrossSelling extends DataModel
     public function getProductId()
     {
         return $this->_productId;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

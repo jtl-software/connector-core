@@ -80,7 +80,6 @@ class FileDownloadI18n extends DataModel
     {
         return $this->_fileDownloadId;
     }
-    
     /**
      * @param string $localeName Locale
      * @return \jtl\Connector\Model\FileDownloadI18n
@@ -98,7 +97,6 @@ class FileDownloadI18n extends DataModel
     {
         return $this->_localeName;
     }
-    
     /**
      * @param string $name File download title / name
      * @return \jtl\Connector\Model\FileDownloadI18n
@@ -116,7 +114,6 @@ class FileDownloadI18n extends DataModel
     {
         return $this->_name;
     }
-    
     /**
      * @param string $description Optional File download description
      * @return \jtl\Connector\Model\FileDownloadI18n
@@ -133,14 +130,5 @@ class FileDownloadI18n extends DataModel
     public function getDescription()
     {
         return $this->_description;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

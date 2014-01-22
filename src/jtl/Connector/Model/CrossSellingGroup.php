@@ -80,7 +80,6 @@ class CrossSellingGroup extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $localeName Locale
      * @return \jtl\Connector\Model\CrossSellingGroup
@@ -98,7 +97,6 @@ class CrossSellingGroup extends DataModel
     {
         return $this->_localeName;
     }
-    
     /**
      * @param string $name Localized name
      * @return \jtl\Connector\Model\CrossSellingGroup
@@ -116,7 +114,6 @@ class CrossSellingGroup extends DataModel
     {
         return $this->_name;
     }
-    
     /**
      * @param string $description Optional localized description
      * @return \jtl\Connector\Model\CrossSellingGroup
@@ -133,14 +130,5 @@ class CrossSellingGroup extends DataModel
     public function getDescription()
     {
         return $this->_description;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

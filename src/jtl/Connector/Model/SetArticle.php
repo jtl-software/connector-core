@@ -78,7 +78,6 @@ class SetArticle extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $productId Reference to a component / product
      * @return \jtl\Connector\Model\SetArticle
@@ -96,7 +95,6 @@ class SetArticle extends DataModel
     {
         return $this->_productId;
     }
-    
     /**
      * @param double $quantity Component quantity
      * @return \jtl\Connector\Model\SetArticle
@@ -113,14 +111,5 @@ class SetArticle extends DataModel
     public function getQuantity()
     {
         return $this->_quantity;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

@@ -96,7 +96,6 @@ class Image extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $masterImageId Reference to master imageId
      * @return \jtl\Connector\Model\Image
@@ -114,7 +113,6 @@ class Image extends DataModel
     {
         return $this->_masterImageId;
     }
-    
     /**
      * @param string $relationType Allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
      * @return \jtl\Connector\Model\Image
@@ -132,7 +130,6 @@ class Image extends DataModel
     {
         return $this->_relationType;
     }
-    
     /**
      * @param int $foreignKey Foreign key dependent on relationType
      * @return \jtl\Connector\Model\Image
@@ -150,7 +147,6 @@ class Image extends DataModel
     {
         return $this->_foreignKey;
     }
-    
     /**
      * @param string $filename Filename or path
      * @return \jtl\Connector\Model\Image
@@ -168,7 +164,6 @@ class Image extends DataModel
     {
         return $this->_filename;
     }
-    
     /**
      * @param int $sort Optional sort number
      * @return \jtl\Connector\Model\Image
@@ -185,14 +180,5 @@ class Image extends DataModel
     public function getSort()
     {
         return $this->_sort;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

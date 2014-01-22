@@ -74,7 +74,6 @@ class Unit extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $localeName Locale
      * @return \jtl\Connector\Model\Unit
@@ -92,7 +91,6 @@ class Unit extends DataModel
     {
         return $this->_localeName;
     }
-    
     /**
      * @param string $name Localized unit name
      * @return \jtl\Connector\Model\Unit
@@ -109,14 +107,5 @@ class Unit extends DataModel
     public function getName()
     {
         return $this->_name;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

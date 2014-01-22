@@ -74,7 +74,6 @@ class ProductVariationI18n extends DataModel
     {
         return $this->_localeName;
     }
-    
     /**
      * @param string $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\ProductVariationI18n
@@ -92,7 +91,6 @@ class ProductVariationI18n extends DataModel
     {
         return $this->_productVariationId;
     }
-    
     /**
      * @param string $name Locale specific variation name
      * @return \jtl\Connector\Model\ProductVariationI18n
@@ -109,14 +107,5 @@ class ProductVariationI18n extends DataModel
     public function getName()
     {
         return $this->_name;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

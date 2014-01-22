@@ -115,7 +115,6 @@ class DeliveryNote extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $customerOrderId Reference to customerOrder
      * @return \jtl\Connector\Model\DeliveryNote
@@ -133,7 +132,6 @@ class DeliveryNote extends DataModel
     {
         return $this->_customerOrderId;
     }
-    
     /**
      * @param string $note Optional text note
      * @return \jtl\Connector\Model\DeliveryNote
@@ -151,7 +149,6 @@ class DeliveryNote extends DataModel
     {
         return $this->_note;
     }
-    
     /**
      * @param string $created Creation date
      * @return \jtl\Connector\Model\DeliveryNote
@@ -169,7 +166,6 @@ class DeliveryNote extends DataModel
     {
         return $this->_created;
     }
-    
     /**
      * @param bool $isFulfillment Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      * @return \jtl\Connector\Model\DeliveryNote
@@ -187,7 +183,6 @@ class DeliveryNote extends DataModel
     {
         return $this->_isFulfillment;
     }
-    
     /**
      * @param int $status Delivery status
      * @return \jtl\Connector\Model\DeliveryNote
@@ -204,14 +199,5 @@ class DeliveryNote extends DataModel
     public function getStatus()
     {
         return $this->_status;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

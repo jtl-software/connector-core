@@ -78,7 +78,6 @@ class SpecificValue extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $specificId Reference to specificId
      * @return \jtl\Connector\Model\SpecificValue
@@ -96,7 +95,6 @@ class SpecificValue extends DataModel
     {
         return $this->_specificId;
     }
-    
     /**
      * @param int $sort Optional sort number
      * @return \jtl\Connector\Model\SpecificValue
@@ -113,14 +111,5 @@ class SpecificValue extends DataModel
     public function getSort()
     {
         return $this->_sort;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

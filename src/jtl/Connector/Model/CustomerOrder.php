@@ -265,7 +265,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $customerId Optional reference to customer. 
      * @return \jtl\Connector\Model\CustomerOrder
@@ -283,7 +282,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_customerId;
     }
-    
     /**
      * @param string $shippingAddressId Reference to shippingAddress
      * @return \jtl\Connector\Model\CustomerOrder
@@ -301,7 +299,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_shippingAddressId;
     }
-    
     /**
      * @param string $billingAddressId Reference to billingAddress
      * @return \jtl\Connector\Model\CustomerOrder
@@ -319,7 +316,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_billingAddressId;
     }
-    
     /**
      * @param string $shippingMethodId Reference to shippingMethod
      * @return \jtl\Connector\Model\CustomerOrder
@@ -337,7 +333,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_shippingMethodId;
     }
-    
     /**
      * @param string $localeName Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
      * @return \jtl\Connector\Model\CustomerOrder
@@ -355,7 +350,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_localeName;
     }
-    
     /**
      * @param string $currencyIso Currency ISO set, when customerOrder was finished
      * @return \jtl\Connector\Model\CustomerOrder
@@ -373,7 +367,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_currencyIso;
     }
-    
     /**
      * @param string $estimatedDeliveryDate Optional Estimated delivery date set by ERP System
      * @return \jtl\Connector\Model\CustomerOrder
@@ -391,7 +384,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_estimatedDeliveryDate;
     }
-    
     /**
      * @param double $credit Optional customer credit (credit reduces total sum)
      * @return \jtl\Connector\Model\CustomerOrder
@@ -409,7 +401,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_credit;
     }
-    
     /**
      * @param double $totalSum Total sum to pay
      * @return \jtl\Connector\Model\CustomerOrder
@@ -427,7 +418,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_totalSum;
     }
-    
     /**
      * @param string $session Optional session id or session hash
      * @return \jtl\Connector\Model\CustomerOrder
@@ -445,7 +435,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_session;
     }
-    
     /**
      * @param string $shippingMethodName Optional shipping method name
      * @return \jtl\Connector\Model\CustomerOrder
@@ -463,7 +452,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_shippingMethodName;
     }
-    
     /**
      * @param string $orderNumber Optional order number (usually set by ERP System later)
      * @return \jtl\Connector\Model\CustomerOrder
@@ -481,7 +469,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_orderNumber;
     }
-    
     /**
      * @param string $shippingInfo Additional shipping info
      * @return \jtl\Connector\Model\CustomerOrder
@@ -499,7 +486,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_shippingInfo;
     }
-    
     /**
      * @param string $shippingDate Shipping date
      * @return \jtl\Connector\Model\CustomerOrder
@@ -517,7 +503,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_shippingDate;
     }
-    
     /**
      * @param string $paymentDate Payment date
      * @return \jtl\Connector\Model\CustomerOrder
@@ -535,7 +520,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_paymentDate;
     }
-    
     /**
      * @param string $ratingNotificationDate Date from when customer will receive notification to rate order
      * @return \jtl\Connector\Model\CustomerOrder
@@ -553,7 +537,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_ratingNotificationDate;
     }
-    
     /**
      * @param string $tracking Optional TrackingID (not Tracking URL)
      * @return \jtl\Connector\Model\CustomerOrder
@@ -571,7 +554,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_tracking;
     }
-    
     /**
      * @param string $note Optional additional note
      * @return \jtl\Connector\Model\CustomerOrder
@@ -589,7 +571,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_note;
     }
-    
     /**
      * @param string $logistic Optional Logistic name
      * @return \jtl\Connector\Model\CustomerOrder
@@ -607,7 +588,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_logistic;
     }
-    
     /**
      * @param string $trackingURL Optional Tracking URL
      * @return \jtl\Connector\Model\CustomerOrder
@@ -625,7 +605,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_trackingURL;
     }
-    
     /**
      * @param string $ip Optional customer IP address at the time of checkout. Do not store full IP-Adress (dependent on local laws or regulations)
      * @return \jtl\Connector\Model\CustomerOrder
@@ -643,7 +622,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_ip;
     }
-    
     /**
      * @param bool $isFetched Optional flag, if customerOrder is fetched by ERP System
      * @return \jtl\Connector\Model\CustomerOrder
@@ -661,7 +639,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_isFetched;
     }
-    
     /**
      * @param string $status Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
      * @return \jtl\Connector\Model\CustomerOrder
@@ -679,7 +656,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_status;
     }
-    
     /**
      * @param string $created Date of creation
      * @return \jtl\Connector\Model\CustomerOrder
@@ -697,7 +673,6 @@ class CustomerOrder extends DataModel
     {
         return $this->_created;
     }
-    
     /**
      * @param string $paymentModuleId Optional payment module id
      * @return \jtl\Connector\Model\CustomerOrder
@@ -714,14 +689,5 @@ class CustomerOrder extends DataModel
     public function getPaymentModuleId()
     {
         return $this->_paymentModuleId;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

@@ -136,7 +136,6 @@ class CustomerOrderItem extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $productId Reference to product
      * @return \jtl\Connector\Model\CustomerOrderItem
@@ -154,7 +153,6 @@ class CustomerOrderItem extends DataModel
     {
         return $this->_productId;
     }
-    
     /**
      * @param string $shippingClassId Reference to shippingClass
      * @return \jtl\Connector\Model\CustomerOrderItem
@@ -172,7 +170,6 @@ class CustomerOrderItem extends DataModel
     {
         return $this->_shippingClassId;
     }
-    
     /**
      * @param string $customerOrderId Reference to customerOrder
      * @return \jtl\Connector\Model\CustomerOrderItem
@@ -190,7 +187,6 @@ class CustomerOrderItem extends DataModel
     {
         return $this->_customerOrderId;
     }
-    
     /**
      * @param string $name Order item name
      * @return \jtl\Connector\Model\CustomerOrderItem
@@ -208,7 +204,6 @@ class CustomerOrderItem extends DataModel
     {
         return $this->_name;
     }
-    
     /**
      * @param string $sku Stock keeping Unit (unique item identifier)
      * @return \jtl\Connector\Model\CustomerOrderItem
@@ -226,7 +221,6 @@ class CustomerOrderItem extends DataModel
     {
         return $this->_sku;
     }
-    
     /**
      * @param double $price Price (net)
      * @return \jtl\Connector\Model\CustomerOrderItem
@@ -244,7 +238,6 @@ class CustomerOrderItem extends DataModel
     {
         return $this->_price;
     }
-    
     /**
      * @param double $vat Value added tax
      * @return \jtl\Connector\Model\CustomerOrderItem
@@ -262,7 +255,6 @@ class CustomerOrderItem extends DataModel
     {
         return $this->_vat;
     }
-    
     /**
      * @param int $quantity Quantity purchased
      * @return \jtl\Connector\Model\CustomerOrderItem
@@ -280,7 +272,6 @@ class CustomerOrderItem extends DataModel
     {
         return $this->_quantity;
     }
-    
     /**
      * @param string $type Item type e.g. "product" or "shipping"
      * @return \jtl\Connector\Model\CustomerOrderItem
@@ -298,7 +289,6 @@ class CustomerOrderItem extends DataModel
     {
         return $this->_type;
     }
-    
     /**
      * @param string $unique Optional unique Hashsum (if item is part of configurable item
      * @return \jtl\Connector\Model\CustomerOrderItem
@@ -316,7 +306,6 @@ class CustomerOrderItem extends DataModel
     {
         return $this->_unique;
     }
-    
     /**
      * @param string $configItemId Optional reference to configItemId (if item is part of a configurable item)
      * @return \jtl\Connector\Model\CustomerOrderItem
@@ -333,14 +322,5 @@ class CustomerOrderItem extends DataModel
     public function getConfigItemId()
     {
         return $this->_configItemId;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

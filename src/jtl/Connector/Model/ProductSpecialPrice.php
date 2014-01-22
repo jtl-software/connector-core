@@ -112,7 +112,6 @@ class ProductSpecialPrice extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $productId Reference to product
      * @return \jtl\Connector\Model\ProductSpecialPrice
@@ -130,7 +129,6 @@ class ProductSpecialPrice extends DataModel
     {
         return $this->_productId;
     }
-    
     /**
      * @param bool $isActive Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match. 
      * @return \jtl\Connector\Model\ProductSpecialPrice
@@ -148,7 +146,6 @@ class ProductSpecialPrice extends DataModel
     {
         return $this->_isActive;
     }
-    
     /**
      * @param string $activeFrom Optional: Activate special price from date
      * @return \jtl\Connector\Model\ProductSpecialPrice
@@ -166,7 +163,6 @@ class ProductSpecialPrice extends DataModel
     {
         return $this->_activeFrom;
     }
-    
     /**
      * @param string $activeUntil Optional: Special price active until date
      * @return \jtl\Connector\Model\ProductSpecialPrice
@@ -184,7 +180,6 @@ class ProductSpecialPrice extends DataModel
     {
         return $this->_activeUntil;
     }
-    
     /**
      * @param double $stockLimit Optional: SpecialPrice active until stock level quantity
      * @return \jtl\Connector\Model\ProductSpecialPrice
@@ -202,7 +197,6 @@ class ProductSpecialPrice extends DataModel
     {
         return $this->_stockLimit;
     }
-    
     /**
      * @param bool $considerStockLimit Optional: Consider stockLimit value. If true, specialPrice will be only active until product stockLevel is greater or equal stockLimit.
      * @return \jtl\Connector\Model\ProductSpecialPrice
@@ -220,7 +214,6 @@ class ProductSpecialPrice extends DataModel
     {
         return $this->_considerStockLimit;
     }
-    
     /**
      * @param bool $considerDateLimit Optional: Consider activeFrom/activeUntil date range. If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
      * @return \jtl\Connector\Model\ProductSpecialPrice
@@ -237,14 +230,5 @@ class ProductSpecialPrice extends DataModel
     public function getConsiderDateLimit()
     {
         return $this->_considerDateLimit;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

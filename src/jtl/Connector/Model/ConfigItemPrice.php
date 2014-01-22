@@ -88,7 +88,6 @@ class ConfigItemPrice extends DataModel
     {
         return $this->_configItemId;
     }
-    
     /**
      * @param string $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ConfigItemPrice
@@ -106,7 +105,6 @@ class ConfigItemPrice extends DataModel
     {
         return $this->_customerGroupId;
     }
-    
     /**
      * @param float $price Net price or percental value to add/deduct to/from product price (depending on type). Positive value means surcharge, negative value means discount. Also see configItem.vat for value added tax.
      * @return \jtl\Connector\Model\ConfigItemPrice
@@ -124,7 +122,6 @@ class ConfigItemPrice extends DataModel
     {
         return $this->_price;
     }
-    
     /**
      * @param int $type Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
      * @return \jtl\Connector\Model\ConfigItemPrice
@@ -141,14 +138,5 @@ class ConfigItemPrice extends DataModel
     public function getType()
     {
         return $this->_type;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

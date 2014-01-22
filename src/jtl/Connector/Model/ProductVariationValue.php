@@ -100,7 +100,6 @@ class ProductVariationValue extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -118,7 +117,6 @@ class ProductVariationValue extends DataModel
     {
         return $this->_productVariationId;
     }
-    
     /**
      * @param double $extraWeight Optional variation extra weight
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -136,7 +134,6 @@ class ProductVariationValue extends DataModel
     {
         return $this->_extraWeight;
     }
-    
     /**
      * @param string $sku Optional Stock Keeping Unit
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -154,7 +151,6 @@ class ProductVariationValue extends DataModel
     {
         return $this->_sku;
     }
-    
     /**
      * @param int $sort Optional sort number
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -172,7 +168,6 @@ class ProductVariationValue extends DataModel
     {
         return $this->_sort;
     }
-    
     /**
      * @param double $stockLevel Optional stock level
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -189,14 +184,5 @@ class ProductVariationValue extends DataModel
     public function getStockLevel()
     {
         return $this->_stockLevel;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

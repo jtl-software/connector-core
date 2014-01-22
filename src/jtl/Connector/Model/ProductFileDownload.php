@@ -68,7 +68,6 @@ class ProductFileDownload extends DataModel
     {
         return $this->_productId;
     }
-    
     /**
      * @param string $fileDownloadId Reference to fileDownload
      * @return \jtl\Connector\Model\ProductFileDownload
@@ -85,14 +84,5 @@ class ProductFileDownload extends DataModel
     public function getFileDownloadId()
     {
         return $this->_fileDownloadId;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

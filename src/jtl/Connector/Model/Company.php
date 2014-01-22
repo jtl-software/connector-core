@@ -170,7 +170,6 @@ class Company extends DataModel
     {
         return $this->_name;
     }
-    
     /**
      * @param string $businessman Company businessman / entrepreneur
      * @return \jtl\Connector\Model\Company
@@ -188,7 +187,6 @@ class Company extends DataModel
     {
         return $this->_businessman;
     }
-    
     /**
      * @param string $street Street
      * @return \jtl\Connector\Model\Company
@@ -206,7 +204,6 @@ class Company extends DataModel
     {
         return $this->_street;
     }
-    
     /**
      * @param string $streetNumber Street number
      * @return \jtl\Connector\Model\Company
@@ -224,7 +221,6 @@ class Company extends DataModel
     {
         return $this->_streetNumber;
     }
-    
     /**
      * @param string $zipCode Zip code / postcode
      * @return \jtl\Connector\Model\Company
@@ -242,7 +238,6 @@ class Company extends DataModel
     {
         return $this->_zipCode;
     }
-    
     /**
      * @param string $city City
      * @return \jtl\Connector\Model\Company
@@ -260,7 +255,6 @@ class Company extends DataModel
     {
         return $this->_city;
     }
-    
     /**
      * @param string $countryIso CountryIso
      * @return \jtl\Connector\Model\Company
@@ -278,7 +272,6 @@ class Company extends DataModel
     {
         return $this->_countryIso;
     }
-    
     /**
      * @param string $phone Phone number
      * @return \jtl\Connector\Model\Company
@@ -296,7 +289,6 @@ class Company extends DataModel
     {
         return $this->_phone;
     }
-    
     /**
      * @param string $fax Fax number
      * @return \jtl\Connector\Model\Company
@@ -314,7 +306,6 @@ class Company extends DataModel
     {
         return $this->_fax;
     }
-    
     /**
      * @param string $eMail Company E-Mail address
      * @return \jtl\Connector\Model\Company
@@ -332,7 +323,6 @@ class Company extends DataModel
     {
         return $this->_eMail;
     }
-    
     /**
      * @param string $www Company website URL
      * @return \jtl\Connector\Model\Company
@@ -350,7 +340,6 @@ class Company extends DataModel
     {
         return $this->_www;
     }
-    
     /**
      * @param string $bankCode Bank code number
      * @return \jtl\Connector\Model\Company
@@ -368,7 +357,6 @@ class Company extends DataModel
     {
         return $this->_bankCode;
     }
-    
     /**
      * @param string $accountNumber Bank account number
      * @return \jtl\Connector\Model\Company
@@ -386,7 +374,6 @@ class Company extends DataModel
     {
         return $this->_accountNumber;
     }
-    
     /**
      * @param string $bankName Bank name e.g. "Deutsche Bank"
      * @return \jtl\Connector\Model\Company
@@ -404,7 +391,6 @@ class Company extends DataModel
     {
         return $this->_bankName;
     }
-    
     /**
      * @param string $accountHolder Bank account holder name e.g. "John Doe"
      * @return \jtl\Connector\Model\Company
@@ -422,7 +408,6 @@ class Company extends DataModel
     {
         return $this->_accountHolder;
     }
-    
     /**
      * @param string $vatNumber VAT registration number (german: USt-ID)
      * @return \jtl\Connector\Model\Company
@@ -440,7 +425,6 @@ class Company extends DataModel
     {
         return $this->_vatNumber;
     }
-    
     /**
      * @param string $taxIdNumber Tax id number (german: Steuernummer)
      * @return \jtl\Connector\Model\Company
@@ -458,7 +442,6 @@ class Company extends DataModel
     {
         return $this->_taxIdNumber;
     }
-    
     /**
      * @param string $iban International Bank Account Number (IBAN) 
      * @return \jtl\Connector\Model\Company
@@ -476,7 +459,6 @@ class Company extends DataModel
     {
         return $this->_iban;
     }
-    
     /**
      * @param string $bic Bank Identifier Code (BIC)
      * @return \jtl\Connector\Model\Company
@@ -493,14 +475,5 @@ class Company extends DataModel
     public function getBic()
     {
         return $this->_bic;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

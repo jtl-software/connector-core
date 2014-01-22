@@ -102,7 +102,6 @@ class FileDownload extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $path Path to download file
      * @return \jtl\Connector\Model\FileDownload
@@ -120,7 +119,6 @@ class FileDownload extends DataModel
     {
         return $this->_path;
     }
-    
     /**
      * @param string $previewPath Optional path to preview file
      * @return \jtl\Connector\Model\FileDownload
@@ -138,7 +136,6 @@ class FileDownload extends DataModel
     {
         return $this->_previewPath;
     }
-    
     /**
      * @param int $maxDownloads Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
      * @return \jtl\Connector\Model\FileDownload
@@ -156,7 +153,6 @@ class FileDownload extends DataModel
     {
         return $this->_maxDownloads;
     }
-    
     /**
      * @param int $maxDays Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
      * @return \jtl\Connector\Model\FileDownload
@@ -174,7 +170,6 @@ class FileDownload extends DataModel
     {
         return $this->_maxDays;
     }
-    
     /**
      * @param int $sort Optional sort number
      * @return \jtl\Connector\Model\FileDownload
@@ -192,7 +187,6 @@ class FileDownload extends DataModel
     {
         return $this->_sort;
     }
-    
     /**
      * @param string $created Optional creation date
      * @return \jtl\Connector\Model\FileDownload
@@ -209,14 +203,5 @@ class FileDownload extends DataModel
     public function getCreated()
     {
         return $this->_created;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

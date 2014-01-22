@@ -68,7 +68,6 @@ class ProductVariationInvisibility extends DataModel
     {
         return $this->_customerGroupId;
     }
-    
     /**
      * @param string $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\ProductVariationInvisibility
@@ -85,14 +84,5 @@ class ProductVariationInvisibility extends DataModel
     public function getProductVariationId()
     {
         return $this->_productVariationId;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

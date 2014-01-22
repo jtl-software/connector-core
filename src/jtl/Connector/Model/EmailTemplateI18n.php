@@ -98,7 +98,6 @@ class EmailTemplateI18n extends DataModel
     {
         return $this->_emailTemplateId;
     }
-    
     /**
      * @param string $localeName
      * @return \jtl\Connector\Model\EmailTemplateI18n
@@ -116,7 +115,6 @@ class EmailTemplateI18n extends DataModel
     {
         return $this->_localeName;
     }
-    
     /**
      * @param string $subject
      * @return \jtl\Connector\Model\EmailTemplateI18n
@@ -134,7 +132,6 @@ class EmailTemplateI18n extends DataModel
     {
         return $this->_subject;
     }
-    
     /**
      * @param string $contentHtml
      * @return \jtl\Connector\Model\EmailTemplateI18n
@@ -152,7 +149,6 @@ class EmailTemplateI18n extends DataModel
     {
         return $this->_contentHtml;
     }
-    
     /**
      * @param string $contentText
      * @return \jtl\Connector\Model\EmailTemplateI18n
@@ -170,7 +166,6 @@ class EmailTemplateI18n extends DataModel
     {
         return $this->_contentText;
     }
-    
     /**
      * @param string $pdf
      * @return \jtl\Connector\Model\EmailTemplateI18n
@@ -188,7 +183,6 @@ class EmailTemplateI18n extends DataModel
     {
         return $this->_pdf;
     }
-    
     /**
      * @param string $filename
      * @return \jtl\Connector\Model\EmailTemplateI18n
@@ -205,14 +199,5 @@ class EmailTemplateI18n extends DataModel
     public function getFilename()
     {
         return $this->_filename;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

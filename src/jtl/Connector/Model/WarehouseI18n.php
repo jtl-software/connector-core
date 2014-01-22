@@ -68,7 +68,6 @@ class WarehouseI18n extends DataModel
     {
         return $this->_warehouseId;
     }
-    
     /**
      * @param string $name Localized warehouse name
      * @return \jtl\Connector\Model\WarehouseI18n
@@ -85,14 +84,5 @@ class WarehouseI18n extends DataModel
     public function getName()
     {
         return $this->_name;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

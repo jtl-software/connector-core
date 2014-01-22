@@ -102,7 +102,6 @@ class ConfigGroup extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $imagePath Optional image file path
      * @return \jtl\Connector\Model\ConfigGroup
@@ -120,7 +119,6 @@ class ConfigGroup extends DataModel
     {
         return $this->_imagePath;
     }
-    
     /**
      * @param int $minimumSelection Optional minimum number required selections. Default 0 for no minimum requirement. 
      * @return \jtl\Connector\Model\ConfigGroup
@@ -138,7 +136,6 @@ class ConfigGroup extends DataModel
     {
         return $this->_minimumSelection;
     }
-    
     /**
      * @param int $maximumSelection Optional maximum number allowed selections. Default 0 for no maximum limitation.
      * @return \jtl\Connector\Model\ConfigGroup
@@ -156,7 +153,6 @@ class ConfigGroup extends DataModel
     {
         return $this->_maximumSelection;
     }
-    
     /**
      * @param int $type Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      * @return \jtl\Connector\Model\ConfigGroup
@@ -174,7 +170,6 @@ class ConfigGroup extends DataModel
     {
         return $this->_type;
     }
-    
     /**
      * @param int $sort Optional sort order number
      * @return \jtl\Connector\Model\ConfigGroup
@@ -192,7 +187,6 @@ class ConfigGroup extends DataModel
     {
         return $this->_sort;
     }
-    
     /**
      * @param string $comment Optional internal comment to differantiate config groups by comment name
      * @return \jtl\Connector\Model\ConfigGroup
@@ -209,14 +203,5 @@ class ConfigGroup extends DataModel
     public function getComment()
     {
         return $this->_comment;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

@@ -78,7 +78,6 @@ class CategoryCustomerGroup extends DataModel
     {
         return $this->_customerGroupId;
     }
-    
     /**
      * @param string $categoryId Reference to category
      * @return \jtl\Connector\Model\CategoryCustomerGroup
@@ -96,7 +95,6 @@ class CategoryCustomerGroup extends DataModel
     {
         return $this->_categoryId;
     }
-    
     /**
      * @param double $discount Optional discount on products in specified categoryId for  customerGroupId
      * @return \jtl\Connector\Model\CategoryCustomerGroup
@@ -113,14 +111,5 @@ class CategoryCustomerGroup extends DataModel
     public function getDiscount()
     {
         return $this->_discount;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

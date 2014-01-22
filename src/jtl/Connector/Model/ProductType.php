@@ -68,7 +68,6 @@ class ProductType extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $name Optional (internal) product type name
      * @return \jtl\Connector\Model\ProductType
@@ -85,14 +84,5 @@ class ProductType extends DataModel
     public function getName()
     {
         return $this->_name;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

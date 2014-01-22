@@ -80,7 +80,6 @@ class CategoryAttrI18n extends DataModel
     {
         return $this->_localeName;
     }
-    
     /**
      * @param string $categoryAttrId Reference to categoryAttr
      * @return \jtl\Connector\Model\CategoryAttrI18n
@@ -98,7 +97,6 @@ class CategoryAttrI18n extends DataModel
     {
         return $this->_categoryAttrId;
     }
-    
     /**
      * @param string $key Attribute key
      * @return \jtl\Connector\Model\CategoryAttrI18n
@@ -116,7 +114,6 @@ class CategoryAttrI18n extends DataModel
     {
         return $this->_key;
     }
-    
     /**
      * @param string $value Attribute value
      * @return \jtl\Connector\Model\CategoryAttrI18n
@@ -133,14 +130,5 @@ class CategoryAttrI18n extends DataModel
     public function getValue()
     {
         return $this->_value;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

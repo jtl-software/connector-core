@@ -130,7 +130,6 @@ class EmailTemplate extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $name
      * @return \jtl\Connector\Model\EmailTemplate
@@ -148,7 +147,6 @@ class EmailTemplate extends DataModel
     {
         return $this->_name;
     }
-    
     /**
      * @param string $description
      * @return \jtl\Connector\Model\EmailTemplate
@@ -166,7 +164,6 @@ class EmailTemplate extends DataModel
     {
         return $this->_description;
     }
-    
     /**
      * @param string $emailType
      * @return \jtl\Connector\Model\EmailTemplate
@@ -184,7 +181,6 @@ class EmailTemplate extends DataModel
     {
         return $this->_emailType;
     }
-    
     /**
      * @param string $moduleId
      * @return \jtl\Connector\Model\EmailTemplate
@@ -202,7 +198,6 @@ class EmailTemplate extends DataModel
     {
         return $this->_moduleId;
     }
-    
     /**
      * @param string $filename
      * @return \jtl\Connector\Model\EmailTemplate
@@ -220,7 +215,6 @@ class EmailTemplate extends DataModel
     {
         return $this->_filename;
     }
-    
     /**
      * @param bool $isActive
      * @return \jtl\Connector\Model\EmailTemplate
@@ -238,7 +232,6 @@ class EmailTemplate extends DataModel
     {
         return $this->_isActive;
     }
-    
     /**
      * @param bool $isOii
      * @return \jtl\Connector\Model\EmailTemplate
@@ -256,7 +249,6 @@ class EmailTemplate extends DataModel
     {
         return $this->_isOii;
     }
-    
     /**
      * @param bool $isAgb
      * @return \jtl\Connector\Model\EmailTemplate
@@ -274,7 +266,6 @@ class EmailTemplate extends DataModel
     {
         return $this->_isAgb;
     }
-    
     /**
      * @param bool $isWrb
      * @return \jtl\Connector\Model\EmailTemplate
@@ -292,7 +283,6 @@ class EmailTemplate extends DataModel
     {
         return $this->_isWrb;
     }
-    
     /**
      * @param int $error
      * @return \jtl\Connector\Model\EmailTemplate
@@ -309,14 +299,5 @@ class EmailTemplate extends DataModel
     public function getError()
     {
         return $this->_error;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

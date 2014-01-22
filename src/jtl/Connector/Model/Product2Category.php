@@ -74,7 +74,6 @@ class Product2Category extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $categoryId Reference to category
      * @return \jtl\Connector\Model\Product2Category
@@ -92,7 +91,6 @@ class Product2Category extends DataModel
     {
         return $this->_categoryId;
     }
-    
     /**
      * @param string $productId Reference to product
      * @return \jtl\Connector\Model\Product2Category
@@ -109,14 +107,5 @@ class Product2Category extends DataModel
     public function getProductId()
     {
         return $this->_productId;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

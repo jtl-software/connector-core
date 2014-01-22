@@ -90,7 +90,6 @@ class Language extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $nameEnglish English term
      * @return \jtl\Connector\Model\Language
@@ -108,7 +107,6 @@ class Language extends DataModel
     {
         return $this->_nameEnglish;
     }
-    
     /**
      * @param string $nameGerman German term
      * @return \jtl\Connector\Model\Language
@@ -126,7 +124,6 @@ class Language extends DataModel
     {
         return $this->_nameGerman;
     }
-    
     /**
      * @param string $localeName Locale
      * @return \jtl\Connector\Model\Language
@@ -144,7 +141,6 @@ class Language extends DataModel
     {
         return $this->_localeName;
     }
-    
     /**
      * @param bool $isDefault Flag default language for frontend. Exact 1 language must be marked as default.
      * @return \jtl\Connector\Model\Language
@@ -161,14 +157,5 @@ class Language extends DataModel
     public function getIsDefault()
     {
         return $this->_isDefault;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

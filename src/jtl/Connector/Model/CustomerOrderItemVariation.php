@@ -108,7 +108,6 @@ class CustomerOrderItemVariation extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $customerOrderItemId Reference to customerOrderItem
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
@@ -126,7 +125,6 @@ class CustomerOrderItemVariation extends DataModel
     {
         return $this->_customerOrderItemId;
     }
-    
     /**
      * @param string $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
@@ -144,7 +142,6 @@ class CustomerOrderItemVariation extends DataModel
     {
         return $this->_productVariationId;
     }
-    
     /**
      * @param string $productVariationValueId Reference to productVariationValue
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
@@ -162,7 +159,6 @@ class CustomerOrderItemVariation extends DataModel
     {
         return $this->_productVariationValueId;
     }
-    
     /**
      * @param string $productVariationName Variation name e.g. "color"
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
@@ -180,7 +176,6 @@ class CustomerOrderItemVariation extends DataModel
     {
         return $this->_productVariationName;
     }
-    
     /**
      * @param string $productVariationValueName Variation value e.g. "red"
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
@@ -198,7 +193,6 @@ class CustomerOrderItemVariation extends DataModel
     {
         return $this->_productVariationValueName;
     }
-    
     /**
      * @param string $freeField Optional custom text value for variation 
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
@@ -216,7 +210,6 @@ class CustomerOrderItemVariation extends DataModel
     {
         return $this->_freeField;
     }
-    
     /**
      * @param double $surcharge Optional extra surcharge (added to item price)
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
@@ -233,14 +226,5 @@ class CustomerOrderItemVariation extends DataModel
     public function getSurcharge()
     {
         return $this->_surcharge;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

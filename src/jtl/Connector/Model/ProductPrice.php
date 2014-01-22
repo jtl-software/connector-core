@@ -88,7 +88,6 @@ class ProductPrice extends DataModel
     {
         return $this->_customerGroupId;
     }
-    
     /**
      * @param string $productId Reference to product
      * @return \jtl\Connector\Model\ProductPrice
@@ -106,7 +105,6 @@ class ProductPrice extends DataModel
     {
         return $this->_productId;
     }
-    
     /**
      * @param double $netPrice Price value (net)
      * @return \jtl\Connector\Model\ProductPrice
@@ -124,7 +122,6 @@ class ProductPrice extends DataModel
     {
         return $this->_netPrice;
     }
-    
     /**
      * @param int $quantity Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
      * @return \jtl\Connector\Model\ProductPrice
@@ -141,14 +138,5 @@ class ProductPrice extends DataModel
     public function getQuantity()
     {
         return $this->_quantity;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

@@ -104,7 +104,6 @@ class SpecificValueI18n extends DataModel
     {
         return $this->_localeName;
     }
-    
     /**
      * @param string $specificValueId Reference to specificValue
      * @return \jtl\Connector\Model\SpecificValueI18n
@@ -122,7 +121,6 @@ class SpecificValueI18n extends DataModel
     {
         return $this->_specificValueId;
     }
-    
     /**
      * @param string $value Localized value
      * @return \jtl\Connector\Model\SpecificValueI18n
@@ -140,7 +138,6 @@ class SpecificValueI18n extends DataModel
     {
         return $this->_value;
     }
-    
     /**
      * @param string $urlPath Optional localized URL path
      * @return \jtl\Connector\Model\SpecificValueI18n
@@ -158,7 +155,6 @@ class SpecificValueI18n extends DataModel
     {
         return $this->_urlPath;
     }
-    
     /**
      * @param string $description Optional localized description
      * @return \jtl\Connector\Model\SpecificValueI18n
@@ -176,7 +172,6 @@ class SpecificValueI18n extends DataModel
     {
         return $this->_description;
     }
-    
     /**
      * @param string $metaDescription Optional localized meta description value
      * @return \jtl\Connector\Model\SpecificValueI18n
@@ -194,7 +189,6 @@ class SpecificValueI18n extends DataModel
     {
         return $this->_metaDescription;
     }
-    
     /**
      * @param string $metaKeywords Optional localized meta keywords value
      * @return \jtl\Connector\Model\SpecificValueI18n
@@ -212,7 +206,6 @@ class SpecificValueI18n extends DataModel
     {
         return $this->_metaKeywords;
     }
-    
     /**
      * @param string $titleTag Optional localized title tag value
      * @return \jtl\Connector\Model\SpecificValueI18n
@@ -229,14 +222,5 @@ class SpecificValueI18n extends DataModel
     public function getTitleTag()
     {
         return $this->_titleTag;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

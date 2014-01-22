@@ -108,7 +108,6 @@ class DeliveryNoteItem extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $customerOrderItemId Reference to customerOrderItem
      * @return \jtl\Connector\Model\DeliveryNoteItem
@@ -126,7 +125,6 @@ class DeliveryNoteItem extends DataModel
     {
         return $this->_customerOrderItemId;
     }
-    
     /**
      * @param double $quantity Quantity delivered
      * @return \jtl\Connector\Model\DeliveryNoteItem
@@ -144,7 +142,6 @@ class DeliveryNoteItem extends DataModel
     {
         return $this->_quantity;
     }
-    
     /**
      * @param string $warehouseId Optional reference to warehouse
      * @return \jtl\Connector\Model\DeliveryNoteItem
@@ -162,7 +159,6 @@ class DeliveryNoteItem extends DataModel
     {
         return $this->_warehouseId;
     }
-    
     /**
      * @param string $serialNumber Optional serial number
      * @return \jtl\Connector\Model\DeliveryNoteItem
@@ -180,7 +176,6 @@ class DeliveryNoteItem extends DataModel
     {
         return $this->_serialNumber;
     }
-    
     /**
      * @param string $batchNumber Optional batch number
      * @return \jtl\Connector\Model\DeliveryNoteItem
@@ -198,7 +193,6 @@ class DeliveryNoteItem extends DataModel
     {
         return $this->_batchNumber;
     }
-    
     /**
      * @param string $bestBefore Optional best before date
      * @return \jtl\Connector\Model\DeliveryNoteItem
@@ -216,7 +210,6 @@ class DeliveryNoteItem extends DataModel
     {
         return $this->_bestBefore;
     }
-    
     /**
      * @param string $deliveryNoteId Reference to deliveryNote
      * @return \jtl\Connector\Model\DeliveryNoteItem
@@ -233,14 +226,5 @@ class DeliveryNoteItem extends DataModel
     public function getDeliveryNoteId()
     {
         return $this->_deliveryNoteId;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

@@ -98,7 +98,6 @@ class Shipment extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $deliveryNoteId Reference to deliveryNote
      * @return \jtl\Connector\Model\Shipment
@@ -116,7 +115,6 @@ class Shipment extends DataModel
     {
         return $this->_deliveryNoteId;
     }
-    
     /**
      * @param string $logistic Logistic name
      * @return \jtl\Connector\Model\Shipment
@@ -134,7 +132,6 @@ class Shipment extends DataModel
     {
         return $this->_logistic;
     }
-    
     /**
      * @param string $logisticURL Optional Logistic URL
      * @return \jtl\Connector\Model\Shipment
@@ -152,7 +149,6 @@ class Shipment extends DataModel
     {
         return $this->_logisticURL;
     }
-    
     /**
      * @param string $identCode Optional Identcode
      * @return \jtl\Connector\Model\Shipment
@@ -170,7 +166,6 @@ class Shipment extends DataModel
     {
         return $this->_identCode;
     }
-    
     /**
      * @param string $created Creation date
      * @return \jtl\Connector\Model\Shipment
@@ -188,7 +183,6 @@ class Shipment extends DataModel
     {
         return $this->_created;
     }
-    
     /**
      * @param string $note Optional shipment note
      * @return \jtl\Connector\Model\Shipment
@@ -205,14 +199,5 @@ class Shipment extends DataModel
     public function getNote()
     {
         return $this->_note;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

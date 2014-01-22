@@ -80,7 +80,6 @@ class CustomerGroupAttr extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\CustomerGroupAttr
@@ -98,7 +97,6 @@ class CustomerGroupAttr extends DataModel
     {
         return $this->_customerGroupId;
     }
-    
     /**
      * @param string $key Attribute key
      * @return \jtl\Connector\Model\CustomerGroupAttr
@@ -116,7 +114,6 @@ class CustomerGroupAttr extends DataModel
     {
         return $this->_key;
     }
-    
     /**
      * @param string $value Attribute value
      * @return \jtl\Connector\Model\CustomerGroupAttr
@@ -133,14 +130,5 @@ class CustomerGroupAttr extends DataModel
     public function getValue()
     {
         return $this->_value;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

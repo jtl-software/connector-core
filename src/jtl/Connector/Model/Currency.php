@@ -118,7 +118,6 @@ class Currency extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $name Currency name
      * @return \jtl\Connector\Model\Currency
@@ -136,7 +135,6 @@ class Currency extends DataModel
     {
         return $this->_name;
     }
-    
     /**
      * @param string $iso Currency ISO 4217 (3-letter Uppercase Code)
      * @return \jtl\Connector\Model\Currency
@@ -154,7 +152,6 @@ class Currency extends DataModel
     {
         return $this->_iso;
     }
-    
     /**
      * @param string $nameHtml Optional HTML name e.g. "&euro;"
      * @return \jtl\Connector\Model\Currency
@@ -172,7 +169,6 @@ class Currency extends DataModel
     {
         return $this->_nameHtml;
     }
-    
     /**
      * @param double $factor Optional conversion factor to default currency. Default is 1 (equals default currency)
      * @return \jtl\Connector\Model\Currency
@@ -190,7 +186,6 @@ class Currency extends DataModel
     {
         return $this->_factor;
     }
-    
     /**
      * @param bool $isDefault Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default. 
      * @return \jtl\Connector\Model\Currency
@@ -208,7 +203,6 @@ class Currency extends DataModel
     {
         return $this->_isDefault;
     }
-    
     /**
      * @param bool $hasCurrencySignBeforeValue Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference. 
      * @return \jtl\Connector\Model\Currency
@@ -226,7 +220,6 @@ class Currency extends DataModel
     {
         return $this->_hasCurrencySignBeforeValue;
     }
-    
     /**
      * @param string $delimiterCent Optional delimiter char for cent, default=",". Ignore this flag if you have the correct user locale preference.
      * @return \jtl\Connector\Model\Currency
@@ -244,7 +237,6 @@ class Currency extends DataModel
     {
         return $this->_delimiterCent;
     }
-    
     /**
      * @param string $delimiterThousand Optional delimiter char for thousand. Default=".". Ignore this flag if you have the correct user locale preference.
      * @return \jtl\Connector\Model\Currency
@@ -261,14 +253,5 @@ class Currency extends DataModel
     public function getDelimiterThousand()
     {
         return $this->_delimiterThousand;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

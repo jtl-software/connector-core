@@ -80,7 +80,6 @@ class ConfigGroupI18n extends DataModel
     {
         return $this->_configGroupId;
     }
-    
     /**
      * @param string $localeName Locale
      * @return \jtl\Connector\Model\ConfigGroupI18n
@@ -98,7 +97,6 @@ class ConfigGroupI18n extends DataModel
     {
         return $this->_localeName;
     }
-    
     /**
      * @param string $name Config group name
      * @return \jtl\Connector\Model\ConfigGroupI18n
@@ -116,7 +114,6 @@ class ConfigGroupI18n extends DataModel
     {
         return $this->_name;
     }
-    
     /**
      * @param string $description Optional description (HTML)
      * @return \jtl\Connector\Model\ConfigGroupI18n
@@ -133,14 +130,5 @@ class ConfigGroupI18n extends DataModel
     public function getDescription()
     {
         return $this->_description;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

@@ -88,7 +88,6 @@ class CustomerGroup extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param double $discount Optional percentual discount on all products. Negative Value means surcharge. 
      * @return \jtl\Connector\Model\CustomerGroup
@@ -106,7 +105,6 @@ class CustomerGroup extends DataModel
     {
         return $this->_discount;
     }
-    
     /**
      * @param bool $isDefault Optional: Flag default customer group
      * @return \jtl\Connector\Model\CustomerGroup
@@ -124,7 +122,6 @@ class CustomerGroup extends DataModel
     {
         return $this->_isDefault;
     }
-    
     /**
      * @param bool $applyNetPrice Optional: Show net prices default instead of gross prices
      * @return \jtl\Connector\Model\CustomerGroup
@@ -141,14 +138,5 @@ class CustomerGroup extends DataModel
     public function getApplyNetPrice()
     {
         return $this->_applyNetPrice;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

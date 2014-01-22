@@ -68,7 +68,6 @@ class CategoryInvisibility extends DataModel
     {
         return $this->_customerGroupId;
     }
-    
     /**
      * @param string $categoryId Reference to category to hide from customerGroupId
      * @return \jtl\Connector\Model\CategoryInvisibility
@@ -85,14 +84,5 @@ class CategoryInvisibility extends DataModel
     public function getCategoryId()
     {
         return $this->_categoryId;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

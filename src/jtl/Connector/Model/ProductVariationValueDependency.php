@@ -68,7 +68,6 @@ class ProductVariationValueDependency extends DataModel
     {
         return $this->_productVariationValueId;
     }
-    
     /**
      * @param string $productVariationValueTargetId
      * @return \jtl\Connector\Model\ProductVariationValueDependency
@@ -85,14 +84,5 @@ class ProductVariationValueDependency extends DataModel
     public function getProductVariationValueTargetId()
     {
         return $this->_productVariationValueTargetId;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

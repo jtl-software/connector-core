@@ -96,7 +96,6 @@ class FileUpload extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $productId Reference to product
      * @return \jtl\Connector\Model\FileUpload
@@ -114,7 +113,6 @@ class FileUpload extends DataModel
     {
         return $this->_productId;
     }
-    
     /**
      * @param string $name Filename specification
      * @return \jtl\Connector\Model\FileUpload
@@ -132,7 +130,6 @@ class FileUpload extends DataModel
     {
         return $this->_name;
     }
-    
     /**
      * @param string $description Optional file description
      * @return \jtl\Connector\Model\FileUpload
@@ -150,7 +147,6 @@ class FileUpload extends DataModel
     {
         return $this->_description;
     }
-    
     /**
      * @param string $fileType Allowed file type
      * @return \jtl\Connector\Model\FileUpload
@@ -168,7 +164,6 @@ class FileUpload extends DataModel
     {
         return $this->_fileType;
     }
-    
     /**
      * @param bool $isRequired Optional flag to force upload before finishing checkout. True if file upload is required to buy product
      * @return \jtl\Connector\Model\FileUpload
@@ -185,14 +180,5 @@ class FileUpload extends DataModel
     public function getIsRequired()
     {
         return $this->_isRequired;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

@@ -90,7 +90,6 @@ class ProductWarehouseInfo extends DataModel
     {
         return $this->_productId;
     }
-    
     /**
      * @param string $warehouseId Reference to warehouse
      * @return \jtl\Connector\Model\ProductWarehouseInfo
@@ -108,7 +107,6 @@ class ProductWarehouseInfo extends DataModel
     {
         return $this->_warehouseId;
     }
-    
     /**
      * @param double $stockLevel Optional product stock level in specified warehouse
      * @return \jtl\Connector\Model\ProductWarehouseInfo
@@ -126,7 +124,6 @@ class ProductWarehouseInfo extends DataModel
     {
         return $this->_stockLevel;
     }
-    
     /**
      * @param double $inflowQuantity Optional product inflow quantity for specified warehouse
      * @return \jtl\Connector\Model\ProductWarehouseInfo
@@ -144,7 +141,6 @@ class ProductWarehouseInfo extends DataModel
     {
         return $this->_inflowQuantity;
     }
-    
     /**
      * @param string $inflowDate Optional product inflow date for specified warehouse
      * @return \jtl\Connector\Model\ProductWarehouseInfo
@@ -161,14 +157,5 @@ class ProductWarehouseInfo extends DataModel
     public function getInflowDate()
     {
         return $this->_inflowDate;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

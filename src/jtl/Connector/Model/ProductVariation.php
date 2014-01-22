@@ -84,7 +84,6 @@ class ProductVariation extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $productId Reference to product
      * @return \jtl\Connector\Model\ProductVariation
@@ -102,7 +101,6 @@ class ProductVariation extends DataModel
     {
         return $this->_productId;
     }
-    
     /**
      * @param string $type Variation type e.g. radio or select
      * @return \jtl\Connector\Model\ProductVariation
@@ -120,7 +118,6 @@ class ProductVariation extends DataModel
     {
         return $this->_type;
     }
-    
     /**
      * @param int $sort Optional sort number
      * @return \jtl\Connector\Model\ProductVariation
@@ -137,14 +134,5 @@ class ProductVariation extends DataModel
     public function getSort()
     {
         return $this->_sort;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

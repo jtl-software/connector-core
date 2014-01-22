@@ -78,7 +78,6 @@ class CategoryAttr extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $categoryId Reference to category
      * @return \jtl\Connector\Model\CategoryAttr
@@ -96,7 +95,6 @@ class CategoryAttr extends DataModel
     {
         return $this->_categoryId;
     }
-    
     /**
      * @param int $sort Optional sort number
      * @return \jtl\Connector\Model\CategoryAttr
@@ -113,14 +111,5 @@ class CategoryAttr extends DataModel
     public function getSort()
     {
         return $this->_sort;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

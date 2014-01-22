@@ -92,7 +92,6 @@ class ManufacturerI18n extends DataModel
     {
         return $this->_manufacturerId;
     }
-    
     /**
      * @param string $localeName Locale
      * @return \jtl\Connector\Model\ManufacturerI18n
@@ -110,7 +109,6 @@ class ManufacturerI18n extends DataModel
     {
         return $this->_localeName;
     }
-    
     /**
      * @param string $description Optional manufacturer description (HTML)
      * @return \jtl\Connector\Model\ManufacturerI18n
@@ -128,7 +126,6 @@ class ManufacturerI18n extends DataModel
     {
         return $this->_description;
     }
-    
     /**
      * @param string $metaDescription Optional meta description tag value
      * @return \jtl\Connector\Model\ManufacturerI18n
@@ -146,7 +143,6 @@ class ManufacturerI18n extends DataModel
     {
         return $this->_metaDescription;
     }
-    
     /**
      * @param string $metaKeywords Optional meta keywords tag value
      * @return \jtl\Connector\Model\ManufacturerI18n
@@ -164,7 +160,6 @@ class ManufacturerI18n extends DataModel
     {
         return $this->_metaKeywords;
     }
-    
     /**
      * @param string $titleTag Optional title tag value
      * @return \jtl\Connector\Model\ManufacturerI18n
@@ -181,14 +176,5 @@ class ManufacturerI18n extends DataModel
     public function getTitleTag()
     {
         return $this->_titleTag;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

@@ -74,7 +74,6 @@ class TaxZoneCountry extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $taxZoneId Reference to taxZone
      * @return \jtl\Connector\Model\TaxZoneCountry
@@ -92,7 +91,6 @@ class TaxZoneCountry extends DataModel
     {
         return $this->_taxZoneId;
     }
-    
     /**
      * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
      * @return \jtl\Connector\Model\TaxZoneCountry
@@ -109,14 +107,5 @@ class TaxZoneCountry extends DataModel
     public function getCountryIso()
     {
         return $this->_countryIso;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

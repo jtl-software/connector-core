@@ -104,7 +104,6 @@ class CategoryI18n extends DataModel
     {
         return $this->_localeName;
     }
-    
     /**
      * @param string $categoryId Reference to category
      * @return \jtl\Connector\Model\CategoryI18n
@@ -122,7 +121,6 @@ class CategoryI18n extends DataModel
     {
         return $this->_categoryId;
     }
-    
     /**
      * @param string $name Localized category name
      * @return \jtl\Connector\Model\CategoryI18n
@@ -140,7 +138,6 @@ class CategoryI18n extends DataModel
     {
         return $this->_name;
     }
-    
     /**
      * @param string $urlPath Optional localized category URL
      * @return \jtl\Connector\Model\CategoryI18n
@@ -158,7 +155,6 @@ class CategoryI18n extends DataModel
     {
         return $this->_urlPath;
     }
-    
     /**
      * @param string $description Optional localized Long Description
      * @return \jtl\Connector\Model\CategoryI18n
@@ -176,7 +172,6 @@ class CategoryI18n extends DataModel
     {
         return $this->_description;
     }
-    
     /**
      * @param string $metaDescription Optional localized  short description used for meta tag description
      * @return \jtl\Connector\Model\CategoryI18n
@@ -194,7 +189,6 @@ class CategoryI18n extends DataModel
     {
         return $this->_metaDescription;
     }
-    
     /**
      * @param string $metaKeywords Optional localized meta tag keywords value
      * @return \jtl\Connector\Model\CategoryI18n
@@ -212,7 +206,6 @@ class CategoryI18n extends DataModel
     {
         return $this->_metaKeywords;
     }
-    
     /**
      * @param string $titleTag Optional localized title tag value
      * @return \jtl\Connector\Model\CategoryI18n
@@ -229,14 +222,5 @@ class CategoryI18n extends DataModel
     public function getTitleTag()
     {
         return $this->_titleTag;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

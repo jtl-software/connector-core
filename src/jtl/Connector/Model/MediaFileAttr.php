@@ -90,7 +90,6 @@ class MediaFileAttr extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $mediaFileId Reference to mediaFile
      * @return \jtl\Connector\Model\MediaFileAttr
@@ -108,7 +107,6 @@ class MediaFileAttr extends DataModel
     {
         return $this->_mediaFileId;
     }
-    
     /**
      * @param string $localeName Locale
      * @return \jtl\Connector\Model\MediaFileAttr
@@ -126,7 +124,6 @@ class MediaFileAttr extends DataModel
     {
         return $this->_localeName;
     }
-    
     /**
      * @param string $key Attribute name
      * @return \jtl\Connector\Model\MediaFileAttr
@@ -144,7 +141,6 @@ class MediaFileAttr extends DataModel
     {
         return $this->_key;
     }
-    
     /**
      * @param string $value Attribute value
      * @return \jtl\Connector\Model\MediaFileAttr
@@ -161,14 +157,5 @@ class MediaFileAttr extends DataModel
     public function getValue()
     {
         return $this->_value;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }

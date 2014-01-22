@@ -90,7 +90,6 @@ class Manufacturer extends DataModel
     {
         return $this->_id;
     }
-    
     /**
      * @param string $name Manufacturer (brand) name
      * @return \jtl\Connector\Model\Manufacturer
@@ -108,7 +107,6 @@ class Manufacturer extends DataModel
     {
         return $this->_name;
     }
-    
     /**
      * @param string $www Optional manufacturer website URL
      * @return \jtl\Connector\Model\Manufacturer
@@ -126,7 +124,6 @@ class Manufacturer extends DataModel
     {
         return $this->_www;
     }
-    
     /**
      * @param int $sort Optional sort number
      * @return \jtl\Connector\Model\Manufacturer
@@ -144,7 +141,6 @@ class Manufacturer extends DataModel
     {
         return $this->_sort;
     }
-    
     /**
      * @param string $urlPath Optional url path e.g. "Products-manufactured-by-X"
      * @return \jtl\Connector\Model\Manufacturer
@@ -161,14 +157,5 @@ class Manufacturer extends DataModel
     public function getUrlPath()
     {
         return $this->_urlPath;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
-    {
-    
     }
 }
