@@ -24,6 +24,7 @@ class Connector extends Singleton implements IEndpointConnector
 {
     protected $_config;
     protected $_method;
+    protected $_modelNamespace;
 
     /**
      * Setter connector config.
@@ -69,6 +70,28 @@ class Connector extends Singleton implements IEndpointConnector
     public function getMethod()
     {
         return $this->_method;
+    }
+
+    /**
+     * Method Setter
+     *
+     * @param string $method
+     * @return \jtl\Core\Controller\Controller
+     */
+    public function setModelNamespace($modelNamespace)
+    {
+        $this->_modelNamespace = $modelNamespace;
+        return $this;
+    }
+    
+    /**
+     * Method Getter
+     *
+     * @return string
+     */
+    public function getModelNamespace()
+    {
+        return $this->_modelNamespace;
     }
     
     /**
