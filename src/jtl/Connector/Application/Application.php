@@ -138,7 +138,7 @@ class Application extends CoreApplication
                 // Transaction                
                 if (TransactionHandler::exists($requestpacket)) {
                     if (!$method->isCommit()) {
-                        $actionresult = TransactionHandler::insert($requestpacket);
+                        $actionresult = TransactionHandler::insert($requestpacket, $endpointconnector->getModelNamespace());
 
                         $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
 

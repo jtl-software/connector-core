@@ -44,9 +44,10 @@ final class Handler
     /**
      * 
      * @param \jtl\Core\Rpc\RequestPacket $requestpacket
+     * @param string $modelNamespace
      * @return \jtl\Connector\Result\Action
      */
-    public static function insert(RequestPacket $requestpacket)
+    public static function insert(RequestPacket $requestpacket, $modelNamespace = null)
     {
         $action = new Action();
         $action->setHandled(true);
@@ -73,7 +74,7 @@ final class Handler
                     if (isset($session->trans[$type][$trid])) {                        
                         $result = new TransactionResult();
                         $result->setTransactionId($trid);
-                        if ($session->trans[$type][$trid]->add($method->getController(), $requestpacket->getParams())) {
+                        if ($session->trans[$type][$trid]->add($method->getController(), $requestpacket->getParams(), true, $modelNamespace)) {
                             $action->setResult($result->getPublic());
                         }
                         else {
@@ -89,7 +90,7 @@ final class Handler
                             $result = new TransactionResult();
                             $result->setTransactionId($trid);
                             
-                            if ($session->trans[$type][$trid]->add($method->getController(), $requestpacket->getParams())) {
+                            if ($session->trans[$type][$trid]->add($method->getController(), $requestpacket->getParams(), true, $modelNamespace)) {
                                 $action->setResult($result->getPublic());
                             }
                             else {

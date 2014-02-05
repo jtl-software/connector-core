@@ -18,12 +18,13 @@ abstract class CoreContainer implements IModelContainer
      * (non-PHPdoc)
      * @see \jtl\Core\ModelContainer\IModelContainer::add()
      */
-    public function add($type, $object, $useValidation = true)
+    public function add($type, $object, $useValidation = true, $modelNamespace = null)
     {
         $type = strtolower($type);
         if (isset($this->items[$type])) {
             $modelclass = $this->items[$type][0];
-            $class = "\\jtl\\Connector\\Model\\{$modelclass}";
+            $namespace = $modelNamespace !== null ? $modelNamespace : "\\jtl\\Connector\\Model";
+            $class = "{$namespace}\\{$modelclass}";
             if (class_exists($class)) {
                 $model = new $class();
                 $model->setOptions($object);
