@@ -8,6 +8,7 @@ namespace jtl\Connector\ModelContainer;
 
 use \jtl\Core\ModelContainer\IModelContainer;
 use \jtl\Core\Exception\DatabaseException;
+use \jtl\Core\Model\DataModel;
 
 /**
  * Core Container Class
@@ -84,6 +85,54 @@ abstract class CoreContainer implements IModelContainer
                 }
 
                 return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Try to find an object and replace it
+     * If an object was not found, it will be added, if the add parameter is true
+     *
+     * @param string $type
+     * @param multiple: mixed
+     * @param \jtl\Core\Model\DataModel $object
+     * @param bool $add
+     * @param bool $useValidation
+     * @return bool
+     */
+    public function updateOne($type, array $kvs, DataModel $object, $add = false, $useValidation = true)
+    {
+        $type = strtolower($type);
+        if (isset($this->items[$type]) && $kvs !== null && count($kvs) > 0) {
+            $getter = "_" . lcfirst($this->items[$type][1]);
+
+            $objs = $this->$getter;
+            if ($objs !== null) {
+                foreach ($objs as $i => $obj) {
+                    $matched = true;
+                    foreach ($kvs as $key => $value) {
+                        if (!isset($obj->$key) || $obj->$key != $value) {
+                            $matched = false;
+                            break;
+                        }
+                    }
+
+                    if ($matched) {
+                        $this->{$getter}[$i] = $object;
+
+                        return true;
+                    }
+                }
+
+                if ($add) {
+                    if ($useValidation) {
+                        $object->validate();
+                    }
+
+                    $this->{$getter}[] = $object;
+                }
             }
         }
 
