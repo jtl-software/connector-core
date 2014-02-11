@@ -23,25 +23,32 @@ abstract class CoreContainer implements IModelContainer
     {
         $type = strtolower($type);
         if (isset($this->items[$type])) {
-            $modelclass = $this->items[$type][0];
-            $namespace = $modelNamespace !== null ? $modelNamespace : "\\jtl\\Connector\\Model";
-            $class = "{$namespace}\\{$modelclass}";
-            if (class_exists($class)) {
-                $model = new $class();
-                $model->setOptions($object);
-                if ($useValidation) {
-                    $model->validate();
-                }
-                $setter = "_" . lcfirst($this->items[$type][1]);
-    
-                if ($this->$setter === null) {
-                    $this->$setter = array();
-                }
-                
-                array_push($this->$setter, $model);
-    
-                return true;
+            if (is_subclass_of($object, '\jtl\Core\Model\DataModel')) {
+                $model = $object;
             }
+            else {
+                $modelclass = $this->items[$type][0];
+                $namespace = $modelNamespace !== null ? $modelNamespace : "\\jtl\\Connector\\Model";
+                $class = "{$namespace}\\{$modelclass}";
+                if (class_exists($class)) {
+                    $model = new $class();
+                    $model->setOptions($object);
+                }
+            }
+
+            if ($useValidation) {
+                $model->validate();
+            }
+
+            $setter = "_" . lcfirst($this->items[$type][1]);
+        
+            if ($this->$setter === null) {
+                $this->$setter = array();
+            }
+
+            array_push($this->$setter, $model);
+        
+            return true;
         }
     
         return false;
