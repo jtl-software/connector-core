@@ -8,6 +8,7 @@ namespace jtl\Connector\ModelContainer;
 
 use \jtl\Core\ModelContainer\IModelContainer;
 use \jtl\Core\Exception\DatabaseException;
+use \jtl\Core\Exception\ContainerException;
 use \jtl\Core\Model\DataModel;
 
 /**
@@ -15,6 +16,17 @@ use \jtl\Core\Model\DataModel;
  */
 abstract class CoreContainer implements IModelContainer
 {
+    /**
+     * Construct
+     */
+    public function __construct()
+    {
+        $members = array_keys(get_object_vars($this));
+        foreach ($members as $member) {
+            $this->{$member} = array();
+        }
+    }
+
     /**
      * (non-PHPdoc)
      * @see \jtl\Core\ModelContainer\IModelContainer::add()
@@ -67,7 +79,7 @@ abstract class CoreContainer implements IModelContainer
             return $this->$getter;
         }
 
-        return false;
+        throw new ContainerException("Type '{$type}' does not exists");
     }
 
     /**
