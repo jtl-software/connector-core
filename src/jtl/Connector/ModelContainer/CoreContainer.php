@@ -23,7 +23,9 @@ abstract class CoreContainer implements IModelContainer
     {
         $members = array_keys(get_object_vars($this));
         foreach ($members as $member) {
-            $this->{$member} = array();
+            if ($this->{$member} === null) {
+                $this->{$member} = array();
+            }
         }
     }
 
