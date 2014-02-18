@@ -114,5 +114,15 @@ class Action
         $this->_error = $error;
         return $this;
     }
+
+    /**
+     * Return true if an error occurs otherwise false
+     *           
+     * @return boolean
+     */
+    public function isError()
+    {
+        return ($this->_error !== null);
+    }
 }
 ?>
