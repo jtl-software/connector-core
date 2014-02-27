@@ -70,7 +70,7 @@ class GlobalDataContainer extends CoreContainer
     /**
      * @var \jtl\Connector\Model\TaxClass[]
      */
-    protected $_taxClasss;
+    protected $_taxClasses;
     
     /**
      * @var \jtl\Connector\Model\TaxRate[]
@@ -80,7 +80,7 @@ class GlobalDataContainer extends CoreContainer
     /**
      * @var \jtl\Connector\Model\ShippingClass[]
      */
-    protected $_shippingClasss;
+    protected $_shippingClasses;
     
     /**
      * @var \jtl\Connector\Model\Warehouse[]
@@ -223,9 +223,9 @@ class GlobalDataContainer extends CoreContainer
     /**
      * @return array \jtl\Connector\Model\TaxClass
      */
-    public function getTaxClasss()
+    public function getTaxClasses()
     {
-        return $this->_taxClasss;
+        return $this->_taxClasses;
     }
         
     /**
@@ -239,9 +239,9 @@ class GlobalDataContainer extends CoreContainer
     /**
      * @return array \jtl\Connector\Model\ShippingClass
      */
-    public function getShippingClasss()
+    public function getShippingClasses()
     {
-        return $this->_shippingClasss;
+        return $this->_shippingClasses;
     }
         
     /**
@@ -336,9 +336,9 @@ class GlobalDataContainer extends CoreContainer
         "unit" => array("Unit", "Units"),
         "tax_zone" => array("TaxZone", "TaxZones"),
         "tax_zone_country" => array("TaxZoneCountry", "TaxZoneCountries"),
-        "tax_class" => array("TaxClass", "TaxClasss"),
+        "tax_class" => array("TaxClass", "TaxClasses"),
         "tax_rate" => array("TaxRate", "TaxRates"),
-        "shipping_class" => array("ShippingClass", "ShippingClasss"),
+        "shipping_class" => array("ShippingClass", "ShippingClasses"),
         "warehouse" => array("Warehouse", "Warehouses"),
         "warehouse_i18n" => array("WarehouseI18n", "WarehouseI18ns"),
         "product_type" => array("ProductType", "ProductTypes"),
