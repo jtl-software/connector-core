@@ -180,7 +180,10 @@ class Application extends CoreApplication
             throw new RpcException("Method could not be handled", -32000);
         }
         else {
-            throw new RpcException("Method not found", -32601);
+            throw new RpcException(
+				sprintf("Method '%s' not found", $requestpacket->getMethod()),
+				-32601
+			);
         }
     }
 
@@ -400,4 +403,4 @@ class Application extends CoreApplication
         self::$session = new Session($sqlite3, $sessionId);
     }
 }
-?>
+
