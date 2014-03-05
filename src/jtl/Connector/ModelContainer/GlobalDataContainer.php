@@ -45,7 +45,7 @@ class GlobalDataContainer extends CoreContainer
     /**
      * @var \jtl\Connector\Model\DeliveryStatus[]
      */
-    protected $_deliveryStatuss;
+    protected $_deliveryStatuses;
     
     /**
      * @var \jtl\Connector\Model\CrossSellingGroup[]
@@ -183,9 +183,9 @@ class GlobalDataContainer extends CoreContainer
     /**
      * @return array \jtl\Connector\Model\DeliveryStatus
      */
-    public function getDeliveryStatuss()
+    public function getDeliveryStatuses()
     {
-        return $this->_deliveryStatuss;
+        return $this->_deliveryStatuses;
     }
         
     /**
@@ -331,7 +331,7 @@ class GlobalDataContainer extends CoreContainer
         "customer_group" => array("CustomerGroup", "CustomerGroups"),
         "customer_group_i18n" => array("CustomerGroupI18n", "CustomerGroupI18ns"),
         "customer_group_attr" => array("CustomerGroupAttr", "CustomerGroupAttrs"),
-        "delivery_status" => array("DeliveryStatus", "DeliveryStatuss"),
+        "delivery_status" => array("DeliveryStatus", "DeliveryStatuses"),
         "cross_selling_group" => array("CrossSellingGroup", "CrossSellingGroups"),
         "unit" => array("Unit", "Units"),
         "tax_zone" => array("TaxZone", "TaxZones"),
