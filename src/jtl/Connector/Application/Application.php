@@ -181,9 +181,9 @@ class Application extends CoreApplication
         }
         else {
             throw new RpcException(
-				sprintf("Method '%s' not found", $requestpacket->getMethod()),
-				-32601
-			);
+                sprintf("Method '%s' not found", $requestpacket->getMethod()),
+                -32601
+            );
         }
     }
 
