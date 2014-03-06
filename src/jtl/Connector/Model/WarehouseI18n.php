@@ -17,14 +17,14 @@ use \jtl\Core\Model\DataModel;
 class WarehouseI18n extends DataModel
 {
     /**
-     * @var string - Reference to warehouse
+     * @var string Reference to warehouse
      */
-    protected $_warehouseId = '';
+    protected $_warehouseId = '';             
     
     /**
-     * @var string - Localized warehouse name
+     * @var string Localized warehouse name
      */
-    protected $_name = '';
+    protected $_name = '';             
     
     /**
      * WarehouseI18n Setter
@@ -52,12 +52,37 @@ class WarehouseI18n extends DataModel
     }
     
     /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
+     * @param string $warehouseId Reference to warehouse
+     * @return \jtl\Connector\Model\WarehouseI18n
+     */
+    public function setWarehouseId($warehouseId)
     {
+        $this->_warehouseId = (string)$warehouseId;
+        return $this;
+    }
     
+    /**
+     * @return string Reference to warehouse
+     */
+    public function getWarehouseId()
+    {
+        return $this->_warehouseId;
+    }
+    /**
+     * @param string $name Localized warehouse name
+     * @return \jtl\Connector\Model\WarehouseI18n
+     */
+    public function setName($name)
+    {
+        $this->_name = (string)$name;
+        return $this;
+    }
+    
+    /**
+     * @return string Localized warehouse name
+     */
+    public function getName()
+    {
+        return $this->_name;
     }
 }
-?>

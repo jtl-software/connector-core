@@ -17,24 +17,24 @@ use \jtl\Core\Model\DataModel;
 class Specific extends DataModel
 {
     /**
-     * @var string - Unique specific id
+     * @var string Unique specific id
      */
-    protected $_id = '';
+    protected $_id = '';             
     
     /**
-     * @var int - Optional sort number
+     * @var int Optional sort number
      */
-    protected $_sort = 0;
+    protected $_sort = 0;             
     
     /**
-     * @var bool - Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
+     * @var bool Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      */
-    protected $_isGlobal = false;
+    protected $_isGlobal = false;             
     
     /**
-     * @var string - Specific type (radio, dropdown, image...)
+     * @var string Specific type (radio, dropdown, image...)
      */
-    protected $_type = '';
+    protected $_type = '';             
     
     /**
      * Specific Setter
@@ -72,12 +72,71 @@ class Specific extends DataModel
     }
     
     /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
+     * @param string $id Unique specific id
+     * @return \jtl\Connector\Model\Specific
+     */
+    public function setId($id)
     {
+        $this->_id = (string)$id;
+        return $this;
+    }
     
+    /**
+     * @return string Unique specific id
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    /**
+     * @param int $sort Optional sort number
+     * @return \jtl\Connector\Model\Specific
+     */
+    public function setSort($sort)
+    {
+        $this->_sort = (int)$sort;
+        return $this;
+    }
+    
+    /**
+     * @return int Optional sort number
+     */
+    public function getSort()
+    {
+        return $this->_sort;
+    }
+    /**
+     * @param bool $isGlobal Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
+     * @return \jtl\Connector\Model\Specific
+     */
+    public function setIsGlobal($isGlobal)
+    {
+        $this->_isGlobal = (bool)$isGlobal;
+        return $this;
+    }
+    
+    /**
+     * @return bool Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
+     */
+    public function getIsGlobal()
+    {
+        return $this->_isGlobal;
+    }
+    /**
+     * @param string $type Specific type (radio, dropdown, image...)
+     * @return \jtl\Connector\Model\Specific
+     */
+    public function setType($type)
+    {
+        $this->_type = (string)$type;
+        return $this;
+    }
+    
+    /**
+     * @return string Specific type (radio, dropdown, image...)
+     */
+    public function getType()
+    {
+        return $this->_type;
     }
 }
-?>

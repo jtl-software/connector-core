@@ -17,19 +17,19 @@ use \jtl\Core\Model\DataModel;
 class CategoryCustomerGroup extends DataModel
 {
     /**
-     * @var string - Reference to customerGroup
+     * @var string Reference to customerGroup
      */
-    protected $_customerGroupId = '';
+    protected $_customerGroupId = '';             
     
     /**
-     * @var string - Reference to category
+     * @var string Reference to category
      */
-    protected $_categoryId = '';
+    protected $_categoryId = '';             
     
     /**
-     * @var double - Optional discount on products in specified categoryId for  customerGroupId
+     * @var double Optional discount on products in specified categoryId for  customerGroupId
      */
-    protected $_discount = 0;
+    protected $_discount = 0;             
     
     /**
      * CategoryCustomerGroup Setter
@@ -62,12 +62,54 @@ class CategoryCustomerGroup extends DataModel
     }
     
     /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
+     * @param string $customerGroupId Reference to customerGroup
+     * @return \jtl\Connector\Model\CategoryCustomerGroup
+     */
+    public function setCustomerGroupId($customerGroupId)
     {
+        $this->_customerGroupId = (string)$customerGroupId;
+        return $this;
+    }
     
+    /**
+     * @return string Reference to customerGroup
+     */
+    public function getCustomerGroupId()
+    {
+        return $this->_customerGroupId;
+    }
+    /**
+     * @param string $categoryId Reference to category
+     * @return \jtl\Connector\Model\CategoryCustomerGroup
+     */
+    public function setCategoryId($categoryId)
+    {
+        $this->_categoryId = (string)$categoryId;
+        return $this;
+    }
+    
+    /**
+     * @return string Reference to category
+     */
+    public function getCategoryId()
+    {
+        return $this->_categoryId;
+    }
+    /**
+     * @param double $discount Optional discount on products in specified categoryId for  customerGroupId
+     * @return \jtl\Connector\Model\CategoryCustomerGroup
+     */
+    public function setDiscount($discount)
+    {
+        $this->_discount = (double)$discount;
+        return $this;
+    }
+    
+    /**
+     * @return double Optional discount on products in specified categoryId for  customerGroupId
+     */
+    public function getDiscount()
+    {
+        return $this->_discount;
     }
 }
-?>

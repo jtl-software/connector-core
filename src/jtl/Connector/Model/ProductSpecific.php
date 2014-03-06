@@ -17,19 +17,19 @@ use \jtl\Core\Model\DataModel;
 class ProductSpecific extends DataModel
 {
     /**
-     * @var string - Unique productSpecific id
+     * @var string Unique productSpecific id
      */
-    protected $_id = '';
+    protected $_id = '';             
     
     /**
-     * @var string - Reference to specificValue
+     * @var string Reference to specificValue
      */
-    protected $_specificValueId = '';
+    protected $_specificValueId = '';             
     
     /**
-     * @var string - Reference to product
+     * @var string Reference to product
      */
-    protected $_productId = '';
+    protected $_productId = '';             
     
     /**
      * ProductSpecific Setter
@@ -58,12 +58,54 @@ class ProductSpecific extends DataModel
     }
     
     /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
+     * @param string $id Unique productSpecific id
+     * @return \jtl\Connector\Model\ProductSpecific
+     */
+    public function setId($id)
     {
+        $this->_id = (string)$id;
+        return $this;
+    }
     
+    /**
+     * @return string Unique productSpecific id
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    /**
+     * @param string $specificValueId Reference to specificValue
+     * @return \jtl\Connector\Model\ProductSpecific
+     */
+    public function setSpecificValueId($specificValueId)
+    {
+        $this->_specificValueId = (string)$specificValueId;
+        return $this;
+    }
+    
+    /**
+     * @return string Reference to specificValue
+     */
+    public function getSpecificValueId()
+    {
+        return $this->_specificValueId;
+    }
+    /**
+     * @param string $productId Reference to product
+     * @return \jtl\Connector\Model\ProductSpecific
+     */
+    public function setProductId($productId)
+    {
+        $this->_productId = (string)$productId;
+        return $this;
+    }
+    
+    /**
+     * @return string Reference to product
+     */
+    public function getProductId()
+    {
+        return $this->_productId;
     }
 }
-?>

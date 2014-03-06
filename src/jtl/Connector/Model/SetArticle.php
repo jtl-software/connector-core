@@ -17,19 +17,19 @@ use \jtl\Core\Model\DataModel;
 class SetArticle extends DataModel
 {
     /**
-     * @var string - Unique setArticle id, referenced by product.setArticleId
+     * @var string Unique setArticle id, referenced by product.setArticleId
      */
-    protected $_id = '';
+    protected $_id = '';             
     
     /**
-     * @var string - Reference to a component / product
+     * @var string Reference to a component / product
      */
-    protected $_productId = '';
+    protected $_productId = '';             
     
     /**
-     * @var double - Component quantity
+     * @var double Component quantity
      */
-    protected $_quantity = 0.0;
+    protected $_quantity = 0.0;             
     
     /**
      * SetArticle Setter
@@ -62,12 +62,54 @@ class SetArticle extends DataModel
     }
     
     /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
+     * @param string $id Unique setArticle id, referenced by product.setArticleId
+     * @return \jtl\Connector\Model\SetArticle
+     */
+    public function setId($id)
     {
+        $this->_id = (string)$id;
+        return $this;
+    }
     
+    /**
+     * @return string Unique setArticle id, referenced by product.setArticleId
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    /**
+     * @param string $productId Reference to a component / product
+     * @return \jtl\Connector\Model\SetArticle
+     */
+    public function setProductId($productId)
+    {
+        $this->_productId = (string)$productId;
+        return $this;
+    }
+    
+    /**
+     * @return string Reference to a component / product
+     */
+    public function getProductId()
+    {
+        return $this->_productId;
+    }
+    /**
+     * @param double $quantity Component quantity
+     * @return \jtl\Connector\Model\SetArticle
+     */
+    public function setQuantity($quantity)
+    {
+        $this->_quantity = (double)$quantity;
+        return $this;
+    }
+    
+    /**
+     * @return double Component quantity
+     */
+    public function getQuantity()
+    {
+        return $this->_quantity;
     }
 }
-?>

@@ -17,24 +17,24 @@ use \jtl\Core\Model\DataModel;
 class ProductFunctionAttr extends DataModel
 {
     /**
-     * @var string - Unique productFunctionAttr id
+     * @var string Unique productFunctionAttr id
      */
-    protected $_id = '';
+    protected $_id = '';             
     
     /**
-     * @var string - Reference to product
+     * @var string Reference to product
      */
-    protected $_productId = '';
+    protected $_productId = '';             
     
     /**
-     * @var string - Attribute key
+     * @var string Attribute key
      */
-    protected $_key = '';
+    protected $_key = '';             
     
     /**
-     * @var string - Attribute value
+     * @var string Attribute value
      */
-    protected $_value = '';
+    protected $_value = '';             
     
     /**
      * ProductFunctionAttr Setter
@@ -64,12 +64,71 @@ class ProductFunctionAttr extends DataModel
     }
     
     /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
+     * @param string $id Unique productFunctionAttr id
+     * @return \jtl\Connector\Model\ProductFunctionAttr
+     */
+    public function setId($id)
     {
+        $this->_id = (string)$id;
+        return $this;
+    }
     
+    /**
+     * @return string Unique productFunctionAttr id
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    /**
+     * @param string $productId Reference to product
+     * @return \jtl\Connector\Model\ProductFunctionAttr
+     */
+    public function setProductId($productId)
+    {
+        $this->_productId = (string)$productId;
+        return $this;
+    }
+    
+    /**
+     * @return string Reference to product
+     */
+    public function getProductId()
+    {
+        return $this->_productId;
+    }
+    /**
+     * @param string $key Attribute key
+     * @return \jtl\Connector\Model\ProductFunctionAttr
+     */
+    public function setKey($key)
+    {
+        $this->_key = (string)$key;
+        return $this;
+    }
+    
+    /**
+     * @return string Attribute key
+     */
+    public function getKey()
+    {
+        return $this->_key;
+    }
+    /**
+     * @param string $value Attribute value
+     * @return \jtl\Connector\Model\ProductFunctionAttr
+     */
+    public function setValue($value)
+    {
+        $this->_value = (string)$value;
+        return $this;
+    }
+    
+    /**
+     * @return string Attribute value
+     */
+    public function getValue()
+    {
+        return $this->_value;
     }
 }
-?>

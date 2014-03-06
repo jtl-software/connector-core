@@ -17,19 +17,19 @@ use \jtl\Core\Model\DataModel;
 class CategoryAttr extends DataModel
 {
     /**
-     * @var string - Unique categoryAttr id
+     * @var string Unique categoryAttr id
      */
-    protected $_id = '';
+    protected $_id = '';             
     
     /**
-     * @var string - Reference to category
+     * @var string Reference to category
      */
-    protected $_categoryId = '';
+    protected $_categoryId = '';             
     
     /**
-     * @var int - Optional sort number
+     * @var int Optional sort number
      */
-    protected $_sort = 0;
+    protected $_sort = 0;             
     
     /**
      * CategoryAttr Setter
@@ -62,12 +62,54 @@ class CategoryAttr extends DataModel
     }
     
     /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
+     * @param string $id Unique categoryAttr id
+     * @return \jtl\Connector\Model\CategoryAttr
+     */
+    public function setId($id)
     {
+        $this->_id = (string)$id;
+        return $this;
+    }
     
+    /**
+     * @return string Unique categoryAttr id
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    /**
+     * @param string $categoryId Reference to category
+     * @return \jtl\Connector\Model\CategoryAttr
+     */
+    public function setCategoryId($categoryId)
+    {
+        $this->_categoryId = (string)$categoryId;
+        return $this;
+    }
+    
+    /**
+     * @return string Reference to category
+     */
+    public function getCategoryId()
+    {
+        return $this->_categoryId;
+    }
+    /**
+     * @param int $sort Optional sort number
+     * @return \jtl\Connector\Model\CategoryAttr
+     */
+    public function setSort($sort)
+    {
+        $this->_sort = (int)$sort;
+        return $this;
+    }
+    
+    /**
+     * @return int Optional sort number
+     */
+    public function getSort()
+    {
+        return $this->_sort;
     }
 }
-?>

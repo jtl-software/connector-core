@@ -17,19 +17,19 @@ use \jtl\Core\Model\DataModel;
 class TaxZoneCountry extends DataModel
 {
     /**
-     * @var string - Unique taxZoneCountry id
+     * @var string Unique taxZoneCountry id
      */
-    protected $_id = '';
+    protected $_id = '';             
     
     /**
-     * @var string - Reference to taxZone
+     * @var string Reference to taxZone
      */
-    protected $_taxZoneId = '';
+    protected $_taxZoneId = '';             
     
     /**
-     * @var string - Country ISO 3166-2 (2 letter Uppercase)
+     * @var string Country ISO 3166-2 (2 letter Uppercase)
      */
-    protected $_countryIso = '';
+    protected $_countryIso = '';             
     
     /**
      * TaxZoneCountry Setter
@@ -58,12 +58,54 @@ class TaxZoneCountry extends DataModel
     }
     
     /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
+     * @param string $id Unique taxZoneCountry id
+     * @return \jtl\Connector\Model\TaxZoneCountry
+     */
+    public function setId($id)
     {
+        $this->_id = (string)$id;
+        return $this;
+    }
     
+    /**
+     * @return string Unique taxZoneCountry id
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    /**
+     * @param string $taxZoneId Reference to taxZone
+     * @return \jtl\Connector\Model\TaxZoneCountry
+     */
+    public function setTaxZoneId($taxZoneId)
+    {
+        $this->_taxZoneId = (string)$taxZoneId;
+        return $this;
+    }
+    
+    /**
+     * @return string Reference to taxZone
+     */
+    public function getTaxZoneId()
+    {
+        return $this->_taxZoneId;
+    }
+    /**
+     * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
+     * @return \jtl\Connector\Model\TaxZoneCountry
+     */
+    public function setCountryIso($countryIso)
+    {
+        $this->_countryIso = (string)$countryIso;
+        return $this;
+    }
+    
+    /**
+     * @return string Country ISO 3166-2 (2 letter Uppercase)
+     */
+    public function getCountryIso()
+    {
+        return $this->_countryIso;
     }
 }
-?>

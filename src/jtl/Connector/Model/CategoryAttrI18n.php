@@ -17,24 +17,24 @@ use \jtl\Core\Model\DataModel;
 class CategoryAttrI18n extends DataModel
 {
     /**
-     * @var string - Locale
+     * @var string Locale
      */
-    protected $_localeName = '';
+    protected $_localeName = '';             
     
     /**
-     * @var string - Reference to categoryAttr
+     * @var string Reference to categoryAttr
      */
-    protected $_categoryAttrId = '';
+    protected $_categoryAttrId = '';             
     
     /**
-     * @var string - Attribute key
+     * @var string Attribute key
      */
-    protected $_key = '';
+    protected $_key = '';             
     
     /**
-     * @var string - Attribute value
+     * @var string Attribute value
      */
-    protected $_value = '';
+    protected $_value = '';             
     
     /**
      * CategoryAttrI18n Setter
@@ -64,12 +64,71 @@ class CategoryAttrI18n extends DataModel
     }
     
     /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
+     * @param string $localeName Locale
+     * @return \jtl\Connector\Model\CategoryAttrI18n
+     */
+    public function setLocaleName($localeName)
     {
+        $this->_localeName = (string)$localeName;
+        return $this;
+    }
     
+    /**
+     * @return string Locale
+     */
+    public function getLocaleName()
+    {
+        return $this->_localeName;
+    }
+    /**
+     * @param string $categoryAttrId Reference to categoryAttr
+     * @return \jtl\Connector\Model\CategoryAttrI18n
+     */
+    public function setCategoryAttrId($categoryAttrId)
+    {
+        $this->_categoryAttrId = (string)$categoryAttrId;
+        return $this;
+    }
+    
+    /**
+     * @return string Reference to categoryAttr
+     */
+    public function getCategoryAttrId()
+    {
+        return $this->_categoryAttrId;
+    }
+    /**
+     * @param string $key Attribute key
+     * @return \jtl\Connector\Model\CategoryAttrI18n
+     */
+    public function setKey($key)
+    {
+        $this->_key = (string)$key;
+        return $this;
+    }
+    
+    /**
+     * @return string Attribute key
+     */
+    public function getKey()
+    {
+        return $this->_key;
+    }
+    /**
+     * @param string $value Attribute value
+     * @return \jtl\Connector\Model\CategoryAttrI18n
+     */
+    public function setValue($value)
+    {
+        $this->_value = (string)$value;
+        return $this;
+    }
+    
+    /**
+     * @return string Attribute value
+     */
+    public function getValue()
+    {
+        return $this->_value;
     }
 }
-?>

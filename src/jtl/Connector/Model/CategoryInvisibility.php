@@ -17,14 +17,14 @@ use \jtl\Core\Model\DataModel;
 class CategoryInvisibility extends DataModel
 {
     /**
-     * @var string - Reference to customerGroup that is not allowed to view categoryId
+     * @var string Reference to customerGroup that is not allowed to view categoryId
      */
-    protected $_customerGroupId = '';
+    protected $_customerGroupId = '';             
     
     /**
-     * @var string - Reference to category to hide from customerGroupId
+     * @var string Reference to category to hide from customerGroupId
      */
-    protected $_categoryId = '';
+    protected $_categoryId = '';             
     
     /**
      * CategoryInvisibility Setter
@@ -52,12 +52,37 @@ class CategoryInvisibility extends DataModel
     }
     
     /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
+     * @param string $customerGroupId Reference to customerGroup that is not allowed to view categoryId
+     * @return \jtl\Connector\Model\CategoryInvisibility
+     */
+    public function setCustomerGroupId($customerGroupId)
     {
+        $this->_customerGroupId = (string)$customerGroupId;
+        return $this;
+    }
     
+    /**
+     * @return string Reference to customerGroup that is not allowed to view categoryId
+     */
+    public function getCustomerGroupId()
+    {
+        return $this->_customerGroupId;
+    }
+    /**
+     * @param string $categoryId Reference to category to hide from customerGroupId
+     * @return \jtl\Connector\Model\CategoryInvisibility
+     */
+    public function setCategoryId($categoryId)
+    {
+        $this->_categoryId = (string)$categoryId;
+        return $this;
+    }
+    
+    /**
+     * @return string Reference to category to hide from customerGroupId
+     */
+    public function getCategoryId()
+    {
+        return $this->_categoryId;
     }
 }
-?>

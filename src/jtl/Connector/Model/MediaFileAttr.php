@@ -17,29 +17,29 @@ use \jtl\Core\Model\DataModel;
 class MediaFileAttr extends DataModel
 {
     /**
-     * @var int - Unique MediaFileAttr id
+     * @var int Unique MediaFileAttr id
      */
-    protected $_id = 0;
+    protected $_id = 0;             
     
     /**
-     * @var string - Reference to mediaFile
+     * @var string Reference to mediaFile
      */
-    protected $_mediaFileId = '';
+    protected $_mediaFileId = '';             
     
     /**
-     * @var string - Locale
+     * @var string Locale
      */
-    protected $_localeName = '';
+    protected $_localeName = '';             
     
     /**
-     * @var string - Attribute name
+     * @var string Attribute name
      */
-    protected $_key = '';
+    protected $_key = '';             
     
     /**
-     * @var string - Attribute value
+     * @var string Attribute value
      */
-    protected $_value = '';
+    protected $_value = '';             
     
     /**
      * MediaFileAttr Setter
@@ -74,12 +74,88 @@ class MediaFileAttr extends DataModel
     }
     
     /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
+     * @param int $id Unique MediaFileAttr id
+     * @return \jtl\Connector\Model\MediaFileAttr
+     */
+    public function setId($id)
     {
+        $this->_id = (int)$id;
+        return $this;
+    }
     
+    /**
+     * @return int Unique MediaFileAttr id
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    /**
+     * @param string $mediaFileId Reference to mediaFile
+     * @return \jtl\Connector\Model\MediaFileAttr
+     */
+    public function setMediaFileId($mediaFileId)
+    {
+        $this->_mediaFileId = (string)$mediaFileId;
+        return $this;
+    }
+    
+    /**
+     * @return string Reference to mediaFile
+     */
+    public function getMediaFileId()
+    {
+        return $this->_mediaFileId;
+    }
+    /**
+     * @param string $localeName Locale
+     * @return \jtl\Connector\Model\MediaFileAttr
+     */
+    public function setLocaleName($localeName)
+    {
+        $this->_localeName = (string)$localeName;
+        return $this;
+    }
+    
+    /**
+     * @return string Locale
+     */
+    public function getLocaleName()
+    {
+        return $this->_localeName;
+    }
+    /**
+     * @param string $key Attribute name
+     * @return \jtl\Connector\Model\MediaFileAttr
+     */
+    public function setKey($key)
+    {
+        $this->_key = (string)$key;
+        return $this;
+    }
+    
+    /**
+     * @return string Attribute name
+     */
+    public function getKey()
+    {
+        return $this->_key;
+    }
+    /**
+     * @param string $value Attribute value
+     * @return \jtl\Connector\Model\MediaFileAttr
+     */
+    public function setValue($value)
+    {
+        $this->_value = (string)$value;
+        return $this;
+    }
+    
+    /**
+     * @return string Attribute value
+     */
+    public function getValue()
+    {
+        return $this->_value;
     }
 }
-?>

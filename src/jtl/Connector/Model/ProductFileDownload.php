@@ -17,14 +17,14 @@ use \jtl\Core\Model\DataModel;
 class ProductFileDownload extends DataModel
 {
     /**
-     * @var string - Reference to product
+     * @var string Reference to product
      */
-    protected $_productId = '';
+    protected $_productId = '';             
     
     /**
-     * @var string - Reference to fileDownload
+     * @var string Reference to fileDownload
      */
-    protected $_fileDownloadId = '';
+    protected $_fileDownloadId = '';             
     
     /**
      * ProductFileDownload Setter
@@ -52,12 +52,37 @@ class ProductFileDownload extends DataModel
     }
     
     /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
+     * @param string $productId Reference to product
+     * @return \jtl\Connector\Model\ProductFileDownload
+     */
+    public function setProductId($productId)
     {
+        $this->_productId = (string)$productId;
+        return $this;
+    }
     
+    /**
+     * @return string Reference to product
+     */
+    public function getProductId()
+    {
+        return $this->_productId;
+    }
+    /**
+     * @param string $fileDownloadId Reference to fileDownload
+     * @return \jtl\Connector\Model\ProductFileDownload
+     */
+    public function setFileDownloadId($fileDownloadId)
+    {
+        $this->_fileDownloadId = (string)$fileDownloadId;
+        return $this;
+    }
+    
+    /**
+     * @return string Reference to fileDownload
+     */
+    public function getFileDownloadId()
+    {
+        return $this->_fileDownloadId;
     }
 }
-?>

@@ -17,19 +17,19 @@ use \jtl\Core\Model\DataModel;
 class Product2Category extends DataModel
 {
     /**
-     * @var string - Unique product2Category id
+     * @var string Unique product2Category id
      */
-    protected $_id = '';
+    protected $_id = '';             
     
     /**
-     * @var string - Reference to category
+     * @var string Reference to category
      */
-    protected $_categoryId = '';
+    protected $_categoryId = '';             
     
     /**
-     * @var string - Reference to product
+     * @var string Reference to product
      */
-    protected $_productId = '';
+    protected $_productId = '';             
     
     /**
      * Product2Category Setter
@@ -58,12 +58,54 @@ class Product2Category extends DataModel
     }
     
     /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
+     * @param string $id Unique product2Category id
+     * @return \jtl\Connector\Model\Product2Category
+     */
+    public function setId($id)
     {
+        $this->_id = (string)$id;
+        return $this;
+    }
     
+    /**
+     * @return string Unique product2Category id
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    /**
+     * @param string $categoryId Reference to category
+     * @return \jtl\Connector\Model\Product2Category
+     */
+    public function setCategoryId($categoryId)
+    {
+        $this->_categoryId = (string)$categoryId;
+        return $this;
+    }
+    
+    /**
+     * @return string Reference to category
+     */
+    public function getCategoryId()
+    {
+        return $this->_categoryId;
+    }
+    /**
+     * @param string $productId Reference to product
+     * @return \jtl\Connector\Model\Product2Category
+     */
+    public function setProductId($productId)
+    {
+        $this->_productId = (string)$productId;
+        return $this;
+    }
+    
+    /**
+     * @return string Reference to product
+     */
+    public function getProductId()
+    {
+        return $this->_productId;
     }
 }
-?>

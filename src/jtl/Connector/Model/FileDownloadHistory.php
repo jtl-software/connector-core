@@ -19,27 +19,27 @@ class FileDownloadHistory extends DataModel
     /**
      * @var string
      */
-    protected $_id = '0';
+    protected $_id = '0';             
     
     /**
      * @var string
      */
-    protected $_fileDownloadId = '0';
+    protected $_fileDownloadId = '0';             
     
     /**
      * @var string
      */
-    protected $_customerId = '0';
+    protected $_customerId = '0';             
     
     /**
      * @var string
      */
-    protected $_customerOrderId = '0';
+    protected $_customerOrderId = '0';             
     
     /**
      * @var string
      */
-    protected $_created = null;
+    protected $_created = null;             
     
     /**
      * FileDownloadHistory Setter
@@ -70,12 +70,88 @@ class FileDownloadHistory extends DataModel
     }
     
     /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
+     * @param string $id
+     * @return \jtl\Connector\Model\FileDownloadHistory
+     */
+    public function setId($id)
     {
+        $this->_id = (string)$id;
+        return $this;
+    }
     
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    /**
+     * @param string $fileDownloadId
+     * @return \jtl\Connector\Model\FileDownloadHistory
+     */
+    public function setFileDownloadId($fileDownloadId)
+    {
+        $this->_fileDownloadId = (string)$fileDownloadId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getFileDownloadId()
+    {
+        return $this->_fileDownloadId;
+    }
+    /**
+     * @param string $customerId
+     * @return \jtl\Connector\Model\FileDownloadHistory
+     */
+    public function setCustomerId($customerId)
+    {
+        $this->_customerId = (string)$customerId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCustomerId()
+    {
+        return $this->_customerId;
+    }
+    /**
+     * @param string $customerOrderId
+     * @return \jtl\Connector\Model\FileDownloadHistory
+     */
+    public function setCustomerOrderId($customerOrderId)
+    {
+        $this->_customerOrderId = (string)$customerOrderId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCustomerOrderId()
+    {
+        return $this->_customerOrderId;
+    }
+    /**
+     * @param string $created
+     * @return \jtl\Connector\Model\FileDownloadHistory
+     */
+    public function setCreated($created)
+    {
+        $this->_created = (string)$created;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCreated()
+    {
+        return $this->_created;
     }
 }
-?>

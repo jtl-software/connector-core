@@ -17,24 +17,24 @@ use \jtl\Core\Model\DataModel;
 class ConfigItemPrice extends DataModel
 {
     /**
-     * @var string - Reference to configItem
+     * @var string Reference to configItem
      */
-    protected $_configItemId = '';
+    protected $_configItemId = '';             
     
     /**
-     * @var string - Reference to customerGroup
+     * @var string Reference to customerGroup
      */
-    protected $_customerGroupId = '';
+    protected $_customerGroupId = '';             
     
     /**
-     * @var float - Net price or percental value to add/deduct to/from product price (depending on type). Positive value means surcharge, negative value means discount. Also see configItem.vat for value added tax.
+     * @var float Net price or percental value to add/deduct to/from product price (depending on type). Positive value means surcharge, negative value means discount. Also see configItem.vat for value added tax.
      */
-    protected $_price;
+    protected $_price;             
     
     /**
-     * @var int - Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
+     * @var int Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
      */
-    protected $_type = 0;
+    protected $_type = 0;             
     
     /**
      * ConfigItemPrice Setter
@@ -72,12 +72,71 @@ class ConfigItemPrice extends DataModel
     }
     
     /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
+     * @param string $configItemId Reference to configItem
+     * @return \jtl\Connector\Model\ConfigItemPrice
+     */
+    public function setConfigItemId($configItemId)
     {
+        $this->_configItemId = (string)$configItemId;
+        return $this;
+    }
     
+    /**
+     * @return string Reference to configItem
+     */
+    public function getConfigItemId()
+    {
+        return $this->_configItemId;
+    }
+    /**
+     * @param string $customerGroupId Reference to customerGroup
+     * @return \jtl\Connector\Model\ConfigItemPrice
+     */
+    public function setCustomerGroupId($customerGroupId)
+    {
+        $this->_customerGroupId = (string)$customerGroupId;
+        return $this;
+    }
+    
+    /**
+     * @return string Reference to customerGroup
+     */
+    public function getCustomerGroupId()
+    {
+        return $this->_customerGroupId;
+    }
+    /**
+     * @param float $price Net price or percental value to add/deduct to/from product price (depending on type). Positive value means surcharge, negative value means discount. Also see configItem.vat for value added tax.
+     * @return \jtl\Connector\Model\ConfigItemPrice
+     */
+    public function setPrice($price)
+    {
+        $this->_price = (float)$price;
+        return $this;
+    }
+    
+    /**
+     * @return float Net price or percental value to add/deduct to/from product price (depending on type). Positive value means surcharge, negative value means discount. Also see configItem.vat for value added tax.
+     */
+    public function getPrice()
+    {
+        return $this->_price;
+    }
+    /**
+     * @param int $type Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
+     * @return \jtl\Connector\Model\ConfigItemPrice
+     */
+    public function setType($type)
+    {
+        $this->_type = (int)$type;
+        return $this;
+    }
+    
+    /**
+     * @return int Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
+     */
+    public function getType()
+    {
+        return $this->_type;
     }
 }
-?>

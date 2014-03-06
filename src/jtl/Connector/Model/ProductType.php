@@ -17,14 +17,14 @@ use \jtl\Core\Model\DataModel;
 class ProductType extends DataModel
 {
     /**
-     * @var string - Unique productType id
+     * @var string Unique productType id
      */
-    protected $_id = '';
+    protected $_id = '';             
     
     /**
-     * @var string - Optional (internal) product type name
+     * @var string Optional (internal) product type name
      */
-    protected $_name = '';
+    protected $_name = '';             
     
     /**
      * ProductType Setter
@@ -52,12 +52,37 @@ class ProductType extends DataModel
     }
     
     /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
+     * @param string $id Unique productType id
+     * @return \jtl\Connector\Model\ProductType
+     */
+    public function setId($id)
     {
+        $this->_id = (string)$id;
+        return $this;
+    }
     
+    /**
+     * @return string Unique productType id
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    /**
+     * @param string $name Optional (internal) product type name
+     * @return \jtl\Connector\Model\ProductType
+     */
+    public function setName($name)
+    {
+        $this->_name = (string)$name;
+        return $this;
+    }
+    
+    /**
+     * @return string Optional (internal) product type name
+     */
+    public function getName()
+    {
+        return $this->_name;
     }
 }
-?>

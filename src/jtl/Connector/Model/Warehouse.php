@@ -17,9 +17,9 @@ use \jtl\Core\Model\DataModel;
 class Warehouse extends DataModel
 {
     /**
-     * @var string - Unique warehouse id
+     * @var string Unique warehouse id
      */
-    protected $_id = '';
+    protected $_id = '';             
     
     /**
      * Warehouse Setter
@@ -46,12 +46,20 @@ class Warehouse extends DataModel
     }
     
     /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
+     * @param string $id Unique warehouse id
+     * @return \jtl\Connector\Model\Warehouse
+     */
+    public function setId($id)
     {
+        $this->_id = (string)$id;
+        return $this;
+    }
     
+    /**
+     * @return string Unique warehouse id
+     */
+    public function getId()
+    {
+        return $this->_id;
     }
 }
-?>

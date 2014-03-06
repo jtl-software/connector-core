@@ -17,24 +17,24 @@ use \jtl\Core\Model\DataModel;
 class CustomerGroupAttr extends DataModel
 {
     /**
-     * @var string - Unique customerGroupAttr id
+     * @var string Unique customerGroupAttr id
      */
-    protected $_id = '';
+    protected $_id = '';             
     
     /**
-     * @var string - Reference to customerGroup
+     * @var string Reference to customerGroup
      */
-    protected $_customerGroupId = '';
+    protected $_customerGroupId = '';             
     
     /**
-     * @var string - Attribute key
+     * @var string Attribute key
      */
-    protected $_key = '';
+    protected $_key = '';             
     
     /**
-     * @var string - Attribute value
+     * @var string Attribute value
      */
-    protected $_value = '';
+    protected $_value = '';             
     
     /**
      * CustomerGroupAttr Setter
@@ -64,12 +64,71 @@ class CustomerGroupAttr extends DataModel
     }
     
     /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
+     * @param string $id Unique customerGroupAttr id
+     * @return \jtl\Connector\Model\CustomerGroupAttr
+     */
+    public function setId($id)
     {
+        $this->_id = (string)$id;
+        return $this;
+    }
     
+    /**
+     * @return string Unique customerGroupAttr id
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+    /**
+     * @param string $customerGroupId Reference to customerGroup
+     * @return \jtl\Connector\Model\CustomerGroupAttr
+     */
+    public function setCustomerGroupId($customerGroupId)
+    {
+        $this->_customerGroupId = (string)$customerGroupId;
+        return $this;
+    }
+    
+    /**
+     * @return string Reference to customerGroup
+     */
+    public function getCustomerGroupId()
+    {
+        return $this->_customerGroupId;
+    }
+    /**
+     * @param string $key Attribute key
+     * @return \jtl\Connector\Model\CustomerGroupAttr
+     */
+    public function setKey($key)
+    {
+        $this->_key = (string)$key;
+        return $this;
+    }
+    
+    /**
+     * @return string Attribute key
+     */
+    public function getKey()
+    {
+        return $this->_key;
+    }
+    /**
+     * @param string $value Attribute value
+     * @return \jtl\Connector\Model\CustomerGroupAttr
+     */
+    public function setValue($value)
+    {
+        $this->_value = (string)$value;
+        return $this;
+    }
+    
+    /**
+     * @return string Attribute value
+     */
+    public function getValue()
+    {
+        return $this->_value;
     }
 }
-?>

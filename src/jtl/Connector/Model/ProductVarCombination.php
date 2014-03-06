@@ -17,19 +17,19 @@ use \jtl\Core\Model\DataModel;
 class ProductVarCombination extends DataModel
 {
     /**
-     * @var string - Reference to product
+     * @var string Reference to product
      */
-    protected $_productId = '';
+    protected $_productId = '';             
     
     /**
-     * @var string - Reference to productVariation
+     * @var string Reference to productVariation
      */
-    protected $_productVariationId = '';
+    protected $_productVariationId = '';             
     
     /**
-     * @var string - Reference to productVariationValue
+     * @var string Reference to productVariationValue
      */
-    protected $_productVariationValueId = '';
+    protected $_productVariationValueId = '';             
     
     /**
      * ProductVarCombination Setter
@@ -58,12 +58,54 @@ class ProductVarCombination extends DataModel
     }
     
     /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
+     * @param string $productId Reference to product
+     * @return \jtl\Connector\Model\ProductVarCombination
+     */
+    public function setProductId($productId)
     {
+        $this->_productId = (string)$productId;
+        return $this;
+    }
     
+    /**
+     * @return string Reference to product
+     */
+    public function getProductId()
+    {
+        return $this->_productId;
+    }
+    /**
+     * @param string $productVariationId Reference to productVariation
+     * @return \jtl\Connector\Model\ProductVarCombination
+     */
+    public function setProductVariationId($productVariationId)
+    {
+        $this->_productVariationId = (string)$productVariationId;
+        return $this;
+    }
+    
+    /**
+     * @return string Reference to productVariation
+     */
+    public function getProductVariationId()
+    {
+        return $this->_productVariationId;
+    }
+    /**
+     * @param string $productVariationValueId Reference to productVariationValue
+     * @return \jtl\Connector\Model\ProductVarCombination
+     */
+    public function setProductVariationValueId($productVariationValueId)
+    {
+        $this->_productVariationValueId = (string)$productVariationValueId;
+        return $this;
+    }
+    
+    /**
+     * @return string Reference to productVariationValue
+     */
+    public function getProductVariationValueId()
+    {
+        return $this->_productVariationValueId;
     }
 }
-?>
