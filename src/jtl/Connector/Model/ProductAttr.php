@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class ProductAttr extends DataModel
 {
     /**
-     * @var string Unique productAttr id
+     * @var string - Unique productAttr id
      */
     protected $_id = '';
     
     /**
-     * @var string Reference to product
+     * @var string - Reference to product
      */
     protected $_productId = '';
     
     /**
-     * @var int Optional sort number
+     * @var int - Optional sort number
      */
     protected $_sort = 0;
     
@@ -62,54 +62,12 @@ class ProductAttr extends DataModel
     }
     
     /**
-     * @param string $id Unique productAttr id
-     * @return \jtl\Connector\Model\ProductAttr
-     */
-    public function setId($id)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_id = (string)$id;
-        return $this;
-    }
     
-    /**
-     * @return string Unique productAttr id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param string $productId Reference to product
-     * @return \jtl\Connector\Model\ProductAttr
-     */
-    public function setProductId($productId)
-    {
-        $this->_productId = (string)$productId;
-        return $this;
-    }
-    
-    /**
-     * @return string Reference to product
-     */
-    public function getProductId()
-    {
-        return $this->_productId;
-    }
-    /**
-     * @param int $sort Optional sort number
-     * @return \jtl\Connector\Model\ProductAttr
-     */
-    public function setSort($sort)
-    {
-        $this->_sort = (int)$sort;
-        return $this;
-    }
-    
-    /**
-     * @return int Optional sort number
-     */
-    public function getSort()
-    {
-        return $this->_sort;
     }
 }
+?>

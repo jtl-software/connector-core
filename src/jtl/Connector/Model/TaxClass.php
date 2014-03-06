@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class TaxClass extends DataModel
 {
     /**
-     * @var string Unique taxClass id
+     * @var string - Unique taxClass id
      */
     protected $_id = '';
     
     /**
-     * @var string Optional tax class name
+     * @var string - Optional tax class name
      */
     protected $_name = '';
     
     /**
-     * @var bool Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
+     * @var bool - Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
      */
     protected $_isDefault = false;
     
@@ -62,54 +62,12 @@ class TaxClass extends DataModel
     }
     
     /**
-     * @param string $id Unique taxClass id
-     * @return \jtl\Connector\Model\TaxClass
-     */
-    public function setId($id)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_id = (string)$id;
-        return $this;
-    }
     
-    /**
-     * @return string Unique taxClass id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param string $name Optional tax class name
-     * @return \jtl\Connector\Model\TaxClass
-     */
-    public function setName($name)
-    {
-        $this->_name = (string)$name;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional tax class name
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-    /**
-     * @param bool $isDefault Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
-     * @return \jtl\Connector\Model\TaxClass
-     */
-    public function setIsDefault($isDefault)
-    {
-        $this->_isDefault = (bool)$isDefault;
-        return $this;
-    }
-    
-    /**
-     * @return bool Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
-     */
-    public function getIsDefault()
-    {
-        return $this->_isDefault;
     }
 }
+?>

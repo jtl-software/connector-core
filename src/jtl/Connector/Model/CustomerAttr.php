@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class CustomerAttr extends DataModel
 {
     /**
-     * @var string Unique customerAttr id
+     * @var string - Unique customerAttr id
      */
     protected $_id = '';
     
     /**
-     * @var string Reference to customer
+     * @var string - Reference to customer
      */
     protected $_customerId = '';
     
     /**
-     * @var string Attribute key
+     * @var string - Attribute key
      */
     protected $_key = '';
     
     /**
-     * @var string Attribute value
+     * @var string - Attribute value
      */
     protected $_value = '';
     
@@ -64,71 +64,12 @@ class CustomerAttr extends DataModel
     }
     
     /**
-     * @param string $id Unique customerAttr id
-     * @return \jtl\Connector\Model\CustomerAttr
-     */
-    public function setId($id)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_id = (string)$id;
-        return $this;
-    }
     
-    /**
-     * @return string Unique customerAttr id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param string $customerId Reference to customer
-     * @return \jtl\Connector\Model\CustomerAttr
-     */
-    public function setCustomerId($customerId)
-    {
-        $this->_customerId = (string)$customerId;
-        return $this;
-    }
-    
-    /**
-     * @return string Reference to customer
-     */
-    public function getCustomerId()
-    {
-        return $this->_customerId;
-    }
-    /**
-     * @param string $key Attribute key
-     * @return \jtl\Connector\Model\CustomerAttr
-     */
-    public function setKey($key)
-    {
-        $this->_key = (string)$key;
-        return $this;
-    }
-    
-    /**
-     * @return string Attribute key
-     */
-    public function getKey()
-    {
-        return $this->_key;
-    }
-    /**
-     * @param string $value Attribute value
-     * @return \jtl\Connector\Model\CustomerAttr
-     */
-    public function setValue($value)
-    {
-        $this->_value = (string)$value;
-        return $this;
-    }
-    
-    /**
-     * @return string Attribute value
-     */
-    public function getValue()
-    {
-        return $this->_value;
     }
 }
+?>

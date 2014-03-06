@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class ConfigItemI18n extends DataModel
 {
     /**
-     * @var string Reference to configItem
+     * @var string - Reference to configItem
      */
     protected $_configItemId = '';
     
     /**
-     * @var string Locale
+     * @var string - Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string Config item name. Will be ignored if inheritProductName==true
+     * @var string - Config item name. Will be ignored if inheritProductName==true
      */
     protected $_name = '';
     
     /**
-     * @var string Description (html). Will be ignored, if inheritProductName==true
+     * @var string - Description (html). Will be ignored, if inheritProductName==true
      */
     protected $_description = '';
     
@@ -64,71 +64,12 @@ class ConfigItemI18n extends DataModel
     }
     
     /**
-     * @param string $configItemId Reference to configItem
-     * @return \jtl\Connector\Model\ConfigItemI18n
-     */
-    public function setConfigItemId($configItemId)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_configItemId = (string)$configItemId;
-        return $this;
-    }
     
-    /**
-     * @return string Reference to configItem
-     */
-    public function getConfigItemId()
-    {
-        return $this->_configItemId;
-    }
-    /**
-     * @param string $localeName Locale
-     * @return \jtl\Connector\Model\ConfigItemI18n
-     */
-    public function setLocaleName($localeName)
-    {
-        $this->_localeName = (string)$localeName;
-        return $this;
-    }
-    
-    /**
-     * @return string Locale
-     */
-    public function getLocaleName()
-    {
-        return $this->_localeName;
-    }
-    /**
-     * @param string $name Config item name. Will be ignored if inheritProductName==true
-     * @return \jtl\Connector\Model\ConfigItemI18n
-     */
-    public function setName($name)
-    {
-        $this->_name = (string)$name;
-        return $this;
-    }
-    
-    /**
-     * @return string Config item name. Will be ignored if inheritProductName==true
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-    /**
-     * @param string $description Description (html). Will be ignored, if inheritProductName==true
-     * @return \jtl\Connector\Model\ConfigItemI18n
-     */
-    public function setDescription($description)
-    {
-        $this->_description = (string)$description;
-        return $this;
-    }
-    
-    /**
-     * @return string Description (html). Will be ignored, if inheritProductName==true
-     */
-    public function getDescription()
-    {
-        return $this->_description;
     }
 }
+?>

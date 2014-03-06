@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class Category extends DataModel
 {
     /**
-     * @var string Unique category id
+     * @var string - Unique category id
      */
     protected $_id = '';
     
     /**
-     * @var string Optional reference to parent category id
+     * @var string - Optional reference to parent category id
      */
     protected $_parentCategoryId = '0';
     
     /**
-     * @var int Optional sort order number
+     * @var int - Optional sort order number
      */
     protected $_sort = 0;
     
     /**
-     * @var int Optional category level (default 1 for first level)
+     * @var int - Optional category level (default 1 for first level)
      */
     protected $_level = 1;
     
@@ -68,71 +68,12 @@ class Category extends DataModel
     }
     
     /**
-     * @param string $id Unique category id
-     * @return \jtl\Connector\Model\Category
-     */
-    public function setId($id)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_id = (string)$id;
-        return $this;
-    }
     
-    /**
-     * @return string Unique category id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param string $parentCategoryId Optional reference to parent category id
-     * @return \jtl\Connector\Model\Category
-     */
-    public function setParentCategoryId($parentCategoryId)
-    {
-        $this->_parentCategoryId = (string)$parentCategoryId;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional reference to parent category id
-     */
-    public function getParentCategoryId()
-    {
-        return $this->_parentCategoryId;
-    }
-    /**
-     * @param int $sort Optional sort order number
-     * @return \jtl\Connector\Model\Category
-     */
-    public function setSort($sort)
-    {
-        $this->_sort = (int)$sort;
-        return $this;
-    }
-    
-    /**
-     * @return int Optional sort order number
-     */
-    public function getSort()
-    {
-        return $this->_sort;
-    }
-    /**
-     * @param int $level Optional category level (default 1 for first level)
-     * @return \jtl\Connector\Model\Category
-     */
-    public function setLevel($level)
-    {
-        $this->_level = (int)$level;
-        return $this;
-    }
-    
-    /**
-     * @return int Optional category level (default 1 for first level)
-     */
-    public function getLevel()
-    {
-        return $this->_level;
     }
 }
+?>

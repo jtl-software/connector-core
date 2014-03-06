@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class CrossSelling extends DataModel
 {
     /**
-     * @var string Unique crossSelling id
+     * @var string - Unique crossSelling id
      */
     protected $_id = '';
     
     /**
-     * @var string Reference to product (main product)
+     * @var string - Reference to product (main product)
      */
     protected $_crossSellingProductId = '';
     
     /**
-     * @var string Reference to crossSellingGroup
+     * @var string - Reference to crossSellingGroup
      */
     protected $_crossSellingGroupId = '';
     
     /**
-     * @var string Reference to product (cross selling product)
+     * @var string - Reference to product (cross selling product)
      */
     protected $_productId = '';
     
@@ -64,71 +64,12 @@ class CrossSelling extends DataModel
     }
     
     /**
-     * @param string $id Unique crossSelling id
-     * @return \jtl\Connector\Model\CrossSelling
-     */
-    public function setId($id)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_id = (string)$id;
-        return $this;
-    }
     
-    /**
-     * @return string Unique crossSelling id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param string $crossSellingProductId Reference to product (main product)
-     * @return \jtl\Connector\Model\CrossSelling
-     */
-    public function setCrossSellingProductId($crossSellingProductId)
-    {
-        $this->_crossSellingProductId = (string)$crossSellingProductId;
-        return $this;
-    }
-    
-    /**
-     * @return string Reference to product (main product)
-     */
-    public function getCrossSellingProductId()
-    {
-        return $this->_crossSellingProductId;
-    }
-    /**
-     * @param string $crossSellingGroupId Reference to crossSellingGroup
-     * @return \jtl\Connector\Model\CrossSelling
-     */
-    public function setCrossSellingGroupId($crossSellingGroupId)
-    {
-        $this->_crossSellingGroupId = (string)$crossSellingGroupId;
-        return $this;
-    }
-    
-    /**
-     * @return string Reference to crossSellingGroup
-     */
-    public function getCrossSellingGroupId()
-    {
-        return $this->_crossSellingGroupId;
-    }
-    /**
-     * @param string $productId Reference to product (cross selling product)
-     * @return \jtl\Connector\Model\CrossSelling
-     */
-    public function setProductId($productId)
-    {
-        $this->_productId = (string)$productId;
-        return $this;
-    }
-    
-    /**
-     * @return string Reference to product (cross selling product)
-     */
-    public function getProductId()
-    {
-        return $this->_productId;
     }
 }
+?>

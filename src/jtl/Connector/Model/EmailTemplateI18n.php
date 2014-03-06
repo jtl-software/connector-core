@@ -82,122 +82,12 @@ class EmailTemplateI18n extends DataModel
     }
     
     /**
-     * @param string $emailTemplateId
-     * @return \jtl\Connector\Model\EmailTemplateI18n
-     */
-    public function setEmailTemplateId($emailTemplateId)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_emailTemplateId = (string)$emailTemplateId;
-        return $this;
-    }
     
-    /**
-     * @return string
-     */
-    public function getEmailTemplateId()
-    {
-        return $this->_emailTemplateId;
-    }
-    /**
-     * @param string $localeName
-     * @return \jtl\Connector\Model\EmailTemplateI18n
-     */
-    public function setLocaleName($localeName)
-    {
-        $this->_localeName = (string)$localeName;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getLocaleName()
-    {
-        return $this->_localeName;
-    }
-    /**
-     * @param string $subject
-     * @return \jtl\Connector\Model\EmailTemplateI18n
-     */
-    public function setSubject($subject)
-    {
-        $this->_subject = (string)$subject;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getSubject()
-    {
-        return $this->_subject;
-    }
-    /**
-     * @param string $contentHtml
-     * @return \jtl\Connector\Model\EmailTemplateI18n
-     */
-    public function setContentHtml($contentHtml)
-    {
-        $this->_contentHtml = (string)$contentHtml;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getContentHtml()
-    {
-        return $this->_contentHtml;
-    }
-    /**
-     * @param string $contentText
-     * @return \jtl\Connector\Model\EmailTemplateI18n
-     */
-    public function setContentText($contentText)
-    {
-        $this->_contentText = (string)$contentText;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getContentText()
-    {
-        return $this->_contentText;
-    }
-    /**
-     * @param string $pdf
-     * @return \jtl\Connector\Model\EmailTemplateI18n
-     */
-    public function setPdf($pdf)
-    {
-        $this->_pdf = (string)$pdf;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getPdf()
-    {
-        return $this->_pdf;
-    }
-    /**
-     * @param string $filename
-     * @return \jtl\Connector\Model\EmailTemplateI18n
-     */
-    public function setFilename($filename)
-    {
-        $this->_filename = (string)$filename;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getFilename()
-    {
-        return $this->_filename;
     }
 }
+?>

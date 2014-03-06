@@ -17,27 +17,27 @@ use \jtl\Core\Model\DataModel;
 class TaxRate extends DataModel
 {
     /**
-     * @var string Unique taxRate id
+     * @var string - Unique taxRate id
      */
     protected $_id = '';
     
     /**
-     * @var string Reference to taxZone
+     * @var string - Reference to taxZone
      */
     protected $_taxZoneId = '';
     
     /**
-     * @var string Reference to taxClass
+     * @var string - Reference to taxClass
      */
     protected $_taxClassId = '';
     
     /**
-     * @var double Tax rate value e.g. 19.00
+     * @var double - Tax rate value e.g. 19.00
      */
     protected $_rate = 0.0;
     
     /**
-     * @var int Optional priority number. Higher value means higher priority
+     * @var int - Optional priority number. Higher value means higher priority
      */
     protected $_priority = 0;
     
@@ -78,88 +78,12 @@ class TaxRate extends DataModel
     }
     
     /**
-     * @param string $id Unique taxRate id
-     * @return \jtl\Connector\Model\TaxRate
-     */
-    public function setId($id)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_id = (string)$id;
-        return $this;
-    }
     
-    /**
-     * @return string Unique taxRate id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param string $taxZoneId Reference to taxZone
-     * @return \jtl\Connector\Model\TaxRate
-     */
-    public function setTaxZoneId($taxZoneId)
-    {
-        $this->_taxZoneId = (string)$taxZoneId;
-        return $this;
-    }
-    
-    /**
-     * @return string Reference to taxZone
-     */
-    public function getTaxZoneId()
-    {
-        return $this->_taxZoneId;
-    }
-    /**
-     * @param string $taxClassId Reference to taxClass
-     * @return \jtl\Connector\Model\TaxRate
-     */
-    public function setTaxClassId($taxClassId)
-    {
-        $this->_taxClassId = (string)$taxClassId;
-        return $this;
-    }
-    
-    /**
-     * @return string Reference to taxClass
-     */
-    public function getTaxClassId()
-    {
-        return $this->_taxClassId;
-    }
-    /**
-     * @param double $rate Tax rate value e.g. 19.00
-     * @return \jtl\Connector\Model\TaxRate
-     */
-    public function setRate($rate)
-    {
-        $this->_rate = (double)$rate;
-        return $this;
-    }
-    
-    /**
-     * @return double Tax rate value e.g. 19.00
-     */
-    public function getRate()
-    {
-        return $this->_rate;
-    }
-    /**
-     * @param int $priority Optional priority number. Higher value means higher priority
-     * @return \jtl\Connector\Model\TaxRate
-     */
-    public function setPriority($priority)
-    {
-        $this->_priority = (int)$priority;
-        return $this;
-    }
-    
-    /**
-     * @return int Optional priority number. Higher value means higher priority
-     */
-    public function getPriority()
-    {
-        return $this->_priority;
     }
 }
+?>

@@ -17,12 +17,12 @@ use \jtl\Core\Model\DataModel;
 class ProductInvisibility extends DataModel
 {
     /**
-     * @var string Reference to customerGroup
+     * @var string - Reference to customerGroup
      */
     protected $_customerGroupId = '';
     
     /**
-     * @var string Reference to product
+     * @var string - Reference to product
      */
     protected $_productId = '';
     
@@ -52,37 +52,12 @@ class ProductInvisibility extends DataModel
     }
     
     /**
-     * @param string $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\ProductInvisibility
-     */
-    public function setCustomerGroupId($customerGroupId)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
-        return $this;
-    }
     
-    /**
-     * @return string Reference to customerGroup
-     */
-    public function getCustomerGroupId()
-    {
-        return $this->_customerGroupId;
-    }
-    /**
-     * @param string $productId Reference to product
-     * @return \jtl\Connector\Model\ProductInvisibility
-     */
-    public function setProductId($productId)
-    {
-        $this->_productId = (string)$productId;
-        return $this;
-    }
-    
-    /**
-     * @return string Reference to product
-     */
-    public function getProductId()
-    {
-        return $this->_productId;
     }
 }
+?>

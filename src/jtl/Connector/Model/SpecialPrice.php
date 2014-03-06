@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class SpecialPrice extends DataModel
 {
     /**
-     * @var string Reference to customerGroup
+     * @var string - Reference to customerGroup
      */
     protected $_customerGroupId = '';
     
     /**
-     * @var string Reference to productSpecialPrice
+     * @var string - Reference to productSpecialPrice
      */
     protected $_productSpecialPriceId = '';
     
     /**
-     * @var double net price value
+     * @var double - net price value
      */
     protected $_priceNet = 0.0;
     
@@ -62,54 +62,12 @@ class SpecialPrice extends DataModel
     }
     
     /**
-     * @param string $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\SpecialPrice
-     */
-    public function setCustomerGroupId($customerGroupId)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
-        return $this;
-    }
     
-    /**
-     * @return string Reference to customerGroup
-     */
-    public function getCustomerGroupId()
-    {
-        return $this->_customerGroupId;
-    }
-    /**
-     * @param string $productSpecialPriceId Reference to productSpecialPrice
-     * @return \jtl\Connector\Model\SpecialPrice
-     */
-    public function setProductSpecialPriceId($productSpecialPriceId)
-    {
-        $this->_productSpecialPriceId = (string)$productSpecialPriceId;
-        return $this;
-    }
-    
-    /**
-     * @return string Reference to productSpecialPrice
-     */
-    public function getProductSpecialPriceId()
-    {
-        return $this->_productSpecialPriceId;
-    }
-    /**
-     * @param double $priceNet net price value
-     * @return \jtl\Connector\Model\SpecialPrice
-     */
-    public function setPriceNet($priceNet)
-    {
-        $this->_priceNet = (double)$priceNet;
-        return $this;
-    }
-    
-    /**
-     * @return double net price value
-     */
-    public function getPriceNet()
-    {
-        return $this->_priceNet;
     }
 }
+?>

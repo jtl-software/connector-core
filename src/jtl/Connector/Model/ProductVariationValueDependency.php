@@ -52,37 +52,12 @@ class ProductVariationValueDependency extends DataModel
     }
     
     /**
-     * @param string $productVariationValueId
-     * @return \jtl\Connector\Model\ProductVariationValueDependency
-     */
-    public function setProductVariationValueId($productVariationValueId)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_productVariationValueId = (string)$productVariationValueId;
-        return $this;
-    }
     
-    /**
-     * @return string
-     */
-    public function getProductVariationValueId()
-    {
-        return $this->_productVariationValueId;
-    }
-    /**
-     * @param string $productVariationValueTargetId
-     * @return \jtl\Connector\Model\ProductVariationValueDependency
-     */
-    public function setProductVariationValueTargetId($productVariationValueTargetId)
-    {
-        $this->_productVariationValueTargetId = (string)$productVariationValueTargetId;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getProductVariationValueTargetId()
-    {
-        return $this->_productVariationValueTargetId;
     }
 }
+?>

@@ -17,27 +17,27 @@ use \jtl\Core\Model\DataModel;
 class Manufacturer extends DataModel
 {
     /**
-     * @var string Unique manufacturer id
+     * @var string - Unique manufacturer id
      */
     protected $_id = '';
     
     /**
-     * @var string Manufacturer (brand) name
+     * @var string - Manufacturer (brand) name
      */
     protected $_name = '';
     
     /**
-     * @var string Optional manufacturer website URL
+     * @var string - Optional manufacturer website URL
      */
     protected $_www = '';
     
     /**
-     * @var int Optional sort number
+     * @var int - Optional sort number
      */
     protected $_sort = 0;
     
     /**
-     * @var string Optional url path e.g. "Products-manufactured-by-X"
+     * @var string - Optional url path e.g. "Products-manufactured-by-X"
      */
     protected $_urlPath = '';
     
@@ -74,88 +74,12 @@ class Manufacturer extends DataModel
     }
     
     /**
-     * @param string $id Unique manufacturer id
-     * @return \jtl\Connector\Model\Manufacturer
-     */
-    public function setId($id)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_id = (string)$id;
-        return $this;
-    }
     
-    /**
-     * @return string Unique manufacturer id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param string $name Manufacturer (brand) name
-     * @return \jtl\Connector\Model\Manufacturer
-     */
-    public function setName($name)
-    {
-        $this->_name = (string)$name;
-        return $this;
-    }
-    
-    /**
-     * @return string Manufacturer (brand) name
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-    /**
-     * @param string $www Optional manufacturer website URL
-     * @return \jtl\Connector\Model\Manufacturer
-     */
-    public function setWww($www)
-    {
-        $this->_www = (string)$www;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional manufacturer website URL
-     */
-    public function getWww()
-    {
-        return $this->_www;
-    }
-    /**
-     * @param int $sort Optional sort number
-     * @return \jtl\Connector\Model\Manufacturer
-     */
-    public function setSort($sort)
-    {
-        $this->_sort = (int)$sort;
-        return $this;
-    }
-    
-    /**
-     * @return int Optional sort number
-     */
-    public function getSort()
-    {
-        return $this->_sort;
-    }
-    /**
-     * @param string $urlPath Optional url path e.g. "Products-manufactured-by-X"
-     * @return \jtl\Connector\Model\Manufacturer
-     */
-    public function setUrlPath($urlPath)
-    {
-        $this->_urlPath = (string)$urlPath;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional url path e.g. "Products-manufactured-by-X"
-     */
-    public function getUrlPath()
-    {
-        return $this->_urlPath;
     }
 }
+?>

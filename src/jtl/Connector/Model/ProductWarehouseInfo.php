@@ -17,29 +17,29 @@ use \jtl\Core\Model\DataModel;
 class ProductWarehouseInfo extends DataModel
 {
     /**
-     * @var string Reference to product
+     * @var string - Reference to product
      */
     protected $_productId = '';
     
     /**
-     * @var string Reference to warehouse
+     * @var string - Reference to warehouse
      */
     protected $_warehouseId = '';
     
     /**
-     * @var double Optional product stock level in specified warehouse
+     * @var double - Optional product stock level in specified warehouse
      */
     protected $_stockLevel = 0;
     
     /**
-     * @var double Optional product inflow quantity for specified warehouse
+     * @var double - Optional product inflow quantity for specified warehouse
      */
     protected $_inflowQuantity = 0;
     
     /**
-     * @var string Optional product inflow date for specified warehouse
+     * @var string - Optional product inflow date for specified warehouse
      */
-    protected $_inflowDate = '0000-00-00';
+    protected $_inflowDate = null;
     
     /**
      * ProductWarehouseInfo Setter
@@ -74,88 +74,12 @@ class ProductWarehouseInfo extends DataModel
     }
     
     /**
-     * @param string $productId Reference to product
-     * @return \jtl\Connector\Model\ProductWarehouseInfo
-     */
-    public function setProductId($productId)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_productId = (string)$productId;
-        return $this;
-    }
     
-    /**
-     * @return string Reference to product
-     */
-    public function getProductId()
-    {
-        return $this->_productId;
-    }
-    /**
-     * @param string $warehouseId Reference to warehouse
-     * @return \jtl\Connector\Model\ProductWarehouseInfo
-     */
-    public function setWarehouseId($warehouseId)
-    {
-        $this->_warehouseId = (string)$warehouseId;
-        return $this;
-    }
-    
-    /**
-     * @return string Reference to warehouse
-     */
-    public function getWarehouseId()
-    {
-        return $this->_warehouseId;
-    }
-    /**
-     * @param double $stockLevel Optional product stock level in specified warehouse
-     * @return \jtl\Connector\Model\ProductWarehouseInfo
-     */
-    public function setStockLevel($stockLevel)
-    {
-        $this->_stockLevel = (double)$stockLevel;
-        return $this;
-    }
-    
-    /**
-     * @return double Optional product stock level in specified warehouse
-     */
-    public function getStockLevel()
-    {
-        return $this->_stockLevel;
-    }
-    /**
-     * @param double $inflowQuantity Optional product inflow quantity for specified warehouse
-     * @return \jtl\Connector\Model\ProductWarehouseInfo
-     */
-    public function setInflowQuantity($inflowQuantity)
-    {
-        $this->_inflowQuantity = (double)$inflowQuantity;
-        return $this;
-    }
-    
-    /**
-     * @return double Optional product inflow quantity for specified warehouse
-     */
-    public function getInflowQuantity()
-    {
-        return $this->_inflowQuantity;
-    }
-    /**
-     * @param string $inflowDate Optional product inflow date for specified warehouse
-     * @return \jtl\Connector\Model\ProductWarehouseInfo
-     */
-    public function setInflowDate($inflowDate)
-    {
-        $this->_inflowDate = (string)$inflowDate;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional product inflow date for specified warehouse
-     */
-    public function getInflowDate()
-    {
-        return $this->_inflowDate;
     }
 }
+?>

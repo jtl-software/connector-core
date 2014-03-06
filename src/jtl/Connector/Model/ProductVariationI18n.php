@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class ProductVariationI18n extends DataModel
 {
     /**
-     * @var string Locale
+     * @var string - Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string Reference to productVariation
+     * @var string - Reference to productVariation
      */
     protected $_productVariationId = '';
     
     /**
-     * @var string Locale specific variation name
+     * @var string - Locale specific variation name
      */
     protected $_name = '';
     
@@ -58,54 +58,12 @@ class ProductVariationI18n extends DataModel
     }
     
     /**
-     * @param string $localeName Locale
-     * @return \jtl\Connector\Model\ProductVariationI18n
-     */
-    public function setLocaleName($localeName)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_localeName = (string)$localeName;
-        return $this;
-    }
     
-    /**
-     * @return string Locale
-     */
-    public function getLocaleName()
-    {
-        return $this->_localeName;
-    }
-    /**
-     * @param string $productVariationId Reference to productVariation
-     * @return \jtl\Connector\Model\ProductVariationI18n
-     */
-    public function setProductVariationId($productVariationId)
-    {
-        $this->_productVariationId = (string)$productVariationId;
-        return $this;
-    }
-    
-    /**
-     * @return string Reference to productVariation
-     */
-    public function getProductVariationId()
-    {
-        return $this->_productVariationId;
-    }
-    /**
-     * @param string $name Locale specific variation name
-     * @return \jtl\Connector\Model\ProductVariationI18n
-     */
-    public function setName($name)
-    {
-        $this->_name = (string)$name;
-        return $this;
-    }
-    
-    /**
-     * @return string Locale specific variation name
-     */
-    public function getName()
-    {
-        return $this->_name;
     }
 }
+?>

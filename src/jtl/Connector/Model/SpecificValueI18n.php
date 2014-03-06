@@ -17,42 +17,42 @@ use \jtl\Core\Model\DataModel;
 class SpecificValueI18n extends DataModel
 {
     /**
-     * @var string locale
+     * @var string - locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string Reference to specificValue
+     * @var string - Reference to specificValue
      */
     protected $_specificValueId = '';
     
     /**
-     * @var string Localized value
+     * @var string - Localized value
      */
     protected $_value = '';
     
     /**
-     * @var string Optional localized URL path
+     * @var string - Optional localized URL path
      */
     protected $_urlPath = '';
     
     /**
-     * @var string Optional localized description
+     * @var string - Optional localized description
      */
     protected $_description = '';
     
     /**
-     * @var string Optional localized meta description value
+     * @var string - Optional localized meta description value
      */
     protected $_metaDescription = '';
     
     /**
-     * @var string Optional localized meta keywords value
+     * @var string - Optional localized meta keywords value
      */
     protected $_metaKeywords = '';
     
     /**
-     * @var string Optional localized title tag value
+     * @var string - Optional localized title tag value
      */
     protected $_titleTag = '';
     
@@ -88,139 +88,12 @@ class SpecificValueI18n extends DataModel
     }
     
     /**
-     * @param string $localeName locale
-     * @return \jtl\Connector\Model\SpecificValueI18n
-     */
-    public function setLocaleName($localeName)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_localeName = (string)$localeName;
-        return $this;
-    }
     
-    /**
-     * @return string locale
-     */
-    public function getLocaleName()
-    {
-        return $this->_localeName;
-    }
-    /**
-     * @param string $specificValueId Reference to specificValue
-     * @return \jtl\Connector\Model\SpecificValueI18n
-     */
-    public function setSpecificValueId($specificValueId)
-    {
-        $this->_specificValueId = (string)$specificValueId;
-        return $this;
-    }
-    
-    /**
-     * @return string Reference to specificValue
-     */
-    public function getSpecificValueId()
-    {
-        return $this->_specificValueId;
-    }
-    /**
-     * @param string $value Localized value
-     * @return \jtl\Connector\Model\SpecificValueI18n
-     */
-    public function setValue($value)
-    {
-        $this->_value = (string)$value;
-        return $this;
-    }
-    
-    /**
-     * @return string Localized value
-     */
-    public function getValue()
-    {
-        return $this->_value;
-    }
-    /**
-     * @param string $urlPath Optional localized URL path
-     * @return \jtl\Connector\Model\SpecificValueI18n
-     */
-    public function setUrlPath($urlPath)
-    {
-        $this->_urlPath = (string)$urlPath;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional localized URL path
-     */
-    public function getUrlPath()
-    {
-        return $this->_urlPath;
-    }
-    /**
-     * @param string $description Optional localized description
-     * @return \jtl\Connector\Model\SpecificValueI18n
-     */
-    public function setDescription($description)
-    {
-        $this->_description = (string)$description;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional localized description
-     */
-    public function getDescription()
-    {
-        return $this->_description;
-    }
-    /**
-     * @param string $metaDescription Optional localized meta description value
-     * @return \jtl\Connector\Model\SpecificValueI18n
-     */
-    public function setMetaDescription($metaDescription)
-    {
-        $this->_metaDescription = (string)$metaDescription;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional localized meta description value
-     */
-    public function getMetaDescription()
-    {
-        return $this->_metaDescription;
-    }
-    /**
-     * @param string $metaKeywords Optional localized meta keywords value
-     * @return \jtl\Connector\Model\SpecificValueI18n
-     */
-    public function setMetaKeywords($metaKeywords)
-    {
-        $this->_metaKeywords = (string)$metaKeywords;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional localized meta keywords value
-     */
-    public function getMetaKeywords()
-    {
-        return $this->_metaKeywords;
-    }
-    /**
-     * @param string $titleTag Optional localized title tag value
-     * @return \jtl\Connector\Model\SpecificValueI18n
-     */
-    public function setTitleTag($titleTag)
-    {
-        $this->_titleTag = (string)$titleTag;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional localized title tag value
-     */
-    public function getTitleTag()
-    {
-        return $this->_titleTag;
     }
 }
+?>

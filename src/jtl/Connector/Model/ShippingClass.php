@@ -17,12 +17,12 @@ use \jtl\Core\Model\DataModel;
 class ShippingClass extends DataModel
 {
     /**
-     * @var string Unique shippingClass id
+     * @var string - Unique shippingClass id
      */
     protected $_id = '';
     
     /**
-     * @var string Optional (internal) Shipping class name
+     * @var string - Optional (internal) Shipping class name
      */
     protected $_name = '';
     
@@ -52,37 +52,12 @@ class ShippingClass extends DataModel
     }
     
     /**
-     * @param string $id Unique shippingClass id
-     * @return \jtl\Connector\Model\ShippingClass
-     */
-    public function setId($id)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_id = (string)$id;
-        return $this;
-    }
     
-    /**
-     * @return string Unique shippingClass id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param string $name Optional (internal) Shipping class name
-     * @return \jtl\Connector\Model\ShippingClass
-     */
-    public function setName($name)
-    {
-        $this->_name = (string)$name;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional (internal) Shipping class name
-     */
-    public function getName()
-    {
-        return $this->_name;
     }
 }
+?>

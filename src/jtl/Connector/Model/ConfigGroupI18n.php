@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class ConfigGroupI18n extends DataModel
 {
     /**
-     * @var string Reference to configGroup
+     * @var string - Reference to configGroup
      */
     protected $_configGroupId = '';
     
     /**
-     * @var string Locale
+     * @var string - Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string Config group name
+     * @var string - Config group name
      */
     protected $_name = '';
     
     /**
-     * @var string Optional description (HTML)
+     * @var string - Optional description (HTML)
      */
     protected $_description = '';
     
@@ -64,71 +64,12 @@ class ConfigGroupI18n extends DataModel
     }
     
     /**
-     * @param string $configGroupId Reference to configGroup
-     * @return \jtl\Connector\Model\ConfigGroupI18n
-     */
-    public function setConfigGroupId($configGroupId)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_configGroupId = (string)$configGroupId;
-        return $this;
-    }
     
-    /**
-     * @return string Reference to configGroup
-     */
-    public function getConfigGroupId()
-    {
-        return $this->_configGroupId;
-    }
-    /**
-     * @param string $localeName Locale
-     * @return \jtl\Connector\Model\ConfigGroupI18n
-     */
-    public function setLocaleName($localeName)
-    {
-        $this->_localeName = (string)$localeName;
-        return $this;
-    }
-    
-    /**
-     * @return string Locale
-     */
-    public function getLocaleName()
-    {
-        return $this->_localeName;
-    }
-    /**
-     * @param string $name Config group name
-     * @return \jtl\Connector\Model\ConfigGroupI18n
-     */
-    public function setName($name)
-    {
-        $this->_name = (string)$name;
-        return $this;
-    }
-    
-    /**
-     * @return string Config group name
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-    /**
-     * @param string $description Optional description (HTML)
-     * @return \jtl\Connector\Model\ConfigGroupI18n
-     */
-    public function setDescription($description)
-    {
-        $this->_description = (string)$description;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional description (HTML)
-     */
-    public function getDescription()
-    {
-        return $this->_description;
     }
 }
+?>

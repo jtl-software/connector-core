@@ -17,32 +17,32 @@ use \jtl\Core\Model\DataModel;
 class FileUpload extends DataModel
 {
     /**
-     * @var string Unique fileUpload id
+     * @var string - Unique fileUpload id
      */
     protected $_id = '';
     
     /**
-     * @var string Reference to product
+     * @var string - Reference to product
      */
     protected $_productId = '';
     
     /**
-     * @var string Filename specification
+     * @var string - Filename specification
      */
     protected $_name = '';
     
     /**
-     * @var string Optional file description
+     * @var string - Optional file description
      */
     protected $_description = '';
     
     /**
-     * @var string Allowed file type
+     * @var string - Allowed file type
      */
     protected $_fileType = '';
     
     /**
-     * @var bool Optional flag to force upload before finishing checkout. True if file upload is required to buy product
+     * @var bool - Optional flag to force upload before finishing checkout. True if file upload is required to buy product
      */
     protected $_isRequired = false;
     
@@ -80,105 +80,12 @@ class FileUpload extends DataModel
     }
     
     /**
-     * @param string $id Unique fileUpload id
-     * @return \jtl\Connector\Model\FileUpload
-     */
-    public function setId($id)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_id = (string)$id;
-        return $this;
-    }
     
-    /**
-     * @return string Unique fileUpload id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param string $productId Reference to product
-     * @return \jtl\Connector\Model\FileUpload
-     */
-    public function setProductId($productId)
-    {
-        $this->_productId = (string)$productId;
-        return $this;
-    }
-    
-    /**
-     * @return string Reference to product
-     */
-    public function getProductId()
-    {
-        return $this->_productId;
-    }
-    /**
-     * @param string $name Filename specification
-     * @return \jtl\Connector\Model\FileUpload
-     */
-    public function setName($name)
-    {
-        $this->_name = (string)$name;
-        return $this;
-    }
-    
-    /**
-     * @return string Filename specification
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-    /**
-     * @param string $description Optional file description
-     * @return \jtl\Connector\Model\FileUpload
-     */
-    public function setDescription($description)
-    {
-        $this->_description = (string)$description;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional file description
-     */
-    public function getDescription()
-    {
-        return $this->_description;
-    }
-    /**
-     * @param string $fileType Allowed file type
-     * @return \jtl\Connector\Model\FileUpload
-     */
-    public function setFileType($fileType)
-    {
-        $this->_fileType = (string)$fileType;
-        return $this;
-    }
-    
-    /**
-     * @return string Allowed file type
-     */
-    public function getFileType()
-    {
-        return $this->_fileType;
-    }
-    /**
-     * @param bool $isRequired Optional flag to force upload before finishing checkout. True if file upload is required to buy product
-     * @return \jtl\Connector\Model\FileUpload
-     */
-    public function setIsRequired($isRequired)
-    {
-        $this->_isRequired = (bool)$isRequired;
-        return $this;
-    }
-    
-    /**
-     * @return bool Optional flag to force upload before finishing checkout. True if file upload is required to buy product
-     */
-    public function getIsRequired()
-    {
-        return $this->_isRequired;
     }
 }
+?>

@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class SpecificValue extends DataModel
 {
     /**
-     * @var string Unique specificValue id
+     * @var string - Unique specificValue id
      */
     protected $_id = '';
     
     /**
-     * @var string Reference to specificId
+     * @var string - Reference to specificId
      */
     protected $_specificId = '';
     
     /**
-     * @var int Optional sort number
+     * @var int - Optional sort number
      */
     protected $_sort = 0;
     
@@ -62,54 +62,12 @@ class SpecificValue extends DataModel
     }
     
     /**
-     * @param string $id Unique specificValue id
-     * @return \jtl\Connector\Model\SpecificValue
-     */
-    public function setId($id)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_id = (string)$id;
-        return $this;
-    }
     
-    /**
-     * @return string Unique specificValue id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param string $specificId Reference to specificId
-     * @return \jtl\Connector\Model\SpecificValue
-     */
-    public function setSpecificId($specificId)
-    {
-        $this->_specificId = (string)$specificId;
-        return $this;
-    }
-    
-    /**
-     * @return string Reference to specificId
-     */
-    public function getSpecificId()
-    {
-        return $this->_specificId;
-    }
-    /**
-     * @param int $sort Optional sort number
-     * @return \jtl\Connector\Model\SpecificValue
-     */
-    public function setSort($sort)
-    {
-        $this->_sort = (int)$sort;
-        return $this;
-    }
-    
-    /**
-     * @return int Optional sort number
-     */
-    public function getSort()
-    {
-        return $this->_sort;
     }
 }
+?>

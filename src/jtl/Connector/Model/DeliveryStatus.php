@@ -17,17 +17,17 @@ use \jtl\Core\Model\DataModel;
 class DeliveryStatus extends DataModel
 {
     /**
-     * @var string DeliveryStatus id
+     * @var string - DeliveryStatus id
      */
     protected $_id = '';
     
     /**
-     * @var string Locale
+     * @var string - Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string Localized delivery status text
+     * @var string - Localized delivery status text
      */
     protected $_name = '';
     
@@ -58,54 +58,12 @@ class DeliveryStatus extends DataModel
     }
     
     /**
-     * @param string $id DeliveryStatus id
-     * @return \jtl\Connector\Model\DeliveryStatus
-     */
-    public function setId($id)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_id = (string)$id;
-        return $this;
-    }
     
-    /**
-     * @return string DeliveryStatus id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param string $localeName Locale
-     * @return \jtl\Connector\Model\DeliveryStatus
-     */
-    public function setLocaleName($localeName)
-    {
-        $this->_localeName = (string)$localeName;
-        return $this;
-    }
-    
-    /**
-     * @return string Locale
-     */
-    public function getLocaleName()
-    {
-        return $this->_localeName;
-    }
-    /**
-     * @param string $name Localized delivery status text
-     * @return \jtl\Connector\Model\DeliveryStatus
-     */
-    public function setName($name)
-    {
-        $this->_name = (string)$name;
-        return $this;
-    }
-    
-    /**
-     * @return string Localized delivery status text
-     */
-    public function getName()
-    {
-        return $this->_name;
     }
 }
+?>

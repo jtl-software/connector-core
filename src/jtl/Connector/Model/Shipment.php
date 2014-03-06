@@ -17,37 +17,37 @@ use \jtl\Core\Model\DataModel;
 class Shipment extends DataModel
 {
     /**
-     * @var string Unique shipment id
+     * @var string - Unique shipment id
      */
     protected $_id = '';
     
     /**
-     * @var string Reference to deliveryNote
+     * @var string - Reference to deliveryNote
      */
     protected $_deliveryNoteId = '';
     
     /**
-     * @var string Logistic name
+     * @var string - Logistic name
      */
     protected $_logistic = '';
     
     /**
-     * @var string Optional Logistic URL
+     * @var string - Optional Logistic URL
      */
     protected $_logisticURL = '';
     
     /**
-     * @var string Optional Identcode
+     * @var string - Optional Identcode
      */
     protected $_identCode = '';
     
     /**
-     * @var string Creation date
+     * @var string - Creation date
      */
-    protected $_created = '';
+    protected $_created = null;
     
     /**
-     * @var string Optional shipment note
+     * @var string - Optional shipment note
      */
     protected $_note = '';
     
@@ -82,122 +82,12 @@ class Shipment extends DataModel
     }
     
     /**
-     * @param string $id Unique shipment id
-     * @return \jtl\Connector\Model\Shipment
-     */
-    public function setId($id)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_id = (string)$id;
-        return $this;
-    }
     
-    /**
-     * @return string Unique shipment id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param string $deliveryNoteId Reference to deliveryNote
-     * @return \jtl\Connector\Model\Shipment
-     */
-    public function setDeliveryNoteId($deliveryNoteId)
-    {
-        $this->_deliveryNoteId = (string)$deliveryNoteId;
-        return $this;
-    }
-    
-    /**
-     * @return string Reference to deliveryNote
-     */
-    public function getDeliveryNoteId()
-    {
-        return $this->_deliveryNoteId;
-    }
-    /**
-     * @param string $logistic Logistic name
-     * @return \jtl\Connector\Model\Shipment
-     */
-    public function setLogistic($logistic)
-    {
-        $this->_logistic = (string)$logistic;
-        return $this;
-    }
-    
-    /**
-     * @return string Logistic name
-     */
-    public function getLogistic()
-    {
-        return $this->_logistic;
-    }
-    /**
-     * @param string $logisticURL Optional Logistic URL
-     * @return \jtl\Connector\Model\Shipment
-     */
-    public function setLogisticURL($logisticURL)
-    {
-        $this->_logisticURL = (string)$logisticURL;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional Logistic URL
-     */
-    public function getLogisticURL()
-    {
-        return $this->_logisticURL;
-    }
-    /**
-     * @param string $identCode Optional Identcode
-     * @return \jtl\Connector\Model\Shipment
-     */
-    public function setIdentCode($identCode)
-    {
-        $this->_identCode = (string)$identCode;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional Identcode
-     */
-    public function getIdentCode()
-    {
-        return $this->_identCode;
-    }
-    /**
-     * @param string $created Creation date
-     * @return \jtl\Connector\Model\Shipment
-     */
-    public function setCreated($created)
-    {
-        $this->_created = (string)$created;
-        return $this;
-    }
-    
-    /**
-     * @return string Creation date
-     */
-    public function getCreated()
-    {
-        return $this->_created;
-    }
-    /**
-     * @param string $note Optional shipment note
-     * @return \jtl\Connector\Model\Shipment
-     */
-    public function setNote($note)
-    {
-        $this->_note = (string)$note;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional shipment note
-     */
-    public function getNote()
-    {
-        return $this->_note;
     }
 }
+?>

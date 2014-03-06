@@ -17,22 +17,22 @@ use \jtl\Core\Model\DataModel;
 class CustomerGroup extends DataModel
 {
     /**
-     * @var string Unique customerGroup id
+     * @var string - Unique customerGroup id
      */
     protected $_id = '';
     
     /**
-     * @var double Optional percentual discount on all products. Negative Value means surcharge. 
+     * @var double - Optional percentual discount on all products. Negative Value means surcharge. 
      */
     protected $_discount = 0;
     
     /**
-     * @var bool Optional: Flag default customer group
+     * @var bool - Optional: Flag default customer group
      */
     protected $_isDefault = false;
     
     /**
-     * @var bool Optional: Show net prices default instead of gross prices
+     * @var bool - Optional: Show net prices default instead of gross prices
      */
     protected $_applyNetPrice = false;
     
@@ -72,71 +72,12 @@ class CustomerGroup extends DataModel
     }
     
     /**
-     * @param string $id Unique customerGroup id
-     * @return \jtl\Connector\Model\CustomerGroup
-     */
-    public function setId($id)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_id = (string)$id;
-        return $this;
-    }
     
-    /**
-     * @return string Unique customerGroup id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param double $discount Optional percentual discount on all products. Negative Value means surcharge. 
-     * @return \jtl\Connector\Model\CustomerGroup
-     */
-    public function setDiscount($discount)
-    {
-        $this->_discount = (double)$discount;
-        return $this;
-    }
-    
-    /**
-     * @return double Optional percentual discount on all products. Negative Value means surcharge. 
-     */
-    public function getDiscount()
-    {
-        return $this->_discount;
-    }
-    /**
-     * @param bool $isDefault Optional: Flag default customer group
-     * @return \jtl\Connector\Model\CustomerGroup
-     */
-    public function setIsDefault($isDefault)
-    {
-        $this->_isDefault = (bool)$isDefault;
-        return $this;
-    }
-    
-    /**
-     * @return bool Optional: Flag default customer group
-     */
-    public function getIsDefault()
-    {
-        return $this->_isDefault;
-    }
-    /**
-     * @param bool $applyNetPrice Optional: Show net prices default instead of gross prices
-     * @return \jtl\Connector\Model\CustomerGroup
-     */
-    public function setApplyNetPrice($applyNetPrice)
-    {
-        $this->_applyNetPrice = (bool)$applyNetPrice;
-        return $this;
-    }
-    
-    /**
-     * @return bool Optional: Show net prices default instead of gross prices
-     */
-    public function getApplyNetPrice()
-    {
-        return $this->_applyNetPrice;
     }
 }
+?>

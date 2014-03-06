@@ -17,42 +17,42 @@ use \jtl\Core\Model\DataModel;
 class CategoryI18n extends DataModel
 {
     /**
-     * @var string Locale
+     * @var string - Locale
      */
     protected $_localeName = '';
     
     /**
-     * @var string Reference to category
+     * @var string - Reference to category
      */
     protected $_categoryId = '';
     
     /**
-     * @var string Localized category name
+     * @var string - Localized category name
      */
     protected $_name = '';
     
     /**
-     * @var string Optional localized category URL
+     * @var string - Optional localized category URL
      */
     protected $_urlPath = '';
     
     /**
-     * @var string Optional localized Long Description
+     * @var string - Optional localized Long Description
      */
     protected $_description = '';
     
     /**
-     * @var string Optional localized  short description used for meta tag description
+     * @var string - Optional localized  short description used for meta tag description
      */
     protected $_metaDescription = '';
     
     /**
-     * @var string Optional localized meta tag keywords value
+     * @var string - Optional localized meta tag keywords value
      */
     protected $_metaKeywords = '';
     
     /**
-     * @var string Optional localized title tag value
+     * @var string - Optional localized title tag value
      */
     protected $_titleTag = '';
     
@@ -88,139 +88,12 @@ class CategoryI18n extends DataModel
     }
     
     /**
-     * @param string $localeName Locale
-     * @return \jtl\Connector\Model\CategoryI18n
-     */
-    public function setLocaleName($localeName)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_localeName = (string)$localeName;
-        return $this;
-    }
     
-    /**
-     * @return string Locale
-     */
-    public function getLocaleName()
-    {
-        return $this->_localeName;
-    }
-    /**
-     * @param string $categoryId Reference to category
-     * @return \jtl\Connector\Model\CategoryI18n
-     */
-    public function setCategoryId($categoryId)
-    {
-        $this->_categoryId = (string)$categoryId;
-        return $this;
-    }
-    
-    /**
-     * @return string Reference to category
-     */
-    public function getCategoryId()
-    {
-        return $this->_categoryId;
-    }
-    /**
-     * @param string $name Localized category name
-     * @return \jtl\Connector\Model\CategoryI18n
-     */
-    public function setName($name)
-    {
-        $this->_name = (string)$name;
-        return $this;
-    }
-    
-    /**
-     * @return string Localized category name
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-    /**
-     * @param string $urlPath Optional localized category URL
-     * @return \jtl\Connector\Model\CategoryI18n
-     */
-    public function setUrlPath($urlPath)
-    {
-        $this->_urlPath = (string)$urlPath;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional localized category URL
-     */
-    public function getUrlPath()
-    {
-        return $this->_urlPath;
-    }
-    /**
-     * @param string $description Optional localized Long Description
-     * @return \jtl\Connector\Model\CategoryI18n
-     */
-    public function setDescription($description)
-    {
-        $this->_description = (string)$description;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional localized Long Description
-     */
-    public function getDescription()
-    {
-        return $this->_description;
-    }
-    /**
-     * @param string $metaDescription Optional localized  short description used for meta tag description
-     * @return \jtl\Connector\Model\CategoryI18n
-     */
-    public function setMetaDescription($metaDescription)
-    {
-        $this->_metaDescription = (string)$metaDescription;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional localized  short description used for meta tag description
-     */
-    public function getMetaDescription()
-    {
-        return $this->_metaDescription;
-    }
-    /**
-     * @param string $metaKeywords Optional localized meta tag keywords value
-     * @return \jtl\Connector\Model\CategoryI18n
-     */
-    public function setMetaKeywords($metaKeywords)
-    {
-        $this->_metaKeywords = (string)$metaKeywords;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional localized meta tag keywords value
-     */
-    public function getMetaKeywords()
-    {
-        return $this->_metaKeywords;
-    }
-    /**
-     * @param string $titleTag Optional localized title tag value
-     * @return \jtl\Connector\Model\CategoryI18n
-     */
-    public function setTitleTag($titleTag)
-    {
-        $this->_titleTag = (string)$titleTag;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional localized title tag value
-     */
-    public function getTitleTag()
-    {
-        return $this->_titleTag;
     }
 }
+?>

@@ -17,12 +17,12 @@ use \jtl\Core\Model\DataModel;
 class ProductVariationValueInvisibility extends DataModel
 {
     /**
-     * @var string Reference to customerGroup
+     * @var string - Reference to customerGroup
      */
     protected $_customerGroupId = '';
     
     /**
-     * @var string Reference to productVariationValue to hide from customerGroup
+     * @var string - Reference to productVariationValue to hide from customerGroup
      */
     protected $_productVariationValueId = '';
     
@@ -52,37 +52,12 @@ class ProductVariationValueInvisibility extends DataModel
     }
     
     /**
-     * @param string $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\ProductVariationValueInvisibility
-     */
-    public function setCustomerGroupId($customerGroupId)
+     * (non-PHPdoc)
+     * @see \jtl\Core\Model\DataModel::map()
+     */ 
+    public function map($toWawi = false, \stdClass $obj = null)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
-        return $this;
-    }
     
-    /**
-     * @return string Reference to customerGroup
-     */
-    public function getCustomerGroupId()
-    {
-        return $this->_customerGroupId;
-    }
-    /**
-     * @param string $productVariationValueId Reference to productVariationValue to hide from customerGroup
-     * @return \jtl\Connector\Model\ProductVariationValueInvisibility
-     */
-    public function setProductVariationValueId($productVariationValueId)
-    {
-        $this->_productVariationValueId = (string)$productVariationValueId;
-        return $this;
-    }
-    
-    /**
-     * @return string Reference to productVariationValue to hide from customerGroup
-     */
-    public function getProductVariationValueId()
-    {
-        return $this->_productVariationValueId;
     }
 }
+?>
