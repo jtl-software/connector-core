@@ -74,7 +74,7 @@ class CustomerOrderItem extends DataModel
     /**
      * @var string Optional reference to configItemId (if item is part of a configurable item)
      */
-    protected $_configItemId = '0';             
+    protected $_configItemId = '0';
     
     /**
      * CustomerOrderItem Setter
