@@ -4,15 +4,15 @@
  * @package jtl\Connector\Model
  */
 
-namespace jtl\Connector\Response;
+namespace jtl\Connector\Result;
 
 /**
- * Response Model
- * Push reponse object
+ * Result Model
+ * Push result object
  *
  * @access public
  */
-class Response extends \jtl\Core\Model\Model
+class Tranction extends \jtl\Core\Result\Transaction
 {
     const ACTION_CREATE = 'create';
     const ACTION_DELETE = 'delete';
@@ -48,7 +48,7 @@ class Response extends \jtl\Core\Model\Model
 
     /**
      * @param string $id Unique connector id
-     * @return \jtl\Connector\Response\Response
+     * @return \jtl\Connector\Result\Transaction
      */
     public function setId($id)
     {
@@ -66,7 +66,7 @@ class Response extends \jtl\Core\Model\Model
 
     /**
      * @param string $hostId Unique host id
-     * @return \jtl\Connector\Response\Response
+     * @return \jtl\Connector\Result\Transaction
      */
     public function setHostId($hostId)
     {
@@ -84,7 +84,7 @@ class Response extends \jtl\Core\Model\Model
 
     /**
      * @param string $action Response action (create/update/delete)
-     * @return \jtl\Connector\Response\Response
+     * @return \jtl\Connector\Result\Transaction
      */
     public function setAction($action = self::ACTION_UPDATE)
     {
@@ -102,7 +102,7 @@ class Response extends \jtl\Core\Model\Model
 
     /**
      * @param string $error Error (null|error string)
-     * @return \jtl\Connector\Response\Response
+     * @return \jtl\Connector\Result\Transaction
      */
     public function setError($error)
     {
