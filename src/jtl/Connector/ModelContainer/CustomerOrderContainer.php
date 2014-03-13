@@ -40,12 +40,12 @@ class CustomerOrderContainer extends CoreContainer
     /**
      * @var \jtl\Connector\Model\CustomerOrderShippingAddress[]
      */
-    protected $_customerOrderShippingAddresss;
+    protected $_customerOrderShippingAddresses;
     
     /**
      * @var \jtl\Connector\Model\CustomerOrderBillingAddress[]
      */
-    protected $_customerOrderBillingAddresss;
+    protected $_customerOrderBillingAddresses;
         
     /**
      * @return array \jtl\Connector\Model\CustomerOrder
@@ -90,17 +90,17 @@ class CustomerOrderContainer extends CoreContainer
     /**
      * @return array \jtl\Connector\Model\CustomerOrderShippingAddress
      */
-    public function getCustomerOrderShippingAddresss()
+    public function getCustomerOrderShippingAddresses()
     {
-        return $this->_customerOrderShippingAddresss;
+        return $this->_customerOrderShippingAddresses;
     }
         
     /**
      * @return array \jtl\Connector\Model\CustomerOrderBillingAddress
      */
-    public function getCustomerOrderBillingAddresss()
+    public function getCustomerOrderBillingAddresses()
     {
-        return $this->_customerOrderBillingAddresss;
+        return $this->_customerOrderBillingAddresses;
     }
         
     public $items = array(
@@ -109,8 +109,8 @@ class CustomerOrderContainer extends CoreContainer
         "customer_order_item" => array("CustomerOrderItem", "CustomerOrderItems"),
         "customer_order_item_variation" => array("CustomerOrderItemVariation", "CustomerOrderItemVariations"),
         "customer_order_payment_info" => array("CustomerOrderPaymentInfo", "CustomerOrderPaymentInfos"),
-        "customer_order_shipping_address" => array("CustomerOrderShippingAddress", "CustomerOrderShippingAddresss"),
-        "customer_order_billing_address" => array("CustomerOrderBillingAddress", "CustomerOrderBillingAddresss")
+        "customer_order_shipping_address" => array("CustomerOrderShippingAddress", "CustomerOrderShippingAddresses"),
+        "customer_order_billing_address" => array("CustomerOrderBillingAddress", "CustomerOrderBillingAddresses")
     );
 }
 ?>
