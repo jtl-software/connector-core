@@ -12,7 +12,7 @@ namespace jtl\Connector\Response;
  *
  * @access public
  */
-class Response
+class Response extends \jtl\Core\Model\Model
 {
     const ACTION_CREATE = 'create';
     const ACTION_DELETE = 'delete';
