@@ -40,12 +40,12 @@ class CustomerOrderContainer
     /**
      * @var \jtl\Connector\Response\Response[]
      */
-    protected $customerOrderShippingAddresss;
+    protected $customerOrderShippingAddresses;
     
     /**
      * @var \jtl\Connector\Response\Response[]
      */
-    protected $customerOrderBillingAddresss;
+    protected $customerOrderBillingAddresses;
         
     /**
      * @return array \jtl\Connector\Response\Response
@@ -150,9 +150,9 @@ class CustomerOrderContainer
     /**
      * @return array \jtl\Connector\Response\Response
      */
-    public function getCustomerOrderShippingAddresss()
+    public function getCustomerOrderShippingAddresses()
     {
-        return $this->customerOrderShippingAddresss;
+        return $this->customerOrderShippingAddresses;
     }
     
     /**
@@ -160,19 +160,19 @@ class CustomerOrderContainer
      */
     public function addCustomerOrderShippingAddress(Response $response)
     {
-        if ($this->customerOrderShippingAddresss === null) {
-            $this->customerOrderShippingAddresss = array();
+        if ($this->customerOrderShippingAddresses === null) {
+            $this->customerOrderShippingAddresses = array();
         }
         
-        $this->customerOrderShippingAddresss[] = $response;
+        $this->customerOrderShippingAddresses[] = $response;
     }
         
     /**
      * @return array \jtl\Connector\Response\Response
      */
-    public function getCustomerOrderBillingAddresss()
+    public function getCustomerOrderBillingAddresses()
     {
-        return $this->customerOrderBillingAddresss;
+        return $this->customerOrderBillingAddresses;
     }
     
     /**
@@ -180,11 +180,11 @@ class CustomerOrderContainer
      */
     public function addCustomerOrderBillingAddress(Response $response)
     {
-        if ($this->customerOrderBillingAddresss === null) {
-            $this->customerOrderBillingAddresss = array();
+        if ($this->customerOrderBillingAddresses === null) {
+            $this->customerOrderBillingAddresses = array();
         }
         
-        $this->customerOrderBillingAddresss[] = $response;
+        $this->customerOrderBillingAddresses[] = $response;
     }
     
 }
