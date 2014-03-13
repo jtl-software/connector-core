@@ -8,11 +8,11 @@ namespace jtl\Connector\Result;
 
 /**
  * Result Model
- * Push result object
+ * Transaction result object
  *
  * @access public
  */
-class Tranction extends \jtl\Core\Result\Transaction
+class Transaction extends \jtl\Core\Result\Transaction
 {
     const ACTION_CREATE = 'create';
     const ACTION_DELETE = 'delete';
