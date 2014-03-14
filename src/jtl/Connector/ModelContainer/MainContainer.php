@@ -6,8 +6,6 @@
 
 namespace jtl\Connector\ModelContainer;
 
-use \jtl\Core\Utilities\RpcMethod;
-
 /**
  * Main Container Class
  */
@@ -112,10 +110,6 @@ final class MainContainer
      */
     public static function allocate($rpcmethod, $type = self::TYPE_CONTROLLER)
     {
-        if (!RpcMethod::isMethod($rpcmethod)) {
-            throw new \InvalidArgumentException("Parameter rpcmethod ({$rpcmethod}) is not a valid method");
-        }
-
         if ($type != self::TYPE_CONTROLLER && $type != self::TYPE_RCPMETHOD) {
             throw new \InvalidArgumentException("Parameter type ({$type}) is not a valid type");
         }
