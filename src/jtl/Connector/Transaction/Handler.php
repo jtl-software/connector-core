@@ -11,7 +11,7 @@ use \jtl\Core\Rpc\RequestPacket;
 use \jtl\Core\Exception\TransactionException;
 use \jtl\Core\Rpc\Error;
 use \jtl\Core\Utilities\RpcMethod;
-use \jtl\Core\ModelContainer\MainContainer;
+use \jtl\Connector\ModelContainer\MainContainer;
 use \jtl\Connector\Result\Action;
 use \jtl\Connector\ModelContainer;
 use \jtl\Connector\Session\SessionHelper;
@@ -146,23 +146,6 @@ final class Handler
         }
         
         return $session->trans[$type][$trid];
-    }
-    
-    /**
-     * Checks if controller is a maincontroller
-     * 
-     * @param string $controller
-     * @throws \jtl\Core\Exception\TransactionException
-     * @return boolean
-     */
-    public static function isMain($controller)
-    {
-        $type = MainContainer::allocate($controller);
-        if ($type === null) {
-            throw new TransactionException("Could not find any Container for Controller ({$controller})");
-        }
-        
-        return (strtolower($controller) == strtolower($type));
     }
 }
 ?>

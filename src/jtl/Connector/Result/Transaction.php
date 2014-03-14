@@ -12,7 +12,7 @@ namespace jtl\Connector\Result;
  *
  * @access public
  */
-class Transaction extends \jtl\Core\Result\Transaction
+final class Transaction extends \jtl\Core\Result\Transaction
 {
     const ACTION_CREATE = 'create';
     const ACTION_DELETE = 'delete';
