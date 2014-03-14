@@ -20,6 +20,7 @@ final class MainContainer
      * @var multiple:string
      */
     public static $mappings = array(
+        'global_data' => array('global_data', 'GlobalData'),
         'company' => array('global_data', 'GlobalData'),
         'language' => array('global_data', 'GlobalData'),
         'currency' => array('global_data', 'GlobalData'),
@@ -138,7 +139,7 @@ final class MainContainer
             return (strtolower($mainMethod) === strtolower($rpcmethod));
         }
 
-        throw new \InvalidArgumentException("Parameter rpcmethod {$rpcmethod} could not be found");
+        throw new \InvalidArgumentException("Parameter rpcmethod ({$rpcmethod}) could not be found");
     }
 }
 ?>
