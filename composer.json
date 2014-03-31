@@ -1,8 +1,8 @@
 {
   "name": "jtl/connector",
   "type": "library",
-  "description": "jtlConnector PHP 5.3 Library and Classes",
-  "keywords": ["jtl", "Connector"],
+  "description": "JTL-Connector protocol library and classes",
+  "keywords": ["jtl", "connector", "protocol", "model", "data"],
   "homepage": "http://www.jtl-software.de",
   "license": "GPL",
   "authors": [
