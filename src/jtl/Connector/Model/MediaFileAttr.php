@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Monolingual mediafile attribute.
  *
  * @access public
+ * @subpackage Product
  */
 class MediaFileAttr extends DataModel
 {

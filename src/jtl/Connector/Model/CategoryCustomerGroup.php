@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Link customergroup with category. Set optional discount on category for customergroup. 
  *
  * @access public
+ * @subpackage Category
  */
 class CategoryCustomerGroup extends DataModel
 {

@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Localized name for specific.
  *
  * @access public
+ * @subpackage Specific
  */
 class SpecificI18n extends DataModel
 {

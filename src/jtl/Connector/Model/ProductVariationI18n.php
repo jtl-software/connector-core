@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Locale specific product variation properties. 
  *
  * @access public
+ * @subpackage Product
  */
 class ProductVariationI18n extends DataModel
 {

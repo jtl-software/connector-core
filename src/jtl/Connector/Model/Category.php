@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * A category with sort number, link to parent category and level
  *
  * @access public
+ * @subpackage Category
  */
 class Category extends DataModel
 {

@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Shipping classes are usually defined in JTL-Wawi ERP.
  *
  * @access public
+ * @subpackage GlobalData
  */
 class ShippingClass extends DataModel
 {

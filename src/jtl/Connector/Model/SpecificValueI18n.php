@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Localized specific value text.
  *
  * @access public
+ * @subpackage Specific
  */
 class SpecificValueI18n extends DataModel
 {

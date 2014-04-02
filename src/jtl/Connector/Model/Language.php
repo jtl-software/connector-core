@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Global language model
  *
  * @access public
+ * @subpackage GlobalData
  */
 class Language extends DataModel
 {

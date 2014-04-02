@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Manufacturer / brand properties. 
  *
  * @access public
+ * @subpackage Manufacturer
  */
 class Manufacturer extends DataModel
 {

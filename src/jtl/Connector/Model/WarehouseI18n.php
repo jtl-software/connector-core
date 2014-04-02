@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Localized warehouse name.
  *
  * @access public
+ * @subpackage GlobalData
  */
 class WarehouseI18n extends DataModel
 {

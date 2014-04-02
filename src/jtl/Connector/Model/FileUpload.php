@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * File upload properties. 
  *
  * @access public
+ * @subpackage Product
  */
 class FileUpload extends DataModel
 {

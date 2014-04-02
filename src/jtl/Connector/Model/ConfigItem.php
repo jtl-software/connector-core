@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * A config Item that is displayed in a config Group. Config item can reference to a specific productId to inherit price, name and description. 
  *
  * @access public
+ * @subpackage GlobalData
  */
 class ConfigItem extends DataModel
 {

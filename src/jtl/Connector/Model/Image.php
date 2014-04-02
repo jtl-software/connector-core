@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Image model.
  *
  * @access public
+ * @subpackage Image
  */
 class Image extends DataModel
 {

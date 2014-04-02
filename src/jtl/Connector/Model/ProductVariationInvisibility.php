@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Specify productVariation to hide from customerGroup.
  *
  * @access public
+ * @subpackage Product
  */
 class ProductVariationInvisibility extends DataModel
 {

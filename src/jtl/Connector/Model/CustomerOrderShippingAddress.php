@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Shipping Address properties of a customer (order)
  *
  * @access public
+ * @subpackage CustomerOrder
  */
 class CustomerOrderShippingAddress extends DataModel
 {

@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Shipment Model with reference to a deliveryNote
  *
  * @access public
+ * @subpackage DeliveryNote
  */
 class Shipment extends DataModel
 {

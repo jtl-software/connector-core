@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * warehouse model (set in JTL-Wawi ERP).
  *
  * @access public
+ * @subpackage GlobalData
  */
 class Warehouse extends DataModel
 {

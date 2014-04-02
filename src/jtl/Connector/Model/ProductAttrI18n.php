@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Localized key-value-pair for productAttr.
  *
  * @access public
+ * @subpackage Product
  */
 class ProductAttrI18n extends DataModel
 {

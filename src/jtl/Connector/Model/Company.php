@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Provides company address and bank details
  *
  * @access public
+ * @subpackage GlobalData
  */
 class Company extends DataModel
 {

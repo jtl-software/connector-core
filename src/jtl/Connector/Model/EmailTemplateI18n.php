@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * 
  *
  * @access public
+ * @subpackage 
  */
 class EmailTemplateI18n extends DataModel
 {

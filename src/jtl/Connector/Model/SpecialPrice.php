@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * special price properties to define a net price for a customerGroup.
  *
  * @access public
+ * @subpackage 
  */
 class SpecialPrice extends DataModel
 {

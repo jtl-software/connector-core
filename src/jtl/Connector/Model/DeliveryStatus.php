@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Localized delivery status text. Delivery status is set in the Wawi-ERP. 
  *
  * @access public
+ * @subpackage GlobalData
  */
 class DeliveryStatus extends DataModel
 {

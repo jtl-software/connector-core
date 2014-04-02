@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Product properties.
  *
  * @access public
+ * @subpackage Product
  */
 class Product extends DataModel
 {

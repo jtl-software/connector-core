@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Localized customer group name.
  *
  * @access public
+ * @subpackage GlobalData
  */
 class CustomerGroupI18n extends DataModel
 {

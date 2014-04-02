@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Media file model.
  *
  * @access public
+ * @subpackage Product
  */
 class MediaFile extends DataModel
 {

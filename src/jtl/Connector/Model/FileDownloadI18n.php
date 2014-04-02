@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Localized fileDownload name and  description.
  *
  * @access public
+ * @subpackage GlobalData
  */
 class FileDownloadI18n extends DataModel
 {

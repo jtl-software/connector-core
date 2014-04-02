@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Monolingual product function attribute.
  *
  * @access public
+ * @subpackage Product
  */
 class ProductFunctionAttr extends DataModel
 {

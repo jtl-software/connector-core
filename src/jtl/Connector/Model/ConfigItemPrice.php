@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Customer group price for config item.
  *
  * @access public
+ * @subpackage GlobalData
  */
 class ConfigItemPrice extends DataModel
 {

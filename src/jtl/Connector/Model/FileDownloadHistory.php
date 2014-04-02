@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * ToDo: Remove (deprecated)
  *
  * @access public
+ * @subpackage 
  */
 class FileDownloadHistory extends DataModel
 {

@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Specifies which CustomerGroup is not permitted to view category.
  *
  * @access public
+ * @subpackage Category
  */
 class CategoryInvisibility extends DataModel
 {

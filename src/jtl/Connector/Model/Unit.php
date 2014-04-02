@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Specifies product units like "piece", "bottle", "package".
  *
  * @access public
+ * @subpackage GlobalData
  */
 class Unit extends DataModel
 {

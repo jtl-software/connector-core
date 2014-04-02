@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Billing address of a customer (order)
  *
  * @access public
+ * @subpackage CustomerOrder
  */
 class CustomerOrderBillingAddress extends DataModel
 {

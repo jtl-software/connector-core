@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Config group holds several configItems and settings
  *
  * @access public
+ * @subpackage GlobalData
  */
 class ConfigGroup extends DataModel
 {

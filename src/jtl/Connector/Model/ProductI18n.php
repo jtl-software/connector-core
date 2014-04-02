@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Locale specific texts for product
  *
  * @access public
+ * @subpackage Product
  */
 class ProductI18n extends DataModel
 {

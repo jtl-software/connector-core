@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Locale specific text and meta-information for manufacturer.
  *
  * @access public
+ * @subpackage Manufacturer
  */
 class ManufacturerI18n extends DataModel
 {

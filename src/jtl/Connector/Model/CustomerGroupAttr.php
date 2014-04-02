@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Monolingual customer group attribute.
  *
  * @access public
+ * @subpackage GlobalData
  */
 class CustomerGroupAttr extends DataModel
 {

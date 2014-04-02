@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Specific value properties to define a new specificValue with a sort number. 
  *
  * @access public
+ * @subpackage Specific
  */
 class SpecificValue extends DataModel
 {

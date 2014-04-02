@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Product-Category Allocation.
  *
  * @access public
+ * @subpackage Product
  */
 class Product2Category extends DataModel
 {

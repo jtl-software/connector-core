@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Tax zone model (set in JTL-Wawi ERP).
  *
  * @access public
+ * @subpackage GlobalData
  */
 class TaxZone extends DataModel
 {

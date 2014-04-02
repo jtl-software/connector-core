@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Tax class model (set in JTL-Wawi ERP)
  *
  * @access public
+ * @subpackage GlobalData
  */
 class TaxClass extends DataModel
 {

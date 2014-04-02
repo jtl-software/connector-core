@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Special product price properties to specify date and stock limits.
  *
  * @access public
+ * @subpackage Product
  */
 class ProductSpecialPrice extends DataModel
 {

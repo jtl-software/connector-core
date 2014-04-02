@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Customer address data and preference properties.
  *
  * @access public
+ * @subpackage Customer
  */
 class Customer extends DataModel
 {

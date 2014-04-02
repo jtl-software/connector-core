@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Product to productVariationValue Allocation.
  *
  * @access public
+ * @subpackage Product
  */
 class ProductVarCombination extends DataModel
 {

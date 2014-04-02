@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Order item in customer order.
  *
  * @access public
+ * @subpackage CustomerOrder
  */
 class CustomerOrderItem extends DataModel
 {

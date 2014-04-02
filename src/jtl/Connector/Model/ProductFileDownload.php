@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Product to FileDownload allocation.
  *
  * @access public
+ * @subpackage Product
  */
 class ProductFileDownload extends DataModel
 {

@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * File download properties. 
  *
  * @access public
+ * @subpackage GlobalData
  */
 class FileDownload extends DataModel
 {

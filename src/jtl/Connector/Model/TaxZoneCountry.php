@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * TaxZone to Country Allocation (set in JTL-Wawi ERP).
  *
  * @access public
+ * @subpackage GlobalData
  */
 class TaxZoneCountry extends DataModel
 {
