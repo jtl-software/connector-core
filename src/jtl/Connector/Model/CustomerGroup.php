@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Customer group model.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class CustomerGroup extends DataModel

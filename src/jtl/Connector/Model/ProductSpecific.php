@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Product to specificValue Assignment. Product specifics are used to assign characteristic product attributes like color or  size... When different products have common specifics, products are similar. 
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductSpecific extends DataModel

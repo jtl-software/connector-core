@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * ToDo: Remove (deprecated)
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductVariationValueDependency extends DataModel

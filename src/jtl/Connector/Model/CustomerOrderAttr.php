@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Monolingual attribute for a customerorder.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage CustomerOrder
  */
 class CustomerOrderAttr extends DataModel

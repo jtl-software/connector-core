@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Define set articles / parts lists. 
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class SetArticle extends DataModel

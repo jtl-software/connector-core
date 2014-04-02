@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Product to warehouse info association.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductWarehouseInfo extends DataModel

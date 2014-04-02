@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Localized category attribute
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Category
  */
 class CategoryAttr extends DataModel

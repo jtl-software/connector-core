@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * ProductVariation Model. Each product defines its own variations, that means  variations are not global  in contrast to specifics. 
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductVariation extends DataModel

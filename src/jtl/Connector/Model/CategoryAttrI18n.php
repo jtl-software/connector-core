@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Localized key-value-pair for categoryAttr. All properties must be specified. 
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Category
  */
 class CategoryAttrI18n extends DataModel
