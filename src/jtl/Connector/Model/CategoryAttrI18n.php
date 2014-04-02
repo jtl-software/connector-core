@@ -2,6 +2,7 @@
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Category
  */
 
 namespace jtl\Connector\Model;
@@ -9,7 +10,6 @@ namespace jtl\Connector\Model;
 use \jtl\Core\Model\DataModel;
 
 /**
- * CategoryAttrI18n Model
  * Localized key-value-pair for categoryAttr. All properties must be specified. 
  *
  * @access public

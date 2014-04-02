@@ -2,6 +2,7 @@
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -9,7 +10,6 @@ namespace jtl\Connector\Model;
 use \jtl\Core\Model\DataModel;
 
 /**
- * ProductSpecific Model
  * Product to specificValue Assignment. Product specifics are used to assign characteristic product attributes like color or  size... When different products have common specifics, products are similar. 
  *
  * @access public

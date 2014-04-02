@@ -2,6 +2,7 @@
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
  */
 
 namespace jtl\Connector\Model;
@@ -9,7 +10,6 @@ namespace jtl\Connector\Model;
 use \jtl\Core\Model\DataModel;
 
 /**
- * ConfigItemI18n Model
  * Localized config item name and description.
  *
  * @access public

@@ -2,6 +2,7 @@
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage CustomerOrder
  */
 
 namespace jtl\Connector\Model;
@@ -9,7 +10,6 @@ namespace jtl\Connector\Model;
 use \jtl\Core\Model\DataModel;
 
 /**
- * CustomerOrderItem Model
  * Order item in customer order.
  *
  * @access public
@@ -74,7 +74,7 @@ class CustomerOrderItem extends DataModel
     /**
      * @var string Optional reference to configItemId (if item is part of a configurable item)
      */
-    protected $_configItemId = '0';
+    protected $_configItemId = '0';             
     
     /**
      * CustomerOrderItem Setter
