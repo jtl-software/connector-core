@@ -128,7 +128,7 @@
             ],
             "optional": true
         },
-        "logistic": {
+        "carrierName": {
             "type": [
                 "string",
                 "null"

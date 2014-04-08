@@ -14,13 +14,13 @@
             ],
             "optional": false
         },
-        "logistic": {
+        "carrierName": {
             "type": [
                 "string"
             ],
             "optional": false
         },
-        "logisticURL": {
+        "trackingURL": {
             "type": [
                 "string",
                 "null"
@@ -51,7 +51,7 @@
     "required": [
         "id",
         "deliveryNoteId",
-        "logistic",
+        "carrierName",
         "created"
     ]
 }
