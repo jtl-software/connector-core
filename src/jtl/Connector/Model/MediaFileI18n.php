@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Locale specific mediafile name + description.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class MediaFileI18n extends DataModel

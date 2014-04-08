@@ -11,6 +11,7 @@ use \jtl\Core\Model\DataModel;
 /**
  * Statistic Model
  * @access public
+ * @package jtl\Connector\Model
  */
 class Statistic extends DataModel
 {

@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Product variation value model. Each product defines its own variations and variation values. 
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductVariationValue extends DataModel

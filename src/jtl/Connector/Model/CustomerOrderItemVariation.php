@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * customer order item variation
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage CustomerOrder
  */
 class CustomerOrderItemVariation extends DataModel

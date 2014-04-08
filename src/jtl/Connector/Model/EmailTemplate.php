@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Shop3 only
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage 
  */
 class EmailTemplate extends DataModel

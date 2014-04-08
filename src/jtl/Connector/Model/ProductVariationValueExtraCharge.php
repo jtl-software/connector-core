@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Extra charge for productVariationValue per customerGroup.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductVariationValueExtraCharge extends DataModel

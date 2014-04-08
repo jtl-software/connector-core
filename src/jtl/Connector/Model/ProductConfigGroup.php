@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Product-ConfigGroup Assignment.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductConfigGroup extends DataModel

@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Link 2 products that are in a common crossSellingGroup.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class CrossSelling extends DataModel

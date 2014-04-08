@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel;
  * Monolingual category attribute. All properties must be set. 
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Category
  */
 class CategoryFunctionAttr extends DataModel
