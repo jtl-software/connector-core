@@ -158,9 +158,9 @@ class CustomerOrder extends DataModel
     protected $_note = '';             
     
     /**
-     * @var string Optional Logistic name
+     * @var string Optional Carrier name
      */
-    protected $_logistic = '';             
+    protected $_carrierName = '';             
     
     /**
      * @var string Optional Tracking URL
@@ -224,7 +224,7 @@ class CustomerOrder extends DataModel
                 case "_ratingNotificationDate":
                 case "_tracking":
                 case "_note":
-                case "_logistic":
+                case "_carrierName":
                 case "_trackingURL":
                 case "_ip":
                 case "_status":
@@ -573,21 +573,21 @@ class CustomerOrder extends DataModel
         return $this->_note;
     }
     /**
-     * @param string $logistic Optional Logistic name
+     * @param string $carrierName Optional Carrier name
      * @return \jtl\Connector\Model\CustomerOrder
      */
-    public function setLogistic($logistic)
+    public function setCarrierName($carrierName)
     {
-        $this->_logistic = (string)$logistic;
+        $this->_carrierName = (string)$carrierName;
         return $this;
     }
     
     /**
-     * @return string Optional Logistic name
+     * @return string Optional Carrier name
      */
-    public function getLogistic()
+    public function getCarrierName()
     {
-        return $this->_logistic;
+        return $this->_carrierName;
     }
     /**
      * @param string $trackingURL Optional Tracking URL
