@@ -46,7 +46,7 @@ class Warehouse extends DataModel
             switch ($name) {
                 case "_id":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
             }

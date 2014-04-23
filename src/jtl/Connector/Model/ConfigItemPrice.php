@@ -63,7 +63,7 @@ class ConfigItemPrice extends DataModel
                 case "_configItemId":
                 case "_customerGroupId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_price":

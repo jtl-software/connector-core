@@ -73,7 +73,7 @@ class ProductVariationValue extends DataModel
                 case "_id":
                 case "_productVariationId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_extraWeight":

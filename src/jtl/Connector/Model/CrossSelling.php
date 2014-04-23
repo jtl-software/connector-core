@@ -63,7 +63,7 @@ class CrossSelling extends DataModel
                 case "_id":
                 case "_crossSellingGroupId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_crossSellingProductId":

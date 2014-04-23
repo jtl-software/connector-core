@@ -53,7 +53,7 @@ class ProductInvisibility extends DataModel
                 case "_customerGroupId":
                 case "_productId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
             }

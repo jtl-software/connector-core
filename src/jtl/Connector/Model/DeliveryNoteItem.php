@@ -87,7 +87,7 @@ class DeliveryNoteItem extends DataModel
                 case "_warehouseId":
                 case "_deliveryNoteId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_quantity":

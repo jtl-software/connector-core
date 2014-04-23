@@ -58,7 +58,7 @@ class ProductAttr extends DataModel
                 case "_id":
                 case "_productId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_sort":

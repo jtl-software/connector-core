@@ -61,7 +61,7 @@ class MediaFileI18n extends DataModel
             switch ($name) {
                 case "_mediaFileId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_localeName":

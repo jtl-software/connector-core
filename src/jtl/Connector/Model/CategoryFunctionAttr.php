@@ -63,7 +63,7 @@ class CategoryFunctionAttr extends DataModel
                 case "_id":
                 case "_categoryId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_name":

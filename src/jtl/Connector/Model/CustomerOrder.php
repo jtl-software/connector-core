@@ -224,7 +224,7 @@ class CustomerOrder extends DataModel
                 case "_shippingMethodId":
                 case "_paymentModuleId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_customerId":

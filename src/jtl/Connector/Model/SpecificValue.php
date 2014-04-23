@@ -58,7 +58,7 @@ class SpecificValue extends DataModel
                 case "_id":
                 case "_specificId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_sort":

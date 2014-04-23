@@ -63,7 +63,7 @@ class CustomerOrderAttr extends DataModel
                 case "_id":
                 case "_customerOrderId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_key":

@@ -62,7 +62,7 @@ class SpecificI18n extends DataModel
             
                 case "_specificId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
             }

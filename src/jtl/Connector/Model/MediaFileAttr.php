@@ -71,7 +71,7 @@ class MediaFileAttr extends DataModel
             
                 case "_mediaFileId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_localeName":

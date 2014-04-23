@@ -51,7 +51,7 @@ class WarehouseI18n extends DataModel
             switch ($name) {
                 case "_warehouseId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_name":

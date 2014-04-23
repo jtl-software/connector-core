@@ -125,7 +125,7 @@ class ConfigItem extends DataModel
                 case "_configGroupId":
                 case "_productId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_type":

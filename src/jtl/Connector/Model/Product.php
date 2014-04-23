@@ -290,7 +290,7 @@ class Product extends DataModel
                 case "_setArticleId":
                 case "_productTypeId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_deliveryStatusId":

@@ -62,7 +62,7 @@ class ProductVariationValueI18n extends DataModel
             
                 case "_productVariationValueId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
             }

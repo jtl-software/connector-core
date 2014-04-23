@@ -63,7 +63,7 @@ class Product2Category extends DataModel
                 case "_categoryId":
                 case "_productId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
             }

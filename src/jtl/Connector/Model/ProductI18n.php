@@ -80,7 +80,7 @@ class ProductI18n extends DataModel
             
                 case "_productId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
             }

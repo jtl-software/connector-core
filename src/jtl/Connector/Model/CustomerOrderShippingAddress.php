@@ -133,7 +133,7 @@ class CustomerOrderShippingAddress extends DataModel
                 case "_id":
                 case "_customerId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_salutation":

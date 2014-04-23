@@ -61,7 +61,7 @@ class ConfigGroupI18n extends DataModel
             switch ($name) {
                 case "_configGroupId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_localeName":

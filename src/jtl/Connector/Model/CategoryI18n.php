@@ -92,7 +92,7 @@ class CategoryI18n extends DataModel
             
                 case "_categoryId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
             }

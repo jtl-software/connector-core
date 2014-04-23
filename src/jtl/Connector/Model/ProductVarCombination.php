@@ -60,7 +60,7 @@ class ProductVarCombination extends DataModel
                 case "_productVariationId":
                 case "_productVariationValueId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
             }

@@ -58,7 +58,7 @@ class CategoryCustomerGroup extends DataModel
                 case "_customerGroupId":
                 case "_categoryId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_discount":

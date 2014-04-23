@@ -61,7 +61,7 @@ class FileDownloadI18n extends DataModel
             switch ($name) {
                 case "_fileDownloadId":
                 
-                    $this->$name = Identity::convert();
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_localeName":
