@@ -25,7 +25,7 @@ class Category extends DataModel
     /**
      * @var Identity Optional reference to parent category id
      */
-    protected $_parentCategoryId = 0;
+    protected $_parentCategoryId = null;
     
     /**
      * @var int Optional sort order number

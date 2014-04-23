@@ -20,12 +20,12 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @var Identity Unique customerOrderPaymentInfo id
      */
-    protected $_id = 0;
+    protected $_id = null;
     
     /**
      * @var Identity Reference to customerOrder
      */
-    protected $_customerOrderId = 0;
+    protected $_customerOrderId = null;
     
     /**
      * @var string Bank name
