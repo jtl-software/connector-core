@@ -13,25 +13,24 @@ use \jtl\Core\Model\DataModel;
  * TaxZone to Country Allocation (set in JTL-Wawi ERP).
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class TaxZoneCountry extends DataModel
 {
     /**
-     * @var string Unique taxZoneCountry id
+     * @var Identity Unique taxZoneCountry id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to taxZone
+     * @var Identity Reference to taxZone
      */
-    protected $_taxZoneId = '';             
+    protected $_taxZoneId = null;
     
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
      */
-    protected $_countryIso = '';             
+    protected $_countryIso = '';
     
     /**
      * TaxZoneCountry Setter
@@ -50,6 +49,10 @@ class TaxZoneCountry extends DataModel
             switch ($name) {
                 case "_id":
                 case "_taxZoneId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_countryIso":
                 
                     $this->$name = (string)$value;
@@ -60,34 +63,34 @@ class TaxZoneCountry extends DataModel
     }
     
     /**
-     * @param string $id Unique taxZoneCountry id
+     * @param Identity $id Unique taxZoneCountry id
      * @return \jtl\Connector\Model\TaxZoneCountry
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique taxZoneCountry id
+     * @return Identity Unique taxZoneCountry id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $taxZoneId Reference to taxZone
+     * @param Identity $taxZoneId Reference to taxZone
      * @return \jtl\Connector\Model\TaxZoneCountry
      */
-    public function setTaxZoneId($taxZoneId)
+    public function setTaxZoneId(Identity $taxZoneId)
     {
-        $this->_taxZoneId = (string)$taxZoneId;
+        $this->_taxZoneId = $taxZoneId;
         return $this;
     }
     
     /**
-     * @return string Reference to taxZone
+     * @return Identity Reference to taxZone
      */
     public function getTaxZoneId()
     {

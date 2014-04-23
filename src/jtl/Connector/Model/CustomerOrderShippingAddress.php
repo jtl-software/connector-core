@@ -13,100 +13,99 @@ use \jtl\Core\Model\DataModel;
  * Shipping Address properties of a customer (order)
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage CustomerOrder
  */
 class CustomerOrderShippingAddress extends DataModel
 {
     /**
-     * @var string Unique customerOrderShippingAddress id
+     * @var Identity Unique customerOrderShippingAddress id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to customer
+     * @var Identity Reference to customer
      */
-    protected $_customerId = '';             
+    protected $_customerId = null;
     
     /**
      * @var string Salutation e.g. "Mr."
      */
-    protected $_salutation = '';             
+    protected $_salutation = '';
     
     /**
      * @var string First name
      */
-    protected $_firstName = '';             
+    protected $_firstName = '';
     
     /**
      * @var string Last name
      */
-    protected $_lastName = '';             
+    protected $_lastName = '';
     
     /**
      * @var string Title e.g. ("Prof. Dr.")
      */
-    protected $_title = '';             
+    protected $_title = '';
     
     /**
      * @var string Company name
      */
-    protected $_company = '';             
+    protected $_company = '';
     
     /**
      * @var string Delivery instruction e.g. "c/o John Doe"
      */
-    protected $_deliveryInstruction = '';             
+    protected $_deliveryInstruction = '';
     
     /**
      * @var string Street + streetnumber
      */
-    protected $_street = '';             
+    protected $_street = '';
     
     /**
      * @var string Extra address line e.g. "Apartment 2.5"
      */
-    protected $_extraAddressLine = '';             
+    protected $_extraAddressLine = '';
     
     /**
      * @var string Zip / postal code
      */
-    protected $_zipCode = '';             
+    protected $_zipCode = '';
     
     /**
      * @var string City
      */
-    protected $_city = '';             
+    protected $_city = '';
     
     /**
      * @var string State
      */
-    protected $_state = '';             
+    protected $_state = '';
     
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
      */
-    protected $_countryIso = '';             
+    protected $_countryIso = '';
     
     /**
      * @var string Phone number
      */
-    protected $_phone = '';             
+    protected $_phone = '';
     
     /**
      * @var string Mobile phone number
      */
-    protected $_mobile = '';             
+    protected $_mobile = '';
     
     /**
      * @var string Fax number
      */
-    protected $_fax = '';             
+    protected $_fax = '';
     
     /**
      * @var string E-Mail address
      */
-    protected $_eMail = '';             
+    protected $_eMail = '';
     
     /**
      * CustomerOrderShippingAddress Setter
@@ -125,6 +124,10 @@ class CustomerOrderShippingAddress extends DataModel
             switch ($name) {
                 case "_id":
                 case "_customerId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_salutation":
                 case "_firstName":
                 case "_lastName":
@@ -150,34 +153,34 @@ class CustomerOrderShippingAddress extends DataModel
     }
     
     /**
-     * @param string $id Unique customerOrderShippingAddress id
+     * @param Identity $id Unique customerOrderShippingAddress id
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique customerOrderShippingAddress id
+     * @return Identity Unique customerOrderShippingAddress id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $customerId Reference to customer
+     * @param Identity $customerId Reference to customer
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
      */
-    public function setCustomerId($customerId)
+    public function setCustomerId(Identity $customerId)
     {
-        $this->_customerId = (string)$customerId;
+        $this->_customerId = $customerId;
         return $this;
     }
     
     /**
-     * @return string Reference to customer
+     * @return Identity Reference to customer
      */
     public function getCustomerId()
     {

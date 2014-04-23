@@ -13,20 +13,19 @@ use \jtl\Core\Model\DataModel;
  * ProductType model to classify and group products.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class ProductType extends DataModel
 {
     /**
-     * @var string Unique productType id
+     * @var Identity Unique productType id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
      * @var string Optional (internal) product type name
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * ProductType Setter
@@ -44,6 +43,10 @@ class ProductType extends DataModel
         
             switch ($name) {
                 case "_id":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_name":
                 
                     $this->$name = (string)$value;
@@ -54,17 +57,17 @@ class ProductType extends DataModel
     }
     
     /**
-     * @param string $id Unique productType id
+     * @param Identity $id Unique productType id
      * @return \jtl\Connector\Model\ProductType
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique productType id
+     * @return Identity Unique productType id
      */
     public function getId()
     {

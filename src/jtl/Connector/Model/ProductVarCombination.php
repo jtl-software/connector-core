@@ -13,25 +13,24 @@ use \jtl\Core\Model\DataModel;
  * Product to productVariationValue Allocation.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductVarCombination extends DataModel
 {
     /**
-     * @var string Reference to product
+     * @var Identity Reference to product
      */
-    protected $_productId = '';             
+    protected $_productId = null;
     
     /**
-     * @var string Reference to productVariation
+     * @var Identity Reference to productVariation
      */
-    protected $_productVariationId = '';             
+    protected $_productVariationId = null;
     
     /**
-     * @var string Reference to productVariationValue
+     * @var Identity Reference to productVariationValue
      */
-    protected $_productVariationValueId = '';             
+    protected $_productVariationValueId = null;
     
     /**
      * ProductVarCombination Setter
@@ -52,7 +51,7 @@ class ProductVarCombination extends DataModel
                 case "_productVariationId":
                 case "_productVariationValueId":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
             }
@@ -60,51 +59,51 @@ class ProductVarCombination extends DataModel
     }
     
     /**
-     * @param string $productId Reference to product
+     * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductVarCombination
      */
-    public function setProductId($productId)
+    public function setProductId(Identity $productId)
     {
-        $this->_productId = (string)$productId;
+        $this->_productId = $productId;
         return $this;
     }
     
     /**
-     * @return string Reference to product
+     * @return Identity Reference to product
      */
     public function getProductId()
     {
         return $this->_productId;
     }
     /**
-     * @param string $productVariationId Reference to productVariation
+     * @param Identity $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\ProductVarCombination
      */
-    public function setProductVariationId($productVariationId)
+    public function setProductVariationId(Identity $productVariationId)
     {
-        $this->_productVariationId = (string)$productVariationId;
+        $this->_productVariationId = $productVariationId;
         return $this;
     }
     
     /**
-     * @return string Reference to productVariation
+     * @return Identity Reference to productVariation
      */
     public function getProductVariationId()
     {
         return $this->_productVariationId;
     }
     /**
-     * @param string $productVariationValueId Reference to productVariationValue
+     * @param Identity $productVariationValueId Reference to productVariationValue
      * @return \jtl\Connector\Model\ProductVarCombination
      */
-    public function setProductVariationValueId($productVariationValueId)
+    public function setProductVariationValueId(Identity $productVariationValueId)
     {
-        $this->_productVariationValueId = (string)$productVariationValueId;
+        $this->_productVariationValueId = $productVariationValueId;
         return $this;
     }
     
     /**
-     * @return string Reference to productVariationValue
+     * @return Identity Reference to productVariationValue
      */
     public function getProductVariationValueId()
     {

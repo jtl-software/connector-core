@@ -13,35 +13,34 @@ use \jtl\Core\Model\DataModel;
  * Tax rate model (set in JTL-Wawi ERP).
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class TaxRate extends DataModel
 {
     /**
-     * @var string Unique taxRate id
+     * @var Identity Unique taxRate id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to taxZone
+     * @var Identity Reference to taxZone
      */
-    protected $_taxZoneId = '';             
+    protected $_taxZoneId = null;
     
     /**
-     * @var string Reference to taxClass
+     * @var Identity Reference to taxClass
      */
-    protected $_taxClassId = '';             
+    protected $_taxClassId = null;
     
     /**
      * @var double Tax rate value e.g. 19.00
      */
-    protected $_rate = 0.0;             
+    protected $_rate = 0.0;
     
     /**
      * @var int Optional priority number. Higher value means higher priority
      */
-    protected $_priority = 0;             
+    protected $_priority = 0;
     
     /**
      * TaxRate Setter
@@ -62,7 +61,7 @@ class TaxRate extends DataModel
                 case "_taxZoneId":
                 case "_taxClassId":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
                 case "_rate":
@@ -80,51 +79,51 @@ class TaxRate extends DataModel
     }
     
     /**
-     * @param string $id Unique taxRate id
+     * @param Identity $id Unique taxRate id
      * @return \jtl\Connector\Model\TaxRate
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique taxRate id
+     * @return Identity Unique taxRate id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $taxZoneId Reference to taxZone
+     * @param Identity $taxZoneId Reference to taxZone
      * @return \jtl\Connector\Model\TaxRate
      */
-    public function setTaxZoneId($taxZoneId)
+    public function setTaxZoneId(Identity $taxZoneId)
     {
-        $this->_taxZoneId = (string)$taxZoneId;
+        $this->_taxZoneId = $taxZoneId;
         return $this;
     }
     
     /**
-     * @return string Reference to taxZone
+     * @return Identity Reference to taxZone
      */
     public function getTaxZoneId()
     {
         return $this->_taxZoneId;
     }
     /**
-     * @param string $taxClassId Reference to taxClass
+     * @param Identity $taxClassId Reference to taxClass
      * @return \jtl\Connector\Model\TaxRate
      */
-    public function setTaxClassId($taxClassId)
+    public function setTaxClassId(Identity $taxClassId)
     {
-        $this->_taxClassId = (string)$taxClassId;
+        $this->_taxClassId = $taxClassId;
         return $this;
     }
     
     /**
-     * @return string Reference to taxClass
+     * @return Identity Reference to taxClass
      */
     public function getTaxClassId()
     {

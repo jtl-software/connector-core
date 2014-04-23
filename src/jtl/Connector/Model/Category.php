@@ -13,30 +13,29 @@ use \jtl\Core\Model\DataModel;
  * A category with sort number, link to parent category and level
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Category
  */
 class Category extends DataModel
 {
     /**
-     * @var string Unique category id
+     * @var Identity Unique category id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Optional reference to parent category id
+     * @var Identity Optional reference to parent category id
      */
-    protected $_parentCategoryId = '0';             
+    protected $_parentCategoryId = 0;
     
     /**
      * @var int Optional sort order number
      */
-    protected $_sort = 0;             
+    protected $_sort = 0;
     
     /**
      * @var int Optional category level (default 1 for first level)
      */
-    protected $_level = 1;             
+    protected $_level = 1;
     
     /**
      * Category Setter
@@ -56,7 +55,7 @@ class Category extends DataModel
                 case "_id":
                 case "_parentCategoryId":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
                 case "_sort":
@@ -70,34 +69,34 @@ class Category extends DataModel
     }
     
     /**
-     * @param string $id Unique category id
+     * @param Identity $id Unique category id
      * @return \jtl\Connector\Model\Category
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique category id
+     * @return Identity Unique category id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $parentCategoryId Optional reference to parent category id
+     * @param Identity $parentCategoryId Optional reference to parent category id
      * @return \jtl\Connector\Model\Category
      */
-    public function setParentCategoryId($parentCategoryId)
+    public function setParentCategoryId(Identity $parentCategoryId)
     {
-        $this->_parentCategoryId = (string)$parentCategoryId;
+        $this->_parentCategoryId = $parentCategoryId;
         return $this;
     }
     
     /**
-     * @return string Optional reference to parent category id
+     * @return Identity Optional reference to parent category id
      */
     public function getParentCategoryId()
     {

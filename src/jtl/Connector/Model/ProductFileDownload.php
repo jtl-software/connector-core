@@ -13,20 +13,19 @@ use \jtl\Core\Model\DataModel;
  * Product to FileDownload allocation.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductFileDownload extends DataModel
 {
     /**
-     * @var string Reference to product
+     * @var Identity Reference to product
      */
-    protected $_productId = '';             
+    protected $_productId = null;
     
     /**
-     * @var string Reference to fileDownload
+     * @var Identity Reference to fileDownload
      */
-    protected $_fileDownloadId = '';             
+    protected $_fileDownloadId = null;
     
     /**
      * ProductFileDownload Setter
@@ -46,7 +45,7 @@ class ProductFileDownload extends DataModel
                 case "_productId":
                 case "_fileDownloadId":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
             }
@@ -54,34 +53,34 @@ class ProductFileDownload extends DataModel
     }
     
     /**
-     * @param string $productId Reference to product
+     * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductFileDownload
      */
-    public function setProductId($productId)
+    public function setProductId(Identity $productId)
     {
-        $this->_productId = (string)$productId;
+        $this->_productId = $productId;
         return $this;
     }
     
     /**
-     * @return string Reference to product
+     * @return Identity Reference to product
      */
     public function getProductId()
     {
         return $this->_productId;
     }
     /**
-     * @param string $fileDownloadId Reference to fileDownload
+     * @param Identity $fileDownloadId Reference to fileDownload
      * @return \jtl\Connector\Model\ProductFileDownload
      */
-    public function setFileDownloadId($fileDownloadId)
+    public function setFileDownloadId(Identity $fileDownloadId)
     {
-        $this->_fileDownloadId = (string)$fileDownloadId;
+        $this->_fileDownloadId = $fileDownloadId;
         return $this;
     }
     
     /**
-     * @return string Reference to fileDownload
+     * @return Identity Reference to fileDownload
      */
     public function getFileDownloadId()
     {

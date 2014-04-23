@@ -13,7 +13,6 @@ use \jtl\Core\Model\DataModel;
  * Locale specific texts for product
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductI18n extends DataModel
@@ -21,32 +20,32 @@ class ProductI18n extends DataModel
     /**
      * @var string locale
      */
-    protected $_localeName = '';             
+    protected $_localeName = '';
     
     /**
-     * @var string Reference to product
+     * @var Identity Reference to product
      */
-    protected $_productId = '';             
+    protected $_productId = null;
     
     /**
      * @var string Product name / title
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * @var string Optional path of product URL
      */
-    protected $_urlPath = '';             
+    protected $_urlPath = '';
     
     /**
      * @var string Optional product description
      */
-    protected $_description = '';             
+    protected $_description = '';
     
     /**
      * @var string Optional product shortdescription
      */
-    protected $_shortDescription = '';             
+    protected $_shortDescription = '';
     
     /**
      * ProductI18n Setter
@@ -64,13 +63,17 @@ class ProductI18n extends DataModel
         
             switch ($name) {
                 case "_localeName":
-                case "_productId":
                 case "_name":
                 case "_urlPath":
                 case "_description":
                 case "_shortDescription":
                 
                     $this->$name = (string)$value;
+                    break;
+            
+                case "_productId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
             }
@@ -95,17 +98,17 @@ class ProductI18n extends DataModel
         return $this->_localeName;
     }
     /**
-     * @param string $productId Reference to product
+     * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductI18n
      */
-    public function setProductId($productId)
+    public function setProductId(Identity $productId)
     {
-        $this->_productId = (string)$productId;
+        $this->_productId = $productId;
         return $this;
     }
     
     /**
-     * @return string Reference to product
+     * @return Identity Reference to product
      */
     public function getProductId()
     {

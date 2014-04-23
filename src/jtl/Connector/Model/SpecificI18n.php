@@ -13,7 +13,6 @@ use \jtl\Core\Model\DataModel;
  * Localized name for specific.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Specific
  */
 class SpecificI18n extends DataModel
@@ -21,17 +20,17 @@ class SpecificI18n extends DataModel
     /**
      * @var string Locale
      */
-    protected $_localeName = '';             
+    protected $_localeName = '';
     
     /**
-     * @var string Reference to specific
+     * @var Identity Reference to specific
      */
-    protected $_specificId = '';             
+    protected $_specificId = null;
     
     /**
      * @var string Localized name
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * SpecificI18n Setter
@@ -49,10 +48,14 @@ class SpecificI18n extends DataModel
         
             switch ($name) {
                 case "_localeName":
-                case "_specificId":
                 case "_name":
                 
                     $this->$name = (string)$value;
+                    break;
+            
+                case "_specificId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
             }
@@ -77,17 +80,17 @@ class SpecificI18n extends DataModel
         return $this->_localeName;
     }
     /**
-     * @param string $specificId Reference to specific
+     * @param Identity $specificId Reference to specific
      * @return \jtl\Connector\Model\SpecificI18n
      */
-    public function setSpecificId($specificId)
+    public function setSpecificId(Identity $specificId)
     {
-        $this->_specificId = (string)$specificId;
+        $this->_specificId = $specificId;
         return $this;
     }
     
     /**
-     * @return string Reference to specific
+     * @return Identity Reference to specific
      */
     public function getSpecificId()
     {

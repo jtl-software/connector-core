@@ -13,30 +13,29 @@ use \jtl\Core\Model\DataModel;
  * Product-ConfigGroup Assignment.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductConfigGroup extends DataModel
 {
     /**
-     * @var string Unique productConfigGroup id
+     * @var Identity Unique productConfigGroup id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to configGroup
+     * @var Identity Reference to configGroup
      */
-    protected $_configGroupId = '';             
+    protected $_configGroupId = null;
     
     /**
-     * @var string Reference to product
+     * @var Identity Reference to product
      */
-    protected $_productId = '';             
+    protected $_productId = null;
     
     /**
      * @var int Optional sort number
      */
-    protected $_sort = 0;             
+    protected $_sort = 0;
     
     /**
      * ProductConfigGroup Setter
@@ -57,7 +56,7 @@ class ProductConfigGroup extends DataModel
                 case "_configGroupId":
                 case "_productId":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
                 case "_sort":
@@ -70,51 +69,51 @@ class ProductConfigGroup extends DataModel
     }
     
     /**
-     * @param string $id Unique productConfigGroup id
+     * @param Identity $id Unique productConfigGroup id
      * @return \jtl\Connector\Model\ProductConfigGroup
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique productConfigGroup id
+     * @return Identity Unique productConfigGroup id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $configGroupId Reference to configGroup
+     * @param Identity $configGroupId Reference to configGroup
      * @return \jtl\Connector\Model\ProductConfigGroup
      */
-    public function setConfigGroupId($configGroupId)
+    public function setConfigGroupId(Identity $configGroupId)
     {
-        $this->_configGroupId = (string)$configGroupId;
+        $this->_configGroupId = $configGroupId;
         return $this;
     }
     
     /**
-     * @return string Reference to configGroup
+     * @return Identity Reference to configGroup
      */
     public function getConfigGroupId()
     {
         return $this->_configGroupId;
     }
     /**
-     * @param string $productId Reference to product
+     * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductConfigGroup
      */
-    public function setProductId($productId)
+    public function setProductId(Identity $productId)
     {
-        $this->_productId = (string)$productId;
+        $this->_productId = $productId;
         return $this;
     }
     
     /**
-     * @return string Reference to product
+     * @return Identity Reference to product
      */
     public function getProductId()
     {

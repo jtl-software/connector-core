@@ -13,40 +13,39 @@ use \jtl\Core\Model\DataModel;
  * Locale specific text and meta-information for manufacturer.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Manufacturer
  */
 class ManufacturerI18n extends DataModel
 {
     /**
-     * @var string Reference to manufacturer
+     * @var Identity Reference to manufacturer
      */
-    protected $_manufacturerId = '';             
+    protected $_manufacturerId = null;
     
     /**
      * @var string Locale
      */
-    protected $_localeName = '';             
+    protected $_localeName = '';
     
     /**
      * @var string Optional manufacturer description (HTML)
      */
-    protected $_description = '';             
+    protected $_description = '';
     
     /**
      * @var string Optional meta description tag value
      */
-    protected $_metaDescription = '';             
+    protected $_metaDescription = '';
     
     /**
      * @var string Optional meta keywords tag value
      */
-    protected $_metaKeywords = '';             
+    protected $_metaKeywords = '';
     
     /**
      * @var string Optional title tag value
      */
-    protected $_titleTag = '';             
+    protected $_titleTag = '';
     
     /**
      * ManufacturerI18n Setter
@@ -64,6 +63,10 @@ class ManufacturerI18n extends DataModel
         
             switch ($name) {
                 case "_manufacturerId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_localeName":
                 case "_description":
                 case "_metaDescription":
@@ -78,17 +81,17 @@ class ManufacturerI18n extends DataModel
     }
     
     /**
-     * @param string $manufacturerId Reference to manufacturer
+     * @param Identity $manufacturerId Reference to manufacturer
      * @return \jtl\Connector\Model\ManufacturerI18n
      */
-    public function setManufacturerId($manufacturerId)
+    public function setManufacturerId(Identity $manufacturerId)
     {
-        $this->_manufacturerId = (string)$manufacturerId;
+        $this->_manufacturerId = $manufacturerId;
         return $this;
     }
     
     /**
-     * @return string Reference to manufacturer
+     * @return Identity Reference to manufacturer
      */
     public function getManufacturerId()
     {

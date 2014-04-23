@@ -13,30 +13,29 @@ use \jtl\Core\Model\DataModel;
  * Link 2 products that are in a common crossSellingGroup.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class CrossSelling extends DataModel
 {
     /**
-     * @var string Unique crossSelling id
+     * @var Identity Unique crossSelling id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
      * @var string Reference to product (main product)
      */
-    protected $_crossSellingProductId = '';             
+    protected $_crossSellingProductId = '';
     
     /**
-     * @var string Reference to crossSellingGroup
+     * @var Identity Reference to crossSellingGroup
      */
-    protected $_crossSellingGroupId = '';             
+    protected $_crossSellingGroupId = null;
     
     /**
      * @var string Reference to product (cross selling product)
      */
-    protected $_productId = '';             
+    protected $_productId = '';
     
     /**
      * CrossSelling Setter
@@ -54,8 +53,12 @@ class CrossSelling extends DataModel
         
             switch ($name) {
                 case "_id":
-                case "_crossSellingProductId":
                 case "_crossSellingGroupId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
+                case "_crossSellingProductId":
                 case "_productId":
                 
                     $this->$name = (string)$value;
@@ -66,17 +69,17 @@ class CrossSelling extends DataModel
     }
     
     /**
-     * @param string $id Unique crossSelling id
+     * @param Identity $id Unique crossSelling id
      * @return \jtl\Connector\Model\CrossSelling
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique crossSelling id
+     * @return Identity Unique crossSelling id
      */
     public function getId()
     {
@@ -100,17 +103,17 @@ class CrossSelling extends DataModel
         return $this->_crossSellingProductId;
     }
     /**
-     * @param string $crossSellingGroupId Reference to crossSellingGroup
+     * @param Identity $crossSellingGroupId Reference to crossSellingGroup
      * @return \jtl\Connector\Model\CrossSelling
      */
-    public function setCrossSellingGroupId($crossSellingGroupId)
+    public function setCrossSellingGroupId(Identity $crossSellingGroupId)
     {
-        $this->_crossSellingGroupId = (string)$crossSellingGroupId;
+        $this->_crossSellingGroupId = $crossSellingGroupId;
         return $this;
     }
     
     /**
-     * @return string Reference to crossSellingGroup
+     * @return Identity Reference to crossSellingGroup
      */
     public function getCrossSellingGroupId()
     {

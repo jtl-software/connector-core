@@ -13,7 +13,6 @@ use \jtl\Core\Model\DataModel;
  * ToDo: Remove (deprecated)
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage 
  */
 class FileDownloadHistory extends DataModel
@@ -21,27 +20,27 @@ class FileDownloadHistory extends DataModel
     /**
      * @var string
      */
-    protected $_id = '0';             
+    protected $_id = '0';
     
     /**
      * @var string
      */
-    protected $_fileDownloadId = '0';             
+    protected $_fileDownloadId = '0';
     
     /**
      * @var string
      */
-    protected $_customerId = '0';             
+    protected $_customerId = '0';
     
     /**
      * @var string
      */
-    protected $_customerOrderId = '0';             
+    protected $_customerOrderId = '0';
     
     /**
      * @var string
      */
-    protected $_created = null;             
+    protected $_created = null;
     
     /**
      * FileDownloadHistory Setter

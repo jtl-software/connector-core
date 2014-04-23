@@ -13,7 +13,6 @@ use \jtl\Core\Model\DataModel;
  * Provides company address and bank details
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class Company extends DataModel
@@ -21,97 +20,97 @@ class Company extends DataModel
     /**
      * @var string Company name
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * @var string Company businessman / entrepreneur
      */
-    protected $_businessman = '';             
+    protected $_businessman = '';
     
     /**
      * @var string Street
      */
-    protected $_street = '';             
+    protected $_street = '';
     
     /**
      * @var string Street number
      */
-    protected $_streetNumber = '';             
+    protected $_streetNumber = '';
     
     /**
      * @var string Zip code / postcode
      */
-    protected $_zipCode = '';             
+    protected $_zipCode = '';
     
     /**
      * @var string City
      */
-    protected $_city = '';             
+    protected $_city = '';
     
     /**
      * @var string CountryIso
      */
-    protected $_countryIso = '';             
+    protected $_countryIso = '';
     
     /**
      * @var string Phone number
      */
-    protected $_phone = '';             
+    protected $_phone = '';
     
     /**
      * @var string Fax number
      */
-    protected $_fax = '';             
+    protected $_fax = '';
     
     /**
      * @var string Company E-Mail address
      */
-    protected $_eMail = '';             
+    protected $_eMail = '';
     
     /**
      * @var string Company website URL
      */
-    protected $_www = '';             
+    protected $_www = '';
     
     /**
      * @var string Bank code number
      */
-    protected $_bankCode = '';             
+    protected $_bankCode = '';
     
     /**
      * @var string Bank account number
      */
-    protected $_accountNumber = '';             
+    protected $_accountNumber = '';
     
     /**
      * @var string Bank name e.g. "Deutsche Bank"
      */
-    protected $_bankName = '';             
+    protected $_bankName = '';
     
     /**
      * @var string Bank account holder name e.g. "John Doe"
      */
-    protected $_accountHolder = '';             
+    protected $_accountHolder = '';
     
     /**
      * @var string VAT registration number (german: USt-ID)
      */
-    protected $_vatNumber = '';             
+    protected $_vatNumber = '';
     
     /**
      * @var string Tax id number (german: Steuernummer)
      */
-    protected $_taxIdNumber = '';             
+    protected $_taxIdNumber = '';
     
     /**
      * @var string International Bank Account Number (IBAN) 
      */
-    protected $_iban = '';             
+    protected $_iban = '';
     
     /**
      * @var string Bank Identifier Code (BIC)
      */
-    protected $_bic = '';             
+    protected $_bic = '';
     
     /**
      * Company Setter

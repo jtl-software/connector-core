@@ -13,7 +13,6 @@ use \jtl\Core\Model\DataModel;
  * Localized key-value-pair for categoryAttr. All properties must be specified. 
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Category
  */
 class CategoryAttrI18n extends DataModel
@@ -21,22 +20,22 @@ class CategoryAttrI18n extends DataModel
     /**
      * @var string Locale
      */
-    protected $_localeName = '';             
+    protected $_localeName = '';
     
     /**
-     * @var string Reference to categoryAttr
+     * @var Identity Reference to categoryAttr
      */
-    protected $_categoryAttrId = '';             
+    protected $_categoryAttrId = null;
     
     /**
      * @var string Attribute key
      */
-    protected $_key = '';             
+    protected $_key = '';
     
     /**
      * @var string Attribute value
      */
-    protected $_value = '';             
+    protected $_value = '';
     
     /**
      * CategoryAttrI18n Setter
@@ -54,11 +53,15 @@ class CategoryAttrI18n extends DataModel
         
             switch ($name) {
                 case "_localeName":
-                case "_categoryAttrId":
                 case "_key":
                 case "_value":
                 
                     $this->$name = (string)$value;
+                    break;
+            
+                case "_categoryAttrId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
             }
@@ -83,17 +86,17 @@ class CategoryAttrI18n extends DataModel
         return $this->_localeName;
     }
     /**
-     * @param string $categoryAttrId Reference to categoryAttr
+     * @param Identity $categoryAttrId Reference to categoryAttr
      * @return \jtl\Connector\Model\CategoryAttrI18n
      */
-    public function setCategoryAttrId($categoryAttrId)
+    public function setCategoryAttrId(Identity $categoryAttrId)
     {
-        $this->_categoryAttrId = (string)$categoryAttrId;
+        $this->_categoryAttrId = $categoryAttrId;
         return $this;
     }
     
     /**
-     * @return string Reference to categoryAttr
+     * @return Identity Reference to categoryAttr
      */
     public function getCategoryAttrId()
     {

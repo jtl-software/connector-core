@@ -13,7 +13,6 @@ use \jtl\Core\Model\DataModel;
  * Monolingual mediafile attribute.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class MediaFileAttr extends DataModel
@@ -21,27 +20,27 @@ class MediaFileAttr extends DataModel
     /**
      * @var int Unique MediaFileAttr id
      */
-    protected $_id = 0;             
+    protected $_id = 0;
     
     /**
-     * @var string Reference to mediaFile
+     * @var Identity Reference to mediaFile
      */
-    protected $_mediaFileId = '';             
+    protected $_mediaFileId = null;
     
     /**
      * @var string Locale
      */
-    protected $_localeName = '';             
+    protected $_localeName = '';
     
     /**
      * @var string Attribute name
      */
-    protected $_key = '';             
+    protected $_key = '';
     
     /**
      * @var string Attribute value
      */
-    protected $_value = '';             
+    protected $_value = '';
     
     /**
      * MediaFileAttr Setter
@@ -64,6 +63,10 @@ class MediaFileAttr extends DataModel
                     break;
             
                 case "_mediaFileId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_localeName":
                 case "_key":
                 case "_value":
@@ -93,17 +96,17 @@ class MediaFileAttr extends DataModel
         return $this->_id;
     }
     /**
-     * @param string $mediaFileId Reference to mediaFile
+     * @param Identity $mediaFileId Reference to mediaFile
      * @return \jtl\Connector\Model\MediaFileAttr
      */
-    public function setMediaFileId($mediaFileId)
+    public function setMediaFileId(Identity $mediaFileId)
     {
-        $this->_mediaFileId = (string)$mediaFileId;
+        $this->_mediaFileId = $mediaFileId;
         return $this;
     }
     
     /**
-     * @return string Reference to mediaFile
+     * @return Identity Reference to mediaFile
      */
     public function getMediaFileId()
     {

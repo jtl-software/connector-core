@@ -13,7 +13,6 @@ use \jtl\Core\Model\DataModel;
  * Customer order properties.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage CustomerOrder
  */
 class CustomerOrder extends DataModel
@@ -64,134 +63,134 @@ class CustomerOrder extends DataModel
     const STATUS_PENDING_PAYMENT = 'pending_payment';
     
     /**
-     * @var string Unique customerOrder id
+     * @var Identity Unique customerOrder id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
      * @var string Optional reference to customer. 
      */
-    protected $_customerId = '';             
+    protected $_customerId = '';
     
     /**
-     * @var string Reference to shippingAddress
+     * @var Identity Reference to shippingAddress
      */
-    protected $_shippingAddressId = '';             
+    protected $_shippingAddressId = null;
     
     /**
-     * @var string Reference to billingAddress
+     * @var Identity Reference to billingAddress
      */
-    protected $_billingAddressId = '';             
+    protected $_billingAddressId = null;
     
     /**
-     * @var string Reference to shippingMethod
+     * @var Identity Reference to shippingMethod
      */
-    protected $_shippingMethodId = '';             
+    protected $_shippingMethodId = null;
     
     /**
      * @var string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
      */
-    protected $_localeName = '';             
+    protected $_localeName = '';
     
     /**
      * @var string Currency ISO set, when customerOrder was finished
      */
-    protected $_currencyIso = '';             
+    protected $_currencyIso = '';
     
     /**
      * @var string Optional Estimated delivery date set by ERP System
      */
-    protected $_estimatedDeliveryDate = null;             
+    protected $_estimatedDeliveryDate = null;
     
     /**
      * @var double Optional customer credit (credit reduces total sum)
      */
-    protected $_credit = 0;             
+    protected $_credit = 0;
     
     /**
      * @var double Total sum to pay
      */
-    protected $_totalSum = 0.0;             
+    protected $_totalSum = 0.0;
     
     /**
      * @var string Optional session id or session hash
      */
-    protected $_session = '';             
+    protected $_session = '';
     
     /**
      * @var string Optional shipping method name
      */
-    protected $_shippingMethodName = '';             
+    protected $_shippingMethodName = '';
     
     /**
      * @var string Optional order number (usually set by ERP System later)
      */
-    protected $_orderNumber = '';             
+    protected $_orderNumber = '';
     
     /**
      * @var string Additional shipping info
      */
-    protected $_shippingInfo = '';             
+    protected $_shippingInfo = '';
     
     /**
      * @var string Shipping date
      */
-    protected $_shippingDate = null;             
+    protected $_shippingDate = null;
     
     /**
      * @var string Payment date
      */
-    protected $_paymentDate = null;             
+    protected $_paymentDate = null;
     
     /**
      * @var string Date from when customer will receive notification to rate order
      */
-    protected $_ratingNotificationDate = null;             
+    protected $_ratingNotificationDate = null;
     
     /**
      * @var string Optional TrackingID (not Tracking URL)
      */
-    protected $_tracking = '';             
+    protected $_tracking = '';
     
     /**
      * @var string Optional additional note
      */
-    protected $_note = '';             
+    protected $_note = '';
     
     /**
-     * @var string Optional Carrier name
+     * @var string Optional Logistic name
      */
-    protected $_carrierName = '';             
+    protected $_logistic = '';
     
     /**
      * @var string Optional Tracking URL
      */
-    protected $_trackingURL = '';             
+    protected $_trackingURL = '';
     
     /**
      * @var string Optional customer IP address at the time of checkout. Do not store full IP-Adress (dependent on local laws or regulations)
      */
-    protected $_ip = '';             
+    protected $_ip = '';
     
     /**
      * @var bool Optional flag, if customerOrder is fetched by ERP System
      */
-    protected $_isFetched = false;             
+    protected $_isFetched = false;
     
     /**
      * @var string Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
      */
-    protected $_status = 'new';             
+    protected $_status = 'new';
     
     /**
      * @var string Date of creation
      */
-    protected $_created = null;             
+    protected $_created = null;
     
     /**
-     * @var string Optional payment module id
+     * @var Identity Optional payment module id
      */
-    protected $_paymentModuleId = '';             
+    protected $_paymentModuleId = null;
     
     /**
      * CustomerOrder Setter
@@ -209,10 +208,15 @@ class CustomerOrder extends DataModel
         
             switch ($name) {
                 case "_id":
-                case "_customerId":
                 case "_shippingAddressId":
                 case "_billingAddressId":
                 case "_shippingMethodId":
+                case "_paymentModuleId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
+                case "_customerId":
                 case "_localeName":
                 case "_currencyIso":
                 case "_estimatedDeliveryDate":
@@ -225,12 +229,11 @@ class CustomerOrder extends DataModel
                 case "_ratingNotificationDate":
                 case "_tracking":
                 case "_note":
-                case "_carrierName":
+                case "_logistic":
                 case "_trackingURL":
                 case "_ip":
                 case "_status":
                 case "_created":
-                case "_paymentModuleId":
                 
                     $this->$name = (string)$value;
                     break;
@@ -251,17 +254,17 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param string $id Unique customerOrder id
+     * @param Identity $id Unique customerOrder id
      * @return \jtl\Connector\Model\CustomerOrder
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique customerOrder id
+     * @return Identity Unique customerOrder id
      */
     public function getId()
     {
@@ -285,51 +288,51 @@ class CustomerOrder extends DataModel
         return $this->_customerId;
     }
     /**
-     * @param string $shippingAddressId Reference to shippingAddress
+     * @param Identity $shippingAddressId Reference to shippingAddress
      * @return \jtl\Connector\Model\CustomerOrder
      */
-    public function setShippingAddressId($shippingAddressId)
+    public function setShippingAddressId(Identity $shippingAddressId)
     {
-        $this->_shippingAddressId = (string)$shippingAddressId;
+        $this->_shippingAddressId = $shippingAddressId;
         return $this;
     }
     
     /**
-     * @return string Reference to shippingAddress
+     * @return Identity Reference to shippingAddress
      */
     public function getShippingAddressId()
     {
         return $this->_shippingAddressId;
     }
     /**
-     * @param string $billingAddressId Reference to billingAddress
+     * @param Identity $billingAddressId Reference to billingAddress
      * @return \jtl\Connector\Model\CustomerOrder
      */
-    public function setBillingAddressId($billingAddressId)
+    public function setBillingAddressId(Identity $billingAddressId)
     {
-        $this->_billingAddressId = (string)$billingAddressId;
+        $this->_billingAddressId = $billingAddressId;
         return $this;
     }
     
     /**
-     * @return string Reference to billingAddress
+     * @return Identity Reference to billingAddress
      */
     public function getBillingAddressId()
     {
         return $this->_billingAddressId;
     }
     /**
-     * @param string $shippingMethodId Reference to shippingMethod
+     * @param Identity $shippingMethodId Reference to shippingMethod
      * @return \jtl\Connector\Model\CustomerOrder
      */
-    public function setShippingMethodId($shippingMethodId)
+    public function setShippingMethodId(Identity $shippingMethodId)
     {
-        $this->_shippingMethodId = (string)$shippingMethodId;
+        $this->_shippingMethodId = $shippingMethodId;
         return $this;
     }
     
     /**
-     * @return string Reference to shippingMethod
+     * @return Identity Reference to shippingMethod
      */
     public function getShippingMethodId()
     {
@@ -574,21 +577,21 @@ class CustomerOrder extends DataModel
         return $this->_note;
     }
     /**
-     * @param string $carrierName Optional Carrier name
+     * @param string $logistic Optional Logistic name
      * @return \jtl\Connector\Model\CustomerOrder
      */
-    public function setCarrierName($carrierName)
+    public function setLogistic($logistic)
     {
-        $this->_carrierName = (string)$carrierName;
+        $this->_logistic = (string)$logistic;
         return $this;
     }
     
     /**
-     * @return string Optional Carrier name
+     * @return string Optional Logistic name
      */
-    public function getCarrierName()
+    public function getLogistic()
     {
-        return $this->_carrierName;
+        return $this->_logistic;
     }
     /**
      * @param string $trackingURL Optional Tracking URL
@@ -676,17 +679,17 @@ class CustomerOrder extends DataModel
         return $this->_created;
     }
     /**
-     * @param string $paymentModuleId Optional payment module id
+     * @param Identity $paymentModuleId Optional payment module id
      * @return \jtl\Connector\Model\CustomerOrder
      */
-    public function setPaymentModuleId($paymentModuleId)
+    public function setPaymentModuleId(Identity $paymentModuleId)
     {
-        $this->_paymentModuleId = (string)$paymentModuleId;
+        $this->_paymentModuleId = $paymentModuleId;
         return $this;
     }
     
     /**
-     * @return string Optional payment module id
+     * @return Identity Optional payment module id
      */
     public function getPaymentModuleId()
     {

@@ -13,7 +13,6 @@ use \jtl\Core\Model\DataModel;
  * Localized key-value-pair for productAttr.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductAttrI18n extends DataModel
@@ -21,22 +20,22 @@ class ProductAttrI18n extends DataModel
     /**
      * @var string Locale
      */
-    protected $_localeName = '';             
+    protected $_localeName = '';
     
     /**
-     * @var string Reference to productAttr
+     * @var Identity Reference to productAttr
      */
-    protected $_productAttrId = '';             
+    protected $_productAttrId = null;
     
     /**
      * @var string Attribute key
      */
-    protected $_key = '';             
+    protected $_key = '';
     
     /**
      * @var string Attribute value
      */
-    protected $_value = '';             
+    protected $_value = '';
     
     /**
      * ProductAttrI18n Setter
@@ -54,11 +53,15 @@ class ProductAttrI18n extends DataModel
         
             switch ($name) {
                 case "_localeName":
-                case "_productAttrId":
                 case "_key":
                 case "_value":
                 
                     $this->$name = (string)$value;
+                    break;
+            
+                case "_productAttrId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
             }
@@ -83,17 +86,17 @@ class ProductAttrI18n extends DataModel
         return $this->_localeName;
     }
     /**
-     * @param string $productAttrId Reference to productAttr
+     * @param Identity $productAttrId Reference to productAttr
      * @return \jtl\Connector\Model\ProductAttrI18n
      */
-    public function setProductAttrId($productAttrId)
+    public function setProductAttrId(Identity $productAttrId)
     {
-        $this->_productAttrId = (string)$productAttrId;
+        $this->_productAttrId = $productAttrId;
         return $this;
     }
     
     /**
-     * @return string Reference to productAttr
+     * @return Identity Reference to productAttr
      */
     public function getProductAttrId()
     {

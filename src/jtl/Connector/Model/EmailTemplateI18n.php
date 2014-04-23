@@ -13,7 +13,6 @@ use \jtl\Core\Model\DataModel;
  * 
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage 
  */
 class EmailTemplateI18n extends DataModel
@@ -21,37 +20,37 @@ class EmailTemplateI18n extends DataModel
     /**
      * @var string
      */
-    protected $_emailTemplateId = '0';             
+    protected $_emailTemplateId = '0';
     
     /**
      * @var string
      */
-    protected $_localeName = '';             
+    protected $_localeName = '';
     
     /**
      * @var string
      */
-    protected $_subject = '';             
+    protected $_subject = '';
     
     /**
      * @var string
      */
-    protected $_contentHtml = '';             
+    protected $_contentHtml = '';
     
     /**
      * @var string
      */
-    protected $_contentText = '';             
+    protected $_contentText = '';
     
     /**
      * @var string
      */
-    protected $_pdf = '';             
+    protected $_pdf = '';
     
     /**
      * @var string
      */
-    protected $_filename = '';             
+    protected $_filename = '';
     
     /**
      * EmailTemplateI18n Setter

@@ -13,30 +13,29 @@ use \jtl\Core\Model\DataModel;
  * Monolingual product function attribute.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductFunctionAttr extends DataModel
 {
     /**
-     * @var string Unique productFunctionAttr id
+     * @var Identity Unique productFunctionAttr id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to product
+     * @var Identity Reference to product
      */
-    protected $_productId = '';             
+    protected $_productId = null;
     
     /**
      * @var string Attribute key
      */
-    protected $_key = '';             
+    protected $_key = '';
     
     /**
      * @var string Attribute value
      */
-    protected $_value = '';             
+    protected $_value = '';
     
     /**
      * ProductFunctionAttr Setter
@@ -55,6 +54,10 @@ class ProductFunctionAttr extends DataModel
             switch ($name) {
                 case "_id":
                 case "_productId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_key":
                 case "_value":
                 
@@ -66,34 +69,34 @@ class ProductFunctionAttr extends DataModel
     }
     
     /**
-     * @param string $id Unique productFunctionAttr id
+     * @param Identity $id Unique productFunctionAttr id
      * @return \jtl\Connector\Model\ProductFunctionAttr
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique productFunctionAttr id
+     * @return Identity Unique productFunctionAttr id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $productId Reference to product
+     * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductFunctionAttr
      */
-    public function setProductId($productId)
+    public function setProductId(Identity $productId)
     {
-        $this->_productId = (string)$productId;
+        $this->_productId = $productId;
         return $this;
     }
     
     /**
-     * @return string Reference to product
+     * @return Identity Reference to product
      */
     public function getProductId()
     {

@@ -13,7 +13,6 @@ use \jtl\Core\Model\DataModel;
  * Shop3 only
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage 
  */
 class EmailTemplate extends DataModel
@@ -21,57 +20,57 @@ class EmailTemplate extends DataModel
     /**
      * @var string
      */
-    protected $_id = '0';             
+    protected $_id = '0';
     
     /**
      * @var string
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * @var string
      */
-    protected $_description = '';             
+    protected $_description = '';
     
     /**
      * @var string
      */
-    protected $_emailType = '';             
+    protected $_emailType = '';
     
     /**
      * @var string
      */
-    protected $_moduleId = '0';             
+    protected $_moduleId = '0';
     
     /**
      * @var string
      */
-    protected $_filename = '';             
+    protected $_filename = '';
     
     /**
      * @var bool
      */
-    protected $_isActive = false;             
+    protected $_isActive = false;
     
     /**
      * @var bool
      */
-    protected $_isOii = false;             
+    protected $_isOii = false;
     
     /**
      * @var bool
      */
-    protected $_isAgb = false;             
+    protected $_isAgb = false;
     
     /**
      * @var bool
      */
-    protected $_isWrb = false;             
+    protected $_isWrb = false;
     
     /**
      * @var int
      */
-    protected $_error = 0;             
+    protected $_error = 0;
     
     /**
      * EmailTemplate Setter

@@ -13,175 +13,174 @@ use \jtl\Core\Model\DataModel;
  * Customer address data and preference properties.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Customer
  */
 class Customer extends DataModel
 {
     /**
-     * @var string Unique customer id
+     * @var Identity Unique customer id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string References a customer group
+     * @var Identity References a customer group
      */
-    protected $_customerGroupId = '';             
+    protected $_customerGroupId = null;
     
     /**
      * @var string User locale preference
      */
-    protected $_localeName = '';             
+    protected $_localeName = '';
     
     /**
      * @var string Optional customer number set by JTL-Wawi ERP software
      */
-    protected $_customerNumber = '';             
+    protected $_customerNumber = '';
     
     /**
      * @var string Optional (encrypted!) customer password
      */
-    protected $_password = '';             
+    protected $_password = '';
     
     /**
      * @var string Salutation (german: "Anrede")
      */
-    protected $_salutation = '';             
+    protected $_salutation = '';
     
     /**
      * @var string Title, e.g. "Prof. Dr."
      */
-    protected $_title = '';             
+    protected $_title = '';
     
     /**
      * @var string First name
      */
-    protected $_firstName = '';             
+    protected $_firstName = '';
     
     /**
      * @var string Last name
      */
-    protected $_lastName = '';             
+    protected $_lastName = '';
     
     /**
      * @var string Company name
      */
-    protected $_company = '';             
+    protected $_company = '';
     
     /**
      * @var string Street name
      */
-    protected $_street = '';             
+    protected $_street = '';
     
     /**
      * @var string Delivery instruction e.g. "c/o John Doe"
      */
-    protected $_deliveryInstruction = '';             
+    protected $_deliveryInstruction = '';
     
     /**
      * @var string Extra address line e.g. "Apartment 2.5"
      */
-    protected $_extraAddressLine = '';             
+    protected $_extraAddressLine = '';
     
     /**
      * @var string ZIP / postal code
      */
-    protected $_zipCode = '';             
+    protected $_zipCode = '';
     
     /**
      * @var string City
      */
-    protected $_city = '';             
+    protected $_city = '';
     
     /**
      * @var string State
      */
-    protected $_state = '';             
+    protected $_state = '';
     
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
      */
-    protected $_countryIso = '';             
+    protected $_countryIso = '';
     
     /**
      * @var string Phone number
      */
-    protected $_phone = '';             
+    protected $_phone = '';
     
     /**
      * @var string Mobile phone number
      */
-    protected $_mobile = '';             
+    protected $_mobile = '';
     
     /**
      * @var string Fax number
      */
-    protected $_fax = '';             
+    protected $_fax = '';
     
     /**
      * @var string E-Mail address
      */
-    protected $_eMail = '';             
+    protected $_eMail = '';
     
     /**
      * @var string VAT number (german "USt-ID")
      */
-    protected $_vatNumber = '';             
+    protected $_vatNumber = '';
     
     /**
      * @var string WWW address
      */
-    protected $_www = '';             
+    protected $_www = '';
     
     /**
      * @var double Credit value on customer account in default currency
      */
-    protected $_accountCredit = 0.0;             
+    protected $_accountCredit = 0.0;
     
     /**
      * @var bool Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
      */
-    protected $_hasNewsletterSubscription = false;             
+    protected $_hasNewsletterSubscription = false;
     
     /**
      * @var string Date of birth
      */
-    protected $_birthday = null;             
+    protected $_birthday = null;
     
     /**
      * @var double Percentual discount for customer on all prices
      */
-    protected $_discount = 0.0;             
+    protected $_discount = 0.0;
     
     /**
      * @var string Customer origin
      */
-    protected $_origin = '';             
+    protected $_origin = '';
     
     /**
      * @var string Creation date
      */
-    protected $_created = '';             
+    protected $_created = '';
     
     /**
      * @var string Last modified date
      */
-    protected $_modified = '';             
+    protected $_modified = '';
     
     /**
      * @var bool Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
      */
-    protected $_isActive = true;             
+    protected $_isActive = true;
     
     /**
      * @var bool Flag if customer is fetched by ERP System. True, if customer is already fetched and must not be fetched again. 
      */
-    protected $_isFetched = false;             
+    protected $_isFetched = false;
     
     /**
      * @var bool Flag persistent customer account. True, if customer chose to create persistent customer account. False, if customer doesnt want to have his data stored for login-purposes.
      */
-    protected $_hasCustomerAccount = false;             
+    protected $_hasCustomerAccount = false;
     
     /**
      * Customer Setter
@@ -200,6 +199,10 @@ class Customer extends DataModel
             switch ($name) {
                 case "_id":
                 case "_customerGroupId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_localeName":
                 case "_customerNumber":
                 case "_password":
@@ -248,34 +251,34 @@ class Customer extends DataModel
     }
     
     /**
-     * @param string $id Unique customer id
+     * @param Identity $id Unique customer id
      * @return \jtl\Connector\Model\Customer
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique customer id
+     * @return Identity Unique customer id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $customerGroupId References a customer group
+     * @param Identity $customerGroupId References a customer group
      * @return \jtl\Connector\Model\Customer
      */
-    public function setCustomerGroupId($customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
+        $this->_customerGroupId = $customerGroupId;
         return $this;
     }
     
     /**
-     * @return string References a customer group
+     * @return Identity References a customer group
      */
     public function getCustomerGroupId()
     {

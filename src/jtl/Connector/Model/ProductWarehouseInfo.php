@@ -13,35 +13,34 @@ use \jtl\Core\Model\DataModel;
  * Product to warehouse info association.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductWarehouseInfo extends DataModel
 {
     /**
-     * @var string Reference to product
+     * @var Identity Reference to product
      */
-    protected $_productId = '';             
+    protected $_productId = null;
     
     /**
-     * @var string Reference to warehouse
+     * @var Identity Reference to warehouse
      */
-    protected $_warehouseId = '';             
+    protected $_warehouseId = null;
     
     /**
      * @var double Optional product stock level in specified warehouse
      */
-    protected $_stockLevel = 0;             
+    protected $_stockLevel = 0;
     
     /**
      * @var double Optional product inflow quantity for specified warehouse
      */
-    protected $_inflowQuantity = 0;             
+    protected $_inflowQuantity = 0;
     
     /**
      * @var string Optional product inflow date for specified warehouse
      */
-    protected $_inflowDate = null;             
+    protected $_inflowDate = null;
     
     /**
      * ProductWarehouseInfo Setter
@@ -60,9 +59,8 @@ class ProductWarehouseInfo extends DataModel
             switch ($name) {
                 case "_productId":
                 case "_warehouseId":
-                case "_inflowDate":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
                 case "_stockLevel":
@@ -71,39 +69,44 @@ class ProductWarehouseInfo extends DataModel
                     $this->$name = (double)$value;
                     break;
             
+                case "_inflowDate":
+                
+                    $this->$name = (string)$value;
+                    break;
+            
             }
         }
     }
     
     /**
-     * @param string $productId Reference to product
+     * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductWarehouseInfo
      */
-    public function setProductId($productId)
+    public function setProductId(Identity $productId)
     {
-        $this->_productId = (string)$productId;
+        $this->_productId = $productId;
         return $this;
     }
     
     /**
-     * @return string Reference to product
+     * @return Identity Reference to product
      */
     public function getProductId()
     {
         return $this->_productId;
     }
     /**
-     * @param string $warehouseId Reference to warehouse
+     * @param Identity $warehouseId Reference to warehouse
      * @return \jtl\Connector\Model\ProductWarehouseInfo
      */
-    public function setWarehouseId($warehouseId)
+    public function setWarehouseId(Identity $warehouseId)
     {
-        $this->_warehouseId = (string)$warehouseId;
+        $this->_warehouseId = $warehouseId;
         return $this;
     }
     
     /**
-     * @return string Reference to warehouse
+     * @return Identity Reference to warehouse
      */
     public function getWarehouseId()
     {

@@ -13,30 +13,29 @@ use \jtl\Core\Model\DataModel;
  * Localized config item name and description.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class ConfigItemI18n extends DataModel
 {
     /**
-     * @var string Reference to configItem
+     * @var Identity Reference to configItem
      */
-    protected $_configItemId = '';             
+    protected $_configItemId = null;
     
     /**
      * @var string Locale
      */
-    protected $_localeName = '';             
+    protected $_localeName = '';
     
     /**
      * @var string Config item name. Will be ignored if inheritProductName==true
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * @var string Description (html). Will be ignored, if inheritProductName==true
      */
-    protected $_description = '';             
+    protected $_description = '';
     
     /**
      * ConfigItemI18n Setter
@@ -54,6 +53,10 @@ class ConfigItemI18n extends DataModel
         
             switch ($name) {
                 case "_configItemId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_localeName":
                 case "_name":
                 case "_description":
@@ -66,17 +69,17 @@ class ConfigItemI18n extends DataModel
     }
     
     /**
-     * @param string $configItemId Reference to configItem
+     * @param Identity $configItemId Reference to configItem
      * @return \jtl\Connector\Model\ConfigItemI18n
      */
-    public function setConfigItemId($configItemId)
+    public function setConfigItemId(Identity $configItemId)
     {
-        $this->_configItemId = (string)$configItemId;
+        $this->_configItemId = $configItemId;
         return $this;
     }
     
     /**
-     * @return string Reference to configItem
+     * @return Identity Reference to configItem
      */
     public function getConfigItemId()
     {

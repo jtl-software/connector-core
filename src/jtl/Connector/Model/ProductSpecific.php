@@ -13,25 +13,24 @@ use \jtl\Core\Model\DataModel;
  * Product to specificValue Assignment. Product specifics are used to assign characteristic product attributes like color or  size... When different products have common specifics, products are similar. 
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductSpecific extends DataModel
 {
     /**
-     * @var string Unique productSpecific id
+     * @var Identity Unique productSpecific id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to specificValue
+     * @var Identity Reference to specificValue
      */
-    protected $_specificValueId = '';             
+    protected $_specificValueId = null;
     
     /**
-     * @var string Reference to product
+     * @var Identity Reference to product
      */
-    protected $_productId = '';             
+    protected $_productId = null;
     
     /**
      * ProductSpecific Setter
@@ -52,7 +51,7 @@ class ProductSpecific extends DataModel
                 case "_specificValueId":
                 case "_productId":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
             }
@@ -60,51 +59,51 @@ class ProductSpecific extends DataModel
     }
     
     /**
-     * @param string $id Unique productSpecific id
+     * @param Identity $id Unique productSpecific id
      * @return \jtl\Connector\Model\ProductSpecific
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique productSpecific id
+     * @return Identity Unique productSpecific id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $specificValueId Reference to specificValue
+     * @param Identity $specificValueId Reference to specificValue
      * @return \jtl\Connector\Model\ProductSpecific
      */
-    public function setSpecificValueId($specificValueId)
+    public function setSpecificValueId(Identity $specificValueId)
     {
-        $this->_specificValueId = (string)$specificValueId;
+        $this->_specificValueId = $specificValueId;
         return $this;
     }
     
     /**
-     * @return string Reference to specificValue
+     * @return Identity Reference to specificValue
      */
     public function getSpecificValueId()
     {
         return $this->_specificValueId;
     }
     /**
-     * @param string $productId Reference to product
+     * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductSpecific
      */
-    public function setProductId($productId)
+    public function setProductId(Identity $productId)
     {
-        $this->_productId = (string)$productId;
+        $this->_productId = $productId;
         return $this;
     }
     
     /**
-     * @return string Reference to product
+     * @return Identity Reference to product
      */
     public function getProductId()
     {

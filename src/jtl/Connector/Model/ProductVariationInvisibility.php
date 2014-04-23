@@ -13,20 +13,19 @@ use \jtl\Core\Model\DataModel;
  * Specify productVariation to hide from customerGroup.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductVariationInvisibility extends DataModel
 {
     /**
-     * @var string Reference to customerGroup
+     * @var Identity Reference to customerGroup
      */
-    protected $_customerGroupId = '';             
+    protected $_customerGroupId = null;
     
     /**
-     * @var string Reference to productVariation
+     * @var Identity Reference to productVariation
      */
-    protected $_productVariationId = '';             
+    protected $_productVariationId = null;
     
     /**
      * ProductVariationInvisibility Setter
@@ -46,7 +45,7 @@ class ProductVariationInvisibility extends DataModel
                 case "_customerGroupId":
                 case "_productVariationId":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
             }
@@ -54,34 +53,34 @@ class ProductVariationInvisibility extends DataModel
     }
     
     /**
-     * @param string $customerGroupId Reference to customerGroup
+     * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ProductVariationInvisibility
      */
-    public function setCustomerGroupId($customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
+        $this->_customerGroupId = $customerGroupId;
         return $this;
     }
     
     /**
-     * @return string Reference to customerGroup
+     * @return Identity Reference to customerGroup
      */
     public function getCustomerGroupId()
     {
         return $this->_customerGroupId;
     }
     /**
-     * @param string $productVariationId Reference to productVariation
+     * @param Identity $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\ProductVariationInvisibility
      */
-    public function setProductVariationId($productVariationId)
+    public function setProductVariationId(Identity $productVariationId)
     {
-        $this->_productVariationId = (string)$productVariationId;
+        $this->_productVariationId = $productVariationId;
         return $this;
     }
     
     /**
-     * @return string Reference to productVariation
+     * @return Identity Reference to productVariation
      */
     public function getProductVariationId()
     {

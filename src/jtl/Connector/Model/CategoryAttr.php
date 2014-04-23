@@ -13,25 +13,24 @@ use \jtl\Core\Model\DataModel;
  * Localized category attribute
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Category
  */
 class CategoryAttr extends DataModel
 {
     /**
-     * @var string Unique categoryAttr id
+     * @var Identity Unique categoryAttr id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to category
+     * @var Identity Reference to category
      */
-    protected $_categoryId = '';             
+    protected $_categoryId = null;
     
     /**
      * @var int Optional sort number
      */
-    protected $_sort = 0;             
+    protected $_sort = 0;
     
     /**
      * CategoryAttr Setter
@@ -51,7 +50,7 @@ class CategoryAttr extends DataModel
                 case "_id":
                 case "_categoryId":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
                 case "_sort":
@@ -64,34 +63,34 @@ class CategoryAttr extends DataModel
     }
     
     /**
-     * @param string $id Unique categoryAttr id
+     * @param Identity $id Unique categoryAttr id
      * @return \jtl\Connector\Model\CategoryAttr
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique categoryAttr id
+     * @return Identity Unique categoryAttr id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $categoryId Reference to category
+     * @param Identity $categoryId Reference to category
      * @return \jtl\Connector\Model\CategoryAttr
      */
-    public function setCategoryId($categoryId)
+    public function setCategoryId(Identity $categoryId)
     {
-        $this->_categoryId = (string)$categoryId;
+        $this->_categoryId = $categoryId;
         return $this;
     }
     
     /**
-     * @return string Reference to category
+     * @return Identity Reference to category
      */
     public function getCategoryId()
     {

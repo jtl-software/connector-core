@@ -13,40 +13,39 @@ use \jtl\Core\Model\DataModel;
  * Image model.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Image
  */
 class Image extends DataModel
 {
     /**
-     * @var string Unique image id
+     * @var Identity Unique image id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to master imageId
+     * @var Identity Reference to master imageId
      */
-    protected $_masterImageId = '';             
+    protected $_masterImageId = null;
     
     /**
      * @var string Allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
      */
-    protected $_relationType = 'product';             
+    protected $_relationType = 'product';
     
     /**
      * @var int Foreign key dependent on relationType
      */
-    protected $_foreignKey = 0;             
+    protected $_foreignKey = 0;
     
     /**
      * @var string Filename or path
      */
-    protected $_filename = '';             
+    protected $_filename = '';
     
     /**
      * @var int Optional sort number
      */
-    protected $_sort = 0;             
+    protected $_sort = 0;
     
     /**
      * Image Setter
@@ -65,6 +64,10 @@ class Image extends DataModel
             switch ($name) {
                 case "_id":
                 case "_masterImageId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_relationType":
                 case "_filename":
                 
@@ -82,34 +85,34 @@ class Image extends DataModel
     }
     
     /**
-     * @param string $id Unique image id
+     * @param Identity $id Unique image id
      * @return \jtl\Connector\Model\Image
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique image id
+     * @return Identity Unique image id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $masterImageId Reference to master imageId
+     * @param Identity $masterImageId Reference to master imageId
      * @return \jtl\Connector\Model\Image
      */
-    public function setMasterImageId($masterImageId)
+    public function setMasterImageId(Identity $masterImageId)
     {
-        $this->_masterImageId = (string)$masterImageId;
+        $this->_masterImageId = $masterImageId;
         return $this;
     }
     
     /**
-     * @return string Reference to master imageId
+     * @return Identity Reference to master imageId
      */
     public function getMasterImageId()
     {

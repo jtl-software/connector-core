@@ -13,7 +13,6 @@ use \jtl\Core\Model\DataModel;
  * Localized specific value text.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Specific
  */
 class SpecificValueI18n extends DataModel
@@ -21,42 +20,42 @@ class SpecificValueI18n extends DataModel
     /**
      * @var string locale
      */
-    protected $_localeName = '';             
+    protected $_localeName = '';
     
     /**
-     * @var string Reference to specificValue
+     * @var Identity Reference to specificValue
      */
-    protected $_specificValueId = '';             
+    protected $_specificValueId = null;
     
     /**
      * @var string Localized value
      */
-    protected $_value = '';             
+    protected $_value = '';
     
     /**
      * @var string Optional localized URL path
      */
-    protected $_urlPath = '';             
+    protected $_urlPath = '';
     
     /**
      * @var string Optional localized description
      */
-    protected $_description = '';             
+    protected $_description = '';
     
     /**
      * @var string Optional localized meta description value
      */
-    protected $_metaDescription = '';             
+    protected $_metaDescription = '';
     
     /**
      * @var string Optional localized meta keywords value
      */
-    protected $_metaKeywords = '';             
+    protected $_metaKeywords = '';
     
     /**
      * @var string Optional localized title tag value
      */
-    protected $_titleTag = '';             
+    protected $_titleTag = '';
     
     /**
      * SpecificValueI18n Setter
@@ -74,7 +73,6 @@ class SpecificValueI18n extends DataModel
         
             switch ($name) {
                 case "_localeName":
-                case "_specificValueId":
                 case "_value":
                 case "_urlPath":
                 case "_description":
@@ -83,6 +81,11 @@ class SpecificValueI18n extends DataModel
                 case "_titleTag":
                 
                     $this->$name = (string)$value;
+                    break;
+            
+                case "_specificValueId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
             }
@@ -107,17 +110,17 @@ class SpecificValueI18n extends DataModel
         return $this->_localeName;
     }
     /**
-     * @param string $specificValueId Reference to specificValue
+     * @param Identity $specificValueId Reference to specificValue
      * @return \jtl\Connector\Model\SpecificValueI18n
      */
-    public function setSpecificValueId($specificValueId)
+    public function setSpecificValueId(Identity $specificValueId)
     {
-        $this->_specificValueId = (string)$specificValueId;
+        $this->_specificValueId = $specificValueId;
         return $this;
     }
     
     /**
-     * @return string Reference to specificValue
+     * @return Identity Reference to specificValue
      */
     public function getSpecificValueId()
     {

@@ -13,25 +13,24 @@ use \jtl\Core\Model\DataModel;
  * Localized product attribute.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductAttr extends DataModel
 {
     /**
-     * @var string Unique productAttr id
+     * @var Identity Unique productAttr id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to product
+     * @var Identity Reference to product
      */
-    protected $_productId = '';             
+    protected $_productId = null;
     
     /**
      * @var int Optional sort number
      */
-    protected $_sort = 0;             
+    protected $_sort = 0;
     
     /**
      * ProductAttr Setter
@@ -51,7 +50,7 @@ class ProductAttr extends DataModel
                 case "_id":
                 case "_productId":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
                 case "_sort":
@@ -64,34 +63,34 @@ class ProductAttr extends DataModel
     }
     
     /**
-     * @param string $id Unique productAttr id
+     * @param Identity $id Unique productAttr id
      * @return \jtl\Connector\Model\ProductAttr
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique productAttr id
+     * @return Identity Unique productAttr id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $productId Reference to product
+     * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductAttr
      */
-    public function setProductId($productId)
+    public function setProductId(Identity $productId)
     {
-        $this->_productId = (string)$productId;
+        $this->_productId = $productId;
         return $this;
     }
     
     /**
-     * @return string Reference to product
+     * @return Identity Reference to product
      */
     public function getProductId()
     {

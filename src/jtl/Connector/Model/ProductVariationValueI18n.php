@@ -13,7 +13,6 @@ use \jtl\Core\Model\DataModel;
  * locale specifig productVariationValue name.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductVariationValueI18n extends DataModel
@@ -21,17 +20,17 @@ class ProductVariationValueI18n extends DataModel
     /**
      * @var string Locale
      */
-    protected $_localeName = '';             
+    protected $_localeName = '';
     
     /**
-     * @var string Reference to productVariationValue
+     * @var Identity Reference to productVariationValue
      */
-    protected $_productVariationValueId = '';             
+    protected $_productVariationValueId = null;
     
     /**
      * @var string Locale specific variationValue name
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * ProductVariationValueI18n Setter
@@ -49,10 +48,14 @@ class ProductVariationValueI18n extends DataModel
         
             switch ($name) {
                 case "_localeName":
-                case "_productVariationValueId":
                 case "_name":
                 
                     $this->$name = (string)$value;
+                    break;
+            
+                case "_productVariationValueId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
             }
@@ -77,17 +80,17 @@ class ProductVariationValueI18n extends DataModel
         return $this->_localeName;
     }
     /**
-     * @param string $productVariationValueId Reference to productVariationValue
+     * @param Identity $productVariationValueId Reference to productVariationValue
      * @return \jtl\Connector\Model\ProductVariationValueI18n
      */
-    public function setProductVariationValueId($productVariationValueId)
+    public function setProductVariationValueId(Identity $productVariationValueId)
     {
-        $this->_productVariationValueId = (string)$productVariationValueId;
+        $this->_productVariationValueId = $productVariationValueId;
         return $this;
     }
     
     /**
-     * @return string Reference to productVariationValue
+     * @return Identity Reference to productVariationValue
      */
     public function getProductVariationValueId()
     {

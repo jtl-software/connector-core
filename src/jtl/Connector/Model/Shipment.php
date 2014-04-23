@@ -13,45 +13,44 @@ use \jtl\Core\Model\DataModel;
  * Shipment Model with reference to a deliveryNote
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage DeliveryNote
  */
 class Shipment extends DataModel
 {
     /**
-     * @var string Unique shipment id
+     * @var Identity Unique shipment id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to deliveryNote
+     * @var Identity Reference to deliveryNote
      */
-    protected $_deliveryNoteId = '';             
+    protected $_deliveryNoteId = null;
     
     /**
-     * @var string Carrier name
+     * @var string Logistic name
      */
-    protected $_carrierName = '';             
+    protected $_logistic = '';
     
     /**
-     * @var string Optional Tracking URL
+     * @var string Optional Logistic URL
      */
-    protected $_trackingURL = '';             
+    protected $_logisticURL = '';
     
     /**
      * @var string Optional Identcode
      */
-    protected $_identCode = '';             
+    protected $_identCode = '';
     
     /**
      * @var string Creation date
      */
-    protected $_created = null;             
+    protected $_created = null;
     
     /**
      * @var string Optional shipment note
      */
-    protected $_note = '';             
+    protected $_note = '';
     
     /**
      * Shipment Setter
@@ -70,8 +69,12 @@ class Shipment extends DataModel
             switch ($name) {
                 case "_id":
                 case "_deliveryNoteId":
-                case "_carrierName":
-                case "_trackingURL":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
+                case "_logistic":
+                case "_logisticURL":
                 case "_identCode":
                 case "_created":
                 case "_note":
@@ -84,72 +87,72 @@ class Shipment extends DataModel
     }
     
     /**
-     * @param string $id Unique shipment id
+     * @param Identity $id Unique shipment id
      * @return \jtl\Connector\Model\Shipment
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique shipment id
+     * @return Identity Unique shipment id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $deliveryNoteId Reference to deliveryNote
+     * @param Identity $deliveryNoteId Reference to deliveryNote
      * @return \jtl\Connector\Model\Shipment
      */
-    public function setDeliveryNoteId($deliveryNoteId)
+    public function setDeliveryNoteId(Identity $deliveryNoteId)
     {
-        $this->_deliveryNoteId = (string)$deliveryNoteId;
+        $this->_deliveryNoteId = $deliveryNoteId;
         return $this;
     }
     
     /**
-     * @return string Reference to deliveryNote
+     * @return Identity Reference to deliveryNote
      */
     public function getDeliveryNoteId()
     {
         return $this->_deliveryNoteId;
     }
     /**
-     * @param string $carrierName Carrier name
+     * @param string $logistic Logistic name
      * @return \jtl\Connector\Model\Shipment
      */
-    public function setCarrierName($carrierName)
+    public function setLogistic($logistic)
     {
-        $this->_carrierName = (string)$carrierName;
+        $this->_logistic = (string)$logistic;
         return $this;
     }
     
     /**
-     * @return string Carrier name
+     * @return string Logistic name
      */
-    public function getCarrierName()
+    public function getLogistic()
     {
-        return $this->_carrierName;
+        return $this->_logistic;
     }
     /**
-     * @param string $trackingURL Optional Tracking URL
+     * @param string $logisticURL Optional Logistic URL
      * @return \jtl\Connector\Model\Shipment
      */
-    public function setTrackingURL($trackingURL)
+    public function setLogisticURL($logisticURL)
     {
-        $this->_trackingURL = (string)$trackingURL;
+        $this->_logisticURL = (string)$logisticURL;
         return $this;
     }
     
     /**
-     * @return string Optional Tracking URL
+     * @return string Optional Logistic URL
      */
-    public function getTrackingURL()
+    public function getLogisticURL()
     {
-        return $this->_trackingURL;
+        return $this->_logisticURL;
     }
     /**
      * @param string $identCode Optional Identcode

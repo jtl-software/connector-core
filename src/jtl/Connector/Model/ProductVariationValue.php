@@ -13,40 +13,39 @@ use \jtl\Core\Model\DataModel;
  * Product variation value model. Each product defines its own variations and variation values. 
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductVariationValue extends DataModel
 {
     /**
-     * @var string Unique productVariationValue id
+     * @var Identity Unique productVariationValue id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to productVariation
+     * @var Identity Reference to productVariation
      */
-    protected $_productVariationId = '';             
+    protected $_productVariationId = null;
     
     /**
      * @var double Optional variation extra weight
      */
-    protected $_extraWeight = 0;             
+    protected $_extraWeight = 0;
     
     /**
      * @var string Optional Stock Keeping Unit
      */
-    protected $_sku = '';             
+    protected $_sku = '';
     
     /**
      * @var int Optional sort number
      */
-    protected $_sort = 0;             
+    protected $_sort = 0;
     
     /**
      * @var double Optional stock level
      */
-    protected $_stockLevel = 0.0;             
+    protected $_stockLevel = 0.0;
     
     /**
      * ProductVariationValue Setter
@@ -65,15 +64,19 @@ class ProductVariationValue extends DataModel
             switch ($name) {
                 case "_id":
                 case "_productVariationId":
-                case "_sku":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
                 case "_extraWeight":
                 case "_stockLevel":
                 
                     $this->$name = (double)$value;
+                    break;
+            
+                case "_sku":
+                
+                    $this->$name = (string)$value;
                     break;
             
                 case "_sort":
@@ -86,34 +89,34 @@ class ProductVariationValue extends DataModel
     }
     
     /**
-     * @param string $id Unique productVariationValue id
+     * @param Identity $id Unique productVariationValue id
      * @return \jtl\Connector\Model\ProductVariationValue
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique productVariationValue id
+     * @return Identity Unique productVariationValue id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $productVariationId Reference to productVariation
+     * @param Identity $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\ProductVariationValue
      */
-    public function setProductVariationId($productVariationId)
+    public function setProductVariationId(Identity $productVariationId)
     {
-        $this->_productVariationId = (string)$productVariationId;
+        $this->_productVariationId = $productVariationId;
         return $this;
     }
     
     /**
-     * @return string Reference to productVariation
+     * @return Identity Reference to productVariation
      */
     public function getProductVariationId()
     {

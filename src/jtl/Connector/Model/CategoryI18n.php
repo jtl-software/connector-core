@@ -13,7 +13,6 @@ use \jtl\Core\Model\DataModel;
  * Localized category properties. localeName, categoryId and a localized name must be set. 
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Category
  */
 class CategoryI18n extends DataModel
@@ -21,42 +20,42 @@ class CategoryI18n extends DataModel
     /**
      * @var string Locale
      */
-    protected $_localeName = '';             
+    protected $_localeName = '';
     
     /**
-     * @var string Reference to category
+     * @var Identity Reference to category
      */
-    protected $_categoryId = '';             
+    protected $_categoryId = null;
     
     /**
      * @var string Localized category name
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * @var string Optional localized category URL
      */
-    protected $_urlPath = '';             
+    protected $_urlPath = '';
     
     /**
      * @var string Optional localized Long Description
      */
-    protected $_description = '';             
+    protected $_description = '';
     
     /**
      * @var string Optional localized  short description used for meta tag description
      */
-    protected $_metaDescription = '';             
+    protected $_metaDescription = '';
     
     /**
      * @var string Optional localized meta tag keywords value
      */
-    protected $_metaKeywords = '';             
+    protected $_metaKeywords = '';
     
     /**
      * @var string Optional localized title tag value
      */
-    protected $_titleTag = '';             
+    protected $_titleTag = '';
     
     /**
      * CategoryI18n Setter
@@ -74,7 +73,6 @@ class CategoryI18n extends DataModel
         
             switch ($name) {
                 case "_localeName":
-                case "_categoryId":
                 case "_name":
                 case "_urlPath":
                 case "_description":
@@ -83,6 +81,11 @@ class CategoryI18n extends DataModel
                 case "_titleTag":
                 
                     $this->$name = (string)$value;
+                    break;
+            
+                case "_categoryId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
             }
@@ -107,17 +110,17 @@ class CategoryI18n extends DataModel
         return $this->_localeName;
     }
     /**
-     * @param string $categoryId Reference to category
+     * @param Identity $categoryId Reference to category
      * @return \jtl\Connector\Model\CategoryI18n
      */
-    public function setCategoryId($categoryId)
+    public function setCategoryId(Identity $categoryId)
     {
-        $this->_categoryId = (string)$categoryId;
+        $this->_categoryId = $categoryId;
         return $this;
     }
     
     /**
-     * @return string Reference to category
+     * @return Identity Reference to category
      */
     public function getCategoryId()
     {

@@ -13,30 +13,29 @@ use \jtl\Core\Model\DataModel;
  * Monolingual attribute for a customerorder.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage CustomerOrder
  */
 class CustomerOrderAttr extends DataModel
 {
     /**
-     * @var string Unique customerOrderAttr id
+     * @var Identity Unique customerOrderAttr id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to customerOrder
+     * @var Identity Reference to customerOrder
      */
-    protected $_customerOrderId = '';             
+    protected $_customerOrderId = null;
     
     /**
      * @var string Attribute key name
      */
-    protected $_key = '';             
+    protected $_key = '';
     
     /**
      * @var string Attribute value
      */
-    protected $_value = '';             
+    protected $_value = '';
     
     /**
      * CustomerOrderAttr Setter
@@ -55,6 +54,10 @@ class CustomerOrderAttr extends DataModel
             switch ($name) {
                 case "_id":
                 case "_customerOrderId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_key":
                 case "_value":
                 
@@ -66,34 +69,34 @@ class CustomerOrderAttr extends DataModel
     }
     
     /**
-     * @param string $id Unique customerOrderAttr id
+     * @param Identity $id Unique customerOrderAttr id
      * @return \jtl\Connector\Model\CustomerOrderAttr
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique customerOrderAttr id
+     * @return Identity Unique customerOrderAttr id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $customerOrderId Reference to customerOrder
+     * @param Identity $customerOrderId Reference to customerOrder
      * @return \jtl\Connector\Model\CustomerOrderAttr
      */
-    public function setCustomerOrderId($customerOrderId)
+    public function setCustomerOrderId(Identity $customerOrderId)
     {
-        $this->_customerOrderId = (string)$customerOrderId;
+        $this->_customerOrderId = $customerOrderId;
         return $this;
     }
     
     /**
-     * @return string Reference to customerOrder
+     * @return Identity Reference to customerOrder
      */
     public function getCustomerOrderId()
     {

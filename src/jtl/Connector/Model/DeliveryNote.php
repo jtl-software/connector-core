@@ -13,7 +13,6 @@ use \jtl\Core\Model\DataModel;
  * A delivery note created for shipment.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage DeliveryNote
  */
 class DeliveryNote extends DataModel
@@ -34,34 +33,34 @@ class DeliveryNote extends DataModel
     const STATUS_COMPLETED = completed;
     
     /**
-     * @var string Unique deliveryNote id
+     * @var Identity Unique deliveryNote id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to customerOrder
+     * @var Identity Reference to customerOrder
      */
-    protected $_customerOrderId = '';             
+    protected $_customerOrderId = null;
     
     /**
      * @var string Optional text note
      */
-    protected $_note = '';             
+    protected $_note = '';
     
     /**
      * @var string Creation date
      */
-    protected $_created = null;             
+    protected $_created = null;
     
     /**
      * @var bool Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      */
-    protected $_isFulfillment = false;             
+    protected $_isFulfillment = false;
     
     /**
      * @var int Delivery status
      */
-    protected $_status = 0;             
+    protected $_status = 0;
     
     /**
      * DeliveryNote Setter
@@ -80,6 +79,10 @@ class DeliveryNote extends DataModel
             switch ($name) {
                 case "_id":
                 case "_customerOrderId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_note":
                 case "_created":
                 
@@ -101,34 +104,34 @@ class DeliveryNote extends DataModel
     }
     
     /**
-     * @param string $id Unique deliveryNote id
+     * @param Identity $id Unique deliveryNote id
      * @return \jtl\Connector\Model\DeliveryNote
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique deliveryNote id
+     * @return Identity Unique deliveryNote id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $customerOrderId Reference to customerOrder
+     * @param Identity $customerOrderId Reference to customerOrder
      * @return \jtl\Connector\Model\DeliveryNote
      */
-    public function setCustomerOrderId($customerOrderId)
+    public function setCustomerOrderId(Identity $customerOrderId)
     {
-        $this->_customerOrderId = (string)$customerOrderId;
+        $this->_customerOrderId = $customerOrderId;
         return $this;
     }
     
     /**
-     * @return string Reference to customerOrder
+     * @return Identity Reference to customerOrder
      */
     public function getCustomerOrderId()
     {

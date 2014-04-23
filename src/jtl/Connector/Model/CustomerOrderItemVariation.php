@@ -13,50 +13,49 @@ use \jtl\Core\Model\DataModel;
  * customer order item variation
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage CustomerOrder
  */
 class CustomerOrderItemVariation extends DataModel
 {
     /**
-     * @var string Unique customerOrderItemVariation id
+     * @var Identity Unique customerOrderItemVariation id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to customerOrderItem
+     * @var Identity Reference to customerOrderItem
      */
-    protected $_customerOrderItemId = '';             
+    protected $_customerOrderItemId = null;
     
     /**
-     * @var string Reference to productVariation
+     * @var Identity Reference to productVariation
      */
-    protected $_productVariationId = '';             
+    protected $_productVariationId = null;
     
     /**
-     * @var string Reference to productVariationValue
+     * @var Identity Reference to productVariationValue
      */
-    protected $_productVariationValueId = '';             
+    protected $_productVariationValueId = null;
     
     /**
      * @var string Variation name e.g. "color"
      */
-    protected $_productVariationName = '';             
+    protected $_productVariationName = '';
     
     /**
      * @var string Variation value e.g. "red"
      */
-    protected $_productVariationValueName = '';             
+    protected $_productVariationValueName = '';
     
     /**
      * @var string Optional custom text value for variation 
      */
-    protected $_freeField = '';             
+    protected $_freeField = '';
     
     /**
      * @var double Optional extra surcharge (added to item price)
      */
-    protected $_surcharge = 0;             
+    protected $_surcharge = 0;
     
     /**
      * CustomerOrderItemVariation Setter
@@ -77,6 +76,10 @@ class CustomerOrderItemVariation extends DataModel
                 case "_customerOrderItemId":
                 case "_productVariationId":
                 case "_productVariationValueId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_productVariationName":
                 case "_productVariationValueName":
                 case "_freeField":
@@ -94,68 +97,68 @@ class CustomerOrderItemVariation extends DataModel
     }
     
     /**
-     * @param string $id Unique customerOrderItemVariation id
+     * @param Identity $id Unique customerOrderItemVariation id
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique customerOrderItemVariation id
+     * @return Identity Unique customerOrderItemVariation id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $customerOrderItemId Reference to customerOrderItem
+     * @param Identity $customerOrderItemId Reference to customerOrderItem
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
      */
-    public function setCustomerOrderItemId($customerOrderItemId)
+    public function setCustomerOrderItemId(Identity $customerOrderItemId)
     {
-        $this->_customerOrderItemId = (string)$customerOrderItemId;
+        $this->_customerOrderItemId = $customerOrderItemId;
         return $this;
     }
     
     /**
-     * @return string Reference to customerOrderItem
+     * @return Identity Reference to customerOrderItem
      */
     public function getCustomerOrderItemId()
     {
         return $this->_customerOrderItemId;
     }
     /**
-     * @param string $productVariationId Reference to productVariation
+     * @param Identity $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
      */
-    public function setProductVariationId($productVariationId)
+    public function setProductVariationId(Identity $productVariationId)
     {
-        $this->_productVariationId = (string)$productVariationId;
+        $this->_productVariationId = $productVariationId;
         return $this;
     }
     
     /**
-     * @return string Reference to productVariation
+     * @return Identity Reference to productVariation
      */
     public function getProductVariationId()
     {
         return $this->_productVariationId;
     }
     /**
-     * @param string $productVariationValueId Reference to productVariationValue
+     * @param Identity $productVariationValueId Reference to productVariationValue
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
      */
-    public function setProductVariationValueId($productVariationValueId)
+    public function setProductVariationValueId(Identity $productVariationValueId)
     {
-        $this->_productVariationValueId = (string)$productVariationValueId;
+        $this->_productVariationValueId = $productVariationValueId;
         return $this;
     }
     
     /**
-     * @return string Reference to productVariationValue
+     * @return Identity Reference to productVariationValue
      */
     public function getProductVariationValueId()
     {

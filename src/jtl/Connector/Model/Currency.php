@@ -13,55 +13,54 @@ use \jtl\Core\Model\DataModel;
  * Currency model properties.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class Currency extends DataModel
 {
     /**
-     * @var string Unique currency id
+     * @var Identity Unique currency id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
      * @var string Currency name
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * @var string Currency ISO 4217 (3-letter Uppercase Code)
      */
-    protected $_iso = '';             
+    protected $_iso = '';
     
     /**
      * @var string Optional HTML name e.g. "&euro;"
      */
-    protected $_nameHtml = '';             
+    protected $_nameHtml = '';
     
     /**
      * @var double Optional conversion factor to default currency. Default is 1 (equals default currency)
      */
-    protected $_factor = 1;             
+    protected $_factor = 1;
     
     /**
      * @var bool Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default. 
      */
-    protected $_isDefault = false;             
+    protected $_isDefault = false;
     
     /**
      * @var bool Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference. 
      */
-    protected $_hasCurrencySignBeforeValue = false;             
+    protected $_hasCurrencySignBeforeValue = false;
     
     /**
      * @var string Optional delimiter char for cent, default=",". Ignore this flag if you have the correct user locale preference.
      */
-    protected $_delimiterCent = ',';             
+    protected $_delimiterCent = ',';
     
     /**
      * @var string Optional delimiter char for thousand. Default=".". Ignore this flag if you have the correct user locale preference.
      */
-    protected $_delimiterThousand = '.';             
+    protected $_delimiterThousand = '.';
     
     /**
      * Currency Setter
@@ -79,6 +78,10 @@ class Currency extends DataModel
         
             switch ($name) {
                 case "_id":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_name":
                 case "_iso":
                 case "_nameHtml":
@@ -104,17 +107,17 @@ class Currency extends DataModel
     }
     
     /**
-     * @param string $id Unique currency id
+     * @param Identity $id Unique currency id
      * @return \jtl\Connector\Model\Currency
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique currency id
+     * @return Identity Unique currency id
      */
     public function getId()
     {

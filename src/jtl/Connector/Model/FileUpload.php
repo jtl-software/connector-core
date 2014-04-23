@@ -13,40 +13,39 @@ use \jtl\Core\Model\DataModel;
  * File upload properties. 
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class FileUpload extends DataModel
 {
     /**
-     * @var string Unique fileUpload id
+     * @var Identity Unique fileUpload id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to product
+     * @var Identity Reference to product
      */
-    protected $_productId = '';             
+    protected $_productId = null;
     
     /**
      * @var string Filename specification
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * @var string Optional file description
      */
-    protected $_description = '';             
+    protected $_description = '';
     
     /**
      * @var string Allowed file type
      */
-    protected $_fileType = '';             
+    protected $_fileType = '';
     
     /**
      * @var bool Optional flag to force upload before finishing checkout. True if file upload is required to buy product
      */
-    protected $_isRequired = false;             
+    protected $_isRequired = false;
     
     /**
      * FileUpload Setter
@@ -65,6 +64,10 @@ class FileUpload extends DataModel
             switch ($name) {
                 case "_id":
                 case "_productId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_name":
                 case "_description":
                 case "_fileType":
@@ -82,34 +85,34 @@ class FileUpload extends DataModel
     }
     
     /**
-     * @param string $id Unique fileUpload id
+     * @param Identity $id Unique fileUpload id
      * @return \jtl\Connector\Model\FileUpload
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique fileUpload id
+     * @return Identity Unique fileUpload id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $productId Reference to product
+     * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\FileUpload
      */
-    public function setProductId($productId)
+    public function setProductId(Identity $productId)
     {
-        $this->_productId = (string)$productId;
+        $this->_productId = $productId;
         return $this;
     }
     
     /**
-     * @return string Reference to product
+     * @return Identity Reference to product
      */
     public function getProductId()
     {

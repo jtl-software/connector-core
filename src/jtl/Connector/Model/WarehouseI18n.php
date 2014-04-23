@@ -13,20 +13,19 @@ use \jtl\Core\Model\DataModel;
  * Localized warehouse name.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class WarehouseI18n extends DataModel
 {
     /**
-     * @var string Reference to warehouse
+     * @var Identity Reference to warehouse
      */
-    protected $_warehouseId = '';             
+    protected $_warehouseId = null;
     
     /**
      * @var string Localized warehouse name
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * WarehouseI18n Setter
@@ -44,6 +43,10 @@ class WarehouseI18n extends DataModel
         
             switch ($name) {
                 case "_warehouseId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_name":
                 
                     $this->$name = (string)$value;
@@ -54,17 +57,17 @@ class WarehouseI18n extends DataModel
     }
     
     /**
-     * @param string $warehouseId Reference to warehouse
+     * @param Identity $warehouseId Reference to warehouse
      * @return \jtl\Connector\Model\WarehouseI18n
      */
-    public function setWarehouseId($warehouseId)
+    public function setWarehouseId(Identity $warehouseId)
     {
-        $this->_warehouseId = (string)$warehouseId;
+        $this->_warehouseId = $warehouseId;
         return $this;
     }
     
     /**
-     * @return string Reference to warehouse
+     * @return Identity Reference to warehouse
      */
     public function getWarehouseId()
     {

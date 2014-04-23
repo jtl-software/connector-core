@@ -13,7 +13,6 @@ use \jtl\Core\Model\DataModel;
  * Define set articles / parts lists. 
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class SetArticle extends DataModel
@@ -21,17 +20,17 @@ class SetArticle extends DataModel
     /**
      * @var string Unique setArticle id, referenced by product.setArticleId
      */
-    protected $_id = '';             
+    protected $_id = '';
     
     /**
      * @var string Reference to a component / product
      */
-    protected $_productId = '';             
+    protected $_productId = '';
     
     /**
      * @var double Component quantity
      */
-    protected $_quantity = 0.0;             
+    protected $_quantity = 0.0;
     
     /**
      * SetArticle Setter

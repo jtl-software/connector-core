@@ -13,70 +13,69 @@ use \jtl\Core\Model\DataModel;
  * Order item in customer order.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage CustomerOrder
  */
 class CustomerOrderItem extends DataModel
 {
     /**
-     * @var string Unique customerOrderItem id
+     * @var Identity Unique customerOrderItem id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to product
+     * @var Identity Reference to product
      */
-    protected $_productId = '';             
+    protected $_productId = null;
     
     /**
-     * @var string Reference to shippingClass
+     * @var Identity Reference to shippingClass
      */
-    protected $_shippingClassId = '';             
+    protected $_shippingClassId = null;
     
     /**
-     * @var string Reference to customerOrder
+     * @var Identity Reference to customerOrder
      */
-    protected $_customerOrderId = '';             
+    protected $_customerOrderId = null;
     
     /**
      * @var string Order item name
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * @var string Stock keeping Unit (unique item identifier)
      */
-    protected $_sku = '';             
+    protected $_sku = '';
     
     /**
      * @var double Price (net)
      */
-    protected $_price = 0.0;             
+    protected $_price = 0.0;
     
     /**
      * @var double Value added tax
      */
-    protected $_vat = 0.0;             
+    protected $_vat = 0.0;
     
     /**
      * @var int Quantity purchased
      */
-    protected $_quantity = 0;             
+    protected $_quantity = 0;
     
     /**
      * @var string Item type e.g. "product" or "shipping"
      */
-    protected $_type = '';             
+    protected $_type = '';
     
     /**
      * @var string Optional unique Hashsum (if item is part of configurable item
      */
-    protected $_unique = '';             
+    protected $_unique = '';
     
     /**
      * @var string Optional reference to configItemId (if item is part of a configurable item)
      */
-    protected $_configItemId = '0';             
+    protected $_configItemId = '0';
     
     /**
      * CustomerOrderItem Setter
@@ -97,6 +96,10 @@ class CustomerOrderItem extends DataModel
                 case "_productId":
                 case "_shippingClassId":
                 case "_customerOrderId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_name":
                 case "_sku":
                 case "_type":
@@ -122,68 +125,68 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @param string $id Unique customerOrderItem id
+     * @param Identity $id Unique customerOrderItem id
      * @return \jtl\Connector\Model\CustomerOrderItem
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique customerOrderItem id
+     * @return Identity Unique customerOrderItem id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $productId Reference to product
+     * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\CustomerOrderItem
      */
-    public function setProductId($productId)
+    public function setProductId(Identity $productId)
     {
-        $this->_productId = (string)$productId;
+        $this->_productId = $productId;
         return $this;
     }
     
     /**
-     * @return string Reference to product
+     * @return Identity Reference to product
      */
     public function getProductId()
     {
         return $this->_productId;
     }
     /**
-     * @param string $shippingClassId Reference to shippingClass
+     * @param Identity $shippingClassId Reference to shippingClass
      * @return \jtl\Connector\Model\CustomerOrderItem
      */
-    public function setShippingClassId($shippingClassId)
+    public function setShippingClassId(Identity $shippingClassId)
     {
-        $this->_shippingClassId = (string)$shippingClassId;
+        $this->_shippingClassId = $shippingClassId;
         return $this;
     }
     
     /**
-     * @return string Reference to shippingClass
+     * @return Identity Reference to shippingClass
      */
     public function getShippingClassId()
     {
         return $this->_shippingClassId;
     }
     /**
-     * @param string $customerOrderId Reference to customerOrder
+     * @param Identity $customerOrderId Reference to customerOrder
      * @return \jtl\Connector\Model\CustomerOrderItem
      */
-    public function setCustomerOrderId($customerOrderId)
+    public function setCustomerOrderId(Identity $customerOrderId)
     {
-        $this->_customerOrderId = (string)$customerOrderId;
+        $this->_customerOrderId = $customerOrderId;
         return $this;
     }
     
     /**
-     * @return string Reference to customerOrder
+     * @return Identity Reference to customerOrder
      */
     public function getCustomerOrderId()
     {

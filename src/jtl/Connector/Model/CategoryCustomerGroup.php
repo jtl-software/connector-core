@@ -13,25 +13,24 @@ use \jtl\Core\Model\DataModel;
  * Link customergroup with category. Set optional discount on category for customergroup. 
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Category
  */
 class CategoryCustomerGroup extends DataModel
 {
     /**
-     * @var string Reference to customerGroup
+     * @var Identity Reference to customerGroup
      */
-    protected $_customerGroupId = '';             
+    protected $_customerGroupId = null;
     
     /**
-     * @var string Reference to category
+     * @var Identity Reference to category
      */
-    protected $_categoryId = '';             
+    protected $_categoryId = null;
     
     /**
      * @var double Optional discount on products in specified categoryId for  customerGroupId
      */
-    protected $_discount = 0;             
+    protected $_discount = 0;
     
     /**
      * CategoryCustomerGroup Setter
@@ -51,7 +50,7 @@ class CategoryCustomerGroup extends DataModel
                 case "_customerGroupId":
                 case "_categoryId":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
                 case "_discount":
@@ -64,34 +63,34 @@ class CategoryCustomerGroup extends DataModel
     }
     
     /**
-     * @param string $customerGroupId Reference to customerGroup
+     * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\CategoryCustomerGroup
      */
-    public function setCustomerGroupId($customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
+        $this->_customerGroupId = $customerGroupId;
         return $this;
     }
     
     /**
-     * @return string Reference to customerGroup
+     * @return Identity Reference to customerGroup
      */
     public function getCustomerGroupId()
     {
         return $this->_customerGroupId;
     }
     /**
-     * @param string $categoryId Reference to category
+     * @param Identity $categoryId Reference to category
      * @return \jtl\Connector\Model\CategoryCustomerGroup
      */
-    public function setCategoryId($categoryId)
+    public function setCategoryId(Identity $categoryId)
     {
-        $this->_categoryId = (string)$categoryId;
+        $this->_categoryId = $categoryId;
         return $this;
     }
     
     /**
-     * @return string Reference to category
+     * @return Identity Reference to category
      */
     public function getCategoryId()
     {

@@ -13,30 +13,29 @@ use \jtl\Core\Model\DataModel;
  * Monolingual customer attribute.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Customer
  */
 class CustomerAttr extends DataModel
 {
     /**
-     * @var string Unique customerAttr id
+     * @var Identity Unique customerAttr id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to customer
+     * @var Identity Reference to customer
      */
-    protected $_customerId = '';             
+    protected $_customerId = null;
     
     /**
      * @var string Attribute key
      */
-    protected $_key = '';             
+    protected $_key = '';
     
     /**
      * @var string Attribute value
      */
-    protected $_value = '';             
+    protected $_value = '';
     
     /**
      * CustomerAttr Setter
@@ -55,6 +54,10 @@ class CustomerAttr extends DataModel
             switch ($name) {
                 case "_id":
                 case "_customerId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_key":
                 case "_value":
                 
@@ -66,34 +69,34 @@ class CustomerAttr extends DataModel
     }
     
     /**
-     * @param string $id Unique customerAttr id
+     * @param Identity $id Unique customerAttr id
      * @return \jtl\Connector\Model\CustomerAttr
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique customerAttr id
+     * @return Identity Unique customerAttr id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $customerId Reference to customer
+     * @param Identity $customerId Reference to customer
      * @return \jtl\Connector\Model\CustomerAttr
      */
-    public function setCustomerId($customerId)
+    public function setCustomerId(Identity $customerId)
     {
-        $this->_customerId = (string)$customerId;
+        $this->_customerId = $customerId;
         return $this;
     }
     
     /**
-     * @return string Reference to customer
+     * @return Identity Reference to customer
      */
     public function getCustomerId()
     {

@@ -13,25 +13,24 @@ use \jtl\Core\Model\DataModel;
  * Extra charge for productVariationValue per customerGroup.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductVariationValueExtraCharge extends DataModel
 {
     /**
-     * @var string Reference to customerGroup
+     * @var Identity Reference to customerGroup
      */
-    protected $_customerGroupId = '';             
+    protected $_customerGroupId = null;
     
     /**
-     * @var string Reference to productVariationValue
+     * @var Identity Reference to productVariationValue
      */
-    protected $_productVariationValueId = '';             
+    protected $_productVariationValueId = null;
     
     /**
      * @var double Extra charge (net)
      */
-    protected $_extraChargeNet = 0.0;             
+    protected $_extraChargeNet = 0.0;
     
     /**
      * ProductVariationValueExtraCharge Setter
@@ -51,7 +50,7 @@ class ProductVariationValueExtraCharge extends DataModel
                 case "_customerGroupId":
                 case "_productVariationValueId":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
                 case "_extraChargeNet":
@@ -64,34 +63,34 @@ class ProductVariationValueExtraCharge extends DataModel
     }
     
     /**
-     * @param string $customerGroupId Reference to customerGroup
+     * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
      */
-    public function setCustomerGroupId($customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
+        $this->_customerGroupId = $customerGroupId;
         return $this;
     }
     
     /**
-     * @return string Reference to customerGroup
+     * @return Identity Reference to customerGroup
      */
     public function getCustomerGroupId()
     {
         return $this->_customerGroupId;
     }
     /**
-     * @param string $productVariationValueId Reference to productVariationValue
+     * @param Identity $productVariationValueId Reference to productVariationValue
      * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
      */
-    public function setProductVariationValueId($productVariationValueId)
+    public function setProductVariationValueId(Identity $productVariationValueId)
     {
-        $this->_productVariationValueId = (string)$productVariationValueId;
+        $this->_productVariationValueId = $productVariationValueId;
         return $this;
     }
     
     /**
-     * @return string Reference to productVariationValue
+     * @return Identity Reference to productVariationValue
      */
     public function getProductVariationValueId()
     {

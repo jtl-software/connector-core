@@ -13,25 +13,24 @@ use \jtl\Core\Model\DataModel;
  * Tax class model (set in JTL-Wawi ERP)
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class TaxClass extends DataModel
 {
     /**
-     * @var string Unique taxClass id
+     * @var Identity Unique taxClass id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
      * @var string Optional tax class name
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * @var bool Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
      */
-    protected $_isDefault = false;             
+    protected $_isDefault = false;
     
     /**
      * TaxClass Setter
@@ -49,6 +48,10 @@ class TaxClass extends DataModel
         
             switch ($name) {
                 case "_id":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_name":
                 
                     $this->$name = (string)$value;
@@ -64,17 +67,17 @@ class TaxClass extends DataModel
     }
     
     /**
-     * @param string $id Unique taxClass id
+     * @param Identity $id Unique taxClass id
      * @return \jtl\Connector\Model\TaxClass
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique taxClass id
+     * @return Identity Unique taxClass id
      */
     public function getId()
     {

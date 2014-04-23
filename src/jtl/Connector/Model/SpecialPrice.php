@@ -13,25 +13,24 @@ use \jtl\Core\Model\DataModel;
  * special price properties to define a net price for a customerGroup.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage 
  */
 class SpecialPrice extends DataModel
 {
     /**
-     * @var string Reference to customerGroup
+     * @var Identity Reference to customerGroup
      */
-    protected $_customerGroupId = '';             
+    protected $_customerGroupId = null;
     
     /**
-     * @var string Reference to productSpecialPrice
+     * @var Identity Reference to productSpecialPrice
      */
-    protected $_productSpecialPriceId = '';             
+    protected $_productSpecialPriceId = null;
     
     /**
      * @var double net price value
      */
-    protected $_priceNet = 0.0;             
+    protected $_priceNet = 0.0;
     
     /**
      * SpecialPrice Setter
@@ -51,7 +50,7 @@ class SpecialPrice extends DataModel
                 case "_customerGroupId":
                 case "_productSpecialPriceId":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
                 case "_priceNet":
@@ -64,34 +63,34 @@ class SpecialPrice extends DataModel
     }
     
     /**
-     * @param string $customerGroupId Reference to customerGroup
+     * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\SpecialPrice
      */
-    public function setCustomerGroupId($customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
+        $this->_customerGroupId = $customerGroupId;
         return $this;
     }
     
     /**
-     * @return string Reference to customerGroup
+     * @return Identity Reference to customerGroup
      */
     public function getCustomerGroupId()
     {
         return $this->_customerGroupId;
     }
     /**
-     * @param string $productSpecialPriceId Reference to productSpecialPrice
+     * @param Identity $productSpecialPriceId Reference to productSpecialPrice
      * @return \jtl\Connector\Model\SpecialPrice
      */
-    public function setProductSpecialPriceId($productSpecialPriceId)
+    public function setProductSpecialPriceId(Identity $productSpecialPriceId)
     {
-        $this->_productSpecialPriceId = (string)$productSpecialPriceId;
+        $this->_productSpecialPriceId = $productSpecialPriceId;
         return $this;
     }
     
     /**
-     * @return string Reference to productSpecialPrice
+     * @return Identity Reference to productSpecialPrice
      */
     public function getProductSpecialPriceId()
     {

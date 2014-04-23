@@ -13,30 +13,29 @@ use \jtl\Core\Model\DataModel;
  * Localized configGroup
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class ConfigGroupI18n extends DataModel
 {
     /**
-     * @var string Reference to configGroup
+     * @var Identity Reference to configGroup
      */
-    protected $_configGroupId = '';             
+    protected $_configGroupId = null;
     
     /**
      * @var string Locale
      */
-    protected $_localeName = '';             
+    protected $_localeName = '';
     
     /**
      * @var string Config group name
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * @var string Optional description (HTML)
      */
-    protected $_description = '';             
+    protected $_description = '';
     
     /**
      * ConfigGroupI18n Setter
@@ -54,6 +53,10 @@ class ConfigGroupI18n extends DataModel
         
             switch ($name) {
                 case "_configGroupId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_localeName":
                 case "_name":
                 case "_description":
@@ -66,17 +69,17 @@ class ConfigGroupI18n extends DataModel
     }
     
     /**
-     * @param string $configGroupId Reference to configGroup
+     * @param Identity $configGroupId Reference to configGroup
      * @return \jtl\Connector\Model\ConfigGroupI18n
      */
-    public function setConfigGroupId($configGroupId)
+    public function setConfigGroupId(Identity $configGroupId)
     {
-        $this->_configGroupId = (string)$configGroupId;
+        $this->_configGroupId = $configGroupId;
         return $this;
     }
     
     /**
-     * @return string Reference to configGroup
+     * @return Identity Reference to configGroup
      */
     public function getConfigGroupId()
     {

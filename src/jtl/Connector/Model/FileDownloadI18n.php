@@ -13,30 +13,29 @@ use \jtl\Core\Model\DataModel;
  * Localized fileDownload name and  description.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class FileDownloadI18n extends DataModel
 {
     /**
-     * @var string Reference to fileDownloadId
+     * @var Identity Reference to fileDownloadId
      */
-    protected $_fileDownloadId = '';             
+    protected $_fileDownloadId = null;
     
     /**
      * @var string Locale
      */
-    protected $_localeName = '';             
+    protected $_localeName = '';
     
     /**
      * @var string File download title / name
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * @var string Optional File download description
      */
-    protected $_description = '';             
+    protected $_description = '';
     
     /**
      * FileDownloadI18n Setter
@@ -54,6 +53,10 @@ class FileDownloadI18n extends DataModel
         
             switch ($name) {
                 case "_fileDownloadId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_localeName":
                 case "_name":
                 case "_description":
@@ -66,17 +69,17 @@ class FileDownloadI18n extends DataModel
     }
     
     /**
-     * @param string $fileDownloadId Reference to fileDownloadId
+     * @param Identity $fileDownloadId Reference to fileDownloadId
      * @return \jtl\Connector\Model\FileDownloadI18n
      */
-    public function setFileDownloadId($fileDownloadId)
+    public function setFileDownloadId(Identity $fileDownloadId)
     {
-        $this->_fileDownloadId = (string)$fileDownloadId;
+        $this->_fileDownloadId = $fileDownloadId;
         return $this;
     }
     
     /**
-     * @return string Reference to fileDownloadId
+     * @return Identity Reference to fileDownloadId
      */
     public function getFileDownloadId()
     {

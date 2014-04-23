@@ -13,75 +13,74 @@ use \jtl\Core\Model\DataModel;
  * Additional payment info for direct debit / banktransfer or payment by credit card. 
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage CustomerOrder
  */
 class CustomerOrderPaymentInfo extends DataModel
 {
     /**
-     * @var string Unique customerOrderPaymentInfo id
+     * @var Identity Unique customerOrderPaymentInfo id
      */
-    protected $_id = '0';             
+    protected $_id = 0;
     
     /**
-     * @var string Reference to customerOrder
+     * @var Identity Reference to customerOrder
      */
-    protected $_customerOrderId = '0';             
+    protected $_customerOrderId = 0;
     
     /**
      * @var string Bank name
      */
-    protected $_bankName = '';             
+    protected $_bankName = '';
     
     /**
      * @var string Bank code (deprecated in DE since SEPA)
      */
-    protected $_bankCode = '';             
+    protected $_bankCode = '';
     
     /**
      * @var string Bank account holder name
      */
-    protected $_accountHolder = '';             
+    protected $_accountHolder = '';
     
     /**
      * @var string Bank account number (deprecated in DE since SEPA)
      */
-    protected $_accountNumber = '';             
+    protected $_accountNumber = '';
     
     /**
      * @var string International Bank Account Number (IBAN)
      */
-    protected $_iban = '';             
+    protected $_iban = '';
     
     /**
      * @var string Bank Identifier Code (BIC)
      */
-    protected $_bic = '';             
+    protected $_bic = '';
     
     /**
      * @var string Credit card number
      */
-    protected $_creditCardNumber = '';             
+    protected $_creditCardNumber = '';
     
     /**
      * @var string Credit card verification number
      */
-    protected $_creditCardVerificationNumber = '';             
+    protected $_creditCardVerificationNumber = '';
     
     /**
      * @var string Credit card expiration date
      */
-    protected $_creditCardExpiration = '';             
+    protected $_creditCardExpiration = '';
     
     /**
      * @var string Credit card type (e.g. "visa")
      */
-    protected $_creditCardType = '';             
+    protected $_creditCardType = '';
     
     /**
      * @var string Credit card holder name
      */
-    protected $_creditCardHolder = '';             
+    protected $_creditCardHolder = '';
     
     /**
      * CustomerOrderPaymentInfo Setter
@@ -100,6 +99,10 @@ class CustomerOrderPaymentInfo extends DataModel
             switch ($name) {
                 case "_id":
                 case "_customerOrderId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_bankName":
                 case "_bankCode":
                 case "_accountHolder":
@@ -120,34 +123,34 @@ class CustomerOrderPaymentInfo extends DataModel
     }
     
     /**
-     * @param string $id Unique customerOrderPaymentInfo id
+     * @param Identity $id Unique customerOrderPaymentInfo id
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique customerOrderPaymentInfo id
+     * @return Identity Unique customerOrderPaymentInfo id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $customerOrderId Reference to customerOrder
+     * @param Identity $customerOrderId Reference to customerOrder
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
-    public function setCustomerOrderId($customerOrderId)
+    public function setCustomerOrderId(Identity $customerOrderId)
     {
-        $this->_customerOrderId = (string)$customerOrderId;
+        $this->_customerOrderId = $customerOrderId;
         return $this;
     }
     
     /**
-     * @return string Reference to customerOrder
+     * @return Identity Reference to customerOrder
      */
     public function getCustomerOrderId()
     {

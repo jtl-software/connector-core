@@ -13,25 +13,24 @@ use \jtl\Core\Model\DataModel;
  * Specific value properties to define a new specificValue with a sort number. 
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Specific
  */
 class SpecificValue extends DataModel
 {
     /**
-     * @var string Unique specificValue id
+     * @var Identity Unique specificValue id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to specificId
+     * @var Identity Reference to specificId
      */
-    protected $_specificId = '';             
+    protected $_specificId = null;
     
     /**
      * @var int Optional sort number
      */
-    protected $_sort = 0;             
+    protected $_sort = 0;
     
     /**
      * SpecificValue Setter
@@ -51,7 +50,7 @@ class SpecificValue extends DataModel
                 case "_id":
                 case "_specificId":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
                 case "_sort":
@@ -64,34 +63,34 @@ class SpecificValue extends DataModel
     }
     
     /**
-     * @param string $id Unique specificValue id
+     * @param Identity $id Unique specificValue id
      * @return \jtl\Connector\Model\SpecificValue
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique specificValue id
+     * @return Identity Unique specificValue id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $specificId Reference to specificId
+     * @param Identity $specificId Reference to specificId
      * @return \jtl\Connector\Model\SpecificValue
      */
-    public function setSpecificId($specificId)
+    public function setSpecificId(Identity $specificId)
     {
-        $this->_specificId = (string)$specificId;
+        $this->_specificId = $specificId;
         return $this;
     }
     
     /**
-     * @return string Reference to specificId
+     * @return Identity Reference to specificId
      */
     public function getSpecificId()
     {

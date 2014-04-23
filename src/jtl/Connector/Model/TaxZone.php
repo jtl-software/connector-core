@@ -13,20 +13,19 @@ use \jtl\Core\Model\DataModel;
  * Tax zone model (set in JTL-Wawi ERP).
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class TaxZone extends DataModel
 {
     /**
-     * @var string Unique taxZone id
+     * @var Identity Unique taxZone id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
      * @var string Optional tax zone name e.g. "EU Zone"
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * TaxZone Setter
@@ -44,6 +43,10 @@ class TaxZone extends DataModel
         
             switch ($name) {
                 case "_id":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_name":
                 
                     $this->$name = (string)$value;
@@ -54,17 +57,17 @@ class TaxZone extends DataModel
     }
     
     /**
-     * @param string $id Unique taxZone id
+     * @param Identity $id Unique taxZone id
      * @return \jtl\Connector\Model\TaxZone
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique taxZone id
+     * @return Identity Unique taxZone id
      */
     public function getId()
     {

@@ -13,30 +13,29 @@ use \jtl\Core\Model\DataModel;
  * Customer group model.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class CustomerGroup extends DataModel
 {
     /**
-     * @var string Unique customerGroup id
+     * @var Identity Unique customerGroup id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
      * @var double Optional percentual discount on all products. Negative Value means surcharge. 
      */
-    protected $_discount = 0;             
+    protected $_discount = 0;
     
     /**
      * @var bool Optional: Flag default customer group
      */
-    protected $_isDefault = false;             
+    protected $_isDefault = false;
     
     /**
      * @var bool Optional: Show net prices default instead of gross prices
      */
-    protected $_applyNetPrice = false;             
+    protected $_applyNetPrice = false;
     
     /**
      * CustomerGroup Setter
@@ -55,7 +54,7 @@ class CustomerGroup extends DataModel
             switch ($name) {
                 case "_id":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
                 case "_discount":
@@ -74,17 +73,17 @@ class CustomerGroup extends DataModel
     }
     
     /**
-     * @param string $id Unique customerGroup id
+     * @param Identity $id Unique customerGroup id
      * @return \jtl\Connector\Model\CustomerGroup
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique customerGroup id
+     * @return Identity Unique customerGroup id
      */
     public function getId()
     {

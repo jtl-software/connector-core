@@ -13,7 +13,6 @@ use \jtl\Core\Model\DataModel;
  * ToDo: Remove (deprecated)
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductVariationValueDependency extends DataModel
@@ -21,12 +20,12 @@ class ProductVariationValueDependency extends DataModel
     /**
      * @var string
      */
-    protected $_productVariationValueId = '';             
+    protected $_productVariationValueId = '';
     
     /**
      * @var string
      */
-    protected $_productVariationValueTargetId = '';             
+    protected $_productVariationValueTargetId = '';
     
     /**
      * ProductVariationValueDependency Setter

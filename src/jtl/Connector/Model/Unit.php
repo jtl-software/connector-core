@@ -13,25 +13,24 @@ use \jtl\Core\Model\DataModel;
  * Specifies product units like "piece", "bottle", "package".
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class Unit extends DataModel
 {
     /**
-     * @var string Unit id
+     * @var Identity Unit id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
      * @var string Locale
      */
-    protected $_localeName = '';             
+    protected $_localeName = '';
     
     /**
      * @var string Localized unit name
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * Unit Setter
@@ -49,6 +48,10 @@ class Unit extends DataModel
         
             switch ($name) {
                 case "_id":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_localeName":
                 case "_name":
                 
@@ -60,17 +63,17 @@ class Unit extends DataModel
     }
     
     /**
-     * @param string $id Unit id
+     * @param Identity $id Unit id
      * @return \jtl\Connector\Model\Unit
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unit id
+     * @return Identity Unit id
      */
     public function getId()
     {

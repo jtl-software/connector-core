@@ -13,7 +13,6 @@ use \jtl\Core\Model\DataModel;
  * Localized customer group name.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class CustomerGroupI18n extends DataModel
@@ -21,17 +20,17 @@ class CustomerGroupI18n extends DataModel
     /**
      * @var string Locale
      */
-    protected $_localeName = '';             
+    protected $_localeName = '';
     
     /**
-     * @var string Reference to customerGroup
+     * @var Identity Reference to customerGroup
      */
-    protected $_customerGroupId = '';             
+    protected $_customerGroupId = null;
     
     /**
      * @var string Localized customer group name
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * CustomerGroupI18n Setter
@@ -49,10 +48,14 @@ class CustomerGroupI18n extends DataModel
         
             switch ($name) {
                 case "_localeName":
-                case "_customerGroupId":
                 case "_name":
                 
                     $this->$name = (string)$value;
+                    break;
+            
+                case "_customerGroupId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
             }
@@ -77,17 +80,17 @@ class CustomerGroupI18n extends DataModel
         return $this->_localeName;
     }
     /**
-     * @param string $customerGroupId Reference to customerGroup
+     * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\CustomerGroupI18n
      */
-    public function setCustomerGroupId($customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
+        $this->_customerGroupId = $customerGroupId;
         return $this;
     }
     
     /**
-     * @return string Reference to customerGroup
+     * @return Identity Reference to customerGroup
      */
     public function getCustomerGroupId()
     {

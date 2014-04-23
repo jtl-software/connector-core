@@ -13,15 +13,14 @@ use \jtl\Core\Model\DataModel;
  * warehouse model (set in JTL-Wawi ERP).
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class Warehouse extends DataModel
 {
     /**
-     * @var string Unique warehouse id
+     * @var Identity Unique warehouse id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
      * Warehouse Setter
@@ -40,7 +39,7 @@ class Warehouse extends DataModel
             switch ($name) {
                 case "_id":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
             }
@@ -48,17 +47,17 @@ class Warehouse extends DataModel
     }
     
     /**
-     * @param string $id Unique warehouse id
+     * @param Identity $id Unique warehouse id
      * @return \jtl\Connector\Model\Warehouse
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique warehouse id
+     * @return Identity Unique warehouse id
      */
     public function getId()
     {

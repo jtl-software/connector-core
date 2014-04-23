@@ -13,20 +13,19 @@ use \jtl\Core\Model\DataModel;
  * Specify productVariationValue to hide from specific customerGroup.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductVariationValueInvisibility extends DataModel
 {
     /**
-     * @var string Reference to customerGroup
+     * @var Identity Reference to customerGroup
      */
-    protected $_customerGroupId = '';             
+    protected $_customerGroupId = null;
     
     /**
-     * @var string Reference to productVariationValue to hide from customerGroup
+     * @var Identity Reference to productVariationValue to hide from customerGroup
      */
-    protected $_productVariationValueId = '';             
+    protected $_productVariationValueId = null;
     
     /**
      * ProductVariationValueInvisibility Setter
@@ -46,7 +45,7 @@ class ProductVariationValueInvisibility extends DataModel
                 case "_customerGroupId":
                 case "_productVariationValueId":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
             }
@@ -54,34 +53,34 @@ class ProductVariationValueInvisibility extends DataModel
     }
     
     /**
-     * @param string $customerGroupId Reference to customerGroup
+     * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ProductVariationValueInvisibility
      */
-    public function setCustomerGroupId($customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
+        $this->_customerGroupId = $customerGroupId;
         return $this;
     }
     
     /**
-     * @return string Reference to customerGroup
+     * @return Identity Reference to customerGroup
      */
     public function getCustomerGroupId()
     {
         return $this->_customerGroupId;
     }
     /**
-     * @param string $productVariationValueId Reference to productVariationValue to hide from customerGroup
+     * @param Identity $productVariationValueId Reference to productVariationValue to hide from customerGroup
      * @return \jtl\Connector\Model\ProductVariationValueInvisibility
      */
-    public function setProductVariationValueId($productVariationValueId)
+    public function setProductVariationValueId(Identity $productVariationValueId)
     {
-        $this->_productVariationValueId = (string)$productVariationValueId;
+        $this->_productVariationValueId = $productVariationValueId;
         return $this;
     }
     
     /**
-     * @return string Reference to productVariationValue to hide from customerGroup
+     * @return Identity Reference to productVariationValue to hide from customerGroup
      */
     public function getProductVariationValueId()
     {

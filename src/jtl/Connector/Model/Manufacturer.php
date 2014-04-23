@@ -13,35 +13,34 @@ use \jtl\Core\Model\DataModel;
  * Manufacturer / brand properties. 
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Manufacturer
  */
 class Manufacturer extends DataModel
 {
     /**
-     * @var string Unique manufacturer id
+     * @var Identity Unique manufacturer id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
      * @var string Manufacturer (brand) name
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * @var string Optional manufacturer website URL
      */
-    protected $_www = '';             
+    protected $_www = '';
     
     /**
      * @var int Optional sort number
      */
-    protected $_sort = 0;             
+    protected $_sort = 0;
     
     /**
      * @var string Optional url path e.g. "Products-manufactured-by-X"
      */
-    protected $_urlPath = '';             
+    protected $_urlPath = '';
     
     /**
      * Manufacturer Setter
@@ -59,6 +58,10 @@ class Manufacturer extends DataModel
         
             switch ($name) {
                 case "_id":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_name":
                 case "_www":
                 case "_urlPath":
@@ -76,17 +79,17 @@ class Manufacturer extends DataModel
     }
     
     /**
-     * @param string $id Unique manufacturer id
+     * @param Identity $id Unique manufacturer id
      * @return \jtl\Connector\Model\Manufacturer
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique manufacturer id
+     * @return Identity Unique manufacturer id
      */
     public function getId()
     {

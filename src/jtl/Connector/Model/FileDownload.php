@@ -13,45 +13,44 @@ use \jtl\Core\Model\DataModel;
  * File download properties. 
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class FileDownload extends DataModel
 {
     /**
-     * @var string Unique fileDownload id
+     * @var Identity Unique fileDownload id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
      * @var string Path to download file
      */
-    protected $_path = '';             
+    protected $_path = '';
     
     /**
      * @var string Optional path to preview file
      */
-    protected $_previewPath = '';             
+    protected $_previewPath = '';
     
     /**
      * @var int Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
      */
-    protected $_maxDownloads = 0;             
+    protected $_maxDownloads = 0;
     
     /**
      * @var int Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
      */
-    protected $_maxDays = 0;             
+    protected $_maxDays = 0;
     
     /**
      * @var int Optional sort number
      */
-    protected $_sort = 0;             
+    protected $_sort = 0;
     
     /**
      * @var string Optional creation date
      */
-    protected $_created = null;             
+    protected $_created = null;
     
     /**
      * FileDownload Setter
@@ -69,6 +68,10 @@ class FileDownload extends DataModel
         
             switch ($name) {
                 case "_id":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_path":
                 case "_previewPath":
                 case "_created":
@@ -88,17 +91,17 @@ class FileDownload extends DataModel
     }
     
     /**
-     * @param string $id Unique fileDownload id
+     * @param Identity $id Unique fileDownload id
      * @return \jtl\Connector\Model\FileDownload
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique fileDownload id
+     * @return Identity Unique fileDownload id
      */
     public function getId()
     {

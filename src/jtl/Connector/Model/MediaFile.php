@@ -13,45 +13,44 @@ use \jtl\Core\Model\DataModel;
  * Media file model.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class MediaFile extends DataModel
 {
     /**
-     * @var string Unique MediaFile id
+     * @var Identity Unique MediaFile id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to product
+     * @var Identity Reference to product
      */
-    protected $_productId = '';             
+    protected $_productId = null;
     
     /**
      * @var string File path
      */
-    protected $_path = '';             
+    protected $_path = '';
     
     /**
      * @var string Complete URL
      */
-    protected $_url = '';             
+    protected $_url = '';
     
     /**
      * @var string Optional media file category name
      */
-    protected $_mediaFileCategory = '';             
+    protected $_mediaFileCategory = '';
     
     /**
      * @var string Media file type e.g. "pdf"
      */
-    protected $_type = '';             
+    protected $_type = '';
     
     /**
      * @var int Optional sort number
      */
-    protected $_sort = 0;             
+    protected $_sort = 0;
     
     /**
      * MediaFile Setter
@@ -70,6 +69,10 @@ class MediaFile extends DataModel
             switch ($name) {
                 case "_id":
                 case "_productId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_path":
                 case "_url":
                 case "_mediaFileCategory":
@@ -88,34 +91,34 @@ class MediaFile extends DataModel
     }
     
     /**
-     * @param string $id Unique MediaFile id
+     * @param Identity $id Unique MediaFile id
      * @return \jtl\Connector\Model\MediaFile
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique MediaFile id
+     * @return Identity Unique MediaFile id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $productId Reference to product
+     * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\MediaFile
      */
-    public function setProductId($productId)
+    public function setProductId(Identity $productId)
     {
-        $this->_productId = (string)$productId;
+        $this->_productId = $productId;
         return $this;
     }
     
     /**
-     * @return string Reference to product
+     * @return Identity Reference to product
      */
     public function getProductId()
     {

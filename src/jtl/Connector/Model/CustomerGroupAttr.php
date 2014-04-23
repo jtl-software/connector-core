@@ -13,30 +13,29 @@ use \jtl\Core\Model\DataModel;
  * Monolingual customer group attribute.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class CustomerGroupAttr extends DataModel
 {
     /**
-     * @var string Unique customerGroupAttr id
+     * @var Identity Unique customerGroupAttr id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to customerGroup
+     * @var Identity Reference to customerGroup
      */
-    protected $_customerGroupId = '';             
+    protected $_customerGroupId = null;
     
     /**
      * @var string Attribute key
      */
-    protected $_key = '';             
+    protected $_key = '';
     
     /**
      * @var string Attribute value
      */
-    protected $_value = '';             
+    protected $_value = '';
     
     /**
      * CustomerGroupAttr Setter
@@ -55,6 +54,10 @@ class CustomerGroupAttr extends DataModel
             switch ($name) {
                 case "_id":
                 case "_customerGroupId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_key":
                 case "_value":
                 
@@ -66,34 +69,34 @@ class CustomerGroupAttr extends DataModel
     }
     
     /**
-     * @param string $id Unique customerGroupAttr id
+     * @param Identity $id Unique customerGroupAttr id
      * @return \jtl\Connector\Model\CustomerGroupAttr
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique customerGroupAttr id
+     * @return Identity Unique customerGroupAttr id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $customerGroupId Reference to customerGroup
+     * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\CustomerGroupAttr
      */
-    public function setCustomerGroupId($customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
+        $this->_customerGroupId = $customerGroupId;
         return $this;
     }
     
     /**
-     * @return string Reference to customerGroup
+     * @return Identity Reference to customerGroup
      */
     public function getCustomerGroupId()
     {

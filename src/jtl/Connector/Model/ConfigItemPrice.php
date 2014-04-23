@@ -13,30 +13,29 @@ use \jtl\Core\Model\DataModel;
  * Customer group price for config item.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class ConfigItemPrice extends DataModel
 {
     /**
-     * @var string Reference to configItem
+     * @var Identity Reference to configItem
      */
-    protected $_configItemId = '';             
+    protected $_configItemId = null;
     
     /**
-     * @var string Reference to customerGroup
+     * @var Identity Reference to customerGroup
      */
-    protected $_customerGroupId = '';             
+    protected $_customerGroupId = null;
     
     /**
      * @var float Net price or percental value to add/deduct to/from product price (depending on type). Positive value means surcharge, negative value means discount. Also see configItem.vat for value added tax.
      */
-    protected $_price;             
+    protected $_price;
     
     /**
      * @var int Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
      */
-    protected $_type = 0;             
+    protected $_type = 0;
     
     /**
      * ConfigItemPrice Setter
@@ -56,7 +55,7 @@ class ConfigItemPrice extends DataModel
                 case "_configItemId":
                 case "_customerGroupId":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
                 case "_price":
@@ -74,34 +73,34 @@ class ConfigItemPrice extends DataModel
     }
     
     /**
-     * @param string $configItemId Reference to configItem
+     * @param Identity $configItemId Reference to configItem
      * @return \jtl\Connector\Model\ConfigItemPrice
      */
-    public function setConfigItemId($configItemId)
+    public function setConfigItemId(Identity $configItemId)
     {
-        $this->_configItemId = (string)$configItemId;
+        $this->_configItemId = $configItemId;
         return $this;
     }
     
     /**
-     * @return string Reference to configItem
+     * @return Identity Reference to configItem
      */
     public function getConfigItemId()
     {
         return $this->_configItemId;
     }
     /**
-     * @param string $customerGroupId Reference to customerGroup
+     * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ConfigItemPrice
      */
-    public function setCustomerGroupId($customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
+        $this->_customerGroupId = $customerGroupId;
         return $this;
     }
     
     /**
-     * @return string Reference to customerGroup
+     * @return Identity Reference to customerGroup
      */
     public function getCustomerGroupId()
     {

@@ -13,50 +13,49 @@ use \jtl\Core\Model\DataModel;
  * Delivery note item properties.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage DeliveryNote
  */
 class DeliveryNoteItem extends DataModel
 {
     /**
-     * @var string Unique deliveryNoteItem id
+     * @var Identity Unique deliveryNoteItem id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to customerOrderItem
+     * @var Identity Reference to customerOrderItem
      */
-    protected $_customerOrderItemId = '';             
+    protected $_customerOrderItemId = null;
     
     /**
      * @var double Quantity delivered
      */
-    protected $_quantity = 0.0;             
+    protected $_quantity = 0.0;
     
     /**
-     * @var string Optional reference to warehouse
+     * @var Identity Optional reference to warehouse
      */
-    protected $_warehouseId = '';             
+    protected $_warehouseId = null;
     
     /**
      * @var string Optional serial number
      */
-    protected $_serialNumber = '';             
+    protected $_serialNumber = '';
     
     /**
      * @var string Optional batch number
      */
-    protected $_batchNumber = '';             
+    protected $_batchNumber = '';
     
     /**
      * @var string Optional best before date
      */
-    protected $_bestBefore = null;             
+    protected $_bestBefore = null;
     
     /**
-     * @var string Reference to deliveryNote
+     * @var Identity Reference to deliveryNote
      */
-    protected $_deliveryNoteId = '';             
+    protected $_deliveryNoteId = null;
     
     /**
      * DeliveryNoteItem Setter
@@ -76,12 +75,9 @@ class DeliveryNoteItem extends DataModel
                 case "_id":
                 case "_customerOrderItemId":
                 case "_warehouseId":
-                case "_serialNumber":
-                case "_batchNumber":
-                case "_bestBefore":
                 case "_deliveryNoteId":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
                 case "_quantity":
@@ -89,39 +85,46 @@ class DeliveryNoteItem extends DataModel
                     $this->$name = (double)$value;
                     break;
             
+                case "_serialNumber":
+                case "_batchNumber":
+                case "_bestBefore":
+                
+                    $this->$name = (string)$value;
+                    break;
+            
             }
         }
     }
     
     /**
-     * @param string $id Unique deliveryNoteItem id
+     * @param Identity $id Unique deliveryNoteItem id
      * @return \jtl\Connector\Model\DeliveryNoteItem
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique deliveryNoteItem id
+     * @return Identity Unique deliveryNoteItem id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $customerOrderItemId Reference to customerOrderItem
+     * @param Identity $customerOrderItemId Reference to customerOrderItem
      * @return \jtl\Connector\Model\DeliveryNoteItem
      */
-    public function setCustomerOrderItemId($customerOrderItemId)
+    public function setCustomerOrderItemId(Identity $customerOrderItemId)
     {
-        $this->_customerOrderItemId = (string)$customerOrderItemId;
+        $this->_customerOrderItemId = $customerOrderItemId;
         return $this;
     }
     
     /**
-     * @return string Reference to customerOrderItem
+     * @return Identity Reference to customerOrderItem
      */
     public function getCustomerOrderItemId()
     {
@@ -145,17 +148,17 @@ class DeliveryNoteItem extends DataModel
         return $this->_quantity;
     }
     /**
-     * @param string $warehouseId Optional reference to warehouse
+     * @param Identity $warehouseId Optional reference to warehouse
      * @return \jtl\Connector\Model\DeliveryNoteItem
      */
-    public function setWarehouseId($warehouseId)
+    public function setWarehouseId(Identity $warehouseId)
     {
-        $this->_warehouseId = (string)$warehouseId;
+        $this->_warehouseId = $warehouseId;
         return $this;
     }
     
     /**
-     * @return string Optional reference to warehouse
+     * @return Identity Optional reference to warehouse
      */
     public function getWarehouseId()
     {
@@ -213,17 +216,17 @@ class DeliveryNoteItem extends DataModel
         return $this->_bestBefore;
     }
     /**
-     * @param string $deliveryNoteId Reference to deliveryNote
+     * @param Identity $deliveryNoteId Reference to deliveryNote
      * @return \jtl\Connector\Model\DeliveryNoteItem
      */
-    public function setDeliveryNoteId($deliveryNoteId)
+    public function setDeliveryNoteId(Identity $deliveryNoteId)
     {
-        $this->_deliveryNoteId = (string)$deliveryNoteId;
+        $this->_deliveryNoteId = $deliveryNoteId;
         return $this;
     }
     
     /**
-     * @return string Reference to deliveryNote
+     * @return Identity Reference to deliveryNote
      */
     public function getDeliveryNoteId()
     {

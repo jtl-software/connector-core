@@ -13,50 +13,49 @@ use \jtl\Core\Model\DataModel;
  * Special product price properties to specify date and stock limits.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductSpecialPrice extends DataModel
 {
     /**
-     * @var string Unique productSpecialPrice id
+     * @var Identity Unique productSpecialPrice id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
-     * @var string Reference to product
+     * @var Identity Reference to product
      */
-    protected $_productId = '';             
+    protected $_productId = null;
     
     /**
      * @var bool Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match. 
      */
-    protected $_isActive = true;             
+    protected $_isActive = true;
     
     /**
      * @var string Optional: Activate special price from date
      */
-    protected $_activeFrom = null;             
+    protected $_activeFrom = null;
     
     /**
      * @var string Optional: Special price active until date
      */
-    protected $_activeUntil = null;             
+    protected $_activeUntil = null;
     
     /**
      * @var double Optional: SpecialPrice active until stock level quantity
      */
-    protected $_stockLimit = 0;             
+    protected $_stockLimit = 0;
     
     /**
      * @var bool Optional: Consider stockLimit value. If true, specialPrice will be only active until product stockLevel is greater or equal stockLimit.
      */
-    protected $_considerStockLimit = false;             
+    protected $_considerStockLimit = false;
     
     /**
      * @var bool Optional: Consider activeFrom/activeUntil date range. If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
      */
-    protected $_considerDateLimit = false;             
+    protected $_considerDateLimit = false;
     
     /**
      * ProductSpecialPrice Setter
@@ -75,10 +74,8 @@ class ProductSpecialPrice extends DataModel
             switch ($name) {
                 case "_id":
                 case "_productId":
-                case "_activeFrom":
-                case "_activeUntil":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
                 case "_isActive":
@@ -86,6 +83,12 @@ class ProductSpecialPrice extends DataModel
                 case "_considerDateLimit":
                 
                     $this->$name = (bool)$value;
+                    break;
+            
+                case "_activeFrom":
+                case "_activeUntil":
+                
+                    $this->$name = (string)$value;
                     break;
             
                 case "_stockLimit":
@@ -98,34 +101,34 @@ class ProductSpecialPrice extends DataModel
     }
     
     /**
-     * @param string $id Unique productSpecialPrice id
+     * @param Identity $id Unique productSpecialPrice id
      * @return \jtl\Connector\Model\ProductSpecialPrice
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique productSpecialPrice id
+     * @return Identity Unique productSpecialPrice id
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $productId Reference to product
+     * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductSpecialPrice
      */
-    public function setProductId($productId)
+    public function setProductId(Identity $productId)
     {
-        $this->_productId = (string)$productId;
+        $this->_productId = $productId;
         return $this;
     }
     
     /**
-     * @return string Reference to product
+     * @return Identity Reference to product
      */
     public function getProductId()
     {

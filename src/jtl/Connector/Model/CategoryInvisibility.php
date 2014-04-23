@@ -13,20 +13,19 @@ use \jtl\Core\Model\DataModel;
  * Specifies which CustomerGroup is not permitted to view category.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Category
  */
 class CategoryInvisibility extends DataModel
 {
     /**
-     * @var string Reference to customerGroup that is not allowed to view categoryId
+     * @var Identity Reference to customerGroup that is not allowed to view categoryId
      */
-    protected $_customerGroupId = '';             
+    protected $_customerGroupId = null;
     
     /**
-     * @var string Reference to category to hide from customerGroupId
+     * @var Identity Reference to category to hide from customerGroupId
      */
-    protected $_categoryId = '';             
+    protected $_categoryId = null;
     
     /**
      * CategoryInvisibility Setter
@@ -46,7 +45,7 @@ class CategoryInvisibility extends DataModel
                 case "_customerGroupId":
                 case "_categoryId":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
             }
@@ -54,34 +53,34 @@ class CategoryInvisibility extends DataModel
     }
     
     /**
-     * @param string $customerGroupId Reference to customerGroup that is not allowed to view categoryId
+     * @param Identity $customerGroupId Reference to customerGroup that is not allowed to view categoryId
      * @return \jtl\Connector\Model\CategoryInvisibility
      */
-    public function setCustomerGroupId($customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId)
     {
-        $this->_customerGroupId = (string)$customerGroupId;
+        $this->_customerGroupId = $customerGroupId;
         return $this;
     }
     
     /**
-     * @return string Reference to customerGroup that is not allowed to view categoryId
+     * @return Identity Reference to customerGroup that is not allowed to view categoryId
      */
     public function getCustomerGroupId()
     {
         return $this->_customerGroupId;
     }
     /**
-     * @param string $categoryId Reference to category to hide from customerGroupId
+     * @param Identity $categoryId Reference to category to hide from customerGroupId
      * @return \jtl\Connector\Model\CategoryInvisibility
      */
-    public function setCategoryId($categoryId)
+    public function setCategoryId(Identity $categoryId)
     {
-        $this->_categoryId = (string)$categoryId;
+        $this->_categoryId = $categoryId;
         return $this;
     }
     
     /**
-     * @return string Reference to category to hide from customerGroupId
+     * @return Identity Reference to category to hide from customerGroupId
      */
     public function getCategoryId()
     {

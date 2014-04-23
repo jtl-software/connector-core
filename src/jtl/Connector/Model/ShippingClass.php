@@ -13,20 +13,19 @@ use \jtl\Core\Model\DataModel;
  * Shipping classes are usually defined in JTL-Wawi ERP.
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class ShippingClass extends DataModel
 {
     /**
-     * @var string Unique shippingClass id
+     * @var Identity Unique shippingClass id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
      * @var string Optional (internal) Shipping class name
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * ShippingClass Setter
@@ -44,6 +43,10 @@ class ShippingClass extends DataModel
         
             switch ($name) {
                 case "_id":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_name":
                 
                     $this->$name = (string)$value;
@@ -54,17 +57,17 @@ class ShippingClass extends DataModel
     }
     
     /**
-     * @param string $id Unique shippingClass id
+     * @param Identity $id Unique shippingClass id
      * @return \jtl\Connector\Model\ShippingClass
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique shippingClass id
+     * @return Identity Unique shippingClass id
      */
     public function getId()
     {

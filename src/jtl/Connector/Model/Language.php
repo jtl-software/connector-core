@@ -13,35 +13,34 @@ use \jtl\Core\Model\DataModel;
  * Global language model
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class Language extends DataModel
 {
     /**
-     * @var string Unique language id
+     * @var Identity Unique language id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
      * @var string English term
      */
-    protected $_nameEnglish = '';             
+    protected $_nameEnglish = '';
     
     /**
      * @var string German term
      */
-    protected $_nameGerman = '';             
+    protected $_nameGerman = '';
     
     /**
      * @var string Locale
      */
-    protected $_localeName = '';             
+    protected $_localeName = '';
     
     /**
      * @var bool Flag default language for frontend. Exact 1 language must be marked as default.
      */
-    protected $_isDefault = false;             
+    protected $_isDefault = false;
     
     /**
      * Language Setter
@@ -59,6 +58,10 @@ class Language extends DataModel
         
             switch ($name) {
                 case "_id":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_nameEnglish":
                 case "_nameGerman":
                 case "_localeName":
@@ -76,17 +79,17 @@ class Language extends DataModel
     }
     
     /**
-     * @param string $id Unique language id
+     * @param Identity $id Unique language id
      * @return \jtl\Connector\Model\Language
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique language id
+     * @return Identity Unique language id
      */
     public function getId()
     {

@@ -13,30 +13,29 @@ use \jtl\Core\Model\DataModel;
  * Localized cross selling group. Can hold several crossSelling items that are linked for cross selling purposes. 
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class CrossSellingGroup extends DataModel
 {
     /**
-     * @var string crossSellingGroup id
+     * @var Identity crossSellingGroup id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
      * @var string Locale
      */
-    protected $_localeName = '';             
+    protected $_localeName = '';
     
     /**
      * @var string Localized name
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * @var string Optional localized description
      */
-    protected $_description = '';             
+    protected $_description = '';
     
     /**
      * CrossSellingGroup Setter
@@ -54,6 +53,10 @@ class CrossSellingGroup extends DataModel
         
             switch ($name) {
                 case "_id":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_localeName":
                 case "_name":
                 case "_description":
@@ -66,17 +69,17 @@ class CrossSellingGroup extends DataModel
     }
     
     /**
-     * @param string $id crossSellingGroup id
+     * @param Identity $id crossSellingGroup id
      * @return \jtl\Connector\Model\CrossSellingGroup
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string crossSellingGroup id
+     * @return Identity crossSellingGroup id
      */
     public function getId()
     {

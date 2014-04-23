@@ -13,7 +13,6 @@ use \jtl\Core\Model\DataModel;
  * Locale specific product variation properties. 
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductVariationI18n extends DataModel
@@ -21,17 +20,17 @@ class ProductVariationI18n extends DataModel
     /**
      * @var string Locale
      */
-    protected $_localeName = '';             
+    protected $_localeName = '';
     
     /**
-     * @var string Reference to productVariation
+     * @var Identity Reference to productVariation
      */
-    protected $_productVariationId = '';             
+    protected $_productVariationId = null;
     
     /**
      * @var string Locale specific variation name
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * ProductVariationI18n Setter
@@ -49,10 +48,14 @@ class ProductVariationI18n extends DataModel
         
             switch ($name) {
                 case "_localeName":
-                case "_productVariationId":
                 case "_name":
                 
                     $this->$name = (string)$value;
+                    break;
+            
+                case "_productVariationId":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
             }
@@ -77,17 +80,17 @@ class ProductVariationI18n extends DataModel
         return $this->_localeName;
     }
     /**
-     * @param string $productVariationId Reference to productVariation
+     * @param Identity $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\ProductVariationI18n
      */
-    public function setProductVariationId($productVariationId)
+    public function setProductVariationId(Identity $productVariationId)
     {
-        $this->_productVariationId = (string)$productVariationId;
+        $this->_productVariationId = $productVariationId;
         return $this;
     }
     
     /**
-     * @return string Reference to productVariation
+     * @return Identity Reference to productVariation
      */
     public function getProductVariationId()
     {

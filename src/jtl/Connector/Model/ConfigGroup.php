@@ -13,45 +13,44 @@ use \jtl\Core\Model\DataModel;
  * Config group holds several configItems and settings
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class ConfigGroup extends DataModel
 {
     /**
-     * @var string Unique configGroup id
+     * @var Identity Unique configGroup id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
      * @var string Optional image file path
      */
-    protected $_imagePath = '';             
+    protected $_imagePath = '';
     
     /**
      * @var int Optional minimum number required selections. Default 0 for no minimum requirement. 
      */
-    protected $_minimumSelection = 0;             
+    protected $_minimumSelection = 0;
     
     /**
      * @var int Optional maximum number allowed selections. Default 0 for no maximum limitation.
      */
-    protected $_maximumSelection = 0;             
+    protected $_maximumSelection = 0;
     
     /**
      * @var int Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      */
-    protected $_type = 0;             
+    protected $_type = 0;
     
     /**
      * @var int Optional sort order number
      */
-    protected $_sort = 0;             
+    protected $_sort = 0;
     
     /**
      * @var string Optional internal comment to differantiate config groups by comment name
      */
-    protected $_comment = '';             
+    protected $_comment = '';
     
     /**
      * ConfigGroup Setter
@@ -69,6 +68,10 @@ class ConfigGroup extends DataModel
         
             switch ($name) {
                 case "_id":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_imagePath":
                 case "_comment":
                 
@@ -88,17 +91,17 @@ class ConfigGroup extends DataModel
     }
     
     /**
-     * @param string $id Unique configGroup id
+     * @param Identity $id Unique configGroup id
      * @return \jtl\Connector\Model\ConfigGroup
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique configGroup id
+     * @return Identity Unique configGroup id
      */
     public function getId()
     {

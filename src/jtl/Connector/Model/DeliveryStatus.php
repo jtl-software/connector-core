@@ -13,25 +13,24 @@ use \jtl\Core\Model\DataModel;
  * Localized delivery status text. Delivery status is set in the Wawi-ERP. 
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class DeliveryStatus extends DataModel
 {
     /**
-     * @var string DeliveryStatus id
+     * @var Identity DeliveryStatus id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
      * @var string Locale
      */
-    protected $_localeName = '';             
+    protected $_localeName = '';
     
     /**
      * @var string Localized delivery status text
      */
-    protected $_name = '';             
+    protected $_name = '';
     
     /**
      * DeliveryStatus Setter
@@ -49,6 +48,10 @@ class DeliveryStatus extends DataModel
         
             switch ($name) {
                 case "_id":
+                
+                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    break;
+            
                 case "_localeName":
                 case "_name":
                 
@@ -60,17 +63,17 @@ class DeliveryStatus extends DataModel
     }
     
     /**
-     * @param string $id DeliveryStatus id
+     * @param Identity $id DeliveryStatus id
      * @return \jtl\Connector\Model\DeliveryStatus
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string DeliveryStatus id
+     * @return Identity DeliveryStatus id
      */
     public function getId()
     {

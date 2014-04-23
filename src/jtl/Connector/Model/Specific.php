@@ -13,30 +13,29 @@ use \jtl\Core\Model\DataModel;
  * Specific is defined as a characteristic product attribute Like "color". Specifics can be used for after-search-filtering. 
  *
  * @access public
- * @package jtl\Connector\Model
  * @subpackage Specific
  */
 class Specific extends DataModel
 {
     /**
-     * @var string Unique specific id
+     * @var Identity Unique specific id
      */
-    protected $_id = '';             
+    protected $_id = null;
     
     /**
      * @var int Optional sort number
      */
-    protected $_sort = 0;             
+    protected $_sort = 0;
     
     /**
      * @var bool Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      */
-    protected $_isGlobal = false;             
+    protected $_isGlobal = false;
     
     /**
      * @var string Specific type (radio, dropdown, image...)
      */
-    protected $_type = '';             
+    protected $_type = '';
     
     /**
      * Specific Setter
@@ -54,9 +53,8 @@ class Specific extends DataModel
         
             switch ($name) {
                 case "_id":
-                case "_type":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
                 case "_sort":
@@ -69,22 +67,27 @@ class Specific extends DataModel
                     $this->$name = (bool)$value;
                     break;
             
+                case "_type":
+                
+                    $this->$name = (string)$value;
+                    break;
+            
             }
         }
     }
     
     /**
-     * @param string $id Unique specific id
+     * @param Identity $id Unique specific id
      * @return \jtl\Connector\Model\Specific
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique specific id
+     * @return Identity Unique specific id
      */
     public function getId()
     {
