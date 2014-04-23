@@ -81,4 +81,23 @@ class Identity
     {
         return array($this->endpoint, $this->host);
     }
+
+    /**
+     * Convert from Array
+     *
+     * @throws \InvalidArgumentException
+     * @return jtl\Connector\Model\Identity
+     */
+    public static function fromArray(array $data)
+    {
+        if ($data === null || count($data) != 2 || !isset($data[0]) || !isset($data[1])) {
+            throw new \InvalidArgumentException('The data parameter can not be null and must contain two values'); 
+        }
+
+        $identity = new self;
+        $identity->setEndpoint($data[0])
+            ->setHost($data[1]);
+
+        return $identity;
+    }
 }
