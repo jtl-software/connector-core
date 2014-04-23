@@ -28,14 +28,14 @@ class Shipment extends DataModel
     protected $_deliveryNoteId = null;
     
     /**
-     * @var string Logistic name
+     * @var string Carrier name
      */
-    protected $_logistic = '';
+    protected $_carrierName = '';
     
     /**
-     * @var string Optional Logistic URL
+     * @var string Optional Tracking URL
      */
-    protected $_logisticURL = '';
+    protected $_trackingURL = '';
     
     /**
      * @var string Optional Identcode
@@ -73,8 +73,8 @@ class Shipment extends DataModel
                     $this->$name = ($value instanceof Identity) ? $value : null;
                     break;
             
-                case "_logistic":
-                case "_logisticURL":
+                case "_carrierName":
+                case "_trackingURL":
                 case "_identCode":
                 case "_created":
                 case "_note":
@@ -121,38 +121,38 @@ class Shipment extends DataModel
         return $this->_deliveryNoteId;
     }
     /**
-     * @param string $logistic Logistic name
+     * @param string $carrierName Carrier name
      * @return \jtl\Connector\Model\Shipment
      */
-    public function setLogistic($logistic)
+    public function setCarrierName($carrierName)
     {
-        $this->_logistic = (string)$logistic;
+        $this->_carrierName = (string)$carrierName;
         return $this;
     }
     
     /**
-     * @return string Logistic name
+     * @return string Carrier name
      */
-    public function getLogistic()
+    public function getCarrierName()
     {
-        return $this->_logistic;
+        return $this->_carrierName;
     }
     /**
-     * @param string $logisticURL Optional Logistic URL
+     * @param string $trackingURL Optional Tracking URL
      * @return \jtl\Connector\Model\Shipment
      */
-    public function setLogisticURL($logisticURL)
+    public function setTrackingURL($trackingURL)
     {
-        $this->_logisticURL = (string)$logisticURL;
+        $this->_trackingURL = (string)$trackingURL;
         return $this;
     }
     
     /**
-     * @return string Optional Logistic URL
+     * @return string Optional Tracking URL
      */
-    public function getLogisticURL()
+    public function getTrackingURL()
     {
-        return $this->_logisticURL;
+        return $this->_trackingURL;
     }
     /**
      * @param string $identCode Optional Identcode
