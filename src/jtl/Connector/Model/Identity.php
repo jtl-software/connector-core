@@ -90,7 +90,7 @@ class Identity
      */
     public static function fromArray(array $data)
     {
-        if ($data === null || count($data) != 2 || !isset($data[0]) || !isset($data[1])) {
+        if ($data === null || count($data) != 2 || !array_key_exists(0, $data) || !array_key_exists(1, $data)) {
             throw new \InvalidArgumentException('The data parameter can not be null and must contain two values'); 
         }
 
@@ -112,7 +112,7 @@ class Identity
             return $data;
         }
 
-        if ($data === null || !is_array($data) || count($data) != 2 || !isset($data[0]) || !isset($data[1])) {
+        if ($data === null || !is_array($data) || count($data) != 2 || !array_key_exists(0, $data) || !array_key_exists(1, $data)) {
             return null;
         }
 
