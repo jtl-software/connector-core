@@ -44,7 +44,7 @@ class TaxZone extends DataModel
             switch ($name) {
                 case "_id":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_name":

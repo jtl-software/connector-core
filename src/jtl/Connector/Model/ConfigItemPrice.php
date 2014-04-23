@@ -55,7 +55,7 @@ class ConfigItemPrice extends DataModel
                 case "_configItemId":
                 case "_customerGroupId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_price":

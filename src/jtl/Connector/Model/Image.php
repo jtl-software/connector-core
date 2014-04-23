@@ -65,7 +65,7 @@ class Image extends DataModel
                 case "_id":
                 case "_masterImageId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_relationType":

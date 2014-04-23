@@ -276,7 +276,7 @@ class Product extends DataModel
                 case "_setArticleId":
                 case "_productTypeId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_deliveryStatusId":

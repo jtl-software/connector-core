@@ -61,7 +61,7 @@ class TaxRate extends DataModel
                 case "_taxZoneId":
                 case "_taxClassId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_rate":

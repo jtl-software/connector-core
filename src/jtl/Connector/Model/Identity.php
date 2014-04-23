@@ -100,4 +100,26 @@ class Identity
 
         return $identity;
     }
+
+    /**
+     * Dynamic Converter
+     *
+     * @return jtl\Connector\Model\Identity
+     */
+    public static function convert($data)
+    {
+        if ($data instanceof self) {
+            return $data;
+        }
+
+        if ($data === null || !is_array($data) || count($data) != 2 || !isset($data[0]) || !isset($data[1])) {
+            return null;
+        }
+
+        try {
+            return self::fromArray($data);
+        } catch (\Exception $exc) {
+            return null;
+        }
+    }
 }

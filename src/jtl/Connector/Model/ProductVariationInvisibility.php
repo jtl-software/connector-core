@@ -45,7 +45,7 @@ class ProductVariationInvisibility extends DataModel
                 case "_customerGroupId":
                 case "_productVariationId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
             }

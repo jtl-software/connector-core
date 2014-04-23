@@ -100,7 +100,7 @@ class CustomerOrderPaymentInfo extends DataModel
                 case "_id":
                 case "_customerOrderId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_bankName":

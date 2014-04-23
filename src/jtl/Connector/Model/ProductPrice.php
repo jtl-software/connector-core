@@ -55,7 +55,7 @@ class ProductPrice extends DataModel
                 case "_customerGroupId":
                 case "_productId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_netPrice":

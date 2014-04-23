@@ -77,7 +77,7 @@ class CustomerOrderItemVariation extends DataModel
                 case "_productVariationId":
                 case "_productVariationValueId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_productVariationName":

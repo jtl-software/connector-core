@@ -55,7 +55,7 @@ class ProductVariationI18n extends DataModel
             
                 case "_productVariationId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
             }

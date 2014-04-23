@@ -50,7 +50,7 @@ class TaxZoneCountry extends DataModel
                 case "_id":
                 case "_taxZoneId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_countryIso":

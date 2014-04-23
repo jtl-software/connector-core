@@ -77,7 +77,7 @@ class DeliveryNoteItem extends DataModel
                 case "_warehouseId":
                 case "_deliveryNoteId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_quantity":

@@ -55,7 +55,7 @@ class CustomerGroupI18n extends DataModel
             
                 case "_customerGroupId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
             }

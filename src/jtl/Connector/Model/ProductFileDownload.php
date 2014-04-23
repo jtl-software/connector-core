@@ -45,7 +45,7 @@ class ProductFileDownload extends DataModel
                 case "_productId":
                 case "_fileDownloadId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
             }

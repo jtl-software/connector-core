@@ -55,7 +55,7 @@ class CustomerGroupAttr extends DataModel
                 case "_id":
                 case "_customerGroupId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_key":

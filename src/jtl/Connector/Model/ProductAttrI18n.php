@@ -61,7 +61,7 @@ class ProductAttrI18n extends DataModel
             
                 case "_productAttrId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
             }

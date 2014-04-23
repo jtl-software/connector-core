@@ -60,7 +60,7 @@ class ProductWarehouseInfo extends DataModel
                 case "_productId":
                 case "_warehouseId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_stockLevel":

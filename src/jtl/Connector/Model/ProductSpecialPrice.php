@@ -75,7 +75,7 @@ class ProductSpecialPrice extends DataModel
                 case "_id":
                 case "_productId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_isActive":

@@ -64,7 +64,7 @@ class ManufacturerI18n extends DataModel
             switch ($name) {
                 case "_manufacturerId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_localeName":

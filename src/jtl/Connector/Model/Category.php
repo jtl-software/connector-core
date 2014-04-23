@@ -55,7 +55,7 @@ class Category extends DataModel
                 case "_id":
                 case "_parentCategoryId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_sort":

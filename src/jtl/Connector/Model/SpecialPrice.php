@@ -50,7 +50,7 @@ class SpecialPrice extends DataModel
                 case "_customerGroupId":
                 case "_productSpecialPriceId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_priceNet":

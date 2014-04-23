@@ -51,7 +51,7 @@ class ProductSpecific extends DataModel
                 case "_specificValueId":
                 case "_productId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
             }

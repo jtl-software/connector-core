@@ -50,7 +50,7 @@ class ProductVariationValueExtraCharge extends DataModel
                 case "_customerGroupId":
                 case "_productVariationValueId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_extraChargeNet":

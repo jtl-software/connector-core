@@ -45,7 +45,7 @@ class CategoryInvisibility extends DataModel
                 case "_customerGroupId":
                 case "_categoryId":
                 
-                    $this->$name = ($value instanceof Identity) ? $value : null;
+                    $this->$name = Identity::convert($value);
                     break;
             
             }
