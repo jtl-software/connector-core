@@ -36,7 +36,7 @@ class Unit extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'id'
+        '_id'
     );
     
     /**

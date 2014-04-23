@@ -41,9 +41,9 @@ class ProductConfigGroup extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'id',
-        'configGroupId',
-        'productId'
+        '_id',
+        '_configGroupId',
+        '_productId'
     );
     
     /**

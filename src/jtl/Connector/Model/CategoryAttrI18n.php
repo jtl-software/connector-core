@@ -41,7 +41,7 @@ class CategoryAttrI18n extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'categoryAttrId'
+        '_categoryAttrId'
     );
     
     /**

@@ -41,7 +41,7 @@ class ProductAttrI18n extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'productAttrId'
+        '_productAttrId'
     );
     
     /**

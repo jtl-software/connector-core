@@ -256,14 +256,14 @@ class Product extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'id',
-        'masterProductId',
-        'manufacturerId',
-        'unitId',
-        'basePriceUnitId',
-        'shippingClassId',
-        'setArticleId',
-        'productTypeId'
+        '_id',
+        '_masterProductId',
+        '_manufacturerId',
+        '_unitId',
+        '_basePriceUnitId',
+        '_shippingClassId',
+        '_setArticleId',
+        '_productTypeId'
     );
     
     /**

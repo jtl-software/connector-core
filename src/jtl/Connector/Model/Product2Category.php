@@ -36,8 +36,8 @@ class Product2Category extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'categoryId',
-        'productId'
+        '_categoryId',
+        '_productId'
     );
     
     /**

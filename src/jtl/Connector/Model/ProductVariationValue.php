@@ -51,8 +51,8 @@ class ProductVariationValue extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'id',
-        'productVariationId'
+        '_id',
+        '_productVariationId'
     );
     
     /**

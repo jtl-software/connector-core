@@ -51,8 +51,8 @@ class Image extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'id',
-        'masterImageId'
+        '_id',
+        '_masterImageId'
     );
     
     /**

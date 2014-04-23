@@ -46,8 +46,8 @@ class ProductWarehouseInfo extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'productId',
-        'warehouseId'
+        '_productId',
+        '_warehouseId'
     );
     
     /**

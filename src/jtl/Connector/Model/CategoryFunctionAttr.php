@@ -41,8 +41,8 @@ class CategoryFunctionAttr extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'id',
-        'categoryId'
+        '_id',
+        '_categoryId'
     );
     
     /**

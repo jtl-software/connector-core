@@ -36,7 +36,7 @@ class SpecificI18n extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'specificId'
+        '_specificId'
     );
     
     /**

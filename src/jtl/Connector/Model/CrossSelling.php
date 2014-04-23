@@ -41,8 +41,8 @@ class CrossSelling extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'id',
-        'crossSellingGroupId'
+        '_id',
+        '_crossSellingGroupId'
     );
     
     /**

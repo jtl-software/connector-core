@@ -196,11 +196,11 @@ class CustomerOrder extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'id',
-        'shippingAddressId',
-        'billingAddressId',
-        'shippingMethodId',
-        'paymentModuleId'
+        '_id',
+        '_shippingAddressId',
+        '_billingAddressId',
+        '_shippingMethodId',
+        '_paymentModuleId'
     );
     
     /**

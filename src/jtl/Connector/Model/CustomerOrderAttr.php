@@ -41,8 +41,8 @@ class CustomerOrderAttr extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'id',
-        'customerOrderId'
+        '_id',
+        '_customerOrderId'
     );
     
     /**

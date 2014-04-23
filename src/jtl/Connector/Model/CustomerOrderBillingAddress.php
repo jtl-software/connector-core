@@ -111,8 +111,8 @@ class CustomerOrderBillingAddress extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'id',
-        'customerId'
+        '_id',
+        '_customerId'
     );
     
     /**

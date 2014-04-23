@@ -61,10 +61,10 @@ class DeliveryNoteItem extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'id',
-        'customerOrderItemId',
-        'warehouseId',
-        'deliveryNoteId'
+        '_id',
+        '_customerOrderItemId',
+        '_warehouseId',
+        '_deliveryNoteId'
     );
     
     /**

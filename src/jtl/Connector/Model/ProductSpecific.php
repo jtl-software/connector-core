@@ -36,9 +36,9 @@ class ProductSpecific extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'id',
-        'specificValueId',
-        'productId'
+        '_id',
+        '_specificValueId',
+        '_productId'
     );
     
     /**

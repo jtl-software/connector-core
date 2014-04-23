@@ -41,8 +41,8 @@ class Category extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'id',
-        'parentCategoryId'
+        '_id',
+        '_parentCategoryId'
     );
     
     /**

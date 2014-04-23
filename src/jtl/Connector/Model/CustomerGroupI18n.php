@@ -36,7 +36,7 @@ class CustomerGroupI18n extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'customerGroupId'
+        '_customerGroupId'
     );
     
     /**

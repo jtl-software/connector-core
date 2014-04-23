@@ -31,7 +31,7 @@ class WarehouseI18n extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'warehouseId'
+        '_warehouseId'
     );
     
     /**

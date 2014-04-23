@@ -46,9 +46,9 @@ class TaxRate extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'id',
-        'taxZoneId',
-        'taxClassId'
+        '_id',
+        '_taxZoneId',
+        '_taxClassId'
     );
     
     /**

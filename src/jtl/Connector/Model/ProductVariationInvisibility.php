@@ -31,8 +31,8 @@ class ProductVariationInvisibility extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'customerGroupId',
-        'productVariationId'
+        '_customerGroupId',
+        '_productVariationId'
     );
     
     /**

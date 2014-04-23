@@ -41,8 +41,8 @@ class ProductPrice extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'customerGroupId',
-        'productId'
+        '_customerGroupId',
+        '_productId'
     );
     
     /**

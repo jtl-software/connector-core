@@ -41,7 +41,7 @@ class ConfigItemI18n extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'configItemId'
+        '_configItemId'
     );
     
     /**

@@ -36,8 +36,8 @@ class CategoryCustomerGroup extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'customerGroupId',
-        'categoryId'
+        '_customerGroupId',
+        '_categoryId'
     );
     
     /**

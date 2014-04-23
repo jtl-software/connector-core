@@ -31,8 +31,8 @@ class ProductFileDownload extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'productId',
-        'fileDownloadId'
+        '_productId',
+        '_fileDownloadId'
     );
     
     /**

@@ -41,7 +41,7 @@ class MediaFileI18n extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'mediaFileId'
+        '_mediaFileId'
     );
     
     /**

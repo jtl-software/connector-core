@@ -56,8 +56,8 @@ class Shipment extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'id',
-        'deliveryNoteId'
+        '_id',
+        '_deliveryNoteId'
     );
     
     /**

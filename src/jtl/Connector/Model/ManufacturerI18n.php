@@ -51,7 +51,7 @@ class ManufacturerI18n extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'manufacturerId'
+        '_manufacturerId'
     );
     
     /**

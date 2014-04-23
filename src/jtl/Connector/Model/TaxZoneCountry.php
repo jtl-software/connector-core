@@ -36,8 +36,8 @@ class TaxZoneCountry extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'id',
-        'taxZoneId'
+        '_id',
+        '_taxZoneId'
     );
     
     /**

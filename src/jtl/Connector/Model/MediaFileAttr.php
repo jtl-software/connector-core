@@ -46,7 +46,7 @@ class MediaFileAttr extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'mediaFileId'
+        '_mediaFileId'
     );
     
     /**

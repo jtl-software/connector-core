@@ -36,8 +36,8 @@ class SpecialPrice extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'customerGroupId',
-        'productSpecialPriceId'
+        '_customerGroupId',
+        '_productSpecialPriceId'
     );
     
     /**

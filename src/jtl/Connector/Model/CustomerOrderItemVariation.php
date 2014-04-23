@@ -61,10 +61,10 @@ class CustomerOrderItemVariation extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'id',
-        'customerOrderItemId',
-        'productVariationId',
-        'productVariationValueId'
+        '_id',
+        '_customerOrderItemId',
+        '_productVariationId',
+        '_productVariationValueId'
     );
     
     /**

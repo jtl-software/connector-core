@@ -41,8 +41,8 @@ class ConfigItemPrice extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'configItemId',
-        'customerGroupId'
+        '_configItemId',
+        '_customerGroupId'
     );
     
     /**

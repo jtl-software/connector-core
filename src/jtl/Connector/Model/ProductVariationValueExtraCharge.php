@@ -36,8 +36,8 @@ class ProductVariationValueExtraCharge extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'customerGroupId',
-        'productVariationValueId'
+        '_customerGroupId',
+        '_productVariationValueId'
     );
     
     /**

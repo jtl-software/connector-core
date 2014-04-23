@@ -41,7 +41,7 @@ class FileDownloadI18n extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
-        'fileDownloadId'
+        '_fileDownloadId'
     );
     
     /**
