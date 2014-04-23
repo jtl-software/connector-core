@@ -43,6 +43,14 @@ class ProductWarehouseInfo extends DataModel
     protected $_inflowDate = null;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'productId',
+        'warehouseId'
+    );
+    
+    /**
      * ProductWarehouseInfo Setter
      *
      * @param string $name
@@ -60,7 +68,7 @@ class ProductWarehouseInfo extends DataModel
                 case "_productId":
                 case "_warehouseId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_stockLevel":

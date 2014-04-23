@@ -38,6 +38,13 @@ class Specific extends DataModel
     protected $_type = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id'
+    );
+    
+    /**
      * Specific Setter
      *
      * @param string $name
@@ -54,7 +61,7 @@ class Specific extends DataModel
             switch ($name) {
                 case "_id":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_sort":

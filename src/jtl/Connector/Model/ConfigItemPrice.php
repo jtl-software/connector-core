@@ -38,6 +38,14 @@ class ConfigItemPrice extends DataModel
     protected $_type = 0;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'configItemId',
+        'customerGroupId'
+    );
+    
+    /**
      * ConfigItemPrice Setter
      *
      * @param string $name
@@ -55,7 +63,7 @@ class ConfigItemPrice extends DataModel
                 case "_configItemId":
                 case "_customerGroupId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_price":

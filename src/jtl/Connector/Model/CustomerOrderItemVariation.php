@@ -58,6 +58,16 @@ class CustomerOrderItemVariation extends DataModel
     protected $_surcharge = 0;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'customerOrderItemId',
+        'productVariationId',
+        'productVariationValueId'
+    );
+    
+    /**
      * CustomerOrderItemVariation Setter
      *
      * @param string $name
@@ -77,7 +87,7 @@ class CustomerOrderItemVariation extends DataModel
                 case "_productVariationId":
                 case "_productVariationValueId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_productVariationName":

@@ -63,6 +63,13 @@ class Currency extends DataModel
     protected $_delimiterThousand = '.';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id'
+    );
+    
+    /**
      * Currency Setter
      *
      * @param string $name
@@ -79,7 +86,7 @@ class Currency extends DataModel
             switch ($name) {
                 case "_id":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_name":

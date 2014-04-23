@@ -38,6 +38,14 @@ class CrossSelling extends DataModel
     protected $_productId = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'crossSellingGroupId'
+    );
+    
+    /**
      * CrossSelling Setter
      *
      * @param string $name
@@ -55,7 +63,7 @@ class CrossSelling extends DataModel
                 case "_id":
                 case "_crossSellingGroupId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_crossSellingProductId":

@@ -33,6 +33,14 @@ class SpecificValue extends DataModel
     protected $_sort = 0;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'specificId'
+    );
+    
+    /**
      * SpecificValue Setter
      *
      * @param string $name
@@ -50,7 +58,7 @@ class SpecificValue extends DataModel
                 case "_id":
                 case "_specificId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_sort":

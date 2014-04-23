@@ -83,6 +83,14 @@ class CustomerOrderPaymentInfo extends DataModel
     protected $_creditCardHolder = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'customerOrderId'
+    );
+    
+    /**
      * CustomerOrderPaymentInfo Setter
      *
      * @param string $name
@@ -100,7 +108,7 @@ class CustomerOrderPaymentInfo extends DataModel
                 case "_id":
                 case "_customerOrderId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_bankName":

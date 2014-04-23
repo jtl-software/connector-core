@@ -28,6 +28,12 @@ class ProductVariationValueDependency extends DataModel
     protected $_productVariationValueTargetId = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+    );
+    
+    /**
      * ProductVariationValueDependency Setter
      *
      * @param string $name

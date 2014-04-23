@@ -28,6 +28,13 @@ class ProductType extends DataModel
     protected $_name = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id'
+    );
+    
+    /**
      * ProductType Setter
      *
      * @param string $name
@@ -44,7 +51,7 @@ class ProductType extends DataModel
             switch ($name) {
                 case "_id":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_name":

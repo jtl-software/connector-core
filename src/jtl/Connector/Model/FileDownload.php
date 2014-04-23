@@ -53,6 +53,13 @@ class FileDownload extends DataModel
     protected $_created = null;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id'
+    );
+    
+    /**
      * FileDownload Setter
      *
      * @param string $name
@@ -69,7 +76,7 @@ class FileDownload extends DataModel
             switch ($name) {
                 case "_id":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_path":

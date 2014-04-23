@@ -38,6 +38,13 @@ class CustomerGroup extends DataModel
     protected $_applyNetPrice = false;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id'
+    );
+    
+    /**
      * CustomerGroup Setter
      *
      * @param string $name
@@ -54,7 +61,7 @@ class CustomerGroup extends DataModel
             switch ($name) {
                 case "_id":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_discount":

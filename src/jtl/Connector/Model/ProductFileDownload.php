@@ -28,6 +28,14 @@ class ProductFileDownload extends DataModel
     protected $_fileDownloadId = null;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'productId',
+        'fileDownloadId'
+    );
+    
+    /**
      * ProductFileDownload Setter
      *
      * @param string $name
@@ -45,7 +53,7 @@ class ProductFileDownload extends DataModel
                 case "_productId":
                 case "_fileDownloadId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
             }

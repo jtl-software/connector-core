@@ -43,6 +43,15 @@ class TaxRate extends DataModel
     protected $_priority = 0;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'taxZoneId',
+        'taxClassId'
+    );
+    
+    /**
      * TaxRate Setter
      *
      * @param string $name
@@ -61,7 +70,7 @@ class TaxRate extends DataModel
                 case "_taxZoneId":
                 case "_taxClassId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_rate":

@@ -33,6 +33,13 @@ class ProductVariationValueI18n extends DataModel
     protected $_name = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'productVariationValueId'
+    );
+    
+    /**
      * ProductVariationValueI18n Setter
      *
      * @param string $name
@@ -55,7 +62,7 @@ class ProductVariationValueI18n extends DataModel
             
                 case "_productVariationValueId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
             }

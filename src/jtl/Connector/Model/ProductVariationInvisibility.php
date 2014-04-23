@@ -28,6 +28,14 @@ class ProductVariationInvisibility extends DataModel
     protected $_productVariationId = null;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'customerGroupId',
+        'productVariationId'
+    );
+    
+    /**
      * ProductVariationInvisibility Setter
      *
      * @param string $name
@@ -45,7 +53,7 @@ class ProductVariationInvisibility extends DataModel
                 case "_customerGroupId":
                 case "_productVariationId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
             }

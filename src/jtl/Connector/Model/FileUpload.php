@@ -48,6 +48,14 @@ class FileUpload extends DataModel
     protected $_isRequired = false;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'productId'
+    );
+    
+    /**
      * FileUpload Setter
      *
      * @param string $name
@@ -65,7 +73,7 @@ class FileUpload extends DataModel
                 case "_id":
                 case "_productId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_name":

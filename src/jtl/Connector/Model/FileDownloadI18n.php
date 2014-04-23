@@ -38,6 +38,13 @@ class FileDownloadI18n extends DataModel
     protected $_description = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'fileDownloadId'
+    );
+    
+    /**
      * FileDownloadI18n Setter
      *
      * @param string $name
@@ -54,7 +61,7 @@ class FileDownloadI18n extends DataModel
             switch ($name) {
                 case "_fileDownloadId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_localeName":

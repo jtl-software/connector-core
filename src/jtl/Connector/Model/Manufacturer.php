@@ -43,6 +43,13 @@ class Manufacturer extends DataModel
     protected $_urlPath = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id'
+    );
+    
+    /**
      * Manufacturer Setter
      *
      * @param string $name
@@ -59,7 +66,7 @@ class Manufacturer extends DataModel
             switch ($name) {
                 case "_id":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_name":

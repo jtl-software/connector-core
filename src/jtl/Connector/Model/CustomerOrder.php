@@ -193,6 +193,17 @@ class CustomerOrder extends DataModel
     protected $_paymentModuleId = null;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'shippingAddressId',
+        'billingAddressId',
+        'shippingMethodId',
+        'paymentModuleId'
+    );
+    
+    /**
      * CustomerOrder Setter
      *
      * @param string $name
@@ -213,7 +224,7 @@ class CustomerOrder extends DataModel
                 case "_shippingMethodId":
                 case "_paymentModuleId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_customerId":

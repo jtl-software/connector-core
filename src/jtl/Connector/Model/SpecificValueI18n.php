@@ -58,6 +58,13 @@ class SpecificValueI18n extends DataModel
     protected $_titleTag = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'specificValueId'
+    );
+    
+    /**
      * SpecificValueI18n Setter
      *
      * @param string $name
@@ -85,7 +92,7 @@ class SpecificValueI18n extends DataModel
             
                 case "_specificValueId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
             }

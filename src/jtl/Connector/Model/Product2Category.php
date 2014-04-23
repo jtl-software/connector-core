@@ -33,6 +33,14 @@ class Product2Category extends DataModel
     protected $_productId = null;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'categoryId',
+        'productId'
+    );
+    
+    /**
      * Product2Category Setter
      *
      * @param string $name
@@ -55,7 +63,7 @@ class Product2Category extends DataModel
                 case "_categoryId":
                 case "_productId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
             }

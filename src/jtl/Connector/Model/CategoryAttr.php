@@ -33,6 +33,14 @@ class CategoryAttr extends DataModel
     protected $_sort = 0;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'categoryId'
+    );
+    
+    /**
      * CategoryAttr Setter
      *
      * @param string $name
@@ -50,7 +58,7 @@ class CategoryAttr extends DataModel
                 case "_id":
                 case "_categoryId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_sort":

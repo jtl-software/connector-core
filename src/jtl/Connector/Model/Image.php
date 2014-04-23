@@ -48,6 +48,14 @@ class Image extends DataModel
     protected $_sort = 0;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'masterImageId'
+    );
+    
+    /**
      * Image Setter
      *
      * @param string $name
@@ -65,7 +73,7 @@ class Image extends DataModel
                 case "_id":
                 case "_masterImageId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_relationType":

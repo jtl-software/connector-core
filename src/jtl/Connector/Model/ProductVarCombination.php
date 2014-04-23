@@ -33,6 +33,15 @@ class ProductVarCombination extends DataModel
     protected $_productVariationValueId = null;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'productId',
+        'productVariationId',
+        'productVariationValueId'
+    );
+    
+    /**
      * ProductVarCombination Setter
      *
      * @param string $name
@@ -51,7 +60,7 @@ class ProductVarCombination extends DataModel
                 case "_productVariationId":
                 case "_productVariationValueId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
             }

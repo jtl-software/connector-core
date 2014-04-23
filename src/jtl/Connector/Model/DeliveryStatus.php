@@ -33,6 +33,13 @@ class DeliveryStatus extends DataModel
     protected $_name = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id'
+    );
+    
+    /**
      * DeliveryStatus Setter
      *
      * @param string $name
@@ -49,7 +56,7 @@ class DeliveryStatus extends DataModel
             switch ($name) {
                 case "_id":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_localeName":

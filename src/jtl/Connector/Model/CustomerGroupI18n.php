@@ -33,6 +33,13 @@ class CustomerGroupI18n extends DataModel
     protected $_name = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'customerGroupId'
+    );
+    
+    /**
      * CustomerGroupI18n Setter
      *
      * @param string $name
@@ -55,7 +62,7 @@ class CustomerGroupI18n extends DataModel
             
                 case "_customerGroupId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
             }

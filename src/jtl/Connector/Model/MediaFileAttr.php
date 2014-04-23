@@ -43,6 +43,13 @@ class MediaFileAttr extends DataModel
     protected $_value = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'mediaFileId'
+    );
+    
+    /**
      * MediaFileAttr Setter
      *
      * @param string $name
@@ -64,7 +71,7 @@ class MediaFileAttr extends DataModel
             
                 case "_mediaFileId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_localeName":

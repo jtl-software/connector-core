@@ -183,6 +183,14 @@ class Customer extends DataModel
     protected $_hasCustomerAccount = false;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'customerGroupId'
+    );
+    
+    /**
      * Customer Setter
      *
      * @param string $name
@@ -200,7 +208,7 @@ class Customer extends DataModel
                 case "_id":
                 case "_customerGroupId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_localeName":

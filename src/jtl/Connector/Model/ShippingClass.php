@@ -28,6 +28,13 @@ class ShippingClass extends DataModel
     protected $_name = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id'
+    );
+    
+    /**
      * ShippingClass Setter
      *
      * @param string $name
@@ -44,7 +51,7 @@ class ShippingClass extends DataModel
             switch ($name) {
                 case "_id":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_name":

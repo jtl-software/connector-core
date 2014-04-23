@@ -53,6 +53,14 @@ class MediaFile extends DataModel
     protected $_sort = 0;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'productId'
+    );
+    
+    /**
      * MediaFile Setter
      *
      * @param string $name
@@ -70,7 +78,7 @@ class MediaFile extends DataModel
                 case "_id":
                 case "_productId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_path":

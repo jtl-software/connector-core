@@ -58,6 +58,14 @@ class ProductSpecialPrice extends DataModel
     protected $_considerDateLimit = false;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'productId'
+    );
+    
+    /**
      * ProductSpecialPrice Setter
      *
      * @param string $name
@@ -75,7 +83,7 @@ class ProductSpecialPrice extends DataModel
                 case "_id":
                 case "_productId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_isActive":

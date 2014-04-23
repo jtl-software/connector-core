@@ -73,6 +73,12 @@ class EmailTemplate extends DataModel
     protected $_error = 0;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+    );
+    
+    /**
      * EmailTemplate Setter
      *
      * @param string $name

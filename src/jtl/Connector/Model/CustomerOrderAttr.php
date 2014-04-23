@@ -38,6 +38,14 @@ class CustomerOrderAttr extends DataModel
     protected $_value = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'customerOrderId'
+    );
+    
+    /**
      * CustomerOrderAttr Setter
      *
      * @param string $name
@@ -55,7 +63,7 @@ class CustomerOrderAttr extends DataModel
                 case "_id":
                 case "_customerOrderId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_key":

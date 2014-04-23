@@ -53,6 +53,13 @@ class ConfigGroup extends DataModel
     protected $_comment = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id'
+    );
+    
+    /**
      * ConfigGroup Setter
      *
      * @param string $name
@@ -69,7 +76,7 @@ class ConfigGroup extends DataModel
             switch ($name) {
                 case "_id":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_imagePath":

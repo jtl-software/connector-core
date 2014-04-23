@@ -28,6 +28,13 @@ class WarehouseI18n extends DataModel
     protected $_name = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'warehouseId'
+    );
+    
+    /**
      * WarehouseI18n Setter
      *
      * @param string $name
@@ -44,7 +51,7 @@ class WarehouseI18n extends DataModel
             switch ($name) {
                 case "_warehouseId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_name":

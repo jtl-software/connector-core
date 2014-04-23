@@ -38,6 +38,13 @@ class MediaFileI18n extends DataModel
     protected $_description = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'mediaFileId'
+    );
+    
+    /**
      * MediaFileI18n Setter
      *
      * @param string $name
@@ -54,7 +61,7 @@ class MediaFileI18n extends DataModel
             switch ($name) {
                 case "_mediaFileId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_localeName":

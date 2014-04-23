@@ -33,6 +33,14 @@ class CategoryCustomerGroup extends DataModel
     protected $_discount = 0;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'customerGroupId',
+        'categoryId'
+    );
+    
+    /**
      * CategoryCustomerGroup Setter
      *
      * @param string $name
@@ -50,7 +58,7 @@ class CategoryCustomerGroup extends DataModel
                 case "_customerGroupId":
                 case "_categoryId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_discount":

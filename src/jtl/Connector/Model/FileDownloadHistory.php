@@ -43,6 +43,12 @@ class FileDownloadHistory extends DataModel
     protected $_created = null;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+    );
+    
+    /**
      * FileDownloadHistory Setter
      *
      * @param string $name

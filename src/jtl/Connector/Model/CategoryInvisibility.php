@@ -28,6 +28,14 @@ class CategoryInvisibility extends DataModel
     protected $_categoryId = null;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'customerGroupId',
+        'categoryId'
+    );
+    
+    /**
      * CategoryInvisibility Setter
      *
      * @param string $name
@@ -45,7 +53,7 @@ class CategoryInvisibility extends DataModel
                 case "_customerGroupId":
                 case "_categoryId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
             }

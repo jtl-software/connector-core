@@ -253,6 +253,20 @@ class Product extends DataModel
     protected $_bestBefore = null;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'masterProductId',
+        'manufacturerId',
+        'unitId',
+        'basePriceUnitId',
+        'shippingClassId',
+        'setArticleId',
+        'productTypeId'
+    );
+    
+    /**
      * Product Setter
      *
      * @param string $name
@@ -276,7 +290,7 @@ class Product extends DataModel
                 case "_setArticleId":
                 case "_productTypeId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_deliveryStatusId":

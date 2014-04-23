@@ -33,6 +33,14 @@ class TaxZoneCountry extends DataModel
     protected $_countryIso = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'taxZoneId'
+    );
+    
+    /**
      * TaxZoneCountry Setter
      *
      * @param string $name
@@ -50,7 +58,7 @@ class TaxZoneCountry extends DataModel
                 case "_id":
                 case "_taxZoneId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_countryIso":

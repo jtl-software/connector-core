@@ -78,6 +78,16 @@ class CustomerOrderItem extends DataModel
     protected $_configItemId = '0';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'productId',
+        'shippingClassId',
+        'customerOrderId'
+    );
+    
+    /**
      * CustomerOrderItem Setter
      *
      * @param string $name
@@ -97,7 +107,7 @@ class CustomerOrderItem extends DataModel
                 case "_shippingClassId":
                 case "_customerOrderId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_name":

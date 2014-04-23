@@ -38,6 +38,14 @@ class CategoryFunctionAttr extends DataModel
     protected $_value = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'categoryId'
+    );
+    
+    /**
      * CategoryFunctionAttr Setter
      *
      * @param string $name
@@ -55,7 +63,7 @@ class CategoryFunctionAttr extends DataModel
                 case "_id":
                 case "_categoryId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_name":

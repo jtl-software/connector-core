@@ -33,6 +33,15 @@ class ProductSpecific extends DataModel
     protected $_productId = null;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'specificValueId',
+        'productId'
+    );
+    
+    /**
      * ProductSpecific Setter
      *
      * @param string $name
@@ -51,7 +60,7 @@ class ProductSpecific extends DataModel
                 case "_specificValueId":
                 case "_productId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
             }

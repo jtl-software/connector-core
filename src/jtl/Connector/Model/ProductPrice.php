@@ -38,6 +38,14 @@ class ProductPrice extends DataModel
     protected $_quantity = 1;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'customerGroupId',
+        'productId'
+    );
+    
+    /**
      * ProductPrice Setter
      *
      * @param string $name
@@ -55,7 +63,7 @@ class ProductPrice extends DataModel
                 case "_customerGroupId":
                 case "_productId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_netPrice":

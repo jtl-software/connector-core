@@ -53,6 +53,14 @@ class Shipment extends DataModel
     protected $_note = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'deliveryNoteId'
+    );
+    
+    /**
      * Shipment Setter
      *
      * @param string $name
@@ -70,7 +78,7 @@ class Shipment extends DataModel
                 case "_id":
                 case "_deliveryNoteId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_carrierName":

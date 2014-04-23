@@ -33,6 +33,14 @@ class ProductAttr extends DataModel
     protected $_sort = 0;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'productId'
+    );
+    
+    /**
      * ProductAttr Setter
      *
      * @param string $name
@@ -50,7 +58,7 @@ class ProductAttr extends DataModel
                 case "_id":
                 case "_productId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_sort":

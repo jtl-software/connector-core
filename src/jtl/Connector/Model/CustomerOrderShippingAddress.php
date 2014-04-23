@@ -108,6 +108,14 @@ class CustomerOrderShippingAddress extends DataModel
     protected $_eMail = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'customerId'
+    );
+    
+    /**
      * CustomerOrderShippingAddress Setter
      *
      * @param string $name
@@ -125,7 +133,7 @@ class CustomerOrderShippingAddress extends DataModel
                 case "_id":
                 case "_customerId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_salutation":

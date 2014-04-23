@@ -113,6 +113,12 @@ class Company extends DataModel
     protected $_bic = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+    );
+    
+    /**
      * Company Setter
      *
      * @param string $name

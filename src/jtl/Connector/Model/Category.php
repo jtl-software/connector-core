@@ -38,6 +38,14 @@ class Category extends DataModel
     protected $_level = 1;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'parentCategoryId'
+    );
+    
+    /**
      * Category Setter
      *
      * @param string $name
@@ -55,7 +63,7 @@ class Category extends DataModel
                 case "_id":
                 case "_parentCategoryId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_sort":

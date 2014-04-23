@@ -33,6 +33,14 @@ class SpecialPrice extends DataModel
     protected $_priceNet = 0.0;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'customerGroupId',
+        'productSpecialPriceId'
+    );
+    
+    /**
      * SpecialPrice Setter
      *
      * @param string $name
@@ -50,7 +58,7 @@ class SpecialPrice extends DataModel
                 case "_customerGroupId":
                 case "_productSpecialPriceId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_priceNet":

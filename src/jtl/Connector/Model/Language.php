@@ -43,6 +43,13 @@ class Language extends DataModel
     protected $_isDefault = false;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id'
+    );
+    
+    /**
      * Language Setter
      *
      * @param string $name
@@ -59,7 +66,7 @@ class Language extends DataModel
             switch ($name) {
                 case "_id":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_nameEnglish":

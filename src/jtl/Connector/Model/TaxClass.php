@@ -33,6 +33,13 @@ class TaxClass extends DataModel
     protected $_isDefault = false;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id'
+    );
+    
+    /**
      * TaxClass Setter
      *
      * @param string $name
@@ -49,7 +56,7 @@ class TaxClass extends DataModel
             switch ($name) {
                 case "_id":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_name":

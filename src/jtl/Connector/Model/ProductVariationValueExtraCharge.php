@@ -33,6 +33,14 @@ class ProductVariationValueExtraCharge extends DataModel
     protected $_extraChargeNet = 0.0;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'customerGroupId',
+        'productVariationValueId'
+    );
+    
+    /**
      * ProductVariationValueExtraCharge Setter
      *
      * @param string $name
@@ -50,7 +58,7 @@ class ProductVariationValueExtraCharge extends DataModel
                 case "_customerGroupId":
                 case "_productVariationValueId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_extraChargeNet":

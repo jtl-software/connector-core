@@ -48,6 +48,13 @@ class ProductI18n extends DataModel
     protected $_shortDescription = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'productId'
+    );
+    
+    /**
      * ProductI18n Setter
      *
      * @param string $name
@@ -73,7 +80,7 @@ class ProductI18n extends DataModel
             
                 case "_productId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
             }

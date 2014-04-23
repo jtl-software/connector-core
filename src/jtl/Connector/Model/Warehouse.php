@@ -23,6 +23,13 @@ class Warehouse extends DataModel
     protected $_id = null;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id'
+    );
+    
+    /**
      * Warehouse Setter
      *
      * @param string $name
@@ -39,7 +46,7 @@ class Warehouse extends DataModel
             switch ($name) {
                 case "_id":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
             }

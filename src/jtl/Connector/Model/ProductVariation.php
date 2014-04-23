@@ -38,6 +38,14 @@ class ProductVariation extends DataModel
     protected $_sort = 0;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'productId'
+    );
+    
+    /**
      * ProductVariation Setter
      *
      * @param string $name
@@ -55,7 +63,7 @@ class ProductVariation extends DataModel
                 case "_id":
                 case "_productId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_type":

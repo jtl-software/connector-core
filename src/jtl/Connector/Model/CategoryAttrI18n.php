@@ -38,6 +38,13 @@ class CategoryAttrI18n extends DataModel
     protected $_value = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'categoryAttrId'
+    );
+    
+    /**
      * CategoryAttrI18n Setter
      *
      * @param string $name
@@ -61,7 +68,7 @@ class CategoryAttrI18n extends DataModel
             
                 case "_categoryAttrId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
             }

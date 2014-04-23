@@ -63,6 +63,14 @@ class DeliveryNote extends DataModel
     protected $_status = 0;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'customerOrderId'
+    );
+    
+    /**
      * DeliveryNote Setter
      *
      * @param string $name
@@ -80,7 +88,7 @@ class DeliveryNote extends DataModel
                 case "_id":
                 case "_customerOrderId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_note":

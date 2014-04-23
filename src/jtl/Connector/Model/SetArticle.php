@@ -33,6 +33,12 @@ class SetArticle extends DataModel
     protected $_quantity = 0.0;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+    );
+    
+    /**
      * SetArticle Setter
      *
      * @param string $name

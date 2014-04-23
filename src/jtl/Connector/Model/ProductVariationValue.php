@@ -48,6 +48,14 @@ class ProductVariationValue extends DataModel
     protected $_stockLevel = 0.0;
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'productVariationId'
+    );
+    
+    /**
      * ProductVariationValue Setter
      *
      * @param string $name
@@ -65,7 +73,7 @@ class ProductVariationValue extends DataModel
                 case "_id":
                 case "_productVariationId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_extraWeight":

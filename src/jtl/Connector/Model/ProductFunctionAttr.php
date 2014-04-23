@@ -38,6 +38,14 @@ class ProductFunctionAttr extends DataModel
     protected $_value = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'id',
+        'productId'
+    );
+    
+    /**
      * ProductFunctionAttr Setter
      *
      * @param string $name
@@ -55,7 +63,7 @@ class ProductFunctionAttr extends DataModel
                 case "_id":
                 case "_productId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_key":

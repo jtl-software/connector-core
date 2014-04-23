@@ -53,6 +53,12 @@ class EmailTemplateI18n extends DataModel
     protected $_filename = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+    );
+    
+    /**
      * EmailTemplateI18n Setter
      *
      * @param string $name

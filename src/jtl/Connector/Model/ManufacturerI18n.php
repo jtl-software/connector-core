@@ -48,6 +48,13 @@ class ManufacturerI18n extends DataModel
     protected $_titleTag = '';
     
     /**
+     * @var mixed:string
+     */
+    protected $_identities = array(
+        'manufacturerId'
+    );
+    
+    /**
      * ManufacturerI18n Setter
      *
      * @param string $name
@@ -64,7 +71,7 @@ class ManufacturerI18n extends DataModel
             switch ($name) {
                 case "_manufacturerId":
                 
-                    $this->$name = Identity::convert($value);
+                    $this->$name = Identity::convert();
                     break;
             
                 case "_localeName":
