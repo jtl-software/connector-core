@@ -7,8 +7,6 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\DataModel;
-
 /**
  * ProductVariation Model. Each product defines its own variations, that means  variations are not global  in contrast to specifics. 
  *

@@ -7,8 +7,6 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\DataModel;
-
 /**
  * ProductType model to classify and group products.
  *

@@ -7,8 +7,6 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\DataModel;
-
 /**
  * Localized config item name and description.
  *

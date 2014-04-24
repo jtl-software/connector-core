@@ -7,8 +7,6 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\DataModel;
-
 /**
  * Extra charge for productVariationValue per customerGroup.
  *

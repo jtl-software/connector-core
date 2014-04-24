@@ -7,8 +7,6 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\DataModel;
-
 /**
  * Locale specific product variation properties. 
  *

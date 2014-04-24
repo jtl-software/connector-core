@@ -7,8 +7,6 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\DataModel;
-
 /**
  * TaxZone to Country Allocation (set in JTL-Wawi ERP).
  *

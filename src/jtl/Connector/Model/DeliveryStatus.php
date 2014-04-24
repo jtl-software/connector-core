@@ -7,8 +7,6 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\DataModel;
-
 /**
  * Localized delivery status text. Delivery status is set in the Wawi-ERP. 
  *

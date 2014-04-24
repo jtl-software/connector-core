@@ -7,8 +7,6 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\DataModel;
-
 /**
  * Specific is defined as a characteristic product attribute Like "color". Specifics can be used for after-search-filtering. 
  *

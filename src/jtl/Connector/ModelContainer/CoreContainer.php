@@ -47,6 +47,7 @@ abstract class CoreContainer implements IModelContainer
                 if (class_exists($class)) {
                     $model = new $class();
                     $model->setOptions($object);
+                    $model->setIdentities();
                 }
             }
 
@@ -185,7 +186,7 @@ abstract class CoreContainer implements IModelContainer
                     if (is_array($this->$member)) {
                         $var = array();
                         foreach ($this->$member as $i => $model) {
-                            $var[$i] = $model->getPublic($subExcludes);
+                            $var[$i] = ($subExcludes !== null) ? $model->getPublic($subExcludes) : $model->getPublic();
                         }
                     }
 

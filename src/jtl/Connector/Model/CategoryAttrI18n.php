@@ -7,8 +7,6 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\DataModel;
-
 /**
  * Localized key-value-pair for categoryAttr. All properties must be specified. 
  *

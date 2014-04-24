@@ -7,8 +7,6 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\DataModel;
-
 /**
  * Localized cross selling group. Can hold several crossSelling items that are linked for cross selling purposes. 
  *

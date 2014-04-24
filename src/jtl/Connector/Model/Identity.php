@@ -27,6 +27,15 @@ class Identity
     protected $host = '';
 
     /**
+     * Constructor
+     */
+    public function __construct($endpoint = null, $host = null)
+    {
+        $this->endpoint = $endpoint;
+        $this->host = $host;
+    }
+
+    /**
      * Gets the value of endpoint.
      *
      * @return mixed
@@ -94,11 +103,7 @@ class Identity
             throw new \InvalidArgumentException('The data parameter can not be null and must contain two values'); 
         }
 
-        $identity = new self;
-        $identity->setEndpoint($data[0])
-            ->setHost($data[1]);
-
-        return $identity;
+        return new self($data[0], $data[1]);
     }
 
     /**
@@ -112,7 +117,11 @@ class Identity
             return $data;
         }
 
-        if ($data === null || !is_array($data) || count($data) != 2 || !array_key_exists(0, $data) || !array_key_exists(1, $data)) {
+        if (!is_array($data) && $data !== null) {
+            return new self($data);
+        }
+
+        if ($data === null || (is_array($data) && (count($data) != 2 || !array_key_exists(0, $data) || !array_key_exists(1, $data)))) {
             return null;
         }
 

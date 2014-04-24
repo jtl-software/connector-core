@@ -7,8 +7,6 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\DataModel;
-
 /**
  * Additional payment info for direct debit / banktransfer or payment by credit card. 
  *
