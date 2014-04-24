@@ -6,8 +6,6 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\DataModel;
-
 /**
  * Statistic Model
  * @access public
