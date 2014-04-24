@@ -48,11 +48,30 @@ class DataModel extends CoreModel
 
     /**
      * Try to convert identities into objects
+     *
+     * @return jtl\Connector\Model\DataModel
      */
     public function setIdentities()
     {
         foreach ($this->_identities as $identity) {
             $this->$identity = Identity::convert($this->$identity);
         }
+
+        return $this;
+    }
+
+    /**
+     * Sets Properties with matching Array Values
+     *
+     * @param object $object
+     * @param array $options
+     * @return jtl\Connector\Model\DataModel
+     */
+    public function setOptions($object = null, array $options = null)
+    {
+        parent::setOptions($object, $options);
+        $this->setIdentities();
+
+        return $this;
     }
 }

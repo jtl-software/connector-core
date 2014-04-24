@@ -22,23 +22,23 @@ class Identity
     protected $endpoint = '';
     
     /**
-     * @var string
+     * @var int
      */
-    protected $host = '';
+    protected $host = 0;
 
     /**
      * Constructor
      */
-    public function __construct($endpoint = null, $host = null)
+    public function __construct($endpoint = '', $host = 0)
     {
-        $this->endpoint = $endpoint;
-        $this->host = $host;
+        $this->endpoint = (string)$endpoint;
+        $this->host = (int)$host;
     }
 
     /**
      * Gets the value of endpoint.
      *
-     * @return mixed
+     * @return string
      */
     public function getEndpoint()
     {
@@ -48,7 +48,7 @@ class Identity
     /**
      * Sets the value of endpoint.
      *
-     * @param mixed $endpoint the endpoint
+     * @param string $endpoint the endpoint
      *
      * @return jtl\Connector\Model\Identity
      */
@@ -61,7 +61,7 @@ class Identity
     /**
      * Gets the value of host.
      *
-     * @return mixed
+     * @return int
      */
     public function getHost()
     {
@@ -71,13 +71,13 @@ class Identity
     /**
      * Sets the value of host.
      *
-     * @param mixed $host the host
+     * @param int $host the host
      *
      * @return jtl\Connector\Model\Identity
      */
     public function setHost($host)
     {
-        $this->host = $host;
+        $this->host = (int)$host;
         return $this;
     }
 
@@ -122,13 +122,13 @@ class Identity
         }
 
         if ($data === null || (is_array($data) && (count($data) != 2 || !array_key_exists(0, $data) || !array_key_exists(1, $data)))) {
-            return null;
+            return new self;
         }
 
         try {
             return self::fromArray($data);
         } catch (\Exception $exc) {
-            return null;
+            return new self;
         }
     }
 }
