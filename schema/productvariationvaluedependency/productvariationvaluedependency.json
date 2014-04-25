@@ -6,17 +6,19 @@
             "type": [
                 "string"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "productVariationValueTargetId": {
             "type": [
                 "string"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         }
     },
     "required": [
-        "productVariationValueId",
-        "productVariationValueTargetId"
     ]
 }

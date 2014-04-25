@@ -4,117 +4,165 @@
     "properties": {
         "id": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": false
+            "optional": false,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "configGroupId": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": false
+            "optional": false,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "productId": {
             "type": [
-                "string",
+                "array",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "type": {
             "type": [
                 "int"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "isPreSelected": {
             "type": [
                 "bool",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "isRecommended": {
             "type": [
                 "bool",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "inheritProductName": {
             "type": [
                 "bool",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "inheritProductPrice": {
             "type": [
                 "bool",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "showDiscount": {
             "type": [
                 "bool",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "showSurcharge": {
             "type": [
                 "bool",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "ignoreMultiplier": {
             "type": [
                 "bool",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "minQuantity": {
             "type": [
                 "double",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "maxQuantity": {
             "type": [
                 "double",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "initialQuantity": {
             "type": [
                 "double",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "sort": {
             "type": [
                 "int",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "vat": {
             "type": [
                 "double"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         }
     },
     "required": [
         "id",
-        "configGroupId",
-        "type",
-        "vat"
+        "configGroupId"
     ]
 }

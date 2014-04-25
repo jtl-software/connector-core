@@ -4,19 +4,28 @@
     "properties": {
         "warehouseId": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": false
+            "optional": false,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "name": {
             "type": [
                 "string"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         }
     },
     "required": [
-        "warehouseId",
-        "name"
+        "warehouseId"
     ]
 }

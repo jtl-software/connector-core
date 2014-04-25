@@ -4,33 +4,52 @@
     "properties": {
         "configItemId": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": false
+            "optional": false,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "customerGroupId": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": false
+            "optional": false,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "price": {
             "type": [
                 "float"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "type": {
             "type": [
                 "int",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         }
     },
     "required": [
         "configItemId",
-        "customerGroupId",
-        "price"
+        "customerGroupId"
     ]
 }

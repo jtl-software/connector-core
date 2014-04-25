@@ -4,128 +4,176 @@
     "properties": {
         "id": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": false
+            "optional": false,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "customerId": {
             "type": [
-                "string",
+                "array",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "salutation": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "firstName": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "lastName": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "title": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "company": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "deliveryInstruction": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "street": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "extraAddressLine": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "zipCode": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "city": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "state": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "countryIso": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "phone": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "mobile": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "fax": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "eMail": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         }
     },
     "required": [

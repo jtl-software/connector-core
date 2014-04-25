@@ -4,47 +4,70 @@
     "properties": {
         "id": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": false
+            "optional": false,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "masterImageId": {
             "type": [
-                "string",
+                "array",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "relationType": {
             "type": [
                 "string"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "foreignKey": {
             "type": [
                 "int",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "filename": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "sort": {
             "type": [
                 "int",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         }
     },
     "required": [
-        "id",
-        "relationType"
+        "id"
     ]
 }

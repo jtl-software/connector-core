@@ -4,26 +4,43 @@
     "properties": {
         "customerGroupId": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": false
+            "optional": false,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "productSpecialPriceId": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": false
+            "optional": false,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "priceNet": {
             "type": [
                 "double"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         }
     },
     "required": [
         "customerGroupId",
-        "productSpecialPriceId",
-        "priceNet"
+        "productSpecialPriceId"
     ]
 }

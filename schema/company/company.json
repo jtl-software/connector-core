@@ -6,136 +6,167 @@
             "type": [
                 "string"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "businessman": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "street": {
             "type": [
                 "string"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "streetNumber": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "zipCode": {
             "type": [
                 "string"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "city": {
             "type": [
                 "string"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "countryIso": {
             "type": [
                 "string"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "phone": {
             "type": [
                 "string"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "fax": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "eMail": {
             "type": [
                 "string"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "www": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "bankCode": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "accountNumber": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "bankName": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "accountHolder": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "vatNumber": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "taxIdNumber": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "iban": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "bic": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         }
     },
     "required": [
-        "name",
-        "street",
-        "zipCode",
-        "city",
-        "countryIso",
-        "phone",
-        "eMail"
     ]
 }

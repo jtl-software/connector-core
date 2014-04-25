@@ -4,334 +4,471 @@
     "properties": {
         "id": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": false
+            "optional": false,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "masterProductId": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": false
+            "optional": false,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "manufacturerId": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": false
+            "optional": false,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "deliveryStatusId": {
             "type": [
                 "string"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "unitId": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": false
+            "optional": false,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "basePriceUnitId": {
             "type": [
-                "string",
+                "array",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "shippingClassId": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": false
+            "optional": false,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "sku": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "note": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "stockLevel": {
             "type": [
                 "double",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "vat": {
             "type": [
                 "double"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "minimumOrderQuantity": {
             "type": [
                 "double",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "ean": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "isTopProduct": {
             "type": [
                 "bool",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "productWeight": {
             "type": [
                 "double"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "shippingWeight": {
             "type": [
                 "double"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "isNew": {
             "type": [
                 "bool",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "recommendedRetailPrice": {
             "type": [
                 "double",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "considerStock": {
             "type": [
                 "bool"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "permitNegativeStock": {
             "type": [
                 "bool",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "considerVariationStock": {
             "type": [
                 "bool",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "isDivisible": {
             "type": [
                 "bool",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "considerBasePrice": {
             "type": [
                 "bool",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "basePriceDivisor": {
             "type": [
                 "double",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "keywords": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "sort": {
             "type": [
                 "int",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "created": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "availableFrom": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "manufacturerNumber": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "serialNumber": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "isbn": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "asin": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "unNumber": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "hazardIdNumber": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "taric": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "isMasterProduct": {
             "type": [
                 "bool",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "takeOffQuantity": {
             "type": [
                 "double",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "setArticleId": {
             "type": [
-                "string",
+                "array",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "upc": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "originCountry": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "epid": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "productTypeId": {
             "type": [
-                "string",
+                "array",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "inflowQuantity": {
             "type": [
                 "double",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "inflowDate": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "supplierStockLevel": {
             "type": [
                 "double",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "supplierDeliveryTime": {
             "type": [
                 "double",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "bestBefore": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         }
     },
     "required": [
         "id",
         "masterProductId",
         "manufacturerId",
-        "deliveryStatusId",
         "unitId",
-        "shippingClassId",
-        "vat",
-        "productWeight",
-        "shippingWeight",
-        "considerStock"
+        "shippingClassId"
     ]
 }

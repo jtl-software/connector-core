@@ -6,38 +6,50 @@
             "type": [
                 "int"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "mediaFileId": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": false
+            "optional": false,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "localeName": {
             "type": [
                 "string"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
-        "name": {
+        "key": {
             "type": [
                 "string"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "value": {
             "type": [
                 "string"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         }
     },
     "required": [
-        "id",
-        "mediaFileId",
-        "localeName",
-        "name",
-        "value"
+        "mediaFileId"
     ]
 }

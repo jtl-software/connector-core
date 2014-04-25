@@ -4,40 +4,47 @@
     "properties": {
         "id": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": false
-        },
-        "name": {
-            "type": [
-                "string"
-            ],
-            "optional": false
+            "optional": false,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "discount": {
             "type": [
                 "double",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "isDefault": {
             "type": [
                 "bool",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "applyNetPrice": {
             "type": [
                 "bool",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         }
     },
     "required": [
-        "id",
-        "name"
+        "id"
     ]
 }

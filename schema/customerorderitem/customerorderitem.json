@@ -4,89 +4,132 @@
     "properties": {
         "id": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": false
+            "optional": false,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "productId": {
             "type": [
-                "string",
+                "array",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "shippingClassId": {
             "type": [
-                "string",
+                "array",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "customerOrderId": {
             "type": [
-                "string",
+                "array",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
         },
         "name": {
             "type": [
                 "string"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "sku": {
             "type": [
                 "string"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "price": {
             "type": [
                 "double"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "vat": {
             "type": [
                 "double"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "quantity": {
             "type": [
                 "int"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "type": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "unique": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "configItemId": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         }
     },
     "required": [
-        "id",
-        "name",
-        "sku",
-        "price",
-        "vat",
-        "quantity"
+        "id"
     ]
 }

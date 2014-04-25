@@ -89,7 +89,7 @@ final class Handler
                             
                             $result = new TransactionResult();
                             $result->setTransactionId($trid);
-                            
+
                             if ($session->trans[$type][$trid]->add($method->getController(), $requestpacket->getParams(), true, $modelNamespace)) {
                                 $action->setResult($result->getPublic());
                             }

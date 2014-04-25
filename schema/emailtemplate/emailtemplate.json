@@ -6,80 +6,95 @@
             "type": [
                 "string"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "name": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "description": {
             "type": [
                 "string"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "emailType": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "moduleId": {
             "type": [
                 "string",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "filename": {
             "type": [
                 "string"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "isActive": {
             "type": [
                 "bool",
                 "null"
             ],
-            "optional": true
+            "optional": true,
+            "items": [
+            ]
         },
         "isOii": {
             "type": [
                 "bool"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "isAgb": {
             "type": [
                 "bool"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "isWrb": {
             "type": [
                 "bool"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         },
         "error": {
             "type": [
                 "int"
             ],
-            "optional": false
+            "optional": true,
+            "items": [
+            ]
         }
     },
     "required": [
-        "id",
-        "description",
-        "filename",
-        "isOii",
-        "isAgb",
-        "isWrb",
-        "error"
     ]
 }
