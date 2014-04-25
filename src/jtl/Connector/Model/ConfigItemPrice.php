@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Customer group price for config item.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class ConfigItemPrice extends DataModel

@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Global language model
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class Language extends DataModel

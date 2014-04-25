@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Specifies which CustomerGroup is not permitted to view category.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Category
  */
 class CategoryInvisibility extends DataModel

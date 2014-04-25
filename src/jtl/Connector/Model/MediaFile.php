@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Media file model.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class MediaFile extends DataModel

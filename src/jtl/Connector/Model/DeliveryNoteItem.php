@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Delivery note item properties.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage DeliveryNote
  */
 class DeliveryNoteItem extends DataModel

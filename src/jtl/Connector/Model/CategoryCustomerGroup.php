@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Link customergroup with category. Set optional discount on category for customergroup. 
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Category
  */
 class CategoryCustomerGroup extends DataModel

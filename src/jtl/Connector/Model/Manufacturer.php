@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Manufacturer / brand properties. 
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Manufacturer
  */
 class Manufacturer extends DataModel

@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Customer address data and preference properties.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Customer
  */
 class Customer extends DataModel

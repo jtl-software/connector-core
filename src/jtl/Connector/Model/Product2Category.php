@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Product-Category Allocation.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class Product2Category extends DataModel

@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Shop3 only
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage 
  */
 class EmailTemplate extends DataModel

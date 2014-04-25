@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Localized cross selling group. Can hold several crossSelling items that are linked for cross selling purposes. 
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class CrossSellingGroup extends DataModel

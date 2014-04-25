@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * warehouse model (set in JTL-Wawi ERP).
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class Warehouse extends DataModel

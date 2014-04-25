@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Currency model properties.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class Currency extends DataModel

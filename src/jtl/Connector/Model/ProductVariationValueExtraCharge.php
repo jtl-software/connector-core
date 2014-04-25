@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Extra charge for productVariationValue per customerGroup.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductVariationValueExtraCharge extends DataModel

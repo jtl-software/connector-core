@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Localized warehouse name.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class WarehouseI18n extends DataModel

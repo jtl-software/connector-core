@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Localized configGroup
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class ConfigGroupI18n extends DataModel

@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Product to productVariationValue Allocation.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductVarCombination extends DataModel

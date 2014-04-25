@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Localized key-value-pair for productAttr.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductAttrI18n extends DataModel

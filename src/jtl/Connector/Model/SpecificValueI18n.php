@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Localized specific value text.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Specific
  */
 class SpecificValueI18n extends DataModel

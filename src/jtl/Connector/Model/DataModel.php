@@ -13,6 +13,7 @@ use \jtl\Core\Model\DataModel as CoreModel;
  * Entity data model
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage DataModel
  */
 class DataModel extends CoreModel

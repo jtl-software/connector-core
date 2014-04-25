@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * A category with sort number, link to parent category and level
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Category
  */
 class Category extends DataModel

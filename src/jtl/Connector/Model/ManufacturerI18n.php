@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Locale specific text and meta-information for manufacturer.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Manufacturer
  */
 class ManufacturerI18n extends DataModel

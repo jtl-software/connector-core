@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Special product price properties to specify date and stock limits.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductSpecialPrice extends DataModel

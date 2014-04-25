@@ -47,7 +47,6 @@ abstract class CoreContainer implements IModelContainer
                 if (class_exists($class)) {
                     $model = new $class();
                     $model->setOptions($object);
-                    $model->setIdentities();
                 }
             }
 

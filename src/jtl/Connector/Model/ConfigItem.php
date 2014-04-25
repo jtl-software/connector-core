@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * A config Item that is displayed in a config Group. Config item can reference to a specific productId to inherit price, name and description. 
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class ConfigItem extends DataModel

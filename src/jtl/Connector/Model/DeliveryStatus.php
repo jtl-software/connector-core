@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Localized delivery status text. Delivery status is set in the Wawi-ERP. 
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class DeliveryStatus extends DataModel

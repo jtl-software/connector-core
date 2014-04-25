@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Shipment Model with reference to a deliveryNote
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage DeliveryNote
  */
 class Shipment extends DataModel

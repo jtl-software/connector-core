@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * File download properties. 
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class FileDownload extends DataModel

@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Provides company address and bank details
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class Company extends DataModel

@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Config group holds several configItems and settings
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class ConfigGroup extends DataModel

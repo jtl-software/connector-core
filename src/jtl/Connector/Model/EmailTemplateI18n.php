@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * 
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage 
  */
 class EmailTemplateI18n extends DataModel

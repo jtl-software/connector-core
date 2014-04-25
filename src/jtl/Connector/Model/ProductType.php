@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * ProductType model to classify and group products.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class ProductType extends DataModel

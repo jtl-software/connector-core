@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Specific value properties to define a new specificValue with a sort number. 
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Specific
  */
 class SpecificValue extends DataModel

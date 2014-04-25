@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Specifies product units like "piece", "bottle", "package".
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class Unit extends DataModel

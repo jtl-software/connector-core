@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Localized config item name and description.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class ConfigItemI18n extends DataModel

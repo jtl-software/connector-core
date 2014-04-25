@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Monolingual mediafile attribute.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class MediaFileAttr extends DataModel

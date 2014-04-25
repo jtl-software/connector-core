@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Specific is defined as a characteristic product attribute Like "color". Specifics can be used for after-search-filtering. 
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Specific
  */
 class Specific extends DataModel

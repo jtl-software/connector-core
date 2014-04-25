@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Billing address of a customer (order)
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage CustomerOrder
  */
 class CustomerOrderBillingAddress extends DataModel

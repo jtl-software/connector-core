@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * customer order item variation
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage CustomerOrder
  */
 class CustomerOrderItemVariation extends DataModel

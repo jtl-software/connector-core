@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Localized category attribute
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Category
  */
 class CategoryAttr extends DataModel

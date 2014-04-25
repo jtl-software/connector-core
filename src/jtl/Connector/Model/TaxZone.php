@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Tax zone model (set in JTL-Wawi ERP).
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class TaxZone extends DataModel

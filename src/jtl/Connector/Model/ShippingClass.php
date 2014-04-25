@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Shipping classes are usually defined in JTL-Wawi ERP.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class ShippingClass extends DataModel

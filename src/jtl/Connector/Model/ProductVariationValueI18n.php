@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * locale specifig productVariationValue name.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductVariationValueI18n extends DataModel

@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Customer order properties.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage CustomerOrder
  */
 class CustomerOrder extends DataModel

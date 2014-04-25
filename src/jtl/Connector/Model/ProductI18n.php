@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Locale specific texts for product
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductI18n extends DataModel

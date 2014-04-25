@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * ToDo: Remove (deprecated)
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage 
  */
 class FileDownloadHistory extends DataModel

@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Product properties.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class Product extends DataModel

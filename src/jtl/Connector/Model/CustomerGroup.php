@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Customer group model.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class CustomerGroup extends DataModel

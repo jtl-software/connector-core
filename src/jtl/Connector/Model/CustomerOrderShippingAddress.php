@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Shipping Address properties of a customer (order)
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage CustomerOrder
  */
 class CustomerOrderShippingAddress extends DataModel

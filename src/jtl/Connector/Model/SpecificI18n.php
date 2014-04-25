@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Localized name for specific.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Specific
  */
 class SpecificI18n extends DataModel

@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * File upload properties. 
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class FileUpload extends DataModel

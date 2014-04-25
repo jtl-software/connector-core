@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Specify productVariationValue to hide from specific customerGroup.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductVariationValueInvisibility extends DataModel

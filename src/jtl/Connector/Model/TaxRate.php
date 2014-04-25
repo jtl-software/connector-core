@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Tax rate model (set in JTL-Wawi ERP).
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class TaxRate extends DataModel

@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Monolingual product function attribute.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductFunctionAttr extends DataModel

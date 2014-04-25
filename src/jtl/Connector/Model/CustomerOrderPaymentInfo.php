@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Additional payment info for direct debit / banktransfer or payment by credit card. 
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage CustomerOrder
  */
 class CustomerOrderPaymentInfo extends DataModel

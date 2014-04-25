@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Localized category properties. localeName, categoryId and a localized name must be set. 
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Category
  */
 class CategoryI18n extends DataModel

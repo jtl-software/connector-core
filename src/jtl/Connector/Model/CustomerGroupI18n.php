@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Localized customer group name.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage GlobalData
  */
 class CustomerGroupI18n extends DataModel

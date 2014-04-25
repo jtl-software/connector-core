@@ -11,6 +11,7 @@ namespace jtl\Connector\Model;
  * Localized product attribute.
  *
  * @access public
+ * @package jtl\Connector\Model
  * @subpackage Product
  */
 class ProductAttr extends DataModel
