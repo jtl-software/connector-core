@@ -82,9 +82,9 @@ class CustomerOrder extends DataModel
     protected $_billingAddressId = null;
     
     /**
-     * @var Identity Reference to shippingMethod
+     * @var string Identifier code for shippingMethod
      */
-    protected $_shippingMethodId = null;
+    protected $_shippingMethodCode = '';
     
     /**
      * @var string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
@@ -187,9 +187,9 @@ class CustomerOrder extends DataModel
     protected $_created = null;
     
     /**
-     * @var Identity Optional payment module id
+     * @var string Optional payment module code
      */
-    protected $_paymentModuleId = null;
+    protected $_paymentModuleCode = '';
     
     /**
      * @var mixed:string
@@ -197,9 +197,7 @@ class CustomerOrder extends DataModel
     protected $_identities = array(
         '_id',
         '_shippingAddressId',
-        '_billingAddressId',
-        '_shippingMethodId',
-        '_paymentModuleId'
+        '_billingAddressId'
     );
     
     /**
@@ -220,13 +218,12 @@ class CustomerOrder extends DataModel
                 case "_id":
                 case "_shippingAddressId":
                 case "_billingAddressId":
-                case "_shippingMethodId":
-                case "_paymentModuleId":
                 
                     $this->$name = Identity::convert($value);
                     break;
             
                 case "_customerId":
+                case "_shippingMethodCode":
                 case "_localeName":
                 case "_currencyIso":
                 case "_estimatedDeliveryDate":
@@ -244,6 +241,7 @@ class CustomerOrder extends DataModel
                 case "_ip":
                 case "_status":
                 case "_created":
+                case "_paymentModuleCode":
                 
                     $this->$name = (string)$value;
                     break;
@@ -332,21 +330,21 @@ class CustomerOrder extends DataModel
         return $this->_billingAddressId;
     }
     /**
-     * @param Identity $shippingMethodId Reference to shippingMethod
+     * @param string $shippingMethodCode Identifier code for shippingMethod
      * @return \jtl\Connector\Model\CustomerOrder
      */
-    public function setShippingMethodId(Identity $shippingMethodId)
+    public function setShippingMethodCode($shippingMethodCode)
     {
-        $this->_shippingMethodId = $shippingMethodId;
+        $this->_shippingMethodCode = (string)$shippingMethodCode;
         return $this;
     }
     
     /**
-     * @return Identity Reference to shippingMethod
+     * @return string Identifier code for shippingMethod
      */
-    public function getShippingMethodId()
+    public function getShippingMethodCode()
     {
-        return $this->_shippingMethodId;
+        return $this->_shippingMethodCode;
     }
     /**
      * @param string $localeName Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
@@ -689,20 +687,20 @@ class CustomerOrder extends DataModel
         return $this->_created;
     }
     /**
-     * @param Identity $paymentModuleId Optional payment module id
+     * @param string $paymentModuleCode Optional payment module code
      * @return \jtl\Connector\Model\CustomerOrder
      */
-    public function setPaymentModuleId(Identity $paymentModuleId)
+    public function setPaymentModuleCode($paymentModuleCode)
     {
-        $this->_paymentModuleId = $paymentModuleId;
+        $this->_paymentModuleCode = (string)$paymentModuleCode;
         return $this;
     }
     
     /**
-     * @return Identity Optional payment module id
+     * @return string Optional payment module code
      */
-    public function getPaymentModuleId()
+    public function getPaymentModuleCode()
     {
-        return $this->_paymentModuleId;
+        return $this->_paymentModuleCode;
     }
 }

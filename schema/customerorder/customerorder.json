@@ -53,18 +53,12 @@
                 }
             ]
         },
-        "shippingMethodId": {
+        "shippingMethodCode": {
             "type": [
-                "array"
+                "string"
             ],
-            "optional": false,
+            "optional": true,
             "items": [
-                {
-                    "type": [
-                        "string",
-                        "int"
-                    ]
-                }
             ]
         },
         "localeName": {
@@ -243,26 +237,19 @@
             "items": [
             ]
         },
-        "paymentModuleId": {
+        "paymentModuleCode": {
             "type": [
-                "array",
+                "string",
                 "null"
             ],
             "optional": true,
             "items": [
-                {
-                    "type": [
-                        "string",
-                        "int"
-                    ]
-                }
             ]
         }
     },
     "required": [
         "id",
         "shippingAddressId",
-        "billingAddressId",
-        "shippingMethodId"
+        "billingAddressId"
     ]
 }
