@@ -17,14 +17,14 @@ namespace jtl\Connector\Model;
 class SetArticle extends DataModel
 {
     /**
-     * @var string Unique setArticle id, referenced by product.setArticleId
+     * @var Identity Unique setArticle id, referenced by product.setArticleId
      */
-    protected $_id = '';
+    protected $_id = null;
     
     /**
-     * @var string Reference to a component / product
+     * @var Identity Reference to a component / product
      */
-    protected $_productId = '';
+    protected $_productId = null;
     
     /**
      * @var double Component quantity
@@ -35,6 +35,8 @@ class SetArticle extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
+        '_id',
+        '_productId'
     );
     
     /**
@@ -55,7 +57,7 @@ class SetArticle extends DataModel
                 case "_id":
                 case "_productId":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = Identity::convert($value);
                     break;
             
                 case "_quantity":
@@ -68,34 +70,34 @@ class SetArticle extends DataModel
     }
     
     /**
-     * @param string $id Unique setArticle id, referenced by product.setArticleId
+     * @param Identity $id Unique setArticle id, referenced by product.setArticleId
      * @return \jtl\Connector\Model\SetArticle
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique setArticle id, referenced by product.setArticleId
+     * @return Identity Unique setArticle id, referenced by product.setArticleId
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $productId Reference to a component / product
+     * @param Identity $productId Reference to a component / product
      * @return \jtl\Connector\Model\SetArticle
      */
-    public function setProductId($productId)
+    public function setProductId(Identity $productId)
     {
-        $this->_productId = (string)$productId;
+        $this->_productId = $productId;
         return $this;
     }
     
     /**
-     * @return string Reference to a component / product
+     * @return Identity Reference to a component / product
      */
     public function getProductId()
     {

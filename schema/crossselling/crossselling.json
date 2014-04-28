@@ -18,10 +18,16 @@
         },
         "crossSellingProductId": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": true,
+            "optional": false,
             "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
             ]
         },
         "crossSellingGroupId": {
@@ -40,15 +46,23 @@
         },
         "productId": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": true,
+            "optional": false,
             "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
             ]
         }
     },
     "required": [
         "id",
-        "crossSellingGroupId"
+        "crossSellingProductId",
+        "crossSellingGroupId",
+        "productId"
     ]
 }

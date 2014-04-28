@@ -67,9 +67,9 @@ class CustomerOrder extends DataModel
     protected $_id = null;
     
     /**
-     * @var string Optional reference to customer. 
+     * @var Identity Optional reference to customer. 
      */
-    protected $_customerId = '';
+    protected $_customerId = null;
     
     /**
      * @var Identity Reference to shippingAddress
@@ -196,6 +196,7 @@ class CustomerOrder extends DataModel
      */
     protected $_identities = array(
         '_id',
+        '_customerId',
         '_shippingAddressId',
         '_billingAddressId'
     );
@@ -216,13 +217,13 @@ class CustomerOrder extends DataModel
         
             switch ($name) {
                 case "_id":
+                case "_customerId":
                 case "_shippingAddressId":
                 case "_billingAddressId":
                 
                     $this->$name = Identity::convert($value);
                     break;
             
-                case "_customerId":
                 case "_shippingMethodCode":
                 case "_localeName":
                 case "_currencyIso":
@@ -279,17 +280,17 @@ class CustomerOrder extends DataModel
         return $this->_id;
     }
     /**
-     * @param string $customerId Optional reference to customer. 
+     * @param Identity $customerId Optional reference to customer. 
      * @return \jtl\Connector\Model\CustomerOrder
      */
-    public function setCustomerId($customerId)
+    public function setCustomerId(Identity $customerId)
     {
-        $this->_customerId = (string)$customerId;
+        $this->_customerId = $customerId;
         return $this;
     }
     
     /**
-     * @return string Optional reference to customer. 
+     * @return Identity Optional reference to customer. 
      */
     public function getCustomerId()
     {

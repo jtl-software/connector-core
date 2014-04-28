@@ -17,24 +17,24 @@ namespace jtl\Connector\Model;
 class FileDownloadHistory extends DataModel
 {
     /**
-     * @var string
+     * @var Identity
      */
-    protected $_id = '0';
+    protected $_id = null;
     
     /**
-     * @var string
+     * @var Identity
      */
-    protected $_fileDownloadId = '0';
+    protected $_fileDownloadId = null;
     
     /**
-     * @var string
+     * @var Identity
      */
-    protected $_customerId = '0';
+    protected $_customerId = null;
     
     /**
-     * @var string
+     * @var Identity
      */
-    protected $_customerOrderId = '0';
+    protected $_customerOrderId = null;
     
     /**
      * @var string
@@ -45,6 +45,10 @@ class FileDownloadHistory extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
+        '_id',
+        '_fileDownloadId',
+        '_customerId',
+        '_customerOrderId'
     );
     
     /**
@@ -66,6 +70,10 @@ class FileDownloadHistory extends DataModel
                 case "_fileDownloadId":
                 case "_customerId":
                 case "_customerOrderId":
+                
+                    $this->$name = Identity::convert($value);
+                    break;
+            
                 case "_created":
                 
                     $this->$name = (string)$value;
@@ -76,68 +84,68 @@ class FileDownloadHistory extends DataModel
     }
     
     /**
-     * @param string $id
+     * @param Identity $id
      * @return \jtl\Connector\Model\FileDownloadHistory
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string
+     * @return Identity
      */
     public function getId()
     {
         return $this->_id;
     }
     /**
-     * @param string $fileDownloadId
+     * @param Identity $fileDownloadId
      * @return \jtl\Connector\Model\FileDownloadHistory
      */
-    public function setFileDownloadId($fileDownloadId)
+    public function setFileDownloadId(Identity $fileDownloadId)
     {
-        $this->_fileDownloadId = (string)$fileDownloadId;
+        $this->_fileDownloadId = $fileDownloadId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return Identity
      */
     public function getFileDownloadId()
     {
         return $this->_fileDownloadId;
     }
     /**
-     * @param string $customerId
+     * @param Identity $customerId
      * @return \jtl\Connector\Model\FileDownloadHistory
      */
-    public function setCustomerId($customerId)
+    public function setCustomerId(Identity $customerId)
     {
-        $this->_customerId = (string)$customerId;
+        $this->_customerId = $customerId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return Identity
      */
     public function getCustomerId()
     {
         return $this->_customerId;
     }
     /**
-     * @param string $customerOrderId
+     * @param Identity $customerOrderId
      * @return \jtl\Connector\Model\FileDownloadHistory
      */
-    public function setCustomerOrderId($customerOrderId)
+    public function setCustomerOrderId(Identity $customerOrderId)
     {
-        $this->_customerOrderId = (string)$customerOrderId;
+        $this->_customerOrderId = $customerOrderId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return Identity
      */
     public function getCustomerOrderId()
     {

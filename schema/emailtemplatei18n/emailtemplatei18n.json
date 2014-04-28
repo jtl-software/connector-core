@@ -4,10 +4,16 @@
     "properties": {
         "emailTemplateId": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": true,
+            "optional": false,
             "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
             ]
         },
         "localeName": {
@@ -61,5 +67,6 @@
         }
     },
     "required": [
+        "emailTemplateId"
     ]
 }

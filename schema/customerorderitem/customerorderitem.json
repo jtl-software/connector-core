@@ -121,11 +121,17 @@
         },
         "configItemId": {
             "type": [
-                "string",
+                "array",
                 "null"
             ],
             "optional": true,
             "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
             ]
         }
     },

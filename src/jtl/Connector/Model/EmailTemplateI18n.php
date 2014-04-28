@@ -17,9 +17,9 @@ namespace jtl\Connector\Model;
 class EmailTemplateI18n extends DataModel
 {
     /**
-     * @var string
+     * @var Identity
      */
-    protected $_emailTemplateId = '0';
+    protected $_emailTemplateId = null;
     
     /**
      * @var string
@@ -55,6 +55,7 @@ class EmailTemplateI18n extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
+        '_emailTemplateId'
     );
     
     /**
@@ -73,6 +74,10 @@ class EmailTemplateI18n extends DataModel
         
             switch ($name) {
                 case "_emailTemplateId":
+                
+                    $this->$name = Identity::convert($value);
+                    break;
+            
                 case "_localeName":
                 case "_subject":
                 case "_contentHtml":
@@ -88,17 +93,17 @@ class EmailTemplateI18n extends DataModel
     }
     
     /**
-     * @param string $emailTemplateId
+     * @param Identity $emailTemplateId
      * @return \jtl\Connector\Model\EmailTemplateI18n
      */
-    public function setEmailTemplateId($emailTemplateId)
+    public function setEmailTemplateId(Identity $emailTemplateId)
     {
-        $this->_emailTemplateId = (string)$emailTemplateId;
+        $this->_emailTemplateId = $emailTemplateId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return Identity
      */
     public function getEmailTemplateId()
     {

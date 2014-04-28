@@ -4,10 +4,16 @@
     "properties": {
         "id": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": true,
+            "optional": false,
             "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
             ]
         },
         "name": {
@@ -96,5 +102,6 @@
         }
     },
     "required": [
+        "id"
     ]
 }

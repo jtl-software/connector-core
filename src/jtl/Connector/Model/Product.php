@@ -32,9 +32,9 @@ class Product extends DataModel
     protected $_manufacturerId = null;
     
     /**
-     * @var string Reference to (current) deliveryStatus
+     * @var Identity Reference to (current) deliveryStatus
      */
-    protected $_deliveryStatusId = '';
+    protected $_deliveryStatusId = null;
     
     /**
      * @var Identity Reference to unit
@@ -258,6 +258,7 @@ class Product extends DataModel
         '_id',
         '_masterProductId',
         '_manufacturerId',
+        '_deliveryStatusId',
         '_unitId',
         '_basePriceUnitId',
         '_shippingClassId',
@@ -283,6 +284,7 @@ class Product extends DataModel
                 case "_id":
                 case "_masterProductId":
                 case "_manufacturerId":
+                case "_deliveryStatusId":
                 case "_unitId":
                 case "_basePriceUnitId":
                 case "_shippingClassId":
@@ -292,7 +294,6 @@ class Product extends DataModel
                     $this->$name = Identity::convert($value);
                     break;
             
-                case "_deliveryStatusId":
                 case "_sku":
                 case "_note":
                 case "_ean":
@@ -403,17 +404,17 @@ class Product extends DataModel
         return $this->_manufacturerId;
     }
     /**
-     * @param string $deliveryStatusId Reference to (current) deliveryStatus
+     * @param Identity $deliveryStatusId Reference to (current) deliveryStatus
      * @return \jtl\Connector\Model\Product
      */
-    public function setDeliveryStatusId($deliveryStatusId)
+    public function setDeliveryStatusId(Identity $deliveryStatusId)
     {
-        $this->_deliveryStatusId = (string)$deliveryStatusId;
+        $this->_deliveryStatusId = $deliveryStatusId;
         return $this;
     }
     
     /**
-     * @return string Reference to (current) deliveryStatus
+     * @return Identity Reference to (current) deliveryStatus
      */
     public function getDeliveryStatusId()
     {

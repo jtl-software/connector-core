@@ -22,9 +22,9 @@ class CrossSelling extends DataModel
     protected $_id = null;
     
     /**
-     * @var string Reference to product (main product)
+     * @var Identity Reference to product (main product)
      */
-    protected $_crossSellingProductId = '';
+    protected $_crossSellingProductId = null;
     
     /**
      * @var Identity Reference to crossSellingGroup
@@ -32,16 +32,18 @@ class CrossSelling extends DataModel
     protected $_crossSellingGroupId = null;
     
     /**
-     * @var string Reference to product (cross selling product)
+     * @var Identity Reference to product (cross selling product)
      */
-    protected $_productId = '';
+    protected $_productId = null;
     
     /**
      * @var mixed:string
      */
     protected $_identities = array(
         '_id',
-        '_crossSellingGroupId'
+        '_crossSellingProductId',
+        '_crossSellingGroupId',
+        '_productId'
     );
     
     /**
@@ -60,15 +62,11 @@ class CrossSelling extends DataModel
         
             switch ($name) {
                 case "_id":
-                case "_crossSellingGroupId":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
                 case "_crossSellingProductId":
+                case "_crossSellingGroupId":
                 case "_productId":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = Identity::convert($value);
                     break;
             
             }
@@ -93,17 +91,17 @@ class CrossSelling extends DataModel
         return $this->_id;
     }
     /**
-     * @param string $crossSellingProductId Reference to product (main product)
+     * @param Identity $crossSellingProductId Reference to product (main product)
      * @return \jtl\Connector\Model\CrossSelling
      */
-    public function setCrossSellingProductId($crossSellingProductId)
+    public function setCrossSellingProductId(Identity $crossSellingProductId)
     {
-        $this->_crossSellingProductId = (string)$crossSellingProductId;
+        $this->_crossSellingProductId = $crossSellingProductId;
         return $this;
     }
     
     /**
-     * @return string Reference to product (main product)
+     * @return Identity Reference to product (main product)
      */
     public function getCrossSellingProductId()
     {
@@ -127,17 +125,17 @@ class CrossSelling extends DataModel
         return $this->_crossSellingGroupId;
     }
     /**
-     * @param string $productId Reference to product (cross selling product)
+     * @param Identity $productId Reference to product (cross selling product)
      * @return \jtl\Connector\Model\CrossSelling
      */
-    public function setProductId($productId)
+    public function setProductId(Identity $productId)
     {
-        $this->_productId = (string)$productId;
+        $this->_productId = $productId;
         return $this;
     }
     
     /**
-     * @return string Reference to product (cross selling product)
+     * @return Identity Reference to product (cross selling product)
      */
     public function getProductId()
     {

@@ -72,9 +72,9 @@ class CustomerOrderItem extends DataModel
     protected $_unique = '';
     
     /**
-     * @var string Optional reference to configItemId (if item is part of a configurable item)
+     * @var Identity Optional reference to configItemId (if item is part of a configurable item)
      */
-    protected $_configItemId = '0';
+    protected $_configItemId = null;
     
     /**
      * @var mixed:string
@@ -83,7 +83,8 @@ class CustomerOrderItem extends DataModel
         '_id',
         '_productId',
         '_shippingClassId',
-        '_customerOrderId'
+        '_customerOrderId',
+        '_configItemId'
     );
     
     /**
@@ -105,6 +106,7 @@ class CustomerOrderItem extends DataModel
                 case "_productId":
                 case "_shippingClassId":
                 case "_customerOrderId":
+                case "_configItemId":
                 
                     $this->$name = Identity::convert($value);
                     break;
@@ -113,7 +115,6 @@ class CustomerOrderItem extends DataModel
                 case "_sku":
                 case "_type":
                 case "_unique":
-                case "_configItemId":
                 
                     $this->$name = (string)$value;
                     break;
@@ -321,17 +322,17 @@ class CustomerOrderItem extends DataModel
         return $this->_unique;
     }
     /**
-     * @param string $configItemId Optional reference to configItemId (if item is part of a configurable item)
+     * @param Identity $configItemId Optional reference to configItemId (if item is part of a configurable item)
      * @return \jtl\Connector\Model\CustomerOrderItem
      */
-    public function setConfigItemId($configItemId)
+    public function setConfigItemId(Identity $configItemId)
     {
-        $this->_configItemId = (string)$configItemId;
+        $this->_configItemId = $configItemId;
         return $this;
     }
     
     /**
-     * @return string Optional reference to configItemId (if item is part of a configurable item)
+     * @return Identity Optional reference to configItemId (if item is part of a configurable item)
      */
     public function getConfigItemId()
     {

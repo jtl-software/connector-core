@@ -4,10 +4,16 @@
     "properties": {
         "id": {
             "type": [
-                "int"
+                "array"
             ],
-            "optional": true,
+            "optional": false,
             "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
             ]
         },
         "mediaFileId": {
@@ -50,6 +56,7 @@
         }
     },
     "required": [
+        "id",
         "mediaFileId"
     ]
 }

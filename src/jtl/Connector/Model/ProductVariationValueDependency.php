@@ -17,19 +17,21 @@ namespace jtl\Connector\Model;
 class ProductVariationValueDependency extends DataModel
 {
     /**
-     * @var string
+     * @var Identity
      */
-    protected $_productVariationValueId = '';
+    protected $_productVariationValueId = null;
     
     /**
-     * @var string
+     * @var Identity
      */
-    protected $_productVariationValueTargetId = '';
+    protected $_productVariationValueTargetId = null;
     
     /**
      * @var mixed:string
      */
     protected $_identities = array(
+        '_productVariationValueId',
+        '_productVariationValueTargetId'
     );
     
     /**
@@ -50,7 +52,7 @@ class ProductVariationValueDependency extends DataModel
                 case "_productVariationValueId":
                 case "_productVariationValueTargetId":
                 
-                    $this->$name = (string)$value;
+                    $this->$name = Identity::convert($value);
                     break;
             
             }
@@ -58,34 +60,34 @@ class ProductVariationValueDependency extends DataModel
     }
     
     /**
-     * @param string $productVariationValueId
+     * @param Identity $productVariationValueId
      * @return \jtl\Connector\Model\ProductVariationValueDependency
      */
-    public function setProductVariationValueId($productVariationValueId)
+    public function setProductVariationValueId(Identity $productVariationValueId)
     {
-        $this->_productVariationValueId = (string)$productVariationValueId;
+        $this->_productVariationValueId = $productVariationValueId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return Identity
      */
     public function getProductVariationValueId()
     {
         return $this->_productVariationValueId;
     }
     /**
-     * @param string $productVariationValueTargetId
+     * @param Identity $productVariationValueTargetId
      * @return \jtl\Connector\Model\ProductVariationValueDependency
      */
-    public function setProductVariationValueTargetId($productVariationValueTargetId)
+    public function setProductVariationValueTargetId(Identity $productVariationValueTargetId)
     {
-        $this->_productVariationValueTargetId = (string)$productVariationValueTargetId;
+        $this->_productVariationValueTargetId = $productVariationValueTargetId;
         return $this;
     }
     
     /**
-     * @return string
+     * @return Identity
      */
     public function getProductVariationValueTargetId()
     {

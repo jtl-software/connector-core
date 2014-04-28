@@ -17,9 +17,9 @@ namespace jtl\Connector\Model;
 class Product2Category extends DataModel
 {
     /**
-     * @var string Unique product2Category id
+     * @var Identity Unique product2Category id
      */
-    protected $_id = '';
+    protected $_id = null;
     
     /**
      * @var Identity Reference to category
@@ -35,6 +35,7 @@ class Product2Category extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
+        '_id',
         '_categoryId',
         '_productId'
     );
@@ -55,10 +56,6 @@ class Product2Category extends DataModel
         
             switch ($name) {
                 case "_id":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
                 case "_categoryId":
                 case "_productId":
                 
@@ -70,17 +67,17 @@ class Product2Category extends DataModel
     }
     
     /**
-     * @param string $id Unique product2Category id
+     * @param Identity $id Unique product2Category id
      * @return \jtl\Connector\Model\Product2Category
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (string)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return string Unique product2Category id
+     * @return Identity Unique product2Category id
      */
     public function getId()
     {

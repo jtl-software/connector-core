@@ -17,9 +17,9 @@ namespace jtl\Connector\Model;
 class MediaFileAttr extends DataModel
 {
     /**
-     * @var int Unique MediaFileAttr id
+     * @var Identity Unique MediaFileAttr id
      */
-    protected $_id = 0;
+    protected $_id = null;
     
     /**
      * @var Identity Reference to mediaFile
@@ -45,6 +45,7 @@ class MediaFileAttr extends DataModel
      * @var mixed:string
      */
     protected $_identities = array(
+        '_id',
         '_mediaFileId'
     );
     
@@ -64,10 +65,6 @@ class MediaFileAttr extends DataModel
         
             switch ($name) {
                 case "_id":
-                
-                    $this->$name = (int)$value;
-                    break;
-            
                 case "_mediaFileId":
                 
                     $this->$name = Identity::convert($value);
@@ -85,17 +82,17 @@ class MediaFileAttr extends DataModel
     }
     
     /**
-     * @param int $id Unique MediaFileAttr id
+     * @param Identity $id Unique MediaFileAttr id
      * @return \jtl\Connector\Model\MediaFileAttr
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        $this->_id = (int)$id;
+        $this->_id = $id;
         return $this;
     }
     
     /**
-     * @return int Unique MediaFileAttr id
+     * @return Identity Unique MediaFileAttr id
      */
     public function getId()
     {

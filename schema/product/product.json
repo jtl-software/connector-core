@@ -46,10 +46,16 @@
         },
         "deliveryStatusId": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": true,
+            "optional": false,
             "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
             ]
         },
         "unitId": {
@@ -468,6 +474,7 @@
         "id",
         "masterProductId",
         "manufacturerId",
+        "deliveryStatusId",
         "unitId",
         "shippingClassId"
     ]

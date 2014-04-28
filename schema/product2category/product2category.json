@@ -4,10 +4,16 @@
     "properties": {
         "id": {
             "type": [
-                "string"
+                "array"
             ],
-            "optional": true,
+            "optional": false,
             "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
             ]
         },
         "categoryId": {
@@ -40,6 +46,7 @@
         }
     },
     "required": [
+        "id",
         "categoryId",
         "productId"
     ]
