@@ -41,11 +41,17 @@
         },
         "foreignKey": {
             "type": [
-                "int",
+                "array",
                 "null"
             ],
             "optional": true,
             "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
             ]
         },
         "filename": {

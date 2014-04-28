@@ -32,9 +32,9 @@ class Image extends DataModel
     protected $_relationType = 'product';
     
     /**
-     * @var int Foreign key dependent on relationType
+     * @var Identity Foreign key dependent on relationType
      */
-    protected $_foreignKey = 0;
+    protected $_foreignKey = null;
     
     /**
      * @var string Filename or path
@@ -51,7 +51,8 @@ class Image extends DataModel
      */
     protected $_identities = array(
         '_id',
-        '_masterImageId'
+        '_masterImageId',
+        '_foreignKey'
     );
     
     /**
@@ -71,6 +72,7 @@ class Image extends DataModel
             switch ($name) {
                 case "_id":
                 case "_masterImageId":
+                case "_foreignKey":
                 
                     $this->$name = Identity::convert($value);
                     break;
@@ -81,7 +83,6 @@ class Image extends DataModel
                     $this->$name = (string)$value;
                     break;
             
-                case "_foreignKey":
                 case "_sort":
                 
                     $this->$name = (int)$value;
@@ -143,17 +144,17 @@ class Image extends DataModel
         return $this->_relationType;
     }
     /**
-     * @param int $foreignKey Foreign key dependent on relationType
+     * @param Identity $foreignKey Foreign key dependent on relationType
      * @return \jtl\Connector\Model\Image
      */
-    public function setForeignKey($foreignKey)
+    public function setForeignKey(Identity $foreignKey)
     {
-        $this->_foreignKey = (int)$foreignKey;
+        $this->_foreignKey = $foreignKey;
         return $this;
     }
     
     /**
-     * @return int Foreign key dependent on relationType
+     * @return Identity Foreign key dependent on relationType
      */
     public function getForeignKey()
     {
