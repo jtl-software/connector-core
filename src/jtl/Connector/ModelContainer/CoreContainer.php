@@ -182,14 +182,14 @@ abstract class CoreContainer implements IModelContainer
                         $memberpub = substr($member, 1);
 
                     $var = $this->$member;
-                    if (is_array($this->$member)) {
+                    if (is_array($this->$member) && count($this->$member) > 0) {
                         $var = array();
                         foreach ($this->$member as $i => $model) {
                             $var[$i] = ($subExcludes !== null) ? $model->getPublic($subExcludes) : $model->getPublic();
                         }
-                    }
 
-                    $object->$memberpub = $var;
+                        $object->$memberpub = $var;
+                    }
                 }
             }
         }
