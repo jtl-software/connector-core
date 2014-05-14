@@ -7,6 +7,8 @@
 
 namespace jtl\Connector\Model;
 
+use \jtl\Core\Model\Model;
+
 /**
  * Identity
  *
@@ -14,7 +16,7 @@ namespace jtl\Connector\Model;
  * @package jtl\Connector\Model
  * @subpackage Identity
  */
-class Identity
+class Identity extends Model
 {
     /**
      * @var string
