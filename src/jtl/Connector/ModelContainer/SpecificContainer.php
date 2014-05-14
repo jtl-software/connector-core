@@ -63,6 +63,17 @@ class SpecificContainer extends CoreContainer
     {
         return $this->_specificValueI18ns;
     }
+
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Connector\ModelContainer\CoreContainer::getMainModel()
+     */
+    public function getMainModel()
+    {
+        $arr = $this->getSpecifics();
+
+        return isset($arr[0]) ? $arr[0] : null;
+    }
         
     public $items = array(
         "specific" => array("Specific", "Specifics"),

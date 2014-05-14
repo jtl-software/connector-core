@@ -196,5 +196,11 @@ abstract class CoreContainer implements IModelContainer
         
         return $object;
     }
+
+    /**
+     * @return \jtl\Connector\Model\DataModel
+     * @throws \jtl\Core\Exception\ContainerException
+     */
+    abstract public function getMainModel();
 }
 ?>

@@ -50,6 +50,17 @@ class DeliveryNoteContainer extends CoreContainer
     {
         return $this->_shipments;
     }
+
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Connector\ModelContainer\CoreContainer::getMainModel()
+     */
+    public function getMainModel()
+    {
+        $arr = $this->getDeliveryNotes();
+
+        return isset($arr[0]) ? $arr[0] : null;
+    }
         
     public $items = array(
         "delivery_note" => array("DeliveryNote", "DeliveryNotes"),

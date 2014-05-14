@@ -102,7 +102,18 @@ class CustomerOrderContainer extends CoreContainer
     {
         return $this->_customerOrderBillingAddresses;
     }
-        
+
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Connector\ModelContainer\CoreContainer::getMainModel()
+     */
+    public function getMainModel()
+    {
+        $arr = $this->getCustomerOrders();
+
+        return isset($arr[0]) ? $arr[0] : null;
+    }
+
     public $items = array(
         "customer_order" => array("CustomerOrder", "CustomerOrders"),
         "customer_order_attr" => array("CustomerOrderAttr", "CustomerOrderAttrs"),

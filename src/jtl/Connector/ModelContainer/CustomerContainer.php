@@ -37,7 +37,18 @@ class CustomerContainer extends CoreContainer
     {
         return $this->_customerAttrs;
     }
-        
+
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Connector\ModelContainer\CoreContainer::getMainModel()
+     */
+    public function getMainModel()
+    {
+        $arr = $this->getCustomers();
+
+        return isset($arr[0]) ? $arr[0] : null;
+    }
+
     public $items = array(
         "customer" => array("Customer", "Customers"),
         "customer_attr" => array("CustomerAttr", "CustomerAttrs")

@@ -14,10 +14,6 @@ namespace jtl\Connector\Result;
  */
 final class Transaction extends \jtl\Core\Result\Transaction
 {
-    const ACTION_CREATE = 'create';
-    const ACTION_DELETE = 'delete';
-    const ACTION_UPDATE = 'update';
-
     /**
      * @var string Unique connector id
      */
@@ -27,16 +23,6 @@ final class Transaction extends \jtl\Core\Result\Transaction
      * @var string Unique host id
      */
     protected $hostId = '';
-    
-    /**
-     * @var string Response action (create/update/delete)
-     */
-    protected $action = '';
-    
-    /**
-     * @var null|string Error (null|error string)
-     */
-    protected $error;
 
     /**
      * @return string Unique connector id
@@ -71,44 +57,6 @@ final class Transaction extends \jtl\Core\Result\Transaction
     public function setHostId($hostId)
     {
         $this->hostId = (string)$hostId;
-        return $this;
-    }
-
-    /**
-     * @return string Response action (create/update/delete)
-     */
-    public function getAction()
-    {
-        return $this->action;
-    }
-
-    /**
-     * @param string $action Response action (create/update/delete)
-     * @return \jtl\Connector\Result\Transaction
-     */
-    public function setAction($action = self::ACTION_UPDATE)
-    {
-        $this->action = (string)$action;
-        return $this;
-    }
-
-    /**
-     * @return null|string Error (null|error string)
-     */
-    public function getError()
-    {
-        return $this->error;
-    }
-
-    /**
-     * @param string $error Error (null|error string)
-     * @return \jtl\Connector\Result\Transaction
-     */
-    public function setError($error)
-    {
-        if ($error !== null) {
-            $this->error = (string)$error;
-        }
         return $this;
     }
 }

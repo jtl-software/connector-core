@@ -323,6 +323,15 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_fileDownloadI18ns;
     }
+
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Connector\ModelContainer\CoreContainer::getMainModel()
+     */
+    public function getMainModel()
+    {
+        throw new \jtl\Core\Exception\ContainerException('not implemented');
+    }
         
     public $items = array(
         "company" => array("Company", "Companies"),

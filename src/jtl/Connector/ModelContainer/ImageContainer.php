@@ -24,6 +24,17 @@ class ImageContainer extends CoreContainer
     {
         return $this->_images;
     }
+
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Connector\ModelContainer\CoreContainer::getMainModel()
+     */
+    public function getMainModel()
+    {
+        $arr = $this->getImages();
+
+        return isset($arr[0]) ? $arr[0] : null;
+    }
         
     public $items = array(
         "image" => array("Image", "Images")

@@ -37,6 +37,17 @@ class ManufacturerContainer extends CoreContainer
     {
         return $this->_manufacturerI18ns;
     }
+
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Connector\ModelContainer\CoreContainer::getMainModel()
+     */
+    public function getMainModel()
+    {
+        $arr = $this->getManufacturers();
+
+        return isset($arr[0]) ? $arr[0] : null;
+    }
         
     public $items = array(
         "manufacturer" => array("Manufacturer", "Manufacturers"),
