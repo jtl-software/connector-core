@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Result;
 
+use \jtl\Core\Exception\ModelException;
+
 /**
  * Result Model
  * Transaction result object
@@ -17,14 +19,14 @@ final class Transaction extends \jtl\Core\Result\Transaction
     /**
      * @var \jtl\Connector\Model\Identity
      */
-    protected $id = null;
+    protected $_id = null;
 
     /**
      * @return \jtl\Connector\Model\Identity
      */
     public function getId()
     {
-        return $this->id;
+        return $this->_id;
     }
 
     /**
@@ -33,7 +35,23 @@ final class Transaction extends \jtl\Core\Result\Transaction
      */
     public function setId(\jtl\Connector\Model\Identity $id)
     {
-        $this->id = $id;
+        $this->_id = $id;
         return $this;
+    }
+
+    /**
+     * Magic Member Getter
+     *
+     * @param string $name
+     * @return mixed
+     * @throws \jtl\Core\Exception\ModelException
+     */
+    public function __get($name)
+    {
+        if (property_exists($this, $name)) {
+            return $name == '_id' ? $this->$name->getEndpoint() : $this->$name;
+        }
+
+        throw new ModelException("Class (" . get_called_class() . ") does not have the member ({$name})");
     }
 }
