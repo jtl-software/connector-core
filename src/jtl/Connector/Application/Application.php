@@ -269,7 +269,8 @@ class Application extends CoreApplication
                 $responsepacket = new ResponsePacket();
                 $responsepacket->setId($requestpacket->getId())
                   ->setJtlrpc($requestpacket->getJtlrpc())
-                  ->setError($error);
+                  ->setError($error)
+                  ->setGlobals($requestpacket->getGlobals());
 
                 $jtlrpcreponses[] = $responsepacket;
             }
@@ -292,7 +293,8 @@ class Application extends CoreApplication
         $responsepacket->setId($requestpacket->getId())
           ->setJtlrpc($requestpacket->getJtlrpc())
           ->setResult($actionresult->getResult())
-          ->setError($actionresult->getError());
+          ->setError($actionresult->getError())
+          ->setGlobals($requestpacket->getGlobals());
 
         $responsepacket->validate();
 

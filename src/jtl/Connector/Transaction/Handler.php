@@ -6,7 +6,7 @@
 
 namespace jtl\Connector\Transaction;
 
-use \jtl\Core\Result\Transaction as TransactionResult;
+//use \jtl\Connector\Result\Transaction as TransactionResult;
 use \jtl\Core\Rpc\RequestPacket;
 use \jtl\Core\Exception\TransactionException;
 use \jtl\Core\Rpc\Error;
@@ -71,11 +71,12 @@ final class Handler
                         $session->trans[$type] = array();
                     }
                     
-                    if (isset($session->trans[$type][$trid])) {                        
-                        $result = new TransactionResult();
-                        $result->setTransactionId($trid);
+                    if (isset($session->trans[$type][$trid])) {
+                        //$result = new TransactionResult();
+                        //$result->setTransactionId($trid);
                         if ($session->trans[$type][$trid]->add($method->getController(), $requestpacket->getParams(), true, $modelNamespace)) {
-                            $action->setResult($result->getPublic());
+                            //$action->setResult($result->getPublic());
+                            $action->setResult(true);
                         }
                         else {
                             throw new TransactionException("Model is not a part of type ({$type}) or class not found");
@@ -87,11 +88,12 @@ final class Handler
                         if (class_exists($class)) {
                             $session->trans[$type][$trid] = new $class();
                             
-                            $result = new TransactionResult();
-                            $result->setTransactionId($trid);
+                            //$result = new TransactionResult();
+                            //$result->setTransactionId($trid);
 
                             if ($session->trans[$type][$trid]->add($method->getController(), $requestpacket->getParams(), true, $modelNamespace)) {
-                                $action->setResult($result->getPublic());
+                                //$action->setResult($result->getPublic());
+                                $action->setResult(true);
                             }
                             else {
                                 throw new TransactionException("Model is not a part of type ({$type}) or class not found");
