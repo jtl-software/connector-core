@@ -15,17 +15,12 @@ namespace jtl\Connector\Result;
 final class Transaction extends \jtl\Core\Result\Transaction
 {
     /**
-     * @var string Unique connector id
+     * @var \jtl\Connector\Model\Identity
      */
-    protected $id = '';
-    
-    /**
-     * @var string Unique host id
-     */
-    protected $hostId = '';
+    protected $id = null;
 
     /**
-     * @return string Unique connector id
+     * @return \jtl\Connector\Model\Identity
      */
     public function getId()
     {
@@ -33,30 +28,12 @@ final class Transaction extends \jtl\Core\Result\Transaction
     }
 
     /**
-     * @param string $id Unique connector id
+     * @param \jtl\Connector\Model\Identity $id
      * @return \jtl\Connector\Result\Transaction
      */
-    public function setId($id)
+    public function setId(\jtl\Connector\Model\Identity $id)
     {
-        $this->id = (string)$id;
-        return $this;
-    }
-
-    /**
-     * @return string Unique host id
-     */
-    public function getHostId()
-    {
-        return $this->hostId;
-    }
-
-    /**
-     * @param string $hostId Unique host id
-     * @return \jtl\Connector\Result\Transaction
-     */
-    public function setHostId($hostId)
-    {
-        $this->hostId = (string)$hostId;
+        $this->id = $id;
         return $this;
     }
 }
