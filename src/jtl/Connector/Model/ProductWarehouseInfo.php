@@ -39,7 +39,7 @@ class ProductWarehouseInfo extends DataModel
     /**
      * @var string Optional product inflow date for specified warehouse
      */
-    protected $_inflowDate = null;
+    protected $_inflowDate = '';
     
     /**
      * @var mixed:string

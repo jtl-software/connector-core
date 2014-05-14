@@ -135,7 +135,7 @@ class Application extends CoreApplication
             $endpointconnector->setMethod($method);
             if ($endpointconnector->canHandle()) {
 
-                // Transaction                
+                // Transaction
                 if (TransactionHandler::exists($requestpacket)) {
                     if (!$method->isCommit()) {
                         $actionresult = TransactionHandler::insert($requestpacket, $endpointconnector->getModelNamespace());
