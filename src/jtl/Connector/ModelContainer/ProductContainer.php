@@ -384,7 +384,7 @@ class ProductContainer extends CoreContainer
     {
         $arr = $this->getProducts();
 
-        return isset($arr[0]) ? $arr[0] : null;
+        return reset($arr) ?: null;
     }
         
     public $items = array(

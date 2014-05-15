@@ -59,7 +59,7 @@ class DeliveryNoteContainer extends CoreContainer
     {
         $arr = $this->getDeliveryNotes();
 
-        return isset($arr[0]) ? $arr[0] : null;
+        return reset($arr) ?: null;
     }
         
     public $items = array(

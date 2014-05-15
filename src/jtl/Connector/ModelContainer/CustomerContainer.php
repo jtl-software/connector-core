@@ -46,7 +46,7 @@ class CustomerContainer extends CoreContainer
     {
         $arr = $this->getCustomers();
 
-        return isset($arr[0]) ? $arr[0] : null;
+        return reset($arr) ?: null;
     }
 
     public $items = array(
