@@ -34,6 +34,8 @@ use \jtl\Core\Utilities\RpcMethod;
 use \jtl\Connector\Session\Session;
 use \jtl\Connector\Base\Connector;
 use \jtl\Connector\Transaction\Handler as TransactionHandler;
+use \jtl\Connector\Logger\Logger;
+use \Monolog\Logger as Monolog;
 
 /**
  * Application Class
@@ -73,6 +75,8 @@ class Application extends CoreApplication
         $jtlrpc = Request::handle();
         $sessionId = Request::getSession();
         $requestpackets = RequestPacket::build($jtlrpc);
+
+        Logger::log($jtlrpc, Monolog::DEBUG);
 
         $rpcmode = is_object($requestpackets) ? Packet::SINGLE_MODE : Packet::BATCH_MODE;
 
