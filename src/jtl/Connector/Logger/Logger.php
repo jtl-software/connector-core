@@ -18,8 +18,18 @@ class Logger
             return null;
         }
 
+        $path = array(
+            APP_DIR,
+            '..',
+            'vendor',
+            'jtl',
+            'connector',
+            'logs',
+            'logger.log'
+        );
+
         $log = LoggerFactory::get($channel);
-        $log->pushHandler(new StreamHandler('/tmp/log.log', $level));
+        $log->pushHandler(new StreamHandler(implode(DIRECTORY_SEPARATOR, $path), $level));
 
         return $log->log($level, $message);
     }
