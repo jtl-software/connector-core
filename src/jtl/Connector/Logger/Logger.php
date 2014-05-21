@@ -10,9 +10,17 @@ use \jtl\Core\Logger\LoggerFactory;
 use \Monolog\Logger as Monolog;
 use \Monolog\Handler\StreamHandler;
 
-class Logger
+class Logger extends Monolog
 {
-    public static function log($message, $level = Monolog::ERROR, $channel = 'general')
+    /**
+     * Adds a log record at an arbitrary level.
+     *
+     * @param mixed $message The log message
+     * @param mixed $level The log level
+     * @param string $channel The log channel
+     * @return Boolean Whether the record has been processed
+     */
+    public static function write($message, $level = self::ERROR, $channel = 'general')
     {
         if ($level == Monolog::DEBUG && getenv('APPLICATION_ENV') != 'development') {
             return null;
@@ -25,12 +33,25 @@ class Logger
             'jtl',
             'connector',
             'logs',
-            'logger.log'
+            "{$channel}.log"
         );
 
         $log = LoggerFactory::get($channel);
-        $log->pushHandler(new StreamHandler(implode(DIRECTORY_SEPARATOR, $path), $level));
+        if (!$log->isHandling($level)) {
+            $log->pushHandler(new StreamHandler(implode(DIRECTORY_SEPARATOR, $path), $level));
+        }
 
         return $log->log($level, $message);
+    }
+
+    /**
+     * Gets the current logger
+     *
+     * @param string $channel The log channel
+     * @return \Monolog\Logger
+     */
+    public static function getLogger($channel)
+    {
+        return LoggerFactory::get($channel);
     }
 }

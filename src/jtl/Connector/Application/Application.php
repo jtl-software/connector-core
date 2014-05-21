@@ -35,7 +35,6 @@ use \jtl\Connector\Session\Session;
 use \jtl\Connector\Base\Connector;
 use \jtl\Connector\Transaction\Handler as TransactionHandler;
 use \jtl\Connector\Logger\Logger;
-use \Monolog\Logger as Monolog;
 
 /**
  * Application Class
@@ -76,7 +75,7 @@ class Application extends CoreApplication
         $sessionId = Request::getSession();
         $requestpackets = RequestPacket::build($jtlrpc);
 
-        Logger::log($jtlrpc, Monolog::DEBUG);
+        Logger::write(Json::encode($requestpackets->getPublic()), Logger::DEBUG, 'rpc');
 
         $rpcmode = is_object($requestpackets) ? Packet::SINGLE_MODE : Packet::BATCH_MODE;
 
@@ -124,6 +123,8 @@ class Application extends CoreApplication
             if ($actionresult->isHandled()) {
                 $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
 
+                Logger::write(Json::encode($responsepacket->getPublic()), Logger::DEBUG, 'rpc');
+
                 if ($rpcmode == Packet::SINGLE_MODE) {
                     Response::send($responsepacket);
                 }
@@ -146,6 +147,8 @@ class Application extends CoreApplication
 
                         $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
 
+                        Logger::write(Json::encode($responsepacket->getPublic()), Logger::DEBUG, 'rpc');
+
                         if ($rpcmode == Packet::SINGLE_MODE) {
                             Response::send($responsepacket);
                         }
@@ -166,6 +169,9 @@ class Application extends CoreApplication
                     $exists = true;
                     if ($actionresult->isHandled()) {
                         $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
+
+                        Logger::write(Json::encode($responsepacket->getPublic()), Logger::DEBUG, 'rpc');
+
                         if ($rpcmode == Packet::SINGLE_MODE) {
                             Response::send($responsepacket);
                         }
