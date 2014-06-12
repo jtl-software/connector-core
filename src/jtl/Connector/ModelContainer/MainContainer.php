@@ -50,6 +50,7 @@ final class MainContainer
         'product_i18n' => array('product', 'Product'),
         'product_price' => array('product', 'Product'),
         'product_special_price' => array('product', 'Product'),
+        'special_price' => array('product', 'Product'),
         'product2_category' => array('product', 'Product'),
         'product_attr' => array('product', 'Product'),
         'product_attr_i18n' => array('product', 'Product'),

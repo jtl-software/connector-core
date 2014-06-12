@@ -36,6 +36,11 @@ class ProductContainer extends CoreContainer
      * @var \jtl\Connector\Model\ProductSpecialPrice[]
      */
     protected $_productSpecialPrices;
+
+    /**
+     * @var \jtl\Connector\Model\SpecialPrice[]
+     */
+    protected $_specialPrices;
     
     /**
      * @var \jtl\Connector\Model\Product2Category[]
@@ -191,7 +196,15 @@ class ProductContainer extends CoreContainer
     {
         return $this->_productSpecialPrices;
     }
-        
+
+    /**
+     * @return array \jtl\Connector\Model\SpecialPrice
+     */
+    public function getSpecialPrices()
+    {
+        return $this->_specialPrices;
+    }
+
     /**
      * @return array \jtl\Connector\Model\Product2Category
      */
@@ -393,6 +406,7 @@ class ProductContainer extends CoreContainer
         "product_i18n" => array("ProductI18n", "ProductI18ns"),
         "product_price" => array("ProductPrice", "ProductPrices"),
         "product_special_price" => array("ProductSpecialPrice", "ProductSpecialPrices"),
+        "special_price" => array("SpecialPrice", "SpecialPrices"),
         "product2_category" => array("Product2Category", "Product2Categories"),
         "product_attr" => array("ProductAttr", "ProductAttrs"),
         "product_attr_i18n" => array("ProductAttrI18n", "ProductAttrI18ns"),
