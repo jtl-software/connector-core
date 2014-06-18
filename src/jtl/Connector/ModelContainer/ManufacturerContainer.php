@@ -21,7 +21,7 @@ class ManufacturerContainer extends CoreContainer
      * @var \jtl\Connector\Model\ManufacturerI18n[]
      */
     protected $_manufacturerI18ns;
-        
+    
     /**
      * @return array \jtl\Connector\Model\Manufacturer
      */
@@ -29,7 +29,7 @@ class ManufacturerContainer extends CoreContainer
     {
         return $this->_manufacturers;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ManufacturerI18n
      */
@@ -37,7 +37,7 @@ class ManufacturerContainer extends CoreContainer
     {
         return $this->_manufacturerI18ns;
     }
-
+    
     /**
      * (non-PHPdoc)
      * @see \jtl\Connector\ModelContainer\CoreContainer::getMainModel()
@@ -45,13 +45,12 @@ class ManufacturerContainer extends CoreContainer
     public function getMainModel()
     {
         $arr = $this->getManufacturers();
-
+        
         return reset($arr) ?: null;
     }
-        
+    
     public $items = array(
         "manufacturer" => array("Manufacturer", "Manufacturers"),
         "manufacturer_i18n" => array("ManufacturerI18n", "ManufacturerI18ns")
     );
 }
-?>

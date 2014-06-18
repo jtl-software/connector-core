@@ -46,7 +46,7 @@ class CategoryContainer extends CoreContainer
      * @var \jtl\Connector\Model\CategoryCustomerGroup[]
      */
     protected $_categoryCustomerGroups;
-        
+    
     /**
      * @return array \jtl\Connector\Model\Category
      */
@@ -54,7 +54,7 @@ class CategoryContainer extends CoreContainer
     {
         return $this->_categories;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\CategoryI18n
      */
@@ -62,7 +62,7 @@ class CategoryContainer extends CoreContainer
     {
         return $this->_categoryI18ns;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\CategoryAttr
      */
@@ -70,7 +70,7 @@ class CategoryContainer extends CoreContainer
     {
         return $this->_categoryAttrs;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\CategoryAttrI18n
      */
@@ -78,7 +78,7 @@ class CategoryContainer extends CoreContainer
     {
         return $this->_categoryAttrI18ns;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\CategoryFunctionAttr
      */
@@ -86,7 +86,7 @@ class CategoryContainer extends CoreContainer
     {
         return $this->_categoryFunctionAttrs;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\CategoryInvisibility
      */
@@ -94,7 +94,7 @@ class CategoryContainer extends CoreContainer
     {
         return $this->_categoryInvisibilities;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\CategoryCustomerGroup
      */
@@ -102,7 +102,7 @@ class CategoryContainer extends CoreContainer
     {
         return $this->_categoryCustomerGroups;
     }
-
+    
     /**
      * (non-PHPdoc)
      * @see \jtl\Connector\ModelContainer\CoreContainer::getMainModel()
@@ -110,10 +110,10 @@ class CategoryContainer extends CoreContainer
     public function getMainModel()
     {
         $arr = $this->getCategories();
-
+        
         return reset($arr) ?: null;
     }
-        
+    
     public $items = array(
         "category" => array("Category", "Categories"),
         "category_i18n" => array("CategoryI18n", "CategoryI18ns"),
@@ -124,4 +124,3 @@ class CategoryContainer extends CoreContainer
         "category_customer_group" => array("CategoryCustomerGroup", "CategoryCustomerGroups")
     );
 }
-?>

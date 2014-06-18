@@ -31,7 +31,7 @@ class SpecificContainer extends CoreContainer
      * @var \jtl\Connector\Model\SpecificValueI18n[]
      */
     protected $_specificValueI18ns;
-        
+    
     /**
      * @return array \jtl\Connector\Model\Specific
      */
@@ -39,7 +39,7 @@ class SpecificContainer extends CoreContainer
     {
         return $this->_specifics;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\SpecificI18n
      */
@@ -47,7 +47,7 @@ class SpecificContainer extends CoreContainer
     {
         return $this->_specificI18ns;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\SpecificValue
      */
@@ -55,7 +55,7 @@ class SpecificContainer extends CoreContainer
     {
         return $this->_specificValues;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\SpecificValueI18n
      */
@@ -63,7 +63,7 @@ class SpecificContainer extends CoreContainer
     {
         return $this->_specificValueI18ns;
     }
-
+    
     /**
      * (non-PHPdoc)
      * @see \jtl\Connector\ModelContainer\CoreContainer::getMainModel()
@@ -71,10 +71,10 @@ class SpecificContainer extends CoreContainer
     public function getMainModel()
     {
         $arr = $this->getSpecifics();
-
+        
         return reset($arr) ?: null;
     }
-        
+    
     public $items = array(
         "specific" => array("Specific", "Specifics"),
         "specific_i18n" => array("SpecificI18n", "SpecificI18ns"),
@@ -82,4 +82,3 @@ class SpecificContainer extends CoreContainer
         "specific_value_i18n" => array("SpecificValueI18n", "SpecificValueI18ns")
     );
 }
-?>

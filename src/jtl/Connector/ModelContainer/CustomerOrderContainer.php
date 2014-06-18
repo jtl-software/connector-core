@@ -46,7 +46,7 @@ class CustomerOrderContainer extends CoreContainer
      * @var \jtl\Connector\Model\CustomerOrderBillingAddress[]
      */
     protected $_customerOrderBillingAddresses;
-        
+    
     /**
      * @return array \jtl\Connector\Model\CustomerOrder
      */
@@ -54,7 +54,7 @@ class CustomerOrderContainer extends CoreContainer
     {
         return $this->_customerOrders;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\CustomerOrderAttr
      */
@@ -62,7 +62,7 @@ class CustomerOrderContainer extends CoreContainer
     {
         return $this->_customerOrderAttrs;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\CustomerOrderItem
      */
@@ -70,7 +70,7 @@ class CustomerOrderContainer extends CoreContainer
     {
         return $this->_customerOrderItems;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\CustomerOrderItemVariation
      */
@@ -78,7 +78,7 @@ class CustomerOrderContainer extends CoreContainer
     {
         return $this->_customerOrderItemVariations;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
@@ -86,7 +86,7 @@ class CustomerOrderContainer extends CoreContainer
     {
         return $this->_customerOrderPaymentInfos;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\CustomerOrderShippingAddress
      */
@@ -94,7 +94,7 @@ class CustomerOrderContainer extends CoreContainer
     {
         return $this->_customerOrderShippingAddresses;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\CustomerOrderBillingAddress
      */
@@ -102,7 +102,7 @@ class CustomerOrderContainer extends CoreContainer
     {
         return $this->_customerOrderBillingAddresses;
     }
-
+    
     /**
      * (non-PHPdoc)
      * @see \jtl\Connector\ModelContainer\CoreContainer::getMainModel()
@@ -110,10 +110,10 @@ class CustomerOrderContainer extends CoreContainer
     public function getMainModel()
     {
         $arr = $this->getCustomerOrders();
-
+        
         return reset($arr) ?: null;
     }
-
+    
     public $items = array(
         "customer_order" => array("CustomerOrder", "CustomerOrders"),
         "customer_order_attr" => array("CustomerOrderAttr", "CustomerOrderAttrs"),
@@ -124,4 +124,3 @@ class CustomerOrderContainer extends CoreContainer
         "customer_order_billing_address" => array("CustomerOrderBillingAddress", "CustomerOrderBillingAddresses")
     );
 }
-?>

@@ -16,7 +16,7 @@ class ImageContainer extends CoreContainer
      * @var \jtl\Connector\Model\Image[]
      */
     protected $_images;
-        
+    
     /**
      * @return array \jtl\Connector\Model\Image
      */
@@ -24,7 +24,7 @@ class ImageContainer extends CoreContainer
     {
         return $this->_images;
     }
-
+    
     /**
      * (non-PHPdoc)
      * @see \jtl\Connector\ModelContainer\CoreContainer::getMainModel()
@@ -32,12 +32,11 @@ class ImageContainer extends CoreContainer
     public function getMainModel()
     {
         $arr = $this->getImages();
-
+        
         return reset($arr) ?: null;
     }
-        
+    
     public $items = array(
         "image" => array("Image", "Images")
     );
 }
-?>

@@ -48,6 +48,11 @@ class GlobalDataContainer extends CoreContainer
     protected $_deliveryStatuses;
     
     /**
+     * @var \jtl\Connector\Model\CrossSelling[]
+     */
+    protected $_crossSellings;
+    
+    /**
      * @var \jtl\Connector\Model\CrossSellingGroup[]
      */
     protected $_crossSellingGroups;
@@ -81,6 +86,11 @@ class GlobalDataContainer extends CoreContainer
      * @var \jtl\Connector\Model\ShippingClass[]
      */
     protected $_shippingClasses;
+    
+    /**
+     * @var \jtl\Connector\Model\SetArticle[]
+     */
+    protected $_setArticles;
     
     /**
      * @var \jtl\Connector\Model\Warehouse[]
@@ -131,7 +141,7 @@ class GlobalDataContainer extends CoreContainer
      * @var \jtl\Connector\Model\FileDownloadI18n[]
      */
     protected $_fileDownloadI18ns;
-        
+    
     /**
      * @return array \jtl\Connector\Model\Company
      */
@@ -139,7 +149,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_companies;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\Language
      */
@@ -147,7 +157,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_languages;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\Currency
      */
@@ -155,7 +165,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_currencies;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\CustomerGroup
      */
@@ -163,7 +173,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_customerGroups;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\CustomerGroupI18n
      */
@@ -171,7 +181,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_customerGroupI18ns;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\CustomerGroupAttr
      */
@@ -179,7 +189,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_customerGroupAttrs;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\DeliveryStatus
      */
@@ -187,7 +197,15 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_deliveryStatuses;
     }
-        
+    
+    /**
+     * @return array \jtl\Connector\Model\CrossSelling
+     */
+    public function getCrossSellings()
+    {
+        return $this->_crossSellings;
+    }
+    
     /**
      * @return array \jtl\Connector\Model\CrossSellingGroup
      */
@@ -195,7 +213,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_crossSellingGroups;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\Unit
      */
@@ -203,7 +221,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_units;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\TaxZone
      */
@@ -211,7 +229,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_taxZones;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\TaxZoneCountry
      */
@@ -219,7 +237,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_taxZoneCountries;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\TaxClass
      */
@@ -227,7 +245,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_taxClasses;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\TaxRate
      */
@@ -235,7 +253,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_taxRates;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ShippingClass
      */
@@ -243,7 +261,15 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_shippingClasses;
     }
-        
+    
+    /**
+     * @return array \jtl\Connector\Model\SetArticle
+     */
+    public function getSetArticles()
+    {
+        return $this->_setArticles;
+    }
+    
     /**
      * @return array \jtl\Connector\Model\Warehouse
      */
@@ -251,7 +277,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_warehouses;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\WarehouseI18n
      */
@@ -259,7 +285,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_warehouseI18ns;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ProductType
      */
@@ -267,7 +293,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_productTypes;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ConfigGroup
      */
@@ -275,7 +301,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_configGroups;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ConfigGroupI18n
      */
@@ -283,7 +309,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_configGroupI18ns;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ConfigItem
      */
@@ -291,7 +317,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_configItems;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ConfigItemI18n
      */
@@ -299,7 +325,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_configItemI18ns;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ConfigItemPrice
      */
@@ -307,7 +333,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_configItemPrices;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\FileDownload
      */
@@ -315,7 +341,7 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_fileDownloads;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\FileDownloadI18n
      */
@@ -323,16 +349,18 @@ class GlobalDataContainer extends CoreContainer
     {
         return $this->_fileDownloadI18ns;
     }
-
+    
     /**
      * (non-PHPdoc)
      * @see \jtl\Connector\ModelContainer\CoreContainer::getMainModel()
      */
     public function getMainModel()
     {
-        throw new \jtl\Core\Exception\ContainerException('not implemented');
-    }
+        $arr = $this->getCompanies();
         
+        return reset($arr) ?: null;
+    }
+    
     public $items = array(
         "company" => array("Company", "Companies"),
         "language" => array("Language", "Languages"),
@@ -341,6 +369,7 @@ class GlobalDataContainer extends CoreContainer
         "customer_group_i18n" => array("CustomerGroupI18n", "CustomerGroupI18ns"),
         "customer_group_attr" => array("CustomerGroupAttr", "CustomerGroupAttrs"),
         "delivery_status" => array("DeliveryStatus", "DeliveryStatuses"),
+        "cross_selling" => array("CrossSelling", "CrossSellings"),
         "cross_selling_group" => array("CrossSellingGroup", "CrossSellingGroups"),
         "unit" => array("Unit", "Units"),
         "tax_zone" => array("TaxZone", "TaxZones"),
@@ -348,6 +377,7 @@ class GlobalDataContainer extends CoreContainer
         "tax_class" => array("TaxClass", "TaxClasses"),
         "tax_rate" => array("TaxRate", "TaxRates"),
         "shipping_class" => array("ShippingClass", "ShippingClasses"),
+        "set_article" => array("SetArticle", "SetArticles"),
         "warehouse" => array("Warehouse", "Warehouses"),
         "warehouse_i18n" => array("WarehouseI18n", "WarehouseI18ns"),
         "product_type" => array("ProductType", "ProductTypes"),
@@ -360,4 +390,3 @@ class GlobalDataContainer extends CoreContainer
         "file_download_i18n" => array("FileDownloadI18n", "FileDownloadI18ns")
     );
 }
-?>

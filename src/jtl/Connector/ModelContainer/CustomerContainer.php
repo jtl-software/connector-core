@@ -21,7 +21,7 @@ class CustomerContainer extends CoreContainer
      * @var \jtl\Connector\Model\CustomerAttr[]
      */
     protected $_customerAttrs;
-        
+    
     /**
      * @return array \jtl\Connector\Model\Customer
      */
@@ -29,7 +29,7 @@ class CustomerContainer extends CoreContainer
     {
         return $this->_customers;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\CustomerAttr
      */
@@ -37,7 +37,7 @@ class CustomerContainer extends CoreContainer
     {
         return $this->_customerAttrs;
     }
-
+    
     /**
      * (non-PHPdoc)
      * @see \jtl\Connector\ModelContainer\CoreContainer::getMainModel()
@@ -45,13 +45,12 @@ class CustomerContainer extends CoreContainer
     public function getMainModel()
     {
         $arr = $this->getCustomers();
-
+        
         return reset($arr) ?: null;
     }
-
+    
     public $items = array(
         "customer" => array("Customer", "Customers"),
         "customer_attr" => array("CustomerAttr", "CustomerAttrs")
     );
 }
-?>

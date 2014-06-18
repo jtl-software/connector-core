@@ -13,14 +13,14 @@ namespace jtl\Connector\ModelContainer;
 class ProductContainer extends CoreContainer
 {
     /**
-     * @var \jtl\Connector\Model\ProductFileDownload[]
-     */
-    protected $_productFileDownloads;
-    
-    /**
      * @var \jtl\Connector\Model\Product[]
      */
     protected $_products;
+    
+    /**
+     * @var \jtl\Connector\Model\ProductFileDownload[]
+     */
+    protected $_productFileDownloads;
     
     /**
      * @var \jtl\Connector\Model\ProductI18n[]
@@ -36,7 +36,7 @@ class ProductContainer extends CoreContainer
      * @var \jtl\Connector\Model\ProductSpecialPrice[]
      */
     protected $_productSpecialPrices;
-
+    
     /**
      * @var \jtl\Connector\Model\SpecialPrice[]
      */
@@ -113,11 +113,6 @@ class ProductContainer extends CoreContainer
     protected $_productVarCombinations;
     
     /**
-     * @var \jtl\Connector\Model\CrossSelling[]
-     */
-    protected $_crossSellings;
-    
-    /**
      * @var \jtl\Connector\Model\ProductSpecific[]
      */
     protected $_productSpecifics;
@@ -138,11 +133,6 @@ class ProductContainer extends CoreContainer
     protected $_mediaFileAttrs;
     
     /**
-     * @var \jtl\Connector\Model\SetArticle[]
-     */
-    protected $_setArticles;
-    
-    /**
      * @var \jtl\Connector\Model\FileUpload[]
      */
     protected $_fileUploads;
@@ -156,15 +146,7 @@ class ProductContainer extends CoreContainer
      * @var \jtl\Connector\Model\ProductConfigGroup[]
      */
     protected $_productConfigGroups;
-        
-    /**
-     * @return array \jtl\Connector\Model\ProductFileDownload
-     */
-    public function getProductFileDownloads()
-    {
-        return $this->_productFileDownloads;
-    }
-        
+    
     /**
      * @return array \jtl\Connector\Model\Product
      */
@@ -172,7 +154,15 @@ class ProductContainer extends CoreContainer
     {
         return $this->_products;
     }
-        
+    
+    /**
+     * @return array \jtl\Connector\Model\ProductFileDownload
+     */
+    public function getProductFileDownloads()
+    {
+        return $this->_productFileDownloads;
+    }
+    
     /**
      * @return array \jtl\Connector\Model\ProductI18n
      */
@@ -180,7 +170,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_productI18ns;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ProductPrice
      */
@@ -188,7 +178,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_productPrices;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ProductSpecialPrice
      */
@@ -196,7 +186,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_productSpecialPrices;
     }
-
+    
     /**
      * @return array \jtl\Connector\Model\SpecialPrice
      */
@@ -204,7 +194,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_specialPrices;
     }
-
+    
     /**
      * @return array \jtl\Connector\Model\Product2Category
      */
@@ -212,7 +202,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_product2Categories;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ProductAttr
      */
@@ -220,7 +210,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_productAttrs;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ProductAttrI18n
      */
@@ -228,7 +218,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_productAttrI18ns;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ProductInvisibility
      */
@@ -236,7 +226,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_productInvisibilities;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ProductFunctionAttr
      */
@@ -244,7 +234,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_productFunctionAttrs;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ProductVariation
      */
@@ -252,7 +242,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_productVariations;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ProductVariationI18n
      */
@@ -260,7 +250,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_productVariationI18ns;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ProductVariationInvisibility
      */
@@ -268,7 +258,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_productVariationInvisibilities;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ProductVariationValue
      */
@@ -276,7 +266,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_productVariationValues;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ProductVariationValueI18n
      */
@@ -284,7 +274,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_productVariationValueI18ns;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ProductVariationValueExtraCharge
      */
@@ -292,7 +282,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_productVariationValueExtraCharges;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ProductVariationValueInvisibility
      */
@@ -300,7 +290,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_productVariationValueInvisibilities;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ProductVariationValueDependency
      */
@@ -308,7 +298,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_productVariationValueDependencies;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ProductVarCombination
      */
@@ -316,15 +306,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_productVarCombinations;
     }
-        
-    /**
-     * @return array \jtl\Connector\Model\CrossSelling
-     */
-    public function getCrossSellings()
-    {
-        return $this->_crossSellings;
-    }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ProductSpecific
      */
@@ -332,7 +314,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_productSpecifics;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\MediaFile
      */
@@ -340,7 +322,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_mediaFiles;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\MediaFileI18n
      */
@@ -348,7 +330,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_mediaFileI18ns;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\MediaFileAttr
      */
@@ -356,15 +338,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_mediaFileAttrs;
     }
-        
-    /**
-     * @return array \jtl\Connector\Model\SetArticle
-     */
-    public function getSetArticles()
-    {
-        return $this->_setArticles;
-    }
-        
+    
     /**
      * @return array \jtl\Connector\Model\FileUpload
      */
@@ -372,7 +346,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_fileUploads;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ProductWarehouseInfo
      */
@@ -380,7 +354,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_productWarehouseInfos;
     }
-        
+    
     /**
      * @return array \jtl\Connector\Model\ProductConfigGroup
      */
@@ -388,7 +362,7 @@ class ProductContainer extends CoreContainer
     {
         return $this->_productConfigGroups;
     }
-
+    
     /**
      * (non-PHPdoc)
      * @see \jtl\Connector\ModelContainer\CoreContainer::getMainModel()
@@ -396,13 +370,13 @@ class ProductContainer extends CoreContainer
     public function getMainModel()
     {
         $arr = $this->getProducts();
-
+        
         return reset($arr) ?: null;
     }
-        
+    
     public $items = array(
-        "product_file_download" => array("ProductFileDownload", "ProductFileDownloads"),
         "product" => array("Product", "Products"),
+        "product_file_download" => array("ProductFileDownload", "ProductFileDownloads"),
         "product_i18n" => array("ProductI18n", "ProductI18ns"),
         "product_price" => array("ProductPrice", "ProductPrices"),
         "product_special_price" => array("ProductSpecialPrice", "ProductSpecialPrices"),
@@ -421,15 +395,12 @@ class ProductContainer extends CoreContainer
         "product_variation_value_invisibility" => array("ProductVariationValueInvisibility", "ProductVariationValueInvisibilities"),
         "product_variation_value_dependency" => array("ProductVariationValueDependency", "ProductVariationValueDependencies"),
         "product_var_combination" => array("ProductVarCombination", "ProductVarCombinations"),
-        "cross_selling" => array("CrossSelling", "CrossSellings"),
         "product_specific" => array("ProductSpecific", "ProductSpecifics"),
         "media_file" => array("MediaFile", "MediaFiles"),
         "media_file_i18n" => array("MediaFileI18n", "MediaFileI18ns"),
         "media_file_attr" => array("MediaFileAttr", "MediaFileAttrs"),
-        "set_article" => array("SetArticle", "SetArticles"),
         "file_upload" => array("FileUpload", "FileUploads"),
         "product_warehouse_info" => array("ProductWarehouseInfo", "ProductWarehouseInfos"),
         "product_config_group" => array("ProductConfigGroup", "ProductConfigGroups")
     );
 }
-?>
