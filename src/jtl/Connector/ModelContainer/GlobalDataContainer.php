@@ -356,9 +356,7 @@ class GlobalDataContainer extends CoreContainer
      */
     public function getMainModel()
     {
-        $arr = $this->getCompanies();
-        
-        return reset($arr) ?: null;
+        throw new \jtl\Core\Exception\ContainerException('not implemented');
     }
     
     public $items = array(
