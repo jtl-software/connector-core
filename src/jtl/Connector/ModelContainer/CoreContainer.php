@@ -10,6 +10,7 @@ use \jtl\Core\ModelContainer\IModelContainer;
 use \jtl\Core\Exception\DatabaseException;
 use \jtl\Core\Exception\ContainerException;
 use \jtl\Core\Model\DataModel;
+use \jtl\Connector\Model\Identity;
 
 /**
  * Core Container Class
@@ -65,6 +66,30 @@ abstract class CoreContainer implements IModelContainer
             return true;
         }
     
+        return false;
+    }
+
+    /**
+     * 
+     * @param string $type
+     * @param \jtl\Connector\Model\Identity $itentity
+     * @return boolean
+     */
+    public function addIdentity($type, Identity $itentity)
+    {
+        $type = strtolower($type);
+        if (isset($this->items[$type])) {
+            $setter = "_" . lcfirst($this->items[$type][1]);
+
+            if ($this->$setter === null) {
+                $this->$setter = array();
+            }
+
+            $count = array_push($this->$setter, $itentity);
+
+            return ($count > 0);
+        }
+
         return false;
     }
 
