@@ -94,6 +94,16 @@ class Identity extends Model
     }
 
     /**
+     * Convert the Model into array
+     *            
+     * @return array
+     */
+    public function getPublic()
+    {
+        return $this->toArray();
+    }
+
+    /**
      * Convert from Array
      *
      * @throws \InvalidArgumentException

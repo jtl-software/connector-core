@@ -72,7 +72,7 @@ abstract class CoreContainer implements IModelContainer
     /**
      * 
      * @param string $type
-     * @param \jtl\Connector\Model\Identity $itentity
+     * @param \jtl\Connector\Model\Identity $identity
      * @return boolean
      */
     public function addIdentity($type, Identity $itentity)
