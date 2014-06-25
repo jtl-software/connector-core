@@ -183,6 +183,10 @@ class Application extends CoreApplication
                 else {
                     throw new RpcException("Internal error", -32603);
                 }
+            } else {
+                if ($requestpacket->getMethod() == "image.push") {
+                    Request::deleteFileupload($imagePath);
+                }
             }
         }
 
