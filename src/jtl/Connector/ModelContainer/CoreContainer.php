@@ -191,7 +191,7 @@ abstract class CoreContainer implements IModelContainer
      * @param array $excludes            
      * @return stdClass $object
      */
-    public function getPublic(array $excludes = null, array $subExcludes = null)
+    public function getPublic(array $excludes = array('items'), array $subExcludes = null)
     {
         $object = new \stdClass();
         
