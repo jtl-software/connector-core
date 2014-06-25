@@ -14,6 +14,7 @@ use \jtl\Core\Serializer\Json;
 use \jtl\Core\Application\Application as CoreApplication;
 use \jtl\Core\Exception\RpcException;
 use \jtl\Core\Exception\SessionException;
+use \jtl\Core\Exception\ConnectorException;
 use \jtl\Core\Rpc\Handler;
 use \jtl\Core\Rpc\Packet;
 use \jtl\Core\Rpc\RequestPacket;
@@ -234,6 +235,8 @@ class Application extends CoreApplication
                 $image = $requestpacket->getParams();
                 $image->filename = $imagePath;
                 $requestpacket->setParams($image);
+            } else {
+                throw new ConnectorException("Could not handle fileupload (no file was uploaded via HTTP POST?)");
             }
         }
 

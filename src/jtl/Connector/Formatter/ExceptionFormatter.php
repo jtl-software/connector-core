@@ -1,10 +1,10 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Connector\Formatter
+ * @package jtl\Connector\Formatter
  */
 
-namespace jtl\Connector\Connector\Formatter;
+namespace jtl\Connector\Formatter;
 
 class ExceptionFormatter
 {
