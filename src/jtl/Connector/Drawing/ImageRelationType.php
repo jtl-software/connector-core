@@ -16,4 +16,3 @@ class ImageRelationType
     const TYPE_MANUFACTURER = 'manufacturer';
     const TYPE_CONFIG_GROUP = 'configGroup';
 }
-?>
