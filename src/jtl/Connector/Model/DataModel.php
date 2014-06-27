@@ -30,16 +30,20 @@ class DataModel extends CoreModel
             
         $members = array_keys(get_object_vars($this));
         if (is_array($members) && count($members) > 0) {
-            if ($publics === null)
-                $publics = array();
-            
             foreach ($members as $member) {
                 if (!in_array($member, $publics)) {
                     $memberpub = $member;
-                    if ($member[0] == "_")
+                    if ($member[0] == "_") {
                         $memberpub = substr($member, 1);
+                    }
                     
-                    $object->$memberpub = ($this->$member instanceof Identity) ? $this->$member->toArray() : $this->$member;
+                    if ($this->$member instanceof self) {
+                        $object->$memberpub = $this->$member->getPublic($publics);
+                    } elseif ($this->$member instanceof Identity) {
+                        $object->$memberpub = $this->$member->toArray();
+                    } else {
+                        $object->$memberpub = $this->$member;
+                    }
                 }
             }
         }
