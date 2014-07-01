@@ -10,6 +10,6 @@ class ExceptionFormatter
 {
     public static function format(\Exception $exc)
     {
-        return sprintf("Exception '%s' with message '%s' in %s:%s", get_class($exc), $exc->getMessage(), $exc->getFile(), $exc->getFile());
+        return sprintf("Exception '%s' with message '%s' in %s:%s", get_class($exc), $exc->getMessage(), $exc->getFile(), $exc->getLine());
     }
 }

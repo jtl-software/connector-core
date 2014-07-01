@@ -369,6 +369,7 @@ class Product extends DataModel
     {
         return $this->_id;
     }
+    
     /**
      * @param Identity $masterProductId Reference to master product
      * @return \jtl\Connector\Model\Product
