@@ -35,7 +35,7 @@ use \jtl\Core\Utilities\RpcMethod;
 use \jtl\Connector\Session\Session;
 use \jtl\Connector\Base\Connector;
 use \jtl\Connector\Transaction\Handler as TransactionHandler;
-use \jtl\Connector\Logger\Logger;
+use \jtl\Core\Logger\Logger;
 
 /**
  * Application Class
