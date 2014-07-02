@@ -148,8 +148,6 @@ class Application extends CoreApplication
 
                         $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
 
-                        Logger::write(Json::encode($responsepacket->getPublic()), Logger::DEBUG, 'rpc');
-
                         if ($rpcmode == Packet::SINGLE_MODE) {
                             Response::send($responsepacket);
                         }
@@ -170,8 +168,6 @@ class Application extends CoreApplication
                     $exists = true;
                     if ($actionresult->isHandled()) {
                         $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
-
-                        Logger::write(Json::encode($responsepacket->getPublic()), Logger::DEBUG, 'rpc');
 
                         if ($rpcmode == Packet::SINGLE_MODE) {
                             Response::send($responsepacket);
