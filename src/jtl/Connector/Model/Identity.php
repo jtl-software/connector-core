@@ -98,7 +98,7 @@ class Identity extends Model
      *            
      * @return array
      */
-    public function getPublic()
+    public function getPublic(array $publics = null)
     {
         return $this->toArray();
     }
