@@ -468,6 +468,66 @@
             "optional": true,
             "items": [
             ]
+        },
+        "measurementUnitId": {
+            "type": [
+                "array",
+                "null"
+            ],
+            "optional": true,
+            "items": [
+                {
+                    "type": [
+                        "string",
+                        "int"
+                    ]
+                }
+            ]
+        },
+        "measurementQuantity": {
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true,
+            "items": [
+            ]
+        },
+        "basePriceQuantity": {
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true,
+            "items": [
+            ]
+        },
+        "length": {
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true,
+            "items": [
+            ]
+        },
+        "height": {
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true,
+            "items": [
+            ]
+        },
+        "width": {
+            "type": [
+                "double",
+                "null"
+            ],
+            "optional": true,
+            "items": [
+            ]
         }
     },
     "required": [

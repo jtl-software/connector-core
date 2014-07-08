@@ -31,6 +31,15 @@
             "optional": true,
             "items": [
             ]
+        },
+        "isUserDefined": {
+            "type": [
+                "bool",
+                "null"
+            ],
+            "optional": true,
+            "items": [
+            ]
         }
     },
     "required": [

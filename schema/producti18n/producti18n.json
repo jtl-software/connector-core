@@ -58,6 +58,33 @@
             "optional": true,
             "items": [
             ]
+        },
+        "titleTag": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true,
+            "items": [
+            ]
+        },
+        "metaDescription": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true,
+            "items": [
+            ]
+        },
+        "metaKeywords": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "optional": true,
+            "items": [
+            ]
         }
     },
     "required": [

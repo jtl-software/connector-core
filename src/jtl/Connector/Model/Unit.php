@@ -32,6 +32,11 @@ class Unit extends DataModel
     protected $_name = '';
     
     /**
+     * @var bool
+     */
+    protected $_isUserDefined = false;
+    
+    /**
      * @var mixed:string
      */
     protected $_identities = array(
@@ -62,6 +67,11 @@ class Unit extends DataModel
                 case "_name":
                 
                     $this->$name = (string)$value;
+                    break;
+            
+                case "_isUserDefined":
+                
+                    $this->$name = (bool)$value;
                     break;
             
             }
@@ -118,5 +128,22 @@ class Unit extends DataModel
     public function getName()
     {
         return $this->_name;
+    }
+    /**
+     * @param bool $isUserDefined
+     * @return \jtl\Connector\Model\Unit
+     */
+    public function setIsUserDefined($isUserDefined)
+    {
+        $this->_isUserDefined = (bool)$isUserDefined;
+        return $this;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function getIsUserDefined()
+    {
+        return $this->_isUserDefined;
     }
 }

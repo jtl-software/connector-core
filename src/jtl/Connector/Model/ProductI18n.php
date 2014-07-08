@@ -47,6 +47,21 @@ class ProductI18n extends DataModel
     protected $_shortDescription = '';
     
     /**
+     * @var string
+     */
+    protected $_titleTag = '';
+    
+    /**
+     * @var string
+     */
+    protected $_metaDescription = '';
+    
+    /**
+     * @var string
+     */
+    protected $_metaKeywords = '';
+    
+    /**
      * @var mixed:string
      */
     protected $_identities = array(
@@ -73,6 +88,9 @@ class ProductI18n extends DataModel
                 case "_urlPath":
                 case "_description":
                 case "_shortDescription":
+                case "_titleTag":
+                case "_metaDescription":
+                case "_metaKeywords":
                 
                     $this->$name = (string)$value;
                     break;
@@ -187,5 +205,56 @@ class ProductI18n extends DataModel
     public function getShortDescription()
     {
         return $this->_shortDescription;
+    }
+    /**
+     * @param string $titleTag
+     * @return \jtl\Connector\Model\ProductI18n
+     */
+    public function setTitleTag($titleTag)
+    {
+        $this->_titleTag = (string)$titleTag;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getTitleTag()
+    {
+        return $this->_titleTag;
+    }
+    /**
+     * @param string $metaDescription
+     * @return \jtl\Connector\Model\ProductI18n
+     */
+    public function setMetaDescription($metaDescription)
+    {
+        $this->_metaDescription = (string)$metaDescription;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getMetaDescription()
+    {
+        return $this->_metaDescription;
+    }
+    /**
+     * @param string $metaKeywords
+     * @return \jtl\Connector\Model\ProductI18n
+     */
+    public function setMetaKeywords($metaKeywords)
+    {
+        $this->_metaKeywords = (string)$metaKeywords;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getMetaKeywords()
+    {
+        return $this->_metaKeywords;
     }
 }
