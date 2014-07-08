@@ -262,11 +262,6 @@ class Product extends DataModel
     protected $_measurementQuantity = 0.0;
     
     /**
-     * @var Identity
-     */
-    protected $_basePriceUnitId = null;
-    
-    /**
      * @var double
      */
     protected $_basePriceQuantity = 0.0;
@@ -299,8 +294,7 @@ class Product extends DataModel
         '_shippingClassId',
         '_setArticleId',
         '_productTypeId',
-        '_measurementUnitId',
-        '_basePriceUnitId'
+        '_measurementUnitId'
     );
     
     /**
@@ -328,7 +322,6 @@ class Product extends DataModel
                 case "_setArticleId":
                 case "_productTypeId":
                 case "_measurementUnitId":
-                case "_basePriceUnitId":
                 
                     $this->$name = Identity::convert($value);
                     break;
@@ -1228,23 +1221,6 @@ class Product extends DataModel
     public function getMeasurementQuantity()
     {
         return $this->_measurementQuantity;
-    }
-    /**
-     * @param Identity $basePriceUnitId
-     * @return \jtl\Connector\Model\Product
-     */
-    public function setBasePriceUnitId(Identity $basePriceUnitId)
-    {
-        $this->_basePriceUnitId = $basePriceUnitId;
-        return $this;
-    }
-    
-    /**
-     * @return Identity
-     */
-    public function getBasePriceUnitId()
-    {
-        return $this->_basePriceUnitId;
     }
     /**
      * @param double $basePriceQuantity
