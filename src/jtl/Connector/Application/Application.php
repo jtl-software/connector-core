@@ -30,7 +30,7 @@ use \jtl\Connector\Result\Action;
 use \jtl\Core\Validator\Schema;
 use \jtl\Core\Exception\SchemaException;
 use \jtl\Core\Validator\ValidationException;
-use \jtl\Core\Database\Sqlite3;
+use \jtl\Connector\Database\Sqlite3;
 use \jtl\Core\Utilities\RpcMethod;
 use \jtl\Connector\Session\Session;
 use \jtl\Connector\Base\Connector;
