@@ -1,8 +1,8 @@
 {
-    "title": "Unit Model",
+    "title": "UnitI18n Model",
     "type": "object",
     "properties": {
-        "id": {
+        "unitId": {
             "type": [
                 "array"
             ],
@@ -16,10 +16,17 @@
                 }
             ]
         },
-        "code": {
+        "localeName": {
             "type": [
-                "string",
-                "null"
+                "string"
+            ],
+            "optional": true,
+            "items": [
+            ]
+        },
+        "name": {
+            "type": [
+                "string"
             ],
             "optional": true,
             "items": [
@@ -27,6 +34,6 @@
         }
     },
     "required": [
-        "id"
+        "unitId"
     ]
 }

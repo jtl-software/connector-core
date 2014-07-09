@@ -22,19 +22,9 @@ class Unit extends DataModel
     protected $_id = null;
     
     /**
-     * @var string Locale
+     * @var string  Optional UCUM-Code, see  http://unitsofmeasure.org/
      */
-    protected $_localeName = '';
-    
-    /**
-     * @var string Localized unit name
-     */
-    protected $_name = '';
-    
-    /**
-     * @var bool
-     */
-    protected $_isUserDefined = false;
+    protected $_code = '';
     
     /**
      * @var mixed:string
@@ -63,15 +53,9 @@ class Unit extends DataModel
                     $this->$name = Identity::convert($value);
                     break;
             
-                case "_localeName":
-                case "_name":
+                case "_code":
                 
                     $this->$name = (string)$value;
-                    break;
-            
-                case "_isUserDefined":
-                
-                    $this->$name = (bool)$value;
                     break;
             
             }
@@ -96,54 +80,20 @@ class Unit extends DataModel
         return $this->_id;
     }
     /**
-     * @param string $localeName Locale
+     * @param string $code  Optional UCUM-Code, see  http://unitsofmeasure.org/
      * @return \jtl\Connector\Model\Unit
      */
-    public function setLocaleName($localeName)
+    public function setCode($code)
     {
-        $this->_localeName = (string)$localeName;
+        $this->_code = (string)$code;
         return $this;
     }
     
     /**
-     * @return string Locale
+     * @return string  Optional UCUM-Code, see  http://unitsofmeasure.org/
      */
-    public function getLocaleName()
+    public function getCode()
     {
-        return $this->_localeName;
-    }
-    /**
-     * @param string $name Localized unit name
-     * @return \jtl\Connector\Model\Unit
-     */
-    public function setName($name)
-    {
-        $this->_name = (string)$name;
-        return $this;
-    }
-    
-    /**
-     * @return string Localized unit name
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-    /**
-     * @param bool $isUserDefined
-     * @return \jtl\Connector\Model\Unit
-     */
-    public function setIsUserDefined($isUserDefined)
-    {
-        $this->_isUserDefined = (bool)$isUserDefined;
-        return $this;
-    }
-    
-    /**
-     * @return bool
-     */
-    public function getIsUserDefined()
-    {
-        return $this->_isUserDefined;
+        return $this->_code;
     }
 }
