@@ -252,32 +252,32 @@ class Product extends DataModel
     protected $_bestBefore = '';
     
     /**
-     * @var Identity
+     * @var Identity Optional reference to measurement unit id
      */
     protected $_measurementUnitId = null;
     
     /**
-     * @var double
+     * @var double Optional measurement quantity
      */
     protected $_measurementQuantity = 0.0;
     
     /**
-     * @var double
+     * @var double Optional base price quantity
      */
     protected $_basePriceQuantity = 0.0;
     
     /**
-     * @var double
+     * @var double Optional product length
      */
     protected $_length = 0.0;
     
     /**
-     * @var double
+     * @var double Optional product height
      */
     protected $_height = 0.0;
     
     /**
-     * @var double
+     * @var double Optional product width
      */
     protected $_width = 0.0;
     
@@ -1189,7 +1189,7 @@ class Product extends DataModel
         return $this->_bestBefore;
     }
     /**
-     * @param Identity $measurementUnitId
+     * @param Identity $measurementUnitId Optional reference to measurement unit id
      * @return \jtl\Connector\Model\Product
      */
     public function setMeasurementUnitId(Identity $measurementUnitId)
@@ -1199,14 +1199,14 @@ class Product extends DataModel
     }
     
     /**
-     * @return Identity
+     * @return Identity Optional reference to measurement unit id
      */
     public function getMeasurementUnitId()
     {
         return $this->_measurementUnitId;
     }
     /**
-     * @param double $measurementQuantity
+     * @param double $measurementQuantity Optional measurement quantity
      * @return \jtl\Connector\Model\Product
      */
     public function setMeasurementQuantity($measurementQuantity)
@@ -1216,14 +1216,14 @@ class Product extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Optional measurement quantity
      */
     public function getMeasurementQuantity()
     {
         return $this->_measurementQuantity;
     }
     /**
-     * @param double $basePriceQuantity
+     * @param double $basePriceQuantity Optional base price quantity
      * @return \jtl\Connector\Model\Product
      */
     public function setBasePriceQuantity($basePriceQuantity)
@@ -1233,14 +1233,14 @@ class Product extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Optional base price quantity
      */
     public function getBasePriceQuantity()
     {
         return $this->_basePriceQuantity;
     }
     /**
-     * @param double $length
+     * @param double $length Optional product length
      * @return \jtl\Connector\Model\Product
      */
     public function setLength($length)
@@ -1250,14 +1250,14 @@ class Product extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Optional product length
      */
     public function getLength()
     {
         return $this->_length;
     }
     /**
-     * @param double $height
+     * @param double $height Optional product height
      * @return \jtl\Connector\Model\Product
      */
     public function setHeight($height)
@@ -1267,14 +1267,14 @@ class Product extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Optional product height
      */
     public function getHeight()
     {
         return $this->_height;
     }
     /**
-     * @param double $width
+     * @param double $width Optional product width
      * @return \jtl\Connector\Model\Product
      */
     public function setWidth($width)
@@ -1284,7 +1284,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return double
+     * @return double Optional product width
      */
     public function getWidth()
     {
