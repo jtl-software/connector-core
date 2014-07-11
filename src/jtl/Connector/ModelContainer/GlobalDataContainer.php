@@ -68,6 +68,16 @@ class GlobalDataContainer extends CoreContainer
     protected $_unitI18ns;
     
     /**
+     * @var \jtl\Connector\Model\Measurement[]
+     */
+    protected $_measurements;
+    
+    /**
+     * @var \jtl\Connector\Model\MeasurementI18n[]
+     */
+    protected $_measurementI18ns;
+    
+    /**
      * @var \jtl\Connector\Model\TaxZone[]
      */
     protected $_taxZones;
@@ -236,6 +246,22 @@ class GlobalDataContainer extends CoreContainer
     }
     
     /**
+     * @return array \jtl\Connector\Model\Measurement
+     */
+    public function getMeasurements()
+    {
+        return $this->_measurements;
+    }
+    
+    /**
+     * @return array \jtl\Connector\Model\MeasurementI18n
+     */
+    public function getMeasurementI18ns()
+    {
+        return $this->_measurementI18ns;
+    }
+    
+    /**
      * @return array \jtl\Connector\Model\TaxZone
      */
     public function getTaxZones()
@@ -384,6 +410,8 @@ class GlobalDataContainer extends CoreContainer
         "cross_selling_group" => array("CrossSellingGroup", "CrossSellingGroups"),
         "unit" => array("Unit", "Units"),
         "unit_i18n" => array("UnitI18n", "UnitI18ns"),
+        "measurement" => array("Measurement", "Measurements"),
+        "measurement_i18n" => array("MeasurementI18n", "MeasurementI18ns"),
         "tax_zone" => array("TaxZone", "TaxZones"),
         "tax_zone_country" => array("TaxZoneCountry", "TaxZoneCountries"),
         "tax_class" => array("TaxClass", "TaxClasses"),

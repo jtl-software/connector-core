@@ -22,11 +22,6 @@ class Unit extends DataModel
     protected $_id = null;
     
     /**
-     * @var string  Optional UCUM-Code, see  http://unitsofmeasure.org/
-     */
-    protected $_code = '';
-    
-    /**
      * @var mixed:string
      */
     protected $_identities = array(
@@ -53,11 +48,6 @@ class Unit extends DataModel
                     $this->$name = Identity::convert($value);
                     break;
             
-                case "_code":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
             }
         }
     }
@@ -78,22 +68,5 @@ class Unit extends DataModel
     public function getId()
     {
         return $this->_id;
-    }
-    /**
-     * @param string $code  Optional UCUM-Code, see  http://unitsofmeasure.org/
-     * @return \jtl\Connector\Model\Unit
-     */
-    public function setCode($code)
-    {
-        $this->_code = (string)$code;
-        return $this;
-    }
-    
-    /**
-     * @return string  Optional UCUM-Code, see  http://unitsofmeasure.org/
-     */
-    public function getCode()
-    {
-        return $this->_code;
     }
 }
