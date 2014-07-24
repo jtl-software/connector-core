@@ -1,150 +1,130 @@
-<?php
+﻿<?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Product
+ * @subpackage #todo: get_main_controller#
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Product price properties.
+ * .
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Product
+ * @subpackage #todo: get_main_controller#
  */
 class ProductPrice extends DataModel
 {
     /**
-     * @var Identity Reference to customerGroup
+     * @type Identity 
      */
     protected $_customerGroupId = null;
-    
+
     /**
-     * @var Identity Reference to product
+     * @type Identity 
      */
     protected $_productId = null;
-    
+
     /**
-     * @var double Price value (net)
+     * @type float 
      */
     protected $_netPrice = 0.0;
-    
+
     /**
-     * @var int Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
+     * @type integer 
      */
-    protected $_quantity = 1;
-    
-    /**
-     * @var mixed:string
-     */
-    protected $_identities = array(
-        '_customerGroupId',
-        '_productId'
-    );
-    
-    /**
-     * ProductPrice Setter
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_customerGroupId":
-                case "_productId":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-                case "_netPrice":
-                
-                    $this->$name = (double)$value;
-                    break;
-            
-                case "_quantity":
-                
-                    $this->$name = (int)$value;
-                    break;
-            
-            }
-        }
-    }
-    
-    /**
-     * @param Identity $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\ProductPrice
-     */
-    public function setCustomerGroupId(Identity $customerGroupId)
-    {
-        $this->_customerGroupId = $customerGroupId;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to customerGroup
-     */
-    public function getCustomerGroupId()
-    {
-        return $this->_customerGroupId;
-    }
-    /**
-     * @param Identity $productId Reference to product
-     * @return \jtl\Connector\Model\ProductPrice
-     */
-    public function setProductId(Identity $productId)
-    {
-        $this->_productId = $productId;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to product
-     */
-    public function getProductId()
-    {
-        return $this->_productId;
-    }
-    /**
-     * @param double $netPrice Price value (net)
-     * @return \jtl\Connector\Model\ProductPrice
-     */
-    public function setNetPrice($netPrice)
-    {
-        $this->_netPrice = (double)$netPrice;
-        return $this;
-    }
-    
-    /**
-     * @return double Price value (net)
-     */
-    public function getNetPrice()
-    {
-        return $this->_netPrice;
-    }
-    /**
-     * @param int $quantity Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
-     * @return \jtl\Connector\Model\ProductPrice
-     */
-    public function setQuantity($quantity)
-    {
-        $this->_quantity = (int)$quantity;
-        return $this;
-    }
-    
-    /**
-     * @return int Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
-     */
-    public function getQuantity()
-    {
-        return $this->_quantity;
-    }
+    protected $_quantity = 0;
+
+
+	/**
+	 * @type array
+	 */
+	protected $_identities = array(
+		'_customerGroupId',
+		'_productId',
+	);
+
+	/**
+	 * @param  Identity $customerGroupId 
+	 * @return \jtl\Connector\Model\ProductPrice
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setCustomerGroupId(Identity $customerGroupId)
+	{
+		
+		$this->_customerGroupId = $customerGroupId;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity 
+	 */
+	public function getCustomerGroupId()
+	{
+		return $this->_customerGroupId;
+	}
+
+	/**
+	 * @param  Identity $productId 
+	 * @return \jtl\Connector\Model\ProductPrice
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setProductId(Identity $productId)
+	{
+		
+		$this->_productId = $productId;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity 
+	 */
+	public function getProductId()
+	{
+		return $this->_productId;
+	}
+
+	/**
+	 * @param  float $netPrice 
+	 * @return \jtl\Connector\Model\ProductPrice
+	 * @throws InvalidArgumentException if the provided argument is not of type 'float'.
+	 */
+	public function setNetPrice($netPrice)
+	{
+		if (!is_float($netPrice))
+			throw new InvalidArgumentException('float expected.');
+		$this->_netPrice = $netPrice;
+		return $this;
+	}
+	
+	/**
+	 * @return float 
+	 */
+	public function getNetPrice()
+	{
+		return $this->_netPrice;
+	}
+
+	/**
+	 * @param  integer $quantity 
+	 * @return \jtl\Connector\Model\ProductPrice
+	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+	 */
+	public function setQuantity($quantity)
+	{
+		if (!is_integer($quantity))
+			throw new InvalidArgumentException('integer expected.');
+		$this->_quantity = $quantity;
+		return $this;
+	}
+	
+	/**
+	 * @return integer 
+	 */
+	public function getQuantity()
+	{
+		return $this->_quantity;
+	}
 }
+

@@ -1,260 +1,242 @@
-<?php
+﻿<?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Product
+ * @subpackage #todo: get_main_controller#
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Locale specific texts for product
+ * Locale specific texts for product.
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Product
+ * @subpackage #todo: get_main_controller#
  */
 class ProductI18n extends DataModel
 {
     /**
-     * @var string locale
-     */
-    protected $_localeName = '';
-    
-    /**
-     * @var Identity Reference to product
+     * @type Identity Reference to product
      */
     protected $_productId = null;
-    
+
     /**
-     * @var string Product name / title
+     * @type integer 
      */
-    protected $_name = '';
-    
+    protected $_connectorId = 0;
+
     /**
-     * @var string Optional path of product URL
-     */
-    protected $_urlPath = '';
-    
-    /**
-     * @var string Optional product description
+     * @type string Optional product description
      */
     protected $_description = '';
-    
+
     /**
-     * @var string Optional product shortdescription
+     * @type string locale
+     */
+    protected $_localeName = '';
+
+    /**
+     * @type string Product name / title
+     */
+    protected $_name = '';
+
+    /**
+     * @type string Optional product shortdescription
      */
     protected $_shortDescription = '';
-    
+
     /**
-     * @var string
+     * @type string 
      */
-    protected $_titleTag = '';
-    
+    protected $_url = '';
+
     /**
-     * @var string
+	 * Nav [ProductI18n » Many]
+	 *
+     * @type \jtl\Connector\Model\Product[]
      */
-    protected $_metaDescription = '';
-    
-    /**
-     * @var string
-     */
-    protected $_metaKeywords = '';
-    
-    /**
-     * @var mixed:string
-     */
-    protected $_identities = array(
-        '_productId'
-    );
-    
-    /**
-     * ProductI18n Setter
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_localeName":
-                case "_name":
-                case "_urlPath":
-                case "_description":
-                case "_shortDescription":
-                case "_titleTag":
-                case "_metaDescription":
-                case "_metaKeywords":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-                case "_productId":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-            }
-        }
-    }
-    
-    /**
-     * @param string $localeName locale
-     * @return \jtl\Connector\Model\ProductI18n
-     */
-    public function setLocaleName($localeName)
-    {
-        $this->_localeName = (string)$localeName;
-        return $this;
-    }
-    
-    /**
-     * @return string locale
-     */
-    public function getLocaleName()
-    {
-        return $this->_localeName;
-    }
-    /**
-     * @param Identity $productId Reference to product
-     * @return \jtl\Connector\Model\ProductI18n
-     */
-    public function setProductId(Identity $productId)
-    {
-        $this->_productId = $productId;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to product
-     */
-    public function getProductId()
-    {
-        return $this->_productId;
-    }
-    /**
-     * @param string $name Product name / title
-     * @return \jtl\Connector\Model\ProductI18n
-     */
-    public function setName($name)
-    {
-        $this->_name = (string)$name;
-        return $this;
-    }
-    
-    /**
-     * @return string Product name / title
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-    /**
-     * @param string $urlPath Optional path of product URL
-     * @return \jtl\Connector\Model\ProductI18n
-     */
-    public function setUrlPath($urlPath)
-    {
-        $this->_urlPath = (string)$urlPath;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional path of product URL
-     */
-    public function getUrlPath()
-    {
-        return $this->_urlPath;
-    }
-    /**
-     * @param string $description Optional product description
-     * @return \jtl\Connector\Model\ProductI18n
-     */
-    public function setDescription($description)
-    {
-        $this->_description = (string)$description;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional product description
-     */
-    public function getDescription()
-    {
-        return $this->_description;
-    }
-    /**
-     * @param string $shortDescription Optional product shortdescription
-     * @return \jtl\Connector\Model\ProductI18n
-     */
-    public function setShortDescription($shortDescription)
-    {
-        $this->_shortDescription = (string)$shortDescription;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional product shortdescription
-     */
-    public function getShortDescription()
-    {
-        return $this->_shortDescription;
-    }
-    /**
-     * @param string $titleTag
-     * @return \jtl\Connector\Model\ProductI18n
-     */
-    public function setTitleTag($titleTag)
-    {
-        $this->_titleTag = (string)$titleTag;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getTitleTag()
-    {
-        return $this->_titleTag;
-    }
-    /**
-     * @param string $metaDescription
-     * @return \jtl\Connector\Model\ProductI18n
-     */
-    public function setMetaDescription($metaDescription)
-    {
-        $this->_metaDescription = (string)$metaDescription;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getMetaDescription()
-    {
-        return $this->_metaDescription;
-    }
-    /**
-     * @param string $metaKeywords
-     * @return \jtl\Connector\Model\ProductI18n
-     */
-    public function setMetaKeywords($metaKeywords)
-    {
-        $this->_metaKeywords = (string)$metaKeywords;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getMetaKeywords()
-    {
-        return $this->_metaKeywords;
-    }
+    protected $_product = array();
+
+
+	/**
+	 * @type array
+	 */
+	protected $_identities = array(
+		'_productId',
+	);
+
+	/**
+	 * @param  string $name Product name / title
+	 * @return \jtl\Connector\Model\ProductI18n
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setName($name)
+	{
+		if (!is_string($name))
+			throw new InvalidArgumentException('string expected.');
+		$this->_name = $name;
+		return $this;
+	}
+	
+	/**
+	 * @return string Product name / title
+	 */
+	public function getName()
+	{
+		return $this->_name;
+	}
+
+	/**
+	 * @param  string $description Optional product description
+	 * @return \jtl\Connector\Model\ProductI18n
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setDescription($description)
+	{
+		if (!is_string($description))
+			throw new InvalidArgumentException('string expected.');
+		$this->_description = $description;
+		return $this;
+	}
+	
+	/**
+	 * @return string Optional product description
+	 */
+	public function getDescription()
+	{
+		return $this->_description;
+	}
+
+	/**
+	 * @param  string $shortDescription Optional product shortdescription
+	 * @return \jtl\Connector\Model\ProductI18n
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setShortDescription($shortDescription)
+	{
+		if (!is_string($shortDescription))
+			throw new InvalidArgumentException('string expected.');
+		$this->_shortDescription = $shortDescription;
+		return $this;
+	}
+	
+	/**
+	 * @return string Optional product shortdescription
+	 */
+	public function getShortDescription()
+	{
+		return $this->_shortDescription;
+	}
+
+	/**
+	 * @param  string $url 
+	 * @return \jtl\Connector\Model\ProductI18n
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setUrl($url)
+	{
+		if (!is_string($url))
+			throw new InvalidArgumentException('string expected.');
+		$this->_url = $url;
+		return $this;
+	}
+	
+	/**
+	 * @return string 
+	 */
+	public function getUrl()
+	{
+		return $this->_url;
+	}
+
+	/**
+	 * @param  integer $connectorId 
+	 * @return \jtl\Connector\Model\ProductI18n
+	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+	 */
+	public function setConnectorId($connectorId)
+	{
+		if (!is_integer($connectorId))
+			throw new InvalidArgumentException('integer expected.');
+		$this->_connectorId = $connectorId;
+		return $this;
+	}
+	
+	/**
+	 * @return integer 
+	 */
+	public function getConnectorId()
+	{
+		return $this->_connectorId;
+	}
+
+	/**
+	 * @param  Identity $productId Reference to product
+	 * @return \jtl\Connector\Model\ProductI18n
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setProductId(Identity $productId)
+	{
+		
+		$this->_productId = $productId;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Reference to product
+	 */
+	public function getProductId()
+	{
+		return $this->_productId;
+	}
+
+	/**
+	 * @param  string $localeName locale
+	 * @return \jtl\Connector\Model\ProductI18n
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setLocaleName($localeName)
+	{
+		if (!is_string($localeName))
+			throw new InvalidArgumentException('string expected.');
+		$this->_localeName = $localeName;
+		return $this;
+	}
+	
+	/**
+	 * @return string locale
+	 */
+	public function getLocaleName()
+	{
+		return $this->_localeName;
+	}
+
+	/**
+	 * @param  \jtl\Connector\Model\Product $product
+	 * @return \jtl\Connector\Model\ProductI18n
+	 */
+	public function addProduct(\jtl\Connector\Model\Product $product)
+	{
+		$this->_product[] = $product;
+		return $this;
+	}
+	
+	/**
+	 * @return Product
+	 */
+	public function getProduct()
+	{
+		return $this->_product;
+	}
+
+	/**
+	 * @return \jtl\Connector\Model\ProductI18n
+	 */
+	public function clearProduct()
+	{
+		$this->_product = array();
+		return $this;
+	}
 }
+

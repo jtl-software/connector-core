@@ -1,72 +1,78 @@
-<?php
+﻿<?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage #todo: get_main_controller#
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Specifies product units like "piece", "bottle", "package".
+ * Specifies product units like "piece", "bottle", "package"..
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage #todo: get_main_controller#
  */
 class Unit extends DataModel
 {
     /**
-     * @var Identity Unit id
+     * @type string 
      */
-    protected $_id = null;
-    
+    protected $_localeName = '';
+
     /**
-     * @var mixed:string
+     * @type string 
      */
-    protected $_identities = array(
-        '_id'
-    );
-    
-    /**
-     * Unit Setter
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_id":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-            }
-        }
-    }
-    
-    /**
-     * @param Identity $id Unit id
-     * @return \jtl\Connector\Model\Unit
-     */
-    public function setId(Identity $id)
-    {
-        $this->_id = $id;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unit id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
+    protected $_name = '';
+
+
+	/**
+	 * @type array
+	 */
+	protected $_identities = array(
+	);
+
+	/**
+	 * @param  string $name 
+	 * @return \jtl\Connector\Model\Unit
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setName($name)
+	{
+		if (!is_string($name))
+			throw new InvalidArgumentException('string expected.');
+		$this->_name = $name;
+		return $this;
+	}
+	
+	/**
+	 * @return string 
+	 */
+	public function getName()
+	{
+		return $this->_name;
+	}
+
+	/**
+	 * @param  string $localeName 
+	 * @return \jtl\Connector\Model\Unit
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setLocaleName($localeName)
+	{
+		if (!is_string($localeName))
+			throw new InvalidArgumentException('string expected.');
+		$this->_localeName = $localeName;
+		return $this;
+	}
+	
+	/**
+	 * @return string 
+	 */
+	public function getLocaleName()
+	{
+		return $this->_localeName;
+	}
 }
+

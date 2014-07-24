@@ -1,126 +1,78 @@
-<?php
+﻿<?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage #todo: get_main_controller#
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Tax class model (set in JTL-Wawi ERP)
+ * Tax class model (set in JTL-Wawi ERP).
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage #todo: get_main_controller#
  */
 class TaxClass extends DataModel
 {
     /**
-     * @var Identity Unique taxClass id
+     * @type Identity Unique taxClass id
      */
     protected $_id = null;
-    
+
     /**
-     * @var string Optional tax class name
+     * @type string Optional tax class name
      */
     protected $_name = '';
-    
-    /**
-     * @var bool Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
-     */
-    protected $_isDefault = false;
-    
-    /**
-     * @var mixed:string
-     */
-    protected $_identities = array(
-        '_id'
-    );
-    
-    /**
-     * TaxClass Setter
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_id":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-                case "_name":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-                case "_isDefault":
-                
-                    $this->$name = (bool)$value;
-                    break;
-            
-            }
-        }
-    }
-    
-    /**
-     * @param Identity $id Unique taxClass id
-     * @return \jtl\Connector\Model\TaxClass
-     */
-    public function setId(Identity $id)
-    {
-        $this->_id = $id;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique taxClass id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param string $name Optional tax class name
-     * @return \jtl\Connector\Model\TaxClass
-     */
-    public function setName($name)
-    {
-        $this->_name = (string)$name;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional tax class name
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-    /**
-     * @param bool $isDefault Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
-     * @return \jtl\Connector\Model\TaxClass
-     */
-    public function setIsDefault($isDefault)
-    {
-        $this->_isDefault = (bool)$isDefault;
-        return $this;
-    }
-    
-    /**
-     * @return bool Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
-     */
-    public function getIsDefault()
-    {
-        return $this->_isDefault;
-    }
+
+
+	/**
+	 * @type array
+	 */
+	protected $_identities = array(
+		'_id',
+	);
+
+	/**
+	 * @param  string $name Optional tax class name
+	 * @return \jtl\Connector\Model\TaxClass
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setName($name)
+	{
+		if (!is_string($name))
+			throw new InvalidArgumentException('string expected.');
+		$this->_name = $name;
+		return $this;
+	}
+	
+	/**
+	 * @return string Optional tax class name
+	 */
+	public function getName()
+	{
+		return $this->_name;
+	}
+
+	/**
+	 * @param  Identity $id Unique taxClass id
+	 * @return \jtl\Connector\Model\TaxClass
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setId(Identity $id)
+	{
+		
+		$this->_id = $id;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Unique taxClass id
+	 */
+	public function getId()
+	{
+		return $this->_id;
+	}
 }
+

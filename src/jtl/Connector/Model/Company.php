@@ -1,485 +1,702 @@
-<?php
+﻿<?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage #todo: get_main_controller#
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Provides company address and bank details
+ * Provides company address and bank details.
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage #todo: get_main_controller#
  */
 class Company extends DataModel
 {
     /**
-     * @var string Company name
+     * @type Identity 
      */
-    protected $_name = '';
-    
+    protected $_companyId = null;
+
     /**
-     * @var string Company businessman / entrepreneur
-     */
-    protected $_businessman = '';
-    
-    /**
-     * @var string Street
-     */
-    protected $_street = '';
-    
-    /**
-     * @var string Street number
-     */
-    protected $_streetNumber = '';
-    
-    /**
-     * @var string Zip code / postcode
-     */
-    protected $_zipCode = '';
-    
-    /**
-     * @var string City
-     */
-    protected $_city = '';
-    
-    /**
-     * @var string CountryIso
-     */
-    protected $_countryIso = '';
-    
-    /**
-     * @var string Phone number
-     */
-    protected $_phone = '';
-    
-    /**
-     * @var string Fax number
-     */
-    protected $_fax = '';
-    
-    /**
-     * @var string Company E-Mail address
-     */
-    protected $_eMail = '';
-    
-    /**
-     * @var string Company website URL
-     */
-    protected $_www = '';
-    
-    /**
-     * @var string Bank code number
-     */
-    protected $_bankCode = '';
-    
-    /**
-     * @var string Bank account number
-     */
-    protected $_accountNumber = '';
-    
-    /**
-     * @var string Bank name e.g. "Deutsche Bank"
-     */
-    protected $_bankName = '';
-    
-    /**
-     * @var string Bank account holder name e.g. "John Doe"
+     * @type string Bank account holder name e.g. "John Doe"
      */
     protected $_accountHolder = '';
-    
+
     /**
-     * @var string VAT registration number (german: USt-ID)
+     * @type string Bank account number
      */
-    protected $_vatNumber = '';
-    
+    protected $_accountNumber = '';
+
     /**
-     * @var string Tax id number (german: Steuernummer)
+     * @type string Bank code number
      */
-    protected $_taxIdNumber = '';
-    
+    protected $_bankCode = '';
+
     /**
-     * @var string International Bank Account Number (IBAN) 
+     * @type string Bank name e.g. "Deutsche Bank"
      */
-    protected $_iban = '';
-    
+    protected $_bankName = '';
+
     /**
-     * @var string Bank Identifier Code (BIC)
+     * @type string Bank Identifier Code (BIC)
      */
     protected $_bic = '';
-    
+
     /**
-     * @var mixed:string
+     * @type string Company businessman / entrepreneur
      */
-    protected $_identities = array(
-    );
-    
+    protected $_businessman = '';
+
     /**
-     * Company Setter
-     *
-     * @param string $name
-     * @param string $value
+     * @type string 
      */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_name":
-                case "_businessman":
-                case "_street":
-                case "_streetNumber":
-                case "_zipCode":
-                case "_city":
-                case "_countryIso":
-                case "_phone":
-                case "_fax":
-                case "_eMail":
-                case "_www":
-                case "_bankCode":
-                case "_accountNumber":
-                case "_bankName":
-                case "_accountHolder":
-                case "_vatNumber":
-                case "_taxIdNumber":
-                case "_iban":
-                case "_bic":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-            }
-        }
-    }
-    
+    protected $_cGlaeubigerID = '';
+
     /**
-     * @param string $name Company name
-     * @return \jtl\Connector\Model\Company
+     * @type string City
      */
-    public function setName($name)
-    {
-        $this->_name = (string)$name;
-        return $this;
-    }
-    
+    protected $_city = '';
+
     /**
-     * @return string Company name
+     * @type string CountryIso
      */
-    public function getName()
-    {
-        return $this->_name;
-    }
+    protected $_countryIso = '';
+
     /**
-     * @param string $businessman Company businessman / entrepreneur
-     * @return \jtl\Connector\Model\Company
+     * @type string Company E-Mail address
      */
-    public function setBusinessman($businessman)
-    {
-        $this->_businessman = (string)$businessman;
-        return $this;
-    }
-    
+    protected $_eMail = '';
+
     /**
-     * @return string Company businessman / entrepreneur
+     * @type string Fax number
      */
-    public function getBusinessman()
-    {
-        return $this->_businessman;
-    }
+    protected $_fax = '';
+
     /**
-     * @param string $street Street
-     * @return \jtl\Connector\Model\Company
+     * @type boolean 
      */
-    public function setStreet($street)
-    {
-        $this->_street = (string)$street;
-        return $this;
-    }
-    
+    protected $_flagUpdate = false;
+
     /**
-     * @return string Street
+     * @type string 
      */
-    public function getStreet()
-    {
-        return $this->_street;
-    }
+    protected $_footer = '';
+
     /**
-     * @param string $streetNumber Street number
-     * @return \jtl\Connector\Model\Company
+     * @type string 
      */
-    public function setStreetNumber($streetNumber)
-    {
-        $this->_streetNumber = (string)$streetNumber;
-        return $this;
-    }
-    
+    protected $_headerLogo = '';
+
     /**
-     * @return string Street number
+     * @type string International Bank Account Number (IBAN) 
      */
-    public function getStreetNumber()
-    {
-        return $this->_streetNumber;
-    }
+    protected $_iban = '';
+
     /**
-     * @param string $zipCode Zip code / postcode
-     * @return \jtl\Connector\Model\Company
+     * @type string 
      */
-    public function setZipCode($zipCode)
-    {
-        $this->_zipCode = (string)$zipCode;
-        return $this;
-    }
-    
+    protected $_intrashipNumber = '';
+
     /**
-     * @return string Zip code / postcode
+     * @type boolean 
      */
-    public function getZipCode()
-    {
-        return $this->_zipCode;
-    }
+    protected $_isActive = false;
+
     /**
-     * @param string $city City
-     * @return \jtl\Connector\Model\Company
+     * @type string Company name
      */
-    public function setCity($city)
-    {
-        $this->_city = (string)$city;
-        return $this;
-    }
-    
+    protected $_name = '';
+
     /**
-     * @return string City
+     * @type string Phone number
      */
-    public function getCity()
-    {
-        return $this->_city;
-    }
+    protected $_phone = '';
+
     /**
-     * @param string $countryIso CountryIso
-     * @return \jtl\Connector\Model\Company
+     * @type string Street
      */
-    public function setCountryIso($countryIso)
-    {
-        $this->_countryIso = (string)$countryIso;
-        return $this;
-    }
-    
+    protected $_street = '';
+
     /**
-     * @return string CountryIso
+     * @type string Tax id number (german: Steuernummer)
      */
-    public function getCountryIso()
-    {
-        return $this->_countryIso;
-    }
+    protected $_taxIdNumber = '';
+
     /**
-     * @param string $phone Phone number
-     * @return \jtl\Connector\Model\Company
+     * @type string 
      */
-    public function setPhone($phone)
-    {
-        $this->_phone = (string)$phone;
-        return $this;
-    }
-    
+    protected $_upsNumber = '';
+
     /**
-     * @return string Phone number
+     * @type string VAT registration number (german: USt-ID)
      */
-    public function getPhone()
-    {
-        return $this->_phone;
-    }
+    protected $_vatNumber = '';
+
     /**
-     * @param string $fax Fax number
-     * @return \jtl\Connector\Model\Company
+     * @type string Company website URL
      */
-    public function setFax($fax)
-    {
-        $this->_fax = (string)$fax;
-        return $this;
-    }
-    
+    protected $_www = '';
+
     /**
-     * @return string Fax number
+     * @type string Zip code / postcode
      */
-    public function getFax()
-    {
-        return $this->_fax;
-    }
-    /**
-     * @param string $eMail Company E-Mail address
-     * @return \jtl\Connector\Model\Company
-     */
-    public function setEMail($eMail)
-    {
-        $this->_eMail = (string)$eMail;
-        return $this;
-    }
-    
-    /**
-     * @return string Company E-Mail address
-     */
-    public function getEMail()
-    {
-        return $this->_eMail;
-    }
-    /**
-     * @param string $www Company website URL
-     * @return \jtl\Connector\Model\Company
-     */
-    public function setWww($www)
-    {
-        $this->_www = (string)$www;
-        return $this;
-    }
-    
-    /**
-     * @return string Company website URL
-     */
-    public function getWww()
-    {
-        return $this->_www;
-    }
-    /**
-     * @param string $bankCode Bank code number
-     * @return \jtl\Connector\Model\Company
-     */
-    public function setBankCode($bankCode)
-    {
-        $this->_bankCode = (string)$bankCode;
-        return $this;
-    }
-    
-    /**
-     * @return string Bank code number
-     */
-    public function getBankCode()
-    {
-        return $this->_bankCode;
-    }
-    /**
-     * @param string $accountNumber Bank account number
-     * @return \jtl\Connector\Model\Company
-     */
-    public function setAccountNumber($accountNumber)
-    {
-        $this->_accountNumber = (string)$accountNumber;
-        return $this;
-    }
-    
-    /**
-     * @return string Bank account number
-     */
-    public function getAccountNumber()
-    {
-        return $this->_accountNumber;
-    }
-    /**
-     * @param string $bankName Bank name e.g. "Deutsche Bank"
-     * @return \jtl\Connector\Model\Company
-     */
-    public function setBankName($bankName)
-    {
-        $this->_bankName = (string)$bankName;
-        return $this;
-    }
-    
-    /**
-     * @return string Bank name e.g. "Deutsche Bank"
-     */
-    public function getBankName()
-    {
-        return $this->_bankName;
-    }
-    /**
-     * @param string $accountHolder Bank account holder name e.g. "John Doe"
-     * @return \jtl\Connector\Model\Company
-     */
-    public function setAccountHolder($accountHolder)
-    {
-        $this->_accountHolder = (string)$accountHolder;
-        return $this;
-    }
-    
-    /**
-     * @return string Bank account holder name e.g. "John Doe"
-     */
-    public function getAccountHolder()
-    {
-        return $this->_accountHolder;
-    }
-    /**
-     * @param string $vatNumber VAT registration number (german: USt-ID)
-     * @return \jtl\Connector\Model\Company
-     */
-    public function setVatNumber($vatNumber)
-    {
-        $this->_vatNumber = (string)$vatNumber;
-        return $this;
-    }
-    
-    /**
-     * @return string VAT registration number (german: USt-ID)
-     */
-    public function getVatNumber()
-    {
-        return $this->_vatNumber;
-    }
-    /**
-     * @param string $taxIdNumber Tax id number (german: Steuernummer)
-     * @return \jtl\Connector\Model\Company
-     */
-    public function setTaxIdNumber($taxIdNumber)
-    {
-        $this->_taxIdNumber = (string)$taxIdNumber;
-        return $this;
-    }
-    
-    /**
-     * @return string Tax id number (german: Steuernummer)
-     */
-    public function getTaxIdNumber()
-    {
-        return $this->_taxIdNumber;
-    }
-    /**
-     * @param string $iban International Bank Account Number (IBAN) 
-     * @return \jtl\Connector\Model\Company
-     */
-    public function setIban($iban)
-    {
-        $this->_iban = (string)$iban;
-        return $this;
-    }
-    
-    /**
-     * @return string International Bank Account Number (IBAN) 
-     */
-    public function getIban()
-    {
-        return $this->_iban;
-    }
-    /**
-     * @param string $bic Bank Identifier Code (BIC)
-     * @return \jtl\Connector\Model\Company
-     */
-    public function setBic($bic)
-    {
-        $this->_bic = (string)$bic;
-        return $this;
-    }
-    
-    /**
-     * @return string Bank Identifier Code (BIC)
-     */
-    public function getBic()
-    {
-        return $this->_bic;
-    }
+    protected $_zipCode = '';
+
+
+	/**
+	 * @type array
+	 */
+	protected $_identities = array(
+		'_companyId',
+	);
+
+	/**
+	 * @param  string $name Company name
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setName($name)
+	{
+		if (!is_string($name))
+			throw new InvalidArgumentException('string expected.');
+		$this->_name = $name;
+		return $this;
+	}
+	
+	/**
+	 * @return string Company name
+	 */
+	public function getName()
+	{
+		return $this->_name;
+	}
+
+	/**
+	 * @param  string $businessman Company businessman / entrepreneur
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setBusinessman($businessman)
+	{
+		if (!is_string($businessman))
+			throw new InvalidArgumentException('string expected.');
+		$this->_businessman = $businessman;
+		return $this;
+	}
+	
+	/**
+	 * @return string Company businessman / entrepreneur
+	 */
+	public function getBusinessman()
+	{
+		return $this->_businessman;
+	}
+
+	/**
+	 * @param  string $street Street
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setStreet($street)
+	{
+		if (!is_string($street))
+			throw new InvalidArgumentException('string expected.');
+		$this->_street = $street;
+		return $this;
+	}
+	
+	/**
+	 * @return string Street
+	 */
+	public function getStreet()
+	{
+		return $this->_street;
+	}
+
+	/**
+	 * @param  string $zipCode Zip code / postcode
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setZipCode($zipCode)
+	{
+		if (!is_string($zipCode))
+			throw new InvalidArgumentException('string expected.');
+		$this->_zipCode = $zipCode;
+		return $this;
+	}
+	
+	/**
+	 * @return string Zip code / postcode
+	 */
+	public function getZipCode()
+	{
+		return $this->_zipCode;
+	}
+
+	/**
+	 * @param  string $city City
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setCity($city)
+	{
+		if (!is_string($city))
+			throw new InvalidArgumentException('string expected.');
+		$this->_city = $city;
+		return $this;
+	}
+	
+	/**
+	 * @return string City
+	 */
+	public function getCity()
+	{
+		return $this->_city;
+	}
+
+	/**
+	 * @param  string $countryIso CountryIso
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setCountryIso($countryIso)
+	{
+		if (!is_string($countryIso))
+			throw new InvalidArgumentException('string expected.');
+		$this->_countryIso = $countryIso;
+		return $this;
+	}
+	
+	/**
+	 * @return string CountryIso
+	 */
+	public function getCountryIso()
+	{
+		return $this->_countryIso;
+	}
+
+	/**
+	 * @param  string $phone Phone number
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setPhone($phone)
+	{
+		if (!is_string($phone))
+			throw new InvalidArgumentException('string expected.');
+		$this->_phone = $phone;
+		return $this;
+	}
+	
+	/**
+	 * @return string Phone number
+	 */
+	public function getPhone()
+	{
+		return $this->_phone;
+	}
+
+	/**
+	 * @param  string $fax Fax number
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setFax($fax)
+	{
+		if (!is_string($fax))
+			throw new InvalidArgumentException('string expected.');
+		$this->_fax = $fax;
+		return $this;
+	}
+	
+	/**
+	 * @return string Fax number
+	 */
+	public function getFax()
+	{
+		return $this->_fax;
+	}
+
+	/**
+	 * @param  string $eMail Company E-Mail address
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setEMail($eMail)
+	{
+		if (!is_string($eMail))
+			throw new InvalidArgumentException('string expected.');
+		$this->_eMail = $eMail;
+		return $this;
+	}
+	
+	/**
+	 * @return string Company E-Mail address
+	 */
+	public function getEMail()
+	{
+		return $this->_eMail;
+	}
+
+	/**
+	 * @param  string $www Company website URL
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setWww($www)
+	{
+		if (!is_string($www))
+			throw new InvalidArgumentException('string expected.');
+		$this->_www = $www;
+		return $this;
+	}
+	
+	/**
+	 * @return string Company website URL
+	 */
+	public function getWww()
+	{
+		return $this->_www;
+	}
+
+	/**
+	 * @param  string $bankCode Bank code number
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setBankCode($bankCode)
+	{
+		if (!is_string($bankCode))
+			throw new InvalidArgumentException('string expected.');
+		$this->_bankCode = $bankCode;
+		return $this;
+	}
+	
+	/**
+	 * @return string Bank code number
+	 */
+	public function getBankCode()
+	{
+		return $this->_bankCode;
+	}
+
+	/**
+	 * @param  string $accountNumber Bank account number
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setAccountNumber($accountNumber)
+	{
+		if (!is_string($accountNumber))
+			throw new InvalidArgumentException('string expected.');
+		$this->_accountNumber = $accountNumber;
+		return $this;
+	}
+	
+	/**
+	 * @return string Bank account number
+	 */
+	public function getAccountNumber()
+	{
+		return $this->_accountNumber;
+	}
+
+	/**
+	 * @param  string $bankName Bank name e.g. "Deutsche Bank"
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setBankName($bankName)
+	{
+		if (!is_string($bankName))
+			throw new InvalidArgumentException('string expected.');
+		$this->_bankName = $bankName;
+		return $this;
+	}
+	
+	/**
+	 * @return string Bank name e.g. "Deutsche Bank"
+	 */
+	public function getBankName()
+	{
+		return $this->_bankName;
+	}
+
+	/**
+	 * @param  string $vatNumber VAT registration number (german: USt-ID)
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setVatNumber($vatNumber)
+	{
+		if (!is_string($vatNumber))
+			throw new InvalidArgumentException('string expected.');
+		$this->_vatNumber = $vatNumber;
+		return $this;
+	}
+	
+	/**
+	 * @return string VAT registration number (german: USt-ID)
+	 */
+	public function getVatNumber()
+	{
+		return $this->_vatNumber;
+	}
+
+	/**
+	 * @param  string $taxIdNumber Tax id number (german: Steuernummer)
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setTaxIdNumber($taxIdNumber)
+	{
+		if (!is_string($taxIdNumber))
+			throw new InvalidArgumentException('string expected.');
+		$this->_taxIdNumber = $taxIdNumber;
+		return $this;
+	}
+	
+	/**
+	 * @return string Tax id number (german: Steuernummer)
+	 */
+	public function getTaxIdNumber()
+	{
+		return $this->_taxIdNumber;
+	}
+
+	/**
+	 * @param  string $intrashipNumber 
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setIntrashipNumber($intrashipNumber)
+	{
+		if (!is_string($intrashipNumber))
+			throw new InvalidArgumentException('string expected.');
+		$this->_intrashipNumber = $intrashipNumber;
+		return $this;
+	}
+	
+	/**
+	 * @return string 
+	 */
+	public function getIntrashipNumber()
+	{
+		return $this->_intrashipNumber;
+	}
+
+	/**
+	 * @param  string $upsNumber 
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setUpsNumber($upsNumber)
+	{
+		if (!is_string($upsNumber))
+			throw new InvalidArgumentException('string expected.');
+		$this->_upsNumber = $upsNumber;
+		return $this;
+	}
+	
+	/**
+	 * @return string 
+	 */
+	public function getUpsNumber()
+	{
+		return $this->_upsNumber;
+	}
+
+	/**
+	 * @param  string $iban International Bank Account Number (IBAN) 
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setIban($iban)
+	{
+		if (!is_string($iban))
+			throw new InvalidArgumentException('string expected.');
+		$this->_iban = $iban;
+		return $this;
+	}
+	
+	/**
+	 * @return string International Bank Account Number (IBAN) 
+	 */
+	public function getIban()
+	{
+		return $this->_iban;
+	}
+
+	/**
+	 * @param  string $bic Bank Identifier Code (BIC)
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setBic($bic)
+	{
+		if (!is_string($bic))
+			throw new InvalidArgumentException('string expected.');
+		$this->_bic = $bic;
+		return $this;
+	}
+	
+	/**
+	 * @return string Bank Identifier Code (BIC)
+	 */
+	public function getBic()
+	{
+		return $this->_bic;
+	}
+
+	/**
+	 * @param  string $headerLogo 
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setHeaderLogo($headerLogo)
+	{
+		if (!is_string($headerLogo))
+			throw new InvalidArgumentException('string expected.');
+		$this->_headerLogo = $headerLogo;
+		return $this;
+	}
+	
+	/**
+	 * @return string 
+	 */
+	public function getHeaderLogo()
+	{
+		return $this->_headerLogo;
+	}
+
+	/**
+	 * @param  string $footer 
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setFooter($footer)
+	{
+		if (!is_string($footer))
+			throw new InvalidArgumentException('string expected.');
+		$this->_footer = $footer;
+		return $this;
+	}
+	
+	/**
+	 * @return string 
+	 */
+	public function getFooter()
+	{
+		return $this->_footer;
+	}
+
+	/**
+	 * @param  string $accountHolder Bank account holder name e.g. "John Doe"
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setAccountHolder($accountHolder)
+	{
+		if (!is_string($accountHolder))
+			throw new InvalidArgumentException('string expected.');
+		$this->_accountHolder = $accountHolder;
+		return $this;
+	}
+	
+	/**
+	 * @return string Bank account holder name e.g. "John Doe"
+	 */
+	public function getAccountHolder()
+	{
+		return $this->_accountHolder;
+	}
+
+	/**
+	 * @param  string $cGlaeubigerID 
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setCGlaeubigerID($cGlaeubigerID)
+	{
+		if (!is_string($cGlaeubigerID))
+			throw new InvalidArgumentException('string expected.');
+		$this->_cGlaeubigerID = $cGlaeubigerID;
+		return $this;
+	}
+	
+	/**
+	 * @return string 
+	 */
+	public function getCGlaeubigerID()
+	{
+		return $this->_cGlaeubigerID;
+	}
+
+	/**
+	 * @param  Identity $companyId 
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setCompanyId(Identity $companyId)
+	{
+		
+		$this->_companyId = $companyId;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity 
+	 */
+	public function getCompanyId()
+	{
+		return $this->_companyId;
+	}
+
+	/**
+	 * @param  boolean $flagUpdate 
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
+	 */
+	public function setFlagUpdate($flagUpdate)
+	{
+		if (!is_bool($flagUpdate))
+			throw new InvalidArgumentException('boolean expected.');
+		$this->_flagUpdate = $flagUpdate;
+		return $this;
+	}
+	
+	/**
+	 * @return boolean 
+	 */
+	public function getFlagUpdate()
+	{
+		return $this->_flagUpdate;
+	}
+
+	/**
+	 * @param  boolean $isActive 
+	 * @return \jtl\Connector\Model\Company
+	 * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
+	 */
+	public function setIsActive($isActive)
+	{
+		if (!is_bool($isActive))
+			throw new InvalidArgumentException('boolean expected.');
+		$this->_isActive = $isActive;
+		return $this;
+	}
+	
+	/**
+	 * @return boolean 
+	 */
+	public function getIsActive()
+	{
+		return $this->_isActive;
+	}
 }
+
