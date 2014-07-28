@@ -18,6 +18,34 @@ use \jtl\Core\Model\DataModel as CoreModel;
  */
 class DataModel extends CoreModel
 {
+    const ACTION_COMPLETE = 'complete';
+    const ACTION_INSERT = 'insert';
+    const ACTION_UPDATE = 'update';
+    const ACTION_DELETE = 'delete';
+
+    /**
+     * @type string
+     */
+    protected $action = '';
+
+    /**
+     * @param  string $action 
+     * @return \jtl\Connector\Model\DataModel
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setAction($action)
+    {
+        return $this->setProperty('action', $action, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getAction()
+    {
+        return $this->action;
+    }
+
     /**
      * Convert the Model into stdClass Object
      *
