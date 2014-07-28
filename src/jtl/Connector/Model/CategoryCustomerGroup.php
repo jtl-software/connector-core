@@ -1,123 +1,164 @@
-<?php
+﻿<?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Category
+ * @subpackage #todo: get_main_controller#
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Link customergroup with category. Set optional discount on category for customergroup. 
+ * Link customergroup with category. Set optional discount on category for customergroup. .
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Category
+ * @subpackage #todo: get_main_controller#
  */
 class CategoryCustomerGroup extends DataModel
 {
     /**
-     * @var Identity Reference to customerGroup
-     */
-    protected $_customerGroupId = null;
-    
-    /**
-     * @var Identity Reference to category
+     * @type Identity Reference to category
      */
     protected $_categoryId = null;
-    
+
     /**
-     * @var double Optional discount on products in specified categoryId for  customerGroupId
+     * @type Identity Reference to customerGroup
      */
-    protected $_discount = 0;
-    
+    protected $_customerGroupId = null;
+
     /**
-     * @var mixed:string
+     * @type integer 
      */
-    protected $_identities = array(
-        '_customerGroupId',
-        '_categoryId'
-    );
-    
+    protected $_connectorId = 0;
+
     /**
-     * CategoryCustomerGroup Setter
-     *
-     * @param string $name
-     * @param string $value
+     * @type float|null Optional discount on products in specified categoryId for  customerGroupId
      */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_customerGroupId":
-                case "_categoryId":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-                case "_discount":
-                
-                    $this->$name = (double)$value;
-                    break;
-            
-            }
-        }
-    }
-    
+    protected $_discount = 0.0;
+
     /**
-     * @param Identity $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\CategoryCustomerGroup
+	 * Nav [CategoryCustomerGroup » Many]
+	 *
+     * @type \jtl\Connector\Model\Category[]
      */
-    public function setCustomerGroupId(Identity $customerGroupId)
-    {
-        $this->_customerGroupId = $customerGroupId;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to customerGroup
-     */
-    public function getCustomerGroupId()
-    {
-        return $this->_customerGroupId;
-    }
-    /**
-     * @param Identity $categoryId Reference to category
-     * @return \jtl\Connector\Model\CategoryCustomerGroup
-     */
-    public function setCategoryId(Identity $categoryId)
-    {
-        $this->_categoryId = $categoryId;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to category
-     */
-    public function getCategoryId()
-    {
-        return $this->_categoryId;
-    }
-    /**
-     * @param double $discount Optional discount on products in specified categoryId for  customerGroupId
-     * @return \jtl\Connector\Model\CategoryCustomerGroup
-     */
-    public function setDiscount($discount)
-    {
-        $this->_discount = (double)$discount;
-        return $this;
-    }
-    
-    /**
-     * @return double Optional discount on products in specified categoryId for  customerGroupId
-     */
-    public function getDiscount()
-    {
-        return $this->_discount;
-    }
+    protected $_category = array();
+
+
+	/**
+	 * @type array
+	 */
+	protected $_identities = array(
+		'_categoryId',
+		'_customerGroupId',
+	);
+
+	/**
+	 * @param  integer $connectorId 
+	 * @return \jtl\Connector\Model\CategoryCustomerGroup
+	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+	 */
+	public function setConnectorId($connectorId)
+	{
+		if (!is_integer($connectorId))
+			throw new InvalidArgumentException('integer expected.');
+		$this->_connectorId = $connectorId;
+		return $this;
+	}
+	
+	/**
+	 * @return integer 
+	 */
+	public function getConnectorId()
+	{
+		return $this->_connectorId;
+	}
+
+	/**
+	 * @param  float $discount Optional discount on products in specified categoryId for  customerGroupId
+	 * @return \jtl\Connector\Model\CategoryCustomerGroup
+	 * @throws InvalidArgumentException if the provided argument is not of type 'float'.
+	 */
+	public function setDiscount($discount)
+	{
+		if (!is_float($discount))
+			throw new InvalidArgumentException('float expected.');
+		$this->_discount = $discount;
+		return $this;
+	}
+	
+	/**
+	 * @return float Optional discount on products in specified categoryId for  customerGroupId
+	 */
+	public function getDiscount()
+	{
+		return $this->_discount;
+	}
+
+	/**
+	 * @param  Identity $categoryId Reference to category
+	 * @return \jtl\Connector\Model\CategoryCustomerGroup
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setCategoryId(Identity $categoryId)
+	{
+		
+		$this->_categoryId = $categoryId;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Reference to category
+	 */
+	public function getCategoryId()
+	{
+		return $this->_categoryId;
+	}
+
+	/**
+	 * @param  Identity $customerGroupId Reference to customerGroup
+	 * @return \jtl\Connector\Model\CategoryCustomerGroup
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setCustomerGroupId(Identity $customerGroupId)
+	{
+		
+		$this->_customerGroupId = $customerGroupId;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Reference to customerGroup
+	 */
+	public function getCustomerGroupId()
+	{
+		return $this->_customerGroupId;
+	}
+
+	/**
+	 * @param  \jtl\Connector\Model\Category $category
+	 * @return \jtl\Connector\Model\CategoryCustomerGroup
+	 */
+	public function addCategory(\jtl\Connector\Model\Category $category)
+	{
+		$this->_category[] = $category;
+		return $this;
+	}
+	
+	/**
+	 * @return Category
+	 */
+	public function getCategory()
+	{
+		return $this->_category;
+	}
+
+	/**
+	 * @return \jtl\Connector\Model\CategoryCustomerGroup
+	 */
+	public function clearCategory()
+	{
+		$this->_category = array();
+		return $this;
+	}
 }
+

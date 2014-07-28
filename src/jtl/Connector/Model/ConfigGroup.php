@@ -1,218 +1,181 @@
-<?php
+﻿<?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage #todo: get_main_controller#
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Config group holds several configItems and settings
+ * Config group holds several configItems and settings.
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage #todo: get_main_controller#
  */
 class ConfigGroup extends DataModel
 {
     /**
-     * @var Identity Unique configGroup id
-     */
-    protected $_id = null;
-    
-    /**
-     * @var string Optional image file path
-     */
-    protected $_imagePath = '';
-    
-    /**
-     * @var int Optional minimum number required selections. Default 0 for no minimum requirement. 
-     */
-    protected $_minimumSelection = 0;
-    
-    /**
-     * @var int Optional maximum number allowed selections. Default 0 for no maximum limitation.
-     */
-    protected $_maximumSelection = 0;
-    
-    /**
-     * @var int Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
-     */
-    protected $_type = 0;
-    
-    /**
-     * @var int Optional sort order number
-     */
-    protected $_sort = 0;
-    
-    /**
-     * @var string Optional internal comment to differantiate config groups by comment name
+     * @type string Optional internal comment to differantiate config groups by comment name
      */
     protected $_comment = '';
-    
+
     /**
-     * @var mixed:string
+     * @type Byte[] 
      */
-    protected $_identities = array(
-        '_id'
-    );
-    
+    protected $_image = null;
+
     /**
-     * ConfigGroup Setter
-     *
-     * @param string $name
-     * @param string $value
+     * @type integer|null Optional maximum number allowed selections. Default 0 for no maximum limitation.
      */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_id":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-                case "_imagePath":
-                case "_comment":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-                case "_minimumSelection":
-                case "_maximumSelection":
-                case "_type":
-                case "_sort":
-                
-                    $this->$name = (int)$value;
-                    break;
-            
-            }
-        }
-    }
-    
+    protected $_maximumSelection = 0;
+
     /**
-     * @param Identity $id Unique configGroup id
-     * @return \jtl\Connector\Model\ConfigGroup
+     * @type integer|null Optional minimum number required selections. Default 0 for no minimum requirement. 
      */
-    public function setId(Identity $id)
-    {
-        $this->_id = $id;
-        return $this;
-    }
-    
+    protected $_minimumSelection = 0;
+
     /**
-     * @return Identity Unique configGroup id
+     * @type integer|null Optional sort order number
      */
-    public function getId()
-    {
-        return $this->_id;
-    }
+    protected $_sort = 0;
+
     /**
-     * @param string $imagePath Optional image file path
-     * @return \jtl\Connector\Model\ConfigGroup
+     * @type integer|null Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      */
-    public function setImagePath($imagePath)
-    {
-        $this->_imagePath = (string)$imagePath;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional image file path
-     */
-    public function getImagePath()
-    {
-        return $this->_imagePath;
-    }
-    /**
-     * @param int $minimumSelection Optional minimum number required selections. Default 0 for no minimum requirement. 
-     * @return \jtl\Connector\Model\ConfigGroup
-     */
-    public function setMinimumSelection($minimumSelection)
-    {
-        $this->_minimumSelection = (int)$minimumSelection;
-        return $this;
-    }
-    
-    /**
-     * @return int Optional minimum number required selections. Default 0 for no minimum requirement. 
-     */
-    public function getMinimumSelection()
-    {
-        return $this->_minimumSelection;
-    }
-    /**
-     * @param int $maximumSelection Optional maximum number allowed selections. Default 0 for no maximum limitation.
-     * @return \jtl\Connector\Model\ConfigGroup
-     */
-    public function setMaximumSelection($maximumSelection)
-    {
-        $this->_maximumSelection = (int)$maximumSelection;
-        return $this;
-    }
-    
-    /**
-     * @return int Optional maximum number allowed selections. Default 0 for no maximum limitation.
-     */
-    public function getMaximumSelection()
-    {
-        return $this->_maximumSelection;
-    }
-    /**
-     * @param int $type Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
-     * @return \jtl\Connector\Model\ConfigGroup
-     */
-    public function setType($type)
-    {
-        $this->_type = (int)$type;
-        return $this;
-    }
-    
-    /**
-     * @return int Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
-     */
-    public function getType()
-    {
-        return $this->_type;
-    }
-    /**
-     * @param int $sort Optional sort order number
-     * @return \jtl\Connector\Model\ConfigGroup
-     */
-    public function setSort($sort)
-    {
-        $this->_sort = (int)$sort;
-        return $this;
-    }
-    
-    /**
-     * @return int Optional sort order number
-     */
-    public function getSort()
-    {
-        return $this->_sort;
-    }
-    /**
-     * @param string $comment Optional internal comment to differantiate config groups by comment name
-     * @return \jtl\Connector\Model\ConfigGroup
-     */
-    public function setComment($comment)
-    {
-        $this->_comment = (string)$comment;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional internal comment to differantiate config groups by comment name
-     */
-    public function getComment()
-    {
-        return $this->_comment;
-    }
+    protected $_type = 0;
+
+
+	/**
+	 * @type array
+	 */
+	protected $_identities = array(
+	);
+
+	/**
+	 * @param  Byte[] $image 
+	 * @return \jtl\Connector\Model\ConfigGroup
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Byte[]'.
+	 */
+	public function setImage(Byte[] $image)
+	{
+		
+		$this->_image = $image;
+		return $this;
+	}
+	
+	/**
+	 * @return Byte[] 
+	 */
+	public function getImage()
+	{
+		return $this->_image;
+	}
+
+	/**
+	 * @param  integer $minimumSelection Optional minimum number required selections. Default 0 for no minimum requirement. 
+	 * @return \jtl\Connector\Model\ConfigGroup
+	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+	 */
+	public function setMinimumSelection($minimumSelection)
+	{
+		if (!is_integer($minimumSelection))
+			throw new InvalidArgumentException('integer expected.');
+		$this->_minimumSelection = $minimumSelection;
+		return $this;
+	}
+	
+	/**
+	 * @return integer Optional minimum number required selections. Default 0 for no minimum requirement. 
+	 */
+	public function getMinimumSelection()
+	{
+		return $this->_minimumSelection;
+	}
+
+	/**
+	 * @param  integer $maximumSelection Optional maximum number allowed selections. Default 0 for no maximum limitation.
+	 * @return \jtl\Connector\Model\ConfigGroup
+	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+	 */
+	public function setMaximumSelection($maximumSelection)
+	{
+		if (!is_integer($maximumSelection))
+			throw new InvalidArgumentException('integer expected.');
+		$this->_maximumSelection = $maximumSelection;
+		return $this;
+	}
+	
+	/**
+	 * @return integer Optional maximum number allowed selections. Default 0 for no maximum limitation.
+	 */
+	public function getMaximumSelection()
+	{
+		return $this->_maximumSelection;
+	}
+
+	/**
+	 * @param  integer $type Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
+	 * @return \jtl\Connector\Model\ConfigGroup
+	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+	 */
+	public function setType($type)
+	{
+		if (!is_integer($type))
+			throw new InvalidArgumentException('integer expected.');
+		$this->_type = $type;
+		return $this;
+	}
+	
+	/**
+	 * @return integer Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
+	 */
+	public function getType()
+	{
+		return $this->_type;
+	}
+
+	/**
+	 * @param  integer $sort Optional sort order number
+	 * @return \jtl\Connector\Model\ConfigGroup
+	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+	 */
+	public function setSort($sort)
+	{
+		if (!is_integer($sort))
+			throw new InvalidArgumentException('integer expected.');
+		$this->_sort = $sort;
+		return $this;
+	}
+	
+	/**
+	 * @return integer Optional sort order number
+	 */
+	public function getSort()
+	{
+		return $this->_sort;
+	}
+
+	/**
+	 * @param  string $comment Optional internal comment to differantiate config groups by comment name
+	 * @return \jtl\Connector\Model\ConfigGroup
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setComment($comment)
+	{
+		if (!is_string($comment))
+			throw new InvalidArgumentException('string expected.');
+		$this->_comment = $comment;
+		return $this;
+	}
+	
+	/**
+	 * @return string Optional internal comment to differantiate config groups by comment name
+	 */
+	public function getComment()
+	{
+		return $this->_comment;
+	}
 }
+

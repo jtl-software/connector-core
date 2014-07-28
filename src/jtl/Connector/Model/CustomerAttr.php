@@ -1,146 +1,164 @@
-<?php
+﻿<?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Customer
+ * @subpackage #todo: get_main_controller#
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Monolingual customer attribute.
+ * Monolingual customer attribute..
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Customer
+ * @subpackage #todo: get_main_controller#
  */
 class CustomerAttr extends DataModel
 {
     /**
-     * @var Identity Unique customerAttr id
-     */
-    protected $_id = null;
-    
-    /**
-     * @var Identity Reference to customer
+     * @type Identity Reference to customer
      */
     protected $_customerId = null;
-    
+
     /**
-     * @var string Attribute key
+     * @type Identity Unique customerAttr id
+     */
+    protected $_id = null;
+
+    /**
+     * @type string Attribute key
      */
     protected $_key = '';
-    
+
     /**
-     * @var string Attribute value
+     * @type string Attribute value
      */
     protected $_value = '';
-    
+
     /**
-     * @var mixed:string
+	 * Nav [CustomerAttr » Many]
+	 *
+     * @type \jtl\Connector\Model\Customer[]
      */
-    protected $_identities = array(
-        '_id',
-        '_customerId'
-    );
-    
-    /**
-     * CustomerAttr Setter
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_id":
-                case "_customerId":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-                case "_key":
-                case "_value":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-            }
-        }
-    }
-    
-    /**
-     * @param Identity $id Unique customerAttr id
-     * @return \jtl\Connector\Model\CustomerAttr
-     */
-    public function setId(Identity $id)
-    {
-        $this->_id = $id;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique customerAttr id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param Identity $customerId Reference to customer
-     * @return \jtl\Connector\Model\CustomerAttr
-     */
-    public function setCustomerId(Identity $customerId)
-    {
-        $this->_customerId = $customerId;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to customer
-     */
-    public function getCustomerId()
-    {
-        return $this->_customerId;
-    }
-    /**
-     * @param string $key Attribute key
-     * @return \jtl\Connector\Model\CustomerAttr
-     */
-    public function setKey($key)
-    {
-        $this->_key = (string)$key;
-        return $this;
-    }
-    
-    /**
-     * @return string Attribute key
-     */
-    public function getKey()
-    {
-        return $this->_key;
-    }
-    /**
-     * @param string $value Attribute value
-     * @return \jtl\Connector\Model\CustomerAttr
-     */
-    public function setValue($value)
-    {
-        $this->_value = (string)$value;
-        return $this;
-    }
-    
-    /**
-     * @return string Attribute value
-     */
-    public function getValue()
-    {
-        return $this->_value;
-    }
+    protected $_customer = array();
+
+
+	/**
+	 * @type array
+	 */
+	protected $_identities = array(
+		'_id',
+		'_customerId',
+	);
+
+	/**
+	 * @param  string $key Attribute key
+	 * @return \jtl\Connector\Model\CustomerAttr
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setKey($key)
+	{
+		if (!is_string($key))
+			throw new InvalidArgumentException('string expected.');
+		$this->_key = $key;
+		return $this;
+	}
+	
+	/**
+	 * @return string Attribute key
+	 */
+	public function getKey()
+	{
+		return $this->_key;
+	}
+
+	/**
+	 * @param  string $value Attribute value
+	 * @return \jtl\Connector\Model\CustomerAttr
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setValue($value)
+	{
+		if (!is_string($value))
+			throw new InvalidArgumentException('string expected.');
+		$this->_value = $value;
+		return $this;
+	}
+	
+	/**
+	 * @return string Attribute value
+	 */
+	public function getValue()
+	{
+		return $this->_value;
+	}
+
+	/**
+	 * @param  Identity $id Unique customerAttr id
+	 * @return \jtl\Connector\Model\CustomerAttr
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setId(Identity $id)
+	{
+		
+		$this->_id = $id;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Unique customerAttr id
+	 */
+	public function getId()
+	{
+		return $this->_id;
+	}
+
+	/**
+	 * @param  Identity $customerId Reference to customer
+	 * @return \jtl\Connector\Model\CustomerAttr
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setCustomerId(Identity $customerId)
+	{
+		
+		$this->_customerId = $customerId;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Reference to customer
+	 */
+	public function getCustomerId()
+	{
+		return $this->_customerId;
+	}
+
+	/**
+	 * @param  \jtl\Connector\Model\Customer $customer
+	 * @return \jtl\Connector\Model\CustomerAttr
+	 */
+	public function addCustomer(\jtl\Connector\Model\Customer $customer)
+	{
+		$this->_customer[] = $customer;
+		return $this;
+	}
+	
+	/**
+	 * @return Customer
+	 */
+	public function getCustomer()
+	{
+		return $this->_customer;
+	}
+
+	/**
+	 * @return \jtl\Connector\Model\CustomerAttr
+	 */
+	public function clearCustomer()
+	{
+		$this->_customer = array();
+		return $this;
+	}
 }
+

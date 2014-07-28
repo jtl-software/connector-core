@@ -1,707 +1,686 @@
-<?php
+﻿<?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage CustomerOrder
+ * @subpackage #todo: get_main_controller#
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Customer order properties.
+ * Customer order properties..
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage CustomerOrder
+ * @subpackage #todo: get_main_controller#
  */
 class CustomerOrder extends DataModel
 {
     /**
-     * @var string - Initial status for new customerOrder, when customer finished order and order has not yet been payed or fetched
-     */
-    const STATUS_NEW = 'new';
-    
-    /**
-     * @var string - Customer order in process
-     */
-    const STATUS_PROCESSING = 'processing';
-    
-    /**
-     * @var string - Status when order is payed completely
-     */
-    const STATUS_PAYMENT_COMPLETED = 'payment_completed';
-    
-    /**
-     * @var string - Order payed and shipped completely
-     */
-    const STATUS_COMPLETED = 'completed';
-    
-    /**
-     * @var string - Order has been shipped partially
-     */
-    const STATUS_PARTIALLY_SHIPPED = 'partially_shipped';
-    
-    /**
-     * @var string - Cancelled by merchant or customer
-     */
-    const STATUS_CANCELLED = 'cancelled';
-    
-    /**
-     * @var string - New status, when changes have been made to customerOrder (e.g. item quantity change)
-     */
-    const STATUS_UPDATED = 'updated';
-    
-    /**
-     * @var string - Previous status was cancelled, next status is reactivated (similar to new or processing)
-     */
-    const STATUS_REACTIVATED = 'reactivated';
-    
-    /**
-     * @var string - Waiting for payment confirmation. Depending on payment method, a customerOrder with pending_payment will not be processed until payment ist confirmed. 
-     */
-    const STATUS_PENDING_PAYMENT = 'pending_payment';
-    
-    /**
-     * @var Identity Unique customerOrder id
-     */
-    protected $_id = null;
-    
-    /**
-     * @var Identity Optional reference to customer. 
-     */
-    protected $_customerId = null;
-    
-    /**
-     * @var Identity Reference to shippingAddress
-     */
-    protected $_shippingAddressId = null;
-    
-    /**
-     * @var Identity Reference to billingAddress
+     * @type Identity Reference to billingAddress
      */
     protected $_billingAddressId = null;
-    
+
     /**
-     * @var string Identifier code for shippingMethod
+     * @type Identity 
      */
-    protected $_shippingMethodCode = '';
-    
+    protected $_companyId = null;
+
     /**
-     * @var string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
+     * @type Identity Optional reference to customer. 
      */
-    protected $_localeName = '';
-    
+    protected $_customerId = null;
+
     /**
-     * @var string Currency ISO set, when customerOrder was finished
+     * @type Identity Unique customerOrder id
      */
-    protected $_currencyIso = '';
-    
+    protected $_id = null;
+
     /**
-     * @var string Optional Estimated delivery date set by ERP System
+     * @type Identity Reference to shippingAddress
      */
-    protected $_estimatedDeliveryDate = null;
-    
+    protected $_shippingAddressId = null;
+
     /**
-     * @var double Optional customer credit (credit reduces total sum)
-     */
-    protected $_credit = 0;
-    
-    /**
-     * @var double Total sum to pay
-     */
-    protected $_totalSum = 0.0;
-    
-    /**
-     * @var string Optional session id or session hash
-     */
-    protected $_session = '';
-    
-    /**
-     * @var string Optional shipping method name
-     */
-    protected $_shippingMethodName = '';
-    
-    /**
-     * @var string Optional order number (usually set by ERP System later)
-     */
-    protected $_orderNumber = '';
-    
-    /**
-     * @var string Additional shipping info
-     */
-    protected $_shippingInfo = '';
-    
-    /**
-     * @var string Shipping date
-     */
-    protected $_shippingDate = null;
-    
-    /**
-     * @var string Payment date
-     */
-    protected $_paymentDate = null;
-    
-    /**
-     * @var string Date from when customer will receive notification to rate order
-     */
-    protected $_ratingNotificationDate = null;
-    
-    /**
-     * @var string Optional TrackingID (not Tracking URL)
-     */
-    protected $_tracking = '';
-    
-    /**
-     * @var string Optional additional note
-     */
-    protected $_note = '';
-    
-    /**
-     * @var string Optional Carrier name
-     */
-    protected $_carrierName = '';
-    
-    /**
-     * @var string Optional Tracking URL
-     */
-    protected $_trackingURL = '';
-    
-    /**
-     * @var string Optional customer IP address at the time of checkout. Do not store full IP-Adress (dependent on local laws or regulations)
-     */
-    protected $_ip = '';
-    
-    /**
-     * @var bool Optional flag, if customerOrder is fetched by ERP System
-     */
-    protected $_isFetched = false;
-    
-    /**
-     * @var string Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
-     */
-    protected $_status = 'new';
-    
-    /**
-     * @var string Date of creation
+     * @type DateTime|null Date of creation
      */
     protected $_created = null;
-    
+
     /**
-     * @var string Optional payment module code
+     * @type string Currency ISO set, when customerOrder was finished
+     */
+    protected $_currencyIso = '';
+
+    /**
+     * @type DateTime|null Optional Estimated delivery date set by ERP System
+     */
+    protected $_estimatedDeliveryDate = null;
+
+    /**
+     * @type float 
+     */
+    protected $_factor = 0.0;
+
+    /**
+     * @type boolean 
+     */
+    protected $_isFullyDelivered = false;
+
+    /**
+     * @type boolean 
+     */
+    protected $_isPlatform = false;
+
+    /**
+     * @type integer 
+     */
+    protected $_languageId = 0;
+
+    /**
+     * @type integer|null 
+     */
+    protected $_nGesperrt = 0;
+
+    /**
+     * @type string Optional order number (usually set by ERP System later)
+     */
+    protected $_orderNumber = '';
+
+    /**
+     * @type DateTime|null Payment date
+     */
+    protected $_paymentDate = null;
+
+    /**
+     * @type string Optional payment module code
      */
     protected $_paymentModuleCode = '';
-    
+
     /**
-     * @var mixed:string
+     * @type DateTime|null Shipping date
      */
-    protected $_identities = array(
-        '_id',
-        '_customerId',
-        '_shippingAddressId',
-        '_billingAddressId'
-    );
-    
+    protected $_shippingDate = null;
+
     /**
-     * CustomerOrder Setter
-     *
-     * @param string $name
-     * @param string $value
+     * @type string Additional shipping info
      */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_id":
-                case "_customerId":
-                case "_shippingAddressId":
-                case "_billingAddressId":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-                case "_shippingMethodCode":
-                case "_localeName":
-                case "_currencyIso":
-                case "_estimatedDeliveryDate":
-                case "_session":
-                case "_shippingMethodName":
-                case "_orderNumber":
-                case "_shippingInfo":
-                case "_shippingDate":
-                case "_paymentDate":
-                case "_ratingNotificationDate":
-                case "_tracking":
-                case "_note":
-                case "_carrierName":
-                case "_trackingURL":
-                case "_ip":
-                case "_status":
-                case "_created":
-                case "_paymentModuleCode":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-                case "_credit":
-                case "_totalSum":
-                
-                    $this->$name = (double)$value;
-                    break;
-            
-                case "_isFetched":
-                
-                    $this->$name = (bool)$value;
-                    break;
-            
-            }
-        }
-    }
-    
+    protected $_shippingInfo = '';
+
     /**
-     * @param Identity $id Unique customerOrder id
-     * @return \jtl\Connector\Model\CustomerOrder
+     * @type string 
      */
-    public function setId(Identity $id)
-    {
-        $this->_id = $id;
-        return $this;
-    }
-    
+    protected $_status = '';
+
     /**
-     * @return Identity Unique customerOrder id
+	 * Nav [CustomerOrder » One]
+	 *
+     * @type \jtl\Connector\Model\CustomerOrderItem[]
      */
-    public function getId()
-    {
-        return $this->_id;
-    }
+    protected $_positions = array();
+
     /**
-     * @param Identity $customerId Optional reference to customer. 
-     * @return \jtl\Connector\Model\CustomerOrder
+	 * Nav [CustomerOrder » ZeroOrOne]
+	 *
+     * @type \jtl\Connector\Model\CustomerOrderAttr[]
      */
-    public function setCustomerId(Identity $customerId)
-    {
-        $this->_customerId = $customerId;
-        return $this;
-    }
-    
+    protected $_attrs = array();
+
     /**
-     * @return Identity Optional reference to customer. 
+	 * Nav [CustomerOrder » Many]
+	 *
+     * @type \jtl\Connector\Model\CustomerOrderBillingAddress[]
      */
-    public function getCustomerId()
-    {
-        return $this->_customerId;
-    }
+    protected $_billingAddress = array();
+
     /**
-     * @param Identity $shippingAddressId Reference to shippingAddress
-     * @return \jtl\Connector\Model\CustomerOrder
+	 * Nav [CustomerOrder » Many]
+	 *
+     * @type \jtl\Connector\Model\CustomerOrderShippingAddress[]
      */
-    public function setShippingAddressId(Identity $shippingAddressId)
-    {
-        $this->_shippingAddressId = $shippingAddressId;
-        return $this;
-    }
-    
+    protected $_shippingAddress = array();
+
     /**
-     * @return Identity Reference to shippingAddress
+	 * Nav [CustomerOrder » ZeroOrOne]
+	 *
+     * @type \jtl\Connector\Model\CustomerOrderPaymentInfo[]
      */
-    public function getShippingAddressId()
-    {
-        return $this->_shippingAddressId;
-    }
-    /**
-     * @param Identity $billingAddressId Reference to billingAddress
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setBillingAddressId(Identity $billingAddressId)
-    {
-        $this->_billingAddressId = $billingAddressId;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to billingAddress
-     */
-    public function getBillingAddressId()
-    {
-        return $this->_billingAddressId;
-    }
-    /**
-     * @param string $shippingMethodCode Identifier code for shippingMethod
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setShippingMethodCode($shippingMethodCode)
-    {
-        $this->_shippingMethodCode = (string)$shippingMethodCode;
-        return $this;
-    }
-    
-    /**
-     * @return string Identifier code for shippingMethod
-     */
-    public function getShippingMethodCode()
-    {
-        return $this->_shippingMethodCode;
-    }
-    /**
-     * @param string $localeName Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setLocaleName($localeName)
-    {
-        $this->_localeName = (string)$localeName;
-        return $this;
-    }
-    
-    /**
-     * @return string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
-     */
-    public function getLocaleName()
-    {
-        return $this->_localeName;
-    }
-    /**
-     * @param string $currencyIso Currency ISO set, when customerOrder was finished
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setCurrencyIso($currencyIso)
-    {
-        $this->_currencyIso = (string)$currencyIso;
-        return $this;
-    }
-    
-    /**
-     * @return string Currency ISO set, when customerOrder was finished
-     */
-    public function getCurrencyIso()
-    {
-        return $this->_currencyIso;
-    }
-    /**
-     * @param string $estimatedDeliveryDate Optional Estimated delivery date set by ERP System
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setEstimatedDeliveryDate($estimatedDeliveryDate)
-    {
-        $this->_estimatedDeliveryDate = (string)$estimatedDeliveryDate;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional Estimated delivery date set by ERP System
-     */
-    public function getEstimatedDeliveryDate()
-    {
-        return $this->_estimatedDeliveryDate;
-    }
-    /**
-     * @param double $credit Optional customer credit (credit reduces total sum)
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setCredit($credit)
-    {
-        $this->_credit = (double)$credit;
-        return $this;
-    }
-    
-    /**
-     * @return double Optional customer credit (credit reduces total sum)
-     */
-    public function getCredit()
-    {
-        return $this->_credit;
-    }
-    /**
-     * @param double $totalSum Total sum to pay
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setTotalSum($totalSum)
-    {
-        $this->_totalSum = (double)$totalSum;
-        return $this;
-    }
-    
-    /**
-     * @return double Total sum to pay
-     */
-    public function getTotalSum()
-    {
-        return $this->_totalSum;
-    }
-    /**
-     * @param string $session Optional session id or session hash
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setSession($session)
-    {
-        $this->_session = (string)$session;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional session id or session hash
-     */
-    public function getSession()
-    {
-        return $this->_session;
-    }
-    /**
-     * @param string $shippingMethodName Optional shipping method name
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setShippingMethodName($shippingMethodName)
-    {
-        $this->_shippingMethodName = (string)$shippingMethodName;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional shipping method name
-     */
-    public function getShippingMethodName()
-    {
-        return $this->_shippingMethodName;
-    }
-    /**
-     * @param string $orderNumber Optional order number (usually set by ERP System later)
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setOrderNumber($orderNumber)
-    {
-        $this->_orderNumber = (string)$orderNumber;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional order number (usually set by ERP System later)
-     */
-    public function getOrderNumber()
-    {
-        return $this->_orderNumber;
-    }
-    /**
-     * @param string $shippingInfo Additional shipping info
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setShippingInfo($shippingInfo)
-    {
-        $this->_shippingInfo = (string)$shippingInfo;
-        return $this;
-    }
-    
-    /**
-     * @return string Additional shipping info
-     */
-    public function getShippingInfo()
-    {
-        return $this->_shippingInfo;
-    }
-    /**
-     * @param string $shippingDate Shipping date
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setShippingDate($shippingDate)
-    {
-        $this->_shippingDate = (string)$shippingDate;
-        return $this;
-    }
-    
-    /**
-     * @return string Shipping date
-     */
-    public function getShippingDate()
-    {
-        return $this->_shippingDate;
-    }
-    /**
-     * @param string $paymentDate Payment date
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setPaymentDate($paymentDate)
-    {
-        $this->_paymentDate = (string)$paymentDate;
-        return $this;
-    }
-    
-    /**
-     * @return string Payment date
-     */
-    public function getPaymentDate()
-    {
-        return $this->_paymentDate;
-    }
-    /**
-     * @param string $ratingNotificationDate Date from when customer will receive notification to rate order
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setRatingNotificationDate($ratingNotificationDate)
-    {
-        $this->_ratingNotificationDate = (string)$ratingNotificationDate;
-        return $this;
-    }
-    
-    /**
-     * @return string Date from when customer will receive notification to rate order
-     */
-    public function getRatingNotificationDate()
-    {
-        return $this->_ratingNotificationDate;
-    }
-    /**
-     * @param string $tracking Optional TrackingID (not Tracking URL)
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setTracking($tracking)
-    {
-        $this->_tracking = (string)$tracking;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional TrackingID (not Tracking URL)
-     */
-    public function getTracking()
-    {
-        return $this->_tracking;
-    }
-    /**
-     * @param string $note Optional additional note
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setNote($note)
-    {
-        $this->_note = (string)$note;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional additional note
-     */
-    public function getNote()
-    {
-        return $this->_note;
-    }
-    /**
-     * @param string $carrierName Optional Carrier name
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setCarrierName($carrierName)
-    {
-        $this->_carrierName = (string)$carrierName;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional Carrier name
-     */
-    public function getCarrierName()
-    {
-        return $this->_carrierName;
-    }
-    /**
-     * @param string $trackingURL Optional Tracking URL
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setTrackingURL($trackingURL)
-    {
-        $this->_trackingURL = (string)$trackingURL;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional Tracking URL
-     */
-    public function getTrackingURL()
-    {
-        return $this->_trackingURL;
-    }
-    /**
-     * @param string $ip Optional customer IP address at the time of checkout. Do not store full IP-Adress (dependent on local laws or regulations)
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setIp($ip)
-    {
-        $this->_ip = (string)$ip;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional customer IP address at the time of checkout. Do not store full IP-Adress (dependent on local laws or regulations)
-     */
-    public function getIp()
-    {
-        return $this->_ip;
-    }
-    /**
-     * @param bool $isFetched Optional flag, if customerOrder is fetched by ERP System
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setIsFetched($isFetched)
-    {
-        $this->_isFetched = (bool)$isFetched;
-        return $this;
-    }
-    
-    /**
-     * @return bool Optional flag, if customerOrder is fetched by ERP System
-     */
-    public function getIsFetched()
-    {
-        return $this->_isFetched;
-    }
-    /**
-     * @param string $status Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setStatus($status)
-    {
-        $this->_status = (string)$status;
-        return $this;
-    }
-    
-    /**
-     * @return string Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
-     */
-    public function getStatus()
-    {
-        return $this->_status;
-    }
-    /**
-     * @param string $created Date of creation
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setCreated($created)
-    {
-        $this->_created = (string)$created;
-        return $this;
-    }
-    
-    /**
-     * @return string Date of creation
-     */
-    public function getCreated()
-    {
-        return $this->_created;
-    }
-    /**
-     * @param string $paymentModuleCode Optional payment module code
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setPaymentModuleCode($paymentModuleCode)
-    {
-        $this->_paymentModuleCode = (string)$paymentModuleCode;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional payment module code
-     */
-    public function getPaymentModuleCode()
-    {
-        return $this->_paymentModuleCode;
-    }
+    protected $_paymentInfo = array();
+
+
+	/**
+	 * @type array
+	 */
+	protected $_identities = array(
+		'_id',
+		'_customerId',
+		'_shippingAddressId',
+		'_billingAddressId',
+		'_companyId',
+	);
+
+	/**
+	 * @param  string $orderNumber Optional order number (usually set by ERP System later)
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setOrderNumber($orderNumber)
+	{
+		if (!is_string($orderNumber))
+			throw new InvalidArgumentException('string expected.');
+		$this->_orderNumber = $orderNumber;
+		return $this;
+	}
+	
+	/**
+	 * @return string Optional order number (usually set by ERP System later)
+	 */
+	public function getOrderNumber()
+	{
+		return $this->_orderNumber;
+	}
+
+	/**
+	 * @param  DateTime $created Date of creation
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
+	 */
+	public function setCreated(DateTime $created)
+	{
+		
+		$this->_created = $created;
+		return $this;
+	}
+	
+	/**
+	 * @return DateTime Date of creation
+	 */
+	public function getCreated()
+	{
+		return $this->_created;
+	}
+
+	/**
+	 * @param  string $shippingInfo Additional shipping info
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setShippingInfo($shippingInfo)
+	{
+		if (!is_string($shippingInfo))
+			throw new InvalidArgumentException('string expected.');
+		$this->_shippingInfo = $shippingInfo;
+		return $this;
+	}
+	
+	/**
+	 * @return string Additional shipping info
+	 */
+	public function getShippingInfo()
+	{
+		return $this->_shippingInfo;
+	}
+
+	/**
+	 * @param  DateTime $shippingDate Shipping date
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
+	 */
+	public function setShippingDate(DateTime $shippingDate)
+	{
+		
+		$this->_shippingDate = $shippingDate;
+		return $this;
+	}
+	
+	/**
+	 * @return DateTime Shipping date
+	 */
+	public function getShippingDate()
+	{
+		return $this->_shippingDate;
+	}
+
+	/**
+	 * @param  DateTime $estimatedDeliveryDate Optional Estimated delivery date set by ERP System
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
+	 */
+	public function setEstimatedDeliveryDate(DateTime $estimatedDeliveryDate)
+	{
+		
+		$this->_estimatedDeliveryDate = $estimatedDeliveryDate;
+		return $this;
+	}
+	
+	/**
+	 * @return DateTime Optional Estimated delivery date set by ERP System
+	 */
+	public function getEstimatedDeliveryDate()
+	{
+		return $this->_estimatedDeliveryDate;
+	}
+
+	/**
+	 * @param  string $currencyIso Currency ISO set, when customerOrder was finished
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setCurrencyIso($currencyIso)
+	{
+		if (!is_string($currencyIso))
+			throw new InvalidArgumentException('string expected.');
+		$this->_currencyIso = $currencyIso;
+		return $this;
+	}
+	
+	/**
+	 * @return string Currency ISO set, when customerOrder was finished
+	 */
+	public function getCurrencyIso()
+	{
+		return $this->_currencyIso;
+	}
+
+	/**
+	 * @param  integer $languageId 
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+	 */
+	public function setLanguageId($languageId)
+	{
+		if (!is_integer($languageId))
+			throw new InvalidArgumentException('integer expected.');
+		$this->_languageId = $languageId;
+		return $this;
+	}
+	
+	/**
+	 * @return integer 
+	 */
+	public function getLanguageId()
+	{
+		return $this->_languageId;
+	}
+
+	/**
+	 * @param  string $paymentModuleCode Optional payment module code
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setPaymentModuleCode($paymentModuleCode)
+	{
+		if (!is_string($paymentModuleCode))
+			throw new InvalidArgumentException('string expected.');
+		$this->_paymentModuleCode = $paymentModuleCode;
+		return $this;
+	}
+	
+	/**
+	 * @return string Optional payment module code
+	 */
+	public function getPaymentModuleCode()
+	{
+		return $this->_paymentModuleCode;
+	}
+
+	/**
+	 * @param  DateTime $paymentDate Payment date
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
+	 */
+	public function setPaymentDate(DateTime $paymentDate)
+	{
+		
+		$this->_paymentDate = $paymentDate;
+		return $this;
+	}
+	
+	/**
+	 * @return DateTime Payment date
+	 */
+	public function getPaymentDate()
+	{
+		return $this->_paymentDate;
+	}
+
+	/**
+	 * @param  float $factor 
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 * @throws InvalidArgumentException if the provided argument is not of type 'float'.
+	 */
+	public function setFactor($factor)
+	{
+		if (!is_float($factor))
+			throw new InvalidArgumentException('float expected.');
+		$this->_factor = $factor;
+		return $this;
+	}
+	
+	/**
+	 * @return float 
+	 */
+	public function getFactor()
+	{
+		return $this->_factor;
+	}
+
+	/**
+	 * @param  integer $nGesperrt 
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+	 */
+	public function setNGesperrt($nGesperrt)
+	{
+		if (!is_integer($nGesperrt))
+			throw new InvalidArgumentException('integer expected.');
+		$this->_nGesperrt = $nGesperrt;
+		return $this;
+	}
+	
+	/**
+	 * @return integer 
+	 */
+	public function getNGesperrt()
+	{
+		return $this->_nGesperrt;
+	}
+
+	/**
+	 * @param  Identity $id Unique customerOrder id
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setId(Identity $id)
+	{
+		
+		$this->_id = $id;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Unique customerOrder id
+	 */
+	public function getId()
+	{
+		return $this->_id;
+	}
+
+	/**
+	 * @param  Identity $customerId Optional reference to customer. 
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setCustomerId(Identity $customerId)
+	{
+		
+		$this->_customerId = $customerId;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Optional reference to customer. 
+	 */
+	public function getCustomerId()
+	{
+		return $this->_customerId;
+	}
+
+	/**
+	 * @param  Identity $shippingAddressId Reference to shippingAddress
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setShippingAddressId(Identity $shippingAddressId)
+	{
+		
+		$this->_shippingAddressId = $shippingAddressId;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Reference to shippingAddress
+	 */
+	public function getShippingAddressId()
+	{
+		return $this->_shippingAddressId;
+	}
+
+	/**
+	 * @param  Identity $billingAddressId Reference to billingAddress
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setBillingAddressId(Identity $billingAddressId)
+	{
+		
+		$this->_billingAddressId = $billingAddressId;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Reference to billingAddress
+	 */
+	public function getBillingAddressId()
+	{
+		return $this->_billingAddressId;
+	}
+
+	/**
+	 * @param  Identity $companyId 
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setCompanyId(Identity $companyId)
+	{
+		
+		$this->_companyId = $companyId;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity 
+	 */
+	public function getCompanyId()
+	{
+		return $this->_companyId;
+	}
+
+	/**
+	 * @param  boolean $isPlatform 
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
+	 */
+	public function setIsPlatform($isPlatform)
+	{
+		if (!is_bool($isPlatform))
+			throw new InvalidArgumentException('boolean expected.');
+		$this->_isPlatform = $isPlatform;
+		return $this;
+	}
+	
+	/**
+	 * @return boolean 
+	 */
+	public function getIsPlatform()
+	{
+		return $this->_isPlatform;
+	}
+
+	/**
+	 * @param  boolean $isFullyDelivered 
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
+	 */
+	public function setIsFullyDelivered($isFullyDelivered)
+	{
+		if (!is_bool($isFullyDelivered))
+			throw new InvalidArgumentException('boolean expected.');
+		$this->_isFullyDelivered = $isFullyDelivered;
+		return $this;
+	}
+	
+	/**
+	 * @return boolean 
+	 */
+	public function getIsFullyDelivered()
+	{
+		return $this->_isFullyDelivered;
+	}
+
+	/**
+	 * @param  string $status 
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setStatus($status)
+	{
+		if (!is_string($status))
+			throw new InvalidArgumentException('string expected.');
+		$this->_status = $status;
+		return $this;
+	}
+	
+	/**
+	 * @return string 
+	 */
+	public function getStatus()
+	{
+		return $this->_status;
+	}
+
+	/**
+	 * @param  \jtl\Connector\Model\CustomerOrderItem $position
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 */
+	public function addPosition(\jtl\Connector\Model\CustomerOrderItem $position)
+	{
+		$this->_positions[] = $position;
+		return $this;
+	}
+	
+	/**
+	 * @return CustomerOrderItem
+	 */
+	public function getPositions()
+	{
+		return $this->_positions;
+	}
+
+	/**
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 */
+	public function clearPositions()
+	{
+		$this->_positions = array();
+		return $this;
+	}
+
+	/**
+	 * @param  \jtl\Connector\Model\CustomerOrderAttr $attr
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 */
+	public function addAttr(\jtl\Connector\Model\CustomerOrderAttr $attr)
+	{
+		$this->_attrs[] = $attr;
+		return $this;
+	}
+	
+	/**
+	 * @return CustomerOrderAttr
+	 */
+	public function getAttrs()
+	{
+		return $this->_attrs;
+	}
+
+	/**
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 */
+	public function clearAttrs()
+	{
+		$this->_attrs = array();
+		return $this;
+	}
+
+	/**
+	 * @param  \jtl\Connector\Model\CustomerOrderBillingAddress $billingAddress
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 */
+	public function addBillingAddress(\jtl\Connector\Model\CustomerOrderBillingAddress $billingAddress)
+	{
+		$this->_billingAddress[] = $billingAddress;
+		return $this;
+	}
+	
+	/**
+	 * @return CustomerOrderBillingAddress
+	 */
+	public function getBillingAddress()
+	{
+		return $this->_billingAddress;
+	}
+
+	/**
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 */
+	public function clearBillingAddress()
+	{
+		$this->_billingAddress = array();
+		return $this;
+	}
+
+	/**
+	 * @param  \jtl\Connector\Model\CustomerOrderShippingAddress $shippingAddress
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 */
+	public function addShippingAddress(\jtl\Connector\Model\CustomerOrderShippingAddress $shippingAddress)
+	{
+		$this->_shippingAddress[] = $shippingAddress;
+		return $this;
+	}
+	
+	/**
+	 * @return CustomerOrderShippingAddress
+	 */
+	public function getShippingAddress()
+	{
+		return $this->_shippingAddress;
+	}
+
+	/**
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 */
+	public function clearShippingAddress()
+	{
+		$this->_shippingAddress = array();
+		return $this;
+	}
+
+	/**
+	 * @param  \jtl\Connector\Model\CustomerOrderPaymentInfo $paymentInfo
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 */
+	public function addPaymentInfo(\jtl\Connector\Model\CustomerOrderPaymentInfo $paymentInfo)
+	{
+		$this->_paymentInfo[] = $paymentInfo;
+		return $this;
+	}
+	
+	/**
+	 * @return CustomerOrderPaymentInfo
+	 */
+	public function getPaymentInfo()
+	{
+		return $this->_paymentInfo;
+	}
+
+	/**
+	 * @return \jtl\Connector\Model\CustomerOrder
+	 */
+	public function clearPaymentInfo()
+	{
+		$this->_paymentInfo = array();
+		return $this;
+	}
 }
+

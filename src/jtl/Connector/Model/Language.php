@@ -1,172 +1,156 @@
-<?php
+﻿<?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage #todo: get_main_controller#
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Global language model
+ * Global language model.
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage #todo: get_main_controller#
  */
 class Language extends DataModel
 {
     /**
-     * @var Identity Unique language id
+     * @type Identity Unique language id
      */
     protected $_id = null;
-    
+
     /**
-     * @var string English term
-     */
-    protected $_nameEnglish = '';
-    
-    /**
-     * @var string German term
-     */
-    protected $_nameGerman = '';
-    
-    /**
-     * @var string Locale
-     */
-    protected $_localeName = '';
-    
-    /**
-     * @var bool Flag default language for frontend. Exact 1 language must be marked as default.
+     * @type boolean Flag default language for frontend. Exact 1 language must be marked as default.
      */
     protected $_isDefault = false;
-    
+
     /**
-     * @var mixed:string
+     * @type string Locale
      */
-    protected $_identities = array(
-        '_id'
-    );
-    
+    protected $_localeName = '';
+
     /**
-     * Language Setter
-     *
-     * @param string $name
-     * @param string $value
+     * @type string English term
      */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_id":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-                case "_nameEnglish":
-                case "_nameGerman":
-                case "_localeName":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-                case "_isDefault":
-                
-                    $this->$name = (bool)$value;
-                    break;
-            
-            }
-        }
-    }
-    
+    protected $_nameEnglish = '';
+
     /**
-     * @param Identity $id Unique language id
-     * @return \jtl\Connector\Model\Language
+     * @type string German term
      */
-    public function setId(Identity $id)
-    {
-        $this->_id = $id;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique language id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param string $nameEnglish English term
-     * @return \jtl\Connector\Model\Language
-     */
-    public function setNameEnglish($nameEnglish)
-    {
-        $this->_nameEnglish = (string)$nameEnglish;
-        return $this;
-    }
-    
-    /**
-     * @return string English term
-     */
-    public function getNameEnglish()
-    {
-        return $this->_nameEnglish;
-    }
-    /**
-     * @param string $nameGerman German term
-     * @return \jtl\Connector\Model\Language
-     */
-    public function setNameGerman($nameGerman)
-    {
-        $this->_nameGerman = (string)$nameGerman;
-        return $this;
-    }
-    
-    /**
-     * @return string German term
-     */
-    public function getNameGerman()
-    {
-        return $this->_nameGerman;
-    }
-    /**
-     * @param string $localeName Locale
-     * @return \jtl\Connector\Model\Language
-     */
-    public function setLocaleName($localeName)
-    {
-        $this->_localeName = (string)$localeName;
-        return $this;
-    }
-    
-    /**
-     * @return string Locale
-     */
-    public function getLocaleName()
-    {
-        return $this->_localeName;
-    }
-    /**
-     * @param bool $isDefault Flag default language for frontend. Exact 1 language must be marked as default.
-     * @return \jtl\Connector\Model\Language
-     */
-    public function setIsDefault($isDefault)
-    {
-        $this->_isDefault = (bool)$isDefault;
-        return $this;
-    }
-    
-    /**
-     * @return bool Flag default language for frontend. Exact 1 language must be marked as default.
-     */
-    public function getIsDefault()
-    {
-        return $this->_isDefault;
-    }
+    protected $_nameGerman = '';
+
+
+	/**
+	 * @type array
+	 */
+	protected $_identities = array(
+		'_id',
+	);
+
+	/**
+	 * @param  string $nameEnglish English term
+	 * @return \jtl\Connector\Model\Language
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setNameEnglish($nameEnglish)
+	{
+		if (!is_string($nameEnglish))
+			throw new InvalidArgumentException('string expected.');
+		$this->_nameEnglish = $nameEnglish;
+		return $this;
+	}
+	
+	/**
+	 * @return string English term
+	 */
+	public function getNameEnglish()
+	{
+		return $this->_nameEnglish;
+	}
+
+	/**
+	 * @param  string $nameGerman German term
+	 * @return \jtl\Connector\Model\Language
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setNameGerman($nameGerman)
+	{
+		if (!is_string($nameGerman))
+			throw new InvalidArgumentException('string expected.');
+		$this->_nameGerman = $nameGerman;
+		return $this;
+	}
+	
+	/**
+	 * @return string German term
+	 */
+	public function getNameGerman()
+	{
+		return $this->_nameGerman;
+	}
+
+	/**
+	 * @param  string $localeName Locale
+	 * @return \jtl\Connector\Model\Language
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setLocaleName($localeName)
+	{
+		if (!is_string($localeName))
+			throw new InvalidArgumentException('string expected.');
+		$this->_localeName = $localeName;
+		return $this;
+	}
+	
+	/**
+	 * @return string Locale
+	 */
+	public function getLocaleName()
+	{
+		return $this->_localeName;
+	}
+
+	/**
+	 * @param  Identity $id Unique language id
+	 * @return \jtl\Connector\Model\Language
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setId(Identity $id)
+	{
+		
+		$this->_id = $id;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Unique language id
+	 */
+	public function getId()
+	{
+		return $this->_id;
+	}
+
+	/**
+	 * @param  boolean $isDefault Flag default language for frontend. Exact 1 language must be marked as default.
+	 * @return \jtl\Connector\Model\Language
+	 * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
+	 */
+	public function setIsDefault($isDefault)
+	{
+		if (!is_bool($isDefault))
+			throw new InvalidArgumentException('boolean expected.');
+		$this->_isDefault = $isDefault;
+		return $this;
+	}
+	
+	/**
+	 * @return boolean Flag default language for frontend. Exact 1 language must be marked as default.
+	 */
+	public function getIsDefault()
+	{
+		return $this->_isDefault;
+	}
 }
+

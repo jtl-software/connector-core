@@ -1,353 +1,346 @@
-<?php
+﻿<?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage CustomerOrder
+ * @subpackage #todo: get_main_controller#
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Additional payment info for direct debit / banktransfer or payment by credit card. 
+ * Additional payment info for direct debit / banktransfer or payment by credit card. .
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage CustomerOrder
+ * @subpackage #todo: get_main_controller#
  */
 class CustomerOrderPaymentInfo extends DataModel
 {
     /**
-     * @var Identity Unique customerOrderPaymentInfo id
-     */
-    protected $_id = null;
-    
-    /**
-     * @var Identity Reference to customerOrder
+     * @type Identity Reference to customerOrder
      */
     protected $_customerOrderId = null;
-    
+
     /**
-     * @var string Bank name
+     * @type Identity Unique customerOrderPaymentInfo id
      */
-    protected $_bankName = '';
-    
+    protected $_id = null;
+
     /**
-     * @var string Bank code (deprecated in DE since SEPA)
+     * @type Identity 
      */
-    protected $_bankCode = '';
-    
+    protected $_platformId = null;
+
     /**
-     * @var string Bank account holder name
+     * @type string Bank account holder name
      */
     protected $_accountHolder = '';
-    
+
     /**
-     * @var string Bank account number (deprecated in DE since SEPA)
+     * @type string Bank account number (deprecated in DE since SEPA)
      */
     protected $_accountNumber = '';
-    
+
     /**
-     * @var string International Bank Account Number (IBAN)
+     * @type string 
      */
-    protected $_iban = '';
-    
+    protected $_bankAccount = '';
+
     /**
-     * @var string Bank Identifier Code (BIC)
+     * @type string Bank code (deprecated in DE since SEPA)
      */
-    protected $_bic = '';
-    
+    protected $_bankCode = '';
+
     /**
-     * @var string Credit card number
+     * @type string 
+     */
+    protected $_cBIC = '';
+
+    /**
+     * @type string 
+     */
+    protected $_cIBAN = '';
+
+    /**
+     * @type string Credit card number
      */
     protected $_creditCardNumber = '';
-    
+
     /**
-     * @var string Credit card verification number
+     * @type string 
      */
-    protected $_creditCardVerificationNumber = '';
-    
+    protected $_cvv = '';
+
     /**
-     * @var string Credit card expiration date
+	 * Nav [CustomerOrderPaymentInfo » Many]
+	 *
+     * @type \jtl\Connector\Model\CustomerOrder[]
      */
-    protected $_creditCardExpiration = '';
-    
-    /**
-     * @var string Credit card type (e.g. "visa")
-     */
-    protected $_creditCardType = '';
-    
-    /**
-     * @var string Credit card holder name
-     */
-    protected $_creditCardHolder = '';
-    
-    /**
-     * @var mixed:string
-     */
-    protected $_identities = array(
-        '_id',
-        '_customerOrderId'
-    );
-    
-    /**
-     * CustomerOrderPaymentInfo Setter
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_id":
-                case "_customerOrderId":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-                case "_bankName":
-                case "_bankCode":
-                case "_accountHolder":
-                case "_accountNumber":
-                case "_iban":
-                case "_bic":
-                case "_creditCardNumber":
-                case "_creditCardVerificationNumber":
-                case "_creditCardExpiration":
-                case "_creditCardType":
-                case "_creditCardHolder":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-            }
-        }
-    }
-    
-    /**
-     * @param Identity $id Unique customerOrderPaymentInfo id
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setId(Identity $id)
-    {
-        $this->_id = $id;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique customerOrderPaymentInfo id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param Identity $customerOrderId Reference to customerOrder
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setCustomerOrderId(Identity $customerOrderId)
-    {
-        $this->_customerOrderId = $customerOrderId;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to customerOrder
-     */
-    public function getCustomerOrderId()
-    {
-        return $this->_customerOrderId;
-    }
-    /**
-     * @param string $bankName Bank name
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setBankName($bankName)
-    {
-        $this->_bankName = (string)$bankName;
-        return $this;
-    }
-    
-    /**
-     * @return string Bank name
-     */
-    public function getBankName()
-    {
-        return $this->_bankName;
-    }
-    /**
-     * @param string $bankCode Bank code (deprecated in DE since SEPA)
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setBankCode($bankCode)
-    {
-        $this->_bankCode = (string)$bankCode;
-        return $this;
-    }
-    
-    /**
-     * @return string Bank code (deprecated in DE since SEPA)
-     */
-    public function getBankCode()
-    {
-        return $this->_bankCode;
-    }
-    /**
-     * @param string $accountHolder Bank account holder name
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setAccountHolder($accountHolder)
-    {
-        $this->_accountHolder = (string)$accountHolder;
-        return $this;
-    }
-    
-    /**
-     * @return string Bank account holder name
-     */
-    public function getAccountHolder()
-    {
-        return $this->_accountHolder;
-    }
-    /**
-     * @param string $accountNumber Bank account number (deprecated in DE since SEPA)
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setAccountNumber($accountNumber)
-    {
-        $this->_accountNumber = (string)$accountNumber;
-        return $this;
-    }
-    
-    /**
-     * @return string Bank account number (deprecated in DE since SEPA)
-     */
-    public function getAccountNumber()
-    {
-        return $this->_accountNumber;
-    }
-    /**
-     * @param string $iban International Bank Account Number (IBAN)
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setIban($iban)
-    {
-        $this->_iban = (string)$iban;
-        return $this;
-    }
-    
-    /**
-     * @return string International Bank Account Number (IBAN)
-     */
-    public function getIban()
-    {
-        return $this->_iban;
-    }
-    /**
-     * @param string $bic Bank Identifier Code (BIC)
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setBic($bic)
-    {
-        $this->_bic = (string)$bic;
-        return $this;
-    }
-    
-    /**
-     * @return string Bank Identifier Code (BIC)
-     */
-    public function getBic()
-    {
-        return $this->_bic;
-    }
-    /**
-     * @param string $creditCardNumber Credit card number
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setCreditCardNumber($creditCardNumber)
-    {
-        $this->_creditCardNumber = (string)$creditCardNumber;
-        return $this;
-    }
-    
-    /**
-     * @return string Credit card number
-     */
-    public function getCreditCardNumber()
-    {
-        return $this->_creditCardNumber;
-    }
-    /**
-     * @param string $creditCardVerificationNumber Credit card verification number
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setCreditCardVerificationNumber($creditCardVerificationNumber)
-    {
-        $this->_creditCardVerificationNumber = (string)$creditCardVerificationNumber;
-        return $this;
-    }
-    
-    /**
-     * @return string Credit card verification number
-     */
-    public function getCreditCardVerificationNumber()
-    {
-        return $this->_creditCardVerificationNumber;
-    }
-    /**
-     * @param string $creditCardExpiration Credit card expiration date
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setCreditCardExpiration($creditCardExpiration)
-    {
-        $this->_creditCardExpiration = (string)$creditCardExpiration;
-        return $this;
-    }
-    
-    /**
-     * @return string Credit card expiration date
-     */
-    public function getCreditCardExpiration()
-    {
-        return $this->_creditCardExpiration;
-    }
-    /**
-     * @param string $creditCardType Credit card type (e.g. "visa")
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setCreditCardType($creditCardType)
-    {
-        $this->_creditCardType = (string)$creditCardType;
-        return $this;
-    }
-    
-    /**
-     * @return string Credit card type (e.g. "visa")
-     */
-    public function getCreditCardType()
-    {
-        return $this->_creditCardType;
-    }
-    /**
-     * @param string $creditCardHolder Credit card holder name
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     */
-    public function setCreditCardHolder($creditCardHolder)
-    {
-        $this->_creditCardHolder = (string)$creditCardHolder;
-        return $this;
-    }
-    
-    /**
-     * @return string Credit card holder name
-     */
-    public function getCreditCardHolder()
-    {
-        return $this->_creditCardHolder;
-    }
+    protected $_customerOrders = array();
+
+
+	/**
+	 * @type array
+	 */
+	protected $_identities = array(
+		'_id',
+		'_customerOrderId',
+		'_platformId',
+	);
+
+	/**
+	 * @param  string $bankAccount 
+	 * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setBankAccount($bankAccount)
+	{
+		if (!is_string($bankAccount))
+			throw new InvalidArgumentException('string expected.');
+		$this->_bankAccount = $bankAccount;
+		return $this;
+	}
+	
+	/**
+	 * @return string 
+	 */
+	public function getBankAccount()
+	{
+		return $this->_bankAccount;
+	}
+
+	/**
+	 * @param  string $bankCode Bank code (deprecated in DE since SEPA)
+	 * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setBankCode($bankCode)
+	{
+		if (!is_string($bankCode))
+			throw new InvalidArgumentException('string expected.');
+		$this->_bankCode = $bankCode;
+		return $this;
+	}
+	
+	/**
+	 * @return string Bank code (deprecated in DE since SEPA)
+	 */
+	public function getBankCode()
+	{
+		return $this->_bankCode;
+	}
+
+	/**
+	 * @param  string $accountNumber Bank account number (deprecated in DE since SEPA)
+	 * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setAccountNumber($accountNumber)
+	{
+		if (!is_string($accountNumber))
+			throw new InvalidArgumentException('string expected.');
+		$this->_accountNumber = $accountNumber;
+		return $this;
+	}
+	
+	/**
+	 * @return string Bank account number (deprecated in DE since SEPA)
+	 */
+	public function getAccountNumber()
+	{
+		return $this->_accountNumber;
+	}
+
+	/**
+	 * @param  string $creditCardNumber Credit card number
+	 * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setCreditCardNumber($creditCardNumber)
+	{
+		if (!is_string($creditCardNumber))
+			throw new InvalidArgumentException('string expected.');
+		$this->_creditCardNumber = $creditCardNumber;
+		return $this;
+	}
+	
+	/**
+	 * @return string Credit card number
+	 */
+	public function getCreditCardNumber()
+	{
+		return $this->_creditCardNumber;
+	}
+
+	/**
+	 * @param  string $cvv 
+	 * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setCvv($cvv)
+	{
+		if (!is_string($cvv))
+			throw new InvalidArgumentException('string expected.');
+		$this->_cvv = $cvv;
+		return $this;
+	}
+	
+	/**
+	 * @return string 
+	 */
+	public function getCvv()
+	{
+		return $this->_cvv;
+	}
+
+	/**
+	 * @param  string $accountHolder Bank account holder name
+	 * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setAccountHolder($accountHolder)
+	{
+		if (!is_string($accountHolder))
+			throw new InvalidArgumentException('string expected.');
+		$this->_accountHolder = $accountHolder;
+		return $this;
+	}
+	
+	/**
+	 * @return string Bank account holder name
+	 */
+	public function getAccountHolder()
+	{
+		return $this->_accountHolder;
+	}
+
+	/**
+	 * @param  string $cIBAN 
+	 * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setCIBAN($cIBAN)
+	{
+		if (!is_string($cIBAN))
+			throw new InvalidArgumentException('string expected.');
+		$this->_cIBAN = $cIBAN;
+		return $this;
+	}
+	
+	/**
+	 * @return string 
+	 */
+	public function getCIBAN()
+	{
+		return $this->_cIBAN;
+	}
+
+	/**
+	 * @param  string $cBIC 
+	 * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setCBIC($cBIC)
+	{
+		if (!is_string($cBIC))
+			throw new InvalidArgumentException('string expected.');
+		$this->_cBIC = $cBIC;
+		return $this;
+	}
+	
+	/**
+	 * @return string 
+	 */
+	public function getCBIC()
+	{
+		return $this->_cBIC;
+	}
+
+	/**
+	 * @param  Identity $id Unique customerOrderPaymentInfo id
+	 * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setId(Identity $id)
+	{
+		
+		$this->_id = $id;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Unique customerOrderPaymentInfo id
+	 */
+	public function getId()
+	{
+		return $this->_id;
+	}
+
+	/**
+	 * @param  Identity $customerOrderId Reference to customerOrder
+	 * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setCustomerOrderId(Identity $customerOrderId)
+	{
+		
+		$this->_customerOrderId = $customerOrderId;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Reference to customerOrder
+	 */
+	public function getCustomerOrderId()
+	{
+		return $this->_customerOrderId;
+	}
+
+	/**
+	 * @param  Identity $platformId 
+	 * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setPlatformId(Identity $platformId)
+	{
+		
+		$this->_platformId = $platformId;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity 
+	 */
+	public function getPlatformId()
+	{
+		return $this->_platformId;
+	}
+
+	/**
+	 * @param  \jtl\Connector\Model\CustomerOrder $customerOrder
+	 * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+	 */
+	public function addCustomerOrder(\jtl\Connector\Model\CustomerOrder $customerOrder)
+	{
+		$this->_customerOrders[] = $customerOrder;
+		return $this;
+	}
+	
+	/**
+	 * @return CustomerOrder
+	 */
+	public function getCustomerOrders()
+	{
+		return $this->_customerOrders;
+	}
+
+	/**
+	 * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+	 */
+	public function clearCustomerOrders()
+	{
+		$this->_customerOrders = array();
+		return $this;
+	}
 }
+

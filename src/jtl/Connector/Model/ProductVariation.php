@@ -1,150 +1,344 @@
-<?php
+﻿<?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Product
+ * @subpackage #todo: get_main_controller#
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * ProductVariation Model. Each product defines its own variations, that means  variations are not global  in contrast to specifics. 
+ * ProductVariation Model. Each product defines its own variations, that means  variations are not global  in contrast to specifics. .
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Product
+ * @subpackage #todo: get_main_controller#
  */
 class ProductVariation extends DataModel
 {
     /**
-     * @var Identity Unique productVariation id
+     * @type Identity Unique productVariation id
      */
     protected $_id = null;
-    
+
     /**
-     * @var Identity Reference to product
+     * @type Identity Reference to product
      */
     protected $_productId = null;
-    
+
     /**
-     * @var string Variation type e.g. radio or select
+     * @type boolean 
      */
-    protected $_type = '';
-    
+    protected $_isActive = false;
+
     /**
-     * @var int Optional sort number
+     * @type boolean 
+     */
+    protected $_isSelectable = false;
+
+    /**
+     * @type string 
+     */
+    protected $_name = '';
+
+    /**
+     * @type integer|null Optional sort number
      */
     protected $_sort = 0;
-    
+
     /**
-     * @var mixed:string
+     * @type string Variation type e.g. radio or select
      */
-    protected $_identities = array(
-        '_id',
-        '_productId'
-    );
-    
+    protected $_type = '';
+
     /**
-     * ProductVariation Setter
-     *
-     * @param string $name
-     * @param string $value
+	 * Nav [ProductVariation » Many]
+	 *
+     * @type \jtl\Connector\Model\Product[]
      */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_id":
-                case "_productId":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-                case "_type":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-                case "_sort":
-                
-                    $this->$name = (int)$value;
-                    break;
-            
-            }
-        }
-    }
-    
+    protected $_product = array();
+
     /**
-     * @param Identity $id Unique productVariation id
-     * @return \jtl\Connector\Model\ProductVariation
+	 * Nav [ProductVariation » One]
+	 *
+     * @type \jtl\Connector\Model\ProductVariationI18n[]
      */
-    public function setId(Identity $id)
-    {
-        $this->_id = $id;
-        return $this;
-    }
-    
+    protected $_i18ns = array();
+
     /**
-     * @return Identity Unique productVariation id
+	 * Nav [ProductVariation » One]
+	 *
+     * @type \jtl\Connector\Model\ProductVariationInvisibility[]
      */
-    public function getId()
-    {
-        return $this->_id;
-    }
+    protected $_invisibilities = array();
+
     /**
-     * @param Identity $productId Reference to product
-     * @return \jtl\Connector\Model\ProductVariation
+	 * Nav [ProductVariation » One]
+	 *
+     * @type \jtl\Connector\Model\ProductVariationValue[]
      */
-    public function setProductId(Identity $productId)
-    {
-        $this->_productId = $productId;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to product
-     */
-    public function getProductId()
-    {
-        return $this->_productId;
-    }
-    /**
-     * @param string $type Variation type e.g. radio or select
-     * @return \jtl\Connector\Model\ProductVariation
-     */
-    public function setType($type)
-    {
-        $this->_type = (string)$type;
-        return $this;
-    }
-    
-    /**
-     * @return string Variation type e.g. radio or select
-     */
-    public function getType()
-    {
-        return $this->_type;
-    }
-    /**
-     * @param int $sort Optional sort number
-     * @return \jtl\Connector\Model\ProductVariation
-     */
-    public function setSort($sort)
-    {
-        $this->_sort = (int)$sort;
-        return $this;
-    }
-    
-    /**
-     * @return int Optional sort number
-     */
-    public function getSort()
-    {
-        return $this->_sort;
-    }
+    protected $_values = array();
+
+
+	/**
+	 * @type array
+	 */
+	protected $_identities = array(
+		'_id',
+		'_productId',
+	);
+
+	/**
+	 * @param  string $name 
+	 * @return \jtl\Connector\Model\ProductVariation
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setName($name)
+	{
+		if (!is_string($name))
+			throw new InvalidArgumentException('string expected.');
+		$this->_name = $name;
+		return $this;
+	}
+	
+	/**
+	 * @return string 
+	 */
+	public function getName()
+	{
+		return $this->_name;
+	}
+
+	/**
+	 * @param  integer $sort Optional sort number
+	 * @return \jtl\Connector\Model\ProductVariation
+	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+	 */
+	public function setSort($sort)
+	{
+		if (!is_integer($sort))
+			throw new InvalidArgumentException('integer expected.');
+		$this->_sort = $sort;
+		return $this;
+	}
+	
+	/**
+	 * @return integer Optional sort number
+	 */
+	public function getSort()
+	{
+		return $this->_sort;
+	}
+
+	/**
+	 * @param  string $type Variation type e.g. radio or select
+	 * @return \jtl\Connector\Model\ProductVariation
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setType($type)
+	{
+		if (!is_string($type))
+			throw new InvalidArgumentException('string expected.');
+		$this->_type = $type;
+		return $this;
+	}
+	
+	/**
+	 * @return string Variation type e.g. radio or select
+	 */
+	public function getType()
+	{
+		return $this->_type;
+	}
+
+	/**
+	 * @param  Identity $id Unique productVariation id
+	 * @return \jtl\Connector\Model\ProductVariation
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setId(Identity $id)
+	{
+		
+		$this->_id = $id;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Unique productVariation id
+	 */
+	public function getId()
+	{
+		return $this->_id;
+	}
+
+	/**
+	 * @param  Identity $productId Reference to product
+	 * @return \jtl\Connector\Model\ProductVariation
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setProductId(Identity $productId)
+	{
+		
+		$this->_productId = $productId;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Reference to product
+	 */
+	public function getProductId()
+	{
+		return $this->_productId;
+	}
+
+	/**
+	 * @param  boolean $isSelectable 
+	 * @return \jtl\Connector\Model\ProductVariation
+	 * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
+	 */
+	public function setIsSelectable($isSelectable)
+	{
+		if (!is_bool($isSelectable))
+			throw new InvalidArgumentException('boolean expected.');
+		$this->_isSelectable = $isSelectable;
+		return $this;
+	}
+	
+	/**
+	 * @return boolean 
+	 */
+	public function getIsSelectable()
+	{
+		return $this->_isSelectable;
+	}
+
+	/**
+	 * @param  boolean $isActive 
+	 * @return \jtl\Connector\Model\ProductVariation
+	 * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
+	 */
+	public function setIsActive($isActive)
+	{
+		if (!is_bool($isActive))
+			throw new InvalidArgumentException('boolean expected.');
+		$this->_isActive = $isActive;
+		return $this;
+	}
+	
+	/**
+	 * @return boolean 
+	 */
+	public function getIsActive()
+	{
+		return $this->_isActive;
+	}
+
+	/**
+	 * @param  \jtl\Connector\Model\Product $product
+	 * @return \jtl\Connector\Model\ProductVariation
+	 */
+	public function addProduct(\jtl\Connector\Model\Product $product)
+	{
+		$this->_product[] = $product;
+		return $this;
+	}
+	
+	/**
+	 * @return Product
+	 */
+	public function getProduct()
+	{
+		return $this->_product;
+	}
+
+	/**
+	 * @return \jtl\Connector\Model\ProductVariation
+	 */
+	public function clearProduct()
+	{
+		$this->_product = array();
+		return $this;
+	}
+
+	/**
+	 * @param  \jtl\Connector\Model\ProductVariationI18n $i18ns
+	 * @return \jtl\Connector\Model\ProductVariation
+	 */
+	public function addI18ns(\jtl\Connector\Model\ProductVariationI18n $i18ns)
+	{
+		$this->_i18ns[] = $i18ns;
+		return $this;
+	}
+	
+	/**
+	 * @return ProductVariationI18n
+	 */
+	public function getI18ns()
+	{
+		return $this->_i18ns;
+	}
+
+	/**
+	 * @return \jtl\Connector\Model\ProductVariation
+	 */
+	public function clearI18ns()
+	{
+		$this->_i18ns = array();
+		return $this;
+	}
+
+	/**
+	 * @param  \jtl\Connector\Model\ProductVariationInvisibility $invisibility
+	 * @return \jtl\Connector\Model\ProductVariation
+	 */
+	public function addInvisibility(\jtl\Connector\Model\ProductVariationInvisibility $invisibility)
+	{
+		$this->_invisibilities[] = $invisibility;
+		return $this;
+	}
+	
+	/**
+	 * @return ProductVariationInvisibility
+	 */
+	public function getInvisibilities()
+	{
+		return $this->_invisibilities;
+	}
+
+	/**
+	 * @return \jtl\Connector\Model\ProductVariation
+	 */
+	public function clearInvisibilities()
+	{
+		$this->_invisibilities = array();
+		return $this;
+	}
+
+	/**
+	 * @param  \jtl\Connector\Model\ProductVariationValue $value
+	 * @return \jtl\Connector\Model\ProductVariation
+	 */
+	public function addValue(\jtl\Connector\Model\ProductVariationValue $value)
+	{
+		$this->_values[] = $value;
+		return $this;
+	}
+	
+	/**
+	 * @return ProductVariationValue
+	 */
+	public function getValues()
+	{
+		return $this->_values;
+	}
+
+	/**
+	 * @return \jtl\Connector\Model\ProductVariation
+	 */
+	public function clearValues()
+	{
+		$this->_values = array();
+		return $this;
+	}
 }
+

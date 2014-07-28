@@ -1,145 +1,104 @@
-<?php
+﻿<?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage #todo: get_main_controller#
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Localized cross selling group. Can hold several crossSelling items that are linked for cross selling purposes. 
+ * Localized cross selling group. Can hold several crossSelling items that are linked for cross selling purposes. .
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage #todo: get_main_controller#
  */
 class CrossSellingGroup extends DataModel
 {
     /**
-     * @var Identity crossSellingGroup id
-     */
-    protected $_id = null;
-    
-    /**
-     * @var string Locale
-     */
-    protected $_localeName = '';
-    
-    /**
-     * @var string Localized name
-     */
-    protected $_name = '';
-    
-    /**
-     * @var string Optional localized description
+     * @type string Optional localized description
      */
     protected $_description = '';
-    
+
     /**
-     * @var mixed:string
+     * @type string Locale
      */
-    protected $_identities = array(
-        '_id'
-    );
-    
+    protected $_localeName = '';
+
     /**
-     * CrossSellingGroup Setter
-     *
-     * @param string $name
-     * @param string $value
+     * @type string Localized name
      */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_id":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-                case "_localeName":
-                case "_name":
-                case "_description":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-            }
-        }
-    }
-    
-    /**
-     * @param Identity $id crossSellingGroup id
-     * @return \jtl\Connector\Model\CrossSellingGroup
-     */
-    public function setId(Identity $id)
-    {
-        $this->_id = $id;
-        return $this;
-    }
-    
-    /**
-     * @return Identity crossSellingGroup id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param string $localeName Locale
-     * @return \jtl\Connector\Model\CrossSellingGroup
-     */
-    public function setLocaleName($localeName)
-    {
-        $this->_localeName = (string)$localeName;
-        return $this;
-    }
-    
-    /**
-     * @return string Locale
-     */
-    public function getLocaleName()
-    {
-        return $this->_localeName;
-    }
-    /**
-     * @param string $name Localized name
-     * @return \jtl\Connector\Model\CrossSellingGroup
-     */
-    public function setName($name)
-    {
-        $this->_name = (string)$name;
-        return $this;
-    }
-    
-    /**
-     * @return string Localized name
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-    /**
-     * @param string $description Optional localized description
-     * @return \jtl\Connector\Model\CrossSellingGroup
-     */
-    public function setDescription($description)
-    {
-        $this->_description = (string)$description;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional localized description
-     */
-    public function getDescription()
-    {
-        return $this->_description;
-    }
+    protected $_name = '';
+
+
+	/**
+	 * @type array
+	 */
+	protected $_identities = array(
+	);
+
+	/**
+	 * @param  string $name Localized name
+	 * @return \jtl\Connector\Model\CrossSellingGroup
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setName($name)
+	{
+		if (!is_string($name))
+			throw new InvalidArgumentException('string expected.');
+		$this->_name = $name;
+		return $this;
+	}
+	
+	/**
+	 * @return string Localized name
+	 */
+	public function getName()
+	{
+		return $this->_name;
+	}
+
+	/**
+	 * @param  string $description Optional localized description
+	 * @return \jtl\Connector\Model\CrossSellingGroup
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setDescription($description)
+	{
+		if (!is_string($description))
+			throw new InvalidArgumentException('string expected.');
+		$this->_description = $description;
+		return $this;
+	}
+	
+	/**
+	 * @return string Optional localized description
+	 */
+	public function getDescription()
+	{
+		return $this->_description;
+	}
+
+	/**
+	 * @param  string $localeName Locale
+	 * @return \jtl\Connector\Model\CrossSellingGroup
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setLocaleName($localeName)
+	{
+		if (!is_string($localeName))
+			throw new InvalidArgumentException('string expected.');
+		$this->_localeName = $localeName;
+		return $this;
+	}
+	
+	/**
+	 * @return string Locale
+	 */
+	public function getLocaleName()
+	{
+		return $this->_localeName;
+	}
 }
+

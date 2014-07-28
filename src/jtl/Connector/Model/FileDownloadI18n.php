@@ -1,145 +1,130 @@
-<?php
+﻿<?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage #todo: get_main_controller#
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Localized fileDownload name and  description.
+ * Localized fileDownload name and  description..
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage #todo: get_main_controller#
  */
 class FileDownloadI18n extends DataModel
 {
     /**
-     * @var Identity Reference to fileDownloadId
+     * @type Identity Reference to fileDownloadId
      */
     protected $_fileDownloadId = null;
-    
+
     /**
-     * @var string Locale
-     */
-    protected $_localeName = '';
-    
-    /**
-     * @var string File download title / name
-     */
-    protected $_name = '';
-    
-    /**
-     * @var string Optional File download description
+     * @type string Optional File download description
      */
     protected $_description = '';
-    
+
     /**
-     * @var mixed:string
+     * @type string Locale
      */
-    protected $_identities = array(
-        '_fileDownloadId'
-    );
-    
+    protected $_localeName = '';
+
     /**
-     * FileDownloadI18n Setter
-     *
-     * @param string $name
-     * @param string $value
+     * @type string File download title / name
      */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_fileDownloadId":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-                case "_localeName":
-                case "_name":
-                case "_description":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-            }
-        }
-    }
-    
-    /**
-     * @param Identity $fileDownloadId Reference to fileDownloadId
-     * @return \jtl\Connector\Model\FileDownloadI18n
-     */
-    public function setFileDownloadId(Identity $fileDownloadId)
-    {
-        $this->_fileDownloadId = $fileDownloadId;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to fileDownloadId
-     */
-    public function getFileDownloadId()
-    {
-        return $this->_fileDownloadId;
-    }
-    /**
-     * @param string $localeName Locale
-     * @return \jtl\Connector\Model\FileDownloadI18n
-     */
-    public function setLocaleName($localeName)
-    {
-        $this->_localeName = (string)$localeName;
-        return $this;
-    }
-    
-    /**
-     * @return string Locale
-     */
-    public function getLocaleName()
-    {
-        return $this->_localeName;
-    }
-    /**
-     * @param string $name File download title / name
-     * @return \jtl\Connector\Model\FileDownloadI18n
-     */
-    public function setName($name)
-    {
-        $this->_name = (string)$name;
-        return $this;
-    }
-    
-    /**
-     * @return string File download title / name
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-    /**
-     * @param string $description Optional File download description
-     * @return \jtl\Connector\Model\FileDownloadI18n
-     */
-    public function setDescription($description)
-    {
-        $this->_description = (string)$description;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional File download description
-     */
-    public function getDescription()
-    {
-        return $this->_description;
-    }
+    protected $_name = '';
+
+
+	/**
+	 * @type array
+	 */
+	protected $_identities = array(
+		'_fileDownloadId',
+	);
+
+	/**
+	 * @param  string $name File download title / name
+	 * @return \jtl\Connector\Model\FileDownloadI18n
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setName($name)
+	{
+		if (!is_string($name))
+			throw new InvalidArgumentException('string expected.');
+		$this->_name = $name;
+		return $this;
+	}
+	
+	/**
+	 * @return string File download title / name
+	 */
+	public function getName()
+	{
+		return $this->_name;
+	}
+
+	/**
+	 * @param  string $description Optional File download description
+	 * @return \jtl\Connector\Model\FileDownloadI18n
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setDescription($description)
+	{
+		if (!is_string($description))
+			throw new InvalidArgumentException('string expected.');
+		$this->_description = $description;
+		return $this;
+	}
+	
+	/**
+	 * @return string Optional File download description
+	 */
+	public function getDescription()
+	{
+		return $this->_description;
+	}
+
+	/**
+	 * @param  Identity $fileDownloadId Reference to fileDownloadId
+	 * @return \jtl\Connector\Model\FileDownloadI18n
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setFileDownloadId(Identity $fileDownloadId)
+	{
+		
+		$this->_fileDownloadId = $fileDownloadId;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Reference to fileDownloadId
+	 */
+	public function getFileDownloadId()
+	{
+		return $this->_fileDownloadId;
+	}
+
+	/**
+	 * @param  string $localeName Locale
+	 * @return \jtl\Connector\Model\FileDownloadI18n
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setLocaleName($localeName)
+	{
+		if (!is_string($localeName))
+			throw new InvalidArgumentException('string expected.');
+		$this->_localeName = $localeName;
+		return $this;
+	}
+	
+	/**
+	 * @return string Locale
+	 */
+	public function getLocaleName()
+	{
+		return $this->_localeName;
+	}
 }
+

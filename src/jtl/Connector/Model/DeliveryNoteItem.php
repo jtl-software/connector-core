@@ -1,244 +1,164 @@
-<?php
+﻿<?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage DeliveryNote
+ * @subpackage #todo: get_main_controller#
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Delivery note item properties.
+ * Delivery note item properties..
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage DeliveryNote
+ * @subpackage #todo: get_main_controller#
  */
 class DeliveryNoteItem extends DataModel
 {
     /**
-     * @var Identity Unique deliveryNoteItem id
-     */
-    protected $_id = null;
-    
-    /**
-     * @var Identity Reference to customerOrderItem
+     * @type Identity Reference to customerOrderItem
      */
     protected $_customerOrderItemId = null;
-    
+
     /**
-     * @var double Quantity delivered
-     */
-    protected $_quantity = 0.0;
-    
-    /**
-     * @var Identity Optional reference to warehouse
-     */
-    protected $_warehouseId = null;
-    
-    /**
-     * @var string Optional serial number
-     */
-    protected $_serialNumber = '';
-    
-    /**
-     * @var string Optional batch number
-     */
-    protected $_batchNumber = '';
-    
-    /**
-     * @var string Optional best before date
-     */
-    protected $_bestBefore = null;
-    
-    /**
-     * @var Identity Reference to deliveryNote
+     * @type Identity Reference to deliveryNote
      */
     protected $_deliveryNoteId = null;
-    
+
     /**
-     * @var mixed:string
+     * @type string 
      */
-    protected $_identities = array(
-        '_id',
-        '_customerOrderItemId',
-        '_warehouseId',
-        '_deliveryNoteId'
-    );
-    
+    protected $_cHinweis = '';
+
     /**
-     * DeliveryNoteItem Setter
-     *
-     * @param string $name
-     * @param string $value
+     * @type float|null Quantity delivered
      */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_id":
-                case "_customerOrderItemId":
-                case "_warehouseId":
-                case "_deliveryNoteId":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-                case "_quantity":
-                
-                    $this->$name = (double)$value;
-                    break;
-            
-                case "_serialNumber":
-                case "_batchNumber":
-                case "_bestBefore":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-            }
-        }
-    }
-    
+    protected $_quantity = 0.0;
+
     /**
-     * @param Identity $id Unique deliveryNoteItem id
-     * @return \jtl\Connector\Model\DeliveryNoteItem
+	 * Nav [DeliveryNoteItem » Many]
+	 *
+     * @type \jtl\Connector\Model\DeliveryNote[]
      */
-    public function setId(Identity $id)
-    {
-        $this->_id = $id;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique deliveryNoteItem id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param Identity $customerOrderItemId Reference to customerOrderItem
-     * @return \jtl\Connector\Model\DeliveryNoteItem
-     */
-    public function setCustomerOrderItemId(Identity $customerOrderItemId)
-    {
-        $this->_customerOrderItemId = $customerOrderItemId;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to customerOrderItem
-     */
-    public function getCustomerOrderItemId()
-    {
-        return $this->_customerOrderItemId;
-    }
-    /**
-     * @param double $quantity Quantity delivered
-     * @return \jtl\Connector\Model\DeliveryNoteItem
-     */
-    public function setQuantity($quantity)
-    {
-        $this->_quantity = (double)$quantity;
-        return $this;
-    }
-    
-    /**
-     * @return double Quantity delivered
-     */
-    public function getQuantity()
-    {
-        return $this->_quantity;
-    }
-    /**
-     * @param Identity $warehouseId Optional reference to warehouse
-     * @return \jtl\Connector\Model\DeliveryNoteItem
-     */
-    public function setWarehouseId(Identity $warehouseId)
-    {
-        $this->_warehouseId = $warehouseId;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Optional reference to warehouse
-     */
-    public function getWarehouseId()
-    {
-        return $this->_warehouseId;
-    }
-    /**
-     * @param string $serialNumber Optional serial number
-     * @return \jtl\Connector\Model\DeliveryNoteItem
-     */
-    public function setSerialNumber($serialNumber)
-    {
-        $this->_serialNumber = (string)$serialNumber;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional serial number
-     */
-    public function getSerialNumber()
-    {
-        return $this->_serialNumber;
-    }
-    /**
-     * @param string $batchNumber Optional batch number
-     * @return \jtl\Connector\Model\DeliveryNoteItem
-     */
-    public function setBatchNumber($batchNumber)
-    {
-        $this->_batchNumber = (string)$batchNumber;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional batch number
-     */
-    public function getBatchNumber()
-    {
-        return $this->_batchNumber;
-    }
-    /**
-     * @param string $bestBefore Optional best before date
-     * @return \jtl\Connector\Model\DeliveryNoteItem
-     */
-    public function setBestBefore($bestBefore)
-    {
-        $this->_bestBefore = (string)$bestBefore;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional best before date
-     */
-    public function getBestBefore()
-    {
-        return $this->_bestBefore;
-    }
-    /**
-     * @param Identity $deliveryNoteId Reference to deliveryNote
-     * @return \jtl\Connector\Model\DeliveryNoteItem
-     */
-    public function setDeliveryNoteId(Identity $deliveryNoteId)
-    {
-        $this->_deliveryNoteId = $deliveryNoteId;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to deliveryNote
-     */
-    public function getDeliveryNoteId()
-    {
-        return $this->_deliveryNoteId;
-    }
+    protected $_deliveryNote = array();
+
+
+	/**
+	 * @type array
+	 */
+	protected $_identities = array(
+		'_deliveryNoteId',
+		'_customerOrderItemId',
+	);
+
+	/**
+	 * @param  float $quantity Quantity delivered
+	 * @return \jtl\Connector\Model\DeliveryNoteItem
+	 * @throws InvalidArgumentException if the provided argument is not of type 'float'.
+	 */
+	public function setQuantity($quantity)
+	{
+		if (!is_float($quantity))
+			throw new InvalidArgumentException('float expected.');
+		$this->_quantity = $quantity;
+		return $this;
+	}
+	
+	/**
+	 * @return float Quantity delivered
+	 */
+	public function getQuantity()
+	{
+		return $this->_quantity;
+	}
+
+	/**
+	 * @param  string $cHinweis 
+	 * @return \jtl\Connector\Model\DeliveryNoteItem
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setCHinweis($cHinweis)
+	{
+		if (!is_string($cHinweis))
+			throw new InvalidArgumentException('string expected.');
+		$this->_cHinweis = $cHinweis;
+		return $this;
+	}
+	
+	/**
+	 * @return string 
+	 */
+	public function getCHinweis()
+	{
+		return $this->_cHinweis;
+	}
+
+	/**
+	 * @param  Identity $deliveryNoteId Reference to deliveryNote
+	 * @return \jtl\Connector\Model\DeliveryNoteItem
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setDeliveryNoteId(Identity $deliveryNoteId)
+	{
+		
+		$this->_deliveryNoteId = $deliveryNoteId;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Reference to deliveryNote
+	 */
+	public function getDeliveryNoteId()
+	{
+		return $this->_deliveryNoteId;
+	}
+
+	/**
+	 * @param  Identity $customerOrderItemId Reference to customerOrderItem
+	 * @return \jtl\Connector\Model\DeliveryNoteItem
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setCustomerOrderItemId(Identity $customerOrderItemId)
+	{
+		
+		$this->_customerOrderItemId = $customerOrderItemId;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Reference to customerOrderItem
+	 */
+	public function getCustomerOrderItemId()
+	{
+		return $this->_customerOrderItemId;
+	}
+
+	/**
+	 * @param  \jtl\Connector\Model\DeliveryNote $deliveryNote
+	 * @return \jtl\Connector\Model\DeliveryNoteItem
+	 */
+	public function addDeliveryNote(\jtl\Connector\Model\DeliveryNote $deliveryNote)
+	{
+		$this->_deliveryNote[] = $deliveryNote;
+		return $this;
+	}
+	
+	/**
+	 * @return DeliveryNote
+	 */
+	public function getDeliveryNote()
+	{
+		return $this->_deliveryNote;
+	}
+
+	/**
+	 * @return \jtl\Connector\Model\DeliveryNoteItem
+	 */
+	public function clearDeliveryNote()
+	{
+		$this->_deliveryNote = array();
+		return $this;
+	}
 }
+

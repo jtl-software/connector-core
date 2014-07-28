@@ -1,431 +1,416 @@
-<?php
+﻿<?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage #todo: get_main_controller#
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * A config Item that is displayed in a config Group. Config item can reference to a specific productId to inherit price, name and description. 
+ * A config Item that is displayed in a config Group. Config item can reference to a specific productId to inherit price, name and description. .
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage #todo: get_main_controller#
  */
 class ConfigItem extends DataModel
 {
     /**
-     * @var Identity Unique configItem id
-     */
-    protected $_id = null;
-    
-    /**
-     * @var Identity Reference to configGroup
+     * @type Identity Reference to configGroup
      */
     protected $_configGroupId = null;
-    
+
     /**
-     * @var Identity Optional reference to product
+     * @type Identity Optional reference to product
      */
     protected $_productId = null;
-    
+
     /**
-     * @var int Config item type. 0: Product, 1: Special
+     * @type float|null 
      */
-    protected $_type = 0;
-    
+    protected $_fStandardpreis = 0.0;
+
     /**
-     * @var bool Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
+     * @type integer Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
      */
-    protected $_isPreSelected = false;
-    
+    protected $_ignoreMultiplier = 0;
+
     /**
-     * @var bool Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
+     * @type integer|null Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
      */
-    protected $_isRecommended = false;
-    
+    protected $_inheritProductName = 0;
+
     /**
-     * @var bool Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
+     * @type integer|null Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
      */
-    protected $_inheritProductName = false;
-    
+    protected $_inheritProductPrice = 0;
+
     /**
-     * @var bool Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
+     * @type float|null Optional initial / predefined quantity. Default is one (1) quantity piece. 
      */
-    protected $_inheritProductPrice = false;
-    
+    protected $_initialQuantity = 0.0;
+
     /**
-     * @var bool Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
+     * @type integer|null Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
      */
-    protected $_showDiscount = True;
-    
+    protected $_isPreSelected = 0;
+
     /**
-     * @var bool Optional: Show surcharge compared to productId price.
+     * @type integer|null Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
      */
-    protected $_showSurcharge = False;
-    
+    protected $_isRecommended = 0;
+
     /**
-     * @var bool Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
+     * @type float|null Maximum allowed quantity. Default 0 for no maximum limit. 
      */
-    protected $_ignoreMultiplier = False;
-    
+    protected $_maxQuantity = 0.0;
+
     /**
-     * @var double Optional minimum quantity required to add configItem. Default 0 for no minimum quantity. 
+     * @type float|null Optional minimum quantity required to add configItem. Default 0 for no minimum quantity. 
      */
-    protected $_minQuantity = 0;
-    
+    protected $_minQuantity = 0.0;
+
     /**
-     * @var double Maximum allowed quantity. Default 0 for no maximum limit. 
+     * @type integer|null Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
      */
-    protected $_maxQuantity = 0;
-    
+    protected $_showDiscount = 0;
+
     /**
-     * @var double Optional initial / predefined quantity. Default is one (1) quantity piece. 
+     * @type integer|null Optional: Show surcharge compared to productId price.
      */
-    protected $_initialQuantity = 1;
-    
+    protected $_showSurcharge = 0;
+
     /**
-     * @var int Optional sort order number
+     * @type integer|null Optional sort order number
      */
     protected $_sort = 0;
-    
+
     /**
-     * @var double Value added tax
+     * @type integer|null Config item type. 0: Product, 1: Special
      */
-    protected $_vat = 0.0;
-    
-    /**
-     * @var mixed:string
-     */
-    protected $_identities = array(
-        '_id',
-        '_configGroupId',
-        '_productId'
-    );
-    
-    /**
-     * ConfigItem Setter
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_id":
-                case "_configGroupId":
-                case "_productId":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-                case "_type":
-                case "_sort":
-                
-                    $this->$name = (int)$value;
-                    break;
-            
-                case "_isPreSelected":
-                case "_isRecommended":
-                case "_inheritProductName":
-                case "_inheritProductPrice":
-                case "_showDiscount":
-                case "_showSurcharge":
-                case "_ignoreMultiplier":
-                
-                    $this->$name = (bool)$value;
-                    break;
-            
-                case "_minQuantity":
-                case "_maxQuantity":
-                case "_initialQuantity":
-                case "_vat":
-                
-                    $this->$name = (double)$value;
-                    break;
-            
-            }
-        }
-    }
-    
-    /**
-     * @param Identity $id Unique configItem id
-     * @return \jtl\Connector\Model\ConfigItem
-     */
-    public function setId(Identity $id)
-    {
-        $this->_id = $id;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique configItem id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param Identity $configGroupId Reference to configGroup
-     * @return \jtl\Connector\Model\ConfigItem
-     */
-    public function setConfigGroupId(Identity $configGroupId)
-    {
-        $this->_configGroupId = $configGroupId;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to configGroup
-     */
-    public function getConfigGroupId()
-    {
-        return $this->_configGroupId;
-    }
-    /**
-     * @param Identity $productId Optional reference to product
-     * @return \jtl\Connector\Model\ConfigItem
-     */
-    public function setProductId(Identity $productId)
-    {
-        $this->_productId = $productId;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Optional reference to product
-     */
-    public function getProductId()
-    {
-        return $this->_productId;
-    }
-    /**
-     * @param int $type Config item type. 0: Product, 1: Special
-     * @return \jtl\Connector\Model\ConfigItem
-     */
-    public function setType($type)
-    {
-        $this->_type = (int)$type;
-        return $this;
-    }
-    
-    /**
-     * @return int Config item type. 0: Product, 1: Special
-     */
-    public function getType()
-    {
-        return $this->_type;
-    }
-    /**
-     * @param bool $isPreSelected Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
-     * @return \jtl\Connector\Model\ConfigItem
-     */
-    public function setIsPreSelected($isPreSelected)
-    {
-        $this->_isPreSelected = (bool)$isPreSelected;
-        return $this;
-    }
-    
-    /**
-     * @return bool Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
-     */
-    public function getIsPreSelected()
-    {
-        return $this->_isPreSelected;
-    }
-    /**
-     * @param bool $isRecommended Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
-     * @return \jtl\Connector\Model\ConfigItem
-     */
-    public function setIsRecommended($isRecommended)
-    {
-        $this->_isRecommended = (bool)$isRecommended;
-        return $this;
-    }
-    
-    /**
-     * @return bool Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
-     */
-    public function getIsRecommended()
-    {
-        return $this->_isRecommended;
-    }
-    /**
-     * @param bool $inheritProductName Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
-     * @return \jtl\Connector\Model\ConfigItem
-     */
-    public function setInheritProductName($inheritProductName)
-    {
-        $this->_inheritProductName = (bool)$inheritProductName;
-        return $this;
-    }
-    
-    /**
-     * @return bool Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
-     */
-    public function getInheritProductName()
-    {
-        return $this->_inheritProductName;
-    }
-    /**
-     * @param bool $inheritProductPrice Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
-     * @return \jtl\Connector\Model\ConfigItem
-     */
-    public function setInheritProductPrice($inheritProductPrice)
-    {
-        $this->_inheritProductPrice = (bool)$inheritProductPrice;
-        return $this;
-    }
-    
-    /**
-     * @return bool Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
-     */
-    public function getInheritProductPrice()
-    {
-        return $this->_inheritProductPrice;
-    }
-    /**
-     * @param bool $showDiscount Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
-     * @return \jtl\Connector\Model\ConfigItem
-     */
-    public function setShowDiscount($showDiscount)
-    {
-        $this->_showDiscount = (bool)$showDiscount;
-        return $this;
-    }
-    
-    /**
-     * @return bool Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
-     */
-    public function getShowDiscount()
-    {
-        return $this->_showDiscount;
-    }
-    /**
-     * @param bool $showSurcharge Optional: Show surcharge compared to productId price.
-     * @return \jtl\Connector\Model\ConfigItem
-     */
-    public function setShowSurcharge($showSurcharge)
-    {
-        $this->_showSurcharge = (bool)$showSurcharge;
-        return $this;
-    }
-    
-    /**
-     * @return bool Optional: Show surcharge compared to productId price.
-     */
-    public function getShowSurcharge()
-    {
-        return $this->_showSurcharge;
-    }
-    /**
-     * @param bool $ignoreMultiplier Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
-     * @return \jtl\Connector\Model\ConfigItem
-     */
-    public function setIgnoreMultiplier($ignoreMultiplier)
-    {
-        $this->_ignoreMultiplier = (bool)$ignoreMultiplier;
-        return $this;
-    }
-    
-    /**
-     * @return bool Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
-     */
-    public function getIgnoreMultiplier()
-    {
-        return $this->_ignoreMultiplier;
-    }
-    /**
-     * @param double $minQuantity Optional minimum quantity required to add configItem. Default 0 for no minimum quantity. 
-     * @return \jtl\Connector\Model\ConfigItem
-     */
-    public function setMinQuantity($minQuantity)
-    {
-        $this->_minQuantity = (double)$minQuantity;
-        return $this;
-    }
-    
-    /**
-     * @return double Optional minimum quantity required to add configItem. Default 0 for no minimum quantity. 
-     */
-    public function getMinQuantity()
-    {
-        return $this->_minQuantity;
-    }
-    /**
-     * @param double $maxQuantity Maximum allowed quantity. Default 0 for no maximum limit. 
-     * @return \jtl\Connector\Model\ConfigItem
-     */
-    public function setMaxQuantity($maxQuantity)
-    {
-        $this->_maxQuantity = (double)$maxQuantity;
-        return $this;
-    }
-    
-    /**
-     * @return double Maximum allowed quantity. Default 0 for no maximum limit. 
-     */
-    public function getMaxQuantity()
-    {
-        return $this->_maxQuantity;
-    }
-    /**
-     * @param double $initialQuantity Optional initial / predefined quantity. Default is one (1) quantity piece. 
-     * @return \jtl\Connector\Model\ConfigItem
-     */
-    public function setInitialQuantity($initialQuantity)
-    {
-        $this->_initialQuantity = (double)$initialQuantity;
-        return $this;
-    }
-    
-    /**
-     * @return double Optional initial / predefined quantity. Default is one (1) quantity piece. 
-     */
-    public function getInitialQuantity()
-    {
-        return $this->_initialQuantity;
-    }
-    /**
-     * @param int $sort Optional sort order number
-     * @return \jtl\Connector\Model\ConfigItem
-     */
-    public function setSort($sort)
-    {
-        $this->_sort = (int)$sort;
-        return $this;
-    }
-    
-    /**
-     * @return int Optional sort order number
-     */
-    public function getSort()
-    {
-        return $this->_sort;
-    }
-    /**
-     * @param double $vat Value added tax
-     * @return \jtl\Connector\Model\ConfigItem
-     */
-    public function setVat($vat)
-    {
-        $this->_vat = (double)$vat;
-        return $this;
-    }
-    
-    /**
-     * @return double Value added tax
-     */
-    public function getVat()
-    {
-        return $this->_vat;
-    }
+    protected $_type = 0;
+
+
+	/**
+	 * @type array
+	 */
+	protected $_identities = array(
+		'_configGroupId',
+		'_productId',
+	);
+
+	/**
+	 * @param  integer $type Config item type. 0: Product, 1: Special
+	 * @return \jtl\Connector\Model\ConfigItem
+	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+	 */
+	public function setType($type)
+	{
+		if (!is_integer($type))
+			throw new InvalidArgumentException('integer expected.');
+		$this->_type = $type;
+		return $this;
+	}
+	
+	/**
+	 * @return integer Config item type. 0: Product, 1: Special
+	 */
+	public function getType()
+	{
+		return $this->_type;
+	}
+
+	/**
+	 * @param  integer $isPreSelected Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
+	 * @return \jtl\Connector\Model\ConfigItem
+	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+	 */
+	public function setIsPreSelected($isPreSelected)
+	{
+		if (!is_integer($isPreSelected))
+			throw new InvalidArgumentException('integer expected.');
+		$this->_isPreSelected = $isPreSelected;
+		return $this;
+	}
+	
+	/**
+	 * @return integer Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
+	 */
+	public function getIsPreSelected()
+	{
+		return $this->_isPreSelected;
+	}
+
+	/**
+	 * @param  integer $isRecommended Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
+	 * @return \jtl\Connector\Model\ConfigItem
+	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+	 */
+	public function setIsRecommended($isRecommended)
+	{
+		if (!is_integer($isRecommended))
+			throw new InvalidArgumentException('integer expected.');
+		$this->_isRecommended = $isRecommended;
+		return $this;
+	}
+	
+	/**
+	 * @return integer Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
+	 */
+	public function getIsRecommended()
+	{
+		return $this->_isRecommended;
+	}
+
+	/**
+	 * @param  integer $inheritProductName Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
+	 * @return \jtl\Connector\Model\ConfigItem
+	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+	 */
+	public function setInheritProductName($inheritProductName)
+	{
+		if (!is_integer($inheritProductName))
+			throw new InvalidArgumentException('integer expected.');
+		$this->_inheritProductName = $inheritProductName;
+		return $this;
+	}
+	
+	/**
+	 * @return integer Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
+	 */
+	public function getInheritProductName()
+	{
+		return $this->_inheritProductName;
+	}
+
+	/**
+	 * @param  integer $inheritProductPrice Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
+	 * @return \jtl\Connector\Model\ConfigItem
+	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+	 */
+	public function setInheritProductPrice($inheritProductPrice)
+	{
+		if (!is_integer($inheritProductPrice))
+			throw new InvalidArgumentException('integer expected.');
+		$this->_inheritProductPrice = $inheritProductPrice;
+		return $this;
+	}
+	
+	/**
+	 * @return integer Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
+	 */
+	public function getInheritProductPrice()
+	{
+		return $this->_inheritProductPrice;
+	}
+
+	/**
+	 * @param  integer $sort Optional sort order number
+	 * @return \jtl\Connector\Model\ConfigItem
+	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+	 */
+	public function setSort($sort)
+	{
+		if (!is_integer($sort))
+			throw new InvalidArgumentException('integer expected.');
+		$this->_sort = $sort;
+		return $this;
+	}
+	
+	/**
+	 * @return integer Optional sort order number
+	 */
+	public function getSort()
+	{
+		return $this->_sort;
+	}
+
+	/**
+	 * @param  integer $showDiscount Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
+	 * @return \jtl\Connector\Model\ConfigItem
+	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+	 */
+	public function setShowDiscount($showDiscount)
+	{
+		if (!is_integer($showDiscount))
+			throw new InvalidArgumentException('integer expected.');
+		$this->_showDiscount = $showDiscount;
+		return $this;
+	}
+	
+	/**
+	 * @return integer Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
+	 */
+	public function getShowDiscount()
+	{
+		return $this->_showDiscount;
+	}
+
+	/**
+	 * @param  integer $showSurcharge Optional: Show surcharge compared to productId price.
+	 * @return \jtl\Connector\Model\ConfigItem
+	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+	 */
+	public function setShowSurcharge($showSurcharge)
+	{
+		if (!is_integer($showSurcharge))
+			throw new InvalidArgumentException('integer expected.');
+		$this->_showSurcharge = $showSurcharge;
+		return $this;
+	}
+	
+	/**
+	 * @return integer Optional: Show surcharge compared to productId price.
+	 */
+	public function getShowSurcharge()
+	{
+		return $this->_showSurcharge;
+	}
+
+	/**
+	 * @param  float $minQuantity Optional minimum quantity required to add configItem. Default 0 for no minimum quantity. 
+	 * @return \jtl\Connector\Model\ConfigItem
+	 * @throws InvalidArgumentException if the provided argument is not of type 'float'.
+	 */
+	public function setMinQuantity($minQuantity)
+	{
+		if (!is_float($minQuantity))
+			throw new InvalidArgumentException('float expected.');
+		$this->_minQuantity = $minQuantity;
+		return $this;
+	}
+	
+	/**
+	 * @return float Optional minimum quantity required to add configItem. Default 0 for no minimum quantity. 
+	 */
+	public function getMinQuantity()
+	{
+		return $this->_minQuantity;
+	}
+
+	/**
+	 * @param  float $maxQuantity Maximum allowed quantity. Default 0 for no maximum limit. 
+	 * @return \jtl\Connector\Model\ConfigItem
+	 * @throws InvalidArgumentException if the provided argument is not of type 'float'.
+	 */
+	public function setMaxQuantity($maxQuantity)
+	{
+		if (!is_float($maxQuantity))
+			throw new InvalidArgumentException('float expected.');
+		$this->_maxQuantity = $maxQuantity;
+		return $this;
+	}
+	
+	/**
+	 * @return float Maximum allowed quantity. Default 0 for no maximum limit. 
+	 */
+	public function getMaxQuantity()
+	{
+		return $this->_maxQuantity;
+	}
+
+	/**
+	 * @param  float $initialQuantity Optional initial / predefined quantity. Default is one (1) quantity piece. 
+	 * @return \jtl\Connector\Model\ConfigItem
+	 * @throws InvalidArgumentException if the provided argument is not of type 'float'.
+	 */
+	public function setInitialQuantity($initialQuantity)
+	{
+		if (!is_float($initialQuantity))
+			throw new InvalidArgumentException('float expected.');
+		$this->_initialQuantity = $initialQuantity;
+		return $this;
+	}
+	
+	/**
+	 * @return float Optional initial / predefined quantity. Default is one (1) quantity piece. 
+	 */
+	public function getInitialQuantity()
+	{
+		return $this->_initialQuantity;
+	}
+
+	/**
+	 * @param  float $fStandardpreis 
+	 * @return \jtl\Connector\Model\ConfigItem
+	 * @throws InvalidArgumentException if the provided argument is not of type 'float'.
+	 */
+	public function setFStandardpreis($fStandardpreis)
+	{
+		if (!is_float($fStandardpreis))
+			throw new InvalidArgumentException('float expected.');
+		$this->_fStandardpreis = $fStandardpreis;
+		return $this;
+	}
+	
+	/**
+	 * @return float 
+	 */
+	public function getFStandardpreis()
+	{
+		return $this->_fStandardpreis;
+	}
+
+	/**
+	 * @param  integer $ignoreMultiplier Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
+	 * @return \jtl\Connector\Model\ConfigItem
+	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+	 */
+	public function setIgnoreMultiplier($ignoreMultiplier)
+	{
+		if (!is_integer($ignoreMultiplier))
+			throw new InvalidArgumentException('integer expected.');
+		$this->_ignoreMultiplier = $ignoreMultiplier;
+		return $this;
+	}
+	
+	/**
+	 * @return integer Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
+	 */
+	public function getIgnoreMultiplier()
+	{
+		return $this->_ignoreMultiplier;
+	}
+
+	/**
+	 * @param  Identity $configGroupId Reference to configGroup
+	 * @return \jtl\Connector\Model\ConfigItem
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setConfigGroupId(Identity $configGroupId)
+	{
+		
+		$this->_configGroupId = $configGroupId;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Reference to configGroup
+	 */
+	public function getConfigGroupId()
+	{
+		return $this->_configGroupId;
+	}
+
+	/**
+	 * @param  Identity $productId Optional reference to product
+	 * @return \jtl\Connector\Model\ConfigItem
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setProductId(Identity $productId)
+	{
+		
+		$this->_productId = $productId;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Optional reference to product
+	 */
+	public function getProductId()
+	{
+		return $this->_productId;
+	}
 }
+

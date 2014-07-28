@@ -1,237 +1,190 @@
-<?php
+﻿<?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Category
+ * @subpackage #todo: get_main_controller#
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Localized category properties. localeName, categoryId and a localized name must be set. 
+ * Localized category properties. localeName, categoryId and a localized name must be set. .
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Category
+ * @subpackage #todo: get_main_controller#
  */
 class CategoryI18n extends DataModel
 {
     /**
-     * @var string Locale
-     */
-    protected $_localeName = '';
-    
-    /**
-     * @var Identity Reference to category
+     * @type Identity Reference to category
      */
     protected $_categoryId = null;
-    
+
     /**
-     * @var string Localized category name
-     */
-    protected $_name = '';
-    
-    /**
-     * @var string Optional localized category URL
-     */
-    protected $_urlPath = '';
-    
-    /**
-     * @var string Optional localized Long Description
+     * @type string Optional localized Long Description
      */
     protected $_description = '';
-    
+
     /**
-     * @var string Optional localized  short description used for meta tag description
+     * @type string Locale
      */
-    protected $_metaDescription = '';
-    
+    protected $_localeName = '';
+
     /**
-     * @var string Optional localized meta tag keywords value
+     * @type string Localized category name
      */
-    protected $_metaKeywords = '';
-    
+    protected $_name = '';
+
     /**
-     * @var string Optional localized title tag value
+     * @type string 
      */
-    protected $_titleTag = '';
-    
+    protected $_url = '';
+
     /**
-     * @var mixed:string
+	 * Nav [CategoryI18n » Many]
+	 *
+     * @type \jtl\Connector\Model\Category[]
      */
-    protected $_identities = array(
-        '_categoryId'
-    );
-    
-    /**
-     * CategoryI18n Setter
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_localeName":
-                case "_name":
-                case "_urlPath":
-                case "_description":
-                case "_metaDescription":
-                case "_metaKeywords":
-                case "_titleTag":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-                case "_categoryId":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-            }
-        }
-    }
-    
-    /**
-     * @param string $localeName Locale
-     * @return \jtl\Connector\Model\CategoryI18n
-     */
-    public function setLocaleName($localeName)
-    {
-        $this->_localeName = (string)$localeName;
-        return $this;
-    }
-    
-    /**
-     * @return string Locale
-     */
-    public function getLocaleName()
-    {
-        return $this->_localeName;
-    }
-    /**
-     * @param Identity $categoryId Reference to category
-     * @return \jtl\Connector\Model\CategoryI18n
-     */
-    public function setCategoryId(Identity $categoryId)
-    {
-        $this->_categoryId = $categoryId;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to category
-     */
-    public function getCategoryId()
-    {
-        return $this->_categoryId;
-    }
-    /**
-     * @param string $name Localized category name
-     * @return \jtl\Connector\Model\CategoryI18n
-     */
-    public function setName($name)
-    {
-        $this->_name = (string)$name;
-        return $this;
-    }
-    
-    /**
-     * @return string Localized category name
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-    /**
-     * @param string $urlPath Optional localized category URL
-     * @return \jtl\Connector\Model\CategoryI18n
-     */
-    public function setUrlPath($urlPath)
-    {
-        $this->_urlPath = (string)$urlPath;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional localized category URL
-     */
-    public function getUrlPath()
-    {
-        return $this->_urlPath;
-    }
-    /**
-     * @param string $description Optional localized Long Description
-     * @return \jtl\Connector\Model\CategoryI18n
-     */
-    public function setDescription($description)
-    {
-        $this->_description = (string)$description;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional localized Long Description
-     */
-    public function getDescription()
-    {
-        return $this->_description;
-    }
-    /**
-     * @param string $metaDescription Optional localized  short description used for meta tag description
-     * @return \jtl\Connector\Model\CategoryI18n
-     */
-    public function setMetaDescription($metaDescription)
-    {
-        $this->_metaDescription = (string)$metaDescription;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional localized  short description used for meta tag description
-     */
-    public function getMetaDescription()
-    {
-        return $this->_metaDescription;
-    }
-    /**
-     * @param string $metaKeywords Optional localized meta tag keywords value
-     * @return \jtl\Connector\Model\CategoryI18n
-     */
-    public function setMetaKeywords($metaKeywords)
-    {
-        $this->_metaKeywords = (string)$metaKeywords;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional localized meta tag keywords value
-     */
-    public function getMetaKeywords()
-    {
-        return $this->_metaKeywords;
-    }
-    /**
-     * @param string $titleTag Optional localized title tag value
-     * @return \jtl\Connector\Model\CategoryI18n
-     */
-    public function setTitleTag($titleTag)
-    {
-        $this->_titleTag = (string)$titleTag;
-        return $this;
-    }
-    
-    /**
-     * @return string Optional localized title tag value
-     */
-    public function getTitleTag()
-    {
-        return $this->_titleTag;
-    }
+    protected $_category = array();
+
+
+	/**
+	 * @type array
+	 */
+	protected $_identities = array(
+		'_categoryId',
+	);
+
+	/**
+	 * @param  string $name Localized category name
+	 * @return \jtl\Connector\Model\CategoryI18n
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setName($name)
+	{
+		if (!is_string($name))
+			throw new InvalidArgumentException('string expected.');
+		$this->_name = $name;
+		return $this;
+	}
+	
+	/**
+	 * @return string Localized category name
+	 */
+	public function getName()
+	{
+		return $this->_name;
+	}
+
+	/**
+	 * @param  string $description Optional localized Long Description
+	 * @return \jtl\Connector\Model\CategoryI18n
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setDescription($description)
+	{
+		if (!is_string($description))
+			throw new InvalidArgumentException('string expected.');
+		$this->_description = $description;
+		return $this;
+	}
+	
+	/**
+	 * @return string Optional localized Long Description
+	 */
+	public function getDescription()
+	{
+		return $this->_description;
+	}
+
+	/**
+	 * @param  string $url 
+	 * @return \jtl\Connector\Model\CategoryI18n
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setUrl($url)
+	{
+		if (!is_string($url))
+			throw new InvalidArgumentException('string expected.');
+		$this->_url = $url;
+		return $this;
+	}
+	
+	/**
+	 * @return string 
+	 */
+	public function getUrl()
+	{
+		return $this->_url;
+	}
+
+	/**
+	 * @param  Identity $categoryId Reference to category
+	 * @return \jtl\Connector\Model\CategoryI18n
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setCategoryId(Identity $categoryId)
+	{
+		
+		$this->_categoryId = $categoryId;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Reference to category
+	 */
+	public function getCategoryId()
+	{
+		return $this->_categoryId;
+	}
+
+	/**
+	 * @param  string $localeName Locale
+	 * @return \jtl\Connector\Model\CategoryI18n
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setLocaleName($localeName)
+	{
+		if (!is_string($localeName))
+			throw new InvalidArgumentException('string expected.');
+		$this->_localeName = $localeName;
+		return $this;
+	}
+	
+	/**
+	 * @return string Locale
+	 */
+	public function getLocaleName()
+	{
+		return $this->_localeName;
+	}
+
+	/**
+	 * @param  \jtl\Connector\Model\Category $category
+	 * @return \jtl\Connector\Model\CategoryI18n
+	 */
+	public function addCategory(\jtl\Connector\Model\Category $category)
+	{
+		$this->_category[] = $category;
+		return $this;
+	}
+	
+	/**
+	 * @return Category
+	 */
+	public function getCategory()
+	{
+		return $this->_category;
+	}
+
+	/**
+	 * @return \jtl\Connector\Model\CategoryI18n
+	 */
+	public function clearCategory()
+	{
+		$this->_category = array();
+		return $this;
+	}
 }
+

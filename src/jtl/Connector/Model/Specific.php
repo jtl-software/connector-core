@@ -1,153 +1,198 @@
-<?php
+﻿<?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Specific
+ * @subpackage #todo: get_main_controller#
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Specific is defined as a characteristic product attribute Like "color". Specifics can be used for after-search-filtering. 
+ * Specific is defined as a characteristic product attribute Like "color". Specifics can be used for after-search-filtering. .
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Specific
+ * @subpackage #todo: get_main_controller#
  */
 class Specific extends DataModel
 {
     /**
-     * @var Identity Unique specific id
+     * @type Identity Unique specific id
      */
     protected $_id = null;
-    
+
     /**
-     * @var int Optional sort number
+     * @type string 
+     */
+    protected $_name = '';
+
+    /**
+     * @type integer|null Optional sort number
      */
     protected $_sort = 0;
-    
+
     /**
-     * @var bool Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
-     */
-    protected $_isGlobal = false;
-    
-    /**
-     * @var string Specific type (radio, dropdown, image...)
+     * @type string Specific type (radio, dropdown, image...)
      */
     protected $_type = '';
-    
+
     /**
-     * @var mixed:string
+	 * Nav [Specific » One]
+	 *
+     * @type \jtl\Connector\Model\SpecificI18n[]
      */
-    protected $_identities = array(
-        '_id'
-    );
-    
+    protected $_specificI18ns = array();
+
     /**
-     * Specific Setter
-     *
-     * @param string $name
-     * @param string $value
+	 * Nav [Specific » ZeroOrOne]
+	 *
+     * @type \jtl\Connector\Model\SpecificValue[]
      */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_id":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-                case "_sort":
-                
-                    $this->$name = (int)$value;
-                    break;
-            
-                case "_isGlobal":
-                
-                    $this->$name = (bool)$value;
-                    break;
-            
-                case "_type":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-            }
-        }
-    }
-    
-    /**
-     * @param Identity $id Unique specific id
-     * @return \jtl\Connector\Model\Specific
-     */
-    public function setId(Identity $id)
-    {
-        $this->_id = $id;
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique specific id
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-    /**
-     * @param int $sort Optional sort number
-     * @return \jtl\Connector\Model\Specific
-     */
-    public function setSort($sort)
-    {
-        $this->_sort = (int)$sort;
-        return $this;
-    }
-    
-    /**
-     * @return int Optional sort number
-     */
-    public function getSort()
-    {
-        return $this->_sort;
-    }
-    /**
-     * @param bool $isGlobal Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
-     * @return \jtl\Connector\Model\Specific
-     */
-    public function setIsGlobal($isGlobal)
-    {
-        $this->_isGlobal = (bool)$isGlobal;
-        return $this;
-    }
-    
-    /**
-     * @return bool Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
-     */
-    public function getIsGlobal()
-    {
-        return $this->_isGlobal;
-    }
-    /**
-     * @param string $type Specific type (radio, dropdown, image...)
-     * @return \jtl\Connector\Model\Specific
-     */
-    public function setType($type)
-    {
-        $this->_type = (string)$type;
-        return $this;
-    }
-    
-    /**
-     * @return string Specific type (radio, dropdown, image...)
-     */
-    public function getType()
-    {
-        return $this->_type;
-    }
+    protected $_values = array();
+
+
+	/**
+	 * @type array
+	 */
+	protected $_identities = array(
+		'_id',
+	);
+
+	/**
+	 * @param  integer $sort Optional sort number
+	 * @return \jtl\Connector\Model\Specific
+	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+	 */
+	public function setSort($sort)
+	{
+		if (!is_integer($sort))
+			throw new InvalidArgumentException('integer expected.');
+		$this->_sort = $sort;
+		return $this;
+	}
+	
+	/**
+	 * @return integer Optional sort number
+	 */
+	public function getSort()
+	{
+		return $this->_sort;
+	}
+
+	/**
+	 * @param  string $name 
+	 * @return \jtl\Connector\Model\Specific
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setName($name)
+	{
+		if (!is_string($name))
+			throw new InvalidArgumentException('string expected.');
+		$this->_name = $name;
+		return $this;
+	}
+	
+	/**
+	 * @return string 
+	 */
+	public function getName()
+	{
+		return $this->_name;
+	}
+
+	/**
+	 * @param  string $type Specific type (radio, dropdown, image...)
+	 * @return \jtl\Connector\Model\Specific
+	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+	 */
+	public function setType($type)
+	{
+		if (!is_string($type))
+			throw new InvalidArgumentException('string expected.');
+		$this->_type = $type;
+		return $this;
+	}
+	
+	/**
+	 * @return string Specific type (radio, dropdown, image...)
+	 */
+	public function getType()
+	{
+		return $this->_type;
+	}
+
+	/**
+	 * @param  Identity $id Unique specific id
+	 * @return \jtl\Connector\Model\Specific
+	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+	 */
+	public function setId(Identity $id)
+	{
+		
+		$this->_id = $id;
+		return $this;
+	}
+	
+	/**
+	 * @return Identity Unique specific id
+	 */
+	public function getId()
+	{
+		return $this->_id;
+	}
+
+	/**
+	 * @param  \jtl\Connector\Model\SpecificI18n $specificI18ns
+	 * @return \jtl\Connector\Model\Specific
+	 */
+	public function addSpecificI18ns(\jtl\Connector\Model\SpecificI18n $specificI18ns)
+	{
+		$this->_specificI18ns[] = $specificI18ns;
+		return $this;
+	}
+	
+	/**
+	 * @return SpecificI18n
+	 */
+	public function getSpecificI18ns()
+	{
+		return $this->_specificI18ns;
+	}
+
+	/**
+	 * @return \jtl\Connector\Model\Specific
+	 */
+	public function clearSpecificI18ns()
+	{
+		$this->_specificI18ns = array();
+		return $this;
+	}
+
+	/**
+	 * @param  \jtl\Connector\Model\SpecificValue $value
+	 * @return \jtl\Connector\Model\Specific
+	 */
+	public function addValue(\jtl\Connector\Model\SpecificValue $value)
+	{
+		$this->_values[] = $value;
+		return $this;
+	}
+	
+	/**
+	 * @return SpecificValue
+	 */
+	public function getValues()
+	{
+		return $this->_values;
+	}
+
+	/**
+	 * @return \jtl\Connector\Model\Specific
+	 */
+	public function clearValues()
+	{
+		$this->_values = array();
+		return $this;
+	}
 }
+
