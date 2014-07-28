@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,63 +11,62 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class Specific extends DataModel
 {
     /**
      * @type Identity Unique specific id
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type boolean 
      */
-    public $_isGlobal = false;
+    protected $isGlobal = false;
 
     /**
      * @type string 
      */
-    public $_name = '';
+    protected $name = '';
 
     /**
      * @type integer|null Optional sort number
      */
-    public $_sort = 0;
+    protected $sort = 0;
 
     /**
      * @type string Specific type (radio, dropdown, image...)
      */
-    public $_type = '';
+    protected $type = '';
 
     /**
      * Nav [Specific » One]
      *
      * @type \jtl\Connector\Model\SpecificI18n[]
      */
-    public $_i18ns = array();
+    protected $i18ns = array();
 
     /**
      * Nav [Specific » ZeroOrOne]
      *
      * @type \jtl\Connector\Model\SpecificValue[]
      */
-    public $_values = array();
+    protected $values = array();
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
+    public $identities = array(
+        'id',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
-        '_i18ns' => '\jtl\Connector\Model\SpecificI18n',
-        '_values' => '\jtl\Connector\Model\SpecificValue',
+    public $navigations = array(
+        'i18ns' => '\jtl\Connector\Model\SpecificI18n',
+        'values' => '\jtl\Connector\Model\SpecificValue',
     );
 
     /**
@@ -76,7 +74,7 @@ class Specific extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -84,41 +82,7 @@ class Specific extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -128,7 +92,7 @@ class Specific extends DataModel
      */
     public function setSort($sort)
     {
-        return $this->setProperty('_sort', $sort, 'integer');
+        return $this->setProperty('sort', $sort, 'integer');
     }
     
     /**
@@ -136,7 +100,7 @@ class Specific extends DataModel
      */
     public function getSort()
     {
-        return $this->_sort;
+        return $this->sort;
     }
 
     /**
@@ -146,7 +110,7 @@ class Specific extends DataModel
      */
     public function setName($name)
     {
-        return $this->setProperty('_name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
     
     /**
@@ -154,7 +118,7 @@ class Specific extends DataModel
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -164,7 +128,7 @@ class Specific extends DataModel
      */
     public function setType($type)
     {
-        return $this->setProperty('_type', $type, 'string');
+        return $this->setProperty('type', $type, 'string');
     }
     
     /**
@@ -172,7 +136,7 @@ class Specific extends DataModel
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
@@ -182,7 +146,7 @@ class Specific extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -190,7 +154,7 @@ class Specific extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -200,7 +164,7 @@ class Specific extends DataModel
      */
     public function setIsGlobal($isGlobal)
     {
-        return $this->setProperty('_isGlobal', $isGlobal, 'boolean');
+        return $this->setProperty('isGlobal', $isGlobal, 'boolean');
     }
     
     /**
@@ -208,7 +172,7 @@ class Specific extends DataModel
      */
     public function getIsGlobal()
     {
-        return $this->_isGlobal;
+        return $this->isGlobal;
     }
 
     /**
@@ -217,7 +181,7 @@ class Specific extends DataModel
      */
     public function addI18ns(\jtl\Connector\Model\SpecificI18n $i18ns)
     {
-        $this->_i18ns[] = $i18ns;
+        $this->i18ns[] = $i18ns;
         return $this;
     }
     
@@ -226,7 +190,7 @@ class Specific extends DataModel
      */
     public function getI18ns()
     {
-        return $this->_i18ns;
+        return $this->i18ns;
     }
 
     /**
@@ -234,7 +198,7 @@ class Specific extends DataModel
      */
     public function clearI18ns()
     {
-        $this->_i18ns = array();
+        $this->i18ns = array();
         return $this;
     }
 
@@ -244,7 +208,7 @@ class Specific extends DataModel
      */
     public function addValue(\jtl\Connector\Model\SpecificValue $value)
     {
-        $this->_values[] = $value;
+        $this->values[] = $value;
         return $this;
     }
     
@@ -253,7 +217,7 @@ class Specific extends DataModel
      */
     public function getValues()
     {
-        return $this->_values;
+        return $this->values;
     }
 
     /**
@@ -261,7 +225,7 @@ class Specific extends DataModel
      */
     public function clearValues()
     {
-        $this->_values = array();
+        $this->values = array();
         return $this;
     }
 }

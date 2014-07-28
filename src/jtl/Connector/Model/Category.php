@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,121 +11,120 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class Category extends DataModel
 {
     /**
      * @type Identity Unique category id
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type Identity Optional reference to parent category id
      */
-    public $_parentCategoryId = null;
+    protected $parentCategoryId = null;
 
     /**
      * @type string 
      */
-    public $_description = '';
+    protected $description = '';
 
     /**
      * @type boolean 
      */
-    public $_flagDelete = false;
+    protected $flagDelete = false;
 
     /**
      * @type boolean 
      */
-    public $_flagUpdate = false;
+    protected $flagUpdate = false;
 
     /**
      * @type boolean 
      */
-    public $_isActive = false;
+    protected $isActive = false;
 
     /**
      * @type integer 
      */
-    public $_level = 0;
+    protected $level = 0;
 
     /**
      * @type string 
      */
-    public $_name = '';
+    protected $name = '';
 
     /**
      * @type integer|null Optional sort order number
      */
-    public $_sort = 0;
+    protected $sort = 0;
 
     /**
      * @type string 
      */
-    public $_url = '';
+    protected $url = '';
 
     /**
      * Nav [ParentCategory » ZeroOrOne]
      *
      * @type \jtl\Connector\Model\Category[]
      */
-    public $_children = array();
+    protected $children = array();
 
     /**
      * Nav [ChildCategory » Many]
      *
      * @type \jtl\Connector\Model\Category[]
      */
-    public $_parent = array();
+    protected $parent = array();
 
     /**
      * Nav [Category » One]
      *
      * @type \jtl\Connector\Model\CategoryI18n[]
      */
-    public $_i18ns = array();
+    protected $i18ns = array();
 
     /**
      * Nav [Category » One]
      *
      * @type \jtl\Connector\Model\CategoryInvisibility[]
      */
-    public $_invisibilities = array();
+    protected $invisibilities = array();
 
     /**
      * Nav [Category » One]
      *
      * @type \jtl\Connector\Model\CategoryCustomerGroup[]
      */
-    public $_customerGroups = array();
+    protected $customerGroups = array();
 
     /**
      * Nav [Category » One]
      *
      * @type \jtl\Connector\Model\CategoryAttr[]
      */
-    public $_attributes = array();
+    protected $attributes = array();
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
-        '_parentCategoryId',
+    public $identities = array(
+        'id',
+        'parentCategoryId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
-        '_children' => '\jtl\Connector\Model\Category',
-        '_parent' => '\jtl\Connector\Model\Category',
-        '_i18ns' => '\jtl\Connector\Model\CategoryI18n',
-        '_invisibilities' => '\jtl\Connector\Model\CategoryInvisibility',
-        '_customerGroups' => '\jtl\Connector\Model\CategoryCustomerGroup',
-        '_attributes' => '\jtl\Connector\Model\CategoryAttr',
+    public $navigations = array(
+        'children' => '\jtl\Connector\Model\Category',
+        'parent' => '\jtl\Connector\Model\Category',
+        'i18ns' => '\jtl\Connector\Model\CategoryI18n',
+        'invisibilities' => '\jtl\Connector\Model\CategoryInvisibility',
+        'customerGroups' => '\jtl\Connector\Model\CategoryCustomerGroup',
+        'attributes' => '\jtl\Connector\Model\CategoryAttr',
     );
 
     /**
@@ -134,7 +132,7 @@ class Category extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -142,41 +140,7 @@ class Category extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -186,7 +150,7 @@ class Category extends DataModel
      */
     public function setName($name)
     {
-        return $this->setProperty('_name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
     
     /**
@@ -194,7 +158,7 @@ class Category extends DataModel
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -204,7 +168,7 @@ class Category extends DataModel
      */
     public function setDescription($description)
     {
-        return $this->setProperty('_description', $description, 'string');
+        return $this->setProperty('description', $description, 'string');
     }
     
     /**
@@ -212,7 +176,7 @@ class Category extends DataModel
      */
     public function getDescription()
     {
-        return $this->_description;
+        return $this->description;
     }
 
     /**
@@ -222,7 +186,7 @@ class Category extends DataModel
      */
     public function setSort($sort)
     {
-        return $this->setProperty('_sort', $sort, 'integer');
+        return $this->setProperty('sort', $sort, 'integer');
     }
     
     /**
@@ -230,7 +194,7 @@ class Category extends DataModel
      */
     public function getSort()
     {
-        return $this->_sort;
+        return $this->sort;
     }
 
     /**
@@ -240,7 +204,7 @@ class Category extends DataModel
      */
     public function setUrl($url)
     {
-        return $this->setProperty('_url', $url, 'string');
+        return $this->setProperty('url', $url, 'string');
     }
     
     /**
@@ -248,7 +212,7 @@ class Category extends DataModel
      */
     public function getUrl()
     {
-        return $this->_url;
+        return $this->url;
     }
 
     /**
@@ -258,7 +222,7 @@ class Category extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -266,7 +230,7 @@ class Category extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -276,7 +240,7 @@ class Category extends DataModel
      */
     public function setParentCategoryId(Identity $parentCategoryId)
     {
-        return $this->setProperty('_parentCategoryId', $parentCategoryId, 'Identity');
+        return $this->setProperty('parentCategoryId', $parentCategoryId, 'Identity');
     }
     
     /**
@@ -284,7 +248,7 @@ class Category extends DataModel
      */
     public function getParentCategoryId()
     {
-        return $this->_parentCategoryId;
+        return $this->parentCategoryId;
     }
 
     /**
@@ -294,7 +258,7 @@ class Category extends DataModel
      */
     public function setFlagUpdate($flagUpdate)
     {
-        return $this->setProperty('_flagUpdate', $flagUpdate, 'boolean');
+        return $this->setProperty('flagUpdate', $flagUpdate, 'boolean');
     }
     
     /**
@@ -302,7 +266,7 @@ class Category extends DataModel
      */
     public function getFlagUpdate()
     {
-        return $this->_flagUpdate;
+        return $this->flagUpdate;
     }
 
     /**
@@ -312,7 +276,7 @@ class Category extends DataModel
      */
     public function setIsActive($isActive)
     {
-        return $this->setProperty('_isActive', $isActive, 'boolean');
+        return $this->setProperty('isActive', $isActive, 'boolean');
     }
     
     /**
@@ -320,7 +284,7 @@ class Category extends DataModel
      */
     public function getIsActive()
     {
-        return $this->_isActive;
+        return $this->isActive;
     }
 
     /**
@@ -330,7 +294,7 @@ class Category extends DataModel
      */
     public function setFlagDelete($flagDelete)
     {
-        return $this->setProperty('_flagDelete', $flagDelete, 'boolean');
+        return $this->setProperty('flagDelete', $flagDelete, 'boolean');
     }
     
     /**
@@ -338,7 +302,7 @@ class Category extends DataModel
      */
     public function getFlagDelete()
     {
-        return $this->_flagDelete;
+        return $this->flagDelete;
     }
 
     /**
@@ -348,7 +312,7 @@ class Category extends DataModel
      */
     public function setLevel($level)
     {
-        return $this->setProperty('_level', $level, 'integer');
+        return $this->setProperty('level', $level, 'integer');
     }
     
     /**
@@ -356,7 +320,7 @@ class Category extends DataModel
      */
     public function getLevel()
     {
-        return $this->_level;
+        return $this->level;
     }
 
     /**
@@ -365,7 +329,7 @@ class Category extends DataModel
      */
     public function addChild(\jtl\Connector\Model\Category $child)
     {
-        $this->_children[] = $child;
+        $this->children[] = $child;
         return $this;
     }
     
@@ -374,7 +338,7 @@ class Category extends DataModel
      */
     public function getChildren()
     {
-        return $this->_children;
+        return $this->children;
     }
 
     /**
@@ -382,7 +346,7 @@ class Category extends DataModel
      */
     public function clearChildren()
     {
-        $this->_children = array();
+        $this->children = array();
         return $this;
     }
 
@@ -392,7 +356,7 @@ class Category extends DataModel
      */
     public function addParent(\jtl\Connector\Model\Category $parent)
     {
-        $this->_parent[] = $parent;
+        $this->parent[] = $parent;
         return $this;
     }
     
@@ -401,7 +365,7 @@ class Category extends DataModel
      */
     public function getParent()
     {
-        return $this->_parent;
+        return $this->parent;
     }
 
     /**
@@ -409,7 +373,7 @@ class Category extends DataModel
      */
     public function clearParent()
     {
-        $this->_parent = array();
+        $this->parent = array();
         return $this;
     }
 
@@ -419,7 +383,7 @@ class Category extends DataModel
      */
     public function addI18ns(\jtl\Connector\Model\CategoryI18n $i18ns)
     {
-        $this->_i18ns[] = $i18ns;
+        $this->i18ns[] = $i18ns;
         return $this;
     }
     
@@ -428,7 +392,7 @@ class Category extends DataModel
      */
     public function getI18ns()
     {
-        return $this->_i18ns;
+        return $this->i18ns;
     }
 
     /**
@@ -436,7 +400,7 @@ class Category extends DataModel
      */
     public function clearI18ns()
     {
-        $this->_i18ns = array();
+        $this->i18ns = array();
         return $this;
     }
 
@@ -446,7 +410,7 @@ class Category extends DataModel
      */
     public function addInvisibility(\jtl\Connector\Model\CategoryInvisibility $invisibility)
     {
-        $this->_invisibilities[] = $invisibility;
+        $this->invisibilities[] = $invisibility;
         return $this;
     }
     
@@ -455,7 +419,7 @@ class Category extends DataModel
      */
     public function getInvisibilities()
     {
-        return $this->_invisibilities;
+        return $this->invisibilities;
     }
 
     /**
@@ -463,7 +427,7 @@ class Category extends DataModel
      */
     public function clearInvisibilities()
     {
-        $this->_invisibilities = array();
+        $this->invisibilities = array();
         return $this;
     }
 
@@ -473,7 +437,7 @@ class Category extends DataModel
      */
     public function addCustomerGroup(\jtl\Connector\Model\CategoryCustomerGroup $customerGroup)
     {
-        $this->_customerGroups[] = $customerGroup;
+        $this->customerGroups[] = $customerGroup;
         return $this;
     }
     
@@ -482,7 +446,7 @@ class Category extends DataModel
      */
     public function getCustomerGroups()
     {
-        return $this->_customerGroups;
+        return $this->customerGroups;
     }
 
     /**
@@ -490,7 +454,7 @@ class Category extends DataModel
      */
     public function clearCustomerGroups()
     {
-        $this->_customerGroups = array();
+        $this->customerGroups = array();
         return $this;
     }
 
@@ -500,7 +464,7 @@ class Category extends DataModel
      */
     public function addAttribute(\jtl\Connector\Model\CategoryAttr $attribute)
     {
-        $this->_attributes[] = $attribute;
+        $this->attributes[] = $attribute;
         return $this;
     }
     
@@ -509,7 +473,7 @@ class Category extends DataModel
      */
     public function getAttributes()
     {
-        return $this->_attributes;
+        return $this->attributes;
     }
 
     /**
@@ -517,7 +481,7 @@ class Category extends DataModel
      */
     public function clearAttributes()
     {
-        $this->_attributes = array();
+        $this->attributes = array();
         return $this;
     }
 }

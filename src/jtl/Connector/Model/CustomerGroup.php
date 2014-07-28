@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,68 +11,67 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class CustomerGroup extends DataModel
 {
     /**
      * @type Identity Unique customerGroup id
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type integer|null Optional: Show net prices default instead of gross prices
      */
-    public $_applyNetPrice = 0;
+    protected $applyNetPrice = 0;
 
     /**
      * @type float|null Optional percentual discount on all products. Negative Value means surcharge. 
      */
-    public $_discount = 0.0;
+    protected $discount = 0.0;
 
     /**
      * @type boolean Optional: Flag default customer group
      */
-    public $_isDefault = false;
+    protected $isDefault = false;
 
     /**
      * @type integer|null 
      */
-    public $_kKundenDrucktext = 0;
+    protected $kKundenDrucktext = 0;
 
     /**
      * @type string 
      */
-    public $_name = '';
+    protected $name = '';
 
     /**
      * Nav [CustomerGroup » One]
      *
      * @type \jtl\Connector\Model\CustomerGroupAttr[]
      */
-    public $_attributes = array();
+    protected $attributes = array();
 
     /**
      * Nav [CustomerGroup » One]
      *
      * @type \jtl\Connector\Model\CustomerGroupI18n[]
      */
-    public $_i18n = array();
+    protected $i18n = array();
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
+    public $identities = array(
+        'id',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
-        '_attributes' => '\jtl\Connector\Model\CustomerGroupAttr',
-        '_i18n' => '\jtl\Connector\Model\CustomerGroupI18n',
+    public $navigations = array(
+        'attributes' => '\jtl\Connector\Model\CustomerGroupAttr',
+        'i18n' => '\jtl\Connector\Model\CustomerGroupI18n',
     );
 
     /**
@@ -81,7 +79,7 @@ class CustomerGroup extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -89,41 +87,7 @@ class CustomerGroup extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -133,7 +97,7 @@ class CustomerGroup extends DataModel
      */
     public function setName($name)
     {
-        return $this->setProperty('_name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
     
     /**
@@ -141,7 +105,7 @@ class CustomerGroup extends DataModel
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -151,7 +115,7 @@ class CustomerGroup extends DataModel
      */
     public function setApplyNetPrice($applyNetPrice)
     {
-        return $this->setProperty('_applyNetPrice', $applyNetPrice, 'integer');
+        return $this->setProperty('applyNetPrice', $applyNetPrice, 'integer');
     }
     
     /**
@@ -159,7 +123,7 @@ class CustomerGroup extends DataModel
      */
     public function getApplyNetPrice()
     {
-        return $this->_applyNetPrice;
+        return $this->applyNetPrice;
     }
 
     /**
@@ -169,7 +133,7 @@ class CustomerGroup extends DataModel
      */
     public function setDiscount($discount)
     {
-        return $this->setProperty('_discount', $discount, 'float');
+        return $this->setProperty('discount', $discount, 'float');
     }
     
     /**
@@ -177,7 +141,7 @@ class CustomerGroup extends DataModel
      */
     public function getDiscount()
     {
-        return $this->_discount;
+        return $this->discount;
     }
 
     /**
@@ -187,7 +151,7 @@ class CustomerGroup extends DataModel
      */
     public function setKKundenDrucktext($kKundenDrucktext)
     {
-        return $this->setProperty('_kKundenDrucktext', $kKundenDrucktext, 'integer');
+        return $this->setProperty('kKundenDrucktext', $kKundenDrucktext, 'integer');
     }
     
     /**
@@ -195,7 +159,7 @@ class CustomerGroup extends DataModel
      */
     public function getKKundenDrucktext()
     {
-        return $this->_kKundenDrucktext;
+        return $this->kKundenDrucktext;
     }
 
     /**
@@ -205,7 +169,7 @@ class CustomerGroup extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -213,7 +177,7 @@ class CustomerGroup extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -223,7 +187,7 @@ class CustomerGroup extends DataModel
      */
     public function setIsDefault($isDefault)
     {
-        return $this->setProperty('_isDefault', $isDefault, 'boolean');
+        return $this->setProperty('isDefault', $isDefault, 'boolean');
     }
     
     /**
@@ -231,7 +195,7 @@ class CustomerGroup extends DataModel
      */
     public function getIsDefault()
     {
-        return $this->_isDefault;
+        return $this->isDefault;
     }
 
     /**
@@ -240,7 +204,7 @@ class CustomerGroup extends DataModel
      */
     public function addAttribute(\jtl\Connector\Model\CustomerGroupAttr $attribute)
     {
-        $this->_attributes[] = $attribute;
+        $this->attributes[] = $attribute;
         return $this;
     }
     
@@ -249,7 +213,7 @@ class CustomerGroup extends DataModel
      */
     public function getAttributes()
     {
-        return $this->_attributes;
+        return $this->attributes;
     }
 
     /**
@@ -257,7 +221,7 @@ class CustomerGroup extends DataModel
      */
     public function clearAttributes()
     {
-        $this->_attributes = array();
+        $this->attributes = array();
         return $this;
     }
 
@@ -267,7 +231,7 @@ class CustomerGroup extends DataModel
      */
     public function addI18n(\jtl\Connector\Model\CustomerGroupI18n $i18n)
     {
-        $this->_i18n[] = $i18n;
+        $this->i18n[] = $i18n;
         return $this;
     }
     
@@ -276,7 +240,7 @@ class CustomerGroup extends DataModel
      */
     public function getI18n()
     {
-        return $this->_i18n;
+        return $this->i18n;
     }
 
     /**
@@ -284,7 +248,7 @@ class CustomerGroup extends DataModel
      */
     public function clearI18n()
     {
-        $this->_i18n = array();
+        $this->i18n = array();
         return $this;
     }
 }

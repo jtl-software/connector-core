@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,51 +11,50 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class CustomerGroupAttr extends DataModel
 {
     /**
      * @type Identity Reference to customerGroup
      */
-    public $_customerGroupId = null;
+    protected $customerGroupId = null;
 
     /**
      * @type Identity Unique customerGroupAttr id
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type string Attribute key
      */
-    public $_key = '';
+    protected $key = '';
 
     /**
      * @type string Attribute value
      */
-    public $_value = '';
+    protected $value = '';
 
     /**
      * Nav [CustomerGroupAttr » Many]
      *
      * @type \jtl\Connector\Model\CustomerGroup[]
      */
-    public $_customerGroup = array();
+    protected $customerGroup = array();
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
-        '_customerGroupId',
+    public $identities = array(
+        'id',
+        'customerGroupId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
-        '_customerGroup' => '\jtl\Connector\Model\CustomerGroup',
+    public $navigations = array(
+        'customerGroup' => '\jtl\Connector\Model\CustomerGroup',
     );
 
     /**
@@ -64,7 +62,7 @@ class CustomerGroupAttr extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -72,41 +70,7 @@ class CustomerGroupAttr extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -116,7 +80,7 @@ class CustomerGroupAttr extends DataModel
      */
     public function setKey($key)
     {
-        return $this->setProperty('_key', $key, 'string');
+        return $this->setProperty('key', $key, 'string');
     }
     
     /**
@@ -124,7 +88,7 @@ class CustomerGroupAttr extends DataModel
      */
     public function getKey()
     {
-        return $this->_key;
+        return $this->key;
     }
 
     /**
@@ -134,7 +98,7 @@ class CustomerGroupAttr extends DataModel
      */
     public function setValue($value)
     {
-        return $this->setProperty('_value', $value, 'string');
+        return $this->setProperty('value', $value, 'string');
     }
     
     /**
@@ -142,7 +106,7 @@ class CustomerGroupAttr extends DataModel
      */
     public function getValue()
     {
-        return $this->_value;
+        return $this->value;
     }
 
     /**
@@ -152,7 +116,7 @@ class CustomerGroupAttr extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -160,7 +124,7 @@ class CustomerGroupAttr extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -170,7 +134,7 @@ class CustomerGroupAttr extends DataModel
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('_customerGroupId', $customerGroupId, 'Identity');
+        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
     }
     
     /**
@@ -178,7 +142,7 @@ class CustomerGroupAttr extends DataModel
      */
     public function getCustomerGroupId()
     {
-        return $this->_customerGroupId;
+        return $this->customerGroupId;
     }
 
     /**
@@ -187,7 +151,7 @@ class CustomerGroupAttr extends DataModel
      */
     public function addCustomerGroup(\jtl\Connector\Model\CustomerGroup $customerGroup)
     {
-        $this->_customerGroup[] = $customerGroup;
+        $this->customerGroup[] = $customerGroup;
         return $this;
     }
     
@@ -196,7 +160,7 @@ class CustomerGroupAttr extends DataModel
      */
     public function getCustomerGroup()
     {
-        return $this->_customerGroup;
+        return $this->customerGroup;
     }
 
     /**
@@ -204,7 +168,7 @@ class CustomerGroupAttr extends DataModel
      */
     public function clearCustomerGroup()
     {
-        $this->_customerGroup = array();
+        $this->customerGroup = array();
         return $this;
     }
 }

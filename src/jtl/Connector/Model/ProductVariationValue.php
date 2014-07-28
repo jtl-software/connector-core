@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,115 +11,114 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class ProductVariationValue extends DataModel
 {
     /**
      * @type Identity Unique productVariationValue id
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type Identity Reference to productVariation
      */
-    public $_productVariationId = null;
+    protected $productVariationId = null;
 
     /**
      * @type string 
      */
-    public $_cName = '';
+    protected $cName = '';
 
     /**
      * @type string 
      */
-    public $_ean = '';
+    protected $ean = '';
 
     /**
      * @type float|null 
      */
-    public $_extraCharge = 0.0;
+    protected $extraCharge = 0.0;
 
     /**
      * @type float|null 
      */
-    public $_extraChargeNet = 0.0;
+    protected $extraChargeNet = 0.0;
 
     /**
      * @type float|null Optional variation extra weight
      */
-    public $_extraWeight = 0.0;
+    protected $extraWeight = 0.0;
 
     /**
      * @type boolean 
      */
-    public $_flagUpdate = false;
+    protected $flagUpdate = false;
 
     /**
      * @type boolean 
      */
-    public $_isActive = false;
+    protected $isActive = false;
 
     /**
      * @type string Optional Stock Keeping Unit
      */
-    public $_sku = '';
+    protected $sku = '';
 
     /**
      * @type integer|null Optional sort number
      */
-    public $_sort = 0;
+    protected $sort = 0;
 
     /**
      * @type float|null Optional stock level
      */
-    public $_stockLevel = 0.0;
+    protected $stockLevel = 0.0;
 
     /**
      * Nav [ProductVariationValue » ZeroOrOne]
      *
      * @type \jtl\Connector\Model\ProductVariationValueDependency[]
      */
-    public $_dependencies = array();
+    protected $dependencies = array();
 
     /**
      * Nav [ProductVariationValue » One]
      *
      * @type \jtl\Connector\Model\ProductVariationValueExtraCharge[]
      */
-    public $_extraCharges = array();
+    protected $extraCharges = array();
 
     /**
      * Nav [ProductVariationValue » One]
      *
      * @type \jtl\Connector\Model\ProductVariationValueI18n[]
      */
-    public $_i18ns = array();
+    protected $i18ns = array();
 
     /**
      * Nav [ProductVariationValue » One]
      *
      * @type \jtl\Connector\Model\ProductVariationValueInvisibility[]
      */
-    public $_invisibilities = array();
+    protected $invisibilities = array();
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
-        '_productVariationId',
+    public $identities = array(
+        'id',
+        'productVariationId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
-        '_dependencies' => '\jtl\Connector\Model\ProductVariationValueDependency',
-        '_extraCharges' => '\jtl\Connector\Model\ProductVariationValueExtraCharge',
-        '_i18ns' => '\jtl\Connector\Model\ProductVariationValueI18n',
-        '_invisibilities' => '\jtl\Connector\Model\ProductVariationValueInvisibility',
+    public $navigations = array(
+        'dependencies' => '\jtl\Connector\Model\ProductVariationValueDependency',
+        'extraCharges' => '\jtl\Connector\Model\ProductVariationValueExtraCharge',
+        'i18ns' => '\jtl\Connector\Model\ProductVariationValueI18n',
+        'invisibilities' => '\jtl\Connector\Model\ProductVariationValueInvisibility',
     );
 
     /**
@@ -128,7 +126,7 @@ class ProductVariationValue extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -136,41 +134,7 @@ class ProductVariationValue extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -180,7 +144,7 @@ class ProductVariationValue extends DataModel
      */
     public function setExtraCharge($extraCharge)
     {
-        return $this->setProperty('_extraCharge', $extraCharge, 'float');
+        return $this->setProperty('extraCharge', $extraCharge, 'float');
     }
     
     /**
@@ -188,7 +152,7 @@ class ProductVariationValue extends DataModel
      */
     public function getExtraCharge()
     {
-        return $this->_extraCharge;
+        return $this->extraCharge;
     }
 
     /**
@@ -198,7 +162,7 @@ class ProductVariationValue extends DataModel
      */
     public function setExtraChargeNet($extraChargeNet)
     {
-        return $this->setProperty('_extraChargeNet', $extraChargeNet, 'float');
+        return $this->setProperty('extraChargeNet', $extraChargeNet, 'float');
     }
     
     /**
@@ -206,7 +170,7 @@ class ProductVariationValue extends DataModel
      */
     public function getExtraChargeNet()
     {
-        return $this->_extraChargeNet;
+        return $this->extraChargeNet;
     }
 
     /**
@@ -216,7 +180,7 @@ class ProductVariationValue extends DataModel
      */
     public function setExtraWeight($extraWeight)
     {
-        return $this->setProperty('_extraWeight', $extraWeight, 'float');
+        return $this->setProperty('extraWeight', $extraWeight, 'float');
     }
     
     /**
@@ -224,7 +188,7 @@ class ProductVariationValue extends DataModel
      */
     public function getExtraWeight()
     {
-        return $this->_extraWeight;
+        return $this->extraWeight;
     }
 
     /**
@@ -234,7 +198,7 @@ class ProductVariationValue extends DataModel
      */
     public function setSku($sku)
     {
-        return $this->setProperty('_sku', $sku, 'string');
+        return $this->setProperty('sku', $sku, 'string');
     }
     
     /**
@@ -242,7 +206,7 @@ class ProductVariationValue extends DataModel
      */
     public function getSku()
     {
-        return $this->_sku;
+        return $this->sku;
     }
 
     /**
@@ -252,7 +216,7 @@ class ProductVariationValue extends DataModel
      */
     public function setSort($sort)
     {
-        return $this->setProperty('_sort', $sort, 'integer');
+        return $this->setProperty('sort', $sort, 'integer');
     }
     
     /**
@@ -260,7 +224,7 @@ class ProductVariationValue extends DataModel
      */
     public function getSort()
     {
-        return $this->_sort;
+        return $this->sort;
     }
 
     /**
@@ -270,7 +234,7 @@ class ProductVariationValue extends DataModel
      */
     public function setStockLevel($stockLevel)
     {
-        return $this->setProperty('_stockLevel', $stockLevel, 'float');
+        return $this->setProperty('stockLevel', $stockLevel, 'float');
     }
     
     /**
@@ -278,7 +242,7 @@ class ProductVariationValue extends DataModel
      */
     public function getStockLevel()
     {
-        return $this->_stockLevel;
+        return $this->stockLevel;
     }
 
     /**
@@ -288,7 +252,7 @@ class ProductVariationValue extends DataModel
      */
     public function setEan($ean)
     {
-        return $this->setProperty('_ean', $ean, 'string');
+        return $this->setProperty('ean', $ean, 'string');
     }
     
     /**
@@ -296,7 +260,7 @@ class ProductVariationValue extends DataModel
      */
     public function getEan()
     {
-        return $this->_ean;
+        return $this->ean;
     }
 
     /**
@@ -306,7 +270,7 @@ class ProductVariationValue extends DataModel
      */
     public function setCName($cName)
     {
-        return $this->setProperty('_cName', $cName, 'string');
+        return $this->setProperty('cName', $cName, 'string');
     }
     
     /**
@@ -314,7 +278,7 @@ class ProductVariationValue extends DataModel
      */
     public function getCName()
     {
-        return $this->_cName;
+        return $this->cName;
     }
 
     /**
@@ -324,7 +288,7 @@ class ProductVariationValue extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -332,7 +296,7 @@ class ProductVariationValue extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -342,7 +306,7 @@ class ProductVariationValue extends DataModel
      */
     public function setProductVariationId(Identity $productVariationId)
     {
-        return $this->setProperty('_productVariationId', $productVariationId, 'Identity');
+        return $this->setProperty('productVariationId', $productVariationId, 'Identity');
     }
     
     /**
@@ -350,7 +314,7 @@ class ProductVariationValue extends DataModel
      */
     public function getProductVariationId()
     {
-        return $this->_productVariationId;
+        return $this->productVariationId;
     }
 
     /**
@@ -360,7 +324,7 @@ class ProductVariationValue extends DataModel
      */
     public function setIsActive($isActive)
     {
-        return $this->setProperty('_isActive', $isActive, 'boolean');
+        return $this->setProperty('isActive', $isActive, 'boolean');
     }
     
     /**
@@ -368,7 +332,7 @@ class ProductVariationValue extends DataModel
      */
     public function getIsActive()
     {
-        return $this->_isActive;
+        return $this->isActive;
     }
 
     /**
@@ -378,7 +342,7 @@ class ProductVariationValue extends DataModel
      */
     public function setFlagUpdate($flagUpdate)
     {
-        return $this->setProperty('_flagUpdate', $flagUpdate, 'boolean');
+        return $this->setProperty('flagUpdate', $flagUpdate, 'boolean');
     }
     
     /**
@@ -386,7 +350,7 @@ class ProductVariationValue extends DataModel
      */
     public function getFlagUpdate()
     {
-        return $this->_flagUpdate;
+        return $this->flagUpdate;
     }
 
     /**
@@ -395,7 +359,7 @@ class ProductVariationValue extends DataModel
      */
     public function addDependency(\jtl\Connector\Model\ProductVariationValueDependency $dependency)
     {
-        $this->_dependencies[] = $dependency;
+        $this->dependencies[] = $dependency;
         return $this;
     }
     
@@ -404,7 +368,7 @@ class ProductVariationValue extends DataModel
      */
     public function getDependencies()
     {
-        return $this->_dependencies;
+        return $this->dependencies;
     }
 
     /**
@@ -412,7 +376,7 @@ class ProductVariationValue extends DataModel
      */
     public function clearDependencies()
     {
-        $this->_dependencies = array();
+        $this->dependencies = array();
         return $this;
     }
 
@@ -422,7 +386,7 @@ class ProductVariationValue extends DataModel
      */
     public function addExtraCharge(\jtl\Connector\Model\ProductVariationValueExtraCharge $extraCharge)
     {
-        $this->_extraCharges[] = $extraCharge;
+        $this->extraCharges[] = $extraCharge;
         return $this;
     }
     
@@ -431,7 +395,7 @@ class ProductVariationValue extends DataModel
      */
     public function getExtraCharges()
     {
-        return $this->_extraCharges;
+        return $this->extraCharges;
     }
 
     /**
@@ -439,7 +403,7 @@ class ProductVariationValue extends DataModel
      */
     public function clearExtraCharges()
     {
-        $this->_extraCharges = array();
+        $this->extraCharges = array();
         return $this;
     }
 
@@ -449,7 +413,7 @@ class ProductVariationValue extends DataModel
      */
     public function addI18ns(\jtl\Connector\Model\ProductVariationValueI18n $i18ns)
     {
-        $this->_i18ns[] = $i18ns;
+        $this->i18ns[] = $i18ns;
         return $this;
     }
     
@@ -458,7 +422,7 @@ class ProductVariationValue extends DataModel
      */
     public function getI18ns()
     {
-        return $this->_i18ns;
+        return $this->i18ns;
     }
 
     /**
@@ -466,7 +430,7 @@ class ProductVariationValue extends DataModel
      */
     public function clearI18ns()
     {
-        $this->_i18ns = array();
+        $this->i18ns = array();
         return $this;
     }
 
@@ -476,7 +440,7 @@ class ProductVariationValue extends DataModel
      */
     public function addInvisibility(\jtl\Connector\Model\ProductVariationValueInvisibility $invisibility)
     {
-        $this->_invisibilities[] = $invisibility;
+        $this->invisibilities[] = $invisibility;
         return $this;
     }
     
@@ -485,7 +449,7 @@ class ProductVariationValue extends DataModel
      */
     public function getInvisibilities()
     {
-        return $this->_invisibilities;
+        return $this->invisibilities;
     }
 
     /**
@@ -493,7 +457,7 @@ class ProductVariationValue extends DataModel
      */
     public function clearInvisibilities()
     {
-        $this->_invisibilities = array();
+        $this->invisibilities = array();
         return $this;
     }
 }

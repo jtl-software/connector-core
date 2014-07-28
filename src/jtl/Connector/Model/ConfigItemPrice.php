@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,54 +11,53 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class ConfigItemPrice extends DataModel
 {
     /**
      * @type Identity Reference to configItem
      */
-    public $_configItemId = null;
+    protected $configItemId = null;
 
     /**
      * @type Identity Reference to customerGroup
      */
-    public $_customerGroupId = null;
+    protected $customerGroupId = null;
 
     /**
      * @type Identity 
      */
-    public $_taxClassId = null;
+    protected $taxClassId = null;
 
     /**
      * @type integer 
      */
-    public $_connectorId = 0;
+    protected $connectorId = 0;
 
     /**
      * @type float|null Net price or percental value to add/deduct to/from product price (depending on type). Positive value means surcharge, negative value means discount. Also see configItem.vat for value added tax.
      */
-    public $_price = 0.0;
+    protected $price = 0.0;
 
     /**
      * @type integer|null Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
      */
-    public $_type = 0;
+    protected $type = 0;
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_configItemId',
-        '_customerGroupId',
-        '_taxClassId',
+    public $identities = array(
+        'configItemId',
+        'customerGroupId',
+        'taxClassId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -67,7 +65,7 @@ class ConfigItemPrice extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -75,41 +73,7 @@ class ConfigItemPrice extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -119,7 +83,7 @@ class ConfigItemPrice extends DataModel
      */
     public function setPrice($price)
     {
-        return $this->setProperty('_price', $price, 'float');
+        return $this->setProperty('price', $price, 'float');
     }
     
     /**
@@ -127,7 +91,7 @@ class ConfigItemPrice extends DataModel
      */
     public function getPrice()
     {
-        return $this->_price;
+        return $this->price;
     }
 
     /**
@@ -137,7 +101,7 @@ class ConfigItemPrice extends DataModel
      */
     public function setConnectorId($connectorId)
     {
-        return $this->setProperty('_connectorId', $connectorId, 'integer');
+        return $this->setProperty('connectorId', $connectorId, 'integer');
     }
     
     /**
@@ -145,7 +109,7 @@ class ConfigItemPrice extends DataModel
      */
     public function getConnectorId()
     {
-        return $this->_connectorId;
+        return $this->connectorId;
     }
 
     /**
@@ -155,7 +119,7 @@ class ConfigItemPrice extends DataModel
      */
     public function setType($type)
     {
-        return $this->setProperty('_type', $type, 'integer');
+        return $this->setProperty('type', $type, 'integer');
     }
     
     /**
@@ -163,7 +127,7 @@ class ConfigItemPrice extends DataModel
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
@@ -173,7 +137,7 @@ class ConfigItemPrice extends DataModel
      */
     public function setConfigItemId(Identity $configItemId)
     {
-        return $this->setProperty('_configItemId', $configItemId, 'Identity');
+        return $this->setProperty('configItemId', $configItemId, 'Identity');
     }
     
     /**
@@ -181,7 +145,7 @@ class ConfigItemPrice extends DataModel
      */
     public function getConfigItemId()
     {
-        return $this->_configItemId;
+        return $this->configItemId;
     }
 
     /**
@@ -191,7 +155,7 @@ class ConfigItemPrice extends DataModel
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('_customerGroupId', $customerGroupId, 'Identity');
+        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
     }
     
     /**
@@ -199,7 +163,7 @@ class ConfigItemPrice extends DataModel
      */
     public function getCustomerGroupId()
     {
-        return $this->_customerGroupId;
+        return $this->customerGroupId;
     }
 
     /**
@@ -209,7 +173,7 @@ class ConfigItemPrice extends DataModel
      */
     public function setTaxClassId(Identity $taxClassId)
     {
-        return $this->setProperty('_taxClassId', $taxClassId, 'Identity');
+        return $this->setProperty('taxClassId', $taxClassId, 'Identity');
     }
     
     /**
@@ -217,7 +181,7 @@ class ConfigItemPrice extends DataModel
      */
     public function getTaxClassId()
     {
-        return $this->_taxClassId;
+        return $this->taxClassId;
     }
 }
 

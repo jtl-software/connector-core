@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,71 +11,70 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class ProductSpecialPrice extends DataModel
 {
     /**
      * @type Identity Unique productSpecialPrice id
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type Identity Reference to product
      */
-    public $_productId = null;
+    protected $productId = null;
 
     /**
      * @type DateTime|null Optional: Activate special price from date
      */
-    public $_activeFrom = null;
+    protected $activeFrom = null;
 
     /**
      * @type DateTime|null Optional: Special price active until date
      */
-    public $_activeUntil = null;
+    protected $activeUntil = null;
 
     /**
      * @type integer|null Optional: Consider activeFrom/activeUntil date range. If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
      */
-    public $_considerDateLimit = 0;
+    protected $considerDateLimit = 0;
 
     /**
      * @type integer|null Optional: Consider stockLimit value. If true, specialPrice will be only active until product stockLevel is greater or equal stockLimit.
      */
-    public $_considerStockLimit = 0;
+    protected $considerStockLimit = 0;
 
     /**
      * @type boolean Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match. 
      */
-    public $_isActive = false;
+    protected $isActive = false;
 
     /**
      * @type integer|null Optional: SpecialPrice active until stock level quantity
      */
-    public $_stockLimit = 0;
+    protected $stockLimit = 0;
 
     /**
      * Nav [ProductSpecialPrice » One]
      *
      * @type \jtl\Connector\Model\SpecialPrice[]
      */
-    public $_specialPrices = array();
+    protected $specialPrices = array();
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
-        '_productId',
+    public $identities = array(
+        'id',
+        'productId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
-        '_specialPrices' => '\jtl\Connector\Model\SpecialPrice',
+    public $navigations = array(
+        'specialPrices' => '\jtl\Connector\Model\SpecialPrice',
     );
 
     /**
@@ -84,7 +82,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -92,41 +90,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -136,7 +100,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function setActiveFrom(DateTime $activeFrom)
     {
-        return $this->setProperty('_activeFrom', $activeFrom, 'DateTime');
+        return $this->setProperty('activeFrom', $activeFrom, 'DateTime');
     }
     
     /**
@@ -144,7 +108,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function getActiveFrom()
     {
-        return $this->_activeFrom;
+        return $this->activeFrom;
     }
 
     /**
@@ -154,7 +118,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function setStockLimit($stockLimit)
     {
-        return $this->setProperty('_stockLimit', $stockLimit, 'integer');
+        return $this->setProperty('stockLimit', $stockLimit, 'integer');
     }
     
     /**
@@ -162,7 +126,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function getStockLimit()
     {
-        return $this->_stockLimit;
+        return $this->stockLimit;
     }
 
     /**
@@ -172,7 +136,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function setActiveUntil(DateTime $activeUntil)
     {
-        return $this->setProperty('_activeUntil', $activeUntil, 'DateTime');
+        return $this->setProperty('activeUntil', $activeUntil, 'DateTime');
     }
     
     /**
@@ -180,7 +144,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function getActiveUntil()
     {
-        return $this->_activeUntil;
+        return $this->activeUntil;
     }
 
     /**
@@ -190,7 +154,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function setConsiderDateLimit($considerDateLimit)
     {
-        return $this->setProperty('_considerDateLimit', $considerDateLimit, 'integer');
+        return $this->setProperty('considerDateLimit', $considerDateLimit, 'integer');
     }
     
     /**
@@ -198,7 +162,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function getConsiderDateLimit()
     {
-        return $this->_considerDateLimit;
+        return $this->considerDateLimit;
     }
 
     /**
@@ -208,7 +172,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function setConsiderStockLimit($considerStockLimit)
     {
-        return $this->setProperty('_considerStockLimit', $considerStockLimit, 'integer');
+        return $this->setProperty('considerStockLimit', $considerStockLimit, 'integer');
     }
     
     /**
@@ -216,7 +180,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function getConsiderStockLimit()
     {
-        return $this->_considerStockLimit;
+        return $this->considerStockLimit;
     }
 
     /**
@@ -226,7 +190,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -234,7 +198,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -244,7 +208,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('_productId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
     
     /**
@@ -252,7 +216,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function getProductId()
     {
-        return $this->_productId;
+        return $this->productId;
     }
 
     /**
@@ -262,7 +226,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function setIsActive($isActive)
     {
-        return $this->setProperty('_isActive', $isActive, 'boolean');
+        return $this->setProperty('isActive', $isActive, 'boolean');
     }
     
     /**
@@ -270,7 +234,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function getIsActive()
     {
-        return $this->_isActive;
+        return $this->isActive;
     }
 
     /**
@@ -279,7 +243,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function addSpecialPrice(\jtl\Connector\Model\SpecialPrice $specialPrice)
     {
-        $this->_specialPrices[] = $specialPrice;
+        $this->specialPrices[] = $specialPrice;
         return $this;
     }
     
@@ -288,7 +252,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function getSpecialPrices()
     {
-        return $this->_specialPrices;
+        return $this->specialPrices;
     }
 
     /**
@@ -296,7 +260,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function clearSpecialPrices()
     {
-        $this->_specialPrices = array();
+        $this->specialPrices = array();
         return $this;
     }
 }

@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,39 +11,38 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class ProductVariationValueDependency extends DataModel
 {
     /**
      * @type Identity 
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type Identity 
      */
-    public $_productVariationValueId = null;
+    protected $productVariationValueId = null;
 
     /**
      * @type Identity 
      */
-    public $_productVariationValueTargetId = null;
+    protected $productVariationValueTargetId = null;
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
-        '_productVariationValueId',
-        '_productVariationValueTargetId',
+    public $identities = array(
+        'id',
+        'productVariationValueId',
+        'productVariationValueTargetId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -52,7 +50,7 @@ class ProductVariationValueDependency extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -60,41 +58,7 @@ class ProductVariationValueDependency extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -104,7 +68,7 @@ class ProductVariationValueDependency extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -112,7 +76,7 @@ class ProductVariationValueDependency extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -122,7 +86,7 @@ class ProductVariationValueDependency extends DataModel
      */
     public function setProductVariationValueId(Identity $productVariationValueId)
     {
-        return $this->setProperty('_productVariationValueId', $productVariationValueId, 'Identity');
+        return $this->setProperty('productVariationValueId', $productVariationValueId, 'Identity');
     }
     
     /**
@@ -130,7 +94,7 @@ class ProductVariationValueDependency extends DataModel
      */
     public function getProductVariationValueId()
     {
-        return $this->_productVariationValueId;
+        return $this->productVariationValueId;
     }
 
     /**
@@ -140,7 +104,7 @@ class ProductVariationValueDependency extends DataModel
      */
     public function setProductVariationValueTargetId(Identity $productVariationValueTargetId)
     {
-        return $this->setProperty('_productVariationValueTargetId', $productVariationValueTargetId, 'Identity');
+        return $this->setProperty('productVariationValueTargetId', $productVariationValueTargetId, 'Identity');
     }
     
     /**
@@ -148,7 +112,7 @@ class ProductVariationValueDependency extends DataModel
      */
     public function getProductVariationValueTargetId()
     {
-        return $this->_productVariationValueTargetId;
+        return $this->productVariationValueTargetId;
     }
 }
 

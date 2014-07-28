@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,87 +11,86 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class Shipment extends DataModel
 {
     /**
      * @type Identity Reference to deliveryNote
      */
-    public $_deliveryNoteId = null;
+    protected $deliveryNoteId = null;
 
     /**
      * @type string 
      */
-    public $_cFulfillmentCenter = '';
+    protected $cFulfillmentCenter = '';
 
     /**
      * @type DateTime|null Creation date
      */
-    public $_created = null;
+    protected $created = null;
 
     /**
      * @type DateTime|null 
      */
-    public $_dAnkunftszeit = null;
+    protected $dAnkunftszeit = null;
 
     /**
      * @type DateTime|null 
      */
-    public $_dVersendet = null;
+    protected $dVersendet = null;
 
     /**
      * @type float|null 
      */
-    public $_fGewicht = 0.0;
+    protected $fGewicht = 0.0;
 
     /**
      * @type string Unique shipment id
      */
-    public $_identCode = '';
+    protected $identCode = '';
 
     /**
      * @type integer 
      */
-    public $_kBenutzer = 0;
+    protected $kBenutzer = 0;
 
     /**
      * @type integer|null 
      */
-    public $_kLogistik = 0;
+    protected $kLogistik = 0;
 
     /**
      * @type integer|null 
      */
-    public $_kVersandArt = 0;
+    protected $kVersandArt = 0;
 
     /**
      * @type string 
      */
-    public $_logistic = '';
+    protected $logistic = '';
 
     /**
      * @type string Optional shipment note
      */
-    public $_note = '';
+    protected $note = '';
 
     /**
      * @type integer|null 
      */
-    public $_nVerpackZeitSek = 0;
+    protected $nVerpackZeitSek = 0;
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_deliveryNoteId',
+    public $identities = array(
+        'deliveryNoteId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -100,7 +98,7 @@ class Shipment extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -108,41 +106,7 @@ class Shipment extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -152,7 +116,7 @@ class Shipment extends DataModel
      */
     public function setKBenutzer($kBenutzer)
     {
-        return $this->setProperty('_kBenutzer', $kBenutzer, 'integer');
+        return $this->setProperty('kBenutzer', $kBenutzer, 'integer');
     }
     
     /**
@@ -160,7 +124,7 @@ class Shipment extends DataModel
      */
     public function getKBenutzer()
     {
-        return $this->_kBenutzer;
+        return $this->kBenutzer;
     }
 
     /**
@@ -170,7 +134,7 @@ class Shipment extends DataModel
      */
     public function setKLogistik($kLogistik)
     {
-        return $this->setProperty('_kLogistik', $kLogistik, 'integer');
+        return $this->setProperty('kLogistik', $kLogistik, 'integer');
     }
     
     /**
@@ -178,7 +142,7 @@ class Shipment extends DataModel
      */
     public function getKLogistik()
     {
-        return $this->_kLogistik;
+        return $this->kLogistik;
     }
 
     /**
@@ -188,7 +152,7 @@ class Shipment extends DataModel
      */
     public function setIdentCode($identCode)
     {
-        return $this->setProperty('_identCode', $identCode, 'string');
+        return $this->setProperty('identCode', $identCode, 'string');
     }
     
     /**
@@ -196,7 +160,7 @@ class Shipment extends DataModel
      */
     public function getIdentCode()
     {
-        return $this->_identCode;
+        return $this->identCode;
     }
 
     /**
@@ -206,7 +170,7 @@ class Shipment extends DataModel
      */
     public function setCreated(DateTime $created)
     {
-        return $this->setProperty('_created', $created, 'DateTime');
+        return $this->setProperty('created', $created, 'DateTime');
     }
     
     /**
@@ -214,7 +178,7 @@ class Shipment extends DataModel
      */
     public function getCreated()
     {
-        return $this->_created;
+        return $this->created;
     }
 
     /**
@@ -224,7 +188,7 @@ class Shipment extends DataModel
      */
     public function setNote($note)
     {
-        return $this->setProperty('_note', $note, 'string');
+        return $this->setProperty('note', $note, 'string');
     }
     
     /**
@@ -232,7 +196,7 @@ class Shipment extends DataModel
      */
     public function getNote()
     {
-        return $this->_note;
+        return $this->note;
     }
 
     /**
@@ -242,7 +206,7 @@ class Shipment extends DataModel
      */
     public function setFGewicht($fGewicht)
     {
-        return $this->setProperty('_fGewicht', $fGewicht, 'float');
+        return $this->setProperty('fGewicht', $fGewicht, 'float');
     }
     
     /**
@@ -250,7 +214,7 @@ class Shipment extends DataModel
      */
     public function getFGewicht()
     {
-        return $this->_fGewicht;
+        return $this->fGewicht;
     }
 
     /**
@@ -260,7 +224,7 @@ class Shipment extends DataModel
      */
     public function setKVersandArt($kVersandArt)
     {
-        return $this->setProperty('_kVersandArt', $kVersandArt, 'integer');
+        return $this->setProperty('kVersandArt', $kVersandArt, 'integer');
     }
     
     /**
@@ -268,7 +232,7 @@ class Shipment extends DataModel
      */
     public function getKVersandArt()
     {
-        return $this->_kVersandArt;
+        return $this->kVersandArt;
     }
 
     /**
@@ -278,7 +242,7 @@ class Shipment extends DataModel
      */
     public function setLogistic($logistic)
     {
-        return $this->setProperty('_logistic', $logistic, 'string');
+        return $this->setProperty('logistic', $logistic, 'string');
     }
     
     /**
@@ -286,7 +250,7 @@ class Shipment extends DataModel
      */
     public function getLogistic()
     {
-        return $this->_logistic;
+        return $this->logistic;
     }
 
     /**
@@ -296,7 +260,7 @@ class Shipment extends DataModel
      */
     public function setCFulfillmentCenter($cFulfillmentCenter)
     {
-        return $this->setProperty('_cFulfillmentCenter', $cFulfillmentCenter, 'string');
+        return $this->setProperty('cFulfillmentCenter', $cFulfillmentCenter, 'string');
     }
     
     /**
@@ -304,7 +268,7 @@ class Shipment extends DataModel
      */
     public function getCFulfillmentCenter()
     {
-        return $this->_cFulfillmentCenter;
+        return $this->cFulfillmentCenter;
     }
 
     /**
@@ -314,7 +278,7 @@ class Shipment extends DataModel
      */
     public function setDAnkunftszeit(DateTime $dAnkunftszeit)
     {
-        return $this->setProperty('_dAnkunftszeit', $dAnkunftszeit, 'DateTime');
+        return $this->setProperty('dAnkunftszeit', $dAnkunftszeit, 'DateTime');
     }
     
     /**
@@ -322,7 +286,7 @@ class Shipment extends DataModel
      */
     public function getDAnkunftszeit()
     {
-        return $this->_dAnkunftszeit;
+        return $this->dAnkunftszeit;
     }
 
     /**
@@ -332,7 +296,7 @@ class Shipment extends DataModel
      */
     public function setNVerpackZeitSek($nVerpackZeitSek)
     {
-        return $this->setProperty('_nVerpackZeitSek', $nVerpackZeitSek, 'integer');
+        return $this->setProperty('nVerpackZeitSek', $nVerpackZeitSek, 'integer');
     }
     
     /**
@@ -340,7 +304,7 @@ class Shipment extends DataModel
      */
     public function getNVerpackZeitSek()
     {
-        return $this->_nVerpackZeitSek;
+        return $this->nVerpackZeitSek;
     }
 
     /**
@@ -350,7 +314,7 @@ class Shipment extends DataModel
      */
     public function setDVersendet(DateTime $dVersendet)
     {
-        return $this->setProperty('_dVersendet', $dVersendet, 'DateTime');
+        return $this->setProperty('dVersendet', $dVersendet, 'DateTime');
     }
     
     /**
@@ -358,7 +322,7 @@ class Shipment extends DataModel
      */
     public function getDVersendet()
     {
-        return $this->_dVersendet;
+        return $this->dVersendet;
     }
 
     /**
@@ -368,7 +332,7 @@ class Shipment extends DataModel
      */
     public function setDeliveryNoteId(Identity $deliveryNoteId)
     {
-        return $this->setProperty('_deliveryNoteId', $deliveryNoteId, 'Identity');
+        return $this->setProperty('deliveryNoteId', $deliveryNoteId, 'Identity');
     }
     
     /**
@@ -376,7 +340,7 @@ class Shipment extends DataModel
      */
     public function getDeliveryNoteId()
     {
-        return $this->_deliveryNoteId;
+        return $this->deliveryNoteId;
     }
 }
 

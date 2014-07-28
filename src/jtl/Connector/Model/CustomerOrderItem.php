@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,103 +11,102 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class CustomerOrderItem extends DataModel
 {
     /**
      * @type Identity Optional reference to configItemId (if item is part of a configurable item)
      */
-    public $_configItemId = null;
+    protected $configItemId = null;
 
     /**
      * @type Identity Reference to customerOrder
      */
-    public $_customerOrderId = null;
+    protected $customerOrderId = null;
 
     /**
      * @type Identity Unique customerOrderItem id
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type Identity Reference to product
      */
-    public $_productId = null;
+    protected $productId = null;
 
     /**
      * @type float|null 
      */
-    public $_grossPrice = 0.0;
+    protected $grossPrice = 0.0;
 
     /**
      * @type integer 
      */
-    public $_kBestellStueckliste = 0;
+    protected $kBestellStueckliste = 0;
 
     /**
      * @type string Order item name
      */
-    public $_name = '';
+    protected $name = '';
 
     /**
      * @type float|null Price (net)
      */
-    public $_price = 0.0;
+    protected $price = 0.0;
 
     /**
      * @type float|null Quantity purchased
      */
-    public $_quantity = 0.0;
+    protected $quantity = 0.0;
 
     /**
      * @type string Stock keeping Unit (unique item identifier)
      */
-    public $_sku = '';
+    protected $sku = '';
 
     /**
      * @type integer 
      */
-    public $_sort = 0;
+    protected $sort = 0;
 
     /**
      * @type string 
      */
-    public $_type = '';
+    protected $type = '';
 
     /**
      * @type string Optional unique Hashsum (if item is part of configurable item
      */
-    public $_unique = '';
+    protected $unique = '';
 
     /**
      * @type float|null Value added tax
      */
-    public $_vat = 0.0;
+    protected $vat = 0.0;
 
     /**
      * Nav [CustomerOrderItem » ZeroOrOne]
      *
      * @type \jtl\Connector\Model\CustomerOrderItemVariation[]
      */
-    public $_variations = array();
+    protected $variations = array();
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
-        '_productId',
-        '_customerOrderId',
-        '_configItemId',
+    public $identities = array(
+        'id',
+        'productId',
+        'customerOrderId',
+        'configItemId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
-        '_variations' => '\jtl\Connector\Model\CustomerOrderItemVariation',
+    public $navigations = array(
+        'variations' => '\jtl\Connector\Model\CustomerOrderItemVariation',
     );
 
     /**
@@ -116,7 +114,7 @@ class CustomerOrderItem extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -124,41 +122,7 @@ class CustomerOrderItem extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -168,7 +132,7 @@ class CustomerOrderItem extends DataModel
      */
     public function setGrossPrice($grossPrice)
     {
-        return $this->setProperty('_grossPrice', $grossPrice, 'float');
+        return $this->setProperty('grossPrice', $grossPrice, 'float');
     }
     
     /**
@@ -176,7 +140,7 @@ class CustomerOrderItem extends DataModel
      */
     public function getGrossPrice()
     {
-        return $this->_grossPrice;
+        return $this->grossPrice;
     }
 
     /**
@@ -186,7 +150,7 @@ class CustomerOrderItem extends DataModel
      */
     public function setVat($vat)
     {
-        return $this->setProperty('_vat', $vat, 'float');
+        return $this->setProperty('vat', $vat, 'float');
     }
     
     /**
@@ -194,7 +158,7 @@ class CustomerOrderItem extends DataModel
      */
     public function getVat()
     {
-        return $this->_vat;
+        return $this->vat;
     }
 
     /**
@@ -204,7 +168,7 @@ class CustomerOrderItem extends DataModel
      */
     public function setQuantity($quantity)
     {
-        return $this->setProperty('_quantity', $quantity, 'float');
+        return $this->setProperty('quantity', $quantity, 'float');
     }
     
     /**
@@ -212,7 +176,7 @@ class CustomerOrderItem extends DataModel
      */
     public function getQuantity()
     {
-        return $this->_quantity;
+        return $this->quantity;
     }
 
     /**
@@ -222,7 +186,7 @@ class CustomerOrderItem extends DataModel
      */
     public function setPrice($price)
     {
-        return $this->setProperty('_price', $price, 'float');
+        return $this->setProperty('price', $price, 'float');
     }
     
     /**
@@ -230,7 +194,7 @@ class CustomerOrderItem extends DataModel
      */
     public function getPrice()
     {
-        return $this->_price;
+        return $this->price;
     }
 
     /**
@@ -240,7 +204,7 @@ class CustomerOrderItem extends DataModel
      */
     public function setSku($sku)
     {
-        return $this->setProperty('_sku', $sku, 'string');
+        return $this->setProperty('sku', $sku, 'string');
     }
     
     /**
@@ -248,7 +212,7 @@ class CustomerOrderItem extends DataModel
      */
     public function getSku()
     {
-        return $this->_sku;
+        return $this->sku;
     }
 
     /**
@@ -258,7 +222,7 @@ class CustomerOrderItem extends DataModel
      */
     public function setUnique($unique)
     {
-        return $this->setProperty('_unique', $unique, 'string');
+        return $this->setProperty('unique', $unique, 'string');
     }
     
     /**
@@ -266,7 +230,7 @@ class CustomerOrderItem extends DataModel
      */
     public function getUnique()
     {
-        return $this->_unique;
+        return $this->unique;
     }
 
     /**
@@ -276,7 +240,7 @@ class CustomerOrderItem extends DataModel
      */
     public function setSort($sort)
     {
-        return $this->setProperty('_sort', $sort, 'integer');
+        return $this->setProperty('sort', $sort, 'integer');
     }
     
     /**
@@ -284,7 +248,7 @@ class CustomerOrderItem extends DataModel
      */
     public function getSort()
     {
-        return $this->_sort;
+        return $this->sort;
     }
 
     /**
@@ -294,7 +258,7 @@ class CustomerOrderItem extends DataModel
      */
     public function setName($name)
     {
-        return $this->setProperty('_name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
     
     /**
@@ -302,7 +266,7 @@ class CustomerOrderItem extends DataModel
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -312,7 +276,7 @@ class CustomerOrderItem extends DataModel
      */
     public function setKBestellStueckliste($kBestellStueckliste)
     {
-        return $this->setProperty('_kBestellStueckliste', $kBestellStueckliste, 'integer');
+        return $this->setProperty('kBestellStueckliste', $kBestellStueckliste, 'integer');
     }
     
     /**
@@ -320,7 +284,7 @@ class CustomerOrderItem extends DataModel
      */
     public function getKBestellStueckliste()
     {
-        return $this->_kBestellStueckliste;
+        return $this->kBestellStueckliste;
     }
 
     /**
@@ -330,7 +294,7 @@ class CustomerOrderItem extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -338,7 +302,7 @@ class CustomerOrderItem extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -348,7 +312,7 @@ class CustomerOrderItem extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('_productId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
     
     /**
@@ -356,7 +320,7 @@ class CustomerOrderItem extends DataModel
      */
     public function getProductId()
     {
-        return $this->_productId;
+        return $this->productId;
     }
 
     /**
@@ -366,7 +330,7 @@ class CustomerOrderItem extends DataModel
      */
     public function setCustomerOrderId(Identity $customerOrderId)
     {
-        return $this->setProperty('_customerOrderId', $customerOrderId, 'Identity');
+        return $this->setProperty('customerOrderId', $customerOrderId, 'Identity');
     }
     
     /**
@@ -374,7 +338,7 @@ class CustomerOrderItem extends DataModel
      */
     public function getCustomerOrderId()
     {
-        return $this->_customerOrderId;
+        return $this->customerOrderId;
     }
 
     /**
@@ -384,7 +348,7 @@ class CustomerOrderItem extends DataModel
      */
     public function setConfigItemId(Identity $configItemId)
     {
-        return $this->setProperty('_configItemId', $configItemId, 'Identity');
+        return $this->setProperty('configItemId', $configItemId, 'Identity');
     }
     
     /**
@@ -392,7 +356,7 @@ class CustomerOrderItem extends DataModel
      */
     public function getConfigItemId()
     {
-        return $this->_configItemId;
+        return $this->configItemId;
     }
 
     /**
@@ -402,7 +366,7 @@ class CustomerOrderItem extends DataModel
      */
     public function setType($type)
     {
-        return $this->setProperty('_type', $type, 'string');
+        return $this->setProperty('type', $type, 'string');
     }
     
     /**
@@ -410,7 +374,7 @@ class CustomerOrderItem extends DataModel
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
@@ -419,7 +383,7 @@ class CustomerOrderItem extends DataModel
      */
     public function addVariation(\jtl\Connector\Model\CustomerOrderItemVariation $variation)
     {
-        $this->_variations[] = $variation;
+        $this->variations[] = $variation;
         return $this;
     }
     
@@ -428,7 +392,7 @@ class CustomerOrderItem extends DataModel
      */
     public function getVariations()
     {
-        return $this->_variations;
+        return $this->variations;
     }
 
     /**
@@ -436,7 +400,7 @@ class CustomerOrderItem extends DataModel
      */
     public function clearVariations()
     {
-        $this->_variations = array();
+        $this->variations = array();
         return $this;
     }
 }

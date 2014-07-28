@@ -1,8 +1,7 @@
-﻿<?php
+<?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 
 namespace jtl\Connector\Model;
@@ -12,204 +11,174 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class ConnectorSyncQueue extends DataModel
 {
     /**
      * @type Byte[] 
      */
-    protected $_action = null;
+    protected $action = null;
 
     /**
      * @type integer 
      */
-    protected $_connectorId = 0;
+    protected $connectorId = 0;
 
     /**
      * @type integer 
      */
-    protected $_key = 0;
+    protected $key = 0;
 
     /**
      * @type integer 
      */
-    protected $_queueId = 0;
+    protected $queueId = 0;
 
     /**
      * @type integer 
      */
-    protected $_tryCount = 0;
+    protected $tryCount = 0;
 
     /**
      * @type integer 
      */
-    protected $_type = 0;
+    protected $type = 0;
+
 
     /**
-	 * Nav [ConnectorSyncQueue » Many]
-	 *
-     * @type \jtl\Connector\Model\Connector[]
+     * @type array list of identities
      */
-    protected $_connector = array();
+    public $identities = array(
+    );
 
+    /**
+     * @type array list of navigations
+     */
+    public $navigations = array(
+    );
 
-	/**
-	 * @type array
-	 */
-	protected $_identities = array(
-	);
+    /**
+     * @return array 
+     */
+    public function getIdentities()
+    {
+        return $this->identities;
+    }
 
-	/**
-	 * @param  integer $queueId 
-	 * @return \jtl\Connector\Model\ConnectorSyncQueue
-	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-	 */
-	public function setQueueId($queueId)
-	{
-		if (!is_integer($queueId))
-			throw new InvalidArgumentException('integer expected.');
-		$this->_queueId = $queueId;
-		return $this;
-	}
-	
-	/**
-	 * @return integer 
-	 */
-	public function getQueueId()
-	{
-		return $this->_queueId;
-	}
+    /**
+     * @return array 
+     */
+    public function getNavigations()
+    {
+        return $this->navigations;
+    }
 
-	/**
-	 * @param  integer $connectorId 
-	 * @return \jtl\Connector\Model\ConnectorSyncQueue
-	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-	 */
-	public function setConnectorId($connectorId)
-	{
-		if (!is_integer($connectorId))
-			throw new InvalidArgumentException('integer expected.');
-		$this->_connectorId = $connectorId;
-		return $this;
-	}
-	
-	/**
-	 * @return integer 
-	 */
-	public function getConnectorId()
-	{
-		return $this->_connectorId;
-	}
+    /**
+     * @param  integer $queueId 
+     * @return \jtl\Connector\Model\ConnectorSyncQueue
+     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     */
+    public function setQueueId($queueId)
+    {
+        return $this->setProperty('queueId', $queueId, 'integer');
+    }
+    
+    /**
+     * @return integer 
+     */
+    public function getQueueId()
+    {
+        return $this->queueId;
+    }
 
-	/**
-	 * @param  integer $key 
-	 * @return \jtl\Connector\Model\ConnectorSyncQueue
-	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-	 */
-	public function setKey($key)
-	{
-		if (!is_integer($key))
-			throw new InvalidArgumentException('integer expected.');
-		$this->_key = $key;
-		return $this;
-	}
-	
-	/**
-	 * @return integer 
-	 */
-	public function getKey()
-	{
-		return $this->_key;
-	}
+    /**
+     * @param  integer $connectorId 
+     * @return \jtl\Connector\Model\ConnectorSyncQueue
+     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     */
+    public function setConnectorId($connectorId)
+    {
+        return $this->setProperty('connectorId', $connectorId, 'integer');
+    }
+    
+    /**
+     * @return integer 
+     */
+    public function getConnectorId()
+    {
+        return $this->connectorId;
+    }
 
-	/**
-	 * @param  integer $type 
-	 * @return \jtl\Connector\Model\ConnectorSyncQueue
-	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-	 */
-	public function setType($type)
-	{
-		if (!is_integer($type))
-			throw new InvalidArgumentException('integer expected.');
-		$this->_type = $type;
-		return $this;
-	}
-	
-	/**
-	 * @return integer 
-	 */
-	public function getType()
-	{
-		return $this->_type;
-	}
+    /**
+     * @param  integer $key 
+     * @return \jtl\Connector\Model\ConnectorSyncQueue
+     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     */
+    public function setKey($key)
+    {
+        return $this->setProperty('key', $key, 'integer');
+    }
+    
+    /**
+     * @return integer 
+     */
+    public function getKey()
+    {
+        return $this->key;
+    }
 
-	/**
-	 * @param  integer $tryCount 
-	 * @return \jtl\Connector\Model\ConnectorSyncQueue
-	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-	 */
-	public function setTryCount($tryCount)
-	{
-		if (!is_integer($tryCount))
-			throw new InvalidArgumentException('integer expected.');
-		$this->_tryCount = $tryCount;
-		return $this;
-	}
-	
-	/**
-	 * @return integer 
-	 */
-	public function getTryCount()
-	{
-		return $this->_tryCount;
-	}
+    /**
+     * @param  integer $type 
+     * @return \jtl\Connector\Model\ConnectorSyncQueue
+     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     */
+    public function setType($type)
+    {
+        return $this->setProperty('type', $type, 'integer');
+    }
+    
+    /**
+     * @return integer 
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
 
-	/**
-	 * @param  Byte[] $action 
-	 * @return \jtl\Connector\Model\ConnectorSyncQueue
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Byte[]'.
-	 */
-	public function setAction(Byte[] $action)
-	{
-		
-		$this->_action = $action;
-		return $this;
-	}
-	
-	/**
-	 * @return Byte[] 
-	 */
-	public function getAction()
-	{
-		return $this->_action;
-	}
+    /**
+     * @param  integer $tryCount 
+     * @return \jtl\Connector\Model\ConnectorSyncQueue
+     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     */
+    public function setTryCount($tryCount)
+    {
+        return $this->setProperty('tryCount', $tryCount, 'integer');
+    }
+    
+    /**
+     * @return integer 
+     */
+    public function getTryCount()
+    {
+        return $this->tryCount;
+    }
 
-	/**
-	 * @param  \jtl\Connector\Model\Connector $connector
-	 * @return \jtl\Connector\Model\ConnectorSyncQueue
-	 */
-	public function addConnector(\jtl\Connector\Model\Connector $connector)
-	{
-		$this->_connector[] = $connector;
-		return $this;
-	}
-	
-	/**
-	 * @return Connector
-	 */
-	public function getConnector()
-	{
-		return $this->_connector;
-	}
-
-	/**
-	 * @return \jtl\Connector\Model\ConnectorSyncQueue
-	 */
-	public function clearConnector()
-	{
-		$this->_connector = array();
-		return $this;
-	}
+    /**
+     * @param  Byte[] $action 
+     * @return \jtl\Connector\Model\ConnectorSyncQueue
+     * @throws InvalidArgumentException if the provided argument is not of type 'Byte[]'.
+     */
+    public function setAction(Byte[] $action)
+    {
+        return $this->setProperty('action', $action, 'Byte[]');
+    }
+    
+    /**
+     * @return Byte[] 
+     */
+    public function getAction()
+    {
+        return $this->action;
+    }
 }
 

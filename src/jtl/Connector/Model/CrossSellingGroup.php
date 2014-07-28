@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,36 +11,35 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class CrossSellingGroup extends DataModel
 {
     /**
      * @type string Optional localized description
      */
-    public $_description = '';
+    protected $description = '';
 
     /**
      * @type string Locale
      */
-    public $_localeName = '';
+    protected $localeName = '';
 
     /**
      * @type string Localized name
      */
-    public $_name = '';
+    protected $name = '';
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
+    public $identities = array(
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -49,7 +47,7 @@ class CrossSellingGroup extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -57,41 +55,7 @@ class CrossSellingGroup extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -101,7 +65,7 @@ class CrossSellingGroup extends DataModel
      */
     public function setName($name)
     {
-        return $this->setProperty('_name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
     
     /**
@@ -109,7 +73,7 @@ class CrossSellingGroup extends DataModel
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -119,7 +83,7 @@ class CrossSellingGroup extends DataModel
      */
     public function setDescription($description)
     {
-        return $this->setProperty('_description', $description, 'string');
+        return $this->setProperty('description', $description, 'string');
     }
     
     /**
@@ -127,7 +91,7 @@ class CrossSellingGroup extends DataModel
      */
     public function getDescription()
     {
-        return $this->_description;
+        return $this->description;
     }
 
     /**
@@ -137,7 +101,7 @@ class CrossSellingGroup extends DataModel
      */
     public function setLocaleName($localeName)
     {
-        return $this->setProperty('_localeName', $localeName, 'string');
+        return $this->setProperty('localeName', $localeName, 'string');
     }
     
     /**
@@ -145,7 +109,7 @@ class CrossSellingGroup extends DataModel
      */
     public function getLocaleName()
     {
-        return $this->_localeName;
+        return $this->localeName;
     }
 }
 

@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,147 +11,146 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class Company extends DataModel
 {
     /**
      * @type Identity 
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type string Bank account holder name e.g. "John Doe"
      */
-    public $_accountHolder = '';
+    protected $accountHolder = '';
 
     /**
      * @type string Bank account number
      */
-    public $_accountNumber = '';
+    protected $accountNumber = '';
 
     /**
      * @type string Bank code number
      */
-    public $_bankCode = '';
+    protected $bankCode = '';
 
     /**
      * @type string Bank name e.g. "Deutsche Bank"
      */
-    public $_bankName = '';
+    protected $bankName = '';
 
     /**
      * @type string Bank Identifier Code (BIC)
      */
-    public $_bic = '';
+    protected $bic = '';
 
     /**
      * @type string Company businessman / entrepreneur
      */
-    public $_businessman = '';
+    protected $businessman = '';
 
     /**
      * @type string City
      */
-    public $_city = '';
+    protected $city = '';
 
     /**
      * @type string CountryIso
      */
-    public $_countryIso = '';
+    protected $countryIso = '';
 
     /**
      * @type string Company E-Mail address
      */
-    public $_eMail = '';
+    protected $eMail = '';
 
     /**
      * @type string Fax number
      */
-    public $_fax = '';
+    protected $fax = '';
 
     /**
      * @type boolean 
      */
-    public $_flagUpdate = false;
+    protected $flagUpdate = false;
 
     /**
      * @type string 
      */
-    public $_footer = '';
+    protected $footer = '';
 
     /**
      * @type string 
      */
-    public $_headerLogo = '';
+    protected $headerLogo = '';
 
     /**
      * @type string International Bank Account Number (IBAN) 
      */
-    public $_iban = '';
+    protected $iban = '';
 
     /**
      * @type string 
      */
-    public $_intrashipNumber = '';
+    protected $intrashipNumber = '';
 
     /**
      * @type boolean 
      */
-    public $_isActive = false;
+    protected $isActive = false;
 
     /**
      * @type string Company name
      */
-    public $_name = '';
+    protected $name = '';
 
     /**
      * @type string Phone number
      */
-    public $_phone = '';
+    protected $phone = '';
 
     /**
      * @type string Street
      */
-    public $_street = '';
+    protected $street = '';
 
     /**
      * @type string Tax id number (german: Steuernummer)
      */
-    public $_taxIdNumber = '';
+    protected $taxIdNumber = '';
 
     /**
      * @type string 
      */
-    public $_upsNumber = '';
+    protected $upsNumber = '';
 
     /**
      * @type string VAT registration number (german: USt-ID)
      */
-    public $_vatNumber = '';
+    protected $vatNumber = '';
 
     /**
      * @type string Company website URL
      */
-    public $_www = '';
+    protected $www = '';
 
     /**
      * @type string Zip code / postcode
      */
-    public $_zipCode = '';
+    protected $zipCode = '';
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
+    public $identities = array(
+        'id',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -160,7 +158,7 @@ class Company extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -168,41 +166,7 @@ class Company extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -212,7 +176,7 @@ class Company extends DataModel
      */
     public function setName($name)
     {
-        return $this->setProperty('_name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
     
     /**
@@ -220,7 +184,7 @@ class Company extends DataModel
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -230,7 +194,7 @@ class Company extends DataModel
      */
     public function setBusinessman($businessman)
     {
-        return $this->setProperty('_businessman', $businessman, 'string');
+        return $this->setProperty('businessman', $businessman, 'string');
     }
     
     /**
@@ -238,7 +202,7 @@ class Company extends DataModel
      */
     public function getBusinessman()
     {
-        return $this->_businessman;
+        return $this->businessman;
     }
 
     /**
@@ -248,7 +212,7 @@ class Company extends DataModel
      */
     public function setStreet($street)
     {
-        return $this->setProperty('_street', $street, 'string');
+        return $this->setProperty('street', $street, 'string');
     }
     
     /**
@@ -256,7 +220,7 @@ class Company extends DataModel
      */
     public function getStreet()
     {
-        return $this->_street;
+        return $this->street;
     }
 
     /**
@@ -266,7 +230,7 @@ class Company extends DataModel
      */
     public function setZipCode($zipCode)
     {
-        return $this->setProperty('_zipCode', $zipCode, 'string');
+        return $this->setProperty('zipCode', $zipCode, 'string');
     }
     
     /**
@@ -274,7 +238,7 @@ class Company extends DataModel
      */
     public function getZipCode()
     {
-        return $this->_zipCode;
+        return $this->zipCode;
     }
 
     /**
@@ -284,7 +248,7 @@ class Company extends DataModel
      */
     public function setCity($city)
     {
-        return $this->setProperty('_city', $city, 'string');
+        return $this->setProperty('city', $city, 'string');
     }
     
     /**
@@ -292,7 +256,7 @@ class Company extends DataModel
      */
     public function getCity()
     {
-        return $this->_city;
+        return $this->city;
     }
 
     /**
@@ -302,7 +266,7 @@ class Company extends DataModel
      */
     public function setCountryIso($countryIso)
     {
-        return $this->setProperty('_countryIso', $countryIso, 'string');
+        return $this->setProperty('countryIso', $countryIso, 'string');
     }
     
     /**
@@ -310,7 +274,7 @@ class Company extends DataModel
      */
     public function getCountryIso()
     {
-        return $this->_countryIso;
+        return $this->countryIso;
     }
 
     /**
@@ -320,7 +284,7 @@ class Company extends DataModel
      */
     public function setPhone($phone)
     {
-        return $this->setProperty('_phone', $phone, 'string');
+        return $this->setProperty('phone', $phone, 'string');
     }
     
     /**
@@ -328,7 +292,7 @@ class Company extends DataModel
      */
     public function getPhone()
     {
-        return $this->_phone;
+        return $this->phone;
     }
 
     /**
@@ -338,7 +302,7 @@ class Company extends DataModel
      */
     public function setFax($fax)
     {
-        return $this->setProperty('_fax', $fax, 'string');
+        return $this->setProperty('fax', $fax, 'string');
     }
     
     /**
@@ -346,7 +310,7 @@ class Company extends DataModel
      */
     public function getFax()
     {
-        return $this->_fax;
+        return $this->fax;
     }
 
     /**
@@ -356,7 +320,7 @@ class Company extends DataModel
      */
     public function setEMail($eMail)
     {
-        return $this->setProperty('_eMail', $eMail, 'string');
+        return $this->setProperty('eMail', $eMail, 'string');
     }
     
     /**
@@ -364,7 +328,7 @@ class Company extends DataModel
      */
     public function getEMail()
     {
-        return $this->_eMail;
+        return $this->eMail;
     }
 
     /**
@@ -374,7 +338,7 @@ class Company extends DataModel
      */
     public function setWww($www)
     {
-        return $this->setProperty('_www', $www, 'string');
+        return $this->setProperty('www', $www, 'string');
     }
     
     /**
@@ -382,7 +346,7 @@ class Company extends DataModel
      */
     public function getWww()
     {
-        return $this->_www;
+        return $this->www;
     }
 
     /**
@@ -392,7 +356,7 @@ class Company extends DataModel
      */
     public function setBankCode($bankCode)
     {
-        return $this->setProperty('_bankCode', $bankCode, 'string');
+        return $this->setProperty('bankCode', $bankCode, 'string');
     }
     
     /**
@@ -400,7 +364,7 @@ class Company extends DataModel
      */
     public function getBankCode()
     {
-        return $this->_bankCode;
+        return $this->bankCode;
     }
 
     /**
@@ -410,7 +374,7 @@ class Company extends DataModel
      */
     public function setAccountNumber($accountNumber)
     {
-        return $this->setProperty('_accountNumber', $accountNumber, 'string');
+        return $this->setProperty('accountNumber', $accountNumber, 'string');
     }
     
     /**
@@ -418,7 +382,7 @@ class Company extends DataModel
      */
     public function getAccountNumber()
     {
-        return $this->_accountNumber;
+        return $this->accountNumber;
     }
 
     /**
@@ -428,7 +392,7 @@ class Company extends DataModel
      */
     public function setBankName($bankName)
     {
-        return $this->setProperty('_bankName', $bankName, 'string');
+        return $this->setProperty('bankName', $bankName, 'string');
     }
     
     /**
@@ -436,7 +400,7 @@ class Company extends DataModel
      */
     public function getBankName()
     {
-        return $this->_bankName;
+        return $this->bankName;
     }
 
     /**
@@ -446,7 +410,7 @@ class Company extends DataModel
      */
     public function setVatNumber($vatNumber)
     {
-        return $this->setProperty('_vatNumber', $vatNumber, 'string');
+        return $this->setProperty('vatNumber', $vatNumber, 'string');
     }
     
     /**
@@ -454,7 +418,7 @@ class Company extends DataModel
      */
     public function getVatNumber()
     {
-        return $this->_vatNumber;
+        return $this->vatNumber;
     }
 
     /**
@@ -464,7 +428,7 @@ class Company extends DataModel
      */
     public function setTaxIdNumber($taxIdNumber)
     {
-        return $this->setProperty('_taxIdNumber', $taxIdNumber, 'string');
+        return $this->setProperty('taxIdNumber', $taxIdNumber, 'string');
     }
     
     /**
@@ -472,7 +436,7 @@ class Company extends DataModel
      */
     public function getTaxIdNumber()
     {
-        return $this->_taxIdNumber;
+        return $this->taxIdNumber;
     }
 
     /**
@@ -482,7 +446,7 @@ class Company extends DataModel
      */
     public function setIntrashipNumber($intrashipNumber)
     {
-        return $this->setProperty('_intrashipNumber', $intrashipNumber, 'string');
+        return $this->setProperty('intrashipNumber', $intrashipNumber, 'string');
     }
     
     /**
@@ -490,7 +454,7 @@ class Company extends DataModel
      */
     public function getIntrashipNumber()
     {
-        return $this->_intrashipNumber;
+        return $this->intrashipNumber;
     }
 
     /**
@@ -500,7 +464,7 @@ class Company extends DataModel
      */
     public function setUpsNumber($upsNumber)
     {
-        return $this->setProperty('_upsNumber', $upsNumber, 'string');
+        return $this->setProperty('upsNumber', $upsNumber, 'string');
     }
     
     /**
@@ -508,7 +472,7 @@ class Company extends DataModel
      */
     public function getUpsNumber()
     {
-        return $this->_upsNumber;
+        return $this->upsNumber;
     }
 
     /**
@@ -518,7 +482,7 @@ class Company extends DataModel
      */
     public function setIban($iban)
     {
-        return $this->setProperty('_iban', $iban, 'string');
+        return $this->setProperty('iban', $iban, 'string');
     }
     
     /**
@@ -526,7 +490,7 @@ class Company extends DataModel
      */
     public function getIban()
     {
-        return $this->_iban;
+        return $this->iban;
     }
 
     /**
@@ -536,7 +500,7 @@ class Company extends DataModel
      */
     public function setBic($bic)
     {
-        return $this->setProperty('_bic', $bic, 'string');
+        return $this->setProperty('bic', $bic, 'string');
     }
     
     /**
@@ -544,7 +508,7 @@ class Company extends DataModel
      */
     public function getBic()
     {
-        return $this->_bic;
+        return $this->bic;
     }
 
     /**
@@ -554,7 +518,7 @@ class Company extends DataModel
      */
     public function setHeaderLogo($headerLogo)
     {
-        return $this->setProperty('_headerLogo', $headerLogo, 'string');
+        return $this->setProperty('headerLogo', $headerLogo, 'string');
     }
     
     /**
@@ -562,7 +526,7 @@ class Company extends DataModel
      */
     public function getHeaderLogo()
     {
-        return $this->_headerLogo;
+        return $this->headerLogo;
     }
 
     /**
@@ -572,7 +536,7 @@ class Company extends DataModel
      */
     public function setFooter($footer)
     {
-        return $this->setProperty('_footer', $footer, 'string');
+        return $this->setProperty('footer', $footer, 'string');
     }
     
     /**
@@ -580,7 +544,7 @@ class Company extends DataModel
      */
     public function getFooter()
     {
-        return $this->_footer;
+        return $this->footer;
     }
 
     /**
@@ -590,7 +554,7 @@ class Company extends DataModel
      */
     public function setAccountHolder($accountHolder)
     {
-        return $this->setProperty('_accountHolder', $accountHolder, 'string');
+        return $this->setProperty('accountHolder', $accountHolder, 'string');
     }
     
     /**
@@ -598,7 +562,7 @@ class Company extends DataModel
      */
     public function getAccountHolder()
     {
-        return $this->_accountHolder;
+        return $this->accountHolder;
     }
 
     /**
@@ -608,7 +572,7 @@ class Company extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -616,7 +580,7 @@ class Company extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -626,7 +590,7 @@ class Company extends DataModel
      */
     public function setFlagUpdate($flagUpdate)
     {
-        return $this->setProperty('_flagUpdate', $flagUpdate, 'boolean');
+        return $this->setProperty('flagUpdate', $flagUpdate, 'boolean');
     }
     
     /**
@@ -634,7 +598,7 @@ class Company extends DataModel
      */
     public function getFlagUpdate()
     {
-        return $this->_flagUpdate;
+        return $this->flagUpdate;
     }
 
     /**
@@ -644,7 +608,7 @@ class Company extends DataModel
      */
     public function setIsActive($isActive)
     {
-        return $this->setProperty('_isActive', $isActive, 'boolean');
+        return $this->setProperty('isActive', $isActive, 'boolean');
     }
     
     /**
@@ -652,7 +616,7 @@ class Company extends DataModel
      */
     public function getIsActive()
     {
-        return $this->_isActive;
+        return $this->isActive;
     }
 }
 

@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,70 +11,69 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class FileDownload extends DataModel
 {
     /**
      * @type Identity Unique fileDownload id
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type DateTime|null Optional creation date
      */
-    public $_created = null;
+    protected $created = null;
 
     /**
      * @type string 
      */
-    public $_internalId = '';
+    protected $internalId = '';
 
     /**
      * @type integer|null Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
      */
-    public $_maxDays = 0;
+    protected $maxDays = 0;
 
     /**
      * @type integer|null Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
      */
-    public $_maxDownloads = 0;
+    protected $maxDownloads = 0;
 
     /**
      * @type string Path to download file
      */
-    public $_path = '';
+    protected $path = '';
 
     /**
      * @type string Optional path to preview file
      */
-    public $_previewPath = '';
+    protected $previewPath = '';
 
     /**
      * @type integer|null Optional sort number
      */
-    public $_sort = 0;
+    protected $sort = 0;
 
     /**
      * Nav [FileDownload » One]
      *
      * @type \jtl\Connector\Model\FileDownloadI18n[]
      */
-    public $_i18n = array();
+    protected $i18n = array();
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
+    public $identities = array(
+        'id',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
-        '_i18n' => '\jtl\Connector\Model\FileDownloadI18n',
+    public $navigations = array(
+        'i18n' => '\jtl\Connector\Model\FileDownloadI18n',
     );
 
     /**
@@ -83,7 +81,7 @@ class FileDownload extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -91,41 +89,7 @@ class FileDownload extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -135,7 +99,7 @@ class FileDownload extends DataModel
      */
     public function setInternalId($internalId)
     {
-        return $this->setProperty('_internalId', $internalId, 'string');
+        return $this->setProperty('internalId', $internalId, 'string');
     }
     
     /**
@@ -143,7 +107,7 @@ class FileDownload extends DataModel
      */
     public function getInternalId()
     {
-        return $this->_internalId;
+        return $this->internalId;
     }
 
     /**
@@ -153,7 +117,7 @@ class FileDownload extends DataModel
      */
     public function setPath($path)
     {
-        return $this->setProperty('_path', $path, 'string');
+        return $this->setProperty('path', $path, 'string');
     }
     
     /**
@@ -161,7 +125,7 @@ class FileDownload extends DataModel
      */
     public function getPath()
     {
-        return $this->_path;
+        return $this->path;
     }
 
     /**
@@ -171,7 +135,7 @@ class FileDownload extends DataModel
      */
     public function setPreviewPath($previewPath)
     {
-        return $this->setProperty('_previewPath', $previewPath, 'string');
+        return $this->setProperty('previewPath', $previewPath, 'string');
     }
     
     /**
@@ -179,7 +143,7 @@ class FileDownload extends DataModel
      */
     public function getPreviewPath()
     {
-        return $this->_previewPath;
+        return $this->previewPath;
     }
 
     /**
@@ -189,7 +153,7 @@ class FileDownload extends DataModel
      */
     public function setMaxDownloads($maxDownloads)
     {
-        return $this->setProperty('_maxDownloads', $maxDownloads, 'integer');
+        return $this->setProperty('maxDownloads', $maxDownloads, 'integer');
     }
     
     /**
@@ -197,7 +161,7 @@ class FileDownload extends DataModel
      */
     public function getMaxDownloads()
     {
-        return $this->_maxDownloads;
+        return $this->maxDownloads;
     }
 
     /**
@@ -207,7 +171,7 @@ class FileDownload extends DataModel
      */
     public function setMaxDays($maxDays)
     {
-        return $this->setProperty('_maxDays', $maxDays, 'integer');
+        return $this->setProperty('maxDays', $maxDays, 'integer');
     }
     
     /**
@@ -215,7 +179,7 @@ class FileDownload extends DataModel
      */
     public function getMaxDays()
     {
-        return $this->_maxDays;
+        return $this->maxDays;
     }
 
     /**
@@ -225,7 +189,7 @@ class FileDownload extends DataModel
      */
     public function setCreated(DateTime $created)
     {
-        return $this->setProperty('_created', $created, 'DateTime');
+        return $this->setProperty('created', $created, 'DateTime');
     }
     
     /**
@@ -233,7 +197,7 @@ class FileDownload extends DataModel
      */
     public function getCreated()
     {
-        return $this->_created;
+        return $this->created;
     }
 
     /**
@@ -243,7 +207,7 @@ class FileDownload extends DataModel
      */
     public function setSort($sort)
     {
-        return $this->setProperty('_sort', $sort, 'integer');
+        return $this->setProperty('sort', $sort, 'integer');
     }
     
     /**
@@ -251,7 +215,7 @@ class FileDownload extends DataModel
      */
     public function getSort()
     {
-        return $this->_sort;
+        return $this->sort;
     }
 
     /**
@@ -261,7 +225,7 @@ class FileDownload extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -269,7 +233,7 @@ class FileDownload extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -278,7 +242,7 @@ class FileDownload extends DataModel
      */
     public function addI18n(\jtl\Connector\Model\FileDownloadI18n $i18n)
     {
-        $this->_i18n[] = $i18n;
+        $this->i18n[] = $i18n;
         return $this;
     }
     
@@ -287,7 +251,7 @@ class FileDownload extends DataModel
      */
     public function getI18n()
     {
-        return $this->_i18n;
+        return $this->i18n;
     }
 
     /**
@@ -295,7 +259,7 @@ class FileDownload extends DataModel
      */
     public function clearI18n()
     {
-        $this->_i18n = array();
+        $this->i18n = array();
         return $this;
     }
 }

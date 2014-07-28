@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,172 +11,171 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class Customer extends DataModel
 {
     /**
      * @type Identity 
      */
-    public $_customerCategoryId = null;
+    protected $customerCategoryId = null;
 
     /**
      * @type Identity References a customer group
      */
-    public $_customerGroupId = null;
+    protected $customerGroupId = null;
 
     /**
      * @type Identity Unique customer id
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type string City
      */
-    public $_city = '';
+    protected $city = '';
 
     /**
      * @type string Company name
      */
-    public $_company = '';
+    protected $company = '';
 
     /**
      * @type string Country ISO 3166-2 (2 letter Uppercase)
      */
-    public $_countryIso = '';
+    protected $countryIso = '';
 
     /**
      * @type DateTime|null Creation date
      */
-    public $_created = null;
+    protected $created = null;
 
     /**
      * @type string Optional customer number set by JTL-Wawi ERP software
      */
-    public $_customerNumber = '';
+    protected $customerNumber = '';
 
     /**
      * @type string Delivery instruction e.g. "c/o John Doe"
      */
-    public $_deliveryInstruction = '';
+    protected $deliveryInstruction = '';
 
     /**
      * @type float|null Percentual discount for customer on all prices
      */
-    public $_discount = 0.0;
+    protected $discount = 0.0;
 
     /**
      * @type string E-Mail address
      */
-    public $_eMail = '';
+    protected $eMail = '';
 
     /**
      * @type string Extra address line e.g. "Apartment 2.5"
      */
-    public $_extraAddressLine = '';
+    protected $extraAddressLine = '';
 
     /**
      * @type string Fax number
      */
-    public $_fax = '';
+    protected $fax = '';
 
     /**
      * @type string First name
      */
-    public $_firstName = '';
+    protected $firstName = '';
 
     /**
      * @type boolean Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
      */
-    public $_hasNewsletterSubscription = false;
+    protected $hasNewsletterSubscription = false;
 
     /**
      * @type boolean Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
      */
-    public $_isActive = false;
+    protected $isActive = false;
 
     /**
      * @type integer|null 
      */
-    public $_languageId = 0;
+    protected $languageId = 0;
 
     /**
      * @type string Last name
      */
-    public $_lastName = '';
+    protected $lastName = '';
 
     /**
      * @type string Mobile phone number
      */
-    public $_mobile = '';
+    protected $mobile = '';
 
     /**
      * @type string Customer origin
      */
-    public $_origin = '';
+    protected $origin = '';
 
     /**
      * @type string Phone number
      */
-    public $_phone = '';
+    protected $phone = '';
 
     /**
      * @type string Salutation (german: "Anrede")
      */
-    public $_salutation = '';
+    protected $salutation = '';
 
     /**
      * @type string State
      */
-    public $_state = '';
+    protected $state = '';
 
     /**
      * @type string Street name
      */
-    public $_street = '';
+    protected $street = '';
 
     /**
      * @type string Title, e.g. "Prof. Dr."
      */
-    public $_title = '';
+    protected $title = '';
 
     /**
      * @type string VAT number (german "USt-ID")
      */
-    public $_vatNumber = '';
+    protected $vatNumber = '';
 
     /**
      * @type string WWW address
      */
-    public $_www = '';
+    protected $www = '';
 
     /**
      * @type string ZIP / postal code
      */
-    public $_zipCode = '';
+    protected $zipCode = '';
 
     /**
      * Nav [Customer » ZeroOrOne]
      *
      * @type \jtl\Connector\Model\CustomerAttr[]
      */
-    public $_attributes = array();
+    protected $attributes = array();
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
-        '_customerCategoryId',
-        '_customerGroupId',
+    public $identities = array(
+        'id',
+        'customerCategoryId',
+        'customerGroupId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
-        '_attributes' => '\jtl\Connector\Model\CustomerAttr',
+    public $navigations = array(
+        'attributes' => '\jtl\Connector\Model\CustomerAttr',
     );
 
     /**
@@ -185,7 +183,7 @@ class Customer extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -193,41 +191,7 @@ class Customer extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -237,7 +201,7 @@ class Customer extends DataModel
      */
     public function setCustomerNumber($customerNumber)
     {
-        return $this->setProperty('_customerNumber', $customerNumber, 'string');
+        return $this->setProperty('customerNumber', $customerNumber, 'string');
     }
     
     /**
@@ -245,7 +209,7 @@ class Customer extends DataModel
      */
     public function getCustomerNumber()
     {
-        return $this->_customerNumber;
+        return $this->customerNumber;
     }
 
     /**
@@ -255,7 +219,7 @@ class Customer extends DataModel
      */
     public function setCompany($company)
     {
-        return $this->setProperty('_company', $company, 'string');
+        return $this->setProperty('company', $company, 'string');
     }
     
     /**
@@ -263,7 +227,7 @@ class Customer extends DataModel
      */
     public function getCompany()
     {
-        return $this->_company;
+        return $this->company;
     }
 
     /**
@@ -273,7 +237,7 @@ class Customer extends DataModel
      */
     public function setTitle($title)
     {
-        return $this->setProperty('_title', $title, 'string');
+        return $this->setProperty('title', $title, 'string');
     }
     
     /**
@@ -281,7 +245,7 @@ class Customer extends DataModel
      */
     public function getTitle()
     {
-        return $this->_title;
+        return $this->title;
     }
 
     /**
@@ -291,7 +255,7 @@ class Customer extends DataModel
      */
     public function setFirstName($firstName)
     {
-        return $this->setProperty('_firstName', $firstName, 'string');
+        return $this->setProperty('firstName', $firstName, 'string');
     }
     
     /**
@@ -299,7 +263,7 @@ class Customer extends DataModel
      */
     public function getFirstName()
     {
-        return $this->_firstName;
+        return $this->firstName;
     }
 
     /**
@@ -309,7 +273,7 @@ class Customer extends DataModel
      */
     public function setLastName($lastName)
     {
-        return $this->setProperty('_lastName', $lastName, 'string');
+        return $this->setProperty('lastName', $lastName, 'string');
     }
     
     /**
@@ -317,7 +281,7 @@ class Customer extends DataModel
      */
     public function getLastName()
     {
-        return $this->_lastName;
+        return $this->lastName;
     }
 
     /**
@@ -327,7 +291,7 @@ class Customer extends DataModel
      */
     public function setStreet($street)
     {
-        return $this->setProperty('_street', $street, 'string');
+        return $this->setProperty('street', $street, 'string');
     }
     
     /**
@@ -335,7 +299,7 @@ class Customer extends DataModel
      */
     public function getStreet()
     {
-        return $this->_street;
+        return $this->street;
     }
 
     /**
@@ -345,7 +309,7 @@ class Customer extends DataModel
      */
     public function setZipCode($zipCode)
     {
-        return $this->setProperty('_zipCode', $zipCode, 'string');
+        return $this->setProperty('zipCode', $zipCode, 'string');
     }
     
     /**
@@ -353,7 +317,7 @@ class Customer extends DataModel
      */
     public function getZipCode()
     {
-        return $this->_zipCode;
+        return $this->zipCode;
     }
 
     /**
@@ -363,7 +327,7 @@ class Customer extends DataModel
      */
     public function setCity($city)
     {
-        return $this->setProperty('_city', $city, 'string');
+        return $this->setProperty('city', $city, 'string');
     }
     
     /**
@@ -371,7 +335,7 @@ class Customer extends DataModel
      */
     public function getCity()
     {
-        return $this->_city;
+        return $this->city;
     }
 
     /**
@@ -381,7 +345,7 @@ class Customer extends DataModel
      */
     public function setCountryIso($countryIso)
     {
-        return $this->setProperty('_countryIso', $countryIso, 'string');
+        return $this->setProperty('countryIso', $countryIso, 'string');
     }
     
     /**
@@ -389,7 +353,7 @@ class Customer extends DataModel
      */
     public function getCountryIso()
     {
-        return $this->_countryIso;
+        return $this->countryIso;
     }
 
     /**
@@ -399,7 +363,7 @@ class Customer extends DataModel
      */
     public function setPhone($phone)
     {
-        return $this->setProperty('_phone', $phone, 'string');
+        return $this->setProperty('phone', $phone, 'string');
     }
     
     /**
@@ -407,7 +371,7 @@ class Customer extends DataModel
      */
     public function getPhone()
     {
-        return $this->_phone;
+        return $this->phone;
     }
 
     /**
@@ -417,7 +381,7 @@ class Customer extends DataModel
      */
     public function setFax($fax)
     {
-        return $this->setProperty('_fax', $fax, 'string');
+        return $this->setProperty('fax', $fax, 'string');
     }
     
     /**
@@ -425,7 +389,7 @@ class Customer extends DataModel
      */
     public function getFax()
     {
-        return $this->_fax;
+        return $this->fax;
     }
 
     /**
@@ -435,7 +399,7 @@ class Customer extends DataModel
      */
     public function setEMail($eMail)
     {
-        return $this->setProperty('_eMail', $eMail, 'string');
+        return $this->setProperty('eMail', $eMail, 'string');
     }
     
     /**
@@ -443,7 +407,7 @@ class Customer extends DataModel
      */
     public function getEMail()
     {
-        return $this->_eMail;
+        return $this->eMail;
     }
 
     /**
@@ -453,7 +417,7 @@ class Customer extends DataModel
      */
     public function setCreated(DateTime $created)
     {
-        return $this->setProperty('_created', $created, 'DateTime');
+        return $this->setProperty('created', $created, 'DateTime');
     }
     
     /**
@@ -461,7 +425,7 @@ class Customer extends DataModel
      */
     public function getCreated()
     {
-        return $this->_created;
+        return $this->created;
     }
 
     /**
@@ -471,7 +435,7 @@ class Customer extends DataModel
      */
     public function setMobile($mobile)
     {
-        return $this->setProperty('_mobile', $mobile, 'string');
+        return $this->setProperty('mobile', $mobile, 'string');
     }
     
     /**
@@ -479,7 +443,7 @@ class Customer extends DataModel
      */
     public function getMobile()
     {
-        return $this->_mobile;
+        return $this->mobile;
     }
 
     /**
@@ -489,7 +453,7 @@ class Customer extends DataModel
      */
     public function setDiscount($discount)
     {
-        return $this->setProperty('_discount', $discount, 'float');
+        return $this->setProperty('discount', $discount, 'float');
     }
     
     /**
@@ -497,7 +461,7 @@ class Customer extends DataModel
      */
     public function getDiscount()
     {
-        return $this->_discount;
+        return $this->discount;
     }
 
     /**
@@ -507,7 +471,7 @@ class Customer extends DataModel
      */
     public function setVatNumber($vatNumber)
     {
-        return $this->setProperty('_vatNumber', $vatNumber, 'string');
+        return $this->setProperty('vatNumber', $vatNumber, 'string');
     }
     
     /**
@@ -515,7 +479,7 @@ class Customer extends DataModel
      */
     public function getVatNumber()
     {
-        return $this->_vatNumber;
+        return $this->vatNumber;
     }
 
     /**
@@ -525,7 +489,7 @@ class Customer extends DataModel
      */
     public function setDeliveryInstruction($deliveryInstruction)
     {
-        return $this->setProperty('_deliveryInstruction', $deliveryInstruction, 'string');
+        return $this->setProperty('deliveryInstruction', $deliveryInstruction, 'string');
     }
     
     /**
@@ -533,7 +497,7 @@ class Customer extends DataModel
      */
     public function getDeliveryInstruction()
     {
-        return $this->_deliveryInstruction;
+        return $this->deliveryInstruction;
     }
 
     /**
@@ -543,7 +507,7 @@ class Customer extends DataModel
      */
     public function setExtraAddressLine($extraAddressLine)
     {
-        return $this->setProperty('_extraAddressLine', $extraAddressLine, 'string');
+        return $this->setProperty('extraAddressLine', $extraAddressLine, 'string');
     }
     
     /**
@@ -551,7 +515,7 @@ class Customer extends DataModel
      */
     public function getExtraAddressLine()
     {
-        return $this->_extraAddressLine;
+        return $this->extraAddressLine;
     }
 
     /**
@@ -561,7 +525,7 @@ class Customer extends DataModel
      */
     public function setWww($www)
     {
-        return $this->setProperty('_www', $www, 'string');
+        return $this->setProperty('www', $www, 'string');
     }
     
     /**
@@ -569,7 +533,7 @@ class Customer extends DataModel
      */
     public function getWww()
     {
-        return $this->_www;
+        return $this->www;
     }
 
     /**
@@ -579,7 +543,7 @@ class Customer extends DataModel
      */
     public function setLanguageId($languageId)
     {
-        return $this->setProperty('_languageId', $languageId, 'integer');
+        return $this->setProperty('languageId', $languageId, 'integer');
     }
     
     /**
@@ -587,7 +551,7 @@ class Customer extends DataModel
      */
     public function getLanguageId()
     {
-        return $this->_languageId;
+        return $this->languageId;
     }
 
     /**
@@ -597,7 +561,7 @@ class Customer extends DataModel
      */
     public function setState($state)
     {
-        return $this->setProperty('_state', $state, 'string');
+        return $this->setProperty('state', $state, 'string');
     }
     
     /**
@@ -605,7 +569,7 @@ class Customer extends DataModel
      */
     public function getState()
     {
-        return $this->_state;
+        return $this->state;
     }
 
     /**
@@ -615,7 +579,7 @@ class Customer extends DataModel
      */
     public function setOrigin($origin)
     {
-        return $this->setProperty('_origin', $origin, 'string');
+        return $this->setProperty('origin', $origin, 'string');
     }
     
     /**
@@ -623,7 +587,7 @@ class Customer extends DataModel
      */
     public function getOrigin()
     {
-        return $this->_origin;
+        return $this->origin;
     }
 
     /**
@@ -633,7 +597,7 @@ class Customer extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -641,7 +605,7 @@ class Customer extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -651,7 +615,7 @@ class Customer extends DataModel
      */
     public function setCustomerCategoryId(Identity $customerCategoryId)
     {
-        return $this->setProperty('_customerCategoryId', $customerCategoryId, 'Identity');
+        return $this->setProperty('customerCategoryId', $customerCategoryId, 'Identity');
     }
     
     /**
@@ -659,7 +623,7 @@ class Customer extends DataModel
      */
     public function getCustomerCategoryId()
     {
-        return $this->_customerCategoryId;
+        return $this->customerCategoryId;
     }
 
     /**
@@ -669,7 +633,7 @@ class Customer extends DataModel
      */
     public function setSalutation($salutation)
     {
-        return $this->setProperty('_salutation', $salutation, 'string');
+        return $this->setProperty('salutation', $salutation, 'string');
     }
     
     /**
@@ -677,7 +641,7 @@ class Customer extends DataModel
      */
     public function getSalutation()
     {
-        return $this->_salutation;
+        return $this->salutation;
     }
 
     /**
@@ -687,7 +651,7 @@ class Customer extends DataModel
      */
     public function setIsActive($isActive)
     {
-        return $this->setProperty('_isActive', $isActive, 'boolean');
+        return $this->setProperty('isActive', $isActive, 'boolean');
     }
     
     /**
@@ -695,7 +659,7 @@ class Customer extends DataModel
      */
     public function getIsActive()
     {
-        return $this->_isActive;
+        return $this->isActive;
     }
 
     /**
@@ -705,7 +669,7 @@ class Customer extends DataModel
      */
     public function setHasNewsletterSubscription($hasNewsletterSubscription)
     {
-        return $this->setProperty('_hasNewsletterSubscription', $hasNewsletterSubscription, 'boolean');
+        return $this->setProperty('hasNewsletterSubscription', $hasNewsletterSubscription, 'boolean');
     }
     
     /**
@@ -713,7 +677,7 @@ class Customer extends DataModel
      */
     public function getHasNewsletterSubscription()
     {
-        return $this->_hasNewsletterSubscription;
+        return $this->hasNewsletterSubscription;
     }
 
     /**
@@ -723,7 +687,7 @@ class Customer extends DataModel
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('_customerGroupId', $customerGroupId, 'Identity');
+        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
     }
     
     /**
@@ -731,7 +695,7 @@ class Customer extends DataModel
      */
     public function getCustomerGroupId()
     {
-        return $this->_customerGroupId;
+        return $this->customerGroupId;
     }
 
     /**
@@ -740,7 +704,7 @@ class Customer extends DataModel
      */
     public function addAttribute(\jtl\Connector\Model\CustomerAttr $attribute)
     {
-        $this->_attributes[] = $attribute;
+        $this->attributes[] = $attribute;
         return $this;
     }
     
@@ -749,7 +713,7 @@ class Customer extends DataModel
      */
     public function getAttributes()
     {
-        return $this->_attributes;
+        return $this->attributes;
     }
 
     /**
@@ -757,7 +721,7 @@ class Customer extends DataModel
      */
     public function clearAttributes()
     {
-        $this->_attributes = array();
+        $this->attributes = array();
         return $this;
     }
 }

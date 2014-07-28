@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,49 +11,48 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class TaxRate extends DataModel
 {
     /**
      * @type Identity Unique taxRate id
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type Identity Reference to taxClass
      */
-    public $_taxClassId = null;
+    protected $taxClassId = null;
 
     /**
      * @type Identity Reference to taxZone
      */
-    public $_taxZoneId = null;
+    protected $taxZoneId = null;
 
     /**
      * @type integer|null Optional priority number. Higher value means higher priority
      */
-    public $_priority = 0;
+    protected $priority = 0;
 
     /**
      * @type float|null Tax rate value e.g. 19.00
      */
-    public $_rate = 0.0;
+    protected $rate = 0.0;
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
-        '_taxZoneId',
-        '_taxClassId',
+    public $identities = array(
+        'id',
+        'taxZoneId',
+        'taxClassId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -62,7 +60,7 @@ class TaxRate extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -70,41 +68,7 @@ class TaxRate extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -114,7 +78,7 @@ class TaxRate extends DataModel
      */
     public function setRate($rate)
     {
-        return $this->setProperty('_rate', $rate, 'float');
+        return $this->setProperty('rate', $rate, 'float');
     }
     
     /**
@@ -122,7 +86,7 @@ class TaxRate extends DataModel
      */
     public function getRate()
     {
-        return $this->_rate;
+        return $this->rate;
     }
 
     /**
@@ -132,7 +96,7 @@ class TaxRate extends DataModel
      */
     public function setPriority($priority)
     {
-        return $this->setProperty('_priority', $priority, 'integer');
+        return $this->setProperty('priority', $priority, 'integer');
     }
     
     /**
@@ -140,7 +104,7 @@ class TaxRate extends DataModel
      */
     public function getPriority()
     {
-        return $this->_priority;
+        return $this->priority;
     }
 
     /**
@@ -150,7 +114,7 @@ class TaxRate extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -158,7 +122,7 @@ class TaxRate extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -168,7 +132,7 @@ class TaxRate extends DataModel
      */
     public function setTaxZoneId(Identity $taxZoneId)
     {
-        return $this->setProperty('_taxZoneId', $taxZoneId, 'Identity');
+        return $this->setProperty('taxZoneId', $taxZoneId, 'Identity');
     }
     
     /**
@@ -176,7 +140,7 @@ class TaxRate extends DataModel
      */
     public function getTaxZoneId()
     {
-        return $this->_taxZoneId;
+        return $this->taxZoneId;
     }
 
     /**
@@ -186,7 +150,7 @@ class TaxRate extends DataModel
      */
     public function setTaxClassId(Identity $taxClassId)
     {
-        return $this->setProperty('_taxClassId', $taxClassId, 'Identity');
+        return $this->setProperty('taxClassId', $taxClassId, 'Identity');
     }
     
     /**
@@ -194,7 +158,7 @@ class TaxRate extends DataModel
      */
     public function getTaxClassId()
     {
-        return $this->_taxClassId;
+        return $this->taxClassId;
     }
 }
 

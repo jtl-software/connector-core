@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,66 +11,65 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class CustomerOrderItemVariation extends DataModel
 {
     /**
      * @type Identity Reference to customerOrderItem
      */
-    public $_customerOrderItemId = null;
+    protected $customerOrderItemId = null;
 
     /**
      * @type Identity Unique customerOrderItemVariation id
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type Identity 
      */
-    public $_productId = null;
+    protected $productId = null;
 
     /**
      * @type Identity Reference to productVariation
      */
-    public $_productVariationId = null;
+    protected $productVariationId = null;
 
     /**
      * @type Identity Reference to productVariationValue
      */
-    public $_productVariationValueId = null;
+    protected $productVariationValueId = null;
 
     /**
      * @type string Variation name e.g. "color"
      */
-    public $_productVariationName = '';
+    protected $productVariationName = '';
 
     /**
      * @type string Variation value e.g. "red"
      */
-    public $_productVariationValueName = '';
+    protected $productVariationValueName = '';
 
     /**
      * @type float|null Optional extra surcharge (added to item price)
      */
-    public $_surcharge = 0.0;
+    protected $surcharge = 0.0;
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
-        '_productVariationValueId',
-        '_customerOrderItemId',
-        '_productId',
-        '_productVariationId',
+    public $identities = array(
+        'id',
+        'productVariationValueId',
+        'customerOrderItemId',
+        'productId',
+        'productVariationId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -79,7 +77,7 @@ class CustomerOrderItemVariation extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -87,41 +85,7 @@ class CustomerOrderItemVariation extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -131,7 +95,7 @@ class CustomerOrderItemVariation extends DataModel
      */
     public function setProductVariationName($productVariationName)
     {
-        return $this->setProperty('_productVariationName', $productVariationName, 'string');
+        return $this->setProperty('productVariationName', $productVariationName, 'string');
     }
     
     /**
@@ -139,7 +103,7 @@ class CustomerOrderItemVariation extends DataModel
      */
     public function getProductVariationName()
     {
-        return $this->_productVariationName;
+        return $this->productVariationName;
     }
 
     /**
@@ -149,7 +113,7 @@ class CustomerOrderItemVariation extends DataModel
      */
     public function setProductVariationValueName($productVariationValueName)
     {
-        return $this->setProperty('_productVariationValueName', $productVariationValueName, 'string');
+        return $this->setProperty('productVariationValueName', $productVariationValueName, 'string');
     }
     
     /**
@@ -157,7 +121,7 @@ class CustomerOrderItemVariation extends DataModel
      */
     public function getProductVariationValueName()
     {
-        return $this->_productVariationValueName;
+        return $this->productVariationValueName;
     }
 
     /**
@@ -167,7 +131,7 @@ class CustomerOrderItemVariation extends DataModel
      */
     public function setSurcharge($surcharge)
     {
-        return $this->setProperty('_surcharge', $surcharge, 'float');
+        return $this->setProperty('surcharge', $surcharge, 'float');
     }
     
     /**
@@ -175,7 +139,7 @@ class CustomerOrderItemVariation extends DataModel
      */
     public function getSurcharge()
     {
-        return $this->_surcharge;
+        return $this->surcharge;
     }
 
     /**
@@ -185,7 +149,7 @@ class CustomerOrderItemVariation extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -193,7 +157,7 @@ class CustomerOrderItemVariation extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -203,7 +167,7 @@ class CustomerOrderItemVariation extends DataModel
      */
     public function setProductVariationValueId(Identity $productVariationValueId)
     {
-        return $this->setProperty('_productVariationValueId', $productVariationValueId, 'Identity');
+        return $this->setProperty('productVariationValueId', $productVariationValueId, 'Identity');
     }
     
     /**
@@ -211,7 +175,7 @@ class CustomerOrderItemVariation extends DataModel
      */
     public function getProductVariationValueId()
     {
-        return $this->_productVariationValueId;
+        return $this->productVariationValueId;
     }
 
     /**
@@ -221,7 +185,7 @@ class CustomerOrderItemVariation extends DataModel
      */
     public function setCustomerOrderItemId(Identity $customerOrderItemId)
     {
-        return $this->setProperty('_customerOrderItemId', $customerOrderItemId, 'Identity');
+        return $this->setProperty('customerOrderItemId', $customerOrderItemId, 'Identity');
     }
     
     /**
@@ -229,7 +193,7 @@ class CustomerOrderItemVariation extends DataModel
      */
     public function getCustomerOrderItemId()
     {
-        return $this->_customerOrderItemId;
+        return $this->customerOrderItemId;
     }
 
     /**
@@ -239,7 +203,7 @@ class CustomerOrderItemVariation extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('_productId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
     
     /**
@@ -247,7 +211,7 @@ class CustomerOrderItemVariation extends DataModel
      */
     public function getProductId()
     {
-        return $this->_productId;
+        return $this->productId;
     }
 
     /**
@@ -257,7 +221,7 @@ class CustomerOrderItemVariation extends DataModel
      */
     public function setProductVariationId(Identity $productVariationId)
     {
-        return $this->setProperty('_productVariationId', $productVariationId, 'Identity');
+        return $this->setProperty('productVariationId', $productVariationId, 'Identity');
     }
     
     /**
@@ -265,7 +229,7 @@ class CustomerOrderItemVariation extends DataModel
      */
     public function getProductVariationId()
     {
-        return $this->_productVariationId;
+        return $this->productVariationId;
     }
 }
 

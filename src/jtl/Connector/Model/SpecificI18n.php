@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,37 +11,36 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class SpecificI18n extends DataModel
 {
     /**
      * @type Identity Reference to specific
      */
-    public $_specificId = null;
+    protected $specificId = null;
 
     /**
      * @type string Locale
      */
-    public $_localeName = '';
+    protected $localeName = '';
 
     /**
      * @type string Localized name
      */
-    public $_name = '';
+    protected $name = '';
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_specificId',
+    public $identities = array(
+        'specificId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -50,7 +48,7 @@ class SpecificI18n extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -58,41 +56,7 @@ class SpecificI18n extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -102,7 +66,7 @@ class SpecificI18n extends DataModel
      */
     public function setName($name)
     {
-        return $this->setProperty('_name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
     
     /**
@@ -110,7 +74,7 @@ class SpecificI18n extends DataModel
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -120,7 +84,7 @@ class SpecificI18n extends DataModel
      */
     public function setSpecificId(Identity $specificId)
     {
-        return $this->setProperty('_specificId', $specificId, 'Identity');
+        return $this->setProperty('specificId', $specificId, 'Identity');
     }
     
     /**
@@ -128,7 +92,7 @@ class SpecificI18n extends DataModel
      */
     public function getSpecificId()
     {
-        return $this->_specificId;
+        return $this->specificId;
     }
 
     /**
@@ -138,7 +102,7 @@ class SpecificI18n extends DataModel
      */
     public function setLocaleName($localeName)
     {
-        return $this->setProperty('_localeName', $localeName, 'string');
+        return $this->setProperty('localeName', $localeName, 'string');
     }
     
     /**
@@ -146,7 +110,7 @@ class SpecificI18n extends DataModel
      */
     public function getLocaleName()
     {
-        return $this->_localeName;
+        return $this->localeName;
     }
 }
 

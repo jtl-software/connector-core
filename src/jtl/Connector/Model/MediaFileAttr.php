@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,48 +11,47 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class MediaFileAttr extends DataModel
 {
     /**
      * @type Identity Unique MediaFileAttr id
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type Identity Reference to mediaFile
      */
-    public $_mediaFileId = null;
+    protected $mediaFileId = null;
 
     /**
      * @type string Attribute name
      */
-    public $_key = '';
+    protected $key = '';
 
     /**
      * @type string Locale
      */
-    public $_localeName = '';
+    protected $localeName = '';
 
     /**
      * @type string Attribute value
      */
-    public $_value = '';
+    protected $value = '';
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
-        '_mediaFileId',
+    public $identities = array(
+        'id',
+        'mediaFileId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -61,7 +59,7 @@ class MediaFileAttr extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -69,41 +67,7 @@ class MediaFileAttr extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -113,7 +77,7 @@ class MediaFileAttr extends DataModel
      */
     public function setKey($key)
     {
-        return $this->setProperty('_key', $key, 'string');
+        return $this->setProperty('key', $key, 'string');
     }
     
     /**
@@ -121,7 +85,7 @@ class MediaFileAttr extends DataModel
      */
     public function getKey()
     {
-        return $this->_key;
+        return $this->key;
     }
 
     /**
@@ -131,7 +95,7 @@ class MediaFileAttr extends DataModel
      */
     public function setValue($value)
     {
-        return $this->setProperty('_value', $value, 'string');
+        return $this->setProperty('value', $value, 'string');
     }
     
     /**
@@ -139,7 +103,7 @@ class MediaFileAttr extends DataModel
      */
     public function getValue()
     {
-        return $this->_value;
+        return $this->value;
     }
 
     /**
@@ -149,7 +113,7 @@ class MediaFileAttr extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -157,7 +121,7 @@ class MediaFileAttr extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -167,7 +131,7 @@ class MediaFileAttr extends DataModel
      */
     public function setMediaFileId(Identity $mediaFileId)
     {
-        return $this->setProperty('_mediaFileId', $mediaFileId, 'Identity');
+        return $this->setProperty('mediaFileId', $mediaFileId, 'Identity');
     }
     
     /**
@@ -175,7 +139,7 @@ class MediaFileAttr extends DataModel
      */
     public function getMediaFileId()
     {
-        return $this->_mediaFileId;
+        return $this->mediaFileId;
     }
 
     /**
@@ -185,7 +149,7 @@ class MediaFileAttr extends DataModel
      */
     public function setLocaleName($localeName)
     {
-        return $this->setProperty('_localeName', $localeName, 'string');
+        return $this->setProperty('localeName', $localeName, 'string');
     }
     
     /**
@@ -193,7 +157,7 @@ class MediaFileAttr extends DataModel
      */
     public function getLocaleName()
     {
-        return $this->_localeName;
+        return $this->localeName;
     }
 }
 

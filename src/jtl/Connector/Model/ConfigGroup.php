@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,59 +11,58 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class ConfigGroup extends DataModel
 {
     /**
      * @type string Optional internal comment to differantiate config groups by comment name
      */
-    public $_comment = '';
+    protected $comment = '';
 
     /**
      * @type Byte[] 
      */
-    public $_image = null;
+    protected $image = null;
 
     /**
      * @type integer|null Optional maximum number allowed selections. Default 0 for no maximum limitation.
      */
-    public $_maximumSelection = 0;
+    protected $maximumSelection = 0;
 
     /**
      * @type integer|null Optional minimum number required selections. Default 0 for no minimum requirement. 
      */
-    public $_minimumSelection = 0;
+    protected $minimumSelection = 0;
 
     /**
      * @type integer|null Optional sort order number
      */
-    public $_sort = 0;
+    protected $sort = 0;
 
     /**
      * @type integer|null Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      */
-    public $_type = 0;
+    protected $type = 0;
 
     /**
      * Nav [ConfigGroup » One]
      *
      * @type \jtl\Connector\Model\ConfigGroupI18n[]
      */
-    public $_i18n = array();
+    protected $i18n = array();
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
+    public $identities = array(
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
-        '_i18n' => '\jtl\Connector\Model\ConfigGroupI18n',
+    public $navigations = array(
+        'i18n' => '\jtl\Connector\Model\ConfigGroupI18n',
     );
 
     /**
@@ -72,7 +70,7 @@ class ConfigGroup extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -80,41 +78,7 @@ class ConfigGroup extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -124,7 +88,7 @@ class ConfigGroup extends DataModel
      */
     public function setImage(Byte[] $image)
     {
-        return $this->setProperty('_image', $image, 'Byte[]');
+        return $this->setProperty('image', $image, 'Byte[]');
     }
     
     /**
@@ -132,7 +96,7 @@ class ConfigGroup extends DataModel
      */
     public function getImage()
     {
-        return $this->_image;
+        return $this->image;
     }
 
     /**
@@ -142,7 +106,7 @@ class ConfigGroup extends DataModel
      */
     public function setMinimumSelection($minimumSelection)
     {
-        return $this->setProperty('_minimumSelection', $minimumSelection, 'integer');
+        return $this->setProperty('minimumSelection', $minimumSelection, 'integer');
     }
     
     /**
@@ -150,7 +114,7 @@ class ConfigGroup extends DataModel
      */
     public function getMinimumSelection()
     {
-        return $this->_minimumSelection;
+        return $this->minimumSelection;
     }
 
     /**
@@ -160,7 +124,7 @@ class ConfigGroup extends DataModel
      */
     public function setMaximumSelection($maximumSelection)
     {
-        return $this->setProperty('_maximumSelection', $maximumSelection, 'integer');
+        return $this->setProperty('maximumSelection', $maximumSelection, 'integer');
     }
     
     /**
@@ -168,7 +132,7 @@ class ConfigGroup extends DataModel
      */
     public function getMaximumSelection()
     {
-        return $this->_maximumSelection;
+        return $this->maximumSelection;
     }
 
     /**
@@ -178,7 +142,7 @@ class ConfigGroup extends DataModel
      */
     public function setType($type)
     {
-        return $this->setProperty('_type', $type, 'integer');
+        return $this->setProperty('type', $type, 'integer');
     }
     
     /**
@@ -186,7 +150,7 @@ class ConfigGroup extends DataModel
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
@@ -196,7 +160,7 @@ class ConfigGroup extends DataModel
      */
     public function setSort($sort)
     {
-        return $this->setProperty('_sort', $sort, 'integer');
+        return $this->setProperty('sort', $sort, 'integer');
     }
     
     /**
@@ -204,7 +168,7 @@ class ConfigGroup extends DataModel
      */
     public function getSort()
     {
-        return $this->_sort;
+        return $this->sort;
     }
 
     /**
@@ -214,7 +178,7 @@ class ConfigGroup extends DataModel
      */
     public function setComment($comment)
     {
-        return $this->setProperty('_comment', $comment, 'string');
+        return $this->setProperty('comment', $comment, 'string');
     }
     
     /**
@@ -222,7 +186,7 @@ class ConfigGroup extends DataModel
      */
     public function getComment()
     {
-        return $this->_comment;
+        return $this->comment;
     }
 
     /**
@@ -231,7 +195,7 @@ class ConfigGroup extends DataModel
      */
     public function addI18n(\jtl\Connector\Model\ConfigGroupI18n $i18n)
     {
-        $this->_i18n[] = $i18n;
+        $this->i18n[] = $i18n;
         return $this;
     }
     
@@ -240,7 +204,7 @@ class ConfigGroup extends DataModel
      */
     public function getI18n()
     {
-        return $this->_i18n;
+        return $this->i18n;
     }
 
     /**
@@ -248,7 +212,7 @@ class ConfigGroup extends DataModel
      */
     public function clearI18n()
     {
-        $this->_i18n = array();
+        $this->i18n = array();
         return $this;
     }
 }

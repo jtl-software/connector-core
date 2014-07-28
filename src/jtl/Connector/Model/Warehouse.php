@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,252 +11,251 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class Warehouse extends DataModel
 {
     /**
      * @type Identity Unique warehouse id
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type string 
      */
-    public $_cAnsprechpartnerAbteilung = '';
+    protected $cAnsprechpartnerAbteilung = '';
 
     /**
      * @type string 
      */
-    public $_cAnsprechpartnerAnrede = '';
+    protected $cAnsprechpartnerAnrede = '';
 
     /**
      * @type string 
      */
-    public $_cAnsprechpartnerEMail = '';
+    protected $cAnsprechpartnerEMail = '';
 
     /**
      * @type string 
      */
-    public $_cAnsprechpartnerFax = '';
+    protected $cAnsprechpartnerFax = '';
 
     /**
      * @type string 
      */
-    public $_cAnsprechpartnerName = '';
+    protected $cAnsprechpartnerName = '';
 
     /**
      * @type string 
      */
-    public $_cAnsprechpartnerTel = '';
+    protected $cAnsprechpartnerTel = '';
 
     /**
      * @type string 
      */
-    public $_cAnsprechpartnerVorname = '';
+    protected $cAnsprechpartnerVorname = '';
 
     /**
      * @type string 
      */
-    public $_cBeschreibung = '';
+    protected $cBeschreibung = '';
 
     /**
      * @type string 
      */
-    public $_cBundesland = '';
+    protected $cBundesland = '';
 
     /**
      * @type string 
      */
-    public $_cDimension1Name = '';
+    protected $cDimension1Name = '';
 
     /**
      * @type string 
      */
-    public $_cDimension1Trennzeichen = '';
+    protected $cDimension1Trennzeichen = '';
 
     /**
      * @type string 
      */
-    public $_cDimension2Name = '';
+    protected $cDimension2Name = '';
 
     /**
      * @type string 
      */
-    public $_cDimension2Trennzeichen = '';
+    protected $cDimension2Trennzeichen = '';
 
     /**
      * @type string 
      */
-    public $_cDimension3Name = '';
+    protected $cDimension3Name = '';
 
     /**
      * @type string 
      */
-    public $_cDimension3Trennzeichen = '';
+    protected $cDimension3Trennzeichen = '';
 
     /**
      * @type string 
      */
-    public $_cDimension4Name = '';
+    protected $cDimension4Name = '';
 
     /**
      * @type string 
      */
-    public $_cDimension4Trennzeichen = '';
+    protected $cDimension4Trennzeichen = '';
 
     /**
      * @type string 
      */
-    public $_cDimension5Name = '';
+    protected $cDimension5Name = '';
 
     /**
      * @type string 
      */
-    public $_cDimension5Trennzeichen = '';
+    protected $cDimension5Trennzeichen = '';
 
     /**
      * @type string 
      */
-    public $_cEmpfaengerFirma = '';
+    protected $cEmpfaengerFirma = '';
 
     /**
      * @type string 
      */
-    public $_cKuerzel = '';
+    protected $cKuerzel = '';
 
     /**
      * @type string 
      */
-    public $_cLagerTyp = '';
+    protected $cLagerTyp = '';
 
     /**
      * @type string 
      */
-    public $_cLand = '';
+    protected $cLand = '';
 
     /**
      * @type string 
      */
-    public $_cOrt = '';
+    protected $cOrt = '';
 
     /**
      * @type string 
      */
-    public $_cPLZ = '';
+    protected $cPLZ = '';
 
     /**
      * @type string 
      */
-    public $_cStrasse = '';
+    protected $cStrasse = '';
 
     /**
      * @type integer|null 
      */
-    public $_kFirma = 0;
+    protected $kFirma = 0;
 
     /**
      * @type integer|null 
      */
-    public $_kQuellLager = 0;
+    protected $kQuellLager = 0;
 
     /**
      * @type integer|null 
      */
-    public $_kUser = 0;
+    protected $kUser = 0;
 
     /**
      * @type integer|null 
      */
-    public $_kZielLager = 0;
+    protected $kZielLager = 0;
 
     /**
      * @type string 
      */
-    public $_name = '';
+    protected $name = '';
 
     /**
      * @type integer|null 
      */
-    public $_nAuslieferungsPrio = 0;
+    protected $nAuslieferungsPrio = 0;
 
     /**
      * @type integer|null 
      */
-    public $_nDimension1Laenge = 0;
+    protected $nDimension1Laenge = 0;
 
     /**
      * @type integer|null 
      */
-    public $_nDimension1Typ = 0;
+    protected $nDimension1Typ = 0;
 
     /**
      * @type integer|null 
      */
-    public $_nDimension2Laenge = 0;
+    protected $nDimension2Laenge = 0;
 
     /**
      * @type integer|null 
      */
-    public $_nDimension2Typ = 0;
+    protected $nDimension2Typ = 0;
 
     /**
      * @type integer|null 
      */
-    public $_nDimension3Laenge = 0;
+    protected $nDimension3Laenge = 0;
 
     /**
      * @type integer|null 
      */
-    public $_nDimension3Typ = 0;
+    protected $nDimension3Typ = 0;
 
     /**
      * @type integer|null 
      */
-    public $_nDimension4Laenge = 0;
+    protected $nDimension4Laenge = 0;
 
     /**
      * @type integer|null 
      */
-    public $_nDimension4Typ = 0;
+    protected $nDimension4Typ = 0;
 
     /**
      * @type integer|null 
      */
-    public $_nDimension5Laenge = 0;
+    protected $nDimension5Laenge = 0;
 
     /**
      * @type integer|null 
      */
-    public $_nDimension5Typ = 0;
+    protected $nDimension5Typ = 0;
 
     /**
      * @type integer 
      */
-    public $_nFulfillment = 0;
+    protected $nFulfillment = 0;
 
     /**
      * @type integer 
      */
-    public $_nLagerplatzVerwaltung = 0;
+    protected $nLagerplatzVerwaltung = 0;
 
     /**
      * @type integer|null 
      */
-    public $_nPackStationAktiv = 0;
+    protected $nPackStationAktiv = 0;
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
+    public $identities = array(
+        'id',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -265,7 +263,7 @@ class Warehouse extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -273,41 +271,7 @@ class Warehouse extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -317,7 +281,7 @@ class Warehouse extends DataModel
      */
     public function setName($name)
     {
-        return $this->setProperty('_name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
     
     /**
@@ -325,7 +289,7 @@ class Warehouse extends DataModel
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -335,7 +299,7 @@ class Warehouse extends DataModel
      */
     public function setCKuerzel($cKuerzel)
     {
-        return $this->setProperty('_cKuerzel', $cKuerzel, 'string');
+        return $this->setProperty('cKuerzel', $cKuerzel, 'string');
     }
     
     /**
@@ -343,7 +307,7 @@ class Warehouse extends DataModel
      */
     public function getCKuerzel()
     {
-        return $this->_cKuerzel;
+        return $this->cKuerzel;
     }
 
     /**
@@ -353,7 +317,7 @@ class Warehouse extends DataModel
      */
     public function setCLagerTyp($cLagerTyp)
     {
-        return $this->setProperty('_cLagerTyp', $cLagerTyp, 'string');
+        return $this->setProperty('cLagerTyp', $cLagerTyp, 'string');
     }
     
     /**
@@ -361,7 +325,7 @@ class Warehouse extends DataModel
      */
     public function getCLagerTyp()
     {
-        return $this->_cLagerTyp;
+        return $this->cLagerTyp;
     }
 
     /**
@@ -371,7 +335,7 @@ class Warehouse extends DataModel
      */
     public function setCBeschreibung($cBeschreibung)
     {
-        return $this->setProperty('_cBeschreibung', $cBeschreibung, 'string');
+        return $this->setProperty('cBeschreibung', $cBeschreibung, 'string');
     }
     
     /**
@@ -379,7 +343,7 @@ class Warehouse extends DataModel
      */
     public function getCBeschreibung()
     {
-        return $this->_cBeschreibung;
+        return $this->cBeschreibung;
     }
 
     /**
@@ -389,7 +353,7 @@ class Warehouse extends DataModel
      */
     public function setCStrasse($cStrasse)
     {
-        return $this->setProperty('_cStrasse', $cStrasse, 'string');
+        return $this->setProperty('cStrasse', $cStrasse, 'string');
     }
     
     /**
@@ -397,7 +361,7 @@ class Warehouse extends DataModel
      */
     public function getCStrasse()
     {
-        return $this->_cStrasse;
+        return $this->cStrasse;
     }
 
     /**
@@ -407,7 +371,7 @@ class Warehouse extends DataModel
      */
     public function setCPLZ($cPLZ)
     {
-        return $this->setProperty('_cPLZ', $cPLZ, 'string');
+        return $this->setProperty('cPLZ', $cPLZ, 'string');
     }
     
     /**
@@ -415,7 +379,7 @@ class Warehouse extends DataModel
      */
     public function getCPLZ()
     {
-        return $this->_cPLZ;
+        return $this->cPLZ;
     }
 
     /**
@@ -425,7 +389,7 @@ class Warehouse extends DataModel
      */
     public function setCOrt($cOrt)
     {
-        return $this->setProperty('_cOrt', $cOrt, 'string');
+        return $this->setProperty('cOrt', $cOrt, 'string');
     }
     
     /**
@@ -433,7 +397,7 @@ class Warehouse extends DataModel
      */
     public function getCOrt()
     {
-        return $this->_cOrt;
+        return $this->cOrt;
     }
 
     /**
@@ -443,7 +407,7 @@ class Warehouse extends DataModel
      */
     public function setCLand($cLand)
     {
-        return $this->setProperty('_cLand', $cLand, 'string');
+        return $this->setProperty('cLand', $cLand, 'string');
     }
     
     /**
@@ -451,7 +415,7 @@ class Warehouse extends DataModel
      */
     public function getCLand()
     {
-        return $this->_cLand;
+        return $this->cLand;
     }
 
     /**
@@ -461,7 +425,7 @@ class Warehouse extends DataModel
      */
     public function setCAnsprechpartnerAnrede($cAnsprechpartnerAnrede)
     {
-        return $this->setProperty('_cAnsprechpartnerAnrede', $cAnsprechpartnerAnrede, 'string');
+        return $this->setProperty('cAnsprechpartnerAnrede', $cAnsprechpartnerAnrede, 'string');
     }
     
     /**
@@ -469,7 +433,7 @@ class Warehouse extends DataModel
      */
     public function getCAnsprechpartnerAnrede()
     {
-        return $this->_cAnsprechpartnerAnrede;
+        return $this->cAnsprechpartnerAnrede;
     }
 
     /**
@@ -479,7 +443,7 @@ class Warehouse extends DataModel
      */
     public function setCAnsprechpartnerVorname($cAnsprechpartnerVorname)
     {
-        return $this->setProperty('_cAnsprechpartnerVorname', $cAnsprechpartnerVorname, 'string');
+        return $this->setProperty('cAnsprechpartnerVorname', $cAnsprechpartnerVorname, 'string');
     }
     
     /**
@@ -487,7 +451,7 @@ class Warehouse extends DataModel
      */
     public function getCAnsprechpartnerVorname()
     {
-        return $this->_cAnsprechpartnerVorname;
+        return $this->cAnsprechpartnerVorname;
     }
 
     /**
@@ -497,7 +461,7 @@ class Warehouse extends DataModel
      */
     public function setCAnsprechpartnerName($cAnsprechpartnerName)
     {
-        return $this->setProperty('_cAnsprechpartnerName', $cAnsprechpartnerName, 'string');
+        return $this->setProperty('cAnsprechpartnerName', $cAnsprechpartnerName, 'string');
     }
     
     /**
@@ -505,7 +469,7 @@ class Warehouse extends DataModel
      */
     public function getCAnsprechpartnerName()
     {
-        return $this->_cAnsprechpartnerName;
+        return $this->cAnsprechpartnerName;
     }
 
     /**
@@ -515,7 +479,7 @@ class Warehouse extends DataModel
      */
     public function setCAnsprechpartnerTel($cAnsprechpartnerTel)
     {
-        return $this->setProperty('_cAnsprechpartnerTel', $cAnsprechpartnerTel, 'string');
+        return $this->setProperty('cAnsprechpartnerTel', $cAnsprechpartnerTel, 'string');
     }
     
     /**
@@ -523,7 +487,7 @@ class Warehouse extends DataModel
      */
     public function getCAnsprechpartnerTel()
     {
-        return $this->_cAnsprechpartnerTel;
+        return $this->cAnsprechpartnerTel;
     }
 
     /**
@@ -533,7 +497,7 @@ class Warehouse extends DataModel
      */
     public function setCAnsprechpartnerFax($cAnsprechpartnerFax)
     {
-        return $this->setProperty('_cAnsprechpartnerFax', $cAnsprechpartnerFax, 'string');
+        return $this->setProperty('cAnsprechpartnerFax', $cAnsprechpartnerFax, 'string');
     }
     
     /**
@@ -541,7 +505,7 @@ class Warehouse extends DataModel
      */
     public function getCAnsprechpartnerFax()
     {
-        return $this->_cAnsprechpartnerFax;
+        return $this->cAnsprechpartnerFax;
     }
 
     /**
@@ -551,7 +515,7 @@ class Warehouse extends DataModel
      */
     public function setCAnsprechpartnerEMail($cAnsprechpartnerEMail)
     {
-        return $this->setProperty('_cAnsprechpartnerEMail', $cAnsprechpartnerEMail, 'string');
+        return $this->setProperty('cAnsprechpartnerEMail', $cAnsprechpartnerEMail, 'string');
     }
     
     /**
@@ -559,7 +523,7 @@ class Warehouse extends DataModel
      */
     public function getCAnsprechpartnerEMail()
     {
-        return $this->_cAnsprechpartnerEMail;
+        return $this->cAnsprechpartnerEMail;
     }
 
     /**
@@ -569,7 +533,7 @@ class Warehouse extends DataModel
      */
     public function setCAnsprechpartnerAbteilung($cAnsprechpartnerAbteilung)
     {
-        return $this->setProperty('_cAnsprechpartnerAbteilung', $cAnsprechpartnerAbteilung, 'string');
+        return $this->setProperty('cAnsprechpartnerAbteilung', $cAnsprechpartnerAbteilung, 'string');
     }
     
     /**
@@ -577,7 +541,7 @@ class Warehouse extends DataModel
      */
     public function getCAnsprechpartnerAbteilung()
     {
-        return $this->_cAnsprechpartnerAbteilung;
+        return $this->cAnsprechpartnerAbteilung;
     }
 
     /**
@@ -587,7 +551,7 @@ class Warehouse extends DataModel
      */
     public function setCBundesland($cBundesland)
     {
-        return $this->setProperty('_cBundesland', $cBundesland, 'string');
+        return $this->setProperty('cBundesland', $cBundesland, 'string');
     }
     
     /**
@@ -595,7 +559,7 @@ class Warehouse extends DataModel
      */
     public function getCBundesland()
     {
-        return $this->_cBundesland;
+        return $this->cBundesland;
     }
 
     /**
@@ -605,7 +569,7 @@ class Warehouse extends DataModel
      */
     public function setKFirma($kFirma)
     {
-        return $this->setProperty('_kFirma', $kFirma, 'integer');
+        return $this->setProperty('kFirma', $kFirma, 'integer');
     }
     
     /**
@@ -613,7 +577,7 @@ class Warehouse extends DataModel
      */
     public function getKFirma()
     {
-        return $this->_kFirma;
+        return $this->kFirma;
     }
 
     /**
@@ -623,7 +587,7 @@ class Warehouse extends DataModel
      */
     public function setKUser($kUser)
     {
-        return $this->setProperty('_kUser', $kUser, 'integer');
+        return $this->setProperty('kUser', $kUser, 'integer');
     }
     
     /**
@@ -631,7 +595,7 @@ class Warehouse extends DataModel
      */
     public function getKUser()
     {
-        return $this->_kUser;
+        return $this->kUser;
     }
 
     /**
@@ -641,7 +605,7 @@ class Warehouse extends DataModel
      */
     public function setNFulfillment($nFulfillment)
     {
-        return $this->setProperty('_nFulfillment', $nFulfillment, 'integer');
+        return $this->setProperty('nFulfillment', $nFulfillment, 'integer');
     }
     
     /**
@@ -649,7 +613,7 @@ class Warehouse extends DataModel
      */
     public function getNFulfillment()
     {
-        return $this->_nFulfillment;
+        return $this->nFulfillment;
     }
 
     /**
@@ -659,7 +623,7 @@ class Warehouse extends DataModel
      */
     public function setNLagerplatzVerwaltung($nLagerplatzVerwaltung)
     {
-        return $this->setProperty('_nLagerplatzVerwaltung', $nLagerplatzVerwaltung, 'integer');
+        return $this->setProperty('nLagerplatzVerwaltung', $nLagerplatzVerwaltung, 'integer');
     }
     
     /**
@@ -667,7 +631,7 @@ class Warehouse extends DataModel
      */
     public function getNLagerplatzVerwaltung()
     {
-        return $this->_nLagerplatzVerwaltung;
+        return $this->nLagerplatzVerwaltung;
     }
 
     /**
@@ -677,7 +641,7 @@ class Warehouse extends DataModel
      */
     public function setNAuslieferungsPrio($nAuslieferungsPrio)
     {
-        return $this->setProperty('_nAuslieferungsPrio', $nAuslieferungsPrio, 'integer');
+        return $this->setProperty('nAuslieferungsPrio', $nAuslieferungsPrio, 'integer');
     }
     
     /**
@@ -685,7 +649,7 @@ class Warehouse extends DataModel
      */
     public function getNAuslieferungsPrio()
     {
-        return $this->_nAuslieferungsPrio;
+        return $this->nAuslieferungsPrio;
     }
 
     /**
@@ -695,7 +659,7 @@ class Warehouse extends DataModel
      */
     public function setNPackStationAktiv($nPackStationAktiv)
     {
-        return $this->setProperty('_nPackStationAktiv', $nPackStationAktiv, 'integer');
+        return $this->setProperty('nPackStationAktiv', $nPackStationAktiv, 'integer');
     }
     
     /**
@@ -703,7 +667,7 @@ class Warehouse extends DataModel
      */
     public function getNPackStationAktiv()
     {
-        return $this->_nPackStationAktiv;
+        return $this->nPackStationAktiv;
     }
 
     /**
@@ -713,7 +677,7 @@ class Warehouse extends DataModel
      */
     public function setCDimension1Name($cDimension1Name)
     {
-        return $this->setProperty('_cDimension1Name', $cDimension1Name, 'string');
+        return $this->setProperty('cDimension1Name', $cDimension1Name, 'string');
     }
     
     /**
@@ -721,7 +685,7 @@ class Warehouse extends DataModel
      */
     public function getCDimension1Name()
     {
-        return $this->_cDimension1Name;
+        return $this->cDimension1Name;
     }
 
     /**
@@ -731,7 +695,7 @@ class Warehouse extends DataModel
      */
     public function setCDimension1Trennzeichen($cDimension1Trennzeichen)
     {
-        return $this->setProperty('_cDimension1Trennzeichen', $cDimension1Trennzeichen, 'string');
+        return $this->setProperty('cDimension1Trennzeichen', $cDimension1Trennzeichen, 'string');
     }
     
     /**
@@ -739,7 +703,7 @@ class Warehouse extends DataModel
      */
     public function getCDimension1Trennzeichen()
     {
-        return $this->_cDimension1Trennzeichen;
+        return $this->cDimension1Trennzeichen;
     }
 
     /**
@@ -749,7 +713,7 @@ class Warehouse extends DataModel
      */
     public function setNDimension1Laenge($nDimension1Laenge)
     {
-        return $this->setProperty('_nDimension1Laenge', $nDimension1Laenge, 'integer');
+        return $this->setProperty('nDimension1Laenge', $nDimension1Laenge, 'integer');
     }
     
     /**
@@ -757,7 +721,7 @@ class Warehouse extends DataModel
      */
     public function getNDimension1Laenge()
     {
-        return $this->_nDimension1Laenge;
+        return $this->nDimension1Laenge;
     }
 
     /**
@@ -767,7 +731,7 @@ class Warehouse extends DataModel
      */
     public function setNDimension1Typ($nDimension1Typ)
     {
-        return $this->setProperty('_nDimension1Typ', $nDimension1Typ, 'integer');
+        return $this->setProperty('nDimension1Typ', $nDimension1Typ, 'integer');
     }
     
     /**
@@ -775,7 +739,7 @@ class Warehouse extends DataModel
      */
     public function getNDimension1Typ()
     {
-        return $this->_nDimension1Typ;
+        return $this->nDimension1Typ;
     }
 
     /**
@@ -785,7 +749,7 @@ class Warehouse extends DataModel
      */
     public function setCDimension2Name($cDimension2Name)
     {
-        return $this->setProperty('_cDimension2Name', $cDimension2Name, 'string');
+        return $this->setProperty('cDimension2Name', $cDimension2Name, 'string');
     }
     
     /**
@@ -793,7 +757,7 @@ class Warehouse extends DataModel
      */
     public function getCDimension2Name()
     {
-        return $this->_cDimension2Name;
+        return $this->cDimension2Name;
     }
 
     /**
@@ -803,7 +767,7 @@ class Warehouse extends DataModel
      */
     public function setCDimension2Trennzeichen($cDimension2Trennzeichen)
     {
-        return $this->setProperty('_cDimension2Trennzeichen', $cDimension2Trennzeichen, 'string');
+        return $this->setProperty('cDimension2Trennzeichen', $cDimension2Trennzeichen, 'string');
     }
     
     /**
@@ -811,7 +775,7 @@ class Warehouse extends DataModel
      */
     public function getCDimension2Trennzeichen()
     {
-        return $this->_cDimension2Trennzeichen;
+        return $this->cDimension2Trennzeichen;
     }
 
     /**
@@ -821,7 +785,7 @@ class Warehouse extends DataModel
      */
     public function setNDimension2Laenge($nDimension2Laenge)
     {
-        return $this->setProperty('_nDimension2Laenge', $nDimension2Laenge, 'integer');
+        return $this->setProperty('nDimension2Laenge', $nDimension2Laenge, 'integer');
     }
     
     /**
@@ -829,7 +793,7 @@ class Warehouse extends DataModel
      */
     public function getNDimension2Laenge()
     {
-        return $this->_nDimension2Laenge;
+        return $this->nDimension2Laenge;
     }
 
     /**
@@ -839,7 +803,7 @@ class Warehouse extends DataModel
      */
     public function setNDimension2Typ($nDimension2Typ)
     {
-        return $this->setProperty('_nDimension2Typ', $nDimension2Typ, 'integer');
+        return $this->setProperty('nDimension2Typ', $nDimension2Typ, 'integer');
     }
     
     /**
@@ -847,7 +811,7 @@ class Warehouse extends DataModel
      */
     public function getNDimension2Typ()
     {
-        return $this->_nDimension2Typ;
+        return $this->nDimension2Typ;
     }
 
     /**
@@ -857,7 +821,7 @@ class Warehouse extends DataModel
      */
     public function setCDimension3Name($cDimension3Name)
     {
-        return $this->setProperty('_cDimension3Name', $cDimension3Name, 'string');
+        return $this->setProperty('cDimension3Name', $cDimension3Name, 'string');
     }
     
     /**
@@ -865,7 +829,7 @@ class Warehouse extends DataModel
      */
     public function getCDimension3Name()
     {
-        return $this->_cDimension3Name;
+        return $this->cDimension3Name;
     }
 
     /**
@@ -875,7 +839,7 @@ class Warehouse extends DataModel
      */
     public function setCDimension3Trennzeichen($cDimension3Trennzeichen)
     {
-        return $this->setProperty('_cDimension3Trennzeichen', $cDimension3Trennzeichen, 'string');
+        return $this->setProperty('cDimension3Trennzeichen', $cDimension3Trennzeichen, 'string');
     }
     
     /**
@@ -883,7 +847,7 @@ class Warehouse extends DataModel
      */
     public function getCDimension3Trennzeichen()
     {
-        return $this->_cDimension3Trennzeichen;
+        return $this->cDimension3Trennzeichen;
     }
 
     /**
@@ -893,7 +857,7 @@ class Warehouse extends DataModel
      */
     public function setNDimension3Laenge($nDimension3Laenge)
     {
-        return $this->setProperty('_nDimension3Laenge', $nDimension3Laenge, 'integer');
+        return $this->setProperty('nDimension3Laenge', $nDimension3Laenge, 'integer');
     }
     
     /**
@@ -901,7 +865,7 @@ class Warehouse extends DataModel
      */
     public function getNDimension3Laenge()
     {
-        return $this->_nDimension3Laenge;
+        return $this->nDimension3Laenge;
     }
 
     /**
@@ -911,7 +875,7 @@ class Warehouse extends DataModel
      */
     public function setNDimension3Typ($nDimension3Typ)
     {
-        return $this->setProperty('_nDimension3Typ', $nDimension3Typ, 'integer');
+        return $this->setProperty('nDimension3Typ', $nDimension3Typ, 'integer');
     }
     
     /**
@@ -919,7 +883,7 @@ class Warehouse extends DataModel
      */
     public function getNDimension3Typ()
     {
-        return $this->_nDimension3Typ;
+        return $this->nDimension3Typ;
     }
 
     /**
@@ -929,7 +893,7 @@ class Warehouse extends DataModel
      */
     public function setCDimension4Name($cDimension4Name)
     {
-        return $this->setProperty('_cDimension4Name', $cDimension4Name, 'string');
+        return $this->setProperty('cDimension4Name', $cDimension4Name, 'string');
     }
     
     /**
@@ -937,7 +901,7 @@ class Warehouse extends DataModel
      */
     public function getCDimension4Name()
     {
-        return $this->_cDimension4Name;
+        return $this->cDimension4Name;
     }
 
     /**
@@ -947,7 +911,7 @@ class Warehouse extends DataModel
      */
     public function setCDimension4Trennzeichen($cDimension4Trennzeichen)
     {
-        return $this->setProperty('_cDimension4Trennzeichen', $cDimension4Trennzeichen, 'string');
+        return $this->setProperty('cDimension4Trennzeichen', $cDimension4Trennzeichen, 'string');
     }
     
     /**
@@ -955,7 +919,7 @@ class Warehouse extends DataModel
      */
     public function getCDimension4Trennzeichen()
     {
-        return $this->_cDimension4Trennzeichen;
+        return $this->cDimension4Trennzeichen;
     }
 
     /**
@@ -965,7 +929,7 @@ class Warehouse extends DataModel
      */
     public function setNDimension4Laenge($nDimension4Laenge)
     {
-        return $this->setProperty('_nDimension4Laenge', $nDimension4Laenge, 'integer');
+        return $this->setProperty('nDimension4Laenge', $nDimension4Laenge, 'integer');
     }
     
     /**
@@ -973,7 +937,7 @@ class Warehouse extends DataModel
      */
     public function getNDimension4Laenge()
     {
-        return $this->_nDimension4Laenge;
+        return $this->nDimension4Laenge;
     }
 
     /**
@@ -983,7 +947,7 @@ class Warehouse extends DataModel
      */
     public function setNDimension4Typ($nDimension4Typ)
     {
-        return $this->setProperty('_nDimension4Typ', $nDimension4Typ, 'integer');
+        return $this->setProperty('nDimension4Typ', $nDimension4Typ, 'integer');
     }
     
     /**
@@ -991,7 +955,7 @@ class Warehouse extends DataModel
      */
     public function getNDimension4Typ()
     {
-        return $this->_nDimension4Typ;
+        return $this->nDimension4Typ;
     }
 
     /**
@@ -1001,7 +965,7 @@ class Warehouse extends DataModel
      */
     public function setCDimension5Name($cDimension5Name)
     {
-        return $this->setProperty('_cDimension5Name', $cDimension5Name, 'string');
+        return $this->setProperty('cDimension5Name', $cDimension5Name, 'string');
     }
     
     /**
@@ -1009,7 +973,7 @@ class Warehouse extends DataModel
      */
     public function getCDimension5Name()
     {
-        return $this->_cDimension5Name;
+        return $this->cDimension5Name;
     }
 
     /**
@@ -1019,7 +983,7 @@ class Warehouse extends DataModel
      */
     public function setCDimension5Trennzeichen($cDimension5Trennzeichen)
     {
-        return $this->setProperty('_cDimension5Trennzeichen', $cDimension5Trennzeichen, 'string');
+        return $this->setProperty('cDimension5Trennzeichen', $cDimension5Trennzeichen, 'string');
     }
     
     /**
@@ -1027,7 +991,7 @@ class Warehouse extends DataModel
      */
     public function getCDimension5Trennzeichen()
     {
-        return $this->_cDimension5Trennzeichen;
+        return $this->cDimension5Trennzeichen;
     }
 
     /**
@@ -1037,7 +1001,7 @@ class Warehouse extends DataModel
      */
     public function setNDimension5Laenge($nDimension5Laenge)
     {
-        return $this->setProperty('_nDimension5Laenge', $nDimension5Laenge, 'integer');
+        return $this->setProperty('nDimension5Laenge', $nDimension5Laenge, 'integer');
     }
     
     /**
@@ -1045,7 +1009,7 @@ class Warehouse extends DataModel
      */
     public function getNDimension5Laenge()
     {
-        return $this->_nDimension5Laenge;
+        return $this->nDimension5Laenge;
     }
 
     /**
@@ -1055,7 +1019,7 @@ class Warehouse extends DataModel
      */
     public function setNDimension5Typ($nDimension5Typ)
     {
-        return $this->setProperty('_nDimension5Typ', $nDimension5Typ, 'integer');
+        return $this->setProperty('nDimension5Typ', $nDimension5Typ, 'integer');
     }
     
     /**
@@ -1063,7 +1027,7 @@ class Warehouse extends DataModel
      */
     public function getNDimension5Typ()
     {
-        return $this->_nDimension5Typ;
+        return $this->nDimension5Typ;
     }
 
     /**
@@ -1073,7 +1037,7 @@ class Warehouse extends DataModel
      */
     public function setCEmpfaengerFirma($cEmpfaengerFirma)
     {
-        return $this->setProperty('_cEmpfaengerFirma', $cEmpfaengerFirma, 'string');
+        return $this->setProperty('cEmpfaengerFirma', $cEmpfaengerFirma, 'string');
     }
     
     /**
@@ -1081,7 +1045,7 @@ class Warehouse extends DataModel
      */
     public function getCEmpfaengerFirma()
     {
-        return $this->_cEmpfaengerFirma;
+        return $this->cEmpfaengerFirma;
     }
 
     /**
@@ -1091,7 +1055,7 @@ class Warehouse extends DataModel
      */
     public function setKQuellLager($kQuellLager)
     {
-        return $this->setProperty('_kQuellLager', $kQuellLager, 'integer');
+        return $this->setProperty('kQuellLager', $kQuellLager, 'integer');
     }
     
     /**
@@ -1099,7 +1063,7 @@ class Warehouse extends DataModel
      */
     public function getKQuellLager()
     {
-        return $this->_kQuellLager;
+        return $this->kQuellLager;
     }
 
     /**
@@ -1109,7 +1073,7 @@ class Warehouse extends DataModel
      */
     public function setKZielLager($kZielLager)
     {
-        return $this->setProperty('_kZielLager', $kZielLager, 'integer');
+        return $this->setProperty('kZielLager', $kZielLager, 'integer');
     }
     
     /**
@@ -1117,7 +1081,7 @@ class Warehouse extends DataModel
      */
     public function getKZielLager()
     {
-        return $this->_kZielLager;
+        return $this->kZielLager;
     }
 
     /**
@@ -1127,7 +1091,7 @@ class Warehouse extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -1135,7 +1099,7 @@ class Warehouse extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 }
 

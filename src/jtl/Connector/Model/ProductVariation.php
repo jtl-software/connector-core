@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,82 +11,81 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class ProductVariation extends DataModel
 {
     /**
      * @type Identity Unique productVariation id
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type Identity Reference to product
      */
-    public $_productId = null;
+    protected $productId = null;
 
     /**
      * @type string 
      */
-    public $_cName = '';
+    protected $cName = '';
 
     /**
      * @type boolean 
      */
-    public $_isActive = false;
+    protected $isActive = false;
 
     /**
      * @type boolean 
      */
-    public $_isSelectable = false;
+    protected $isSelectable = false;
 
     /**
      * @type integer|null Optional sort number
      */
-    public $_sort = 0;
+    protected $sort = 0;
 
     /**
      * @type string Variation type e.g. radio or select
      */
-    public $_type = '';
+    protected $type = '';
 
     /**
      * Nav [ProductVariation » One]
      *
      * @type \jtl\Connector\Model\ProductVariationI18n[]
      */
-    public $_i18ns = array();
+    protected $i18ns = array();
 
     /**
      * Nav [ProductVariation » One]
      *
      * @type \jtl\Connector\Model\ProductVariationInvisibility[]
      */
-    public $_invisibilities = array();
+    protected $invisibilities = array();
 
     /**
      * Nav [ProductVariation » One]
      *
      * @type \jtl\Connector\Model\ProductVariationValue[]
      */
-    public $_values = array();
+    protected $values = array();
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
-        '_productId',
+    public $identities = array(
+        'id',
+        'productId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
-        '_i18ns' => '\jtl\Connector\Model\ProductVariationI18n',
-        '_invisibilities' => '\jtl\Connector\Model\ProductVariationInvisibility',
-        '_values' => '\jtl\Connector\Model\ProductVariationValue',
+    public $navigations = array(
+        'i18ns' => '\jtl\Connector\Model\ProductVariationI18n',
+        'invisibilities' => '\jtl\Connector\Model\ProductVariationInvisibility',
+        'values' => '\jtl\Connector\Model\ProductVariationValue',
     );
 
     /**
@@ -95,7 +93,7 @@ class ProductVariation extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -103,41 +101,7 @@ class ProductVariation extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -147,7 +111,7 @@ class ProductVariation extends DataModel
      */
     public function setSort($sort)
     {
-        return $this->setProperty('_sort', $sort, 'integer');
+        return $this->setProperty('sort', $sort, 'integer');
     }
     
     /**
@@ -155,7 +119,7 @@ class ProductVariation extends DataModel
      */
     public function getSort()
     {
-        return $this->_sort;
+        return $this->sort;
     }
 
     /**
@@ -165,7 +129,7 @@ class ProductVariation extends DataModel
      */
     public function setType($type)
     {
-        return $this->setProperty('_type', $type, 'string');
+        return $this->setProperty('type', $type, 'string');
     }
     
     /**
@@ -173,7 +137,7 @@ class ProductVariation extends DataModel
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
@@ -183,7 +147,7 @@ class ProductVariation extends DataModel
      */
     public function setCName($cName)
     {
-        return $this->setProperty('_cName', $cName, 'string');
+        return $this->setProperty('cName', $cName, 'string');
     }
     
     /**
@@ -191,7 +155,7 @@ class ProductVariation extends DataModel
      */
     public function getCName()
     {
-        return $this->_cName;
+        return $this->cName;
     }
 
     /**
@@ -201,7 +165,7 @@ class ProductVariation extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -209,7 +173,7 @@ class ProductVariation extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -219,7 +183,7 @@ class ProductVariation extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('_productId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
     
     /**
@@ -227,7 +191,7 @@ class ProductVariation extends DataModel
      */
     public function getProductId()
     {
-        return $this->_productId;
+        return $this->productId;
     }
 
     /**
@@ -237,7 +201,7 @@ class ProductVariation extends DataModel
      */
     public function setIsSelectable($isSelectable)
     {
-        return $this->setProperty('_isSelectable', $isSelectable, 'boolean');
+        return $this->setProperty('isSelectable', $isSelectable, 'boolean');
     }
     
     /**
@@ -245,7 +209,7 @@ class ProductVariation extends DataModel
      */
     public function getIsSelectable()
     {
-        return $this->_isSelectable;
+        return $this->isSelectable;
     }
 
     /**
@@ -255,7 +219,7 @@ class ProductVariation extends DataModel
      */
     public function setIsActive($isActive)
     {
-        return $this->setProperty('_isActive', $isActive, 'boolean');
+        return $this->setProperty('isActive', $isActive, 'boolean');
     }
     
     /**
@@ -263,7 +227,7 @@ class ProductVariation extends DataModel
      */
     public function getIsActive()
     {
-        return $this->_isActive;
+        return $this->isActive;
     }
 
     /**
@@ -272,7 +236,7 @@ class ProductVariation extends DataModel
      */
     public function addI18ns(\jtl\Connector\Model\ProductVariationI18n $i18ns)
     {
-        $this->_i18ns[] = $i18ns;
+        $this->i18ns[] = $i18ns;
         return $this;
     }
     
@@ -281,7 +245,7 @@ class ProductVariation extends DataModel
      */
     public function getI18ns()
     {
-        return $this->_i18ns;
+        return $this->i18ns;
     }
 
     /**
@@ -289,7 +253,7 @@ class ProductVariation extends DataModel
      */
     public function clearI18ns()
     {
-        $this->_i18ns = array();
+        $this->i18ns = array();
         return $this;
     }
 
@@ -299,7 +263,7 @@ class ProductVariation extends DataModel
      */
     public function addInvisibility(\jtl\Connector\Model\ProductVariationInvisibility $invisibility)
     {
-        $this->_invisibilities[] = $invisibility;
+        $this->invisibilities[] = $invisibility;
         return $this;
     }
     
@@ -308,7 +272,7 @@ class ProductVariation extends DataModel
      */
     public function getInvisibilities()
     {
-        return $this->_invisibilities;
+        return $this->invisibilities;
     }
 
     /**
@@ -316,7 +280,7 @@ class ProductVariation extends DataModel
      */
     public function clearInvisibilities()
     {
-        $this->_invisibilities = array();
+        $this->invisibilities = array();
         return $this;
     }
 
@@ -326,7 +290,7 @@ class ProductVariation extends DataModel
      */
     public function addValue(\jtl\Connector\Model\ProductVariationValue $value)
     {
-        $this->_values[] = $value;
+        $this->values[] = $value;
         return $this;
     }
     
@@ -335,7 +299,7 @@ class ProductVariation extends DataModel
      */
     public function getValues()
     {
-        return $this->_values;
+        return $this->values;
     }
 
     /**
@@ -343,7 +307,7 @@ class ProductVariation extends DataModel
      */
     public function clearValues()
     {
-        $this->_values = array();
+        $this->values = array();
         return $this;
     }
 }

@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,79 +11,78 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class ProductImage extends DataModel
 {
     /**
      * @type Identity 
      */
-    public $_foreignKey = null;
+    protected $foreignKey = null;
 
     /**
      * @type Identity 
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type Identity 
      */
-    public $_masterImageId = null;
+    protected $masterImageId = null;
 
     /**
      * @type string 
      */
-    public $_cAufloesung = '';
+    protected $cAufloesung = '';
 
     /**
      * @type string 
      */
-    public $_cHash = '';
+    protected $cHash = '';
 
     /**
      * @type DateTime|null 
      */
-    public $_dAenderungsdatum = null;
+    protected $dAenderungsdatum = null;
 
     /**
      * @type Byte[] 
      */
-    public $_data = null;
+    protected $data = null;
 
     /**
      * @type boolean 
      */
-    public $_flagDelete = false;
+    protected $flagDelete = false;
 
     /**
      * @type boolean 
      */
-    public $_flagUpdate = false;
+    protected $flagUpdate = false;
 
     /**
      * @type string 
      */
-    public $_modified = '';
+    protected $modified = '';
 
     /**
      * @type integer|null 
      */
-    public $_size = 0;
+    protected $size = 0;
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
-        '_foreignKey',
-        '_masterImageId',
+    public $identities = array(
+        'id',
+        'foreignKey',
+        'masterImageId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -92,7 +90,7 @@ class ProductImage extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -100,41 +98,7 @@ class ProductImage extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -144,7 +108,7 @@ class ProductImage extends DataModel
      */
     public function setData(Byte[] $data)
     {
-        return $this->setProperty('_data', $data, 'Byte[]');
+        return $this->setProperty('data', $data, 'Byte[]');
     }
     
     /**
@@ -152,7 +116,7 @@ class ProductImage extends DataModel
      */
     public function getData()
     {
-        return $this->_data;
+        return $this->data;
     }
 
     /**
@@ -162,7 +126,7 @@ class ProductImage extends DataModel
      */
     public function setSize($size)
     {
-        return $this->setProperty('_size', $size, 'integer');
+        return $this->setProperty('size', $size, 'integer');
     }
     
     /**
@@ -170,7 +134,7 @@ class ProductImage extends DataModel
      */
     public function getSize()
     {
-        return $this->_size;
+        return $this->size;
     }
 
     /**
@@ -180,7 +144,7 @@ class ProductImage extends DataModel
      */
     public function setModified($modified)
     {
-        return $this->setProperty('_modified', $modified, 'string');
+        return $this->setProperty('modified', $modified, 'string');
     }
     
     /**
@@ -188,7 +152,7 @@ class ProductImage extends DataModel
      */
     public function getModified()
     {
-        return $this->_modified;
+        return $this->modified;
     }
 
     /**
@@ -198,7 +162,7 @@ class ProductImage extends DataModel
      */
     public function setDAenderungsdatum(DateTime $dAenderungsdatum)
     {
-        return $this->setProperty('_dAenderungsdatum', $dAenderungsdatum, 'DateTime');
+        return $this->setProperty('dAenderungsdatum', $dAenderungsdatum, 'DateTime');
     }
     
     /**
@@ -206,7 +170,7 @@ class ProductImage extends DataModel
      */
     public function getDAenderungsdatum()
     {
-        return $this->_dAenderungsdatum;
+        return $this->dAenderungsdatum;
     }
 
     /**
@@ -216,7 +180,7 @@ class ProductImage extends DataModel
      */
     public function setCHash($cHash)
     {
-        return $this->setProperty('_cHash', $cHash, 'string');
+        return $this->setProperty('cHash', $cHash, 'string');
     }
     
     /**
@@ -224,7 +188,7 @@ class ProductImage extends DataModel
      */
     public function getCHash()
     {
-        return $this->_cHash;
+        return $this->cHash;
     }
 
     /**
@@ -234,7 +198,7 @@ class ProductImage extends DataModel
      */
     public function setCAufloesung($cAufloesung)
     {
-        return $this->setProperty('_cAufloesung', $cAufloesung, 'string');
+        return $this->setProperty('cAufloesung', $cAufloesung, 'string');
     }
     
     /**
@@ -242,7 +206,7 @@ class ProductImage extends DataModel
      */
     public function getCAufloesung()
     {
-        return $this->_cAufloesung;
+        return $this->cAufloesung;
     }
 
     /**
@@ -252,7 +216,7 @@ class ProductImage extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -260,7 +224,7 @@ class ProductImage extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -270,7 +234,7 @@ class ProductImage extends DataModel
      */
     public function setForeignKey(Identity $foreignKey)
     {
-        return $this->setProperty('_foreignKey', $foreignKey, 'Identity');
+        return $this->setProperty('foreignKey', $foreignKey, 'Identity');
     }
     
     /**
@@ -278,7 +242,7 @@ class ProductImage extends DataModel
      */
     public function getForeignKey()
     {
-        return $this->_foreignKey;
+        return $this->foreignKey;
     }
 
     /**
@@ -288,7 +252,7 @@ class ProductImage extends DataModel
      */
     public function setFlagDelete($flagDelete)
     {
-        return $this->setProperty('_flagDelete', $flagDelete, 'boolean');
+        return $this->setProperty('flagDelete', $flagDelete, 'boolean');
     }
     
     /**
@@ -296,7 +260,7 @@ class ProductImage extends DataModel
      */
     public function getFlagDelete()
     {
-        return $this->_flagDelete;
+        return $this->flagDelete;
     }
 
     /**
@@ -306,7 +270,7 @@ class ProductImage extends DataModel
      */
     public function setFlagUpdate($flagUpdate)
     {
-        return $this->setProperty('_flagUpdate', $flagUpdate, 'boolean');
+        return $this->setProperty('flagUpdate', $flagUpdate, 'boolean');
     }
     
     /**
@@ -314,7 +278,7 @@ class ProductImage extends DataModel
      */
     public function getFlagUpdate()
     {
-        return $this->_flagUpdate;
+        return $this->flagUpdate;
     }
 
     /**
@@ -324,7 +288,7 @@ class ProductImage extends DataModel
      */
     public function setMasterImageId(Identity $masterImageId)
     {
-        return $this->setProperty('_masterImageId', $masterImageId, 'Identity');
+        return $this->setProperty('masterImageId', $masterImageId, 'Identity');
     }
     
     /**
@@ -332,7 +296,7 @@ class ProductImage extends DataModel
      */
     public function getMasterImageId()
     {
-        return $this->_masterImageId;
+        return $this->masterImageId;
     }
 }
 

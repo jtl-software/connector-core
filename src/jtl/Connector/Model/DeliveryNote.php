@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,75 +11,74 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class DeliveryNote extends DataModel
 {
     /**
      * @type Identity Reference to customerOrder
      */
-    public $_customerOrderId = null;
+    protected $customerOrderId = null;
 
     /**
      * @type string 
      */
-    public $_cLieferscheinNr = '';
+    protected $cLieferscheinNr = '';
 
     /**
      * @type DateTime|null Creation date
      */
-    public $_created = null;
+    protected $created = null;
 
     /**
      * @type DateTime|null 
      */
-    public $_dGedruckt = null;
+    protected $dGedruckt = null;
 
     /**
      * @type DateTime|null 
      */
-    public $_dMailVersand = null;
+    protected $dMailVersand = null;
 
     /**
      * @type boolean Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      */
-    public $_isFulfillment = false;
+    protected $isFulfillment = false;
 
     /**
      * @type integer 
      */
-    public $_kBenutzer = 0;
+    protected $kBenutzer = 0;
 
     /**
      * @type integer|null 
      */
-    public $_kLieferantenBestellung = 0;
+    protected $kLieferantenBestellung = 0;
 
     /**
      * @type string Optional text note
      */
-    public $_note = '';
+    protected $note = '';
 
     /**
      * Nav [DeliveryNote » One]
      *
      * @type \jtl\Connector\Model\DeliveryNoteItem[]
      */
-    public $_items = array();
+    protected $items = array();
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_customerOrderId',
+    public $identities = array(
+        'customerOrderId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
-        '_items' => '\jtl\Connector\Model\DeliveryNoteItem',
+    public $navigations = array(
+        'items' => '\jtl\Connector\Model\DeliveryNoteItem',
     );
 
     /**
@@ -88,7 +86,7 @@ class DeliveryNote extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -96,41 +94,7 @@ class DeliveryNote extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -140,7 +104,7 @@ class DeliveryNote extends DataModel
      */
     public function setKBenutzer($kBenutzer)
     {
-        return $this->setProperty('_kBenutzer', $kBenutzer, 'integer');
+        return $this->setProperty('kBenutzer', $kBenutzer, 'integer');
     }
     
     /**
@@ -148,7 +112,7 @@ class DeliveryNote extends DataModel
      */
     public function getKBenutzer()
     {
-        return $this->_kBenutzer;
+        return $this->kBenutzer;
     }
 
     /**
@@ -158,7 +122,7 @@ class DeliveryNote extends DataModel
      */
     public function setCLieferscheinNr($cLieferscheinNr)
     {
-        return $this->setProperty('_cLieferscheinNr', $cLieferscheinNr, 'string');
+        return $this->setProperty('cLieferscheinNr', $cLieferscheinNr, 'string');
     }
     
     /**
@@ -166,7 +130,7 @@ class DeliveryNote extends DataModel
      */
     public function getCLieferscheinNr()
     {
-        return $this->_cLieferscheinNr;
+        return $this->cLieferscheinNr;
     }
 
     /**
@@ -176,7 +140,7 @@ class DeliveryNote extends DataModel
      */
     public function setNote($note)
     {
-        return $this->setProperty('_note', $note, 'string');
+        return $this->setProperty('note', $note, 'string');
     }
     
     /**
@@ -184,7 +148,7 @@ class DeliveryNote extends DataModel
      */
     public function getNote()
     {
-        return $this->_note;
+        return $this->note;
     }
 
     /**
@@ -194,7 +158,7 @@ class DeliveryNote extends DataModel
      */
     public function setDMailVersand(DateTime $dMailVersand)
     {
-        return $this->setProperty('_dMailVersand', $dMailVersand, 'DateTime');
+        return $this->setProperty('dMailVersand', $dMailVersand, 'DateTime');
     }
     
     /**
@@ -202,7 +166,7 @@ class DeliveryNote extends DataModel
      */
     public function getDMailVersand()
     {
-        return $this->_dMailVersand;
+        return $this->dMailVersand;
     }
 
     /**
@@ -212,7 +176,7 @@ class DeliveryNote extends DataModel
      */
     public function setCreated(DateTime $created)
     {
-        return $this->setProperty('_created', $created, 'DateTime');
+        return $this->setProperty('created', $created, 'DateTime');
     }
     
     /**
@@ -220,7 +184,7 @@ class DeliveryNote extends DataModel
      */
     public function getCreated()
     {
-        return $this->_created;
+        return $this->created;
     }
 
     /**
@@ -230,7 +194,7 @@ class DeliveryNote extends DataModel
      */
     public function setDGedruckt(DateTime $dGedruckt)
     {
-        return $this->setProperty('_dGedruckt', $dGedruckt, 'DateTime');
+        return $this->setProperty('dGedruckt', $dGedruckt, 'DateTime');
     }
     
     /**
@@ -238,7 +202,7 @@ class DeliveryNote extends DataModel
      */
     public function getDGedruckt()
     {
-        return $this->_dGedruckt;
+        return $this->dGedruckt;
     }
 
     /**
@@ -248,7 +212,7 @@ class DeliveryNote extends DataModel
      */
     public function setKLieferantenBestellung($kLieferantenBestellung)
     {
-        return $this->setProperty('_kLieferantenBestellung', $kLieferantenBestellung, 'integer');
+        return $this->setProperty('kLieferantenBestellung', $kLieferantenBestellung, 'integer');
     }
     
     /**
@@ -256,7 +220,7 @@ class DeliveryNote extends DataModel
      */
     public function getKLieferantenBestellung()
     {
-        return $this->_kLieferantenBestellung;
+        return $this->kLieferantenBestellung;
     }
 
     /**
@@ -266,7 +230,7 @@ class DeliveryNote extends DataModel
      */
     public function setCustomerOrderId(Identity $customerOrderId)
     {
-        return $this->setProperty('_customerOrderId', $customerOrderId, 'Identity');
+        return $this->setProperty('customerOrderId', $customerOrderId, 'Identity');
     }
     
     /**
@@ -274,7 +238,7 @@ class DeliveryNote extends DataModel
      */
     public function getCustomerOrderId()
     {
-        return $this->_customerOrderId;
+        return $this->customerOrderId;
     }
 
     /**
@@ -284,7 +248,7 @@ class DeliveryNote extends DataModel
      */
     public function setIsFulfillment($isFulfillment)
     {
-        return $this->setProperty('_isFulfillment', $isFulfillment, 'boolean');
+        return $this->setProperty('isFulfillment', $isFulfillment, 'boolean');
     }
     
     /**
@@ -292,7 +256,7 @@ class DeliveryNote extends DataModel
      */
     public function getIsFulfillment()
     {
-        return $this->_isFulfillment;
+        return $this->isFulfillment;
     }
 
     /**
@@ -301,7 +265,7 @@ class DeliveryNote extends DataModel
      */
     public function addItem(\jtl\Connector\Model\DeliveryNoteItem $item)
     {
-        $this->_items[] = $item;
+        $this->items[] = $item;
         return $this;
     }
     
@@ -310,7 +274,7 @@ class DeliveryNote extends DataModel
      */
     public function getItems()
     {
-        return $this->_items;
+        return $this->items;
     }
 
     /**
@@ -318,7 +282,7 @@ class DeliveryNote extends DataModel
      */
     public function clearItems()
     {
-        $this->_items = array();
+        $this->items = array();
         return $this;
     }
 }

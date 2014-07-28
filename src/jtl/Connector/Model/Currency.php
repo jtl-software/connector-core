@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,72 +11,71 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class Currency extends DataModel
 {
     /**
      * @type Identity Unique currency id
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type boolean 
      */
-    public $_beforeAmount = false;
+    protected $beforeAmount = false;
 
     /**
      * @type string 
      */
-    public $_decimalSeparator = '';
+    protected $decimalSeparator = '';
 
     /**
      * @type float Optional conversion factor to default currency. Default is 1 (equals default currency)
      */
-    public $_factor = 0.0;
+    protected $factor = 0.0;
 
     /**
      * @type boolean Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default. 
      */
-    public $_isDefault = false;
+    protected $isDefault = false;
 
     /**
      * @type DateTime|null 
      */
-    public $_lastModified = null;
+    protected $lastModified = null;
 
     /**
      * @type string 
      */
-    public $_mapping = '';
+    protected $mapping = '';
 
     /**
      * @type string Currency name
      */
-    public $_name = '';
+    protected $name = '';
 
     /**
      * @type string Currency name
      */
-    public $_nameHTML = '';
+    protected $nameHTML = '';
 
     /**
      * @type string 
      */
-    public $_thousandsSeparator = '';
+    protected $thousandsSeparator = '';
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
+    public $identities = array(
+        'id',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -85,7 +83,7 @@ class Currency extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -93,41 +91,7 @@ class Currency extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -137,7 +101,7 @@ class Currency extends DataModel
      */
     public function setName($name)
     {
-        return $this->setProperty('_name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
     
     /**
@@ -145,7 +109,7 @@ class Currency extends DataModel
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -155,7 +119,7 @@ class Currency extends DataModel
      */
     public function setNameHTML($nameHTML)
     {
-        return $this->setProperty('_nameHTML', $nameHTML, 'string');
+        return $this->setProperty('nameHTML', $nameHTML, 'string');
     }
     
     /**
@@ -163,7 +127,7 @@ class Currency extends DataModel
      */
     public function getNameHTML()
     {
-        return $this->_nameHTML;
+        return $this->nameHTML;
     }
 
     /**
@@ -173,7 +137,7 @@ class Currency extends DataModel
      */
     public function setFactor($factor)
     {
-        return $this->setProperty('_factor', $factor, 'float');
+        return $this->setProperty('factor', $factor, 'float');
     }
     
     /**
@@ -181,7 +145,7 @@ class Currency extends DataModel
      */
     public function getFactor()
     {
-        return $this->_factor;
+        return $this->factor;
     }
 
     /**
@@ -191,7 +155,7 @@ class Currency extends DataModel
      */
     public function setDecimalSeparator($decimalSeparator)
     {
-        return $this->setProperty('_decimalSeparator', $decimalSeparator, 'string');
+        return $this->setProperty('decimalSeparator', $decimalSeparator, 'string');
     }
     
     /**
@@ -199,7 +163,7 @@ class Currency extends DataModel
      */
     public function getDecimalSeparator()
     {
-        return $this->_decimalSeparator;
+        return $this->decimalSeparator;
     }
 
     /**
@@ -209,7 +173,7 @@ class Currency extends DataModel
      */
     public function setThousandsSeparator($thousandsSeparator)
     {
-        return $this->setProperty('_thousandsSeparator', $thousandsSeparator, 'string');
+        return $this->setProperty('thousandsSeparator', $thousandsSeparator, 'string');
     }
     
     /**
@@ -217,7 +181,7 @@ class Currency extends DataModel
      */
     public function getThousandsSeparator()
     {
-        return $this->_thousandsSeparator;
+        return $this->thousandsSeparator;
     }
 
     /**
@@ -227,7 +191,7 @@ class Currency extends DataModel
      */
     public function setLastModified(DateTime $lastModified)
     {
-        return $this->setProperty('_lastModified', $lastModified, 'DateTime');
+        return $this->setProperty('lastModified', $lastModified, 'DateTime');
     }
     
     /**
@@ -235,7 +199,7 @@ class Currency extends DataModel
      */
     public function getLastModified()
     {
-        return $this->_lastModified;
+        return $this->lastModified;
     }
 
     /**
@@ -245,7 +209,7 @@ class Currency extends DataModel
      */
     public function setMapping($mapping)
     {
-        return $this->setProperty('_mapping', $mapping, 'string');
+        return $this->setProperty('mapping', $mapping, 'string');
     }
     
     /**
@@ -253,7 +217,7 @@ class Currency extends DataModel
      */
     public function getMapping()
     {
-        return $this->_mapping;
+        return $this->mapping;
     }
 
     /**
@@ -263,7 +227,7 @@ class Currency extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -271,7 +235,7 @@ class Currency extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -281,7 +245,7 @@ class Currency extends DataModel
      */
     public function setIsDefault($isDefault)
     {
-        return $this->setProperty('_isDefault', $isDefault, 'boolean');
+        return $this->setProperty('isDefault', $isDefault, 'boolean');
     }
     
     /**
@@ -289,7 +253,7 @@ class Currency extends DataModel
      */
     public function getIsDefault()
     {
-        return $this->_isDefault;
+        return $this->isDefault;
     }
 
     /**
@@ -299,7 +263,7 @@ class Currency extends DataModel
      */
     public function setBeforeAmount($beforeAmount)
     {
-        return $this->setProperty('_beforeAmount', $beforeAmount, 'boolean');
+        return $this->setProperty('beforeAmount', $beforeAmount, 'boolean');
     }
     
     /**
@@ -307,7 +271,7 @@ class Currency extends DataModel
      */
     public function getBeforeAmount()
     {
-        return $this->_beforeAmount;
+        return $this->beforeAmount;
     }
 }
 

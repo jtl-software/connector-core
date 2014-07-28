@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,45 +11,44 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class CustomerGroupI18n extends DataModel
 {
     /**
      * @type Identity Reference to customerGroup
      */
-    public $_customerGroupId = null;
+    protected $customerGroupId = null;
 
     /**
      * @type string Locale
      */
-    public $_localeName = '';
+    protected $localeName = '';
 
     /**
      * @type string Localized customer group name
      */
-    public $_name = '';
+    protected $name = '';
 
     /**
      * Nav [CustomerGroupI18n » Many]
      *
      * @type \jtl\Connector\Model\CustomerGroup[]
      */
-    public $_customerGroup = array();
+    protected $customerGroup = array();
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_customerGroupId',
+    public $identities = array(
+        'customerGroupId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
-        '_customerGroup' => '\jtl\Connector\Model\CustomerGroup',
+    public $navigations = array(
+        'customerGroup' => '\jtl\Connector\Model\CustomerGroup',
     );
 
     /**
@@ -58,7 +56,7 @@ class CustomerGroupI18n extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -66,41 +64,7 @@ class CustomerGroupI18n extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -110,7 +74,7 @@ class CustomerGroupI18n extends DataModel
      */
     public function setName($name)
     {
-        return $this->setProperty('_name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
     
     /**
@@ -118,7 +82,7 @@ class CustomerGroupI18n extends DataModel
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -128,7 +92,7 @@ class CustomerGroupI18n extends DataModel
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('_customerGroupId', $customerGroupId, 'Identity');
+        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
     }
     
     /**
@@ -136,7 +100,7 @@ class CustomerGroupI18n extends DataModel
      */
     public function getCustomerGroupId()
     {
-        return $this->_customerGroupId;
+        return $this->customerGroupId;
     }
 
     /**
@@ -146,7 +110,7 @@ class CustomerGroupI18n extends DataModel
      */
     public function setLocaleName($localeName)
     {
-        return $this->setProperty('_localeName', $localeName, 'string');
+        return $this->setProperty('localeName', $localeName, 'string');
     }
     
     /**
@@ -154,7 +118,7 @@ class CustomerGroupI18n extends DataModel
      */
     public function getLocaleName()
     {
-        return $this->_localeName;
+        return $this->localeName;
     }
 
     /**
@@ -163,7 +127,7 @@ class CustomerGroupI18n extends DataModel
      */
     public function addCustomerGroup(\jtl\Connector\Model\CustomerGroup $customerGroup)
     {
-        $this->_customerGroup[] = $customerGroup;
+        $this->customerGroup[] = $customerGroup;
         return $this;
     }
     
@@ -172,7 +136,7 @@ class CustomerGroupI18n extends DataModel
      */
     public function getCustomerGroup()
     {
-        return $this->_customerGroup;
+        return $this->customerGroup;
     }
 
     /**
@@ -180,7 +144,7 @@ class CustomerGroupI18n extends DataModel
      */
     public function clearCustomerGroup()
     {
-        $this->_customerGroup = array();
+        $this->customerGroup = array();
         return $this;
     }
 }

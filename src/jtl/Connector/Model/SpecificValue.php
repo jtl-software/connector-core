@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,46 +11,45 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class SpecificValue extends DataModel
 {
     /**
      * @type Identity Unique specificValue id
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type Identity Reference to specificId
      */
-    public $_specificId = null;
+    protected $specificId = null;
 
     /**
      * @type integer|null Optional sort number
      */
-    public $_sort = 0;
+    protected $sort = 0;
 
     /**
      * Nav [SpecificValue » One]
      *
      * @type \jtl\Connector\Model\SpecificValueI18n[]
      */
-    public $_i18ns = array();
+    protected $i18ns = array();
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
-        '_specificId',
+    public $identities = array(
+        'id',
+        'specificId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
-        '_i18ns' => '\jtl\Connector\Model\SpecificValueI18n',
+    public $navigations = array(
+        'i18ns' => '\jtl\Connector\Model\SpecificValueI18n',
     );
 
     /**
@@ -59,7 +57,7 @@ class SpecificValue extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -67,41 +65,7 @@ class SpecificValue extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -111,7 +75,7 @@ class SpecificValue extends DataModel
      */
     public function setSort($sort)
     {
-        return $this->setProperty('_sort', $sort, 'integer');
+        return $this->setProperty('sort', $sort, 'integer');
     }
     
     /**
@@ -119,7 +83,7 @@ class SpecificValue extends DataModel
      */
     public function getSort()
     {
-        return $this->_sort;
+        return $this->sort;
     }
 
     /**
@@ -129,7 +93,7 @@ class SpecificValue extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -137,7 +101,7 @@ class SpecificValue extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -147,7 +111,7 @@ class SpecificValue extends DataModel
      */
     public function setSpecificId(Identity $specificId)
     {
-        return $this->setProperty('_specificId', $specificId, 'Identity');
+        return $this->setProperty('specificId', $specificId, 'Identity');
     }
     
     /**
@@ -155,7 +119,7 @@ class SpecificValue extends DataModel
      */
     public function getSpecificId()
     {
-        return $this->_specificId;
+        return $this->specificId;
     }
 
     /**
@@ -164,7 +128,7 @@ class SpecificValue extends DataModel
      */
     public function addI18ns(\jtl\Connector\Model\SpecificValueI18n $i18ns)
     {
-        $this->_i18ns[] = $i18ns;
+        $this->i18ns[] = $i18ns;
         return $this;
     }
     
@@ -173,7 +137,7 @@ class SpecificValue extends DataModel
      */
     public function getI18ns()
     {
-        return $this->_i18ns;
+        return $this->i18ns;
     }
 
     /**
@@ -181,7 +145,7 @@ class SpecificValue extends DataModel
      */
     public function clearI18ns()
     {
-        $this->_i18ns = array();
+        $this->i18ns = array();
         return $this;
     }
 }

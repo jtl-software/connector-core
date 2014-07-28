@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,113 +11,112 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class CustomerOrderBillingAddress extends DataModel
 {
     /**
      * @type Identity Reference to customer
      */
-    public $_customerId = null;
+    protected $customerId = null;
 
     /**
      * @type Identity Unique customerOrderBillingAddress id
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type string City
      */
-    public $_city = '';
+    protected $city = '';
 
     /**
      * @type string Company name
      */
-    public $_company = '';
+    protected $company = '';
 
     /**
      * @type string Country ISO 3166-2 (2 letter Uppercase)
      */
-    public $_countryIso = '';
+    protected $countryIso = '';
 
     /**
      * @type string Delivery instruction e.g. "c/o John Doe"
      */
-    public $_deliveryInstruction = '';
+    protected $deliveryInstruction = '';
 
     /**
      * @type string E-Mail address
      */
-    public $_eMail = '';
+    protected $eMail = '';
 
     /**
      * @type string Extra address line e.g. "Apartment 2.5"
      */
-    public $_extraAddressLine = '';
+    protected $extraAddressLine = '';
 
     /**
      * @type string Fax number
      */
-    public $_fax = '';
+    protected $fax = '';
 
     /**
      * @type string First name
      */
-    public $_firstName = '';
+    protected $firstName = '';
 
     /**
      * @type string Last name
      */
-    public $_lastName = '';
+    protected $lastName = '';
 
     /**
      * @type string Mobile phone number
      */
-    public $_mobile = '';
+    protected $mobile = '';
 
     /**
      * @type string Phone number
      */
-    public $_phone = '';
+    protected $phone = '';
 
     /**
      * @type string Salutation (german: "Anrede")
      */
-    public $_salutation = '';
+    protected $salutation = '';
 
     /**
      * @type string State
      */
-    public $_state = '';
+    protected $state = '';
 
     /**
      * @type string Street + street number
      */
-    public $_street = '';
+    protected $street = '';
 
     /**
      * @type string Title (e.g. "Prof. Dr.")
      */
-    public $_title = '';
+    protected $title = '';
 
     /**
      * @type string Zip / postal code
      */
-    public $_zipCode = '';
+    protected $zipCode = '';
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
-        '_customerId',
+    public $identities = array(
+        'id',
+        'customerId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -126,7 +124,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -134,41 +132,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -178,7 +142,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function setCompany($company)
     {
-        return $this->setProperty('_company', $company, 'string');
+        return $this->setProperty('company', $company, 'string');
     }
     
     /**
@@ -186,7 +150,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function getCompany()
     {
-        return $this->_company;
+        return $this->company;
     }
 
     /**
@@ -196,7 +160,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function setTitle($title)
     {
-        return $this->setProperty('_title', $title, 'string');
+        return $this->setProperty('title', $title, 'string');
     }
     
     /**
@@ -204,7 +168,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function getTitle()
     {
-        return $this->_title;
+        return $this->title;
     }
 
     /**
@@ -214,7 +178,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function setFirstName($firstName)
     {
-        return $this->setProperty('_firstName', $firstName, 'string');
+        return $this->setProperty('firstName', $firstName, 'string');
     }
     
     /**
@@ -222,7 +186,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function getFirstName()
     {
-        return $this->_firstName;
+        return $this->firstName;
     }
 
     /**
@@ -232,7 +196,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function setLastName($lastName)
     {
-        return $this->setProperty('_lastName', $lastName, 'string');
+        return $this->setProperty('lastName', $lastName, 'string');
     }
     
     /**
@@ -240,7 +204,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function getLastName()
     {
-        return $this->_lastName;
+        return $this->lastName;
     }
 
     /**
@@ -250,7 +214,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function setStreet($street)
     {
-        return $this->setProperty('_street', $street, 'string');
+        return $this->setProperty('street', $street, 'string');
     }
     
     /**
@@ -258,7 +222,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function getStreet()
     {
-        return $this->_street;
+        return $this->street;
     }
 
     /**
@@ -268,7 +232,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function setZipCode($zipCode)
     {
-        return $this->setProperty('_zipCode', $zipCode, 'string');
+        return $this->setProperty('zipCode', $zipCode, 'string');
     }
     
     /**
@@ -276,7 +240,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function getZipCode()
     {
-        return $this->_zipCode;
+        return $this->zipCode;
     }
 
     /**
@@ -286,7 +250,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function setCity($city)
     {
-        return $this->setProperty('_city', $city, 'string');
+        return $this->setProperty('city', $city, 'string');
     }
     
     /**
@@ -294,7 +258,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function getCity()
     {
-        return $this->_city;
+        return $this->city;
     }
 
     /**
@@ -304,7 +268,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function setCountryIso($countryIso)
     {
-        return $this->setProperty('_countryIso', $countryIso, 'string');
+        return $this->setProperty('countryIso', $countryIso, 'string');
     }
     
     /**
@@ -312,7 +276,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function getCountryIso()
     {
-        return $this->_countryIso;
+        return $this->countryIso;
     }
 
     /**
@@ -322,7 +286,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function setPhone($phone)
     {
-        return $this->setProperty('_phone', $phone, 'string');
+        return $this->setProperty('phone', $phone, 'string');
     }
     
     /**
@@ -330,7 +294,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function getPhone()
     {
-        return $this->_phone;
+        return $this->phone;
     }
 
     /**
@@ -340,7 +304,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function setDeliveryInstruction($deliveryInstruction)
     {
-        return $this->setProperty('_deliveryInstruction', $deliveryInstruction, 'string');
+        return $this->setProperty('deliveryInstruction', $deliveryInstruction, 'string');
     }
     
     /**
@@ -348,7 +312,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function getDeliveryInstruction()
     {
-        return $this->_deliveryInstruction;
+        return $this->deliveryInstruction;
     }
 
     /**
@@ -358,7 +322,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function setExtraAddressLine($extraAddressLine)
     {
-        return $this->setProperty('_extraAddressLine', $extraAddressLine, 'string');
+        return $this->setProperty('extraAddressLine', $extraAddressLine, 'string');
     }
     
     /**
@@ -366,7 +330,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function getExtraAddressLine()
     {
-        return $this->_extraAddressLine;
+        return $this->extraAddressLine;
     }
 
     /**
@@ -376,7 +340,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function setMobile($mobile)
     {
-        return $this->setProperty('_mobile', $mobile, 'string');
+        return $this->setProperty('mobile', $mobile, 'string');
     }
     
     /**
@@ -384,7 +348,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function getMobile()
     {
-        return $this->_mobile;
+        return $this->mobile;
     }
 
     /**
@@ -394,7 +358,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function setEMail($eMail)
     {
-        return $this->setProperty('_eMail', $eMail, 'string');
+        return $this->setProperty('eMail', $eMail, 'string');
     }
     
     /**
@@ -402,7 +366,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function getEMail()
     {
-        return $this->_eMail;
+        return $this->eMail;
     }
 
     /**
@@ -412,7 +376,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function setFax($fax)
     {
-        return $this->setProperty('_fax', $fax, 'string');
+        return $this->setProperty('fax', $fax, 'string');
     }
     
     /**
@@ -420,7 +384,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function getFax()
     {
-        return $this->_fax;
+        return $this->fax;
     }
 
     /**
@@ -430,7 +394,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function setState($state)
     {
-        return $this->setProperty('_state', $state, 'string');
+        return $this->setProperty('state', $state, 'string');
     }
     
     /**
@@ -438,7 +402,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function getState()
     {
-        return $this->_state;
+        return $this->state;
     }
 
     /**
@@ -448,7 +412,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -456,7 +420,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -466,7 +430,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function setCustomerId(Identity $customerId)
     {
-        return $this->setProperty('_customerId', $customerId, 'Identity');
+        return $this->setProperty('customerId', $customerId, 'Identity');
     }
     
     /**
@@ -474,7 +438,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function getCustomerId()
     {
-        return $this->_customerId;
+        return $this->customerId;
     }
 
     /**
@@ -484,7 +448,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function setSalutation($salutation)
     {
-        return $this->setProperty('_salutation', $salutation, 'string');
+        return $this->setProperty('salutation', $salutation, 'string');
     }
     
     /**
@@ -492,7 +456,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function getSalutation()
     {
-        return $this->_salutation;
+        return $this->salutation;
     }
 }
 

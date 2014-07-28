@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,43 +11,42 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class DeliveryNoteItem extends DataModel
 {
     /**
      * @type Identity Reference to customerOrderItem
      */
-    public $_customerOrderItemId = null;
+    protected $customerOrderItemId = null;
 
     /**
      * @type Identity Reference to deliveryNote
      */
-    public $_deliveryNoteId = null;
+    protected $deliveryNoteId = null;
 
     /**
      * @type string 
      */
-    public $_cHinweis = '';
+    protected $cHinweis = '';
 
     /**
      * @type float|null Quantity delivered
      */
-    public $_quantity = 0.0;
+    protected $quantity = 0.0;
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_deliveryNoteId',
-        '_customerOrderItemId',
+    public $identities = array(
+        'deliveryNoteId',
+        'customerOrderItemId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -56,7 +54,7 @@ class DeliveryNoteItem extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -64,41 +62,7 @@ class DeliveryNoteItem extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -108,7 +72,7 @@ class DeliveryNoteItem extends DataModel
      */
     public function setQuantity($quantity)
     {
-        return $this->setProperty('_quantity', $quantity, 'float');
+        return $this->setProperty('quantity', $quantity, 'float');
     }
     
     /**
@@ -116,7 +80,7 @@ class DeliveryNoteItem extends DataModel
      */
     public function getQuantity()
     {
-        return $this->_quantity;
+        return $this->quantity;
     }
 
     /**
@@ -126,7 +90,7 @@ class DeliveryNoteItem extends DataModel
      */
     public function setCHinweis($cHinweis)
     {
-        return $this->setProperty('_cHinweis', $cHinweis, 'string');
+        return $this->setProperty('cHinweis', $cHinweis, 'string');
     }
     
     /**
@@ -134,7 +98,7 @@ class DeliveryNoteItem extends DataModel
      */
     public function getCHinweis()
     {
-        return $this->_cHinweis;
+        return $this->cHinweis;
     }
 
     /**
@@ -144,7 +108,7 @@ class DeliveryNoteItem extends DataModel
      */
     public function setDeliveryNoteId(Identity $deliveryNoteId)
     {
-        return $this->setProperty('_deliveryNoteId', $deliveryNoteId, 'Identity');
+        return $this->setProperty('deliveryNoteId', $deliveryNoteId, 'Identity');
     }
     
     /**
@@ -152,7 +116,7 @@ class DeliveryNoteItem extends DataModel
      */
     public function getDeliveryNoteId()
     {
-        return $this->_deliveryNoteId;
+        return $this->deliveryNoteId;
     }
 
     /**
@@ -162,7 +126,7 @@ class DeliveryNoteItem extends DataModel
      */
     public function setCustomerOrderItemId(Identity $customerOrderItemId)
     {
-        return $this->setProperty('_customerOrderItemId', $customerOrderItemId, 'Identity');
+        return $this->setProperty('customerOrderItemId', $customerOrderItemId, 'Identity');
     }
     
     /**
@@ -170,7 +134,7 @@ class DeliveryNoteItem extends DataModel
      */
     public function getCustomerOrderItemId()
     {
-        return $this->_customerOrderItemId;
+        return $this->customerOrderItemId;
     }
 }
 

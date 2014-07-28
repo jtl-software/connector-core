@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,161 +11,160 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class CustomerOrder extends DataModel
 {
     /**
      * @type Identity Reference to billingAddress
      */
-    public $_billingAddressId = null;
+    protected $billingAddressId = null;
 
     /**
      * @type Identity 
      */
-    public $_companyId = null;
+    protected $companyId = null;
 
     /**
      * @type Identity Optional reference to customer. 
      */
-    public $_customerId = null;
+    protected $customerId = null;
 
     /**
      * @type Identity Unique customerOrder id
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type Identity Reference to shippingAddress
      */
-    public $_shippingAddressId = null;
+    protected $shippingAddressId = null;
 
     /**
      * @type DateTime|null Date of creation
      */
-    public $_created = null;
+    protected $created = null;
 
     /**
      * @type string Currency ISO set, when customerOrder was finished
      */
-    public $_currencyIso = '';
+    protected $currencyIso = '';
 
     /**
      * @type DateTime|null Optional Estimated delivery date set by ERP System
      */
-    public $_estimatedDeliveryDate = null;
+    protected $estimatedDeliveryDate = null;
 
     /**
      * @type float 
      */
-    public $_factor = 0.0;
+    protected $factor = 0.0;
 
     /**
      * @type boolean 
      */
-    public $_isFullyDelivered = false;
+    protected $isFullyDelivered = false;
 
     /**
      * @type boolean 
      */
-    public $_isPlatform = false;
+    protected $isPlatform = false;
 
     /**
      * @type integer 
      */
-    public $_languageId = 0;
+    protected $languageId = 0;
 
     /**
      * @type integer|null 
      */
-    public $_nGesperrt = 0;
+    protected $nGesperrt = 0;
 
     /**
      * @type string Optional order number (usually set by ERP System later)
      */
-    public $_orderNumber = '';
+    protected $orderNumber = '';
 
     /**
      * @type DateTime|null Payment date
      */
-    public $_paymentDate = null;
+    protected $paymentDate = null;
 
     /**
      * @type string Optional payment module code
      */
-    public $_paymentModuleCode = '';
+    protected $paymentModuleCode = '';
 
     /**
      * @type DateTime|null Shipping date
      */
-    public $_shippingDate = null;
+    protected $shippingDate = null;
 
     /**
      * @type string Additional shipping info
      */
-    public $_shippingInfo = '';
+    protected $shippingInfo = '';
 
     /**
      * @type string 
      */
-    public $_status = '';
+    protected $status = '';
 
     /**
      * Nav [CustomerOrder » One]
      *
      * @type \jtl\Connector\Model\CustomerOrderItem[]
      */
-    public $_positions = array();
+    protected $positions = array();
 
     /**
      * Nav [CustomerOrder » ZeroOrOne]
      *
      * @type \jtl\Connector\Model\CustomerOrderAttr[]
      */
-    public $_attributes = array();
+    protected $attributes = array();
 
     /**
      * Nav [CustomerOrder » Many]
      *
      * @type \jtl\Connector\Model\CustomerOrderBillingAddress[]
      */
-    public $_billingAddress = array();
+    protected $billingAddress = array();
 
     /**
      * Nav [CustomerOrder » Many]
      *
      * @type \jtl\Connector\Model\CustomerOrderShippingAddress[]
      */
-    public $_shippingAddress = array();
+    protected $shippingAddress = array();
 
     /**
      * Nav [CustomerOrder » ZeroOrOne]
      *
      * @type \jtl\Connector\Model\CustomerOrderPaymentInfo[]
      */
-    public $_paymentInfo = array();
+    protected $paymentInfo = array();
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
-        '_customerId',
-        '_shippingAddressId',
-        '_billingAddressId',
-        '_companyId',
+    public $identities = array(
+        'id',
+        'customerId',
+        'shippingAddressId',
+        'billingAddressId',
+        'companyId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
-        '_positions' => '\jtl\Connector\Model\CustomerOrderItem',
-        '_attributes' => '\jtl\Connector\Model\CustomerOrderAttr',
-        '_billingAddress' => '\jtl\Connector\Model\CustomerOrderBillingAddress',
-        '_shippingAddress' => '\jtl\Connector\Model\CustomerOrderShippingAddress',
-        '_paymentInfo' => '\jtl\Connector\Model\CustomerOrderPaymentInfo',
+    public $navigations = array(
+        'positions' => '\jtl\Connector\Model\CustomerOrderItem',
+        'attributes' => '\jtl\Connector\Model\CustomerOrderAttr',
+        'billingAddress' => '\jtl\Connector\Model\CustomerOrderBillingAddress',
+        'shippingAddress' => '\jtl\Connector\Model\CustomerOrderShippingAddress',
+        'paymentInfo' => '\jtl\Connector\Model\CustomerOrderPaymentInfo',
     );
 
     /**
@@ -174,7 +172,7 @@ class CustomerOrder extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -182,41 +180,7 @@ class CustomerOrder extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -226,7 +190,7 @@ class CustomerOrder extends DataModel
      */
     public function setOrderNumber($orderNumber)
     {
-        return $this->setProperty('_orderNumber', $orderNumber, 'string');
+        return $this->setProperty('orderNumber', $orderNumber, 'string');
     }
     
     /**
@@ -234,7 +198,7 @@ class CustomerOrder extends DataModel
      */
     public function getOrderNumber()
     {
-        return $this->_orderNumber;
+        return $this->orderNumber;
     }
 
     /**
@@ -244,7 +208,7 @@ class CustomerOrder extends DataModel
      */
     public function setCreated(DateTime $created)
     {
-        return $this->setProperty('_created', $created, 'DateTime');
+        return $this->setProperty('created', $created, 'DateTime');
     }
     
     /**
@@ -252,7 +216,7 @@ class CustomerOrder extends DataModel
      */
     public function getCreated()
     {
-        return $this->_created;
+        return $this->created;
     }
 
     /**
@@ -262,7 +226,7 @@ class CustomerOrder extends DataModel
      */
     public function setShippingInfo($shippingInfo)
     {
-        return $this->setProperty('_shippingInfo', $shippingInfo, 'string');
+        return $this->setProperty('shippingInfo', $shippingInfo, 'string');
     }
     
     /**
@@ -270,7 +234,7 @@ class CustomerOrder extends DataModel
      */
     public function getShippingInfo()
     {
-        return $this->_shippingInfo;
+        return $this->shippingInfo;
     }
 
     /**
@@ -280,7 +244,7 @@ class CustomerOrder extends DataModel
      */
     public function setShippingDate(DateTime $shippingDate)
     {
-        return $this->setProperty('_shippingDate', $shippingDate, 'DateTime');
+        return $this->setProperty('shippingDate', $shippingDate, 'DateTime');
     }
     
     /**
@@ -288,7 +252,7 @@ class CustomerOrder extends DataModel
      */
     public function getShippingDate()
     {
-        return $this->_shippingDate;
+        return $this->shippingDate;
     }
 
     /**
@@ -298,7 +262,7 @@ class CustomerOrder extends DataModel
      */
     public function setEstimatedDeliveryDate(DateTime $estimatedDeliveryDate)
     {
-        return $this->setProperty('_estimatedDeliveryDate', $estimatedDeliveryDate, 'DateTime');
+        return $this->setProperty('estimatedDeliveryDate', $estimatedDeliveryDate, 'DateTime');
     }
     
     /**
@@ -306,7 +270,7 @@ class CustomerOrder extends DataModel
      */
     public function getEstimatedDeliveryDate()
     {
-        return $this->_estimatedDeliveryDate;
+        return $this->estimatedDeliveryDate;
     }
 
     /**
@@ -316,7 +280,7 @@ class CustomerOrder extends DataModel
      */
     public function setCurrencyIso($currencyIso)
     {
-        return $this->setProperty('_currencyIso', $currencyIso, 'string');
+        return $this->setProperty('currencyIso', $currencyIso, 'string');
     }
     
     /**
@@ -324,7 +288,7 @@ class CustomerOrder extends DataModel
      */
     public function getCurrencyIso()
     {
-        return $this->_currencyIso;
+        return $this->currencyIso;
     }
 
     /**
@@ -334,7 +298,7 @@ class CustomerOrder extends DataModel
      */
     public function setLanguageId($languageId)
     {
-        return $this->setProperty('_languageId', $languageId, 'integer');
+        return $this->setProperty('languageId', $languageId, 'integer');
     }
     
     /**
@@ -342,7 +306,7 @@ class CustomerOrder extends DataModel
      */
     public function getLanguageId()
     {
-        return $this->_languageId;
+        return $this->languageId;
     }
 
     /**
@@ -352,7 +316,7 @@ class CustomerOrder extends DataModel
      */
     public function setPaymentModuleCode($paymentModuleCode)
     {
-        return $this->setProperty('_paymentModuleCode', $paymentModuleCode, 'string');
+        return $this->setProperty('paymentModuleCode', $paymentModuleCode, 'string');
     }
     
     /**
@@ -360,7 +324,7 @@ class CustomerOrder extends DataModel
      */
     public function getPaymentModuleCode()
     {
-        return $this->_paymentModuleCode;
+        return $this->paymentModuleCode;
     }
 
     /**
@@ -370,7 +334,7 @@ class CustomerOrder extends DataModel
      */
     public function setPaymentDate(DateTime $paymentDate)
     {
-        return $this->setProperty('_paymentDate', $paymentDate, 'DateTime');
+        return $this->setProperty('paymentDate', $paymentDate, 'DateTime');
     }
     
     /**
@@ -378,7 +342,7 @@ class CustomerOrder extends DataModel
      */
     public function getPaymentDate()
     {
-        return $this->_paymentDate;
+        return $this->paymentDate;
     }
 
     /**
@@ -388,7 +352,7 @@ class CustomerOrder extends DataModel
      */
     public function setFactor($factor)
     {
-        return $this->setProperty('_factor', $factor, 'float');
+        return $this->setProperty('factor', $factor, 'float');
     }
     
     /**
@@ -396,7 +360,7 @@ class CustomerOrder extends DataModel
      */
     public function getFactor()
     {
-        return $this->_factor;
+        return $this->factor;
     }
 
     /**
@@ -406,7 +370,7 @@ class CustomerOrder extends DataModel
      */
     public function setNGesperrt($nGesperrt)
     {
-        return $this->setProperty('_nGesperrt', $nGesperrt, 'integer');
+        return $this->setProperty('nGesperrt', $nGesperrt, 'integer');
     }
     
     /**
@@ -414,7 +378,7 @@ class CustomerOrder extends DataModel
      */
     public function getNGesperrt()
     {
-        return $this->_nGesperrt;
+        return $this->nGesperrt;
     }
 
     /**
@@ -424,7 +388,7 @@ class CustomerOrder extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -432,7 +396,7 @@ class CustomerOrder extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -442,7 +406,7 @@ class CustomerOrder extends DataModel
      */
     public function setCustomerId(Identity $customerId)
     {
-        return $this->setProperty('_customerId', $customerId, 'Identity');
+        return $this->setProperty('customerId', $customerId, 'Identity');
     }
     
     /**
@@ -450,7 +414,7 @@ class CustomerOrder extends DataModel
      */
     public function getCustomerId()
     {
-        return $this->_customerId;
+        return $this->customerId;
     }
 
     /**
@@ -460,7 +424,7 @@ class CustomerOrder extends DataModel
      */
     public function setShippingAddressId(Identity $shippingAddressId)
     {
-        return $this->setProperty('_shippingAddressId', $shippingAddressId, 'Identity');
+        return $this->setProperty('shippingAddressId', $shippingAddressId, 'Identity');
     }
     
     /**
@@ -468,7 +432,7 @@ class CustomerOrder extends DataModel
      */
     public function getShippingAddressId()
     {
-        return $this->_shippingAddressId;
+        return $this->shippingAddressId;
     }
 
     /**
@@ -478,7 +442,7 @@ class CustomerOrder extends DataModel
      */
     public function setBillingAddressId(Identity $billingAddressId)
     {
-        return $this->setProperty('_billingAddressId', $billingAddressId, 'Identity');
+        return $this->setProperty('billingAddressId', $billingAddressId, 'Identity');
     }
     
     /**
@@ -486,7 +450,7 @@ class CustomerOrder extends DataModel
      */
     public function getBillingAddressId()
     {
-        return $this->_billingAddressId;
+        return $this->billingAddressId;
     }
 
     /**
@@ -496,7 +460,7 @@ class CustomerOrder extends DataModel
      */
     public function setCompanyId(Identity $companyId)
     {
-        return $this->setProperty('_companyId', $companyId, 'Identity');
+        return $this->setProperty('companyId', $companyId, 'Identity');
     }
     
     /**
@@ -504,7 +468,7 @@ class CustomerOrder extends DataModel
      */
     public function getCompanyId()
     {
-        return $this->_companyId;
+        return $this->companyId;
     }
 
     /**
@@ -514,7 +478,7 @@ class CustomerOrder extends DataModel
      */
     public function setIsPlatform($isPlatform)
     {
-        return $this->setProperty('_isPlatform', $isPlatform, 'boolean');
+        return $this->setProperty('isPlatform', $isPlatform, 'boolean');
     }
     
     /**
@@ -522,7 +486,7 @@ class CustomerOrder extends DataModel
      */
     public function getIsPlatform()
     {
-        return $this->_isPlatform;
+        return $this->isPlatform;
     }
 
     /**
@@ -532,7 +496,7 @@ class CustomerOrder extends DataModel
      */
     public function setIsFullyDelivered($isFullyDelivered)
     {
-        return $this->setProperty('_isFullyDelivered', $isFullyDelivered, 'boolean');
+        return $this->setProperty('isFullyDelivered', $isFullyDelivered, 'boolean');
     }
     
     /**
@@ -540,7 +504,7 @@ class CustomerOrder extends DataModel
      */
     public function getIsFullyDelivered()
     {
-        return $this->_isFullyDelivered;
+        return $this->isFullyDelivered;
     }
 
     /**
@@ -550,7 +514,7 @@ class CustomerOrder extends DataModel
      */
     public function setStatus($status)
     {
-        return $this->setProperty('_status', $status, 'string');
+        return $this->setProperty('status', $status, 'string');
     }
     
     /**
@@ -558,7 +522,7 @@ class CustomerOrder extends DataModel
      */
     public function getStatus()
     {
-        return $this->_status;
+        return $this->status;
     }
 
     /**
@@ -567,7 +531,7 @@ class CustomerOrder extends DataModel
      */
     public function addPosition(\jtl\Connector\Model\CustomerOrderItem $position)
     {
-        $this->_positions[] = $position;
+        $this->positions[] = $position;
         return $this;
     }
     
@@ -576,7 +540,7 @@ class CustomerOrder extends DataModel
      */
     public function getPositions()
     {
-        return $this->_positions;
+        return $this->positions;
     }
 
     /**
@@ -584,7 +548,7 @@ class CustomerOrder extends DataModel
      */
     public function clearPositions()
     {
-        $this->_positions = array();
+        $this->positions = array();
         return $this;
     }
 
@@ -594,7 +558,7 @@ class CustomerOrder extends DataModel
      */
     public function addAttribute(\jtl\Connector\Model\CustomerOrderAttr $attribute)
     {
-        $this->_attributes[] = $attribute;
+        $this->attributes[] = $attribute;
         return $this;
     }
     
@@ -603,7 +567,7 @@ class CustomerOrder extends DataModel
      */
     public function getAttributes()
     {
-        return $this->_attributes;
+        return $this->attributes;
     }
 
     /**
@@ -611,7 +575,7 @@ class CustomerOrder extends DataModel
      */
     public function clearAttributes()
     {
-        $this->_attributes = array();
+        $this->attributes = array();
         return $this;
     }
 
@@ -621,7 +585,7 @@ class CustomerOrder extends DataModel
      */
     public function addBillingAddress(\jtl\Connector\Model\CustomerOrderBillingAddress $billingAddress)
     {
-        $this->_billingAddress[] = $billingAddress;
+        $this->billingAddress[] = $billingAddress;
         return $this;
     }
     
@@ -630,7 +594,7 @@ class CustomerOrder extends DataModel
      */
     public function getBillingAddress()
     {
-        return $this->_billingAddress;
+        return $this->billingAddress;
     }
 
     /**
@@ -638,7 +602,7 @@ class CustomerOrder extends DataModel
      */
     public function clearBillingAddress()
     {
-        $this->_billingAddress = array();
+        $this->billingAddress = array();
         return $this;
     }
 
@@ -648,7 +612,7 @@ class CustomerOrder extends DataModel
      */
     public function addShippingAddress(\jtl\Connector\Model\CustomerOrderShippingAddress $shippingAddress)
     {
-        $this->_shippingAddress[] = $shippingAddress;
+        $this->shippingAddress[] = $shippingAddress;
         return $this;
     }
     
@@ -657,7 +621,7 @@ class CustomerOrder extends DataModel
      */
     public function getShippingAddress()
     {
-        return $this->_shippingAddress;
+        return $this->shippingAddress;
     }
 
     /**
@@ -665,7 +629,7 @@ class CustomerOrder extends DataModel
      */
     public function clearShippingAddress()
     {
-        $this->_shippingAddress = array();
+        $this->shippingAddress = array();
         return $this;
     }
 
@@ -675,7 +639,7 @@ class CustomerOrder extends DataModel
      */
     public function addPaymentInfo(\jtl\Connector\Model\CustomerOrderPaymentInfo $paymentInfo)
     {
-        $this->_paymentInfo[] = $paymentInfo;
+        $this->paymentInfo[] = $paymentInfo;
         return $this;
     }
     
@@ -684,7 +648,7 @@ class CustomerOrder extends DataModel
      */
     public function getPaymentInfo()
     {
-        return $this->_paymentInfo;
+        return $this->paymentInfo;
     }
 
     /**
@@ -692,7 +656,7 @@ class CustomerOrder extends DataModel
      */
     public function clearPaymentInfo()
     {
-        $this->_paymentInfo = array();
+        $this->paymentInfo = array();
         return $this;
     }
 }

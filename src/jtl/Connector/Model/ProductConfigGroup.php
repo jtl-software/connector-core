@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,44 +11,43 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class ProductConfigGroup extends DataModel
 {
     /**
      * @type Identity Reference to configGroup
      */
-    public $_configGroupId = null;
+    protected $configGroupId = null;
 
     /**
      * @type Identity Unique productConfigGroup id
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type Identity Reference to product
      */
-    public $_productId = null;
+    protected $productId = null;
 
     /**
      * @type integer Optional sort number
      */
-    public $_sort = 0;
+    protected $sort = 0;
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
-        '_productId',
-        '_configGroupId',
+    public $identities = array(
+        'id',
+        'productId',
+        'configGroupId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -57,7 +55,7 @@ class ProductConfigGroup extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -65,41 +63,7 @@ class ProductConfigGroup extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -109,7 +73,7 @@ class ProductConfigGroup extends DataModel
      */
     public function setSort($sort)
     {
-        return $this->setProperty('_sort', $sort, 'integer');
+        return $this->setProperty('sort', $sort, 'integer');
     }
     
     /**
@@ -117,7 +81,7 @@ class ProductConfigGroup extends DataModel
      */
     public function getSort()
     {
-        return $this->_sort;
+        return $this->sort;
     }
 
     /**
@@ -127,7 +91,7 @@ class ProductConfigGroup extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -135,7 +99,7 @@ class ProductConfigGroup extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -145,7 +109,7 @@ class ProductConfigGroup extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('_productId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
     
     /**
@@ -153,7 +117,7 @@ class ProductConfigGroup extends DataModel
      */
     public function getProductId()
     {
-        return $this->_productId;
+        return $this->productId;
     }
 
     /**
@@ -163,7 +127,7 @@ class ProductConfigGroup extends DataModel
      */
     public function setConfigGroupId(Identity $configGroupId)
     {
-        return $this->setProperty('_configGroupId', $configGroupId, 'Identity');
+        return $this->setProperty('configGroupId', $configGroupId, 'Identity');
     }
     
     /**
@@ -171,7 +135,7 @@ class ProductConfigGroup extends DataModel
      */
     public function getConfigGroupId()
     {
-        return $this->_configGroupId;
+        return $this->configGroupId;
     }
 }
 

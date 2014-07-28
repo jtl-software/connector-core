@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,123 +11,122 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class ProductPriceOld extends DataModel
 {
     /**
      * @type Identity 
      */
-    public $_customerGroupId = null;
+    protected $customerGroupId = null;
 
     /**
      * @type Identity 
      */
-    public $_productId = null;
+    protected $productId = null;
 
     /**
      * @type integer 
      */
-    public $_connectorId = 0;
+    protected $connectorId = 0;
 
     /**
      * @type float|null 
      */
-    public $_netPercent1 = 0.0;
+    protected $netPercent1 = 0.0;
 
     /**
      * @type float|null 
      */
-    public $_netPercent2 = 0.0;
+    protected $netPercent2 = 0.0;
 
     /**
      * @type float|null 
      */
-    public $_netPercent3 = 0.0;
+    protected $netPercent3 = 0.0;
 
     /**
      * @type float|null 
      */
-    public $_netPercent4 = 0.0;
+    protected $netPercent4 = 0.0;
 
     /**
      * @type float|null 
      */
-    public $_netPercent5 = 0.0;
+    protected $netPercent5 = 0.0;
 
     /**
      * @type float 
      */
-    public $_netPrice = 0.0;
+    protected $netPrice = 0.0;
 
     /**
      * @type float 
      */
-    public $_netPrice1 = 0.0;
+    protected $netPrice1 = 0.0;
 
     /**
      * @type float 
      */
-    public $_netPrice2 = 0.0;
+    protected $netPrice2 = 0.0;
 
     /**
      * @type float 
      */
-    public $_netPrice3 = 0.0;
+    protected $netPrice3 = 0.0;
 
     /**
      * @type float 
      */
-    public $_netPrice4 = 0.0;
+    protected $netPrice4 = 0.0;
 
     /**
      * @type float 
      */
-    public $_netPrice5 = 0.0;
+    protected $netPrice5 = 0.0;
 
     /**
      * @type float|null 
      */
-    public $_percent = 0.0;
+    protected $percent = 0.0;
 
     /**
      * @type integer|null 
      */
-    public $_quantity1 = 0;
+    protected $quantity1 = 0;
 
     /**
      * @type integer|null 
      */
-    public $_quantity2 = 0;
+    protected $quantity2 = 0;
 
     /**
      * @type integer|null 
      */
-    public $_quantity3 = 0;
+    protected $quantity3 = 0;
 
     /**
      * @type integer|null 
      */
-    public $_quantity4 = 0;
+    protected $quantity4 = 0;
 
     /**
      * @type integer|null 
      */
-    public $_quantity5 = 0;
+    protected $quantity5 = 0;
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_customerGroupId',
-        '_productId',
+    public $identities = array(
+        'customerGroupId',
+        'productId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -136,7 +134,7 @@ class ProductPriceOld extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -144,41 +142,7 @@ class ProductPriceOld extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -188,7 +152,7 @@ class ProductPriceOld extends DataModel
      */
     public function setConnectorId($connectorId)
     {
-        return $this->setProperty('_connectorId', $connectorId, 'integer');
+        return $this->setProperty('connectorId', $connectorId, 'integer');
     }
     
     /**
@@ -196,7 +160,7 @@ class ProductPriceOld extends DataModel
      */
     public function getConnectorId()
     {
-        return $this->_connectorId;
+        return $this->connectorId;
     }
 
     /**
@@ -206,7 +170,7 @@ class ProductPriceOld extends DataModel
      */
     public function setQuantity1($quantity1)
     {
-        return $this->setProperty('_quantity1', $quantity1, 'integer');
+        return $this->setProperty('quantity1', $quantity1, 'integer');
     }
     
     /**
@@ -214,7 +178,7 @@ class ProductPriceOld extends DataModel
      */
     public function getQuantity1()
     {
-        return $this->_quantity1;
+        return $this->quantity1;
     }
 
     /**
@@ -224,7 +188,7 @@ class ProductPriceOld extends DataModel
      */
     public function setQuantity2($quantity2)
     {
-        return $this->setProperty('_quantity2', $quantity2, 'integer');
+        return $this->setProperty('quantity2', $quantity2, 'integer');
     }
     
     /**
@@ -232,7 +196,7 @@ class ProductPriceOld extends DataModel
      */
     public function getQuantity2()
     {
-        return $this->_quantity2;
+        return $this->quantity2;
     }
 
     /**
@@ -242,7 +206,7 @@ class ProductPriceOld extends DataModel
      */
     public function setQuantity3($quantity3)
     {
-        return $this->setProperty('_quantity3', $quantity3, 'integer');
+        return $this->setProperty('quantity3', $quantity3, 'integer');
     }
     
     /**
@@ -250,7 +214,7 @@ class ProductPriceOld extends DataModel
      */
     public function getQuantity3()
     {
-        return $this->_quantity3;
+        return $this->quantity3;
     }
 
     /**
@@ -260,7 +224,7 @@ class ProductPriceOld extends DataModel
      */
     public function setQuantity4($quantity4)
     {
-        return $this->setProperty('_quantity4', $quantity4, 'integer');
+        return $this->setProperty('quantity4', $quantity4, 'integer');
     }
     
     /**
@@ -268,7 +232,7 @@ class ProductPriceOld extends DataModel
      */
     public function getQuantity4()
     {
-        return $this->_quantity4;
+        return $this->quantity4;
     }
 
     /**
@@ -278,7 +242,7 @@ class ProductPriceOld extends DataModel
      */
     public function setQuantity5($quantity5)
     {
-        return $this->setProperty('_quantity5', $quantity5, 'integer');
+        return $this->setProperty('quantity5', $quantity5, 'integer');
     }
     
     /**
@@ -286,7 +250,7 @@ class ProductPriceOld extends DataModel
      */
     public function getQuantity5()
     {
-        return $this->_quantity5;
+        return $this->quantity5;
     }
 
     /**
@@ -296,7 +260,7 @@ class ProductPriceOld extends DataModel
      */
     public function setPercent($percent)
     {
-        return $this->setProperty('_percent', $percent, 'float');
+        return $this->setProperty('percent', $percent, 'float');
     }
     
     /**
@@ -304,7 +268,7 @@ class ProductPriceOld extends DataModel
      */
     public function getPercent()
     {
-        return $this->_percent;
+        return $this->percent;
     }
 
     /**
@@ -314,7 +278,7 @@ class ProductPriceOld extends DataModel
      */
     public function setNetPercent1($netPercent1)
     {
-        return $this->setProperty('_netPercent1', $netPercent1, 'float');
+        return $this->setProperty('netPercent1', $netPercent1, 'float');
     }
     
     /**
@@ -322,7 +286,7 @@ class ProductPriceOld extends DataModel
      */
     public function getNetPercent1()
     {
-        return $this->_netPercent1;
+        return $this->netPercent1;
     }
 
     /**
@@ -332,7 +296,7 @@ class ProductPriceOld extends DataModel
      */
     public function setNetPercent2($netPercent2)
     {
-        return $this->setProperty('_netPercent2', $netPercent2, 'float');
+        return $this->setProperty('netPercent2', $netPercent2, 'float');
     }
     
     /**
@@ -340,7 +304,7 @@ class ProductPriceOld extends DataModel
      */
     public function getNetPercent2()
     {
-        return $this->_netPercent2;
+        return $this->netPercent2;
     }
 
     /**
@@ -350,7 +314,7 @@ class ProductPriceOld extends DataModel
      */
     public function setNetPercent3($netPercent3)
     {
-        return $this->setProperty('_netPercent3', $netPercent3, 'float');
+        return $this->setProperty('netPercent3', $netPercent3, 'float');
     }
     
     /**
@@ -358,7 +322,7 @@ class ProductPriceOld extends DataModel
      */
     public function getNetPercent3()
     {
-        return $this->_netPercent3;
+        return $this->netPercent3;
     }
 
     /**
@@ -368,7 +332,7 @@ class ProductPriceOld extends DataModel
      */
     public function setNetPercent4($netPercent4)
     {
-        return $this->setProperty('_netPercent4', $netPercent4, 'float');
+        return $this->setProperty('netPercent4', $netPercent4, 'float');
     }
     
     /**
@@ -376,7 +340,7 @@ class ProductPriceOld extends DataModel
      */
     public function getNetPercent4()
     {
-        return $this->_netPercent4;
+        return $this->netPercent4;
     }
 
     /**
@@ -386,7 +350,7 @@ class ProductPriceOld extends DataModel
      */
     public function setNetPercent5($netPercent5)
     {
-        return $this->setProperty('_netPercent5', $netPercent5, 'float');
+        return $this->setProperty('netPercent5', $netPercent5, 'float');
     }
     
     /**
@@ -394,7 +358,7 @@ class ProductPriceOld extends DataModel
      */
     public function getNetPercent5()
     {
-        return $this->_netPercent5;
+        return $this->netPercent5;
     }
 
     /**
@@ -404,7 +368,7 @@ class ProductPriceOld extends DataModel
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('_customerGroupId', $customerGroupId, 'Identity');
+        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
     }
     
     /**
@@ -412,7 +376,7 @@ class ProductPriceOld extends DataModel
      */
     public function getCustomerGroupId()
     {
-        return $this->_customerGroupId;
+        return $this->customerGroupId;
     }
 
     /**
@@ -422,7 +386,7 @@ class ProductPriceOld extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('_productId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
     
     /**
@@ -430,7 +394,7 @@ class ProductPriceOld extends DataModel
      */
     public function getProductId()
     {
-        return $this->_productId;
+        return $this->productId;
     }
 
     /**
@@ -440,7 +404,7 @@ class ProductPriceOld extends DataModel
      */
     public function setNetPrice($netPrice)
     {
-        return $this->setProperty('_netPrice', $netPrice, 'float');
+        return $this->setProperty('netPrice', $netPrice, 'float');
     }
     
     /**
@@ -448,7 +412,7 @@ class ProductPriceOld extends DataModel
      */
     public function getNetPrice()
     {
-        return $this->_netPrice;
+        return $this->netPrice;
     }
 
     /**
@@ -458,7 +422,7 @@ class ProductPriceOld extends DataModel
      */
     public function setNetPrice1($netPrice1)
     {
-        return $this->setProperty('_netPrice1', $netPrice1, 'float');
+        return $this->setProperty('netPrice1', $netPrice1, 'float');
     }
     
     /**
@@ -466,7 +430,7 @@ class ProductPriceOld extends DataModel
      */
     public function getNetPrice1()
     {
-        return $this->_netPrice1;
+        return $this->netPrice1;
     }
 
     /**
@@ -476,7 +440,7 @@ class ProductPriceOld extends DataModel
      */
     public function setNetPrice2($netPrice2)
     {
-        return $this->setProperty('_netPrice2', $netPrice2, 'float');
+        return $this->setProperty('netPrice2', $netPrice2, 'float');
     }
     
     /**
@@ -484,7 +448,7 @@ class ProductPriceOld extends DataModel
      */
     public function getNetPrice2()
     {
-        return $this->_netPrice2;
+        return $this->netPrice2;
     }
 
     /**
@@ -494,7 +458,7 @@ class ProductPriceOld extends DataModel
      */
     public function setNetPrice3($netPrice3)
     {
-        return $this->setProperty('_netPrice3', $netPrice3, 'float');
+        return $this->setProperty('netPrice3', $netPrice3, 'float');
     }
     
     /**
@@ -502,7 +466,7 @@ class ProductPriceOld extends DataModel
      */
     public function getNetPrice3()
     {
-        return $this->_netPrice3;
+        return $this->netPrice3;
     }
 
     /**
@@ -512,7 +476,7 @@ class ProductPriceOld extends DataModel
      */
     public function setNetPrice4($netPrice4)
     {
-        return $this->setProperty('_netPrice4', $netPrice4, 'float');
+        return $this->setProperty('netPrice4', $netPrice4, 'float');
     }
     
     /**
@@ -520,7 +484,7 @@ class ProductPriceOld extends DataModel
      */
     public function getNetPrice4()
     {
-        return $this->_netPrice4;
+        return $this->netPrice4;
     }
 
     /**
@@ -530,7 +494,7 @@ class ProductPriceOld extends DataModel
      */
     public function setNetPrice5($netPrice5)
     {
-        return $this->setProperty('_netPrice5', $netPrice5, 'float');
+        return $this->setProperty('netPrice5', $netPrice5, 'float');
     }
     
     /**
@@ -538,7 +502,7 @@ class ProductPriceOld extends DataModel
      */
     public function getNetPrice5()
     {
-        return $this->_netPrice5;
+        return $this->netPrice5;
     }
 }
 

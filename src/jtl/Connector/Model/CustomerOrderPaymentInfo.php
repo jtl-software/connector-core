@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,79 +11,78 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class CustomerOrderPaymentInfo extends DataModel
 {
     /**
      * @type Identity Reference to customerOrder
      */
-    public $_customerOrderId = null;
+    protected $customerOrderId = null;
 
     /**
      * @type Identity Unique customerOrderPaymentInfo id
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type Identity 
      */
-    public $_platformId = null;
+    protected $platformId = null;
 
     /**
      * @type string Bank account holder name
      */
-    public $_accountHolder = '';
+    protected $accountHolder = '';
 
     /**
      * @type string Bank account number (deprecated in DE since SEPA)
      */
-    public $_accountNumber = '';
+    protected $accountNumber = '';
 
     /**
      * @type string 
      */
-    public $_bankAccount = '';
+    protected $bankAccount = '';
 
     /**
      * @type string Bank code (deprecated in DE since SEPA)
      */
-    public $_bankCode = '';
+    protected $bankCode = '';
 
     /**
      * @type string 
      */
-    public $_cBIC = '';
+    protected $cBIC = '';
 
     /**
      * @type string 
      */
-    public $_cIBAN = '';
+    protected $cIBAN = '';
 
     /**
      * @type string Credit card number
      */
-    public $_creditCardNumber = '';
+    protected $creditCardNumber = '';
 
     /**
      * @type string 
      */
-    public $_cvv = '';
+    protected $cvv = '';
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
-        '_customerOrderId',
-        '_platformId',
+    public $identities = array(
+        'id',
+        'customerOrderId',
+        'platformId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -92,7 +90,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -100,41 +98,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -144,7 +108,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function setBankAccount($bankAccount)
     {
-        return $this->setProperty('_bankAccount', $bankAccount, 'string');
+        return $this->setProperty('bankAccount', $bankAccount, 'string');
     }
     
     /**
@@ -152,7 +116,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function getBankAccount()
     {
-        return $this->_bankAccount;
+        return $this->bankAccount;
     }
 
     /**
@@ -162,7 +126,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function setBankCode($bankCode)
     {
-        return $this->setProperty('_bankCode', $bankCode, 'string');
+        return $this->setProperty('bankCode', $bankCode, 'string');
     }
     
     /**
@@ -170,7 +134,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function getBankCode()
     {
-        return $this->_bankCode;
+        return $this->bankCode;
     }
 
     /**
@@ -180,7 +144,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function setAccountNumber($accountNumber)
     {
-        return $this->setProperty('_accountNumber', $accountNumber, 'string');
+        return $this->setProperty('accountNumber', $accountNumber, 'string');
     }
     
     /**
@@ -188,7 +152,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function getAccountNumber()
     {
-        return $this->_accountNumber;
+        return $this->accountNumber;
     }
 
     /**
@@ -198,7 +162,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function setCreditCardNumber($creditCardNumber)
     {
-        return $this->setProperty('_creditCardNumber', $creditCardNumber, 'string');
+        return $this->setProperty('creditCardNumber', $creditCardNumber, 'string');
     }
     
     /**
@@ -206,7 +170,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function getCreditCardNumber()
     {
-        return $this->_creditCardNumber;
+        return $this->creditCardNumber;
     }
 
     /**
@@ -216,7 +180,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function setCvv($cvv)
     {
-        return $this->setProperty('_cvv', $cvv, 'string');
+        return $this->setProperty('cvv', $cvv, 'string');
     }
     
     /**
@@ -224,7 +188,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function getCvv()
     {
-        return $this->_cvv;
+        return $this->cvv;
     }
 
     /**
@@ -234,7 +198,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function setAccountHolder($accountHolder)
     {
-        return $this->setProperty('_accountHolder', $accountHolder, 'string');
+        return $this->setProperty('accountHolder', $accountHolder, 'string');
     }
     
     /**
@@ -242,7 +206,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function getAccountHolder()
     {
-        return $this->_accountHolder;
+        return $this->accountHolder;
     }
 
     /**
@@ -252,7 +216,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function setCIBAN($cIBAN)
     {
-        return $this->setProperty('_cIBAN', $cIBAN, 'string');
+        return $this->setProperty('cIBAN', $cIBAN, 'string');
     }
     
     /**
@@ -260,7 +224,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function getCIBAN()
     {
-        return $this->_cIBAN;
+        return $this->cIBAN;
     }
 
     /**
@@ -270,7 +234,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function setCBIC($cBIC)
     {
-        return $this->setProperty('_cBIC', $cBIC, 'string');
+        return $this->setProperty('cBIC', $cBIC, 'string');
     }
     
     /**
@@ -278,7 +242,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function getCBIC()
     {
-        return $this->_cBIC;
+        return $this->cBIC;
     }
 
     /**
@@ -288,7 +252,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -296,7 +260,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -306,7 +270,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function setCustomerOrderId(Identity $customerOrderId)
     {
-        return $this->setProperty('_customerOrderId', $customerOrderId, 'Identity');
+        return $this->setProperty('customerOrderId', $customerOrderId, 'Identity');
     }
     
     /**
@@ -314,7 +278,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function getCustomerOrderId()
     {
-        return $this->_customerOrderId;
+        return $this->customerOrderId;
     }
 
     /**
@@ -324,7 +288,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function setPlatformId(Identity $platformId)
     {
-        return $this->setProperty('_platformId', $platformId, 'Identity');
+        return $this->setProperty('platformId', $platformId, 'Identity');
     }
     
     /**
@@ -332,7 +296,7 @@ class CustomerOrderPaymentInfo extends DataModel
      */
     public function getPlatformId()
     {
-        return $this->_platformId;
+        return $this->platformId;
     }
 }
 

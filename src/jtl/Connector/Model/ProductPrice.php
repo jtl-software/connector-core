@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,43 +11,42 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class ProductPrice extends DataModel
 {
     /**
      * @type Identity 
      */
-    public $_customerGroupId = null;
+    protected $customerGroupId = null;
 
     /**
      * @type Identity 
      */
-    public $_productId = null;
+    protected $productId = null;
 
     /**
      * @type float 
      */
-    public $_netPrice = 0.0;
+    protected $netPrice = 0.0;
 
     /**
      * @type integer 
      */
-    public $_quantity = 0;
+    protected $quantity = 0;
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_customerGroupId',
-        '_productId',
+    public $identities = array(
+        'customerGroupId',
+        'productId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -56,7 +54,7 @@ class ProductPrice extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -64,41 +62,7 @@ class ProductPrice extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -108,7 +72,7 @@ class ProductPrice extends DataModel
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('_customerGroupId', $customerGroupId, 'Identity');
+        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
     }
     
     /**
@@ -116,7 +80,7 @@ class ProductPrice extends DataModel
      */
     public function getCustomerGroupId()
     {
-        return $this->_customerGroupId;
+        return $this->customerGroupId;
     }
 
     /**
@@ -126,7 +90,7 @@ class ProductPrice extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('_productId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
     
     /**
@@ -134,7 +98,7 @@ class ProductPrice extends DataModel
      */
     public function getProductId()
     {
-        return $this->_productId;
+        return $this->productId;
     }
 
     /**
@@ -144,7 +108,7 @@ class ProductPrice extends DataModel
      */
     public function setNetPrice($netPrice)
     {
-        return $this->setProperty('_netPrice', $netPrice, 'float');
+        return $this->setProperty('netPrice', $netPrice, 'float');
     }
     
     /**
@@ -152,7 +116,7 @@ class ProductPrice extends DataModel
      */
     public function getNetPrice()
     {
-        return $this->_netPrice;
+        return $this->netPrice;
     }
 
     /**
@@ -162,7 +126,7 @@ class ProductPrice extends DataModel
      */
     public function setQuantity($quantity)
     {
-        return $this->setProperty('_quantity', $quantity, 'integer');
+        return $this->setProperty('quantity', $quantity, 'integer');
     }
     
     /**
@@ -170,7 +134,7 @@ class ProductPrice extends DataModel
      */
     public function getQuantity()
     {
-        return $this->_quantity;
+        return $this->quantity;
     }
 }
 

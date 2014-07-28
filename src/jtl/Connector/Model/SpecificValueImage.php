@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,58 +11,57 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class SpecificValueImage extends DataModel
 {
     /**
      * @type Identity 
      */
-    public $_foreignKey = null;
+    protected $foreignKey = null;
 
     /**
      * @type Identity 
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type integer|null 
      */
-    public $_connectorId = 0;
+    protected $connectorId = 0;
 
     /**
      * @type Byte[] 
      */
-    public $_data = null;
+    protected $data = null;
 
     /**
      * @type boolean 
      */
-    public $_flagUpdate = false;
+    protected $flagUpdate = false;
 
     /**
      * @type integer|null 
      */
-    public $_size = 0;
+    protected $size = 0;
 
     /**
      * @type integer|null 
      */
-    public $_sort = 0;
+    protected $sort = 0;
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
-        '_foreignKey',
+    public $identities = array(
+        'id',
+        'foreignKey',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -71,7 +69,7 @@ class SpecificValueImage extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -79,41 +77,7 @@ class SpecificValueImage extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -123,7 +87,7 @@ class SpecificValueImage extends DataModel
      */
     public function setConnectorId($connectorId)
     {
-        return $this->setProperty('_connectorId', $connectorId, 'integer');
+        return $this->setProperty('connectorId', $connectorId, 'integer');
     }
     
     /**
@@ -131,7 +95,7 @@ class SpecificValueImage extends DataModel
      */
     public function getConnectorId()
     {
-        return $this->_connectorId;
+        return $this->connectorId;
     }
 
     /**
@@ -141,7 +105,7 @@ class SpecificValueImage extends DataModel
      */
     public function setData(Byte[] $data)
     {
-        return $this->setProperty('_data', $data, 'Byte[]');
+        return $this->setProperty('data', $data, 'Byte[]');
     }
     
     /**
@@ -149,7 +113,7 @@ class SpecificValueImage extends DataModel
      */
     public function getData()
     {
-        return $this->_data;
+        return $this->data;
     }
 
     /**
@@ -159,7 +123,7 @@ class SpecificValueImage extends DataModel
      */
     public function setSize($size)
     {
-        return $this->setProperty('_size', $size, 'integer');
+        return $this->setProperty('size', $size, 'integer');
     }
     
     /**
@@ -167,7 +131,7 @@ class SpecificValueImage extends DataModel
      */
     public function getSize()
     {
-        return $this->_size;
+        return $this->size;
     }
 
     /**
@@ -177,7 +141,7 @@ class SpecificValueImage extends DataModel
      */
     public function setSort($sort)
     {
-        return $this->setProperty('_sort', $sort, 'integer');
+        return $this->setProperty('sort', $sort, 'integer');
     }
     
     /**
@@ -185,7 +149,7 @@ class SpecificValueImage extends DataModel
      */
     public function getSort()
     {
-        return $this->_sort;
+        return $this->sort;
     }
 
     /**
@@ -195,7 +159,7 @@ class SpecificValueImage extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -203,7 +167,7 @@ class SpecificValueImage extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -213,7 +177,7 @@ class SpecificValueImage extends DataModel
      */
     public function setForeignKey(Identity $foreignKey)
     {
-        return $this->setProperty('_foreignKey', $foreignKey, 'Identity');
+        return $this->setProperty('foreignKey', $foreignKey, 'Identity');
     }
     
     /**
@@ -221,7 +185,7 @@ class SpecificValueImage extends DataModel
      */
     public function getForeignKey()
     {
-        return $this->_foreignKey;
+        return $this->foreignKey;
     }
 
     /**
@@ -231,7 +195,7 @@ class SpecificValueImage extends DataModel
      */
     public function setFlagUpdate($flagUpdate)
     {
-        return $this->setProperty('_flagUpdate', $flagUpdate, 'boolean');
+        return $this->setProperty('flagUpdate', $flagUpdate, 'boolean');
     }
     
     /**
@@ -239,7 +203,7 @@ class SpecificValueImage extends DataModel
      */
     public function getFlagUpdate()
     {
-        return $this->_flagUpdate;
+        return $this->flagUpdate;
     }
 }
 

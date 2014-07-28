@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,38 +11,37 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class SetArticle extends DataModel
 {
     /**
      * @type Identity Unique setArticle id, referenced by product.setArticleId
      */
-    public $_id = null;
+    protected $id = null;
 
     /**
      * @type Identity Reference to a component / product
      */
-    public $_productId = null;
+    protected $productId = null;
 
     /**
      * @type float Component quantity
      */
-    public $_quantity = 0.0;
+    protected $quantity = 0.0;
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_id',
-        '_productId',
+    public $identities = array(
+        'id',
+        'productId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -51,7 +49,7 @@ class SetArticle extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -59,41 +57,7 @@ class SetArticle extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -103,7 +67,7 @@ class SetArticle extends DataModel
      */
     public function setQuantity($quantity)
     {
-        return $this->setProperty('_quantity', $quantity, 'float');
+        return $this->setProperty('quantity', $quantity, 'float');
     }
     
     /**
@@ -111,7 +75,7 @@ class SetArticle extends DataModel
      */
     public function getQuantity()
     {
-        return $this->_quantity;
+        return $this->quantity;
     }
 
     /**
@@ -121,7 +85,7 @@ class SetArticle extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('_id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
     
     /**
@@ -129,7 +93,7 @@ class SetArticle extends DataModel
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -139,7 +103,7 @@ class SetArticle extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('_productId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
     
     /**
@@ -147,7 +111,7 @@ class SetArticle extends DataModel
      */
     public function getProductId()
     {
-        return $this->_productId;
+        return $this->productId;
     }
 }
 

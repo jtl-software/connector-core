@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,114 +11,113 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class ConfigItem extends DataModel
 {
     /**
      * @type Identity Reference to configGroup
      */
-    public $_configGroupId = null;
+    protected $configGroupId = null;
 
     /**
      * @type Identity Optional reference to product
      */
-    public $_productId = null;
+    protected $productId = null;
 
     /**
      * @type float|null 
      */
-    public $_fStandardpreis = 0.0;
+    protected $fStandardpreis = 0.0;
 
     /**
      * @type integer Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
      */
-    public $_ignoreMultiplier = 0;
+    protected $ignoreMultiplier = 0;
 
     /**
      * @type integer|null Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
      */
-    public $_inheritProductName = 0;
+    protected $inheritProductName = 0;
 
     /**
      * @type integer|null Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
      */
-    public $_inheritProductPrice = 0;
+    protected $inheritProductPrice = 0;
 
     /**
      * @type float|null Optional initial / predefined quantity. Default is one (1) quantity piece. 
      */
-    public $_initialQuantity = 0.0;
+    protected $initialQuantity = 0.0;
 
     /**
      * @type integer|null Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
      */
-    public $_isPreSelected = 0;
+    protected $isPreSelected = 0;
 
     /**
      * @type integer|null Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
      */
-    public $_isRecommended = 0;
+    protected $isRecommended = 0;
 
     /**
      * @type float|null Maximum allowed quantity. Default 0 for no maximum limit. 
      */
-    public $_maxQuantity = 0.0;
+    protected $maxQuantity = 0.0;
 
     /**
      * @type float|null Optional minimum quantity required to add configItem. Default 0 for no minimum quantity. 
      */
-    public $_minQuantity = 0.0;
+    protected $minQuantity = 0.0;
 
     /**
      * @type integer|null Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
      */
-    public $_showDiscount = 0;
+    protected $showDiscount = 0;
 
     /**
      * @type integer|null Optional: Show surcharge compared to productId price.
      */
-    public $_showSurcharge = 0;
+    protected $showSurcharge = 0;
 
     /**
      * @type integer|null Optional sort order number
      */
-    public $_sort = 0;
+    protected $sort = 0;
 
     /**
      * @type integer|null Config item type. 0: Product, 1: Special
      */
-    public $_type = 0;
+    protected $type = 0;
 
     /**
      * Nav [ConfigItem » One]
      *
      * @type \jtl\Connector\Model\ConfigItemPrice[]
      */
-    public $_prices = array();
+    protected $prices = array();
 
     /**
      * Nav [ConfigItem » One]
      *
      * @type \jtl\Connector\Model\ConfigItemI18n[]
      */
-    public $_i18n = array();
+    protected $i18n = array();
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_configGroupId',
-        '_productId',
+    public $identities = array(
+        'configGroupId',
+        'productId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
-        '_prices' => '\jtl\Connector\Model\ConfigItemPrice',
-        '_i18n' => '\jtl\Connector\Model\ConfigItemI18n',
+    public $navigations = array(
+        'prices' => '\jtl\Connector\Model\ConfigItemPrice',
+        'i18n' => '\jtl\Connector\Model\ConfigItemI18n',
     );
 
     /**
@@ -127,7 +125,7 @@ class ConfigItem extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -135,41 +133,7 @@ class ConfigItem extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -179,7 +143,7 @@ class ConfigItem extends DataModel
      */
     public function setType($type)
     {
-        return $this->setProperty('_type', $type, 'integer');
+        return $this->setProperty('type', $type, 'integer');
     }
     
     /**
@@ -187,7 +151,7 @@ class ConfigItem extends DataModel
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
@@ -197,7 +161,7 @@ class ConfigItem extends DataModel
      */
     public function setIsPreSelected($isPreSelected)
     {
-        return $this->setProperty('_isPreSelected', $isPreSelected, 'integer');
+        return $this->setProperty('isPreSelected', $isPreSelected, 'integer');
     }
     
     /**
@@ -205,7 +169,7 @@ class ConfigItem extends DataModel
      */
     public function getIsPreSelected()
     {
-        return $this->_isPreSelected;
+        return $this->isPreSelected;
     }
 
     /**
@@ -215,7 +179,7 @@ class ConfigItem extends DataModel
      */
     public function setIsRecommended($isRecommended)
     {
-        return $this->setProperty('_isRecommended', $isRecommended, 'integer');
+        return $this->setProperty('isRecommended', $isRecommended, 'integer');
     }
     
     /**
@@ -223,7 +187,7 @@ class ConfigItem extends DataModel
      */
     public function getIsRecommended()
     {
-        return $this->_isRecommended;
+        return $this->isRecommended;
     }
 
     /**
@@ -233,7 +197,7 @@ class ConfigItem extends DataModel
      */
     public function setInheritProductName($inheritProductName)
     {
-        return $this->setProperty('_inheritProductName', $inheritProductName, 'integer');
+        return $this->setProperty('inheritProductName', $inheritProductName, 'integer');
     }
     
     /**
@@ -241,7 +205,7 @@ class ConfigItem extends DataModel
      */
     public function getInheritProductName()
     {
-        return $this->_inheritProductName;
+        return $this->inheritProductName;
     }
 
     /**
@@ -251,7 +215,7 @@ class ConfigItem extends DataModel
      */
     public function setInheritProductPrice($inheritProductPrice)
     {
-        return $this->setProperty('_inheritProductPrice', $inheritProductPrice, 'integer');
+        return $this->setProperty('inheritProductPrice', $inheritProductPrice, 'integer');
     }
     
     /**
@@ -259,7 +223,7 @@ class ConfigItem extends DataModel
      */
     public function getInheritProductPrice()
     {
-        return $this->_inheritProductPrice;
+        return $this->inheritProductPrice;
     }
 
     /**
@@ -269,7 +233,7 @@ class ConfigItem extends DataModel
      */
     public function setSort($sort)
     {
-        return $this->setProperty('_sort', $sort, 'integer');
+        return $this->setProperty('sort', $sort, 'integer');
     }
     
     /**
@@ -277,7 +241,7 @@ class ConfigItem extends DataModel
      */
     public function getSort()
     {
-        return $this->_sort;
+        return $this->sort;
     }
 
     /**
@@ -287,7 +251,7 @@ class ConfigItem extends DataModel
      */
     public function setShowDiscount($showDiscount)
     {
-        return $this->setProperty('_showDiscount', $showDiscount, 'integer');
+        return $this->setProperty('showDiscount', $showDiscount, 'integer');
     }
     
     /**
@@ -295,7 +259,7 @@ class ConfigItem extends DataModel
      */
     public function getShowDiscount()
     {
-        return $this->_showDiscount;
+        return $this->showDiscount;
     }
 
     /**
@@ -305,7 +269,7 @@ class ConfigItem extends DataModel
      */
     public function setShowSurcharge($showSurcharge)
     {
-        return $this->setProperty('_showSurcharge', $showSurcharge, 'integer');
+        return $this->setProperty('showSurcharge', $showSurcharge, 'integer');
     }
     
     /**
@@ -313,7 +277,7 @@ class ConfigItem extends DataModel
      */
     public function getShowSurcharge()
     {
-        return $this->_showSurcharge;
+        return $this->showSurcharge;
     }
 
     /**
@@ -323,7 +287,7 @@ class ConfigItem extends DataModel
      */
     public function setMinQuantity($minQuantity)
     {
-        return $this->setProperty('_minQuantity', $minQuantity, 'float');
+        return $this->setProperty('minQuantity', $minQuantity, 'float');
     }
     
     /**
@@ -331,7 +295,7 @@ class ConfigItem extends DataModel
      */
     public function getMinQuantity()
     {
-        return $this->_minQuantity;
+        return $this->minQuantity;
     }
 
     /**
@@ -341,7 +305,7 @@ class ConfigItem extends DataModel
      */
     public function setMaxQuantity($maxQuantity)
     {
-        return $this->setProperty('_maxQuantity', $maxQuantity, 'float');
+        return $this->setProperty('maxQuantity', $maxQuantity, 'float');
     }
     
     /**
@@ -349,7 +313,7 @@ class ConfigItem extends DataModel
      */
     public function getMaxQuantity()
     {
-        return $this->_maxQuantity;
+        return $this->maxQuantity;
     }
 
     /**
@@ -359,7 +323,7 @@ class ConfigItem extends DataModel
      */
     public function setInitialQuantity($initialQuantity)
     {
-        return $this->setProperty('_initialQuantity', $initialQuantity, 'float');
+        return $this->setProperty('initialQuantity', $initialQuantity, 'float');
     }
     
     /**
@@ -367,7 +331,7 @@ class ConfigItem extends DataModel
      */
     public function getInitialQuantity()
     {
-        return $this->_initialQuantity;
+        return $this->initialQuantity;
     }
 
     /**
@@ -377,7 +341,7 @@ class ConfigItem extends DataModel
      */
     public function setFStandardpreis($fStandardpreis)
     {
-        return $this->setProperty('_fStandardpreis', $fStandardpreis, 'float');
+        return $this->setProperty('fStandardpreis', $fStandardpreis, 'float');
     }
     
     /**
@@ -385,7 +349,7 @@ class ConfigItem extends DataModel
      */
     public function getFStandardpreis()
     {
-        return $this->_fStandardpreis;
+        return $this->fStandardpreis;
     }
 
     /**
@@ -395,7 +359,7 @@ class ConfigItem extends DataModel
      */
     public function setIgnoreMultiplier($ignoreMultiplier)
     {
-        return $this->setProperty('_ignoreMultiplier', $ignoreMultiplier, 'integer');
+        return $this->setProperty('ignoreMultiplier', $ignoreMultiplier, 'integer');
     }
     
     /**
@@ -403,7 +367,7 @@ class ConfigItem extends DataModel
      */
     public function getIgnoreMultiplier()
     {
-        return $this->_ignoreMultiplier;
+        return $this->ignoreMultiplier;
     }
 
     /**
@@ -413,7 +377,7 @@ class ConfigItem extends DataModel
      */
     public function setConfigGroupId(Identity $configGroupId)
     {
-        return $this->setProperty('_configGroupId', $configGroupId, 'Identity');
+        return $this->setProperty('configGroupId', $configGroupId, 'Identity');
     }
     
     /**
@@ -421,7 +385,7 @@ class ConfigItem extends DataModel
      */
     public function getConfigGroupId()
     {
-        return $this->_configGroupId;
+        return $this->configGroupId;
     }
 
     /**
@@ -431,7 +395,7 @@ class ConfigItem extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('_productId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
     
     /**
@@ -439,7 +403,7 @@ class ConfigItem extends DataModel
      */
     public function getProductId()
     {
-        return $this->_productId;
+        return $this->productId;
     }
 
     /**
@@ -448,7 +412,7 @@ class ConfigItem extends DataModel
      */
     public function addPrice(\jtl\Connector\Model\ConfigItemPrice $price)
     {
-        $this->_prices[] = $price;
+        $this->prices[] = $price;
         return $this;
     }
     
@@ -457,7 +421,7 @@ class ConfigItem extends DataModel
      */
     public function getPrices()
     {
-        return $this->_prices;
+        return $this->prices;
     }
 
     /**
@@ -465,7 +429,7 @@ class ConfigItem extends DataModel
      */
     public function clearPrices()
     {
-        $this->_prices = array();
+        $this->prices = array();
         return $this;
     }
 
@@ -475,7 +439,7 @@ class ConfigItem extends DataModel
      */
     public function addI18n(\jtl\Connector\Model\ConfigItemI18n $i18n)
     {
-        $this->_i18n[] = $i18n;
+        $this->i18n[] = $i18n;
         return $this;
     }
     
@@ -484,7 +448,7 @@ class ConfigItem extends DataModel
      */
     public function getI18n()
     {
-        return $this->_i18n;
+        return $this->i18n;
     }
 
     /**
@@ -492,7 +456,7 @@ class ConfigItem extends DataModel
      */
     public function clearI18n()
     {
-        $this->_i18n = array();
+        $this->i18n = array();
         return $this;
     }
 }

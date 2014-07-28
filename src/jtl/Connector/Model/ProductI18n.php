@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,67 +11,66 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class ProductI18n extends DataModel
 {
     /**
      * @type Identity Reference to product
      */
-    public $_productId = null;
+    protected $productId = null;
 
     /**
      * @type string 
      */
-    public $_description = '';
+    protected $description = '';
 
     /**
      * @type string locale
      */
-    public $_localeName = '';
+    protected $localeName = '';
 
     /**
      * @type string 
      */
-    public $_metaDescription = '';
+    protected $metaDescription = '';
 
     /**
      * @type string 
      */
-    public $_metaKeywords = '';
+    protected $metaKeywords = '';
 
     /**
      * @type string 
      */
-    public $_name = '';
+    protected $name = '';
 
     /**
      * @type string 
      */
-    public $_shortDescription = '';
+    protected $shortDescription = '';
 
     /**
      * @type string 
      */
-    public $_titleTag = '';
+    protected $titleTag = '';
 
     /**
      * @type string 
      */
-    public $_urlPath = '';
+    protected $urlPath = '';
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_productId',
+    public $identities = array(
+        'productId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -80,7 +78,7 @@ class ProductI18n extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -88,41 +86,7 @@ class ProductI18n extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -132,7 +96,7 @@ class ProductI18n extends DataModel
      */
     public function setName($name)
     {
-        return $this->setProperty('_name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
     
     /**
@@ -140,7 +104,7 @@ class ProductI18n extends DataModel
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -150,7 +114,7 @@ class ProductI18n extends DataModel
      */
     public function setDescription($description)
     {
-        return $this->setProperty('_description', $description, 'string');
+        return $this->setProperty('description', $description, 'string');
     }
     
     /**
@@ -158,7 +122,7 @@ class ProductI18n extends DataModel
      */
     public function getDescription()
     {
-        return $this->_description;
+        return $this->description;
     }
 
     /**
@@ -168,7 +132,7 @@ class ProductI18n extends DataModel
      */
     public function setShortDescription($shortDescription)
     {
-        return $this->setProperty('_shortDescription', $shortDescription, 'string');
+        return $this->setProperty('shortDescription', $shortDescription, 'string');
     }
     
     /**
@@ -176,7 +140,7 @@ class ProductI18n extends DataModel
      */
     public function getShortDescription()
     {
-        return $this->_shortDescription;
+        return $this->shortDescription;
     }
 
     /**
@@ -186,7 +150,7 @@ class ProductI18n extends DataModel
      */
     public function setUrlPath($urlPath)
     {
-        return $this->setProperty('_urlPath', $urlPath, 'string');
+        return $this->setProperty('urlPath', $urlPath, 'string');
     }
     
     /**
@@ -194,7 +158,7 @@ class ProductI18n extends DataModel
      */
     public function getUrlPath()
     {
-        return $this->_urlPath;
+        return $this->urlPath;
     }
 
     /**
@@ -204,7 +168,7 @@ class ProductI18n extends DataModel
      */
     public function setTitleTag($titleTag)
     {
-        return $this->setProperty('_titleTag', $titleTag, 'string');
+        return $this->setProperty('titleTag', $titleTag, 'string');
     }
     
     /**
@@ -212,7 +176,7 @@ class ProductI18n extends DataModel
      */
     public function getTitleTag()
     {
-        return $this->_titleTag;
+        return $this->titleTag;
     }
 
     /**
@@ -222,7 +186,7 @@ class ProductI18n extends DataModel
      */
     public function setMetaKeywords($metaKeywords)
     {
-        return $this->setProperty('_metaKeywords', $metaKeywords, 'string');
+        return $this->setProperty('metaKeywords', $metaKeywords, 'string');
     }
     
     /**
@@ -230,7 +194,7 @@ class ProductI18n extends DataModel
      */
     public function getMetaKeywords()
     {
-        return $this->_metaKeywords;
+        return $this->metaKeywords;
     }
 
     /**
@@ -240,7 +204,7 @@ class ProductI18n extends DataModel
      */
     public function setMetaDescription($metaDescription)
     {
-        return $this->setProperty('_metaDescription', $metaDescription, 'string');
+        return $this->setProperty('metaDescription', $metaDescription, 'string');
     }
     
     /**
@@ -248,7 +212,7 @@ class ProductI18n extends DataModel
      */
     public function getMetaDescription()
     {
-        return $this->_metaDescription;
+        return $this->metaDescription;
     }
 
     /**
@@ -258,7 +222,7 @@ class ProductI18n extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('_productId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
     
     /**
@@ -266,7 +230,7 @@ class ProductI18n extends DataModel
      */
     public function getProductId()
     {
-        return $this->_productId;
+        return $this->productId;
     }
 
     /**
@@ -276,7 +240,7 @@ class ProductI18n extends DataModel
      */
     public function setLocaleName($localeName)
     {
-        return $this->setProperty('_localeName', $localeName, 'string');
+        return $this->setProperty('localeName', $localeName, 'string');
     }
     
     /**
@@ -284,7 +248,7 @@ class ProductI18n extends DataModel
      */
     public function getLocaleName()
     {
-        return $this->_localeName;
+        return $this->localeName;
     }
 }
 

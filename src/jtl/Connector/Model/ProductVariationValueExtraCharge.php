@@ -2,7 +2,6 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -12,43 +11,42 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class ProductVariationValueExtraCharge extends DataModel
 {
     /**
      * @type Identity Reference to customerGroup
      */
-    public $_customerGroupId = null;
+    protected $customerGroupId = null;
 
     /**
      * @type Identity Reference to productVariationValue
      */
-    public $_productVariationValueId = null;
+    protected $productVariationValueId = null;
 
     /**
      * @type integer 
      */
-    public $_connectorId = 0;
+    protected $connectorId = 0;
 
     /**
      * @type float Extra charge (net)
      */
-    public $_extraChargeNet = 0.0;
+    protected $extraChargeNet = 0.0;
 
 
     /**
      * @type array list of identities
      */
-    public $_identities = array(
-        '_productVariationValueId',
-        '_customerGroupId',
+    public $identities = array(
+        'productVariationValueId',
+        'customerGroupId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $_navigations = array(
+    public $navigations = array(
     );
 
     /**
@@ -56,7 +54,7 @@ class ProductVariationValueExtraCharge extends DataModel
      */
     public function getIdentities()
     {
-        return $this->_identities;
+        return $this->identities;
     }
 
     /**
@@ -64,41 +62,7 @@ class ProductVariationValueExtraCharge extends DataModel
      */
     public function getNavigations()
     {
-        return $this->_navigations;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function setProperty($name, $value, $type)
-    {
-        if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
-        }
-        $this->{$name} = $value;
-        return $this;
-    }
-
-    /**
-     * @todo: Move to BasisModel
-     */
-    protected function validateType($value, $type)
-    {
-        switch ($type)
-        {
-            case 'boolean':
-                return is_bool($value);
-            case 'integer':
-                return is_integer($value);
-            case 'float':
-                return is_float($value);
-            case 'string':
-                return is_string($value);
-            case 'array':
-                return is_array($value);
-            default:
-                throw new InvalidArgumentException('type validator not found');
-        }
+        return $this->navigations;
     }
 
     /**
@@ -108,7 +72,7 @@ class ProductVariationValueExtraCharge extends DataModel
      */
     public function setConnectorId($connectorId)
     {
-        return $this->setProperty('_connectorId', $connectorId, 'integer');
+        return $this->setProperty('connectorId', $connectorId, 'integer');
     }
     
     /**
@@ -116,7 +80,7 @@ class ProductVariationValueExtraCharge extends DataModel
      */
     public function getConnectorId()
     {
-        return $this->_connectorId;
+        return $this->connectorId;
     }
 
     /**
@@ -126,7 +90,7 @@ class ProductVariationValueExtraCharge extends DataModel
      */
     public function setExtraChargeNet($extraChargeNet)
     {
-        return $this->setProperty('_extraChargeNet', $extraChargeNet, 'float');
+        return $this->setProperty('extraChargeNet', $extraChargeNet, 'float');
     }
     
     /**
@@ -134,7 +98,7 @@ class ProductVariationValueExtraCharge extends DataModel
      */
     public function getExtraChargeNet()
     {
-        return $this->_extraChargeNet;
+        return $this->extraChargeNet;
     }
 
     /**
@@ -144,7 +108,7 @@ class ProductVariationValueExtraCharge extends DataModel
      */
     public function setProductVariationValueId(Identity $productVariationValueId)
     {
-        return $this->setProperty('_productVariationValueId', $productVariationValueId, 'Identity');
+        return $this->setProperty('productVariationValueId', $productVariationValueId, 'Identity');
     }
     
     /**
@@ -152,7 +116,7 @@ class ProductVariationValueExtraCharge extends DataModel
      */
     public function getProductVariationValueId()
     {
-        return $this->_productVariationValueId;
+        return $this->productVariationValueId;
     }
 
     /**
@@ -162,7 +126,7 @@ class ProductVariationValueExtraCharge extends DataModel
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('_customerGroupId', $customerGroupId, 'Identity');
+        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
     }
     
     /**
@@ -170,7 +134,7 @@ class ProductVariationValueExtraCharge extends DataModel
      */
     public function getCustomerGroupId()
     {
-        return $this->_customerGroupId;
+        return $this->customerGroupId;
     }
 }
 
