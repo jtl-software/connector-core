@@ -9,7 +9,6 @@
 
 namespace jtl\Connector\Application;
 
-use \jtl\Core\Rpc\Transaction;
 use \jtl\Core\Serializer\Json;
 use \jtl\Core\Application\Application as CoreApplication;
 use \jtl\Core\Exception\RpcException;
@@ -34,7 +33,6 @@ use \jtl\Connector\Database\Sqlite3;
 use \jtl\Core\Utilities\RpcMethod;
 use \jtl\Connector\Session\Session;
 use \jtl\Connector\Base\Connector;
-use \jtl\Connector\Transaction\Handler as TransactionHandler;
 use \jtl\Core\Logger\Logger;
 
 /**
@@ -140,23 +138,6 @@ class Application extends CoreApplication
         foreach (self::$_connectors as $endpointconnector) {
             $endpointconnector->setMethod($method);
             if ($endpointconnector->canHandle()) {
-
-                // Transaction
-                if (TransactionHandler::exists($requestpacket)) {
-                    if (!$method->isCommit()) {
-                        $actionresult = TransactionHandler::insert($requestpacket, $endpointconnector->getModelNamespace());
-
-                        $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
-
-                        if ($rpcmode == Packet::SINGLE_MODE) {
-                            Response::send($responsepacket);
-                        }
-                        else {
-                            return $responsepacket;
-                        }
-                    }
-                }
-
                 $endpointconnector->setConfig($config);
                 $actionresult = $endpointconnector->handle($requestpacket);
                 
