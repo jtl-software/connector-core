@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
+ * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -19,120 +19,134 @@ class ProductVariationI18n extends DataModel
     /**
      * @type Identity Reference to productVariation
      */
-    protected $_productVariationId = null;
+    public $_productVariationId = null;
 
     /**
      * @type string Locale
      */
-    protected $_localeName = '';
+    public $_localeName = '';
 
     /**
      * @type string Locale specific variation name
      */
-    protected $_name = '';
+    public $_name = '';
+
 
     /**
-	 * Nav [ProductVariationI18n » Many]
-	 *
-     * @type \jtl\Connector\Model\ProductVariation[]
+     * @type array list of identities
      */
-    protected $_productVariation = array();
+    public $_identities = array(
+        '_productVariationId',
+    );
 
+    /**
+     * @type array list of navigations
+     */
+    public $_navigations = array(
+    );
 
-	/**
-	 * @type array
-	 */
-	protected $_identities = array(
-		'_productVariationId',
-	);
+    /**
+     * @return array 
+     */
+    public function getIdentities()
+    {
+        return $this->_identities;
+    }
 
-	/**
-	 * @param  string $name Locale specific variation name
-	 * @return \jtl\Connector\Model\ProductVariationI18n
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setName($name)
-	{
-		if (!is_string($name))
-			throw new InvalidArgumentException('string expected.');
-		$this->_name = $name;
-		return $this;
-	}
-	
-	/**
-	 * @return string Locale specific variation name
-	 */
-	public function getName()
-	{
-		return $this->_name;
-	}
+    /**
+     * @return array 
+     */
+    public function getNavigations()
+    {
+        return $this->_navigations;
+    }
 
-	/**
-	 * @param  Identity $productVariationId Reference to productVariation
-	 * @return \jtl\Connector\Model\ProductVariationI18n
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setProductVariationId(Identity $productVariationId)
-	{
-		
-		$this->_productVariationId = $productVariationId;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity Reference to productVariation
-	 */
-	public function getProductVariationId()
-	{
-		return $this->_productVariationId;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function setProperty($name, $value, $type)
+    {
+        if (!$this->validateType($value, $type)) {
+            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
+        }
+        $this->{$name} = $value;
+        return $this;
+    }
 
-	/**
-	 * @param  string $localeName Locale
-	 * @return \jtl\Connector\Model\ProductVariationI18n
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setLocaleName($localeName)
-	{
-		if (!is_string($localeName))
-			throw new InvalidArgumentException('string expected.');
-		$this->_localeName = $localeName;
-		return $this;
-	}
-	
-	/**
-	 * @return string Locale
-	 */
-	public function getLocaleName()
-	{
-		return $this->_localeName;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function validateType($value, $type)
+    {
+        switch ($type)
+        {
+            case 'boolean':
+                return is_bool($value);
+            case 'integer':
+                return is_integer($value);
+            case 'float':
+                return is_float($value);
+            case 'string':
+                return is_string($value);
+            case 'array':
+                return is_array($value);
+            default:
+                throw new InvalidArgumentException('type validator not found');
+        }
+    }
 
-	/**
-	 * @param  \jtl\Connector\Model\ProductVariation $productVariation
-	 * @return \jtl\Connector\Model\ProductVariationI18n
-	 */
-	public function addProductVariation(\jtl\Connector\Model\ProductVariation $productVariation)
-	{
-		$this->_productVariation[] = $productVariation;
-		return $this;
-	}
-	
-	/**
-	 * @return ProductVariation
-	 */
-	public function getProductVariation()
-	{
-		return $this->_productVariation;
-	}
+    /**
+     * @param  string $name Locale specific variation name
+     * @return \jtl\Connector\Model\ProductVariationI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setName($name)
+    {
+        return $this->setProperty('_name', $name, 'string');
+    }
+    
+    /**
+     * @return string Locale specific variation name
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
 
-	/**
-	 * @return \jtl\Connector\Model\ProductVariationI18n
-	 */
-	public function clearProductVariation()
-	{
-		$this->_productVariation = array();
-		return $this;
-	}
+    /**
+     * @param  Identity $productVariationId Reference to productVariation
+     * @return \jtl\Connector\Model\ProductVariationI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setProductVariationId(Identity $productVariationId)
+    {
+        return $this->setProperty('_productVariationId', $productVariationId, 'Identity');
+    }
+    
+    /**
+     * @return Identity Reference to productVariation
+     */
+    public function getProductVariationId()
+    {
+        return $this->_productVariationId;
+    }
+
+    /**
+     * @param  string $localeName Locale
+     * @return \jtl\Connector\Model\ProductVariationI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setLocaleName($localeName)
+    {
+        return $this->setProperty('_localeName', $localeName, 'string');
+    }
+    
+    /**
+     * @return string Locale
+     */
+    public function getLocaleName()
+    {
+        return $this->_localeName;
+    }
 }
 

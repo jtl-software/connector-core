@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
+ * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -19,146 +19,158 @@ class SpecialPrice extends DataModel
     /**
      * @type Identity 
      */
-    protected $_customerGroupId = null;
+    public $_customerGroupId = null;
 
     /**
      * @type Identity 
      */
-    protected $_productSpecialPriceId = null;
+    public $_productSpecialPriceId = null;
 
     /**
      * @type integer 
      */
-    protected $_connectorId = 0;
+    public $_connectorId = 0;
 
     /**
      * @type float 
      */
-    protected $_priceNet = 0.0;
+    public $_priceNet = 0.0;
+
 
     /**
-	 * Nav [SpecialPrice » Many]
-	 *
-     * @type \jtl\Connector\Model\ProductSpecialPrice[]
+     * @type array list of identities
      */
-    protected $_productSpecialPrice = array();
+    public $_identities = array(
+        '_productSpecialPriceId',
+        '_customerGroupId',
+    );
 
+    /**
+     * @type array list of navigations
+     */
+    public $_navigations = array(
+    );
 
-	/**
-	 * @type array
-	 */
-	protected $_identities = array(
-		'_productSpecialPriceId',
-		'_customerGroupId',
-	);
+    /**
+     * @return array 
+     */
+    public function getIdentities()
+    {
+        return $this->_identities;
+    }
 
-	/**
-	 * @param  integer $connectorId 
-	 * @return \jtl\Connector\Model\SpecialPrice
-	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-	 */
-	public function setConnectorId($connectorId)
-	{
-		if (!is_integer($connectorId))
-			throw new InvalidArgumentException('integer expected.');
-		$this->_connectorId = $connectorId;
-		return $this;
-	}
-	
-	/**
-	 * @return integer 
-	 */
-	public function getConnectorId()
-	{
-		return $this->_connectorId;
-	}
+    /**
+     * @return array 
+     */
+    public function getNavigations()
+    {
+        return $this->_navigations;
+    }
 
-	/**
-	 * @param  Identity $productSpecialPriceId 
-	 * @return \jtl\Connector\Model\SpecialPrice
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setProductSpecialPriceId(Identity $productSpecialPriceId)
-	{
-		
-		$this->_productSpecialPriceId = $productSpecialPriceId;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity 
-	 */
-	public function getProductSpecialPriceId()
-	{
-		return $this->_productSpecialPriceId;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function setProperty($name, $value, $type)
+    {
+        if (!$this->validateType($value, $type)) {
+            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
+        }
+        $this->{$name} = $value;
+        return $this;
+    }
 
-	/**
-	 * @param  Identity $customerGroupId 
-	 * @return \jtl\Connector\Model\SpecialPrice
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setCustomerGroupId(Identity $customerGroupId)
-	{
-		
-		$this->_customerGroupId = $customerGroupId;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity 
-	 */
-	public function getCustomerGroupId()
-	{
-		return $this->_customerGroupId;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function validateType($value, $type)
+    {
+        switch ($type)
+        {
+            case 'boolean':
+                return is_bool($value);
+            case 'integer':
+                return is_integer($value);
+            case 'float':
+                return is_float($value);
+            case 'string':
+                return is_string($value);
+            case 'array':
+                return is_array($value);
+            default:
+                throw new InvalidArgumentException('type validator not found');
+        }
+    }
 
-	/**
-	 * @param  float $priceNet 
-	 * @return \jtl\Connector\Model\SpecialPrice
-	 * @throws InvalidArgumentException if the provided argument is not of type 'float'.
-	 */
-	public function setPriceNet($priceNet)
-	{
-		if (!is_float($priceNet))
-			throw new InvalidArgumentException('float expected.');
-		$this->_priceNet = $priceNet;
-		return $this;
-	}
-	
-	/**
-	 * @return float 
-	 */
-	public function getPriceNet()
-	{
-		return $this->_priceNet;
-	}
+    /**
+     * @param  integer $connectorId 
+     * @return \jtl\Connector\Model\SpecialPrice
+     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     */
+    public function setConnectorId($connectorId)
+    {
+        return $this->setProperty('_connectorId', $connectorId, 'integer');
+    }
+    
+    /**
+     * @return integer 
+     */
+    public function getConnectorId()
+    {
+        return $this->_connectorId;
+    }
 
-	/**
-	 * @param  \jtl\Connector\Model\ProductSpecialPrice $productSpecialPrice
-	 * @return \jtl\Connector\Model\SpecialPrice
-	 */
-	public function addProductSpecialPrice(\jtl\Connector\Model\ProductSpecialPrice $productSpecialPrice)
-	{
-		$this->_productSpecialPrice[] = $productSpecialPrice;
-		return $this;
-	}
-	
-	/**
-	 * @return ProductSpecialPrice
-	 */
-	public function getProductSpecialPrice()
-	{
-		return $this->_productSpecialPrice;
-	}
+    /**
+     * @param  Identity $productSpecialPriceId 
+     * @return \jtl\Connector\Model\SpecialPrice
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setProductSpecialPriceId(Identity $productSpecialPriceId)
+    {
+        return $this->setProperty('_productSpecialPriceId', $productSpecialPriceId, 'Identity');
+    }
+    
+    /**
+     * @return Identity 
+     */
+    public function getProductSpecialPriceId()
+    {
+        return $this->_productSpecialPriceId;
+    }
 
-	/**
-	 * @return \jtl\Connector\Model\SpecialPrice
-	 */
-	public function clearProductSpecialPrice()
-	{
-		$this->_productSpecialPrice = array();
-		return $this;
-	}
+    /**
+     * @param  Identity $customerGroupId 
+     * @return \jtl\Connector\Model\SpecialPrice
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerGroupId(Identity $customerGroupId)
+    {
+        return $this->setProperty('_customerGroupId', $customerGroupId, 'Identity');
+    }
+    
+    /**
+     * @return Identity 
+     */
+    public function getCustomerGroupId()
+    {
+        return $this->_customerGroupId;
+    }
+
+    /**
+     * @param  float $priceNet 
+     * @return \jtl\Connector\Model\SpecialPrice
+     * @throws InvalidArgumentException if the provided argument is not of type 'float'.
+     */
+    public function setPriceNet($priceNet)
+    {
+        return $this->setProperty('_priceNet', $priceNet, 'float');
+    }
+    
+    /**
+     * @return float 
+     */
+    public function getPriceNet()
+    {
+        return $this->_priceNet;
+    }
 }
 

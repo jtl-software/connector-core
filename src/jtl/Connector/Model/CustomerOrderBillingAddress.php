@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
+ * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -19,510 +19,480 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @type Identity Reference to customer
      */
-    protected $_customerId = null;
+    public $_customerId = null;
 
     /**
      * @type Identity Unique customerOrderBillingAddress id
      */
-    protected $_id = null;
+    public $_id = null;
 
     /**
      * @type string City
      */
-    protected $_city = '';
+    public $_city = '';
 
     /**
      * @type string Company name
      */
-    protected $_company = '';
+    public $_company = '';
 
     /**
      * @type string Country ISO 3166-2 (2 letter Uppercase)
      */
-    protected $_countryIso = '';
+    public $_countryIso = '';
 
     /**
      * @type string Delivery instruction e.g. "c/o John Doe"
      */
-    protected $_deliveryInstruction = '';
+    public $_deliveryInstruction = '';
 
     /**
      * @type string E-Mail address
      */
-    protected $_eMail = '';
+    public $_eMail = '';
 
     /**
      * @type string Extra address line e.g. "Apartment 2.5"
      */
-    protected $_extraAddressLine = '';
+    public $_extraAddressLine = '';
 
     /**
      * @type string Fax number
      */
-    protected $_fax = '';
+    public $_fax = '';
 
     /**
      * @type string First name
      */
-    protected $_firstName = '';
+    public $_firstName = '';
 
     /**
      * @type string Last name
      */
-    protected $_lastName = '';
+    public $_lastName = '';
 
     /**
      * @type string Mobile phone number
      */
-    protected $_mobile = '';
+    public $_mobile = '';
 
     /**
      * @type string Phone number
      */
-    protected $_phone = '';
+    public $_phone = '';
 
     /**
      * @type string Salutation (german: "Anrede")
      */
-    protected $_salutation = '';
+    public $_salutation = '';
 
     /**
      * @type string State
      */
-    protected $_state = '';
+    public $_state = '';
 
     /**
      * @type string Street + street number
      */
-    protected $_street = '';
+    public $_street = '';
 
     /**
      * @type string Title (e.g. "Prof. Dr.")
      */
-    protected $_title = '';
+    public $_title = '';
 
     /**
      * @type string Zip / postal code
      */
-    protected $_zipCode = '';
+    public $_zipCode = '';
+
 
     /**
-	 * Nav [CustomerOrderBillingAddress » ZeroOrOne]
-	 *
-     * @type \jtl\Connector\Model\CustomerOrder[]
+     * @type array list of identities
      */
-    protected $_customerOrder = array();
+    public $_identities = array(
+        '_id',
+        '_customerId',
+    );
 
+    /**
+     * @type array list of navigations
+     */
+    public $_navigations = array(
+    );
 
-	/**
-	 * @type array
-	 */
-	protected $_identities = array(
-		'_id',
-		'_customerId',
-	);
+    /**
+     * @return array 
+     */
+    public function getIdentities()
+    {
+        return $this->_identities;
+    }
 
-	/**
-	 * @param  string $company Company name
-	 * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setCompany($company)
-	{
-		if (!is_string($company))
-			throw new InvalidArgumentException('string expected.');
-		$this->_company = $company;
-		return $this;
-	}
-	
-	/**
-	 * @return string Company name
-	 */
-	public function getCompany()
-	{
-		return $this->_company;
-	}
+    /**
+     * @return array 
+     */
+    public function getNavigations()
+    {
+        return $this->_navigations;
+    }
 
-	/**
-	 * @param  string $title Title (e.g. "Prof. Dr.")
-	 * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setTitle($title)
-	{
-		if (!is_string($title))
-			throw new InvalidArgumentException('string expected.');
-		$this->_title = $title;
-		return $this;
-	}
-	
-	/**
-	 * @return string Title (e.g. "Prof. Dr.")
-	 */
-	public function getTitle()
-	{
-		return $this->_title;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function setProperty($name, $value, $type)
+    {
+        if (!$this->validateType($value, $type)) {
+            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
+        }
+        $this->{$name} = $value;
+        return $this;
+    }
 
-	/**
-	 * @param  string $firstName First name
-	 * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setFirstName($firstName)
-	{
-		if (!is_string($firstName))
-			throw new InvalidArgumentException('string expected.');
-		$this->_firstName = $firstName;
-		return $this;
-	}
-	
-	/**
-	 * @return string First name
-	 */
-	public function getFirstName()
-	{
-		return $this->_firstName;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function validateType($value, $type)
+    {
+        switch ($type)
+        {
+            case 'boolean':
+                return is_bool($value);
+            case 'integer':
+                return is_integer($value);
+            case 'float':
+                return is_float($value);
+            case 'string':
+                return is_string($value);
+            case 'array':
+                return is_array($value);
+            default:
+                throw new InvalidArgumentException('type validator not found');
+        }
+    }
 
-	/**
-	 * @param  string $lastName Last name
-	 * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setLastName($lastName)
-	{
-		if (!is_string($lastName))
-			throw new InvalidArgumentException('string expected.');
-		$this->_lastName = $lastName;
-		return $this;
-	}
-	
-	/**
-	 * @return string Last name
-	 */
-	public function getLastName()
-	{
-		return $this->_lastName;
-	}
+    /**
+     * @param  string $company Company name
+     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setCompany($company)
+    {
+        return $this->setProperty('_company', $company, 'string');
+    }
+    
+    /**
+     * @return string Company name
+     */
+    public function getCompany()
+    {
+        return $this->_company;
+    }
 
-	/**
-	 * @param  string $street Street + street number
-	 * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setStreet($street)
-	{
-		if (!is_string($street))
-			throw new InvalidArgumentException('string expected.');
-		$this->_street = $street;
-		return $this;
-	}
-	
-	/**
-	 * @return string Street + street number
-	 */
-	public function getStreet()
-	{
-		return $this->_street;
-	}
+    /**
+     * @param  string $title Title (e.g. "Prof. Dr.")
+     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setTitle($title)
+    {
+        return $this->setProperty('_title', $title, 'string');
+    }
+    
+    /**
+     * @return string Title (e.g. "Prof. Dr.")
+     */
+    public function getTitle()
+    {
+        return $this->_title;
+    }
 
-	/**
-	 * @param  string $zipCode Zip / postal code
-	 * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setZipCode($zipCode)
-	{
-		if (!is_string($zipCode))
-			throw new InvalidArgumentException('string expected.');
-		$this->_zipCode = $zipCode;
-		return $this;
-	}
-	
-	/**
-	 * @return string Zip / postal code
-	 */
-	public function getZipCode()
-	{
-		return $this->_zipCode;
-	}
+    /**
+     * @param  string $firstName First name
+     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setFirstName($firstName)
+    {
+        return $this->setProperty('_firstName', $firstName, 'string');
+    }
+    
+    /**
+     * @return string First name
+     */
+    public function getFirstName()
+    {
+        return $this->_firstName;
+    }
 
-	/**
-	 * @param  string $city City
-	 * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setCity($city)
-	{
-		if (!is_string($city))
-			throw new InvalidArgumentException('string expected.');
-		$this->_city = $city;
-		return $this;
-	}
-	
-	/**
-	 * @return string City
-	 */
-	public function getCity()
-	{
-		return $this->_city;
-	}
+    /**
+     * @param  string $lastName Last name
+     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setLastName($lastName)
+    {
+        return $this->setProperty('_lastName', $lastName, 'string');
+    }
+    
+    /**
+     * @return string Last name
+     */
+    public function getLastName()
+    {
+        return $this->_lastName;
+    }
 
-	/**
-	 * @param  string $countryIso Country ISO 3166-2 (2 letter Uppercase)
-	 * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setCountryIso($countryIso)
-	{
-		if (!is_string($countryIso))
-			throw new InvalidArgumentException('string expected.');
-		$this->_countryIso = $countryIso;
-		return $this;
-	}
-	
-	/**
-	 * @return string Country ISO 3166-2 (2 letter Uppercase)
-	 */
-	public function getCountryIso()
-	{
-		return $this->_countryIso;
-	}
+    /**
+     * @param  string $street Street + street number
+     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setStreet($street)
+    {
+        return $this->setProperty('_street', $street, 'string');
+    }
+    
+    /**
+     * @return string Street + street number
+     */
+    public function getStreet()
+    {
+        return $this->_street;
+    }
 
-	/**
-	 * @param  string $phone Phone number
-	 * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setPhone($phone)
-	{
-		if (!is_string($phone))
-			throw new InvalidArgumentException('string expected.');
-		$this->_phone = $phone;
-		return $this;
-	}
-	
-	/**
-	 * @return string Phone number
-	 */
-	public function getPhone()
-	{
-		return $this->_phone;
-	}
+    /**
+     * @param  string $zipCode Zip / postal code
+     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setZipCode($zipCode)
+    {
+        return $this->setProperty('_zipCode', $zipCode, 'string');
+    }
+    
+    /**
+     * @return string Zip / postal code
+     */
+    public function getZipCode()
+    {
+        return $this->_zipCode;
+    }
 
-	/**
-	 * @param  string $deliveryInstruction Delivery instruction e.g. "c/o John Doe"
-	 * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setDeliveryInstruction($deliveryInstruction)
-	{
-		if (!is_string($deliveryInstruction))
-			throw new InvalidArgumentException('string expected.');
-		$this->_deliveryInstruction = $deliveryInstruction;
-		return $this;
-	}
-	
-	/**
-	 * @return string Delivery instruction e.g. "c/o John Doe"
-	 */
-	public function getDeliveryInstruction()
-	{
-		return $this->_deliveryInstruction;
-	}
+    /**
+     * @param  string $city City
+     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setCity($city)
+    {
+        return $this->setProperty('_city', $city, 'string');
+    }
+    
+    /**
+     * @return string City
+     */
+    public function getCity()
+    {
+        return $this->_city;
+    }
 
-	/**
-	 * @param  string $extraAddressLine Extra address line e.g. "Apartment 2.5"
-	 * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setExtraAddressLine($extraAddressLine)
-	{
-		if (!is_string($extraAddressLine))
-			throw new InvalidArgumentException('string expected.');
-		$this->_extraAddressLine = $extraAddressLine;
-		return $this;
-	}
-	
-	/**
-	 * @return string Extra address line e.g. "Apartment 2.5"
-	 */
-	public function getExtraAddressLine()
-	{
-		return $this->_extraAddressLine;
-	}
+    /**
+     * @param  string $countryIso Country ISO 3166-2 (2 letter Uppercase)
+     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setCountryIso($countryIso)
+    {
+        return $this->setProperty('_countryIso', $countryIso, 'string');
+    }
+    
+    /**
+     * @return string Country ISO 3166-2 (2 letter Uppercase)
+     */
+    public function getCountryIso()
+    {
+        return $this->_countryIso;
+    }
 
-	/**
-	 * @param  string $mobile Mobile phone number
-	 * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setMobile($mobile)
-	{
-		if (!is_string($mobile))
-			throw new InvalidArgumentException('string expected.');
-		$this->_mobile = $mobile;
-		return $this;
-	}
-	
-	/**
-	 * @return string Mobile phone number
-	 */
-	public function getMobile()
-	{
-		return $this->_mobile;
-	}
+    /**
+     * @param  string $phone Phone number
+     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setPhone($phone)
+    {
+        return $this->setProperty('_phone', $phone, 'string');
+    }
+    
+    /**
+     * @return string Phone number
+     */
+    public function getPhone()
+    {
+        return $this->_phone;
+    }
 
-	/**
-	 * @param  string $eMail E-Mail address
-	 * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setEMail($eMail)
-	{
-		if (!is_string($eMail))
-			throw new InvalidArgumentException('string expected.');
-		$this->_eMail = $eMail;
-		return $this;
-	}
-	
-	/**
-	 * @return string E-Mail address
-	 */
-	public function getEMail()
-	{
-		return $this->_eMail;
-	}
+    /**
+     * @param  string $deliveryInstruction Delivery instruction e.g. "c/o John Doe"
+     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setDeliveryInstruction($deliveryInstruction)
+    {
+        return $this->setProperty('_deliveryInstruction', $deliveryInstruction, 'string');
+    }
+    
+    /**
+     * @return string Delivery instruction e.g. "c/o John Doe"
+     */
+    public function getDeliveryInstruction()
+    {
+        return $this->_deliveryInstruction;
+    }
 
-	/**
-	 * @param  string $fax Fax number
-	 * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setFax($fax)
-	{
-		if (!is_string($fax))
-			throw new InvalidArgumentException('string expected.');
-		$this->_fax = $fax;
-		return $this;
-	}
-	
-	/**
-	 * @return string Fax number
-	 */
-	public function getFax()
-	{
-		return $this->_fax;
-	}
+    /**
+     * @param  string $extraAddressLine Extra address line e.g. "Apartment 2.5"
+     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setExtraAddressLine($extraAddressLine)
+    {
+        return $this->setProperty('_extraAddressLine', $extraAddressLine, 'string');
+    }
+    
+    /**
+     * @return string Extra address line e.g. "Apartment 2.5"
+     */
+    public function getExtraAddressLine()
+    {
+        return $this->_extraAddressLine;
+    }
 
-	/**
-	 * @param  string $state State
-	 * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setState($state)
-	{
-		if (!is_string($state))
-			throw new InvalidArgumentException('string expected.');
-		$this->_state = $state;
-		return $this;
-	}
-	
-	/**
-	 * @return string State
-	 */
-	public function getState()
-	{
-		return $this->_state;
-	}
+    /**
+     * @param  string $mobile Mobile phone number
+     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setMobile($mobile)
+    {
+        return $this->setProperty('_mobile', $mobile, 'string');
+    }
+    
+    /**
+     * @return string Mobile phone number
+     */
+    public function getMobile()
+    {
+        return $this->_mobile;
+    }
 
-	/**
-	 * @param  Identity $id Unique customerOrderBillingAddress id
-	 * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setId(Identity $id)
-	{
-		
-		$this->_id = $id;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity Unique customerOrderBillingAddress id
-	 */
-	public function getId()
-	{
-		return $this->_id;
-	}
+    /**
+     * @param  string $eMail E-Mail address
+     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setEMail($eMail)
+    {
+        return $this->setProperty('_eMail', $eMail, 'string');
+    }
+    
+    /**
+     * @return string E-Mail address
+     */
+    public function getEMail()
+    {
+        return $this->_eMail;
+    }
 
-	/**
-	 * @param  Identity $customerId Reference to customer
-	 * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setCustomerId(Identity $customerId)
-	{
-		
-		$this->_customerId = $customerId;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity Reference to customer
-	 */
-	public function getCustomerId()
-	{
-		return $this->_customerId;
-	}
+    /**
+     * @param  string $fax Fax number
+     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setFax($fax)
+    {
+        return $this->setProperty('_fax', $fax, 'string');
+    }
+    
+    /**
+     * @return string Fax number
+     */
+    public function getFax()
+    {
+        return $this->_fax;
+    }
 
-	/**
-	 * @param  string $salutation Salutation (german: "Anrede")
-	 * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setSalutation($salutation)
-	{
-		if (!is_string($salutation))
-			throw new InvalidArgumentException('string expected.');
-		$this->_salutation = $salutation;
-		return $this;
-	}
-	
-	/**
-	 * @return string Salutation (german: "Anrede")
-	 */
-	public function getSalutation()
-	{
-		return $this->_salutation;
-	}
+    /**
+     * @param  string $state State
+     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setState($state)
+    {
+        return $this->setProperty('_state', $state, 'string');
+    }
+    
+    /**
+     * @return string State
+     */
+    public function getState()
+    {
+        return $this->_state;
+    }
 
-	/**
-	 * @param  \jtl\Connector\Model\CustomerOrder $customerOrder
-	 * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-	 */
-	public function addCustomerOrder(\jtl\Connector\Model\CustomerOrder $customerOrder)
-	{
-		$this->_customerOrder[] = $customerOrder;
-		return $this;
-	}
-	
-	/**
-	 * @return CustomerOrder
-	 */
-	public function getCustomerOrder()
-	{
-		return $this->_customerOrder;
-	}
+    /**
+     * @param  Identity $id Unique customerOrderBillingAddress id
+     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setId(Identity $id)
+    {
+        return $this->setProperty('_id', $id, 'Identity');
+    }
+    
+    /**
+     * @return Identity Unique customerOrderBillingAddress id
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
 
-	/**
-	 * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-	 */
-	public function clearCustomerOrder()
-	{
-		$this->_customerOrder = array();
-		return $this;
-	}
+    /**
+     * @param  Identity $customerId Reference to customer
+     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerId(Identity $customerId)
+    {
+        return $this->setProperty('_customerId', $customerId, 'Identity');
+    }
+    
+    /**
+     * @return Identity Reference to customer
+     */
+    public function getCustomerId()
+    {
+        return $this->_customerId;
+    }
+
+    /**
+     * @param  string $salutation Salutation (german: "Anrede")
+     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setSalutation($salutation)
+    {
+        return $this->setProperty('_salutation', $salutation, 'string');
+    }
+    
+    /**
+     * @return string Salutation (german: "Anrede")
+     */
+    public function getSalutation()
+    {
+        return $this->_salutation;
+    }
 }
 

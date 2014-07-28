@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
+ * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -19,189 +19,227 @@ class SpecificValueImage extends DataModel
     /**
      * @type Identity 
      */
-    protected $_foreignKey = null;
+    public $_foreignKey = null;
 
     /**
      * @type Identity 
      */
-    protected $_id = null;
+    public $_id = null;
 
     /**
      * @type integer|null 
      */
-    protected $_connectorId = 0;
+    public $_connectorId = 0;
 
     /**
      * @type Byte[] 
      */
-    protected $_data = null;
+    public $_data = null;
 
     /**
      * @type boolean 
      */
-    protected $_flagUpdate = false;
+    public $_flagUpdate = false;
 
     /**
      * @type integer|null 
      */
-    protected $_size = 0;
+    public $_size = 0;
 
     /**
      * @type integer|null 
      */
-    protected $_sort = 0;
+    public $_sort = 0;
 
 
-	/**
-	 * @type array
-	 */
-	protected $_identities = array(
-		'_id',
-		'_foreignKey',
-	);
+    /**
+     * @type array list of identities
+     */
+    public $_identities = array(
+        '_id',
+        '_foreignKey',
+    );
 
-	/**
-	 * @param  integer $connectorId 
-	 * @return \jtl\Connector\Model\SpecificValueImage
-	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-	 */
-	public function setConnectorId($connectorId)
-	{
-		if (!is_integer($connectorId))
-			throw new InvalidArgumentException('integer expected.');
-		$this->_connectorId = $connectorId;
-		return $this;
-	}
-	
-	/**
-	 * @return integer 
-	 */
-	public function getConnectorId()
-	{
-		return $this->_connectorId;
-	}
+    /**
+     * @type array list of navigations
+     */
+    public $_navigations = array(
+    );
 
-	/**
-	 * @param  Byte[] $data 
-	 * @return \jtl\Connector\Model\SpecificValueImage
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Byte[]'.
-	 */
-	public function setData(Byte[] $data)
-	{
-		
-		$this->_data = $data;
-		return $this;
-	}
-	
-	/**
-	 * @return Byte[] 
-	 */
-	public function getData()
-	{
-		return $this->_data;
-	}
+    /**
+     * @return array 
+     */
+    public function getIdentities()
+    {
+        return $this->_identities;
+    }
 
-	/**
-	 * @param  integer $size 
-	 * @return \jtl\Connector\Model\SpecificValueImage
-	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-	 */
-	public function setSize($size)
-	{
-		if (!is_integer($size))
-			throw new InvalidArgumentException('integer expected.');
-		$this->_size = $size;
-		return $this;
-	}
-	
-	/**
-	 * @return integer 
-	 */
-	public function getSize()
-	{
-		return $this->_size;
-	}
+    /**
+     * @return array 
+     */
+    public function getNavigations()
+    {
+        return $this->_navigations;
+    }
 
-	/**
-	 * @param  integer $sort 
-	 * @return \jtl\Connector\Model\SpecificValueImage
-	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-	 */
-	public function setSort($sort)
-	{
-		if (!is_integer($sort))
-			throw new InvalidArgumentException('integer expected.');
-		$this->_sort = $sort;
-		return $this;
-	}
-	
-	/**
-	 * @return integer 
-	 */
-	public function getSort()
-	{
-		return $this->_sort;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function setProperty($name, $value, $type)
+    {
+        if (!$this->validateType($value, $type)) {
+            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
+        }
+        $this->{$name} = $value;
+        return $this;
+    }
 
-	/**
-	 * @param  Identity $id 
-	 * @return \jtl\Connector\Model\SpecificValueImage
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setId(Identity $id)
-	{
-		
-		$this->_id = $id;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity 
-	 */
-	public function getId()
-	{
-		return $this->_id;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function validateType($value, $type)
+    {
+        switch ($type)
+        {
+            case 'boolean':
+                return is_bool($value);
+            case 'integer':
+                return is_integer($value);
+            case 'float':
+                return is_float($value);
+            case 'string':
+                return is_string($value);
+            case 'array':
+                return is_array($value);
+            default:
+                throw new InvalidArgumentException('type validator not found');
+        }
+    }
 
-	/**
-	 * @param  Identity $foreignKey 
-	 * @return \jtl\Connector\Model\SpecificValueImage
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setForeignKey(Identity $foreignKey)
-	{
-		
-		$this->_foreignKey = $foreignKey;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity 
-	 */
-	public function getForeignKey()
-	{
-		return $this->_foreignKey;
-	}
+    /**
+     * @param  integer $connectorId 
+     * @return \jtl\Connector\Model\SpecificValueImage
+     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     */
+    public function setConnectorId($connectorId)
+    {
+        return $this->setProperty('_connectorId', $connectorId, 'integer');
+    }
+    
+    /**
+     * @return integer 
+     */
+    public function getConnectorId()
+    {
+        return $this->_connectorId;
+    }
 
-	/**
-	 * @param  boolean $flagUpdate 
-	 * @return \jtl\Connector\Model\SpecificValueImage
-	 * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
-	 */
-	public function setFlagUpdate($flagUpdate)
-	{
-		if (!is_bool($flagUpdate))
-			throw new InvalidArgumentException('boolean expected.');
-		$this->_flagUpdate = $flagUpdate;
-		return $this;
-	}
-	
-	/**
-	 * @return boolean 
-	 */
-	public function getFlagUpdate()
-	{
-		return $this->_flagUpdate;
-	}
+    /**
+     * @param  Byte[] $data 
+     * @return \jtl\Connector\Model\SpecificValueImage
+     * @throws InvalidArgumentException if the provided argument is not of type 'Byte[]'.
+     */
+    public function setData(Byte[] $data)
+    {
+        return $this->setProperty('_data', $data, 'Byte[]');
+    }
+    
+    /**
+     * @return Byte[] 
+     */
+    public function getData()
+    {
+        return $this->_data;
+    }
+
+    /**
+     * @param  integer $size 
+     * @return \jtl\Connector\Model\SpecificValueImage
+     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     */
+    public function setSize($size)
+    {
+        return $this->setProperty('_size', $size, 'integer');
+    }
+    
+    /**
+     * @return integer 
+     */
+    public function getSize()
+    {
+        return $this->_size;
+    }
+
+    /**
+     * @param  integer $sort 
+     * @return \jtl\Connector\Model\SpecificValueImage
+     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     */
+    public function setSort($sort)
+    {
+        return $this->setProperty('_sort', $sort, 'integer');
+    }
+    
+    /**
+     * @return integer 
+     */
+    public function getSort()
+    {
+        return $this->_sort;
+    }
+
+    /**
+     * @param  Identity $id 
+     * @return \jtl\Connector\Model\SpecificValueImage
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setId(Identity $id)
+    {
+        return $this->setProperty('_id', $id, 'Identity');
+    }
+    
+    /**
+     * @return Identity 
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+
+    /**
+     * @param  Identity $foreignKey 
+     * @return \jtl\Connector\Model\SpecificValueImage
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setForeignKey(Identity $foreignKey)
+    {
+        return $this->setProperty('_foreignKey', $foreignKey, 'Identity');
+    }
+    
+    /**
+     * @return Identity 
+     */
+    public function getForeignKey()
+    {
+        return $this->_foreignKey;
+    }
+
+    /**
+     * @param  boolean $flagUpdate 
+     * @return \jtl\Connector\Model\SpecificValueImage
+     * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
+     */
+    public function setFlagUpdate($flagUpdate)
+    {
+        return $this->setProperty('_flagUpdate', $flagUpdate, 'boolean');
+    }
+    
+    /**
+     * @return boolean 
+     */
+    public function getFlagUpdate()
+    {
+        return $this->_flagUpdate;
+    }
 }
 

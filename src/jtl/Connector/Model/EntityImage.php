@@ -19,38 +19,38 @@ class EntityImage extends DataModel
     /**
      * @type string 
      */
-    protected $_filename = '';
+    public $_filename = '';
 
     /**
      * @type Identity 
      */
-    protected $_foreignKey = null;
+    public $_foreignKey = null;
 
     /**
      * @type Identity 
      */
-    protected $_id = null;
+    public $_id = null;
 
     /**
      * @type Identity 
      */
-    protected $_masterImageId = null;
+    public $_masterImageId = null;
 
     /**
      * @type integer 
      */
-    protected $_relationType = 0;
+    public $_relationType = 0;
 
     /**
      * @type integer 
      */
-    protected $_sort = 0;
+    public $_sort = 0;
 
 
 	/**
 	 * @type array
 	 */
-	protected $_identities = array(
+	public $_identities = array(
 	);
 
 	/**
@@ -121,7 +121,7 @@ class EntityImage extends DataModel
 	public function setRelationType($relationType)
 	{
 		if (!is_integer($relationType))
-			throw new InvalidArgumentException('integer expected.');
+			throw new InvalidArgumentException('expected type integer, given value JTL.Connector.Attributes.ModelPropertyAttribute.');
 		$this->_relationType = $relationType;
 		return $this;
 	}
@@ -142,7 +142,7 @@ class EntityImage extends DataModel
 	public function setFilename($filename)
 	{
 		if (!is_string($filename))
-			throw new InvalidArgumentException('string expected.');
+			throw new InvalidArgumentException('expected type string, given value JTL.Connector.Attributes.ModelPropertyAttribute.');
 		$this->_filename = $filename;
 		return $this;
 	}
@@ -163,7 +163,7 @@ class EntityImage extends DataModel
 	public function setSort($sort)
 	{
 		if (!is_integer($sort))
-			throw new InvalidArgumentException('integer expected.');
+			throw new InvalidArgumentException('expected type integer, given value JTL.Connector.Attributes.ModelPropertyAttribute.');
 		$this->_sort = $sort;
 		return $this;
 	}

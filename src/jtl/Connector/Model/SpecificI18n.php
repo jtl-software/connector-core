@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
+ * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -19,120 +19,134 @@ class SpecificI18n extends DataModel
     /**
      * @type Identity Reference to specific
      */
-    protected $_specificId = null;
+    public $_specificId = null;
 
     /**
      * @type string Locale
      */
-    protected $_localeName = '';
+    public $_localeName = '';
 
     /**
      * @type string Localized name
      */
-    protected $_name = '';
+    public $_name = '';
+
 
     /**
-	 * Nav [SpecificI18n » Many]
-	 *
-     * @type \jtl\Connector\Model\Specific[]
+     * @type array list of identities
      */
-    protected $_specific = array();
+    public $_identities = array(
+        '_specificId',
+    );
 
+    /**
+     * @type array list of navigations
+     */
+    public $_navigations = array(
+    );
 
-	/**
-	 * @type array
-	 */
-	protected $_identities = array(
-		'_specificId',
-	);
+    /**
+     * @return array 
+     */
+    public function getIdentities()
+    {
+        return $this->_identities;
+    }
 
-	/**
-	 * @param  string $name Localized name
-	 * @return \jtl\Connector\Model\SpecificI18n
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setName($name)
-	{
-		if (!is_string($name))
-			throw new InvalidArgumentException('string expected.');
-		$this->_name = $name;
-		return $this;
-	}
-	
-	/**
-	 * @return string Localized name
-	 */
-	public function getName()
-	{
-		return $this->_name;
-	}
+    /**
+     * @return array 
+     */
+    public function getNavigations()
+    {
+        return $this->_navigations;
+    }
 
-	/**
-	 * @param  Identity $specificId Reference to specific
-	 * @return \jtl\Connector\Model\SpecificI18n
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setSpecificId(Identity $specificId)
-	{
-		
-		$this->_specificId = $specificId;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity Reference to specific
-	 */
-	public function getSpecificId()
-	{
-		return $this->_specificId;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function setProperty($name, $value, $type)
+    {
+        if (!$this->validateType($value, $type)) {
+            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
+        }
+        $this->{$name} = $value;
+        return $this;
+    }
 
-	/**
-	 * @param  string $localeName Locale
-	 * @return \jtl\Connector\Model\SpecificI18n
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setLocaleName($localeName)
-	{
-		if (!is_string($localeName))
-			throw new InvalidArgumentException('string expected.');
-		$this->_localeName = $localeName;
-		return $this;
-	}
-	
-	/**
-	 * @return string Locale
-	 */
-	public function getLocaleName()
-	{
-		return $this->_localeName;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function validateType($value, $type)
+    {
+        switch ($type)
+        {
+            case 'boolean':
+                return is_bool($value);
+            case 'integer':
+                return is_integer($value);
+            case 'float':
+                return is_float($value);
+            case 'string':
+                return is_string($value);
+            case 'array':
+                return is_array($value);
+            default:
+                throw new InvalidArgumentException('type validator not found');
+        }
+    }
 
-	/**
-	 * @param  \jtl\Connector\Model\Specific $specific
-	 * @return \jtl\Connector\Model\SpecificI18n
-	 */
-	public function addSpecific(\jtl\Connector\Model\Specific $specific)
-	{
-		$this->_specific[] = $specific;
-		return $this;
-	}
-	
-	/**
-	 * @return Specific
-	 */
-	public function getSpecific()
-	{
-		return $this->_specific;
-	}
+    /**
+     * @param  string $name Localized name
+     * @return \jtl\Connector\Model\SpecificI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setName($name)
+    {
+        return $this->setProperty('_name', $name, 'string');
+    }
+    
+    /**
+     * @return string Localized name
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
 
-	/**
-	 * @return \jtl\Connector\Model\SpecificI18n
-	 */
-	public function clearSpecific()
-	{
-		$this->_specific = array();
-		return $this;
-	}
+    /**
+     * @param  Identity $specificId Reference to specific
+     * @return \jtl\Connector\Model\SpecificI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setSpecificId(Identity $specificId)
+    {
+        return $this->setProperty('_specificId', $specificId, 'Identity');
+    }
+    
+    /**
+     * @return Identity Reference to specific
+     */
+    public function getSpecificId()
+    {
+        return $this->_specificId;
+    }
+
+    /**
+     * @param  string $localeName Locale
+     * @return \jtl\Connector\Model\SpecificI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setLocaleName($localeName)
+    {
+        return $this->setProperty('_localeName', $localeName, 'string');
+    }
+    
+    /**
+     * @return string Locale
+     */
+    public function getLocaleName()
+    {
+        return $this->_localeName;
+    }
 }
 

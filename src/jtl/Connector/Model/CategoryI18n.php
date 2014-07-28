@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
+ * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -19,172 +19,180 @@ class CategoryI18n extends DataModel
     /**
      * @type Identity Reference to category
      */
-    protected $_categoryId = null;
+    public $_categoryId = null;
 
     /**
      * @type string Optional localized Long Description
      */
-    protected $_description = '';
+    public $_description = '';
 
     /**
      * @type string Locale
      */
-    protected $_localeName = '';
+    public $_localeName = '';
 
     /**
      * @type string Localized category name
      */
-    protected $_name = '';
+    public $_name = '';
 
     /**
      * @type string 
      */
-    protected $_url = '';
+    public $_url = '';
+
 
     /**
-	 * Nav [CategoryI18n » Many]
-	 *
-     * @type \jtl\Connector\Model\Category[]
+     * @type array list of identities
      */
-    protected $_category = array();
+    public $_identities = array(
+        '_categoryId',
+    );
 
+    /**
+     * @type array list of navigations
+     */
+    public $_navigations = array(
+    );
 
-	/**
-	 * @type array
-	 */
-	protected $_identities = array(
-		'_categoryId',
-	);
+    /**
+     * @return array 
+     */
+    public function getIdentities()
+    {
+        return $this->_identities;
+    }
 
-	/**
-	 * @param  string $name Localized category name
-	 * @return \jtl\Connector\Model\CategoryI18n
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setName($name)
-	{
-		if (!is_string($name))
-			throw new InvalidArgumentException('string expected.');
-		$this->_name = $name;
-		return $this;
-	}
-	
-	/**
-	 * @return string Localized category name
-	 */
-	public function getName()
-	{
-		return $this->_name;
-	}
+    /**
+     * @return array 
+     */
+    public function getNavigations()
+    {
+        return $this->_navigations;
+    }
 
-	/**
-	 * @param  string $description Optional localized Long Description
-	 * @return \jtl\Connector\Model\CategoryI18n
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setDescription($description)
-	{
-		if (!is_string($description))
-			throw new InvalidArgumentException('string expected.');
-		$this->_description = $description;
-		return $this;
-	}
-	
-	/**
-	 * @return string Optional localized Long Description
-	 */
-	public function getDescription()
-	{
-		return $this->_description;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function setProperty($name, $value, $type)
+    {
+        if (!$this->validateType($value, $type)) {
+            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
+        }
+        $this->{$name} = $value;
+        return $this;
+    }
 
-	/**
-	 * @param  string $url 
-	 * @return \jtl\Connector\Model\CategoryI18n
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setUrl($url)
-	{
-		if (!is_string($url))
-			throw new InvalidArgumentException('string expected.');
-		$this->_url = $url;
-		return $this;
-	}
-	
-	/**
-	 * @return string 
-	 */
-	public function getUrl()
-	{
-		return $this->_url;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function validateType($value, $type)
+    {
+        switch ($type)
+        {
+            case 'boolean':
+                return is_bool($value);
+            case 'integer':
+                return is_integer($value);
+            case 'float':
+                return is_float($value);
+            case 'string':
+                return is_string($value);
+            case 'array':
+                return is_array($value);
+            default:
+                throw new InvalidArgumentException('type validator not found');
+        }
+    }
 
-	/**
-	 * @param  Identity $categoryId Reference to category
-	 * @return \jtl\Connector\Model\CategoryI18n
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setCategoryId(Identity $categoryId)
-	{
-		
-		$this->_categoryId = $categoryId;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity Reference to category
-	 */
-	public function getCategoryId()
-	{
-		return $this->_categoryId;
-	}
+    /**
+     * @param  string $name Localized category name
+     * @return \jtl\Connector\Model\CategoryI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setName($name)
+    {
+        return $this->setProperty('_name', $name, 'string');
+    }
+    
+    /**
+     * @return string Localized category name
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
 
-	/**
-	 * @param  string $localeName Locale
-	 * @return \jtl\Connector\Model\CategoryI18n
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setLocaleName($localeName)
-	{
-		if (!is_string($localeName))
-			throw new InvalidArgumentException('string expected.');
-		$this->_localeName = $localeName;
-		return $this;
-	}
-	
-	/**
-	 * @return string Locale
-	 */
-	public function getLocaleName()
-	{
-		return $this->_localeName;
-	}
+    /**
+     * @param  string $description Optional localized Long Description
+     * @return \jtl\Connector\Model\CategoryI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setDescription($description)
+    {
+        return $this->setProperty('_description', $description, 'string');
+    }
+    
+    /**
+     * @return string Optional localized Long Description
+     */
+    public function getDescription()
+    {
+        return $this->_description;
+    }
 
-	/**
-	 * @param  \jtl\Connector\Model\Category $category
-	 * @return \jtl\Connector\Model\CategoryI18n
-	 */
-	public function addCategory(\jtl\Connector\Model\Category $category)
-	{
-		$this->_category[] = $category;
-		return $this;
-	}
-	
-	/**
-	 * @return Category
-	 */
-	public function getCategory()
-	{
-		return $this->_category;
-	}
+    /**
+     * @param  string $url 
+     * @return \jtl\Connector\Model\CategoryI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setUrl($url)
+    {
+        return $this->setProperty('_url', $url, 'string');
+    }
+    
+    /**
+     * @return string 
+     */
+    public function getUrl()
+    {
+        return $this->_url;
+    }
 
-	/**
-	 * @return \jtl\Connector\Model\CategoryI18n
-	 */
-	public function clearCategory()
-	{
-		$this->_category = array();
-		return $this;
-	}
+    /**
+     * @param  Identity $categoryId Reference to category
+     * @return \jtl\Connector\Model\CategoryI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCategoryId(Identity $categoryId)
+    {
+        return $this->setProperty('_categoryId', $categoryId, 'Identity');
+    }
+    
+    /**
+     * @return Identity Reference to category
+     */
+    public function getCategoryId()
+    {
+        return $this->_categoryId;
+    }
+
+    /**
+     * @param  string $localeName Locale
+     * @return \jtl\Connector\Model\CategoryI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setLocaleName($localeName)
+    {
+        return $this->setProperty('_localeName', $localeName, 'string');
+    }
+    
+    /**
+     * @return string Locale
+     */
+    public function getLocaleName()
+    {
+        return $this->_localeName;
+    }
 }
 

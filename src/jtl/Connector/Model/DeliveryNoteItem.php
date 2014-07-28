@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
+ * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -19,146 +19,158 @@ class DeliveryNoteItem extends DataModel
     /**
      * @type Identity Reference to customerOrderItem
      */
-    protected $_customerOrderItemId = null;
+    public $_customerOrderItemId = null;
 
     /**
      * @type Identity Reference to deliveryNote
      */
-    protected $_deliveryNoteId = null;
+    public $_deliveryNoteId = null;
 
     /**
      * @type string 
      */
-    protected $_cHinweis = '';
+    public $_cHinweis = '';
 
     /**
      * @type float|null Quantity delivered
      */
-    protected $_quantity = 0.0;
+    public $_quantity = 0.0;
+
 
     /**
-	 * Nav [DeliveryNoteItem » Many]
-	 *
-     * @type \jtl\Connector\Model\DeliveryNote[]
+     * @type array list of identities
      */
-    protected $_deliveryNote = array();
+    public $_identities = array(
+        '_deliveryNoteId',
+        '_customerOrderItemId',
+    );
 
+    /**
+     * @type array list of navigations
+     */
+    public $_navigations = array(
+    );
 
-	/**
-	 * @type array
-	 */
-	protected $_identities = array(
-		'_deliveryNoteId',
-		'_customerOrderItemId',
-	);
+    /**
+     * @return array 
+     */
+    public function getIdentities()
+    {
+        return $this->_identities;
+    }
 
-	/**
-	 * @param  float $quantity Quantity delivered
-	 * @return \jtl\Connector\Model\DeliveryNoteItem
-	 * @throws InvalidArgumentException if the provided argument is not of type 'float'.
-	 */
-	public function setQuantity($quantity)
-	{
-		if (!is_float($quantity))
-			throw new InvalidArgumentException('float expected.');
-		$this->_quantity = $quantity;
-		return $this;
-	}
-	
-	/**
-	 * @return float Quantity delivered
-	 */
-	public function getQuantity()
-	{
-		return $this->_quantity;
-	}
+    /**
+     * @return array 
+     */
+    public function getNavigations()
+    {
+        return $this->_navigations;
+    }
 
-	/**
-	 * @param  string $cHinweis 
-	 * @return \jtl\Connector\Model\DeliveryNoteItem
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setCHinweis($cHinweis)
-	{
-		if (!is_string($cHinweis))
-			throw new InvalidArgumentException('string expected.');
-		$this->_cHinweis = $cHinweis;
-		return $this;
-	}
-	
-	/**
-	 * @return string 
-	 */
-	public function getCHinweis()
-	{
-		return $this->_cHinweis;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function setProperty($name, $value, $type)
+    {
+        if (!$this->validateType($value, $type)) {
+            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
+        }
+        $this->{$name} = $value;
+        return $this;
+    }
 
-	/**
-	 * @param  Identity $deliveryNoteId Reference to deliveryNote
-	 * @return \jtl\Connector\Model\DeliveryNoteItem
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setDeliveryNoteId(Identity $deliveryNoteId)
-	{
-		
-		$this->_deliveryNoteId = $deliveryNoteId;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity Reference to deliveryNote
-	 */
-	public function getDeliveryNoteId()
-	{
-		return $this->_deliveryNoteId;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function validateType($value, $type)
+    {
+        switch ($type)
+        {
+            case 'boolean':
+                return is_bool($value);
+            case 'integer':
+                return is_integer($value);
+            case 'float':
+                return is_float($value);
+            case 'string':
+                return is_string($value);
+            case 'array':
+                return is_array($value);
+            default:
+                throw new InvalidArgumentException('type validator not found');
+        }
+    }
 
-	/**
-	 * @param  Identity $customerOrderItemId Reference to customerOrderItem
-	 * @return \jtl\Connector\Model\DeliveryNoteItem
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setCustomerOrderItemId(Identity $customerOrderItemId)
-	{
-		
-		$this->_customerOrderItemId = $customerOrderItemId;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity Reference to customerOrderItem
-	 */
-	public function getCustomerOrderItemId()
-	{
-		return $this->_customerOrderItemId;
-	}
+    /**
+     * @param  float $quantity Quantity delivered
+     * @return \jtl\Connector\Model\DeliveryNoteItem
+     * @throws InvalidArgumentException if the provided argument is not of type 'float'.
+     */
+    public function setQuantity($quantity)
+    {
+        return $this->setProperty('_quantity', $quantity, 'float');
+    }
+    
+    /**
+     * @return float Quantity delivered
+     */
+    public function getQuantity()
+    {
+        return $this->_quantity;
+    }
 
-	/**
-	 * @param  \jtl\Connector\Model\DeliveryNote $deliveryNote
-	 * @return \jtl\Connector\Model\DeliveryNoteItem
-	 */
-	public function addDeliveryNote(\jtl\Connector\Model\DeliveryNote $deliveryNote)
-	{
-		$this->_deliveryNote[] = $deliveryNote;
-		return $this;
-	}
-	
-	/**
-	 * @return DeliveryNote
-	 */
-	public function getDeliveryNote()
-	{
-		return $this->_deliveryNote;
-	}
+    /**
+     * @param  string $cHinweis 
+     * @return \jtl\Connector\Model\DeliveryNoteItem
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setCHinweis($cHinweis)
+    {
+        return $this->setProperty('_cHinweis', $cHinweis, 'string');
+    }
+    
+    /**
+     * @return string 
+     */
+    public function getCHinweis()
+    {
+        return $this->_cHinweis;
+    }
 
-	/**
-	 * @return \jtl\Connector\Model\DeliveryNoteItem
-	 */
-	public function clearDeliveryNote()
-	{
-		$this->_deliveryNote = array();
-		return $this;
-	}
+    /**
+     * @param  Identity $deliveryNoteId Reference to deliveryNote
+     * @return \jtl\Connector\Model\DeliveryNoteItem
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setDeliveryNoteId(Identity $deliveryNoteId)
+    {
+        return $this->setProperty('_deliveryNoteId', $deliveryNoteId, 'Identity');
+    }
+    
+    /**
+     * @return Identity Reference to deliveryNote
+     */
+    public function getDeliveryNoteId()
+    {
+        return $this->_deliveryNoteId;
+    }
+
+    /**
+     * @param  Identity $customerOrderItemId Reference to customerOrderItem
+     * @return \jtl\Connector\Model\DeliveryNoteItem
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerOrderItemId(Identity $customerOrderItemId)
+    {
+        return $this->setProperty('_customerOrderItemId', $customerOrderItemId, 'Identity');
+    }
+    
+    /**
+     * @return Identity Reference to customerOrderItem
+     */
+    public function getCustomerOrderItemId()
+    {
+        return $this->_customerOrderItemId;
+    }
 }
 

@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
+ * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -19,198 +19,203 @@ class ManufacturerI18n extends DataModel
     /**
      * @type Identity Reference to manufacturer
      */
-    protected $_manufacturerId = null;
+    public $_manufacturerId = null;
 
     /**
      * @type string Optional manufacturer description (HTML)
      */
-    protected $_description = '';
+    public $_description = '';
 
     /**
      * @type string Locale
      */
-    protected $_localeName = '';
+    public $_localeName = '';
 
     /**
      * @type string Optional meta description tag value
      */
-    protected $_metaDescription = '';
+    public $_metaDescription = '';
 
     /**
      * @type string Optional meta keywords tag value
      */
-    protected $_metaKeywords = '';
+    public $_metaKeywords = '';
 
     /**
      * @type string 
      */
-    protected $_metaTitle = '';
+    public $_metaTitle = '';
+
 
     /**
-	 * Nav [ManufacturerI18n » Many]
-	 *
-     * @type \jtl\Connector\Model\Manufacturer[]
+     * @type array list of identities
      */
-    protected $_manufacturer = array();
+    public $_identities = array(
+        '_manufacturerId',
+    );
 
+    /**
+     * @type array list of navigations
+     */
+    public $_navigations = array(
+    );
 
-	/**
-	 * @type array
-	 */
-	protected $_identities = array(
-		'_manufacturerId',
-	);
+    /**
+     * @return array 
+     */
+    public function getIdentities()
+    {
+        return $this->_identities;
+    }
 
-	/**
-	 * @param  string $metaTitle 
-	 * @return \jtl\Connector\Model\ManufacturerI18n
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setMetaTitle($metaTitle)
-	{
-		if (!is_string($metaTitle))
-			throw new InvalidArgumentException('string expected.');
-		$this->_metaTitle = $metaTitle;
-		return $this;
-	}
-	
-	/**
-	 * @return string 
-	 */
-	public function getMetaTitle()
-	{
-		return $this->_metaTitle;
-	}
+    /**
+     * @return array 
+     */
+    public function getNavigations()
+    {
+        return $this->_navigations;
+    }
 
-	/**
-	 * @param  string $metaKeywords Optional meta keywords tag value
-	 * @return \jtl\Connector\Model\ManufacturerI18n
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setMetaKeywords($metaKeywords)
-	{
-		if (!is_string($metaKeywords))
-			throw new InvalidArgumentException('string expected.');
-		$this->_metaKeywords = $metaKeywords;
-		return $this;
-	}
-	
-	/**
-	 * @return string Optional meta keywords tag value
-	 */
-	public function getMetaKeywords()
-	{
-		return $this->_metaKeywords;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function setProperty($name, $value, $type)
+    {
+        if (!$this->validateType($value, $type)) {
+            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
+        }
+        $this->{$name} = $value;
+        return $this;
+    }
 
-	/**
-	 * @param  string $metaDescription Optional meta description tag value
-	 * @return \jtl\Connector\Model\ManufacturerI18n
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setMetaDescription($metaDescription)
-	{
-		if (!is_string($metaDescription))
-			throw new InvalidArgumentException('string expected.');
-		$this->_metaDescription = $metaDescription;
-		return $this;
-	}
-	
-	/**
-	 * @return string Optional meta description tag value
-	 */
-	public function getMetaDescription()
-	{
-		return $this->_metaDescription;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function validateType($value, $type)
+    {
+        switch ($type)
+        {
+            case 'boolean':
+                return is_bool($value);
+            case 'integer':
+                return is_integer($value);
+            case 'float':
+                return is_float($value);
+            case 'string':
+                return is_string($value);
+            case 'array':
+                return is_array($value);
+            default:
+                throw new InvalidArgumentException('type validator not found');
+        }
+    }
 
-	/**
-	 * @param  string $description Optional manufacturer description (HTML)
-	 * @return \jtl\Connector\Model\ManufacturerI18n
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setDescription($description)
-	{
-		if (!is_string($description))
-			throw new InvalidArgumentException('string expected.');
-		$this->_description = $description;
-		return $this;
-	}
-	
-	/**
-	 * @return string Optional manufacturer description (HTML)
-	 */
-	public function getDescription()
-	{
-		return $this->_description;
-	}
+    /**
+     * @param  string $metaTitle 
+     * @return \jtl\Connector\Model\ManufacturerI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setMetaTitle($metaTitle)
+    {
+        return $this->setProperty('_metaTitle', $metaTitle, 'string');
+    }
+    
+    /**
+     * @return string 
+     */
+    public function getMetaTitle()
+    {
+        return $this->_metaTitle;
+    }
 
-	/**
-	 * @param  Identity $manufacturerId Reference to manufacturer
-	 * @return \jtl\Connector\Model\ManufacturerI18n
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setManufacturerId(Identity $manufacturerId)
-	{
-		
-		$this->_manufacturerId = $manufacturerId;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity Reference to manufacturer
-	 */
-	public function getManufacturerId()
-	{
-		return $this->_manufacturerId;
-	}
+    /**
+     * @param  string $metaKeywords Optional meta keywords tag value
+     * @return \jtl\Connector\Model\ManufacturerI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setMetaKeywords($metaKeywords)
+    {
+        return $this->setProperty('_metaKeywords', $metaKeywords, 'string');
+    }
+    
+    /**
+     * @return string Optional meta keywords tag value
+     */
+    public function getMetaKeywords()
+    {
+        return $this->_metaKeywords;
+    }
 
-	/**
-	 * @param  string $localeName Locale
-	 * @return \jtl\Connector\Model\ManufacturerI18n
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setLocaleName($localeName)
-	{
-		if (!is_string($localeName))
-			throw new InvalidArgumentException('string expected.');
-		$this->_localeName = $localeName;
-		return $this;
-	}
-	
-	/**
-	 * @return string Locale
-	 */
-	public function getLocaleName()
-	{
-		return $this->_localeName;
-	}
+    /**
+     * @param  string $metaDescription Optional meta description tag value
+     * @return \jtl\Connector\Model\ManufacturerI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setMetaDescription($metaDescription)
+    {
+        return $this->setProperty('_metaDescription', $metaDescription, 'string');
+    }
+    
+    /**
+     * @return string Optional meta description tag value
+     */
+    public function getMetaDescription()
+    {
+        return $this->_metaDescription;
+    }
 
-	/**
-	 * @param  \jtl\Connector\Model\Manufacturer $manufacturer
-	 * @return \jtl\Connector\Model\ManufacturerI18n
-	 */
-	public function addManufacturer(\jtl\Connector\Model\Manufacturer $manufacturer)
-	{
-		$this->_manufacturer[] = $manufacturer;
-		return $this;
-	}
-	
-	/**
-	 * @return Manufacturer
-	 */
-	public function getManufacturer()
-	{
-		return $this->_manufacturer;
-	}
+    /**
+     * @param  string $description Optional manufacturer description (HTML)
+     * @return \jtl\Connector\Model\ManufacturerI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setDescription($description)
+    {
+        return $this->setProperty('_description', $description, 'string');
+    }
+    
+    /**
+     * @return string Optional manufacturer description (HTML)
+     */
+    public function getDescription()
+    {
+        return $this->_description;
+    }
 
-	/**
-	 * @return \jtl\Connector\Model\ManufacturerI18n
-	 */
-	public function clearManufacturer()
-	{
-		$this->_manufacturer = array();
-		return $this;
-	}
+    /**
+     * @param  Identity $manufacturerId Reference to manufacturer
+     * @return \jtl\Connector\Model\ManufacturerI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setManufacturerId(Identity $manufacturerId)
+    {
+        return $this->setProperty('_manufacturerId', $manufacturerId, 'Identity');
+    }
+    
+    /**
+     * @return Identity Reference to manufacturer
+     */
+    public function getManufacturerId()
+    {
+        return $this->_manufacturerId;
+    }
+
+    /**
+     * @param  string $localeName Locale
+     * @return \jtl\Connector\Model\ManufacturerI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setLocaleName($localeName)
+    {
+        return $this->setProperty('_localeName', $localeName, 'string');
+    }
+    
+    /**
+     * @return string Locale
+     */
+    public function getLocaleName()
+    {
+        return $this->_localeName;
+    }
 }
 

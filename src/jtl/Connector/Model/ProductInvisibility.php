@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
+ * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -19,120 +19,135 @@ class ProductInvisibility extends DataModel
     /**
      * @type Identity Reference to customerGroup
      */
-    protected $_customerGroupId = null;
+    public $_customerGroupId = null;
 
     /**
      * @type Identity Reference to product
      */
-    protected $_productId = null;
+    public $_productId = null;
 
     /**
      * @type integer 
      */
-    protected $_connectorId = 0;
+    public $_connectorId = 0;
+
 
     /**
-	 * Nav [ProductInvisibility » Many]
-	 *
-     * @type \jtl\Connector\Model\Product[]
+     * @type array list of identities
      */
-    protected $_product = array();
+    public $_identities = array(
+        '_productId',
+        '_customerGroupId',
+    );
 
+    /**
+     * @type array list of navigations
+     */
+    public $_navigations = array(
+    );
 
-	/**
-	 * @type array
-	 */
-	protected $_identities = array(
-		'_productId',
-		'_customerGroupId',
-	);
+    /**
+     * @return array 
+     */
+    public function getIdentities()
+    {
+        return $this->_identities;
+    }
 
-	/**
-	 * @param  integer $connectorId 
-	 * @return \jtl\Connector\Model\ProductInvisibility
-	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-	 */
-	public function setConnectorId($connectorId)
-	{
-		if (!is_integer($connectorId))
-			throw new InvalidArgumentException('integer expected.');
-		$this->_connectorId = $connectorId;
-		return $this;
-	}
-	
-	/**
-	 * @return integer 
-	 */
-	public function getConnectorId()
-	{
-		return $this->_connectorId;
-	}
+    /**
+     * @return array 
+     */
+    public function getNavigations()
+    {
+        return $this->_navigations;
+    }
 
-	/**
-	 * @param  Identity $productId Reference to product
-	 * @return \jtl\Connector\Model\ProductInvisibility
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setProductId(Identity $productId)
-	{
-		
-		$this->_productId = $productId;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity Reference to product
-	 */
-	public function getProductId()
-	{
-		return $this->_productId;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function setProperty($name, $value, $type)
+    {
+        if (!$this->validateType($value, $type)) {
+            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
+        }
+        $this->{$name} = $value;
+        return $this;
+    }
 
-	/**
-	 * @param  Identity $customerGroupId Reference to customerGroup
-	 * @return \jtl\Connector\Model\ProductInvisibility
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setCustomerGroupId(Identity $customerGroupId)
-	{
-		
-		$this->_customerGroupId = $customerGroupId;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity Reference to customerGroup
-	 */
-	public function getCustomerGroupId()
-	{
-		return $this->_customerGroupId;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function validateType($value, $type)
+    {
+        switch ($type)
+        {
+            case 'boolean':
+                return is_bool($value);
+            case 'integer':
+                return is_integer($value);
+            case 'float':
+                return is_float($value);
+            case 'string':
+                return is_string($value);
+            case 'array':
+                return is_array($value);
+            default:
+                throw new InvalidArgumentException('type validator not found');
+        }
+    }
 
-	/**
-	 * @param  \jtl\Connector\Model\Product $product
-	 * @return \jtl\Connector\Model\ProductInvisibility
-	 */
-	public function addProduct(\jtl\Connector\Model\Product $product)
-	{
-		$this->_product[] = $product;
-		return $this;
-	}
-	
-	/**
-	 * @return Product
-	 */
-	public function getProduct()
-	{
-		return $this->_product;
-	}
+    /**
+     * @param  integer $connectorId 
+     * @return \jtl\Connector\Model\ProductInvisibility
+     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     */
+    public function setConnectorId($connectorId)
+    {
+        return $this->setProperty('_connectorId', $connectorId, 'integer');
+    }
+    
+    /**
+     * @return integer 
+     */
+    public function getConnectorId()
+    {
+        return $this->_connectorId;
+    }
 
-	/**
-	 * @return \jtl\Connector\Model\ProductInvisibility
-	 */
-	public function clearProduct()
-	{
-		$this->_product = array();
-		return $this;
-	}
+    /**
+     * @param  Identity $productId Reference to product
+     * @return \jtl\Connector\Model\ProductInvisibility
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setProductId(Identity $productId)
+    {
+        return $this->setProperty('_productId', $productId, 'Identity');
+    }
+    
+    /**
+     * @return Identity Reference to product
+     */
+    public function getProductId()
+    {
+        return $this->_productId;
+    }
+
+    /**
+     * @param  Identity $customerGroupId Reference to customerGroup
+     * @return \jtl\Connector\Model\ProductInvisibility
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerGroupId(Identity $customerGroupId)
+    {
+        return $this->setProperty('_customerGroupId', $customerGroupId, 'Identity');
+    }
+    
+    /**
+     * @return Identity Reference to customerGroup
+     */
+    public function getCustomerGroupId()
+    {
+        return $this->_customerGroupId;
+    }
 }
 

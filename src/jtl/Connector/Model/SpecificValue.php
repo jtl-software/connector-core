@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
+ * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -19,154 +19,170 @@ class SpecificValue extends DataModel
     /**
      * @type Identity Unique specificValue id
      */
-    protected $_id = null;
+    public $_id = null;
 
     /**
      * @type Identity Reference to specificId
      */
-    protected $_specificId = null;
+    public $_specificId = null;
 
     /**
      * @type integer|null Optional sort number
      */
-    protected $_sort = 0;
+    public $_sort = 0;
 
     /**
-	 * Nav [SpecificValue » One]
-	 *
+     * Nav [SpecificValue » One]
+     *
      * @type \jtl\Connector\Model\SpecificValueI18n[]
      */
-    protected $_specificValueI18ns = array();
+    public $_i18ns = array();
+
 
     /**
-	 * Nav [SpecificValue » Many]
-	 *
-     * @type \jtl\Connector\Model\Specific[]
+     * @type array list of identities
      */
-    protected $_specific = array();
+    public $_identities = array(
+        '_id',
+        '_specificId',
+    );
 
+    /**
+     * @type array list of navigations
+     */
+    public $_navigations = array(
+        '_i18ns' => '\jtl\Connector\Model\SpecificValueI18n',
+    );
 
-	/**
-	 * @type array
-	 */
-	protected $_identities = array(
-		'_id',
-		'_specificId',
-	);
+    /**
+     * @return array 
+     */
+    public function getIdentities()
+    {
+        return $this->_identities;
+    }
 
-	/**
-	 * @param  integer $sort Optional sort number
-	 * @return \jtl\Connector\Model\SpecificValue
-	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-	 */
-	public function setSort($sort)
-	{
-		if (!is_integer($sort))
-			throw new InvalidArgumentException('integer expected.');
-		$this->_sort = $sort;
-		return $this;
-	}
-	
-	/**
-	 * @return integer Optional sort number
-	 */
-	public function getSort()
-	{
-		return $this->_sort;
-	}
+    /**
+     * @return array 
+     */
+    public function getNavigations()
+    {
+        return $this->_navigations;
+    }
 
-	/**
-	 * @param  Identity $id Unique specificValue id
-	 * @return \jtl\Connector\Model\SpecificValue
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setId(Identity $id)
-	{
-		
-		$this->_id = $id;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity Unique specificValue id
-	 */
-	public function getId()
-	{
-		return $this->_id;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function setProperty($name, $value, $type)
+    {
+        if (!$this->validateType($value, $type)) {
+            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
+        }
+        $this->{$name} = $value;
+        return $this;
+    }
 
-	/**
-	 * @param  Identity $specificId Reference to specificId
-	 * @return \jtl\Connector\Model\SpecificValue
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setSpecificId(Identity $specificId)
-	{
-		
-		$this->_specificId = $specificId;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity Reference to specificId
-	 */
-	public function getSpecificId()
-	{
-		return $this->_specificId;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function validateType($value, $type)
+    {
+        switch ($type)
+        {
+            case 'boolean':
+                return is_bool($value);
+            case 'integer':
+                return is_integer($value);
+            case 'float':
+                return is_float($value);
+            case 'string':
+                return is_string($value);
+            case 'array':
+                return is_array($value);
+            default:
+                throw new InvalidArgumentException('type validator not found');
+        }
+    }
 
-	/**
-	 * @param  \jtl\Connector\Model\SpecificValueI18n $specificValueI18ns
-	 * @return \jtl\Connector\Model\SpecificValue
-	 */
-	public function addSpecificValueI18ns(\jtl\Connector\Model\SpecificValueI18n $specificValueI18ns)
-	{
-		$this->_specificValueI18ns[] = $specificValueI18ns;
-		return $this;
-	}
-	
-	/**
-	 * @return SpecificValueI18n
-	 */
-	public function getSpecificValueI18ns()
-	{
-		return $this->_specificValueI18ns;
-	}
+    /**
+     * @param  integer $sort Optional sort number
+     * @return \jtl\Connector\Model\SpecificValue
+     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     */
+    public function setSort($sort)
+    {
+        return $this->setProperty('_sort', $sort, 'integer');
+    }
+    
+    /**
+     * @return integer Optional sort number
+     */
+    public function getSort()
+    {
+        return $this->_sort;
+    }
 
-	/**
-	 * @return \jtl\Connector\Model\SpecificValue
-	 */
-	public function clearSpecificValueI18ns()
-	{
-		$this->_specificValueI18ns = array();
-		return $this;
-	}
+    /**
+     * @param  Identity $id Unique specificValue id
+     * @return \jtl\Connector\Model\SpecificValue
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setId(Identity $id)
+    {
+        return $this->setProperty('_id', $id, 'Identity');
+    }
+    
+    /**
+     * @return Identity Unique specificValue id
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
 
-	/**
-	 * @param  \jtl\Connector\Model\Specific $specific
-	 * @return \jtl\Connector\Model\SpecificValue
-	 */
-	public function addSpecific(\jtl\Connector\Model\Specific $specific)
-	{
-		$this->_specific[] = $specific;
-		return $this;
-	}
-	
-	/**
-	 * @return Specific
-	 */
-	public function getSpecific()
-	{
-		return $this->_specific;
-	}
+    /**
+     * @param  Identity $specificId Reference to specificId
+     * @return \jtl\Connector\Model\SpecificValue
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setSpecificId(Identity $specificId)
+    {
+        return $this->setProperty('_specificId', $specificId, 'Identity');
+    }
+    
+    /**
+     * @return Identity Reference to specificId
+     */
+    public function getSpecificId()
+    {
+        return $this->_specificId;
+    }
 
-	/**
-	 * @return \jtl\Connector\Model\SpecificValue
-	 */
-	public function clearSpecific()
-	{
-		$this->_specific = array();
-		return $this;
-	}
+    /**
+     * @param  \jtl\Connector\Model\SpecificValueI18n $i18ns
+     * @return \jtl\Connector\Model\SpecificValue
+     */
+    public function addI18ns(\jtl\Connector\Model\SpecificValueI18n $i18ns)
+    {
+        $this->_i18ns[] = $i18ns;
+        return $this;
+    }
+    
+    /**
+     * @return SpecificValueI18n
+     */
+    public function getI18ns()
+    {
+        return $this->_i18ns;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\SpecificValue
+     */
+    public function clearI18ns()
+    {
+        $this->_i18ns = array();
+        return $this;
+    }
 }
 

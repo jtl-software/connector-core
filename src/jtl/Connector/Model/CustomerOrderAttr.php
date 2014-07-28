@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
+ * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -19,146 +19,158 @@ class CustomerOrderAttr extends DataModel
     /**
      * @type Identity Reference to customerOrder
      */
-    protected $_customerOrderId = null;
+    public $_customerOrderId = null;
 
     /**
      * @type Identity Unique customerOrderAttr id
      */
-    protected $_id = null;
+    public $_id = null;
 
     /**
      * @type string Attribute key name
      */
-    protected $_key = '';
+    public $_key = '';
 
     /**
      * @type string Attribute value
      */
-    protected $_value = '';
+    public $_value = '';
+
 
     /**
-	 * Nav [CustomerOrderAttr » Many]
-	 *
-     * @type \jtl\Connector\Model\CustomerOrder[]
+     * @type array list of identities
      */
-    protected $_customerOrder = array();
+    public $_identities = array(
+        '_id',
+        '_customerOrderId',
+    );
 
+    /**
+     * @type array list of navigations
+     */
+    public $_navigations = array(
+    );
 
-	/**
-	 * @type array
-	 */
-	protected $_identities = array(
-		'_id',
-		'_customerOrderId',
-	);
+    /**
+     * @return array 
+     */
+    public function getIdentities()
+    {
+        return $this->_identities;
+    }
 
-	/**
-	 * @param  string $key Attribute key name
-	 * @return \jtl\Connector\Model\CustomerOrderAttr
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setKey($key)
-	{
-		if (!is_string($key))
-			throw new InvalidArgumentException('string expected.');
-		$this->_key = $key;
-		return $this;
-	}
-	
-	/**
-	 * @return string Attribute key name
-	 */
-	public function getKey()
-	{
-		return $this->_key;
-	}
+    /**
+     * @return array 
+     */
+    public function getNavigations()
+    {
+        return $this->_navigations;
+    }
 
-	/**
-	 * @param  string $value Attribute value
-	 * @return \jtl\Connector\Model\CustomerOrderAttr
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setValue($value)
-	{
-		if (!is_string($value))
-			throw new InvalidArgumentException('string expected.');
-		$this->_value = $value;
-		return $this;
-	}
-	
-	/**
-	 * @return string Attribute value
-	 */
-	public function getValue()
-	{
-		return $this->_value;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function setProperty($name, $value, $type)
+    {
+        if (!$this->validateType($value, $type)) {
+            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
+        }
+        $this->{$name} = $value;
+        return $this;
+    }
 
-	/**
-	 * @param  Identity $id Unique customerOrderAttr id
-	 * @return \jtl\Connector\Model\CustomerOrderAttr
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setId(Identity $id)
-	{
-		
-		$this->_id = $id;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity Unique customerOrderAttr id
-	 */
-	public function getId()
-	{
-		return $this->_id;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function validateType($value, $type)
+    {
+        switch ($type)
+        {
+            case 'boolean':
+                return is_bool($value);
+            case 'integer':
+                return is_integer($value);
+            case 'float':
+                return is_float($value);
+            case 'string':
+                return is_string($value);
+            case 'array':
+                return is_array($value);
+            default:
+                throw new InvalidArgumentException('type validator not found');
+        }
+    }
 
-	/**
-	 * @param  Identity $customerOrderId Reference to customerOrder
-	 * @return \jtl\Connector\Model\CustomerOrderAttr
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setCustomerOrderId(Identity $customerOrderId)
-	{
-		
-		$this->_customerOrderId = $customerOrderId;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity Reference to customerOrder
-	 */
-	public function getCustomerOrderId()
-	{
-		return $this->_customerOrderId;
-	}
+    /**
+     * @param  string $key Attribute key name
+     * @return \jtl\Connector\Model\CustomerOrderAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setKey($key)
+    {
+        return $this->setProperty('_key', $key, 'string');
+    }
+    
+    /**
+     * @return string Attribute key name
+     */
+    public function getKey()
+    {
+        return $this->_key;
+    }
 
-	/**
-	 * @param  \jtl\Connector\Model\CustomerOrder $customerOrder
-	 * @return \jtl\Connector\Model\CustomerOrderAttr
-	 */
-	public function addCustomerOrder(\jtl\Connector\Model\CustomerOrder $customerOrder)
-	{
-		$this->_customerOrder[] = $customerOrder;
-		return $this;
-	}
-	
-	/**
-	 * @return CustomerOrder
-	 */
-	public function getCustomerOrder()
-	{
-		return $this->_customerOrder;
-	}
+    /**
+     * @param  string $value Attribute value
+     * @return \jtl\Connector\Model\CustomerOrderAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setValue($value)
+    {
+        return $this->setProperty('_value', $value, 'string');
+    }
+    
+    /**
+     * @return string Attribute value
+     */
+    public function getValue()
+    {
+        return $this->_value;
+    }
 
-	/**
-	 * @return \jtl\Connector\Model\CustomerOrderAttr
-	 */
-	public function clearCustomerOrder()
-	{
-		$this->_customerOrder = array();
-		return $this;
-	}
+    /**
+     * @param  Identity $id Unique customerOrderAttr id
+     * @return \jtl\Connector\Model\CustomerOrderAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setId(Identity $id)
+    {
+        return $this->setProperty('_id', $id, 'Identity');
+    }
+    
+    /**
+     * @return Identity Unique customerOrderAttr id
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+
+    /**
+     * @param  Identity $customerOrderId Reference to customerOrder
+     * @return \jtl\Connector\Model\CustomerOrderAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerOrderId(Identity $customerOrderId)
+    {
+        return $this->setProperty('_customerOrderId', $customerOrderId, 'Identity');
+    }
+    
+    /**
+     * @return Identity Reference to customerOrder
+     */
+    public function getCustomerOrderId()
+    {
+        return $this->_customerOrderId;
+    }
 }
 

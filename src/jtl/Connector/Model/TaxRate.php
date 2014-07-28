@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
+ * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -19,138 +19,182 @@ class TaxRate extends DataModel
     /**
      * @type Identity Unique taxRate id
      */
-    protected $_id = null;
+    public $_id = null;
 
     /**
      * @type Identity Reference to taxClass
      */
-    protected $_taxClassId = null;
+    public $_taxClassId = null;
 
     /**
      * @type Identity Reference to taxZone
      */
-    protected $_taxZoneId = null;
+    public $_taxZoneId = null;
 
     /**
      * @type integer|null Optional priority number. Higher value means higher priority
      */
-    protected $_priority = 0;
+    public $_priority = 0;
 
     /**
      * @type float|null Tax rate value e.g. 19.00
      */
-    protected $_rate = 0.0;
+    public $_rate = 0.0;
 
 
-	/**
-	 * @type array
-	 */
-	protected $_identities = array(
-		'_id',
-		'_taxZoneId',
-		'_taxClassId',
-	);
+    /**
+     * @type array list of identities
+     */
+    public $_identities = array(
+        '_id',
+        '_taxZoneId',
+        '_taxClassId',
+    );
 
-	/**
-	 * @param  float $rate Tax rate value e.g. 19.00
-	 * @return \jtl\Connector\Model\TaxRate
-	 * @throws InvalidArgumentException if the provided argument is not of type 'float'.
-	 */
-	public function setRate($rate)
-	{
-		if (!is_float($rate))
-			throw new InvalidArgumentException('float expected.');
-		$this->_rate = $rate;
-		return $this;
-	}
-	
-	/**
-	 * @return float Tax rate value e.g. 19.00
-	 */
-	public function getRate()
-	{
-		return $this->_rate;
-	}
+    /**
+     * @type array list of navigations
+     */
+    public $_navigations = array(
+    );
 
-	/**
-	 * @param  integer $priority Optional priority number. Higher value means higher priority
-	 * @return \jtl\Connector\Model\TaxRate
-	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-	 */
-	public function setPriority($priority)
-	{
-		if (!is_integer($priority))
-			throw new InvalidArgumentException('integer expected.');
-		$this->_priority = $priority;
-		return $this;
-	}
-	
-	/**
-	 * @return integer Optional priority number. Higher value means higher priority
-	 */
-	public function getPriority()
-	{
-		return $this->_priority;
-	}
+    /**
+     * @return array 
+     */
+    public function getIdentities()
+    {
+        return $this->_identities;
+    }
 
-	/**
-	 * @param  Identity $id Unique taxRate id
-	 * @return \jtl\Connector\Model\TaxRate
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setId(Identity $id)
-	{
-		
-		$this->_id = $id;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity Unique taxRate id
-	 */
-	public function getId()
-	{
-		return $this->_id;
-	}
+    /**
+     * @return array 
+     */
+    public function getNavigations()
+    {
+        return $this->_navigations;
+    }
 
-	/**
-	 * @param  Identity $taxZoneId Reference to taxZone
-	 * @return \jtl\Connector\Model\TaxRate
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setTaxZoneId(Identity $taxZoneId)
-	{
-		
-		$this->_taxZoneId = $taxZoneId;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity Reference to taxZone
-	 */
-	public function getTaxZoneId()
-	{
-		return $this->_taxZoneId;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function setProperty($name, $value, $type)
+    {
+        if (!$this->validateType($value, $type)) {
+            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
+        }
+        $this->{$name} = $value;
+        return $this;
+    }
 
-	/**
-	 * @param  Identity $taxClassId Reference to taxClass
-	 * @return \jtl\Connector\Model\TaxRate
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setTaxClassId(Identity $taxClassId)
-	{
-		
-		$this->_taxClassId = $taxClassId;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity Reference to taxClass
-	 */
-	public function getTaxClassId()
-	{
-		return $this->_taxClassId;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function validateType($value, $type)
+    {
+        switch ($type)
+        {
+            case 'boolean':
+                return is_bool($value);
+            case 'integer':
+                return is_integer($value);
+            case 'float':
+                return is_float($value);
+            case 'string':
+                return is_string($value);
+            case 'array':
+                return is_array($value);
+            default:
+                throw new InvalidArgumentException('type validator not found');
+        }
+    }
+
+    /**
+     * @param  float $rate Tax rate value e.g. 19.00
+     * @return \jtl\Connector\Model\TaxRate
+     * @throws InvalidArgumentException if the provided argument is not of type 'float'.
+     */
+    public function setRate($rate)
+    {
+        return $this->setProperty('_rate', $rate, 'float');
+    }
+    
+    /**
+     * @return float Tax rate value e.g. 19.00
+     */
+    public function getRate()
+    {
+        return $this->_rate;
+    }
+
+    /**
+     * @param  integer $priority Optional priority number. Higher value means higher priority
+     * @return \jtl\Connector\Model\TaxRate
+     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     */
+    public function setPriority($priority)
+    {
+        return $this->setProperty('_priority', $priority, 'integer');
+    }
+    
+    /**
+     * @return integer Optional priority number. Higher value means higher priority
+     */
+    public function getPriority()
+    {
+        return $this->_priority;
+    }
+
+    /**
+     * @param  Identity $id Unique taxRate id
+     * @return \jtl\Connector\Model\TaxRate
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setId(Identity $id)
+    {
+        return $this->setProperty('_id', $id, 'Identity');
+    }
+    
+    /**
+     * @return Identity Unique taxRate id
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+
+    /**
+     * @param  Identity $taxZoneId Reference to taxZone
+     * @return \jtl\Connector\Model\TaxRate
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setTaxZoneId(Identity $taxZoneId)
+    {
+        return $this->setProperty('_taxZoneId', $taxZoneId, 'Identity');
+    }
+    
+    /**
+     * @return Identity Reference to taxZone
+     */
+    public function getTaxZoneId()
+    {
+        return $this->_taxZoneId;
+    }
+
+    /**
+     * @param  Identity $taxClassId Reference to taxClass
+     * @return \jtl\Connector\Model\TaxRate
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setTaxClassId(Identity $taxClassId)
+    {
+        return $this->setProperty('_taxClassId', $taxClassId, 'Identity');
+    }
+    
+    /**
+     * @return Identity Reference to taxClass
+     */
+    public function getTaxClassId()
+    {
+        return $this->_taxClassId;
+    }
 }
 

@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
+ * @subpackage #!!todo: get_main_controller!!#
  */
 
 namespace jtl\Connector\Model;
@@ -19,273 +19,307 @@ class DeliveryNote extends DataModel
     /**
      * @type Identity Reference to customerOrder
      */
-    protected $_customerOrderId = null;
+    public $_customerOrderId = null;
 
     /**
      * @type string 
      */
-    protected $_cLieferscheinNr = '';
+    public $_cLieferscheinNr = '';
 
     /**
      * @type DateTime|null Creation date
      */
-    protected $_created = null;
+    public $_created = null;
 
     /**
      * @type DateTime|null 
      */
-    protected $_dGedruckt = null;
+    public $_dGedruckt = null;
 
     /**
      * @type DateTime|null 
      */
-    protected $_dMailVersand = null;
+    public $_dMailVersand = null;
 
     /**
      * @type boolean Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      */
-    protected $_isFulfillment = false;
+    public $_isFulfillment = false;
 
     /**
      * @type integer 
      */
-    protected $_kBenutzer = 0;
+    public $_kBenutzer = 0;
 
     /**
      * @type integer|null 
      */
-    protected $_kLieferantenBestellung = 0;
+    public $_kLieferantenBestellung = 0;
 
     /**
      * @type string Optional text note
      */
-    protected $_note = '';
+    public $_note = '';
 
     /**
-	 * Nav [DeliveryNote » One]
-	 *
+     * Nav [DeliveryNote » One]
+     *
      * @type \jtl\Connector\Model\DeliveryNoteItem[]
      */
-    protected $_items = array();
+    public $_items = array();
 
 
-	/**
-	 * @type array
-	 */
-	protected $_identities = array(
-		'_customerOrderId',
-	);
+    /**
+     * @type array list of identities
+     */
+    public $_identities = array(
+        '_customerOrderId',
+    );
 
-	/**
-	 * @param  integer $kBenutzer 
-	 * @return \jtl\Connector\Model\DeliveryNote
-	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-	 */
-	public function setKBenutzer($kBenutzer)
-	{
-		if (!is_integer($kBenutzer))
-			throw new InvalidArgumentException('integer expected.');
-		$this->_kBenutzer = $kBenutzer;
-		return $this;
-	}
-	
-	/**
-	 * @return integer 
-	 */
-	public function getKBenutzer()
-	{
-		return $this->_kBenutzer;
-	}
+    /**
+     * @type array list of navigations
+     */
+    public $_navigations = array(
+        '_items' => '\jtl\Connector\Model\DeliveryNoteItem',
+    );
 
-	/**
-	 * @param  string $cLieferscheinNr 
-	 * @return \jtl\Connector\Model\DeliveryNote
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setCLieferscheinNr($cLieferscheinNr)
-	{
-		if (!is_string($cLieferscheinNr))
-			throw new InvalidArgumentException('string expected.');
-		$this->_cLieferscheinNr = $cLieferscheinNr;
-		return $this;
-	}
-	
-	/**
-	 * @return string 
-	 */
-	public function getCLieferscheinNr()
-	{
-		return $this->_cLieferscheinNr;
-	}
+    /**
+     * @return array 
+     */
+    public function getIdentities()
+    {
+        return $this->_identities;
+    }
 
-	/**
-	 * @param  string $note Optional text note
-	 * @return \jtl\Connector\Model\DeliveryNote
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setNote($note)
-	{
-		if (!is_string($note))
-			throw new InvalidArgumentException('string expected.');
-		$this->_note = $note;
-		return $this;
-	}
-	
-	/**
-	 * @return string Optional text note
-	 */
-	public function getNote()
-	{
-		return $this->_note;
-	}
+    /**
+     * @return array 
+     */
+    public function getNavigations()
+    {
+        return $this->_navigations;
+    }
 
-	/**
-	 * @param  DateTime $dMailVersand 
-	 * @return \jtl\Connector\Model\DeliveryNote
-	 * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
-	 */
-	public function setDMailVersand(DateTime $dMailVersand)
-	{
-		
-		$this->_dMailVersand = $dMailVersand;
-		return $this;
-	}
-	
-	/**
-	 * @return DateTime 
-	 */
-	public function getDMailVersand()
-	{
-		return $this->_dMailVersand;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function setProperty($name, $value, $type)
+    {
+        if (!$this->validateType($value, $type)) {
+            throw new InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
+        }
+        $this->{$name} = $value;
+        return $this;
+    }
 
-	/**
-	 * @param  DateTime $created Creation date
-	 * @return \jtl\Connector\Model\DeliveryNote
-	 * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
-	 */
-	public function setCreated(DateTime $created)
-	{
-		
-		$this->_created = $created;
-		return $this;
-	}
-	
-	/**
-	 * @return DateTime Creation date
-	 */
-	public function getCreated()
-	{
-		return $this->_created;
-	}
+    /**
+     * @todo: Move to BasisModel
+     */
+    protected function validateType($value, $type)
+    {
+        switch ($type)
+        {
+            case 'boolean':
+                return is_bool($value);
+            case 'integer':
+                return is_integer($value);
+            case 'float':
+                return is_float($value);
+            case 'string':
+                return is_string($value);
+            case 'array':
+                return is_array($value);
+            default:
+                throw new InvalidArgumentException('type validator not found');
+        }
+    }
 
-	/**
-	 * @param  DateTime $dGedruckt 
-	 * @return \jtl\Connector\Model\DeliveryNote
-	 * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
-	 */
-	public function setDGedruckt(DateTime $dGedruckt)
-	{
-		
-		$this->_dGedruckt = $dGedruckt;
-		return $this;
-	}
-	
-	/**
-	 * @return DateTime 
-	 */
-	public function getDGedruckt()
-	{
-		return $this->_dGedruckt;
-	}
+    /**
+     * @param  integer $kBenutzer 
+     * @return \jtl\Connector\Model\DeliveryNote
+     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     */
+    public function setKBenutzer($kBenutzer)
+    {
+        return $this->setProperty('_kBenutzer', $kBenutzer, 'integer');
+    }
+    
+    /**
+     * @return integer 
+     */
+    public function getKBenutzer()
+    {
+        return $this->_kBenutzer;
+    }
 
-	/**
-	 * @param  integer $kLieferantenBestellung 
-	 * @return \jtl\Connector\Model\DeliveryNote
-	 * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-	 */
-	public function setKLieferantenBestellung($kLieferantenBestellung)
-	{
-		if (!is_integer($kLieferantenBestellung))
-			throw new InvalidArgumentException('integer expected.');
-		$this->_kLieferantenBestellung = $kLieferantenBestellung;
-		return $this;
-	}
-	
-	/**
-	 * @return integer 
-	 */
-	public function getKLieferantenBestellung()
-	{
-		return $this->_kLieferantenBestellung;
-	}
+    /**
+     * @param  string $cLieferscheinNr 
+     * @return \jtl\Connector\Model\DeliveryNote
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setCLieferscheinNr($cLieferscheinNr)
+    {
+        return $this->setProperty('_cLieferscheinNr', $cLieferscheinNr, 'string');
+    }
+    
+    /**
+     * @return string 
+     */
+    public function getCLieferscheinNr()
+    {
+        return $this->_cLieferscheinNr;
+    }
 
-	/**
-	 * @param  Identity $customerOrderId Reference to customerOrder
-	 * @return \jtl\Connector\Model\DeliveryNote
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setCustomerOrderId(Identity $customerOrderId)
-	{
-		
-		$this->_customerOrderId = $customerOrderId;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity Reference to customerOrder
-	 */
-	public function getCustomerOrderId()
-	{
-		return $this->_customerOrderId;
-	}
+    /**
+     * @param  string $note Optional text note
+     * @return \jtl\Connector\Model\DeliveryNote
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setNote($note)
+    {
+        return $this->setProperty('_note', $note, 'string');
+    }
+    
+    /**
+     * @return string Optional text note
+     */
+    public function getNote()
+    {
+        return $this->_note;
+    }
 
-	/**
-	 * @param  boolean $isFulfillment Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
-	 * @return \jtl\Connector\Model\DeliveryNote
-	 * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
-	 */
-	public function setIsFulfillment($isFulfillment)
-	{
-		if (!is_bool($isFulfillment))
-			throw new InvalidArgumentException('boolean expected.');
-		$this->_isFulfillment = $isFulfillment;
-		return $this;
-	}
-	
-	/**
-	 * @return boolean Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
-	 */
-	public function getIsFulfillment()
-	{
-		return $this->_isFulfillment;
-	}
+    /**
+     * @param  DateTime $dMailVersand 
+     * @return \jtl\Connector\Model\DeliveryNote
+     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     */
+    public function setDMailVersand(DateTime $dMailVersand)
+    {
+        return $this->setProperty('_dMailVersand', $dMailVersand, 'DateTime');
+    }
+    
+    /**
+     * @return DateTime 
+     */
+    public function getDMailVersand()
+    {
+        return $this->_dMailVersand;
+    }
 
-	/**
-	 * @param  \jtl\Connector\Model\DeliveryNoteItem $item
-	 * @return \jtl\Connector\Model\DeliveryNote
-	 */
-	public function addItem(\jtl\Connector\Model\DeliveryNoteItem $item)
-	{
-		$this->_items[] = $item;
-		return $this;
-	}
-	
-	/**
-	 * @return DeliveryNoteItem
-	 */
-	public function getItems()
-	{
-		return $this->_items;
-	}
+    /**
+     * @param  DateTime $created Creation date
+     * @return \jtl\Connector\Model\DeliveryNote
+     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     */
+    public function setCreated(DateTime $created)
+    {
+        return $this->setProperty('_created', $created, 'DateTime');
+    }
+    
+    /**
+     * @return DateTime Creation date
+     */
+    public function getCreated()
+    {
+        return $this->_created;
+    }
 
-	/**
-	 * @return \jtl\Connector\Model\DeliveryNote
-	 */
-	public function clearItems()
-	{
-		$this->_items = array();
-		return $this;
-	}
+    /**
+     * @param  DateTime $dGedruckt 
+     * @return \jtl\Connector\Model\DeliveryNote
+     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     */
+    public function setDGedruckt(DateTime $dGedruckt)
+    {
+        return $this->setProperty('_dGedruckt', $dGedruckt, 'DateTime');
+    }
+    
+    /**
+     * @return DateTime 
+     */
+    public function getDGedruckt()
+    {
+        return $this->_dGedruckt;
+    }
+
+    /**
+     * @param  integer $kLieferantenBestellung 
+     * @return \jtl\Connector\Model\DeliveryNote
+     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     */
+    public function setKLieferantenBestellung($kLieferantenBestellung)
+    {
+        return $this->setProperty('_kLieferantenBestellung', $kLieferantenBestellung, 'integer');
+    }
+    
+    /**
+     * @return integer 
+     */
+    public function getKLieferantenBestellung()
+    {
+        return $this->_kLieferantenBestellung;
+    }
+
+    /**
+     * @param  Identity $customerOrderId Reference to customerOrder
+     * @return \jtl\Connector\Model\DeliveryNote
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerOrderId(Identity $customerOrderId)
+    {
+        return $this->setProperty('_customerOrderId', $customerOrderId, 'Identity');
+    }
+    
+    /**
+     * @return Identity Reference to customerOrder
+     */
+    public function getCustomerOrderId()
+    {
+        return $this->_customerOrderId;
+    }
+
+    /**
+     * @param  boolean $isFulfillment Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
+     * @return \jtl\Connector\Model\DeliveryNote
+     * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
+     */
+    public function setIsFulfillment($isFulfillment)
+    {
+        return $this->setProperty('_isFulfillment', $isFulfillment, 'boolean');
+    }
+    
+    /**
+     * @return boolean Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
+     */
+    public function getIsFulfillment()
+    {
+        return $this->_isFulfillment;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\DeliveryNoteItem $item
+     * @return \jtl\Connector\Model\DeliveryNote
+     */
+    public function addItem(\jtl\Connector\Model\DeliveryNoteItem $item)
+    {
+        $this->_items[] = $item;
+        return $this;
+    }
+    
+    /**
+     * @return DeliveryNoteItem
+     */
+    public function getItems()
+    {
+        return $this->_items;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\DeliveryNote
+     */
+    public function clearItems()
+    {
+        $this->_items = array();
+        return $this;
+    }
 }
 
