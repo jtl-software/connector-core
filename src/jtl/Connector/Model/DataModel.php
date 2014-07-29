@@ -52,7 +52,7 @@ class DataModel extends CoreModel
      * @param array $publics
      * @return stdClass $object
      */
-    public function getPublic(array $publics = array('_fields', '_isEncrypted', '_identities'))
+    public function getPublic(array $publics = array('fields', 'isEncrypted', 'identities', 'action'))
     {
         $object = new \stdClass();
             
@@ -65,12 +65,12 @@ class DataModel extends CoreModel
                         $memberpub = substr($member, 1);
                     }
                     
-                    if ($this->$member instanceof self) {
-                        $object->$memberpub = $this->$member->getPublic($publics);
-                    } elseif ($this->$member instanceof Identity) {
-                        $object->$memberpub = $this->$member->toArray();
+                    if ($this->{$member} instanceof self) {
+                        $object->{$memberpub} = $this->{$member}->getPublic($publics);
+                    } elseif ($this->{$member} instanceof Identity) {
+                        $object->{$memberpub} = $this->{$member}->toArray();
                     } else {
-                        $object->$memberpub = $this->$member;
+                        $object->{$memberpub} = $this->{$member};
                     }
                 }
             }
@@ -86,8 +86,8 @@ class DataModel extends CoreModel
      */
     public function setIdentities()
     {
-        foreach ($this->_identities as $identity) {
-            $this->$identity = Identity::convert($this->$identity);
+        foreach ($this->identities as $identity) {
+            $this->{$identity} = Identity::convert($this->{$identity});
         }
 
         return $this;
@@ -111,7 +111,7 @@ class DataModel extends CoreModel
     protected function setProperty($name, $value, $type)
     {
         if (!$this->validateType($value, $type)) {
-            throw new \InvalidArgumentException(sprintf("expected type %s, given value %s.", $type, gettype($value)));
+            throw new \InvalidArgumentException(sprintf("expected type '%s', given value '%s'.", $type, gettype($value)));
         }
 
         $this->{$name} = $value;
@@ -121,6 +121,10 @@ class DataModel extends CoreModel
 
     protected function validateType($value, $type)
     {
+        if ($value === null) {
+            return true;
+        }
+
         switch ($type)
         {
             case 'boolean':
@@ -128,13 +132,17 @@ class DataModel extends CoreModel
             case 'integer':
                 return is_integer($value);
             case 'float':
-                return is_float($value);
+                return (is_float($value) || is_integer($value) || is_double($value));
             case 'string':
                 return is_string($value);
             case 'array':
                 return is_array($value);
+            case 'Identity':
+                return ($value instanceof Identity);
+            case 'DateTime':
+                return ($value instanceof \DateTime);
             default:
-                throw new \InvalidArgumentException('type validator not found');
+                throw new \InvalidArgumentException(sprintf("type '%s' validator not found", $type));
         }
     }
 }
