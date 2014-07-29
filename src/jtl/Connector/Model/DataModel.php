@@ -59,7 +59,7 @@ class DataModel extends CoreModel
         $recursive = function (array $subElems, array $publics) use (&$recursive) {
             $arr = array();
             foreach ($subElems as $subElem) {
-                if ($subElem instanceof self) {
+                if ($subElem instanceof DataModel) {
                     $arr[] = $subElem->getPublic($publics);
                 } else if ($subElem instanceof Identity) {
                     $arr[] = $subElem->toArray();
