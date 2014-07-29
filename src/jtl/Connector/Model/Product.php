@@ -360,7 +360,7 @@ class Product extends DataModel
     /**
      * @type array list of identities
      */
-    public $identities = array(
+    protected $identities = array(
         'manufacturerId',
         'id',
         'taxClassId',
@@ -375,7 +375,7 @@ class Product extends DataModel
     /**
      * @type array list of navigations
      */
-    public $navigations = array(
+    protected $navigations = array(
         'prices' => '\jtl\Connector\Model\ProductPriceOld',
         'specialPrices' => '\jtl\Connector\Model\ProductSpecialPrice',
         'fileDownloads' => '\jtl\Connector\Model\ProductFileDownload',
@@ -1368,6 +1368,16 @@ class Product extends DataModel
         $this->prices[] = $price;
         return $this;
     }
+
+    /**
+     * @param  array $prices
+     * @return \jtl\Connector\Model\Product
+     */
+    public function addPrices(array $prices)
+    {
+		$this->prices = array_merge($this->prices, $prices);
+        return $this;
+    }
     
     /**
      * @return ProductPriceOld
@@ -1393,6 +1403,16 @@ class Product extends DataModel
     public function addSpecialPrice(\jtl\Connector\Model\ProductSpecialPrice $specialPrice)
     {
         $this->specialPrices[] = $specialPrice;
+        return $this;
+    }
+
+    /**
+     * @param  array $specialPrices
+     * @return \jtl\Connector\Model\Product
+     */
+    public function addSpecialPrices(array $specialPrices)
+    {
+		$this->specialPrices = array_merge($this->specialPrices, $specialPrices);
         return $this;
     }
     
@@ -1422,6 +1442,16 @@ class Product extends DataModel
         $this->fileDownloads[] = $fileDownload;
         return $this;
     }
+
+    /**
+     * @param  array $fileDownloads
+     * @return \jtl\Connector\Model\Product
+     */
+    public function addFileDownloads(array $fileDownloads)
+    {
+		$this->fileDownloads = array_merge($this->fileDownloads, $fileDownloads);
+        return $this;
+    }
     
     /**
      * @return ProductFileDownload
@@ -1447,6 +1477,16 @@ class Product extends DataModel
     public function addCategory(\jtl\Connector\Model\Product2Category $category)
     {
         $this->categories[] = $category;
+        return $this;
+    }
+
+    /**
+     * @param  array $categories
+     * @return \jtl\Connector\Model\Product
+     */
+    public function addCategories(array $categories)
+    {
+		$this->categories = array_merge($this->categories, $categories);
         return $this;
     }
     
@@ -1476,6 +1516,16 @@ class Product extends DataModel
         $this->mediaFiles[] = $mediaFile;
         return $this;
     }
+
+    /**
+     * @param  array $mediaFiles
+     * @return \jtl\Connector\Model\Product
+     */
+    public function addMediaFiles(array $mediaFiles)
+    {
+		$this->mediaFiles = array_merge($this->mediaFiles, $mediaFiles);
+        return $this;
+    }
     
     /**
      * @return MediaFile
@@ -1501,6 +1551,16 @@ class Product extends DataModel
     public function addConfigGroup(\jtl\Connector\Model\ProductConfigGroup $configGroup)
     {
         $this->configGroups[] = $configGroup;
+        return $this;
+    }
+
+    /**
+     * @param  array $configGroups
+     * @return \jtl\Connector\Model\Product
+     */
+    public function addConfigGroups(array $configGroups)
+    {
+		$this->configGroups = array_merge($this->configGroups, $configGroups);
         return $this;
     }
     
@@ -1530,6 +1590,16 @@ class Product extends DataModel
         $this->invisibilities[] = $invisibility;
         return $this;
     }
+
+    /**
+     * @param  array $invisibilities
+     * @return \jtl\Connector\Model\Product
+     */
+    public function addInvisibilities(array $invisibilities)
+    {
+		$this->invisibilities = array_merge($this->invisibilities, $invisibilities);
+        return $this;
+    }
     
     /**
      * @return ProductInvisibility
@@ -1555,6 +1625,16 @@ class Product extends DataModel
     public function addCrossSelling(\jtl\Connector\Model\CrossSelling $crossSelling)
     {
         $this->crossSellings[] = $crossSelling;
+        return $this;
+    }
+
+    /**
+     * @param  array $crossSellings
+     * @return \jtl\Connector\Model\Product
+     */
+    public function addCrossSellings(array $crossSellings)
+    {
+		$this->crossSellings = array_merge($this->crossSellings, $crossSellings);
         return $this;
     }
     
@@ -1584,6 +1664,16 @@ class Product extends DataModel
         $this->setArticles[] = $setArticle;
         return $this;
     }
+
+    /**
+     * @param  array $setArticles
+     * @return \jtl\Connector\Model\Product
+     */
+    public function addSetArticles(array $setArticles)
+    {
+		$this->setArticles = array_merge($this->setArticles, $setArticles);
+        return $this;
+    }
     
     /**
      * @return SetArticle
@@ -1611,6 +1701,16 @@ class Product extends DataModel
         $this->variations[] = $variation;
         return $this;
     }
+
+    /**
+     * @param  array $variations
+     * @return \jtl\Connector\Model\Product
+     */
+    public function addVariations(array $variations)
+    {
+		$this->variations = array_merge($this->variations, $variations);
+        return $this;
+    }
     
     /**
      * @return ProductVariation
@@ -1630,12 +1730,22 @@ class Product extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductI18n $i18ns
+     * @param  \jtl\Connector\Model\ProductI18n $i18n
      * @return \jtl\Connector\Model\Product
      */
-    public function addI18ns(\jtl\Connector\Model\ProductI18n $i18ns)
+    public function addI18n(\jtl\Connector\Model\ProductI18n $i18n)
     {
-        $this->i18ns[] = $i18ns;
+        $this->i18ns[] = $i18n;
+        return $this;
+    }
+
+    /**
+     * @param  array $i18ns
+     * @return \jtl\Connector\Model\Product
+     */
+    public function addI18ns(array $i18ns)
+    {
+		$this->i18ns = array_merge($this->i18ns, $i18ns);
         return $this;
     }
     

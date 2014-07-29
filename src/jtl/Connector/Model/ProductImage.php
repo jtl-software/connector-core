@@ -73,7 +73,7 @@ class ProductImage extends DataModel
     /**
      * @type array list of identities
      */
-    public $identities = array(
+    protected $identities = array(
         'id',
         'foreignKey',
         'masterImageId',
@@ -82,7 +82,7 @@ class ProductImage extends DataModel
     /**
      * @type array list of navigations
      */
-    public $navigations = array(
+    protected $navigations = array(
     );
 
     /**

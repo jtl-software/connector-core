@@ -65,7 +65,7 @@ class ProductSpecialPrice extends DataModel
     /**
      * @type array list of identities
      */
-    public $identities = array(
+    protected $identities = array(
         'id',
         'productId',
     );
@@ -73,7 +73,7 @@ class ProductSpecialPrice extends DataModel
     /**
      * @type array list of navigations
      */
-    public $navigations = array(
+    protected $navigations = array(
         'specialPrices' => '\jtl\Connector\Model\SpecialPrice',
     );
 
@@ -244,6 +244,16 @@ class ProductSpecialPrice extends DataModel
     public function addSpecialPrice(\jtl\Connector\Model\SpecialPrice $specialPrice)
     {
         $this->specialPrices[] = $specialPrice;
+        return $this;
+    }
+
+    /**
+     * @param  array $specialPrices
+     * @return \jtl\Connector\Model\ProductSpecialPrice
+     */
+    public function addSpecialPrices(array $specialPrices)
+    {
+		$this->specialPrices = array_merge($this->specialPrices, $specialPrices);
         return $this;
     }
     

@@ -50,14 +50,14 @@ class Manufacturer extends DataModel
     /**
      * @type array list of identities
      */
-    public $identities = array(
+    protected $identities = array(
         'id',
     );
 
     /**
      * @type array list of navigations
      */
-    public $navigations = array(
+    protected $navigations = array(
         'i18ns' => '\jtl\Connector\Model\ManufacturerI18n',
     );
 
@@ -168,12 +168,22 @@ class Manufacturer extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ManufacturerI18n $i18ns
+     * @param  \jtl\Connector\Model\ManufacturerI18n $i18n
      * @return \jtl\Connector\Model\Manufacturer
      */
-    public function addI18ns(\jtl\Connector\Model\ManufacturerI18n $i18ns)
+    public function addI18n(\jtl\Connector\Model\ManufacturerI18n $i18n)
     {
-        $this->i18ns[] = $i18ns;
+        $this->i18ns[] = $i18n;
+        return $this;
+    }
+
+    /**
+     * @param  array $i18ns
+     * @return \jtl\Connector\Model\Manufacturer
+     */
+    public function addI18ns(array $i18ns)
+    {
+		$this->i18ns = array_merge($this->i18ns, $i18ns);
         return $this;
     }
     

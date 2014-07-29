@@ -57,14 +57,14 @@ class Specific extends DataModel
     /**
      * @type array list of identities
      */
-    public $identities = array(
+    protected $identities = array(
         'id',
     );
 
     /**
      * @type array list of navigations
      */
-    public $navigations = array(
+    protected $navigations = array(
         'i18ns' => '\jtl\Connector\Model\SpecificI18n',
         'values' => '\jtl\Connector\Model\SpecificValue',
     );
@@ -176,12 +176,22 @@ class Specific extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\SpecificI18n $i18ns
+     * @param  \jtl\Connector\Model\SpecificI18n $i18n
      * @return \jtl\Connector\Model\Specific
      */
-    public function addI18ns(\jtl\Connector\Model\SpecificI18n $i18ns)
+    public function addI18n(\jtl\Connector\Model\SpecificI18n $i18n)
     {
-        $this->i18ns[] = $i18ns;
+        $this->i18ns[] = $i18n;
+        return $this;
+    }
+
+    /**
+     * @param  array $i18ns
+     * @return \jtl\Connector\Model\Specific
+     */
+    public function addI18ns(array $i18ns)
+    {
+		$this->i18ns = array_merge($this->i18ns, $i18ns);
         return $this;
     }
     
@@ -209,6 +219,16 @@ class Specific extends DataModel
     public function addValue(\jtl\Connector\Model\SpecificValue $value)
     {
         $this->values[] = $value;
+        return $this;
+    }
+
+    /**
+     * @param  array $values
+     * @return \jtl\Connector\Model\Specific
+     */
+    public function addValues(array $values)
+    {
+		$this->values = array_merge($this->values, $values);
         return $this;
     }
     

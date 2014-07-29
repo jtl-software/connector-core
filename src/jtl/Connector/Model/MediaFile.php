@@ -67,7 +67,7 @@ class MediaFile extends DataModel
     /**
      * @type array list of identities
      */
-    public $identities = array(
+    protected $identities = array(
         'id',
         'productId',
     );
@@ -75,7 +75,7 @@ class MediaFile extends DataModel
     /**
      * @type array list of navigations
      */
-    public $navigations = array(
+    protected $navigations = array(
         'i18ns' => '\jtl\Connector\Model\MediaFileI18n',
         'attributes' => '\jtl\Connector\Model\MediaFileAttr',
     );
@@ -223,12 +223,22 @@ class MediaFile extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\MediaFileI18n $i18ns
+     * @param  \jtl\Connector\Model\MediaFileI18n $i18n
      * @return \jtl\Connector\Model\MediaFile
      */
-    public function addI18ns(\jtl\Connector\Model\MediaFileI18n $i18ns)
+    public function addI18n(\jtl\Connector\Model\MediaFileI18n $i18n)
     {
-        $this->i18ns[] = $i18ns;
+        $this->i18ns[] = $i18n;
+        return $this;
+    }
+
+    /**
+     * @param  array $i18ns
+     * @return \jtl\Connector\Model\MediaFile
+     */
+    public function addI18ns(array $i18ns)
+    {
+		$this->i18ns = array_merge($this->i18ns, $i18ns);
         return $this;
     }
     
@@ -256,6 +266,16 @@ class MediaFile extends DataModel
     public function addAttribute(\jtl\Connector\Model\MediaFileAttr $attribute)
     {
         $this->attributes[] = $attribute;
+        return $this;
+    }
+
+    /**
+     * @param  array $attributes
+     * @return \jtl\Connector\Model\MediaFile
+     */
+    public function addAttributes(array $attributes)
+    {
+		$this->attributes = array_merge($this->attributes, $attributes);
         return $this;
     }
     

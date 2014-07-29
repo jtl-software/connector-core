@@ -107,7 +107,7 @@ class ConfigItem extends DataModel
     /**
      * @type array list of identities
      */
-    public $identities = array(
+    protected $identities = array(
         'configGroupId',
         'productId',
     );
@@ -115,7 +115,7 @@ class ConfigItem extends DataModel
     /**
      * @type array list of navigations
      */
-    public $navigations = array(
+    protected $navigations = array(
         'prices' => '\jtl\Connector\Model\ConfigItemPrice',
         'i18n' => '\jtl\Connector\Model\ConfigItemI18n',
     );
@@ -415,6 +415,16 @@ class ConfigItem extends DataModel
         $this->prices[] = $price;
         return $this;
     }
+
+    /**
+     * @param  array $prices
+     * @return \jtl\Connector\Model\ConfigItem
+     */
+    public function addPrices(array $prices)
+    {
+		$this->prices = array_merge($this->prices, $prices);
+        return $this;
+    }
     
     /**
      * @return ConfigItemPrice
@@ -440,6 +450,16 @@ class ConfigItem extends DataModel
     public function addI18n(\jtl\Connector\Model\ConfigItemI18n $i18n)
     {
         $this->i18n[] = $i18n;
+        return $this;
+    }
+
+    /**
+     * @param  array $i18n
+     * @return \jtl\Connector\Model\ConfigItem
+     */
+    public function addI18n(array $i18n)
+    {
+		$this->i18n = array_merge($this->i18n, $i18n);
         return $this;
     }
     

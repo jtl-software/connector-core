@@ -165,7 +165,7 @@ class Customer extends DataModel
     /**
      * @type array list of identities
      */
-    public $identities = array(
+    protected $identities = array(
         'id',
         'customerCategoryId',
         'customerGroupId',
@@ -174,7 +174,7 @@ class Customer extends DataModel
     /**
      * @type array list of navigations
      */
-    public $navigations = array(
+    protected $navigations = array(
         'attributes' => '\jtl\Connector\Model\CustomerAttr',
     );
 
@@ -705,6 +705,16 @@ class Customer extends DataModel
     public function addAttribute(\jtl\Connector\Model\CustomerAttr $attribute)
     {
         $this->attributes[] = $attribute;
+        return $this;
+    }
+
+    /**
+     * @param  array $attributes
+     * @return \jtl\Connector\Model\Customer
+     */
+    public function addAttributes(array $attributes)
+    {
+		$this->attributes = array_merge($this->attributes, $attributes);
         return $this;
     }
     

@@ -62,14 +62,14 @@ class CustomerGroup extends DataModel
     /**
      * @type array list of identities
      */
-    public $identities = array(
+    protected $identities = array(
         'id',
     );
 
     /**
      * @type array list of navigations
      */
-    public $navigations = array(
+    protected $navigations = array(
         'attributes' => '\jtl\Connector\Model\CustomerGroupAttr',
         'i18n' => '\jtl\Connector\Model\CustomerGroupI18n',
     );
@@ -207,6 +207,16 @@ class CustomerGroup extends DataModel
         $this->attributes[] = $attribute;
         return $this;
     }
+
+    /**
+     * @param  array $attributes
+     * @return \jtl\Connector\Model\CustomerGroup
+     */
+    public function addAttributes(array $attributes)
+    {
+		$this->attributes = array_merge($this->attributes, $attributes);
+        return $this;
+    }
     
     /**
      * @return CustomerGroupAttr
@@ -232,6 +242,16 @@ class CustomerGroup extends DataModel
     public function addI18n(\jtl\Connector\Model\CustomerGroupI18n $i18n)
     {
         $this->i18n[] = $i18n;
+        return $this;
+    }
+
+    /**
+     * @param  array $i18n
+     * @return \jtl\Connector\Model\CustomerGroup
+     */
+    public function addI18n(array $i18n)
+    {
+		$this->i18n = array_merge($this->i18n, $i18n);
         return $this;
     }
     

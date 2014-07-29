@@ -45,7 +45,7 @@ class CustomerGroupAttr extends DataModel
     /**
      * @type array list of identities
      */
-    public $identities = array(
+    protected $identities = array(
         'id',
         'customerGroupId',
     );
@@ -53,7 +53,7 @@ class CustomerGroupAttr extends DataModel
     /**
      * @type array list of navigations
      */
-    public $navigations = array(
+    protected $navigations = array(
         'customerGroup' => '\jtl\Connector\Model\CustomerGroup',
     );
 
@@ -152,6 +152,16 @@ class CustomerGroupAttr extends DataModel
     public function addCustomerGroup(\jtl\Connector\Model\CustomerGroup $customerGroup)
     {
         $this->customerGroup[] = $customerGroup;
+        return $this;
+    }
+
+    /**
+     * @param  array $customerGroup
+     * @return \jtl\Connector\Model\CustomerGroupAttr
+     */
+    public function addCustomerGroup(array $customerGroup)
+    {
+		$this->customerGroup = array_merge($this->customerGroup, $customerGroup);
         return $this;
     }
     

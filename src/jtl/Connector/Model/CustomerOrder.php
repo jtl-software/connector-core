@@ -148,7 +148,7 @@ class CustomerOrder extends DataModel
     /**
      * @type array list of identities
      */
-    public $identities = array(
+    protected $identities = array(
         'id',
         'customerId',
         'shippingAddressId',
@@ -159,7 +159,7 @@ class CustomerOrder extends DataModel
     /**
      * @type array list of navigations
      */
-    public $navigations = array(
+    protected $navigations = array(
         'positions' => '\jtl\Connector\Model\CustomerOrderItem',
         'attributes' => '\jtl\Connector\Model\CustomerOrderAttr',
         'billingAddress' => '\jtl\Connector\Model\CustomerOrderBillingAddress',
@@ -534,6 +534,16 @@ class CustomerOrder extends DataModel
         $this->positions[] = $position;
         return $this;
     }
+
+    /**
+     * @param  array $positions
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function addPositions(array $positions)
+    {
+		$this->positions = array_merge($this->positions, $positions);
+        return $this;
+    }
     
     /**
      * @return CustomerOrderItem
@@ -559,6 +569,16 @@ class CustomerOrder extends DataModel
     public function addAttribute(\jtl\Connector\Model\CustomerOrderAttr $attribute)
     {
         $this->attributes[] = $attribute;
+        return $this;
+    }
+
+    /**
+     * @param  array $attributes
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function addAttributes(array $attributes)
+    {
+		$this->attributes = array_merge($this->attributes, $attributes);
         return $this;
     }
     
@@ -588,6 +608,16 @@ class CustomerOrder extends DataModel
         $this->billingAddress[] = $billingAddress;
         return $this;
     }
+
+    /**
+     * @param  array $billingAddress
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function addBillingAddress(array $billingAddress)
+    {
+		$this->billingAddress = array_merge($this->billingAddress, $billingAddress);
+        return $this;
+    }
     
     /**
      * @return CustomerOrderBillingAddress
@@ -615,6 +645,16 @@ class CustomerOrder extends DataModel
         $this->shippingAddress[] = $shippingAddress;
         return $this;
     }
+
+    /**
+     * @param  array $shippingAddress
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function addShippingAddress(array $shippingAddress)
+    {
+		$this->shippingAddress = array_merge($this->shippingAddress, $shippingAddress);
+        return $this;
+    }
     
     /**
      * @return CustomerOrderShippingAddress
@@ -640,6 +680,16 @@ class CustomerOrder extends DataModel
     public function addPaymentInfo(\jtl\Connector\Model\CustomerOrderPaymentInfo $paymentInfo)
     {
         $this->paymentInfo[] = $paymentInfo;
+        return $this;
+    }
+
+    /**
+     * @param  array $paymentInfo
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function addPaymentInfo(array $paymentInfo)
+    {
+		$this->paymentInfo = array_merge($this->paymentInfo, $paymentInfo);
         return $this;
     }
     

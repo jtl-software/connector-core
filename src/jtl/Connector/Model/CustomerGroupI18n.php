@@ -40,14 +40,14 @@ class CustomerGroupI18n extends DataModel
     /**
      * @type array list of identities
      */
-    public $identities = array(
+    protected $identities = array(
         'customerGroupId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $navigations = array(
+    protected $navigations = array(
         'customerGroup' => '\jtl\Connector\Model\CustomerGroup',
     );
 
@@ -128,6 +128,16 @@ class CustomerGroupI18n extends DataModel
     public function addCustomerGroup(\jtl\Connector\Model\CustomerGroup $customerGroup)
     {
         $this->customerGroup[] = $customerGroup;
+        return $this;
+    }
+
+    /**
+     * @param  array $customerGroup
+     * @return \jtl\Connector\Model\CustomerGroupI18n
+     */
+    public function addCustomerGroup(array $customerGroup)
+    {
+		$this->customerGroup = array_merge($this->customerGroup, $customerGroup);
         return $this;
     }
     

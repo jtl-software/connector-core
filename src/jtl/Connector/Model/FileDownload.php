@@ -65,14 +65,14 @@ class FileDownload extends DataModel
     /**
      * @type array list of identities
      */
-    public $identities = array(
+    protected $identities = array(
         'id',
     );
 
     /**
      * @type array list of navigations
      */
-    public $navigations = array(
+    protected $navigations = array(
         'i18n' => '\jtl\Connector\Model\FileDownloadI18n',
     );
 
@@ -243,6 +243,16 @@ class FileDownload extends DataModel
     public function addI18n(\jtl\Connector\Model\FileDownloadI18n $i18n)
     {
         $this->i18n[] = $i18n;
+        return $this;
+    }
+
+    /**
+     * @param  array $i18n
+     * @return \jtl\Connector\Model\FileDownload
+     */
+    public function addI18n(array $i18n)
+    {
+		$this->i18n = array_merge($this->i18n, $i18n);
         return $this;
     }
     

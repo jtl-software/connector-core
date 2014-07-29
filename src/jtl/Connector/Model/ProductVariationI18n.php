@@ -33,14 +33,14 @@ class ProductVariationI18n extends DataModel
     /**
      * @type array list of identities
      */
-    public $identities = array(
+    protected $identities = array(
         'productVariationId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $navigations = array(
+    protected $navigations = array(
     );
 
     /**

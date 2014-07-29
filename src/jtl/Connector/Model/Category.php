@@ -72,13 +72,6 @@ class Category extends DataModel
     protected $children = array();
 
     /**
-     * Nav [ChildCategory » Many]
-     *
-     * @type \jtl\Connector\Model\Category[]
-     */
-    protected $parent = array();
-
-    /**
      * Nav [Category » One]
      *
      * @type \jtl\Connector\Model\CategoryI18n[]
@@ -110,7 +103,7 @@ class Category extends DataModel
     /**
      * @type array list of identities
      */
-    public $identities = array(
+    protected $identities = array(
         'id',
         'parentCategoryId',
     );
@@ -118,9 +111,8 @@ class Category extends DataModel
     /**
      * @type array list of navigations
      */
-    public $navigations = array(
+    protected $navigations = array(
         'children' => '\jtl\Connector\Model\Category',
-        'parent' => '\jtl\Connector\Model\Category',
         'i18ns' => '\jtl\Connector\Model\CategoryI18n',
         'invisibilities' => '\jtl\Connector\Model\CategoryInvisibility',
         'customerGroups' => '\jtl\Connector\Model\CategoryCustomerGroup',
@@ -332,6 +324,16 @@ class Category extends DataModel
         $this->children[] = $child;
         return $this;
     }
+
+    /**
+     * @param  array $children
+     * @return \jtl\Connector\Model\Category
+     */
+    public function addChildren(array $children)
+    {
+		$this->children = array_merge($this->children, $children);
+        return $this;
+    }
     
     /**
      * @return Category
@@ -351,39 +353,22 @@ class Category extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\Category $parent
+     * @param  \jtl\Connector\Model\CategoryI18n $i18n
      * @return \jtl\Connector\Model\Category
      */
-    public function addParent(\jtl\Connector\Model\Category $parent)
+    public function addI18n(\jtl\Connector\Model\CategoryI18n $i18n)
     {
-        $this->parent[] = $parent;
-        return $this;
-    }
-    
-    /**
-     * @return Category
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\Category
-     */
-    public function clearParent()
-    {
-        $this->parent = array();
+        $this->i18ns[] = $i18n;
         return $this;
     }
 
     /**
-     * @param  \jtl\Connector\Model\CategoryI18n $i18ns
+     * @param  array $i18ns
      * @return \jtl\Connector\Model\Category
      */
-    public function addI18ns(\jtl\Connector\Model\CategoryI18n $i18ns)
+    public function addI18ns(array $i18ns)
     {
-        $this->i18ns[] = $i18ns;
+		$this->i18ns = array_merge($this->i18ns, $i18ns);
         return $this;
     }
     
@@ -413,6 +398,16 @@ class Category extends DataModel
         $this->invisibilities[] = $invisibility;
         return $this;
     }
+
+    /**
+     * @param  array $invisibilities
+     * @return \jtl\Connector\Model\Category
+     */
+    public function addInvisibilities(array $invisibilities)
+    {
+		$this->invisibilities = array_merge($this->invisibilities, $invisibilities);
+        return $this;
+    }
     
     /**
      * @return CategoryInvisibility
@@ -440,6 +435,16 @@ class Category extends DataModel
         $this->customerGroups[] = $customerGroup;
         return $this;
     }
+
+    /**
+     * @param  array $customerGroups
+     * @return \jtl\Connector\Model\Category
+     */
+    public function addCustomerGroups(array $customerGroups)
+    {
+		$this->customerGroups = array_merge($this->customerGroups, $customerGroups);
+        return $this;
+    }
     
     /**
      * @return CategoryCustomerGroup
@@ -465,6 +470,16 @@ class Category extends DataModel
     public function addAttribute(\jtl\Connector\Model\CategoryAttr $attribute)
     {
         $this->attributes[] = $attribute;
+        return $this;
+    }
+
+    /**
+     * @param  array $attributes
+     * @return \jtl\Connector\Model\Category
+     */
+    public function addAttributes(array $attributes)
+    {
+		$this->attributes = array_merge($this->attributes, $attributes);
         return $this;
     }
     

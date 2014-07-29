@@ -70,14 +70,14 @@ class DeliveryNote extends DataModel
     /**
      * @type array list of identities
      */
-    public $identities = array(
+    protected $identities = array(
         'customerOrderId',
     );
 
     /**
      * @type array list of navigations
      */
-    public $navigations = array(
+    protected $navigations = array(
         'items' => '\jtl\Connector\Model\DeliveryNoteItem',
     );
 
@@ -266,6 +266,16 @@ class DeliveryNote extends DataModel
     public function addItem(\jtl\Connector\Model\DeliveryNoteItem $item)
     {
         $this->items[] = $item;
+        return $this;
+    }
+
+    /**
+     * @param  array $items
+     * @return \jtl\Connector\Model\DeliveryNote
+     */
+    public function addItems(array $items)
+    {
+		$this->items = array_merge($this->items, $items);
         return $this;
     }
     

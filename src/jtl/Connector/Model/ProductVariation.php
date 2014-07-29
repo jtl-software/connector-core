@@ -74,7 +74,7 @@ class ProductVariation extends DataModel
     /**
      * @type array list of identities
      */
-    public $identities = array(
+    protected $identities = array(
         'id',
         'productId',
     );
@@ -82,7 +82,7 @@ class ProductVariation extends DataModel
     /**
      * @type array list of navigations
      */
-    public $navigations = array(
+    protected $navigations = array(
         'i18ns' => '\jtl\Connector\Model\ProductVariationI18n',
         'invisibilities' => '\jtl\Connector\Model\ProductVariationInvisibility',
         'values' => '\jtl\Connector\Model\ProductVariationValue',
@@ -231,12 +231,22 @@ class ProductVariation extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductVariationI18n $i18ns
+     * @param  \jtl\Connector\Model\ProductVariationI18n $i18n
      * @return \jtl\Connector\Model\ProductVariation
      */
-    public function addI18ns(\jtl\Connector\Model\ProductVariationI18n $i18ns)
+    public function addI18n(\jtl\Connector\Model\ProductVariationI18n $i18n)
     {
-        $this->i18ns[] = $i18ns;
+        $this->i18ns[] = $i18n;
+        return $this;
+    }
+
+    /**
+     * @param  array $i18ns
+     * @return \jtl\Connector\Model\ProductVariation
+     */
+    public function addI18ns(array $i18ns)
+    {
+		$this->i18ns = array_merge($this->i18ns, $i18ns);
         return $this;
     }
     
@@ -266,6 +276,16 @@ class ProductVariation extends DataModel
         $this->invisibilities[] = $invisibility;
         return $this;
     }
+
+    /**
+     * @param  array $invisibilities
+     * @return \jtl\Connector\Model\ProductVariation
+     */
+    public function addInvisibilities(array $invisibilities)
+    {
+		$this->invisibilities = array_merge($this->invisibilities, $invisibilities);
+        return $this;
+    }
     
     /**
      * @return ProductVariationInvisibility
@@ -291,6 +311,16 @@ class ProductVariation extends DataModel
     public function addValue(\jtl\Connector\Model\ProductVariationValue $value)
     {
         $this->values[] = $value;
+        return $this;
+    }
+
+    /**
+     * @param  array $values
+     * @return \jtl\Connector\Model\ProductVariation
+     */
+    public function addValues(array $values)
+    {
+		$this->values = array_merge($this->values, $values);
         return $this;
     }
     
