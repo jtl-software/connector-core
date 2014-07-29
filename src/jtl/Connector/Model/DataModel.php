@@ -52,25 +52,42 @@ class DataModel extends CoreModel
      * @param array $publics
      * @return stdClass $object
      */
-    public function getPublic(array $publics = array('fields', 'isEncrypted', 'identities', 'action'))
+    public function getPublic(array $publics = array('fields', 'isEncrypted', 'identities', 'action', 'navigations'))
     {
         $object = new \stdClass();
-            
+
+        $recursive = function (array $subElems, array $publics) use (&$recursive) {
+            $arr = array();
+            foreach ($subElems as $subElem) {
+                if ($subElem instanceof self) {
+                    $arr[] = $subElem->getPublic($publics);
+                } else if ($subElem instanceof Identity) {
+                    $arr[] = $subElem->toArray();
+                } else if (is_array($subElem)) {
+                    $arr[] = $recursive($subElem, $publics);
+                } else {
+                    $arr[] = $subElem;
+                }
+            }
+
+            return $arr;
+        };
+
         $members = array_keys(get_object_vars($this));
         if (is_array($members) && count($members) > 0) {
             foreach ($members as $member) {
+                $property = ucfirst($member);
+                $getter = 'get' . $property;
+
                 if (!in_array($member, $publics)) {
-                    $memberpub = $member;
-                    if ($member[0] == "_") {
-                        $memberpub = substr($member, 1);
-                    }
-                    
-                    if ($this->{$member} instanceof self) {
-                        $object->{$memberpub} = $this->{$member}->getPublic($publics);
-                    } elseif ($this->{$member} instanceof Identity) {
-                        $object->{$memberpub} = $this->{$member}->toArray();
+                    if ($this->{$getter}() instanceof self) {
+                        $object->{$member} = $this->{$getter}()->getPublic($publics);
+                    } else if ($this->{$getter}() instanceof Identity) {
+                        $object->{$member} = $this->{$getter}()->toArray();
+                    } else if (is_array($this->{$member})) {
+                        $object->{$member} = $recursive($this->{$member}, $publics);
                     } else {
-                        $object->{$memberpub} = $this->{$member};
+                        $object->{$member} = $this->{$member};
                     }
                 }
             }
