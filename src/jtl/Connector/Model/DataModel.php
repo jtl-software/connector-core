@@ -24,9 +24,50 @@ class DataModel extends CoreModel
     const ACTION_DELETE = 'delete';
 
     /**
+     * @type boolean
+     */
+    protected $isEncrypted = false;
+
+    /**
+     * @type array list of strings
+     */
+    protected $identities = array();
+
+    /**
+     * @type array list of strings
+     */
+    protected $navigations = array();
+
+    /**
      * @type string
      */
     protected $action = '';
+
+    /**
+     * @return array 
+     */
+    public function getIdentities()
+    {
+        return $this->identities;
+    }
+
+    /**
+     * @return array 
+     */
+    public function getNavigations()
+    {
+        return $this->navigations;
+    }
+
+    /**
+     * Encrypted Status
+     * 
+     * @return boolean
+     */
+    public function isEncrypted()
+    {
+        return $this->isEncrypted;
+    }
 
     /**
      * @param  string $action 
@@ -44,6 +85,17 @@ class DataModel extends CoreModel
     public function getAction()
     {
         return $this->action;
+    }
+
+    /**
+     * Identity checker
+     *
+     * @param string $identity
+     * @return boolean
+     */
+    public function isIdentity($identity)
+    {
+        return in_array($identity, $this->identities);
     }
 
     /**
