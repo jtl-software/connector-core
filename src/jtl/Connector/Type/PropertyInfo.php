@@ -12,7 +12,7 @@ namespace jtl\Connector\Type;
  * @access public
  * @package jtl\Connector\Type
  */
-public class PropertyInfo
+class PropertyInfo
 {
     protected $name;
     protected $type;
