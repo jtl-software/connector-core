@@ -39,9 +39,12 @@ class ProductInvisibility extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'connectorId' => 'integer',
+        'productId' => '\jtl\Connector\Model\Identity',
+        'customerGroupId' => '\jtl\Connector\Model\Identity',
     );
 
 

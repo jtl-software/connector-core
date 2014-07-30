@@ -44,9 +44,13 @@ class ProductPrice extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'customerGroupId' => '\jtl\Connector\Model\Identity',
+        'productId' => '\jtl\Connector\Model\Identity',
+        'netPrice' => 'float',
+        'quantity' => 'integer',
     );
 
 

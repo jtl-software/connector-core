@@ -94,9 +94,15 @@ class Connector extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'id' => 'integer',
+        'companyId' => 'integer',
+        'name' => 'string',
+        'url' => 'string',
+        'token' => 'string',
+        'isActive' => 'boolean',
         'customerGroups' => '\jtl\Connector\Model\ConnectorCustomerGroup',
         'logMessages' => '\jtl\Connector\Model\ConnectorLog',
         'currencies' => '\jtl\Connector\Model\ConnectorCurrency',

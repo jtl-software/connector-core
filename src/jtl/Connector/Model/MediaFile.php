@@ -73,9 +73,16 @@ class MediaFile extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'path' => 'string',
+        'url' => 'string',
+        'mediaFileCategory' => 'string',
+        'type' => 'string',
+        'sort' => 'integer',
+        'id' => '\jtl\Connector\Model\Identity',
+        'productId' => '\jtl\Connector\Model\Identity',
         'i18ns' => '\jtl\Connector\Model\MediaFileI18n',
         'attributes' => '\jtl\Connector\Model\MediaFileAttr',
     );

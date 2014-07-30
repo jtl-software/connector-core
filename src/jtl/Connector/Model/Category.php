@@ -109,14 +109,24 @@ class Category extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'name' => 'string',
+        'description' => 'string',
+        'sort' => 'integer',
+        'url' => 'string',
+        'id' => '\jtl\Connector\Model\Identity',
+        'parentCategoryId' => '\jtl\Connector\Model\Identity',
+        'flagUpdate' => 'boolean',
+        'isActive' => 'boolean',
+        'flagDelete' => 'boolean',
         'children' => '\jtl\Connector\Model\Category',
         'i18ns' => '\jtl\Connector\Model\CategoryI18n',
         'invisibilities' => '\jtl\Connector\Model\CategoryInvisibility',
         'customerGroups' => '\jtl\Connector\Model\CategoryCustomerGroup',
         'attributes' => '\jtl\Connector\Model\CategoryAttr',
+        'level' => 'integer',
     );
 
 

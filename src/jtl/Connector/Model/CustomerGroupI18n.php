@@ -45,9 +45,12 @@ class CustomerGroupI18n extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'name' => 'string',
+        'customerGroupId' => '\jtl\Connector\Model\Identity',
+        'localeName' => 'string',
         'customerGroup' => '\jtl\Connector\Model\CustomerGroup',
     );
 

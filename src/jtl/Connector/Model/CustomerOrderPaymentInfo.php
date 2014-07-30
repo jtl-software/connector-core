@@ -80,9 +80,20 @@ class CustomerOrderPaymentInfo extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'bankAccount' => 'string',
+        'bankCode' => 'string',
+        'accountNumber' => 'string',
+        'creditCardNumber' => 'string',
+        'cvv' => 'string',
+        'accountHolder' => 'string',
+        'cIBAN' => 'string',
+        'cBIC' => 'string',
+        'id' => '\jtl\Connector\Model\Identity',
+        'customerOrderId' => '\jtl\Connector\Model\Identity',
+        'platformId' => '\jtl\Connector\Model\Identity',
     );
 
 

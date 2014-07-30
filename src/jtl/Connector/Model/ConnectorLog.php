@@ -43,9 +43,13 @@ class ConnectorLog extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'connectorId' => 'integer',
+        'message' => 'string',
+        'date' => '\jtl\Connector\Model\DateTime',
+        'id' => '\jtl\Connector\Model\Identity',
     );
 
 

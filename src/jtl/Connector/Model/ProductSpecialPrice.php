@@ -71,9 +71,17 @@ class ProductSpecialPrice extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'activeFrom' => '\jtl\Connector\Model\DateTime',
+        'stockLimit' => 'integer',
+        'activeUntil' => '\jtl\Connector\Model\DateTime',
+        'considerDateLimit' => 'integer',
+        'considerStockLimit' => 'integer',
+        'id' => '\jtl\Connector\Model\Identity',
+        'productId' => '\jtl\Connector\Model\Identity',
+        'isActive' => 'boolean',
         'specialPrices' => '\jtl\Connector\Model\SpecialPrice',
     );
 

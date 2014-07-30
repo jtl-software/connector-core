@@ -46,9 +46,12 @@ class SpecificValue extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'sort' => 'integer',
+        'id' => '\jtl\Connector\Model\Identity',
+        'specificId' => '\jtl\Connector\Model\Identity',
         'i18ns' => '\jtl\Connector\Model\SpecificValueI18n',
     );
 

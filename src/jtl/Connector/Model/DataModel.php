@@ -36,7 +36,7 @@ class DataModel extends CoreModel
     /**
      * @type array list of strings
      */
-    protected $navigations = array();
+    protected $propertyInfos = array();
 
     /**
      * @type string
@@ -54,9 +54,9 @@ class DataModel extends CoreModel
     /**
      * @return array 
      */
-    public function getNavigations()
+    public function getPropertyInfos()
     {
-        return $this->navigations;
+        return $this->propertyInfos;
     }
 
     /**
@@ -104,7 +104,7 @@ class DataModel extends CoreModel
      * @param array $publics
      * @return stdClass $object
      */
-    public function getPublic(array $publics = array('fields', 'isEncrypted', 'identities', 'action', 'navigations'))
+    public function getPublic(array $publics = array('fields', 'isEncrypted', 'identities', 'action', 'propertyInfos'))
     {
         $object = new \stdClass();
 
@@ -180,8 +180,6 @@ class DataModel extends CoreModel
     protected function setProperty($name, $value, $type)
     {
         if (!$this->validateType($value, $type)) {
-            var_dump($value);
-            debug_print_backtrace();
             throw new \InvalidArgumentException(sprintf("expected type '%s', given value '%s'.", $type, gettype($value)));
         }
 

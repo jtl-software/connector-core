@@ -112,9 +112,21 @@ class ProductVariationValue extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'extraCharge' => 'float',
+        'extraChargeNet' => 'float',
+        'extraWeight' => 'float',
+        'sku' => 'string',
+        'sort' => 'integer',
+        'stockLevel' => 'float',
+        'ean' => 'string',
+        'cName' => 'string',
+        'id' => '\jtl\Connector\Model\Identity',
+        'productVariationId' => '\jtl\Connector\Model\Identity',
+        'isActive' => 'boolean',
+        'flagUpdate' => 'boolean',
         'dependencies' => '\jtl\Connector\Model\ProductVariationValueDependency',
         'extraCharges' => '\jtl\Connector\Model\ProductVariationValueExtraCharge',
         'i18ns' => '\jtl\Connector\Model\ProductVariationValueI18n',

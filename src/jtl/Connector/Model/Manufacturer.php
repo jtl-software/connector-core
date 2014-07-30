@@ -55,9 +55,14 @@ class Manufacturer extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'name' => 'string',
+        'www' => 'string',
+        'sort' => 'integer',
+        'urlPath' => 'string',
+        'id' => '\jtl\Connector\Model\Identity',
         'i18ns' => '\jtl\Connector\Model\ManufacturerI18n',
     );
 

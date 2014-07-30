@@ -52,9 +52,15 @@ class ConnectorSyncQueue extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'queueId' => 'integer',
+        'connectorId' => 'integer',
+        'key' => 'integer',
+        'type' => 'integer',
+        'tryCount' => 'integer',
+        'action' => '\jtl\Connector\Model\Byte[]',
     );
 
 

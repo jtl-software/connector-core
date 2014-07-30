@@ -70,9 +70,17 @@ class FileDownload extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'internalId' => 'string',
+        'path' => 'string',
+        'previewPath' => 'string',
+        'maxDownloads' => 'integer',
+        'maxDays' => 'integer',
+        'created' => '\jtl\Connector\Model\DateTime',
+        'sort' => 'integer',
+        'id' => '\jtl\Connector\Model\Identity',
         'i18n' => '\jtl\Connector\Model\FileDownloadI18n',
     );
 

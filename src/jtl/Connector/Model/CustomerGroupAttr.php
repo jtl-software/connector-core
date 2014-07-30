@@ -51,9 +51,13 @@ class CustomerGroupAttr extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'key' => 'string',
+        'value' => 'string',
+        'id' => '\jtl\Connector\Model\Identity',
+        'customerGroupId' => '\jtl\Connector\Model\Identity',
         'customerGroup' => '\jtl\Connector\Model\CustomerGroup',
     );
 

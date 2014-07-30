@@ -50,9 +50,14 @@ class TaxRate extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'rate' => 'float',
+        'priority' => 'integer',
+        'id' => '\jtl\Connector\Model\Identity',
+        'taxZoneId' => '\jtl\Connector\Model\Identity',
+        'taxClassId' => '\jtl\Connector\Model\Identity',
     );
 
 

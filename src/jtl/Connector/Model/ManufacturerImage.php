@@ -54,9 +54,15 @@ class ManufacturerImage extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'connectorId' => 'integer',
+        'data' => '\jtl\Connector\Model\Byte[]',
+        'size' => 'integer',
+        'sort' => 'integer',
+        'id' => '\jtl\Connector\Model\Identity',
+        'foreignKey' => '\jtl\Connector\Model\Identity',
     );
 
 

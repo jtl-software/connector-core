@@ -42,9 +42,13 @@ class ConnectorSync extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'syncId' => 'integer',
+        'key' => 'integer',
+        'type' => 'integer',
+        'action' => '\jtl\Connector\Model\Byte[]',
     );
 
 

@@ -52,9 +52,15 @@ class Image extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'id' => '\jtl\Connector\Model\Identity',
+        'foreignKey' => '\jtl\Connector\Model\Identity',
+        'masterImageId' => '\jtl\Connector\Model\Identity',
+        'relationType' => 'integer',
+        'filename' => 'string',
+        'sort' => 'integer',
     );
 
 

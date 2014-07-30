@@ -53,9 +53,15 @@ class ManufacturerI18n extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'metaTitle' => 'string',
+        'metaKeywords' => 'string',
+        'metaDescription' => 'string',
+        'description' => 'string',
+        'manufacturerId' => '\jtl\Connector\Model\Identity',
+        'localeName' => 'string',
     );
 
 

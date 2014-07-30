@@ -44,9 +44,13 @@ class ProductVariationValueExtraCharge extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'connectorId' => 'integer',
+        'extraChargeNet' => 'float',
+        'productVariationValueId' => '\jtl\Connector\Model\Identity',
+        'customerGroupId' => '\jtl\Connector\Model\Identity',
     );
 
 

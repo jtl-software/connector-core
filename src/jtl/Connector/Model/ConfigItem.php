@@ -113,9 +113,24 @@ class ConfigItem extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'type' => 'integer',
+        'isPreSelected' => 'integer',
+        'isRecommended' => 'integer',
+        'inheritProductName' => 'integer',
+        'inheritProductPrice' => 'integer',
+        'sort' => 'integer',
+        'showDiscount' => 'integer',
+        'showSurcharge' => 'integer',
+        'minQuantity' => 'float',
+        'maxQuantity' => 'float',
+        'initialQuantity' => 'float',
+        'fStandardpreis' => 'float',
+        'ignoreMultiplier' => 'integer',
+        'configGroupId' => '\jtl\Connector\Model\Identity',
+        'productId' => '\jtl\Connector\Model\Identity',
         'prices' => '\jtl\Connector\Model\ConfigItemPrice',
         'i18n' => '\jtl\Connector\Model\ConfigItemI18n',
     );

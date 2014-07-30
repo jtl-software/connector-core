@@ -68,9 +68,18 @@ class ProductI18n extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'name' => 'string',
+        'description' => 'string',
+        'shortDescription' => 'string',
+        'urlPath' => 'string',
+        'titleTag' => 'string',
+        'metaKeywords' => 'string',
+        'metaDescription' => 'string',
+        'productId' => '\jtl\Connector\Model\Identity',
+        'localeName' => 'string',
     );
 
 

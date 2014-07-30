@@ -49,9 +49,14 @@ class MediaFileAttr extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'key' => 'string',
+        'value' => 'string',
+        'id' => '\jtl\Connector\Model\Identity',
+        'mediaFileId' => '\jtl\Connector\Model\Identity',
+        'localeName' => 'string',
     );
 
 

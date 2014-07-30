@@ -80,9 +80,20 @@ class ProductImage extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'data' => '\jtl\Connector\Model\Byte[]',
+        'size' => 'integer',
+        'modified' => 'string',
+        'dAenderungsdatum' => '\jtl\Connector\Model\DateTime',
+        'cHash' => 'string',
+        'cAufloesung' => 'string',
+        'id' => '\jtl\Connector\Model\Identity',
+        'foreignKey' => '\jtl\Connector\Model\Identity',
+        'flagDelete' => 'boolean',
+        'flagUpdate' => 'boolean',
+        'masterImageId' => '\jtl\Connector\Model\Identity',
     );
 
 

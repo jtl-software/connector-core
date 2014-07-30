@@ -59,9 +59,16 @@ class ProductVariationValueImage extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'data' => '\jtl\Connector\Model\Byte[]',
+        'size' => 'integer',
+        'modified' => 'string',
+        'id' => '\jtl\Connector\Model\Identity',
+        'foreignKey' => '\jtl\Connector\Model\Identity',
+        'flagDelete' => 'boolean',
+        'flagUpdate' => 'boolean',
     );
 
 

@@ -75,9 +75,18 @@ class DeliveryNote extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'kBenutzer' => 'integer',
+        'cLieferscheinNr' => 'string',
+        'note' => 'string',
+        'dMailVersand' => '\jtl\Connector\Model\DateTime',
+        'created' => '\jtl\Connector\Model\DateTime',
+        'dGedruckt' => '\jtl\Connector\Model\DateTime',
+        'kLieferantenBestellung' => 'integer',
+        'customerOrderId' => '\jtl\Connector\Model\Identity',
+        'isFulfillment' => 'boolean',
         'items' => '\jtl\Connector\Model\DeliveryNoteItem',
     );
 

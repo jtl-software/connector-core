@@ -67,9 +67,15 @@ class CustomerGroup extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'name' => 'string',
+        'applyNetPrice' => 'integer',
+        'discount' => 'float',
+        'kKundenDrucktext' => 'integer',
+        'id' => '\jtl\Connector\Model\Identity',
+        'isDefault' => 'boolean',
         'attributes' => '\jtl\Connector\Model\CustomerGroupAttr',
         'i18n' => '\jtl\Connector\Model\CustomerGroupI18n',
     );

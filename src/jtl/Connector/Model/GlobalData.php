@@ -126,6 +126,13 @@ class GlobalData extends DataModel
      */
     protected $configItems = array();
 
+    /**
+     * 
+     *
+     * @type \jtl\Connector\Model\CustomerGroup[]
+     */
+    protected $customerGroups = array();
+
 
     /**
      * @type array list of identities
@@ -134,9 +141,9 @@ class GlobalData extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
         'companies' => '\jtl\Connector\Model\Company',
         'currencies' => '\jtl\Connector\Model\Currency',
         'languages' => '\jtl\Connector\Model\Language',
@@ -153,6 +160,7 @@ class GlobalData extends DataModel
         'crossSellingGroups' => '\jtl\Connector\Model\CrossSellingGroup',
         'configGroups' => '\jtl\Connector\Model\ConfigGroup',
         'configItems' => '\jtl\Connector\Model\ConfigItem',
+        'customerGroups' => '\jtl\Connector\Model\CustomerGroup',
     );
 
 
@@ -585,6 +593,33 @@ class GlobalData extends DataModel
     public function clearConfigItems()
     {
         $this->configItems = array();
+        return $this;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\CustomerGroup $customerGroup
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function addCustomerGroup(\jtl\Connector\Model\CustomerGroup $customerGroup)
+    {
+        $this->customerGroups[] = $customerGroup;
+        return $this;
+    }
+    
+    /**
+     * @return CustomerGroup
+     */
+    public function getCustomerGroups()
+    {
+        return $this->customerGroups;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function clearCustomerGroups()
+    {
+        $this->customerGroups = array();
         return $this;
     }
 }

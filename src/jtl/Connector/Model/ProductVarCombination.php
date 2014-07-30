@@ -40,9 +40,12 @@ class ProductVarCombination extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'id' => '\jtl\Connector\Model\Identity',
+        'productVariationId' => '\jtl\Connector\Model\Identity',
+        'productVariationValueId' => '\jtl\Connector\Model\Identity',
     );
 
 

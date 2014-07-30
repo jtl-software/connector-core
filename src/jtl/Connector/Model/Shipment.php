@@ -88,9 +88,22 @@ class Shipment extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'kBenutzer' => 'integer',
+        'kLogistik' => 'integer',
+        'identCode' => 'string',
+        'created' => '\jtl\Connector\Model\DateTime',
+        'note' => 'string',
+        'fGewicht' => 'float',
+        'kVersandArt' => 'integer',
+        'logistic' => 'string',
+        'cFulfillmentCenter' => 'string',
+        'dAnkunftszeit' => '\jtl\Connector\Model\DateTime',
+        'nVerpackZeitSek' => 'integer',
+        'dVersendet' => '\jtl\Connector\Model\DateTime',
+        'deliveryNoteId' => '\jtl\Connector\Model\Identity',
     );
 
 

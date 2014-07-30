@@ -67,9 +67,17 @@ class CustomerOrderItemVariation extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'productVariationName' => 'string',
+        'productVariationValueName' => 'string',
+        'surcharge' => 'float',
+        'id' => '\jtl\Connector\Model\Identity',
+        'productVariationValueId' => '\jtl\Connector\Model\Identity',
+        'customerOrderItemId' => '\jtl\Connector\Model\Identity',
+        'productId' => '\jtl\Connector\Model\Identity',
+        'productVariationId' => '\jtl\Connector\Model\Identity',
     );
 
 

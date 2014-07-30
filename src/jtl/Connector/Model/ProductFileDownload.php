@@ -34,9 +34,11 @@ class ProductFileDownload extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'productId' => '\jtl\Connector\Model\Identity',
+        'fileDownloadId' => '\jtl\Connector\Model\Identity',
     );
 
 

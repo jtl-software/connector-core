@@ -38,9 +38,12 @@ class SpecificI18n extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'name' => 'string',
+        'specificId' => '\jtl\Connector\Model\Identity',
+        'localeName' => 'string',
     );
 
 

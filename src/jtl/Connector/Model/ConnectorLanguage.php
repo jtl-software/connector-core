@@ -37,9 +37,12 @@ class ConnectorLanguage extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'connectorId' => 'integer',
+        'languageId' => 'integer',
+        'isDefault' => 'boolean',
     );
 
 

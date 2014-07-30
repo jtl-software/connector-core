@@ -43,9 +43,13 @@ class ConfigGroupI18n extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'name' => 'string',
+        'description' => 'string',
+        'configGroupId' => '\jtl\Connector\Model\Identity',
+        'localeName' => 'string',
     );
 
 

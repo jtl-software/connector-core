@@ -55,9 +55,15 @@ class ConfigItemPrice extends DataModel
     );
 
     /**
-     * @type array list of navigations
+     * @type array list of propertyInfo
      */
-    protected $navigations = array(
+    protected $propertyInfos = array(
+        'price' => 'float',
+        'connectorId' => 'integer',
+        'type' => 'integer',
+        'configItemId' => '\jtl\Connector\Model\Identity',
+        'customerGroupId' => '\jtl\Connector\Model\Identity',
+        'taxClassId' => '\jtl\Connector\Model\Identity',
     );
 
 
