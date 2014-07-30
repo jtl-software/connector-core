@@ -27,8 +27,9 @@ abstract class DataType
      */
     public function getProperties()
     {
-        if ($this->propertyInfo === null)
+        if ($this->propertyInfo === null) {
             $this->propertyInfo = $this->loadProperties();
+        }
             
         return $this->propertyInfo;
     }
@@ -41,8 +42,7 @@ abstract class DataType
      */
     public function getProperty($property)
     {
-        foreach ($this->getProperties() as $property)
-        {
+        foreach ($this->getProperties() as $property) {
             
         }
         
