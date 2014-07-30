@@ -16,13 +16,19 @@ public class PropertyInfo
 {
     protected $name;
     protected $type;
-    protected $nullable;
+    protected $defaultValue;
+    protected $isPrimary;
+    protected $isEntity;
+    protected $isNavigation;
     
-    public function __construct ($name, $type, $nullable)
+    public function __construct ($name, $type, $defaultValue, $isPrimary, $isEntity, $isNavigation)
     {
-        $this->setName($name)
-            ->setType($type)
-            ->setNullable($nullable);
+        $this->name = $name;
+        $this->type = $type;
+        $this->defaultValue = $defaultValue;
+        $this->isPrimary = $isPrimary;
+        $this->isEntity = $isEntity;
+        $this->isNavigation = $isNavigation;
     }
 
     public function getName()
@@ -30,31 +36,28 @@ public class PropertyInfo
         return $this->name;
     }
     
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
-    }
-    
     public function getType()
     {
         return $this->type;
     }
     
-    public function setType($type)
+    public function getDefaultValue()
     {
-        $this->type = $type;
-        return $this;
+        return $this->defaultValue;
     }
     
-    public function getNullable()
+    public function isPrimary()
     {
-        return $this->type;
+        return $this->isPrimary;
     }
     
-    public function setNullable($nullable)
+    public function isEntity()
     {
-        $this->nullable = $nullable;
-        return $this;
+        return $this->isEntity;
+    }
+    
+    public function isNavigation()
+    {
+        return $this->isNavigation;
     }
 }
