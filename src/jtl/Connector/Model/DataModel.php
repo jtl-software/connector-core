@@ -132,7 +132,7 @@ class DataModel extends CoreModel
                 $getter = 'get' . $property;
 
                 if (!in_array($member, $publics)) {
-                    if ($this->{$getter}() instanceof self) {
+                    if ($this->{$getter}() instanceof DataModel) {
                         $object->{$member} = $this->{$getter}()->getPublic($publics);
                     } else if ($this->{$getter}() instanceof Identity) {
                         $object->{$member} = $this->{$getter}()->toArray();
@@ -180,6 +180,8 @@ class DataModel extends CoreModel
     protected function setProperty($name, $value, $type)
     {
         if (!$this->validateType($value, $type)) {
+            var_dump($value);
+            debug_print_backtrace();
             throw new \InvalidArgumentException(sprintf("expected type '%s', given value '%s'.", $type, gettype($value)));
         }
 
