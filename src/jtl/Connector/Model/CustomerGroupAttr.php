@@ -57,21 +57,6 @@ class CustomerGroupAttr extends DataModel
         'customerGroup' => '\jtl\Connector\Model\CustomerGroup',
     );
 
-    /**
-     * @return array 
-     */
-    public function getIdentities()
-    {
-        return $this->identities;
-    }
-
-    /**
-     * @return array 
-     */
-    public function getNavigations()
-    {
-        return $this->navigations;
-    }
 
     /**
      * @param  string $key Attribute key
@@ -152,16 +137,6 @@ class CustomerGroupAttr extends DataModel
     public function addCustomerGroup(\jtl\Connector\Model\CustomerGroup $customerGroup)
     {
         $this->customerGroup[] = $customerGroup;
-        return $this;
-    }
-
-    /**
-     * @param  array $customerGroup
-     * @return \jtl\Connector\Model\CustomerGroupAttr
-     */
-    public function addCustomerGroup(array $customerGroup)
-    {
-		$this->customerGroup = array_merge($this->customerGroup, $customerGroup);
         return $this;
     }
     

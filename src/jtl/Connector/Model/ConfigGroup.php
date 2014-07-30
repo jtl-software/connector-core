@@ -65,21 +65,6 @@ class ConfigGroup extends DataModel
         'i18n' => '\jtl\Connector\Model\ConfigGroupI18n',
     );
 
-    /**
-     * @return array 
-     */
-    public function getIdentities()
-    {
-        return $this->identities;
-    }
-
-    /**
-     * @return array 
-     */
-    public function getNavigations()
-    {
-        return $this->navigations;
-    }
 
     /**
      * @param  Byte[] $image 
@@ -196,16 +181,6 @@ class ConfigGroup extends DataModel
     public function addI18n(\jtl\Connector\Model\ConfigGroupI18n $i18n)
     {
         $this->i18n[] = $i18n;
-        return $this;
-    }
-
-    /**
-     * @param  array $i18n
-     * @return \jtl\Connector\Model\ConfigGroup
-     */
-    public function addI18n(array $i18n)
-    {
-		$this->i18n = array_merge($this->i18n, $i18n);
         return $this;
     }
     

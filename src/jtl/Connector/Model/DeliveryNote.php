@@ -81,21 +81,6 @@ class DeliveryNote extends DataModel
         'items' => '\jtl\Connector\Model\DeliveryNoteItem',
     );
 
-    /**
-     * @return array 
-     */
-    public function getIdentities()
-    {
-        return $this->identities;
-    }
-
-    /**
-     * @return array 
-     */
-    public function getNavigations()
-    {
-        return $this->navigations;
-    }
 
     /**
      * @param  integer $kBenutzer 
@@ -266,16 +251,6 @@ class DeliveryNote extends DataModel
     public function addItem(\jtl\Connector\Model\DeliveryNoteItem $item)
     {
         $this->items[] = $item;
-        return $this;
-    }
-
-    /**
-     * @param  array $items
-     * @return \jtl\Connector\Model\DeliveryNote
-     */
-    public function addItems(array $items)
-    {
-		$this->items = array_merge($this->items, $items);
         return $this;
     }
     

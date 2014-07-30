@@ -77,21 +77,6 @@ class ProductSpecialPrice extends DataModel
         'specialPrices' => '\jtl\Connector\Model\SpecialPrice',
     );
 
-    /**
-     * @return array 
-     */
-    public function getIdentities()
-    {
-        return $this->identities;
-    }
-
-    /**
-     * @return array 
-     */
-    public function getNavigations()
-    {
-        return $this->navigations;
-    }
 
     /**
      * @param  DateTime $activeFrom Optional: Activate special price from date
@@ -244,16 +229,6 @@ class ProductSpecialPrice extends DataModel
     public function addSpecialPrice(\jtl\Connector\Model\SpecialPrice $specialPrice)
     {
         $this->specialPrices[] = $specialPrice;
-        return $this;
-    }
-
-    /**
-     * @param  array $specialPrices
-     * @return \jtl\Connector\Model\ProductSpecialPrice
-     */
-    public function addSpecialPrices(array $specialPrices)
-    {
-		$this->specialPrices = array_merge($this->specialPrices, $specialPrices);
         return $this;
     }
     

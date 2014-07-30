@@ -9,7 +9,7 @@ namespace jtl\Connector\Model;
 
 /**
  * Statistic Model
- 
+ *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Statistic
@@ -17,46 +17,19 @@ namespace jtl\Connector\Model;
 class Statistic extends DataModel
 {
     /**
-     * @var int
+     * @type int
      */
-    protected $_available;
+    protected $available = 0;
 
     /**
-     * @var int
+     * @type int
      */
-    protected $_pending;
+    protected $pending = 0;
 
     /**
-     * @var string
+     * @type string
      */
-    protected $_controllerName;
-
-    /**
-     * Statistic Setter
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function __set($name, $value)
-    {
-        if ($value === null) {
-            $this->$name = null;
-            return;
-        }
-
-        switch ($name) {
-            case "_available":
-            case "_pending":
-            
-                $this->$name = (int)$value;
-                break;
-
-            case "_controllerName":
-
-                $this->$name = $value;
-                break;
-        }
-    }
+    protected $controllerName = '';
 
     /**
      * (non-PHPdoc)
@@ -65,6 +38,60 @@ class Statistic extends DataModel
     public function map($toWawi = false, \stdClass $obj = null)
     {
     
+    }
+
+    /**
+     * @return integer
+     */
+    public function getAvailable()
+    {
+        return $this->available;
+    }
+    
+    /**
+     * @param  integer $available
+     * @return \jtl\Connector\Model\Statistic
+     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     */
+    public function setAvailable($available)
+    {
+        return $this->setProperty('available', $available, 'integer');
+    }
+
+    /**
+     * @return integer
+     */
+    public function getPending()
+    {
+        return $this->pending;
+    }
+    
+    /**
+     * @param  integer $pending
+     * @return \jtl\Connector\Model\Statistic
+     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     */
+    public function setPending($pending)
+    {
+        return $this->setProperty('pending', $pending, 'integer');
+    }
+
+    /**
+     * @return string
+     */
+    public function getControllerName()
+    {
+        return $this->controllerName;
+    }
+    
+    /**
+     * @param  string $pending
+     * @return \jtl\Connector\Model\Statistic
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setControllerName($controllerName)
+    {
+        return $this->setProperty('controllerName', $controllerName, 'string');
     }
 }
 ?>

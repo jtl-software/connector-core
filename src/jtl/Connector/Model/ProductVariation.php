@@ -88,21 +88,6 @@ class ProductVariation extends DataModel
         'values' => '\jtl\Connector\Model\ProductVariationValue',
     );
 
-    /**
-     * @return array 
-     */
-    public function getIdentities()
-    {
-        return $this->identities;
-    }
-
-    /**
-     * @return array 
-     */
-    public function getNavigations()
-    {
-        return $this->navigations;
-    }
 
     /**
      * @param  integer $sort Optional sort number
@@ -239,16 +224,6 @@ class ProductVariation extends DataModel
         $this->i18ns[] = $i18n;
         return $this;
     }
-
-    /**
-     * @param  array $i18ns
-     * @return \jtl\Connector\Model\ProductVariation
-     */
-    public function addI18ns(array $i18ns)
-    {
-		$this->i18ns = array_merge($this->i18ns, $i18ns);
-        return $this;
-    }
     
     /**
      * @return ProductVariationI18n
@@ -276,16 +251,6 @@ class ProductVariation extends DataModel
         $this->invisibilities[] = $invisibility;
         return $this;
     }
-
-    /**
-     * @param  array $invisibilities
-     * @return \jtl\Connector\Model\ProductVariation
-     */
-    public function addInvisibilities(array $invisibilities)
-    {
-		$this->invisibilities = array_merge($this->invisibilities, $invisibilities);
-        return $this;
-    }
     
     /**
      * @return ProductVariationInvisibility
@@ -311,16 +276,6 @@ class ProductVariation extends DataModel
     public function addValue(\jtl\Connector\Model\ProductVariationValue $value)
     {
         $this->values[] = $value;
-        return $this;
-    }
-
-    /**
-     * @param  array $values
-     * @return \jtl\Connector\Model\ProductVariation
-     */
-    public function addValues(array $values)
-    {
-		$this->values = array_merge($this->values, $values);
         return $this;
     }
     

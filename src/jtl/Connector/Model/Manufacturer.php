@@ -61,21 +61,6 @@ class Manufacturer extends DataModel
         'i18ns' => '\jtl\Connector\Model\ManufacturerI18n',
     );
 
-    /**
-     * @return array 
-     */
-    public function getIdentities()
-    {
-        return $this->identities;
-    }
-
-    /**
-     * @return array 
-     */
-    public function getNavigations()
-    {
-        return $this->navigations;
-    }
 
     /**
      * @param  string $name Manufacturer (brand) name
@@ -174,16 +159,6 @@ class Manufacturer extends DataModel
     public function addI18n(\jtl\Connector\Model\ManufacturerI18n $i18n)
     {
         $this->i18ns[] = $i18n;
-        return $this;
-    }
-
-    /**
-     * @param  array $i18ns
-     * @return \jtl\Connector\Model\Manufacturer
-     */
-    public function addI18ns(array $i18ns)
-    {
-		$this->i18ns = array_merge($this->i18ns, $i18ns);
         return $this;
     }
     

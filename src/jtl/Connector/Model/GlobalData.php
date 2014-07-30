@@ -15,84 +15,116 @@ namespace jtl\Connector\Model;
 class GlobalData extends DataModel
 {
     /**
-     * @type HashSet`1 
+     * 
+     *
+     * @type \jtl\Connector\Model\Company[]
      */
-    protected $companies = null;
+    protected $companies = array();
 
     /**
-     * @type HashSet`1 
+     * 
+     *
+     * @type \jtl\Connector\Model\Currency[]
      */
-    protected $configGroups = null;
+    protected $currencies = array();
 
     /**
-     * @type HashSet`1 
+     * 
+     *
+     * @type \jtl\Connector\Model\Language[]
      */
-    protected $configItems = null;
+    protected $languages = array();
 
     /**
-     * @type HashSet`1 
+     * 
+     *
+     * @type \jtl\Connector\Model\SetArticle[]
      */
-    protected $crossSellingGroups = null;
+    protected $setArticles = array();
 
     /**
-     * @type HashSet`1 
+     * 
+     *
+     * @type \jtl\Connector\Model\Shipment[]
      */
-    protected $crossSellings = null;
+    protected $shipments = array();
 
     /**
-     * @type HashSet`1 
+     * 
+     *
+     * @type \jtl\Connector\Model\ShippingClass[]
      */
-    protected $currencies = null;
+    protected $shippingClasss = array();
 
     /**
-     * @type HashSet`1 
+     * 
+     *
+     * @type \jtl\Connector\Model\SpecialPrice[]
      */
-    protected $languages = null;
+    protected $specialPrices = array();
 
     /**
-     * @type HashSet`1 
+     * 
+     *
+     * @type \jtl\Connector\Model\TaxClass[]
      */
-    protected $setArticles = null;
+    protected $taxClasss = array();
 
     /**
-     * @type HashSet`1 
+     * 
+     *
+     * @type \jtl\Connector\Model\Company[]
      */
-    protected $shipments = null;
+    protected $taxRates = array();
 
     /**
-     * @type HashSet`1 
+     * 
+     *
+     * @type \jtl\Connector\Model\TaxZone[]
      */
-    protected $shippingClasss = null;
+    protected $taxZones = array();
 
     /**
-     * @type HashSet`1 
+     * 
+     *
+     * @type \jtl\Connector\Model\Unit[]
      */
-    protected $specialPrices = null;
+    protected $units = array();
 
     /**
-     * @type HashSet`1 
+     * 
+     *
+     * @type \jtl\Connector\Model\Unit[]
      */
-    protected $taxClasss = null;
+    protected $warehouses = array();
 
     /**
-     * @type HashSet`1 
+     * 
+     *
+     * @type \jtl\Connector\Model\CrossSelling[]
      */
-    protected $taxRates = null;
+    protected $crossSellings = array();
 
     /**
-     * @type HashSet`1 
+     * 
+     *
+     * @type \jtl\Connector\Model\CrossSellingGroup[]
      */
-    protected $taxZones = null;
+    protected $crossSellingGroups = array();
 
     /**
-     * @type HashSet`1 
+     * 
+     *
+     * @type \jtl\Connector\Model\ConfigGroup[]
      */
-    protected $units = null;
+    protected $configGroups = array();
 
     /**
-     * @type HashSet`1 
+     * 
+     *
+     * @type \jtl\Connector\Model\ConfigItem[]
      */
-    protected $warehouses = null;
+    protected $configItems = array();
 
 
     /**
@@ -105,36 +137,37 @@ class GlobalData extends DataModel
      * @type array list of navigations
      */
     protected $navigations = array(
+        'companies' => '\jtl\Connector\Model\Company',
+        'currencies' => '\jtl\Connector\Model\Currency',
+        'languages' => '\jtl\Connector\Model\Language',
+        'setArticles' => '\jtl\Connector\Model\SetArticle',
+        'shipments' => '\jtl\Connector\Model\Shipment',
+        'shippingClasss' => '\jtl\Connector\Model\ShippingClass',
+        'specialPrices' => '\jtl\Connector\Model\SpecialPrice',
+        'taxClasss' => '\jtl\Connector\Model\TaxClass',
+        'taxRates' => '\jtl\Connector\Model\Company',
+        'taxZones' => '\jtl\Connector\Model\TaxZone',
+        'units' => '\jtl\Connector\Model\Unit',
+        'warehouses' => '\jtl\Connector\Model\Unit',
+        'crossSellings' => '\jtl\Connector\Model\CrossSelling',
+        'crossSellingGroups' => '\jtl\Connector\Model\CrossSellingGroup',
+        'configGroups' => '\jtl\Connector\Model\ConfigGroup',
+        'configItems' => '\jtl\Connector\Model\ConfigItem',
     );
 
-    /**
-     * @return array 
-     */
-    public function getIdentities()
-    {
-        return $this->identities;
-    }
 
     /**
-     * @return array 
-     */
-    public function getNavigations()
-    {
-        return $this->navigations;
-    }
-
-    /**
-     * @param  HashSet`1 $companies 
+     * @param  \jtl\Connector\Model\Company $company
      * @return \jtl\Connector\Model\GlobalData
-     * @throws InvalidArgumentException if the provided argument is not of type 'HashSet`1'.
      */
-    public function setCompanies(HashSet`1 $companies)
+    public function addCompany(\jtl\Connector\Model\Company $company)
     {
-        return $this->setProperty('companies', $companies, 'HashSet`1');
+        $this->companies[] = $company;
+        return $this;
     }
     
     /**
-     * @return HashSet`1 
+     * @return Company
      */
     public function getCompanies()
     {
@@ -142,17 +175,26 @@ class GlobalData extends DataModel
     }
 
     /**
-     * @param  HashSet`1 $currencies 
      * @return \jtl\Connector\Model\GlobalData
-     * @throws InvalidArgumentException if the provided argument is not of type 'HashSet`1'.
      */
-    public function setCurrencies(HashSet`1 $currencies)
+    public function clearCompanies()
     {
-        return $this->setProperty('currencies', $currencies, 'HashSet`1');
+        $this->companies = array();
+        return $this;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\Currency $currency
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function addCurrency(\jtl\Connector\Model\Currency $currency)
+    {
+        $this->currencies[] = $currency;
+        return $this;
     }
     
     /**
-     * @return HashSet`1 
+     * @return Currency
      */
     public function getCurrencies()
     {
@@ -160,17 +202,26 @@ class GlobalData extends DataModel
     }
 
     /**
-     * @param  HashSet`1 $languages 
      * @return \jtl\Connector\Model\GlobalData
-     * @throws InvalidArgumentException if the provided argument is not of type 'HashSet`1'.
      */
-    public function setLanguages(HashSet`1 $languages)
+    public function clearCurrencies()
     {
-        return $this->setProperty('languages', $languages, 'HashSet`1');
+        $this->currencies = array();
+        return $this;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\Language $language
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function addLanguage(\jtl\Connector\Model\Language $language)
+    {
+        $this->languages[] = $language;
+        return $this;
     }
     
     /**
-     * @return HashSet`1 
+     * @return Language
      */
     public function getLanguages()
     {
@@ -178,17 +229,26 @@ class GlobalData extends DataModel
     }
 
     /**
-     * @param  HashSet`1 $setArticles 
      * @return \jtl\Connector\Model\GlobalData
-     * @throws InvalidArgumentException if the provided argument is not of type 'HashSet`1'.
      */
-    public function setSetArticles(HashSet`1 $setArticles)
+    public function clearLanguages()
     {
-        return $this->setProperty('setArticles', $setArticles, 'HashSet`1');
+        $this->languages = array();
+        return $this;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\SetArticle $setArticle
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function addSetArticle(\jtl\Connector\Model\SetArticle $setArticle)
+    {
+        $this->setArticles[] = $setArticle;
+        return $this;
     }
     
     /**
-     * @return HashSet`1 
+     * @return SetArticle
      */
     public function getSetArticles()
     {
@@ -196,17 +256,26 @@ class GlobalData extends DataModel
     }
 
     /**
-     * @param  HashSet`1 $shipments 
      * @return \jtl\Connector\Model\GlobalData
-     * @throws InvalidArgumentException if the provided argument is not of type 'HashSet`1'.
      */
-    public function setShipments(HashSet`1 $shipments)
+    public function clearSetArticles()
     {
-        return $this->setProperty('shipments', $shipments, 'HashSet`1');
+        $this->setArticles = array();
+        return $this;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\Shipment $shipment
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function addShipment(\jtl\Connector\Model\Shipment $shipment)
+    {
+        $this->shipments[] = $shipment;
+        return $this;
     }
     
     /**
-     * @return HashSet`1 
+     * @return Shipment
      */
     public function getShipments()
     {
@@ -214,17 +283,26 @@ class GlobalData extends DataModel
     }
 
     /**
-     * @param  HashSet`1 $shippingClasss 
      * @return \jtl\Connector\Model\GlobalData
-     * @throws InvalidArgumentException if the provided argument is not of type 'HashSet`1'.
      */
-    public function setShippingClasss(HashSet`1 $shippingClasss)
+    public function clearShipments()
     {
-        return $this->setProperty('shippingClasss', $shippingClasss, 'HashSet`1');
+        $this->shipments = array();
+        return $this;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\ShippingClass $shippingClasss
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function addShippingClasss(\jtl\Connector\Model\ShippingClass $shippingClasss)
+    {
+        $this->shippingClasss[] = $shippingClasss;
+        return $this;
     }
     
     /**
-     * @return HashSet`1 
+     * @return ShippingClass
      */
     public function getShippingClasss()
     {
@@ -232,17 +310,26 @@ class GlobalData extends DataModel
     }
 
     /**
-     * @param  HashSet`1 $specialPrices 
      * @return \jtl\Connector\Model\GlobalData
-     * @throws InvalidArgumentException if the provided argument is not of type 'HashSet`1'.
      */
-    public function setSpecialPrices(HashSet`1 $specialPrices)
+    public function clearShippingClasss()
     {
-        return $this->setProperty('specialPrices', $specialPrices, 'HashSet`1');
+        $this->shippingClasss = array();
+        return $this;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\SpecialPrice $specialPrice
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function addSpecialPrice(\jtl\Connector\Model\SpecialPrice $specialPrice)
+    {
+        $this->specialPrices[] = $specialPrice;
+        return $this;
     }
     
     /**
-     * @return HashSet`1 
+     * @return SpecialPrice
      */
     public function getSpecialPrices()
     {
@@ -250,17 +337,26 @@ class GlobalData extends DataModel
     }
 
     /**
-     * @param  HashSet`1 $taxClasss 
      * @return \jtl\Connector\Model\GlobalData
-     * @throws InvalidArgumentException if the provided argument is not of type 'HashSet`1'.
      */
-    public function setTaxClasss(HashSet`1 $taxClasss)
+    public function clearSpecialPrices()
     {
-        return $this->setProperty('taxClasss', $taxClasss, 'HashSet`1');
+        $this->specialPrices = array();
+        return $this;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\TaxClass $taxClasss
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function addTaxClasss(\jtl\Connector\Model\TaxClass $taxClasss)
+    {
+        $this->taxClasss[] = $taxClasss;
+        return $this;
     }
     
     /**
-     * @return HashSet`1 
+     * @return TaxClass
      */
     public function getTaxClasss()
     {
@@ -268,17 +364,26 @@ class GlobalData extends DataModel
     }
 
     /**
-     * @param  HashSet`1 $taxRates 
      * @return \jtl\Connector\Model\GlobalData
-     * @throws InvalidArgumentException if the provided argument is not of type 'HashSet`1'.
      */
-    public function setTaxRates(HashSet`1 $taxRates)
+    public function clearTaxClasss()
     {
-        return $this->setProperty('taxRates', $taxRates, 'HashSet`1');
+        $this->taxClasss = array();
+        return $this;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\Company $taxRate
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function addTaxRate(\jtl\Connector\Model\Company $taxRate)
+    {
+        $this->taxRates[] = $taxRate;
+        return $this;
     }
     
     /**
-     * @return HashSet`1 
+     * @return Company
      */
     public function getTaxRates()
     {
@@ -286,17 +391,26 @@ class GlobalData extends DataModel
     }
 
     /**
-     * @param  HashSet`1 $taxZones 
      * @return \jtl\Connector\Model\GlobalData
-     * @throws InvalidArgumentException if the provided argument is not of type 'HashSet`1'.
      */
-    public function setTaxZones(HashSet`1 $taxZones)
+    public function clearTaxRates()
     {
-        return $this->setProperty('taxZones', $taxZones, 'HashSet`1');
+        $this->taxRates = array();
+        return $this;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\TaxZone $taxZone
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function addTaxZone(\jtl\Connector\Model\TaxZone $taxZone)
+    {
+        $this->taxZones[] = $taxZone;
+        return $this;
     }
     
     /**
-     * @return HashSet`1 
+     * @return TaxZone
      */
     public function getTaxZones()
     {
@@ -304,17 +418,26 @@ class GlobalData extends DataModel
     }
 
     /**
-     * @param  HashSet`1 $units 
      * @return \jtl\Connector\Model\GlobalData
-     * @throws InvalidArgumentException if the provided argument is not of type 'HashSet`1'.
      */
-    public function setUnits(HashSet`1 $units)
+    public function clearTaxZones()
     {
-        return $this->setProperty('units', $units, 'HashSet`1');
+        $this->taxZones = array();
+        return $this;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\Unit $unit
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function addUnit(\jtl\Connector\Model\Unit $unit)
+    {
+        $this->units[] = $unit;
+        return $this;
     }
     
     /**
-     * @return HashSet`1 
+     * @return Unit
      */
     public function getUnits()
     {
@@ -322,17 +445,26 @@ class GlobalData extends DataModel
     }
 
     /**
-     * @param  HashSet`1 $warehouses 
      * @return \jtl\Connector\Model\GlobalData
-     * @throws InvalidArgumentException if the provided argument is not of type 'HashSet`1'.
      */
-    public function setWarehouses(HashSet`1 $warehouses)
+    public function clearUnits()
     {
-        return $this->setProperty('warehouses', $warehouses, 'HashSet`1');
+        $this->units = array();
+        return $this;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\Unit $warehouse
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function addWarehouse(\jtl\Connector\Model\Unit $warehouse)
+    {
+        $this->warehouses[] = $warehouse;
+        return $this;
     }
     
     /**
-     * @return HashSet`1 
+     * @return Unit
      */
     public function getWarehouses()
     {
@@ -340,17 +472,26 @@ class GlobalData extends DataModel
     }
 
     /**
-     * @param  HashSet`1 $crossSellings 
      * @return \jtl\Connector\Model\GlobalData
-     * @throws InvalidArgumentException if the provided argument is not of type 'HashSet`1'.
      */
-    public function setCrossSellings(HashSet`1 $crossSellings)
+    public function clearWarehouses()
     {
-        return $this->setProperty('crossSellings', $crossSellings, 'HashSet`1');
+        $this->warehouses = array();
+        return $this;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\CrossSelling $crossSelling
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function addCrossSelling(\jtl\Connector\Model\CrossSelling $crossSelling)
+    {
+        $this->crossSellings[] = $crossSelling;
+        return $this;
     }
     
     /**
-     * @return HashSet`1 
+     * @return CrossSelling
      */
     public function getCrossSellings()
     {
@@ -358,17 +499,26 @@ class GlobalData extends DataModel
     }
 
     /**
-     * @param  HashSet`1 $crossSellingGroups 
      * @return \jtl\Connector\Model\GlobalData
-     * @throws InvalidArgumentException if the provided argument is not of type 'HashSet`1'.
      */
-    public function setCrossSellingGroups(HashSet`1 $crossSellingGroups)
+    public function clearCrossSellings()
     {
-        return $this->setProperty('crossSellingGroups', $crossSellingGroups, 'HashSet`1');
+        $this->crossSellings = array();
+        return $this;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\CrossSellingGroup $crossSellingGroup
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function addCrossSellingGroup(\jtl\Connector\Model\CrossSellingGroup $crossSellingGroup)
+    {
+        $this->crossSellingGroups[] = $crossSellingGroup;
+        return $this;
     }
     
     /**
-     * @return HashSet`1 
+     * @return CrossSellingGroup
      */
     public function getCrossSellingGroups()
     {
@@ -376,17 +526,26 @@ class GlobalData extends DataModel
     }
 
     /**
-     * @param  HashSet`1 $configGroups 
      * @return \jtl\Connector\Model\GlobalData
-     * @throws InvalidArgumentException if the provided argument is not of type 'HashSet`1'.
      */
-    public function setConfigGroups(HashSet`1 $configGroups)
+    public function clearCrossSellingGroups()
     {
-        return $this->setProperty('configGroups', $configGroups, 'HashSet`1');
+        $this->crossSellingGroups = array();
+        return $this;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\ConfigGroup $configGroup
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function addConfigGroup(\jtl\Connector\Model\ConfigGroup $configGroup)
+    {
+        $this->configGroups[] = $configGroup;
+        return $this;
     }
     
     /**
-     * @return HashSet`1 
+     * @return ConfigGroup
      */
     public function getConfigGroups()
     {
@@ -394,21 +553,39 @@ class GlobalData extends DataModel
     }
 
     /**
-     * @param  HashSet`1 $configItems 
      * @return \jtl\Connector\Model\GlobalData
-     * @throws InvalidArgumentException if the provided argument is not of type 'HashSet`1'.
      */
-    public function setConfigItems(HashSet`1 $configItems)
+    public function clearConfigGroups()
     {
-        return $this->setProperty('configItems', $configItems, 'HashSet`1');
+        $this->configGroups = array();
+        return $this;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\ConfigItem $configItem
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function addConfigItem(\jtl\Connector\Model\ConfigItem $configItem)
+    {
+        $this->configItems[] = $configItem;
+        return $this;
     }
     
     /**
-     * @return HashSet`1 
+     * @return ConfigItem
      */
     public function getConfigItems()
     {
         return $this->configItems;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function clearConfigItems()
+    {
+        $this->configItems = array();
+        return $this;
     }
 }
 

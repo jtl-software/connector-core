@@ -109,21 +109,6 @@ class CustomerOrderItem extends DataModel
         'variations' => '\jtl\Connector\Model\CustomerOrderItemVariation',
     );
 
-    /**
-     * @return array 
-     */
-    public function getIdentities()
-    {
-        return $this->identities;
-    }
-
-    /**
-     * @return array 
-     */
-    public function getNavigations()
-    {
-        return $this->navigations;
-    }
 
     /**
      * @param  float $grossPrice 
@@ -384,16 +369,6 @@ class CustomerOrderItem extends DataModel
     public function addVariation(\jtl\Connector\Model\CustomerOrderItemVariation $variation)
     {
         $this->variations[] = $variation;
-        return $this;
-    }
-
-    /**
-     * @param  array $variations
-     * @return \jtl\Connector\Model\CustomerOrderItem
-     */
-    public function addVariations(array $variations)
-    {
-		$this->variations = array_merge($this->variations, $variations);
         return $this;
     }
     

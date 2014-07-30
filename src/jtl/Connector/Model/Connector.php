@@ -105,21 +105,6 @@ class Connector extends DataModel
         'links' => '\jtl\Connector\Model\ConnectorLink',
     );
 
-    /**
-     * @return array 
-     */
-    public function getIdentities()
-    {
-        return $this->identities;
-    }
-
-    /**
-     * @return array 
-     */
-    public function getNavigations()
-    {
-        return $this->navigations;
-    }
 
     /**
      * @param  integer $id 
@@ -238,16 +223,6 @@ class Connector extends DataModel
         $this->customerGroups[] = $customerGroup;
         return $this;
     }
-
-    /**
-     * @param  array $customerGroups
-     * @return \jtl\Connector\Model\Connector
-     */
-    public function addCustomerGroups(array $customerGroups)
-    {
-		$this->customerGroups = array_merge($this->customerGroups, $customerGroups);
-        return $this;
-    }
     
     /**
      * @return ConnectorCustomerGroup
@@ -273,16 +248,6 @@ class Connector extends DataModel
     public function addLogMessage(\jtl\Connector\Model\ConnectorLog $logMessage)
     {
         $this->logMessages[] = $logMessage;
-        return $this;
-    }
-
-    /**
-     * @param  array $logMessages
-     * @return \jtl\Connector\Model\Connector
-     */
-    public function addLogMessages(array $logMessages)
-    {
-		$this->logMessages = array_merge($this->logMessages, $logMessages);
         return $this;
     }
     
@@ -312,16 +277,6 @@ class Connector extends DataModel
         $this->currencies[] = $currency;
         return $this;
     }
-
-    /**
-     * @param  array $currencies
-     * @return \jtl\Connector\Model\Connector
-     */
-    public function addCurrencies(array $currencies)
-    {
-		$this->currencies = array_merge($this->currencies, $currencies);
-        return $this;
-    }
     
     /**
      * @return ConnectorCurrency
@@ -347,16 +302,6 @@ class Connector extends DataModel
     public function addSyncQueue(\jtl\Connector\Model\ConnectorSyncQueue $syncQueue)
     {
         $this->syncQueues[] = $syncQueue;
-        return $this;
-    }
-
-    /**
-     * @param  array $syncQueues
-     * @return \jtl\Connector\Model\Connector
-     */
-    public function addSyncQueues(array $syncQueues)
-    {
-		$this->syncQueues = array_merge($this->syncQueues, $syncQueues);
         return $this;
     }
     
@@ -386,16 +331,6 @@ class Connector extends DataModel
         $this->languages[] = $language;
         return $this;
     }
-
-    /**
-     * @param  array $languages
-     * @return \jtl\Connector\Model\Connector
-     */
-    public function addLanguages(array $languages)
-    {
-		$this->languages = array_merge($this->languages, $languages);
-        return $this;
-    }
     
     /**
      * @return ConnectorLanguage
@@ -421,16 +356,6 @@ class Connector extends DataModel
     public function addLink(\jtl\Connector\Model\ConnectorLink $link)
     {
         $this->links[] = $link;
-        return $this;
-    }
-
-    /**
-     * @param  array $links
-     * @return \jtl\Connector\Model\Connector
-     */
-    public function addLinks(array $links)
-    {
-		$this->links = array_merge($this->links, $links);
         return $this;
     }
     

@@ -119,21 +119,6 @@ class Category extends DataModel
         'attributes' => '\jtl\Connector\Model\CategoryAttr',
     );
 
-    /**
-     * @return array 
-     */
-    public function getIdentities()
-    {
-        return $this->identities;
-    }
-
-    /**
-     * @return array 
-     */
-    public function getNavigations()
-    {
-        return $this->navigations;
-    }
 
     /**
      * @param  string $name 
@@ -324,16 +309,6 @@ class Category extends DataModel
         $this->children[] = $child;
         return $this;
     }
-
-    /**
-     * @param  array $children
-     * @return \jtl\Connector\Model\Category
-     */
-    public function addChildren(array $children)
-    {
-		$this->children = array_merge($this->children, $children);
-        return $this;
-    }
     
     /**
      * @return Category
@@ -359,16 +334,6 @@ class Category extends DataModel
     public function addI18n(\jtl\Connector\Model\CategoryI18n $i18n)
     {
         $this->i18ns[] = $i18n;
-        return $this;
-    }
-
-    /**
-     * @param  array $i18ns
-     * @return \jtl\Connector\Model\Category
-     */
-    public function addI18ns(array $i18ns)
-    {
-		$this->i18ns = array_merge($this->i18ns, $i18ns);
         return $this;
     }
     
@@ -398,16 +363,6 @@ class Category extends DataModel
         $this->invisibilities[] = $invisibility;
         return $this;
     }
-
-    /**
-     * @param  array $invisibilities
-     * @return \jtl\Connector\Model\Category
-     */
-    public function addInvisibilities(array $invisibilities)
-    {
-		$this->invisibilities = array_merge($this->invisibilities, $invisibilities);
-        return $this;
-    }
     
     /**
      * @return CategoryInvisibility
@@ -435,16 +390,6 @@ class Category extends DataModel
         $this->customerGroups[] = $customerGroup;
         return $this;
     }
-
-    /**
-     * @param  array $customerGroups
-     * @return \jtl\Connector\Model\Category
-     */
-    public function addCustomerGroups(array $customerGroups)
-    {
-		$this->customerGroups = array_merge($this->customerGroups, $customerGroups);
-        return $this;
-    }
     
     /**
      * @return CategoryCustomerGroup
@@ -470,16 +415,6 @@ class Category extends DataModel
     public function addAttribute(\jtl\Connector\Model\CategoryAttr $attribute)
     {
         $this->attributes[] = $attribute;
-        return $this;
-    }
-
-    /**
-     * @param  array $attributes
-     * @return \jtl\Connector\Model\Category
-     */
-    public function addAttributes(array $attributes)
-    {
-		$this->attributes = array_merge($this->attributes, $attributes);
         return $this;
     }
     

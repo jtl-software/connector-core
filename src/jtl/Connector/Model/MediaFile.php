@@ -80,21 +80,6 @@ class MediaFile extends DataModel
         'attributes' => '\jtl\Connector\Model\MediaFileAttr',
     );
 
-    /**
-     * @return array 
-     */
-    public function getIdentities()
-    {
-        return $this->identities;
-    }
-
-    /**
-     * @return array 
-     */
-    public function getNavigations()
-    {
-        return $this->navigations;
-    }
 
     /**
      * @param  string $path File path
@@ -231,16 +216,6 @@ class MediaFile extends DataModel
         $this->i18ns[] = $i18n;
         return $this;
     }
-
-    /**
-     * @param  array $i18ns
-     * @return \jtl\Connector\Model\MediaFile
-     */
-    public function addI18ns(array $i18ns)
-    {
-		$this->i18ns = array_merge($this->i18ns, $i18ns);
-        return $this;
-    }
     
     /**
      * @return MediaFileI18n
@@ -266,16 +241,6 @@ class MediaFile extends DataModel
     public function addAttribute(\jtl\Connector\Model\MediaFileAttr $attribute)
     {
         $this->attributes[] = $attribute;
-        return $this;
-    }
-
-    /**
-     * @param  array $attributes
-     * @return \jtl\Connector\Model\MediaFile
-     */
-    public function addAttributes(array $attributes)
-    {
-		$this->attributes = array_merge($this->attributes, $attributes);
         return $this;
     }
     

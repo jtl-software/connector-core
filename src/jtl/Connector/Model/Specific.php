@@ -69,21 +69,6 @@ class Specific extends DataModel
         'values' => '\jtl\Connector\Model\SpecificValue',
     );
 
-    /**
-     * @return array 
-     */
-    public function getIdentities()
-    {
-        return $this->identities;
-    }
-
-    /**
-     * @return array 
-     */
-    public function getNavigations()
-    {
-        return $this->navigations;
-    }
 
     /**
      * @param  integer $sort Optional sort number
@@ -184,16 +169,6 @@ class Specific extends DataModel
         $this->i18ns[] = $i18n;
         return $this;
     }
-
-    /**
-     * @param  array $i18ns
-     * @return \jtl\Connector\Model\Specific
-     */
-    public function addI18ns(array $i18ns)
-    {
-		$this->i18ns = array_merge($this->i18ns, $i18ns);
-        return $this;
-    }
     
     /**
      * @return SpecificI18n
@@ -219,16 +194,6 @@ class Specific extends DataModel
     public function addValue(\jtl\Connector\Model\SpecificValue $value)
     {
         $this->values[] = $value;
-        return $this;
-    }
-
-    /**
-     * @param  array $values
-     * @return \jtl\Connector\Model\Specific
-     */
-    public function addValues(array $values)
-    {
-		$this->values = array_merge($this->values, $values);
         return $this;
     }
     

@@ -121,21 +121,6 @@ class ProductVariationValue extends DataModel
         'invisibilities' => '\jtl\Connector\Model\ProductVariationValueInvisibility',
     );
 
-    /**
-     * @return array 
-     */
-    public function getIdentities()
-    {
-        return $this->identities;
-    }
-
-    /**
-     * @return array 
-     */
-    public function getNavigations()
-    {
-        return $this->navigations;
-    }
 
     /**
      * @param  float $extraCharge 
@@ -362,16 +347,6 @@ class ProductVariationValue extends DataModel
         $this->dependencies[] = $dependency;
         return $this;
     }
-
-    /**
-     * @param  array $dependencies
-     * @return \jtl\Connector\Model\ProductVariationValue
-     */
-    public function addDependencies(array $dependencies)
-    {
-		$this->dependencies = array_merge($this->dependencies, $dependencies);
-        return $this;
-    }
     
     /**
      * @return ProductVariationValueDependency
@@ -397,16 +372,6 @@ class ProductVariationValue extends DataModel
     public function addExtraCharge(\jtl\Connector\Model\ProductVariationValueExtraCharge $extraCharge)
     {
         $this->extraCharges[] = $extraCharge;
-        return $this;
-    }
-
-    /**
-     * @param  array $extraCharges
-     * @return \jtl\Connector\Model\ProductVariationValue
-     */
-    public function addExtraCharges(array $extraCharges)
-    {
-		$this->extraCharges = array_merge($this->extraCharges, $extraCharges);
         return $this;
     }
     
@@ -436,16 +401,6 @@ class ProductVariationValue extends DataModel
         $this->i18ns[] = $i18n;
         return $this;
     }
-
-    /**
-     * @param  array $i18ns
-     * @return \jtl\Connector\Model\ProductVariationValue
-     */
-    public function addI18ns(array $i18ns)
-    {
-		$this->i18ns = array_merge($this->i18ns, $i18ns);
-        return $this;
-    }
     
     /**
      * @return ProductVariationValueI18n
@@ -471,16 +426,6 @@ class ProductVariationValue extends DataModel
     public function addInvisibility(\jtl\Connector\Model\ProductVariationValueInvisibility $invisibility)
     {
         $this->invisibilities[] = $invisibility;
-        return $this;
-    }
-
-    /**
-     * @param  array $invisibilities
-     * @return \jtl\Connector\Model\ProductVariationValue
-     */
-    public function addInvisibilities(array $invisibilities)
-    {
-		$this->invisibilities = array_merge($this->invisibilities, $invisibilities);
         return $this;
     }
     

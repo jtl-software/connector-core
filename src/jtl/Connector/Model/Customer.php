@@ -178,21 +178,6 @@ class Customer extends DataModel
         'attributes' => '\jtl\Connector\Model\CustomerAttr',
     );
 
-    /**
-     * @return array 
-     */
-    public function getIdentities()
-    {
-        return $this->identities;
-    }
-
-    /**
-     * @return array 
-     */
-    public function getNavigations()
-    {
-        return $this->navigations;
-    }
 
     /**
      * @param  string $customerNumber Optional customer number set by JTL-Wawi ERP software
@@ -705,16 +690,6 @@ class Customer extends DataModel
     public function addAttribute(\jtl\Connector\Model\CustomerAttr $attribute)
     {
         $this->attributes[] = $attribute;
-        return $this;
-    }
-
-    /**
-     * @param  array $attributes
-     * @return \jtl\Connector\Model\Customer
-     */
-    public function addAttributes(array $attributes)
-    {
-		$this->attributes = array_merge($this->attributes, $attributes);
         return $this;
     }
     

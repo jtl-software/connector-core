@@ -48,21 +48,6 @@ class ConnectorLog extends DataModel
     protected $navigations = array(
     );
 
-    /**
-     * @return array 
-     */
-    public function getIdentities()
-    {
-        return $this->identities;
-    }
-
-    /**
-     * @return array 
-     */
-    public function getNavigations()
-    {
-        return $this->navigations;
-    }
 
     /**
      * @param  integer $connectorId 
