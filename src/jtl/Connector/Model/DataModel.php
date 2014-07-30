@@ -16,12 +16,17 @@ use \jtl\Core\Model\DataModel as CoreModel;
  * @package jtl\Connector\Model
  * @subpackage DataModel
  */
-class DataModel extends CoreModel
+abstract class DataModel extends CoreModel
 {
     const ACTION_COMPLETE = 'complete';
     const ACTION_INSERT = 'insert';
     const ACTION_UPDATE = 'update';
     const ACTION_DELETE = 'delete';
+
+    /**
+     * @type \jtl\Connector\Type\DataType
+     */
+    private $_type = null;
 
     /**
      * @type boolean
@@ -32,11 +37,6 @@ class DataModel extends CoreModel
      * @type array list of strings
      */
     protected $identities = array();
-
-    /**
-     * @type array list of strings
-     */
-    protected $propertyInfos = array();
 
     /**
      * @type string
@@ -52,11 +52,18 @@ class DataModel extends CoreModel
     }
 
     /**
-     * @return array 
+     * @return \jtl\Connector\Type\DataType 
      */
-    public function getPropertyInfos()
+    public function getType()
     {
-        return $this->propertyInfos;
+        if ($this->_type === null) {
+            $reflect = new \ReflectionClass($this);
+            $class = '\\jtl\\Connector\\Type\\' . $reflect->getShortName();
+
+            $this->_type = new $class;
+        }
+
+        return $this->_type;
     }
 
     /**
@@ -104,7 +111,7 @@ class DataModel extends CoreModel
      * @param array $publics
      * @return stdClass $object
      */
-    public function getPublic(array $publics = array('fields', 'isEncrypted', 'identities', 'action', 'propertyInfos'))
+    public function getPublic(array $publics = array('fields', 'isEncrypted', 'identities', 'action'))
     {
         $object = new \stdClass();
 
