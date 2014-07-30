@@ -16,9 +16,7 @@ use jtl\Connector\Type\PropertyInfo;
  */
 abstract class DataType
 {
-    private $propertyInfo = null;
-    
-    protected Type() {}
+    private $_propertyInfo = null;
 
     /**
      * Returns all the public properties of the current Type. 
@@ -27,25 +25,26 @@ abstract class DataType
      */
     public function getProperties()
     {
-        if ($this->propertyInfo === null) {
-            $this->propertyInfo = $this->loadProperties();
+        if ($this->_propertyInfo === null) {
+            $this->_propertyInfo = $this->loadProperties();
         }
             
-        return $this->propertyInfo;
+        return $this->_propertyInfo;
     }
     
     /**
      * Searches for the public property with the specified name.
      *
-     * @param string $property
+     * @param string $propertyName
      * @return jtl\Connector\Type\PropertyInfo
      */
-    public function getProperty($property)
+    public function getProperty($propertyName)
     {
         foreach ($this->getProperties() as $property) {
-            
+            if ($property->getName() == $propertyName) {
+                return $property;
+            }
         }
-        
         return null;
     }
     
