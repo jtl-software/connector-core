@@ -80,24 +80,6 @@ class CustomerOrderPaymentInfo extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'bankAccount' => 'string',
-        'bankCode' => 'string',
-        'accountNumber' => 'string',
-        'creditCardNumber' => 'string',
-        'cvv' => 'string',
-        'accountHolder' => 'string',
-        'cIBAN' => 'string',
-        'cBIC' => 'string',
-        'id' => '\jtl\Connector\Model\Identity',
-        'customerOrderId' => '\jtl\Connector\Model\Identity',
-        'platformId' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  string $bankAccount 
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

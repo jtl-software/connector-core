@@ -38,16 +38,6 @@ class ConnectorCustomerGroup extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'connectorId' => 'integer',
-        'customerGroupId' => '\jtl\Connector\Model\Identity',
-        'isDefault' => 'boolean',
-    );
-
-
-    /**
      * @param  integer $connectorId 
      * @return \jtl\Connector\Model\ConnectorCustomerGroup
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.

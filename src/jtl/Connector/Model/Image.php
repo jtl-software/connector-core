@@ -52,19 +52,6 @@ class Image extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'id' => '\jtl\Connector\Model\Identity',
-        'foreignKey' => '\jtl\Connector\Model\Identity',
-        'masterImageId' => '\jtl\Connector\Model\Identity',
-        'relationType' => 'integer',
-        'filename' => 'string',
-        'sort' => 'integer',
-    );
-
-
-    /**
      * @param  Identity $id 
      * @return \jtl\Connector\Model\Image
      * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.

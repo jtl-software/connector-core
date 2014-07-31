@@ -51,18 +51,6 @@ class CustomerGroupAttr extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'key' => 'string',
-        'value' => 'string',
-        'id' => '\jtl\Connector\Model\Identity',
-        'customerGroupId' => '\jtl\Connector\Model\Identity',
-        'customerGroup' => '\jtl\Connector\Model\CustomerGroup',
-    );
-
-
-    /**
      * @param  string $key Attribute key
      * @return \jtl\Connector\Model\CustomerGroupAttr
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

@@ -157,37 +157,6 @@ class CustomerOrder extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'orderNumber' => 'string',
-        'created' => '\jtl\Connector\Model\DateTime',
-        'shippingInfo' => 'string',
-        'shippingDate' => '\jtl\Connector\Model\DateTime',
-        'estimatedDeliveryDate' => '\jtl\Connector\Model\DateTime',
-        'currencyIso' => 'string',
-        'languageId' => 'integer',
-        'paymentModuleCode' => 'string',
-        'paymentDate' => '\jtl\Connector\Model\DateTime',
-        'factor' => 'float',
-        'nGesperrt' => 'integer',
-        'id' => '\jtl\Connector\Model\Identity',
-        'customerId' => '\jtl\Connector\Model\Identity',
-        'shippingAddressId' => '\jtl\Connector\Model\Identity',
-        'billingAddressId' => '\jtl\Connector\Model\Identity',
-        'companyId' => '\jtl\Connector\Model\Identity',
-        'isPlatform' => 'boolean',
-        'isFullyDelivered' => 'boolean',
-        'positions' => '\jtl\Connector\Model\CustomerOrderItem',
-        'attributes' => '\jtl\Connector\Model\CustomerOrderAttr',
-        'billingAddress' => '\jtl\Connector\Model\CustomerOrderBillingAddress',
-        'shippingAddress' => '\jtl\Connector\Model\CustomerOrderShippingAddress',
-        'paymentInfo' => '\jtl\Connector\Model\CustomerOrderPaymentInfo',
-        'status' => 'string',
-    );
-
-
-    /**
      * @param  string $orderNumber Optional order number (usually set by ERP System later)
      * @return \jtl\Connector\Model\CustomerOrder
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

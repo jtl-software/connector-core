@@ -71,22 +71,6 @@ class ProductSpecialPrice extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'activeFrom' => '\jtl\Connector\Model\DateTime',
-        'stockLimit' => 'integer',
-        'activeUntil' => '\jtl\Connector\Model\DateTime',
-        'considerDateLimit' => 'integer',
-        'considerStockLimit' => 'integer',
-        'id' => '\jtl\Connector\Model\Identity',
-        'productId' => '\jtl\Connector\Model\Identity',
-        'isActive' => 'boolean',
-        'specialPrices' => '\jtl\Connector\Model\SpecialPrice',
-    );
-
-
-    /**
      * @param  DateTime $activeFrom Optional: Activate special price from date
      * @return \jtl\Connector\Model\ProductSpecialPrice
      * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.

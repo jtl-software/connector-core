@@ -39,16 +39,6 @@ class SetArticle extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'quantity' => 'float',
-        'id' => '\jtl\Connector\Model\Identity',
-        'productId' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  float $quantity Component quantity
      * @return \jtl\Connector\Model\SetArticle
      * @throws InvalidArgumentException if the provided argument is not of type 'float'.

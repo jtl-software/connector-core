@@ -43,17 +43,6 @@ class ConfigItemI18n extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'name' => 'string',
-        'description' => 'string',
-        'configItemId' => '\jtl\Connector\Model\Identity',
-        'localeName' => 'string',
-    );
-
-
-    /**
      * @param  string $name Config item name. Will be ignored if inheritProductName==true
      * @return \jtl\Connector\Model\ConfigItemI18n
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

@@ -114,31 +114,6 @@ class CustomerOrderShippingAddress extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'company' => 'string',
-        'title' => 'string',
-        'firstName' => 'string',
-        'lastName' => 'string',
-        'street' => 'string',
-        'zipCode' => 'string',
-        'city' => 'string',
-        'countryIso' => 'string',
-        'phone' => 'string',
-        'deliveryInstruction' => 'string',
-        'extraAddressLine' => 'string',
-        'mobile' => 'string',
-        'eMail' => 'string',
-        'fax' => 'string',
-        'state' => 'string',
-        'id' => '\jtl\Connector\Model\Identity',
-        'customerId' => '\jtl\Connector\Model\Identity',
-        'salutation' => 'string',
-    );
-
-
-    /**
      * @param  string $company Company name
      * @return \jtl\Connector\Model\CustomerOrderShippingAddress
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

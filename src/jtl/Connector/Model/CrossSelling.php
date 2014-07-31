@@ -51,18 +51,6 @@ class CrossSelling extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'nEigenesFeld' => 'integer',
-        'id' => '\jtl\Connector\Model\Identity',
-        'productId' => '\jtl\Connector\Model\Identity',
-        'crossSellingProductId' => '\jtl\Connector\Model\Identity',
-        'crossSellingGroupId' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  integer $nEigenesFeld 
      * @return \jtl\Connector\Model\CrossSelling
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.

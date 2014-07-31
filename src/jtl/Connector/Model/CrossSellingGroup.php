@@ -37,16 +37,6 @@ class CrossSellingGroup extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'name' => 'string',
-        'description' => 'string',
-        'localeName' => 'string',
-    );
-
-
-    /**
      * @param  string $name Localized name
      * @return \jtl\Connector\Model\CrossSellingGroup
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

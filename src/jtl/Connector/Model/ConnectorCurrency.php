@@ -37,16 +37,6 @@ class ConnectorCurrency extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'connectorId' => 'integer',
-        'currencyId' => 'integer',
-        'isDefault' => 'boolean',
-    );
-
-
-    /**
      * @param  integer $connectorId 
      * @return \jtl\Connector\Model\ConnectorCurrency
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.

@@ -62,20 +62,6 @@ class Specific extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'sort' => 'integer',
-        'name' => 'string',
-        'type' => 'string',
-        'id' => '\jtl\Connector\Model\Identity',
-        'isGlobal' => 'boolean',
-        'i18ns' => '\jtl\Connector\Model\SpecificI18n',
-        'values' => '\jtl\Connector\Model\SpecificValue',
-    );
-
-
-    /**
      * @param  integer $sort Optional sort number
      * @return \jtl\Connector\Model\Specific
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.

@@ -44,17 +44,6 @@ class CustomerOrderAttr extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'key' => 'string',
-        'value' => 'string',
-        'id' => '\jtl\Connector\Model\Identity',
-        'customerOrderId' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  string $key Attribute key name
      * @return \jtl\Connector\Model\CustomerOrderAttr
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

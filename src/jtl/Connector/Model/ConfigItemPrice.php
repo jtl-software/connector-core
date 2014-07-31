@@ -55,19 +55,6 @@ class ConfigItemPrice extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'price' => 'float',
-        'connectorId' => 'integer',
-        'type' => 'integer',
-        'configItemId' => '\jtl\Connector\Model\Identity',
-        'customerGroupId' => '\jtl\Connector\Model\Identity',
-        'taxClassId' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  float $price Net price or percental value to add/deduct to/from product price (depending on type). Positive value means surcharge, negative value means discount. Also see configItem.vat for value added tax.
      * @return \jtl\Connector\Model\ConfigItemPrice
      * @throws InvalidArgumentException if the provided argument is not of type 'float'.

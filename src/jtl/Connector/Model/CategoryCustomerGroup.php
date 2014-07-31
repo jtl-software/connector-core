@@ -44,17 +44,6 @@ class CategoryCustomerGroup extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'connectorId' => 'integer',
-        'discount' => 'float',
-        'categoryId' => '\jtl\Connector\Model\Identity',
-        'customerGroupId' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  integer $connectorId 
      * @return \jtl\Connector\Model\CategoryCustomerGroup
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.

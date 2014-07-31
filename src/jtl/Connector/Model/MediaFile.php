@@ -73,22 +73,6 @@ class MediaFile extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'path' => 'string',
-        'url' => 'string',
-        'mediaFileCategory' => 'string',
-        'type' => 'string',
-        'sort' => 'integer',
-        'id' => '\jtl\Connector\Model\Identity',
-        'productId' => '\jtl\Connector\Model\Identity',
-        'i18ns' => '\jtl\Connector\Model\MediaFileI18n',
-        'attributes' => '\jtl\Connector\Model\MediaFileAttr',
-    );
-
-
-    /**
      * @param  string $path File path
      * @return \jtl\Connector\Model\MediaFile
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

@@ -80,24 +80,6 @@ class ProductImage extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'data' => '\jtl\Connector\Model\Byte[]',
-        'size' => 'integer',
-        'modified' => 'string',
-        'dAenderungsdatum' => '\jtl\Connector\Model\DateTime',
-        'cHash' => 'string',
-        'cAufloesung' => 'string',
-        'id' => '\jtl\Connector\Model\Identity',
-        'foreignKey' => '\jtl\Connector\Model\Identity',
-        'flagDelete' => 'boolean',
-        'flagUpdate' => 'boolean',
-        'masterImageId' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  Byte[] $data 
      * @return \jtl\Connector\Model\ProductImage
      * @throws InvalidArgumentException if the provided argument is not of type 'Byte[]'.

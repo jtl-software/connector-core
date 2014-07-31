@@ -253,59 +253,6 @@ class Warehouse extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'name' => 'string',
-        'cKuerzel' => 'string',
-        'cLagerTyp' => 'string',
-        'cBeschreibung' => 'string',
-        'cStrasse' => 'string',
-        'cPLZ' => 'string',
-        'cOrt' => 'string',
-        'cLand' => 'string',
-        'cAnsprechpartnerAnrede' => 'string',
-        'cAnsprechpartnerVorname' => 'string',
-        'cAnsprechpartnerName' => 'string',
-        'cAnsprechpartnerTel' => 'string',
-        'cAnsprechpartnerFax' => 'string',
-        'cAnsprechpartnerEMail' => 'string',
-        'cAnsprechpartnerAbteilung' => 'string',
-        'cBundesland' => 'string',
-        'kFirma' => 'integer',
-        'kUser' => 'integer',
-        'nFulfillment' => 'integer',
-        'nLagerplatzVerwaltung' => 'integer',
-        'nAuslieferungsPrio' => 'integer',
-        'nPackStationAktiv' => 'integer',
-        'cDimension1Name' => 'string',
-        'cDimension1Trennzeichen' => 'string',
-        'nDimension1Laenge' => 'integer',
-        'nDimension1Typ' => 'integer',
-        'cDimension2Name' => 'string',
-        'cDimension2Trennzeichen' => 'string',
-        'nDimension2Laenge' => 'integer',
-        'nDimension2Typ' => 'integer',
-        'cDimension3Name' => 'string',
-        'cDimension3Trennzeichen' => 'string',
-        'nDimension3Laenge' => 'integer',
-        'nDimension3Typ' => 'integer',
-        'cDimension4Name' => 'string',
-        'cDimension4Trennzeichen' => 'string',
-        'nDimension4Laenge' => 'integer',
-        'nDimension4Typ' => 'integer',
-        'cDimension5Name' => 'string',
-        'cDimension5Trennzeichen' => 'string',
-        'nDimension5Laenge' => 'integer',
-        'nDimension5Typ' => 'integer',
-        'cEmpfaengerFirma' => 'string',
-        'kQuellLager' => 'integer',
-        'kZielLager' => 'integer',
-        'id' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  string $name 
      * @return \jtl\Connector\Model\Warehouse
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

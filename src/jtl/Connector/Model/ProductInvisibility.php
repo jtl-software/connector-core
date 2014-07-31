@@ -39,16 +39,6 @@ class ProductInvisibility extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'connectorId' => 'integer',
-        'productId' => '\jtl\Connector\Model\Identity',
-        'customerGroupId' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  integer $connectorId 
      * @return \jtl\Connector\Model\ProductInvisibility
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.

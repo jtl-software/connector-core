@@ -53,19 +53,6 @@ class ManufacturerI18n extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'metaTitle' => 'string',
-        'metaKeywords' => 'string',
-        'metaDescription' => 'string',
-        'description' => 'string',
-        'manufacturerId' => '\jtl\Connector\Model\Identity',
-        'localeName' => 'string',
-    );
-
-
-    /**
      * @param  string $metaTitle 
      * @return \jtl\Connector\Model\ManufacturerI18n
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

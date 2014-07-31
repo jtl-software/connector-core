@@ -141,30 +141,6 @@ class GlobalData extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'companies' => '\jtl\Connector\Model\Company',
-        'currencies' => '\jtl\Connector\Model\Currency',
-        'languages' => '\jtl\Connector\Model\Language',
-        'setArticles' => '\jtl\Connector\Model\SetArticle',
-        'shipments' => '\jtl\Connector\Model\Shipment',
-        'shippingClasss' => '\jtl\Connector\Model\ShippingClass',
-        'specialPrices' => '\jtl\Connector\Model\SpecialPrice',
-        'taxClasss' => '\jtl\Connector\Model\TaxClass',
-        'taxRates' => '\jtl\Connector\Model\Company',
-        'taxZones' => '\jtl\Connector\Model\TaxZone',
-        'units' => '\jtl\Connector\Model\Unit',
-        'warehouses' => '\jtl\Connector\Model\Unit',
-        'crossSellings' => '\jtl\Connector\Model\CrossSelling',
-        'crossSellingGroups' => '\jtl\Connector\Model\CrossSellingGroup',
-        'configGroups' => '\jtl\Connector\Model\ConfigGroup',
-        'configItems' => '\jtl\Connector\Model\ConfigItem',
-        'customerGroups' => '\jtl\Connector\Model\CustomerGroup',
-    );
-
-
-    /**
      * @param  \jtl\Connector\Model\Company $company
      * @return \jtl\Connector\Model\GlobalData
      */

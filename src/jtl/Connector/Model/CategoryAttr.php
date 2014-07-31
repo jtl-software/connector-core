@@ -49,18 +49,6 @@ class CategoryAttr extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'name' => 'string',
-        'value' => 'string',
-        'id' => '\jtl\Connector\Model\Identity',
-        'categoryId' => '\jtl\Connector\Model\Identity',
-        'sort' => 'integer',
-    );
-
-
-    /**
      * @param  string $name 
      * @return \jtl\Connector\Model\CategoryAttr
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

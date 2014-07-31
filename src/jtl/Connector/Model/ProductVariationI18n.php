@@ -38,16 +38,6 @@ class ProductVariationI18n extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'name' => 'string',
-        'productVariationId' => '\jtl\Connector\Model\Identity',
-        'localeName' => 'string',
-    );
-
-
-    /**
      * @param  string $name Locale specific variation name
      * @return \jtl\Connector\Model\ProductVariationI18n
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

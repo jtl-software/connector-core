@@ -67,21 +67,6 @@ class CustomerGroup extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'name' => 'string',
-        'applyNetPrice' => 'integer',
-        'discount' => 'float',
-        'kKundenDrucktext' => 'integer',
-        'id' => '\jtl\Connector\Model\Identity',
-        'isDefault' => 'boolean',
-        'attributes' => '\jtl\Connector\Model\CustomerGroupAttr',
-        'i18n' => '\jtl\Connector\Model\CustomerGroupI18n',
-    );
-
-
-    /**
      * @param  string $name 
      * @return \jtl\Connector\Model\CustomerGroup
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

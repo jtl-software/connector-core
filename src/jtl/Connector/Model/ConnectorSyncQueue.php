@@ -52,19 +52,6 @@ class ConnectorSyncQueue extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'queueId' => 'integer',
-        'connectorId' => 'integer',
-        'key' => 'integer',
-        'type' => 'integer',
-        'tryCount' => 'integer',
-        'action' => '\jtl\Connector\Model\Byte[]',
-    );
-
-
-    /**
      * @param  integer $queueId 
      * @return \jtl\Connector\Model\ConnectorSyncQueue
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.

@@ -50,18 +50,6 @@ class TaxRate extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'rate' => 'float',
-        'priority' => 'integer',
-        'id' => '\jtl\Connector\Model\Identity',
-        'taxZoneId' => '\jtl\Connector\Model\Identity',
-        'taxClassId' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  float $rate Tax rate value e.g. 19.00
      * @return \jtl\Connector\Model\TaxRate
      * @throws InvalidArgumentException if the provided argument is not of type 'float'.

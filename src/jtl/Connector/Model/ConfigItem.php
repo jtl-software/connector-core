@@ -113,30 +113,6 @@ class ConfigItem extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'type' => 'integer',
-        'isPreSelected' => 'integer',
-        'isRecommended' => 'integer',
-        'inheritProductName' => 'integer',
-        'inheritProductPrice' => 'integer',
-        'sort' => 'integer',
-        'showDiscount' => 'integer',
-        'showSurcharge' => 'integer',
-        'minQuantity' => 'float',
-        'maxQuantity' => 'float',
-        'initialQuantity' => 'float',
-        'fStandardpreis' => 'float',
-        'ignoreMultiplier' => 'integer',
-        'configGroupId' => '\jtl\Connector\Model\Identity',
-        'productId' => '\jtl\Connector\Model\Identity',
-        'prices' => '\jtl\Connector\Model\ConfigItemPrice',
-        'i18n' => '\jtl\Connector\Model\ConfigItemI18n',
-    );
-
-
-    /**
      * @param  integer $type Config item type. 0: Product, 1: Special
      * @return \jtl\Connector\Model\ConfigItem
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.

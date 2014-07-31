@@ -43,17 +43,6 @@ class ConfigGroupI18n extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'name' => 'string',
-        'description' => 'string',
-        'configGroupId' => '\jtl\Connector\Model\Identity',
-        'localeName' => 'string',
-    );
-
-
-    /**
      * @param  string $name Config group name
      * @return \jtl\Connector\Model\ConfigGroupI18n
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

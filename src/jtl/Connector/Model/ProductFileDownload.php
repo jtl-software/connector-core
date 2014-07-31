@@ -34,15 +34,6 @@ class ProductFileDownload extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'productId' => '\jtl\Connector\Model\Identity',
-        'fileDownloadId' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductFileDownload
      * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.

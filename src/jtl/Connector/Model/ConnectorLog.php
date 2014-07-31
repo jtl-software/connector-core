@@ -43,17 +43,6 @@ class ConnectorLog extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'connectorId' => 'integer',
-        'message' => 'string',
-        'date' => '\jtl\Connector\Model\DateTime',
-        'id' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  integer $connectorId 
      * @return \jtl\Connector\Model\ConnectorLog
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.

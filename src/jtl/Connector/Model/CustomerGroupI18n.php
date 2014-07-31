@@ -45,17 +45,6 @@ class CustomerGroupI18n extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'name' => 'string',
-        'customerGroupId' => '\jtl\Connector\Model\Identity',
-        'localeName' => 'string',
-        'customerGroup' => '\jtl\Connector\Model\CustomerGroup',
-    );
-
-
-    /**
      * @param  string $name Localized customer group name
      * @return \jtl\Connector\Model\CustomerGroupI18n
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

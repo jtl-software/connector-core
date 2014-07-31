@@ -44,17 +44,6 @@ class DeliveryNoteItem extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'quantity' => 'float',
-        'cHinweis' => 'string',
-        'deliveryNoteId' => '\jtl\Connector\Model\Identity',
-        'customerOrderItemId' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  float $quantity Quantity delivered
      * @return \jtl\Connector\Model\DeliveryNoteItem
      * @throws InvalidArgumentException if the provided argument is not of type 'float'.

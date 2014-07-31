@@ -43,17 +43,6 @@ class MediaFileI18n extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'name' => 'string',
-        'description' => 'string',
-        'mediaFileId' => '\jtl\Connector\Model\Identity',
-        'localeName' => 'string',
-    );
-
-
-    /**
      * @param  string $name Locale specific name
      * @return \jtl\Connector\Model\MediaFileI18n
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

@@ -59,20 +59,6 @@ class CategoryImage extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'data' => '\jtl\Connector\Model\Byte[]',
-        'size' => 'integer',
-        'modified' => 'string',
-        'id' => '\jtl\Connector\Model\Identity',
-        'foreignKey' => '\jtl\Connector\Model\Identity',
-        'flagDelete' => 'boolean',
-        'flagUpdate' => 'boolean',
-    );
-
-
-    /**
      * @param  Byte[] $data 
      * @return \jtl\Connector\Model\CategoryImage
      * @throws InvalidArgumentException if the provided argument is not of type 'Byte[]'.

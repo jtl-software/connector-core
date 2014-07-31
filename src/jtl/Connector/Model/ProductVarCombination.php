@@ -40,16 +40,6 @@ class ProductVarCombination extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'id' => '\jtl\Connector\Model\Identity',
-        'productVariationId' => '\jtl\Connector\Model\Identity',
-        'productVariationValueId' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  Identity $id 
      * @return \jtl\Connector\Model\ProductVarCombination
      * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.

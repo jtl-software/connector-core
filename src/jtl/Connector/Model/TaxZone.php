@@ -33,15 +33,6 @@ class TaxZone extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'name' => 'string',
-        'id' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  string $name Optional tax zone name e.g. "EU Zone"
      * @return \jtl\Connector\Model\TaxZone
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

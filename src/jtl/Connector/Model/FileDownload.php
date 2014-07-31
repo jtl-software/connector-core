@@ -70,22 +70,6 @@ class FileDownload extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'internalId' => 'string',
-        'path' => 'string',
-        'previewPath' => 'string',
-        'maxDownloads' => 'integer',
-        'maxDays' => 'integer',
-        'created' => '\jtl\Connector\Model\DateTime',
-        'sort' => 'integer',
-        'id' => '\jtl\Connector\Model\Identity',
-        'i18n' => '\jtl\Connector\Model\FileDownloadI18n',
-    );
-
-
-    /**
      * @param  string $internalId 
      * @return \jtl\Connector\Model\FileDownload
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

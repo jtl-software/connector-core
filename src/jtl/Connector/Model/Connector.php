@@ -94,25 +94,6 @@ class Connector extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'id' => 'integer',
-        'companyId' => 'integer',
-        'name' => 'string',
-        'url' => 'string',
-        'token' => 'string',
-        'isActive' => 'boolean',
-        'customerGroups' => '\jtl\Connector\Model\ConnectorCustomerGroup',
-        'logMessages' => '\jtl\Connector\Model\ConnectorLog',
-        'currencies' => '\jtl\Connector\Model\ConnectorCurrency',
-        'syncQueues' => '\jtl\Connector\Model\ConnectorSyncQueue',
-        'languages' => '\jtl\Connector\Model\ConnectorLanguage',
-        'links' => '\jtl\Connector\Model\ConnectorLink',
-    );
-
-
-    /**
      * @param  integer $id 
      * @return \jtl\Connector\Model\Connector
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.

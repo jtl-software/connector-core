@@ -124,33 +124,6 @@ class ProductPriceOld extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'connectorId' => 'integer',
-        'quantity1' => 'integer',
-        'quantity2' => 'integer',
-        'quantity3' => 'integer',
-        'quantity4' => 'integer',
-        'quantity5' => 'integer',
-        'percent' => 'float',
-        'netPercent1' => 'float',
-        'netPercent2' => 'float',
-        'netPercent3' => 'float',
-        'netPercent4' => 'float',
-        'netPercent5' => 'float',
-        'customerGroupId' => '\jtl\Connector\Model\Identity',
-        'productId' => '\jtl\Connector\Model\Identity',
-        'netPrice' => 'float',
-        'netPrice1' => 'float',
-        'netPrice2' => 'float',
-        'netPrice3' => 'float',
-        'netPrice4' => 'float',
-        'netPrice5' => 'float',
-    );
-
-
-    /**
      * @param  integer $connectorId 
      * @return \jtl\Connector\Model\ProductPriceOld
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.

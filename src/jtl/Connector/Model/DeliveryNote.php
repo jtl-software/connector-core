@@ -75,23 +75,6 @@ class DeliveryNote extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'kBenutzer' => 'integer',
-        'cLieferscheinNr' => 'string',
-        'note' => 'string',
-        'dMailVersand' => '\jtl\Connector\Model\DateTime',
-        'created' => '\jtl\Connector\Model\DateTime',
-        'dGedruckt' => '\jtl\Connector\Model\DateTime',
-        'kLieferantenBestellung' => 'integer',
-        'customerOrderId' => '\jtl\Connector\Model\Identity',
-        'isFulfillment' => 'boolean',
-        'items' => '\jtl\Connector\Model\DeliveryNoteItem',
-    );
-
-
-    /**
      * @param  integer $kBenutzer 
      * @return \jtl\Connector\Model\DeliveryNote
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.

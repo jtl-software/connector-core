@@ -44,17 +44,6 @@ class ProductVariationValueExtraCharge extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'connectorId' => 'integer',
-        'extraChargeNet' => 'float',
-        'productVariationValueId' => '\jtl\Connector\Model\Identity',
-        'customerGroupId' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  integer $connectorId 
      * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.

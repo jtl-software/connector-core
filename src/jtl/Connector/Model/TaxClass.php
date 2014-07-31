@@ -33,15 +33,6 @@ class TaxClass extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'name' => 'string',
-        'id' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  string $name Optional tax class name
      * @return \jtl\Connector\Model\TaxClass
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

@@ -68,22 +68,6 @@ class ProductI18n extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'name' => 'string',
-        'description' => 'string',
-        'shortDescription' => 'string',
-        'urlPath' => 'string',
-        'titleTag' => 'string',
-        'metaKeywords' => 'string',
-        'metaDescription' => 'string',
-        'productId' => '\jtl\Connector\Model\Identity',
-        'localeName' => 'string',
-    );
-
-
-    /**
      * @param  string $name 
      * @return \jtl\Connector\Model\ProductI18n
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

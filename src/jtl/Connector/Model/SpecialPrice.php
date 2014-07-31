@@ -44,17 +44,6 @@ class SpecialPrice extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'connectorId' => 'integer',
-        'productSpecialPriceId' => '\jtl\Connector\Model\Identity',
-        'customerGroupId' => '\jtl\Connector\Model\Identity',
-        'priceNet' => 'float',
-    );
-
-
-    /**
      * @param  integer $connectorId 
      * @return \jtl\Connector\Model\SpecialPrice
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.

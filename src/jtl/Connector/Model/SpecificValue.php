@@ -46,17 +46,6 @@ class SpecificValue extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'sort' => 'integer',
-        'id' => '\jtl\Connector\Model\Identity',
-        'specificId' => '\jtl\Connector\Model\Identity',
-        'i18ns' => '\jtl\Connector\Model\SpecificValueI18n',
-    );
-
-
-    /**
      * @param  integer $sort Optional sort number
      * @return \jtl\Connector\Model\SpecificValue
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.

@@ -63,21 +63,6 @@ class SpecificValueI18n extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'value' => 'string',
-        'urlPath' => 'string',
-        'titleTag' => 'string',
-        'metaKeywords' => 'string',
-        'metaDescription' => 'string',
-        'description' => 'string',
-        'specificValueId' => '\jtl\Connector\Model\Identity',
-        'localeName' => 'string',
-    );
-
-
-    /**
      * @param  string $value Localized value
      * @return \jtl\Connector\Model\SpecificValueI18n
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

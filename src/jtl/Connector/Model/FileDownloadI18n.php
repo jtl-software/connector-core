@@ -43,17 +43,6 @@ class FileDownloadI18n extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'name' => 'string',
-        'description' => 'string',
-        'fileDownloadId' => '\jtl\Connector\Model\Identity',
-        'localeName' => 'string',
-    );
-
-
-    /**
      * @param  string $name File download title / name
      * @return \jtl\Connector\Model\FileDownloadI18n
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

@@ -55,19 +55,6 @@ class Manufacturer extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'name' => 'string',
-        'www' => 'string',
-        'sort' => 'integer',
-        'urlPath' => 'string',
-        'id' => '\jtl\Connector\Model\Identity',
-        'i18ns' => '\jtl\Connector\Model\ManufacturerI18n',
-    );
-
-
-    /**
      * @param  string $name Manufacturer (brand) name
      * @return \jtl\Connector\Model\Manufacturer
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

@@ -67,21 +67,6 @@ class CustomerOrderItemVariation extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'productVariationName' => 'string',
-        'productVariationValueName' => 'string',
-        'surcharge' => 'float',
-        'id' => '\jtl\Connector\Model\Identity',
-        'productVariationValueId' => '\jtl\Connector\Model\Identity',
-        'customerOrderItemId' => '\jtl\Connector\Model\Identity',
-        'productId' => '\jtl\Connector\Model\Identity',
-        'productVariationId' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  string $productVariationName Variation name e.g. "color"
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

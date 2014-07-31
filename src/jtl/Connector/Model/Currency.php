@@ -73,23 +73,6 @@ class Currency extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'name' => 'string',
-        'nameHTML' => 'string',
-        'factor' => 'float',
-        'decimalSeparator' => 'string',
-        'thousandsSeparator' => 'string',
-        'lastModified' => '\jtl\Connector\Model\DateTime',
-        'mapping' => 'string',
-        'id' => '\jtl\Connector\Model\Identity',
-        'isDefault' => 'boolean',
-        'beforeAmount' => 'boolean',
-    );
-
-
-    /**
      * @param  string $name Currency name
      * @return \jtl\Connector\Model\Currency
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

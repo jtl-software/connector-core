@@ -38,16 +38,6 @@ class DeliveryStatus extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'name' => 'string',
-        'id' => '\jtl\Connector\Model\Identity',
-        'localeName' => 'string',
-    );
-
-
-    /**
      * @param  string $name Localized delivery status text
      * @return \jtl\Connector\Model\DeliveryStatus
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

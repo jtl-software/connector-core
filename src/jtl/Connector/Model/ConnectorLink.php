@@ -42,17 +42,6 @@ class ConnectorLink extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'connectorId' => 'integer',
-        'type' => 'integer',
-        'endpointId' => 'string',
-        'wawiId' => 'integer',
-    );
-
-
-    /**
      * @param  integer $connectorId 
      * @return \jtl\Connector\Model\ConnectorLink
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.

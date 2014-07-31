@@ -103,28 +103,6 @@ class CustomerOrderItem extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'grossPrice' => 'float',
-        'vat' => 'float',
-        'quantity' => 'float',
-        'price' => 'float',
-        'sku' => 'string',
-        'unique' => 'string',
-        'sort' => 'integer',
-        'name' => 'string',
-        'kBestellStueckliste' => 'integer',
-        'id' => '\jtl\Connector\Model\Identity',
-        'productId' => '\jtl\Connector\Model\Identity',
-        'customerOrderId' => '\jtl\Connector\Model\Identity',
-        'configItemId' => '\jtl\Connector\Model\Identity',
-        'variations' => '\jtl\Connector\Model\CustomerOrderItemVariation',
-        'type' => 'string',
-    );
-
-
-    /**
      * @param  float $grossPrice 
      * @return \jtl\Connector\Model\CustomerOrderItem
      * @throws InvalidArgumentException if the provided argument is not of type 'float'.

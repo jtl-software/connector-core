@@ -33,15 +33,6 @@ class ProductType extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'name' => 'string',
-        'id' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  string $name Optional (internal) product type name
      * @return \jtl\Connector\Model\ProductType
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

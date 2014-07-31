@@ -59,20 +59,6 @@ class ConfigGroup extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'image' => '\jtl\Connector\Model\Byte[]',
-        'minimumSelection' => 'integer',
-        'maximumSelection' => 'integer',
-        'type' => 'integer',
-        'sort' => 'integer',
-        'comment' => 'string',
-        'i18n' => '\jtl\Connector\Model\ConfigGroupI18n',
-    );
-
-
-    /**
      * @param  Byte[] $image 
      * @return \jtl\Connector\Model\ConfigGroup
      * @throws InvalidArgumentException if the provided argument is not of type 'Byte[]'.

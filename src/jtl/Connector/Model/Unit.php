@@ -32,15 +32,6 @@ class Unit extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'name' => 'string',
-        'localeName' => 'string',
-    );
-
-
-    /**
      * @param  string $name 
      * @return \jtl\Connector\Model\Unit
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

@@ -42,17 +42,6 @@ class ConnectorSync extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'syncId' => 'integer',
-        'key' => 'integer',
-        'type' => 'integer',
-        'action' => '\jtl\Connector\Model\Byte[]',
-    );
-
-
-    /**
      * @param  integer $syncId 
      * @return \jtl\Connector\Model\ConnectorSync
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.

@@ -45,17 +45,6 @@ class ProductConfigGroup extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'sort' => 'integer',
-        'id' => '\jtl\Connector\Model\Identity',
-        'productId' => '\jtl\Connector\Model\Identity',
-        'configGroupId' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  integer $sort Optional sort number
      * @return \jtl\Connector\Model\ProductConfigGroup
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.

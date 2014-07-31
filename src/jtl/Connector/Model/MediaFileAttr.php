@@ -49,18 +49,6 @@ class MediaFileAttr extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'key' => 'string',
-        'value' => 'string',
-        'id' => '\jtl\Connector\Model\Identity',
-        'mediaFileId' => '\jtl\Connector\Model\Identity',
-        'localeName' => 'string',
-    );
-
-
-    /**
      * @param  string $key Attribute name
      * @return \jtl\Connector\Model\MediaFileAttr
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

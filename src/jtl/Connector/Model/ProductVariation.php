@@ -80,23 +80,6 @@ class ProductVariation extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'sort' => 'integer',
-        'type' => 'string',
-        'cName' => 'string',
-        'id' => '\jtl\Connector\Model\Identity',
-        'productId' => '\jtl\Connector\Model\Identity',
-        'isSelectable' => 'boolean',
-        'isActive' => 'boolean',
-        'i18ns' => '\jtl\Connector\Model\ProductVariationI18n',
-        'invisibilities' => '\jtl\Connector\Model\ProductVariationInvisibility',
-        'values' => '\jtl\Connector\Model\ProductVariationValue',
-    );
-
-
-    /**
      * @param  integer $sort Optional sort number
      * @return \jtl\Connector\Model\ProductVariation
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.

@@ -44,17 +44,6 @@ class ProductPrice extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'customerGroupId' => '\jtl\Connector\Model\Identity',
-        'productId' => '\jtl\Connector\Model\Identity',
-        'netPrice' => 'float',
-        'quantity' => 'integer',
-    );
-
-
-    /**
      * @param  Identity $customerGroupId 
      * @return \jtl\Connector\Model\ProductPrice
      * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.

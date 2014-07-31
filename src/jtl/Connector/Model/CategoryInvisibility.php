@@ -39,16 +39,6 @@ class CategoryInvisibility extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'connectorId' => 'integer',
-        'categoryId' => '\jtl\Connector\Model\Identity',
-        'customerGroupId' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  integer $connectorId 
      * @return \jtl\Connector\Model\CategoryInvisibility
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.

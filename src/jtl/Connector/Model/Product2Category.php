@@ -40,16 +40,6 @@ class Product2Category extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'id' => '\jtl\Connector\Model\Identity',
-        'productId' => '\jtl\Connector\Model\Identity',
-        'categoryId' => '\jtl\Connector\Model\Identity',
-    );
-
-
-    /**
      * @param  Identity $id Unique product2Category id
      * @return \jtl\Connector\Model\Product2Category
      * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.

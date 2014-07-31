@@ -172,42 +172,6 @@ class Customer extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'customerNumber' => 'string',
-        'company' => 'string',
-        'title' => 'string',
-        'firstName' => 'string',
-        'lastName' => 'string',
-        'street' => 'string',
-        'zipCode' => 'string',
-        'city' => 'string',
-        'countryIso' => 'string',
-        'phone' => 'string',
-        'fax' => 'string',
-        'eMail' => 'string',
-        'created' => '\jtl\Connector\Model\DateTime',
-        'mobile' => 'string',
-        'discount' => 'float',
-        'vatNumber' => 'string',
-        'deliveryInstruction' => 'string',
-        'extraAddressLine' => 'string',
-        'www' => 'string',
-        'languageId' => 'integer',
-        'state' => 'string',
-        'origin' => 'string',
-        'id' => '\jtl\Connector\Model\Identity',
-        'customerCategoryId' => '\jtl\Connector\Model\Identity',
-        'salutation' => 'string',
-        'isActive' => 'boolean',
-        'hasNewsletterSubscription' => 'boolean',
-        'customerGroupId' => '\jtl\Connector\Model\Identity',
-        'attributes' => '\jtl\Connector\Model\CustomerAttr',
-    );
-
-
-    /**
      * @param  string $customerNumber Optional customer number set by JTL-Wawi ERP software
      * @return \jtl\Connector\Model\Customer
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.

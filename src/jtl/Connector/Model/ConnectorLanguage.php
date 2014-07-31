@@ -37,16 +37,6 @@ class ConnectorLanguage extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'connectorId' => 'integer',
-        'languageId' => 'integer',
-        'isDefault' => 'boolean',
-    );
-
-
-    /**
      * @param  integer $connectorId 
      * @return \jtl\Connector\Model\ConnectorLanguage
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.

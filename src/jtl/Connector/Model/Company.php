@@ -148,38 +148,6 @@ class Company extends DataModel
     );
 
     /**
-     * @type array list of propertyInfo
-     */
-    protected $propertyInfos = array(
-        'name' => 'string',
-        'businessman' => 'string',
-        'street' => 'string',
-        'zipCode' => 'string',
-        'city' => 'string',
-        'countryIso' => 'string',
-        'phone' => 'string',
-        'fax' => 'string',
-        'eMail' => 'string',
-        'www' => 'string',
-        'bankCode' => 'string',
-        'accountNumber' => 'string',
-        'bankName' => 'string',
-        'vatNumber' => 'string',
-        'taxIdNumber' => 'string',
-        'intrashipNumber' => 'string',
-        'upsNumber' => 'string',
-        'iban' => 'string',
-        'bic' => 'string',
-        'headerLogo' => 'string',
-        'footer' => 'string',
-        'accountHolder' => 'string',
-        'id' => '\jtl\Connector\Model\Identity',
-        'flagUpdate' => 'boolean',
-        'isActive' => 'boolean',
-    );
-
-
-    /**
      * @param  string $name Company name
      * @return \jtl\Connector\Model\Company
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.
