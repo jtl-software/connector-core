@@ -6,13 +6,13 @@
 
 namespace jtl\Connector\Type;
 
-use jtl\Connector\Type\PropertyInfo;
+use \jtl\Connector\Type\PropertyInfo;
 
 /**
  * @access public
  * @package jtl\Connector\Type
  */
-class Product extends DataType
+class Specific extends DataType
 {
     protected function loadProperties()
     {
