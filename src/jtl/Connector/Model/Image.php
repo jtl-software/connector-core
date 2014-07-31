@@ -35,9 +35,9 @@ class Image extends DataModel
     protected $masterImageId = null;
 
     /**
-     * @type integer 
+     * @type string 
      */
-    protected $relationType = 0;
+    protected $relationType = '';
 
     /**
      * @type integer 
@@ -106,17 +106,17 @@ class Image extends DataModel
     }
 
     /**
-     * @param  integer $relationType 
+     * @param  string $relationType 
      * @return \jtl\Connector\Model\Image
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setRelationType($relationType)
     {
-        return $this->setProperty('relationType', $relationType, 'integer');
+        return $this->setProperty('relationType', $relationType, 'string');
     }
     
     /**
-     * @return integer 
+     * @return string 
      */
     public function getRelationType()
     {
