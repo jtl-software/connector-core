@@ -12,7 +12,7 @@ use jtl\Connector\Type\PropertyInfo;
  * @access public
  * @package jtl\Connector\Type
  */
-class Product extends DataModel
+class Product extends DataType
 {
     protected function loadProperties()
     {
