@@ -187,7 +187,7 @@ abstract class DataModel extends CoreModel
     protected function setProperty($name, $value, $type)
     {
         if (!$this->validateType($value, $type)) {
-            throw new \InvalidArgumentException(sprintf("%s: expected type '%s', given value '%s'.", __FUNCTION__, $type, gettype($value)));
+            throw new \InvalidArgumentException(sprintf("%s: expected type '%s', given value '%s'.", $name, $type, gettype($value)));
         }
 
         $this->{$name} = $value;
