@@ -27,4 +27,3 @@ interface IEndpointConnector
      */
     public function handle(RequestPacket $requestpacket);
 }
-?>

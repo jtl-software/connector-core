@@ -125,4 +125,3 @@ class Action
         return ($this->_error !== null);
     }
 }
-?>

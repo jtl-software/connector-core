@@ -74,6 +74,7 @@ class Connector extends CoreController
             $err->setMessage($e->getMessage());
             $ret->setError($err);
         }
+
         return $ret;
     }
     
@@ -98,6 +99,7 @@ class Connector extends CoreController
             $err->setMessage($e->getMessage());
             $ret->setError($err);
         }
+
         return $ret;
     }
 
@@ -145,8 +147,7 @@ class Connector extends CoreController
         if (function_exists('apache_request_headers')) {
             $headers = apache_request_headers();
             $digestData = $headers['Authorization'];
-        }
-        else {
+        } else {
             $digestData = $_SERVER['PHP_AUTH_DIGEST'];
         }
 
@@ -193,8 +194,7 @@ class Connector extends CoreController
             
             $action->setResult($session)
                 ->setHandled(true);
-        }
-        else {
+        } else {
             $error = new Error();
             $error->setCode(789)
                 ->setMessage("Could not get any Session");
@@ -204,4 +204,3 @@ class Connector extends CoreController
         return $action;
     }
 }
-?>

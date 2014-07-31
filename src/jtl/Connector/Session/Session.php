@@ -17,4 +17,3 @@ use \jtl\Core\Session\Handler as CoreHandler;
 final class Session extends CoreHandler
 {
 }
-?>

@@ -109,9 +109,11 @@ abstract class DataModel extends CoreModel
             foreach ($subElems as $subElem) {
                 if ($subElem instanceof DataModel) {
                     $arr[] = $subElem->getPublic($publics);
-                } else if ($subElem instanceof Identity) {
+                } elseif ($subElem instanceof Identity) {
                     $arr[] = $subElem->toArray();
-                } else if (is_array($subElem)) {
+                } elseif ($subElem instanceof \DateTime) {
+                    $arr[] = $subElem->format(\DateTime::ISO8601);
+                } elseif (is_array($subElem)) {
                     $arr[] = $recursive($subElem, $publics);
                 } else {
                     $arr[] = $subElem;
@@ -130,9 +132,11 @@ abstract class DataModel extends CoreModel
                 if (!in_array($member, $publics)) {
                     if ($this->{$getter}() instanceof DataModel) {
                         $object->{$member} = $this->{$getter}()->getPublic($publics);
-                    } else if ($this->{$getter}() instanceof Identity) {
+                    } elseif ($this->{$getter}() instanceof Identity) {
                         $object->{$member} = $this->{$getter}()->toArray();
-                    } else if (is_array($this->{$member})) {
+                    } elseif ($this->{$getter}() instanceof \DateTime) {
+                        $object->{$member} = $this->{$getter}()->format(\DateTime::ISO8601);
+                    } elseif (is_array($this->{$member})) {
                         $object->{$member} = $recursive($this->{$member}, $publics);
                     } else {
                         $object->{$member} = $this->{$member};

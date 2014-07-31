@@ -94,4 +94,3 @@ class Statistic extends DataModel
         return $this->setProperty('controllerName', $controllerName, 'string');
     }
 }
-?>

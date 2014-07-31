@@ -127,4 +127,3 @@ class Connector extends Singleton implements IEndpointConnector
         return $this->_controller->{$this->_action}($requestpacket->getParams());
     }
 }
-?>
