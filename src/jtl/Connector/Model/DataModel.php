@@ -95,17 +95,6 @@ abstract class DataModel extends CoreModel
     }
 
     /**
-     * Identity checker
-     *
-     * @param string $identity
-     * @return boolean
-     */
-    public function isIdentity($identity)
-    {
-        return in_array($identity, $this->identities);
-    }
-
-    /**
      * Convert the Model into stdClass Object
      *
      * @param array $publics
@@ -156,20 +145,6 @@ abstract class DataModel extends CoreModel
     }
 
     /**
-     * Try to convert identities into objects
-     *
-     * @return jtl\Connector\Model\DataModel
-     */
-    public function setIdentities()
-    {
-        foreach ($this->identities as $identity) {
-            $this->{$identity} = Identity::convert($this->{$identity});
-        }
-
-        return $this;
-    }
-
-    /**
      * Sets Properties with matching Array Values
      *
      * @param object $object
@@ -179,7 +154,6 @@ abstract class DataModel extends CoreModel
     public function setOptions($object = null, array $options = null)
     {
         parent::setOptions($object, $options);
-        $this->setIdentities();
 
         return $this;
     }
