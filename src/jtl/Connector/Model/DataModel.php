@@ -111,7 +111,7 @@ abstract class DataModel extends CoreModel
      * @param array $publics
      * @return stdClass $object
      */
-    public function getPublic(array $publics = array('fields', 'isEncrypted', 'identities', 'action'))
+    public function getPublic(array $publics = array('fields', 'isEncrypted', 'identities', 'action', '_type'))
     {
         $object = new \stdClass();
 
