@@ -45,6 +45,7 @@ abstract class DataType
                 return $property;
             }
         }
+        
         return null;
     }
     

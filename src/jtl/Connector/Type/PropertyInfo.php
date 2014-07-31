@@ -18,16 +18,16 @@ class PropertyInfo
     protected $type;
     protected $defaultValue;
     protected $isPrimary;
-    protected $isEntity;
+    protected $isIdentity;
     protected $isNavigation;
     
-    public function __construct ($name, $type, $defaultValue, $isPrimary, $isEntity, $isNavigation)
+    public function __construct ($name, $type, $defaultValue, $isPrimary, $isIdentity, $isNavigation)
     {
         $this->name = $name;
         $this->type = $type;
         $this->defaultValue = $defaultValue;
         $this->isPrimary = $isPrimary;
-        $this->isEntity = $isEntity;
+        $this->isIdentity = $isIdentity;
         $this->isNavigation = $isNavigation;
     }
 
@@ -51,9 +51,9 @@ class PropertyInfo
         return $this->isPrimary;
     }
     
-    public function isEntity()
+    public function isIdentity()
     {
-        return $this->isEntity;
+        return $this->isIdentity;
     }
     
     public function isNavigation()

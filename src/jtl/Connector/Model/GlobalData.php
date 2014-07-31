@@ -54,7 +54,7 @@ class GlobalData extends DataModel
      *
      * @type \jtl\Connector\Model\ShippingClass[]
      */
-    protected $shippingClasss = array();
+    protected $shippingClasses = array();
 
     /**
      * 
@@ -68,7 +68,7 @@ class GlobalData extends DataModel
      *
      * @type \jtl\Connector\Model\TaxClass[]
      */
-    protected $taxClasss = array();
+    protected $taxClasses = array();
 
     /**
      * 
@@ -276,29 +276,29 @@ class GlobalData extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ShippingClass $shippingClasss
+     * @param  \jtl\Connector\Model\ShippingClass $shippingClasses
      * @return \jtl\Connector\Model\GlobalData
      */
-    public function addShippingClasss(\jtl\Connector\Model\ShippingClass $shippingClasss)
+    public function addShippingClasses(\jtl\Connector\Model\ShippingClass $shippingClasses)
     {
-        $this->shippingClasss[] = $shippingClasss;
+        $this->shippingClasses[] = $shippingClasses;
         return $this;
     }
     
     /**
      * @return ShippingClass
      */
-    public function getShippingClasss()
+    public function getShippingClasses()
     {
-        return $this->shippingClasss;
+        return $this->shippingClasses;
     }
 
     /**
      * @return \jtl\Connector\Model\GlobalData
      */
-    public function clearShippingClasss()
+    public function clearShippingClasses()
     {
-        $this->shippingClasss = array();
+        $this->shippingClasses = array();
         return $this;
     }
 
@@ -330,29 +330,29 @@ class GlobalData extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\TaxClass $taxClasss
+     * @param  \jtl\Connector\Model\TaxClass $taxClasses
      * @return \jtl\Connector\Model\GlobalData
      */
-    public function addTaxClasss(\jtl\Connector\Model\TaxClass $taxClasss)
+    public function addTaxClasses(\jtl\Connector\Model\TaxClass $taxClasses)
     {
-        $this->taxClasss[] = $taxClasss;
+        $this->taxClasses[] = $taxClasses;
         return $this;
     }
     
     /**
      * @return TaxClass
      */
-    public function getTaxClasss()
+    public function getTaxClasses()
     {
-        return $this->taxClasss;
+        return $this->taxClasses;
     }
 
     /**
      * @return \jtl\Connector\Model\GlobalData
      */
-    public function clearTaxClasss()
+    public function clearTaxClasses()
     {
-        $this->taxClasss = array();
+        $this->taxClasses = array();
         return $this;
     }
 
