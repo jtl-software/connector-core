@@ -12,15 +12,13 @@ use jtl\Connector\Type\PropertyInfo;
  * @access public
  * @package jtl\Connector\Type
  */
-class TaxZone extends DataModel
+class Product extends DataModel
 {
     protected function loadProperties()
     {
         return array(
-			'CDE6B7C7' => new PropertyInfo('id', '\jtl\Connector\Model\Identity', null, true, true, true),
-			'03BD1C7B' => new PropertyInfo('name', 'string', '', false, false, false),
+			new PropertyInfo('id', '\jtl\Connector\Model\IdentityKeyPair', null, true, true, false),
+			new PropertyInfo('name', 'string', '', false, false, false),
         );
     }
 }
-
-

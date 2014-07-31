@@ -12,18 +12,17 @@ use jtl\Connector\Type\PropertyInfo;
  * @access public
  * @package jtl\Connector\Type
  */
-class Manufacturer extends DataModel
+class Product extends DataModel
 {
     protected function loadProperties()
     {
         return array(
-			'CDE6B7C7' => new PropertyInfo('id', '\jtl\Connector\Model\Identity', null, true, true, true),
-			'03BD1C7B' => new PropertyInfo('name', 'string', '', false, false, false),
-			'484219DD' => new PropertyInfo('sort', 'integer', 0, false, false, false),
-			'CF8EFB36' => new PropertyInfo('urlPath', 'string', '', false, false, false),
-			'803360E0' => new PropertyInfo('www', 'string', '', false, false, false),
+			new PropertyInfo('id', '\jtl\Connector\Model\IdentityKeyPair', null, true, true, false),
+			new PropertyInfo('i18ns', '\jtl\Connector\Model\ManufacturerI18n', null, false, false, true),
+			new PropertyInfo('name', 'string', '', false, false, false),
+			new PropertyInfo('sort', 'integer', 0, false, false, false),
+			new PropertyInfo('urlPath', 'string', '', false, false, false),
+			new PropertyInfo('www', 'string', '', false, false, false),
         );
     }
 }
-
-

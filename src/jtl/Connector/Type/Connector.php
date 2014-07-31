@@ -12,19 +12,23 @@ use jtl\Connector\Type\PropertyInfo;
  * @access public
  * @package jtl\Connector\Type
  */
-class Connector extends DataModel
+class Product extends DataModel
 {
     protected function loadProperties()
     {
         return array(
-			'7A6CE769' => new PropertyInfo('companyId', 'integer', 0, false, false, false),
-			'CDE6B7C7' => new PropertyInfo('id', 'integer', 0, true, true, true),
-			'597AD442' => new PropertyInfo('isActive', 'boolean', false, false, false, false),
-			'03BD1C7B' => new PropertyInfo('name', 'string', '', false, false, false),
-			'7786EDC3' => new PropertyInfo('token', 'string', '', false, false, false),
-			'AD7DA7E9' => new PropertyInfo('url', 'string', '', false, false, false),
+			new PropertyInfo('companyId', 'integer', 0, false, false, false),
+			new PropertyInfo('currencies', '\jtl\Connector\Model\ConnectorCurrency', null, false, false, true),
+			new PropertyInfo('customerGroups', '\jtl\Connector\Model\ConnectorCustomerGroup', null, false, false, true),
+			new PropertyInfo('id', 'integer', 0, true, false, false),
+			new PropertyInfo('isActive', 'boolean', false, false, false, false),
+			new PropertyInfo('languages', '\jtl\Connector\Model\ConnectorLanguage', null, false, false, true),
+			new PropertyInfo('links', '\jtl\Connector\Model\ConnectorLink', null, false, false, true),
+			new PropertyInfo('logMessages', '\jtl\Connector\Model\ConnectorLog', null, false, false, true),
+			new PropertyInfo('name', 'string', '', false, false, false),
+			new PropertyInfo('syncQueues', '\jtl\Connector\Model\ConnectorSyncQueue', null, false, false, true),
+			new PropertyInfo('token', 'string', '', false, false, false),
+			new PropertyInfo('url', 'string', '', false, false, false),
         );
     }
 }
-
-

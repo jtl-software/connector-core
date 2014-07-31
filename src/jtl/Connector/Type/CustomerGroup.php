@@ -12,19 +12,19 @@ use jtl\Connector\Type\PropertyInfo;
  * @access public
  * @package jtl\Connector\Type
  */
-class CustomerGroup extends DataModel
+class Product extends DataModel
 {
     protected function loadProperties()
     {
         return array(
-			'CDE6B7C7' => new PropertyInfo('id', '\jtl\Connector\Model\Identity', null, true, true, true),
-			'93C47682' => new PropertyInfo('applyNetPrice', 'integer', 0, false, false, false),
-			'4ACB38AA' => new PropertyInfo('discount', 'float', 0.0, false, false, false),
-			'B0DDC840' => new PropertyInfo('isDefault', 'boolean', false, false, false, false),
-			'2E7EAA9A' => new PropertyInfo('kKundenDrucktext', 'integer', 0, false, false, false),
-			'03BD1C7B' => new PropertyInfo('name', 'string', '', false, false, false),
+			new PropertyInfo('id', '\jtl\Connector\Model\IdentityKeyPair', null, true, true, false),
+			new PropertyInfo('applyNetPrice', 'integer', 0, false, false, false),
+			new PropertyInfo('attributes', '\jtl\Connector\Model\CustomerGroupAttr', null, false, false, true),
+			new PropertyInfo('discount', 'float', 0.0, false, false, false),
+			new PropertyInfo('i18n', '\jtl\Connector\Model\CustomerGroupI18n', null, false, false, true),
+			new PropertyInfo('isDefault', 'boolean', false, false, false, false),
+			new PropertyInfo('kKundenDrucktext', 'integer', 0, false, false, false),
+			new PropertyInfo('name', 'string', '', false, false, false),
         );
     }
 }
-
-

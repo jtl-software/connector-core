@@ -12,17 +12,15 @@ use jtl\Connector\Type\PropertyInfo;
  * @access public
  * @package jtl\Connector\Type
  */
-class ConnectorLog extends DataModel
+class Product extends DataModel
 {
     protected function loadProperties()
     {
         return array(
-			'CDE6B7C7' => new PropertyInfo('id', '\jtl\Connector\Model\Identity', null, true, true, true),
-			'569E932A' => new PropertyInfo('connectorId', 'integer', 0, false, false, false),
-			'4BDA0302' => new PropertyInfo('date', '\jtl\Connector\Model\DateTime', null, false, false, false),
-			'C1F336EC' => new PropertyInfo('message', 'string', '', false, false, false),
+			new PropertyInfo('id', '\jtl\Connector\Model\IdentityKeyPair', null, true, true, false),
+			new PropertyInfo('connectorId', 'integer', 0, false, false, false),
+			new PropertyInfo('date', '\jtl\Connector\Model\DateTime', null, false, false, false),
+			new PropertyInfo('message', 'string', '', false, false, false),
         );
     }
 }
-
-

@@ -12,16 +12,15 @@ use jtl\Connector\Type\PropertyInfo;
  * @access public
  * @package jtl\Connector\Type
  */
-class CustomerGroupI18n extends DataModel
+class Product extends DataModel
 {
     protected function loadProperties()
     {
         return array(
-			'C5988257' => new PropertyInfo('customerGroupId', '\jtl\Connector\Model\Identity', null, true, true, true),
-			'3BDDE85B' => new PropertyInfo('localeName', 'string', '', true, true, true),
-			'03BD1C7B' => new PropertyInfo('name', 'string', '', false, false, false),
+			new PropertyInfo('customerGroupId', '\jtl\Connector\Model\IdentityKeyPair', null, true, true, false),
+			new PropertyInfo('customerGroup', '\jtl\Connector\Model\CustomerGroup', null, false, false, true),
+			new PropertyInfo('localeName', 'string', '', true, false, false),
+			new PropertyInfo('name', 'string', '', false, false, false),
         );
     }
 }
-
-

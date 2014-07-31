@@ -12,16 +12,14 @@ use jtl\Connector\Type\PropertyInfo;
  * @access public
  * @package jtl\Connector\Type
  */
-class ProductVariationInvisibility extends DataModel
+class Product extends DataModel
 {
     protected function loadProperties()
     {
         return array(
-			'C5988257' => new PropertyInfo('customerGroupId', '\jtl\Connector\Model\Identity', null, true, true, true),
-			'81B11883' => new PropertyInfo('productVariationId', '\jtl\Connector\Model\Identity', null, true, true, true),
-			'569E932A' => new PropertyInfo('connectorId', 'integer', 0, true, true, true),
+			new PropertyInfo('customerGroupId', '\jtl\Connector\Model\IdentityKeyPair', null, true, true, false),
+			new PropertyInfo('productVariationId', '\jtl\Connector\Model\IdentityKeyPair', null, true, true, false),
+			new PropertyInfo('connectorId', 'integer', 0, true, false, false),
         );
     }
 }
-
-

@@ -12,17 +12,15 @@ use jtl\Connector\Type\PropertyInfo;
  * @access public
  * @package jtl\Connector\Type
  */
-class DeliveryNoteItem extends DataModel
+class Product extends DataModel
 {
     protected function loadProperties()
     {
         return array(
-			'F674B959' => new PropertyInfo('customerOrderItemId', '\jtl\Connector\Model\Identity', null, false, false, false),
-			'D80BDE14' => new PropertyInfo('deliveryNoteId', '\jtl\Connector\Model\Identity', null, false, false, false),
-			'AC4C45CE' => new PropertyInfo('cHinweis', 'string', '', false, false, false),
-			'14A73220' => new PropertyInfo('quantity', 'float', 0.0, false, false, false),
+			new PropertyInfo('customerOrderItemId', '\jtl\Connector\Model\IdentityKeyPair', null, false, true, false),
+			new PropertyInfo('deliveryNoteId', '\jtl\Connector\Model\IdentityKeyPair', null, false, true, false),
+			new PropertyInfo('cHinweis', 'string', '', false, false, false),
+			new PropertyInfo('quantity', 'float', 0.0, false, false, false),
         );
     }
 }
-
-

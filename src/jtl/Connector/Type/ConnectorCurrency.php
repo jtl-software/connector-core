@@ -12,16 +12,14 @@ use jtl\Connector\Type\PropertyInfo;
  * @access public
  * @package jtl\Connector\Type
  */
-class ConnectorCurrency extends DataModel
+class Product extends DataModel
 {
     protected function loadProperties()
     {
         return array(
-			'569E932A' => new PropertyInfo('connectorId', 'integer', 0, true, true, true),
-			'B8BAC52C' => new PropertyInfo('currencyId', 'integer', 0, true, true, true),
-			'B0DDC840' => new PropertyInfo('isDefault', 'boolean', false, false, false, false),
+			new PropertyInfo('connectorId', 'integer', 0, true, false, false),
+			new PropertyInfo('currencyId', 'integer', 0, true, false, false),
+			new PropertyInfo('isDefault', 'boolean', false, false, false, false),
         );
     }
 }
-
-
