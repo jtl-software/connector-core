@@ -16,6 +16,10 @@ use jtl\Connector\Type\PropertyInfo;
  */
 abstract class DataType
 {
+    /**
+     * List of PropertyInfos
+     * @var \jtl\Connector\Type\PropertyInfo[]
+     */
     private $_propertyInfo = null;
 
     /**
