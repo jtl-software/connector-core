@@ -54,7 +54,7 @@ abstract class DataModel extends CoreModel
     /**
      * @return \jtl\Connector\Type\DataType 
      */
-    public function getType()
+    public function getModelType()
     {
         if ($this->_type === null) {
             $reflect = new \ReflectionClass($this);
