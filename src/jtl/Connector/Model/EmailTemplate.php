@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Shop3 only.
  *
@@ -15,75 +17,68 @@ namespace jtl\Connector\Model;
 class EmailTemplate extends DataModel
 {
     /**
-     * @type Identity 
+     * @var Identity 
      */
     protected $id = null;
 
     /**
-     * @type string 
+     * @var string 
      */
     protected $description = '';
 
     /**
-     * @type string 
+     * @var string 
      */
     protected $emailType = '';
 
     /**
-     * @type int 
+     * @var int 
      */
     protected $error = 0;
 
     /**
-     * @type string 
+     * @var string 
      */
     protected $filename = '';
 
     /**
-     * @type bool 
+     * @var bool 
      */
     protected $isActive = false;
 
     /**
-     * @type bool 
+     * @var bool 
      */
     protected $isAgb = false;
 
     /**
-     * @type bool 
+     * @var bool 
      */
     protected $isOii = false;
 
     /**
-     * @type bool 
+     * @var bool 
      */
     protected $isWrb = false;
 
     /**
-     * @type string 
+     * @var string 
      */
     protected $moduleId = '';
 
     /**
-     * @type string 
+     * @var string 
      */
     protected $name = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-    );
-
-    /**
      * @param  Identity $id 
      * @return \jtl\Connector\Model\EmailTemplate
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -97,11 +92,11 @@ class EmailTemplate extends DataModel
     /**
      * @param  string $description 
      * @return \jtl\Connector\Model\EmailTemplate
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setDescription(Identity $description)
+    public function setDescription($description)
     {
-        return $this->setProperty('Description', $description, 'string');
+        return $this->setProperty('description', $description, 'string');
     }
 
     /**
@@ -115,11 +110,11 @@ class EmailTemplate extends DataModel
     /**
      * @param  string $emailType 
      * @return \jtl\Connector\Model\EmailTemplate
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setEmailType(Identity $emailType)
+    public function setEmailType($emailType)
     {
-        return $this->setProperty('EmailType', $emailType, 'string');
+        return $this->setProperty('emailType', $emailType, 'string');
     }
 
     /**
@@ -133,11 +128,11 @@ class EmailTemplate extends DataModel
     /**
      * @param  int $error 
      * @return \jtl\Connector\Model\EmailTemplate
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setError(Identity $error)
+    public function setError($error)
     {
-        return $this->setProperty('Error', $error, 'int');
+        return $this->setProperty('error', $error, 'int');
     }
 
     /**
@@ -151,11 +146,11 @@ class EmailTemplate extends DataModel
     /**
      * @param  string $filename 
      * @return \jtl\Connector\Model\EmailTemplate
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setFilename(Identity $filename)
+    public function setFilename($filename)
     {
-        return $this->setProperty('Filename', $filename, 'string');
+        return $this->setProperty('filename', $filename, 'string');
     }
 
     /**
@@ -169,11 +164,11 @@ class EmailTemplate extends DataModel
     /**
      * @param  bool $isActive 
      * @return \jtl\Connector\Model\EmailTemplate
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setIsActive(Identity $isActive)
+    public function setIsActive($isActive)
     {
-        return $this->setProperty('IsActive', $isActive, 'bool');
+        return $this->setProperty('isActive', $isActive, 'bool');
     }
 
     /**
@@ -187,11 +182,11 @@ class EmailTemplate extends DataModel
     /**
      * @param  bool $isAgb 
      * @return \jtl\Connector\Model\EmailTemplate
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setIsAgb(Identity $isAgb)
+    public function setIsAgb($isAgb)
     {
-        return $this->setProperty('IsAgb', $isAgb, 'bool');
+        return $this->setProperty('isAgb', $isAgb, 'bool');
     }
 
     /**
@@ -205,11 +200,11 @@ class EmailTemplate extends DataModel
     /**
      * @param  bool $isOii 
      * @return \jtl\Connector\Model\EmailTemplate
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setIsOii(Identity $isOii)
+    public function setIsOii($isOii)
     {
-        return $this->setProperty('IsOii', $isOii, 'bool');
+        return $this->setProperty('isOii', $isOii, 'bool');
     }
 
     /**
@@ -223,11 +218,11 @@ class EmailTemplate extends DataModel
     /**
      * @param  bool $isWrb 
      * @return \jtl\Connector\Model\EmailTemplate
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setIsWrb(Identity $isWrb)
+    public function setIsWrb($isWrb)
     {
-        return $this->setProperty('IsWrb', $isWrb, 'bool');
+        return $this->setProperty('isWrb', $isWrb, 'bool');
     }
 
     /**
@@ -241,11 +236,11 @@ class EmailTemplate extends DataModel
     /**
      * @param  string $moduleId 
      * @return \jtl\Connector\Model\EmailTemplate
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setModuleId(Identity $moduleId)
+    public function setModuleId($moduleId)
     {
-        return $this->setProperty('ModuleId', $moduleId, 'string');
+        return $this->setProperty('moduleId', $moduleId, 'string');
     }
 
     /**
@@ -259,11 +254,11 @@ class EmailTemplate extends DataModel
     /**
      * @param  string $name 
      * @return \jtl\Connector\Model\EmailTemplate
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setName(Identity $name)
+    public function setName($name)
     {
-        return $this->setProperty('Name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
 
     /**

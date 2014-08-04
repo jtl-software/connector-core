@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * ProductVariation Model. Each product defines its own variations, that means  variations are not global  in contrast to specifics. .
  *
@@ -15,56 +17,48 @@ namespace jtl\Connector\Model;
 class ProductVariation extends DataModel
 {
     /**
-     * @type Identity Unique productVariation id
+     * @var Identity Unique productVariation id
      */
     protected $id = null;
 
     /**
-     * @type Identity Reference to product
+     * @var Identity Reference to product
      */
     protected $productId = null;
 
     /**
-     * @type int Optional sort number
+     * @var int Optional sort number
      */
     protected $sort = 0;
 
     /**
-     * @type string Variation type e.g. radio or select
+     * @var string Variation type e.g. radio or select
      */
     protected $type = '';
 
     /**
-     * @type \jtl\Connector\Model\ProductVariationValue[]
+     * @var \jtl\Connector\Model\ProductVariationValue[]
      */
     protected $values = array();
 
     /**
-     * @type \jtl\Connector\Model\ProductVariationInvisibility[]
+     * @var \jtl\Connector\Model\ProductVariationInvisibility[]
      */
     protected $invisibilities = array();
 
     /**
-     * @type \jtl\Connector\Model\ProductVariationI18n[]
+     * @var \jtl\Connector\Model\ProductVariationI18n[]
      */
     protected $i18ns = array();
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-        'productId',
-    );
-
-    /**
      * @param  Identity $id Unique productVariation id
      * @return \jtl\Connector\Model\ProductVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -78,11 +72,11 @@ class ProductVariation extends DataModel
     /**
      * @param  Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('ProductId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
 
     /**
@@ -96,11 +90,11 @@ class ProductVariation extends DataModel
     /**
      * @param  int $sort Optional sort number
      * @return \jtl\Connector\Model\ProductVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setSort(Identity $sort)
+    public function setSort($sort)
     {
-        return $this->setProperty('Sort', $sort, 'int');
+        return $this->setProperty('sort', $sort, 'int');
     }
 
     /**
@@ -114,11 +108,11 @@ class ProductVariation extends DataModel
     /**
      * @param  string $type Variation type e.g. radio or select
      * @return \jtl\Connector\Model\ProductVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setType(Identity $type)
+    public function setType($type)
     {
-        return $this->setProperty('Type', $type, 'string');
+        return $this->setProperty('type', $type, 'string');
     }
 
     /**

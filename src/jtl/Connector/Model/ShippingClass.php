@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Shipping classes are usually defined in JTL-Wawi ERP..
  *
@@ -15,30 +17,23 @@ namespace jtl\Connector\Model;
 class ShippingClass extends DataModel
 {
     /**
-     * @type Identity Unique shippingClass id
+     * @var Identity Unique shippingClass id
      */
     protected $id = null;
 
     /**
-     * @type string Optional (internal) Shipping class name
+     * @var string Optional (internal) Shipping class name
      */
     protected $name = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-    );
-
-    /**
      * @param  Identity $id Unique shippingClass id
      * @return \jtl\Connector\Model\ShippingClass
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -52,11 +47,11 @@ class ShippingClass extends DataModel
     /**
      * @param  string $name Optional (internal) Shipping class name
      * @return \jtl\Connector\Model\ShippingClass
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setName(Identity $name)
+    public function setName($name)
     {
-        return $this->setProperty('Name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
 
     /**

@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Monolingual product function attribute..
  *
@@ -15,41 +17,33 @@ namespace jtl\Connector\Model;
 class ProductFunctionAttr extends DataModel
 {
     /**
-     * @type Identity Unique productFunctionAttr id
+     * @var Identity Unique productFunctionAttr id
      */
     protected $id = null;
 
     /**
-     * @type Identity Reference to product
+     * @var Identity Reference to product
      */
     protected $productId = null;
 
     /**
-     * @type string Attribute key
+     * @var string Attribute key
      */
     protected $key = '';
 
     /**
-     * @type string Attribute value
+     * @var string Attribute value
      */
     protected $value = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-        'productId',
-    );
-
-    /**
      * @param  Identity $id Unique productFunctionAttr id
      * @return \jtl\Connector\Model\ProductFunctionAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -63,11 +57,11 @@ class ProductFunctionAttr extends DataModel
     /**
      * @param  Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductFunctionAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('ProductId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
 
     /**
@@ -81,11 +75,11 @@ class ProductFunctionAttr extends DataModel
     /**
      * @param  string $key Attribute key
      * @return \jtl\Connector\Model\ProductFunctionAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setKey(Identity $key)
+    public function setKey($key)
     {
-        return $this->setProperty('Key', $key, 'string');
+        return $this->setProperty('key', $key, 'string');
     }
 
     /**
@@ -99,11 +93,11 @@ class ProductFunctionAttr extends DataModel
     /**
      * @param  string $value Attribute value
      * @return \jtl\Connector\Model\ProductFunctionAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setValue(Identity $value)
+    public function setValue($value)
     {
-        return $this->setProperty('Value', $value, 'string');
+        return $this->setProperty('value', $value, 'string');
     }
 
     /**

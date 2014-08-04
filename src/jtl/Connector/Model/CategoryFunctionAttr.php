@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Monolingual category attribute. All properties must be set. .
  *
@@ -15,41 +17,33 @@ namespace jtl\Connector\Model;
 class CategoryFunctionAttr extends DataModel
 {
     /**
-     * @type Identity Reference to category
+     * @var Identity Reference to category
      */
     protected $categoryId = null;
 
     /**
-     * @type Identity Unique categoryFunctionAttr id
+     * @var Identity Unique categoryFunctionAttr id
      */
     protected $id = null;
 
     /**
-     * @type string Attribute key name
+     * @var string Attribute key name
      */
     protected $name = '';
 
     /**
-     * @type string Attribute value
+     * @var string Attribute value
      */
     protected $value = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'categoryId',
-        'id',
-    );
-
-    /**
      * @param  Identity $categoryId Reference to category
      * @return \jtl\Connector\Model\CategoryFunctionAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCategoryId(Identity $categoryId)
     {
-        return $this->setProperty('CategoryId', $categoryId, 'Identity');
+        return $this->setProperty('categoryId', $categoryId, 'Identity');
     }
 
     /**
@@ -63,11 +57,11 @@ class CategoryFunctionAttr extends DataModel
     /**
      * @param  Identity $id Unique categoryFunctionAttr id
      * @return \jtl\Connector\Model\CategoryFunctionAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -81,11 +75,11 @@ class CategoryFunctionAttr extends DataModel
     /**
      * @param  string $name Attribute key name
      * @return \jtl\Connector\Model\CategoryFunctionAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setName(Identity $name)
+    public function setName($name)
     {
-        return $this->setProperty('Name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
 
     /**
@@ -99,11 +93,11 @@ class CategoryFunctionAttr extends DataModel
     /**
      * @param  string $value Attribute value
      * @return \jtl\Connector\Model\CategoryFunctionAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setValue(Identity $value)
+    public function setValue($value)
     {
-        return $this->setProperty('Value', $value, 'string');
+        return $this->setProperty('value', $value, 'string');
     }
 
     /**

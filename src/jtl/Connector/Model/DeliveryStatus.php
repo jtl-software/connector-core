@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Localized delivery status text. Delivery status is set in the Wawi-ERP. .
  *
@@ -15,35 +17,28 @@ namespace jtl\Connector\Model;
 class DeliveryStatus extends DataModel
 {
     /**
-     * @type Identity DeliveryStatus id
+     * @var Identity DeliveryStatus id
      */
     protected $id = null;
 
     /**
-     * @type string Locale
+     * @var string Locale
      */
     protected $localeName = '';
 
     /**
-     * @type string Localized delivery status text
+     * @var string Localized delivery status text
      */
     protected $name = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-    );
-
-    /**
      * @param  Identity $id DeliveryStatus id
      * @return \jtl\Connector\Model\DeliveryStatus
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -57,11 +52,11 @@ class DeliveryStatus extends DataModel
     /**
      * @param  string $localeName Locale
      * @return \jtl\Connector\Model\DeliveryStatus
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName(Identity $localeName)
+    public function setLocaleName($localeName)
     {
-        return $this->setProperty('LocaleName', $localeName, 'string');
+        return $this->setProperty('localeName', $localeName, 'string');
     }
 
     /**
@@ -75,11 +70,11 @@ class DeliveryStatus extends DataModel
     /**
      * @param  string $name Localized delivery status text
      * @return \jtl\Connector\Model\DeliveryStatus
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setName(Identity $name)
+    public function setName($name)
     {
-        return $this->setProperty('Name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
 
     /**

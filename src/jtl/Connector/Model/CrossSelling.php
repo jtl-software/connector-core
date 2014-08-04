@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Link 2 products that are in a common crossSellingGroup..
  *
@@ -15,43 +17,33 @@ namespace jtl\Connector\Model;
 class CrossSelling extends DataModel
 {
     /**
-     * @type Identity Reference to crossSellingGroup
+     * @var Identity Reference to crossSellingGroup
      */
     protected $crossSellingGroupId = null;
 
     /**
-     * @type Identity Reference to product (main product)
+     * @var Identity Reference to product (main product)
      */
     protected $crossSellingProductId = null;
 
     /**
-     * @type Identity Unique crossSelling id
+     * @var Identity Unique crossSelling id
      */
     protected $id = null;
 
     /**
-     * @type Identity Reference to product (cross selling product)
+     * @var Identity Reference to product (cross selling product)
      */
     protected $productId = null;
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'crossSellingGroupId',
-        'crossSellingProductId',
-        'id',
-        'productId',
-    );
-
-    /**
      * @param  Identity $crossSellingGroupId Reference to crossSellingGroup
      * @return \jtl\Connector\Model\CrossSelling
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCrossSellingGroupId(Identity $crossSellingGroupId)
     {
-        return $this->setProperty('CrossSellingGroupId', $crossSellingGroupId, 'Identity');
+        return $this->setProperty('crossSellingGroupId', $crossSellingGroupId, 'Identity');
     }
 
     /**
@@ -65,11 +57,11 @@ class CrossSelling extends DataModel
     /**
      * @param  Identity $crossSellingProductId Reference to product (main product)
      * @return \jtl\Connector\Model\CrossSelling
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCrossSellingProductId(Identity $crossSellingProductId)
     {
-        return $this->setProperty('CrossSellingProductId', $crossSellingProductId, 'Identity');
+        return $this->setProperty('crossSellingProductId', $crossSellingProductId, 'Identity');
     }
 
     /**
@@ -83,11 +75,11 @@ class CrossSelling extends DataModel
     /**
      * @param  Identity $id Unique crossSelling id
      * @return \jtl\Connector\Model\CrossSelling
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -101,11 +93,11 @@ class CrossSelling extends DataModel
     /**
      * @param  Identity $productId Reference to product (cross selling product)
      * @return \jtl\Connector\Model\CrossSelling
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('ProductId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
 
     /**

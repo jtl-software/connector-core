@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Monolingual customer attribute..
  *
@@ -15,41 +17,33 @@ namespace jtl\Connector\Model;
 class CustomerAttr extends DataModel
 {
     /**
-     * @type Identity Reference to customer
+     * @var Identity Reference to customer
      */
     protected $customerId = null;
 
     /**
-     * @type Identity Unique customerAttr id
+     * @var Identity Unique customerAttr id
      */
     protected $id = null;
 
     /**
-     * @type string Attribute key
+     * @var string Attribute key
      */
     protected $key = '';
 
     /**
-     * @type string Attribute value
+     * @var string Attribute value
      */
     protected $value = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'customerId',
-        'id',
-    );
-
-    /**
      * @param  Identity $customerId Reference to customer
      * @return \jtl\Connector\Model\CustomerAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerId(Identity $customerId)
     {
-        return $this->setProperty('CustomerId', $customerId, 'Identity');
+        return $this->setProperty('customerId', $customerId, 'Identity');
     }
 
     /**
@@ -63,11 +57,11 @@ class CustomerAttr extends DataModel
     /**
      * @param  Identity $id Unique customerAttr id
      * @return \jtl\Connector\Model\CustomerAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -81,11 +75,11 @@ class CustomerAttr extends DataModel
     /**
      * @param  string $key Attribute key
      * @return \jtl\Connector\Model\CustomerAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setKey(Identity $key)
+    public function setKey($key)
     {
-        return $this->setProperty('Key', $key, 'string');
+        return $this->setProperty('key', $key, 'string');
     }
 
     /**
@@ -99,11 +93,11 @@ class CustomerAttr extends DataModel
     /**
      * @param  string $value Attribute value
      * @return \jtl\Connector\Model\CustomerAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setValue(Identity $value)
+    public function setValue($value)
     {
-        return $this->setProperty('Value', $value, 'string');
+        return $this->setProperty('value', $value, 'string');
     }
 
     /**

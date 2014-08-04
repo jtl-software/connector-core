@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package jtl\Connector\Type
  */
 
 namespace jtl\Connector\Type;
@@ -17,10 +17,10 @@ class ProductConfigGroup extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('configGroupId', 'Identity', null, True, false, false),
-            new PropertyInfo('id', 'Identity', null, False, false, false),
-            new PropertyInfo('productId', 'Identity', null, True, false, false),
-            new PropertyInfo('sort', 'int', null, False, false, false),
+            new PropertyInfo('configGroupId', 'Identity', null, true, true, false),
+            new PropertyInfo('id', 'Identity', null, false, true, false),
+            new PropertyInfo('productId', 'Identity', null, true, true, false),
+            new PropertyInfo('sort', 'int', null, false, false, false),
         );
     }
 }

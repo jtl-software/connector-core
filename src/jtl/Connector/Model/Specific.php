@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Specific is defined as a characteristic product attribute Like "color". Specifics can be used for after-search-filtering. .
  *
@@ -15,50 +17,43 @@ namespace jtl\Connector\Model;
 class Specific extends DataModel
 {
     /**
-     * @type Identity Unique specific id
+     * @var Identity Unique specific id
      */
     protected $id = null;
 
     /**
-     * @type bool Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
+     * @var bool Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      */
     protected $isGlobal = false;
 
     /**
-     * @type int Optional sort number
+     * @var int Optional sort number
      */
     protected $sort = 0;
 
     /**
-     * @type string Specific type (radio, dropdown, image...)
+     * @var string Specific type (radio, dropdown, image...)
      */
     protected $type = '';
 
     /**
-     * @type \jtl\Connector\Model\SpecificValue[]
+     * @var \jtl\Connector\Model\SpecificValue[]
      */
     protected $values = array();
 
     /**
-     * @type \jtl\Connector\Model\SpecificI18n[]
+     * @var \jtl\Connector\Model\SpecificI18n[]
      */
     protected $i18ns = array();
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-    );
-
-    /**
      * @param  Identity $id Unique specific id
      * @return \jtl\Connector\Model\Specific
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -72,11 +67,11 @@ class Specific extends DataModel
     /**
      * @param  bool $isGlobal Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      * @return \jtl\Connector\Model\Specific
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setIsGlobal(Identity $isGlobal)
+    public function setIsGlobal($isGlobal)
     {
-        return $this->setProperty('IsGlobal', $isGlobal, 'bool');
+        return $this->setProperty('isGlobal', $isGlobal, 'bool');
     }
 
     /**
@@ -90,11 +85,11 @@ class Specific extends DataModel
     /**
      * @param  int $sort Optional sort number
      * @return \jtl\Connector\Model\Specific
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setSort(Identity $sort)
+    public function setSort($sort)
     {
-        return $this->setProperty('Sort', $sort, 'int');
+        return $this->setProperty('sort', $sort, 'int');
     }
 
     /**
@@ -108,11 +103,11 @@ class Specific extends DataModel
     /**
      * @param  string $type Specific type (radio, dropdown, image...)
      * @return \jtl\Connector\Model\Specific
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setType(Identity $type)
+    public function setType($type)
     {
-        return $this->setProperty('Type', $type, 'string');
+        return $this->setProperty('type', $type, 'string');
     }
 
     /**

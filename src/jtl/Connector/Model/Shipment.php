@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Shipment Model with reference to a deliveryNote.
  *
@@ -15,56 +17,48 @@ namespace jtl\Connector\Model;
 class Shipment extends DataModel
 {
     /**
-     * @type Identity Reference to deliveryNote
+     * @var Identity Reference to deliveryNote
      */
     protected $deliveryNoteId = null;
 
     /**
-     * @type Identity Unique shipment id
+     * @var Identity Unique shipment id
      */
     protected $id = null;
 
     /**
-     * @type string Carrier name
+     * @var string Carrier name
      */
     protected $carrierName = '';
 
     /**
-     * @type string Creation date
+     * @var DateTime Creation date
      */
-    protected $created = '';
+    protected $created = null;
 
     /**
-     * @type string Optional Identcode
+     * @var string Optional Identcode
      */
     protected $identCode = '';
 
     /**
-     * @type string Optional shipment note
+     * @var string Optional shipment note
      */
     protected $note = '';
 
     /**
-     * @type string Optional Tracking URL
+     * @var string Optional Tracking URL
      */
     protected $trackingURL = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'deliveryNoteId',
-        'id',
-    );
-
-    /**
      * @param  Identity $deliveryNoteId Reference to deliveryNote
      * @return \jtl\Connector\Model\Shipment
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setDeliveryNoteId(Identity $deliveryNoteId)
     {
-        return $this->setProperty('DeliveryNoteId', $deliveryNoteId, 'Identity');
+        return $this->setProperty('deliveryNoteId', $deliveryNoteId, 'Identity');
     }
 
     /**
@@ -78,11 +72,11 @@ class Shipment extends DataModel
     /**
      * @param  Identity $id Unique shipment id
      * @return \jtl\Connector\Model\Shipment
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -96,11 +90,11 @@ class Shipment extends DataModel
     /**
      * @param  string $carrierName Carrier name
      * @return \jtl\Connector\Model\Shipment
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setCarrierName(Identity $carrierName)
+    public function setCarrierName($carrierName)
     {
-        return $this->setProperty('CarrierName', $carrierName, 'string');
+        return $this->setProperty('carrierName', $carrierName, 'string');
     }
 
     /**
@@ -112,17 +106,17 @@ class Shipment extends DataModel
     }
 
     /**
-     * @param  string $created Creation date
+     * @param  DateTime $created Creation date
      * @return \jtl\Connector\Model\Shipment
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreated(Identity $created)
+    public function setCreated(DateTime $created)
     {
-        return $this->setProperty('Created', $created, 'string');
+        return $this->setProperty('created', $created, 'DateTime');
     }
 
     /**
-     * @return string Creation date
+     * @return DateTime Creation date
      */
     public function getCreated()
     {
@@ -132,11 +126,11 @@ class Shipment extends DataModel
     /**
      * @param  string $identCode Optional Identcode
      * @return \jtl\Connector\Model\Shipment
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setIdentCode(Identity $identCode)
+    public function setIdentCode($identCode)
     {
-        return $this->setProperty('IdentCode', $identCode, 'string');
+        return $this->setProperty('identCode', $identCode, 'string');
     }
 
     /**
@@ -150,11 +144,11 @@ class Shipment extends DataModel
     /**
      * @param  string $note Optional shipment note
      * @return \jtl\Connector\Model\Shipment
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setNote(Identity $note)
+    public function setNote($note)
     {
-        return $this->setProperty('Note', $note, 'string');
+        return $this->setProperty('note', $note, 'string');
     }
 
     /**
@@ -168,11 +162,11 @@ class Shipment extends DataModel
     /**
      * @param  string $trackingURL Optional Tracking URL
      * @return \jtl\Connector\Model\Shipment
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setTrackingURL(Identity $trackingURL)
+    public function setTrackingURL($trackingURL)
     {
-        return $this->setProperty('TrackingURL', $trackingURL, 'string');
+        return $this->setProperty('trackingURL', $trackingURL, 'string');
     }
 
     /**

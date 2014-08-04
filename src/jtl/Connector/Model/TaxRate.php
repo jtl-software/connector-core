@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Tax rate model (set in JTL-Wawi ERP)..
  *
@@ -15,47 +17,38 @@ namespace jtl\Connector\Model;
 class TaxRate extends DataModel
 {
     /**
-     * @type Identity Unique taxRate id
+     * @var Identity Unique taxRate id
      */
     protected $id = null;
 
     /**
-     * @type Identity Reference to taxClass
+     * @var Identity Reference to taxClass
      */
     protected $taxClassId = null;
 
     /**
-     * @type Identity Reference to taxZone
+     * @var Identity Reference to taxZone
      */
     protected $taxZoneId = null;
 
     /**
-     * @type int Optional priority number. Higher value means higher priority
+     * @var int Optional priority number. Higher value means higher priority
      */
     protected $priority = 0;
 
     /**
-     * @type double Tax rate value e.g. 19.00
+     * @var double Tax rate value e.g. 19.00
      */
     protected $rate = 0.0;
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-        'taxClassId',
-        'taxZoneId',
-    );
-
-    /**
      * @param  Identity $id Unique taxRate id
      * @return \jtl\Connector\Model\TaxRate
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -69,11 +62,11 @@ class TaxRate extends DataModel
     /**
      * @param  Identity $taxClassId Reference to taxClass
      * @return \jtl\Connector\Model\TaxRate
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setTaxClassId(Identity $taxClassId)
     {
-        return $this->setProperty('TaxClassId', $taxClassId, 'Identity');
+        return $this->setProperty('taxClassId', $taxClassId, 'Identity');
     }
 
     /**
@@ -87,11 +80,11 @@ class TaxRate extends DataModel
     /**
      * @param  Identity $taxZoneId Reference to taxZone
      * @return \jtl\Connector\Model\TaxRate
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setTaxZoneId(Identity $taxZoneId)
     {
-        return $this->setProperty('TaxZoneId', $taxZoneId, 'Identity');
+        return $this->setProperty('taxZoneId', $taxZoneId, 'Identity');
     }
 
     /**
@@ -105,11 +98,11 @@ class TaxRate extends DataModel
     /**
      * @param  int $priority Optional priority number. Higher value means higher priority
      * @return \jtl\Connector\Model\TaxRate
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setPriority(Identity $priority)
+    public function setPriority($priority)
     {
-        return $this->setProperty('Priority', $priority, 'int');
+        return $this->setProperty('priority', $priority, 'int');
     }
 
     /**
@@ -123,11 +116,11 @@ class TaxRate extends DataModel
     /**
      * @param  double $rate Tax rate value e.g. 19.00
      * @return \jtl\Connector\Model\TaxRate
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setRate(Identity $rate)
+    public function setRate($rate)
     {
-        return $this->setProperty('Rate', $rate, 'double');
+        return $this->setProperty('rate', $rate, 'double');
     }
 
     /**

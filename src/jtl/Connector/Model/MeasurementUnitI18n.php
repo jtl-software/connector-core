@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Localized Measurement Unit Name.
  *
@@ -15,35 +17,28 @@ namespace jtl\Connector\Model;
 class MeasurementUnitI18n extends DataModel
 {
     /**
-     * @type Identity Reference to measurementUnitId
+     * @var Identity Reference to measurementUnitId
      */
     protected $measurementUnitId = null;
 
     /**
-     * @type string Locale
+     * @var string Locale
      */
     protected $localeName = '';
 
     /**
-     * @type string Localized Name
+     * @var string Localized Name
      */
     protected $name = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'measurementUnitId',
-    );
-
-    /**
      * @param  Identity $measurementUnitId Reference to measurementUnitId
      * @return \jtl\Connector\Model\MeasurementUnitI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setMeasurementUnitId(Identity $measurementUnitId)
     {
-        return $this->setProperty('MeasurementUnitId', $measurementUnitId, 'Identity');
+        return $this->setProperty('measurementUnitId', $measurementUnitId, 'Identity');
     }
 
     /**
@@ -57,11 +52,11 @@ class MeasurementUnitI18n extends DataModel
     /**
      * @param  string $localeName Locale
      * @return \jtl\Connector\Model\MeasurementUnitI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName(Identity $localeName)
+    public function setLocaleName($localeName)
     {
-        return $this->setProperty('LocaleName', $localeName, 'string');
+        return $this->setProperty('localeName', $localeName, 'string');
     }
 
     /**
@@ -75,11 +70,11 @@ class MeasurementUnitI18n extends DataModel
     /**
      * @param  string $name Localized Name
      * @return \jtl\Connector\Model\MeasurementUnitI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setName(Identity $name)
+    public function setName($name)
     {
-        return $this->setProperty('Name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
 
     /**

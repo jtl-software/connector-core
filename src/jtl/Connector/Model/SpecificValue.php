@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Specific value properties to define a new specificValue with a sort number. .
  *
@@ -15,41 +17,33 @@ namespace jtl\Connector\Model;
 class SpecificValue extends DataModel
 {
     /**
-     * @type Identity Unique specificValue id
+     * @var Identity Unique specificValue id
      */
     protected $id = null;
 
     /**
-     * @type Identity Reference to specificId
+     * @var Identity Reference to specificId
      */
     protected $specificId = null;
 
     /**
-     * @type int Optional sort number
+     * @var int Optional sort number
      */
     protected $sort = 0;
 
     /**
-     * @type \jtl\Connector\Model\SpecificValueI18n[]
+     * @var \jtl\Connector\Model\SpecificValueI18n[]
      */
     protected $i18ns = array();
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-        'specificId',
-    );
-
-    /**
      * @param  Identity $id Unique specificValue id
      * @return \jtl\Connector\Model\SpecificValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -63,11 +57,11 @@ class SpecificValue extends DataModel
     /**
      * @param  Identity $specificId Reference to specificId
      * @return \jtl\Connector\Model\SpecificValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setSpecificId(Identity $specificId)
     {
-        return $this->setProperty('SpecificId', $specificId, 'Identity');
+        return $this->setProperty('specificId', $specificId, 'Identity');
     }
 
     /**
@@ -81,11 +75,11 @@ class SpecificValue extends DataModel
     /**
      * @param  int $sort Optional sort number
      * @return \jtl\Connector\Model\SpecificValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setSort(Identity $sort)
+    public function setSort($sort)
     {
-        return $this->setProperty('Sort', $sort, 'int');
+        return $this->setProperty('sort', $sort, 'int');
     }
 
     /**

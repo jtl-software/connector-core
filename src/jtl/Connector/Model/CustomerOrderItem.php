@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Order item in customer order..
  *
@@ -15,89 +17,78 @@ namespace jtl\Connector\Model;
 class CustomerOrderItem extends DataModel
 {
     /**
-     * @type Identity Optional reference to configItemId (if item is part of a configurable item)
+     * @var Identity Optional reference to configItemId (if item is part of a configurable item)
      */
     protected $configItemId = null;
 
     /**
-     * @type Identity Reference to customerOrder
+     * @var Identity Reference to customerOrder
      */
     protected $customerOrderId = null;
 
     /**
-     * @type Identity Unique customerOrderItem id
+     * @var Identity Unique customerOrderItem id
      */
     protected $id = null;
 
     /**
-     * @type Identity Reference to product
+     * @var Identity Reference to product
      */
     protected $productId = null;
 
     /**
-     * @type Identity Reference to shippingClass
+     * @var Identity Reference to shippingClass
      */
     protected $shippingClassId = null;
 
     /**
-     * @type string Order item name
+     * @var string Order item name
      */
     protected $name = '';
 
     /**
-     * @type double Price (net)
+     * @var double Price (net)
      */
     protected $price = 0.0;
 
     /**
-     * @type int Quantity purchased
+     * @var int Quantity purchased
      */
     protected $quantity = 0;
 
     /**
-     * @type string Stock keeping Unit (unique item identifier)
+     * @var string Stock keeping Unit (unique item identifier)
      */
     protected $sku = '';
 
     /**
-     * @type string Item type e.g. "product" or "shipping"
+     * @var string Item type e.g. "product" or "shipping"
      */
     protected $type = '';
 
     /**
-     * @type string Optional unique Hashsum (if item is part of configurable item
+     * @var string Optional unique Hashsum (if item is part of configurable item
      */
     protected $unique = '';
 
     /**
-     * @type double Value added tax
+     * @var double Value added tax
      */
     protected $vat = 0.0;
 
     /**
-     * @type \jtl\Connector\Model\CustomerOrderItemVariation[]
+     * @var \jtl\Connector\Model\CustomerOrderItemVariation[]
      */
     protected $variations = array();
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'configItemId',
-        'customerOrderId',
-        'id',
-        'productId',
-        'shippingClassId',
-    );
-
-    /**
      * @param  Identity $configItemId Optional reference to configItemId (if item is part of a configurable item)
      * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setConfigItemId(Identity $configItemId)
     {
-        return $this->setProperty('ConfigItemId', $configItemId, 'Identity');
+        return $this->setProperty('configItemId', $configItemId, 'Identity');
     }
 
     /**
@@ -111,11 +102,11 @@ class CustomerOrderItem extends DataModel
     /**
      * @param  Identity $customerOrderId Reference to customerOrder
      * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerOrderId(Identity $customerOrderId)
     {
-        return $this->setProperty('CustomerOrderId', $customerOrderId, 'Identity');
+        return $this->setProperty('customerOrderId', $customerOrderId, 'Identity');
     }
 
     /**
@@ -129,11 +120,11 @@ class CustomerOrderItem extends DataModel
     /**
      * @param  Identity $id Unique customerOrderItem id
      * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -147,11 +138,11 @@ class CustomerOrderItem extends DataModel
     /**
      * @param  Identity $productId Reference to product
      * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('ProductId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
 
     /**
@@ -165,11 +156,11 @@ class CustomerOrderItem extends DataModel
     /**
      * @param  Identity $shippingClassId Reference to shippingClass
      * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setShippingClassId(Identity $shippingClassId)
     {
-        return $this->setProperty('ShippingClassId', $shippingClassId, 'Identity');
+        return $this->setProperty('shippingClassId', $shippingClassId, 'Identity');
     }
 
     /**
@@ -183,11 +174,11 @@ class CustomerOrderItem extends DataModel
     /**
      * @param  string $name Order item name
      * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setName(Identity $name)
+    public function setName($name)
     {
-        return $this->setProperty('Name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
 
     /**
@@ -201,11 +192,11 @@ class CustomerOrderItem extends DataModel
     /**
      * @param  double $price Price (net)
      * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setPrice(Identity $price)
+    public function setPrice($price)
     {
-        return $this->setProperty('Price', $price, 'double');
+        return $this->setProperty('price', $price, 'double');
     }
 
     /**
@@ -219,11 +210,11 @@ class CustomerOrderItem extends DataModel
     /**
      * @param  int $quantity Quantity purchased
      * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setQuantity(Identity $quantity)
+    public function setQuantity($quantity)
     {
-        return $this->setProperty('Quantity', $quantity, 'int');
+        return $this->setProperty('quantity', $quantity, 'int');
     }
 
     /**
@@ -237,11 +228,11 @@ class CustomerOrderItem extends DataModel
     /**
      * @param  string $sku Stock keeping Unit (unique item identifier)
      * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setSku(Identity $sku)
+    public function setSku($sku)
     {
-        return $this->setProperty('Sku', $sku, 'string');
+        return $this->setProperty('sku', $sku, 'string');
     }
 
     /**
@@ -255,11 +246,11 @@ class CustomerOrderItem extends DataModel
     /**
      * @param  string $type Item type e.g. "product" or "shipping"
      * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setType(Identity $type)
+    public function setType($type)
     {
-        return $this->setProperty('Type', $type, 'string');
+        return $this->setProperty('type', $type, 'string');
     }
 
     /**
@@ -273,11 +264,11 @@ class CustomerOrderItem extends DataModel
     /**
      * @param  string $unique Optional unique Hashsum (if item is part of configurable item
      * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setUnique(Identity $unique)
+    public function setUnique($unique)
     {
-        return $this->setProperty('Unique', $unique, 'string');
+        return $this->setProperty('unique', $unique, 'string');
     }
 
     /**
@@ -291,11 +282,11 @@ class CustomerOrderItem extends DataModel
     /**
      * @param  double $vat Value added tax
      * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setVat(Identity $vat)
+    public function setVat($vat)
     {
-        return $this->setProperty('Vat', $vat, 'double');
+        return $this->setProperty('vat', $vat, 'double');
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package jtl\Connector\Type
  */
 
 namespace jtl\Connector\Type;
@@ -17,14 +17,14 @@ class ProductSpecialPrice extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('id', 'Identity', null, True, false, false),
-            new PropertyInfo('productId', 'Identity', null, False, false, false),
-            new PropertyInfo('activeFrom', 'string', null, False, false, false),
-            new PropertyInfo('activeUntil', 'string', null, False, false, false),
-            new PropertyInfo('considerDateLimit', 'bool', null, False, false, false),
-            new PropertyInfo('considerStockLimit', 'bool', null, False, false, false),
-            new PropertyInfo('isActive', 'bool', null, False, false, false),
-            new PropertyInfo('stockLimit', 'double', null, False, false, false),
+            new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('productId', 'Identity', null, false, true, false),
+            new PropertyInfo('activeFrom', 'string', null, false, false, false),
+            new PropertyInfo('activeUntil', 'string', null, false, false, false),
+            new PropertyInfo('considerDateLimit', 'bool', null, false, false, false),
+            new PropertyInfo('considerStockLimit', 'bool', null, false, false, false),
+            new PropertyInfo('isActive', 'bool', null, false, false, false),
+            new PropertyInfo('stockLimit', 'double', null, false, false, false),
             new PropertyInfo('specialPrices', '\jtl\Connector\Model\SpecialPrice', null, false, false, true),
         );
     }

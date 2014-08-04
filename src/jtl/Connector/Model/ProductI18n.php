@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Locale specific texts for product.
  *
@@ -15,65 +17,58 @@ namespace jtl\Connector\Model;
 class ProductI18n extends DataModel
 {
     /**
-     * @type Identity Reference to product
+     * @var Identity Reference to product
      */
     protected $productId = null;
 
     /**
-     * @type string Optional product description
+     * @var string Optional product description
      */
     protected $description = '';
 
     /**
-     * @type string locale
+     * @var string locale
      */
     protected $localeName = '';
 
     /**
-     * @type string 
+     * @var string 
      */
     protected $metaDescription = '';
 
     /**
-     * @type string 
+     * @var string 
      */
     protected $metaKeywords = '';
 
     /**
-     * @type string Product name / title
+     * @var string Product name / title
      */
     protected $name = '';
 
     /**
-     * @type string Optional product shortdescription
+     * @var string Optional product shortdescription
      */
     protected $shortDescription = '';
 
     /**
-     * @type string 
+     * @var string 
      */
     protected $titleTag = '';
 
     /**
-     * @type string Optional path of product URL
+     * @var string Optional path of product URL
      */
     protected $urlPath = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'productId',
-    );
-
-    /**
      * @param  Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('ProductId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
 
     /**
@@ -87,11 +82,11 @@ class ProductI18n extends DataModel
     /**
      * @param  string $description Optional product description
      * @return \jtl\Connector\Model\ProductI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setDescription(Identity $description)
+    public function setDescription($description)
     {
-        return $this->setProperty('Description', $description, 'string');
+        return $this->setProperty('description', $description, 'string');
     }
 
     /**
@@ -105,11 +100,11 @@ class ProductI18n extends DataModel
     /**
      * @param  string $localeName locale
      * @return \jtl\Connector\Model\ProductI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName(Identity $localeName)
+    public function setLocaleName($localeName)
     {
-        return $this->setProperty('LocaleName', $localeName, 'string');
+        return $this->setProperty('localeName', $localeName, 'string');
     }
 
     /**
@@ -123,11 +118,11 @@ class ProductI18n extends DataModel
     /**
      * @param  string $metaDescription 
      * @return \jtl\Connector\Model\ProductI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setMetaDescription(Identity $metaDescription)
+    public function setMetaDescription($metaDescription)
     {
-        return $this->setProperty('MetaDescription', $metaDescription, 'string');
+        return $this->setProperty('metaDescription', $metaDescription, 'string');
     }
 
     /**
@@ -141,11 +136,11 @@ class ProductI18n extends DataModel
     /**
      * @param  string $metaKeywords 
      * @return \jtl\Connector\Model\ProductI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setMetaKeywords(Identity $metaKeywords)
+    public function setMetaKeywords($metaKeywords)
     {
-        return $this->setProperty('MetaKeywords', $metaKeywords, 'string');
+        return $this->setProperty('metaKeywords', $metaKeywords, 'string');
     }
 
     /**
@@ -159,11 +154,11 @@ class ProductI18n extends DataModel
     /**
      * @param  string $name Product name / title
      * @return \jtl\Connector\Model\ProductI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setName(Identity $name)
+    public function setName($name)
     {
-        return $this->setProperty('Name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
 
     /**
@@ -177,11 +172,11 @@ class ProductI18n extends DataModel
     /**
      * @param  string $shortDescription Optional product shortdescription
      * @return \jtl\Connector\Model\ProductI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setShortDescription(Identity $shortDescription)
+    public function setShortDescription($shortDescription)
     {
-        return $this->setProperty('ShortDescription', $shortDescription, 'string');
+        return $this->setProperty('shortDescription', $shortDescription, 'string');
     }
 
     /**
@@ -195,11 +190,11 @@ class ProductI18n extends DataModel
     /**
      * @param  string $titleTag 
      * @return \jtl\Connector\Model\ProductI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setTitleTag(Identity $titleTag)
+    public function setTitleTag($titleTag)
     {
-        return $this->setProperty('TitleTag', $titleTag, 'string');
+        return $this->setProperty('titleTag', $titleTag, 'string');
     }
 
     /**
@@ -213,11 +208,11 @@ class ProductI18n extends DataModel
     /**
      * @param  string $urlPath Optional path of product URL
      * @return \jtl\Connector\Model\ProductI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setUrlPath(Identity $urlPath)
+    public function setUrlPath($urlPath)
     {
-        return $this->setProperty('UrlPath', $urlPath, 'string');
+        return $this->setProperty('urlPath', $urlPath, 'string');
     }
 
     /**

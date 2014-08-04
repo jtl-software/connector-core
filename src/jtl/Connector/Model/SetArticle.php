@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Define set articles / parts lists. .
  *
@@ -15,36 +17,28 @@ namespace jtl\Connector\Model;
 class SetArticle extends DataModel
 {
     /**
-     * @type Identity Unique setArticle id, referenced by product.setArticleId
+     * @var Identity Unique setArticle id, referenced by product.setArticleId
      */
     protected $id = null;
 
     /**
-     * @type Identity Reference to a component / product
+     * @var Identity Reference to a component / product
      */
     protected $productId = null;
 
     /**
-     * @type double Component quantity
+     * @var double Component quantity
      */
     protected $quantity = 0.0;
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-        'productId',
-    );
-
-    /**
      * @param  Identity $id Unique setArticle id, referenced by product.setArticleId
      * @return \jtl\Connector\Model\SetArticle
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -58,11 +52,11 @@ class SetArticle extends DataModel
     /**
      * @param  Identity $productId Reference to a component / product
      * @return \jtl\Connector\Model\SetArticle
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('ProductId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
 
     /**
@@ -76,11 +70,11 @@ class SetArticle extends DataModel
     /**
      * @param  double $quantity Component quantity
      * @return \jtl\Connector\Model\SetArticle
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setQuantity(Identity $quantity)
+    public function setQuantity($quantity)
     {
-        return $this->setProperty('Quantity', $quantity, 'double');
+        return $this->setProperty('quantity', $quantity, 'double');
     }
 
     /**

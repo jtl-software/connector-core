@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * File download properties. .
  *
@@ -15,60 +17,53 @@ namespace jtl\Connector\Model;
 class FileDownload extends DataModel
 {
     /**
-     * @type Identity Unique fileDownload id
+     * @var Identity Unique fileDownload id
      */
     protected $id = null;
 
     /**
-     * @type string Optional creation date
+     * @var DateTime Optional creation date
      */
-    protected $created = '';
+    protected $created = null;
 
     /**
-     * @type int Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
+     * @var int Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
      */
     protected $maxDays = 0;
 
     /**
-     * @type int Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
+     * @var int Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
      */
     protected $maxDownloads = 0;
 
     /**
-     * @type string Path to download file
+     * @var string Path to download file
      */
     protected $path = '';
 
     /**
-     * @type string Optional path to preview file
+     * @var string Optional path to preview file
      */
     protected $previewPath = '';
 
     /**
-     * @type int Optional sort number
+     * @var int Optional sort number
      */
     protected $sort = 0;
 
     /**
-     * @type \jtl\Connector\Model\FileDownloadI18n[]
+     * @var \jtl\Connector\Model\FileDownloadI18n[]
      */
     protected $i18n = array();
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-    );
-
-    /**
      * @param  Identity $id Unique fileDownload id
      * @return \jtl\Connector\Model\FileDownload
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -80,17 +75,17 @@ class FileDownload extends DataModel
     }
 
     /**
-     * @param  string $created Optional creation date
+     * @param  DateTime $created Optional creation date
      * @return \jtl\Connector\Model\FileDownload
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreated(Identity $created)
+    public function setCreated(DateTime $created)
     {
-        return $this->setProperty('Created', $created, 'string');
+        return $this->setProperty('created', $created, 'DateTime');
     }
 
     /**
-     * @return string Optional creation date
+     * @return DateTime Optional creation date
      */
     public function getCreated()
     {
@@ -100,11 +95,11 @@ class FileDownload extends DataModel
     /**
      * @param  int $maxDays Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
      * @return \jtl\Connector\Model\FileDownload
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setMaxDays(Identity $maxDays)
+    public function setMaxDays($maxDays)
     {
-        return $this->setProperty('MaxDays', $maxDays, 'int');
+        return $this->setProperty('maxDays', $maxDays, 'int');
     }
 
     /**
@@ -118,11 +113,11 @@ class FileDownload extends DataModel
     /**
      * @param  int $maxDownloads Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
      * @return \jtl\Connector\Model\FileDownload
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setMaxDownloads(Identity $maxDownloads)
+    public function setMaxDownloads($maxDownloads)
     {
-        return $this->setProperty('MaxDownloads', $maxDownloads, 'int');
+        return $this->setProperty('maxDownloads', $maxDownloads, 'int');
     }
 
     /**
@@ -136,11 +131,11 @@ class FileDownload extends DataModel
     /**
      * @param  string $path Path to download file
      * @return \jtl\Connector\Model\FileDownload
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setPath(Identity $path)
+    public function setPath($path)
     {
-        return $this->setProperty('Path', $path, 'string');
+        return $this->setProperty('path', $path, 'string');
     }
 
     /**
@@ -154,11 +149,11 @@ class FileDownload extends DataModel
     /**
      * @param  string $previewPath Optional path to preview file
      * @return \jtl\Connector\Model\FileDownload
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setPreviewPath(Identity $previewPath)
+    public function setPreviewPath($previewPath)
     {
-        return $this->setProperty('PreviewPath', $previewPath, 'string');
+        return $this->setProperty('previewPath', $previewPath, 'string');
     }
 
     /**
@@ -172,11 +167,11 @@ class FileDownload extends DataModel
     /**
      * @param  int $sort Optional sort number
      * @return \jtl\Connector\Model\FileDownload
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setSort(Identity $sort)
+    public function setSort($sort)
     {
-        return $this->setProperty('Sort', $sort, 'int');
+        return $this->setProperty('sort', $sort, 'int');
     }
 
     /**

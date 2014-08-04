@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Locale specific mediafile name + description..
  *
@@ -15,40 +17,33 @@ namespace jtl\Connector\Model;
 class MediaFileI18n extends DataModel
 {
     /**
-     * @type Identity Reference to mediaFile
+     * @var Identity Reference to mediaFile
      */
     protected $mediaFileId = null;
 
     /**
-     * @type string Locale specific description
+     * @var string Locale specific description
      */
     protected $description = '';
 
     /**
-     * @type string Locale
+     * @var string Locale
      */
     protected $localeName = '';
 
     /**
-     * @type string Locale specific name
+     * @var string Locale specific name
      */
     protected $name = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'mediaFileId',
-    );
-
-    /**
      * @param  Identity $mediaFileId Reference to mediaFile
      * @return \jtl\Connector\Model\MediaFileI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setMediaFileId(Identity $mediaFileId)
     {
-        return $this->setProperty('MediaFileId', $mediaFileId, 'Identity');
+        return $this->setProperty('mediaFileId', $mediaFileId, 'Identity');
     }
 
     /**
@@ -62,11 +57,11 @@ class MediaFileI18n extends DataModel
     /**
      * @param  string $description Locale specific description
      * @return \jtl\Connector\Model\MediaFileI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setDescription(Identity $description)
+    public function setDescription($description)
     {
-        return $this->setProperty('Description', $description, 'string');
+        return $this->setProperty('description', $description, 'string');
     }
 
     /**
@@ -80,11 +75,11 @@ class MediaFileI18n extends DataModel
     /**
      * @param  string $localeName Locale
      * @return \jtl\Connector\Model\MediaFileI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName(Identity $localeName)
+    public function setLocaleName($localeName)
     {
-        return $this->setProperty('LocaleName', $localeName, 'string');
+        return $this->setProperty('localeName', $localeName, 'string');
     }
 
     /**
@@ -98,11 +93,11 @@ class MediaFileI18n extends DataModel
     /**
      * @param  string $name Locale specific name
      * @return \jtl\Connector\Model\MediaFileI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setName(Identity $name)
+    public function setName($name)
     {
-        return $this->setProperty('Name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
 
     /**

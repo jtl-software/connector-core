@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Localized category attribute.
  *
@@ -15,36 +17,28 @@ namespace jtl\Connector\Model;
 class CategoryAttr extends DataModel
 {
     /**
-     * @type Identity Reference to category
+     * @var Identity Reference to category
      */
     protected $categoryId = null;
 
     /**
-     * @type Identity Unique categoryAttr id
+     * @var Identity Unique categoryAttr id
      */
     protected $id = null;
 
     /**
-     * @type int Optional sort number
+     * @var int Optional sort number
      */
     protected $sort = 0;
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'categoryId',
-        'id',
-    );
-
-    /**
      * @param  Identity $categoryId Reference to category
      * @return \jtl\Connector\Model\CategoryAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCategoryId(Identity $categoryId)
     {
-        return $this->setProperty('CategoryId', $categoryId, 'Identity');
+        return $this->setProperty('categoryId', $categoryId, 'Identity');
     }
 
     /**
@@ -58,11 +52,11 @@ class CategoryAttr extends DataModel
     /**
      * @param  Identity $id Unique categoryAttr id
      * @return \jtl\Connector\Model\CategoryAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -76,11 +70,11 @@ class CategoryAttr extends DataModel
     /**
      * @param  int $sort Optional sort number
      * @return \jtl\Connector\Model\CategoryAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setSort(Identity $sort)
+    public function setSort($sort)
     {
-        return $this->setProperty('Sort', $sort, 'int');
+        return $this->setProperty('sort', $sort, 'int');
     }
 
     /**

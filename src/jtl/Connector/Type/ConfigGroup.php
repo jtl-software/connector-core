@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package jtl\Connector\Type
  */
 
 namespace jtl\Connector\Type;
@@ -17,13 +17,13 @@ class ConfigGroup extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('id', 'Identity', null, False, false, false),
-            new PropertyInfo('comment', 'string', null, False, false, false),
-            new PropertyInfo('imagePath', 'string', null, False, false, false),
-            new PropertyInfo('maximumSelection', 'int', null, False, false, false),
-            new PropertyInfo('minimumSelection', 'int', null, False, false, false),
-            new PropertyInfo('sort', 'int', null, False, false, false),
-            new PropertyInfo('type', 'int', null, False, false, false),
+            new PropertyInfo('id', 'Identity', null, false, true, false),
+            new PropertyInfo('comment', 'string', null, false, false, false),
+            new PropertyInfo('imagePath', 'string', null, false, false, false),
+            new PropertyInfo('maximumSelection', 'int', null, false, false, false),
+            new PropertyInfo('minimumSelection', 'int', null, false, false, false),
+            new PropertyInfo('sort', 'int', null, false, false, false),
+            new PropertyInfo('type', 'int', null, false, false, false),
             new PropertyInfo('i18n', '\jtl\Connector\Model\ConfigGroupI18n', null, false, false, true),
         );
     }

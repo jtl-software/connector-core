@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Specifies which CustomerGroup is not permitted to view category..
  *
@@ -15,31 +17,23 @@ namespace jtl\Connector\Model;
 class CategoryInvisibility extends DataModel
 {
     /**
-     * @type Identity Reference to category to hide from customerGroupId
+     * @var Identity Reference to category to hide from customerGroupId
      */
     protected $categoryId = null;
 
     /**
-     * @type Identity Reference to customerGroup that is not allowed to view categoryId
+     * @var Identity Reference to customerGroup that is not allowed to view categoryId
      */
     protected $customerGroupId = null;
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'categoryId',
-        'customerGroupId',
-    );
-
-    /**
      * @param  Identity $categoryId Reference to category to hide from customerGroupId
      * @return \jtl\Connector\Model\CategoryInvisibility
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCategoryId(Identity $categoryId)
     {
-        return $this->setProperty('CategoryId', $categoryId, 'Identity');
+        return $this->setProperty('categoryId', $categoryId, 'Identity');
     }
 
     /**
@@ -53,11 +47,11 @@ class CategoryInvisibility extends DataModel
     /**
      * @param  Identity $customerGroupId Reference to customerGroup that is not allowed to view categoryId
      * @return \jtl\Connector\Model\CategoryInvisibility
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('CustomerGroupId', $customerGroupId, 'Identity');
+        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
     }
 
     /**

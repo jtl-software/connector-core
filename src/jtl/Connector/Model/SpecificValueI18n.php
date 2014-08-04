@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Localized specific value text..
  *
@@ -15,60 +17,53 @@ namespace jtl\Connector\Model;
 class SpecificValueI18n extends DataModel
 {
     /**
-     * @type Identity Reference to specificValue
+     * @var Identity Reference to specificValue
      */
     protected $specificValueId = null;
 
     /**
-     * @type string Optional localized description
+     * @var string Optional localized description
      */
     protected $description = '';
 
     /**
-     * @type string locale
+     * @var string locale
      */
     protected $localeName = '';
 
     /**
-     * @type string Optional localized meta description value
+     * @var string Optional localized meta description value
      */
     protected $metaDescription = '';
 
     /**
-     * @type string Optional localized meta keywords value
+     * @var string Optional localized meta keywords value
      */
     protected $metaKeywords = '';
 
     /**
-     * @type string Optional localized title tag value
+     * @var string Optional localized title tag value
      */
     protected $titleTag = '';
 
     /**
-     * @type string Optional localized URL path
+     * @var string Optional localized URL path
      */
     protected $urlPath = '';
 
     /**
-     * @type string Localized value
+     * @var string Localized value
      */
     protected $value = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'specificValueId',
-    );
-
-    /**
      * @param  Identity $specificValueId Reference to specificValue
      * @return \jtl\Connector\Model\SpecificValueI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setSpecificValueId(Identity $specificValueId)
     {
-        return $this->setProperty('SpecificValueId', $specificValueId, 'Identity');
+        return $this->setProperty('specificValueId', $specificValueId, 'Identity');
     }
 
     /**
@@ -82,11 +77,11 @@ class SpecificValueI18n extends DataModel
     /**
      * @param  string $description Optional localized description
      * @return \jtl\Connector\Model\SpecificValueI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setDescription(Identity $description)
+    public function setDescription($description)
     {
-        return $this->setProperty('Description', $description, 'string');
+        return $this->setProperty('description', $description, 'string');
     }
 
     /**
@@ -100,11 +95,11 @@ class SpecificValueI18n extends DataModel
     /**
      * @param  string $localeName locale
      * @return \jtl\Connector\Model\SpecificValueI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName(Identity $localeName)
+    public function setLocaleName($localeName)
     {
-        return $this->setProperty('LocaleName', $localeName, 'string');
+        return $this->setProperty('localeName', $localeName, 'string');
     }
 
     /**
@@ -118,11 +113,11 @@ class SpecificValueI18n extends DataModel
     /**
      * @param  string $metaDescription Optional localized meta description value
      * @return \jtl\Connector\Model\SpecificValueI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setMetaDescription(Identity $metaDescription)
+    public function setMetaDescription($metaDescription)
     {
-        return $this->setProperty('MetaDescription', $metaDescription, 'string');
+        return $this->setProperty('metaDescription', $metaDescription, 'string');
     }
 
     /**
@@ -136,11 +131,11 @@ class SpecificValueI18n extends DataModel
     /**
      * @param  string $metaKeywords Optional localized meta keywords value
      * @return \jtl\Connector\Model\SpecificValueI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setMetaKeywords(Identity $metaKeywords)
+    public function setMetaKeywords($metaKeywords)
     {
-        return $this->setProperty('MetaKeywords', $metaKeywords, 'string');
+        return $this->setProperty('metaKeywords', $metaKeywords, 'string');
     }
 
     /**
@@ -154,11 +149,11 @@ class SpecificValueI18n extends DataModel
     /**
      * @param  string $titleTag Optional localized title tag value
      * @return \jtl\Connector\Model\SpecificValueI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setTitleTag(Identity $titleTag)
+    public function setTitleTag($titleTag)
     {
-        return $this->setProperty('TitleTag', $titleTag, 'string');
+        return $this->setProperty('titleTag', $titleTag, 'string');
     }
 
     /**
@@ -172,11 +167,11 @@ class SpecificValueI18n extends DataModel
     /**
      * @param  string $urlPath Optional localized URL path
      * @return \jtl\Connector\Model\SpecificValueI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setUrlPath(Identity $urlPath)
+    public function setUrlPath($urlPath)
     {
-        return $this->setProperty('UrlPath', $urlPath, 'string');
+        return $this->setProperty('urlPath', $urlPath, 'string');
     }
 
     /**
@@ -190,11 +185,11 @@ class SpecificValueI18n extends DataModel
     /**
      * @param  string $value Localized value
      * @return \jtl\Connector\Model\SpecificValueI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setValue(Identity $value)
+    public function setValue($value)
     {
-        return $this->setProperty('Value', $value, 'string');
+        return $this->setProperty('value', $value, 'string');
     }
 
     /**

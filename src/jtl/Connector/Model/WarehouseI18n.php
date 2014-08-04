@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Localized warehouse name..
  *
@@ -15,30 +17,23 @@ namespace jtl\Connector\Model;
 class WarehouseI18n extends DataModel
 {
     /**
-     * @type Identity Reference to warehouse
+     * @var Identity Reference to warehouse
      */
     protected $warehouseId = null;
 
     /**
-     * @type string Localized warehouse name
+     * @var string Localized warehouse name
      */
     protected $name = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'warehouseId',
-    );
-
-    /**
      * @param  Identity $warehouseId Reference to warehouse
      * @return \jtl\Connector\Model\WarehouseI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setWarehouseId(Identity $warehouseId)
     {
-        return $this->setProperty('WarehouseId', $warehouseId, 'Identity');
+        return $this->setProperty('warehouseId', $warehouseId, 'Identity');
     }
 
     /**
@@ -52,11 +47,11 @@ class WarehouseI18n extends DataModel
     /**
      * @param  string $name Localized warehouse name
      * @return \jtl\Connector\Model\WarehouseI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setName(Identity $name)
+    public function setName($name)
     {
-        return $this->setProperty('Name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
 
     /**

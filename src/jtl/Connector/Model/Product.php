@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Product properties..
  *
@@ -15,349 +17,333 @@ namespace jtl\Connector\Model;
 class Product extends DataModel
 {
     /**
-     * @type Identity Optional reference to basePriceUnit
+     * @var Identity Optional reference to basePriceUnit
      */
     protected $basePriceUnitId = null;
 
     /**
-     * @type Identity Reference to (current) deliveryStatus
+     * @var Identity Reference to (current) deliveryStatus
      */
     protected $deliveryStatusId = null;
 
     /**
-     * @type Identity Unique product id
+     * @var Identity Unique product id
      */
     protected $id = null;
 
     /**
-     * @type Identity Reference to manufacturer
+     * @var Identity Reference to manufacturer
      */
     protected $manufacturerId = null;
 
     /**
-     * @type Identity Reference to master product
+     * @var Identity Reference to master product
      */
     protected $masterProductId = null;
 
     /**
-     * @type Identity Optional reference to measurement unit id
+     * @var Identity Optional reference to measurement unit id
      */
     protected $measurementUnitId = null;
 
     /**
-     * @type Identity Optional reference to productType
+     * @var Identity Optional reference to productType
      */
     protected $productTypeId = null;
 
     /**
-     * @type Identity Optional reference to setArticle
+     * @var Identity Optional reference to setArticle
      */
     protected $setArticleId = null;
 
     /**
-     * @type Identity Reference to shippingClass
+     * @var Identity Reference to shippingClass
      */
     protected $shippingClassId = null;
 
     /**
-     * @type Identity Reference to unit
+     * @var Identity Reference to unit
      */
     protected $unitId = null;
 
     /**
-     * @type string Optional Amazon Standard Identification Number
+     * @var string Optional Amazon Standard Identification Number
      */
     protected $asin = '';
 
     /**
-     * @type string Optional available from date. Specify a date, upon when product can be purchased. 
+     * @var string Optional available from date. Specify a date, upon when product can be purchased. 
      */
     protected $availableFrom = '';
 
     /**
-     * @type double Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
+     * @var double Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
      */
     protected $basePriceDivisor = 0.0;
 
     /**
-     * @type double Optional base price quantity
+     * @var double Optional base price quantity
      */
     protected $basePriceQuantity = 0.0;
 
     /**
-     * @type string Optional best before date. Default 0000-00-00 if product has no best-before-date.
+     * @var string Optional best before date. Default 0000-00-00 if product has no best-before-date.
      */
     protected $bestBefore = '';
 
     /**
-     * @type bool Optional: Set to true to display base price / unit pricing measure
+     * @var bool Optional: Set to true to display base price / unit pricing measure
      */
     protected $considerBasePrice = false;
 
     /**
-     * @type bool Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
+     * @var bool Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
      */
     protected $considerStock = false;
 
     /**
-     * @type bool Optional: Consider stock levels of productVariations. Same as considerStock but for variations. 
+     * @var bool Optional: Consider stock levels of productVariations. Same as considerStock but for variations. 
      */
     protected $considerVariationStock = false;
 
     /**
-     * @type string Creation date
+     * @var DateTime Creation date
      */
-    protected $created = '';
+    protected $created = null;
 
     /**
-     * @type string Optional European Article Number (EAN)
+     * @var string Optional European Article Number (EAN)
      */
     protected $ean = '';
 
     /**
-     * @type string Optional Ebay product ID
+     * @var string Optional Ebay product ID
      */
     protected $epid = '';
 
     /**
-     * @type string Optional Hazard identifier, encodes general hazard class und subdivision
+     * @var string Optional Hazard identifier, encodes general hazard class und subdivision
      */
     protected $hazardIdNumber = '';
 
     /**
-     * @type double Optional product height
+     * @var double Optional product height
      */
     protected $height = 0.0;
 
     /**
-     * @type string Optional expected inflow date
+     * @var string Optional expected inflow date
      */
     protected $inflowDate = '';
 
     /**
-     * @type double Optional expected inflow quantity
+     * @var double Optional expected inflow quantity
      */
     protected $inflowQuantity = 0.0;
 
     /**
-     * @type string Optional International Standard Book Number
+     * @var string Optional International Standard Book Number
      */
     protected $isbn = '';
 
     /**
-     * @type bool Optional: Set to true to allow non-integer quantites for purchase
+     * @var bool Optional: Set to true to allow non-integer quantites for purchase
      */
     protected $isDivisible = false;
 
     /**
-     * @type bool Optional flag if product is master product
+     * @var bool Optional flag if product is master product
      */
     protected $isMasterProduct = false;
 
     /**
-     * @type bool Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
+     * @var bool Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
      */
     protected $isNew = false;
 
     /**
-     * @type bool Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
+     * @var bool Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
      */
     protected $isTopProduct = false;
 
     /**
-     * @type string Optional internal keywords and synonyms for product
+     * @var string Optional internal keywords and synonyms for product
      */
     protected $keywords = '';
 
     /**
-     * @type double Optional product length
+     * @var double Optional product length
      */
     protected $length = 0.0;
 
     /**
-     * @type string Optional manufacturer number
+     * @var string Optional manufacturer number
      */
     protected $manufacturerNumber = '';
 
     /**
-     * @type double Optional measurement quantity
+     * @var double Optional measurement quantity
      */
     protected $measurementQuantity = 0.0;
 
     /**
-     * @type double Optional minimum quantity needed to purchase product
+     * @var double Optional minimum quantity needed to purchase product
      */
     protected $minimumOrderQuantity = 0.0;
 
     /**
-     * @type string Optional internal product note
+     * @var string Optional internal product note
      */
     protected $note = '';
 
     /**
-     * @type string Optional Origin country
+     * @var string Optional Origin country
      */
     protected $originCountry = '';
 
     /**
-     * @type bool Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true. 
+     * @var bool Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true. 
      */
     protected $permitNegativeStock = false;
 
     /**
-     * @type double Productweight exclusive packaging
+     * @var double Productweight exclusive packaging
      */
     protected $productWeight = 0.0;
 
     /**
-     * @type double Optional recommended retail price (gross) 
+     * @var double Optional recommended retail price (gross) 
      */
     protected $recommendedRetailPrice = 0.0;
 
     /**
-     * @type string Optional serial number
+     * @var string Optional serial number
      */
     protected $serialNumber = '';
 
     /**
-     * @type double Productweight inclusive packaging
+     * @var double Productweight inclusive packaging
      */
     protected $shippingWeight = 0.0;
 
     /**
-     * @type string Optional stock keeping unit identifier
+     * @var string Optional stock keeping unit identifier
      */
     protected $sku = '';
 
     /**
-     * @type int Optional sort number for product sorting in lists
+     * @var int Optional sort number for product sorting in lists
      */
     protected $sort = 0;
 
     /**
-     * @type double Optional stock (level)
+     * @var double Optional stock (level)
      */
     protected $stockLevel = 0.0;
 
     /**
-     * @type double Optional average supplier delivery time in days. Default 0 if no average delivery time is present. 
+     * @var double Optional average supplier delivery time in days. Default 0 if no average delivery time is present. 
      */
     protected $supplierDeliveryTime = 0.0;
 
     /**
-     * @type double Optional supplier stock level for product
+     * @var double Optional supplier stock level for product
      */
     protected $supplierStockLevel = 0.0;
 
     /**
-     * @type double Optional: Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
+     * @var double Optional: Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      */
     protected $takeOffQuantity = 0.0;
 
     /**
-     * @type string Optional TARIC
+     * @var string Optional TARIC
      */
     protected $taric = '';
 
     /**
-     * @type string Optional UN number, used to define hazardous properties
+     * @var string Optional UN number, used to define hazardous properties
      */
     protected $unNumber = '';
 
     /**
-     * @type string Optional Universal Product Code
+     * @var string Optional Universal Product Code
      */
     protected $upc = '';
 
     /**
-     * @type double Value added tax
+     * @var double Value added tax
      */
     protected $vat = 0.0;
 
     /**
-     * @type double Optional product width
+     * @var double Optional product width
      */
     protected $width = 0.0;
 
     /**
-     * @type \jtl\Connector\Model\ProductVariation[]
+     * @var \jtl\Connector\Model\ProductVariation[]
      */
     protected $variations = array();
 
     /**
-     * @type \jtl\Connector\Model\ProductSpecialPrice[]
+     * @var \jtl\Connector\Model\ProductSpecialPrice[]
      */
     protected $specialPrices = array();
 
     /**
-     * @type \jtl\Connector\Model\SetArticle[]
+     * @var \jtl\Connector\Model\SetArticle[]
      */
     protected $setArticles = array();
 
     /**
-     * @type \jtl\Connector\Model\ProductPrice[]
+     * @var \jtl\Connector\Model\ProductPrice[]
      */
     protected $prices = array();
 
     /**
-     * @type \jtl\Connector\Model\MediaFile[]
+     * @var \jtl\Connector\Model\MediaFile[]
      */
     protected $mediaFiles = array();
 
     /**
-     * @type \jtl\Connector\Model\ProductInvisibility[]
+     * @var \jtl\Connector\Model\ProductInvisibility[]
      */
     protected $invisibilities = array();
 
     /**
-     * @type \jtl\Connector\Model\ProductI18n[]
+     * @var \jtl\Connector\Model\ProductI18n[]
      */
     protected $i18ns = array();
 
     /**
-     * @type \jtl\Connector\Model\ProductFileDownload[]
+     * @var \jtl\Connector\Model\ProductFileDownload[]
      */
     protected $fileDownloads = array();
 
     /**
-     * @type \jtl\Connector\Model\CrossSelling[]
+     * @var \jtl\Connector\Model\CrossSelling[]
      */
     protected $crossSellings = array();
 
     /**
-     * @type \jtl\Connector\Model\ProductConfigGroup[]
+     * @var \jtl\Connector\Model\ProductConfigGroup[]
      */
     protected $configGroups = array();
 
     /**
-     * @type \jtl\Connector\Model\Product2Category[]
+     * @var \jtl\Connector\Model\Product2Category[]
      */
     protected $categories = array();
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'basePriceUnitId',
-        'deliveryStatusId',
-        'id',
-        'manufacturerId',
-        'masterProductId',
-        'measurementUnitId',
-        'productTypeId',
-        'setArticleId',
-        'shippingClassId',
-        'unitId',
-    );
-
-    /**
      * @param  Identity $basePriceUnitId Optional reference to basePriceUnit
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setBasePriceUnitId(Identity $basePriceUnitId)
     {
-        return $this->setProperty('BasePriceUnitId', $basePriceUnitId, 'Identity');
+        return $this->setProperty('basePriceUnitId', $basePriceUnitId, 'Identity');
     }
 
     /**
@@ -371,11 +357,11 @@ class Product extends DataModel
     /**
      * @param  Identity $deliveryStatusId Reference to (current) deliveryStatus
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setDeliveryStatusId(Identity $deliveryStatusId)
     {
-        return $this->setProperty('DeliveryStatusId', $deliveryStatusId, 'Identity');
+        return $this->setProperty('deliveryStatusId', $deliveryStatusId, 'Identity');
     }
 
     /**
@@ -389,11 +375,11 @@ class Product extends DataModel
     /**
      * @param  Identity $id Unique product id
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -407,11 +393,11 @@ class Product extends DataModel
     /**
      * @param  Identity $manufacturerId Reference to manufacturer
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setManufacturerId(Identity $manufacturerId)
     {
-        return $this->setProperty('ManufacturerId', $manufacturerId, 'Identity');
+        return $this->setProperty('manufacturerId', $manufacturerId, 'Identity');
     }
 
     /**
@@ -425,11 +411,11 @@ class Product extends DataModel
     /**
      * @param  Identity $masterProductId Reference to master product
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setMasterProductId(Identity $masterProductId)
     {
-        return $this->setProperty('MasterProductId', $masterProductId, 'Identity');
+        return $this->setProperty('masterProductId', $masterProductId, 'Identity');
     }
 
     /**
@@ -443,11 +429,11 @@ class Product extends DataModel
     /**
      * @param  Identity $measurementUnitId Optional reference to measurement unit id
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setMeasurementUnitId(Identity $measurementUnitId)
     {
-        return $this->setProperty('MeasurementUnitId', $measurementUnitId, 'Identity');
+        return $this->setProperty('measurementUnitId', $measurementUnitId, 'Identity');
     }
 
     /**
@@ -461,11 +447,11 @@ class Product extends DataModel
     /**
      * @param  Identity $productTypeId Optional reference to productType
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductTypeId(Identity $productTypeId)
     {
-        return $this->setProperty('ProductTypeId', $productTypeId, 'Identity');
+        return $this->setProperty('productTypeId', $productTypeId, 'Identity');
     }
 
     /**
@@ -479,11 +465,11 @@ class Product extends DataModel
     /**
      * @param  Identity $setArticleId Optional reference to setArticle
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setSetArticleId(Identity $setArticleId)
     {
-        return $this->setProperty('SetArticleId', $setArticleId, 'Identity');
+        return $this->setProperty('setArticleId', $setArticleId, 'Identity');
     }
 
     /**
@@ -497,11 +483,11 @@ class Product extends DataModel
     /**
      * @param  Identity $shippingClassId Reference to shippingClass
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setShippingClassId(Identity $shippingClassId)
     {
-        return $this->setProperty('ShippingClassId', $shippingClassId, 'Identity');
+        return $this->setProperty('shippingClassId', $shippingClassId, 'Identity');
     }
 
     /**
@@ -515,11 +501,11 @@ class Product extends DataModel
     /**
      * @param  Identity $unitId Reference to unit
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setUnitId(Identity $unitId)
     {
-        return $this->setProperty('UnitId', $unitId, 'Identity');
+        return $this->setProperty('unitId', $unitId, 'Identity');
     }
 
     /**
@@ -533,11 +519,11 @@ class Product extends DataModel
     /**
      * @param  string $asin Optional Amazon Standard Identification Number
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setAsin(Identity $asin)
+    public function setAsin($asin)
     {
-        return $this->setProperty('Asin', $asin, 'string');
+        return $this->setProperty('asin', $asin, 'string');
     }
 
     /**
@@ -551,11 +537,11 @@ class Product extends DataModel
     /**
      * @param  string $availableFrom Optional available from date. Specify a date, upon when product can be purchased. 
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setAvailableFrom(Identity $availableFrom)
+    public function setAvailableFrom($availableFrom)
     {
-        return $this->setProperty('AvailableFrom', $availableFrom, 'string');
+        return $this->setProperty('availableFrom', $availableFrom, 'string');
     }
 
     /**
@@ -569,11 +555,11 @@ class Product extends DataModel
     /**
      * @param  double $basePriceDivisor Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setBasePriceDivisor(Identity $basePriceDivisor)
+    public function setBasePriceDivisor($basePriceDivisor)
     {
-        return $this->setProperty('BasePriceDivisor', $basePriceDivisor, 'double');
+        return $this->setProperty('basePriceDivisor', $basePriceDivisor, 'double');
     }
 
     /**
@@ -587,11 +573,11 @@ class Product extends DataModel
     /**
      * @param  double $basePriceQuantity Optional base price quantity
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setBasePriceQuantity(Identity $basePriceQuantity)
+    public function setBasePriceQuantity($basePriceQuantity)
     {
-        return $this->setProperty('BasePriceQuantity', $basePriceQuantity, 'double');
+        return $this->setProperty('basePriceQuantity', $basePriceQuantity, 'double');
     }
 
     /**
@@ -605,11 +591,11 @@ class Product extends DataModel
     /**
      * @param  string $bestBefore Optional best before date. Default 0000-00-00 if product has no best-before-date.
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setBestBefore(Identity $bestBefore)
+    public function setBestBefore($bestBefore)
     {
-        return $this->setProperty('BestBefore', $bestBefore, 'string');
+        return $this->setProperty('bestBefore', $bestBefore, 'string');
     }
 
     /**
@@ -623,11 +609,11 @@ class Product extends DataModel
     /**
      * @param  bool $considerBasePrice Optional: Set to true to display base price / unit pricing measure
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setConsiderBasePrice(Identity $considerBasePrice)
+    public function setConsiderBasePrice($considerBasePrice)
     {
-        return $this->setProperty('ConsiderBasePrice', $considerBasePrice, 'bool');
+        return $this->setProperty('considerBasePrice', $considerBasePrice, 'bool');
     }
 
     /**
@@ -641,11 +627,11 @@ class Product extends DataModel
     /**
      * @param  bool $considerStock Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setConsiderStock(Identity $considerStock)
+    public function setConsiderStock($considerStock)
     {
-        return $this->setProperty('ConsiderStock', $considerStock, 'bool');
+        return $this->setProperty('considerStock', $considerStock, 'bool');
     }
 
     /**
@@ -659,11 +645,11 @@ class Product extends DataModel
     /**
      * @param  bool $considerVariationStock Optional: Consider stock levels of productVariations. Same as considerStock but for variations. 
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setConsiderVariationStock(Identity $considerVariationStock)
+    public function setConsiderVariationStock($considerVariationStock)
     {
-        return $this->setProperty('ConsiderVariationStock', $considerVariationStock, 'bool');
+        return $this->setProperty('considerVariationStock', $considerVariationStock, 'bool');
     }
 
     /**
@@ -675,17 +661,17 @@ class Product extends DataModel
     }
 
     /**
-     * @param  string $created Creation date
+     * @param  DateTime $created Creation date
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreated(Identity $created)
+    public function setCreated(DateTime $created)
     {
-        return $this->setProperty('Created', $created, 'string');
+        return $this->setProperty('created', $created, 'DateTime');
     }
 
     /**
-     * @return string Creation date
+     * @return DateTime Creation date
      */
     public function getCreated()
     {
@@ -695,11 +681,11 @@ class Product extends DataModel
     /**
      * @param  string $ean Optional European Article Number (EAN)
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setEan(Identity $ean)
+    public function setEan($ean)
     {
-        return $this->setProperty('Ean', $ean, 'string');
+        return $this->setProperty('ean', $ean, 'string');
     }
 
     /**
@@ -713,11 +699,11 @@ class Product extends DataModel
     /**
      * @param  string $epid Optional Ebay product ID
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setEpid(Identity $epid)
+    public function setEpid($epid)
     {
-        return $this->setProperty('Epid', $epid, 'string');
+        return $this->setProperty('epid', $epid, 'string');
     }
 
     /**
@@ -731,11 +717,11 @@ class Product extends DataModel
     /**
      * @param  string $hazardIdNumber Optional Hazard identifier, encodes general hazard class und subdivision
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setHazardIdNumber(Identity $hazardIdNumber)
+    public function setHazardIdNumber($hazardIdNumber)
     {
-        return $this->setProperty('HazardIdNumber', $hazardIdNumber, 'string');
+        return $this->setProperty('hazardIdNumber', $hazardIdNumber, 'string');
     }
 
     /**
@@ -749,11 +735,11 @@ class Product extends DataModel
     /**
      * @param  double $height Optional product height
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setHeight(Identity $height)
+    public function setHeight($height)
     {
-        return $this->setProperty('Height', $height, 'double');
+        return $this->setProperty('height', $height, 'double');
     }
 
     /**
@@ -767,11 +753,11 @@ class Product extends DataModel
     /**
      * @param  string $inflowDate Optional expected inflow date
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setInflowDate(Identity $inflowDate)
+    public function setInflowDate($inflowDate)
     {
-        return $this->setProperty('InflowDate', $inflowDate, 'string');
+        return $this->setProperty('inflowDate', $inflowDate, 'string');
     }
 
     /**
@@ -785,11 +771,11 @@ class Product extends DataModel
     /**
      * @param  double $inflowQuantity Optional expected inflow quantity
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setInflowQuantity(Identity $inflowQuantity)
+    public function setInflowQuantity($inflowQuantity)
     {
-        return $this->setProperty('InflowQuantity', $inflowQuantity, 'double');
+        return $this->setProperty('inflowQuantity', $inflowQuantity, 'double');
     }
 
     /**
@@ -803,11 +789,11 @@ class Product extends DataModel
     /**
      * @param  string $isbn Optional International Standard Book Number
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setIsbn(Identity $isbn)
+    public function setIsbn($isbn)
     {
-        return $this->setProperty('Isbn', $isbn, 'string');
+        return $this->setProperty('isbn', $isbn, 'string');
     }
 
     /**
@@ -821,11 +807,11 @@ class Product extends DataModel
     /**
      * @param  bool $isDivisible Optional: Set to true to allow non-integer quantites for purchase
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setIsDivisible(Identity $isDivisible)
+    public function setIsDivisible($isDivisible)
     {
-        return $this->setProperty('IsDivisible', $isDivisible, 'bool');
+        return $this->setProperty('isDivisible', $isDivisible, 'bool');
     }
 
     /**
@@ -839,11 +825,11 @@ class Product extends DataModel
     /**
      * @param  bool $isMasterProduct Optional flag if product is master product
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setIsMasterProduct(Identity $isMasterProduct)
+    public function setIsMasterProduct($isMasterProduct)
     {
-        return $this->setProperty('IsMasterProduct', $isMasterProduct, 'bool');
+        return $this->setProperty('isMasterProduct', $isMasterProduct, 'bool');
     }
 
     /**
@@ -857,11 +843,11 @@ class Product extends DataModel
     /**
      * @param  bool $isNew Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setIsNew(Identity $isNew)
+    public function setIsNew($isNew)
     {
-        return $this->setProperty('IsNew', $isNew, 'bool');
+        return $this->setProperty('isNew', $isNew, 'bool');
     }
 
     /**
@@ -875,11 +861,11 @@ class Product extends DataModel
     /**
      * @param  bool $isTopProduct Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setIsTopProduct(Identity $isTopProduct)
+    public function setIsTopProduct($isTopProduct)
     {
-        return $this->setProperty('IsTopProduct', $isTopProduct, 'bool');
+        return $this->setProperty('isTopProduct', $isTopProduct, 'bool');
     }
 
     /**
@@ -893,11 +879,11 @@ class Product extends DataModel
     /**
      * @param  string $keywords Optional internal keywords and synonyms for product
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setKeywords(Identity $keywords)
+    public function setKeywords($keywords)
     {
-        return $this->setProperty('Keywords', $keywords, 'string');
+        return $this->setProperty('keywords', $keywords, 'string');
     }
 
     /**
@@ -911,11 +897,11 @@ class Product extends DataModel
     /**
      * @param  double $length Optional product length
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setLength(Identity $length)
+    public function setLength($length)
     {
-        return $this->setProperty('Length', $length, 'double');
+        return $this->setProperty('length', $length, 'double');
     }
 
     /**
@@ -929,11 +915,11 @@ class Product extends DataModel
     /**
      * @param  string $manufacturerNumber Optional manufacturer number
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setManufacturerNumber(Identity $manufacturerNumber)
+    public function setManufacturerNumber($manufacturerNumber)
     {
-        return $this->setProperty('ManufacturerNumber', $manufacturerNumber, 'string');
+        return $this->setProperty('manufacturerNumber', $manufacturerNumber, 'string');
     }
 
     /**
@@ -947,11 +933,11 @@ class Product extends DataModel
     /**
      * @param  double $measurementQuantity Optional measurement quantity
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setMeasurementQuantity(Identity $measurementQuantity)
+    public function setMeasurementQuantity($measurementQuantity)
     {
-        return $this->setProperty('MeasurementQuantity', $measurementQuantity, 'double');
+        return $this->setProperty('measurementQuantity', $measurementQuantity, 'double');
     }
 
     /**
@@ -965,11 +951,11 @@ class Product extends DataModel
     /**
      * @param  double $minimumOrderQuantity Optional minimum quantity needed to purchase product
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setMinimumOrderQuantity(Identity $minimumOrderQuantity)
+    public function setMinimumOrderQuantity($minimumOrderQuantity)
     {
-        return $this->setProperty('MinimumOrderQuantity', $minimumOrderQuantity, 'double');
+        return $this->setProperty('minimumOrderQuantity', $minimumOrderQuantity, 'double');
     }
 
     /**
@@ -983,11 +969,11 @@ class Product extends DataModel
     /**
      * @param  string $note Optional internal product note
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setNote(Identity $note)
+    public function setNote($note)
     {
-        return $this->setProperty('Note', $note, 'string');
+        return $this->setProperty('note', $note, 'string');
     }
 
     /**
@@ -1001,11 +987,11 @@ class Product extends DataModel
     /**
      * @param  string $originCountry Optional Origin country
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setOriginCountry(Identity $originCountry)
+    public function setOriginCountry($originCountry)
     {
-        return $this->setProperty('OriginCountry', $originCountry, 'string');
+        return $this->setProperty('originCountry', $originCountry, 'string');
     }
 
     /**
@@ -1019,11 +1005,11 @@ class Product extends DataModel
     /**
      * @param  bool $permitNegativeStock Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true. 
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setPermitNegativeStock(Identity $permitNegativeStock)
+    public function setPermitNegativeStock($permitNegativeStock)
     {
-        return $this->setProperty('PermitNegativeStock', $permitNegativeStock, 'bool');
+        return $this->setProperty('permitNegativeStock', $permitNegativeStock, 'bool');
     }
 
     /**
@@ -1037,11 +1023,11 @@ class Product extends DataModel
     /**
      * @param  double $productWeight Productweight exclusive packaging
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setProductWeight(Identity $productWeight)
+    public function setProductWeight($productWeight)
     {
-        return $this->setProperty('ProductWeight', $productWeight, 'double');
+        return $this->setProperty('productWeight', $productWeight, 'double');
     }
 
     /**
@@ -1055,11 +1041,11 @@ class Product extends DataModel
     /**
      * @param  double $recommendedRetailPrice Optional recommended retail price (gross) 
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setRecommendedRetailPrice(Identity $recommendedRetailPrice)
+    public function setRecommendedRetailPrice($recommendedRetailPrice)
     {
-        return $this->setProperty('RecommendedRetailPrice', $recommendedRetailPrice, 'double');
+        return $this->setProperty('recommendedRetailPrice', $recommendedRetailPrice, 'double');
     }
 
     /**
@@ -1073,11 +1059,11 @@ class Product extends DataModel
     /**
      * @param  string $serialNumber Optional serial number
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setSerialNumber(Identity $serialNumber)
+    public function setSerialNumber($serialNumber)
     {
-        return $this->setProperty('SerialNumber', $serialNumber, 'string');
+        return $this->setProperty('serialNumber', $serialNumber, 'string');
     }
 
     /**
@@ -1091,11 +1077,11 @@ class Product extends DataModel
     /**
      * @param  double $shippingWeight Productweight inclusive packaging
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setShippingWeight(Identity $shippingWeight)
+    public function setShippingWeight($shippingWeight)
     {
-        return $this->setProperty('ShippingWeight', $shippingWeight, 'double');
+        return $this->setProperty('shippingWeight', $shippingWeight, 'double');
     }
 
     /**
@@ -1109,11 +1095,11 @@ class Product extends DataModel
     /**
      * @param  string $sku Optional stock keeping unit identifier
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setSku(Identity $sku)
+    public function setSku($sku)
     {
-        return $this->setProperty('Sku', $sku, 'string');
+        return $this->setProperty('sku', $sku, 'string');
     }
 
     /**
@@ -1127,11 +1113,11 @@ class Product extends DataModel
     /**
      * @param  int $sort Optional sort number for product sorting in lists
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setSort(Identity $sort)
+    public function setSort($sort)
     {
-        return $this->setProperty('Sort', $sort, 'int');
+        return $this->setProperty('sort', $sort, 'int');
     }
 
     /**
@@ -1145,11 +1131,11 @@ class Product extends DataModel
     /**
      * @param  double $stockLevel Optional stock (level)
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setStockLevel(Identity $stockLevel)
+    public function setStockLevel($stockLevel)
     {
-        return $this->setProperty('StockLevel', $stockLevel, 'double');
+        return $this->setProperty('stockLevel', $stockLevel, 'double');
     }
 
     /**
@@ -1163,11 +1149,11 @@ class Product extends DataModel
     /**
      * @param  double $supplierDeliveryTime Optional average supplier delivery time in days. Default 0 if no average delivery time is present. 
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setSupplierDeliveryTime(Identity $supplierDeliveryTime)
+    public function setSupplierDeliveryTime($supplierDeliveryTime)
     {
-        return $this->setProperty('SupplierDeliveryTime', $supplierDeliveryTime, 'double');
+        return $this->setProperty('supplierDeliveryTime', $supplierDeliveryTime, 'double');
     }
 
     /**
@@ -1181,11 +1167,11 @@ class Product extends DataModel
     /**
      * @param  double $supplierStockLevel Optional supplier stock level for product
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setSupplierStockLevel(Identity $supplierStockLevel)
+    public function setSupplierStockLevel($supplierStockLevel)
     {
-        return $this->setProperty('SupplierStockLevel', $supplierStockLevel, 'double');
+        return $this->setProperty('supplierStockLevel', $supplierStockLevel, 'double');
     }
 
     /**
@@ -1199,11 +1185,11 @@ class Product extends DataModel
     /**
      * @param  double $takeOffQuantity Optional: Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setTakeOffQuantity(Identity $takeOffQuantity)
+    public function setTakeOffQuantity($takeOffQuantity)
     {
-        return $this->setProperty('TakeOffQuantity', $takeOffQuantity, 'double');
+        return $this->setProperty('takeOffQuantity', $takeOffQuantity, 'double');
     }
 
     /**
@@ -1217,11 +1203,11 @@ class Product extends DataModel
     /**
      * @param  string $taric Optional TARIC
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setTaric(Identity $taric)
+    public function setTaric($taric)
     {
-        return $this->setProperty('Taric', $taric, 'string');
+        return $this->setProperty('taric', $taric, 'string');
     }
 
     /**
@@ -1235,11 +1221,11 @@ class Product extends DataModel
     /**
      * @param  string $unNumber Optional UN number, used to define hazardous properties
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setUnNumber(Identity $unNumber)
+    public function setUnNumber($unNumber)
     {
-        return $this->setProperty('UnNumber', $unNumber, 'string');
+        return $this->setProperty('unNumber', $unNumber, 'string');
     }
 
     /**
@@ -1253,11 +1239,11 @@ class Product extends DataModel
     /**
      * @param  string $upc Optional Universal Product Code
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setUpc(Identity $upc)
+    public function setUpc($upc)
     {
-        return $this->setProperty('Upc', $upc, 'string');
+        return $this->setProperty('upc', $upc, 'string');
     }
 
     /**
@@ -1271,11 +1257,11 @@ class Product extends DataModel
     /**
      * @param  double $vat Value added tax
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setVat(Identity $vat)
+    public function setVat($vat)
     {
-        return $this->setProperty('Vat', $vat, 'double');
+        return $this->setProperty('vat', $vat, 'double');
     }
 
     /**
@@ -1289,11 +1275,11 @@ class Product extends DataModel
     /**
      * @param  double $width Optional product width
      * @return \jtl\Connector\Model\Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setWidth(Identity $width)
+    public function setWidth($width)
     {
-        return $this->setProperty('Width', $width, 'double');
+        return $this->setProperty('width', $width, 'double');
     }
 
     /**

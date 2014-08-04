@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Product variation value model. Each product defines its own variations and variation values. .
  *
@@ -15,71 +17,63 @@ namespace jtl\Connector\Model;
 class ProductVariationValue extends DataModel
 {
     /**
-     * @type Identity Unique productVariationValue id
+     * @var Identity Unique productVariationValue id
      */
     protected $id = null;
 
     /**
-     * @type Identity Reference to productVariation
+     * @var Identity Reference to productVariation
      */
     protected $productVariationId = null;
 
     /**
-     * @type double Optional variation extra weight
+     * @var double Optional variation extra weight
      */
     protected $extraWeight = 0.0;
 
     /**
-     * @type string Optional Stock Keeping Unit
+     * @var string Optional Stock Keeping Unit
      */
     protected $sku = '';
 
     /**
-     * @type int Optional sort number
+     * @var int Optional sort number
      */
     protected $sort = 0;
 
     /**
-     * @type double Optional stock level
+     * @var double Optional stock level
      */
     protected $stockLevel = 0.0;
 
     /**
-     * @type \jtl\Connector\Model\ProductVariationValueInvisibility[]
+     * @var \jtl\Connector\Model\ProductVariationValueInvisibility[]
      */
     protected $invisibilities = array();
 
     /**
-     * @type \jtl\Connector\Model\ProductVariationValueI18n[]
+     * @var \jtl\Connector\Model\ProductVariationValueI18n[]
      */
     protected $i18ns = array();
 
     /**
-     * @type \jtl\Connector\Model\ProductVariationValueExtraCharge[]
+     * @var \jtl\Connector\Model\ProductVariationValueExtraCharge[]
      */
     protected $extraCharges = array();
 
     /**
-     * @type \jtl\Connector\Model\ProductVariationValueDependency[]
+     * @var \jtl\Connector\Model\ProductVariationValueDependency[]
      */
     protected $dependencies = array();
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-        'productVariationId',
-    );
-
-    /**
      * @param  Identity $id Unique productVariationValue id
      * @return \jtl\Connector\Model\ProductVariationValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -93,11 +87,11 @@ class ProductVariationValue extends DataModel
     /**
      * @param  Identity $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\ProductVariationValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductVariationId(Identity $productVariationId)
     {
-        return $this->setProperty('ProductVariationId', $productVariationId, 'Identity');
+        return $this->setProperty('productVariationId', $productVariationId, 'Identity');
     }
 
     /**
@@ -111,11 +105,11 @@ class ProductVariationValue extends DataModel
     /**
      * @param  double $extraWeight Optional variation extra weight
      * @return \jtl\Connector\Model\ProductVariationValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setExtraWeight(Identity $extraWeight)
+    public function setExtraWeight($extraWeight)
     {
-        return $this->setProperty('ExtraWeight', $extraWeight, 'double');
+        return $this->setProperty('extraWeight', $extraWeight, 'double');
     }
 
     /**
@@ -129,11 +123,11 @@ class ProductVariationValue extends DataModel
     /**
      * @param  string $sku Optional Stock Keeping Unit
      * @return \jtl\Connector\Model\ProductVariationValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setSku(Identity $sku)
+    public function setSku($sku)
     {
-        return $this->setProperty('Sku', $sku, 'string');
+        return $this->setProperty('sku', $sku, 'string');
     }
 
     /**
@@ -147,11 +141,11 @@ class ProductVariationValue extends DataModel
     /**
      * @param  int $sort Optional sort number
      * @return \jtl\Connector\Model\ProductVariationValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setSort(Identity $sort)
+    public function setSort($sort)
     {
-        return $this->setProperty('Sort', $sort, 'int');
+        return $this->setProperty('sort', $sort, 'int');
     }
 
     /**
@@ -165,11 +159,11 @@ class ProductVariationValue extends DataModel
     /**
      * @param  double $stockLevel Optional stock level
      * @return \jtl\Connector\Model\ProductVariationValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setStockLevel(Identity $stockLevel)
+    public function setStockLevel($stockLevel)
     {
-        return $this->setProperty('StockLevel', $stockLevel, 'double');
+        return $this->setProperty('stockLevel', $stockLevel, 'double');
     }
 
     /**

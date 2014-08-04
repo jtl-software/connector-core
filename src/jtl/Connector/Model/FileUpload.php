@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * File upload properties. .
  *
@@ -15,51 +17,43 @@ namespace jtl\Connector\Model;
 class FileUpload extends DataModel
 {
     /**
-     * @type Identity Unique fileUpload id
+     * @var Identity Unique fileUpload id
      */
     protected $id = null;
 
     /**
-     * @type Identity Reference to product
+     * @var Identity Reference to product
      */
     protected $productId = null;
 
     /**
-     * @type string Optional file description
+     * @var string Optional file description
      */
     protected $description = '';
 
     /**
-     * @type string Allowed file type
+     * @var string Allowed file type
      */
     protected $fileType = '';
 
     /**
-     * @type bool Optional flag to force upload before finishing checkout. True if file upload is required to buy product
+     * @var bool Optional flag to force upload before finishing checkout. True if file upload is required to buy product
      */
     protected $isRequired = false;
 
     /**
-     * @type string Filename specification
+     * @var string Filename specification
      */
     protected $name = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-        'productId',
-    );
-
-    /**
      * @param  Identity $id Unique fileUpload id
      * @return \jtl\Connector\Model\FileUpload
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -73,11 +67,11 @@ class FileUpload extends DataModel
     /**
      * @param  Identity $productId Reference to product
      * @return \jtl\Connector\Model\FileUpload
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('ProductId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
 
     /**
@@ -91,11 +85,11 @@ class FileUpload extends DataModel
     /**
      * @param  string $description Optional file description
      * @return \jtl\Connector\Model\FileUpload
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setDescription(Identity $description)
+    public function setDescription($description)
     {
-        return $this->setProperty('Description', $description, 'string');
+        return $this->setProperty('description', $description, 'string');
     }
 
     /**
@@ -109,11 +103,11 @@ class FileUpload extends DataModel
     /**
      * @param  string $fileType Allowed file type
      * @return \jtl\Connector\Model\FileUpload
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setFileType(Identity $fileType)
+    public function setFileType($fileType)
     {
-        return $this->setProperty('FileType', $fileType, 'string');
+        return $this->setProperty('fileType', $fileType, 'string');
     }
 
     /**
@@ -127,11 +121,11 @@ class FileUpload extends DataModel
     /**
      * @param  bool $isRequired Optional flag to force upload before finishing checkout. True if file upload is required to buy product
      * @return \jtl\Connector\Model\FileUpload
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setIsRequired(Identity $isRequired)
+    public function setIsRequired($isRequired)
     {
-        return $this->setProperty('IsRequired', $isRequired, 'bool');
+        return $this->setProperty('isRequired', $isRequired, 'bool');
     }
 
     /**
@@ -145,11 +139,11 @@ class FileUpload extends DataModel
     /**
      * @param  string $name Filename specification
      * @return \jtl\Connector\Model\FileUpload
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setName(Identity $name)
+    public function setName($name)
     {
-        return $this->setProperty('Name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
 
     /**

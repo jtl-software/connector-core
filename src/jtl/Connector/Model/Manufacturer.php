@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Manufacturer / brand properties. .
  *
@@ -15,50 +17,43 @@ namespace jtl\Connector\Model;
 class Manufacturer extends DataModel
 {
     /**
-     * @type Identity Unique manufacturer id
+     * @var Identity Unique manufacturer id
      */
     protected $id = null;
 
     /**
-     * @type string Manufacturer (brand) name
+     * @var string Manufacturer (brand) name
      */
     protected $name = '';
 
     /**
-     * @type int Optional sort number
+     * @var int Optional sort number
      */
     protected $sort = 0;
 
     /**
-     * @type string Optional url path e.g. "Products-manufactured-by-X"
+     * @var string Optional url path e.g. "Products-manufactured-by-X"
      */
     protected $urlPath = '';
 
     /**
-     * @type string Optional manufacturer website URL
+     * @var string Optional manufacturer website URL
      */
     protected $www = '';
 
     /**
-     * @type \jtl\Connector\Model\ManufacturerI18n[]
+     * @var \jtl\Connector\Model\ManufacturerI18n[]
      */
     protected $i18ns = array();
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-    );
-
-    /**
      * @param  Identity $id Unique manufacturer id
      * @return \jtl\Connector\Model\Manufacturer
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -72,11 +67,11 @@ class Manufacturer extends DataModel
     /**
      * @param  string $name Manufacturer (brand) name
      * @return \jtl\Connector\Model\Manufacturer
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setName(Identity $name)
+    public function setName($name)
     {
-        return $this->setProperty('Name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
 
     /**
@@ -90,11 +85,11 @@ class Manufacturer extends DataModel
     /**
      * @param  int $sort Optional sort number
      * @return \jtl\Connector\Model\Manufacturer
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setSort(Identity $sort)
+    public function setSort($sort)
     {
-        return $this->setProperty('Sort', $sort, 'int');
+        return $this->setProperty('sort', $sort, 'int');
     }
 
     /**
@@ -108,11 +103,11 @@ class Manufacturer extends DataModel
     /**
      * @param  string $urlPath Optional url path e.g. "Products-manufactured-by-X"
      * @return \jtl\Connector\Model\Manufacturer
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setUrlPath(Identity $urlPath)
+    public function setUrlPath($urlPath)
     {
-        return $this->setProperty('UrlPath', $urlPath, 'string');
+        return $this->setProperty('urlPath', $urlPath, 'string');
     }
 
     /**
@@ -126,11 +121,11 @@ class Manufacturer extends DataModel
     /**
      * @param  string $www Optional manufacturer website URL
      * @return \jtl\Connector\Model\Manufacturer
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setWww(Identity $www)
+    public function setWww($www)
     {
-        return $this->setProperty('Www', $www, 'string');
+        return $this->setProperty('www', $www, 'string');
     }
 
     /**

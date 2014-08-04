@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Product-Category Allocation..
  *
@@ -15,37 +17,28 @@ namespace jtl\Connector\Model;
 class Product2Category extends DataModel
 {
     /**
-     * @type Identity Reference to category
+     * @var Identity Reference to category
      */
     protected $categoryId = null;
 
     /**
-     * @type Identity Unique product2Category id
+     * @var Identity Unique product2Category id
      */
     protected $id = null;
 
     /**
-     * @type Identity Reference to product
+     * @var Identity Reference to product
      */
     protected $productId = null;
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'categoryId',
-        'id',
-        'productId',
-    );
-
-    /**
      * @param  Identity $categoryId Reference to category
      * @return \jtl\Connector\Model\Product2Category
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCategoryId(Identity $categoryId)
     {
-        return $this->setProperty('CategoryId', $categoryId, 'Identity');
+        return $this->setProperty('categoryId', $categoryId, 'Identity');
     }
 
     /**
@@ -59,11 +52,11 @@ class Product2Category extends DataModel
     /**
      * @param  Identity $id Unique product2Category id
      * @return \jtl\Connector\Model\Product2Category
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -77,11 +70,11 @@ class Product2Category extends DataModel
     /**
      * @param  Identity $productId Reference to product
      * @return \jtl\Connector\Model\Product2Category
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('ProductId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package jtl\Connector\Type
  */
 
 namespace jtl\Connector\Type;
@@ -17,8 +17,8 @@ class ProductVariationInvisibility extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('customerGroupId', 'Identity', null, True, false, false),
-            new PropertyInfo('productVariationId', 'Identity', null, True, false, false),
+            new PropertyInfo('customerGroupId', 'Identity', null, true, true, false),
+            new PropertyInfo('productVariationId', 'Identity', null, true, true, false),
         );
     }
 }

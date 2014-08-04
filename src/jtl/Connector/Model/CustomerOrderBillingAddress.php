@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Billing address of a customer (order).
  *
@@ -15,111 +17,103 @@ namespace jtl\Connector\Model;
 class CustomerOrderBillingAddress extends DataModel
 {
     /**
-     * @type Identity Reference to customer
+     * @var Identity Reference to customer
      */
     protected $customerId = null;
 
     /**
-     * @type Identity Unique customerOrderBillingAddress id
+     * @var Identity Unique customerOrderBillingAddress id
      */
     protected $id = null;
 
     /**
-     * @type string City
+     * @var string City
      */
     protected $city = '';
 
     /**
-     * @type string Company name
+     * @var string Company name
      */
     protected $company = '';
 
     /**
-     * @type string Country ISO 3166-2 (2 letter Uppercase)
+     * @var string Country ISO 3166-2 (2 letter Uppercase)
      */
     protected $countryIso = '';
 
     /**
-     * @type string Delivery instruction e.g. "c/o John Doe"
+     * @var string Delivery instruction e.g. "c/o John Doe"
      */
     protected $deliveryInstruction = '';
 
     /**
-     * @type string E-Mail address
+     * @var string E-Mail address
      */
     protected $eMail = '';
 
     /**
-     * @type string Extra address line e.g. "Apartment 2.5"
+     * @var string Extra address line e.g. "Apartment 2.5"
      */
     protected $extraAddressLine = '';
 
     /**
-     * @type string Fax number
+     * @var string Fax number
      */
     protected $fax = '';
 
     /**
-     * @type string First name
+     * @var string First name
      */
     protected $firstName = '';
 
     /**
-     * @type string Last name
+     * @var string Last name
      */
     protected $lastName = '';
 
     /**
-     * @type string Mobile phone number
+     * @var string Mobile phone number
      */
     protected $mobile = '';
 
     /**
-     * @type string Phone number
+     * @var string Phone number
      */
     protected $phone = '';
 
     /**
-     * @type string Salutation (german: "Anrede")
+     * @var string Salutation (german: "Anrede")
      */
     protected $salutation = '';
 
     /**
-     * @type string State
+     * @var string State
      */
     protected $state = '';
 
     /**
-     * @type string Street + street number
+     * @var string Street + street number
      */
     protected $street = '';
 
     /**
-     * @type string Title (e.g. "Prof. Dr.")
+     * @var string Title (e.g. "Prof. Dr.")
      */
     protected $title = '';
 
     /**
-     * @type string Zip / postal code
+     * @var string Zip / postal code
      */
     protected $zipCode = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'customerId',
-        'id',
-    );
-
-    /**
      * @param  Identity $customerId Reference to customer
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerId(Identity $customerId)
     {
-        return $this->setProperty('CustomerId', $customerId, 'Identity');
+        return $this->setProperty('customerId', $customerId, 'Identity');
     }
 
     /**
@@ -133,11 +127,11 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @param  Identity $id Unique customerOrderBillingAddress id
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -151,11 +145,11 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @param  string $city City
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setCity(Identity $city)
+    public function setCity($city)
     {
-        return $this->setProperty('City', $city, 'string');
+        return $this->setProperty('city', $city, 'string');
     }
 
     /**
@@ -169,11 +163,11 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @param  string $company Company name
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setCompany(Identity $company)
+    public function setCompany($company)
     {
-        return $this->setProperty('Company', $company, 'string');
+        return $this->setProperty('company', $company, 'string');
     }
 
     /**
@@ -187,11 +181,11 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @param  string $countryIso Country ISO 3166-2 (2 letter Uppercase)
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setCountryIso(Identity $countryIso)
+    public function setCountryIso($countryIso)
     {
-        return $this->setProperty('CountryIso', $countryIso, 'string');
+        return $this->setProperty('countryIso', $countryIso, 'string');
     }
 
     /**
@@ -205,11 +199,11 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @param  string $deliveryInstruction Delivery instruction e.g. "c/o John Doe"
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setDeliveryInstruction(Identity $deliveryInstruction)
+    public function setDeliveryInstruction($deliveryInstruction)
     {
-        return $this->setProperty('DeliveryInstruction', $deliveryInstruction, 'string');
+        return $this->setProperty('deliveryInstruction', $deliveryInstruction, 'string');
     }
 
     /**
@@ -223,11 +217,11 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @param  string $eMail E-Mail address
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setEMail(Identity $eMail)
+    public function setEMail($eMail)
     {
-        return $this->setProperty('EMail', $eMail, 'string');
+        return $this->setProperty('eMail', $eMail, 'string');
     }
 
     /**
@@ -241,11 +235,11 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @param  string $extraAddressLine Extra address line e.g. "Apartment 2.5"
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setExtraAddressLine(Identity $extraAddressLine)
+    public function setExtraAddressLine($extraAddressLine)
     {
-        return $this->setProperty('ExtraAddressLine', $extraAddressLine, 'string');
+        return $this->setProperty('extraAddressLine', $extraAddressLine, 'string');
     }
 
     /**
@@ -259,11 +253,11 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @param  string $fax Fax number
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setFax(Identity $fax)
+    public function setFax($fax)
     {
-        return $this->setProperty('Fax', $fax, 'string');
+        return $this->setProperty('fax', $fax, 'string');
     }
 
     /**
@@ -277,11 +271,11 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @param  string $firstName First name
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setFirstName(Identity $firstName)
+    public function setFirstName($firstName)
     {
-        return $this->setProperty('FirstName', $firstName, 'string');
+        return $this->setProperty('firstName', $firstName, 'string');
     }
 
     /**
@@ -295,11 +289,11 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @param  string $lastName Last name
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLastName(Identity $lastName)
+    public function setLastName($lastName)
     {
-        return $this->setProperty('LastName', $lastName, 'string');
+        return $this->setProperty('lastName', $lastName, 'string');
     }
 
     /**
@@ -313,11 +307,11 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @param  string $mobile Mobile phone number
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setMobile(Identity $mobile)
+    public function setMobile($mobile)
     {
-        return $this->setProperty('Mobile', $mobile, 'string');
+        return $this->setProperty('mobile', $mobile, 'string');
     }
 
     /**
@@ -331,11 +325,11 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @param  string $phone Phone number
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setPhone(Identity $phone)
+    public function setPhone($phone)
     {
-        return $this->setProperty('Phone', $phone, 'string');
+        return $this->setProperty('phone', $phone, 'string');
     }
 
     /**
@@ -349,11 +343,11 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @param  string $salutation Salutation (german: "Anrede")
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setSalutation(Identity $salutation)
+    public function setSalutation($salutation)
     {
-        return $this->setProperty('Salutation', $salutation, 'string');
+        return $this->setProperty('salutation', $salutation, 'string');
     }
 
     /**
@@ -367,11 +361,11 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @param  string $state State
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setState(Identity $state)
+    public function setState($state)
     {
-        return $this->setProperty('State', $state, 'string');
+        return $this->setProperty('state', $state, 'string');
     }
 
     /**
@@ -385,11 +379,11 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @param  string $street Street + street number
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setStreet(Identity $street)
+    public function setStreet($street)
     {
-        return $this->setProperty('Street', $street, 'string');
+        return $this->setProperty('street', $street, 'string');
     }
 
     /**
@@ -403,11 +397,11 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @param  string $title Title (e.g. "Prof. Dr.")
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setTitle(Identity $title)
+    public function setTitle($title)
     {
-        return $this->setProperty('Title', $title, 'string');
+        return $this->setProperty('title', $title, 'string');
     }
 
     /**
@@ -421,11 +415,11 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @param  string $zipCode Zip / postal code
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setZipCode(Identity $zipCode)
+    public function setZipCode($zipCode)
     {
-        return $this->setProperty('ZipCode', $zipCode, 'string');
+        return $this->setProperty('zipCode', $zipCode, 'string');
     }
 
     /**

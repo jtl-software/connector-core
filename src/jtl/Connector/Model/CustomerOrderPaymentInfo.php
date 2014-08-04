@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Additional payment info for direct debit / banktransfer or payment by credit card. .
  *
@@ -15,86 +17,78 @@ namespace jtl\Connector\Model;
 class CustomerOrderPaymentInfo extends DataModel
 {
     /**
-     * @type Identity Reference to customerOrder
+     * @var Identity Reference to customerOrder
      */
     protected $customerOrderId = null;
 
     /**
-     * @type Identity Unique customerOrderPaymentInfo id
+     * @var Identity Unique customerOrderPaymentInfo id
      */
     protected $id = null;
 
     /**
-     * @type string Bank account holder name
+     * @var string Bank account holder name
      */
     protected $accountHolder = '';
 
     /**
-     * @type string Bank account number (deprecated in DE since SEPA)
+     * @var string Bank account number (deprecated in DE since SEPA)
      */
     protected $accountNumber = '';
 
     /**
-     * @type string Bank code (deprecated in DE since SEPA)
+     * @var string Bank code (deprecated in DE since SEPA)
      */
     protected $bankCode = '';
 
     /**
-     * @type string Bank name
+     * @var string Bank name
      */
     protected $bankName = '';
 
     /**
-     * @type string Bank Identifier Code (BIC)
+     * @var string Bank Identifier Code (BIC)
      */
     protected $bic = '';
 
     /**
-     * @type string Credit card expiration date
+     * @var string Credit card expiration date
      */
     protected $creditCardExpiration = '';
 
     /**
-     * @type string Credit card holder name
+     * @var string Credit card holder name
      */
     protected $creditCardHolder = '';
 
     /**
-     * @type string Credit card number
+     * @var string Credit card number
      */
     protected $creditCardNumber = '';
 
     /**
-     * @type string Credit card type (e.g. "visa")
+     * @var string Credit card type (e.g. "visa")
      */
     protected $creditCardType = '';
 
     /**
-     * @type string Credit card verification number
+     * @var string Credit card verification number
      */
     protected $creditCardVerificationNumber = '';
 
     /**
-     * @type string International Bank Account Number (IBAN)
+     * @var string International Bank Account Number (IBAN)
      */
     protected $iban = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'customerOrderId',
-        'id',
-    );
-
-    /**
      * @param  Identity $customerOrderId Reference to customerOrder
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerOrderId(Identity $customerOrderId)
     {
-        return $this->setProperty('CustomerOrderId', $customerOrderId, 'Identity');
+        return $this->setProperty('customerOrderId', $customerOrderId, 'Identity');
     }
 
     /**
@@ -108,11 +102,11 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @param  Identity $id Unique customerOrderPaymentInfo id
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -126,11 +120,11 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @param  string $accountHolder Bank account holder name
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setAccountHolder(Identity $accountHolder)
+    public function setAccountHolder($accountHolder)
     {
-        return $this->setProperty('AccountHolder', $accountHolder, 'string');
+        return $this->setProperty('accountHolder', $accountHolder, 'string');
     }
 
     /**
@@ -144,11 +138,11 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @param  string $accountNumber Bank account number (deprecated in DE since SEPA)
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setAccountNumber(Identity $accountNumber)
+    public function setAccountNumber($accountNumber)
     {
-        return $this->setProperty('AccountNumber', $accountNumber, 'string');
+        return $this->setProperty('accountNumber', $accountNumber, 'string');
     }
 
     /**
@@ -162,11 +156,11 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @param  string $bankCode Bank code (deprecated in DE since SEPA)
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setBankCode(Identity $bankCode)
+    public function setBankCode($bankCode)
     {
-        return $this->setProperty('BankCode', $bankCode, 'string');
+        return $this->setProperty('bankCode', $bankCode, 'string');
     }
 
     /**
@@ -180,11 +174,11 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @param  string $bankName Bank name
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setBankName(Identity $bankName)
+    public function setBankName($bankName)
     {
-        return $this->setProperty('BankName', $bankName, 'string');
+        return $this->setProperty('bankName', $bankName, 'string');
     }
 
     /**
@@ -198,11 +192,11 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @param  string $bic Bank Identifier Code (BIC)
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setBic(Identity $bic)
+    public function setBic($bic)
     {
-        return $this->setProperty('Bic', $bic, 'string');
+        return $this->setProperty('bic', $bic, 'string');
     }
 
     /**
@@ -216,11 +210,11 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @param  string $creditCardExpiration Credit card expiration date
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setCreditCardExpiration(Identity $creditCardExpiration)
+    public function setCreditCardExpiration($creditCardExpiration)
     {
-        return $this->setProperty('CreditCardExpiration', $creditCardExpiration, 'string');
+        return $this->setProperty('creditCardExpiration', $creditCardExpiration, 'string');
     }
 
     /**
@@ -234,11 +228,11 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @param  string $creditCardHolder Credit card holder name
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setCreditCardHolder(Identity $creditCardHolder)
+    public function setCreditCardHolder($creditCardHolder)
     {
-        return $this->setProperty('CreditCardHolder', $creditCardHolder, 'string');
+        return $this->setProperty('creditCardHolder', $creditCardHolder, 'string');
     }
 
     /**
@@ -252,11 +246,11 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @param  string $creditCardNumber Credit card number
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setCreditCardNumber(Identity $creditCardNumber)
+    public function setCreditCardNumber($creditCardNumber)
     {
-        return $this->setProperty('CreditCardNumber', $creditCardNumber, 'string');
+        return $this->setProperty('creditCardNumber', $creditCardNumber, 'string');
     }
 
     /**
@@ -270,11 +264,11 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @param  string $creditCardType Credit card type (e.g. "visa")
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setCreditCardType(Identity $creditCardType)
+    public function setCreditCardType($creditCardType)
     {
-        return $this->setProperty('CreditCardType', $creditCardType, 'string');
+        return $this->setProperty('creditCardType', $creditCardType, 'string');
     }
 
     /**
@@ -288,11 +282,11 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @param  string $creditCardVerificationNumber Credit card verification number
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setCreditCardVerificationNumber(Identity $creditCardVerificationNumber)
+    public function setCreditCardVerificationNumber($creditCardVerificationNumber)
     {
-        return $this->setProperty('CreditCardVerificationNumber', $creditCardVerificationNumber, 'string');
+        return $this->setProperty('creditCardVerificationNumber', $creditCardVerificationNumber, 'string');
     }
 
     /**
@@ -306,11 +300,11 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @param  string $iban International Bank Account Number (IBAN)
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setIban(Identity $iban)
+    public function setIban($iban)
     {
-        return $this->setProperty('Iban', $iban, 'string');
+        return $this->setProperty('iban', $iban, 'string');
     }
 
     /**

@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * special price properties to define a net price for a customerGroup..
  *
@@ -15,36 +17,28 @@ namespace jtl\Connector\Model;
 class SpecialPrice extends DataModel
 {
     /**
-     * @type Identity Reference to customerGroup
+     * @var Identity Reference to customerGroup
      */
     protected $customerGroupId = null;
 
     /**
-     * @type Identity Reference to productSpecialPrice
+     * @var Identity Reference to productSpecialPrice
      */
     protected $productSpecialPriceId = null;
 
     /**
-     * @type double net price value
+     * @var double net price value
      */
     protected $priceNet = 0.0;
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'customerGroupId',
-        'productSpecialPriceId',
-    );
-
-    /**
      * @param  Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\SpecialPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('CustomerGroupId', $customerGroupId, 'Identity');
+        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
     }
 
     /**
@@ -58,11 +52,11 @@ class SpecialPrice extends DataModel
     /**
      * @param  Identity $productSpecialPriceId Reference to productSpecialPrice
      * @return \jtl\Connector\Model\SpecialPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductSpecialPriceId(Identity $productSpecialPriceId)
     {
-        return $this->setProperty('ProductSpecialPriceId', $productSpecialPriceId, 'Identity');
+        return $this->setProperty('productSpecialPriceId', $productSpecialPriceId, 'Identity');
     }
 
     /**
@@ -76,11 +70,11 @@ class SpecialPrice extends DataModel
     /**
      * @param  double $priceNet net price value
      * @return \jtl\Connector\Model\SpecialPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setPriceNet(Identity $priceNet)
+    public function setPriceNet($priceNet)
     {
-        return $this->setProperty('PriceNet', $priceNet, 'double');
+        return $this->setProperty('priceNet', $priceNet, 'double');
     }
 
     /**

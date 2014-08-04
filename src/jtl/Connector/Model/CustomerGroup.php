@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Customer group model..
  *
@@ -15,50 +17,43 @@ namespace jtl\Connector\Model;
 class CustomerGroup extends DataModel
 {
     /**
-     * @type Identity Unique customerGroup id
+     * @var Identity Unique customerGroup id
      */
     protected $id = null;
 
     /**
-     * @type bool Optional: Show net prices default instead of gross prices
+     * @var bool Optional: Show net prices default instead of gross prices
      */
     protected $applyNetPrice = false;
 
     /**
-     * @type double Optional percentual discount on all products. Negative Value means surcharge. 
+     * @var double Optional percentual discount on all products. Negative Value means surcharge. 
      */
     protected $discount = 0.0;
 
     /**
-     * @type bool Optional: Flag default customer group
+     * @var bool Optional: Flag default customer group
      */
     protected $isDefault = false;
 
     /**
-     * @type \jtl\Connector\Model\CustomerGroupI18n[]
+     * @var \jtl\Connector\Model\CustomerGroupI18n[]
      */
     protected $i18n = array();
 
     /**
-     * @type \jtl\Connector\Model\CustomerGroupAttr[]
+     * @var \jtl\Connector\Model\CustomerGroupAttr[]
      */
     protected $attributes = array();
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-    );
-
-    /**
      * @param  Identity $id Unique customerGroup id
      * @return \jtl\Connector\Model\CustomerGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -72,11 +67,11 @@ class CustomerGroup extends DataModel
     /**
      * @param  bool $applyNetPrice Optional: Show net prices default instead of gross prices
      * @return \jtl\Connector\Model\CustomerGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setApplyNetPrice(Identity $applyNetPrice)
+    public function setApplyNetPrice($applyNetPrice)
     {
-        return $this->setProperty('ApplyNetPrice', $applyNetPrice, 'bool');
+        return $this->setProperty('applyNetPrice', $applyNetPrice, 'bool');
     }
 
     /**
@@ -90,11 +85,11 @@ class CustomerGroup extends DataModel
     /**
      * @param  double $discount Optional percentual discount on all products. Negative Value means surcharge. 
      * @return \jtl\Connector\Model\CustomerGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setDiscount(Identity $discount)
+    public function setDiscount($discount)
     {
-        return $this->setProperty('Discount', $discount, 'double');
+        return $this->setProperty('discount', $discount, 'double');
     }
 
     /**
@@ -108,11 +103,11 @@ class CustomerGroup extends DataModel
     /**
      * @param  bool $isDefault Optional: Flag default customer group
      * @return \jtl\Connector\Model\CustomerGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setIsDefault(Identity $isDefault)
+    public function setIsDefault($isDefault)
     {
-        return $this->setProperty('IsDefault', $isDefault, 'bool');
+        return $this->setProperty('isDefault', $isDefault, 'bool');
     }
 
     /**

@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * ToDo: Remove (deprecated).
  *
@@ -15,48 +17,38 @@ namespace jtl\Connector\Model;
 class FileDownloadHistory extends DataModel
 {
     /**
-     * @type Identity 
+     * @var Identity 
      */
     protected $customerId = null;
 
     /**
-     * @type Identity 
+     * @var Identity 
      */
     protected $customerOrderId = null;
 
     /**
-     * @type Identity 
+     * @var Identity 
      */
     protected $fileDownloadId = null;
 
     /**
-     * @type Identity 
+     * @var Identity 
      */
     protected $id = null;
 
     /**
-     * @type string 
+     * @var DateTime 
      */
-    protected $created = '';
-
-    /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'customerId',
-        'customerOrderId',
-        'fileDownloadId',
-        'id',
-    );
+    protected $created = null;
 
     /**
      * @param  Identity $customerId 
      * @return \jtl\Connector\Model\FileDownloadHistory
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerId(Identity $customerId)
     {
-        return $this->setProperty('CustomerId', $customerId, 'Identity');
+        return $this->setProperty('customerId', $customerId, 'Identity');
     }
 
     /**
@@ -70,11 +62,11 @@ class FileDownloadHistory extends DataModel
     /**
      * @param  Identity $customerOrderId 
      * @return \jtl\Connector\Model\FileDownloadHistory
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerOrderId(Identity $customerOrderId)
     {
-        return $this->setProperty('CustomerOrderId', $customerOrderId, 'Identity');
+        return $this->setProperty('customerOrderId', $customerOrderId, 'Identity');
     }
 
     /**
@@ -88,11 +80,11 @@ class FileDownloadHistory extends DataModel
     /**
      * @param  Identity $fileDownloadId 
      * @return \jtl\Connector\Model\FileDownloadHistory
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setFileDownloadId(Identity $fileDownloadId)
     {
-        return $this->setProperty('FileDownloadId', $fileDownloadId, 'Identity');
+        return $this->setProperty('fileDownloadId', $fileDownloadId, 'Identity');
     }
 
     /**
@@ -106,11 +98,11 @@ class FileDownloadHistory extends DataModel
     /**
      * @param  Identity $id 
      * @return \jtl\Connector\Model\FileDownloadHistory
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -122,17 +114,17 @@ class FileDownloadHistory extends DataModel
     }
 
     /**
-     * @param  string $created 
+     * @param  DateTime $created 
      * @return \jtl\Connector\Model\FileDownloadHistory
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreated(Identity $created)
+    public function setCreated(DateTime $created)
     {
-        return $this->setProperty('Created', $created, 'string');
+        return $this->setProperty('created', $created, 'DateTime');
     }
 
     /**
-     * @return string 
+     * @return DateTime 
      */
     public function getCreated()
     {

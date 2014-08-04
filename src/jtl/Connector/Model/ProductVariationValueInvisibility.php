@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Specify productVariationValue to hide from specific customerGroup..
  *
@@ -15,31 +17,23 @@ namespace jtl\Connector\Model;
 class ProductVariationValueInvisibility extends DataModel
 {
     /**
-     * @type Identity Reference to customerGroup
+     * @var Identity Reference to customerGroup
      */
     protected $customerGroupId = null;
 
     /**
-     * @type Identity Reference to productVariationValue to hide from customerGroup
+     * @var Identity Reference to productVariationValue to hide from customerGroup
      */
     protected $productVariationValueId = null;
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'customerGroupId',
-        'productVariationValueId',
-    );
-
-    /**
      * @param  Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ProductVariationValueInvisibility
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('CustomerGroupId', $customerGroupId, 'Identity');
+        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
     }
 
     /**
@@ -53,11 +47,11 @@ class ProductVariationValueInvisibility extends DataModel
     /**
      * @param  Identity $productVariationValueId Reference to productVariationValue to hide from customerGroup
      * @return \jtl\Connector\Model\ProductVariationValueInvisibility
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductVariationValueId(Identity $productVariationValueId)
     {
-        return $this->setProperty('ProductVariationValueId', $productVariationValueId, 'Identity');
+        return $this->setProperty('productVariationValueId', $productVariationValueId, 'Identity');
     }
 
     /**

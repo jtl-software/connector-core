@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * A config Item that is displayed in a config Group. Config item can reference to a specific productId to inherit price, name and description. .
  *
@@ -15,112 +17,103 @@ namespace jtl\Connector\Model;
 class ConfigItem extends DataModel
 {
     /**
-     * @type Identity Reference to configGroup
+     * @var Identity Reference to configGroup
      */
     protected $configGroupId = null;
 
     /**
-     * @type Identity Unique configItem id
+     * @var Identity Unique configItem id
      */
     protected $id = null;
 
     /**
-     * @type Identity Optional reference to product
+     * @var Identity Optional reference to product
      */
     protected $productId = null;
 
     /**
-     * @type bool Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
+     * @var bool Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
      */
     protected $ignoreMultiplier = false;
 
     /**
-     * @type bool Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
+     * @var bool Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
      */
     protected $inheritProductName = false;
 
     /**
-     * @type bool Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
+     * @var bool Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
      */
     protected $inheritProductPrice = false;
 
     /**
-     * @type double Optional initial / predefined quantity. Default is one (1) quantity piece. 
+     * @var double Optional initial / predefined quantity. Default is one (1) quantity piece. 
      */
     protected $initialQuantity = 0.0;
 
     /**
-     * @type bool Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
+     * @var bool Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
      */
     protected $isPreSelected = false;
 
     /**
-     * @type bool Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
+     * @var bool Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
      */
     protected $isRecommended = false;
 
     /**
-     * @type double Maximum allowed quantity. Default 0 for no maximum limit. 
+     * @var double Maximum allowed quantity. Default 0 for no maximum limit. 
      */
     protected $maxQuantity = 0.0;
 
     /**
-     * @type double Optional minimum quantity required to add configItem. Default 0 for no minimum quantity. 
+     * @var double Optional minimum quantity required to add configItem. Default 0 for no minimum quantity. 
      */
     protected $minQuantity = 0.0;
 
     /**
-     * @type bool Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
+     * @var bool Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
      */
     protected $showDiscount = false;
 
     /**
-     * @type bool Optional: Show surcharge compared to productId price.
+     * @var bool Optional: Show surcharge compared to productId price.
      */
     protected $showSurcharge = false;
 
     /**
-     * @type int Optional sort order number
+     * @var int Optional sort order number
      */
     protected $sort = 0;
 
     /**
-     * @type int Config item type. 0: Product, 1: Special
+     * @var int Config item type. 0: Product, 1: Special
      */
     protected $type = 0;
 
     /**
-     * @type double Value added tax
+     * @var double Value added tax
      */
     protected $vat = 0.0;
 
     /**
-     * @type \jtl\Connector\Model\ConfigItemPrice[]
+     * @var \jtl\Connector\Model\ConfigItemPrice[]
      */
     protected $prices = array();
 
     /**
-     * @type \jtl\Connector\Model\ConfigItemI18n[]
+     * @var \jtl\Connector\Model\ConfigItemI18n[]
      */
     protected $i18n = array();
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'configGroupId',
-        'id',
-        'productId',
-    );
-
-    /**
      * @param  Identity $configGroupId Reference to configGroup
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setConfigGroupId(Identity $configGroupId)
     {
-        return $this->setProperty('ConfigGroupId', $configGroupId, 'Identity');
+        return $this->setProperty('configGroupId', $configGroupId, 'Identity');
     }
 
     /**
@@ -134,11 +127,11 @@ class ConfigItem extends DataModel
     /**
      * @param  Identity $id Unique configItem id
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -152,11 +145,11 @@ class ConfigItem extends DataModel
     /**
      * @param  Identity $productId Optional reference to product
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('ProductId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
 
     /**
@@ -170,11 +163,11 @@ class ConfigItem extends DataModel
     /**
      * @param  bool $ignoreMultiplier Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setIgnoreMultiplier(Identity $ignoreMultiplier)
+    public function setIgnoreMultiplier($ignoreMultiplier)
     {
-        return $this->setProperty('IgnoreMultiplier', $ignoreMultiplier, 'bool');
+        return $this->setProperty('ignoreMultiplier', $ignoreMultiplier, 'bool');
     }
 
     /**
@@ -188,11 +181,11 @@ class ConfigItem extends DataModel
     /**
      * @param  bool $inheritProductName Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setInheritProductName(Identity $inheritProductName)
+    public function setInheritProductName($inheritProductName)
     {
-        return $this->setProperty('InheritProductName', $inheritProductName, 'bool');
+        return $this->setProperty('inheritProductName', $inheritProductName, 'bool');
     }
 
     /**
@@ -206,11 +199,11 @@ class ConfigItem extends DataModel
     /**
      * @param  bool $inheritProductPrice Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setInheritProductPrice(Identity $inheritProductPrice)
+    public function setInheritProductPrice($inheritProductPrice)
     {
-        return $this->setProperty('InheritProductPrice', $inheritProductPrice, 'bool');
+        return $this->setProperty('inheritProductPrice', $inheritProductPrice, 'bool');
     }
 
     /**
@@ -224,11 +217,11 @@ class ConfigItem extends DataModel
     /**
      * @param  double $initialQuantity Optional initial / predefined quantity. Default is one (1) quantity piece. 
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setInitialQuantity(Identity $initialQuantity)
+    public function setInitialQuantity($initialQuantity)
     {
-        return $this->setProperty('InitialQuantity', $initialQuantity, 'double');
+        return $this->setProperty('initialQuantity', $initialQuantity, 'double');
     }
 
     /**
@@ -242,11 +235,11 @@ class ConfigItem extends DataModel
     /**
      * @param  bool $isPreSelected Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setIsPreSelected(Identity $isPreSelected)
+    public function setIsPreSelected($isPreSelected)
     {
-        return $this->setProperty('IsPreSelected', $isPreSelected, 'bool');
+        return $this->setProperty('isPreSelected', $isPreSelected, 'bool');
     }
 
     /**
@@ -260,11 +253,11 @@ class ConfigItem extends DataModel
     /**
      * @param  bool $isRecommended Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setIsRecommended(Identity $isRecommended)
+    public function setIsRecommended($isRecommended)
     {
-        return $this->setProperty('IsRecommended', $isRecommended, 'bool');
+        return $this->setProperty('isRecommended', $isRecommended, 'bool');
     }
 
     /**
@@ -278,11 +271,11 @@ class ConfigItem extends DataModel
     /**
      * @param  double $maxQuantity Maximum allowed quantity. Default 0 for no maximum limit. 
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setMaxQuantity(Identity $maxQuantity)
+    public function setMaxQuantity($maxQuantity)
     {
-        return $this->setProperty('MaxQuantity', $maxQuantity, 'double');
+        return $this->setProperty('maxQuantity', $maxQuantity, 'double');
     }
 
     /**
@@ -296,11 +289,11 @@ class ConfigItem extends DataModel
     /**
      * @param  double $minQuantity Optional minimum quantity required to add configItem. Default 0 for no minimum quantity. 
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setMinQuantity(Identity $minQuantity)
+    public function setMinQuantity($minQuantity)
     {
-        return $this->setProperty('MinQuantity', $minQuantity, 'double');
+        return $this->setProperty('minQuantity', $minQuantity, 'double');
     }
 
     /**
@@ -314,11 +307,11 @@ class ConfigItem extends DataModel
     /**
      * @param  bool $showDiscount Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setShowDiscount(Identity $showDiscount)
+    public function setShowDiscount($showDiscount)
     {
-        return $this->setProperty('ShowDiscount', $showDiscount, 'bool');
+        return $this->setProperty('showDiscount', $showDiscount, 'bool');
     }
 
     /**
@@ -332,11 +325,11 @@ class ConfigItem extends DataModel
     /**
      * @param  bool $showSurcharge Optional: Show surcharge compared to productId price.
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setShowSurcharge(Identity $showSurcharge)
+    public function setShowSurcharge($showSurcharge)
     {
-        return $this->setProperty('ShowSurcharge', $showSurcharge, 'bool');
+        return $this->setProperty('showSurcharge', $showSurcharge, 'bool');
     }
 
     /**
@@ -350,11 +343,11 @@ class ConfigItem extends DataModel
     /**
      * @param  int $sort Optional sort order number
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setSort(Identity $sort)
+    public function setSort($sort)
     {
-        return $this->setProperty('Sort', $sort, 'int');
+        return $this->setProperty('sort', $sort, 'int');
     }
 
     /**
@@ -368,11 +361,11 @@ class ConfigItem extends DataModel
     /**
      * @param  int $type Config item type. 0: Product, 1: Special
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setType(Identity $type)
+    public function setType($type)
     {
-        return $this->setProperty('Type', $type, 'int');
+        return $this->setProperty('type', $type, 'int');
     }
 
     /**
@@ -386,11 +379,11 @@ class ConfigItem extends DataModel
     /**
      * @param  double $vat Value added tax
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setVat(Identity $vat)
+    public function setVat($vat)
     {
-        return $this->setProperty('Vat', $vat, 'double');
+        return $this->setProperty('vat', $vat, 'double');
     }
 
     /**

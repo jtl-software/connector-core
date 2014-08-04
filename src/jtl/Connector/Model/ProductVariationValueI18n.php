@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * locale specifig productVariationValue name..
  *
@@ -15,35 +17,28 @@ namespace jtl\Connector\Model;
 class ProductVariationValueI18n extends DataModel
 {
     /**
-     * @type Identity Reference to productVariationValue
+     * @var Identity Reference to productVariationValue
      */
     protected $productVariationValueId = null;
 
     /**
-     * @type string Locale
+     * @var string Locale
      */
     protected $localeName = '';
 
     /**
-     * @type string Locale specific variationValue name
+     * @var string Locale specific variationValue name
      */
     protected $name = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'productVariationValueId',
-    );
-
-    /**
      * @param  Identity $productVariationValueId Reference to productVariationValue
      * @return \jtl\Connector\Model\ProductVariationValueI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductVariationValueId(Identity $productVariationValueId)
     {
-        return $this->setProperty('ProductVariationValueId', $productVariationValueId, 'Identity');
+        return $this->setProperty('productVariationValueId', $productVariationValueId, 'Identity');
     }
 
     /**
@@ -57,11 +52,11 @@ class ProductVariationValueI18n extends DataModel
     /**
      * @param  string $localeName Locale
      * @return \jtl\Connector\Model\ProductVariationValueI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName(Identity $localeName)
+    public function setLocaleName($localeName)
     {
-        return $this->setProperty('LocaleName', $localeName, 'string');
+        return $this->setProperty('localeName', $localeName, 'string');
     }
 
     /**
@@ -75,11 +70,11 @@ class ProductVariationValueI18n extends DataModel
     /**
      * @param  string $name Locale specific variationValue name
      * @return \jtl\Connector\Model\ProductVariationValueI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setName(Identity $name)
+    public function setName($name)
     {
-        return $this->setProperty('Name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
 
     /**

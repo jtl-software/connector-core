@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Product to warehouse info association..
  *
@@ -15,46 +17,38 @@ namespace jtl\Connector\Model;
 class ProductWarehouseInfo extends DataModel
 {
     /**
-     * @type Identity Reference to product
+     * @var Identity Reference to product
      */
     protected $productId = null;
 
     /**
-     * @type Identity Reference to warehouse
+     * @var Identity Reference to warehouse
      */
     protected $warehouseId = null;
 
     /**
-     * @type string Optional product inflow date for specified warehouse
+     * @var string Optional product inflow date for specified warehouse
      */
     protected $inflowDate = '';
 
     /**
-     * @type double Optional product inflow quantity for specified warehouse
+     * @var double Optional product inflow quantity for specified warehouse
      */
     protected $inflowQuantity = 0.0;
 
     /**
-     * @type double Optional product stock level in specified warehouse
+     * @var double Optional product stock level in specified warehouse
      */
     protected $stockLevel = 0.0;
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'productId',
-        'warehouseId',
-    );
-
-    /**
      * @param  Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductWarehouseInfo
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('ProductId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
 
     /**
@@ -68,11 +62,11 @@ class ProductWarehouseInfo extends DataModel
     /**
      * @param  Identity $warehouseId Reference to warehouse
      * @return \jtl\Connector\Model\ProductWarehouseInfo
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setWarehouseId(Identity $warehouseId)
     {
-        return $this->setProperty('WarehouseId', $warehouseId, 'Identity');
+        return $this->setProperty('warehouseId', $warehouseId, 'Identity');
     }
 
     /**
@@ -86,11 +80,11 @@ class ProductWarehouseInfo extends DataModel
     /**
      * @param  string $inflowDate Optional product inflow date for specified warehouse
      * @return \jtl\Connector\Model\ProductWarehouseInfo
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setInflowDate(Identity $inflowDate)
+    public function setInflowDate($inflowDate)
     {
-        return $this->setProperty('InflowDate', $inflowDate, 'string');
+        return $this->setProperty('inflowDate', $inflowDate, 'string');
     }
 
     /**
@@ -104,11 +98,11 @@ class ProductWarehouseInfo extends DataModel
     /**
      * @param  double $inflowQuantity Optional product inflow quantity for specified warehouse
      * @return \jtl\Connector\Model\ProductWarehouseInfo
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setInflowQuantity(Identity $inflowQuantity)
+    public function setInflowQuantity($inflowQuantity)
     {
-        return $this->setProperty('InflowQuantity', $inflowQuantity, 'double');
+        return $this->setProperty('inflowQuantity', $inflowQuantity, 'double');
     }
 
     /**
@@ -122,11 +116,11 @@ class ProductWarehouseInfo extends DataModel
     /**
      * @param  double $stockLevel Optional product stock level in specified warehouse
      * @return \jtl\Connector\Model\ProductWarehouseInfo
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setStockLevel(Identity $stockLevel)
+    public function setStockLevel($stockLevel)
     {
-        return $this->setProperty('StockLevel', $stockLevel, 'double');
+        return $this->setProperty('stockLevel', $stockLevel, 'double');
     }
 
     /**

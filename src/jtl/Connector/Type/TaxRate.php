@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package jtl\Connector\Type
  */
 
 namespace jtl\Connector\Type;
@@ -17,11 +17,11 @@ class TaxRate extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('id', 'Identity', null, True, false, false),
-            new PropertyInfo('taxClassId', 'Identity', null, False, false, false),
-            new PropertyInfo('taxZoneId', 'Identity', null, False, false, false),
-            new PropertyInfo('priority', 'int', null, False, false, false),
-            new PropertyInfo('rate', 'double', null, False, false, false),
+            new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('taxClassId', 'Identity', null, false, true, false),
+            new PropertyInfo('taxZoneId', 'Identity', null, false, true, false),
+            new PropertyInfo('priority', 'int', null, false, false, false),
+            new PropertyInfo('rate', 'double', null, false, false, false),
         );
     }
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package jtl\Connector\Type
  */
 
 namespace jtl\Connector\Type;
@@ -17,10 +17,10 @@ class CustomerOrderBasket extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('customerId', 'Identity', null, False, false, false),
-            new PropertyInfo('customerOrderPaymentInfoId', 'Identity', null, False, false, false),
-            new PropertyInfo('id', 'Identity', null, True, false, false),
-            new PropertyInfo('shippingAddressId', 'Identity', null, False, false, false),
+            new PropertyInfo('customerId', 'Identity', null, false, true, false),
+            new PropertyInfo('customerOrderPaymentInfoId', 'Identity', null, false, true, false),
+            new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('shippingAddressId', 'Identity', null, false, true, false),
         );
     }
 }

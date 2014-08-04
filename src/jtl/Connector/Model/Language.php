@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Global language model.
  *
@@ -15,45 +17,38 @@ namespace jtl\Connector\Model;
 class Language extends DataModel
 {
     /**
-     * @type Identity Unique language id
+     * @var Identity Unique language id
      */
     protected $id = null;
 
     /**
-     * @type bool Flag default language for frontend. Exact 1 language must be marked as default.
+     * @var bool Flag default language for frontend. Exact 1 language must be marked as default.
      */
     protected $isDefault = false;
 
     /**
-     * @type string Locale
+     * @var string Locale
      */
     protected $localeName = '';
 
     /**
-     * @type string English term
+     * @var string English term
      */
     protected $nameEnglish = '';
 
     /**
-     * @type string German term
+     * @var string German term
      */
     protected $nameGerman = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-    );
-
-    /**
      * @param  Identity $id Unique language id
      * @return \jtl\Connector\Model\Language
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -67,11 +62,11 @@ class Language extends DataModel
     /**
      * @param  bool $isDefault Flag default language for frontend. Exact 1 language must be marked as default.
      * @return \jtl\Connector\Model\Language
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setIsDefault(Identity $isDefault)
+    public function setIsDefault($isDefault)
     {
-        return $this->setProperty('IsDefault', $isDefault, 'bool');
+        return $this->setProperty('isDefault', $isDefault, 'bool');
     }
 
     /**
@@ -85,11 +80,11 @@ class Language extends DataModel
     /**
      * @param  string $localeName Locale
      * @return \jtl\Connector\Model\Language
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName(Identity $localeName)
+    public function setLocaleName($localeName)
     {
-        return $this->setProperty('LocaleName', $localeName, 'string');
+        return $this->setProperty('localeName', $localeName, 'string');
     }
 
     /**
@@ -103,11 +98,11 @@ class Language extends DataModel
     /**
      * @param  string $nameEnglish English term
      * @return \jtl\Connector\Model\Language
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setNameEnglish(Identity $nameEnglish)
+    public function setNameEnglish($nameEnglish)
     {
-        return $this->setProperty('NameEnglish', $nameEnglish, 'string');
+        return $this->setProperty('nameEnglish', $nameEnglish, 'string');
     }
 
     /**
@@ -121,11 +116,11 @@ class Language extends DataModel
     /**
      * @param  string $nameGerman German term
      * @return \jtl\Connector\Model\Language
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setNameGerman(Identity $nameGerman)
+    public function setNameGerman($nameGerman)
     {
-        return $this->setProperty('NameGerman', $nameGerman, 'string');
+        return $this->setProperty('nameGerman', $nameGerman, 'string');
     }
 
     /**

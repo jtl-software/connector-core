@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Monolingual customer group attribute..
  *
@@ -15,46 +17,38 @@ namespace jtl\Connector\Model;
 class CustomerGroupAttr extends DataModel
 {
     /**
-     * @type Identity Reference to customerGroup
+     * @var Identity Reference to customerGroup
      */
     protected $customerGroupId = null;
 
     /**
-     * @type Identity Unique customerGroupAttr id
+     * @var Identity Unique customerGroupAttr id
      */
     protected $id = null;
 
     /**
-     * @type string Attribute key
+     * @var string Attribute key
      */
     protected $key = '';
 
     /**
-     * @type string Attribute value
+     * @var string Attribute value
      */
     protected $value = '';
 
     /**
-     * @type \jtl\Connector\Model\CustomerGroup[]
+     * @var \jtl\Connector\Model\CustomerGroup[]
      */
     protected $customerGroup = array();
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'customerGroupId',
-        'id',
-    );
-
-    /**
      * @param  Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\CustomerGroupAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('CustomerGroupId', $customerGroupId, 'Identity');
+        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
     }
 
     /**
@@ -68,11 +62,11 @@ class CustomerGroupAttr extends DataModel
     /**
      * @param  Identity $id Unique customerGroupAttr id
      * @return \jtl\Connector\Model\CustomerGroupAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -86,11 +80,11 @@ class CustomerGroupAttr extends DataModel
     /**
      * @param  string $key Attribute key
      * @return \jtl\Connector\Model\CustomerGroupAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setKey(Identity $key)
+    public function setKey($key)
     {
-        return $this->setProperty('Key', $key, 'string');
+        return $this->setProperty('key', $key, 'string');
     }
 
     /**
@@ -104,11 +98,11 @@ class CustomerGroupAttr extends DataModel
     /**
      * @param  string $value Attribute value
      * @return \jtl\Connector\Model\CustomerGroupAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setValue(Identity $value)
+    public function setValue($value)
     {
-        return $this->setProperty('Value', $value, 'string');
+        return $this->setProperty('value', $value, 'string');
     }
 
     /**

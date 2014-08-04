@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Special product price properties to specify date and stock limits..
  *
@@ -15,66 +17,58 @@ namespace jtl\Connector\Model;
 class ProductSpecialPrice extends DataModel
 {
     /**
-     * @type Identity Unique productSpecialPrice id
+     * @var Identity Unique productSpecialPrice id
      */
     protected $id = null;
 
     /**
-     * @type Identity Reference to product
+     * @var Identity Reference to product
      */
     protected $productId = null;
 
     /**
-     * @type string Optional: Activate special price from date
+     * @var string Optional: Activate special price from date
      */
     protected $activeFrom = '';
 
     /**
-     * @type string Optional: Special price active until date
+     * @var string Optional: Special price active until date
      */
     protected $activeUntil = '';
 
     /**
-     * @type bool Optional: Consider activeFrom/activeUntil date range. If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
+     * @var bool Optional: Consider activeFrom/activeUntil date range. If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
      */
     protected $considerDateLimit = false;
 
     /**
-     * @type bool Optional: Consider stockLimit value. If true, specialPrice will be only active until product stockLevel is greater or equal stockLimit.
+     * @var bool Optional: Consider stockLimit value. If true, specialPrice will be only active until product stockLevel is greater or equal stockLimit.
      */
     protected $considerStockLimit = false;
 
     /**
-     * @type bool Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match. 
+     * @var bool Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match. 
      */
     protected $isActive = false;
 
     /**
-     * @type double Optional: SpecialPrice active until stock level quantity
+     * @var double Optional: SpecialPrice active until stock level quantity
      */
     protected $stockLimit = 0.0;
 
     /**
-     * @type \jtl\Connector\Model\SpecialPrice[]
+     * @var \jtl\Connector\Model\SpecialPrice[]
      */
     protected $specialPrices = array();
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-        'productId',
-    );
-
-    /**
      * @param  Identity $id Unique productSpecialPrice id
      * @return \jtl\Connector\Model\ProductSpecialPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -88,11 +82,11 @@ class ProductSpecialPrice extends DataModel
     /**
      * @param  Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductSpecialPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('ProductId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
 
     /**
@@ -106,11 +100,11 @@ class ProductSpecialPrice extends DataModel
     /**
      * @param  string $activeFrom Optional: Activate special price from date
      * @return \jtl\Connector\Model\ProductSpecialPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setActiveFrom(Identity $activeFrom)
+    public function setActiveFrom($activeFrom)
     {
-        return $this->setProperty('ActiveFrom', $activeFrom, 'string');
+        return $this->setProperty('activeFrom', $activeFrom, 'string');
     }
 
     /**
@@ -124,11 +118,11 @@ class ProductSpecialPrice extends DataModel
     /**
      * @param  string $activeUntil Optional: Special price active until date
      * @return \jtl\Connector\Model\ProductSpecialPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setActiveUntil(Identity $activeUntil)
+    public function setActiveUntil($activeUntil)
     {
-        return $this->setProperty('ActiveUntil', $activeUntil, 'string');
+        return $this->setProperty('activeUntil', $activeUntil, 'string');
     }
 
     /**
@@ -142,11 +136,11 @@ class ProductSpecialPrice extends DataModel
     /**
      * @param  bool $considerDateLimit Optional: Consider activeFrom/activeUntil date range. If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
      * @return \jtl\Connector\Model\ProductSpecialPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setConsiderDateLimit(Identity $considerDateLimit)
+    public function setConsiderDateLimit($considerDateLimit)
     {
-        return $this->setProperty('ConsiderDateLimit', $considerDateLimit, 'bool');
+        return $this->setProperty('considerDateLimit', $considerDateLimit, 'bool');
     }
 
     /**
@@ -160,11 +154,11 @@ class ProductSpecialPrice extends DataModel
     /**
      * @param  bool $considerStockLimit Optional: Consider stockLimit value. If true, specialPrice will be only active until product stockLevel is greater or equal stockLimit.
      * @return \jtl\Connector\Model\ProductSpecialPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setConsiderStockLimit(Identity $considerStockLimit)
+    public function setConsiderStockLimit($considerStockLimit)
     {
-        return $this->setProperty('ConsiderStockLimit', $considerStockLimit, 'bool');
+        return $this->setProperty('considerStockLimit', $considerStockLimit, 'bool');
     }
 
     /**
@@ -178,11 +172,11 @@ class ProductSpecialPrice extends DataModel
     /**
      * @param  bool $isActive Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match. 
      * @return \jtl\Connector\Model\ProductSpecialPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setIsActive(Identity $isActive)
+    public function setIsActive($isActive)
     {
-        return $this->setProperty('IsActive', $isActive, 'bool');
+        return $this->setProperty('isActive', $isActive, 'bool');
     }
 
     /**
@@ -196,11 +190,11 @@ class ProductSpecialPrice extends DataModel
     /**
      * @param  double $stockLimit Optional: SpecialPrice active until stock level quantity
      * @return \jtl\Connector\Model\ProductSpecialPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setStockLimit(Identity $stockLimit)
+    public function setStockLimit($stockLimit)
     {
-        return $this->setProperty('StockLimit', $stockLimit, 'double');
+        return $this->setProperty('stockLimit', $stockLimit, 'double');
     }
 
     /**

@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Localized Unit Name.
  *
@@ -15,35 +17,28 @@ namespace jtl\Connector\Model;
 class UnitI18n extends DataModel
 {
     /**
-     * @type Identity Unit id
+     * @var Identity Unit id
      */
     protected $unitId = null;
 
     /**
-     * @type string Locale
+     * @var string Locale
      */
     protected $localeName = '';
 
     /**
-     * @type string Localized unit name
+     * @var string Localized unit name
      */
     protected $name = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'unitId',
-    );
-
-    /**
      * @param  Identity $unitId Unit id
      * @return \jtl\Connector\Model\UnitI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setUnitId(Identity $unitId)
     {
-        return $this->setProperty('UnitId', $unitId, 'Identity');
+        return $this->setProperty('unitId', $unitId, 'Identity');
     }
 
     /**
@@ -57,11 +52,11 @@ class UnitI18n extends DataModel
     /**
      * @param  string $localeName Locale
      * @return \jtl\Connector\Model\UnitI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName(Identity $localeName)
+    public function setLocaleName($localeName)
     {
-        return $this->setProperty('LocaleName', $localeName, 'string');
+        return $this->setProperty('localeName', $localeName, 'string');
     }
 
     /**
@@ -75,11 +70,11 @@ class UnitI18n extends DataModel
     /**
      * @param  string $name Localized unit name
      * @return \jtl\Connector\Model\UnitI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setName(Identity $name)
+    public function setName($name)
     {
-        return $this->setProperty('Name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
 
     /**

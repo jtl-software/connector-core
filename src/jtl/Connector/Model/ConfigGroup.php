@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Config group holds several configItems and settings.
  *
@@ -15,60 +17,53 @@ namespace jtl\Connector\Model;
 class ConfigGroup extends DataModel
 {
     /**
-     * @type Identity Unique configGroup id
+     * @var Identity Unique configGroup id
      */
     protected $id = null;
 
     /**
-     * @type string Optional internal comment to differantiate config groups by comment name
+     * @var string Optional internal comment to differantiate config groups by comment name
      */
     protected $comment = '';
 
     /**
-     * @type string Optional image file path
+     * @var string Optional image file path
      */
     protected $imagePath = '';
 
     /**
-     * @type int Optional maximum number allowed selections. Default 0 for no maximum limitation.
+     * @var int Optional maximum number allowed selections. Default 0 for no maximum limitation.
      */
     protected $maximumSelection = 0;
 
     /**
-     * @type int Optional minimum number required selections. Default 0 for no minimum requirement. 
+     * @var int Optional minimum number required selections. Default 0 for no minimum requirement. 
      */
     protected $minimumSelection = 0;
 
     /**
-     * @type int Optional sort order number
+     * @var int Optional sort order number
      */
     protected $sort = 0;
 
     /**
-     * @type int Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
+     * @var int Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      */
     protected $type = 0;
 
     /**
-     * @type \jtl\Connector\Model\ConfigGroupI18n[]
+     * @var \jtl\Connector\Model\ConfigGroupI18n[]
      */
     protected $i18n = array();
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-    );
-
-    /**
      * @param  Identity $id Unique configGroup id
      * @return \jtl\Connector\Model\ConfigGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -82,11 +77,11 @@ class ConfigGroup extends DataModel
     /**
      * @param  string $comment Optional internal comment to differantiate config groups by comment name
      * @return \jtl\Connector\Model\ConfigGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setComment(Identity $comment)
+    public function setComment($comment)
     {
-        return $this->setProperty('Comment', $comment, 'string');
+        return $this->setProperty('comment', $comment, 'string');
     }
 
     /**
@@ -100,11 +95,11 @@ class ConfigGroup extends DataModel
     /**
      * @param  string $imagePath Optional image file path
      * @return \jtl\Connector\Model\ConfigGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setImagePath(Identity $imagePath)
+    public function setImagePath($imagePath)
     {
-        return $this->setProperty('ImagePath', $imagePath, 'string');
+        return $this->setProperty('imagePath', $imagePath, 'string');
     }
 
     /**
@@ -118,11 +113,11 @@ class ConfigGroup extends DataModel
     /**
      * @param  int $maximumSelection Optional maximum number allowed selections. Default 0 for no maximum limitation.
      * @return \jtl\Connector\Model\ConfigGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setMaximumSelection(Identity $maximumSelection)
+    public function setMaximumSelection($maximumSelection)
     {
-        return $this->setProperty('MaximumSelection', $maximumSelection, 'int');
+        return $this->setProperty('maximumSelection', $maximumSelection, 'int');
     }
 
     /**
@@ -136,11 +131,11 @@ class ConfigGroup extends DataModel
     /**
      * @param  int $minimumSelection Optional minimum number required selections. Default 0 for no minimum requirement. 
      * @return \jtl\Connector\Model\ConfigGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setMinimumSelection(Identity $minimumSelection)
+    public function setMinimumSelection($minimumSelection)
     {
-        return $this->setProperty('MinimumSelection', $minimumSelection, 'int');
+        return $this->setProperty('minimumSelection', $minimumSelection, 'int');
     }
 
     /**
@@ -154,11 +149,11 @@ class ConfigGroup extends DataModel
     /**
      * @param  int $sort Optional sort order number
      * @return \jtl\Connector\Model\ConfigGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setSort(Identity $sort)
+    public function setSort($sort)
     {
-        return $this->setProperty('Sort', $sort, 'int');
+        return $this->setProperty('sort', $sort, 'int');
     }
 
     /**
@@ -172,11 +167,11 @@ class ConfigGroup extends DataModel
     /**
      * @param  int $type Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      * @return \jtl\Connector\Model\ConfigGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setType(Identity $type)
+    public function setType($type)
     {
-        return $this->setProperty('Type', $type, 'int');
+        return $this->setProperty('type', $type, 'int');
     }
 
     /**

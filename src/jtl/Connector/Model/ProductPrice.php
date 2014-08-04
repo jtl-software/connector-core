@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Product price properties..
  *
@@ -15,41 +17,33 @@ namespace jtl\Connector\Model;
 class ProductPrice extends DataModel
 {
     /**
-     * @type Identity Reference to customerGroup
+     * @var Identity Reference to customerGroup
      */
     protected $customerGroupId = null;
 
     /**
-     * @type Identity Reference to product
+     * @var Identity Reference to product
      */
     protected $productId = null;
 
     /**
-     * @type double Price value (net)
+     * @var double Price value (net)
      */
     protected $netPrice = 0.0;
 
     /**
-     * @type int Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
+     * @var int Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
      */
     protected $quantity = 0;
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'customerGroupId',
-        'productId',
-    );
-
-    /**
      * @param  Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ProductPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('CustomerGroupId', $customerGroupId, 'Identity');
+        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
     }
 
     /**
@@ -63,11 +57,11 @@ class ProductPrice extends DataModel
     /**
      * @param  Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('ProductId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
 
     /**
@@ -81,11 +75,11 @@ class ProductPrice extends DataModel
     /**
      * @param  double $netPrice Price value (net)
      * @return \jtl\Connector\Model\ProductPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setNetPrice(Identity $netPrice)
+    public function setNetPrice($netPrice)
     {
-        return $this->setProperty('NetPrice', $netPrice, 'double');
+        return $this->setProperty('netPrice', $netPrice, 'double');
     }
 
     /**
@@ -99,11 +93,11 @@ class ProductPrice extends DataModel
     /**
      * @param  int $quantity Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
      * @return \jtl\Connector\Model\ProductPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setQuantity(Identity $quantity)
+    public function setQuantity($quantity)
     {
-        return $this->setProperty('Quantity', $quantity, 'int');
+        return $this->setProperty('quantity', $quantity, 'int');
     }
 
     /**

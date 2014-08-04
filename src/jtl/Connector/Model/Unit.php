@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Specifies product units like "piece", "bottle", "package"..
  *
@@ -15,25 +17,18 @@ namespace jtl\Connector\Model;
 class Unit extends DataModel
 {
     /**
-     * @type Identity Unit id
+     * @var Identity Unit id
      */
     protected $id = null;
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-    );
-
-    /**
      * @param  Identity $id Unit id
      * @return \jtl\Connector\Model\Unit
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**

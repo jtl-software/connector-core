@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * warehouse model (set in JTL-Wawi ERP)..
  *
@@ -15,25 +17,18 @@ namespace jtl\Connector\Model;
 class Warehouse extends DataModel
 {
     /**
-     * @type Identity Unique warehouse id
+     * @var Identity Unique warehouse id
      */
     protected $id = null;
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-    );
-
-    /**
      * @param  Identity $id Unique warehouse id
      * @return \jtl\Connector\Model\Warehouse
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**

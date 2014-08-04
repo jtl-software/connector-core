@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Delivery note item properties..
  *
@@ -15,63 +17,53 @@ namespace jtl\Connector\Model;
 class DeliveryNoteItem extends DataModel
 {
     /**
-     * @type Identity Reference to customerOrderItem
+     * @var Identity Reference to customerOrderItem
      */
     protected $customerOrderItemId = null;
 
     /**
-     * @type Identity Reference to deliveryNote
+     * @var Identity Reference to deliveryNote
      */
     protected $deliveryNoteId = null;
 
     /**
-     * @type Identity Unique deliveryNoteItem id
+     * @var Identity Unique deliveryNoteItem id
      */
     protected $id = null;
 
     /**
-     * @type Identity Optional reference to warehouse
+     * @var Identity Optional reference to warehouse
      */
     protected $warehouseId = null;
 
     /**
-     * @type string Optional batch number
+     * @var string Optional batch number
      */
     protected $batchNumber = '';
 
     /**
-     * @type string Optional best before date
+     * @var string Optional best before date
      */
     protected $bestBefore = '';
 
     /**
-     * @type double Quantity delivered
+     * @var double Quantity delivered
      */
     protected $quantity = 0.0;
 
     /**
-     * @type string Optional serial number
+     * @var string Optional serial number
      */
     protected $serialNumber = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'customerOrderItemId',
-        'deliveryNoteId',
-        'id',
-        'warehouseId',
-    );
-
-    /**
      * @param  Identity $customerOrderItemId Reference to customerOrderItem
      * @return \jtl\Connector\Model\DeliveryNoteItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerOrderItemId(Identity $customerOrderItemId)
     {
-        return $this->setProperty('CustomerOrderItemId', $customerOrderItemId, 'Identity');
+        return $this->setProperty('customerOrderItemId', $customerOrderItemId, 'Identity');
     }
 
     /**
@@ -85,11 +77,11 @@ class DeliveryNoteItem extends DataModel
     /**
      * @param  Identity $deliveryNoteId Reference to deliveryNote
      * @return \jtl\Connector\Model\DeliveryNoteItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setDeliveryNoteId(Identity $deliveryNoteId)
     {
-        return $this->setProperty('DeliveryNoteId', $deliveryNoteId, 'Identity');
+        return $this->setProperty('deliveryNoteId', $deliveryNoteId, 'Identity');
     }
 
     /**
@@ -103,11 +95,11 @@ class DeliveryNoteItem extends DataModel
     /**
      * @param  Identity $id Unique deliveryNoteItem id
      * @return \jtl\Connector\Model\DeliveryNoteItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -121,11 +113,11 @@ class DeliveryNoteItem extends DataModel
     /**
      * @param  Identity $warehouseId Optional reference to warehouse
      * @return \jtl\Connector\Model\DeliveryNoteItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setWarehouseId(Identity $warehouseId)
     {
-        return $this->setProperty('WarehouseId', $warehouseId, 'Identity');
+        return $this->setProperty('warehouseId', $warehouseId, 'Identity');
     }
 
     /**
@@ -139,11 +131,11 @@ class DeliveryNoteItem extends DataModel
     /**
      * @param  string $batchNumber Optional batch number
      * @return \jtl\Connector\Model\DeliveryNoteItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setBatchNumber(Identity $batchNumber)
+    public function setBatchNumber($batchNumber)
     {
-        return $this->setProperty('BatchNumber', $batchNumber, 'string');
+        return $this->setProperty('batchNumber', $batchNumber, 'string');
     }
 
     /**
@@ -157,11 +149,11 @@ class DeliveryNoteItem extends DataModel
     /**
      * @param  string $bestBefore Optional best before date
      * @return \jtl\Connector\Model\DeliveryNoteItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setBestBefore(Identity $bestBefore)
+    public function setBestBefore($bestBefore)
     {
-        return $this->setProperty('BestBefore', $bestBefore, 'string');
+        return $this->setProperty('bestBefore', $bestBefore, 'string');
     }
 
     /**
@@ -175,11 +167,11 @@ class DeliveryNoteItem extends DataModel
     /**
      * @param  double $quantity Quantity delivered
      * @return \jtl\Connector\Model\DeliveryNoteItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setQuantity(Identity $quantity)
+    public function setQuantity($quantity)
     {
-        return $this->setProperty('Quantity', $quantity, 'double');
+        return $this->setProperty('quantity', $quantity, 'double');
     }
 
     /**
@@ -193,11 +185,11 @@ class DeliveryNoteItem extends DataModel
     /**
      * @param  string $serialNumber Optional serial number
      * @return \jtl\Connector\Model\DeliveryNoteItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setSerialNumber(Identity $serialNumber)
+    public function setSerialNumber($serialNumber)
     {
-        return $this->setProperty('SerialNumber', $serialNumber, 'string');
+        return $this->setProperty('serialNumber', $serialNumber, 'string');
     }
 
     /**

@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * A category with sort number, link to parent category and level.
  *
@@ -15,71 +17,63 @@ namespace jtl\Connector\Model;
 class Category extends DataModel
 {
     /**
-     * @type Identity Unique category id
+     * @var Identity Unique category id
      */
     protected $id = null;
 
     /**
-     * @type Identity Optional reference to parent category id
+     * @var Identity Optional reference to parent category id
      */
     protected $parentCategoryId = null;
 
     /**
-     * @type int Optional category level (default 1 for first level)
+     * @var int Optional category level (default 1 for first level)
      */
     protected $level = 0;
 
     /**
-     * @type int Optional sort order number
+     * @var int Optional sort order number
      */
     protected $sort = 0;
 
     /**
-     * @type \jtl\Connector\Model\ParentCategory[]
+     * @var \jtl\Connector\Model\ParentCategory[]
      */
     protected $parent = array();
 
     /**
-     * @type \jtl\Connector\Model\CategoryInvisibility[]
+     * @var \jtl\Connector\Model\CategoryInvisibility[]
      */
     protected $invisibilities = array();
 
     /**
-     * @type \jtl\Connector\Model\CategoryI18n[]
+     * @var \jtl\Connector\Model\CategoryI18n[]
      */
     protected $i18ns = array();
 
     /**
-     * @type \jtl\Connector\Model\CategoryCustomerGroup[]
+     * @var \jtl\Connector\Model\CategoryCustomerGroup[]
      */
     protected $customerGroups = array();
 
     /**
-     * @type \jtl\Connector\Model\ChildCategory[]
+     * @var \jtl\Connector\Model\ChildCategory[]
      */
     protected $children = array();
 
     /**
-     * @type \jtl\Connector\Model\CategoryAttr[]
+     * @var \jtl\Connector\Model\CategoryAttr[]
      */
     protected $attributes = array();
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-        'parentCategoryId',
-    );
-
-    /**
      * @param  Identity $id Unique category id
      * @return \jtl\Connector\Model\Category
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -93,11 +87,11 @@ class Category extends DataModel
     /**
      * @param  Identity $parentCategoryId Optional reference to parent category id
      * @return \jtl\Connector\Model\Category
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setParentCategoryId(Identity $parentCategoryId)
     {
-        return $this->setProperty('ParentCategoryId', $parentCategoryId, 'Identity');
+        return $this->setProperty('parentCategoryId', $parentCategoryId, 'Identity');
     }
 
     /**
@@ -111,11 +105,11 @@ class Category extends DataModel
     /**
      * @param  int $level Optional category level (default 1 for first level)
      * @return \jtl\Connector\Model\Category
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setLevel(Identity $level)
+    public function setLevel($level)
     {
-        return $this->setProperty('Level', $level, 'int');
+        return $this->setProperty('level', $level, 'int');
     }
 
     /**
@@ -129,11 +123,11 @@ class Category extends DataModel
     /**
      * @param  int $sort Optional sort order number
      * @return \jtl\Connector\Model\Category
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setSort(Identity $sort)
+    public function setSort($sort)
     {
-        return $this->setProperty('Sort', $sort, 'int');
+        return $this->setProperty('sort', $sort, 'int');
     }
 
     /**

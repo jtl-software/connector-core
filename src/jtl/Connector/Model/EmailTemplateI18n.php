@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * .
  *
@@ -15,55 +17,48 @@ namespace jtl\Connector\Model;
 class EmailTemplateI18n extends DataModel
 {
     /**
-     * @type Identity 
+     * @var Identity 
      */
     protected $emailTemplateId = null;
 
     /**
-     * @type string 
+     * @var string 
      */
     protected $contentHtml = '';
 
     /**
-     * @type string 
+     * @var string 
      */
     protected $contentText = '';
 
     /**
-     * @type string 
+     * @var string 
      */
     protected $filename = '';
 
     /**
-     * @type string 
+     * @var string 
      */
     protected $localeName = '';
 
     /**
-     * @type string 
+     * @var string 
      */
     protected $pdf = '';
 
     /**
-     * @type string 
+     * @var string 
      */
     protected $subject = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'emailTemplateId',
-    );
-
-    /**
      * @param  Identity $emailTemplateId 
      * @return \jtl\Connector\Model\EmailTemplateI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setEmailTemplateId(Identity $emailTemplateId)
     {
-        return $this->setProperty('EmailTemplateId', $emailTemplateId, 'Identity');
+        return $this->setProperty('emailTemplateId', $emailTemplateId, 'Identity');
     }
 
     /**
@@ -77,11 +72,11 @@ class EmailTemplateI18n extends DataModel
     /**
      * @param  string $contentHtml 
      * @return \jtl\Connector\Model\EmailTemplateI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setContentHtml(Identity $contentHtml)
+    public function setContentHtml($contentHtml)
     {
-        return $this->setProperty('ContentHtml', $contentHtml, 'string');
+        return $this->setProperty('contentHtml', $contentHtml, 'string');
     }
 
     /**
@@ -95,11 +90,11 @@ class EmailTemplateI18n extends DataModel
     /**
      * @param  string $contentText 
      * @return \jtl\Connector\Model\EmailTemplateI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setContentText(Identity $contentText)
+    public function setContentText($contentText)
     {
-        return $this->setProperty('ContentText', $contentText, 'string');
+        return $this->setProperty('contentText', $contentText, 'string');
     }
 
     /**
@@ -113,11 +108,11 @@ class EmailTemplateI18n extends DataModel
     /**
      * @param  string $filename 
      * @return \jtl\Connector\Model\EmailTemplateI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setFilename(Identity $filename)
+    public function setFilename($filename)
     {
-        return $this->setProperty('Filename', $filename, 'string');
+        return $this->setProperty('filename', $filename, 'string');
     }
 
     /**
@@ -131,11 +126,11 @@ class EmailTemplateI18n extends DataModel
     /**
      * @param  string $localeName 
      * @return \jtl\Connector\Model\EmailTemplateI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName(Identity $localeName)
+    public function setLocaleName($localeName)
     {
-        return $this->setProperty('LocaleName', $localeName, 'string');
+        return $this->setProperty('localeName', $localeName, 'string');
     }
 
     /**
@@ -149,11 +144,11 @@ class EmailTemplateI18n extends DataModel
     /**
      * @param  string $pdf 
      * @return \jtl\Connector\Model\EmailTemplateI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setPdf(Identity $pdf)
+    public function setPdf($pdf)
     {
-        return $this->setProperty('Pdf', $pdf, 'string');
+        return $this->setProperty('pdf', $pdf, 'string');
     }
 
     /**
@@ -167,11 +162,11 @@ class EmailTemplateI18n extends DataModel
     /**
      * @param  string $subject 
      * @return \jtl\Connector\Model\EmailTemplateI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setSubject(Identity $subject)
+    public function setSubject($subject)
     {
-        return $this->setProperty('Subject', $subject, 'string');
+        return $this->setProperty('subject', $subject, 'string');
     }
 
     /**

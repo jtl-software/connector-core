@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Localized key-value-pair for categoryAttr. All properties must be specified. .
  *
@@ -15,40 +17,33 @@ namespace jtl\Connector\Model;
 class CategoryAttrI18n extends DataModel
 {
     /**
-     * @type Identity Reference to categoryAttr
+     * @var Identity Reference to categoryAttr
      */
     protected $categoryAttrId = null;
 
     /**
-     * @type string Attribute key
+     * @var string Attribute key
      */
     protected $key = '';
 
     /**
-     * @type string Locale
+     * @var string Locale
      */
     protected $localeName = '';
 
     /**
-     * @type string Attribute value
+     * @var string Attribute value
      */
     protected $value = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'categoryAttrId',
-    );
-
-    /**
      * @param  Identity $categoryAttrId Reference to categoryAttr
      * @return \jtl\Connector\Model\CategoryAttrI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCategoryAttrId(Identity $categoryAttrId)
     {
-        return $this->setProperty('CategoryAttrId', $categoryAttrId, 'Identity');
+        return $this->setProperty('categoryAttrId', $categoryAttrId, 'Identity');
     }
 
     /**
@@ -62,11 +57,11 @@ class CategoryAttrI18n extends DataModel
     /**
      * @param  string $key Attribute key
      * @return \jtl\Connector\Model\CategoryAttrI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setKey(Identity $key)
+    public function setKey($key)
     {
-        return $this->setProperty('Key', $key, 'string');
+        return $this->setProperty('key', $key, 'string');
     }
 
     /**
@@ -80,11 +75,11 @@ class CategoryAttrI18n extends DataModel
     /**
      * @param  string $localeName Locale
      * @return \jtl\Connector\Model\CategoryAttrI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName(Identity $localeName)
+    public function setLocaleName($localeName)
     {
-        return $this->setProperty('LocaleName', $localeName, 'string');
+        return $this->setProperty('localeName', $localeName, 'string');
     }
 
     /**
@@ -98,11 +93,11 @@ class CategoryAttrI18n extends DataModel
     /**
      * @param  string $value Attribute value
      * @return \jtl\Connector\Model\CategoryAttrI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setValue(Identity $value)
+    public function setValue($value)
     {
-        return $this->setProperty('Value', $value, 'string');
+        return $this->setProperty('value', $value, 'string');
     }
 
     /**

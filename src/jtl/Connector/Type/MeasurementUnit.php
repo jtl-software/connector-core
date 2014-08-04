@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package jtl\Connector\Type
  */
 
 namespace jtl\Connector\Type;
@@ -17,9 +17,9 @@ class MeasurementUnit extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('id', 'Identity', null, True, false, false),
-            new PropertyInfo('code', 'string', null, False, false, false),
-            new PropertyInfo('displayCode', 'string', null, False, false, false),
+            new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('code', 'string', null, false, false, false),
+            new PropertyInfo('displayCode', 'string', null, false, false, false),
         );
     }
 }

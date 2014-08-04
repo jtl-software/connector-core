@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Localized fileDownload name and  description..
  *
@@ -15,40 +17,33 @@ namespace jtl\Connector\Model;
 class FileDownloadI18n extends DataModel
 {
     /**
-     * @type Identity Reference to fileDownloadId
+     * @var Identity Reference to fileDownloadId
      */
     protected $fileDownloadId = null;
 
     /**
-     * @type string Optional File download description
+     * @var string Optional File download description
      */
     protected $description = '';
 
     /**
-     * @type string Locale
+     * @var string Locale
      */
     protected $localeName = '';
 
     /**
-     * @type string File download title / name
+     * @var string File download title / name
      */
     protected $name = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'fileDownloadId',
-    );
-
-    /**
      * @param  Identity $fileDownloadId Reference to fileDownloadId
      * @return \jtl\Connector\Model\FileDownloadI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setFileDownloadId(Identity $fileDownloadId)
     {
-        return $this->setProperty('FileDownloadId', $fileDownloadId, 'Identity');
+        return $this->setProperty('fileDownloadId', $fileDownloadId, 'Identity');
     }
 
     /**
@@ -62,11 +57,11 @@ class FileDownloadI18n extends DataModel
     /**
      * @param  string $description Optional File download description
      * @return \jtl\Connector\Model\FileDownloadI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setDescription(Identity $description)
+    public function setDescription($description)
     {
-        return $this->setProperty('Description', $description, 'string');
+        return $this->setProperty('description', $description, 'string');
     }
 
     /**
@@ -80,11 +75,11 @@ class FileDownloadI18n extends DataModel
     /**
      * @param  string $localeName Locale
      * @return \jtl\Connector\Model\FileDownloadI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName(Identity $localeName)
+    public function setLocaleName($localeName)
     {
-        return $this->setProperty('LocaleName', $localeName, 'string');
+        return $this->setProperty('localeName', $localeName, 'string');
     }
 
     /**
@@ -98,11 +93,11 @@ class FileDownloadI18n extends DataModel
     /**
      * @param  string $name File download title / name
      * @return \jtl\Connector\Model\FileDownloadI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setName(Identity $name)
+    public function setName($name)
     {
-        return $this->setProperty('Name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
 
     /**

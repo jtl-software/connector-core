@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Customer order properties..
  *
@@ -15,178 +17,168 @@ namespace jtl\Connector\Model;
 class CustomerOrder extends DataModel
 {
     /**
-     * @type Identity Reference to billingAddress
+     * @var Identity Reference to billingAddress
      */
     protected $billingAddressId = null;
 
     /**
-     * @type Identity Optional reference to customer. 
+     * @var Identity Optional reference to customer. 
      */
     protected $customerId = null;
 
     /**
-     * @type Identity Unique customerOrder id
+     * @var Identity Unique customerOrder id
      */
     protected $id = null;
 
     /**
-     * @type Identity Reference to shippingAddress
+     * @var Identity Reference to shippingAddress
      */
     protected $shippingAddressId = null;
 
     /**
-     * @type string Optional Carrier name
+     * @var string Optional Carrier name
      */
     protected $carrierName = '';
 
     /**
-     * @type string Date of creation
+     * @var DateTime Date of creation
      */
-    protected $created = '';
+    protected $created = null;
 
     /**
-     * @type double Optional customer credit (credit reduces total sum)
+     * @var double Optional customer credit (credit reduces total sum)
      */
     protected $credit = 0.0;
 
     /**
-     * @type string Currency ISO set, when customerOrder was finished
+     * @var string Currency ISO set, when customerOrder was finished
      */
     protected $currencyIso = '';
 
     /**
-     * @type string Optional Estimated delivery date set by ERP System
+     * @var string Optional Estimated delivery date set by ERP System
      */
     protected $estimatedDeliveryDate = '';
 
     /**
-     * @type string Optional customer IP address at the time of checkout. Do not store full IP-Adress (dependent on local laws or regulations)
+     * @var string Optional customer IP address at the time of checkout. Do not store full IP-Adress (dependent on local laws or regulations)
      */
     protected $ip = '';
 
     /**
-     * @type bool Optional flag, if customerOrder is fetched by ERP System
+     * @var bool Optional flag, if customerOrder is fetched by ERP System
      */
     protected $isFetched = false;
 
     /**
-     * @type string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
+     * @var string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
      */
     protected $localeName = '';
 
     /**
-     * @type string Optional additional note
+     * @var string Optional additional note
      */
     protected $note = '';
 
     /**
-     * @type string Optional order number (usually set by ERP System later)
+     * @var string Optional order number (usually set by ERP System later)
      */
     protected $orderNumber = '';
 
     /**
-     * @type string Payment date
+     * @var string Payment date
      */
     protected $paymentDate = '';
 
     /**
-     * @type string Optional payment module code
+     * @var string Optional payment module code
      */
     protected $paymentModuleCode = '';
 
     /**
-     * @type string Date from when customer will receive notification to rate order
+     * @var string Date from when customer will receive notification to rate order
      */
     protected $ratingNotificationDate = '';
 
     /**
-     * @type string Optional session id or session hash
+     * @var string Optional session id or session hash
      */
     protected $session = '';
 
     /**
-     * @type string Shipping date
+     * @var string Shipping date
      */
     protected $shippingDate = '';
 
     /**
-     * @type string Additional shipping info
+     * @var string Additional shipping info
      */
     protected $shippingInfo = '';
 
     /**
-     * @type string Identifier code for shippingMethod
+     * @var string Identifier code for shippingMethod
      */
     protected $shippingMethodCode = '';
 
     /**
-     * @type string Optional shipping method name
+     * @var string Optional shipping method name
      */
     protected $shippingMethodName = '';
 
     /**
-     * @type string Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
+     * @var string Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
      */
     protected $status = '';
 
     /**
-     * @type double Total sum to pay
+     * @var double Total sum to pay
      */
     protected $totalSum = 0.0;
 
     /**
-     * @type string Optional TrackingID (not Tracking URL)
+     * @var string Optional TrackingID (not Tracking URL)
      */
     protected $tracking = '';
 
     /**
-     * @type string Optional Tracking URL
+     * @var string Optional Tracking URL
      */
     protected $trackingURL = '';
 
     /**
-     * @type \jtl\Connector\Model\CustomerOrderShippingAddress[]
+     * @var \jtl\Connector\Model\CustomerOrderShippingAddress[]
      */
     protected $shippingAddress = array();
 
     /**
-     * @type \jtl\Connector\Model\CustomerOrderPosition[]
+     * @var \jtl\Connector\Model\CustomerOrderPosition[]
      */
     protected $positions = array();
 
     /**
-     * @type \jtl\Connector\Model\CustomerOrderPaymentInfo[]
+     * @var \jtl\Connector\Model\CustomerOrderPaymentInfo[]
      */
     protected $paymentInfo = array();
 
     /**
-     * @type \jtl\Connector\Model\CustomerOrderBillingAddress[]
+     * @var \jtl\Connector\Model\CustomerOrderBillingAddress[]
      */
     protected $billingAddress = array();
 
     /**
-     * @type \jtl\Connector\Model\CustomerOrderAttr[]
+     * @var \jtl\Connector\Model\CustomerOrderAttr[]
      */
     protected $attributes = array();
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'billingAddressId',
-        'customerId',
-        'id',
-        'shippingAddressId',
-    );
-
-    /**
      * @param  Identity $billingAddressId Reference to billingAddress
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setBillingAddressId(Identity $billingAddressId)
     {
-        return $this->setProperty('BillingAddressId', $billingAddressId, 'Identity');
+        return $this->setProperty('billingAddressId', $billingAddressId, 'Identity');
     }
 
     /**
@@ -200,11 +192,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  Identity $customerId Optional reference to customer. 
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerId(Identity $customerId)
     {
-        return $this->setProperty('CustomerId', $customerId, 'Identity');
+        return $this->setProperty('customerId', $customerId, 'Identity');
     }
 
     /**
@@ -218,11 +210,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  Identity $id Unique customerOrder id
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -236,11 +228,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  Identity $shippingAddressId Reference to shippingAddress
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setShippingAddressId(Identity $shippingAddressId)
     {
-        return $this->setProperty('ShippingAddressId', $shippingAddressId, 'Identity');
+        return $this->setProperty('shippingAddressId', $shippingAddressId, 'Identity');
     }
 
     /**
@@ -254,11 +246,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  string $carrierName Optional Carrier name
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setCarrierName(Identity $carrierName)
+    public function setCarrierName($carrierName)
     {
-        return $this->setProperty('CarrierName', $carrierName, 'string');
+        return $this->setProperty('carrierName', $carrierName, 'string');
     }
 
     /**
@@ -270,17 +262,17 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param  string $created Date of creation
+     * @param  DateTime $created Date of creation
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreated(Identity $created)
+    public function setCreated(DateTime $created)
     {
-        return $this->setProperty('Created', $created, 'string');
+        return $this->setProperty('created', $created, 'DateTime');
     }
 
     /**
-     * @return string Date of creation
+     * @return DateTime Date of creation
      */
     public function getCreated()
     {
@@ -290,11 +282,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  double $credit Optional customer credit (credit reduces total sum)
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setCredit(Identity $credit)
+    public function setCredit($credit)
     {
-        return $this->setProperty('Credit', $credit, 'double');
+        return $this->setProperty('credit', $credit, 'double');
     }
 
     /**
@@ -308,11 +300,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  string $currencyIso Currency ISO set, when customerOrder was finished
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setCurrencyIso(Identity $currencyIso)
+    public function setCurrencyIso($currencyIso)
     {
-        return $this->setProperty('CurrencyIso', $currencyIso, 'string');
+        return $this->setProperty('currencyIso', $currencyIso, 'string');
     }
 
     /**
@@ -326,11 +318,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  string $estimatedDeliveryDate Optional Estimated delivery date set by ERP System
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setEstimatedDeliveryDate(Identity $estimatedDeliveryDate)
+    public function setEstimatedDeliveryDate($estimatedDeliveryDate)
     {
-        return $this->setProperty('EstimatedDeliveryDate', $estimatedDeliveryDate, 'string');
+        return $this->setProperty('estimatedDeliveryDate', $estimatedDeliveryDate, 'string');
     }
 
     /**
@@ -344,11 +336,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  string $ip Optional customer IP address at the time of checkout. Do not store full IP-Adress (dependent on local laws or regulations)
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setIp(Identity $ip)
+    public function setIp($ip)
     {
-        return $this->setProperty('Ip', $ip, 'string');
+        return $this->setProperty('ip', $ip, 'string');
     }
 
     /**
@@ -362,11 +354,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  bool $isFetched Optional flag, if customerOrder is fetched by ERP System
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setIsFetched(Identity $isFetched)
+    public function setIsFetched($isFetched)
     {
-        return $this->setProperty('IsFetched', $isFetched, 'bool');
+        return $this->setProperty('isFetched', $isFetched, 'bool');
     }
 
     /**
@@ -380,11 +372,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  string $localeName Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName(Identity $localeName)
+    public function setLocaleName($localeName)
     {
-        return $this->setProperty('LocaleName', $localeName, 'string');
+        return $this->setProperty('localeName', $localeName, 'string');
     }
 
     /**
@@ -398,11 +390,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  string $note Optional additional note
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setNote(Identity $note)
+    public function setNote($note)
     {
-        return $this->setProperty('Note', $note, 'string');
+        return $this->setProperty('note', $note, 'string');
     }
 
     /**
@@ -416,11 +408,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  string $orderNumber Optional order number (usually set by ERP System later)
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setOrderNumber(Identity $orderNumber)
+    public function setOrderNumber($orderNumber)
     {
-        return $this->setProperty('OrderNumber', $orderNumber, 'string');
+        return $this->setProperty('orderNumber', $orderNumber, 'string');
     }
 
     /**
@@ -434,11 +426,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  string $paymentDate Payment date
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setPaymentDate(Identity $paymentDate)
+    public function setPaymentDate($paymentDate)
     {
-        return $this->setProperty('PaymentDate', $paymentDate, 'string');
+        return $this->setProperty('paymentDate', $paymentDate, 'string');
     }
 
     /**
@@ -452,11 +444,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  string $paymentModuleCode Optional payment module code
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setPaymentModuleCode(Identity $paymentModuleCode)
+    public function setPaymentModuleCode($paymentModuleCode)
     {
-        return $this->setProperty('PaymentModuleCode', $paymentModuleCode, 'string');
+        return $this->setProperty('paymentModuleCode', $paymentModuleCode, 'string');
     }
 
     /**
@@ -470,11 +462,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  string $ratingNotificationDate Date from when customer will receive notification to rate order
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setRatingNotificationDate(Identity $ratingNotificationDate)
+    public function setRatingNotificationDate($ratingNotificationDate)
     {
-        return $this->setProperty('RatingNotificationDate', $ratingNotificationDate, 'string');
+        return $this->setProperty('ratingNotificationDate', $ratingNotificationDate, 'string');
     }
 
     /**
@@ -488,11 +480,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  string $session Optional session id or session hash
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setSession(Identity $session)
+    public function setSession($session)
     {
-        return $this->setProperty('Session', $session, 'string');
+        return $this->setProperty('session', $session, 'string');
     }
 
     /**
@@ -506,11 +498,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  string $shippingDate Shipping date
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setShippingDate(Identity $shippingDate)
+    public function setShippingDate($shippingDate)
     {
-        return $this->setProperty('ShippingDate', $shippingDate, 'string');
+        return $this->setProperty('shippingDate', $shippingDate, 'string');
     }
 
     /**
@@ -524,11 +516,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  string $shippingInfo Additional shipping info
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setShippingInfo(Identity $shippingInfo)
+    public function setShippingInfo($shippingInfo)
     {
-        return $this->setProperty('ShippingInfo', $shippingInfo, 'string');
+        return $this->setProperty('shippingInfo', $shippingInfo, 'string');
     }
 
     /**
@@ -542,11 +534,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  string $shippingMethodCode Identifier code for shippingMethod
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setShippingMethodCode(Identity $shippingMethodCode)
+    public function setShippingMethodCode($shippingMethodCode)
     {
-        return $this->setProperty('ShippingMethodCode', $shippingMethodCode, 'string');
+        return $this->setProperty('shippingMethodCode', $shippingMethodCode, 'string');
     }
 
     /**
@@ -560,11 +552,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  string $shippingMethodName Optional shipping method name
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setShippingMethodName(Identity $shippingMethodName)
+    public function setShippingMethodName($shippingMethodName)
     {
-        return $this->setProperty('ShippingMethodName', $shippingMethodName, 'string');
+        return $this->setProperty('shippingMethodName', $shippingMethodName, 'string');
     }
 
     /**
@@ -578,11 +570,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  string $status Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setStatus(Identity $status)
+    public function setStatus($status)
     {
-        return $this->setProperty('Status', $status, 'string');
+        return $this->setProperty('status', $status, 'string');
     }
 
     /**
@@ -596,11 +588,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  double $totalSum Total sum to pay
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setTotalSum(Identity $totalSum)
+    public function setTotalSum($totalSum)
     {
-        return $this->setProperty('TotalSum', $totalSum, 'double');
+        return $this->setProperty('totalSum', $totalSum, 'double');
     }
 
     /**
@@ -614,11 +606,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  string $tracking Optional TrackingID (not Tracking URL)
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setTracking(Identity $tracking)
+    public function setTracking($tracking)
     {
-        return $this->setProperty('Tracking', $tracking, 'string');
+        return $this->setProperty('tracking', $tracking, 'string');
     }
 
     /**
@@ -632,11 +624,11 @@ class CustomerOrder extends DataModel
     /**
      * @param  string $trackingURL Optional Tracking URL
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setTrackingURL(Identity $trackingURL)
+    public function setTrackingURL($trackingURL)
     {
-        return $this->setProperty('TrackingURL', $trackingURL, 'string');
+        return $this->setProperty('trackingURL', $trackingURL, 'string');
     }
 
     /**

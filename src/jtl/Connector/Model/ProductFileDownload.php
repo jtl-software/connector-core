@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Product to FileDownload allocation..
  *
@@ -15,31 +17,23 @@ namespace jtl\Connector\Model;
 class ProductFileDownload extends DataModel
 {
     /**
-     * @type Identity Reference to fileDownload
+     * @var Identity Reference to fileDownload
      */
     protected $fileDownloadId = null;
 
     /**
-     * @type Identity Reference to product
+     * @var Identity Reference to product
      */
     protected $productId = null;
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'fileDownloadId',
-        'productId',
-    );
-
-    /**
      * @param  Identity $fileDownloadId Reference to fileDownload
      * @return \jtl\Connector\Model\ProductFileDownload
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setFileDownloadId(Identity $fileDownloadId)
     {
-        return $this->setProperty('FileDownloadId', $fileDownloadId, 'Identity');
+        return $this->setProperty('fileDownloadId', $fileDownloadId, 'Identity');
     }
 
     /**
@@ -53,11 +47,11 @@ class ProductFileDownload extends DataModel
     /**
      * @param  Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductFileDownload
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('ProductId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
 
     /**

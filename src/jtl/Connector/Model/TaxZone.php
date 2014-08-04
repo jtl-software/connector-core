@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Tax zone model (set in JTL-Wawi ERP)..
  *
@@ -15,30 +17,23 @@ namespace jtl\Connector\Model;
 class TaxZone extends DataModel
 {
     /**
-     * @type Identity Unique taxZone id
+     * @var Identity Unique taxZone id
      */
     protected $id = null;
 
     /**
-     * @type string Optional tax zone name e.g. "EU Zone"
+     * @var string Optional tax zone name e.g. "EU Zone"
      */
     protected $name = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-    );
-
-    /**
      * @param  Identity $id Unique taxZone id
      * @return \jtl\Connector\Model\TaxZone
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -52,11 +47,11 @@ class TaxZone extends DataModel
     /**
      * @param  string $name Optional tax zone name e.g. "EU Zone"
      * @return \jtl\Connector\Model\TaxZone
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setName(Identity $name)
+    public function setName($name)
     {
-        return $this->setProperty('Name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
 
     /**

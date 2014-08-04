@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * ProductType model to classify and group products..
  *
@@ -15,30 +17,23 @@ namespace jtl\Connector\Model;
 class ProductType extends DataModel
 {
     /**
-     * @type Identity Unique productType id
+     * @var Identity Unique productType id
      */
     protected $id = null;
 
     /**
-     * @type string Optional (internal) product type name
+     * @var string Optional (internal) product type name
      */
     protected $name = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-    );
-
-    /**
      * @param  Identity $id Unique productType id
      * @return \jtl\Connector\Model\ProductType
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -52,11 +47,11 @@ class ProductType extends DataModel
     /**
      * @param  string $name Optional (internal) product type name
      * @return \jtl\Connector\Model\ProductType
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setName(Identity $name)
+    public function setName($name)
     {
-        return $this->setProperty('Name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
 
     /**

@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Tax class model (set in JTL-Wawi ERP).
  *
@@ -15,35 +17,28 @@ namespace jtl\Connector\Model;
 class TaxClass extends DataModel
 {
     /**
-     * @type Identity Unique taxClass id
+     * @var Identity Unique taxClass id
      */
     protected $id = null;
 
     /**
-     * @type bool Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
+     * @var bool Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
      */
     protected $isDefault = false;
 
     /**
-     * @type string Optional tax class name
+     * @var string Optional tax class name
      */
     protected $name = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-    );
-
-    /**
      * @param  Identity $id Unique taxClass id
      * @return \jtl\Connector\Model\TaxClass
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -57,11 +52,11 @@ class TaxClass extends DataModel
     /**
      * @param  bool $isDefault Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
      * @return \jtl\Connector\Model\TaxClass
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setIsDefault(Identity $isDefault)
+    public function setIsDefault($isDefault)
     {
-        return $this->setProperty('IsDefault', $isDefault, 'bool');
+        return $this->setProperty('isDefault', $isDefault, 'bool');
     }
 
     /**
@@ -75,11 +70,11 @@ class TaxClass extends DataModel
     /**
      * @param  string $name Optional tax class name
      * @return \jtl\Connector\Model\TaxClass
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setName(Identity $name)
+    public function setName($name)
     {
-        return $this->setProperty('Name', $name, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
 
     /**

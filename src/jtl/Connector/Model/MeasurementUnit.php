@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Model;
 
+use \DateTime;
+
 /**
  * Specifies product units like "ml", "l", " cm"..
  *
@@ -15,35 +17,28 @@ namespace jtl\Connector\Model;
 class MeasurementUnit extends DataModel
 {
     /**
-     * @type Identity Unit id
+     * @var Identity Unit id
      */
     protected $id = null;
 
     /**
-     * @type string Optional UCUM-Code, see  http://unitsofmeasure.org/
+     * @var string Optional UCUM-Code, see  http://unitsofmeasure.org/
      */
     protected $code = '';
 
     /**
-     * @type string Synonym e.g. 'ml'
+     * @var string Synonym e.g. 'ml'
      */
     protected $displayCode = '';
 
     /**
-     * @type array list of identities
-     */
-     protected $identities = array(
-        'id',
-    );
-
-    /**
      * @param  Identity $id Unit id
      * @return \jtl\Connector\Model\MeasurementUnit
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('Id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
@@ -57,11 +52,11 @@ class MeasurementUnit extends DataModel
     /**
      * @param  string $code Optional UCUM-Code, see  http://unitsofmeasure.org/
      * @return \jtl\Connector\Model\MeasurementUnit
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setCode(Identity $code)
+    public function setCode($code)
     {
-        return $this->setProperty('Code', $code, 'string');
+        return $this->setProperty('code', $code, 'string');
     }
 
     /**
@@ -75,11 +70,11 @@ class MeasurementUnit extends DataModel
     /**
      * @param  string $displayCode Synonym e.g. 'ml'
      * @return \jtl\Connector\Model\MeasurementUnit
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setDisplayCode(Identity $displayCode)
+    public function setDisplayCode($displayCode)
     {
-        return $this->setProperty('DisplayCode', $displayCode, 'string');
+        return $this->setProperty('displayCode', $displayCode, 'string');
     }
 
     /**
