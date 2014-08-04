@@ -25,82 +25,17 @@ class CategoryAttr extends DataModel
     protected $id = null;
 
     /**
-     * @type string 
-     */
-    protected $name = '';
-
-    /**
-     * @type integer 
+     * @type int Optional sort number
      */
     protected $sort = 0;
 
     /**
-     * @type string 
-     */
-    protected $value = '';
-
-
-    /**
      * @type array list of identities
      */
-    protected $identities = array(
-        'id',
+     protected $identities = array(
         'categoryId',
+        'id',
     );
-
-    /**
-     * @param  string $name 
-     * @return \jtl\Connector\Model\CategoryAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setName($name)
-    {
-        return $this->setProperty('name', $name, 'string');
-    }
-    
-    /**
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param  string $value 
-     * @return \jtl\Connector\Model\CategoryAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setValue($value)
-    {
-        return $this->setProperty('value', $value, 'string');
-    }
-    
-    /**
-     * @return string 
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    /**
-     * @param  Identity $id Unique categoryAttr id
-     * @return \jtl\Connector\Model\CategoryAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id)
-    {
-        return $this->setProperty('id', $id, 'Identity');
-    }
-    
-    /**
-     * @return Identity Unique categoryAttr id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * @param  Identity $categoryId Reference to category
@@ -109,9 +44,9 @@ class CategoryAttr extends DataModel
      */
     public function setCategoryId(Identity $categoryId)
     {
-        return $this->setProperty('categoryId', $categoryId, 'Identity');
+        return $this->setProperty('CategoryId', $categoryId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to category
      */
@@ -121,21 +56,40 @@ class CategoryAttr extends DataModel
     }
 
     /**
-     * @param  integer $sort 
+     * @param  Identity $id Unique categoryAttr id
      * @return \jtl\Connector\Model\CategoryAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setSort($sort)
+    public function setId(Identity $id)
     {
-        return $this->setProperty('sort', $sort, 'integer');
+        return $this->setProperty('Id', $id, 'Identity');
     }
-    
+
     /**
-     * @return integer 
+     * @return Identity Unique categoryAttr id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param  int $sort Optional sort number
+     * @return \jtl\Connector\Model\CategoryAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setSort(Identity $sort)
+    {
+        return $this->setProperty('Sort', $sort, 'int');
+    }
+
+    /**
+     * @return int Optional sort number
      */
     public function getSort()
     {
         return $this->sort;
     }
-}
 
+ 
+}

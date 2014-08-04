@@ -17,11 +17,6 @@ class ProductVariationValueDependency extends DataModel
     /**
      * @type Identity 
      */
-    protected $id = null;
-
-    /**
-     * @type Identity 
-     */
     protected $productVariationValueId = null;
 
     /**
@@ -29,33 +24,13 @@ class ProductVariationValueDependency extends DataModel
      */
     protected $productVariationValueTargetId = null;
 
-
     /**
      * @type array list of identities
      */
-    protected $identities = array(
-        'id',
+     protected $identities = array(
         'productVariationValueId',
         'productVariationValueTargetId',
     );
-
-    /**
-     * @param  Identity $id 
-     * @return \jtl\Connector\Model\ProductVariationValueDependency
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id)
-    {
-        return $this->setProperty('id', $id, 'Identity');
-    }
-    
-    /**
-     * @return Identity 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * @param  Identity $productVariationValueId 
@@ -64,9 +39,9 @@ class ProductVariationValueDependency extends DataModel
      */
     public function setProductVariationValueId(Identity $productVariationValueId)
     {
-        return $this->setProperty('productVariationValueId', $productVariationValueId, 'Identity');
+        return $this->setProperty('ProductVariationValueId', $productVariationValueId, 'Identity');
     }
-    
+
     /**
      * @return Identity 
      */
@@ -82,9 +57,9 @@ class ProductVariationValueDependency extends DataModel
      */
     public function setProductVariationValueTargetId(Identity $productVariationValueTargetId)
     {
-        return $this->setProperty('productVariationValueTargetId', $productVariationValueTargetId, 'Identity');
+        return $this->setProperty('ProductVariationValueTargetId', $productVariationValueTargetId, 'Identity');
     }
-    
+
     /**
      * @return Identity 
      */
@@ -92,5 +67,6 @@ class ProductVariationValueDependency extends DataModel
     {
         return $this->productVariationValueTargetId;
     }
-}
 
+ 
+}

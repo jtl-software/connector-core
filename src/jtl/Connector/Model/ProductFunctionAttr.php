@@ -1,8 +1,7 @@
-﻿<?php
+<?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 
 namespace jtl\Connector\Model;
@@ -12,153 +11,108 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage #todo: get_main_controller#
  */
 class ProductFunctionAttr extends DataModel
 {
     /**
      * @type Identity Unique productFunctionAttr id
      */
-    protected $_id = null;
+    protected $id = null;
 
     /**
      * @type Identity Reference to product
      */
-    protected $_productId = null;
+    protected $productId = null;
 
     /**
      * @type string Attribute key
      */
-    protected $_key = '';
+    protected $key = '';
 
     /**
      * @type string Attribute value
      */
-    protected $_value = '';
+    protected $value = '';
 
     /**
-	 * Nav [ProductFunctionAttr » Many]
-	 *
-     * @type \jtl\Connector\Model\Product[]
+     * @type array list of identities
      */
-    protected $_product = array();
+     protected $identities = array(
+        'id',
+        'productId',
+    );
 
+    /**
+     * @param  Identity $id Unique productFunctionAttr id
+     * @return \jtl\Connector\Model\ProductFunctionAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setId(Identity $id)
+    {
+        return $this->setProperty('Id', $id, 'Identity');
+    }
 
-	/**
-	 * @type array
-	 */
-	protected $_identities = array(
-		'_id',
-		'_productId',
-	);
+    /**
+     * @return Identity Unique productFunctionAttr id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
-	/**
-	 * @param  string $key Attribute key
-	 * @return \jtl\Connector\Model\ProductFunctionAttr
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setKey($key)
-	{
-		if (!is_string($key))
-			throw new InvalidArgumentException('string expected.');
-		$this->_key = $key;
-		return $this;
-	}
-	
-	/**
-	 * @return string Attribute key
-	 */
-	public function getKey()
-	{
-		return $this->_key;
-	}
+    /**
+     * @param  Identity $productId Reference to product
+     * @return \jtl\Connector\Model\ProductFunctionAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setProductId(Identity $productId)
+    {
+        return $this->setProperty('ProductId', $productId, 'Identity');
+    }
 
-	/**
-	 * @param  string $value Attribute value
-	 * @return \jtl\Connector\Model\ProductFunctionAttr
-	 * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-	 */
-	public function setValue($value)
-	{
-		if (!is_string($value))
-			throw new InvalidArgumentException('string expected.');
-		$this->_value = $value;
-		return $this;
-	}
-	
-	/**
-	 * @return string Attribute value
-	 */
-	public function getValue()
-	{
-		return $this->_value;
-	}
+    /**
+     * @return Identity Reference to product
+     */
+    public function getProductId()
+    {
+        return $this->productId;
+    }
 
-	/**
-	 * @param  Identity $id Unique productFunctionAttr id
-	 * @return \jtl\Connector\Model\ProductFunctionAttr
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setId(Identity $id)
-	{
-		
-		$this->_id = $id;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity Unique productFunctionAttr id
-	 */
-	public function getId()
-	{
-		return $this->_id;
-	}
+    /**
+     * @param  string $key Attribute key
+     * @return \jtl\Connector\Model\ProductFunctionAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setKey(Identity $key)
+    {
+        return $this->setProperty('Key', $key, 'string');
+    }
 
-	/**
-	 * @param  Identity $productId Reference to product
-	 * @return \jtl\Connector\Model\ProductFunctionAttr
-	 * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-	 */
-	public function setProductId(Identity $productId)
-	{
-		
-		$this->_productId = $productId;
-		return $this;
-	}
-	
-	/**
-	 * @return Identity Reference to product
-	 */
-	public function getProductId()
-	{
-		return $this->_productId;
-	}
+    /**
+     * @return string Attribute key
+     */
+    public function getKey()
+    {
+        return $this->key;
+    }
 
-	/**
-	 * @param  \jtl\Connector\Model\Product $product
-	 * @return \jtl\Connector\Model\ProductFunctionAttr
-	 */
-	public function addProduct(\jtl\Connector\Model\Product $product)
-	{
-		$this->_product[] = $product;
-		return $this;
-	}
-	
-	/**
-	 * @return Product
-	 */
-	public function getProduct()
-	{
-		return $this->_product;
-	}
+    /**
+     * @param  string $value Attribute value
+     * @return \jtl\Connector\Model\ProductFunctionAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setValue(Identity $value)
+    {
+        return $this->setProperty('Value', $value, 'string');
+    }
 
-	/**
-	 * @return \jtl\Connector\Model\ProductFunctionAttr
-	 */
-	public function clearProduct()
-	{
-		$this->_product = array();
-		return $this;
-	}
+    /**
+     * @return string Attribute value
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+ 
 }
-

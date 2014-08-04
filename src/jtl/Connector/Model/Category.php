@@ -25,160 +25,52 @@ class Category extends DataModel
     protected $parentCategoryId = null;
 
     /**
-     * @type string 
-     */
-    protected $description = '';
-
-    /**
-     * @type boolean 
-     */
-    protected $flagDelete = false;
-
-    /**
-     * @type boolean 
-     */
-    protected $flagUpdate = false;
-
-    /**
-     * @type boolean 
-     */
-    protected $isActive = false;
-
-    /**
-     * @type integer 
+     * @type int Optional category level (default 1 for first level)
      */
     protected $level = 0;
 
     /**
-     * @type string 
-     */
-    protected $name = '';
-
-    /**
-     * @type integer|null Optional sort order number
+     * @type int Optional sort order number
      */
     protected $sort = 0;
 
     /**
-     * @type string 
+     * @type \jtl\Connector\Model\ParentCategory[]
      */
-    protected $url = '';
+    protected $parent = array();
 
     /**
-     * Nav [ParentCategory » ZeroOrOne]
-     *
-     * @type \jtl\Connector\Model\Category[]
-     */
-    protected $children = array();
-
-    /**
-     * Nav [Category » One]
-     *
-     * @type \jtl\Connector\Model\CategoryI18n[]
-     */
-    protected $i18ns = array();
-
-    /**
-     * Nav [Category » One]
-     *
      * @type \jtl\Connector\Model\CategoryInvisibility[]
      */
     protected $invisibilities = array();
 
     /**
-     * Nav [Category » One]
-     *
+     * @type \jtl\Connector\Model\CategoryI18n[]
+     */
+    protected $i18ns = array();
+
+    /**
      * @type \jtl\Connector\Model\CategoryCustomerGroup[]
      */
     protected $customerGroups = array();
 
     /**
-     * Nav [Category » One]
-     *
+     * @type \jtl\Connector\Model\ChildCategory[]
+     */
+    protected $children = array();
+
+    /**
      * @type \jtl\Connector\Model\CategoryAttr[]
      */
     protected $attributes = array();
 
-
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
         'id',
         'parentCategoryId',
     );
-
-    /**
-     * @param  string $name 
-     * @return \jtl\Connector\Model\Category
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setName($name)
-    {
-        return $this->setProperty('name', $name, 'string');
-    }
-    
-    /**
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param  string $description 
-     * @return \jtl\Connector\Model\Category
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setDescription($description)
-    {
-        return $this->setProperty('description', $description, 'string');
-    }
-    
-    /**
-     * @return string 
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param  integer $sort Optional sort order number
-     * @return \jtl\Connector\Model\Category
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-     */
-    public function setSort($sort)
-    {
-        return $this->setProperty('sort', $sort, 'integer');
-    }
-    
-    /**
-     * @return integer Optional sort order number
-     */
-    public function getSort()
-    {
-        return $this->sort;
-    }
-
-    /**
-     * @param  string $url 
-     * @return \jtl\Connector\Model\Category
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setUrl($url)
-    {
-        return $this->setProperty('url', $url, 'string');
-    }
-    
-    /**
-     * @return string 
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
 
     /**
      * @param  Identity $id Unique category id
@@ -187,9 +79,9 @@ class Category extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        return $this->setProperty('Id', $id, 'Identity');
     }
-    
+
     /**
      * @return Identity Unique category id
      */
@@ -205,9 +97,9 @@ class Category extends DataModel
      */
     public function setParentCategoryId(Identity $parentCategoryId)
     {
-        return $this->setProperty('parentCategoryId', $parentCategoryId, 'Identity');
+        return $this->setProperty('ParentCategoryId', $parentCategoryId, 'Identity');
     }
-    
+
     /**
      * @return Identity Optional reference to parent category id
      */
@@ -217,71 +109,17 @@ class Category extends DataModel
     }
 
     /**
-     * @param  boolean $flagUpdate 
+     * @param  int $level Optional category level (default 1 for first level)
      * @return \jtl\Connector\Model\Category
-     * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setFlagUpdate($flagUpdate)
+    public function setLevel(Identity $level)
     {
-        return $this->setProperty('flagUpdate', $flagUpdate, 'boolean');
-    }
-    
-    /**
-     * @return boolean 
-     */
-    public function getFlagUpdate()
-    {
-        return $this->flagUpdate;
+        return $this->setProperty('Level', $level, 'int');
     }
 
     /**
-     * @param  boolean $isActive 
-     * @return \jtl\Connector\Model\Category
-     * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
-     */
-    public function setIsActive($isActive)
-    {
-        return $this->setProperty('isActive', $isActive, 'boolean');
-    }
-    
-    /**
-     * @return boolean 
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
-    }
-
-    /**
-     * @param  boolean $flagDelete 
-     * @return \jtl\Connector\Model\Category
-     * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
-     */
-    public function setFlagDelete($flagDelete)
-    {
-        return $this->setProperty('flagDelete', $flagDelete, 'boolean');
-    }
-    
-    /**
-     * @return boolean 
-     */
-    public function getFlagDelete()
-    {
-        return $this->flagDelete;
-    }
-
-    /**
-     * @param  integer $level 
-     * @return \jtl\Connector\Model\Category
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-     */
-    public function setLevel($level)
-    {
-        return $this->setProperty('level', $level, 'integer');
-    }
-    
-    /**
-     * @return integer 
+     * @return int Optional category level (default 1 for first level)
      */
     public function getLevel()
     {
@@ -289,61 +127,51 @@ class Category extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\Category $child
+     * @param  int $sort Optional sort order number
+     * @return \jtl\Connector\Model\Category
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setSort(Identity $sort)
+    {
+        return $this->setProperty('Sort', $sort, 'int');
+    }
+
+    /**
+     * @return int Optional sort order number
+     */
+    public function getSort()
+    {
+        return $this->sort;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\ParentCategory $parent
      * @return \jtl\Connector\Model\Category
      */
-    public function addChild(\jtl\Connector\Model\Category $child)
+    public function addParent(\jtl\Connector\Model\ParentCategory $parent)
     {
-        $this->children[] = $child;
+        $this->parent[] = $parent;
         return $this;
     }
     
     /**
-     * @return Category
+     * @return \jtl\Connector\Model\ParentCategory[]
      */
-    public function getChildren()
+    public function getParent()
     {
-        return $this->children;
+        return $this->parent;
     }
 
     /**
      * @return \jtl\Connector\Model\Category
      */
-    public function clearChildren()
+    public function clearParent()
     {
-        $this->children = array();
+        $this->parent = array();
         return $this;
     }
-
     /**
-     * @param  \jtl\Connector\Model\CategoryI18n $i18n
-     * @return \jtl\Connector\Model\Category
-     */
-    public function addI18n(\jtl\Connector\Model\CategoryI18n $i18n)
-    {
-        $this->i18ns[] = $i18n;
-        return $this;
-    }
-    
-    /**
-     * @return CategoryI18n
-     */
-    public function getI18ns()
-    {
-        return $this->i18ns;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\Category
-     */
-    public function clearI18ns()
-    {
-        $this->i18ns = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\CategoryInvisibility $invisibility
+     * @param  \jtl\Connector\Model\CategoryInvisibility $invisibilities
      * @return \jtl\Connector\Model\Category
      */
     public function addInvisibility(\jtl\Connector\Model\CategoryInvisibility $invisibility)
@@ -353,7 +181,7 @@ class Category extends DataModel
     }
     
     /**
-     * @return CategoryInvisibility
+     * @return \jtl\Connector\Model\CategoryInvisibility[]
      */
     public function getInvisibilities()
     {
@@ -368,9 +196,34 @@ class Category extends DataModel
         $this->invisibilities = array();
         return $this;
     }
+    /**
+     * @param  \jtl\Connector\Model\CategoryI18n $i18ns
+     * @return \jtl\Connector\Model\Category
+     */
+    public function addI18n(\jtl\Connector\Model\CategoryI18n $i18n)
+    {
+        $this->i18ns[] = $i18ns;
+        return $this;
+    }
+    
+    /**
+     * @return \jtl\Connector\Model\CategoryI18n[]
+     */
+    public function getI18ns()
+    {
+        return $this->i18ns;
+    }
 
     /**
-     * @param  \jtl\Connector\Model\CategoryCustomerGroup $customerGroup
+     * @return \jtl\Connector\Model\Category
+     */
+    public function clearI18ns()
+    {
+        $this->i18ns = array();
+        return $this;
+    }
+    /**
+     * @param  \jtl\Connector\Model\CategoryCustomerGroup $customerGroups
      * @return \jtl\Connector\Model\Category
      */
     public function addCustomerGroup(\jtl\Connector\Model\CategoryCustomerGroup $customerGroup)
@@ -380,7 +233,7 @@ class Category extends DataModel
     }
     
     /**
-     * @return CategoryCustomerGroup
+     * @return \jtl\Connector\Model\CategoryCustomerGroup[]
      */
     public function getCustomerGroups()
     {
@@ -395,9 +248,34 @@ class Category extends DataModel
         $this->customerGroups = array();
         return $this;
     }
+    /**
+     * @param  \jtl\Connector\Model\ChildCategory $children
+     * @return \jtl\Connector\Model\Category
+     */
+    public function addChild(\jtl\Connector\Model\ChildCategory $child)
+    {
+        $this->children[] = $child;
+        return $this;
+    }
+    
+    /**
+     * @return \jtl\Connector\Model\ChildCategory[]
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
 
     /**
-     * @param  \jtl\Connector\Model\CategoryAttr $attribute
+     * @return \jtl\Connector\Model\Category
+     */
+    public function clearChildren()
+    {
+        $this->children = array();
+        return $this;
+    }
+    /**
+     * @param  \jtl\Connector\Model\CategoryAttr $attributes
      * @return \jtl\Connector\Model\Category
      */
     public function addAttribute(\jtl\Connector\Model\CategoryAttr $attribute)
@@ -407,7 +285,7 @@ class Category extends DataModel
     }
     
     /**
-     * @return CategoryAttr
+     * @return \jtl\Connector\Model\CategoryAttr[]
      */
     public function getAttributes()
     {
@@ -422,5 +300,5 @@ class Category extends DataModel
         $this->attributes = array();
         return $this;
     }
+ 
 }
-

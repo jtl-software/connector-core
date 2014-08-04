@@ -1,145 +1,117 @@
 <?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Localized key-value-pair for productAttr.
+ * Localized key-value-pair for productAttr..
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Product
  */
 class ProductAttrI18n extends DataModel
 {
     /**
-     * @var string Locale
+     * @type Identity Reference to productAttr
      */
-    protected $_localeName = '';
-    
+    protected $productAttrId = null;
+
     /**
-     * @var Identity Reference to productAttr
+     * @type string Attribute key
      */
-    protected $_productAttrId = null;
-    
+    protected $key = '';
+
     /**
-     * @var string Attribute key
+     * @type string Locale
      */
-    protected $_key = '';
-    
+    protected $localeName = '';
+
     /**
-     * @var string Attribute value
+     * @type string Attribute value
      */
-    protected $_value = '';
-    
+    protected $value = '';
+
     /**
-     * @var mixed:string
+     * @type array list of identities
      */
-    protected $_identities = array(
-        '_productAttrId'
+     protected $identities = array(
+        'productAttrId',
     );
-    
+
     /**
-     * ProductAttrI18n Setter
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_localeName":
-                case "_key":
-                case "_value":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-                case "_productAttrId":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-            }
-        }
-    }
-    
-    /**
-     * @param string $localeName Locale
+     * @param  Identity $productAttrId Reference to productAttr
      * @return \jtl\Connector\Model\ProductAttrI18n
-     */
-    public function setLocaleName($localeName)
-    {
-        $this->_localeName = (string)$localeName;
-        return $this;
-    }
-    
-    /**
-     * @return string Locale
-     */
-    public function getLocaleName()
-    {
-        return $this->_localeName;
-    }
-    /**
-     * @param Identity $productAttrId Reference to productAttr
-     * @return \jtl\Connector\Model\ProductAttrI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductAttrId(Identity $productAttrId)
     {
-        $this->_productAttrId = $productAttrId;
-        return $this;
+        return $this->setProperty('ProductAttrId', $productAttrId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to productAttr
      */
     public function getProductAttrId()
     {
-        return $this->_productAttrId;
+        return $this->productAttrId;
     }
+
     /**
-     * @param string $key Attribute key
+     * @param  string $key Attribute key
      * @return \jtl\Connector\Model\ProductAttrI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setKey($key)
+    public function setKey(Identity $key)
     {
-        $this->_key = (string)$key;
-        return $this;
+        return $this->setProperty('Key', $key, 'string');
     }
-    
+
     /**
      * @return string Attribute key
      */
     public function getKey()
     {
-        return $this->_key;
+        return $this->key;
     }
+
     /**
-     * @param string $value Attribute value
+     * @param  string $localeName Locale
      * @return \jtl\Connector\Model\ProductAttrI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setValue($value)
+    public function setLocaleName(Identity $localeName)
     {
-        $this->_value = (string)$value;
-        return $this;
+        return $this->setProperty('LocaleName', $localeName, 'string');
     }
-    
+
+    /**
+     * @return string Locale
+     */
+    public function getLocaleName()
+    {
+        return $this->localeName;
+    }
+
+    /**
+     * @param  string $value Attribute value
+     * @return \jtl\Connector\Model\ProductAttrI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setValue(Identity $value)
+    {
+        return $this->setProperty('Value', $value, 'string');
+    }
+
     /**
      * @return string Attribute value
      */
     public function getValue()
     {
-        return $this->_value;
+        return $this->value;
     }
+
+ 
 }

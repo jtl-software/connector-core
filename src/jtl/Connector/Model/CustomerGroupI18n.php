@@ -30,37 +30,16 @@ class CustomerGroupI18n extends DataModel
     protected $name = '';
 
     /**
-     * Nav [CustomerGroupI18n » Many]
-     *
      * @type \jtl\Connector\Model\CustomerGroup[]
      */
     protected $customerGroup = array();
 
-
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
         'customerGroupId',
     );
-
-    /**
-     * @param  string $name Localized customer group name
-     * @return \jtl\Connector\Model\CustomerGroupI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setName($name)
-    {
-        return $this->setProperty('name', $name, 'string');
-    }
-    
-    /**
-     * @return string Localized customer group name
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
 
     /**
      * @param  Identity $customerGroupId Reference to customerGroup
@@ -69,9 +48,9 @@ class CustomerGroupI18n extends DataModel
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        return $this->setProperty('CustomerGroupId', $customerGroupId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to customerGroup
      */
@@ -83,19 +62,37 @@ class CustomerGroupI18n extends DataModel
     /**
      * @param  string $localeName Locale
      * @return \jtl\Connector\Model\CustomerGroupI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setLocaleName($localeName)
+    public function setLocaleName(Identity $localeName)
     {
-        return $this->setProperty('localeName', $localeName, 'string');
+        return $this->setProperty('LocaleName', $localeName, 'string');
     }
-    
+
     /**
      * @return string Locale
      */
     public function getLocaleName()
     {
         return $this->localeName;
+    }
+
+    /**
+     * @param  string $name Localized customer group name
+     * @return \jtl\Connector\Model\CustomerGroupI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setName(Identity $name)
+    {
+        return $this->setProperty('Name', $name, 'string');
+    }
+
+    /**
+     * @return string Localized customer group name
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -109,7 +106,7 @@ class CustomerGroupI18n extends DataModel
     }
     
     /**
-     * @return CustomerGroup
+     * @return \jtl\Connector\Model\CustomerGroup[]
      */
     public function getCustomerGroup()
     {
@@ -124,5 +121,5 @@ class CustomerGroupI18n extends DataModel
         $this->customerGroup = array();
         return $this;
     }
+ 
 }
-

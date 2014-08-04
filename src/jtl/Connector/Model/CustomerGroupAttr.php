@@ -35,31 +35,64 @@ class CustomerGroupAttr extends DataModel
     protected $value = '';
 
     /**
-     * Nav [CustomerGroupAttr » Many]
-     *
      * @type \jtl\Connector\Model\CustomerGroup[]
      */
     protected $customerGroup = array();
 
-
     /**
      * @type array list of identities
      */
-    protected $identities = array(
-        'id',
+     protected $identities = array(
         'customerGroupId',
+        'id',
     );
+
+    /**
+     * @param  Identity $customerGroupId Reference to customerGroup
+     * @return \jtl\Connector\Model\CustomerGroupAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerGroupId(Identity $customerGroupId)
+    {
+        return $this->setProperty('CustomerGroupId', $customerGroupId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to customerGroup
+     */
+    public function getCustomerGroupId()
+    {
+        return $this->customerGroupId;
+    }
+
+    /**
+     * @param  Identity $id Unique customerGroupAttr id
+     * @return \jtl\Connector\Model\CustomerGroupAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setId(Identity $id)
+    {
+        return $this->setProperty('Id', $id, 'Identity');
+    }
+
+    /**
+     * @return Identity Unique customerGroupAttr id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @param  string $key Attribute key
      * @return \jtl\Connector\Model\CustomerGroupAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setKey($key)
+    public function setKey(Identity $key)
     {
-        return $this->setProperty('key', $key, 'string');
+        return $this->setProperty('Key', $key, 'string');
     }
-    
+
     /**
      * @return string Attribute key
      */
@@ -71,55 +104,19 @@ class CustomerGroupAttr extends DataModel
     /**
      * @param  string $value Attribute value
      * @return \jtl\Connector\Model\CustomerGroupAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setValue($value)
+    public function setValue(Identity $value)
     {
-        return $this->setProperty('value', $value, 'string');
+        return $this->setProperty('Value', $value, 'string');
     }
-    
+
     /**
      * @return string Attribute value
      */
     public function getValue()
     {
         return $this->value;
-    }
-
-    /**
-     * @param  Identity $id Unique customerGroupAttr id
-     * @return \jtl\Connector\Model\CustomerGroupAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id)
-    {
-        return $this->setProperty('id', $id, 'Identity');
-    }
-    
-    /**
-     * @return Identity Unique customerGroupAttr id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param  Identity $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\CustomerGroupAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCustomerGroupId(Identity $customerGroupId)
-    {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
-    }
-    
-    /**
-     * @return Identity Reference to customerGroup
-     */
-    public function getCustomerGroupId()
-    {
-        return $this->customerGroupId;
     }
 
     /**
@@ -133,7 +130,7 @@ class CustomerGroupAttr extends DataModel
     }
     
     /**
-     * @return CustomerGroup
+     * @return \jtl\Connector\Model\CustomerGroup[]
      */
     public function getCustomerGroup()
     {
@@ -148,5 +145,5 @@ class CustomerGroupAttr extends DataModel
         $this->customerGroup = array();
         return $this;
     }
+ 
 }
-

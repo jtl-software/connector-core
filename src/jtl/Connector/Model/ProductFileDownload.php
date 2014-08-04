@@ -24,32 +24,13 @@ class ProductFileDownload extends DataModel
      */
     protected $productId = null;
 
-
     /**
      * @type array list of identities
      */
-    protected $identities = array(
-        'productId',
+     protected $identities = array(
         'fileDownloadId',
+        'productId',
     );
-
-    /**
-     * @param  Identity $productId Reference to product
-     * @return \jtl\Connector\Model\ProductFileDownload
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductId(Identity $productId)
-    {
-        return $this->setProperty('productId', $productId, 'Identity');
-    }
-    
-    /**
-     * @return Identity Reference to product
-     */
-    public function getProductId()
-    {
-        return $this->productId;
-    }
 
     /**
      * @param  Identity $fileDownloadId Reference to fileDownload
@@ -58,9 +39,9 @@ class ProductFileDownload extends DataModel
      */
     public function setFileDownloadId(Identity $fileDownloadId)
     {
-        return $this->setProperty('fileDownloadId', $fileDownloadId, 'Identity');
+        return $this->setProperty('FileDownloadId', $fileDownloadId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to fileDownload
      */
@@ -68,5 +49,24 @@ class ProductFileDownload extends DataModel
     {
         return $this->fileDownloadId;
     }
-}
 
+    /**
+     * @param  Identity $productId Reference to product
+     * @return \jtl\Connector\Model\ProductFileDownload
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setProductId(Identity $productId)
+    {
+        return $this->setProperty('ProductId', $productId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to product
+     */
+    public function getProductId()
+    {
+        return $this->productId;
+    }
+
+ 
+}

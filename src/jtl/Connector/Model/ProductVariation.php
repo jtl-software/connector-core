@@ -25,22 +25,7 @@ class ProductVariation extends DataModel
     protected $productId = null;
 
     /**
-     * @type string 
-     */
-    protected $cName = '';
-
-    /**
-     * @type boolean 
-     */
-    protected $isActive = false;
-
-    /**
-     * @type boolean 
-     */
-    protected $isSelectable = false;
-
-    /**
-     * @type integer|null Optional sort number
+     * @type int Optional sort number
      */
     protected $sort = 0;
 
@@ -50,88 +35,27 @@ class ProductVariation extends DataModel
     protected $type = '';
 
     /**
-     * Nav [ProductVariation » One]
-     *
-     * @type \jtl\Connector\Model\ProductVariationI18n[]
+     * @type \jtl\Connector\Model\ProductVariationValue[]
      */
-    protected $i18ns = array();
+    protected $values = array();
 
     /**
-     * Nav [ProductVariation » One]
-     *
      * @type \jtl\Connector\Model\ProductVariationInvisibility[]
      */
     protected $invisibilities = array();
 
     /**
-     * Nav [ProductVariation » One]
-     *
-     * @type \jtl\Connector\Model\ProductVariationValue[]
+     * @type \jtl\Connector\Model\ProductVariationI18n[]
      */
-    protected $values = array();
-
+    protected $i18ns = array();
 
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
         'id',
         'productId',
     );
-
-    /**
-     * @param  integer $sort Optional sort number
-     * @return \jtl\Connector\Model\ProductVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-     */
-    public function setSort($sort)
-    {
-        return $this->setProperty('sort', $sort, 'integer');
-    }
-    
-    /**
-     * @return integer Optional sort number
-     */
-    public function getSort()
-    {
-        return $this->sort;
-    }
-
-    /**
-     * @param  string $type Variation type e.g. radio or select
-     * @return \jtl\Connector\Model\ProductVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setType($type)
-    {
-        return $this->setProperty('type', $type, 'string');
-    }
-    
-    /**
-     * @return string Variation type e.g. radio or select
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param  string $cName 
-     * @return \jtl\Connector\Model\ProductVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setCName($cName)
-    {
-        return $this->setProperty('cName', $cName, 'string');
-    }
-    
-    /**
-     * @return string 
-     */
-    public function getCName()
-    {
-        return $this->cName;
-    }
 
     /**
      * @param  Identity $id Unique productVariation id
@@ -140,9 +64,9 @@ class ProductVariation extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        return $this->setProperty('Id', $id, 'Identity');
     }
-    
+
     /**
      * @return Identity Unique productVariation id
      */
@@ -158,9 +82,9 @@ class ProductVariation extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        return $this->setProperty('ProductId', $productId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to product
      */
@@ -170,97 +94,43 @@ class ProductVariation extends DataModel
     }
 
     /**
-     * @param  boolean $isSelectable 
+     * @param  int $sort Optional sort number
      * @return \jtl\Connector\Model\ProductVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setIsSelectable($isSelectable)
+    public function setSort(Identity $sort)
     {
-        return $this->setProperty('isSelectable', $isSelectable, 'boolean');
-    }
-    
-    /**
-     * @return boolean 
-     */
-    public function getIsSelectable()
-    {
-        return $this->isSelectable;
+        return $this->setProperty('Sort', $sort, 'int');
     }
 
     /**
-     * @param  boolean $isActive 
-     * @return \jtl\Connector\Model\ProductVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
+     * @return int Optional sort number
      */
-    public function setIsActive($isActive)
+    public function getSort()
     {
-        return $this->setProperty('isActive', $isActive, 'boolean');
-    }
-    
-    /**
-     * @return boolean 
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
+        return $this->sort;
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductVariationI18n $i18n
+     * @param  string $type Variation type e.g. radio or select
      * @return \jtl\Connector\Model\ProductVariation
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function addI18n(\jtl\Connector\Model\ProductVariationI18n $i18n)
+    public function setType(Identity $type)
     {
-        $this->i18ns[] = $i18n;
-        return $this;
-    }
-    
-    /**
-     * @return ProductVariationI18n
-     */
-    public function getI18ns()
-    {
-        return $this->i18ns;
+        return $this->setProperty('Type', $type, 'string');
     }
 
     /**
-     * @return \jtl\Connector\Model\ProductVariation
+     * @return string Variation type e.g. radio or select
      */
-    public function clearI18ns()
+    public function getType()
     {
-        $this->i18ns = array();
-        return $this;
+        return $this->type;
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductVariationInvisibility $invisibility
-     * @return \jtl\Connector\Model\ProductVariation
-     */
-    public function addInvisibility(\jtl\Connector\Model\ProductVariationInvisibility $invisibility)
-    {
-        $this->invisibilities[] = $invisibility;
-        return $this;
-    }
-    
-    /**
-     * @return ProductVariationInvisibility
-     */
-    public function getInvisibilities()
-    {
-        return $this->invisibilities;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\ProductVariation
-     */
-    public function clearInvisibilities()
-    {
-        $this->invisibilities = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\ProductVariationValue $value
+     * @param  \jtl\Connector\Model\ProductVariationValue $values
      * @return \jtl\Connector\Model\ProductVariation
      */
     public function addValue(\jtl\Connector\Model\ProductVariationValue $value)
@@ -270,7 +140,7 @@ class ProductVariation extends DataModel
     }
     
     /**
-     * @return ProductVariationValue
+     * @return \jtl\Connector\Model\ProductVariationValue[]
      */
     public function getValues()
     {
@@ -285,5 +155,57 @@ class ProductVariation extends DataModel
         $this->values = array();
         return $this;
     }
-}
+    /**
+     * @param  \jtl\Connector\Model\ProductVariationInvisibility $invisibilities
+     * @return \jtl\Connector\Model\ProductVariation
+     */
+    public function addInvisibility(\jtl\Connector\Model\ProductVariationInvisibility $invisibility)
+    {
+        $this->invisibilities[] = $invisibility;
+        return $this;
+    }
+    
+    /**
+     * @return \jtl\Connector\Model\ProductVariationInvisibility[]
+     */
+    public function getInvisibilities()
+    {
+        return $this->invisibilities;
+    }
 
+    /**
+     * @return \jtl\Connector\Model\ProductVariation
+     */
+    public function clearInvisibilities()
+    {
+        $this->invisibilities = array();
+        return $this;
+    }
+    /**
+     * @param  \jtl\Connector\Model\ProductVariationI18n $i18ns
+     * @return \jtl\Connector\Model\ProductVariation
+     */
+    public function addI18n(\jtl\Connector\Model\ProductVariationI18n $i18n)
+    {
+        $this->i18ns[] = $i18ns;
+        return $this;
+    }
+    
+    /**
+     * @return \jtl\Connector\Model\ProductVariationI18n[]
+     */
+    public function getI18ns()
+    {
+        return $this->i18ns;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\ProductVariation
+     */
+    public function clearI18ns()
+    {
+        $this->i18ns = array();
+        return $this;
+    }
+ 
+}

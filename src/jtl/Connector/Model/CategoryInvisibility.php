@@ -25,36 +25,12 @@ class CategoryInvisibility extends DataModel
     protected $customerGroupId = null;
 
     /**
-     * @type integer 
-     */
-    protected $connectorId = 0;
-
-
-    /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
         'categoryId',
         'customerGroupId',
     );
-
-    /**
-     * @param  integer $connectorId 
-     * @return \jtl\Connector\Model\CategoryInvisibility
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-     */
-    public function setConnectorId($connectorId)
-    {
-        return $this->setProperty('connectorId', $connectorId, 'integer');
-    }
-    
-    /**
-     * @return integer 
-     */
-    public function getConnectorId()
-    {
-        return $this->connectorId;
-    }
 
     /**
      * @param  Identity $categoryId Reference to category to hide from customerGroupId
@@ -63,9 +39,9 @@ class CategoryInvisibility extends DataModel
      */
     public function setCategoryId(Identity $categoryId)
     {
-        return $this->setProperty('categoryId', $categoryId, 'Identity');
+        return $this->setProperty('CategoryId', $categoryId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to category to hide from customerGroupId
      */
@@ -81,9 +57,9 @@ class CategoryInvisibility extends DataModel
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        return $this->setProperty('CustomerGroupId', $customerGroupId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to customerGroup that is not allowed to view categoryId
      */
@@ -91,5 +67,6 @@ class CategoryInvisibility extends DataModel
     {
         return $this->customerGroupId;
     }
-}
 
+ 
+}

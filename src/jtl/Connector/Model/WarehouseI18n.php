@@ -1,99 +1,71 @@
 <?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Localized warehouse name.
+ * Localized warehouse name..
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
  */
 class WarehouseI18n extends DataModel
 {
     /**
-     * @var Identity Reference to warehouse
+     * @type Identity Reference to warehouse
      */
-    protected $_warehouseId = null;
-    
+    protected $warehouseId = null;
+
     /**
-     * @var string Localized warehouse name
+     * @type string Localized warehouse name
      */
-    protected $_name = '';
-    
+    protected $name = '';
+
     /**
-     * @var mixed:string
+     * @type array list of identities
      */
-    protected $_identities = array(
-        '_warehouseId'
+     protected $identities = array(
+        'warehouseId',
     );
-    
+
     /**
-     * WarehouseI18n Setter
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_warehouseId":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-                case "_name":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-            }
-        }
-    }
-    
-    /**
-     * @param Identity $warehouseId Reference to warehouse
+     * @param  Identity $warehouseId Reference to warehouse
      * @return \jtl\Connector\Model\WarehouseI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setWarehouseId(Identity $warehouseId)
     {
-        $this->_warehouseId = $warehouseId;
-        return $this;
+        return $this->setProperty('WarehouseId', $warehouseId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to warehouse
      */
     public function getWarehouseId()
     {
-        return $this->_warehouseId;
+        return $this->warehouseId;
     }
+
     /**
-     * @param string $name Localized warehouse name
+     * @param  string $name Localized warehouse name
      * @return \jtl\Connector\Model\WarehouseI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setName($name)
+    public function setName(Identity $name)
     {
-        $this->_name = (string)$name;
-        return $this;
+        return $this->setProperty('Name', $name, 'string');
     }
-    
+
     /**
      * @return string Localized warehouse name
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
+
+ 
 }

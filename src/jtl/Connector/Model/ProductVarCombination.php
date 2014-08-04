@@ -15,9 +15,9 @@ namespace jtl\Connector\Model;
 class ProductVarCombination extends DataModel
 {
     /**
-     * @type Identity 
+     * @type Identity Reference to product
      */
-    protected $id = null;
+    protected $productId = null;
 
     /**
      * @type Identity Reference to productVariation
@@ -29,32 +29,31 @@ class ProductVarCombination extends DataModel
      */
     protected $productVariationValueId = null;
 
-
     /**
      * @type array list of identities
      */
-    protected $identities = array(
-        'id',
+     protected $identities = array(
+        'productId',
         'productVariationId',
         'productVariationValueId',
     );
 
     /**
-     * @param  Identity $id 
+     * @param  Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductVarCombination
      * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setProductId(Identity $productId)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        return $this->setProperty('ProductId', $productId, 'Identity');
     }
-    
+
     /**
-     * @return Identity 
+     * @return Identity Reference to product
      */
-    public function getId()
+    public function getProductId()
     {
-        return $this->id;
+        return $this->productId;
     }
 
     /**
@@ -64,9 +63,9 @@ class ProductVarCombination extends DataModel
      */
     public function setProductVariationId(Identity $productVariationId)
     {
-        return $this->setProperty('productVariationId', $productVariationId, 'Identity');
+        return $this->setProperty('ProductVariationId', $productVariationId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to productVariation
      */
@@ -82,9 +81,9 @@ class ProductVarCombination extends DataModel
      */
     public function setProductVariationValueId(Identity $productVariationValueId)
     {
-        return $this->setProperty('productVariationValueId', $productVariationValueId, 'Identity');
+        return $this->setProperty('ProductVariationValueId', $productVariationValueId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to productVariationValue
      */
@@ -92,5 +91,6 @@ class ProductVarCombination extends DataModel
     {
         return $this->productVariationValueId;
     }
-}
 
+ 
+}

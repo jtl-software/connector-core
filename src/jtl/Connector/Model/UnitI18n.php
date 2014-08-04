@@ -1,122 +1,94 @@
 <?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Localized Unit Name
+ * Localized Unit Name.
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
  */
 class UnitI18n extends DataModel
 {
     /**
-     * @var Identity Unit id
+     * @type Identity Unit id
      */
-    protected $_unitId = null;
-    
+    protected $unitId = null;
+
     /**
-     * @var string Locale
+     * @type string Locale
      */
-    protected $_localeName = '';
-    
+    protected $localeName = '';
+
     /**
-     * @var string Localized unit name
+     * @type string Localized unit name
      */
-    protected $_name = '';
-    
+    protected $name = '';
+
     /**
-     * @var mixed:string
+     * @type array list of identities
      */
-    protected $_identities = array(
-        '_unitId'
+     protected $identities = array(
+        'unitId',
     );
-    
+
     /**
-     * UnitI18n Setter
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_unitId":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-                case "_localeName":
-                case "_name":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-            }
-        }
-    }
-    
-    /**
-     * @param Identity $unitId Unit id
+     * @param  Identity $unitId Unit id
      * @return \jtl\Connector\Model\UnitI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setUnitId(Identity $unitId)
     {
-        $this->_unitId = $unitId;
-        return $this;
+        return $this->setProperty('UnitId', $unitId, 'Identity');
     }
-    
+
     /**
      * @return Identity Unit id
      */
     public function getUnitId()
     {
-        return $this->_unitId;
+        return $this->unitId;
     }
+
     /**
-     * @param string $localeName Locale
+     * @param  string $localeName Locale
      * @return \jtl\Connector\Model\UnitI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setLocaleName($localeName)
+    public function setLocaleName(Identity $localeName)
     {
-        $this->_localeName = (string)$localeName;
-        return $this;
+        return $this->setProperty('LocaleName', $localeName, 'string');
     }
-    
+
     /**
      * @return string Locale
      */
     public function getLocaleName()
     {
-        return $this->_localeName;
+        return $this->localeName;
     }
+
     /**
-     * @param string $name Localized unit name
+     * @param  string $name Localized unit name
      * @return \jtl\Connector\Model\UnitI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setName($name)
+    public function setName(Identity $name)
     {
-        $this->_name = (string)$name;
-        return $this;
+        return $this->setProperty('Name', $name, 'string');
     }
-    
+
     /**
      * @return string Localized unit name
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
+
+ 
 }

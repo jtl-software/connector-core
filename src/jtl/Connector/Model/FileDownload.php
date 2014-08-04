@@ -20,22 +20,17 @@ class FileDownload extends DataModel
     protected $id = null;
 
     /**
-     * @type DateTime|null Optional creation date
+     * @type string Optional creation date
      */
-    protected $created = null;
+    protected $created = '';
 
     /**
-     * @type string 
-     */
-    protected $internalId = '';
-
-    /**
-     * @type integer|null Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
+     * @type int Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
      */
     protected $maxDays = 0;
 
     /**
-     * @type integer|null Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
+     * @type int Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
      */
     protected $maxDownloads = 0;
 
@@ -50,53 +45,104 @@ class FileDownload extends DataModel
     protected $previewPath = '';
 
     /**
-     * @type integer|null Optional sort number
+     * @type int Optional sort number
      */
     protected $sort = 0;
 
     /**
-     * Nav [FileDownload » One]
-     *
      * @type \jtl\Connector\Model\FileDownloadI18n[]
      */
     protected $i18n = array();
 
-
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
         'id',
     );
 
     /**
-     * @param  string $internalId 
+     * @param  Identity $id Unique fileDownload id
      * @return \jtl\Connector\Model\FileDownload
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setInternalId($internalId)
+    public function setId(Identity $id)
     {
-        return $this->setProperty('internalId', $internalId, 'string');
+        return $this->setProperty('Id', $id, 'Identity');
     }
-    
+
     /**
-     * @return string 
+     * @return Identity Unique fileDownload id
      */
-    public function getInternalId()
+    public function getId()
     {
-        return $this->internalId;
+        return $this->id;
+    }
+
+    /**
+     * @param  string $created Optional creation date
+     * @return \jtl\Connector\Model\FileDownload
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCreated(Identity $created)
+    {
+        return $this->setProperty('Created', $created, 'string');
+    }
+
+    /**
+     * @return string Optional creation date
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param  int $maxDays Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
+     * @return \jtl\Connector\Model\FileDownload
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setMaxDays(Identity $maxDays)
+    {
+        return $this->setProperty('MaxDays', $maxDays, 'int');
+    }
+
+    /**
+     * @return int Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
+     */
+    public function getMaxDays()
+    {
+        return $this->maxDays;
+    }
+
+    /**
+     * @param  int $maxDownloads Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
+     * @return \jtl\Connector\Model\FileDownload
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setMaxDownloads(Identity $maxDownloads)
+    {
+        return $this->setProperty('MaxDownloads', $maxDownloads, 'int');
+    }
+
+    /**
+     * @return int Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
+     */
+    public function getMaxDownloads()
+    {
+        return $this->maxDownloads;
     }
 
     /**
      * @param  string $path Path to download file
      * @return \jtl\Connector\Model\FileDownload
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setPath($path)
+    public function setPath(Identity $path)
     {
-        return $this->setProperty('path', $path, 'string');
+        return $this->setProperty('Path', $path, 'string');
     }
-    
+
     /**
      * @return string Path to download file
      */
@@ -108,13 +154,13 @@ class FileDownload extends DataModel
     /**
      * @param  string $previewPath Optional path to preview file
      * @return \jtl\Connector\Model\FileDownload
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setPreviewPath($previewPath)
+    public function setPreviewPath(Identity $previewPath)
     {
-        return $this->setProperty('previewPath', $previewPath, 'string');
+        return $this->setProperty('PreviewPath', $previewPath, 'string');
     }
-    
+
     /**
      * @return string Optional path to preview file
      */
@@ -124,93 +170,21 @@ class FileDownload extends DataModel
     }
 
     /**
-     * @param  integer $maxDownloads Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
+     * @param  int $sort Optional sort number
      * @return \jtl\Connector\Model\FileDownload
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setMaxDownloads($maxDownloads)
+    public function setSort(Identity $sort)
     {
-        return $this->setProperty('maxDownloads', $maxDownloads, 'integer');
-    }
-    
-    /**
-     * @return integer Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
-     */
-    public function getMaxDownloads()
-    {
-        return $this->maxDownloads;
+        return $this->setProperty('Sort', $sort, 'int');
     }
 
     /**
-     * @param  integer $maxDays Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
-     * @return \jtl\Connector\Model\FileDownload
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-     */
-    public function setMaxDays($maxDays)
-    {
-        return $this->setProperty('maxDays', $maxDays, 'integer');
-    }
-    
-    /**
-     * @return integer Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
-     */
-    public function getMaxDays()
-    {
-        return $this->maxDays;
-    }
-
-    /**
-     * @param  DateTime $created Optional creation date
-     * @return \jtl\Connector\Model\FileDownload
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
-     */
-    public function setCreated(DateTime $created)
-    {
-        return $this->setProperty('created', $created, 'DateTime');
-    }
-    
-    /**
-     * @return DateTime Optional creation date
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
-    /**
-     * @param  integer $sort Optional sort number
-     * @return \jtl\Connector\Model\FileDownload
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-     */
-    public function setSort($sort)
-    {
-        return $this->setProperty('sort', $sort, 'integer');
-    }
-    
-    /**
-     * @return integer Optional sort number
+     * @return int Optional sort number
      */
     public function getSort()
     {
         return $this->sort;
-    }
-
-    /**
-     * @param  Identity $id Unique fileDownload id
-     * @return \jtl\Connector\Model\FileDownload
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id)
-    {
-        return $this->setProperty('id', $id, 'Identity');
-    }
-    
-    /**
-     * @return Identity Unique fileDownload id
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
@@ -224,7 +198,7 @@ class FileDownload extends DataModel
     }
     
     /**
-     * @return FileDownloadI18n
+     * @return \jtl\Connector\Model\FileDownloadI18n[]
      */
     public function getI18n()
     {
@@ -239,5 +213,5 @@ class FileDownload extends DataModel
         $this->i18n = array();
         return $this;
     }
+ 
 }
-

@@ -34,49 +34,12 @@ class ConfigGroupI18n extends DataModel
      */
     protected $name = '';
 
-
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
         'configGroupId',
     );
-
-    /**
-     * @param  string $name Config group name
-     * @return \jtl\Connector\Model\ConfigGroupI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setName($name)
-    {
-        return $this->setProperty('name', $name, 'string');
-    }
-    
-    /**
-     * @return string Config group name
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param  string $description Optional description (HTML)
-     * @return \jtl\Connector\Model\ConfigGroupI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setDescription($description)
-    {
-        return $this->setProperty('description', $description, 'string');
-    }
-    
-    /**
-     * @return string Optional description (HTML)
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
 
     /**
      * @param  Identity $configGroupId Reference to configGroup
@@ -85,9 +48,9 @@ class ConfigGroupI18n extends DataModel
      */
     public function setConfigGroupId(Identity $configGroupId)
     {
-        return $this->setProperty('configGroupId', $configGroupId, 'Identity');
+        return $this->setProperty('ConfigGroupId', $configGroupId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to configGroup
      */
@@ -97,15 +60,33 @@ class ConfigGroupI18n extends DataModel
     }
 
     /**
+     * @param  string $description Optional description (HTML)
+     * @return \jtl\Connector\Model\ConfigGroupI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setDescription(Identity $description)
+    {
+        return $this->setProperty('Description', $description, 'string');
+    }
+
+    /**
+     * @return string Optional description (HTML)
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
      * @param  string $localeName Locale
      * @return \jtl\Connector\Model\ConfigGroupI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setLocaleName($localeName)
+    public function setLocaleName(Identity $localeName)
     {
-        return $this->setProperty('localeName', $localeName, 'string');
+        return $this->setProperty('LocaleName', $localeName, 'string');
     }
-    
+
     /**
      * @return string Locale
      */
@@ -113,5 +94,24 @@ class ConfigGroupI18n extends DataModel
     {
         return $this->localeName;
     }
-}
 
+    /**
+     * @param  string $name Config group name
+     * @return \jtl\Connector\Model\ConfigGroupI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setName(Identity $name)
+    {
+        return $this->setProperty('Name', $name, 'string');
+    }
+
+    /**
+     * @return string Config group name
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+ 
+}

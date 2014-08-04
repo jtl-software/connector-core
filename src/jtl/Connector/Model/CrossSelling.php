@@ -35,37 +35,49 @@ class CrossSelling extends DataModel
     protected $productId = null;
 
     /**
-     * @type integer|null 
-     */
-    protected $nEigenesFeld = 0;
-
-
-    /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
+        'crossSellingGroupId',
+        'crossSellingProductId',
         'id',
         'productId',
-        'crossSellingProductId',
-        'crossSellingGroupId',
     );
 
     /**
-     * @param  integer $nEigenesFeld 
+     * @param  Identity $crossSellingGroupId Reference to crossSellingGroup
      * @return \jtl\Connector\Model\CrossSelling
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setNEigenesFeld($nEigenesFeld)
+    public function setCrossSellingGroupId(Identity $crossSellingGroupId)
     {
-        return $this->setProperty('nEigenesFeld', $nEigenesFeld, 'integer');
+        return $this->setProperty('CrossSellingGroupId', $crossSellingGroupId, 'Identity');
     }
-    
+
     /**
-     * @return integer 
+     * @return Identity Reference to crossSellingGroup
      */
-    public function getNEigenesFeld()
+    public function getCrossSellingGroupId()
     {
-        return $this->nEigenesFeld;
+        return $this->crossSellingGroupId;
+    }
+
+    /**
+     * @param  Identity $crossSellingProductId Reference to product (main product)
+     * @return \jtl\Connector\Model\CrossSelling
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCrossSellingProductId(Identity $crossSellingProductId)
+    {
+        return $this->setProperty('CrossSellingProductId', $crossSellingProductId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to product (main product)
+     */
+    public function getCrossSellingProductId()
+    {
+        return $this->crossSellingProductId;
     }
 
     /**
@@ -75,9 +87,9 @@ class CrossSelling extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        return $this->setProperty('Id', $id, 'Identity');
     }
-    
+
     /**
      * @return Identity Unique crossSelling id
      */
@@ -93,9 +105,9 @@ class CrossSelling extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        return $this->setProperty('ProductId', $productId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to product (cross selling product)
      */
@@ -104,40 +116,5 @@ class CrossSelling extends DataModel
         return $this->productId;
     }
 
-    /**
-     * @param  Identity $crossSellingProductId Reference to product (main product)
-     * @return \jtl\Connector\Model\CrossSelling
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCrossSellingProductId(Identity $crossSellingProductId)
-    {
-        return $this->setProperty('crossSellingProductId', $crossSellingProductId, 'Identity');
-    }
-    
-    /**
-     * @return Identity Reference to product (main product)
-     */
-    public function getCrossSellingProductId()
-    {
-        return $this->crossSellingProductId;
-    }
-
-    /**
-     * @param  Identity $crossSellingGroupId Reference to crossSellingGroup
-     * @return \jtl\Connector\Model\CrossSelling
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCrossSellingGroupId(Identity $crossSellingGroupId)
-    {
-        return $this->setProperty('crossSellingGroupId', $crossSellingGroupId, 'Identity');
-    }
-    
-    /**
-     * @return Identity Reference to crossSellingGroup
-     */
-    public function getCrossSellingGroupId()
-    {
-        return $this->crossSellingGroupId;
-    }
+ 
 }
-

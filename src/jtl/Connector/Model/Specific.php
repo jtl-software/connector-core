@@ -20,17 +20,12 @@ class Specific extends DataModel
     protected $id = null;
 
     /**
-     * @type boolean 
+     * @type bool Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      */
     protected $isGlobal = false;
 
     /**
-     * @type string 
-     */
-    protected $name = '';
-
-    /**
-     * @type integer|null Optional sort number
+     * @type int Optional sort number
      */
     protected $sort = 0;
 
@@ -40,80 +35,21 @@ class Specific extends DataModel
     protected $type = '';
 
     /**
-     * Nav [Specific » One]
-     *
+     * @type \jtl\Connector\Model\SpecificValue[]
+     */
+    protected $values = array();
+
+    /**
      * @type \jtl\Connector\Model\SpecificI18n[]
      */
     protected $i18ns = array();
 
     /**
-     * Nav [Specific » ZeroOrOne]
-     *
-     * @type \jtl\Connector\Model\SpecificValue[]
-     */
-    protected $values = array();
-
-
-    /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
         'id',
     );
-
-    /**
-     * @param  integer $sort Optional sort number
-     * @return \jtl\Connector\Model\Specific
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-     */
-    public function setSort($sort)
-    {
-        return $this->setProperty('sort', $sort, 'integer');
-    }
-    
-    /**
-     * @return integer Optional sort number
-     */
-    public function getSort()
-    {
-        return $this->sort;
-    }
-
-    /**
-     * @param  string $name 
-     * @return \jtl\Connector\Model\Specific
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setName($name)
-    {
-        return $this->setProperty('name', $name, 'string');
-    }
-    
-    /**
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param  string $type Specific type (radio, dropdown, image...)
-     * @return \jtl\Connector\Model\Specific
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setType($type)
-    {
-        return $this->setProperty('type', $type, 'string');
-    }
-    
-    /**
-     * @return string Specific type (radio, dropdown, image...)
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
 
     /**
      * @param  Identity $id Unique specific id
@@ -122,9 +58,9 @@ class Specific extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        return $this->setProperty('Id', $id, 'Identity');
     }
-    
+
     /**
      * @return Identity Unique specific id
      */
@@ -134,17 +70,17 @@ class Specific extends DataModel
     }
 
     /**
-     * @param  boolean $isGlobal 
+     * @param  bool $isGlobal Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      * @return \jtl\Connector\Model\Specific
-     * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setIsGlobal($isGlobal)
+    public function setIsGlobal(Identity $isGlobal)
     {
-        return $this->setProperty('isGlobal', $isGlobal, 'boolean');
+        return $this->setProperty('IsGlobal', $isGlobal, 'bool');
     }
-    
+
     /**
-     * @return boolean 
+     * @return bool Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      */
     public function getIsGlobal()
     {
@@ -152,34 +88,43 @@ class Specific extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\SpecificI18n $i18n
+     * @param  int $sort Optional sort number
      * @return \jtl\Connector\Model\Specific
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function addI18n(\jtl\Connector\Model\SpecificI18n $i18n)
+    public function setSort(Identity $sort)
     {
-        $this->i18ns[] = $i18n;
-        return $this;
-    }
-    
-    /**
-     * @return SpecificI18n
-     */
-    public function getI18ns()
-    {
-        return $this->i18ns;
+        return $this->setProperty('Sort', $sort, 'int');
     }
 
     /**
-     * @return \jtl\Connector\Model\Specific
+     * @return int Optional sort number
      */
-    public function clearI18ns()
+    public function getSort()
     {
-        $this->i18ns = array();
-        return $this;
+        return $this->sort;
     }
 
     /**
-     * @param  \jtl\Connector\Model\SpecificValue $value
+     * @param  string $type Specific type (radio, dropdown, image...)
+     * @return \jtl\Connector\Model\Specific
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setType(Identity $type)
+    {
+        return $this->setProperty('Type', $type, 'string');
+    }
+
+    /**
+     * @return string Specific type (radio, dropdown, image...)
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\SpecificValue $values
      * @return \jtl\Connector\Model\Specific
      */
     public function addValue(\jtl\Connector\Model\SpecificValue $value)
@@ -189,7 +134,7 @@ class Specific extends DataModel
     }
     
     /**
-     * @return SpecificValue
+     * @return \jtl\Connector\Model\SpecificValue[]
      */
     public function getValues()
     {
@@ -204,5 +149,31 @@ class Specific extends DataModel
         $this->values = array();
         return $this;
     }
-}
+    /**
+     * @param  \jtl\Connector\Model\SpecificI18n $i18ns
+     * @return \jtl\Connector\Model\Specific
+     */
+    public function addI18n(\jtl\Connector\Model\SpecificI18n $i18n)
+    {
+        $this->i18ns[] = $i18ns;
+        return $this;
+    }
+    
+    /**
+     * @return \jtl\Connector\Model\SpecificI18n[]
+     */
+    public function getI18ns()
+    {
+        return $this->i18ns;
+    }
 
+    /**
+     * @return \jtl\Connector\Model\Specific
+     */
+    public function clearI18ns()
+    {
+        $this->i18ns = array();
+        return $this;
+    }
+ 
+}

@@ -40,89 +40,16 @@ class ManufacturerI18n extends DataModel
     protected $metaKeywords = '';
 
     /**
-     * @type string 
+     * @type string Optional title tag value
      */
-    protected $metaTitle = '';
-
+    protected $titleTag = '';
 
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
         'manufacturerId',
     );
-
-    /**
-     * @param  string $metaTitle 
-     * @return \jtl\Connector\Model\ManufacturerI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setMetaTitle($metaTitle)
-    {
-        return $this->setProperty('metaTitle', $metaTitle, 'string');
-    }
-    
-    /**
-     * @return string 
-     */
-    public function getMetaTitle()
-    {
-        return $this->metaTitle;
-    }
-
-    /**
-     * @param  string $metaKeywords Optional meta keywords tag value
-     * @return \jtl\Connector\Model\ManufacturerI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setMetaKeywords($metaKeywords)
-    {
-        return $this->setProperty('metaKeywords', $metaKeywords, 'string');
-    }
-    
-    /**
-     * @return string Optional meta keywords tag value
-     */
-    public function getMetaKeywords()
-    {
-        return $this->metaKeywords;
-    }
-
-    /**
-     * @param  string $metaDescription Optional meta description tag value
-     * @return \jtl\Connector\Model\ManufacturerI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setMetaDescription($metaDescription)
-    {
-        return $this->setProperty('metaDescription', $metaDescription, 'string');
-    }
-    
-    /**
-     * @return string Optional meta description tag value
-     */
-    public function getMetaDescription()
-    {
-        return $this->metaDescription;
-    }
-
-    /**
-     * @param  string $description Optional manufacturer description (HTML)
-     * @return \jtl\Connector\Model\ManufacturerI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setDescription($description)
-    {
-        return $this->setProperty('description', $description, 'string');
-    }
-    
-    /**
-     * @return string Optional manufacturer description (HTML)
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
 
     /**
      * @param  Identity $manufacturerId Reference to manufacturer
@@ -131,9 +58,9 @@ class ManufacturerI18n extends DataModel
      */
     public function setManufacturerId(Identity $manufacturerId)
     {
-        return $this->setProperty('manufacturerId', $manufacturerId, 'Identity');
+        return $this->setProperty('ManufacturerId', $manufacturerId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to manufacturer
      */
@@ -143,15 +70,33 @@ class ManufacturerI18n extends DataModel
     }
 
     /**
+     * @param  string $description Optional manufacturer description (HTML)
+     * @return \jtl\Connector\Model\ManufacturerI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setDescription(Identity $description)
+    {
+        return $this->setProperty('Description', $description, 'string');
+    }
+
+    /**
+     * @return string Optional manufacturer description (HTML)
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
      * @param  string $localeName Locale
      * @return \jtl\Connector\Model\ManufacturerI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setLocaleName($localeName)
+    public function setLocaleName(Identity $localeName)
     {
-        return $this->setProperty('localeName', $localeName, 'string');
+        return $this->setProperty('LocaleName', $localeName, 'string');
     }
-    
+
     /**
      * @return string Locale
      */
@@ -159,5 +104,60 @@ class ManufacturerI18n extends DataModel
     {
         return $this->localeName;
     }
-}
 
+    /**
+     * @param  string $metaDescription Optional meta description tag value
+     * @return \jtl\Connector\Model\ManufacturerI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setMetaDescription(Identity $metaDescription)
+    {
+        return $this->setProperty('MetaDescription', $metaDescription, 'string');
+    }
+
+    /**
+     * @return string Optional meta description tag value
+     */
+    public function getMetaDescription()
+    {
+        return $this->metaDescription;
+    }
+
+    /**
+     * @param  string $metaKeywords Optional meta keywords tag value
+     * @return \jtl\Connector\Model\ManufacturerI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setMetaKeywords(Identity $metaKeywords)
+    {
+        return $this->setProperty('MetaKeywords', $metaKeywords, 'string');
+    }
+
+    /**
+     * @return string Optional meta keywords tag value
+     */
+    public function getMetaKeywords()
+    {
+        return $this->metaKeywords;
+    }
+
+    /**
+     * @param  string $titleTag Optional title tag value
+     * @return \jtl\Connector\Model\ManufacturerI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setTitleTag(Identity $titleTag)
+    {
+        return $this->setProperty('TitleTag', $titleTag, 'string');
+    }
+
+    /**
+     * @return string Optional title tag value
+     */
+    public function getTitleTag()
+    {
+        return $this->titleTag;
+    }
+
+ 
+}

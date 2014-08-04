@@ -7,7 +7,7 @@
 namespace jtl\Connector\Model;
 
 /**
- * .
+ * Image model..
  *
  * @access public
  * @package jtl\Connector\Model
@@ -15,72 +15,56 @@ namespace jtl\Connector\Model;
 class Image extends DataModel
 {
     /**
-     * @type string 
-     */
-    protected $filename = '';
-
-    /**
-     * @type Identity 
+     * @type Identity Foreign key dependent on relationType
      */
     protected $foreignKey = null;
 
     /**
-     * @type Identity 
+     * @type Identity Unique image id
      */
     protected $id = null;
 
     /**
-     * @type Identity 
+     * @type Identity Reference to master imageId
      */
     protected $masterImageId = null;
 
     /**
-     * @type string 
+     * @type string Filename or path
+     */
+    protected $filename = '';
+
+    /**
+     * @type string Allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
      */
     protected $relationType = '';
 
     /**
-     * @type integer 
+     * @type int Optional sort number
      */
     protected $sort = 0;
-
 
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
+        'foreignKey',
+        'id',
+        'masterImageId',
     );
 
     /**
-     * @param  Identity $id 
-     * @return \jtl\Connector\Model\Image
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id)
-    {
-        return $this->setProperty('id', $id, 'Identity');
-    }
-    
-    /**
-     * @return Identity 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param  Identity $foreignKey 
+     * @param  Identity $foreignKey Foreign key dependent on relationType
      * @return \jtl\Connector\Model\Image
      * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setForeignKey(Identity $foreignKey)
     {
-        return $this->setProperty('foreignKey', $foreignKey, 'Identity');
+        return $this->setProperty('ForeignKey', $foreignKey, 'Identity');
     }
-    
+
     /**
-     * @return Identity 
+     * @return Identity Foreign key dependent on relationType
      */
     public function getForeignKey()
     {
@@ -88,17 +72,35 @@ class Image extends DataModel
     }
 
     /**
-     * @param  Identity $masterImageId 
+     * @param  Identity $id Unique image id
+     * @return \jtl\Connector\Model\Image
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setId(Identity $id)
+    {
+        return $this->setProperty('Id', $id, 'Identity');
+    }
+
+    /**
+     * @return Identity Unique image id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param  Identity $masterImageId Reference to master imageId
      * @return \jtl\Connector\Model\Image
      * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setMasterImageId(Identity $masterImageId)
     {
-        return $this->setProperty('masterImageId', $masterImageId, 'Identity');
+        return $this->setProperty('MasterImageId', $masterImageId, 'Identity');
     }
-    
+
     /**
-     * @return Identity 
+     * @return Identity Reference to master imageId
      */
     public function getMasterImageId()
     {
@@ -106,35 +108,17 @@ class Image extends DataModel
     }
 
     /**
-     * @param  string $relationType 
+     * @param  string $filename Filename or path
      * @return \jtl\Connector\Model\Image
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setRelationType($relationType)
+    public function setFilename(Identity $filename)
     {
-        return $this->setProperty('relationType', $relationType, 'string');
-    }
-    
-    /**
-     * @return string 
-     */
-    public function getRelationType()
-    {
-        return $this->relationType;
+        return $this->setProperty('Filename', $filename, 'string');
     }
 
     /**
-     * @param  string $filename 
-     * @return \jtl\Connector\Model\Image
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setFilename($filename)
-    {
-        return $this->setProperty('filename', $filename, 'string');
-    }
-    
-    /**
-     * @return string 
+     * @return string Filename or path
      */
     public function getFilename()
     {
@@ -142,21 +126,40 @@ class Image extends DataModel
     }
 
     /**
-     * @param  integer $sort 
+     * @param  string $relationType Allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
      * @return \jtl\Connector\Model\Image
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setSort($sort)
+    public function setRelationType(Identity $relationType)
     {
-        return $this->setProperty('sort', $sort, 'integer');
+        return $this->setProperty('RelationType', $relationType, 'string');
     }
-    
+
     /**
-     * @return integer 
+     * @return string Allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
+     */
+    public function getRelationType()
+    {
+        return $this->relationType;
+    }
+
+    /**
+     * @param  int $sort Optional sort number
+     * @return \jtl\Connector\Model\Image
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setSort(Identity $sort)
+    {
+        return $this->setProperty('Sort', $sort, 'int');
+    }
+
+    /**
+     * @return int Optional sort number
      */
     public function getSort()
     {
         return $this->sort;
     }
-}
 
+ 
+}

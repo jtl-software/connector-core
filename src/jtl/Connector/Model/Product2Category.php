@@ -29,15 +29,32 @@ class Product2Category extends DataModel
      */
     protected $productId = null;
 
-
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
+        'categoryId',
         'id',
         'productId',
-        'categoryId',
     );
+
+    /**
+     * @param  Identity $categoryId Reference to category
+     * @return \jtl\Connector\Model\Product2Category
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCategoryId(Identity $categoryId)
+    {
+        return $this->setProperty('CategoryId', $categoryId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to category
+     */
+    public function getCategoryId()
+    {
+        return $this->categoryId;
+    }
 
     /**
      * @param  Identity $id Unique product2Category id
@@ -46,9 +63,9 @@ class Product2Category extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        return $this->setProperty('Id', $id, 'Identity');
     }
-    
+
     /**
      * @return Identity Unique product2Category id
      */
@@ -64,9 +81,9 @@ class Product2Category extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        return $this->setProperty('ProductId', $productId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to product
      */
@@ -75,22 +92,5 @@ class Product2Category extends DataModel
         return $this->productId;
     }
 
-    /**
-     * @param  Identity $categoryId Reference to category
-     * @return \jtl\Connector\Model\Product2Category
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCategoryId(Identity $categoryId)
-    {
-        return $this->setProperty('categoryId', $categoryId, 'Identity');
-    }
-    
-    /**
-     * @return Identity Reference to category
-     */
-    public function getCategoryId()
-    {
-        return $this->categoryId;
-    }
+ 
 }
-

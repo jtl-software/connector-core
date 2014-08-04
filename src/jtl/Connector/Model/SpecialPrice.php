@@ -7,7 +7,7 @@
 namespace jtl\Connector\Model;
 
 /**
- * .
+ * special price properties to define a net price for a customerGroup..
  *
  * @access public
  * @package jtl\Connector\Model
@@ -15,82 +15,40 @@ namespace jtl\Connector\Model;
 class SpecialPrice extends DataModel
 {
     /**
-     * @type Identity 
+     * @type Identity Reference to customerGroup
      */
     protected $customerGroupId = null;
 
     /**
-     * @type Identity 
+     * @type Identity Reference to productSpecialPrice
      */
     protected $productSpecialPriceId = null;
 
     /**
-     * @type integer 
-     */
-    protected $connectorId = 0;
-
-    /**
-     * @type float 
+     * @type double net price value
      */
     protected $priceNet = 0.0;
-
 
     /**
      * @type array list of identities
      */
-    protected $identities = array(
-        'productSpecialPriceId',
+     protected $identities = array(
         'customerGroupId',
+        'productSpecialPriceId',
     );
 
     /**
-     * @param  integer $connectorId 
-     * @return \jtl\Connector\Model\SpecialPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-     */
-    public function setConnectorId($connectorId)
-    {
-        return $this->setProperty('connectorId', $connectorId, 'integer');
-    }
-    
-    /**
-     * @return integer 
-     */
-    public function getConnectorId()
-    {
-        return $this->connectorId;
-    }
-
-    /**
-     * @param  Identity $productSpecialPriceId 
-     * @return \jtl\Connector\Model\SpecialPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductSpecialPriceId(Identity $productSpecialPriceId)
-    {
-        return $this->setProperty('productSpecialPriceId', $productSpecialPriceId, 'Identity');
-    }
-    
-    /**
-     * @return Identity 
-     */
-    public function getProductSpecialPriceId()
-    {
-        return $this->productSpecialPriceId;
-    }
-
-    /**
-     * @param  Identity $customerGroupId 
+     * @param  Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\SpecialPrice
      * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        return $this->setProperty('CustomerGroupId', $customerGroupId, 'Identity');
     }
-    
+
     /**
-     * @return Identity 
+     * @return Identity Reference to customerGroup
      */
     public function getCustomerGroupId()
     {
@@ -98,21 +56,40 @@ class SpecialPrice extends DataModel
     }
 
     /**
-     * @param  float $priceNet 
+     * @param  Identity $productSpecialPriceId Reference to productSpecialPrice
      * @return \jtl\Connector\Model\SpecialPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'float'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setPriceNet($priceNet)
+    public function setProductSpecialPriceId(Identity $productSpecialPriceId)
     {
-        return $this->setProperty('priceNet', $priceNet, 'float');
+        return $this->setProperty('ProductSpecialPriceId', $productSpecialPriceId, 'Identity');
     }
-    
+
     /**
-     * @return float 
+     * @return Identity Reference to productSpecialPrice
+     */
+    public function getProductSpecialPriceId()
+    {
+        return $this->productSpecialPriceId;
+    }
+
+    /**
+     * @param  double $priceNet net price value
+     * @return \jtl\Connector\Model\SpecialPrice
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setPriceNet(Identity $priceNet)
+    {
+        return $this->setProperty('PriceNet', $priceNet, 'double');
+    }
+
+    /**
+     * @return double net price value
      */
     public function getPriceNet()
     {
         return $this->priceNet;
     }
-}
 
+ 
+}

@@ -15,56 +15,34 @@ namespace jtl\Connector\Model;
 class Unit extends DataModel
 {
     /**
-     * @type string 
+     * @type Identity Unit id
      */
-    protected $localeName = '';
-
-    /**
-     * @type string 
-     */
-    protected $name = '';
-
+    protected $id = null;
 
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
+        'id',
     );
 
     /**
-     * @param  string $name 
+     * @param  Identity $id Unit id
      * @return \jtl\Connector\Model\Unit
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setName($name)
+    public function setId(Identity $id)
     {
-        return $this->setProperty('name', $name, 'string');
-    }
-    
-    /**
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
+        return $this->setProperty('Id', $id, 'Identity');
     }
 
     /**
-     * @param  string $localeName 
-     * @return \jtl\Connector\Model\Unit
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @return Identity Unit id
      */
-    public function setLocaleName($localeName)
+    public function getId()
     {
-        return $this->setProperty('localeName', $localeName, 'string');
+        return $this->id;
     }
-    
-    /**
-     * @return string 
-     */
-    public function getLocaleName()
-    {
-        return $this->localeName;
-    }
+
+ 
 }
-

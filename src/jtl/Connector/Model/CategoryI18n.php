@@ -30,76 +30,36 @@ class CategoryI18n extends DataModel
     protected $localeName = '';
 
     /**
+     * @type string Optional localized  short description used for meta tag description
+     */
+    protected $metaDescription = '';
+
+    /**
+     * @type string Optional localized meta tag keywords value
+     */
+    protected $metaKeywords = '';
+
+    /**
      * @type string Localized category name
      */
     protected $name = '';
 
     /**
-     * @type string 
+     * @type string Optional localized title tag value
      */
-    protected $url = '';
+    protected $titleTag = '';
 
+    /**
+     * @type string Optional localized category URL
+     */
+    protected $urlPath = '';
 
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
         'categoryId',
     );
-
-    /**
-     * @param  string $name Localized category name
-     * @return \jtl\Connector\Model\CategoryI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setName($name)
-    {
-        return $this->setProperty('name', $name, 'string');
-    }
-    
-    /**
-     * @return string Localized category name
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param  string $description Optional localized Long Description
-     * @return \jtl\Connector\Model\CategoryI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setDescription($description)
-    {
-        return $this->setProperty('description', $description, 'string');
-    }
-    
-    /**
-     * @return string Optional localized Long Description
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param  string $url 
-     * @return \jtl\Connector\Model\CategoryI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setUrl($url)
-    {
-        return $this->setProperty('url', $url, 'string');
-    }
-    
-    /**
-     * @return string 
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
 
     /**
      * @param  Identity $categoryId Reference to category
@@ -108,9 +68,9 @@ class CategoryI18n extends DataModel
      */
     public function setCategoryId(Identity $categoryId)
     {
-        return $this->setProperty('categoryId', $categoryId, 'Identity');
+        return $this->setProperty('CategoryId', $categoryId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to category
      */
@@ -120,15 +80,33 @@ class CategoryI18n extends DataModel
     }
 
     /**
+     * @param  string $description Optional localized Long Description
+     * @return \jtl\Connector\Model\CategoryI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setDescription(Identity $description)
+    {
+        return $this->setProperty('Description', $description, 'string');
+    }
+
+    /**
+     * @return string Optional localized Long Description
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
      * @param  string $localeName Locale
      * @return \jtl\Connector\Model\CategoryI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setLocaleName($localeName)
+    public function setLocaleName(Identity $localeName)
     {
-        return $this->setProperty('localeName', $localeName, 'string');
+        return $this->setProperty('LocaleName', $localeName, 'string');
     }
-    
+
     /**
      * @return string Locale
      */
@@ -136,5 +114,96 @@ class CategoryI18n extends DataModel
     {
         return $this->localeName;
     }
-}
 
+    /**
+     * @param  string $metaDescription Optional localized  short description used for meta tag description
+     * @return \jtl\Connector\Model\CategoryI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setMetaDescription(Identity $metaDescription)
+    {
+        return $this->setProperty('MetaDescription', $metaDescription, 'string');
+    }
+
+    /**
+     * @return string Optional localized  short description used for meta tag description
+     */
+    public function getMetaDescription()
+    {
+        return $this->metaDescription;
+    }
+
+    /**
+     * @param  string $metaKeywords Optional localized meta tag keywords value
+     * @return \jtl\Connector\Model\CategoryI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setMetaKeywords(Identity $metaKeywords)
+    {
+        return $this->setProperty('MetaKeywords', $metaKeywords, 'string');
+    }
+
+    /**
+     * @return string Optional localized meta tag keywords value
+     */
+    public function getMetaKeywords()
+    {
+        return $this->metaKeywords;
+    }
+
+    /**
+     * @param  string $name Localized category name
+     * @return \jtl\Connector\Model\CategoryI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setName(Identity $name)
+    {
+        return $this->setProperty('Name', $name, 'string');
+    }
+
+    /**
+     * @return string Localized category name
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param  string $titleTag Optional localized title tag value
+     * @return \jtl\Connector\Model\CategoryI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setTitleTag(Identity $titleTag)
+    {
+        return $this->setProperty('TitleTag', $titleTag, 'string');
+    }
+
+    /**
+     * @return string Optional localized title tag value
+     */
+    public function getTitleTag()
+    {
+        return $this->titleTag;
+    }
+
+    /**
+     * @param  string $urlPath Optional localized category URL
+     * @return \jtl\Connector\Model\CategoryI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setUrlPath(Identity $urlPath)
+    {
+        return $this->setProperty('UrlPath', $urlPath, 'string');
+    }
+
+    /**
+     * @return string Optional localized category URL
+     */
+    public function getUrlPath()
+    {
+        return $this->urlPath;
+    }
+
+ 
+}

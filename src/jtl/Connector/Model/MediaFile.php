@@ -35,7 +35,7 @@ class MediaFile extends DataModel
     protected $path = '';
 
     /**
-     * @type integer|null Optional sort number
+     * @type int Optional sort number
      */
     protected $sort = 0;
 
@@ -50,117 +50,22 @@ class MediaFile extends DataModel
     protected $url = '';
 
     /**
-     * Nav [MediaFile » One]
-     *
      * @type \jtl\Connector\Model\MediaFileI18n[]
      */
     protected $i18ns = array();
 
     /**
-     * Nav [MediaFile » One]
-     *
      * @type \jtl\Connector\Model\MediaFileAttr[]
      */
     protected $attributes = array();
 
-
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
         'id',
         'productId',
     );
-
-    /**
-     * @param  string $path File path
-     * @return \jtl\Connector\Model\MediaFile
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setPath($path)
-    {
-        return $this->setProperty('path', $path, 'string');
-    }
-    
-    /**
-     * @return string File path
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
-     * @param  string $url Complete URL
-     * @return \jtl\Connector\Model\MediaFile
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setUrl($url)
-    {
-        return $this->setProperty('url', $url, 'string');
-    }
-    
-    /**
-     * @return string Complete URL
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * @param  string $mediaFileCategory Optional media file category name
-     * @return \jtl\Connector\Model\MediaFile
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setMediaFileCategory($mediaFileCategory)
-    {
-        return $this->setProperty('mediaFileCategory', $mediaFileCategory, 'string');
-    }
-    
-    /**
-     * @return string Optional media file category name
-     */
-    public function getMediaFileCategory()
-    {
-        return $this->mediaFileCategory;
-    }
-
-    /**
-     * @param  string $type Media file type e.g. "pdf"
-     * @return \jtl\Connector\Model\MediaFile
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setType($type)
-    {
-        return $this->setProperty('type', $type, 'string');
-    }
-    
-    /**
-     * @return string Media file type e.g. "pdf"
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param  integer $sort Optional sort number
-     * @return \jtl\Connector\Model\MediaFile
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-     */
-    public function setSort($sort)
-    {
-        return $this->setProperty('sort', $sort, 'integer');
-    }
-    
-    /**
-     * @return integer Optional sort number
-     */
-    public function getSort()
-    {
-        return $this->sort;
-    }
 
     /**
      * @param  Identity $id Unique MediaFile id
@@ -169,9 +74,9 @@ class MediaFile extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        return $this->setProperty('Id', $id, 'Identity');
     }
-    
+
     /**
      * @return Identity Unique MediaFile id
      */
@@ -187,9 +92,9 @@ class MediaFile extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        return $this->setProperty('ProductId', $productId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to product
      */
@@ -199,17 +104,107 @@ class MediaFile extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\MediaFileI18n $i18n
+     * @param  string $mediaFileCategory Optional media file category name
+     * @return \jtl\Connector\Model\MediaFile
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setMediaFileCategory(Identity $mediaFileCategory)
+    {
+        return $this->setProperty('MediaFileCategory', $mediaFileCategory, 'string');
+    }
+
+    /**
+     * @return string Optional media file category name
+     */
+    public function getMediaFileCategory()
+    {
+        return $this->mediaFileCategory;
+    }
+
+    /**
+     * @param  string $path File path
+     * @return \jtl\Connector\Model\MediaFile
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setPath(Identity $path)
+    {
+        return $this->setProperty('Path', $path, 'string');
+    }
+
+    /**
+     * @return string File path
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * @param  int $sort Optional sort number
+     * @return \jtl\Connector\Model\MediaFile
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setSort(Identity $sort)
+    {
+        return $this->setProperty('Sort', $sort, 'int');
+    }
+
+    /**
+     * @return int Optional sort number
+     */
+    public function getSort()
+    {
+        return $this->sort;
+    }
+
+    /**
+     * @param  string $type Media file type e.g. "pdf"
+     * @return \jtl\Connector\Model\MediaFile
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setType(Identity $type)
+    {
+        return $this->setProperty('Type', $type, 'string');
+    }
+
+    /**
+     * @return string Media file type e.g. "pdf"
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param  string $url Complete URL
+     * @return \jtl\Connector\Model\MediaFile
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setUrl(Identity $url)
+    {
+        return $this->setProperty('Url', $url, 'string');
+    }
+
+    /**
+     * @return string Complete URL
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\MediaFileI18n $i18ns
      * @return \jtl\Connector\Model\MediaFile
      */
     public function addI18n(\jtl\Connector\Model\MediaFileI18n $i18n)
     {
-        $this->i18ns[] = $i18n;
+        $this->i18ns[] = $i18ns;
         return $this;
     }
     
     /**
-     * @return MediaFileI18n
+     * @return \jtl\Connector\Model\MediaFileI18n[]
      */
     public function getI18ns()
     {
@@ -224,9 +219,8 @@ class MediaFile extends DataModel
         $this->i18ns = array();
         return $this;
     }
-
     /**
-     * @param  \jtl\Connector\Model\MediaFileAttr $attribute
+     * @param  \jtl\Connector\Model\MediaFileAttr $attributes
      * @return \jtl\Connector\Model\MediaFile
      */
     public function addAttribute(\jtl\Connector\Model\MediaFileAttr $attribute)
@@ -236,7 +230,7 @@ class MediaFile extends DataModel
     }
     
     /**
-     * @return MediaFileAttr
+     * @return \jtl\Connector\Model\MediaFileAttr[]
      */
     public function getAttributes()
     {
@@ -251,5 +245,5 @@ class MediaFile extends DataModel
         $this->attributes = array();
         return $this;
     }
+ 
 }
-

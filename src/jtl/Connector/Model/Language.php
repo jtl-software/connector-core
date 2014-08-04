@@ -20,7 +20,7 @@ class Language extends DataModel
     protected $id = null;
 
     /**
-     * @type boolean Flag default language for frontend. Exact 1 language must be marked as default.
+     * @type bool Flag default language for frontend. Exact 1 language must be marked as default.
      */
     protected $isDefault = false;
 
@@ -39,24 +39,77 @@ class Language extends DataModel
      */
     protected $nameGerman = '';
 
-
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
         'id',
     );
 
     /**
+     * @param  Identity $id Unique language id
+     * @return \jtl\Connector\Model\Language
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setId(Identity $id)
+    {
+        return $this->setProperty('Id', $id, 'Identity');
+    }
+
+    /**
+     * @return Identity Unique language id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param  bool $isDefault Flag default language for frontend. Exact 1 language must be marked as default.
+     * @return \jtl\Connector\Model\Language
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setIsDefault(Identity $isDefault)
+    {
+        return $this->setProperty('IsDefault', $isDefault, 'bool');
+    }
+
+    /**
+     * @return bool Flag default language for frontend. Exact 1 language must be marked as default.
+     */
+    public function getIsDefault()
+    {
+        return $this->isDefault;
+    }
+
+    /**
+     * @param  string $localeName Locale
+     * @return \jtl\Connector\Model\Language
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setLocaleName(Identity $localeName)
+    {
+        return $this->setProperty('LocaleName', $localeName, 'string');
+    }
+
+    /**
+     * @return string Locale
+     */
+    public function getLocaleName()
+    {
+        return $this->localeName;
+    }
+
+    /**
      * @param  string $nameEnglish English term
      * @return \jtl\Connector\Model\Language
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setNameEnglish($nameEnglish)
+    public function setNameEnglish(Identity $nameEnglish)
     {
-        return $this->setProperty('nameEnglish', $nameEnglish, 'string');
+        return $this->setProperty('NameEnglish', $nameEnglish, 'string');
     }
-    
+
     /**
      * @return string English term
      */
@@ -68,13 +121,13 @@ class Language extends DataModel
     /**
      * @param  string $nameGerman German term
      * @return \jtl\Connector\Model\Language
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setNameGerman($nameGerman)
+    public function setNameGerman(Identity $nameGerman)
     {
-        return $this->setProperty('nameGerman', $nameGerman, 'string');
+        return $this->setProperty('NameGerman', $nameGerman, 'string');
     }
-    
+
     /**
      * @return string German term
      */
@@ -83,58 +136,5 @@ class Language extends DataModel
         return $this->nameGerman;
     }
 
-    /**
-     * @param  string $localeName Locale
-     * @return \jtl\Connector\Model\Language
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setLocaleName($localeName)
-    {
-        return $this->setProperty('localeName', $localeName, 'string');
-    }
-    
-    /**
-     * @return string Locale
-     */
-    public function getLocaleName()
-    {
-        return $this->localeName;
-    }
-
-    /**
-     * @param  Identity $id Unique language id
-     * @return \jtl\Connector\Model\Language
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id)
-    {
-        return $this->setProperty('id', $id, 'Identity');
-    }
-    
-    /**
-     * @return Identity Unique language id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param  boolean $isDefault Flag default language for frontend. Exact 1 language must be marked as default.
-     * @return \jtl\Connector\Model\Language
-     * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
-     */
-    public function setIsDefault($isDefault)
-    {
-        return $this->setProperty('isDefault', $isDefault, 'boolean');
-    }
-    
-    /**
-     * @return boolean Flag default language for frontend. Exact 1 language must be marked as default.
-     */
-    public function getIsDefault()
-    {
-        return $this->isDefault;
-    }
+ 
 }
-

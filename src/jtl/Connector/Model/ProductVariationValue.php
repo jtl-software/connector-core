@@ -25,39 +25,9 @@ class ProductVariationValue extends DataModel
     protected $productVariationId = null;
 
     /**
-     * @type string 
-     */
-    protected $cName = '';
-
-    /**
-     * @type string 
-     */
-    protected $ean = '';
-
-    /**
-     * @type float|null 
-     */
-    protected $extraCharge = 0.0;
-
-    /**
-     * @type float|null 
-     */
-    protected $extraChargeNet = 0.0;
-
-    /**
-     * @type float|null Optional variation extra weight
+     * @type double Optional variation extra weight
      */
     protected $extraWeight = 0.0;
-
-    /**
-     * @type boolean 
-     */
-    protected $flagUpdate = false;
-
-    /**
-     * @type boolean 
-     */
-    protected $isActive = false;
 
     /**
      * @type string Optional Stock Keeping Unit
@@ -65,195 +35,42 @@ class ProductVariationValue extends DataModel
     protected $sku = '';
 
     /**
-     * @type integer|null Optional sort number
+     * @type int Optional sort number
      */
     protected $sort = 0;
 
     /**
-     * @type float|null Optional stock level
+     * @type double Optional stock level
      */
     protected $stockLevel = 0.0;
 
     /**
-     * Nav [ProductVariationValue » ZeroOrOne]
-     *
-     * @type \jtl\Connector\Model\ProductVariationValueDependency[]
+     * @type \jtl\Connector\Model\ProductVariationValueInvisibility[]
      */
-    protected $dependencies = array();
+    protected $invisibilities = array();
 
     /**
-     * Nav [ProductVariationValue » One]
-     *
-     * @type \jtl\Connector\Model\ProductVariationValueExtraCharge[]
-     */
-    protected $extraCharges = array();
-
-    /**
-     * Nav [ProductVariationValue » One]
-     *
      * @type \jtl\Connector\Model\ProductVariationValueI18n[]
      */
     protected $i18ns = array();
 
     /**
-     * Nav [ProductVariationValue » One]
-     *
-     * @type \jtl\Connector\Model\ProductVariationValueInvisibility[]
+     * @type \jtl\Connector\Model\ProductVariationValueExtraCharge[]
      */
-    protected $invisibilities = array();
+    protected $extraCharges = array();
 
+    /**
+     * @type \jtl\Connector\Model\ProductVariationValueDependency[]
+     */
+    protected $dependencies = array();
 
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
         'id',
         'productVariationId',
     );
-
-    /**
-     * @param  float $extraCharge 
-     * @return \jtl\Connector\Model\ProductVariationValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'float'.
-     */
-    public function setExtraCharge($extraCharge)
-    {
-        return $this->setProperty('extraCharge', $extraCharge, 'float');
-    }
-    
-    /**
-     * @return float 
-     */
-    public function getExtraCharge()
-    {
-        return $this->extraCharge;
-    }
-
-    /**
-     * @param  float $extraChargeNet 
-     * @return \jtl\Connector\Model\ProductVariationValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'float'.
-     */
-    public function setExtraChargeNet($extraChargeNet)
-    {
-        return $this->setProperty('extraChargeNet', $extraChargeNet, 'float');
-    }
-    
-    /**
-     * @return float 
-     */
-    public function getExtraChargeNet()
-    {
-        return $this->extraChargeNet;
-    }
-
-    /**
-     * @param  float $extraWeight Optional variation extra weight
-     * @return \jtl\Connector\Model\ProductVariationValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'float'.
-     */
-    public function setExtraWeight($extraWeight)
-    {
-        return $this->setProperty('extraWeight', $extraWeight, 'float');
-    }
-    
-    /**
-     * @return float Optional variation extra weight
-     */
-    public function getExtraWeight()
-    {
-        return $this->extraWeight;
-    }
-
-    /**
-     * @param  string $sku Optional Stock Keeping Unit
-     * @return \jtl\Connector\Model\ProductVariationValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setSku($sku)
-    {
-        return $this->setProperty('sku', $sku, 'string');
-    }
-    
-    /**
-     * @return string Optional Stock Keeping Unit
-     */
-    public function getSku()
-    {
-        return $this->sku;
-    }
-
-    /**
-     * @param  integer $sort Optional sort number
-     * @return \jtl\Connector\Model\ProductVariationValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-     */
-    public function setSort($sort)
-    {
-        return $this->setProperty('sort', $sort, 'integer');
-    }
-    
-    /**
-     * @return integer Optional sort number
-     */
-    public function getSort()
-    {
-        return $this->sort;
-    }
-
-    /**
-     * @param  float $stockLevel Optional stock level
-     * @return \jtl\Connector\Model\ProductVariationValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'float'.
-     */
-    public function setStockLevel($stockLevel)
-    {
-        return $this->setProperty('stockLevel', $stockLevel, 'float');
-    }
-    
-    /**
-     * @return float Optional stock level
-     */
-    public function getStockLevel()
-    {
-        return $this->stockLevel;
-    }
-
-    /**
-     * @param  string $ean 
-     * @return \jtl\Connector\Model\ProductVariationValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setEan($ean)
-    {
-        return $this->setProperty('ean', $ean, 'string');
-    }
-    
-    /**
-     * @return string 
-     */
-    public function getEan()
-    {
-        return $this->ean;
-    }
-
-    /**
-     * @param  string $cName 
-     * @return \jtl\Connector\Model\ProductVariationValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setCName($cName)
-    {
-        return $this->setProperty('cName', $cName, 'string');
-    }
-    
-    /**
-     * @return string 
-     */
-    public function getCName()
-    {
-        return $this->cName;
-    }
 
     /**
      * @param  Identity $id Unique productVariationValue id
@@ -262,9 +79,9 @@ class ProductVariationValue extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        return $this->setProperty('Id', $id, 'Identity');
     }
-    
+
     /**
      * @return Identity Unique productVariationValue id
      */
@@ -280,9 +97,9 @@ class ProductVariationValue extends DataModel
      */
     public function setProductVariationId(Identity $productVariationId)
     {
-        return $this->setProperty('productVariationId', $productVariationId, 'Identity');
+        return $this->setProperty('ProductVariationId', $productVariationId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to productVariation
      */
@@ -292,124 +109,79 @@ class ProductVariationValue extends DataModel
     }
 
     /**
-     * @param  boolean $isActive 
+     * @param  double $extraWeight Optional variation extra weight
      * @return \jtl\Connector\Model\ProductVariationValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setIsActive($isActive)
+    public function setExtraWeight(Identity $extraWeight)
     {
-        return $this->setProperty('isActive', $isActive, 'boolean');
-    }
-    
-    /**
-     * @return boolean 
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
+        return $this->setProperty('ExtraWeight', $extraWeight, 'double');
     }
 
     /**
-     * @param  boolean $flagUpdate 
-     * @return \jtl\Connector\Model\ProductVariationValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
+     * @return double Optional variation extra weight
      */
-    public function setFlagUpdate($flagUpdate)
+    public function getExtraWeight()
     {
-        return $this->setProperty('flagUpdate', $flagUpdate, 'boolean');
-    }
-    
-    /**
-     * @return boolean 
-     */
-    public function getFlagUpdate()
-    {
-        return $this->flagUpdate;
+        return $this->extraWeight;
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductVariationValueDependency $dependency
+     * @param  string $sku Optional Stock Keeping Unit
      * @return \jtl\Connector\Model\ProductVariationValue
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function addDependency(\jtl\Connector\Model\ProductVariationValueDependency $dependency)
+    public function setSku(Identity $sku)
     {
-        $this->dependencies[] = $dependency;
-        return $this;
-    }
-    
-    /**
-     * @return ProductVariationValueDependency
-     */
-    public function getDependencies()
-    {
-        return $this->dependencies;
+        return $this->setProperty('Sku', $sku, 'string');
     }
 
     /**
-     * @return \jtl\Connector\Model\ProductVariationValue
+     * @return string Optional Stock Keeping Unit
      */
-    public function clearDependencies()
+    public function getSku()
     {
-        $this->dependencies = array();
-        return $this;
+        return $this->sku;
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductVariationValueExtraCharge $extraCharge
+     * @param  int $sort Optional sort number
      * @return \jtl\Connector\Model\ProductVariationValue
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function addExtraCharge(\jtl\Connector\Model\ProductVariationValueExtraCharge $extraCharge)
+    public function setSort(Identity $sort)
     {
-        $this->extraCharges[] = $extraCharge;
-        return $this;
-    }
-    
-    /**
-     * @return ProductVariationValueExtraCharge
-     */
-    public function getExtraCharges()
-    {
-        return $this->extraCharges;
+        return $this->setProperty('Sort', $sort, 'int');
     }
 
     /**
-     * @return \jtl\Connector\Model\ProductVariationValue
+     * @return int Optional sort number
      */
-    public function clearExtraCharges()
+    public function getSort()
     {
-        $this->extraCharges = array();
-        return $this;
+        return $this->sort;
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductVariationValueI18n $i18n
+     * @param  double $stockLevel Optional stock level
      * @return \jtl\Connector\Model\ProductVariationValue
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function addI18n(\jtl\Connector\Model\ProductVariationValueI18n $i18n)
+    public function setStockLevel(Identity $stockLevel)
     {
-        $this->i18ns[] = $i18n;
-        return $this;
-    }
-    
-    /**
-     * @return ProductVariationValueI18n
-     */
-    public function getI18ns()
-    {
-        return $this->i18ns;
+        return $this->setProperty('StockLevel', $stockLevel, 'double');
     }
 
     /**
-     * @return \jtl\Connector\Model\ProductVariationValue
+     * @return double Optional stock level
      */
-    public function clearI18ns()
+    public function getStockLevel()
     {
-        $this->i18ns = array();
-        return $this;
+        return $this->stockLevel;
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductVariationValueInvisibility $invisibility
+     * @param  \jtl\Connector\Model\ProductVariationValueInvisibility $invisibilities
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function addInvisibility(\jtl\Connector\Model\ProductVariationValueInvisibility $invisibility)
@@ -419,7 +191,7 @@ class ProductVariationValue extends DataModel
     }
     
     /**
-     * @return ProductVariationValueInvisibility
+     * @return \jtl\Connector\Model\ProductVariationValueInvisibility[]
      */
     public function getInvisibilities()
     {
@@ -434,5 +206,83 @@ class ProductVariationValue extends DataModel
         $this->invisibilities = array();
         return $this;
     }
-}
+    /**
+     * @param  \jtl\Connector\Model\ProductVariationValueI18n $i18ns
+     * @return \jtl\Connector\Model\ProductVariationValue
+     */
+    public function addI18n(\jtl\Connector\Model\ProductVariationValueI18n $i18n)
+    {
+        $this->i18ns[] = $i18ns;
+        return $this;
+    }
+    
+    /**
+     * @return \jtl\Connector\Model\ProductVariationValueI18n[]
+     */
+    public function getI18ns()
+    {
+        return $this->i18ns;
+    }
 
+    /**
+     * @return \jtl\Connector\Model\ProductVariationValue
+     */
+    public function clearI18ns()
+    {
+        $this->i18ns = array();
+        return $this;
+    }
+    /**
+     * @param  \jtl\Connector\Model\ProductVariationValueExtraCharge $extraCharges
+     * @return \jtl\Connector\Model\ProductVariationValue
+     */
+    public function addExtraCharge(\jtl\Connector\Model\ProductVariationValueExtraCharge $extraCharge)
+    {
+        $this->extraCharges[] = $extraCharge;
+        return $this;
+    }
+    
+    /**
+     * @return \jtl\Connector\Model\ProductVariationValueExtraCharge[]
+     */
+    public function getExtraCharges()
+    {
+        return $this->extraCharges;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\ProductVariationValue
+     */
+    public function clearExtraCharges()
+    {
+        $this->extraCharges = array();
+        return $this;
+    }
+    /**
+     * @param  \jtl\Connector\Model\ProductVariationValueDependency $dependencies
+     * @return \jtl\Connector\Model\ProductVariationValue
+     */
+    public function addDependency(\jtl\Connector\Model\ProductVariationValueDependency $dependency)
+    {
+        $this->dependencies[] = $dependency;
+        return $this;
+    }
+    
+    /**
+     * @return \jtl\Connector\Model\ProductVariationValueDependency[]
+     */
+    public function getDependencies()
+    {
+        return $this->dependencies;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\ProductVariationValue
+     */
+    public function clearDependencies()
+    {
+        $this->dependencies = array();
+        return $this;
+    }
+ 
+}

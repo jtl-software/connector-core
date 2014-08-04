@@ -25,35 +25,29 @@ class ProductVariationInvisibility extends DataModel
     protected $productVariationId = null;
 
     /**
-     * @type integer 
-     */
-    protected $connectorId = 0;
-
-
-    /**
      * @type array list of identities
      */
-    protected $identities = array(
-        'productVariationId',
+     protected $identities = array(
         'customerGroupId',
+        'productVariationId',
     );
 
     /**
-     * @param  integer $connectorId 
+     * @param  Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ProductVariationInvisibility
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setConnectorId($connectorId)
+    public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('connectorId', $connectorId, 'integer');
+        return $this->setProperty('CustomerGroupId', $customerGroupId, 'Identity');
     }
-    
+
     /**
-     * @return integer 
+     * @return Identity Reference to customerGroup
      */
-    public function getConnectorId()
+    public function getCustomerGroupId()
     {
-        return $this->connectorId;
+        return $this->customerGroupId;
     }
 
     /**
@@ -63,9 +57,9 @@ class ProductVariationInvisibility extends DataModel
      */
     public function setProductVariationId(Identity $productVariationId)
     {
-        return $this->setProperty('productVariationId', $productVariationId, 'Identity');
+        return $this->setProperty('ProductVariationId', $productVariationId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to productVariation
      */
@@ -74,22 +68,5 @@ class ProductVariationInvisibility extends DataModel
         return $this->productVariationId;
     }
 
-    /**
-     * @param  Identity $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\ProductVariationInvisibility
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCustomerGroupId(Identity $customerGroupId)
-    {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
-    }
-    
-    /**
-     * @return Identity Reference to customerGroup
-     */
-    public function getCustomerGroupId()
-    {
-        return $this->customerGroupId;
-    }
+ 
 }
-

@@ -1,123 +1,95 @@
 <?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * TaxZone to Country Allocation (set in JTL-Wawi ERP).
+ * TaxZone to Country Allocation (set in JTL-Wawi ERP)..
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
  */
 class TaxZoneCountry extends DataModel
 {
     /**
-     * @var Identity Unique taxZoneCountry id
+     * @type Identity Unique taxZoneCountry id
      */
-    protected $_id = null;
-    
+    protected $id = null;
+
     /**
-     * @var Identity Reference to taxZone
+     * @type Identity Reference to taxZone
      */
-    protected $_taxZoneId = null;
-    
+    protected $taxZoneId = null;
+
     /**
-     * @var string Country ISO 3166-2 (2 letter Uppercase)
+     * @type string Country ISO 3166-2 (2 letter Uppercase)
      */
-    protected $_countryIso = '';
-    
+    protected $countryIso = '';
+
     /**
-     * @var mixed:string
+     * @type array list of identities
      */
-    protected $_identities = array(
-        '_id',
-        '_taxZoneId'
+     protected $identities = array(
+        'id',
+        'taxZoneId',
     );
-    
+
     /**
-     * TaxZoneCountry Setter
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_id":
-                case "_taxZoneId":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-                case "_countryIso":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-            }
-        }
-    }
-    
-    /**
-     * @param Identity $id Unique taxZoneCountry id
+     * @param  Identity $id Unique taxZoneCountry id
      * @return \jtl\Connector\Model\TaxZoneCountry
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        $this->_id = $id;
-        return $this;
+        return $this->setProperty('Id', $id, 'Identity');
     }
-    
+
     /**
      * @return Identity Unique taxZoneCountry id
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
+
     /**
-     * @param Identity $taxZoneId Reference to taxZone
+     * @param  Identity $taxZoneId Reference to taxZone
      * @return \jtl\Connector\Model\TaxZoneCountry
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setTaxZoneId(Identity $taxZoneId)
     {
-        $this->_taxZoneId = $taxZoneId;
-        return $this;
+        return $this->setProperty('TaxZoneId', $taxZoneId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to taxZone
      */
     public function getTaxZoneId()
     {
-        return $this->_taxZoneId;
+        return $this->taxZoneId;
     }
+
     /**
-     * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
+     * @param  string $countryIso Country ISO 3166-2 (2 letter Uppercase)
      * @return \jtl\Connector\Model\TaxZoneCountry
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCountryIso($countryIso)
+    public function setCountryIso(Identity $countryIso)
     {
-        $this->_countryIso = (string)$countryIso;
-        return $this;
+        return $this->setProperty('CountryIso', $countryIso, 'string');
     }
-    
+
     /**
      * @return string Country ISO 3166-2 (2 letter Uppercase)
      */
     public function getCountryIso()
     {
-        return $this->_countryIso;
+        return $this->countryIso;
     }
+
+ 
 }

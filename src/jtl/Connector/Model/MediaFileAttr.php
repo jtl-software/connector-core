@@ -39,50 +39,13 @@ class MediaFileAttr extends DataModel
      */
     protected $value = '';
 
-
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
         'id',
         'mediaFileId',
     );
-
-    /**
-     * @param  string $key Attribute name
-     * @return \jtl\Connector\Model\MediaFileAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setKey($key)
-    {
-        return $this->setProperty('key', $key, 'string');
-    }
-    
-    /**
-     * @return string Attribute name
-     */
-    public function getKey()
-    {
-        return $this->key;
-    }
-
-    /**
-     * @param  string $value Attribute value
-     * @return \jtl\Connector\Model\MediaFileAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setValue($value)
-    {
-        return $this->setProperty('value', $value, 'string');
-    }
-    
-    /**
-     * @return string Attribute value
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
 
     /**
      * @param  Identity $id Unique MediaFileAttr id
@@ -91,9 +54,9 @@ class MediaFileAttr extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        return $this->setProperty('Id', $id, 'Identity');
     }
-    
+
     /**
      * @return Identity Unique MediaFileAttr id
      */
@@ -109,9 +72,9 @@ class MediaFileAttr extends DataModel
      */
     public function setMediaFileId(Identity $mediaFileId)
     {
-        return $this->setProperty('mediaFileId', $mediaFileId, 'Identity');
+        return $this->setProperty('MediaFileId', $mediaFileId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to mediaFile
      */
@@ -121,15 +84,33 @@ class MediaFileAttr extends DataModel
     }
 
     /**
+     * @param  string $key Attribute name
+     * @return \jtl\Connector\Model\MediaFileAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setKey(Identity $key)
+    {
+        return $this->setProperty('Key', $key, 'string');
+    }
+
+    /**
+     * @return string Attribute name
+     */
+    public function getKey()
+    {
+        return $this->key;
+    }
+
+    /**
      * @param  string $localeName Locale
      * @return \jtl\Connector\Model\MediaFileAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setLocaleName($localeName)
+    public function setLocaleName(Identity $localeName)
     {
-        return $this->setProperty('localeName', $localeName, 'string');
+        return $this->setProperty('LocaleName', $localeName, 'string');
     }
-    
+
     /**
      * @return string Locale
      */
@@ -137,5 +118,24 @@ class MediaFileAttr extends DataModel
     {
         return $this->localeName;
     }
-}
 
+    /**
+     * @param  string $value Attribute value
+     * @return \jtl\Connector\Model\MediaFileAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setValue(Identity $value)
+    {
+        return $this->setProperty('Value', $value, 'string');
+    }
+
+    /**
+     * @return string Attribute value
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+ 
+}

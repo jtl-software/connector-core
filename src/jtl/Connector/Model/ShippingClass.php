@@ -24,31 +24,12 @@ class ShippingClass extends DataModel
      */
     protected $name = '';
 
-
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
         'id',
     );
-
-    /**
-     * @param  string $name Optional (internal) Shipping class name
-     * @return \jtl\Connector\Model\ShippingClass
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setName($name)
-    {
-        return $this->setProperty('name', $name, 'string');
-    }
-    
-    /**
-     * @return string Optional (internal) Shipping class name
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
 
     /**
      * @param  Identity $id Unique shippingClass id
@@ -57,9 +38,9 @@ class ShippingClass extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        return $this->setProperty('Id', $id, 'Identity');
     }
-    
+
     /**
      * @return Identity Unique shippingClass id
      */
@@ -67,5 +48,24 @@ class ShippingClass extends DataModel
     {
         return $this->id;
     }
-}
 
+    /**
+     * @param  string $name Optional (internal) Shipping class name
+     * @return \jtl\Connector\Model\ShippingClass
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setName(Identity $name)
+    {
+        return $this->setProperty('Name', $name, 'string');
+    }
+
+    /**
+     * @return string Optional (internal) Shipping class name
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+ 
+}

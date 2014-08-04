@@ -1,145 +1,117 @@
 <?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Category
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Localized key-value-pair for categoryAttr. All properties must be specified. 
+ * Localized key-value-pair for categoryAttr. All properties must be specified. .
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Category
  */
 class CategoryAttrI18n extends DataModel
 {
     /**
-     * @var string Locale
+     * @type Identity Reference to categoryAttr
      */
-    protected $_localeName = '';
-    
+    protected $categoryAttrId = null;
+
     /**
-     * @var Identity Reference to categoryAttr
+     * @type string Attribute key
      */
-    protected $_categoryAttrId = null;
-    
+    protected $key = '';
+
     /**
-     * @var string Attribute key
+     * @type string Locale
      */
-    protected $_key = '';
-    
+    protected $localeName = '';
+
     /**
-     * @var string Attribute value
+     * @type string Attribute value
      */
-    protected $_value = '';
-    
+    protected $value = '';
+
     /**
-     * @var mixed:string
+     * @type array list of identities
      */
-    protected $_identities = array(
-        '_categoryAttrId'
+     protected $identities = array(
+        'categoryAttrId',
     );
-    
+
     /**
-     * CategoryAttrI18n Setter
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_localeName":
-                case "_key":
-                case "_value":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-                case "_categoryAttrId":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-            }
-        }
-    }
-    
-    /**
-     * @param string $localeName Locale
+     * @param  Identity $categoryAttrId Reference to categoryAttr
      * @return \jtl\Connector\Model\CategoryAttrI18n
-     */
-    public function setLocaleName($localeName)
-    {
-        $this->_localeName = (string)$localeName;
-        return $this;
-    }
-    
-    /**
-     * @return string Locale
-     */
-    public function getLocaleName()
-    {
-        return $this->_localeName;
-    }
-    /**
-     * @param Identity $categoryAttrId Reference to categoryAttr
-     * @return \jtl\Connector\Model\CategoryAttrI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCategoryAttrId(Identity $categoryAttrId)
     {
-        $this->_categoryAttrId = $categoryAttrId;
-        return $this;
+        return $this->setProperty('CategoryAttrId', $categoryAttrId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to categoryAttr
      */
     public function getCategoryAttrId()
     {
-        return $this->_categoryAttrId;
+        return $this->categoryAttrId;
     }
+
     /**
-     * @param string $key Attribute key
+     * @param  string $key Attribute key
      * @return \jtl\Connector\Model\CategoryAttrI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setKey($key)
+    public function setKey(Identity $key)
     {
-        $this->_key = (string)$key;
-        return $this;
+        return $this->setProperty('Key', $key, 'string');
     }
-    
+
     /**
      * @return string Attribute key
      */
     public function getKey()
     {
-        return $this->_key;
+        return $this->key;
     }
+
     /**
-     * @param string $value Attribute value
+     * @param  string $localeName Locale
      * @return \jtl\Connector\Model\CategoryAttrI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setValue($value)
+    public function setLocaleName(Identity $localeName)
     {
-        $this->_value = (string)$value;
-        return $this;
+        return $this->setProperty('LocaleName', $localeName, 'string');
     }
-    
+
+    /**
+     * @return string Locale
+     */
+    public function getLocaleName()
+    {
+        return $this->localeName;
+    }
+
+    /**
+     * @param  string $value Attribute value
+     * @return \jtl\Connector\Model\CategoryAttrI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setValue(Identity $value)
+    {
+        return $this->setProperty('Value', $value, 'string');
+    }
+
     /**
      * @return string Attribute value
      */
     public function getValue()
     {
-        return $this->_value;
+        return $this->value;
     }
+
+ 
 }

@@ -25,59 +25,17 @@ class CategoryCustomerGroup extends DataModel
     protected $customerGroupId = null;
 
     /**
-     * @type integer 
-     */
-    protected $connectorId = 0;
-
-    /**
-     * @type float|null Optional discount on products in specified categoryId for  customerGroupId
+     * @type double Optional discount on products in specified categoryId for  customerGroupId
      */
     protected $discount = 0.0;
-
 
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
         'categoryId',
         'customerGroupId',
     );
-
-    /**
-     * @param  integer $connectorId 
-     * @return \jtl\Connector\Model\CategoryCustomerGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-     */
-    public function setConnectorId($connectorId)
-    {
-        return $this->setProperty('connectorId', $connectorId, 'integer');
-    }
-    
-    /**
-     * @return integer 
-     */
-    public function getConnectorId()
-    {
-        return $this->connectorId;
-    }
-
-    /**
-     * @param  float $discount Optional discount on products in specified categoryId for  customerGroupId
-     * @return \jtl\Connector\Model\CategoryCustomerGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'float'.
-     */
-    public function setDiscount($discount)
-    {
-        return $this->setProperty('discount', $discount, 'float');
-    }
-    
-    /**
-     * @return float Optional discount on products in specified categoryId for  customerGroupId
-     */
-    public function getDiscount()
-    {
-        return $this->discount;
-    }
 
     /**
      * @param  Identity $categoryId Reference to category
@@ -86,9 +44,9 @@ class CategoryCustomerGroup extends DataModel
      */
     public function setCategoryId(Identity $categoryId)
     {
-        return $this->setProperty('categoryId', $categoryId, 'Identity');
+        return $this->setProperty('CategoryId', $categoryId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to category
      */
@@ -104,9 +62,9 @@ class CategoryCustomerGroup extends DataModel
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        return $this->setProperty('CustomerGroupId', $customerGroupId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to customerGroup
      */
@@ -114,5 +72,24 @@ class CategoryCustomerGroup extends DataModel
     {
         return $this->customerGroupId;
     }
-}
 
+    /**
+     * @param  double $discount Optional discount on products in specified categoryId for  customerGroupId
+     * @return \jtl\Connector\Model\CategoryCustomerGroup
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setDiscount(Identity $discount)
+    {
+        return $this->setProperty('Discount', $discount, 'double');
+    }
+
+    /**
+     * @return double Optional discount on products in specified categoryId for  customerGroupId
+     */
+    public function getDiscount()
+    {
+        return $this->discount;
+    }
+
+ 
+}

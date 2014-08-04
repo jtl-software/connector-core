@@ -1,214 +1,186 @@
 <?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage 
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * 
+ * .
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage 
  */
 class EmailTemplateI18n extends DataModel
 {
     /**
-     * @var Identity
+     * @type Identity 
      */
-    protected $_emailTemplateId = null;
-    
+    protected $emailTemplateId = null;
+
     /**
-     * @var string
+     * @type string 
      */
-    protected $_localeName = '';
-    
+    protected $contentHtml = '';
+
     /**
-     * @var string
+     * @type string 
      */
-    protected $_subject = '';
-    
+    protected $contentText = '';
+
     /**
-     * @var string
+     * @type string 
      */
-    protected $_contentHtml = '';
-    
+    protected $filename = '';
+
     /**
-     * @var string
+     * @type string 
      */
-    protected $_contentText = '';
-    
+    protected $localeName = '';
+
     /**
-     * @var string
+     * @type string 
      */
-    protected $_pdf = '';
-    
+    protected $pdf = '';
+
     /**
-     * @var string
+     * @type string 
      */
-    protected $_filename = '';
-    
+    protected $subject = '';
+
     /**
-     * @var mixed:string
+     * @type array list of identities
      */
-    protected $_identities = array(
-        '_emailTemplateId'
+     protected $identities = array(
+        'emailTemplateId',
     );
-    
+
     /**
-     * EmailTemplateI18n Setter
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_emailTemplateId":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-                case "_localeName":
-                case "_subject":
-                case "_contentHtml":
-                case "_contentText":
-                case "_pdf":
-                case "_filename":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-            }
-        }
-    }
-    
-    /**
-     * @param Identity $emailTemplateId
+     * @param  Identity $emailTemplateId 
      * @return \jtl\Connector\Model\EmailTemplateI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setEmailTemplateId(Identity $emailTemplateId)
     {
-        $this->_emailTemplateId = $emailTemplateId;
-        return $this;
+        return $this->setProperty('EmailTemplateId', $emailTemplateId, 'Identity');
     }
-    
+
     /**
-     * @return Identity
+     * @return Identity 
      */
     public function getEmailTemplateId()
     {
-        return $this->_emailTemplateId;
+        return $this->emailTemplateId;
     }
+
     /**
-     * @param string $localeName
+     * @param  string $contentHtml 
      * @return \jtl\Connector\Model\EmailTemplateI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setLocaleName($localeName)
+    public function setContentHtml(Identity $contentHtml)
     {
-        $this->_localeName = (string)$localeName;
-        return $this;
+        return $this->setProperty('ContentHtml', $contentHtml, 'string');
     }
-    
+
     /**
-     * @return string
-     */
-    public function getLocaleName()
-    {
-        return $this->_localeName;
-    }
-    /**
-     * @param string $subject
-     * @return \jtl\Connector\Model\EmailTemplateI18n
-     */
-    public function setSubject($subject)
-    {
-        $this->_subject = (string)$subject;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getSubject()
-    {
-        return $this->_subject;
-    }
-    /**
-     * @param string $contentHtml
-     * @return \jtl\Connector\Model\EmailTemplateI18n
-     */
-    public function setContentHtml($contentHtml)
-    {
-        $this->_contentHtml = (string)$contentHtml;
-        return $this;
-    }
-    
-    /**
-     * @return string
+     * @return string 
      */
     public function getContentHtml()
     {
-        return $this->_contentHtml;
+        return $this->contentHtml;
     }
+
     /**
-     * @param string $contentText
+     * @param  string $contentText 
      * @return \jtl\Connector\Model\EmailTemplateI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setContentText($contentText)
+    public function setContentText(Identity $contentText)
     {
-        $this->_contentText = (string)$contentText;
-        return $this;
+        return $this->setProperty('ContentText', $contentText, 'string');
     }
-    
+
     /**
-     * @return string
+     * @return string 
      */
     public function getContentText()
     {
-        return $this->_contentText;
+        return $this->contentText;
     }
+
     /**
-     * @param string $pdf
+     * @param  string $filename 
      * @return \jtl\Connector\Model\EmailTemplateI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setPdf($pdf)
+    public function setFilename(Identity $filename)
     {
-        $this->_pdf = (string)$pdf;
-        return $this;
+        return $this->setProperty('Filename', $filename, 'string');
     }
-    
+
     /**
-     * @return string
-     */
-    public function getPdf()
-    {
-        return $this->_pdf;
-    }
-    /**
-     * @param string $filename
-     * @return \jtl\Connector\Model\EmailTemplateI18n
-     */
-    public function setFilename($filename)
-    {
-        $this->_filename = (string)$filename;
-        return $this;
-    }
-    
-    /**
-     * @return string
+     * @return string 
      */
     public function getFilename()
     {
-        return $this->_filename;
+        return $this->filename;
     }
+
+    /**
+     * @param  string $localeName 
+     * @return \jtl\Connector\Model\EmailTemplateI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setLocaleName(Identity $localeName)
+    {
+        return $this->setProperty('LocaleName', $localeName, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getLocaleName()
+    {
+        return $this->localeName;
+    }
+
+    /**
+     * @param  string $pdf 
+     * @return \jtl\Connector\Model\EmailTemplateI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setPdf(Identity $pdf)
+    {
+        return $this->setProperty('Pdf', $pdf, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getPdf()
+    {
+        return $this->pdf;
+    }
+
+    /**
+     * @param  string $subject 
+     * @return \jtl\Connector\Model\EmailTemplateI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setSubject(Identity $subject)
+    {
+        return $this->setProperty('Subject', $subject, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getSubject()
+    {
+        return $this->subject;
+    }
+
+ 
 }

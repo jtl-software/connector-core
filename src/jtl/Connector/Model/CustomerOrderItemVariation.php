@@ -25,11 +25,6 @@ class CustomerOrderItemVariation extends DataModel
     protected $id = null;
 
     /**
-     * @type Identity 
-     */
-    protected $productId = null;
-
-    /**
      * @type Identity Reference to productVariation
      */
     protected $productVariationId = null;
@@ -38,6 +33,11 @@ class CustomerOrderItemVariation extends DataModel
      * @type Identity Reference to productVariationValue
      */
     protected $productVariationValueId = null;
+
+    /**
+     * @type string Optional custom text value for variation 
+     */
+    protected $freeField = '';
 
     /**
      * @type string Variation name e.g. "color"
@@ -50,32 +50,120 @@ class CustomerOrderItemVariation extends DataModel
     protected $productVariationValueName = '';
 
     /**
-     * @type float|null Optional extra surcharge (added to item price)
+     * @type double Optional extra surcharge (added to item price)
      */
     protected $surcharge = 0.0;
-
 
     /**
      * @type array list of identities
      */
-    protected $identities = array(
-        'id',
-        'productVariationValueId',
+     protected $identities = array(
         'customerOrderItemId',
-        'productId',
+        'id',
         'productVariationId',
+        'productVariationValueId',
     );
+
+    /**
+     * @param  Identity $customerOrderItemId Reference to customerOrderItem
+     * @return \jtl\Connector\Model\CustomerOrderItemVariation
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerOrderItemId(Identity $customerOrderItemId)
+    {
+        return $this->setProperty('CustomerOrderItemId', $customerOrderItemId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to customerOrderItem
+     */
+    public function getCustomerOrderItemId()
+    {
+        return $this->customerOrderItemId;
+    }
+
+    /**
+     * @param  Identity $id Unique customerOrderItemVariation id
+     * @return \jtl\Connector\Model\CustomerOrderItemVariation
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setId(Identity $id)
+    {
+        return $this->setProperty('Id', $id, 'Identity');
+    }
+
+    /**
+     * @return Identity Unique customerOrderItemVariation id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param  Identity $productVariationId Reference to productVariation
+     * @return \jtl\Connector\Model\CustomerOrderItemVariation
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setProductVariationId(Identity $productVariationId)
+    {
+        return $this->setProperty('ProductVariationId', $productVariationId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to productVariation
+     */
+    public function getProductVariationId()
+    {
+        return $this->productVariationId;
+    }
+
+    /**
+     * @param  Identity $productVariationValueId Reference to productVariationValue
+     * @return \jtl\Connector\Model\CustomerOrderItemVariation
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setProductVariationValueId(Identity $productVariationValueId)
+    {
+        return $this->setProperty('ProductVariationValueId', $productVariationValueId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to productVariationValue
+     */
+    public function getProductVariationValueId()
+    {
+        return $this->productVariationValueId;
+    }
+
+    /**
+     * @param  string $freeField Optional custom text value for variation 
+     * @return \jtl\Connector\Model\CustomerOrderItemVariation
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setFreeField(Identity $freeField)
+    {
+        return $this->setProperty('FreeField', $freeField, 'string');
+    }
+
+    /**
+     * @return string Optional custom text value for variation 
+     */
+    public function getFreeField()
+    {
+        return $this->freeField;
+    }
 
     /**
      * @param  string $productVariationName Variation name e.g. "color"
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductVariationName($productVariationName)
+    public function setProductVariationName(Identity $productVariationName)
     {
-        return $this->setProperty('productVariationName', $productVariationName, 'string');
+        return $this->setProperty('ProductVariationName', $productVariationName, 'string');
     }
-    
+
     /**
      * @return string Variation name e.g. "color"
      */
@@ -87,13 +175,13 @@ class CustomerOrderItemVariation extends DataModel
     /**
      * @param  string $productVariationValueName Variation value e.g. "red"
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductVariationValueName($productVariationValueName)
+    public function setProductVariationValueName(Identity $productVariationValueName)
     {
-        return $this->setProperty('productVariationValueName', $productVariationValueName, 'string');
+        return $this->setProperty('ProductVariationValueName', $productVariationValueName, 'string');
     }
-    
+
     /**
      * @return string Variation value e.g. "red"
      */
@@ -103,111 +191,22 @@ class CustomerOrderItemVariation extends DataModel
     }
 
     /**
-     * @param  float $surcharge Optional extra surcharge (added to item price)
+     * @param  double $surcharge Optional extra surcharge (added to item price)
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'float'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setSurcharge($surcharge)
+    public function setSurcharge(Identity $surcharge)
     {
-        return $this->setProperty('surcharge', $surcharge, 'float');
+        return $this->setProperty('Surcharge', $surcharge, 'double');
     }
-    
+
     /**
-     * @return float Optional extra surcharge (added to item price)
+     * @return double Optional extra surcharge (added to item price)
      */
     public function getSurcharge()
     {
         return $this->surcharge;
     }
 
-    /**
-     * @param  Identity $id Unique customerOrderItemVariation id
-     * @return \jtl\Connector\Model\CustomerOrderItemVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id)
-    {
-        return $this->setProperty('id', $id, 'Identity');
-    }
-    
-    /**
-     * @return Identity Unique customerOrderItemVariation id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param  Identity $productVariationValueId Reference to productVariationValue
-     * @return \jtl\Connector\Model\CustomerOrderItemVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductVariationValueId(Identity $productVariationValueId)
-    {
-        return $this->setProperty('productVariationValueId', $productVariationValueId, 'Identity');
-    }
-    
-    /**
-     * @return Identity Reference to productVariationValue
-     */
-    public function getProductVariationValueId()
-    {
-        return $this->productVariationValueId;
-    }
-
-    /**
-     * @param  Identity $customerOrderItemId Reference to customerOrderItem
-     * @return \jtl\Connector\Model\CustomerOrderItemVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCustomerOrderItemId(Identity $customerOrderItemId)
-    {
-        return $this->setProperty('customerOrderItemId', $customerOrderItemId, 'Identity');
-    }
-    
-    /**
-     * @return Identity Reference to customerOrderItem
-     */
-    public function getCustomerOrderItemId()
-    {
-        return $this->customerOrderItemId;
-    }
-
-    /**
-     * @param  Identity $productId 
-     * @return \jtl\Connector\Model\CustomerOrderItemVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductId(Identity $productId)
-    {
-        return $this->setProperty('productId', $productId, 'Identity');
-    }
-    
-    /**
-     * @return Identity 
-     */
-    public function getProductId()
-    {
-        return $this->productId;
-    }
-
-    /**
-     * @param  Identity $productVariationId Reference to productVariation
-     * @return \jtl\Connector\Model\CustomerOrderItemVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductVariationId(Identity $productVariationId)
-    {
-        return $this->setProperty('productVariationId', $productVariationId, 'Identity');
-    }
-    
-    /**
-     * @return Identity Reference to productVariation
-     */
-    public function getProductVariationId()
-    {
-        return $this->productVariationId;
-    }
+ 
 }
-

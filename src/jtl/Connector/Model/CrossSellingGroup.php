@@ -15,6 +15,11 @@ namespace jtl\Connector\Model;
 class CrossSellingGroup extends DataModel
 {
     /**
+     * @type Identity crossSellingGroup id
+     */
+    protected $id = null;
+
+    /**
      * @type string Optional localized description
      */
     protected $description = '';
@@ -29,41 +34,41 @@ class CrossSellingGroup extends DataModel
      */
     protected $name = '';
 
-
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
+        'id',
     );
 
     /**
-     * @param  string $name Localized name
+     * @param  Identity $id crossSellingGroup id
      * @return \jtl\Connector\Model\CrossSellingGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setName($name)
+    public function setId(Identity $id)
     {
-        return $this->setProperty('name', $name, 'string');
+        return $this->setProperty('Id', $id, 'Identity');
     }
-    
+
     /**
-     * @return string Localized name
+     * @return Identity crossSellingGroup id
      */
-    public function getName()
+    public function getId()
     {
-        return $this->name;
+        return $this->id;
     }
 
     /**
      * @param  string $description Optional localized description
      * @return \jtl\Connector\Model\CrossSellingGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setDescription($description)
+    public function setDescription(Identity $description)
     {
-        return $this->setProperty('description', $description, 'string');
+        return $this->setProperty('Description', $description, 'string');
     }
-    
+
     /**
      * @return string Optional localized description
      */
@@ -75,13 +80,13 @@ class CrossSellingGroup extends DataModel
     /**
      * @param  string $localeName Locale
      * @return \jtl\Connector\Model\CrossSellingGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setLocaleName($localeName)
+    public function setLocaleName(Identity $localeName)
     {
-        return $this->setProperty('localeName', $localeName, 'string');
+        return $this->setProperty('LocaleName', $localeName, 'string');
     }
-    
+
     /**
      * @return string Locale
      */
@@ -89,5 +94,24 @@ class CrossSellingGroup extends DataModel
     {
         return $this->localeName;
     }
-}
 
+    /**
+     * @param  string $name Localized name
+     * @return \jtl\Connector\Model\CrossSellingGroup
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setName(Identity $name)
+    {
+        return $this->setProperty('Name', $name, 'string');
+    }
+
+    /**
+     * @return string Localized name
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+ 
+}

@@ -1,314 +1,278 @@
 <?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage 
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Shop3 only
+ * Shop3 only.
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage 
  */
 class EmailTemplate extends DataModel
 {
     /**
-     * @var Identity
+     * @type Identity 
      */
-    protected $_id = null;
-    
+    protected $id = null;
+
     /**
-     * @var string
+     * @type string 
      */
-    protected $_name = '';
-    
+    protected $description = '';
+
     /**
-     * @var string
+     * @type string 
      */
-    protected $_description = '';
-    
+    protected $emailType = '';
+
     /**
-     * @var string
+     * @type int 
      */
-    protected $_emailType = '';
-    
+    protected $error = 0;
+
     /**
-     * @var string
+     * @type string 
      */
-    protected $_moduleId = '0';
-    
+    protected $filename = '';
+
     /**
-     * @var string
+     * @type bool 
      */
-    protected $_filename = '';
-    
+    protected $isActive = false;
+
     /**
-     * @var bool
+     * @type bool 
      */
-    protected $_isActive = false;
-    
+    protected $isAgb = false;
+
     /**
-     * @var bool
+     * @type bool 
      */
-    protected $_isOii = false;
-    
+    protected $isOii = false;
+
     /**
-     * @var bool
+     * @type bool 
      */
-    protected $_isAgb = false;
-    
+    protected $isWrb = false;
+
     /**
-     * @var bool
+     * @type string 
      */
-    protected $_isWrb = false;
-    
+    protected $moduleId = '';
+
     /**
-     * @var int
+     * @type string 
      */
-    protected $_error = 0;
-    
+    protected $name = '';
+
     /**
-     * @var mixed:string
+     * @type array list of identities
      */
-    protected $_identities = array(
-        '_id'
+     protected $identities = array(
+        'id',
     );
-    
+
     /**
-     * EmailTemplate Setter
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_id":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-                case "_name":
-                case "_description":
-                case "_emailType":
-                case "_moduleId":
-                case "_filename":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-                case "_isActive":
-                case "_isOii":
-                case "_isAgb":
-                case "_isWrb":
-                
-                    $this->$name = (bool)$value;
-                    break;
-            
-                case "_error":
-                
-                    $this->$name = (int)$value;
-                    break;
-            
-            }
-        }
-    }
-    
-    /**
-     * @param Identity $id
+     * @param  Identity $id 
      * @return \jtl\Connector\Model\EmailTemplate
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        $this->_id = $id;
-        return $this;
+        return $this->setProperty('Id', $id, 'Identity');
     }
-    
+
     /**
-     * @return Identity
+     * @return Identity 
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
+
     /**
-     * @param string $name
+     * @param  string $description 
      * @return \jtl\Connector\Model\EmailTemplate
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setName($name)
+    public function setDescription(Identity $description)
     {
-        $this->_name = (string)$name;
-        return $this;
+        return $this->setProperty('Description', $description, 'string');
     }
-    
+
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-    /**
-     * @param string $description
-     * @return \jtl\Connector\Model\EmailTemplate
-     */
-    public function setDescription($description)
-    {
-        $this->_description = (string)$description;
-        return $this;
-    }
-    
-    /**
-     * @return string
+     * @return string 
      */
     public function getDescription()
     {
-        return $this->_description;
+        return $this->description;
     }
+
     /**
-     * @param string $emailType
+     * @param  string $emailType 
      * @return \jtl\Connector\Model\EmailTemplate
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setEmailType($emailType)
+    public function setEmailType(Identity $emailType)
     {
-        $this->_emailType = (string)$emailType;
-        return $this;
+        return $this->setProperty('EmailType', $emailType, 'string');
     }
-    
+
     /**
-     * @return string
+     * @return string 
      */
     public function getEmailType()
     {
-        return $this->_emailType;
+        return $this->emailType;
     }
+
     /**
-     * @param string $moduleId
+     * @param  int $error 
      * @return \jtl\Connector\Model\EmailTemplate
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setModuleId($moduleId)
+    public function setError(Identity $error)
     {
-        $this->_moduleId = (string)$moduleId;
-        return $this;
+        return $this->setProperty('Error', $error, 'int');
     }
-    
+
     /**
-     * @return string
-     */
-    public function getModuleId()
-    {
-        return $this->_moduleId;
-    }
-    /**
-     * @param string $filename
-     * @return \jtl\Connector\Model\EmailTemplate
-     */
-    public function setFilename($filename)
-    {
-        $this->_filename = (string)$filename;
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getFilename()
-    {
-        return $this->_filename;
-    }
-    /**
-     * @param bool $isActive
-     * @return \jtl\Connector\Model\EmailTemplate
-     */
-    public function setIsActive($isActive)
-    {
-        $this->_isActive = (bool)$isActive;
-        return $this;
-    }
-    
-    /**
-     * @return bool
-     */
-    public function getIsActive()
-    {
-        return $this->_isActive;
-    }
-    /**
-     * @param bool $isOii
-     * @return \jtl\Connector\Model\EmailTemplate
-     */
-    public function setIsOii($isOii)
-    {
-        $this->_isOii = (bool)$isOii;
-        return $this;
-    }
-    
-    /**
-     * @return bool
-     */
-    public function getIsOii()
-    {
-        return $this->_isOii;
-    }
-    /**
-     * @param bool $isAgb
-     * @return \jtl\Connector\Model\EmailTemplate
-     */
-    public function setIsAgb($isAgb)
-    {
-        $this->_isAgb = (bool)$isAgb;
-        return $this;
-    }
-    
-    /**
-     * @return bool
-     */
-    public function getIsAgb()
-    {
-        return $this->_isAgb;
-    }
-    /**
-     * @param bool $isWrb
-     * @return \jtl\Connector\Model\EmailTemplate
-     */
-    public function setIsWrb($isWrb)
-    {
-        $this->_isWrb = (bool)$isWrb;
-        return $this;
-    }
-    
-    /**
-     * @return bool
-     */
-    public function getIsWrb()
-    {
-        return $this->_isWrb;
-    }
-    /**
-     * @param int $error
-     * @return \jtl\Connector\Model\EmailTemplate
-     */
-    public function setError($error)
-    {
-        $this->_error = (int)$error;
-        return $this;
-    }
-    
-    /**
-     * @return int
+     * @return int 
      */
     public function getError()
     {
-        return $this->_error;
+        return $this->error;
     }
+
+    /**
+     * @param  string $filename 
+     * @return \jtl\Connector\Model\EmailTemplate
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setFilename(Identity $filename)
+    {
+        return $this->setProperty('Filename', $filename, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getFilename()
+    {
+        return $this->filename;
+    }
+
+    /**
+     * @param  bool $isActive 
+     * @return \jtl\Connector\Model\EmailTemplate
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setIsActive(Identity $isActive)
+    {
+        return $this->setProperty('IsActive', $isActive, 'bool');
+    }
+
+    /**
+     * @return bool 
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param  bool $isAgb 
+     * @return \jtl\Connector\Model\EmailTemplate
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setIsAgb(Identity $isAgb)
+    {
+        return $this->setProperty('IsAgb', $isAgb, 'bool');
+    }
+
+    /**
+     * @return bool 
+     */
+    public function getIsAgb()
+    {
+        return $this->isAgb;
+    }
+
+    /**
+     * @param  bool $isOii 
+     * @return \jtl\Connector\Model\EmailTemplate
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setIsOii(Identity $isOii)
+    {
+        return $this->setProperty('IsOii', $isOii, 'bool');
+    }
+
+    /**
+     * @return bool 
+     */
+    public function getIsOii()
+    {
+        return $this->isOii;
+    }
+
+    /**
+     * @param  bool $isWrb 
+     * @return \jtl\Connector\Model\EmailTemplate
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setIsWrb(Identity $isWrb)
+    {
+        return $this->setProperty('IsWrb', $isWrb, 'bool');
+    }
+
+    /**
+     * @return bool 
+     */
+    public function getIsWrb()
+    {
+        return $this->isWrb;
+    }
+
+    /**
+     * @param  string $moduleId 
+     * @return \jtl\Connector\Model\EmailTemplate
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setModuleId(Identity $moduleId)
+    {
+        return $this->setProperty('ModuleId', $moduleId, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getModuleId()
+    {
+        return $this->moduleId;
+    }
+
+    /**
+     * @param  string $name 
+     * @return \jtl\Connector\Model\EmailTemplate
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setName(Identity $name)
+    {
+        return $this->setProperty('Name', $name, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+ 
 }

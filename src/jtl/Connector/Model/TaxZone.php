@@ -24,31 +24,12 @@ class TaxZone extends DataModel
      */
     protected $name = '';
 
-
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
         'id',
     );
-
-    /**
-     * @param  string $name Optional tax zone name e.g. "EU Zone"
-     * @return \jtl\Connector\Model\TaxZone
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setName($name)
-    {
-        return $this->setProperty('name', $name, 'string');
-    }
-    
-    /**
-     * @return string Optional tax zone name e.g. "EU Zone"
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
 
     /**
      * @param  Identity $id Unique taxZone id
@@ -57,9 +38,9 @@ class TaxZone extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        return $this->setProperty('Id', $id, 'Identity');
     }
-    
+
     /**
      * @return Identity Unique taxZone id
      */
@@ -67,5 +48,24 @@ class TaxZone extends DataModel
     {
         return $this->id;
     }
-}
 
+    /**
+     * @param  string $name Optional tax zone name e.g. "EU Zone"
+     * @return \jtl\Connector\Model\TaxZone
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setName(Identity $name)
+    {
+        return $this->setProperty('Name', $name, 'string');
+    }
+
+    /**
+     * @return string Optional tax zone name e.g. "EU Zone"
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+ 
+}

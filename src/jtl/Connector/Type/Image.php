@@ -18,9 +18,9 @@ class Image extends DataType
     {
         return array(
 			new PropertyInfo('filename', 'string', '', false, false, false),
-			new PropertyInfo('foreignKey', '\jtl\Connector\Model\IdentityKeyPair', null, false, false, false),
-			new PropertyInfo('id', '\jtl\Connector\Model\IdentityKeyPair', null, false, false, false),
-			new PropertyInfo('masterImageId', '\jtl\Connector\Model\IdentityKeyPair', null, false, false, false),
+			new PropertyInfo('foreignKey', '\jtl\Connector\Model\Identity', null, false, false, false),
+			new PropertyInfo('id', '\jtl\Connector\Model\Identity', null, false, false, false),
+			new PropertyInfo('masterImageId', '\jtl\Connector\Model\Identity', null, false, false, false),
 			new PropertyInfo('relationType', 'string', 0, false, false, false),
 			new PropertyInfo('sort', 'integer', 0, false, false, false),
         );

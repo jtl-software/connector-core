@@ -1,196 +1,164 @@
 <?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * File upload properties. 
+ * File upload properties. .
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Product
  */
 class FileUpload extends DataModel
 {
     /**
-     * @var Identity Unique fileUpload id
+     * @type Identity Unique fileUpload id
      */
-    protected $_id = null;
-    
+    protected $id = null;
+
     /**
-     * @var Identity Reference to product
+     * @type Identity Reference to product
      */
-    protected $_productId = null;
-    
+    protected $productId = null;
+
     /**
-     * @var string Filename specification
+     * @type string Optional file description
      */
-    protected $_name = '';
-    
+    protected $description = '';
+
     /**
-     * @var string Optional file description
+     * @type string Allowed file type
      */
-    protected $_description = '';
-    
+    protected $fileType = '';
+
     /**
-     * @var string Allowed file type
+     * @type bool Optional flag to force upload before finishing checkout. True if file upload is required to buy product
      */
-    protected $_fileType = '';
-    
+    protected $isRequired = false;
+
     /**
-     * @var bool Optional flag to force upload before finishing checkout. True if file upload is required to buy product
+     * @type string Filename specification
      */
-    protected $_isRequired = false;
-    
+    protected $name = '';
+
     /**
-     * @var mixed:string
+     * @type array list of identities
      */
-    protected $_identities = array(
-        '_id',
-        '_productId'
+     protected $identities = array(
+        'id',
+        'productId',
     );
-    
+
     /**
-     * FileUpload Setter
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_id":
-                case "_productId":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-                case "_name":
-                case "_description":
-                case "_fileType":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-                case "_isRequired":
-                
-                    $this->$name = (bool)$value;
-                    break;
-            
-            }
-        }
-    }
-    
-    /**
-     * @param Identity $id Unique fileUpload id
+     * @param  Identity $id Unique fileUpload id
      * @return \jtl\Connector\Model\FileUpload
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        $this->_id = $id;
-        return $this;
+        return $this->setProperty('Id', $id, 'Identity');
     }
-    
+
     /**
      * @return Identity Unique fileUpload id
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
+
     /**
-     * @param Identity $productId Reference to product
+     * @param  Identity $productId Reference to product
      * @return \jtl\Connector\Model\FileUpload
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId)
     {
-        $this->_productId = $productId;
-        return $this;
+        return $this->setProperty('ProductId', $productId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to product
      */
     public function getProductId()
     {
-        return $this->_productId;
+        return $this->productId;
     }
+
     /**
-     * @param string $name Filename specification
+     * @param  string $description Optional file description
      * @return \jtl\Connector\Model\FileUpload
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setName($name)
+    public function setDescription(Identity $description)
     {
-        $this->_name = (string)$name;
-        return $this;
+        return $this->setProperty('Description', $description, 'string');
     }
-    
-    /**
-     * @return string Filename specification
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-    /**
-     * @param string $description Optional file description
-     * @return \jtl\Connector\Model\FileUpload
-     */
-    public function setDescription($description)
-    {
-        $this->_description = (string)$description;
-        return $this;
-    }
-    
+
     /**
      * @return string Optional file description
      */
     public function getDescription()
     {
-        return $this->_description;
+        return $this->description;
     }
+
     /**
-     * @param string $fileType Allowed file type
+     * @param  string $fileType Allowed file type
      * @return \jtl\Connector\Model\FileUpload
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setFileType($fileType)
+    public function setFileType(Identity $fileType)
     {
-        $this->_fileType = (string)$fileType;
-        return $this;
+        return $this->setProperty('FileType', $fileType, 'string');
     }
-    
+
     /**
      * @return string Allowed file type
      */
     public function getFileType()
     {
-        return $this->_fileType;
+        return $this->fileType;
     }
+
     /**
-     * @param bool $isRequired Optional flag to force upload before finishing checkout. True if file upload is required to buy product
+     * @param  bool $isRequired Optional flag to force upload before finishing checkout. True if file upload is required to buy product
      * @return \jtl\Connector\Model\FileUpload
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setIsRequired($isRequired)
+    public function setIsRequired(Identity $isRequired)
     {
-        $this->_isRequired = (bool)$isRequired;
-        return $this;
+        return $this->setProperty('IsRequired', $isRequired, 'bool');
     }
-    
+
     /**
      * @return bool Optional flag to force upload before finishing checkout. True if file upload is required to buy product
      */
     public function getIsRequired()
     {
-        return $this->_isRequired;
+        return $this->isRequired;
     }
+
+    /**
+     * @param  string $name Filename specification
+     * @return \jtl\Connector\Model\FileUpload
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setName(Identity $name)
+    {
+        return $this->setProperty('Name', $name, 'string');
+    }
+
+    /**
+     * @return string Filename specification
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+ 
 }

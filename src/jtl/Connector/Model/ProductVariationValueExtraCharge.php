@@ -25,58 +25,34 @@ class ProductVariationValueExtraCharge extends DataModel
     protected $productVariationValueId = null;
 
     /**
-     * @type integer 
-     */
-    protected $connectorId = 0;
-
-    /**
-     * @type float Extra charge (net)
+     * @type double Extra charge (net)
      */
     protected $extraChargeNet = 0.0;
-
 
     /**
      * @type array list of identities
      */
-    protected $identities = array(
-        'productVariationValueId',
+     protected $identities = array(
         'customerGroupId',
+        'productVariationValueId',
     );
 
     /**
-     * @param  integer $connectorId 
+     * @param  Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setConnectorId($connectorId)
+    public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('connectorId', $connectorId, 'integer');
-    }
-    
-    /**
-     * @return integer 
-     */
-    public function getConnectorId()
-    {
-        return $this->connectorId;
+        return $this->setProperty('CustomerGroupId', $customerGroupId, 'Identity');
     }
 
     /**
-     * @param  float $extraChargeNet Extra charge (net)
-     * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
-     * @throws InvalidArgumentException if the provided argument is not of type 'float'.
+     * @return Identity Reference to customerGroup
      */
-    public function setExtraChargeNet($extraChargeNet)
+    public function getCustomerGroupId()
     {
-        return $this->setProperty('extraChargeNet', $extraChargeNet, 'float');
-    }
-    
-    /**
-     * @return float Extra charge (net)
-     */
-    public function getExtraChargeNet()
-    {
-        return $this->extraChargeNet;
+        return $this->customerGroupId;
     }
 
     /**
@@ -86,9 +62,9 @@ class ProductVariationValueExtraCharge extends DataModel
      */
     public function setProductVariationValueId(Identity $productVariationValueId)
     {
-        return $this->setProperty('productVariationValueId', $productVariationValueId, 'Identity');
+        return $this->setProperty('ProductVariationValueId', $productVariationValueId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to productVariationValue
      */
@@ -98,21 +74,22 @@ class ProductVariationValueExtraCharge extends DataModel
     }
 
     /**
-     * @param  Identity $customerGroupId Reference to customerGroup
+     * @param  double $extraChargeNet Extra charge (net)
      * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
      * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerGroupId(Identity $customerGroupId)
+    public function setExtraChargeNet(Identity $extraChargeNet)
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        return $this->setProperty('ExtraChargeNet', $extraChargeNet, 'double');
     }
-    
-    /**
-     * @return Identity Reference to customerGroup
-     */
-    public function getCustomerGroupId()
-    {
-        return $this->customerGroupId;
-    }
-}
 
+    /**
+     * @return double Extra charge (net)
+     */
+    public function getExtraChargeNet()
+    {
+        return $this->extraChargeNet;
+    }
+
+ 
+}

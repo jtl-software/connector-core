@@ -30,36 +30,35 @@ class ProductConfigGroup extends DataModel
     protected $productId = null;
 
     /**
-     * @type integer Optional sort number
+     * @type int Optional sort number
      */
     protected $sort = 0;
-
 
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
+        'configGroupId',
         'id',
         'productId',
-        'configGroupId',
     );
 
     /**
-     * @param  integer $sort Optional sort number
+     * @param  Identity $configGroupId Reference to configGroup
      * @return \jtl\Connector\Model\ProductConfigGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setSort($sort)
+    public function setConfigGroupId(Identity $configGroupId)
     {
-        return $this->setProperty('sort', $sort, 'integer');
+        return $this->setProperty('ConfigGroupId', $configGroupId, 'Identity');
     }
-    
+
     /**
-     * @return integer Optional sort number
+     * @return Identity Reference to configGroup
      */
-    public function getSort()
+    public function getConfigGroupId()
     {
-        return $this->sort;
+        return $this->configGroupId;
     }
 
     /**
@@ -69,9 +68,9 @@ class ProductConfigGroup extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        return $this->setProperty('Id', $id, 'Identity');
     }
-    
+
     /**
      * @return Identity Unique productConfigGroup id
      */
@@ -87,9 +86,9 @@ class ProductConfigGroup extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        return $this->setProperty('ProductId', $productId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to product
      */
@@ -99,21 +98,22 @@ class ProductConfigGroup extends DataModel
     }
 
     /**
-     * @param  Identity $configGroupId Reference to configGroup
+     * @param  int $sort Optional sort number
      * @return \jtl\Connector\Model\ProductConfigGroup
      * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setConfigGroupId(Identity $configGroupId)
+    public function setSort(Identity $sort)
     {
-        return $this->setProperty('configGroupId', $configGroupId, 'Identity');
+        return $this->setProperty('Sort', $sort, 'int');
     }
-    
-    /**
-     * @return Identity Reference to configGroup
-     */
-    public function getConfigGroupId()
-    {
-        return $this->configGroupId;
-    }
-}
 
+    /**
+     * @return int Optional sort number
+     */
+    public function getSort()
+    {
+        return $this->sort;
+    }
+
+ 
+}

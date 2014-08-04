@@ -25,35 +25,29 @@ class ProductInvisibility extends DataModel
     protected $productId = null;
 
     /**
-     * @type integer 
-     */
-    protected $connectorId = 0;
-
-
-    /**
      * @type array list of identities
      */
-    protected $identities = array(
-        'productId',
+     protected $identities = array(
         'customerGroupId',
+        'productId',
     );
 
     /**
-     * @param  integer $connectorId 
+     * @param  Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ProductInvisibility
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setConnectorId($connectorId)
+    public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('connectorId', $connectorId, 'integer');
+        return $this->setProperty('CustomerGroupId', $customerGroupId, 'Identity');
     }
-    
+
     /**
-     * @return integer 
+     * @return Identity Reference to customerGroup
      */
-    public function getConnectorId()
+    public function getCustomerGroupId()
     {
-        return $this->connectorId;
+        return $this->customerGroupId;
     }
 
     /**
@@ -63,9 +57,9 @@ class ProductInvisibility extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        return $this->setProperty('ProductId', $productId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to product
      */
@@ -74,22 +68,5 @@ class ProductInvisibility extends DataModel
         return $this->productId;
     }
 
-    /**
-     * @param  Identity $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\ProductInvisibility
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCustomerGroupId(Identity $customerGroupId)
-    {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
-    }
-    
-    /**
-     * @return Identity Reference to customerGroup
-     */
-    public function getCustomerGroupId()
-    {
-        return $this->customerGroupId;
-    }
+ 
 }
-

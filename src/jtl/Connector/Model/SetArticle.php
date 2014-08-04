@@ -25,36 +25,17 @@ class SetArticle extends DataModel
     protected $productId = null;
 
     /**
-     * @type float Component quantity
+     * @type double Component quantity
      */
     protected $quantity = 0.0;
-
 
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
         'id',
         'productId',
     );
-
-    /**
-     * @param  float $quantity Component quantity
-     * @return \jtl\Connector\Model\SetArticle
-     * @throws InvalidArgumentException if the provided argument is not of type 'float'.
-     */
-    public function setQuantity($quantity)
-    {
-        return $this->setProperty('quantity', $quantity, 'float');
-    }
-    
-    /**
-     * @return float Component quantity
-     */
-    public function getQuantity()
-    {
-        return $this->quantity;
-    }
 
     /**
      * @param  Identity $id Unique setArticle id, referenced by product.setArticleId
@@ -63,9 +44,9 @@ class SetArticle extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        return $this->setProperty('Id', $id, 'Identity');
     }
-    
+
     /**
      * @return Identity Unique setArticle id, referenced by product.setArticleId
      */
@@ -81,9 +62,9 @@ class SetArticle extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        return $this->setProperty('ProductId', $productId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to a component / product
      */
@@ -91,5 +72,24 @@ class SetArticle extends DataModel
     {
         return $this->productId;
     }
-}
 
+    /**
+     * @param  double $quantity Component quantity
+     * @return \jtl\Connector\Model\SetArticle
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setQuantity(Identity $quantity)
+    {
+        return $this->setProperty('Quantity', $quantity, 'double');
+    }
+
+    /**
+     * @return double Component quantity
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+ 
+}

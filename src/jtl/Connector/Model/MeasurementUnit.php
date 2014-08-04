@@ -1,122 +1,94 @@
 <?php
 /**
- * @copyright 2010-2013 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
  */
 
 namespace jtl\Connector\Model;
 
 /**
- * Specifies product units like "ml", "l", " cm".
+ * Specifies product units like "ml", "l", " cm"..
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
  */
 class MeasurementUnit extends DataModel
 {
     /**
-     * @var Identity Unit id
+     * @type Identity Unit id
      */
-    protected $_id = null;
-    
+    protected $id = null;
+
     /**
-     * @var string Optional UCUM-Code, see  http://unitsofmeasure.org/
+     * @type string Optional UCUM-Code, see  http://unitsofmeasure.org/
      */
-    protected $_code = '';
-    
+    protected $code = '';
+
     /**
-     * @var string Synonym e.g. 'ml'
+     * @type string Synonym e.g. 'ml'
      */
-    protected $_displayCode = '';
-    
+    protected $displayCode = '';
+
     /**
-     * @var mixed:string
+     * @type array list of identities
      */
-    protected $_identities = array(
-        '_id'
+     protected $identities = array(
+        'id',
     );
-    
+
     /**
-     * MeasurementUnit Setter
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function __set($name, $value)
-    {
-        if (property_exists($this, $name)) {
-            if ($value === null) {
-                $this->$name = null;
-                return;
-            }
-        
-            switch ($name) {
-                case "_id":
-                
-                    $this->$name = Identity::convert($value);
-                    break;
-            
-                case "_code":
-                case "_displayCode":
-                
-                    $this->$name = (string)$value;
-                    break;
-            
-            }
-        }
-    }
-    
-    /**
-     * @param Identity $id Unit id
+     * @param  Identity $id Unit id
      * @return \jtl\Connector\Model\MeasurementUnit
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
     {
-        $this->_id = $id;
-        return $this;
+        return $this->setProperty('Id', $id, 'Identity');
     }
-    
+
     /**
      * @return Identity Unit id
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
+
     /**
-     * @param string $code Optional UCUM-Code, see  http://unitsofmeasure.org/
+     * @param  string $code Optional UCUM-Code, see  http://unitsofmeasure.org/
      * @return \jtl\Connector\Model\MeasurementUnit
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCode($code)
+    public function setCode(Identity $code)
     {
-        $this->_code = (string)$code;
-        return $this;
+        return $this->setProperty('Code', $code, 'string');
     }
-    
+
     /**
      * @return string Optional UCUM-Code, see  http://unitsofmeasure.org/
      */
     public function getCode()
     {
-        return $this->_code;
+        return $this->code;
     }
+
     /**
-     * @param string $displayCode Synonym e.g. 'ml'
+     * @param  string $displayCode Synonym e.g. 'ml'
      * @return \jtl\Connector\Model\MeasurementUnit
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setDisplayCode($displayCode)
+    public function setDisplayCode(Identity $displayCode)
     {
-        $this->_displayCode = (string)$displayCode;
-        return $this;
+        return $this->setProperty('DisplayCode', $displayCode, 'string');
     }
-    
+
     /**
      * @return string Synonym e.g. 'ml'
      */
     public function getDisplayCode()
     {
-        return $this->_displayCode;
+        return $this->displayCode;
     }
+
+ 
 }

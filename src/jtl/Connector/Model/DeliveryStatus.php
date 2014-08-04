@@ -29,31 +29,12 @@ class DeliveryStatus extends DataModel
      */
     protected $name = '';
 
-
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
         'id',
     );
-
-    /**
-     * @param  string $name Localized delivery status text
-     * @return \jtl\Connector\Model\DeliveryStatus
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setName($name)
-    {
-        return $this->setProperty('name', $name, 'string');
-    }
-    
-    /**
-     * @return string Localized delivery status text
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
 
     /**
      * @param  Identity $id DeliveryStatus id
@@ -62,9 +43,9 @@ class DeliveryStatus extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        return $this->setProperty('Id', $id, 'Identity');
     }
-    
+
     /**
      * @return Identity DeliveryStatus id
      */
@@ -76,13 +57,13 @@ class DeliveryStatus extends DataModel
     /**
      * @param  string $localeName Locale
      * @return \jtl\Connector\Model\DeliveryStatus
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setLocaleName($localeName)
+    public function setLocaleName(Identity $localeName)
     {
-        return $this->setProperty('localeName', $localeName, 'string');
+        return $this->setProperty('LocaleName', $localeName, 'string');
     }
-    
+
     /**
      * @return string Locale
      */
@@ -90,5 +71,24 @@ class DeliveryStatus extends DataModel
     {
         return $this->localeName;
     }
-}
 
+    /**
+     * @param  string $name Localized delivery status text
+     * @return \jtl\Connector\Model\DeliveryStatus
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setName(Identity $name)
+    {
+        return $this->setProperty('Name', $name, 'string');
+    }
+
+    /**
+     * @return string Localized delivery status text
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+ 
+}

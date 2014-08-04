@@ -15,97 +15,118 @@ namespace jtl\Connector\Model;
 class ConfigGroup extends DataModel
 {
     /**
+     * @type Identity Unique configGroup id
+     */
+    protected $id = null;
+
+    /**
      * @type string Optional internal comment to differantiate config groups by comment name
      */
     protected $comment = '';
 
     /**
-     * @type Byte[] 
+     * @type string Optional image file path
      */
-    protected $image = null;
+    protected $imagePath = '';
 
     /**
-     * @type integer|null Optional maximum number allowed selections. Default 0 for no maximum limitation.
+     * @type int Optional maximum number allowed selections. Default 0 for no maximum limitation.
      */
     protected $maximumSelection = 0;
 
     /**
-     * @type integer|null Optional minimum number required selections. Default 0 for no minimum requirement. 
+     * @type int Optional minimum number required selections. Default 0 for no minimum requirement. 
      */
     protected $minimumSelection = 0;
 
     /**
-     * @type integer|null Optional sort order number
+     * @type int Optional sort order number
      */
     protected $sort = 0;
 
     /**
-     * @type integer|null Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
+     * @type int Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      */
     protected $type = 0;
 
     /**
-     * Nav [ConfigGroup » One]
-     *
      * @type \jtl\Connector\Model\ConfigGroupI18n[]
      */
     protected $i18n = array();
 
-
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
+        'id',
     );
 
     /**
-     * @param  Byte[] $image 
+     * @param  Identity $id Unique configGroup id
      * @return \jtl\Connector\Model\ConfigGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'Byte[]'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setImage(Byte[] $image)
+    public function setId(Identity $id)
     {
-        return $this->setProperty('image', $image, 'Byte[]');
-    }
-    
-    /**
-     * @return Byte[] 
-     */
-    public function getImage()
-    {
-        return $this->image;
+        return $this->setProperty('Id', $id, 'Identity');
     }
 
     /**
-     * @param  integer $minimumSelection Optional minimum number required selections. Default 0 for no minimum requirement. 
-     * @return \jtl\Connector\Model\ConfigGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     * @return Identity Unique configGroup id
      */
-    public function setMinimumSelection($minimumSelection)
+    public function getId()
     {
-        return $this->setProperty('minimumSelection', $minimumSelection, 'integer');
-    }
-    
-    /**
-     * @return integer Optional minimum number required selections. Default 0 for no minimum requirement. 
-     */
-    public function getMinimumSelection()
-    {
-        return $this->minimumSelection;
+        return $this->id;
     }
 
     /**
-     * @param  integer $maximumSelection Optional maximum number allowed selections. Default 0 for no maximum limitation.
+     * @param  string $comment Optional internal comment to differantiate config groups by comment name
      * @return \jtl\Connector\Model\ConfigGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setMaximumSelection($maximumSelection)
+    public function setComment(Identity $comment)
     {
-        return $this->setProperty('maximumSelection', $maximumSelection, 'integer');
+        return $this->setProperty('Comment', $comment, 'string');
     }
-    
+
     /**
-     * @return integer Optional maximum number allowed selections. Default 0 for no maximum limitation.
+     * @return string Optional internal comment to differantiate config groups by comment name
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @param  string $imagePath Optional image file path
+     * @return \jtl\Connector\Model\ConfigGroup
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setImagePath(Identity $imagePath)
+    {
+        return $this->setProperty('ImagePath', $imagePath, 'string');
+    }
+
+    /**
+     * @return string Optional image file path
+     */
+    public function getImagePath()
+    {
+        return $this->imagePath;
+    }
+
+    /**
+     * @param  int $maximumSelection Optional maximum number allowed selections. Default 0 for no maximum limitation.
+     * @return \jtl\Connector\Model\ConfigGroup
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setMaximumSelection(Identity $maximumSelection)
+    {
+        return $this->setProperty('MaximumSelection', $maximumSelection, 'int');
+    }
+
+    /**
+     * @return int Optional maximum number allowed selections. Default 0 for no maximum limitation.
      */
     public function getMaximumSelection()
     {
@@ -113,35 +134,35 @@ class ConfigGroup extends DataModel
     }
 
     /**
-     * @param  integer $type Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
+     * @param  int $minimumSelection Optional minimum number required selections. Default 0 for no minimum requirement. 
      * @return \jtl\Connector\Model\ConfigGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setType($type)
+    public function setMinimumSelection(Identity $minimumSelection)
     {
-        return $this->setProperty('type', $type, 'integer');
-    }
-    
-    /**
-     * @return integer Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
-     */
-    public function getType()
-    {
-        return $this->type;
+        return $this->setProperty('MinimumSelection', $minimumSelection, 'int');
     }
 
     /**
-     * @param  integer $sort Optional sort order number
-     * @return \jtl\Connector\Model\ConfigGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     * @return int Optional minimum number required selections. Default 0 for no minimum requirement. 
      */
-    public function setSort($sort)
+    public function getMinimumSelection()
     {
-        return $this->setProperty('sort', $sort, 'integer');
+        return $this->minimumSelection;
     }
-    
+
     /**
-     * @return integer Optional sort order number
+     * @param  int $sort Optional sort order number
+     * @return \jtl\Connector\Model\ConfigGroup
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setSort(Identity $sort)
+    {
+        return $this->setProperty('Sort', $sort, 'int');
+    }
+
+    /**
+     * @return int Optional sort order number
      */
     public function getSort()
     {
@@ -149,21 +170,21 @@ class ConfigGroup extends DataModel
     }
 
     /**
-     * @param  string $comment Optional internal comment to differantiate config groups by comment name
+     * @param  int $type Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      * @return \jtl\Connector\Model\ConfigGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setComment($comment)
+    public function setType(Identity $type)
     {
-        return $this->setProperty('comment', $comment, 'string');
+        return $this->setProperty('Type', $type, 'int');
     }
-    
+
     /**
-     * @return string Optional internal comment to differantiate config groups by comment name
+     * @return int Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      */
-    public function getComment()
+    public function getType()
     {
-        return $this->comment;
+        return $this->type;
     }
 
     /**
@@ -177,7 +198,7 @@ class ConfigGroup extends DataModel
     }
     
     /**
-     * @return ConfigGroupI18n
+     * @return \jtl\Connector\Model\ConfigGroupI18n[]
      */
     public function getI18n()
     {
@@ -192,5 +213,5 @@ class ConfigGroup extends DataModel
         $this->i18n = array();
         return $this;
     }
+ 
 }
-

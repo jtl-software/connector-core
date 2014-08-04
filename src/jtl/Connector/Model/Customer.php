@@ -15,11 +15,6 @@ namespace jtl\Connector\Model;
 class Customer extends DataModel
 {
     /**
-     * @type Identity 
-     */
-    protected $customerCategoryId = null;
-
-    /**
      * @type Identity References a customer group
      */
     protected $customerGroupId = null;
@@ -28,6 +23,16 @@ class Customer extends DataModel
      * @type Identity Unique customer id
      */
     protected $id = null;
+
+    /**
+     * @type double Credit value on customer account in default currency
+     */
+    protected $accountCredit = 0.0;
+
+    /**
+     * @type string Date of birth
+     */
+    protected $birthday = '';
 
     /**
      * @type string City
@@ -45,9 +50,9 @@ class Customer extends DataModel
     protected $countryIso = '';
 
     /**
-     * @type DateTime|null Creation date
+     * @type string Creation date
      */
-    protected $created = null;
+    protected $created = '';
 
     /**
      * @type string Optional customer number set by JTL-Wawi ERP software
@@ -60,7 +65,7 @@ class Customer extends DataModel
     protected $deliveryInstruction = '';
 
     /**
-     * @type float|null Percentual discount for customer on all prices
+     * @type double Percentual discount for customer on all prices
      */
     protected $discount = 0.0;
 
@@ -85,19 +90,24 @@ class Customer extends DataModel
     protected $firstName = '';
 
     /**
-     * @type boolean Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
+     * @type bool Flag persistent customer account. True, if customer chose to create persistent customer account. False, if customer doesnt want to have his data stored for login-purposes.
+     */
+    protected $hasCustomerAccount = false;
+
+    /**
+     * @type bool Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
      */
     protected $hasNewsletterSubscription = false;
 
     /**
-     * @type boolean Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
+     * @type bool Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
      */
     protected $isActive = false;
 
     /**
-     * @type integer|null 
+     * @type bool Flag if customer is fetched by ERP System. True, if customer is already fetched and must not be fetched again. 
      */
-    protected $languageId = 0;
+    protected $isFetched = false;
 
     /**
      * @type string Last name
@@ -105,14 +115,29 @@ class Customer extends DataModel
     protected $lastName = '';
 
     /**
+     * @type string User locale preference
+     */
+    protected $localeName = '';
+
+    /**
      * @type string Mobile phone number
      */
     protected $mobile = '';
 
     /**
+     * @type string Last modified date
+     */
+    protected $modified = '';
+
+    /**
      * @type string Customer origin
      */
     protected $origin = '';
+
+    /**
+     * @type string Optional (encrypted!) customer password
+     */
+    protected $password = '';
 
     /**
      * @type string Phone number
@@ -155,507 +180,17 @@ class Customer extends DataModel
     protected $zipCode = '';
 
     /**
-     * Nav [Customer » ZeroOrOne]
-     *
      * @type \jtl\Connector\Model\CustomerAttr[]
      */
     protected $attributes = array();
 
-
     /**
      * @type array list of identities
      */
-    protected $identities = array(
-        'id',
-        'customerCategoryId',
+     protected $identities = array(
         'customerGroupId',
+        'id',
     );
-
-    /**
-     * @param  string $customerNumber Optional customer number set by JTL-Wawi ERP software
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setCustomerNumber($customerNumber)
-    {
-        return $this->setProperty('customerNumber', $customerNumber, 'string');
-    }
-    
-    /**
-     * @return string Optional customer number set by JTL-Wawi ERP software
-     */
-    public function getCustomerNumber()
-    {
-        return $this->customerNumber;
-    }
-
-    /**
-     * @param  string $company Company name
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setCompany($company)
-    {
-        return $this->setProperty('company', $company, 'string');
-    }
-    
-    /**
-     * @return string Company name
-     */
-    public function getCompany()
-    {
-        return $this->company;
-    }
-
-    /**
-     * @param  string $title Title, e.g. "Prof. Dr."
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setTitle($title)
-    {
-        return $this->setProperty('title', $title, 'string');
-    }
-    
-    /**
-     * @return string Title, e.g. "Prof. Dr."
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param  string $firstName First name
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setFirstName($firstName)
-    {
-        return $this->setProperty('firstName', $firstName, 'string');
-    }
-    
-    /**
-     * @return string First name
-     */
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * @param  string $lastName Last name
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setLastName($lastName)
-    {
-        return $this->setProperty('lastName', $lastName, 'string');
-    }
-    
-    /**
-     * @return string Last name
-     */
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * @param  string $street Street name
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setStreet($street)
-    {
-        return $this->setProperty('street', $street, 'string');
-    }
-    
-    /**
-     * @return string Street name
-     */
-    public function getStreet()
-    {
-        return $this->street;
-    }
-
-    /**
-     * @param  string $zipCode ZIP / postal code
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setZipCode($zipCode)
-    {
-        return $this->setProperty('zipCode', $zipCode, 'string');
-    }
-    
-    /**
-     * @return string ZIP / postal code
-     */
-    public function getZipCode()
-    {
-        return $this->zipCode;
-    }
-
-    /**
-     * @param  string $city City
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setCity($city)
-    {
-        return $this->setProperty('city', $city, 'string');
-    }
-    
-    /**
-     * @return string City
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
-
-    /**
-     * @param  string $countryIso Country ISO 3166-2 (2 letter Uppercase)
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setCountryIso($countryIso)
-    {
-        return $this->setProperty('countryIso', $countryIso, 'string');
-    }
-    
-    /**
-     * @return string Country ISO 3166-2 (2 letter Uppercase)
-     */
-    public function getCountryIso()
-    {
-        return $this->countryIso;
-    }
-
-    /**
-     * @param  string $phone Phone number
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setPhone($phone)
-    {
-        return $this->setProperty('phone', $phone, 'string');
-    }
-    
-    /**
-     * @return string Phone number
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    /**
-     * @param  string $fax Fax number
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setFax($fax)
-    {
-        return $this->setProperty('fax', $fax, 'string');
-    }
-    
-    /**
-     * @return string Fax number
-     */
-    public function getFax()
-    {
-        return $this->fax;
-    }
-
-    /**
-     * @param  string $eMail E-Mail address
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setEMail($eMail)
-    {
-        return $this->setProperty('eMail', $eMail, 'string');
-    }
-    
-    /**
-     * @return string E-Mail address
-     */
-    public function getEMail()
-    {
-        return $this->eMail;
-    }
-
-    /**
-     * @param  DateTime $created Creation date
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
-     */
-    public function setCreated(DateTime $created)
-    {
-        return $this->setProperty('created', $created, 'DateTime');
-    }
-    
-    /**
-     * @return DateTime Creation date
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
-    /**
-     * @param  string $mobile Mobile phone number
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setMobile($mobile)
-    {
-        return $this->setProperty('mobile', $mobile, 'string');
-    }
-    
-    /**
-     * @return string Mobile phone number
-     */
-    public function getMobile()
-    {
-        return $this->mobile;
-    }
-
-    /**
-     * @param  float $discount Percentual discount for customer on all prices
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'float'.
-     */
-    public function setDiscount($discount)
-    {
-        return $this->setProperty('discount', $discount, 'float');
-    }
-    
-    /**
-     * @return float Percentual discount for customer on all prices
-     */
-    public function getDiscount()
-    {
-        return $this->discount;
-    }
-
-    /**
-     * @param  string $vatNumber VAT number (german "USt-ID")
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setVatNumber($vatNumber)
-    {
-        return $this->setProperty('vatNumber', $vatNumber, 'string');
-    }
-    
-    /**
-     * @return string VAT number (german "USt-ID")
-     */
-    public function getVatNumber()
-    {
-        return $this->vatNumber;
-    }
-
-    /**
-     * @param  string $deliveryInstruction Delivery instruction e.g. "c/o John Doe"
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setDeliveryInstruction($deliveryInstruction)
-    {
-        return $this->setProperty('deliveryInstruction', $deliveryInstruction, 'string');
-    }
-    
-    /**
-     * @return string Delivery instruction e.g. "c/o John Doe"
-     */
-    public function getDeliveryInstruction()
-    {
-        return $this->deliveryInstruction;
-    }
-
-    /**
-     * @param  string $extraAddressLine Extra address line e.g. "Apartment 2.5"
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setExtraAddressLine($extraAddressLine)
-    {
-        return $this->setProperty('extraAddressLine', $extraAddressLine, 'string');
-    }
-    
-    /**
-     * @return string Extra address line e.g. "Apartment 2.5"
-     */
-    public function getExtraAddressLine()
-    {
-        return $this->extraAddressLine;
-    }
-
-    /**
-     * @param  string $www WWW address
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setWww($www)
-    {
-        return $this->setProperty('www', $www, 'string');
-    }
-    
-    /**
-     * @return string WWW address
-     */
-    public function getWww()
-    {
-        return $this->www;
-    }
-
-    /**
-     * @param  integer $languageId 
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-     */
-    public function setLanguageId($languageId)
-    {
-        return $this->setProperty('languageId', $languageId, 'integer');
-    }
-    
-    /**
-     * @return integer 
-     */
-    public function getLanguageId()
-    {
-        return $this->languageId;
-    }
-
-    /**
-     * @param  string $state State
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setState($state)
-    {
-        return $this->setProperty('state', $state, 'string');
-    }
-    
-    /**
-     * @return string State
-     */
-    public function getState()
-    {
-        return $this->state;
-    }
-
-    /**
-     * @param  string $origin Customer origin
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setOrigin($origin)
-    {
-        return $this->setProperty('origin', $origin, 'string');
-    }
-    
-    /**
-     * @return string Customer origin
-     */
-    public function getOrigin()
-    {
-        return $this->origin;
-    }
-
-    /**
-     * @param  Identity $id Unique customer id
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id)
-    {
-        return $this->setProperty('id', $id, 'Identity');
-    }
-    
-    /**
-     * @return Identity Unique customer id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param  Identity $customerCategoryId 
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCustomerCategoryId(Identity $customerCategoryId)
-    {
-        return $this->setProperty('customerCategoryId', $customerCategoryId, 'Identity');
-    }
-    
-    /**
-     * @return Identity 
-     */
-    public function getCustomerCategoryId()
-    {
-        return $this->customerCategoryId;
-    }
-
-    /**
-     * @param  string $salutation Salutation (german: "Anrede")
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setSalutation($salutation)
-    {
-        return $this->setProperty('salutation', $salutation, 'string');
-    }
-    
-    /**
-     * @return string Salutation (german: "Anrede")
-     */
-    public function getSalutation()
-    {
-        return $this->salutation;
-    }
-
-    /**
-     * @param  boolean $isActive Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
-     */
-    public function setIsActive($isActive)
-    {
-        return $this->setProperty('isActive', $isActive, 'boolean');
-    }
-    
-    /**
-     * @return boolean Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
-    }
-
-    /**
-     * @param  boolean $hasNewsletterSubscription Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
-     * @return \jtl\Connector\Model\Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
-     */
-    public function setHasNewsletterSubscription($hasNewsletterSubscription)
-    {
-        return $this->setProperty('hasNewsletterSubscription', $hasNewsletterSubscription, 'boolean');
-    }
-    
-    /**
-     * @return boolean Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
-     */
-    public function getHasNewsletterSubscription()
-    {
-        return $this->hasNewsletterSubscription;
-    }
 
     /**
      * @param  Identity $customerGroupId References a customer group
@@ -664,9 +199,9 @@ class Customer extends DataModel
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        return $this->setProperty('CustomerGroupId', $customerGroupId, 'Identity');
     }
-    
+
     /**
      * @return Identity References a customer group
      */
@@ -676,7 +211,583 @@ class Customer extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\CustomerAttr $attribute
+     * @param  Identity $id Unique customer id
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setId(Identity $id)
+    {
+        return $this->setProperty('Id', $id, 'Identity');
+    }
+
+    /**
+     * @return Identity Unique customer id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param  double $accountCredit Credit value on customer account in default currency
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setAccountCredit(Identity $accountCredit)
+    {
+        return $this->setProperty('AccountCredit', $accountCredit, 'double');
+    }
+
+    /**
+     * @return double Credit value on customer account in default currency
+     */
+    public function getAccountCredit()
+    {
+        return $this->accountCredit;
+    }
+
+    /**
+     * @param  string $birthday Date of birth
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setBirthday(Identity $birthday)
+    {
+        return $this->setProperty('Birthday', $birthday, 'string');
+    }
+
+    /**
+     * @return string Date of birth
+     */
+    public function getBirthday()
+    {
+        return $this->birthday;
+    }
+
+    /**
+     * @param  string $city City
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCity(Identity $city)
+    {
+        return $this->setProperty('City', $city, 'string');
+    }
+
+    /**
+     * @return string City
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param  string $company Company name
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCompany(Identity $company)
+    {
+        return $this->setProperty('Company', $company, 'string');
+    }
+
+    /**
+     * @return string Company name
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * @param  string $countryIso Country ISO 3166-2 (2 letter Uppercase)
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCountryIso(Identity $countryIso)
+    {
+        return $this->setProperty('CountryIso', $countryIso, 'string');
+    }
+
+    /**
+     * @return string Country ISO 3166-2 (2 letter Uppercase)
+     */
+    public function getCountryIso()
+    {
+        return $this->countryIso;
+    }
+
+    /**
+     * @param  string $created Creation date
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCreated(Identity $created)
+    {
+        return $this->setProperty('Created', $created, 'string');
+    }
+
+    /**
+     * @return string Creation date
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param  string $customerNumber Optional customer number set by JTL-Wawi ERP software
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerNumber(Identity $customerNumber)
+    {
+        return $this->setProperty('CustomerNumber', $customerNumber, 'string');
+    }
+
+    /**
+     * @return string Optional customer number set by JTL-Wawi ERP software
+     */
+    public function getCustomerNumber()
+    {
+        return $this->customerNumber;
+    }
+
+    /**
+     * @param  string $deliveryInstruction Delivery instruction e.g. "c/o John Doe"
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setDeliveryInstruction(Identity $deliveryInstruction)
+    {
+        return $this->setProperty('DeliveryInstruction', $deliveryInstruction, 'string');
+    }
+
+    /**
+     * @return string Delivery instruction e.g. "c/o John Doe"
+     */
+    public function getDeliveryInstruction()
+    {
+        return $this->deliveryInstruction;
+    }
+
+    /**
+     * @param  double $discount Percentual discount for customer on all prices
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setDiscount(Identity $discount)
+    {
+        return $this->setProperty('Discount', $discount, 'double');
+    }
+
+    /**
+     * @return double Percentual discount for customer on all prices
+     */
+    public function getDiscount()
+    {
+        return $this->discount;
+    }
+
+    /**
+     * @param  string $eMail E-Mail address
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setEMail(Identity $eMail)
+    {
+        return $this->setProperty('EMail', $eMail, 'string');
+    }
+
+    /**
+     * @return string E-Mail address
+     */
+    public function getEMail()
+    {
+        return $this->eMail;
+    }
+
+    /**
+     * @param  string $extraAddressLine Extra address line e.g. "Apartment 2.5"
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setExtraAddressLine(Identity $extraAddressLine)
+    {
+        return $this->setProperty('ExtraAddressLine', $extraAddressLine, 'string');
+    }
+
+    /**
+     * @return string Extra address line e.g. "Apartment 2.5"
+     */
+    public function getExtraAddressLine()
+    {
+        return $this->extraAddressLine;
+    }
+
+    /**
+     * @param  string $fax Fax number
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setFax(Identity $fax)
+    {
+        return $this->setProperty('Fax', $fax, 'string');
+    }
+
+    /**
+     * @return string Fax number
+     */
+    public function getFax()
+    {
+        return $this->fax;
+    }
+
+    /**
+     * @param  string $firstName First name
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setFirstName(Identity $firstName)
+    {
+        return $this->setProperty('FirstName', $firstName, 'string');
+    }
+
+    /**
+     * @return string First name
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param  bool $hasCustomerAccount Flag persistent customer account. True, if customer chose to create persistent customer account. False, if customer doesnt want to have his data stored for login-purposes.
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setHasCustomerAccount(Identity $hasCustomerAccount)
+    {
+        return $this->setProperty('HasCustomerAccount', $hasCustomerAccount, 'bool');
+    }
+
+    /**
+     * @return bool Flag persistent customer account. True, if customer chose to create persistent customer account. False, if customer doesnt want to have his data stored for login-purposes.
+     */
+    public function getHasCustomerAccount()
+    {
+        return $this->hasCustomerAccount;
+    }
+
+    /**
+     * @param  bool $hasNewsletterSubscription Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setHasNewsletterSubscription(Identity $hasNewsletterSubscription)
+    {
+        return $this->setProperty('HasNewsletterSubscription', $hasNewsletterSubscription, 'bool');
+    }
+
+    /**
+     * @return bool Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
+     */
+    public function getHasNewsletterSubscription()
+    {
+        return $this->hasNewsletterSubscription;
+    }
+
+    /**
+     * @param  bool $isActive Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setIsActive(Identity $isActive)
+    {
+        return $this->setProperty('IsActive', $isActive, 'bool');
+    }
+
+    /**
+     * @return bool Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param  bool $isFetched Flag if customer is fetched by ERP System. True, if customer is already fetched and must not be fetched again. 
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setIsFetched(Identity $isFetched)
+    {
+        return $this->setProperty('IsFetched', $isFetched, 'bool');
+    }
+
+    /**
+     * @return bool Flag if customer is fetched by ERP System. True, if customer is already fetched and must not be fetched again. 
+     */
+    public function getIsFetched()
+    {
+        return $this->isFetched;
+    }
+
+    /**
+     * @param  string $lastName Last name
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setLastName(Identity $lastName)
+    {
+        return $this->setProperty('LastName', $lastName, 'string');
+    }
+
+    /**
+     * @return string Last name
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param  string $localeName User locale preference
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setLocaleName(Identity $localeName)
+    {
+        return $this->setProperty('LocaleName', $localeName, 'string');
+    }
+
+    /**
+     * @return string User locale preference
+     */
+    public function getLocaleName()
+    {
+        return $this->localeName;
+    }
+
+    /**
+     * @param  string $mobile Mobile phone number
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setMobile(Identity $mobile)
+    {
+        return $this->setProperty('Mobile', $mobile, 'string');
+    }
+
+    /**
+     * @return string Mobile phone number
+     */
+    public function getMobile()
+    {
+        return $this->mobile;
+    }
+
+    /**
+     * @param  string $modified Last modified date
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setModified(Identity $modified)
+    {
+        return $this->setProperty('Modified', $modified, 'string');
+    }
+
+    /**
+     * @return string Last modified date
+     */
+    public function getModified()
+    {
+        return $this->modified;
+    }
+
+    /**
+     * @param  string $origin Customer origin
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setOrigin(Identity $origin)
+    {
+        return $this->setProperty('Origin', $origin, 'string');
+    }
+
+    /**
+     * @return string Customer origin
+     */
+    public function getOrigin()
+    {
+        return $this->origin;
+    }
+
+    /**
+     * @param  string $password Optional (encrypted!) customer password
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setPassword(Identity $password)
+    {
+        return $this->setProperty('Password', $password, 'string');
+    }
+
+    /**
+     * @return string Optional (encrypted!) customer password
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param  string $phone Phone number
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setPhone(Identity $phone)
+    {
+        return $this->setProperty('Phone', $phone, 'string');
+    }
+
+    /**
+     * @return string Phone number
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param  string $salutation Salutation (german: "Anrede")
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setSalutation(Identity $salutation)
+    {
+        return $this->setProperty('Salutation', $salutation, 'string');
+    }
+
+    /**
+     * @return string Salutation (german: "Anrede")
+     */
+    public function getSalutation()
+    {
+        return $this->salutation;
+    }
+
+    /**
+     * @param  string $state State
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setState(Identity $state)
+    {
+        return $this->setProperty('State', $state, 'string');
+    }
+
+    /**
+     * @return string State
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param  string $street Street name
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setStreet(Identity $street)
+    {
+        return $this->setProperty('Street', $street, 'string');
+    }
+
+    /**
+     * @return string Street name
+     */
+    public function getStreet()
+    {
+        return $this->street;
+    }
+
+    /**
+     * @param  string $title Title, e.g. "Prof. Dr."
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setTitle(Identity $title)
+    {
+        return $this->setProperty('Title', $title, 'string');
+    }
+
+    /**
+     * @return string Title, e.g. "Prof. Dr."
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param  string $vatNumber VAT number (german "USt-ID")
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setVatNumber(Identity $vatNumber)
+    {
+        return $this->setProperty('VatNumber', $vatNumber, 'string');
+    }
+
+    /**
+     * @return string VAT number (german "USt-ID")
+     */
+    public function getVatNumber()
+    {
+        return $this->vatNumber;
+    }
+
+    /**
+     * @param  string $www WWW address
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setWww(Identity $www)
+    {
+        return $this->setProperty('Www', $www, 'string');
+    }
+
+    /**
+     * @return string WWW address
+     */
+    public function getWww()
+    {
+        return $this->www;
+    }
+
+    /**
+     * @param  string $zipCode ZIP / postal code
+     * @return \jtl\Connector\Model\Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setZipCode(Identity $zipCode)
+    {
+        return $this->setProperty('ZipCode', $zipCode, 'string');
+    }
+
+    /**
+     * @return string ZIP / postal code
+     */
+    public function getZipCode()
+    {
+        return $this->zipCode;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\CustomerAttr $attributes
      * @return \jtl\Connector\Model\Customer
      */
     public function addAttribute(\jtl\Connector\Model\CustomerAttr $attribute)
@@ -686,7 +797,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return CustomerAttr
+     * @return \jtl\Connector\Model\CustomerAttr[]
      */
     public function getAttributes()
     {
@@ -701,5 +812,5 @@ class Customer extends DataModel
         $this->attributes = array();
         return $this;
     }
+ 
 }
-

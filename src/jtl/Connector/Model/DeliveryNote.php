@@ -20,39 +20,19 @@ class DeliveryNote extends DataModel
     protected $customerOrderId = null;
 
     /**
-     * @type string 
+     * @type Identity Unique deliveryNote id
      */
-    protected $cLieferscheinNr = '';
+    protected $id = null;
 
     /**
-     * @type DateTime|null Creation date
+     * @type string Creation date
      */
-    protected $created = null;
+    protected $created = '';
 
     /**
-     * @type DateTime|null 
-     */
-    protected $dGedruckt = null;
-
-    /**
-     * @type DateTime|null 
-     */
-    protected $dMailVersand = null;
-
-    /**
-     * @type boolean Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
+     * @type bool Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      */
     protected $isFulfillment = false;
-
-    /**
-     * @type integer 
-     */
-    protected $kBenutzer = 0;
-
-    /**
-     * @type integer|null 
-     */
-    protected $kLieferantenBestellung = 0;
 
     /**
      * @type string Optional text note
@@ -60,145 +40,22 @@ class DeliveryNote extends DataModel
     protected $note = '';
 
     /**
-     * Nav [DeliveryNote » One]
-     *
+     * @type int Delivery status
+     */
+    protected $status = 0;
+
+    /**
      * @type \jtl\Connector\Model\DeliveryNoteItem[]
      */
     protected $items = array();
 
-
     /**
      * @type array list of identities
      */
-    protected $identities = array(
+     protected $identities = array(
         'customerOrderId',
+        'id',
     );
-
-    /**
-     * @param  integer $kBenutzer 
-     * @return \jtl\Connector\Model\DeliveryNote
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-     */
-    public function setKBenutzer($kBenutzer)
-    {
-        return $this->setProperty('kBenutzer', $kBenutzer, 'integer');
-    }
-    
-    /**
-     * @return integer 
-     */
-    public function getKBenutzer()
-    {
-        return $this->kBenutzer;
-    }
-
-    /**
-     * @param  string $cLieferscheinNr 
-     * @return \jtl\Connector\Model\DeliveryNote
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setCLieferscheinNr($cLieferscheinNr)
-    {
-        return $this->setProperty('cLieferscheinNr', $cLieferscheinNr, 'string');
-    }
-    
-    /**
-     * @return string 
-     */
-    public function getCLieferscheinNr()
-    {
-        return $this->cLieferscheinNr;
-    }
-
-    /**
-     * @param  string $note Optional text note
-     * @return \jtl\Connector\Model\DeliveryNote
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setNote($note)
-    {
-        return $this->setProperty('note', $note, 'string');
-    }
-    
-    /**
-     * @return string Optional text note
-     */
-    public function getNote()
-    {
-        return $this->note;
-    }
-
-    /**
-     * @param  DateTime $dMailVersand 
-     * @return \jtl\Connector\Model\DeliveryNote
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
-     */
-    public function setDMailVersand(DateTime $dMailVersand)
-    {
-        return $this->setProperty('dMailVersand', $dMailVersand, 'DateTime');
-    }
-    
-    /**
-     * @return DateTime 
-     */
-    public function getDMailVersand()
-    {
-        return $this->dMailVersand;
-    }
-
-    /**
-     * @param  DateTime $created Creation date
-     * @return \jtl\Connector\Model\DeliveryNote
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
-     */
-    public function setCreated(DateTime $created)
-    {
-        return $this->setProperty('created', $created, 'DateTime');
-    }
-    
-    /**
-     * @return DateTime Creation date
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
-    /**
-     * @param  DateTime $dGedruckt 
-     * @return \jtl\Connector\Model\DeliveryNote
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
-     */
-    public function setDGedruckt(DateTime $dGedruckt)
-    {
-        return $this->setProperty('dGedruckt', $dGedruckt, 'DateTime');
-    }
-    
-    /**
-     * @return DateTime 
-     */
-    public function getDGedruckt()
-    {
-        return $this->dGedruckt;
-    }
-
-    /**
-     * @param  integer $kLieferantenBestellung 
-     * @return \jtl\Connector\Model\DeliveryNote
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-     */
-    public function setKLieferantenBestellung($kLieferantenBestellung)
-    {
-        return $this->setProperty('kLieferantenBestellung', $kLieferantenBestellung, 'integer');
-    }
-    
-    /**
-     * @return integer 
-     */
-    public function getKLieferantenBestellung()
-    {
-        return $this->kLieferantenBestellung;
-    }
 
     /**
      * @param  Identity $customerOrderId Reference to customerOrder
@@ -207,9 +64,9 @@ class DeliveryNote extends DataModel
      */
     public function setCustomerOrderId(Identity $customerOrderId)
     {
-        return $this->setProperty('customerOrderId', $customerOrderId, 'Identity');
+        return $this->setProperty('CustomerOrderId', $customerOrderId, 'Identity');
     }
-    
+
     /**
      * @return Identity Reference to customerOrder
      */
@@ -219,17 +76,53 @@ class DeliveryNote extends DataModel
     }
 
     /**
-     * @param  boolean $isFulfillment Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
+     * @param  Identity $id Unique deliveryNote id
      * @return \jtl\Connector\Model\DeliveryNote
-     * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setIsFulfillment($isFulfillment)
+    public function setId(Identity $id)
     {
-        return $this->setProperty('isFulfillment', $isFulfillment, 'boolean');
+        return $this->setProperty('Id', $id, 'Identity');
     }
-    
+
     /**
-     * @return boolean Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
+     * @return Identity Unique deliveryNote id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param  string $created Creation date
+     * @return \jtl\Connector\Model\DeliveryNote
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCreated(Identity $created)
+    {
+        return $this->setProperty('Created', $created, 'string');
+    }
+
+    /**
+     * @return string Creation date
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param  bool $isFulfillment Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
+     * @return \jtl\Connector\Model\DeliveryNote
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setIsFulfillment(Identity $isFulfillment)
+    {
+        return $this->setProperty('IsFulfillment', $isFulfillment, 'bool');
+    }
+
+    /**
+     * @return bool Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      */
     public function getIsFulfillment()
     {
@@ -237,7 +130,43 @@ class DeliveryNote extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\DeliveryNoteItem $item
+     * @param  string $note Optional text note
+     * @return \jtl\Connector\Model\DeliveryNote
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setNote(Identity $note)
+    {
+        return $this->setProperty('Note', $note, 'string');
+    }
+
+    /**
+     * @return string Optional text note
+     */
+    public function getNote()
+    {
+        return $this->note;
+    }
+
+    /**
+     * @param  int $status Delivery status
+     * @return \jtl\Connector\Model\DeliveryNote
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setStatus(Identity $status)
+    {
+        return $this->setProperty('Status', $status, 'int');
+    }
+
+    /**
+     * @return int Delivery status
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\DeliveryNoteItem $items
      * @return \jtl\Connector\Model\DeliveryNote
      */
     public function addItem(\jtl\Connector\Model\DeliveryNoteItem $item)
@@ -247,7 +176,7 @@ class DeliveryNote extends DataModel
     }
     
     /**
-     * @return DeliveryNoteItem
+     * @return \jtl\Connector\Model\DeliveryNoteItem[]
      */
     public function getItems()
     {
@@ -262,5 +191,5 @@ class DeliveryNote extends DataModel
         $this->items = array();
         return $this;
     }
+ 
 }
-
