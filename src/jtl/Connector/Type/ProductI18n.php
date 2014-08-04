@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package jtl\Connector\Model
  */
 
 namespace jtl\Connector\Type;
@@ -17,15 +17,15 @@ class ProductI18n extends DataType
     protected function loadProperties()
     {
         return array(
-			new PropertyInfo('productId', '\jtl\Connector\Model\IdentityKeyPair', null, true, true, false),
-			new PropertyInfo('description', 'string', '', false, false, false),
-			new PropertyInfo('localeName', 'string', '', true, false, false),
-			new PropertyInfo('metaDescription', 'string', '', false, false, false),
-			new PropertyInfo('metaKeywords', 'string', '', false, false, false),
-			new PropertyInfo('name', 'string', '', false, false, false),
-			new PropertyInfo('shortDescription', 'string', '', false, false, false),
-			new PropertyInfo('titleTag', 'string', '', false, false, false),
-			new PropertyInfo('urlPath', 'string', '', false, false, false),
+            new PropertyInfo('productId', 'Identity', null, True, false, false),
+            new PropertyInfo('description', 'string', null, False, false, false),
+            new PropertyInfo('localeName', 'string', null, True, false, false),
+            new PropertyInfo('metaDescription', 'string', null, False, false, false),
+            new PropertyInfo('metaKeywords', 'string', null, False, false, false),
+            new PropertyInfo('name', 'string', null, False, false, false),
+            new PropertyInfo('shortDescription', 'string', null, False, false, false),
+            new PropertyInfo('titleTag', 'string', null, False, false, false),
+            new PropertyInfo('urlPath', 'string', null, False, false, false),
         );
     }
 }

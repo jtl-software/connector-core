@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package jtl\Connector\Model
  */
 
 namespace jtl\Connector\Type;
@@ -17,10 +17,10 @@ class CustomerOrderAttr extends DataType
     protected function loadProperties()
     {
         return array(
-			new PropertyInfo('customerOrderId', '\jtl\Connector\Model\IdentityKeyPair', null, false, true, false),
-			new PropertyInfo('id', '\jtl\Connector\Model\IdentityKeyPair', null, true, true, false),
-			new PropertyInfo('key', 'string', '', false, false, false),
-			new PropertyInfo('value', 'string', '', false, false, false),
+            new PropertyInfo('customerOrderId', 'Identity', null, False, false, false),
+            new PropertyInfo('id', 'Identity', null, True, false, false),
+            new PropertyInfo('key', 'string', null, False, false, false),
+            new PropertyInfo('value', 'string', null, False, false, false),
         );
     }
 }

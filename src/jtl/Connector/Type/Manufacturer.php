@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package jtl\Connector\Model
  */
 
 namespace jtl\Connector\Type;
@@ -17,12 +17,12 @@ class Manufacturer extends DataType
     protected function loadProperties()
     {
         return array(
-			new PropertyInfo('id', '\jtl\Connector\Model\IdentityKeyPair', null, true, true, false),
-			new PropertyInfo('i18ns', '\jtl\Connector\Model\ManufacturerI18n', null, false, false, true),
-			new PropertyInfo('name', 'string', '', false, false, false),
-			new PropertyInfo('sort', 'integer', 0, false, false, false),
-			new PropertyInfo('urlPath', 'string', '', false, false, false),
-			new PropertyInfo('www', 'string', '', false, false, false),
+            new PropertyInfo('id', 'Identity', null, True, false, false),
+            new PropertyInfo('name', 'string', null, False, false, false),
+            new PropertyInfo('sort', 'int', null, False, false, false),
+            new PropertyInfo('urlPath', 'string', null, False, false, false),
+            new PropertyInfo('www', 'string', null, False, false, false),
+            new PropertyInfo('i18ns', '\jtl\Connector\Model\ManufacturerI18n', null, false, false, true),
         );
     }
 }

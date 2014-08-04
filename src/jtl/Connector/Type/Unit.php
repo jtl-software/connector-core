@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package jtl\Connector\Model
  */
 
 namespace jtl\Connector\Type;
@@ -17,8 +17,7 @@ class Unit extends DataType
     protected function loadProperties()
     {
         return array(
-			new PropertyInfo('localeName', 'string', '', true, false, false),
-			new PropertyInfo('name', 'string', '', false, false, false),
+            new PropertyInfo('id', 'Identity', null, True, false, false),
         );
     }
 }

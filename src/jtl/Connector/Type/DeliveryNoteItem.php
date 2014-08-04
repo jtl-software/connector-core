@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package jtl\Connector\Model
  */
 
 namespace jtl\Connector\Type;
@@ -17,10 +17,14 @@ class DeliveryNoteItem extends DataType
     protected function loadProperties()
     {
         return array(
-			new PropertyInfo('customerOrderItemId', '\jtl\Connector\Model\IdentityKeyPair', null, false, true, false),
-			new PropertyInfo('deliveryNoteId', '\jtl\Connector\Model\IdentityKeyPair', null, false, true, false),
-			new PropertyInfo('cHinweis', 'string', '', false, false, false),
-			new PropertyInfo('quantity', 'float', 0.0, false, false, false),
+            new PropertyInfo('customerOrderItemId', 'Identity', null, False, false, false),
+            new PropertyInfo('deliveryNoteId', 'Identity', null, False, false, false),
+            new PropertyInfo('id', 'Identity', null, True, false, false),
+            new PropertyInfo('warehouseId', 'Identity', null, False, false, false),
+            new PropertyInfo('batchNumber', 'string', null, False, false, false),
+            new PropertyInfo('bestBefore', 'string', null, False, false, false),
+            new PropertyInfo('quantity', 'double', null, False, false, false),
+            new PropertyInfo('serialNumber', 'string', null, False, false, false),
         );
     }
 }

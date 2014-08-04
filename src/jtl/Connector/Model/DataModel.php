@@ -182,10 +182,13 @@ abstract class DataModel extends CoreModel
         switch ($type)
         {
             case 'boolean':
+            case 'bool':
                 return is_bool($value);
             case 'integer':
+            case 'int':
                 return is_integer($value);
             case 'float':
+            case 'double':
                 return (is_float($value) || is_integer($value) || is_double($value));
             case 'string':
                 return is_string($value);

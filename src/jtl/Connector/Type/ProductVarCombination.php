@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package jtl\Connector\Model
  */
 
 namespace jtl\Connector\Type;
@@ -17,9 +17,9 @@ class ProductVarCombination extends DataType
     protected function loadProperties()
     {
         return array(
-			new PropertyInfo('id', '\jtl\Connector\Model\IdentityKeyPair', null, true, true, false),
-			new PropertyInfo('productVariationId', '\jtl\Connector\Model\IdentityKeyPair', null, true, true, false),
-			new PropertyInfo('productVariationValueId', '\jtl\Connector\Model\IdentityKeyPair', null, false, true, false),
+            new PropertyInfo('productId', 'Identity', null, True, false, false),
+            new PropertyInfo('productVariationId', 'Identity', null, True, false, false),
+            new PropertyInfo('productVariationValueId', 'Identity', null, True, false, false),
         );
     }
 }

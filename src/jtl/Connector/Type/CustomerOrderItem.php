@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package jtl\Connector\Model
  */
 
 namespace jtl\Connector\Type;
@@ -17,21 +17,19 @@ class CustomerOrderItem extends DataType
     protected function loadProperties()
     {
         return array(
-			new PropertyInfo('configItemId', '\jtl\Connector\Model\IdentityKeyPair', null, false, true, false),
-			new PropertyInfo('customerOrderId', '\jtl\Connector\Model\IdentityKeyPair', null, false, true, false),
-			new PropertyInfo('id', '\jtl\Connector\Model\IdentityKeyPair', null, true, true, false),
-			new PropertyInfo('productId', '\jtl\Connector\Model\IdentityKeyPair', null, false, true, false),
-			new PropertyInfo('grossPrice', 'float', 0.0, false, false, false),
-			new PropertyInfo('kBestellStueckliste', 'integer', 0, false, false, false),
-			new PropertyInfo('name', 'string', '', false, false, false),
-			new PropertyInfo('price', 'float', 0.0, false, false, false),
-			new PropertyInfo('quantity', 'float', 0.0, false, false, false),
-			new PropertyInfo('sku', 'string', '', false, false, false),
-			new PropertyInfo('sort', 'integer', 0, false, false, false),
-			new PropertyInfo('type', 'string', '', false, false, false),
-			new PropertyInfo('unique', 'string', '', false, false, false),
-			new PropertyInfo('variations', '\jtl\Connector\Model\CustomerOrderItemVariation', null, false, false, true),
-			new PropertyInfo('vat', 'float', 0.0, false, false, false),
+            new PropertyInfo('configItemId', 'Identity', null, False, false, false),
+            new PropertyInfo('customerOrderId', 'Identity', null, False, false, false),
+            new PropertyInfo('id', 'Identity', null, True, false, false),
+            new PropertyInfo('productId', 'Identity', null, False, false, false),
+            new PropertyInfo('shippingClassId', 'Identity', null, False, false, false),
+            new PropertyInfo('name', 'string', null, False, false, false),
+            new PropertyInfo('price', 'double', null, False, false, false),
+            new PropertyInfo('quantity', 'int', null, False, false, false),
+            new PropertyInfo('sku', 'string', null, False, false, false),
+            new PropertyInfo('type', 'string', null, False, false, false),
+            new PropertyInfo('unique', 'string', null, False, false, false),
+            new PropertyInfo('vat', 'double', null, False, false, false),
+            new PropertyInfo('variations', '\jtl\Connector\Model\CustomerOrderItemVariation', null, false, false, true),
         );
     }
 }

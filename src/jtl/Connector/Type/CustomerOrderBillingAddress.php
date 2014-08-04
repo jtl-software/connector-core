@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package jtl\Connector\Model
  */
 
 namespace jtl\Connector\Type;
@@ -17,24 +17,24 @@ class CustomerOrderBillingAddress extends DataType
     protected function loadProperties()
     {
         return array(
-			new PropertyInfo('customerId', '\jtl\Connector\Model\IdentityKeyPair', null, false, true, false),
-			new PropertyInfo('id', '\jtl\Connector\Model\IdentityKeyPair', null, true, true, false),
-			new PropertyInfo('city', 'string', '', false, false, false),
-			new PropertyInfo('company', 'string', '', false, false, false),
-			new PropertyInfo('countryIso', 'string', '', false, false, false),
-			new PropertyInfo('deliveryInstruction', 'string', '', false, false, false),
-			new PropertyInfo('eMail', 'string', '', false, false, false),
-			new PropertyInfo('extraAddressLine', 'string', '', false, false, false),
-			new PropertyInfo('fax', 'string', '', false, false, false),
-			new PropertyInfo('firstName', 'string', '', false, false, false),
-			new PropertyInfo('lastName', 'string', '', false, false, false),
-			new PropertyInfo('mobile', 'string', '', false, false, false),
-			new PropertyInfo('phone', 'string', '', false, false, false),
-			new PropertyInfo('salutation', 'string', '', false, false, false),
-			new PropertyInfo('state', 'string', '', false, false, false),
-			new PropertyInfo('street', 'string', '', false, false, false),
-			new PropertyInfo('title', 'string', '', false, false, false),
-			new PropertyInfo('zipCode', 'string', '', false, false, false),
+            new PropertyInfo('customerId', 'Identity', null, False, false, false),
+            new PropertyInfo('id', 'Identity', null, True, false, false),
+            new PropertyInfo('city', 'string', null, False, false, false),
+            new PropertyInfo('company', 'string', null, False, false, false),
+            new PropertyInfo('countryIso', 'string', null, False, false, false),
+            new PropertyInfo('deliveryInstruction', 'string', null, False, false, false),
+            new PropertyInfo('eMail', 'string', null, False, false, false),
+            new PropertyInfo('extraAddressLine', 'string', null, False, false, false),
+            new PropertyInfo('fax', 'string', null, False, false, false),
+            new PropertyInfo('firstName', 'string', null, False, false, false),
+            new PropertyInfo('lastName', 'string', null, False, false, false),
+            new PropertyInfo('mobile', 'string', null, False, false, false),
+            new PropertyInfo('phone', 'string', null, False, false, false),
+            new PropertyInfo('salutation', 'string', null, False, false, false),
+            new PropertyInfo('state', 'string', null, False, false, false),
+            new PropertyInfo('street', 'string', null, False, false, false),
+            new PropertyInfo('title', 'string', null, False, false, false),
+            new PropertyInfo('zipCode', 'string', null, False, false, false),
         );
     }
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package jtl\Connector\Model
  */
 
 namespace jtl\Connector\Type;
@@ -17,15 +17,15 @@ class ProductSpecialPrice extends DataType
     protected function loadProperties()
     {
         return array(
-			new PropertyInfo('id', '\jtl\Connector\Model\IdentityKeyPair', null, true, true, false),
-			new PropertyInfo('productId', '\jtl\Connector\Model\IdentityKeyPair', null, false, true, false),
-			new PropertyInfo('activeFrom', '\jtl\Connector\Model\DateTime', null, false, false, false),
-			new PropertyInfo('activeUntil', '\jtl\Connector\Model\DateTime', null, false, false, false),
-			new PropertyInfo('considerDateLimit', 'integer', 0, false, false, false),
-			new PropertyInfo('considerStockLimit', 'integer', 0, false, false, false),
-			new PropertyInfo('isActive', 'boolean', false, false, false, false),
-			new PropertyInfo('specialPrices', '\jtl\Connector\Model\SpecialPrice', null, false, false, true),
-			new PropertyInfo('stockLimit', 'integer', 0, false, false, false),
+            new PropertyInfo('id', 'Identity', null, True, false, false),
+            new PropertyInfo('productId', 'Identity', null, False, false, false),
+            new PropertyInfo('activeFrom', 'string', null, False, false, false),
+            new PropertyInfo('activeUntil', 'string', null, False, false, false),
+            new PropertyInfo('considerDateLimit', 'bool', null, False, false, false),
+            new PropertyInfo('considerStockLimit', 'bool', null, False, false, false),
+            new PropertyInfo('isActive', 'bool', null, False, false, false),
+            new PropertyInfo('stockLimit', 'double', null, False, false, false),
+            new PropertyInfo('specialPrices', '\jtl\Connector\Model\SpecialPrice', null, false, false, true),
         );
     }
 }
