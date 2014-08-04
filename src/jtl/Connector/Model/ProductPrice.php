@@ -32,9 +32,9 @@ class ProductPrice extends DataModel
     protected $netPrice = 0.0;
 
     /**
-     * @var int Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
+     * @var double Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
      */
-    protected $quantity = 0;
+    protected $quantity = 0.0;
 
     /**
      * @param  Identity $customerGroupId Reference to customerGroup
@@ -91,17 +91,17 @@ class ProductPrice extends DataModel
     }
 
     /**
-     * @param  int $quantity Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
+     * @param  double $quantity Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
      * @return \jtl\Connector\Model\ProductPrice
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
     public function setQuantity($quantity)
     {
-        return $this->setProperty('quantity', $quantity, 'int');
+        return $this->setProperty('quantity', $quantity, 'double');
     }
 
     /**
-     * @return int Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
+     * @return double Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
      */
     public function getQuantity()
     {
