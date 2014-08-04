@@ -2,7 +2,7 @@
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Identity
+ * @subpackage Internal 
  */
 
 namespace jtl\Connector\Model;
@@ -14,7 +14,7 @@ use \jtl\Core\Model\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Identity
+ * @subpackage Internal
  */
 class Identity extends Model
 {

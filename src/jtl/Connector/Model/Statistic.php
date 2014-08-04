@@ -2,7 +2,7 @@
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Statistic
+ * @subpackage Internal 
  */
 
 namespace jtl\Connector\Model;
@@ -12,7 +12,7 @@ namespace jtl\Connector\Model;
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Statistic
+ * @subpackage Internal
  */
 class Statistic extends DataModel
 {
