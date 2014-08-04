@@ -52,9 +52,9 @@ class CustomerOrderItem extends DataModel
     protected $price = 0.0;
 
     /**
-     * @var int Quantity purchased
+     * @var double Quantity purchased
      */
-    protected $quantity = 0;
+    protected $quantity = 0.0;
 
     /**
      * @var string Stock keeping Unit (unique item identifier)
@@ -208,17 +208,17 @@ class CustomerOrderItem extends DataModel
     }
 
     /**
-     * @param  int $quantity Quantity purchased
+     * @param  double $quantity Quantity purchased
      * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
     public function setQuantity($quantity)
     {
-        return $this->setProperty('quantity', $quantity, 'int');
+        return $this->setProperty('quantity', $quantity, 'double');
     }
 
     /**
-     * @return int Quantity purchased
+     * @return double Quantity purchased
      */
     public function getQuantity()
     {
