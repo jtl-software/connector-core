@@ -2,6 +2,7 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -13,6 +14,7 @@ use \DateTime;
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Product
  */
 class ProductInvisibility extends DataModel
 {
