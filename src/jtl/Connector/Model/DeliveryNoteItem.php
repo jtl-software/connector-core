@@ -42,9 +42,9 @@ class DeliveryNoteItem extends DataModel
     protected $batchNumber = '';
 
     /**
-     * @var string Optional best before date
+     * @var DateTime Optional best before date
      */
-    protected $bestBefore = '';
+    protected $bestBefore = null;
 
     /**
      * @var double Quantity delivered
@@ -147,17 +147,17 @@ class DeliveryNoteItem extends DataModel
     }
 
     /**
-     * @param  string $bestBefore Optional best before date
+     * @param  DateTime $bestBefore Optional best before date
      * @return \jtl\Connector\Model\DeliveryNoteItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setBestBefore($bestBefore)
+    public function setBestBefore(DateTime $bestBefore)
     {
-        return $this->setProperty('bestBefore', $bestBefore, 'string');
+        return $this->setProperty('bestBefore', $bestBefore, 'DateTime');
     }
 
     /**
-     * @return string Optional best before date
+     * @return DateTime Optional best before date
      */
     public function getBestBefore()
     {

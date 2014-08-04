@@ -27,14 +27,14 @@ class ProductSpecialPrice extends DataModel
     protected $productId = null;
 
     /**
-     * @var string Optional: Activate special price from date
+     * @var DateTime Optional: Activate special price from date
      */
-    protected $activeFrom = '';
+    protected $activeFrom = null;
 
     /**
-     * @var string Optional: Special price active until date
+     * @var DateTime Optional: Special price active until date
      */
-    protected $activeUntil = '';
+    protected $activeUntil = null;
 
     /**
      * @var bool Optional: Consider activeFrom/activeUntil date range. If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
@@ -98,17 +98,17 @@ class ProductSpecialPrice extends DataModel
     }
 
     /**
-     * @param  string $activeFrom Optional: Activate special price from date
+     * @param  DateTime $activeFrom Optional: Activate special price from date
      * @return \jtl\Connector\Model\ProductSpecialPrice
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setActiveFrom($activeFrom)
+    public function setActiveFrom(DateTime $activeFrom)
     {
-        return $this->setProperty('activeFrom', $activeFrom, 'string');
+        return $this->setProperty('activeFrom', $activeFrom, 'DateTime');
     }
 
     /**
-     * @return string Optional: Activate special price from date
+     * @return DateTime Optional: Activate special price from date
      */
     public function getActiveFrom()
     {
@@ -116,17 +116,17 @@ class ProductSpecialPrice extends DataModel
     }
 
     /**
-     * @param  string $activeUntil Optional: Special price active until date
+     * @param  DateTime $activeUntil Optional: Special price active until date
      * @return \jtl\Connector\Model\ProductSpecialPrice
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setActiveUntil($activeUntil)
+    public function setActiveUntil(DateTime $activeUntil)
     {
-        return $this->setProperty('activeUntil', $activeUntil, 'string');
+        return $this->setProperty('activeUntil', $activeUntil, 'DateTime');
     }
 
     /**
-     * @return string Optional: Special price active until date
+     * @return DateTime Optional: Special price active until date
      */
     public function getActiveUntil()
     {
@@ -231,5 +231,6 @@ class ProductSpecialPrice extends DataModel
         $this->specialPrices = array();
         return $this;
     }
+
  
 }

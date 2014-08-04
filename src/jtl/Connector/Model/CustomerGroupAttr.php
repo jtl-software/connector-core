@@ -139,5 +139,6 @@ class CustomerGroupAttr extends DataModel
         $this->customerGroup = array();
         return $this;
     }
+
  
 }

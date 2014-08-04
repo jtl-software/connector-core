@@ -200,13 +200,14 @@ class ProductVariationValue extends DataModel
         $this->invisibilities = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\ProductVariationValueI18n $i18ns
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function addI18n(\jtl\Connector\Model\ProductVariationValueI18n $i18n)
     {
-        $this->i18ns[] = $i18ns;
+        $this->i18ns[] = $i18n;
         return $this;
     }
     
@@ -226,6 +227,7 @@ class ProductVariationValue extends DataModel
         $this->i18ns = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\ProductVariationValueExtraCharge $extraCharges
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -252,6 +254,7 @@ class ProductVariationValue extends DataModel
         $this->extraCharges = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\ProductVariationValueDependency $dependencies
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -278,5 +281,6 @@ class ProductVariationValue extends DataModel
         $this->dependencies = array();
         return $this;
     }
+
  
 }

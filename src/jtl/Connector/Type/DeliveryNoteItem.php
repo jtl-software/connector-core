@@ -22,7 +22,7 @@ class DeliveryNoteItem extends DataType
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('warehouseId', 'Identity', null, false, true, false),
             new PropertyInfo('batchNumber', 'string', null, false, false, false),
-            new PropertyInfo('bestBefore', 'string', null, false, false, false),
+            new PropertyInfo('bestBefore', 'DateTime', null, false, false, false),
             new PropertyInfo('quantity', 'double', null, false, false, false),
             new PropertyInfo('serialNumber', 'string', null, false, false, false),
         );

@@ -144,13 +144,14 @@ class Specific extends DataModel
         $this->values = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\SpecificI18n $i18ns
      * @return \jtl\Connector\Model\Specific
      */
     public function addI18n(\jtl\Connector\Model\SpecificI18n $i18n)
     {
-        $this->i18ns[] = $i18ns;
+        $this->i18ns[] = $i18n;
         return $this;
     }
     
@@ -170,5 +171,6 @@ class Specific extends DataModel
         $this->i18ns = array();
         return $this;
     }
+
  
 }

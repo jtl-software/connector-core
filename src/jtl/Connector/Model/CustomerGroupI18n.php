@@ -116,5 +116,6 @@ class CustomerGroupI18n extends DataModel
         $this->customerGroup = array();
         return $this;
     }
+
  
 }

@@ -323,5 +323,6 @@ class CustomerOrderItem extends DataModel
         $this->variations = array();
         return $this;
     }
+
  
 }

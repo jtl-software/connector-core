@@ -420,6 +420,7 @@ class ConfigItem extends DataModel
         $this->prices = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\ConfigItemI18n $i18n
      * @return \jtl\Connector\Model\ConfigItem
@@ -446,5 +447,6 @@ class ConfigItem extends DataModel
         $this->i18n = array();
         return $this;
     }
+
  
 }

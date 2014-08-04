@@ -19,6 +19,7 @@ class Category extends DataType
         return array(
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('parentCategoryId', 'Identity', null, false, true, false),
+            new PropertyInfo('isActive', 'bool', null, false, false, false),
             new PropertyInfo('level', 'int', null, false, false, false),
             new PropertyInfo('sort', 'int', null, false, false, false),
             new PropertyInfo('children', '\jtl\Connector\Model\ChildCategory', null, false, false, true),

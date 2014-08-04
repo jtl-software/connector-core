@@ -19,8 +19,8 @@ class ProductSpecialPrice extends DataType
         return array(
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('productId', 'Identity', null, false, true, false),
-            new PropertyInfo('activeFrom', 'string', null, false, false, false),
-            new PropertyInfo('activeUntil', 'string', null, false, false, false),
+            new PropertyInfo('activeFrom', 'DateTime', null, false, false, false),
+            new PropertyInfo('activeUntil', 'DateTime', null, false, false, false),
             new PropertyInfo('considerDateLimit', 'bool', null, false, false, false),
             new PropertyInfo('considerStockLimit', 'bool', null, false, false, false),
             new PropertyInfo('isActive', 'bool', null, false, false, false),

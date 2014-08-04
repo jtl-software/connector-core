@@ -20,7 +20,7 @@ class Customer extends DataType
             new PropertyInfo('customerGroupId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('accountCredit', 'double', null, false, false, false),
-            new PropertyInfo('birthday', 'string', null, false, false, false),
+            new PropertyInfo('birthday', 'DateTime', null, false, false, false),
             new PropertyInfo('city', 'string', null, false, false, false),
             new PropertyInfo('company', 'string', null, false, false, false),
             new PropertyInfo('countryIso', 'string', null, false, false, false),

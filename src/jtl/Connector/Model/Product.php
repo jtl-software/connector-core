@@ -72,9 +72,9 @@ class Product extends DataModel
     protected $asin = '';
 
     /**
-     * @var string Optional available from date. Specify a date, upon when product can be purchased. 
+     * @var DateTime Optional available from date. Specify a date, upon when product can be purchased. 
      */
-    protected $availableFrom = '';
+    protected $availableFrom = null;
 
     /**
      * @var double Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
@@ -87,9 +87,9 @@ class Product extends DataModel
     protected $basePriceQuantity = 0.0;
 
     /**
-     * @var string Optional best before date. Default 0000-00-00 if product has no best-before-date.
+     * @var DateTime Optional best before date. Default 0000-00-00 if product has no best-before-date.
      */
-    protected $bestBefore = '';
+    protected $bestBefore = null;
 
     /**
      * @var bool Optional: Set to true to display base price / unit pricing measure
@@ -132,9 +132,9 @@ class Product extends DataModel
     protected $height = 0.0;
 
     /**
-     * @var string Optional expected inflow date
+     * @var DateTime Optional expected inflow date
      */
-    protected $inflowDate = '';
+    protected $inflowDate = null;
 
     /**
      * @var double Optional expected inflow quantity
@@ -535,17 +535,17 @@ class Product extends DataModel
     }
 
     /**
-     * @param  string $availableFrom Optional available from date. Specify a date, upon when product can be purchased. 
+     * @param  DateTime $availableFrom Optional available from date. Specify a date, upon when product can be purchased. 
      * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setAvailableFrom($availableFrom)
+    public function setAvailableFrom(DateTime $availableFrom)
     {
-        return $this->setProperty('availableFrom', $availableFrom, 'string');
+        return $this->setProperty('availableFrom', $availableFrom, 'DateTime');
     }
 
     /**
-     * @return string Optional available from date. Specify a date, upon when product can be purchased. 
+     * @return DateTime Optional available from date. Specify a date, upon when product can be purchased. 
      */
     public function getAvailableFrom()
     {
@@ -589,17 +589,17 @@ class Product extends DataModel
     }
 
     /**
-     * @param  string $bestBefore Optional best before date. Default 0000-00-00 if product has no best-before-date.
+     * @param  DateTime $bestBefore Optional best before date. Default 0000-00-00 if product has no best-before-date.
      * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setBestBefore($bestBefore)
+    public function setBestBefore(DateTime $bestBefore)
     {
-        return $this->setProperty('bestBefore', $bestBefore, 'string');
+        return $this->setProperty('bestBefore', $bestBefore, 'DateTime');
     }
 
     /**
-     * @return string Optional best before date. Default 0000-00-00 if product has no best-before-date.
+     * @return DateTime Optional best before date. Default 0000-00-00 if product has no best-before-date.
      */
     public function getBestBefore()
     {
@@ -751,17 +751,17 @@ class Product extends DataModel
     }
 
     /**
-     * @param  string $inflowDate Optional expected inflow date
+     * @param  DateTime $inflowDate Optional expected inflow date
      * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setInflowDate($inflowDate)
+    public function setInflowDate(DateTime $inflowDate)
     {
-        return $this->setProperty('inflowDate', $inflowDate, 'string');
+        return $this->setProperty('inflowDate', $inflowDate, 'DateTime');
     }
 
     /**
-     * @return string Optional expected inflow date
+     * @return DateTime Optional expected inflow date
      */
     public function getInflowDate()
     {
@@ -1316,6 +1316,7 @@ class Product extends DataModel
         $this->variations = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\ProductSpecialPrice $specialPrices
      * @return \jtl\Connector\Model\Product
@@ -1342,6 +1343,7 @@ class Product extends DataModel
         $this->specialPrices = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\SetArticle $setArticles
      * @return \jtl\Connector\Model\Product
@@ -1368,6 +1370,7 @@ class Product extends DataModel
         $this->setArticles = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\ProductPrice $prices
      * @return \jtl\Connector\Model\Product
@@ -1394,6 +1397,7 @@ class Product extends DataModel
         $this->prices = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\MediaFile $mediaFiles
      * @return \jtl\Connector\Model\Product
@@ -1420,6 +1424,7 @@ class Product extends DataModel
         $this->mediaFiles = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\ProductInvisibility $invisibilities
      * @return \jtl\Connector\Model\Product
@@ -1446,13 +1451,14 @@ class Product extends DataModel
         $this->invisibilities = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\ProductI18n $i18ns
      * @return \jtl\Connector\Model\Product
      */
     public function addI18n(\jtl\Connector\Model\ProductI18n $i18n)
     {
-        $this->i18ns[] = $i18ns;
+        $this->i18ns[] = $i18n;
         return $this;
     }
     
@@ -1472,6 +1478,7 @@ class Product extends DataModel
         $this->i18ns = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\ProductFileDownload $fileDownloads
      * @return \jtl\Connector\Model\Product
@@ -1498,6 +1505,7 @@ class Product extends DataModel
         $this->fileDownloads = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\CrossSelling $crossSellings
      * @return \jtl\Connector\Model\Product
@@ -1524,6 +1532,7 @@ class Product extends DataModel
         $this->crossSellings = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\ProductConfigGroup $configGroups
      * @return \jtl\Connector\Model\Product
@@ -1550,6 +1559,7 @@ class Product extends DataModel
         $this->configGroups = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\Product2Category $categories
      * @return \jtl\Connector\Model\Product
@@ -1576,5 +1586,6 @@ class Product extends DataModel
         $this->categories = array();
         return $this;
     }
+
  
 }

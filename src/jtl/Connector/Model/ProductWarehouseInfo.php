@@ -27,9 +27,9 @@ class ProductWarehouseInfo extends DataModel
     protected $warehouseId = null;
 
     /**
-     * @var string Optional product inflow date for specified warehouse
+     * @var DateTime Optional product inflow date for specified warehouse
      */
-    protected $inflowDate = '';
+    protected $inflowDate = null;
 
     /**
      * @var double Optional product inflow quantity for specified warehouse
@@ -78,17 +78,17 @@ class ProductWarehouseInfo extends DataModel
     }
 
     /**
-     * @param  string $inflowDate Optional product inflow date for specified warehouse
+     * @param  DateTime $inflowDate Optional product inflow date for specified warehouse
      * @return \jtl\Connector\Model\ProductWarehouseInfo
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setInflowDate($inflowDate)
+    public function setInflowDate(DateTime $inflowDate)
     {
-        return $this->setProperty('inflowDate', $inflowDate, 'string');
+        return $this->setProperty('inflowDate', $inflowDate, 'DateTime');
     }
 
     /**
-     * @return string Optional product inflow date for specified warehouse
+     * @return DateTime Optional product inflow date for specified warehouse
      */
     public function getInflowDate()
     {

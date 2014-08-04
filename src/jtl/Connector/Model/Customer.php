@@ -32,9 +32,9 @@ class Customer extends DataModel
     protected $accountCredit = 0.0;
 
     /**
-     * @var string Date of birth
+     * @var DateTime Date of birth
      */
-    protected $birthday = '';
+    protected $birthday = null;
 
     /**
      * @var string City
@@ -241,17 +241,17 @@ class Customer extends DataModel
     }
 
     /**
-     * @param  string $birthday Date of birth
+     * @param  DateTime $birthday Date of birth
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setBirthday($birthday)
+    public function setBirthday(DateTime $birthday)
     {
-        return $this->setProperty('birthday', $birthday, 'string');
+        return $this->setProperty('birthday', $birthday, 'DateTime');
     }
 
     /**
-     * @return string Date of birth
+     * @return DateTime Date of birth
      */
     public function getBirthday()
     {
@@ -806,5 +806,6 @@ class Customer extends DataModel
         $this->attributes = array();
         return $this;
     }
+
  
 }

@@ -142,7 +142,7 @@ class Manufacturer extends DataModel
      */
     public function addI18n(\jtl\Connector\Model\ManufacturerI18n $i18n)
     {
-        $this->i18ns[] = $i18ns;
+        $this->i18ns[] = $i18n;
         return $this;
     }
     
@@ -162,5 +162,6 @@ class Manufacturer extends DataModel
         $this->i18ns = array();
         return $this;
     }
+
  
 }

@@ -193,7 +193,7 @@ class MediaFile extends DataModel
      */
     public function addI18n(\jtl\Connector\Model\MediaFileI18n $i18n)
     {
-        $this->i18ns[] = $i18ns;
+        $this->i18ns[] = $i18n;
         return $this;
     }
     
@@ -213,6 +213,7 @@ class MediaFile extends DataModel
         $this->i18ns = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\MediaFileAttr $attributes
      * @return \jtl\Connector\Model\MediaFile
@@ -239,5 +240,6 @@ class MediaFile extends DataModel
         $this->attributes = array();
         return $this;
     }
+
  
 }

@@ -144,6 +144,7 @@ class CustomerGroup extends DataModel
         $this->i18n = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\CustomerGroupAttr $attributes
      * @return \jtl\Connector\Model\CustomerGroup
@@ -170,5 +171,6 @@ class CustomerGroup extends DataModel
         $this->attributes = array();
         return $this;
     }
+
  
 }

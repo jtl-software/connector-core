@@ -96,7 +96,7 @@ class SpecificValue extends DataModel
      */
     public function addI18n(\jtl\Connector\Model\SpecificValueI18n $i18n)
     {
-        $this->i18ns[] = $i18ns;
+        $this->i18ns[] = $i18n;
         return $this;
     }
     
@@ -116,5 +116,6 @@ class SpecificValue extends DataModel
         $this->i18ns = array();
         return $this;
     }
+
  
 }

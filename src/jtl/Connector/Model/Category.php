@@ -27,6 +27,11 @@ class Category extends DataModel
     protected $parentCategoryId = null;
 
     /**
+     * @var bool 
+     */
+    protected $isActive = false;
+
+    /**
      * @var int Optional category level (default 1 for first level)
      */
     protected $level = 0;
@@ -103,6 +108,24 @@ class Category extends DataModel
     }
 
     /**
+     * @param  bool $isActive 
+     * @return \jtl\Connector\Model\Category
+     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
+     */
+    public function setIsActive($isActive)
+    {
+        return $this->setProperty('isActive', $isActive, 'bool');
+    }
+
+    /**
+     * @return bool 
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
      * @param  int $level Optional category level (default 1 for first level)
      * @return \jtl\Connector\Model\Category
      * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
@@ -164,6 +187,7 @@ class Category extends DataModel
         $this->parent = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\CategoryInvisibility $invisibilities
      * @return \jtl\Connector\Model\Category
@@ -190,13 +214,14 @@ class Category extends DataModel
         $this->invisibilities = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\CategoryI18n $i18ns
      * @return \jtl\Connector\Model\Category
      */
     public function addI18n(\jtl\Connector\Model\CategoryI18n $i18n)
     {
-        $this->i18ns[] = $i18ns;
+        $this->i18ns[] = $i18n;
         return $this;
     }
     
@@ -216,6 +241,7 @@ class Category extends DataModel
         $this->i18ns = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\CategoryCustomerGroup $customerGroups
      * @return \jtl\Connector\Model\Category
@@ -242,6 +268,7 @@ class Category extends DataModel
         $this->customerGroups = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\ChildCategory $children
      * @return \jtl\Connector\Model\Category
@@ -268,6 +295,7 @@ class Category extends DataModel
         $this->children = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\CategoryAttr $attributes
      * @return \jtl\Connector\Model\Category
@@ -294,5 +322,6 @@ class Category extends DataModel
         $this->attributes = array();
         return $this;
     }
+
  
 }

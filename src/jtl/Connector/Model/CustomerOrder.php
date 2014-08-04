@@ -87,9 +87,9 @@ class CustomerOrder extends DataModel
     protected $orderNumber = '';
 
     /**
-     * @var string Payment date
+     * @var DateTime Payment date
      */
-    protected $paymentDate = '';
+    protected $paymentDate = null;
 
     /**
      * @var string Optional payment module code
@@ -97,9 +97,9 @@ class CustomerOrder extends DataModel
     protected $paymentModuleCode = '';
 
     /**
-     * @var string Date from when customer will receive notification to rate order
+     * @var DateTime Date from when customer will receive notification to rate order
      */
-    protected $ratingNotificationDate = '';
+    protected $ratingNotificationDate = null;
 
     /**
      * @var string Optional session id or session hash
@@ -107,9 +107,9 @@ class CustomerOrder extends DataModel
     protected $session = '';
 
     /**
-     * @var string Shipping date
+     * @var DateTime Shipping date
      */
-    protected $shippingDate = '';
+    protected $shippingDate = null;
 
     /**
      * @var string Additional shipping info
@@ -152,14 +152,14 @@ class CustomerOrder extends DataModel
     protected $shippingAddress = array();
 
     /**
-     * @var \jtl\Connector\Model\CustomerOrderPosition[]
-     */
-    protected $positions = array();
-
-    /**
      * @var \jtl\Connector\Model\CustomerOrderPaymentInfo[]
      */
     protected $paymentInfo = array();
+
+    /**
+     * @var \jtl\Connector\Model\CustomerOrderItem[]
+     */
+    protected $items = array();
 
     /**
      * @var \jtl\Connector\Model\CustomerOrderBillingAddress[]
@@ -424,17 +424,17 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param  string $paymentDate Payment date
+     * @param  DateTime $paymentDate Payment date
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setPaymentDate($paymentDate)
+    public function setPaymentDate(DateTime $paymentDate)
     {
-        return $this->setProperty('paymentDate', $paymentDate, 'string');
+        return $this->setProperty('paymentDate', $paymentDate, 'DateTime');
     }
 
     /**
-     * @return string Payment date
+     * @return DateTime Payment date
      */
     public function getPaymentDate()
     {
@@ -460,17 +460,17 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param  string $ratingNotificationDate Date from when customer will receive notification to rate order
+     * @param  DateTime $ratingNotificationDate Date from when customer will receive notification to rate order
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setRatingNotificationDate($ratingNotificationDate)
+    public function setRatingNotificationDate(DateTime $ratingNotificationDate)
     {
-        return $this->setProperty('ratingNotificationDate', $ratingNotificationDate, 'string');
+        return $this->setProperty('ratingNotificationDate', $ratingNotificationDate, 'DateTime');
     }
 
     /**
-     * @return string Date from when customer will receive notification to rate order
+     * @return DateTime Date from when customer will receive notification to rate order
      */
     public function getRatingNotificationDate()
     {
@@ -496,17 +496,17 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param  string $shippingDate Shipping date
+     * @param  DateTime $shippingDate Shipping date
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setShippingDate($shippingDate)
+    public function setShippingDate(DateTime $shippingDate)
     {
-        return $this->setProperty('shippingDate', $shippingDate, 'string');
+        return $this->setProperty('shippingDate', $shippingDate, 'DateTime');
     }
 
     /**
-     * @return string Shipping date
+     * @return DateTime Shipping date
      */
     public function getShippingDate()
     {
@@ -665,32 +665,7 @@ class CustomerOrder extends DataModel
         $this->shippingAddress = array();
         return $this;
     }
-    /**
-     * @param  \jtl\Connector\Model\CustomerOrderPosition $positions
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function addPosition(\jtl\Connector\Model\CustomerOrderPosition $position)
-    {
-        $this->positions[] = $position;
-        return $this;
-    }
-    
-    /**
-     * @return \jtl\Connector\Model\CustomerOrderPosition[]
-     */
-    public function getPositions()
-    {
-        return $this->positions;
-    }
 
-    /**
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function clearPositions()
-    {
-        $this->positions = array();
-        return $this;
-    }
     /**
      * @param  \jtl\Connector\Model\CustomerOrderPaymentInfo $paymentInfo
      * @return \jtl\Connector\Model\CustomerOrder
@@ -717,6 +692,34 @@ class CustomerOrder extends DataModel
         $this->paymentInfo = array();
         return $this;
     }
+
+    /**
+     * @param  \jtl\Connector\Model\CustomerOrderItem $items
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function addItem(\jtl\Connector\Model\CustomerOrderItem $item)
+    {
+        $this->items[] = $item;
+        return $this;
+    }
+    
+    /**
+     * @return \jtl\Connector\Model\CustomerOrderItem[]
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function clearItems()
+    {
+        $this->items = array();
+        return $this;
+    }
+
     /**
      * @param  \jtl\Connector\Model\CustomerOrderBillingAddress $billingAddress
      * @return \jtl\Connector\Model\CustomerOrder
@@ -743,6 +746,7 @@ class CustomerOrder extends DataModel
         $this->billingAddress = array();
         return $this;
     }
+
     /**
      * @param  \jtl\Connector\Model\CustomerOrderAttr $attributes
      * @return \jtl\Connector\Model\CustomerOrder
@@ -769,5 +773,6 @@ class CustomerOrder extends DataModel
         $this->attributes = array();
         return $this;
     }
+
  
 }
