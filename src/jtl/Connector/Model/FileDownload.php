@@ -2,57 +2,69 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * File download properties. .
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
+ * @JMS\AccessType("public_method")
  */
 class FileDownload extends DataModel
 {
     /**
      * @var Identity Unique fileDownload id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var DateTime Optional creation date
+	 * @JMS\Type("DateTime")
      */
     protected $created = null;
 
     /**
      * @var int Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
+	 * @JMS\Type("integer")
      */
     protected $maxDays = 0;
 
     /**
      * @var int Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
+	 * @JMS\Type("integer")
      */
     protected $maxDownloads = 0;
 
     /**
      * @var string Path to download file
+	 * @JMS\Type("string")
      */
     protected $path = '';
 
     /**
      * @var string Optional path to preview file
+	 * @JMS\Type("string")
      */
     protected $previewPath = '';
 
     /**
      * @var int Optional sort number
+	 * @JMS\Type("integer")
      */
     protected $sort = 0;
 
     /**
      * @var \jtl\Connector\Model\FileDownloadI18n[]
+	 * @JMS\Type("array<\jtl\Connector\Model\FileDownloadI18n>")
      */
     protected $i18n = array();
 

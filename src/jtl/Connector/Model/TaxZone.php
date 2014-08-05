@@ -2,27 +2,33 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Tax zone model (set in JTL-Wawi ERP)..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
+ * @JMS\AccessType("public_method")
  */
 class TaxZone extends DataModel
 {
     /**
      * @var Identity Unique taxZone id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var string Optional tax zone name e.g. "EU Zone"
+	 * @JMS\Type("string")
      */
     protected $name = '';
 

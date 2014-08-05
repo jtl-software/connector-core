@@ -2,27 +2,33 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * ToDo: Remove (deprecated).
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Product
+ * @JMS\AccessType("public_method")
  */
 class ProductVariationValueDependency extends DataModel
 {
     /**
      * @var Identity 
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $productVariationValueId = null;
 
     /**
      * @var Identity 
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $productVariationValueTargetId = null;
 

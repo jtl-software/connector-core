@@ -2,47 +2,57 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * File upload properties. .
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Product
+ * @JMS\AccessType("public_method")
  */
 class FileUpload extends DataModel
 {
     /**
      * @var Identity Unique fileUpload id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to product
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $productId = null;
 
     /**
      * @var string Optional file description
+	 * @JMS\Type("string")
      */
     protected $description = '';
 
     /**
      * @var string Allowed file type
+	 * @JMS\Type("string")
      */
     protected $fileType = '';
 
     /**
      * @var bool Optional flag to force upload before finishing checkout. True if file upload is required to buy product
+	 * @JMS\Type("boolean")
      */
     protected $isRequired = false;
 
     /**
      * @var string Filename specification
+	 * @JMS\Type("string")
      */
     protected $name = '';
 

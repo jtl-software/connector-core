@@ -2,32 +2,39 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Product-Category Allocation..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Product
+ * @JMS\AccessType("public_method")
  */
 class Product2Category extends DataModel
 {
     /**
      * @var Identity Reference to category
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $categoryId = null;
 
     /**
      * @var Identity Unique product2Category id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to product
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $productId = null;
 

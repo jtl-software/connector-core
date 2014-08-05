@@ -2,22 +2,27 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Specifies product units like "piece", "bottle", "package"..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
+ * @JMS\AccessType("public_method")
  */
 class Unit extends DataModel
 {
     /**
      * @var Identity Unit id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 

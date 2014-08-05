@@ -2,42 +2,51 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Product to warehouse info association..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Product
+ * @JMS\AccessType("public_method")
  */
 class ProductWarehouseInfo extends DataModel
 {
     /**
      * @var Identity Reference to product
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $productId = null;
 
     /**
      * @var Identity Reference to warehouse
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $warehouseId = null;
 
     /**
      * @var DateTime Optional product inflow date for specified warehouse
+	 * @JMS\Type("DateTime")
      */
     protected $inflowDate = null;
 
     /**
      * @var double Optional product inflow quantity for specified warehouse
+	 * @JMS\Type("double")
      */
     protected $inflowQuantity = 0.0;
 
     /**
      * @var double Optional product stock level in specified warehouse
+	 * @JMS\Type("double")
      */
     protected $stockLevel = 0.0;
 

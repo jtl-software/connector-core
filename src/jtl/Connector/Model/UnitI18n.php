@@ -2,32 +2,39 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Localized Unit Name.
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
+ * @JMS\AccessType("public_method")
  */
 class UnitI18n extends DataModel
 {
     /**
      * @var Identity Unit id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $unitId = null;
 
     /**
      * @var string Locale
+	 * @JMS\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string Localized unit name
+	 * @JMS\Type("string")
      */
     protected $name = '';
 

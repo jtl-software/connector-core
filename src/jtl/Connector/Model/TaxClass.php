@@ -2,32 +2,39 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Tax class model (set in JTL-Wawi ERP).
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
+ * @JMS\AccessType("public_method")
  */
 class TaxClass extends DataModel
 {
     /**
      * @var Identity Unique taxClass id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var bool Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
+	 * @JMS\Type("boolean")
      */
     protected $isDefault = false;
 
     /**
      * @var string Optional tax class name
+	 * @JMS\Type("string")
      */
     protected $name = '';
 

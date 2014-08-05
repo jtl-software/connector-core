@@ -2,37 +2,45 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Localized fileDownload name and  description..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
+ * @JMS\AccessType("public_method")
  */
 class FileDownloadI18n extends DataModel
 {
     /**
      * @var Identity Reference to fileDownloadId
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $fileDownloadId = null;
 
     /**
      * @var string Optional File download description
+	 * @JMS\Type("string")
      */
     protected $description = '';
 
     /**
      * @var string Locale
+	 * @JMS\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string File download title / name
+	 * @JMS\Type("string")
      */
     protected $name = '';
 

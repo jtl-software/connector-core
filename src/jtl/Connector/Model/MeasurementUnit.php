@@ -2,32 +2,39 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Specifies product units like "ml", "l", " cm"..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
+ * @JMS\AccessType("public_method")
  */
 class MeasurementUnit extends DataModel
 {
     /**
      * @var Identity Unit id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var string Optional UCUM-Code, see  http://unitsofmeasure.org/
+	 * @JMS\Type("string")
      */
     protected $code = '';
 
     /**
      * @var string Synonym e.g. 'ml'
+	 * @JMS\Type("string")
      */
     protected $displayCode = '';
 

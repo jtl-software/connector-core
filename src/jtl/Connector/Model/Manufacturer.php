@@ -2,47 +2,57 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Manufacturer
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Manufacturer / brand properties. .
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Manufacturer
+ * @JMS\AccessType("public_method")
  */
 class Manufacturer extends DataModel
 {
     /**
      * @var Identity Unique manufacturer id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var string Manufacturer (brand) name
+	 * @JMS\Type("string")
      */
     protected $name = '';
 
     /**
      * @var int Optional sort number
+	 * @JMS\Type("integer")
      */
     protected $sort = 0;
 
     /**
      * @var string Optional url path e.g. "Products-manufactured-by-X"
+	 * @JMS\Type("string")
      */
     protected $urlPath = '';
 
     /**
      * @var string Optional manufacturer website URL
+	 * @JMS\Type("string")
      */
     protected $www = '';
 
     /**
      * @var \jtl\Connector\Model\ManufacturerI18n[]
+	 * @JMS\Type("array<\jtl\Connector\Model\ManufacturerI18n>")
      */
     protected $i18ns = array();
 

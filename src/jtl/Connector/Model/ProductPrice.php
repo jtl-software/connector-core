@@ -2,37 +2,45 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Product price properties..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Product
+ * @JMS\AccessType("public_method")
  */
 class ProductPrice extends DataModel
 {
     /**
      * @var Identity Reference to customerGroup
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $customerGroupId = null;
 
     /**
      * @var Identity Reference to product
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $productId = null;
 
     /**
      * @var double Price value (net)
+	 * @JMS\Type("double")
      */
     protected $netPrice = 0.0;
 
     /**
      * @var double Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
+	 * @JMS\Type("double")
      */
     protected $quantity = 0.0;
 

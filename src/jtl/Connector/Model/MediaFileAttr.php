@@ -2,42 +2,51 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Monolingual mediafile attribute..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Product
+ * @JMS\AccessType("public_method")
  */
 class MediaFileAttr extends DataModel
 {
     /**
      * @var Identity Unique MediaFileAttr id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to mediaFile
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $mediaFileId = null;
 
     /**
      * @var string Attribute name
+	 * @JMS\Type("string")
      */
     protected $key = '';
 
     /**
      * @var string Locale
+	 * @JMS\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string Attribute value
+	 * @JMS\Type("string")
      */
     protected $value = '';
 

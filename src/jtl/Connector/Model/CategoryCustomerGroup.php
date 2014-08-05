@@ -2,32 +2,39 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Category
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Link customergroup with category. Set optional discount on category for customergroup. .
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Category
+ * @JMS\AccessType("public_method")
  */
 class CategoryCustomerGroup extends DataModel
 {
     /**
      * @var Identity Reference to category
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $categoryId = null;
 
     /**
      * @var Identity Reference to customerGroup
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $customerGroupId = null;
 
     /**
      * @var double Optional discount on products in specified categoryId for  customerGroupId
+	 * @JMS\Type("double")
      */
     protected $discount = 0.0;
 

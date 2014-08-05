@@ -2,107 +2,129 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage CustomerOrder
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Billing address of a customer (order).
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage CustomerOrder
+ * @JMS\AccessType("public_method")
  */
 class CustomerOrderBillingAddress extends DataModel
 {
     /**
      * @var Identity Reference to customer
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $customerId = null;
 
     /**
      * @var Identity Unique customerOrderBillingAddress id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var string City
+	 * @JMS\Type("string")
      */
     protected $city = '';
 
     /**
      * @var string Company name
+	 * @JMS\Type("string")
      */
     protected $company = '';
 
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
+	 * @JMS\Type("string")
      */
     protected $countryIso = '';
 
     /**
      * @var string Delivery instruction e.g. "c/o John Doe"
+	 * @JMS\Type("string")
      */
     protected $deliveryInstruction = '';
 
     /**
      * @var string E-Mail address
+	 * @JMS\Type("string")
      */
     protected $eMail = '';
 
     /**
      * @var string Extra address line e.g. "Apartment 2.5"
+	 * @JMS\Type("string")
      */
     protected $extraAddressLine = '';
 
     /**
      * @var string Fax number
+	 * @JMS\Type("string")
      */
     protected $fax = '';
 
     /**
      * @var string First name
+	 * @JMS\Type("string")
      */
     protected $firstName = '';
 
     /**
      * @var string Last name
+	 * @JMS\Type("string")
      */
     protected $lastName = '';
 
     /**
      * @var string Mobile phone number
+	 * @JMS\Type("string")
      */
     protected $mobile = '';
 
     /**
      * @var string Phone number
+	 * @JMS\Type("string")
      */
     protected $phone = '';
 
     /**
      * @var string Salutation (german: "Anrede")
+	 * @JMS\Type("string")
      */
     protected $salutation = '';
 
     /**
      * @var string State
+	 * @JMS\Type("string")
      */
     protected $state = '';
 
     /**
      * @var string Street + street number
+	 * @JMS\Type("string")
      */
     protected $street = '';
 
     /**
      * @var string Title (e.g. "Prof. Dr.")
+	 * @JMS\Type("string")
      */
     protected $title = '';
 
     /**
      * @var string Zip / postal code
+	 * @JMS\Type("string")
      */
     protected $zipCode = '';
 

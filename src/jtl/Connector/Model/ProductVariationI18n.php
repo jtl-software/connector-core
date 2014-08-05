@@ -2,32 +2,39 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Locale specific product variation properties. .
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Product
+ * @JMS\AccessType("public_method")
  */
 class ProductVariationI18n extends DataModel
 {
     /**
      * @var Identity Reference to productVariation
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $productVariationId = null;
 
     /**
      * @var string Locale
+	 * @JMS\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string Locale specific variation name
+	 * @JMS\Type("string")
      */
     protected $name = '';
 

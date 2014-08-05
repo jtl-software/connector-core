@@ -2,37 +2,45 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage CustomerOrder
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Monolingual attribute for a customerorder..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage CustomerOrder
+ * @JMS\AccessType("public_method")
  */
 class CustomerOrderAttr extends DataModel
 {
     /**
      * @var Identity Reference to customerOrder
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $customerOrderId = null;
 
     /**
      * @var Identity Unique customerOrderAttr id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var string Attribute key name
+	 * @JMS\Type("string")
      */
     protected $key = '';
 
     /**
      * @var string Attribute value
+	 * @JMS\Type("string")
      */
     protected $value = '';
 

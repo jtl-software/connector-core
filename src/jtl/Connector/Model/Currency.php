@@ -2,62 +2,75 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Currency model properties..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
+ * @JMS\AccessType("public_method")
  */
 class Currency extends DataModel
 {
     /**
      * @var Identity Unique currency id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var string Optional delimiter char for cent, default=",". Ignore this flag if you have the correct user locale preference.
+	 * @JMS\Type("string")
      */
     protected $delimiterCent = '';
 
     /**
      * @var string Optional delimiter char for thousand. Default=".". Ignore this flag if you have the correct user locale preference.
+	 * @JMS\Type("string")
      */
     protected $delimiterThousand = '';
 
     /**
      * @var double Optional conversion factor to default currency. Default is 1 (equals default currency)
+	 * @JMS\Type("double")
      */
     protected $factor = 0.0;
 
     /**
      * @var bool Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference. 
+	 * @JMS\Type("boolean")
      */
     protected $hasCurrencySignBeforeValue = false;
 
     /**
      * @var bool Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default. 
+	 * @JMS\Type("boolean")
      */
     protected $isDefault = false;
 
     /**
      * @var string Currency ISO 4217 (3-letter Uppercase Code)
+	 * @JMS\Type("string")
      */
     protected $iso = '';
 
     /**
      * @var string Currency name
+	 * @JMS\Type("string")
      */
     protected $name = '';
 
     /**
      * @var string Optional HTML name e.g. "&euro;"
+	 * @JMS\Type("string")
      */
     protected $nameHtml = '';
 

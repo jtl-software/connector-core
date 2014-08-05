@@ -2,37 +2,45 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Localized customer group name..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
+ * @JMS\AccessType("public_method")
  */
 class CustomerGroupI18n extends DataModel
 {
     /**
      * @var Identity Reference to customerGroup
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $customerGroupId = null;
 
     /**
      * @var string Locale
+	 * @JMS\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string Localized customer group name
+	 * @JMS\Type("string")
      */
     protected $name = '';
 
     /**
      * @var \jtl\Connector\Model\CustomerGroup[]
+	 * @JMS\Type("array<\jtl\Connector\Model\CustomerGroup>")
      */
     protected $customerGroup = array();
 

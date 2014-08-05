@@ -2,32 +2,39 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Internal
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * special price properties to define a net price for a customerGroup..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Internal
+ * @JMS\AccessType("public_method")
  */
 class SpecialPrice extends DataModel
 {
     /**
      * @var Identity Reference to customerGroup
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $customerGroupId = null;
 
     /**
      * @var Identity Reference to productSpecialPrice
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $productSpecialPriceId = null;
 
     /**
      * @var double net price value
+	 * @JMS\Type("double")
      */
     protected $priceNet = 0.0;
 

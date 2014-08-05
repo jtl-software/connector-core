@@ -2,27 +2,33 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Specify productVariationValue to hide from specific customerGroup..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Product
+ * @JMS\AccessType("public_method")
  */
 class ProductVariationValueInvisibility extends DataModel
 {
     /**
      * @var Identity Reference to customerGroup
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $customerGroupId = null;
 
     /**
      * @var Identity Reference to productVariationValue to hide from customerGroup
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $productVariationValueId = null;
 

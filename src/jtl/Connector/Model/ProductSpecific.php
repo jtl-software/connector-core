@@ -2,32 +2,39 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Product to specificValue Assignment. Product specifics are used to assign characteristic product attributes like color or  size... When different products have common specifics, products are similar. .
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Product
+ * @JMS\AccessType("public_method")
  */
 class ProductSpecific extends DataModel
 {
     /**
      * @var Identity Unique productSpecific id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to product
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $productId = null;
 
     /**
      * @var Identity Reference to specificValue
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $specificValueId = null;
 

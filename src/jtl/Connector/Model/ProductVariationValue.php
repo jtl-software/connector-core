@@ -2,67 +2,81 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Product variation value model. Each product defines its own variations and variation values. .
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Product
+ * @JMS\AccessType("public_method")
  */
 class ProductVariationValue extends DataModel
 {
     /**
      * @var Identity Unique productVariationValue id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to productVariation
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $productVariationId = null;
 
     /**
      * @var double Optional variation extra weight
+	 * @JMS\Type("double")
      */
     protected $extraWeight = 0.0;
 
     /**
      * @var string Optional Stock Keeping Unit
+	 * @JMS\Type("string")
      */
     protected $sku = '';
 
     /**
      * @var int Optional sort number
+	 * @JMS\Type("integer")
      */
     protected $sort = 0;
 
     /**
      * @var double Optional stock level
+	 * @JMS\Type("double")
      */
     protected $stockLevel = 0.0;
 
     /**
      * @var \jtl\Connector\Model\ProductVariationValueInvisibility[]
+	 * @JMS\Type("array<\jtl\Connector\Model\ProductVariationValueInvisibility>")
      */
     protected $invisibilities = array();
 
     /**
      * @var \jtl\Connector\Model\ProductVariationValueI18n[]
+	 * @JMS\Type("array<\jtl\Connector\Model\ProductVariationValueI18n>")
      */
     protected $i18ns = array();
 
     /**
      * @var \jtl\Connector\Model\ProductVariationValueExtraCharge[]
+	 * @JMS\Type("array<\jtl\Connector\Model\ProductVariationValueExtraCharge>")
      */
     protected $extraCharges = array();
 
     /**
      * @var \jtl\Connector\Model\ProductVariationValueDependency[]
+	 * @JMS\Type("array<\jtl\Connector\Model\ProductVariationValueDependency>")
      */
     protected $dependencies = array();
 

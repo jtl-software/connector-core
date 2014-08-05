@@ -2,32 +2,39 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * TaxZone to Country Allocation (set in JTL-Wawi ERP)..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
+ * @JMS\AccessType("public_method")
  */
 class TaxZoneCountry extends DataModel
 {
     /**
      * @var Identity Unique taxZoneCountry id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to taxZone
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $taxZoneId = null;
 
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
+	 * @JMS\Type("string")
      */
     protected $countryIso = '';
 

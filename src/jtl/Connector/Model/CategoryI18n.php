@@ -2,57 +2,69 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Category
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Localized category properties. localeName, categoryId and a localized name must be set. .
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Category
+ * @JMS\AccessType("public_method")
  */
 class CategoryI18n extends DataModel
 {
     /**
      * @var Identity Reference to category
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $categoryId = null;
 
     /**
      * @var string Optional localized Long Description
+	 * @JMS\Type("string")
      */
     protected $description = '';
 
     /**
      * @var string Locale
+	 * @JMS\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string Optional localized  short description used for meta tag description
+	 * @JMS\Type("string")
      */
     protected $metaDescription = '';
 
     /**
      * @var string Optional localized meta tag keywords value
+	 * @JMS\Type("string")
      */
     protected $metaKeywords = '';
 
     /**
      * @var string Localized category name
+	 * @JMS\Type("string")
      */
     protected $name = '';
 
     /**
      * @var string Optional localized title tag value
+	 * @JMS\Type("string")
      */
     protected $titleTag = '';
 
     /**
      * @var string Optional localized category URL
+	 * @JMS\Type("string")
      */
     protected $urlPath = '';
 

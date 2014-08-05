@@ -2,37 +2,45 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Localized key-value-pair for productAttr..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Product
+ * @JMS\AccessType("public_method")
  */
 class ProductAttrI18n extends DataModel
 {
     /**
      * @var Identity Reference to productAttr
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $productAttrId = null;
 
     /**
      * @var string Attribute key
+	 * @JMS\Type("string")
      */
     protected $key = '';
 
     /**
      * @var string Locale
+	 * @JMS\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string Attribute value
+	 * @JMS\Type("string")
      */
     protected $value = '';
 

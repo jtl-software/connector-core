@@ -2,32 +2,39 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Specific
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Localized name for specific..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Specific
+ * @JMS\AccessType("public_method")
  */
 class SpecificI18n extends DataModel
 {
     /**
      * @var Identity Reference to specific
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $specificId = null;
 
     /**
      * @var string Locale
+	 * @JMS\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string Localized name
+	 * @JMS\Type("string")
      */
     protected $name = '';
 

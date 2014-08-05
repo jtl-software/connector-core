@@ -2,37 +2,45 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Specific
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Specific value properties to define a new specificValue with a sort number. .
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Specific
+ * @JMS\AccessType("public_method")
  */
 class SpecificValue extends DataModel
 {
     /**
      * @var Identity Unique specificValue id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to specificId
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $specificId = null;
 
     /**
      * @var int Optional sort number
+	 * @JMS\Type("integer")
      */
     protected $sort = 0;
 
     /**
      * @var \jtl\Connector\Model\SpecificValueI18n[]
+	 * @JMS\Type("array<\jtl\Connector\Model\SpecificValueI18n>")
      */
     protected $i18ns = array();
 

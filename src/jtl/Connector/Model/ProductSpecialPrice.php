@@ -2,62 +2,75 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Special product price properties to specify date and stock limits..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Product
+ * @JMS\AccessType("public_method")
  */
 class ProductSpecialPrice extends DataModel
 {
     /**
      * @var Identity Unique productSpecialPrice id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to product
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $productId = null;
 
     /**
      * @var DateTime Optional: Activate special price from date
+	 * @JMS\Type("DateTime")
      */
     protected $activeFrom = null;
 
     /**
      * @var DateTime Optional: Special price active until date
+	 * @JMS\Type("DateTime")
      */
     protected $activeUntil = null;
 
     /**
      * @var bool Optional: Consider activeFrom/activeUntil date range. If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
+	 * @JMS\Type("boolean")
      */
     protected $considerDateLimit = false;
 
     /**
      * @var bool Optional: Consider stockLimit value. If true, specialPrice will be only active until product stockLevel is greater or equal stockLimit.
+	 * @JMS\Type("boolean")
      */
     protected $considerStockLimit = false;
 
     /**
      * @var bool Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match. 
+	 * @JMS\Type("boolean")
      */
     protected $isActive = false;
 
     /**
      * @var double Optional: SpecialPrice active until stock level quantity
+	 * @JMS\Type("double")
      */
     protected $stockLimit = 0.0;
 
     /**
      * @var \jtl\Connector\Model\SpecialPrice[]
+	 * @JMS\Type("array<\jtl\Connector\Model\SpecialPrice>")
      */
     protected $specialPrices = array();
 

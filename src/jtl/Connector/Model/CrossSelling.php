@@ -2,37 +2,45 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Link 2 products that are in a common crossSellingGroup..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Product
+ * @JMS\AccessType("public_method")
  */
 class CrossSelling extends DataModel
 {
     /**
      * @var Identity Reference to crossSellingGroup
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $crossSellingGroupId = null;
 
     /**
      * @var Identity Reference to product (main product)
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $crossSellingProductId = null;
 
     /**
      * @var Identity Unique crossSelling id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to product (cross selling product)
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $productId = null;
 

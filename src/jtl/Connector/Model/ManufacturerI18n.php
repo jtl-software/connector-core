@@ -2,47 +2,57 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Manufacturer
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Locale specific text and meta-information for manufacturer..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Manufacturer
+ * @JMS\AccessType("public_method")
  */
 class ManufacturerI18n extends DataModel
 {
     /**
      * @var Identity Reference to manufacturer
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $manufacturerId = null;
 
     /**
      * @var string Optional manufacturer description (HTML)
+	 * @JMS\Type("string")
      */
     protected $description = '';
 
     /**
      * @var string Locale
+	 * @JMS\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string Optional meta description tag value
+	 * @JMS\Type("string")
      */
     protected $metaDescription = '';
 
     /**
      * @var string Optional meta keywords tag value
+	 * @JMS\Type("string")
      */
     protected $metaKeywords = '';
 
     /**
      * @var string Optional title tag value
+	 * @JMS\Type("string")
      */
     protected $titleTag = '';
 

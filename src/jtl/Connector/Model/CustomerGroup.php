@@ -2,47 +2,57 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Customer group model..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
+ * @JMS\AccessType("public_method")
  */
 class CustomerGroup extends DataModel
 {
     /**
      * @var Identity Unique customerGroup id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var bool Optional: Show net prices default instead of gross prices
+	 * @JMS\Type("boolean")
      */
     protected $applyNetPrice = false;
 
     /**
      * @var double Optional percentual discount on all products. Negative Value means surcharge. 
+	 * @JMS\Type("double")
      */
     protected $discount = 0.0;
 
     /**
      * @var bool Optional: Flag default customer group
+	 * @JMS\Type("boolean")
      */
     protected $isDefault = false;
 
     /**
      * @var \jtl\Connector\Model\CustomerGroupI18n[]
+	 * @JMS\Type("array<\jtl\Connector\Model\CustomerGroupI18n>")
      */
     protected $i18n = array();
 
     /**
      * @var \jtl\Connector\Model\CustomerGroupAttr[]
+	 * @JMS\Type("array<\jtl\Connector\Model\CustomerGroupAttr>")
      */
     protected $attributes = array();
 

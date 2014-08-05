@@ -2,47 +2,57 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Image
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Image model..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Image
+ * @JMS\AccessType("public_method")
  */
 class Image extends DataModel
 {
     /**
      * @var Identity Foreign key dependent on relationType
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $foreignKey = null;
 
     /**
      * @var Identity Unique image id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to master imageId
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $masterImageId = null;
 
     /**
      * @var string Filename or path
+	 * @JMS\Type("string")
      */
     protected $filename = '';
 
     /**
      * @var string Allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
+	 * @JMS\Type("string")
      */
     protected $relationType = '';
 
     /**
      * @var int Optional sort number
+	 * @JMS\Type("integer")
      */
     protected $sort = 0;
 

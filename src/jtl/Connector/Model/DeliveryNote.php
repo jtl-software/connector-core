@@ -2,52 +2,63 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage DeliveryNote
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * A delivery note created for shipment..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage DeliveryNote
+ * @JMS\AccessType("public_method")
  */
 class DeliveryNote extends DataModel
 {
     /**
      * @var Identity Reference to customerOrder
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $customerOrderId = null;
 
     /**
      * @var Identity Unique deliveryNote id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var DateTime Creation date
+	 * @JMS\Type("DateTime")
      */
     protected $created = null;
 
     /**
      * @var bool Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
+	 * @JMS\Type("boolean")
      */
     protected $isFulfillment = false;
 
     /**
      * @var string Optional text note
+	 * @JMS\Type("string")
      */
     protected $note = '';
 
     /**
      * @var int Delivery status
+	 * @JMS\Type("integer")
      */
     protected $status = 0;
 
     /**
      * @var \jtl\Connector\Model\DeliveryNoteItem[]
+	 * @JMS\Type("array<\jtl\Connector\Model\DeliveryNoteItem>")
      */
     protected $items = array();
 

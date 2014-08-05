@@ -2,72 +2,87 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Category
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * A category with sort number, link to parent category and level.
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Category
+ * @JMS\AccessType("public_method")
  */
 class Category extends DataModel
 {
     /**
      * @var Identity Unique category id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Optional reference to parent category id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $parentCategoryId = null;
 
     /**
      * @var bool 
+	 * @JMS\Type("boolean")
      */
     protected $isActive = false;
 
     /**
      * @var int Optional category level (default 1 for first level)
+	 * @JMS\Type("integer")
      */
     protected $level = 0;
 
     /**
      * @var int Optional sort order number
+	 * @JMS\Type("integer")
      */
     protected $sort = 0;
 
     /**
      * @var \jtl\Connector\Model\ParentCategory[]
+	 * @JMS\Type("array<\jtl\Connector\Model\ParentCategory>")
      */
     protected $parent = array();
 
     /**
      * @var \jtl\Connector\Model\CategoryInvisibility[]
+	 * @JMS\Type("array<\jtl\Connector\Model\CategoryInvisibility>")
      */
     protected $invisibilities = array();
 
     /**
      * @var \jtl\Connector\Model\CategoryI18n[]
+	 * @JMS\Type("array<\jtl\Connector\Model\CategoryI18n>")
      */
     protected $i18ns = array();
 
     /**
      * @var \jtl\Connector\Model\CategoryCustomerGroup[]
+	 * @JMS\Type("array<\jtl\Connector\Model\CategoryCustomerGroup>")
      */
     protected $customerGroups = array();
 
     /**
      * @var \jtl\Connector\Model\ChildCategory[]
+	 * @JMS\Type("array<\jtl\Connector\Model\ChildCategory>")
      */
     protected $children = array();
 
     /**
      * @var \jtl\Connector\Model\CategoryAttr[]
+	 * @JMS\Type("array<\jtl\Connector\Model\CategoryAttr>")
      */
     protected $attributes = array();
 

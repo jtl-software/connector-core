@@ -2,72 +2,87 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Internal
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Shop3 only.
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Internal
+ * @JMS\AccessType("public_method")
  */
 class EmailTemplate extends DataModel
 {
     /**
      * @var Identity 
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var string 
+	 * @JMS\Type("string")
      */
     protected $description = '';
 
     /**
      * @var string 
+	 * @JMS\Type("string")
      */
     protected $emailType = '';
 
     /**
      * @var int 
+	 * @JMS\Type("integer")
      */
     protected $error = 0;
 
     /**
      * @var string 
+	 * @JMS\Type("string")
      */
     protected $filename = '';
 
     /**
      * @var bool 
+	 * @JMS\Type("boolean")
      */
     protected $isActive = false;
 
     /**
      * @var bool 
+	 * @JMS\Type("boolean")
      */
     protected $isAgb = false;
 
     /**
      * @var bool 
+	 * @JMS\Type("boolean")
      */
     protected $isOii = false;
 
     /**
      * @var bool 
+	 * @JMS\Type("boolean")
      */
     protected $isWrb = false;
 
     /**
      * @var string 
+	 * @JMS\Type("string")
      */
     protected $moduleId = '';
 
     /**
      * @var string 
+	 * @JMS\Type("string")
      */
     protected $name = '';
 

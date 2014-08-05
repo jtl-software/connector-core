@@ -2,37 +2,45 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Customer
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Monolingual customer attribute..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Customer
+ * @JMS\AccessType("public_method")
  */
 class CustomerAttr extends DataModel
 {
     /**
      * @var Identity Reference to customer
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $customerId = null;
 
     /**
      * @var Identity Unique customerAttr id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var string Attribute key
+	 * @JMS\Type("string")
      */
     protected $key = '';
 
     /**
      * @var string Attribute value
+	 * @JMS\Type("string")
      */
     protected $value = '';
 

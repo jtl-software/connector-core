@@ -2,52 +2,63 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage DeliveryNote
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Shipment Model with reference to a deliveryNote.
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage DeliveryNote
+ * @JMS\AccessType("public_method")
  */
 class Shipment extends DataModel
 {
     /**
      * @var Identity Reference to deliveryNote
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $deliveryNoteId = null;
 
     /**
      * @var Identity Unique shipment id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var string Carrier name
+	 * @JMS\Type("string")
      */
     protected $carrierName = '';
 
     /**
      * @var DateTime Creation date
+	 * @JMS\Type("DateTime")
      */
     protected $created = null;
 
     /**
      * @var string Optional Identcode
+	 * @JMS\Type("string")
      */
     protected $identCode = '';
 
     /**
      * @var string Optional shipment note
+	 * @JMS\Type("string")
      */
     protected $note = '';
 
     /**
      * @var string Optional Tracking URL
+	 * @JMS\Type("string")
      */
     protected $trackingURL = '';
 

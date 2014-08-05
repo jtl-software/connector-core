@@ -2,37 +2,45 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Category
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Localized key-value-pair for categoryAttr. All properties must be specified. .
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Category
+ * @JMS\AccessType("public_method")
  */
 class CategoryAttrI18n extends DataModel
 {
     /**
      * @var Identity Reference to categoryAttr
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $categoryAttrId = null;
 
     /**
      * @var string Attribute key
+	 * @JMS\Type("string")
      */
     protected $key = '';
 
     /**
      * @var string Locale
+	 * @JMS\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string Attribute value
+	 * @JMS\Type("string")
      */
     protected $value = '';
 

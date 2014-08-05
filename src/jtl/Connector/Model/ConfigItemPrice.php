@@ -2,37 +2,45 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Customer group price for config item..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
+ * @JMS\AccessType("public_method")
  */
 class ConfigItemPrice extends DataModel
 {
     /**
      * @var Identity Reference to configItem
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $configItemId = null;
 
     /**
      * @var Identity Reference to customerGroup
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $customerGroupId = null;
 
     /**
      * @var float Net price or percental value to add/deduct to/from product price (depending on type). Positive value means surcharge, negative value means discount. Also see configItem.vat for value added tax.
+	 * @JMS\Type("float")
      */
     protected $price = 0.0;
 
     /**
      * @var int Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
+	 * @JMS\Type("integer")
      */
     protected $type = 0;
 

@@ -2,57 +2,69 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Config group holds several configItems and settings.
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
+ * @JMS\AccessType("public_method")
  */
 class ConfigGroup extends DataModel
 {
     /**
      * @var Identity Unique configGroup id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var string Optional internal comment to differantiate config groups by comment name
+	 * @JMS\Type("string")
      */
     protected $comment = '';
 
     /**
      * @var string Optional image file path
+	 * @JMS\Type("string")
      */
     protected $imagePath = '';
 
     /**
      * @var int Optional maximum number allowed selections. Default 0 for no maximum limitation.
+	 * @JMS\Type("integer")
      */
     protected $maximumSelection = 0;
 
     /**
      * @var int Optional minimum number required selections. Default 0 for no minimum requirement. 
+	 * @JMS\Type("integer")
      */
     protected $minimumSelection = 0;
 
     /**
      * @var int Optional sort order number
+	 * @JMS\Type("integer")
      */
     protected $sort = 0;
 
     /**
      * @var int Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
+	 * @JMS\Type("integer")
      */
     protected $type = 0;
 
     /**
      * @var \jtl\Connector\Model\ConfigGroupI18n[]
+	 * @JMS\Type("array<\jtl\Connector\Model\ConfigGroupI18n>")
      */
     protected $i18n = array();
 

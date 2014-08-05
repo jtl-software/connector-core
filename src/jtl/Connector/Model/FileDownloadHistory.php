@@ -2,42 +2,51 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Internal
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * ToDo: Remove (deprecated).
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Internal
+ * @JMS\AccessType("public_method")
  */
 class FileDownloadHistory extends DataModel
 {
     /**
      * @var Identity 
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $customerId = null;
 
     /**
      * @var Identity 
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $customerOrderId = null;
 
     /**
      * @var Identity 
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $fileDownloadId = null;
 
     /**
      * @var Identity 
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var DateTime 
+	 * @JMS\Type("DateTime")
      */
     protected $created = null;
 

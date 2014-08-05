@@ -2,187 +2,225 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Customer
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Customer address data and preference properties..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Customer
+ * @JMS\AccessType("public_method")
  */
 class Customer extends DataModel
 {
     /**
      * @var Identity References a customer group
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $customerGroupId = null;
 
     /**
      * @var Identity Unique customer id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var double Credit value on customer account in default currency
+	 * @JMS\Type("double")
      */
     protected $accountCredit = 0.0;
 
     /**
      * @var DateTime Date of birth
+	 * @JMS\Type("DateTime")
      */
     protected $birthday = null;
 
     /**
      * @var string City
+	 * @JMS\Type("string")
      */
     protected $city = '';
 
     /**
      * @var string Company name
+	 * @JMS\Type("string")
      */
     protected $company = '';
 
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
+	 * @JMS\Type("string")
      */
     protected $countryIso = '';
 
     /**
      * @var DateTime Creation date
+	 * @JMS\Type("DateTime")
      */
     protected $created = null;
 
     /**
      * @var string Optional customer number set by JTL-Wawi ERP software
+	 * @JMS\Type("string")
      */
     protected $customerNumber = '';
 
     /**
      * @var string Delivery instruction e.g. "c/o John Doe"
+	 * @JMS\Type("string")
      */
     protected $deliveryInstruction = '';
 
     /**
      * @var double Percentual discount for customer on all prices
+	 * @JMS\Type("double")
      */
     protected $discount = 0.0;
 
     /**
      * @var string E-Mail address
+	 * @JMS\Type("string")
      */
     protected $eMail = '';
 
     /**
      * @var string Extra address line e.g. "Apartment 2.5"
+	 * @JMS\Type("string")
      */
     protected $extraAddressLine = '';
 
     /**
      * @var string Fax number
+	 * @JMS\Type("string")
      */
     protected $fax = '';
 
     /**
      * @var string First name
+	 * @JMS\Type("string")
      */
     protected $firstName = '';
 
     /**
      * @var bool Flag persistent customer account. True, if customer chose to create persistent customer account. False, if customer doesnt want to have his data stored for login-purposes.
+	 * @JMS\Type("boolean")
      */
     protected $hasCustomerAccount = false;
 
     /**
      * @var bool Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
+	 * @JMS\Type("boolean")
      */
     protected $hasNewsletterSubscription = false;
 
     /**
      * @var bool Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
+	 * @JMS\Type("boolean")
      */
     protected $isActive = false;
 
     /**
      * @var bool Flag if customer is fetched by ERP System. True, if customer is already fetched and must not be fetched again. 
+	 * @JMS\Type("boolean")
      */
     protected $isFetched = false;
 
     /**
      * @var string Last name
+	 * @JMS\Type("string")
      */
     protected $lastName = '';
 
     /**
      * @var string User locale preference
+	 * @JMS\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string Mobile phone number
+	 * @JMS\Type("string")
      */
     protected $mobile = '';
 
     /**
      * @var DateTime Last modified date
+	 * @JMS\Type("DateTime")
      */
     protected $modified = null;
 
     /**
      * @var string Customer origin
+	 * @JMS\Type("string")
      */
     protected $origin = '';
 
     /**
      * @var string Optional (encrypted!) customer password
+	 * @JMS\Type("string")
      */
     protected $password = '';
 
     /**
      * @var string Phone number
+	 * @JMS\Type("string")
      */
     protected $phone = '';
 
     /**
      * @var string Salutation (german: "Anrede")
+	 * @JMS\Type("string")
      */
     protected $salutation = '';
 
     /**
      * @var string State
+	 * @JMS\Type("string")
      */
     protected $state = '';
 
     /**
      * @var string Street name
+	 * @JMS\Type("string")
      */
     protected $street = '';
 
     /**
      * @var string Title, e.g. "Prof. Dr."
+	 * @JMS\Type("string")
      */
     protected $title = '';
 
     /**
      * @var string VAT number (german "USt-ID")
+	 * @JMS\Type("string")
      */
     protected $vatNumber = '';
 
     /**
      * @var string WWW address
+	 * @JMS\Type("string")
      */
     protected $www = '';
 
     /**
      * @var string ZIP / postal code
+	 * @JMS\Type("string")
      */
     protected $zipCode = '';
 
     /**
      * @var \jtl\Connector\Model\CustomerAttr[]
+	 * @JMS\Type("array<\jtl\Connector\Model\CustomerAttr>")
      */
     protected $attributes = array();
 

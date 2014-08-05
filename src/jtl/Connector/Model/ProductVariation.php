@@ -2,52 +2,63 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * ProductVariation Model. Each product defines its own variations, that means  variations are not global  in contrast to specifics. .
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Product
+ * @JMS\AccessType("public_method")
  */
 class ProductVariation extends DataModel
 {
     /**
      * @var Identity Unique productVariation id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to product
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $productId = null;
 
     /**
      * @var int Optional sort number
+	 * @JMS\Type("integer")
      */
     protected $sort = 0;
 
     /**
      * @var string Variation type e.g. radio or select
+	 * @JMS\Type("string")
      */
     protected $type = '';
 
     /**
      * @var \jtl\Connector\Model\ProductVariationValue[]
+	 * @JMS\Type("array<\jtl\Connector\Model\ProductVariationValue>")
      */
     protected $values = array();
 
     /**
      * @var \jtl\Connector\Model\ProductVariationInvisibility[]
+	 * @JMS\Type("array<\jtl\Connector\Model\ProductVariationInvisibility>")
      */
     protected $invisibilities = array();
 
     /**
      * @var \jtl\Connector\Model\ProductVariationI18n[]
+	 * @JMS\Type("array<\jtl\Connector\Model\ProductVariationI18n>")
      */
     protected $i18ns = array();
 

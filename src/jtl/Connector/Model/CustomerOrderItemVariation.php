@@ -2,57 +2,69 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage CustomerOrder
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * customer order item variation.
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage CustomerOrder
+ * @JMS\AccessType("public_method")
  */
 class CustomerOrderItemVariation extends DataModel
 {
     /**
      * @var Identity Reference to customerOrderItem
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $customerOrderItemId = null;
 
     /**
      * @var Identity Unique customerOrderItemVariation id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to productVariation
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $productVariationId = null;
 
     /**
      * @var Identity Reference to productVariationValue
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $productVariationValueId = null;
 
     /**
      * @var string Optional custom text value for variation 
+	 * @JMS\Type("string")
      */
     protected $freeField = '';
 
     /**
      * @var string Variation name e.g. "color"
+	 * @JMS\Type("string")
      */
     protected $productVariationName = '';
 
     /**
      * @var string Variation value e.g. "red"
+	 * @JMS\Type("string")
      */
     protected $productVariationValueName = '';
 
     /**
      * @var double Optional extra surcharge (added to item price)
+	 * @JMS\Type("double")
      */
     protected $surcharge = 0.0;
 

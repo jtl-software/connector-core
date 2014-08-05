@@ -2,112 +2,135 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Provides company address and bank details.
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
+ * @JMS\AccessType("public_method")
  */
 class Company extends DataModel
 {
     /**
      * @var string Bank account holder name e.g. "John Doe"
+	 * @JMS\Type("string")
      */
     protected $accountHolder = '';
 
     /**
      * @var string Bank account number
+	 * @JMS\Type("string")
      */
     protected $accountNumber = '';
 
     /**
      * @var string Bank code number
+	 * @JMS\Type("string")
      */
     protected $bankCode = '';
 
     /**
      * @var string Bank name e.g. "Deutsche Bank"
+	 * @JMS\Type("string")
      */
     protected $bankName = '';
 
     /**
      * @var string Bank Identifier Code (BIC)
+	 * @JMS\Type("string")
      */
     protected $bic = '';
 
     /**
      * @var string Company businessman / entrepreneur
+	 * @JMS\Type("string")
      */
     protected $businessman = '';
 
     /**
      * @var string City
+	 * @JMS\Type("string")
      */
     protected $city = '';
 
     /**
      * @var string CountryIso
+	 * @JMS\Type("string")
      */
     protected $countryIso = '';
 
     /**
      * @var string Company E-Mail address
+	 * @JMS\Type("string")
      */
     protected $eMail = '';
 
     /**
      * @var string Fax number
+	 * @JMS\Type("string")
      */
     protected $fax = '';
 
     /**
      * @var string International Bank Account Number (IBAN) 
+	 * @JMS\Type("string")
      */
     protected $iban = '';
 
     /**
      * @var string Company name
+	 * @JMS\Type("string")
      */
     protected $name = '';
 
     /**
      * @var string Phone number
+	 * @JMS\Type("string")
      */
     protected $phone = '';
 
     /**
      * @var string Street
+	 * @JMS\Type("string")
      */
     protected $street = '';
 
     /**
      * @var string Street number
+	 * @JMS\Type("string")
      */
     protected $streetNumber = '';
 
     /**
      * @var string Tax id number (german: Steuernummer)
+	 * @JMS\Type("string")
      */
     protected $taxIdNumber = '';
 
     /**
      * @var string VAT registration number (german: USt-ID)
+	 * @JMS\Type("string")
      */
     protected $vatNumber = '';
 
     /**
      * @var string Company website URL
+	 * @JMS\Type("string")
      */
     protected $www = '';
 
     /**
      * @var string Zip code / postcode
+	 * @JMS\Type("string")
      */
     protected $zipCode = '';
 

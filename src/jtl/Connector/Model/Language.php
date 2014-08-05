@@ -2,42 +2,51 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Global language model.
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
+ * @JMS\AccessType("public_method")
  */
 class Language extends DataModel
 {
     /**
      * @var Identity Unique language id
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var bool Flag default language for frontend. Exact 1 language must be marked as default.
+	 * @JMS\Type("boolean")
      */
     protected $isDefault = false;
 
     /**
      * @var string Locale
+	 * @JMS\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string English term
+	 * @JMS\Type("string")
      */
     protected $nameEnglish = '';
 
     /**
      * @var string German term
+	 * @JMS\Type("string")
      */
     protected $nameGerman = '';
 

@@ -2,32 +2,39 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Product to productVariationValue Allocation..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Product
+ * @JMS\AccessType("public_method")
  */
 class ProductVarCombination extends DataModel
 {
     /**
      * @var Identity Reference to product
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $productId = null;
 
     /**
      * @var Identity Reference to productVariation
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $productVariationId = null;
 
     /**
      * @var Identity Reference to productVariationValue
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $productVariationValueId = null;
 

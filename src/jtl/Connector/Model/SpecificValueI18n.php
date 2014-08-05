@@ -2,57 +2,69 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage Specific
  */
 
 namespace jtl\Connector\Model;
 
-use \DateTime;
+use DateTime;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Localized specific value text..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage Specific
+ * @JMS\AccessType("public_method")
  */
 class SpecificValueI18n extends DataModel
 {
     /**
      * @var Identity Reference to specificValue
+	 * @JMS\Type("\jtl\Connector\Model\Identity")
      */
     protected $specificValueId = null;
 
     /**
      * @var string Optional localized description
+	 * @JMS\Type("string")
      */
     protected $description = '';
 
     /**
      * @var string locale
+	 * @JMS\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string Optional localized meta description value
+	 * @JMS\Type("string")
      */
     protected $metaDescription = '';
 
     /**
      * @var string Optional localized meta keywords value
+	 * @JMS\Type("string")
      */
     protected $metaKeywords = '';
 
     /**
      * @var string Optional localized title tag value
+	 * @JMS\Type("string")
      */
     protected $titleTag = '';
 
     /**
      * @var string Optional localized URL path
+	 * @JMS\Type("string")
      */
     protected $urlPath = '';
 
     /**
      * @var string Localized value
+	 * @JMS\Type("string")
      */
     protected $value = '';
 
