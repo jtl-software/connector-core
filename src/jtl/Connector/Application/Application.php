@@ -34,6 +34,7 @@ use \jtl\Core\Utilities\RpcMethod;
 use \jtl\Connector\Session\Session;
 use \jtl\Connector\Base\Connector;
 use \jtl\Core\Logger\Logger;
+use Doctrine\Common\Annotations\AnnotationRegistry;
 
 /**
  * Application Class
@@ -70,6 +71,8 @@ class Application extends CoreApplication
      */
     public function run()
     {
+        AnnotationRegistry::registerLoader('class_exists');
+
         $jtlrpc = Request::handle();
         $sessionId = Request::getSession();
         $requestpackets = RequestPacket::build($jtlrpc);
@@ -263,8 +266,7 @@ class Application extends CoreApplication
                 $responsepacket = new ResponsePacket();
                 $responsepacket->setId($requestpacket->getId())
                   ->setJtlrpc($requestpacket->getJtlrpc())
-                  ->setError($error)
-                  ->setGlobals($requestpacket->getGlobals());
+                  ->setError($error);
 
                 $jtlrpcreponses[] = $responsepacket;
             }
@@ -287,8 +289,7 @@ class Application extends CoreApplication
         $responsepacket->setId($requestpacket->getId())
           ->setJtlrpc($requestpacket->getJtlrpc())
           ->setResult($actionresult->getResult())
-          ->setError($actionresult->getError())
-          ->setGlobals($requestpacket->getGlobals());
+          ->setError($actionresult->getError());
 
         $responsepacket->validate();
 

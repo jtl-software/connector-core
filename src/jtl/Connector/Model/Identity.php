@@ -8,6 +8,7 @@
 namespace jtl\Connector\Model;
 
 use \jtl\Core\Model\Model;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Identity
@@ -15,16 +16,19 @@ use \jtl\Core\Model\Model;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Internal
+ * @JMS\AccessType("public_method")
  */
 class Identity extends Model
 {
     /**
      * @var string
+     * @JMS\Type("string")
      */
     protected $endpoint = '';
     
     /**
      * @var int
+     * @JMS\Type("integer")
      */
     protected $host = 0;
 

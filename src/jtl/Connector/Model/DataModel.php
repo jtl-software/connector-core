@@ -8,6 +8,7 @@
 namespace jtl\Connector\Model;
 
 use \jtl\Core\Model\DataModel as CoreModel;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Entity data model
@@ -15,6 +16,7 @@ use \jtl\Core\Model\DataModel as CoreModel;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Internal
+ * @JMS\AccessType("public_method")
  */
 abstract class DataModel extends CoreModel
 {
@@ -24,32 +26,22 @@ abstract class DataModel extends CoreModel
     const ACTION_DELETE = 'delete';
 
     /**
-     * @type \jtl\Connector\Type\DataType
+     * @var \jtl\Connector\Type\DataType
+     * @JMS\type("jtl\Connector\Type\DataType")
      */
     private $_type = null;
 
     /**
-     * @type boolean
+     * @var boolean
+     * @JMS\type("boolean")
      */
     protected $isEncrypted = false;
 
     /**
-     * @type array list of strings
-     */
-    protected $identities = array();
-
-    /**
-     * @type string
+     * @var string
+     * @JMS\type("string")
      */
     protected $action = '';
-
-    /**
-     * @return array 
-     */
-    public function getIdentities()
-    {
-        return $this->identities;
-    }
 
     /**
      * @return \jtl\Connector\Type\DataType 
