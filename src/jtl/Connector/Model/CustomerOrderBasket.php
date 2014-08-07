@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * ToDo: Remove this Controller, not defined. .
@@ -16,33 +16,41 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Internal
- * @JMS\AccessType("public_method")
  */
 class CustomerOrderBasket extends DataModel
 {
     /**
      * @var Identity Reference to customerId
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $customerId = null;
 
     /**
      * @var Identity customerOrderPaymentInfoId
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $customerOrderPaymentInfoId = null;
 
     /**
      * @var Identity Unique id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to shippingAddressId
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $shippingAddressId = null;
+
+
+    public function __construct()
+    {
+        $this->customerId = new Identity;
+        $this->customerOrderPaymentInfoId = new Identity;
+        $this->id = new Identity;
+        $this->shippingAddressId = new Identity;
+    }
 
     /**
      * @param  Identity $customerId Reference to customerId

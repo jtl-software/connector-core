@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Additional payment info for direct debit / banktransfer or payment by credit card. .
@@ -16,87 +16,93 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage CustomerOrder
- * @JMS\AccessType("public_method")
  */
 class CustomerOrderPaymentInfo extends DataModel
 {
     /**
      * @var Identity Reference to customerOrder
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $customerOrderId = null;
 
     /**
      * @var Identity Unique customerOrderPaymentInfo id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var string Bank account holder name
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $accountHolder = '';
 
     /**
      * @var string Bank account number (deprecated in DE since SEPA)
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $accountNumber = '';
 
     /**
      * @var string Bank code (deprecated in DE since SEPA)
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $bankCode = '';
 
     /**
      * @var string Bank name
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $bankName = '';
 
     /**
      * @var string Bank Identifier Code (BIC)
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $bic = '';
 
     /**
      * @var string Credit card expiration date
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $creditCardExpiration = '';
 
     /**
      * @var string Credit card holder name
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $creditCardHolder = '';
 
     /**
      * @var string Credit card number
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $creditCardNumber = '';
 
     /**
      * @var string Credit card type (e.g. "visa")
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $creditCardType = '';
 
     /**
      * @var string Credit card verification number
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $creditCardVerificationNumber = '';
 
     /**
      * @var string International Bank Account Number (IBAN)
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $iban = '';
+
+
+    public function __construct()
+    {
+        $this->customerOrderId = new Identity;
+        $this->id = new Identity;
+    }
 
     /**
      * @param  Identity $customerOrderId Reference to customerOrder

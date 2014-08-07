@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use \jtl\Core\Model\DataModel as CoreModel;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Entity data model
@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Internal
- * @JMS\AccessType("public_method")
+ * @Serializer\AccessType("public_method")
  */
 abstract class DataModel extends CoreModel
 {
@@ -27,19 +27,24 @@ abstract class DataModel extends CoreModel
 
     /**
      * @var \jtl\Connector\Type\DataType
-     * @JMS\type("jtl\Connector\Type\DataType")
+     * @Serializer\type("jtl\Connector\Type\DataType")
+     * @Serializer\AccessType("reflection")
+     * @Serializer\Exclude
      */
     private $_type = null;
 
     /**
      * @var boolean
-     * @JMS\type("boolean")
+     * @Serializer\type("boolean")
+     * @Serializer\AccessType("reflection")
+     * @Serializer\Exclude
      */
     protected $isEncrypted = false;
 
     /**
      * @var string
-     * @JMS\type("string")
+     * @Serializer\type("string")
+     * @Serializer\Exclude
      */
     protected $action = '';
 

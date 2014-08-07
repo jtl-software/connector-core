@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * PaymentMethod model..
@@ -16,57 +16,63 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Internal
- * @JMS\AccessType("public_method")
  */
 class PaymentMethod extends DataModel
 {
     /**
      * @var Identity Unique paymentMethod id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Payment module identifier
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $moduleId = null;
 
     /**
      * @var bool Optional: Payment method active? Some payment methods have to be activated by validation or by vendor
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $isActive = false;
 
     /**
      * @var bool Optional flag if system requirements and validation fit to use paymentMethod
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $isUseable = false;
 
     /**
      * @var string Optional image (path or URL) for Paymentmethod
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $picture = '';
 
     /**
      * @var int Sort number
-	 * @JMS\Type("integer")
+     * @Serializer\Type("integer")
      */
     protected $sort = 0;
 
     /**
      * @var bool Optional: Send mail on Payment confirmation to customer?
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $useMail = false;
 
     /**
      * @var string Optional vendor name (e.g. "Paypal")
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $vendor = '';
+
+
+    public function __construct()
+    {
+        $this->id = new Identity;
+        $this->moduleId = new Identity;
+    }
 
     /**
      * @param  Identity $id Unique paymentMethod id

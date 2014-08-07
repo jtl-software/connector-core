@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * File upload properties. .
@@ -16,45 +16,51 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * @JMS\AccessType("public_method")
  */
 class FileUpload extends DataModel
 {
     /**
      * @var Identity Unique fileUpload id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to product
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productId = null;
 
     /**
      * @var string Optional file description
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $description = '';
 
     /**
      * @var string Allowed file type
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $fileType = '';
 
     /**
      * @var bool Optional flag to force upload before finishing checkout. True if file upload is required to buy product
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $isRequired = false;
 
     /**
      * @var string Filename specification
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $name = '';
+
+
+    public function __construct()
+    {
+        $this->id = new Identity;
+        $this->productId = new Identity;
+    }
 
     /**
      * @param  Identity $id Unique fileUpload id

@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * special price properties to define a net price for a customerGroup..
@@ -16,27 +16,33 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Internal
- * @JMS\AccessType("public_method")
  */
 class SpecialPrice extends DataModel
 {
     /**
      * @var Identity Reference to customerGroup
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $customerGroupId = null;
 
     /**
      * @var Identity Reference to productSpecialPrice
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productSpecialPriceId = null;
 
     /**
      * @var double net price value
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $priceNet = 0.0;
+
+
+    public function __construct()
+    {
+        $this->customerGroupId = new Identity;
+        $this->productSpecialPriceId = new Identity;
+    }
 
     /**
      * @param  Identity $customerGroupId Reference to customerGroup

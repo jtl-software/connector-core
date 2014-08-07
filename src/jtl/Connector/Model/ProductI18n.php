@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Locale specific texts for product.
@@ -16,63 +16,68 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * @JMS\AccessType("public_method")
  */
 class ProductI18n extends DataModel
 {
     /**
      * @var Identity Reference to product
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productId = null;
 
     /**
      * @var string Optional product description
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $description = '';
 
     /**
      * @var string locale
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string 
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $metaDescription = '';
 
     /**
      * @var string 
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $metaKeywords = '';
 
     /**
      * @var string Product name / title
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $name = '';
 
     /**
      * @var string Optional product shortdescription
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $shortDescription = '';
 
     /**
      * @var string 
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $titleTag = '';
 
     /**
      * @var string Optional path of product URL
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $urlPath = '';
+
+
+    public function __construct()
+    {
+        $this->productId = new Identity;
+    }
 
     /**
      * @param  Identity $productId Reference to product

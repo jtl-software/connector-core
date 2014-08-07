@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Locale specific text and meta-information for manufacturer..
@@ -16,45 +16,50 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Manufacturer
- * @JMS\AccessType("public_method")
  */
 class ManufacturerI18n extends DataModel
 {
     /**
      * @var Identity Reference to manufacturer
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $manufacturerId = null;
 
     /**
      * @var string Optional manufacturer description (HTML)
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $description = '';
 
     /**
      * @var string Locale
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string Optional meta description tag value
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $metaDescription = '';
 
     /**
      * @var string Optional meta keywords tag value
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $metaKeywords = '';
 
     /**
      * @var string Optional title tag value
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $titleTag = '';
+
+
+    public function __construct()
+    {
+        $this->manufacturerId = new Identity;
+    }
 
     /**
      * @param  Identity $manufacturerId Reference to manufacturer

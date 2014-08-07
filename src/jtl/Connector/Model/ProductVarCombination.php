@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Product to productVariationValue Allocation..
@@ -16,27 +16,34 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * @JMS\AccessType("public_method")
  */
 class ProductVarCombination extends DataModel
 {
     /**
      * @var Identity Reference to product
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productId = null;
 
     /**
      * @var Identity Reference to productVariation
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productVariationId = null;
 
     /**
      * @var Identity Reference to productVariationValue
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productVariationValueId = null;
+
+
+    public function __construct()
+    {
+        $this->productId = new Identity;
+        $this->productVariationId = new Identity;
+        $this->productVariationValueId = new Identity;
+    }
 
     /**
      * @param  Identity $productId Reference to product

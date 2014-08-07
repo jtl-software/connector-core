@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Global language model.
@@ -16,39 +16,44 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
- * @JMS\AccessType("public_method")
  */
 class Language extends DataModel
 {
     /**
      * @var Identity Unique language id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var bool Flag default language for frontend. Exact 1 language must be marked as default.
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $isDefault = false;
 
     /**
      * @var string Locale
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string English term
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $nameEnglish = '';
 
     /**
      * @var string German term
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $nameGerman = '';
+
+
+    public function __construct()
+    {
+        $this->id = new Identity;
+    }
 
     /**
      * @param  Identity $id Unique language id

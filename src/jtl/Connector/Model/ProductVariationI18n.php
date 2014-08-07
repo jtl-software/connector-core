@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Locale specific product variation properties. .
@@ -16,27 +16,32 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * @JMS\AccessType("public_method")
  */
 class ProductVariationI18n extends DataModel
 {
     /**
      * @var Identity Reference to productVariation
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productVariationId = null;
 
     /**
      * @var string Locale
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string Locale specific variation name
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $name = '';
+
+
+    public function __construct()
+    {
+        $this->productVariationId = new Identity;
+    }
 
     /**
      * @param  Identity $productVariationId Reference to productVariation

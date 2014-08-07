@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Define set articles / parts lists. .
@@ -16,27 +16,33 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * @JMS\AccessType("public_method")
  */
 class SetArticle extends DataModel
 {
     /**
      * @var Identity Unique setArticle id, referenced by product.setArticleId
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to a component / product
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productId = null;
 
     /**
      * @var double Component quantity
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $quantity = 0.0;
+
+
+    public function __construct()
+    {
+        $this->id = new Identity;
+        $this->productId = new Identity;
+    }
 
     /**
      * @param  Identity $id Unique setArticle id, referenced by product.setArticleId

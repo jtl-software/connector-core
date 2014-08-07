@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * A delivery note created for shipment..
@@ -16,51 +16,56 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage DeliveryNote
- * @JMS\AccessType("public_method")
  */
 class DeliveryNote extends DataModel
 {
     /**
      * @var Identity Reference to customerOrder
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $customerOrderId = null;
 
     /**
      * @var Identity Unique deliveryNote id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var DateTime Creation date
-	 * @JMS\Type("DateTime")
+     * @Serializer\Type("DateTime")
      */
     protected $created = null;
 
     /**
      * @var bool Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $isFulfillment = false;
 
     /**
      * @var string Optional text note
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $note = '';
 
     /**
      * @var int Delivery status
-	 * @JMS\Type("integer")
+     * @Serializer\Type("integer")
      */
     protected $status = 0;
 
     /**
      * @var \jtl\Connector\Model\DeliveryNoteItem[]
-	 * @JMS\Type("array<\jtl\Connector\Model\DeliveryNoteItem>")
+     * @Serializer\Type("array<jtl\Connector\Model\DeliveryNoteItem>")
      */
     protected $items = array();
+
+    public function __construct()
+    {
+        $this->customerOrderId = new Identity;
+        $this->id = new Identity;
+    }
 
     /**
      * @param  Identity $customerOrderId Reference to customerOrder

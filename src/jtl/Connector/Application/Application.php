@@ -111,6 +111,8 @@ class Application extends CoreApplication
      */
     protected function execute(RequestPacket $requestpacket, Config $config, $rpcmode, $imagePath = null)
     {
+        $this->deserializeRequestParams($requestpacket);
+
         if (!RpcMethod::isMethod($requestpacket->getMethod())) {
             throw new RpcException("Invalid Request", -32600);
         }
@@ -273,6 +275,14 @@ class Application extends CoreApplication
         }
 
         Response::sendAll($jtlrpcreponses);
+    }
+
+    protected function deserializeRequestParams(RequestPacket &$requestpacket)
+    {
+        $method = RpcMethod::splitMethod($requestpacket->getMethod());
+        $namespace = 'jtl\\Connector\\Model\\' . ucfirst($method->getController());
+        $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
+        $requestpacket->setParams($serializer->deserialize($requestpacket->getParams(), $namespace, 'json'));
     }
 
     /**

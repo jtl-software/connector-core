@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Product-ConfigGroup Assignment..
@@ -16,33 +16,40 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * @JMS\AccessType("public_method")
  */
 class ProductConfigGroup extends DataModel
 {
     /**
      * @var Identity Reference to configGroup
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $configGroupId = null;
 
     /**
      * @var Identity Unique productConfigGroup id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to product
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productId = null;
 
     /**
      * @var int Optional sort number
-	 * @JMS\Type("integer")
+     * @Serializer\Type("integer")
      */
     protected $sort = 0;
+
+
+    public function __construct()
+    {
+        $this->configGroupId = new Identity;
+        $this->id = new Identity;
+        $this->productId = new Identity;
+    }
 
     /**
      * @param  Identity $configGroupId Reference to configGroup

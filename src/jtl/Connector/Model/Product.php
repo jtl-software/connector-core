@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Product properties..
@@ -16,393 +16,396 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * @JMS\AccessType("public_method")
  */
 class Product extends DataModel
 {
     /**
      * @var Identity Optional reference to basePriceUnit
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $basePriceUnitId = null;
 
     /**
      * @var Identity Reference to (current) deliveryStatus
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $deliveryStatusId = null;
 
     /**
      * @var Identity Unique product id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to manufacturer
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $manufacturerId = null;
 
     /**
      * @var Identity Reference to master product
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $masterProductId = null;
 
     /**
      * @var Identity Optional reference to measurement unit id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $measurementUnitId = null;
 
     /**
      * @var Identity Optional reference to productType
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productTypeId = null;
 
     /**
      * @var Identity Optional reference to setArticle
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $setArticleId = null;
 
     /**
      * @var Identity Reference to shippingClass
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $shippingClassId = null;
 
     /**
      * @var Identity Reference to unit
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $unitId = null;
 
     /**
      * @var string Optional Amazon Standard Identification Number
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $asin = '';
 
     /**
      * @var DateTime Optional available from date. Specify a date, upon when product can be purchased. 
-	 * @JMS\Type("DateTime")
+     * @Serializer\Type("DateTime")
      */
     protected $availableFrom = null;
 
     /**
      * @var double Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $basePriceDivisor = 0.0;
 
     /**
      * @var double Optional base price quantity
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $basePriceQuantity = 0.0;
 
     /**
      * @var DateTime Optional best before date. Default 0000-00-00 if product has no best-before-date.
-	 * @JMS\Type("DateTime")
+     * @Serializer\Type("DateTime")
      */
     protected $bestBefore = null;
 
     /**
      * @var bool Optional: Set to true to display base price / unit pricing measure
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $considerBasePrice = false;
 
     /**
      * @var bool Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $considerStock = false;
 
     /**
      * @var bool Optional: Consider stock levels of productVariations. Same as considerStock but for variations. 
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $considerVariationStock = false;
 
     /**
      * @var DateTime Creation date
-	 * @JMS\Type("DateTime")
+     * @Serializer\Type("DateTime")
      */
     protected $created = null;
 
     /**
      * @var string Optional European Article Number (EAN)
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $ean = '';
 
     /**
      * @var string Optional Ebay product ID
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $epid = '';
 
     /**
      * @var string Optional Hazard identifier, encodes general hazard class und subdivision
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $hazardIdNumber = '';
 
     /**
      * @var double Optional product height
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $height = 0.0;
 
     /**
      * @var DateTime Optional expected inflow date
-	 * @JMS\Type("DateTime")
+     * @Serializer\Type("DateTime")
      */
     protected $inflowDate = null;
 
     /**
      * @var double Optional expected inflow quantity
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $inflowQuantity = 0.0;
 
     /**
      * @var string Optional International Standard Book Number
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $isbn = '';
 
     /**
      * @var bool Optional: Set to true to allow non-integer quantites for purchase
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $isDivisible = false;
 
     /**
      * @var bool Optional flag if product is master product
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $isMasterProduct = false;
 
     /**
      * @var bool Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $isNew = false;
 
     /**
      * @var bool Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $isTopProduct = false;
 
     /**
      * @var string Optional internal keywords and synonyms for product
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $keywords = '';
 
     /**
      * @var double Optional product length
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $length = 0.0;
 
     /**
      * @var string Optional manufacturer number
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $manufacturerNumber = '';
 
     /**
      * @var double Optional measurement quantity
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $measurementQuantity = 0.0;
 
     /**
      * @var double Optional minimum quantity needed to purchase product
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $minimumOrderQuantity = 0.0;
 
     /**
      * @var string Optional internal product note
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $note = '';
 
     /**
      * @var string Optional Origin country
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $originCountry = '';
 
     /**
      * @var bool Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true. 
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $permitNegativeStock = false;
 
     /**
      * @var double Productweight exclusive packaging
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $productWeight = 0.0;
 
     /**
      * @var double Optional recommended retail price (gross) 
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $recommendedRetailPrice = 0.0;
 
     /**
      * @var string Optional serial number
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $serialNumber = '';
 
     /**
      * @var double Productweight inclusive packaging
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $shippingWeight = 0.0;
 
     /**
      * @var string Optional stock keeping unit identifier
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $sku = '';
 
     /**
      * @var int Optional sort number for product sorting in lists
-	 * @JMS\Type("integer")
+     * @Serializer\Type("integer")
      */
     protected $sort = 0;
 
     /**
      * @var double Optional stock (level)
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $stockLevel = 0.0;
 
     /**
      * @var double Optional average supplier delivery time in days. Default 0 if no average delivery time is present. 
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $supplierDeliveryTime = 0.0;
 
     /**
      * @var double Optional supplier stock level for product
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $supplierStockLevel = 0.0;
 
     /**
      * @var double Optional: Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $takeOffQuantity = 0.0;
 
     /**
      * @var string Optional TARIC
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $taric = '';
 
     /**
      * @var string Optional UN number, used to define hazardous properties
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $unNumber = '';
 
     /**
      * @var string Optional Universal Product Code
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $upc = '';
 
     /**
      * @var double Value added tax
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $vat = 0.0;
 
     /**
      * @var double Optional product width
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $width = 0.0;
 
     /**
      * @var \jtl\Connector\Model\ProductVariation[]
-	 * @JMS\Type("array<\jtl\Connector\Model\ProductVariation>")
+     * @Serializer\Type("array<jtl\Connector\Model\ProductVariation>")
      */
     protected $variations = array();
-
     /**
      * @var \jtl\Connector\Model\ProductSpecialPrice[]
-	 * @JMS\Type("array<\jtl\Connector\Model\ProductSpecialPrice>")
+     * @Serializer\Type("array<jtl\Connector\Model\ProductSpecialPrice>")
      */
     protected $specialPrices = array();
-
     /**
      * @var \jtl\Connector\Model\SetArticle[]
-	 * @JMS\Type("array<\jtl\Connector\Model\SetArticle>")
+     * @Serializer\Type("array<jtl\Connector\Model\SetArticle>")
      */
     protected $setArticles = array();
-
     /**
      * @var \jtl\Connector\Model\ProductPrice[]
-	 * @JMS\Type("array<\jtl\Connector\Model\ProductPrice>")
+     * @Serializer\Type("array<jtl\Connector\Model\ProductPrice>")
      */
     protected $prices = array();
-
     /**
      * @var \jtl\Connector\Model\MediaFile[]
-	 * @JMS\Type("array<\jtl\Connector\Model\MediaFile>")
+     * @Serializer\Type("array<jtl\Connector\Model\MediaFile>")
      */
     protected $mediaFiles = array();
-
     /**
      * @var \jtl\Connector\Model\ProductInvisibility[]
-	 * @JMS\Type("array<\jtl\Connector\Model\ProductInvisibility>")
+     * @Serializer\Type("array<jtl\Connector\Model\ProductInvisibility>")
      */
     protected $invisibilities = array();
-
     /**
      * @var \jtl\Connector\Model\ProductI18n[]
-	 * @JMS\Type("array<\jtl\Connector\Model\ProductI18n>")
+     * @Serializer\Type("array<jtl\Connector\Model\ProductI18n>")
      */
     protected $i18ns = array();
-
     /**
      * @var \jtl\Connector\Model\ProductFileDownload[]
-	 * @JMS\Type("array<\jtl\Connector\Model\ProductFileDownload>")
+     * @Serializer\Type("array<jtl\Connector\Model\ProductFileDownload>")
      */
     protected $fileDownloads = array();
-
     /**
      * @var \jtl\Connector\Model\CrossSelling[]
-	 * @JMS\Type("array<\jtl\Connector\Model\CrossSelling>")
+     * @Serializer\Type("array<jtl\Connector\Model\CrossSelling>")
      */
     protected $crossSellings = array();
-
     /**
      * @var \jtl\Connector\Model\ProductConfigGroup[]
-	 * @JMS\Type("array<\jtl\Connector\Model\ProductConfigGroup>")
+     * @Serializer\Type("array<jtl\Connector\Model\ProductConfigGroup>")
      */
     protected $configGroups = array();
-
     /**
      * @var \jtl\Connector\Model\Product2Category[]
-	 * @JMS\Type("array<\jtl\Connector\Model\Product2Category>")
+     * @Serializer\Type("array<jtl\Connector\Model\Product2Category>")
      */
     protected $categories = array();
+
+    public function __construct()
+    {
+        $this->basePriceUnitId = new Identity;
+        $this->deliveryStatusId = new Identity;
+        $this->id = new Identity;
+        $this->manufacturerId = new Identity;
+        $this->masterProductId = new Identity;
+        $this->measurementUnitId = new Identity;
+        $this->productTypeId = new Identity;
+        $this->setArticleId = new Identity;
+        $this->shippingClassId = new Identity;
+        $this->unitId = new Identity;
+    }
 
     /**
      * @param  Identity $basePriceUnitId Optional reference to basePriceUnit

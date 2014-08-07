@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Specific value properties to define a new specificValue with a sort number. .
@@ -16,33 +16,38 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Specific
- * @JMS\AccessType("public_method")
  */
 class SpecificValue extends DataModel
 {
     /**
      * @var Identity Unique specificValue id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to specificId
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $specificId = null;
 
     /**
      * @var int Optional sort number
-	 * @JMS\Type("integer")
+     * @Serializer\Type("integer")
      */
     protected $sort = 0;
 
     /**
      * @var \jtl\Connector\Model\SpecificValueI18n[]
-	 * @JMS\Type("array<\jtl\Connector\Model\SpecificValueI18n>")
+     * @Serializer\Type("array<jtl\Connector\Model\SpecificValueI18n>")
      */
     protected $i18ns = array();
+
+    public function __construct()
+    {
+        $this->id = new Identity;
+        $this->specificId = new Identity;
+    }
 
     /**
      * @param  Identity $id Unique specificValue id

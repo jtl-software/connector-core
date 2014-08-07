@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Link 2 products that are in a common crossSellingGroup..
@@ -16,33 +16,41 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * @JMS\AccessType("public_method")
  */
 class CrossSelling extends DataModel
 {
     /**
      * @var Identity Reference to crossSellingGroup
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $crossSellingGroupId = null;
 
     /**
      * @var Identity Reference to product (main product)
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $crossSellingProductId = null;
 
     /**
      * @var Identity Unique crossSelling id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to product (cross selling product)
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productId = null;
+
+
+    public function __construct()
+    {
+        $this->crossSellingGroupId = new Identity;
+        $this->crossSellingProductId = new Identity;
+        $this->id = new Identity;
+        $this->productId = new Identity;
+    }
 
     /**
      * @param  Identity $crossSellingGroupId Reference to crossSellingGroup

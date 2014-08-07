@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * ToDo: Remove (deprecated).
@@ -16,21 +16,27 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * @JMS\AccessType("public_method")
  */
 class ProductVariationValueDependency extends DataModel
 {
     /**
      * @var Identity 
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productVariationValueId = null;
 
     /**
      * @var Identity 
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productVariationValueTargetId = null;
+
+
+    public function __construct()
+    {
+        $this->productVariationValueId = new Identity;
+        $this->productVariationValueTargetId = new Identity;
+    }
 
     /**
      * @param  Identity $productVariationValueId 

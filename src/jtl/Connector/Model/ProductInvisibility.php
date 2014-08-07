@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Specify product to hide from customerGroup..
@@ -16,21 +16,27 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * @JMS\AccessType("public_method")
  */
 class ProductInvisibility extends DataModel
 {
     /**
      * @var Identity Reference to customerGroup
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $customerGroupId = null;
 
     /**
      * @var Identity Reference to product
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productId = null;
+
+
+    public function __construct()
+    {
+        $this->customerGroupId = new Identity;
+        $this->productId = new Identity;
+    }
 
     /**
      * @param  Identity $customerGroupId Reference to customerGroup

@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Localized fileDownload name and  description..
@@ -16,33 +16,38 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
- * @JMS\AccessType("public_method")
  */
 class FileDownloadI18n extends DataModel
 {
     /**
      * @var Identity Reference to fileDownloadId
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $fileDownloadId = null;
 
     /**
      * @var string Optional File download description
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $description = '';
 
     /**
      * @var string Locale
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string File download title / name
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $name = '';
+
+
+    public function __construct()
+    {
+        $this->fileDownloadId = new Identity;
+    }
 
     /**
      * @param  Identity $fileDownloadId Reference to fileDownloadId

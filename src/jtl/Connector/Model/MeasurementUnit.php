@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Specifies product units like "ml", "l", " cm"..
@@ -16,27 +16,32 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
- * @JMS\AccessType("public_method")
  */
 class MeasurementUnit extends DataModel
 {
     /**
      * @var Identity Unit id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var string Optional UCUM-Code, see  http://unitsofmeasure.org/
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $code = '';
 
     /**
      * @var string Synonym e.g. 'ml'
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $displayCode = '';
+
+
+    public function __construct()
+    {
+        $this->id = new Identity;
+    }
 
     /**
      * @param  Identity $id Unit id

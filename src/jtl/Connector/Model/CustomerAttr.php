@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Monolingual customer attribute..
@@ -16,33 +16,39 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Customer
- * @JMS\AccessType("public_method")
  */
 class CustomerAttr extends DataModel
 {
     /**
      * @var Identity Reference to customer
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $customerId = null;
 
     /**
      * @var Identity Unique customerAttr id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var string Attribute key
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $key = '';
 
     /**
      * @var string Attribute value
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $value = '';
+
+
+    public function __construct()
+    {
+        $this->customerId = new Identity;
+        $this->id = new Identity;
+    }
 
     /**
      * @param  Identity $customerId Reference to customer

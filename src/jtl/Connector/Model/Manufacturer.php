@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Manufacturer / brand properties. .
@@ -16,45 +16,49 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Manufacturer
- * @JMS\AccessType("public_method")
  */
 class Manufacturer extends DataModel
 {
     /**
      * @var Identity Unique manufacturer id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var string Manufacturer (brand) name
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $name = '';
 
     /**
      * @var int Optional sort number
-	 * @JMS\Type("integer")
+     * @Serializer\Type("integer")
      */
     protected $sort = 0;
 
     /**
      * @var string Optional url path e.g. "Products-manufactured-by-X"
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $urlPath = '';
 
     /**
      * @var string Optional manufacturer website URL
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $www = '';
 
     /**
      * @var \jtl\Connector\Model\ManufacturerI18n[]
-	 * @JMS\Type("array<\jtl\Connector\Model\ManufacturerI18n>")
+     * @Serializer\Type("array<jtl\Connector\Model\ManufacturerI18n>")
      */
     protected $i18ns = array();
+
+    public function __construct()
+    {
+        $this->id = new Identity;
+    }
 
     /**
      * @param  Identity $id Unique manufacturer id

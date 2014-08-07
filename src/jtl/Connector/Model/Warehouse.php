@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * warehouse model (set in JTL-Wawi ERP)..
@@ -16,15 +16,20 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
- * @JMS\AccessType("public_method")
  */
 class Warehouse extends DataModel
 {
     /**
      * @var Identity Unique warehouse id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
+
+
+    public function __construct()
+    {
+        $this->id = new Identity;
+    }
 
     /**
      * @param  Identity $id Unique warehouse id

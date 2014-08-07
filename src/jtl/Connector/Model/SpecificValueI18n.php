@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Localized specific value text..
@@ -16,57 +16,62 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Specific
- * @JMS\AccessType("public_method")
  */
 class SpecificValueI18n extends DataModel
 {
     /**
      * @var Identity Reference to specificValue
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $specificValueId = null;
 
     /**
      * @var string Optional localized description
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $description = '';
 
     /**
      * @var string locale
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string Optional localized meta description value
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $metaDescription = '';
 
     /**
      * @var string Optional localized meta keywords value
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $metaKeywords = '';
 
     /**
      * @var string Optional localized title tag value
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $titleTag = '';
 
     /**
      * @var string Optional localized URL path
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $urlPath = '';
 
     /**
      * @var string Localized value
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $value = '';
+
+
+    public function __construct()
+    {
+        $this->specificValueId = new Identity;
+    }
 
     /**
      * @param  Identity $specificValueId Reference to specificValue

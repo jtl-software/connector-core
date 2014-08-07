@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Product variation value model. Each product defines its own variations and variation values. .
@@ -16,69 +16,71 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * @JMS\AccessType("public_method")
  */
 class ProductVariationValue extends DataModel
 {
     /**
      * @var Identity Unique productVariationValue id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to productVariation
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productVariationId = null;
 
     /**
      * @var double Optional variation extra weight
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $extraWeight = 0.0;
 
     /**
      * @var string Optional Stock Keeping Unit
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $sku = '';
 
     /**
      * @var int Optional sort number
-	 * @JMS\Type("integer")
+     * @Serializer\Type("integer")
      */
     protected $sort = 0;
 
     /**
      * @var double Optional stock level
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $stockLevel = 0.0;
 
     /**
      * @var \jtl\Connector\Model\ProductVariationValueInvisibility[]
-	 * @JMS\Type("array<\jtl\Connector\Model\ProductVariationValueInvisibility>")
+     * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValueInvisibility>")
      */
     protected $invisibilities = array();
-
     /**
      * @var \jtl\Connector\Model\ProductVariationValueI18n[]
-	 * @JMS\Type("array<\jtl\Connector\Model\ProductVariationValueI18n>")
+     * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValueI18n>")
      */
     protected $i18ns = array();
-
     /**
      * @var \jtl\Connector\Model\ProductVariationValueExtraCharge[]
-	 * @JMS\Type("array<\jtl\Connector\Model\ProductVariationValueExtraCharge>")
+     * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValueExtraCharge>")
      */
     protected $extraCharges = array();
-
     /**
      * @var \jtl\Connector\Model\ProductVariationValueDependency[]
-	 * @JMS\Type("array<\jtl\Connector\Model\ProductVariationValueDependency>")
+     * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValueDependency>")
      */
     protected $dependencies = array();
+
+    public function __construct()
+    {
+        $this->id = new Identity;
+        $this->productVariationId = new Identity;
+    }
 
     /**
      * @param  Identity $id Unique productVariationValue id

@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Monolingual mediafile attribute..
@@ -16,39 +16,45 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * @JMS\AccessType("public_method")
  */
 class MediaFileAttr extends DataModel
 {
     /**
      * @var Identity Unique MediaFileAttr id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to mediaFile
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $mediaFileId = null;
 
     /**
      * @var string Attribute name
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $key = '';
 
     /**
      * @var string Locale
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string Attribute value
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $value = '';
+
+
+    public function __construct()
+    {
+        $this->id = new Identity;
+        $this->mediaFileId = new Identity;
+    }
 
     /**
      * @param  Identity $id Unique MediaFileAttr id

@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Media file model..
@@ -16,63 +16,67 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * @JMS\AccessType("public_method")
  */
 class MediaFile extends DataModel
 {
     /**
      * @var Identity Unique MediaFile id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to product
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productId = null;
 
     /**
      * @var string Optional media file category name
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $mediaFileCategory = '';
 
     /**
      * @var string File path
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $path = '';
 
     /**
      * @var int Optional sort number
-	 * @JMS\Type("integer")
+     * @Serializer\Type("integer")
      */
     protected $sort = 0;
 
     /**
      * @var string Media file type e.g. "pdf"
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $type = '';
 
     /**
      * @var string Complete URL
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $url = '';
 
     /**
      * @var \jtl\Connector\Model\MediaFileI18n[]
-	 * @JMS\Type("array<\jtl\Connector\Model\MediaFileI18n>")
+     * @Serializer\Type("array<jtl\Connector\Model\MediaFileI18n>")
      */
     protected $i18ns = array();
-
     /**
      * @var \jtl\Connector\Model\MediaFileAttr[]
-	 * @JMS\Type("array<\jtl\Connector\Model\MediaFileAttr>")
+     * @Serializer\Type("array<jtl\Connector\Model\MediaFileAttr>")
      */
     protected $attributes = array();
+
+    public function __construct()
+    {
+        $this->id = new Identity;
+        $this->productId = new Identity;
+    }
 
     /**
      * @param  Identity $id Unique MediaFile id

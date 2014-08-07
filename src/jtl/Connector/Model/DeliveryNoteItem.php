@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Delivery note item properties..
@@ -16,57 +16,65 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage DeliveryNote
- * @JMS\AccessType("public_method")
  */
 class DeliveryNoteItem extends DataModel
 {
     /**
      * @var Identity Reference to customerOrderItem
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $customerOrderItemId = null;
 
     /**
      * @var Identity Reference to deliveryNote
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $deliveryNoteId = null;
 
     /**
      * @var Identity Unique deliveryNoteItem id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Optional reference to warehouse
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $warehouseId = null;
 
     /**
      * @var string Optional batch number
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $batchNumber = '';
 
     /**
      * @var DateTime Optional best before date
-	 * @JMS\Type("DateTime")
+     * @Serializer\Type("DateTime")
      */
     protected $bestBefore = null;
 
     /**
      * @var double Quantity delivered
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $quantity = 0.0;
 
     /**
      * @var string Optional serial number
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $serialNumber = '';
+
+
+    public function __construct()
+    {
+        $this->customerOrderItemId = new Identity;
+        $this->deliveryNoteId = new Identity;
+        $this->id = new Identity;
+        $this->warehouseId = new Identity;
+    }
 
     /**
      * @param  Identity $customerOrderItemId Reference to customerOrderItem

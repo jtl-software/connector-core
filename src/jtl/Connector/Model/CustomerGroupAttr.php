@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Monolingual customer group attribute..
@@ -16,39 +16,44 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
- * @JMS\AccessType("public_method")
  */
 class CustomerGroupAttr extends DataModel
 {
     /**
      * @var Identity Reference to customerGroup
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $customerGroupId = null;
 
     /**
      * @var Identity Unique customerGroupAttr id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var string Attribute key
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $key = '';
 
     /**
      * @var string Attribute value
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $value = '';
 
     /**
      * @var \jtl\Connector\Model\CustomerGroup[]
-	 * @JMS\Type("array<\jtl\Connector\Model\CustomerGroup>")
+     * @Serializer\Type("array<jtl\Connector\Model\CustomerGroup>")
      */
     protected $customerGroup = array();
+
+    public function __construct()
+    {
+        $this->customerGroupId = new Identity;
+        $this->id = new Identity;
+    }
 
     /**
      * @param  Identity $customerGroupId Reference to customerGroup

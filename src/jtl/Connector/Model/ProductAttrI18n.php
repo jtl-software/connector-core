@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Localized key-value-pair for productAttr..
@@ -16,33 +16,38 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * @JMS\AccessType("public_method")
  */
 class ProductAttrI18n extends DataModel
 {
     /**
      * @var Identity Reference to productAttr
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productAttrId = null;
 
     /**
      * @var string Attribute key
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $key = '';
 
     /**
      * @var string Locale
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string Attribute value
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $value = '';
+
+
+    public function __construct()
+    {
+        $this->productAttrId = new Identity;
+    }
 
     /**
      * @param  Identity $productAttrId Reference to productAttr

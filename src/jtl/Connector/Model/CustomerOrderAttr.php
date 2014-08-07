@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Monolingual attribute for a customerorder..
@@ -16,33 +16,39 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage CustomerOrder
- * @JMS\AccessType("public_method")
  */
 class CustomerOrderAttr extends DataModel
 {
     /**
      * @var Identity Reference to customerOrder
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $customerOrderId = null;
 
     /**
      * @var Identity Unique customerOrderAttr id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var string Attribute key name
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $key = '';
 
     /**
      * @var string Attribute value
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $value = '';
+
+
+    public function __construct()
+    {
+        $this->customerOrderId = new Identity;
+        $this->id = new Identity;
+    }
 
     /**
      * @param  Identity $customerOrderId Reference to customerOrder

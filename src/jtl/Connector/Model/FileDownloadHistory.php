@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * ToDo: Remove (deprecated).
@@ -16,39 +16,47 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Internal
- * @JMS\AccessType("public_method")
  */
 class FileDownloadHistory extends DataModel
 {
     /**
      * @var Identity 
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $customerId = null;
 
     /**
      * @var Identity 
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $customerOrderId = null;
 
     /**
      * @var Identity 
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $fileDownloadId = null;
 
     /**
      * @var Identity 
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var DateTime 
-	 * @JMS\Type("DateTime")
+     * @Serializer\Type("DateTime")
      */
     protected $created = null;
+
+
+    public function __construct()
+    {
+        $this->customerId = new Identity;
+        $this->customerOrderId = new Identity;
+        $this->fileDownloadId = new Identity;
+        $this->id = new Identity;
+    }
 
     /**
      * @param  Identity $customerId 

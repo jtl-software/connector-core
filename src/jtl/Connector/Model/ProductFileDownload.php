@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Product to FileDownload allocation..
@@ -16,21 +16,27 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * @JMS\AccessType("public_method")
  */
 class ProductFileDownload extends DataModel
 {
     /**
      * @var Identity Reference to fileDownload
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $fileDownloadId = null;
 
     /**
      * @var Identity Reference to product
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productId = null;
+
+
+    public function __construct()
+    {
+        $this->fileDownloadId = new Identity;
+        $this->productId = new Identity;
+    }
 
     /**
      * @param  Identity $fileDownloadId Reference to fileDownload

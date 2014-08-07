@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * A config Item that is displayed in a config Group. Config item can reference to a specific productId to inherit price, name and description. .
@@ -16,117 +16,122 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
- * @JMS\AccessType("public_method")
  */
 class ConfigItem extends DataModel
 {
     /**
      * @var Identity Reference to configGroup
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $configGroupId = null;
 
     /**
      * @var Identity Unique configItem id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Optional reference to product
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productId = null;
 
     /**
      * @var bool Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $ignoreMultiplier = false;
 
     /**
      * @var bool Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $inheritProductName = false;
 
     /**
      * @var bool Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $inheritProductPrice = false;
 
     /**
      * @var double Optional initial / predefined quantity. Default is one (1) quantity piece. 
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $initialQuantity = 0.0;
 
     /**
      * @var bool Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $isPreSelected = false;
 
     /**
      * @var bool Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $isRecommended = false;
 
     /**
      * @var double Maximum allowed quantity. Default 0 for no maximum limit. 
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $maxQuantity = 0.0;
 
     /**
      * @var double Optional minimum quantity required to add configItem. Default 0 for no minimum quantity. 
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $minQuantity = 0.0;
 
     /**
      * @var bool Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $showDiscount = false;
 
     /**
      * @var bool Optional: Show surcharge compared to productId price.
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $showSurcharge = false;
 
     /**
      * @var int Optional sort order number
-	 * @JMS\Type("integer")
+     * @Serializer\Type("integer")
      */
     protected $sort = 0;
 
     /**
      * @var int Config item type. 0: Product, 1: Special
-	 * @JMS\Type("integer")
+     * @Serializer\Type("integer")
      */
     protected $type = 0;
 
     /**
      * @var double Value added tax
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $vat = 0.0;
 
     /**
      * @var \jtl\Connector\Model\ConfigItemPrice[]
-	 * @JMS\Type("array<\jtl\Connector\Model\ConfigItemPrice>")
+     * @Serializer\Type("array<jtl\Connector\Model\ConfigItemPrice>")
      */
     protected $prices = array();
-
     /**
      * @var \jtl\Connector\Model\ConfigItemI18n[]
-	 * @JMS\Type("array<\jtl\Connector\Model\ConfigItemI18n>")
+     * @Serializer\Type("array<jtl\Connector\Model\ConfigItemI18n>")
      */
     protected $i18n = array();
+
+    public function __construct()
+    {
+        $this->configGroupId = new Identity;
+        $this->id = new Identity;
+        $this->productId = new Identity;
+    }
 
     /**
      * @param  Identity $configGroupId Reference to configGroup

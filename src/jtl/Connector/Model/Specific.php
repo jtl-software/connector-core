@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Specific is defined as a characteristic product attribute Like "color". Specifics can be used for after-search-filtering. .
@@ -16,45 +16,48 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Specific
- * @JMS\AccessType("public_method")
  */
 class Specific extends DataModel
 {
     /**
      * @var Identity Unique specific id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var bool Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $isGlobal = false;
 
     /**
      * @var int Optional sort number
-	 * @JMS\Type("integer")
+     * @Serializer\Type("integer")
      */
     protected $sort = 0;
 
     /**
      * @var string Specific type (radio, dropdown, image...)
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $type = '';
 
     /**
      * @var \jtl\Connector\Model\SpecificValue[]
-	 * @JMS\Type("array<\jtl\Connector\Model\SpecificValue>")
+     * @Serializer\Type("array<jtl\Connector\Model\SpecificValue>")
      */
     protected $values = array();
-
     /**
      * @var \jtl\Connector\Model\SpecificI18n[]
-	 * @JMS\Type("array<\jtl\Connector\Model\SpecificI18n>")
+     * @Serializer\Type("array<jtl\Connector\Model\SpecificI18n>")
      */
     protected $i18ns = array();
+
+    public function __construct()
+    {
+        $this->id = new Identity;
+    }
 
     /**
      * @param  Identity $id Unique specific id

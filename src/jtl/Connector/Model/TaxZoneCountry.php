@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * TaxZone to Country Allocation (set in JTL-Wawi ERP)..
@@ -16,27 +16,33 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
- * @JMS\AccessType("public_method")
  */
 class TaxZoneCountry extends DataModel
 {
     /**
      * @var Identity Unique taxZoneCountry id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to taxZone
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $taxZoneId = null;
 
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $countryIso = '';
+
+
+    public function __construct()
+    {
+        $this->id = new Identity;
+        $this->taxZoneId = new Identity;
+    }
 
     /**
      * @param  Identity $id Unique taxZoneCountry id

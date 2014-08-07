@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Order item in customer order..
@@ -16,87 +16,95 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage CustomerOrder
- * @JMS\AccessType("public_method")
  */
 class CustomerOrderItem extends DataModel
 {
     /**
      * @var Identity Optional reference to configItemId (if item is part of a configurable item)
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $configItemId = null;
 
     /**
      * @var Identity Reference to customerOrder
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $customerOrderId = null;
 
     /**
      * @var Identity Unique customerOrderItem id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to product
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productId = null;
 
     /**
      * @var Identity Reference to shippingClass
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $shippingClassId = null;
 
     /**
      * @var string Order item name
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $name = '';
 
     /**
      * @var double Price (net)
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $price = 0.0;
 
     /**
      * @var double Quantity purchased
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $quantity = 0.0;
 
     /**
      * @var string Stock keeping Unit (unique item identifier)
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $sku = '';
 
     /**
      * @var string Item type e.g. "product" or "shipping"
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $type = '';
 
     /**
      * @var string Optional unique Hashsum (if item is part of configurable item
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $unique = '';
 
     /**
      * @var double Value added tax
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $vat = 0.0;
 
     /**
      * @var \jtl\Connector\Model\CustomerOrderItemVariation[]
-	 * @JMS\Type("array<\jtl\Connector\Model\CustomerOrderItemVariation>")
+     * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderItemVariation>")
      */
     protected $variations = array();
+
+    public function __construct()
+    {
+        $this->configItemId = new Identity;
+        $this->customerOrderId = new Identity;
+        $this->id = new Identity;
+        $this->productId = new Identity;
+        $this->shippingClassId = new Identity;
+    }
 
     /**
      * @param  Identity $configItemId Optional reference to configItemId (if item is part of a configurable item)

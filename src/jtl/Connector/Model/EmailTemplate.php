@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Shop3 only.
@@ -16,75 +16,80 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Internal
- * @JMS\AccessType("public_method")
  */
 class EmailTemplate extends DataModel
 {
     /**
      * @var Identity 
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var string 
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $description = '';
 
     /**
      * @var string 
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $emailType = '';
 
     /**
      * @var int 
-	 * @JMS\Type("integer")
+     * @Serializer\Type("integer")
      */
     protected $error = 0;
 
     /**
      * @var string 
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $filename = '';
 
     /**
      * @var bool 
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $isActive = false;
 
     /**
      * @var bool 
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $isAgb = false;
 
     /**
      * @var bool 
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $isOii = false;
 
     /**
      * @var bool 
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $isWrb = false;
 
     /**
      * @var string 
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $moduleId = '';
 
     /**
      * @var string 
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $name = '';
+
+
+    public function __construct()
+    {
+        $this->id = new Identity;
+    }
 
     /**
      * @param  Identity $id 

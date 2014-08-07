@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Customer order properties..
@@ -16,195 +16,198 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage CustomerOrder
- * @JMS\AccessType("public_method")
  */
 class CustomerOrder extends DataModel
 {
     /**
      * @var Identity Reference to billingAddress
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $billingAddressId = null;
 
     /**
      * @var Identity Optional reference to customer. 
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $customerId = null;
 
     /**
      * @var Identity Unique customerOrder id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to shippingAddress
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $shippingAddressId = null;
 
     /**
      * @var string Optional Carrier name
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $carrierName = '';
 
     /**
      * @var DateTime Date of creation
-	 * @JMS\Type("DateTime")
+     * @Serializer\Type("DateTime")
      */
     protected $created = null;
 
     /**
      * @var double Optional customer credit (credit reduces total sum)
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $credit = 0.0;
 
     /**
      * @var string Currency ISO set, when customerOrder was finished
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $currencyIso = '';
 
     /**
      * @var string Optional Estimated delivery date set by ERP System
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $estimatedDeliveryDate = '';
 
     /**
      * @var string Optional customer IP address at the time of checkout. Do not store full IP-Adress (dependent on local laws or regulations)
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $ip = '';
 
     /**
      * @var bool Optional flag, if customerOrder is fetched by ERP System
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $isFetched = false;
 
     /**
      * @var string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string Optional additional note
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $note = '';
 
     /**
      * @var string Optional order number (usually set by ERP System later)
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $orderNumber = '';
 
     /**
      * @var DateTime Payment date
-	 * @JMS\Type("DateTime")
+     * @Serializer\Type("DateTime")
      */
     protected $paymentDate = null;
 
     /**
      * @var string Optional payment module code
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $paymentModuleCode = '';
 
     /**
      * @var DateTime Date from when customer will receive notification to rate order
-	 * @JMS\Type("DateTime")
+     * @Serializer\Type("DateTime")
      */
     protected $ratingNotificationDate = null;
 
     /**
      * @var string Optional session id or session hash
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $session = '';
 
     /**
      * @var DateTime Shipping date
-	 * @JMS\Type("DateTime")
+     * @Serializer\Type("DateTime")
      */
     protected $shippingDate = null;
 
     /**
      * @var string Additional shipping info
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $shippingInfo = '';
 
     /**
      * @var string Identifier code for shippingMethod
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $shippingMethodCode = '';
 
     /**
      * @var string Optional shipping method name
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $shippingMethodName = '';
 
     /**
      * @var string Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $status = '';
 
     /**
      * @var double Total sum to pay
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $totalSum = 0.0;
 
     /**
      * @var string Optional TrackingID (not Tracking URL)
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $tracking = '';
 
     /**
      * @var string Optional Tracking URL
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $trackingURL = '';
 
     /**
      * @var \jtl\Connector\Model\CustomerOrderShippingAddress[]
-	 * @JMS\Type("array<\jtl\Connector\Model\CustomerOrderShippingAddress>")
+     * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderShippingAddress>")
      */
     protected $shippingAddress = array();
-
     /**
      * @var \jtl\Connector\Model\CustomerOrderPaymentInfo[]
-	 * @JMS\Type("array<\jtl\Connector\Model\CustomerOrderPaymentInfo>")
+     * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderPaymentInfo>")
      */
     protected $paymentInfo = array();
-
     /**
      * @var \jtl\Connector\Model\CustomerOrderItem[]
-	 * @JMS\Type("array<\jtl\Connector\Model\CustomerOrderItem>")
+     * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderItem>")
      */
     protected $items = array();
-
     /**
      * @var \jtl\Connector\Model\CustomerOrderBillingAddress[]
-	 * @JMS\Type("array<\jtl\Connector\Model\CustomerOrderBillingAddress>")
+     * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderBillingAddress>")
      */
     protected $billingAddress = array();
-
     /**
      * @var \jtl\Connector\Model\CustomerOrderAttr[]
-	 * @JMS\Type("array<\jtl\Connector\Model\CustomerOrderAttr>")
+     * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderAttr>")
      */
     protected $attributes = array();
+
+    public function __construct()
+    {
+        $this->billingAddressId = new Identity;
+        $this->customerId = new Identity;
+        $this->id = new Identity;
+        $this->shippingAddressId = new Identity;
+    }
 
     /**
      * @param  Identity $billingAddressId Reference to billingAddress

@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * customer order item variation.
@@ -16,57 +16,65 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage CustomerOrder
- * @JMS\AccessType("public_method")
  */
 class CustomerOrderItemVariation extends DataModel
 {
     /**
      * @var Identity Reference to customerOrderItem
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $customerOrderItemId = null;
 
     /**
      * @var Identity Unique customerOrderItemVariation id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to productVariation
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productVariationId = null;
 
     /**
      * @var Identity Reference to productVariationValue
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productVariationValueId = null;
 
     /**
      * @var string Optional custom text value for variation 
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $freeField = '';
 
     /**
      * @var string Variation name e.g. "color"
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $productVariationName = '';
 
     /**
      * @var string Variation value e.g. "red"
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $productVariationValueName = '';
 
     /**
      * @var double Optional extra surcharge (added to item price)
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $surcharge = 0.0;
+
+
+    public function __construct()
+    {
+        $this->customerOrderItemId = new Identity;
+        $this->id = new Identity;
+        $this->productVariationId = new Identity;
+        $this->productVariationValueId = new Identity;
+    }
 
     /**
      * @param  Identity $customerOrderItemId Reference to customerOrderItem

@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Specifies which CustomerGroup is not permitted to view category..
@@ -16,21 +16,27 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Category
- * @JMS\AccessType("public_method")
  */
 class CategoryInvisibility extends DataModel
 {
     /**
      * @var Identity Reference to category to hide from customerGroupId
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $categoryId = null;
 
     /**
      * @var Identity Reference to customerGroup that is not allowed to view categoryId
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $customerGroupId = null;
+
+
+    public function __construct()
+    {
+        $this->categoryId = new Identity;
+        $this->customerGroupId = new Identity;
+    }
 
     /**
      * @param  Identity $categoryId Reference to category to hide from customerGroupId

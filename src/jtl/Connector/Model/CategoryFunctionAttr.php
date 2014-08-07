@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Monolingual category attribute. All properties must be set. .
@@ -16,33 +16,39 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Category
- * @JMS\AccessType("public_method")
  */
 class CategoryFunctionAttr extends DataModel
 {
     /**
      * @var Identity Reference to category
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $categoryId = null;
 
     /**
      * @var Identity Unique categoryFunctionAttr id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var string Attribute key name
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $name = '';
 
     /**
      * @var string Attribute value
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $value = '';
+
+
+    public function __construct()
+    {
+        $this->categoryId = new Identity;
+        $this->id = new Identity;
+    }
 
     /**
      * @param  Identity $categoryId Reference to category

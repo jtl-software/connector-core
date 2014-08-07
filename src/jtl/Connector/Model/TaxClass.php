@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Tax class model (set in JTL-Wawi ERP).
@@ -16,27 +16,32 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
- * @JMS\AccessType("public_method")
  */
 class TaxClass extends DataModel
 {
     /**
      * @var Identity Unique taxClass id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var bool Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $isDefault = false;
 
     /**
      * @var string Optional tax class name
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $name = '';
+
+
+    public function __construct()
+    {
+        $this->id = new Identity;
+    }
 
     /**
      * @param  Identity $id Unique taxClass id

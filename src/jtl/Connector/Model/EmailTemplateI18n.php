@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * .
@@ -16,51 +16,56 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Internal
- * @JMS\AccessType("public_method")
  */
 class EmailTemplateI18n extends DataModel
 {
     /**
      * @var Identity 
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $emailTemplateId = null;
 
     /**
      * @var string 
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $contentHtml = '';
 
     /**
      * @var string 
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $contentText = '';
 
     /**
      * @var string 
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $filename = '';
 
     /**
      * @var string 
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $localeName = '';
 
     /**
      * @var string 
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $pdf = '';
 
     /**
      * @var string 
-	 * @JMS\Type("string")
+     * @Serializer\Type("string")
      */
     protected $subject = '';
+
+
+    public function __construct()
+    {
+        $this->emailTemplateId = new Identity;
+    }
 
     /**
      * @param  Identity $emailTemplateId 

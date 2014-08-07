@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Extra charge for productVariationValue per customerGroup..
@@ -16,27 +16,33 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * @JMS\AccessType("public_method")
  */
 class ProductVariationValueExtraCharge extends DataModel
 {
     /**
      * @var Identity Reference to customerGroup
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $customerGroupId = null;
 
     /**
      * @var Identity Reference to productVariationValue
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $productVariationValueId = null;
 
     /**
      * @var double Extra charge (net)
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $extraChargeNet = 0.0;
+
+
+    public function __construct()
+    {
+        $this->customerGroupId = new Identity;
+        $this->productVariationValueId = new Identity;
+    }
 
     /**
      * @param  Identity $customerGroupId Reference to customerGroup

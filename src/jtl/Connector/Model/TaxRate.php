@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Tax rate model (set in JTL-Wawi ERP)..
@@ -16,39 +16,46 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
- * @JMS\AccessType("public_method")
  */
 class TaxRate extends DataModel
 {
     /**
      * @var Identity Unique taxRate id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to taxClass
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $taxClassId = null;
 
     /**
      * @var Identity Reference to taxZone
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $taxZoneId = null;
 
     /**
      * @var int Optional priority number. Higher value means higher priority
-	 * @JMS\Type("integer")
+     * @Serializer\Type("integer")
      */
     protected $priority = 0;
 
     /**
      * @var double Tax rate value e.g. 19.00
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $rate = 0.0;
+
+
+    public function __construct()
+    {
+        $this->id = new Identity;
+        $this->taxClassId = new Identity;
+        $this->taxZoneId = new Identity;
+    }
 
     /**
      * @param  Identity $id Unique taxRate id

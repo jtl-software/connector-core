@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * A category with sort number, link to parent category and level.
@@ -16,75 +16,75 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Category
- * @JMS\AccessType("public_method")
  */
 class Category extends DataModel
 {
     /**
      * @var Identity Unique category id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $id = null;
 
     /**
      * @var Identity Optional reference to parent category id
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $parentCategoryId = null;
 
     /**
      * @var bool 
-	 * @JMS\Type("boolean")
+     * @Serializer\Type("boolean")
      */
     protected $isActive = false;
 
     /**
      * @var int Optional category level (default 1 for first level)
-	 * @JMS\Type("integer")
+     * @Serializer\Type("integer")
      */
     protected $level = 0;
 
     /**
      * @var int Optional sort order number
-	 * @JMS\Type("integer")
+     * @Serializer\Type("integer")
      */
     protected $sort = 0;
 
     /**
      * @var \jtl\Connector\Model\ParentCategory[]
-	 * @JMS\Type("array<\jtl\Connector\Model\ParentCategory>")
+     * @Serializer\Type("array<jtl\Connector\Model\ParentCategory>")
      */
     protected $parent = array();
-
     /**
      * @var \jtl\Connector\Model\CategoryInvisibility[]
-	 * @JMS\Type("array<\jtl\Connector\Model\CategoryInvisibility>")
+     * @Serializer\Type("array<jtl\Connector\Model\CategoryInvisibility>")
      */
     protected $invisibilities = array();
-
     /**
      * @var \jtl\Connector\Model\CategoryI18n[]
-	 * @JMS\Type("array<\jtl\Connector\Model\CategoryI18n>")
+     * @Serializer\Type("array<jtl\Connector\Model\CategoryI18n>")
      */
     protected $i18ns = array();
-
     /**
      * @var \jtl\Connector\Model\CategoryCustomerGroup[]
-	 * @JMS\Type("array<\jtl\Connector\Model\CategoryCustomerGroup>")
+     * @Serializer\Type("array<jtl\Connector\Model\CategoryCustomerGroup>")
      */
     protected $customerGroups = array();
-
     /**
      * @var \jtl\Connector\Model\ChildCategory[]
-	 * @JMS\Type("array<\jtl\Connector\Model\ChildCategory>")
+     * @Serializer\Type("array<jtl\Connector\Model\ChildCategory>")
      */
     protected $children = array();
-
     /**
      * @var \jtl\Connector\Model\CategoryAttr[]
-	 * @JMS\Type("array<\jtl\Connector\Model\CategoryAttr>")
+     * @Serializer\Type("array<jtl\Connector\Model\CategoryAttr>")
      */
     protected $attributes = array();
+
+    public function __construct()
+    {
+        $this->id = new Identity;
+        $this->parentCategoryId = new Identity;
+    }
 
     /**
      * @param  Identity $id Unique category id

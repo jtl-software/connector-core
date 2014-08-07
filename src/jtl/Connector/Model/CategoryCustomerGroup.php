@@ -8,7 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Link customergroup with category. Set optional discount on category for customergroup. .
@@ -16,27 +16,33 @@ use JMS\Serializer\Annotation as JMS;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Category
- * @JMS\AccessType("public_method")
  */
 class CategoryCustomerGroup extends DataModel
 {
     /**
      * @var Identity Reference to category
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $categoryId = null;
 
     /**
      * @var Identity Reference to customerGroup
-	 * @JMS\Type("\jtl\Connector\Model\Identity")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      */
     protected $customerGroupId = null;
 
     /**
      * @var double Optional discount on products in specified categoryId for  customerGroupId
-	 * @JMS\Type("double")
+     * @Serializer\Type("double")
      */
     protected $discount = 0.0;
+
+
+    public function __construct()
+    {
+        $this->categoryId = new Identity;
+        $this->customerGroupId = new Identity;
+    }
 
     /**
      * @param  Identity $categoryId Reference to category
