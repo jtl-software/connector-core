@@ -280,9 +280,14 @@ class Application extends CoreApplication
     protected function deserializeRequestParams(RequestPacket &$requestpacket)
     {
         $method = RpcMethod::splitMethod($requestpacket->getMethod());
-        $namespace = 'jtl\\Connector\\Model\\' . ucfirst($method->getController());
-        $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
-        $requestpacket->setParams($serializer->deserialize($requestpacket->getParams(), $namespace, 'json'));
+
+        if ($method->getAction() == \jtl\Core\Rpc\Method::ACTION_PUSH) {
+            $namespace = 'jtl\\Connector\\Model\\' . ucfirst($method->getController());
+            if (class_exists("\\{$namespace}")) {
+                $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
+                $requestpacket->setParams($serializer->deserialize($requestpacket->getParams(), $namespace, 'json'));
+            }
+        }
     }
 
     /**
