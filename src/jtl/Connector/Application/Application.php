@@ -282,7 +282,7 @@ class Application extends CoreApplication
         $method = RpcMethod::splitMethod($requestpacket->getMethod());
 
         if ($method->getAction() == \jtl\Core\Rpc\Method::ACTION_PUSH) {
-            $namespace = 'jtl\\Connector\\Model\\' . ucfirst($method->getController());
+            $namespace = 'jtl\\Connector\\Model\\' . RpcMethod::buildController($method->getController());
             if (class_exists("\\{$namespace}")) {
                 $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
                 $requestpacket->setParams($serializer->deserialize($requestpacket->getParams(), $namespace, 'json'));
