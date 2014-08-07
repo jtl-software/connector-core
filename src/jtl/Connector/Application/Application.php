@@ -111,8 +111,6 @@ class Application extends CoreApplication
      */
     protected function execute(RequestPacket $requestpacket, Config $config, $rpcmode, $imagePath = null)
     {
-        $this->deserializeRequestParams($requestpacket);
-
         if (!RpcMethod::isMethod($requestpacket->getMethod())) {
             throw new RpcException("Invalid Request", -32600);
         }
@@ -137,6 +135,8 @@ class Application extends CoreApplication
                 }
             }
         }
+
+        $this->deserializeRequestParams($requestpacket);
 
         // Endpoint Connector
         $exists = false;
