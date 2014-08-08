@@ -24,7 +24,7 @@ class Connector extends Singleton implements IEndpointConnector
 {
     protected $config;
     protected $method;
-    protected $modelNamespace;
+    protected $modelNamespace = 'jtl\Connector\Model';
 
     /**
      * Setter connector config.
