@@ -284,7 +284,13 @@ class Application extends CoreApplication
         if ($method->getAction() == \jtl\Core\Rpc\Method::ACTION_PUSH) {
             $namespace = 'jtl\\Connector\\Model\\' . RpcMethod::buildController($method->getController());
             if (class_exists("\\{$namespace}")) {
-                $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
+                $serializer = \JMS\Serializer\SerializerBuilder::create()
+                    ->addDefaultHandlers()
+                    ->configureHandlers(function(\JMS\Serializer\Handler\HandlerRegistry $registry) {
+                        $registry->registerSubscribingHandler(new \jtl\Connector\Serializer\Handler\IdentityHandler());
+                    })
+                    ->build();
+
                 $requestpacket->setParams($serializer->deserialize($requestpacket->getParams(), $namespace, 'json'));
             }
         }
