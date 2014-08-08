@@ -22,9 +22,9 @@ use \jtl\Core\Rpc\Method;
  */
 class Connector extends Singleton implements IEndpointConnector
 {
-    protected $_config;
-    protected $_method;
-    protected $_modelNamespace;
+    protected $config;
+    protected $method;
+    protected $modelNamespace;
 
     /**
      * Setter connector config.
@@ -33,7 +33,7 @@ class Connector extends Singleton implements IEndpointConnector
      */
     public function setConfig(Config $config)
     {
-        $this->_config = $config;
+        $this->config = $config;
     }
 
     /**
@@ -44,10 +44,10 @@ class Connector extends Singleton implements IEndpointConnector
      */
     public function getConfig()
     {
-        if (empty($this->_config)) {
+        if (empty($this->config)) {
             throw new ConnectorException('The connector configuration is not set!');
         }
-        return $this->_config;
+        return $this->config;
     }
     
     /**
@@ -58,7 +58,7 @@ class Connector extends Singleton implements IEndpointConnector
      */
     public function setMethod(Method $method)
     {
-        $this->_method = $method;
+        $this->method = $method;
         return $this;
     }
     
@@ -69,7 +69,7 @@ class Connector extends Singleton implements IEndpointConnector
      */
     public function getMethod()
     {
-        return $this->_method;
+        return $this->method;
     }
 
     /**
@@ -80,7 +80,11 @@ class Connector extends Singleton implements IEndpointConnector
      */
     public function setModelNamespace($modelNamespace)
     {
-        $this->_modelNamespace = $modelNamespace;
+        if (!is_string($modelNamespace) || $modelNamespace[strlen($modelNamespace) - 1] == '\\' || $modelNamespace[0] == '\\') {
+            throw new \InvalidArgumentException(sprintf('Wrong Namespace (%s) syntax. Example: jtl\Connector\Model', $modelNamespace));
+        }
+
+        $this->modelNamespace = $modelNamespace;
         return $this;
     }
     
@@ -91,7 +95,7 @@ class Connector extends Singleton implements IEndpointConnector
      */
     public function getModelNamespace()
     {
-        return $this->_modelNamespace;
+        return $this->modelNamespace;
     }
     
     /**
@@ -105,10 +109,10 @@ class Connector extends Singleton implements IEndpointConnector
         
         $class = "\\jtl\\Connector\\Controller\\{$controller}";
         if (class_exists($class)) {
-            $this->_controller = $class::getInstance();
-            $this->_action = $this->getMethod()->getAction();
+            $this->controller = $class::getInstance();
+            $this->action = $this->getMethod()->getAction();
         
-            return method_exists($this->_controller, $this->_action);
+            return method_exists($this->controller, $this->action);
         }
         
         return false;
@@ -121,9 +125,9 @@ class Connector extends Singleton implements IEndpointConnector
      */
     public function handle(RequestPacket $requestpacket)
     {        
-        $this->_controller->setConfig($this->getConfig());
-        $this->_controller->setMethod($this->getMethod());
+        $this->controller->setConfig($this->getConfig());
+        $this->controller->setMethod($this->getMethod());
         
-        return $this->_controller->{$this->_action}($requestpacket->getParams());
+        return $this->controller->{$this->action}($requestpacket->getParams());
     }
 }

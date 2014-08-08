@@ -44,6 +44,7 @@ abstract class DataModel extends CoreModel
     /**
      * @var string
      * @Serializer\type("string")
+     * @Serializer\Accessor(getter="setAction",setter="getAction")
      * @Serializer\Exclude
      */
     protected $action = '';

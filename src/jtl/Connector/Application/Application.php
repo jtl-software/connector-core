@@ -136,11 +136,11 @@ class Application extends CoreApplication
             }
         }
 
-        $this->deserializeRequestParams($requestpacket);
-
         // Endpoint Connector
         $exists = false;
         foreach (self::$_connectors as $endpointconnector) {
+            $this->deserializeRequestParams($requestpacket, $endpointconnector->getModelNamespace());
+
             $endpointconnector->setMethod($method);
             if ($endpointconnector->canHandle()) {
                 $endpointconnector->setConfig($config);
@@ -277,12 +277,12 @@ class Application extends CoreApplication
         Response::sendAll($jtlrpcreponses);
     }
 
-    protected function deserializeRequestParams(RequestPacket &$requestpacket)
+    protected function deserializeRequestParams(RequestPacket &$requestpacket, $modelNamespace)
     {
         $method = RpcMethod::splitMethod($requestpacket->getMethod());
 
         if ($method->getAction() == \jtl\Core\Rpc\Method::ACTION_PUSH) {
-            $namespace = 'jtl\\Connector\\Model\\' . RpcMethod::buildController($method->getController());
+            $namespace = $modelNamespace . '\\' . RpcMethod::buildController($method->getController());
             if (class_exists("\\{$namespace}")) {
                 $serializer = \JMS\Serializer\SerializerBuilder::create()
                     ->addDefaultHandlers()
