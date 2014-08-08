@@ -156,6 +156,7 @@ class ConfigItem extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $prices = array();
+
     /**
      * @var \jtl\Connector\Model\ConfigItemI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ConfigItemI18n>")
@@ -163,6 +164,7 @@ class ConfigItem extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $i18n = array();
+
 
     public function __construct()
     {

@@ -53,6 +53,7 @@ class SpecificValue extends DataModel
      */
     protected $i18ns = array();
 
+
     public function __construct()
     {
         $this->id = new Identity;

@@ -77,6 +77,7 @@ class DeliveryNote extends DataModel
      */
     protected $items = array();
 
+
     public function __construct()
     {
         $this->customerOrderId = new Identity;

@@ -53,6 +53,7 @@ class CustomerGroupI18n extends DataModel
      */
     protected $customerGroup = array();
 
+
     public function __construct()
     {
         $this->customerGroupId = new Identity;
