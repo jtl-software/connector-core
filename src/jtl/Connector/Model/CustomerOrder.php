@@ -16,188 +16,252 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage CustomerOrder
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class CustomerOrder extends DataModel
 {
     /**
      * @var Identity Reference to billingAddress
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("billingAddressId")
+     * @Serializer\Accessor(getter="getBillingAddressId",setter="setBillingAddressId")
      */
     protected $billingAddressId = null;
 
     /**
      * @var Identity Optional reference to customer. 
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerId")
+     * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
      */
     protected $customerId = null;
 
     /**
      * @var Identity Unique customerOrder id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to shippingAddress
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("shippingAddressId")
+     * @Serializer\Accessor(getter="getShippingAddressId",setter="setShippingAddressId")
      */
     protected $shippingAddressId = null;
 
     /**
      * @var string Optional Carrier name
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("carrierName")
+     * @Serializer\Accessor(getter="getCarrierName",setter="setCarrierName")
      */
     protected $carrierName = '';
 
     /**
      * @var DateTime Date of creation
      * @Serializer\Type("DateTime")
+     * @Serializer\SerializedName("created")
+     * @Serializer\Accessor(getter="getCreated",setter="setCreated")
      */
     protected $created = null;
 
     /**
      * @var double Optional customer credit (credit reduces total sum)
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("credit")
+     * @Serializer\Accessor(getter="getCredit",setter="setCredit")
      */
     protected $credit = 0.0;
 
     /**
      * @var string Currency ISO set, when customerOrder was finished
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("currencyIso")
+     * @Serializer\Accessor(getter="getCurrencyIso",setter="setCurrencyIso")
      */
     protected $currencyIso = '';
 
     /**
      * @var string Optional Estimated delivery date set by ERP System
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("estimatedDeliveryDate")
+     * @Serializer\Accessor(getter="getEstimatedDeliveryDate",setter="setEstimatedDeliveryDate")
      */
     protected $estimatedDeliveryDate = '';
 
     /**
      * @var string Optional customer IP address at the time of checkout. Do not store full IP-Adress (dependent on local laws or regulations)
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("ip")
+     * @Serializer\Accessor(getter="getIp",setter="setIp")
      */
     protected $ip = '';
 
     /**
      * @var bool Optional flag, if customerOrder is fetched by ERP System
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("isFetched")
+     * @Serializer\Accessor(getter="getIsFetched",setter="setIsFetched")
      */
     protected $isFetched = false;
 
     /**
      * @var string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("localeName")
+     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
      */
     protected $localeName = '';
 
     /**
      * @var string Optional additional note
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("note")
+     * @Serializer\Accessor(getter="getNote",setter="setNote")
      */
     protected $note = '';
 
     /**
      * @var string Optional order number (usually set by ERP System later)
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("orderNumber")
+     * @Serializer\Accessor(getter="getOrderNumber",setter="setOrderNumber")
      */
     protected $orderNumber = '';
 
     /**
      * @var DateTime Payment date
      * @Serializer\Type("DateTime")
+     * @Serializer\SerializedName("paymentDate")
+     * @Serializer\Accessor(getter="getPaymentDate",setter="setPaymentDate")
      */
     protected $paymentDate = null;
 
     /**
      * @var string Optional payment module code
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("paymentModuleCode")
+     * @Serializer\Accessor(getter="getPaymentModuleCode",setter="setPaymentModuleCode")
      */
     protected $paymentModuleCode = '';
 
     /**
      * @var DateTime Date from when customer will receive notification to rate order
      * @Serializer\Type("DateTime")
+     * @Serializer\SerializedName("ratingNotificationDate")
+     * @Serializer\Accessor(getter="getRatingNotificationDate",setter="setRatingNotificationDate")
      */
     protected $ratingNotificationDate = null;
 
     /**
      * @var string Optional session id or session hash
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("session")
+     * @Serializer\Accessor(getter="getSession",setter="setSession")
      */
     protected $session = '';
 
     /**
      * @var DateTime Shipping date
      * @Serializer\Type("DateTime")
+     * @Serializer\SerializedName("shippingDate")
+     * @Serializer\Accessor(getter="getShippingDate",setter="setShippingDate")
      */
     protected $shippingDate = null;
 
     /**
      * @var string Additional shipping info
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("shippingInfo")
+     * @Serializer\Accessor(getter="getShippingInfo",setter="setShippingInfo")
      */
     protected $shippingInfo = '';
 
     /**
      * @var string Identifier code for shippingMethod
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("shippingMethodCode")
+     * @Serializer\Accessor(getter="getShippingMethodCode",setter="setShippingMethodCode")
      */
     protected $shippingMethodCode = '';
 
     /**
      * @var string Optional shipping method name
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("shippingMethodName")
+     * @Serializer\Accessor(getter="getShippingMethodName",setter="setShippingMethodName")
      */
     protected $shippingMethodName = '';
 
     /**
      * @var string Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("status")
+     * @Serializer\Accessor(getter="getStatus",setter="setStatus")
      */
     protected $status = '';
 
     /**
      * @var double Total sum to pay
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("totalSum")
+     * @Serializer\Accessor(getter="getTotalSum",setter="setTotalSum")
      */
     protected $totalSum = 0.0;
 
     /**
      * @var string Optional TrackingID (not Tracking URL)
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("tracking")
+     * @Serializer\Accessor(getter="getTracking",setter="setTracking")
      */
     protected $tracking = '';
 
     /**
      * @var string Optional Tracking URL
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("trackingURL")
+     * @Serializer\Accessor(getter="getTrackingURL",setter="setTrackingURL")
      */
     protected $trackingURL = '';
 
     /**
      * @var \jtl\Connector\Model\CustomerOrderShippingAddress[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderShippingAddress>")
+     * @Serializer\SerializedName("shippingAddress")
+     * @Serializer\AccessType("reflection")
      */
     protected $shippingAddress = array();
     /**
      * @var \jtl\Connector\Model\CustomerOrderPaymentInfo[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderPaymentInfo>")
+     * @Serializer\SerializedName("paymentInfo")
+     * @Serializer\AccessType("reflection")
      */
     protected $paymentInfo = array();
     /**
      * @var \jtl\Connector\Model\CustomerOrderItem[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderItem>")
+     * @Serializer\SerializedName("items")
+     * @Serializer\AccessType("reflection")
      */
     protected $items = array();
     /**
      * @var \jtl\Connector\Model\CustomerOrderBillingAddress[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderBillingAddress>")
+     * @Serializer\SerializedName("billingAddress")
+     * @Serializer\AccessType("reflection")
      */
     protected $billingAddress = array();
     /**
      * @var \jtl\Connector\Model\CustomerOrderAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderAttr>")
+     * @Serializer\SerializedName("attributes")
+     * @Serializer\AccessType("reflection")
      */
     protected $attributes = array();
 

@@ -16,48 +16,64 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage DeliveryNote
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class Shipment extends DataModel
 {
     /**
      * @var Identity Reference to deliveryNote
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("deliveryNoteId")
+     * @Serializer\Accessor(getter="getDeliveryNoteId",setter="setDeliveryNoteId")
      */
     protected $deliveryNoteId = null;
 
     /**
      * @var Identity Unique shipment id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var string Carrier name
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("carrierName")
+     * @Serializer\Accessor(getter="getCarrierName",setter="setCarrierName")
      */
     protected $carrierName = '';
 
     /**
      * @var DateTime Creation date
      * @Serializer\Type("DateTime")
+     * @Serializer\SerializedName("created")
+     * @Serializer\Accessor(getter="getCreated",setter="setCreated")
      */
     protected $created = null;
 
     /**
      * @var string Optional Identcode
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("identCode")
+     * @Serializer\Accessor(getter="getIdentCode",setter="setIdentCode")
      */
     protected $identCode = '';
 
     /**
      * @var string Optional shipment note
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("note")
+     * @Serializer\Accessor(getter="getNote",setter="setNote")
      */
     protected $note = '';
 
     /**
      * @var string Optional Tracking URL
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("trackingURL")
+     * @Serializer\Accessor(getter="getTrackingURL",setter="setTrackingURL")
      */
     protected $trackingURL = '';
 

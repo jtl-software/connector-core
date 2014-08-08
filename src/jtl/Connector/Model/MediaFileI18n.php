@@ -16,30 +16,40 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class MediaFileI18n extends DataModel
 {
     /**
      * @var Identity Reference to mediaFile
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("mediaFileId")
+     * @Serializer\Accessor(getter="getMediaFileId",setter="setMediaFileId")
      */
     protected $mediaFileId = null;
 
     /**
      * @var string Locale specific description
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("description")
+     * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
 
     /**
      * @var string Locale
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("localeName")
+     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
      */
     protected $localeName = '';
 
     /**
      * @var string Locale specific name
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("name")
+     * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
 

@@ -16,30 +16,40 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class ConfigItemI18n extends DataModel
 {
     /**
      * @var Identity Reference to configItem
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("configItemId")
+     * @Serializer\Accessor(getter="getConfigItemId",setter="setConfigItemId")
      */
     protected $configItemId = null;
 
     /**
      * @var string Description (html). Will be ignored, if inheritProductName==true
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("description")
+     * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
 
     /**
      * @var string Locale
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("localeName")
+     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
      */
     protected $localeName = '';
 
     /**
      * @var string Config item name. Will be ignored if inheritProductName==true
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("name")
+     * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
 

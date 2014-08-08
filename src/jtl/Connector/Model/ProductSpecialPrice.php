@@ -16,60 +16,80 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class ProductSpecialPrice extends DataModel
 {
     /**
      * @var Identity Unique productSpecialPrice id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productId")
+     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
 
     /**
      * @var DateTime Optional: Activate special price from date
      * @Serializer\Type("DateTime")
+     * @Serializer\SerializedName("activeFrom")
+     * @Serializer\Accessor(getter="getActiveFrom",setter="setActiveFrom")
      */
     protected $activeFrom = null;
 
     /**
      * @var DateTime Optional: Special price active until date
      * @Serializer\Type("DateTime")
+     * @Serializer\SerializedName("activeUntil")
+     * @Serializer\Accessor(getter="getActiveUntil",setter="setActiveUntil")
      */
     protected $activeUntil = null;
 
     /**
      * @var bool Optional: Consider activeFrom/activeUntil date range. If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("considerDateLimit")
+     * @Serializer\Accessor(getter="getConsiderDateLimit",setter="setConsiderDateLimit")
      */
     protected $considerDateLimit = false;
 
     /**
      * @var bool Optional: Consider stockLimit value. If true, specialPrice will be only active until product stockLevel is greater or equal stockLimit.
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("considerStockLimit")
+     * @Serializer\Accessor(getter="getConsiderStockLimit",setter="setConsiderStockLimit")
      */
     protected $considerStockLimit = false;
 
     /**
      * @var bool Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match. 
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("isActive")
+     * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
      */
     protected $isActive = false;
 
     /**
      * @var double Optional: SpecialPrice active until stock level quantity
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("stockLimit")
+     * @Serializer\Accessor(getter="getStockLimit",setter="setStockLimit")
      */
     protected $stockLimit = 0.0;
 
     /**
      * @var \jtl\Connector\Model\SpecialPrice[]
      * @Serializer\Type("array<jtl\Connector\Model\SpecialPrice>")
+     * @Serializer\SerializedName("specialPrices")
+     * @Serializer\AccessType("reflection")
      */
     protected $specialPrices = array();
 

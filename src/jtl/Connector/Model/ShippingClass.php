@@ -16,18 +16,24 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class ShippingClass extends DataModel
 {
     /**
      * @var Identity Unique shippingClass id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var string Optional (internal) Shipping class name
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("name")
+     * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
 

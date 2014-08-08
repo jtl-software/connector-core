@@ -16,54 +16,72 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Specific
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class SpecificValueI18n extends DataModel
 {
     /**
      * @var Identity Reference to specificValue
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("specificValueId")
+     * @Serializer\Accessor(getter="getSpecificValueId",setter="setSpecificValueId")
      */
     protected $specificValueId = null;
 
     /**
      * @var string Optional localized description
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("description")
+     * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
 
     /**
      * @var string locale
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("localeName")
+     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
      */
     protected $localeName = '';
 
     /**
      * @var string Optional localized meta description value
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("metaDescription")
+     * @Serializer\Accessor(getter="getMetaDescription",setter="setMetaDescription")
      */
     protected $metaDescription = '';
 
     /**
      * @var string Optional localized meta keywords value
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("metaKeywords")
+     * @Serializer\Accessor(getter="getMetaKeywords",setter="setMetaKeywords")
      */
     protected $metaKeywords = '';
 
     /**
      * @var string Optional localized title tag value
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("titleTag")
+     * @Serializer\Accessor(getter="getTitleTag",setter="setTitleTag")
      */
     protected $titleTag = '';
 
     /**
      * @var string Optional localized URL path
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("urlPath")
+     * @Serializer\Accessor(getter="getUrlPath",setter="setUrlPath")
      */
     protected $urlPath = '';
 
     /**
      * @var string Localized value
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("value")
+     * @Serializer\Accessor(getter="getValue",setter="setValue")
      */
     protected $value = '';
 

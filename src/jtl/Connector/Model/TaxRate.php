@@ -16,36 +16,48 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class TaxRate extends DataModel
 {
     /**
      * @var Identity Unique taxRate id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to taxClass
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("taxClassId")
+     * @Serializer\Accessor(getter="getTaxClassId",setter="setTaxClassId")
      */
     protected $taxClassId = null;
 
     /**
      * @var Identity Reference to taxZone
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("taxZoneId")
+     * @Serializer\Accessor(getter="getTaxZoneId",setter="setTaxZoneId")
      */
     protected $taxZoneId = null;
 
     /**
      * @var int Optional priority number. Higher value means higher priority
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("priority")
+     * @Serializer\Accessor(getter="getPriority",setter="setPriority")
      */
     protected $priority = 0;
 
     /**
      * @var double Tax rate value e.g. 19.00
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("rate")
+     * @Serializer\Accessor(getter="getRate",setter="setRate")
      */
     protected $rate = 0.0;
 

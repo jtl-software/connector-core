@@ -16,54 +16,72 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class ConfigGroup extends DataModel
 {
     /**
      * @var Identity Unique configGroup id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var string Optional internal comment to differantiate config groups by comment name
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("comment")
+     * @Serializer\Accessor(getter="getComment",setter="setComment")
      */
     protected $comment = '';
 
     /**
      * @var string Optional image file path
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("imagePath")
+     * @Serializer\Accessor(getter="getImagePath",setter="setImagePath")
      */
     protected $imagePath = '';
 
     /**
      * @var int Optional maximum number allowed selections. Default 0 for no maximum limitation.
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("maximumSelection")
+     * @Serializer\Accessor(getter="getMaximumSelection",setter="setMaximumSelection")
      */
     protected $maximumSelection = 0;
 
     /**
      * @var int Optional minimum number required selections. Default 0 for no minimum requirement. 
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("minimumSelection")
+     * @Serializer\Accessor(getter="getMinimumSelection",setter="setMinimumSelection")
      */
     protected $minimumSelection = 0;
 
     /**
      * @var int Optional sort order number
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("sort")
+     * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
 
     /**
      * @var int Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("type")
+     * @Serializer\Accessor(getter="getType",setter="setType")
      */
     protected $type = 0;
 
     /**
      * @var \jtl\Connector\Model\ConfigGroupI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ConfigGroupI18n>")
+     * @Serializer\SerializedName("i18n")
+     * @Serializer\AccessType("reflection")
      */
     protected $i18n = array();
 

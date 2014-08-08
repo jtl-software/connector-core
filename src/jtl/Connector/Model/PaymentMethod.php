@@ -16,54 +16,72 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Internal
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class PaymentMethod extends DataModel
 {
     /**
      * @var Identity Unique paymentMethod id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var Identity Payment module identifier
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("moduleId")
+     * @Serializer\Accessor(getter="getModuleId",setter="setModuleId")
      */
     protected $moduleId = null;
 
     /**
      * @var bool Optional: Payment method active? Some payment methods have to be activated by validation or by vendor
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("isActive")
+     * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
      */
     protected $isActive = false;
 
     /**
      * @var bool Optional flag if system requirements and validation fit to use paymentMethod
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("isUseable")
+     * @Serializer\Accessor(getter="getIsUseable",setter="setIsUseable")
      */
     protected $isUseable = false;
 
     /**
      * @var string Optional image (path or URL) for Paymentmethod
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("picture")
+     * @Serializer\Accessor(getter="getPicture",setter="setPicture")
      */
     protected $picture = '';
 
     /**
      * @var int Sort number
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("sort")
+     * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
 
     /**
      * @var bool Optional: Send mail on Payment confirmation to customer?
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("useMail")
+     * @Serializer\Accessor(getter="getUseMail",setter="setUseMail")
      */
     protected $useMail = false;
 
     /**
      * @var string Optional vendor name (e.g. "Paypal")
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("vendor")
+     * @Serializer\Accessor(getter="getVendor",setter="setVendor")
      */
     protected $vendor = '';
 

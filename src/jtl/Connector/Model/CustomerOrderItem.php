@@ -16,84 +16,112 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage CustomerOrder
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class CustomerOrderItem extends DataModel
 {
     /**
      * @var Identity Optional reference to configItemId (if item is part of a configurable item)
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("configItemId")
+     * @Serializer\Accessor(getter="getConfigItemId",setter="setConfigItemId")
      */
     protected $configItemId = null;
 
     /**
      * @var Identity Reference to customerOrder
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerOrderId")
+     * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
      */
     protected $customerOrderId = null;
 
     /**
      * @var Identity Unique customerOrderItem id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productId")
+     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
 
     /**
      * @var Identity Reference to shippingClass
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("shippingClassId")
+     * @Serializer\Accessor(getter="getShippingClassId",setter="setShippingClassId")
      */
     protected $shippingClassId = null;
 
     /**
      * @var string Order item name
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("name")
+     * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
 
     /**
      * @var double Price (net)
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("price")
+     * @Serializer\Accessor(getter="getPrice",setter="setPrice")
      */
     protected $price = 0.0;
 
     /**
      * @var double Quantity purchased
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("quantity")
+     * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
      */
     protected $quantity = 0.0;
 
     /**
      * @var string Stock keeping Unit (unique item identifier)
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("sku")
+     * @Serializer\Accessor(getter="getSku",setter="setSku")
      */
     protected $sku = '';
 
     /**
      * @var string Item type e.g. "product" or "shipping"
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("type")
+     * @Serializer\Accessor(getter="getType",setter="setType")
      */
     protected $type = '';
 
     /**
      * @var string Optional unique Hashsum (if item is part of configurable item
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("unique")
+     * @Serializer\Accessor(getter="getUnique",setter="setUnique")
      */
     protected $unique = '';
 
     /**
      * @var double Value added tax
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("vat")
+     * @Serializer\Accessor(getter="getVat",setter="setVat")
      */
     protected $vat = 0.0;
 
     /**
      * @var \jtl\Connector\Model\CustomerOrderItemVariation[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderItemVariation>")
+     * @Serializer\SerializedName("variations")
+     * @Serializer\AccessType("reflection")
      */
     protected $variations = array();
 

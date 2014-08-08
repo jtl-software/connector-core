@@ -16,67 +16,91 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Category
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class Category extends DataModel
 {
     /**
      * @var Identity Unique category id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var Identity Optional reference to parent category id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("parentCategoryId")
+     * @Serializer\Accessor(getter="getParentCategoryId",setter="setParentCategoryId")
      */
     protected $parentCategoryId = null;
 
     /**
      * @var bool 
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("isActive")
+     * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
      */
     protected $isActive = false;
 
     /**
      * @var int Optional category level (default 1 for first level)
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("level")
+     * @Serializer\Accessor(getter="getLevel",setter="setLevel")
      */
     protected $level = 0;
 
     /**
      * @var int Optional sort order number
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("sort")
+     * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
 
     /**
      * @var \jtl\Connector\Model\ParentCategory[]
      * @Serializer\Type("array<jtl\Connector\Model\ParentCategory>")
+     * @Serializer\SerializedName("parent")
+     * @Serializer\AccessType("reflection")
      */
     protected $parent = array();
     /**
      * @var \jtl\Connector\Model\CategoryInvisibility[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryInvisibility>")
+     * @Serializer\SerializedName("invisibilities")
+     * @Serializer\AccessType("reflection")
      */
     protected $invisibilities = array();
     /**
      * @var \jtl\Connector\Model\CategoryI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryI18n>")
+     * @Serializer\SerializedName("i18ns")
+     * @Serializer\AccessType("reflection")
      */
     protected $i18ns = array();
     /**
      * @var \jtl\Connector\Model\CategoryCustomerGroup[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryCustomerGroup>")
+     * @Serializer\SerializedName("customerGroups")
+     * @Serializer\AccessType("reflection")
      */
     protected $customerGroups = array();
     /**
      * @var \jtl\Connector\Model\ChildCategory[]
      * @Serializer\Type("array<jtl\Connector\Model\ChildCategory>")
+     * @Serializer\SerializedName("children")
+     * @Serializer\AccessType("reflection")
      */
     protected $children = array();
     /**
      * @var \jtl\Connector\Model\CategoryAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryAttr>")
+     * @Serializer\SerializedName("attributes")
+     * @Serializer\AccessType("reflection")
      */
     protected $attributes = array();
 

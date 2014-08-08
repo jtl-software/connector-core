@@ -16,24 +16,32 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class ProductVariationI18n extends DataModel
 {
     /**
      * @var Identity Reference to productVariation
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productVariationId")
+     * @Serializer\Accessor(getter="getProductVariationId",setter="setProductVariationId")
      */
     protected $productVariationId = null;
 
     /**
      * @var string Locale
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("localeName")
+     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
      */
     protected $localeName = '';
 
     /**
      * @var string Locale specific variation name
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("name")
+     * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
 

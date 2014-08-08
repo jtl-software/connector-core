@@ -16,30 +16,40 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Category
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class CategoryAttrI18n extends DataModel
 {
     /**
      * @var Identity Reference to categoryAttr
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("categoryAttrId")
+     * @Serializer\Accessor(getter="getCategoryAttrId",setter="setCategoryAttrId")
      */
     protected $categoryAttrId = null;
 
     /**
      * @var string Attribute key
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("key")
+     * @Serializer\Accessor(getter="getKey",setter="setKey")
      */
     protected $key = '';
 
     /**
      * @var string Locale
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("localeName")
+     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
      */
     protected $localeName = '';
 
     /**
      * @var string Attribute value
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("value")
+     * @Serializer\Accessor(getter="getValue",setter="setValue")
      */
     protected $value = '';
 

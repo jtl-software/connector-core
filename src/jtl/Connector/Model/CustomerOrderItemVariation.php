@@ -16,54 +16,72 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage CustomerOrder
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class CustomerOrderItemVariation extends DataModel
 {
     /**
      * @var Identity Reference to customerOrderItem
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerOrderItemId")
+     * @Serializer\Accessor(getter="getCustomerOrderItemId",setter="setCustomerOrderItemId")
      */
     protected $customerOrderItemId = null;
 
     /**
      * @var Identity Unique customerOrderItemVariation id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to productVariation
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productVariationId")
+     * @Serializer\Accessor(getter="getProductVariationId",setter="setProductVariationId")
      */
     protected $productVariationId = null;
 
     /**
      * @var Identity Reference to productVariationValue
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productVariationValueId")
+     * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
      */
     protected $productVariationValueId = null;
 
     /**
      * @var string Optional custom text value for variation 
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("freeField")
+     * @Serializer\Accessor(getter="getFreeField",setter="setFreeField")
      */
     protected $freeField = '';
 
     /**
      * @var string Variation name e.g. "color"
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("productVariationName")
+     * @Serializer\Accessor(getter="getProductVariationName",setter="setProductVariationName")
      */
     protected $productVariationName = '';
 
     /**
      * @var string Variation value e.g. "red"
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("productVariationValueName")
+     * @Serializer\Accessor(getter="getProductVariationValueName",setter="setProductVariationValueName")
      */
     protected $productVariationValueName = '';
 
     /**
      * @var double Optional extra surcharge (added to item price)
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("surcharge")
+     * @Serializer\Accessor(getter="getSurcharge",setter="setSurcharge")
      */
     protected $surcharge = 0.0;
 

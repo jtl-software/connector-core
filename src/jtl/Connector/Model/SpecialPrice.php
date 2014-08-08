@@ -16,24 +16,32 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Internal
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class SpecialPrice extends DataModel
 {
     /**
      * @var Identity Reference to customerGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerGroupId")
+     * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
 
     /**
      * @var Identity Reference to productSpecialPrice
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productSpecialPriceId")
+     * @Serializer\Accessor(getter="getProductSpecialPriceId",setter="setProductSpecialPriceId")
      */
     protected $productSpecialPriceId = null;
 
     /**
      * @var double net price value
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("priceNet")
+     * @Serializer\Accessor(getter="getPriceNet",setter="setPriceNet")
      */
     protected $priceNet = 0.0;
 

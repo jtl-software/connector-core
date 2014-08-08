@@ -16,30 +16,40 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class ConfigItemPrice extends DataModel
 {
     /**
      * @var Identity Reference to configItem
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("configItemId")
+     * @Serializer\Accessor(getter="getConfigItemId",setter="setConfigItemId")
      */
     protected $configItemId = null;
 
     /**
      * @var Identity Reference to customerGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerGroupId")
+     * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
 
     /**
      * @var float Net price or percental value to add/deduct to/from product price (depending on type). Positive value means surcharge, negative value means discount. Also see configItem.vat for value added tax.
      * @Serializer\Type("float")
+     * @Serializer\SerializedName("price")
+     * @Serializer\Accessor(getter="getPrice",setter="setPrice")
      */
     protected $price = 0.0;
 
     /**
      * @var int Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("type")
+     * @Serializer\Accessor(getter="getType",setter="setType")
      */
     protected $type = 0;
 

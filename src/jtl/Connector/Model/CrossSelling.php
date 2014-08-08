@@ -16,30 +16,40 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class CrossSelling extends DataModel
 {
     /**
      * @var Identity Reference to crossSellingGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("crossSellingGroupId")
+     * @Serializer\Accessor(getter="getCrossSellingGroupId",setter="setCrossSellingGroupId")
      */
     protected $crossSellingGroupId = null;
 
     /**
      * @var Identity Reference to product (main product)
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("crossSellingProductId")
+     * @Serializer\Accessor(getter="getCrossSellingProductId",setter="setCrossSellingProductId")
      */
     protected $crossSellingProductId = null;
 
     /**
      * @var Identity Unique crossSelling id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to product (cross selling product)
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productId")
+     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
 

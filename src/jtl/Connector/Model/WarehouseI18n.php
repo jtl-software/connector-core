@@ -16,18 +16,24 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class WarehouseI18n extends DataModel
 {
     /**
      * @var Identity Reference to warehouse
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("warehouseId")
+     * @Serializer\Accessor(getter="getWarehouseId",setter="setWarehouseId")
      */
     protected $warehouseId = null;
 
     /**
      * @var string Localized warehouse name
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("name")
+     * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
 

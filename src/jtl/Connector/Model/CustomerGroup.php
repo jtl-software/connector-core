@@ -16,41 +16,55 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class CustomerGroup extends DataModel
 {
     /**
      * @var Identity Unique customerGroup id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var bool Optional: Show net prices default instead of gross prices
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("applyNetPrice")
+     * @Serializer\Accessor(getter="getApplyNetPrice",setter="setApplyNetPrice")
      */
     protected $applyNetPrice = false;
 
     /**
      * @var double Optional percentual discount on all products. Negative Value means surcharge. 
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("discount")
+     * @Serializer\Accessor(getter="getDiscount",setter="setDiscount")
      */
     protected $discount = 0.0;
 
     /**
      * @var bool Optional: Flag default customer group
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("isDefault")
+     * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
      */
     protected $isDefault = false;
 
     /**
      * @var \jtl\Connector\Model\CustomerGroupI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerGroupI18n>")
+     * @Serializer\SerializedName("i18n")
+     * @Serializer\AccessType("reflection")
      */
     protected $i18n = array();
     /**
      * @var \jtl\Connector\Model\CustomerGroupAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerGroupAttr>")
+     * @Serializer\SerializedName("attributes")
+     * @Serializer\AccessType("reflection")
      */
     protected $attributes = array();
 

@@ -16,30 +16,40 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class FileDownloadI18n extends DataModel
 {
     /**
      * @var Identity Reference to fileDownloadId
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("fileDownloadId")
+     * @Serializer\Accessor(getter="getFileDownloadId",setter="setFileDownloadId")
      */
     protected $fileDownloadId = null;
 
     /**
      * @var string Optional File download description
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("description")
+     * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
 
     /**
      * @var string Locale
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("localeName")
+     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
      */
     protected $localeName = '';
 
     /**
      * @var string File download title / name
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("name")
+     * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
 

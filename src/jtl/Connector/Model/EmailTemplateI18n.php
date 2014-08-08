@@ -16,48 +16,64 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Internal
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class EmailTemplateI18n extends DataModel
 {
     /**
      * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("emailTemplateId")
+     * @Serializer\Accessor(getter="getEmailTemplateId",setter="setEmailTemplateId")
      */
     protected $emailTemplateId = null;
 
     /**
      * @var string 
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("contentHtml")
+     * @Serializer\Accessor(getter="getContentHtml",setter="setContentHtml")
      */
     protected $contentHtml = '';
 
     /**
      * @var string 
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("contentText")
+     * @Serializer\Accessor(getter="getContentText",setter="setContentText")
      */
     protected $contentText = '';
 
     /**
      * @var string 
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("filename")
+     * @Serializer\Accessor(getter="getFilename",setter="setFilename")
      */
     protected $filename = '';
 
     /**
      * @var string 
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("localeName")
+     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
      */
     protected $localeName = '';
 
     /**
      * @var string 
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("pdf")
+     * @Serializer\Accessor(getter="getPdf",setter="setPdf")
      */
     protected $pdf = '';
 
     /**
      * @var string 
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("subject")
+     * @Serializer\Accessor(getter="getSubject",setter="setSubject")
      */
     protected $subject = '';
 

@@ -16,24 +16,32 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Category
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class CategoryAttr extends DataModel
 {
     /**
      * @var Identity Reference to category
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("categoryId")
+     * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
      */
     protected $categoryId = null;
 
     /**
      * @var Identity Unique categoryAttr id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var int Optional sort number
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("sort")
+     * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
 

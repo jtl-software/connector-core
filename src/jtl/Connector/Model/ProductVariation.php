@@ -16,46 +16,62 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class ProductVariation extends DataModel
 {
     /**
      * @var Identity Unique productVariation id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productId")
+     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
 
     /**
      * @var int Optional sort number
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("sort")
+     * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
 
     /**
      * @var string Variation type e.g. radio or select
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("type")
+     * @Serializer\Accessor(getter="getType",setter="setType")
      */
     protected $type = '';
 
     /**
      * @var \jtl\Connector\Model\ProductVariationValue[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValue>")
+     * @Serializer\SerializedName("values")
+     * @Serializer\AccessType("reflection")
      */
     protected $values = array();
     /**
      * @var \jtl\Connector\Model\ProductVariationInvisibility[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationInvisibility>")
+     * @Serializer\SerializedName("invisibilities")
+     * @Serializer\AccessType("reflection")
      */
     protected $invisibilities = array();
     /**
      * @var \jtl\Connector\Model\ProductVariationI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationI18n>")
+     * @Serializer\SerializedName("i18ns")
+     * @Serializer\AccessType("reflection")
      */
     protected $i18ns = array();
 

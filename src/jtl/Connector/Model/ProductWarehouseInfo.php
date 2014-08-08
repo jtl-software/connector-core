@@ -16,36 +16,48 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class ProductWarehouseInfo extends DataModel
 {
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productId")
+     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
 
     /**
      * @var Identity Reference to warehouse
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("warehouseId")
+     * @Serializer\Accessor(getter="getWarehouseId",setter="setWarehouseId")
      */
     protected $warehouseId = null;
 
     /**
      * @var DateTime Optional product inflow date for specified warehouse
      * @Serializer\Type("DateTime")
+     * @Serializer\SerializedName("inflowDate")
+     * @Serializer\Accessor(getter="getInflowDate",setter="setInflowDate")
      */
     protected $inflowDate = null;
 
     /**
      * @var double Optional product inflow quantity for specified warehouse
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("inflowQuantity")
+     * @Serializer\Accessor(getter="getInflowQuantity",setter="setInflowQuantity")
      */
     protected $inflowQuantity = 0.0;
 
     /**
      * @var double Optional product stock level in specified warehouse
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("stockLevel")
+     * @Serializer\Accessor(getter="getStockLevel",setter="setStockLevel")
      */
     protected $stockLevel = 0.0;
 

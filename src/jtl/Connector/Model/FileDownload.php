@@ -16,54 +16,72 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class FileDownload extends DataModel
 {
     /**
      * @var Identity Unique fileDownload id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var DateTime Optional creation date
      * @Serializer\Type("DateTime")
+     * @Serializer\SerializedName("created")
+     * @Serializer\Accessor(getter="getCreated",setter="setCreated")
      */
     protected $created = null;
 
     /**
      * @var int Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("maxDays")
+     * @Serializer\Accessor(getter="getMaxDays",setter="setMaxDays")
      */
     protected $maxDays = 0;
 
     /**
      * @var int Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("maxDownloads")
+     * @Serializer\Accessor(getter="getMaxDownloads",setter="setMaxDownloads")
      */
     protected $maxDownloads = 0;
 
     /**
      * @var string Path to download file
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("path")
+     * @Serializer\Accessor(getter="getPath",setter="setPath")
      */
     protected $path = '';
 
     /**
      * @var string Optional path to preview file
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("previewPath")
+     * @Serializer\Accessor(getter="getPreviewPath",setter="setPreviewPath")
      */
     protected $previewPath = '';
 
     /**
      * @var int Optional sort number
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("sort")
+     * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
 
     /**
      * @var \jtl\Connector\Model\FileDownloadI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\FileDownloadI18n>")
+     * @Serializer\SerializedName("i18n")
+     * @Serializer\AccessType("reflection")
      */
     protected $i18n = array();
 

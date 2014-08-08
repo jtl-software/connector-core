@@ -16,24 +16,32 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class TaxClass extends DataModel
 {
     /**
      * @var Identity Unique taxClass id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var bool Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("isDefault")
+     * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
      */
     protected $isDefault = false;
 
     /**
      * @var string Optional tax class name
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("name")
+     * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
 

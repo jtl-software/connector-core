@@ -16,30 +16,40 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Specific
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class SpecificValue extends DataModel
 {
     /**
      * @var Identity Unique specificValue id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to specificId
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("specificId")
+     * @Serializer\Accessor(getter="getSpecificId",setter="setSpecificId")
      */
     protected $specificId = null;
 
     /**
      * @var int Optional sort number
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("sort")
+     * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
 
     /**
      * @var \jtl\Connector\Model\SpecificValueI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\SpecificValueI18n>")
+     * @Serializer\SerializedName("i18ns")
+     * @Serializer\AccessType("reflection")
      */
     protected $i18ns = array();
 

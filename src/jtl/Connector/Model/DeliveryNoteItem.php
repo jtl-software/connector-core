@@ -16,54 +16,72 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage DeliveryNote
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class DeliveryNoteItem extends DataModel
 {
     /**
      * @var Identity Reference to customerOrderItem
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerOrderItemId")
+     * @Serializer\Accessor(getter="getCustomerOrderItemId",setter="setCustomerOrderItemId")
      */
     protected $customerOrderItemId = null;
 
     /**
      * @var Identity Reference to deliveryNote
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("deliveryNoteId")
+     * @Serializer\Accessor(getter="getDeliveryNoteId",setter="setDeliveryNoteId")
      */
     protected $deliveryNoteId = null;
 
     /**
      * @var Identity Unique deliveryNoteItem id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var Identity Optional reference to warehouse
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("warehouseId")
+     * @Serializer\Accessor(getter="getWarehouseId",setter="setWarehouseId")
      */
     protected $warehouseId = null;
 
     /**
      * @var string Optional batch number
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("batchNumber")
+     * @Serializer\Accessor(getter="getBatchNumber",setter="setBatchNumber")
      */
     protected $batchNumber = '';
 
     /**
      * @var DateTime Optional best before date
      * @Serializer\Type("DateTime")
+     * @Serializer\SerializedName("bestBefore")
+     * @Serializer\Accessor(getter="getBestBefore",setter="setBestBefore")
      */
     protected $bestBefore = null;
 
     /**
      * @var double Quantity delivered
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("quantity")
+     * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
      */
     protected $quantity = 0.0;
 
     /**
      * @var string Optional serial number
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("serialNumber")
+     * @Serializer\Accessor(getter="getSerialNumber",setter="setSerialNumber")
      */
     protected $serialNumber = '';
 

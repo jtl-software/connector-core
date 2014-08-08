@@ -16,18 +16,24 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class ProductVariationValueInvisibility extends DataModel
 {
     /**
      * @var Identity Reference to customerGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerGroupId")
+     * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
 
     /**
      * @var Identity Reference to productVariationValue to hide from customerGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productVariationValueId")
+     * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
      */
     protected $productVariationValueId = null;
 

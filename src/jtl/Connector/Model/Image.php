@@ -16,42 +16,56 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Image
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class Image extends DataModel
 {
     /**
      * @var Identity Foreign key dependent on relationType
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("foreignKey")
+     * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
      */
     protected $foreignKey = null;
 
     /**
      * @var Identity Unique image id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to master imageId
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("masterImageId")
+     * @Serializer\Accessor(getter="getMasterImageId",setter="setMasterImageId")
      */
     protected $masterImageId = null;
 
     /**
      * @var string Filename or path
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("filename")
+     * @Serializer\Accessor(getter="getFilename",setter="setFilename")
      */
     protected $filename = '';
 
     /**
      * @var string Allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("relationType")
+     * @Serializer\Accessor(getter="getRelationType",setter="setRelationType")
      */
     protected $relationType = '';
 
     /**
      * @var int Optional sort number
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("sort")
+     * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
 

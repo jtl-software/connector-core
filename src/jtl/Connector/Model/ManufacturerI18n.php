@@ -16,42 +16,56 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Manufacturer
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class ManufacturerI18n extends DataModel
 {
     /**
      * @var Identity Reference to manufacturer
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("manufacturerId")
+     * @Serializer\Accessor(getter="getManufacturerId",setter="setManufacturerId")
      */
     protected $manufacturerId = null;
 
     /**
      * @var string Optional manufacturer description (HTML)
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("description")
+     * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
 
     /**
      * @var string Locale
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("localeName")
+     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
      */
     protected $localeName = '';
 
     /**
      * @var string Optional meta description tag value
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("metaDescription")
+     * @Serializer\Accessor(getter="getMetaDescription",setter="setMetaDescription")
      */
     protected $metaDescription = '';
 
     /**
      * @var string Optional meta keywords tag value
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("metaKeywords")
+     * @Serializer\Accessor(getter="getMetaKeywords",setter="setMetaKeywords")
      */
     protected $metaKeywords = '';
 
     /**
      * @var string Optional title tag value
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("titleTag")
+     * @Serializer\Accessor(getter="getTitleTag",setter="setTitleTag")
      */
     protected $titleTag = '';
 

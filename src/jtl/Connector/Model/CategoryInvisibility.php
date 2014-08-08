@@ -16,18 +16,24 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Category
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class CategoryInvisibility extends DataModel
 {
     /**
      * @var Identity Reference to category to hide from customerGroupId
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("categoryId")
+     * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
      */
     protected $categoryId = null;
 
     /**
      * @var Identity Reference to customerGroup that is not allowed to view categoryId
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerGroupId")
+     * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
 

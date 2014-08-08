@@ -16,113 +16,151 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class ConfigItem extends DataModel
 {
     /**
      * @var Identity Reference to configGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("configGroupId")
+     * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
      */
     protected $configGroupId = null;
 
     /**
      * @var Identity Unique configItem id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var Identity Optional reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productId")
+     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
 
     /**
      * @var bool Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("ignoreMultiplier")
+     * @Serializer\Accessor(getter="getIgnoreMultiplier",setter="setIgnoreMultiplier")
      */
     protected $ignoreMultiplier = false;
 
     /**
      * @var bool Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("inheritProductName")
+     * @Serializer\Accessor(getter="getInheritProductName",setter="setInheritProductName")
      */
     protected $inheritProductName = false;
 
     /**
      * @var bool Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("inheritProductPrice")
+     * @Serializer\Accessor(getter="getInheritProductPrice",setter="setInheritProductPrice")
      */
     protected $inheritProductPrice = false;
 
     /**
      * @var double Optional initial / predefined quantity. Default is one (1) quantity piece. 
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("initialQuantity")
+     * @Serializer\Accessor(getter="getInitialQuantity",setter="setInitialQuantity")
      */
     protected $initialQuantity = 0.0;
 
     /**
      * @var bool Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("isPreSelected")
+     * @Serializer\Accessor(getter="getIsPreSelected",setter="setIsPreSelected")
      */
     protected $isPreSelected = false;
 
     /**
      * @var bool Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("isRecommended")
+     * @Serializer\Accessor(getter="getIsRecommended",setter="setIsRecommended")
      */
     protected $isRecommended = false;
 
     /**
      * @var double Maximum allowed quantity. Default 0 for no maximum limit. 
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("maxQuantity")
+     * @Serializer\Accessor(getter="getMaxQuantity",setter="setMaxQuantity")
      */
     protected $maxQuantity = 0.0;
 
     /**
      * @var double Optional minimum quantity required to add configItem. Default 0 for no minimum quantity. 
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("minQuantity")
+     * @Serializer\Accessor(getter="getMinQuantity",setter="setMinQuantity")
      */
     protected $minQuantity = 0.0;
 
     /**
      * @var bool Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("showDiscount")
+     * @Serializer\Accessor(getter="getShowDiscount",setter="setShowDiscount")
      */
     protected $showDiscount = false;
 
     /**
      * @var bool Optional: Show surcharge compared to productId price.
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("showSurcharge")
+     * @Serializer\Accessor(getter="getShowSurcharge",setter="setShowSurcharge")
      */
     protected $showSurcharge = false;
 
     /**
      * @var int Optional sort order number
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("sort")
+     * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
 
     /**
      * @var int Config item type. 0: Product, 1: Special
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("type")
+     * @Serializer\Accessor(getter="getType",setter="setType")
      */
     protected $type = 0;
 
     /**
      * @var double Value added tax
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("vat")
+     * @Serializer\Accessor(getter="getVat",setter="setVat")
      */
     protected $vat = 0.0;
 
     /**
      * @var \jtl\Connector\Model\ConfigItemPrice[]
      * @Serializer\Type("array<jtl\Connector\Model\ConfigItemPrice>")
+     * @Serializer\SerializedName("prices")
+     * @Serializer\AccessType("reflection")
      */
     protected $prices = array();
     /**
      * @var \jtl\Connector\Model\ConfigItemI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ConfigItemI18n>")
+     * @Serializer\SerializedName("i18n")
+     * @Serializer\AccessType("reflection")
      */
     protected $i18n = array();
 

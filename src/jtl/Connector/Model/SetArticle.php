@@ -16,24 +16,32 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class SetArticle extends DataModel
 {
     /**
      * @var Identity Unique setArticle id, referenced by product.setArticleId
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to a component / product
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productId")
+     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
 
     /**
      * @var double Component quantity
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("quantity")
+     * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
      */
     protected $quantity = 0.0;
 

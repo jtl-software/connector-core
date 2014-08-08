@@ -16,42 +16,56 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Manufacturer
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class Manufacturer extends DataModel
 {
     /**
      * @var Identity Unique manufacturer id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var string Manufacturer (brand) name
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("name")
+     * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
 
     /**
      * @var int Optional sort number
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("sort")
+     * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
 
     /**
      * @var string Optional url path e.g. "Products-manufactured-by-X"
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("urlPath")
+     * @Serializer\Accessor(getter="getUrlPath",setter="setUrlPath")
      */
     protected $urlPath = '';
 
     /**
      * @var string Optional manufacturer website URL
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("www")
+     * @Serializer\Accessor(getter="getWww",setter="setWww")
      */
     protected $www = '';
 
     /**
      * @var \jtl\Connector\Model\ManufacturerI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ManufacturerI18n>")
+     * @Serializer\SerializedName("i18ns")
+     * @Serializer\AccessType("reflection")
      */
     protected $i18ns = array();
 

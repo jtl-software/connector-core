@@ -16,63 +16,85 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class ProductVariationValue extends DataModel
 {
     /**
      * @var Identity Unique productVariationValue id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to productVariation
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productVariationId")
+     * @Serializer\Accessor(getter="getProductVariationId",setter="setProductVariationId")
      */
     protected $productVariationId = null;
 
     /**
      * @var double Optional variation extra weight
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("extraWeight")
+     * @Serializer\Accessor(getter="getExtraWeight",setter="setExtraWeight")
      */
     protected $extraWeight = 0.0;
 
     /**
      * @var string Optional Stock Keeping Unit
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("sku")
+     * @Serializer\Accessor(getter="getSku",setter="setSku")
      */
     protected $sku = '';
 
     /**
      * @var int Optional sort number
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("sort")
+     * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
 
     /**
      * @var double Optional stock level
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("stockLevel")
+     * @Serializer\Accessor(getter="getStockLevel",setter="setStockLevel")
      */
     protected $stockLevel = 0.0;
 
     /**
      * @var \jtl\Connector\Model\ProductVariationValueInvisibility[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValueInvisibility>")
+     * @Serializer\SerializedName("invisibilities")
+     * @Serializer\AccessType("reflection")
      */
     protected $invisibilities = array();
     /**
      * @var \jtl\Connector\Model\ProductVariationValueI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValueI18n>")
+     * @Serializer\SerializedName("i18ns")
+     * @Serializer\AccessType("reflection")
      */
     protected $i18ns = array();
     /**
      * @var \jtl\Connector\Model\ProductVariationValueExtraCharge[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValueExtraCharge>")
+     * @Serializer\SerializedName("extraCharges")
+     * @Serializer\AccessType("reflection")
      */
     protected $extraCharges = array();
     /**
      * @var \jtl\Connector\Model\ProductVariationValueDependency[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValueDependency>")
+     * @Serializer\SerializedName("dependencies")
+     * @Serializer\AccessType("reflection")
      */
     protected $dependencies = array();
 

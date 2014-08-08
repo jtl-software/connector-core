@@ -16,24 +16,32 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class TaxZoneCountry extends DataModel
 {
     /**
      * @var Identity Unique taxZoneCountry id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to taxZone
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("taxZoneId")
+     * @Serializer\Accessor(getter="getTaxZoneId",setter="setTaxZoneId")
      */
     protected $taxZoneId = null;
 
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("countryIso")
+     * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
      */
     protected $countryIso = '';
 

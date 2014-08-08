@@ -16,36 +16,48 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class Language extends DataModel
 {
     /**
      * @var Identity Unique language id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var bool Flag default language for frontend. Exact 1 language must be marked as default.
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("isDefault")
+     * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
      */
     protected $isDefault = false;
 
     /**
      * @var string Locale
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("localeName")
+     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
      */
     protected $localeName = '';
 
     /**
      * @var string English term
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("nameEnglish")
+     * @Serializer\Accessor(getter="getNameEnglish",setter="setNameEnglish")
      */
     protected $nameEnglish = '';
 
     /**
      * @var string German term
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("nameGerman")
+     * @Serializer\Accessor(getter="getNameGerman",setter="setNameGerman")
      */
     protected $nameGerman = '';
 

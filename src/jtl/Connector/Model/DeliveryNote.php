@@ -16,48 +16,64 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage DeliveryNote
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class DeliveryNote extends DataModel
 {
     /**
      * @var Identity Reference to customerOrder
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerOrderId")
+     * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
      */
     protected $customerOrderId = null;
 
     /**
      * @var Identity Unique deliveryNote id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var DateTime Creation date
      * @Serializer\Type("DateTime")
+     * @Serializer\SerializedName("created")
+     * @Serializer\Accessor(getter="getCreated",setter="setCreated")
      */
     protected $created = null;
 
     /**
      * @var bool Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("isFulfillment")
+     * @Serializer\Accessor(getter="getIsFulfillment",setter="setIsFulfillment")
      */
     protected $isFulfillment = false;
 
     /**
      * @var string Optional text note
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("note")
+     * @Serializer\Accessor(getter="getNote",setter="setNote")
      */
     protected $note = '';
 
     /**
      * @var int Delivery status
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("status")
+     * @Serializer\Accessor(getter="getStatus",setter="setStatus")
      */
     protected $status = 0;
 
     /**
      * @var \jtl\Connector\Model\DeliveryNoteItem[]
      * @Serializer\Type("array<jtl\Connector\Model\DeliveryNoteItem>")
+     * @Serializer\SerializedName("items")
+     * @Serializer\AccessType("reflection")
      */
     protected $items = array();
 

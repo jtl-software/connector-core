@@ -16,54 +16,72 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Category
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class CategoryI18n extends DataModel
 {
     /**
      * @var Identity Reference to category
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("categoryId")
+     * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
      */
     protected $categoryId = null;
 
     /**
      * @var string Optional localized Long Description
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("description")
+     * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
 
     /**
      * @var string Locale
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("localeName")
+     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
      */
     protected $localeName = '';
 
     /**
      * @var string Optional localized  short description used for meta tag description
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("metaDescription")
+     * @Serializer\Accessor(getter="getMetaDescription",setter="setMetaDescription")
      */
     protected $metaDescription = '';
 
     /**
      * @var string Optional localized meta tag keywords value
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("metaKeywords")
+     * @Serializer\Accessor(getter="getMetaKeywords",setter="setMetaKeywords")
      */
     protected $metaKeywords = '';
 
     /**
      * @var string Localized category name
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("name")
+     * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
 
     /**
      * @var string Optional localized title tag value
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("titleTag")
+     * @Serializer\Accessor(getter="getTitleTag",setter="setTitleTag")
      */
     protected $titleTag = '';
 
     /**
      * @var string Optional localized category URL
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("urlPath")
+     * @Serializer\Accessor(getter="getUrlPath",setter="setUrlPath")
      */
     protected $urlPath = '';
 

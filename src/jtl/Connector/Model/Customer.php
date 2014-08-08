@@ -16,210 +16,280 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Customer
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class Customer extends DataModel
 {
     /**
      * @var Identity References a customer group
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerGroupId")
+     * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
 
     /**
      * @var Identity Unique customer id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var double Credit value on customer account in default currency
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("accountCredit")
+     * @Serializer\Accessor(getter="getAccountCredit",setter="setAccountCredit")
      */
     protected $accountCredit = 0.0;
 
     /**
      * @var DateTime Date of birth
      * @Serializer\Type("DateTime")
+     * @Serializer\SerializedName("birthday")
+     * @Serializer\Accessor(getter="getBirthday",setter="setBirthday")
      */
     protected $birthday = null;
 
     /**
      * @var string City
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("city")
+     * @Serializer\Accessor(getter="getCity",setter="setCity")
      */
     protected $city = '';
 
     /**
      * @var string Company name
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("company")
+     * @Serializer\Accessor(getter="getCompany",setter="setCompany")
      */
     protected $company = '';
 
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("countryIso")
+     * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
      */
     protected $countryIso = '';
 
     /**
      * @var DateTime Creation date
      * @Serializer\Type("DateTime")
+     * @Serializer\SerializedName("created")
+     * @Serializer\Accessor(getter="getCreated",setter="setCreated")
      */
     protected $created = null;
 
     /**
      * @var string Optional customer number set by JTL-Wawi ERP software
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("customerNumber")
+     * @Serializer\Accessor(getter="getCustomerNumber",setter="setCustomerNumber")
      */
     protected $customerNumber = '';
 
     /**
      * @var string Delivery instruction e.g. "c/o John Doe"
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("deliveryInstruction")
+     * @Serializer\Accessor(getter="getDeliveryInstruction",setter="setDeliveryInstruction")
      */
     protected $deliveryInstruction = '';
 
     /**
      * @var double Percentual discount for customer on all prices
      * @Serializer\Type("double")
+     * @Serializer\SerializedName("discount")
+     * @Serializer\Accessor(getter="getDiscount",setter="setDiscount")
      */
     protected $discount = 0.0;
 
     /**
      * @var string E-Mail address
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("eMail")
+     * @Serializer\Accessor(getter="getEMail",setter="setEMail")
      */
     protected $eMail = '';
 
     /**
      * @var string Extra address line e.g. "Apartment 2.5"
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("extraAddressLine")
+     * @Serializer\Accessor(getter="getExtraAddressLine",setter="setExtraAddressLine")
      */
     protected $extraAddressLine = '';
 
     /**
      * @var string Fax number
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("fax")
+     * @Serializer\Accessor(getter="getFax",setter="setFax")
      */
     protected $fax = '';
 
     /**
      * @var string First name
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("firstName")
+     * @Serializer\Accessor(getter="getFirstName",setter="setFirstName")
      */
     protected $firstName = '';
 
     /**
      * @var bool Flag persistent customer account. True, if customer chose to create persistent customer account. False, if customer doesnt want to have his data stored for login-purposes.
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("hasCustomerAccount")
+     * @Serializer\Accessor(getter="getHasCustomerAccount",setter="setHasCustomerAccount")
      */
     protected $hasCustomerAccount = false;
 
     /**
      * @var bool Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("hasNewsletterSubscription")
+     * @Serializer\Accessor(getter="getHasNewsletterSubscription",setter="setHasNewsletterSubscription")
      */
     protected $hasNewsletterSubscription = false;
 
     /**
      * @var bool Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("isActive")
+     * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
      */
     protected $isActive = false;
 
     /**
      * @var bool Flag if customer is fetched by ERP System. True, if customer is already fetched and must not be fetched again. 
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("isFetched")
+     * @Serializer\Accessor(getter="getIsFetched",setter="setIsFetched")
      */
     protected $isFetched = false;
 
     /**
      * @var string Last name
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("lastName")
+     * @Serializer\Accessor(getter="getLastName",setter="setLastName")
      */
     protected $lastName = '';
 
     /**
      * @var string User locale preference
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("localeName")
+     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
      */
     protected $localeName = '';
 
     /**
      * @var string Mobile phone number
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("mobile")
+     * @Serializer\Accessor(getter="getMobile",setter="setMobile")
      */
     protected $mobile = '';
 
     /**
      * @var DateTime Last modified date
      * @Serializer\Type("DateTime")
+     * @Serializer\SerializedName("modified")
+     * @Serializer\Accessor(getter="getModified",setter="setModified")
      */
     protected $modified = null;
 
     /**
      * @var string Customer origin
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("origin")
+     * @Serializer\Accessor(getter="getOrigin",setter="setOrigin")
      */
     protected $origin = '';
 
     /**
      * @var string Optional (encrypted!) customer password
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("password")
+     * @Serializer\Accessor(getter="getPassword",setter="setPassword")
      */
     protected $password = '';
 
     /**
      * @var string Phone number
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("phone")
+     * @Serializer\Accessor(getter="getPhone",setter="setPhone")
      */
     protected $phone = '';
 
     /**
      * @var string Salutation (german: "Anrede")
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("salutation")
+     * @Serializer\Accessor(getter="getSalutation",setter="setSalutation")
      */
     protected $salutation = '';
 
     /**
      * @var string State
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("state")
+     * @Serializer\Accessor(getter="getState",setter="setState")
      */
     protected $state = '';
 
     /**
      * @var string Street name
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("street")
+     * @Serializer\Accessor(getter="getStreet",setter="setStreet")
      */
     protected $street = '';
 
     /**
      * @var string Title, e.g. "Prof. Dr."
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("title")
+     * @Serializer\Accessor(getter="getTitle",setter="setTitle")
      */
     protected $title = '';
 
     /**
      * @var string VAT number (german "USt-ID")
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("vatNumber")
+     * @Serializer\Accessor(getter="getVatNumber",setter="setVatNumber")
      */
     protected $vatNumber = '';
 
     /**
      * @var string WWW address
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("www")
+     * @Serializer\Accessor(getter="getWww",setter="setWww")
      */
     protected $www = '';
 
     /**
      * @var string ZIP / postal code
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("zipCode")
+     * @Serializer\Accessor(getter="getZipCode",setter="setZipCode")
      */
     protected $zipCode = '';
 
     /**
      * @var \jtl\Connector\Model\CustomerAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerAttr>")
+     * @Serializer\SerializedName("attributes")
+     * @Serializer\AccessType("reflection")
      */
     protected $attributes = array();
 

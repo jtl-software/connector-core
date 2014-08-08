@@ -16,59 +16,79 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class MediaFile extends DataModel
 {
     /**
      * @var Identity Unique MediaFile id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productId")
+     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
 
     /**
      * @var string Optional media file category name
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("mediaFileCategory")
+     * @Serializer\Accessor(getter="getMediaFileCategory",setter="setMediaFileCategory")
      */
     protected $mediaFileCategory = '';
 
     /**
      * @var string File path
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("path")
+     * @Serializer\Accessor(getter="getPath",setter="setPath")
      */
     protected $path = '';
 
     /**
      * @var int Optional sort number
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("sort")
+     * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
 
     /**
      * @var string Media file type e.g. "pdf"
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("type")
+     * @Serializer\Accessor(getter="getType",setter="setType")
      */
     protected $type = '';
 
     /**
      * @var string Complete URL
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("url")
+     * @Serializer\Accessor(getter="getUrl",setter="setUrl")
      */
     protected $url = '';
 
     /**
      * @var \jtl\Connector\Model\MediaFileI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\MediaFileI18n>")
+     * @Serializer\SerializedName("i18ns")
+     * @Serializer\AccessType("reflection")
      */
     protected $i18ns = array();
     /**
      * @var \jtl\Connector\Model\MediaFileAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\MediaFileAttr>")
+     * @Serializer\SerializedName("attributes")
+     * @Serializer\AccessType("reflection")
      */
     protected $attributes = array();
 

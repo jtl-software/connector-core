@@ -16,120 +16,160 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class Company extends DataModel
 {
     /**
      * @var string Bank account holder name e.g. "John Doe"
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("accountHolder")
+     * @Serializer\Accessor(getter="getAccountHolder",setter="setAccountHolder")
      */
     protected $accountHolder = '';
 
     /**
      * @var string Bank account number
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("accountNumber")
+     * @Serializer\Accessor(getter="getAccountNumber",setter="setAccountNumber")
      */
     protected $accountNumber = '';
 
     /**
      * @var string Bank code number
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("bankCode")
+     * @Serializer\Accessor(getter="getBankCode",setter="setBankCode")
      */
     protected $bankCode = '';
 
     /**
      * @var string Bank name e.g. "Deutsche Bank"
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("bankName")
+     * @Serializer\Accessor(getter="getBankName",setter="setBankName")
      */
     protected $bankName = '';
 
     /**
      * @var string Bank Identifier Code (BIC)
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("bic")
+     * @Serializer\Accessor(getter="getBic",setter="setBic")
      */
     protected $bic = '';
 
     /**
      * @var string Company businessman / entrepreneur
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("businessman")
+     * @Serializer\Accessor(getter="getBusinessman",setter="setBusinessman")
      */
     protected $businessman = '';
 
     /**
      * @var string City
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("city")
+     * @Serializer\Accessor(getter="getCity",setter="setCity")
      */
     protected $city = '';
 
     /**
      * @var string CountryIso
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("countryIso")
+     * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
      */
     protected $countryIso = '';
 
     /**
      * @var string Company E-Mail address
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("eMail")
+     * @Serializer\Accessor(getter="getEMail",setter="setEMail")
      */
     protected $eMail = '';
 
     /**
      * @var string Fax number
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("fax")
+     * @Serializer\Accessor(getter="getFax",setter="setFax")
      */
     protected $fax = '';
 
     /**
      * @var string International Bank Account Number (IBAN) 
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("iban")
+     * @Serializer\Accessor(getter="getIban",setter="setIban")
      */
     protected $iban = '';
 
     /**
      * @var string Company name
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("name")
+     * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
 
     /**
      * @var string Phone number
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("phone")
+     * @Serializer\Accessor(getter="getPhone",setter="setPhone")
      */
     protected $phone = '';
 
     /**
      * @var string Street
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("street")
+     * @Serializer\Accessor(getter="getStreet",setter="setStreet")
      */
     protected $street = '';
 
     /**
      * @var string Street number
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("streetNumber")
+     * @Serializer\Accessor(getter="getStreetNumber",setter="setStreetNumber")
      */
     protected $streetNumber = '';
 
     /**
      * @var string Tax id number (german: Steuernummer)
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("taxIdNumber")
+     * @Serializer\Accessor(getter="getTaxIdNumber",setter="setTaxIdNumber")
      */
     protected $taxIdNumber = '';
 
     /**
      * @var string VAT registration number (german: USt-ID)
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("vatNumber")
+     * @Serializer\Accessor(getter="getVatNumber",setter="setVatNumber")
      */
     protected $vatNumber = '';
 
     /**
      * @var string Company website URL
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("www")
+     * @Serializer\Accessor(getter="getWww",setter="setWww")
      */
     protected $www = '';
 
     /**
      * @var string Zip code / postcode
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("zipCode")
+     * @Serializer\Accessor(getter="getZipCode",setter="setZipCode")
      */
     protected $zipCode = '';
 

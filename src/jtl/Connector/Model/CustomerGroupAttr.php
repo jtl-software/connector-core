@@ -16,36 +16,48 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage GlobalData
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class CustomerGroupAttr extends DataModel
 {
     /**
      * @var Identity Reference to customerGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerGroupId")
+     * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
 
     /**
      * @var Identity Unique customerGroupAttr id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var string Attribute key
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("key")
+     * @Serializer\Accessor(getter="getKey",setter="setKey")
      */
     protected $key = '';
 
     /**
      * @var string Attribute value
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("value")
+     * @Serializer\Accessor(getter="getValue",setter="setValue")
      */
     protected $value = '';
 
     /**
      * @var \jtl\Connector\Model\CustomerGroup[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerGroup>")
+     * @Serializer\SerializedName("customerGroup")
+     * @Serializer\AccessType("reflection")
      */
     protected $customerGroup = array();
 

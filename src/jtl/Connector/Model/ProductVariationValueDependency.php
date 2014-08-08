@@ -16,18 +16,24 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class ProductVariationValueDependency extends DataModel
 {
     /**
      * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productVariationValueId")
+     * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
      */
     protected $productVariationValueId = null;
 
     /**
      * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productVariationValueTargetId")
+     * @Serializer\Accessor(getter="getProductVariationValueTargetId",setter="setProductVariationValueTargetId")
      */
     protected $productVariationValueTargetId = null;
 

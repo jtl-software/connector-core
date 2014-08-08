@@ -16,60 +16,80 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class ProductI18n extends DataModel
 {
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productId")
+     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
 
     /**
      * @var string Optional product description
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("description")
+     * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
 
     /**
      * @var string locale
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("localeName")
+     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
      */
     protected $localeName = '';
 
     /**
      * @var string 
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("metaDescription")
+     * @Serializer\Accessor(getter="getMetaDescription",setter="setMetaDescription")
      */
     protected $metaDescription = '';
 
     /**
      * @var string 
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("metaKeywords")
+     * @Serializer\Accessor(getter="getMetaKeywords",setter="setMetaKeywords")
      */
     protected $metaKeywords = '';
 
     /**
      * @var string Product name / title
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("name")
+     * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
 
     /**
      * @var string Optional product shortdescription
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("shortDescription")
+     * @Serializer\Accessor(getter="getShortDescription",setter="setShortDescription")
      */
     protected $shortDescription = '';
 
     /**
      * @var string 
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("titleTag")
+     * @Serializer\Accessor(getter="getTitleTag",setter="setTitleTag")
      */
     protected $titleTag = '';
 
     /**
      * @var string Optional path of product URL
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("urlPath")
+     * @Serializer\Accessor(getter="getUrlPath",setter="setUrlPath")
      */
     protected $urlPath = '';
 

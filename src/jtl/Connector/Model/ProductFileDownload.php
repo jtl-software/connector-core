@@ -16,18 +16,24 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class ProductFileDownload extends DataModel
 {
     /**
      * @var Identity Reference to fileDownload
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("fileDownloadId")
+     * @Serializer\Accessor(getter="getFileDownloadId",setter="setFileDownloadId")
      */
     protected $fileDownloadId = null;
 
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productId")
+     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
 

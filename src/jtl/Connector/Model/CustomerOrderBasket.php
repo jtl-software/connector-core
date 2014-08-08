@@ -16,30 +16,40 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Internal
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class CustomerOrderBasket extends DataModel
 {
     /**
      * @var Identity Reference to customerId
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerId")
+     * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
      */
     protected $customerId = null;
 
     /**
      * @var Identity customerOrderPaymentInfoId
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerOrderPaymentInfoId")
+     * @Serializer\Accessor(getter="getCustomerOrderPaymentInfoId",setter="setCustomerOrderPaymentInfoId")
      */
     protected $customerOrderPaymentInfoId = null;
 
     /**
      * @var Identity Unique id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to shippingAddressId
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("shippingAddressId")
+     * @Serializer\Accessor(getter="getShippingAddressId",setter="setShippingAddressId")
      */
     protected $shippingAddressId = null;
 

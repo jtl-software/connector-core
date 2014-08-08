@@ -16,72 +16,96 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Internal
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class EmailTemplate extends DataModel
 {
     /**
      * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var string 
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("description")
+     * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
 
     /**
      * @var string 
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("emailType")
+     * @Serializer\Accessor(getter="getEmailType",setter="setEmailType")
      */
     protected $emailType = '';
 
     /**
      * @var int 
      * @Serializer\Type("integer")
+     * @Serializer\SerializedName("error")
+     * @Serializer\Accessor(getter="getError",setter="setError")
      */
     protected $error = 0;
 
     /**
      * @var string 
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("filename")
+     * @Serializer\Accessor(getter="getFilename",setter="setFilename")
      */
     protected $filename = '';
 
     /**
      * @var bool 
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("isActive")
+     * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
      */
     protected $isActive = false;
 
     /**
      * @var bool 
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("isAgb")
+     * @Serializer\Accessor(getter="getIsAgb",setter="setIsAgb")
      */
     protected $isAgb = false;
 
     /**
      * @var bool 
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("isOii")
+     * @Serializer\Accessor(getter="getIsOii",setter="setIsOii")
      */
     protected $isOii = false;
 
     /**
      * @var bool 
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("isWrb")
+     * @Serializer\Accessor(getter="getIsWrb",setter="setIsWrb")
      */
     protected $isWrb = false;
 
     /**
      * @var string 
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("moduleId")
+     * @Serializer\Accessor(getter="getModuleId",setter="setModuleId")
      */
     protected $moduleId = '';
 
     /**
      * @var string 
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("name")
+     * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
 

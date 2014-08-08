@@ -16,42 +16,56 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class FileUpload extends DataModel
 {
     /**
      * @var Identity Unique fileUpload id
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productId")
+     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
 
     /**
      * @var string Optional file description
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("description")
+     * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
 
     /**
      * @var string Allowed file type
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("fileType")
+     * @Serializer\Accessor(getter="getFileType",setter="setFileType")
      */
     protected $fileType = '';
 
     /**
      * @var bool Optional flag to force upload before finishing checkout. True if file upload is required to buy product
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("isRequired")
+     * @Serializer\Accessor(getter="getIsRequired",setter="setIsRequired")
      */
     protected $isRequired = false;
 
     /**
      * @var string Filename specification
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("name")
+     * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
 
