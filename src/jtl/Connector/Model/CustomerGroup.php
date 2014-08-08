@@ -60,6 +60,7 @@ class CustomerGroup extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $i18n = array();
+
     /**
      * @var \jtl\Connector\Model\CustomerGroupAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerGroupAttr>")
@@ -67,6 +68,7 @@ class CustomerGroup extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $attributes = array();
+
 
     public function __construct()
     {

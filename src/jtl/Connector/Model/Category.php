@@ -68,6 +68,7 @@ class Category extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $parent = array();
+
     /**
      * @var \jtl\Connector\Model\CategoryInvisibility[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryInvisibility>")
@@ -75,6 +76,7 @@ class Category extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $invisibilities = array();
+
     /**
      * @var \jtl\Connector\Model\CategoryI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryI18n>")
@@ -82,6 +84,7 @@ class Category extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = array();
+
     /**
      * @var \jtl\Connector\Model\CategoryCustomerGroup[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryCustomerGroup>")
@@ -89,6 +92,7 @@ class Category extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $customerGroups = array();
+
     /**
      * @var \jtl\Connector\Model\ChildCategory[]
      * @Serializer\Type("array<jtl\Connector\Model\ChildCategory>")
@@ -96,6 +100,7 @@ class Category extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $children = array();
+
     /**
      * @var \jtl\Connector\Model\CategoryAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryAttr>")
@@ -103,6 +108,7 @@ class Category extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $attributes = array();
+
 
     public function __construct()
     {

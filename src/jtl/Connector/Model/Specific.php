@@ -60,6 +60,7 @@ class Specific extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $values = array();
+
     /**
      * @var \jtl\Connector\Model\SpecificI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\SpecificI18n>")
@@ -67,6 +68,7 @@ class Specific extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = array();
+
 
     public function __construct()
     {

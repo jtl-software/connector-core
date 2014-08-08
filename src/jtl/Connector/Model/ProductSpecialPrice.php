@@ -93,6 +93,7 @@ class ProductSpecialPrice extends DataModel
      */
     protected $specialPrices = array();
 
+
     public function __construct()
     {
         $this->id = new Identity;

@@ -452,6 +452,7 @@ class Product extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $variations = array();
+
     /**
      * @var \jtl\Connector\Model\ProductSpecialPrice[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductSpecialPrice>")
@@ -459,6 +460,7 @@ class Product extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $specialPrices = array();
+
     /**
      * @var \jtl\Connector\Model\SetArticle[]
      * @Serializer\Type("array<jtl\Connector\Model\SetArticle>")
@@ -466,6 +468,7 @@ class Product extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $setArticles = array();
+
     /**
      * @var \jtl\Connector\Model\ProductPrice[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductPrice>")
@@ -473,6 +476,7 @@ class Product extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $prices = array();
+
     /**
      * @var \jtl\Connector\Model\MediaFile[]
      * @Serializer\Type("array<jtl\Connector\Model\MediaFile>")
@@ -480,6 +484,7 @@ class Product extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $mediaFiles = array();
+
     /**
      * @var \jtl\Connector\Model\ProductInvisibility[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductInvisibility>")
@@ -487,6 +492,7 @@ class Product extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $invisibilities = array();
+
     /**
      * @var \jtl\Connector\Model\ProductI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductI18n>")
@@ -494,6 +500,7 @@ class Product extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = array();
+
     /**
      * @var \jtl\Connector\Model\ProductFileDownload[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductFileDownload>")
@@ -501,6 +508,7 @@ class Product extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $fileDownloads = array();
+
     /**
      * @var \jtl\Connector\Model\CrossSelling[]
      * @Serializer\Type("array<jtl\Connector\Model\CrossSelling>")
@@ -508,6 +516,7 @@ class Product extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $crossSellings = array();
+
     /**
      * @var \jtl\Connector\Model\ProductConfigGroup[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductConfigGroup>")
@@ -515,6 +524,7 @@ class Product extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $configGroups = array();
+
     /**
      * @var \jtl\Connector\Model\Product2Category[]
      * @Serializer\Type("array<jtl\Connector\Model\Product2Category>")
@@ -522,6 +532,7 @@ class Product extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $categories = array();
+
 
     public function __construct()
     {

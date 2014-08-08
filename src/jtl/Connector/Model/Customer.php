@@ -293,6 +293,7 @@ class Customer extends DataModel
      */
     protected $attributes = array();
 
+
     public function __construct()
     {
         $this->customerGroupId = new Identity;

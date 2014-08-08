@@ -85,6 +85,7 @@ class ConfigGroup extends DataModel
      */
     protected $i18n = array();
 
+
     public function __construct()
     {
         $this->id = new Identity;

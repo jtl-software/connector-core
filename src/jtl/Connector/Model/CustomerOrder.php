@@ -236,6 +236,7 @@ class CustomerOrder extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $shippingAddress = array();
+
     /**
      * @var \jtl\Connector\Model\CustomerOrderPaymentInfo[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderPaymentInfo>")
@@ -243,6 +244,7 @@ class CustomerOrder extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $paymentInfo = array();
+
     /**
      * @var \jtl\Connector\Model\CustomerOrderItem[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderItem>")
@@ -250,6 +252,7 @@ class CustomerOrder extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $items = array();
+
     /**
      * @var \jtl\Connector\Model\CustomerOrderBillingAddress[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderBillingAddress>")
@@ -257,6 +260,7 @@ class CustomerOrder extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $billingAddress = array();
+
     /**
      * @var \jtl\Connector\Model\CustomerOrderAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderAttr>")
@@ -264,6 +268,7 @@ class CustomerOrder extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $attributes = array();
+
 
     public function __construct()
     {

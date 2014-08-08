@@ -125,6 +125,7 @@ class CustomerOrderItem extends DataModel
      */
     protected $variations = array();
 
+
     public function __construct()
     {
         $this->configItemId = new Identity;

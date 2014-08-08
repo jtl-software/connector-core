@@ -60,6 +60,7 @@ class ProductVariation extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $values = array();
+
     /**
      * @var \jtl\Connector\Model\ProductVariationInvisibility[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationInvisibility>")
@@ -67,6 +68,7 @@ class ProductVariation extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $invisibilities = array();
+
     /**
      * @var \jtl\Connector\Model\ProductVariationI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationI18n>")
@@ -74,6 +76,7 @@ class ProductVariation extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = array();
+
 
     public function __construct()
     {

@@ -84,6 +84,7 @@ class MediaFile extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = array();
+
     /**
      * @var \jtl\Connector\Model\MediaFileAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\MediaFileAttr>")
@@ -91,6 +92,7 @@ class MediaFile extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $attributes = array();
+
 
     public function __construct()
     {
