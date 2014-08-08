@@ -148,11 +148,11 @@ abstract class DataModel extends CoreModel
     /**
      * Sets Properties with matching Array Values
      *
-     * @param object $object
+     * @param \stdClass $object
      * @param array $options
      * @return jtl\Connector\Model\DataModel
      */
-    public function setOptions($object = null, array $options = null)
+    public function setOptions(\stdClass $object = null, array $options = null)
     {
         parent::setOptions($object, $options);
 
