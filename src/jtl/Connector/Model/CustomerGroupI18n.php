@@ -45,14 +45,6 @@ class CustomerGroupI18n extends DataModel
      */
     protected $name = '';
 
-    /**
-     * @var \jtl\Connector\Model\CustomerGroup[]
-     * @Serializer\Type("array<jtl\Connector\Model\CustomerGroup>")
-     * @Serializer\SerializedName("customerGroup")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $customerGroup = array();
-
 
     public function __construct()
     {
@@ -111,33 +103,6 @@ class CustomerGroupI18n extends DataModel
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\CustomerGroup $customerGroup
-     * @return \jtl\Connector\Model\CustomerGroupI18n
-     */
-    public function addCustomerGroup(\jtl\Connector\Model\CustomerGroup $customerGroup)
-    {
-        $this->customerGroup[] = $customerGroup;
-        return $this;
-    }
-    
-    /**
-     * @return \jtl\Connector\Model\CustomerGroup[]
-     */
-    public function getCustomerGroup()
-    {
-        return $this->customerGroup;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\CustomerGroupI18n
-     */
-    public function clearCustomerGroup()
-    {
-        $this->customerGroup = array();
-        return $this;
     }
 
  
