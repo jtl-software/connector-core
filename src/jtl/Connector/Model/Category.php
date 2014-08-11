@@ -62,6 +62,9 @@ class Category extends DataModel
     protected $sort = 0;
 
     /**
+     * End: 0..1 (Zero or One of ParentCategory)
+     *      * (Collection of ChildCategory)
+     *
      * @var \jtl\Connector\Model\ParentCategory[]
      * @Serializer\Type("array<jtl\Connector\Model\ParentCategory>")
      * @Serializer\SerializedName("parent")
@@ -70,6 +73,9 @@ class Category extends DataModel
     protected $parent = array();
 
     /**
+     * End: 1 (One of Category)
+     *      * (Collection of CategoryInvisibility)
+     *
      * @var \jtl\Connector\Model\CategoryInvisibility[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryInvisibility>")
      * @Serializer\SerializedName("invisibilities")
@@ -78,6 +84,9 @@ class Category extends DataModel
     protected $invisibilities = array();
 
     /**
+     * End: 1 (One of Category)
+     *      * (Collection of CategoryI18n)
+     *
      * @var \jtl\Connector\Model\CategoryI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryI18n>")
      * @Serializer\SerializedName("i18ns")
@@ -86,6 +95,9 @@ class Category extends DataModel
     protected $i18ns = array();
 
     /**
+     * End: 1 (One of Category)
+     *      * (Collection of CategoryCustomerGroup)
+     *
      * @var \jtl\Connector\Model\CategoryCustomerGroup[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryCustomerGroup>")
      * @Serializer\SerializedName("customerGroups")
@@ -94,6 +106,9 @@ class Category extends DataModel
     protected $customerGroups = array();
 
     /**
+     * End: 0..1 (Zero or One of ParentCategory)
+     *      * (Collection of ChildCategory)
+     *
      * @var \jtl\Connector\Model\ChildCategory[]
      * @Serializer\Type("array<jtl\Connector\Model\ChildCategory>")
      * @Serializer\SerializedName("children")
@@ -102,6 +117,9 @@ class Category extends DataModel
     protected $children = array();
 
     /**
+     * End: 1 (One of Category)
+     *      * (Collection of CategoryAttr)
+     *
      * @var \jtl\Connector\Model\CategoryAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryAttr>")
      * @Serializer\SerializedName("attributes")

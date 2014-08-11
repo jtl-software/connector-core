@@ -78,6 +78,9 @@ class ConfigGroup extends DataModel
     protected $type = 0;
 
     /**
+     * End: 1 (One of ConfigGroup)
+     *      * (Collection of ConfigGroupI18n)
+     *
      * @var \jtl\Connector\Model\ConfigGroupI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ConfigGroupI18n>")
      * @Serializer\SerializedName("i18n")

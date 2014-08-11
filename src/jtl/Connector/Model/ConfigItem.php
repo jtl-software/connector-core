@@ -150,6 +150,9 @@ class ConfigItem extends DataModel
     protected $vat = 0.0;
 
     /**
+     * End: 1 (One of ConfigItem)
+     *      * (Collection of ConfigItemPrice)
+     *
      * @var \jtl\Connector\Model\ConfigItemPrice[]
      * @Serializer\Type("array<jtl\Connector\Model\ConfigItemPrice>")
      * @Serializer\SerializedName("prices")
@@ -158,6 +161,9 @@ class ConfigItem extends DataModel
     protected $prices = array();
 
     /**
+     * End: 1 (One of ConfigItem)
+     *      * (Collection of ConfigItemI18n)
+     *
      * @var \jtl\Connector\Model\ConfigItemI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ConfigItemI18n>")
      * @Serializer\SerializedName("i18n")

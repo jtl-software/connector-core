@@ -118,6 +118,9 @@ class CustomerOrderItem extends DataModel
     protected $vat = 0.0;
 
     /**
+     * End: 0..1 (Zero or One of CustomerOrderItem)
+     *      * (Collection of CustomerOrderItemVariation)
+     *
      * @var \jtl\Connector\Model\CustomerOrderItemVariation[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderItemVariation>")
      * @Serializer\SerializedName("variations")

@@ -78,6 +78,9 @@ class FileDownload extends DataModel
     protected $sort = 0;
 
     /**
+     * End: 1 (One of FileDownload)
+     *      * (Collection of FileDownloadI18n)
+     *
      * @var \jtl\Connector\Model\FileDownloadI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\FileDownloadI18n>")
      * @Serializer\SerializedName("i18n")

@@ -54,6 +54,9 @@ class CustomerGroupAttr extends DataModel
     protected $value = '';
 
     /**
+     * End: 1 (One of CustomerGroup)
+     *      * (Collection of CustomerGroupAttr)
+     *
      * @var \jtl\Connector\Model\CustomerGroup[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerGroup>")
      * @Serializer\SerializedName("customerGroup")

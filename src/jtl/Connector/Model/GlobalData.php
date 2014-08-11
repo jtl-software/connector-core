@@ -22,6 +22,8 @@ use JMS\Serializer\Annotation as Serializer;
 class GlobalData extends DataModel
 {
     /**
+     * <unknown>
+     *
      * @var \jtl\Connector\Model\Warehouse[]
      * @Serializer\Type("array<jtl\Connector\Model\Warehouse>")
      * @Serializer\SerializedName("warehouses")
@@ -30,6 +32,8 @@ class GlobalData extends DataModel
     protected $warehouses = array();
 
     /**
+     * <unknown>
+     *
      * @var \jtl\Connector\Model\Unit[]
      * @Serializer\Type("array<jtl\Connector\Model\Unit>")
      * @Serializer\SerializedName("units")
@@ -38,6 +42,8 @@ class GlobalData extends DataModel
     protected $units = array();
 
     /**
+     * <unknown>
+     *
      * @var \jtl\Connector\Model\TaxZone[]
      * @Serializer\Type("array<jtl\Connector\Model\TaxZone>")
      * @Serializer\SerializedName("taxZones")
@@ -46,6 +52,8 @@ class GlobalData extends DataModel
     protected $taxZones = array();
 
     /**
+     * <unknown>
+     *
      * @var \jtl\Connector\Model\TaxRate[]
      * @Serializer\Type("array<jtl\Connector\Model\TaxRate>")
      * @Serializer\SerializedName("taxRates")
@@ -54,6 +62,8 @@ class GlobalData extends DataModel
     protected $taxRates = array();
 
     /**
+     * <unknown>
+     *
      * @var \jtl\Connector\Model\TaxClass[]
      * @Serializer\Type("array<jtl\Connector\Model\TaxClass>")
      * @Serializer\SerializedName("taxClasses")
@@ -62,6 +72,8 @@ class GlobalData extends DataModel
     protected $taxClasses = array();
 
     /**
+     * <unknown>
+     *
      * @var \jtl\Connector\Model\SpecialPrice[]
      * @Serializer\Type("array<jtl\Connector\Model\SpecialPrice>")
      * @Serializer\SerializedName("specialPrices")
@@ -70,6 +82,8 @@ class GlobalData extends DataModel
     protected $specialPrices = array();
 
     /**
+     * <unknown>
+     *
      * @var \jtl\Connector\Model\ShippingClass[]
      * @Serializer\Type("array<jtl\Connector\Model\ShippingClass>")
      * @Serializer\SerializedName("shippingClasses")
@@ -78,6 +92,8 @@ class GlobalData extends DataModel
     protected $shippingClasses = array();
 
     /**
+     * <unknown>
+     *
      * @var \jtl\Connector\Model\Shipment[]
      * @Serializer\Type("array<jtl\Connector\Model\Shipment>")
      * @Serializer\SerializedName("shipments")
@@ -86,6 +102,8 @@ class GlobalData extends DataModel
     protected $shipments = array();
 
     /**
+     * <unknown>
+     *
      * @var \jtl\Connector\Model\SetArticle[]
      * @Serializer\Type("array<jtl\Connector\Model\SetArticle>")
      * @Serializer\SerializedName("setArticles")
@@ -94,6 +112,8 @@ class GlobalData extends DataModel
     protected $setArticles = array();
 
     /**
+     * <unknown>
+     *
      * @var \jtl\Connector\Model\Language[]
      * @Serializer\Type("array<jtl\Connector\Model\Language>")
      * @Serializer\SerializedName("languages")
@@ -102,6 +122,8 @@ class GlobalData extends DataModel
     protected $languages = array();
 
     /**
+     * <unknown>
+     *
      * @var \jtl\Connector\Model\CustomerGroup[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerGroup>")
      * @Serializer\SerializedName("customerGroups")
@@ -110,6 +132,8 @@ class GlobalData extends DataModel
     protected $customerGroups = array();
 
     /**
+     * <unknown>
+     *
      * @var \jtl\Connector\Model\Currency[]
      * @Serializer\Type("array<jtl\Connector\Model\Currency>")
      * @Serializer\SerializedName("currencies")
@@ -118,6 +142,8 @@ class GlobalData extends DataModel
     protected $currencies = array();
 
     /**
+     * <unknown>
+     *
      * @var \jtl\Connector\Model\CrossSelling[]
      * @Serializer\Type("array<jtl\Connector\Model\CrossSelling>")
      * @Serializer\SerializedName("crossSellings")
@@ -126,6 +152,8 @@ class GlobalData extends DataModel
     protected $crossSellings = array();
 
     /**
+     * <unknown>
+     *
      * @var \jtl\Connector\Model\CrossSellingGroup[]
      * @Serializer\Type("array<jtl\Connector\Model\CrossSellingGroup>")
      * @Serializer\SerializedName("crossSellingGroups")
@@ -134,6 +162,8 @@ class GlobalData extends DataModel
     protected $crossSellingGroups = array();
 
     /**
+     * <unknown>
+     *
      * @var \jtl\Connector\Model\ConfigItem[]
      * @Serializer\Type("array<jtl\Connector\Model\ConfigItem>")
      * @Serializer\SerializedName("configItems")
@@ -142,6 +172,8 @@ class GlobalData extends DataModel
     protected $configItems = array();
 
     /**
+     * <unknown>
+     *
      * @var \jtl\Connector\Model\ConfigGroup[]
      * @Serializer\Type("array<jtl\Connector\Model\ConfigGroup>")
      * @Serializer\SerializedName("configGroups")
@@ -150,6 +182,8 @@ class GlobalData extends DataModel
     protected $configGroups = array();
 
     /**
+     * <unknown>
+     *
      * @var \jtl\Connector\Model\Company[]
      * @Serializer\Type("array<jtl\Connector\Model\Company>")
      * @Serializer\SerializedName("companies")

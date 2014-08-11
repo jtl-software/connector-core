@@ -54,6 +54,9 @@ class Specific extends DataModel
     protected $type = '';
 
     /**
+     * End: 0..1 (Zero or One of Specific)
+     *      * (Collection of SpecificValue)
+     *
      * @var \jtl\Connector\Model\SpecificValue[]
      * @Serializer\Type("array<jtl\Connector\Model\SpecificValue>")
      * @Serializer\SerializedName("values")
@@ -62,6 +65,9 @@ class Specific extends DataModel
     protected $values = array();
 
     /**
+     * End: 1 (One of Specific)
+     *      * (Collection of SpecificI18n)
+     *
      * @var \jtl\Connector\Model\SpecificI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\SpecificI18n>")
      * @Serializer\SerializedName("i18ns")

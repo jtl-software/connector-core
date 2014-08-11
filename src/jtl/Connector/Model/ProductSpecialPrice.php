@@ -86,6 +86,9 @@ class ProductSpecialPrice extends DataModel
     protected $stockLimit = 0.0;
 
     /**
+     * End: 1 (One of ProductSpecialPrice)
+     *      * (Collection of SpecialPrice)
+     *
      * @var \jtl\Connector\Model\SpecialPrice[]
      * @Serializer\Type("array<jtl\Connector\Model\SpecialPrice>")
      * @Serializer\SerializedName("specialPrices")

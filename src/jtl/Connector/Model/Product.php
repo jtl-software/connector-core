@@ -446,6 +446,9 @@ class Product extends DataModel
     protected $width = 0.0;
 
     /**
+     * End: 1 (One of Product)
+     *      * (Collection of ProductVariation)
+     *
      * @var \jtl\Connector\Model\ProductVariation[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariation>")
      * @Serializer\SerializedName("variations")
@@ -454,6 +457,9 @@ class Product extends DataModel
     protected $variations = array();
 
     /**
+     * End: 1 (One of Product)
+     *      * (Collection of ProductSpecialPrice)
+     *
      * @var \jtl\Connector\Model\ProductSpecialPrice[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductSpecialPrice>")
      * @Serializer\SerializedName("specialPrices")
@@ -462,6 +468,9 @@ class Product extends DataModel
     protected $specialPrices = array();
 
     /**
+     * End: 1 (One of Product)
+     *      * (Collection of SetArticle)
+     *
      * @var \jtl\Connector\Model\SetArticle[]
      * @Serializer\Type("array<jtl\Connector\Model\SetArticle>")
      * @Serializer\SerializedName("setArticles")
@@ -470,6 +479,9 @@ class Product extends DataModel
     protected $setArticles = array();
 
     /**
+     * End: 1 (One of Product)
+     *      * (Collection of ProductPrice)
+     *
      * @var \jtl\Connector\Model\ProductPrice[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductPrice>")
      * @Serializer\SerializedName("prices")
@@ -478,6 +490,9 @@ class Product extends DataModel
     protected $prices = array();
 
     /**
+     * End: 1 (One of Product)
+     *      * (Collection of MediaFile)
+     *
      * @var \jtl\Connector\Model\MediaFile[]
      * @Serializer\Type("array<jtl\Connector\Model\MediaFile>")
      * @Serializer\SerializedName("mediaFiles")
@@ -486,6 +501,9 @@ class Product extends DataModel
     protected $mediaFiles = array();
 
     /**
+     * End: 1 (One of Product)
+     *      * (Collection of ProductInvisibility)
+     *
      * @var \jtl\Connector\Model\ProductInvisibility[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductInvisibility>")
      * @Serializer\SerializedName("invisibilities")
@@ -494,6 +512,9 @@ class Product extends DataModel
     protected $invisibilities = array();
 
     /**
+     * End: 1 (One of Product)
+     *      * (Collection of ProductI18n)
+     *
      * @var \jtl\Connector\Model\ProductI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductI18n>")
      * @Serializer\SerializedName("i18ns")
@@ -502,6 +523,9 @@ class Product extends DataModel
     protected $i18ns = array();
 
     /**
+     * End: 1 (One of Product)
+     *      * (Collection of ProductFileDownload)
+     *
      * @var \jtl\Connector\Model\ProductFileDownload[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductFileDownload>")
      * @Serializer\SerializedName("fileDownloads")
@@ -510,6 +534,9 @@ class Product extends DataModel
     protected $fileDownloads = array();
 
     /**
+     * End: 1 (One of Product)
+     *      * (Collection of CrossSelling)
+     *
      * @var \jtl\Connector\Model\CrossSelling[]
      * @Serializer\Type("array<jtl\Connector\Model\CrossSelling>")
      * @Serializer\SerializedName("crossSellings")
@@ -518,6 +545,9 @@ class Product extends DataModel
     protected $crossSellings = array();
 
     /**
+     * End: 1 (One of Product)
+     *      * (Collection of ProductConfigGroup)
+     *
      * @var \jtl\Connector\Model\ProductConfigGroup[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductConfigGroup>")
      * @Serializer\SerializedName("configGroups")
@@ -526,6 +556,9 @@ class Product extends DataModel
     protected $configGroups = array();
 
     /**
+     * End: 1 (One of Product)
+     *      * (Collection of Product2Category)
+     *
      * @var \jtl\Connector\Model\Product2Category[]
      * @Serializer\Type("array<jtl\Connector\Model\Product2Category>")
      * @Serializer\SerializedName("categories")
