@@ -20,7 +20,7 @@ class ProductPrice extends DataType
             new PropertyInfo('customerGroupId', 'Identity', null, true, true, false),
             new PropertyInfo('productId', 'Identity', null, true, true, false),
             new PropertyInfo('netPrice', 'double', null, false, false, false),
-            new PropertyInfo('quantity', 'int', null, false, false, false),
+            new PropertyInfo('quantity', 'double', null, false, false, false),
         );
     }
 }

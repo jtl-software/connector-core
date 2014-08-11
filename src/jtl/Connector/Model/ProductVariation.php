@@ -157,7 +157,7 @@ class ProductVariation extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductVariationValue $values
+     * @param  \jtl\Connector\Model\ProductVariationValue $value
      * @return \jtl\Connector\Model\ProductVariation
      */
     public function addValue(\jtl\Connector\Model\ProductVariationValue $value)
@@ -184,7 +184,7 @@ class ProductVariation extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductVariationInvisibility $invisibilities
+     * @param  \jtl\Connector\Model\ProductVariationInvisibility $invisibility
      * @return \jtl\Connector\Model\ProductVariation
      */
     public function addInvisibility(\jtl\Connector\Model\ProductVariationInvisibility $invisibility)
@@ -211,7 +211,7 @@ class ProductVariation extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductVariationI18n $i18ns
+     * @param  \jtl\Connector\Model\ProductVariationI18n $i18n
      * @return \jtl\Connector\Model\ProductVariation
      */
     public function addI18n(\jtl\Connector\Model\ProductVariationI18n $i18n)

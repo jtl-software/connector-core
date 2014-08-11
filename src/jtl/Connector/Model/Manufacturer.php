@@ -166,7 +166,7 @@ class Manufacturer extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ManufacturerI18n $i18ns
+     * @param  \jtl\Connector\Model\ManufacturerI18n $i18n
      * @return \jtl\Connector\Model\Manufacturer
      */
     public function addI18n(\jtl\Connector\Model\ManufacturerI18n $i18n)

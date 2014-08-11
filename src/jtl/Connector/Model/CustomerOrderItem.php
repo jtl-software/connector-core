@@ -352,7 +352,7 @@ class CustomerOrderItem extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\CustomerOrderItemVariation $variations
+     * @param  \jtl\Connector\Model\CustomerOrderItemVariation $variation
      * @return \jtl\Connector\Model\CustomerOrderItem
      */
     public function addVariation(\jtl\Connector\Model\CustomerOrderItemVariation $variation)

@@ -193,7 +193,7 @@ class DeliveryNote extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\DeliveryNoteItem $items
+     * @param  \jtl\Connector\Model\DeliveryNoteItem $item
      * @return \jtl\Connector\Model\DeliveryNote
      */
     public function addItem(\jtl\Connector\Model\DeliveryNoteItem $item)

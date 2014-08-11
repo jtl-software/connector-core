@@ -895,7 +895,7 @@ class Customer extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\CustomerAttr $attributes
+     * @param  \jtl\Connector\Model\CustomerAttr $attribute
      * @return \jtl\Connector\Model\Customer
      */
     public function addAttribute(\jtl\Connector\Model\CustomerAttr $attribute)

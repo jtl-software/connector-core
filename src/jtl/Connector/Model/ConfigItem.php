@@ -462,7 +462,7 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ConfigItemPrice $prices
+     * @param  \jtl\Connector\Model\ConfigItemPrice $price
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function addPrice(\jtl\Connector\Model\ConfigItemPrice $price)

@@ -801,7 +801,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\CustomerOrderItem $items
+     * @param  \jtl\Connector\Model\CustomerOrderItem $item
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function addItem(\jtl\Connector\Model\CustomerOrderItem $item)
@@ -855,7 +855,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\CustomerOrderAttr $attributes
+     * @param  \jtl\Connector\Model\CustomerOrderAttr $attribute
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function addAttribute(\jtl\Connector\Model\CustomerOrderAttr $attribute)

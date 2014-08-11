@@ -1503,7 +1503,7 @@ class Product extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductVariation $variations
+     * @param  \jtl\Connector\Model\ProductVariation $variation
      * @return \jtl\Connector\Model\Product
      */
     public function addVariation(\jtl\Connector\Model\ProductVariation $variation)
@@ -1530,7 +1530,7 @@ class Product extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductSpecialPrice $specialPrices
+     * @param  \jtl\Connector\Model\ProductSpecialPrice $specialPrice
      * @return \jtl\Connector\Model\Product
      */
     public function addSpecialPrice(\jtl\Connector\Model\ProductSpecialPrice $specialPrice)
@@ -1557,7 +1557,7 @@ class Product extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\SetArticle $setArticles
+     * @param  \jtl\Connector\Model\SetArticle $setArticle
      * @return \jtl\Connector\Model\Product
      */
     public function addSetArticle(\jtl\Connector\Model\SetArticle $setArticle)
@@ -1584,7 +1584,7 @@ class Product extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductPrice $prices
+     * @param  \jtl\Connector\Model\ProductPrice $price
      * @return \jtl\Connector\Model\Product
      */
     public function addPrice(\jtl\Connector\Model\ProductPrice $price)
@@ -1611,7 +1611,7 @@ class Product extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\MediaFile $mediaFiles
+     * @param  \jtl\Connector\Model\MediaFile $mediaFile
      * @return \jtl\Connector\Model\Product
      */
     public function addMediaFile(\jtl\Connector\Model\MediaFile $mediaFile)
@@ -1638,7 +1638,7 @@ class Product extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductInvisibility $invisibilities
+     * @param  \jtl\Connector\Model\ProductInvisibility $invisibility
      * @return \jtl\Connector\Model\Product
      */
     public function addInvisibility(\jtl\Connector\Model\ProductInvisibility $invisibility)
@@ -1665,7 +1665,7 @@ class Product extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductI18n $i18ns
+     * @param  \jtl\Connector\Model\ProductI18n $i18n
      * @return \jtl\Connector\Model\Product
      */
     public function addI18n(\jtl\Connector\Model\ProductI18n $i18n)
@@ -1692,7 +1692,7 @@ class Product extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductFileDownload $fileDownloads
+     * @param  \jtl\Connector\Model\ProductFileDownload $fileDownload
      * @return \jtl\Connector\Model\Product
      */
     public function addFileDownload(\jtl\Connector\Model\ProductFileDownload $fileDownload)
@@ -1719,7 +1719,7 @@ class Product extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\CrossSelling $crossSellings
+     * @param  \jtl\Connector\Model\CrossSelling $crossSelling
      * @return \jtl\Connector\Model\Product
      */
     public function addCrossSelling(\jtl\Connector\Model\CrossSelling $crossSelling)
@@ -1746,7 +1746,7 @@ class Product extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductConfigGroup $configGroups
+     * @param  \jtl\Connector\Model\ProductConfigGroup $configGroup
      * @return \jtl\Connector\Model\Product
      */
     public function addConfigGroup(\jtl\Connector\Model\ProductConfigGroup $configGroup)
@@ -1773,7 +1773,7 @@ class Product extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\Product2Category $categories
+     * @param  \jtl\Connector\Model\Product2Category $category
      * @return \jtl\Connector\Model\Product
      */
     public function addCategory(\jtl\Connector\Model\Product2Category $category)

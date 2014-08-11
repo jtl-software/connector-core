@@ -115,7 +115,7 @@ class SpecificValue extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\SpecificValueI18n $i18ns
+     * @param  \jtl\Connector\Model\SpecificValueI18n $i18n
      * @return \jtl\Connector\Model\SpecificValue
      */
     public function addI18n(\jtl\Connector\Model\SpecificValueI18n $i18n)

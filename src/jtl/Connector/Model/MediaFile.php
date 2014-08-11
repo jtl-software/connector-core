@@ -227,7 +227,7 @@ class MediaFile extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\MediaFileI18n $i18ns
+     * @param  \jtl\Connector\Model\MediaFileI18n $i18n
      * @return \jtl\Connector\Model\MediaFile
      */
     public function addI18n(\jtl\Connector\Model\MediaFileI18n $i18n)
@@ -254,7 +254,7 @@ class MediaFile extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\MediaFileAttr $attributes
+     * @param  \jtl\Connector\Model\MediaFileAttr $attribute
      * @return \jtl\Connector\Model\MediaFile
      */
     public function addAttribute(\jtl\Connector\Model\MediaFileAttr $attribute)

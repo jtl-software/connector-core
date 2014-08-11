@@ -234,7 +234,7 @@ class Category extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\CategoryInvisibility $invisibilities
+     * @param  \jtl\Connector\Model\CategoryInvisibility $invisibility
      * @return \jtl\Connector\Model\Category
      */
     public function addInvisibility(\jtl\Connector\Model\CategoryInvisibility $invisibility)
@@ -261,7 +261,7 @@ class Category extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\CategoryI18n $i18ns
+     * @param  \jtl\Connector\Model\CategoryI18n $i18n
      * @return \jtl\Connector\Model\Category
      */
     public function addI18n(\jtl\Connector\Model\CategoryI18n $i18n)
@@ -288,7 +288,7 @@ class Category extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\CategoryCustomerGroup $customerGroups
+     * @param  \jtl\Connector\Model\CategoryCustomerGroup $customerGroup
      * @return \jtl\Connector\Model\Category
      */
     public function addCustomerGroup(\jtl\Connector\Model\CategoryCustomerGroup $customerGroup)
@@ -315,7 +315,7 @@ class Category extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ChildCategory $children
+     * @param  \jtl\Connector\Model\ChildCategory $child
      * @return \jtl\Connector\Model\Category
      */
     public function addChild(\jtl\Connector\Model\ChildCategory $child)
@@ -342,7 +342,7 @@ class Category extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\CategoryAttr $attributes
+     * @param  \jtl\Connector\Model\CategoryAttr $attribute
      * @return \jtl\Connector\Model\Category
      */
     public function addAttribute(\jtl\Connector\Model\CategoryAttr $attribute)

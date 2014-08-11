@@ -24,7 +24,7 @@ class CustomerOrderItem extends DataType
             new PropertyInfo('shippingClassId', 'Identity', null, false, true, false),
             new PropertyInfo('name', 'string', null, false, false, false),
             new PropertyInfo('price', 'double', null, false, false, false),
-            new PropertyInfo('quantity', 'int', null, false, false, false),
+            new PropertyInfo('quantity', 'double', null, false, false, false),
             new PropertyInfo('sku', 'string', null, false, false, false),
             new PropertyInfo('type', 'string', null, false, false, false),
             new PropertyInfo('unique', 'string', null, false, false, false),

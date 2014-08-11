@@ -245,7 +245,7 @@ class ProductSpecialPrice extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\SpecialPrice $specialPrices
+     * @param  \jtl\Connector\Model\SpecialPrice $specialPrice
      * @return \jtl\Connector\Model\ProductSpecialPrice
      */
     public function addSpecialPrice(\jtl\Connector\Model\SpecialPrice $specialPrice)

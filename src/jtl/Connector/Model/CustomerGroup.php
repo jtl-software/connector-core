@@ -175,7 +175,7 @@ class CustomerGroup extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\CustomerGroupAttr $attributes
+     * @param  \jtl\Connector\Model\CustomerGroupAttr $attribute
      * @return \jtl\Connector\Model\CustomerGroup
      */
     public function addAttribute(\jtl\Connector\Model\CustomerGroupAttr $attribute)

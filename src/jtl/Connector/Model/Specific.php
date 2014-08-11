@@ -148,7 +148,7 @@ class Specific extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\SpecificValue $values
+     * @param  \jtl\Connector\Model\SpecificValue $value
      * @return \jtl\Connector\Model\Specific
      */
     public function addValue(\jtl\Connector\Model\SpecificValue $value)
@@ -175,7 +175,7 @@ class Specific extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\SpecificI18n $i18ns
+     * @param  \jtl\Connector\Model\SpecificI18n $i18n
      * @return \jtl\Connector\Model\Specific
      */
     public function addI18n(\jtl\Connector\Model\SpecificI18n $i18n)

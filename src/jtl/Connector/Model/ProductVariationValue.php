@@ -217,7 +217,7 @@ class ProductVariationValue extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductVariationValueInvisibility $invisibilities
+     * @param  \jtl\Connector\Model\ProductVariationValueInvisibility $invisibility
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function addInvisibility(\jtl\Connector\Model\ProductVariationValueInvisibility $invisibility)
@@ -244,7 +244,7 @@ class ProductVariationValue extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductVariationValueI18n $i18ns
+     * @param  \jtl\Connector\Model\ProductVariationValueI18n $i18n
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function addI18n(\jtl\Connector\Model\ProductVariationValueI18n $i18n)
@@ -271,7 +271,7 @@ class ProductVariationValue extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductVariationValueExtraCharge $extraCharges
+     * @param  \jtl\Connector\Model\ProductVariationValueExtraCharge $extraCharge
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function addExtraCharge(\jtl\Connector\Model\ProductVariationValueExtraCharge $extraCharge)
@@ -298,7 +298,7 @@ class ProductVariationValue extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductVariationValueDependency $dependencies
+     * @param  \jtl\Connector\Model\ProductVariationValueDependency $dependency
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function addDependency(\jtl\Connector\Model\ProductVariationValueDependency $dependency)
