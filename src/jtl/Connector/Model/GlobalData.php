@@ -2,156 +2,178 @@
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
  */
 
 namespace jtl\Connector\Model;
 
+use DateTime;
+use JMS\Serializer\Annotation as Serializer;
+
 /**
- * Global properties.
+ * Global data..
  *
  * @access public
  * @package jtl\Connector\Model
+ * @subpackage GlobalData
+ * 
+ * @Serializer\AccessType("public_method")
  */
 class GlobalData extends DataModel
 {
     /**
-     * 
-     *
-     * @type \jtl\Connector\Model\Company[]
+     * @var Company[] 
+     * @Serializer\Type("Company[]")
+     * @Serializer\SerializedName("companies")
+     * @Serializer\Accessor(getter="getCompanies",setter="setCompanies")
      */
-    protected $companies = array();
+    protected $companies = null;
 
     /**
-     * 
-     *
-     * @type \jtl\Connector\Model\Currency[]
+     * @var ConfigGroup[] 
+     * @Serializer\Type("ConfigGroup[]")
+     * @Serializer\SerializedName("configGroups")
+     * @Serializer\Accessor(getter="getConfigGroups",setter="setConfigGroups")
      */
-    protected $currencies = array();
+    protected $configGroups = null;
 
     /**
-     * 
-     *
-     * @type \jtl\Connector\Model\Language[]
+     * @var ConfigItem[] 
+     * @Serializer\Type("ConfigItem[]")
+     * @Serializer\SerializedName("configItems")
+     * @Serializer\Accessor(getter="getConfigItems",setter="setConfigItems")
      */
-    protected $languages = array();
+    protected $configItems = null;
 
     /**
-     * 
-     *
-     * @type \jtl\Connector\Model\SetArticle[]
+     * @var CrossSellingGroup[] 
+     * @Serializer\Type("CrossSellingGroup[]")
+     * @Serializer\SerializedName("crossSellingGroups")
+     * @Serializer\Accessor(getter="getCrossSellingGroups",setter="setCrossSellingGroups")
      */
-    protected $setArticles = array();
+    protected $crossSellingGroups = null;
 
     /**
-     * 
-     *
-     * @type \jtl\Connector\Model\Shipment[]
+     * @var CrossSelling[] 
+     * @Serializer\Type("CrossSelling[]")
+     * @Serializer\SerializedName("crossSellings")
+     * @Serializer\Accessor(getter="getCrossSellings",setter="setCrossSellings")
      */
-    protected $shipments = array();
+    protected $crossSellings = null;
 
     /**
-     * 
-     *
-     * @type \jtl\Connector\Model\ShippingClass[]
+     * @var Currency[] 
+     * @Serializer\Type("Currency[]")
+     * @Serializer\SerializedName("currencies")
+     * @Serializer\Accessor(getter="getCurrencies",setter="setCurrencies")
      */
-    protected $shippingClasses = array();
+    protected $currencies = null;
 
     /**
-     * 
-     *
-     * @type \jtl\Connector\Model\SpecialPrice[]
+     * @var CustomerGroup[] 
+     * @Serializer\Type("CustomerGroup[]")
+     * @Serializer\SerializedName("customerGroups")
+     * @Serializer\Accessor(getter="getCustomerGroups",setter="setCustomerGroups")
      */
-    protected $specialPrices = array();
+    protected $customerGroups = null;
 
     /**
-     * 
-     *
-     * @type \jtl\Connector\Model\TaxClass[]
+     * @var Language[] 
+     * @Serializer\Type("Language[]")
+     * @Serializer\SerializedName("languages")
+     * @Serializer\Accessor(getter="getLanguages",setter="setLanguages")
      */
-    protected $taxClasses = array();
+    protected $languages = null;
 
     /**
-     * 
-     *
-     * @type \jtl\Connector\Model\Company[]
+     * @var SetArticle[] 
+     * @Serializer\Type("SetArticle[]")
+     * @Serializer\SerializedName("setArticles")
+     * @Serializer\Accessor(getter="getSetArticles",setter="setSetArticles")
      */
-    protected $taxRates = array();
+    protected $setArticles = null;
 
     /**
-     * 
-     *
-     * @type \jtl\Connector\Model\TaxZone[]
+     * @var Shipment[] 
+     * @Serializer\Type("Shipment[]")
+     * @Serializer\SerializedName("shipments")
+     * @Serializer\Accessor(getter="getShipments",setter="setShipments")
      */
-    protected $taxZones = array();
+    protected $shipments = null;
 
     /**
-     * 
-     *
-     * @type \jtl\Connector\Model\Unit[]
+     * @var ShippingClass[] 
+     * @Serializer\Type("ShippingClass[]")
+     * @Serializer\SerializedName("shippingClasses")
+     * @Serializer\Accessor(getter="getShippingClasses",setter="setShippingClasses")
      */
-    protected $units = array();
+    protected $shippingClasses = null;
 
     /**
-     * 
-     *
-     * @type \jtl\Connector\Model\Unit[]
+     * @var SpecialPrice[] 
+     * @Serializer\Type("SpecialPrice[]")
+     * @Serializer\SerializedName("specialPrices")
+     * @Serializer\Accessor(getter="getSpecialPrices",setter="setSpecialPrices")
      */
-    protected $warehouses = array();
+    protected $specialPrices = null;
 
     /**
-     * 
-     *
-     * @type \jtl\Connector\Model\CrossSelling[]
+     * @var TaxClass[] 
+     * @Serializer\Type("TaxClass[]")
+     * @Serializer\SerializedName("taxClasses")
+     * @Serializer\Accessor(getter="getTaxClasses",setter="setTaxClasses")
      */
-    protected $crossSellings = array();
+    protected $taxClasses = null;
 
     /**
-     * 
-     *
-     * @type \jtl\Connector\Model\CrossSellingGroup[]
+     * @var TaxRate[] 
+     * @Serializer\Type("TaxRate[]")
+     * @Serializer\SerializedName("taxRates")
+     * @Serializer\Accessor(getter="getTaxRates",setter="setTaxRates")
      */
-    protected $crossSellingGroups = array();
+    protected $taxRates = null;
 
     /**
-     * 
-     *
-     * @type \jtl\Connector\Model\ConfigGroup[]
+     * @var TaxZone[] 
+     * @Serializer\Type("TaxZone[]")
+     * @Serializer\SerializedName("taxZones")
+     * @Serializer\Accessor(getter="getTaxZones",setter="setTaxZones")
      */
-    protected $configGroups = array();
+    protected $taxZones = null;
 
     /**
-     * 
-     *
-     * @type \jtl\Connector\Model\ConfigItem[]
+     * @var Unit[] 
+     * @Serializer\Type("Unit[]")
+     * @Serializer\SerializedName("units")
+     * @Serializer\Accessor(getter="getUnits",setter="setUnits")
      */
-    protected $configItems = array();
+    protected $units = null;
 
     /**
-     * 
-     *
-     * @type \jtl\Connector\Model\CustomerGroup[]
+     * @var Warehouse[] 
+     * @Serializer\Type("Warehouse[]")
+     * @Serializer\SerializedName("warehouses")
+     * @Serializer\Accessor(getter="getWarehouses",setter="setWarehouses")
      */
-    protected $customerGroups = array();
+    protected $warehouses = null;
 
 
-    /**
-     * @type array list of identities
-     */
-    protected $identities = array(
-    );
-
-    /**
-     * @param  \jtl\Connector\Model\Company $company
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function addCompany(\jtl\Connector\Model\Company $company)
+    public function __construct()
     {
-        $this->companies[] = $company;
-        return $this;
     }
-    
+
     /**
-     * @return Company
+     * @param  Company[] $companies 
+     * @return \jtl\Connector\Model\GlobalData
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Company[]'.
+     */
+    public function setCompanies(array $companies)
+    {
+        return $this->setProperty('companies', $companies, 'Company[]');
+    }
+
+    /**
+     * @return Company[] 
      */
     public function getCompanies()
     {
@@ -159,377 +181,17 @@ class GlobalData extends DataModel
     }
 
     /**
+     * @param  ConfigGroup[] $configGroups 
      * @return \jtl\Connector\Model\GlobalData
+     * @throws \InvalidArgumentException if the provided argument is not of type 'ConfigGroup[]'.
      */
-    public function clearCompanies()
+    public function setConfigGroups(array $configGroups)
     {
-        $this->companies = array();
-        return $this;
+        return $this->setProperty('configGroups', $configGroups, 'ConfigGroup[]');
     }
 
     /**
-     * @param  \jtl\Connector\Model\Currency $currency
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function addCurrency(\jtl\Connector\Model\Currency $currency)
-    {
-        $this->currencies[] = $currency;
-        return $this;
-    }
-    
-    /**
-     * @return Currency
-     */
-    public function getCurrencies()
-    {
-        return $this->currencies;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function clearCurrencies()
-    {
-        $this->currencies = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\Language $language
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function addLanguage(\jtl\Connector\Model\Language $language)
-    {
-        $this->languages[] = $language;
-        return $this;
-    }
-    
-    /**
-     * @return Language
-     */
-    public function getLanguages()
-    {
-        return $this->languages;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function clearLanguages()
-    {
-        $this->languages = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\SetArticle $setArticle
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function addSetArticle(\jtl\Connector\Model\SetArticle $setArticle)
-    {
-        $this->setArticles[] = $setArticle;
-        return $this;
-    }
-    
-    /**
-     * @return SetArticle
-     */
-    public function getSetArticles()
-    {
-        return $this->setArticles;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function clearSetArticles()
-    {
-        $this->setArticles = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\Shipment $shipment
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function addShipment(\jtl\Connector\Model\Shipment $shipment)
-    {
-        $this->shipments[] = $shipment;
-        return $this;
-    }
-    
-    /**
-     * @return Shipment
-     */
-    public function getShipments()
-    {
-        return $this->shipments;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function clearShipments()
-    {
-        $this->shipments = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\ShippingClass $shippingClasses
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function addShippingClasses(\jtl\Connector\Model\ShippingClass $shippingClasses)
-    {
-        $this->shippingClasses[] = $shippingClasses;
-        return $this;
-    }
-    
-    /**
-     * @return ShippingClass
-     */
-    public function getShippingClasses()
-    {
-        return $this->shippingClasses;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function clearShippingClasses()
-    {
-        $this->shippingClasses = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\SpecialPrice $specialPrice
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function addSpecialPrice(\jtl\Connector\Model\SpecialPrice $specialPrice)
-    {
-        $this->specialPrices[] = $specialPrice;
-        return $this;
-    }
-    
-    /**
-     * @return SpecialPrice
-     */
-    public function getSpecialPrices()
-    {
-        return $this->specialPrices;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function clearSpecialPrices()
-    {
-        $this->specialPrices = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\TaxClass $taxClasses
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function addTaxClasses(\jtl\Connector\Model\TaxClass $taxClasses)
-    {
-        $this->taxClasses[] = $taxClasses;
-        return $this;
-    }
-    
-    /**
-     * @return TaxClass
-     */
-    public function getTaxClasses()
-    {
-        return $this->taxClasses;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function clearTaxClasses()
-    {
-        $this->taxClasses = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\Company $taxRate
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function addTaxRate(\jtl\Connector\Model\Company $taxRate)
-    {
-        $this->taxRates[] = $taxRate;
-        return $this;
-    }
-    
-    /**
-     * @return Company
-     */
-    public function getTaxRates()
-    {
-        return $this->taxRates;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function clearTaxRates()
-    {
-        $this->taxRates = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\TaxZone $taxZone
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function addTaxZone(\jtl\Connector\Model\TaxZone $taxZone)
-    {
-        $this->taxZones[] = $taxZone;
-        return $this;
-    }
-    
-    /**
-     * @return TaxZone
-     */
-    public function getTaxZones()
-    {
-        return $this->taxZones;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function clearTaxZones()
-    {
-        $this->taxZones = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\Unit $unit
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function addUnit(\jtl\Connector\Model\Unit $unit)
-    {
-        $this->units[] = $unit;
-        return $this;
-    }
-    
-    /**
-     * @return Unit
-     */
-    public function getUnits()
-    {
-        return $this->units;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function clearUnits()
-    {
-        $this->units = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\Unit $warehouse
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function addWarehouse(\jtl\Connector\Model\Unit $warehouse)
-    {
-        $this->warehouses[] = $warehouse;
-        return $this;
-    }
-    
-    /**
-     * @return Unit
-     */
-    public function getWarehouses()
-    {
-        return $this->warehouses;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function clearWarehouses()
-    {
-        $this->warehouses = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\CrossSelling $crossSelling
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function addCrossSelling(\jtl\Connector\Model\CrossSelling $crossSelling)
-    {
-        $this->crossSellings[] = $crossSelling;
-        return $this;
-    }
-    
-    /**
-     * @return CrossSelling
-     */
-    public function getCrossSellings()
-    {
-        return $this->crossSellings;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function clearCrossSellings()
-    {
-        $this->crossSellings = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\CrossSellingGroup $crossSellingGroup
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function addCrossSellingGroup(\jtl\Connector\Model\CrossSellingGroup $crossSellingGroup)
-    {
-        $this->crossSellingGroups[] = $crossSellingGroup;
-        return $this;
-    }
-    
-    /**
-     * @return CrossSellingGroup
-     */
-    public function getCrossSellingGroups()
-    {
-        return $this->crossSellingGroups;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function clearCrossSellingGroups()
-    {
-        $this->crossSellingGroups = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\ConfigGroup $configGroup
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function addConfigGroup(\jtl\Connector\Model\ConfigGroup $configGroup)
-    {
-        $this->configGroups[] = $configGroup;
-        return $this;
-    }
-    
-    /**
-     * @return ConfigGroup
+     * @return ConfigGroup[] 
      */
     public function getConfigGroups()
     {
@@ -537,26 +199,17 @@ class GlobalData extends DataModel
     }
 
     /**
+     * @param  ConfigItem[] $configItems 
      * @return \jtl\Connector\Model\GlobalData
+     * @throws \InvalidArgumentException if the provided argument is not of type 'ConfigItem[]'.
      */
-    public function clearConfigGroups()
+    public function setConfigItems(array $configItems)
     {
-        $this->configGroups = array();
-        return $this;
+        return $this->setProperty('configItems', $configItems, 'ConfigItem[]');
     }
 
     /**
-     * @param  \jtl\Connector\Model\ConfigItem $configItem
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function addConfigItem(\jtl\Connector\Model\ConfigItem $configItem)
-    {
-        $this->configItems[] = $configItem;
-        return $this;
-    }
-    
-    /**
-     * @return ConfigItem
+     * @return ConfigItem[] 
      */
     public function getConfigItems()
     {
@@ -564,26 +217,71 @@ class GlobalData extends DataModel
     }
 
     /**
+     * @param  CrossSellingGroup[] $crossSellingGroups 
      * @return \jtl\Connector\Model\GlobalData
+     * @throws \InvalidArgumentException if the provided argument is not of type 'CrossSellingGroup[]'.
      */
-    public function clearConfigItems()
+    public function setCrossSellingGroups(array $crossSellingGroups)
     {
-        $this->configItems = array();
-        return $this;
+        return $this->setProperty('crossSellingGroups', $crossSellingGroups, 'CrossSellingGroup[]');
     }
 
     /**
-     * @param  \jtl\Connector\Model\CustomerGroup $customerGroup
-     * @return \jtl\Connector\Model\GlobalData
+     * @return CrossSellingGroup[] 
      */
-    public function addCustomerGroup(\jtl\Connector\Model\CustomerGroup $customerGroup)
+    public function getCrossSellingGroups()
     {
-        $this->customerGroups[] = $customerGroup;
-        return $this;
+        return $this->crossSellingGroups;
     }
-    
+
     /**
-     * @return CustomerGroup
+     * @param  CrossSelling[] $crossSellings 
+     * @return \jtl\Connector\Model\GlobalData
+     * @throws \InvalidArgumentException if the provided argument is not of type 'CrossSelling[]'.
+     */
+    public function setCrossSellings(array $crossSellings)
+    {
+        return $this->setProperty('crossSellings', $crossSellings, 'CrossSelling[]');
+    }
+
+    /**
+     * @return CrossSelling[] 
+     */
+    public function getCrossSellings()
+    {
+        return $this->crossSellings;
+    }
+
+    /**
+     * @param  Currency[] $currencies 
+     * @return \jtl\Connector\Model\GlobalData
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Currency[]'.
+     */
+    public function setCurrencies(array $currencies)
+    {
+        return $this->setProperty('currencies', $currencies, 'Currency[]');
+    }
+
+    /**
+     * @return Currency[] 
+     */
+    public function getCurrencies()
+    {
+        return $this->currencies;
+    }
+
+    /**
+     * @param  CustomerGroup[] $customerGroups 
+     * @return \jtl\Connector\Model\GlobalData
+     * @throws \InvalidArgumentException if the provided argument is not of type 'CustomerGroup[]'.
+     */
+    public function setCustomerGroups(array $customerGroups)
+    {
+        return $this->setProperty('customerGroups', $customerGroups, 'CustomerGroup[]');
+    }
+
+    /**
+     * @return CustomerGroup[] 
      */
     public function getCustomerGroups()
     {
@@ -591,12 +289,184 @@ class GlobalData extends DataModel
     }
 
     /**
+     * @param  Language[] $languages 
      * @return \jtl\Connector\Model\GlobalData
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Language[]'.
      */
-    public function clearCustomerGroups()
+    public function setLanguages(array $languages)
     {
-        $this->customerGroups = array();
-        return $this;
+        return $this->setProperty('languages', $languages, 'Language[]');
     }
-}
 
+    /**
+     * @return Language[] 
+     */
+    public function getLanguages()
+    {
+        return $this->languages;
+    }
+
+    /**
+     * @param  SetArticle[] $setArticles 
+     * @return \jtl\Connector\Model\GlobalData
+     * @throws \InvalidArgumentException if the provided argument is not of type 'SetArticle[]'.
+     */
+    public function setSetArticles(array $setArticles)
+    {
+        return $this->setProperty('setArticles', $setArticles, 'SetArticle[]');
+    }
+
+    /**
+     * @return SetArticle[] 
+     */
+    public function getSetArticles()
+    {
+        return $this->setArticles;
+    }
+
+    /**
+     * @param  Shipment[] $shipments 
+     * @return \jtl\Connector\Model\GlobalData
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Shipment[]'.
+     */
+    public function setShipments(array $shipments)
+    {
+        return $this->setProperty('shipments', $shipments, 'Shipment[]');
+    }
+
+    /**
+     * @return Shipment[] 
+     */
+    public function getShipments()
+    {
+        return $this->shipments;
+    }
+
+    /**
+     * @param  ShippingClass[] $shippingClasses 
+     * @return \jtl\Connector\Model\GlobalData
+     * @throws \InvalidArgumentException if the provided argument is not of type 'ShippingClass[]'.
+     */
+    public function setShippingClasses(array $shippingClasses)
+    {
+        return $this->setProperty('shippingClasses', $shippingClasses, 'ShippingClass[]');
+    }
+
+    /**
+     * @return ShippingClass[] 
+     */
+    public function getShippingClasses()
+    {
+        return $this->shippingClasses;
+    }
+
+    /**
+     * @param  SpecialPrice[] $specialPrices 
+     * @return \jtl\Connector\Model\GlobalData
+     * @throws \InvalidArgumentException if the provided argument is not of type 'SpecialPrice[]'.
+     */
+    public function setSpecialPrices(array $specialPrices)
+    {
+        return $this->setProperty('specialPrices', $specialPrices, 'SpecialPrice[]');
+    }
+
+    /**
+     * @return SpecialPrice[] 
+     */
+    public function getSpecialPrices()
+    {
+        return $this->specialPrices;
+    }
+
+    /**
+     * @param  TaxClass[] $taxClasses 
+     * @return \jtl\Connector\Model\GlobalData
+     * @throws \InvalidArgumentException if the provided argument is not of type 'TaxClass[]'.
+     */
+    public function setTaxClasses(array $taxClasses)
+    {
+        return $this->setProperty('taxClasses', $taxClasses, 'TaxClass[]');
+    }
+
+    /**
+     * @return TaxClass[] 
+     */
+    public function getTaxClasses()
+    {
+        return $this->taxClasses;
+    }
+
+    /**
+     * @param  TaxRate[] $taxRates 
+     * @return \jtl\Connector\Model\GlobalData
+     * @throws \InvalidArgumentException if the provided argument is not of type 'TaxRate[]'.
+     */
+    public function setTaxRates(array $taxRates)
+    {
+        return $this->setProperty('taxRates', $taxRates, 'TaxRate[]');
+    }
+
+    /**
+     * @return TaxRate[] 
+     */
+    public function getTaxRates()
+    {
+        return $this->taxRates;
+    }
+
+    /**
+     * @param  TaxZone[] $taxZones 
+     * @return \jtl\Connector\Model\GlobalData
+     * @throws \InvalidArgumentException if the provided argument is not of type 'TaxZone[]'.
+     */
+    public function setTaxZones(array $taxZones)
+    {
+        return $this->setProperty('taxZones', $taxZones, 'TaxZone[]');
+    }
+
+    /**
+     * @return TaxZone[] 
+     */
+    public function getTaxZones()
+    {
+        return $this->taxZones;
+    }
+
+    /**
+     * @param  Unit[] $units 
+     * @return \jtl\Connector\Model\GlobalData
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Unit[]'.
+     */
+    public function setUnits(array $units)
+    {
+        return $this->setProperty('units', $units, 'Unit[]');
+    }
+
+    /**
+     * @return Unit[] 
+     */
+    public function getUnits()
+    {
+        return $this->units;
+    }
+
+    /**
+     * @param  Warehouse[] $warehouses 
+     * @return \jtl\Connector\Model\GlobalData
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Warehouse[]'.
+     */
+    public function setWarehouses(array $warehouses)
+    {
+        return $this->setProperty('warehouses', $warehouses, 'Warehouse[]');
+    }
+
+    /**
+     * @return Warehouse[] 
+     */
+    public function getWarehouses()
+    {
+        return $this->warehouses;
+    }
+
+ 
+}
