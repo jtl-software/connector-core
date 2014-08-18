@@ -45,12 +45,12 @@ abstract class DataModel extends CoreModel
      * @var string
      * @Serializer\type("string")
      * @Serializer\Accessor(getter="setAction",setter="getAction")
-     * @Serializer\Exclude
+     * @Serializer\SerializedName("action")
      */
     protected $action = '';
 
     /**
-     * @return \jtl\Connector\Type\DataType 
+     * @return \jtl\Connector\Type\DataType
      */
     public function getModelType()
     {
@@ -98,7 +98,7 @@ abstract class DataModel extends CoreModel
      * @param array $publics
      * @return stdClass $object
      */
-    public function getPublic(array $publics = array('fields', 'isEncrypted', 'identities', 'action', '_type'))
+    public function getPublic(array $publics = array('fields', 'isEncrypted', 'identities', '_type'))
     {
         $object = new \stdClass();
 
