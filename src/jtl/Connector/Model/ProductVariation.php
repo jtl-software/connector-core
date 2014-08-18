@@ -54,6 +54,9 @@ class ProductVariation extends DataModel
     protected $type = '';
 
     /**
+     * End: 1 (One of ProductVariation)
+     *      * (Collection of ProductVariationValue)
+     *
      * @var \jtl\Connector\Model\ProductVariationValue[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValue>")
      * @Serializer\SerializedName("values")
@@ -62,6 +65,9 @@ class ProductVariation extends DataModel
     protected $values = array();
 
     /**
+     * End: 1 (One of ProductVariation)
+     *      * (Collection of ProductVariationInvisibility)
+     *
      * @var \jtl\Connector\Model\ProductVariationInvisibility[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationInvisibility>")
      * @Serializer\SerializedName("invisibilities")
@@ -70,6 +76,9 @@ class ProductVariation extends DataModel
     protected $invisibilities = array();
 
     /**
+     * End: 1 (One of ProductVariation)
+     *      * (Collection of ProductVariationI18n)
+     *
      * @var \jtl\Connector\Model\ProductVariationI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationI18n>")
      * @Serializer\SerializedName("i18ns")

@@ -62,6 +62,9 @@ class Manufacturer extends DataModel
     protected $www = '';
 
     /**
+     * End: 1 (One of Manufacturer)
+     *      * (Collection of ManufacturerI18n)
+     *
      * @var \jtl\Connector\Model\ManufacturerI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ManufacturerI18n>")
      * @Serializer\SerializedName("i18ns")

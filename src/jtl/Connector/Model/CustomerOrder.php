@@ -230,6 +230,9 @@ class CustomerOrder extends DataModel
     protected $trackingURL = '';
 
     /**
+     * End: * (Collection of CustomerOrder)
+     *      0..1 (Zero or One of CustomerOrderShippingAddress)
+     *
      * @var \jtl\Connector\Model\CustomerOrderShippingAddress[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderShippingAddress>")
      * @Serializer\SerializedName("shippingAddress")
@@ -238,6 +241,9 @@ class CustomerOrder extends DataModel
     protected $shippingAddress = array();
 
     /**
+     * End: 0..1 (Zero or One of CustomerOrder)
+     *      * (Collection of CustomerOrderPaymentInfo)
+     *
      * @var \jtl\Connector\Model\CustomerOrderPaymentInfo[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderPaymentInfo>")
      * @Serializer\SerializedName("paymentInfo")
@@ -246,6 +252,9 @@ class CustomerOrder extends DataModel
     protected $paymentInfo = array();
 
     /**
+     * End: 1 (One of CustomerOrder)
+     *      * (Collection of CustomerOrderItem)
+     *
      * @var \jtl\Connector\Model\CustomerOrderItem[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderItem>")
      * @Serializer\SerializedName("items")
@@ -254,6 +263,9 @@ class CustomerOrder extends DataModel
     protected $items = array();
 
     /**
+     * End: * (Collection of CustomerOrder)
+     *      0..1 (Zero or One of CustomerOrderBillingAddress)
+     *
      * @var \jtl\Connector\Model\CustomerOrderBillingAddress[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderBillingAddress>")
      * @Serializer\SerializedName("billingAddress")
@@ -262,6 +274,9 @@ class CustomerOrder extends DataModel
     protected $billingAddress = array();
 
     /**
+     * End: 0..1 (Zero or One of CustomerOrder)
+     *      * (Collection of CustomerOrderAttr)
+     *
      * @var \jtl\Connector\Model\CustomerOrderAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderAttr>")
      * @Serializer\SerializedName("attributes")

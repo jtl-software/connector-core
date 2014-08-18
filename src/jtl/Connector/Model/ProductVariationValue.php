@@ -70,6 +70,9 @@ class ProductVariationValue extends DataModel
     protected $stockLevel = 0.0;
 
     /**
+     * End: 1 (One of ProductVariationValue)
+     *      * (Collection of ProductVariationValueInvisibility)
+     *
      * @var \jtl\Connector\Model\ProductVariationValueInvisibility[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValueInvisibility>")
      * @Serializer\SerializedName("invisibilities")
@@ -78,6 +81,9 @@ class ProductVariationValue extends DataModel
     protected $invisibilities = array();
 
     /**
+     * End: 1 (One of ProductVariationValue)
+     *      * (Collection of ProductVariationValueI18n)
+     *
      * @var \jtl\Connector\Model\ProductVariationValueI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValueI18n>")
      * @Serializer\SerializedName("i18ns")
@@ -86,6 +92,9 @@ class ProductVariationValue extends DataModel
     protected $i18ns = array();
 
     /**
+     * End: 1 (One of ProductVariationValue)
+     *      * (Collection of ProductVariationValueExtraCharge)
+     *
      * @var \jtl\Connector\Model\ProductVariationValueExtraCharge[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValueExtraCharge>")
      * @Serializer\SerializedName("extraCharges")
@@ -94,6 +103,9 @@ class ProductVariationValue extends DataModel
     protected $extraCharges = array();
 
     /**
+     * End: 0..1 (Zero or One of ProductVariationValue)
+     *      * (Collection of ProductVariationValueDependency)
+     *
      * @var \jtl\Connector\Model\ProductVariationValueDependency[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValueDependency>")
      * @Serializer\SerializedName("dependencies")

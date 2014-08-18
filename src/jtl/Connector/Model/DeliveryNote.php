@@ -70,6 +70,9 @@ class DeliveryNote extends DataModel
     protected $status = 0;
 
     /**
+     * End: 1 (One of DeliveryNote)
+     *      * (Collection of DeliveryNoteItem)
+     *
      * @var \jtl\Connector\Model\DeliveryNoteItem[]
      * @Serializer\Type("array<jtl\Connector\Model\DeliveryNoteItem>")
      * @Serializer\SerializedName("items")

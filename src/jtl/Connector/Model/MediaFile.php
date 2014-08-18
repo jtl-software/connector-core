@@ -78,6 +78,9 @@ class MediaFile extends DataModel
     protected $url = '';
 
     /**
+     * End: 1 (One of MediaFile)
+     *      * (Collection of MediaFileI18n)
+     *
      * @var \jtl\Connector\Model\MediaFileI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\MediaFileI18n>")
      * @Serializer\SerializedName("i18ns")
@@ -86,6 +89,9 @@ class MediaFile extends DataModel
     protected $i18ns = array();
 
     /**
+     * End: 1 (One of MediaFile)
+     *      * (Collection of MediaFileAttr)
+     *
      * @var \jtl\Connector\Model\MediaFileAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\MediaFileAttr>")
      * @Serializer\SerializedName("attributes")

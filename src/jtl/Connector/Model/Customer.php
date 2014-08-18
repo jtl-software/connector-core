@@ -286,6 +286,9 @@ class Customer extends DataModel
     protected $zipCode = '';
 
     /**
+     * End: 0..1 (Zero or One of Customer)
+     *      * (Collection of CustomerAttr)
+     *
      * @var \jtl\Connector\Model\CustomerAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerAttr>")
      * @Serializer\SerializedName("attributes")

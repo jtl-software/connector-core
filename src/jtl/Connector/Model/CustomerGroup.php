@@ -54,6 +54,9 @@ class CustomerGroup extends DataModel
     protected $isDefault = false;
 
     /**
+     * End: 1 (One of CustomerGroup)
+     *      * (Collection of CustomerGroupI18n)
+     *
      * @var \jtl\Connector\Model\CustomerGroupI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerGroupI18n>")
      * @Serializer\SerializedName("i18n")
@@ -62,6 +65,9 @@ class CustomerGroup extends DataModel
     protected $i18n = array();
 
     /**
+     * End: 1 (One of CustomerGroup)
+     *      * (Collection of CustomerGroupAttr)
+     *
      * @var \jtl\Connector\Model\CustomerGroupAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerGroupAttr>")
      * @Serializer\SerializedName("attributes")
