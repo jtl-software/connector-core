@@ -34,7 +34,8 @@ use \jtl\Core\Utilities\RpcMethod;
 use \jtl\Connector\Session\Session;
 use \jtl\Connector\Base\Connector;
 use \jtl\Core\Logger\Logger;
-use Doctrine\Common\Annotations\AnnotationRegistry;
+use \Doctrine\Common\Annotations\AnnotationRegistry;
+use \jtl\Core\Rpc\Method;
 
 /**
  * Application Class
@@ -281,18 +282,18 @@ class Application extends CoreApplication
     {
         $method = RpcMethod::splitMethod($requestpacket->getMethod());
 
-        if ($method->getAction() == \jtl\Core\Rpc\Method::ACTION_PUSH) {
-            $namespace = $modelNamespace . '\\' . RpcMethod::buildController($method->getController());
-            if (class_exists("\\{$namespace}")) {
-                $serializer = \JMS\Serializer\SerializerBuilder::create()
-                    ->addDefaultHandlers()
-                    ->configureHandlers(function(\JMS\Serializer\Handler\HandlerRegistry $registry) {
-                        $registry->registerSubscribingHandler(new \jtl\Connector\Serializer\Handler\IdentityHandler());
-                    })
-                    ->build();
+        $namespace = ($method->getAction() == Method::ACTION_PUSH) ? 
+            sprintf('%s\%s', $modelNamespace, RpcMethod::buildController($method->getController())) : 'jtl\Core\Model\QueryFilter';
 
-                $requestpacket->setParams($serializer->deserialize($requestpacket->getParams(), $namespace, 'json'));
-            }
+        if (class_exists("\\{$namespace}")) {
+            $serializer = \JMS\Serializer\SerializerBuilder::create()
+                ->addDefaultHandlers()
+                ->configureHandlers(function(\JMS\Serializer\Handler\HandlerRegistry $registry) {
+                    $registry->registerSubscribingHandler(new \jtl\Connector\Serializer\Handler\IdentityHandler());
+                })
+                ->build();
+
+            $requestpacket->setParams($serializer->deserialize($requestpacket->getParams(), $namespace, 'json'));
         }
     }
 
