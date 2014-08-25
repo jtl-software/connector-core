@@ -22,14 +22,6 @@ use JMS\Serializer\Annotation as Serializer;
 class Product2Category extends DataModel
 {
     /**
-     * @var Identity Reference to category
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("categoryId")
-     * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
-     */
-    protected $categoryId = null;
-
-    /**
      * @var Identity Unique product2Category id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
@@ -38,37 +30,25 @@ class Product2Category extends DataModel
     protected $id = null;
 
     /**
-     * @var Identity Reference to product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @var int Reference to category
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("categoryId")
+     * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
+     */
+    protected $categoryId = 0;
+
+    /**
+     * @var int Reference to product
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected $productId = null;
+    protected $productId = 0;
 
 
     public function __construct()
     {
-        $this->categoryId = new Identity;
         $this->id = new Identity;
-        $this->productId = new Identity;
-    }
-
-    /**
-     * @param  Identity $categoryId Reference to category
-     * @return \jtl\Connector\Model\Product2Category
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCategoryId(Identity $categoryId)
-    {
-        return $this->setProperty('categoryId', $categoryId, 'Identity');
-    }
-
-    /**
-     * @return Identity Reference to category
-     */
-    public function getCategoryId()
-    {
-        return $this->categoryId;
     }
 
     /**
@@ -90,17 +70,35 @@ class Product2Category extends DataModel
     }
 
     /**
-     * @param  Identity $productId Reference to product
+     * @param  int $categoryId Reference to category
      * @return \jtl\Connector\Model\Product2Category
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setProductId(Identity $productId)
+    public function setCategoryId($categoryId)
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        return $this->setProperty('categoryId', $categoryId, 'int');
     }
 
     /**
-     * @return Identity Reference to product
+     * @return int Reference to category
+     */
+    public function getCategoryId()
+    {
+        return $this->categoryId;
+    }
+
+    /**
+     * @param  int $productId Reference to product
+     * @return \jtl\Connector\Model\Product2Category
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     */
+    public function setProductId($productId)
+    {
+        return $this->setProperty('productId', $productId, 'int');
+    }
+
+    /**
+     * @return int Reference to product
      */
     public function getProductId()
     {

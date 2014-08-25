@@ -22,6 +22,30 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductI18n extends DataModel
 {
     /**
+     * @var Identity 
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("connectorId")
+     * @Serializer\Accessor(getter="getConnectorId",setter="setConnectorId")
+     */
+    protected $connectorId = null;
+
+    /**
+     * @var Identity locale
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("localeName")
+     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
+     */
+    protected $localeName = null;
+
+    /**
+     * @var Identity 
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("platformId")
+     * @Serializer\Accessor(getter="getPlatformId",setter="setPlatformId")
+     */
+    protected $platformId = null;
+
+    /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("productId")
@@ -36,14 +60,6 @@ class ProductI18n extends DataModel
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
-
-    /**
-     * @var string locale
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("localeName")
-     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
-     */
-    protected $localeName = '';
 
     /**
      * @var string 
@@ -96,7 +112,64 @@ class ProductI18n extends DataModel
 
     public function __construct()
     {
+        $this->connectorId = new Identity;
+        $this->localeName = new Identity;
+        $this->platformId = new Identity;
         $this->productId = new Identity;
+    }
+
+    /**
+     * @param  Identity $connectorId 
+     * @return \jtl\Connector\Model\ProductI18n
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setConnectorId(Identity $connectorId)
+    {
+        return $this->setProperty('connectorId', $connectorId, 'Identity');
+    }
+
+    /**
+     * @return Identity 
+     */
+    public function getConnectorId()
+    {
+        return $this->connectorId;
+    }
+
+    /**
+     * @param  Identity $localeName locale
+     * @return \jtl\Connector\Model\ProductI18n
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setLocaleName(Identity $localeName)
+    {
+        return $this->setProperty('localeName', $localeName, 'Identity');
+    }
+
+    /**
+     * @return Identity locale
+     */
+    public function getLocaleName()
+    {
+        return $this->localeName;
+    }
+
+    /**
+     * @param  Identity $platformId 
+     * @return \jtl\Connector\Model\ProductI18n
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setPlatformId(Identity $platformId)
+    {
+        return $this->setProperty('platformId', $platformId, 'Identity');
+    }
+
+    /**
+     * @return Identity 
+     */
+    public function getPlatformId()
+    {
+        return $this->platformId;
     }
 
     /**
@@ -133,24 +206,6 @@ class ProductI18n extends DataModel
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * @param  string $localeName locale
-     * @return \jtl\Connector\Model\ProductI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setLocaleName($localeName)
-    {
-        return $this->setProperty('localeName', $localeName, 'string');
-    }
-
-    /**
-     * @return string locale
-     */
-    public function getLocaleName()
-    {
-        return $this->localeName;
     }
 
     /**

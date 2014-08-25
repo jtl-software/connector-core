@@ -30,20 +30,20 @@ class SpecificValue extends DataModel
     protected $id = null;
 
     /**
-     * @var Identity Reference to specificId
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("specificId")
-     * @Serializer\Accessor(getter="getSpecificId",setter="setSpecificId")
-     */
-    protected $specificId = null;
-
-    /**
      * @var int Optional sort number
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
+
+    /**
+     * @var int Reference to specificId
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("specificId")
+     * @Serializer\Accessor(getter="getSpecificId",setter="setSpecificId")
+     */
+    protected $specificId = 0;
 
     /**
      * End: 1 (One of SpecificValue)
@@ -60,7 +60,6 @@ class SpecificValue extends DataModel
     public function __construct()
     {
         $this->id = new Identity;
-        $this->specificId = new Identity;
     }
 
     /**
@@ -82,24 +81,6 @@ class SpecificValue extends DataModel
     }
 
     /**
-     * @param  Identity $specificId Reference to specificId
-     * @return \jtl\Connector\Model\SpecificValue
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setSpecificId(Identity $specificId)
-    {
-        return $this->setProperty('specificId', $specificId, 'Identity');
-    }
-
-    /**
-     * @return Identity Reference to specificId
-     */
-    public function getSpecificId()
-    {
-        return $this->specificId;
-    }
-
-    /**
      * @param  int $sort Optional sort number
      * @return \jtl\Connector\Model\SpecificValue
      * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
@@ -115,6 +96,24 @@ class SpecificValue extends DataModel
     public function getSort()
     {
         return $this->sort;
+    }
+
+    /**
+     * @param  int $specificId Reference to specificId
+     * @return \jtl\Connector\Model\SpecificValue
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     */
+    public function setSpecificId($specificId)
+    {
+        return $this->setProperty('specificId', $specificId, 'int');
+    }
+
+    /**
+     * @return int Reference to specificId
+     */
+    public function getSpecificId()
+    {
+        return $this->specificId;
     }
 
     /**

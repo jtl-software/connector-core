@@ -22,20 +22,20 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductVariationI18n extends DataModel
 {
     /**
+     * @var Identity Locale
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("localeName")
+     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
+     */
+    protected $localeName = null;
+
+    /**
      * @var Identity Reference to productVariation
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("productVariationId")
      * @Serializer\Accessor(getter="getProductVariationId",setter="setProductVariationId")
      */
     protected $productVariationId = null;
-
-    /**
-     * @var string Locale
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("localeName")
-     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
-     */
-    protected $localeName = '';
 
     /**
      * @var string Locale specific variation name
@@ -48,7 +48,26 @@ class ProductVariationI18n extends DataModel
 
     public function __construct()
     {
+        $this->localeName = new Identity;
         $this->productVariationId = new Identity;
+    }
+
+    /**
+     * @param  Identity $localeName Locale
+     * @return \jtl\Connector\Model\ProductVariationI18n
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setLocaleName(Identity $localeName)
+    {
+        return $this->setProperty('localeName', $localeName, 'Identity');
+    }
+
+    /**
+     * @return Identity Locale
+     */
+    public function getLocaleName()
+    {
+        return $this->localeName;
     }
 
     /**
@@ -67,24 +86,6 @@ class ProductVariationI18n extends DataModel
     public function getProductVariationId()
     {
         return $this->productVariationId;
-    }
-
-    /**
-     * @param  string $localeName Locale
-     * @return \jtl\Connector\Model\ProductVariationI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setLocaleName($localeName)
-    {
-        return $this->setProperty('localeName', $localeName, 'string');
-    }
-
-    /**
-     * @return string Locale
-     */
-    public function getLocaleName()
-    {
-        return $this->localeName;
     }
 
     /**

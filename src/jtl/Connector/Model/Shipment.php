@@ -22,14 +22,6 @@ use JMS\Serializer\Annotation as Serializer;
 class Shipment extends DataModel
 {
     /**
-     * @var Identity Reference to deliveryNote
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("deliveryNoteId")
-     * @Serializer\Accessor(getter="getDeliveryNoteId",setter="setDeliveryNoteId")
-     */
-    protected $deliveryNoteId = null;
-
-    /**
      * @var Identity Unique shipment id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
@@ -52,6 +44,14 @@ class Shipment extends DataModel
      * @Serializer\Accessor(getter="getCreated",setter="setCreated")
      */
     protected $created = null;
+
+    /**
+     * @var int Reference to deliveryNote
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("deliveryNoteId")
+     * @Serializer\Accessor(getter="getDeliveryNoteId",setter="setDeliveryNoteId")
+     */
+    protected $deliveryNoteId = 0;
 
     /**
      * @var string Optional Identcode
@@ -80,26 +80,7 @@ class Shipment extends DataModel
 
     public function __construct()
     {
-        $this->deliveryNoteId = new Identity;
         $this->id = new Identity;
-    }
-
-    /**
-     * @param  Identity $deliveryNoteId Reference to deliveryNote
-     * @return \jtl\Connector\Model\Shipment
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setDeliveryNoteId(Identity $deliveryNoteId)
-    {
-        return $this->setProperty('deliveryNoteId', $deliveryNoteId, 'Identity');
-    }
-
-    /**
-     * @return Identity Reference to deliveryNote
-     */
-    public function getDeliveryNoteId()
-    {
-        return $this->deliveryNoteId;
     }
 
     /**
@@ -143,7 +124,7 @@ class Shipment extends DataModel
      * @return \jtl\Connector\Model\Shipment
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreated(DateTime $created)
+    public function setCreated(DateTime $created = null)
     {
         return $this->setProperty('created', $created, 'DateTime');
     }
@@ -154,6 +135,24 @@ class Shipment extends DataModel
     public function getCreated()
     {
         return $this->created;
+    }
+
+    /**
+     * @param  int $deliveryNoteId Reference to deliveryNote
+     * @return \jtl\Connector\Model\Shipment
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     */
+    public function setDeliveryNoteId($deliveryNoteId)
+    {
+        return $this->setProperty('deliveryNoteId', $deliveryNoteId, 'int');
+    }
+
+    /**
+     * @return int Reference to deliveryNote
+     */
+    public function getDeliveryNoteId()
+    {
+        return $this->deliveryNoteId;
     }
 
     /**

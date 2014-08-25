@@ -30,20 +30,20 @@ class ProductFunctionAttr extends DataModel
     protected $id = null;
 
     /**
-     * @var Identity Reference to product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
-    protected $productId = null;
-
-    /**
      * @var string Attribute key
      * @Serializer\Type("string")
      * @Serializer\SerializedName("key")
      * @Serializer\Accessor(getter="getKey",setter="setKey")
      */
     protected $key = '';
+
+    /**
+     * @var int Reference to product
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("productId")
+     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
+     */
+    protected $productId = 0;
 
     /**
      * @var string Attribute value
@@ -57,7 +57,6 @@ class ProductFunctionAttr extends DataModel
     public function __construct()
     {
         $this->id = new Identity;
-        $this->productId = new Identity;
     }
 
     /**
@@ -79,24 +78,6 @@ class ProductFunctionAttr extends DataModel
     }
 
     /**
-     * @param  Identity $productId Reference to product
-     * @return \jtl\Connector\Model\ProductFunctionAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductId(Identity $productId)
-    {
-        return $this->setProperty('productId', $productId, 'Identity');
-    }
-
-    /**
-     * @return Identity Reference to product
-     */
-    public function getProductId()
-    {
-        return $this->productId;
-    }
-
-    /**
      * @param  string $key Attribute key
      * @return \jtl\Connector\Model\ProductFunctionAttr
      * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
@@ -112,6 +93,24 @@ class ProductFunctionAttr extends DataModel
     public function getKey()
     {
         return $this->key;
+    }
+
+    /**
+     * @param  int $productId Reference to product
+     * @return \jtl\Connector\Model\ProductFunctionAttr
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     */
+    public function setProductId($productId)
+    {
+        return $this->setProperty('productId', $productId, 'int');
+    }
+
+    /**
+     * @return int Reference to product
+     */
+    public function getProductId()
+    {
+        return $this->productId;
     }
 
     /**

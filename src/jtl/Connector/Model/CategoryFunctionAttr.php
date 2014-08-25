@@ -22,20 +22,20 @@ use JMS\Serializer\Annotation as Serializer;
 class CategoryFunctionAttr extends DataModel
 {
     /**
-     * @var Identity Reference to category
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("categoryId")
-     * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
-     */
-    protected $categoryId = null;
-
-    /**
      * @var Identity Unique categoryFunctionAttr id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
+
+    /**
+     * @var int Reference to category
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("categoryId")
+     * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
+     */
+    protected $categoryId = 0;
 
     /**
      * @var string Attribute key name
@@ -56,26 +56,7 @@ class CategoryFunctionAttr extends DataModel
 
     public function __construct()
     {
-        $this->categoryId = new Identity;
         $this->id = new Identity;
-    }
-
-    /**
-     * @param  Identity $categoryId Reference to category
-     * @return \jtl\Connector\Model\CategoryFunctionAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCategoryId(Identity $categoryId)
-    {
-        return $this->setProperty('categoryId', $categoryId, 'Identity');
-    }
-
-    /**
-     * @return Identity Reference to category
-     */
-    public function getCategoryId()
-    {
-        return $this->categoryId;
     }
 
     /**
@@ -94,6 +75,24 @@ class CategoryFunctionAttr extends DataModel
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param  int $categoryId Reference to category
+     * @return \jtl\Connector\Model\CategoryFunctionAttr
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     */
+    public function setCategoryId($categoryId)
+    {
+        return $this->setProperty('categoryId', $categoryId, 'int');
+    }
+
+    /**
+     * @return int Reference to category
+     */
+    public function getCategoryId()
+    {
+        return $this->categoryId;
     }
 
     /**

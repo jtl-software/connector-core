@@ -22,20 +22,20 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerAttr extends DataModel
 {
     /**
-     * @var Identity Reference to customer
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("customerId")
-     * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
-     */
-    protected $customerId = null;
-
-    /**
      * @var Identity Unique customerAttr id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
+
+    /**
+     * @var int Reference to customer
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("customerId")
+     * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
+     */
+    protected $customerId = 0;
 
     /**
      * @var string Attribute key
@@ -56,26 +56,7 @@ class CustomerAttr extends DataModel
 
     public function __construct()
     {
-        $this->customerId = new Identity;
         $this->id = new Identity;
-    }
-
-    /**
-     * @param  Identity $customerId Reference to customer
-     * @return \jtl\Connector\Model\CustomerAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCustomerId(Identity $customerId)
-    {
-        return $this->setProperty('customerId', $customerId, 'Identity');
-    }
-
-    /**
-     * @return Identity Reference to customer
-     */
-    public function getCustomerId()
-    {
-        return $this->customerId;
     }
 
     /**
@@ -94,6 +75,24 @@ class CustomerAttr extends DataModel
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param  int $customerId Reference to customer
+     * @return \jtl\Connector\Model\CustomerAttr
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     */
+    public function setCustomerId($customerId)
+    {
+        return $this->setProperty('customerId', $customerId, 'int');
+    }
+
+    /**
+     * @return int Reference to customer
+     */
+    public function getCustomerId()
+    {
+        return $this->customerId;
     }
 
     /**

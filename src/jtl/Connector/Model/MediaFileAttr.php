@@ -30,14 +30,6 @@ class MediaFileAttr extends DataModel
     protected $id = null;
 
     /**
-     * @var Identity Reference to mediaFile
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("mediaFileId")
-     * @Serializer\Accessor(getter="getMediaFileId",setter="setMediaFileId")
-     */
-    protected $mediaFileId = null;
-
-    /**
      * @var string Attribute name
      * @Serializer\Type("string")
      * @Serializer\SerializedName("key")
@@ -54,6 +46,14 @@ class MediaFileAttr extends DataModel
     protected $localeName = '';
 
     /**
+     * @var int Reference to mediaFile
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("mediaFileId")
+     * @Serializer\Accessor(getter="getMediaFileId",setter="setMediaFileId")
+     */
+    protected $mediaFileId = 0;
+
+    /**
      * @var string Attribute value
      * @Serializer\Type("string")
      * @Serializer\SerializedName("value")
@@ -65,7 +65,6 @@ class MediaFileAttr extends DataModel
     public function __construct()
     {
         $this->id = new Identity;
-        $this->mediaFileId = new Identity;
     }
 
     /**
@@ -84,24 +83,6 @@ class MediaFileAttr extends DataModel
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param  Identity $mediaFileId Reference to mediaFile
-     * @return \jtl\Connector\Model\MediaFileAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setMediaFileId(Identity $mediaFileId)
-    {
-        return $this->setProperty('mediaFileId', $mediaFileId, 'Identity');
-    }
-
-    /**
-     * @return Identity Reference to mediaFile
-     */
-    public function getMediaFileId()
-    {
-        return $this->mediaFileId;
     }
 
     /**
@@ -138,6 +119,24 @@ class MediaFileAttr extends DataModel
     public function getLocaleName()
     {
         return $this->localeName;
+    }
+
+    /**
+     * @param  int $mediaFileId Reference to mediaFile
+     * @return \jtl\Connector\Model\MediaFileAttr
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     */
+    public function setMediaFileId($mediaFileId)
+    {
+        return $this->setProperty('mediaFileId', $mediaFileId, 'int');
+    }
+
+    /**
+     * @return int Reference to mediaFile
+     */
+    public function getMediaFileId()
+    {
+        return $this->mediaFileId;
     }
 
     /**

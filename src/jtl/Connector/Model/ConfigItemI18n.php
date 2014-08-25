@@ -30,20 +30,20 @@ class ConfigItemI18n extends DataModel
     protected $configItemId = null;
 
     /**
+     * @var Identity Locale
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("localeName")
+     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
+     */
+    protected $localeName = null;
+
+    /**
      * @var string Description (html). Will be ignored, if inheritProductName==true
      * @Serializer\Type("string")
      * @Serializer\SerializedName("description")
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
-
-    /**
-     * @var string Locale
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("localeName")
-     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
-     */
-    protected $localeName = '';
 
     /**
      * @var string Config item name. Will be ignored if inheritProductName==true
@@ -57,6 +57,7 @@ class ConfigItemI18n extends DataModel
     public function __construct()
     {
         $this->configItemId = new Identity;
+        $this->localeName = new Identity;
     }
 
     /**
@@ -78,6 +79,24 @@ class ConfigItemI18n extends DataModel
     }
 
     /**
+     * @param  Identity $localeName Locale
+     * @return \jtl\Connector\Model\ConfigItemI18n
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setLocaleName(Identity $localeName)
+    {
+        return $this->setProperty('localeName', $localeName, 'Identity');
+    }
+
+    /**
+     * @return Identity Locale
+     */
+    public function getLocaleName()
+    {
+        return $this->localeName;
+    }
+
+    /**
      * @param  string $description Description (html). Will be ignored, if inheritProductName==true
      * @return \jtl\Connector\Model\ConfigItemI18n
      * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
@@ -93,24 +112,6 @@ class ConfigItemI18n extends DataModel
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * @param  string $localeName Locale
-     * @return \jtl\Connector\Model\ConfigItemI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setLocaleName($localeName)
-    {
-        return $this->setProperty('localeName', $localeName, 'string');
-    }
-
-    /**
-     * @return string Locale
-     */
-    public function getLocaleName()
-    {
-        return $this->localeName;
     }
 
     /**

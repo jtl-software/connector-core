@@ -22,36 +22,12 @@ use JMS\Serializer\Annotation as Serializer;
 class DeliveryNoteItem extends DataModel
 {
     /**
-     * @var Identity Reference to customerOrderItem
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("customerOrderItemId")
-     * @Serializer\Accessor(getter="getCustomerOrderItemId",setter="setCustomerOrderItemId")
-     */
-    protected $customerOrderItemId = null;
-
-    /**
-     * @var Identity Reference to deliveryNote
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("deliveryNoteId")
-     * @Serializer\Accessor(getter="getDeliveryNoteId",setter="setDeliveryNoteId")
-     */
-    protected $deliveryNoteId = null;
-
-    /**
      * @var Identity Unique deliveryNoteItem id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
-    /**
-     * @var Identity Optional reference to warehouse
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("warehouseId")
-     * @Serializer\Accessor(getter="getWarehouseId",setter="setWarehouseId")
-     */
-    protected $warehouseId = null;
 
     /**
      * @var string Optional batch number
@@ -70,6 +46,22 @@ class DeliveryNoteItem extends DataModel
     protected $bestBefore = null;
 
     /**
+     * @var int Reference to customerOrderItem
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("customerOrderItemId")
+     * @Serializer\Accessor(getter="getCustomerOrderItemId",setter="setCustomerOrderItemId")
+     */
+    protected $customerOrderItemId = 0;
+
+    /**
+     * @var int Reference to deliveryNote
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("deliveryNoteId")
+     * @Serializer\Accessor(getter="getDeliveryNoteId",setter="setDeliveryNoteId")
+     */
+    protected $deliveryNoteId = 0;
+
+    /**
      * @var double Quantity delivered
      * @Serializer\Type("double")
      * @Serializer\SerializedName("quantity")
@@ -85,49 +77,18 @@ class DeliveryNoteItem extends DataModel
      */
     protected $serialNumber = '';
 
+    /**
+     * @var int Optional reference to warehouse
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("warehouseId")
+     * @Serializer\Accessor(getter="getWarehouseId",setter="setWarehouseId")
+     */
+    protected $warehouseId = 0;
+
 
     public function __construct()
     {
-        $this->customerOrderItemId = new Identity;
-        $this->deliveryNoteId = new Identity;
         $this->id = new Identity;
-        $this->warehouseId = new Identity;
-    }
-
-    /**
-     * @param  Identity $customerOrderItemId Reference to customerOrderItem
-     * @return \jtl\Connector\Model\DeliveryNoteItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCustomerOrderItemId(Identity $customerOrderItemId)
-    {
-        return $this->setProperty('customerOrderItemId', $customerOrderItemId, 'Identity');
-    }
-
-    /**
-     * @return Identity Reference to customerOrderItem
-     */
-    public function getCustomerOrderItemId()
-    {
-        return $this->customerOrderItemId;
-    }
-
-    /**
-     * @param  Identity $deliveryNoteId Reference to deliveryNote
-     * @return \jtl\Connector\Model\DeliveryNoteItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setDeliveryNoteId(Identity $deliveryNoteId)
-    {
-        return $this->setProperty('deliveryNoteId', $deliveryNoteId, 'Identity');
-    }
-
-    /**
-     * @return Identity Reference to deliveryNote
-     */
-    public function getDeliveryNoteId()
-    {
-        return $this->deliveryNoteId;
     }
 
     /**
@@ -146,24 +107,6 @@ class DeliveryNoteItem extends DataModel
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param  Identity $warehouseId Optional reference to warehouse
-     * @return \jtl\Connector\Model\DeliveryNoteItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setWarehouseId(Identity $warehouseId)
-    {
-        return $this->setProperty('warehouseId', $warehouseId, 'Identity');
-    }
-
-    /**
-     * @return Identity Optional reference to warehouse
-     */
-    public function getWarehouseId()
-    {
-        return $this->warehouseId;
     }
 
     /**
@@ -189,7 +132,7 @@ class DeliveryNoteItem extends DataModel
      * @return \jtl\Connector\Model\DeliveryNoteItem
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setBestBefore(DateTime $bestBefore)
+    public function setBestBefore(DateTime $bestBefore = null)
     {
         return $this->setProperty('bestBefore', $bestBefore, 'DateTime');
     }
@@ -200,6 +143,42 @@ class DeliveryNoteItem extends DataModel
     public function getBestBefore()
     {
         return $this->bestBefore;
+    }
+
+    /**
+     * @param  int $customerOrderItemId Reference to customerOrderItem
+     * @return \jtl\Connector\Model\DeliveryNoteItem
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     */
+    public function setCustomerOrderItemId($customerOrderItemId)
+    {
+        return $this->setProperty('customerOrderItemId', $customerOrderItemId, 'int');
+    }
+
+    /**
+     * @return int Reference to customerOrderItem
+     */
+    public function getCustomerOrderItemId()
+    {
+        return $this->customerOrderItemId;
+    }
+
+    /**
+     * @param  int $deliveryNoteId Reference to deliveryNote
+     * @return \jtl\Connector\Model\DeliveryNoteItem
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     */
+    public function setDeliveryNoteId($deliveryNoteId)
+    {
+        return $this->setProperty('deliveryNoteId', $deliveryNoteId, 'int');
+    }
+
+    /**
+     * @return int Reference to deliveryNote
+     */
+    public function getDeliveryNoteId()
+    {
+        return $this->deliveryNoteId;
     }
 
     /**
@@ -236,6 +215,24 @@ class DeliveryNoteItem extends DataModel
     public function getSerialNumber()
     {
         return $this->serialNumber;
+    }
+
+    /**
+     * @param  int $warehouseId Optional reference to warehouse
+     * @return \jtl\Connector\Model\DeliveryNoteItem
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     */
+    public function setWarehouseId($warehouseId)
+    {
+        return $this->setProperty('warehouseId', $warehouseId, 'int');
+    }
+
+    /**
+     * @return int Optional reference to warehouse
+     */
+    public function getWarehouseId()
+    {
+        return $this->warehouseId;
     }
 
  

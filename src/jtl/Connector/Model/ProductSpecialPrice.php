@@ -30,14 +30,6 @@ class ProductSpecialPrice extends DataModel
     protected $id = null;
 
     /**
-     * @var Identity Reference to product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
-    protected $productId = null;
-
-    /**
      * @var DateTime Optional: Activate special price from date
      * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("activeFrom")
@@ -78,6 +70,14 @@ class ProductSpecialPrice extends DataModel
     protected $isActive = false;
 
     /**
+     * @var int Reference to product
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("productId")
+     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
+     */
+    protected $productId = 0;
+
+    /**
      * @var double Optional: SpecialPrice active until stock level quantity
      * @Serializer\Type("double")
      * @Serializer\SerializedName("stockLimit")
@@ -100,7 +100,6 @@ class ProductSpecialPrice extends DataModel
     public function __construct()
     {
         $this->id = new Identity;
-        $this->productId = new Identity;
     }
 
     /**
@@ -122,29 +121,11 @@ class ProductSpecialPrice extends DataModel
     }
 
     /**
-     * @param  Identity $productId Reference to product
-     * @return \jtl\Connector\Model\ProductSpecialPrice
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductId(Identity $productId)
-    {
-        return $this->setProperty('productId', $productId, 'Identity');
-    }
-
-    /**
-     * @return Identity Reference to product
-     */
-    public function getProductId()
-    {
-        return $this->productId;
-    }
-
-    /**
      * @param  DateTime $activeFrom Optional: Activate special price from date
      * @return \jtl\Connector\Model\ProductSpecialPrice
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setActiveFrom(DateTime $activeFrom)
+    public function setActiveFrom(DateTime $activeFrom = null)
     {
         return $this->setProperty('activeFrom', $activeFrom, 'DateTime');
     }
@@ -162,7 +143,7 @@ class ProductSpecialPrice extends DataModel
      * @return \jtl\Connector\Model\ProductSpecialPrice
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setActiveUntil(DateTime $activeUntil)
+    public function setActiveUntil(DateTime $activeUntil = null)
     {
         return $this->setProperty('activeUntil', $activeUntil, 'DateTime');
     }
@@ -227,6 +208,24 @@ class ProductSpecialPrice extends DataModel
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * @param  int $productId Reference to product
+     * @return \jtl\Connector\Model\ProductSpecialPrice
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     */
+    public function setProductId($productId)
+    {
+        return $this->setProperty('productId', $productId, 'int');
+    }
+
+    /**
+     * @return int Reference to product
+     */
+    public function getProductId()
+    {
+        return $this->productId;
     }
 
     /**

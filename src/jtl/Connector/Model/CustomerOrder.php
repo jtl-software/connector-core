@@ -22,22 +22,6 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerOrder extends DataModel
 {
     /**
-     * @var Identity Reference to billingAddress
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("billingAddressId")
-     * @Serializer\Accessor(getter="getBillingAddressId",setter="setBillingAddressId")
-     */
-    protected $billingAddressId = null;
-
-    /**
-     * @var Identity Optional reference to customer. 
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("customerId")
-     * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
-     */
-    protected $customerId = null;
-
-    /**
      * @var Identity Unique customerOrder id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
@@ -46,12 +30,12 @@ class CustomerOrder extends DataModel
     protected $id = null;
 
     /**
-     * @var Identity Reference to shippingAddress
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("shippingAddressId")
-     * @Serializer\Accessor(getter="getShippingAddressId",setter="setShippingAddressId")
+     * @var int Reference to billingAddress
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("billingAddressId")
+     * @Serializer\Accessor(getter="getBillingAddressId",setter="setBillingAddressId")
      */
-    protected $shippingAddressId = null;
+    protected $billingAddressId = 0;
 
     /**
      * @var string Optional Carrier name
@@ -84,6 +68,14 @@ class CustomerOrder extends DataModel
      * @Serializer\Accessor(getter="getCurrencyIso",setter="setCurrencyIso")
      */
     protected $currencyIso = '';
+
+    /**
+     * @var int Optional reference to customer. 
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("customerId")
+     * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
+     */
+    protected $customerId = 0;
 
     /**
      * @var string Optional Estimated delivery date set by ERP System
@@ -164,6 +156,14 @@ class CustomerOrder extends DataModel
      * @Serializer\Accessor(getter="getSession",setter="setSession")
      */
     protected $session = '';
+
+    /**
+     * @var int Reference to shippingAddress
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("shippingAddressId")
+     * @Serializer\Accessor(getter="getShippingAddressId",setter="setShippingAddressId")
+     */
+    protected $shippingAddressId = 0;
 
     /**
      * @var DateTime Shipping date
@@ -287,46 +287,7 @@ class CustomerOrder extends DataModel
 
     public function __construct()
     {
-        $this->billingAddressId = new Identity;
-        $this->customerId = new Identity;
         $this->id = new Identity;
-        $this->shippingAddressId = new Identity;
-    }
-
-    /**
-     * @param  Identity $billingAddressId Reference to billingAddress
-     * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setBillingAddressId(Identity $billingAddressId)
-    {
-        return $this->setProperty('billingAddressId', $billingAddressId, 'Identity');
-    }
-
-    /**
-     * @return Identity Reference to billingAddress
-     */
-    public function getBillingAddressId()
-    {
-        return $this->billingAddressId;
-    }
-
-    /**
-     * @param  Identity $customerId Optional reference to customer. 
-     * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCustomerId(Identity $customerId)
-    {
-        return $this->setProperty('customerId', $customerId, 'Identity');
-    }
-
-    /**
-     * @return Identity Optional reference to customer. 
-     */
-    public function getCustomerId()
-    {
-        return $this->customerId;
     }
 
     /**
@@ -348,21 +309,21 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param  Identity $shippingAddressId Reference to shippingAddress
+     * @param  int $billingAddressId Reference to billingAddress
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setShippingAddressId(Identity $shippingAddressId)
+    public function setBillingAddressId($billingAddressId)
     {
-        return $this->setProperty('shippingAddressId', $shippingAddressId, 'Identity');
+        return $this->setProperty('billingAddressId', $billingAddressId, 'int');
     }
 
     /**
-     * @return Identity Reference to shippingAddress
+     * @return int Reference to billingAddress
      */
-    public function getShippingAddressId()
+    public function getBillingAddressId()
     {
-        return $this->shippingAddressId;
+        return $this->billingAddressId;
     }
 
     /**
@@ -388,7 +349,7 @@ class CustomerOrder extends DataModel
      * @return \jtl\Connector\Model\CustomerOrder
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreated(DateTime $created)
+    public function setCreated(DateTime $created = null)
     {
         return $this->setProperty('created', $created, 'DateTime');
     }
@@ -435,6 +396,24 @@ class CustomerOrder extends DataModel
     public function getCurrencyIso()
     {
         return $this->currencyIso;
+    }
+
+    /**
+     * @param  int $customerId Optional reference to customer. 
+     * @return \jtl\Connector\Model\CustomerOrder
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     */
+    public function setCustomerId($customerId)
+    {
+        return $this->setProperty('customerId', $customerId, 'int');
+    }
+
+    /**
+     * @return int Optional reference to customer. 
+     */
+    public function getCustomerId()
+    {
+        return $this->customerId;
     }
 
     /**
@@ -550,7 +529,7 @@ class CustomerOrder extends DataModel
      * @return \jtl\Connector\Model\CustomerOrder
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setPaymentDate(DateTime $paymentDate)
+    public function setPaymentDate(DateTime $paymentDate = null)
     {
         return $this->setProperty('paymentDate', $paymentDate, 'DateTime');
     }
@@ -586,7 +565,7 @@ class CustomerOrder extends DataModel
      * @return \jtl\Connector\Model\CustomerOrder
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setRatingNotificationDate(DateTime $ratingNotificationDate)
+    public function setRatingNotificationDate(DateTime $ratingNotificationDate = null)
     {
         return $this->setProperty('ratingNotificationDate', $ratingNotificationDate, 'DateTime');
     }
@@ -618,11 +597,29 @@ class CustomerOrder extends DataModel
     }
 
     /**
+     * @param  int $shippingAddressId Reference to shippingAddress
+     * @return \jtl\Connector\Model\CustomerOrder
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     */
+    public function setShippingAddressId($shippingAddressId)
+    {
+        return $this->setProperty('shippingAddressId', $shippingAddressId, 'int');
+    }
+
+    /**
+     * @return int Reference to shippingAddress
+     */
+    public function getShippingAddressId()
+    {
+        return $this->shippingAddressId;
+    }
+
+    /**
      * @param  DateTime $shippingDate Shipping date
      * @return \jtl\Connector\Model\CustomerOrder
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setShippingDate(DateTime $shippingDate)
+    public function setShippingDate(DateTime $shippingDate = null)
     {
         return $this->setProperty('shippingDate', $shippingDate, 'DateTime');
     }

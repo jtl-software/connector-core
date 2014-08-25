@@ -109,7 +109,7 @@ class ProductWarehouseInfo extends DataModel
      * @return \jtl\Connector\Model\ProductWarehouseInfo
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setInflowDate(DateTime $inflowDate)
+    public function setInflowDate(DateTime $inflowDate = null)
     {
         return $this->setProperty('inflowDate', $inflowDate, 'DateTime');
     }

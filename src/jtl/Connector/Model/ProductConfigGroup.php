@@ -30,20 +30,20 @@ class ProductConfigGroup extends DataModel
     protected $configGroupId = null;
 
     /**
-     * @var Identity Unique productConfigGroup id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-
-    /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
+
+    /**
+     * @var int Unique productConfigGroup id
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
+     */
+    protected $id = 0;
 
     /**
      * @var int Optional sort number
@@ -57,7 +57,6 @@ class ProductConfigGroup extends DataModel
     public function __construct()
     {
         $this->configGroupId = new Identity;
-        $this->id = new Identity;
         $this->productId = new Identity;
     }
 
@@ -80,24 +79,6 @@ class ProductConfigGroup extends DataModel
     }
 
     /**
-     * @param  Identity $id Unique productConfigGroup id
-     * @return \jtl\Connector\Model\ProductConfigGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id)
-    {
-        return $this->setProperty('id', $id, 'Identity');
-    }
-
-    /**
-     * @return Identity Unique productConfigGroup id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
      * @param  Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductConfigGroup
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
@@ -113,6 +94,24 @@ class ProductConfigGroup extends DataModel
     public function getProductId()
     {
         return $this->productId;
+    }
+
+    /**
+     * @param  int $id Unique productConfigGroup id
+     * @return \jtl\Connector\Model\ProductConfigGroup
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     */
+    public function setId($id)
+    {
+        return $this->setProperty('id', $id, 'int');
+    }
+
+    /**
+     * @return int Unique productConfigGroup id
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**

@@ -59,10 +59,10 @@ class CustomerGroup extends DataModel
      *
      * @var \jtl\Connector\Model\CustomerGroupI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerGroupI18n>")
-     * @Serializer\SerializedName("i18n")
+     * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18n = array();
+    protected $i18ns = array();
 
     /**
      * End: 1 (One of CustomerGroup)
@@ -159,24 +159,24 @@ class CustomerGroup extends DataModel
      */
     public function addI18n(\jtl\Connector\Model\CustomerGroupI18n $i18n)
     {
-        $this->i18n[] = $i18n;
+        $this->i18ns[] = $i18n;
         return $this;
     }
     
     /**
      * @return \jtl\Connector\Model\CustomerGroupI18n[]
      */
-    public function getI18n()
+    public function getI18ns()
     {
-        return $this->i18n;
+        return $this->i18ns;
     }
 
     /**
      * @return \jtl\Connector\Model\CustomerGroup
      */
-    public function clearI18n()
+    public function clearI18ns()
     {
-        $this->i18n = array();
+        $this->i18ns = array();
         return $this;
     }
 

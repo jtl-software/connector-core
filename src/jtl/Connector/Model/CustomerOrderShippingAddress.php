@@ -22,14 +22,6 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerOrderShippingAddress extends DataModel
 {
     /**
-     * @var Identity Reference to customer
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("customerId")
-     * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
-     */
-    protected $customerId = null;
-
-    /**
      * @var Identity Unique customerOrderShippingAddress id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
@@ -60,6 +52,14 @@ class CustomerOrderShippingAddress extends DataModel
      * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
      */
     protected $countryIso = '';
+
+    /**
+     * @var int Reference to customer
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("customerId")
+     * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
+     */
+    protected $customerId = 0;
 
     /**
      * @var string Delivery instruction e.g. "c/o John Doe"
@@ -168,26 +168,7 @@ class CustomerOrderShippingAddress extends DataModel
 
     public function __construct()
     {
-        $this->customerId = new Identity;
         $this->id = new Identity;
-    }
-
-    /**
-     * @param  Identity $customerId Reference to customer
-     * @return \jtl\Connector\Model\CustomerOrderShippingAddress
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCustomerId(Identity $customerId)
-    {
-        return $this->setProperty('customerId', $customerId, 'Identity');
-    }
-
-    /**
-     * @return Identity Reference to customer
-     */
-    public function getCustomerId()
-    {
-        return $this->customerId;
     }
 
     /**
@@ -260,6 +241,24 @@ class CustomerOrderShippingAddress extends DataModel
     public function getCountryIso()
     {
         return $this->countryIso;
+    }
+
+    /**
+     * @param  int $customerId Reference to customer
+     * @return \jtl\Connector\Model\CustomerOrderShippingAddress
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     */
+    public function setCustomerId($customerId)
+    {
+        return $this->setProperty('customerId', $customerId, 'int');
+    }
+
+    /**
+     * @return int Reference to customer
+     */
+    public function getCustomerId()
+    {
+        return $this->customerId;
     }
 
     /**

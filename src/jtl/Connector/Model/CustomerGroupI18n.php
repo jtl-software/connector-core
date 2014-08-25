@@ -30,12 +30,12 @@ class CustomerGroupI18n extends DataModel
     protected $customerGroupId = null;
 
     /**
-     * @var string Locale
-     * @Serializer\Type("string")
+     * @var Identity Locale
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("localeName")
      * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
      */
-    protected $localeName = '';
+    protected $localeName = null;
 
     /**
      * @var string Localized customer group name
@@ -49,6 +49,7 @@ class CustomerGroupI18n extends DataModel
     public function __construct()
     {
         $this->customerGroupId = new Identity;
+        $this->localeName = new Identity;
     }
 
     /**
@@ -70,17 +71,17 @@ class CustomerGroupI18n extends DataModel
     }
 
     /**
-     * @param  string $localeName Locale
+     * @param  Identity $localeName Locale
      * @return \jtl\Connector\Model\CustomerGroupI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setLocaleName($localeName)
+    public function setLocaleName(Identity $localeName)
     {
-        return $this->setProperty('localeName', $localeName, 'string');
+        return $this->setProperty('localeName', $localeName, 'Identity');
     }
 
     /**
-     * @return string Locale
+     * @return Identity Locale
      */
     public function getLocaleName()
     {

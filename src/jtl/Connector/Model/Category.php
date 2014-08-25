@@ -30,15 +30,7 @@ class Category extends DataModel
     protected $id = null;
 
     /**
-     * @var Identity Optional reference to parent category id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("parentCategoryId")
-     * @Serializer\Accessor(getter="getParentCategoryId",setter="setParentCategoryId")
-     */
-    protected $parentCategoryId = null;
-
-    /**
-     * @var bool 
+     * @var bool Flag if category is active
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isActive")
      * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
@@ -54,23 +46,20 @@ class Category extends DataModel
     protected $level = 0;
 
     /**
+     * @var int Optional reference to parent category id
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("parentCategoryId")
+     * @Serializer\Accessor(getter="getParentCategoryId",setter="setParentCategoryId")
+     */
+    protected $parentCategoryId = 0;
+
+    /**
      * @var int Optional sort order number
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
-
-    /**
-     * End: 0..1 (Zero or One of ParentCategory)
-     *      * (Collection of ChildCategory)
-     *
-     * @var \jtl\Connector\Model\ParentCategory[]
-     * @Serializer\Type("array<jtl\Connector\Model\ParentCategory>")
-     * @Serializer\SerializedName("parent")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $parent = array();
 
     /**
      * End: 1 (One of Category)
@@ -106,11 +95,11 @@ class Category extends DataModel
     protected $customerGroups = array();
 
     /**
-     * End: 0..1 (Zero or One of ParentCategory)
-     *      * (Collection of ChildCategory)
+     * End: 0..1 (Zero or One of Category)
+     *      * (Collection of Category)
      *
-     * @var \jtl\Connector\Model\ChildCategory[]
-     * @Serializer\Type("array<jtl\Connector\Model\ChildCategory>")
+     * @var \jtl\Connector\Model\Category[]
+     * @Serializer\Type("array<jtl\Connector\Model\Category>")
      * @Serializer\SerializedName("children")
      * @Serializer\AccessType("reflection")
      */
@@ -131,7 +120,6 @@ class Category extends DataModel
     public function __construct()
     {
         $this->id = new Identity;
-        $this->parentCategoryId = new Identity;
     }
 
     /**
@@ -153,25 +141,7 @@ class Category extends DataModel
     }
 
     /**
-     * @param  Identity $parentCategoryId Optional reference to parent category id
-     * @return \jtl\Connector\Model\Category
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setParentCategoryId(Identity $parentCategoryId)
-    {
-        return $this->setProperty('parentCategoryId', $parentCategoryId, 'Identity');
-    }
-
-    /**
-     * @return Identity Optional reference to parent category id
-     */
-    public function getParentCategoryId()
-    {
-        return $this->parentCategoryId;
-    }
-
-    /**
-     * @param  bool $isActive 
+     * @param  bool $isActive Flag if category is active
      * @return \jtl\Connector\Model\Category
      * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
@@ -181,7 +151,7 @@ class Category extends DataModel
     }
 
     /**
-     * @return bool 
+     * @return bool Flag if category is active
      */
     public function getIsActive()
     {
@@ -207,6 +177,24 @@ class Category extends DataModel
     }
 
     /**
+     * @param  int $parentCategoryId Optional reference to parent category id
+     * @return \jtl\Connector\Model\Category
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     */
+    public function setParentCategoryId($parentCategoryId)
+    {
+        return $this->setProperty('parentCategoryId', $parentCategoryId, 'int');
+    }
+
+    /**
+     * @return int Optional reference to parent category id
+     */
+    public function getParentCategoryId()
+    {
+        return $this->parentCategoryId;
+    }
+
+    /**
      * @param  int $sort Optional sort order number
      * @return \jtl\Connector\Model\Category
      * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
@@ -222,33 +210,6 @@ class Category extends DataModel
     public function getSort()
     {
         return $this->sort;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\ParentCategory $parent
-     * @return \jtl\Connector\Model\Category
-     */
-    public function addParent(\jtl\Connector\Model\ParentCategory $parent)
-    {
-        $this->parent[] = $parent;
-        return $this;
-    }
-    
-    /**
-     * @return \jtl\Connector\Model\ParentCategory[]
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\Category
-     */
-    public function clearParent()
-    {
-        $this->parent = array();
-        return $this;
     }
 
     /**
@@ -333,17 +294,17 @@ class Category extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ChildCategory $child
+     * @param  \jtl\Connector\Model\Category $child
      * @return \jtl\Connector\Model\Category
      */
-    public function addChild(\jtl\Connector\Model\ChildCategory $child)
+    public function addChild(\jtl\Connector\Model\Category $child)
     {
         $this->children[] = $child;
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ChildCategory[]
+     * @return \jtl\Connector\Model\Category[]
      */
     public function getChildren()
     {

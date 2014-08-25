@@ -30,14 +30,6 @@ class PaymentMethod extends DataModel
     protected $id = null;
 
     /**
-     * @var Identity Payment module identifier
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("moduleId")
-     * @Serializer\Accessor(getter="getModuleId",setter="setModuleId")
-     */
-    protected $moduleId = null;
-
-    /**
      * @var bool Optional: Payment method active? Some payment methods have to be activated by validation or by vendor
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isActive")
@@ -52,6 +44,14 @@ class PaymentMethod extends DataModel
      * @Serializer\Accessor(getter="getIsUseable",setter="setIsUseable")
      */
     protected $isUseable = false;
+
+    /**
+     * @var int Payment module identifier
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("moduleId")
+     * @Serializer\Accessor(getter="getModuleId",setter="setModuleId")
+     */
+    protected $moduleId = 0;
 
     /**
      * @var string Optional image (path or URL) for Paymentmethod
@@ -89,7 +89,6 @@ class PaymentMethod extends DataModel
     public function __construct()
     {
         $this->id = new Identity;
-        $this->moduleId = new Identity;
     }
 
     /**
@@ -108,24 +107,6 @@ class PaymentMethod extends DataModel
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param  Identity $moduleId Payment module identifier
-     * @return \jtl\Connector\Model\PaymentMethod
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setModuleId(Identity $moduleId)
-    {
-        return $this->setProperty('moduleId', $moduleId, 'Identity');
-    }
-
-    /**
-     * @return Identity Payment module identifier
-     */
-    public function getModuleId()
-    {
-        return $this->moduleId;
     }
 
     /**
@@ -162,6 +143,24 @@ class PaymentMethod extends DataModel
     public function getIsUseable()
     {
         return $this->isUseable;
+    }
+
+    /**
+     * @param  int $moduleId Payment module identifier
+     * @return \jtl\Connector\Model\PaymentMethod
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     */
+    public function setModuleId($moduleId)
+    {
+        return $this->setProperty('moduleId', $moduleId, 'int');
+    }
+
+    /**
+     * @return int Payment module identifier
+     */
+    public function getModuleId()
+    {
+        return $this->moduleId;
     }
 
     /**

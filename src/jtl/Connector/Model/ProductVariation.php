@@ -30,12 +30,12 @@ class ProductVariation extends DataModel
     protected $id = null;
 
     /**
-     * @var Identity Reference to product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @var int Reference to product
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected $productId = null;
+    protected $productId = 0;
 
     /**
      * @var int Optional sort number
@@ -90,7 +90,6 @@ class ProductVariation extends DataModel
     public function __construct()
     {
         $this->id = new Identity;
-        $this->productId = new Identity;
     }
 
     /**
@@ -112,17 +111,17 @@ class ProductVariation extends DataModel
     }
 
     /**
-     * @param  Identity $productId Reference to product
+     * @param  int $productId Reference to product
      * @return \jtl\Connector\Model\ProductVariation
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId($productId)
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        return $this->setProperty('productId', $productId, 'int');
     }
 
     /**
-     * @return Identity Reference to product
+     * @return int Reference to product
      */
     public function getProductId()
     {

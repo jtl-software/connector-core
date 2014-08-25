@@ -30,20 +30,20 @@ class ProductVariationValue extends DataModel
     protected $id = null;
 
     /**
-     * @var Identity Reference to productVariation
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productVariationId")
-     * @Serializer\Accessor(getter="getProductVariationId",setter="setProductVariationId")
-     */
-    protected $productVariationId = null;
-
-    /**
      * @var double Optional variation extra weight
      * @Serializer\Type("double")
      * @Serializer\SerializedName("extraWeight")
      * @Serializer\Accessor(getter="getExtraWeight",setter="setExtraWeight")
      */
     protected $extraWeight = 0.0;
+
+    /**
+     * @var int Reference to productVariation
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("productVariationId")
+     * @Serializer\Accessor(getter="getProductVariationId",setter="setProductVariationId")
+     */
+    protected $productVariationId = 0;
 
     /**
      * @var string Optional Stock Keeping Unit
@@ -117,7 +117,6 @@ class ProductVariationValue extends DataModel
     public function __construct()
     {
         $this->id = new Identity;
-        $this->productVariationId = new Identity;
     }
 
     /**
@@ -139,24 +138,6 @@ class ProductVariationValue extends DataModel
     }
 
     /**
-     * @param  Identity $productVariationId Reference to productVariation
-     * @return \jtl\Connector\Model\ProductVariationValue
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductVariationId(Identity $productVariationId)
-    {
-        return $this->setProperty('productVariationId', $productVariationId, 'Identity');
-    }
-
-    /**
-     * @return Identity Reference to productVariation
-     */
-    public function getProductVariationId()
-    {
-        return $this->productVariationId;
-    }
-
-    /**
      * @param  double $extraWeight Optional variation extra weight
      * @return \jtl\Connector\Model\ProductVariationValue
      * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
@@ -172,6 +153,24 @@ class ProductVariationValue extends DataModel
     public function getExtraWeight()
     {
         return $this->extraWeight;
+    }
+
+    /**
+     * @param  int $productVariationId Reference to productVariation
+     * @return \jtl\Connector\Model\ProductVariationValue
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     */
+    public function setProductVariationId($productVariationId)
+    {
+        return $this->setProperty('productVariationId', $productVariationId, 'int');
+    }
+
+    /**
+     * @return int Reference to productVariation
+     */
+    public function getProductVariationId()
+    {
+        return $this->productVariationId;
     }
 
     /**
