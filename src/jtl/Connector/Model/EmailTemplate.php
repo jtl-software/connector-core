@@ -30,6 +30,14 @@ class EmailTemplate extends DataModel
     protected $id = null;
 
     /**
+     * @var Identity 
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("moduleId")
+     * @Serializer\Accessor(getter="getModuleId",setter="setModuleId")
+     */
+    protected $moduleId = null;
+
+    /**
      * @var string 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("description")
@@ -96,14 +104,6 @@ class EmailTemplate extends DataModel
     /**
      * @var string 
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("moduleId")
-     * @Serializer\Accessor(getter="getModuleId",setter="setModuleId")
-     */
-    protected $moduleId = '';
-
-    /**
-     * @var string 
-     * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
@@ -113,6 +113,7 @@ class EmailTemplate extends DataModel
     public function __construct()
     {
         $this->id = new Identity;
+        $this->moduleId = new Identity;
     }
 
     /**
@@ -131,6 +132,24 @@ class EmailTemplate extends DataModel
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param  Identity $moduleId 
+     * @return \jtl\Connector\Model\EmailTemplate
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setModuleId(Identity $moduleId)
+    {
+        return $this->setProperty('moduleId', $moduleId, 'Identity');
+    }
+
+    /**
+     * @return Identity 
+     */
+    public function getModuleId()
+    {
+        return $this->moduleId;
     }
 
     /**
@@ -275,24 +294,6 @@ class EmailTemplate extends DataModel
     public function getIsWrb()
     {
         return $this->isWrb;
-    }
-
-    /**
-     * @param  string $moduleId 
-     * @return \jtl\Connector\Model\EmailTemplate
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setModuleId($moduleId)
-    {
-        return $this->setProperty('moduleId', $moduleId, 'string');
-    }
-
-    /**
-     * @return string 
-     */
-    public function getModuleId()
-    {
-        return $this->moduleId;
     }
 
     /**

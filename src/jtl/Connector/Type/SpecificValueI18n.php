@@ -17,11 +17,11 @@ class SpecificValueI18n extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('specificValueId', 'Identity', null, true, true, false),
             new PropertyInfo('description', 'string', null, false, false, false),
-            new PropertyInfo('localeName', 'string', null, true, false, false),
+            new PropertyInfo('localeName', 'string', null, false, false, false),
             new PropertyInfo('metaDescription', 'string', null, false, false, false),
             new PropertyInfo('metaKeywords', 'string', null, false, false, false),
+            new PropertyInfo('specificValueId', 'int', null, true, true, false),
             new PropertyInfo('titleTag', 'string', null, false, false, false),
             new PropertyInfo('urlPath', 'string', null, false, false, false),
             new PropertyInfo('value', 'string', null, false, false, false),

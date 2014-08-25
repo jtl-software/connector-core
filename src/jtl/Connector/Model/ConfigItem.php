@@ -22,6 +22,14 @@ use JMS\Serializer\Annotation as Serializer;
 class ConfigItem extends DataModel
 {
     /**
+     * @var Identity Reference to configGroup
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("configGroupId")
+     * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
+     */
+    protected $configGroupId = null;
+
+    /**
      * @var Identity Unique configItem id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
@@ -30,12 +38,12 @@ class ConfigItem extends DataModel
     protected $id = null;
 
     /**
-     * @var int Reference to configGroup
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("configGroupId")
-     * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
+     * @var Identity Optional reference to product
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productId")
+     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected $configGroupId = 0;
+    protected $productId = null;
 
     /**
      * @var bool Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
@@ -102,14 +110,6 @@ class ConfigItem extends DataModel
     protected $minQuantity = 0.0;
 
     /**
-     * @var int Optional reference to product
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
-    protected $productId = 0;
-
-    /**
      * @var bool Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("showDiscount")
@@ -174,7 +174,27 @@ class ConfigItem extends DataModel
 
     public function __construct()
     {
+        $this->configGroupId = new Identity;
         $this->id = new Identity;
+        $this->productId = new Identity;
+    }
+
+    /**
+     * @param  Identity $configGroupId Reference to configGroup
+     * @return \jtl\Connector\Model\ConfigItem
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setConfigGroupId(Identity $configGroupId)
+    {
+        return $this->setProperty('configGroupId', $configGroupId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to configGroup
+     */
+    public function getConfigGroupId()
+    {
+        return $this->configGroupId;
     }
 
     /**
@@ -196,21 +216,21 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @param  int $configGroupId Reference to configGroup
+     * @param  Identity $productId Optional reference to product
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setConfigGroupId($configGroupId)
+    public function setProductId(Identity $productId)
     {
-        return $this->setProperty('configGroupId', $configGroupId, 'int');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
 
     /**
-     * @return int Reference to configGroup
+     * @return Identity Optional reference to product
      */
-    public function getConfigGroupId()
+    public function getProductId()
     {
-        return $this->configGroupId;
+        return $this->productId;
     }
 
     /**
@@ -355,24 +375,6 @@ class ConfigItem extends DataModel
     public function getMinQuantity()
     {
         return $this->minQuantity;
-    }
-
-    /**
-     * @param  int $productId Optional reference to product
-     * @return \jtl\Connector\Model\ConfigItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setProductId($productId)
-    {
-        return $this->setProperty('productId', $productId, 'int');
-    }
-
-    /**
-     * @return int Optional reference to product
-     */
-    public function getProductId()
-    {
-        return $this->productId;
     }
 
     /**

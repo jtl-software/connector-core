@@ -22,6 +22,14 @@ use JMS\Serializer\Annotation as Serializer;
 class DeliveryNote extends DataModel
 {
     /**
+     * @var Identity Reference to customerOrder
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerOrderId")
+     * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
+     */
+    protected $customerOrderId = null;
+
+    /**
      * @var Identity Unique deliveryNote id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
@@ -36,14 +44,6 @@ class DeliveryNote extends DataModel
      * @Serializer\Accessor(getter="getCreated",setter="setCreated")
      */
     protected $created = null;
-
-    /**
-     * @var int Reference to customerOrder
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("customerOrderId")
-     * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
-     */
-    protected $customerOrderId = 0;
 
     /**
      * @var bool Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
@@ -83,7 +83,26 @@ class DeliveryNote extends DataModel
 
     public function __construct()
     {
+        $this->customerOrderId = new Identity;
         $this->id = new Identity;
+    }
+
+    /**
+     * @param  Identity $customerOrderId Reference to customerOrder
+     * @return \jtl\Connector\Model\DeliveryNote
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerOrderId(Identity $customerOrderId)
+    {
+        return $this->setProperty('customerOrderId', $customerOrderId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to customerOrder
+     */
+    public function getCustomerOrderId()
+    {
+        return $this->customerOrderId;
     }
 
     /**
@@ -120,24 +139,6 @@ class DeliveryNote extends DataModel
     public function getCreated()
     {
         return $this->created;
-    }
-
-    /**
-     * @param  int $customerOrderId Reference to customerOrder
-     * @return \jtl\Connector\Model\DeliveryNote
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setCustomerOrderId($customerOrderId)
-    {
-        return $this->setProperty('customerOrderId', $customerOrderId, 'int');
-    }
-
-    /**
-     * @return int Reference to customerOrder
-     */
-    public function getCustomerOrderId()
-    {
-        return $this->customerOrderId;
     }
 
     /**

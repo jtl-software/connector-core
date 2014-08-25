@@ -24,6 +24,30 @@ class FileDownloadHistory extends DataModel
     /**
      * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerId")
+     * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
+     */
+    protected $customerId = null;
+
+    /**
+     * @var Identity 
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerOrderId")
+     * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
+     */
+    protected $customerOrderId = null;
+
+    /**
+     * @var Identity 
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("fileDownloadId")
+     * @Serializer\Accessor(getter="getFileDownloadId",setter="setFileDownloadId")
+     */
+    protected $fileDownloadId = null;
+
+    /**
+     * @var Identity 
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
@@ -37,34 +61,67 @@ class FileDownloadHistory extends DataModel
      */
     protected $created = null;
 
-    /**
-     * @var int 
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("customerId")
-     * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
-     */
-    protected $customerId = 0;
-
-    /**
-     * @var int 
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("customerOrderId")
-     * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
-     */
-    protected $customerOrderId = 0;
-
-    /**
-     * @var int 
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("fileDownloadId")
-     * @Serializer\Accessor(getter="getFileDownloadId",setter="setFileDownloadId")
-     */
-    protected $fileDownloadId = 0;
-
 
     public function __construct()
     {
+        $this->customerId = new Identity;
+        $this->customerOrderId = new Identity;
+        $this->fileDownloadId = new Identity;
         $this->id = new Identity;
+    }
+
+    /**
+     * @param  Identity $customerId 
+     * @return \jtl\Connector\Model\FileDownloadHistory
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerId(Identity $customerId)
+    {
+        return $this->setProperty('customerId', $customerId, 'Identity');
+    }
+
+    /**
+     * @return Identity 
+     */
+    public function getCustomerId()
+    {
+        return $this->customerId;
+    }
+
+    /**
+     * @param  Identity $customerOrderId 
+     * @return \jtl\Connector\Model\FileDownloadHistory
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerOrderId(Identity $customerOrderId)
+    {
+        return $this->setProperty('customerOrderId', $customerOrderId, 'Identity');
+    }
+
+    /**
+     * @return Identity 
+     */
+    public function getCustomerOrderId()
+    {
+        return $this->customerOrderId;
+    }
+
+    /**
+     * @param  Identity $fileDownloadId 
+     * @return \jtl\Connector\Model\FileDownloadHistory
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setFileDownloadId(Identity $fileDownloadId)
+    {
+        return $this->setProperty('fileDownloadId', $fileDownloadId, 'Identity');
+    }
+
+    /**
+     * @return Identity 
+     */
+    public function getFileDownloadId()
+    {
+        return $this->fileDownloadId;
     }
 
     /**
@@ -101,60 +158,6 @@ class FileDownloadHistory extends DataModel
     public function getCreated()
     {
         return $this->created;
-    }
-
-    /**
-     * @param  int $customerId 
-     * @return \jtl\Connector\Model\FileDownloadHistory
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setCustomerId($customerId)
-    {
-        return $this->setProperty('customerId', $customerId, 'int');
-    }
-
-    /**
-     * @return int 
-     */
-    public function getCustomerId()
-    {
-        return $this->customerId;
-    }
-
-    /**
-     * @param  int $customerOrderId 
-     * @return \jtl\Connector\Model\FileDownloadHistory
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setCustomerOrderId($customerOrderId)
-    {
-        return $this->setProperty('customerOrderId', $customerOrderId, 'int');
-    }
-
-    /**
-     * @return int 
-     */
-    public function getCustomerOrderId()
-    {
-        return $this->customerOrderId;
-    }
-
-    /**
-     * @param  int $fileDownloadId 
-     * @return \jtl\Connector\Model\FileDownloadHistory
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setFileDownloadId($fileDownloadId)
-    {
-        return $this->setProperty('fileDownloadId', $fileDownloadId, 'int');
-    }
-
-    /**
-     * @return int 
-     */
-    public function getFileDownloadId()
-    {
-        return $this->fileDownloadId;
     }
 
  

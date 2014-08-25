@@ -30,20 +30,20 @@ class CrossSellingGroup extends DataModel
     protected $id = null;
 
     /**
-     * @var Identity Locale
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("localeName")
-     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
-     */
-    protected $localeName = null;
-
-    /**
      * @var string Optional localized description
      * @Serializer\Type("string")
      * @Serializer\SerializedName("description")
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
+
+    /**
+     * @var string Locale
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("localeName")
+     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
+     */
+    protected $localeName = '';
 
     /**
      * @var string Localized name
@@ -57,7 +57,6 @@ class CrossSellingGroup extends DataModel
     public function __construct()
     {
         $this->id = new Identity;
-        $this->localeName = new Identity;
     }
 
     /**
@@ -79,24 +78,6 @@ class CrossSellingGroup extends DataModel
     }
 
     /**
-     * @param  Identity $localeName Locale
-     * @return \jtl\Connector\Model\CrossSellingGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setLocaleName(Identity $localeName)
-    {
-        return $this->setProperty('localeName', $localeName, 'Identity');
-    }
-
-    /**
-     * @return Identity Locale
-     */
-    public function getLocaleName()
-    {
-        return $this->localeName;
-    }
-
-    /**
      * @param  string $description Optional localized description
      * @return \jtl\Connector\Model\CrossSellingGroup
      * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
@@ -112,6 +93,24 @@ class CrossSellingGroup extends DataModel
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @param  string $localeName Locale
+     * @return \jtl\Connector\Model\CrossSellingGroup
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setLocaleName($localeName)
+    {
+        return $this->setProperty('localeName', $localeName, 'string');
+    }
+
+    /**
+     * @return string Locale
+     */
+    public function getLocaleName()
+    {
+        return $this->localeName;
     }
 
     /**

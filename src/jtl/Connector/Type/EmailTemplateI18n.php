@@ -17,11 +17,11 @@ class EmailTemplateI18n extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('emailTemplateId', 'Identity', null, true, true, false),
             new PropertyInfo('contentHtml', 'string', null, false, false, false),
             new PropertyInfo('contentText', 'string', null, false, false, false),
+            new PropertyInfo('emailTemplateId', 'int', null, true, true, false),
             new PropertyInfo('filename', 'string', null, false, false, false),
-            new PropertyInfo('localeName', 'string', null, true, false, false),
+            new PropertyInfo('localeName', 'string', null, false, false, false),
             new PropertyInfo('pdf', 'string', null, false, false, false),
             new PropertyInfo('subject', 'string', null, false, false, false),
         );

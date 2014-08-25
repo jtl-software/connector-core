@@ -17,9 +17,9 @@ class CategoryI18n extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('categoryId', 'Identity', null, true, true, false),
+            new PropertyInfo('categoryId', 'int', null, true, true, false),
             new PropertyInfo('description', 'string', null, false, false, false),
-            new PropertyInfo('localeName', 'string', null, true, false, false),
+            new PropertyInfo('localeName', 'string', null, false, false, false),
             new PropertyInfo('metaDescription', 'string', null, false, false, false),
             new PropertyInfo('metaKeywords', 'string', null, false, false, false),
             new PropertyInfo('name', 'string', null, false, false, false),

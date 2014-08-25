@@ -17,9 +17,9 @@ class SpecialPrice extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('customerGroupId', 'Identity', null, true, true, false),
-            new PropertyInfo('productSpecialPriceId', 'Identity', null, true, true, false),
+            new PropertyInfo('customerGroupId', 'int', null, true, true, false),
             new PropertyInfo('priceNet', 'double', null, false, false, false),
+            new PropertyInfo('productSpecialPriceId', 'int', null, true, true, false),
         );
     }
 }

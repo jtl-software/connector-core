@@ -22,20 +22,20 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerOrderAttr extends DataModel
 {
     /**
+     * @var Identity Reference to customerOrder
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerOrderId")
+     * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
+     */
+    protected $customerOrderId = null;
+
+    /**
      * @var Identity Unique customerOrderAttr id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
-    /**
-     * @var int Reference to customerOrder
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("customerOrderId")
-     * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
-     */
-    protected $customerOrderId = 0;
 
     /**
      * @var string Attribute key name
@@ -56,7 +56,26 @@ class CustomerOrderAttr extends DataModel
 
     public function __construct()
     {
+        $this->customerOrderId = new Identity;
         $this->id = new Identity;
+    }
+
+    /**
+     * @param  Identity $customerOrderId Reference to customerOrder
+     * @return \jtl\Connector\Model\CustomerOrderAttr
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerOrderId(Identity $customerOrderId)
+    {
+        return $this->setProperty('customerOrderId', $customerOrderId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to customerOrder
+     */
+    public function getCustomerOrderId()
+    {
+        return $this->customerOrderId;
     }
 
     /**
@@ -75,24 +94,6 @@ class CustomerOrderAttr extends DataModel
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param  int $customerOrderId Reference to customerOrder
-     * @return \jtl\Connector\Model\CustomerOrderAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setCustomerOrderId($customerOrderId)
-    {
-        return $this->setProperty('customerOrderId', $customerOrderId, 'int');
-    }
-
-    /**
-     * @return int Reference to customerOrder
-     */
-    public function getCustomerOrderId()
-    {
-        return $this->customerOrderId;
     }
 
     /**

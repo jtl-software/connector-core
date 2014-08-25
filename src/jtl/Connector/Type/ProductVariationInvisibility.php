@@ -17,8 +17,8 @@ class ProductVariationInvisibility extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('customerGroupId', 'Identity', null, true, true, false),
-            new PropertyInfo('productVariationId', 'Identity', null, true, true, false),
+            new PropertyInfo('customerGroupId', 'int', null, true, true, false),
+            new PropertyInfo('productVariationId', 'int', null, true, true, false),
         );
     }
 }

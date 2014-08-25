@@ -22,6 +22,22 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerOrderBasket extends DataModel
 {
     /**
+     * @var Identity Reference to customerId
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerId")
+     * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
+     */
+    protected $customerId = null;
+
+    /**
+     * @var Identity customerOrderPaymentInfoId
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerOrderPaymentInfoId")
+     * @Serializer\Accessor(getter="getCustomerOrderPaymentInfoId",setter="setCustomerOrderPaymentInfoId")
+     */
+    protected $customerOrderPaymentInfoId = null;
+
+    /**
      * @var Identity Unique id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
@@ -30,33 +46,56 @@ class CustomerOrderBasket extends DataModel
     protected $id = null;
 
     /**
-     * @var int Reference to customerId
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("customerId")
-     * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
-     */
-    protected $customerId = 0;
-
-    /**
-     * @var int customerOrderPaymentInfoId
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("customerOrderPaymentInfoId")
-     * @Serializer\Accessor(getter="getCustomerOrderPaymentInfoId",setter="setCustomerOrderPaymentInfoId")
-     */
-    protected $customerOrderPaymentInfoId = 0;
-
-    /**
-     * @var int Reference to shippingAddressId
-     * @Serializer\Type("integer")
+     * @var Identity Reference to shippingAddressId
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("shippingAddressId")
      * @Serializer\Accessor(getter="getShippingAddressId",setter="setShippingAddressId")
      */
-    protected $shippingAddressId = 0;
+    protected $shippingAddressId = null;
 
 
     public function __construct()
     {
+        $this->customerId = new Identity;
+        $this->customerOrderPaymentInfoId = new Identity;
         $this->id = new Identity;
+        $this->shippingAddressId = new Identity;
+    }
+
+    /**
+     * @param  Identity $customerId Reference to customerId
+     * @return \jtl\Connector\Model\CustomerOrderBasket
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerId(Identity $customerId)
+    {
+        return $this->setProperty('customerId', $customerId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to customerId
+     */
+    public function getCustomerId()
+    {
+        return $this->customerId;
+    }
+
+    /**
+     * @param  Identity $customerOrderPaymentInfoId customerOrderPaymentInfoId
+     * @return \jtl\Connector\Model\CustomerOrderBasket
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerOrderPaymentInfoId(Identity $customerOrderPaymentInfoId)
+    {
+        return $this->setProperty('customerOrderPaymentInfoId', $customerOrderPaymentInfoId, 'Identity');
+    }
+
+    /**
+     * @return Identity customerOrderPaymentInfoId
+     */
+    public function getCustomerOrderPaymentInfoId()
+    {
+        return $this->customerOrderPaymentInfoId;
     }
 
     /**
@@ -78,53 +117,17 @@ class CustomerOrderBasket extends DataModel
     }
 
     /**
-     * @param  int $customerId Reference to customerId
+     * @param  Identity $shippingAddressId Reference to shippingAddressId
      * @return \jtl\Connector\Model\CustomerOrderBasket
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerId($customerId)
+    public function setShippingAddressId(Identity $shippingAddressId)
     {
-        return $this->setProperty('customerId', $customerId, 'int');
+        return $this->setProperty('shippingAddressId', $shippingAddressId, 'Identity');
     }
 
     /**
-     * @return int Reference to customerId
-     */
-    public function getCustomerId()
-    {
-        return $this->customerId;
-    }
-
-    /**
-     * @param  int $customerOrderPaymentInfoId customerOrderPaymentInfoId
-     * @return \jtl\Connector\Model\CustomerOrderBasket
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setCustomerOrderPaymentInfoId($customerOrderPaymentInfoId)
-    {
-        return $this->setProperty('customerOrderPaymentInfoId', $customerOrderPaymentInfoId, 'int');
-    }
-
-    /**
-     * @return int customerOrderPaymentInfoId
-     */
-    public function getCustomerOrderPaymentInfoId()
-    {
-        return $this->customerOrderPaymentInfoId;
-    }
-
-    /**
-     * @param  int $shippingAddressId Reference to shippingAddressId
-     * @return \jtl\Connector\Model\CustomerOrderBasket
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setShippingAddressId($shippingAddressId)
-    {
-        return $this->setProperty('shippingAddressId', $shippingAddressId, 'int');
-    }
-
-    /**
-     * @return int Reference to shippingAddressId
+     * @return Identity Reference to shippingAddressId
      */
     public function getShippingAddressId()
     {

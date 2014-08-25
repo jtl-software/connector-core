@@ -30,14 +30,6 @@ class EmailTemplateI18n extends DataModel
     protected $emailTemplateId = null;
 
     /**
-     * @var Identity 
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("localeName")
-     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
-     */
-    protected $localeName = null;
-
-    /**
      * @var string 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("contentHtml")
@@ -64,6 +56,14 @@ class EmailTemplateI18n extends DataModel
     /**
      * @var string 
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("localeName")
+     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
+     */
+    protected $localeName = '';
+
+    /**
+     * @var string 
+     * @Serializer\Type("string")
      * @Serializer\SerializedName("pdf")
      * @Serializer\Accessor(getter="getPdf",setter="setPdf")
      */
@@ -81,7 +81,6 @@ class EmailTemplateI18n extends DataModel
     public function __construct()
     {
         $this->emailTemplateId = new Identity;
-        $this->localeName = new Identity;
     }
 
     /**
@@ -100,24 +99,6 @@ class EmailTemplateI18n extends DataModel
     public function getEmailTemplateId()
     {
         return $this->emailTemplateId;
-    }
-
-    /**
-     * @param  Identity $localeName 
-     * @return \jtl\Connector\Model\EmailTemplateI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setLocaleName(Identity $localeName)
-    {
-        return $this->setProperty('localeName', $localeName, 'Identity');
-    }
-
-    /**
-     * @return Identity 
-     */
-    public function getLocaleName()
-    {
-        return $this->localeName;
     }
 
     /**
@@ -172,6 +153,24 @@ class EmailTemplateI18n extends DataModel
     public function getFilename()
     {
         return $this->filename;
+    }
+
+    /**
+     * @param  string $localeName 
+     * @return \jtl\Connector\Model\EmailTemplateI18n
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setLocaleName($localeName)
+    {
+        return $this->setProperty('localeName', $localeName, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getLocaleName()
+    {
+        return $this->localeName;
     }
 
     /**

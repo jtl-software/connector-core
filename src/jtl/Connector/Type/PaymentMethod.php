@@ -17,10 +17,10 @@ class PaymentMethod extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('id', 'Identity', null, true, true, false),
-            new PropertyInfo('moduleId', 'Identity', null, false, true, false),
+            new PropertyInfo('id', 'int', null, true, true, false),
             new PropertyInfo('isActive', 'bool', null, false, false, false),
             new PropertyInfo('isUseable', 'bool', null, false, false, false),
+            new PropertyInfo('moduleId', 'int', null, false, true, false),
             new PropertyInfo('picture', 'string', null, false, false, false),
             new PropertyInfo('sort', 'int', null, false, false, false),
             new PropertyInfo('useMail', 'bool', null, false, false, false),

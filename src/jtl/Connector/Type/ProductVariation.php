@@ -17,8 +17,8 @@ class ProductVariation extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('id', 'Identity', null, true, true, false),
-            new PropertyInfo('productId', 'Identity', null, false, true, false),
+            new PropertyInfo('id', 'int', null, true, true, false),
+            new PropertyInfo('productId', 'int', null, false, true, false),
             new PropertyInfo('sort', 'int', null, false, false, false),
             new PropertyInfo('type', 'string', null, false, false, false),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\ProductVariationI18n', null, false, false, true),

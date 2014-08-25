@@ -17,9 +17,9 @@ class ProductConfigGroup extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('configGroupId', 'Identity', null, true, true, false),
-            new PropertyInfo('id', 'Identity', null, false, true, false),
-            new PropertyInfo('productId', 'Identity', null, true, true, false),
+            new PropertyInfo('configGroupId', 'int', null, true, true, false),
+            new PropertyInfo('id', 'int', null, false, true, false),
+            new PropertyInfo('productId', 'int', null, true, true, false),
             new PropertyInfo('sort', 'int', null, false, false, false),
         );
     }

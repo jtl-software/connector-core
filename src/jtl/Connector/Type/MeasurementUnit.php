@@ -17,9 +17,9 @@ class MeasurementUnit extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('code', 'string', null, false, false, false),
             new PropertyInfo('displayCode', 'string', null, false, false, false),
+            new PropertyInfo('id', 'int', null, true, true, false),
         );
     }
 }

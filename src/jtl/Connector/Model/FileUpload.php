@@ -30,6 +30,14 @@ class FileUpload extends DataModel
     protected $id = null;
 
     /**
+     * @var Identity Reference to product
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productId")
+     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
+     */
+    protected $productId = null;
+
+    /**
      * @var string Optional file description
      * @Serializer\Type("string")
      * @Serializer\SerializedName("description")
@@ -61,18 +69,11 @@ class FileUpload extends DataModel
      */
     protected $name = '';
 
-    /**
-     * @var int Reference to product
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
-    protected $productId = 0;
-
 
     public function __construct()
     {
         $this->id = new Identity;
+        $this->productId = new Identity;
     }
 
     /**
@@ -91,6 +92,24 @@ class FileUpload extends DataModel
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param  Identity $productId Reference to product
+     * @return \jtl\Connector\Model\FileUpload
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setProductId(Identity $productId)
+    {
+        return $this->setProperty('productId', $productId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to product
+     */
+    public function getProductId()
+    {
+        return $this->productId;
     }
 
     /**
@@ -163,24 +182,6 @@ class FileUpload extends DataModel
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * @param  int $productId Reference to product
-     * @return \jtl\Connector\Model\FileUpload
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setProductId($productId)
-    {
-        return $this->setProperty('productId', $productId, 'int');
-    }
-
-    /**
-     * @return int Reference to product
-     */
-    public function getProductId()
-    {
-        return $this->productId;
     }
 
  

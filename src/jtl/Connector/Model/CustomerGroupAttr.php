@@ -22,20 +22,20 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerGroupAttr extends DataModel
 {
     /**
+     * @var Identity Reference to customerGroup
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerGroupId")
+     * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
+     */
+    protected $customerGroupId = null;
+
+    /**
      * @var Identity Unique customerGroupAttr id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
-    /**
-     * @var int Reference to customerGroup
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("customerGroupId")
-     * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
-     */
-    protected $customerGroupId = 0;
 
     /**
      * @var string Attribute key
@@ -67,7 +67,26 @@ class CustomerGroupAttr extends DataModel
 
     public function __construct()
     {
+        $this->customerGroupId = new Identity;
         $this->id = new Identity;
+    }
+
+    /**
+     * @param  Identity $customerGroupId Reference to customerGroup
+     * @return \jtl\Connector\Model\CustomerGroupAttr
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerGroupId(Identity $customerGroupId)
+    {
+        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to customerGroup
+     */
+    public function getCustomerGroupId()
+    {
+        return $this->customerGroupId;
     }
 
     /**
@@ -86,24 +105,6 @@ class CustomerGroupAttr extends DataModel
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param  int $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\CustomerGroupAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setCustomerGroupId($customerGroupId)
-    {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'int');
-    }
-
-    /**
-     * @return int Reference to customerGroup
-     */
-    public function getCustomerGroupId()
-    {
-        return $this->customerGroupId;
     }
 
     /**

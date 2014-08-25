@@ -17,10 +17,10 @@ class Image extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('foreignKey', 'Identity', null, false, true, false),
-            new PropertyInfo('id', 'Identity', null, false, true, false),
-            new PropertyInfo('masterImageId', 'Identity', null, false, true, false),
             new PropertyInfo('filename', 'string', null, false, false, false),
+            new PropertyInfo('foreignKey', 'int', null, false, false, false),
+            new PropertyInfo('id', 'int', null, true, true, false),
+            new PropertyInfo('masterImageId', 'int', null, false, true, false),
             new PropertyInfo('relationType', 'string', null, false, false, false),
             new PropertyInfo('sort', 'int', null, false, false, false),
         );

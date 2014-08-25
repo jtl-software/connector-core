@@ -17,8 +17,8 @@ class ProductFileDownload extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('fileDownloadId', 'Identity', null, true, true, false),
-            new PropertyInfo('productId', 'Identity', null, true, true, false),
+            new PropertyInfo('fileDownloadId', 'int', null, true, true, false),
+            new PropertyInfo('productId', 'int', null, true, true, false),
         );
     }
 }

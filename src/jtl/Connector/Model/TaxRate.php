@@ -30,6 +30,22 @@ class TaxRate extends DataModel
     protected $id = null;
 
     /**
+     * @var Identity Reference to taxClass
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("taxClassId")
+     * @Serializer\Accessor(getter="getTaxClassId",setter="setTaxClassId")
+     */
+    protected $taxClassId = null;
+
+    /**
+     * @var Identity Reference to taxZone
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("taxZoneId")
+     * @Serializer\Accessor(getter="getTaxZoneId",setter="setTaxZoneId")
+     */
+    protected $taxZoneId = null;
+
+    /**
      * @var int Optional priority number. Higher value means higher priority
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("priority")
@@ -45,26 +61,12 @@ class TaxRate extends DataModel
      */
     protected $rate = 0.0;
 
-    /**
-     * @var int Reference to taxClass
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("taxClassId")
-     * @Serializer\Accessor(getter="getTaxClassId",setter="setTaxClassId")
-     */
-    protected $taxClassId = 0;
-
-    /**
-     * @var int Reference to taxZone
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("taxZoneId")
-     * @Serializer\Accessor(getter="getTaxZoneId",setter="setTaxZoneId")
-     */
-    protected $taxZoneId = 0;
-
 
     public function __construct()
     {
         $this->id = new Identity;
+        $this->taxClassId = new Identity;
+        $this->taxZoneId = new Identity;
     }
 
     /**
@@ -83,6 +85,42 @@ class TaxRate extends DataModel
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param  Identity $taxClassId Reference to taxClass
+     * @return \jtl\Connector\Model\TaxRate
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setTaxClassId(Identity $taxClassId)
+    {
+        return $this->setProperty('taxClassId', $taxClassId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to taxClass
+     */
+    public function getTaxClassId()
+    {
+        return $this->taxClassId;
+    }
+
+    /**
+     * @param  Identity $taxZoneId Reference to taxZone
+     * @return \jtl\Connector\Model\TaxRate
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setTaxZoneId(Identity $taxZoneId)
+    {
+        return $this->setProperty('taxZoneId', $taxZoneId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to taxZone
+     */
+    public function getTaxZoneId()
+    {
+        return $this->taxZoneId;
     }
 
     /**
@@ -119,42 +157,6 @@ class TaxRate extends DataModel
     public function getRate()
     {
         return $this->rate;
-    }
-
-    /**
-     * @param  int $taxClassId Reference to taxClass
-     * @return \jtl\Connector\Model\TaxRate
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setTaxClassId($taxClassId)
-    {
-        return $this->setProperty('taxClassId', $taxClassId, 'int');
-    }
-
-    /**
-     * @return int Reference to taxClass
-     */
-    public function getTaxClassId()
-    {
-        return $this->taxClassId;
-    }
-
-    /**
-     * @param  int $taxZoneId Reference to taxZone
-     * @return \jtl\Connector\Model\TaxRate
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setTaxZoneId($taxZoneId)
-    {
-        return $this->setProperty('taxZoneId', $taxZoneId, 'int');
-    }
-
-    /**
-     * @return int Reference to taxZone
-     */
-    public function getTaxZoneId()
-    {
-        return $this->taxZoneId;
     }
 
  

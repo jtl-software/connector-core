@@ -17,8 +17,8 @@ class ProductVariationValueDependency extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('productVariationValueId', 'Identity', null, true, true, false),
-            new PropertyInfo('productVariationValueTargetId', 'Identity', null, true, true, false),
+            new PropertyInfo('productVariationValueId', 'int', null, true, true, false),
+            new PropertyInfo('productVariationValueTargetId', 'int', null, true, true, false),
         );
     }
 }

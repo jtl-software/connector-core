@@ -17,8 +17,8 @@ class WarehouseI18n extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('warehouseId', 'Identity', null, false, true, false),
             new PropertyInfo('name', 'string', null, false, false, false),
+            new PropertyInfo('warehouseId', 'int', null, true, true, false),
         );
     }
 }

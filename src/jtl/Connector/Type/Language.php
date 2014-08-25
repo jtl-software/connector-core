@@ -17,7 +17,7 @@ class Language extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('id', 'int', null, true, true, false),
             new PropertyInfo('isDefault', 'bool', null, false, false, false),
             new PropertyInfo('localeName', 'string', null, false, false, false),
             new PropertyInfo('nameEnglish', 'string', null, false, false, false),

@@ -17,10 +17,10 @@ class CustomerOrderBasket extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('customerId', 'Identity', null, false, true, false),
-            new PropertyInfo('customerOrderPaymentInfoId', 'Identity', null, false, true, false),
-            new PropertyInfo('id', 'Identity', null, true, true, false),
-            new PropertyInfo('shippingAddressId', 'Identity', null, false, true, false),
+            new PropertyInfo('customerId', 'int', null, false, true, false),
+            new PropertyInfo('customerOrderPaymentInfoId', 'int', null, false, true, false),
+            new PropertyInfo('id', 'int', null, true, true, false),
+            new PropertyInfo('shippingAddressId', 'int', null, false, true, false),
         );
     }
 }

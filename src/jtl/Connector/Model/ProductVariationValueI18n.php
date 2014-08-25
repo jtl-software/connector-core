@@ -22,20 +22,20 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductVariationValueI18n extends DataModel
 {
     /**
-     * @var Identity Locale
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("localeName")
-     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
-     */
-    protected $localeName = null;
-
-    /**
      * @var Identity Reference to productVariationValue
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("productVariationValueId")
      * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
      */
     protected $productVariationValueId = null;
+
+    /**
+     * @var string Locale
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("localeName")
+     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
+     */
+    protected $localeName = '';
 
     /**
      * @var string Locale specific variationValue name
@@ -48,26 +48,7 @@ class ProductVariationValueI18n extends DataModel
 
     public function __construct()
     {
-        $this->localeName = new Identity;
         $this->productVariationValueId = new Identity;
-    }
-
-    /**
-     * @param  Identity $localeName Locale
-     * @return \jtl\Connector\Model\ProductVariationValueI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setLocaleName(Identity $localeName)
-    {
-        return $this->setProperty('localeName', $localeName, 'Identity');
-    }
-
-    /**
-     * @return Identity Locale
-     */
-    public function getLocaleName()
-    {
-        return $this->localeName;
     }
 
     /**
@@ -86,6 +67,24 @@ class ProductVariationValueI18n extends DataModel
     public function getProductVariationValueId()
     {
         return $this->productVariationValueId;
+    }
+
+    /**
+     * @param  string $localeName Locale
+     * @return \jtl\Connector\Model\ProductVariationValueI18n
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setLocaleName($localeName)
+    {
+        return $this->setProperty('localeName', $localeName, 'string');
+    }
+
+    /**
+     * @return string Locale
+     */
+    public function getLocaleName()
+    {
+        return $this->localeName;
     }
 
     /**

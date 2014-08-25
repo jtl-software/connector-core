@@ -17,8 +17,8 @@ class CategoryFunctionAttr extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('categoryId', 'Identity', null, false, true, false),
-            new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('categoryId', 'int', null, false, true, false),
+            new PropertyInfo('id', 'int', null, true, true, false),
             new PropertyInfo('name', 'string', null, false, false, false),
             new PropertyInfo('value', 'string', null, false, false, false),
         );

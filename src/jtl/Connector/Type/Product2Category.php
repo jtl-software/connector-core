@@ -17,9 +17,9 @@ class Product2Category extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('categoryId', 'Identity', null, false, true, false),
-            new PropertyInfo('id', 'Identity', null, true, true, false),
-            new PropertyInfo('productId', 'Identity', null, false, true, false),
+            new PropertyInfo('categoryId', 'int', null, false, true, false),
+            new PropertyInfo('id', 'int', null, true, true, false),
+            new PropertyInfo('productId', 'int', null, false, true, false),
         );
     }
 }

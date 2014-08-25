@@ -17,9 +17,9 @@ class ManufacturerI18n extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('manufacturerId', 'Identity', null, true, true, false),
             new PropertyInfo('description', 'string', null, false, false, false),
-            new PropertyInfo('localeName', 'string', null, true, false, false),
+            new PropertyInfo('localeName', 'string', null, false, false, false),
+            new PropertyInfo('manufacturerId', 'int', null, true, true, false),
             new PropertyInfo('metaDescription', 'string', null, false, false, false),
             new PropertyInfo('metaKeywords', 'string', null, false, false, false),
             new PropertyInfo('titleTag', 'string', null, false, false, false),

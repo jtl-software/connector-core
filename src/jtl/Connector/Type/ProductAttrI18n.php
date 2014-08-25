@@ -17,9 +17,9 @@ class ProductAttrI18n extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('productAttrId', 'Identity', null, true, true, false),
             new PropertyInfo('key', 'string', null, false, false, false),
-            new PropertyInfo('localeName', 'string', null, true, false, false),
+            new PropertyInfo('localeName', 'string', null, false, false, false),
+            new PropertyInfo('productAttrId', 'int', null, true, true, false),
             new PropertyInfo('value', 'string', null, false, false, false),
         );
     }

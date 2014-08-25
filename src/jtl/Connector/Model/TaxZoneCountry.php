@@ -22,6 +22,14 @@ use JMS\Serializer\Annotation as Serializer;
 class TaxZoneCountry extends DataModel
 {
     /**
+     * @var Identity Unique taxZoneCountry id
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
+     */
+    protected $id = null;
+
+    /**
      * @var Identity Reference to taxZone
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("taxZoneId")
@@ -37,18 +45,29 @@ class TaxZoneCountry extends DataModel
      */
     protected $countryIso = '';
 
-    /**
-     * @var int Unique taxZoneCountry id
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = 0;
-
 
     public function __construct()
     {
+        $this->id = new Identity;
         $this->taxZoneId = new Identity;
+    }
+
+    /**
+     * @param  Identity $id Unique taxZoneCountry id
+     * @return \jtl\Connector\Model\TaxZoneCountry
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setId(Identity $id)
+    {
+        return $this->setProperty('id', $id, 'Identity');
+    }
+
+    /**
+     * @return Identity Unique taxZoneCountry id
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -85,24 +104,6 @@ class TaxZoneCountry extends DataModel
     public function getCountryIso()
     {
         return $this->countryIso;
-    }
-
-    /**
-     * @param  int $id Unique taxZoneCountry id
-     * @return \jtl\Connector\Model\TaxZoneCountry
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setId($id)
-    {
-        return $this->setProperty('id', $id, 'int');
-    }
-
-    /**
-     * @return int Unique taxZoneCountry id
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
  

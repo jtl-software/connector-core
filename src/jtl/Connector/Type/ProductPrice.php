@@ -17,9 +17,9 @@ class ProductPrice extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('customerGroupId', 'Identity', null, true, true, false),
-            new PropertyInfo('productId', 'Identity', null, true, true, false),
+            new PropertyInfo('customerGroupId', 'int', null, true, true, false),
             new PropertyInfo('netPrice', 'double', null, false, false, false),
+            new PropertyInfo('productId', 'int', null, true, true, false),
             new PropertyInfo('quantity', 'double', null, false, false, false),
         );
     }

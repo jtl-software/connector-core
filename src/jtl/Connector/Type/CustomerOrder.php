@@ -17,15 +17,14 @@ class CustomerOrder extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('billingAddressId', 'Identity', null, false, true, false),
-            new PropertyInfo('customerId', 'Identity', null, false, true, false),
-            new PropertyInfo('id', 'Identity', null, true, true, false),
-            new PropertyInfo('shippingAddressId', 'Identity', null, false, true, false),
+            new PropertyInfo('billingAddressId', 'int', null, false, true, false),
             new PropertyInfo('carrierName', 'string', null, false, false, false),
             new PropertyInfo('created', 'DateTime', null, false, false, false),
             new PropertyInfo('credit', 'double', null, false, false, false),
             new PropertyInfo('currencyIso', 'string', null, false, false, false),
+            new PropertyInfo('customerId', 'int', null, false, true, false),
             new PropertyInfo('estimatedDeliveryDate', 'string', null, false, false, false),
+            new PropertyInfo('id', 'int', null, true, true, false),
             new PropertyInfo('ip', 'string', null, false, false, false),
             new PropertyInfo('isFetched', 'bool', null, false, false, false),
             new PropertyInfo('localeName', 'string', null, false, false, false),
@@ -35,6 +34,7 @@ class CustomerOrder extends DataType
             new PropertyInfo('paymentModuleCode', 'string', null, false, false, false),
             new PropertyInfo('ratingNotificationDate', 'DateTime', null, false, false, false),
             new PropertyInfo('session', 'string', null, false, false, false),
+            new PropertyInfo('shippingAddressId', 'int', null, false, true, false),
             new PropertyInfo('shippingDate', 'DateTime', null, false, false, false),
             new PropertyInfo('shippingInfo', 'string', null, false, false, false),
             new PropertyInfo('shippingMethodCode', 'string', null, false, false, false),

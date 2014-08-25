@@ -17,7 +17,7 @@ class Specific extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('id', 'int', null, true, true, false),
             new PropertyInfo('isGlobal', 'bool', null, false, false, false),
             new PropertyInfo('sort', 'int', null, false, false, false),
             new PropertyInfo('type', 'string', null, false, false, false),

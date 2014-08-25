@@ -30,20 +30,20 @@ class ConfigGroupI18n extends DataModel
     protected $configGroupId = null;
 
     /**
-     * @var Identity Locale
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("localeName")
-     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
-     */
-    protected $localeName = null;
-
-    /**
      * @var string Optional description (HTML)
      * @Serializer\Type("string")
      * @Serializer\SerializedName("description")
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
+
+    /**
+     * @var string Locale
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("localeName")
+     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
+     */
+    protected $localeName = '';
 
     /**
      * @var string Config group name
@@ -57,7 +57,6 @@ class ConfigGroupI18n extends DataModel
     public function __construct()
     {
         $this->configGroupId = new Identity;
-        $this->localeName = new Identity;
     }
 
     /**
@@ -79,24 +78,6 @@ class ConfigGroupI18n extends DataModel
     }
 
     /**
-     * @param  Identity $localeName Locale
-     * @return \jtl\Connector\Model\ConfigGroupI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setLocaleName(Identity $localeName)
-    {
-        return $this->setProperty('localeName', $localeName, 'Identity');
-    }
-
-    /**
-     * @return Identity Locale
-     */
-    public function getLocaleName()
-    {
-        return $this->localeName;
-    }
-
-    /**
      * @param  string $description Optional description (HTML)
      * @return \jtl\Connector\Model\ConfigGroupI18n
      * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
@@ -112,6 +93,24 @@ class ConfigGroupI18n extends DataModel
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @param  string $localeName Locale
+     * @return \jtl\Connector\Model\ConfigGroupI18n
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setLocaleName($localeName)
+    {
+        return $this->setProperty('localeName', $localeName, 'string');
+    }
+
+    /**
+     * @return string Locale
+     */
+    public function getLocaleName()
+    {
+        return $this->localeName;
     }
 
     /**

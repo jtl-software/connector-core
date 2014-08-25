@@ -17,8 +17,8 @@ class ConfigItemPrice extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('configItemId', 'Identity', null, true, true, false),
-            new PropertyInfo('customerGroupId', 'Identity', null, true, true, false),
+            new PropertyInfo('configItemId', 'int', null, true, true, false),
+            new PropertyInfo('customerGroupId', 'int', null, true, true, false),
             new PropertyInfo('price', 'float', null, false, false, false),
             new PropertyInfo('type', 'int', null, false, false, false),
         );

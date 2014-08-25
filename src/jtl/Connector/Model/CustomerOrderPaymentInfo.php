@@ -22,6 +22,14 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerOrderPaymentInfo extends DataModel
 {
     /**
+     * @var Identity Reference to customerOrder
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerOrderId")
+     * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
+     */
+    protected $customerOrderId = null;
+
+    /**
      * @var Identity Unique customerOrderPaymentInfo id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
@@ -110,14 +118,6 @@ class CustomerOrderPaymentInfo extends DataModel
     protected $creditCardVerificationNumber = '';
 
     /**
-     * @var int Reference to customerOrder
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("customerOrderId")
-     * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
-     */
-    protected $customerOrderId = 0;
-
-    /**
      * @var string International Bank Account Number (IBAN)
      * @Serializer\Type("string")
      * @Serializer\SerializedName("iban")
@@ -128,7 +128,26 @@ class CustomerOrderPaymentInfo extends DataModel
 
     public function __construct()
     {
+        $this->customerOrderId = new Identity;
         $this->id = new Identity;
+    }
+
+    /**
+     * @param  Identity $customerOrderId Reference to customerOrder
+     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerOrderId(Identity $customerOrderId)
+    {
+        return $this->setProperty('customerOrderId', $customerOrderId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to customerOrder
+     */
+    public function getCustomerOrderId()
+    {
+        return $this->customerOrderId;
     }
 
     /**
@@ -327,24 +346,6 @@ class CustomerOrderPaymentInfo extends DataModel
     public function getCreditCardVerificationNumber()
     {
         return $this->creditCardVerificationNumber;
-    }
-
-    /**
-     * @param  int $customerOrderId Reference to customerOrder
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setCustomerOrderId($customerOrderId)
-    {
-        return $this->setProperty('customerOrderId', $customerOrderId, 'int');
-    }
-
-    /**
-     * @return int Reference to customerOrder
-     */
-    public function getCustomerOrderId()
-    {
-        return $this->customerOrderId;
     }
 
     /**

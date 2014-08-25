@@ -30,12 +30,12 @@ class ProductAttr extends DataModel
     protected $id = null;
 
     /**
-     * @var int Reference to product
-     * @Serializer\Type("integer")
+     * @var Identity Reference to product
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected $productId = 0;
+    protected $productId = null;
 
     /**
      * @var int Optional sort number
@@ -49,6 +49,7 @@ class ProductAttr extends DataModel
     public function __construct()
     {
         $this->id = new Identity;
+        $this->productId = new Identity;
     }
 
     /**
@@ -70,17 +71,17 @@ class ProductAttr extends DataModel
     }
 
     /**
-     * @param  int $productId Reference to product
+     * @param  Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId($productId)
+    public function setProductId(Identity $productId)
     {
-        return $this->setProperty('productId', $productId, 'int');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
 
     /**
-     * @return int Reference to product
+     * @return Identity Reference to product
      */
     public function getProductId()
     {

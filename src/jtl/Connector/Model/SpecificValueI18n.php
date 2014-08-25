@@ -22,14 +22,6 @@ use JMS\Serializer\Annotation as Serializer;
 class SpecificValueI18n extends DataModel
 {
     /**
-     * @var Identity locale
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("localeName")
-     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
-     */
-    protected $localeName = null;
-
-    /**
      * @var Identity Reference to specificValue
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("specificValueId")
@@ -44,6 +36,14 @@ class SpecificValueI18n extends DataModel
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
+
+    /**
+     * @var string locale
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("localeName")
+     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
+     */
+    protected $localeName = '';
 
     /**
      * @var string Optional localized meta description value
@@ -88,26 +88,7 @@ class SpecificValueI18n extends DataModel
 
     public function __construct()
     {
-        $this->localeName = new Identity;
         $this->specificValueId = new Identity;
-    }
-
-    /**
-     * @param  Identity $localeName locale
-     * @return \jtl\Connector\Model\SpecificValueI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setLocaleName(Identity $localeName)
-    {
-        return $this->setProperty('localeName', $localeName, 'Identity');
-    }
-
-    /**
-     * @return Identity locale
-     */
-    public function getLocaleName()
-    {
-        return $this->localeName;
     }
 
     /**
@@ -144,6 +125,24 @@ class SpecificValueI18n extends DataModel
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @param  string $localeName locale
+     * @return \jtl\Connector\Model\SpecificValueI18n
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setLocaleName($localeName)
+    {
+        return $this->setProperty('localeName', $localeName, 'string');
+    }
+
+    /**
+     * @return string locale
+     */
+    public function getLocaleName()
+    {
+        return $this->localeName;
     }
 
     /**

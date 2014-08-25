@@ -30,6 +30,14 @@ class Image extends DataModel
     protected $id = null;
 
     /**
+     * @var Identity Reference to master imageId
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("masterImageId")
+     * @Serializer\Accessor(getter="getMasterImageId",setter="setMasterImageId")
+     */
+    protected $masterImageId = null;
+
+    /**
      * @var string Filename or path
      * @Serializer\Type("string")
      * @Serializer\SerializedName("filename")
@@ -44,14 +52,6 @@ class Image extends DataModel
      * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
      */
     protected $foreignKey = 0;
-
-    /**
-     * @var int Reference to master imageId
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("masterImageId")
-     * @Serializer\Accessor(getter="getMasterImageId",setter="setMasterImageId")
-     */
-    protected $masterImageId = 0;
 
     /**
      * @var string Allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
@@ -73,6 +73,7 @@ class Image extends DataModel
     public function __construct()
     {
         $this->id = new Identity;
+        $this->masterImageId = new Identity;
     }
 
     /**
@@ -91,6 +92,24 @@ class Image extends DataModel
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param  Identity $masterImageId Reference to master imageId
+     * @return \jtl\Connector\Model\Image
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setMasterImageId(Identity $masterImageId)
+    {
+        return $this->setProperty('masterImageId', $masterImageId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to master imageId
+     */
+    public function getMasterImageId()
+    {
+        return $this->masterImageId;
     }
 
     /**
@@ -127,24 +146,6 @@ class Image extends DataModel
     public function getForeignKey()
     {
         return $this->foreignKey;
-    }
-
-    /**
-     * @param  int $masterImageId Reference to master imageId
-     * @return \jtl\Connector\Model\Image
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setMasterImageId($masterImageId)
-    {
-        return $this->setProperty('masterImageId', $masterImageId, 'int');
-    }
-
-    /**
-     * @return int Reference to master imageId
-     */
-    public function getMasterImageId()
-    {
-        return $this->masterImageId;
     }
 
     /**

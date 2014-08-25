@@ -22,6 +22,22 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerOrderItem extends DataModel
 {
     /**
+     * @var Identity Optional reference to configItemId (if item is part of a configurable item)
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("configItemId")
+     * @Serializer\Accessor(getter="getConfigItemId",setter="setConfigItemId")
+     */
+    protected $configItemId = null;
+
+    /**
+     * @var Identity Reference to customerOrder
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerOrderId")
+     * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
+     */
+    protected $customerOrderId = null;
+
+    /**
      * @var Identity Unique customerOrderItem id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
@@ -30,20 +46,20 @@ class CustomerOrderItem extends DataModel
     protected $id = null;
 
     /**
-     * @var int Optional reference to configItemId (if item is part of a configurable item)
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("configItemId")
-     * @Serializer\Accessor(getter="getConfigItemId",setter="setConfigItemId")
+     * @var Identity Reference to product
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productId")
+     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected $configItemId = 0;
+    protected $productId = null;
 
     /**
-     * @var int Reference to customerOrder
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("customerOrderId")
-     * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
+     * @var Identity Reference to shippingClass
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("shippingClassId")
+     * @Serializer\Accessor(getter="getShippingClassId",setter="setShippingClassId")
      */
-    protected $customerOrderId = 0;
+    protected $shippingClassId = null;
 
     /**
      * @var string Order item name
@@ -62,28 +78,12 @@ class CustomerOrderItem extends DataModel
     protected $price = 0.0;
 
     /**
-     * @var int Reference to product
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
-    protected $productId = 0;
-
-    /**
      * @var double Quantity purchased
      * @Serializer\Type("double")
      * @Serializer\SerializedName("quantity")
      * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
      */
     protected $quantity = 0.0;
-
-    /**
-     * @var int Reference to shippingClass
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("shippingClassId")
-     * @Serializer\Accessor(getter="getShippingClassId",setter="setShippingClassId")
-     */
-    protected $shippingClassId = 0;
 
     /**
      * @var string Stock keeping Unit (unique item identifier)
@@ -131,7 +131,47 @@ class CustomerOrderItem extends DataModel
 
     public function __construct()
     {
+        $this->configItemId = new Identity;
+        $this->customerOrderId = new Identity;
         $this->id = new Identity;
+        $this->productId = new Identity;
+        $this->shippingClassId = new Identity;
+    }
+
+    /**
+     * @param  Identity $configItemId Optional reference to configItemId (if item is part of a configurable item)
+     * @return \jtl\Connector\Model\CustomerOrderItem
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setConfigItemId(Identity $configItemId)
+    {
+        return $this->setProperty('configItemId', $configItemId, 'Identity');
+    }
+
+    /**
+     * @return Identity Optional reference to configItemId (if item is part of a configurable item)
+     */
+    public function getConfigItemId()
+    {
+        return $this->configItemId;
+    }
+
+    /**
+     * @param  Identity $customerOrderId Reference to customerOrder
+     * @return \jtl\Connector\Model\CustomerOrderItem
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerOrderId(Identity $customerOrderId)
+    {
+        return $this->setProperty('customerOrderId', $customerOrderId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to customerOrder
+     */
+    public function getCustomerOrderId()
+    {
+        return $this->customerOrderId;
     }
 
     /**
@@ -153,39 +193,39 @@ class CustomerOrderItem extends DataModel
     }
 
     /**
-     * @param  int $configItemId Optional reference to configItemId (if item is part of a configurable item)
+     * @param  Identity $productId Reference to product
      * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setConfigItemId($configItemId)
+    public function setProductId(Identity $productId)
     {
-        return $this->setProperty('configItemId', $configItemId, 'int');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
 
     /**
-     * @return int Optional reference to configItemId (if item is part of a configurable item)
+     * @return Identity Reference to product
      */
-    public function getConfigItemId()
+    public function getProductId()
     {
-        return $this->configItemId;
+        return $this->productId;
     }
 
     /**
-     * @param  int $customerOrderId Reference to customerOrder
+     * @param  Identity $shippingClassId Reference to shippingClass
      * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerOrderId($customerOrderId)
+    public function setShippingClassId(Identity $shippingClassId)
     {
-        return $this->setProperty('customerOrderId', $customerOrderId, 'int');
+        return $this->setProperty('shippingClassId', $shippingClassId, 'Identity');
     }
 
     /**
-     * @return int Reference to customerOrder
+     * @return Identity Reference to shippingClass
      */
-    public function getCustomerOrderId()
+    public function getShippingClassId()
     {
-        return $this->customerOrderId;
+        return $this->shippingClassId;
     }
 
     /**
@@ -225,24 +265,6 @@ class CustomerOrderItem extends DataModel
     }
 
     /**
-     * @param  int $productId Reference to product
-     * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setProductId($productId)
-    {
-        return $this->setProperty('productId', $productId, 'int');
-    }
-
-    /**
-     * @return int Reference to product
-     */
-    public function getProductId()
-    {
-        return $this->productId;
-    }
-
-    /**
      * @param  double $quantity Quantity purchased
      * @return \jtl\Connector\Model\CustomerOrderItem
      * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
@@ -258,24 +280,6 @@ class CustomerOrderItem extends DataModel
     public function getQuantity()
     {
         return $this->quantity;
-    }
-
-    /**
-     * @param  int $shippingClassId Reference to shippingClass
-     * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setShippingClassId($shippingClassId)
-    {
-        return $this->setProperty('shippingClassId', $shippingClassId, 'int');
-    }
-
-    /**
-     * @return int Reference to shippingClass
-     */
-    public function getShippingClassId()
-    {
-        return $this->shippingClassId;
     }
 
     /**

@@ -17,10 +17,10 @@ class MediaFile extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('id', 'Identity', null, true, true, false),
-            new PropertyInfo('productId', 'Identity', null, true, true, false),
+            new PropertyInfo('id', 'int', null, true, true, false),
             new PropertyInfo('mediaFileCategory', 'string', null, false, false, false),
             new PropertyInfo('path', 'string', null, false, false, false),
+            new PropertyInfo('productId', 'int', null, true, true, false),
             new PropertyInfo('sort', 'int', null, false, false, false),
             new PropertyInfo('type', 'string', null, false, false, false),
             new PropertyInfo('url', 'string', null, false, false, false),

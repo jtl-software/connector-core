@@ -17,7 +17,7 @@ class Manufacturer extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('id', 'int', null, true, true, false),
             new PropertyInfo('name', 'string', null, false, false, false),
             new PropertyInfo('sort', 'int', null, false, false, false),
             new PropertyInfo('urlPath', 'string', null, false, false, false),

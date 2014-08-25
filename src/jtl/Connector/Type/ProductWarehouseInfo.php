@@ -17,11 +17,11 @@ class ProductWarehouseInfo extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('productId', 'Identity', null, true, true, false),
-            new PropertyInfo('warehouseId', 'Identity', null, true, true, false),
             new PropertyInfo('inflowDate', 'DateTime', null, false, false, false),
             new PropertyInfo('inflowQuantity', 'double', null, false, false, false),
+            new PropertyInfo('productId', 'int', null, true, true, false),
             new PropertyInfo('stockLevel', 'double', null, false, false, false),
+            new PropertyInfo('warehouseId', 'int', null, true, true, false),
         );
     }
 }

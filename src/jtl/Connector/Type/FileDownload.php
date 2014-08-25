@@ -17,14 +17,14 @@ class FileDownload extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('created', 'DateTime', null, false, false, false),
+            new PropertyInfo('id', 'int', null, true, true, false),
             new PropertyInfo('maxDays', 'int', null, false, false, false),
             new PropertyInfo('maxDownloads', 'int', null, false, false, false),
             new PropertyInfo('path', 'string', null, false, false, false),
             new PropertyInfo('previewPath', 'string', null, false, false, false),
             new PropertyInfo('sort', 'int', null, false, false, false),
-            new PropertyInfo('i18n', '\jtl\Connector\Model\FileDownloadI18n', null, false, false, true),
+            new PropertyInfo('i18ns', '\jtl\Connector\Model\FileDownloadI18n', null, false, false, true),
         );
     }
 }

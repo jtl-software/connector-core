@@ -22,12 +22,84 @@ use JMS\Serializer\Annotation as Serializer;
 class Product extends DataModel
 {
     /**
+     * @var Identity Optional reference to basePriceUnit
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("basePriceUnitId")
+     * @Serializer\Accessor(getter="getBasePriceUnitId",setter="setBasePriceUnitId")
+     */
+    protected $basePriceUnitId = null;
+
+    /**
+     * @var Identity Reference to (current) deliveryStatus
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("deliveryStatusId")
+     * @Serializer\Accessor(getter="getDeliveryStatusId",setter="setDeliveryStatusId")
+     */
+    protected $deliveryStatusId = null;
+
+    /**
      * @var Identity Unique product id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
+
+    /**
+     * @var Identity Reference to manufacturer
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("manufacturerId")
+     * @Serializer\Accessor(getter="getManufacturerId",setter="setManufacturerId")
+     */
+    protected $manufacturerId = null;
+
+    /**
+     * @var Identity Reference to master product
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("masterProductId")
+     * @Serializer\Accessor(getter="getMasterProductId",setter="setMasterProductId")
+     */
+    protected $masterProductId = null;
+
+    /**
+     * @var Identity Optional reference to measurement unit id
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("measurementUnitId")
+     * @Serializer\Accessor(getter="getMeasurementUnitId",setter="setMeasurementUnitId")
+     */
+    protected $measurementUnitId = null;
+
+    /**
+     * @var Identity Optional reference to productType
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productTypeId")
+     * @Serializer\Accessor(getter="getProductTypeId",setter="setProductTypeId")
+     */
+    protected $productTypeId = null;
+
+    /**
+     * @var Identity Optional reference to setArticle
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("setArticleId")
+     * @Serializer\Accessor(getter="getSetArticleId",setter="setSetArticleId")
+     */
+    protected $setArticleId = null;
+
+    /**
+     * @var Identity Reference to shippingClass
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("shippingClassId")
+     * @Serializer\Accessor(getter="getShippingClassId",setter="setShippingClassId")
+     */
+    protected $shippingClassId = null;
+
+    /**
+     * @var Identity Reference to unit
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("unitId")
+     * @Serializer\Accessor(getter="getUnitId",setter="setUnitId")
+     */
+    protected $unitId = null;
 
     /**
      * @var string Optional Amazon Standard Identification Number
@@ -60,14 +132,6 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getBasePriceQuantity",setter="setBasePriceQuantity")
      */
     protected $basePriceQuantity = 0.0;
-
-    /**
-     * @var int Optional reference to basePriceUnit
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("basePriceUnitId")
-     * @Serializer\Accessor(getter="getBasePriceUnitId",setter="setBasePriceUnitId")
-     */
-    protected $basePriceUnitId = 0;
 
     /**
      * @var DateTime Optional best before date. Default 0000-00-00 if product has no best-before-date.
@@ -108,14 +172,6 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getCreated",setter="setCreated")
      */
     protected $created = null;
-
-    /**
-     * @var int Reference to (current) deliveryStatus
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("deliveryStatusId")
-     * @Serializer\Accessor(getter="getDeliveryStatusId",setter="setDeliveryStatusId")
-     */
-    protected $deliveryStatusId = 0;
 
     /**
      * @var string Optional European Article Number (EAN)
@@ -222,14 +278,6 @@ class Product extends DataModel
     protected $length = 0.0;
 
     /**
-     * @var int Reference to manufacturer
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("manufacturerId")
-     * @Serializer\Accessor(getter="getManufacturerId",setter="setManufacturerId")
-     */
-    protected $manufacturerId = 0;
-
-    /**
      * @var string Optional manufacturer number
      * @Serializer\Type("string")
      * @Serializer\SerializedName("manufacturerNumber")
@@ -238,28 +286,12 @@ class Product extends DataModel
     protected $manufacturerNumber = '';
 
     /**
-     * @var int Reference to master product
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("masterProductId")
-     * @Serializer\Accessor(getter="getMasterProductId",setter="setMasterProductId")
-     */
-    protected $masterProductId = 0;
-
-    /**
      * @var double Optional measurement quantity
      * @Serializer\Type("double")
      * @Serializer\SerializedName("measurementQuantity")
      * @Serializer\Accessor(getter="getMeasurementQuantity",setter="setMeasurementQuantity")
      */
     protected $measurementQuantity = 0.0;
-
-    /**
-     * @var int Optional reference to measurement unit id
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("measurementUnitId")
-     * @Serializer\Accessor(getter="getMeasurementUnitId",setter="setMeasurementUnitId")
-     */
-    protected $measurementUnitId = 0;
 
     /**
      * @var double Optional minimum quantity needed to purchase product
@@ -294,14 +326,6 @@ class Product extends DataModel
     protected $permitNegativeStock = false;
 
     /**
-     * @var int Optional reference to productType
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("productTypeId")
-     * @Serializer\Accessor(getter="getProductTypeId",setter="setProductTypeId")
-     */
-    protected $productTypeId = 0;
-
-    /**
      * @var double Productweight exclusive packaging
      * @Serializer\Type("double")
      * @Serializer\SerializedName("productWeight")
@@ -324,22 +348,6 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getSerialNumber",setter="setSerialNumber")
      */
     protected $serialNumber = '';
-
-    /**
-     * @var int Optional reference to setArticle
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("setArticleId")
-     * @Serializer\Accessor(getter="getSetArticleId",setter="setSetArticleId")
-     */
-    protected $setArticleId = 0;
-
-    /**
-     * @var int Reference to shippingClass
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("shippingClassId")
-     * @Serializer\Accessor(getter="getShippingClassId",setter="setShippingClassId")
-     */
-    protected $shippingClassId = 0;
 
     /**
      * @var double Productweight inclusive packaging
@@ -404,14 +412,6 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getTaric",setter="setTaric")
      */
     protected $taric = '';
-
-    /**
-     * @var int Reference to unit
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("unitId")
-     * @Serializer\Accessor(getter="getUnitId",setter="setUnitId")
-     */
-    protected $unitId = 0;
 
     /**
      * @var string Optional UN number, used to define hazardous properties
@@ -579,7 +579,52 @@ class Product extends DataModel
 
     public function __construct()
     {
+        $this->basePriceUnitId = new Identity;
+        $this->deliveryStatusId = new Identity;
         $this->id = new Identity;
+        $this->manufacturerId = new Identity;
+        $this->masterProductId = new Identity;
+        $this->measurementUnitId = new Identity;
+        $this->productTypeId = new Identity;
+        $this->setArticleId = new Identity;
+        $this->shippingClassId = new Identity;
+        $this->unitId = new Identity;
+    }
+
+    /**
+     * @param  Identity $basePriceUnitId Optional reference to basePriceUnit
+     * @return \jtl\Connector\Model\Product
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setBasePriceUnitId(Identity $basePriceUnitId)
+    {
+        return $this->setProperty('basePriceUnitId', $basePriceUnitId, 'Identity');
+    }
+
+    /**
+     * @return Identity Optional reference to basePriceUnit
+     */
+    public function getBasePriceUnitId()
+    {
+        return $this->basePriceUnitId;
+    }
+
+    /**
+     * @param  Identity $deliveryStatusId Reference to (current) deliveryStatus
+     * @return \jtl\Connector\Model\Product
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setDeliveryStatusId(Identity $deliveryStatusId)
+    {
+        return $this->setProperty('deliveryStatusId', $deliveryStatusId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to (current) deliveryStatus
+     */
+    public function getDeliveryStatusId()
+    {
+        return $this->deliveryStatusId;
     }
 
     /**
@@ -598,6 +643,132 @@ class Product extends DataModel
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param  Identity $manufacturerId Reference to manufacturer
+     * @return \jtl\Connector\Model\Product
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setManufacturerId(Identity $manufacturerId)
+    {
+        return $this->setProperty('manufacturerId', $manufacturerId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to manufacturer
+     */
+    public function getManufacturerId()
+    {
+        return $this->manufacturerId;
+    }
+
+    /**
+     * @param  Identity $masterProductId Reference to master product
+     * @return \jtl\Connector\Model\Product
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setMasterProductId(Identity $masterProductId)
+    {
+        return $this->setProperty('masterProductId', $masterProductId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to master product
+     */
+    public function getMasterProductId()
+    {
+        return $this->masterProductId;
+    }
+
+    /**
+     * @param  Identity $measurementUnitId Optional reference to measurement unit id
+     * @return \jtl\Connector\Model\Product
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setMeasurementUnitId(Identity $measurementUnitId)
+    {
+        return $this->setProperty('measurementUnitId', $measurementUnitId, 'Identity');
+    }
+
+    /**
+     * @return Identity Optional reference to measurement unit id
+     */
+    public function getMeasurementUnitId()
+    {
+        return $this->measurementUnitId;
+    }
+
+    /**
+     * @param  Identity $productTypeId Optional reference to productType
+     * @return \jtl\Connector\Model\Product
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setProductTypeId(Identity $productTypeId)
+    {
+        return $this->setProperty('productTypeId', $productTypeId, 'Identity');
+    }
+
+    /**
+     * @return Identity Optional reference to productType
+     */
+    public function getProductTypeId()
+    {
+        return $this->productTypeId;
+    }
+
+    /**
+     * @param  Identity $setArticleId Optional reference to setArticle
+     * @return \jtl\Connector\Model\Product
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setSetArticleId(Identity $setArticleId)
+    {
+        return $this->setProperty('setArticleId', $setArticleId, 'Identity');
+    }
+
+    /**
+     * @return Identity Optional reference to setArticle
+     */
+    public function getSetArticleId()
+    {
+        return $this->setArticleId;
+    }
+
+    /**
+     * @param  Identity $shippingClassId Reference to shippingClass
+     * @return \jtl\Connector\Model\Product
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setShippingClassId(Identity $shippingClassId)
+    {
+        return $this->setProperty('shippingClassId', $shippingClassId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to shippingClass
+     */
+    public function getShippingClassId()
+    {
+        return $this->shippingClassId;
+    }
+
+    /**
+     * @param  Identity $unitId Reference to unit
+     * @return \jtl\Connector\Model\Product
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setUnitId(Identity $unitId)
+    {
+        return $this->setProperty('unitId', $unitId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to unit
+     */
+    public function getUnitId()
+    {
+        return $this->unitId;
     }
 
     /**
@@ -670,24 +841,6 @@ class Product extends DataModel
     public function getBasePriceQuantity()
     {
         return $this->basePriceQuantity;
-    }
-
-    /**
-     * @param  int $basePriceUnitId Optional reference to basePriceUnit
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setBasePriceUnitId($basePriceUnitId)
-    {
-        return $this->setProperty('basePriceUnitId', $basePriceUnitId, 'int');
-    }
-
-    /**
-     * @return int Optional reference to basePriceUnit
-     */
-    public function getBasePriceUnitId()
-    {
-        return $this->basePriceUnitId;
     }
 
     /**
@@ -778,24 +931,6 @@ class Product extends DataModel
     public function getCreated()
     {
         return $this->created;
-    }
-
-    /**
-     * @param  int $deliveryStatusId Reference to (current) deliveryStatus
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setDeliveryStatusId($deliveryStatusId)
-    {
-        return $this->setProperty('deliveryStatusId', $deliveryStatusId, 'int');
-    }
-
-    /**
-     * @return int Reference to (current) deliveryStatus
-     */
-    public function getDeliveryStatusId()
-    {
-        return $this->deliveryStatusId;
     }
 
     /**
@@ -1033,24 +1168,6 @@ class Product extends DataModel
     }
 
     /**
-     * @param  int $manufacturerId Reference to manufacturer
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setManufacturerId($manufacturerId)
-    {
-        return $this->setProperty('manufacturerId', $manufacturerId, 'int');
-    }
-
-    /**
-     * @return int Reference to manufacturer
-     */
-    public function getManufacturerId()
-    {
-        return $this->manufacturerId;
-    }
-
-    /**
      * @param  string $manufacturerNumber Optional manufacturer number
      * @return \jtl\Connector\Model\Product
      * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
@@ -1069,24 +1186,6 @@ class Product extends DataModel
     }
 
     /**
-     * @param  int $masterProductId Reference to master product
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setMasterProductId($masterProductId)
-    {
-        return $this->setProperty('masterProductId', $masterProductId, 'int');
-    }
-
-    /**
-     * @return int Reference to master product
-     */
-    public function getMasterProductId()
-    {
-        return $this->masterProductId;
-    }
-
-    /**
      * @param  double $measurementQuantity Optional measurement quantity
      * @return \jtl\Connector\Model\Product
      * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
@@ -1102,24 +1201,6 @@ class Product extends DataModel
     public function getMeasurementQuantity()
     {
         return $this->measurementQuantity;
-    }
-
-    /**
-     * @param  int $measurementUnitId Optional reference to measurement unit id
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setMeasurementUnitId($measurementUnitId)
-    {
-        return $this->setProperty('measurementUnitId', $measurementUnitId, 'int');
-    }
-
-    /**
-     * @return int Optional reference to measurement unit id
-     */
-    public function getMeasurementUnitId()
-    {
-        return $this->measurementUnitId;
     }
 
     /**
@@ -1195,24 +1276,6 @@ class Product extends DataModel
     }
 
     /**
-     * @param  int $productTypeId Optional reference to productType
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setProductTypeId($productTypeId)
-    {
-        return $this->setProperty('productTypeId', $productTypeId, 'int');
-    }
-
-    /**
-     * @return int Optional reference to productType
-     */
-    public function getProductTypeId()
-    {
-        return $this->productTypeId;
-    }
-
-    /**
      * @param  double $productWeight Productweight exclusive packaging
      * @return \jtl\Connector\Model\Product
      * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
@@ -1264,42 +1327,6 @@ class Product extends DataModel
     public function getSerialNumber()
     {
         return $this->serialNumber;
-    }
-
-    /**
-     * @param  int $setArticleId Optional reference to setArticle
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setSetArticleId($setArticleId)
-    {
-        return $this->setProperty('setArticleId', $setArticleId, 'int');
-    }
-
-    /**
-     * @return int Optional reference to setArticle
-     */
-    public function getSetArticleId()
-    {
-        return $this->setArticleId;
-    }
-
-    /**
-     * @param  int $shippingClassId Reference to shippingClass
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setShippingClassId($shippingClassId)
-    {
-        return $this->setProperty('shippingClassId', $shippingClassId, 'int');
-    }
-
-    /**
-     * @return int Reference to shippingClass
-     */
-    public function getShippingClassId()
-    {
-        return $this->shippingClassId;
     }
 
     /**
@@ -1444,24 +1471,6 @@ class Product extends DataModel
     public function getTaric()
     {
         return $this->taric;
-    }
-
-    /**
-     * @param  int $unitId Reference to unit
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setUnitId($unitId)
-    {
-        return $this->setProperty('unitId', $unitId, 'int');
-    }
-
-    /**
-     * @return int Reference to unit
-     */
-    public function getUnitId()
-    {
-        return $this->unitId;
     }
 
     /**

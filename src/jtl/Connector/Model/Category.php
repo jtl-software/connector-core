@@ -30,6 +30,14 @@ class Category extends DataModel
     protected $id = null;
 
     /**
+     * @var Identity Optional reference to parent category id
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("parentCategoryId")
+     * @Serializer\Accessor(getter="getParentCategoryId",setter="setParentCategoryId")
+     */
+    protected $parentCategoryId = null;
+
+    /**
      * @var bool Flag if category is active
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isActive")
@@ -44,14 +52,6 @@ class Category extends DataModel
      * @Serializer\Accessor(getter="getLevel",setter="setLevel")
      */
     protected $level = 0;
-
-    /**
-     * @var int Optional reference to parent category id
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("parentCategoryId")
-     * @Serializer\Accessor(getter="getParentCategoryId",setter="setParentCategoryId")
-     */
-    protected $parentCategoryId = 0;
 
     /**
      * @var int Optional sort order number
@@ -120,6 +120,7 @@ class Category extends DataModel
     public function __construct()
     {
         $this->id = new Identity;
+        $this->parentCategoryId = new Identity;
     }
 
     /**
@@ -138,6 +139,24 @@ class Category extends DataModel
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param  Identity $parentCategoryId Optional reference to parent category id
+     * @return \jtl\Connector\Model\Category
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setParentCategoryId(Identity $parentCategoryId)
+    {
+        return $this->setProperty('parentCategoryId', $parentCategoryId, 'Identity');
+    }
+
+    /**
+     * @return Identity Optional reference to parent category id
+     */
+    public function getParentCategoryId()
+    {
+        return $this->parentCategoryId;
     }
 
     /**
@@ -174,24 +193,6 @@ class Category extends DataModel
     public function getLevel()
     {
         return $this->level;
-    }
-
-    /**
-     * @param  int $parentCategoryId Optional reference to parent category id
-     * @return \jtl\Connector\Model\Category
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setParentCategoryId($parentCategoryId)
-    {
-        return $this->setProperty('parentCategoryId', $parentCategoryId, 'int');
-    }
-
-    /**
-     * @return int Optional reference to parent category id
-     */
-    public function getParentCategoryId()
-    {
-        return $this->parentCategoryId;
     }
 
     /**

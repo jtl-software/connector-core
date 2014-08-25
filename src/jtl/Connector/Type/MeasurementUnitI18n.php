@@ -17,8 +17,8 @@ class MeasurementUnitI18n extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('measurementUnitId', 'Identity', null, true, true, false),
-            new PropertyInfo('localeName', 'string', null, true, false, false),
+            new PropertyInfo('localeName', 'string', null, false, false, false),
+            new PropertyInfo('measurementUnitId', 'int', null, true, true, false),
             new PropertyInfo('name', 'string', null, false, false, false),
         );
     }
