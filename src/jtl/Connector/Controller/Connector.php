@@ -12,6 +12,8 @@ use \jtl\Core\Exception\ControllerException;
 use \jtl\Connector\Result\Action;
 use \jtl\Core\Rpc\Error;
 use \jtl\Connector\Application\Application;
+use \jtl\Core\Model\QueryFilter;
+use \jtl\Core\Model\DataModel;
 
 /**
  * Base Config Controller
@@ -25,7 +27,7 @@ class Connector extends CoreController
      * (non-PHPdoc)
      * @see \jtl\Core\Controller\IController::push()
      */
-    public function push($params)
+    public function push(DataModel $model)
     {
         // Not yet implemented
     }
@@ -34,16 +36,7 @@ class Connector extends CoreController
      * (non-PHPdoc)
      * @see \jtl\Core\Controller\IController::pull()
      */
-    public function pull($params)
-    {
-        // Not yet implemented
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Core\Controller\IController::delete()
-     */
-    public function delete($params)
+    public function pull(QueryFilter $queryFilter)
     {
         // Not yet implemented
     }
