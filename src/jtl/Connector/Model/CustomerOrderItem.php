@@ -22,6 +22,21 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerOrderItem extends DataModel
 {
     /**
+     * @var string - Product
+     */
+    const TYPE_PRODUCT = 'product';
+
+    /**
+     * @var string - Shipping
+     */   
+    const TYPE_SHIPPING = 'shipping';
+
+    /**
+     * @var string - Dicount
+     */   
+    const TYPE_DISCOUNT = 'discount';
+
+    /**
      * @var Identity Optional reference to configItemId (if item is part of a configurable item)
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("configItemId")
