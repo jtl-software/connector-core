@@ -32,11 +32,6 @@ class CustomerOrder extends DataModel
     const STATUS_PROCESSING = 'processing';
 
     /**
-     * @var string - Status when order is payed completely
-     */
-    const STATUS_PAYMENT_COMPLETED = 'payment_completed';
-
-    /**
      * @var string - Order payed and shipped completely
      */
     const STATUS_COMPLETED = 'completed';
@@ -55,6 +50,21 @@ class CustomerOrder extends DataModel
      * @var string - New status, when changes have been made to customerOrder (e.g. item quantity change) 
      */
     const STATUS_UPDATED = 'updated';
+
+    /**
+     * @var string - Status when payment is completed
+     */
+    const PAYMENT_STATUS_COMPLETED = 'completed'
+
+    /**
+     * @var string - Status when order is partially paid
+     */
+    const PAYMENT_STATUS_PARTIALLY = 'partially_paid'
+
+    /**
+     * @var string - Status when order is unpaid
+     */
+    const PAYMENT_STATUS_UNPAID = 'unpaid'
     
     /**
      * @var Identity Reference to billingAddress
@@ -233,12 +243,20 @@ class CustomerOrder extends DataModel
     protected $shippingMethodName = '';
 
     /**
-     * @var string Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
+     * @var string Customer order status: new / processing / completed / partially_shipped / cancelled / reactivated / updated
      * @Serializer\Type("string")
      * @Serializer\SerializedName("status")
      * @Serializer\Accessor(getter="getStatus",setter="setStatus")
      */
     protected $status = '';
+
+    /**
+     * @var string Customer payment status: completed / partially_paid / unpaid
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("paymentStatus")
+     * @Serializer\Accessor(getter="getPaymentStatus",setter="setPaymentStatus")
+     */
+    protected $paymentStatus = ''
 
     /**
      * @var double Total sum to pay
