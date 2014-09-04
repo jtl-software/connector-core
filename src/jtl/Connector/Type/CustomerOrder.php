@@ -40,6 +40,7 @@ class CustomerOrder extends DataType
             new PropertyInfo('shippingMethodCode', 'string', null, false, false, false),
             new PropertyInfo('shippingMethodName', 'string', null, false, false, false),
             new PropertyInfo('status', 'string', null, false, false, false),
+            new PropertyInfo('paymentStatus', 'string', null, false, false, false),
             new PropertyInfo('totalSum', 'double', null, false, false, false),
             new PropertyInfo('tracking', 'string', null, false, false, false),
             new PropertyInfo('trackingURL', 'string', null, false, false, false),
