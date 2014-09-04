@@ -54,17 +54,17 @@ class CustomerOrder extends DataModel
     /**
      * @var string - Status when payment is completed
      */
-    const PAYMENT_STATUS_COMPLETED = 'completed'
+    const PAYMENT_STATUS_COMPLETED = 'completed';
 
     /**
      * @var string - Status when order is partially paid
      */
-    const PAYMENT_STATUS_PARTIALLY = 'partially_paid'
+    const PAYMENT_STATUS_PARTIALLY = 'partially_paid';
 
     /**
      * @var string - Status when order is unpaid
      */
-    const PAYMENT_STATUS_UNPAID = 'unpaid'
+    const PAYMENT_STATUS_UNPAID = 'unpaid';
     
     /**
      * @var Identity Reference to billingAddress
@@ -256,7 +256,7 @@ class CustomerOrder extends DataModel
      * @Serializer\SerializedName("paymentStatus")
      * @Serializer\Accessor(getter="getPaymentStatus",setter="setPaymentStatus")
      */
-    protected $paymentStatus = ''
+    protected $paymentStatus = '';
 
     /**
      * @var double Total sum to pay
