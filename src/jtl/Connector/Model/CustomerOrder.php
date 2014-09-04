@@ -251,7 +251,7 @@ class CustomerOrder extends DataModel
     protected $status = '';
 
     /**
-     * @var string Customer payment status: completed / partially_paid / unpaid
+     * @var string Customer order payment status: completed / partially_paid / unpaid
      * @Serializer\Type("string")
      * @Serializer\SerializedName("paymentStatus")
      * @Serializer\Accessor(getter="getPaymentStatus",setter="setPaymentStatus")
@@ -758,6 +758,24 @@ class CustomerOrder extends DataModel
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @param string Customer order payment status: completed / partially_paid / unpaid
+     * @return \jtl\Connector\Model\CustomerOrder
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setPaymentStatus($paymentStatus)
+    {
+        return $this->setProperty('paymentStatus', $paymentStatus, 'string');
+    }
+
+    /**
+     * @return string Customer order payment status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
+     */
+    public function getPaymentStatus()
+    {
+        return $this->paymentStatus;
     }
 
     /**
