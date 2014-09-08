@@ -22,4 +22,9 @@ class ProductVariationValueI18n extends DataType
             new PropertyInfo('productVariationValueId', 'int', null, true, true, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

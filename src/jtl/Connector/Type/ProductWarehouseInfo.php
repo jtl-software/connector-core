@@ -24,4 +24,9 @@ class ProductWarehouseInfo extends DataType
             new PropertyInfo('warehouseId', 'int', null, true, true, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

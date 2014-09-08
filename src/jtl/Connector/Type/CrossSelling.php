@@ -23,4 +23,9 @@ class CrossSelling extends DataType
             new PropertyInfo('productId', 'int', null, false, true, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

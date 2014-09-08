@@ -23,4 +23,9 @@ class ProductConfigGroup extends DataType
             new PropertyInfo('sort', 'int', null, false, false, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

@@ -22,4 +22,9 @@ class SetArticle extends DataType
             new PropertyInfo('quantity', 'double', null, false, false, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

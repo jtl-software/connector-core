@@ -22,4 +22,9 @@ class TaxZoneCountry extends DataType
             new PropertyInfo('taxZoneId', 'int', null, true, true, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

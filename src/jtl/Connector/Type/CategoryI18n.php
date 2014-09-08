@@ -27,4 +27,9 @@ class CategoryI18n extends DataType
             new PropertyInfo('urlPath', 'string', null, false, false, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

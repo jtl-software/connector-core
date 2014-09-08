@@ -22,4 +22,9 @@ class SpecialPrice extends DataType
             new PropertyInfo('productSpecialPriceId', 'int', null, true, true, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

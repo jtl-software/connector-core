@@ -81,7 +81,11 @@ class Product extends DataType
             new PropertyInfo('setArticles', '\jtl\Connector\Model\SetArticle', null, false, false, true),
             new PropertyInfo('variations', '\jtl\Connector\Model\ProductVariation', null, false, false, true),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\ProductI18n', null, false, false, true),
-            new PropertyInfo('specifics', '\jtl\Connector\Model\ProductSpecific', null, false, false, true),
         );
     }
+
+	public function isMain()
+	{
+		return true;
+	}
 }

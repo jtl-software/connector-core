@@ -17,17 +17,20 @@ class ProductI18n extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('connectorId', 'int', null, true, true, false),
             new PropertyInfo('description', 'string', null, false, false, false),
             new PropertyInfo('localeName', 'string', null, false, false, false),
             new PropertyInfo('metaDescription', 'string', null, false, false, false),
             new PropertyInfo('metaKeywords', 'string', null, false, false, false),
             new PropertyInfo('name', 'string', null, false, false, false),
-            new PropertyInfo('platformId', 'int', null, true, true, false),
             new PropertyInfo('productId', 'int', null, true, true, false),
             new PropertyInfo('shortDescription', 'string', null, false, false, false),
             new PropertyInfo('titleTag', 'string', null, false, false, false),
             new PropertyInfo('urlPath', 'string', null, false, false, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

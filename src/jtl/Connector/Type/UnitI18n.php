@@ -22,4 +22,9 @@ class UnitI18n extends DataType
             new PropertyInfo('unitId', 'int', null, true, true, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

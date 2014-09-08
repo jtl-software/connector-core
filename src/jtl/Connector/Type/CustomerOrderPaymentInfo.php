@@ -32,4 +32,9 @@ class CustomerOrderPaymentInfo extends DataType
             new PropertyInfo('id', 'int', null, true, true, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

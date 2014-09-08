@@ -23,4 +23,9 @@ class CategoryFunctionAttr extends DataType
             new PropertyInfo('value', 'string', null, false, false, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

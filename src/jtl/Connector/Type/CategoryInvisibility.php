@@ -21,4 +21,9 @@ class CategoryInvisibility extends DataType
             new PropertyInfo('customerGroupId', 'int', null, true, true, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

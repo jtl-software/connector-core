@@ -23,4 +23,9 @@ class ProductFunctionAttr extends DataType
             new PropertyInfo('value', 'string', null, false, false, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

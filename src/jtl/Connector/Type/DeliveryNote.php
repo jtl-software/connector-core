@@ -26,4 +26,9 @@ class DeliveryNote extends DataType
             new PropertyInfo('items', '\jtl\Connector\Model\DeliveryNoteItem', null, false, false, true),
         );
     }
+
+	public function isMain()
+	{
+		return true;
+	}
 }

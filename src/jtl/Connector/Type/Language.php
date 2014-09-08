@@ -24,4 +24,9 @@ class Language extends DataType
             new PropertyInfo('nameGerman', 'string', null, false, false, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

@@ -34,7 +34,12 @@ class ConfigItem extends DataType
             new PropertyInfo('type', 'int', null, false, false, false),
             new PropertyInfo('vat', 'double', null, false, false, false),
             new PropertyInfo('prices', '\jtl\Connector\Model\ConfigItemPrice', null, false, false, true),
-            new PropertyInfo('i18ns', '\jtl\Connector\Model\ConfigItemI18n', null, false, false, true),
+            new PropertyInfo('i18n', '\jtl\Connector\Model\ConfigItemI18n', null, false, false, true),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

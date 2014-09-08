@@ -27,4 +27,9 @@ class PaymentMethod extends DataType
             new PropertyInfo('vendor', 'string', null, false, false, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

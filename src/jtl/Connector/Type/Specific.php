@@ -25,4 +25,9 @@ class Specific extends DataType
             new PropertyInfo('values', '\jtl\Connector\Model\SpecificValue', null, false, false, true),
         );
     }
+
+	public function isMain()
+	{
+		return true;
+	}
 }

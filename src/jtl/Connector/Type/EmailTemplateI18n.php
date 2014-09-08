@@ -26,4 +26,9 @@ class EmailTemplateI18n extends DataType
             new PropertyInfo('subject', 'string', null, false, false, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

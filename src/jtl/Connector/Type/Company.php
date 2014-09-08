@@ -28,7 +28,6 @@ class Company extends DataType
             new PropertyInfo('eMail', 'string', null, false, false, false),
             new PropertyInfo('fax', 'string', null, false, false, false),
             new PropertyInfo('iban', 'string', null, false, false, false),
-            new PropertyInfo('id', 'int', null, true, true, false),
             new PropertyInfo('name', 'string', null, false, false, false),
             new PropertyInfo('phone', 'string', null, false, false, false),
             new PropertyInfo('street', 'string', null, false, false, false),
@@ -39,4 +38,9 @@ class Company extends DataType
             new PropertyInfo('zipCode', 'string', null, false, false, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

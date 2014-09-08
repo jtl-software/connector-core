@@ -28,4 +28,9 @@ class Currency extends DataType
             new PropertyInfo('nameHtml', 'string', null, false, false, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

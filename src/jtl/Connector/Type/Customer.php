@@ -53,4 +53,9 @@ class Customer extends DataType
             new PropertyInfo('attributes', '\jtl\Connector\Model\CustomerAttr', null, false, false, true),
         );
     }
+
+	public function isMain()
+	{
+		return true;
+	}
 }

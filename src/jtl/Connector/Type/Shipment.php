@@ -26,4 +26,9 @@ class Shipment extends DataType
             new PropertyInfo('trackingURL', 'string', null, false, false, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

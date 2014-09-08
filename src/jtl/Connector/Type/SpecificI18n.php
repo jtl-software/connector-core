@@ -22,4 +22,9 @@ class SpecificI18n extends DataType
             new PropertyInfo('specificId', 'int', null, true, true, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

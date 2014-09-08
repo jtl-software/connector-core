@@ -22,4 +22,9 @@ class ProductSpecific extends DataType
             new PropertyInfo('specificValueId', 'int', null, true, true, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

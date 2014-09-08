@@ -23,4 +23,9 @@ class CustomerOrderBasket extends DataType
             new PropertyInfo('shippingAddressId', 'int', null, false, true, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

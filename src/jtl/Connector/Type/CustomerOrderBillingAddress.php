@@ -37,4 +37,9 @@ class CustomerOrderBillingAddress extends DataType
             new PropertyInfo('zipCode', 'string', null, false, false, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

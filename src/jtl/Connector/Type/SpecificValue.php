@@ -23,4 +23,9 @@ class SpecificValue extends DataType
             new PropertyInfo('i18ns', '\jtl\Connector\Model\SpecificValueI18n', null, false, false, true),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

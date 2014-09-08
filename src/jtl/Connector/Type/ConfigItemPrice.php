@@ -23,4 +23,9 @@ class ConfigItemPrice extends DataType
             new PropertyInfo('type', 'int', null, false, false, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

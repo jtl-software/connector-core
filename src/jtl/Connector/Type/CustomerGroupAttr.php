@@ -24,4 +24,9 @@ class CustomerGroupAttr extends DataType
             new PropertyInfo('customerGroup', '\jtl\Connector\Model\CustomerGroup', null, false, false, true),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

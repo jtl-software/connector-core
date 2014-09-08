@@ -32,4 +32,9 @@ class CustomerOrderItem extends DataType
             new PropertyInfo('variations', '\jtl\Connector\Model\CustomerOrderItemVariation', null, false, false, true),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

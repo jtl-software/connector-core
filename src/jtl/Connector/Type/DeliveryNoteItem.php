@@ -27,4 +27,9 @@ class DeliveryNoteItem extends DataType
             new PropertyInfo('warehouseId', 'int', null, false, true, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

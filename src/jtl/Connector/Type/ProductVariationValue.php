@@ -29,4 +29,9 @@ class ProductVariationValue extends DataType
             new PropertyInfo('invisibilities', '\jtl\Connector\Model\ProductVariationValueInvisibility', null, false, false, true),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

@@ -36,4 +36,9 @@ class GlobalData extends DataType
             new PropertyInfo('customerGroups', '\jtl\Connector\Model\CustomerGroup', null, false, false, true),
         );
     }
+
+	public function isMain()
+	{
+		return true;
+	}
 }

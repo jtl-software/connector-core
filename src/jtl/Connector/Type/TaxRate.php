@@ -24,4 +24,9 @@ class TaxRate extends DataType
             new PropertyInfo('taxZoneId', 'int', null, false, true, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

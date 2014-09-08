@@ -21,4 +21,9 @@ class ProductVariationValueDependency extends DataType
             new PropertyInfo('productVariationValueTargetId', 'int', null, true, true, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

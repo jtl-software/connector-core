@@ -25,4 +25,9 @@ class ManufacturerI18n extends DataType
             new PropertyInfo('titleTag', 'string', null, false, false, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

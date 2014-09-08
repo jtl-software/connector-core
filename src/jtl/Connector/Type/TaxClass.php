@@ -22,4 +22,9 @@ class TaxClass extends DataType
             new PropertyInfo('name', 'string', null, false, false, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

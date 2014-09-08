@@ -21,4 +21,9 @@ class ProductVariationInvisibility extends DataType
             new PropertyInfo('productVariationId', 'int', null, true, true, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

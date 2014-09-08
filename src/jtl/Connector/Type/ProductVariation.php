@@ -26,4 +26,9 @@ class ProductVariation extends DataType
             new PropertyInfo('values', '\jtl\Connector\Model\ProductVariationValue', null, false, false, true),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

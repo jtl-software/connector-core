@@ -54,4 +54,5 @@ abstract class DataType
     }
     
     abstract protected function loadProperties();
+	abstract public function isMain();
 }

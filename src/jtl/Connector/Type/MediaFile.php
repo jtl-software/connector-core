@@ -28,4 +28,9 @@ class MediaFile extends DataType
             new PropertyInfo('attributes', '\jtl\Connector\Model\MediaFileAttr', null, false, false, true),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

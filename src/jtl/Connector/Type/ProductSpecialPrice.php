@@ -28,4 +28,9 @@ class ProductSpecialPrice extends DataType
             new PropertyInfo('specialPrices', '\jtl\Connector\Model\SpecialPrice', null, false, false, true),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }

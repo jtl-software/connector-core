@@ -27,4 +27,9 @@ class CustomerOrderItemVariation extends DataType
             new PropertyInfo('surcharge', 'double', null, false, false, false),
         );
     }
+
+	public function isMain()
+	{
+		return false;
+	}
 }
