@@ -22,17 +22,17 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerOrder extends DataModel
 {
     /**
-     * @var string - Initial status for new customerOrder, when customer finished order and order has not yet been payed or fetched
+     * @var string - Initial status for new customerOrder, when customer finished order and order has not yet been paid or fetched
      */
     const STATUS_NEW = 'new';
 
     /**
      * @var string - Customer order in process
-     */   
-    const STATUS_PROCESSING = 'processing';
+     */
+    const STATUS_PROCESSING = 'processed';
 
     /**
-     * @var string - Order payed and shipped completely
+     * @var string - Order paid and shipped completely
      */
     const STATUS_COMPLETED = 'completed';
 
@@ -47,7 +47,7 @@ class CustomerOrder extends DataModel
     const STATUS_CANCELLED = 'cancelled';
 
     /**
-     * @var string - New status, when changes have been made to customerOrder (e.g. item quantity change) 
+     * @var string - New status, when changes have been made to customerOrder (e.g. item quantity change)
      */
     const STATUS_UPDATED = 'updated';
 
@@ -65,7 +65,8 @@ class CustomerOrder extends DataModel
      * @var string - Status when order is unpaid
      */
     const PAYMENT_STATUS_UNPAID = 'unpaid';
-    
+
+
     /**
      * @var Identity Reference to billingAddress
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -243,20 +244,12 @@ class CustomerOrder extends DataModel
     protected $shippingMethodName = '';
 
     /**
-     * @var string Customer order status: new / processing / completed / partially_shipped / cancelled / reactivated / updated
+     * @var string Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
      * @Serializer\Type("string")
      * @Serializer\SerializedName("status")
      * @Serializer\Accessor(getter="getStatus",setter="setStatus")
      */
     protected $status = '';
-
-    /**
-     * @var string Customer order payment status: completed / partially_paid / unpaid
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("paymentStatus")
-     * @Serializer\Accessor(getter="getPaymentStatus",setter="setPaymentStatus")
-     */
-    protected $paymentStatus = '';
 
     /**
      * @var double Total sum to pay
@@ -758,24 +751,6 @@ class CustomerOrder extends DataModel
     public function getStatus()
     {
         return $this->status;
-    }
-
-    /**
-     * @param string Customer order payment status: completed / partially_paid / unpaid
-     * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setPaymentStatus($paymentStatus)
-    {
-        return $this->setProperty('paymentStatus', $paymentStatus, 'string');
-    }
-
-    /**
-     * @return string Customer order payment status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
-     */
-    public function getPaymentStatus()
-    {
-        return $this->paymentStatus;
     }
 
     /**

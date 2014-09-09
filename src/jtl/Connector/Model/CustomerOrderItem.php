@@ -28,13 +28,14 @@ class CustomerOrderItem extends DataModel
 
     /**
      * @var string - Shipping
-     */   
+     */
     const TYPE_SHIPPING = 'shipping';
 
     /**
-     * @var string - Dicount
-     */   
+     * @var string - Discount
+     */
     const TYPE_DISCOUNT = 'discount';
+
 
     /**
      * @var Identity Optional reference to configItemId (if item is part of a configurable item)

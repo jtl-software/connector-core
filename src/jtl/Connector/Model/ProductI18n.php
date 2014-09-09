@@ -22,22 +22,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductI18n extends DataModel
 {
     /**
-     * @var Identity 
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("connectorId")
-     * @Serializer\Accessor(getter="getConnectorId",setter="setConnectorId")
-     */
-    protected $connectorId = null;
-
-    /**
-     * @var Identity 
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("platformId")
-     * @Serializer\Accessor(getter="getPlatformId",setter="setPlatformId")
-     */
-    protected $platformId = null;
-
-    /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("productId")
@@ -112,45 +96,7 @@ class ProductI18n extends DataModel
 
     public function __construct()
     {
-        $this->connectorId = new Identity;
-        $this->platformId = new Identity;
         $this->productId = new Identity;
-    }
-
-    /**
-     * @param  Identity $connectorId 
-     * @return \jtl\Connector\Model\ProductI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setConnectorId(Identity $connectorId)
-    {
-        return $this->setProperty('connectorId', $connectorId, 'Identity');
-    }
-
-    /**
-     * @return Identity 
-     */
-    public function getConnectorId()
-    {
-        return $this->connectorId;
-    }
-
-    /**
-     * @param  Identity $platformId 
-     * @return \jtl\Connector\Model\ProductI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setPlatformId(Identity $platformId)
-    {
-        return $this->setProperty('platformId', $platformId, 'Identity');
-    }
-
-    /**
-     * @return Identity 
-     */
-    public function getPlatformId()
-    {
-        return $this->platformId;
     }
 
     /**

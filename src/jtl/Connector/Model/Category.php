@@ -38,7 +38,7 @@ class Category extends DataModel
     protected $parentCategoryId = null;
 
     /**
-     * @var bool Flag if category is active
+     * @var bool 
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isActive")
      * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
@@ -60,6 +60,17 @@ class Category extends DataModel
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
+
+    /**
+     * End: 0..1 (Zero or One of Category)
+     *      * (Collection of Category)
+     *
+     * @var \jtl\Connector\Model\Category[]
+     * @Serializer\Type("array<jtl\Connector\Model\Category>")
+     * @Serializer\SerializedName("parent")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $parent = array();
 
     /**
      * End: 1 (One of Category)
@@ -160,7 +171,7 @@ class Category extends DataModel
     }
 
     /**
-     * @param  bool $isActive Flag if category is active
+     * @param  bool $isActive 
      * @return \jtl\Connector\Model\Category
      * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
@@ -170,7 +181,7 @@ class Category extends DataModel
     }
 
     /**
-     * @return bool Flag if category is active
+     * @return bool 
      */
     public function getIsActive()
     {
@@ -211,6 +222,33 @@ class Category extends DataModel
     public function getSort()
     {
         return $this->sort;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\Category $parent
+     * @return \jtl\Connector\Model\Category
+     */
+    public function addParent(\jtl\Connector\Model\Category $parent)
+    {
+        $this->parent[] = $parent;
+        return $this;
+    }
+    
+    /**
+     * @return \jtl\Connector\Model\Category[]
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\Category
+     */
+    public function clearParent()
+    {
+        $this->parent = array();
+        return $this;
     }
 
     /**
