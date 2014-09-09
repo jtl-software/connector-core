@@ -32,6 +32,7 @@ class CustomerOrder extends DataType
             new PropertyInfo('orderNumber', 'string', null, false, false, false),
             new PropertyInfo('paymentDate', 'DateTime', null, false, false, false),
             new PropertyInfo('paymentModuleCode', 'string', null, false, false, false),
+            new PropertyInfo('paymentStatus', 'string', null, false, false, false),
             new PropertyInfo('ratingNotificationDate', 'DateTime', null, false, false, false),
             new PropertyInfo('session', 'string', null, false, false, false),
             new PropertyInfo('shippingAddressId', 'int', null, false, true, false),

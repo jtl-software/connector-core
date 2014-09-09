@@ -24,7 +24,7 @@ class FileDownload extends DataType
             new PropertyInfo('path', 'string', null, false, false, false),
             new PropertyInfo('previewPath', 'string', null, false, false, false),
             new PropertyInfo('sort', 'int', null, false, false, false),
-            new PropertyInfo('i18n', '\jtl\Connector\Model\FileDownloadI18n', null, false, false, true),
+            new PropertyInfo('i18ns', '\jtl\Connector\Model\FileDownloadI18n', null, false, false, true),
         );
     }
 

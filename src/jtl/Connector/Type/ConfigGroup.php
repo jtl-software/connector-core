@@ -24,7 +24,7 @@ class ConfigGroup extends DataType
             new PropertyInfo('minimumSelection', 'int', null, false, false, false),
             new PropertyInfo('sort', 'int', null, false, false, false),
             new PropertyInfo('type', 'int', null, false, false, false),
-            new PropertyInfo('i18n', '\jtl\Connector\Model\ConfigGroupI18n', null, false, false, true),
+            new PropertyInfo('i18ns', '\jtl\Connector\Model\ConfigGroupI18n', null, false, false, true),
         );
     }
 

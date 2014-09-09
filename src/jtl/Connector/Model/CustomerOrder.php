@@ -196,6 +196,14 @@ class CustomerOrder extends DataModel
     protected $paymentModuleCode = '';
 
     /**
+     * @var string Customer order payment status: completed / partially_paid / unpaid
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("paymentStatus")
+     * @Serializer\Accessor(getter="getPaymentStatus",setter="setPaymentStatus")
+     */
+    protected $paymentStatus = '';
+
+    /**
      * @var DateTime Date from when customer will receive notification to rate order
      * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("ratingNotificationDate")
@@ -625,6 +633,24 @@ class CustomerOrder extends DataModel
     public function getPaymentModuleCode()
     {
         return $this->paymentModuleCode;
+    }
+
+    /**
+     * @param  string $paymentStatus Customer order payment status: completed / partially_paid / unpaid
+     * @return \jtl\Connector\Model\CustomerOrder
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setPaymentStatus($paymentStatus)
+    {
+        return $this->setProperty('paymentStatus', $paymentStatus, 'string');
+    }
+
+    /**
+     * @return string Customer order payment status: completed / partially_paid / unpaid
+     */
+    public function getPaymentStatus()
+    {
+        return $this->paymentStatus;
     }
 
     /**
