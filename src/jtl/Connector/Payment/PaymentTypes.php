@@ -72,6 +72,5 @@ class PaymentTypes
     const TYPE_ILOXX = 'pm_iloxx';
     const TYPE_SOFORT = 'pm_sofort';
     const TYPE_IPAYMENT = 'pm_ipayment';
-    const TYPE_WORLDPAY = 'pm_worldpay';
-    const TYPE_PREPAYMENT = 'pm_prepayment'
+    const TYPE_PREPAYMENT = 'pm_prepayment';
 }
