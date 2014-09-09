@@ -457,6 +457,16 @@ class Product extends DataModel
     protected $variations = array();
 
     /**
+     * <unknown>
+     *
+     * @var \jtl\Connector\Model\ProductSpecific[]
+     * @Serializer\Type("array<jtl\Connector\Model\ProductSpecific>")
+     * @Serializer\SerializedName("specifics")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $specifics = array();
+
+    /**
      * End: 1 (One of Product)
      *      * (Collection of ProductSpecialPrice)
      *
@@ -1559,6 +1569,33 @@ class Product extends DataModel
     public function clearVariations()
     {
         $this->variations = array();
+        return $this;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\ProductSpecific $specific
+     * @return \jtl\Connector\Model\Product
+     */
+    public function addSpecific(\jtl\Connector\Model\ProductSpecific $specific)
+    {
+        $this->specifics[] = $specific;
+        return $this;
+    }
+    
+    /**
+     * @return \jtl\Connector\Model\ProductSpecific[]
+     */
+    public function getSpecifics()
+    {
+        return $this->specifics;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\Product
+     */
+    public function clearSpecifics()
+    {
+        $this->specifics = array();
         return $this;
     }
 
