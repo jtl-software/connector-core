@@ -18,7 +18,7 @@ class Image extends DataType
     {
         return array(
             new PropertyInfo('filename', 'string', null, false, false, false),
-            new PropertyInfo('foreignKey', 'int', null, false, false, false),
+            new PropertyInfo('foreignKey', 'int', null, false, true, false),
             new PropertyInfo('id', 'int', null, false, true, false),
             new PropertyInfo('masterImageId', 'int', null, false, true, false),
             new PropertyInfo('relationType', 'string', null, false, false, false),

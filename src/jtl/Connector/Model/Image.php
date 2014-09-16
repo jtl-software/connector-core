@@ -47,11 +47,11 @@ class Image extends DataModel
 
     /**
      * @var int Foreign key dependent on relationType
-     * @Serializer\Type("integer")
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("foreignKey")
      * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
      */
-    protected $foreignKey = 0;
+    protected $foreignKey = null;
 
     /**
      * @var string Allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
@@ -131,17 +131,17 @@ class Image extends DataModel
     }
 
     /**
-     * @param  int $foreignKey Foreign key dependent on relationType
+     * @param  Identity $foreignKey Foreign key dependent on relationType
      * @return \jtl\Connector\Model\Image
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setForeignKey($foreignKey)
+    public function setForeignKey(Identity $foreignKey)
     {
-        return $this->setProperty('foreignKey', $foreignKey, 'int');
+        return $this->setProperty('foreignKey', $foreignKey, 'Identity');
     }
 
     /**
-     * @return int Foreign key dependent on relationType
+     * @return Identity Foreign key dependent on relationType
      */
     public function getForeignKey()
     {
