@@ -143,16 +143,12 @@ class Application extends CoreApplication
             $this->deserializeRequestParams($requestpacket, $endpointconnector->getModelNamespace());
 
             // Image?
-            $imagePath = null;
-            if ($requestpacket->getMethod() == "image.push") {
-                $imagePath = Request::handleFileupload();
-                if ($imagePath !== null) {
-                    $image = $requestpacket->getParams();
-                    $image->setFilename($imagePath);
-                    $requestpacket->setParams($image);
-                } else {
-                    throw new ConnectorException("Could not handle fileupload (no file was uploaded via HTTP POST?)");
-                }
+            if ($imagePath !== null) {
+                $image = $requestpacket->getParams();
+                $image->setFilename($imagePath);
+                $requestpacket->setParams($image);
+            } else {
+                throw new ConnectorException("Could not handle fileupload (no file was uploaded via HTTP POST?)");
             }
 
             $endpointconnector->setMethod($method);
@@ -223,10 +219,15 @@ class Application extends CoreApplication
         $this->runActionValidation($requestpacket);
         $this->runModelValidation($requestpacket);
 
+        // Image?
+        $imagePath = null;
+        if ($requestpacket->getMethod() == "image.push") {
+            $imagePath = Request::handleFileupload();
+        }
+
         try {
             $this->execute($requestpacket, $config, $rpcmode, $imagePath);
         } catch (RpcException $exc) {
-            
             if ($requestpacket->getMethod() == "image.push") {
                 Request::deleteFileupload($imagePath);
             }
