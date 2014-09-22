@@ -143,12 +143,14 @@ class Application extends CoreApplication
             $this->deserializeRequestParams($requestpacket, $endpointconnector->getModelNamespace());
 
             // Image?
-            if ($imagePath !== null) {
-                $image = $requestpacket->getParams();
-                $image->setFilename($imagePath);
-                $requestpacket->setParams($image);
-            } else {
-                throw new ConnectorException("Could not handle fileupload (no file was uploaded via HTTP POST?)");
+            if ($requestpacket->getMethod() == "image.push") {
+                if ($imagePath !== null) {
+                    $image = $requestpacket->getParams();
+                    $image->setFilename($imagePath);
+                    $requestpacket->setParams($image);
+                } else {
+                    throw new ConnectorException("Could not handle fileupload (no file was uploaded via HTTP POST?)");
+                }
             }
 
             $endpointconnector->setMethod($method);
