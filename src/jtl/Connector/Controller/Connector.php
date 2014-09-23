@@ -45,7 +45,7 @@ class Connector extends CoreController
      * (non-PHPdoc)
      * @see \jtl\Core\Controller\IController::statistic()
      */
-    public function statistic($params)
+    public function statistic(QueryFilter $queryFilter)
     {
         // Not yet implemented
     }
