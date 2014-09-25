@@ -26,7 +26,6 @@ class CustomerOrder extends DataType
             new PropertyInfo('estimatedDeliveryDate', 'string', null, false, false, false),
             new PropertyInfo('id', 'int', null, true, true, false),
             new PropertyInfo('ip', 'string', null, false, false, false),
-            new PropertyInfo('isFetched', 'bool', null, false, false, false),
             new PropertyInfo('localeName', 'string', null, false, false, false),
             new PropertyInfo('note', 'string', null, false, false, false),
             new PropertyInfo('orderNumber', 'string', null, false, false, false),

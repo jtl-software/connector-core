@@ -148,14 +148,6 @@ class CustomerOrder extends DataModel
     protected $ip = '';
 
     /**
-     * @var bool Optional flag, if customerOrder is fetched by ERP System
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isFetched")
-     * @Serializer\Accessor(getter="getIsFetched",setter="setIsFetched")
-     */
-    protected $isFetched = false;
-
-    /**
      * @var string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("localeName")
@@ -525,24 +517,6 @@ class CustomerOrder extends DataModel
     public function getIp()
     {
         return $this->ip;
-    }
-
-    /**
-     * @param  bool $isFetched Optional flag, if customerOrder is fetched by ERP System
-     * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
-     */
-    public function setIsFetched($isFetched)
-    {
-        return $this->setProperty('isFetched', $isFetched, 'bool');
-    }
-
-    /**
-     * @return bool Optional flag, if customerOrder is fetched by ERP System
-     */
-    public function getIsFetched()
-    {
-        return $this->isFetched;
     }
 
     /**
