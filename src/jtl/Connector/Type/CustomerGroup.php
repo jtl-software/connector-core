@@ -21,8 +21,8 @@ class CustomerGroup extends DataType
             new PropertyInfo('discount', 'double', null, false, false, false),
             new PropertyInfo('id', 'int', null, true, true, false),
             new PropertyInfo('isDefault', 'bool', null, false, false, false),
-            new PropertyInfo('attributes', '\jtl\Connector\Model\CustomerGroupAttr', null, false, false, true),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\CustomerGroupI18n', null, false, false, true),
+            new PropertyInfo('attributes', '\jtl\Connector\Model\CustomerGroupAttr', null, false, false, true),
         );
     }
 

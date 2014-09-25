@@ -43,11 +43,7 @@ class CustomerOrder extends DataType
             new PropertyInfo('totalSum', 'double', null, false, false, false),
             new PropertyInfo('tracking', 'string', null, false, false, false),
             new PropertyInfo('trackingURL', 'string', null, false, false, false),
-            new PropertyInfo('items', '\jtl\Connector\Model\CustomerOrderItem', null, false, false, true),
             new PropertyInfo('attributes', '\jtl\Connector\Model\CustomerOrderAttr', null, false, false, true),
-            new PropertyInfo('billingAddress', '\jtl\Connector\Model\CustomerOrderBillingAddress', null, false, false, true),
-            new PropertyInfo('shippingAddress', '\jtl\Connector\Model\CustomerOrderShippingAddress', null, false, false, true),
-            new PropertyInfo('paymentInfo', '\jtl\Connector\Model\CustomerOrderPaymentInfo', null, false, false, true),
         );
     }
 

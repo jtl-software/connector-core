@@ -22,12 +22,11 @@ class Category extends DataType
             new PropertyInfo('level', 'int', null, false, false, false),
             new PropertyInfo('parentCategoryId', 'int', null, false, true, false),
             new PropertyInfo('sort', 'int', null, false, false, false),
-            new PropertyInfo('children', '\jtl\Connector\Model\Category', null, false, false, true),
             new PropertyInfo('parent', '\jtl\Connector\Model\Category', null, false, false, true),
-            new PropertyInfo('i18ns', '\jtl\Connector\Model\CategoryI18n', null, false, false, true),
             new PropertyInfo('invisibilities', '\jtl\Connector\Model\CategoryInvisibility', null, false, false, true),
+            new PropertyInfo('i18ns', '\jtl\Connector\Model\CategoryI18n', null, false, false, true),
             new PropertyInfo('customerGroups', '\jtl\Connector\Model\CategoryCustomerGroup', null, false, false, true),
-            new PropertyInfo('#Attributes', '\jtl\Connector\Model\CategoryAttr', null, false, false, true),
+            new PropertyInfo('children', '\jtl\Connector\Model\Category', null, false, false, true),
         );
     }
 

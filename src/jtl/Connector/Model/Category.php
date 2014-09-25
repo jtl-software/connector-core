@@ -116,17 +116,6 @@ class Category extends DataModel
      */
     protected $children = array();
 
-    /**
-     * End: 1 (One of Category)
-     *      * (Collection of CategoryAttr)
-     *
-     * @var \jtl\Connector\Model\CategoryAttr[]
-     * @Serializer\Type("array<jtl\Connector\Model\CategoryAttr>")
-     * @Serializer\SerializedName("attributes")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $attributes = array();
-
 
     public function __construct()
     {
@@ -356,33 +345,6 @@ class Category extends DataModel
     public function clearChildren()
     {
         $this->children = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\CategoryAttr $attribute
-     * @return \jtl\Connector\Model\Category
-     */
-    public function addAttribute(\jtl\Connector\Model\CategoryAttr $attribute)
-    {
-        $this->attributes[] = $attribute;
-        return $this;
-    }
-    
-    /**
-     * @return \jtl\Connector\Model\CategoryAttr[]
-     */
-    public function getAttributes()
-    {
-        return $this->attributes;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\Category
-     */
-    public function clearAttributes()
-    {
-        $this->attributes = array();
         return $this;
     }
 

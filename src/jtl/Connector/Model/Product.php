@@ -482,17 +482,6 @@ class Product extends DataModel
 
     /**
      * End: 1 (One of Product)
-     *      * (Collection of ProductVarCombination)
-     *
-     * @var \jtl\Connector\Model\ProductVarCombination[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductVarCombination>")
-     * @Serializer\SerializedName("varCombinations")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $varCombinations = array();
-
-    /**
-     * End: 1 (One of Product)
      *      * (Collection of ProductSpecific)
      *
      * @var \jtl\Connector\Model\ProductSpecific[]
@@ -600,17 +589,6 @@ class Product extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $categories = array();
-
-    /**
-     * End: 1 (One of Product)
-     *      * (Collection of ProductPrice)
-     *
-     * @var \jtl\Connector\Model\ProductPrice[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductPrice>")
-     * @Serializer\SerializedName("#Prices")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $#Prices = array();
 
 
     public function __construct()
@@ -1663,33 +1641,6 @@ class Product extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductVarCombination $varCombination
-     * @return \jtl\Connector\Model\Product
-     */
-    public function addVarCombination(\jtl\Connector\Model\ProductVarCombination $varCombination)
-    {
-        $this->varCombinations[] = $varCombination;
-        return $this;
-    }
-    
-    /**
-     * @return \jtl\Connector\Model\ProductVarCombination[]
-     */
-    public function getVarCombinations()
-    {
-        return $this->varCombinations;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\Product
-     */
-    public function clearVarCombinations()
-    {
-        $this->varCombinations = array();
-        return $this;
-    }
-
-    /**
      * @param  \jtl\Connector\Model\ProductSpecific $specific
      * @return \jtl\Connector\Model\Product
      */
@@ -1956,33 +1907,6 @@ class Product extends DataModel
     public function clearCategories()
     {
         $this->categories = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\ProductPrice $#Prices
-     * @return \jtl\Connector\Model\Product
-     */
-    public function add#Prices(\jtl\Connector\Model\ProductPrice $#Prices)
-    {
-        $this->#Prices[] = $#Prices;
-        return $this;
-    }
-    
-    /**
-     * @return \jtl\Connector\Model\ProductPrice[]
-     */
-    public function get#Prices()
-    {
-        return $this->#Prices;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\Product
-     */
-    public function clear#Prices()
-    {
-        $this->#Prices = array();
         return $this;
     }
 
