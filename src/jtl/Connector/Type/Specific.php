@@ -21,8 +21,8 @@ class Specific extends DataType
             new PropertyInfo('isGlobal', 'bool', null, false, false, false),
             new PropertyInfo('sort', 'int', null, false, false, false),
             new PropertyInfo('type', 'string', null, false, false, false),
-            new PropertyInfo('values', '\jtl\Connector\Model\SpecificValue', null, false, false, true),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\SpecificI18n', null, false, false, true),
+            new PropertyInfo('values', '\jtl\Connector\Model\SpecificValue', null, false, false, true),
         );
     }
 
