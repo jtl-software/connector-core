@@ -142,14 +142,6 @@ class Product extends DataModel
     protected $bestBefore = null;
 
     /**
-     * @var int Optional summary
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("buffer")
-     * @Serializer\Accessor(getter="getBuffer",setter="setBuffer")
-     */
-    protected $buffer = 0;
-
-    /**
      * @var bool Optional: Set to true to display base price / unit pricing measure
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("considerBasePrice")
@@ -230,14 +222,6 @@ class Product extends DataModel
     protected $inflowQuantity = 0.0;
 
     /**
-     * @var bool 
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isActive")
-     * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
-     */
-    protected $isActive = false;
-
-    /**
      * @var string Optional International Standard Book Number
      * @Serializer\Type("string")
      * @Serializer\SerializedName("isbn")
@@ -316,14 +300,6 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getMinimumOrderQuantity",setter="setMinimumOrderQuantity")
      */
     protected $minimumOrderQuantity = 0.0;
-
-    /**
-     * @var DateTime Last modification date
-     * @Serializer\Type("DateTime")
-     * @Serializer\SerializedName("modified")
-     * @Serializer\Accessor(getter="getModified",setter="setModified")
-     */
-    protected $modified = null;
 
     /**
      * @var string Optional internal product note
@@ -481,19 +457,7 @@ class Product extends DataModel
     protected $variations = array();
 
     /**
-     * End: 1 (One of Product)
-     *      * (Collection of ProductVarCombination)
-     *
-     * @var \jtl\Connector\Model\ProductVarCombination[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductVarCombination>")
-     * @Serializer\SerializedName("varCombinations")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $varCombinations = array();
-
-    /**
-     * End: 1 (One of Product)
-     *      * (Collection of ProductSpecific)
+     * <unknown>
      *
      * @var \jtl\Connector\Model\ProductSpecific[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductSpecific>")
@@ -523,6 +487,17 @@ class Product extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $setArticles = array();
+
+    /**
+     * End: 1 (One of Product)
+     *      * (Collection of ProductPrice)
+     *
+     * @var \jtl\Connector\Model\ProductPrice[]
+     * @Serializer\Type("array<jtl\Connector\Model\ProductPrice>")
+     * @Serializer\SerializedName("prices")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $prices = array();
 
     /**
      * End: 1 (One of Product)
@@ -600,17 +575,6 @@ class Product extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $categories = array();
-
-    /**
-     * End: 1 (One of Product)
-     *      * (Collection of ProductPrice)
-     *
-     * @var \jtl\Connector\Model\ProductPrice[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductPrice>")
-     * @Serializer\SerializedName("#Prices")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $#Prices = array();
 
 
     public function __construct()
@@ -898,24 +862,6 @@ class Product extends DataModel
     }
 
     /**
-     * @param  int $buffer Optional summary
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setBuffer($buffer)
-    {
-        return $this->setProperty('buffer', $buffer, 'int');
-    }
-
-    /**
-     * @return int Optional summary
-     */
-    public function getBuffer()
-    {
-        return $this->buffer;
-    }
-
-    /**
      * @param  bool $considerBasePrice Optional: Set to true to display base price / unit pricing measure
      * @return \jtl\Connector\Model\Product
      * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
@@ -1096,24 +1042,6 @@ class Product extends DataModel
     }
 
     /**
-     * @param  bool $isActive 
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
-     */
-    public function setIsActive($isActive)
-    {
-        return $this->setProperty('isActive', $isActive, 'bool');
-    }
-
-    /**
-     * @return bool 
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
-    }
-
-    /**
      * @param  string $isbn Optional International Standard Book Number
      * @return \jtl\Connector\Model\Product
      * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
@@ -1291,24 +1219,6 @@ class Product extends DataModel
     public function getMinimumOrderQuantity()
     {
         return $this->minimumOrderQuantity;
-    }
-
-    /**
-     * @param  DateTime $modified Last modification date
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
-     */
-    public function setModified(DateTime $modified = null)
-    {
-        return $this->setProperty('modified', $modified, 'DateTime');
-    }
-
-    /**
-     * @return DateTime Last modification date
-     */
-    public function getModified()
-    {
-        return $this->modified;
     }
 
     /**
@@ -1663,33 +1573,6 @@ class Product extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\ProductVarCombination $varCombination
-     * @return \jtl\Connector\Model\Product
-     */
-    public function addVarCombination(\jtl\Connector\Model\ProductVarCombination $varCombination)
-    {
-        $this->varCombinations[] = $varCombination;
-        return $this;
-    }
-    
-    /**
-     * @return \jtl\Connector\Model\ProductVarCombination[]
-     */
-    public function getVarCombinations()
-    {
-        return $this->varCombinations;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\Product
-     */
-    public function clearVarCombinations()
-    {
-        $this->varCombinations = array();
-        return $this;
-    }
-
-    /**
      * @param  \jtl\Connector\Model\ProductSpecific $specific
      * @return \jtl\Connector\Model\Product
      */
@@ -1767,6 +1650,33 @@ class Product extends DataModel
     public function clearSetArticles()
     {
         $this->setArticles = array();
+        return $this;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\ProductPrice $price
+     * @return \jtl\Connector\Model\Product
+     */
+    public function addPrice(\jtl\Connector\Model\ProductPrice $price)
+    {
+        $this->prices[] = $price;
+        return $this;
+    }
+    
+    /**
+     * @return \jtl\Connector\Model\ProductPrice[]
+     */
+    public function getPrices()
+    {
+        return $this->prices;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\Product
+     */
+    public function clearPrices()
+    {
+        $this->prices = array();
         return $this;
     }
 
@@ -1956,33 +1866,6 @@ class Product extends DataModel
     public function clearCategories()
     {
         $this->categories = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\ProductPrice $#Prices
-     * @return \jtl\Connector\Model\Product
-     */
-    public function add#Prices(\jtl\Connector\Model\ProductPrice $#Prices)
-    {
-        $this->#Prices[] = $#Prices;
-        return $this;
-    }
-    
-    /**
-     * @return \jtl\Connector\Model\ProductPrice[]
-     */
-    public function get#Prices()
-    {
-        return $this->#Prices;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\Product
-     */
-    public function clear#Prices()
-    {
-        $this->#Prices = array();
         return $this;
     }
 

@@ -62,6 +62,14 @@ class DeliveryNote extends DataModel
     protected $note = '';
 
     /**
+     * @var int Delivery status
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("status")
+     * @Serializer\Accessor(getter="getStatus",setter="setStatus")
+     */
+    protected $status = 0;
+
+    /**
      * End: 1 (One of DeliveryNote)
      *      * (Collection of DeliveryNoteItem)
      *
@@ -167,6 +175,24 @@ class DeliveryNote extends DataModel
     public function getNote()
     {
         return $this->note;
+    }
+
+    /**
+     * @param  int $status Delivery status
+     * @return \jtl\Connector\Model\DeliveryNote
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     */
+    public function setStatus($status)
+    {
+        return $this->setProperty('status', $status, 'int');
+    }
+
+    /**
+     * @return int Delivery status
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     /**

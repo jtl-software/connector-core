@@ -27,7 +27,7 @@ class Category extends DataType
             new PropertyInfo('i18ns', '\jtl\Connector\Model\CategoryI18n', null, false, false, true),
             new PropertyInfo('invisibilities', '\jtl\Connector\Model\CategoryInvisibility', null, false, false, true),
             new PropertyInfo('customerGroups', '\jtl\Connector\Model\CategoryCustomerGroup', null, false, false, true),
-            new PropertyInfo('#Attributes', '\jtl\Connector\Model\CategoryAttr', null, false, false, true),
+            new PropertyInfo('attributes', '\jtl\Connector\Model\CategoryAttr', null, false, false, true),
         );
     }
 

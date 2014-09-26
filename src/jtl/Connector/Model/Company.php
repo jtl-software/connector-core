@@ -22,14 +22,6 @@ use JMS\Serializer\Annotation as Serializer;
 class Company extends DataModel
 {
     /**
-     * @var Identity Unique company id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-
-    /**
      * @var string Bank account holder name e.g. "John Doe"
      * @Serializer\Type("string")
      * @Serializer\SerializedName("accountHolder")
@@ -184,25 +176,6 @@ class Company extends DataModel
 
     public function __construct()
     {
-        $this->id = new Identity;
-    }
-
-    /**
-     * @param  Identity $id Unique company id
-     * @return \jtl\Connector\Model\Company
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id)
-    {
-        return $this->setProperty('id', $id, 'Identity');
-    }
-
-    /**
-     * @return Identity Unique company id
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
