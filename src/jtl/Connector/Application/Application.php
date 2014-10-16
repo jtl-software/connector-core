@@ -21,7 +21,6 @@ use \jtl\Core\Rpc\ResponsePacket;
 use \jtl\Core\Rpc\Error;
 use \jtl\Core\Http\Request;
 use \jtl\Core\Http\Response;
-use \jtl\Core\Authentication\Wawi as WawiAuthentication;
 use \jtl\Core\Config\Config;
 use \jtl\Core\Config\Loader\Json as ConfigJson;
 use \jtl\Core\Config\Loader\System as ConfigSystem;
@@ -143,7 +142,7 @@ class Application extends CoreApplication
             $this->deserializeRequestParams($requestpacket, $endpointconnector->getModelNamespace());
 
             // Image?
-            if ($requestpacket->getMethod() == "image.push") {
+            if ($requestpacket->getMethod() == "image.push" && $imagePath !== null) {
                 if ($imagePath !== null) {
                     $image = $requestpacket->getParams();
                     $image->setFilename($imagePath);
@@ -158,7 +157,7 @@ class Application extends CoreApplication
                 $endpointconnector->setConfig($config);
                 $actionresult = $endpointconnector->handle($requestpacket);
                 
-                if ($requestpacket->getMethod() == "image.push") {
+                if ($requestpacket->getMethod() == "image.push" && $imagePath !== null) {
                     Request::deleteFileupload($imagePath);
                 }
                 
@@ -230,7 +229,7 @@ class Application extends CoreApplication
         try {
             $this->execute($requestpacket, $config, $rpcmode, $imagePath);
         } catch (RpcException $exc) {
-            if ($requestpacket->getMethod() == "image.push") {
+            if ($requestpacket->getMethod() == "image.push" && $imagePath !== null) {
                 Request::deleteFileupload($imagePath);
             }
 

@@ -9,7 +9,6 @@
 namespace jtl\Connector\Controller;
 
 use \jtl\Core\Controller\Controller as CoreController;
-use \jtl\Core\Exception\ControllerException;
 use \jtl\Connector\Result\Action;
 use \jtl\Core\Rpc\Error;
 
