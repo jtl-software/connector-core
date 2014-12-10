@@ -80,10 +80,10 @@ class Customer extends DataModel
     /**
      * @var DateTime Creation date
      * @Serializer\Type("DateTime")
-     * @Serializer\SerializedName("created")
-     * @Serializer\Accessor(getter="getCreated",setter="setCreated")
+     * @Serializer\SerializedName("creationDate")
+     * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
-    protected $created = null;
+    protected $creationDate = null;
 
     /**
      * @var string Optional customer number set by JTL-Wawi ERP software
@@ -166,14 +166,6 @@ class Customer extends DataModel
     protected $isActive = false;
 
     /**
-     * @var bool Flag if customer is fetched by ERP System. True, if customer is already fetched and must not be fetched again. 
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isFetched")
-     * @Serializer\Accessor(getter="getIsFetched",setter="setIsFetched")
-     */
-    protected $isFetched = false;
-
-    /**
      * @var string Last name
      * @Serializer\Type("string")
      * @Serializer\SerializedName("lastName")
@@ -198,28 +190,12 @@ class Customer extends DataModel
     protected $mobile = '';
 
     /**
-     * @var DateTime Last modified date
-     * @Serializer\Type("DateTime")
-     * @Serializer\SerializedName("modified")
-     * @Serializer\Accessor(getter="getModified",setter="setModified")
-     */
-    protected $modified = null;
-
-    /**
      * @var string Customer origin
      * @Serializer\Type("string")
      * @Serializer\SerializedName("origin")
      * @Serializer\Accessor(getter="getOrigin",setter="setOrigin")
      */
     protected $origin = '';
-
-    /**
-     * @var string Optional (encrypted!) customer password
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("password")
-     * @Serializer\Accessor(getter="getPassword",setter="setPassword")
-     */
-    protected $password = '';
 
     /**
      * @var string Phone number
@@ -272,10 +248,10 @@ class Customer extends DataModel
     /**
      * @var string WWW address
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("www")
-     * @Serializer\Accessor(getter="getWww",setter="setWww")
+     * @Serializer\SerializedName("websiteUrl")
+     * @Serializer\Accessor(getter="getWebsiteUrl",setter="setWebsiteUrl")
      */
-    protected $www = '';
+    protected $websiteUrl = '';
 
     /**
      * @var string ZIP / postal code
@@ -430,21 +406,21 @@ class Customer extends DataModel
     }
 
     /**
-     * @param  DateTime $created Creation date
+     * @param  DateTime $creationDate Creation date
      * @return \jtl\Connector\Model\Customer
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreated(DateTime $created = null)
+    public function setCreationDate(DateTime $creationDate = null)
     {
-        return $this->setProperty('created', $created, 'DateTime');
+        return $this->setProperty('creationDate', $creationDate, 'DateTime');
     }
 
     /**
      * @return DateTime Creation date
      */
-    public function getCreated()
+    public function getCreationDate()
     {
-        return $this->created;
+        return $this->creationDate;
     }
 
     /**
@@ -628,24 +604,6 @@ class Customer extends DataModel
     }
 
     /**
-     * @param  bool $isFetched Flag if customer is fetched by ERP System. True, if customer is already fetched and must not be fetched again. 
-     * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
-     */
-    public function setIsFetched($isFetched)
-    {
-        return $this->setProperty('isFetched', $isFetched, 'bool');
-    }
-
-    /**
-     * @return bool Flag if customer is fetched by ERP System. True, if customer is already fetched and must not be fetched again. 
-     */
-    public function getIsFetched()
-    {
-        return $this->isFetched;
-    }
-
-    /**
      * @param  string $lastName Last name
      * @return \jtl\Connector\Model\Customer
      * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
@@ -700,24 +658,6 @@ class Customer extends DataModel
     }
 
     /**
-     * @param  DateTime $modified Last modified date
-     * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
-     */
-    public function setModified(DateTime $modified = null)
-    {
-        return $this->setProperty('modified', $modified, 'DateTime');
-    }
-
-    /**
-     * @return DateTime Last modified date
-     */
-    public function getModified()
-    {
-        return $this->modified;
-    }
-
-    /**
      * @param  string $origin Customer origin
      * @return \jtl\Connector\Model\Customer
      * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
@@ -733,24 +673,6 @@ class Customer extends DataModel
     public function getOrigin()
     {
         return $this->origin;
-    }
-
-    /**
-     * @param  string $password Optional (encrypted!) customer password
-     * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setPassword($password)
-    {
-        return $this->setProperty('password', $password, 'string');
-    }
-
-    /**
-     * @return string Optional (encrypted!) customer password
-     */
-    public function getPassword()
-    {
-        return $this->password;
     }
 
     /**
@@ -862,21 +784,21 @@ class Customer extends DataModel
     }
 
     /**
-     * @param  string $www WWW address
+     * @param  string $websiteUrl WWW address
      * @return \jtl\Connector\Model\Customer
      * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setWww($www)
+    public function setWebsiteUrl($websiteUrl)
     {
-        return $this->setProperty('www', $www, 'string');
+        return $this->setProperty('websiteUrl', $websiteUrl, 'string');
     }
 
     /**
      * @return string WWW address
      */
-    public function getWww()
+    public function getWebsiteUrl()
     {
-        return $this->www;
+        return $this->websiteUrl;
     }
 
     /**

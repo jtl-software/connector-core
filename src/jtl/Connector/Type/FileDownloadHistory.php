@@ -17,7 +17,7 @@ class FileDownloadHistory extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('created', 'DateTime', null, false, false, false),
+            new PropertyInfo('creationDate', 'DateTime', null, false, false, false),
             new PropertyInfo('customerId', 'int', null, false, true, false),
             new PropertyInfo('customerOrderId', 'int', null, false, true, false),
             new PropertyInfo('fileDownloadId', 'int', null, false, true, false),

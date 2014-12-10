@@ -18,12 +18,12 @@ class Shipment extends DataType
     {
         return array(
             new PropertyInfo('carrierName', 'string', null, false, false, false),
-            new PropertyInfo('created', 'DateTime', null, false, false, false),
+            new PropertyInfo('creationDate', 'DateTime', null, false, false, false),
             new PropertyInfo('deliveryNoteId', 'int', null, false, true, false),
             new PropertyInfo('id', 'int', null, true, true, false),
             new PropertyInfo('identCode', 'string', null, false, false, false),
             new PropertyInfo('note', 'string', null, false, false, false),
-            new PropertyInfo('trackingURL', 'string', null, false, false, false),
+            new PropertyInfo('trackingUrl', 'string', null, false, false, false),
         );
     }
 

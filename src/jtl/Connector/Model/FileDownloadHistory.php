@@ -56,10 +56,10 @@ class FileDownloadHistory extends DataModel
     /**
      * @var DateTime 
      * @Serializer\Type("DateTime")
-     * @Serializer\SerializedName("created")
-     * @Serializer\Accessor(getter="getCreated",setter="setCreated")
+     * @Serializer\SerializedName("creationDate")
+     * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
-    protected $created = null;
+    protected $creationDate = null;
 
 
     public function __construct()
@@ -143,21 +143,21 @@ class FileDownloadHistory extends DataModel
     }
 
     /**
-     * @param  DateTime $created 
+     * @param  DateTime $creationDate 
      * @return \jtl\Connector\Model\FileDownloadHistory
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreated(DateTime $created = null)
+    public function setCreationDate(DateTime $creationDate = null)
     {
-        return $this->setProperty('created', $created, 'DateTime');
+        return $this->setProperty('creationDate', $creationDate, 'DateTime');
     }
 
     /**
      * @return DateTime 
      */
-    public function getCreated()
+    public function getCreationDate()
     {
-        return $this->created;
+        return $this->creationDate;
     }
 
  

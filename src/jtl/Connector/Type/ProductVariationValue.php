@@ -23,10 +23,10 @@ class ProductVariationValue extends DataType
             new PropertyInfo('sku', 'string', null, false, false, false),
             new PropertyInfo('sort', 'int', null, false, false, false),
             new PropertyInfo('stockLevel', 'double', null, false, false, false),
-            new PropertyInfo('dependencies', '\jtl\Connector\Model\ProductVariationValueDependency', null, false, false, true),
-            new PropertyInfo('extraCharges', '\jtl\Connector\Model\ProductVariationValueExtraCharge', null, false, false, true),
-            new PropertyInfo('i18ns', '\jtl\Connector\Model\ProductVariationValueI18n', null, false, false, true),
             new PropertyInfo('invisibilities', '\jtl\Connector\Model\ProductVariationValueInvisibility', null, false, false, true),
+            new PropertyInfo('i18ns', '\jtl\Connector\Model\ProductVariationValueI18n', null, false, false, true),
+            new PropertyInfo('extraCharges', '\jtl\Connector\Model\ProductVariationValueExtraCharge', null, false, false, true),
+            new PropertyInfo('dependencies', '\jtl\Connector\Model\ProductVariationValueDependency', null, false, false, true),
         );
     }
 

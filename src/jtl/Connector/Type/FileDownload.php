@@ -17,7 +17,7 @@ class FileDownload extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('created', 'DateTime', null, false, false, false),
+            new PropertyInfo('creationDate', 'DateTime', null, false, false, false),
             new PropertyInfo('id', 'int', null, true, true, false),
             new PropertyInfo('maxDays', 'int', null, false, false, false),
             new PropertyInfo('maxDownloads', 'int', null, false, false, false),

@@ -110,10 +110,10 @@ class CustomerOrder extends DataModel
     /**
      * @var DateTime Date of creation
      * @Serializer\Type("DateTime")
-     * @Serializer\SerializedName("created")
-     * @Serializer\Accessor(getter="getCreated",setter="setCreated")
+     * @Serializer\SerializedName("creationDate")
+     * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
-    protected $created = null;
+    protected $creationDate = null;
 
     /**
      * @var double Optional customer credit (credit reduces total sum)
@@ -146,14 +146,6 @@ class CustomerOrder extends DataModel
      * @Serializer\Accessor(getter="getIp",setter="setIp")
      */
     protected $ip = '';
-
-    /**
-     * @var bool Optional flag, if customerOrder is fetched by ERP System
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isFetched")
-     * @Serializer\Accessor(getter="getIsFetched",setter="setIsFetched")
-     */
-    protected $isFetched = false;
 
     /**
      * @var string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
@@ -278,10 +270,10 @@ class CustomerOrder extends DataModel
     /**
      * @var string Optional Tracking URL
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("trackingURL")
-     * @Serializer\Accessor(getter="getTrackingURL",setter="setTrackingURL")
+     * @Serializer\SerializedName("trackingUrl")
+     * @Serializer\Accessor(getter="getTrackingUrl",setter="setTrackingUrl")
      */
-    protected $trackingURL = '';
+    protected $trackingUrl = '';
 
     /**
      * End: * (Collection of CustomerOrder)
@@ -293,28 +285,6 @@ class CustomerOrder extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $shippingAddress = array();
-
-    /**
-     * End: 0..1 (Zero or One of CustomerOrder)
-     *      * (Collection of CustomerOrderPaymentInfo)
-     *
-     * @var \jtl\Connector\Model\CustomerOrderPaymentInfo[]
-     * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderPaymentInfo>")
-     * @Serializer\SerializedName("paymentInfo")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $paymentInfo = array();
-
-    /**
-     * End: 1 (One of CustomerOrder)
-     *      * (Collection of CustomerOrderItem)
-     *
-     * @var \jtl\Connector\Model\CustomerOrderItem[]
-     * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderItem>")
-     * @Serializer\SerializedName("items")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $items = array();
 
     /**
      * End: * (Collection of CustomerOrder)
@@ -438,21 +408,21 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param  DateTime $created Date of creation
+     * @param  DateTime $creationDate Date of creation
      * @return \jtl\Connector\Model\CustomerOrder
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreated(DateTime $created = null)
+    public function setCreationDate(DateTime $creationDate = null)
     {
-        return $this->setProperty('created', $created, 'DateTime');
+        return $this->setProperty('creationDate', $creationDate, 'DateTime');
     }
 
     /**
      * @return DateTime Date of creation
      */
-    public function getCreated()
+    public function getCreationDate()
     {
-        return $this->created;
+        return $this->creationDate;
     }
 
     /**
@@ -525,24 +495,6 @@ class CustomerOrder extends DataModel
     public function getIp()
     {
         return $this->ip;
-    }
-
-    /**
-     * @param  bool $isFetched Optional flag, if customerOrder is fetched by ERP System
-     * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
-     */
-    public function setIsFetched($isFetched)
-    {
-        return $this->setProperty('isFetched', $isFetched, 'bool');
-    }
-
-    /**
-     * @return bool Optional flag, if customerOrder is fetched by ERP System
-     */
-    public function getIsFetched()
-    {
-        return $this->isFetched;
     }
 
     /**
@@ -816,21 +768,21 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param  string $trackingURL Optional Tracking URL
+     * @param  string $trackingUrl Optional Tracking URL
      * @return \jtl\Connector\Model\CustomerOrder
      * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setTrackingURL($trackingURL)
+    public function setTrackingUrl($trackingUrl)
     {
-        return $this->setProperty('trackingURL', $trackingURL, 'string');
+        return $this->setProperty('trackingUrl', $trackingUrl, 'string');
     }
 
     /**
      * @return string Optional Tracking URL
      */
-    public function getTrackingURL()
+    public function getTrackingUrl()
     {
-        return $this->trackingURL;
+        return $this->trackingUrl;
     }
 
     /**
@@ -857,60 +809,6 @@ class CustomerOrder extends DataModel
     public function clearShippingAddress()
     {
         $this->shippingAddress = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\CustomerOrderPaymentInfo $paymentInfo
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function addPaymentInfo(\jtl\Connector\Model\CustomerOrderPaymentInfo $paymentInfo)
-    {
-        $this->paymentInfo[] = $paymentInfo;
-        return $this;
-    }
-    
-    /**
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo[]
-     */
-    public function getPaymentInfo()
-    {
-        return $this->paymentInfo;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function clearPaymentInfo()
-    {
-        $this->paymentInfo = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\CustomerOrderItem $item
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function addItem(\jtl\Connector\Model\CustomerOrderItem $item)
-    {
-        $this->items[] = $item;
-        return $this;
-    }
-    
-    /**
-     * @return \jtl\Connector\Model\CustomerOrderItem[]
-     */
-    public function getItems()
-    {
-        return $this->items;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function clearItems()
-    {
-        $this->items = array();
         return $this;
     }
 

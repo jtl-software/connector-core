@@ -17,13 +17,11 @@ class DeliveryNote extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('created', 'DateTime', null, false, false, false),
+            new PropertyInfo('creationDate', 'DateTime', null, false, false, false),
             new PropertyInfo('customerOrderId', 'int', null, false, true, false),
             new PropertyInfo('id', 'int', null, true, true, false),
             new PropertyInfo('isFulfillment', 'bool', null, false, false, false),
             new PropertyInfo('note', 'string', null, false, false, false),
-            new PropertyInfo('status', 'int', null, false, false, false),
-            new PropertyInfo('items', '\jtl\Connector\Model\DeliveryNoteItem', null, false, false, true),
         );
     }
 

@@ -40,10 +40,10 @@ class DeliveryNote extends DataModel
     /**
      * @var DateTime Creation date
      * @Serializer\Type("DateTime")
-     * @Serializer\SerializedName("created")
-     * @Serializer\Accessor(getter="getCreated",setter="setCreated")
+     * @Serializer\SerializedName("creationDate")
+     * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
-    protected $created = null;
+    protected $creationDate = null;
 
     /**
      * @var bool Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
@@ -60,25 +60,6 @@ class DeliveryNote extends DataModel
      * @Serializer\Accessor(getter="getNote",setter="setNote")
      */
     protected $note = '';
-
-    /**
-     * @var int Delivery status
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("status")
-     * @Serializer\Accessor(getter="getStatus",setter="setStatus")
-     */
-    protected $status = 0;
-
-    /**
-     * End: 1 (One of DeliveryNote)
-     *      * (Collection of DeliveryNoteItem)
-     *
-     * @var \jtl\Connector\Model\DeliveryNoteItem[]
-     * @Serializer\Type("array<jtl\Connector\Model\DeliveryNoteItem>")
-     * @Serializer\SerializedName("items")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $items = array();
 
 
     public function __construct()
@@ -124,21 +105,21 @@ class DeliveryNote extends DataModel
     }
 
     /**
-     * @param  DateTime $created Creation date
+     * @param  DateTime $creationDate Creation date
      * @return \jtl\Connector\Model\DeliveryNote
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreated(DateTime $created = null)
+    public function setCreationDate(DateTime $creationDate = null)
     {
-        return $this->setProperty('created', $created, 'DateTime');
+        return $this->setProperty('creationDate', $creationDate, 'DateTime');
     }
 
     /**
      * @return DateTime Creation date
      */
-    public function getCreated()
+    public function getCreationDate()
     {
-        return $this->created;
+        return $this->creationDate;
     }
 
     /**
@@ -175,51 +156,6 @@ class DeliveryNote extends DataModel
     public function getNote()
     {
         return $this->note;
-    }
-
-    /**
-     * @param  int $status Delivery status
-     * @return \jtl\Connector\Model\DeliveryNote
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setStatus($status)
-    {
-        return $this->setProperty('status', $status, 'int');
-    }
-
-    /**
-     * @return int Delivery status
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\DeliveryNoteItem $item
-     * @return \jtl\Connector\Model\DeliveryNote
-     */
-    public function addItem(\jtl\Connector\Model\DeliveryNoteItem $item)
-    {
-        $this->items[] = $item;
-        return $this;
-    }
-    
-    /**
-     * @return \jtl\Connector\Model\DeliveryNoteItem[]
-     */
-    public function getItems()
-    {
-        return $this->items;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\DeliveryNote
-     */
-    public function clearItems()
-    {
-        $this->items = array();
-        return $this;
     }
 
  

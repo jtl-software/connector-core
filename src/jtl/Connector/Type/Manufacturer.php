@@ -21,7 +21,7 @@ class Manufacturer extends DataType
             new PropertyInfo('name', 'string', null, false, false, false),
             new PropertyInfo('sort', 'int', null, false, false, false),
             new PropertyInfo('urlPath', 'string', null, false, false, false),
-            new PropertyInfo('www', 'string', null, false, false, false),
+            new PropertyInfo('websiteUrl', 'string', null, false, false, false),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\ManufacturerI18n', null, false, false, true),
         );
     }

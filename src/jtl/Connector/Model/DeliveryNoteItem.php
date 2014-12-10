@@ -64,10 +64,10 @@ class DeliveryNoteItem extends DataModel
     /**
      * @var DateTime Optional best before date
      * @Serializer\Type("DateTime")
-     * @Serializer\SerializedName("bestBefore")
-     * @Serializer\Accessor(getter="getBestBefore",setter="setBestBefore")
+     * @Serializer\SerializedName("bestBeforeDate")
+     * @Serializer\Accessor(getter="getBestBeforeDate",setter="setBestBeforeDate")
      */
-    protected $bestBefore = null;
+    protected $bestBeforeDate = null;
 
     /**
      * @var double Quantity delivered
@@ -185,21 +185,21 @@ class DeliveryNoteItem extends DataModel
     }
 
     /**
-     * @param  DateTime $bestBefore Optional best before date
+     * @param  DateTime $bestBeforeDate Optional best before date
      * @return \jtl\Connector\Model\DeliveryNoteItem
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setBestBefore(DateTime $bestBefore = null)
+    public function setBestBeforeDate(DateTime $bestBeforeDate = null)
     {
-        return $this->setProperty('bestBefore', $bestBefore, 'DateTime');
+        return $this->setProperty('bestBeforeDate', $bestBeforeDate, 'DateTime');
     }
 
     /**
      * @return DateTime Optional best before date
      */
-    public function getBestBefore()
+    public function getBestBeforeDate()
     {
-        return $this->bestBefore;
+        return $this->bestBeforeDate;
     }
 
     /**

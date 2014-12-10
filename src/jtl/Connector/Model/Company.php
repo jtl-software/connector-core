@@ -22,6 +22,14 @@ use JMS\Serializer\Annotation as Serializer;
 class Company extends DataModel
 {
     /**
+     * @var Identity Unique company id
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
+     */
+    protected $id = null;
+
+    /**
      * @var string Bank account holder name e.g. "John Doe"
      * @Serializer\Type("string")
      * @Serializer\SerializedName("accountHolder")
@@ -160,10 +168,10 @@ class Company extends DataModel
     /**
      * @var string Company website URL
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("www")
-     * @Serializer\Accessor(getter="getWww",setter="setWww")
+     * @Serializer\SerializedName("websiteUrl")
+     * @Serializer\Accessor(getter="getWebsiteUrl",setter="setWebsiteUrl")
      */
-    protected $www = '';
+    protected $websiteUrl = '';
 
     /**
      * @var string Zip code / postcode
@@ -176,6 +184,25 @@ class Company extends DataModel
 
     public function __construct()
     {
+        $this->id = new Identity;
+    }
+
+    /**
+     * @param  Identity $id Unique company id
+     * @return \jtl\Connector\Model\Company
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setId(Identity $id)
+    {
+        return $this->setProperty('id', $id, 'Identity');
+    }
+
+    /**
+     * @return Identity Unique company id
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -485,21 +512,21 @@ class Company extends DataModel
     }
 
     /**
-     * @param  string $www Company website URL
+     * @param  string $websiteUrl Company website URL
      * @return \jtl\Connector\Model\Company
      * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setWww($www)
+    public function setWebsiteUrl($websiteUrl)
     {
-        return $this->setProperty('www', $www, 'string');
+        return $this->setProperty('websiteUrl', $websiteUrl, 'string');
     }
 
     /**
      * @return string Company website URL
      */
-    public function getWww()
+    public function getWebsiteUrl()
     {
-        return $this->www;
+        return $this->websiteUrl;
     }
 
     /**

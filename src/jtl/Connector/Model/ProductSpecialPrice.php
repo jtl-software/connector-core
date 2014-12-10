@@ -40,18 +40,18 @@ class ProductSpecialPrice extends DataModel
     /**
      * @var DateTime Optional: Activate special price from date
      * @Serializer\Type("DateTime")
-     * @Serializer\SerializedName("activeFrom")
-     * @Serializer\Accessor(getter="getActiveFrom",setter="setActiveFrom")
+     * @Serializer\SerializedName("activeFromDate")
+     * @Serializer\Accessor(getter="getActiveFromDate",setter="setActiveFromDate")
      */
-    protected $activeFrom = null;
+    protected $activeFromDate = null;
 
     /**
      * @var DateTime Optional: Special price active until date
      * @Serializer\Type("DateTime")
-     * @Serializer\SerializedName("activeUntil")
-     * @Serializer\Accessor(getter="getActiveUntil",setter="setActiveUntil")
+     * @Serializer\SerializedName("activeUntilDate")
+     * @Serializer\Accessor(getter="getActiveUntilDate",setter="setActiveUntilDate")
      */
-    protected $activeUntil = null;
+    protected $activeUntilDate = null;
 
     /**
      * @var bool Optional: Consider activeFrom/activeUntil date range. If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
@@ -140,39 +140,39 @@ class ProductSpecialPrice extends DataModel
     }
 
     /**
-     * @param  DateTime $activeFrom Optional: Activate special price from date
+     * @param  DateTime $activeFromDate Optional: Activate special price from date
      * @return \jtl\Connector\Model\ProductSpecialPrice
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setActiveFrom(DateTime $activeFrom = null)
+    public function setActiveFromDate(DateTime $activeFromDate = null)
     {
-        return $this->setProperty('activeFrom', $activeFrom, 'DateTime');
+        return $this->setProperty('activeFromDate', $activeFromDate, 'DateTime');
     }
 
     /**
      * @return DateTime Optional: Activate special price from date
      */
-    public function getActiveFrom()
+    public function getActiveFromDate()
     {
-        return $this->activeFrom;
+        return $this->activeFromDate;
     }
 
     /**
-     * @param  DateTime $activeUntil Optional: Special price active until date
+     * @param  DateTime $activeUntilDate Optional: Special price active until date
      * @return \jtl\Connector\Model\ProductSpecialPrice
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setActiveUntil(DateTime $activeUntil = null)
+    public function setActiveUntilDate(DateTime $activeUntilDate = null)
     {
-        return $this->setProperty('activeUntil', $activeUntil, 'DateTime');
+        return $this->setProperty('activeUntilDate', $activeUntilDate, 'DateTime');
     }
 
     /**
      * @return DateTime Optional: Special price active until date
      */
-    public function getActiveUntil()
+    public function getActiveUntilDate()
     {
-        return $this->activeUntil;
+        return $this->activeUntilDate;
     }
 
     /**

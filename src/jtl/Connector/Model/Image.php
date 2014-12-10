@@ -30,14 +30,6 @@ class Image extends DataModel
     protected $id = null;
 
     /**
-     * @var Identity Reference to master imageId
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("masterImageId")
-     * @Serializer\Accessor(getter="getMasterImageId",setter="setMasterImageId")
-     */
-    protected $masterImageId = null;
-
-    /**
      * @var string Filename or path
      * @Serializer\Type("string")
      * @Serializer\SerializedName("filename")
@@ -47,11 +39,11 @@ class Image extends DataModel
 
     /**
      * @var int Foreign key dependent on relationType
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("foreignKey")
      * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
      */
-    protected $foreignKey = null;
+    protected $foreignKey = 0;
 
     /**
      * @var string Allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
@@ -60,6 +52,14 @@ class Image extends DataModel
      * @Serializer\Accessor(getter="getRelationType",setter="setRelationType")
      */
     protected $relationType = '';
+
+    /**
+     * @var string If set, contains a URL which the endpoint should load the image from
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("remoteUrl")
+     * @Serializer\Accessor(getter="getRemoteUrl",setter="setRemoteUrl")
+     */
+    protected $remoteUrl = '';
 
     /**
      * @var int Optional sort number
@@ -73,7 +73,6 @@ class Image extends DataModel
     public function __construct()
     {
         $this->id = new Identity;
-        $this->masterImageId = new Identity;
     }
 
     /**
@@ -95,24 +94,6 @@ class Image extends DataModel
     }
 
     /**
-     * @param  Identity $masterImageId Reference to master imageId
-     * @return \jtl\Connector\Model\Image
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setMasterImageId(Identity $masterImageId)
-    {
-        return $this->setProperty('masterImageId', $masterImageId, 'Identity');
-    }
-
-    /**
-     * @return Identity Reference to master imageId
-     */
-    public function getMasterImageId()
-    {
-        return $this->masterImageId;
-    }
-
-    /**
      * @param  string $filename Filename or path
      * @return \jtl\Connector\Model\Image
      * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
@@ -131,17 +112,17 @@ class Image extends DataModel
     }
 
     /**
-     * @param  Identity $foreignKey Foreign key dependent on relationType
+     * @param  int $foreignKey Foreign key dependent on relationType
      * @return \jtl\Connector\Model\Image
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
-    public function setForeignKey(Identity $foreignKey)
+    public function setForeignKey($foreignKey)
     {
-        return $this->setProperty('foreignKey', $foreignKey, 'Identity');
+        return $this->setProperty('foreignKey', $foreignKey, 'int');
     }
 
     /**
-     * @return Identity Foreign key dependent on relationType
+     * @return int Foreign key dependent on relationType
      */
     public function getForeignKey()
     {
@@ -164,6 +145,24 @@ class Image extends DataModel
     public function getRelationType()
     {
         return $this->relationType;
+    }
+
+    /**
+     * @param  string $remoteUrl If set, contains a URL which the endpoint should load the image from
+     * @return \jtl\Connector\Model\Image
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     */
+    public function setRemoteUrl($remoteUrl)
+    {
+        return $this->setProperty('remoteUrl', $remoteUrl, 'string');
+    }
+
+    /**
+     * @return string If set, contains a URL which the endpoint should load the image from
+     */
+    public function getRemoteUrl()
+    {
+        return $this->remoteUrl;
     }
 
     /**

@@ -48,10 +48,10 @@ class Shipment extends DataModel
     /**
      * @var DateTime Creation date
      * @Serializer\Type("DateTime")
-     * @Serializer\SerializedName("created")
-     * @Serializer\Accessor(getter="getCreated",setter="setCreated")
+     * @Serializer\SerializedName("creationDate")
+     * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
-    protected $created = null;
+    protected $creationDate = null;
 
     /**
      * @var string Optional Identcode
@@ -72,10 +72,10 @@ class Shipment extends DataModel
     /**
      * @var string Optional Tracking URL
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("trackingURL")
-     * @Serializer\Accessor(getter="getTrackingURL",setter="setTrackingURL")
+     * @Serializer\SerializedName("trackingUrl")
+     * @Serializer\Accessor(getter="getTrackingUrl",setter="setTrackingUrl")
      */
-    protected $trackingURL = '';
+    protected $trackingUrl = '';
 
 
     public function __construct()
@@ -139,21 +139,21 @@ class Shipment extends DataModel
     }
 
     /**
-     * @param  DateTime $created Creation date
+     * @param  DateTime $creationDate Creation date
      * @return \jtl\Connector\Model\Shipment
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreated(DateTime $created = null)
+    public function setCreationDate(DateTime $creationDate = null)
     {
-        return $this->setProperty('created', $created, 'DateTime');
+        return $this->setProperty('creationDate', $creationDate, 'DateTime');
     }
 
     /**
      * @return DateTime Creation date
      */
-    public function getCreated()
+    public function getCreationDate()
     {
-        return $this->created;
+        return $this->creationDate;
     }
 
     /**
@@ -193,21 +193,21 @@ class Shipment extends DataModel
     }
 
     /**
-     * @param  string $trackingURL Optional Tracking URL
+     * @param  string $trackingUrl Optional Tracking URL
      * @return \jtl\Connector\Model\Shipment
      * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setTrackingURL($trackingURL)
+    public function setTrackingUrl($trackingUrl)
     {
-        return $this->setProperty('trackingURL', $trackingURL, 'string');
+        return $this->setProperty('trackingUrl', $trackingUrl, 'string');
     }
 
     /**
      * @return string Optional Tracking URL
      */
-    public function getTrackingURL()
+    public function getTrackingUrl()
     {
-        return $this->trackingURL;
+        return $this->trackingUrl;
     }
 
  

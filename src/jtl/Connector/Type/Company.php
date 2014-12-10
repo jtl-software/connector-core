@@ -28,13 +28,14 @@ class Company extends DataType
             new PropertyInfo('eMail', 'string', null, false, false, false),
             new PropertyInfo('fax', 'string', null, false, false, false),
             new PropertyInfo('iban', 'string', null, false, false, false),
+            new PropertyInfo('id', 'int', null, true, true, false),
             new PropertyInfo('name', 'string', null, false, false, false),
             new PropertyInfo('phone', 'string', null, false, false, false),
             new PropertyInfo('street', 'string', null, false, false, false),
             new PropertyInfo('streetNumber', 'string', null, false, false, false),
             new PropertyInfo('taxIdNumber', 'string', null, false, false, false),
             new PropertyInfo('vatNumber', 'string', null, false, false, false),
-            new PropertyInfo('www', 'string', null, false, false, false),
+            new PropertyInfo('websiteUrl', 'string', null, false, false, false),
             new PropertyInfo('zipCode', 'string', null, false, false, false),
         );
     }

@@ -104,12 +104,12 @@ class GlobalData extends DataModel
     /**
      * <unknown>
      *
-     * @var \jtl\Connector\Model\SetArticle[]
-     * @Serializer\Type("array<jtl\Connector\Model\SetArticle>")
-     * @Serializer\SerializedName("setArticles")
+     * @var \jtl\Connector\Model\PartsList[]
+     * @Serializer\Type("array<jtl\Connector\Model\PartsList>")
+     * @Serializer\SerializedName("partsLists")
      * @Serializer\AccessType("reflection")
      */
-    protected $setArticles = array();
+    protected $partsLists = array();
 
     /**
      * <unknown>
@@ -413,29 +413,29 @@ class GlobalData extends DataModel
     }
 
     /**
-     * @param  \jtl\Connector\Model\SetArticle $setArticle
+     * @param  \jtl\Connector\Model\PartsList $partsList
      * @return \jtl\Connector\Model\GlobalData
      */
-    public function addSetArticle(\jtl\Connector\Model\SetArticle $setArticle)
+    public function addPartsList(\jtl\Connector\Model\PartsList $partsList)
     {
-        $this->setArticles[] = $setArticle;
+        $this->partsLists[] = $partsList;
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\SetArticle[]
+     * @return \jtl\Connector\Model\PartsList[]
      */
-    public function getSetArticles()
+    public function getPartsLists()
     {
-        return $this->setArticles;
+        return $this->partsLists;
     }
 
     /**
      * @return \jtl\Connector\Model\GlobalData
      */
-    public function clearSetArticles()
+    public function clearPartsLists()
     {
-        $this->setArticles = array();
+        $this->partsLists = array();
         return $this;
     }
 

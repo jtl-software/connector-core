@@ -17,8 +17,8 @@ class ProductSpecialPrice extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('activeFrom', 'DateTime', null, false, false, false),
-            new PropertyInfo('activeUntil', 'DateTime', null, false, false, false),
+            new PropertyInfo('activeFromDate', 'DateTime', null, false, false, false),
+            new PropertyInfo('activeUntilDate', 'DateTime', null, false, false, false),
             new PropertyInfo('considerDateLimit', 'bool', null, false, false, false),
             new PropertyInfo('considerStockLimit', 'bool', null, false, false, false),
             new PropertyInfo('id', 'int', null, true, true, false),

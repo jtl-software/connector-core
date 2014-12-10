@@ -32,10 +32,10 @@ class FileDownload extends DataModel
     /**
      * @var DateTime Optional creation date
      * @Serializer\Type("DateTime")
-     * @Serializer\SerializedName("created")
-     * @Serializer\Accessor(getter="getCreated",setter="setCreated")
+     * @Serializer\SerializedName("creationDate")
+     * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
-    protected $created = null;
+    protected $creationDate = null;
 
     /**
      * @var int Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
@@ -113,21 +113,21 @@ class FileDownload extends DataModel
     }
 
     /**
-     * @param  DateTime $created Optional creation date
+     * @param  DateTime $creationDate Optional creation date
      * @return \jtl\Connector\Model\FileDownload
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreated(DateTime $created = null)
+    public function setCreationDate(DateTime $creationDate = null)
     {
-        return $this->setProperty('created', $created, 'DateTime');
+        return $this->setProperty('creationDate', $creationDate, 'DateTime');
     }
 
     /**
      * @return DateTime Optional creation date
      */
-    public function getCreated()
+    public function getCreationDate()
     {
-        return $this->created;
+        return $this->creationDate;
     }
 
     /**

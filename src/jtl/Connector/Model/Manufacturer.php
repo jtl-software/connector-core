@@ -56,10 +56,10 @@ class Manufacturer extends DataModel
     /**
      * @var string Optional manufacturer website URL
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("www")
-     * @Serializer\Accessor(getter="getWww",setter="setWww")
+     * @Serializer\SerializedName("websiteUrl")
+     * @Serializer\Accessor(getter="getWebsiteUrl",setter="setWebsiteUrl")
      */
-    protected $www = '';
+    protected $websiteUrl = '';
 
     /**
      * End: 1 (One of Manufacturer)
@@ -151,21 +151,21 @@ class Manufacturer extends DataModel
     }
 
     /**
-     * @param  string $www Optional manufacturer website URL
+     * @param  string $websiteUrl Optional manufacturer website URL
      * @return \jtl\Connector\Model\Manufacturer
      * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setWww($www)
+    public function setWebsiteUrl($websiteUrl)
     {
-        return $this->setProperty('www', $www, 'string');
+        return $this->setProperty('websiteUrl', $websiteUrl, 'string');
     }
 
     /**
      * @return string Optional manufacturer website URL
      */
-    public function getWww()
+    public function getWebsiteUrl()
     {
-        return $this->www;
+        return $this->websiteUrl;
     }
 
     /**
