@@ -7,12 +7,12 @@
 
 namespace jtl\Connector\Controller;
 
-use \jtl\Core\Controller\Controller as CoreController;
+use \jtl\Connector\Core\Controller\Controller as CoreController;
 use \jtl\Connector\Result\Action;
-use \jtl\Core\Rpc\Error;
+use \jtl\Connector\Core\Rpc\Error;
 use \jtl\Connector\Application\Application;
-use \jtl\Core\Model\QueryFilter;
-use \jtl\Core\Model\DataModel;
+use \jtl\Connector\Core\Model\QueryFilter;
+use \jtl\Connector\Core\Model\DataModel;
 
 /**
  * Base Config Controller
@@ -24,7 +24,7 @@ class Connector extends CoreController
 {
     /**
      * (non-PHPdoc)
-     * @see \jtl\Core\Controller\IController::push()
+     * @see \jtl\Connector\Core\Controller\IController::push()
      */
     public function push(DataModel $model)
     {
@@ -33,7 +33,7 @@ class Connector extends CoreController
     
     /**
      * (non-PHPdoc)
-     * @see \jtl\Core\Controller\IController::pull()
+     * @see \jtl\Connector\Core\Controller\IController::pull()
      */
     public function pull(QueryFilter $queryFilter)
     {
@@ -42,7 +42,7 @@ class Connector extends CoreController
 
     /**
      * (non-PHPdoc)
-     * @see \jtl\Core\Controller\IController::statistic()
+     * @see \jtl\Connector\Core\Controller\IController::statistic()
      */
     public function statistic(QueryFilter $queryFilter)
     {

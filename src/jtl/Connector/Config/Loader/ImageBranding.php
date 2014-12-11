@@ -7,9 +7,9 @@
 
 namespace jtl\Connector\Config\Loader;
 
-use \jtl\Core\Exception\ConfigException;
-use \jtl\Core\Config\Loader\Base as BaseLoader;
-use \jtl\Core\Database\Mysql;
+use \jtl\Connector\Core\Exception\ConfigException;
+use \jtl\Connector\Core\Config\Loader\Base as BaseLoader;
+use \jtl\Connector\Core\Database\Mysql;
 
 /**
  * Shop3 Imagebranding class.
@@ -23,7 +23,7 @@ abstract class ImageBranding extends BaseLoader
     const GROUP_ALL = 0;
 
     /**
-     * @var jtl\Core\Database\Mysql
+     * @var jtl\Connector\Core\Database\Mysql
      */
     protected $db;
 

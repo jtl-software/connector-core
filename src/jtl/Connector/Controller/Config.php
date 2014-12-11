@@ -8,9 +8,9 @@
 
 namespace jtl\Connector\Controller;
 
-use \jtl\Core\Controller\Controller as CoreController;
+use \jtl\Connector\Core\Controller\Controller as CoreController;
 use \jtl\Connector\Result\Action;
-use \jtl\Core\Rpc\Error;
+use \jtl\Connector\Core\Rpc\Error;
 
 /**
  * Base Config Controller

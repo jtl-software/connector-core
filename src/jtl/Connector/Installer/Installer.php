@@ -6,11 +6,11 @@
  */
 namespace jtl\Connector\Installer;
 
-use \jtl\Core\Application\Application as CoreApplication;
-use \jtl\Core\Config\Config as ConnectorConfig;
-use \jtl\Core\Config\Loader\Json as ConfigJson;
-use \jtl\Core\Config\Loader\System as ConfigSystem;
-use \jtl\Core\Utilities\HttpRequest;
+use \jtl\Connector\Core\Application\Application as CoreApplication;
+use \jtl\Connector\Core\Config\Config as ConnectorConfig;
+use \jtl\Connector\Core\Config\Loader\Json as ConfigJson;
+use \jtl\Connector\Core\Config\Loader\System as ConfigSystem;
+use \jtl\Connector\Core\Utilities\HttpRequest;
 
 /**
  * Description of Installer
@@ -30,7 +30,7 @@ class Installer extends CoreApplication
     /**
      * Connector configuration object
      *
-     * @var \jtl\Core\Utilities\Config\Config
+     * @var \jtl\Connector\Core\Utilities\Config\Config
      */
     public static $config = null;
 

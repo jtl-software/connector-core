@@ -8,9 +8,9 @@
 
 namespace jtl\Connector\Controller;
 
-use \jtl\Core\Controller\Controller as CoreController;
+use \jtl\Connector\Core\Controller\Controller as CoreController;
 use \jtl\Connector\Result\Action;
-use \jtl\Core\Rpc\Error;
+use \jtl\Connector\Core\Rpc\Error;
 use \jtl\Connector\Feature\Manager;
 use \jtl\Connector\Feature\Producer;
 use \jtl\Connector\Feature\Importer\Json as JsonImporter;

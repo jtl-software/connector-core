@@ -6,7 +6,7 @@
  */
 namespace jtl\Connector\Database;
 
-use \jtl\Core\Database\Sqlite3 as Sqlite3Core;
+use \jtl\Connector\Core\Database\Sqlite3 as Sqlite3Core;
 
 /**
  * Sqlite 3 Database Class
@@ -19,14 +19,14 @@ final class Sqlite3 extends Sqlite3Core
     /**
      * Database Singleton
      *
-     * @var \jtl\Core\Database\Sqlite3
+     * @var \jtl\Connector\Core\Database\Sqlite3
      */
     private static $_instance;
     
     /**
      * Singleton
      *
-     * @return \jtl\Core\Database\Sqlite3
+     * @return \jtl\Connector\Core\Database\Sqlite3
      */
     public static function getInstance()
     {

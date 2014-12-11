@@ -33,7 +33,7 @@ class Statistic extends DataModel
 
     /**
      * (non-PHPdoc)
-     * @see \jtl\Core\Model\DataModel::map()
+     * @see \jtl\Connector\Core\Model\DataModel::map()
      */ 
     public function map($toWawi = false, \stdClass $obj = null)
     {

@@ -6,13 +6,13 @@
  */
 namespace jtl\Connector\Base;
 
-use \jtl\Core\Rpc\RequestPacket;
+use \jtl\Connector\Core\Rpc\RequestPacket;
 use \jtl\Connector\Application\IEndpointConnector;
-use \jtl\Core\Utilities\Singleton;
-use \jtl\Core\Utilities\RpcMethod;
-use \jtl\Core\Config\Config;
-use \jtl\Core\Exception\ConnectorException;
-use \jtl\Core\Rpc\Method;
+use \jtl\Connector\Core\Utilities\Singleton;
+use \jtl\Connector\Core\Utilities\RpcMethod;
+use \jtl\Connector\Core\Config\Config;
+use \jtl\Connector\Core\Exception\ConnectorException;
+use \jtl\Connector\Core\Rpc\Method;
 
 /**
  * Base Connector
@@ -29,7 +29,7 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * Setter connector config.
      *
-     * @param \jtl\Core\Config\Config $config
+     * @param \jtl\Connector\Core\Config\Config $config
      */
     public function setConfig(Config $config)
     {
@@ -53,8 +53,8 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * Method Setter
      *
-     * @param \jtl\Core\Rpc\Method $method
-     * @return \jtl\Core\Controller\Controller
+     * @param \jtl\Connector\Core\Rpc\Method $method
+     * @return \jtl\Connector\Core\Controller\Controller
      */
     public function setMethod(Method $method)
     {
@@ -65,7 +65,7 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * Method Getter
      *
-     * @return \jtl\Core\Rpc\Method
+     * @return \jtl\Connector\Core\Rpc\Method
      */
     public function getMethod()
     {
@@ -76,7 +76,7 @@ class Connector extends Singleton implements IEndpointConnector
      * Method Setter
      *
      * @param string $method
-     * @return \jtl\Core\Controller\Controller
+     * @return \jtl\Connector\Core\Controller\Controller
      */
     public function setModelNamespace($modelNamespace)
     {

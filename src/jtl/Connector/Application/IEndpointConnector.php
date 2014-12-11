@@ -6,7 +6,7 @@
  */
 namespace jtl\Connector\Application;
 
-use \jtl\Core\Rpc\RequestPacket;
+use \jtl\Connector\Core\Rpc\RequestPacket;
 
 /**
  *
@@ -23,7 +23,7 @@ interface IEndpointConnector
     /**
      * Controller handle
      * 
-     * @param \jtl\Core\Rpc\RequestPacket $requestpacket
+     * @param \jtl\Connector\Core\Rpc\RequestPacket $requestpacket
      */
     public function handle(RequestPacket $requestpacket);
 }

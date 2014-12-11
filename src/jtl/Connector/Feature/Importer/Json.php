@@ -9,7 +9,7 @@ namespace jtl\Connector\Feature\Importer;
 
 use \jtl\Connector\Feature\Importer\Base as BaseImporter;
 use \jtl\Connector\Feature\Exception\Importer as ExceptionImporter;
-use \jtl\Core\Serializer\Json as SerializerJson;
+use \jtl\Connector\Core\Serializer\Json as SerializerJson;
 
 /**
  * Json importer class

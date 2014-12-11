@@ -6,7 +6,7 @@
 
 namespace jtl\Connector\Session;
 
-use \jtl\Core\Session\Handler as CoreHandler;
+use \jtl\Connector\Core\Session\Handler as CoreHandler;
 
 /**
  * Session Class

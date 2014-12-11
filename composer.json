@@ -13,16 +13,9 @@
       "role": "Founder"
     }
   ],
-  "repositories": [
-    {
-      "type": "git",
-      "url": "git@gitlab.jtl-software.de:jtl-software-gmbh/jtlcore.git",
-      "reference": "origin/master"
-    }
-  ],
   "require": {
     "php": ">=5.3.0",
-    "jtl/core": "dev-master"
+    "monolog/monolog": "1.10.0"
   },
   "require-dev": {
     "phpdocumentor/phpdocumentor": "2.*",

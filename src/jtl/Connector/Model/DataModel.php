@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Core\Model\DataModel as CoreModel;
+use \jtl\Connector\Core\Model\DataModel as CoreModel;
 use JMS\Serializer\Annotation as Serializer;
 
 /**

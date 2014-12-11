@@ -9,32 +9,32 @@
 
 namespace jtl\Connector\Application;
 
-use \jtl\Core\Serializer\Json;
-use \jtl\Core\Application\Application as CoreApplication;
-use \jtl\Core\Exception\RpcException;
-use \jtl\Core\Exception\SessionException;
-use \jtl\Core\Exception\ConnectorException;
-use \jtl\Core\Rpc\Handler;
-use \jtl\Core\Rpc\Packet;
-use \jtl\Core\Rpc\RequestPacket;
-use \jtl\Core\Rpc\ResponsePacket;
-use \jtl\Core\Rpc\Error;
-use \jtl\Core\Http\Request;
-use \jtl\Core\Http\Response;
-use \jtl\Core\Config\Config;
-use \jtl\Core\Config\Loader\Json as ConfigJson;
-use \jtl\Core\Config\Loader\System as ConfigSystem;
+use \jtl\Connector\Core\Serializer\Json;
+use \jtl\Connector\Core\Application\Application as CoreApplication;
+use \jtl\Connector\Core\Exception\RpcException;
+use \jtl\Connector\Core\Exception\SessionException;
+use \jtl\Connector\Core\Exception\ConnectorException;
+use \jtl\Connector\Core\Rpc\Handler;
+use \jtl\Connector\Core\Rpc\Packet;
+use \jtl\Connector\Core\Rpc\RequestPacket;
+use \jtl\Connector\Core\Rpc\ResponsePacket;
+use \jtl\Connector\Core\Rpc\Error;
+use \jtl\Connector\Core\Http\Request;
+use \jtl\Connector\Core\Http\Response;
+use \jtl\Connector\Core\Config\Config;
+use \jtl\Connector\Core\Config\Loader\Json as ConfigJson;
+use \jtl\Connector\Core\Config\Loader\System as ConfigSystem;
 use \jtl\Connector\Result\Action;
-use \jtl\Core\Validator\Schema;
-use \jtl\Core\Exception\SchemaException;
-use \jtl\Core\Validator\ValidationException;
+use \jtl\Connector\Core\Validator\Schema;
+use \jtl\Connector\Core\Exception\SchemaException;
+use \jtl\Connector\Core\Validator\ValidationException;
 use \jtl\Connector\Database\Sqlite3;
-use \jtl\Core\Utilities\RpcMethod;
+use \jtl\Connector\Core\Utilities\RpcMethod;
 use \jtl\Connector\Session\Session;
 use \jtl\Connector\Base\Connector;
-use \jtl\Core\Logger\Logger;
+use \jtl\Connector\Core\Logger\Logger;
 use \Doctrine\Common\Annotations\AnnotationRegistry;
-use \jtl\Core\Rpc\Method;
+use \jtl\Connector\Core\Rpc\Method;
 
 /**
  * Application Class
@@ -53,7 +53,7 @@ class Application extends CoreApplication
     protected static $_connectors = array();
 
     /**
-     * @var \jtl\Core\Config\Config;
+     * @var \jtl\Connector\Core\Config\Config;
      */
     protected $config;
 
@@ -67,7 +67,7 @@ class Application extends CoreApplication
     /**
      * (non-PHPdoc)
      *
-     * @see \jtl\Core\Application\Application::run()
+     * @see \jtl\Connector\Core\Application\Application::run()
      */
     public function run()
     {
@@ -107,7 +107,7 @@ class Application extends CoreApplication
      * @param Config $config
      * @param integer $rpcmode
      * @throws RpcException
-     * @return \jtl\Core\Rpc\ResponsePacket
+     * @return \jtl\Connector\Core\Rpc\ResponsePacket
      */
     protected function execute(RequestPacket $requestpacket, Config $config, $rpcmode, $imagePath = null)
     {
@@ -285,7 +285,7 @@ class Application extends CoreApplication
         $method = RpcMethod::splitMethod($requestpacket->getMethod());
 
         $namespace = ($method->getAction() == Method::ACTION_PUSH) ? 
-            sprintf('%s\%s', $modelNamespace, RpcMethod::buildController($method->getController())) : 'jtl\Core\Model\QueryFilter';
+            sprintf('%s\%s', $modelNamespace, RpcMethod::buildController($method->getController())) : 'jtl\Connector\Core\Model\QueryFilter';
 
         if (class_exists("\\{$namespace}")) {
             $serializer = \JMS\Serializer\SerializerBuilder::create()
@@ -302,10 +302,10 @@ class Application extends CoreApplication
     /**
      * Build RPC Reponse Packet
      *
-     * @param \jtl\Core\Rpc\ResponsePacket $requestpacket        
+     * @param \jtl\Connector\Core\Rpc\ResponsePacket $requestpacket        
      * @param \jtl\Connector\Result\Action $actionresult        
-     * @return \jtl\Core\Rpc\ResponsePacket
-     * @throws \jtl\Core\Exception\RpcException
+     * @return \jtl\Connector\Core\Rpc\ResponsePacket
+     * @throws \jtl\Connector\Core\Exception\RpcException
      */
     protected function buildRpcResponse(RequestPacket $requestpacket, Action $actionresult)
     {
@@ -409,8 +409,8 @@ class Application extends CoreApplication
     /**
      * Starting Session
      * 
-     * @throws \jtl\Core\Exception\DatabaseException
-     * @throws \jtl\Core\Exception\SessionException
+     * @throws \jtl\Connector\Core\Exception\DatabaseException
+     * @throws \jtl\Connector\Core\Exception\SessionException
      */
     protected function startSession($sessionId = null, $method)
     {
