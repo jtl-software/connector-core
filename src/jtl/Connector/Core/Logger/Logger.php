@@ -30,7 +30,7 @@ class Logger extends Monolog
             '..',
             'vendor',
             'jtl',
-            'core',
+            'connector',
             'logs',
             "{$channel}.log"
         );
