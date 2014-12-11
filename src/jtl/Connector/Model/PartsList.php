@@ -19,10 +19,10 @@ use JMS\Serializer\Annotation as Serializer;
  * 
  * @Serializer\AccessType("public_method")
  */
-class SetArticle extends DataModel
+class PartsList extends DataModel
 {
     /**
-     * @var Identity Unique setArticle id, referenced by product.setArticleId
+     * @var Identity Unique PartsList id, referenced by product.PartsListId
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
@@ -53,8 +53,8 @@ class SetArticle extends DataModel
     }
 
     /**
-     * @param  Identity $id Unique setArticle id, referenced by product.setArticleId
-     * @return \jtl\Connector\Model\SetArticle
+     * @param  Identity $id Unique PartsList id, referenced by product.PartsListId
+     * @return \jtl\Connector\Model\PartsList
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
@@ -63,7 +63,7 @@ class SetArticle extends DataModel
     }
 
     /**
-     * @return Identity Unique setArticle id, referenced by product.setArticleId
+     * @return Identity Unique PartsList id, referenced by product.PartsListId
      */
     public function getId()
     {
@@ -72,7 +72,7 @@ class SetArticle extends DataModel
 
     /**
      * @param  Identity $productId Reference to a component / product
-     * @return \jtl\Connector\Model\SetArticle
+     * @return \jtl\Connector\Model\PartsList
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId)
@@ -90,7 +90,7 @@ class SetArticle extends DataModel
 
     /**
      * @param  double $quantity Component quantity
-     * @return \jtl\Connector\Model\SetArticle
+     * @return \jtl\Connector\Model\PartsList
      * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
     public function setQuantity($quantity)

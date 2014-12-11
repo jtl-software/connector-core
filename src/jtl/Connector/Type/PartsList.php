@@ -12,7 +12,7 @@ use \jtl\Connector\Type\PropertyInfo;
  * @access public
  * @package jtl\Connector\Type
  */
-class SetArticle extends DataType
+class PartsList extends DataType
 {
     protected function loadProperties()
     {
