@@ -61,6 +61,17 @@ class DeliveryNote extends DataModel
      */
     protected $note = '';
 
+    /**
+     * End: 1 (One of DeliveryNote)
+     *      * (Collection of DeliveryNoteItem)
+     *
+     * @var \jtl\Connector\Model\DeliveryNoteItem[]
+     * @Serializer\Type("array<jtl\Connector\Model\DeliveryNoteItem>")
+     * @Serializer\SerializedName("items")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $items = array();
+
 
     public function __construct()
     {
@@ -156,6 +167,33 @@ class DeliveryNote extends DataModel
     public function getNote()
     {
         return $this->note;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\DeliveryNoteItem $item
+     * @return \jtl\Connector\Model\DeliveryNote
+     */
+    public function addItem(\jtl\Connector\Model\DeliveryNoteItem $item)
+    {
+        $this->items[] = $item;
+        return $this;
+    }
+    
+    /**
+     * @return \jtl\Connector\Model\DeliveryNoteItem[]
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\DeliveryNote
+     */
+    public function clearItems()
+    {
+        $this->items = array();
+        return $this;
     }
 
  

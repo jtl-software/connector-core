@@ -287,6 +287,27 @@ class CustomerOrder extends DataModel
     protected $shippingAddress = array();
 
     /**
+     * End: 0..1 (Zero or One of CustomerOrder)
+     *      * (Collection of CustomerOrderPaymentInfo)
+     *
+     * @var \jtl\Connector\Model\CustomerOrderPaymentInfo[]
+     * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderPaymentInfo>")
+     * @Serializer\SerializedName("paymentInfo")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $paymentInfo = array();
+
+    /**
+     * <unknown>
+     *
+     * @var \jtl\Connector\Model\CustomerOrderItem[]
+     * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderItem>")
+     * @Serializer\SerializedName("items")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $items = array();
+
+    /**
      * End: * (Collection of CustomerOrder)
      *      0..1 (Zero or One of CustomerOrderBillingAddress)
      *
@@ -809,6 +830,60 @@ class CustomerOrder extends DataModel
     public function clearShippingAddress()
     {
         $this->shippingAddress = array();
+        return $this;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\CustomerOrderPaymentInfo $paymentInfo
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function addPaymentInfo(\jtl\Connector\Model\CustomerOrderPaymentInfo $paymentInfo)
+    {
+        $this->paymentInfo[] = $paymentInfo;
+        return $this;
+    }
+    
+    /**
+     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo[]
+     */
+    public function getPaymentInfo()
+    {
+        return $this->paymentInfo;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function clearPaymentInfo()
+    {
+        $this->paymentInfo = array();
+        return $this;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\CustomerOrderItem $item
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function addItem(\jtl\Connector\Model\CustomerOrderItem $item)
+    {
+        $this->items[] = $item;
+        return $this;
+    }
+    
+    /**
+     * @return \jtl\Connector\Model\CustomerOrderItem[]
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function clearItems()
+    {
+        $this->items = array();
         return $this;
     }
 

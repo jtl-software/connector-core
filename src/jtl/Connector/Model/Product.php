@@ -481,6 +481,16 @@ class Product extends DataModel
     protected $variations = array();
 
     /**
+     * <unknown>
+     *
+     * @var \jtl\Connector\Model\ProductVarCombination[]
+     * @Serializer\Type("array<jtl\Connector\Model\ProductVarCombination>")
+     * @Serializer\SerializedName("varCombinations")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $varCombinations = array();
+
+    /**
      * End: 1 (One of Product)
      *      * (Collection of ProductSpecific)
      *
@@ -501,6 +511,17 @@ class Product extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $specialPrices = array();
+
+    /**
+     * End: 1 (One of Product)
+     *      * (Collection of ProductPrice)
+     *
+     * @var \jtl\Connector\Model\ProductPrice[]
+     * @Serializer\Type("array<jtl\Connector\Model\ProductPrice>")
+     * @Serializer\SerializedName("prices")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $prices = array();
 
     /**
      * End: 1 (One of Product)
@@ -1641,6 +1662,33 @@ class Product extends DataModel
     }
 
     /**
+     * @param  \jtl\Connector\Model\ProductVarCombination $varCombination
+     * @return \jtl\Connector\Model\Product
+     */
+    public function addVarCombination(\jtl\Connector\Model\ProductVarCombination $varCombination)
+    {
+        $this->varCombinations[] = $varCombination;
+        return $this;
+    }
+    
+    /**
+     * @return \jtl\Connector\Model\ProductVarCombination[]
+     */
+    public function getVarCombinations()
+    {
+        return $this->varCombinations;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\Product
+     */
+    public function clearVarCombinations()
+    {
+        $this->varCombinations = array();
+        return $this;
+    }
+
+    /**
      * @param  \jtl\Connector\Model\ProductSpecific $specific
      * @return \jtl\Connector\Model\Product
      */
@@ -1691,6 +1739,33 @@ class Product extends DataModel
     public function clearSpecialPrices()
     {
         $this->specialPrices = array();
+        return $this;
+    }
+
+    /**
+     * @param  \jtl\Connector\Model\ProductPrice $price
+     * @return \jtl\Connector\Model\Product
+     */
+    public function addPrice(\jtl\Connector\Model\ProductPrice $price)
+    {
+        $this->prices[] = $price;
+        return $this;
+    }
+    
+    /**
+     * @return \jtl\Connector\Model\ProductPrice[]
+     */
+    public function getPrices()
+    {
+        return $this->prices;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\Product
+     */
+    public function clearPrices()
+    {
+        $this->prices = array();
         return $this;
     }
 
