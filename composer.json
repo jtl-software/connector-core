@@ -15,11 +15,9 @@
   ],
   "require": {
     "php": ">=5.3.0",
-    "monolog/monolog": "1.10.0"
-  },
-  "require-dev": {
-    "phpdocumentor/phpdocumentor": "2.*",
-    "evert/phpdoc-md" : "dev-master"
+    "monolog/monolog": "1.11.*@dev",
+    "phpdocumentor/phpdocumentor": "dev-master",
+    "evert/phpdoc-md": "dev-master"
   },
   "minimum-stability": "dev",
   "extra": {
