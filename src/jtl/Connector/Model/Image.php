@@ -22,6 +22,14 @@ use JMS\Serializer\Annotation as Serializer;
 class Image extends DataModel
 {
     /**
+     * @var Identity Foreign key dependent on relationType
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("foreignKey")
+     * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
+     */
+    protected $foreignKey = null;
+
+    /**
      * @var Identity Unique image id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
@@ -36,14 +44,6 @@ class Image extends DataModel
      * @Serializer\Accessor(getter="getFilename",setter="setFilename")
      */
     protected $filename = '';
-
-    /**
-     * @var int Foreign key dependent on relationType
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("foreignKey")
-     * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
-     */
-    protected $foreignKey = 0;
 
     /**
      * @var string Allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
@@ -72,7 +72,26 @@ class Image extends DataModel
 
     public function __construct()
     {
+        $this->foreignKey = new Identity;
         $this->id = new Identity;
+    }
+
+    /**
+     * @param  Identity $foreignKey Foreign key dependent on relationType
+     * @return \jtl\Connector\Model\Image
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setForeignKey(Identity $foreignKey)
+    {
+        return $this->setProperty('foreignKey', $foreignKey, 'Identity');
+    }
+
+    /**
+     * @return Identity Foreign key dependent on relationType
+     */
+    public function getForeignKey()
+    {
+        return $this->foreignKey;
     }
 
     /**
@@ -109,24 +128,6 @@ class Image extends DataModel
     public function getFilename()
     {
         return $this->filename;
-    }
-
-    /**
-     * @param  int $foreignKey Foreign key dependent on relationType
-     * @return \jtl\Connector\Model\Image
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setForeignKey($foreignKey)
-    {
-        return $this->setProperty('foreignKey', $foreignKey, 'int');
-    }
-
-    /**
-     * @return int Foreign key dependent on relationType
-     */
-    public function getForeignKey()
-    {
-        return $this->foreignKey;
     }
 
     /**

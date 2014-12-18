@@ -454,14 +454,6 @@ class Product extends DataModel
     protected $upc = '';
 
     /**
-     * @var double Value added tax
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("vat")
-     * @Serializer\Accessor(getter="getVat",setter="setVat")
-     */
-    protected $vat = 0.0;
-
-    /**
      * @var double Optional product width
      * @Serializer\Type("double")
      * @Serializer\SerializedName("width")
@@ -1596,24 +1588,6 @@ class Product extends DataModel
     public function getUpc()
     {
         return $this->upc;
-    }
-
-    /**
-     * @param  double $vat Value added tax
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
-     */
-    public function setVat($vat)
-    {
-        return $this->setProperty('vat', $vat, 'double');
-    }
-
-    /**
-     * @return double Value added tax
-     */
-    public function getVat()
-    {
-        return $this->vat;
     }
 
     /**

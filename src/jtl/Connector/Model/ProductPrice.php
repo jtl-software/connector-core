@@ -30,6 +30,14 @@ class ProductPrice extends DataModel
     protected $customerGroupId = null;
 
     /**
+     * @var Identity Unique ProductPrice id
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
+     */
+    protected $id = null;
+
+    /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("productId")
@@ -38,25 +46,21 @@ class ProductPrice extends DataModel
     protected $productId = null;
 
     /**
-     * @var double Price value (net)
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("netPrice")
-     * @Serializer\Accessor(getter="getNetPrice",setter="setNetPrice")
+     * End: 1 (One of ProductPrice)
+     *      * (Collection of ProductPriceItem)
+     *
+     * @var \jtl\Connector\Model\ProductPriceItem[]
+     * @Serializer\Type("array<jtl\Connector\Model\ProductPriceItem>")
+     * @Serializer\SerializedName("items")
+     * @Serializer\AccessType("reflection")
      */
-    protected $netPrice = 0.0;
-
-    /**
-     * @var double Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("quantity")
-     * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
-     */
-    protected $quantity = 0.0;
+    protected $items = array();
 
 
     public function __construct()
     {
         $this->customerGroupId = new Identity;
+        $this->id = new Identity;
         $this->productId = new Identity;
     }
 
@@ -79,6 +83,24 @@ class ProductPrice extends DataModel
     }
 
     /**
+     * @param  Identity $id Unique ProductPrice id
+     * @return \jtl\Connector\Model\ProductPrice
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setId(Identity $id)
+    {
+        return $this->setProperty('id', $id, 'Identity');
+    }
+
+    /**
+     * @return Identity Unique ProductPrice id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * @param  Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductPrice
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
@@ -97,39 +119,30 @@ class ProductPrice extends DataModel
     }
 
     /**
-     * @param  double $netPrice Price value (net)
+     * @param  \jtl\Connector\Model\ProductPriceItem $item
      * @return \jtl\Connector\Model\ProductPrice
-     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setNetPrice($netPrice)
+    public function addItem(\jtl\Connector\Model\ProductPriceItem $item)
     {
-        return $this->setProperty('netPrice', $netPrice, 'double');
+        $this->items[] = $item;
+        return $this;
+    }
+    
+    /**
+     * @return \jtl\Connector\Model\ProductPriceItem[]
+     */
+    public function getItems()
+    {
+        return $this->items;
     }
 
     /**
-     * @return double Price value (net)
-     */
-    public function getNetPrice()
-    {
-        return $this->netPrice;
-    }
-
-    /**
-     * @param  double $quantity Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
      * @return \jtl\Connector\Model\ProductPrice
-     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setQuantity($quantity)
+    public function clearItems()
     {
-        return $this->setProperty('quantity', $quantity, 'double');
-    }
-
-    /**
-     * @return double Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
-     */
-    public function getQuantity()
-    {
-        return $this->quantity;
+        $this->items = array();
+        return $this;
     }
 
  
