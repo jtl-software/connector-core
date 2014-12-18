@@ -71,6 +71,7 @@ class Product extends DataType
             new PropertyInfo('unitId', 'int', null, false, true, false),
             new PropertyInfo('unNumber', 'string', null, false, false, false),
             new PropertyInfo('upc', 'string', null, false, false, false),
+            new PropertyInfo('vat', 'double', null, false, false, false),
             new PropertyInfo('width', 'double', null, false, false, false),
             new PropertyInfo('variations', '\jtl\Connector\Model\ProductVariation', null, false, false, true),
             new PropertyInfo('varCombinations', '\jtl\Connector\Model\ProductVarCombination', null, false, false, true),

@@ -18,7 +18,6 @@ class ProductPrice extends DataType
     {
         return array(
             new PropertyInfo('customerGroupId', 'int', null, false, true, false),
-            new PropertyInfo('id', 'int', null, true, true, false),
             new PropertyInfo('productId', 'int', null, false, true, false),
             new PropertyInfo('items', '\jtl\Connector\Model\ProductPriceItem', null, false, false, true),
         );

@@ -18,7 +18,6 @@ class ProductPriceItem extends DataType
     {
         return array(
             new PropertyInfo('netPrice', 'double', null, false, false, false),
-            new PropertyInfo('productPriceId', 'int', null, true, true, false),
             new PropertyInfo('quantity', 'double', null, true, false, false),
         );
     }

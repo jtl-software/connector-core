@@ -30,14 +30,6 @@ class ProductPrice extends DataModel
     protected $customerGroupId = null;
 
     /**
-     * @var Identity Unique ProductPrice id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-
-    /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("productId")
@@ -60,7 +52,6 @@ class ProductPrice extends DataModel
     public function __construct()
     {
         $this->customerGroupId = new Identity;
-        $this->id = new Identity;
         $this->productId = new Identity;
     }
 
@@ -80,24 +71,6 @@ class ProductPrice extends DataModel
     public function getCustomerGroupId()
     {
         return $this->customerGroupId;
-    }
-
-    /**
-     * @param  Identity $id Unique ProductPrice id
-     * @return \jtl\Connector\Model\ProductPrice
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id)
-    {
-        return $this->setProperty('id', $id, 'Identity');
-    }
-
-    /**
-     * @return Identity Unique ProductPrice id
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
