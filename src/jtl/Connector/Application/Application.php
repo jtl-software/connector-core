@@ -419,7 +419,7 @@ class Application extends CoreApplication
         }
 
         $sqlite3 = Sqlite3::getInstance();
-        $sqlite3->connect(array("location" => CONNECTOR_DIR . "db/connector.s3db"));
+        $sqlite3->connect(array("location" => CONNECTOR_DIR . "/db/connector.s3db"));
 
         self::$session = new Session($sqlite3, $sessionId);
     }
