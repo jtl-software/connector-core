@@ -1,7 +1,4 @@
 <?php
-
-//
-
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Application
@@ -331,7 +328,7 @@ class Application extends CoreApplication
         $method = RpcMethod::splitMethod($requestpacket->getMethod());
 
         try {
-            Schema::validateAction(CONNECTOR_DIR . "schema/{$method->getController()}/params/{$method->getAction()}.json", $requestpacket->getParams());
+            Schema::validateAction(__DIR__ . "/../../../../schema/{$method->getController()}/params/{$method->getAction()}.json", $requestpacket->getParams());
         } catch (ValidationException $exc) {
             throw new SchemaException($exc->getMessage());
         }
