@@ -129,6 +129,7 @@ class Request
             $pathinfo = pathinfo($_FILES[$name]["name"]);
             
             if (isset($pathinfo["extension"])) {
+                /*
                 $path = array(
                     APP_DIR,
                     '..',
@@ -137,10 +138,12 @@ class Request
                     'core',
                     'tmp'
                 );
+                */
 
                 $extension = $pathinfo["extension"];
                 $filename = uniqid() . ".{$extension}";
-                $path = realpath(implode(DIRECTORY_SEPARATOR, $path)) . '/';
+                //$path = realpath(implode(DIRECTORY_SEPARATOR, $path)) . '/';
+                $path = sys_get_temp_dir();
 
                 if (Request::moveFileupload($path, $filename, $name)) {
                     return "{$path}{$filename}";
@@ -187,7 +190,8 @@ class Request
         }
         elseif (Request::isFileupload()) {
             $filename = uniqid() . ".zip";
-            $path = APP_DIR . '/../tmp/';
+            //$path = APP_DIR . '/../tmp/';
+            $path = sys_get_temp_dir();
             if (Request::moveFileupload($path, $filename)) {
                 $gzip = new Gzip();
         

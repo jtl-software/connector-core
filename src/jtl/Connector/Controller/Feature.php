@@ -39,7 +39,7 @@ class Feature extends CoreController
         $ret = new Action();
         try {
             $datas = $man->transform(
-                new JsonImporter(APP_DIR . '/../config/features.json'), //
+                new JsonImporter(CONNECTOR_DIR . '/config/features.json'), //
                 new WawiExporter()
             );
             $ret->setResult($datas);

@@ -137,7 +137,7 @@ class Installer extends CoreApplication
         // Creates the config instance
         $this->config = new ConnectorConfig(array(
             new ConfigSystem(),
-            new ConfigJson(APP_DIR . '/../config/config.json')
+            new ConfigJson(CONNECTOR_DIR . '/config/config.json')
         ));
 
         // Initialize Twig environment

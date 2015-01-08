@@ -80,7 +80,7 @@ class Connector extends CoreController
         $ret = new Action();
         try {
             //@todo: irgend ne supertolle feature list methode
-            $featureData = file_get_contents(APP_DIR . '/../config/features.json');
+            $featureData = file_get_contents(CONNECTOR_DIR . '/config/features.json');
             $features = json_decode($featureData, true);
 
             $ret->setResult($features);

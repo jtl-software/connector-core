@@ -372,7 +372,7 @@ class Application extends CoreApplication
             $json = $this->config->getLoader('Json');
         }
         else {
-            $json = new ConfigJson(realpath(APP_DIR . '/../config/') . '/config.json');
+            $json = new ConfigJson(CONNECTOR_DIR . '/config/config.json');
             $this->config = new Config(array(
               $json,
               new ConfigSystem()

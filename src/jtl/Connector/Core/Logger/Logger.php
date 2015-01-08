@@ -26,11 +26,7 @@ class Logger extends Monolog
         }
 
         $path = array(
-            APP_DIR,
-            '..',
-            'vendor',
-            'jtl',
-            'connector',
+            CONNECTOR_DIR,
             'logs',
             "{$channel}.log"
         );
