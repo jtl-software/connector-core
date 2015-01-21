@@ -32,7 +32,7 @@ class Installer extends CoreApplication
      *
      * @var \jtl\Connector\Core\Utilities\Config\Config
      */
-    public static $config = null;
+    public $config = null;
 
     /**
      * Current installer step index
