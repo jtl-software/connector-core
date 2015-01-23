@@ -32,6 +32,7 @@ use \jtl\Connector\Base\Connector;
 use \jtl\Connector\Core\Logger\Logger;
 use \Doctrine\Common\Annotations\AnnotationRegistry;
 use \jtl\Connector\Core\Rpc\Method;
+use \jtl\Connector\Linker\IdentityLinker;
 
 /**
  * Application Class
@@ -136,7 +137,7 @@ class Application extends CoreApplication
         // Endpoint Connector
         $exists = false;
         foreach (self::$_connectors as $endpointconnector) {
-            $this->deserializeRequestParams($requestpacket, $endpointconnector->getModelNamespace());
+            $this->deserializeRequestParams($endpointconnector, $requestpacket, $endpointconnector->getModelNamespace());
 
             // Image?
             if ($requestpacket->getMethod() == "image.push" && $imagePath !== null) {
@@ -277,7 +278,7 @@ class Application extends CoreApplication
         Response::sendAll($jtlrpcreponses);
     }
 
-    protected function deserializeRequestParams(RequestPacket &$requestpacket, $modelNamespace)
+    protected function deserializeRequestParams(Connector $connector, RequestPacket &$requestpacket, $modelNamespace)
     {
         $method = RpcMethod::splitMethod($requestpacket->getMethod());
 
@@ -292,7 +293,32 @@ class Application extends CoreApplication
                 })
                 ->build();
 
-            $requestpacket->setParams($serializer->deserialize($requestpacket->getParams(), $namespace, 'json'));
+            // Identity mapping
+            if ($method->getAction() != Method::ACTION_PULL) {
+                $params = $serializer->deserialize($requestpacket->getParams(), "array<{$namespace}>", 'json');
+
+                //die(var_dump($connector->getPrimaryKeyMapper()->getEndpointId(3, 0)));
+
+                /*
+                if (is_array($params)) {
+                    $sqlite3 = Sqlite3::getInstance();
+                    if (!$sqlite3->isConnected()) {
+                        $sqlite3->connect(array("location" => CONNECTOR_DIR . "/db/connector.s3db"));
+                    }
+
+                    $identityLinker = IdentityLinker::getInstance();
+                    $identityLinker->setDatabase($sqlite3);
+
+                    foreach ($params as &$param) {
+                        $identityLinker->linkModel($param);
+                    }
+                }
+                */
+            } else {
+                $params = $serializer->deserialize($requestpacket->getParams(), $namespace, 'json');
+            }
+
+            $requestpacket->setParams($params);
         }
     }
 

@@ -58,7 +58,7 @@ class Sqlite3 implements IDatabase
      * @throws \jtl\Connector\Core\Exception\DatabaseException
      */
     public function connect(array $options = null)
-    {        
+    {
         $this->setOptions($options);
         if (!is_string($this->location) || strlen($this->location) == 0) {
             throw new DatabaseException('Wrong type or empty location');

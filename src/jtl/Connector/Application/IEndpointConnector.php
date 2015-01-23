@@ -7,6 +7,8 @@
 namespace jtl\Connector\Application;
 
 use \jtl\Connector\Core\Rpc\RequestPacket;
+use \jtl\Connector\Core\Config\Config;
+use \jtl\Connector\Mapper\IPrimaryKeyMapper;
 
 /**
  *
@@ -15,6 +17,26 @@ use \jtl\Connector\Core\Rpc\RequestPacket;
  */
 interface IEndpointConnector
 {
+    /**
+     * Setter primary key mapper
+     */
+    public function setPrimaryKeyMapper(IPrimaryKeyMapper $mapper);
+
+    /**
+     * Returns primary key mapper
+     */
+    public function getPrimaryKeyMapper();
+
+    /**
+     * Setter connector config
+     */
+    public function setConfig(Config $config);
+
+    /**
+     * Returns the config
+     */
+    public function getConfig();
+
     /**
      * Checks whether or not a method can be handled
      */

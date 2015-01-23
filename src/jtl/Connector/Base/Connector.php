@@ -13,6 +13,7 @@ use \jtl\Connector\Core\Utilities\RpcMethod;
 use \jtl\Connector\Core\Config\Config;
 use \jtl\Connector\Core\Exception\ConnectorException;
 use \jtl\Connector\Core\Rpc\Method;
+use \jtl\Connector\Mapper\IPrimaryKeyMapper;
 
 /**
  * Base Connector
@@ -22,18 +23,43 @@ use \jtl\Connector\Core\Rpc\Method;
  */
 class Connector extends Singleton implements IEndpointConnector
 {
+    protected $keyMapper;
     protected $config;
     protected $method;
     protected $modelNamespace = 'jtl\Connector\Model';
 
     /**
+     * Setter primary key mapper
+     *
+     * @param \jtl\Connector\Mapper\IPrimaryKeyMapper $mapper
+     * @return \jtl\Connector\Base\Connector
+     */
+    public function setPrimaryKeyMapper(IPrimaryKeyMapper $mapper)
+    {
+        $this->keyMapper = $mapper;
+        return $this;
+    }
+
+    /**
+     * Returns primary key mapper
+     *
+     * @return \jtl\Connector\Mapper\IPrimaryKeyMapper
+     */
+    public function getPrimaryKeyMapper()
+    {
+        return $this->keyMapper;
+    }
+
+    /**
      * Setter connector config.
      *
      * @param \jtl\Connector\Core\Config\Config $config
+     * @return \jtl\Connector\Base\Connector
      */
     public function setConfig(Config $config)
     {
         $this->config = $config;
+        return $this;
     }
 
     /**
