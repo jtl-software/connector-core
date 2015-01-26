@@ -18,6 +18,9 @@ use \jtl\Connector\Model\Identity;
  */
 class IdentityLinker
 {
+    const CACHE_TYPE_HOST = 'h';
+    const CACHE_TYPE_ENDPOINT = 'e';
+
     /**
      * Session Database Mapper
      *
@@ -121,7 +124,349 @@ class IdentityLinker
         'WarehouseI18n' => 89
     );
 
-    protected static $mappings = array();
+    protected static $mappings = array(
+        'Category' => array(
+            'id' => 0,
+            'parentCategoryId' => 0
+        ),
+        'CategoryI18n' => array(
+            'categoryId' => 0
+        ),
+        'Specific' => array(
+            'id' => 77
+        ),
+        'SpecificI18n' => array(
+            'specificId' => 77
+        ),
+        'SpecificValue' => array(
+            'id' => 79,
+            'specificId' => 77
+        ),
+        'SpecificValueI18n' => array(
+            'specificValueId' => 79
+        ),
+        'ProductPrice' => array(
+            'id' => 59,
+            'productId' => 50,
+            'customerGroupId' => 18
+        ),
+        'ProductPriceItem' => array(
+            'productPriceId' => 59
+        ),
+        'Manufacturer' => array(
+            'id' => 41
+        ),
+        'ManufacturerI18n' => array(
+            'manufacturerId' => 41
+        ),
+        'Customer' => array(
+            'id' => 16,
+            'customerGroupId' => 18
+        ),
+        'CustomerAttr' => array(
+            'customerId' => 16,
+            'id' => 17
+        ),
+        'CustomerOrder' => array(
+            'id' => 21,
+            'billingAddressId' => 24,
+            'shippingAddressId' => 28,
+            'customerId' => 16
+        ),
+        'CustomerOrderAttr' => array(
+            'customerOrderId' => 21,
+            'id' => 22
+        ),
+        'CustomerOrderBillingAddress' => array(
+            'id' => 24,
+            'customerId' => 16
+        ),
+        'CustomerOrderShippingAddress' => array(
+            'id' => 28,
+            'customerId' => 16
+        ),
+        'CustomerOrderPaymentInfo' => array(
+            'customerOrderId' => 21,
+            'id' => 27
+        ),
+        'Currency' => array(
+            'id' => 15
+        ),
+        'Product' => array(
+            'id' => 50,
+            'masterProductId' => 50,
+            'manufacturerId' => 41,
+            'deliveryStatusId' => 31,
+            'unitId' => 86,
+            'shippingClassId' => 75,
+            'partsListId' => 48,
+            'productTypeId' => 63,
+            'measurementUnitId' => 43
+        ),
+        'ProductSpecialPrice' => array(
+            'productId' => 50,
+            'id' => 61
+        ),
+        'ProductSpecific' => array(
+            'productId' => 50,
+            'id' => 62,
+            'specificValueId' => 79
+        ),
+        'DeliveryNote' => array(
+            'id' => 29,
+            'customerOrderId' => 21
+        ),
+        'DeliveryNoteItem' => array(
+            'deliveryNoteId' => 29,
+            'id' => 30,
+            'customerOrderItemId' => 25,
+            'warehouseId' => 88
+        ),
+        'CategoryInvisibility' => array(
+            'categoryId' => 0,
+            'customerGroupId' => 18
+        ),
+        'CategoryCustomerGroup' => array(
+            'categoryId' => 0,
+            'customerGroupId' => 18
+        ),
+        'CategoryAttr' => array(
+            'categoryId' => 0,
+            'id' => 1
+        ),
+        'ProductFileDownload' => array(
+            'productId' => 50,
+            'fileDownloadId' => 34
+        ),
+        'Product2Category' => array(
+            'productId' => 50,
+            'id' => 51,
+            'categoryId' => 0
+        ),
+        'MediaFile' => array(
+            'id' => 45,
+            'productId' => 50
+        ),
+        'MediaFileI18n' => array(
+            'mediaFileId' => 45
+        ),
+        'Language' => array(
+            'id' => 40
+        ),
+        'CustomerGroup' => array(
+            'id' => 18
+        ),
+        'CustomerGroupAttr' => array(
+            'customerGroupId' => 18,
+            'id' => 19
+        ),
+        'CustomerGroupI18n' => array(
+            'customerGroupId' => 18
+        ),
+        'ProductConfigGroup' => array(
+            'productId' => 50,
+            'id' => 54,
+            'configGroupId' => 8
+        ),
+        'ProductInvisibility' => array(
+            'productId' => 50,
+            'customerGroupId' => 18
+        ),
+        'CrossSelling' => array(
+            'productId' => 50,
+            'id' => 13,
+            'crossSellingProductId' => 50,
+            'crossSellingGroupId' => 14
+        ),
+        'PartsList' => array(
+            'productId' => 50,
+            'id' => 48
+        ),
+        'MediaFileAttr' => array(
+            'mediaFileId' => 45,
+            'id' => 46
+        ),
+        'ProductVariation' => array(
+            'productId' => 50,
+            'id' => 65
+        ),
+        'ProductVariationI18n' => array(
+            'productVariationId' => 65
+        ),
+        'ProductVariationInvisibility' => array(
+            'productVariationId' => 65,
+            'customerGroupId' => 18
+        ),
+        'ProductVariationValue' => array(
+            'productVariationId' => 65,
+            'id' => 68
+        ),
+        'ProductVariationValueDependency' => array(
+            'productVariationValueId' => 68
+        ),
+        'ProductVariationValueExtraCharge' => array(
+            'productVariationValueId' => 68,
+            'customerGroupId' => 18
+        ),
+        'ProductVariationValueI18n' => array(
+            'productVariationValueId' => 68
+        ),
+        'ProductVariationValueInvisibility' => array(
+            'productVariationValueId' => 68,
+            'customerGroupId' => 18
+        ),
+        'SpecialPrice' => array(
+            'productSpecialPriceId' => 61,
+            'customerGroupId' => 18
+        ),
+        'CustomerOrderItem' => array(
+            'id' => 25,
+            'productId' => 50,
+            'shippingClassId' => 75,
+            'customerOrderId' => 21,
+            'configItemId' => 10
+        ),
+        'CustomerOrderItemVariation' => array(
+            'customerOrderItemId' => 25,
+            'id' => 26,
+            'productVariationId' => 65,
+            'productVariationValueId' => 68
+        ),
+        'ConfigItem' => array(
+            'id' => 10,
+            'configGroupId' => 8,
+            'productId' => 50
+        ),
+        'ConfigItemPrice' => array(
+            'configItemId' => 10,
+            'customerGroupId' => 18
+        ),
+        'ConfigItemI18n' => array(
+            'configItemId' => 10
+        ),
+        'ConfigGroup' => array(
+            'id' => 8
+        ),
+        'ConfigGroupI18n' => array(
+            'configGroupId' => 8
+        ),
+        'FileDownload' => array(
+            'id' => 34
+        ),
+        'FileDownloadI18n' => array(
+            'fileDownloadId' => 34
+        ),
+        'ProductI18n' => array(
+            'productId' => 50
+        ),
+        'Unit' => array(
+            'id' => 86
+        ),
+        'UnitI18n' => array(
+            'unitId' => 86
+        ),
+        'ProductFunctionAttr' => array(
+            'id' => 56,
+            'productId' => 50
+        ),
+        'Warehouse' => array(
+            'id' => 88
+        ),
+        'TaxClass' => array(
+            'id' => 82
+        ),
+        'FileUpload' => array(
+            'id' => 37,
+            'productId' => 50
+        ),
+        'ProductWarehouseInfo' => array(
+            'productId' => 50,
+            'warehouseId' => 88
+        ),
+        'WarehouseI18n' => array(
+            'warehouseId' => 88
+        ),
+        'MeasurementUnit' => array(
+            'id' => 43
+        ),
+        'MeasurementUnitI18n' => array(
+            'measurementUnitId' => 43
+        ),
+        'TaxRate' => array(
+            'id' => 83,
+            'taxZoneId' => 84,
+            'taxClassId' => 82
+        ),
+        'ProductType' => array(
+            'id' => 63
+        ),
+        'FileDownloadHistory' => array(
+            'id' => 35,
+            'fileDownloadId' => 34,
+            'customerId' => 16,
+            'customerOrderId' => 21
+        ),
+        'Company' => array(
+            'id' => 7
+        ),
+        'ProductVarCombination' => array(
+            'productId' => 50,
+            'productVariationId' => 65,
+            'productVariationValueId' => 68
+        ),
+        'ProductAttr' => array(
+            'id' => 52,
+            'productId' => 50
+        ),
+        'PaymentMethod' => array(
+            'id' => 49
+        ),
+        'TaxZone' => array(
+            'id' => 84
+        ),
+        'CrossSellingGroup' => array(
+            'id' => 14
+        ),
+        'TaxZoneCountry' => array(
+            'id' => 85,
+            'taxZoneId' => 84
+        ),
+        'Shipment' => array(
+            'id' => 74,
+            'deliveryNoteId' => 29
+        ),
+        'DeliveryStatus' => array(
+            'id' => 31
+        ),
+        'EmailTemplate' => array(
+            'id' => 32
+        ),
+        'Image' => array(
+            'id' => 39
+        ),
+        'EmailTemplateI18n' => array(
+            'emailTemplateId' => 32
+        ),
+        'CategoryFunctionAttr' => array(
+            'id' => 4,
+            'categoryId' => 0
+        ),
+        'ProductAttrI18n' => array(
+            'productAttrId' => 52
+        ),
+        'ShippingClass' => array(
+            'id' => 75
+        ),
+        'CustomerOrderBasket' => array(
+            'id' => 23,
+            'customerId' => 16,
+            'shippingAddressId' => 28,
+            'customerOrderPaymentInfoId' => 27
+        ),
+        'CategoryAttrI18n' => array(
+            'categoryAttrId' => 1
+        )
+    );
 
     /**
      * Singleton
@@ -181,18 +526,42 @@ class IdentityLinker
     {
         $reflect = new \ReflectionClass($model);
 
-        foreach ($model->getModelType()->getProperties() as $propertyInfo) {
-            if ($propertyInfo->isIdentity()) {
-                $property = ucfirst($propertyInfo->getName());
-                $setter = 'set' . $property;
-                $getter = 'get' . $property;
+        foreach ($model->getModelType()->getProperties() as $propertyInfo) {            
+            $property = ucfirst($propertyInfo->getName());
+            $setter = 'set' . $property;
+            $getter = 'get' . $property;
 
+            if ($propertyInfo->isNavigation()) {
+                foreach ($identity = $model->{$getter}() as &$entity) {
+                    $this->linkModel($entity);
+                }
+            } elseif ($propertyInfo->isIdentity()) {
                 $identity = $model->{$getter}();
 
-                if ($identity instanceof Identity && $this->exists($identity->getHost(), $reflect->getShortName())) {
-                    $identity->setEndpoint($this->getEndpointId($identity->getHost(), $reflect->getShortName()));
+                if (!($identity instanceof Identity)) {
+                    continue;
+                }
 
-                    $model->{$setter}($identity);
+                if (strlen($identity->getEndpoint()) > 0 && $identity->getHost() > 0) {
+                    if (!$this->exists(null, $identity->getHost(), $reflect->getShortName(), $property)) {
+                        $this->save($identity->getEndpoint(), $identity->getHost(), $reflect->getShortName(), $property);
+                    }
+
+                    continue;
+                } else {
+                    if ($identity->getHost() > 0) {
+                        if ($this->exists(null, $identity->getHost(), $reflect->getShortName(), $property)) {
+                            $identity->setEndpoint($this->getEndpointId($identity->getHost(), $reflect->getShortName(), $property));
+
+                            $model->{$setter}($identity);
+                        }
+                    } elseif (strlen($identity->getEndpoint()) > 0) {
+                        if ($this->exists($identity->getEndpoint(), null, $reflect->getShortName(), $property)) {
+                            $identity->setHost($this->getHostId($identity->getEndpoint(), $reflect->getShortName(), $property));
+
+                            $model->{$setter}($identity);
+                        }
+                    }
                 }
             }
         }
@@ -202,36 +571,64 @@ class IdentityLinker
      * Type id getter
      *
      * @param string $modelName
+     * @param string $property
      * @throws \jtl\Connector\Exception\LinkerException
      */
-    public function getType($modelName)
+    public function getType($modelName, $property)
     {
-        if (!isset(self::$types[$modelName])) {
+        $modelName = ucfirst($modelName);
+        $property = lcfirst($property);
+
+        if (!isset(self::$mappings[$modelName])) {
             throw new \LinkerException(sprintf('Type for model (%s) not found', $modelName));
         }
 
-        return self::$types[$modelName];
+        if (!isset(self::$mappings[$modelName][$property])) {
+            throw new \LinkerException(sprintf('Type for model (%s) and property (%s) not found', $modelName, $property));
+        }
+
+        return self::$mappings[$modelName][$property];
     }
 
     /**
      * Checks if link exists
      *
+     * @param string $endpointId
      * @param integer $hostId
      * @param string $modelName
+     * @param string $property
      * @throws \jtl\Connector\Exception\LinkerException
      */
-    public function exists($hostId, $modelName)
+    public function exists($endpointId = null, $hostId = null, $modelName, $property)
     {
-        $type = $this->getType($modelName);
+        if ($endpointId === null && $hostId === null) {
+            throw new \LinkerException('Both parameters (endpointId, hostId) can not be null');
+        }
 
-        if ($this->checkCache($hostId, $type)) {
+        $type = $this->getType($modelName, $property);
+
+        $id = null;
+        $cacheType = null;
+        if ($endpointId !== null) {
+            $id = $endpointId;
+            $cacheType = self::CACHE_TYPE_ENDPOINT;
+        } elseif ($hostId !== null) {
+            $id = $hostId;
+            $cacheType = self::CACHE_TYPE_HOST;
+        }
+
+        if ($this->checkCache($id, $type, $cacheType)) {
             return true;
         }
 
-        $endpointId = self::$mapper->getEndpointId($hostId, $type);
-
         if ($endpointId !== null) {
-            $this->saveCache($endpointId, $hostId, $type);
+            $id = self::$mapper->getHostId($endpointId, $type);
+        } elseif ($hostId !== null) {
+            $id = self::$mapper->getEndpointId($hostId, $type);
+        }
+
+        if ($id !== null) {
+            $this->saveCache($id, $type, $cacheType);
 
             return true;
         }
@@ -245,15 +642,17 @@ class IdentityLinker
      * @param string $endpointId
      * @param integer $hostId
      * @param string $modelName
+     * @param string $property
      * @throws \jtl\Connector\Exception\LinkerException
      */
-    public function save($endpointId, $hostId, $modelName)
+    public function save($endpointId, $hostId, $modelName, $property)
     {
-        $type = $this->getType($modelName);
+        $type = $this->getType($modelName, $property);
 
         $result = self::$mapper->save($endpointId, $hostId, $type);
         if ($result) {
-            $this->saveCache($endpointId, $hostId, $type);
+            $this->saveCache($endpointId, $type, self::CACHE_TYPE_ENDPOINT);
+            $this->saveCache($hostId, $type, self::CACHE_TYPE_HOST);
 
             return true;
         }
@@ -262,23 +661,24 @@ class IdentityLinker
     }
 
     /**
-     * Save link to database
+     * Endpoint ID getter
      *
      * @param integer $hostId
      * @param string $modelName
+     * @param string $property
      */
-    public function getEndpointId($hostId, $modelName)
+    public function getEndpointId($hostId, $modelName, $property)
     {
-        $type = $this->getType($modelName);
+        $type = $this->getType($modelName, $property);
 
-        if (($endpointId = $this->loadCache($hostId, $type)) !== null) {
+        if (($endpointId = $this->loadCache($hostId, $type, self::CACHE_TYPE_HOST)) !== null) {
             return $endpointId;
         }
 
         $endpointId = self::$mapper->getEndpointId($hostId, $type);
 
         if ($endpointId !== null) {
-            $this->saveCache($endpointId, $hostId, $type);
+            $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_HOST);
 
             return $endpointId;
         }
@@ -286,25 +686,58 @@ class IdentityLinker
         return null;
     }
 
-    protected function checkCache($hostId, $type)
+    /**
+     * Host ID getter
+     *
+     * @param string $endpointId
+     * @param string $modelName
+     * @param string $property
+     */
+    public function getHostId($endpointId, $modelName, $property)
     {
-        return (self::$useCache && isset(self::$cache[$this->buildKey($hostId, $type)]));
+        $type = $this->getType($modelName, $property);
+
+        if (($hostId = $this->loadCache($endpointId, $type, self::CACHE_TYPE_ENDPOINT)) !== null) {
+            return $hostId;
+        }
+
+        $hostId = self::$mapper->getHostId($endpointId, $type);
+
+        if ($hostId !== null) {
+            $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_ENDPOINT);
+
+            return $hostId;
+        }
+
+        return null;
     }
 
-    protected function loadCache($hostId, $type)
+    protected function checkCache($id, $type, $cacheType)
     {
-        return $this->checkCache($hostId, $type) ? self::$cache[$this->buildKey($hostId, $type)] : null;
+        return (self::$useCache && isset(self::$cache[$this->buildKey($id, $type, $cacheType)]));
     }
 
-    protected function saveCache($endpointId, $hostId, $type)
+    protected function loadCache($id, $type, $cacheType)
+    {
+        return $this->checkCache($id, $type, $cacheType) ? self::$cache[$this->buildKey($id, $type, $cacheType)] : null;
+    }
+
+    protected function saveCache($endpointId, $hostId, $type, $cacheType)
     {
         if (self::$useCache) {
-            self::$cache[$this->buildKey($hostId, $type)] = $endpointId;
+            switch ($cacheType) {
+                case self::CACHE_TYPE_ENDPOINT:
+                    self::$cache[$this->buildKey($endpointId, $type, $cacheType)] = $hostId;
+                    break;
+                case self::CACHE_TYPE_ENDPOINT:
+                    self::$cache[$this->buildKey($hostId, $type, $cacheType)] = $endpointId;
+                    break;
+            }
         }
     }
 
-    protected function buildKey($hostId, $type)
+    protected function buildKey($id, $type, $cacheType)
     {
-        return sprintf('%s_%s', $hostId, $type);
+        return sprintf('%s_%s_%s', $cacheType, $id, $type);
     }
 }

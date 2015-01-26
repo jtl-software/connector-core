@@ -137,7 +137,10 @@ class Application extends CoreApplication
         // Endpoint Connector
         $exists = false;
         foreach (self::$_connectors as $endpointconnector) {
-            $this->deserializeRequestParams($endpointconnector, $requestpacket, $endpointconnector->getModelNamespace());
+            $identityLinker = IdentityLinker::getInstance();
+            $identityLinker->setPrimaryKeyMapper($endpointconnector->getPrimaryKeyMapper());
+
+            $this->deserializeRequestParams($requestpacket, $endpointconnector->getModelNamespace());
 
             // Image?
             if ($requestpacket->getMethod() == "image.push" && $imagePath !== null) {
@@ -278,7 +281,7 @@ class Application extends CoreApplication
         Response::sendAll($jtlrpcreponses);
     }
 
-    protected function deserializeRequestParams(Connector $connector, RequestPacket &$requestpacket, $modelNamespace)
+    protected function deserializeRequestParams(RequestPacket &$requestpacket, $modelNamespace)
     {
         $method = RpcMethod::splitMethod($requestpacket->getMethod());
 
@@ -299,8 +302,6 @@ class Application extends CoreApplication
 
                 if (is_array($params)) {
                     $identityLinker = IdentityLinker::getInstance();
-                    $identityLinker->setPrimaryKeyMapper($connector->getPrimaryKeyMapper());
-
                     foreach ($params as &$param) {
                         $identityLinker->linkModel($param);
                     }
