@@ -295,25 +295,16 @@ class Application extends CoreApplication
 
             // Identity mapping
             if ($method->getAction() != Method::ACTION_PULL) {
-                $params = $serializer->deserialize($requestpacket->getParams(), "array<{$namespace}>", 'json');
+                $params = $serializer->deserialize($requestpacket->getParams(), "ArrayCollection<{$namespace}>", 'json');
 
-                //die(var_dump($connector->getPrimaryKeyMapper()->getEndpointId(3, 0)));
-
-                /*
                 if (is_array($params)) {
-                    $sqlite3 = Sqlite3::getInstance();
-                    if (!$sqlite3->isConnected()) {
-                        $sqlite3->connect(array("location" => CONNECTOR_DIR . "/db/connector.s3db"));
-                    }
-
                     $identityLinker = IdentityLinker::getInstance();
-                    $identityLinker->setDatabase($sqlite3);
+                    $identityLinker->setPrimaryKeyMapper($connector->getPrimaryKeyMapper());
 
                     foreach ($params as &$param) {
                         $identityLinker->linkModel($param);
                     }
                 }
-                */
             } else {
                 $params = $serializer->deserialize($requestpacket->getParams(), $namespace, 'json');
             }

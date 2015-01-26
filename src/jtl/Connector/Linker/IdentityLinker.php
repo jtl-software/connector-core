@@ -5,9 +5,10 @@
  */
 namespace jtl\Connector\Linker;
 
-use \jtl\Connector\Core\Database\IDatabase;
+use \jtl\Connector\Mapper\IPrimaryKeyMapper;
 use \jtl\Connector\Model\DataModel;
 use \jtl\Connector\Exception\LinkerException;
+use \jtl\Connector\Model\Identity;
 
 /**
  * Identity Connector Linker
@@ -22,7 +23,7 @@ class IdentityLinker
      *
      * @var \jtl\Connector\Core\Database\IDatabase
      */
-    protected static $db;
+    protected static $mapper;
     public static $useCache;
     protected static $cache = array();
     protected static $instance;
@@ -125,12 +126,15 @@ class IdentityLinker
     /**
      * Singleton
      *
+     * @param boolean $useCache
      * @return \jtl\Connector\Linker\IdentityLinker
      */
-    public static function getInstance()
+    public static function getInstance($useCache = true)
     {
         if (self::$instance === null) {
-            self::$instance = new self();
+            self::$instance = new self($useCache);
+        } else {
+            self::$instance->useCache($useCache);
         }
         
         return self::$instance;
@@ -139,34 +143,32 @@ class IdentityLinker
     /**
      * Constructor
      *
-     * @param \jtl\Connector\Core\Database\IDatabase $db
      * @param boolean $useCache
      */
-    protected function __construct(IDatabase $db = null, $useCache = true)
+    protected function __construct($useCache = true)
     {
-        self::$db = $db;
         self::$useCache = (bool)$useCache;
+    }
 
-        self::$mappings = array(
-            
-        );
+    /**
+     * Constructor
+     *
+     * @param boolean $useCache
+     * @return \jtl\Connector\Linker\IdentityLinker
+     */
+    public function useCache($useCache)
+    {
+        self::$useCache = (bool)$useCache;
     }
 
     /**
      * Database setter
      *
-     * @param \jtl\Connector\Core\Database\IDatabase $db
+     * @param \jtl\Connector\Mapper\IPrimaryKeyMapper $mapper
      */
-    public function setDatabase(IDatabase $db)
+    public function setPrimaryKeyMapper(IPrimaryKeyMapper $mapper)
     {
-        self::$db = $db;
-    }
-
-    protected static function checkDatabase()
-    {
-        if (self::$db === null || !self::$db->isConnected()) {
-            throw new \LinkerException('Database is not attached or not connected');
-        }
+        self::$mapper = $mapper;
     }
 
     /**
@@ -177,7 +179,6 @@ class IdentityLinker
      */
     public function linkModel(DataModel &$model)
     {
-        self::checkDatabase();
         $reflect = new \ReflectionClass($model);
 
         foreach ($model->getModelType()->getProperties() as $propertyInfo) {
@@ -188,7 +189,7 @@ class IdentityLinker
 
                 $identity = $model->{$getter}();
 
-                if ($this->exists($identity->getHost(), $reflect->getShortName())) {
+                if ($identity instanceof Identity && $this->exists($identity->getHost(), $reflect->getShortName())) {
                     $identity->setEndpoint($this->getEndpointId($identity->getHost(), $reflect->getShortName()));
 
                     $model->{$setter}($identity);
@@ -215,26 +216,22 @@ class IdentityLinker
     /**
      * Checks if link exists
      *
-     * @param integer $host
+     * @param integer $hostId
      * @param string $modelName
      * @throws \jtl\Connector\Exception\LinkerException
      */
-    public function exists($host, $modelName)
+    public function exists($hostId, $modelName)
     {
         $type = $this->getType($modelName);
 
-        if ($this->checkCache($host, $type)) {
+        if ($this->checkCache($hostId, $type)) {
             return true;
         }
 
-        self::checkDatabase();
-        $rows = self::$db->query("SELECT endpoint
-                                    FROM link
-                                    WHERE host = {$host}
-                                        AND type = {$type}");
+        $endpointId = self::$mapper->getEndpointId($hostId, $type);
 
-        if ($rows !== null && isset($rows[0])) {
-            $this->saveCache($rows[0]['endpoint'], $host, $type);
+        if ($endpointId !== null) {
+            $this->saveCache($endpointId, $hostId, $type);
 
             return true;
         }
@@ -245,23 +242,18 @@ class IdentityLinker
     /**
      * Save link to database
      *
-     * @param string $endpoint
-     * @param integer $host
+     * @param string $endpointId
+     * @param integer $hostId
      * @param string $modelName
      * @throws \jtl\Connector\Exception\LinkerException
      */
-    public function save($endpoint, $host, $modelName)
+    public function save($endpointId, $hostId, $modelName)
     {
         $type = $this->getType($modelName);
 
-        $stmt = self::$db->prepare("INSERT INTO link (endpoint, host, type) VALUES(:endpoint, :host, :type)");
-        $stmt->bindValue(":endpoint", $endpoint, SQLITE3_TEXT);
-        $stmt->bindValue(":host", $host, SQLITE3_INTEGER);
-        $stmt->bindValue(":type", $type, SQLITE3_INTEGER);
-            
-        $result = $stmt->execute();
+        $result = self::$mapper->save($endpointId, $hostId, $type);
         if ($result) {
-            $this->saveCache($endpoint, $host, $type);
+            $this->saveCache($endpointId, $hostId, $type);
 
             return true;
         }
@@ -272,51 +264,47 @@ class IdentityLinker
     /**
      * Save link to database
      *
-     * @param integer $host
+     * @param integer $hostId
      * @param string $modelName
      */
-    public function getEndpointId($host, $modelName)
+    public function getEndpointId($hostId, $modelName)
     {
         $type = $this->getType($modelName);
 
-        if (($endpointId = $this->loadCache($host, $type)) !== null) {
+        if (($endpointId = $this->loadCache($hostId, $type)) !== null) {
             return $endpointId;
         }
 
-        self::checkDatabase();
-        $rows = self::$db->query("SELECT endpoint
-                                    FROM link
-                                    WHERE host = {$host}
-                                        AND type = {$type}");
+        $endpointId = self::$mapper->getEndpointId($hostId, $type);
 
-        if ($rows !== null && isset($rows[0])) {
-            $this->saveCache($rows[0]['endpoint'], $host, $type);
+        if ($endpointId !== null) {
+            $this->saveCache($endpointId, $hostId, $type);
 
-            return $rows[0]['endpoint'];
+            return $endpointId;
         }
 
         return null;
     }
 
-    protected function checkCache($host, $type)
+    protected function checkCache($hostId, $type)
     {
-        return (self::$useCache && isset(self::$cache[$this->buildKey($host, $type)]));
+        return (self::$useCache && isset(self::$cache[$this->buildKey($hostId, $type)]));
     }
 
-    protected function loadCache($host, $type)
+    protected function loadCache($hostId, $type)
     {
-        return $this->checkCache($host, $type) ? self::$cache[$this->buildKey($host, $type)] : null;
+        return $this->checkCache($hostId, $type) ? self::$cache[$this->buildKey($hostId, $type)] : null;
     }
 
-    protected function saveCache($endpoint, $host, $type)
+    protected function saveCache($endpointId, $hostId, $type)
     {
         if (self::$useCache) {
-            self::$cache[$this->buildKey($host, $type)] = $endpoint;
+            self::$cache[$this->buildKey($hostId, $type)] = $endpointId;
         }
     }
 
-    protected function buildKey($host, $type)
+    protected function buildKey($hostId, $type)
     {
-        return sprintf('%s_%s', $host, $type);
+        return sprintf('%s_%s', $hostId, $type);
     }
 }
