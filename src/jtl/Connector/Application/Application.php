@@ -165,6 +165,16 @@ class Application extends CoreApplication
                 if (get_class($actionresult) == "jtl\\Connector\\Result\\Action") {
                     $exists = true;
                     if ($actionresult->isHandled()) {
+
+                        // Identity mapping
+                        $results = array();
+                        foreach ($actionresult->getResult() as $model) {
+                            $identityLinker->linkModel($model);
+                            $results[] = $model->getPublic();
+                        }
+
+                        $actionresult->setResult($results);
+
                         $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
 
                         if ($rpcmode == Packet::SINGLE_MODE) {
