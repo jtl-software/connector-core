@@ -574,9 +574,18 @@ class IdentityLinker
      * @param string $property
      * @throws \jtl\Connector\Exception\LinkerException
      */
-    public function getType($modelName, $property)
+    public function getType($modelName, $property = null)
     {
         $modelName = ucfirst($modelName);
+
+        if ($property === null) {
+            if (!isset(self::$types[$modelName])) {
+                throw new \LinkerException(sprintf('Type for model (%s) not found', $modelName));
+            }
+
+            return self::$types[$modelName];
+        }
+
         $property = lcfirst($property);
 
         if (!isset(self::$mappings[$modelName])) {
@@ -645,7 +654,7 @@ class IdentityLinker
      * @param string $property
      * @throws \jtl\Connector\Exception\LinkerException
      */
-    public function save($endpointId, $hostId, $modelName, $property)
+    public function save($endpointId, $hostId, $modelName, $property = null)
     {
         $type = $this->getType($modelName, $property);
 

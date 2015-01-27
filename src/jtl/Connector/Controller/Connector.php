@@ -13,6 +13,7 @@ use \jtl\Connector\Core\Rpc\Error;
 use \jtl\Connector\Application\Application;
 use \jtl\Connector\Core\Model\QueryFilter;
 use \jtl\Connector\Core\Model\DataModel;
+use \jtl\Connector\Linker\IdentityLinker;
 
 /**
  * Base Config Controller
@@ -84,6 +85,44 @@ class Connector extends CoreController
             $features = json_decode($featureData, true);
 
             $ret->setResult($features);
+            $ret->setHandled(true);
+        } catch (\Exception $e) {
+            $err = new Error();
+            $err->setCode($e->getCode());
+            $err->setMessage($e->getMessage());
+            $ret->setError($err);
+        }
+
+        return $ret;
+    }
+
+    /**
+     * Ack Identity Mappings
+     * 
+     * @param mixed $params empty or ack json string.
+     */
+    public function ack($params = null)
+    {
+        $ret = new Action();
+        try {
+            $serializer = \JMS\Serializer\SerializerBuilder::create()
+                ->addDefaultHandlers()
+                ->configureHandlers(function(\JMS\Serializer\Handler\HandlerRegistry $registry) {
+                    $registry->registerSubscribingHandler(new \jtl\Connector\Serializer\Handler\IdentityHandler());
+                })
+                ->build();
+
+            $ack = $serializer->deserialize($params, "jtl\Connector\Model\Ack", 'json');
+
+            $identityLinker = IdentityLinker::getInstance();
+
+            foreach ($ack->getIdentities() as $modelName => $identities) {
+                foreach ($identities as $identity) {
+                    $identityLinker->save($identity->getEndpoint(), $identity->getHost(), $modelName);
+                }
+            }
+
+            $ret->setResult(true);
             $ret->setHandled(true);
         } catch (\Exception $e) {
             $err = new Error();

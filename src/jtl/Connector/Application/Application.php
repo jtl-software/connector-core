@@ -44,14 +44,14 @@ class Application extends CoreApplication
 {
 
     /**
-     * List of connected EndpointConnectors
+     * Connected EndpointConnectors
      *
-     * @var multiple: IEndpointConnector
+     * @var IEndpointConnector
      */
-    protected static $_connectors = array();
+    protected static $connector = null;
 
     /**
-     * @var \jtl\Connector\Core\Config\Config;
+     * @var \jtl\connector\Core\Config\Config;
      */
     protected $config;
 
@@ -113,7 +113,12 @@ class Application extends CoreApplication
             throw new RpcException("Invalid Request", -32600);
         }
 
-        // Core Connector
+        $identityLinker = IdentityLinker::getInstance();
+        $identityLinker->setPrimaryKeyMapper(self::$connector->getPrimaryKeyMapper());
+
+        ////////////////////
+        // Core Connector //
+        ////////////////////
         $coreconnector = Connector::getInstance();
         $method = RpcMethod::splitMethod($requestpacket->getMethod());
         $coreconnector->setMethod($method);
@@ -134,64 +139,62 @@ class Application extends CoreApplication
             }
         }
 
-        // Endpoint Connector
+        ////////////////////////
+        // Endpoint Connector //
+        ////////////////////////
         $exists = false;
-        foreach (self::$_connectors as $endpointconnector) {
-            $identityLinker = IdentityLinker::getInstance();
-            $identityLinker->setPrimaryKeyMapper($endpointconnector->getPrimaryKeyMapper());
 
-            $this->deserializeRequestParams($requestpacket, $endpointconnector->getModelNamespace());
+        $this->deserializeRequestParams($requestpacket, self::$connector->getModelNamespace());
 
-            // Image?
-            if ($requestpacket->getMethod() == "image.push" && $imagePath !== null) {
-                if ($imagePath !== null) {
-                    $image = $requestpacket->getParams();
-                    $image->setFilename($imagePath);
-                    $requestpacket->setParams($image);
-                } else {
-                    throw new ConnectorException("Could not handle fileupload (no file was uploaded via HTTP POST?)");
-                }
+        // Image?
+        if ($requestpacket->getMethod() == "image.push" && $imagePath !== null) {
+            if ($imagePath !== null) {
+                $image = $requestpacket->getParams();
+                $image->setFilename($imagePath);
+                $requestpacket->setParams($image);
+            } else {
+                throw new ConnectorException("Could not handle fileupload (no file was uploaded via HTTP POST?)");
             }
+        }
 
-            $endpointconnector->setMethod($method);
-            if ($endpointconnector->canHandle()) {
-                $endpointconnector->setConfig($config);
-                $actionresult = $endpointconnector->handle($requestpacket);
-                
-                if ($requestpacket->getMethod() == "image.push" && $imagePath !== null) {
-                    Request::deleteFileupload($imagePath);
-                }
-                
-                if (get_class($actionresult) == "jtl\\Connector\\Result\\Action") {
-                    $exists = true;
-                    if ($actionresult->isHandled()) {
+        self::$connector->setMethod($method);
+        if (self::$connector->canHandle()) {
+            self::$connector->setConfig($config);
+            $actionresult = self::$connector->handle($requestpacket);
+            
+            if ($requestpacket->getMethod() == "image.push" && $imagePath !== null) {
+                Request::deleteFileupload($imagePath);
+            }
+            
+            if (get_class($actionresult) == "jtl\\Connector\\Result\\Action") {
+                $exists = true;
+                if ($actionresult->isHandled()) {
 
-                        // Identity mapping
-                        $results = array();
-                        foreach ($actionresult->getResult() as $model) {
-                            $identityLinker->linkModel($model);
-                            $results[] = $model->getPublic();
-                        }
+                    // Identity mapping
+                    $results = array();
+                    foreach ($actionresult->getResult() as $model) {
+                        $identityLinker->linkModel($model);
+                        $results[] = $model->getPublic();
+                    }
 
-                        $actionresult->setResult($results);
+                    $actionresult->setResult($results);
 
-                        $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
+                    $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
 
-                        if ($rpcmode == Packet::SINGLE_MODE) {
-                            Response::send($responsepacket);
-                        }
-                        else {
-                            return $responsepacket;
-                        }
+                    if ($rpcmode == Packet::SINGLE_MODE) {
+                        Response::send($responsepacket);
+                    }
+                    else {
+                        return $responsepacket;
                     }
                 }
-                else {
-                    throw new RpcException("Internal error", -32603);
-                }
-            } else {
-                if ($requestpacket->getMethod() == "image.push") {
-                    Request::deleteFileupload($imagePath);
-                }
+            }
+            else {
+                throw new RpcException("Internal error", -32603);
+            }
+        } else {
+            if ($requestpacket->getMethod() == "image.push") {
+                Request::deleteFileupload($imagePath);
             }
         }
 
@@ -208,14 +211,11 @@ class Application extends CoreApplication
 
     /**
      *
-     * @param IEndpointConnector $endpointconnector        
+     * @param IEndpointConnector $endpointconnector
      */
     public static function register(IEndpointConnector $endpointconnector)
     {
-        $classname = get_class($endpointconnector);
-        if (!isset(self::$_connectors[$classname])) {
-            self::$_connectors[$classname] = $endpointconnector;
-        }
+        self::$connector = $endpointconnector;
     }
 
     /**
