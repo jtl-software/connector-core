@@ -11,7 +11,7 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Localized category properties. localeName, categoryId and a localized name must be set. 
+ * Localized category properties. languageISO, categoryId and a localized name must be set. 
  *
  * @access public
  * @package jtl\Connector\Model

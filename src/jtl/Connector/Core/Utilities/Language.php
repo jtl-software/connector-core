@@ -130,16 +130,20 @@ class Language
         return null;
     }
     
-    public static function map($locale = null, $country = null)
+    public static function map($locale = null, $country = null, $lang = null, $useLong = true)
     {
-        if ($locale === null && $country === null) {
-            throw new LanguageException("Locale and Country cannot be null");
+        if ($locale === null && $country === null && $lang === null) {
+            throw new LanguageException("Locale, Country and Language cannot be null");
         }
         
         if ($locale !== null && isset(self::$_locales[$locale])) {
-            return self::$_locales[$locale];
+            return $useLong ? self::convert(self::$_locales[$locale]) : self::$_locales[$locale];
         }
         
+        if ($lang !== null) {
+            $country = self::convert(null, $lang);
+        }
+
         if ($country !== null) {
             $country = strtolower($country);
             if (in_array($country, self::$_locales)) {
