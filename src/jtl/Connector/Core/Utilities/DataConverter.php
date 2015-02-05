@@ -12,8 +12,7 @@ final class DataConverter
     {
         if (function_exists('json_encode') && !$forceOwn) {
             return json_decode(json_encode($values));
-        }
-        else {
+        } else {
             $obj = new \stdClass();
             if ($values !== null) {
                 $toObject = function ($values, $obj) use (&$toObject) {
@@ -21,8 +20,7 @@ final class DataConverter
                         if (is_array($value)) {
                             $obj->$key = new \stdClass();
                             $obj->$key = $toObject($value, $obj->$key);
-                        }
-                        else {
+                        } else {
                             $obj->$key = $value;
                         }
                     }
@@ -41,8 +39,7 @@ final class DataConverter
     {
         if (function_exists('json_encode') && !$forceOwn) {
             return json_decode(json_encode($obj), true);
-        }
-        else {
+        } else {
             $arr = array();
             if ($obj !== null) {
                 $toArray = function (array $objVars, array $arr) use (&$toArray) {
@@ -50,8 +47,7 @@ final class DataConverter
                         if (is_object($var)) {
                             $arr[$key] = array();
                             $arr[$key] = $toArray(get_object_vars($var), $arr[$key]);
-                        }
-                        else {
+                        } else {
                             $arr[$key] = $var;
                         }
                     }

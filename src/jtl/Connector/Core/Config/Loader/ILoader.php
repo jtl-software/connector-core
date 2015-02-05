@@ -9,10 +9,10 @@ namespace jtl\Connector\Core\Config\Loader;
 
 /**
  * Loader Interface
- * 
+ *
  * @author David Spickers <david.spickers@jtl-software.de>
  */
-Interface ILoader
+interface ILoader
 {
 
     public function read($key, $default = null);

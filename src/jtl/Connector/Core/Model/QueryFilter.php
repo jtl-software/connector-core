@@ -20,7 +20,7 @@ class QueryFilter
 {
     /**
      * Query item count limitation
-     * 
+     *
      * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("limit")
@@ -29,7 +29,7 @@ class QueryFilter
     
     /**
      * Query item range offset
-     * 
+     *
      * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("offset")
@@ -47,7 +47,7 @@ class QueryFilter
     
     /**
      * Query item filter (where)
-     * 
+     *
      * @var multiple: string
      * @Serializer\Type("array<string, string>")
      * @Serializer\SerializedName("filters")
@@ -99,7 +99,7 @@ class QueryFilter
     
     /**
      * Limit Setter
-     * 
+     *
      * @param integer $limit
      * @return \jtl\Connector\Model\QueryFilter
      */
@@ -111,7 +111,7 @@ class QueryFilter
     
     /**
      * Limit Getter
-     * 
+     *
      * @return integer
      */
     public function getLimit()
@@ -129,7 +129,7 @@ class QueryFilter
     
     /**
      * Offset Setter
-     * 
+     *
      * @param integer $offset
      * @return \jtl\Connector\Model\QueryFilter
      */
@@ -141,7 +141,7 @@ class QueryFilter
     
     /**
      * Offset Getter
-     * 
+     *
      * @return integer
      */
     public function getOffset()
@@ -159,7 +159,7 @@ class QueryFilter
     
     /**
      * Date range beginning Setter
-     * 
+     *
      * @param integer $from
      * @return \jtl\Connector\Model\QueryFilter
      */
@@ -171,7 +171,7 @@ class QueryFilter
     
     /**
      * Date range beginning Getter
-     * 
+     *
      * @return integer
      */
     public function getFrom()
@@ -189,7 +189,7 @@ class QueryFilter
     
     /**
      * Date range end Setter
-     * 
+     *
      * @param integer $until
      * @return \jtl\Connector\Model\QueryFilter
      */
@@ -201,7 +201,7 @@ class QueryFilter
     
     /**
      * Date range end Getter
-     * 
+     *
      * @return integer
      */
     public function getUntil()
@@ -277,7 +277,8 @@ class QueryFilter
      * @param string $newValue
      * @return boolean
      */
-    public function updateOrder($oldValue, $newValue) {
+    public function updateOrder($oldValue, $newValue)
+    {
         $index = $this->isOrder($oldValue, true);
         if ($index !== false) {
             $this->orders[$index] = $newValue;
@@ -297,11 +298,10 @@ class QueryFilter
     {
         if ($value !== null) {
             return ($this->orders !== null && is_array($this->orders) && count($this->orders) > 0);
-        }
-        else {
+        } else {
             foreach ($this->orders as $i => $order) {
                 if ($order === $value) {
-                    return $getIndex ? $i : true; 
+                    return $getIndex ? $i : true;
                 }
             }
         }
@@ -323,7 +323,7 @@ class QueryFilter
         }
     
         return null;
-    }    
+    }
     
     /**
      * Filters Setter
@@ -349,7 +349,7 @@ class QueryFilter
     
     /**
      * Add one Filter
-     * 
+     *
      * @param string $filter
      * @return \jtl\Connector\Core\Model\QueryFilter
      */
@@ -365,7 +365,7 @@ class QueryFilter
     
     /**
      * Delete one Filter
-     * 
+     *
      * @param string $key
      * @return boolean
      */
@@ -381,7 +381,7 @@ class QueryFilter
     }
     
     /**
-     *  
+     *
      * @param string $key
      * @return boolean
      */
@@ -391,7 +391,7 @@ class QueryFilter
     }
     
     /**
-     * 
+     *
      * @param string $key
      * @return mixed|NULL
      */
@@ -405,7 +405,7 @@ class QueryFilter
     }
     
     /**
-     * 
+     *
      * @param string $oldKey
      * @param string $newKey
      * @param mixed $value
@@ -429,13 +429,14 @@ class QueryFilter
     
     /**
      * Setter
-     * 
+     *
      * @param \stdClass $obj
      */
     public function set(\stdClass $obj)
     {
-        if (!is_object($obj))
+        if (!is_object($obj)) {
             return;
+        }
 
         if (isset($obj->limit)) {
             $this->setLimit($obj->limit);

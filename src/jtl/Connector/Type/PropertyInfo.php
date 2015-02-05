@@ -52,7 +52,7 @@ class PropertyInfo
 
     /**
      * Class Constructor
-     * 
+     *
      * @param string $name
      * @param string $type
      * @param string $defaultValue

@@ -19,7 +19,7 @@ class Model extends Singleton
 {
     /**
      *
-     * @param mixed $data            
+     * @param mixed $data
      */
     public function validate($data)
     {

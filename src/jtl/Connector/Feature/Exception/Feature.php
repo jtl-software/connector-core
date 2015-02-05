@@ -15,5 +15,4 @@ namespace jtl\Connector\Feature\Exception;
  */
 class Feature extends \RuntimeException
 {
-    
 }

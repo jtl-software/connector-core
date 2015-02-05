@@ -16,7 +16,7 @@ interface ISerializer
 {
     /**
      *
-     * @param type $object            
+     * @param type $object
      */
     public static function encode($object);
 

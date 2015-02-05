@@ -126,11 +126,11 @@ class Connector extends Singleton implements IEndpointConnector
     
     /**
      * (non-PHPdoc)
-     * 
+     *
      * @see \jtl\Connector\Application\IEndpointConnector::canHandle()
      */
     public function canHandle()
-    {        
+    {
         $controller = RpcMethod::buildController($this->getMethod()->getController());
         
         $class = "\\jtl\\Connector\\Controller\\{$controller}";
@@ -146,11 +146,11 @@ class Connector extends Singleton implements IEndpointConnector
     
     /**
      * (non-PHPdoc)
-     * 
+     *
      * @see \jtl\Connector\Application\IEndpointConnector::handle()
      */
     public function handle(RequestPacket $requestpacket)
-    {        
+    {
         $this->controller->setConfig($this->getConfig());
         $this->controller->setMethod($this->getMethod());
         

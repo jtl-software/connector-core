@@ -72,7 +72,7 @@ class ResponsePacket extends Packet
     /**
      * Setter for $error
      *
-     * @param \jtl\Connector\Core\Rpc\Error $error            
+     * @param \jtl\Connector\Core\Rpc\Error $error
      * @return \jtl\Connector\Core\Rpc\Packet
      */
     public function setError(Error $error = null)
@@ -83,7 +83,7 @@ class ResponsePacket extends Packet
 
     /**
      * Validates a Rpc Response Packet
-     * 
+     *
      * @throws RpcException
      */
     final public function validate()

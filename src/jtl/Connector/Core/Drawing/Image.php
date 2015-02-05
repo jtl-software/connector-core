@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Core\Drawing
@@ -9,7 +9,7 @@ namespace jtl\Connector\Core\Drawing;
 use \jtl\Connector\Core\Exception\DrawingException;
 
 abstract class Image implements IDrawing
-{   
+{
     // Branding Position
     const BRANDING_TOP = 1;
     const BRANDING_TOP_RIGHT = 2;
@@ -61,14 +61,14 @@ abstract class Image implements IDrawing
     
     /**
      * Calculates the Watermark position
-     * 
+     *
      * @param int $image_width
      * @param int $image_height
      * @param int $watermark_width
      * @param int $watermark_height
      * @param int $position
      * @param int $padding
-     * 
+     *
      * @return multitype:number
      */
     protected function _calcWatermarkPosition($image_width, $image_height, $watermark_width, $watermark_height, $position, $padding = 0)
@@ -76,8 +76,7 @@ abstract class Image implements IDrawing
         $padding /= 100;
         $posX = 0;
         $posY = 0;
-        switch($position)
-        {
+        switch ($position) {
             case Image::BRANDING_TOP:
                 $posX = $image_width / 2 - $watermark_width / 2;
                 $posY = $image_height * $padding;
@@ -124,17 +123,17 @@ abstract class Image implements IDrawing
     
     /**
      * Calculates the Watermark offset
-     * 
+     *
      * @param int $image_width
      * @param int $image_height
      * @param int $watermark_width
      * @param int $watermark_height
      * @param int $percent
-     * 
+     *
      * @return multitype:number
      */
     protected function _calcWatermarkOffset($image_width, $image_height, $watermark_width, $watermark_height, $percent = 30)
-    {         
+    {
         $off = $percent / 100;
          
         $watermark_width = (int)round($image_width * $off);

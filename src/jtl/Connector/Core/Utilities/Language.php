@@ -41,7 +41,7 @@ class Language
         'en_IE' => 'en',    'af_ZA' => 'af'
     );
     
-    protected static $_languages = array(        
+    protected static $_languages = array(
         'ab' => 'abk',    'aa' => 'aar',    'af' => 'afr',
         'ak' => 'aka',    'sq' => 'alb',    'am' => 'amh',
         'ar' => 'ara',    'an' => 'arg',    'hy' => 'arm',
@@ -107,7 +107,7 @@ class Language
     );
     
     public static function convert($short = null, $long = null)
-    {        
+    {
         if ($short === null && $long === null) {
             throw new LanguageException("Short and Long cannot be null");
         }

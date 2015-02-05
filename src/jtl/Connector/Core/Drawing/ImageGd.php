@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Core\Drawing
@@ -47,7 +47,7 @@ class ImageGd extends Image
             return null;
         }
         
-        if ($useContainer) {            
+        if ($useContainer) {
             $this->_imageload_container($new_width, $new_height, $width, $height, $backgroundColor);
         } else {
             $this->_imageload_alpha($new_width, $new_height, $backgroundColor);
@@ -63,7 +63,7 @@ class ImageGd extends Image
     public function watermark($filepath, $position, $percent = null, $opacity = 1.0, $padding = 0)
     {
         if (!file_exists($filepath)) {
-            throw new DrawingException("File '{$filepath}' does not exsits");    
+            throw new DrawingException("File '{$filepath}' does not exsits");
         }
         
         $branding = $this->_imageload_alpha(0, 0, "#FFFFFF", $filepath);
@@ -116,8 +116,7 @@ class ImageGd extends Image
             throw new DrawingException("Image is not a valid resource. Please resize or watermark the image before saving!");
         }
         
-        switch($this->imageinfos[2])
-        {
+        switch ($this->imageinfos[2]) {
             case IMAGETYPE_GIF:
                 if (!function_exists('imagegif')) {
                     throw new DrawingException("Function 'imagegif' does not exists");
@@ -159,7 +158,7 @@ class ImageGd extends Image
     protected function _imageload_alpha($width, $height, $backgroundColor, $filepath = null)
     {
         $image = null;
-        $imageinfos = null;        
+        $imageinfos = null;
         if ($filepath === null) {
             $imageinfos = $this->imageinfos;
             $image = $this->_image;
@@ -185,8 +184,7 @@ class ImageGd extends Image
             } else {
                 $color = imagecolorallocate($newImg, 255, 255, 255);
             }
-        }
-        else {
+        } else {
             $color = imagecolorallocatealpha($newImg, 255, 255, 255, 127);
         }
          
@@ -206,7 +204,7 @@ class ImageGd extends Image
     protected function _imageload_container($width, $height, $containerWidth, $containerHeight, $backgroundColor, $filepath = null)
     {
         $image = null;
-        $imageinfos = null;        
+        $imageinfos = null;
         if ($filepath === null) {
             $imageinfos = $this->imageinfos;
             $image = $this->_image;
@@ -257,7 +255,7 @@ class ImageGd extends Image
     }
     
     protected function _imagecopymerge_alpha($dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h, $pct)
-    {        
+    {
         if (!isset($pct)) {
             return false;
         }
@@ -283,7 +281,7 @@ class ImageGd extends Image
                 
                 $alphacolorxy = imagecolorallocatealpha($src_im, ($colorxy >> 16) & 0xFF, ($colorxy >> 8) & 0xFF, $colorxy & 0xFF, $alpha);
                 
-                if(!imagesetpixel($src_im, $x, $y, $alphacolorxy)) {
+                if (!imagesetpixel($src_im, $x, $y, $alphacolorxy)) {
                     return false;
                 }
             }
@@ -293,7 +291,7 @@ class ImageGd extends Image
     }
     
     protected function _createImage($filepath = null)
-    {   
+    {
         $isExt = false;
         if ($filepath === null) {
             $filepath = $this->filepath;
@@ -327,15 +325,15 @@ class ImageGd extends Image
 
         if (strlen($color) == 6) {
             list($r, $g, $b) = array($color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5]);
-        }
-        elseif (strlen($color) == 3) {
+        } elseif (strlen($color) == 3) {
             list($r, $g, $b) = array($color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2]);
-        }
-        else {
+        } else {
             return false;
         }
 
-        $r = hexdec($r); $g = hexdec($g); $b = hexdec($b);
+        $r = hexdec($r);
+        $g = hexdec($g);
+        $b = hexdec($b);
 
         return array($r, $g, $b);
     }

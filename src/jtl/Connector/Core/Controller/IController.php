@@ -12,7 +12,7 @@ use \jtl\Connector\Core\Model\DataModel;
 /**
  * Controller Interface
  */
-Interface IController
+interface IController
 {
     /**
      * Insert or update

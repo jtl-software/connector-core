@@ -24,7 +24,7 @@ abstract class Base
 
     /**
      * Returns the name.
-     * 
+     *
      * @return string
      */
     final public function getName()
@@ -34,7 +34,7 @@ abstract class Base
 
     /**
      * Sets the name.
-     * 
+     *
      * @param string $name
      * @return boolean
      */
@@ -51,7 +51,7 @@ abstract class Base
      * Returns all declared classes.
      * We need this way, because the autoloader will try to include the class
      * file if we use "class_exists" or similar functions.
-     * 
+     *
      * @return array
      */
     public function getClasses()
@@ -61,5 +61,4 @@ abstract class Base
         }
         return $this->_classes;
     }
-
 }

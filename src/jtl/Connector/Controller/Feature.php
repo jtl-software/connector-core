@@ -48,8 +48,7 @@ class Feature extends CoreController
         } catch (\Exception $e) {
             if (isset($e->jtl)) {
                 $ret->setHandled($e->jtl);
-            }
-            else {
+            } else {
                 $ret->setHandled(false);
             }
             $err = new Error();
@@ -62,7 +61,7 @@ class Feature extends CoreController
 
     /**
      * Write is not supported for features.
-     * 
+     *
      * @param mixed $params An array of parameters to write
      */
     public function push($params = null)
@@ -75,7 +74,7 @@ class Feature extends CoreController
 
     /**
      * Delete is not supported for features.
-     * 
+     *
      * @param mixed $params An array of parameters to write
      */
     public function delete($params = null)
@@ -88,6 +87,5 @@ class Feature extends CoreController
 
     public function statistic($params)
     {
-        
     }
 }

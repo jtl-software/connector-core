@@ -10,7 +10,7 @@ use \jtl\Connector\Core\Session\Handler as CoreHandler;
 
 /**
  * Session Class
- * 
+ *
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */

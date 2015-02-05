@@ -62,7 +62,7 @@ class Error extends Model
     /**
      * Setter for $code
      *
-     * @param interger $code            
+     * @param interger $code
      * @return \jtl\Connector\Core\Rpc\Error
      */
     public function setCode($code)
@@ -84,7 +84,7 @@ class Error extends Model
     /**
      * Setter for $message
      *
-     * @param string $message            
+     * @param string $message
      * @return \jtl\Connector\Core\Rpc\Error
      */
     public function setMessage($message)
@@ -118,7 +118,7 @@ class Error extends Model
 
     /**
      * Validates a Rpc Error
-     * 
+     *
      * @throws RpcException
      */
     final public function validate()

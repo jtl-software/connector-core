@@ -35,7 +35,7 @@ class Wawi implements IAuthentication
     /**
      * Validate the communication between an external tool and the connector
      *
-     * @param mixed $data            
+     * @param mixed $data
      * @throws \jtl\Connector\Core\Exception\AuthenticationException
      */
     public static function validate($data)

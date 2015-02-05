@@ -19,5 +19,4 @@ class Pull extends BaseMethod
 {
 
     protected $_name = 'pull';
-
 }

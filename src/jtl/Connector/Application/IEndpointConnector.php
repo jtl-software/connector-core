@@ -44,7 +44,7 @@ interface IEndpointConnector
 
     /**
      * Controller handle
-     * 
+     *
      * @param \jtl\Connector\Core\Rpc\RequestPacket $requestpacket
      */
     public function handle(RequestPacket $requestpacket);

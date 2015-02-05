@@ -11,15 +11,14 @@ class Producer extends BaseProducer
     /**
      * Will start the load process inside of the importer and validates the datas
      * that will be returned by this method.
-     * 
+     *
      * @throws ExceptionProducer If the datas param contains no array, is empty,
      * or doesn't contain the feature key we need to inform the caller about
-     * the inconsistency. 
+     * the inconsistency.
      */
     protected function loadAndValidate()
     {
-        if (empty($this->_importer))
-        {
+        if (empty($this->_importer)) {
             throw new ExceptionProducer('Importer missing!');
         }
         $datas = $this->_importer->load();
@@ -46,8 +45,8 @@ class Producer extends BaseProducer
 
     /**
      * Extracts the different layers, methods and parameters.
-     * 
-     * @throws ExceptionProducer If there are no methods or parameters, we need 
+     *
+     * @throws ExceptionProducer If there are no methods or parameters, we need
      * to notify the caller about the inconsistency.
      */
     protected function extractLayers()
@@ -75,9 +74,9 @@ class Producer extends BaseProducer
     }
 
     /**
-     * Extracts the actual layer with a given key, manage the parent and adds 
+     * Extracts the actual layer with a given key, manage the parent and adds
      * (if found) features, groups and childrens to the producer.
-     * 
+     *
      * @param string $key The actual key inside of the feature array.
      * @param mixed $layer The data.
      * @param type $parent If there is a active group, all children will be added
@@ -90,8 +89,7 @@ class Producer extends BaseProducer
             asort($n_keys);
             if (implode(':', $n_keys) == $this->_methods_cmp_str) { //Feature
                 $child = $this->addFeature($key, $layer);
-            }
-            else { //Group
+            } else { //Group
                 $child = $this->addGroup($key, $layer);
                 foreach ($layer as $fkey => $value) {
                     $this->extractLayer($fkey, $value, $child);
@@ -102,5 +100,4 @@ class Producer extends BaseProducer
             $parent->addChildren($child);
         }
     }
-
 }

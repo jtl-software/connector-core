@@ -14,7 +14,7 @@ use \jtl\Connector\Core\Serializer\Json as SerializerJson;
 
 /**
  * Json Loader Class
- * 
+ *
  * @access public
  * @author David Spickers <david.spickers@jtl-software.de>
  */
@@ -32,13 +32,13 @@ class Json extends BaseLoader
     protected $name = 'Json';
 
     /**
-     * @var Bool 
+     * @var Bool
      */
     protected $canWrite = true;
 
     /**
      * Creates the instance.
-     * 
+     *
      * @param string $file The full filename of a JSON config file
      */
     public function __construct($json_file)
@@ -47,9 +47,9 @@ class Json extends BaseLoader
     }
 
     /**
-     * Will be triggered before the READ method is called, to initialize the 
+     * Will be triggered before the READ method is called, to initialize the
      * content when it is required.
-     * 
+     *
      * @throws ConfigException
      */
     public function beforeRead()
@@ -68,12 +68,11 @@ class Json extends BaseLoader
 
     /**
      * Saves the values to the configuration file in json format.
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     protected function save()
     {
-
         if (!Tool::is_writable($this->file)) {
             throw new ConfigException(sprintf('File %s is not writable', $this->file), 100);
         }
@@ -83,5 +82,4 @@ class Json extends BaseLoader
         }
         return true;
     }
-
 }

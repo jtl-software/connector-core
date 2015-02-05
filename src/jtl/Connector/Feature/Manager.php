@@ -33,17 +33,17 @@ final class Manager extends BaseClass
     protected $_parameters = array();
 
     /**
-     * @var jtl\Connector\Feature\Producer 
+     * @var jtl\Connector\Feature\Producer
      */
     protected $_producer;
 
     /**
      * Constructor.
-     * 
+     *
      * @param \jtl\Connector\Feature\Producer $producer The base class instance
      * that is required to import and export our feature.
      */
-    function __construct(Producer $producer = null)
+    public function __construct(Producer $producer = null)
     {
         $this->name = 'Manager';
         if (!empty($producer)) {
@@ -54,7 +54,7 @@ final class Manager extends BaseClass
 
     /**
      * Sets the producer, the base class of this converting manager.
-     * 
+     *
      * @param \jtl\Connector\Feature\Producer $producer
      */
     public function setProducer(Producer $producer)
@@ -65,7 +65,7 @@ final class Manager extends BaseClass
 
     /**
      * Returns the Producer.
-     * 
+     *
      * @return jtl\Connector\Feature\Producer
      */
     public function getProducer()
@@ -75,7 +75,7 @@ final class Manager extends BaseClass
 
     /**
      * Returns the parameters that will be extraced during the import/export.
-     * 
+     *
      * @return array Standard key value array.
      */
     public function getParameters()
@@ -84,11 +84,11 @@ final class Manager extends BaseClass
     }
 
     /**
-     * Registers a parameter where the producer will looking for during the 
+     * Registers a parameter where the producer will looking for during the
      * import/export phase.
-     * 
+     *
      * @param string $name The name of the needed parameter.
-     * @throws ExceptionManager If the parameter is already added, we need to 
+     * @throws ExceptionManager If the parameter is already added, we need to
      * notify the caller of his inconsistency.
      */
     public function registerParameter($name)
@@ -101,7 +101,7 @@ final class Manager extends BaseClass
 
     /**
      * Registers multiple parameters.
-     * 
+     *
      * @param array $parameters Standard key value array.
      * @see self::registerParameter()
      */
@@ -114,7 +114,7 @@ final class Manager extends BaseClass
 
     /**
      * Checks if a parameter already exists and returns the result as boolean.
-     * 
+     *
      * @param string $name The parameter name.
      * @return bool If the parameter already exists TRUE, otherwhise FALSE.
      */
@@ -125,7 +125,7 @@ final class Manager extends BaseClass
 
     /**
      * Returns the methods that will be extraced during the import/export.
-     * 
+     *
      * @return array
      */
     public function getMethods()
@@ -136,7 +136,7 @@ final class Manager extends BaseClass
     /**
      * Registers a method by name where the producer will look for during the
      * import/export phase.
-     * 
+     *
      * @param string $name The name of the method.
      * @throws ExceptionManager If the method is already added we need to notify
      * the caller about his inconsistency.
@@ -151,7 +151,7 @@ final class Manager extends BaseClass
 
     /**
      * Registers multiple methods at once.
-     * 
+     *
      * @param array $methods Standard key/value array.
      * @see self::registerMethod()
      */
@@ -164,7 +164,7 @@ final class Manager extends BaseClass
 
     /**
      * Checks if a method already exists and returns the result as boolean.
-     * 
+     *
      * @param string $name The parameter name.
      * @return bool If the parameter already exists TRUE, otherwhise FALSE.
      */
@@ -175,9 +175,9 @@ final class Manager extends BaseClass
 
     /**
      * Will check if the producer exists.
-     * If there is no producer, we need to inform the caller about his 
+     * If there is no producer, we need to inform the caller about his
      * inconsistency.
-     * 
+     *
      * @param string $type The type of process, this should usually be 'Import'
      * or 'Export'.
      * @throws ExceptionManager If there is no producer, we need to inform the
@@ -192,11 +192,11 @@ final class Manager extends BaseClass
 
     /**
      * Starts the importing process in the producer.
-     * 
-     * @param \jtl\Connector\Feature\Importer\IImporter $importer The importer 
+     *
+     * @param \jtl\Connector\Feature\Importer\IImporter $importer The importer
      * object, that implements the IImporter interface to be conform to this
      * manager/producer.
-     * 
+     *
      * @return array The imported feature array.
      */
     public function import(IImporter $importer)
@@ -207,11 +207,11 @@ final class Manager extends BaseClass
 
     /**
      * Starts the exporting process in the producer.
-     * 
+     *
      * @param \jtl\Connector\Feature\Exporter\IExporter $export The exporter
      * object, that implements the IExporter interface to be conform to this
      * manager/producer.
-     * 
+     *
      * @return mixed The result of the export call may be various.
      */
     public function export(IExporter $export)
@@ -222,12 +222,12 @@ final class Manager extends BaseClass
 
     /**
      * Will do the import and export in one call.
-     * 
+     *
      * @param \jtl\Connector\Feature\Importer\IImporter $from The Importer
-     * object, that implements the IImporter interface to be conform to this 
+     * object, that implements the IImporter interface to be conform to this
      * manager/producer.
      * @param \jtl\Connector\Feature\Exporter\IExporter $to The Exporter
-     * object, that implements the IExporter interface to be conform to this 
+     * object, that implements the IExporter interface to be conform to this
      * manager/producer.
      * @return mixed The result of the transform call may be various.
      */
@@ -236,5 +236,4 @@ final class Manager extends BaseClass
         $this->checkProducer('Transform');
         return $this->_producer->transform($from, $to);
     }
-
 }

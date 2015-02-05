@@ -35,8 +35,7 @@ class Config extends CoreController
         } catch (\Exception $e) {
             if (isset($e->jtl)) {
                 $ret->setHandled($e->jtl);
-            }
-            else {
+            } else {
                 $ret->setHandled(false);
             }
             $err = new Error();
@@ -49,7 +48,7 @@ class Config extends CoreController
 
     /**
      * Writes the controller configuration and returns the result.
-     * 
+     *
      * @param mixed $params An array of parameters to write
      */
     public function push($params = null)
@@ -70,12 +69,11 @@ class Config extends CoreController
 
     /**
      * Delete is not needed.
-     * 
+     *
      * @param mixed $params An array of parameters to write
      */
     public function delete($params = null)
     {
         return $params;
     }
-
 }

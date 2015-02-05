@@ -8,7 +8,7 @@ namespace jtl\Connector\Core\Exception;
 
 /**
  * Payment Exception Class
- * 
+ *
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */

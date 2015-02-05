@@ -8,8 +8,10 @@ namespace jtl\Connector\Core\Exception;
 
 /**
  * NotImplemented Exception Class
- * 
+ *
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-class NotImplementedException extends \Exception { }
+class NotImplementedException extends \Exception
+{
+}

@@ -47,7 +47,7 @@ abstract class Image extends BaseLoader
 
     /**
      * Contructor.
-     * 
+     *
      * @param array $images
      */
     public function __construct(array $images = array())
@@ -62,7 +62,7 @@ abstract class Image extends BaseLoader
     
     /**
      * Adds a image to the data array.
-     * 
+     *
      * @param string $type The name of our image type.
      * @param integer $width The width of this image types.
      * @param integer $height The height of this image types.
@@ -93,7 +93,7 @@ abstract class Image extends BaseLoader
 
     /**
      * Adding multiple images at once.
-     * 
+     *
      * @param array $images Array of images, with the same parameters as in addImage.
      */
     public function addImages(array $images)
@@ -108,7 +108,7 @@ abstract class Image extends BaseLoader
 
     /**
      * Removes a image from the data array by type.
-     * 
+     *
      * @param string $type
      * @throws ConfigException
      */
@@ -121,9 +121,9 @@ abstract class Image extends BaseLoader
 
     /**
      * Validates a image array and throws a exception with the failure.
-     * 
+     *
      * @param array $image Array with all needed parameters for an image (see: addImage)
-     * @return boolean 
+     * @return boolean
      * @throws ConfigException
      */
     public function validateImageArray(array $image)
@@ -141,7 +141,7 @@ abstract class Image extends BaseLoader
 
     /**
      * Checks if a image with that type already exists.
-     * 
+     *
      * @param string $type The image type.
      * @return Boolean
      */
@@ -152,7 +152,7 @@ abstract class Image extends BaseLoader
 
     /**
      * Returns all Images.
-     * 
+     *
      * @return array
      */
     public function getImages()
@@ -162,7 +162,7 @@ abstract class Image extends BaseLoader
 
     /**
      * Adds a global image property to the class.
-     * 
+     *
      * @param string $name
      * @param mixed $value
      */
@@ -179,7 +179,7 @@ abstract class Image extends BaseLoader
 
     /**
      * Adding multiple globals at once.
-     * 
+     *
      * @param array $globals
      */
     public function addGlobals(array $globals)
@@ -192,7 +192,7 @@ abstract class Image extends BaseLoader
 
     /**
      * Removes a global from the data array by type.
-     * 
+     *
      * @param string $global
      * @throws ConfigException
      */
@@ -205,9 +205,9 @@ abstract class Image extends BaseLoader
 
     /**
      * Validates a name array and throws a exception with the failure.
-     * 
+     *
      * @param array $global Array with all needed parameters for an name (see: addGlobal)
-     * @return boolean 
+     * @return boolean
      * @throws ConfigException
      */
     public function validateGlobalArray(array $global)
@@ -225,7 +225,7 @@ abstract class Image extends BaseLoader
 
     /**
      * Checks if a image with that type already exists.
-     * 
+     *
      * @param string $type The image type.
      * @return Boolean
      */
@@ -233,5 +233,4 @@ abstract class Image extends BaseLoader
     {
         return !empty($this->data) && is_array($this->data['platform']['global']) && array_key_exists($type, $this->data['platform']['global']);
     }
-
 }

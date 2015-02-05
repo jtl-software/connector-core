@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Core\Drawing
@@ -98,8 +98,7 @@ class ImageIm extends Image
             
             if ($watermark_width > $watermark_height) {
                 $newImg->thumbnailImage($watermark_width, 0, false);
-            }
-            else {
+            } else {
                 $newImg->thumbnailImage(0, $watermark_height, false);
             }
             
@@ -108,7 +107,7 @@ class ImageIm extends Image
             
             list($posX, $posY) = $this->_calcWatermarkPosition($image_width, $image_height, $watermark_width, $watermark_height, $position, $padding);
                          
-            $newImg->evaluateImage(\Imagick::EVALUATE_MULTIPLY, $opacity, \Imagick::CHANNEL_ALPHA);            
+            $newImg->evaluateImage(\Imagick::EVALUATE_MULTIPLY, $opacity, \Imagick::CHANNEL_ALPHA);
             $this->_image->compositeImage($newImg, \Imagick::COMPOSITE_OVER, $posX, $posY, \Imagick::CHANNEL_ALPHA);
             $newImg->destroy();
             
@@ -123,7 +122,7 @@ class ImageIm extends Image
      * @see \jtl\Connector\Core\Drawing\IDrawing::save()
      */
     public function save($newFilepath)
-    {        
+    {
         if (!$this->_isResized && !$this->_isBranded) {
             return copy($this->filepath, $newFilepath);
         }
@@ -141,6 +140,6 @@ class ImageIm extends Image
      */
     public function destroy()
     {
-        $this->__destruct();        
+        $this->__destruct();
     }
 }

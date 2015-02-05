@@ -19,7 +19,7 @@ abstract class Packet extends Model
 {
     /**
      * Single Mode
-     * 
+     *
      * @var integer
      * @Serializer\Type("integer")
      */
@@ -27,7 +27,7 @@ abstract class Packet extends Model
     
     /**
      * Batch Mode
-     * 
+     *
      * @var integer
      * @Serializer\Type("integer")
      */
@@ -68,7 +68,7 @@ abstract class Packet extends Model
     /**
      * Setter for $jtlrpc
      *
-     * @param string $jtlrpc            
+     * @param string $jtlrpc
      * @return \jtl\Connector\Core\Rpc\Packet
      */
     public function setJtlrpc($jtlrpc)

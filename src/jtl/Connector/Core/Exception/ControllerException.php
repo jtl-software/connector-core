@@ -8,7 +8,7 @@ namespace jtl\Connector\Core\Exception;
 
 /**
  * Controller Exception Class
- * 
+ *
  * @access public
  * @author David Spickers <david.spickers@jtl-software.de>
  */

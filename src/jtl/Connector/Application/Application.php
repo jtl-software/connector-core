@@ -57,7 +57,7 @@ class Application extends CoreApplication
 
     /**
      * Global Session
-     * 
+     *
      * @var \jtl\Connector\Session\Session
      */
     public static $session;
@@ -100,7 +100,7 @@ class Application extends CoreApplication
 
     /**
      * Execute RPC Method
-     * 
+     *
      * @param RequestPacket $requestpacket
      * @param Config $config
      * @param integer $rpcmode
@@ -132,8 +132,7 @@ class Application extends CoreApplication
 
                 if ($rpcmode == Packet::SINGLE_MODE) {
                     Response::send($responsepacket);
-                }
-                else {
+                } else {
                     return $responsepacket;
                 }
             }
@@ -183,13 +182,11 @@ class Application extends CoreApplication
 
                     if ($rpcmode == Packet::SINGLE_MODE) {
                         Response::send($responsepacket);
-                    }
-                    else {
+                    } else {
                         return $responsepacket;
                     }
                 }
-            }
-            else {
+            } else {
                 throw new RpcException("Internal error", -32603);
             }
         } else {
@@ -200,8 +197,7 @@ class Application extends CoreApplication
 
         if ($exists) {
             throw new RpcException("Method could not be handled", -32000);
-        }
-        else {
+        } else {
             throw new RpcException(
                 sprintf("Method '%s' not found", $requestpacket->getMethod()),
                 -32601
@@ -220,7 +216,7 @@ class Application extends CoreApplication
 
     /**
      * Single Mode
-     * 
+     *
      * @param ResponsePacket $requestpacket
      * @param Config $config
      * @param integer $rpcmode
@@ -259,7 +255,7 @@ class Application extends CoreApplication
 
     /**
      * Batch Mode
-     * 
+     *
      * @param array $requestpackets
      * @param Config $config
      * @param integer $rpcmode
@@ -295,13 +291,13 @@ class Application extends CoreApplication
     {
         $method = RpcMethod::splitMethod($requestpacket->getMethod());
 
-        $namespace = ($method->getAction() == Method::ACTION_PUSH) ? 
+        $namespace = ($method->getAction() == Method::ACTION_PUSH) ?
             sprintf('%s\%s', $modelNamespace, RpcMethod::buildController($method->getController())) : 'jtl\Connector\Core\Model\QueryFilter';
 
         if (class_exists("\\{$namespace}")) {
             $serializer = \JMS\Serializer\SerializerBuilder::create()
                 ->addDefaultHandlers()
-                ->configureHandlers(function(\JMS\Serializer\Handler\HandlerRegistry $registry) {
+                ->configureHandlers(function (\JMS\Serializer\Handler\HandlerRegistry $registry) {
                     $registry->registerSubscribingHandler(new \jtl\Connector\Serializer\Handler\IdentityHandler());
                 })
                 ->build();
@@ -327,8 +323,8 @@ class Application extends CoreApplication
     /**
      * Build RPC Reponse Packet
      *
-     * @param \jtl\Connector\Core\Rpc\ResponsePacket $requestpacket        
-     * @param \jtl\Connector\Result\Action $actionresult        
+     * @param \jtl\Connector\Core\Rpc\ResponsePacket $requestpacket
+     * @param \jtl\Connector\Result\Action $actionresult
      * @return \jtl\Connector\Core\Rpc\ResponsePacket
      * @throws \jtl\Connector\Core\Exception\RpcException
      */
@@ -347,7 +343,7 @@ class Application extends CoreApplication
 
     /**
      * Validate Action
-     * 
+     *
      * @param RequestPacket $requestpacket
      * @throws SchemaException
      */
@@ -364,13 +360,13 @@ class Application extends CoreApplication
 
     /**
      * Validate Model
-     * 
+     *
      * @param string $controller
      * @throws SchemaException
      */
     protected function runModelValidation(RequestPacket $requestpacket)
     {
-//        $method = RpcMethod::splitMethod($requestpacket->getMethod());
+        //        $method = RpcMethod::splitMethod($requestpacket->getMethod());
 //
 //        if ($method->getAction() == "push") {
 //            $controller = str_replace("_", "", $method->getController());
@@ -395,8 +391,7 @@ class Application extends CoreApplication
         if (isset($this->config)) {
             $this->config = $this->config;
             $json = $this->config->getLoader('Json');
-        }
-        else {
+        } else {
             $json = new ConfigJson(CONNECTOR_DIR . '/config/config.json');
             $this->config = new Config(array(
               $json,
@@ -433,7 +428,7 @@ class Application extends CoreApplication
 
     /**
      * Starting Session
-     * 
+     *
      * @throws \jtl\Connector\Core\Exception\DatabaseException
      * @throws \jtl\Connector\Core\Exception\SessionException
      */
@@ -449,4 +444,3 @@ class Application extends CoreApplication
         self::$session = new Session($sqlite3, $sessionId);
     }
 }
-

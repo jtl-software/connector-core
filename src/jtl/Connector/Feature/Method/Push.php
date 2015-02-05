@@ -19,5 +19,4 @@ class Push extends BaseMethod
 {
 
     protected $_name = 'push';
-
 }

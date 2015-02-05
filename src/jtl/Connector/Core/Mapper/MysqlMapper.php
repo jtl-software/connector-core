@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Core\Mapper
@@ -15,28 +15,28 @@ use \jtl\Connector\Core\Model\QueryFilter;
 
 /**
  * Abstract Mysql Mapper
- * 
+ *
  * @access public
  */
 abstract class MysqlMapper extends Singleton implements IMapper
 {
     /**
      * Mysql Database
-     * 
+     *
      * @var \jtl\Connector\Core\Database\Mysql
      */
     protected $_db;
     
     /**
      * Mysql Table
-     * 
+     *
      * @var string
      */
     protected $_table;
     
     /**
      * Mysql Primary Key
-     * 
+     *
      * @var mixed:string|multiple
      */
     protected $_primary;
@@ -47,8 +47,9 @@ abstract class MysqlMapper extends Singleton implements IMapper
     protected function __construct()
     {
         $this->_db = Mysql::getInstance();
-        if (!$this->_db->isConnected())
+        if (!$this->_db->isConnected()) {
             throw new DatabaseException("No Database Connection");
+        }
         
         $this->load();
     }
@@ -68,7 +69,7 @@ abstract class MysqlMapper extends Singleton implements IMapper
     
     /**
      * Get Table Name
-     * 
+     *
      * @return string
      */
     public function getTable()
@@ -78,7 +79,7 @@ abstract class MysqlMapper extends Singleton implements IMapper
 
     /**
      * Character Set Support
-     * 
+     *
      * @param string $encoding
      */
     public function setNames($encoding = 'utf8')
@@ -88,7 +89,7 @@ abstract class MysqlMapper extends Singleton implements IMapper
 
     /**
      * Name Set Support
-     * 
+     *
      * @param string $encoding
      */
     public function setCharset($encoding = 'utf8')
@@ -98,7 +99,7 @@ abstract class MysqlMapper extends Singleton implements IMapper
     
     /**
      * Checks if a Primary Key is set
-     * 
+     *
      * @param \stdClass $object
      * @return boolean
      */
@@ -113,8 +114,7 @@ abstract class MysqlMapper extends Singleton implements IMapper
             }
             
             return $isSet;
-        }
-        elseif ($this->_primary !== null) {
+        } elseif ($this->_primary !== null) {
             $primary = $this->_primary;
             if ($object->$primary !== null || strlen($object->$primary) > 0) {
                 return true;
@@ -126,7 +126,7 @@ abstract class MysqlMapper extends Singleton implements IMapper
     
     /**
      * Gets Primary Values
-     * 
+     *
      * @param DataModel $model
      * @return mutiple|string|null
      */
@@ -139,8 +139,7 @@ abstract class MysqlMapper extends Singleton implements IMapper
             }
             
             return $values;
-        }
-        elseif ($this->_primary !== null) {
+        } elseif ($this->_primary !== null) {
             $primary = $this->_primary;
             return $model->$primary;
         }
@@ -173,8 +172,7 @@ abstract class MysqlMapper extends Singleton implements IMapper
             }
             
             return $fields;
-        }
-        elseif ($this->_primary !== null) {
+        } elseif ($this->_primary !== null) {
             if ($model === null) {
                 return $this->_primary;
             }
@@ -186,7 +184,7 @@ abstract class MysqlMapper extends Singleton implements IMapper
     }
     
     /**
-     * 
+     *
      * @param DataModel $model
      * @param boolean $toWawi
      * @return multitype: mixed
@@ -202,8 +200,7 @@ abstract class MysqlMapper extends Singleton implements IMapper
             foreach ($fields as $i => $field) {
                 $kvs[$field] = $values[$i];
             }
-        }
-        elseif ($fields !== null) {
+        } elseif ($fields !== null) {
             $kvs[$fields] = $values;
         }
         
@@ -212,7 +209,7 @@ abstract class MysqlMapper extends Singleton implements IMapper
     
     /**
      * Generation Sql Primary Key Where Statement
-     * 
+     *
      * @param array $kvs
      * @return string
      */
@@ -234,7 +231,7 @@ abstract class MysqlMapper extends Singleton implements IMapper
     
     /**
      * Generation Sql Limit Statement
-     * 
+     *
      * @param QueryFilter $filter
      * @return string
      */
@@ -255,7 +252,7 @@ abstract class MysqlMapper extends Singleton implements IMapper
     
     /**
      * Generation Sql Order Statement
-     * 
+     *
      * @param QueryFilter $filter
      * @return string
      */

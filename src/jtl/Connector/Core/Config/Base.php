@@ -12,7 +12,7 @@ use \jtl\Connector\Core\System\Tool as SystemTool;
 
 /**
  * Base Config Class
- * 
+ *
  * @access public
  * @author David Spickers <david.spickers@jtl-software.de>
  */
@@ -43,14 +43,14 @@ class Base
     protected $loaded;
 
     /**
-     * @var type 
+     * @var type
      */
     protected $parsed_loader_data;
 
     /**
      * Creates the config instance.
-     * 
-     * @param array $loaders A array with loaders that implements the ILoader 
+     *
+     * @param array $loaders A array with loaders that implements the ILoader
      * interface.
      */
     public function __construct(array $loaders)
@@ -74,7 +74,7 @@ class Base
 
     /**
      * Reads multiple/single requests to the configuration.
-     * 
+     *
      * @param array $keys An array with stings as entries.
      * @return array An array with the values from $keys as index-keys.
      */
@@ -83,8 +83,7 @@ class Base
         $ret = array();
         if ($keys === null || empty($keys)) { //Empty keys maybe need also be processed
             $ret = $this->read();
-        }
-        elseif (is_array($keys)) {
+        } elseif (is_array($keys)) {
             foreach ($keys as $key => $value) {
                 if (is_string($value)) {
                     $ret[$value] = $this->read($value);
@@ -96,7 +95,7 @@ class Base
 
     /**
      * Retrieves the data array from the loader and stores it.
-     * 
+     *
      * @param \jtl\Connector\Core\Config\Loader\ILoader $loader
      */
     protected function retrieveAndMerge(ILoader $loader)
@@ -115,7 +114,7 @@ class Base
 
     /**
      * Returns the values of a key, or all datas if the key is not provided.
-     * 
+     *
      * @param string $key The index key of the requested datas.
      * @return mixed The data value of the index key.
      * @throws ConfigException
@@ -142,14 +141,11 @@ class Base
         }
         if (empty($key)) { //Return the complete loader datas
             return $this->parsed_loader_data;
-        }
-        elseif (array_key_exists($key, $this->parsed_loader_data)) { //Check if the key is available and returns it
+        } elseif (array_key_exists($key, $this->parsed_loader_data)) { //Check if the key is available and returns it
             $ret = $this->parsed_loader_data[$key];
-        }
-        elseif ($this->isCombined($key)) { //If there is a custom string combined request (contacted strings)
+        } elseif ($this->isCombined($key)) { //If there is a custom string combined request (contacted strings)
             $ret = $this->readCombine($key, null, $this->parsed_loader_data);
-        }
-        elseif (empty($ret)) {
+        } elseif (empty($ret)) {
             throw new ConfigException(sprintf('Your request "%s" is not implemented yet!', $key), 100);
         }
 
@@ -160,9 +156,9 @@ class Base
      * Returns the value of a combined key string/index.
      * If the index is available in $this->data, there will be recursivly checked
      * if the depending keys are available.
-     * 
+     *
      * Is there no value, $default will be returned.
-     * 
+     *
      * @param string $key
      * @param mixed $default
      * @param array $loader_data
@@ -193,7 +189,7 @@ class Base
 
     /**
      * Returns if the provided key is a combined key.
-     * 
+     *
      * @param string $key A combined key as string.
      * @return bool
      */
@@ -204,7 +200,7 @@ class Base
 
     /**
      * Writes multiple/single requests to the configuration.
-     * 
+     *
      * @param array $values An array with index-kex=>key-value as entries.
      * @return array An array with the values from $keys as index-keys.
      */
@@ -221,7 +217,7 @@ class Base
 
     /**
      * Writes key/values.
-     * 
+     *
      * @param \stdClass $values The key value array that should be written.
      * @return array
      */
@@ -251,7 +247,7 @@ class Base
 
     /**
      * Checks if a loader is already added.
-     * 
+     *
      * @param string $name The loader name.
      */
     public function existsLoaderByName($name)
@@ -261,7 +257,7 @@ class Base
 
     /**
      * Checks if a loader is already added.
-     * 
+     *
      * @param \jtl\Connector\Core\Config\Base $loader
      * @throws ConfigException
      */
@@ -279,7 +275,7 @@ class Base
 
     /**
      * Returns a loader by name.
-     * 
+     *
      * @param string $name
      * @return boolean | \jtl\Connector\Core\Config\Loader\ILoader
      */
@@ -293,7 +289,7 @@ class Base
 
     /**
      * Adds a new loader to the class.
-     * 
+     *
      * @param \jtl\Connector\Core\Config\Base $loader
      */
     public function addLoader(ILoader $loader)
@@ -306,8 +302,8 @@ class Base
     }
 
     /**
-     * Deletes a existing loader. 
-     * 
+     * Deletes a existing loader.
+     *
      * @param string $name The name of the loader that should be deleted.
      * @return boolean
      * @throws ConfigException If the loader is not present raise exception.
@@ -323,7 +319,7 @@ class Base
 
     /**
      * Clears the actual loaders from the instance.
-     * 
+     *
      * @return boolean
      */
     public function clearLoader()

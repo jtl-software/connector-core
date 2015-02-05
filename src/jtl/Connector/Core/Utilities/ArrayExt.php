@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Core\Utilities
@@ -8,7 +8,9 @@ namespace jtl\Connector\Core\Utilities;
 
 class ArrayExt
 {
-    private function __construct() { }
+    private function __construct()
+    {
+    }
 
     /**
      * Return the values from a single column in the input array
@@ -75,7 +77,6 @@ class ArrayExt
         $resultArray = array();
 
         foreach ($paramsInput as $row) {
-
             $key = $value = null;
             $keySet = $valueSet = false;
 
@@ -99,7 +100,6 @@ class ArrayExt
                     $resultArray[] = $value;
                 }
             }
-
         }
 
         return $resultArray;

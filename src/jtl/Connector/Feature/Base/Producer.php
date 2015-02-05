@@ -83,11 +83,11 @@ abstract class Producer extends Baseclass implements IProducer
 
     /**
      * Creates the producer instance.
-     * 
+     *
      * @param \jtl\Connector\Feature\Manager $manager Our manager as reference
      * back.
      */
-    function __construct(Manager $manager = null)
+    public function __construct(Manager $manager = null)
     {
         $this->name = 'Manager';
         $this->_manager = $manager;
@@ -97,7 +97,7 @@ abstract class Producer extends Baseclass implements IProducer
 
     /**
      * Sets the manager.
-     * 
+     *
      * @param \jtl\Connector\Feature\Manager $manager
      */
     public function setManager(Manager $manager)
@@ -107,7 +107,7 @@ abstract class Producer extends Baseclass implements IProducer
 
     /**
      * Returns the manager.
-     * 
+     *
      * @return \jtl\Connector\Feature\Manager
      */
     public function getManager()
@@ -117,7 +117,7 @@ abstract class Producer extends Baseclass implements IProducer
 
     /**
      * Returns the groups.
-     * 
+     *
      * @return array of \jtl\Connector\Feature\Group\IGroup
      */
     public function getGroups()
@@ -127,7 +127,7 @@ abstract class Producer extends Baseclass implements IProducer
 
     /**
      * Returns the features.
-     * 
+     *
      * @return array of \jtl\Connector\Feature\Feature\IFeature
      */
     public function getFeatures()
@@ -137,7 +137,7 @@ abstract class Producer extends Baseclass implements IProducer
 
     /**
      * Returns the methods that the producer should look for.
-     * 
+     *
      * @return array of string
      */
     public function getMethods()
@@ -147,11 +147,11 @@ abstract class Producer extends Baseclass implements IProducer
 
     /**
      * Starts the importing process.
-     * 
-     * @param \jtl\Connector\Feature\Importer\IImporter $importer The importer 
+     *
+     * @param \jtl\Connector\Feature\Importer\IImporter $importer The importer
      * object, that implements the IImporter interface to be conform to this
      * manager/producer.
-     * 
+     *
      * @return mixed  The result of the parse call may be various.
      * @see self::parse()
      */
@@ -163,11 +163,11 @@ abstract class Producer extends Baseclass implements IProducer
 
     /**
      * Starts the exporting process.
-     * 
+     *
      * @param \jtl\Connector\Feature\Exporter\IExporter $export The exporter
      * object, that implements the IExporter interface to be conform to this
      * manager/producer.
-     * 
+     *
      * @return mixed The result of the load call may be various.
      * @see $exporter->load()
      */
@@ -180,12 +180,12 @@ abstract class Producer extends Baseclass implements IProducer
 
     /**
      * Will do the import and export in one call.
-     * 
+     *
      * @param \jtl\Connector\Feature\Importer\IImporter $from The Importer
-     * object, that implements the IImporter interface to be conform to this 
+     * object, that implements the IImporter interface to be conform to this
      * manager/producer.
      * @param \jtl\Connector\Feature\Exporter\IExporter $to The Exporter
-     * object, that implements the IExporter interface to be conform to this 
+     * object, that implements the IExporter interface to be conform to this
      * manager/producer.
      * @return mixed The result of the export call may be various.
      */
@@ -197,9 +197,9 @@ abstract class Producer extends Baseclass implements IProducer
 
     /**
      * Adds a feature to the producer.
-     * 
+     *
      * @param string $name The name of the new feature.
-     * @param array $methods An array with the 
+     * @param array $methods An array with the
      * @return \jtl\Connector\Feature\Base\Feature
      */
     protected function addFeature($name, array $methods)
@@ -214,7 +214,7 @@ abstract class Producer extends Baseclass implements IProducer
 
     /**
      * Adds a group to the producer.
-     * 
+     *
      * @param string $name The name of th new group.
      * @param array $value The params for the new group.
      * @return \jtl\Connector\Feature\Group\IGroup
@@ -224,8 +224,7 @@ abstract class Producer extends Baseclass implements IProducer
         $class = 'jtl\\Connector\\Feature\\Group\\' . ucfirst($name);
         if (in_array($class, $this->getClasses())) {
             $group = new $class($value);
-        }
-        else {
+        } else {
             $group = new GroupStandard($name);
         }
         $this->_active_group = $group;
@@ -235,7 +234,7 @@ abstract class Producer extends Baseclass implements IProducer
 
     /**
      * Adds a method to the producer that will be assigned to a feature.
-     * 
+     *
      * @param string $method The name of the new method.
      * @param array $params The params array for the new method.
      * @return \jtl\Connector\Feature\Method\IMethod
@@ -257,5 +256,4 @@ abstract class Producer extends Baseclass implements IProducer
         }
         return $obj;
     }
-
 }

@@ -39,7 +39,7 @@ abstract class ImageBranding extends BaseLoader
 
     /**
      * Constructor.
-     * 
+     *
      * This loader needs database access.
      */
     public function __construct()
@@ -49,7 +49,7 @@ abstract class ImageBranding extends BaseLoader
 
     /**
      * Checks if the database connection is empty.
-     * 
+     *
      * @throws ConfigException
      */
     public function checkDb()
@@ -59,5 +59,4 @@ abstract class ImageBranding extends BaseLoader
             throw new ConfigException('Unable to retrieve database instance', 100);
         }
     }
-
 }

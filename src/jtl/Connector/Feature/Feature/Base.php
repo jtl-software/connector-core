@@ -28,7 +28,7 @@ abstract class Base extends BaseClass implements IFeature
 
     /**
      * Adds a new method to the feature.
-     * 
+     *
      * @param \jtl\Connector\Feature\Method\IMethod $method A method object.
      * @throws ExceptionMethod If the method already exists we need to raise a
      * exception to inform the calling part.
@@ -43,7 +43,7 @@ abstract class Base extends BaseClass implements IFeature
 
     /**
      * Deletes a method from a feature by name.
-     * 
+     *
      * @param string $name The method name inside of the _methods array.
      * @throws ExceptionMethod If the method doesn't exist we need to raise a
      * exception to inform the calling part.
@@ -58,9 +58,9 @@ abstract class Base extends BaseClass implements IFeature
 
     /**
      * Returns a boolean if a method exists in the _methods array.
-     * 
+     *
      * @param string $name The name of the method we're looking for.
-     * @return boolean If the method already exists in our _methods array TRUE 
+     * @return boolean If the method already exists in our _methods array TRUE
      * otherwhise FALSE.
      */
     public function existsMethod($name)
@@ -70,7 +70,7 @@ abstract class Base extends BaseClass implements IFeature
 
     /**
      * Returns a method of a feature if it exists.
-     * 
+     *
      * @param string $name The name of your requested method.
      * @return \jtl\Connector\Feature\Method\IMethod The requested method.
      * @throws ExceptionMethod If the method is not set we need to raise a
@@ -83,5 +83,4 @@ abstract class Base extends BaseClass implements IFeature
         }
         return $this->_methods[$name];
     }
-
 }

@@ -48,9 +48,9 @@ class Action
     /**
      * Constructor
      *
-     * @param bool $handled            
-     * @param mixed $result            
-     * @param mixed $error            
+     * @param bool $handled
+     * @param mixed $result
+     * @param mixed $error
      */
     public function __construct($handled = null, $result = null, $error = null)
     {
@@ -62,7 +62,7 @@ class Action
     /**
      * Setter for $_isHandled
      *
-     * @param bool $handled            
+     * @param bool $handled
      * @return \jtl\Connector\Result\Action
      */
     public function setHandled($handled)
@@ -84,7 +84,7 @@ class Action
     /**
      * Setter for $_result
      *
-     * @param mixed $result            
+     * @param mixed $result
      * @return \jtl\Connector\Result\Action
      */
     public function setResult($result)
@@ -106,7 +106,7 @@ class Action
     /**
      * Setter for $_error
      *
-     * @param mixed $error            
+     * @param mixed $error
      * @return \jtl\Connector\Result\Action
      */
     public function setError($error)
@@ -117,7 +117,7 @@ class Action
 
     /**
      * Return true if an error occurs otherwise false
-     *           
+     *
      * @return boolean
      */
     public function isError()

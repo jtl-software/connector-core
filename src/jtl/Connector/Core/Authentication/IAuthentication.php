@@ -11,7 +11,7 @@ namespace jtl\Connector\Core\Authentication;
  *
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-Interface IAuthentication
+interface IAuthentication
 {
 
     /**
@@ -24,7 +24,7 @@ Interface IAuthentication
     /**
      * Validate the communication between an external tool and the connector
      *
-     * @param mixed $data            
+     * @param mixed $data
      * @return bool
      */
     public static function validate($data);

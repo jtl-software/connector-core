@@ -14,8 +14,8 @@ namespace jtl\Connector\Installer\Step;
  */
 abstract class FormStep extends InstallerStep
 {
-    protected abstract function validateFormData();
-    protected abstract function processFormData();
+    abstract protected function validateFormData();
+    abstract protected function processFormData();
     
     public function run()
     {
@@ -23,13 +23,11 @@ abstract class FormStep extends InstallerStep
             // Form has been submitted
             if ($this->validateFormData()) {
                 $this->processFormData();
-            }
-            else {
+            } else {
                 // Throw error
             }
         }
 
         parent::run();
     }
-    
 }

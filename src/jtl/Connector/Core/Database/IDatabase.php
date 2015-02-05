@@ -11,7 +11,7 @@ namespace jtl\Connector\Core\Database;
  *
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-Interface IDatabase
+interface IDatabase
 {
     /**
      * Connect to Database
@@ -39,7 +39,7 @@ Interface IDatabase
     
     /**
      * Returns a string that has been properly escaped
-     * 
+     *
      * @return string
      */
     public function escapeString($query);

@@ -20,12 +20,12 @@ class Tool
     /**
      * @var boolean
      */
-    static public $test = false;
+    public static $test = false;
 
     /**
      * @var boolean
      */
-    static public $exception = false;
+    public static $exception = false;
 
     /**
      * @var boolean
@@ -40,17 +40,16 @@ class Tool
     /**
      * @var mixed
      */
-    static public $ret_get_object_vars;
+    public static $ret_get_object_vars;
 
     /**
      * This method will return the average system load for unix based systems.
-     * 
+     *
      * @return array
      */
     public static function sys_getloadavg()
     {
-        if (self::$exception)
-        {
+        if (self::$exception) {
             throw new \RuntimeException('Unit Testing Exception');
         }
         if (self::$test) {
@@ -61,13 +60,12 @@ class Tool
 
     /**
      * This method will return the average system load for windows based systems.
-     * 
+     *
      * @return array
      */
     public static function sys_win_getloadavg()
     {
-        if (self::$exception)
-        {
+        if (self::$exception) {
             throw new \RuntimeException('Unit Testing Exception');
         }
         if (self::$test) {
@@ -78,15 +76,14 @@ class Tool
     
     /**
      * Returns object variables from std class.
-     * 
+     *
      * @param \stdClass $obj
      * @return mixed
      * @throws \RuntimeException
      */
     public static function get_object_vars($obj)
     {
-        if (self::$exception)
-        {
+        if (self::$exception) {
             throw new \RuntimeException('Unit Testing Exception');
         }
         if (self::$test) {
@@ -94,5 +91,4 @@ class Tool
         }
         return get_object_vars($obj);
     }
-
 }

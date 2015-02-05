@@ -15,28 +15,28 @@ class Method
 
     /**
      * Rcp Method
-     * 
+     *
      * @var string
      */
     protected $rpcmethod;
     
     /**
      * Connector Controller
-     * 
+     *
      * @var string
      */
     protected $controller;
     
     /**
      * Connector Action
-     * 
+     *
      * @var string
      */
     protected $action;
     
     /**
      * Constructor
-     * 
+     *
      * @param string $rpcmethod
      * @param string $controller
      * @param string $action
@@ -50,10 +50,10 @@ class Method
     
     /**
      * Rpc Method Getter
-     * 
+     *
      * @return string
      */
-	public function getRpcMethod()
+    public function getRpcMethod()
     {
         return $this->rpcmethod;
     }
@@ -63,7 +63,7 @@ class Method
      *
      * @return string
      */
-	public function getController()
+    public function getController()
     {
         return $this->controller;
     }
@@ -73,14 +73,14 @@ class Method
      *
      * @return string
      */
-	public function getAction()
+    public function getAction()
     {
         return $this->action;
     }
     
     /**
      * Commit check
-     * 
+     *
      * @return boolean
      */
     public function isCommit()
@@ -90,7 +90,7 @@ class Method
     
     /**
      * Core check
-     * 
+     *
      * @return boolean
      */
     public function isCore()
@@ -104,11 +104,11 @@ class Method
 
     /**
      * Method Setter
-     * 
+     *
      * @param string $rpcmethod
      * @return \jtl\Connector\Core\Rpc\Method
      */
-	public function setRpcMethod($rpcmethod)
+    public function setRpcMethod($rpcmethod)
     {
         $this->rpcmethod = $rpcmethod;
         return $this;
@@ -120,7 +120,7 @@ class Method
      * @param string $controller
      * @return \jtl\Connector\Core\Rpc\Method
      */
-	public function setController($controller)
+    public function setController($controller)
     {
         $this->controller = $controller;
         return $this;
@@ -132,7 +132,7 @@ class Method
      * @param string $action
      * @return \jtl\Connector\Core\Rpc\Method
      */
-	public function setAction($action)
+    public function setAction($action)
     {
         $this->action = $action;
         return $this;

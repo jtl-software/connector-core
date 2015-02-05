@@ -17,7 +17,7 @@ class HttpRequest
     /**
      * Return accepted browser languages as ISO-639 compliant values, sorted
      * by the user's preference
-     * 
+     *
      * @return array
      */
     public static function getAcceptedLanguages()
@@ -38,13 +38,14 @@ class HttpRequest
                 foreach ($parsed_langs as $lang => $val) {
                     $lang = strtr($lang, '-', '_');
                     
-                    if ($val === '')
+                    if ($val === '') {
                         $langs[$lang] = 1;
-                    else
+                    } else {
                         $langs[$lang] = $val;
+                    }
                 }
 
-                // sort list based on value	
+                // sort list based on value
                 arsort($langs, SORT_NUMERIC);
             }
         }

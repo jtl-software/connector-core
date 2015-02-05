@@ -9,10 +9,9 @@ namespace jtl\Connector\Feature\Group;
 
 /**
  * Group Interface
- * 
+ *
  * @author David Spickers <david.spickers@jtl-software.de>
  */
-Interface IGroup
+interface IGroup
 {
-    
 }

@@ -20,7 +20,7 @@ class Response
 {
     /**
      * Http Response sender
-     * 
+     *
      * @param ResponsePacket $responsepacket
      */
     public static function send(ResponsePacket $responsepacket)
@@ -40,10 +40,10 @@ class Response
     
     /**
      * Http Response sender
-     * 
+     *
      * @param array $reponsepackets
      */
-    public static function sendAll(array $reponsepackets) 
+    public static function sendAll(array $reponsepackets)
     {
         header('Cache-Control: no-cache, must-revalidate');
         header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');

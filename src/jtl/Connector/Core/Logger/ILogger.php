@@ -20,6 +20,6 @@ interface ILogger
     const ERROR = 0;
     
     public static function log($message, $level = ILogger::ERROR, $module = 'General');
-    public static function getLogEntries($maxLevel = ILogger::WARNING, $since = NULL, $module = NULL);
+    public static function getLogEntries($maxLevel = ILogger::WARNING, $since = null, $module = null);
     public static function clearLog();
 }

@@ -526,7 +526,7 @@ class IdentityLinker
     {
         $reflect = new \ReflectionClass($model);
 
-        foreach ($model->getModelType()->getProperties() as $propertyInfo) {            
+        foreach ($model->getModelType()->getProperties() as $propertyInfo) {
             $property = ucfirst($propertyInfo->getName());
             $setter = 'set' . $property;
             $getter = 'get' . $property;

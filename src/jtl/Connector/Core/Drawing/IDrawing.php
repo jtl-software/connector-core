@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Core\Drawing
@@ -6,11 +6,11 @@
 
 namespace jtl\Connector\Core\Drawing;
 
-Interface IDrawing
+interface IDrawing
 {
     /**
      * Image Resizing
-     * 
+     *
      * @param int $width
      * @param int $height
      * @param boolean $useContainer
@@ -21,7 +21,7 @@ Interface IDrawing
     
     /**
      * Image Watermarking
-     * 
+     *
      * @param string $filepath
      * @param int $position
      * @param int $percent
@@ -32,7 +32,7 @@ Interface IDrawing
     
     /**
      * Image Saving
-     * 
+     *
      * @param string $newFilepath
      */
     public function save($newFilepath);

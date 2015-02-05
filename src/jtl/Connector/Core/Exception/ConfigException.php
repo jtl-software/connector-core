@@ -10,7 +10,7 @@ namespace jtl\Connector\Core\Exception;
 
 /**
  * Config Exception Class
- * 
+ *
  * @access public
  * @author David Spickers <david.spickers@jtl-software.de>
  */
@@ -21,7 +21,7 @@ class ConfigException extends \Exception
 
     /**
      * Constructor.
-     * 
+     *
      * @param string $message
      * @param int $code
      * @param \Exception $previous
@@ -31,5 +31,4 @@ class ConfigException extends \Exception
         $this->jtl = $code > 0;
         parent::__construct($message, $code, $previous);
     }
-
 }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Core\Result
@@ -10,7 +10,7 @@ use \jtl\Connector\Core\Model\Model;
 
 /**
  * Mysql Result Class
- * 
+ *
  * @access public
  */
 class Mysql extends Model
@@ -24,42 +24,42 @@ class Mysql extends Model
     
     /**
      * Mysql Query
-     * 
+     *
      * @var string
      */
     protected $_query = "";
     
     /**
      * The error code for the most recent function call
-     * 
+     *
      * @var integer
      */
     protected $_errno = 0;
     
     /**
      * A string description of the last error
-     * 
+     *
      * @var string
      */
     protected $_error = "";
     
     /**
      * Primary Key
-     * 
+     *
      * @var integer|array
      */
     protected $_key = 0;
     
     /**
      * Mysql Command
-     * 
+     *
      * @var string
      */
     protected $_type = "";
     
     /**
      * Gets the number of affected rows in a previous MySQL operation
-     * 
+     *
      * @var integer
      */
     protected $_affected = 0;
@@ -88,10 +88,10 @@ class Mysql extends Model
     
     /**
      * Errno Getter
-     * 
+     *
      * @return integer
      */
-	public function getErrno()
+    public function getErrno()
     {
         return $this->_errno;
     }
@@ -102,7 +102,7 @@ class Mysql extends Model
      * @param integer $errno
      * @return \jtl\Connector\Result\Mysql
      */
-	public function setErrno($errno)
+    public function setErrno($errno)
     {
         $this->_errno = (int)$errno;
         return $this;
@@ -113,7 +113,7 @@ class Mysql extends Model
      *
      * @return integer
      */
-	public function getError()
+    public function getError()
     {
         return $this->_error;
     }
@@ -124,7 +124,7 @@ class Mysql extends Model
      * @param integer $error
      * @return \jtl\Connector\Result\Mysql
      */
-	public function setError($error)
+    public function setError($error)
     {
         $this->_error = $error;
         return $this;
@@ -135,7 +135,7 @@ class Mysql extends Model
      *
      * @return integer
      */
-	public function getKey()
+    public function getKey()
     {
         return $this->_key;
     }
@@ -146,7 +146,7 @@ class Mysql extends Model
      * @param integer $key
      * @return \jtl\Connector\Result\Mysql
      */
-	public function setKey($key)
+    public function setKey($key)
     {
         $this->_key = (int)$key;
         return $this;
@@ -157,7 +157,7 @@ class Mysql extends Model
      *
      * @return integer
      */
-	public function getType()
+    public function getType()
     {
         return $this->_type;
     }
@@ -168,7 +168,7 @@ class Mysql extends Model
      * @param string $type
      * @return \jtl\Connector\Result\Mysql
      */
-	public function setType($type)
+    public function setType($type)
     {
         $this->_type = $type;
         return $this;
@@ -179,18 +179,18 @@ class Mysql extends Model
      *
      * @return integer
      */
-	public function getAffected()
+    public function getAffected()
     {
         return $this->_affected;
     }
 
     /**
      * Affected Setter
-     * 
+     *
      * @param integer $affected
      * @return \jtl\Connector\Result\Mysql
      */
-	public function setAffected($affected)
+    public function setAffected($affected)
     {
         $this->_affected = (int)$affected;
         return $this;

@@ -39,10 +39,14 @@ abstract class Singleton
     /**
      * Basic Constructor
      */
-    protected function __construct() { }
+    protected function __construct()
+    {
+    }
     
     /**
      * Clone Method
      */
-    final protected function __clone() { }
+    final protected function __clone()
+    {
+    }
 }

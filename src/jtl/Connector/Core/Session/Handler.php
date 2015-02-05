@@ -34,7 +34,7 @@ abstract class Handler
     
     /**
      * Session Id
-     * 
+     *
      * @var string
      */
     protected $_sessionId;
@@ -43,7 +43,7 @@ abstract class Handler
      * Constructor
      *
      * @param \jtl\Connector\Core\Database\IDatabase $db
-     * @throws \jtl\Connector\Core\Exception\SessionException 
+     * @throws \jtl\Connector\Core\Exception\SessionException
      */
     public function __construct(IDatabase $db, $sessionId = null, $sessionName = "jtlConnector")
     {
@@ -55,8 +55,7 @@ abstract class Handler
         if ($sessionId !== null) {
             if ($this->check($sessionId)) {
                 session_id($sessionId);
-            }
-            else {
+            } else {
                 throw new SessionException("Session is invalid", -32000);
             }
         }
@@ -89,7 +88,7 @@ abstract class Handler
     
     /**
      * Checks if Session is Valid
-     * 
+     *
      * @param string $sessionId
      * @return boolean
      */
@@ -113,7 +112,7 @@ abstract class Handler
      * Open Session
      */
     public function open($savePath, $sessionName)
-    {        
+    {
         //$this->_lifetime = get_cfg_var("session.gc_maxlifetime");
         $this->_lifetime = 7200;
         
@@ -124,7 +123,7 @@ abstract class Handler
      * Close Sesssion
      */
     public function close()
-    {        
+    {
         return true;
     }
 
@@ -165,17 +164,16 @@ abstract class Handler
 									FROM session
 								    WHERE sessionId = '{$sessionId}'");
         
-        if ($rows !== null && isset($rows[0])) {           
-           $stmt = $this->_db->prepare("UPDATE session SET sessionData=:data WHERE sessionId=:sessionid");
-           $stmt->bindValue(":data", $sessionData, SQLITE3_TEXT);
-           $stmt->bindValue(":sessionid", $sessionId, SQLITE3_TEXT);
+        if ($rows !== null && isset($rows[0])) {
+            $stmt = $this->_db->prepare("UPDATE session SET sessionData=:data WHERE sessionId=:sessionid");
+            $stmt->bindValue(":data", $sessionData, SQLITE3_TEXT);
+            $stmt->bindValue(":sessionid", $sessionId, SQLITE3_TEXT);
            
-           $result = $stmt->execute();
-           if ($result) {
-               return true;
-           }
-        }
-        else {
+            $result = $stmt->execute();
+            if ($result) {
+                return true;
+            }
+        } else {
             $stmt = $this->_db->prepare("INSERT INTO session (sessionId, sessionExpires, sessionData) VALUES(:sessionid, :expire, :data)");
             $stmt->bindValue(":sessionid", $sessionId, SQLITE3_TEXT);
             $stmt->bindValue(":expire", $newExpire, SQLITE3_INTEGER);
@@ -183,7 +181,7 @@ abstract class Handler
             
             $result = $stmt->execute();
             if ($result) {
-               return true;
+                return true;
             }
         }
         
@@ -194,7 +192,7 @@ abstract class Handler
      * Destroy Session
      */
     public function destroy($sessionId)
-    {        
+    {
         $sessionId = $this->_db->escapeString($sessionId);
         
         return $this->_db->query("DELETE FROM session WHERE sessionId = '{$sessionId}'");
@@ -204,13 +202,13 @@ abstract class Handler
      * Garbage Collector
      */
     public function gc($maxLifetime)
-    {        
+    {
         return $this->_db->query("DELETE FROM session WHERE sessionExpires < " . time());
     }
     
     /**
      * SessionId Getter
-     * 
+     *
      * @return string
      */
     public function getSessionId()
@@ -220,7 +218,7 @@ abstract class Handler
     
     /**
      * Lifetime Getter
-     * 
+     *
      * @return number
      */
     public function getLifetime()

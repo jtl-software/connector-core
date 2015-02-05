@@ -31,7 +31,7 @@ namespace jtl\Connector\Core\Cryptography;
  * www.php-einfach.de wuerden wir uns freuen. ************************ Usage:
  * <?php include("xtea.class.php"); $xtea = new XTEA("secret Key"); $cipher =
  * $xtea->Encrypt("Hello World"); //Encrypts 'Hello World' $plain =
- * $xtea->Decrypt($cipher); //Decrypts the cipher text echo $plain; 
+ * $xtea->Decrypt($cipher); //Decrypts the cipher text echo $plain;
  */
 final class Xtea implements ICryptography
 {
@@ -52,8 +52,7 @@ final class Xtea implements ICryptography
         $n = strlen($text);
         if ($n % 8 != 0) {
             $lng = ($n + (8 - ($n % 8)));
-        }
-        else {
+        } else {
             $lng = 0;
         }
         
@@ -95,8 +94,7 @@ final class Xtea implements ICryptography
         $cipher = $this->_str2long(base64_decode($text));
         if ($this->cbc == 1) {
             $i = 2; // Message start at second block
-        }
-        else {
+        } else {
             $i = 0; // Message start at first block
         }
         
@@ -131,11 +129,9 @@ final class Xtea implements ICryptography
     {
         if (is_array($key)) {
             $this->key = $key;
-        }
-        elseif (isset($key) && !empty($key)) {
+        } elseif (isset($key) && !empty($key)) {
             $this->key = $this->_str2long(str_pad($key, 16, $key));
-        }
-        else {
+        } else {
             $this->key = array(0, 0, 0, 0);
         }
     }
@@ -268,8 +264,7 @@ final class Xtea implements ICryptography
         // convert to unsigned integer
         if (0x7fffffff < $integer) {
             $integer -= 0xffffffff + 1.0;
-        }
-        elseif (-0x80000000 > $integer) {
+        } elseif (-0x80000000 > $integer) {
             $integer += 0xffffffff + 1.0;
         }
         
@@ -278,8 +273,7 @@ final class Xtea implements ICryptography
             $integer &= 0x7fffffff; // remove sign bit before shift
             $integer >>= $n; // right shift
             $integer |= 1 << (31 - $n); // set shifted sign bit
-        }
-        else {
+        } else {
             $integer >>= $n; // use normal right shift
         }
         
@@ -306,8 +300,7 @@ final class Xtea implements ICryptography
         // convert to signed integer
         if (0x7fffffff < $result) {
             $result -= 0xffffffff + 1.0;
-        }
-        elseif (-0x80000000 > $result) {
+        } elseif (-0x80000000 > $result) {
             $result += 0xffffffff + 1.0;
         }
         

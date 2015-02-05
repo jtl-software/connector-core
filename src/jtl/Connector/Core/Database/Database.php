@@ -10,7 +10,7 @@ use \jtl\Connector\Core\Exception\DatabaseException;
 
 /**
  * Base Database Class
- * 
+ *
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
@@ -19,7 +19,7 @@ class Database
     /**
      * Creates a Database Object
      *
-     * @param string $type            
+     * @param string $type
      * @throws \jtl\Connector\Core\Exception\DatabaseException
      */
     public static function create($type)

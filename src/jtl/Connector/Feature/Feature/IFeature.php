@@ -9,10 +9,9 @@ namespace jtl\Connector\Feature\Feature;
 
 /**
  * Feature Interface
- * 
+ *
  * @author David Spickers <david.spickers@jtl-software.de>
  */
-Interface IFeature
+interface IFeature
 {
-    
 }

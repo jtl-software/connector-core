@@ -10,9 +10,9 @@ namespace jtl\Connector\Feature\Group;
 use \jtl\Connector\Feature\Group\Base as BaseGroup;
 
 /**
- * Special image group, that supports additional parameters inside of the params 
+ * Special image group, that supports additional parameters inside of the params
  * array.
- * 
+ *
  * @author David Spickers <david.spickers@jtl-software.de>
  */
 class Image extends BaseGroup
@@ -27,14 +27,14 @@ class Image extends BaseGroup
 
     /**
      * Creates the instance, parses the params and will look for relation types.
-     * 
+     *
      * If there is the entry with the key "relationTypes" inside of this array,
      * all relations will be extracted and saved in the _relation_types array.
-     * 
-     * @param array $params The features array entry of the image feature as 
+     *
+     * @param array $params The features array entry of the image feature as
      * reference.
      */
-    function __construct(array &$params)
+    public function __construct(array &$params)
     {
         $this->name = 'Image';
         if (array_key_exists(self::RELATIONS_KEY_NAME, $params)) {
@@ -45,12 +45,11 @@ class Image extends BaseGroup
 
     /**
      * Returns the relations.
-     * 
+     *
      * @return array
      */
     public function getRelations()
     {
         return $this->_relation_types;
     }
-
 }

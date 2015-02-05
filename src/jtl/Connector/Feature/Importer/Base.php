@@ -18,5 +18,4 @@ use \jtl\Connector\Feature\Importer\IImporter;
  */
 abstract class Base extends BaseClass implements IImporter
 {
-    
 }

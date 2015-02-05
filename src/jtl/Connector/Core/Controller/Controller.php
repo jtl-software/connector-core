@@ -13,7 +13,7 @@ use \jtl\Connector\Core\Rpc\Method;
 
 /**
  * Base Controller Class
- * 
+ *
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
@@ -25,7 +25,7 @@ abstract class Controller extends Singleton implements IController
     /**
      * Setter controller config.
      *
-     * @param \jtl\Connector\Core\Config\Config $config            
+     * @param \jtl\Connector\Core\Config\Config $config
      */
     public function setConfig(Config $config)
     {
@@ -49,7 +49,7 @@ abstract class Controller extends Singleton implements IController
     
     /**
      * Method Setter
-     * 
+     *
      * @param \jtl\Connector\Core\Rpc\Method $method
      * @return \jtl\Connector\Core\Controller\Controller
      */
@@ -61,7 +61,7 @@ abstract class Controller extends Singleton implements IController
     
     /**
      * Method Getter
-     * 
+     *
      * @return \jtl\Connector\Core\Rpc\Method
      */
     public function getMethod()

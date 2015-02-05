@@ -74,13 +74,14 @@ class Installer extends CoreApplication
             return '';
         }
 
-        if ($index > 1)
+        if ($index > 1) {
             return INSTALLER_BASE_URI . '/index.php/' . $index;
-        else
+        } else {
             return INSTALLER_BASE_URI . '/';
+        }
     }
 
-    protected final function runStep($index)
+    final protected function runStep($index)
     {
         $steps = $this->getInstallSteps();
 
@@ -97,17 +98,17 @@ class Installer extends CoreApplication
         $stepObject->run();
     }
     
-    public final function advance()
+    final public function advance()
     {
         header('Location: ' . $this->stepUrl($this->currentStep() + 1));
     }
 
-    public final function run()
+    final public function run()
     {
         $tmpDir = INSTALLER_DIR . '/../tmp';
         if (!@stat($tmpDir)) {
             mkdir($tmpDir);
-            chmod ($tmpDir, 0777);
+            chmod($tmpDir, 0777);
         }
         $tmpDir .= '/cache';
         if (!@stat($tmpDir)) {
@@ -147,7 +148,7 @@ class Installer extends CoreApplication
         ));
         static::$twig = new \Twig_Environment($tplLoader, array(
           'cache' => $tmpDir,
-		  'debug' => true,
+          'debug' => true,
           'auto_reload' => true
         ));
         static::$twig->addExtension(new \Twig_Extension_Debug());
@@ -163,8 +164,7 @@ class Installer extends CoreApplication
                 if (preg_match('/\/?([0-9]+)\/?/', $queryPath, $matches)) {
                     $step = $matches[1];
                     $this->_currentStep = intval($step);
-                }
-                else {
+                } else {
                     header('Location: ' . $this->stepUrl(1));
                 }
             }

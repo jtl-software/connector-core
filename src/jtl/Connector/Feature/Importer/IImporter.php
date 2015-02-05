@@ -9,7 +9,7 @@ namespace jtl\Connector\Feature\Importer;
 
 /**
  * Importer interface
- * 
+ *
  * @author David Spickers <david.spickers@jtl-software.de>
  */
 interface IImporter
@@ -17,7 +17,7 @@ interface IImporter
 
     /**
      * Imports the features array with the given importer.
-     * 
+     *
      * @return array The features array, in the following format:
      * array(
      *  'features' => array(

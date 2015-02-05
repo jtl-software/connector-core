@@ -18,7 +18,7 @@ class RpcMethod
 {
     /**
      * Method validation
-     * 
+     *
      * @param string $method
      * @return boolean
      */
@@ -38,7 +38,7 @@ class RpcMethod
     
     /**
      * Controller and Action Splitter
-     * 
+     *
      * @param string $method
      * @return \jtl\Connector\Core\Rpc\Method
      */
@@ -47,10 +47,9 @@ class RpcMethod
         $methodObj = new Method($method);
         
         if (strpos($method, "core.") !== false) {
-            list ($core, $controller, $action) = explode(".", $method);
-        }
-        else {
-            list ($controller, $action) = explode(".", $method);
+            list($core, $controller, $action) = explode(".", $method);
+        } else {
+            list($controller, $action) = explode(".", $method);
         }
         
         $methodObj->setController($controller)
@@ -61,7 +60,7 @@ class RpcMethod
     
     /**
      * Controller Name Builder
-     * 
+     *
      * @param string $controller
      * @return string
      */
@@ -72,7 +71,7 @@ class RpcMethod
 
     /**
      * Action Name Builder
-     * 
+     *
      * @param string $controller
      * @return string
      */
@@ -99,8 +98,7 @@ class RpcMethod
             }
             
             return $str;
-        }
-        else {
+        } else {
             return $isAction ? $str : ucfirst($str);
         }
     }

@@ -52,7 +52,7 @@ class RequestPacket extends Packet
     /**
      * Setter for $method
      *
-     * @param string $method            
+     * @param string $method
      * @return \jtl\Connector\Core\Rpc\Packet
      */
     public function setMethod($method)
@@ -126,7 +126,7 @@ class RequestPacket extends Packet
             try {
                 $serializer = \JMS\Serializer\SerializerBuilder::create()
                     ->addDefaultHandlers()
-                    ->configureHandlers(function(\JMS\Serializer\Handler\HandlerRegistry $registry) {
+                    ->configureHandlers(function (\JMS\Serializer\Handler\HandlerRegistry $registry) {
                         $registry->registerSubscribingHandler(new \jtl\Connector\Core\Serializer\Handler\JsonStringHandler());
                     })
                     ->build();
@@ -160,15 +160,12 @@ class RequestPacket extends Packet
                     throw new RpcException("Invalid Request", -32600);
                 }
                 */
-            }
-            catch (RpcException $exc) {
+            } catch (RpcException $exc) {
                 throw $exc;
-            }
-            catch (\Exception $exc) {
+            } catch (\Exception $exc) {
                 throw new RpcException("Parse error", -32700);
             }
-        }
-        else {
+        } else {
             throw new RpcException("Invalid Request", -32600);
         }
     }

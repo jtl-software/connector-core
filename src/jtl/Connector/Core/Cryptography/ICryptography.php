@@ -13,7 +13,7 @@ interface ICryptography
 {
     /**
      * Encrypt
-     * 
+     *
      * @param string $text
      */
     public function encrypt($text);

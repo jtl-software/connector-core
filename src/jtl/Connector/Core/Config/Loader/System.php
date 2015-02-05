@@ -13,10 +13,10 @@ use \jtl\Connector\Core\Http\Ssl;
 
 /**
  * System Loader Class
- * 
+ *
  * @access public
  * @author David Spickers <david.spickers@jtl-software.de>
- * 
+ *
  * @todo: 1. Windows load einbauen
  */
 class System extends BaseLoader
@@ -58,7 +58,7 @@ class System extends BaseLoader
 
     /**
      * Sets the operating system to the given value.
-     * 
+     *
      * @param string $os
      */
     public function setOs($os)
@@ -68,7 +68,7 @@ class System extends BaseLoader
 
     /**
      * Returns the first three characters of the operating system string.
-     * 
+     *
      * @return string
      */
     public function getOs()
@@ -78,7 +78,7 @@ class System extends BaseLoader
 
     /**
      * Returns the value for a given name.
-     * 
+     *
      * @param string $key Name of the required information.
      * @param mixed $default Default value if the command/name is not implemented yet.
      * @return mixed
@@ -125,7 +125,7 @@ class System extends BaseLoader
 
     /**
      * Returns the section php.
-     * 
+     *
      * @throws \RuntimeException
      */
     public function setSectionPhp()
@@ -153,7 +153,7 @@ class System extends BaseLoader
 
     /**
      * Returns the http section.
-     * 
+     *
      * @return array
      */
     public function setSectionHttp()
@@ -165,7 +165,7 @@ class System extends BaseLoader
 
     /**
      * Returns the section compression.
-     * 
+     *
      * @return array
      */
     public function setSectionCompression()
@@ -181,7 +181,7 @@ class System extends BaseLoader
 
     /**
      * Returns the server load.
-     * 
+     *
      * @param bool $use_average
      */
     public function setSectionLoad()
@@ -211,7 +211,7 @@ class System extends BaseLoader
     /**
      * Calculates memory strings into bytes.
      * Provided by http://php.net/manual/en/function.ini-get.php.
-     * 
+     *
      * @param string $v
      * @return integer
      */
@@ -229,5 +229,4 @@ class System extends BaseLoader
         }
         return (int) $v;
     }
-
 }

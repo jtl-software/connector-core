@@ -18,7 +18,7 @@ abstract class Model
     /**
      * Constructor
      *
-     * @param \stdClass $object            
+     * @param \stdClass $object
      */
     public function __construct(\stdClass $object = null)
     {
@@ -76,7 +76,7 @@ abstract class Model
     /**
      * Convert the Model into stdClass Object
      *
-     * @param array $publics            
+     * @param array $publics
      * @return stdClass $object
      */
     public function getPublic(array $publics = null)
@@ -85,7 +85,7 @@ abstract class Model
         
         $members = array_keys(get_object_vars($this));
         if (is_array($members) && count($members) > 0) {
-            if ($publics === null){
+            if ($publics === null) {
                 $publics = array();
             }
 

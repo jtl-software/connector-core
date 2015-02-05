@@ -8,7 +8,7 @@ namespace jtl\Connector\Core\Exception;
 
 /**
  * RPC Exception Class
- * 
+ *
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */

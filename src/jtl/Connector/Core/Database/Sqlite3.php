@@ -53,7 +53,7 @@ class Sqlite3 implements IDatabase
     
     /**
      * (non-PHPdoc)
-     * 
+     *
      * @see \jtl\Connector\Core\Database\IDatabase::connect()
      * @throws \jtl\Connector\Core\Exception\DatabaseException
      */
@@ -90,7 +90,7 @@ class Sqlite3 implements IDatabase
 
     /**
      * (non-PHPdoc)
-     * 
+     *
      * @see \jtl\Connector\Core\Database\IDatabase::close()
      */
     public function close()
@@ -100,7 +100,7 @@ class Sqlite3 implements IDatabase
 
     /**
      * (non-PHPdoc)
-     * 
+     *
      * @see \jtl\Connector\Core\Database\IDatabase::query()
      */
     public function query($query)
@@ -123,7 +123,7 @@ class Sqlite3 implements IDatabase
     
     /**
      * Prepares an SQL statement for execution
-     * 
+     *
      * @param string $query
      * @return SQLite3Stmt|boolean Returns an SQLite3Stmt object on success or FALSE on failure.
      */
@@ -134,13 +134,13 @@ class Sqlite3 implements IDatabase
     
     /**
      * Sqlite Select
-     * 
+     *
      * @param string $query
      * @return multitype:array |NULL
      */
     protected function fetch($query)
     {
-        while(true) {
+        while (true) {
             $result = @$this->db->query($query);
             if ($result instanceof \SQLite3Result) {
                 $rows = array();
@@ -158,7 +158,6 @@ class Sqlite3 implements IDatabase
                         return null;
                 }
             }
-
         };
         
         return null;
@@ -166,7 +165,7 @@ class Sqlite3 implements IDatabase
     
     /**
      * Sqlite Update or Delete
-     * 
+     *
      * @param string $query
      * @return boolean
      */
@@ -177,7 +176,7 @@ class Sqlite3 implements IDatabase
     
     /**
      * Sqlite Insert
-     * 
+     *
      * @param string $query
      * @return number|boolean
      */
@@ -193,7 +192,7 @@ class Sqlite3 implements IDatabase
     /**
      * Executes a result-less query against a given database
      *
-     * @param string $query            
+     * @param string $query
      */
     public function exec($query)
     {
@@ -202,7 +201,7 @@ class Sqlite3 implements IDatabase
 
     /**
      * (non-PHPdoc)
-     * 
+     *
      * @see \jtl\Connector\Core\Database\IDatabase::isConnected()
      */
     public function isConnected()
@@ -213,7 +212,7 @@ class Sqlite3 implements IDatabase
     /**
      * Set Options
      *
-     * @param array $options            
+     * @param array $options
      */
     public function setOptions(array $options = null)
     {
@@ -234,7 +233,7 @@ class Sqlite3 implements IDatabase
      * (non-PHPdoc)
      * @see \jtl\Connector\Core\Database\IDatabase::escapeString()
      */
-    public function escapeString($query) 
+    public function escapeString($query)
     {
         return \Sqlite3::escapeString($query);
     }

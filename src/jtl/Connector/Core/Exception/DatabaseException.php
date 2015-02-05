@@ -8,7 +8,7 @@ namespace jtl\Connector\Core\Exception;
 
 /**
  * Database Exception Class
- * 
+ *
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */

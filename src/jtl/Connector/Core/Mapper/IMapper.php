@@ -17,7 +17,7 @@ interface IMapper
 {
     /**
      * Save
-     * 
+     *
      * @param \jtl\Connector\Core\Model\DataModel $model
      * @return boolean
      */
@@ -25,7 +25,7 @@ interface IMapper
     
     /**
      * Delete
-     * 
+     *
      * @param \jtl\Connector\Core\Model\DataModel $model
      * @return boolean
      */
@@ -33,7 +33,7 @@ interface IMapper
     
     /**
      * Fetching a single Row
-     * 
+     *
      * @param array $kvs
      * @return \stdClass
      */
@@ -41,7 +41,7 @@ interface IMapper
 
     /**
      * Fetching multiple Rows
-     * 
+     *
      * @param array $kvs
      * @return multiple: \stdClass
      */
@@ -49,7 +49,7 @@ interface IMapper
     
     /**
      * Fetching multiple Rows
-     * 
+     *
      * @param \jtl\Connector\Model\QueryFilter $filter
      * @return multiple: \stdClass
      */
@@ -57,7 +57,7 @@ interface IMapper
 
     /**
      * Fetching a single count
-     * 
+     *
      * @param \jtl\Connector\Model\QueryFilter $filter
      * @return integer
      */

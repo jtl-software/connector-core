@@ -35,14 +35,14 @@ class Mysql implements IDatabase
     
     /**
      * Database Singleton
-     * 
+     *
      * @var \jtl\Connector\Core\Database\Mysql
      */
     protected static $_instance;
     
     /**
      * Mysql Result
-     * 
+     *
      * @var \jtl\Connector\Core\Result\Mysql
      */
     public $mysqlResult;
@@ -82,14 +82,14 @@ class Mysql implements IDatabase
     /**
      * Constructor
      */
-    private function __construct() 
-    { 
+    private function __construct()
+    {
         $this->mysqlResult = new MysqlResult();
     }
     
     /**
      * Singleton
-     * 
+     *
      * @return \jtl\Connector\Core\Database\Mysql
      */
     public static function getInstance()
@@ -151,7 +151,7 @@ class Mysql implements IDatabase
     
     /**
      * Turns on or off auto-committing database modifications
-     * 
+     *
      * @param boolean $mode
      * @return boolean
      */
@@ -162,7 +162,7 @@ class Mysql implements IDatabase
     
     /**
      * Performs a query on the database
-     * 
+     *
      * @param string $query
      * @return mixed
      */
@@ -173,7 +173,7 @@ class Mysql implements IDatabase
     
     /**
      * Commits the current transaction
-     * 
+     *
      * @return boolean
      */
     public function commit()
@@ -183,7 +183,7 @@ class Mysql implements IDatabase
     
     /**
      * Rolls back current transaction
-     * 
+     *
      * @return boolean
      */
     public function rollback()
@@ -193,7 +193,7 @@ class Mysql implements IDatabase
     
     /**
      * Prepare an SQL statement for execution
-     * 
+     *
      * @return \mysqli_stmt|boolean
      */
     public function prepare()
@@ -202,7 +202,7 @@ class Mysql implements IDatabase
     }
 
     /**
-     * Returns the mysqli object 
+     * Returns the mysqli object
      *
      * @return \mysqli
      */
@@ -230,8 +230,9 @@ class Mysql implements IDatabase
             case "SELECT":
                 $this->mysqlResult->setType(MysqlResult::TYPE_SELECT);
                 $return = "assoc";
-                if (is_array($options) && isset($options["return"]))
+                if (is_array($options) && isset($options["return"])) {
                     $return = $options["return"];
+                }
 
                 $return = $this->_fetch($query, $return);
                 $this->mysqlResult->setErrno($this->_db->errno)->setError($this->_db->error);
@@ -254,8 +255,9 @@ class Mysql implements IDatabase
             case "SHOW":
                 $this->mysqlResult->setType(MysqlResult::TYPE_SHOW);
                 $return = "assoc";
-                if (is_array($options) && isset($options["return"]))
+                if (is_array($options) && isset($options["return"])) {
                     $return = $options["return"];
+                }
                 
                 $return = $this->_fetch($query, $return);
                 $this->mysqlResult->setErrno($this->_db->errno)->setError($this->_db->error);
@@ -359,7 +361,7 @@ class Mysql implements IDatabase
     /**
      * Set Options
      *
-     * @param array $options            
+     * @param array $options
      */
     public function setOptions(array $options = null)
     {
@@ -388,17 +390,17 @@ class Mysql implements IDatabase
     
     /**
      * (non-PHPdoc)
-     * 
+     *
      * @see \jtl\Connector\Core\Database\IDatabase::escapeString()
      */
     public function escapeString($query)
-    {        
+    {
         return $this->_db->real_escape_string($query);
     }
     
     /**
      * Insert Row
-     * 
+     *
      * @param object $obj
      * @param string $table
      * @param array $ignores
@@ -416,7 +418,7 @@ class Mysql implements IDatabase
             $value = "";
     
             $members = array_keys(get_object_vars($obj));
-            if(is_array($members) && count($members) > 0) {
+            if (is_array($members) && count($members) > 0) {
                 foreach ($members as $member) {
                     if ($ignores !== null && is_array($ignores) && count($ignores) > 0) {
                         if (in_array($member, $ignores)) {
@@ -459,7 +461,7 @@ class Mysql implements IDatabase
     
     /**
      * Update Row
-     * 
+     *
      * @param object $obj
      * @param string $table
      * @param string|array $key
@@ -476,7 +478,7 @@ class Mysql implements IDatabase
         if (is_object($obj) && strlen($table) > 0) {
             if ((is_array($key) && is_array($value)) || (strlen($key) > 0 && strlen($value) > 0)) {
                 $query = "UPDATE " . $this->escapeString($table) . " SET ";
-                	
+                    
                 $sets = array();
                 $membervalue = "";
                 
@@ -500,7 +502,7 @@ class Mysql implements IDatabase
                     }
     
                     $query .= implode(', ', $sets);
-                    	
+                        
                     if (is_array($key) && is_array($value)) {
                         if (count($key) == count($value)) {
                             foreach ($key as $i => $keyStr) {
@@ -548,7 +550,7 @@ class Mysql implements IDatabase
     
     /**
      * Delete Row
-     * 
+     *
      * @param object $obj
      * @param string $table
      * @param string|array $key
@@ -570,8 +572,7 @@ class Mysql implements IDatabase
                         foreach ($key as $i => $keyStr) {
                             if ($i > 0) {
                                 $query .= " AND {$keyStr} = '" . $this->escapeString($value[$i]) . "'";
-                            }
-                            else {
+                            } else {
                                 $query .= " WHERE {$keyStr} = '" . $this->escapeString($value[$i]) . "'";
                             }
                         }
@@ -609,7 +610,7 @@ class Mysql implements IDatabase
     
     /**
      * Delete Insert Row
-     * 
+     *
      * @param object $obj
      * @param string $table
      * @param string|array $key
@@ -618,7 +619,7 @@ class Mysql implements IDatabase
      * @return \jtl\Connector\Core\Result\Mysql
      */
     public function deleteInsertRow($obj, $table, $key, $value, array $ignores = null)
-    {        
+    {
         $this->deleteRow($obj, $table, $key, $value);
         
         $result = $this->insertRow($obj, $table);
@@ -629,7 +630,7 @@ class Mysql implements IDatabase
 
     /**
      * Name Set Support
-     * 
+     *
      * @param string $encoding
      */
     public function setCharset($encoding = 'utf8')
@@ -639,7 +640,7 @@ class Mysql implements IDatabase
 
     /**
      * Character Set Support
-     * 
+     *
      * @param string $encoding
      */
     public function setNames($encoding = 'utf8')

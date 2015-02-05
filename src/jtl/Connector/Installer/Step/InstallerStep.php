@@ -20,21 +20,21 @@ abstract class InstallerStep
     
     /**
      * Template data;
-     * 
+     *
      * @var array
      */
     private $_data = array();
     
     /**
      * Installer object
-     * 
-     * @var \jtl\Connector\Installer\Installer 
+     *
+     * @var \jtl\Connector\Installer\Installer
      */
     protected $_installer = null;
     
     /**
      * Setter method for the template parameters
-     * 
+     *
      * @param string $key
      * @param mixed $value
      */
@@ -45,12 +45,12 @@ abstract class InstallerStep
     
     /**
      * Delete method for template parameters
-     * 
+     *
      * @param string $key
      */
     protected function deleteParameter($key)
     {
-        unset ($this->_data[$key]);
+        unset($this->_data[$key]);
     }
     
     public function __construct(Installer $installer)
@@ -60,7 +60,7 @@ abstract class InstallerStep
     
     /**
      * Executes the current step
-     * 
+     *
      * @return type
      */
     public function run()

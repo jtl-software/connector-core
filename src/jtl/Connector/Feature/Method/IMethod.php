@@ -9,7 +9,7 @@ namespace jtl\Connector\Feature\Method;
 
 /**
  * Method interface
- * 
+ *
  * @author David Spickers <david.spickers@jtl-software.de>
  */
 interface IMethod
@@ -17,7 +17,7 @@ interface IMethod
 
     /**
      * Returns the name of a method.
-     * 
+     *
      * @return string
      */
     public function getName();

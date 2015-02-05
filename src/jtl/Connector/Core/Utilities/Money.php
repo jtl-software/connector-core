@@ -8,7 +8,9 @@ namespace jtl\Connector\Core\Utilities;
 
 class Money
 {
-    private function __construct() { }
+    private function __construct()
+    {
+    }
 
     public static function AsGross($net, $vat)
     {

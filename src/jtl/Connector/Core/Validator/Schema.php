@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
@@ -18,21 +18,21 @@ class Schema
 {
     /**
      * Schema file_exists
-     * 
+     *
      * @var mixed
      */
     protected static $_schemaexists = array();
     
     /**
      * Json Schema Classes
-     * 
+     *
      * @var multiple:\jtl\Connector\Core\Validator\Json
      */
     protected static $_jsons = array();
     
     /**
      * Action Validation
-     * 
+     *
      * @param string $schemafile
      * @param mixed $params
      * @throws ValidationException
@@ -47,18 +47,17 @@ class Schema
     
     /**
      * Model Validation
-     * 
+     *
      * @throws \jtl\Connector\Core\Exception\SchemaException
      */
-    public static function validateModel($schemafile, $obj) 
+    public static function validateModel($schemafile, $obj)
     {
         if (self::schemaExists($schemafile)) {
             $json = self::getJson($schemafile);
             
             try {
                 $json->validate($obj);
-            }
-            catch (ValidationException $exc) {
+            } catch (ValidationException $exc) {
                 throw new SchemaException($exc->getMessage(), $exc->getCode());
             }
         }
@@ -66,7 +65,7 @@ class Schema
     
     /**
      * Checks whether a schema file exists
-     * 
+     *
      * @param string $schemafile
      * @return boolean
      */
@@ -81,7 +80,7 @@ class Schema
     
     /**
      * Singleton Json Schema Class
-     * 
+     *
      * @param string $schemafile
      * @return \jtl\Connector\Core\Validator\Json
      */

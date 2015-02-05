@@ -32,13 +32,13 @@ abstract class Base extends BaseClass implements IMethod
 
     /**
      * Create the instance of your extended method.
-     * 
+     *
      * @param string $name The name of your method.
-     * @param boolean $supported If the method fulfill itself, it will be 
+     * @param boolean $supported If the method fulfill itself, it will be
      * true. Otherwise the supported flag will be false.
      * @param string $comment A comment about the extended method.
      */
-    function __construct($name, $supported = false, $comment = '')
+    public function __construct($name, $supported = false, $comment = '')
     {
         $this->name = $name;
         $this->supported = $supported;
@@ -47,12 +47,11 @@ abstract class Base extends BaseClass implements IMethod
 
     /**
      * Returns if the method is supported.
-     * 
+     *
      * @return boolean
      */
     public function isSupported()
     {
         return $this->supported;
     }
-
 }

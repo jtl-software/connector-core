@@ -20,35 +20,35 @@ class Tool
     /**
      * @var boolean
      */
-    static public $test = false;
+    public static $test = false;
 
     /**
      * @var boolean
      */
-    static public $ret_is_file = false;
+    public static $ret_is_file = false;
 
     /**
      * @var boolean
      */
-    static public $ret_is_writable = false;
+    public static $ret_is_writable = false;
 
     /**
      * Return value of file_get_content (only for unit testing)
      * @var mixed
      */
-    static public $ret_file_get_content = null;
+    public static $ret_file_get_content = null;
 
     /**
      * Return value of file_put_content (only for unit testing)
      * @var mixed
      */
-    static public $ret_file_put_content = null;
+    public static $ret_file_put_content = null;
 
     /**
      * This method is a wrapper for the native file_get_contents function.
-     * 
+     *
      * @see file_get_contents()
-     * 
+     *
      * @param string $filename
      * @param boolean $use_include_path
      * @param resource $context
@@ -63,17 +63,16 @@ class Tool
         }
         if (is_integer($maxlen) && $maxlen > 0) {
             return file_get_contents($filename, $use_include_path, $context, $offset, $maxlen);
-        }
-        else {
+        } else {
             return file_get_contents($filename, $use_include_path, $context, $offset);
         }
     }
 
     /**
      * This method is a wrapper for the native file_put_content function.
-     * 
+     *
      * @see file_put_contents()
-     * 
+     *
      * @param string $filename
      * @param mixed $data
      * @param integer $flags
@@ -90,7 +89,7 @@ class Tool
 
     /**
      * This method is a wrapper for the native is_file function.
-     * 
+     *
      * @param string $filename
      * @return bool
      */
@@ -104,7 +103,7 @@ class Tool
 
     /**
      * This method is a wrapper for the native is_writable function.
-     * 
+     *
      * @param string $file
      * @return bool
      */
@@ -115,5 +114,4 @@ class Tool
         }
         return is_writable($file);
     }
-
 }

@@ -13,4 +13,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-class JsonString { }
+class JsonString
+{
+}

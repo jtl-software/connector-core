@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Core\Compression
@@ -10,7 +10,7 @@ use \jtl\Connector\Core\Exception\CompressionException;
 
 /**
  * Gzip Compression
- * 
+ *
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
@@ -56,5 +56,7 @@ class Gzip implements ICompression
      * (non-PHPdoc)
      * @see \jtl\Connector\Core\Compression\ICompression::write()
      */
-    public function write($filename, $content) { }
+    public function write($filename, $content)
+    {
+    }
 }

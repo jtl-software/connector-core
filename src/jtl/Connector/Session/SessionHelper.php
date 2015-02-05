@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Session
@@ -14,7 +14,7 @@ class SessionHelper
     
     /**
      * Constructor
-     * 
+     *
      * @param string $namespace
      * @throws \jtl\Connector\Core\Exception\SessionException
      */
@@ -37,13 +37,13 @@ class SessionHelper
     
     /**
      * Magic Set
-     * 
+     *
      * @param string $name
      * @param mixed $value
      * @throws \jtl\Connector\Core\Exception\SessionException
      */
     public function __set($name, $value)
-    {        
+    {
         if ($name === null || $name === "") {
             throw new SessionException("The '{$name}' key must be a non-empty string");
         }
@@ -54,13 +54,13 @@ class SessionHelper
     
     /**
      * Magic Get
-     * 
+     *
      * @param string $name
      * @throws \jtl\Connector\Core\Exception\SessionException
      * @return NULL
      */
     public function & __get($name)
-    {        
+    {
         if ($name === null || $name === "") {
             throw new SessionException("The '{$name}' key must be a non-empty string");
         }
@@ -75,7 +75,7 @@ class SessionHelper
     
     /**
      * Magic Isset
-     * 
+     *
      * @param string $name
      * @throws \jtl\Connector\Core\Exception\SessionException
      */

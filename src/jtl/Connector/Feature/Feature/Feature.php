@@ -17,5 +17,4 @@ use \jtl\Connector\Feature\Feature\Base as BaseFeature;
  */
 class Feature extends BaseFeature
 {
-    
 }

@@ -13,7 +13,7 @@ use \jtl\Connector\Core\Serializer\Json as SerializerJson;
 
 /**
  * Json importer class
- * 
+ *
  * @access public
  * @author David Spickers <david.spickers@jtl-software.de>
  */
@@ -32,19 +32,19 @@ class Json extends BaseImporter
 
     /**
      * Creates the instance.
-     * 
+     *
      * @param string $file The full filename of a JSON file that will be read
      * inside of the load method.
      */
-    function __construct($json_file)
+    public function __construct($json_file)
     {
         $this->file = $json_file;
     }
 
     /**
-     * Reads the feature file defined in the constructor and uses the JSON 
+     * Reads the feature file defined in the constructor and uses the JSON
      * serializer to return all datas as associative array.
-     * 
+     *
      * @return array
      * @throws ExceptionImporter
      */
@@ -57,5 +57,4 @@ class Json extends BaseImporter
         }
         return SerializerJson::decode($content, true);
     }
-
 }

@@ -21,7 +21,7 @@ class Ssl
      * Returns if the connector is actually using the ssl encryption.
      * @return type
      */
-    static public function isEnabled()
+    public static function isEnabled()
     {
         $srv = (isset($_SERVER)) ? $_SERVER : array();
         $https = array();
@@ -40,5 +40,4 @@ class Ssl
 
         return $enabled;
     }
-
 }

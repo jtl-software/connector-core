@@ -11,10 +11,9 @@ use \jtl\Connector\Feature\Group\Base as BaseGroup;
 
 /**
  * Standard group class
- * 
+ *
  * @author David Spickers <david.spickers@jtl-software.de>
  */
 class Standard extends BaseGroup
 {
-    
 }

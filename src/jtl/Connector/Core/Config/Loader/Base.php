@@ -30,7 +30,7 @@ abstract class Base implements ILoader
 
     /**
      * Returns the Loader name.
-     * 
+     *
      * @return string
      */
     public function getName()
@@ -40,7 +40,7 @@ abstract class Base implements ILoader
 
     /**
      * Checks if a method exists in a loader and calls it.
-     * 
+     *
      * @param string $name The name of the method that will be triggered.
      * @return mixed The return value of the method triggered.
      */
@@ -64,7 +64,7 @@ abstract class Base implements ILoader
 
     /**
      * Returns if the Loader can write to the configuration.
-     * 
+     *
      * @return bool
      */
     public function isWriteable()
@@ -74,7 +74,7 @@ abstract class Base implements ILoader
 
     /**
      * Returns a defined key.
-     * 
+     *
      * @param string $key Should be a key inside of the data array.
      * @return mixed
      */
@@ -82,8 +82,7 @@ abstract class Base implements ILoader
     {
         if (is_array($this->data) && array_key_exists($key, $this->data)) {
             return $this->data[$key];
-        }
-        elseif (empty($key) || $key == null) {
+        } elseif (empty($key) || $key == null) {
             return $this->data;
         }
         return $default;
@@ -91,7 +90,7 @@ abstract class Base implements ILoader
 
     /**
      * Reads N keys from the data array.
-     * 
+     *
      * @param array $values The values array
      * @return array
      */
@@ -108,7 +107,7 @@ abstract class Base implements ILoader
 
     /**
      * Writes the configuration.
-     * 
+     *
      * @param string $key
      * @param mixed $value
      * @return boolean
@@ -133,7 +132,7 @@ abstract class Base implements ILoader
 
     /**
      * Writes N values in the configuration.
-     * 
+     *
      * @param array $values The key/string combination array
      */
     public function writes($values = array())
@@ -149,7 +148,7 @@ abstract class Base implements ILoader
 
     /**
      * Dynamically returning all class constants supported.
-     * 
+     *
      * @param string $prefix
      * @param bool $only_keys
      * @param int $char_len
@@ -173,5 +172,4 @@ abstract class Base implements ILoader
         }
         return $consts;
     }
-
 }

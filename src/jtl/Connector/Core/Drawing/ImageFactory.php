@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Core\Drawing
@@ -12,7 +12,7 @@ class ImageFactory
 {
     /**
      * Starts a new Image object
-     * 
+     *
      * @param string $filepath
      * @throws \jtl\Connector\Core\Exception\DrawingException
      * @return \jtl\Connector\Core\Drawing\ImageIm|\jtl\Connector\Core\Drawing\ImageGd

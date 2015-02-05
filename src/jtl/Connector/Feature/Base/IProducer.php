@@ -13,7 +13,7 @@ use \jtl\Connector\Feature\Manager;
 
 /**
  * Producer interface
- * 
+ *
  * @author David Spickers <david.spickers@jtl-software.de>
  */
 interface IProducer

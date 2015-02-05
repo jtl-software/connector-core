@@ -21,8 +21,8 @@ class Request
     /**
      * Http Request Getter
      *
-     * @param string $method            
-     * @param string $root            
+     * @param string $method
+     * @param string $root
      * @return Ambiguous <NULL, string>
      * @throws \jtl\Connector\Core\Exception\HttpException
      */
@@ -46,7 +46,7 @@ class Request
     
     /**
      * Returns Http Request method
-     * 
+     *
      * @return string
      */
     public static function getMethod()
@@ -56,7 +56,7 @@ class Request
     
     /**
      * Http Request Check
-     * 
+     *
      * @param string $method
      * @param string $root
      * @return boolean
@@ -79,7 +79,7 @@ class Request
     
     /**
      * Tells whether the file was uploaded via HTTP POST
-     * 
+     *
      * @param string $name
      * @return boolean
      */
@@ -90,7 +90,7 @@ class Request
     
     /**
      * Moves an uploaded file to a new location
-     * 
+     *
      * @param string $name
      * @param string $path
      * @param string $filename
@@ -103,7 +103,7 @@ class Request
     
     /**
      * Checks get_magic_quotes_gpc
-     * 
+     *
      * @param string $data
      * @return string
      */
@@ -118,7 +118,7 @@ class Request
     
     /**
      * File Upload Handler
-     * 
+     *
      * @param string $name
      * @throws HttpException
      * @return string|NULL
@@ -147,12 +147,10 @@ class Request
 
                 if (Request::moveFileupload($path, $filename, $name)) {
                     return "{$path}{$filename}";
-                }
-                else {
+                } else {
                     throw new HttpException("Could not write file to tmp dir");
                 }
-            }
-            else {
+            } else {
                 throw new HttpException("Could not determine the file extension");
             }
         }
@@ -176,19 +174,18 @@ class Request
     
     /**
      * Main HTTP Handler
-     * 
+     *
      * @throws CompressionException
      * @throws HttpException
      * @return string|null
      */
-    public static function handle() 
+    public static function handle()
     {
         $jtlrpc = Request::get();
 
         if ($jtlrpc !== null) {
             return Request::stripData($jtlrpc);
-        }
-        elseif (Request::isFileupload()) {
+        } elseif (Request::isFileupload()) {
             $filename = uniqid() . ".zip";
             //$path = APP_DIR . '/../tmp/';
             $path = sys_get_temp_dir();
@@ -202,14 +199,12 @@ class Request
                     @unlink($path . $filename);
         
                     return $jtlrpc;
-                }
-                catch (CompressionException $exc) {
+                } catch (CompressionException $exc) {
                     @unlink($path . $filename);
                     
                     throw $exc;
                 }
-            }
-            else {
+            } else {
                 throw new HttpException("Could not write file to tmp dir");
             }
         } else {
@@ -223,7 +218,7 @@ class Request
     
     /**
      * Session HTTP Getter
-     * 
+     *
      * @return string|NULL
      */
     public static function getSession()

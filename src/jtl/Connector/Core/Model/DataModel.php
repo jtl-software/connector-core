@@ -28,7 +28,7 @@ abstract class DataModel extends Model
 
     /**
      * Fields Getter
-     * 
+     *
      * @return mixed:string
      */
     public function getFields()
@@ -50,13 +50,13 @@ abstract class DataModel extends Model
     
     /**
      * Get a Model Member Name
-     * 
+     *
      * @param boolean $toWawi
      * @param string $key
      * @return mixed:string|NULL
      */
     public function getField($toWawi = false, $key)
-    {        
+    {
         if ($this->fields !== null && is_array($this->fields)) {
             $fields = $this->fields;
             if (!$toWawi) {
@@ -73,7 +73,7 @@ abstract class DataModel extends Model
 
     /**
      * Object Mapping
-     * 
+     *
      * @param boolean $toWawi
      */
     public function map($toWawi = false, \stdClass $obj = null)

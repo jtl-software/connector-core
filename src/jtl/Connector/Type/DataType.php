@@ -23,7 +23,7 @@ abstract class DataType
     private $_propertyInfo = null;
 
     /**
-     * Returns all the public properties of the current Type. 
+     * Returns all the public properties of the current Type.
      *
      * @return jtl\Connector\Type\PropertyInfo
      */
@@ -54,5 +54,5 @@ abstract class DataType
     }
     
     abstract protected function loadProperties();
-	abstract public function isMain();
+    abstract public function isMain();
 }

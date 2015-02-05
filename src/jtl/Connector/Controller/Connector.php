@@ -73,7 +73,7 @@ class Connector extends CoreController
     
     /**
      * Returns the connector features.
-     * 
+     *
      * @param mixed $params Can be empty or not defined and a string.
      */
     public function features($params = null)
@@ -98,7 +98,7 @@ class Connector extends CoreController
 
     /**
      * Ack Identity Mappings
-     * 
+     *
      * @param mixed $params empty or ack json string.
      */
     public function ack($params = null)
@@ -107,7 +107,7 @@ class Connector extends CoreController
         try {
             $serializer = \JMS\Serializer\SerializerBuilder::create()
                 ->addDefaultHandlers()
-                ->configureHandlers(function(\JMS\Serializer\Handler\HandlerRegistry $registry) {
+                ->configureHandlers(function (\JMS\Serializer\Handler\HandlerRegistry $registry) {
                     $registry->registerSubscribingHandler(new \jtl\Connector\Serializer\Handler\IdentityHandler());
                 })
                 ->build();
@@ -165,7 +165,7 @@ class Connector extends CoreController
 
     /**
      * Returns the connector auth action
-     * 
+     *
      * @param mixed $params
      * @return \jtl\Connector\Result\Action
      */

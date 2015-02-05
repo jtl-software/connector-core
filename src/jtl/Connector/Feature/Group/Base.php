@@ -12,7 +12,7 @@ use \jtl\Connector\Feature\Base\Base as BaseClass;
 
 /**
  * Basic group class.
- * 
+ *
  * @author David Spickers <david.spickers@jtl-software.de>
  */
 abstract class Base extends BaseClass implements IGroup
@@ -25,7 +25,7 @@ abstract class Base extends BaseClass implements IGroup
 
     /**
      * Adds a children to the group.
-     * 
+     *
      * @param mixed $children A children of a group.
      */
     public function addChildren($children)
@@ -35,7 +35,7 @@ abstract class Base extends BaseClass implements IGroup
 
     /**
      * Returns all children as array.
-     * 
+     *
      * @return array Returns the full array with childrens, stored in this group.
      */
     public function getChildrens()
@@ -45,7 +45,7 @@ abstract class Base extends BaseClass implements IGroup
 
     /**
      * Returns if the Group has children.
-     * 
+     *
      * @return boolean If the group has children it will be TRUE, otherwhise
      * FALSE.
      */
@@ -53,5 +53,4 @@ abstract class Base extends BaseClass implements IGroup
     {
         return !empty($this->_children);
     }
-
 }

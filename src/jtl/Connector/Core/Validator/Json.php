@@ -14,8 +14,8 @@
  * EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
  * OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE. 
- * 
+ * DEALINGS IN THE SOFTWARE.
+ *
  * @package jtl\Connector\Core\Validator
  */
 namespace jtl\Connector\Core\Validator;
@@ -51,7 +51,7 @@ class Json
     /**
      * Initialize validation object
      *
-     * @param string $schemaFile            
+     * @param string $schemaFile
      */
     public function __construct($schemaFile)
     {
@@ -72,8 +72,8 @@ class Json
     /**
      * Validate schema object
      *
-     * @param mixed $entity            
-     * @param string $entityName            
+     * @param mixed $entity
+     * @param string $entityName
      *
      * @return Json
      */
@@ -90,9 +90,9 @@ class Json
     /**
      * Check format restriction
      *
-     * @param mixed $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param mixed $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -176,9 +176,9 @@ class Json
     /**
      * Validate object properties
      *
-     * @param object $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param object $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -198,8 +198,7 @@ class Json
                 // Check type
                 $path = $entityName . '.' . $propertyName;
                 $this->validateType($entity->{$propertyName}, $property, $path);
-            }
-            else {
+            } else {
                 // Check required
                 if (isset($property->required) && $property->required) {
                     throw new ValidationException(sprintf('Missing required property [%s] for [%s]', $propertyName, $entityName));
@@ -221,9 +220,9 @@ class Json
     /**
      * Validate entity type
      *
-     * @param mixed $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param mixed $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -231,8 +230,7 @@ class Json
     {
         if (isset($schema->type)) {
             $types = $schema->type;
-        }
-        else {
+        } else {
             $types = 'any';
             // throw new ValidationException(sprintf('No type given for [%s]',
         // $entityName));
@@ -311,9 +309,9 @@ class Json
     /**
      * Check object type
      *
-     * @param mixed $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param mixed $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -327,9 +325,9 @@ class Json
     /**
      * Check number type
      *
-     * @param mixed $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param mixed $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -350,9 +348,9 @@ class Json
     /**
      * Check integer type
      *
-     * @param mixed $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param mixed $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -373,9 +371,9 @@ class Json
     /**
      * Check boolean type
      *
-     * @param mixed $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param mixed $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -387,9 +385,9 @@ class Json
     /**
      * Check string type
      *
-     * @param mixed $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param mixed $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -408,9 +406,9 @@ class Json
     /**
      * Check array type
      *
-     * @param mixed $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param mixed $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -429,9 +427,9 @@ class Json
     /**
      * Check null type
      *
-     * @param mixed $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param mixed $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -443,9 +441,9 @@ class Json
     /**
      * Check any type
      *
-     * @param mixed $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param mixed $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -459,9 +457,9 @@ class Json
     /**
      * Check minimum value
      *
-     * @param int|float $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param int|float $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -479,9 +477,9 @@ class Json
     /**
      * Check maximum value
      *
-     * @param int|float $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param int|float $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -499,9 +497,9 @@ class Json
     /**
      * Check exlusive minimum requirement
      *
-     * @param int|float $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param int|float $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -519,9 +517,9 @@ class Json
     /**
      * Check exclusive maximum requirement
      *
-     * @param int|float $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param int|float $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -539,9 +537,9 @@ class Json
     /**
      * Check value against regex pattern
      *
-     * @param string $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param string $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -559,9 +557,9 @@ class Json
     /**
      * Check string minimum length
      *
-     * @param string $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param string $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -579,9 +577,9 @@ class Json
     /**
      * Check string maximum length
      *
-     * @param string $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param string $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -599,9 +597,9 @@ class Json
     /**
      * Check array minimum items
      *
-     * @param array $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param array $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -619,9 +617,9 @@ class Json
     /**
      * Check array maximum items
      *
-     * @param array $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param array $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -639,9 +637,9 @@ class Json
     /**
      * Check array unique items
      *
-     * @param array $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param array $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -659,9 +657,9 @@ class Json
     /**
      * Check enum restriction
      *
-     * @param array $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param array $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -678,8 +676,7 @@ class Json
                         $valid = false;
                     }
                 }
-            }
-            else {
+            } else {
                 if (!in_array($entity, $schema->enum)) {
                     $valid = false;
                 }
@@ -696,9 +693,9 @@ class Json
     /**
      * Check items restriction
      *
-     * @param array $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param array $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -717,30 +714,26 @@ class Json
                             $this->validateType($node, $item, $nodeEntityName);
                             // Pass
                             break;
-                        }
-                        catch (ValidationException $e) {
+                        } catch (ValidationException $e) {
                             $nodeValid = false;
                         }
                     }
                     
                     // If item did not pass any item validations
                     if (!$nodeValid) {
-                        $allowedTypes = array_map(function ($item)
-                        {
+                        $allowedTypes = array_map(function ($item) {
                             return $item->type == 'object' ? 'object (schema)' : $item->type;
                         }, $schema->items);
                         throw new ValidationException(sprintf('Invalid value for [%s], must be one of the following types: [%s]', $nodeEntityName, implode(', ', $allowedTypes)));
                     }
                 }
                 // Item restriction is a single schema
-            }
-            elseif (is_object($schema->items)) {
+            } elseif (is_object($schema->items)) {
                 foreach ($entity as $index => $node) {
                     $nodeEntityName = $entityName . '[' . $index . ']';
                     $this->validateType($node, $schema->items, $nodeEntityName);
                 }
-            }
-            else {
+            } else {
                 throw new SchemaException(sprintf('Invalid items value for [%s]', $entityName));
             }
         }
@@ -751,9 +744,9 @@ class Json
     /**
      * Check disallowed entity type
      *
-     * @param mixed $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param mixed $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
@@ -769,13 +762,11 @@ class Json
             try {
                 $valid = false;
                 $this->validateType($entity, $thisSchema, $entityName);
-            }
-            catch (ValidationException $e) {
+            } catch (ValidationException $e) {
                 $valid = true;
             }
             if (!$valid) {
-                $disallowedTypes = array_map(function ($item)
-                {
+                $disallowedTypes = array_map(function ($item) {
                     return is_object($item) ? 'object (schema)' : $item;
                 }, is_array($schema->disallow) ? $schema->disallow : array(
                         $schema->disallow
@@ -790,9 +781,9 @@ class Json
     /**
      * Check divisibleby restriction
      *
-     * @param int|float $entity            
-     * @param object $schema            
-     * @param string $entityName            
+     * @param int|float $entity
+     * @param object $schema
+     * @param string $entityName
      *
      * @return Json
      */
