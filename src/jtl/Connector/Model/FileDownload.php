@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class FileDownload extends DataModel
 {
-
     /**
      * @var Identity Unique fileDownload id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class FileDownload extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var DateTime Optional creation date
@@ -41,7 +37,6 @@ class FileDownload extends DataModel
      */
     protected $creationDate = null;
 
-
     /**
      * @var string Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class FileDownload extends DataModel
      * @Serializer\Accessor(getter="getMaxDays",setter="setMaxDays")
      */
     protected $maxDays = '';
-
 
     /**
      * @var string Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
@@ -59,7 +53,6 @@ class FileDownload extends DataModel
      */
     protected $maxDownloads = '';
 
-
     /**
      * @var string Path to download file
      * @Serializer\Type("string")
@@ -67,7 +60,6 @@ class FileDownload extends DataModel
      * @Serializer\Accessor(getter="getPath",setter="setPath")
      */
     protected $path = '';
-
 
     /**
      * @var string Optional path to preview file
@@ -77,7 +69,6 @@ class FileDownload extends DataModel
      */
     protected $previewPath = '';
 
-
     /**
      * @var string Optional sort number
      * @Serializer\Type("string")
@@ -85,7 +76,6 @@ class FileDownload extends DataModel
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = '';
-
 
     /**
      * @var jtl\Connector\Model\FileDownloadI18n[] 
@@ -95,13 +85,14 @@ class FileDownload extends DataModel
      */
     protected $i18ns = array();
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id Unique fileDownload id
      * @return \jtl\Connector\Model\FileDownload
@@ -119,8 +110,7 @@ class FileDownload extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param DateTime $creationDate Optional creation date
      * @return \jtl\Connector\Model\FileDownload
@@ -138,8 +128,7 @@ class FileDownload extends DataModel
     {
         return $this->creationDate;
     }
-	
- 
+
     /**
      * @param string $maxDays Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
      * @return \jtl\Connector\Model\FileDownload
@@ -156,8 +145,7 @@ class FileDownload extends DataModel
     {
         return $this->maxDays;
     }
-	
- 
+
     /**
      * @param string $maxDownloads Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
      * @return \jtl\Connector\Model\FileDownload
@@ -174,8 +162,7 @@ class FileDownload extends DataModel
     {
         return $this->maxDownloads;
     }
-	
- 
+
     /**
      * @param string $path Path to download file
      * @return \jtl\Connector\Model\FileDownload
@@ -192,8 +179,7 @@ class FileDownload extends DataModel
     {
         return $this->path;
     }
-	
- 
+
     /**
      * @param string $previewPath Optional path to preview file
      * @return \jtl\Connector\Model\FileDownload
@@ -210,8 +196,7 @@ class FileDownload extends DataModel
     {
         return $this->previewPath;
     }
-	
- 
+
     /**
      * @param string $sort Optional sort number
      * @return \jtl\Connector\Model\FileDownload
@@ -228,7 +213,6 @@ class FileDownload extends DataModel
     {
         return $this->sort;
     }
-
 
     /**
      * @param \jtl\Connector\Model\FileDownloadI18n $i18n
@@ -256,6 +240,4 @@ class FileDownload extends DataModel
         $this->i18ns = array();
         return $this;
     }
-
-
 }

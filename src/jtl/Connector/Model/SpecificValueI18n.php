@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class SpecificValueI18n extends DataModel
 {
-
     /**
      * @var Identity Reference to specificValue
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class SpecificValueI18n extends DataModel
      * @Serializer\Accessor(getter="getSpecificValueId",setter="setSpecificValueId")
      */
     protected $specificValueId = null;
-
 
     /**
      * @var string Optional localized description
@@ -41,7 +37,6 @@ class SpecificValueI18n extends DataModel
      */
     protected $description = '';
 
-
     /**
      * @var string locale
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class SpecificValueI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
 
     /**
      * @var string Optional localized meta description value
@@ -59,7 +53,6 @@ class SpecificValueI18n extends DataModel
      */
     protected $metaDescription = '';
 
-
     /**
      * @var string Optional localized meta keywords value
      * @Serializer\Type("string")
@@ -67,7 +60,6 @@ class SpecificValueI18n extends DataModel
      * @Serializer\Accessor(getter="getMetaKeywords",setter="setMetaKeywords")
      */
     protected $metaKeywords = '';
-
 
     /**
      * @var string Optional localized title tag value
@@ -77,7 +69,6 @@ class SpecificValueI18n extends DataModel
      */
     protected $titleTag = '';
 
-
     /**
      * @var string Optional localized URL path
      * @Serializer\Type("string")
@@ -85,7 +76,6 @@ class SpecificValueI18n extends DataModel
      * @Serializer\Accessor(getter="getUrlPath",setter="setUrlPath")
      */
     protected $urlPath = '';
-
 
     /**
      * @var string Localized value
@@ -95,13 +85,14 @@ class SpecificValueI18n extends DataModel
      */
     protected $value = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->specificValueId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $specificValueId Reference to specificValue
      * @return \jtl\Connector\Model\SpecificValueI18n
@@ -119,8 +110,7 @@ class SpecificValueI18n extends DataModel
     {
         return $this->specificValueId;
     }
-	
- 
+
     /**
      * @param string $description Optional localized description
      * @return \jtl\Connector\Model\SpecificValueI18n
@@ -137,8 +127,7 @@ class SpecificValueI18n extends DataModel
     {
         return $this->description;
     }
-	
- 
+
     /**
      * @param string $languageISO locale
      * @return \jtl\Connector\Model\SpecificValueI18n
@@ -155,8 +144,7 @@ class SpecificValueI18n extends DataModel
     {
         return $this->languageISO;
     }
-	
- 
+
     /**
      * @param string $metaDescription Optional localized meta description value
      * @return \jtl\Connector\Model\SpecificValueI18n
@@ -173,8 +161,7 @@ class SpecificValueI18n extends DataModel
     {
         return $this->metaDescription;
     }
-	
- 
+
     /**
      * @param string $metaKeywords Optional localized meta keywords value
      * @return \jtl\Connector\Model\SpecificValueI18n
@@ -191,8 +178,7 @@ class SpecificValueI18n extends DataModel
     {
         return $this->metaKeywords;
     }
-	
- 
+
     /**
      * @param string $titleTag Optional localized title tag value
      * @return \jtl\Connector\Model\SpecificValueI18n
@@ -209,8 +195,7 @@ class SpecificValueI18n extends DataModel
     {
         return $this->titleTag;
     }
-	
- 
+
     /**
      * @param string $urlPath Optional localized URL path
      * @return \jtl\Connector\Model\SpecificValueI18n
@@ -227,8 +212,7 @@ class SpecificValueI18n extends DataModel
     {
         return $this->urlPath;
     }
-	
- 
+
     /**
      * @param string $value Localized value
      * @return \jtl\Connector\Model\SpecificValueI18n
@@ -245,6 +229,4 @@ class SpecificValueI18n extends DataModel
     {
         return $this->value;
     }
-
-
 }

@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Product2Category extends DataModel
 {
-
     /**
      * @var Identity Reference to category
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class Product2Category extends DataModel
      * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
      */
     protected $categoryId = null;
-
 
     /**
      * @var Identity Unique product2Category id
@@ -41,7 +37,6 @@ class Product2Category extends DataModel
      */
     protected $id = null;
 
-
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -50,15 +45,16 @@ class Product2Category extends DataModel
      */
     protected $productId = null;
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
         $this->productId = new Identity();
         $this->categoryId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $categoryId Reference to category
      * @return \jtl\Connector\Model\Product2Category
@@ -76,8 +72,7 @@ class Product2Category extends DataModel
     {
         return $this->categoryId;
     }
-	
- 
+
     /**
      * @param Identity $id Unique product2Category id
      * @return \jtl\Connector\Model\Product2Category
@@ -95,8 +90,7 @@ class Product2Category extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\Product2Category
@@ -114,6 +108,4 @@ class Product2Category extends DataModel
     {
         return $this->productId;
     }
-
-
 }

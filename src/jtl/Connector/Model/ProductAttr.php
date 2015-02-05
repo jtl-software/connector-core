@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductAttr extends DataModel
 {
-
     /**
      * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class ProductAttr extends DataModel
      * @Serializer\Accessor(getter="getAttributeId",setter="setAttributeId")
      */
     protected $attributeId = null;
-
 
     /**
      * @var Identity 
@@ -41,7 +37,6 @@ class ProductAttr extends DataModel
      */
     protected $id = null;
 
-
     /**
      * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -49,7 +44,6 @@ class ProductAttr extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-
 
     /**
      * @var boolean 
@@ -59,7 +53,6 @@ class ProductAttr extends DataModel
      */
     protected $isTranslated = false;
 
-
     /**
      * @var jtl\Connector\Model\ProductAttrI18n[] 
      * @Serializer\Type("array<jtl\Connector\Model\ProductAttrI18n>")
@@ -68,15 +61,16 @@ class ProductAttr extends DataModel
      */
     protected $i18ns = array();
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
         $this->productId = new Identity();
         $this->attributeId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $attributeId 
      * @return \jtl\Connector\Model\ProductAttr
@@ -94,8 +88,7 @@ class ProductAttr extends DataModel
     {
         return $this->attributeId;
     }
-	
- 
+
     /**
      * @param Identity $id 
      * @return \jtl\Connector\Model\ProductAttr
@@ -113,8 +106,7 @@ class ProductAttr extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param Identity $productId 
      * @return \jtl\Connector\Model\ProductAttr
@@ -132,8 +124,7 @@ class ProductAttr extends DataModel
     {
         return $this->productId;
     }
-	
- 
+
     /**
      * @param boolean $isTranslated 
      * @return \jtl\Connector\Model\ProductAttr
@@ -151,7 +142,6 @@ class ProductAttr extends DataModel
     {
         return $this->isTranslated;
     }
-
 
     /**
      * @param \jtl\Connector\Model\ProductAttrI18n $i18n
@@ -179,6 +169,4 @@ class ProductAttr extends DataModel
         $this->i18ns = array();
         return $this;
     }
-
-
 }

@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class TaxZone extends DataModel
 {
-
     /**
      * @var Identity Unique taxZone id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class TaxZone extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var string Optional tax zone name e.g. "EU Zone"
@@ -41,7 +37,6 @@ class TaxZone extends DataModel
      */
     protected $name = '';
 
-
     /**
      * @var jtl\Connector\Model\TaxZoneCountry[] 
      * @Serializer\Type("array<jtl\Connector\Model\TaxZoneCountry>")
@@ -50,13 +45,14 @@ class TaxZone extends DataModel
      */
     protected $countries = array();
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id Unique taxZone id
      * @return \jtl\Connector\Model\TaxZone
@@ -74,8 +70,7 @@ class TaxZone extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param string $name Optional tax zone name e.g. "EU Zone"
      * @return \jtl\Connector\Model\TaxZone
@@ -92,7 +87,6 @@ class TaxZone extends DataModel
     {
         return $this->name;
     }
-
 
     /**
      * @param \jtl\Connector\Model\TaxZoneCountry $country
@@ -120,6 +114,4 @@ class TaxZone extends DataModel
         $this->countries = array();
         return $this;
     }
-
-
 }

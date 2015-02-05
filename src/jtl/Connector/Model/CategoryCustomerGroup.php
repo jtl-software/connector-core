@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CategoryCustomerGroup extends DataModel
 {
-
     /**
      * @var Identity Reference to category
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class CategoryCustomerGroup extends DataModel
      * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
      */
     protected $categoryId = null;
-
 
     /**
      * @var Identity 
@@ -41,7 +37,6 @@ class CategoryCustomerGroup extends DataModel
      */
     protected $connectorId = null;
 
-
     /**
      * @var Identity Reference to customerGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -49,7 +44,6 @@ class CategoryCustomerGroup extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-
 
     /**
      * @var double Optional discount on products in specified categoryId for  customerGroupId
@@ -59,15 +53,16 @@ class CategoryCustomerGroup extends DataModel
      */
     protected $discount = 0.0;
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->categoryId = new Identity();
         $this->customerGroupId = new Identity();
         $this->connectorId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $categoryId Reference to category
      * @return \jtl\Connector\Model\CategoryCustomerGroup
@@ -85,8 +80,7 @@ class CategoryCustomerGroup extends DataModel
     {
         return $this->categoryId;
     }
-	
- 
+
     /**
      * @param Identity $connectorId 
      * @return \jtl\Connector\Model\CategoryCustomerGroup
@@ -104,8 +98,7 @@ class CategoryCustomerGroup extends DataModel
     {
         return $this->connectorId;
     }
-	
- 
+
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\CategoryCustomerGroup
@@ -123,8 +116,7 @@ class CategoryCustomerGroup extends DataModel
     {
         return $this->customerGroupId;
     }
-	
- 
+
     /**
      * @param double $discount Optional discount on products in specified categoryId for  customerGroupId
      * @return \jtl\Connector\Model\CategoryCustomerGroup
@@ -141,6 +133,4 @@ class CategoryCustomerGroup extends DataModel
     {
         return $this->discount;
     }
-
-
 }

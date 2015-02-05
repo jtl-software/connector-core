@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class PartsList extends DataModel
 {
-
     /**
      * @var Identity Unique PartsList id, referenced by product.PartsListId
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class PartsList extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var Identity Reference to a component / product
@@ -41,7 +37,6 @@ class PartsList extends DataModel
      */
     protected $productId = null;
 
-
     /**
      * @var double Component quantity
      * @Serializer\Type("double")
@@ -50,14 +45,15 @@ class PartsList extends DataModel
      */
     protected $quantity = 0.0;
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
         $this->productId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id Unique PartsList id, referenced by product.PartsListId
      * @return \jtl\Connector\Model\PartsList
@@ -75,8 +71,7 @@ class PartsList extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param Identity $productId Reference to a component / product
      * @return \jtl\Connector\Model\PartsList
@@ -94,8 +89,7 @@ class PartsList extends DataModel
     {
         return $this->productId;
     }
-	
- 
+
     /**
      * @param double $quantity Component quantity
      * @return \jtl\Connector\Model\PartsList
@@ -112,6 +106,4 @@ class PartsList extends DataModel
     {
         return $this->quantity;
     }
-
-
 }

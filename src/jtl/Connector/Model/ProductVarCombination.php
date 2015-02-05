@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductVarCombination extends DataModel
 {
-
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class ProductVarCombination extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-
 
     /**
      * @var Identity Reference to productVariation
@@ -41,7 +37,6 @@ class ProductVarCombination extends DataModel
      */
     protected $productVariationId = null;
 
-
     /**
      * @var string Reference to productVariationValue
      * @Serializer\Type("string")
@@ -50,14 +45,15 @@ class ProductVarCombination extends DataModel
      */
     protected $productVariationValueId = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->productId = new Identity();
         $this->productVariationId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductVarCombination
@@ -75,8 +71,7 @@ class ProductVarCombination extends DataModel
     {
         return $this->productId;
     }
-	
- 
+
     /**
      * @param Identity $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\ProductVarCombination
@@ -94,8 +89,7 @@ class ProductVarCombination extends DataModel
     {
         return $this->productVariationId;
     }
-	
- 
+
     /**
      * @param string $productVariationValueId Reference to productVariationValue
      * @return \jtl\Connector\Model\ProductVarCombination
@@ -112,6 +106,4 @@ class ProductVarCombination extends DataModel
     {
         return $this->productVariationValueId;
     }
-
-
 }

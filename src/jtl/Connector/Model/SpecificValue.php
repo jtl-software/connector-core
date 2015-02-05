@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class SpecificValue extends DataModel
 {
-
     /**
      * @var Identity Unique specificValue id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class SpecificValue extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var Identity Reference to specificId
@@ -41,7 +37,6 @@ class SpecificValue extends DataModel
      */
     protected $specificId = null;
 
-
     /**
      * @var string Optional sort number
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class SpecificValue extends DataModel
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = '';
-
 
     /**
      * @var jtl\Connector\Model\SpecificValueI18n[] 
@@ -59,14 +53,15 @@ class SpecificValue extends DataModel
      */
     protected $i18ns = array();
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
         $this->specificId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id Unique specificValue id
      * @return \jtl\Connector\Model\SpecificValue
@@ -84,8 +79,7 @@ class SpecificValue extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param Identity $specificId Reference to specificId
      * @return \jtl\Connector\Model\SpecificValue
@@ -103,8 +97,7 @@ class SpecificValue extends DataModel
     {
         return $this->specificId;
     }
-	
- 
+
     /**
      * @param string $sort Optional sort number
      * @return \jtl\Connector\Model\SpecificValue
@@ -121,7 +114,6 @@ class SpecificValue extends DataModel
     {
         return $this->sort;
     }
-
 
     /**
      * @param \jtl\Connector\Model\SpecificValueI18n $i18n
@@ -149,6 +141,4 @@ class SpecificValue extends DataModel
         $this->i18ns = array();
         return $this;
     }
-
-
 }

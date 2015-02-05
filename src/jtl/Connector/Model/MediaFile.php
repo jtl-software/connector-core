@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class MediaFile extends DataModel
 {
-
     /**
      * @var Identity Unique MediaFile id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class MediaFile extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var Identity Reference to product
@@ -41,7 +37,6 @@ class MediaFile extends DataModel
      */
     protected $productId = null;
 
-
     /**
      * @var string Optional media file category name
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class MediaFile extends DataModel
      * @Serializer\Accessor(getter="getMediaFileCategory",setter="setMediaFileCategory")
      */
     protected $mediaFileCategory = '';
-
 
     /**
      * @var string File path
@@ -59,7 +53,6 @@ class MediaFile extends DataModel
      */
     protected $path = '';
 
-
     /**
      * @var string Optional sort number
      * @Serializer\Type("string")
@@ -67,7 +60,6 @@ class MediaFile extends DataModel
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = '';
-
 
     /**
      * @var string Media file type e.g. 'pdf'
@@ -77,7 +69,6 @@ class MediaFile extends DataModel
      */
     protected $type = '';
 
-
     /**
      * @var string Complete URL
      * @Serializer\Type("string")
@@ -86,14 +77,15 @@ class MediaFile extends DataModel
      */
     protected $url = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
         $this->productId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id Unique MediaFile id
      * @return \jtl\Connector\Model\MediaFile
@@ -111,8 +103,7 @@ class MediaFile extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\MediaFile
@@ -130,8 +121,7 @@ class MediaFile extends DataModel
     {
         return $this->productId;
     }
-	
- 
+
     /**
      * @param string $mediaFileCategory Optional media file category name
      * @return \jtl\Connector\Model\MediaFile
@@ -148,8 +138,7 @@ class MediaFile extends DataModel
     {
         return $this->mediaFileCategory;
     }
-	
- 
+
     /**
      * @param string $path File path
      * @return \jtl\Connector\Model\MediaFile
@@ -166,8 +155,7 @@ class MediaFile extends DataModel
     {
         return $this->path;
     }
-	
- 
+
     /**
      * @param string $sort Optional sort number
      * @return \jtl\Connector\Model\MediaFile
@@ -184,8 +172,7 @@ class MediaFile extends DataModel
     {
         return $this->sort;
     }
-	
- 
+
     /**
      * @param string $type Media file type e.g. 'pdf'
      * @return \jtl\Connector\Model\MediaFile
@@ -202,8 +189,7 @@ class MediaFile extends DataModel
     {
         return $this->type;
     }
-	
- 
+
     /**
      * @param string $url Complete URL
      * @return \jtl\Connector\Model\MediaFile
@@ -220,6 +206,4 @@ class MediaFile extends DataModel
     {
         return $this->url;
     }
-
-
 }

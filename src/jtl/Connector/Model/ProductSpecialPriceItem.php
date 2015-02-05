@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductSpecialPriceItem extends DataModel
 {
-
     /**
      * @var Identity Reference to customerGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class ProductSpecialPriceItem extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-
 
     /**
      * @var Identity Reference to productSpecialPrice
@@ -41,7 +37,6 @@ class ProductSpecialPriceItem extends DataModel
      */
     protected $productSpecialPriceId = null;
 
-
     /**
      * @var double net price value
      * @Serializer\Type("double")
@@ -50,14 +45,15 @@ class ProductSpecialPriceItem extends DataModel
      */
     protected $priceNet = 0.0;
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->productSpecialPriceId = new Identity();
         $this->customerGroupId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ProductSpecialPriceItem
@@ -75,8 +71,7 @@ class ProductSpecialPriceItem extends DataModel
     {
         return $this->customerGroupId;
     }
-	
- 
+
     /**
      * @param Identity $productSpecialPriceId Reference to productSpecialPrice
      * @return \jtl\Connector\Model\ProductSpecialPriceItem
@@ -94,8 +89,7 @@ class ProductSpecialPriceItem extends DataModel
     {
         return $this->productSpecialPriceId;
     }
-	
- 
+
     /**
      * @param double $priceNet net price value
      * @return \jtl\Connector\Model\ProductSpecialPriceItem
@@ -112,6 +106,4 @@ class ProductSpecialPriceItem extends DataModel
     {
         return $this->priceNet;
     }
-
-
 }

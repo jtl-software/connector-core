@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class SpecificI18n extends DataModel
 {
-
     /**
      * @var Identity Reference to specific
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class SpecificI18n extends DataModel
      * @Serializer\Accessor(getter="getSpecificId",setter="setSpecificId")
      */
     protected $specificId = null;
-
 
     /**
      * @var string Locale
@@ -41,7 +37,6 @@ class SpecificI18n extends DataModel
      */
     protected $languageISO = '';
 
-
     /**
      * @var string Localized name
      * @Serializer\Type("string")
@@ -50,13 +45,14 @@ class SpecificI18n extends DataModel
      */
     protected $name = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->specificId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $specificId Reference to specific
      * @return \jtl\Connector\Model\SpecificI18n
@@ -74,8 +70,7 @@ class SpecificI18n extends DataModel
     {
         return $this->specificId;
     }
-	
- 
+
     /**
      * @param string $languageISO Locale
      * @return \jtl\Connector\Model\SpecificI18n
@@ -92,8 +87,7 @@ class SpecificI18n extends DataModel
     {
         return $this->languageISO;
     }
-	
- 
+
     /**
      * @param string $name Localized name
      * @return \jtl\Connector\Model\SpecificI18n
@@ -110,6 +104,4 @@ class SpecificI18n extends DataModel
     {
         return $this->name;
     }
-
-
 }

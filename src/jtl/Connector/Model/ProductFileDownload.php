@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductFileDownload extends DataModel
 {
-
     /**
      * @var Identity Reference to fileDownload
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class ProductFileDownload extends DataModel
      * @Serializer\Accessor(getter="getFileDownloadId",setter="setFileDownloadId")
      */
     protected $fileDownloadId = null;
-
 
     /**
      * @var Identity Reference to product
@@ -41,14 +37,15 @@ class ProductFileDownload extends DataModel
      */
     protected $productId = null;
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->productId = new Identity();
         $this->fileDownloadId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $fileDownloadId Reference to fileDownload
      * @return \jtl\Connector\Model\ProductFileDownload
@@ -66,8 +63,7 @@ class ProductFileDownload extends DataModel
     {
         return $this->fileDownloadId;
     }
-	
- 
+
     /**
      * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductFileDownload
@@ -85,6 +81,4 @@ class ProductFileDownload extends DataModel
     {
         return $this->productId;
     }
-
-
 }

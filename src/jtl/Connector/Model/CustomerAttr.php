@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CustomerAttr extends DataModel
 {
-
     /**
      * @var string Reference to customer
      * @Serializer\Type("string")
@@ -31,7 +28,6 @@ class CustomerAttr extends DataModel
      * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
      */
     protected $customerId = '';
-
 
     /**
      * @var string Attribute key
@@ -41,7 +37,6 @@ class CustomerAttr extends DataModel
      */
     protected $key = '';
 
-
     /**
      * @var string Attribute value
      * @Serializer\Type("string")
@@ -50,8 +45,7 @@ class CustomerAttr extends DataModel
      */
     protected $value = '';
 
-	
- 
+
     /**
      * @param string $customerId Reference to customer
      * @return \jtl\Connector\Model\CustomerAttr
@@ -68,8 +62,7 @@ class CustomerAttr extends DataModel
     {
         return $this->customerId;
     }
-	
- 
+
     /**
      * @param string $key Attribute key
      * @return \jtl\Connector\Model\CustomerAttr
@@ -86,8 +79,7 @@ class CustomerAttr extends DataModel
     {
         return $this->key;
     }
-	
- 
+
     /**
      * @param string $value Attribute value
      * @return \jtl\Connector\Model\CustomerAttr
@@ -104,6 +96,4 @@ class CustomerAttr extends DataModel
     {
         return $this->value;
     }
-
-
 }

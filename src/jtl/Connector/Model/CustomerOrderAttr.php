@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CustomerOrderAttr extends DataModel
 {
-
     /**
      * @var Identity Reference to customerOrder
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class CustomerOrderAttr extends DataModel
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
      */
     protected $customerOrderId = null;
-
 
     /**
      * @var Identity Unique customerOrderAttr id
@@ -41,7 +37,6 @@ class CustomerOrderAttr extends DataModel
      */
     protected $id = null;
 
-
     /**
      * @var string Attribute key name
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class CustomerOrderAttr extends DataModel
      * @Serializer\Accessor(getter="getKey",setter="setKey")
      */
     protected $key = '';
-
 
     /**
      * @var string Attribute value
@@ -59,14 +53,15 @@ class CustomerOrderAttr extends DataModel
      */
     protected $value = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
         $this->customerOrderId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $customerOrderId Reference to customerOrder
      * @return \jtl\Connector\Model\CustomerOrderAttr
@@ -84,8 +79,7 @@ class CustomerOrderAttr extends DataModel
     {
         return $this->customerOrderId;
     }
-	
- 
+
     /**
      * @param Identity $id Unique customerOrderAttr id
      * @return \jtl\Connector\Model\CustomerOrderAttr
@@ -103,8 +97,7 @@ class CustomerOrderAttr extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param string $key Attribute key name
      * @return \jtl\Connector\Model\CustomerOrderAttr
@@ -121,8 +114,7 @@ class CustomerOrderAttr extends DataModel
     {
         return $this->key;
     }
-	
- 
+
     /**
      * @param string $value Attribute value
      * @return \jtl\Connector\Model\CustomerOrderAttr
@@ -139,6 +131,4 @@ class CustomerOrderAttr extends DataModel
     {
         return $this->value;
     }
-
-
 }

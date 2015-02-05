@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CustomerGroupI18n extends DataModel
 {
-
     /**
      * @var string Reference to customerGroup
      * @Serializer\Type("string")
@@ -31,7 +28,6 @@ class CustomerGroupI18n extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = '';
-
 
     /**
      * @var string Locale
@@ -41,7 +37,6 @@ class CustomerGroupI18n extends DataModel
      */
     protected $languageISO = '';
 
-
     /**
      * @var string Localized customer group name
      * @Serializer\Type("string")
@@ -50,8 +45,7 @@ class CustomerGroupI18n extends DataModel
      */
     protected $name = '';
 
-	
- 
+
     /**
      * @param string $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\CustomerGroupI18n
@@ -68,8 +62,7 @@ class CustomerGroupI18n extends DataModel
     {
         return $this->customerGroupId;
     }
-	
- 
+
     /**
      * @param string $languageISO Locale
      * @return \jtl\Connector\Model\CustomerGroupI18n
@@ -86,8 +79,7 @@ class CustomerGroupI18n extends DataModel
     {
         return $this->languageISO;
     }
-	
- 
+
     /**
      * @param string $name Localized customer group name
      * @return \jtl\Connector\Model\CustomerGroupI18n
@@ -104,6 +96,4 @@ class CustomerGroupI18n extends DataModel
     {
         return $this->name;
     }
-
-
 }

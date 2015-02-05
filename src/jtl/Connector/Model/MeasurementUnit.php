@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class MeasurementUnit extends DataModel
 {
-
     /**
      * @var Identity Unit id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class MeasurementUnit extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var string Optional UCUM-Code, see  http://unitsofmeasure.org/
@@ -41,7 +37,6 @@ class MeasurementUnit extends DataModel
      */
     protected $code = '';
 
-
     /**
      * @var string Synonym e.g. 'ml'
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class MeasurementUnit extends DataModel
      * @Serializer\Accessor(getter="getDisplayCode",setter="setDisplayCode")
      */
     protected $displayCode = '';
-
 
     /**
      * @var jtl\Connector\Model\MeasurementUnitI18n[] 
@@ -59,13 +53,14 @@ class MeasurementUnit extends DataModel
      */
     protected $i18Ns = array();
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id Unit id
      * @return \jtl\Connector\Model\MeasurementUnit
@@ -83,8 +78,7 @@ class MeasurementUnit extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param string $code Optional UCUM-Code, see  http://unitsofmeasure.org/
      * @return \jtl\Connector\Model\MeasurementUnit
@@ -101,8 +95,7 @@ class MeasurementUnit extends DataModel
     {
         return $this->code;
     }
-	
- 
+
     /**
      * @param string $displayCode Synonym e.g. 'ml'
      * @return \jtl\Connector\Model\MeasurementUnit
@@ -119,7 +112,6 @@ class MeasurementUnit extends DataModel
     {
         return $this->displayCode;
     }
-
 
     /**
      * @param \jtl\Connector\Model\MeasurementUnitI18n $i18N
@@ -147,6 +139,4 @@ class MeasurementUnit extends DataModel
         $this->i18Ns = array();
         return $this;
     }
-
-
 }

@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class TaxRate extends DataModel
 {
-
     /**
      * @var Identity Unique taxRate id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class TaxRate extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var Identity Reference to taxClass
@@ -41,7 +37,6 @@ class TaxRate extends DataModel
      */
     protected $taxClassId = null;
 
-
     /**
      * @var Identity Reference to taxZone
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -49,7 +44,6 @@ class TaxRate extends DataModel
      * @Serializer\Accessor(getter="getTaxZoneId",setter="setTaxZoneId")
      */
     protected $taxZoneId = null;
-
 
     /**
      * @var string Optional priority number. Higher value means higher priority
@@ -59,7 +53,6 @@ class TaxRate extends DataModel
      */
     protected $priority = '';
 
-
     /**
      * @var double Tax rate value e.g. 19.00
      * @Serializer\Type("double")
@@ -68,15 +61,16 @@ class TaxRate extends DataModel
      */
     protected $rate = 0.0;
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
         $this->taxZoneId = new Identity();
         $this->taxClassId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id Unique taxRate id
      * @return \jtl\Connector\Model\TaxRate
@@ -94,8 +88,7 @@ class TaxRate extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param Identity $taxClassId Reference to taxClass
      * @return \jtl\Connector\Model\TaxRate
@@ -113,8 +106,7 @@ class TaxRate extends DataModel
     {
         return $this->taxClassId;
     }
-	
- 
+
     /**
      * @param Identity $taxZoneId Reference to taxZone
      * @return \jtl\Connector\Model\TaxRate
@@ -132,8 +124,7 @@ class TaxRate extends DataModel
     {
         return $this->taxZoneId;
     }
-	
- 
+
     /**
      * @param string $priority Optional priority number. Higher value means higher priority
      * @return \jtl\Connector\Model\TaxRate
@@ -150,8 +141,7 @@ class TaxRate extends DataModel
     {
         return $this->priority;
     }
-	
- 
+
     /**
      * @param double $rate Tax rate value e.g. 19.00
      * @return \jtl\Connector\Model\TaxRate
@@ -168,6 +158,4 @@ class TaxRate extends DataModel
     {
         return $this->rate;
     }
-
-
 }

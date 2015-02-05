@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ConfigGroupI18n extends DataModel
 {
-
     /**
      * @var string Reference to configGroup
      * @Serializer\Type("string")
@@ -31,7 +28,6 @@ class ConfigGroupI18n extends DataModel
      * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
      */
     protected $configGroupId = '';
-
 
     /**
      * @var string Optional description (HTML)
@@ -41,7 +37,6 @@ class ConfigGroupI18n extends DataModel
      */
     protected $description = '';
 
-
     /**
      * @var string Locale
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class ConfigGroupI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
 
     /**
      * @var string Config group name
@@ -59,8 +53,7 @@ class ConfigGroupI18n extends DataModel
      */
     protected $name = '';
 
-	
- 
+
     /**
      * @param string $configGroupId Reference to configGroup
      * @return \jtl\Connector\Model\ConfigGroupI18n
@@ -77,8 +70,7 @@ class ConfigGroupI18n extends DataModel
     {
         return $this->configGroupId;
     }
-	
- 
+
     /**
      * @param string $description Optional description (HTML)
      * @return \jtl\Connector\Model\ConfigGroupI18n
@@ -95,8 +87,7 @@ class ConfigGroupI18n extends DataModel
     {
         return $this->description;
     }
-	
- 
+
     /**
      * @param string $languageISO Locale
      * @return \jtl\Connector\Model\ConfigGroupI18n
@@ -113,8 +104,7 @@ class ConfigGroupI18n extends DataModel
     {
         return $this->languageISO;
     }
-	
- 
+
     /**
      * @param string $name Config group name
      * @return \jtl\Connector\Model\ConfigGroupI18n
@@ -131,6 +121,4 @@ class ConfigGroupI18n extends DataModel
     {
         return $this->name;
     }
-
-
 }

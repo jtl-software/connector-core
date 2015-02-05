@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductVariationValueExtraCharge extends DataModel
 {
-
     /**
      * @var Identity Reference to customerGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class ProductVariationValueExtraCharge extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-
 
     /**
      * @var Identity Reference to productVariationValue
@@ -41,7 +37,6 @@ class ProductVariationValueExtraCharge extends DataModel
      */
     protected $productVariationValueId = null;
 
-
     /**
      * @var double Extra charge (net)
      * @Serializer\Type("double")
@@ -50,14 +45,15 @@ class ProductVariationValueExtraCharge extends DataModel
      */
     protected $extraChargeNet = 0.0;
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->productVariationValueId = new Identity();
         $this->customerGroupId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
@@ -75,8 +71,7 @@ class ProductVariationValueExtraCharge extends DataModel
     {
         return $this->customerGroupId;
     }
-	
- 
+
     /**
      * @param Identity $productVariationValueId Reference to productVariationValue
      * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
@@ -94,8 +89,7 @@ class ProductVariationValueExtraCharge extends DataModel
     {
         return $this->productVariationValueId;
     }
-	
- 
+
     /**
      * @param double $extraChargeNet Extra charge (net)
      * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
@@ -112,6 +106,4 @@ class ProductVariationValueExtraCharge extends DataModel
     {
         return $this->extraChargeNet;
     }
-
-
 }

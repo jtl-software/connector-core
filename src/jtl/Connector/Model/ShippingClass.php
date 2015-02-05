@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ShippingClass extends DataModel
 {
-
     /**
      * @var Identity Unique shippingClass id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class ShippingClass extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var string Optional (internal) Shipping class name
@@ -41,13 +37,14 @@ class ShippingClass extends DataModel
      */
     protected $name = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id Unique shippingClass id
      * @return \jtl\Connector\Model\ShippingClass
@@ -65,8 +62,7 @@ class ShippingClass extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param string $name Optional (internal) Shipping class name
      * @return \jtl\Connector\Model\ShippingClass
@@ -83,6 +79,4 @@ class ShippingClass extends DataModel
     {
         return $this->name;
     }
-
-
 }

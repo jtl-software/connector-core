@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Specific extends DataModel
 {
-
     /**
      * @var Identity Unique specific id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class Specific extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var string Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
@@ -41,7 +37,6 @@ class Specific extends DataModel
      */
     protected $isGlobal = '';
 
-
     /**
      * @var string Optional sort number
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class Specific extends DataModel
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = '';
-
 
     /**
      * @var string Specific type (radio, dropdown, image...)
@@ -59,7 +53,6 @@ class Specific extends DataModel
      */
     protected $type = '';
 
-
     /**
      * @var jtl\Connector\Model\SpecificI18n[] 
      * @Serializer\Type("array<jtl\Connector\Model\SpecificI18n>")
@@ -67,7 +60,6 @@ class Specific extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = array();
-
 
     /**
      * @var jtl\Connector\Model\SpecificValue[] 
@@ -77,13 +69,14 @@ class Specific extends DataModel
      */
     protected $values = array();
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id Unique specific id
      * @return \jtl\Connector\Model\Specific
@@ -101,8 +94,7 @@ class Specific extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param string $isGlobal Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      * @return \jtl\Connector\Model\Specific
@@ -119,8 +111,7 @@ class Specific extends DataModel
     {
         return $this->isGlobal;
     }
-	
- 
+
     /**
      * @param string $sort Optional sort number
      * @return \jtl\Connector\Model\Specific
@@ -137,8 +128,7 @@ class Specific extends DataModel
     {
         return $this->sort;
     }
-	
- 
+
     /**
      * @param string $type Specific type (radio, dropdown, image...)
      * @return \jtl\Connector\Model\Specific
@@ -155,7 +145,6 @@ class Specific extends DataModel
     {
         return $this->type;
     }
-
 
     /**
      * @param \jtl\Connector\Model\SpecificI18n $i18n
@@ -184,7 +173,6 @@ class Specific extends DataModel
         return $this;
     }
 
-
     /**
      * @param \jtl\Connector\Model\SpecificValue $value
      * @return \jtl\Connector\Model\Specific
@@ -211,6 +199,4 @@ class Specific extends DataModel
         $this->values = array();
         return $this;
     }
-
-
 }

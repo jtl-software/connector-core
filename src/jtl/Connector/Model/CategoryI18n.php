@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CategoryI18n extends DataModel
 {
-
     /**
      * @var Identity Reference to category
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class CategoryI18n extends DataModel
      * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
      */
     protected $categoryId = null;
-
 
     /**
      * @var string Optional localized Long Description
@@ -41,7 +37,6 @@ class CategoryI18n extends DataModel
      */
     protected $description = '';
 
-
     /**
      * @var string Locale
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class CategoryI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
 
     /**
      * @var string Optional localized  short description used for meta tag description
@@ -59,7 +53,6 @@ class CategoryI18n extends DataModel
      */
     protected $metaDescription = '';
 
-
     /**
      * @var string Optional localized meta tag keywords value
      * @Serializer\Type("string")
@@ -67,7 +60,6 @@ class CategoryI18n extends DataModel
      * @Serializer\Accessor(getter="getMetaKeywords",setter="setMetaKeywords")
      */
     protected $metaKeywords = '';
-
 
     /**
      * @var string Localized category name
@@ -77,7 +69,6 @@ class CategoryI18n extends DataModel
      */
     protected $name = '';
 
-
     /**
      * @var string Optional localized title tag value
      * @Serializer\Type("string")
@@ -85,7 +76,6 @@ class CategoryI18n extends DataModel
      * @Serializer\Accessor(getter="getTitleTag",setter="setTitleTag")
      */
     protected $titleTag = '';
-
 
     /**
      * @var string Optional localized category URL
@@ -95,13 +85,14 @@ class CategoryI18n extends DataModel
      */
     protected $urlPath = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->categoryId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $categoryId Reference to category
      * @return \jtl\Connector\Model\CategoryI18n
@@ -119,8 +110,7 @@ class CategoryI18n extends DataModel
     {
         return $this->categoryId;
     }
-	
- 
+
     /**
      * @param string $description Optional localized Long Description
      * @return \jtl\Connector\Model\CategoryI18n
@@ -137,8 +127,7 @@ class CategoryI18n extends DataModel
     {
         return $this->description;
     }
-	
- 
+
     /**
      * @param string $languageISO Locale
      * @return \jtl\Connector\Model\CategoryI18n
@@ -155,8 +144,7 @@ class CategoryI18n extends DataModel
     {
         return $this->languageISO;
     }
-	
- 
+
     /**
      * @param string $metaDescription Optional localized  short description used for meta tag description
      * @return \jtl\Connector\Model\CategoryI18n
@@ -173,8 +161,7 @@ class CategoryI18n extends DataModel
     {
         return $this->metaDescription;
     }
-	
- 
+
     /**
      * @param string $metaKeywords Optional localized meta tag keywords value
      * @return \jtl\Connector\Model\CategoryI18n
@@ -191,8 +178,7 @@ class CategoryI18n extends DataModel
     {
         return $this->metaKeywords;
     }
-	
- 
+
     /**
      * @param string $name Localized category name
      * @return \jtl\Connector\Model\CategoryI18n
@@ -209,8 +195,7 @@ class CategoryI18n extends DataModel
     {
         return $this->name;
     }
-	
- 
+
     /**
      * @param string $titleTag Optional localized title tag value
      * @return \jtl\Connector\Model\CategoryI18n
@@ -227,8 +212,7 @@ class CategoryI18n extends DataModel
     {
         return $this->titleTag;
     }
-	
- 
+
     /**
      * @param string $urlPath Optional localized category URL
      * @return \jtl\Connector\Model\CategoryI18n
@@ -245,6 +229,4 @@ class CategoryI18n extends DataModel
     {
         return $this->urlPath;
     }
-
-
 }

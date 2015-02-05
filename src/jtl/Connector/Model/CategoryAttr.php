@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CategoryAttr extends DataModel
 {
-
     /**
      * @var Identity Unique categoryAttr id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class CategoryAttr extends DataModel
      * @Serializer\Accessor(getter="getAttributeId",setter="setAttributeId")
      */
     protected $attributeId = null;
-
 
     /**
      * @var Identity Reference to category
@@ -41,7 +37,6 @@ class CategoryAttr extends DataModel
      */
     protected $categoryId = null;
 
-
     /**
      * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -49,7 +44,6 @@ class CategoryAttr extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var boolean 
@@ -59,7 +53,6 @@ class CategoryAttr extends DataModel
      */
     protected $isTranslated = false;
 
-
     /**
      * @var jtl\Connector\Model\CategoryAttrI18n[] 
      * @Serializer\Type("array<jtl\Connector\Model\CategoryAttrI18n>")
@@ -68,15 +61,16 @@ class CategoryAttr extends DataModel
      */
     protected $i18ns = array();
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
         $this->categoryId = new Identity();
         $this->attributeId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $attributeId Unique categoryAttr id
      * @return \jtl\Connector\Model\CategoryAttr
@@ -94,8 +88,7 @@ class CategoryAttr extends DataModel
     {
         return $this->attributeId;
     }
-	
- 
+
     /**
      * @param Identity $categoryId Reference to category
      * @return \jtl\Connector\Model\CategoryAttr
@@ -113,8 +106,7 @@ class CategoryAttr extends DataModel
     {
         return $this->categoryId;
     }
-	
- 
+
     /**
      * @param Identity $id 
      * @return \jtl\Connector\Model\CategoryAttr
@@ -132,8 +124,7 @@ class CategoryAttr extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param boolean $isTranslated 
      * @return \jtl\Connector\Model\CategoryAttr
@@ -151,7 +142,6 @@ class CategoryAttr extends DataModel
     {
         return $this->isTranslated;
     }
-
 
     /**
      * @param \jtl\Connector\Model\CategoryAttrI18n $i18n
@@ -179,6 +169,4 @@ class CategoryAttr extends DataModel
         $this->i18ns = array();
         return $this;
     }
-
-
 }

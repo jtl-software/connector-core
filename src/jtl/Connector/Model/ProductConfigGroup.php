@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductConfigGroup extends DataModel
 {
-
     /**
      * @var Identity Reference to configGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class ProductConfigGroup extends DataModel
      * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
      */
     protected $configGroupId = null;
-
 
     /**
      * @var Identity Reference to product
@@ -41,7 +37,6 @@ class ProductConfigGroup extends DataModel
      */
     protected $productId = null;
 
-
     /**
      * @var string Optional sort number
      * @Serializer\Type("string")
@@ -50,14 +45,15 @@ class ProductConfigGroup extends DataModel
      */
     protected $sort = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->productId = new Identity();
         $this->configGroupId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $configGroupId Reference to configGroup
      * @return \jtl\Connector\Model\ProductConfigGroup
@@ -75,8 +71,7 @@ class ProductConfigGroup extends DataModel
     {
         return $this->configGroupId;
     }
-	
- 
+
     /**
      * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductConfigGroup
@@ -94,8 +89,7 @@ class ProductConfigGroup extends DataModel
     {
         return $this->productId;
     }
-	
- 
+
     /**
      * @param string $sort Optional sort number
      * @return \jtl\Connector\Model\ProductConfigGroup
@@ -112,6 +106,4 @@ class ProductConfigGroup extends DataModel
     {
         return $this->sort;
     }
-
-
 }

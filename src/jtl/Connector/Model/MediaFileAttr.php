@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class MediaFileAttr extends DataModel
 {
-
     /**
      * @var Identity Unique MediaFileAttr id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class MediaFileAttr extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var Identity Reference to mediaFile
@@ -41,7 +37,6 @@ class MediaFileAttr extends DataModel
      */
     protected $mediaFileId = null;
 
-
     /**
      * @var string Attribute name
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class MediaFileAttr extends DataModel
      * @Serializer\Accessor(getter="getKey",setter="setKey")
      */
     protected $key = '';
-
 
     /**
      * @var string Locale
@@ -59,7 +53,6 @@ class MediaFileAttr extends DataModel
      */
     protected $languageISO = '';
 
-
     /**
      * @var string Attribute value
      * @Serializer\Type("string")
@@ -68,14 +61,15 @@ class MediaFileAttr extends DataModel
      */
     protected $value = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
         $this->mediaFileId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id Unique MediaFileAttr id
      * @return \jtl\Connector\Model\MediaFileAttr
@@ -93,8 +87,7 @@ class MediaFileAttr extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param Identity $mediaFileId Reference to mediaFile
      * @return \jtl\Connector\Model\MediaFileAttr
@@ -112,8 +105,7 @@ class MediaFileAttr extends DataModel
     {
         return $this->mediaFileId;
     }
-	
- 
+
     /**
      * @param string $key Attribute name
      * @return \jtl\Connector\Model\MediaFileAttr
@@ -130,8 +122,7 @@ class MediaFileAttr extends DataModel
     {
         return $this->key;
     }
-	
- 
+
     /**
      * @param string $languageISO Locale
      * @return \jtl\Connector\Model\MediaFileAttr
@@ -148,8 +139,7 @@ class MediaFileAttr extends DataModel
     {
         return $this->languageISO;
     }
-	
- 
+
     /**
      * @param string $value Attribute value
      * @return \jtl\Connector\Model\MediaFileAttr
@@ -166,6 +156,4 @@ class MediaFileAttr extends DataModel
     {
         return $this->value;
     }
-
-
 }

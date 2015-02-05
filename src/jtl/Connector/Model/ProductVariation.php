@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductVariation extends DataModel
 {
-
     /**
      * @var Identity Unique productVariation id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class ProductVariation extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var Identity Reference to product
@@ -41,7 +37,6 @@ class ProductVariation extends DataModel
      */
     protected $productId = null;
 
-
     /**
      * @var string Optional sort number
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class ProductVariation extends DataModel
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = '';
-
 
     /**
      * @var jtl\Connector\Model\ProductVariationI18n[] 
@@ -59,7 +53,6 @@ class ProductVariation extends DataModel
      */
     protected $i18ns = array();
 
-
     /**
      * @var jtl\Connector\Model\ProductVariationInvisibility[] 
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationInvisibility>")
@@ -67,7 +60,6 @@ class ProductVariation extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $invisibilities = array();
-
 
     /**
      * @var jtl\Connector\Model\ProductVariationValue[] 
@@ -77,14 +69,15 @@ class ProductVariation extends DataModel
      */
     protected $values = array();
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
         $this->productId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id Unique productVariation id
      * @return \jtl\Connector\Model\ProductVariation
@@ -102,8 +95,7 @@ class ProductVariation extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductVariation
@@ -121,8 +113,7 @@ class ProductVariation extends DataModel
     {
         return $this->productId;
     }
-	
- 
+
     /**
      * @param string $sort Optional sort number
      * @return \jtl\Connector\Model\ProductVariation
@@ -139,7 +130,6 @@ class ProductVariation extends DataModel
     {
         return $this->sort;
     }
-
 
     /**
      * @param \jtl\Connector\Model\ProductVariationI18n $i18n
@@ -168,7 +158,6 @@ class ProductVariation extends DataModel
         return $this;
     }
 
-
     /**
      * @param \jtl\Connector\Model\ProductVariationInvisibility $invisibility
      * @return \jtl\Connector\Model\ProductVariation
@@ -196,7 +185,6 @@ class ProductVariation extends DataModel
         return $this;
     }
 
-
     /**
      * @param \jtl\Connector\Model\ProductVariationValue $value
      * @return \jtl\Connector\Model\ProductVariation
@@ -223,6 +211,4 @@ class ProductVariation extends DataModel
         $this->values = array();
         return $this;
     }
-
-
 }

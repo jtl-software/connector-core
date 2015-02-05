@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -22,7 +20,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class DeliveryNoteItemInfo extends DataModel
 {
-
     /**
      * @var string 
      * @Serializer\Type("string")
@@ -30,7 +27,6 @@ class DeliveryNoteItemInfo extends DataModel
      * @Serializer\Accessor(getter="getBatch",setter="setBatch")
      */
     protected $batch = '';
-
 
     /**
      * @var string 
@@ -40,7 +36,6 @@ class DeliveryNoteItemInfo extends DataModel
      */
     protected $bestBefore = '';
 
-
     /**
      * @var double 
      * @Serializer\Type("double")
@@ -48,7 +43,6 @@ class DeliveryNoteItemInfo extends DataModel
      * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
      */
     protected $quantity = 0.0;
-
 
     /**
      * @var string 
@@ -58,8 +52,7 @@ class DeliveryNoteItemInfo extends DataModel
      */
     protected $warehouseId = '';
 
-	
- 
+
     /**
      * @param string $batch 
      * @return \jtl\Connector\Model\DeliveryNoteItemInfo
@@ -76,8 +69,7 @@ class DeliveryNoteItemInfo extends DataModel
     {
         return $this->batch;
     }
-	
- 
+
     /**
      * @param string $bestBefore 
      * @return \jtl\Connector\Model\DeliveryNoteItemInfo
@@ -94,8 +86,7 @@ class DeliveryNoteItemInfo extends DataModel
     {
         return $this->bestBefore;
     }
-	
- 
+
     /**
      * @param double $quantity 
      * @return \jtl\Connector\Model\DeliveryNoteItemInfo
@@ -112,8 +103,7 @@ class DeliveryNoteItemInfo extends DataModel
     {
         return $this->quantity;
     }
-	
- 
+
     /**
      * @param string $warehouseId 
      * @return \jtl\Connector\Model\DeliveryNoteItemInfo
@@ -130,6 +120,4 @@ class DeliveryNoteItemInfo extends DataModel
     {
         return $this->warehouseId;
     }
-
-
 }

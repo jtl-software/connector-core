@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class FileDownloadI18n extends DataModel
 {
-
     /**
      * @var Identity Reference to fileDownloadId
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class FileDownloadI18n extends DataModel
      * @Serializer\Accessor(getter="getFileDownloadId",setter="setFileDownloadId")
      */
     protected $fileDownloadId = null;
-
 
     /**
      * @var string Optional File download description
@@ -41,7 +37,6 @@ class FileDownloadI18n extends DataModel
      */
     protected $description = '';
 
-
     /**
      * @var string Locale
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class FileDownloadI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
 
     /**
      * @var string File download title / name
@@ -59,13 +53,14 @@ class FileDownloadI18n extends DataModel
      */
     protected $name = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->fileDownloadId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $fileDownloadId Reference to fileDownloadId
      * @return \jtl\Connector\Model\FileDownloadI18n
@@ -83,8 +78,7 @@ class FileDownloadI18n extends DataModel
     {
         return $this->fileDownloadId;
     }
-	
- 
+
     /**
      * @param string $description Optional File download description
      * @return \jtl\Connector\Model\FileDownloadI18n
@@ -101,8 +95,7 @@ class FileDownloadI18n extends DataModel
     {
         return $this->description;
     }
-	
- 
+
     /**
      * @param string $languageISO Locale
      * @return \jtl\Connector\Model\FileDownloadI18n
@@ -119,8 +112,7 @@ class FileDownloadI18n extends DataModel
     {
         return $this->languageISO;
     }
-	
- 
+
     /**
      * @param string $name File download title / name
      * @return \jtl\Connector\Model\FileDownloadI18n
@@ -137,6 +129,4 @@ class FileDownloadI18n extends DataModel
     {
         return $this->name;
     }
-
-
 }

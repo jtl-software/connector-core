@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ManufacturerI18n extends DataModel
 {
-
     /**
      * @var Identity Reference to manufacturer
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class ManufacturerI18n extends DataModel
      * @Serializer\Accessor(getter="getManufacturerId",setter="setManufacturerId")
      */
     protected $manufacturerId = null;
-
 
     /**
      * @var string Optional manufacturer description (HTML)
@@ -41,7 +37,6 @@ class ManufacturerI18n extends DataModel
      */
     protected $description = '';
 
-
     /**
      * @var string Locale
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class ManufacturerI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
 
     /**
      * @var string Optional meta description tag value
@@ -59,7 +53,6 @@ class ManufacturerI18n extends DataModel
      */
     protected $metaDescription = '';
 
-
     /**
      * @var string Optional meta keywords tag value
      * @Serializer\Type("string")
@@ -67,7 +60,6 @@ class ManufacturerI18n extends DataModel
      * @Serializer\Accessor(getter="getMetaKeywords",setter="setMetaKeywords")
      */
     protected $metaKeywords = '';
-
 
     /**
      * @var string Optional title tag value
@@ -77,13 +69,14 @@ class ManufacturerI18n extends DataModel
      */
     protected $titleTag = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->manufacturerId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $manufacturerId Reference to manufacturer
      * @return \jtl\Connector\Model\ManufacturerI18n
@@ -101,8 +94,7 @@ class ManufacturerI18n extends DataModel
     {
         return $this->manufacturerId;
     }
-	
- 
+
     /**
      * @param string $description Optional manufacturer description (HTML)
      * @return \jtl\Connector\Model\ManufacturerI18n
@@ -119,8 +111,7 @@ class ManufacturerI18n extends DataModel
     {
         return $this->description;
     }
-	
- 
+
     /**
      * @param string $languageISO Locale
      * @return \jtl\Connector\Model\ManufacturerI18n
@@ -137,8 +128,7 @@ class ManufacturerI18n extends DataModel
     {
         return $this->languageISO;
     }
-	
- 
+
     /**
      * @param string $metaDescription Optional meta description tag value
      * @return \jtl\Connector\Model\ManufacturerI18n
@@ -155,8 +145,7 @@ class ManufacturerI18n extends DataModel
     {
         return $this->metaDescription;
     }
-	
- 
+
     /**
      * @param string $metaKeywords Optional meta keywords tag value
      * @return \jtl\Connector\Model\ManufacturerI18n
@@ -173,8 +162,7 @@ class ManufacturerI18n extends DataModel
     {
         return $this->metaKeywords;
     }
-	
- 
+
     /**
      * @param string $titleTag Optional title tag value
      * @return \jtl\Connector\Model\ManufacturerI18n
@@ -191,6 +179,4 @@ class ManufacturerI18n extends DataModel
     {
         return $this->titleTag;
     }
-
-
 }

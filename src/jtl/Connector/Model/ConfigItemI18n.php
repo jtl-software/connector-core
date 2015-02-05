@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ConfigItemI18n extends DataModel
 {
-
     /**
      * @var string Reference to configItem
      * @Serializer\Type("string")
@@ -31,7 +28,6 @@ class ConfigItemI18n extends DataModel
      * @Serializer\Accessor(getter="getConfigItemId",setter="setConfigItemId")
      */
     protected $configItemId = '';
-
 
     /**
      * @var string Description (html). Will be ignored, if inheritProductName==true
@@ -41,7 +37,6 @@ class ConfigItemI18n extends DataModel
      */
     protected $description = '';
 
-
     /**
      * @var string Locale
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class ConfigItemI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
 
     /**
      * @var string Config item name. Will be ignored if inheritProductName==true
@@ -59,8 +53,7 @@ class ConfigItemI18n extends DataModel
      */
     protected $name = '';
 
-	
- 
+
     /**
      * @param string $configItemId Reference to configItem
      * @return \jtl\Connector\Model\ConfigItemI18n
@@ -77,8 +70,7 @@ class ConfigItemI18n extends DataModel
     {
         return $this->configItemId;
     }
-	
- 
+
     /**
      * @param string $description Description (html). Will be ignored, if inheritProductName==true
      * @return \jtl\Connector\Model\ConfigItemI18n
@@ -95,8 +87,7 @@ class ConfigItemI18n extends DataModel
     {
         return $this->description;
     }
-	
- 
+
     /**
      * @param string $languageISO Locale
      * @return \jtl\Connector\Model\ConfigItemI18n
@@ -113,8 +104,7 @@ class ConfigItemI18n extends DataModel
     {
         return $this->languageISO;
     }
-	
- 
+
     /**
      * @param string $name Config item name. Will be ignored if inheritProductName==true
      * @return \jtl\Connector\Model\ConfigItemI18n
@@ -131,6 +121,4 @@ class ConfigItemI18n extends DataModel
     {
         return $this->name;
     }
-
-
 }

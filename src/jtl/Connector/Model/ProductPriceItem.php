@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductPriceItem extends DataModel
 {
-
     /**
      * @var Identity Reference to ProductPrice
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class ProductPriceItem extends DataModel
      * @Serializer\Accessor(getter="getProductPriceId",setter="setProductPriceId")
      */
     protected $productPriceId = null;
-
 
     /**
      * @var Identity Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
@@ -41,7 +37,6 @@ class ProductPriceItem extends DataModel
      */
     protected $quantity = null;
 
-
     /**
      * @var double Price value (net)
      * @Serializer\Type("double")
@@ -50,14 +45,15 @@ class ProductPriceItem extends DataModel
      */
     protected $netPrice = 0.0;
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->productPriceId = new Identity();
         $this->quantity = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $productPriceId Reference to ProductPrice
      * @return \jtl\Connector\Model\ProductPriceItem
@@ -75,8 +71,7 @@ class ProductPriceItem extends DataModel
     {
         return $this->productPriceId;
     }
-	
- 
+
     /**
      * @param Identity $quantity Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
      * @return \jtl\Connector\Model\ProductPriceItem
@@ -94,8 +89,7 @@ class ProductPriceItem extends DataModel
     {
         return $this->quantity;
     }
-	
- 
+
     /**
      * @param double $netPrice Price value (net)
      * @return \jtl\Connector\Model\ProductPriceItem
@@ -112,6 +106,4 @@ class ProductPriceItem extends DataModel
     {
         return $this->netPrice;
     }
-
-
 }

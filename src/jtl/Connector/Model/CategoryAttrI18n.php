@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -22,7 +20,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CategoryAttrI18n extends DataModel
 {
-
     /**
      * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -30,7 +27,6 @@ class CategoryAttrI18n extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var string 
@@ -40,7 +36,6 @@ class CategoryAttrI18n extends DataModel
      */
     protected $languageISO = '';
 
-
     /**
      * @var string 
      * @Serializer\Type("string")
@@ -48,7 +43,6 @@ class CategoryAttrI18n extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
 
     /**
      * @var string 
@@ -58,13 +52,14 @@ class CategoryAttrI18n extends DataModel
      */
     protected $value = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id 
      * @return \jtl\Connector\Model\CategoryAttrI18n
@@ -82,8 +77,7 @@ class CategoryAttrI18n extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param string $languageISO 
      * @return \jtl\Connector\Model\CategoryAttrI18n
@@ -100,8 +94,7 @@ class CategoryAttrI18n extends DataModel
     {
         return $this->languageISO;
     }
-	
- 
+
     /**
      * @param string $name 
      * @return \jtl\Connector\Model\CategoryAttrI18n
@@ -118,8 +111,7 @@ class CategoryAttrI18n extends DataModel
     {
         return $this->name;
     }
-	
- 
+
     /**
      * @param string $value 
      * @return \jtl\Connector\Model\CategoryAttrI18n
@@ -136,6 +128,4 @@ class CategoryAttrI18n extends DataModel
     {
         return $this->value;
     }
-
-
 }

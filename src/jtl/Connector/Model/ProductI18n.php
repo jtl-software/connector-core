@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductI18n extends DataModel
 {
-
     /**
      * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class ProductI18n extends DataModel
      * @Serializer\Accessor(getter="getPlatformId",setter="setPlatformId")
      */
     protected $platformId = null;
-
 
     /**
      * @var Identity Reference to product
@@ -41,7 +37,6 @@ class ProductI18n extends DataModel
      */
     protected $productId = null;
 
-
     /**
      * @var string 
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class ProductI18n extends DataModel
      * @Serializer\Accessor(getter="getConnectorId",setter="setConnectorId")
      */
     protected $connectorId = '';
-
 
     /**
      * @var string Optional product description
@@ -59,7 +53,6 @@ class ProductI18n extends DataModel
      */
     protected $description = '';
 
-
     /**
      * @var string locale
      * @Serializer\Type("string")
@@ -67,7 +60,6 @@ class ProductI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
 
     /**
      * @var string 
@@ -77,7 +69,6 @@ class ProductI18n extends DataModel
      */
     protected $metaDescription = '';
 
-
     /**
      * @var string 
      * @Serializer\Type("string")
@@ -85,7 +76,6 @@ class ProductI18n extends DataModel
      * @Serializer\Accessor(getter="getMetaKeywords",setter="setMetaKeywords")
      */
     protected $metaKeywords = '';
-
 
     /**
      * @var string Product name / title
@@ -95,7 +85,6 @@ class ProductI18n extends DataModel
      */
     protected $name = '';
 
-
     /**
      * @var string Optional product shortdescription
      * @Serializer\Type("string")
@@ -103,7 +92,6 @@ class ProductI18n extends DataModel
      * @Serializer\Accessor(getter="getShortDescription",setter="setShortDescription")
      */
     protected $shortDescription = '';
-
 
     /**
      * @var string 
@@ -113,7 +101,6 @@ class ProductI18n extends DataModel
      */
     protected $titleTag = '';
 
-
     /**
      * @var string Optional path of product URL
      * @Serializer\Type("string")
@@ -122,14 +109,15 @@ class ProductI18n extends DataModel
      */
     protected $urlPath = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->productId = new Identity();
         $this->platformId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $platformId 
      * @return \jtl\Connector\Model\ProductI18n
@@ -147,8 +135,7 @@ class ProductI18n extends DataModel
     {
         return $this->platformId;
     }
-	
- 
+
     /**
      * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductI18n
@@ -166,8 +153,7 @@ class ProductI18n extends DataModel
     {
         return $this->productId;
     }
-	
- 
+
     /**
      * @param string $connectorId 
      * @return \jtl\Connector\Model\ProductI18n
@@ -184,8 +170,7 @@ class ProductI18n extends DataModel
     {
         return $this->connectorId;
     }
-	
- 
+
     /**
      * @param string $description Optional product description
      * @return \jtl\Connector\Model\ProductI18n
@@ -202,8 +187,7 @@ class ProductI18n extends DataModel
     {
         return $this->description;
     }
-	
- 
+
     /**
      * @param string $languageISO locale
      * @return \jtl\Connector\Model\ProductI18n
@@ -220,8 +204,7 @@ class ProductI18n extends DataModel
     {
         return $this->languageISO;
     }
-	
- 
+
     /**
      * @param string $metaDescription 
      * @return \jtl\Connector\Model\ProductI18n
@@ -238,8 +221,7 @@ class ProductI18n extends DataModel
     {
         return $this->metaDescription;
     }
-	
- 
+
     /**
      * @param string $metaKeywords 
      * @return \jtl\Connector\Model\ProductI18n
@@ -256,8 +238,7 @@ class ProductI18n extends DataModel
     {
         return $this->metaKeywords;
     }
-	
- 
+
     /**
      * @param string $name Product name / title
      * @return \jtl\Connector\Model\ProductI18n
@@ -274,8 +255,7 @@ class ProductI18n extends DataModel
     {
         return $this->name;
     }
-	
- 
+
     /**
      * @param string $shortDescription Optional product shortdescription
      * @return \jtl\Connector\Model\ProductI18n
@@ -292,8 +272,7 @@ class ProductI18n extends DataModel
     {
         return $this->shortDescription;
     }
-	
- 
+
     /**
      * @param string $titleTag 
      * @return \jtl\Connector\Model\ProductI18n
@@ -310,8 +289,7 @@ class ProductI18n extends DataModel
     {
         return $this->titleTag;
     }
-	
- 
+
     /**
      * @param string $urlPath Optional path of product URL
      * @return \jtl\Connector\Model\ProductI18n
@@ -328,6 +306,4 @@ class ProductI18n extends DataModel
     {
         return $this->urlPath;
     }
-
-
 }

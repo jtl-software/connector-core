@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CustomerOrderItemVariation extends DataModel
 {
-
     /**
      * @var Identity Reference to customerOrderItem
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class CustomerOrderItemVariation extends DataModel
      * @Serializer\Accessor(getter="getCustomerOrderItemId",setter="setCustomerOrderItemId")
      */
     protected $customerOrderItemId = null;
-
 
     /**
      * @var Identity Unique customerOrderItemVariation id
@@ -41,7 +37,6 @@ class CustomerOrderItemVariation extends DataModel
      */
     protected $id = null;
 
-
     /**
      * @var Identity Reference to productVariation
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -49,7 +44,6 @@ class CustomerOrderItemVariation extends DataModel
      * @Serializer\Accessor(getter="getProductVariationId",setter="setProductVariationId")
      */
     protected $productVariationId = null;
-
 
     /**
      * @var Identity Reference to productVariationValue
@@ -59,7 +53,6 @@ class CustomerOrderItemVariation extends DataModel
      */
     protected $productVariationValueId = null;
 
-
     /**
      * @var string Optional custom text value for variation 
      * @Serializer\Type("string")
@@ -67,7 +60,6 @@ class CustomerOrderItemVariation extends DataModel
      * @Serializer\Accessor(getter="getFreeField",setter="setFreeField")
      */
     protected $freeField = '';
-
 
     /**
      * @var string Variation name e.g. 'color'
@@ -77,7 +69,6 @@ class CustomerOrderItemVariation extends DataModel
      */
     protected $productVariationName = '';
 
-
     /**
      * @var string 
      * @Serializer\Type("string")
@@ -86,7 +77,9 @@ class CustomerOrderItemVariation extends DataModel
      */
     protected $valueName = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
@@ -94,8 +87,7 @@ class CustomerOrderItemVariation extends DataModel
         $this->customerOrderItemId = new Identity();
         $this->productVariationId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $customerOrderItemId Reference to customerOrderItem
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
@@ -113,8 +105,7 @@ class CustomerOrderItemVariation extends DataModel
     {
         return $this->customerOrderItemId;
     }
-	
- 
+
     /**
      * @param Identity $id Unique customerOrderItemVariation id
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
@@ -132,8 +123,7 @@ class CustomerOrderItemVariation extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param Identity $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
@@ -151,8 +141,7 @@ class CustomerOrderItemVariation extends DataModel
     {
         return $this->productVariationId;
     }
-	
- 
+
     /**
      * @param Identity $productVariationValueId Reference to productVariationValue
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
@@ -170,8 +159,7 @@ class CustomerOrderItemVariation extends DataModel
     {
         return $this->productVariationValueId;
     }
-	
- 
+
     /**
      * @param string $freeField Optional custom text value for variation 
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
@@ -188,8 +176,7 @@ class CustomerOrderItemVariation extends DataModel
     {
         return $this->freeField;
     }
-	
- 
+
     /**
      * @param string $productVariationName Variation name e.g. 'color'
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
@@ -206,8 +193,7 @@ class CustomerOrderItemVariation extends DataModel
     {
         return $this->productVariationName;
     }
-	
- 
+
     /**
      * @param string $valueName 
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
@@ -224,6 +210,4 @@ class CustomerOrderItemVariation extends DataModel
     {
         return $this->valueName;
     }
-
-
 }

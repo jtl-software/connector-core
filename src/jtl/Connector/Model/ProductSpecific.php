@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductSpecific extends DataModel
 {
-
     /**
      * @var Identity Unique productSpecific id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class ProductSpecific extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var Identity Reference to product
@@ -41,7 +37,6 @@ class ProductSpecific extends DataModel
      */
     protected $productId = null;
 
-
     /**
      * @var Identity Reference to specificValue
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -50,15 +45,16 @@ class ProductSpecific extends DataModel
      */
     protected $specificValueId = null;
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
         $this->specificValueId = new Identity();
         $this->productId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id Unique productSpecific id
      * @return \jtl\Connector\Model\ProductSpecific
@@ -76,8 +72,7 @@ class ProductSpecific extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductSpecific
@@ -95,8 +90,7 @@ class ProductSpecific extends DataModel
     {
         return $this->productId;
     }
-	
- 
+
     /**
      * @param Identity $specificValueId Reference to specificValue
      * @return \jtl\Connector\Model\ProductSpecific
@@ -114,6 +108,4 @@ class ProductSpecific extends DataModel
     {
         return $this->specificValueId;
     }
-
-
 }

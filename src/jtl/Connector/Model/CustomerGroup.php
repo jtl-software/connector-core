@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CustomerGroup extends DataModel
 {
-
     /**
      * @var boolean Optional: Show net prices default instead of gross prices
      * @Serializer\Type("boolean")
@@ -31,7 +28,6 @@ class CustomerGroup extends DataModel
      * @Serializer\Accessor(getter="getApplyNetPrice",setter="setApplyNetPrice")
      */
     protected $applyNetPrice = false;
-
 
     /**
      * @var double Optional percentual discount on all products. Negative Value means surcharge. 
@@ -41,7 +37,6 @@ class CustomerGroup extends DataModel
      */
     protected $discount = 0.0;
 
-
     /**
      * @var string Unique customerGroup id
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class CustomerGroup extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = '';
-
 
     /**
      * @var boolean Optional: Flag default customer group
@@ -59,7 +53,6 @@ class CustomerGroup extends DataModel
      */
     protected $isDefault = false;
 
-
     /**
      * @var jtl\Connector\Model\CustomerGroupAttr[] 
      * @Serializer\Type("array<jtl\Connector\Model\CustomerGroupAttr>")
@@ -67,7 +60,6 @@ class CustomerGroup extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $attributes = array();
-
 
     /**
      * @var jtl\Connector\Model\CustomerGroupI18n[] 
@@ -77,8 +69,7 @@ class CustomerGroup extends DataModel
      */
     protected $i18ns = array();
 
-	
- 
+
     /**
      * @param boolean $applyNetPrice Optional: Show net prices default instead of gross prices
      * @return \jtl\Connector\Model\CustomerGroup
@@ -96,8 +87,7 @@ class CustomerGroup extends DataModel
     {
         return $this->applyNetPrice;
     }
-	
- 
+
     /**
      * @param double $discount Optional percentual discount on all products. Negative Value means surcharge. 
      * @return \jtl\Connector\Model\CustomerGroup
@@ -114,8 +104,7 @@ class CustomerGroup extends DataModel
     {
         return $this->discount;
     }
-	
- 
+
     /**
      * @param string $id Unique customerGroup id
      * @return \jtl\Connector\Model\CustomerGroup
@@ -132,8 +121,7 @@ class CustomerGroup extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param boolean $isDefault Optional: Flag default customer group
      * @return \jtl\Connector\Model\CustomerGroup
@@ -151,7 +139,6 @@ class CustomerGroup extends DataModel
     {
         return $this->isDefault;
     }
-
 
     /**
      * @param \jtl\Connector\Model\CustomerGroupAttr $attribute
@@ -180,7 +167,6 @@ class CustomerGroup extends DataModel
         return $this;
     }
 
-
     /**
      * @param \jtl\Connector\Model\CustomerGroupI18n $i18n
      * @return \jtl\Connector\Model\CustomerGroup
@@ -207,6 +193,4 @@ class CustomerGroup extends DataModel
         $this->i18ns = array();
         return $this;
     }
-
-
 }

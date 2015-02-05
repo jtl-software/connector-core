@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class TaxClass extends DataModel
 {
-
     /**
      * @var Identity Unique taxClass id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class TaxClass extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var boolean Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
@@ -41,7 +37,6 @@ class TaxClass extends DataModel
      */
     protected $isDefault = false;
 
-
     /**
      * @var string Optional tax class name
      * @Serializer\Type("string")
@@ -50,13 +45,14 @@ class TaxClass extends DataModel
      */
     protected $name = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id Unique taxClass id
      * @return \jtl\Connector\Model\TaxClass
@@ -74,8 +70,7 @@ class TaxClass extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param boolean $isDefault Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
      * @return \jtl\Connector\Model\TaxClass
@@ -93,8 +88,7 @@ class TaxClass extends DataModel
     {
         return $this->isDefault;
     }
-	
- 
+
     /**
      * @param string $name Optional tax class name
      * @return \jtl\Connector\Model\TaxClass
@@ -111,6 +105,4 @@ class TaxClass extends DataModel
     {
         return $this->name;
     }
-
-
 }

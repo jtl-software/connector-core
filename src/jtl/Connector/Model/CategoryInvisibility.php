@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CategoryInvisibility extends DataModel
 {
-
     /**
      * @var Identity Reference to category to hide from customerGroupId
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class CategoryInvisibility extends DataModel
      * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
      */
     protected $categoryId = null;
-
 
     /**
      * @var Identity Reference to customerGroup that is not allowed to view categoryId
@@ -41,14 +37,15 @@ class CategoryInvisibility extends DataModel
      */
     protected $customerGroupId = null;
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->categoryId = new Identity();
         $this->customerGroupId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $categoryId Reference to category to hide from customerGroupId
      * @return \jtl\Connector\Model\CategoryInvisibility
@@ -66,8 +63,7 @@ class CategoryInvisibility extends DataModel
     {
         return $this->categoryId;
     }
-	
- 
+
     /**
      * @param Identity $customerGroupId Reference to customerGroup that is not allowed to view categoryId
      * @return \jtl\Connector\Model\CategoryInvisibility
@@ -85,6 +81,4 @@ class CategoryInvisibility extends DataModel
     {
         return $this->customerGroupId;
     }
-
-
 }

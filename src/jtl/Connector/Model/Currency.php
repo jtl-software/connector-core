@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Currency extends DataModel
 {
-
     /**
      * @var string Optional delimiter char for cent, default=",". Ignore this flag if you have the correct user locale preference.
      * @Serializer\Type("string")
@@ -31,7 +28,6 @@ class Currency extends DataModel
      * @Serializer\Accessor(getter="getDelimiterCent",setter="setDelimiterCent")
      */
     protected $delimiterCent = '';
-
 
     /**
      * @var string Optional delimiter char for thousand. Default=".". Ignore this flag if you have the correct user locale preference.
@@ -41,7 +37,6 @@ class Currency extends DataModel
      */
     protected $delimiterThousand = '';
 
-
     /**
      * @var double Optional conversion factor to default currency. Default is 1 (equals default currency)
      * @Serializer\Type("double")
@@ -49,7 +44,6 @@ class Currency extends DataModel
      * @Serializer\Accessor(getter="getFactor",setter="setFactor")
      */
     protected $factor = 0.0;
-
 
     /**
      * @var boolean Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference. 
@@ -59,7 +53,6 @@ class Currency extends DataModel
      */
     protected $hasCurrencySignBeforeValue = false;
 
-
     /**
      * @var string Unique currency id
      * @Serializer\Type("string")
@@ -67,7 +60,6 @@ class Currency extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = '';
-
 
     /**
      * @var boolean Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default. 
@@ -77,7 +69,6 @@ class Currency extends DataModel
      */
     protected $isDefault = false;
 
-
     /**
      * @var string Currency name
      * @Serializer\Type("string")
@@ -85,7 +76,6 @@ class Currency extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
 
     /**
      * @var string Optional HTML name e.g. "&euro;"
@@ -95,8 +85,7 @@ class Currency extends DataModel
      */
     protected $nameHtml = '';
 
-	
- 
+
     /**
      * @param string $delimiterCent Optional delimiter char for cent, default=",". Ignore this flag if you have the correct user locale preference.
      * @return \jtl\Connector\Model\Currency
@@ -113,8 +102,7 @@ class Currency extends DataModel
     {
         return $this->delimiterCent;
     }
-	
- 
+
     /**
      * @param string $delimiterThousand Optional delimiter char for thousand. Default=".". Ignore this flag if you have the correct user locale preference.
      * @return \jtl\Connector\Model\Currency
@@ -131,8 +119,7 @@ class Currency extends DataModel
     {
         return $this->delimiterThousand;
     }
-	
- 
+
     /**
      * @param double $factor Optional conversion factor to default currency. Default is 1 (equals default currency)
      * @return \jtl\Connector\Model\Currency
@@ -149,8 +136,7 @@ class Currency extends DataModel
     {
         return $this->factor;
     }
-	
- 
+
     /**
      * @param boolean $hasCurrencySignBeforeValue Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference. 
      * @return \jtl\Connector\Model\Currency
@@ -168,8 +154,7 @@ class Currency extends DataModel
     {
         return $this->hasCurrencySignBeforeValue;
     }
-	
- 
+
     /**
      * @param string $id Unique currency id
      * @return \jtl\Connector\Model\Currency
@@ -186,8 +171,7 @@ class Currency extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param boolean $isDefault Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default. 
      * @return \jtl\Connector\Model\Currency
@@ -205,8 +189,7 @@ class Currency extends DataModel
     {
         return $this->isDefault;
     }
-	
- 
+
     /**
      * @param string $name Currency name
      * @return \jtl\Connector\Model\Currency
@@ -223,8 +206,7 @@ class Currency extends DataModel
     {
         return $this->name;
     }
-	
- 
+
     /**
      * @param string $nameHtml Optional HTML name e.g. "&euro;"
      * @return \jtl\Connector\Model\Currency
@@ -241,6 +223,4 @@ class Currency extends DataModel
     {
         return $this->nameHtml;
     }
-
-
 }

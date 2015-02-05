@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CustomerOrderItem extends DataModel
 {
-
     /**
      * @var Identity Optional reference to configItemId (if item is part of a configurable item)
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class CustomerOrderItem extends DataModel
      * @Serializer\Accessor(getter="getConfigItemId",setter="setConfigItemId")
      */
     protected $configItemId = null;
-
 
     /**
      * @var Identity Reference to customerOrder
@@ -41,7 +37,6 @@ class CustomerOrderItem extends DataModel
      */
     protected $customerOrderId = null;
 
-
     /**
      * @var Identity Unique customerOrderItem id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -49,7 +44,6 @@ class CustomerOrderItem extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var Identity Reference to product
@@ -59,7 +53,6 @@ class CustomerOrderItem extends DataModel
      */
     protected $productId = null;
 
-
     /**
      * @var string Order item name
      * @Serializer\Type("string")
@@ -67,7 +60,6 @@ class CustomerOrderItem extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
 
     /**
      * @var double Price (net)
@@ -77,7 +69,6 @@ class CustomerOrderItem extends DataModel
      */
     protected $price = 0.0;
 
-
     /**
      * @var double Quantity purchased
      * @Serializer\Type("double")
@@ -85,7 +76,6 @@ class CustomerOrderItem extends DataModel
      * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
      */
     protected $quantity = 0.0;
-
 
     /**
      * @var string Stock keeping Unit (unique item identifier)
@@ -95,7 +85,6 @@ class CustomerOrderItem extends DataModel
      */
     protected $sku = '';
 
-
     /**
      * @var string Optional unique Hashsum (if item is part of configurable item
      * @Serializer\Type("string")
@@ -103,7 +92,6 @@ class CustomerOrderItem extends DataModel
      * @Serializer\Accessor(getter="getUnique",setter="setUnique")
      */
     protected $unique = '';
-
 
     /**
      * @var double Value added tax
@@ -113,7 +101,6 @@ class CustomerOrderItem extends DataModel
      */
     protected $vat = 0.0;
 
-
     /**
      * @var jtl\Connector\Model\CustomerOrderItemVariation[] 
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderItemVariation>")
@@ -122,7 +109,9 @@ class CustomerOrderItem extends DataModel
      */
     protected $variations = array();
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
@@ -130,8 +119,7 @@ class CustomerOrderItem extends DataModel
         $this->customerOrderId = new Identity();
         $this->configItemId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $configItemId Optional reference to configItemId (if item is part of a configurable item)
      * @return \jtl\Connector\Model\CustomerOrderItem
@@ -149,8 +137,7 @@ class CustomerOrderItem extends DataModel
     {
         return $this->configItemId;
     }
-	
- 
+
     /**
      * @param Identity $customerOrderId Reference to customerOrder
      * @return \jtl\Connector\Model\CustomerOrderItem
@@ -168,8 +155,7 @@ class CustomerOrderItem extends DataModel
     {
         return $this->customerOrderId;
     }
-	
- 
+
     /**
      * @param Identity $id Unique customerOrderItem id
      * @return \jtl\Connector\Model\CustomerOrderItem
@@ -187,8 +173,7 @@ class CustomerOrderItem extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\CustomerOrderItem
@@ -206,8 +191,7 @@ class CustomerOrderItem extends DataModel
     {
         return $this->productId;
     }
-	
- 
+
     /**
      * @param string $name Order item name
      * @return \jtl\Connector\Model\CustomerOrderItem
@@ -224,8 +208,7 @@ class CustomerOrderItem extends DataModel
     {
         return $this->name;
     }
-	
- 
+
     /**
      * @param double $price Price (net)
      * @return \jtl\Connector\Model\CustomerOrderItem
@@ -242,8 +225,7 @@ class CustomerOrderItem extends DataModel
     {
         return $this->price;
     }
-	
- 
+
     /**
      * @param double $quantity Quantity purchased
      * @return \jtl\Connector\Model\CustomerOrderItem
@@ -260,8 +242,7 @@ class CustomerOrderItem extends DataModel
     {
         return $this->quantity;
     }
-	
- 
+
     /**
      * @param string $sku Stock keeping Unit (unique item identifier)
      * @return \jtl\Connector\Model\CustomerOrderItem
@@ -278,8 +259,7 @@ class CustomerOrderItem extends DataModel
     {
         return $this->sku;
     }
-	
- 
+
     /**
      * @param string $unique Optional unique Hashsum (if item is part of configurable item
      * @return \jtl\Connector\Model\CustomerOrderItem
@@ -296,8 +276,7 @@ class CustomerOrderItem extends DataModel
     {
         return $this->unique;
     }
-	
- 
+
     /**
      * @param double $vat Value added tax
      * @return \jtl\Connector\Model\CustomerOrderItem
@@ -314,7 +293,6 @@ class CustomerOrderItem extends DataModel
     {
         return $this->vat;
     }
-
 
     /**
      * @param \jtl\Connector\Model\CustomerOrderItemVariation $variation
@@ -342,6 +320,4 @@ class CustomerOrderItem extends DataModel
         $this->variations = array();
         return $this;
     }
-
-
 }

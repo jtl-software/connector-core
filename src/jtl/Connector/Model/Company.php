@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Company extends DataModel
 {
-
     /**
      * @var string Bank account holder name e.g. 'John Doe'
      * @Serializer\Type("string")
@@ -31,7 +28,6 @@ class Company extends DataModel
      * @Serializer\Accessor(getter="getAccountHolder",setter="setAccountHolder")
      */
     protected $accountHolder = '';
-
 
     /**
      * @var string Bank account number
@@ -41,7 +37,6 @@ class Company extends DataModel
      */
     protected $accountNumber = '';
 
-
     /**
      * @var string Bank code number
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class Company extends DataModel
      * @Serializer\Accessor(getter="getBankCode",setter="setBankCode")
      */
     protected $bankCode = '';
-
 
     /**
      * @var string Bank name e.g. 'Deutsche Bank'
@@ -59,7 +53,6 @@ class Company extends DataModel
      */
     protected $bankName = '';
 
-
     /**
      * @var string Bank Identifier Code (BIC)
      * @Serializer\Type("string")
@@ -67,7 +60,6 @@ class Company extends DataModel
      * @Serializer\Accessor(getter="getBic",setter="setBic")
      */
     protected $bic = '';
-
 
     /**
      * @var string Company businessman / entrepreneur
@@ -77,7 +69,6 @@ class Company extends DataModel
      */
     protected $businessman = '';
 
-
     /**
      * @var string City
      * @Serializer\Type("string")
@@ -85,7 +76,6 @@ class Company extends DataModel
      * @Serializer\Accessor(getter="getCity",setter="setCity")
      */
     protected $city = '';
-
 
     /**
      * @var string CountryIso
@@ -95,7 +85,6 @@ class Company extends DataModel
      */
     protected $countryIso = '';
 
-
     /**
      * @var string Company E-Mail address
      * @Serializer\Type("string")
@@ -103,7 +92,6 @@ class Company extends DataModel
      * @Serializer\Accessor(getter="getEMail",setter="setEMail")
      */
     protected $eMail = '';
-
 
     /**
      * @var string Fax number
@@ -113,7 +101,6 @@ class Company extends DataModel
      */
     protected $fax = '';
 
-
     /**
      * @var string International Bank Account Number (IBAN) 
      * @Serializer\Type("string")
@@ -121,7 +108,6 @@ class Company extends DataModel
      * @Serializer\Accessor(getter="getIban",setter="setIban")
      */
     protected $iban = '';
-
 
     /**
      * @var string Unique company id
@@ -131,7 +117,6 @@ class Company extends DataModel
      */
     protected $id = '';
 
-
     /**
      * @var string Company name
      * @Serializer\Type("string")
@@ -139,7 +124,6 @@ class Company extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
 
     /**
      * @var string Phone number
@@ -149,7 +133,6 @@ class Company extends DataModel
      */
     protected $phone = '';
 
-
     /**
      * @var string Street
      * @Serializer\Type("string")
@@ -157,7 +140,6 @@ class Company extends DataModel
      * @Serializer\Accessor(getter="getStreet",setter="setStreet")
      */
     protected $street = '';
-
 
     /**
      * @var string Tax id number (german: Steuernummer)
@@ -167,7 +149,6 @@ class Company extends DataModel
      */
     protected $taxIdNumber = '';
 
-
     /**
      * @var string VAT registration number (german: USt-ID)
      * @Serializer\Type("string")
@@ -175,7 +156,6 @@ class Company extends DataModel
      * @Serializer\Accessor(getter="getVatNumber",setter="setVatNumber")
      */
     protected $vatNumber = '';
-
 
     /**
      * @var string Company website URL
@@ -185,7 +165,6 @@ class Company extends DataModel
      */
     protected $websiteUrl = '';
 
-
     /**
      * @var string Zip code / postcode
      * @Serializer\Type("string")
@@ -194,8 +173,7 @@ class Company extends DataModel
      */
     protected $zipCode = '';
 
-	
- 
+
     /**
      * @param string $accountHolder Bank account holder name e.g. 'John Doe'
      * @return \jtl\Connector\Model\Company
@@ -212,8 +190,7 @@ class Company extends DataModel
     {
         return $this->accountHolder;
     }
-	
- 
+
     /**
      * @param string $accountNumber Bank account number
      * @return \jtl\Connector\Model\Company
@@ -230,8 +207,7 @@ class Company extends DataModel
     {
         return $this->accountNumber;
     }
-	
- 
+
     /**
      * @param string $bankCode Bank code number
      * @return \jtl\Connector\Model\Company
@@ -248,8 +224,7 @@ class Company extends DataModel
     {
         return $this->bankCode;
     }
-	
- 
+
     /**
      * @param string $bankName Bank name e.g. 'Deutsche Bank'
      * @return \jtl\Connector\Model\Company
@@ -266,8 +241,7 @@ class Company extends DataModel
     {
         return $this->bankName;
     }
-	
- 
+
     /**
      * @param string $bic Bank Identifier Code (BIC)
      * @return \jtl\Connector\Model\Company
@@ -284,8 +258,7 @@ class Company extends DataModel
     {
         return $this->bic;
     }
-	
- 
+
     /**
      * @param string $businessman Company businessman / entrepreneur
      * @return \jtl\Connector\Model\Company
@@ -302,8 +275,7 @@ class Company extends DataModel
     {
         return $this->businessman;
     }
-	
- 
+
     /**
      * @param string $city City
      * @return \jtl\Connector\Model\Company
@@ -320,8 +292,7 @@ class Company extends DataModel
     {
         return $this->city;
     }
-	
- 
+
     /**
      * @param string $countryIso CountryIso
      * @return \jtl\Connector\Model\Company
@@ -338,8 +309,7 @@ class Company extends DataModel
     {
         return $this->countryIso;
     }
-	
- 
+
     /**
      * @param string $eMail Company E-Mail address
      * @return \jtl\Connector\Model\Company
@@ -356,8 +326,7 @@ class Company extends DataModel
     {
         return $this->eMail;
     }
-	
- 
+
     /**
      * @param string $fax Fax number
      * @return \jtl\Connector\Model\Company
@@ -374,8 +343,7 @@ class Company extends DataModel
     {
         return $this->fax;
     }
-	
- 
+
     /**
      * @param string $iban International Bank Account Number (IBAN) 
      * @return \jtl\Connector\Model\Company
@@ -392,8 +360,7 @@ class Company extends DataModel
     {
         return $this->iban;
     }
-	
- 
+
     /**
      * @param string $id Unique company id
      * @return \jtl\Connector\Model\Company
@@ -410,8 +377,7 @@ class Company extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param string $name Company name
      * @return \jtl\Connector\Model\Company
@@ -428,8 +394,7 @@ class Company extends DataModel
     {
         return $this->name;
     }
-	
- 
+
     /**
      * @param string $phone Phone number
      * @return \jtl\Connector\Model\Company
@@ -446,8 +411,7 @@ class Company extends DataModel
     {
         return $this->phone;
     }
-	
- 
+
     /**
      * @param string $street Street
      * @return \jtl\Connector\Model\Company
@@ -464,8 +428,7 @@ class Company extends DataModel
     {
         return $this->street;
     }
-	
- 
+
     /**
      * @param string $taxIdNumber Tax id number (german: Steuernummer)
      * @return \jtl\Connector\Model\Company
@@ -482,8 +445,7 @@ class Company extends DataModel
     {
         return $this->taxIdNumber;
     }
-	
- 
+
     /**
      * @param string $vatNumber VAT registration number (german: USt-ID)
      * @return \jtl\Connector\Model\Company
@@ -500,8 +462,7 @@ class Company extends DataModel
     {
         return $this->vatNumber;
     }
-	
- 
+
     /**
      * @param string $websiteUrl Company website URL
      * @return \jtl\Connector\Model\Company
@@ -518,8 +479,7 @@ class Company extends DataModel
     {
         return $this->websiteUrl;
     }
-	
- 
+
     /**
      * @param string $zipCode Zip code / postcode
      * @return \jtl\Connector\Model\Company
@@ -536,6 +496,4 @@ class Company extends DataModel
     {
         return $this->zipCode;
     }
-
-
 }

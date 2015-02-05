@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class FileUpload extends DataModel
 {
-
     /**
      * @var Identity Unique fileUpload id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class FileUpload extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var Identity Reference to product
@@ -41,14 +37,15 @@ class FileUpload extends DataModel
      */
     protected $productId = null;
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
         $this->productId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id Unique fileUpload id
      * @return \jtl\Connector\Model\FileUpload
@@ -66,8 +63,7 @@ class FileUpload extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\FileUpload
@@ -85,6 +81,4 @@ class FileUpload extends DataModel
     {
         return $this->productId;
     }
-
-
 }

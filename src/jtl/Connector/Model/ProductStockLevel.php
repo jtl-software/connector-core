@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -22,7 +20,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductStockLevel extends DataModel
 {
-
     /**
      * @var double 
      * @Serializer\Type("double")
@@ -31,8 +28,7 @@ class ProductStockLevel extends DataModel
      */
     protected $stockLevel = 0.0;
 
-	
- 
+
     /**
      * @param double $stockLevel 
      * @return \jtl\Connector\Model\ProductStockLevel
@@ -49,6 +45,4 @@ class ProductStockLevel extends DataModel
     {
         return $this->stockLevel;
     }
-
-
 }

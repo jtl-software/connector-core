@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -22,7 +20,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class DeliveryNoteItem extends DataModel
 {
-
     /**
      * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -30,7 +27,6 @@ class DeliveryNoteItem extends DataModel
      * @Serializer\Accessor(getter="getCustomerOrderItemId",setter="setCustomerOrderItemId")
      */
     protected $customerOrderItemId = null;
-
 
     /**
      * @var Identity 
@@ -40,7 +36,6 @@ class DeliveryNoteItem extends DataModel
      */
     protected $deliveryNoteId = null;
 
-
     /**
      * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -48,7 +43,6 @@ class DeliveryNoteItem extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var double 
@@ -58,7 +52,6 @@ class DeliveryNoteItem extends DataModel
      */
     protected $quantity = 0.0;
 
-
     /**
      * @var jtl\Connector\Model\DeliveryNoteItemInfo[] 
      * @Serializer\Type("array<jtl\Connector\Model\DeliveryNoteItemInfo>")
@@ -67,15 +60,16 @@ class DeliveryNoteItem extends DataModel
      */
     protected $infos = array();
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
         $this->deliveryNoteId = new Identity();
         $this->customerOrderItemId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $customerOrderItemId 
      * @return \jtl\Connector\Model\DeliveryNoteItem
@@ -93,8 +87,7 @@ class DeliveryNoteItem extends DataModel
     {
         return $this->customerOrderItemId;
     }
-	
- 
+
     /**
      * @param Identity $deliveryNoteId 
      * @return \jtl\Connector\Model\DeliveryNoteItem
@@ -112,8 +105,7 @@ class DeliveryNoteItem extends DataModel
     {
         return $this->deliveryNoteId;
     }
-	
- 
+
     /**
      * @param Identity $id 
      * @return \jtl\Connector\Model\DeliveryNoteItem
@@ -131,8 +123,7 @@ class DeliveryNoteItem extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param double $quantity 
      * @return \jtl\Connector\Model\DeliveryNoteItem
@@ -149,7 +140,6 @@ class DeliveryNoteItem extends DataModel
     {
         return $this->quantity;
     }
-
 
     /**
      * @param \jtl\Connector\Model\DeliveryNoteItemInfo $info
@@ -177,6 +167,4 @@ class DeliveryNoteItem extends DataModel
         $this->infos = array();
         return $this;
     }
-
-
 }

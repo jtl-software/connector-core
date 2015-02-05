@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Warehouse extends DataModel
 {
-
     /**
      * @var Identity Unique warehouse id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class Warehouse extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var string Warehouse name
@@ -41,13 +37,14 @@ class Warehouse extends DataModel
      */
     protected $name = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id Unique warehouse id
      * @return \jtl\Connector\Model\Warehouse
@@ -65,8 +62,7 @@ class Warehouse extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param string $name Warehouse name
      * @return \jtl\Connector\Model\Warehouse
@@ -83,6 +79,4 @@ class Warehouse extends DataModel
     {
         return $this->name;
     }
-
-
 }

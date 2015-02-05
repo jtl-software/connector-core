@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class TaxZoneCountry extends DataModel
 {
-
     /**
      * @var Identity Reference to taxZone
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class TaxZoneCountry extends DataModel
      * @Serializer\Accessor(getter="getTaxZoneId",setter="setTaxZoneId")
      */
     protected $taxZoneId = null;
-
 
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
@@ -41,13 +37,14 @@ class TaxZoneCountry extends DataModel
      */
     protected $countryIso = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->taxZoneId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $taxZoneId Reference to taxZone
      * @return \jtl\Connector\Model\TaxZoneCountry
@@ -65,8 +62,7 @@ class TaxZoneCountry extends DataModel
     {
         return $this->taxZoneId;
     }
-	
- 
+
     /**
      * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
      * @return \jtl\Connector\Model\TaxZoneCountry
@@ -83,6 +79,4 @@ class TaxZoneCountry extends DataModel
     {
         return $this->countryIso;
     }
-
-
 }

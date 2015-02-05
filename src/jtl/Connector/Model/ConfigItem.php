@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ConfigItem extends DataModel
 {
-
     /**
      * @var string Reference to configGroup
      * @Serializer\Type("string")
@@ -31,7 +28,6 @@ class ConfigItem extends DataModel
      * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
      */
     protected $configGroupId = '';
-
 
     /**
      * @var string Unique configItem id
@@ -41,7 +37,6 @@ class ConfigItem extends DataModel
      */
     protected $id = '';
 
-
     /**
      * @var string Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class ConfigItem extends DataModel
      * @Serializer\Accessor(getter="getIgnoreMultiplier",setter="setIgnoreMultiplier")
      */
     protected $ignoreMultiplier = '';
-
 
     /**
      * @var string Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
@@ -59,7 +53,6 @@ class ConfigItem extends DataModel
      */
     protected $inheritProductName = '';
 
-
     /**
      * @var string Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
      * @Serializer\Type("string")
@@ -67,7 +60,6 @@ class ConfigItem extends DataModel
      * @Serializer\Accessor(getter="getInheritProductPrice",setter="setInheritProductPrice")
      */
     protected $inheritProductPrice = '';
-
 
     /**
      * @var double Optional initial / predefined quantity. Default is one (1) quantity piece. 
@@ -77,7 +69,6 @@ class ConfigItem extends DataModel
      */
     protected $initialQuantity = 0.0;
 
-
     /**
      * @var string Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
      * @Serializer\Type("string")
@@ -85,7 +76,6 @@ class ConfigItem extends DataModel
      * @Serializer\Accessor(getter="getIsPreSelected",setter="setIsPreSelected")
      */
     protected $isPreSelected = '';
-
 
     /**
      * @var string Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
@@ -95,7 +85,6 @@ class ConfigItem extends DataModel
      */
     protected $isRecommended = '';
 
-
     /**
      * @var double Maximum allowed quantity. Default 0 for no maximum limit. 
      * @Serializer\Type("double")
@@ -103,7 +92,6 @@ class ConfigItem extends DataModel
      * @Serializer\Accessor(getter="getMaxQuantity",setter="setMaxQuantity")
      */
     protected $maxQuantity = 0.0;
-
 
     /**
      * @var double Optional minimum quantity required to add configItem. Default 0 for no minimum quantity. 
@@ -113,7 +101,6 @@ class ConfigItem extends DataModel
      */
     protected $minQuantity = 0.0;
 
-
     /**
      * @var string Optional reference to product
      * @Serializer\Type("string")
@@ -121,7 +108,6 @@ class ConfigItem extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = '';
-
 
     /**
      * @var string Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
@@ -131,7 +117,6 @@ class ConfigItem extends DataModel
      */
     protected $showDiscount = '';
 
-
     /**
      * @var string Optional: Show surcharge compared to productId price.
      * @Serializer\Type("string")
@@ -139,7 +124,6 @@ class ConfigItem extends DataModel
      * @Serializer\Accessor(getter="getShowSurcharge",setter="setShowSurcharge")
      */
     protected $showSurcharge = '';
-
 
     /**
      * @var string Optional sort order number
@@ -149,7 +133,6 @@ class ConfigItem extends DataModel
      */
     protected $sort = '';
 
-
     /**
      * @var string Config item type. 0: Product, 1: Special
      * @Serializer\Type("string")
@@ -157,7 +140,6 @@ class ConfigItem extends DataModel
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
     protected $type = '';
-
 
     /**
      * @var jtl\Connector\Model\ConfigItemI18n[] 
@@ -167,7 +149,6 @@ class ConfigItem extends DataModel
      */
     protected $i18ns = array();
 
-
     /**
      * @var jtl\Connector\Model\ConfigItemPrice[] 
      * @Serializer\Type("array<jtl\Connector\Model\ConfigItemPrice>")
@@ -176,8 +157,7 @@ class ConfigItem extends DataModel
      */
     protected $prices = array();
 
-	
- 
+
     /**
      * @param string $configGroupId Reference to configGroup
      * @return \jtl\Connector\Model\ConfigItem
@@ -194,8 +174,7 @@ class ConfigItem extends DataModel
     {
         return $this->configGroupId;
     }
-	
- 
+
     /**
      * @param string $id Unique configItem id
      * @return \jtl\Connector\Model\ConfigItem
@@ -212,8 +191,7 @@ class ConfigItem extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param string $ignoreMultiplier Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
      * @return \jtl\Connector\Model\ConfigItem
@@ -230,8 +208,7 @@ class ConfigItem extends DataModel
     {
         return $this->ignoreMultiplier;
     }
-	
- 
+
     /**
      * @param string $inheritProductName Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
      * @return \jtl\Connector\Model\ConfigItem
@@ -248,8 +225,7 @@ class ConfigItem extends DataModel
     {
         return $this->inheritProductName;
     }
-	
- 
+
     /**
      * @param string $inheritProductPrice Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
      * @return \jtl\Connector\Model\ConfigItem
@@ -266,8 +242,7 @@ class ConfigItem extends DataModel
     {
         return $this->inheritProductPrice;
     }
-	
- 
+
     /**
      * @param double $initialQuantity Optional initial / predefined quantity. Default is one (1) quantity piece. 
      * @return \jtl\Connector\Model\ConfigItem
@@ -284,8 +259,7 @@ class ConfigItem extends DataModel
     {
         return $this->initialQuantity;
     }
-	
- 
+
     /**
      * @param string $isPreSelected Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
      * @return \jtl\Connector\Model\ConfigItem
@@ -302,8 +276,7 @@ class ConfigItem extends DataModel
     {
         return $this->isPreSelected;
     }
-	
- 
+
     /**
      * @param string $isRecommended Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
      * @return \jtl\Connector\Model\ConfigItem
@@ -320,8 +293,7 @@ class ConfigItem extends DataModel
     {
         return $this->isRecommended;
     }
-	
- 
+
     /**
      * @param double $maxQuantity Maximum allowed quantity. Default 0 for no maximum limit. 
      * @return \jtl\Connector\Model\ConfigItem
@@ -338,8 +310,7 @@ class ConfigItem extends DataModel
     {
         return $this->maxQuantity;
     }
-	
- 
+
     /**
      * @param double $minQuantity Optional minimum quantity required to add configItem. Default 0 for no minimum quantity. 
      * @return \jtl\Connector\Model\ConfigItem
@@ -356,8 +327,7 @@ class ConfigItem extends DataModel
     {
         return $this->minQuantity;
     }
-	
- 
+
     /**
      * @param string $productId Optional reference to product
      * @return \jtl\Connector\Model\ConfigItem
@@ -374,8 +344,7 @@ class ConfigItem extends DataModel
     {
         return $this->productId;
     }
-	
- 
+
     /**
      * @param string $showDiscount Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
      * @return \jtl\Connector\Model\ConfigItem
@@ -392,8 +361,7 @@ class ConfigItem extends DataModel
     {
         return $this->showDiscount;
     }
-	
- 
+
     /**
      * @param string $showSurcharge Optional: Show surcharge compared to productId price.
      * @return \jtl\Connector\Model\ConfigItem
@@ -410,8 +378,7 @@ class ConfigItem extends DataModel
     {
         return $this->showSurcharge;
     }
-	
- 
+
     /**
      * @param string $sort Optional sort order number
      * @return \jtl\Connector\Model\ConfigItem
@@ -428,8 +395,7 @@ class ConfigItem extends DataModel
     {
         return $this->sort;
     }
-	
- 
+
     /**
      * @param string $type Config item type. 0: Product, 1: Special
      * @return \jtl\Connector\Model\ConfigItem
@@ -446,7 +412,6 @@ class ConfigItem extends DataModel
     {
         return $this->type;
     }
-
 
     /**
      * @param \jtl\Connector\Model\ConfigItemI18n $i18n
@@ -475,7 +440,6 @@ class ConfigItem extends DataModel
         return $this;
     }
 
-
     /**
      * @param \jtl\Connector\Model\ConfigItemPrice $price
      * @return \jtl\Connector\Model\ConfigItem
@@ -502,6 +466,4 @@ class ConfigItem extends DataModel
         $this->prices = array();
         return $this;
     }
-
-
 }

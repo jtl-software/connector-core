@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class DeliveryStatus extends DataModel
 {
-
     /**
      * @var Identity DeliveryStatus id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class DeliveryStatus extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var string Locale
@@ -41,7 +37,6 @@ class DeliveryStatus extends DataModel
      */
     protected $languageISO = '';
 
-
     /**
      * @var string Localized delivery status text
      * @Serializer\Type("string")
@@ -50,13 +45,14 @@ class DeliveryStatus extends DataModel
      */
     protected $name = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id DeliveryStatus id
      * @return \jtl\Connector\Model\DeliveryStatus
@@ -74,8 +70,7 @@ class DeliveryStatus extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param string $languageISO Locale
      * @return \jtl\Connector\Model\DeliveryStatus
@@ -92,8 +87,7 @@ class DeliveryStatus extends DataModel
     {
         return $this->languageISO;
     }
-	
- 
+
     /**
      * @param string $name Localized delivery status text
      * @return \jtl\Connector\Model\DeliveryStatus
@@ -110,6 +104,4 @@ class DeliveryStatus extends DataModel
     {
         return $this->name;
     }
-
-
 }

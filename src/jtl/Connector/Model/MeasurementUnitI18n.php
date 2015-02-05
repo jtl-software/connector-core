@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class MeasurementUnitI18n extends DataModel
 {
-
     /**
      * @var Identity Reference to measurementUnitId
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class MeasurementUnitI18n extends DataModel
      * @Serializer\Accessor(getter="getMeasurementUnitId",setter="setMeasurementUnitId")
      */
     protected $measurementUnitId = null;
-
 
     /**
      * @var string Locale
@@ -41,7 +37,6 @@ class MeasurementUnitI18n extends DataModel
      */
     protected $languageISO = '';
 
-
     /**
      * @var string Localized Name
      * @Serializer\Type("string")
@@ -50,13 +45,14 @@ class MeasurementUnitI18n extends DataModel
      */
     protected $name = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->measurementUnitId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $measurementUnitId Reference to measurementUnitId
      * @return \jtl\Connector\Model\MeasurementUnitI18n
@@ -74,8 +70,7 @@ class MeasurementUnitI18n extends DataModel
     {
         return $this->measurementUnitId;
     }
-	
- 
+
     /**
      * @param string $languageISO Locale
      * @return \jtl\Connector\Model\MeasurementUnitI18n
@@ -92,8 +87,7 @@ class MeasurementUnitI18n extends DataModel
     {
         return $this->languageISO;
     }
-	
- 
+
     /**
      * @param string $name Localized Name
      * @return \jtl\Connector\Model\MeasurementUnitI18n
@@ -110,6 +104,4 @@ class MeasurementUnitI18n extends DataModel
     {
         return $this->name;
     }
-
-
 }

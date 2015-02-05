@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductWarehouseInfo extends DataModel
 {
-
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class ProductWarehouseInfo extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-
 
     /**
      * @var Identity 
@@ -41,7 +37,6 @@ class ProductWarehouseInfo extends DataModel
      */
     protected $warehouseId = null;
 
-
     /**
      * @var double Optional product inflow quantity for specified warehouse
      * @Serializer\Type("double")
@@ -49,7 +44,6 @@ class ProductWarehouseInfo extends DataModel
      * @Serializer\Accessor(getter="getInflowQuantity",setter="setInflowQuantity")
      */
     protected $inflowQuantity = 0.0;
-
 
     /**
      * @var double 
@@ -59,14 +53,15 @@ class ProductWarehouseInfo extends DataModel
      */
     protected $stockLevel = 0.0;
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->productId = new Identity();
         $this->warehouseId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductWarehouseInfo
@@ -84,8 +79,7 @@ class ProductWarehouseInfo extends DataModel
     {
         return $this->productId;
     }
-	
- 
+
     /**
      * @param Identity $warehouseId 
      * @return \jtl\Connector\Model\ProductWarehouseInfo
@@ -103,8 +97,7 @@ class ProductWarehouseInfo extends DataModel
     {
         return $this->warehouseId;
     }
-	
- 
+
     /**
      * @param double $inflowQuantity Optional product inflow quantity for specified warehouse
      * @return \jtl\Connector\Model\ProductWarehouseInfo
@@ -121,8 +114,7 @@ class ProductWarehouseInfo extends DataModel
     {
         return $this->inflowQuantity;
     }
-	
- 
+
     /**
      * @param double $stockLevel 
      * @return \jtl\Connector\Model\ProductWarehouseInfo
@@ -139,6 +131,4 @@ class ProductWarehouseInfo extends DataModel
     {
         return $this->stockLevel;
     }
-
-
 }

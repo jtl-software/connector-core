@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CrossSelling extends DataModel
 {
-
     /**
      * @var string Reference to crossSellingGroup
      * @Serializer\Type("string")
@@ -31,7 +28,6 @@ class CrossSelling extends DataModel
      * @Serializer\Accessor(getter="getCrossSellingGroupId",setter="setCrossSellingGroupId")
      */
     protected $crossSellingGroupId = '';
-
 
     /**
      * @var string Unique crossSelling id
@@ -41,7 +37,6 @@ class CrossSelling extends DataModel
      */
     protected $id = '';
 
-
     /**
      * @var string Reference to product (main product)
      * @Serializer\Type("string")
@@ -50,8 +45,7 @@ class CrossSelling extends DataModel
      */
     protected $productId = '';
 
-	
- 
+
     /**
      * @param string $crossSellingGroupId Reference to crossSellingGroup
      * @return \jtl\Connector\Model\CrossSelling
@@ -68,8 +62,7 @@ class CrossSelling extends DataModel
     {
         return $this->crossSellingGroupId;
     }
-	
- 
+
     /**
      * @param string $id Unique crossSelling id
      * @return \jtl\Connector\Model\CrossSelling
@@ -86,8 +79,7 @@ class CrossSelling extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param string $productId Reference to product (main product)
      * @return \jtl\Connector\Model\CrossSelling
@@ -104,6 +96,4 @@ class CrossSelling extends DataModel
     {
         return $this->productId;
     }
-
-
 }

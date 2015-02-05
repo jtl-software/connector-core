@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Language extends DataModel
 {
-
     /**
      * @var Identity Unique language id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class Language extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var boolean Flag default language for frontend. Exact 1 language must be marked as default.
@@ -41,7 +37,6 @@ class Language extends DataModel
      */
     protected $isDefault = false;
 
-
     /**
      * @var string English term
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class Language extends DataModel
      * @Serializer\Accessor(getter="getNameEnglish",setter="setNameEnglish")
      */
     protected $nameEnglish = '';
-
 
     /**
      * @var string German term
@@ -59,13 +53,14 @@ class Language extends DataModel
      */
     protected $nameGerman = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id Unique language id
      * @return \jtl\Connector\Model\Language
@@ -83,8 +78,7 @@ class Language extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param boolean $isDefault Flag default language for frontend. Exact 1 language must be marked as default.
      * @return \jtl\Connector\Model\Language
@@ -102,8 +96,7 @@ class Language extends DataModel
     {
         return $this->isDefault;
     }
-	
- 
+
     /**
      * @param string $nameEnglish English term
      * @return \jtl\Connector\Model\Language
@@ -120,8 +113,7 @@ class Language extends DataModel
     {
         return $this->nameEnglish;
     }
-	
- 
+
     /**
      * @param string $nameGerman German term
      * @return \jtl\Connector\Model\Language
@@ -138,6 +130,4 @@ class Language extends DataModel
     {
         return $this->nameGerman;
     }
-
-
 }

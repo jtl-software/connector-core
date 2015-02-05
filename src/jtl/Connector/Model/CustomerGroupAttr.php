@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CustomerGroupAttr extends DataModel
 {
-
     /**
      * @var string Reference to customerGroup
      * @Serializer\Type("string")
@@ -31,7 +28,6 @@ class CustomerGroupAttr extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = '';
-
 
     /**
      * @var string Unique customerGroupAttr id
@@ -41,7 +37,6 @@ class CustomerGroupAttr extends DataModel
      */
     protected $id = '';
 
-
     /**
      * @var string Attribute key
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class CustomerGroupAttr extends DataModel
      * @Serializer\Accessor(getter="getKey",setter="setKey")
      */
     protected $key = '';
-
 
     /**
      * @var string Attribute value
@@ -59,8 +53,7 @@ class CustomerGroupAttr extends DataModel
      */
     protected $value = '';
 
-	
- 
+
     /**
      * @param string $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\CustomerGroupAttr
@@ -77,8 +70,7 @@ class CustomerGroupAttr extends DataModel
     {
         return $this->customerGroupId;
     }
-	
- 
+
     /**
      * @param string $id Unique customerGroupAttr id
      * @return \jtl\Connector\Model\CustomerGroupAttr
@@ -95,8 +87,7 @@ class CustomerGroupAttr extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param string $key Attribute key
      * @return \jtl\Connector\Model\CustomerGroupAttr
@@ -113,8 +104,7 @@ class CustomerGroupAttr extends DataModel
     {
         return $this->key;
     }
-	
- 
+
     /**
      * @param string $value Attribute value
      * @return \jtl\Connector\Model\CustomerGroupAttr
@@ -131,6 +121,4 @@ class CustomerGroupAttr extends DataModel
     {
         return $this->value;
     }
-
-
 }

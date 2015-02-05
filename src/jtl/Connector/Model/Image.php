@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -22,7 +20,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Image extends DataModel
 {
-
     /**
      * @var string 
      * @Serializer\Type("string")
@@ -30,7 +27,6 @@ class Image extends DataModel
      * @Serializer\Accessor(getter="getFilename",setter="setFilename")
      */
     protected $filename = '';
-
 
     /**
      * @var string 
@@ -40,7 +36,6 @@ class Image extends DataModel
      */
     protected $foreignKey = '';
 
-
     /**
      * @var string 
      * @Serializer\Type("string")
@@ -48,7 +43,6 @@ class Image extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = '';
-
 
     /**
      * @var string 
@@ -58,8 +52,7 @@ class Image extends DataModel
      */
     protected $imageRelationType = '';
 
-	
- 
+
     /**
      * @param string $filename 
      * @return \jtl\Connector\Model\Image
@@ -76,8 +69,7 @@ class Image extends DataModel
     {
         return $this->filename;
     }
-	
- 
+
     /**
      * @param string $foreignKey 
      * @return \jtl\Connector\Model\Image
@@ -94,8 +86,7 @@ class Image extends DataModel
     {
         return $this->foreignKey;
     }
-	
- 
+
     /**
      * @param string $id 
      * @return \jtl\Connector\Model\Image
@@ -112,8 +103,7 @@ class Image extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param string $imageRelationType 
      * @return \jtl\Connector\Model\Image
@@ -130,6 +120,4 @@ class Image extends DataModel
     {
         return $this->imageRelationType;
     }
-
-
 }

@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Customer extends DataModel
 {
-
     /**
      * @var string Date of birth
      * @Serializer\Type("string")
@@ -31,7 +28,6 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getBirthday",setter="setBirthday")
      */
     protected $birthday = '';
-
 
     /**
      * @var string City
@@ -41,7 +37,6 @@ class Customer extends DataModel
      */
     protected $city = '';
 
-
     /**
      * @var string Company name
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getCompany",setter="setCompany")
      */
     protected $company = '';
-
 
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
@@ -59,7 +53,6 @@ class Customer extends DataModel
      */
     protected $countryIso = '';
 
-
     /**
      * @var DateTime Creation date
      * @Serializer\Type("DateTime")
@@ -67,7 +60,6 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
     protected $creationDate = null;
-
 
     /**
      * @var string References a customer group
@@ -77,7 +69,6 @@ class Customer extends DataModel
      */
     protected $customerGroupId = '';
 
-
     /**
      * @var string Optional customer number set by JTL-Wawi ERP software
      * @Serializer\Type("string")
@@ -85,7 +76,6 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getCustomerNumber",setter="setCustomerNumber")
      */
     protected $customerNumber = '';
-
 
     /**
      * @var string Delivery instruction e.g. "c/o John Doe"
@@ -95,7 +85,6 @@ class Customer extends DataModel
      */
     protected $deliveryInstruction = '';
 
-
     /**
      * @var double Percentage discount for customer on all prices
      * @Serializer\Type("double")
@@ -103,7 +92,6 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getDiscount",setter="setDiscount")
      */
     protected $discount = 0.0;
-
 
     /**
      * @var string E-Mail address
@@ -113,7 +101,6 @@ class Customer extends DataModel
      */
     protected $eMail = '';
 
-
     /**
      * @var string Extra address line e.g. "Apartment 2.5"
      * @Serializer\Type("string")
@@ -121,7 +108,6 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getExtraAddressLine",setter="setExtraAddressLine")
      */
     protected $extraAddressLine = '';
-
 
     /**
      * @var string Fax number
@@ -131,7 +117,6 @@ class Customer extends DataModel
      */
     protected $fax = '';
 
-
     /**
      * @var string First name
      * @Serializer\Type("string")
@@ -139,7 +124,6 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getFirstName",setter="setFirstName")
      */
     protected $firstName = '';
-
 
     /**
      * @var boolean Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
@@ -149,7 +133,6 @@ class Customer extends DataModel
      */
     protected $hasNewsletterSubscription = false;
 
-
     /**
      * @var string Unique customer id
      * @Serializer\Type("string")
@@ -157,7 +140,6 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = '';
-
 
     /**
      * @var boolean Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
@@ -167,7 +149,6 @@ class Customer extends DataModel
      */
     protected $isActive = false;
 
-
     /**
      * @var string User locale preference
      * @Serializer\Type("string")
@@ -175,7 +156,6 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
 
     /**
      * @var string Last name
@@ -185,7 +165,6 @@ class Customer extends DataModel
      */
     protected $lastName = '';
 
-
     /**
      * @var string Mobile phone number
      * @Serializer\Type("string")
@@ -193,7 +172,6 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getMobile",setter="setMobile")
      */
     protected $mobile = '';
-
 
     /**
      * @var string Customer origin
@@ -203,7 +181,6 @@ class Customer extends DataModel
      */
     protected $origin = '';
 
-
     /**
      * @var string Phone number
      * @Serializer\Type("string")
@@ -211,7 +188,6 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getPhone",setter="setPhone")
      */
     protected $phone = '';
-
 
     /**
      * @var string Salutation (german: "Anrede")
@@ -221,7 +197,6 @@ class Customer extends DataModel
      */
     protected $salutation = '';
 
-
     /**
      * @var string State
      * @Serializer\Type("string")
@@ -229,7 +204,6 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getState",setter="setState")
      */
     protected $state = '';
-
 
     /**
      * @var string Street name
@@ -239,7 +213,6 @@ class Customer extends DataModel
      */
     protected $street = '';
 
-
     /**
      * @var string Title, e.g. "Prof. Dr."
      * @Serializer\Type("string")
@@ -247,7 +220,6 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getTitle",setter="setTitle")
      */
     protected $title = '';
-
 
     /**
      * @var string VAT number (german "USt-ID")
@@ -257,7 +229,6 @@ class Customer extends DataModel
      */
     protected $vatNumber = '';
 
-
     /**
      * @var string WWW address
      * @Serializer\Type("string")
@@ -265,7 +236,6 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getWebsiteUrl",setter="setWebsiteUrl")
      */
     protected $websiteUrl = '';
-
 
     /**
      * @var string ZIP / postal code
@@ -275,7 +245,6 @@ class Customer extends DataModel
      */
     protected $zipCode = '';
 
-
     /**
      * @var jtl\Connector\Model\CustomerAttr[] 
      * @Serializer\Type("array<jtl\Connector\Model\CustomerAttr>")
@@ -284,8 +253,7 @@ class Customer extends DataModel
      */
     protected $attributes = array();
 
-	
- 
+
     /**
      * @param string $birthday Date of birth
      * @return \jtl\Connector\Model\Customer
@@ -302,8 +270,7 @@ class Customer extends DataModel
     {
         return $this->birthday;
     }
-	
- 
+
     /**
      * @param string $city City
      * @return \jtl\Connector\Model\Customer
@@ -320,8 +287,7 @@ class Customer extends DataModel
     {
         return $this->city;
     }
-	
- 
+
     /**
      * @param string $company Company name
      * @return \jtl\Connector\Model\Customer
@@ -338,8 +304,7 @@ class Customer extends DataModel
     {
         return $this->company;
     }
-	
- 
+
     /**
      * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
      * @return \jtl\Connector\Model\Customer
@@ -356,8 +321,7 @@ class Customer extends DataModel
     {
         return $this->countryIso;
     }
-	
- 
+
     /**
      * @param DateTime $creationDate Creation date
      * @return \jtl\Connector\Model\Customer
@@ -375,8 +339,7 @@ class Customer extends DataModel
     {
         return $this->creationDate;
     }
-	
- 
+
     /**
      * @param string $customerGroupId References a customer group
      * @return \jtl\Connector\Model\Customer
@@ -393,8 +356,7 @@ class Customer extends DataModel
     {
         return $this->customerGroupId;
     }
-	
- 
+
     /**
      * @param string $customerNumber Optional customer number set by JTL-Wawi ERP software
      * @return \jtl\Connector\Model\Customer
@@ -411,8 +373,7 @@ class Customer extends DataModel
     {
         return $this->customerNumber;
     }
-	
- 
+
     /**
      * @param string $deliveryInstruction Delivery instruction e.g. "c/o John Doe"
      * @return \jtl\Connector\Model\Customer
@@ -429,8 +390,7 @@ class Customer extends DataModel
     {
         return $this->deliveryInstruction;
     }
-	
- 
+
     /**
      * @param double $discount Percentage discount for customer on all prices
      * @return \jtl\Connector\Model\Customer
@@ -447,8 +407,7 @@ class Customer extends DataModel
     {
         return $this->discount;
     }
-	
- 
+
     /**
      * @param string $eMail E-Mail address
      * @return \jtl\Connector\Model\Customer
@@ -465,8 +424,7 @@ class Customer extends DataModel
     {
         return $this->eMail;
     }
-	
- 
+
     /**
      * @param string $extraAddressLine Extra address line e.g. "Apartment 2.5"
      * @return \jtl\Connector\Model\Customer
@@ -483,8 +441,7 @@ class Customer extends DataModel
     {
         return $this->extraAddressLine;
     }
-	
- 
+
     /**
      * @param string $fax Fax number
      * @return \jtl\Connector\Model\Customer
@@ -501,8 +458,7 @@ class Customer extends DataModel
     {
         return $this->fax;
     }
-	
- 
+
     /**
      * @param string $firstName First name
      * @return \jtl\Connector\Model\Customer
@@ -519,8 +475,7 @@ class Customer extends DataModel
     {
         return $this->firstName;
     }
-	
- 
+
     /**
      * @param boolean $hasNewsletterSubscription Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
      * @return \jtl\Connector\Model\Customer
@@ -538,8 +493,7 @@ class Customer extends DataModel
     {
         return $this->hasNewsletterSubscription;
     }
-	
- 
+
     /**
      * @param string $id Unique customer id
      * @return \jtl\Connector\Model\Customer
@@ -556,8 +510,7 @@ class Customer extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param boolean $isActive Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
      * @return \jtl\Connector\Model\Customer
@@ -575,8 +528,7 @@ class Customer extends DataModel
     {
         return $this->isActive;
     }
-	
- 
+
     /**
      * @param string $languageISO User locale preference
      * @return \jtl\Connector\Model\Customer
@@ -593,8 +545,7 @@ class Customer extends DataModel
     {
         return $this->languageISO;
     }
-	
- 
+
     /**
      * @param string $lastName Last name
      * @return \jtl\Connector\Model\Customer
@@ -611,8 +562,7 @@ class Customer extends DataModel
     {
         return $this->lastName;
     }
-	
- 
+
     /**
      * @param string $mobile Mobile phone number
      * @return \jtl\Connector\Model\Customer
@@ -629,8 +579,7 @@ class Customer extends DataModel
     {
         return $this->mobile;
     }
-	
- 
+
     /**
      * @param string $origin Customer origin
      * @return \jtl\Connector\Model\Customer
@@ -647,8 +596,7 @@ class Customer extends DataModel
     {
         return $this->origin;
     }
-	
- 
+
     /**
      * @param string $phone Phone number
      * @return \jtl\Connector\Model\Customer
@@ -665,8 +613,7 @@ class Customer extends DataModel
     {
         return $this->phone;
     }
-	
- 
+
     /**
      * @param string $salutation Salutation (german: "Anrede")
      * @return \jtl\Connector\Model\Customer
@@ -683,8 +630,7 @@ class Customer extends DataModel
     {
         return $this->salutation;
     }
-	
- 
+
     /**
      * @param string $state State
      * @return \jtl\Connector\Model\Customer
@@ -701,8 +647,7 @@ class Customer extends DataModel
     {
         return $this->state;
     }
-	
- 
+
     /**
      * @param string $street Street name
      * @return \jtl\Connector\Model\Customer
@@ -719,8 +664,7 @@ class Customer extends DataModel
     {
         return $this->street;
     }
-	
- 
+
     /**
      * @param string $title Title, e.g. "Prof. Dr."
      * @return \jtl\Connector\Model\Customer
@@ -737,8 +681,7 @@ class Customer extends DataModel
     {
         return $this->title;
     }
-	
- 
+
     /**
      * @param string $vatNumber VAT number (german "USt-ID")
      * @return \jtl\Connector\Model\Customer
@@ -755,8 +698,7 @@ class Customer extends DataModel
     {
         return $this->vatNumber;
     }
-	
- 
+
     /**
      * @param string $websiteUrl WWW address
      * @return \jtl\Connector\Model\Customer
@@ -773,8 +715,7 @@ class Customer extends DataModel
     {
         return $this->websiteUrl;
     }
-	
- 
+
     /**
      * @param string $zipCode ZIP / postal code
      * @return \jtl\Connector\Model\Customer
@@ -791,7 +732,6 @@ class Customer extends DataModel
     {
         return $this->zipCode;
     }
-
 
     /**
      * @param \jtl\Connector\Model\CustomerAttr $attribute
@@ -819,6 +759,4 @@ class Customer extends DataModel
         $this->attributes = array();
         return $this;
     }
-
-
 }

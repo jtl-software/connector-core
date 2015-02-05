@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CustomerGroupPackagingQuantities extends DataModel
 {
-
     /**
      * @var string Reference to customergroup.
      * @Serializer\Type("string")
@@ -31,7 +28,6 @@ class CustomerGroupPackagingQuantities extends DataModel
      * @Serializer\Accessor(getter="getCustomergroupID",setter="setCustomergroupID")
      */
     protected $customergroupID = '';
-
 
     /**
      * @var double Contains the minimum quantity for a customergroup.
@@ -41,7 +37,6 @@ class CustomerGroupPackagingQuantities extends DataModel
      */
     protected $minimumOrderQuantity = 0.0;
 
-
     /**
      * @var double Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      * @Serializer\Type("double")
@@ -49,7 +44,6 @@ class CustomerGroupPackagingQuantities extends DataModel
      * @Serializer\Accessor(getter="getPackagingQuantity",setter="setPackagingQuantity")
      */
     protected $packagingQuantity = 0.0;
-
 
     /**
      * @var string Reference to product.
@@ -59,8 +53,7 @@ class CustomerGroupPackagingQuantities extends DataModel
      */
     protected $productId = '';
 
-	
- 
+
     /**
      * @param string $customergroupID Reference to customergroup.
      * @return \jtl\Connector\Model\CustomerGroupPackagingQuantities
@@ -77,8 +70,7 @@ class CustomerGroupPackagingQuantities extends DataModel
     {
         return $this->customergroupID;
     }
-	
- 
+
     /**
      * @param double $minimumOrderQuantity Contains the minimum quantity for a customergroup.
      * @return \jtl\Connector\Model\CustomerGroupPackagingQuantities
@@ -95,8 +87,7 @@ class CustomerGroupPackagingQuantities extends DataModel
     {
         return $this->minimumOrderQuantity;
     }
-	
- 
+
     /**
      * @param double $packagingQuantity Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      * @return \jtl\Connector\Model\CustomerGroupPackagingQuantities
@@ -113,8 +104,7 @@ class CustomerGroupPackagingQuantities extends DataModel
     {
         return $this->packagingQuantity;
     }
-	
- 
+
     /**
      * @param string $productId Reference to product.
      * @return \jtl\Connector\Model\CustomerGroupPackagingQuantities
@@ -131,6 +121,4 @@ class CustomerGroupPackagingQuantities extends DataModel
     {
         return $this->productId;
     }
-
-
 }

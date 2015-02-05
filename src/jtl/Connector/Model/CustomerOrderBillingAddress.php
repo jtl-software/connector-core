@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CustomerOrderBillingAddress extends DataModel
 {
-
     /**
      * @var Identity Reference to customer
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
      */
     protected $customerId = null;
-
 
     /**
      * @var Identity Unique customerOrderBillingAddress id
@@ -41,7 +37,6 @@ class CustomerOrderBillingAddress extends DataModel
      */
     protected $id = null;
 
-
     /**
      * @var string City
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getCity",setter="setCity")
      */
     protected $city = '';
-
 
     /**
      * @var string Company name
@@ -59,7 +53,6 @@ class CustomerOrderBillingAddress extends DataModel
      */
     protected $company = '';
 
-
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
      * @Serializer\Type("string")
@@ -67,7 +60,6 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
      */
     protected $countryIso = '';
-
 
     /**
      * @var string Delivery instruction e.g. 'John Doe'
@@ -77,7 +69,6 @@ class CustomerOrderBillingAddress extends DataModel
      */
     protected $deliveryInstruction = '';
 
-
     /**
      * @var string E-Mail address
      * @Serializer\Type("string")
@@ -85,7 +76,6 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getEMail",setter="setEMail")
      */
     protected $eMail = '';
-
 
     /**
      * @var string Extra address line e.g. 'Apartment 2.5'
@@ -95,7 +85,6 @@ class CustomerOrderBillingAddress extends DataModel
      */
     protected $extraAddressLine = '';
 
-
     /**
      * @var string Fax number
      * @Serializer\Type("string")
@@ -103,7 +92,6 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getFax",setter="setFax")
      */
     protected $fax = '';
-
 
     /**
      * @var string First name
@@ -113,7 +101,6 @@ class CustomerOrderBillingAddress extends DataModel
      */
     protected $firstName = '';
 
-
     /**
      * @var string Last name
      * @Serializer\Type("string")
@@ -121,7 +108,6 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getLastName",setter="setLastName")
      */
     protected $lastName = '';
-
 
     /**
      * @var string Mobile phone number
@@ -131,7 +117,6 @@ class CustomerOrderBillingAddress extends DataModel
      */
     protected $mobile = '';
 
-
     /**
      * @var string Phone number
      * @Serializer\Type("string")
@@ -139,7 +124,6 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getPhone",setter="setPhone")
      */
     protected $phone = '';
-
 
     /**
      * @var string Salutation (german: 'Anrede')
@@ -149,7 +133,6 @@ class CustomerOrderBillingAddress extends DataModel
      */
     protected $salutation = '';
 
-
     /**
      * @var string State
      * @Serializer\Type("string")
@@ -157,7 +140,6 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getState",setter="setState")
      */
     protected $state = '';
-
 
     /**
      * @var string Street + street number
@@ -167,7 +149,6 @@ class CustomerOrderBillingAddress extends DataModel
      */
     protected $street = '';
 
-
     /**
      * @var string Title (e.g. 'Prof. Dr.')
      * @Serializer\Type("string")
@@ -175,7 +156,6 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getTitle",setter="setTitle")
      */
     protected $title = '';
-
 
     /**
      * @var string Zip / postal code
@@ -185,14 +165,15 @@ class CustomerOrderBillingAddress extends DataModel
      */
     protected $zipCode = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
         $this->customerId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $customerId Reference to customer
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
@@ -210,8 +191,7 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->customerId;
     }
-	
- 
+
     /**
      * @param Identity $id Unique customerOrderBillingAddress id
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
@@ -229,8 +209,7 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param string $city City
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
@@ -247,8 +226,7 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->city;
     }
-	
- 
+
     /**
      * @param string $company Company name
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
@@ -265,8 +243,7 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->company;
     }
-	
- 
+
     /**
      * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
@@ -283,8 +260,7 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->countryIso;
     }
-	
- 
+
     /**
      * @param string $deliveryInstruction Delivery instruction e.g. 'John Doe'
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
@@ -301,8 +277,7 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->deliveryInstruction;
     }
-	
- 
+
     /**
      * @param string $eMail E-Mail address
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
@@ -319,8 +294,7 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->eMail;
     }
-	
- 
+
     /**
      * @param string $extraAddressLine Extra address line e.g. 'Apartment 2.5'
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
@@ -337,8 +311,7 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->extraAddressLine;
     }
-	
- 
+
     /**
      * @param string $fax Fax number
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
@@ -355,8 +328,7 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->fax;
     }
-	
- 
+
     /**
      * @param string $firstName First name
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
@@ -373,8 +345,7 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->firstName;
     }
-	
- 
+
     /**
      * @param string $lastName Last name
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
@@ -391,8 +362,7 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->lastName;
     }
-	
- 
+
     /**
      * @param string $mobile Mobile phone number
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
@@ -409,8 +379,7 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->mobile;
     }
-	
- 
+
     /**
      * @param string $phone Phone number
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
@@ -427,8 +396,7 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->phone;
     }
-	
- 
+
     /**
      * @param string $salutation Salutation (german: 'Anrede')
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
@@ -445,8 +413,7 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->salutation;
     }
-	
- 
+
     /**
      * @param string $state State
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
@@ -463,8 +430,7 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->state;
     }
-	
- 
+
     /**
      * @param string $street Street + street number
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
@@ -481,8 +447,7 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->street;
     }
-	
- 
+
     /**
      * @param string $title Title (e.g. 'Prof. Dr.')
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
@@ -499,8 +464,7 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->title;
     }
-	
- 
+
     /**
      * @param string $zipCode Zip / postal code
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
@@ -517,6 +481,4 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->zipCode;
     }
-
-
 }

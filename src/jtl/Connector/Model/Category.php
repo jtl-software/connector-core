@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Category extends DataModel
 {
-
     /**
      * @var Identity Unique category id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class Category extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var Identity Optional reference to parent category id
@@ -41,7 +37,6 @@ class Category extends DataModel
      */
     protected $parentCategoryId = null;
 
-
     /**
      * @var boolean 
      * @Serializer\Type("boolean")
@@ -49,7 +44,6 @@ class Category extends DataModel
      * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
      */
     protected $isActive = false;
-
 
     /**
      * @var string Optional sort order number
@@ -59,7 +53,6 @@ class Category extends DataModel
      */
     protected $sort = '';
 
-
     /**
      * @var jtl\Connector\Model\CategoryAttr[] 
      * @Serializer\Type("array<jtl\Connector\Model\CategoryAttr>")
@@ -67,7 +60,6 @@ class Category extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $attributes = array();
-
 
     /**
      * @var jtl\Connector\Model\CategoryCustomerGroup[] 
@@ -77,7 +69,6 @@ class Category extends DataModel
      */
     protected $customerGroups = array();
 
-
     /**
      * @var jtl\Connector\Model\CategoryI18n[] 
      * @Serializer\Type("array<jtl\Connector\Model\CategoryI18n>")
@@ -85,7 +76,6 @@ class Category extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = array();
-
 
     /**
      * @var jtl\Connector\Model\CategoryInvisibility[] 
@@ -95,14 +85,15 @@ class Category extends DataModel
      */
     protected $invisibilities = array();
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
         $this->parentCategoryId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id Unique category id
      * @return \jtl\Connector\Model\Category
@@ -120,8 +111,7 @@ class Category extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param Identity $parentCategoryId Optional reference to parent category id
      * @return \jtl\Connector\Model\Category
@@ -139,8 +129,7 @@ class Category extends DataModel
     {
         return $this->parentCategoryId;
     }
-	
- 
+
     /**
      * @param boolean $isActive 
      * @return \jtl\Connector\Model\Category
@@ -158,8 +147,7 @@ class Category extends DataModel
     {
         return $this->isActive;
     }
-	
- 
+
     /**
      * @param string $sort Optional sort order number
      * @return \jtl\Connector\Model\Category
@@ -176,7 +164,6 @@ class Category extends DataModel
     {
         return $this->sort;
     }
-
 
     /**
      * @param \jtl\Connector\Model\CategoryAttr $attribute
@@ -205,7 +192,6 @@ class Category extends DataModel
         return $this;
     }
 
-
     /**
      * @param \jtl\Connector\Model\CategoryCustomerGroup $customerGroup
      * @return \jtl\Connector\Model\Category
@@ -232,7 +218,6 @@ class Category extends DataModel
         $this->customerGroups = array();
         return $this;
     }
-
 
     /**
      * @param \jtl\Connector\Model\CategoryI18n $i18n
@@ -261,7 +246,6 @@ class Category extends DataModel
         return $this;
     }
 
-
     /**
      * @param \jtl\Connector\Model\CategoryInvisibility $invisibility
      * @return \jtl\Connector\Model\Category
@@ -288,6 +272,4 @@ class Category extends DataModel
         $this->invisibilities = array();
         return $this;
     }
-
-
 }

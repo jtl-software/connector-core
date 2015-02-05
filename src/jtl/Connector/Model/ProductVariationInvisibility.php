@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductVariationInvisibility extends DataModel
 {
-
     /**
      * @var Identity Reference to customerGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class ProductVariationInvisibility extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-
 
     /**
      * @var Identity Reference to productVariation
@@ -41,14 +37,15 @@ class ProductVariationInvisibility extends DataModel
      */
     protected $productVariationId = null;
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->productVariationId = new Identity();
         $this->customerGroupId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ProductVariationInvisibility
@@ -66,8 +63,7 @@ class ProductVariationInvisibility extends DataModel
     {
         return $this->customerGroupId;
     }
-	
- 
+
     /**
      * @param Identity $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\ProductVariationInvisibility
@@ -85,6 +81,4 @@ class ProductVariationInvisibility extends DataModel
     {
         return $this->productVariationId;
     }
-
-
 }

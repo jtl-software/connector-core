@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CrossSellingGroup extends DataModel
 {
-
     /**
      * @var string Optional localized description
      * @Serializer\Type("string")
@@ -31,7 +28,6 @@ class CrossSellingGroup extends DataModel
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
-
 
     /**
      * @var string crossSellingGroup id
@@ -41,7 +37,6 @@ class CrossSellingGroup extends DataModel
      */
     protected $id = '';
 
-
     /**
      * @var string Locale
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class CrossSellingGroup extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
 
     /**
      * @var string Localized name
@@ -59,8 +53,7 @@ class CrossSellingGroup extends DataModel
      */
     protected $name = '';
 
-	
- 
+
     /**
      * @param string $description Optional localized description
      * @return \jtl\Connector\Model\CrossSellingGroup
@@ -77,8 +70,7 @@ class CrossSellingGroup extends DataModel
     {
         return $this->description;
     }
-	
- 
+
     /**
      * @param string $id crossSellingGroup id
      * @return \jtl\Connector\Model\CrossSellingGroup
@@ -95,8 +87,7 @@ class CrossSellingGroup extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param string $languageISO Locale
      * @return \jtl\Connector\Model\CrossSellingGroup
@@ -113,8 +104,7 @@ class CrossSellingGroup extends DataModel
     {
         return $this->languageISO;
     }
-	
- 
+
     /**
      * @param string $name Localized name
      * @return \jtl\Connector\Model\CrossSellingGroup
@@ -131,6 +121,4 @@ class CrossSellingGroup extends DataModel
     {
         return $this->name;
     }
-
-
 }

@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CustomerOrder extends DataModel
 {
-
     /**
      * @var Identity Reference to billingAddress
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class CustomerOrder extends DataModel
      * @Serializer\Accessor(getter="getBillingAddressId",setter="setBillingAddressId")
      */
     protected $billingAddressId = null;
-
 
     /**
      * @var Identity Optional reference to customer. 
@@ -41,7 +37,6 @@ class CustomerOrder extends DataModel
      */
     protected $customerId = null;
 
-
     /**
      * @var Identity Unique customerOrder id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -49,7 +44,6 @@ class CustomerOrder extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var Identity Reference to shippingAddress
@@ -59,7 +53,6 @@ class CustomerOrder extends DataModel
      */
     protected $shippingAddressId = null;
 
-
     /**
      * @var string 
      * @Serializer\Type("string")
@@ -67,7 +60,6 @@ class CustomerOrder extends DataModel
      * @Serializer\Accessor(getter="getBillingAddress",setter="setBillingAddress")
      */
     protected $billingAddress = '';
-
 
     /**
      * @var DateTime Date of creation
@@ -77,7 +69,6 @@ class CustomerOrder extends DataModel
      */
     protected $creationDate = null;
 
-
     /**
      * @var string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
      * @Serializer\Type("string")
@@ -85,7 +76,6 @@ class CustomerOrder extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
 
     /**
      * @var string Optional order number (usually set by ERP System later)
@@ -95,7 +85,6 @@ class CustomerOrder extends DataModel
      */
     protected $orderNumber = '';
 
-
     /**
      * @var DateTime Payment date
      * @Serializer\Type("DateTime")
@@ -103,7 +92,6 @@ class CustomerOrder extends DataModel
      * @Serializer\Accessor(getter="getPaymentDate",setter="setPaymentDate")
      */
     protected $paymentDate = null;
-
 
     /**
      * @var string 
@@ -113,7 +101,6 @@ class CustomerOrder extends DataModel
      */
     protected $paymentInfo = '';
 
-
     /**
      * @var string 
      * @Serializer\Type("string")
@@ -121,7 +108,6 @@ class CustomerOrder extends DataModel
      * @Serializer\Accessor(getter="getShippingAddress",setter="setShippingAddress")
      */
     protected $shippingAddress = '';
-
 
     /**
      * @var DateTime Shipping date
@@ -131,7 +117,6 @@ class CustomerOrder extends DataModel
      */
     protected $shippingDate = null;
 
-
     /**
      * @var string Additional shipping info
      * @Serializer\Type("string")
@@ -139,7 +124,6 @@ class CustomerOrder extends DataModel
      * @Serializer\Accessor(getter="getShippingInfo",setter="setShippingInfo")
      */
     protected $shippingInfo = '';
-
 
     /**
      * @var string Identifier code for shippingMethod
@@ -149,7 +133,6 @@ class CustomerOrder extends DataModel
      */
     protected $shippingMethodCode = '';
 
-
     /**
      * @var string Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
      * @Serializer\Type("string")
@@ -157,7 +140,6 @@ class CustomerOrder extends DataModel
      * @Serializer\Accessor(getter="getStatus",setter="setStatus")
      */
     protected $status = '';
-
 
     /**
      * @var jtl\Connector\Model\CustomerOrderAttr[] 
@@ -167,7 +149,6 @@ class CustomerOrder extends DataModel
      */
     protected $attributes = array();
 
-
     /**
      * @var jtl\Connector\Model\CustomerOrderItem[] 
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderItem>")
@@ -176,7 +157,9 @@ class CustomerOrder extends DataModel
      */
     protected $items = array();
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
@@ -184,8 +167,7 @@ class CustomerOrder extends DataModel
         $this->shippingAddressId = new Identity();
         $this->billingAddressId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $billingAddressId Reference to billingAddress
      * @return \jtl\Connector\Model\CustomerOrder
@@ -203,8 +185,7 @@ class CustomerOrder extends DataModel
     {
         return $this->billingAddressId;
     }
-	
- 
+
     /**
      * @param Identity $customerId Optional reference to customer. 
      * @return \jtl\Connector\Model\CustomerOrder
@@ -222,8 +203,7 @@ class CustomerOrder extends DataModel
     {
         return $this->customerId;
     }
-	
- 
+
     /**
      * @param Identity $id Unique customerOrder id
      * @return \jtl\Connector\Model\CustomerOrder
@@ -241,8 +221,7 @@ class CustomerOrder extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param Identity $shippingAddressId Reference to shippingAddress
      * @return \jtl\Connector\Model\CustomerOrder
@@ -260,8 +239,7 @@ class CustomerOrder extends DataModel
     {
         return $this->shippingAddressId;
     }
-	
- 
+
     /**
      * @param string $billingAddress 
      * @return \jtl\Connector\Model\CustomerOrder
@@ -278,8 +256,7 @@ class CustomerOrder extends DataModel
     {
         return $this->billingAddress;
     }
-	
- 
+
     /**
      * @param DateTime $creationDate Date of creation
      * @return \jtl\Connector\Model\CustomerOrder
@@ -297,8 +274,7 @@ class CustomerOrder extends DataModel
     {
         return $this->creationDate;
     }
-	
- 
+
     /**
      * @param string $languageISO Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
      * @return \jtl\Connector\Model\CustomerOrder
@@ -315,8 +291,7 @@ class CustomerOrder extends DataModel
     {
         return $this->languageISO;
     }
-	
- 
+
     /**
      * @param string $orderNumber Optional order number (usually set by ERP System later)
      * @return \jtl\Connector\Model\CustomerOrder
@@ -333,8 +308,7 @@ class CustomerOrder extends DataModel
     {
         return $this->orderNumber;
     }
-	
- 
+
     /**
      * @param DateTime $paymentDate Payment date
      * @return \jtl\Connector\Model\CustomerOrder
@@ -352,8 +326,7 @@ class CustomerOrder extends DataModel
     {
         return $this->paymentDate;
     }
-	
- 
+
     /**
      * @param string $paymentInfo 
      * @return \jtl\Connector\Model\CustomerOrder
@@ -370,8 +343,7 @@ class CustomerOrder extends DataModel
     {
         return $this->paymentInfo;
     }
-	
- 
+
     /**
      * @param string $shippingAddress 
      * @return \jtl\Connector\Model\CustomerOrder
@@ -388,8 +360,7 @@ class CustomerOrder extends DataModel
     {
         return $this->shippingAddress;
     }
-	
- 
+
     /**
      * @param DateTime $shippingDate Shipping date
      * @return \jtl\Connector\Model\CustomerOrder
@@ -407,8 +378,7 @@ class CustomerOrder extends DataModel
     {
         return $this->shippingDate;
     }
-	
- 
+
     /**
      * @param string $shippingInfo Additional shipping info
      * @return \jtl\Connector\Model\CustomerOrder
@@ -425,8 +395,7 @@ class CustomerOrder extends DataModel
     {
         return $this->shippingInfo;
     }
-	
- 
+
     /**
      * @param string $shippingMethodCode Identifier code for shippingMethod
      * @return \jtl\Connector\Model\CustomerOrder
@@ -443,8 +412,7 @@ class CustomerOrder extends DataModel
     {
         return $this->shippingMethodCode;
     }
-	
- 
+
     /**
      * @param string $status Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
      * @return \jtl\Connector\Model\CustomerOrder
@@ -461,7 +429,6 @@ class CustomerOrder extends DataModel
     {
         return $this->status;
     }
-
 
     /**
      * @param \jtl\Connector\Model\CustomerOrderAttr $attribute
@@ -490,7 +457,6 @@ class CustomerOrder extends DataModel
         return $this;
     }
 
-
     /**
      * @param \jtl\Connector\Model\CustomerOrderItem $item
      * @return \jtl\Connector\Model\CustomerOrder
@@ -517,6 +483,4 @@ class CustomerOrder extends DataModel
         $this->items = array();
         return $this;
     }
-
-
 }

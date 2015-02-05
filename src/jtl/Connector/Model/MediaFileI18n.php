@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class MediaFileI18n extends DataModel
 {
-
     /**
      * @var Identity Reference to mediaFile
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class MediaFileI18n extends DataModel
      * @Serializer\Accessor(getter="getMediaFileId",setter="setMediaFileId")
      */
     protected $mediaFileId = null;
-
 
     /**
      * @var string Locale specific description
@@ -41,7 +37,6 @@ class MediaFileI18n extends DataModel
      */
     protected $description = '';
 
-
     /**
      * @var string Locale
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class MediaFileI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
 
     /**
      * @var string Locale specific name
@@ -59,13 +53,14 @@ class MediaFileI18n extends DataModel
      */
     protected $name = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->mediaFileId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $mediaFileId Reference to mediaFile
      * @return \jtl\Connector\Model\MediaFileI18n
@@ -83,8 +78,7 @@ class MediaFileI18n extends DataModel
     {
         return $this->mediaFileId;
     }
-	
- 
+
     /**
      * @param string $description Locale specific description
      * @return \jtl\Connector\Model\MediaFileI18n
@@ -101,8 +95,7 @@ class MediaFileI18n extends DataModel
     {
         return $this->description;
     }
-	
- 
+
     /**
      * @param string $languageISO Locale
      * @return \jtl\Connector\Model\MediaFileI18n
@@ -119,8 +112,7 @@ class MediaFileI18n extends DataModel
     {
         return $this->languageISO;
     }
-	
- 
+
     /**
      * @param string $name Locale specific name
      * @return \jtl\Connector\Model\MediaFileI18n
@@ -137,6 +129,4 @@ class MediaFileI18n extends DataModel
     {
         return $this->name;
     }
-
-
 }

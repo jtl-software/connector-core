@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Manufacturer extends DataModel
 {
-
     /**
      * @var Identity Unique manufacturer id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class Manufacturer extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var string Manufacturer (brand) name
@@ -41,7 +37,6 @@ class Manufacturer extends DataModel
      */
     protected $name = '';
 
-
     /**
      * @var string Optional sort number
      * @Serializer\Type("string")
@@ -49,7 +44,6 @@ class Manufacturer extends DataModel
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = '';
-
 
     /**
      * @var string Optional url path e.g. 'Products-manufactured-by-X'
@@ -59,7 +53,6 @@ class Manufacturer extends DataModel
      */
     protected $urlPath = '';
 
-
     /**
      * @var string Optional manufacturer website URL
      * @Serializer\Type("string")
@@ -67,7 +60,6 @@ class Manufacturer extends DataModel
      * @Serializer\Accessor(getter="getWebsiteUrl",setter="setWebsiteUrl")
      */
     protected $websiteUrl = '';
-
 
     /**
      * @var jtl\Connector\Model\ManufacturerI18n[] 
@@ -77,13 +69,14 @@ class Manufacturer extends DataModel
      */
     protected $i18ns = array();
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id Unique manufacturer id
      * @return \jtl\Connector\Model\Manufacturer
@@ -101,8 +94,7 @@ class Manufacturer extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param string $name Manufacturer (brand) name
      * @return \jtl\Connector\Model\Manufacturer
@@ -119,8 +111,7 @@ class Manufacturer extends DataModel
     {
         return $this->name;
     }
-	
- 
+
     /**
      * @param string $sort Optional sort number
      * @return \jtl\Connector\Model\Manufacturer
@@ -137,8 +128,7 @@ class Manufacturer extends DataModel
     {
         return $this->sort;
     }
-	
- 
+
     /**
      * @param string $urlPath Optional url path e.g. 'Products-manufactured-by-X'
      * @return \jtl\Connector\Model\Manufacturer
@@ -155,8 +145,7 @@ class Manufacturer extends DataModel
     {
         return $this->urlPath;
     }
-	
- 
+
     /**
      * @param string $websiteUrl Optional manufacturer website URL
      * @return \jtl\Connector\Model\Manufacturer
@@ -173,7 +162,6 @@ class Manufacturer extends DataModel
     {
         return $this->websiteUrl;
     }
-
 
     /**
      * @param \jtl\Connector\Model\ManufacturerI18n $i18n
@@ -201,6 +189,4 @@ class Manufacturer extends DataModel
         $this->i18ns = array();
         return $this;
     }
-
-
 }

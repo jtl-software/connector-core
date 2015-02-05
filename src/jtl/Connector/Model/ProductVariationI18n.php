@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductVariationI18n extends DataModel
 {
-
     /**
      * @var Identity Reference to productVariation
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class ProductVariationI18n extends DataModel
      * @Serializer\Accessor(getter="getProductVariationId",setter="setProductVariationId")
      */
     protected $productVariationId = null;
-
 
     /**
      * @var string Locale
@@ -41,7 +37,6 @@ class ProductVariationI18n extends DataModel
      */
     protected $languageISO = '';
 
-
     /**
      * @var string Locale specific variation name
      * @Serializer\Type("string")
@@ -50,13 +45,14 @@ class ProductVariationI18n extends DataModel
      */
     protected $name = '';
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->productVariationId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\ProductVariationI18n
@@ -74,8 +70,7 @@ class ProductVariationI18n extends DataModel
     {
         return $this->productVariationId;
     }
-	
- 
+
     /**
      * @param string $languageISO Locale
      * @return \jtl\Connector\Model\ProductVariationI18n
@@ -92,8 +87,7 @@ class ProductVariationI18n extends DataModel
     {
         return $this->languageISO;
     }
-	
- 
+
     /**
      * @param string $name Locale specific variation name
      * @return \jtl\Connector\Model\ProductVariationI18n
@@ -110,6 +104,4 @@ class ProductVariationI18n extends DataModel
     {
         return $this->name;
     }
-
-
 }

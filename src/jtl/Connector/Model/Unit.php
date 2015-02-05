@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Unit extends DataModel
 {
-
     /**
      * @var Identity Unit id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class Unit extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var jtl\Connector\Model\UnitI18n[] 
@@ -41,13 +37,14 @@ class Unit extends DataModel
      */
     protected $i18ns = array();
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id Unit id
      * @return \jtl\Connector\Model\Unit
@@ -65,7 +62,6 @@ class Unit extends DataModel
     {
         return $this->id;
     }
-
 
     /**
      * @param \jtl\Connector\Model\UnitI18n $i18n
@@ -93,6 +89,4 @@ class Unit extends DataModel
         $this->i18ns = array();
         return $this;
     }
-
-
 }

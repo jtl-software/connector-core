@@ -1,6 +1,4 @@
-﻿
-<?php
-
+﻿<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -23,7 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductVariationValue extends DataModel
 {
-
     /**
      * @var Identity Unique productVariationValue id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -31,7 +28,6 @@ class ProductVariationValue extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
 
     /**
      * @var Identity Reference to productVariation
@@ -41,7 +37,6 @@ class ProductVariationValue extends DataModel
      */
     protected $productVariationId = null;
 
-
     /**
      * @var double Optional variation extra weight
      * @Serializer\Type("double")
@@ -49,7 +44,6 @@ class ProductVariationValue extends DataModel
      * @Serializer\Accessor(getter="getExtraWeight",setter="setExtraWeight")
      */
     protected $extraWeight = 0.0;
-
 
     /**
      * @var string Optional Stock Keeping Unit
@@ -59,7 +53,6 @@ class ProductVariationValue extends DataModel
      */
     protected $sku = '';
 
-
     /**
      * @var string Optional sort number
      * @Serializer\Type("string")
@@ -67,7 +60,6 @@ class ProductVariationValue extends DataModel
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = '';
-
 
     /**
      * @var double Optional stock level
@@ -77,7 +69,6 @@ class ProductVariationValue extends DataModel
      */
     protected $stockLevel = 0.0;
 
-
     /**
      * @var jtl\Connector\Model\ProductVariationValueExtraCharge[] 
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValueExtraCharge>")
@@ -85,7 +76,6 @@ class ProductVariationValue extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $extraCharges = array();
-
 
     /**
      * @var jtl\Connector\Model\ProductVariationValueI18n[] 
@@ -95,7 +85,6 @@ class ProductVariationValue extends DataModel
      */
     protected $i18ns = array();
 
-
     /**
      * @var jtl\Connector\Model\ProductVariationValueInvisibility[] 
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValueInvisibility>")
@@ -104,14 +93,15 @@ class ProductVariationValue extends DataModel
      */
     protected $invisibilities = array();
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->id = new Identity();
         $this->productVariationId = new Identity();
     }
-	
- 
+
     /**
      * @param Identity $id Unique productVariationValue id
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -129,8 +119,7 @@ class ProductVariationValue extends DataModel
     {
         return $this->id;
     }
-	
- 
+
     /**
      * @param Identity $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -148,8 +137,7 @@ class ProductVariationValue extends DataModel
     {
         return $this->productVariationId;
     }
-	
- 
+
     /**
      * @param double $extraWeight Optional variation extra weight
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -166,8 +154,7 @@ class ProductVariationValue extends DataModel
     {
         return $this->extraWeight;
     }
-	
- 
+
     /**
      * @param string $sku Optional Stock Keeping Unit
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -184,8 +171,7 @@ class ProductVariationValue extends DataModel
     {
         return $this->sku;
     }
-	
- 
+
     /**
      * @param string $sort Optional sort number
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -202,8 +188,7 @@ class ProductVariationValue extends DataModel
     {
         return $this->sort;
     }
-	
- 
+
     /**
      * @param double $stockLevel Optional stock level
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -220,7 +205,6 @@ class ProductVariationValue extends DataModel
     {
         return $this->stockLevel;
     }
-
 
     /**
      * @param \jtl\Connector\Model\ProductVariationValueExtraCharge $extraCharge
@@ -249,7 +233,6 @@ class ProductVariationValue extends DataModel
         return $this;
     }
 
-
     /**
      * @param \jtl\Connector\Model\ProductVariationValueI18n $i18n
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -277,7 +260,6 @@ class ProductVariationValue extends DataModel
         return $this;
     }
 
-
     /**
      * @param \jtl\Connector\Model\ProductVariationValueInvisibility $invisibility
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -304,6 +286,4 @@ class ProductVariationValue extends DataModel
         $this->invisibilities = array();
         return $this;
     }
-
-
 }
