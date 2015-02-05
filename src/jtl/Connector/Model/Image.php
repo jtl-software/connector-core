@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
@@ -47,10 +47,10 @@ class Image extends DataModel
     /**
      * @var string 
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("imageRelationType")
-     * @Serializer\Accessor(getter="getImageRelationType",setter="setImageRelationType")
+     * @Serializer\SerializedName("relationType")
+     * @Serializer\Accessor(getter="getRelationType",setter="setRelationType")
      */
-    protected $imageRelationType = '';
+    protected $relationType = '';
 
 
     /**
@@ -105,19 +105,19 @@ class Image extends DataModel
     }
 
     /**
-     * @param string $imageRelationType 
+     * @param string $relationType 
      * @return \jtl\Connector\Model\Image
      */
-    public function setImageRelationType($imageRelationType)
+    public function setRelationType($relationType)
     {
-        return $this->setProperty('imageRelationType', $imageRelationType, 'string');
+        return $this->setProperty('relationType', $relationType, 'string');
     }
 
     /**
      * @return string 
      */
-    public function getImageRelationType()
+    public function getRelationType()
     {
-        return $this->imageRelationType;
+        return $this->relationType;
     }
 }

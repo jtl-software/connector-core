@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
