@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,16 +13,17 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Localized Unit Name.
+ * Localized Unit Name
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class UnitI18n extends DataModel
 {
+
     /**
      * @var Identity Unit id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -29,13 +32,15 @@ class UnitI18n extends DataModel
      */
     protected $unitId = null;
 
+
     /**
      * @var string Locale
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("localeName")
-     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
+     * @Serializer\SerializedName("languageISO")
+     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
-    protected $localeName = '';
+    protected $languageISO = '';
+
 
     /**
      * @var string Localized unit name
@@ -46,13 +51,15 @@ class UnitI18n extends DataModel
     protected $name = '';
 
 
-    public function __construct()
-    {
-        $this->unitId = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->unitId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $unitId Unit id
+     * @param Identity $unitId Unit id
      * @return \jtl\Connector\Model\UnitI18n
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -68,29 +75,29 @@ class UnitI18n extends DataModel
     {
         return $this->unitId;
     }
-
+	
+ 
     /**
-     * @param  string $localeName Locale
+     * @param string $languageISO Locale
      * @return \jtl\Connector\Model\UnitI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName($localeName)
+    public function setLanguageISO($languageISO)
     {
-        return $this->setProperty('localeName', $localeName, 'string');
+        return $this->setProperty('languageISO', $languageISO, 'string');
     }
 
     /**
      * @return string Locale
      */
-    public function getLocaleName()
+    public function getLanguageISO()
     {
-        return $this->localeName;
+        return $this->languageISO;
     }
-
+	
+ 
     /**
-     * @param  string $name Localized unit name
+     * @param string $name Localized unit name
      * @return \jtl\Connector\Model\UnitI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setName($name)
     {
@@ -105,5 +112,5 @@ class UnitI18n extends DataModel
         return $this->name;
     }
 
- 
+
 }

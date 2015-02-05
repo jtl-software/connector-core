@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Manufacturer
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,16 +13,17 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Locale specific text and meta-information for manufacturer..
+ * Locale specific text and meta-information for manufacturer.
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Manufacturer
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class ManufacturerI18n extends DataModel
 {
+
     /**
      * @var Identity Reference to manufacturer
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -28,6 +31,7 @@ class ManufacturerI18n extends DataModel
      * @Serializer\Accessor(getter="getManufacturerId",setter="setManufacturerId")
      */
     protected $manufacturerId = null;
+
 
     /**
      * @var string Optional manufacturer description (HTML)
@@ -37,13 +41,15 @@ class ManufacturerI18n extends DataModel
      */
     protected $description = '';
 
+
     /**
      * @var string Locale
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("localeName")
-     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
+     * @Serializer\SerializedName("languageISO")
+     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
-    protected $localeName = '';
+    protected $languageISO = '';
+
 
     /**
      * @var string Optional meta description tag value
@@ -53,6 +59,7 @@ class ManufacturerI18n extends DataModel
      */
     protected $metaDescription = '';
 
+
     /**
      * @var string Optional meta keywords tag value
      * @Serializer\Type("string")
@@ -60,6 +67,7 @@ class ManufacturerI18n extends DataModel
      * @Serializer\Accessor(getter="getMetaKeywords",setter="setMetaKeywords")
      */
     protected $metaKeywords = '';
+
 
     /**
      * @var string Optional title tag value
@@ -70,13 +78,15 @@ class ManufacturerI18n extends DataModel
     protected $titleTag = '';
 
 
-    public function __construct()
-    {
-        $this->manufacturerId = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->manufacturerId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $manufacturerId Reference to manufacturer
+     * @param Identity $manufacturerId Reference to manufacturer
      * @return \jtl\Connector\Model\ManufacturerI18n
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -92,11 +102,11 @@ class ManufacturerI18n extends DataModel
     {
         return $this->manufacturerId;
     }
-
+	
+ 
     /**
-     * @param  string $description Optional manufacturer description (HTML)
+     * @param string $description Optional manufacturer description (HTML)
      * @return \jtl\Connector\Model\ManufacturerI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setDescription($description)
     {
@@ -110,29 +120,29 @@ class ManufacturerI18n extends DataModel
     {
         return $this->description;
     }
-
+	
+ 
     /**
-     * @param  string $localeName Locale
+     * @param string $languageISO Locale
      * @return \jtl\Connector\Model\ManufacturerI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName($localeName)
+    public function setLanguageISO($languageISO)
     {
-        return $this->setProperty('localeName', $localeName, 'string');
+        return $this->setProperty('languageISO', $languageISO, 'string');
     }
 
     /**
      * @return string Locale
      */
-    public function getLocaleName()
+    public function getLanguageISO()
     {
-        return $this->localeName;
+        return $this->languageISO;
     }
-
+	
+ 
     /**
-     * @param  string $metaDescription Optional meta description tag value
+     * @param string $metaDescription Optional meta description tag value
      * @return \jtl\Connector\Model\ManufacturerI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setMetaDescription($metaDescription)
     {
@@ -146,11 +156,11 @@ class ManufacturerI18n extends DataModel
     {
         return $this->metaDescription;
     }
-
+	
+ 
     /**
-     * @param  string $metaKeywords Optional meta keywords tag value
+     * @param string $metaKeywords Optional meta keywords tag value
      * @return \jtl\Connector\Model\ManufacturerI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setMetaKeywords($metaKeywords)
     {
@@ -164,11 +174,11 @@ class ManufacturerI18n extends DataModel
     {
         return $this->metaKeywords;
     }
-
+	
+ 
     /**
-     * @param  string $titleTag Optional title tag value
+     * @param string $titleTag Optional title tag value
      * @return \jtl\Connector\Model\ManufacturerI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setTitleTag($titleTag)
     {
@@ -183,5 +193,5 @@ class ManufacturerI18n extends DataModel
         return $this->titleTag;
     }
 
- 
+
 }

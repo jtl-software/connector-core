@@ -1,6 +1,8 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
  * @subpackage Product
  */
@@ -11,7 +13,7 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * ProductVariation Model. Each product defines its own variations, that means  variations are not global  in contrast to specifics. .
+ * ProductVariation Model. Each product defines its own variations, that means  variations are not global  in contrast to specifics. 
  *
  * @access public
  * @package jtl\Connector\Model
@@ -21,6 +23,7 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductVariation extends DataModel
 {
+
     /**
      * @var Identity Unique productVariation id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -28,6 +31,7 @@ class ProductVariation extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
+
 
     /**
      * @var Identity Reference to product
@@ -37,49 +41,18 @@ class ProductVariation extends DataModel
      */
     protected $productId = null;
 
+
     /**
-     * @var int Optional sort number
-     * @Serializer\Type("integer")
+     * @var string Optional sort number
+     * @Serializer\Type("string")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = 0;
+    protected $sort = '';
+
 
     /**
-     * @var string Variation type e.g. radio or select
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("type")
-     * @Serializer\Accessor(getter="getType",setter="setType")
-     */
-    protected $type = '';
-
-    /**
-     * End: 1 (One of ProductVariation)
-     *      * (Collection of ProductVariationValue)
-     *
-     * @var \jtl\Connector\Model\ProductVariationValue[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValue>")
-     * @Serializer\SerializedName("values")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $values = array();
-
-    /**
-     * End: 1 (One of ProductVariation)
-     *      * (Collection of ProductVariationInvisibility)
-     *
-     * @var \jtl\Connector\Model\ProductVariationInvisibility[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductVariationInvisibility>")
-     * @Serializer\SerializedName("invisibilities")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $invisibilities = array();
-
-    /**
-     * End: 1 (One of ProductVariation)
-     *      * (Collection of ProductVariationI18n)
-     *
-     * @var \jtl\Connector\Model\ProductVariationI18n[]
+     * @var jtl\Connector\Model\ProductVariationI18n[] 
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -87,14 +60,34 @@ class ProductVariation extends DataModel
     protected $i18ns = array();
 
 
-    public function __construct()
-    {
-        $this->id = new Identity;
-        $this->productId = new Identity;
-    }
+    /**
+     * @var jtl\Connector\Model\ProductVariationInvisibility[] 
+     * @Serializer\Type("array<jtl\Connector\Model\ProductVariationInvisibility>")
+     * @Serializer\SerializedName("invisibilities")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $invisibilities = array();
+
 
     /**
-     * @param  Identity $id Unique productVariation id
+     * @var jtl\Connector\Model\ProductVariationValue[] 
+     * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValue>")
+     * @Serializer\SerializedName("values")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $values = array();
+
+
+
+	public function __construct()
+	{
+		$this->id = new Identity();
+		$this->productId = new Identity();
+	}
+	
+ 
+    /**
+     * @param Identity $id Unique productVariation id
      * @return \jtl\Connector\Model\ProductVariation
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -110,9 +103,10 @@ class ProductVariation extends DataModel
     {
         return $this->id;
     }
-
+	
+ 
     /**
-     * @param  Identity $productId Reference to product
+     * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductVariation
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -128,99 +122,28 @@ class ProductVariation extends DataModel
     {
         return $this->productId;
     }
-
+	
+ 
     /**
-     * @param  int $sort Optional sort number
+     * @param string $sort Optional sort number
      * @return \jtl\Connector\Model\ProductVariation
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
     public function setSort($sort)
     {
-        return $this->setProperty('sort', $sort, 'int');
+        return $this->setProperty('sort', $sort, 'string');
     }
 
     /**
-     * @return int Optional sort number
+     * @return string Optional sort number
      */
     public function getSort()
     {
         return $this->sort;
     }
 
-    /**
-     * @param  string $type Variation type e.g. radio or select
-     * @return \jtl\Connector\Model\ProductVariation
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setType($type)
-    {
-        return $this->setProperty('type', $type, 'string');
-    }
 
     /**
-     * @return string Variation type e.g. radio or select
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\ProductVariationValue $value
-     * @return \jtl\Connector\Model\ProductVariation
-     */
-    public function addValue(\jtl\Connector\Model\ProductVariationValue $value)
-    {
-        $this->values[] = $value;
-        return $this;
-    }
-    
-    /**
-     * @return \jtl\Connector\Model\ProductVariationValue[]
-     */
-    public function getValues()
-    {
-        return $this->values;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\ProductVariation
-     */
-    public function clearValues()
-    {
-        $this->values = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\ProductVariationInvisibility $invisibility
-     * @return \jtl\Connector\Model\ProductVariation
-     */
-    public function addInvisibility(\jtl\Connector\Model\ProductVariationInvisibility $invisibility)
-    {
-        $this->invisibilities[] = $invisibility;
-        return $this;
-    }
-    
-    /**
-     * @return \jtl\Connector\Model\ProductVariationInvisibility[]
-     */
-    public function getInvisibilities()
-    {
-        return $this->invisibilities;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\ProductVariation
-     */
-    public function clearInvisibilities()
-    {
-        $this->invisibilities = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\ProductVariationI18n $i18n
+     * @param \jtl\Connector\Model\ProductVariationI18n $i18n
      * @return \jtl\Connector\Model\ProductVariation
      */
     public function addI18n(\jtl\Connector\Model\ProductVariationI18n $i18n)
@@ -230,7 +153,7 @@ class ProductVariation extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductVariationI18n[]
+     * @return jtl\Connector\Model\ProductVariationI18n[]
      */
     public function getI18ns()
     {
@@ -246,5 +169,61 @@ class ProductVariation extends DataModel
         return $this;
     }
 
- 
+
+    /**
+     * @param \jtl\Connector\Model\ProductVariationInvisibility $invisibility
+     * @return \jtl\Connector\Model\ProductVariation
+     */
+    public function addInvisibility(\jtl\Connector\Model\ProductVariationInvisibility $invisibility)
+    {
+        $this->invisibilities[] = $invisibility;
+        return $this;
+    }
+    
+    /**
+     * @return jtl\Connector\Model\ProductVariationInvisibility[]
+     */
+    public function getInvisibilities()
+    {
+        return $this->invisibilities;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\ProductVariation
+     */
+    public function clearInvisibilities()
+    {
+        $this->invisibilities = array();
+        return $this;
+    }
+
+
+    /**
+     * @param \jtl\Connector\Model\ProductVariationValue $value
+     * @return \jtl\Connector\Model\ProductVariation
+     */
+    public function addValue(\jtl\Connector\Model\ProductVariationValue $value)
+    {
+        $this->values[] = $value;
+        return $this;
+    }
+    
+    /**
+     * @return jtl\Connector\Model\ProductVariationValue[]
+     */
+    public function getValues()
+    {
+        return $this->values;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\ProductVariation
+     */
+    public function clearValues()
+    {
+        $this->values = array();
+        return $this;
+    }
+
+
 }

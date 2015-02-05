@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,23 +13,16 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * TaxZone to Country Allocation (set in JTL-Wawi ERP)..
+ * TaxZone to Country Allocation (set in JTL-Wawi ERP).
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class TaxZoneCountry extends DataModel
 {
-    /**
-     * @var Identity Unique taxZoneCountry id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
 
     /**
      * @var Identity Reference to taxZone
@@ -36,6 +31,7 @@ class TaxZoneCountry extends DataModel
      * @Serializer\Accessor(getter="getTaxZoneId",setter="setTaxZoneId")
      */
     protected $taxZoneId = null;
+
 
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
@@ -46,32 +42,15 @@ class TaxZoneCountry extends DataModel
     protected $countryIso = '';
 
 
-    public function __construct()
-    {
-        $this->id = new Identity;
-        $this->taxZoneId = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->taxZoneId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $id Unique taxZoneCountry id
-     * @return \jtl\Connector\Model\TaxZoneCountry
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id)
-    {
-        return $this->setProperty('id', $id, 'Identity');
-    }
-
-    /**
-     * @return Identity Unique taxZoneCountry id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param  Identity $taxZoneId Reference to taxZone
+     * @param Identity $taxZoneId Reference to taxZone
      * @return \jtl\Connector\Model\TaxZoneCountry
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -87,11 +66,11 @@ class TaxZoneCountry extends DataModel
     {
         return $this->taxZoneId;
     }
-
+	
+ 
     /**
-     * @param  string $countryIso Country ISO 3166-2 (2 letter Uppercase)
+     * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
      * @return \jtl\Connector\Model\TaxZoneCountry
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setCountryIso($countryIso)
     {
@@ -106,5 +85,5 @@ class TaxZoneCountry extends DataModel
         return $this->countryIso;
     }
 
- 
+
 }

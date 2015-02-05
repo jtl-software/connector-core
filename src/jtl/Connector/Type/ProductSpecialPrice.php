@@ -16,17 +16,17 @@ class ProductSpecialPrice extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+		return array(
+            new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('productId', 'Identity', null, false, true, false),
             new PropertyInfo('activeFromDate', 'DateTime', null, false, false, false),
             new PropertyInfo('activeUntilDate', 'DateTime', null, false, false, false),
-            new PropertyInfo('considerDateLimit', 'bool', null, false, false, false),
-            new PropertyInfo('considerStockLimit', 'bool', null, false, false, false),
-            new PropertyInfo('id', 'int', null, true, true, false),
-            new PropertyInfo('isActive', 'bool', null, false, false, false),
-            new PropertyInfo('productId', 'int', null, false, true, false),
-            new PropertyInfo('stockLimit', 'double', null, false, false, false),
-            new PropertyInfo('specialPrices', '\jtl\Connector\Model\SpecialPrice', null, false, false, true),
-        );
+            new PropertyInfo('considerDateLimit', 'boolean', false, false, false, false),
+            new PropertyInfo('considerStockLimit', 'boolean', false, false, false, false),
+            new PropertyInfo('isActive', 'boolean', false, false, false, false),
+            new PropertyInfo('stockLimit', 'string', '', false, false, false),
+            new PropertyInfo('items', '\jtl\Connector\Model\ProductSpecialPriceItem', null, false, false, true),
+		);
     }
 
 	public function isMain()

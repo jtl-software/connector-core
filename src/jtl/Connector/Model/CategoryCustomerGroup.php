@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Category
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,16 +13,17 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Link customergroup with category. Set optional discount on category for customergroup. .
+ * Link customergroup with category. Set optional discount on category for customergroup. 
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Category
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class CategoryCustomerGroup extends DataModel
 {
+
     /**
      * @var Identity Reference to category
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -29,6 +32,16 @@ class CategoryCustomerGroup extends DataModel
      */
     protected $categoryId = null;
 
+
+    /**
+     * @var Identity 
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("connectorId")
+     * @Serializer\Accessor(getter="getConnectorId",setter="setConnectorId")
+     */
+    protected $connectorId = null;
+
+
     /**
      * @var Identity Reference to customerGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,6 +49,7 @@ class CategoryCustomerGroup extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
+
 
     /**
      * @var double Optional discount on products in specified categoryId for  customerGroupId
@@ -46,14 +60,17 @@ class CategoryCustomerGroup extends DataModel
     protected $discount = 0.0;
 
 
-    public function __construct()
-    {
-        $this->categoryId = new Identity;
-        $this->customerGroupId = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->categoryId = new Identity();
+		$this->customerGroupId = new Identity();
+		$this->connectorId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $categoryId Reference to category
+     * @param Identity $categoryId Reference to category
      * @return \jtl\Connector\Model\CategoryCustomerGroup
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -69,9 +86,29 @@ class CategoryCustomerGroup extends DataModel
     {
         return $this->categoryId;
     }
+	
+ 
+    /**
+     * @param Identity $connectorId 
+     * @return \jtl\Connector\Model\CategoryCustomerGroup
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setConnectorId(Identity $connectorId)
+    {
+        return $this->setProperty('connectorId', $connectorId, 'Identity');
+    }
 
     /**
-     * @param  Identity $customerGroupId Reference to customerGroup
+     * @return Identity 
+     */
+    public function getConnectorId()
+    {
+        return $this->connectorId;
+    }
+	
+ 
+    /**
+     * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\CategoryCustomerGroup
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -87,11 +124,11 @@ class CategoryCustomerGroup extends DataModel
     {
         return $this->customerGroupId;
     }
-
+	
+ 
     /**
-     * @param  double $discount Optional discount on products in specified categoryId for  customerGroupId
+     * @param double $discount Optional discount on products in specified categoryId for  customerGroupId
      * @return \jtl\Connector\Model\CategoryCustomerGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
     public function setDiscount($discount)
     {
@@ -106,5 +143,5 @@ class CategoryCustomerGroup extends DataModel
         return $this->discount;
     }
 
- 
+
 }

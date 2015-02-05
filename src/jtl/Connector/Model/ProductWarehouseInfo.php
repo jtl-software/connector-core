@@ -1,6 +1,8 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
  * @subpackage Product
  */
@@ -11,7 +13,7 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Product to warehouse info association..
+ * Product to warehouse info association.
  *
  * @access public
  * @package jtl\Connector\Model
@@ -21,6 +23,7 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductWarehouseInfo extends DataModel
 {
+
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -29,21 +32,15 @@ class ProductWarehouseInfo extends DataModel
      */
     protected $productId = null;
 
+
     /**
-     * @var Identity Reference to warehouse
+     * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("warehouseId")
-     * @Serializer\Accessor(getter="getWarehouseId",setter="setWarehouseId")
+     * @Serializer\Accessor(getter="getwarehouseId",setter="setwarehouseId")
      */
     protected $warehouseId = null;
 
-    /**
-     * @var DateTime Optional product inflow date for specified warehouse
-     * @Serializer\Type("DateTime")
-     * @Serializer\SerializedName("inflowDate")
-     * @Serializer\Accessor(getter="getInflowDate",setter="setInflowDate")
-     */
-    protected $inflowDate = null;
 
     /**
      * @var double Optional product inflow quantity for specified warehouse
@@ -53,23 +50,26 @@ class ProductWarehouseInfo extends DataModel
      */
     protected $inflowQuantity = 0.0;
 
+
     /**
-     * @var double Optional product stock level in specified warehouse
+     * @var double 
      * @Serializer\Type("double")
      * @Serializer\SerializedName("stockLevel")
-     * @Serializer\Accessor(getter="getStockLevel",setter="setStockLevel")
+     * @Serializer\Accessor(getter="getstockLevel",setter="setstockLevel")
      */
     protected $stockLevel = 0.0;
 
 
-    public function __construct()
-    {
-        $this->productId = new Identity;
-        $this->warehouseId = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->productId = new Identity();
+		$this->warehouseId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $productId Reference to product
+     * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductWarehouseInfo
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -85,47 +85,30 @@ class ProductWarehouseInfo extends DataModel
     {
         return $this->productId;
     }
-
+	
+ 
     /**
-     * @param  Identity $warehouseId Reference to warehouse
+     * @param Identity $warehouseId 
      * @return \jtl\Connector\Model\ProductWarehouseInfo
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setWarehouseId(Identity $warehouseId)
+    public function setwarehouseId(Identity $warehouseId)
     {
         return $this->setProperty('warehouseId', $warehouseId, 'Identity');
     }
 
     /**
-     * @return Identity Reference to warehouse
+     * @return Identity 
      */
-    public function getWarehouseId()
+    public function getwarehouseId()
     {
         return $this->warehouseId;
     }
-
+	
+ 
     /**
-     * @param  DateTime $inflowDate Optional product inflow date for specified warehouse
+     * @param double $inflowQuantity Optional product inflow quantity for specified warehouse
      * @return \jtl\Connector\Model\ProductWarehouseInfo
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
-     */
-    public function setInflowDate(DateTime $inflowDate = null)
-    {
-        return $this->setProperty('inflowDate', $inflowDate, 'DateTime');
-    }
-
-    /**
-     * @return DateTime Optional product inflow date for specified warehouse
-     */
-    public function getInflowDate()
-    {
-        return $this->inflowDate;
-    }
-
-    /**
-     * @param  double $inflowQuantity Optional product inflow quantity for specified warehouse
-     * @return \jtl\Connector\Model\ProductWarehouseInfo
-     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
     public function setInflowQuantity($inflowQuantity)
     {
@@ -139,24 +122,24 @@ class ProductWarehouseInfo extends DataModel
     {
         return $this->inflowQuantity;
     }
-
+	
+ 
     /**
-     * @param  double $stockLevel Optional product stock level in specified warehouse
+     * @param double $stockLevel 
      * @return \jtl\Connector\Model\ProductWarehouseInfo
-     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
-    public function setStockLevel($stockLevel)
+    public function setstockLevel($stockLevel)
     {
         return $this->setProperty('stockLevel', $stockLevel, 'double');
     }
 
     /**
-     * @return double Optional product stock level in specified warehouse
+     * @return double 
      */
-    public function getStockLevel()
+    public function getstockLevel()
     {
         return $this->stockLevel;
     }
 
- 
+
 }

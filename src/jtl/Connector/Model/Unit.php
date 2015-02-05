@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,16 +13,17 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Specifies product units like "piece", "bottle", "package"..
+ * Specifies product units like "piece", "bottle", "package".
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class Unit extends DataModel
 {
+
     /**
      * @var Identity Unit id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -30,13 +33,24 @@ class Unit extends DataModel
     protected $id = null;
 
 
-    public function __construct()
-    {
-        $this->id = new Identity;
-    }
-
     /**
-     * @param  Identity $id Unit id
+     * @var jtl\Connector\Model\UnitI18n[] 
+     * @Serializer\Type("array<jtl\Connector\Model\UnitI18n>")
+     * @Serializer\SerializedName("i18ns")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $i18ns = array();
+
+
+
+	public function __construct()
+	{
+		$this->id = new Identity();
+	}
+	
+ 
+    /**
+     * @param Identity $id Unit id
      * @return \jtl\Connector\Model\Unit
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -53,5 +67,33 @@ class Unit extends DataModel
         return $this->id;
     }
 
- 
+
+    /**
+     * @param \jtl\Connector\Model\UnitI18n $i18n
+     * @return \jtl\Connector\Model\Unit
+     */
+    public function addI18n(\jtl\Connector\Model\UnitI18n $i18n)
+    {
+        $this->i18ns[] = $i18n;
+        return $this;
+    }
+    
+    /**
+     * @return jtl\Connector\Model\UnitI18n[]
+     */
+    public function getI18ns()
+    {
+        return $this->i18ns;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\Unit
+     */
+    public function clearI18ns()
+    {
+        $this->i18ns = array();
+        return $this;
+    }
+
+
 }

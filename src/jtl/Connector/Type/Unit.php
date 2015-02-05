@@ -16,9 +16,10 @@ class Unit extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('id', 'int', null, true, true, false),
-        );
+		return array(
+            new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('i18ns', '\jtl\Connector\Model\UnitI18n', null, false, false, true),
+		);
     }
 
 	public function isMain()

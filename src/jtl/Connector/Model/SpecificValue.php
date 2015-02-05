@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Specific
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,16 +13,17 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Specific value properties to define a new specificValue with a sort number. .
+ * Specific value properties to define a new specificValue with a sort number. 
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Specific
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class SpecificValue extends DataModel
 {
+
     /**
      * @var Identity Unique specificValue id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -28,6 +31,7 @@ class SpecificValue extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
+
 
     /**
      * @var Identity Reference to specificId
@@ -37,19 +41,18 @@ class SpecificValue extends DataModel
      */
     protected $specificId = null;
 
+
     /**
-     * @var int Optional sort number
-     * @Serializer\Type("integer")
+     * @var string Optional sort number
+     * @Serializer\Type("string")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = 0;
+    protected $sort = '';
+
 
     /**
-     * End: 1 (One of SpecificValue)
-     *      * (Collection of SpecificValueI18n)
-     *
-     * @var \jtl\Connector\Model\SpecificValueI18n[]
+     * @var jtl\Connector\Model\SpecificValueI18n[] 
      * @Serializer\Type("array<jtl\Connector\Model\SpecificValueI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -57,14 +60,16 @@ class SpecificValue extends DataModel
     protected $i18ns = array();
 
 
-    public function __construct()
-    {
-        $this->id = new Identity;
-        $this->specificId = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->id = new Identity();
+		$this->specificId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $id Unique specificValue id
+     * @param Identity $id Unique specificValue id
      * @return \jtl\Connector\Model\SpecificValue
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -80,9 +85,10 @@ class SpecificValue extends DataModel
     {
         return $this->id;
     }
-
+	
+ 
     /**
-     * @param  Identity $specificId Reference to specificId
+     * @param Identity $specificId Reference to specificId
      * @return \jtl\Connector\Model\SpecificValue
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -98,27 +104,28 @@ class SpecificValue extends DataModel
     {
         return $this->specificId;
     }
-
+	
+ 
     /**
-     * @param  int $sort Optional sort number
+     * @param string $sort Optional sort number
      * @return \jtl\Connector\Model\SpecificValue
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
     public function setSort($sort)
     {
-        return $this->setProperty('sort', $sort, 'int');
+        return $this->setProperty('sort', $sort, 'string');
     }
 
     /**
-     * @return int Optional sort number
+     * @return string Optional sort number
      */
     public function getSort()
     {
         return $this->sort;
     }
 
+
     /**
-     * @param  \jtl\Connector\Model\SpecificValueI18n $i18n
+     * @param \jtl\Connector\Model\SpecificValueI18n $i18n
      * @return \jtl\Connector\Model\SpecificValue
      */
     public function addI18n(\jtl\Connector\Model\SpecificValueI18n $i18n)
@@ -128,7 +135,7 @@ class SpecificValue extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\SpecificValueI18n[]
+     * @return jtl\Connector\Model\SpecificValueI18n[]
      */
     public function getI18ns()
     {
@@ -144,5 +151,5 @@ class SpecificValue extends DataModel
         return $this;
     }
 
- 
+
 }

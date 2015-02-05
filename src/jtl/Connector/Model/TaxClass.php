@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,16 +13,17 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Tax class model (set in JTL-Wawi ERP).
+ * Tax class model (set in JTL-Wawi ERP)
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class TaxClass extends DataModel
 {
+
     /**
      * @var Identity Unique taxClass id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -29,13 +32,15 @@ class TaxClass extends DataModel
      */
     protected $id = null;
 
+
     /**
-     * @var bool Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
+     * @var boolean Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isDefault")
      * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
      */
     protected $isDefault = false;
+
 
     /**
      * @var string Optional tax class name
@@ -46,13 +51,15 @@ class TaxClass extends DataModel
     protected $name = '';
 
 
-    public function __construct()
-    {
-        $this->id = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->id = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $id Unique taxClass id
+     * @param Identity $id Unique taxClass id
      * @return \jtl\Connector\Model\TaxClass
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -68,29 +75,30 @@ class TaxClass extends DataModel
     {
         return $this->id;
     }
-
+	
+ 
     /**
-     * @param  bool $isDefault Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
+     * @param boolean $isDefault Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
      * @return \jtl\Connector\Model\TaxClass
-     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsDefault($isDefault)
+    public function setIsDefault(boolean $isDefault)
     {
-        return $this->setProperty('isDefault', $isDefault, 'bool');
+        return $this->setProperty('isDefault', $isDefault, 'boolean');
     }
 
     /**
-     * @return bool Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
+     * @return boolean Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
      */
     public function getIsDefault()
     {
         return $this->isDefault;
     }
-
+	
+ 
     /**
-     * @param  string $name Optional tax class name
+     * @param string $name Optional tax class name
      * @return \jtl\Connector\Model\TaxClass
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setName($name)
     {
@@ -105,5 +113,5 @@ class TaxClass extends DataModel
         return $this->name;
     }
 
- 
+
 }

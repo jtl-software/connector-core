@@ -16,11 +16,11 @@ class DeliveryStatus extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('id', 'int', null, true, true, false),
-            new PropertyInfo('localeName', 'string', null, false, false, false),
-            new PropertyInfo('name', 'string', null, false, false, false),
-        );
+		return array(
+            new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('languageISO', 'string', '', false, false, false),
+            new PropertyInfo('name', 'string', '', false, false, false),
+		);
     }
 
 	public function isMain()

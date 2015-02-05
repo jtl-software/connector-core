@@ -16,11 +16,12 @@ class MeasurementUnit extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('code', 'string', null, false, false, false),
-            new PropertyInfo('displayCode', 'string', null, false, false, false),
-            new PropertyInfo('id', 'int', null, true, true, false),
-        );
+		return array(
+            new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('code', 'string', '', false, false, false),
+            new PropertyInfo('displayCode', 'string', '', false, false, false),
+            new PropertyInfo('i18Ns', '\jtl\Connector\Model\MeasurementUnitI18n', null, false, false, true),
+		);
     }
 
 	public function isMain()

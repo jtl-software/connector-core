@@ -16,12 +16,11 @@ class CrossSelling extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('crossSellingGroupId', 'int', null, false, true, false),
-            new PropertyInfo('crossSellingProductId', 'int', null, false, true, false),
-            new PropertyInfo('id', 'int', null, true, true, false),
-            new PropertyInfo('productId', 'int', null, false, true, false),
-        );
+		return array(
+            new PropertyInfo('crossSellingGroupId', 'string', '', false, false, false),
+            new PropertyInfo('id', 'string', '', false, false, false),
+            new PropertyInfo('productId', 'string', '', false, false, false),
+		);
     }
 
 	public function isMain()

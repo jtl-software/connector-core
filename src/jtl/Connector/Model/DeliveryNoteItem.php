@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage DeliveryNote
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,91 +13,72 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Delivery note item properties..
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage DeliveryNote
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class DeliveryNoteItem extends DataModel
 {
+
     /**
-     * @var Identity Reference to customerOrderItem
+     * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("customerOrderItemId")
      * @Serializer\Accessor(getter="getCustomerOrderItemId",setter="setCustomerOrderItemId")
      */
     protected $customerOrderItemId = null;
 
+
     /**
-     * @var Identity Reference to deliveryNote
+     * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("deliveryNoteId")
      * @Serializer\Accessor(getter="getDeliveryNoteId",setter="setDeliveryNoteId")
      */
     protected $deliveryNoteId = null;
 
+
     /**
-     * @var Identity Unique deliveryNoteItem id
+     * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
-    /**
-     * @var Identity Optional reference to warehouse
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("warehouseId")
-     * @Serializer\Accessor(getter="getWarehouseId",setter="setWarehouseId")
-     */
-    protected $warehouseId = null;
 
     /**
-     * @var string Optional batch number
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("batchNumber")
-     * @Serializer\Accessor(getter="getBatchNumber",setter="setBatchNumber")
-     */
-    protected $batchNumber = '';
-
-    /**
-     * @var DateTime Optional best before date
-     * @Serializer\Type("DateTime")
-     * @Serializer\SerializedName("bestBeforeDate")
-     * @Serializer\Accessor(getter="getBestBeforeDate",setter="setBestBeforeDate")
-     */
-    protected $bestBeforeDate = null;
-
-    /**
-     * @var double Quantity delivered
+     * @var double 
      * @Serializer\Type("double")
      * @Serializer\SerializedName("quantity")
      * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
      */
     protected $quantity = 0.0;
 
+
     /**
-     * @var string Optional serial number
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("serialNumber")
-     * @Serializer\Accessor(getter="getSerialNumber",setter="setSerialNumber")
+     * @var jtl\Connector\Model\DeliveryNoteItemInfo[] 
+     * @Serializer\Type("array<jtl\Connector\Model\DeliveryNoteItemInfo>")
+     * @Serializer\SerializedName("infos")
+     * @Serializer\AccessType("reflection")
      */
-    protected $serialNumber = '';
+    protected $infos = array();
 
 
-    public function __construct()
-    {
-        $this->customerOrderItemId = new Identity;
-        $this->deliveryNoteId = new Identity;
-        $this->id = new Identity;
-        $this->warehouseId = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->id = new Identity();
+		$this->deliveryNoteId = new Identity();
+		$this->customerOrderItemId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $customerOrderItemId Reference to customerOrderItem
+     * @param Identity $customerOrderItemId 
      * @return \jtl\Connector\Model\DeliveryNoteItem
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -105,15 +88,16 @@ class DeliveryNoteItem extends DataModel
     }
 
     /**
-     * @return Identity Reference to customerOrderItem
+     * @return Identity 
      */
     public function getCustomerOrderItemId()
     {
         return $this->customerOrderItemId;
     }
-
+	
+ 
     /**
-     * @param  Identity $deliveryNoteId Reference to deliveryNote
+     * @param Identity $deliveryNoteId 
      * @return \jtl\Connector\Model\DeliveryNoteItem
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -123,15 +107,16 @@ class DeliveryNoteItem extends DataModel
     }
 
     /**
-     * @return Identity Reference to deliveryNote
+     * @return Identity 
      */
     public function getDeliveryNoteId()
     {
         return $this->deliveryNoteId;
     }
-
+	
+ 
     /**
-     * @param  Identity $id Unique deliveryNoteItem id
+     * @param Identity $id 
      * @return \jtl\Connector\Model\DeliveryNoteItem
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -141,71 +126,17 @@ class DeliveryNoteItem extends DataModel
     }
 
     /**
-     * @return Identity Unique deliveryNoteItem id
+     * @return Identity 
      */
     public function getId()
     {
         return $this->id;
     }
-
+	
+ 
     /**
-     * @param  Identity $warehouseId Optional reference to warehouse
+     * @param double $quantity 
      * @return \jtl\Connector\Model\DeliveryNoteItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setWarehouseId(Identity $warehouseId)
-    {
-        return $this->setProperty('warehouseId', $warehouseId, 'Identity');
-    }
-
-    /**
-     * @return Identity Optional reference to warehouse
-     */
-    public function getWarehouseId()
-    {
-        return $this->warehouseId;
-    }
-
-    /**
-     * @param  string $batchNumber Optional batch number
-     * @return \jtl\Connector\Model\DeliveryNoteItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setBatchNumber($batchNumber)
-    {
-        return $this->setProperty('batchNumber', $batchNumber, 'string');
-    }
-
-    /**
-     * @return string Optional batch number
-     */
-    public function getBatchNumber()
-    {
-        return $this->batchNumber;
-    }
-
-    /**
-     * @param  DateTime $bestBeforeDate Optional best before date
-     * @return \jtl\Connector\Model\DeliveryNoteItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
-     */
-    public function setBestBeforeDate(DateTime $bestBeforeDate = null)
-    {
-        return $this->setProperty('bestBeforeDate', $bestBeforeDate, 'DateTime');
-    }
-
-    /**
-     * @return DateTime Optional best before date
-     */
-    public function getBestBeforeDate()
-    {
-        return $this->bestBeforeDate;
-    }
-
-    /**
-     * @param  double $quantity Quantity delivered
-     * @return \jtl\Connector\Model\DeliveryNoteItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
     public function setQuantity($quantity)
     {
@@ -213,30 +144,40 @@ class DeliveryNoteItem extends DataModel
     }
 
     /**
-     * @return double Quantity delivered
+     * @return double 
      */
     public function getQuantity()
     {
         return $this->quantity;
     }
 
+
     /**
-     * @param  string $serialNumber Optional serial number
+     * @param \jtl\Connector\Model\DeliveryNoteItemInfo $info
      * @return \jtl\Connector\Model\DeliveryNoteItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setSerialNumber($serialNumber)
+    public function addInfo(\jtl\Connector\Model\DeliveryNoteItemInfo $info)
     {
-        return $this->setProperty('serialNumber', $serialNumber, 'string');
+        $this->infos[] = $info;
+        return $this;
+    }
+    
+    /**
+     * @return jtl\Connector\Model\DeliveryNoteItemInfo[]
+     */
+    public function getInfos()
+    {
+        return $this->infos;
     }
 
     /**
-     * @return string Optional serial number
+     * @return \jtl\Connector\Model\DeliveryNoteItem
      */
-    public function getSerialNumber()
+    public function clearInfos()
     {
-        return $this->serialNumber;
+        $this->infos = array();
+        return $this;
     }
 
- 
+
 }

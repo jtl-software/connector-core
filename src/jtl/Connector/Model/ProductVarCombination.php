@@ -1,6 +1,8 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
  * @subpackage Product
  */
@@ -11,7 +13,7 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Product to productVariationValue Allocation..
+ * Product to productVariationValue Allocation.
  *
  * @access public
  * @package jtl\Connector\Model
@@ -21,6 +23,7 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductVarCombination extends DataModel
 {
+
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -28,6 +31,7 @@ class ProductVarCombination extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
+
 
     /**
      * @var Identity Reference to productVariation
@@ -37,24 +41,26 @@ class ProductVarCombination extends DataModel
      */
     protected $productVariationId = null;
 
+
     /**
-     * @var Identity Reference to productVariationValue
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @var string Reference to productVariationValue
+     * @Serializer\Type("string")
      * @Serializer\SerializedName("productVariationValueId")
      * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
      */
-    protected $productVariationValueId = null;
+    protected $productVariationValueId = '';
 
 
-    public function __construct()
-    {
-        $this->productId = new Identity;
-        $this->productVariationId = new Identity;
-        $this->productVariationValueId = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->productId = new Identity();
+		$this->productVariationId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $productId Reference to product
+     * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductVarCombination
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -70,9 +76,10 @@ class ProductVarCombination extends DataModel
     {
         return $this->productId;
     }
-
+	
+ 
     /**
-     * @param  Identity $productVariationId Reference to productVariation
+     * @param Identity $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\ProductVarCombination
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -88,24 +95,24 @@ class ProductVarCombination extends DataModel
     {
         return $this->productVariationId;
     }
-
+	
+ 
     /**
-     * @param  Identity $productVariationValueId Reference to productVariationValue
+     * @param string $productVariationValueId Reference to productVariationValue
      * @return \jtl\Connector\Model\ProductVarCombination
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductVariationValueId(Identity $productVariationValueId)
+    public function setProductVariationValueId($productVariationValueId)
     {
-        return $this->setProperty('productVariationValueId', $productVariationValueId, 'Identity');
+        return $this->setProperty('productVariationValueId', $productVariationValueId, 'string');
     }
 
     /**
-     * @return Identity Reference to productVariationValue
+     * @return string Reference to productVariationValue
      */
     public function getProductVariationValueId()
     {
         return $this->productVariationValueId;
     }
 
- 
+
 }

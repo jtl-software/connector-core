@@ -1,6 +1,8 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
  * @subpackage Product
  */
@@ -11,7 +13,7 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Specify product to hide from customerGroup..
+ * Specify product to hide from customerGroup.
  *
  * @access public
  * @package jtl\Connector\Model
@@ -21,6 +23,7 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductInvisibility extends DataModel
 {
+
     /**
      * @var Identity Reference to customerGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -28,6 +31,7 @@ class ProductInvisibility extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
+
 
     /**
      * @var Identity Reference to product
@@ -38,14 +42,16 @@ class ProductInvisibility extends DataModel
     protected $productId = null;
 
 
-    public function __construct()
-    {
-        $this->customerGroupId = new Identity;
-        $this->productId = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->productId = new Identity();
+		$this->customerGroupId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $customerGroupId Reference to customerGroup
+     * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ProductInvisibility
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -61,9 +67,10 @@ class ProductInvisibility extends DataModel
     {
         return $this->customerGroupId;
     }
-
+	
+ 
     /**
-     * @param  Identity $productId Reference to product
+     * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductInvisibility
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -80,5 +87,5 @@ class ProductInvisibility extends DataModel
         return $this->productId;
     }
 
- 
+
 }

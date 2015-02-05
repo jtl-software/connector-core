@@ -16,16 +16,13 @@ class DeliveryNoteItem extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('batchNumber', 'string', null, false, false, false),
-            new PropertyInfo('bestBeforeDate', 'DateTime', null, false, false, false),
-            new PropertyInfo('customerOrderItemId', 'int', null, false, true, false),
-            new PropertyInfo('deliveryNoteId', 'int', null, false, true, false),
-            new PropertyInfo('id', 'int', null, true, true, false),
-            new PropertyInfo('quantity', 'double', null, false, false, false),
-            new PropertyInfo('serialNumber', 'string', null, false, false, false),
-            new PropertyInfo('warehouseId', 'int', null, false, true, false),
-        );
+		return array(
+            new PropertyInfo('customerOrderItemId', 'Identity', null, false, true, false),
+            new PropertyInfo('deliveryNoteId', 'Identity', null, false, true, false),
+            new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('quantity', 'double', 0.0, false, false, false),
+            new PropertyInfo('infos', '\jtl\Connector\Model\DeliveryNoteItemInfo', null, false, false, true),
+		);
     }
 
 	public function isMain()

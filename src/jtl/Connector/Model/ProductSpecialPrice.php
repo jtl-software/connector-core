@@ -1,6 +1,8 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
  * @subpackage Product
  */
@@ -11,7 +13,7 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Special product price properties to specify date and stock limits..
+ * Special product price properties to specify date and stock limits.
  *
  * @access public
  * @package jtl\Connector\Model
@@ -21,6 +23,7 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductSpecialPrice extends DataModel
 {
+
     /**
      * @var Identity Unique productSpecialPrice id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -28,6 +31,7 @@ class ProductSpecialPrice extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
+
 
     /**
      * @var Identity Reference to product
@@ -37,6 +41,7 @@ class ProductSpecialPrice extends DataModel
      */
     protected $productId = null;
 
+
     /**
      * @var DateTime Optional: Activate special price from date
      * @Serializer\Type("DateTime")
@@ -44,6 +49,7 @@ class ProductSpecialPrice extends DataModel
      * @Serializer\Accessor(getter="getActiveFromDate",setter="setActiveFromDate")
      */
     protected $activeFromDate = null;
+
 
     /**
      * @var DateTime Optional: Special price active until date
@@ -53,58 +59,62 @@ class ProductSpecialPrice extends DataModel
      */
     protected $activeUntilDate = null;
 
+
     /**
-     * @var bool Optional: Consider activeFrom/activeUntil date range. If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
+     * @var boolean Optional: Consider activeFrom/activeUntil date range. If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("considerDateLimit")
      * @Serializer\Accessor(getter="getConsiderDateLimit",setter="setConsiderDateLimit")
      */
     protected $considerDateLimit = false;
 
+
     /**
-     * @var bool Optional: Consider stockLimit value. If true, specialPrice will be only active until product stockLevel is greater or equal stockLimit.
+     * @var boolean Optional: Consider stockLimit value. If true, specialPrice will be only active until product stockLevel is greater or equal stockLimit.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("considerStockLimit")
      * @Serializer\Accessor(getter="getConsiderStockLimit",setter="setConsiderStockLimit")
      */
     protected $considerStockLimit = false;
 
+
     /**
-     * @var bool Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match. 
+     * @var boolean Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match. 
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isActive")
      * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
      */
     protected $isActive = false;
 
+
     /**
-     * @var double Optional: SpecialPrice active until stock level quantity
-     * @Serializer\Type("double")
+     * @var string Optional: SpecialPrice active until stock level quantity
+     * @Serializer\Type("string")
      * @Serializer\SerializedName("stockLimit")
      * @Serializer\Accessor(getter="getStockLimit",setter="setStockLimit")
      */
-    protected $stockLimit = 0.0;
+    protected $stockLimit = '';
+
 
     /**
-     * End: 1 (One of ProductSpecialPrice)
-     *      * (Collection of SpecialPrice)
-     *
-     * @var \jtl\Connector\Model\SpecialPrice[]
-     * @Serializer\Type("array<jtl\Connector\Model\SpecialPrice>")
-     * @Serializer\SerializedName("specialPrices")
+     * @var jtl\Connector\Model\ProductSpecialPriceItem[] 
+     * @Serializer\Type("array<jtl\Connector\Model\ProductSpecialPriceItem>")
+     * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
      */
-    protected $specialPrices = array();
+    protected $items = array();
 
 
-    public function __construct()
-    {
-        $this->id = new Identity;
-        $this->productId = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->id = new Identity();
+		$this->productId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $id Unique productSpecialPrice id
+     * @param Identity $id Unique productSpecialPrice id
      * @return \jtl\Connector\Model\ProductSpecialPrice
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -120,9 +130,10 @@ class ProductSpecialPrice extends DataModel
     {
         return $this->id;
     }
-
+	
+ 
     /**
-     * @param  Identity $productId Reference to product
+     * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductSpecialPrice
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -138,13 +149,14 @@ class ProductSpecialPrice extends DataModel
     {
         return $this->productId;
     }
-
+	
+ 
     /**
-     * @param  DateTime $activeFromDate Optional: Activate special price from date
+     * @param DateTime $activeFromDate Optional: Activate special price from date
      * @return \jtl\Connector\Model\ProductSpecialPrice
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setActiveFromDate(DateTime $activeFromDate = null)
+    public function setActiveFromDate(DateTime $activeFromDate)
     {
         return $this->setProperty('activeFromDate', $activeFromDate, 'DateTime');
     }
@@ -156,13 +168,14 @@ class ProductSpecialPrice extends DataModel
     {
         return $this->activeFromDate;
     }
-
+	
+ 
     /**
-     * @param  DateTime $activeUntilDate Optional: Special price active until date
+     * @param DateTime $activeUntilDate Optional: Special price active until date
      * @return \jtl\Connector\Model\ProductSpecialPrice
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setActiveUntilDate(DateTime $activeUntilDate = null)
+    public function setActiveUntilDate(DateTime $activeUntilDate)
     {
         return $this->setProperty('activeUntilDate', $activeUntilDate, 'DateTime');
     }
@@ -174,105 +187,109 @@ class ProductSpecialPrice extends DataModel
     {
         return $this->activeUntilDate;
     }
-
+	
+ 
     /**
-     * @param  bool $considerDateLimit Optional: Consider activeFrom/activeUntil date range. If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
+     * @param boolean $considerDateLimit Optional: Consider activeFrom/activeUntil date range. If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
      * @return \jtl\Connector\Model\ProductSpecialPrice
-     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setConsiderDateLimit($considerDateLimit)
+    public function setConsiderDateLimit(boolean $considerDateLimit)
     {
-        return $this->setProperty('considerDateLimit', $considerDateLimit, 'bool');
+        return $this->setProperty('considerDateLimit', $considerDateLimit, 'boolean');
     }
 
     /**
-     * @return bool Optional: Consider activeFrom/activeUntil date range. If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
+     * @return boolean Optional: Consider activeFrom/activeUntil date range. If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
      */
     public function getConsiderDateLimit()
     {
         return $this->considerDateLimit;
     }
-
+	
+ 
     /**
-     * @param  bool $considerStockLimit Optional: Consider stockLimit value. If true, specialPrice will be only active until product stockLevel is greater or equal stockLimit.
+     * @param boolean $considerStockLimit Optional: Consider stockLimit value. If true, specialPrice will be only active until product stockLevel is greater or equal stockLimit.
      * @return \jtl\Connector\Model\ProductSpecialPrice
-     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setConsiderStockLimit($considerStockLimit)
+    public function setConsiderStockLimit(boolean $considerStockLimit)
     {
-        return $this->setProperty('considerStockLimit', $considerStockLimit, 'bool');
+        return $this->setProperty('considerStockLimit', $considerStockLimit, 'boolean');
     }
 
     /**
-     * @return bool Optional: Consider stockLimit value. If true, specialPrice will be only active until product stockLevel is greater or equal stockLimit.
+     * @return boolean Optional: Consider stockLimit value. If true, specialPrice will be only active until product stockLevel is greater or equal stockLimit.
      */
     public function getConsiderStockLimit()
     {
         return $this->considerStockLimit;
     }
-
+	
+ 
     /**
-     * @param  bool $isActive Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match. 
+     * @param boolean $isActive Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match. 
      * @return \jtl\Connector\Model\ProductSpecialPrice
-     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsActive($isActive)
+    public function setIsActive(boolean $isActive)
     {
-        return $this->setProperty('isActive', $isActive, 'bool');
+        return $this->setProperty('isActive', $isActive, 'boolean');
     }
 
     /**
-     * @return bool Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match. 
+     * @return boolean Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match. 
      */
     public function getIsActive()
     {
         return $this->isActive;
     }
-
+	
+ 
     /**
-     * @param  double $stockLimit Optional: SpecialPrice active until stock level quantity
+     * @param string $stockLimit Optional: SpecialPrice active until stock level quantity
      * @return \jtl\Connector\Model\ProductSpecialPrice
-     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
     public function setStockLimit($stockLimit)
     {
-        return $this->setProperty('stockLimit', $stockLimit, 'double');
+        return $this->setProperty('stockLimit', $stockLimit, 'string');
     }
 
     /**
-     * @return double Optional: SpecialPrice active until stock level quantity
+     * @return string Optional: SpecialPrice active until stock level quantity
      */
     public function getStockLimit()
     {
         return $this->stockLimit;
     }
 
+
     /**
-     * @param  \jtl\Connector\Model\SpecialPrice $specialPrice
+     * @param \jtl\Connector\Model\ProductSpecialPriceItem $item
      * @return \jtl\Connector\Model\ProductSpecialPrice
      */
-    public function addSpecialPrice(\jtl\Connector\Model\SpecialPrice $specialPrice)
+    public function addItem(\jtl\Connector\Model\ProductSpecialPriceItem $item)
     {
-        $this->specialPrices[] = $specialPrice;
+        $this->items[] = $item;
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\SpecialPrice[]
+     * @return jtl\Connector\Model\ProductSpecialPriceItem[]
      */
-    public function getSpecialPrices()
+    public function getItems()
     {
-        return $this->specialPrices;
+        return $this->items;
     }
 
     /**
      * @return \jtl\Connector\Model\ProductSpecialPrice
      */
-    public function clearSpecialPrices()
+    public function clearItems()
     {
-        $this->specialPrices = array();
+        $this->items = array();
         return $this;
     }
 
- 
+
 }

@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Category
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,16 +13,17 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Localized category properties. localeName, categoryId and a localized name must be set. .
+ * Localized category properties. localeName, categoryId and a localized name must be set. 
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Category
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class CategoryI18n extends DataModel
 {
+
     /**
      * @var Identity Reference to category
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -28,6 +31,7 @@ class CategoryI18n extends DataModel
      * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
      */
     protected $categoryId = null;
+
 
     /**
      * @var string Optional localized Long Description
@@ -37,13 +41,15 @@ class CategoryI18n extends DataModel
      */
     protected $description = '';
 
+
     /**
      * @var string Locale
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("localeName")
-     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
+     * @Serializer\SerializedName("languageISO")
+     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
-    protected $localeName = '';
+    protected $languageISO = '';
+
 
     /**
      * @var string Optional localized  short description used for meta tag description
@@ -53,6 +59,7 @@ class CategoryI18n extends DataModel
      */
     protected $metaDescription = '';
 
+
     /**
      * @var string Optional localized meta tag keywords value
      * @Serializer\Type("string")
@@ -60,6 +67,7 @@ class CategoryI18n extends DataModel
      * @Serializer\Accessor(getter="getMetaKeywords",setter="setMetaKeywords")
      */
     protected $metaKeywords = '';
+
 
     /**
      * @var string Localized category name
@@ -69,6 +77,7 @@ class CategoryI18n extends DataModel
      */
     protected $name = '';
 
+
     /**
      * @var string Optional localized title tag value
      * @Serializer\Type("string")
@@ -76,6 +85,7 @@ class CategoryI18n extends DataModel
      * @Serializer\Accessor(getter="getTitleTag",setter="setTitleTag")
      */
     protected $titleTag = '';
+
 
     /**
      * @var string Optional localized category URL
@@ -86,13 +96,15 @@ class CategoryI18n extends DataModel
     protected $urlPath = '';
 
 
-    public function __construct()
-    {
-        $this->categoryId = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->categoryId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $categoryId Reference to category
+     * @param Identity $categoryId Reference to category
      * @return \jtl\Connector\Model\CategoryI18n
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -108,11 +120,11 @@ class CategoryI18n extends DataModel
     {
         return $this->categoryId;
     }
-
+	
+ 
     /**
-     * @param  string $description Optional localized Long Description
+     * @param string $description Optional localized Long Description
      * @return \jtl\Connector\Model\CategoryI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setDescription($description)
     {
@@ -126,29 +138,29 @@ class CategoryI18n extends DataModel
     {
         return $this->description;
     }
-
+	
+ 
     /**
-     * @param  string $localeName Locale
+     * @param string $languageISO Locale
      * @return \jtl\Connector\Model\CategoryI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName($localeName)
+    public function setLanguageISO($languageISO)
     {
-        return $this->setProperty('localeName', $localeName, 'string');
+        return $this->setProperty('languageISO', $languageISO, 'string');
     }
 
     /**
      * @return string Locale
      */
-    public function getLocaleName()
+    public function getLanguageISO()
     {
-        return $this->localeName;
+        return $this->languageISO;
     }
-
+	
+ 
     /**
-     * @param  string $metaDescription Optional localized  short description used for meta tag description
+     * @param string $metaDescription Optional localized  short description used for meta tag description
      * @return \jtl\Connector\Model\CategoryI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setMetaDescription($metaDescription)
     {
@@ -162,11 +174,11 @@ class CategoryI18n extends DataModel
     {
         return $this->metaDescription;
     }
-
+	
+ 
     /**
-     * @param  string $metaKeywords Optional localized meta tag keywords value
+     * @param string $metaKeywords Optional localized meta tag keywords value
      * @return \jtl\Connector\Model\CategoryI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setMetaKeywords($metaKeywords)
     {
@@ -180,11 +192,11 @@ class CategoryI18n extends DataModel
     {
         return $this->metaKeywords;
     }
-
+	
+ 
     /**
-     * @param  string $name Localized category name
+     * @param string $name Localized category name
      * @return \jtl\Connector\Model\CategoryI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setName($name)
     {
@@ -198,11 +210,11 @@ class CategoryI18n extends DataModel
     {
         return $this->name;
     }
-
+	
+ 
     /**
-     * @param  string $titleTag Optional localized title tag value
+     * @param string $titleTag Optional localized title tag value
      * @return \jtl\Connector\Model\CategoryI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setTitleTag($titleTag)
     {
@@ -216,11 +228,11 @@ class CategoryI18n extends DataModel
     {
         return $this->titleTag;
     }
-
+	
+ 
     /**
-     * @param  string $urlPath Optional localized category URL
+     * @param string $urlPath Optional localized category URL
      * @return \jtl\Connector\Model\CategoryI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setUrlPath($urlPath)
     {
@@ -235,5 +247,5 @@ class CategoryI18n extends DataModel
         return $this->urlPath;
     }
 
- 
+
 }

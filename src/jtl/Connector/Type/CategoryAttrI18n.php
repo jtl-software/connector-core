@@ -16,12 +16,12 @@ class CategoryAttrI18n extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('categoryAttrId', 'int', null, true, true, false),
-            new PropertyInfo('key', 'string', null, false, false, false),
-            new PropertyInfo('localeName', 'string', null, false, false, false),
-            new PropertyInfo('value', 'string', null, false, false, false),
-        );
+		return array(
+            new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('languageISO', 'string', '', false, false, false),
+            new PropertyInfo('name', 'string', '', false, false, false),
+            new PropertyInfo('value', 'string', '', false, false, false),
+		);
     }
 
 	public function isMain()

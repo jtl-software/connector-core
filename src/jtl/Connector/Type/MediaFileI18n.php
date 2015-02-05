@@ -16,12 +16,12 @@ class MediaFileI18n extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('description', 'string', null, false, false, false),
-            new PropertyInfo('localeName', 'string', null, false, false, false),
-            new PropertyInfo('mediaFileId', 'int', null, true, true, false),
-            new PropertyInfo('name', 'string', null, false, false, false),
-        );
+		return array(
+            new PropertyInfo('mediaFileId', 'Identity', null, true, true, false),
+            new PropertyInfo('description', 'string', '', false, false, false),
+            new PropertyInfo('languageISO', 'string', '', false, false, false),
+            new PropertyInfo('name', 'string', '', false, false, false),
+		);
     }
 
 	public function isMain()

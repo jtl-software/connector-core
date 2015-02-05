@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,16 +13,17 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Specifies product units like "ml", "l", " cm"..
+ * Specifies product units like "ml", "l", " cm".
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class MeasurementUnit extends DataModel
 {
+
     /**
      * @var Identity Unit id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -29,6 +32,7 @@ class MeasurementUnit extends DataModel
      */
     protected $id = null;
 
+
     /**
      * @var string Optional UCUM-Code, see  http://unitsofmeasure.org/
      * @Serializer\Type("string")
@@ -36,6 +40,7 @@ class MeasurementUnit extends DataModel
      * @Serializer\Accessor(getter="getCode",setter="setCode")
      */
     protected $code = '';
+
 
     /**
      * @var string Synonym e.g. 'ml'
@@ -46,13 +51,24 @@ class MeasurementUnit extends DataModel
     protected $displayCode = '';
 
 
-    public function __construct()
-    {
-        $this->id = new Identity;
-    }
-
     /**
-     * @param  Identity $id Unit id
+     * @var jtl\Connector\Model\MeasurementUnitI18n[] 
+     * @Serializer\Type("array<jtl\Connector\Model\MeasurementUnitI18n>")
+     * @Serializer\SerializedName("i18Ns")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $i18Ns = array();
+
+
+
+	public function __construct()
+	{
+		$this->id = new Identity();
+	}
+	
+ 
+    /**
+     * @param Identity $id Unit id
      * @return \jtl\Connector\Model\MeasurementUnit
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -68,11 +84,11 @@ class MeasurementUnit extends DataModel
     {
         return $this->id;
     }
-
+	
+ 
     /**
-     * @param  string $code Optional UCUM-Code, see  http://unitsofmeasure.org/
+     * @param string $code Optional UCUM-Code, see  http://unitsofmeasure.org/
      * @return \jtl\Connector\Model\MeasurementUnit
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setCode($code)
     {
@@ -86,11 +102,11 @@ class MeasurementUnit extends DataModel
     {
         return $this->code;
     }
-
+	
+ 
     /**
-     * @param  string $displayCode Synonym e.g. 'ml'
+     * @param string $displayCode Synonym e.g. 'ml'
      * @return \jtl\Connector\Model\MeasurementUnit
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setDisplayCode($displayCode)
     {
@@ -105,5 +121,33 @@ class MeasurementUnit extends DataModel
         return $this->displayCode;
     }
 
- 
+
+    /**
+     * @param \jtl\Connector\Model\MeasurementUnitI18n $i18N
+     * @return \jtl\Connector\Model\MeasurementUnit
+     */
+    public function addI18N(\jtl\Connector\Model\MeasurementUnitI18n $i18N)
+    {
+        $this->i18Ns[] = $i18N;
+        return $this;
+    }
+    
+    /**
+     * @return jtl\Connector\Model\MeasurementUnitI18n[]
+     */
+    public function getI18Ns()
+    {
+        return $this->i18Ns;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\MeasurementUnit
+     */
+    public function clearI18Ns()
+    {
+        $this->i18Ns = array();
+        return $this;
+    }
+
+
 }

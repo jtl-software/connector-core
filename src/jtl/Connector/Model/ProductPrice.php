@@ -1,6 +1,8 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
  * @subpackage Product
  */
@@ -11,7 +13,7 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Product price properties..
+ * Product price properties.
  *
  * @access public
  * @package jtl\Connector\Model
@@ -21,6 +23,7 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductPrice extends DataModel
 {
+
     /**
      * @var Identity Reference to customerGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -28,6 +31,25 @@ class ProductPrice extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
+
+
+    /**
+     * @var Identity Reference to customer
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerId")
+     * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
+     */
+    protected $customerId = null;
+
+
+    /**
+     * @var Identity Unique ProductPrice id
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
+     */
+    protected $id = null;
+
 
     /**
      * @var Identity Reference to product
@@ -37,11 +59,9 @@ class ProductPrice extends DataModel
      */
     protected $productId = null;
 
+
     /**
-     * End: 1 (One of ProductPrice)
-     *      * (Collection of ProductPriceItem)
-     *
-     * @var \jtl\Connector\Model\ProductPriceItem[]
+     * @var jtl\Connector\Model\ProductPriceItem[] 
      * @Serializer\Type("array<jtl\Connector\Model\ProductPriceItem>")
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
@@ -49,14 +69,18 @@ class ProductPrice extends DataModel
     protected $items = array();
 
 
-    public function __construct()
-    {
-        $this->customerGroupId = new Identity;
-        $this->productId = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->id = new Identity();
+		$this->productId = new Identity();
+		$this->customerGroupId = new Identity();
+		$this->customerId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $customerGroupId Reference to customerGroup
+     * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ProductPrice
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -72,9 +96,48 @@ class ProductPrice extends DataModel
     {
         return $this->customerGroupId;
     }
+	
+ 
+    /**
+     * @param Identity $customerId Reference to customer
+     * @return \jtl\Connector\Model\ProductPrice
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerId(Identity $customerId)
+    {
+        return $this->setProperty('customerId', $customerId, 'Identity');
+    }
 
     /**
-     * @param  Identity $productId Reference to product
+     * @return Identity Reference to customer
+     */
+    public function getCustomerId()
+    {
+        return $this->customerId;
+    }
+	
+ 
+    /**
+     * @param Identity $id Unique ProductPrice id
+     * @return \jtl\Connector\Model\ProductPrice
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setId(Identity $id)
+    {
+        return $this->setProperty('id', $id, 'Identity');
+    }
+
+    /**
+     * @return Identity Unique ProductPrice id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+	
+ 
+    /**
+     * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductPrice
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -91,8 +154,9 @@ class ProductPrice extends DataModel
         return $this->productId;
     }
 
+
     /**
-     * @param  \jtl\Connector\Model\ProductPriceItem $item
+     * @param \jtl\Connector\Model\ProductPriceItem $item
      * @return \jtl\Connector\Model\ProductPrice
      */
     public function addItem(\jtl\Connector\Model\ProductPriceItem $item)
@@ -102,7 +166,7 @@ class ProductPrice extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductPriceItem[]
+     * @return jtl\Connector\Model\ProductPriceItem[]
      */
     public function getItems()
     {
@@ -118,5 +182,5 @@ class ProductPrice extends DataModel
         return $this;
     }
 
- 
+
 }

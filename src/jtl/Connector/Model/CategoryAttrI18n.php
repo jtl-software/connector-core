@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Category
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,42 +13,45 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Localized key-value-pair for categoryAttr. All properties must be specified. .
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Category
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class CategoryAttrI18n extends DataModel
 {
+
     /**
-     * @var Identity Reference to categoryAttr
+     * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("categoryAttrId")
-     * @Serializer\Accessor(getter="getCategoryAttrId",setter="setCategoryAttrId")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
-    protected $categoryAttrId = null;
+    protected $id = null;
+
 
     /**
-     * @var string Attribute key
+     * @var string 
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("key")
-     * @Serializer\Accessor(getter="getKey",setter="setKey")
+     * @Serializer\SerializedName("languageISO")
+     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
-    protected $key = '';
+    protected $languageISO = '';
+
 
     /**
-     * @var string Locale
+     * @var string 
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("localeName")
-     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
+     * @Serializer\SerializedName("name")
+     * @Serializer\Accessor(getter="getName",setter="setName")
      */
-    protected $localeName = '';
+    protected $name = '';
+
 
     /**
-     * @var string Attribute value
+     * @var string 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("value")
      * @Serializer\Accessor(getter="getValue",setter="setValue")
@@ -54,69 +59,71 @@ class CategoryAttrI18n extends DataModel
     protected $value = '';
 
 
-    public function __construct()
-    {
-        $this->categoryAttrId = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->id = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $categoryAttrId Reference to categoryAttr
+     * @param Identity $id 
      * @return \jtl\Connector\Model\CategoryAttrI18n
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCategoryAttrId(Identity $categoryAttrId)
+    public function setId(Identity $id)
     {
-        return $this->setProperty('categoryAttrId', $categoryAttrId, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
-     * @return Identity Reference to categoryAttr
+     * @return Identity 
      */
-    public function getCategoryAttrId()
+    public function getId()
     {
-        return $this->categoryAttrId;
+        return $this->id;
     }
-
+	
+ 
     /**
-     * @param  string $key Attribute key
+     * @param string $languageISO 
      * @return \jtl\Connector\Model\CategoryAttrI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setKey($key)
+    public function setLanguageISO($languageISO)
     {
-        return $this->setProperty('key', $key, 'string');
+        return $this->setProperty('languageISO', $languageISO, 'string');
     }
 
     /**
-     * @return string Attribute key
+     * @return string 
      */
-    public function getKey()
+    public function getLanguageISO()
     {
-        return $this->key;
+        return $this->languageISO;
     }
-
+	
+ 
     /**
-     * @param  string $localeName Locale
+     * @param string $name 
      * @return \jtl\Connector\Model\CategoryAttrI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName($localeName)
+    public function setName($name)
     {
-        return $this->setProperty('localeName', $localeName, 'string');
+        return $this->setProperty('name', $name, 'string');
     }
 
     /**
-     * @return string Locale
+     * @return string 
      */
-    public function getLocaleName()
+    public function getName()
     {
-        return $this->localeName;
+        return $this->name;
     }
-
+	
+ 
     /**
-     * @param  string $value Attribute value
+     * @param string $value 
      * @return \jtl\Connector\Model\CategoryAttrI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setValue($value)
     {
@@ -124,12 +131,12 @@ class CategoryAttrI18n extends DataModel
     }
 
     /**
-     * @return string Attribute value
+     * @return string 
      */
     public function getValue()
     {
         return $this->value;
     }
 
- 
+
 }

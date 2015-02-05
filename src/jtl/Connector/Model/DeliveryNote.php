@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage DeliveryNote
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,16 +13,17 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * A delivery note created for shipment..
+ * A delivery note created for shipment.
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage DeliveryNote
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class DeliveryNote extends DataModel
 {
+
     /**
      * @var Identity Reference to customerOrder
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -28,6 +31,7 @@ class DeliveryNote extends DataModel
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
      */
     protected $customerOrderId = null;
+
 
     /**
      * @var Identity Unique deliveryNote id
@@ -37,6 +41,7 @@ class DeliveryNote extends DataModel
      */
     protected $id = null;
 
+
     /**
      * @var DateTime Creation date
      * @Serializer\Type("DateTime")
@@ -45,13 +50,15 @@ class DeliveryNote extends DataModel
      */
     protected $creationDate = null;
 
+
     /**
-     * @var bool Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
+     * @var boolean Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isFulfillment")
      * @Serializer\Accessor(getter="getIsFulfillment",setter="setIsFulfillment")
      */
     protected $isFulfillment = false;
+
 
     /**
      * @var string Optional text note
@@ -61,11 +68,9 @@ class DeliveryNote extends DataModel
      */
     protected $note = '';
 
+
     /**
-     * End: 1 (One of DeliveryNote)
-     *      * (Collection of DeliveryNoteItem)
-     *
-     * @var \jtl\Connector\Model\DeliveryNoteItem[]
+     * @var jtl\Connector\Model\DeliveryNoteItem[] 
      * @Serializer\Type("array<jtl\Connector\Model\DeliveryNoteItem>")
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
@@ -73,14 +78,16 @@ class DeliveryNote extends DataModel
     protected $items = array();
 
 
-    public function __construct()
-    {
-        $this->customerOrderId = new Identity;
-        $this->id = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->id = new Identity();
+		$this->customerOrderId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $customerOrderId Reference to customerOrder
+     * @param Identity $customerOrderId Reference to customerOrder
      * @return \jtl\Connector\Model\DeliveryNote
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -96,9 +103,10 @@ class DeliveryNote extends DataModel
     {
         return $this->customerOrderId;
     }
-
+	
+ 
     /**
-     * @param  Identity $id Unique deliveryNote id
+     * @param Identity $id Unique deliveryNote id
      * @return \jtl\Connector\Model\DeliveryNote
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -114,13 +122,14 @@ class DeliveryNote extends DataModel
     {
         return $this->id;
     }
-
+	
+ 
     /**
-     * @param  DateTime $creationDate Creation date
+     * @param DateTime $creationDate Creation date
      * @return \jtl\Connector\Model\DeliveryNote
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreationDate(DateTime $creationDate = null)
+    public function setCreationDate(DateTime $creationDate)
     {
         return $this->setProperty('creationDate', $creationDate, 'DateTime');
     }
@@ -132,29 +141,30 @@ class DeliveryNote extends DataModel
     {
         return $this->creationDate;
     }
-
+	
+ 
     /**
-     * @param  bool $isFulfillment Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
+     * @param boolean $isFulfillment Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      * @return \jtl\Connector\Model\DeliveryNote
-     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsFulfillment($isFulfillment)
+    public function setIsFulfillment(boolean $isFulfillment)
     {
-        return $this->setProperty('isFulfillment', $isFulfillment, 'bool');
+        return $this->setProperty('isFulfillment', $isFulfillment, 'boolean');
     }
 
     /**
-     * @return bool Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
+     * @return boolean Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      */
     public function getIsFulfillment()
     {
         return $this->isFulfillment;
     }
-
+	
+ 
     /**
-     * @param  string $note Optional text note
+     * @param string $note Optional text note
      * @return \jtl\Connector\Model\DeliveryNote
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setNote($note)
     {
@@ -169,8 +179,9 @@ class DeliveryNote extends DataModel
         return $this->note;
     }
 
+
     /**
-     * @param  \jtl\Connector\Model\DeliveryNoteItem $item
+     * @param \jtl\Connector\Model\DeliveryNoteItem $item
      * @return \jtl\Connector\Model\DeliveryNote
      */
     public function addItem(\jtl\Connector\Model\DeliveryNoteItem $item)
@@ -180,7 +191,7 @@ class DeliveryNote extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\DeliveryNoteItem[]
+     * @return jtl\Connector\Model\DeliveryNoteItem[]
      */
     public function getItems()
     {
@@ -196,5 +207,5 @@ class DeliveryNote extends DataModel
         return $this;
     }
 
- 
+
 }

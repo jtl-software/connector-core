@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,31 +13,25 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Customer group model..
+ * Customer group model.
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class CustomerGroup extends DataModel
 {
-    /**
-     * @var Identity Unique customerGroup id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
 
     /**
-     * @var bool Optional: Show net prices default instead of gross prices
+     * @var boolean Optional: Show net prices default instead of gross prices
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("applyNetPrice")
      * @Serializer\Accessor(getter="getApplyNetPrice",setter="setApplyNetPrice")
      */
     protected $applyNetPrice = false;
+
 
     /**
      * @var double Optional percentual discount on all products. Negative Value means surcharge. 
@@ -45,30 +41,27 @@ class CustomerGroup extends DataModel
      */
     protected $discount = 0.0;
 
+
     /**
-     * @var bool Optional: Flag default customer group
+     * @var string Unique customerGroup id
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
+     */
+    protected $id = '';
+
+
+    /**
+     * @var boolean Optional: Flag default customer group
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isDefault")
      * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
      */
     protected $isDefault = false;
 
-    /**
-     * End: 1 (One of CustomerGroup)
-     *      * (Collection of CustomerGroupI18n)
-     *
-     * @var \jtl\Connector\Model\CustomerGroupI18n[]
-     * @Serializer\Type("array<jtl\Connector\Model\CustomerGroupI18n>")
-     * @Serializer\SerializedName("i18ns")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $i18ns = array();
 
     /**
-     * End: 1 (One of CustomerGroup)
-     *      * (Collection of CustomerGroupAttr)
-     *
-     * @var \jtl\Connector\Model\CustomerGroupAttr[]
+     * @var jtl\Connector\Model\CustomerGroupAttr[] 
      * @Serializer\Type("array<jtl\Connector\Model\CustomerGroupAttr>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
@@ -76,51 +69,43 @@ class CustomerGroup extends DataModel
     protected $attributes = array();
 
 
-    public function __construct()
-    {
-        $this->id = new Identity;
-    }
-
     /**
-     * @param  Identity $id Unique customerGroup id
+     * @var jtl\Connector\Model\CustomerGroupI18n[] 
+     * @Serializer\Type("array<jtl\Connector\Model\CustomerGroupI18n>")
+     * @Serializer\SerializedName("i18ns")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $i18ns = array();
+
+
+
+	public function __construct()
+	{
+	}
+	
+ 
+    /**
+     * @param boolean $applyNetPrice Optional: Show net prices default instead of gross prices
      * @return \jtl\Connector\Model\CustomerGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setId(Identity $id)
+    public function setApplyNetPrice(boolean $applyNetPrice)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        return $this->setProperty('applyNetPrice', $applyNetPrice, 'boolean');
     }
 
     /**
-     * @return Identity Unique customerGroup id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param  bool $applyNetPrice Optional: Show net prices default instead of gross prices
-     * @return \jtl\Connector\Model\CustomerGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
-     */
-    public function setApplyNetPrice($applyNetPrice)
-    {
-        return $this->setProperty('applyNetPrice', $applyNetPrice, 'bool');
-    }
-
-    /**
-     * @return bool Optional: Show net prices default instead of gross prices
+     * @return boolean Optional: Show net prices default instead of gross prices
      */
     public function getApplyNetPrice()
     {
         return $this->applyNetPrice;
     }
-
+	
+ 
     /**
-     * @param  double $discount Optional percentual discount on all products. Negative Value means surcharge. 
+     * @param double $discount Optional percentual discount on all products. Negative Value means surcharge. 
      * @return \jtl\Connector\Model\CustomerGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
     public function setDiscount($discount)
     {
@@ -134,54 +119,47 @@ class CustomerGroup extends DataModel
     {
         return $this->discount;
     }
-
+	
+ 
     /**
-     * @param  bool $isDefault Optional: Flag default customer group
+     * @param string $id Unique customerGroup id
      * @return \jtl\Connector\Model\CustomerGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setIsDefault($isDefault)
+    public function setId($id)
     {
-        return $this->setProperty('isDefault', $isDefault, 'bool');
+        return $this->setProperty('id', $id, 'string');
     }
 
     /**
-     * @return bool Optional: Flag default customer group
+     * @return string Unique customerGroup id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+	
+ 
+    /**
+     * @param boolean $isDefault Optional: Flag default customer group
+     * @return \jtl\Connector\Model\CustomerGroup
+     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
+     */
+    public function setIsDefault(boolean $isDefault)
+    {
+        return $this->setProperty('isDefault', $isDefault, 'boolean');
+    }
+
+    /**
+     * @return boolean Optional: Flag default customer group
      */
     public function getIsDefault()
     {
         return $this->isDefault;
     }
 
-    /**
-     * @param  \jtl\Connector\Model\CustomerGroupI18n $i18n
-     * @return \jtl\Connector\Model\CustomerGroup
-     */
-    public function addI18n(\jtl\Connector\Model\CustomerGroupI18n $i18n)
-    {
-        $this->i18ns[] = $i18n;
-        return $this;
-    }
-    
-    /**
-     * @return \jtl\Connector\Model\CustomerGroupI18n[]
-     */
-    public function getI18ns()
-    {
-        return $this->i18ns;
-    }
 
     /**
-     * @return \jtl\Connector\Model\CustomerGroup
-     */
-    public function clearI18ns()
-    {
-        $this->i18ns = array();
-        return $this;
-    }
-
-    /**
-     * @param  \jtl\Connector\Model\CustomerGroupAttr $attribute
+     * @param \jtl\Connector\Model\CustomerGroupAttr $attribute
      * @return \jtl\Connector\Model\CustomerGroup
      */
     public function addAttribute(\jtl\Connector\Model\CustomerGroupAttr $attribute)
@@ -191,7 +169,7 @@ class CustomerGroup extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\CustomerGroupAttr[]
+     * @return jtl\Connector\Model\CustomerGroupAttr[]
      */
     public function getAttributes()
     {
@@ -207,5 +185,33 @@ class CustomerGroup extends DataModel
         return $this;
     }
 
- 
+
+    /**
+     * @param \jtl\Connector\Model\CustomerGroupI18n $i18n
+     * @return \jtl\Connector\Model\CustomerGroup
+     */
+    public function addI18n(\jtl\Connector\Model\CustomerGroupI18n $i18n)
+    {
+        $this->i18ns[] = $i18n;
+        return $this;
+    }
+    
+    /**
+     * @return jtl\Connector\Model\CustomerGroupI18n[]
+     */
+    public function getI18ns()
+    {
+        return $this->i18ns;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\CustomerGroup
+     */
+    public function clearI18ns()
+    {
+        $this->i18ns = array();
+        return $this;
+    }
+
+
 }

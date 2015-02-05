@@ -16,10 +16,10 @@ class ProductVariationValueDependency extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('productVariationValueId', 'int', null, true, true, false),
-            new PropertyInfo('productVariationValueTargetId', 'int', null, true, true, false),
-        );
+		return array(
+            new PropertyInfo('productVariationValueId', 'Identity', null, false, true, false),
+            new PropertyInfo('productVariationValueTargetId', 'Identity', null, false, true, false),
+		);
     }
 
 	public function isMain()

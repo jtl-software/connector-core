@@ -16,21 +16,21 @@ class CustomerOrderPaymentInfo extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('accountHolder', 'string', null, false, false, false),
-            new PropertyInfo('accountNumber', 'string', null, false, false, false),
-            new PropertyInfo('bankCode', 'string', null, false, false, false),
-            new PropertyInfo('bankName', 'string', null, false, false, false),
-            new PropertyInfo('bic', 'string', null, false, false, false),
-            new PropertyInfo('creditCardExpiration', 'string', null, false, false, false),
-            new PropertyInfo('creditCardHolder', 'string', null, false, false, false),
-            new PropertyInfo('creditCardNumber', 'string', null, false, false, false),
-            new PropertyInfo('creditCardType', 'string', null, false, false, false),
-            new PropertyInfo('creditCardVerificationNumber', 'string', null, false, false, false),
-            new PropertyInfo('customerOrderId', 'int', null, false, true, false),
-            new PropertyInfo('iban', 'string', null, false, false, false),
-            new PropertyInfo('id', 'int', null, true, true, false),
-        );
+		return array(
+            new PropertyInfo('customerOrderId', 'Identity', null, false, true, false),
+            new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('accountHolder', 'string', '', false, false, false),
+            new PropertyInfo('accountNumber', 'string', '', false, false, false),
+            new PropertyInfo('bankCode', 'string', '', false, false, false),
+            new PropertyInfo('bankName', 'string', '', false, false, false),
+            new PropertyInfo('bic', 'string', '', false, false, false),
+            new PropertyInfo('creditCardExpiration', 'string', '', false, false, false),
+            new PropertyInfo('creditCardHolder', 'string', '', false, false, false),
+            new PropertyInfo('creditCardNumber', 'string', '', false, false, false),
+            new PropertyInfo('creditCardType', 'string', '', false, false, false),
+            new PropertyInfo('creditCardVerificationNumber', 'string', '', false, false, false),
+            new PropertyInfo('iban', 'string', '', false, false, false),
+		);
     }
 
 	public function isMain()

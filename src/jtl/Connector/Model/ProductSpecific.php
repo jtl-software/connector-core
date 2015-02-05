@@ -1,6 +1,8 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
  * @subpackage Product
  */
@@ -11,7 +13,7 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Product to specificValue Assignment. Product specifics are used to assign characteristic product attributes like color or  size... When different products have common specifics, products are similar. .
+ * Product to specificValue Assignment. Product specifics are used to assign characteristic product attributes like color or  size... When different products have common specifics, products are similar. 
  *
  * @access public
  * @package jtl\Connector\Model
@@ -21,6 +23,7 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductSpecific extends DataModel
 {
+
     /**
      * @var Identity Unique productSpecific id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -29,6 +32,7 @@ class ProductSpecific extends DataModel
      */
     protected $id = null;
 
+
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,6 +40,7 @@ class ProductSpecific extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
+
 
     /**
      * @var Identity Reference to specificValue
@@ -46,15 +51,17 @@ class ProductSpecific extends DataModel
     protected $specificValueId = null;
 
 
-    public function __construct()
-    {
-        $this->id = new Identity;
-        $this->productId = new Identity;
-        $this->specificValueId = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->id = new Identity();
+		$this->specificValueId = new Identity();
+		$this->productId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $id Unique productSpecific id
+     * @param Identity $id Unique productSpecific id
      * @return \jtl\Connector\Model\ProductSpecific
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -70,9 +77,10 @@ class ProductSpecific extends DataModel
     {
         return $this->id;
     }
-
+	
+ 
     /**
-     * @param  Identity $productId Reference to product
+     * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductSpecific
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -88,9 +96,10 @@ class ProductSpecific extends DataModel
     {
         return $this->productId;
     }
-
+	
+ 
     /**
-     * @param  Identity $specificValueId Reference to specificValue
+     * @param Identity $specificValueId Reference to specificValue
      * @return \jtl\Connector\Model\ProductSpecific
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -107,5 +116,5 @@ class ProductSpecific extends DataModel
         return $this->specificValueId;
     }
 
- 
+
 }

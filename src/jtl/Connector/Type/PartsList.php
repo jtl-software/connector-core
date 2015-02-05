@@ -16,11 +16,11 @@ class PartsList extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('id', 'int', null, true, true, false),
-            new PropertyInfo('productId', 'int', null, true, true, false),
-            new PropertyInfo('quantity', 'double', null, false, false, false),
-        );
+		return array(
+            new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('productId', 'Identity', null, true, true, false),
+            new PropertyInfo('quantity', 'double', 0.0, false, false, false),
+		);
     }
 
 	public function isMain()

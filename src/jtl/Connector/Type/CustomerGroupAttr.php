@@ -16,13 +16,12 @@ class CustomerGroupAttr extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('customerGroupId', 'int', null, false, true, false),
-            new PropertyInfo('id', 'int', null, true, true, false),
-            new PropertyInfo('key', 'string', null, false, false, false),
-            new PropertyInfo('value', 'string', null, false, false, false),
-            new PropertyInfo('customerGroup', '\jtl\Connector\Model\CustomerGroup', null, false, false, true),
-        );
+		return array(
+            new PropertyInfo('customerGroupId', 'string', '', false, false, false),
+            new PropertyInfo('id', 'string', '', false, false, false),
+            new PropertyInfo('key', 'string', '', false, false, false),
+            new PropertyInfo('value', 'string', '', false, false, false),
+		);
     }
 
 	public function isMain()

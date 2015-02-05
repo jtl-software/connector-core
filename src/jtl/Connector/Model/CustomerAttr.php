@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Customer
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,31 +13,25 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Monolingual customer attribute..
+ * Monolingual customer attribute.
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Customer
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class CustomerAttr extends DataModel
 {
+
     /**
-     * @var Identity Reference to customer
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @var string Reference to customer
+     * @Serializer\Type("string")
      * @Serializer\SerializedName("customerId")
      * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
      */
-    protected $customerId = null;
+    protected $customerId = '';
 
-    /**
-     * @var Identity Unique customerAttr id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
 
     /**
      * @var string Attribute key
@@ -44,6 +40,7 @@ class CustomerAttr extends DataModel
      * @Serializer\Accessor(getter="getKey",setter="setKey")
      */
     protected $key = '';
+
 
     /**
      * @var string Attribute value
@@ -54,52 +51,33 @@ class CustomerAttr extends DataModel
     protected $value = '';
 
 
-    public function __construct()
-    {
-        $this->customerId = new Identity;
-        $this->id = new Identity;
-    }
 
+	public function __construct()
+	{
+	}
+	
+ 
     /**
-     * @param  Identity $customerId Reference to customer
+     * @param string $customerId Reference to customer
      * @return \jtl\Connector\Model\CustomerAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerId(Identity $customerId)
+    public function setCustomerId($customerId)
     {
-        return $this->setProperty('customerId', $customerId, 'Identity');
+        return $this->setProperty('customerId', $customerId, 'string');
     }
 
     /**
-     * @return Identity Reference to customer
+     * @return string Reference to customer
      */
     public function getCustomerId()
     {
         return $this->customerId;
     }
-
+	
+ 
     /**
-     * @param  Identity $id Unique customerAttr id
+     * @param string $key Attribute key
      * @return \jtl\Connector\Model\CustomerAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id)
-    {
-        return $this->setProperty('id', $id, 'Identity');
-    }
-
-    /**
-     * @return Identity Unique customerAttr id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param  string $key Attribute key
-     * @return \jtl\Connector\Model\CustomerAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setKey($key)
     {
@@ -113,11 +91,11 @@ class CustomerAttr extends DataModel
     {
         return $this->key;
     }
-
+	
+ 
     /**
-     * @param  string $value Attribute value
+     * @param string $value Attribute value
      * @return \jtl\Connector\Model\CustomerAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setValue($value)
     {
@@ -132,5 +110,5 @@ class CustomerAttr extends DataModel
         return $this->value;
     }
 
- 
+
 }

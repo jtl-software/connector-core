@@ -1,6 +1,8 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
  * @subpackage Product
  */
@@ -11,7 +13,7 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * locale specifig productVariationValue name..
+ * locale specifig productVariationValue name.
  *
  * @access public
  * @package jtl\Connector\Model
@@ -21,6 +23,7 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductVariationValueI18n extends DataModel
 {
+
     /**
      * @var Identity Reference to productVariationValue
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -29,13 +32,15 @@ class ProductVariationValueI18n extends DataModel
      */
     protected $productVariationValueId = null;
 
+
     /**
      * @var string Locale
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("localeName")
-     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
+     * @Serializer\SerializedName("languageISO")
+     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
-    protected $localeName = '';
+    protected $languageISO = '';
+
 
     /**
      * @var string Locale specific variationValue name
@@ -46,13 +51,15 @@ class ProductVariationValueI18n extends DataModel
     protected $name = '';
 
 
-    public function __construct()
-    {
-        $this->productVariationValueId = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->productVariationValueId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $productVariationValueId Reference to productVariationValue
+     * @param Identity $productVariationValueId Reference to productVariationValue
      * @return \jtl\Connector\Model\ProductVariationValueI18n
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -68,29 +75,29 @@ class ProductVariationValueI18n extends DataModel
     {
         return $this->productVariationValueId;
     }
-
+	
+ 
     /**
-     * @param  string $localeName Locale
+     * @param string $languageISO Locale
      * @return \jtl\Connector\Model\ProductVariationValueI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName($localeName)
+    public function setLanguageISO($languageISO)
     {
-        return $this->setProperty('localeName', $localeName, 'string');
+        return $this->setProperty('languageISO', $languageISO, 'string');
     }
 
     /**
      * @return string Locale
      */
-    public function getLocaleName()
+    public function getLanguageISO()
     {
-        return $this->localeName;
+        return $this->languageISO;
     }
-
+	
+ 
     /**
-     * @param  string $name Locale specific variationValue name
+     * @param string $name Locale specific variationValue name
      * @return \jtl\Connector\Model\ProductVariationValueI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setName($name)
     {
@@ -105,5 +112,5 @@ class ProductVariationValueI18n extends DataModel
         return $this->name;
     }
 
- 
+
 }

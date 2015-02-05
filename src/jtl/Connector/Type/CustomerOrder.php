@@ -16,39 +16,25 @@ class CustomerOrder extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('billingAddressId', 'int', null, false, true, false),
-            new PropertyInfo('carrierName', 'string', null, false, false, false),
+		return array(
+            new PropertyInfo('billingAddressId', 'Identity', null, false, true, false),
+            new PropertyInfo('customerId', 'Identity', null, false, true, false),
+            new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('shippingAddressId', 'Identity', null, false, true, false),
+            new PropertyInfo('billingAddress', 'string', '', false, false, false),
             new PropertyInfo('creationDate', 'DateTime', null, false, false, false),
-            new PropertyInfo('credit', 'double', null, false, false, false),
-            new PropertyInfo('currencyIso', 'string', null, false, false, false),
-            new PropertyInfo('customerId', 'int', null, false, true, false),
-            new PropertyInfo('estimatedDeliveryDate', 'string', null, false, false, false),
-            new PropertyInfo('id', 'int', null, true, true, false),
-            new PropertyInfo('ip', 'string', null, false, false, false),
-            new PropertyInfo('localeName', 'string', null, false, false, false),
-            new PropertyInfo('note', 'string', null, false, false, false),
-            new PropertyInfo('orderNumber', 'string', null, false, false, false),
+            new PropertyInfo('languageISO', 'string', '', false, false, false),
+            new PropertyInfo('orderNumber', 'string', '', false, false, false),
             new PropertyInfo('paymentDate', 'DateTime', null, false, false, false),
-            new PropertyInfo('paymentModuleCode', 'string', null, false, false, false),
-            new PropertyInfo('paymentStatus', 'string', null, false, false, false),
-            new PropertyInfo('ratingNotificationDate', 'DateTime', null, false, false, false),
-            new PropertyInfo('session', 'string', null, false, false, false),
-            new PropertyInfo('shippingAddressId', 'int', null, false, true, false),
+            new PropertyInfo('paymentInfo', 'string', '', false, false, false),
+            new PropertyInfo('shippingAddress', 'string', '', false, false, false),
             new PropertyInfo('shippingDate', 'DateTime', null, false, false, false),
-            new PropertyInfo('shippingInfo', 'string', null, false, false, false),
-            new PropertyInfo('shippingMethodCode', 'string', null, false, false, false),
-            new PropertyInfo('shippingMethodName', 'string', null, false, false, false),
-            new PropertyInfo('status', 'string', null, false, false, false),
-            new PropertyInfo('totalSum', 'double', null, false, false, false),
-            new PropertyInfo('tracking', 'string', null, false, false, false),
-            new PropertyInfo('trackingUrl', 'string', null, false, false, false),
-            new PropertyInfo('shippingAddress', '\jtl\Connector\Model\CustomerOrderShippingAddress', null, false, false, true),
-            new PropertyInfo('paymentInfo', '\jtl\Connector\Model\CustomerOrderPaymentInfo', null, false, false, true),
-            new PropertyInfo('items', '\jtl\Connector\Model\CustomerOrderItem', null, false, false, true),
-            new PropertyInfo('billingAddress', '\jtl\Connector\Model\CustomerOrderBillingAddress', null, false, false, true),
+            new PropertyInfo('shippingInfo', 'string', '', false, false, false),
+            new PropertyInfo('shippingMethodCode', 'string', '', false, false, false),
+            new PropertyInfo('status', 'string', '', false, false, false),
             new PropertyInfo('attributes', '\jtl\Connector\Model\CustomerOrderAttr', null, false, false, true),
-        );
+            new PropertyInfo('items', '\jtl\Connector\Model\CustomerOrderItem', null, false, false, true),
+		);
     }
 
 	public function isMain()

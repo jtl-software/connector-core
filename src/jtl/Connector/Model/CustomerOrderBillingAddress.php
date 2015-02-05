@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage CustomerOrder
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,16 +13,17 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Billing address of a customer (order).
+ * Billing address of a customer (order)
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage CustomerOrder
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class CustomerOrderBillingAddress extends DataModel
 {
+
     /**
      * @var Identity Reference to customer
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -28,6 +31,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
      */
     protected $customerId = null;
+
 
     /**
      * @var Identity Unique customerOrderBillingAddress id
@@ -37,6 +41,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     protected $id = null;
 
+
     /**
      * @var string City
      * @Serializer\Type("string")
@@ -44,6 +49,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getCity",setter="setCity")
      */
     protected $city = '';
+
 
     /**
      * @var string Company name
@@ -53,6 +59,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     protected $company = '';
 
+
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
      * @Serializer\Type("string")
@@ -61,13 +68,15 @@ class CustomerOrderBillingAddress extends DataModel
      */
     protected $countryIso = '';
 
+
     /**
-     * @var string Delivery instruction e.g. "c/o John Doe"
+     * @var string Delivery instruction e.g. 'John Doe'
      * @Serializer\Type("string")
      * @Serializer\SerializedName("deliveryInstruction")
      * @Serializer\Accessor(getter="getDeliveryInstruction",setter="setDeliveryInstruction")
      */
     protected $deliveryInstruction = '';
+
 
     /**
      * @var string E-Mail address
@@ -77,13 +86,15 @@ class CustomerOrderBillingAddress extends DataModel
      */
     protected $eMail = '';
 
+
     /**
-     * @var string Extra address line e.g. "Apartment 2.5"
+     * @var string Extra address line e.g. 'Apartment 2.5'
      * @Serializer\Type("string")
      * @Serializer\SerializedName("extraAddressLine")
      * @Serializer\Accessor(getter="getExtraAddressLine",setter="setExtraAddressLine")
      */
     protected $extraAddressLine = '';
+
 
     /**
      * @var string Fax number
@@ -93,6 +104,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     protected $fax = '';
 
+
     /**
      * @var string First name
      * @Serializer\Type("string")
@@ -100,6 +112,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getFirstName",setter="setFirstName")
      */
     protected $firstName = '';
+
 
     /**
      * @var string Last name
@@ -109,6 +122,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     protected $lastName = '';
 
+
     /**
      * @var string Mobile phone number
      * @Serializer\Type("string")
@@ -116,6 +130,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getMobile",setter="setMobile")
      */
     protected $mobile = '';
+
 
     /**
      * @var string Phone number
@@ -125,13 +140,15 @@ class CustomerOrderBillingAddress extends DataModel
      */
     protected $phone = '';
 
+
     /**
-     * @var string Salutation (german: "Anrede")
+     * @var string Salutation (german: 'Anrede')
      * @Serializer\Type("string")
      * @Serializer\SerializedName("salutation")
      * @Serializer\Accessor(getter="getSalutation",setter="setSalutation")
      */
     protected $salutation = '';
+
 
     /**
      * @var string State
@@ -141,6 +158,7 @@ class CustomerOrderBillingAddress extends DataModel
      */
     protected $state = '';
 
+
     /**
      * @var string Street + street number
      * @Serializer\Type("string")
@@ -149,13 +167,15 @@ class CustomerOrderBillingAddress extends DataModel
      */
     protected $street = '';
 
+
     /**
-     * @var string Title (e.g. "Prof. Dr.")
+     * @var string Title (e.g. 'Prof. Dr.')
      * @Serializer\Type("string")
      * @Serializer\SerializedName("title")
      * @Serializer\Accessor(getter="getTitle",setter="setTitle")
      */
     protected $title = '';
+
 
     /**
      * @var string Zip / postal code
@@ -166,14 +186,16 @@ class CustomerOrderBillingAddress extends DataModel
     protected $zipCode = '';
 
 
-    public function __construct()
-    {
-        $this->customerId = new Identity;
-        $this->id = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->id = new Identity();
+		$this->customerId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $customerId Reference to customer
+     * @param Identity $customerId Reference to customer
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -189,9 +211,10 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->customerId;
     }
-
+	
+ 
     /**
-     * @param  Identity $id Unique customerOrderBillingAddress id
+     * @param Identity $id Unique customerOrderBillingAddress id
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -207,11 +230,11 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->id;
     }
-
+	
+ 
     /**
-     * @param  string $city City
+     * @param string $city City
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setCity($city)
     {
@@ -225,11 +248,11 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->city;
     }
-
+	
+ 
     /**
-     * @param  string $company Company name
+     * @param string $company Company name
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setCompany($company)
     {
@@ -243,11 +266,11 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->company;
     }
-
+	
+ 
     /**
-     * @param  string $countryIso Country ISO 3166-2 (2 letter Uppercase)
+     * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setCountryIso($countryIso)
     {
@@ -261,11 +284,11 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->countryIso;
     }
-
+	
+ 
     /**
-     * @param  string $deliveryInstruction Delivery instruction e.g. "c/o John Doe"
+     * @param string $deliveryInstruction Delivery instruction e.g. 'John Doe'
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setDeliveryInstruction($deliveryInstruction)
     {
@@ -273,17 +296,17 @@ class CustomerOrderBillingAddress extends DataModel
     }
 
     /**
-     * @return string Delivery instruction e.g. "c/o John Doe"
+     * @return string Delivery instruction e.g. 'John Doe'
      */
     public function getDeliveryInstruction()
     {
         return $this->deliveryInstruction;
     }
-
+	
+ 
     /**
-     * @param  string $eMail E-Mail address
+     * @param string $eMail E-Mail address
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setEMail($eMail)
     {
@@ -297,11 +320,11 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->eMail;
     }
-
+	
+ 
     /**
-     * @param  string $extraAddressLine Extra address line e.g. "Apartment 2.5"
+     * @param string $extraAddressLine Extra address line e.g. 'Apartment 2.5'
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setExtraAddressLine($extraAddressLine)
     {
@@ -309,17 +332,17 @@ class CustomerOrderBillingAddress extends DataModel
     }
 
     /**
-     * @return string Extra address line e.g. "Apartment 2.5"
+     * @return string Extra address line e.g. 'Apartment 2.5'
      */
     public function getExtraAddressLine()
     {
         return $this->extraAddressLine;
     }
-
+	
+ 
     /**
-     * @param  string $fax Fax number
+     * @param string $fax Fax number
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setFax($fax)
     {
@@ -333,11 +356,11 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->fax;
     }
-
+	
+ 
     /**
-     * @param  string $firstName First name
+     * @param string $firstName First name
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setFirstName($firstName)
     {
@@ -351,11 +374,11 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->firstName;
     }
-
+	
+ 
     /**
-     * @param  string $lastName Last name
+     * @param string $lastName Last name
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setLastName($lastName)
     {
@@ -369,11 +392,11 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->lastName;
     }
-
+	
+ 
     /**
-     * @param  string $mobile Mobile phone number
+     * @param string $mobile Mobile phone number
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setMobile($mobile)
     {
@@ -387,11 +410,11 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->mobile;
     }
-
+	
+ 
     /**
-     * @param  string $phone Phone number
+     * @param string $phone Phone number
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setPhone($phone)
     {
@@ -405,11 +428,11 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->phone;
     }
-
+	
+ 
     /**
-     * @param  string $salutation Salutation (german: "Anrede")
+     * @param string $salutation Salutation (german: 'Anrede')
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setSalutation($salutation)
     {
@@ -417,17 +440,17 @@ class CustomerOrderBillingAddress extends DataModel
     }
 
     /**
-     * @return string Salutation (german: "Anrede")
+     * @return string Salutation (german: 'Anrede')
      */
     public function getSalutation()
     {
         return $this->salutation;
     }
-
+	
+ 
     /**
-     * @param  string $state State
+     * @param string $state State
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setState($state)
     {
@@ -441,11 +464,11 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->state;
     }
-
+	
+ 
     /**
-     * @param  string $street Street + street number
+     * @param string $street Street + street number
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setStreet($street)
     {
@@ -459,11 +482,11 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->street;
     }
-
+	
+ 
     /**
-     * @param  string $title Title (e.g. "Prof. Dr.")
+     * @param string $title Title (e.g. 'Prof. Dr.')
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setTitle($title)
     {
@@ -471,17 +494,17 @@ class CustomerOrderBillingAddress extends DataModel
     }
 
     /**
-     * @return string Title (e.g. "Prof. Dr.")
+     * @return string Title (e.g. 'Prof. Dr.')
      */
     public function getTitle()
     {
         return $this->title;
     }
-
+	
+ 
     /**
-     * @param  string $zipCode Zip / postal code
+     * @param string $zipCode Zip / postal code
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setZipCode($zipCode)
     {
@@ -496,5 +519,5 @@ class CustomerOrderBillingAddress extends DataModel
         return $this->zipCode;
     }
 
- 
+
 }

@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Image
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,111 +13,61 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Image model..
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Image
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class Image extends DataModel
 {
-    /**
-     * @var Identity Foreign key dependent on relationType
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("foreignKey")
-     * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
-     */
-    protected $foreignKey = null;
 
     /**
-     * @var Identity Unique image id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-
-    /**
-     * @var string Filename or path
+     * @var string 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("filename")
      * @Serializer\Accessor(getter="getFilename",setter="setFilename")
      */
     protected $filename = '';
 
+
     /**
-     * @var string Allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
+     * @var string 
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("relationType")
-     * @Serializer\Accessor(getter="getRelationType",setter="setRelationType")
+     * @Serializer\SerializedName("foreignKey")
+     * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
      */
-    protected $relationType = '';
+    protected $foreignKey = '';
+
 
     /**
-     * @var string If set, contains a URL which the endpoint should load the image from
+     * @var string 
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("remoteUrl")
-     * @Serializer\Accessor(getter="getRemoteUrl",setter="setRemoteUrl")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
-    protected $remoteUrl = '';
+    protected $id = '';
+
 
     /**
-     * @var int Optional sort number
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("sort")
-     * @Serializer\Accessor(getter="getSort",setter="setSort")
+     * @var string 
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("imageRelationType")
+     * @Serializer\Accessor(getter="getImageRelationType",setter="setImageRelationType")
      */
-    protected $sort = 0;
+    protected $imageRelationType = '';
 
 
-    public function __construct()
-    {
-        $this->foreignKey = new Identity;
-        $this->id = new Identity;
-    }
 
+	public function __construct()
+	{
+	}
+	
+ 
     /**
-     * @param  Identity $foreignKey Foreign key dependent on relationType
+     * @param string $filename 
      * @return \jtl\Connector\Model\Image
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setForeignKey(Identity $foreignKey)
-    {
-        return $this->setProperty('foreignKey', $foreignKey, 'Identity');
-    }
-
-    /**
-     * @return Identity Foreign key dependent on relationType
-     */
-    public function getForeignKey()
-    {
-        return $this->foreignKey;
-    }
-
-    /**
-     * @param  Identity $id Unique image id
-     * @return \jtl\Connector\Model\Image
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id)
-    {
-        return $this->setProperty('id', $id, 'Identity');
-    }
-
-    /**
-     * @return Identity Unique image id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param  string $filename Filename or path
-     * @return \jtl\Connector\Model\Image
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setFilename($filename)
     {
@@ -123,66 +75,66 @@ class Image extends DataModel
     }
 
     /**
-     * @return string Filename or path
+     * @return string 
      */
     public function getFilename()
     {
         return $this->filename;
     }
-
-    /**
-     * @param  string $relationType Allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
-     * @return \jtl\Connector\Model\Image
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setRelationType($relationType)
-    {
-        return $this->setProperty('relationType', $relationType, 'string');
-    }
-
-    /**
-     * @return string Allowed values: product, category, manufacturer, specific, specificValue, configGroup, productVariationValue
-     */
-    public function getRelationType()
-    {
-        return $this->relationType;
-    }
-
-    /**
-     * @param  string $remoteUrl If set, contains a URL which the endpoint should load the image from
-     * @return \jtl\Connector\Model\Image
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setRemoteUrl($remoteUrl)
-    {
-        return $this->setProperty('remoteUrl', $remoteUrl, 'string');
-    }
-
-    /**
-     * @return string If set, contains a URL which the endpoint should load the image from
-     */
-    public function getRemoteUrl()
-    {
-        return $this->remoteUrl;
-    }
-
-    /**
-     * @param  int $sort Optional sort number
-     * @return \jtl\Connector\Model\Image
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setSort($sort)
-    {
-        return $this->setProperty('sort', $sort, 'int');
-    }
-
-    /**
-     * @return int Optional sort number
-     */
-    public function getSort()
-    {
-        return $this->sort;
-    }
-
+	
  
+    /**
+     * @param string $foreignKey 
+     * @return \jtl\Connector\Model\Image
+     */
+    public function setForeignKey($foreignKey)
+    {
+        return $this->setProperty('foreignKey', $foreignKey, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getForeignKey()
+    {
+        return $this->foreignKey;
+    }
+	
+ 
+    /**
+     * @param string $id 
+     * @return \jtl\Connector\Model\Image
+     */
+    public function setId($id)
+    {
+        return $this->setProperty('id', $id, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+	
+ 
+    /**
+     * @param string $imageRelationType 
+     * @return \jtl\Connector\Model\Image
+     */
+    public function setImageRelationType($imageRelationType)
+    {
+        return $this->setProperty('imageRelationType', $imageRelationType, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getImageRelationType()
+    {
+        return $this->imageRelationType;
+    }
+
+
 }

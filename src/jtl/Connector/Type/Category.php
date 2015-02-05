@@ -16,19 +16,16 @@ class Category extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('id', 'int', null, true, true, false),
-            new PropertyInfo('isActive', 'bool', null, false, false, false),
-            new PropertyInfo('level', 'int', null, false, false, false),
-            new PropertyInfo('parentCategoryId', 'int', null, false, true, false),
-            new PropertyInfo('sort', 'int', null, false, false, false),
-            new PropertyInfo('parent', '\jtl\Connector\Model\Category', null, false, false, true),
-            new PropertyInfo('invisibilities', '\jtl\Connector\Model\CategoryInvisibility', null, false, false, true),
-            new PropertyInfo('i18ns', '\jtl\Connector\Model\CategoryI18n', null, false, false, true),
-            new PropertyInfo('customerGroups', '\jtl\Connector\Model\CategoryCustomerGroup', null, false, false, true),
-            new PropertyInfo('children', '\jtl\Connector\Model\Category', null, false, false, true),
+		return array(
+            new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('parentCategoryId', 'Identity', null, false, true, false),
+            new PropertyInfo('isActive', 'boolean', false, false, false, false),
+            new PropertyInfo('sort', 'string', '', false, false, false),
             new PropertyInfo('attributes', '\jtl\Connector\Model\CategoryAttr', null, false, false, true),
-        );
+            new PropertyInfo('customerGroups', '\jtl\Connector\Model\CategoryCustomerGroup', null, false, false, true),
+            new PropertyInfo('i18ns', '\jtl\Connector\Model\CategoryI18n', null, false, false, true),
+            new PropertyInfo('invisibilities', '\jtl\Connector\Model\CategoryInvisibility', null, false, false, true),
+		);
     }
 
 	public function isMain()

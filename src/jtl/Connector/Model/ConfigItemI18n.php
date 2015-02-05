@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,23 +13,25 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Localized config item name and description..
+ * Localized config item name and description.
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class ConfigItemI18n extends DataModel
 {
+
     /**
-     * @var Identity Reference to configItem
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @var string Reference to configItem
+     * @Serializer\Type("string")
      * @Serializer\SerializedName("configItemId")
      * @Serializer\Accessor(getter="getConfigItemId",setter="setConfigItemId")
      */
-    protected $configItemId = null;
+    protected $configItemId = '';
+
 
     /**
      * @var string Description (html). Will be ignored, if inheritProductName==true
@@ -37,13 +41,15 @@ class ConfigItemI18n extends DataModel
      */
     protected $description = '';
 
+
     /**
      * @var string Locale
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("localeName")
-     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
+     * @Serializer\SerializedName("languageISO")
+     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
-    protected $localeName = '';
+    protected $languageISO = '';
+
 
     /**
      * @var string Config item name. Will be ignored if inheritProductName==true
@@ -54,33 +60,33 @@ class ConfigItemI18n extends DataModel
     protected $name = '';
 
 
-    public function __construct()
-    {
-        $this->configItemId = new Identity;
-    }
 
+	public function __construct()
+	{
+	}
+	
+ 
     /**
-     * @param  Identity $configItemId Reference to configItem
+     * @param string $configItemId Reference to configItem
      * @return \jtl\Connector\Model\ConfigItemI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setConfigItemId(Identity $configItemId)
+    public function setConfigItemId($configItemId)
     {
-        return $this->setProperty('configItemId', $configItemId, 'Identity');
+        return $this->setProperty('configItemId', $configItemId, 'string');
     }
 
     /**
-     * @return Identity Reference to configItem
+     * @return string Reference to configItem
      */
     public function getConfigItemId()
     {
         return $this->configItemId;
     }
-
+	
+ 
     /**
-     * @param  string $description Description (html). Will be ignored, if inheritProductName==true
+     * @param string $description Description (html). Will be ignored, if inheritProductName==true
      * @return \jtl\Connector\Model\ConfigItemI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setDescription($description)
     {
@@ -94,29 +100,29 @@ class ConfigItemI18n extends DataModel
     {
         return $this->description;
     }
-
+	
+ 
     /**
-     * @param  string $localeName Locale
+     * @param string $languageISO Locale
      * @return \jtl\Connector\Model\ConfigItemI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName($localeName)
+    public function setLanguageISO($languageISO)
     {
-        return $this->setProperty('localeName', $localeName, 'string');
+        return $this->setProperty('languageISO', $languageISO, 'string');
     }
 
     /**
      * @return string Locale
      */
-    public function getLocaleName()
+    public function getLanguageISO()
     {
-        return $this->localeName;
+        return $this->languageISO;
     }
-
+	
+ 
     /**
-     * @param  string $name Config item name. Will be ignored if inheritProductName==true
+     * @param string $name Config item name. Will be ignored if inheritProductName==true
      * @return \jtl\Connector\Model\ConfigItemI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setName($name)
     {
@@ -131,5 +137,5 @@ class ConfigItemI18n extends DataModel
         return $this->name;
     }
 
- 
+
 }

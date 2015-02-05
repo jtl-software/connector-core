@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,16 +13,17 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * File download properties. .
+ * File download properties. 
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class FileDownload extends DataModel
 {
+
     /**
      * @var Identity Unique fileDownload id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -28,6 +31,7 @@ class FileDownload extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
+
 
     /**
      * @var DateTime Optional creation date
@@ -37,21 +41,24 @@ class FileDownload extends DataModel
      */
     protected $creationDate = null;
 
+
     /**
-     * @var int Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
-     * @Serializer\Type("integer")
+     * @var string Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
+     * @Serializer\Type("string")
      * @Serializer\SerializedName("maxDays")
      * @Serializer\Accessor(getter="getMaxDays",setter="setMaxDays")
      */
-    protected $maxDays = 0;
+    protected $maxDays = '';
+
 
     /**
-     * @var int Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
-     * @Serializer\Type("integer")
+     * @var string Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
+     * @Serializer\Type("string")
      * @Serializer\SerializedName("maxDownloads")
      * @Serializer\Accessor(getter="getMaxDownloads",setter="setMaxDownloads")
      */
-    protected $maxDownloads = 0;
+    protected $maxDownloads = '';
+
 
     /**
      * @var string Path to download file
@@ -61,6 +68,7 @@ class FileDownload extends DataModel
      */
     protected $path = '';
 
+
     /**
      * @var string Optional path to preview file
      * @Serializer\Type("string")
@@ -69,19 +77,18 @@ class FileDownload extends DataModel
      */
     protected $previewPath = '';
 
+
     /**
-     * @var int Optional sort number
-     * @Serializer\Type("integer")
+     * @var string Optional sort number
+     * @Serializer\Type("string")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = 0;
+    protected $sort = '';
+
 
     /**
-     * End: 1 (One of FileDownload)
-     *      * (Collection of FileDownloadI18n)
-     *
-     * @var \jtl\Connector\Model\FileDownloadI18n[]
+     * @var jtl\Connector\Model\FileDownloadI18n[] 
      * @Serializer\Type("array<jtl\Connector\Model\FileDownloadI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -89,13 +96,15 @@ class FileDownload extends DataModel
     protected $i18ns = array();
 
 
-    public function __construct()
-    {
-        $this->id = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->id = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $id Unique fileDownload id
+     * @param Identity $id Unique fileDownload id
      * @return \jtl\Connector\Model\FileDownload
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -111,13 +120,14 @@ class FileDownload extends DataModel
     {
         return $this->id;
     }
-
+	
+ 
     /**
-     * @param  DateTime $creationDate Optional creation date
+     * @param DateTime $creationDate Optional creation date
      * @return \jtl\Connector\Model\FileDownload
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreationDate(DateTime $creationDate = null)
+    public function setCreationDate(DateTime $creationDate)
     {
         return $this->setProperty('creationDate', $creationDate, 'DateTime');
     }
@@ -129,47 +139,47 @@ class FileDownload extends DataModel
     {
         return $this->creationDate;
     }
-
+	
+ 
     /**
-     * @param  int $maxDays Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
+     * @param string $maxDays Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
      * @return \jtl\Connector\Model\FileDownload
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
     public function setMaxDays($maxDays)
     {
-        return $this->setProperty('maxDays', $maxDays, 'int');
+        return $this->setProperty('maxDays', $maxDays, 'string');
     }
 
     /**
-     * @return int Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
+     * @return string Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
      */
     public function getMaxDays()
     {
         return $this->maxDays;
     }
-
+	
+ 
     /**
-     * @param  int $maxDownloads Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
+     * @param string $maxDownloads Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
      * @return \jtl\Connector\Model\FileDownload
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
     public function setMaxDownloads($maxDownloads)
     {
-        return $this->setProperty('maxDownloads', $maxDownloads, 'int');
+        return $this->setProperty('maxDownloads', $maxDownloads, 'string');
     }
 
     /**
-     * @return int Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
+     * @return string Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
      */
     public function getMaxDownloads()
     {
         return $this->maxDownloads;
     }
-
+	
+ 
     /**
-     * @param  string $path Path to download file
+     * @param string $path Path to download file
      * @return \jtl\Connector\Model\FileDownload
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setPath($path)
     {
@@ -183,11 +193,11 @@ class FileDownload extends DataModel
     {
         return $this->path;
     }
-
+	
+ 
     /**
-     * @param  string $previewPath Optional path to preview file
+     * @param string $previewPath Optional path to preview file
      * @return \jtl\Connector\Model\FileDownload
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setPreviewPath($previewPath)
     {
@@ -201,27 +211,28 @@ class FileDownload extends DataModel
     {
         return $this->previewPath;
     }
-
+	
+ 
     /**
-     * @param  int $sort Optional sort number
+     * @param string $sort Optional sort number
      * @return \jtl\Connector\Model\FileDownload
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
     public function setSort($sort)
     {
-        return $this->setProperty('sort', $sort, 'int');
+        return $this->setProperty('sort', $sort, 'string');
     }
 
     /**
-     * @return int Optional sort number
+     * @return string Optional sort number
      */
     public function getSort()
     {
         return $this->sort;
     }
 
+
     /**
-     * @param  \jtl\Connector\Model\FileDownloadI18n $i18n
+     * @param \jtl\Connector\Model\FileDownloadI18n $i18n
      * @return \jtl\Connector\Model\FileDownload
      */
     public function addI18n(\jtl\Connector\Model\FileDownloadI18n $i18n)
@@ -231,7 +242,7 @@ class FileDownload extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\FileDownloadI18n[]
+     * @return jtl\Connector\Model\FileDownloadI18n[]
      */
     public function getI18ns()
     {
@@ -247,5 +258,5 @@ class FileDownload extends DataModel
         return $this;
     }
 
- 
+
 }

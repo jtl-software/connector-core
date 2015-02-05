@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,23 +13,25 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Localized configGroup.
+ * Localized configGroup
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class ConfigGroupI18n extends DataModel
 {
+
     /**
-     * @var Identity Reference to configGroup
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @var string Reference to configGroup
+     * @Serializer\Type("string")
      * @Serializer\SerializedName("configGroupId")
      * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
      */
-    protected $configGroupId = null;
+    protected $configGroupId = '';
+
 
     /**
      * @var string Optional description (HTML)
@@ -37,13 +41,15 @@ class ConfigGroupI18n extends DataModel
      */
     protected $description = '';
 
+
     /**
      * @var string Locale
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("localeName")
-     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
+     * @Serializer\SerializedName("languageISO")
+     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
-    protected $localeName = '';
+    protected $languageISO = '';
+
 
     /**
      * @var string Config group name
@@ -54,33 +60,33 @@ class ConfigGroupI18n extends DataModel
     protected $name = '';
 
 
-    public function __construct()
-    {
-        $this->configGroupId = new Identity;
-    }
 
+	public function __construct()
+	{
+	}
+	
+ 
     /**
-     * @param  Identity $configGroupId Reference to configGroup
+     * @param string $configGroupId Reference to configGroup
      * @return \jtl\Connector\Model\ConfigGroupI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setConfigGroupId(Identity $configGroupId)
+    public function setConfigGroupId($configGroupId)
     {
-        return $this->setProperty('configGroupId', $configGroupId, 'Identity');
+        return $this->setProperty('configGroupId', $configGroupId, 'string');
     }
 
     /**
-     * @return Identity Reference to configGroup
+     * @return string Reference to configGroup
      */
     public function getConfigGroupId()
     {
         return $this->configGroupId;
     }
-
+	
+ 
     /**
-     * @param  string $description Optional description (HTML)
+     * @param string $description Optional description (HTML)
      * @return \jtl\Connector\Model\ConfigGroupI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setDescription($description)
     {
@@ -94,29 +100,29 @@ class ConfigGroupI18n extends DataModel
     {
         return $this->description;
     }
-
+	
+ 
     /**
-     * @param  string $localeName Locale
+     * @param string $languageISO Locale
      * @return \jtl\Connector\Model\ConfigGroupI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName($localeName)
+    public function setLanguageISO($languageISO)
     {
-        return $this->setProperty('localeName', $localeName, 'string');
+        return $this->setProperty('languageISO', $languageISO, 'string');
     }
 
     /**
      * @return string Locale
      */
-    public function getLocaleName()
+    public function getLanguageISO()
     {
-        return $this->localeName;
+        return $this->languageISO;
     }
-
+	
+ 
     /**
-     * @param  string $name Config group name
+     * @param string $name Config group name
      * @return \jtl\Connector\Model\ConfigGroupI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setName($name)
     {
@@ -131,5 +137,5 @@ class ConfigGroupI18n extends DataModel
         return $this->name;
     }
 
- 
+
 }

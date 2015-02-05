@@ -16,11 +16,12 @@ class CategoryCustomerGroup extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('categoryId', 'int', null, true, true, false),
-            new PropertyInfo('customerGroupId', 'int', null, true, true, false),
-            new PropertyInfo('discount', 'double', null, false, false, false),
-        );
+		return array(
+            new PropertyInfo('categoryId', 'Identity', null, true, true, false),
+            new PropertyInfo('connectorId', 'Identity', null, true, true, false),
+            new PropertyInfo('customerGroupId', 'Identity', null, true, true, false),
+            new PropertyInfo('discount', 'double', 0.0, false, false, false),
+		);
     }
 
 	public function isMain()

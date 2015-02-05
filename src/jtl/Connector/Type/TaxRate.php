@@ -16,13 +16,13 @@ class TaxRate extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('id', 'int', null, true, true, false),
-            new PropertyInfo('priority', 'int', null, false, false, false),
-            new PropertyInfo('rate', 'double', null, false, false, false),
-            new PropertyInfo('taxClassId', 'int', null, false, true, false),
-            new PropertyInfo('taxZoneId', 'int', null, false, true, false),
-        );
+		return array(
+            new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('taxClassId', 'Identity', null, false, true, false),
+            new PropertyInfo('taxZoneId', 'Identity', null, false, true, false),
+            new PropertyInfo('priority', 'string', '', false, false, false),
+            new PropertyInfo('rate', 'double', 0.0, false, false, false),
+		);
     }
 
 	public function isMain()

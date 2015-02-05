@@ -1,6 +1,8 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
  * @subpackage Product
  */
@@ -11,7 +13,7 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Extra charge for productVariationValue per customerGroup..
+ * Extra charge for productVariationValue per customerGroup.
  *
  * @access public
  * @package jtl\Connector\Model
@@ -21,6 +23,7 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductVariationValueExtraCharge extends DataModel
 {
+
     /**
      * @var Identity Reference to customerGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -29,6 +32,7 @@ class ProductVariationValueExtraCharge extends DataModel
      */
     protected $customerGroupId = null;
 
+
     /**
      * @var Identity Reference to productVariationValue
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,6 +40,7 @@ class ProductVariationValueExtraCharge extends DataModel
      * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
      */
     protected $productVariationValueId = null;
+
 
     /**
      * @var double Extra charge (net)
@@ -46,14 +51,16 @@ class ProductVariationValueExtraCharge extends DataModel
     protected $extraChargeNet = 0.0;
 
 
-    public function __construct()
-    {
-        $this->customerGroupId = new Identity;
-        $this->productVariationValueId = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->productVariationValueId = new Identity();
+		$this->customerGroupId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $customerGroupId Reference to customerGroup
+     * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -69,9 +76,10 @@ class ProductVariationValueExtraCharge extends DataModel
     {
         return $this->customerGroupId;
     }
-
+	
+ 
     /**
-     * @param  Identity $productVariationValueId Reference to productVariationValue
+     * @param Identity $productVariationValueId Reference to productVariationValue
      * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -87,11 +95,11 @@ class ProductVariationValueExtraCharge extends DataModel
     {
         return $this->productVariationValueId;
     }
-
+	
+ 
     /**
-     * @param  double $extraChargeNet Extra charge (net)
+     * @param double $extraChargeNet Extra charge (net)
      * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
-     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
     public function setExtraChargeNet($extraChargeNet)
     {
@@ -106,5 +114,5 @@ class ProductVariationValueExtraCharge extends DataModel
         return $this->extraChargeNet;
     }
 
- 
+
 }

@@ -1,6 +1,8 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
  * @subpackage Product
  */
@@ -11,7 +13,7 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * ToDo: Remove (deprecated).
+ * ToDo: Remove (deprecated)
  *
  * @access public
  * @package jtl\Connector\Model
@@ -21,6 +23,7 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductVariationValueDependency extends DataModel
 {
+
     /**
      * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -28,6 +31,7 @@ class ProductVariationValueDependency extends DataModel
      * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
      */
     protected $productVariationValueId = null;
+
 
     /**
      * @var Identity 
@@ -38,14 +42,16 @@ class ProductVariationValueDependency extends DataModel
     protected $productVariationValueTargetId = null;
 
 
-    public function __construct()
-    {
-        $this->productVariationValueId = new Identity;
-        $this->productVariationValueTargetId = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->productVariationValueId = new Identity();
+		$this->productVariationValueTargetId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $productVariationValueId 
+     * @param Identity $productVariationValueId 
      * @return \jtl\Connector\Model\ProductVariationValueDependency
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -61,9 +67,10 @@ class ProductVariationValueDependency extends DataModel
     {
         return $this->productVariationValueId;
     }
-
+	
+ 
     /**
-     * @param  Identity $productVariationValueTargetId 
+     * @param Identity $productVariationValueTargetId 
      * @return \jtl\Connector\Model\ProductVariationValueDependency
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -80,5 +87,5 @@ class ProductVariationValueDependency extends DataModel
         return $this->productVariationValueTargetId;
     }
 
- 
+
 }

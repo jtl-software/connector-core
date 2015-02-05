@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,31 +13,34 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Localized customer group name..
+ * Localized customer group name.
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class CustomerGroupI18n extends DataModel
 {
+
     /**
-     * @var Identity Reference to customerGroup
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @var string Reference to customerGroup
+     * @Serializer\Type("string")
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
-    protected $customerGroupId = null;
+    protected $customerGroupId = '';
+
 
     /**
      * @var string Locale
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("localeName")
-     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
+     * @Serializer\SerializedName("languageISO")
+     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
-    protected $localeName = '';
+    protected $languageISO = '';
+
 
     /**
      * @var string Localized customer group name
@@ -46,51 +51,51 @@ class CustomerGroupI18n extends DataModel
     protected $name = '';
 
 
-    public function __construct()
-    {
-        $this->customerGroupId = new Identity;
-    }
 
+	public function __construct()
+	{
+	}
+	
+ 
     /**
-     * @param  Identity $customerGroupId Reference to customerGroup
+     * @param string $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\CustomerGroupI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerGroupId(Identity $customerGroupId)
+    public function setCustomerGroupId($customerGroupId)
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        return $this->setProperty('customerGroupId', $customerGroupId, 'string');
     }
 
     /**
-     * @return Identity Reference to customerGroup
+     * @return string Reference to customerGroup
      */
     public function getCustomerGroupId()
     {
         return $this->customerGroupId;
     }
-
+	
+ 
     /**
-     * @param  string $localeName Locale
+     * @param string $languageISO Locale
      * @return \jtl\Connector\Model\CustomerGroupI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName($localeName)
+    public function setLanguageISO($languageISO)
     {
-        return $this->setProperty('localeName', $localeName, 'string');
+        return $this->setProperty('languageISO', $languageISO, 'string');
     }
 
     /**
      * @return string Locale
      */
-    public function getLocaleName()
+    public function getLanguageISO()
     {
-        return $this->localeName;
+        return $this->languageISO;
     }
-
+	
+ 
     /**
-     * @param  string $name Localized customer group name
+     * @param string $name Localized customer group name
      * @return \jtl\Connector\Model\CustomerGroupI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setName($name)
     {
@@ -105,5 +110,5 @@ class CustomerGroupI18n extends DataModel
         return $this->name;
     }
 
- 
+
 }

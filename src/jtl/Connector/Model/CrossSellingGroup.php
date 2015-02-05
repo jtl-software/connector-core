@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,23 +13,16 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Localized cross selling group. Can hold several crossSelling items that are linked for cross selling purposes. .
+ * Localized cross selling group. Can hold several crossSelling items that are linked for cross selling purposes. 
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class CrossSellingGroup extends DataModel
 {
-    /**
-     * @var Identity crossSellingGroup id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
 
     /**
      * @var string Optional localized description
@@ -37,13 +32,24 @@ class CrossSellingGroup extends DataModel
      */
     protected $description = '';
 
+
+    /**
+     * @var string crossSellingGroup id
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
+     */
+    protected $id = '';
+
+
     /**
      * @var string Locale
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("localeName")
-     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
+     * @Serializer\SerializedName("languageISO")
+     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
-    protected $localeName = '';
+    protected $languageISO = '';
+
 
     /**
      * @var string Localized name
@@ -54,33 +60,15 @@ class CrossSellingGroup extends DataModel
     protected $name = '';
 
 
-    public function __construct()
-    {
-        $this->id = new Identity;
-    }
 
+	public function __construct()
+	{
+	}
+	
+ 
     /**
-     * @param  Identity $id crossSellingGroup id
+     * @param string $description Optional localized description
      * @return \jtl\Connector\Model\CrossSellingGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id)
-    {
-        return $this->setProperty('id', $id, 'Identity');
-    }
-
-    /**
-     * @return Identity crossSellingGroup id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param  string $description Optional localized description
-     * @return \jtl\Connector\Model\CrossSellingGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setDescription($description)
     {
@@ -94,29 +82,47 @@ class CrossSellingGroup extends DataModel
     {
         return $this->description;
     }
+	
+ 
+    /**
+     * @param string $id crossSellingGroup id
+     * @return \jtl\Connector\Model\CrossSellingGroup
+     */
+    public function setId($id)
+    {
+        return $this->setProperty('id', $id, 'string');
+    }
 
     /**
-     * @param  string $localeName Locale
-     * @return \jtl\Connector\Model\CrossSellingGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @return string crossSellingGroup id
      */
-    public function setLocaleName($localeName)
+    public function getId()
     {
-        return $this->setProperty('localeName', $localeName, 'string');
+        return $this->id;
+    }
+	
+ 
+    /**
+     * @param string $languageISO Locale
+     * @return \jtl\Connector\Model\CrossSellingGroup
+     */
+    public function setLanguageISO($languageISO)
+    {
+        return $this->setProperty('languageISO', $languageISO, 'string');
     }
 
     /**
      * @return string Locale
      */
-    public function getLocaleName()
+    public function getLanguageISO()
     {
-        return $this->localeName;
+        return $this->languageISO;
     }
-
+	
+ 
     /**
-     * @param  string $name Localized name
+     * @param string $name Localized name
      * @return \jtl\Connector\Model\CrossSellingGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setName($name)
     {
@@ -131,5 +137,5 @@ class CrossSellingGroup extends DataModel
         return $this->name;
     }
 
- 
+
 }

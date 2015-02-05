@@ -16,11 +16,11 @@ class ProductVariationI18n extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('localeName', 'string', null, false, false, false),
-            new PropertyInfo('name', 'string', null, false, false, false),
-            new PropertyInfo('productVariationId', 'int', null, true, true, false),
-        );
+		return array(
+            new PropertyInfo('productVariationId', 'Identity', null, true, true, false),
+            new PropertyInfo('languageISO', 'string', '', false, false, false),
+            new PropertyInfo('name', 'string', '', false, false, false),
+		);
     }
 
 	public function isMain()

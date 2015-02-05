@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,16 +13,17 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Tax rate model (set in JTL-Wawi ERP)..
+ * Tax rate model (set in JTL-Wawi ERP).
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class TaxRate extends DataModel
 {
+
     /**
      * @var Identity Unique taxRate id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -28,6 +31,7 @@ class TaxRate extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
+
 
     /**
      * @var Identity Reference to taxClass
@@ -37,6 +41,7 @@ class TaxRate extends DataModel
      */
     protected $taxClassId = null;
 
+
     /**
      * @var Identity Reference to taxZone
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -45,13 +50,15 @@ class TaxRate extends DataModel
      */
     protected $taxZoneId = null;
 
+
     /**
-     * @var int Optional priority number. Higher value means higher priority
-     * @Serializer\Type("integer")
+     * @var string Optional priority number. Higher value means higher priority
+     * @Serializer\Type("string")
      * @Serializer\SerializedName("priority")
      * @Serializer\Accessor(getter="getPriority",setter="setPriority")
      */
-    protected $priority = 0;
+    protected $priority = '';
+
 
     /**
      * @var double Tax rate value e.g. 19.00
@@ -62,15 +69,17 @@ class TaxRate extends DataModel
     protected $rate = 0.0;
 
 
-    public function __construct()
-    {
-        $this->id = new Identity;
-        $this->taxClassId = new Identity;
-        $this->taxZoneId = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->id = new Identity();
+		$this->taxZoneId = new Identity();
+		$this->taxClassId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $id Unique taxRate id
+     * @param Identity $id Unique taxRate id
      * @return \jtl\Connector\Model\TaxRate
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -86,9 +95,10 @@ class TaxRate extends DataModel
     {
         return $this->id;
     }
-
+	
+ 
     /**
-     * @param  Identity $taxClassId Reference to taxClass
+     * @param Identity $taxClassId Reference to taxClass
      * @return \jtl\Connector\Model\TaxRate
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -104,9 +114,10 @@ class TaxRate extends DataModel
     {
         return $this->taxClassId;
     }
-
+	
+ 
     /**
-     * @param  Identity $taxZoneId Reference to taxZone
+     * @param Identity $taxZoneId Reference to taxZone
      * @return \jtl\Connector\Model\TaxRate
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -122,29 +133,29 @@ class TaxRate extends DataModel
     {
         return $this->taxZoneId;
     }
-
+	
+ 
     /**
-     * @param  int $priority Optional priority number. Higher value means higher priority
+     * @param string $priority Optional priority number. Higher value means higher priority
      * @return \jtl\Connector\Model\TaxRate
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
     public function setPriority($priority)
     {
-        return $this->setProperty('priority', $priority, 'int');
+        return $this->setProperty('priority', $priority, 'string');
     }
 
     /**
-     * @return int Optional priority number. Higher value means higher priority
+     * @return string Optional priority number. Higher value means higher priority
      */
     public function getPriority()
     {
         return $this->priority;
     }
-
+	
+ 
     /**
-     * @param  double $rate Tax rate value e.g. 19.00
+     * @param double $rate Tax rate value e.g. 19.00
      * @return \jtl\Connector\Model\TaxRate
-     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
     public function setRate($rate)
     {
@@ -159,5 +170,5 @@ class TaxRate extends DataModel
         return $this->rate;
     }
 
- 
+
 }

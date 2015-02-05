@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage CustomerOrder
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,16 +13,17 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Monolingual attribute for a customerorder..
+ * Monolingual attribute for a customerorder.
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage CustomerOrder
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class CustomerOrderAttr extends DataModel
 {
+
     /**
      * @var Identity Reference to customerOrder
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -28,6 +31,7 @@ class CustomerOrderAttr extends DataModel
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
      */
     protected $customerOrderId = null;
+
 
     /**
      * @var Identity Unique customerOrderAttr id
@@ -37,6 +41,7 @@ class CustomerOrderAttr extends DataModel
      */
     protected $id = null;
 
+
     /**
      * @var string Attribute key name
      * @Serializer\Type("string")
@@ -44,6 +49,7 @@ class CustomerOrderAttr extends DataModel
      * @Serializer\Accessor(getter="getKey",setter="setKey")
      */
     protected $key = '';
+
 
     /**
      * @var string Attribute value
@@ -54,14 +60,16 @@ class CustomerOrderAttr extends DataModel
     protected $value = '';
 
 
-    public function __construct()
-    {
-        $this->customerOrderId = new Identity;
-        $this->id = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->id = new Identity();
+		$this->customerOrderId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $customerOrderId Reference to customerOrder
+     * @param Identity $customerOrderId Reference to customerOrder
      * @return \jtl\Connector\Model\CustomerOrderAttr
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -77,9 +85,10 @@ class CustomerOrderAttr extends DataModel
     {
         return $this->customerOrderId;
     }
-
+	
+ 
     /**
-     * @param  Identity $id Unique customerOrderAttr id
+     * @param Identity $id Unique customerOrderAttr id
      * @return \jtl\Connector\Model\CustomerOrderAttr
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -95,11 +104,11 @@ class CustomerOrderAttr extends DataModel
     {
         return $this->id;
     }
-
+	
+ 
     /**
-     * @param  string $key Attribute key name
+     * @param string $key Attribute key name
      * @return \jtl\Connector\Model\CustomerOrderAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setKey($key)
     {
@@ -113,11 +122,11 @@ class CustomerOrderAttr extends DataModel
     {
         return $this->key;
     }
-
+	
+ 
     /**
-     * @param  string $value Attribute value
+     * @param string $value Attribute value
      * @return \jtl\Connector\Model\CustomerOrderAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setValue($value)
     {
@@ -132,5 +141,5 @@ class CustomerOrderAttr extends DataModel
         return $this->value;
     }
 
- 
+
 }

@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,31 +13,25 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Provides company address and bank details.
+ * Provides company address and bank details
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class Company extends DataModel
 {
-    /**
-     * @var Identity Unique company id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
 
     /**
-     * @var string Bank account holder name e.g. "John Doe"
+     * @var string Bank account holder name e.g. 'John Doe'
      * @Serializer\Type("string")
      * @Serializer\SerializedName("accountHolder")
      * @Serializer\Accessor(getter="getAccountHolder",setter="setAccountHolder")
      */
     protected $accountHolder = '';
+
 
     /**
      * @var string Bank account number
@@ -45,6 +41,7 @@ class Company extends DataModel
      */
     protected $accountNumber = '';
 
+
     /**
      * @var string Bank code number
      * @Serializer\Type("string")
@@ -53,13 +50,15 @@ class Company extends DataModel
      */
     protected $bankCode = '';
 
+
     /**
-     * @var string Bank name e.g. "Deutsche Bank"
+     * @var string Bank name e.g. 'Deutsche Bank'
      * @Serializer\Type("string")
      * @Serializer\SerializedName("bankName")
      * @Serializer\Accessor(getter="getBankName",setter="setBankName")
      */
     protected $bankName = '';
+
 
     /**
      * @var string Bank Identifier Code (BIC)
@@ -69,6 +68,7 @@ class Company extends DataModel
      */
     protected $bic = '';
 
+
     /**
      * @var string Company businessman / entrepreneur
      * @Serializer\Type("string")
@@ -76,6 +76,7 @@ class Company extends DataModel
      * @Serializer\Accessor(getter="getBusinessman",setter="setBusinessman")
      */
     protected $businessman = '';
+
 
     /**
      * @var string City
@@ -85,6 +86,7 @@ class Company extends DataModel
      */
     protected $city = '';
 
+
     /**
      * @var string CountryIso
      * @Serializer\Type("string")
@@ -92,6 +94,7 @@ class Company extends DataModel
      * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
      */
     protected $countryIso = '';
+
 
     /**
      * @var string Company E-Mail address
@@ -101,6 +104,7 @@ class Company extends DataModel
      */
     protected $eMail = '';
 
+
     /**
      * @var string Fax number
      * @Serializer\Type("string")
@@ -108,6 +112,7 @@ class Company extends DataModel
      * @Serializer\Accessor(getter="getFax",setter="setFax")
      */
     protected $fax = '';
+
 
     /**
      * @var string International Bank Account Number (IBAN) 
@@ -117,6 +122,16 @@ class Company extends DataModel
      */
     protected $iban = '';
 
+
+    /**
+     * @var string Unique company id
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
+     */
+    protected $id = '';
+
+
     /**
      * @var string Company name
      * @Serializer\Type("string")
@@ -124,6 +139,7 @@ class Company extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
+
 
     /**
      * @var string Phone number
@@ -133,6 +149,7 @@ class Company extends DataModel
      */
     protected $phone = '';
 
+
     /**
      * @var string Street
      * @Serializer\Type("string")
@@ -141,13 +158,6 @@ class Company extends DataModel
      */
     protected $street = '';
 
-    /**
-     * @var string Street number
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("streetNumber")
-     * @Serializer\Accessor(getter="getStreetNumber",setter="setStreetNumber")
-     */
-    protected $streetNumber = '';
 
     /**
      * @var string Tax id number (german: Steuernummer)
@@ -157,6 +167,7 @@ class Company extends DataModel
      */
     protected $taxIdNumber = '';
 
+
     /**
      * @var string VAT registration number (german: USt-ID)
      * @Serializer\Type("string")
@@ -165,6 +176,7 @@ class Company extends DataModel
      */
     protected $vatNumber = '';
 
+
     /**
      * @var string Company website URL
      * @Serializer\Type("string")
@@ -172,6 +184,7 @@ class Company extends DataModel
      * @Serializer\Accessor(getter="getWebsiteUrl",setter="setWebsiteUrl")
      */
     protected $websiteUrl = '';
+
 
     /**
      * @var string Zip code / postcode
@@ -182,33 +195,15 @@ class Company extends DataModel
     protected $zipCode = '';
 
 
-    public function __construct()
-    {
-        $this->id = new Identity;
-    }
 
+	public function __construct()
+	{
+	}
+	
+ 
     /**
-     * @param  Identity $id Unique company id
+     * @param string $accountHolder Bank account holder name e.g. 'John Doe'
      * @return \jtl\Connector\Model\Company
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id)
-    {
-        return $this->setProperty('id', $id, 'Identity');
-    }
-
-    /**
-     * @return Identity Unique company id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param  string $accountHolder Bank account holder name e.g. "John Doe"
-     * @return \jtl\Connector\Model\Company
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setAccountHolder($accountHolder)
     {
@@ -216,17 +211,17 @@ class Company extends DataModel
     }
 
     /**
-     * @return string Bank account holder name e.g. "John Doe"
+     * @return string Bank account holder name e.g. 'John Doe'
      */
     public function getAccountHolder()
     {
         return $this->accountHolder;
     }
-
+	
+ 
     /**
-     * @param  string $accountNumber Bank account number
+     * @param string $accountNumber Bank account number
      * @return \jtl\Connector\Model\Company
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setAccountNumber($accountNumber)
     {
@@ -240,11 +235,11 @@ class Company extends DataModel
     {
         return $this->accountNumber;
     }
-
+	
+ 
     /**
-     * @param  string $bankCode Bank code number
+     * @param string $bankCode Bank code number
      * @return \jtl\Connector\Model\Company
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setBankCode($bankCode)
     {
@@ -258,11 +253,11 @@ class Company extends DataModel
     {
         return $this->bankCode;
     }
-
+	
+ 
     /**
-     * @param  string $bankName Bank name e.g. "Deutsche Bank"
+     * @param string $bankName Bank name e.g. 'Deutsche Bank'
      * @return \jtl\Connector\Model\Company
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setBankName($bankName)
     {
@@ -270,17 +265,17 @@ class Company extends DataModel
     }
 
     /**
-     * @return string Bank name e.g. "Deutsche Bank"
+     * @return string Bank name e.g. 'Deutsche Bank'
      */
     public function getBankName()
     {
         return $this->bankName;
     }
-
+	
+ 
     /**
-     * @param  string $bic Bank Identifier Code (BIC)
+     * @param string $bic Bank Identifier Code (BIC)
      * @return \jtl\Connector\Model\Company
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setBic($bic)
     {
@@ -294,11 +289,11 @@ class Company extends DataModel
     {
         return $this->bic;
     }
-
+	
+ 
     /**
-     * @param  string $businessman Company businessman / entrepreneur
+     * @param string $businessman Company businessman / entrepreneur
      * @return \jtl\Connector\Model\Company
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setBusinessman($businessman)
     {
@@ -312,11 +307,11 @@ class Company extends DataModel
     {
         return $this->businessman;
     }
-
+	
+ 
     /**
-     * @param  string $city City
+     * @param string $city City
      * @return \jtl\Connector\Model\Company
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setCity($city)
     {
@@ -330,11 +325,11 @@ class Company extends DataModel
     {
         return $this->city;
     }
-
+	
+ 
     /**
-     * @param  string $countryIso CountryIso
+     * @param string $countryIso CountryIso
      * @return \jtl\Connector\Model\Company
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setCountryIso($countryIso)
     {
@@ -348,11 +343,11 @@ class Company extends DataModel
     {
         return $this->countryIso;
     }
-
+	
+ 
     /**
-     * @param  string $eMail Company E-Mail address
+     * @param string $eMail Company E-Mail address
      * @return \jtl\Connector\Model\Company
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setEMail($eMail)
     {
@@ -366,11 +361,11 @@ class Company extends DataModel
     {
         return $this->eMail;
     }
-
+	
+ 
     /**
-     * @param  string $fax Fax number
+     * @param string $fax Fax number
      * @return \jtl\Connector\Model\Company
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setFax($fax)
     {
@@ -384,11 +379,11 @@ class Company extends DataModel
     {
         return $this->fax;
     }
-
+	
+ 
     /**
-     * @param  string $iban International Bank Account Number (IBAN) 
+     * @param string $iban International Bank Account Number (IBAN) 
      * @return \jtl\Connector\Model\Company
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setIban($iban)
     {
@@ -402,11 +397,29 @@ class Company extends DataModel
     {
         return $this->iban;
     }
+	
+ 
+    /**
+     * @param string $id Unique company id
+     * @return \jtl\Connector\Model\Company
+     */
+    public function setId($id)
+    {
+        return $this->setProperty('id', $id, 'string');
+    }
 
     /**
-     * @param  string $name Company name
+     * @return string Unique company id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+	
+ 
+    /**
+     * @param string $name Company name
      * @return \jtl\Connector\Model\Company
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setName($name)
     {
@@ -420,11 +433,11 @@ class Company extends DataModel
     {
         return $this->name;
     }
-
+	
+ 
     /**
-     * @param  string $phone Phone number
+     * @param string $phone Phone number
      * @return \jtl\Connector\Model\Company
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setPhone($phone)
     {
@@ -438,11 +451,11 @@ class Company extends DataModel
     {
         return $this->phone;
     }
-
+	
+ 
     /**
-     * @param  string $street Street
+     * @param string $street Street
      * @return \jtl\Connector\Model\Company
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setStreet($street)
     {
@@ -456,29 +469,11 @@ class Company extends DataModel
     {
         return $this->street;
     }
-
+	
+ 
     /**
-     * @param  string $streetNumber Street number
+     * @param string $taxIdNumber Tax id number (german: Steuernummer)
      * @return \jtl\Connector\Model\Company
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setStreetNumber($streetNumber)
-    {
-        return $this->setProperty('streetNumber', $streetNumber, 'string');
-    }
-
-    /**
-     * @return string Street number
-     */
-    public function getStreetNumber()
-    {
-        return $this->streetNumber;
-    }
-
-    /**
-     * @param  string $taxIdNumber Tax id number (german: Steuernummer)
-     * @return \jtl\Connector\Model\Company
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setTaxIdNumber($taxIdNumber)
     {
@@ -492,11 +487,11 @@ class Company extends DataModel
     {
         return $this->taxIdNumber;
     }
-
+	
+ 
     /**
-     * @param  string $vatNumber VAT registration number (german: USt-ID)
+     * @param string $vatNumber VAT registration number (german: USt-ID)
      * @return \jtl\Connector\Model\Company
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setVatNumber($vatNumber)
     {
@@ -510,11 +505,11 @@ class Company extends DataModel
     {
         return $this->vatNumber;
     }
-
+	
+ 
     /**
-     * @param  string $websiteUrl Company website URL
+     * @param string $websiteUrl Company website URL
      * @return \jtl\Connector\Model\Company
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setWebsiteUrl($websiteUrl)
     {
@@ -528,11 +523,11 @@ class Company extends DataModel
     {
         return $this->websiteUrl;
     }
-
+	
+ 
     /**
-     * @param  string $zipCode Zip code / postcode
+     * @param string $zipCode Zip code / postcode
      * @return \jtl\Connector\Model\Company
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setZipCode($zipCode)
     {
@@ -547,5 +542,5 @@ class Company extends DataModel
         return $this->zipCode;
     }
 
- 
+
 }

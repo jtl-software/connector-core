@@ -16,17 +16,16 @@ class Currency extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('delimiterCent', 'string', null, false, false, false),
-            new PropertyInfo('delimiterThousand', 'string', null, false, false, false),
-            new PropertyInfo('factor', 'double', null, false, false, false),
-            new PropertyInfo('hasCurrencySignBeforeValue', 'bool', null, false, false, false),
-            new PropertyInfo('id', 'int', null, true, true, false),
-            new PropertyInfo('isDefault', 'bool', null, false, false, false),
-            new PropertyInfo('iso', 'string', null, false, false, false),
-            new PropertyInfo('name', 'string', null, false, false, false),
-            new PropertyInfo('nameHtml', 'string', null, false, false, false),
-        );
+		return array(
+            new PropertyInfo('delimiterCent', 'string', '', false, false, false),
+            new PropertyInfo('delimiterThousand', 'string', '', false, false, false),
+            new PropertyInfo('factor', 'double', 0.0, false, false, false),
+            new PropertyInfo('hasCurrencySignBeforeValue', 'boolean', false, false, false, false),
+            new PropertyInfo('id', 'string', '', false, false, false),
+            new PropertyInfo('isDefault', 'boolean', false, false, false, false),
+            new PropertyInfo('name', 'string', '', false, false, false),
+            new PropertyInfo('nameHtml', 'string', '', false, false, false),
+		);
     }
 
 	public function isMain()

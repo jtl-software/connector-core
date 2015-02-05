@@ -16,14 +16,14 @@ class Specific extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('id', 'int', null, true, true, false),
-            new PropertyInfo('isGlobal', 'bool', null, false, false, false),
-            new PropertyInfo('sort', 'int', null, false, false, false),
-            new PropertyInfo('type', 'string', null, false, false, false),
-            new PropertyInfo('values', '\jtl\Connector\Model\SpecificValue', null, false, false, true),
+		return array(
+            new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('isGlobal', 'string', '', false, false, false),
+            new PropertyInfo('sort', 'string', '', false, false, false),
+            new PropertyInfo('type', 'string', '', false, false, false),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\SpecificI18n', null, false, false, true),
-        );
+            new PropertyInfo('values', '\jtl\Connector\Model\SpecificValue', null, false, false, true),
+		);
     }
 
 	public function isMain()

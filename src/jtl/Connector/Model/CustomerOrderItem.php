@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage CustomerOrder
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,31 +13,16 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Order item in customer order..
+ * Order item in customer order.
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage CustomerOrder
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class CustomerOrderItem extends DataModel
 {
-    /**
-     * @var string - Product
-     */
-    const TYPE_PRODUCT = 'product';
-
-    /**
-     * @var string - Shipping
-     */
-    const TYPE_SHIPPING = 'shipping';
-
-    /**
-     * @var string - Discount
-     */
-    const TYPE_DISCOUNT = 'discount';
-
 
     /**
      * @var Identity Optional reference to configItemId (if item is part of a configurable item)
@@ -45,6 +32,7 @@ class CustomerOrderItem extends DataModel
      */
     protected $configItemId = null;
 
+
     /**
      * @var Identity Reference to customerOrder
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -52,6 +40,7 @@ class CustomerOrderItem extends DataModel
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
      */
     protected $customerOrderId = null;
+
 
     /**
      * @var Identity Unique customerOrderItem id
@@ -61,6 +50,7 @@ class CustomerOrderItem extends DataModel
      */
     protected $id = null;
 
+
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -69,13 +59,6 @@ class CustomerOrderItem extends DataModel
      */
     protected $productId = null;
 
-    /**
-     * @var Identity Reference to shippingClass
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("shippingClassId")
-     * @Serializer\Accessor(getter="getShippingClassId",setter="setShippingClassId")
-     */
-    protected $shippingClassId = null;
 
     /**
      * @var string Order item name
@@ -85,6 +68,7 @@ class CustomerOrderItem extends DataModel
      */
     protected $name = '';
 
+
     /**
      * @var double Price (net)
      * @Serializer\Type("double")
@@ -92,6 +76,7 @@ class CustomerOrderItem extends DataModel
      * @Serializer\Accessor(getter="getPrice",setter="setPrice")
      */
     protected $price = 0.0;
+
 
     /**
      * @var double Quantity purchased
@@ -101,6 +86,7 @@ class CustomerOrderItem extends DataModel
      */
     protected $quantity = 0.0;
 
+
     /**
      * @var string Stock keeping Unit (unique item identifier)
      * @Serializer\Type("string")
@@ -109,13 +95,6 @@ class CustomerOrderItem extends DataModel
      */
     protected $sku = '';
 
-    /**
-     * @var string Item type e.g. "product" or "shipping"
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("type")
-     * @Serializer\Accessor(getter="getType",setter="setType")
-     */
-    protected $type = '';
 
     /**
      * @var string Optional unique Hashsum (if item is part of configurable item
@@ -125,6 +104,7 @@ class CustomerOrderItem extends DataModel
      */
     protected $unique = '';
 
+
     /**
      * @var double Value added tax
      * @Serializer\Type("double")
@@ -133,11 +113,9 @@ class CustomerOrderItem extends DataModel
      */
     protected $vat = 0.0;
 
+
     /**
-     * End: 0..1 (Zero or One of CustomerOrderItem)
-     *      * (Collection of CustomerOrderItemVariation)
-     *
-     * @var \jtl\Connector\Model\CustomerOrderItemVariation[]
+     * @var jtl\Connector\Model\CustomerOrderItemVariation[] 
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderItemVariation>")
      * @Serializer\SerializedName("variations")
      * @Serializer\AccessType("reflection")
@@ -145,17 +123,18 @@ class CustomerOrderItem extends DataModel
     protected $variations = array();
 
 
-    public function __construct()
-    {
-        $this->configItemId = new Identity;
-        $this->customerOrderId = new Identity;
-        $this->id = new Identity;
-        $this->productId = new Identity;
-        $this->shippingClassId = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->id = new Identity();
+		$this->productId = new Identity();
+		$this->customerOrderId = new Identity();
+		$this->configItemId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $configItemId Optional reference to configItemId (if item is part of a configurable item)
+     * @param Identity $configItemId Optional reference to configItemId (if item is part of a configurable item)
      * @return \jtl\Connector\Model\CustomerOrderItem
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -171,9 +150,10 @@ class CustomerOrderItem extends DataModel
     {
         return $this->configItemId;
     }
-
+	
+ 
     /**
-     * @param  Identity $customerOrderId Reference to customerOrder
+     * @param Identity $customerOrderId Reference to customerOrder
      * @return \jtl\Connector\Model\CustomerOrderItem
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -189,9 +169,10 @@ class CustomerOrderItem extends DataModel
     {
         return $this->customerOrderId;
     }
-
+	
+ 
     /**
-     * @param  Identity $id Unique customerOrderItem id
+     * @param Identity $id Unique customerOrderItem id
      * @return \jtl\Connector\Model\CustomerOrderItem
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -207,9 +188,10 @@ class CustomerOrderItem extends DataModel
     {
         return $this->id;
     }
-
+	
+ 
     /**
-     * @param  Identity $productId Reference to product
+     * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\CustomerOrderItem
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -225,29 +207,11 @@ class CustomerOrderItem extends DataModel
     {
         return $this->productId;
     }
-
+	
+ 
     /**
-     * @param  Identity $shippingClassId Reference to shippingClass
+     * @param string $name Order item name
      * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setShippingClassId(Identity $shippingClassId)
-    {
-        return $this->setProperty('shippingClassId', $shippingClassId, 'Identity');
-    }
-
-    /**
-     * @return Identity Reference to shippingClass
-     */
-    public function getShippingClassId()
-    {
-        return $this->shippingClassId;
-    }
-
-    /**
-     * @param  string $name Order item name
-     * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setName($name)
     {
@@ -261,11 +225,11 @@ class CustomerOrderItem extends DataModel
     {
         return $this->name;
     }
-
+	
+ 
     /**
-     * @param  double $price Price (net)
+     * @param double $price Price (net)
      * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
     public function setPrice($price)
     {
@@ -279,11 +243,11 @@ class CustomerOrderItem extends DataModel
     {
         return $this->price;
     }
-
+	
+ 
     /**
-     * @param  double $quantity Quantity purchased
+     * @param double $quantity Quantity purchased
      * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
     public function setQuantity($quantity)
     {
@@ -297,11 +261,11 @@ class CustomerOrderItem extends DataModel
     {
         return $this->quantity;
     }
-
+	
+ 
     /**
-     * @param  string $sku Stock keeping Unit (unique item identifier)
+     * @param string $sku Stock keeping Unit (unique item identifier)
      * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setSku($sku)
     {
@@ -315,29 +279,11 @@ class CustomerOrderItem extends DataModel
     {
         return $this->sku;
     }
-
+	
+ 
     /**
-     * @param  string $type Item type e.g. "product" or "shipping"
+     * @param string $unique Optional unique Hashsum (if item is part of configurable item
      * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setType($type)
-    {
-        return $this->setProperty('type', $type, 'string');
-    }
-
-    /**
-     * @return string Item type e.g. "product" or "shipping"
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param  string $unique Optional unique Hashsum (if item is part of configurable item
-     * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setUnique($unique)
     {
@@ -351,11 +297,11 @@ class CustomerOrderItem extends DataModel
     {
         return $this->unique;
     }
-
+	
+ 
     /**
-     * @param  double $vat Value added tax
+     * @param double $vat Value added tax
      * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
     public function setVat($vat)
     {
@@ -370,8 +316,9 @@ class CustomerOrderItem extends DataModel
         return $this->vat;
     }
 
+
     /**
-     * @param  \jtl\Connector\Model\CustomerOrderItemVariation $variation
+     * @param \jtl\Connector\Model\CustomerOrderItemVariation $variation
      * @return \jtl\Connector\Model\CustomerOrderItem
      */
     public function addVariation(\jtl\Connector\Model\CustomerOrderItemVariation $variation)
@@ -381,7 +328,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\CustomerOrderItemVariation[]
+     * @return jtl\Connector\Model\CustomerOrderItemVariation[]
      */
     public function getVariations()
     {
@@ -397,5 +344,5 @@ class CustomerOrderItem extends DataModel
         return $this;
     }
 
- 
+
 }

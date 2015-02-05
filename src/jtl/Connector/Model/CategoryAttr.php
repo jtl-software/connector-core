@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Category
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,16 +13,26 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Localized category attribute.
+ * Localized category attribute
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Category
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class CategoryAttr extends DataModel
 {
+
+    /**
+     * @var Identity Unique categoryAttr id
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("attributeId")
+     * @Serializer\Accessor(getter="getAttributeId",setter="setAttributeId")
+     */
+    protected $attributeId = null;
+
+
     /**
      * @var Identity Reference to category
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -29,31 +41,64 @@ class CategoryAttr extends DataModel
      */
     protected $categoryId = null;
 
+
     /**
-     * @var Identity Unique categoryAttr id
+     * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
 
+
     /**
-     * @var int Optional sort number
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("sort")
-     * @Serializer\Accessor(getter="getSort",setter="setSort")
+     * @var boolean 
+     * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("isTranslated")
+     * @Serializer\Accessor(getter="getIsTranslated",setter="setIsTranslated")
      */
-    protected $sort = 0;
+    protected $isTranslated = false;
 
 
-    public function __construct()
+    /**
+     * @var jtl\Connector\Model\CategoryAttrI18n[] 
+     * @Serializer\Type("array<jtl\Connector\Model\CategoryAttrI18n>")
+     * @Serializer\SerializedName("i18ns")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $i18ns = array();
+
+
+
+	public function __construct()
+	{
+		$this->id = new Identity();
+		$this->categoryId = new Identity();
+		$this->attributeId = new Identity();
+	}
+	
+ 
+    /**
+     * @param Identity $attributeId Unique categoryAttr id
+     * @return \jtl\Connector\Model\CategoryAttr
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setAttributeId(Identity $attributeId)
     {
-        $this->categoryId = new Identity;
-        $this->id = new Identity;
+        return $this->setProperty('attributeId', $attributeId, 'Identity');
     }
 
     /**
-     * @param  Identity $categoryId Reference to category
+     * @return Identity Unique categoryAttr id
+     */
+    public function getAttributeId()
+    {
+        return $this->attributeId;
+    }
+	
+ 
+    /**
+     * @param Identity $categoryId Reference to category
      * @return \jtl\Connector\Model\CategoryAttr
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -69,9 +114,10 @@ class CategoryAttr extends DataModel
     {
         return $this->categoryId;
     }
-
+	
+ 
     /**
-     * @param  Identity $id Unique categoryAttr id
+     * @param Identity $id 
      * @return \jtl\Connector\Model\CategoryAttr
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -81,30 +127,59 @@ class CategoryAttr extends DataModel
     }
 
     /**
-     * @return Identity Unique categoryAttr id
+     * @return Identity 
      */
     public function getId()
     {
         return $this->id;
     }
-
-    /**
-     * @param  int $sort Optional sort number
-     * @return \jtl\Connector\Model\CategoryAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
-     */
-    public function setSort($sort)
-    {
-        return $this->setProperty('sort', $sort, 'int');
-    }
-
-    /**
-     * @return int Optional sort number
-     */
-    public function getSort()
-    {
-        return $this->sort;
-    }
-
+	
  
+    /**
+     * @param boolean $isTranslated 
+     * @return \jtl\Connector\Model\CategoryAttr
+     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
+     */
+    public function setIsTranslated(boolean $isTranslated)
+    {
+        return $this->setProperty('isTranslated', $isTranslated, 'boolean');
+    }
+
+    /**
+     * @return boolean 
+     */
+    public function getIsTranslated()
+    {
+        return $this->isTranslated;
+    }
+
+
+    /**
+     * @param \jtl\Connector\Model\CategoryAttrI18n $i18n
+     * @return \jtl\Connector\Model\CategoryAttr
+     */
+    public function addI18n(\jtl\Connector\Model\CategoryAttrI18n $i18n)
+    {
+        $this->i18ns[] = $i18n;
+        return $this;
+    }
+    
+    /**
+     * @return jtl\Connector\Model\CategoryAttrI18n[]
+     */
+    public function getI18ns()
+    {
+        return $this->i18ns;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\CategoryAttr
+     */
+    public function clearI18ns()
+    {
+        $this->i18ns = array();
+        return $this;
+    }
+
+
 }

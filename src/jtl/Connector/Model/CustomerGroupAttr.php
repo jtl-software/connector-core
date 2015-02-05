@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,31 +13,34 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Monolingual customer group attribute..
+ * Monolingual customer group attribute.
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class CustomerGroupAttr extends DataModel
 {
+
     /**
-     * @var Identity Reference to customerGroup
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @var string Reference to customerGroup
+     * @Serializer\Type("string")
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
-    protected $customerGroupId = null;
+    protected $customerGroupId = '';
+
 
     /**
-     * @var Identity Unique customerGroupAttr id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @var string Unique customerGroupAttr id
+     * @Serializer\Type("string")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
-    protected $id = null;
+    protected $id = '';
+
 
     /**
      * @var string Attribute key
@@ -45,6 +50,7 @@ class CustomerGroupAttr extends DataModel
      */
     protected $key = '';
 
+
     /**
      * @var string Attribute value
      * @Serializer\Type("string")
@@ -53,64 +59,52 @@ class CustomerGroupAttr extends DataModel
      */
     protected $value = '';
 
+
+
+	public function __construct()
+	{
+	}
+	
+ 
     /**
-     * End: 1 (One of CustomerGroup)
-     *      * (Collection of CustomerGroupAttr)
-     *
-     * @var \jtl\Connector\Model\CustomerGroup[]
-     * @Serializer\Type("array<jtl\Connector\Model\CustomerGroup>")
-     * @Serializer\SerializedName("customerGroup")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $customerGroup = array();
-
-
-    public function __construct()
-    {
-        $this->customerGroupId = new Identity;
-        $this->id = new Identity;
-    }
-
-    /**
-     * @param  Identity $customerGroupId Reference to customerGroup
+     * @param string $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\CustomerGroupAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerGroupId(Identity $customerGroupId)
+    public function setCustomerGroupId($customerGroupId)
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        return $this->setProperty('customerGroupId', $customerGroupId, 'string');
     }
 
     /**
-     * @return Identity Reference to customerGroup
+     * @return string Reference to customerGroup
      */
     public function getCustomerGroupId()
     {
         return $this->customerGroupId;
     }
-
+	
+ 
     /**
-     * @param  Identity $id Unique customerGroupAttr id
+     * @param string $id Unique customerGroupAttr id
      * @return \jtl\Connector\Model\CustomerGroupAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId($id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        return $this->setProperty('id', $id, 'string');
     }
 
     /**
-     * @return Identity Unique customerGroupAttr id
+     * @return string Unique customerGroupAttr id
      */
     public function getId()
     {
         return $this->id;
     }
-
+	
+ 
     /**
-     * @param  string $key Attribute key
+     * @param string $key Attribute key
      * @return \jtl\Connector\Model\CustomerGroupAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setKey($key)
     {
@@ -124,11 +118,11 @@ class CustomerGroupAttr extends DataModel
     {
         return $this->key;
     }
-
+	
+ 
     /**
-     * @param  string $value Attribute value
+     * @param string $value Attribute value
      * @return \jtl\Connector\Model\CustomerGroupAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setValue($value)
     {
@@ -143,32 +137,5 @@ class CustomerGroupAttr extends DataModel
         return $this->value;
     }
 
-    /**
-     * @param  \jtl\Connector\Model\CustomerGroup $customerGroup
-     * @return \jtl\Connector\Model\CustomerGroupAttr
-     */
-    public function addCustomerGroup(\jtl\Connector\Model\CustomerGroup $customerGroup)
-    {
-        $this->customerGroup[] = $customerGroup;
-        return $this;
-    }
-    
-    /**
-     * @return \jtl\Connector\Model\CustomerGroup[]
-     */
-    public function getCustomerGroup()
-    {
-        return $this->customerGroup;
-    }
 
-    /**
-     * @return \jtl\Connector\Model\CustomerGroupAttr
-     */
-    public function clearCustomerGroup()
-    {
-        $this->customerGroup = array();
-        return $this;
-    }
-
- 
 }

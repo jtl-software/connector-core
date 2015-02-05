@@ -1,6 +1,8 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
  * @subpackage Product
  */
@@ -11,7 +13,7 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Locale specific texts for product.
+ * Locale specific texts for product
  *
  * @access public
  * @package jtl\Connector\Model
@@ -21,6 +23,16 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductI18n extends DataModel
 {
+
+    /**
+     * @var Identity 
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("platformId")
+     * @Serializer\Accessor(getter="getPlatformId",setter="setPlatformId")
+     */
+    protected $platformId = null;
+
+
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -28,6 +40,16 @@ class ProductI18n extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
+
+
+    /**
+     * @var string 
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("connectorId")
+     * @Serializer\Accessor(getter="getConnectorId",setter="setConnectorId")
+     */
+    protected $connectorId = '';
+
 
     /**
      * @var string Optional product description
@@ -37,13 +59,15 @@ class ProductI18n extends DataModel
      */
     protected $description = '';
 
+
     /**
      * @var string locale
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("localeName")
-     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
+     * @Serializer\SerializedName("languageISO")
+     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
-    protected $localeName = '';
+    protected $languageISO = '';
+
 
     /**
      * @var string 
@@ -53,6 +77,7 @@ class ProductI18n extends DataModel
      */
     protected $metaDescription = '';
 
+
     /**
      * @var string 
      * @Serializer\Type("string")
@@ -60,6 +85,7 @@ class ProductI18n extends DataModel
      * @Serializer\Accessor(getter="getMetaKeywords",setter="setMetaKeywords")
      */
     protected $metaKeywords = '';
+
 
     /**
      * @var string Product name / title
@@ -69,6 +95,7 @@ class ProductI18n extends DataModel
      */
     protected $name = '';
 
+
     /**
      * @var string Optional product shortdescription
      * @Serializer\Type("string")
@@ -77,6 +104,7 @@ class ProductI18n extends DataModel
      */
     protected $shortDescription = '';
 
+
     /**
      * @var string 
      * @Serializer\Type("string")
@@ -84,6 +112,7 @@ class ProductI18n extends DataModel
      * @Serializer\Accessor(getter="getTitleTag",setter="setTitleTag")
      */
     protected $titleTag = '';
+
 
     /**
      * @var string Optional path of product URL
@@ -94,13 +123,35 @@ class ProductI18n extends DataModel
     protected $urlPath = '';
 
 
-    public function __construct()
+
+	public function __construct()
+	{
+		$this->productId = new Identity();
+		$this->platformId = new Identity();
+	}
+	
+ 
+    /**
+     * @param Identity $platformId 
+     * @return \jtl\Connector\Model\ProductI18n
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setPlatformId(Identity $platformId)
     {
-        $this->productId = new Identity;
+        return $this->setProperty('platformId', $platformId, 'Identity');
     }
 
     /**
-     * @param  Identity $productId Reference to product
+     * @return Identity 
+     */
+    public function getPlatformId()
+    {
+        return $this->platformId;
+    }
+	
+ 
+    /**
+     * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductI18n
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -116,11 +167,29 @@ class ProductI18n extends DataModel
     {
         return $this->productId;
     }
+	
+ 
+    /**
+     * @param string $connectorId 
+     * @return \jtl\Connector\Model\ProductI18n
+     */
+    public function setConnectorId($connectorId)
+    {
+        return $this->setProperty('connectorId', $connectorId, 'string');
+    }
 
     /**
-     * @param  string $description Optional product description
+     * @return string 
+     */
+    public function getConnectorId()
+    {
+        return $this->connectorId;
+    }
+	
+ 
+    /**
+     * @param string $description Optional product description
      * @return \jtl\Connector\Model\ProductI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setDescription($description)
     {
@@ -134,29 +203,29 @@ class ProductI18n extends DataModel
     {
         return $this->description;
     }
-
+	
+ 
     /**
-     * @param  string $localeName locale
+     * @param string $languageISO locale
      * @return \jtl\Connector\Model\ProductI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName($localeName)
+    public function setLanguageISO($languageISO)
     {
-        return $this->setProperty('localeName', $localeName, 'string');
+        return $this->setProperty('languageISO', $languageISO, 'string');
     }
 
     /**
      * @return string locale
      */
-    public function getLocaleName()
+    public function getLanguageISO()
     {
-        return $this->localeName;
+        return $this->languageISO;
     }
-
+	
+ 
     /**
-     * @param  string $metaDescription 
+     * @param string $metaDescription 
      * @return \jtl\Connector\Model\ProductI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setMetaDescription($metaDescription)
     {
@@ -170,11 +239,11 @@ class ProductI18n extends DataModel
     {
         return $this->metaDescription;
     }
-
+	
+ 
     /**
-     * @param  string $metaKeywords 
+     * @param string $metaKeywords 
      * @return \jtl\Connector\Model\ProductI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setMetaKeywords($metaKeywords)
     {
@@ -188,11 +257,11 @@ class ProductI18n extends DataModel
     {
         return $this->metaKeywords;
     }
-
+	
+ 
     /**
-     * @param  string $name Product name / title
+     * @param string $name Product name / title
      * @return \jtl\Connector\Model\ProductI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setName($name)
     {
@@ -206,11 +275,11 @@ class ProductI18n extends DataModel
     {
         return $this->name;
     }
-
+	
+ 
     /**
-     * @param  string $shortDescription Optional product shortdescription
+     * @param string $shortDescription Optional product shortdescription
      * @return \jtl\Connector\Model\ProductI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setShortDescription($shortDescription)
     {
@@ -224,11 +293,11 @@ class ProductI18n extends DataModel
     {
         return $this->shortDescription;
     }
-
+	
+ 
     /**
-     * @param  string $titleTag 
+     * @param string $titleTag 
      * @return \jtl\Connector\Model\ProductI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setTitleTag($titleTag)
     {
@@ -242,11 +311,11 @@ class ProductI18n extends DataModel
     {
         return $this->titleTag;
     }
-
+	
+ 
     /**
-     * @param  string $urlPath Optional path of product URL
+     * @param string $urlPath Optional path of product URL
      * @return \jtl\Connector\Model\ProductI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setUrlPath($urlPath)
     {
@@ -261,5 +330,5 @@ class ProductI18n extends DataModel
         return $this->urlPath;
     }
 
- 
+
 }

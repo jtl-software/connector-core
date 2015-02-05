@@ -16,11 +16,11 @@ class UnitI18n extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('localeName', 'string', null, false, false, false),
-            new PropertyInfo('name', 'string', null, false, false, false),
-            new PropertyInfo('unitId', 'int', null, true, true, false),
-        );
+		return array(
+            new PropertyInfo('unitId', 'Identity', null, true, true, false),
+            new PropertyInfo('languageISO', 'string', '', false, false, false),
+            new PropertyInfo('name', 'string', '', false, false, false),
+		);
     }
 
 	public function isMain()

@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,16 +13,17 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * ProductType model to classify and group products..
+ * ProductType model to classify and group products.
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class ProductType extends DataModel
 {
+
     /**
      * @var Identity Unique productType id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -28,6 +31,7 @@ class ProductType extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
+
 
     /**
      * @var string Optional (internal) product type name
@@ -38,13 +42,15 @@ class ProductType extends DataModel
     protected $name = '';
 
 
-    public function __construct()
-    {
-        $this->id = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->id = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $id Unique productType id
+     * @param Identity $id Unique productType id
      * @return \jtl\Connector\Model\ProductType
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -60,11 +66,11 @@ class ProductType extends DataModel
     {
         return $this->id;
     }
-
+	
+ 
     /**
-     * @param  string $name Optional (internal) product type name
+     * @param string $name Optional (internal) product type name
      * @return \jtl\Connector\Model\ProductType
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setName($name)
     {
@@ -79,5 +85,5 @@ class ProductType extends DataModel
         return $this->name;
     }
 
- 
+
 }

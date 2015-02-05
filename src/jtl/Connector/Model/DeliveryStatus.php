@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,16 +13,17 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Localized delivery status text. Delivery status is set in the Wawi-ERP. .
+ * Localized delivery status text. Delivery status is set in the Wawi-ERP. 
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class DeliveryStatus extends DataModel
 {
+
     /**
      * @var Identity DeliveryStatus id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -29,13 +32,15 @@ class DeliveryStatus extends DataModel
      */
     protected $id = null;
 
+
     /**
      * @var string Locale
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("localeName")
-     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
+     * @Serializer\SerializedName("languageISO")
+     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
-    protected $localeName = '';
+    protected $languageISO = '';
+
 
     /**
      * @var string Localized delivery status text
@@ -46,13 +51,15 @@ class DeliveryStatus extends DataModel
     protected $name = '';
 
 
-    public function __construct()
-    {
-        $this->id = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->id = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $id DeliveryStatus id
+     * @param Identity $id DeliveryStatus id
      * @return \jtl\Connector\Model\DeliveryStatus
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -68,29 +75,29 @@ class DeliveryStatus extends DataModel
     {
         return $this->id;
     }
-
+	
+ 
     /**
-     * @param  string $localeName Locale
+     * @param string $languageISO Locale
      * @return \jtl\Connector\Model\DeliveryStatus
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setLocaleName($localeName)
+    public function setLanguageISO($languageISO)
     {
-        return $this->setProperty('localeName', $localeName, 'string');
+        return $this->setProperty('languageISO', $languageISO, 'string');
     }
 
     /**
      * @return string Locale
      */
-    public function getLocaleName()
+    public function getLanguageISO()
     {
-        return $this->localeName;
+        return $this->languageISO;
     }
-
+	
+ 
     /**
-     * @param  string $name Localized delivery status text
+     * @param string $name Localized delivery status text
      * @return \jtl\Connector\Model\DeliveryStatus
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setName($name)
     {
@@ -105,5 +112,5 @@ class DeliveryStatus extends DataModel
         return $this->name;
     }
 
- 
+
 }

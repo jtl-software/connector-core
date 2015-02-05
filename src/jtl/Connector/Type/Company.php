@@ -16,28 +16,27 @@ class Company extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('accountHolder', 'string', null, false, false, false),
-            new PropertyInfo('accountNumber', 'string', null, false, false, false),
-            new PropertyInfo('bankCode', 'string', null, false, false, false),
-            new PropertyInfo('bankName', 'string', null, false, false, false),
-            new PropertyInfo('bic', 'string', null, false, false, false),
-            new PropertyInfo('businessman', 'string', null, false, false, false),
-            new PropertyInfo('city', 'string', null, false, false, false),
-            new PropertyInfo('countryIso', 'string', null, false, false, false),
-            new PropertyInfo('eMail', 'string', null, false, false, false),
-            new PropertyInfo('fax', 'string', null, false, false, false),
-            new PropertyInfo('iban', 'string', null, false, false, false),
-            new PropertyInfo('id', 'int', null, true, true, false),
-            new PropertyInfo('name', 'string', null, false, false, false),
-            new PropertyInfo('phone', 'string', null, false, false, false),
-            new PropertyInfo('street', 'string', null, false, false, false),
-            new PropertyInfo('streetNumber', 'string', null, false, false, false),
-            new PropertyInfo('taxIdNumber', 'string', null, false, false, false),
-            new PropertyInfo('vatNumber', 'string', null, false, false, false),
-            new PropertyInfo('websiteUrl', 'string', null, false, false, false),
-            new PropertyInfo('zipCode', 'string', null, false, false, false),
-        );
+		return array(
+            new PropertyInfo('accountHolder', 'string', '', false, false, false),
+            new PropertyInfo('accountNumber', 'string', '', false, false, false),
+            new PropertyInfo('bankCode', 'string', '', false, false, false),
+            new PropertyInfo('bankName', 'string', '', false, false, false),
+            new PropertyInfo('bic', 'string', '', false, false, false),
+            new PropertyInfo('businessman', 'string', '', false, false, false),
+            new PropertyInfo('city', 'string', '', false, false, false),
+            new PropertyInfo('countryIso', 'string', '', false, false, false),
+            new PropertyInfo('eMail', 'string', '', false, false, false),
+            new PropertyInfo('fax', 'string', '', false, false, false),
+            new PropertyInfo('iban', 'string', '', false, false, false),
+            new PropertyInfo('id', 'string', '', false, false, false),
+            new PropertyInfo('name', 'string', '', false, false, false),
+            new PropertyInfo('phone', 'string', '', false, false, false),
+            new PropertyInfo('street', 'string', '', false, false, false),
+            new PropertyInfo('taxIdNumber', 'string', '', false, false, false),
+            new PropertyInfo('vatNumber', 'string', '', false, false, false),
+            new PropertyInfo('websiteUrl', 'string', '', false, false, false),
+            new PropertyInfo('zipCode', 'string', '', false, false, false),
+		);
     }
 
 	public function isMain()

@@ -1,6 +1,8 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
  * @subpackage Product
  */
@@ -11,7 +13,7 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Define set articles / parts lists. .
+ * Define set articles / parts lists. 
  *
  * @access public
  * @package jtl\Connector\Model
@@ -21,6 +23,7 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class PartsList extends DataModel
 {
+
     /**
      * @var Identity Unique PartsList id, referenced by product.PartsListId
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -29,6 +32,7 @@ class PartsList extends DataModel
      */
     protected $id = null;
 
+
     /**
      * @var Identity Reference to a component / product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,6 +40,7 @@ class PartsList extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
+
 
     /**
      * @var double Component quantity
@@ -46,14 +51,16 @@ class PartsList extends DataModel
     protected $quantity = 0.0;
 
 
-    public function __construct()
-    {
-        $this->id = new Identity;
-        $this->productId = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->id = new Identity();
+		$this->productId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $id Unique PartsList id, referenced by product.PartsListId
+     * @param Identity $id Unique PartsList id, referenced by product.PartsListId
      * @return \jtl\Connector\Model\PartsList
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -69,9 +76,10 @@ class PartsList extends DataModel
     {
         return $this->id;
     }
-
+	
+ 
     /**
-     * @param  Identity $productId Reference to a component / product
+     * @param Identity $productId Reference to a component / product
      * @return \jtl\Connector\Model\PartsList
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -87,11 +95,11 @@ class PartsList extends DataModel
     {
         return $this->productId;
     }
-
+	
+ 
     /**
-     * @param  double $quantity Component quantity
+     * @param double $quantity Component quantity
      * @return \jtl\Connector\Model\PartsList
-     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
     public function setQuantity($quantity)
     {
@@ -106,5 +114,5 @@ class PartsList extends DataModel
         return $this->quantity;
     }
 
- 
+
 }

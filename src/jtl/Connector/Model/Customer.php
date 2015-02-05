@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Customer
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,47 +13,25 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Customer address data and preference properties..
+ * Customer address data and preference properties.
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Customer
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class Customer extends DataModel
 {
-    /**
-     * @var Identity References a customer group
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("customerGroupId")
-     * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
-     */
-    protected $customerGroupId = null;
 
     /**
-     * @var Identity Unique customer id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-
-    /**
-     * @var double Credit value on customer account in default currency
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("accountCredit")
-     * @Serializer\Accessor(getter="getAccountCredit",setter="setAccountCredit")
-     */
-    protected $accountCredit = 0.0;
-
-    /**
-     * @var DateTime Date of birth
-     * @Serializer\Type("DateTime")
+     * @var string Date of birth
+     * @Serializer\Type("string")
      * @Serializer\SerializedName("birthday")
      * @Serializer\Accessor(getter="getBirthday",setter="setBirthday")
      */
-    protected $birthday = null;
+    protected $birthday = '';
+
 
     /**
      * @var string City
@@ -61,6 +41,7 @@ class Customer extends DataModel
      */
     protected $city = '';
 
+
     /**
      * @var string Company name
      * @Serializer\Type("string")
@@ -68,6 +49,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getCompany",setter="setCompany")
      */
     protected $company = '';
+
 
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
@@ -77,6 +59,7 @@ class Customer extends DataModel
      */
     protected $countryIso = '';
 
+
     /**
      * @var DateTime Creation date
      * @Serializer\Type("DateTime")
@@ -84,6 +67,16 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
     protected $creationDate = null;
+
+
+    /**
+     * @var string References a customer group
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("customerGroupId")
+     * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
+     */
+    protected $customerGroupId = '';
+
 
     /**
      * @var string Optional customer number set by JTL-Wawi ERP software
@@ -93,6 +86,7 @@ class Customer extends DataModel
      */
     protected $customerNumber = '';
 
+
     /**
      * @var string Delivery instruction e.g. "c/o John Doe"
      * @Serializer\Type("string")
@@ -101,13 +95,15 @@ class Customer extends DataModel
      */
     protected $deliveryInstruction = '';
 
+
     /**
-     * @var double Percentual discount for customer on all prices
+     * @var double Percentage discount for customer on all prices
      * @Serializer\Type("double")
      * @Serializer\SerializedName("discount")
      * @Serializer\Accessor(getter="getDiscount",setter="setDiscount")
      */
     protected $discount = 0.0;
+
 
     /**
      * @var string E-Mail address
@@ -117,6 +113,7 @@ class Customer extends DataModel
      */
     protected $eMail = '';
 
+
     /**
      * @var string Extra address line e.g. "Apartment 2.5"
      * @Serializer\Type("string")
@@ -124,6 +121,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getExtraAddressLine",setter="setExtraAddressLine")
      */
     protected $extraAddressLine = '';
+
 
     /**
      * @var string Fax number
@@ -133,6 +131,7 @@ class Customer extends DataModel
      */
     protected $fax = '';
 
+
     /**
      * @var string First name
      * @Serializer\Type("string")
@@ -141,29 +140,42 @@ class Customer extends DataModel
      */
     protected $firstName = '';
 
-    /**
-     * @var bool Flag persistent customer account. True, if customer chose to create persistent customer account. False, if customer doesnt want to have his data stored for login-purposes.
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("hasCustomerAccount")
-     * @Serializer\Accessor(getter="getHasCustomerAccount",setter="setHasCustomerAccount")
-     */
-    protected $hasCustomerAccount = false;
 
     /**
-     * @var bool Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
+     * @var boolean Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("hasNewsletterSubscription")
      * @Serializer\Accessor(getter="getHasNewsletterSubscription",setter="setHasNewsletterSubscription")
      */
     protected $hasNewsletterSubscription = false;
 
+
     /**
-     * @var bool Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
+     * @var string Unique customer id
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
+     */
+    protected $id = '';
+
+
+    /**
+     * @var boolean Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isActive")
      * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
      */
     protected $isActive = false;
+
+
+    /**
+     * @var string User locale preference
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("languageISO")
+     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
+     */
+    protected $languageISO = '';
+
 
     /**
      * @var string Last name
@@ -173,13 +185,6 @@ class Customer extends DataModel
      */
     protected $lastName = '';
 
-    /**
-     * @var string User locale preference
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("localeName")
-     * @Serializer\Accessor(getter="getLocaleName",setter="setLocaleName")
-     */
-    protected $localeName = '';
 
     /**
      * @var string Mobile phone number
@@ -189,6 +194,7 @@ class Customer extends DataModel
      */
     protected $mobile = '';
 
+
     /**
      * @var string Customer origin
      * @Serializer\Type("string")
@@ -196,6 +202,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getOrigin",setter="setOrigin")
      */
     protected $origin = '';
+
 
     /**
      * @var string Phone number
@@ -205,6 +212,7 @@ class Customer extends DataModel
      */
     protected $phone = '';
 
+
     /**
      * @var string Salutation (german: "Anrede")
      * @Serializer\Type("string")
@@ -212,6 +220,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getSalutation",setter="setSalutation")
      */
     protected $salutation = '';
+
 
     /**
      * @var string State
@@ -221,6 +230,7 @@ class Customer extends DataModel
      */
     protected $state = '';
 
+
     /**
      * @var string Street name
      * @Serializer\Type("string")
@@ -228,6 +238,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getStreet",setter="setStreet")
      */
     protected $street = '';
+
 
     /**
      * @var string Title, e.g. "Prof. Dr."
@@ -237,6 +248,7 @@ class Customer extends DataModel
      */
     protected $title = '';
 
+
     /**
      * @var string VAT number (german "USt-ID")
      * @Serializer\Type("string")
@@ -244,6 +256,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getVatNumber",setter="setVatNumber")
      */
     protected $vatNumber = '';
+
 
     /**
      * @var string WWW address
@@ -253,6 +266,7 @@ class Customer extends DataModel
      */
     protected $websiteUrl = '';
 
+
     /**
      * @var string ZIP / postal code
      * @Serializer\Type("string")
@@ -261,11 +275,9 @@ class Customer extends DataModel
      */
     protected $zipCode = '';
 
+
     /**
-     * End: 0..1 (Zero or One of Customer)
-     *      * (Collection of CustomerAttr)
-     *
-     * @var \jtl\Connector\Model\CustomerAttr[]
+     * @var jtl\Connector\Model\CustomerAttr[] 
      * @Serializer\Type("array<jtl\Connector\Model\CustomerAttr>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
@@ -273,88 +285,33 @@ class Customer extends DataModel
     protected $attributes = array();
 
 
-    public function __construct()
-    {
-        $this->customerGroupId = new Identity;
-        $this->id = new Identity;
-    }
 
+	public function __construct()
+	{
+	}
+	
+ 
     /**
-     * @param  Identity $customerGroupId References a customer group
+     * @param string $birthday Date of birth
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerGroupId(Identity $customerGroupId)
+    public function setBirthday($birthday)
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        return $this->setProperty('birthday', $birthday, 'string');
     }
 
     /**
-     * @return Identity References a customer group
-     */
-    public function getCustomerGroupId()
-    {
-        return $this->customerGroupId;
-    }
-
-    /**
-     * @param  Identity $id Unique customer id
-     * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id)
-    {
-        return $this->setProperty('id', $id, 'Identity');
-    }
-
-    /**
-     * @return Identity Unique customer id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param  double $accountCredit Credit value on customer account in default currency
-     * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
-     */
-    public function setAccountCredit($accountCredit)
-    {
-        return $this->setProperty('accountCredit', $accountCredit, 'double');
-    }
-
-    /**
-     * @return double Credit value on customer account in default currency
-     */
-    public function getAccountCredit()
-    {
-        return $this->accountCredit;
-    }
-
-    /**
-     * @param  DateTime $birthday Date of birth
-     * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
-     */
-    public function setBirthday(DateTime $birthday = null)
-    {
-        return $this->setProperty('birthday', $birthday, 'DateTime');
-    }
-
-    /**
-     * @return DateTime Date of birth
+     * @return string Date of birth
      */
     public function getBirthday()
     {
         return $this->birthday;
     }
-
+	
+ 
     /**
-     * @param  string $city City
+     * @param string $city City
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setCity($city)
     {
@@ -368,11 +325,11 @@ class Customer extends DataModel
     {
         return $this->city;
     }
-
+	
+ 
     /**
-     * @param  string $company Company name
+     * @param string $company Company name
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setCompany($company)
     {
@@ -386,11 +343,11 @@ class Customer extends DataModel
     {
         return $this->company;
     }
-
+	
+ 
     /**
-     * @param  string $countryIso Country ISO 3166-2 (2 letter Uppercase)
+     * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setCountryIso($countryIso)
     {
@@ -404,13 +361,14 @@ class Customer extends DataModel
     {
         return $this->countryIso;
     }
-
+	
+ 
     /**
-     * @param  DateTime $creationDate Creation date
+     * @param DateTime $creationDate Creation date
      * @return \jtl\Connector\Model\Customer
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreationDate(DateTime $creationDate = null)
+    public function setCreationDate(DateTime $creationDate)
     {
         return $this->setProperty('creationDate', $creationDate, 'DateTime');
     }
@@ -422,11 +380,29 @@ class Customer extends DataModel
     {
         return $this->creationDate;
     }
+	
+ 
+    /**
+     * @param string $customerGroupId References a customer group
+     * @return \jtl\Connector\Model\Customer
+     */
+    public function setCustomerGroupId($customerGroupId)
+    {
+        return $this->setProperty('customerGroupId', $customerGroupId, 'string');
+    }
 
     /**
-     * @param  string $customerNumber Optional customer number set by JTL-Wawi ERP software
+     * @return string References a customer group
+     */
+    public function getCustomerGroupId()
+    {
+        return $this->customerGroupId;
+    }
+	
+ 
+    /**
+     * @param string $customerNumber Optional customer number set by JTL-Wawi ERP software
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setCustomerNumber($customerNumber)
     {
@@ -440,11 +416,11 @@ class Customer extends DataModel
     {
         return $this->customerNumber;
     }
-
+	
+ 
     /**
-     * @param  string $deliveryInstruction Delivery instruction e.g. "c/o John Doe"
+     * @param string $deliveryInstruction Delivery instruction e.g. "c/o John Doe"
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setDeliveryInstruction($deliveryInstruction)
     {
@@ -458,11 +434,11 @@ class Customer extends DataModel
     {
         return $this->deliveryInstruction;
     }
-
+	
+ 
     /**
-     * @param  double $discount Percentual discount for customer on all prices
+     * @param double $discount Percentage discount for customer on all prices
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'double'.
      */
     public function setDiscount($discount)
     {
@@ -470,17 +446,17 @@ class Customer extends DataModel
     }
 
     /**
-     * @return double Percentual discount for customer on all prices
+     * @return double Percentage discount for customer on all prices
      */
     public function getDiscount()
     {
         return $this->discount;
     }
-
+	
+ 
     /**
-     * @param  string $eMail E-Mail address
+     * @param string $eMail E-Mail address
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setEMail($eMail)
     {
@@ -494,11 +470,11 @@ class Customer extends DataModel
     {
         return $this->eMail;
     }
-
+	
+ 
     /**
-     * @param  string $extraAddressLine Extra address line e.g. "Apartment 2.5"
+     * @param string $extraAddressLine Extra address line e.g. "Apartment 2.5"
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setExtraAddressLine($extraAddressLine)
     {
@@ -512,11 +488,11 @@ class Customer extends DataModel
     {
         return $this->extraAddressLine;
     }
-
+	
+ 
     /**
-     * @param  string $fax Fax number
+     * @param string $fax Fax number
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setFax($fax)
     {
@@ -530,11 +506,11 @@ class Customer extends DataModel
     {
         return $this->fax;
     }
-
+	
+ 
     /**
-     * @param  string $firstName First name
+     * @param string $firstName First name
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setFirstName($firstName)
     {
@@ -548,65 +524,85 @@ class Customer extends DataModel
     {
         return $this->firstName;
     }
-
+	
+ 
     /**
-     * @param  bool $hasCustomerAccount Flag persistent customer account. True, if customer chose to create persistent customer account. False, if customer doesnt want to have his data stored for login-purposes.
+     * @param boolean $hasNewsletterSubscription Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setHasCustomerAccount($hasCustomerAccount)
+    public function setHasNewsletterSubscription(boolean $hasNewsletterSubscription)
     {
-        return $this->setProperty('hasCustomerAccount', $hasCustomerAccount, 'bool');
+        return $this->setProperty('hasNewsletterSubscription', $hasNewsletterSubscription, 'boolean');
     }
 
     /**
-     * @return bool Flag persistent customer account. True, if customer chose to create persistent customer account. False, if customer doesnt want to have his data stored for login-purposes.
-     */
-    public function getHasCustomerAccount()
-    {
-        return $this->hasCustomerAccount;
-    }
-
-    /**
-     * @param  bool $hasNewsletterSubscription Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
-     * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
-     */
-    public function setHasNewsletterSubscription($hasNewsletterSubscription)
-    {
-        return $this->setProperty('hasNewsletterSubscription', $hasNewsletterSubscription, 'bool');
-    }
-
-    /**
-     * @return bool Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
+     * @return boolean Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
      */
     public function getHasNewsletterSubscription()
     {
         return $this->hasNewsletterSubscription;
     }
-
+	
+ 
     /**
-     * @param  bool $isActive Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
+     * @param string $id Unique customer id
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'bool'.
      */
-    public function setIsActive($isActive)
+    public function setId($id)
     {
-        return $this->setProperty('isActive', $isActive, 'bool');
+        return $this->setProperty('id', $id, 'string');
     }
 
     /**
-     * @return bool Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
+     * @return string Unique customer id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+	
+ 
+    /**
+     * @param boolean $isActive Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
+     * @return \jtl\Connector\Model\Customer
+     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
+     */
+    public function setIsActive(boolean $isActive)
+    {
+        return $this->setProperty('isActive', $isActive, 'boolean');
+    }
+
+    /**
+     * @return boolean Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
      */
     public function getIsActive()
     {
         return $this->isActive;
     }
+	
+ 
+    /**
+     * @param string $languageISO User locale preference
+     * @return \jtl\Connector\Model\Customer
+     */
+    public function setLanguageISO($languageISO)
+    {
+        return $this->setProperty('languageISO', $languageISO, 'string');
+    }
 
     /**
-     * @param  string $lastName Last name
+     * @return string User locale preference
+     */
+    public function getLanguageISO()
+    {
+        return $this->languageISO;
+    }
+	
+ 
+    /**
+     * @param string $lastName Last name
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setLastName($lastName)
     {
@@ -620,29 +616,11 @@ class Customer extends DataModel
     {
         return $this->lastName;
     }
-
+	
+ 
     /**
-     * @param  string $localeName User locale preference
+     * @param string $mobile Mobile phone number
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setLocaleName($localeName)
-    {
-        return $this->setProperty('localeName', $localeName, 'string');
-    }
-
-    /**
-     * @return string User locale preference
-     */
-    public function getLocaleName()
-    {
-        return $this->localeName;
-    }
-
-    /**
-     * @param  string $mobile Mobile phone number
-     * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setMobile($mobile)
     {
@@ -656,11 +634,11 @@ class Customer extends DataModel
     {
         return $this->mobile;
     }
-
+	
+ 
     /**
-     * @param  string $origin Customer origin
+     * @param string $origin Customer origin
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setOrigin($origin)
     {
@@ -674,11 +652,11 @@ class Customer extends DataModel
     {
         return $this->origin;
     }
-
+	
+ 
     /**
-     * @param  string $phone Phone number
+     * @param string $phone Phone number
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setPhone($phone)
     {
@@ -692,11 +670,11 @@ class Customer extends DataModel
     {
         return $this->phone;
     }
-
+	
+ 
     /**
-     * @param  string $salutation Salutation (german: "Anrede")
+     * @param string $salutation Salutation (german: "Anrede")
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setSalutation($salutation)
     {
@@ -710,11 +688,11 @@ class Customer extends DataModel
     {
         return $this->salutation;
     }
-
+	
+ 
     /**
-     * @param  string $state State
+     * @param string $state State
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setState($state)
     {
@@ -728,11 +706,11 @@ class Customer extends DataModel
     {
         return $this->state;
     }
-
+	
+ 
     /**
-     * @param  string $street Street name
+     * @param string $street Street name
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setStreet($street)
     {
@@ -746,11 +724,11 @@ class Customer extends DataModel
     {
         return $this->street;
     }
-
+	
+ 
     /**
-     * @param  string $title Title, e.g. "Prof. Dr."
+     * @param string $title Title, e.g. "Prof. Dr."
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setTitle($title)
     {
@@ -764,11 +742,11 @@ class Customer extends DataModel
     {
         return $this->title;
     }
-
+	
+ 
     /**
-     * @param  string $vatNumber VAT number (german "USt-ID")
+     * @param string $vatNumber VAT number (german "USt-ID")
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setVatNumber($vatNumber)
     {
@@ -782,11 +760,11 @@ class Customer extends DataModel
     {
         return $this->vatNumber;
     }
-
+	
+ 
     /**
-     * @param  string $websiteUrl WWW address
+     * @param string $websiteUrl WWW address
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setWebsiteUrl($websiteUrl)
     {
@@ -800,11 +778,11 @@ class Customer extends DataModel
     {
         return $this->websiteUrl;
     }
-
+	
+ 
     /**
-     * @param  string $zipCode ZIP / postal code
+     * @param string $zipCode ZIP / postal code
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setZipCode($zipCode)
     {
@@ -819,8 +797,9 @@ class Customer extends DataModel
         return $this->zipCode;
     }
 
+
     /**
-     * @param  \jtl\Connector\Model\CustomerAttr $attribute
+     * @param \jtl\Connector\Model\CustomerAttr $attribute
      * @return \jtl\Connector\Model\Customer
      */
     public function addAttribute(\jtl\Connector\Model\CustomerAttr $attribute)
@@ -830,7 +809,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\CustomerAttr[]
+     * @return jtl\Connector\Model\CustomerAttr[]
      */
     public function getAttributes()
     {
@@ -846,5 +825,5 @@ class Customer extends DataModel
         return $this;
     }
 
- 
+
 }

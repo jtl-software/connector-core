@@ -16,16 +16,16 @@ class ConfigGroup extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('comment', 'string', null, false, false, false),
-            new PropertyInfo('id', 'int', null, true, true, false),
-            new PropertyInfo('imagePath', 'string', null, false, false, false),
-            new PropertyInfo('maximumSelection', 'int', null, false, false, false),
-            new PropertyInfo('minimumSelection', 'int', null, false, false, false),
-            new PropertyInfo('sort', 'int', null, false, false, false),
-            new PropertyInfo('type', 'int', null, false, false, false),
+		return array(
+            new PropertyInfo('comment', 'string', '', false, false, false),
+            new PropertyInfo('id', 'string', '', false, false, false),
+            new PropertyInfo('imagePath', 'string', '', false, false, false),
+            new PropertyInfo('maximumSelection', 'string', '', false, false, false),
+            new PropertyInfo('minimumSelection', 'string', '', false, false, false),
+            new PropertyInfo('sort', 'string', '', false, false, false),
+            new PropertyInfo('type', 'string', '', false, false, false),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\ConfigGroupI18n', null, false, false, true),
-        );
+		);
     }
 
 	public function isMain()

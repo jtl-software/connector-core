@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Category
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,16 +13,17 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Specifies which CustomerGroup is not permitted to view category..
+ * Specifies which CustomerGroup is not permitted to view category.
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Category
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class CategoryInvisibility extends DataModel
 {
+
     /**
      * @var Identity Reference to category to hide from customerGroupId
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -28,6 +31,7 @@ class CategoryInvisibility extends DataModel
      * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
      */
     protected $categoryId = null;
+
 
     /**
      * @var Identity Reference to customerGroup that is not allowed to view categoryId
@@ -38,14 +42,16 @@ class CategoryInvisibility extends DataModel
     protected $customerGroupId = null;
 
 
-    public function __construct()
-    {
-        $this->categoryId = new Identity;
-        $this->customerGroupId = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->categoryId = new Identity();
+		$this->customerGroupId = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $categoryId Reference to category to hide from customerGroupId
+     * @param Identity $categoryId Reference to category to hide from customerGroupId
      * @return \jtl\Connector\Model\CategoryInvisibility
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -61,9 +67,10 @@ class CategoryInvisibility extends DataModel
     {
         return $this->categoryId;
     }
-
+	
+ 
     /**
-     * @param  Identity $customerGroupId Reference to customerGroup that is not allowed to view categoryId
+     * @param Identity $customerGroupId Reference to customerGroup that is not allowed to view categoryId
      * @return \jtl\Connector\Model\CategoryInvisibility
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -80,5 +87,5 @@ class CategoryInvisibility extends DataModel
         return $this->customerGroupId;
     }
 
- 
+
 }

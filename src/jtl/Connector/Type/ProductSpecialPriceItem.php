@@ -12,14 +12,15 @@ use \jtl\Connector\Type\PropertyInfo;
  * @access public
  * @package jtl\Connector\Type
  */
-class WarehouseI18n extends DataType
+class ProductSpecialPriceItem extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('name', 'string', null, false, false, false),
-            new PropertyInfo('warehouseId', 'int', null, true, true, false),
-        );
+		return array(
+            new PropertyInfo('customerGroupId', 'Identity', null, true, true, false),
+            new PropertyInfo('productSpecialPriceId', 'Identity', null, true, true, false),
+            new PropertyInfo('priceNet', 'double', 0.0, false, false, false),
+		);
     }
 
 	public function isMain()

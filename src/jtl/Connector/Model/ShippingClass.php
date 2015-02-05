@@ -1,8 +1,10 @@
+﻿
 <?php
+
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
@@ -11,16 +13,17 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Shipping classes are usually defined in JTL-Wawi ERP..
+ * Shipping classes are usually defined in JTL-Wawi ERP.
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage GlobalData
+ * @subpackage Product
  * 
  * @Serializer\AccessType("public_method")
  */
 class ShippingClass extends DataModel
 {
+
     /**
      * @var Identity Unique shippingClass id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -28,6 +31,7 @@ class ShippingClass extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
+
 
     /**
      * @var string Optional (internal) Shipping class name
@@ -38,13 +42,15 @@ class ShippingClass extends DataModel
     protected $name = '';
 
 
-    public function __construct()
-    {
-        $this->id = new Identity;
-    }
 
+	public function __construct()
+	{
+		$this->id = new Identity();
+	}
+	
+ 
     /**
-     * @param  Identity $id Unique shippingClass id
+     * @param Identity $id Unique shippingClass id
      * @return \jtl\Connector\Model\ShippingClass
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -60,11 +66,11 @@ class ShippingClass extends DataModel
     {
         return $this->id;
     }
-
+	
+ 
     /**
-     * @param  string $name Optional (internal) Shipping class name
+     * @param string $name Optional (internal) Shipping class name
      * @return \jtl\Connector\Model\ShippingClass
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setName($name)
     {
@@ -79,5 +85,5 @@ class ShippingClass extends DataModel
         return $this->name;
     }
 
- 
+
 }
