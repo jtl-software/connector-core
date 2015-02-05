@@ -16,7 +16,7 @@ class Currency extends DataType
 {
     protected function loadProperties()
     {
-		return array(
+        return array(
             new PropertyInfo('delimiterCent', 'string', '', false, false, false),
             new PropertyInfo('delimiterThousand', 'string', '', false, false, false),
             new PropertyInfo('factor', 'double', 0.0, false, false, false),
@@ -25,11 +25,11 @@ class Currency extends DataType
             new PropertyInfo('isDefault', 'boolean', false, false, false, false),
             new PropertyInfo('name', 'string', '', false, false, false),
             new PropertyInfo('nameHtml', 'string', '', false, false, false),
-		);
+        );
     }
 
-	public function isMain()
-	{
-		return false;
-	}
+    public function isMain()
+    {
+        return false;
+    }
 }

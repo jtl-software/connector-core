@@ -16,7 +16,7 @@ class CustomerOrderItemVariation extends DataType
 {
     protected function loadProperties()
     {
-		return array(
+        return array(
             new PropertyInfo('customerOrderItemId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('productVariationId', 'Identity', null, false, true, false),
@@ -24,11 +24,11 @@ class CustomerOrderItemVariation extends DataType
             new PropertyInfo('freeField', 'string', '', false, false, false),
             new PropertyInfo('productVariationName', 'string', '', false, false, false),
             new PropertyInfo('valueName', 'string', '', false, false, false),
-		);
+        );
     }
 
-	public function isMain()
-	{
-		return false;
-	}
+    public function isMain()
+    {
+        return false;
+    }
 }

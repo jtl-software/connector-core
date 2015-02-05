@@ -16,7 +16,7 @@ class Company extends DataType
 {
     protected function loadProperties()
     {
-		return array(
+        return array(
             new PropertyInfo('accountHolder', 'string', '', false, false, false),
             new PropertyInfo('accountNumber', 'string', '', false, false, false),
             new PropertyInfo('bankCode', 'string', '', false, false, false),
@@ -36,11 +36,11 @@ class Company extends DataType
             new PropertyInfo('vatNumber', 'string', '', false, false, false),
             new PropertyInfo('websiteUrl', 'string', '', false, false, false),
             new PropertyInfo('zipCode', 'string', '', false, false, false),
-		);
+        );
     }
 
-	public function isMain()
-	{
-		return false;
-	}
+    public function isMain()
+    {
+        return false;
+    }
 }

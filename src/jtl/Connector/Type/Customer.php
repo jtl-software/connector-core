@@ -16,7 +16,7 @@ class Customer extends DataType
 {
     protected function loadProperties()
     {
-		return array(
+        return array(
             new PropertyInfo('birthday', 'string', '', false, false, false),
             new PropertyInfo('city', 'string', '', false, false, false),
             new PropertyInfo('company', 'string', '', false, false, false),
@@ -46,11 +46,11 @@ class Customer extends DataType
             new PropertyInfo('websiteUrl', 'string', '', false, false, false),
             new PropertyInfo('zipCode', 'string', '', false, false, false),
             new PropertyInfo('attributes', '\jtl\Connector\Model\CustomerAttr', null, false, false, true),
-		);
+        );
     }
 
-	public function isMain()
-	{
-		return true;
-	}
+    public function isMain()
+    {
+        return true;
+    }
 }

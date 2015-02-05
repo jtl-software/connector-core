@@ -16,7 +16,7 @@ class MediaFile extends DataType
 {
     protected function loadProperties()
     {
-		return array(
+        return array(
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('productId', 'Identity', null, false, true, false),
             new PropertyInfo('mediaFileCategory', 'string', '', false, false, false),
@@ -24,11 +24,11 @@ class MediaFile extends DataType
             new PropertyInfo('sort', 'string', '', false, false, false),
             new PropertyInfo('type', 'string', '', false, false, false),
             new PropertyInfo('url', 'string', '', false, false, false),
-		);
+        );
     }
 
-	public function isMain()
-	{
-		return false;
-	}
+    public function isMain()
+    {
+        return false;
+    }
 }

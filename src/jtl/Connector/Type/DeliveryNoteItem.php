@@ -16,17 +16,17 @@ class DeliveryNoteItem extends DataType
 {
     protected function loadProperties()
     {
-		return array(
+        return array(
             new PropertyInfo('customerOrderItemId', 'Identity', null, false, true, false),
             new PropertyInfo('deliveryNoteId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('quantity', 'double', 0.0, false, false, false),
             new PropertyInfo('infos', '\jtl\Connector\Model\DeliveryNoteItemInfo', null, false, false, true),
-		);
+        );
     }
 
-	public function isMain()
-	{
-		return false;
-	}
+    public function isMain()
+    {
+        return false;
+    }
 }

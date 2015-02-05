@@ -16,14 +16,14 @@ class ShippingClass extends DataType
 {
     protected function loadProperties()
     {
-		return array(
+        return array(
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('name', 'string', '', false, false, false),
-		);
+        );
     }
 
-	public function isMain()
-	{
-		return false;
-	}
+    public function isMain()
+    {
+        return false;
+    }
 }

@@ -16,16 +16,16 @@ class Image extends DataType
 {
     protected function loadProperties()
     {
-		return array(
+        return array(
             new PropertyInfo('filename', 'string', '', false, false, false),
             new PropertyInfo('foreignKey', 'string', '', false, false, false),
             new PropertyInfo('id', 'string', '', false, false, false),
             new PropertyInfo('imageRelationType', 'string', '', false, false, false),
-		);
+        );
     }
 
-	public function isMain()
-	{
-		return false;
-	}
+    public function isMain()
+    {
+        return false;
+    }
 }

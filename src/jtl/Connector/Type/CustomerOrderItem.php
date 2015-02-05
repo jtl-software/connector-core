@@ -16,7 +16,7 @@ class CustomerOrderItem extends DataType
 {
     protected function loadProperties()
     {
-		return array(
+        return array(
             new PropertyInfo('configItemId', 'Identity', null, false, true, false),
             new PropertyInfo('customerOrderId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
@@ -28,11 +28,11 @@ class CustomerOrderItem extends DataType
             new PropertyInfo('unique', 'string', '', false, false, false),
             new PropertyInfo('vat', 'double', 0.0, false, false, false),
             new PropertyInfo('variations', '\jtl\Connector\Model\CustomerOrderItemVariation', null, false, false, true),
-		);
+        );
     }
 
-	public function isMain()
-	{
-		return false;
-	}
+    public function isMain()
+    {
+        return false;
+    }
 }

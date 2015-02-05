@@ -16,15 +16,15 @@ class ProductSpecialPriceItem extends DataType
 {
     protected function loadProperties()
     {
-		return array(
+        return array(
             new PropertyInfo('customerGroupId', 'Identity', null, true, true, false),
             new PropertyInfo('productSpecialPriceId', 'Identity', null, true, true, false),
             new PropertyInfo('priceNet', 'double', 0.0, false, false, false),
-		);
+        );
     }
 
-	public function isMain()
-	{
-		return false;
-	}
+    public function isMain()
+    {
+        return false;
+    }
 }

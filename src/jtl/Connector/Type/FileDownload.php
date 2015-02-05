@@ -16,7 +16,7 @@ class FileDownload extends DataType
 {
     protected function loadProperties()
     {
-		return array(
+        return array(
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('creationDate', 'DateTime', null, false, false, false),
             new PropertyInfo('maxDays', 'string', '', false, false, false),
@@ -25,11 +25,11 @@ class FileDownload extends DataType
             new PropertyInfo('previewPath', 'string', '', false, false, false),
             new PropertyInfo('sort', 'string', '', false, false, false),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\FileDownloadI18n', null, false, false, true),
-		);
+        );
     }
 
-	public function isMain()
-	{
-		return false;
-	}
+    public function isMain()
+    {
+        return false;
+    }
 }

@@ -16,7 +16,7 @@ class CustomerOrderPaymentInfo extends DataType
 {
     protected function loadProperties()
     {
-		return array(
+        return array(
             new PropertyInfo('customerOrderId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('accountHolder', 'string', '', false, false, false),
@@ -30,11 +30,11 @@ class CustomerOrderPaymentInfo extends DataType
             new PropertyInfo('creditCardType', 'string', '', false, false, false),
             new PropertyInfo('creditCardVerificationNumber', 'string', '', false, false, false),
             new PropertyInfo('iban', 'string', '', false, false, false),
-		);
+        );
     }
 
-	public function isMain()
-	{
-		return false;
-	}
+    public function isMain()
+    {
+        return false;
+    }
 }

@@ -16,7 +16,7 @@ class Shipment extends DataType
 {
     protected function loadProperties()
     {
-		return array(
+        return array(
             new PropertyInfo('deliveryNoteId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('carrierName', 'string', '', false, false, false),
@@ -24,11 +24,11 @@ class Shipment extends DataType
             new PropertyInfo('identCode', 'string', '', false, false, false),
             new PropertyInfo('note', 'string', '', false, false, false),
             new PropertyInfo('trackingUrl', 'string', '', false, false, false),
-		);
+        );
     }
 
-	public function isMain()
-	{
-		return false;
-	}
+    public function isMain()
+    {
+        return false;
+    }
 }

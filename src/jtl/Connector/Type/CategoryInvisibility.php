@@ -16,14 +16,14 @@ class CategoryInvisibility extends DataType
 {
     protected function loadProperties()
     {
-		return array(
+        return array(
             new PropertyInfo('categoryId', 'Identity', null, true, true, false),
             new PropertyInfo('customerGroupId', 'Identity', null, true, true, false),
-		);
+        );
     }
 
-	public function isMain()
-	{
-		return false;
-	}
+    public function isMain()
+    {
+        return false;
+    }
 }

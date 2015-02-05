@@ -16,7 +16,7 @@ class Product extends DataType
 {
     protected function loadProperties()
     {
-		return array(
+        return array(
             new PropertyInfo('basePriceUnitId', 'Identity', null, false, true, false),
             new PropertyInfo('deliveryStatusId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
@@ -85,11 +85,11 @@ class Product extends DataType
             new PropertyInfo('varCombinations', '\jtl\Connector\Model\ProductVarCombination', null, false, false, true),
             new PropertyInfo('variations', '\jtl\Connector\Model\ProductVariation', null, false, false, true),
             new PropertyInfo('warehouseInfos', '\jtl\Connector\Model\ProductWarehouseInfo', null, false, false, true),
-		);
+        );
     }
 
-	public function isMain()
-	{
-		return true;
-	}
+    public function isMain()
+    {
+        return true;
+    }
 }

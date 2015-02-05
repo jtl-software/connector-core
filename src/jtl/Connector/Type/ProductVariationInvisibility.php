@@ -16,14 +16,14 @@ class ProductVariationInvisibility extends DataType
 {
     protected function loadProperties()
     {
-		return array(
+        return array(
             new PropertyInfo('customerGroupId', 'Identity', null, true, true, false),
             new PropertyInfo('productVariationId', 'Identity', null, true, true, false),
-		);
+        );
     }
 
-	public function isMain()
-	{
-		return false;
-	}
+    public function isMain()
+    {
+        return false;
+    }
 }

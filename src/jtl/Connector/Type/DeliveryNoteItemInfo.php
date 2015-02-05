@@ -16,16 +16,16 @@ class DeliveryNoteItemInfo extends DataType
 {
     protected function loadProperties()
     {
-		return array(
+        return array(
             new PropertyInfo('batch', 'string', '', false, false, false),
             new PropertyInfo('bestBefore', 'string', '', false, false, false),
             new PropertyInfo('quantity', 'double', 0.0, false, false, false),
             new PropertyInfo('warehouseId', 'string', '', false, false, false),
-		);
+        );
     }
 
-	public function isMain()
-	{
-		return false;
-	}
+    public function isMain()
+    {
+        return false;
+    }
 }

@@ -16,15 +16,15 @@ class TaxZone extends DataType
 {
     protected function loadProperties()
     {
-		return array(
+        return array(
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('name', 'string', '', false, false, false),
             new PropertyInfo('countries', '\jtl\Connector\Model\TaxZoneCountry', null, false, false, true),
-		);
+        );
     }
 
-	public function isMain()
-	{
-		return false;
-	}
+    public function isMain()
+    {
+        return false;
+    }
 }

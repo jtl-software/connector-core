@@ -16,15 +16,15 @@ class ProductConfigGroup extends DataType
 {
     protected function loadProperties()
     {
-		return array(
+        return array(
             new PropertyInfo('configGroupId', 'Identity', null, false, true, false),
             new PropertyInfo('productId', 'Identity', null, false, true, false),
             new PropertyInfo('sort', 'string', '', false, false, false),
-		);
+        );
     }
 
-	public function isMain()
-	{
-		return false;
-	}
+    public function isMain()
+    {
+        return false;
+    }
 }

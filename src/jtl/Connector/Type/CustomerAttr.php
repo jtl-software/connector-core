@@ -16,15 +16,15 @@ class CustomerAttr extends DataType
 {
     protected function loadProperties()
     {
-		return array(
+        return array(
             new PropertyInfo('customerId', 'string', '', false, false, false),
             new PropertyInfo('key', 'string', '', false, false, false),
             new PropertyInfo('value', 'string', '', false, false, false),
-		);
+        );
     }
 
-	public function isMain()
-	{
-		return false;
-	}
+    public function isMain()
+    {
+        return false;
+    }
 }

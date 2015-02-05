@@ -16,15 +16,15 @@ class CustomerGroupI18n extends DataType
 {
     protected function loadProperties()
     {
-		return array(
+        return array(
             new PropertyInfo('customerGroupId', 'string', '', false, false, false),
             new PropertyInfo('languageISO', 'string', '', false, false, false),
             new PropertyInfo('name', 'string', '', false, false, false),
-		);
+        );
     }
 
-	public function isMain()
-	{
-		return false;
-	}
+    public function isMain()
+    {
+        return false;
+    }
 }
