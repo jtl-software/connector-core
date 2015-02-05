@@ -78,12 +78,11 @@ class ProductVariation extends DataModel
     protected $values = array();
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-		$this->productId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+        $this->productId = new Identity();
+    }
 	
  
     /**

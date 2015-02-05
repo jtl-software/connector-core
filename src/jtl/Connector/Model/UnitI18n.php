@@ -51,11 +51,10 @@ class UnitI18n extends DataModel
     protected $name = '';
 
 
-
-	public function __construct()
-	{
-		$this->unitId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->unitId = new Identity();
+    }
 	
  
     /**

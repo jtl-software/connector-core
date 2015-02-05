@@ -69,14 +69,13 @@ class ProductPrice extends DataModel
     protected $items = array();
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-		$this->productId = new Identity();
-		$this->customerGroupId = new Identity();
-		$this->customerId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+        $this->productId = new Identity();
+        $this->customerGroupId = new Identity();
+        $this->customerId = new Identity();
+    }
 	
  
     /**

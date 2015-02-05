@@ -51,12 +51,11 @@ class ProductConfigGroup extends DataModel
     protected $sort = '';
 
 
-
-	public function __construct()
-	{
-		$this->productId = new Identity();
-		$this->configGroupId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->productId = new Identity();
+        $this->configGroupId = new Identity();
+    }
 	
  
     /**

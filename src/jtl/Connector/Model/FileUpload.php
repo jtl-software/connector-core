@@ -42,12 +42,11 @@ class FileUpload extends DataModel
     protected $productId = null;
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-		$this->productId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+        $this->productId = new Identity();
+    }
 	
  
     /**

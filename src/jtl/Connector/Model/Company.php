@@ -194,11 +194,6 @@ class Company extends DataModel
      */
     protected $zipCode = '';
 
-
-
-	public function __construct()
-	{
-	}
 	
  
     /**

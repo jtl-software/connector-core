@@ -177,14 +177,13 @@ class CustomerOrder extends DataModel
     protected $items = array();
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-		$this->customerId = new Identity();
-		$this->shippingAddressId = new Identity();
-		$this->billingAddressId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+        $this->customerId = new Identity();
+        $this->shippingAddressId = new Identity();
+        $this->billingAddressId = new Identity();
+    }
 	
  
     /**

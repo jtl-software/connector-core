@@ -42,11 +42,10 @@ class Unit extends DataModel
     protected $i18ns = array();
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+    }
 	
  
     /**

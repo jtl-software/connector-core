@@ -123,12 +123,11 @@ class ProductI18n extends DataModel
     protected $urlPath = '';
 
 
-
-	public function __construct()
-	{
-		$this->productId = new Identity();
-		$this->platformId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->productId = new Identity();
+        $this->platformId = new Identity();
+    }
 	
  
     /**

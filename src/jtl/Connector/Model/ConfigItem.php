@@ -176,11 +176,6 @@ class ConfigItem extends DataModel
      */
     protected $prices = array();
 
-
-
-	public function __construct()
-	{
-	}
 	
  
     /**

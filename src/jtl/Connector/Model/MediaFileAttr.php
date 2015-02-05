@@ -69,12 +69,11 @@ class MediaFileAttr extends DataModel
     protected $value = '';
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-		$this->mediaFileId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+        $this->mediaFileId = new Identity();
+    }
 	
  
     /**

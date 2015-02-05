@@ -78,11 +78,10 @@ class ManufacturerI18n extends DataModel
     protected $titleTag = '';
 
 
-
-	public function __construct()
-	{
-		$this->manufacturerId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->manufacturerId = new Identity();
+    }
 	
  
     /**

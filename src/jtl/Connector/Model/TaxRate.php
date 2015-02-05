@@ -69,13 +69,12 @@ class TaxRate extends DataModel
     protected $rate = 0.0;
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-		$this->taxZoneId = new Identity();
-		$this->taxClassId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+        $this->taxZoneId = new Identity();
+        $this->taxClassId = new Identity();
+    }
 	
  
     /**

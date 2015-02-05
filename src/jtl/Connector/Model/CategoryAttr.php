@@ -69,13 +69,12 @@ class CategoryAttr extends DataModel
     protected $i18ns = array();
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-		$this->categoryId = new Identity();
-		$this->attributeId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+        $this->categoryId = new Identity();
+        $this->attributeId = new Identity();
+    }
 	
  
     /**

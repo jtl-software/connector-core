@@ -42,12 +42,11 @@ class ProductVariationValueDependency extends DataModel
     protected $productVariationValueTargetId = null;
 
 
-
-	public function __construct()
-	{
-		$this->productVariationValueId = new Identity();
-		$this->productVariationValueTargetId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->productVariationValueId = new Identity();
+        $this->productVariationValueTargetId = new Identity();
+    }
 	
  
     /**

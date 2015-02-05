@@ -51,11 +51,10 @@ class SpecificI18n extends DataModel
     protected $name = '';
 
 
-
-	public function __construct()
-	{
-		$this->specificId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->specificId = new Identity();
+    }
 	
  
     /**

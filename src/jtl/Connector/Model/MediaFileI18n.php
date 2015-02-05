@@ -60,11 +60,10 @@ class MediaFileI18n extends DataModel
     protected $name = '';
 
 
-
-	public function __construct()
-	{
-		$this->mediaFileId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->mediaFileId = new Identity();
+    }
 	
  
     /**

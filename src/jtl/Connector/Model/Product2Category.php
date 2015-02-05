@@ -51,13 +51,12 @@ class Product2Category extends DataModel
     protected $productId = null;
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-		$this->productId = new Identity();
-		$this->categoryId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+        $this->productId = new Identity();
+        $this->categoryId = new Identity();
+    }
 	
  
     /**

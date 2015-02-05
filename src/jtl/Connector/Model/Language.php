@@ -60,11 +60,10 @@ class Language extends DataModel
     protected $nameGerman = '';
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+    }
 	
  
     /**

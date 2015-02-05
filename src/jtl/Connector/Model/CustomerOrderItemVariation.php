@@ -87,14 +87,13 @@ class CustomerOrderItemVariation extends DataModel
     protected $valueName = '';
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-		$this->productVariationValueId = new Identity();
-		$this->customerOrderItemId = new Identity();
-		$this->productVariationId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+        $this->productVariationValueId = new Identity();
+        $this->customerOrderItemId = new Identity();
+        $this->productVariationId = new Identity();
+    }
 	
  
     /**

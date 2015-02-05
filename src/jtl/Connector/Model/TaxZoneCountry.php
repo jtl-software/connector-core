@@ -42,11 +42,10 @@ class TaxZoneCountry extends DataModel
     protected $countryIso = '';
 
 
-
-	public function __construct()
-	{
-		$this->taxZoneId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->taxZoneId = new Identity();
+    }
 	
  
     /**

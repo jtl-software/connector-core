@@ -59,11 +59,6 @@ class CustomerGroupPackagingQuantities extends DataModel
      */
     protected $productId = '';
 
-
-
-	public function __construct()
-	{
-	}
 	
  
     /**

@@ -58,11 +58,6 @@ class DeliveryNoteItemInfo extends DataModel
      */
     protected $warehouseId = '';
 
-
-
-	public function __construct()
-	{
-	}
 	
  
     /**

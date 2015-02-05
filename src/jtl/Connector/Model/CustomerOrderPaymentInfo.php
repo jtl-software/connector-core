@@ -141,12 +141,11 @@ class CustomerOrderPaymentInfo extends DataModel
     protected $iban = '';
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-		$this->customerOrderId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+        $this->customerOrderId = new Identity();
+    }
 	
  
     /**

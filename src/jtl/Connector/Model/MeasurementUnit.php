@@ -60,11 +60,10 @@ class MeasurementUnit extends DataModel
     protected $i18Ns = array();
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+    }
 	
  
     /**

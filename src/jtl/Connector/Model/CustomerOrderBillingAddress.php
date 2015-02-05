@@ -186,12 +186,11 @@ class CustomerOrderBillingAddress extends DataModel
     protected $zipCode = '';
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-		$this->customerId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+        $this->customerId = new Identity();
+    }
 	
  
     /**

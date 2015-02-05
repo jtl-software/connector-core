@@ -96,11 +96,10 @@ class SpecificValueI18n extends DataModel
     protected $value = '';
 
 
-
-	public function __construct()
-	{
-		$this->specificValueId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->specificValueId = new Identity();
+    }
 	
  
     /**

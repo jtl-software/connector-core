@@ -51,13 +51,12 @@ class ProductSpecific extends DataModel
     protected $specificValueId = null;
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-		$this->specificValueId = new Identity();
-		$this->productId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+        $this->specificValueId = new Identity();
+        $this->productId = new Identity();
+    }
 	
  
     /**

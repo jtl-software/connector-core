@@ -60,12 +60,11 @@ class CustomerOrderAttr extends DataModel
     protected $value = '';
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-		$this->customerOrderId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+        $this->customerOrderId = new Identity();
+    }
 	
  
     /**

@@ -60,11 +60,10 @@ class FileDownloadI18n extends DataModel
     protected $name = '';
 
 
-
-	public function __construct()
-	{
-		$this->fileDownloadId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->fileDownloadId = new Identity();
+    }
 	
  
     /**

@@ -31,11 +31,6 @@ class ProductStockLevel extends DataModel
      */
     protected $stockLevel = 0.0;
 
-
-
-	public function __construct()
-	{
-	}
 	
  
     /**

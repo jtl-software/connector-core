@@ -51,11 +51,10 @@ class TaxZone extends DataModel
     protected $countries = array();
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+    }
 	
  
     /**

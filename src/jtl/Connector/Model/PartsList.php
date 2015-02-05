@@ -51,12 +51,11 @@ class PartsList extends DataModel
     protected $quantity = 0.0;
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-		$this->productId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+        $this->productId = new Identity();
+    }
 	
  
     /**

@@ -51,12 +51,11 @@ class ProductPriceItem extends DataModel
     protected $netPrice = 0.0;
 
 
-
-	public function __construct()
-	{
-		$this->productPriceId = new Identity();
-		$this->quantity = new Identity();
-	}
+    public function __construct()
+    {
+        $this->productPriceId = new Identity();
+        $this->quantity = new Identity();
+    }
 	
  
     /**

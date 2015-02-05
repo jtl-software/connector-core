@@ -87,12 +87,11 @@ class MediaFile extends DataModel
     protected $url = '';
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-		$this->productId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+        $this->productId = new Identity();
+    }
 	
  
     /**

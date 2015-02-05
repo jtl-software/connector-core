@@ -51,12 +51,11 @@ class ProductVarCombination extends DataModel
     protected $productVariationValueId = '';
 
 
-
-	public function __construct()
-	{
-		$this->productId = new Identity();
-		$this->productVariationId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->productId = new Identity();
+        $this->productVariationId = new Identity();
+    }
 	
  
     /**

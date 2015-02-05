@@ -42,12 +42,11 @@ class CategoryInvisibility extends DataModel
     protected $customerGroupId = null;
 
 
-
-	public function __construct()
-	{
-		$this->categoryId = new Identity();
-		$this->customerGroupId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->categoryId = new Identity();
+        $this->customerGroupId = new Identity();
+    }
 	
  
     /**

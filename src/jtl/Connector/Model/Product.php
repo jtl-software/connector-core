@@ -636,20 +636,19 @@ class Product extends DataModel
     protected $warehouseInfos = array();
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-		$this->shippingClassId = new Identity();
-		$this->masterProductId = new Identity();
-		$this->partsListId = new Identity();
-		$this->productTypeId = new Identity();
-		$this->manufacturerId = new Identity();
-		$this->deliveryStatusId = new Identity();
-		$this->measurementUnitId = new Identity();
-		$this->basePriceUnitId = new Identity();
-		$this->unitId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+        $this->shippingClassId = new Identity();
+        $this->masterProductId = new Identity();
+        $this->partsListId = new Identity();
+        $this->productTypeId = new Identity();
+        $this->manufacturerId = new Identity();
+        $this->deliveryStatusId = new Identity();
+        $this->measurementUnitId = new Identity();
+        $this->basePriceUnitId = new Identity();
+        $this->unitId = new Identity();
+    }
 	
  
     /**

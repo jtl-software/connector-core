@@ -51,12 +51,11 @@ class ProductSpecialPriceItem extends DataModel
     protected $priceNet = 0.0;
 
 
-
-	public function __construct()
-	{
-		$this->productSpecialPriceId = new Identity();
-		$this->customerGroupId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->productSpecialPriceId = new Identity();
+        $this->customerGroupId = new Identity();
+    }
 	
  
     /**

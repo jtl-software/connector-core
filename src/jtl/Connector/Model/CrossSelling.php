@@ -50,11 +50,6 @@ class CrossSelling extends DataModel
      */
     protected $productId = '';
 
-
-
-	public function __construct()
-	{
-	}
 	
  
     /**

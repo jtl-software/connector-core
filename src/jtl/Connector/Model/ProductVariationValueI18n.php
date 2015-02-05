@@ -51,11 +51,10 @@ class ProductVariationValueI18n extends DataModel
     protected $name = '';
 
 
-
-	public function __construct()
-	{
-		$this->productVariationValueId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->productVariationValueId = new Identity();
+    }
 	
  
     /**

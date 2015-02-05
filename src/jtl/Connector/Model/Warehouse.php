@@ -42,11 +42,10 @@ class Warehouse extends DataModel
     protected $name = '';
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+    }
 	
  
     /**

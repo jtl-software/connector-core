@@ -166,11 +166,6 @@ class GlobalData extends DataModel
      */
     protected $warehouses = array();
 
-
-
-	public function __construct()
-	{
-	}
 	
  
     /**

@@ -42,12 +42,11 @@ class ProductVariationInvisibility extends DataModel
     protected $productVariationId = null;
 
 
-
-	public function __construct()
-	{
-		$this->productVariationId = new Identity();
-		$this->customerGroupId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->productVariationId = new Identity();
+        $this->customerGroupId = new Identity();
+    }
 	
  
     /**

@@ -60,13 +60,12 @@ class CategoryCustomerGroup extends DataModel
     protected $discount = 0.0;
 
 
-
-	public function __construct()
-	{
-		$this->categoryId = new Identity();
-		$this->customerGroupId = new Identity();
-		$this->connectorId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->categoryId = new Identity();
+        $this->customerGroupId = new Identity();
+        $this->connectorId = new Identity();
+    }
 	
  
     /**

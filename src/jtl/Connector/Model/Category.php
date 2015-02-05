@@ -96,12 +96,11 @@ class Category extends DataModel
     protected $invisibilities = array();
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-		$this->parentCategoryId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+        $this->parentCategoryId = new Identity();
+    }
 	
  
     /**

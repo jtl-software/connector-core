@@ -51,12 +51,11 @@ class ProductVariationValueExtraCharge extends DataModel
     protected $extraChargeNet = 0.0;
 
 
-
-	public function __construct()
-	{
-		$this->productVariationValueId = new Identity();
-		$this->customerGroupId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->productVariationValueId = new Identity();
+        $this->customerGroupId = new Identity();
+    }
 	
  
     /**

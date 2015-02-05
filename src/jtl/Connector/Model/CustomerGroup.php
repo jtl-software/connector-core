@@ -77,11 +77,6 @@ class CustomerGroup extends DataModel
      */
     protected $i18ns = array();
 
-
-
-	public function __construct()
-	{
-	}
 	
  
     /**

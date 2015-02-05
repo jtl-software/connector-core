@@ -51,11 +51,10 @@ class MeasurementUnitI18n extends DataModel
     protected $name = '';
 
 
-
-	public function __construct()
-	{
-		$this->measurementUnitId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->measurementUnitId = new Identity();
+    }
 	
  
     /**

@@ -123,14 +123,13 @@ class CustomerOrderItem extends DataModel
     protected $variations = array();
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-		$this->productId = new Identity();
-		$this->customerOrderId = new Identity();
-		$this->configItemId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+        $this->productId = new Identity();
+        $this->customerOrderId = new Identity();
+        $this->configItemId = new Identity();
+    }
 	
  
     /**

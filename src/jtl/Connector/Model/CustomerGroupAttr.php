@@ -59,11 +59,6 @@ class CustomerGroupAttr extends DataModel
      */
     protected $value = '';
 
-
-
-	public function __construct()
-	{
-	}
 	
  
     /**

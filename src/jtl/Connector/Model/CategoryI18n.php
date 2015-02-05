@@ -96,11 +96,10 @@ class CategoryI18n extends DataModel
     protected $urlPath = '';
 
 
-
-	public function __construct()
-	{
-		$this->categoryId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->categoryId = new Identity();
+    }
 	
  
     /**

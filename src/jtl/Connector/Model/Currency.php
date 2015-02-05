@@ -95,11 +95,6 @@ class Currency extends DataModel
      */
     protected $nameHtml = '';
 
-
-
-	public function __construct()
-	{
-	}
 	
  
     /**

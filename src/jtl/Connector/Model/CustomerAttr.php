@@ -50,11 +50,6 @@ class CustomerAttr extends DataModel
      */
     protected $value = '';
 
-
-
-	public function __construct()
-	{
-	}
 	
  
     /**

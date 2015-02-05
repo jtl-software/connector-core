@@ -59,11 +59,6 @@ class ConfigItemPrice extends DataModel
      */
     protected $type = '';
 
-
-
-	public function __construct()
-	{
-	}
 	
  
     /**

@@ -58,11 +58,6 @@ class Image extends DataModel
      */
     protected $imageRelationType = '';
 
-
-
-	public function __construct()
-	{
-	}
 	
  
     /**

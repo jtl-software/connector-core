@@ -60,12 +60,11 @@ class ProductWarehouseInfo extends DataModel
     protected $stockLevel = 0.0;
 
 
-
-	public function __construct()
-	{
-		$this->productId = new Identity();
-		$this->warehouseId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->productId = new Identity();
+        $this->warehouseId = new Identity();
+    }
 	
  
     /**

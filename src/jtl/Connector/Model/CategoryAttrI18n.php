@@ -59,11 +59,10 @@ class CategoryAttrI18n extends DataModel
     protected $value = '';
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+    }
 	
  
     /**

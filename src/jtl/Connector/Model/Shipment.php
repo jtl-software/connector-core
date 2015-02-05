@@ -87,12 +87,11 @@ class Shipment extends DataModel
     protected $trackingUrl = '';
 
 
-
-	public function __construct()
-	{
-		$this->id = new Identity();
-		$this->deliveryNoteId = new Identity();
-	}
+    public function __construct()
+    {
+        $this->id = new Identity();
+        $this->deliveryNoteId = new Identity();
+    }
 	
  
     /**

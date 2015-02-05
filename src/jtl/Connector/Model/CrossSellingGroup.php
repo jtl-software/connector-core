@@ -59,11 +59,6 @@ class CrossSellingGroup extends DataModel
      */
     protected $name = '';
 
-
-
-	public function __construct()
-	{
-	}
 	
  
     /**
