@@ -22,41 +22,51 @@ use JMS\Serializer\Annotation as Serializer;
 class CrossSelling extends DataModel
 {
     /**
-     * @var string Reference to crossSellingGroup
-     * @Serializer\Type("string")
+     * @var Identity Reference to crossSellingGroup
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("crossSellingGroupId")
      * @Serializer\Accessor(getter="getCrossSellingGroupId",setter="setCrossSellingGroupId")
      */
-    protected $crossSellingGroupId = '';
+    protected $crossSellingGroupId = null;
 
     /**
-     * @var string Unique crossSelling id
-     * @Serializer\Type("string")
+     * @var Identity Unique crossSelling id
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
-    protected $id = '';
+    protected $id = null;
 
     /**
-     * @var string Reference to product (main product)
-     * @Serializer\Type("string")
+     * @var Identity Reference to product (main product)
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected $productId = '';
-
+    protected $productId = null;
 
     /**
-     * @param string $crossSellingGroupId Reference to crossSellingGroup
-     * @return \jtl\Connector\Model\CrossSelling
+     * Constructor
      */
-    public function setCrossSellingGroupId($crossSellingGroupId)
+    public function __construct()
     {
-        return $this->setProperty('crossSellingGroupId', $crossSellingGroupId, 'string');
+        $this->id = new Identity();
+        $this->productId = new Identity();
+        $this->crossSellingGroupId = new Identity();
     }
 
     /**
-     * @return string Reference to crossSellingGroup
+     * @param Identity $crossSellingGroupId Reference to crossSellingGroup
+     * @return \jtl\Connector\Model\CrossSelling
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCrossSellingGroupId(Identity $crossSellingGroupId)
+    {
+        return $this->setProperty('crossSellingGroupId', $crossSellingGroupId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to crossSellingGroup
      */
     public function getCrossSellingGroupId()
     {
@@ -64,16 +74,17 @@ class CrossSelling extends DataModel
     }
 
     /**
-     * @param string $id Unique crossSelling id
+     * @param Identity $id Unique crossSelling id
      * @return \jtl\Connector\Model\CrossSelling
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'string');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
-     * @return string Unique crossSelling id
+     * @return Identity Unique crossSelling id
      */
     public function getId()
     {
@@ -81,16 +92,17 @@ class CrossSelling extends DataModel
     }
 
     /**
-     * @param string $productId Reference to product (main product)
+     * @param Identity $productId Reference to product (main product)
      * @return \jtl\Connector\Model\CrossSelling
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId($productId)
+    public function setProductId(Identity $productId)
     {
-        return $this->setProperty('productId', $productId, 'string');
+        return $this->setProperty('productId', $productId, 'Identity');
     }
 
     /**
-     * @return string Reference to product (main product)
+     * @return Identity Reference to product (main product)
      */
     public function getProductId()
     {

@@ -22,20 +22,20 @@ use JMS\Serializer\Annotation as Serializer;
 class CrossSellingGroup extends DataModel
 {
     /**
+     * @var Identity crossSellingGroup id
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
+     */
+    protected $id = null;
+
+    /**
      * @var string Optional localized description
      * @Serializer\Type("string")
      * @Serializer\SerializedName("description")
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
-
-    /**
-     * @var string crossSellingGroup id
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = '';
 
     /**
      * @var string Locale
@@ -53,6 +53,31 @@ class CrossSellingGroup extends DataModel
      */
     protected $name = '';
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->id = new Identity();
+    }
+
+    /**
+     * @param Identity $id crossSellingGroup id
+     * @return \jtl\Connector\Model\CrossSellingGroup
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setId(Identity $id)
+    {
+        return $this->setProperty('id', $id, 'Identity');
+    }
+
+    /**
+     * @return Identity crossSellingGroup id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @param string $description Optional localized description
@@ -69,23 +94,6 @@ class CrossSellingGroup extends DataModel
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * @param string $id crossSellingGroup id
-     * @return \jtl\Connector\Model\CrossSellingGroup
-     */
-    public function setId($id)
-    {
-        return $this->setProperty('id', $id, 'string');
-    }
-
-    /**
-     * @return string crossSellingGroup id
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
