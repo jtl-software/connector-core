@@ -22,44 +22,44 @@ use JMS\Serializer\Annotation as Serializer;
 class ConfigItem extends DataModel
 {
     /**
-     * @var string Reference to configGroup
-     * @Serializer\Type("string")
+     * @var Identity Reference to configGroup
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("configGroupId")
      * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
      */
-    protected $configGroupId = '';
+    protected $configGroupId = null;
 
     /**
-     * @var string Unique configItem id
-     * @Serializer\Type("string")
+     * @var Identity Unique configItem id
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
-    protected $id = '';
+    protected $id = null;
 
     /**
-     * @var string Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
-     * @Serializer\Type("string")
+     * @var integer Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("ignoreMultiplier")
      * @Serializer\Accessor(getter="getIgnoreMultiplier",setter="setIgnoreMultiplier")
      */
-    protected $ignoreMultiplier = '';
+    protected $ignoreMultiplier = 0;
 
     /**
-     * @var string Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
-     * @Serializer\Type("string")
+     * @var integer Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("inheritProductName")
      * @Serializer\Accessor(getter="getInheritProductName",setter="setInheritProductName")
      */
-    protected $inheritProductName = '';
+    protected $inheritProductName = 0;
 
     /**
-     * @var string Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
-     * @Serializer\Type("string")
+     * @var integer Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("inheritProductPrice")
      * @Serializer\Accessor(getter="getInheritProductPrice",setter="setInheritProductPrice")
      */
-    protected $inheritProductPrice = '';
+    protected $inheritProductPrice = 0;
 
     /**
      * @var double Optional initial / predefined quantity. Default is one (1) quantity piece. 
@@ -70,20 +70,20 @@ class ConfigItem extends DataModel
     protected $initialQuantity = 0.0;
 
     /**
-     * @var string Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
-     * @Serializer\Type("string")
+     * @var integer Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("isPreSelected")
      * @Serializer\Accessor(getter="getIsPreSelected",setter="setIsPreSelected")
      */
-    protected $isPreSelected = '';
+    protected $isPreSelected = 0;
 
     /**
-     * @var string Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
-     * @Serializer\Type("string")
+     * @var integer Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("isRecommended")
      * @Serializer\Accessor(getter="getIsRecommended",setter="setIsRecommended")
      */
-    protected $isRecommended = '';
+    protected $isRecommended = 0;
 
     /**
      * @var double Maximum allowed quantity. Default 0 for no maximum limit. 
@@ -102,44 +102,44 @@ class ConfigItem extends DataModel
     protected $minQuantity = 0.0;
 
     /**
-     * @var string Optional reference to product
-     * @Serializer\Type("string")
+     * @var integer Optional reference to product
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected $productId = '';
+    protected $productId = 0;
 
     /**
-     * @var string Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
-     * @Serializer\Type("string")
+     * @var integer Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("showDiscount")
      * @Serializer\Accessor(getter="getShowDiscount",setter="setShowDiscount")
      */
-    protected $showDiscount = '';
+    protected $showDiscount = 0;
 
     /**
-     * @var string Optional: Show surcharge compared to productId price.
-     * @Serializer\Type("string")
+     * @var integer Optional: Show surcharge compared to productId price.
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("showSurcharge")
      * @Serializer\Accessor(getter="getShowSurcharge",setter="setShowSurcharge")
      */
-    protected $showSurcharge = '';
+    protected $showSurcharge = 0;
 
     /**
-     * @var string Optional sort order number
-     * @Serializer\Type("string")
+     * @var integer Optional sort order number
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = '';
+    protected $sort = 0;
 
     /**
-     * @var string Config item type. 0: Product, 1: Special
-     * @Serializer\Type("string")
+     * @var integer Config item type. 0: Product, 1: Special
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
-    protected $type = '';
+    protected $type = 0;
 
     /**
      * @var jtl\Connector\Model\ConfigItemI18n[] 
@@ -157,18 +157,27 @@ class ConfigItem extends DataModel
      */
     protected $prices = array();
 
-
     /**
-     * @param string $configGroupId Reference to configGroup
-     * @return \jtl\Connector\Model\ConfigItem
+     * Constructor
      */
-    public function setConfigGroupId($configGroupId)
+    public function __construct()
     {
-        return $this->setProperty('configGroupId', $configGroupId, 'string');
+        $this->id = new Identity();
+        $this->configGroupId = new Identity();
     }
 
     /**
-     * @return string Reference to configGroup
+     * @param Identity $configGroupId Reference to configGroup
+     * @return \jtl\Connector\Model\ConfigItem
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setConfigGroupId(Identity $configGroupId)
+    {
+        return $this->setProperty('configGroupId', $configGroupId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to configGroup
      */
     public function getConfigGroupId()
     {
@@ -176,16 +185,17 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @param string $id Unique configItem id
+     * @param Identity $id Unique configItem id
      * @return \jtl\Connector\Model\ConfigItem
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'string');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
-     * @return string Unique configItem id
+     * @return Identity Unique configItem id
      */
     public function getId()
     {
@@ -193,16 +203,17 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @param string $ignoreMultiplier Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
+     * @param integer $ignoreMultiplier Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
      * @return \jtl\Connector\Model\ConfigItem
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setIgnoreMultiplier($ignoreMultiplier)
+    public function setIgnoreMultiplier(integer $ignoreMultiplier)
     {
-        return $this->setProperty('ignoreMultiplier', $ignoreMultiplier, 'string');
+        return $this->setProperty('ignoreMultiplier', $ignoreMultiplier, 'integer');
     }
 
     /**
-     * @return string Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
+     * @return integer Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
      */
     public function getIgnoreMultiplier()
     {
@@ -210,16 +221,17 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @param string $inheritProductName Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
+     * @param integer $inheritProductName Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
      * @return \jtl\Connector\Model\ConfigItem
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setInheritProductName($inheritProductName)
+    public function setInheritProductName(integer $inheritProductName)
     {
-        return $this->setProperty('inheritProductName', $inheritProductName, 'string');
+        return $this->setProperty('inheritProductName', $inheritProductName, 'integer');
     }
 
     /**
-     * @return string Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
+     * @return integer Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
      */
     public function getInheritProductName()
     {
@@ -227,16 +239,17 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @param string $inheritProductPrice Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
+     * @param integer $inheritProductPrice Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
      * @return \jtl\Connector\Model\ConfigItem
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setInheritProductPrice($inheritProductPrice)
+    public function setInheritProductPrice(integer $inheritProductPrice)
     {
-        return $this->setProperty('inheritProductPrice', $inheritProductPrice, 'string');
+        return $this->setProperty('inheritProductPrice', $inheritProductPrice, 'integer');
     }
 
     /**
-     * @return string Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
+     * @return integer Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
      */
     public function getInheritProductPrice()
     {
@@ -261,16 +274,17 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @param string $isPreSelected Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
+     * @param integer $isPreSelected Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
      * @return \jtl\Connector\Model\ConfigItem
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setIsPreSelected($isPreSelected)
+    public function setIsPreSelected(integer $isPreSelected)
     {
-        return $this->setProperty('isPreSelected', $isPreSelected, 'string');
+        return $this->setProperty('isPreSelected', $isPreSelected, 'integer');
     }
 
     /**
-     * @return string Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
+     * @return integer Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
      */
     public function getIsPreSelected()
     {
@@ -278,16 +292,17 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @param string $isRecommended Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
+     * @param integer $isRecommended Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
      * @return \jtl\Connector\Model\ConfigItem
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setIsRecommended($isRecommended)
+    public function setIsRecommended(integer $isRecommended)
     {
-        return $this->setProperty('isRecommended', $isRecommended, 'string');
+        return $this->setProperty('isRecommended', $isRecommended, 'integer');
     }
 
     /**
-     * @return string Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
+     * @return integer Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
      */
     public function getIsRecommended()
     {
@@ -329,16 +344,17 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @param string $productId Optional reference to product
+     * @param integer $productId Optional reference to product
      * @return \jtl\Connector\Model\ConfigItem
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setProductId($productId)
+    public function setProductId(integer $productId)
     {
-        return $this->setProperty('productId', $productId, 'string');
+        return $this->setProperty('productId', $productId, 'integer');
     }
 
     /**
-     * @return string Optional reference to product
+     * @return integer Optional reference to product
      */
     public function getProductId()
     {
@@ -346,16 +362,17 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @param string $showDiscount Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
+     * @param integer $showDiscount Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
      * @return \jtl\Connector\Model\ConfigItem
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setShowDiscount($showDiscount)
+    public function setShowDiscount(integer $showDiscount)
     {
-        return $this->setProperty('showDiscount', $showDiscount, 'string');
+        return $this->setProperty('showDiscount', $showDiscount, 'integer');
     }
 
     /**
-     * @return string Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
+     * @return integer Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
      */
     public function getShowDiscount()
     {
@@ -363,16 +380,17 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @param string $showSurcharge Optional: Show surcharge compared to productId price.
+     * @param integer $showSurcharge Optional: Show surcharge compared to productId price.
      * @return \jtl\Connector\Model\ConfigItem
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setShowSurcharge($showSurcharge)
+    public function setShowSurcharge(integer $showSurcharge)
     {
-        return $this->setProperty('showSurcharge', $showSurcharge, 'string');
+        return $this->setProperty('showSurcharge', $showSurcharge, 'integer');
     }
 
     /**
-     * @return string Optional: Show surcharge compared to productId price.
+     * @return integer Optional: Show surcharge compared to productId price.
      */
     public function getShowSurcharge()
     {
@@ -380,16 +398,17 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @param string $sort Optional sort order number
+     * @param integer $sort Optional sort order number
      * @return \jtl\Connector\Model\ConfigItem
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setSort($sort)
+    public function setSort(integer $sort)
     {
-        return $this->setProperty('sort', $sort, 'string');
+        return $this->setProperty('sort', $sort, 'integer');
     }
 
     /**
-     * @return string Optional sort order number
+     * @return integer Optional sort order number
      */
     public function getSort()
     {
@@ -397,16 +416,17 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @param string $type Config item type. 0: Product, 1: Special
+     * @param integer $type Config item type. 0: Product, 1: Special
      * @return \jtl\Connector\Model\ConfigItem
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setType($type)
+    public function setType(integer $type)
     {
-        return $this->setProperty('type', $type, 'string');
+        return $this->setProperty('type', $type, 'integer');
     }
 
     /**
-     * @return string Config item type. 0: Product, 1: Special
+     * @return integer Config item type. 0: Product, 1: Special
      */
     public function getType()
     {

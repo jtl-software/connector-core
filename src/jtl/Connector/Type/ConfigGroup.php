@@ -17,13 +17,13 @@ class ConfigGroup extends DataType
     protected function loadProperties()
     {
         return array(
+            new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('comment', 'string', '', false, false, false),
-            new PropertyInfo('id', 'string', '', false, false, false),
             new PropertyInfo('imagePath', 'string', '', false, false, false),
-            new PropertyInfo('maximumSelection', 'string', '', false, false, false),
-            new PropertyInfo('minimumSelection', 'string', '', false, false, false),
-            new PropertyInfo('sort', 'string', '', false, false, false),
-            new PropertyInfo('type', 'string', '', false, false, false),
+            new PropertyInfo('maximumSelection', 'integer', 0, false, false, false),
+            new PropertyInfo('minimumSelection', 'integer', 0, false, false, false),
+            new PropertyInfo('sort', 'integer', 0, false, false, false),
+            new PropertyInfo('type', 'integer', 0, false, false, false),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\ConfigGroupI18n', null, false, false, true),
         );
     }

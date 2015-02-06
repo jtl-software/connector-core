@@ -18,8 +18,8 @@ class Image extends DataType
     {
         return array(
             new PropertyInfo('filename', 'string', '', false, false, false),
-            new PropertyInfo('foreignKey', 'string', '', false, false, false),
-            new PropertyInfo('id', 'string', '', false, false, false),
+            new PropertyInfo('foreignKey', 'integer', 0, false, false, false),
+            new PropertyInfo('id', 'integer', 0, false, false, false),
             new PropertyInfo('relationType', 'string', '', false, false, false),
         );
     }

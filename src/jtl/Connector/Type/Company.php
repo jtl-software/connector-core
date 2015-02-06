@@ -17,6 +17,7 @@ class Company extends DataType
     protected function loadProperties()
     {
         return array(
+            new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('accountHolder', 'string', '', false, false, false),
             new PropertyInfo('accountNumber', 'string', '', false, false, false),
             new PropertyInfo('bankCode', 'string', '', false, false, false),
@@ -28,7 +29,6 @@ class Company extends DataType
             new PropertyInfo('eMail', 'string', '', false, false, false),
             new PropertyInfo('fax', 'string', '', false, false, false),
             new PropertyInfo('iban', 'string', '', false, false, false),
-            new PropertyInfo('id', 'string', '', false, false, false),
             new PropertyInfo('name', 'string', '', false, false, false),
             new PropertyInfo('phone', 'string', '', false, false, false),
             new PropertyInfo('street', 'string', '', false, false, false),

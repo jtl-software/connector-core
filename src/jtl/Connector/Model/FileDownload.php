@@ -38,20 +38,20 @@ class FileDownload extends DataModel
     protected $creationDate = null;
 
     /**
-     * @var string Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
-     * @Serializer\Type("string")
+     * @var integer Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("maxDays")
      * @Serializer\Accessor(getter="getMaxDays",setter="setMaxDays")
      */
-    protected $maxDays = '';
+    protected $maxDays = 0;
 
     /**
-     * @var string Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
-     * @Serializer\Type("string")
+     * @var integer Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("maxDownloads")
      * @Serializer\Accessor(getter="getMaxDownloads",setter="setMaxDownloads")
      */
-    protected $maxDownloads = '';
+    protected $maxDownloads = 0;
 
     /**
      * @var string Path to download file
@@ -70,12 +70,12 @@ class FileDownload extends DataModel
     protected $previewPath = '';
 
     /**
-     * @var string Optional sort number
-     * @Serializer\Type("string")
+     * @var integer Optional sort number
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = '';
+    protected $sort = 0;
 
     /**
      * @var jtl\Connector\Model\FileDownloadI18n[] 
@@ -130,16 +130,17 @@ class FileDownload extends DataModel
     }
 
     /**
-     * @param string $maxDays Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
+     * @param integer $maxDays Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
      * @return \jtl\Connector\Model\FileDownload
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setMaxDays($maxDays)
+    public function setMaxDays(integer $maxDays)
     {
-        return $this->setProperty('maxDays', $maxDays, 'string');
+        return $this->setProperty('maxDays', $maxDays, 'integer');
     }
 
     /**
-     * @return string Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
+     * @return integer Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
      */
     public function getMaxDays()
     {
@@ -147,16 +148,17 @@ class FileDownload extends DataModel
     }
 
     /**
-     * @param string $maxDownloads Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
+     * @param integer $maxDownloads Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
      * @return \jtl\Connector\Model\FileDownload
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setMaxDownloads($maxDownloads)
+    public function setMaxDownloads(integer $maxDownloads)
     {
-        return $this->setProperty('maxDownloads', $maxDownloads, 'string');
+        return $this->setProperty('maxDownloads', $maxDownloads, 'integer');
     }
 
     /**
-     * @return string Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
+     * @return integer Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
      */
     public function getMaxDownloads()
     {
@@ -198,16 +200,17 @@ class FileDownload extends DataModel
     }
 
     /**
-     * @param string $sort Optional sort number
+     * @param integer $sort Optional sort number
      * @return \jtl\Connector\Model\FileDownload
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setSort($sort)
+    public function setSort(integer $sort)
     {
-        return $this->setProperty('sort', $sort, 'string');
+        return $this->setProperty('sort', $sort, 'integer');
     }
 
     /**
-     * @return string Optional sort number
+     * @return integer Optional sort number
      */
     public function getSort()
     {

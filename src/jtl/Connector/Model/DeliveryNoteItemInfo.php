@@ -45,12 +45,12 @@ class DeliveryNoteItemInfo extends DataModel
     protected $quantity = 0.0;
 
     /**
-     * @var string 
-     * @Serializer\Type("string")
+     * @var integer 
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("warehouseId")
      * @Serializer\Accessor(getter="getWarehouseId",setter="setWarehouseId")
      */
-    protected $warehouseId = '';
+    protected $warehouseId = 0;
 
 
     /**
@@ -105,16 +105,17 @@ class DeliveryNoteItemInfo extends DataModel
     }
 
     /**
-     * @param string $warehouseId 
+     * @param integer $warehouseId 
      * @return \jtl\Connector\Model\DeliveryNoteItemInfo
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setWarehouseId($warehouseId)
+    public function setWarehouseId(integer $warehouseId)
     {
-        return $this->setProperty('warehouseId', $warehouseId, 'string');
+        return $this->setProperty('warehouseId', $warehouseId, 'integer');
     }
 
     /**
-     * @return string 
+     * @return integer 
      */
     public function getWarehouseId()
     {

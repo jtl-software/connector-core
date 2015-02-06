@@ -19,7 +19,7 @@ class ProductConfigGroup extends DataType
         return array(
             new PropertyInfo('configGroupId', 'Identity', null, false, true, false),
             new PropertyInfo('productId', 'Identity', null, false, true, false),
-            new PropertyInfo('sort', 'string', '', false, false, false),
+            new PropertyInfo('sort', 'integer', 0, false, false, false),
         );
     }
 

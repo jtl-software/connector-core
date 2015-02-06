@@ -134,12 +134,12 @@ class Product extends DataModel
     protected $basePriceQuantity = 0.0;
 
     /**
-     * @var string Optional summary
-     * @Serializer\Type("string")
+     * @var integer Optional summary
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("buffer")
      * @Serializer\Accessor(getter="getBuffer",setter="setBuffer")
      */
-    protected $buffer = '';
+    protected $buffer = 0;
 
     /**
      * @var boolean Optional: Set to true to display base price / unit pricing measure
@@ -398,12 +398,12 @@ class Product extends DataModel
     protected $sku = '';
 
     /**
-     * @var string Optional sort number for product sorting in lists
-     * @Serializer\Type("string")
+     * @var integer Optional sort number for product sorting in lists
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = '';
+    protected $sort = 0;
 
     /**
      * @var string 
@@ -832,16 +832,17 @@ class Product extends DataModel
     }
 
     /**
-     * @param string $buffer Optional summary
+     * @param integer $buffer Optional summary
      * @return \jtl\Connector\Model\Product
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setBuffer($buffer)
+    public function setBuffer(integer $buffer)
     {
-        return $this->setProperty('buffer', $buffer, 'string');
+        return $this->setProperty('buffer', $buffer, 'integer');
     }
 
     /**
-     * @return string Optional summary
+     * @return integer Optional summary
      */
     public function getBuffer()
     {
@@ -1407,16 +1408,17 @@ class Product extends DataModel
     }
 
     /**
-     * @param string $sort Optional sort number for product sorting in lists
+     * @param integer $sort Optional sort number for product sorting in lists
      * @return \jtl\Connector\Model\Product
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setSort($sort)
+    public function setSort(integer $sort)
     {
-        return $this->setProperty('sort', $sort, 'string');
+        return $this->setProperty('sort', $sort, 'integer');
     }
 
     /**
-     * @return string Optional sort number for product sorting in lists
+     * @return integer Optional sort number for product sorting in lists
      */
     public function getSort()
     {

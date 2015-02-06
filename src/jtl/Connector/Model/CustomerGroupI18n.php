@@ -22,12 +22,12 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerGroupI18n extends DataModel
 {
     /**
-     * @var string Reference to customerGroup
-     * @Serializer\Type("string")
+     * @var Identity Reference to customerGroup
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
-    protected $customerGroupId = '';
+    protected $customerGroupId = null;
 
     /**
      * @var string Locale
@@ -45,18 +45,26 @@ class CustomerGroupI18n extends DataModel
      */
     protected $name = '';
 
-
     /**
-     * @param string $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\CustomerGroupI18n
+     * Constructor
      */
-    public function setCustomerGroupId($customerGroupId)
+    public function __construct()
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'string');
+        $this->customerGroupId = new Identity();
     }
 
     /**
-     * @return string Reference to customerGroup
+     * @param Identity $customerGroupId Reference to customerGroup
+     * @return \jtl\Connector\Model\CustomerGroupI18n
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerGroupId(Identity $customerGroupId)
+    {
+        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to customerGroup
      */
     public function getCustomerGroupId()
     {

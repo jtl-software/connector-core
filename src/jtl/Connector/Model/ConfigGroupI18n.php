@@ -22,12 +22,12 @@ use JMS\Serializer\Annotation as Serializer;
 class ConfigGroupI18n extends DataModel
 {
     /**
-     * @var string Reference to configGroup
-     * @Serializer\Type("string")
+     * @var Identity Reference to configGroup
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("configGroupId")
      * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
      */
-    protected $configGroupId = '';
+    protected $configGroupId = null;
 
     /**
      * @var string Optional description (HTML)
@@ -53,18 +53,26 @@ class ConfigGroupI18n extends DataModel
      */
     protected $name = '';
 
-
     /**
-     * @param string $configGroupId Reference to configGroup
-     * @return \jtl\Connector\Model\ConfigGroupI18n
+     * Constructor
      */
-    public function setConfigGroupId($configGroupId)
+    public function __construct()
     {
-        return $this->setProperty('configGroupId', $configGroupId, 'string');
+        $this->configGroupId = new Identity();
     }
 
     /**
-     * @return string Reference to configGroup
+     * @param Identity $configGroupId Reference to configGroup
+     * @return \jtl\Connector\Model\ConfigGroupI18n
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setConfigGroupId(Identity $configGroupId)
+    {
+        return $this->setProperty('configGroupId', $configGroupId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to configGroup
      */
     public function getConfigGroupId()
     {

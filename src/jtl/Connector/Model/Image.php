@@ -29,20 +29,20 @@ class Image extends DataModel
     protected $filename = '';
 
     /**
-     * @var string 
-     * @Serializer\Type("string")
+     * @var integer 
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("foreignKey")
      * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
      */
-    protected $foreignKey = '';
+    protected $foreignKey = 0;
 
     /**
-     * @var string 
-     * @Serializer\Type("string")
+     * @var integer 
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
-    protected $id = '';
+    protected $id = 0;
 
     /**
      * @var string 
@@ -71,16 +71,17 @@ class Image extends DataModel
     }
 
     /**
-     * @param string $foreignKey 
+     * @param integer $foreignKey 
      * @return \jtl\Connector\Model\Image
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setForeignKey($foreignKey)
+    public function setForeignKey(integer $foreignKey)
     {
-        return $this->setProperty('foreignKey', $foreignKey, 'string');
+        return $this->setProperty('foreignKey', $foreignKey, 'integer');
     }
 
     /**
-     * @return string 
+     * @return integer 
      */
     public function getForeignKey()
     {
@@ -88,16 +89,17 @@ class Image extends DataModel
     }
 
     /**
-     * @param string $id 
+     * @param integer $id 
      * @return \jtl\Connector\Model\Image
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setId($id)
+    public function setId(integer $id)
     {
-        return $this->setProperty('id', $id, 'string');
+        return $this->setProperty('id', $id, 'integer');
     }
 
     /**
-     * @return string 
+     * @return integer 
      */
     public function getId()
     {

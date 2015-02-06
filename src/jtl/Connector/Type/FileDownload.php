@@ -19,11 +19,11 @@ class FileDownload extends DataType
         return array(
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('creationDate', 'DateTime', null, false, false, false),
-            new PropertyInfo('maxDays', 'string', '', false, false, false),
-            new PropertyInfo('maxDownloads', 'string', '', false, false, false),
+            new PropertyInfo('maxDays', 'integer', 0, false, false, false),
+            new PropertyInfo('maxDownloads', 'integer', 0, false, false, false),
             new PropertyInfo('path', 'string', '', false, false, false),
             new PropertyInfo('previewPath', 'string', '', false, false, false),
-            new PropertyInfo('sort', 'string', '', false, false, false),
+            new PropertyInfo('sort', 'integer', 0, false, false, false),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\FileDownloadI18n', null, false, false, true),
         );
     }

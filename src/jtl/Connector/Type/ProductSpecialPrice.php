@@ -24,7 +24,7 @@ class ProductSpecialPrice extends DataType
             new PropertyInfo('considerDateLimit', 'boolean', false, false, false, false),
             new PropertyInfo('considerStockLimit', 'boolean', false, false, false, false),
             new PropertyInfo('isActive', 'boolean', false, false, false, false),
-            new PropertyInfo('stockLimit', 'string', '', false, false, false),
+            new PropertyInfo('stockLimit', 'integer', 0, false, false, false),
             new PropertyInfo('items', '\jtl\Connector\Model\ProductSpecialPriceItem', null, false, false, true),
         );
     }

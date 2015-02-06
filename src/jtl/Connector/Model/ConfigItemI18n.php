@@ -22,12 +22,12 @@ use JMS\Serializer\Annotation as Serializer;
 class ConfigItemI18n extends DataModel
 {
     /**
-     * @var string Reference to configItem
-     * @Serializer\Type("string")
+     * @var Identity Reference to configItem
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("configItemId")
      * @Serializer\Accessor(getter="getConfigItemId",setter="setConfigItemId")
      */
-    protected $configItemId = '';
+    protected $configItemId = null;
 
     /**
      * @var string Description (html). Will be ignored, if inheritProductName==true
@@ -53,18 +53,26 @@ class ConfigItemI18n extends DataModel
      */
     protected $name = '';
 
-
     /**
-     * @param string $configItemId Reference to configItem
-     * @return \jtl\Connector\Model\ConfigItemI18n
+     * Constructor
      */
-    public function setConfigItemId($configItemId)
+    public function __construct()
     {
-        return $this->setProperty('configItemId', $configItemId, 'string');
+        $this->configItemId = new Identity();
     }
 
     /**
-     * @return string Reference to configItem
+     * @param Identity $configItemId Reference to configItem
+     * @return \jtl\Connector\Model\ConfigItemI18n
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setConfigItemId(Identity $configItemId)
+    {
+        return $this->setProperty('configItemId', $configItemId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to configItem
      */
     public function getConfigItemId()
     {

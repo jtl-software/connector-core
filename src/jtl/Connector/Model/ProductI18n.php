@@ -38,12 +38,12 @@ class ProductI18n extends DataModel
     protected $productId = null;
 
     /**
-     * @var string 
-     * @Serializer\Type("string")
+     * @var integer 
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("connectorId")
      * @Serializer\Accessor(getter="getConnectorId",setter="setConnectorId")
      */
-    protected $connectorId = '';
+    protected $connectorId = 0;
 
     /**
      * @var string Optional product description
@@ -155,16 +155,17 @@ class ProductI18n extends DataModel
     }
 
     /**
-     * @param string $connectorId 
+     * @param integer $connectorId 
      * @return \jtl\Connector\Model\ProductI18n
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setConnectorId($connectorId)
+    public function setConnectorId(integer $connectorId)
     {
-        return $this->setProperty('connectorId', $connectorId, 'string');
+        return $this->setProperty('connectorId', $connectorId, 'integer');
     }
 
     /**
-     * @return string 
+     * @return integer 
      */
     public function getConnectorId()
     {

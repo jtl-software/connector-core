@@ -17,7 +17,7 @@ class CustomerGroupI18n extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('customerGroupId', 'string', '', false, false, false),
+            new PropertyInfo('customerGroupId', 'Identity', null, true, true, false),
             new PropertyInfo('languageISO', 'string', '', false, false, false),
             new PropertyInfo('name', 'string', '', false, false, false),
         );

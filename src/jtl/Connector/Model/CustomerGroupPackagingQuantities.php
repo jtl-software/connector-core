@@ -22,12 +22,12 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerGroupPackagingQuantities extends DataModel
 {
     /**
-     * @var string Reference to customergroup.
-     * @Serializer\Type("string")
+     * @var integer Reference to customergroup.
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("customergroupID")
      * @Serializer\Accessor(getter="getCustomergroupID",setter="setCustomergroupID")
      */
-    protected $customergroupID = '';
+    protected $customergroupID = 0;
 
     /**
      * @var double Contains the minimum quantity for a customergroup.
@@ -46,25 +46,26 @@ class CustomerGroupPackagingQuantities extends DataModel
     protected $packagingQuantity = 0.0;
 
     /**
-     * @var string Reference to product.
-     * @Serializer\Type("string")
+     * @var integer Reference to product.
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected $productId = '';
+    protected $productId = 0;
 
 
     /**
-     * @param string $customergroupID Reference to customergroup.
+     * @param integer $customergroupID Reference to customergroup.
      * @return \jtl\Connector\Model\CustomerGroupPackagingQuantities
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setCustomergroupID($customergroupID)
+    public function setCustomergroupID(integer $customergroupID)
     {
-        return $this->setProperty('customergroupID', $customergroupID, 'string');
+        return $this->setProperty('customergroupID', $customergroupID, 'integer');
     }
 
     /**
-     * @return string Reference to customergroup.
+     * @return integer Reference to customergroup.
      */
     public function getCustomergroupID()
     {
@@ -106,16 +107,17 @@ class CustomerGroupPackagingQuantities extends DataModel
     }
 
     /**
-     * @param string $productId Reference to product.
+     * @param integer $productId Reference to product.
      * @return \jtl\Connector\Model\CustomerGroupPackagingQuantities
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setProductId($productId)
+    public function setProductId(integer $productId)
     {
-        return $this->setProperty('productId', $productId, 'string');
+        return $this->setProperty('productId', $productId, 'integer');
     }
 
     /**
-     * @return string Reference to product.
+     * @return integer Reference to product.
      */
     public function getProductId()
     {

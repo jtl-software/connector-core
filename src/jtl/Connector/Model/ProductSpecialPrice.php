@@ -78,12 +78,12 @@ class ProductSpecialPrice extends DataModel
     protected $isActive = false;
 
     /**
-     * @var string Optional: SpecialPrice active until stock level quantity
-     * @Serializer\Type("string")
+     * @var integer Optional: SpecialPrice active until stock level quantity
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("stockLimit")
      * @Serializer\Accessor(getter="getStockLimit",setter="setStockLimit")
      */
-    protected $stockLimit = '';
+    protected $stockLimit = 0;
 
     /**
      * @var jtl\Connector\Model\ProductSpecialPriceItem[] 
@@ -229,16 +229,17 @@ class ProductSpecialPrice extends DataModel
     }
 
     /**
-     * @param string $stockLimit Optional: SpecialPrice active until stock level quantity
+     * @param integer $stockLimit Optional: SpecialPrice active until stock level quantity
      * @return \jtl\Connector\Model\ProductSpecialPrice
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setStockLimit($stockLimit)
+    public function setStockLimit(integer $stockLimit)
     {
-        return $this->setProperty('stockLimit', $stockLimit, 'string');
+        return $this->setProperty('stockLimit', $stockLimit, 'integer');
     }
 
     /**
-     * @return string Optional: SpecialPrice active until stock level quantity
+     * @return integer Optional: SpecialPrice active until stock level quantity
      */
     public function getStockLimit()
     {

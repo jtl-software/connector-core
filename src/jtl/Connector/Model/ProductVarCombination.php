@@ -38,12 +38,12 @@ class ProductVarCombination extends DataModel
     protected $productVariationId = null;
 
     /**
-     * @var string Reference to productVariationValue
-     * @Serializer\Type("string")
+     * @var integer Reference to productVariationValue
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("productVariationValueId")
      * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
      */
-    protected $productVariationValueId = '';
+    protected $productVariationValueId = 0;
 
     /**
      * Constructor
@@ -91,16 +91,17 @@ class ProductVarCombination extends DataModel
     }
 
     /**
-     * @param string $productVariationValueId Reference to productVariationValue
+     * @param integer $productVariationValueId Reference to productVariationValue
      * @return \jtl\Connector\Model\ProductVarCombination
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setProductVariationValueId($productVariationValueId)
+    public function setProductVariationValueId(integer $productVariationValueId)
     {
-        return $this->setProperty('productVariationValueId', $productVariationValueId, 'string');
+        return $this->setProperty('productVariationValueId', $productVariationValueId, 'integer');
     }
 
     /**
-     * @return string Reference to productVariationValue
+     * @return integer Reference to productVariationValue
      */
     public function getProductVariationValueId()
     {

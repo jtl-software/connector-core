@@ -38,12 +38,12 @@ class ProductVariation extends DataModel
     protected $productId = null;
 
     /**
-     * @var string Optional sort number
-     * @Serializer\Type("string")
+     * @var integer Optional sort number
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = '';
+    protected $sort = 0;
 
     /**
      * @var jtl\Connector\Model\ProductVariationI18n[] 
@@ -115,16 +115,17 @@ class ProductVariation extends DataModel
     }
 
     /**
-     * @param string $sort Optional sort number
+     * @param integer $sort Optional sort number
      * @return \jtl\Connector\Model\ProductVariation
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setSort($sort)
+    public function setSort(integer $sort)
     {
-        return $this->setProperty('sort', $sort, 'string');
+        return $this->setProperty('sort', $sort, 'integer');
     }
 
     /**
-     * @return string Optional sort number
+     * @return integer Optional sort number
      */
     public function getSort()
     {

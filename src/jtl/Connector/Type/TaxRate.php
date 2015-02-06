@@ -20,7 +20,7 @@ class TaxRate extends DataType
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('taxClassId', 'Identity', null, false, true, false),
             new PropertyInfo('taxZoneId', 'Identity', null, false, true, false),
-            new PropertyInfo('priority', 'string', '', false, false, false),
+            new PropertyInfo('priority', 'integer', 0, false, false, false),
             new PropertyInfo('rate', 'double', 0.0, false, false, false),
         );
     }

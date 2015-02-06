@@ -22,20 +22,20 @@ use JMS\Serializer\Annotation as Serializer;
 class ConfigItemPrice extends DataModel
 {
     /**
-     * @var string Reference to configItem
-     * @Serializer\Type("string")
+     * @var Identity Reference to configItem
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("configItemId")
      * @Serializer\Accessor(getter="getConfigItemId",setter="setConfigItemId")
      */
-    protected $configItemId = '';
+    protected $configItemId = null;
 
     /**
-     * @var string Reference to customerGroup
-     * @Serializer\Type("string")
+     * @var Identity Reference to customerGroup
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
-    protected $customerGroupId = '';
+    protected $customerGroupId = null;
 
     /**
      * @var double Net price or percental value to add/deduct to/from product price (depending on type). Positive value means surcharge, negative value means discount. Also see configItem.vat for value added tax.
@@ -46,25 +46,34 @@ class ConfigItemPrice extends DataModel
     protected $price = 0.0;
 
     /**
-     * @var string Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
-     * @Serializer\Type("string")
+     * @var integer Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
-    protected $type = '';
-
+    protected $type = 0;
 
     /**
-     * @param string $configItemId Reference to configItem
-     * @return \jtl\Connector\Model\ConfigItemPrice
+     * Constructor
      */
-    public function setConfigItemId($configItemId)
+    public function __construct()
     {
-        return $this->setProperty('configItemId', $configItemId, 'string');
+        $this->configItemId = new Identity();
+        $this->customerGroupId = new Identity();
     }
 
     /**
-     * @return string Reference to configItem
+     * @param Identity $configItemId Reference to configItem
+     * @return \jtl\Connector\Model\ConfigItemPrice
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setConfigItemId(Identity $configItemId)
+    {
+        return $this->setProperty('configItemId', $configItemId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to configItem
      */
     public function getConfigItemId()
     {
@@ -72,16 +81,17 @@ class ConfigItemPrice extends DataModel
     }
 
     /**
-     * @param string $customerGroupId Reference to customerGroup
+     * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ConfigItemPrice
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerGroupId($customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'string');
+        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
     }
 
     /**
-     * @return string Reference to customerGroup
+     * @return Identity Reference to customerGroup
      */
     public function getCustomerGroupId()
     {
@@ -106,16 +116,17 @@ class ConfigItemPrice extends DataModel
     }
 
     /**
-     * @param string $type Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
+     * @param integer $type Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
      * @return \jtl\Connector\Model\ConfigItemPrice
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setType($type)
+    public function setType(integer $type)
     {
-        return $this->setProperty('type', $type, 'string');
+        return $this->setProperty('type', $type, 'integer');
     }
 
     /**
-     * @return string Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
+     * @return integer Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
      */
     public function getType()
     {

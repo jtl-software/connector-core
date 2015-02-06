@@ -22,6 +22,14 @@ use JMS\Serializer\Annotation as Serializer;
 class Currency extends DataModel
 {
     /**
+     * @var Identity Unique currency id
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
+     */
+    protected $id = null;
+
+    /**
      * @var string Optional delimiter char for cent, default=",". Ignore this flag if you have the correct user locale preference.
      * @Serializer\Type("string")
      * @Serializer\SerializedName("delimiterCent")
@@ -54,14 +62,6 @@ class Currency extends DataModel
     protected $hasCurrencySignBeforeValue = false;
 
     /**
-     * @var string Unique currency id
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = '';
-
-    /**
      * @var boolean Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default. 
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isDefault")
@@ -85,6 +85,31 @@ class Currency extends DataModel
      */
     protected $nameHtml = '';
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->id = new Identity();
+    }
+
+    /**
+     * @param Identity $id Unique currency id
+     * @return \jtl\Connector\Model\Currency
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setId(Identity $id)
+    {
+        return $this->setProperty('id', $id, 'Identity');
+    }
+
+    /**
+     * @return Identity Unique currency id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @param string $delimiterCent Optional delimiter char for cent, default=",". Ignore this flag if you have the correct user locale preference.
@@ -153,23 +178,6 @@ class Currency extends DataModel
     public function getHasCurrencySignBeforeValue()
     {
         return $this->hasCurrencySignBeforeValue;
-    }
-
-    /**
-     * @param string $id Unique currency id
-     * @return \jtl\Connector\Model\Currency
-     */
-    public function setId($id)
-    {
-        return $this->setProperty('id', $id, 'string');
-    }
-
-    /**
-     * @return string Unique currency id
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

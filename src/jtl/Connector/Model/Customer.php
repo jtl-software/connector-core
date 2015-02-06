@@ -22,6 +22,14 @@ use JMS\Serializer\Annotation as Serializer;
 class Customer extends DataModel
 {
     /**
+     * @var Identity Unique customer id
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
+     */
+    protected $id = null;
+
+    /**
      * @var string Date of birth
      * @Serializer\Type("string")
      * @Serializer\SerializedName("birthday")
@@ -62,12 +70,12 @@ class Customer extends DataModel
     protected $creationDate = null;
 
     /**
-     * @var string References a customer group
-     * @Serializer\Type("string")
+     * @var integer References a customer group
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
-    protected $customerGroupId = '';
+    protected $customerGroupId = 0;
 
     /**
      * @var string Optional customer number set by JTL-Wawi ERP software
@@ -132,14 +140,6 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getHasNewsletterSubscription",setter="setHasNewsletterSubscription")
      */
     protected $hasNewsletterSubscription = false;
-
-    /**
-     * @var string Unique customer id
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = '';
 
     /**
      * @var boolean Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
@@ -253,6 +253,31 @@ class Customer extends DataModel
      */
     protected $attributes = array();
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->id = new Identity();
+    }
+
+    /**
+     * @param Identity $id Unique customer id
+     * @return \jtl\Connector\Model\Customer
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setId(Identity $id)
+    {
+        return $this->setProperty('id', $id, 'Identity');
+    }
+
+    /**
+     * @return Identity Unique customer id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @param string $birthday Date of birth
@@ -341,16 +366,17 @@ class Customer extends DataModel
     }
 
     /**
-     * @param string $customerGroupId References a customer group
+     * @param integer $customerGroupId References a customer group
      * @return \jtl\Connector\Model\Customer
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setCustomerGroupId($customerGroupId)
+    public function setCustomerGroupId(integer $customerGroupId)
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'string');
+        return $this->setProperty('customerGroupId', $customerGroupId, 'integer');
     }
 
     /**
-     * @return string References a customer group
+     * @return integer References a customer group
      */
     public function getCustomerGroupId()
     {
@@ -492,23 +518,6 @@ class Customer extends DataModel
     public function getHasNewsletterSubscription()
     {
         return $this->hasNewsletterSubscription;
-    }
-
-    /**
-     * @param string $id Unique customer id
-     * @return \jtl\Connector\Model\Customer
-     */
-    public function setId($id)
-    {
-        return $this->setProperty('id', $id, 'string');
-    }
-
-    /**
-     * @return string Unique customer id
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

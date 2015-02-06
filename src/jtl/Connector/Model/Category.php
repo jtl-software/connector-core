@@ -46,12 +46,12 @@ class Category extends DataModel
     protected $isActive = false;
 
     /**
-     * @var string Optional sort order number
-     * @Serializer\Type("string")
+     * @var integer Optional sort order number
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = '';
+    protected $sort = 0;
 
     /**
      * @var jtl\Connector\Model\CategoryAttr[] 
@@ -149,16 +149,17 @@ class Category extends DataModel
     }
 
     /**
-     * @param string $sort Optional sort order number
+     * @param integer $sort Optional sort order number
      * @return \jtl\Connector\Model\Category
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setSort($sort)
+    public function setSort(integer $sort)
     {
-        return $this->setProperty('sort', $sort, 'string');
+        return $this->setProperty('sort', $sort, 'integer');
     }
 
     /**
-     * @return string Optional sort order number
+     * @return integer Optional sort order number
      */
     public function getSort()
     {

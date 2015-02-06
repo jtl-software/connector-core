@@ -46,12 +46,12 @@ class TaxRate extends DataModel
     protected $taxZoneId = null;
 
     /**
-     * @var string Optional priority number. Higher value means higher priority
-     * @Serializer\Type("string")
+     * @var integer Optional priority number. Higher value means higher priority
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("priority")
      * @Serializer\Accessor(getter="getPriority",setter="setPriority")
      */
-    protected $priority = '';
+    protected $priority = 0;
 
     /**
      * @var double Tax rate value e.g. 19.00
@@ -126,16 +126,17 @@ class TaxRate extends DataModel
     }
 
     /**
-     * @param string $priority Optional priority number. Higher value means higher priority
+     * @param integer $priority Optional priority number. Higher value means higher priority
      * @return \jtl\Connector\Model\TaxRate
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setPriority($priority)
+    public function setPriority(integer $priority)
     {
-        return $this->setProperty('priority', $priority, 'string');
+        return $this->setProperty('priority', $priority, 'integer');
     }
 
     /**
-     * @return string Optional priority number. Higher value means higher priority
+     * @return integer Optional priority number. Higher value means higher priority
      */
     public function getPriority()
     {

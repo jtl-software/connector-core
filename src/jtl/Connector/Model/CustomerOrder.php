@@ -126,12 +126,12 @@ class CustomerOrder extends DataModel
     protected $shippingInfo = '';
 
     /**
-     * @var string Identifier code for shippingMethod
-     * @Serializer\Type("string")
+     * @var integer Identifier code for shippingMethod
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("shippingMethodCode")
      * @Serializer\Accessor(getter="getShippingMethodCode",setter="setShippingMethodCode")
      */
-    protected $shippingMethodCode = '';
+    protected $shippingMethodCode = 0;
 
     /**
      * @var string Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
@@ -397,16 +397,17 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param string $shippingMethodCode Identifier code for shippingMethod
+     * @param integer $shippingMethodCode Identifier code for shippingMethod
      * @return \jtl\Connector\Model\CustomerOrder
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setShippingMethodCode($shippingMethodCode)
+    public function setShippingMethodCode(integer $shippingMethodCode)
     {
-        return $this->setProperty('shippingMethodCode', $shippingMethodCode, 'string');
+        return $this->setProperty('shippingMethodCode', $shippingMethodCode, 'integer');
     }
 
     /**
-     * @return string Identifier code for shippingMethod
+     * @return integer Identifier code for shippingMethod
      */
     public function getShippingMethodCode()
     {

@@ -30,20 +30,20 @@ class Specific extends DataModel
     protected $id = null;
 
     /**
-     * @var string Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
-     * @Serializer\Type("string")
+     * @var integer Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("isGlobal")
      * @Serializer\Accessor(getter="getIsGlobal",setter="setIsGlobal")
      */
-    protected $isGlobal = '';
+    protected $isGlobal = 0;
 
     /**
-     * @var string Optional sort number
-     * @Serializer\Type("string")
+     * @var integer Optional sort number
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = '';
+    protected $sort = 0;
 
     /**
      * @var string Specific type (radio, dropdown, image...)
@@ -96,16 +96,17 @@ class Specific extends DataModel
     }
 
     /**
-     * @param string $isGlobal Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
+     * @param integer $isGlobal Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      * @return \jtl\Connector\Model\Specific
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setIsGlobal($isGlobal)
+    public function setIsGlobal(integer $isGlobal)
     {
-        return $this->setProperty('isGlobal', $isGlobal, 'string');
+        return $this->setProperty('isGlobal', $isGlobal, 'integer');
     }
 
     /**
-     * @return string Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
+     * @return integer Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      */
     public function getIsGlobal()
     {
@@ -113,16 +114,17 @@ class Specific extends DataModel
     }
 
     /**
-     * @param string $sort Optional sort number
+     * @param integer $sort Optional sort number
      * @return \jtl\Connector\Model\Specific
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setSort($sort)
+    public function setSort(integer $sort)
     {
-        return $this->setProperty('sort', $sort, 'string');
+        return $this->setProperty('sort', $sort, 'integer');
     }
 
     /**
-     * @return string Optional sort number
+     * @return integer Optional sort number
      */
     public function getSort()
     {

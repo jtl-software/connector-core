@@ -22,20 +22,20 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerGroupAttr extends DataModel
 {
     /**
-     * @var string Reference to customerGroup
-     * @Serializer\Type("string")
+     * @var Identity Reference to customerGroup
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
-    protected $customerGroupId = '';
+    protected $customerGroupId = null;
 
     /**
-     * @var string Unique customerGroupAttr id
-     * @Serializer\Type("string")
+     * @var Identity Unique customerGroupAttr id
+     * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
-    protected $id = '';
+    protected $id = null;
 
     /**
      * @var string Attribute key
@@ -53,18 +53,27 @@ class CustomerGroupAttr extends DataModel
      */
     protected $value = '';
 
-
     /**
-     * @param string $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\CustomerGroupAttr
+     * Constructor
      */
-    public function setCustomerGroupId($customerGroupId)
+    public function __construct()
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'string');
+        $this->id = new Identity();
+        $this->customerGroupId = new Identity();
     }
 
     /**
-     * @return string Reference to customerGroup
+     * @param Identity $customerGroupId Reference to customerGroup
+     * @return \jtl\Connector\Model\CustomerGroupAttr
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerGroupId(Identity $customerGroupId)
+    {
+        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to customerGroup
      */
     public function getCustomerGroupId()
     {
@@ -72,16 +81,17 @@ class CustomerGroupAttr extends DataModel
     }
 
     /**
-     * @param string $id Unique customerGroupAttr id
+     * @param Identity $id Unique customerGroupAttr id
      * @return \jtl\Connector\Model\CustomerGroupAttr
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId($id)
+    public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'string');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
-     * @return string Unique customerGroupAttr id
+     * @return Identity Unique customerGroupAttr id
      */
     public function getId()
     {

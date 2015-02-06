@@ -17,10 +17,10 @@ class CustomerGroupPackagingQuantities extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('customergroupID', 'string', '', false, false, false),
+            new PropertyInfo('customergroupID', 'integer', 0, false, false, false),
             new PropertyInfo('minimumOrderQuantity', 'double', 0.0, false, false, false),
             new PropertyInfo('packagingQuantity', 'double', 0.0, false, false, false),
-            new PropertyInfo('productId', 'string', '', false, false, false),
+            new PropertyInfo('productId', 'integer', 0, false, false, false),
         );
     }
 

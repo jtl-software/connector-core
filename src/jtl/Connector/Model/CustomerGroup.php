@@ -22,6 +22,14 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerGroup extends DataModel
 {
     /**
+     * @var Identity Unique customerGroup id
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
+     */
+    protected $id = null;
+
+    /**
      * @var boolean Optional: Show net prices default instead of gross prices
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("applyNetPrice")
@@ -36,14 +44,6 @@ class CustomerGroup extends DataModel
      * @Serializer\Accessor(getter="getDiscount",setter="setDiscount")
      */
     protected $discount = 0.0;
-
-    /**
-     * @var string Unique customerGroup id
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = '';
 
     /**
      * @var boolean Optional: Flag default customer group
@@ -69,6 +69,31 @@ class CustomerGroup extends DataModel
      */
     protected $i18ns = array();
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->id = new Identity();
+    }
+
+    /**
+     * @param Identity $id Unique customerGroup id
+     * @return \jtl\Connector\Model\CustomerGroup
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setId(Identity $id)
+    {
+        return $this->setProperty('id', $id, 'Identity');
+    }
+
+    /**
+     * @return Identity Unique customerGroup id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @param boolean $applyNetPrice Optional: Show net prices default instead of gross prices
@@ -103,23 +128,6 @@ class CustomerGroup extends DataModel
     public function getDiscount()
     {
         return $this->discount;
-    }
-
-    /**
-     * @param string $id Unique customerGroup id
-     * @return \jtl\Connector\Model\CustomerGroup
-     */
-    public function setId($id)
-    {
-        return $this->setProperty('id', $id, 'string');
-    }
-
-    /**
-     * @return string Unique customerGroup id
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
