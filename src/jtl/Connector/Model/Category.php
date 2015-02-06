@@ -46,6 +46,14 @@ class Category extends DataModel
     protected $isActive = false;
 
     /**
+     * @var integer 
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("level")
+     * @Serializer\Accessor(getter="getLevel",setter="setLevel")
+     */
+    protected $level = 0;
+
+    /**
      * @var integer Optional sort order number
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
@@ -146,6 +154,24 @@ class Category extends DataModel
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * @param integer $level 
+     * @return \jtl\Connector\Model\Category
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
+     */
+    public function setLevel(integer $level)
+    {
+        return $this->setProperty('level', $level, 'integer');
+    }
+
+    /**
+     * @return integer 
+     */
+    public function getLevel()
+    {
+        return $this->level;
     }
 
     /**

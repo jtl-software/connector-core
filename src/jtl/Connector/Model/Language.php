@@ -38,6 +38,14 @@ class Language extends DataModel
     protected $isDefault = false;
 
     /**
+     * @var string 
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("languageISO")
+     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
+     */
+    protected $languageISO = '';
+
+    /**
      * @var string English term
      * @Serializer\Type("string")
      * @Serializer\SerializedName("nameEnglish")
@@ -95,6 +103,23 @@ class Language extends DataModel
     public function getIsDefault()
     {
         return $this->isDefault;
+    }
+
+    /**
+     * @param string $languageISO 
+     * @return \jtl\Connector\Model\Language
+     */
+    public function setLanguageISO($languageISO)
+    {
+        return $this->setProperty('languageISO', $languageISO, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getLanguageISO()
+    {
+        return $this->languageISO;
     }
 
     /**
