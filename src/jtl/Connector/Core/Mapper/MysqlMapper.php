@@ -238,13 +238,8 @@ abstract class MysqlMapper extends Singleton implements IMapper
     public function limitSql(QueryFilter $filter = null)
     {
         $limit = "";
-        if ($filter !== null && $filter->isLimit()) {
-            $offset = 0;
-            if ($filter->isOffset()) {
-                $offset = $filter->getOffset();
-            }
-        
-            $limit = "LIMIT {$offset}, {$filter->getLimit()}";
+        if ($filter !== null && $filter->isLimit()) {        
+            $limit = "LIMIT {$filter->getLimit()}";
         }
         
         return $limit;
