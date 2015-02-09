@@ -173,13 +173,15 @@ class Application extends CoreApplication
                 if ($actionresult->isHandled()) {
 
                     // Identity mapping
-                    $results = array();
-                    foreach ($actionresult->getResult() as $model) {
-                        $identityLinker->linkModel($model);
-                        $results[] = $model->getPublic();
-                    }
+                    if ($requestpacket->getMethod() == Method::ACTION_PULL) {
+                        $results = array();
+                        foreach ($actionresult->getResult() as $model) {
+                            $identityLinker->linkModel($model);
+                            $results[] = $model->getPublic();
+                        }
 
-                    $actionresult->setResult($results);
+                        $actionresult->setResult($results);
+                    }
 
                     $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
 
@@ -297,7 +299,7 @@ class Application extends CoreApplication
         $namespace = ($method->getAction() == Method::ACTION_PUSH) ?
             sprintf('%s\%s', $modelNamespace, RpcMethod::buildController($method->getController())) : 'jtl\Connector\Core\Model\QueryFilter';
 
-        if (class_exists("\\{$namespace}")) {
+        if (class_exists("\\{$namespace}") && $requestpacket->getParams() !== null) {
             $serializer = \JMS\Serializer\SerializerBuilder::create()
                 ->addDefaultHandlers()
                 ->configureHandlers(function (\JMS\Serializer\Handler\HandlerRegistry $registry) {
