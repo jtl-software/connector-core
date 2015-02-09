@@ -21,14 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
 class GlobalData extends DataModel
 {
     /**
-     * @var string 
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("company")
-     * @Serializer\Accessor(getter="getCompany",setter="setCompany")
-     */
-    protected $company = '';
-
-    /**
      * @var jtl\Connector\Model\ConfigGroup[] 
      * @Serializer\Type("array<jtl\Connector\Model\ConfigGroup>")
      * @Serializer\SerializedName("configGroups")
@@ -148,23 +140,6 @@ class GlobalData extends DataModel
      */
     protected $warehouses = array();
 
-
-    /**
-     * @param string $company 
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function setCompany($company)
-    {
-        return $this->setProperty('company', $company, 'string');
-    }
-
-    /**
-     * @return string 
-     */
-    public function getCompany()
-    {
-        return $this->company;
-    }
 
     /**
      * @param \jtl\Connector\Model\ConfigGroup $configGroup

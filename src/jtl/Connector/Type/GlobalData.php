@@ -17,7 +17,6 @@ class GlobalData extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('company', 'string', '', false, false, false),
             new PropertyInfo('configGroups', '\jtl\Connector\Model\ConfigGroup', null, false, false, true),
             new PropertyInfo('configItems', '\jtl\Connector\Model\ConfigItem', null, false, false, true),
             new PropertyInfo('crossSellingGroups', '\jtl\Connector\Model\CrossSellingGroup', null, false, false, true),
