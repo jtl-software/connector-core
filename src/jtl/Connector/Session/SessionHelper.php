@@ -10,7 +10,7 @@ use \jtl\Connector\Core\Exception\SessionException;
 
 class SessionHelper
 {
-    protected $_namespace;
+    protected $namespace;
     
     /**
      * Constructor
@@ -32,7 +32,7 @@ class SessionHelper
             throw new SessionException("Session namespace must not start with a number.");
         }
         
-        $this->_namespace = $namespace;
+        $this->namespace = $namespace;
     }
     
     /**
@@ -49,7 +49,7 @@ class SessionHelper
         }
         
         $name = (string)$name;
-        $_SESSION[$this->_namespace][$name] = $value;
+        $_SESSION[$this->namespace][$name] = $value;
     }
     
     /**
@@ -66,8 +66,8 @@ class SessionHelper
         }
         
         $name = (string)$name;
-        if (isset($_SESSION[$this->_namespace][$name])) {
-            return $_SESSION[$this->_namespace][$name];
+        if (isset($_SESSION[$this->namespace][$name])) {
+            return $_SESSION[$this->namespace][$name];
         }
         
         return null;
@@ -87,7 +87,7 @@ class SessionHelper
         
         $name = (string)$name;
         
-        return isset($_SESSION[$this->_namespace][$name]);
+        return isset($_SESSION[$this->namespace][$name]);
     }
     
     /**
@@ -102,8 +102,8 @@ class SessionHelper
         }
         
         $name = (string)$name;
-        if (isset($_SESSION[$this->_namespace][$name])) {
-            unset($_SESSION[$this->_namespace][$name]);
+        if (isset($_SESSION[$this->namespace][$name])) {
+            unset($_SESSION[$this->namespace][$name]);
         }
     }
 }

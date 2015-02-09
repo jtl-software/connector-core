@@ -18,6 +18,11 @@ use \jtl\Connector\Mapper\IPrimaryKeyMapper;
 interface IEndpointConnector
 {
     /**
+     * Main initialize method
+     */
+    public function initialize();
+
+    /**
      * Setter primary key mapper
      */
     public function setPrimaryKeyMapper(IPrimaryKeyMapper $mapper);

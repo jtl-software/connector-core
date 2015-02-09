@@ -28,6 +28,11 @@ class Connector extends Singleton implements IEndpointConnector
     protected $method;
     protected $modelNamespace = 'jtl\Connector\Model';
 
+    public function initialize()
+    {
+        
+    }
+
     /**
      * Setter primary key mapper
      *

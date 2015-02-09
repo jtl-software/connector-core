@@ -88,6 +88,9 @@ class Application extends CoreApplication
         $this->startSession($sessionId, $method);
         $this->startConfiguration();
 
+        // Initialize Endpoint
+        self::$connector->initialize();
+
         switch ($rpcmode) {
             case Packet::SINGLE_MODE:
                 $this->runSingle($requestpackets, $this->config, $rpcmode);
