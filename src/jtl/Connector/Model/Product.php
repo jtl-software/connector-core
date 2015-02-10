@@ -438,6 +438,14 @@ class Product extends DataModel
     protected $upc = '';
 
     /**
+     * @var double 
+     * @Serializer\Type("double")
+     * @Serializer\SerializedName("vat")
+     * @Serializer\Accessor(getter="getVat",setter="setVat")
+     */
+    protected $vat = 0.0;
+
+    /**
      * @var double Optional product width
      * @Serializer\Type("double")
      * @Serializer\SerializedName("width")
@@ -510,8 +518,8 @@ class Product extends DataModel
     protected $mediaFiles = array();
 
     /**
-     * @var jtl\Connector\Model\PartsList[] 
-     * @Serializer\Type("array<jtl\Connector\Model\PartsList>")
+     * @var jtl\Connector\Model\ProductPartsList[] 
+     * @Serializer\Type("array<jtl\Connector\Model\ProductPartsList>")
      * @Serializer\SerializedName("partsLists")
      * @Serializer\AccessType("reflection")
      */
@@ -1494,6 +1502,23 @@ class Product extends DataModel
     }
 
     /**
+     * @param double $vat 
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setVat($vat)
+    {
+        return $this->setProperty('vat', $vat, 'double');
+    }
+
+    /**
+     * @return double 
+     */
+    public function getVat()
+    {
+        return $this->vat;
+    }
+
+    /**
      * @param double $width Optional product width
      * @return \jtl\Connector\Model\Product
      */
@@ -1727,17 +1752,17 @@ class Product extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\PartsList $partsList
+     * @param \jtl\Connector\Model\ProductPartsList $partsList
      * @return \jtl\Connector\Model\Product
      */
-    public function addPartsList(\jtl\Connector\Model\PartsList $partsList)
+    public function addPartsList(\jtl\Connector\Model\ProductPartsList $partsList)
     {
         $this->partsLists[] = $partsList;
         return $this;
     }
     
     /**
-     * @return jtl\Connector\Model\PartsList[]
+     * @return jtl\Connector\Model\ProductPartsList[]
      */
     public function getPartsLists()
     {
