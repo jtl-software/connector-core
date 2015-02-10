@@ -12,6 +12,7 @@ class Method
 {
     const ACTION_PULL = 'pull';
     const ACTION_PUSH = 'push';
+    const ACTION_DELETE = 'delete';
 
     /**
      * Rcp Method
