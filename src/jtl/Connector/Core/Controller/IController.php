@@ -37,12 +37,4 @@ interface IController
      * @return \jtl\Connector\Result\Action
      */
     public function statistic(QueryFilter $queryFilter);
-
-    /**
-     * Identify
-     *
-     * @param \jtl\Connector\Core\Model\QueryFilter $queryFilter
-     * @return \jtl\Connector\Result\Action
-     */
-    public function identify(QueryFilter $queryFilter);
 }
