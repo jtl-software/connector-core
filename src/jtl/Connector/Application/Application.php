@@ -173,7 +173,7 @@ class Application extends CoreApplication
                 if ($actionresult->isHandled()) {
 
                     // Identity mapping
-                    if ($requestpacket->getMethod() == Method::ACTION_PULL) {
+                    if ($method->getAction() == Method::ACTION_PULL) {
                         $results = array();
                         foreach ($actionresult->getResult() as $model) {
                             $identityLinker->linkModel($model);
