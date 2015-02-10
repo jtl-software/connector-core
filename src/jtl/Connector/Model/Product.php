@@ -310,6 +310,14 @@ class Product extends DataModel
     protected $measurementQuantity = 0.0;
 
     /**
+     * @var double 
+     * @Serializer\Type("double")
+     * @Serializer\SerializedName("minimumOrderQuantity")
+     * @Serializer\Accessor(getter="getMinimumOrderQuantity",setter="setMinimumOrderQuantity")
+     */
+    protected $minimumOrderQuantity = 0.0;
+
+    /**
      * @var DateTime Contains the date of the next available inflow.
      * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("nextAvailableInflowDate")
@@ -1224,6 +1232,23 @@ class Product extends DataModel
     public function getMeasurementQuantity()
     {
         return $this->measurementQuantity;
+    }
+
+    /**
+     * @param double $minimumOrderQuantity 
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setMinimumOrderQuantity($minimumOrderQuantity)
+    {
+        return $this->setProperty('minimumOrderQuantity', $minimumOrderQuantity, 'double');
+    }
+
+    /**
+     * @return double 
+     */
+    public function getMinimumOrderQuantity()
+    {
+        return $this->minimumOrderQuantity;
     }
 
     /**

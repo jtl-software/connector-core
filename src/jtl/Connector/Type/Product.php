@@ -53,6 +53,7 @@ class Product extends DataType
             new PropertyInfo('length', 'double', 0.0, false, false, false),
             new PropertyInfo('manufacturerNumber', 'string', '', false, false, false),
             new PropertyInfo('measurementQuantity', 'double', 0.0, false, false, false),
+            new PropertyInfo('minimumOrderQuantity', 'double', 0.0, false, false, false),
             new PropertyInfo('nextAvailableInflowDate', 'DateTime', null, false, false, false),
             new PropertyInfo('nextAvailableInflowQuantity', 'double', 0.0, false, false, false),
             new PropertyInfo('note', 'string', '', false, false, false),
