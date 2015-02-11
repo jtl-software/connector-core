@@ -20,7 +20,7 @@ class Image extends DataType
             new PropertyInfo('foreignKey', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, false, true, false),
             new PropertyInfo('filename', 'string', '', false, false, false),
-            new PropertyInfo('relationType', 'string', '', false, false, false),
+            new PropertyInfo('relationType', 'ImageRelationType', '', false, false, false),
         );
     }
 

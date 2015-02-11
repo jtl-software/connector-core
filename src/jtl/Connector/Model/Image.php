@@ -45,7 +45,7 @@ class Image extends DataModel
     protected $filename = '';
 
     /**
-     * @var string 
+     * @var ImageRelationType 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("relationType")
      * @Serializer\Accessor(getter="getRelationType",setter="setRelationType")
@@ -115,10 +115,11 @@ class Image extends DataModel
     }
 
     /**
-     * @param string $relationType 
+     * @param ImageRelationType $relationType 
      * @return \jtl\Connector\Model\Image
+     * @throws \InvalidArgumentException if the provided argument is not of type 'ImageRelationType'.
      */
-    public function setRelationType($relationType)
+    public function setRelationType(ImageRelationType $relationType)
     {
         return $this->setProperty('relationType', $relationType, 'string');
     }

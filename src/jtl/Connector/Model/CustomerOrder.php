@@ -54,7 +54,7 @@ class CustomerOrder extends DataModel
     protected $shippingAddressId = null;
 
     /**
-     * @var string 
+     * @var CustomerOrderBillingAddress 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("billingAddress")
      * @Serializer\Accessor(getter="getBillingAddress",setter="setBillingAddress")
@@ -94,7 +94,7 @@ class CustomerOrder extends DataModel
     protected $paymentDate = null;
 
     /**
-     * @var string 
+     * @var CustomerOrderPaymentInfo 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("paymentInfo")
      * @Serializer\Accessor(getter="getPaymentInfo",setter="setPaymentInfo")
@@ -102,7 +102,7 @@ class CustomerOrder extends DataModel
     protected $paymentInfo = '';
 
     /**
-     * @var string 
+     * @var CustomerOrderShippingAddress 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("shippingAddress")
      * @Serializer\Accessor(getter="getShippingAddress",setter="setShippingAddress")
@@ -241,10 +241,11 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param string $billingAddress 
+     * @param CustomerOrderBillingAddress $billingAddress 
      * @return \jtl\Connector\Model\CustomerOrder
+     * @throws \InvalidArgumentException if the provided argument is not of type 'CustomerOrderBillingAddress'.
      */
-    public function setBillingAddress($billingAddress)
+    public function setBillingAddress(CustomerOrderBillingAddress $billingAddress)
     {
         return $this->setProperty('billingAddress', $billingAddress, 'string');
     }
@@ -328,10 +329,11 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param string $paymentInfo 
+     * @param CustomerOrderPaymentInfo $paymentInfo 
      * @return \jtl\Connector\Model\CustomerOrder
+     * @throws \InvalidArgumentException if the provided argument is not of type 'CustomerOrderPaymentInfo'.
      */
-    public function setPaymentInfo($paymentInfo)
+    public function setPaymentInfo(CustomerOrderPaymentInfo $paymentInfo)
     {
         return $this->setProperty('paymentInfo', $paymentInfo, 'string');
     }
@@ -345,10 +347,11 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param string $shippingAddress 
+     * @param CustomerOrderShippingAddress $shippingAddress 
      * @return \jtl\Connector\Model\CustomerOrder
+     * @throws \InvalidArgumentException if the provided argument is not of type 'CustomerOrderShippingAddress'.
      */
-    public function setShippingAddress($shippingAddress)
+    public function setShippingAddress(CustomerOrderShippingAddress $shippingAddress)
     {
         return $this->setProperty('shippingAddress', $shippingAddress, 'string');
     }
