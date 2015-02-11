@@ -414,12 +414,12 @@ class Product extends DataModel
     protected $sort = 0;
 
     /**
-     * @var string 
-     * @Serializer\Type("string")
+     * @var \jtl\Connector\Model\ProductStockLevel 
+     * @Serializer\Type("\jtl\Connector\Model\ProductStockLevel")
      * @Serializer\SerializedName("stockLevel")
      * @Serializer\Accessor(getter="getStockLevel",setter="setStockLevel")
      */
-    protected $stockLevel = '';
+    protected $stockLevel = null;
 
     /**
      * @var string Optional TARIC
@@ -1459,16 +1459,17 @@ class Product extends DataModel
     }
 
     /**
-     * @param string $stockLevel 
+     * @param \jtl\Connector\Model\ProductStockLevel $stockLevel 
      * @return \jtl\Connector\Model\Product
+     * @throws \InvalidArgumentException if the provided argument is not of type '\jtl\Connector\Model\ProductStockLevel'.
      */
-    public function setStockLevel($stockLevel)
+    public function setStockLevel(\jtl\Connector\Model\ProductStockLevel $stockLevel)
     {
-        return $this->setProperty('stockLevel', $stockLevel, 'string');
+        return $this->setProperty('stockLevel', $stockLevel, '\jtl\Connector\Model\ProductStockLevel');
     }
 
     /**
-     * @return string 
+     * @return \jtl\Connector\Model\ProductStockLevel 
      */
     public function getStockLevel()
     {
