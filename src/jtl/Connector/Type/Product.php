@@ -86,7 +86,7 @@ class Product extends DataType
             new PropertyInfo('specifics', '\jtl\Connector\Model\ProductSpecific', null, false, false, true),
             new PropertyInfo('varCombinations', '\jtl\Connector\Model\ProductVarCombination', null, false, false, true),
             new PropertyInfo('variations', '\jtl\Connector\Model\ProductVariation', null, false, false, true),
-            new PropertyInfo('warehouseInfos', '\jtl\Connector\Model\ProductWarehouseInfo', null, false, false, true),
+            new PropertyInfo('warehouseInfo', '\jtl\Connector\Model\ProductWarehouseInfo', null, false, false, true),
         );
     }
 

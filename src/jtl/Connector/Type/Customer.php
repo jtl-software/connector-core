@@ -17,13 +17,13 @@ class Customer extends DataType
     protected function loadProperties()
     {
         return array(
+            new PropertyInfo('customerGroupId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
-            new PropertyInfo('birthday', 'string', '', false, false, false),
+            new PropertyInfo('birthday', 'DateTime', null, false, false, false),
             new PropertyInfo('city', 'string', '', false, false, false),
             new PropertyInfo('company', 'string', '', false, false, false),
             new PropertyInfo('countryIso', 'string', '', false, false, false),
             new PropertyInfo('creationDate', 'DateTime', null, false, false, false),
-            new PropertyInfo('customerGroupId', 'integer', 0, false, false, false),
             new PropertyInfo('customerNumber', 'string', '', false, false, false),
             new PropertyInfo('deliveryInstruction', 'string', '', false, false, false),
             new PropertyInfo('discount', 'double', 0.0, false, false, false),

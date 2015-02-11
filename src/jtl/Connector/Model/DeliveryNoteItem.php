@@ -55,10 +55,10 @@ class DeliveryNoteItem extends DataModel
     /**
      * @var jtl\Connector\Model\DeliveryNoteItemInfo[] 
      * @Serializer\Type("array<jtl\Connector\Model\DeliveryNoteItemInfo>")
-     * @Serializer\SerializedName("infos")
+     * @Serializer\SerializedName("info")
      * @Serializer\AccessType("reflection")
      */
-    protected $infos = array();
+    protected $info = array();
 
     /**
      * Constructor
@@ -147,24 +147,24 @@ class DeliveryNoteItem extends DataModel
      */
     public function addInfo(\jtl\Connector\Model\DeliveryNoteItemInfo $info)
     {
-        $this->infos[] = $info;
+        $this->info[] = $info;
         return $this;
     }
     
     /**
      * @return jtl\Connector\Model\DeliveryNoteItemInfo[]
      */
-    public function getInfos()
+    public function getInfo()
     {
-        return $this->infos;
+        return $this->info;
     }
 
     /**
      * @return \jtl\Connector\Model\DeliveryNoteItem
      */
-    public function clearInfos()
+    public function clearInfo()
     {
-        $this->infos = array();
+        $this->info = array();
         return $this;
     }
 }

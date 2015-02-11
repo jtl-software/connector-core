@@ -70,6 +70,14 @@ class Currency extends DataModel
     protected $isDefault = false;
 
     /**
+     * @var string 
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("iso")
+     * @Serializer\Accessor(getter="getIso",setter="setIso")
+     */
+    protected $iso = '';
+
+    /**
      * @var string Currency name
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
@@ -196,6 +204,23 @@ class Currency extends DataModel
     public function getIsDefault()
     {
         return $this->isDefault;
+    }
+
+    /**
+     * @param string $iso 
+     * @return \jtl\Connector\Model\Currency
+     */
+    public function setIso($iso)
+    {
+        return $this->setProperty('iso', $iso, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getIso()
+    {
+        return $this->iso;
     }
 
     /**

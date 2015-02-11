@@ -48,10 +48,10 @@ class MeasurementUnit extends DataModel
     /**
      * @var jtl\Connector\Model\MeasurementUnitI18n[] 
      * @Serializer\Type("array<jtl\Connector\Model\MeasurementUnitI18n>")
-     * @Serializer\SerializedName("i18Ns")
+     * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18Ns = array();
+    protected $i18ns = array();
 
     /**
      * Constructor
@@ -114,29 +114,29 @@ class MeasurementUnit extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\MeasurementUnitI18n $i18N
+     * @param \jtl\Connector\Model\MeasurementUnitI18n $i18n
      * @return \jtl\Connector\Model\MeasurementUnit
      */
-    public function addI18N(\jtl\Connector\Model\MeasurementUnitI18n $i18N)
+    public function addI18n(\jtl\Connector\Model\MeasurementUnitI18n $i18n)
     {
-        $this->i18Ns[] = $i18N;
+        $this->i18ns[] = $i18n;
         return $this;
     }
     
     /**
      * @return jtl\Connector\Model\MeasurementUnitI18n[]
      */
-    public function getI18Ns()
+    public function getI18ns()
     {
-        return $this->i18Ns;
+        return $this->i18ns;
     }
 
     /**
      * @return \jtl\Connector\Model\MeasurementUnit
      */
-    public function clearI18Ns()
+    public function clearI18ns()
     {
-        $this->i18Ns = array();
+        $this->i18ns = array();
         return $this;
     }
 }

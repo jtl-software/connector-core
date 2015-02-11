@@ -576,10 +576,10 @@ class Product extends DataModel
     /**
      * @var jtl\Connector\Model\ProductWarehouseInfo[] 
      * @Serializer\Type("array<jtl\Connector\Model\ProductWarehouseInfo>")
-     * @Serializer\SerializedName("warehouseInfos")
+     * @Serializer\SerializedName("warehouseInfo")
      * @Serializer\AccessType("reflection")
      */
-    protected $warehouseInfos = array();
+    protected $warehouseInfo = array();
 
     /**
      * Constructor
@@ -1944,24 +1944,24 @@ class Product extends DataModel
      */
     public function addWarehouseInfo(\jtl\Connector\Model\ProductWarehouseInfo $warehouseInfo)
     {
-        $this->warehouseInfos[] = $warehouseInfo;
+        $this->warehouseInfo[] = $warehouseInfo;
         return $this;
     }
     
     /**
      * @return jtl\Connector\Model\ProductWarehouseInfo[]
      */
-    public function getWarehouseInfos()
+    public function getWarehouseInfo()
     {
-        return $this->warehouseInfos;
+        return $this->warehouseInfo;
     }
 
     /**
      * @return \jtl\Connector\Model\Product
      */
-    public function clearWarehouseInfos()
+    public function clearWarehouseInfo()
     {
-        $this->warehouseInfos = array();
+        $this->warehouseInfo = array();
         return $this;
     }
 }

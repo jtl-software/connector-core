@@ -22,6 +22,14 @@ use JMS\Serializer\Annotation as Serializer;
 class Customer extends DataModel
 {
     /**
+     * @var Identity References a customer group
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerGroupId")
+     * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
+     */
+    protected $customerGroupId = null;
+
+    /**
      * @var Identity Unique customer id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
@@ -30,12 +38,12 @@ class Customer extends DataModel
     protected $id = null;
 
     /**
-     * @var string Date of birth
-     * @Serializer\Type("string")
+     * @var DateTime Date of birth
+     * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("birthday")
      * @Serializer\Accessor(getter="getBirthday",setter="setBirthday")
      */
-    protected $birthday = '';
+    protected $birthday = null;
 
     /**
      * @var string City
@@ -68,14 +76,6 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
     protected $creationDate = null;
-
-    /**
-     * @var integer References a customer group
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("customerGroupId")
-     * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
-     */
-    protected $customerGroupId = 0;
 
     /**
      * @var string Optional customer number set by JTL-Wawi ERP software
@@ -259,6 +259,25 @@ class Customer extends DataModel
     public function __construct()
     {
         $this->id = new Identity();
+        $this->customerGroupId = new Identity();
+    }
+
+    /**
+     * @param Identity $customerGroupId References a customer group
+     * @return \jtl\Connector\Model\Customer
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCustomerGroupId(Identity $customerGroupId)
+    {
+        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+    }
+
+    /**
+     * @return Identity References a customer group
+     */
+    public function getCustomerGroupId()
+    {
+        return $this->customerGroupId;
     }
 
     /**
@@ -280,16 +299,17 @@ class Customer extends DataModel
     }
 
     /**
-     * @param string $birthday Date of birth
+     * @param DateTime $birthday Date of birth
      * @return \jtl\Connector\Model\Customer
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setBirthday($birthday)
+    public function setBirthday(DateTime $birthday)
     {
-        return $this->setProperty('birthday', $birthday, 'string');
+        return $this->setProperty('birthday', $birthday, 'DateTime');
     }
 
     /**
-     * @return string Date of birth
+     * @return DateTime Date of birth
      */
     public function getBirthday()
     {
@@ -363,24 +383,6 @@ class Customer extends DataModel
     public function getCreationDate()
     {
         return $this->creationDate;
-    }
-
-    /**
-     * @param integer $customerGroupId References a customer group
-     * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
-     */
-    public function setCustomerGroupId(integer $customerGroupId)
-    {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'integer');
-    }
-
-    /**
-     * @return integer References a customer group
-     */
-    public function getCustomerGroupId()
-    {
-        return $this->customerGroupId;
     }
 
     /**

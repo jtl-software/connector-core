@@ -101,28 +101,12 @@ class GlobalData extends DataModel
     protected $shippingClasses = array();
 
     /**
-     * @var jtl\Connector\Model\TaxClass[] 
-     * @Serializer\Type("array<jtl\Connector\Model\TaxClass>")
-     * @Serializer\SerializedName("taxClasses")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $taxClasses = array();
-
-    /**
      * @var jtl\Connector\Model\TaxRate[] 
      * @Serializer\Type("array<jtl\Connector\Model\TaxRate>")
      * @Serializer\SerializedName("taxRates")
      * @Serializer\AccessType("reflection")
      */
     protected $taxRates = array();
-
-    /**
-     * @var jtl\Connector\Model\TaxZone[] 
-     * @Serializer\Type("array<jtl\Connector\Model\TaxZone>")
-     * @Serializer\SerializedName("taxZones")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $taxZones = array();
 
     /**
      * @var jtl\Connector\Model\Unit[] 
@@ -412,33 +396,6 @@ class GlobalData extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\TaxClass $taxClass
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function addTaxClass(\jtl\Connector\Model\TaxClass $taxClass)
-    {
-        $this->taxClasses[] = $taxClass;
-        return $this;
-    }
-    
-    /**
-     * @return jtl\Connector\Model\TaxClass[]
-     */
-    public function getTaxClasses()
-    {
-        return $this->taxClasses;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function clearTaxClasses()
-    {
-        $this->taxClasses = array();
-        return $this;
-    }
-
-    /**
      * @param \jtl\Connector\Model\TaxRate $taxRate
      * @return \jtl\Connector\Model\GlobalData
      */
@@ -462,33 +419,6 @@ class GlobalData extends DataModel
     public function clearTaxRates()
     {
         $this->taxRates = array();
-        return $this;
-    }
-
-    /**
-     * @param \jtl\Connector\Model\TaxZone $taxZone
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function addTaxZone(\jtl\Connector\Model\TaxZone $taxZone)
-    {
-        $this->taxZones[] = $taxZone;
-        return $this;
-    }
-    
-    /**
-     * @return jtl\Connector\Model\TaxZone[]
-     */
-    public function getTaxZones()
-    {
-        return $this->taxZones;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function clearTaxZones()
-    {
-        $this->taxZones = array();
         return $this;
     }
 

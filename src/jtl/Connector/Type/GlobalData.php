@@ -27,9 +27,7 @@ class GlobalData extends DataType
             new PropertyInfo('measurementUnits', '\jtl\Connector\Model\MeasurementUnit', null, false, false, true),
             new PropertyInfo('productTypes', '\jtl\Connector\Model\ProductType', null, false, false, true),
             new PropertyInfo('shippingClasses', '\jtl\Connector\Model\ShippingClass', null, false, false, true),
-            new PropertyInfo('taxClasses', '\jtl\Connector\Model\TaxClass', null, false, false, true),
             new PropertyInfo('taxRates', '\jtl\Connector\Model\TaxRate', null, false, false, true),
-            new PropertyInfo('taxZones', '\jtl\Connector\Model\TaxZone', null, false, false, true),
             new PropertyInfo('units', '\jtl\Connector\Model\Unit', null, false, false, true),
             new PropertyInfo('warehouses', '\jtl\Connector\Model\Warehouse', null, false, false, true),
         );

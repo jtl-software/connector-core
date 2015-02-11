@@ -18,7 +18,6 @@ class CategoryCustomerGroup extends DataType
     {
         return array(
             new PropertyInfo('categoryId', 'Identity', null, true, true, false),
-            new PropertyInfo('connectorId', 'Identity', null, true, true, false),
             new PropertyInfo('customerGroupId', 'Identity', null, true, true, false),
             new PropertyInfo('discount', 'double', 0.0, false, false, false),
         );

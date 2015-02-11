@@ -17,9 +17,9 @@ class Image extends DataType
     protected function loadProperties()
     {
         return array(
+            new PropertyInfo('foreignKey', 'Identity', null, false, true, false),
+            new PropertyInfo('id', 'Identity', null, false, true, false),
             new PropertyInfo('filename', 'string', '', false, false, false),
-            new PropertyInfo('foreignKey', 'integer', 0, false, false, false),
-            new PropertyInfo('id', 'integer', 0, false, false, false),
             new PropertyInfo('relationType', 'string', '', false, false, false),
         );
     }

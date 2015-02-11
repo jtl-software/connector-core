@@ -19,7 +19,7 @@ class ProductVarCombination extends DataType
         return array(
             new PropertyInfo('productId', 'Identity', null, true, true, false),
             new PropertyInfo('productVariationId', 'Identity', null, true, true, false),
-            new PropertyInfo('productVariationValueId', 'integer', 0, false, false, false),
+            new PropertyInfo('productVariationValueId', 'Identity', null, false, true, false),
         );
     }
 

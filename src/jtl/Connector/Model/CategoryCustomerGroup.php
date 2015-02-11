@@ -30,14 +30,6 @@ class CategoryCustomerGroup extends DataModel
     protected $categoryId = null;
 
     /**
-     * @var Identity 
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("connectorId")
-     * @Serializer\Accessor(getter="getConnectorId",setter="setConnectorId")
-     */
-    protected $connectorId = null;
-
-    /**
      * @var Identity Reference to customerGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("customerGroupId")
@@ -60,7 +52,6 @@ class CategoryCustomerGroup extends DataModel
     {
         $this->categoryId = new Identity();
         $this->customerGroupId = new Identity();
-        $this->connectorId = new Identity();
     }
 
     /**
@@ -79,24 +70,6 @@ class CategoryCustomerGroup extends DataModel
     public function getCategoryId()
     {
         return $this->categoryId;
-    }
-
-    /**
-     * @param Identity $connectorId 
-     * @return \jtl\Connector\Model\CategoryCustomerGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setConnectorId(Identity $connectorId)
-    {
-        return $this->setProperty('connectorId', $connectorId, 'Identity');
-    }
-
-    /**
-     * @return Identity 
-     */
-    public function getConnectorId()
-    {
-        return $this->connectorId;
     }
 
     /**

@@ -30,6 +30,14 @@ class CustomerAttr extends DataModel
     protected $customerId = null;
 
     /**
+     * @var Identity 
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getid",setter="setid")
+     */
+    protected $id = null;
+
+    /**
      * @var string Attribute key
      * @Serializer\Type("string")
      * @Serializer\SerializedName("key")
@@ -50,6 +58,7 @@ class CustomerAttr extends DataModel
      */
     public function __construct()
     {
+        $this->id = new Identity();
         $this->customerId = new Identity();
     }
 
@@ -69,6 +78,24 @@ class CustomerAttr extends DataModel
     public function getCustomerId()
     {
         return $this->customerId;
+    }
+
+    /**
+     * @param Identity $id 
+     * @return \jtl\Connector\Model\CustomerAttr
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setid(Identity $id)
+    {
+        return $this->setProperty('id', $id, 'Identity');
+    }
+
+    /**
+     * @return Identity 
+     */
+    public function getid()
+    {
+        return $this->id;
     }
 
     /**

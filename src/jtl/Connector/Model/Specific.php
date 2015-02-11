@@ -30,12 +30,12 @@ class Specific extends DataModel
     protected $id = null;
 
     /**
-     * @var integer Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
-     * @Serializer\Type("integer")
+     * @var boolean Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
+     * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isGlobal")
      * @Serializer\Accessor(getter="getIsGlobal",setter="setIsGlobal")
      */
-    protected $isGlobal = 0;
+    protected $isGlobal = false;
 
     /**
      * @var integer Optional sort number
@@ -96,17 +96,17 @@ class Specific extends DataModel
     }
 
     /**
-     * @param integer $isGlobal Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
+     * @param boolean $isGlobal Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      * @return \jtl\Connector\Model\Specific
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsGlobal(integer $isGlobal)
+    public function setIsGlobal(boolean $isGlobal)
     {
-        return $this->setProperty('isGlobal', $isGlobal, 'integer');
+        return $this->setProperty('isGlobal', $isGlobal, 'boolean');
     }
 
     /**
-     * @return integer Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
+     * @return boolean Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      */
     public function getIsGlobal()
     {

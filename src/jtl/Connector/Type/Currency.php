@@ -23,6 +23,7 @@ class Currency extends DataType
             new PropertyInfo('factor', 'double', 0.0, false, false, false),
             new PropertyInfo('hasCurrencySignBeforeValue', 'boolean', false, false, false, false),
             new PropertyInfo('isDefault', 'boolean', false, false, false, false),
+            new PropertyInfo('iso', 'string', '', false, false, false),
             new PropertyInfo('name', 'string', '', false, false, false),
             new PropertyInfo('nameHtml', 'string', '', false, false, false),
         );

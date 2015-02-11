@@ -18,7 +18,7 @@ class Specific extends DataType
     {
         return array(
             new PropertyInfo('id', 'Identity', null, true, true, false),
-            new PropertyInfo('isGlobal', 'integer', 0, false, false, false),
+            new PropertyInfo('isGlobal', 'boolean', false, false, false, false),
             new PropertyInfo('sort', 'integer', 0, false, false, false),
             new PropertyInfo('type', 'string', '', false, false, false),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\SpecificI18n', null, false, false, true),

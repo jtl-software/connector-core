@@ -22,28 +22,12 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductI18n extends DataModel
 {
     /**
-     * @var Identity 
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("platformId")
-     * @Serializer\Accessor(getter="getPlatformId",setter="setPlatformId")
-     */
-    protected $platformId = null;
-
-    /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-
-    /**
-     * @var integer 
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("connectorId")
-     * @Serializer\Accessor(getter="getConnectorId",setter="setConnectorId")
-     */
-    protected $connectorId = 0;
 
     /**
      * @var string Optional product description
@@ -115,25 +99,6 @@ class ProductI18n extends DataModel
     public function __construct()
     {
         $this->productId = new Identity();
-        $this->platformId = new Identity();
-    }
-
-    /**
-     * @param Identity $platformId 
-     * @return \jtl\Connector\Model\ProductI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setPlatformId(Identity $platformId)
-    {
-        return $this->setProperty('platformId', $platformId, 'Identity');
-    }
-
-    /**
-     * @return Identity 
-     */
-    public function getPlatformId()
-    {
-        return $this->platformId;
     }
 
     /**
@@ -152,24 +117,6 @@ class ProductI18n extends DataModel
     public function getProductId()
     {
         return $this->productId;
-    }
-
-    /**
-     * @param integer $connectorId 
-     * @return \jtl\Connector\Model\ProductI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
-     */
-    public function setConnectorId(integer $connectorId)
-    {
-        return $this->setProperty('connectorId', $connectorId, 'integer');
-    }
-
-    /**
-     * @return integer 
-     */
-    public function getConnectorId()
-    {
-        return $this->connectorId;
     }
 
     /**

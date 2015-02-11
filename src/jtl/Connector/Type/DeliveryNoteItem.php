@@ -21,7 +21,7 @@ class DeliveryNoteItem extends DataType
             new PropertyInfo('deliveryNoteId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('quantity', 'double', 0.0, false, false, false),
-            new PropertyInfo('infos', '\jtl\Connector\Model\DeliveryNoteItemInfo', null, false, false, true),
+            new PropertyInfo('info', '\jtl\Connector\Model\DeliveryNoteItemInfo', null, false, false, true),
         );
     }
 

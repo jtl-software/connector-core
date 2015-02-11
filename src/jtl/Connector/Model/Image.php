@@ -21,28 +21,28 @@ use JMS\Serializer\Annotation as Serializer;
 class Image extends DataModel
 {
     /**
+     * @var Identity 
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("foreignKey")
+     * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
+     */
+    protected $foreignKey = null;
+
+    /**
+     * @var Identity 
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
+     */
+    protected $id = null;
+
+    /**
      * @var string 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("filename")
      * @Serializer\Accessor(getter="getFilename",setter="setFilename")
      */
     protected $filename = '';
-
-    /**
-     * @var integer 
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("foreignKey")
-     * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
-     */
-    protected $foreignKey = 0;
-
-    /**
-     * @var integer 
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = 0;
 
     /**
      * @var string 
@@ -52,6 +52,50 @@ class Image extends DataModel
      */
     protected $relationType = '';
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->foreignKey = new Identity();
+        $this->id = new Identity();
+    }
+
+    /**
+     * @param Identity $foreignKey 
+     * @return \jtl\Connector\Model\Image
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setForeignKey(Identity $foreignKey)
+    {
+        return $this->setProperty('foreignKey', $foreignKey, 'Identity');
+    }
+
+    /**
+     * @return Identity 
+     */
+    public function getForeignKey()
+    {
+        return $this->foreignKey;
+    }
+
+    /**
+     * @param Identity $id 
+     * @return \jtl\Connector\Model\Image
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setId(Identity $id)
+    {
+        return $this->setProperty('id', $id, 'Identity');
+    }
+
+    /**
+     * @return Identity 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @param string $filename 
@@ -68,42 +112,6 @@ class Image extends DataModel
     public function getFilename()
     {
         return $this->filename;
-    }
-
-    /**
-     * @param integer $foreignKey 
-     * @return \jtl\Connector\Model\Image
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
-     */
-    public function setForeignKey(integer $foreignKey)
-    {
-        return $this->setProperty('foreignKey', $foreignKey, 'integer');
-    }
-
-    /**
-     * @return integer 
-     */
-    public function getForeignKey()
-    {
-        return $this->foreignKey;
-    }
-
-    /**
-     * @param integer $id 
-     * @return \jtl\Connector\Model\Image
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
-     */
-    public function setId(integer $id)
-    {
-        return $this->setProperty('id', $id, 'integer');
-    }
-
-    /**
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
