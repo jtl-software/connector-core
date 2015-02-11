@@ -11,3 +11,4 @@ composer.lock
 composer.phar
 update-parents.sh
 db/**
+src/jtl/Connector/Model/AckModelMapping.php
