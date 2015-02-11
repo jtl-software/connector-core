@@ -22,111 +22,71 @@ use JMS\Serializer\Annotation as Serializer;
 class CrossSellingGroup extends DataModel
 {
     /**
-     * @var Identity crossSellingGroup id
+     * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
+     * @Serializer\SerializedName("crossSellingGroupId")
+     * @Serializer\Accessor(getter="getCrossSellingGroupId",setter="setCrossSellingGroupId")
      */
-    protected $id = null;
+    protected $crossSellingGroupId = null;
 
     /**
-     * @var string Optional localized description
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("description")
-     * @Serializer\Accessor(getter="getDescription",setter="setDescription")
+     * @var jtl\Connector\Model\CrossSellingGroupI18n[] 
+     * @Serializer\Type("array<jtl\Connector\Model\CrossSellingGroupI18n>")
+     * @Serializer\SerializedName("i18ns")
+     * @Serializer\AccessType("reflection")
      */
-    protected $description = '';
-
-    /**
-     * @var string Locale
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
-     */
-    protected $languageISO = '';
-
-    /**
-     * @var string Localized name
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("name")
-     * @Serializer\Accessor(getter="getName",setter="setName")
-     */
-    protected $name = '';
+    protected $i18ns = array();
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->id = new Identity();
+        $this->crossSellingGroupId = new Identity();
     }
 
     /**
-     * @param Identity $id crossSellingGroup id
+     * @param Identity $crossSellingGroupId 
      * @return \jtl\Connector\Model\CrossSellingGroup
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setCrossSellingGroupId(Identity $crossSellingGroupId)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        return $this->setProperty('crossSellingGroupId', $crossSellingGroupId, 'Identity');
     }
 
     /**
-     * @return Identity crossSellingGroup id
+     * @return Identity 
      */
-    public function getId()
+    public function getCrossSellingGroupId()
     {
-        return $this->id;
+        return $this->crossSellingGroupId;
     }
 
     /**
-     * @param string $description Optional localized description
+     * @param \jtl\Connector\Model\CrossSellingGroupI18n $i18n
      * @return \jtl\Connector\Model\CrossSellingGroup
      */
-    public function setDescription($description)
+    public function addI18n(\jtl\Connector\Model\CrossSellingGroupI18n $i18n)
     {
-        return $this->setProperty('description', $description, 'string');
+        $this->i18ns[] = $i18n;
+        return $this;
     }
-
+    
     /**
-     * @return string Optional localized description
+     * @return jtl\Connector\Model\CrossSellingGroupI18n[]
      */
-    public function getDescription()
+    public function getI18ns()
     {
-        return $this->description;
+        return $this->i18ns;
     }
 
     /**
-     * @param string $languageISO Locale
      * @return \jtl\Connector\Model\CrossSellingGroup
      */
-    public function setLanguageISO($languageISO)
+    public function clearI18ns()
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
-    }
-
-    /**
-     * @return string Locale
-     */
-    public function getLanguageISO()
-    {
-        return $this->languageISO;
-    }
-
-    /**
-     * @param string $name Localized name
-     * @return \jtl\Connector\Model\CrossSellingGroup
-     */
-    public function setName($name)
-    {
-        return $this->setProperty('name', $name, 'string');
-    }
-
-    /**
-     * @return string Localized name
-     */
-    public function getName()
-    {
-        return $this->name;
+        $this->i18ns = array();
+        return $this;
     }
 }

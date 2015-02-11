@@ -23,10 +23,10 @@ class ProductAttrI18n extends DataModel
     /**
      * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
+     * @Serializer\SerializedName("productAttrId")
+     * @Serializer\Accessor(getter="getProductAttrId",setter="setProductAttrId")
      */
-    protected $id = null;
+    protected $productAttrId = null;
 
     /**
      * @var string 
@@ -57,25 +57,25 @@ class ProductAttrI18n extends DataModel
      */
     public function __construct()
     {
-        $this->id = new Identity();
+        $this->productAttrId = new Identity();
     }
 
     /**
-     * @param Identity $id 
+     * @param Identity $productAttrId 
      * @return \jtl\Connector\Model\ProductAttrI18n
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setProductAttrId(Identity $productAttrId)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        return $this->setProperty('productAttrId', $productAttrId, 'Identity');
     }
 
     /**
      * @return Identity 
      */
-    public function getId()
+    public function getProductAttrId()
     {
-        return $this->id;
+        return $this->productAttrId;
     }
 
     /**

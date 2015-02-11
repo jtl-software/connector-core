@@ -101,14 +101,6 @@ class GlobalData extends DataModel
     protected $shippingClasses = array();
 
     /**
-     * @var jtl\Connector\Model\TaxRate[] 
-     * @Serializer\Type("array<jtl\Connector\Model\TaxRate>")
-     * @Serializer\SerializedName("taxRates")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $taxRates = array();
-
-    /**
      * @var jtl\Connector\Model\Unit[] 
      * @Serializer\Type("array<jtl\Connector\Model\Unit>")
      * @Serializer\SerializedName("units")
@@ -392,33 +384,6 @@ class GlobalData extends DataModel
     public function clearShippingClasses()
     {
         $this->shippingClasses = array();
-        return $this;
-    }
-
-    /**
-     * @param \jtl\Connector\Model\TaxRate $taxRate
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function addTaxRate(\jtl\Connector\Model\TaxRate $taxRate)
-    {
-        $this->taxRates[] = $taxRate;
-        return $this;
-    }
-    
-    /**
-     * @return jtl\Connector\Model\TaxRate[]
-     */
-    public function getTaxRates()
-    {
-        return $this->taxRates;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function clearTaxRates()
-    {
-        $this->taxRates = array();
         return $this;
     }
 

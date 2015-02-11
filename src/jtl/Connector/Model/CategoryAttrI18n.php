@@ -23,10 +23,10 @@ class CategoryAttrI18n extends DataModel
     /**
      * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
+     * @Serializer\SerializedName("categoryAttrId")
+     * @Serializer\Accessor(getter="getCategoryAttrId",setter="setCategoryAttrId")
      */
-    protected $id = null;
+    protected $categoryAttrId = null;
 
     /**
      * @var string 
@@ -57,25 +57,25 @@ class CategoryAttrI18n extends DataModel
      */
     public function __construct()
     {
-        $this->id = new Identity();
+        $this->categoryAttrId = new Identity();
     }
 
     /**
-     * @param Identity $id 
+     * @param Identity $categoryAttrId 
      * @return \jtl\Connector\Model\CategoryAttrI18n
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setCategoryAttrId(Identity $categoryAttrId)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        return $this->setProperty('categoryAttrId', $categoryAttrId, 'Identity');
     }
 
     /**
      * @return Identity 
      */
-    public function getId()
+    public function getCategoryAttrId()
     {
-        return $this->id;
+        return $this->categoryAttrId;
     }
 
     /**
