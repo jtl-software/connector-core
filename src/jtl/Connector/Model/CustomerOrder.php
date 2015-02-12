@@ -55,11 +55,11 @@ class CustomerOrder extends DataModel
 
     /**
      * @var CustomerOrderBillingAddress 
-     * @Serializer\Type("string")
+     * @Serializer\Type("jtl\Connector\Model\CustomerOrderBillingAddress")
      * @Serializer\SerializedName("billingAddress")
      * @Serializer\Accessor(getter="getBillingAddress",setter="setBillingAddress")
      */
-    protected $billingAddress = '';
+    protected $billingAddress = null;
 
     /**
      * @var DateTime Date of creation
@@ -95,19 +95,19 @@ class CustomerOrder extends DataModel
 
     /**
      * @var CustomerOrderPaymentInfo 
-     * @Serializer\Type("string")
+     * @Serializer\Type("jtl\Connector\Model\CustomerOrderPaymentInfo")
      * @Serializer\SerializedName("paymentInfo")
      * @Serializer\Accessor(getter="getPaymentInfo",setter="setPaymentInfo")
      */
-    protected $paymentInfo = '';
+    protected $paymentInfo = null;
 
     /**
      * @var CustomerOrderShippingAddress 
-     * @Serializer\Type("string")
+     * @Serializer\Type("jtl\Connector\Model\CustomerOrderShippingAddress")
      * @Serializer\SerializedName("shippingAddress")
      * @Serializer\Accessor(getter="getShippingAddress",setter="setShippingAddress")
      */
-    protected $shippingAddress = '';
+    protected $shippingAddress = null;
 
     /**
      * @var DateTime Shipping date
@@ -247,11 +247,11 @@ class CustomerOrder extends DataModel
      */
     public function setBillingAddress(CustomerOrderBillingAddress $billingAddress)
     {
-        return $this->setProperty('billingAddress', $billingAddress, 'string');
+        return $this->setProperty('billingAddress', $billingAddress, 'jtl\Connector\Model\CustomerOrderBillingAddress');
     }
 
     /**
-     * @return string 
+     * @return jtl\Connector\Model\CustomerOrderBillingAddress 
      */
     public function getBillingAddress()
     {
@@ -335,11 +335,11 @@ class CustomerOrder extends DataModel
      */
     public function setPaymentInfo(CustomerOrderPaymentInfo $paymentInfo)
     {
-        return $this->setProperty('paymentInfo', $paymentInfo, 'string');
+        return $this->setProperty('paymentInfo', $paymentInfo, 'jtl\Connector\Model\CustomerOrderPaymentInfo');
     }
 
     /**
-     * @return string 
+     * @return jtl\Connector\Model\CustomerOrderPaymentInfo 
      */
     public function getPaymentInfo()
     {
@@ -353,11 +353,11 @@ class CustomerOrder extends DataModel
      */
     public function setShippingAddress(CustomerOrderShippingAddress $shippingAddress)
     {
-        return $this->setProperty('shippingAddress', $shippingAddress, 'string');
+        return $this->setProperty('shippingAddress', $shippingAddress, 'jtl\Connector\Model\CustomerOrderShippingAddress');
     }
 
     /**
-     * @return string 
+     * @return jtl\Connector\Model\CustomerOrderShippingAddress 
      */
     public function getShippingAddress()
     {

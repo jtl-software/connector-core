@@ -24,10 +24,10 @@ class CrossSellingGroup extends DataModel
     /**
      * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("crossSellingGroupId")
-     * @Serializer\Accessor(getter="getCrossSellingGroupId",setter="setCrossSellingGroupId")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
      */
-    protected $crossSellingGroupId = null;
+    protected $id = null;
 
     /**
      * @var jtl\Connector\Model\CrossSellingGroupI18n[] 
@@ -42,25 +42,25 @@ class CrossSellingGroup extends DataModel
      */
     public function __construct()
     {
-        $this->crossSellingGroupId = new Identity();
+        $this->id = new Identity();
     }
 
     /**
-     * @param Identity $crossSellingGroupId 
+     * @param Identity $id 
      * @return \jtl\Connector\Model\CrossSellingGroup
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCrossSellingGroupId(Identity $crossSellingGroupId)
+    public function setId(Identity $id)
     {
-        return $this->setProperty('crossSellingGroupId', $crossSellingGroupId, 'Identity');
+        return $this->setProperty('id', $id, 'Identity');
     }
 
     /**
      * @return Identity 
      */
-    public function getCrossSellingGroupId()
+    public function getId()
     {
-        return $this->crossSellingGroupId;
+        return $this->id;
     }
 
     /**
