@@ -197,6 +197,10 @@ abstract class DataModel extends CoreModel
             case 'DateTime':
                 return ($value instanceof \DateTime);
             default:
+                if (is_object($value) && is_subclass_of($value, 'jtl\Connector\Model\DataModel')) {
+                    return true;
+                }
+
                 throw new \InvalidArgumentException(sprintf("type '%s' validator not found", $type));
         }
     }
