@@ -442,7 +442,8 @@ class IdentityLinker
             'id' => 32
         ),
         'Image' => array(
-            'id' => 39
+            'id' => 39,
+            'foreignKey' => 39
         ),
         'EmailTemplateI18n' => array(
             'emailTemplateId' => 32
@@ -580,7 +581,7 @@ class IdentityLinker
 
         if ($property === null) {
             if (!isset(self::$types[$modelName])) {
-                throw new \LinkerException(sprintf('Type for model (%s) not found', $modelName));
+                throw new LinkerException(sprintf('Type for model (%s) not found', $modelName));
             }
 
             return self::$types[$modelName];
@@ -589,11 +590,11 @@ class IdentityLinker
         $property = lcfirst($property);
 
         if (!isset(self::$mappings[$modelName])) {
-            throw new \LinkerException(sprintf('Type for model (%s) not found', $modelName));
+            throw new LinkerException(sprintf('Type for model (%s) not found', $modelName));
         }
 
         if (!isset(self::$mappings[$modelName][$property])) {
-            throw new \LinkerException(sprintf('Type for model (%s) and property (%s) not found', $modelName, $property));
+            throw new LinkerException(sprintf('Type for model (%s) and property (%s) not found', $modelName, $property));
         }
 
         return self::$mappings[$modelName][$property];
@@ -611,7 +612,7 @@ class IdentityLinker
     public function exists($endpointId = null, $hostId = null, $modelName, $property)
     {
         if ($endpointId === null && $hostId === null) {
-            throw new \LinkerException('Both parameters (endpointId, hostId) can not be null');
+            throw new LinkerException('Both parameters (endpointId, hostId) can not be null');
         }
 
         $type = $this->getType($modelName, $property);
