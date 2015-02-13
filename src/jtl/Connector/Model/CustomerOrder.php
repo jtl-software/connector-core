@@ -62,6 +62,14 @@ class CustomerOrder extends DataModel
     protected $billingAddress = null;
 
     /**
+     * @var string 
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("carrierName")
+     * @Serializer\Accessor(getter="getCarrierName",setter="setCarrierName")
+     */
+    protected $carrierName = '';
+
+    /**
      * @var DateTime Date of creation
      * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("creationDate")
@@ -70,12 +78,44 @@ class CustomerOrder extends DataModel
     protected $creationDate = null;
 
     /**
+     * @var double 
+     * @Serializer\Type("double")
+     * @Serializer\SerializedName("credit")
+     * @Serializer\Accessor(getter="getCredit",setter="setCredit")
+     */
+    protected $credit = 0.0;
+
+    /**
+     * @var string 
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("currencyIso")
+     * @Serializer\Accessor(getter="getCurrencyIso",setter="setCurrencyIso")
+     */
+    protected $currencyIso = '';
+
+    /**
+     * @var DateTime 
+     * @Serializer\Type("DateTime")
+     * @Serializer\SerializedName("estimatedDeliveryDate")
+     * @Serializer\Accessor(getter="getEstimatedDeliveryDate",setter="setEstimatedDeliveryDate")
+     */
+    protected $estimatedDeliveryDate = null;
+
+    /**
      * @var string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("languageISO")
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
+
+    /**
+     * @var string 
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("note")
+     * @Serializer\Accessor(getter="getNote",setter="setNote")
+     */
+    protected $note = '';
 
     /**
      * @var string Optional order number (usually set by ERP System later)
@@ -134,12 +174,28 @@ class CustomerOrder extends DataModel
     protected $shippingMethodCode = 0;
 
     /**
+     * @var string 
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("shippingMethodName")
+     * @Serializer\Accessor(getter="getShippingMethodName",setter="setShippingMethodName")
+     */
+    protected $shippingMethodName = '';
+
+    /**
      * @var string Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
      * @Serializer\Type("string")
      * @Serializer\SerializedName("status")
      * @Serializer\Accessor(getter="getStatus",setter="setStatus")
      */
     protected $status = '';
+
+    /**
+     * @var double 
+     * @Serializer\Type("double")
+     * @Serializer\SerializedName("totalSum")
+     * @Serializer\Accessor(getter="getTotalSum",setter="setTotalSum")
+     */
+    protected $totalSum = 0.0;
 
     /**
      * @var jtl\Connector\Model\CustomerOrderAttr[] 
@@ -259,6 +315,23 @@ class CustomerOrder extends DataModel
     }
 
     /**
+     * @param string $carrierName 
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setCarrierName($carrierName)
+    {
+        return $this->setProperty('carrierName', $carrierName, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getCarrierName()
+    {
+        return $this->carrierName;
+    }
+
+    /**
      * @param DateTime $creationDate Date of creation
      * @return \jtl\Connector\Model\CustomerOrder
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
@@ -277,6 +350,58 @@ class CustomerOrder extends DataModel
     }
 
     /**
+     * @param double $credit 
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setCredit($credit)
+    {
+        return $this->setProperty('credit', $credit, 'double');
+    }
+
+    /**
+     * @return double 
+     */
+    public function getCredit()
+    {
+        return $this->credit;
+    }
+
+    /**
+     * @param string $currencyIso 
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setCurrencyIso($currencyIso)
+    {
+        return $this->setProperty('currencyIso', $currencyIso, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getCurrencyIso()
+    {
+        return $this->currencyIso;
+    }
+
+    /**
+     * @param DateTime $estimatedDeliveryDate 
+     * @return \jtl\Connector\Model\CustomerOrder
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     */
+    public function setEstimatedDeliveryDate(DateTime $estimatedDeliveryDate)
+    {
+        return $this->setProperty('estimatedDeliveryDate', $estimatedDeliveryDate, 'DateTime');
+    }
+
+    /**
+     * @return DateTime 
+     */
+    public function getEstimatedDeliveryDate()
+    {
+        return $this->estimatedDeliveryDate;
+    }
+
+    /**
      * @param string $languageISO Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
      * @return \jtl\Connector\Model\CustomerOrder
      */
@@ -291,6 +416,23 @@ class CustomerOrder extends DataModel
     public function getLanguageISO()
     {
         return $this->languageISO;
+    }
+
+    /**
+     * @param string $note 
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setNote($note)
+    {
+        return $this->setProperty('note', $note, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getNote()
+    {
+        return $this->note;
     }
 
     /**
@@ -418,6 +560,23 @@ class CustomerOrder extends DataModel
     }
 
     /**
+     * @param string $shippingMethodName 
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setShippingMethodName($shippingMethodName)
+    {
+        return $this->setProperty('shippingMethodName', $shippingMethodName, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getShippingMethodName()
+    {
+        return $this->shippingMethodName;
+    }
+
+    /**
      * @param string $status Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
      * @return \jtl\Connector\Model\CustomerOrder
      */
@@ -432,6 +591,23 @@ class CustomerOrder extends DataModel
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @param double $totalSum 
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setTotalSum($totalSum)
+    {
+        return $this->setProperty('totalSum', $totalSum, 'double');
+    }
+
+    /**
+     * @return double 
+     */
+    public function getTotalSum()
+    {
+        return $this->totalSum;
     }
 
     /**

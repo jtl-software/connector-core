@@ -67,6 +67,7 @@ class Product extends DataType
             new PropertyInfo('sku', 'string', '', false, false, false),
             new PropertyInfo('sort', 'integer', 0, false, false, false),
             new PropertyInfo('stockLevel', 'ProductStockLevel', null, false, false, false),
+            new PropertyInfo('supplierStockLevel', 'double', 0.0, false, false, false),
             new PropertyInfo('taric', 'string', '', false, false, false),
             new PropertyInfo('unNumber', 'string', '', false, false, false),
             new PropertyInfo('upc', 'string', '', false, false, false),

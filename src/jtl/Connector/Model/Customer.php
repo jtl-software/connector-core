@@ -38,6 +38,14 @@ class Customer extends DataModel
     protected $id = null;
 
     /**
+     * @var double 
+     * @Serializer\Type("double")
+     * @Serializer\SerializedName("accountCredit")
+     * @Serializer\Accessor(getter="getAccountCredit",setter="setAccountCredit")
+     */
+    protected $accountCredit = 0.0;
+
+    /**
      * @var DateTime Date of birth
      * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("birthday")
@@ -70,7 +78,7 @@ class Customer extends DataModel
     protected $countryIso = '';
 
     /**
-     * @var DateTime Creation date
+     * @var DateTime 
      * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
@@ -132,6 +140,14 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getFirstName",setter="setFirstName")
      */
     protected $firstName = '';
+
+    /**
+     * @var boolean 
+     * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("hasCustomerAccount")
+     * @Serializer\Accessor(getter="getHasCustomerAccount",setter="setHasCustomerAccount")
+     */
+    protected $hasCustomerAccount = false;
 
     /**
      * @var boolean Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
@@ -299,6 +315,23 @@ class Customer extends DataModel
     }
 
     /**
+     * @param double $accountCredit 
+     * @return \jtl\Connector\Model\Customer
+     */
+    public function setAccountCredit($accountCredit)
+    {
+        return $this->setProperty('accountCredit', $accountCredit, 'double');
+    }
+
+    /**
+     * @return double 
+     */
+    public function getAccountCredit()
+    {
+        return $this->accountCredit;
+    }
+
+    /**
      * @param DateTime $birthday Date of birth
      * @return \jtl\Connector\Model\Customer
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
@@ -368,7 +401,7 @@ class Customer extends DataModel
     }
 
     /**
-     * @param DateTime $creationDate Creation date
+     * @param DateTime $creationDate 
      * @return \jtl\Connector\Model\Customer
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
@@ -378,7 +411,7 @@ class Customer extends DataModel
     }
 
     /**
-     * @return DateTime Creation date
+     * @return DateTime 
      */
     public function getCreationDate()
     {
@@ -502,6 +535,24 @@ class Customer extends DataModel
     public function getFirstName()
     {
         return $this->firstName;
+    }
+
+    /**
+     * @param boolean $hasCustomerAccount 
+     * @return \jtl\Connector\Model\Customer
+     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
+     */
+    public function setHasCustomerAccount(boolean $hasCustomerAccount)
+    {
+        return $this->setProperty('hasCustomerAccount', $hasCustomerAccount, 'boolean');
+    }
+
+    /**
+     * @return boolean 
+     */
+    public function getHasCustomerAccount()
+    {
+        return $this->hasCustomerAccount;
     }
 
     /**

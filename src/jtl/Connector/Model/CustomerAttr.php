@@ -22,14 +22,6 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerAttr extends DataModel
 {
     /**
-     * @var Identity Reference to customer
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("customerId")
-     * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
-     */
-    protected $customerId = null;
-
-    /**
      * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
@@ -59,25 +51,6 @@ class CustomerAttr extends DataModel
     public function __construct()
     {
         $this->id = new Identity();
-        $this->customerId = new Identity();
-    }
-
-    /**
-     * @param Identity $customerId Reference to customer
-     * @return \jtl\Connector\Model\CustomerAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCustomerId(Identity $customerId)
-    {
-        return $this->setProperty('customerId', $customerId, 'Identity');
-    }
-
-    /**
-     * @return Identity Reference to customer
-     */
-    public function getCustomerId()
-    {
-        return $this->customerId;
     }
 
     /**

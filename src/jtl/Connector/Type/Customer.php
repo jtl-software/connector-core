@@ -19,6 +19,7 @@ class Customer extends DataType
         return array(
             new PropertyInfo('customerGroupId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('accountCredit', 'double', 0.0, false, false, false),
             new PropertyInfo('birthday', 'DateTime', null, false, false, false),
             new PropertyInfo('city', 'string', '', false, false, false),
             new PropertyInfo('company', 'string', '', false, false, false),
@@ -31,6 +32,7 @@ class Customer extends DataType
             new PropertyInfo('extraAddressLine', 'string', '', false, false, false),
             new PropertyInfo('fax', 'string', '', false, false, false),
             new PropertyInfo('firstName', 'string', '', false, false, false),
+            new PropertyInfo('hasCustomerAccount', 'boolean', false, false, false, false),
             new PropertyInfo('hasNewsletterSubscription', 'boolean', false, false, false, false),
             new PropertyInfo('isActive', 'boolean', false, false, false, false),
             new PropertyInfo('languageISO', 'string', '', false, false, false),

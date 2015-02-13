@@ -422,6 +422,14 @@ class Product extends DataModel
     protected $stockLevel = null;
 
     /**
+     * @var double 
+     * @Serializer\Type("double")
+     * @Serializer\SerializedName("supplierStockLevel")
+     * @Serializer\Accessor(getter="getSupplierStockLevel",setter="setSupplierStockLevel")
+     */
+    protected $supplierStockLevel = 0.0;
+
+    /**
      * @var string Optional TARIC
      * @Serializer\Type("string")
      * @Serializer\SerializedName("taric")
@@ -1474,6 +1482,23 @@ class Product extends DataModel
     public function getStockLevel()
     {
         return $this->stockLevel;
+    }
+
+    /**
+     * @param double $supplierStockLevel 
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setSupplierStockLevel($supplierStockLevel)
+    {
+        return $this->setProperty('supplierStockLevel', $supplierStockLevel, 'double');
+    }
+
+    /**
+     * @return double 
+     */
+    public function getSupplierStockLevel()
+    {
+        return $this->supplierStockLevel;
     }
 
     /**
