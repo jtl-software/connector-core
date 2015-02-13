@@ -19,6 +19,8 @@ class FileUpload extends DataType
         return array(
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('productId', 'Identity', null, false, true, false),
+            new PropertyInfo('fileType', 'string', '', false, false, false),
+            new PropertyInfo('isRequired', 'boolean', false, false, false, false),
         );
     }
 

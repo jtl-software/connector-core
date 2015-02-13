@@ -38,6 +38,22 @@ class FileUpload extends DataModel
     protected $productId = null;
 
     /**
+     * @var string 
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("fileType")
+     * @Serializer\Accessor(getter="getFileType",setter="setFileType")
+     */
+    protected $fileType = '';
+
+    /**
+     * @var boolean 
+     * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("isRequired")
+     * @Serializer\Accessor(getter="getIsRequired",setter="setIsRequired")
+     */
+    protected $isRequired = false;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -80,5 +96,40 @@ class FileUpload extends DataModel
     public function getProductId()
     {
         return $this->productId;
+    }
+
+    /**
+     * @param string $fileType 
+     * @return \jtl\Connector\Model\FileUpload
+     */
+    public function setFileType($fileType)
+    {
+        return $this->setProperty('fileType', $fileType, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getFileType()
+    {
+        return $this->fileType;
+    }
+
+    /**
+     * @param boolean $isRequired 
+     * @return \jtl\Connector\Model\FileUpload
+     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
+     */
+    public function setIsRequired(boolean $isRequired)
+    {
+        return $this->setProperty('isRequired', $isRequired, 'boolean');
+    }
+
+    /**
+     * @return boolean 
+     */
+    public function getIsRequired()
+    {
+        return $this->isRequired;
     }
 }
