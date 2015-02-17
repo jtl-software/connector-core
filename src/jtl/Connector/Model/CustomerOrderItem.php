@@ -101,6 +101,14 @@ class CustomerOrderItem extends DataModel
     protected $sku = '';
 
     /**
+     * @var string 
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("type")
+     * @Serializer\Accessor(getter="getType",setter="setType")
+     */
+    protected $type = '';
+
+    /**
      * @var string Optional unique Hashsum (if item is part of configurable item
      * @Serializer\Type("string")
      * @Serializer\SerializedName("unique")
@@ -273,6 +281,23 @@ class CustomerOrderItem extends DataModel
     public function getSku()
     {
         return $this->sku;
+    }
+
+    /**
+     * @param string $type 
+     * @return \jtl\Connector\Model\CustomerOrderItem
+     */
+    public function setType($type)
+    {
+        return $this->setProperty('type', $type, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**
