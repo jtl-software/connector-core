@@ -79,7 +79,7 @@ abstract class Model
      * @param array $publics
      * @return stdClass $object
      */
-    public function getPublic(array $publics = null)
+    public function getPublic(array $publics = array('fields', 'isEncrypted', 'identities', '_type'))
     {
         $object = new \stdClass();
         
