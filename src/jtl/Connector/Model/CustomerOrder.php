@@ -22,6 +22,51 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerOrder extends DataModel
 {
     /**
+     * @var string - Status when payment is completed
+     */
+    const PAYMENT_STATUS_COMPLETED = 'completed';
+
+    /**
+     * @var string - Status when order is partially paid
+     */
+    const PAYMENT_STATUS_PARTIALLY = 'partially_paid';
+
+    /**
+     * @var string - Status when order is unpaid
+     */
+    const PAYMENT_STATUS_UNPAID = 'unpaid';
+
+    /**
+     * @var string - Cancelled by merchant or customer
+     */
+    const STATUS_CANCELLED = 'cancelled';
+
+    /**
+     * @var string - Order paid and shipped completely
+     */
+    const STATUS_COMPLETED = 'completed';
+
+    /**
+     * @var string - Initial status for new customerOrder, when customer finished order and order has not yet been paid or fetched
+     */
+    const STATUS_NEW = 'new';
+
+    /**
+     * @var string - Order has been shipped partially
+     */
+    const STATUS_PARTIALLY_SHIPPED = 'partially_shipped';
+
+    /**
+     * @var string - Customer order in process
+     */
+    const STATUS_PROCESSING = 'processed';
+
+    /**
+     * @var string - New status, when changes have been made to customerOrder (e.g. item quantity change)
+     */
+    const STATUS_UPDATED = 'updated';
+
+    /**
      * @var Identity Reference to billingAddress
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("billingAddressId")
