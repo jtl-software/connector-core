@@ -117,9 +117,8 @@ class Image extends DataModel
     /**
      * @param ImageRelationType $relationType 
      * @return \jtl\Connector\Model\Image
-     * @throws \InvalidArgumentException if the provided argument is not of type 'ImageRelationType'.
      */
-    public function setRelationType(ImageRelationType $relationType)
+    public function setRelationType($relationType)
     {
         return $this->setProperty('relationType', $relationType, 'string');
     }
