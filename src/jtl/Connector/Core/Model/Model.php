@@ -95,6 +95,14 @@ abstract class Model
                     if ($member[0] == "_") {
                         $memberpub = substr($member, 1);
                     }
+
+                    if (is_array($this->{$member})) {
+                        for ($i = 0; $i < count($this->{$member}); $i++) {
+                            if ($this->{$member}[$i] instanceof self) {
+                                $this->{$member}[$i] = $this->{$member}[$i]->getPublic($publics);
+                            }
+                        }
+                    }
                     
                     $object->{$memberpub} = ($this->{$member} instanceof self) ? $this->{$member}->getPublic($publics) : $this->{$member};
                 }
