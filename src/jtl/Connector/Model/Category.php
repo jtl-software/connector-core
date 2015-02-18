@@ -141,9 +141,8 @@ class Category extends DataModel
     /**
      * @param boolean $isActive 
      * @return \jtl\Connector\Model\Category
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsActive(boolean $isActive)
+    public function setIsActive($isActive)
     {
         return $this->setProperty('isActive', $isActive, 'boolean');
     }

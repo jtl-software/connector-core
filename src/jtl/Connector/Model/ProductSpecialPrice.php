@@ -177,9 +177,8 @@ class ProductSpecialPrice extends DataModel
     /**
      * @param boolean $considerDateLimit Optional: Consider activeFrom/activeUntil date range. If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
      * @return \jtl\Connector\Model\ProductSpecialPrice
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setConsiderDateLimit(boolean $considerDateLimit)
+    public function setConsiderDateLimit($considerDateLimit)
     {
         return $this->setProperty('considerDateLimit', $considerDateLimit, 'boolean');
     }
@@ -195,9 +194,8 @@ class ProductSpecialPrice extends DataModel
     /**
      * @param boolean $considerStockLimit Optional: Consider stockLimit value. If true, specialPrice will be only active until product stockLevel is greater or equal stockLimit.
      * @return \jtl\Connector\Model\ProductSpecialPrice
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setConsiderStockLimit(boolean $considerStockLimit)
+    public function setConsiderStockLimit($considerStockLimit)
     {
         return $this->setProperty('considerStockLimit', $considerStockLimit, 'boolean');
     }
@@ -213,9 +211,8 @@ class ProductSpecialPrice extends DataModel
     /**
      * @param boolean $isActive Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match. 
      * @return \jtl\Connector\Model\ProductSpecialPrice
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsActive(boolean $isActive)
+    public function setIsActive($isActive)
     {
         return $this->setProperty('isActive', $isActive, 'boolean');
     }

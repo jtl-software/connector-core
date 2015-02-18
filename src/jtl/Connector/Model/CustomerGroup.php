@@ -98,9 +98,8 @@ class CustomerGroup extends DataModel
     /**
      * @param boolean $applyNetPrice Optional: Show net prices default instead of gross prices
      * @return \jtl\Connector\Model\CustomerGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setApplyNetPrice(boolean $applyNetPrice)
+    public function setApplyNetPrice($applyNetPrice)
     {
         return $this->setProperty('applyNetPrice', $applyNetPrice, 'boolean');
     }
@@ -133,9 +132,8 @@ class CustomerGroup extends DataModel
     /**
      * @param boolean $isDefault Optional: Flag default customer group
      * @return \jtl\Connector\Model\CustomerGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsDefault(boolean $isDefault)
+    public function setIsDefault($isDefault)
     {
         return $this->setProperty('isDefault', $isDefault, 'boolean');
     }

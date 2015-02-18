@@ -128,9 +128,8 @@ class ProductAttr extends DataModel
     /**
      * @param boolean $isTranslated 
      * @return \jtl\Connector\Model\ProductAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsTranslated(boolean $isTranslated)
+    public function setIsTranslated($isTranslated)
     {
         return $this->setProperty('isTranslated', $isTranslated, 'boolean');
     }

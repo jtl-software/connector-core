@@ -118,9 +118,8 @@ class FileUpload extends DataModel
     /**
      * @param boolean $isRequired 
      * @return \jtl\Connector\Model\FileUpload
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsRequired(boolean $isRequired)
+    public function setIsRequired($isRequired)
     {
         return $this->setProperty('isRequired', $isRequired, 'boolean');
     }

@@ -540,9 +540,8 @@ class Customer extends DataModel
     /**
      * @param boolean $hasCustomerAccount 
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setHasCustomerAccount(boolean $hasCustomerAccount)
+    public function setHasCustomerAccount($hasCustomerAccount)
     {
         return $this->setProperty('hasCustomerAccount', $hasCustomerAccount, 'boolean');
     }
@@ -558,9 +557,8 @@ class Customer extends DataModel
     /**
      * @param boolean $hasNewsletterSubscription Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setHasNewsletterSubscription(boolean $hasNewsletterSubscription)
+    public function setHasNewsletterSubscription($hasNewsletterSubscription)
     {
         return $this->setProperty('hasNewsletterSubscription', $hasNewsletterSubscription, 'boolean');
     }
@@ -576,9 +574,8 @@ class Customer extends DataModel
     /**
      * @param boolean $isActive Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
      * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsActive(boolean $isActive)
+    public function setIsActive($isActive)
     {
         return $this->setProperty('isActive', $isActive, 'boolean');
     }

@@ -135,9 +135,8 @@ class DeliveryNote extends DataModel
     /**
      * @param boolean $isFulfillment Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      * @return \jtl\Connector\Model\DeliveryNote
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsFulfillment(boolean $isFulfillment)
+    public function setIsFulfillment($isFulfillment)
     {
         return $this->setProperty('isFulfillment', $isFulfillment, 'boolean');
     }

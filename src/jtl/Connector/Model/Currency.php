@@ -173,9 +173,8 @@ class Currency extends DataModel
     /**
      * @param boolean $hasCurrencySignBeforeValue Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference. 
      * @return \jtl\Connector\Model\Currency
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setHasCurrencySignBeforeValue(boolean $hasCurrencySignBeforeValue)
+    public function setHasCurrencySignBeforeValue($hasCurrencySignBeforeValue)
     {
         return $this->setProperty('hasCurrencySignBeforeValue', $hasCurrencySignBeforeValue, 'boolean');
     }
@@ -191,9 +190,8 @@ class Currency extends DataModel
     /**
      * @param boolean $isDefault Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default. 
      * @return \jtl\Connector\Model\Currency
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsDefault(boolean $isDefault)
+    public function setIsDefault($isDefault)
     {
         return $this->setProperty('isDefault', $isDefault, 'boolean');
     }

@@ -242,9 +242,8 @@ class ConfigItem extends DataModel
     /**
      * @param boolean $inheritProductName Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setInheritProductName(boolean $inheritProductName)
+    public function setInheritProductName($inheritProductName)
     {
         return $this->setProperty('inheritProductName', $inheritProductName, 'boolean');
     }
@@ -260,9 +259,8 @@ class ConfigItem extends DataModel
     /**
      * @param boolean $inheritProductPrice Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setInheritProductPrice(boolean $inheritProductPrice)
+    public function setInheritProductPrice($inheritProductPrice)
     {
         return $this->setProperty('inheritProductPrice', $inheritProductPrice, 'boolean');
     }
@@ -295,9 +293,8 @@ class ConfigItem extends DataModel
     /**
      * @param boolean $isPreSelected Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsPreSelected(boolean $isPreSelected)
+    public function setIsPreSelected($isPreSelected)
     {
         return $this->setProperty('isPreSelected', $isPreSelected, 'boolean');
     }
@@ -313,9 +310,8 @@ class ConfigItem extends DataModel
     /**
      * @param boolean $isRecommended Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsRecommended(boolean $isRecommended)
+    public function setIsRecommended($isRecommended)
     {
         return $this->setProperty('isRecommended', $isRecommended, 'boolean');
     }
@@ -365,9 +361,8 @@ class ConfigItem extends DataModel
     /**
      * @param boolean $showDiscount Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setShowDiscount(boolean $showDiscount)
+    public function setShowDiscount($showDiscount)
     {
         return $this->setProperty('showDiscount', $showDiscount, 'boolean');
     }
@@ -383,9 +378,8 @@ class ConfigItem extends DataModel
     /**
      * @param boolean $showSurcharge Optional: Show surcharge compared to productId price.
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setShowSurcharge(boolean $showSurcharge)
+    public function setShowSurcharge($showSurcharge)
     {
         return $this->setProperty('showSurcharge', $showSurcharge, 'boolean');
     }

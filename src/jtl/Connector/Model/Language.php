@@ -90,9 +90,8 @@ class Language extends DataModel
     /**
      * @param boolean $isDefault Flag default language for frontend. Exact 1 language must be marked as default.
      * @return \jtl\Connector\Model\Language
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsDefault(boolean $isDefault)
+    public function setIsDefault($isDefault)
     {
         return $this->setProperty('isDefault', $isDefault, 'boolean');
     }

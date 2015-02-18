@@ -876,9 +876,8 @@ class Product extends DataModel
     /**
      * @param boolean $considerBasePrice Optional: Set to true to display base price / unit pricing measure
      * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setConsiderBasePrice(boolean $considerBasePrice)
+    public function setConsiderBasePrice($considerBasePrice)
     {
         return $this->setProperty('considerBasePrice', $considerBasePrice, 'boolean');
     }
@@ -894,9 +893,8 @@ class Product extends DataModel
     /**
      * @param boolean $considerStock Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
      * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setConsiderStock(boolean $considerStock)
+    public function setConsiderStock($considerStock)
     {
         return $this->setProperty('considerStock', $considerStock, 'boolean');
     }
@@ -912,9 +910,8 @@ class Product extends DataModel
     /**
      * @param boolean $considerVariationStock Optional: Consider stock levels of productVariations. Same as considerStock but for variations. 
      * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setConsiderVariationStock(boolean $considerVariationStock)
+    public function setConsiderVariationStock($considerVariationStock)
     {
         return $this->setProperty('considerVariationStock', $considerVariationStock, 'boolean');
     }
@@ -1016,9 +1013,8 @@ class Product extends DataModel
     /**
      * @param boolean $isActive 
      * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsActive(boolean $isActive)
+    public function setIsActive($isActive)
     {
         return $this->setProperty('isActive', $isActive, 'boolean');
     }
@@ -1034,9 +1030,8 @@ class Product extends DataModel
     /**
      * @param boolean $isBatch 
      * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsBatch(boolean $isBatch)
+    public function setIsBatch($isBatch)
     {
         return $this->setProperty('isBatch', $isBatch, 'boolean');
     }
@@ -1052,9 +1047,8 @@ class Product extends DataModel
     /**
      * @param boolean $isBestBefore 
      * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsBestBefore(boolean $isBestBefore)
+    public function setIsBestBefore($isBestBefore)
     {
         return $this->setProperty('isBestBefore', $isBestBefore, 'boolean');
     }
@@ -1087,9 +1081,8 @@ class Product extends DataModel
     /**
      * @param boolean $isDivisible Optional: Set to true to allow non-integer quantites for purchase
      * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsDivisible(boolean $isDivisible)
+    public function setIsDivisible($isDivisible)
     {
         return $this->setProperty('isDivisible', $isDivisible, 'boolean');
     }
@@ -1105,9 +1098,8 @@ class Product extends DataModel
     /**
      * @param boolean $isMasterProduct Optional flag if product is master product
      * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsMasterProduct(boolean $isMasterProduct)
+    public function setIsMasterProduct($isMasterProduct)
     {
         return $this->setProperty('isMasterProduct', $isMasterProduct, 'boolean');
     }
@@ -1123,9 +1115,8 @@ class Product extends DataModel
     /**
      * @param boolean $isNewProduct Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
      * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setisNewProduct(boolean $isNewProduct)
+    public function setisNewProduct($isNewProduct)
     {
         return $this->setProperty('isNewProduct', $isNewProduct, 'boolean');
     }
@@ -1141,9 +1132,8 @@ class Product extends DataModel
     /**
      * @param boolean $isSerialNumber 
      * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsSerialNumber(boolean $isSerialNumber)
+    public function setIsSerialNumber($isSerialNumber)
     {
         return $this->setProperty('isSerialNumber', $isSerialNumber, 'boolean');
     }
@@ -1159,9 +1149,8 @@ class Product extends DataModel
     /**
      * @param boolean $isTopProduct Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
      * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsTopProduct(boolean $isTopProduct)
+    public function setIsTopProduct($isTopProduct)
     {
         return $this->setProperty('isTopProduct', $isTopProduct, 'boolean');
     }
@@ -1348,9 +1337,8 @@ class Product extends DataModel
     /**
      * @param boolean $permitNegativeStock Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true. 
      * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setPermitNegativeStock(boolean $permitNegativeStock)
+    public function setPermitNegativeStock($permitNegativeStock)
     {
         return $this->setProperty('permitNegativeStock', $permitNegativeStock, 'boolean');
     }

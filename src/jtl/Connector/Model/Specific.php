@@ -98,9 +98,8 @@ class Specific extends DataModel
     /**
      * @param boolean $isGlobal Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      * @return \jtl\Connector\Model\Specific
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsGlobal(boolean $isGlobal)
+    public function setIsGlobal($isGlobal)
     {
         return $this->setProperty('isGlobal', $isGlobal, 'boolean');
     }
