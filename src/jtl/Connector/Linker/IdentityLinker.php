@@ -574,6 +574,7 @@ class IdentityLinker
      * @param string $modelName
      * @param string $property
      * @throws \jtl\Connector\Exception\LinkerException
+     * @return int
      */
     public function getType($modelName, $property = null)
     {
@@ -598,6 +599,23 @@ class IdentityLinker
         }
 
         return self::$mappings[$modelName][$property];
+    }
+
+    /**
+     * Model name getter
+     *
+     * @param int $type
+     * @throws \jtl\Connector\Exception\LinkerException
+     * @return string
+     */
+    public function getModelName($type)
+    {
+        $modelName = array_search($type, self::$types);
+        if ($modelName === false) {
+            throw new LinkerException(sprintf('Model for type (%s) not found', $type));
+        }
+
+        return $modelName;
     }
 
     /**
