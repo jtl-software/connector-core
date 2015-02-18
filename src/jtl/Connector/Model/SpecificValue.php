@@ -101,9 +101,8 @@ class SpecificValue extends DataModel
     /**
      * @param integer $sort Optional sort number
      * @return \jtl\Connector\Model\SpecificValue
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setSort(integer $sort)
+    public function setSort($sort)
     {
         return $this->setProperty('sort', $sort, 'integer');
     }

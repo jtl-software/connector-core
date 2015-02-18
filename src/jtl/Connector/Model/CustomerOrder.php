@@ -589,9 +589,8 @@ class CustomerOrder extends DataModel
     /**
      * @param integer $shippingMethodCode Identifier code for shippingMethod
      * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setShippingMethodCode(integer $shippingMethodCode)
+    public function setShippingMethodCode($shippingMethodCode)
     {
         return $this->setProperty('shippingMethodCode', $shippingMethodCode, 'integer');
     }

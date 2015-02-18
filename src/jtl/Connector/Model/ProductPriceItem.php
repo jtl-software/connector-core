@@ -91,9 +91,8 @@ class ProductPriceItem extends DataModel
     /**
      * @param integer $quantity Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
      * @return \jtl\Connector\Model\ProductPriceItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setQuantity(integer $quantity)
+    public function setQuantity($quantity)
     {
         return $this->setProperty('quantity', $quantity, 'integer');
     }

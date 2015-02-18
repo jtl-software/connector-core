@@ -228,9 +228,8 @@ class ProductSpecialPrice extends DataModel
     /**
      * @param integer $stockLimit Optional: SpecialPrice active until stock level quantity
      * @return \jtl\Connector\Model\ProductSpecialPrice
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setStockLimit(integer $stockLimit)
+    public function setStockLimit($stockLimit)
     {
         return $this->setProperty('stockLimit', $stockLimit, 'integer');
     }

@@ -148,9 +148,8 @@ class ConfigGroup extends DataModel
     /**
      * @param integer $maximumSelection Optional maximum number allowed selections. Default 0 for no maximum limitation.
      * @return \jtl\Connector\Model\ConfigGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setMaximumSelection(integer $maximumSelection)
+    public function setMaximumSelection($maximumSelection)
     {
         return $this->setProperty('maximumSelection', $maximumSelection, 'integer');
     }
@@ -166,9 +165,8 @@ class ConfigGroup extends DataModel
     /**
      * @param integer $minimumSelection Optional minimum number required selections. Default 0 for no minimum requirement. 
      * @return \jtl\Connector\Model\ConfigGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setMinimumSelection(integer $minimumSelection)
+    public function setMinimumSelection($minimumSelection)
     {
         return $this->setProperty('minimumSelection', $minimumSelection, 'integer');
     }
@@ -184,9 +182,8 @@ class ConfigGroup extends DataModel
     /**
      * @param integer $sort Optional sort order number
      * @return \jtl\Connector\Model\ConfigGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setSort(integer $sort)
+    public function setSort($sort)
     {
         return $this->setProperty('sort', $sort, 'integer');
     }
@@ -202,9 +199,8 @@ class ConfigGroup extends DataModel
     /**
      * @param integer $type Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      * @return \jtl\Connector\Model\ConfigGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setType(integer $type)
+    public function setType($type)
     {
         return $this->setProperty('type', $type, 'integer');
     }

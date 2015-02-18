@@ -118,9 +118,8 @@ class ConfigItemPrice extends DataModel
     /**
      * @param integer $type Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
      * @return \jtl\Connector\Model\ConfigItemPrice
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setType(integer $type)
+    public function setType($type)
     {
         return $this->setProperty('type', $type, 'integer');
     }

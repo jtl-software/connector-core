@@ -107,9 +107,8 @@ class DeliveryNoteItemInfo extends DataModel
     /**
      * @param integer $warehouseId 
      * @return \jtl\Connector\Model\DeliveryNoteItemInfo
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setWarehouseId(integer $warehouseId)
+    public function setWarehouseId($warehouseId)
     {
         return $this->setProperty('warehouseId', $warehouseId, 'integer');
     }

@@ -132,9 +132,8 @@ class FileDownload extends DataModel
     /**
      * @param integer $maxDays Optional max days to allow Download, starting from payment date. Default 0 for no time limit. 
      * @return \jtl\Connector\Model\FileDownload
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setMaxDays(integer $maxDays)
+    public function setMaxDays($maxDays)
     {
         return $this->setProperty('maxDays', $maxDays, 'integer');
     }
@@ -150,9 +149,8 @@ class FileDownload extends DataModel
     /**
      * @param integer $maxDownloads Optional max number of allowed downloads per customer. Default 0 for no maximum download limit. 
      * @return \jtl\Connector\Model\FileDownload
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setMaxDownloads(integer $maxDownloads)
+    public function setMaxDownloads($maxDownloads)
     {
         return $this->setProperty('maxDownloads', $maxDownloads, 'integer');
     }
@@ -202,9 +200,8 @@ class FileDownload extends DataModel
     /**
      * @param integer $sort Optional sort number
      * @return \jtl\Connector\Model\FileDownload
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setSort(integer $sort)
+    public function setSort($sort)
     {
         return $this->setProperty('sort', $sort, 'integer');
     }

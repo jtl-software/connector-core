@@ -57,9 +57,8 @@ class CustomerGroupPackagingQuantities extends DataModel
     /**
      * @param integer $customergroupID Reference to customergroup.
      * @return \jtl\Connector\Model\CustomerGroupPackagingQuantities
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setCustomergroupID(integer $customergroupID)
+    public function setCustomergroupID($customergroupID)
     {
         return $this->setProperty('customergroupID', $customergroupID, 'integer');
     }
@@ -109,9 +108,8 @@ class CustomerGroupPackagingQuantities extends DataModel
     /**
      * @param integer $productId Reference to product.
      * @return \jtl\Connector\Model\CustomerGroupPackagingQuantities
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setProductId(integer $productId)
+    public function setProductId($productId)
     {
         return $this->setProperty('productId', $productId, 'integer');
     }

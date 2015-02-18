@@ -858,9 +858,8 @@ class Product extends DataModel
     /**
      * @param integer $buffer Optional summary
      * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setBuffer(integer $buffer)
+    public function setBuffer($buffer)
     {
         return $this->setProperty('buffer', $buffer, 'integer');
     }
@@ -1439,9 +1438,8 @@ class Product extends DataModel
     /**
      * @param integer $sort Optional sort number for product sorting in lists
      * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setSort(integer $sort)
+    public function setSort($sort)
     {
         return $this->setProperty('sort', $sort, 'integer');
     }

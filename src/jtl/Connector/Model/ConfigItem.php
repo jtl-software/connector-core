@@ -224,9 +224,8 @@ class ConfigItem extends DataModel
     /**
      * @param integer $ignoreMultiplier Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setIgnoreMultiplier(integer $ignoreMultiplier)
+    public function setIgnoreMultiplier($ignoreMultiplier)
     {
         return $this->setProperty('ignoreMultiplier', $ignoreMultiplier, 'integer');
     }
@@ -395,9 +394,8 @@ class ConfigItem extends DataModel
     /**
      * @param integer $sort Optional sort order number
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setSort(integer $sort)
+    public function setSort($sort)
     {
         return $this->setProperty('sort', $sort, 'integer');
     }
@@ -413,9 +411,8 @@ class ConfigItem extends DataModel
     /**
      * @param integer $type Config item type. 0: Product, 1: Special
      * @return \jtl\Connector\Model\ConfigItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setType(integer $type)
+    public function setType($type)
     {
         return $this->setProperty('type', $type, 'integer');
     }
