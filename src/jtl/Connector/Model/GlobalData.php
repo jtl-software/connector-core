@@ -116,6 +116,13 @@ class GlobalData extends DataModel
      */
     protected $warehouses = array();
 
+    /**
+     * @var \jtl\Connector\Model\TaxRate[]
+     * @Serializer\Type("array<jtl\Connector\Model\TaxRate>")
+     * @Serializer\SerializedName("taxRates")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $taxRates = array();
 
     /**
      * @param \jtl\Connector\Model\ConfigGroup $configGroup
@@ -438,6 +445,33 @@ class GlobalData extends DataModel
     public function clearWarehouses()
     {
         $this->warehouses = array();
+        return $this;
+    }
+    
+    /**
+     * @param  \jtl\Connector\Model\TaxRate $taxRate
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function addTaxRate(\jtl\Connector\Model\TaxRate $taxRate)
+    {
+        $this->taxRates[] = $taxRate;
+        return $this;
+    }
+    
+    /**
+     * @return \jtl\Connector\Model\TaxRate[]
+     */
+    public function getTaxRates()
+    {
+        return $this->taxRates;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function clearTaxRates()
+    {
+        $this->taxRates = array();
         return $this;
     }
 }

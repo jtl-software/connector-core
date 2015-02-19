@@ -113,7 +113,7 @@ class Application extends CoreApplication
     protected function execute(RequestPacket $requestpacket, Config $config, $rpcmode, $imagePath = null)
     {
         if (!RpcMethod::isMethod($requestpacket->getMethod())) {
-            throw new RpcException("Invalid Request", -32600);
+            throw new RpcException('Invalid Request', -32600);
         }
 
         $identityLinker = IdentityLinker::getInstance();
@@ -149,13 +149,13 @@ class Application extends CoreApplication
         $this->deserializeRequestParams($requestpacket, self::$connector->getModelNamespace());
 
         // Image?
-        if ($requestpacket->getMethod() == "image.push" && $imagePath !== null) {
+        if ($requestpacket->getMethod() === 'image.push' && $imagePath !== null) {
             if ($imagePath !== null) {
                 $image = $requestpacket->getParams();
                 $image->setFilename($imagePath);
                 $requestpacket->setParams($image);
             } else {
-                throw new ConnectorException("Could not handle fileupload (no file was uploaded via HTTP POST?)");
+                throw new ConnectorException('Could not handle fileupload (no file was uploaded via HTTP POST?)');
             }
         }
 
@@ -164,25 +164,29 @@ class Application extends CoreApplication
             self::$connector->setConfig($config);
             $actionresult = self::$connector->handle($requestpacket);
             
-            if ($requestpacket->getMethod() == "image.push" && $imagePath !== null) {
+            if ($requestpacket->getMethod() === 'image.push' && $imagePath !== null) {
                 Request::deleteFileupload($imagePath);
             }
             
-            if (get_class($actionresult) == "jtl\\Connector\\Result\\Action") {
+            if (get_class($actionresult) === "jtl\\Connector\\Result\\Action") {
                 $exists = true;
                 if ($actionresult->isHandled()) {
 
                     // Identity mapping
-                    if ($method->getAction() == Method::ACTION_PULL) {
-                        $results = array();
-                        foreach ($actionresult->getResult() as $model) {
-                            $identityLinker->linkModel($model);
+                    $results = array();
+                    foreach ($actionresult->getResult() as $model) {
+                        $identityLinker->linkModel($model);
+
+                        if ($method->getAction() === Method::ACTION_PULL) {
                             $results[] = $model->getPublic();
                         }
+                    }
 
+                    if ($method->getAction() === Method::ACTION_PULL) {
                         $actionresult->setResult($results);
                     }
 
+                    // Building response packet
                     $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
 
                     if ($rpcmode == Packet::SINGLE_MODE) {
@@ -192,16 +196,16 @@ class Application extends CoreApplication
                     }
                 }
             } else {
-                throw new RpcException("Internal error", -32603);
+                throw new RpcException('Internal error', -32603);
             }
         } else {
-            if ($requestpacket->getMethod() == "image.push") {
+            if ($requestpacket->getMethod() === 'image.push') {
                 Request::deleteFileupload($imagePath);
             }
         }
 
         if ($exists) {
-            throw new RpcException("Method could not be handled", -32000);
+            throw new RpcException('Method could not be handled', -32000);
         } else {
             throw new RpcException(
                 sprintf("Method '%s' not found", $requestpacket->getMethod()),
@@ -234,14 +238,14 @@ class Application extends CoreApplication
 
         // Image?
         $imagePath = null;
-        if ($requestpacket->getMethod() == "image.push") {
+        if ($requestpacket->getMethod() === 'image.push') {
             $imagePath = Request::handleFileupload();
         }
 
         try {
             $this->execute($requestpacket, $config, $rpcmode, $imagePath);
         } catch (RpcException $exc) {
-            if ($requestpacket->getMethod() == "image.push" && $imagePath !== null) {
+            if ($requestpacket->getMethod() === 'image.push' && $imagePath !== null) {
                 Request::deleteFileupload($imagePath);
             }
 
@@ -439,12 +443,12 @@ class Application extends CoreApplication
      */
     protected function startSession($sessionId = null, $method)
     {
-        if ($sessionId === null && $method !== null && $method != "core.connector.auth") {
-            throw new SessionException("No session");
+        if ($sessionId === null && $method !== null && $method !== 'core.connector.auth') {
+            throw new SessionException('No session');
         }
 
         $sqlite3 = Sqlite3::getInstance();
-        $sqlite3->connect(array("location" => CONNECTOR_DIR . "/db/connector.s3db"));
+        $sqlite3->connect(array('location' => CONNECTOR_DIR . '/db/connector.s3db'));
 
         self::$session = new Session($sqlite3, $sessionId);
     }

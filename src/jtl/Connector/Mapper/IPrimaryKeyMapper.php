@@ -7,9 +7,43 @@ namespace jtl\Connector\Mapper;
 
 interface IPrimaryKeyMapper
 {
+    /**
+     * Host ID getter
+     *
+     * @param string $endpointId
+     * @param integer $type
+     * @return integer|null
+     */
     public function getHostId($endpointId, $type);
+
+    /**
+     * Endpoint ID getter
+     *
+     * @param integer $hostId
+     * @param integer $type
+     * @return string|null
+     */
     public function getEndpointId($hostId, $type);
+
+    /**
+     * Save link to database
+     *
+     * @param string $endpointId
+     * @param integer $hostId
+     * @param integer $type
+     * @return boolean
+     */
     public function save($endpointId, $hostId, $type);
+    
     //public function update($endpointId = null, $hostId = null, $type);
+
+    /**
+     * Delete link from database
+     *
+     * @param string $endpointId
+     * @param integer $hostId
+     * @param integer $type
+     * @return boolean
+     */
     public function delete($endpointId = null, $hostId = null, $type);
 }

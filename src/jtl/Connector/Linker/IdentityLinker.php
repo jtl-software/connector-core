@@ -544,20 +544,26 @@ class IdentityLinker
                 }
 
                 if (strlen($identity->getEndpoint()) > 0 && $identity->getHost() > 0) {
-                    if (!$this->exists(null, $identity->getHost(), $reflect->getShortName(), $property)) {
+                    if ($model->getAction() === DataModel::ACTION_DELETE) {
+                        $this->delete($identity->getEndpoint(), $identity->getHost(), $reflect->getShortName());
+                    } elseif (!$this->exists(null, $identity->getHost(), $reflect->getShortName(), $property)) {
                         $this->save($identity->getEndpoint(), $identity->getHost(), $reflect->getShortName(), $property);
                     }
 
                     continue;
                 } else {
                     if ($identity->getHost() > 0) {
-                        if ($this->exists(null, $identity->getHost(), $reflect->getShortName(), $property)) {
+                        if ($model->getAction() === DataModel::ACTION_DELETE) {
+                            $this->delete(null, $identity->getHost(), $reflect->getShortName());
+                        } elseif ($this->exists(null, $identity->getHost(), $reflect->getShortName(), $property)) {
                             $identity->setEndpoint($this->getEndpointId($identity->getHost(), $reflect->getShortName(), $property));
 
                             $model->{$setter}($identity);
                         }
                     } elseif (strlen($identity->getEndpoint()) > 0) {
-                        if ($this->exists($identity->getEndpoint(), null, $reflect->getShortName(), $property)) {
+                        if ($model->getAction() === DataModel::ACTION_DELETE) {
+                            $this->delete($identity->getEndpoint(), null, $reflect->getShortName());
+                        } elseif ($this->exists($identity->getEndpoint(), null, $reflect->getShortName(), $property)) {
                             $identity->setHost($this->getHostId($identity->getEndpoint(), $reflect->getShortName(), $property));
 
                             $model->{$setter}($identity);
@@ -671,6 +677,7 @@ class IdentityLinker
      * @param integer $hostId
      * @param string $modelName
      * @param string $property
+     * @return boolean
      * @throws \jtl\Connector\Exception\LinkerException
      */
     public function save($endpointId, $hostId, $modelName, $property = null)
@@ -681,6 +688,29 @@ class IdentityLinker
         if ($result) {
             $this->saveCache($endpointId, $type, self::CACHE_TYPE_ENDPOINT);
             $this->saveCache($hostId, $type, self::CACHE_TYPE_HOST);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Delete link from database
+     *
+     * @param string $endpointId
+     * @param integer $hostId
+     * @param string $modelName
+     * @return boolean
+     */
+    public function delete($endpointId = null, $hostId = null, $modelName)
+    {
+        $type = $this->getType($modelName);
+
+        $result = self::$mapper->delete($endpointId, $hostId, $type);
+        if ($result) {
+            $this->deleteCache($endpointId, $type, self::CACHE_TYPE_ENDPOINT);
+            $this->deleteCache($hostId, $type, self::CACHE_TYPE_HOST);
 
             return true;
         }
@@ -759,6 +789,20 @@ class IdentityLinker
                     break;
                 case self::CACHE_TYPE_ENDPOINT:
                     self::$cache[$this->buildKey($hostId, $type, $cacheType)] = $endpointId;
+                    break;
+            }
+        }
+    }
+
+    protected function deleteCache($endpointId, $hostId, $type, $cacheType)
+    {
+        if (self::$useCache) {
+            switch ($cacheType) {
+                case self::CACHE_TYPE_ENDPOINT:
+                    unset(self::$cache[$this->buildKey($endpointId, $type, $cacheType)]);
+                    break;
+                case self::CACHE_TYPE_ENDPOINT:
+                    unset(self::$cache[$this->buildKey($hostId, $type, $cacheType)]);
                     break;
             }
         }
