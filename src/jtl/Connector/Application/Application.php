@@ -175,10 +175,12 @@ class Application extends CoreApplication
                     // Identity mapping
                     $results = array();
                     foreach ($actionresult->getResult() as $model) {
-                        $identityLinker->linkModel($model);
+                        if ($model instanceof DataModel) {
+                            $identityLinker->linkModel($model);
 
-                        if ($method->getAction() === Method::ACTION_PULL) {
-                            $results[] = $model->getPublic();
+                            if ($method->getAction() === Method::ACTION_PULL) {
+                                $results[] = $model->getPublic();
+                            }
                         }
                     }
 

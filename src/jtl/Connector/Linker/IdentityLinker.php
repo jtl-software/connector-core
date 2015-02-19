@@ -9,6 +9,7 @@ use \jtl\Connector\Mapper\IPrimaryKeyMapper;
 use \jtl\Connector\Model\DataModel;
 use \jtl\Connector\Exception\LinkerException;
 use \jtl\Connector\Model\Identity;
+use \jtl\Connector\Core\Logger\Logger;
 
 /**
  * Identity Connector Linker
@@ -533,8 +534,23 @@ class IdentityLinker
             $getter = 'get' . $property;
 
             if ($propertyInfo->isNavigation()) {
-                foreach ($identity = $model->{$getter}() as &$entity) {
-                    $this->linkModel($entity);
+
+                if (is_array($model->{$getter}())) {
+                    foreach ($identity = $model->{$getter}() as &$entity) {
+                        if ($entity instanceof DataModel) {
+                            $this->linkModel($entity);
+                        } else {
+                            Logger::write(
+                                sprintf('Property (%s) from model (%s) is not an instance of DataModel', $propertyInfo->getName(), $reflect->getShortName()), 
+                                Logger::WARNING, 'global'
+                            );        
+                        }
+                    }
+                } else {
+                    Logger::write(
+                        sprintf('Property (%s) from model (%s) is not an array', $propertyInfo->getName(), $reflect->getShortName()), 
+                        Logger::WARNING, 'global'
+                    );
                 }
             } elseif ($propertyInfo->isIdentity()) {
                 $identity = $model->{$getter}();
@@ -656,13 +672,13 @@ class IdentityLinker
         }
 
         if ($endpointId !== null) {
-            $id = self::$mapper->getHostId($endpointId, $type);
+            $hostId = self::$mapper->getHostId($endpointId, $type);
         } elseif ($hostId !== null) {
-            $id = self::$mapper->getEndpointId($hostId, $type);
+            $endpointId = self::$mapper->getEndpointId($hostId, $type);
         }
 
-        if ($id !== null) {
-            $this->saveCache($id, $type, $cacheType);
+        if ($endpointId !== null && $hostId !== null) {
+            $this->saveCache($endpointId, $hostId, $type, $cacheType);
 
             return true;
         }
@@ -686,8 +702,8 @@ class IdentityLinker
 
         $result = self::$mapper->save($endpointId, $hostId, $type);
         if ($result) {
-            $this->saveCache($endpointId, $type, self::CACHE_TYPE_ENDPOINT);
-            $this->saveCache($hostId, $type, self::CACHE_TYPE_HOST);
+            $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_ENDPOINT);
+            $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_HOST);
 
             return true;
         }
@@ -709,8 +725,8 @@ class IdentityLinker
 
         $result = self::$mapper->delete($endpointId, $hostId, $type);
         if ($result) {
-            $this->deleteCache($endpointId, $type, self::CACHE_TYPE_ENDPOINT);
-            $this->deleteCache($hostId, $type, self::CACHE_TYPE_HOST);
+            $this->deleteCache($endpointId, null, $type, self::CACHE_TYPE_ENDPOINT);
+            $this->deleteCache(null, $hostId, $type, self::CACHE_TYPE_HOST);
 
             return true;
         }
@@ -794,7 +810,7 @@ class IdentityLinker
         }
     }
 
-    protected function deleteCache($endpointId, $hostId, $type, $cacheType)
+    protected function deleteCache($endpointId = null, $hostId = null, $type, $cacheType)
     {
         if (self::$useCache) {
             switch ($cacheType) {
