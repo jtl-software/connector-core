@@ -11,7 +11,6 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Tax rate model (set in JTL-Wawi ERP).
  *
  * @access public
  * @package jtl\Connector\Model
@@ -22,7 +21,7 @@ use JMS\Serializer\Annotation as Serializer;
 class TaxRate extends DataModel
 {
     /**
-     * @var Identity Unique taxRate id
+     * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
@@ -30,7 +29,7 @@ class TaxRate extends DataModel
     protected $id = null;
 
     /**
-     * @var integer Optional priority number. Higher value means higher priority
+     * @var integer 
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("priority")
      * @Serializer\Accessor(getter="getPriority",setter="setPriority")
@@ -38,7 +37,7 @@ class TaxRate extends DataModel
     protected $priority = 0;
 
     /**
-     * @var double Tax rate value e.g. 19.00
+     * @var double 
      * @Serializer\Type("double")
      * @Serializer\SerializedName("rate")
      * @Serializer\Accessor(getter="getRate",setter="setRate")
@@ -54,7 +53,7 @@ class TaxRate extends DataModel
     }
 
     /**
-     * @param Identity $id Unique taxRate id
+     * @param Identity $id 
      * @return \jtl\Connector\Model\TaxRate
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -64,7 +63,7 @@ class TaxRate extends DataModel
     }
 
     /**
-     * @return Identity Unique taxRate id
+     * @return Identity 
      */
     public function getId()
     {
@@ -72,17 +71,16 @@ class TaxRate extends DataModel
     }
 
     /**
-     * @param integer $priority Optional priority number. Higher value means higher priority
+     * @param integer $priority 
      * @return \jtl\Connector\Model\TaxRate
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setPriority(integer $priority)
+    public function setPriority($priority)
     {
         return $this->setProperty('priority', $priority, 'integer');
     }
 
     /**
-     * @return integer Optional priority number. Higher value means higher priority
+     * @return integer 
      */
     public function getPriority()
     {
@@ -90,7 +88,7 @@ class TaxRate extends DataModel
     }
 
     /**
-     * @param double $rate Tax rate value e.g. 19.00
+     * @param double $rate 
      * @return \jtl\Connector\Model\TaxRate
      */
     public function setRate($rate)
@@ -99,7 +97,7 @@ class TaxRate extends DataModel
     }
 
     /**
-     * @return double Tax rate value e.g. 19.00
+     * @return double 
      */
     public function getRate()
     {

@@ -50,8 +50,8 @@ class ProductVariationValueExtraCharge extends DataModel
      */
     public function __construct()
     {
-        $this->productVariationValueId = new Identity();
         $this->customerGroupId = new Identity();
+        $this->productVariationValueId = new Identity();
     }
 
     /**
