@@ -58,8 +58,8 @@ class CustomerGroupAttr extends DataModel
      */
     public function __construct()
     {
-        $this->id = new Identity();
         $this->customerGroupId = new Identity();
+        $this->id = new Identity();
     }
 
     /**

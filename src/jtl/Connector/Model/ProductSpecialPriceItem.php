@@ -50,8 +50,8 @@ class ProductSpecialPriceItem extends DataModel
      */
     public function __construct()
     {
-        $this->productSpecialPriceId = new Identity();
         $this->customerGroupId = new Identity();
+        $this->productSpecialPriceId = new Identity();
     }
 
     /**

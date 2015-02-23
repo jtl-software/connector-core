@@ -66,9 +66,9 @@ class ProductPrice extends DataModel
      */
     public function __construct()
     {
+        $this->customerGroupId = new Identity();
         $this->id = new Identity();
         $this->productId = new Identity();
-        $this->customerGroupId = new Identity();
         $this->customerId = new Identity();
     }
 

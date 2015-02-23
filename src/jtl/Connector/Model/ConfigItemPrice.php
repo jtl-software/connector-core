@@ -58,8 +58,8 @@ class ConfigItemPrice extends DataModel
      */
     public function __construct()
     {
-        $this->configItemId = new Identity();
         $this->customerGroupId = new Identity();
+        $this->configItemId = new Identity();
     }
 
     /**

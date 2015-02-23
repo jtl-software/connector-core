@@ -50,8 +50,8 @@ class CategoryCustomerGroup extends DataModel
      */
     public function __construct()
     {
-        $this->categoryId = new Identity();
         $this->customerGroupId = new Identity();
+        $this->categoryId = new Identity();
     }
 
     /**
