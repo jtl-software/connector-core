@@ -33,6 +33,7 @@ use \jtl\Connector\Core\Logger\Logger;
 use \Doctrine\Common\Annotations\AnnotationRegistry;
 use \jtl\Connector\Core\Rpc\Method;
 use \jtl\Connector\Linker\IdentityLinker;
+use \jtl\Connector\Model\DataModel;
 
 /**
  * Application Class
