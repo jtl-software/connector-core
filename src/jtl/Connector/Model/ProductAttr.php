@@ -24,14 +24,6 @@ class ProductAttr extends DataModel
     /**
      * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("attributeId")
-     * @Serializer\Accessor(getter="getAttributeId",setter="setAttributeId")
-     */
-    protected $attributeId = null;
-
-    /**
-     * @var Identity 
-     * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
@@ -68,25 +60,6 @@ class ProductAttr extends DataModel
     {
         $this->id = new Identity();
         $this->productId = new Identity();
-        $this->attributeId = new Identity();
-    }
-
-    /**
-     * @param Identity $attributeId 
-     * @return \jtl\Connector\Model\ProductAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setAttributeId(Identity $attributeId)
-    {
-        return $this->setProperty('attributeId', $attributeId, 'Identity');
-    }
-
-    /**
-     * @return Identity 
-     */
-    public function getAttributeId()
-    {
-        return $this->attributeId;
     }
 
     /**

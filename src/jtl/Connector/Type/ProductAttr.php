@@ -17,7 +17,6 @@ class ProductAttr extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('attributeId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('productId', 'Identity', null, false, true, false),
             new PropertyInfo('isTranslated', 'boolean', false, false, false, false),

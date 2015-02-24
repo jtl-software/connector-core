@@ -22,14 +22,6 @@ use JMS\Serializer\Annotation as Serializer;
 class CategoryAttr extends DataModel
 {
     /**
-     * @var Identity Unique categoryAttr id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("attributeId")
-     * @Serializer\Accessor(getter="getAttributeId",setter="setAttributeId")
-     */
-    protected $attributeId = null;
-
-    /**
      * @var Identity Reference to category
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("categoryId")
@@ -68,25 +60,6 @@ class CategoryAttr extends DataModel
     {
         $this->id = new Identity();
         $this->categoryId = new Identity();
-        $this->attributeId = new Identity();
-    }
-
-    /**
-     * @param Identity $attributeId Unique categoryAttr id
-     * @return \jtl\Connector\Model\CategoryAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setAttributeId(Identity $attributeId)
-    {
-        return $this->setProperty('attributeId', $attributeId, 'Identity');
-    }
-
-    /**
-     * @return Identity Unique categoryAttr id
-     */
-    public function getAttributeId()
-    {
-        return $this->attributeId;
     }
 
     /**
