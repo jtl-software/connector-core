@@ -17,7 +17,7 @@ class CustomerAttr extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('id', 'Identity', null, false, true, false),
+            new PropertyInfo('customerId', 'Identity', null, false, true, false),
             new PropertyInfo('key', 'string', '', false, false, false),
             new PropertyInfo('value', 'string', '', false, false, false),
         );
