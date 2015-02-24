@@ -147,7 +147,7 @@ class Application extends CoreApplication
         // Endpoint Connector //
         ////////////////////////
         $exists = false;
-        
+
         $this->deserializeRequestParams($requestpacket, self::$connector->getModelNamespace());
 
         // Image?
@@ -304,10 +304,10 @@ class Application extends CoreApplication
     {
         $method = RpcMethod::splitMethod($requestpacket->getMethod());
 
-        $namespace = ($method->getAction() == Method::ACTION_PUSH) ?
+        $namespace = ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) ?
             sprintf('%s\%s', $modelNamespace, RpcMethod::buildController($method->getController())) : 'jtl\Connector\Core\Model\QueryFilter';
 
-        if (class_exists("\\{$namespace}") && $requestpacket->getParams() !== null) {
+        if (class_exists("\\{$namespace}") && $requestpacket->getParams() !== null) {            
             $serializer = \JMS\Serializer\SerializerBuilder::create()
                 ->addDefaultHandlers()
                 ->configureHandlers(function (\JMS\Serializer\Handler\HandlerRegistry $registry) {
@@ -316,7 +316,7 @@ class Application extends CoreApplication
                 ->build();
 
             // Identity mapping
-            if ($method->getAction() != Method::ACTION_PULL) {
+            if ($method->getAction() !== Method::ACTION_PULL) {
                 $params = $serializer->deserialize($requestpacket->getParams(), "ArrayCollection<{$namespace}>", 'json');
 
                 if (is_array($params)) {
