@@ -522,9 +522,10 @@ class IdentityLinker
      * Database setter
      *
      * @param \jtl\Connector\Model\DataModel $model
+     * @param bool $isDeleted
      * @throws \jtl\Connector\Exception\LinkerException
      */
-    public function linkModel(DataModel &$model)
+    public function linkModel(DataModel &$model, $isDeleted = false)
     {
         $reflect = new \ReflectionClass($model);
 
@@ -560,7 +561,7 @@ class IdentityLinker
                 }
 
                 if (strlen($identity->getEndpoint()) > 0 && $identity->getHost() > 0) {
-                    if ($model->getAction() === DataModel::ACTION_DELETE) {
+                    if ($isDeleted) {
                         $this->delete($identity->getEndpoint(), $identity->getHost(), $reflect->getShortName());
                     } elseif (!$this->exists(null, $identity->getHost(), $reflect->getShortName(), $property)) {
                         $this->save($identity->getEndpoint(), $identity->getHost(), $reflect->getShortName(), $property);
@@ -569,7 +570,7 @@ class IdentityLinker
                     continue;
                 } else {
                     if ($identity->getHost() > 0) {
-                        if ($model->getAction() === DataModel::ACTION_DELETE) {
+                        if ($isDeleted) {
                             $this->delete(null, $identity->getHost(), $reflect->getShortName());
                         } elseif ($this->exists(null, $identity->getHost(), $reflect->getShortName(), $property)) {
                             $identity->setEndpoint($this->getEndpointId($identity->getHost(), $reflect->getShortName(), $property));
@@ -577,7 +578,7 @@ class IdentityLinker
                             $model->{$setter}($identity);
                         }
                     } elseif (strlen($identity->getEndpoint()) > 0) {
-                        if ($model->getAction() === DataModel::ACTION_DELETE) {
+                        if ($isDeleted) {
                             $this->delete($identity->getEndpoint(), null, $reflect->getShortName());
                         } elseif ($this->exists($identity->getEndpoint(), null, $reflect->getShortName(), $property)) {
                             $identity->setHost($this->getHostId($identity->getEndpoint(), $reflect->getShortName(), $property));

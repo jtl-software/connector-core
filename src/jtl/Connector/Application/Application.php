@@ -34,6 +34,7 @@ use \Doctrine\Common\Annotations\AnnotationRegistry;
 use \jtl\Connector\Core\Rpc\Method;
 use \jtl\Connector\Linker\IdentityLinker;
 use \jtl\Connector\Model\DataModel;
+use \Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Application Class
@@ -177,7 +178,7 @@ class Application extends CoreApplication
                     $results = array();
                     foreach ($actionresult->getResult() as $model) {
                         if ($model instanceof DataModel) {
-                            $identityLinker->linkModel($model);
+                            $identityLinker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
 
                             if ($method->getAction() === Method::ACTION_PULL) {
                                 $results[] = $model->getPublic();
@@ -380,7 +381,7 @@ class Application extends CoreApplication
     {
         //        $method = RpcMethod::splitMethod($requestpacket->getMethod());
 //
-//        if ($method->getAction() == "push") {
+//        if ($method->getAction() == Method::ACTION_PUSH) {
 //            $controller = str_replace("_", "", $method->getController());
 //
 //            try {

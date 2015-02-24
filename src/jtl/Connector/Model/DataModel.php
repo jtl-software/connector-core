@@ -20,11 +20,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 abstract class DataModel extends CoreModel
 {
-    const ACTION_COMPLETE = 'complete';
-    const ACTION_INSERT = 'insert';
-    const ACTION_UPDATE = 'update';
-    const ACTION_DELETE = 'delete';
-
     /**
      * @var \jtl\Connector\Type\DataType
      * @Serializer\type("jtl\Connector\Type\DataType")
@@ -40,14 +35,6 @@ abstract class DataModel extends CoreModel
      * @Serializer\Exclude
      */
     protected $isEncrypted = false;
-
-    /**
-     * @var string
-     * @Serializer\type("string")
-     * @Serializer\SerializedName("action")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $action = '';
 
     /**
      * @return \jtl\Connector\Type\DataType
@@ -72,24 +59,6 @@ abstract class DataModel extends CoreModel
     public function isEncrypted()
     {
         return $this->isEncrypted;
-    }
-
-    /**
-     * @param  string $action 
-     * @return \jtl\Connector\Model\DataModel
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setAction($action)
-    {
-        return $this->setProperty('action', $action, 'string');
-    }
-
-    /**
-     * @return string 
-     */
-    public function getAction()
-    {
-        return $this->action;
     }
 
     /**
