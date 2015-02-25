@@ -543,14 +543,14 @@ class IdentityLinker
                         } else {
                             Logger::write(
                                 sprintf('Property (%s) from model (%s) is not an instance of DataModel', $propertyInfo->getName(), $reflect->getShortName()), 
-                                Logger::WARNING, 'global'
+                                Logger::WARNING, 'linker'
                             );
                         }
                     }
                 } else {
                     Logger::write(
                         sprintf('Property (%s) from model (%s) is not an array', $propertyInfo->getName(), $reflect->getShortName()), 
-                        Logger::WARNING, 'global'
+                        Logger::WARNING, 'linker'
                     );
                 }
             } elseif ($propertyInfo->isIdentity()) {
@@ -733,6 +733,16 @@ class IdentityLinker
         }
 
         return false;
+    }
+
+    /**
+     * Clears the entire link table
+     *
+     * @return boolean
+     */
+    public function clear()
+    {
+        return self::$mapper->clear();
     }
 
     /**

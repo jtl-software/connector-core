@@ -46,4 +46,11 @@ interface IPrimaryKeyMapper
      * @return boolean
      */
     public function delete($endpointId = null, $hostId = null, $type);
+
+    /**
+     * Clears the entire link table
+     *
+     * @return boolean
+     */
+    public function clear();
 }

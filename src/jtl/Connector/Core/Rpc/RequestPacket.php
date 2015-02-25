@@ -8,6 +8,8 @@ namespace jtl\Connector\Core\Rpc;
 use \jtl\Connector\Core\Exception\RpcException;
 use \jtl\Connector\Core\Serializer\Json;
 use JMS\Serializer\Annotation as Serializer;
+use \jtl\Connector\Core\Logger\Logger;
+use \jtl\Connector\Formatter\ExceptionFormatter;
 
 /**
  * Rpc Request Packet
@@ -161,6 +163,8 @@ class RequestPacket extends Packet
                 }
                 */
             } catch (RpcException $exc) {
+                Logger::write(ExceptionFormatter::format($exc), Logger::ERROR, 'global');
+
                 throw $exc;
             } catch (\Exception $exc) {
                 throw new RpcException("Parse error", -32700);
