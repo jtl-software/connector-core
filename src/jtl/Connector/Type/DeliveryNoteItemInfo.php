@@ -18,7 +18,7 @@ class DeliveryNoteItemInfo extends DataType
     {
         return array(
             new PropertyInfo('batch', 'string', '', false, false, false),
-            new PropertyInfo('bestBefore', 'string', '', false, false, false),
+            new PropertyInfo('bestBefore', 'DateTime', null, false, false, false),
             new PropertyInfo('quantity', 'double', 0.0, false, false, false),
             new PropertyInfo('warehouseId', 'integer', 0, false, false, false),
         );

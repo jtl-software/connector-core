@@ -29,12 +29,12 @@ class DeliveryNoteItemInfo extends DataModel
     protected $batch = '';
 
     /**
-     * @var string 
-     * @Serializer\Type("string")
+     * @var DateTime 
+     * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("bestBefore")
      * @Serializer\Accessor(getter="getBestBefore",setter="setBestBefore")
      */
-    protected $bestBefore = '';
+    protected $bestBefore = null;
 
     /**
      * @var double 
@@ -71,16 +71,17 @@ class DeliveryNoteItemInfo extends DataModel
     }
 
     /**
-     * @param string $bestBefore 
+     * @param DateTime $bestBefore 
      * @return \jtl\Connector\Model\DeliveryNoteItemInfo
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setBestBefore($bestBefore)
+    public function setBestBefore(DateTime $bestBefore)
     {
-        return $this->setProperty('bestBefore', $bestBefore, 'string');
+        return $this->setProperty('bestBefore', $bestBefore, 'DateTime');
     }
 
     /**
-     * @return string 
+     * @return DateTime 
      */
     public function getBestBefore()
     {
