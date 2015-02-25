@@ -544,7 +544,7 @@ class IdentityLinker
                             Logger::write(
                                 sprintf('Property (%s) from model (%s) is not an instance of DataModel', $propertyInfo->getName(), $reflect->getShortName()), 
                                 Logger::WARNING, 'global'
-                            );        
+                            );
                         }
                     }
                 } else {

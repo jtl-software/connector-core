@@ -14,6 +14,8 @@ use \jtl\Connector\Application\Application;
 use \jtl\Connector\Core\Model\QueryFilter;
 use \jtl\Connector\Core\Model\DataModel;
 use \jtl\Connector\Linker\IdentityLinker;
+use \jtl\Connector\Serializer\JMS\SerializerBuilder;
+use \jtl\Connector\Core\Model\AuthRequest;
 
 /**
  * Base Config Controller
@@ -105,12 +107,7 @@ class Connector extends CoreController
     {
         $ret = new Action();
         try {
-            $serializer = \JMS\Serializer\SerializerBuilder::create()
-                ->addDefaultHandlers()
-                ->configureHandlers(function (\JMS\Serializer\Handler\HandlerRegistry $registry) {
-                    $registry->registerSubscribingHandler(new \jtl\Connector\Serializer\Handler\IdentityHandler());
-                })
-                ->build();
+            $serializer = SerializerBuilder::create();
 
             $ack = $serializer->deserialize($params, "jtl\Connector\Model\Ack", 'json');
 
@@ -118,7 +115,7 @@ class Connector extends CoreController
 
             foreach ($ack->getIdentities() as $modelName => $identities) {
                 foreach ($identities as $identity) {
-                    $identityLinker->save($identity->getEndpoint(), $identity->getHost(), $modelName);
+                    //$identityLinker->save($identity->getEndpoint(), $identity->getHost(), $modelName);
                 }
             }
 
@@ -135,35 +132,6 @@ class Connector extends CoreController
     }
 
     /**
-     * Parse HTTP digest request
-     * @param  string $str HTTP Digest request data
-     * @return array|false
-     */
-    protected function parseHttpDigest($str)
-    {
-        $requiredParts = array(
-            'nonce' => true,
-            'nc' => true,
-            'cnonce' => true,
-            'qop' => true,
-            'username' => true,
-            'uri' => true,
-            'response' => true
-        );
-
-        $data = array();
-        $key = implode('|', array_keys($requiredParts));
-
-        preg_match_all('@(' . $key . ')=(?:([\'"])([^\2]+?)\2|([^\s,]+))@', $str, $matches, PREG_SET_ORDER);
-        foreach ($matches as $m) {
-            $data[$m[1]] = $m[3] ? $m[3] : $m[4];
-            unset($requiredParts[$m[1]]);
-        }
-
-        return $requiredParts ? false : $data;
-    }
-
-    /**
      * Returns the connector auth action
      *
      * @param mixed $params
@@ -171,41 +139,27 @@ class Connector extends CoreController
      */
     public function auth($params)
     {
-        $realm = 'JTL-Connector';
+        $action = new Action();
+        $action->setHandled(true);
+        $authRequest = null;
+
+        try {
+            $serializer = SerializerBuilder::create();
+
+            $authRequest = $serializer->deserialize($params, "jtl\Connector\Core\Model\AuthRequest", 'json');
+        } catch (\Exception $e) {
+            $err = new Error();
+            $err->setCode($e->getCode());
+            $err->setMessage($e->getMessage());
+            $action->setError($err);
+
+            return $action;
+        }
 
         $configuredAuthToken = $this->getConfig()->read('auth_token');
 
-        if (function_exists('apache_request_headers')) {
-            $headers = apache_request_headers();
-            $digestData = $headers['Authorization'];
-        } else {
-            $digestData = $_SERVER['PHP_AUTH_DIGEST'];
-        }
-
-        // Check if authentication data arrived
-        if (is_null($digestData)) {
-            $nonce = md5(uniqid());
-
-            header('HTTP/1.1 401 Unauthorized');
-            header('WWW-Authenticate: Digest realm="' . $realm . '", qop="auth", nonce="' . $nonce . '", opaque="' . md5($realm). '"');
-            exit;
-        }
-
-        // Check if we have valid authentication data
-        if (!($data = $this->parseHttpDigest($digestData)) || ($data['username'] !== 'jtl')) {
-            header('HTTP/1.1 403 Forbidden');
-            exit;
-        }
-
-        // Check credentials against stored auth_token
-        $a1 = md5($data['username'] . ':' . $realm . ':' . $configuredAuthToken);
-        $a2 = md5($_SERVER['REQUEST_METHOD'] . ':' . $data['uri']);
-        $validResponse = md5($a1 . ':' . $data['nonce'] . ':' . $data['nc'] . ':' . $data['cnonce'] . ':' . $data['qop'] . ':' . $a2);
-
-
-        $action = new Action();
         // If credentials are not valid, return appropriate response
-        if ($data['response'] !== $validResponse) {
+        if (!($authRequest instanceof AuthRequest) || $configuredAuthToken !== $authRequest->getToken()) {
             sleep(2);
 
             // Set 'handled' flag because the call actually IS handled
@@ -215,6 +169,7 @@ class Connector extends CoreController
             $error->setCode(790);
             $error->setMessage("Could not authenticate access to the connector");
             $action->setError($error);
+
             return $action;
         }
 
@@ -223,8 +178,7 @@ class Connector extends CoreController
             $session->sessionId = Application::$session->getSessionId();
             $session->lifetime = Application::$session->getLifetime();
             
-            $action->setResult($session)
-                ->setHandled(true);
+            $action->setResult($session);
         } else {
             $error = new Error();
             $error->setCode(789)

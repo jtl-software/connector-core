@@ -9,6 +9,7 @@ namespace jtl\Connector\Core\Session;
 use \jtl\Connector\Core\Database\IDatabase;
 use \jtl\Connector\Core\Database\Mapper;
 use \jtl\Connector\Core\Exception\SessionException;
+use \jtl\Connector\Core\Logger\Logger;
 
 /**
  * Session Handler
@@ -61,29 +62,31 @@ abstract class Handler
         }
         
         session_set_save_handler(array(
-                &$this,
-                'open'
+            &$this,
+            'open'
         ), array(
-                &$this,
-                'close'
+            &$this,
+            'close'
         ), array(
-                &$this,
-                'read'
+            &$this,
+            'read'
         ), array(
-                &$this,
-                'write'
+            &$this,
+            'write'
         ), array(
-                &$this,
-                'destroy'
+            &$this,
+            'destroy'
         ), array(
-                &$this,
-                'gc'
+            &$this,
+            'gc'
         ));
 
         ini_set('session.save_handler', 'user');
         register_shutdown_function('session_write_close');
         session_regenerate_id(true);
         session_start();
+
+        Logger::write(sprintf('Session started with id (%s)', session_id()), Logger::DEBUG, 'session');
     }
     
     /**
@@ -100,11 +103,17 @@ abstract class Handler
                                         FROM session
                                         WHERE sessionId = '{$sessionId}'
                                             AND sessionExpires >= " . time());
+
+        Logger::write(sprintf('Check session with id (%s) and time (%s) ...', $sessionId, time()), Logger::DEBUG, 'session');
         
         if ($rows !== null && isset($rows[0])) {
+            Logger::write('Session is valid', Logger::DEBUG, 'session');
+
             return true;
         }
         
+        Logger::write('Session is invalid', Logger::DEBUG, 'session');
+
         return false;
     }
 
@@ -115,6 +124,8 @@ abstract class Handler
     {
         //$this->_lifetime = get_cfg_var("session.gc_maxlifetime");
         $this->_lifetime = 7200;
+
+        Logger::write(sprintf('Open session with savePath (%s) and sessionName (%s)', $savePath, $sessionName), Logger::DEBUG, 'session');
         
         return $this->_db->isConnected();
     }
@@ -124,6 +135,8 @@ abstract class Handler
      */
     public function close()
     {
+        Logger::write('Close session', Logger::DEBUG, 'session');
+
         return true;
     }
 
@@ -140,6 +153,8 @@ abstract class Handler
 					        			FROM session
 					        			WHERE sessionId = '{$sessionId}'
                                             AND sessionExpires >= " . time());
+
+        Logger::write(sprintf('Read session with id (%s)', $sessionId), Logger::DEBUG, 'session');
         
         if ($rows !== null && isset($rows[0])) {
             $row = $rows[0];
@@ -163,6 +178,8 @@ abstract class Handler
         $rows = $this->_db->query("SELECT sessionData
 									FROM session
 								    WHERE sessionId = '{$sessionId}'");
+
+        Logger::write(sprintf('Write session with id (%s)', $sessionId), Logger::DEBUG, 'session');
         
         if ($rows !== null && isset($rows[0])) {
             $stmt = $this->_db->prepare("UPDATE session SET sessionData=:data WHERE sessionId=:sessionid");
@@ -194,6 +211,8 @@ abstract class Handler
     public function destroy($sessionId)
     {
         $sessionId = $this->_db->escapeString($sessionId);
+
+        Logger::write(sprintf('Destroy session with id (%s)', $sessionId), Logger::DEBUG, 'session');
         
         return $this->_db->query("DELETE FROM session WHERE sessionId = '{$sessionId}'");
     }
@@ -203,6 +222,8 @@ abstract class Handler
      */
     public function gc($maxLifetime)
     {
+        Logger::write(sprintf('GC session with maxLifetime (%s)', $maxLifetime), Logger::DEBUG, 'session');
+
         return $this->_db->query("DELETE FROM session WHERE sessionExpires < " . time());
     }
     

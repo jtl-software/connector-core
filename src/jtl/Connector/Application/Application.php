@@ -35,6 +35,7 @@ use \jtl\Connector\Core\Rpc\Method;
 use \jtl\Connector\Linker\IdentityLinker;
 use \jtl\Connector\Model\DataModel;
 use \Doctrine\Common\Collections\ArrayCollection;
+use \jtl\Connector\Serializer\JMS\SerializerBuilder;
 
 /**
  * Application Class
@@ -81,13 +82,15 @@ class Application extends CoreApplication
 
         $rpcmode = is_object($requestpackets) ? Packet::SINGLE_MODE : Packet::BATCH_MODE;
 
-        // Start Session
         $method = null;
         if ($rpcmode == Packet::SINGLE_MODE) {
             $method = $requestpackets->getMethod();
         }
 
+        // Start Session
         $this->startSession($sessionId, $method);
+
+        // Start Configuration
         $this->startConfiguration();
 
         // Initialize Endpoint
@@ -132,8 +135,6 @@ class Application extends CoreApplication
             $actionresult = $coreconnector->handle($requestpacket);
             if ($actionresult->isHandled()) {
                 $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
-
-                Logger::write(Json::encode($responsepacket->getPublic()), Logger::DEBUG, 'rpc');
 
                 if ($rpcmode == Packet::SINGLE_MODE) {
                     Response::send($responsepacket);
@@ -308,12 +309,7 @@ class Application extends CoreApplication
             sprintf('%s\%s', $modelNamespace, RpcMethod::buildController($method->getController())) : 'jtl\Connector\Core\Model\QueryFilter';
 
         if (class_exists("\\{$namespace}") && $requestpacket->getParams() !== null) {            
-            $serializer = \JMS\Serializer\SerializerBuilder::create()
-                ->addDefaultHandlers()
-                ->configureHandlers(function (\JMS\Serializer\Handler\HandlerRegistry $registry) {
-                    $registry->registerSubscribingHandler(new \jtl\Connector\Serializer\Handler\IdentityHandler());
-                })
-                ->build();
+            $serializer = SerializerBuilder::create();
 
             // Identity mapping
             if ($method->getAction() !== Method::ACTION_PULL) {
