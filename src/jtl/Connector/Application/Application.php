@@ -312,7 +312,7 @@ class Application extends CoreApplication
             $serializer = SerializerBuilder::create();
 
             // Identity mapping
-            if ($method->getAction() !== Method::ACTION_PULL) {
+            if ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) {
                 $params = $serializer->deserialize($requestpacket->getParams(), "ArrayCollection<{$namespace}>", 'json');
 
                 if (is_array($params)) {
