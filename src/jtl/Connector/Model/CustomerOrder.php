@@ -107,14 +107,6 @@ class CustomerOrder extends DataModel
     protected $shippingAddressId = null;
 
     /**
-     * @var Identity Identifier code for shippingMethod
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("shippingMethodId")
-     * @Serializer\Accessor(getter="getShippingMethodId",setter="setShippingMethodId")
-     */
-    protected $shippingMethodId = null;
-
-    /**
      * @var CustomerOrderBillingAddress 
      * @Serializer\Type("jtl\Connector\Model\CustomerOrderBillingAddress")
      * @Serializer\SerializedName("billingAddress")
@@ -243,6 +235,14 @@ class CustomerOrder extends DataModel
     protected $shippingInfo = '';
 
     /**
+     * @var integer Identifier code for shippingMethod
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("shippingMethodId")
+     * @Serializer\Accessor(getter="getShippingMethodId",setter="setShippingMethodId")
+     */
+    protected $shippingMethodId = 0;
+
+    /**
      * @var string 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("shippingMethodName")
@@ -297,7 +297,6 @@ class CustomerOrder extends DataModel
     {
         $this->id = new Identity();
         $this->customerId = new Identity();
-        $this->shippingMethodId = new Identity();
         $this->paymentModuleId = new Identity();
         $this->shippingAddressId = new Identity();
         $this->billingAddressId = new Identity();
@@ -391,24 +390,6 @@ class CustomerOrder extends DataModel
     public function getShippingAddressId()
     {
         return $this->shippingAddressId;
-    }
-
-    /**
-     * @param Identity $shippingMethodId Identifier code for shippingMethod
-     * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setShippingMethodId(Identity $shippingMethodId)
-    {
-        return $this->setProperty('shippingMethodId', $shippingMethodId, 'Identity');
-    }
-
-    /**
-     * @return Identity Identifier code for shippingMethod
-     */
-    public function getShippingMethodId()
-    {
-        return $this->shippingMethodId;
     }
 
     /**
@@ -688,6 +669,23 @@ class CustomerOrder extends DataModel
     public function getShippingInfo()
     {
         return $this->shippingInfo;
+    }
+
+    /**
+     * @param integer $shippingMethodId Identifier code for shippingMethod
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setShippingMethodId($shippingMethodId)
+    {
+        return $this->setProperty('shippingMethodId', $shippingMethodId, 'integer');
+    }
+
+    /**
+     * @return integer Identifier code for shippingMethod
+     */
+    public function getShippingMethodId()
+    {
+        return $this->shippingMethodId;
     }
 
     /**
