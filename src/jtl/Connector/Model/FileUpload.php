@@ -54,6 +54,14 @@ class FileUpload extends DataModel
     protected $isRequired = false;
 
     /**
+     * @var jtl\Connector\Model\FileUploadI18n[] 
+     * @Serializer\Type("array<jtl\Connector\Model\FileUploadI18n>")
+     * @Serializer\SerializedName("i18ns")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $i18ns = array();
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -130,5 +138,32 @@ class FileUpload extends DataModel
     public function getIsRequired()
     {
         return $this->isRequired;
+    }
+
+    /**
+     * @param \jtl\Connector\Model\FileUploadI18n $i18n
+     * @return \jtl\Connector\Model\FileUpload
+     */
+    public function addI18n(\jtl\Connector\Model\FileUploadI18n $i18n)
+    {
+        $this->i18ns[] = $i18n;
+        return $this;
+    }
+    
+    /**
+     * @return jtl\Connector\Model\FileUploadI18n[]
+     */
+    public function getI18ns()
+    {
+        return $this->i18ns;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\FileUpload
+     */
+    public function clearI18ns()
+    {
+        $this->i18ns = array();
+        return $this;
     }
 }

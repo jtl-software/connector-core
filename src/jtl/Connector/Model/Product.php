@@ -318,6 +318,14 @@ class Product extends DataModel
     protected $minimumOrderQuantity = 0.0;
 
     /**
+     * @var DateTime 
+     * @Serializer\Type("DateTime")
+     * @Serializer\SerializedName("modified")
+     * @Serializer\Accessor(getter="getModified",setter="setModified")
+     */
+    protected $modified = null;
+
+    /**
      * @var DateTime Contains the date of the next available inflow.
      * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("nextAvailableInflowDate")
@@ -420,6 +428,14 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getStockLevel",setter="setStockLevel")
      */
     protected $stockLevel = null;
+
+    /**
+     * @var integer 
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("supplierDeliveryTime")
+     * @Serializer\Accessor(getter="getSupplierDeliveryTime",setter="setSupplierDeliveryTime")
+     */
+    protected $supplierDeliveryTime = 0;
 
     /**
      * @var double 
@@ -1248,6 +1264,24 @@ class Product extends DataModel
     }
 
     /**
+     * @param DateTime $modified 
+     * @return \jtl\Connector\Model\Product
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     */
+    public function setModified(DateTime $modified)
+    {
+        return $this->setProperty('modified', $modified, 'DateTime');
+    }
+
+    /**
+     * @return DateTime 
+     */
+    public function getModified()
+    {
+        return $this->modified;
+    }
+
+    /**
      * @param DateTime $nextAvailableInflowDate Contains the date of the next available inflow.
      * @return \jtl\Connector\Model\Product
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
@@ -1468,6 +1502,23 @@ class Product extends DataModel
     public function getStockLevel()
     {
         return $this->stockLevel;
+    }
+
+    /**
+     * @param integer $supplierDeliveryTime 
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setSupplierDeliveryTime($supplierDeliveryTime)
+    {
+        return $this->setProperty('supplierDeliveryTime', $supplierDeliveryTime, 'integer');
+    }
+
+    /**
+     * @return integer 
+     */
+    public function getSupplierDeliveryTime()
+    {
+        return $this->supplierDeliveryTime;
     }
 
     /**

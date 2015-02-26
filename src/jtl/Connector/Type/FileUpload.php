@@ -21,6 +21,7 @@ class FileUpload extends DataType
             new PropertyInfo('productId', 'Identity', null, false, true, false),
             new PropertyInfo('fileType', 'string', '', false, false, false),
             new PropertyInfo('isRequired', 'boolean', false, false, false, false),
+            new PropertyInfo('i18ns', '\jtl\Connector\Model\FileUploadI18n', null, false, false, true),
         );
     }
 

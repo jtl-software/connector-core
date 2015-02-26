@@ -62,6 +62,14 @@ class MediaFileAttr extends DataModel
     protected $value = '';
 
     /**
+     * @var jtl\Connector\Model\MediaFileAttrI18n[] 
+     * @Serializer\Type("array<jtl\Connector\Model\MediaFileAttrI18n>")
+     * @Serializer\SerializedName("i18ns")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $i18ns = array();
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -155,5 +163,32 @@ class MediaFileAttr extends DataModel
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * @param \jtl\Connector\Model\MediaFileAttrI18n $i18n
+     * @return \jtl\Connector\Model\MediaFileAttr
+     */
+    public function addI18n(\jtl\Connector\Model\MediaFileAttrI18n $i18n)
+    {
+        $this->i18ns[] = $i18n;
+        return $this;
+    }
+    
+    /**
+     * @return jtl\Connector\Model\MediaFileAttrI18n[]
+     */
+    public function getI18ns()
+    {
+        return $this->i18ns;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\MediaFileAttr
+     */
+    public function clearI18ns()
+    {
+        $this->i18ns = array();
+        return $this;
     }
 }

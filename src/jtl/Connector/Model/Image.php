@@ -53,6 +53,14 @@ class Image extends DataModel
     protected $relationType = '';
 
     /**
+     * @var string 
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("remoteUrl")
+     * @Serializer\Accessor(getter="getRemoteUrl",setter="setRemoteUrl")
+     */
+    protected $remoteUrl = '';
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -129,5 +137,22 @@ class Image extends DataModel
     public function getRelationType()
     {
         return $this->relationType;
+    }
+
+    /**
+     * @param string $remoteUrl 
+     * @return \jtl\Connector\Model\Image
+     */
+    public function setRemoteUrl($remoteUrl)
+    {
+        return $this->setProperty('remoteUrl', $remoteUrl, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getRemoteUrl()
+    {
+        return $this->remoteUrl;
     }
 }

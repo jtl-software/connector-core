@@ -21,6 +21,7 @@ class Image extends DataType
             new PropertyInfo('id', 'Identity', null, false, true, false),
             new PropertyInfo('filename', 'string', '', false, false, false),
             new PropertyInfo('relationType', 'ImageRelationType', '', false, false, false),
+            new PropertyInfo('remoteUrl', 'string', '', false, false, false),
         );
     }
 
