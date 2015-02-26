@@ -78,6 +78,14 @@ class MediaFile extends DataModel
     protected $url = '';
 
     /**
+     * @var jtl\Connector\Model\MediaFileI18n[] 
+     * @Serializer\Type("array<jtl\Connector\Model\MediaFileI18n>")
+     * @Serializer\SerializedName("i18ns")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $i18ns = array();
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -205,5 +213,32 @@ class MediaFile extends DataModel
     public function getUrl()
     {
         return $this->url;
+    }
+
+    /**
+     * @param \jtl\Connector\Model\MediaFileI18n $i18n
+     * @return \jtl\Connector\Model\MediaFile
+     */
+    public function addI18n(\jtl\Connector\Model\MediaFileI18n $i18n)
+    {
+        $this->i18ns[] = $i18n;
+        return $this;
+    }
+    
+    /**
+     * @return jtl\Connector\Model\MediaFileI18n[]
+     */
+    public function getI18ns()
+    {
+        return $this->i18ns;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\MediaFile
+     */
+    public function clearI18ns()
+    {
+        $this->i18ns = array();
+        return $this;
     }
 }
