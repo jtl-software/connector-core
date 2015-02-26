@@ -18,6 +18,10 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class QueryFilter
 {
+    const FILTER_FETCH_CHILDREN = 'fetchChildren';
+    const FILTER_PARENT_ID = 'parentId';
+    const FILTER_RELATION_TYPE = 'relationType';
+
     /**
      * Query item count limitation
      *
