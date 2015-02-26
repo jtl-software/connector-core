@@ -623,7 +623,6 @@ class Mysql implements IDatabase
         $this->deleteRow($obj, $table, $key, $value);
         
         $result = $this->insertRow($obj, $table);
-        $result->setKey($value);
         
         return $result;
     }
