@@ -78,18 +78,6 @@ class Application extends CoreApplication
      */
     public function run()
     {
-        if ($this->connector === null) {
-            throw new ApplicationException('No connector registed');
-        }
-
-        if ($this->connector->getPrimaryKeyMapper() === null) {
-            throw new ApplicationException('No primary key mapper registed');
-        }
-
-        if ($this->connector->getTokenLoader() === null) {
-            throw new ApplicationException('No token loader registed');
-        }
-
         AnnotationRegistry::registerLoader('class_exists');
 
         $jtlrpc = Request::handle();
@@ -113,6 +101,18 @@ class Application extends CoreApplication
 
         // Initialize Endpoint
         $this->connector->initialize();
+
+        if ($this->connector === null) {
+            throw new ApplicationException('No connector registed');
+        }
+
+        if ($this->connector->getPrimaryKeyMapper() === null) {
+            throw new ApplicationException('No primary key mapper registed');
+        }
+
+        if ($this->connector->getTokenLoader() === null) {
+            throw new ApplicationException('No token loader registed');
+        }
 
         switch ($rpcmode) {
             case Packet::SINGLE_MODE:
