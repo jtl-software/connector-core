@@ -14,11 +14,7 @@ use \jtl\Connector\Core\Utilities\Singleton;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-abstract class Application extends Singleton
+abstract class Application extends Singleton implements IApplication
 {
-
-    /**
-     * Main run Methode
-     */
-    abstract public function run();
+    
 }

@@ -10,7 +10,12 @@ use \jtl\Connector\Core\Exception\LanguageException;
 
 class Language
 {
-    protected static $_locales = array(
+    const CACHE_KEY_CONVERT = 'c';
+    const CACHE_KEY_MAP = 'm';
+
+    protected static $cache = array();
+
+    protected static $locales = array(
         'ar_DZ' => 'ar',    'ar_EG' => 'ar',    'ar_KW' => 'ar',
         'ar_MA' => 'ar',    'ar_SA' => 'ar',    'az_AZ' => 'az',
         'be_BY' => 'be',    'bg_BG' => 'bg',    'bn_BD' => 'bn',
@@ -41,7 +46,7 @@ class Language
         'en_IE' => 'en',    'af_ZA' => 'af'
     );
     
-    protected static $_languages = array(
+    protected static $languages = array(
         'ab' => 'abk',    'aa' => 'aar',    'af' => 'afr',
         'ak' => 'aka',    'sq' => 'alb',    'am' => 'amh',
         'ar' => 'ara',    'an' => 'arg',    'hy' => 'arm',
@@ -112,18 +117,15 @@ class Language
             throw new LanguageException("Short and Long cannot be null");
         }
         
-        if ($short !== null && isset(self::$_languages[$short])) {
-            return self::$_languages[$short];
+        if ($short !== null && isset(self::$languages[$short])) {
+            return self::$languages[$short];
         }
         
         if ($long !== null) {
             $long = strtolower($long);
-            if (in_array($long, self::$_languages)) {
-                foreach (self::$_languages as $short => $listlanguage) {
-                    if ($listlanguage == $long) {
-                        return $short;
-                    }
-                }
+
+            if (($short = array_search($long, self::$languages)) !== false) {
+                return $short;
             }
         }
         
@@ -136,8 +138,8 @@ class Language
             throw new LanguageException("Locale, Country and Language cannot be null");
         }
         
-        if ($locale !== null && isset(self::$_locales[$locale])) {
-            return $useLong ? self::convert(self::$_locales[$locale]) : self::$_locales[$locale];
+        if ($locale !== null && isset(self::$locales[$locale])) {
+            return $useLong ? self::convert(self::$locales[$locale]) : self::$locales[$locale];
         }
         
         if ($lang !== null) {
@@ -146,12 +148,9 @@ class Language
 
         if ($country !== null) {
             $country = strtolower($country);
-            if (in_array($country, self::$_locales)) {
-                foreach (self::$_locales as $locale => $listcountry) {
-                    if ($listcountry == $country) {
-                        return $locale;
-                    }
-                }
+
+            if (($locale = array_search($country, self::$languages)) !== false) {
+                return $locale;
             }
         }
         

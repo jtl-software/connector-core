@@ -9,6 +9,7 @@ namespace jtl\Connector\Application;
 use \jtl\Connector\Core\Rpc\RequestPacket;
 use \jtl\Connector\Core\Config\Config;
 use \jtl\Connector\Mapper\IPrimaryKeyMapper;
+use \jtl\Connector\Authentication\ITokenLoader;
 
 /**
  *
@@ -33,6 +34,16 @@ interface IEndpointConnector
     public function getPrimaryKeyMapper();
 
     /**
+     * Setter token loader
+     */
+    public function setTokenLoader(ITokenLoader $tokenLoader);
+
+    /**
+     * Returns token loader
+     */
+    public function getTokenLoader();
+
+    /**
      * Setter connector config
      */
     public function setConfig(Config $config);
@@ -53,4 +64,9 @@ interface IEndpointConnector
      * @param \jtl\Connector\Core\Rpc\RequestPacket $requestpacket
      */
     public function handle(RequestPacket $requestpacket);
+
+    /**
+     * Controller getter
+     */
+    public function getController();
 }

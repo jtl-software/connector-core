@@ -15,7 +15,7 @@ use \jtl\Connector\Core\Model\QueryFilter;
 use \jtl\Connector\Core\Model\DataModel;
 use \jtl\Connector\Linker\IdentityLinker;
 use \jtl\Connector\Serializer\JMS\SerializerBuilder;
-use \jtl\Connector\Core\Model\AuthRequest;
+use \jtl\Connector\Core\Logger\Logger;
 
 /**
  * Base Config Controller
@@ -39,6 +39,15 @@ class Connector extends CoreController
      * @see \jtl\Connector\Core\Controller\IController::pull()
      */
     public function pull(QueryFilter $queryFilter)
+    {
+        // Not yet implemented
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Connector\Core\Controller\IController::delete()
+     */
+    public function delete(DataModel $model)
     {
         // Not yet implemented
     }
@@ -139,6 +148,8 @@ class Connector extends CoreController
      */
     public function auth($params)
     {
+        $token = Application()->getConnector()->getTokenLoader()->load();
+
         $action = new Action();
         $action->setHandled(true);
         $authRequest = null;
@@ -156,27 +167,26 @@ class Connector extends CoreController
             return $action;
         }
 
-        $configuredAuthToken = $this->getConfig()->read('auth_token');
+        //$token = $this->getConfig()->read('auth_token');
 
         // If credentials are not valid, return appropriate response
-        if (!($authRequest instanceof AuthRequest) || $configuredAuthToken !== $authRequest->getToken()) {
+        if ($token !== $authRequest->getToken()) {
             sleep(2);
-
-            // Set 'handled' flag because the call actually IS handled
-            $action->setHandled(true);
 
             $error = new Error();
             $error->setCode(790);
             $error->setMessage("Could not authenticate access to the connector");
             $action->setError($error);
 
+            Logger::write(sprintf("Unauthorized access with token (%s) from ip (%s)", $authRequest->getToken(), $_SERVER['REMOTE_ADDR']), Logger::INFO, 'security');
+
             return $action;
         }
 
-        if (Application::$session !== null) {
+        if (Application()->getSession() !== null) {
             $session = new \stdClass();
-            $session->sessionId = Application::$session->getSessionId();
-            $session->lifetime = Application::$session->getLifetime();
+            $session->sessionId = Application()->getSession()->getSessionId();
+            $session->lifetime = Application()->getSession()->getLifetime();
             
             $action->setResult($session);
         } else {

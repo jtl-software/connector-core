@@ -14,6 +14,7 @@ use \jtl\Connector\Core\Config\Config;
 use \jtl\Connector\Core\Exception\ConnectorException;
 use \jtl\Connector\Core\Rpc\Method;
 use \jtl\Connector\Mapper\IPrimaryKeyMapper;
+use \jtl\Connector\Authentication\ITokenLoader;
 
 /**
  * Base Connector
@@ -23,7 +24,9 @@ use \jtl\Connector\Mapper\IPrimaryKeyMapper;
  */
 class Connector extends Singleton implements IEndpointConnector
 {
+    protected $controller;
     protected $keyMapper;
+    protected $tokenLoader;
     protected $config;
     protected $method;
     protected $modelNamespace = 'jtl\Connector\Model';
@@ -48,11 +51,33 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * Returns primary key mapper
      *
-     * @return \jtl\Connector\Mapper\IPrimaryKeyMapper
+     * @return \jtl\Connector\Authentication\ITokenLoader
      */
     public function getPrimaryKeyMapper()
     {
         return $this->keyMapper;
+    }
+
+    /**
+     * Setter token loader
+     *
+     * @param \jtl\Connector\Authentication\ITokenLoader $tokenLoader
+     * @return \jtl\Connector\Base\Connector
+     */
+    public function setTokenLoader(ITokenLoader $tokenLoader)
+    {
+        $this->tokenLoader = $tokenLoader;
+        return $this;
+    }
+
+    /**
+     * Returns token loader
+     *
+     * @return \jtl\Connector\Mapper\IPrimaryKeyMapper
+     */
+    public function getTokenLoader()
+    {
+        return $this->tokenLoader;
     }
 
     /**
@@ -160,5 +185,15 @@ class Connector extends Singleton implements IEndpointConnector
         $this->controller->setMethod($this->getMethod());
         
         return $this->controller->{$this->action}($requestpacket->getParams());
+    }
+
+    /**
+     * (non-PHPdoc)
+     *
+     * @see \jtl\Connector\Application\IEndpointConnector::getController()
+     */
+    public function getController()
+    {
+        return $this->controller;
     }
 }

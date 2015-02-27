@@ -11,6 +11,7 @@ use \jtl\Connector\Core\Application\Application as CoreApplication;
 use \jtl\Connector\Core\Exception\RpcException;
 use \jtl\Connector\Core\Exception\SessionException;
 use \jtl\Connector\Core\Exception\ConnectorException;
+use \jtl\Connector\Core\Exception\ApplicationException;
 use \jtl\Connector\Core\Rpc\Handler;
 use \jtl\Connector\Core\Rpc\Packet;
 use \jtl\Connector\Core\Rpc\RequestPacket;
@@ -51,7 +52,7 @@ class Application extends CoreApplication
      *
      * @var IEndpointConnector
      */
-    protected static $connector = null;
+    protected $connector = null;
 
     /**
      * @var \jtl\connector\Core\Config\Config;
@@ -63,7 +64,12 @@ class Application extends CoreApplication
      *
      * @var \jtl\Connector\Session\Session
      */
-    public static $session;
+    protected $session;
+
+    protected function __construct()
+    {
+        require_once(dirname(__FILE__) . '/../bootstrap.php');
+    }
 
     /**
      * (non-PHPdoc)
@@ -72,6 +78,18 @@ class Application extends CoreApplication
      */
     public function run()
     {
+        if ($this->connector === null) {
+            throw new ApplicationException('No connector registed');
+        }
+
+        if ($this->connector->getPrimaryKeyMapper() === null) {
+            throw new ApplicationException('No primary key mapper registed');
+        }
+
+        if ($this->connector->getTokenLoader() === null) {
+            throw new ApplicationException('No token loader registed');
+        }
+
         AnnotationRegistry::registerLoader('class_exists');
 
         $jtlrpc = Request::handle();
@@ -94,7 +112,7 @@ class Application extends CoreApplication
         $this->startConfiguration();
 
         // Initialize Endpoint
-        self::$connector->initialize();
+        $this->connector->initialize();
 
         switch ($rpcmode) {
             case Packet::SINGLE_MODE:
@@ -122,7 +140,7 @@ class Application extends CoreApplication
         }
 
         $identityLinker = IdentityLinker::getInstance();
-        $identityLinker->setPrimaryKeyMapper(self::$connector->getPrimaryKeyMapper());
+        $identityLinker->setPrimaryKeyMapper($this->connector->getPrimaryKeyMapper());
 
         ////////////////////
         // Core Connector //
@@ -149,7 +167,7 @@ class Application extends CoreApplication
         ////////////////////////
         $exists = false;
 
-        $this->deserializeRequestParams($requestpacket, self::$connector->getModelNamespace());
+        $this->deserializeRequestParams($requestpacket, $this->connector->getModelNamespace());
 
         // Image?
         if ($requestpacket->getMethod() === 'image.push' && $imagePath !== null) {
@@ -162,10 +180,10 @@ class Application extends CoreApplication
             }
         }
 
-        self::$connector->setMethod($method);
-        if (self::$connector->canHandle()) {
-            self::$connector->setConfig($config);
-            $actionresult = self::$connector->handle($requestpacket);
+        $this->connector->setMethod($method);
+        if ($this->connector->canHandle()) {
+            $this->connector->setConfig($config);
+            $actionresult = $this->connector->handle($requestpacket);
             
             if ($requestpacket->getMethod() === 'image.push' && $imagePath !== null) {
                 Request::deleteFileupload($imagePath);
@@ -223,9 +241,9 @@ class Application extends CoreApplication
      *
      * @param IEndpointConnector $endpointconnector
      */
-    public static function register(IEndpointConnector $endpointconnector)
+    public function register(IEndpointConnector $endpointconnector)
     {
-        self::$connector = $endpointconnector;
+        $this->connector = $endpointconnector;
     }
 
     /**
@@ -393,7 +411,7 @@ class Application extends CoreApplication
      */
     protected function startConfiguration()
     {
-        if (!isset(self::$session)) {
+        if (!isset($this->session)) {
             throw new SessionException('Session not initialized', -32001);
         }
 
@@ -450,6 +468,26 @@ class Application extends CoreApplication
         $sqlite3 = Sqlite3::getInstance();
         $sqlite3->connect(array('location' => CONNECTOR_DIR . '/db/connector.s3db'));
 
-        self::$session = new Session($sqlite3, $sessionId);
+        $this->session = new Session($sqlite3, $sessionId);
+    }
+
+    /**
+     * Connector getter
+     *
+     * @return IEndpointConnector
+     */
+    public function getConnector()
+    {
+        return $this->connector;
+    }
+
+    /**
+     * Session getter
+     *
+     * @return IEndpointConnector
+     */
+    public function getSession()
+    {
+        return $this->session;
     }
 }
