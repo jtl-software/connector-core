@@ -109,7 +109,7 @@ class IdentityLinker
         'ProductWarehouseInfo' => 73,
         'Shipment' => 74,
         'ShippingClass' => 75,
-        'SpecialPrice' => 76,
+        'ProductSpecialPriceItem' => 76,
         'Specific' => 77,
         'SpecificI18n' => 78,
         'SpecificValue' => 79,
@@ -316,7 +316,7 @@ class IdentityLinker
             'productVariationValueId' => 68,
             'customerGroupId' => 18
         ),
-        'SpecialPrice' => array(
+        'ProductSpecialPriceItem' => array(
             'productSpecialPriceId' => 61,
             'customerGroupId' => 18
         ),
