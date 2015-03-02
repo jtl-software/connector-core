@@ -58,34 +58,4 @@ class Feature extends CoreController
         }
         return $ret;
     }
-
-    /**
-     * Write is not supported for features.
-     *
-     * @param mixed $params An array of parameters to write
-     */
-    public function push($params = null)
-    {
-        unset($params); //We don't need the params parameter
-        $ret = new Action();
-        $ret->setHandled(false);
-        return $ret;
-    }
-
-    /**
-     * Delete is not supported for features.
-     *
-     * @param mixed $params An array of parameters to write
-     */
-    public function delete($params = null)
-    {
-        unset($params); //We don't need the params parameter
-        $ret = new Action();
-        $ret->setHandled(false);
-        return $ret;
-    }
-
-    public function statistic($params)
-    {
-    }
 }

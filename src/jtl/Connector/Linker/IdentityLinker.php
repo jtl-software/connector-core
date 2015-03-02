@@ -22,6 +22,14 @@ class IdentityLinker
     const CACHE_TYPE_HOST = 'h';
     const CACHE_TYPE_ENDPOINT = 'e';
 
+    const TYPE_CATEGORY = 0;
+    const TYPE_CUSTOMER = 16;
+    const TYPE_CUSTOMER_ORDER = 21;
+    const TYPE_DELIVERY_NOTE = 29;
+    const TYPE_IMAGE = 39;
+    const TYPE_MANUFACTURER = 41;
+    const TYPE_PRODUCT = 50;
+
     /**
      * Session Database Mapper
      *
@@ -33,7 +41,7 @@ class IdentityLinker
     protected static $instance;
 
     protected static $types = array(
-        'Category' => 0,
+        'Category' => self::TYPE_CATEGORY,
         'CategoryAttr' => 1,
         'CategoryAttrI18n' => 2,
         'CategoryCustomerGroup' => 3,
@@ -49,12 +57,12 @@ class IdentityLinker
         'CrossSelling' => 13,
         'CrossSellingGroup' => 14,
         'Currency' => 15,
-        'Customer' => 16,
+        'Customer' => self::TYPE_CUSTOMER,
         'CustomerAttr' => 17,
         'CustomerGroup' => 18,
         'CustomerGroupAttr' => 19,
         'CustomerGroupI18n' => 20,
-        'CustomerOrder' => 21,
+        'CustomerOrder' => self::TYPE_CUSTOMER_ORDER,
         'CustomerOrderAttr' => 22,
         'CustomerOrderBasket' => 23,
         'CustomerOrderBillingAddress' => 24,
@@ -62,7 +70,7 @@ class IdentityLinker
         'CustomerOrderItemVariation' => 26,
         'CustomerOrderPaymentInfo' => 27,
         'CustomerOrderShippingAddress' => 28,
-        'DeliveryNote' => 29,
+        'DeliveryNote' => self::TYPE_DELIVERY_NOTE,
         'DeliveryNoteItem' => 30,
         'DeliveryStatus' => 31,
         'EmailTemplate' => 32,
@@ -72,9 +80,9 @@ class IdentityLinker
         'FileDownloadI18n' => 36,
         'FileUpload' => 37,
         'GlobalData' => 38,
-        'Image' => 39,
+        'Image' => self::TYPE_IMAGE,
         'Language' => 40,
-        'Manufacturer' => 41,
+        'Manufacturer' => self::TYPE_MANUFACTURER,
         'ManufacturerI18n' => 42,
         'MeasurementUnit' => 43,
         'MeasurementUnitI18n' => 44,
@@ -83,7 +91,7 @@ class IdentityLinker
         'MediaFileI18n' => 47,
         'PartsList' => 48,
         'PaymentMethod' => 49,
-        'Product' => 50,
+        'Product' => self::TYPE_PRODUCT,
         'Product2Category' => 51,
         'ProductAttr' => 52,
         'ProductAttrI18n' => 53,

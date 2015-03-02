@@ -193,20 +193,23 @@ class Application extends CoreApplication
                 $exists = true;
                 if ($actionresult->isHandled()) {
 
-                    // Identity mapping
-                    $results = array();
-                    foreach ($actionresult->getResult() as $model) {
-                        if ($model instanceof DataModel) {
-                            $identityLinker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
+                    if ($actionresult->getError() === null) {
 
-                            if ($method->getAction() === Method::ACTION_PULL) {
-                                $results[] = $model->getPublic();
+                        // Identity mapping
+                        $results = array();
+                        foreach ($actionresult->getResult() as $model) {
+                            if ($model instanceof DataModel) {
+                                $identityLinker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
+
+                                if ($method->getAction() === Method::ACTION_PULL) {
+                                    $results[] = $model->getPublic();
+                                }
                             }
                         }
-                    }
 
-                    if ($method->getAction() === Method::ACTION_PULL) {
-                        $actionresult->setResult($results);
+                        if ($method->getAction() === Method::ACTION_PULL) {
+                            $actionresult->setResult($results);
+                        }
                     }
 
                     // Building response packet

@@ -24,43 +24,7 @@ use \jtl\Connector\Core\Logger\Logger;
  * @author David Spickers <david.spickers@jtl-software.de>
  */
 class Connector extends CoreController
-{
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Connector\Core\Controller\IController::push()
-     */
-    public function push(DataModel $model)
-    {
-        // Not yet implemented
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Connector\Core\Controller\IController::pull()
-     */
-    public function pull(QueryFilter $queryFilter)
-    {
-        // Not yet implemented
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Connector\Core\Controller\IController::delete()
-     */
-    public function delete(DataModel $model)
-    {
-        // Not yet implemented
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see \jtl\Connector\Core\Controller\IController::statistic()
-     */
-    public function statistic(QueryFilter $queryFilter)
-    {
-        // Not yet implemented
-    }
-    
+{    
     /**
      * Initialize the connector.
      *

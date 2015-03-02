@@ -9,7 +9,10 @@ namespace jtl\Connector\Core\Controller;
 use \jtl\Connector\Core\Utilities\Singleton;
 use \jtl\Connector\Core\Config\Config;
 use \jtl\Connector\Core\Exception\ControllerException;
+use \jtl\Connector\Core\Exception\NotImplementedException;
 use \jtl\Connector\Core\Rpc\Method;
+use \jtl\Connector\Core\Model\DataModel;
+use \jtl\Connector\Core\Model\QueryFilter;
 
 /**
  * Base Controller Class
@@ -21,6 +24,42 @@ abstract class Controller extends Singleton implements IController
 {
     protected $_config;
     protected $_method;
+
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Connector\Core\Controller\IController::push()
+     */
+    public function push(DataModel $model)
+    {
+        throw new NotImplementedException();
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Connector\Core\Controller\IController::pull()
+     */
+    public function pull(QueryFilter $queryFilter)
+    {
+        throw new NotImplementedException();
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Connector\Core\Controller\IController::delete()
+     */
+    public function delete(DataModel $model)
+    {
+        throw new NotImplementedException();
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see \jtl\Connector\Core\Controller\IController::statistic()
+     */
+    public function statistic(QueryFilter $queryFilter)
+    {
+        throw new NotImplementedException();
+    }
 
     /**
      * Setter controller config.
