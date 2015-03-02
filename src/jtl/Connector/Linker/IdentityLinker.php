@@ -42,439 +42,147 @@ class IdentityLinker
 
     protected static $types = array(
         'Category' => self::TYPE_CATEGORY,
-        'CategoryAttr' => 1,
-        'CategoryAttrI18n' => 2,
-        'CategoryCustomerGroup' => 3,
-        'CategoryFunctionAttr' => 4,
-        'CategoryI18n' => 5,
-        'CategoryInvisibility' => 6,
-        'Company' => 7,
-        'ConfigGroup' => 8,
-        'ConfigGroupI18n' => 9,
-        'ConfigItem' => 10,
-        'ConfigItemI18n' => 11,
-        'ConfigItemPrice' => 12,
-        'CrossSelling' => 13,
-        'CrossSellingGroup' => 14,
-        'Currency' => 15,
         'Customer' => self::TYPE_CUSTOMER,
-        'CustomerAttr' => 17,
-        'CustomerGroup' => 18,
-        'CustomerGroupAttr' => 19,
-        'CustomerGroupI18n' => 20,
         'CustomerOrder' => self::TYPE_CUSTOMER_ORDER,
-        'CustomerOrderAttr' => 22,
-        'CustomerOrderBasket' => 23,
-        'CustomerOrderBillingAddress' => 24,
-        'CustomerOrderItem' => 25,
-        'CustomerOrderItemVariation' => 26,
-        'CustomerOrderPaymentInfo' => 27,
-        'CustomerOrderShippingAddress' => 28,
         'DeliveryNote' => self::TYPE_DELIVERY_NOTE,
-        'DeliveryNoteItem' => 30,
-        'DeliveryStatus' => 31,
-        'EmailTemplate' => 32,
-        'EmailTemplateI18n' => 33,
-        'FileDownload' => 34,
-        'FileDownloadHistory' => 35,
-        'FileDownloadI18n' => 36,
-        'FileUpload' => 37,
-        'GlobalData' => 38,
         'Image' => self::TYPE_IMAGE,
-        'Language' => 40,
         'Manufacturer' => self::TYPE_MANUFACTURER,
-        'ManufacturerI18n' => 42,
-        'MeasurementUnit' => 43,
-        'MeasurementUnitI18n' => 44,
-        'MediaFile' => 45,
-        'MediaFileAttr' => 46,
-        'MediaFileI18n' => 47,
-        'PartsList' => 48,
-        'PaymentMethod' => 49,
-        'Product' => self::TYPE_PRODUCT,
-        'Product2Category' => 51,
-        'ProductAttr' => 52,
-        'ProductAttrI18n' => 53,
-        'ProductConfigGroup' => 54,
-        'ProductFileDownload' => 55,
-        'ProductFunctionAttr' => 56,
-        'ProductI18n' => 57,
-        'ProductInvisibility' => 58,
-        'ProductPrice' => 59,
-        'ProductPriceItem' => 60,
-        'ProductSpecialPrice' => 61,
-        'ProductSpecific' => 62,
-        'ProductType' => 63,
-        'ProductVarCombination' => 64,
-        'ProductVariation' => 65,
-        'ProductVariationI18n' => 66,
-        'ProductVariationInvisibility' => 67,
-        'ProductVariationValue' => 68,
-        'ProductVariationValueDependency' => 69,
-        'ProductVariationValueExtraCharge' => 70,
-        'ProductVariationValueI18n' => 71,
-        'ProductVariationValueInvisibility' => 72,
-        'ProductWarehouseInfo' => 73,
-        'Shipment' => 74,
-        'ShippingClass' => 75,
-        'ProductSpecialPriceItem' => 76,
-        'Specific' => 77,
-        'SpecificI18n' => 78,
-        'SpecificValue' => 79,
-        'SpecificValueI18n' => 80,
-        'Statistic' => 81,
-        'TaxClass' => 82,
-        'TaxRate' => 83,
-        'TaxZone' => 84,
-        'TaxZoneCountry' => 85,
-        'Unit' => 86,
-        'UnitI18n' => 87,
-        'Warehouse' => 88,
-        'WarehouseI18n' => 89
+        'Product' => self::TYPE_PRODUCT
     );
 
     protected static $mappings = array(
         'Category' => array(
-            'id' => 0,
-            'parentCategoryId' => 0
+            'id' => self::TYPE_CATEGORY,
+            'parentCategoryId' => self::TYPE_CATEGORY
         ),
         'CategoryI18n' => array(
-            'categoryId' => 0
-        ),
-        'Specific' => array(
-            'id' => 77
-        ),
-        'SpecificI18n' => array(
-            'specificId' => 77
-        ),
-        'SpecificValue' => array(
-            'id' => 79,
-            'specificId' => 77
-        ),
-        'SpecificValueI18n' => array(
-            'specificValueId' => 79
+            'categoryId' => self::TYPE_CATEGORY
         ),
         'ProductPrice' => array(
-            'id' => 59,
-            'productId' => 50,
-            'customerGroupId' => 18
-        ),
-        'ProductPriceItem' => array(
-            'productPriceId' => 59
+            'productId' => self::TYPE_PRODUCT
         ),
         'Manufacturer' => array(
-            'id' => 41
+            'id' => self::TYPE_MANUFACTURER
         ),
         'ManufacturerI18n' => array(
-            'manufacturerId' => 41
+            'manufacturerId' => self::TYPE_MANUFACTURER
         ),
         'Customer' => array(
-            'id' => 16,
-            'customerGroupId' => 18
+            'id' => self::TYPE_CUSTOMER
         ),
         'CustomerAttr' => array(
-            'customerId' => 16,
-            'id' => 17
+            'customerId' => self::TYPE_CUSTOMER
         ),
         'CustomerOrder' => array(
-            'id' => 21,
-            'billingAddressId' => 24,
-            'shippingAddressId' => 28,
-            'customerId' => 16
+            'id' => self::TYPE_CUSTOMER_ORDER,
+            'customerId' => self::TYPE_CUSTOMER
         ),
         'CustomerOrderAttr' => array(
-            'customerOrderId' => 21,
-            'id' => 22
+            'customerOrderId' => self::TYPE_CUSTOMER_ORDER
         ),
         'CustomerOrderBillingAddress' => array(
-            'id' => 24,
-            'customerId' => 16
+            'customerId' => self::TYPE_CUSTOMER
         ),
         'CustomerOrderShippingAddress' => array(
-            'id' => 28,
-            'customerId' => 16
+            'customerId' => self::TYPE_CUSTOMER
         ),
         'CustomerOrderPaymentInfo' => array(
-            'customerOrderId' => 21,
-            'id' => 27
-        ),
-        'Currency' => array(
-            'id' => 15
+            'customerOrderId' => self::TYPE_CUSTOMER_ORDER
         ),
         'Product' => array(
-            'id' => 50,
-            'masterProductId' => 50,
-            'manufacturerId' => 41,
-            'deliveryStatusId' => 31,
-            'unitId' => 86,
-            'shippingClassId' => 75,
-            'partsListId' => 48,
-            'productTypeId' => 63,
-            'measurementUnitId' => 43
+            'id' => self::TYPE_PRODUCT,
+            'masterProductId' => self::TYPE_PRODUCT,
+            'manufacturerId' => self::TYPE_MANUFACTURER
         ),
         'ProductSpecialPrice' => array(
-            'productId' => 50,
-            'id' => 61
+            'productId' => self::TYPE_PRODUCT
         ),
         'ProductSpecific' => array(
-            'productId' => 50,
-            'id' => 62,
-            'specificValueId' => 79
+            'productId' => self::TYPE_PRODUCT
         ),
         'DeliveryNote' => array(
-            'id' => 29,
-            'customerOrderId' => 21
+            'id' => self::TYPE_DELIVERY_NOTE,
+            'customerOrderId' => self::TYPE_CUSTOMER_ORDER
         ),
         'DeliveryNoteItem' => array(
-            'deliveryNoteId' => 29,
-            'id' => 30,
-            'customerOrderItemId' => 25,
-            'warehouseId' => 88
+            'deliveryNoteId' => self::TYPE_DELIVERY_NOTE
         ),
         'CategoryInvisibility' => array(
-            'categoryId' => 0,
-            'customerGroupId' => 18
+            'categoryId' => self::TYPE_CATEGORY
         ),
         'CategoryCustomerGroup' => array(
-            'categoryId' => 0,
-            'customerGroupId' => 18
+            'categoryId' => self::TYPE_CATEGORY
         ),
         'CategoryAttr' => array(
-            'categoryId' => 0,
-            'id' => 1
+            'categoryId' => self::TYPE_CATEGORY
         ),
         'ProductFileDownload' => array(
-            'productId' => 50,
-            'fileDownloadId' => 34
+            'productId' => self::TYPE_PRODUCT
         ),
         'Product2Category' => array(
-            'productId' => 50,
-            'id' => 51,
-            'categoryId' => 0
+            'productId' => self::TYPE_PRODUCT,
+            'categoryId' => self::TYPE_CATEGORY
         ),
         'MediaFile' => array(
-            'id' => 45,
-            'productId' => 50
-        ),
-        'MediaFileI18n' => array(
-            'mediaFileId' => 45
-        ),
-        'Language' => array(
-            'id' => 40
-        ),
-        'CustomerGroup' => array(
-            'id' => 18
-        ),
-        'CustomerGroupAttr' => array(
-            'customerGroupId' => 18,
-            'id' => 19
-        ),
-        'CustomerGroupI18n' => array(
-            'customerGroupId' => 18
+            'productId' => self::TYPE_PRODUCT
         ),
         'ProductConfigGroup' => array(
-            'productId' => 50,
-            'id' => 54,
-            'configGroupId' => 8
+            'productId' => self::TYPE_PRODUCT
         ),
         'ProductInvisibility' => array(
-            'productId' => 50,
-            'customerGroupId' => 18
+            'productId' => self::TYPE_PRODUCT
         ),
         'CrossSelling' => array(
-            'productId' => 50,
-            'id' => 13,
-            'crossSellingProductId' => 50,
-            'crossSellingGroupId' => 14
+            'productId' => self::TYPE_PRODUCT,
+            'crossSellingProductId' => self::TYPE_PRODUCT
         ),
         'PartsList' => array(
-            'productId' => 50,
-            'id' => 48
-        ),
-        'MediaFileAttr' => array(
-            'mediaFileId' => 45,
-            'id' => 46
+            'productId' => self::TYPE_PRODUCT
         ),
         'ProductVariation' => array(
-            'productId' => 50,
-            'id' => 65
-        ),
-        'ProductVariationI18n' => array(
-            'productVariationId' => 65
-        ),
-        'ProductVariationInvisibility' => array(
-            'productVariationId' => 65,
-            'customerGroupId' => 18
-        ),
-        'ProductVariationValue' => array(
-            'productVariationId' => 65,
-            'id' => 68
-        ),
-        'ProductVariationValueDependency' => array(
-            'productVariationValueId' => 68
-        ),
-        'ProductVariationValueExtraCharge' => array(
-            'productVariationValueId' => 68,
-            'customerGroupId' => 18
-        ),
-        'ProductVariationValueI18n' => array(
-            'productVariationValueId' => 68
-        ),
-        'ProductVariationValueInvisibility' => array(
-            'productVariationValueId' => 68,
-            'customerGroupId' => 18
-        ),
-        'ProductSpecialPriceItem' => array(
-            'productSpecialPriceId' => 61,
-            'customerGroupId' => 18
+            'productId' => self::TYPE_PRODUCT
         ),
         'CustomerOrderItem' => array(
-            'id' => 25,
-            'productId' => 50,
-            'shippingClassId' => 75,
-            'customerOrderId' => 21,
-            'configItemId' => 10
-        ),
-        'CustomerOrderItemVariation' => array(
-            'customerOrderItemId' => 25,
-            'id' => 26,
-            'productVariationId' => 65,
-            'productVariationValueId' => 68
+            'productId' => self::TYPE_PRODUCT,
+            'customerOrderId' => self::TYPE_CUSTOMER_ORDER
         ),
         'ConfigItem' => array(
-            'id' => 10,
-            'configGroupId' => 8,
-            'productId' => 50
-        ),
-        'ConfigItemPrice' => array(
-            'configItemId' => 10,
-            'customerGroupId' => 18
-        ),
-        'ConfigItemI18n' => array(
-            'configItemId' => 10
-        ),
-        'ConfigGroup' => array(
-            'id' => 8
-        ),
-        'ConfigGroupI18n' => array(
-            'configGroupId' => 8
-        ),
-        'FileDownload' => array(
-            'id' => 34
-        ),
-        'FileDownloadI18n' => array(
-            'fileDownloadId' => 34
+            'productId' => self::TYPE_PRODUCT
         ),
         'ProductI18n' => array(
-            'productId' => 50
-        ),
-        'Unit' => array(
-            'id' => 86
-        ),
-        'UnitI18n' => array(
-            'unitId' => 86
+            'productId' => self::TYPE_PRODUCT
         ),
         'ProductFunctionAttr' => array(
-            'id' => 56,
-            'productId' => 50
-        ),
-        'Warehouse' => array(
-            'id' => 88
-        ),
-        'TaxClass' => array(
-            'id' => 82
+            'productId' => self::TYPE_PRODUCT
         ),
         'FileUpload' => array(
-            'id' => 37,
-            'productId' => 50
+            'productId' => self::TYPE_PRODUCT
         ),
         'ProductWarehouseInfo' => array(
-            'productId' => 50,
-            'warehouseId' => 88
-        ),
-        'WarehouseI18n' => array(
-            'warehouseId' => 88
-        ),
-        'MeasurementUnit' => array(
-            'id' => 43
-        ),
-        'MeasurementUnitI18n' => array(
-            'measurementUnitId' => 43
-        ),
-        'TaxRate' => array(
-            'id' => 83,
-            'taxZoneId' => 84,
-            'taxClassId' => 82
-        ),
-        'ProductType' => array(
-            'id' => 63
+            'productId' => self::TYPE_PRODUCT
         ),
         'FileDownloadHistory' => array(
-            'id' => 35,
-            'fileDownloadId' => 34,
-            'customerId' => 16,
-            'customerOrderId' => 21
-        ),
-        'Company' => array(
-            'id' => 7
+            'customerId' => self::TYPE_CUSTOMER,
+            'customerOrderId' => self::TYPE_CUSTOMER_ORDER
         ),
         'ProductVarCombination' => array(
-            'productId' => 50,
-            'productVariationId' => 65,
-            'productVariationValueId' => 68
+            'productId' => self::TYPE_PRODUCT
         ),
         'ProductAttr' => array(
-            'id' => 52,
-            'productId' => 50
-        ),
-        'PaymentMethod' => array(
-            'id' => 49
-        ),
-        'TaxZone' => array(
-            'id' => 84
-        ),
-        'CrossSellingGroup' => array(
-            'id' => 14
-        ),
-        'TaxZoneCountry' => array(
-            'id' => 85,
-            'taxZoneId' => 84
+            'productId' => self::TYPE_PRODUCT
         ),
         'Shipment' => array(
-            'id' => 74,
-            'deliveryNoteId' => 29
-        ),
-        'DeliveryStatus' => array(
-            'id' => 31
-        ),
-        'EmailTemplate' => array(
-            'id' => 32
+            'deliveryNoteId' => self::TYPE_DELIVERY_NOTE
         ),
         'Image' => array(
-            'id' => 39,
-            'foreignKey' => 39
-        ),
-        'EmailTemplateI18n' => array(
-            'emailTemplateId' => 32
+            'id' => self::TYPE_IMAGE,
+            'foreignKey' => self::TYPE_IMAGE
         ),
         'CategoryFunctionAttr' => array(
-            'id' => 4,
-            'categoryId' => 0
-        ),
-        'ProductAttrI18n' => array(
-            'productAttrId' => 52
-        ),
-        'ShippingClass' => array(
-            'id' => 75
+            'categoryId' => self::TYPE_CATEGORY
         ),
         'CustomerOrderBasket' => array(
-            'id' => 23,
-            'customerId' => 16,
-            'shippingAddressId' => 28,
-            'customerOrderPaymentInfoId' => 27
-        ),
-        'CategoryAttrI18n' => array(
-            'categoryAttrId' => 1
+            'customerId' => self::TYPE_CUSTOMER
         )
     );
 
@@ -561,7 +269,7 @@ class IdentityLinker
                         Logger::WARNING, 'linker'
                     );
                 }
-            } elseif ($propertyInfo->isIdentity()) {
+            } elseif ($propertyInfo->isIdentity() && $this->isType($reflect->getShortName(), $property)) {
                 $identity = $model->{$getter}();
 
                 if (!($identity instanceof Identity)) {
@@ -630,6 +338,20 @@ class IdentityLinker
         }
 
         return self::$mappings[$modelName][$property];
+    }
+
+    /**
+     * Type id getter
+     *
+     * @param string $modelName
+     * @param string $property
+     * @return boolean
+     */
+    public function isType($modelName, $property = null)
+    {
+        $modelName = ucfirst($modelName);
+
+        return ($property === null) ? isset(self::$types[$modelName]) : isset(self::$types[$modelName][$property]);
     }
 
     /**
