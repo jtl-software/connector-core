@@ -11,8 +11,6 @@ use \jtl\Connector\Core\Controller\Controller as CoreController;
 use \jtl\Connector\Result\Action;
 use \jtl\Connector\Core\Rpc\Error;
 use \jtl\Connector\Application\Application;
-use \jtl\Connector\Core\Model\QueryFilter;
-use \jtl\Connector\Core\Model\DataModel;
 use \jtl\Connector\Linker\IdentityLinker;
 use \jtl\Connector\Serializer\JMS\SerializerBuilder;
 use \jtl\Connector\Core\Logger\Logger;
@@ -88,7 +86,7 @@ class Connector extends CoreController
 
             foreach ($ack->getIdentities() as $modelName => $identities) {
                 foreach ($identities as $identity) {
-                    //$identityLinker->save($identity->getEndpoint(), $identity->getHost(), $modelName);
+                    $identityLinker->save($identity->getEndpoint(), $identity->getHost(), $modelName);
                 }
             }
 

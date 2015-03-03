@@ -6,7 +6,6 @@
 
 namespace jtl\Connector\Core\Model;
 
-use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**

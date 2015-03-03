@@ -12,7 +12,6 @@ use \jtl\Connector\Core\Exception\RpcException;
 use \jtl\Connector\Core\Exception\SessionException;
 use \jtl\Connector\Core\Exception\ConnectorException;
 use \jtl\Connector\Core\Exception\ApplicationException;
-use \jtl\Connector\Core\Rpc\Handler;
 use \jtl\Connector\Core\Rpc\Packet;
 use \jtl\Connector\Core\Rpc\RequestPacket;
 use \jtl\Connector\Core\Rpc\ResponsePacket;

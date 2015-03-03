@@ -263,9 +263,11 @@ class IdentityLinker
                             );
                         }
                     }
+                } elseif ($model->{$getter}() instanceof DataModel) {
+                    $this->linkModel($model->{$getter}());
                 } else {
                     Logger::write(
-                        sprintf('Property (%s) from model (%s) is not an array', $propertyInfo->getName(), $reflect->getShortName()), 
+                        sprintf('Property (%s) from model (%s) is not an array or an instance of DataModel', $propertyInfo->getName(), $reflect->getShortName()),
                         Logger::WARNING, 'linker'
                     );
                 }
@@ -350,8 +352,9 @@ class IdentityLinker
     public function isType($modelName, $property = null)
     {
         $modelName = ucfirst($modelName);
+        $property = lcfirst($property);
 
-        return ($property === null) ? isset(self::$types[$modelName]) : isset(self::$types[$modelName][$property]);
+        return ($property === null) ? isset(self::$types[$modelName]) : isset(self::$mappings[$modelName][$property]);
     }
 
     /**
