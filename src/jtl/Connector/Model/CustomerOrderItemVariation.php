@@ -70,6 +70,14 @@ class CustomerOrderItemVariation extends DataModel
     protected $productVariationName = '';
 
     /**
+     * @var double 
+     * @Serializer\Type("double")
+     * @Serializer\SerializedName("surcharge")
+     * @Serializer\Accessor(getter="getSurcharge",setter="setSurcharge")
+     */
+    protected $surcharge = 0.0;
+
+    /**
      * @var string 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("valueName")
@@ -192,6 +200,23 @@ class CustomerOrderItemVariation extends DataModel
     public function getProductVariationName()
     {
         return $this->productVariationName;
+    }
+
+    /**
+     * @param double $surcharge 
+     * @return \jtl\Connector\Model\CustomerOrderItemVariation
+     */
+    public function setSurcharge($surcharge)
+    {
+        return $this->setProperty('surcharge', $surcharge, 'double');
+    }
+
+    /**
+     * @return double 
+     */
+    public function getSurcharge()
+    {
+        return $this->surcharge;
     }
 
     /**

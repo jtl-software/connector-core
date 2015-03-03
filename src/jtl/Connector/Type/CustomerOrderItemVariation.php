@@ -23,6 +23,7 @@ class CustomerOrderItemVariation extends DataType
             new PropertyInfo('productVariationValueId', 'Identity', null, false, true, false),
             new PropertyInfo('freeField', 'string', '', false, false, false),
             new PropertyInfo('productVariationName', 'string', '', false, false, false),
+            new PropertyInfo('surcharge', 'double', 0.0, false, false, false),
             new PropertyInfo('valueName', 'string', '', false, false, false),
         );
     }
