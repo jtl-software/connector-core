@@ -149,7 +149,7 @@ class Language
         if ($country !== null) {
             $country = strtolower($country);
 
-            if (($locale = array_search($country, self::$languages)) !== false) {
+            if (($locale = array_search($country, self::$locales)) !== false) {
                 return $locale;
             }
         }

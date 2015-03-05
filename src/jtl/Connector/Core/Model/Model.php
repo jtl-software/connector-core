@@ -97,9 +97,9 @@ abstract class Model
                     }
 
                     if (is_array($this->{$member})) {
-                        for ($i = 0; $i < count($this->{$member}); $i++) {
-                            if ($this->{$member}[$i] instanceof self) {
-                                $this->{$member}[$i] = $this->{$member}[$i]->getPublic($publics);
+                        foreach (array_keys($this->{$member}) as $key) {
+                            if ($this->{$member}[$key] instanceof self) {
+                                $this->{$member}[$key] = $this->{$member}[$key]->getPublic($publics);
                             }
                         }
                     }

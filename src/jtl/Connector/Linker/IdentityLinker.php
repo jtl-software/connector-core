@@ -264,7 +264,8 @@ class IdentityLinker
                         }
                     }
                 } elseif ($model->{$getter}() instanceof DataModel) {
-                    $this->linkModel($model->{$getter}());
+                    $entity = $model->{$getter}();
+                    $this->linkModel($entity);
                 } else {
                     Logger::write(
                         sprintf('Property (%s) from model (%s) is not an array or an instance of DataModel', $propertyInfo->getName(), $reflect->getShortName()),
