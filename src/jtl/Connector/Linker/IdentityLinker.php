@@ -250,8 +250,7 @@ class IdentityLinker
             $setter = 'set' . $property;
             $getter = 'get' . $property;
 
-            if ($propertyInfo->isNavigation()) {
-
+            if ($propertyInfo->isNavigation() && $model->{$getter}() !== null) {
                 if (is_array($model->{$getter}())) {
                     foreach ($identity = $model->{$getter}() as &$entity) {
                         if ($entity instanceof DataModel) {

@@ -18,7 +18,6 @@ class Statistic extends DataType
     {
         return array(
             new PropertyInfo('available', 'integer', null, false, false, false),
-            new PropertyInfo('pending', 'integer', null, false, false, false),
             new PropertyInfo('controllerName', 'string', false, false, false, false)
         );
     }

@@ -22,11 +22,6 @@ class Statistic extends DataModel
     protected $available = 0;
 
     /**
-     * @type int
-     */
-    protected $pending = 0;
-
-    /**
      * @type string
      */
     protected $controllerName = '';
@@ -56,24 +51,6 @@ class Statistic extends DataModel
     public function setAvailable($available)
     {
         return $this->setProperty('available', $available, 'integer');
-    }
-
-    /**
-     * @return integer
-     */
-    public function getPending()
-    {
-        return $this->pending;
-    }
-    
-    /**
-     * @param  integer $pending
-     * @return \jtl\Connector\Model\Statistic
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
-     */
-    public function setPending($pending)
-    {
-        return $this->setProperty('pending', $pending, 'integer');
     }
 
     /**
