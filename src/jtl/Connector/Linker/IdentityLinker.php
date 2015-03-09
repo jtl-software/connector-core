@@ -10,6 +10,7 @@ use \jtl\Connector\Model\DataModel;
 use \jtl\Connector\Exception\LinkerException;
 use \jtl\Connector\Model\Identity;
 use \jtl\Connector\Core\Logger\Logger;
+use \jtl\Connector\Drawing\ImageRelationType;
 
 /**
  * Identity Connector Linker
@@ -22,13 +23,14 @@ class IdentityLinker
     const CACHE_TYPE_HOST = 'h';
     const CACHE_TYPE_ENDPOINT = 'e';
 
-    const TYPE_CATEGORY = 0;
-    const TYPE_CUSTOMER = 16;
-    const TYPE_CUSTOMER_ORDER = 21;
-    const TYPE_DELIVERY_NOTE = 29;
-    const TYPE_IMAGE = 39;
-    const TYPE_MANUFACTURER = 41;
-    const TYPE_PRODUCT = 50;
+    const TYPE_CATEGORY = 1;
+    const TYPE_CUSTOMER = 2;
+    const TYPE_CUSTOMER_ORDER = 4;
+    const TYPE_DELIVERY_NOTE = 8;
+    const TYPE_IMAGE = 16;
+    const TYPE_MANUFACTURER = 32;
+    const TYPE_PRODUCT = 64;
+    const TYPE_SPECIFIC = 128;
 
     /**
      * Session Database Mapper
@@ -183,8 +185,19 @@ class IdentityLinker
         ),
         'CustomerOrderBasket' => array(
             'customerId' => self::TYPE_CUSTOMER
+        ),
+        'Specific' => array(
+            'id' => self::TYPE_SPECIFIC
+        ),
+        'SpecificI18n' => array(
+            'specificId' => self::TYPE_SPECIFIC
+        ),
+        'SpecificValue' => array(
+            'specificId' => self::TYPE_SPECIFIC
         )
     );
+
+    protected $runtimeInfos = array();
 
     /**
      * Singleton
@@ -244,6 +257,15 @@ class IdentityLinker
     public function linkModel(DataModel &$model, $isDeleted = false)
     {
         $reflect = new \ReflectionClass($model);
+
+        // Image work around
+        if (isset($this->runtimeInfos['relationType'])) {
+            unset($this->runtimeInfos['relationType']);
+        }
+
+        if ($reflect->getShortName() === 'Image' && method_exists($model, 'getRelationType')) {
+            $this->runtimeInfos['relationType'] = $model->getRelationType();
+        }
 
         foreach ($model->getModelType()->getProperties() as $propertyInfo) {
             $property = ucfirst($propertyInfo->getName());
@@ -319,6 +341,24 @@ class IdentityLinker
      */
     public function getType($modelName, $property = null)
     {
+        // Work around
+        if ($modelName === 'Image' && isset($this->runtimeInfos['relationType'])) {
+            switch ($this->runtimeInfos['relationType']) {
+                case ImageRelationType::TYPE_PRODUCT:
+                    return self::TYPE_PRODUCT;
+                    break;
+                case ImageRelationType::TYPE_CATEGORY:
+                    return self::TYPE_CATEGORY;
+                    break;                
+                case ImageRelationType::TYPE_SPECIFIC:
+                    return self::TYPE_SPECIFIC;
+                    break;
+                case ImageRelationType::TYPE_MANUFACTURER:
+                    return self::TYPE_MANUFACTURER;
+                    break;
+            }
+        }
+
         $modelName = ucfirst($modelName);
 
         if ($property === null) {
