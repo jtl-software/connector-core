@@ -824,7 +824,7 @@ class Product extends DataModel
      * @return \jtl\Connector\Model\Product
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setAvailableFrom(DateTime $availableFrom)
+    public function setAvailableFrom(DateTime $availableFrom = null)
     {
         return $this->setProperty('availableFrom', $availableFrom, 'DateTime');
     }
@@ -944,7 +944,7 @@ class Product extends DataModel
      * @return \jtl\Connector\Model\Product
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreationDate(DateTime $creationDate)
+    public function setCreationDate(DateTime $creationDate = null)
     {
         return $this->setProperty('creationDate', $creationDate, 'DateTime');
     }
@@ -1268,7 +1268,7 @@ class Product extends DataModel
      * @return \jtl\Connector\Model\Product
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setModified(DateTime $modified)
+    public function setModified(DateTime $modified = null)
     {
         return $this->setProperty('modified', $modified, 'DateTime');
     }
@@ -1286,7 +1286,7 @@ class Product extends DataModel
      * @return \jtl\Connector\Model\Product
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setNextAvailableInflowDate(DateTime $nextAvailableInflowDate)
+    public function setNextAvailableInflowDate(DateTime $nextAvailableInflowDate = null)
     {
         return $this->setProperty('nextAvailableInflowDate', $nextAvailableInflowDate, 'DateTime');
     }
@@ -1491,7 +1491,7 @@ class Product extends DataModel
      * @return \jtl\Connector\Model\Product
      * @throws \InvalidArgumentException if the provided argument is not of type 'ProductStockLevel'.
      */
-    public function setStockLevel(ProductStockLevel $stockLevel)
+    public function setStockLevel(ProductStockLevel $stockLevel = null)
     {
         return $this->setProperty('stockLevel', $stockLevel, 'jtl\Connector\Model\ProductStockLevel');
     }

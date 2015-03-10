@@ -336,7 +336,7 @@ class Customer extends DataModel
      * @return \jtl\Connector\Model\Customer
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setBirthday(DateTime $birthday)
+    public function setBirthday(DateTime $birthday = null)
     {
         return $this->setProperty('birthday', $birthday, 'DateTime');
     }
@@ -405,7 +405,7 @@ class Customer extends DataModel
      * @return \jtl\Connector\Model\Customer
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreationDate(DateTime $creationDate)
+    public function setCreationDate(DateTime $creationDate = null)
     {
         return $this->setProperty('creationDate', $creationDate, 'DateTime');
     }

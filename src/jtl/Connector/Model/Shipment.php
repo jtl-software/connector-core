@@ -144,7 +144,7 @@ class Shipment extends DataModel
      * @return \jtl\Connector\Model\Shipment
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreationDate(DateTime $creationDate)
+    public function setCreationDate(DateTime $creationDate = null)
     {
         return $this->setProperty('creationDate', $creationDate, 'DateTime');
     }

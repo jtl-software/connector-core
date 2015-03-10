@@ -143,7 +143,7 @@ class ProductSpecialPrice extends DataModel
      * @return \jtl\Connector\Model\ProductSpecialPrice
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setActiveFromDate(DateTime $activeFromDate)
+    public function setActiveFromDate(DateTime $activeFromDate = null)
     {
         return $this->setProperty('activeFromDate', $activeFromDate, 'DateTime');
     }
@@ -161,7 +161,7 @@ class ProductSpecialPrice extends DataModel
      * @return \jtl\Connector\Model\ProductSpecialPrice
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setActiveUntilDate(DateTime $activeUntilDate)
+    public function setActiveUntilDate(DateTime $activeUntilDate = null)
     {
         return $this->setProperty('activeUntilDate', $activeUntilDate, 'DateTime');
     }

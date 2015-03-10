@@ -75,7 +75,7 @@ class DeliveryNoteItemInfo extends DataModel
      * @return \jtl\Connector\Model\DeliveryNoteItemInfo
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setBestBefore(DateTime $bestBefore)
+    public function setBestBefore(DateTime $bestBefore = null)
     {
         return $this->setProperty('bestBefore', $bestBefore, 'DateTime');
     }

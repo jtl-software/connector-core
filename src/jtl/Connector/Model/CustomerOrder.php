@@ -397,7 +397,7 @@ class CustomerOrder extends DataModel
      * @return \jtl\Connector\Model\CustomerOrder
      * @throws \InvalidArgumentException if the provided argument is not of type 'CustomerOrderBillingAddress'.
      */
-    public function setBillingAddress(CustomerOrderBillingAddress $billingAddress)
+    public function setBillingAddress(CustomerOrderBillingAddress $billingAddress = null)
     {
         return $this->setProperty('billingAddress', $billingAddress, 'jtl\Connector\Model\CustomerOrderBillingAddress');
     }
@@ -432,7 +432,7 @@ class CustomerOrder extends DataModel
      * @return \jtl\Connector\Model\CustomerOrder
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreationDate(DateTime $creationDate)
+    public function setCreationDate(DateTime $creationDate = null)
     {
         return $this->setProperty('creationDate', $creationDate, 'DateTime');
     }
@@ -484,7 +484,7 @@ class CustomerOrder extends DataModel
      * @return \jtl\Connector\Model\CustomerOrder
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setEstimatedDeliveryDate(DateTime $estimatedDeliveryDate)
+    public function setEstimatedDeliveryDate(DateTime $estimatedDeliveryDate = null)
     {
         return $this->setProperty('estimatedDeliveryDate', $estimatedDeliveryDate, 'DateTime');
     }
@@ -553,7 +553,7 @@ class CustomerOrder extends DataModel
      * @return \jtl\Connector\Model\CustomerOrder
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setPaymentDate(DateTime $paymentDate)
+    public function setPaymentDate(DateTime $paymentDate = null)
     {
         return $this->setProperty('paymentDate', $paymentDate, 'DateTime');
     }
@@ -571,7 +571,7 @@ class CustomerOrder extends DataModel
      * @return \jtl\Connector\Model\CustomerOrder
      * @throws \InvalidArgumentException if the provided argument is not of type 'CustomerOrderPaymentInfo'.
      */
-    public function setPaymentInfo(CustomerOrderPaymentInfo $paymentInfo)
+    public function setPaymentInfo(CustomerOrderPaymentInfo $paymentInfo = null)
     {
         return $this->setProperty('paymentInfo', $paymentInfo, 'jtl\Connector\Model\CustomerOrderPaymentInfo');
     }
@@ -623,7 +623,7 @@ class CustomerOrder extends DataModel
      * @return \jtl\Connector\Model\CustomerOrder
      * @throws \InvalidArgumentException if the provided argument is not of type 'CustomerOrderShippingAddress'.
      */
-    public function setShippingAddress(CustomerOrderShippingAddress $shippingAddress)
+    public function setShippingAddress(CustomerOrderShippingAddress $shippingAddress = null)
     {
         return $this->setProperty('shippingAddress', $shippingAddress, 'jtl\Connector\Model\CustomerOrderShippingAddress');
     }
@@ -641,7 +641,7 @@ class CustomerOrder extends DataModel
      * @return \jtl\Connector\Model\CustomerOrder
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setShippingDate(DateTime $shippingDate)
+    public function setShippingDate(DateTime $shippingDate = null)
     {
         return $this->setProperty('shippingDate', $shippingDate, 'DateTime');
     }
