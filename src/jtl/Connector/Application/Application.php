@@ -188,7 +188,7 @@ class Application extends CoreApplication
                 Request::deleteFileupload($imagePath);
             }
             
-            if (get_class($actionresult) === "jtl\\Connector\\Result\\Action") {
+            if ($actionresult instanceof Action) {
                 $exists = true;
                 if ($actionresult->isHandled()) {
 
