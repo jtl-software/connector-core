@@ -55,7 +55,7 @@ class Connector extends CoreController
         try {
             //@todo: irgend ne supertolle feature list methode
             $featureData = file_get_contents(CONNECTOR_DIR . '/config/features.json');
-            $features = json_decode($featureData, true);
+            $features = json_decode($featureData);
 
             $ret->setResult($features);
             $ret->setHandled(true);
@@ -77,6 +77,8 @@ class Connector extends CoreController
     public function ack($params = null)
     {
         $ret = new Action();
+        $ret->setHandled(true);
+
         try {
             $serializer = SerializerBuilder::create();
 
@@ -90,8 +92,7 @@ class Connector extends CoreController
                 }
             }
 
-            $ret->setResult(true);
-            $ret->setHandled(true);
+            $ret->setResult(true);            
         } catch (\Exception $e) {
             $err = new Error();
             $err->setCode($e->getCode());
