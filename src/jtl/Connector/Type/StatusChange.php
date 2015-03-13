@@ -19,7 +19,7 @@ class StatusChange extends DataType
         return array(
             new PropertyInfo('customerOrderId', 'Identity', null, false, false, false),
             new PropertyInfo('paymentStatus', 'string', '', false, false, false),
-            new PropertyInfo('shippingStatus', 'string', '', false, false, false)
+            new PropertyInfo('orderStatus', 'string', '', false, false, false)
         );
     }
 

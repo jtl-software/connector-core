@@ -195,6 +195,9 @@ class IdentityLinker
         ),
         'SpecificValue' => array(
             'specificId' => self::TYPE_SPECIFIC
+        ),
+        'StatusChange' => array(
+            'customerOrderId' => self::TYPE_CUSTOMER_ORDER
         )
     );
 

@@ -36,12 +36,12 @@ class StatusChange extends DataModel
     protected $paymentStatus = '';
 
     /**
-     * @var string Customer shipping status: cancelled / completed / new / partially_shipped / processed / updated
+     * @var string Customer order status: cancelled / completed / new / partially_shipped / processed / updated
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("shippingStatus")
-     * @Serializer\Accessor(getter="getShippingStatus",setter="setShippingStatus")
+     * @Serializer\SerializedName("orderStatus")
+     * @Serializer\Accessor(getter="getOrderStatus",setter="setOrderStatus")
      */
-    protected $shippingStatus = '';
+    protected $orderStatus = '';
 
     /**
      * Constructor
@@ -100,25 +100,25 @@ class StatusChange extends DataModel
     }
 
     /**
-     * Gets the value of shippingStatus.
+     * Gets the value of orderStatus.
      *
      * @return string
      */
-    public function getShippingStatus()
+    public function getOrderStatus()
     {
-        return $this->shippingStatus;
+        return $this->orderStatus;
     }
 
     /**
-     * Sets the value of shippingStatus.
+     * Sets the value of orderStatus.
      *
-     * @param string $shippingStatus the shipping status
+     * @param string $orderStatus the order status
      *
      * @return self
      */
-    public function setShippingStatus($shippingStatus)
+    public function setOrderStatus($orderStatus)
     {
-        $this->shippingStatus = $shippingStatus;
+        $this->orderStatus = $orderStatus;
 
         return $this;
     }
