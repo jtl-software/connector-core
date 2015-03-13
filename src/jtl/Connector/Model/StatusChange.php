@@ -1,0 +1,125 @@
+<?php
+/**
+ * @copyright 2010-2015 JTL-Software GmbH
+ * @package jtl\Connector\Model
+ * @subpackage CustomerOrder
+ */
+
+namespace jtl\Connector\Model;
+
+use DateTime;
+use JMS\Serializer\Annotation as Serializer;
+
+/**
+ * @access public
+ * @package jtl\Connector\Model
+ * @subpackage CustomerOrder
+ * 
+ * @Serializer\AccessType("public_method")
+ */
+class StatusChange extends DataModel
+{
+    /**
+     * @var Identity Unique customerOrder id
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("customerOrderId")
+     * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
+     */
+    protected $customerOrderId;
+
+    /**
+     * @var string Customer payment status: completed / partially_paid / unpaid
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("paymentStatus")
+     * @Serializer\Accessor(getter="getPaymentStatus",setter="setPaymentStatus")
+     */
+    protected $paymentStatus = '';
+
+    /**
+     * @var string Customer shipping status: cancelled / completed / new / partially_shipped / processed / updated
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("shippingStatus")
+     * @Serializer\Accessor(getter="getShippingStatus",setter="setShippingStatus")
+     */
+    protected $shippingStatus = '';
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->customerOrderId = new Identity();
+    }
+
+    /**
+     * Gets the value of customerOrderId.
+     *
+     * @return Identity
+     */
+    public function getCustomerOrderId()
+    {
+        return $this->customerOrderId;
+    }
+
+    /**
+     * Sets the value of customerOrderId.
+     *
+     * @param Identity $customerOrderId the customer order id
+     *
+     * @return self
+     */
+    public function setCustomerOrderId(Identity $customerOrderId)
+    {
+        $this->customerOrderId = $customerOrderId;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of paymentStatus.
+     *
+     * @return string
+     */
+    public function getPaymentStatus()
+    {
+        return $this->paymentStatus;
+    }
+
+    /**
+     * Sets the value of paymentStatus.
+     *
+     * @param string $paymentStatus the payment status
+     *
+     * @return self
+     */
+    public function setPaymentStatus($paymentStatus)
+    {
+        $this->paymentStatus = $paymentStatus;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of shippingStatus.
+     *
+     * @return string
+     */
+    public function getShippingStatus()
+    {
+        return $this->shippingStatus;
+    }
+
+    /**
+     * Sets the value of shippingStatus.
+     *
+     * @param string $shippingStatus the shipping status
+     *
+     * @return self
+     */
+    public function setShippingStatus($shippingStatus)
+    {
+        $this->shippingStatus = $shippingStatus;
+
+        return $this;
+    }
+}
