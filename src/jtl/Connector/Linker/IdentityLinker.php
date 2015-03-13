@@ -49,7 +49,8 @@ class IdentityLinker
         'DeliveryNote' => self::TYPE_DELIVERY_NOTE,
         'Image' => self::TYPE_IMAGE,
         'Manufacturer' => self::TYPE_MANUFACTURER,
-        'Product' => self::TYPE_PRODUCT
+        'Product' => self::TYPE_PRODUCT,
+        'Specific' => self::TYPE_SPECIFIC
     );
 
     protected static $mappings = array(
