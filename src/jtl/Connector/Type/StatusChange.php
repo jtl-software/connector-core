@@ -17,7 +17,7 @@ class StatusChange extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('customerOrderId', 'Identity', null, false, false, false),
+            new PropertyInfo('customerOrderId', 'Identity', null, true, true, false),
             new PropertyInfo('paymentStatus', 'string', '', false, false, false),
             new PropertyInfo('orderStatus', 'string', '', false, false, false)
         );
@@ -25,6 +25,6 @@ class StatusChange extends DataType
 
     public function isMain()
     {
-        return false;
+        return true;
     }
 }

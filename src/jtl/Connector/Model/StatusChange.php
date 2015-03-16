@@ -2,7 +2,7 @@
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage CustomerOrder
+ * @subpackage StatusChange
  */
 
 namespace jtl\Connector\Model;
@@ -13,7 +13,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @access public
  * @package jtl\Connector\Model
- * @subpackage CustomerOrder
+ * @subpackage StatusChange
  * 
  * @Serializer\AccessType("public_method")
  */
@@ -52,9 +52,7 @@ class StatusChange extends DataModel
     }
 
     /**
-     * Gets the value of customerOrderId.
-     *
-     * @return Identity
+     * @return Identity 
      */
     public function getCustomerOrderId()
     {
@@ -62,23 +60,17 @@ class StatusChange extends DataModel
     }
 
     /**
-     * Sets the value of customerOrderId.
-     *
-     * @param Identity $customerOrderId the customer order id
-     *
-     * @return self
+     * @param Identity $customerOrderId 
+     * @return \jtl\Connector\Model\StatusChange
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerOrderId(Identity $customerOrderId)
     {
-        $this->customerOrderId = $customerOrderId;
-
-        return $this;
+        return $this->setProperty('customerOrderId', $customerOrderId, 'Identity');
     }
 
     /**
-     * Gets the value of paymentStatus.
-     *
-     * @return string
+     * @return string 
      */
     public function getPaymentStatus()
     {
@@ -86,23 +78,16 @@ class StatusChange extends DataModel
     }
 
     /**
-     * Sets the value of paymentStatus.
-     *
-     * @param string $paymentStatus the payment status
-     *
-     * @return self
+     * @param string $paymentStatus 
+     * @return \jtl\Connector\Model\StatusChange
      */
     public function setPaymentStatus($paymentStatus)
     {
-        $this->paymentStatus = $paymentStatus;
-
-        return $this;
+        return $this->setProperty('paymentStatus', $paymentStatus, 'string');
     }
 
     /**
-     * Gets the value of orderStatus.
-     *
-     * @return string
+     * @return string 
      */
     public function getOrderStatus()
     {
@@ -110,16 +95,11 @@ class StatusChange extends DataModel
     }
 
     /**
-     * Sets the value of orderStatus.
-     *
-     * @param string $orderStatus the order status
-     *
-     * @return self
+     * @param string $orderStatus 
+     * @return \jtl\Connector\Model\StatusChange
      */
     public function setOrderStatus($orderStatus)
     {
-        $this->orderStatus = $orderStatus;
-
-        return $this;
+        return $this->setProperty('orderStatus', $orderStatus, 'string');
     }
 }

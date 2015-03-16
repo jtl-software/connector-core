@@ -328,7 +328,7 @@ class Application extends CoreApplication
         $namespace = ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) ?
             sprintf('%s\%s', $modelNamespace, RpcMethod::buildController($method->getController())) : 'jtl\Connector\Core\Model\QueryFilter';
 
-        if (class_exists("\\{$namespace}") && $requestpacket->getParams() !== null) {            
+        if (class_exists("\\{$namespace}") && $requestpacket->getParams() !== null) {
             $serializer = SerializerBuilder::create();
 
             // Identity mapping
