@@ -9,6 +9,7 @@ namespace jtl\Connector\Model;
 
 use DateTime;
 use JMS\Serializer\Annotation as Serializer;
+use \jtl\Connector\Checksum\IChecksum;
 
 /**
  *
@@ -18,7 +19,7 @@ use JMS\Serializer\Annotation as Serializer;
  * 
  * @Serializer\AccessType("public_method")
  */
-class ProductChecksum extends DataModel
+class ProductChecksum extends DataModel implements IChecksum
 {
     /**
      * @var int - Checksum used to check variations for change
@@ -110,13 +111,13 @@ class ProductChecksum extends DataModel
     }
 
     /**
-     * @param ProductChecksumType $type 
+     * @param int $type 
      * @return \jtl\Connector\Model\ProductChecksum
      * @throws \InvalidArgumentException if the provided argument is not of type 'ProductChecksumType'.
      */
-    public function setType(ProductChecksumType $type = null)
+    public function setType($type)
     {
-        return $this->setProperty('type', $type, 'string');
+        return $this->setProperty('type', $type, 'int');
     }
 
     /**

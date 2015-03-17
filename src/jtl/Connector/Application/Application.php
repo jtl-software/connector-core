@@ -36,6 +36,9 @@ use \jtl\Connector\Linker\IdentityLinker;
 use \jtl\Connector\Model\DataModel;
 use \Doctrine\Common\Collections\ArrayCollection;
 use \jtl\Connector\Serializer\JMS\SerializerBuilder;
+use \jtl\Connector\Linker\ChecksumLinker;
+use \jtl\Connector\Model\Product;
+use \jtl\Connector\Model\ProductChecksum;
 
 /**
  * Application Class
@@ -116,6 +119,8 @@ class Application extends CoreApplication
         if ($this->connector->getChecksumLoader() === null) {
             throw new ApplicationException('No checksum loader registed');
         }
+
+        ChecksumLinker::setChecksumLoader($this->connector->getChecksumLoader());
 
         switch ($rpcmode) {
             case Packet::SINGLE_MODE:
@@ -334,15 +339,20 @@ class Application extends CoreApplication
 
         if (class_exists("\\{$namespace}") && $requestpacket->getParams() !== null) {
             $serializer = SerializerBuilder::create();
-
-            // Identity mapping
+            
             if ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) {
                 $params = $serializer->deserialize($requestpacket->getParams(), "ArrayCollection<{$namespace}>", 'json');
-
+                
                 if (is_array($params)) {
+                    // Identity mapping
                     $identityLinker = IdentityLinker::getInstance();
                     foreach ($params as &$param) {
                         $identityLinker->linkModel($param);
+
+                        // Product Checksum
+                        if ($param instanceof Product) {
+                            ChecksumLinker::link($param, ProductChecksum::TYPE_VARIATION);
+                        }
                     }
                 }
             } else {
