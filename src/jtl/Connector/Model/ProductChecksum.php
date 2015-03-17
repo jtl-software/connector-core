@@ -21,6 +21,11 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductChecksum extends DataModel
 {
     /**
+     * @var int - Checksum used to check variations for change
+     */
+    const TYPE_VARIATION = 1;
+
+    /**
      * @var string 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("endpoint")
