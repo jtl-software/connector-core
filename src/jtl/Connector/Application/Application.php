@@ -113,6 +113,10 @@ class Application extends CoreApplication
             throw new ApplicationException('No token loader registed');
         }
 
+        if ($this->connector->getChecksumLoader() === null) {
+            throw new ApplicationException('No checksum loader registed');
+        }
+
         switch ($rpcmode) {
             case Packet::SINGLE_MODE:
                 $this->runSingle($requestpackets, $this->config, $rpcmode);

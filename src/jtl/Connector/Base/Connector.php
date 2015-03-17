@@ -15,6 +15,7 @@ use \jtl\Connector\Core\Exception\ConnectorException;
 use \jtl\Connector\Core\Rpc\Method;
 use \jtl\Connector\Mapper\IPrimaryKeyMapper;
 use \jtl\Connector\Authentication\ITokenLoader;
+use \jtl\Connector\Checksum\IChecksumLoader;
 
 /**
  * Base Connector
@@ -27,6 +28,7 @@ class Connector extends Singleton implements IEndpointConnector
     protected $controller;
     protected $keyMapper;
     protected $tokenLoader;
+    protected $checksumLoader;
     protected $config;
     protected $method;
     protected $modelNamespace = 'jtl\Connector\Model';
@@ -73,11 +75,33 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * Returns token loader
      *
-     * @return \jtl\Connector\Mapper\IPrimaryKeyMapper
+     * @return \jtl\Connector\Authentication\ITokenLoader
      */
     public function getTokenLoader()
     {
         return $this->tokenLoader;
+    }
+
+    /**
+     * Setter checksum loader
+     *
+     * @param \jtl\Connector\Checksum\IChecksumLoader $checksumLoader
+     * @return \jtl\Connector\Base\Connector
+     */
+    public function setChecksumLoader(IChecksumLoader $checksumLoader)
+    {
+        $this->checksumLoader = $checksumLoader;
+        return $this;
+    }
+
+    /**
+     * Returns checksum loader
+     *
+     * @return \jtl\Connector\Checksum\IChecksumLoader
+     */
+    public function getChecksumLoader()
+    {
+        return $this->checksumLoader;
     }
 
     /**

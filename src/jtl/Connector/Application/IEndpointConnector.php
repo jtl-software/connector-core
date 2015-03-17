@@ -10,6 +10,7 @@ use \jtl\Connector\Core\Rpc\RequestPacket;
 use \jtl\Connector\Core\Config\Config;
 use \jtl\Connector\Mapper\IPrimaryKeyMapper;
 use \jtl\Connector\Authentication\ITokenLoader;
+use \jtl\Connector\Checksum\IChecksumLoader;
 
 /**
  *
@@ -42,6 +43,16 @@ interface IEndpointConnector
      * Returns token loader
      */
     public function getTokenLoader();
+
+    /**
+     * Setter checksum loader
+     */
+    public function setChecksumLoader(IChecksumLoader $checksumLoader);
+
+    /**
+     * Returns checksum loader
+     */
+    public function getChecksumLoader();
 
     /**
      * Setter connector config
