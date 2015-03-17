@@ -502,6 +502,14 @@ class Product extends DataModel
     protected $categories = array();
 
     /**
+     * @var jtl\Connector\Model\ProductChecksum[] 
+     * @Serializer\Type("array<jtl\Connector\Model\ProductChecksum>")
+     * @Serializer\SerializedName("checksums")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $checksums = array();
+
+    /**
      * @var jtl\Connector\Model\ProductConfigGroup[] 
      * @Serializer\Type("array<jtl\Connector\Model\ProductConfigGroup>")
      * @Serializer\SerializedName("configGroups")
@@ -1674,6 +1682,33 @@ class Product extends DataModel
     public function clearCategories()
     {
         $this->categories = array();
+        return $this;
+    }
+
+    /**
+     * @param \jtl\Connector\Model\ProductChecksum $checksum
+     * @return \jtl\Connector\Model\Product
+     */
+    public function addChecksum(\jtl\Connector\Model\ProductChecksum $checksum)
+    {
+        $this->checksums[] = $checksum;
+        return $this;
+    }
+    
+    /**
+     * @return jtl\Connector\Model\ProductChecksum[]
+     */
+    public function getChecksums()
+    {
+        return $this->checksums;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\Product
+     */
+    public function clearChecksums()
+    {
+        $this->checksums = array();
         return $this;
     }
 

@@ -77,6 +77,7 @@ class Product extends DataType
             new PropertyInfo('width', 'double', 0.0, false, false, false),
             new PropertyInfo('attributes', '\jtl\Connector\Model\ProductAttr', null, false, false, true),
             new PropertyInfo('categories', '\jtl\Connector\Model\Product2Category', null, false, false, true),
+            new PropertyInfo('checksums', '\jtl\Connector\Model\ProductChecksum', null, false, false, true),
             new PropertyInfo('configGroups', '\jtl\Connector\Model\ProductConfigGroup', null, false, false, true),
             new PropertyInfo('crossSellings', '\jtl\Connector\Model\CrossSelling', null, false, false, true),
             new PropertyInfo('fileDownloads', '\jtl\Connector\Model\ProductFileDownload', null, false, false, true),
