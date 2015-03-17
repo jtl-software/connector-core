@@ -40,6 +40,7 @@ class IdentityLinker
     protected static $mapper;
     public static $useCache;
     protected static $cache = array();
+    protected static $missings = array();
     protected static $instance;
 
     protected static $types = array(
@@ -455,13 +456,13 @@ class IdentityLinker
             $endpointId = self::$mapper->getEndpointId($hostId, $type);
         }
 
-        if ($endpointId !== null && $hostId !== null) {
+        //if ($endpointId !== null && $hostId !== null) {
             $this->saveCache($endpointId, $hostId, $type, $cacheType);
 
             return true;
-        }
+        //}
 
-        return false;
+        //return false;
     }
 
     /**
@@ -533,19 +534,19 @@ class IdentityLinker
     {
         $type = $this->getType($modelName, $property);
 
-        if (($endpointId = $this->loadCache($hostId, $type, self::CACHE_TYPE_HOST)) !== null) {
+        if (($endpointId = $this->loadCache($hostId, $type, self::CACHE_TYPE_HOST)) !== false) {
             return $endpointId;
         }
 
         $endpointId = self::$mapper->getEndpointId($hostId, $type);
 
-        if ($endpointId !== null) {
+        //if ($endpointId !== null) {
             $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_HOST);
 
             return $endpointId;
-        }
+        //}
 
-        return null;
+        //return null;
     }
 
     /**
@@ -559,29 +560,29 @@ class IdentityLinker
     {
         $type = $this->getType($modelName, $property);
 
-        if (($hostId = $this->loadCache($endpointId, $type, self::CACHE_TYPE_ENDPOINT)) !== null) {
+        if (($hostId = $this->loadCache($endpointId, $type, self::CACHE_TYPE_ENDPOINT)) !== false) {
             return $hostId;
         }
 
         $hostId = self::$mapper->getHostId($endpointId, $type);
 
-        if ($hostId !== null) {
+        //if ($hostId !== null) {
             $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_ENDPOINT);
 
             return $hostId;
-        }
+        //}
 
-        return null;
+        //return null;
     }
 
     protected function checkCache($id, $type, $cacheType)
     {
-        return (self::$useCache && isset(self::$cache[$this->buildKey($id, $type, $cacheType)]));
+        return (self::$useCache && array_key_exists($this->buildKey($id, $type, $cacheType), self::$cache));
     }
 
     protected function loadCache($id, $type, $cacheType)
     {
-        return $this->checkCache($id, $type, $cacheType) ? self::$cache[$this->buildKey($id, $type, $cacheType)] : null;
+        return $this->checkCache($id, $type, $cacheType) ? self::$cache[$this->buildKey($id, $type, $cacheType)] : false;
     }
 
     protected function saveCache($endpointId, $hostId, $type, $cacheType)
@@ -591,7 +592,7 @@ class IdentityLinker
                 case self::CACHE_TYPE_ENDPOINT:
                     self::$cache[$this->buildKey($endpointId, $type, $cacheType)] = $hostId;
                     break;
-                case self::CACHE_TYPE_ENDPOINT:
+                case self::CACHE_TYPE_HOST:
                     self::$cache[$this->buildKey($hostId, $type, $cacheType)] = $endpointId;
                     break;
             }
@@ -605,7 +606,7 @@ class IdentityLinker
                 case self::CACHE_TYPE_ENDPOINT:
                     unset(self::$cache[$this->buildKey($endpointId, $type, $cacheType)]);
                     break;
-                case self::CACHE_TYPE_ENDPOINT:
+                case self::CACHE_TYPE_HOST:
                     unset(self::$cache[$this->buildKey($hostId, $type, $cacheType)]);
                     break;
             }
@@ -615,5 +616,10 @@ class IdentityLinker
     protected function buildKey($id, $type, $cacheType)
     {
         return sprintf('%s_%s_%s', $cacheType, $id, $type);
+    }
+
+    public static function getCache()
+    {
+        return self::$cache;
     }
 }
