@@ -7,6 +7,8 @@ namespace jtl\Connector\Linker;
 
 use \jtl\Connector\Checksum\IChecksumLoader;
 use \jtl\Connector\Checksum\IChecksum;
+use \jtl\Connector\Model\DataModel;
+use \jtl\Connector\Core\Logger\Logger;
 
 /**
  * Identity Connector Linker
@@ -27,12 +29,14 @@ class ChecksumLinker
     {
         if (method_exists($model, 'getChecksums')) {
             foreach ($model->getChecksums() as &$checksum) {
-                if ($checksum instanceof IChecksum && ($type === null || $checksum->getType() == $type)) {
+                if ($checksum instanceof IChecksum && ($type === null || $checksum->getType() == $type) 
+                    && $model->getId()->getEndpoint() !== null && strlen($model->getId()->getEndpoint() > 0)) {
                     $checksum->setEndpoint(self::$loader->read($model->getId()->getEndpoint(), $checksum->getType()));
 
                     if ($checksum->getEndpoint() !== null) {
                         if (($checksum->getEndpoint() !== $checksum->getHost())) {
                             $checksum->setHasChanged(true);
+                            self::$loader->delete($model->getId()->getEndpoint(), $checksum->getType());
                             self::$loader->write($model->getId()->getEndpoint(), $checksum->getType(), $checksum->getHost());
                         }
                     } else {

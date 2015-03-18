@@ -96,9 +96,9 @@ class ResponsePacket extends Packet
         }
         
         // This member MUST NOT exist if there was an error invoking the method.
-        if ($this->getResult() !== null && $this->getError() !== null) {
-            $isValid = false;
-        }
+        //if ($this->getResult() !== null && $this->getError() !== null) {
+            //$isValid = false;
+        //}
         
         // This member MUST NOT exist if there was no error triggered during
         // invocation.

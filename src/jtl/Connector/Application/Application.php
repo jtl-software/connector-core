@@ -349,10 +349,8 @@ class Application extends CoreApplication
                     foreach ($params as &$param) {
                         $identityLinker->linkModel($param);
 
-                        // Product Checksum
-                        if ($param instanceof Product) {
-                            ChecksumLinker::link($param, ProductChecksum::TYPE_VARIATION);
-                        }
+                        // Checksum linking
+                        ChecksumLinker::link($param);
                     }
                 }
             } else {

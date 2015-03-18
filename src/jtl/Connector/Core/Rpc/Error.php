@@ -138,7 +138,7 @@ class Error extends Model
         }
         
         if (!$isValid) {
-            throw new RpcException("Parse error", -32700);
+            throw new RpcException("Parse error", -32701);
         }
     }
 }
