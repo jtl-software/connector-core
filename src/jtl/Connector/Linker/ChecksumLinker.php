@@ -23,20 +23,20 @@ class ChecksumLinker
         self::$loader = $loader;
     }
 
-    public static function link(DataModel &$model, $type)
+    public static function link(DataModel &$model, $type = null)
     {
         if (method_exists($model, 'getChecksums')) {
             foreach ($model->getChecksums() as &$checksum) {
-                if ($checksum instanceof IChecksum && $checksum->getType() == $type) {
-                    $checksum->setEndpoint(self::$loader->read($model->getId()->getEndpoint(), $type));
+                if ($checksum instanceof IChecksum && ($type === null || $checksum->getType() == $type)) {
+                    $checksum->setEndpoint(self::$loader->read($model->getId()->getEndpoint(), $checksum->getType()));
 
                     if ($checksum->getEndpoint() !== null) {
                         if (($checksum->getEndpoint() !== $checksum->getHost())) {
                             $checksum->setHasChanged(true);
-                            self::$loader->write($model->getId()->getEndpoint(), $type, $checksum->getHost());
+                            self::$loader->write($model->getId()->getEndpoint(), $checksum->getType(), $checksum->getHost());
                         }
                     } else {
-                        self::$loader->write($model->getId()->getEndpoint(), $type, $checksum->getHost());
+                        self::$loader->write($model->getId()->getEndpoint(), $checksum->getType(), $checksum->getHost());
                     }
                 }
             }
