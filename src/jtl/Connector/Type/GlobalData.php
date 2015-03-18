@@ -20,7 +20,6 @@ class GlobalData extends DataType
             new PropertyInfo('configGroups', '\jtl\Connector\Model\ConfigGroup', null, false, false, true),
             new PropertyInfo('configItems', '\jtl\Connector\Model\ConfigItem', null, false, false, true),
             new PropertyInfo('crossSellingGroups', '\jtl\Connector\Model\CrossSellingGroup', null, false, false, true),
-            new PropertyInfo('crossSellings', '\jtl\Connector\Model\CrossSelling', null, false, false, true),
             new PropertyInfo('currencies', '\jtl\Connector\Model\Currency', null, false, false, true),
             new PropertyInfo('customerGroups', '\jtl\Connector\Model\CustomerGroup', null, false, false, true),
             new PropertyInfo('languages', '\jtl\Connector\Model\Language', null, false, false, true),

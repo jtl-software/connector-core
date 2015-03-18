@@ -19,7 +19,7 @@ use JMS\Serializer\Annotation as Serializer;
  * 
  * @Serializer\AccessType("public_method")
  */
-class CrossSelling extends DataModel
+class ProductCrossSelling extends DataModel
 {
     /**
      * @var Identity Reference to crossSellingGroup
@@ -57,7 +57,7 @@ class CrossSelling extends DataModel
 
     /**
      * @param Identity $crossSellingGroupId Reference to crossSellingGroup
-     * @return \jtl\Connector\Model\CrossSelling
+     * @return \jtl\Connector\Model\ProductCrossSelling
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCrossSellingGroupId(Identity $crossSellingGroupId)
@@ -75,7 +75,7 @@ class CrossSelling extends DataModel
 
     /**
      * @param Identity $id Unique crossSelling id
-     * @return \jtl\Connector\Model\CrossSelling
+     * @return \jtl\Connector\Model\ProductCrossSelling
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
@@ -93,7 +93,7 @@ class CrossSelling extends DataModel
 
     /**
      * @param Identity $productId Reference to product (main product)
-     * @return \jtl\Connector\Model\CrossSelling
+     * @return \jtl\Connector\Model\ProductCrossSelling
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId)

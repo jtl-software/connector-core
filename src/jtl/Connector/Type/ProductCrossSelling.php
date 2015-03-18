@@ -12,7 +12,7 @@ use \jtl\Connector\Type\PropertyInfo;
  * @access public
  * @package jtl\Connector\Type
  */
-class CrossSelling extends DataType
+class ProductCrossSelling extends DataType
 {
     protected function loadProperties()
     {

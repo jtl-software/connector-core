@@ -79,7 +79,7 @@ class Product extends DataType
             new PropertyInfo('categories', '\jtl\Connector\Model\Product2Category', null, false, false, true),
             new PropertyInfo('checksums', '\jtl\Connector\Model\ProductChecksum', null, false, false, true),
             new PropertyInfo('configGroups', '\jtl\Connector\Model\ProductConfigGroup', null, false, false, true),
-            new PropertyInfo('crossSellings', '\jtl\Connector\Model\CrossSelling', null, false, false, true),
+            new PropertyInfo('crossSellings', '\jtl\Connector\Model\ProductCrossSelling', null, false, false, true),
             new PropertyInfo('fileDownloads', '\jtl\Connector\Model\ProductFileDownload', null, false, false, true),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\ProductI18n', null, false, false, true),
             new PropertyInfo('invisibilities', '\jtl\Connector\Model\ProductInvisibility', null, false, false, true),

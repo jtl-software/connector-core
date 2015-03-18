@@ -45,14 +45,6 @@ class GlobalData extends DataModel
     protected $crossSellingGroups = array();
 
     /**
-     * @var jtl\Connector\Model\CrossSelling[] 
-     * @Serializer\Type("array<jtl\Connector\Model\CrossSelling>")
-     * @Serializer\SerializedName("crossSellings")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $crossSellings = array();
-
-    /**
      * @var jtl\Connector\Model\Currency[] 
      * @Serializer\Type("array<jtl\Connector\Model\Currency>")
      * @Serializer\SerializedName("currencies")
@@ -203,33 +195,6 @@ class GlobalData extends DataModel
     public function clearCrossSellingGroups()
     {
         $this->crossSellingGroups = array();
-        return $this;
-    }
-
-    /**
-     * @param \jtl\Connector\Model\CrossSelling $crossSelling
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function addCrossSelling(\jtl\Connector\Model\CrossSelling $crossSelling)
-    {
-        $this->crossSellings[] = $crossSelling;
-        return $this;
-    }
-    
-    /**
-     * @return jtl\Connector\Model\CrossSelling[]
-     */
-    public function getCrossSellings()
-    {
-        return $this->crossSellings;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\GlobalData
-     */
-    public function clearCrossSellings()
-    {
-        $this->crossSellings = array();
         return $this;
     }
 

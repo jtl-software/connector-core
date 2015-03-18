@@ -518,8 +518,8 @@ class Product extends DataModel
     protected $configGroups = array();
 
     /**
-     * @var jtl\Connector\Model\CrossSelling[] 
-     * @Serializer\Type("array<jtl\Connector\Model\CrossSelling>")
+     * @var jtl\Connector\Model\ProductCrossSelling[] 
+     * @Serializer\Type("array<jtl\Connector\Model\ProductCrossSelling>")
      * @Serializer\SerializedName("crossSellings")
      * @Serializer\AccessType("reflection")
      */
@@ -1740,17 +1740,17 @@ class Product extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\CrossSelling $crossSelling
+     * @param \jtl\Connector\Model\ProductCrossSelling $crossSelling
      * @return \jtl\Connector\Model\Product
      */
-    public function addCrossSelling(\jtl\Connector\Model\CrossSelling $crossSelling)
+    public function addCrossSelling(\jtl\Connector\Model\ProductCrossSelling $crossSelling)
     {
         $this->crossSellings[] = $crossSelling;
         return $this;
     }
     
     /**
-     * @return jtl\Connector\Model\CrossSelling[]
+     * @return jtl\Connector\Model\ProductCrossSelling[]
      */
     public function getCrossSellings()
     {
