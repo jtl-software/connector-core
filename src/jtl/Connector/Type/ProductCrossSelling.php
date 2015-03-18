@@ -17,6 +17,7 @@ class ProductCrossSelling extends DataType
     protected function loadProperties()
     {
         return array(
+            new PropertyInfo('crossProductId', 'Identity', null, false, true, false),
             new PropertyInfo('crossSellingGroupId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('productId', 'Identity', null, false, true, false),

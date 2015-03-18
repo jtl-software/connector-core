@@ -22,6 +22,14 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductCrossSelling extends DataModel
 {
     /**
+     * @var Identity Referenced target product ID
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("crossProductId")
+     * @Serializer\Accessor(getter="getCrossProductId",setter="setCrossProductId")
+     */
+    protected $crossProductId = null;
+
+    /**
      * @var Identity Reference to crossSellingGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("crossSellingGroupId")
@@ -52,7 +60,26 @@ class ProductCrossSelling extends DataModel
     {
         $this->id = new Identity();
         $this->productId = new Identity();
+        $this->crossProductId = new Identity();
         $this->crossSellingGroupId = new Identity();
+    }
+
+    /**
+     * @param Identity $crossProductId Referenced target product ID
+     * @return \jtl\Connector\Model\ProductCrossSelling
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setCrossProductId(Identity $crossProductId)
+    {
+        return $this->setProperty('crossProductId', $crossProductId, 'Identity');
+    }
+
+    /**
+     * @return Identity Referenced target product ID
+     */
+    public function getCrossProductId()
+    {
+        return $this->crossProductId;
     }
 
     /**
