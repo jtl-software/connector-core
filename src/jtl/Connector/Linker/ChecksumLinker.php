@@ -27,7 +27,7 @@ class ChecksumLinker
     {
         if (method_exists($model, 'getChecksums')) {
             foreach ($model->getChecksums() as &$checksum) {
-                if ($checksum instanceof IChecksum) {
+                if ($checksum instanceof IChecksum && $checksum->getType() == $type) {
                     $checksum->setEndpoint(self::$loader->read($model->getId()->getEndpoint(), $type));
 
                     if ($checksum->getEndpoint() !== null) {
