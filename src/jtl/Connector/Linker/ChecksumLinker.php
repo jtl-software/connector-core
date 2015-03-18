@@ -28,10 +28,15 @@ class ChecksumLinker
         if (method_exists($model, 'getChecksums')) {
             foreach ($model->getChecksums() as &$checksum) {
                 if ($checksum instanceof IChecksum) {
-                    $checksum->setEndpoint($loader->read($model->getId()->getEndpoint(), $type));
+                    $checksum->setEndpoint(self::$loader->read($model->getId()->getEndpoint(), $type));
 
-                    if ($checksum->getEndpoint() !== null && $checksum->getEndpoint() === $checksum->getHost()) {
-                        $checksum->setHasChanged(true);
+                    if ($checksum->getEndpoint() !== null) {
+                        if (($checksum->getEndpoint() !== $checksum->getHost())) {
+                            $checksum->setHasChanged(true);
+                            self::$loader->write($model->getId()->getEndpoint(), $type, $checksum->getHost());
+                        }
+                    } else {
+                        self::$loader->write($model->getId()->getEndpoint(), $type, $checksum->getHost());
                     }
                 }
             }

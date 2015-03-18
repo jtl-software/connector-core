@@ -51,12 +51,12 @@ class ProductChecksum extends DataModel implements IChecksum
     protected $host = '';
 
     /**
-     * @var ProductChecksumType 
-     * @Serializer\Type("string")
+     * @var int 
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
-    protected $type = '';
+    protected $type = self::TYPE_VARIATION;
 
 
     /**
@@ -113,7 +113,7 @@ class ProductChecksum extends DataModel implements IChecksum
     /**
      * @param int $type 
      * @return \jtl\Connector\Model\ProductChecksum
-     * @throws \InvalidArgumentException if the provided argument is not of type 'ProductChecksumType'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
      */
     public function setType($type)
     {
@@ -121,7 +121,7 @@ class ProductChecksum extends DataModel implements IChecksum
     }
 
     /**
-     * @return string 
+     * @return int 
      */
     public function getType()
     {
