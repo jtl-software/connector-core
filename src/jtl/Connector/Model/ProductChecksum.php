@@ -38,7 +38,7 @@ class ProductChecksum extends DataModel implements IChecksum
      * @var boolean 
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("hasChanged")
-     * @Serializer\Accessor(getter="getHasChanged",setter="setHasChanged")
+     * @Serializer\Accessor(getter="hasChanged",setter="setHasChanged")
      */
     protected $hasChanged = false;
 
@@ -88,7 +88,7 @@ class ProductChecksum extends DataModel implements IChecksum
     /**
      * @return boolean 
      */
-    public function getHasChanged()
+    public function hasChanged()
     {
         return $this->hasChanged;
     }

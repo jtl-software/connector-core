@@ -50,5 +50,5 @@ interface IChecksum
     /**
      * @return boolean
      */
-    public function getHasChanged();
+    public function hasChanged();
 }

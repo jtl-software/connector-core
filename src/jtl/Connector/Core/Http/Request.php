@@ -143,7 +143,7 @@ class Request
                 $extension = $pathinfo["extension"];
                 $filename = uniqid() . ".{$extension}";
                 //$path = realpath(implode(DIRECTORY_SEPARATOR, $path)) . '/';
-                $path = sys_get_temp_dir();
+                $path = realpath(sys_get_temp_dir()) . DIRECTORY_SEPARATOR;
 
                 if (Request::moveFileupload($path, $filename, $name)) {
                     return "{$path}{$filename}";
