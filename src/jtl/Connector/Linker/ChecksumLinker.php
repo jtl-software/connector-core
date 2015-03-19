@@ -25,6 +25,10 @@ class ChecksumLinker
         self::$loader = $loader;
     }
 
+    /**
+     * @param \jtl\Connector\Model\DataModel $model
+     * @param int $type
+     */
     public static function link(DataModel &$model, $type = null)
     {
         if (method_exists($model, 'getChecksums')) {
@@ -45,5 +49,23 @@ class ChecksumLinker
                 }
             }
         }
+    }
+
+    /**
+     * @param \jtl\Connector\Model\DataModel $model
+     * @param int $type
+     * @return \jtl\Connector\Checksum\IChecksum
+     */
+    public static function find(DataModel &$model, $type)
+    {
+        if (method_exists($model, 'getChecksums')) {
+            foreach ($model->getChecksums() as $checksum) {
+                if ($checksum instanceof IChecksum && $checksum->getType() == $type) {
+                    return $checksum;
+                }
+            }   
+        }
+
+        return null;
     }
 }
