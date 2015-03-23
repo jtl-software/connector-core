@@ -61,6 +61,14 @@ class Image extends DataModel
     protected $remoteUrl = '';
 
     /**
+     * @var integer 
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("sort")
+     * @Serializer\Accessor(getter="getSort",setter="setSort")
+     */
+    protected $sort = 0;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -154,5 +162,22 @@ class Image extends DataModel
     public function getRemoteUrl()
     {
         return $this->remoteUrl;
+    }
+
+    /**
+     * @param integer $sort 
+     * @return \jtl\Connector\Model\Image
+     */
+    public function setSort($sort)
+    {
+        return $this->setProperty('sort', $sort, 'integer');
+    }
+
+    /**
+     * @return integer 
+     */
+    public function getSort()
+    {
+        return $this->sort;
     }
 }
