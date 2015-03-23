@@ -341,7 +341,8 @@ class Application extends CoreApplication
             $serializer = SerializerBuilder::create();
             
             if ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) {
-                $params = $serializer->deserialize($requestpacket->getParams(), "ArrayCollection<{$namespace}>", 'json');
+                $ns = ($method->getController() === 'image') ? $namespace : "ArrayCollection<{$namespace}>";
+                $params = $serializer->deserialize($requestpacket->getParams(), $ns, 'json');
                 
                 if (is_array($params)) {
                     // Identity mapping
