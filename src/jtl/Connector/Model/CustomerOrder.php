@@ -67,14 +67,6 @@ class CustomerOrder extends DataModel
     const STATUS_UPDATED = 'updated';
 
     /**
-     * @var Identity Reference to billingAddress
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("billingAddressId")
-     * @Serializer\Accessor(getter="getBillingAddressId",setter="setBillingAddressId")
-     */
-    protected $billingAddressId = null;
-
-    /**
      * @var Identity Optional reference to customer. 
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("customerId")
@@ -99,15 +91,7 @@ class CustomerOrder extends DataModel
     protected $paymentModuleId = null;
 
     /**
-     * @var Identity Reference to shippingAddress
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("shippingAddressId")
-     * @Serializer\Accessor(getter="getShippingAddressId",setter="setShippingAddressId")
-     */
-    protected $shippingAddressId = null;
-
-    /**
-     * @var CustomerOrderBillingAddress 
+     * @var CustomerOrderBillingAddress Billing address
      * @Serializer\Type("jtl\Connector\Model\CustomerOrderBillingAddress")
      * @Serializer\SerializedName("billingAddress")
      * @Serializer\Accessor(getter="getBillingAddress",setter="setBillingAddress")
@@ -211,7 +195,7 @@ class CustomerOrder extends DataModel
     protected $paymentStatus = '';
 
     /**
-     * @var CustomerOrderShippingAddress 
+     * @var CustomerOrderShippingAddress Shipping address
      * @Serializer\Type("jtl\Connector\Model\CustomerOrderShippingAddress")
      * @Serializer\SerializedName("shippingAddress")
      * @Serializer\Accessor(getter="getShippingAddress",setter="setShippingAddress")
@@ -259,7 +243,7 @@ class CustomerOrder extends DataModel
     protected $shippingStatus = '';
 
     /**
-     * @var string Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
+     * @var string Reference to shippingAddress
      * @Serializer\Type("string")
      * @Serializer\SerializedName("status")
      * @Serializer\Accessor(getter="getStatus",setter="setStatus")
@@ -298,26 +282,6 @@ class CustomerOrder extends DataModel
         $this->id = new Identity();
         $this->customerId = new Identity();
         $this->paymentModuleId = new Identity();
-        $this->shippingAddressId = new Identity();
-        $this->billingAddressId = new Identity();
-    }
-
-    /**
-     * @param Identity $billingAddressId Reference to billingAddress
-     * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setBillingAddressId(Identity $billingAddressId)
-    {
-        return $this->setProperty('billingAddressId', $billingAddressId, 'Identity');
-    }
-
-    /**
-     * @return Identity Reference to billingAddress
-     */
-    public function getBillingAddressId()
-    {
-        return $this->billingAddressId;
     }
 
     /**
@@ -375,25 +339,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param Identity $shippingAddressId Reference to shippingAddress
-     * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setShippingAddressId(Identity $shippingAddressId)
-    {
-        return $this->setProperty('shippingAddressId', $shippingAddressId, 'Identity');
-    }
-
-    /**
-     * @return Identity Reference to shippingAddress
-     */
-    public function getShippingAddressId()
-    {
-        return $this->shippingAddressId;
-    }
-
-    /**
-     * @param CustomerOrderBillingAddress $billingAddress 
+     * @param CustomerOrderBillingAddress $billingAddress Billing address
      * @return \jtl\Connector\Model\CustomerOrder
      * @throws \InvalidArgumentException if the provided argument is not of type 'CustomerOrderBillingAddress'.
      */
@@ -403,7 +349,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @return jtl\Connector\Model\CustomerOrderBillingAddress 
+     * @return jtl\Connector\Model\CustomerOrderBillingAddress Billing address
      */
     public function getBillingAddress()
     {
@@ -619,7 +565,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param CustomerOrderShippingAddress $shippingAddress 
+     * @param CustomerOrderShippingAddress $shippingAddress Shipping address
      * @return \jtl\Connector\Model\CustomerOrder
      * @throws \InvalidArgumentException if the provided argument is not of type 'CustomerOrderShippingAddress'.
      */
@@ -629,7 +575,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @return jtl\Connector\Model\CustomerOrderShippingAddress 
+     * @return jtl\Connector\Model\CustomerOrderShippingAddress Shipping address
      */
     public function getShippingAddress()
     {
@@ -723,7 +669,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param string $status Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
+     * @param string $status Reference to shippingAddress
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setStatus($status)
@@ -732,7 +678,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @return string Customer order status: new / processing / payment_completed / completed / partially_shipped / cancelled / reactivated / updated / pending_payment
+     * @return string Reference to shippingAddress
      */
     public function getStatus()
     {

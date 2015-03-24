@@ -17,11 +17,9 @@ class CustomerOrder extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('billingAddressId', 'Identity', null, false, true, false),
             new PropertyInfo('customerId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('paymentModuleId', 'Identity', null, false, true, false),
-            new PropertyInfo('shippingAddressId', 'Identity', null, false, true, false),
             new PropertyInfo('billingAddress', 'CustomerOrderBillingAddress', null, false, false, true),
             new PropertyInfo('carrierName', 'string', '', false, false, false),
             new PropertyInfo('creationDate', 'DateTime', null, false, false, false),
