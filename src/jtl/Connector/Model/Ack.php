@@ -30,6 +30,14 @@ class Ack extends Model
     protected $identities = null;
 
     /**
+     * @var \jtl\Connector\Checksum\IChecksum[] 
+     * @Serializer\Type("array<jtl\Connector\Checksum\IChecksum>")
+     * @Serializer\SerializedName("checksums")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $checksums = array();
+
+    /**
      * Identities getter
      *
      * @return \Doctrine\Common\Collections\ArrayCollection
@@ -48,6 +56,33 @@ class Ack extends Model
     public function setIdentities(ArrayCollection $identities)
     {
         $this->identities = $identities;
+        return $this;
+    }
+
+    /**
+     * @param \jtl\Connector\Checksum\IChecksum $checksum
+     * @return \jtl\Connector\Model\Ack
+     */
+    public function addChecksum(\jtl\Connector\Checksum\IChecksum $checksum)
+    {
+        $this->checksums[] = $checksum;
+        return $this;
+    }
+    
+    /**
+     * @return \jtl\Connector\Checksum\IChecksum[]
+     */
+    public function getChecksums()
+    {
+        return $this->checksums;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\Ack
+     */
+    public function clearChecksums()
+    {
+        $this->checksums = array();
         return $this;
     }
 }

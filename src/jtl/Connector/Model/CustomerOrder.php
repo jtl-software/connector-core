@@ -57,6 +57,11 @@ class CustomerOrder extends DataModel
     const STATUS_PARTIALLY_SHIPPED = 'partially_shipped';
 
     /**
+     * @var string - Order has been shipped
+     */
+    const STATUS_SHIPPED = 'shipped';
+
+    /**
      * @var string - Customer order in process
      */
     const STATUS_PROCESSING = 'processed';
