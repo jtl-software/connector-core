@@ -7,7 +7,7 @@ namespace jtl\Connector\Linker;
 
 use \jtl\Connector\Checksum\IChecksumLoader;
 use \jtl\Connector\Checksum\IChecksum;
-use \jtl\Connector\Model\DataModel;
+use \jtl\Connector\Core\Model\Model;
 use \jtl\Connector\Core\Logger\Logger;
 
 /**
@@ -26,14 +26,14 @@ class ChecksumLinker
     }
 
     /**
-     * @param \jtl\Connector\Model\DataModel $model
+     * @param \jtl\Connector\Core\Model\Model $model
      * @param int $type
      */
-    public static function link(DataModel &$model, $type = null)
+    public static function link(Model &$model, $type = null)
     {
         if (method_exists($model, 'getChecksums')) {
             foreach ($model->getChecksums() as &$checksum) {
-                if ($checksum instanceof IChecksum && ($type === null || $checksum->getType() == $type) 
+                if ($checksum instanceof IChecksum && ($type === null || $checksum->getType() == $type)
                     && $model->getId()->getEndpoint() !== null && strlen($model->getId()->getEndpoint() > 0)) {
                     $checksum->setEndpoint(self::$loader->read($model->getId()->getEndpoint(), $checksum->getType()));
 
@@ -52,11 +52,11 @@ class ChecksumLinker
     }
 
     /**
-     * @param \jtl\Connector\Model\DataModel $model
+     * @param \jtl\Connector\Core\Model\Model $model
      * @param int $type
      * @return \jtl\Connector\Checksum\IChecksum
      */
-    public static function find(DataModel &$model, $type)
+    public static function find(Model &$model, $type)
     {
         if (method_exists($model, 'getChecksums')) {
             foreach ($model->getChecksums() as $checksum) {

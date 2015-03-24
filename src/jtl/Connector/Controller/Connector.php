@@ -14,6 +14,7 @@ use \jtl\Connector\Application\Application;
 use \jtl\Connector\Linker\IdentityLinker;
 use \jtl\Connector\Serializer\JMS\SerializerBuilder;
 use \jtl\Connector\Core\Logger\Logger;
+use \jtl\Connector\Linker\ChecksumLinker;
 
 /**
  * Base Config Controller
@@ -91,6 +92,9 @@ class Connector extends CoreController
                     $identityLinker->save($identity->getEndpoint(), $identity->getHost(), $modelName);
                 }
             }
+
+            // Checksum linking
+            ChecksumLinker::link($ack);
 
             $ret->setResult(true);            
         } catch (\Exception $e) {
