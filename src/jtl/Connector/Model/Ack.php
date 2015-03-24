@@ -7,7 +7,6 @@
 
 namespace jtl\Connector\Model;
 
-use \jtl\Connector\Core\Model\Model;
 use JMS\Serializer\Annotation as Serializer;
 use \Doctrine\Common\Collections\ArrayCollection;
 
@@ -19,7 +18,7 @@ use \Doctrine\Common\Collections\ArrayCollection;
  * @subpackage Internal
  * @Serializer\AccessType("public_method")
  */
-class Ack extends Model
+class Ack extends DataModel
 {
     /**
      * @var Identity list
@@ -30,8 +29,8 @@ class Ack extends Model
     protected $identities = null;
 
     /**
-     * @var \jtl\Connector\Checksum\IChecksum[] 
-     * @Serializer\Type("array<jtl\Connector\Checksum\IChecksum>")
+     * @var Checksum[] 
+     * @Serializer\Type("array<jtl\Connector\Model\Checksum>")
      * @Serializer\SerializedName("checksums")
      * @Serializer\AccessType("reflection")
      */
@@ -60,10 +59,10 @@ class Ack extends Model
     }
 
     /**
-     * @param \jtl\Connector\Checksum\IChecksum $checksum
+     * @param Checksum $checksum
      * @return \jtl\Connector\Model\Ack
      */
-    public function addChecksum(\jtl\Connector\Checksum\IChecksum $checksum)
+    public function addChecksum(Checksum $checksum)
     {
         $this->checksums[] = $checksum;
         return $this;

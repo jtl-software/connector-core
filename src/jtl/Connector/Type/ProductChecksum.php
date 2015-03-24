@@ -17,6 +17,7 @@ class ProductChecksum extends DataType
     protected function loadProperties()
     {
         return array(
+            new PropertyInfo('foreignKey', 'Identity', null, true, true, false),
             new PropertyInfo('endpoint', 'string', '', false, false, false),
             new PropertyInfo('hasChanged', 'boolean', false, false, false, false),
             new PropertyInfo('host', 'string', '', false, false, false),

@@ -6,8 +6,21 @@
 
 namespace jtl\Connector\Checksum;
 
+use \jtl\Connector\Model\Identity;
+
 interface IChecksum
 {
+    /**
+     * @param Identity $foreignKey
+     * @return self
+     */
+    public function setForeignKey(Identity $foreignKey);
+
+    /**
+     * @return Identity
+     */
+    public function getForeignKey();
+
     /**
      * @param string $endpointId
      * @return self

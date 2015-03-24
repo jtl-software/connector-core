@@ -9,7 +9,7 @@ namespace jtl\Connector\Model;
 
 use DateTime;
 use JMS\Serializer\Annotation as Serializer;
-use \jtl\Connector\Checksum\IChecksum;
+use \jtl\Connector\Model\Identity;
 
 /**
  *
@@ -19,12 +19,20 @@ use \jtl\Connector\Checksum\IChecksum;
  * 
  * @Serializer\AccessType("public_method")
  */
-class ProductChecksum extends DataModel implements IChecksum
+class ProductChecksum extends Checksum
 {
     /**
      * @var int - Checksum used to check variations for change
      */
     const TYPE_VARIATION = 1;
+
+    /**
+     * @var Identity 
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("foreignKey")
+     * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
+     */
+    protected $foreignKey = null;
 
     /**
      * @var string 
@@ -58,10 +66,28 @@ class ProductChecksum extends DataModel implements IChecksum
      */
     protected $type = self::TYPE_VARIATION;
 
+    /**
+     * @param Identity $foreignKey 
+     * @return \jtl\Connector\Model\ProductChecksum
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setForeignKey(Identity $foreignKey)
+    {
+        return $this->setProperty('foreignKey', $foreignKey, 'Identity');
+    }
+
+    /**
+     * @return Identity 
+     */
+    public function getForeignKey()
+    {
+        return $this->foreignKey;
+    }
 
     /**
      * @param string $endpoint 
      * @return \jtl\Connector\Model\ProductChecksum
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setEndpoint($endpoint)
     {
@@ -79,6 +105,7 @@ class ProductChecksum extends DataModel implements IChecksum
     /**
      * @param boolean $hasChanged 
      * @return \jtl\Connector\Model\ProductChecksum
+     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
     public function setHasChanged($hasChanged)
     {
@@ -96,6 +123,7 @@ class ProductChecksum extends DataModel implements IChecksum
     /**
      * @param string $host 
      * @return \jtl\Connector\Model\ProductChecksum
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setHost($host)
     {

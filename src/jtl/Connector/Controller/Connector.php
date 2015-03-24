@@ -15,6 +15,7 @@ use \jtl\Connector\Linker\IdentityLinker;
 use \jtl\Connector\Serializer\JMS\SerializerBuilder;
 use \jtl\Connector\Core\Logger\Logger;
 use \jtl\Connector\Linker\ChecksumLinker;
+use \jtl\Connector\Checksum\IChecksum;
 
 /**
  * Base Config Controller
@@ -94,7 +95,17 @@ class Connector extends CoreController
             }
 
             // Checksum linking
-            ChecksumLinker::link($ack);
+            foreach ($ack->getChecksums() as $checksum) {
+                if ($checksum instanceof IChecksum) {
+                    if (!ChecksumLinker::save($checksum)) {
+                        Logger::write(sprintf('Could not save checksum for endpoint (%s), host (%s) and type (%s)',
+                            $checksum->getForeignKey()->getEndpoint(), 
+                            $checksum->getForeignKey()->getHost(),
+                            $checksum->getType()
+                        ), Logger::WARNING, 'checksum');
+                    }
+                }
+            }
 
             $ret->setResult(true);            
         } catch (\Exception $e) {

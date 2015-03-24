@@ -52,6 +52,22 @@ class ChecksumLinker
     }
 
     /**
+     * @param \jtl\Connector\Checksum\IChecksum $checksum
+     * @return boolean
+     */
+    public static function save(IChecksum $checksum)
+    {
+        if (strlen($checksum->getForeignKey()->getEndpoint()) > 0 && $checksum->getForeignKey()->getHost()) {
+            self::$loader->delete($checksum->getForeignKey()->getEndpoint(), $checksum->getType());
+            self::$loader->write($checksum->getForeignKey()->getEndpoint(), $checksum->getType(), $checksum->getHost());
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * @param \jtl\Connector\Core\Model\Model $model
      * @param int $type
      * @return \jtl\Connector\Checksum\IChecksum
@@ -64,6 +80,44 @@ class ChecksumLinker
                     return $checksum;
                 }
             }   
+        }
+
+        return null;
+    }
+
+    /**
+     * @param \jtl\Connector\Core\Model\Model $model
+     * @param string $endpoint
+     * @param int $type
+     * @return \jtl\Connector\Checksum\IChecksum
+     */
+    public static function findByEndpoint(Model &$model, $endpoint, $type)
+    {
+        if (method_exists($model, 'getChecksums')) {
+            foreach ($model->getChecksums() as $checksum) {
+                if ($checksum instanceof IChecksum && $checksum->getType() == $type && $checksum->getForeignKey()->getEndpoint() === $endpoint) {
+                    return $checksum;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param \jtl\Connector\Core\Model\Model $model
+     * @param int $host
+     * @param int $type
+     * @return \jtl\Connector\Checksum\IChecksum
+     */
+    public static function findByHost(Model &$model, $host, $type)
+    {
+        if (method_exists($model, 'getChecksums')) {
+            foreach ($model->getChecksums() as $checksum) {
+                if ($checksum instanceof IChecksum && $checksum->getType() == $type && $checksum->getForeignKey()->getHost() == $host) {
+                    return $checksum;
+                }
+            }
         }
 
         return null;
