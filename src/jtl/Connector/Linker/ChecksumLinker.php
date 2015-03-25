@@ -32,7 +32,8 @@ class ChecksumLinker
     public static function link(Model &$model, $type = null)
     {
         if (method_exists($model, 'getChecksums')) {
-            foreach ($model->getChecksums() as &$checksum) {
+            $checksums = $model->getChecksums();
+            foreach ($checksums as &$checksum) {
                 if ($checksum instanceof IChecksum && ($type === null || $checksum->getType() == $type)
                     && $model->getId()->getEndpoint() !== null && strlen($model->getId()->getEndpoint() > 0)) {
                     $checksum->setEndpoint(self::$loader->read($model->getId()->getEndpoint(), $checksum->getType()));
@@ -72,7 +73,7 @@ class ChecksumLinker
      * @param int $type
      * @return \jtl\Connector\Checksum\IChecksum
      */
-    public static function find(Model &$model, $type)
+    public static function find(Model $model, $type)
     {
         if (method_exists($model, 'getChecksums')) {
             foreach ($model->getChecksums() as $checksum) {
@@ -91,7 +92,7 @@ class ChecksumLinker
      * @param int $type
      * @return \jtl\Connector\Checksum\IChecksum
      */
-    public static function findByEndpoint(Model &$model, $endpoint, $type)
+    public static function findByEndpoint(Model $model, $endpoint, $type)
     {
         if (method_exists($model, 'getChecksums')) {
             foreach ($model->getChecksums() as $checksum) {
@@ -110,7 +111,7 @@ class ChecksumLinker
      * @param int $type
      * @return \jtl\Connector\Checksum\IChecksum
      */
-    public static function findByHost(Model &$model, $host, $type)
+    public static function findByHost(Model $model, $host, $type)
     {
         if (method_exists($model, 'getChecksums')) {
             foreach ($model->getChecksums() as $checksum) {

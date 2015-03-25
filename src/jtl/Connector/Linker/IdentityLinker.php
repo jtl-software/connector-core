@@ -279,7 +279,8 @@ class IdentityLinker
 
             if ($propertyInfo->isNavigation() && $model->{$getter}() !== null) {
                 if (is_array($model->{$getter}())) {
-                    foreach ($identity = $model->{$getter}() as &$entity) {
+                    $list = $model->{$getter}();
+                    foreach ($list as &$entity) {
                         if ($entity instanceof DataModel) {
                             $this->linkModel($entity);
                         } else {
