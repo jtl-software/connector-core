@@ -580,7 +580,7 @@ class IdentityLinker
         //return null;
     }
 
-    protected function checkCache($id, $type, $cacheType, $notNull)
+    protected function checkCache($id, $type, $cacheType, $notNull = false)
     {
         return (self::$useCache && array_key_exists($this->buildKey($id, $type, $cacheType), self::$cache) 
             && (!$notNull || self::$cache[$this->buildKey($id, $type, $cacheType)] !== null));
