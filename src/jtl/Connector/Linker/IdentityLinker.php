@@ -309,7 +309,7 @@ class IdentityLinker
                 if (strlen($identity->getEndpoint()) > 0 && $identity->getHost() > 0) {
                     if ($isDeleted) {
                         $this->delete($identity->getEndpoint(), $identity->getHost(), $reflect->getShortName());
-                    } elseif (!$this->exists(null, $identity->getHost(), $reflect->getShortName(), $property)) {
+                    } elseif (!$this->exists(null, $identity->getHost(), $reflect->getShortName(), $property, true)) {
                         $this->save($identity->getEndpoint(), $identity->getHost(), $reflect->getShortName(), $property);
                     }
 
@@ -429,7 +429,7 @@ class IdentityLinker
      * @param string $property
      * @throws \jtl\Connector\Exception\LinkerException
      */
-    public function exists($endpointId = null, $hostId = null, $modelName, $property)
+    public function exists($endpointId = null, $hostId = null, $modelName, $property, $notNull = false)
     {
         if ($endpointId === null && $hostId === null) {
             throw new LinkerException('Both parameters (endpointId, hostId) can not be null');
@@ -447,7 +447,7 @@ class IdentityLinker
             $cacheType = self::CACHE_TYPE_HOST;
         }
 
-        if ($this->checkCache($id, $type, $cacheType)) {
+        if ($this->checkCache($id, $type, $cacheType, $notNull)) {
             return true;
         }
 
@@ -455,6 +455,10 @@ class IdentityLinker
             $hostId = self::$mapper->getHostId($endpointId, $type);
         } elseif ($hostId !== null) {
             $endpointId = self::$mapper->getEndpointId($hostId, $type);
+        }
+
+        if ($notNull && $endpointId === null) {
+            return false;
         }
 
         //if ($endpointId !== null && $hostId !== null) {
@@ -576,9 +580,10 @@ class IdentityLinker
         //return null;
     }
 
-    protected function checkCache($id, $type, $cacheType)
+    protected function checkCache($id, $type, $cacheType, $notNull)
     {
-        return (self::$useCache && array_key_exists($this->buildKey($id, $type, $cacheType), self::$cache));
+        return (self::$useCache && array_key_exists($this->buildKey($id, $type, $cacheType), self::$cache) 
+            && (!$notNull || self::$cache[$this->buildKey($id, $type, $cacheType)] !== null));
     }
 
     protected function loadCache($id, $type, $cacheType)
