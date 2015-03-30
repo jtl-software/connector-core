@@ -344,15 +344,20 @@ class Application extends CoreApplication
                 $ns = ($method->getController() === 'image') ? $namespace : "ArrayCollection<{$namespace}>";
                 $params = $serializer->deserialize($requestpacket->getParams(), $ns, 'json');
                 
+                $identityLinker = IdentityLinker::getInstance();
                 if (is_array($params)) {
-                    // Identity mapping
-                    $identityLinker = IdentityLinker::getInstance();
-                    foreach ($params as &$param) {
+                    // Identity mapping                    
+                    foreach ($params as &$param) {                        
                         $identityLinker->linkModel($param);
 
                         // Checksum linking
                         ChecksumLinker::link($param);
                     }
+                } else {
+                    $identityLinker->linkModel($params);
+
+                    // Checksum linking
+                    ChecksumLinker::link($params);
                 }
             } else {
                 $params = $serializer->deserialize($requestpacket->getParams(), $namespace, 'json');
