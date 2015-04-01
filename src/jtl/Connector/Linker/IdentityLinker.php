@@ -347,14 +347,14 @@ class IdentityLinker
     public function getType($modelName, $property = null)
     {
         // Work around
-        if ($modelName === 'Image' && isset($this->runtimeInfos['relationType'])) {
+        if ($modelName === 'Image' && $property === 'ForeignKey' && isset($this->runtimeInfos['relationType'])) {
             switch ($this->runtimeInfos['relationType']) {
                 case ImageRelationType::TYPE_PRODUCT:
                     return self::TYPE_PRODUCT;
                     break;
                 case ImageRelationType::TYPE_CATEGORY:
                     return self::TYPE_CATEGORY;
-                    break;                
+                    break;
                 case ImageRelationType::TYPE_SPECIFIC:
                     return self::TYPE_SPECIFIC;
                     break;

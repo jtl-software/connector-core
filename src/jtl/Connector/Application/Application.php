@@ -205,7 +205,8 @@ class Application extends CoreApplication
 
                         // Identity mapping
                         $results = array();
-                        foreach ($actionresult->getResult() as $model) {
+                        $models = is_array($actionresult->getResult()) ? $actionresult->getResult() : array($actionresult->getResult());
+                        foreach ($models as $model) {
                             if ($model instanceof DataModel) {
                                 $identityLinker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
 
