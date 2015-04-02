@@ -16,6 +16,7 @@ use \jtl\Connector\Serializer\JMS\SerializerBuilder;
 use \jtl\Connector\Core\Logger\Logger;
 use \jtl\Connector\Linker\ChecksumLinker;
 use \jtl\Connector\Checksum\IChecksum;
+use \jtl\Connector\Formatter\ExceptionFormatter;
 
 /**
  * Base Config Controller
@@ -126,7 +127,12 @@ class Connector extends CoreController
      */
     public function auth($params)
     {
-        $token = Application()->getConnector()->getTokenLoader()->load();
+        try {
+            $token = Application()->getConnector()->getTokenLoader()->load();
+        } catch (\Exception $e) {
+            Logger::write(ExceptionFormatter::format($e), Logger::ERROR, 'security');
+            $token = '';
+        }
 
         $action = new Action();
         $action->setHandled(true);

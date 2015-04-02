@@ -1642,6 +1642,16 @@ class Product extends DataModel
     }
     
     /**
+     * @param array $attributes
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setAttributes(array $attributes)
+    {
+        $this->attributes = $attributes;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\ProductAttr[]
      */
     public function getAttributes()
@@ -1665,6 +1675,16 @@ class Product extends DataModel
     public function addCategory(\jtl\Connector\Model\Product2Category $category)
     {
         $this->categories[] = $category;
+        return $this;
+    }
+    
+    /**
+     * @param array $categories
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setCategories(array $categories)
+    {
+        $this->categories = $categories;
         return $this;
     }
     
@@ -1696,6 +1716,16 @@ class Product extends DataModel
     }
     
     /**
+     * @param array $checksums
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setChecksums(array $checksums)
+    {
+        $this->checksums = $checksums;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\ProductChecksum[]
      */
     public function getChecksums()
@@ -1719,6 +1749,16 @@ class Product extends DataModel
     public function addConfigGroup(\jtl\Connector\Model\ProductConfigGroup $configGroup)
     {
         $this->configGroups[] = $configGroup;
+        return $this;
+    }
+    
+    /**
+     * @param array $configGroups
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setConfigGroups(array $configGroups)
+    {
+        $this->configGroups = $configGroups;
         return $this;
     }
     
@@ -1750,6 +1790,16 @@ class Product extends DataModel
     }
     
     /**
+     * @param array $crossSellings
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setCrossSellings(array $crossSellings)
+    {
+        $this->crossSellings = $crossSellings;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\ProductCrossSelling[]
      */
     public function getCrossSellings()
@@ -1773,6 +1823,16 @@ class Product extends DataModel
     public function addFileDownload(\jtl\Connector\Model\ProductFileDownload $fileDownload)
     {
         $this->fileDownloads[] = $fileDownload;
+        return $this;
+    }
+    
+    /**
+     * @param array $fileDownloads
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setFileDownloads(array $fileDownloads)
+    {
+        $this->fileDownloads = $fileDownloads;
         return $this;
     }
     
@@ -1804,6 +1864,16 @@ class Product extends DataModel
     }
     
     /**
+     * @param array $i18ns
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setI18ns(array $i18ns)
+    {
+        $this->i18ns = $i18ns;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\ProductI18n[]
      */
     public function getI18ns()
@@ -1827,6 +1897,16 @@ class Product extends DataModel
     public function addInvisibility(\jtl\Connector\Model\ProductInvisibility $invisibility)
     {
         $this->invisibilities[] = $invisibility;
+        return $this;
+    }
+    
+    /**
+     * @param array $invisibilities
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setInvisibilities(array $invisibilities)
+    {
+        $this->invisibilities = $invisibilities;
         return $this;
     }
     
@@ -1858,6 +1938,16 @@ class Product extends DataModel
     }
     
     /**
+     * @param array $mediaFiles
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setMediaFiles(array $mediaFiles)
+    {
+        $this->mediaFiles = $mediaFiles;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\MediaFile[]
      */
     public function getMediaFiles()
@@ -1881,6 +1971,16 @@ class Product extends DataModel
     public function addPartsList(\jtl\Connector\Model\ProductPartsList $partsList)
     {
         $this->partsLists[] = $partsList;
+        return $this;
+    }
+    
+    /**
+     * @param array $partsLists
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setPartsLists(array $partsLists)
+    {
+        $this->partsLists = $partsLists;
         return $this;
     }
     
@@ -1912,6 +2012,16 @@ class Product extends DataModel
     }
     
     /**
+     * @param array $prices
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setPrices(array $prices)
+    {
+        $this->prices = $prices;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\ProductPrice[]
      */
     public function getPrices()
@@ -1935,6 +2045,16 @@ class Product extends DataModel
     public function addSpecialPrice(\jtl\Connector\Model\ProductSpecialPrice $specialPrice)
     {
         $this->specialPrices[] = $specialPrice;
+        return $this;
+    }
+    
+    /**
+     * @param array $specialPrices
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setSpecialPrices(array $specialPrices)
+    {
+        $this->specialPrices = $specialPrices;
         return $this;
     }
     
@@ -1966,6 +2086,16 @@ class Product extends DataModel
     }
     
     /**
+     * @param array $specifics
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setSpecifics(array $specifics)
+    {
+        $this->specifics = $specifics;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\ProductSpecific[]
      */
     public function getSpecifics()
@@ -1989,6 +2119,16 @@ class Product extends DataModel
     public function addVarCombination(\jtl\Connector\Model\ProductVarCombination $varCombination)
     {
         $this->varCombinations[] = $varCombination;
+        return $this;
+    }
+    
+    /**
+     * @param array $varCombinations
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setVarCombinations(array $varCombinations)
+    {
+        $this->varCombinations = $varCombinations;
         return $this;
     }
     
@@ -2020,6 +2160,16 @@ class Product extends DataModel
     }
     
     /**
+     * @param array $variations
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setVariations(array $variations)
+    {
+        $this->variations = $variations;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\ProductVariation[]
      */
     public function getVariations()
@@ -2043,6 +2193,16 @@ class Product extends DataModel
     public function addWarehouseInfo(\jtl\Connector\Model\ProductWarehouseInfo $warehouseInfo)
     {
         $this->warehouseInfo[] = $warehouseInfo;
+        return $this;
+    }
+    
+    /**
+     * @param array $warehouseInfo
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setWarehouseInfo(array $warehouseInfo)
+    {
+        $this->warehouseInfo = $warehouseInfo;
         return $this;
     }
     

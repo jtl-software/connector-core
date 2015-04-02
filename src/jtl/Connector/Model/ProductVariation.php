@@ -142,6 +142,16 @@ class ProductVariation extends DataModel
     }
     
     /**
+     * @param array $i18ns
+     * @return \jtl\Connector\Model\ProductVariation
+     */
+    public function setI18ns(array $i18ns)
+    {
+        $this->i18ns = $i18ns;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\ProductVariationI18n[]
      */
     public function getI18ns()
@@ -169,6 +179,16 @@ class ProductVariation extends DataModel
     }
     
     /**
+     * @param array $invisibilities
+     * @return \jtl\Connector\Model\ProductVariation
+     */
+    public function setInvisibilities(array $invisibilities)
+    {
+        $this->invisibilities = $invisibilities;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\ProductVariationInvisibility[]
      */
     public function getInvisibilities()
@@ -192,6 +212,16 @@ class ProductVariation extends DataModel
     public function addValue(\jtl\Connector\Model\ProductVariationValue $value)
     {
         $this->values[] = $value;
+        return $this;
+    }
+    
+    /**
+     * @param array $values
+     * @return \jtl\Connector\Model\ProductVariation
+     */
+    public function setValues(array $values)
+    {
+        $this->values = $values;
         return $this;
     }
     

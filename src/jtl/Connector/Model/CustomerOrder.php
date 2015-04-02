@@ -616,6 +616,16 @@ class CustomerOrder extends DataModel
     }
     
     /**
+     * @param array $attributes
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setAttributes(array $attributes)
+    {
+        $this->attributes = $attributes;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\CustomerOrderAttr[]
      */
     public function getAttributes()
@@ -639,6 +649,16 @@ class CustomerOrder extends DataModel
     public function addItem(\jtl\Connector\Model\CustomerOrderItem $item)
     {
         $this->items[] = $item;
+        return $this;
+    }
+    
+    /**
+     * @param array $items
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setItems(array $items)
+    {
+        $this->items = $items;
         return $this;
     }
     

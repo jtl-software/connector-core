@@ -253,6 +253,16 @@ class ProductSpecialPrice extends DataModel
     }
     
     /**
+     * @param array $items
+     * @return \jtl\Connector\Model\ProductSpecialPrice
+     */
+    public function setItems(array $items)
+    {
+        $this->items = $items;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\ProductSpecialPriceItem[]
      */
     public function getItems()

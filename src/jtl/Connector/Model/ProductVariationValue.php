@@ -217,6 +217,16 @@ class ProductVariationValue extends DataModel
     }
     
     /**
+     * @param array $extraCharges
+     * @return \jtl\Connector\Model\ProductVariationValue
+     */
+    public function setExtraCharges(array $extraCharges)
+    {
+        $this->extraCharges = $extraCharges;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\ProductVariationValueExtraCharge[]
      */
     public function getExtraCharges()
@@ -244,6 +254,16 @@ class ProductVariationValue extends DataModel
     }
     
     /**
+     * @param array $i18ns
+     * @return \jtl\Connector\Model\ProductVariationValue
+     */
+    public function setI18ns(array $i18ns)
+    {
+        $this->i18ns = $i18ns;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\ProductVariationValueI18n[]
      */
     public function getI18ns()
@@ -267,6 +287,16 @@ class ProductVariationValue extends DataModel
     public function addInvisibility(\jtl\Connector\Model\ProductVariationValueInvisibility $invisibility)
     {
         $this->invisibilities[] = $invisibility;
+        return $this;
+    }
+    
+    /**
+     * @param array $invisibilities
+     * @return \jtl\Connector\Model\ProductVariationValue
+     */
+    public function setInvisibilities(array $invisibilities)
+    {
+        $this->invisibilities = $invisibilities;
         return $this;
     }
     

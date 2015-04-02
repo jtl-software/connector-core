@@ -176,6 +176,16 @@ class MediaFileAttr extends DataModel
     }
     
     /**
+     * @param array $i18ns
+     * @return \jtl\Connector\Model\MediaFileAttr
+     */
+    public function setI18ns(array $i18ns)
+    {
+        $this->i18ns = $i18ns;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\MediaFileAttrI18n[]
      */
     public function getI18ns()

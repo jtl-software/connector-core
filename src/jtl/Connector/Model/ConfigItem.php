@@ -436,6 +436,16 @@ class ConfigItem extends DataModel
     }
     
     /**
+     * @param array $i18ns
+     * @return \jtl\Connector\Model\ConfigItem
+     */
+    public function setI18ns(array $i18ns)
+    {
+        $this->i18ns = $i18ns;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\ConfigItemI18n[]
      */
     public function getI18ns()
@@ -459,6 +469,16 @@ class ConfigItem extends DataModel
     public function addPrice(\jtl\Connector\Model\ConfigItemPrice $price)
     {
         $this->prices[] = $price;
+        return $this;
+    }
+    
+    /**
+     * @param array $prices
+     * @return \jtl\Connector\Model\ConfigItem
+     */
+    public function setPrices(array $prices)
+    {
+        $this->prices = $prices;
         return $this;
     }
     

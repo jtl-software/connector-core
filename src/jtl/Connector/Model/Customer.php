@@ -803,6 +803,16 @@ class Customer extends DataModel
     }
     
     /**
+     * @param array $attributes
+     * @return \jtl\Connector\Model\Customer
+     */
+    public function setAttributes(array $attributes)
+    {
+        $this->attributes = $attributes;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\CustomerAttr[]
      */
     public function getAttributes()

@@ -225,6 +225,16 @@ class FileDownload extends DataModel
     }
     
     /**
+     * @param array $i18ns
+     * @return \jtl\Connector\Model\FileDownload
+     */
+    public function setI18ns(array $i18ns)
+    {
+        $this->i18ns = $i18ns;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\FileDownloadI18n[]
      */
     public function getI18ns()

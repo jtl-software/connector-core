@@ -345,6 +345,16 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
+     * @param array $variations
+     * @return \jtl\Connector\Model\CustomerOrderItem
+     */
+    public function setVariations(array $variations)
+    {
+        $this->variations = $variations;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\CustomerOrderItemVariation[]
      */
     public function getVariations()

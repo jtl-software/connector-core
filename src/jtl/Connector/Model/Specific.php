@@ -157,6 +157,16 @@ class Specific extends DataModel
     }
     
     /**
+     * @param array $i18ns
+     * @return \jtl\Connector\Model\Specific
+     */
+    public function setI18ns(array $i18ns)
+    {
+        $this->i18ns = $i18ns;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\SpecificI18n[]
      */
     public function getI18ns()
@@ -180,6 +190,16 @@ class Specific extends DataModel
     public function addValue(\jtl\Connector\Model\SpecificValue $value)
     {
         $this->values[] = $value;
+        return $this;
+    }
+    
+    /**
+     * @param array $values
+     * @return \jtl\Connector\Model\Specific
+     */
+    public function setValues(array $values)
+    {
+        $this->values = $values;
         return $this;
     }
     

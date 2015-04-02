@@ -157,6 +157,16 @@ class CustomerGroup extends DataModel
     }
     
     /**
+     * @param array $attributes
+     * @return \jtl\Connector\Model\CustomerGroup
+     */
+    public function setAttributes(array $attributes)
+    {
+        $this->attributes = $attributes;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\CustomerGroupAttr[]
      */
     public function getAttributes()
@@ -180,6 +190,16 @@ class CustomerGroup extends DataModel
     public function addI18n(\jtl\Connector\Model\CustomerGroupI18n $i18n)
     {
         $this->i18ns[] = $i18n;
+        return $this;
+    }
+    
+    /**
+     * @param array $i18ns
+     * @return \jtl\Connector\Model\CustomerGroup
+     */
+    public function setI18ns(array $i18ns)
+    {
+        $this->i18ns = $i18ns;
         return $this;
     }
     

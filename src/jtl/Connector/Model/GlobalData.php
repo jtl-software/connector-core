@@ -128,6 +128,16 @@ class GlobalData extends DataModel
     }
     
     /**
+     * @param array $configGroups
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function setConfigGroups(array $configGroups)
+    {
+        $this->configGroups = $configGroups;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\ConfigGroup[]
      */
     public function getConfigGroups()
@@ -151,6 +161,16 @@ class GlobalData extends DataModel
     public function addConfigItem(\jtl\Connector\Model\ConfigItem $configItem)
     {
         $this->configItems[] = $configItem;
+        return $this;
+    }
+    
+    /**
+     * @param array $configItems
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function setConfigItems(array $configItems)
+    {
+        $this->configItems = $configItems;
         return $this;
     }
     
@@ -182,6 +202,16 @@ class GlobalData extends DataModel
     }
     
     /**
+     * @param array $crossSellingGroups
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function setCrossSellingGroups(array $crossSellingGroups)
+    {
+        $this->crossSellingGroups = $crossSellingGroups;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\CrossSellingGroup[]
      */
     public function getCrossSellingGroups()
@@ -205,6 +235,16 @@ class GlobalData extends DataModel
     public function addCurrency(\jtl\Connector\Model\Currency $currency)
     {
         $this->currencies[] = $currency;
+        return $this;
+    }
+    
+    /**
+     * @param array $currencies
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function setCurrencies(array $currencies)
+    {
+        $this->currencies = $currencies;
         return $this;
     }
     
@@ -236,6 +276,16 @@ class GlobalData extends DataModel
     }
     
     /**
+     * @param array $customerGroups
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function setCustomerGroups(array $customerGroups)
+    {
+        $this->customerGroups = $customerGroups;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\CustomerGroup[]
      */
     public function getCustomerGroups()
@@ -259,6 +309,16 @@ class GlobalData extends DataModel
     public function addLanguage(\jtl\Connector\Model\Language $language)
     {
         $this->languages[] = $language;
+        return $this;
+    }
+    
+    /**
+     * @param array $languages
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function setLanguages(array $languages)
+    {
+        $this->languages = $languages;
         return $this;
     }
     
@@ -290,6 +350,16 @@ class GlobalData extends DataModel
     }
     
     /**
+     * @param array $measurementUnits
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function setMeasurementUnits(array $measurementUnits)
+    {
+        $this->measurementUnits = $measurementUnits;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\MeasurementUnit[]
      */
     public function getMeasurementUnits()
@@ -313,6 +383,16 @@ class GlobalData extends DataModel
     public function addProductType(\jtl\Connector\Model\ProductType $productType)
     {
         $this->productTypes[] = $productType;
+        return $this;
+    }
+    
+    /**
+     * @param array $productTypes
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function setProductTypes(array $productTypes)
+    {
+        $this->productTypes = $productTypes;
         return $this;
     }
     
@@ -344,6 +424,16 @@ class GlobalData extends DataModel
     }
     
     /**
+     * @param array $shippingClasses
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function setShippingClasses(array $shippingClasses)
+    {
+        $this->shippingClasses = $shippingClasses;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\ShippingClass[]
      */
     public function getShippingClasses()
@@ -367,6 +457,16 @@ class GlobalData extends DataModel
     public function addTaxRate(\jtl\Connector\Model\TaxRate $taxRate)
     {
         $this->taxRates[] = $taxRate;
+        return $this;
+    }
+    
+    /**
+     * @param array $taxRates
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function setTaxRates(array $taxRates)
+    {
+        $this->taxRates = $taxRates;
         return $this;
     }
     
@@ -398,6 +498,16 @@ class GlobalData extends DataModel
     }
     
     /**
+     * @param array $units
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function setUnits(array $units)
+    {
+        $this->units = $units;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\Unit[]
      */
     public function getUnits()
@@ -421,6 +531,16 @@ class GlobalData extends DataModel
     public function addWarehouse(\jtl\Connector\Model\Warehouse $warehouse)
     {
         $this->warehouses[] = $warehouse;
+        return $this;
+    }
+    
+    /**
+     * @param array $warehouses
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function setWarehouses(array $warehouses)
+    {
+        $this->warehouses = $warehouses;
         return $this;
     }
     

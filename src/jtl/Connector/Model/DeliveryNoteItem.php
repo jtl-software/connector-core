@@ -152,6 +152,16 @@ class DeliveryNoteItem extends DataModel
     }
     
     /**
+     * @param array $info
+     * @return \jtl\Connector\Model\DeliveryNoteItem
+     */
+    public function setInfo(array $info)
+    {
+        $this->info = $info;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\DeliveryNoteItemInfo[]
      */
     public function getInfo()

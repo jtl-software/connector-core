@@ -200,6 +200,16 @@ class Category extends DataModel
     }
     
     /**
+     * @param array $attributes
+     * @return \jtl\Connector\Model\Category
+     */
+    public function setAttributes(array $attributes)
+    {
+        $this->attributes = $attributes;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\CategoryAttr[]
      */
     public function getAttributes()
@@ -223,6 +233,16 @@ class Category extends DataModel
     public function addCustomerGroup(\jtl\Connector\Model\CategoryCustomerGroup $customerGroup)
     {
         $this->customerGroups[] = $customerGroup;
+        return $this;
+    }
+    
+    /**
+     * @param array $customerGroups
+     * @return \jtl\Connector\Model\Category
+     */
+    public function setCustomerGroups(array $customerGroups)
+    {
+        $this->customerGroups = $customerGroups;
         return $this;
     }
     
@@ -254,6 +274,16 @@ class Category extends DataModel
     }
     
     /**
+     * @param array $i18ns
+     * @return \jtl\Connector\Model\Category
+     */
+    public function setI18ns(array $i18ns)
+    {
+        $this->i18ns = $i18ns;
+        return $this;
+    }
+    
+    /**
      * @return jtl\Connector\Model\CategoryI18n[]
      */
     public function getI18ns()
@@ -277,6 +307,16 @@ class Category extends DataModel
     public function addInvisibility(\jtl\Connector\Model\CategoryInvisibility $invisibility)
     {
         $this->invisibilities[] = $invisibility;
+        return $this;
+    }
+    
+    /**
+     * @param array $invisibilities
+     * @return \jtl\Connector\Model\Category
+     */
+    public function setInvisibilities(array $invisibilities)
+    {
+        $this->invisibilities = $invisibilities;
         return $this;
     }
     
