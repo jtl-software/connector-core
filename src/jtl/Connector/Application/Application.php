@@ -347,8 +347,8 @@ class Application extends CoreApplication
                 
                 $identityLinker = IdentityLinker::getInstance();
                 if (is_array($params)) {
-                    // Identity mapping                    
-                    foreach ($params as &$param) {                        
+                    // Identity mapping
+                    foreach ($params as &$param) {
                         $identityLinker->linkModel($param);
 
                         // Checksum linking

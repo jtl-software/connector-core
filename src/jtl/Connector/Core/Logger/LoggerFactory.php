@@ -11,7 +11,7 @@ class LoggerFactory
     /**
      * Array of Logger channels
      */
-    protected static $_logger;
+    protected static $logger;
 
     /**
      * @param string $channel The log channel
@@ -19,15 +19,15 @@ class LoggerFactory
      */
     public static function create($channel)
     {
-        if (static::$_logger === null) {
-            static::$_logger = array();
+        if (static::$logger === null) {
+            static::$logger = array();
         }
 
-        if (!isset(static::$_logger[$channel])) {
-            static::$_logger[$channel] = new \Monolog\Logger($channel);
+        if (!isset(static::$logger[$channel])) {
+            static::$logger[$channel] = new \Monolog\Logger($channel);
         }
 
-        return static::$_logger[$channel];
+        return static::$logger[$channel];
     }
 
     /**
@@ -36,8 +36,8 @@ class LoggerFactory
      */
     public static function get($channel)
     {
-        if (isset(static::$_logger[$channel])) {
-            return static::$_logger[$channel];
+        if (isset(static::$logger[$channel])) {
+            return static::$logger[$channel];
         } else {
             return static::create($channel);
         }
