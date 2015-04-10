@@ -342,7 +342,7 @@ class Application extends CoreApplication
             $serializer = SerializerBuilder::create();
             
             if ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) {
-                $ns = ($method->getController() === 'image') ? $namespace : "ArrayCollection<{$namespace}>";
+                $ns = ($method->getAction() === Method::ACTION_PUSH && $method->getController() === 'image') ? $namespace : "ArrayCollection<{$namespace}>";
                 $params = $serializer->deserialize($requestpacket->getParams(), $ns, 'json');
                 
                 $identityLinker = IdentityLinker::getInstance();
