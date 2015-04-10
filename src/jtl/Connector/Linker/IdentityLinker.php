@@ -174,6 +174,9 @@ class IdentityLinker
         'ProductAttr' => array(
             'productId' => self::TYPE_PRODUCT
         ),
+        'ProductStockLevel' => array(
+            'productId' => self::TYPE_PRODUCT
+        ),
         'Shipment' => array(
             'deliveryNoteId' => self::TYPE_DELIVERY_NOTE
         ),
