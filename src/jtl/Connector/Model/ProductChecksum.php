@@ -121,6 +121,14 @@ class ProductChecksum extends Checksum
     }
 
     /**
+     * @return boolean 
+     */
+    public function getHasChanged()
+    {
+        return $this->hasChanged;
+    }
+
+    /**
      * @param string $host 
      * @return \jtl\Connector\Model\ProductChecksum
      * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
