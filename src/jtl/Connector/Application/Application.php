@@ -210,6 +210,9 @@ class Application extends CoreApplication
                             if ($model instanceof DataModel) {
                                 $identityLinker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
 
+                                // Checksum linking
+                                ChecksumLinker::link($model);
+                                
                                 if ($method->getAction() === Method::ACTION_PULL) {
                                     $results[] = $model->getPublic();
                                 }
