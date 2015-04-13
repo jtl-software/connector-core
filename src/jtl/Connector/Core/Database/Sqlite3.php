@@ -196,7 +196,7 @@ class Sqlite3 implements IDatabase
      */
     public function exec($query)
     {
-        return $this->db->_exec($query);
+        return $this->db->exec($query);
     }
 
     /**

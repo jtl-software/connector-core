@@ -489,8 +489,15 @@ class Application extends CoreApplication
             throw new SessionException('No session');
         }
 
+        if (!is_dir(CONNECTOR_DIR . '/db/')) {
+            if (!mkdir(CONNECTOR_DIR . '/db/')) {
+                throw new ApplicationException('Could not create sqlite database directory');
+            }
+        }
+
         $sqlite3 = Sqlite3::getInstance();
         $sqlite3->connect(array('location' => CONNECTOR_DIR . '/db/connector.s3db'));
+        $sqlite3->check();
 
         $this->session = new Session($sqlite3, $sessionId);
     }

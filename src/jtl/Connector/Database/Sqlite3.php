@@ -37,10 +37,38 @@ final class Sqlite3 extends Sqlite3Core
         return self::$_instance;
     }
 
-    private function __construct()
+    private function __construct() { }
+    private function __clone() { }
+
+    public function check()
     {
-    }
-    private function __clone()
-    {
+        $names = $this->fetch("SELECT name FROM sqlite_master WHERE type='table'");
+
+        $ready = false;
+        if (is_array($names) && count($names) > 0) {
+            foreach ($names as $name) {
+                if ($name === 'session') {
+                    $ready = true;
+                    break;
+                }
+            }
+        }
+
+        if (!$ready) {
+            $this->exec('
+                CREATE TABLE [session] (
+                    [sessionId] VARCHAR(255)  UNIQUE NOT NULL,
+                    [sessionExpires] INTEGER  NOT NULL,
+                    [sessionData] BLOB  NULL
+                )
+            ');
+
+            $this->exec('
+                CREATE INDEX [sessionIndex] ON [session](
+                    [sessionId]  ASC,
+                    [sessionExpires]  ASC
+                )
+            ');
+        }
     }
 }
