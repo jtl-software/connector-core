@@ -16,6 +16,7 @@ use \jtl\Connector\Core\Rpc\Method;
 use \jtl\Connector\Mapper\IPrimaryKeyMapper;
 use \jtl\Connector\Authentication\ITokenLoader;
 use \jtl\Connector\Checksum\IChecksumLoader;
+use \Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * Base Connector
@@ -29,6 +30,7 @@ class Connector extends Singleton implements IEndpointConnector
     protected $keyMapper;
     protected $tokenLoader;
     protected $checksumLoader;
+    protected $eventDispatcher;
     protected $config;
     protected $method;
     protected $modelNamespace = 'jtl\Connector\Model';
@@ -102,6 +104,28 @@ class Connector extends Singleton implements IEndpointConnector
     public function getChecksumLoader()
     {
         return $this->checksumLoader;
+    }
+
+    /**
+     * Setter checksum loader
+     *
+     * @param Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher
+     * @return \jtl\Connector\Base\Connector
+     */
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+        return $this;
+    }
+
+    /**
+     * Returns checksum loader
+     *
+     * @return Symfony\Component\EventDispatcher\EventDispatcher
+     */
+    public function getEventDispatcher()
+    {
+        return $this->eventDispatcher;
     }
 
     /**

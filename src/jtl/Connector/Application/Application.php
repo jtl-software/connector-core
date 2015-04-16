@@ -38,7 +38,8 @@ use \Doctrine\Common\Collections\ArrayCollection;
 use \jtl\Connector\Serializer\JMS\SerializerBuilder;
 use \jtl\Connector\Linker\ChecksumLinker;
 use \jtl\Connector\Model\Product;
-use \jtl\Connector\Model\ProductChecksum;
+use \Symfony\Component\EventDispatcher\EventDispatcher;
+use \jtl\Connector\Core\IO\Path;
 
 /**
  * Application Class
@@ -68,6 +69,11 @@ class Application extends CoreApplication
      */
     protected $session;
 
+    /**
+     * @var \Symfony\Component\EventDispatcher\EventDispatcher
+     */
+    protected $eventDispatcher;
+
     protected function __construct()
     {
         require_once(dirname(__FILE__) . '/../bootstrap.php');
@@ -81,6 +87,9 @@ class Application extends CoreApplication
     public function run()
     {
         AnnotationRegistry::registerLoader('class_exists');
+
+        // Event Dispatcher
+        $this->eventDispatcher = new EventDispatcher();
 
         $jtlrpc = Request::handle();
         $sessionId = Request::getSession();
@@ -101,12 +110,15 @@ class Application extends CoreApplication
         // Start Configuration
         $this->startConfiguration();
 
-        // Initialize Endpoint
-        $this->connector->initialize();
-
         if ($this->connector === null) {
             throw new ApplicationException('No connector registed');
         }
+
+        // Register Event Dispatcher
+        $this->startEventDispatcher();
+
+        // Initialize Endpoint
+        $this->connector->initialize();
 
         if ($this->connector->getPrimaryKeyMapper() === null) {
             throw new ApplicationException('No primary key mapper registed');
@@ -212,6 +224,14 @@ class Application extends CoreApplication
 
                                 // Checksum linking
                                 ChecksumLinker::link($model);
+
+                                // Event Test
+                                if ($method->getAction() === Method::ACTION_PUSH && $model instanceof \jtl\Connector\Model\Product) {
+                                    $this->eventDispatcher->dispatch(
+                                        \jtl\Connector\Event\Product\ProductChangedEvent::EVENT_NAME,
+                                        new \jtl\Connector\Event\Product\ProductChangedEvent($model)
+                                    );
+                                }
                                 
                                 if ($method->getAction() === Method::ACTION_PULL) {
                                     $results[] = $model->getPublic();
@@ -489,17 +509,26 @@ class Application extends CoreApplication
             throw new SessionException('No session');
         }
 
-        if (!is_dir(CONNECTOR_DIR . '/db/')) {
-            if (!mkdir(CONNECTOR_DIR . '/db/')) {
+        $dir = Path::combine(CONNECTOR_DIR, 'db');
+        if (!is_dir($dir)) {
+            if (!mkdir($dir)) {
                 throw new ApplicationException('Could not create sqlite database directory');
             }
         }
 
         $sqlite3 = Sqlite3::getInstance();
-        $sqlite3->connect(array('location' => CONNECTOR_DIR . '/db/connector.s3db'));
+        $sqlite3->connect(array('location' => Path::combine($dir, 'connector.s3db')));
         $sqlite3->check();
 
         $this->session = new Session($sqlite3, $sessionId);
+    }
+
+    protected function startEventDispatcher()
+    {
+        $this->connector->setEventDispatcher($this->eventDispatcher);
+
+        $loader = new \jtl\Connector\Plugin\PluginLoader();
+        $loader->load($this->eventDispatcher);
     }
 
     /**

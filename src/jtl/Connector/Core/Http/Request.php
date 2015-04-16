@@ -9,7 +9,6 @@ namespace jtl\Connector\Core\Http;
 use \jtl\Connector\Core\Compression\Gzip;
 use \jtl\Connector\Core\Exception\CompressionException;
 use \jtl\Connector\Core\Exception\HttpException;
-use \jtl\Connector\Core\Logger\Logger;
 
 /**
  * Http Request Handler
@@ -182,8 +181,6 @@ class Request
      */
     public static function handle()
     {
-        Logger::write('Request: ' . print_r($_REQUEST, 1), Logger::DEBUG, 'http');
-
         $jtlrpc = Request::get();
 
         if ($jtlrpc !== null) {
