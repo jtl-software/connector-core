@@ -10,7 +10,6 @@ use \jtl\Connector\Core\Serializer\Json;
 use \jtl\Connector\Core\Application\Application as CoreApplication;
 use \jtl\Connector\Core\Exception\RpcException;
 use \jtl\Connector\Core\Exception\SessionException;
-use \jtl\Connector\Core\Exception\ConnectorException;
 use \jtl\Connector\Core\Exception\ApplicationException;
 use \jtl\Connector\Core\Rpc\Packet;
 use \jtl\Connector\Core\Rpc\RequestPacket;
@@ -189,16 +188,8 @@ class Application extends CoreApplication
 
         $this->deserializeRequestParams($requestpacket, $this->connector->getModelNamespace());
 
-        // Image?
-        if ($requestpacket->getMethod() === 'image.push' && $imagePath !== null) {
-            if ($imagePath !== null) {
-                $image = $requestpacket->getParams();
-                $image->setFilename($imagePath);
-                $requestpacket->setParams($image);
-            } else {
-                throw new ConnectorException('Could not handle fileupload (no file was uploaded via HTTP POST?)');
-            }
-        }
+        // Image push?
+        $this->handleImagePush($requestpacket, $imagePath);
 
         $this->connector->setMethod($method);
         if ($this->connector->canHandle()) {
@@ -529,6 +520,39 @@ class Application extends CoreApplication
 
         $loader = new \jtl\Connector\Plugin\PluginLoader();
         $loader->load($this->eventDispatcher);
+    }
+
+    protected function handleImagePush(RequestPacket &$requestpacket, $imagePath)
+    {
+        if ($requestpacket->getMethod() === 'image.push') {
+            $image = $requestpacket->getParams();
+            if (!($image instanceof \jtl\Connector\Model\Image)) {
+                throw new ApplicationException('Image push must send a valid image entity');
+            }
+
+            if ($imagePath !== null) {
+                $image->setFilename($imagePath);
+                $requestpacket->setParams($image);
+            } else {
+                // Image Cloud Storage
+                if (strlen($image->getRemoteUrl()) > 0) {
+                    $imageData = file_get_contents($image->getRemoteUrl());
+                    if ($imageData === false) {
+                        throw new ApplicationException('Could not get any data from url: ' . $image->getRemoteUrl());
+                    }
+
+                    $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
+                    $fileName = pathinfo($path, PATHINFO_BASENAME);
+                    $imagePath = Path::combine(realpath(sys_get_temp_dir()), uniqid() . "_{$fileName}");
+                    file_put_contents($imagePath, $imageData);
+
+                    $image->setFilename($imagePath);
+                    $requestpacket->setParams($image);
+                } else {
+                    throw new ApplicationException('Could not handle fileupload (no file was uploaded via HTTP POST?)');
+                }
+            }
+        }
     }
 
     /**

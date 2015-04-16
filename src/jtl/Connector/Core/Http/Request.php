@@ -129,20 +129,8 @@ class Request
             $pathinfo = pathinfo($_FILES[$name]["name"]);
             
             if (isset($pathinfo["extension"])) {
-                /*
-                $path = array(
-                    APP_DIR,
-                    '..',
-                    'vendor',
-                    'jtl',
-                    'core',
-                    'tmp'
-                );
-                */
-
                 $extension = $pathinfo["extension"];
                 $filename = uniqid() . ".{$extension}";
-                //$path = realpath(implode(DIRECTORY_SEPARATOR, $path)) . '/';
                 $path = realpath(sys_get_temp_dir()) . DIRECTORY_SEPARATOR;
 
                 if (Request::moveFileupload($path, $filename, $name)) {
