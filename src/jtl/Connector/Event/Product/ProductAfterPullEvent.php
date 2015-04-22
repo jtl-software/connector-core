@@ -2,21 +2,21 @@
 namespace jtl\Connector\Event\Product;
 
 use \Symfony\Component\EventDispatcher\Event;
-use \jtl\Connector\Model\Product;
+use \jtl\Connector\Core\Model\QueryFilter;
 
 class ProductAfterPullEvent extends Event
 {
     const EVENT_NAME = 'product.after.pull';
 
-    protected $product;
-
-    public function __construct(Product &$product)
+    protected $filter;
+    
+    public function __construct(QueryFilter &$filter)
     {
-        $this->product = $product;
+        $this->filter = $filter;    
     }
 
-    public function getProduct()
+    public function getFilter()
     {
-        return $this->product;
+        return $this->filter;    
     }
 }

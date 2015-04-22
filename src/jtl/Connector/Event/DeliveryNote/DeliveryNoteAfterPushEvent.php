@@ -9,14 +9,14 @@ class DeliveryNoteAfterPushEvent extends Event
     const EVENT_NAME = 'deliveryNote.after.push';
 
     protected $deliveryNote;
-
+    
     public function __construct(DeliveryNote &$deliveryNote)
     {
-        $this->deliveryNote = $deliveryNote;
+        $this->deliveryNote = $deliveryNote;    
     }
 
     public function getDeliveryNote()
     {
-        return $this->deliveryNote;
+        return $this->deliveryNote;    
     }
 }

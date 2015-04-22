@@ -9,14 +9,14 @@ class ManufacturerBeforePushEvent extends Event
     const EVENT_NAME = 'manufacturer.before.push';
 
     protected $manufacturer;
-
+    
     public function __construct(Manufacturer &$manufacturer)
     {
-        $this->manufacturer = $manufacturer;
+        $this->manufacturer = $manufacturer;    
     }
 
     public function getManufacturer()
     {
-        return $this->manufacturer;
+        return $this->manufacturer;    
     }
 }

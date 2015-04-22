@@ -9,14 +9,14 @@ class GlobalDataAfterDeleteEvent extends Event
     const EVENT_NAME = 'globalData.after.delete';
 
     protected $globalData;
-
+    
     public function __construct(GlobalData &$globalData)
     {
-        $this->globalData = $globalData;
+        $this->globalData = $globalData;    
     }
 
     public function getGlobalData()
     {
-        return $this->globalData;
+        return $this->globalData;    
     }
 }

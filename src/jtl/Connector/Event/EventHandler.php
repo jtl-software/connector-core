@@ -12,15 +12,23 @@ class EventHandler
 
     public static function dispatch(DataModel &$entity, EventDispatcher $dispatcher, $action, $moment)
     {
+        if ($entity === null || strlen(trim($action)) == 0 || strlen(trim($moment)) == 0) {
+            return;
+        }
+
         $class = ClassName::getFromNS(get_class($entity));
         $event = self::createEvent($entity, $class, $action, $moment);
 
-        $dispatcher->dispatch($event::EVENT_NAME, $event);
+        if ($event !== null) {
+            $dispatcher->dispatch($event::EVENT_NAME, $event);
+        }
     }
 
     protected static function createEvent(DataModel &$entity, $class, $action, $moment)
     {
         $eventClassname = sprintf('\jtl\Connector\Event\%s\%s%s%sEvent', $class, $class, ucfirst($moment), ucfirst($action));
+
+        var_dump($eventClassname);
 
         if (class_exists($eventClassname)) {
             return new $eventClassname($entity);

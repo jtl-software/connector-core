@@ -9,14 +9,14 @@ class CustomerBeforeDeleteEvent extends Event
     const EVENT_NAME = 'customer.before.delete';
 
     protected $customer;
-
+    
     public function __construct(Customer &$customer)
     {
-        $this->customer = $customer;
+        $this->customer = $customer;    
     }
 
     public function getCustomer()
     {
-        return $this->customer;
+        return $this->customer;    
     }
 }

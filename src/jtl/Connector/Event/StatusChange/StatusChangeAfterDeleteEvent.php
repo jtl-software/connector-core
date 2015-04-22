@@ -9,14 +9,14 @@ class StatusChangeAfterDeleteEvent extends Event
     const EVENT_NAME = 'statusChange.after.delete';
 
     protected $statusChange;
-
+    
     public function __construct(StatusChange &$statusChange)
     {
-        $this->statusChange = $statusChange;
+        $this->statusChange = $statusChange;    
     }
 
     public function getStatusChange()
     {
-        return $this->statusChange;
+        return $this->statusChange;    
     }
 }

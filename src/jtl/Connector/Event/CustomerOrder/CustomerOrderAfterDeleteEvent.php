@@ -9,14 +9,14 @@ class CustomerOrderAfterDeleteEvent extends Event
     const EVENT_NAME = 'customerOrder.after.delete';
 
     protected $customerOrder;
-
+    
     public function __construct(CustomerOrder &$customerOrder)
     {
-        $this->customerOrder = $customerOrder;
+        $this->customerOrder = $customerOrder;    
     }
 
     public function getCustomerOrder()
     {
-        return $this->customerOrder;
+        return $this->customerOrder;    
     }
 }

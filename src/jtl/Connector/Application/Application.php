@@ -378,6 +378,9 @@ class Application extends CoreApplication
                 }
             } else {
                 $params = $serializer->deserialize($requestpacket->getParams(), $namespace, 'json');
+
+                // Event
+                EventHandler::dispatch($params, $this->eventDispatcher, $method->getAction(), EventHandler::BEFORE);
             }
 
             $requestpacket->setParams($params);

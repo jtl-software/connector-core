@@ -9,14 +9,14 @@ class ProductStockLevelAfterDeleteEvent extends Event
     const EVENT_NAME = 'productStockLevel.after.delete';
 
     protected $productStockLevel;
-
+    
     public function __construct(ProductStockLevel &$productStockLevel)
     {
-        $this->productStockLevel = $productStockLevel;
+        $this->productStockLevel = $productStockLevel;    
     }
 
     public function getProductStockLevel()
     {
-        return $this->productStockLevel;
+        return $this->productStockLevel;    
     }
 }

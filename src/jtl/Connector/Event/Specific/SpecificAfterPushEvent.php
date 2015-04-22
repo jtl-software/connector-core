@@ -9,14 +9,14 @@ class SpecificAfterPushEvent extends Event
     const EVENT_NAME = 'specific.after.push';
 
     protected $specific;
-
+    
     public function __construct(Specific &$specific)
     {
-        $this->specific = $specific;
+        $this->specific = $specific;    
     }
 
     public function getSpecific()
     {
-        return $this->specific;
+        return $this->specific;    
     }
 }

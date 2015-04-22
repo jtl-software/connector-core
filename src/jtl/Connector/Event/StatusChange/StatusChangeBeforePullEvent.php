@@ -2,21 +2,21 @@
 namespace jtl\Connector\Event\StatusChange;
 
 use \Symfony\Component\EventDispatcher\Event;
-use \jtl\Connector\Model\StatusChange;
+use \jtl\Connector\Core\Model\QueryFilter;
 
 class StatusChangeBeforePullEvent extends Event
 {
     const EVENT_NAME = 'statusChange.before.pull';
 
-    protected $statusChange;
-
-    public function __construct(StatusChange &$statusChange)
+    protected $filter;
+    
+    public function __construct(QueryFilter &$filter)
     {
-        $this->statusChange = $statusChange;
+        $this->filter = $filter;    
     }
 
-    public function getStatusChange()
+    public function getFilter()
     {
-        return $this->statusChange;
+        return $this->filter;    
     }
 }

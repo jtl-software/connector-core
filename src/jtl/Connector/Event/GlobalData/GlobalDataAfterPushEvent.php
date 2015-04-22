@@ -9,14 +9,14 @@ class GlobalDataAfterPushEvent extends Event
     const EVENT_NAME = 'globalData.after.push';
 
     protected $globalData;
-
+    
     public function __construct(GlobalData &$globalData)
     {
-        $this->globalData = $globalData;
+        $this->globalData = $globalData;    
     }
 
     public function getGlobalData()
     {
-        return $this->globalData;
+        return $this->globalData;    
     }
 }
