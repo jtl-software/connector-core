@@ -10,7 +10,7 @@ class GlobalDataBeforePushEvent extends Event
 
     protected $globalData;
 
-    public function __construct(GlobalData &globalData)
+    public function __construct(GlobalData &$globalData)
     {
         $this->globalData = $globalData;
     }

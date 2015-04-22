@@ -10,7 +10,7 @@ class DeliveryNoteAfterPushEvent extends Event
 
     protected $deliveryNote;
 
-    public function __construct(DeliveryNote &deliveryNote)
+    public function __construct(DeliveryNote &$deliveryNote)
     {
         $this->deliveryNote = $deliveryNote;
     }

@@ -10,7 +10,7 @@ class ProductAfterPullEvent extends Event
 
     protected $product;
 
-    public function __construct(Product &product)
+    public function __construct(Product &$product)
     {
         $this->product = $product;
     }

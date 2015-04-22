@@ -10,7 +10,7 @@ class SpecificAfterPushEvent extends Event
 
     protected $specific;
 
-    public function __construct(Specific &specific)
+    public function __construct(Specific &$specific)
     {
         $this->specific = $specific;
     }

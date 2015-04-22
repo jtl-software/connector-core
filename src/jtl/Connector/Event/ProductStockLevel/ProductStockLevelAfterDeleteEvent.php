@@ -10,7 +10,7 @@ class ProductStockLevelAfterDeleteEvent extends Event
 
     protected $productStockLevel;
 
-    public function __construct(ProductStockLevel &productStockLevel)
+    public function __construct(ProductStockLevel &$productStockLevel)
     {
         $this->productStockLevel = $productStockLevel;
     }

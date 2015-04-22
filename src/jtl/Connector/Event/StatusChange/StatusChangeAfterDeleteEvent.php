@@ -10,7 +10,7 @@ class StatusChangeAfterDeleteEvent extends Event
 
     protected $statusChange;
 
-    public function __construct(StatusChange &statusChange)
+    public function __construct(StatusChange &$statusChange)
     {
         $this->statusChange = $statusChange;
     }

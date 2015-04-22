@@ -10,7 +10,7 @@ class CategoryAfterPullEvent extends Event
 
     protected $category;
 
-    public function __construct(Category &category)
+    public function __construct(Category &$category)
     {
         $this->category = $category;
     }

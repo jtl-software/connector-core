@@ -10,7 +10,7 @@ class CustomerAfterPushEvent extends Event
 
     protected $customer;
 
-    public function __construct(Customer &customer)
+    public function __construct(Customer &$customer)
     {
         $this->customer = $customer;
     }

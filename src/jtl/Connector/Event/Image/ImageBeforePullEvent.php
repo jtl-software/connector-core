@@ -10,7 +10,7 @@ class ImageBeforePullEvent extends Event
 
     protected $image;
 
-    public function __construct(Image &image)
+    public function __construct(Image &$image)
     {
         $this->image = $image;
     }

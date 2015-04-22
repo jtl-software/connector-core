@@ -10,7 +10,7 @@ class ProductPriceAfterDeleteEvent extends Event
 
     protected $productPrice;
 
-    public function __construct(ProductPrice &productPrice)
+    public function __construct(ProductPrice &$productPrice)
     {
         $this->productPrice = $productPrice;
     }

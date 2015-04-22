@@ -10,7 +10,7 @@ class ManufacturerAfterPushEvent extends Event
 
     protected $manufacturer;
 
-    public function __construct(Manufacturer &manufacturer)
+    public function __construct(Manufacturer &$manufacturer)
     {
         $this->manufacturer = $manufacturer;
     }

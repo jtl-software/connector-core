@@ -4,13 +4,13 @@ namespace jtl\Connector\Event\CustomerOrder;
 use \Symfony\Component\EventDispatcher\Event;
 use \jtl\Connector\Model\CustomerOrder;
 
-class CustomerOrderAfterPushEvent extends Event
+class CustomerOrderBeforePullEvent extends Event
 {
-    const EVENT_NAME = 'customerOrder.after.push';
+    const EVENT_NAME = 'customerOrder.before.pull';
 
     protected $customerOrder;
 
-    public function __construct(CustomerOrder &customerOrder)
+    public function __construct(CustomerOrder &$customerOrder)
     {
         $this->customerOrder = $customerOrder;
     }
