@@ -2,21 +2,21 @@
 namespace jtl\Connector\Event\ProductStockLevel;
 
 use \Symfony\Component\EventDispatcher\Event;
-use \jtl\Connector\Core\Model\QueryFilter;
+use \jtl\Connector\Model\ProductStockLevel;
 
 class ProductStockLevelAfterPullEvent extends Event
 {
     const EVENT_NAME = 'productStockLevel.after.pull';
 
-    protected $filter;
+    protected $productStockLevel;
     
-    public function __construct(QueryFilter &$filter)
+    public function __construct(ProductStockLevel &$productStockLevel)
     {
-        $this->filter = $filter;    
+        $this->productStockLevel = $productStockLevel;    
     }
 
-    public function getFilter()
+    public function getProductStockLevel()
     {
-        return $this->filter;    
+        return $this->productStockLevel;    
     }
 }

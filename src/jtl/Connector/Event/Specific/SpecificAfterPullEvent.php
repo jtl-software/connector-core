@@ -2,21 +2,21 @@
 namespace jtl\Connector\Event\Specific;
 
 use \Symfony\Component\EventDispatcher\Event;
-use \jtl\Connector\Core\Model\QueryFilter;
+use \jtl\Connector\Model\Specific;
 
 class SpecificAfterPullEvent extends Event
 {
     const EVENT_NAME = 'specific.after.pull';
 
-    protected $filter;
+    protected $specific;
     
-    public function __construct(QueryFilter &$filter)
+    public function __construct(Specific &$specific)
     {
-        $this->filter = $filter;    
+        $this->specific = $specific;    
     }
 
-    public function getFilter()
+    public function getSpecific()
     {
-        return $this->filter;    
+        return $this->specific;    
     }
 }

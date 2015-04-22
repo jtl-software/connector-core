@@ -2,21 +2,21 @@
 namespace jtl\Connector\Event\Category;
 
 use \Symfony\Component\EventDispatcher\Event;
-use \jtl\Connector\Core\Model\QueryFilter;
+use \jtl\Connector\Model\Category;
 
 class CategoryAfterPullEvent extends Event
 {
     const EVENT_NAME = 'category.after.pull';
 
-    protected $filter;
+    protected $category;
     
-    public function __construct(QueryFilter &$filter)
+    public function __construct(Category &$category)
     {
-        $this->filter = $filter;    
+        $this->category = $category;    
     }
 
-    public function getFilter()
+    public function getCategory()
     {
-        return $this->filter;    
+        return $this->category;    
     }
 }

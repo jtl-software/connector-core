@@ -3,6 +3,7 @@ namespace jtl\Connector\Event;
 
 use \Symfony\Component\EventDispatcher\EventDispatcher;
 use \jtl\Connector\Model\DataModel;
+use \jtl\Connector\Core\Model\QueryFilter;
 use \jtl\Connector\Core\Utilities\ClassName;
 
 class EventHandler
@@ -10,9 +11,9 @@ class EventHandler
     const BEFORE = 'before';
     const AFTER = 'after';
 
-    public static function dispatch(DataModel &$entity, EventDispatcher $dispatcher, $action, $moment)
+    public static function dispatch(&$entity, EventDispatcher $dispatcher, $action, $moment)
     {
-        if ($entity === false || $entity === null || strlen(trim($action)) == 0 || strlen(trim($moment)) == 0) {
+        if ((!($entity instanceof DataModel) && !($entity instanceof QueryFilter)) || strlen(trim($action)) == 0 || strlen(trim($moment)) == 0) {
             return;
         }
 
@@ -24,7 +25,7 @@ class EventHandler
         }
     }
 
-    protected static function createEvent(DataModel &$entity, $class, $action, $moment)
+    protected static function createEvent(&$entity, $class, $action, $moment)
     {
         $eventClassname = sprintf('\jtl\Connector\Event\%s\%s%s%sEvent', $class, $class, ucfirst($moment), ucfirst($action));
 

@@ -2,21 +2,21 @@
 namespace jtl\Connector\Event\Manufacturer;
 
 use \Symfony\Component\EventDispatcher\Event;
-use \jtl\Connector\Core\Model\QueryFilter;
+use \jtl\Connector\Model\Manufacturer;
 
 class ManufacturerAfterPullEvent extends Event
 {
     const EVENT_NAME = 'manufacturer.after.pull';
 
-    protected $filter;
+    protected $manufacturer;
     
-    public function __construct(QueryFilter &$filter)
+    public function __construct(Manufacturer &$manufacturer)
     {
-        $this->filter = $filter;    
+        $this->manufacturer = $manufacturer;    
     }
 
-    public function getFilter()
+    public function getManufacturer()
     {
-        return $this->filter;    
+        return $this->manufacturer;    
     }
 }

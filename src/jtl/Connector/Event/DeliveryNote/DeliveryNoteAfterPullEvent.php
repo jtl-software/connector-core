@@ -2,21 +2,21 @@
 namespace jtl\Connector\Event\DeliveryNote;
 
 use \Symfony\Component\EventDispatcher\Event;
-use \jtl\Connector\Core\Model\QueryFilter;
+use \jtl\Connector\Model\DeliveryNote;
 
 class DeliveryNoteAfterPullEvent extends Event
 {
     const EVENT_NAME = 'deliveryNote.after.pull';
 
-    protected $filter;
+    protected $deliveryNote;
     
-    public function __construct(QueryFilter &$filter)
+    public function __construct(DeliveryNote &$deliveryNote)
     {
-        $this->filter = $filter;    
+        $this->deliveryNote = $deliveryNote;    
     }
 
-    public function getFilter()
+    public function getDeliveryNote()
     {
-        return $this->filter;    
+        return $this->deliveryNote;    
     }
 }
