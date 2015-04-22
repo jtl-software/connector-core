@@ -39,6 +39,7 @@ use \jtl\Connector\Linker\ChecksumLinker;
 use \jtl\Connector\Model\Product;
 use \Symfony\Component\EventDispatcher\EventDispatcher;
 use \jtl\Connector\Core\IO\Path;
+use \jtl\Connector\Event\EventHandler;
 
 /**
  * Application Class
@@ -216,13 +217,8 @@ class Application extends CoreApplication
                                 // Checksum linking
                                 ChecksumLinker::link($model);
 
-                                // Event Test
-                                if ($method->getAction() === Method::ACTION_PUSH && $model instanceof \jtl\Connector\Model\Product) {
-                                    $this->eventDispatcher->dispatch(
-                                        \jtl\Connector\Event\Product\ProductChangedEvent::EVENT_NAME,
-                                        new \jtl\Connector\Event\Product\ProductChangedEvent($model)
-                                    );
-                                }
+                                // Event
+                                EventHandler::dispatch($model, $this->eventDispatcher, $method->getAction(), EventHandler::AFTER);
                                 
                                 if ($method->getAction() === Method::ACTION_PULL) {
                                     $results[] = $model->getPublic();
@@ -367,12 +363,18 @@ class Application extends CoreApplication
 
                         // Checksum linking
                         ChecksumLinker::link($param);
+
+                        // Event
+                        EventHandler::dispatch($params, $this->eventDispatcher, $method->getAction(), EventHandler::BEFORE);
                     }
                 } else {
                     $identityLinker->linkModel($params);
 
                     // Checksum linking
                     ChecksumLinker::link($params);
+
+                    // Event
+                    EventHandler::dispatch($params, $this->eventDispatcher, $method->getAction(), EventHandler::BEFORE);
                 }
             } else {
                 $params = $serializer->deserialize($requestpacket->getParams(), $namespace, 'json');

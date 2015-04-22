@@ -15,8 +15,9 @@ class PluginLoader
         $finder->directories()->in($dir);
 
         foreach ($finder as $directory) {
-            if (file_exists(Path::combine($dir, $directory->getRelativePathname()))) {
-                include (Path::combine($dir, $directory->getRelativePathname(), 'bootstrap.php'));
+            $bootstrap = Path::combine($dir, $directory->getRelativePathname(), 'bootstrap.php');
+            if (file_exists($bootstrap)) {
+                include ($bootstrap);
 
                 $class = sprintf('%s_%s', ucfirst($directory->getRelativePathname()), ucfirst('Bootstrap'));
                 if (class_exists($class)) {
