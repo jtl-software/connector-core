@@ -42,20 +42,9 @@ final class Sqlite3 extends Sqlite3Core
 
     public function check()
     {
-        $results = $this->fetch("SELECT name FROM sqlite_master WHERE type='table'");
+        $results = $this->fetch("SELECT name FROM sqlite_master WHERE type='table' AND name='session'");
 
-        $ready = false;
-        if (isset($results[0]) && is_array($results[0]) && count($results[0]) > 0) {
-            $tables = $results[0];
-            foreach ($tables as $table) {
-                if ($table === 'session') {
-                    $ready = true;
-                    break;
-                }
-            }
-        }
-
-        if (!$ready) {
+        if (!is_array($results) || count($results) == 0) {
             $this->exec('
                 CREATE TABLE [session] (
                     [sessionId] VARCHAR(255)  UNIQUE NOT NULL,
