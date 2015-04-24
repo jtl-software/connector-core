@@ -85,7 +85,7 @@ class Request
      */
     public static function isFileupload($name = "jtlrpc")
     {
-        return @is_uploaded_file($_FILES[$name]["tmp_name"]);
+        return is_uploaded_file($_FILES[$name]["tmp_name"]);
     }
     
     /**
@@ -98,7 +98,7 @@ class Request
      */
     public static function moveFileupload($path, $filename, $name = "jtlrpc")
     {
-        return @move_uploaded_file($_FILES[$name]["tmp_name"], $path . $filename);
+        return move_uploaded_file($_FILES[$name]["tmp_name"], $path . $filename);
     }
     
     /**
@@ -184,11 +184,11 @@ class Request
                     $data = $gzip->read($path . $filename);
                     $jtlrpc = Request::stripData($data);
         
-                    @unlink($path . $filename);
+                    unlink($path . $filename);
         
                     return $jtlrpc;
                 } catch (CompressionException $exc) {
-                    @unlink($path . $filename);
+                    unlink($path . $filename);
                     
                     throw $exc;
                 }
