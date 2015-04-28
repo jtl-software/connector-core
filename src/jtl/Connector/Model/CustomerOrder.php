@@ -62,6 +62,21 @@ class CustomerOrder extends DataModel
     const STATUS_NOTCANCELLED = 'not_cancelled';
 
     /**
+     * @var string - Paid order status
+     */
+    const COMBO_STATUS_PAID = 'paid';
+
+    /**
+     * @var string - Shipped order status
+     */
+    const COMBO_STATUS_SHIPPED = 'shipped';
+
+    /**
+     * @var string - Completed order status
+     */
+    const COMBO_STATUS_COMPLETED = 'completed';
+
+    /**
      * @var Identity Optional reference to customer. 
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("customerId")
@@ -667,5 +682,26 @@ class CustomerOrder extends DataModel
     {
         $this->items = array();
         return $this;
+    }
+
+    public function getCombinatedStatus()
+    {
+        $order = $this->getOrderStatus();
+        $payment = $this->getPaymentStatus();
+        $shipping = $this->getShippingStatus();
+
+        if ($order === self::STATUS_CANCELLED) {
+            return self::STATUS_CANCELLED;
+        } elseif ($shipping === self::SHIPPING_STATUS_NOTSHIPPED && $payment === self::PAYMENT_STATUS_COMPLETED) {
+            return self::COMBO_STATUS_PAID;
+        } elseif ($shipping === self::SHIPPING_STATUS_PARTIALLY && $payment === self::PAYMENT_STATUS_COMPLETED) {
+            return self::COMBO_STATUS_PAID;
+        } elseif ($shipping === self::SHIPPING_STATUS_COMPLETED && $payment === self::PAYMENT_STATUS_UNPAID) {
+            return self::COMBO_STATUS_SHIPPED;
+        } elseif ($shipping === self::SHIPPING_STATUS_COMPLETED && $payment === self::PAYMENT_STATUS_PARTIALLY) {
+            return self::COMBO_STATUS_SHIPPED;
+        } elseif ($shipping === self::SHIPPING_STATUS_COMPLETED && $payment === self::PAYMENT_STATUS_COMPLETED) {
+            return self::COMBO_STATUS_COMPLETED;
+        }
     }
 }
