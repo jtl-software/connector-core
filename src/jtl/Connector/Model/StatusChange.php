@@ -79,11 +79,11 @@ class StatusChange extends DataModel
     }
 
     /**
-     * @param OrderStatus $orderStatus 
+     * @param string $orderStatus 
      * @return \jtl\Connector\Model\StatusChange
-     * @throws \InvalidArgumentException if the provided argument is not of type 'OrderStatus'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setOrderStatus(OrderStatus $orderStatus = null)
+    public function setOrderStatus($orderStatus)
     {
         return $this->setProperty('orderStatus', $orderStatus, 'string');
     }
@@ -97,11 +97,11 @@ class StatusChange extends DataModel
     }
 
     /**
-     * @param PaymentStatus $paymentStatus 
+     * @param string $paymentStatus 
      * @return \jtl\Connector\Model\StatusChange
-     * @throws \InvalidArgumentException if the provided argument is not of type 'PaymentStatus'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setPaymentStatus(PaymentStatus $paymentStatus = null)
+    public function setPaymentStatus($paymentStatus)
     {
         return $this->setProperty('paymentStatus', $paymentStatus, 'string');
     }
@@ -115,11 +115,11 @@ class StatusChange extends DataModel
     }
 
     /**
-     * @param ShippingStatus $shippingStatus 
+     * @param string $shippingStatus 
      * @return \jtl\Connector\Model\StatusChange
-     * @throws \InvalidArgumentException if the provided argument is not of type 'ShippingStatus'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setShippingStatus(ShippingStatus $shippingStatus = null)
+    public function setShippingStatus($shippingStatus)
     {
         return $this->setProperty('shippingStatus', $shippingStatus, 'string');
     }
