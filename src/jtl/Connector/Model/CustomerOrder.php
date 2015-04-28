@@ -37,39 +37,29 @@ class CustomerOrder extends DataModel
     const PAYMENT_STATUS_UNPAID = 'unpaid';
 
     /**
+     * @var string - Status when shipping is completed
+     */
+    const SHIPPING_STATUS_COMPLETED = 'completed';
+
+    /**
+     * @var string - Status when order is not shipped
+     */
+    const SHIPPING_STATUS_NOTSHIPPED = 'not_shipped';
+
+    /**
+     * @var string - Status when order is partially shipped
+     */
+    const SHIPPING_STATUS_PARTIALLY = 'partially_shipped';
+
+    /**
      * @var string - Cancelled by merchant or customer
      */
     const STATUS_CANCELLED = 'cancelled';
 
     /**
-     * @var string - Order paid and shipped completely
+     * @var string - Normal order status
      */
-    const STATUS_COMPLETED = 'completed';
-
-    /**
-     * @var string - Initial status for new customerOrder, when customer finished order and order has not yet been paid or fetched
-     */
-    const STATUS_NEW = 'new';
-
-    /**
-     * @var string - Order has been shipped partially
-     */
-    const STATUS_PARTIALLY_SHIPPED = 'partially_shipped';
-
-    /**
-     * @var string - Customer order in process
-     */
-    const STATUS_PROCESSING = 'processed';
-
-    /**
-     * @var string - Order has been shipped
-     */
-    const STATUS_SHIPPED = 'shipped';
-
-    /**
-     * @var string - New status, when changes have been made to customerOrder (e.g. item quantity change)
-     */
-    const STATUS_UPDATED = 'updated';
+    const STATUS_NOTCANCELLED = 'not_cancelled';
 
     /**
      * @var Identity Optional reference to customer. 

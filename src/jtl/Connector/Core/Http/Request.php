@@ -9,6 +9,7 @@ namespace jtl\Connector\Core\Http;
 use \jtl\Connector\Core\Compression\Gzip;
 use \jtl\Connector\Core\Exception\CompressionException;
 use \jtl\Connector\Core\Exception\HttpException;
+use \jtl\Connector\Core\Logger\Logger;
 
 /**
  * Http Request Handler
@@ -171,6 +172,8 @@ class Request
     {
         $jtlrpc = Request::get();
 
+        //Logger::write('request: ' . print_r($_REQUEST, 1), Logger::DEBUG, 'http');
+
         if ($jtlrpc !== null) {
             return Request::stripData($jtlrpc);
         } elseif (Request::isFileupload()) {
@@ -197,6 +200,8 @@ class Request
             }
         } else {
             parse_str(file_get_contents('php://input'));
+
+            //Logger::write('php-input: ' . file_get_contents('php://input'), Logger::DEBUG, 'http');
 
             return $jtlrpc;
         }
