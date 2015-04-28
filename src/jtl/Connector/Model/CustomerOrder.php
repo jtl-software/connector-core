@@ -221,6 +221,14 @@ class CustomerOrder extends DataModel
     protected $shippingMethodName = '';
 
     /**
+     * @var string 
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("shippingStatus")
+     * @Serializer\Accessor(getter="getShippingStatus",setter="setShippingStatus")
+     */
+    protected $shippingStatus = '';
+
+    /**
      * @var string Shipping status
      * @Serializer\Type("string")
      * @Serializer\SerializedName("status")
@@ -574,6 +582,23 @@ class CustomerOrder extends DataModel
     public function getShippingMethodName()
     {
         return $this->shippingMethodName;
+    }
+
+    /**
+     * @param string $shippingStatus 
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setShippingStatus($shippingStatus)
+    {
+        return $this->setProperty('shippingStatus', $shippingStatus, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getShippingStatus()
+    {
+        return $this->shippingStatus;
     }
 
     /**
