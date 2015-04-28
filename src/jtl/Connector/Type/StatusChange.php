@@ -17,14 +17,15 @@ class StatusChange extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('customerOrderId', 'Identity', null, true, true, false),
-            new PropertyInfo('paymentStatus', 'string', '', false, false, false),
-            new PropertyInfo('orderStatus', 'string', '', false, false, false)
+            new PropertyInfo('customerOrderId', 'Identity', null, false, true, false),
+            new PropertyInfo('orderStatus', 'OrderStatus', '', false, false, false),
+            new PropertyInfo('paymentStatus', 'PaymentStatus', '', false, false, false),
+            new PropertyInfo('shippingStatus', 'ShippingStatus', '', false, false, false),
         );
     }
 
     public function isMain()
     {
-        return true;
+        return false;
     }
 }
