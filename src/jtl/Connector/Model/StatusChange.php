@@ -105,24 +105,4 @@ class StatusChange extends DataModel
     {
         return $this->paymentStatus;
     }
-
-    public function getCombinatedStatus()
-    {
-        $order = $this->getOrderStatus();
-        $payment = $this->getPaymentStatus();
-
-        if ($order === CustomerOrder::STATUS_CANCELLED) {
-            return CustomerOrder::STATUS_CANCELLED;
-        } elseif ($shipping === CustomerOrder::SHIPPING_STATUS_NOTSHIPPED && $payment === CustomerOrder::PAYMENT_STATUS_COMPLETED) {
-            return CustomerOrder::COMBO_STATUS_PAID;
-        } elseif ($shipping === CustomerOrder::SHIPPING_STATUS_PARTIALLY && $payment === CustomerOrder::PAYMENT_STATUS_COMPLETED) {
-            return CustomerOrder::COMBO_STATUS_PAID;
-        } elseif ($shipping === CustomerOrder::SHIPPING_STATUS_COMPLETED && $payment === CustomerOrder::PAYMENT_STATUS_UNPAID) {
-            return CustomerOrder::COMBO_STATUS_SHIPPED;
-        } elseif ($shipping === CustomerOrder::SHIPPING_STATUS_COMPLETED && $payment === CustomerOrder::PAYMENT_STATUS_PARTIALLY) {
-            return CustomerOrder::COMBO_STATUS_SHIPPED;
-        } elseif ($shipping === CustomerOrder::SHIPPING_STATUS_COMPLETED && $payment === CustomerOrder::PAYMENT_STATUS_COMPLETED) {
-            return CustomerOrder::COMBO_STATUS_COMPLETED;
-        }
-    }
 }

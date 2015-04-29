@@ -693,24 +693,4 @@ class CustomerOrder extends DataModel
         $this->items = array();
         return $this;
     }
-
-    public function getCombinatedStatus()
-    {
-        $order = $this->getOrderStatus();
-        $payment = $this->getPaymentStatus();
-
-        if ($order === self::STATUS_CANCELLED) {
-            return self::STATUS_CANCELLED;
-        } elseif ($shipping === self::SHIPPING_STATUS_NOTSHIPPED && $payment === self::PAYMENT_STATUS_COMPLETED) {
-            return self::COMBO_STATUS_PAID;
-        } elseif ($shipping === self::SHIPPING_STATUS_PARTIALLY && $payment === self::PAYMENT_STATUS_COMPLETED) {
-            return self::COMBO_STATUS_PAID;
-        } elseif ($shipping === self::SHIPPING_STATUS_COMPLETED && $payment === self::PAYMENT_STATUS_UNPAID) {
-            return self::COMBO_STATUS_SHIPPED;
-        } elseif ($shipping === self::SHIPPING_STATUS_COMPLETED && $payment === self::PAYMENT_STATUS_PARTIALLY) {
-            return self::COMBO_STATUS_SHIPPED;
-        } elseif ($shipping === self::SHIPPING_STATUS_COMPLETED && $payment === self::PAYMENT_STATUS_COMPLETED) {
-            return self::COMBO_STATUS_COMPLETED;
-        }
-    }
 }
