@@ -37,29 +37,39 @@ class CustomerOrder extends DataModel
     const PAYMENT_STATUS_UNPAID = 'unpaid';
 
     /**
-     * @var string - Status when shipping is completed
-     */
-    const SHIPPING_STATUS_COMPLETED = 'completed';
-
-    /**
-     * @var string - Status when order is not shipped
-     */
-    const SHIPPING_STATUS_NOTSHIPPED = 'not_shipped';
-
-    /**
-     * @var string - Status when order is partially shipped
-     */
-    const SHIPPING_STATUS_PARTIALLY = 'partially_shipped';
-
-    /**
      * @var string - Cancelled by merchant or customer
      */
     const STATUS_CANCELLED = 'cancelled';
 
     /**
-     * @var string - Normal order status
+     * @var string - Order paid and shipped completely
      */
-    const STATUS_NOTCANCELLED = 'not_cancelled';
+    const STATUS_COMPLETED = 'completed';
+
+    /**
+     * @var string - Initial status for new customerOrder, when customer finished order and order has not yet been paid or fetched
+     */
+    const STATUS_NEW = 'new';
+
+    /**
+     * @var string - Order has been shipped partially
+     */
+    const STATUS_PARTIALLY_SHIPPED = 'partially_shipped';
+
+    /**
+     * @var string - Order has been shipped
+     */
+    const STATUS_SHIPPED = 'shipped';
+
+    /**
+     * @var string - New status, when changes have been made to customerOrder (e.g. item quantity change)
+     */
+    const STATUS_UPDATED = 'updated';
+
+    /**
+     * @var string - Paid order status
+     */
+    const COMBO_STATUS_CANCELLED = 'cancelled';
 
     /**
      * @var string - Paid order status
@@ -219,14 +229,6 @@ class CustomerOrder extends DataModel
      * @Serializer\Accessor(getter="getShippingMethodName",setter="setShippingMethodName")
      */
     protected $shippingMethodName = '';
-
-    /**
-     * @var string 
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("shippingStatus")
-     * @Serializer\Accessor(getter="getShippingStatus",setter="setShippingStatus")
-     */
-    protected $shippingStatus = '';
 
     /**
      * @var string Shipping status
@@ -585,23 +587,6 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param string $shippingStatus 
-     * @return \jtl\Connector\Model\CustomerOrder
-     */
-    public function setShippingStatus($shippingStatus)
-    {
-        return $this->setProperty('shippingStatus', $shippingStatus, 'string');
-    }
-
-    /**
-     * @return string 
-     */
-    public function getShippingStatus()
-    {
-        return $this->shippingStatus;
-    }
-
-    /**
      * @param string $status Shipping status
      * @return \jtl\Connector\Model\CustomerOrder
      */
@@ -713,7 +698,6 @@ class CustomerOrder extends DataModel
     {
         $order = $this->getOrderStatus();
         $payment = $this->getPaymentStatus();
-        $shipping = $this->getShippingStatus();
 
         if ($order === self::STATUS_CANCELLED) {
             return self::STATUS_CANCELLED;

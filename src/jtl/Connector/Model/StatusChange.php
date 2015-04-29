@@ -45,14 +45,6 @@ class StatusChange extends DataModel
     protected $paymentStatus = '';
 
     /**
-     * @var ShippingStatus 
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("shippingStatus")
-     * @Serializer\Accessor(getter="getShippingStatus",setter="setShippingStatus")
-     */
-    protected $shippingStatus = '';
-
-    /**
      * Constructor
      */
     public function __construct()
@@ -114,29 +106,10 @@ class StatusChange extends DataModel
         return $this->paymentStatus;
     }
 
-    /**
-     * @param string $shippingStatus 
-     * @return \jtl\Connector\Model\StatusChange
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
-     */
-    public function setShippingStatus($shippingStatus)
-    {
-        return $this->setProperty('shippingStatus', $shippingStatus, 'string');
-    }
-
-    /**
-     * @return string 
-     */
-    public function getShippingStatus()
-    {
-        return $this->shippingStatus;
-    }
-
     public function getCombinatedStatus()
     {
         $order = $this->getOrderStatus();
         $payment = $this->getPaymentStatus();
-        $shipping = $this->getShippingStatus();
 
         if ($order === CustomerOrder::STATUS_CANCELLED) {
             return CustomerOrder::STATUS_CANCELLED;
