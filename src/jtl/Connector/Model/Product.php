@@ -134,6 +134,14 @@ class Product extends DataModel
     protected $basePriceQuantity = 0.0;
 
     /**
+     * @var string 
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("basePriceUnitCode")
+     * @Serializer\Accessor(getter="getBasePriceUnitCode",setter="setBasePriceUnitCode")
+     */
+    protected $basePriceUnitCode = '';
+
+    /**
      * @var integer Optional summary
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("buffer")
@@ -308,6 +316,14 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getMeasurementQuantity",setter="setMeasurementQuantity")
      */
     protected $measurementQuantity = 0.0;
+
+    /**
+     * @var string 
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("measurementUnitCode")
+     * @Serializer\Accessor(getter="getMeasurementUnitCode",setter="setMeasurementUnitCode")
+     */
+    protected $measurementUnitCode = '';
 
     /**
      * @var double 
@@ -524,6 +540,14 @@ class Product extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $crossSellings = array();
+
+    /**
+     * @var jtl\Connector\Model\CustomerGroupPackagingQuantity[] 
+     * @Serializer\Type("array<jtl\Connector\Model\CustomerGroupPackagingQuantity>")
+     * @Serializer\SerializedName("customerGroupPackagingQuantities")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $customerGroupPackagingQuantities = array();
 
     /**
      * @var jtl\Connector\Model\ProductFileDownload[] 
@@ -877,6 +901,23 @@ class Product extends DataModel
     public function getBasePriceQuantity()
     {
         return $this->basePriceQuantity;
+    }
+
+    /**
+     * @param string $basePriceUnitCode 
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setBasePriceUnitCode($basePriceUnitCode)
+    {
+        return $this->setProperty('basePriceUnitCode', $basePriceUnitCode, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getBasePriceUnitCode()
+    {
+        return $this->basePriceUnitCode;
     }
 
     /**
@@ -1252,6 +1293,23 @@ class Product extends DataModel
     public function getMeasurementQuantity()
     {
         return $this->measurementQuantity;
+    }
+
+    /**
+     * @param string $measurementUnitCode 
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setMeasurementUnitCode($measurementUnitCode)
+    {
+        return $this->setProperty('measurementUnitCode', $measurementUnitCode, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getMeasurementUnitCode()
+    {
+        return $this->measurementUnitCode;
     }
 
     /**
@@ -1813,6 +1871,43 @@ class Product extends DataModel
     public function clearCrossSellings()
     {
         $this->crossSellings = array();
+        return $this;
+    }
+
+    /**
+     * @param \jtl\Connector\Model\CustomerGroupPackagingQuantity $customerGroupPackagingQuantity
+     * @return \jtl\Connector\Model\Product
+     */
+    public function addCustomerGroupPackagingQuantity(\jtl\Connector\Model\CustomerGroupPackagingQuantity $customerGroupPackagingQuantity)
+    {
+        $this->customerGroupPackagingQuantities[] = $customerGroupPackagingQuantity;
+        return $this;
+    }
+    
+    /**
+     * @param array $customerGroupPackagingQuantities
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setCustomerGroupPackagingQuantities(array $customerGroupPackagingQuantities)
+    {
+        $this->customerGroupPackagingQuantities = $customerGroupPackagingQuantities;
+        return $this;
+    }
+    
+    /**
+     * @return jtl\Connector\Model\CustomerGroupPackagingQuantity[]
+     */
+    public function getCustomerGroupPackagingQuantities()
+    {
+        return $this->customerGroupPackagingQuantities;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\Product
+     */
+    public function clearCustomerGroupPackagingQuantities()
+    {
+        $this->customerGroupPackagingQuantities = array();
         return $this;
     }
 
