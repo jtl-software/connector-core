@@ -30,6 +30,7 @@ class Product extends DataType
             new PropertyInfo('asin', 'string', '', false, false, false),
             new PropertyInfo('availableFrom', 'DateTime', null, false, false, false),
             new PropertyInfo('basePriceDivisor', 'double', 0.0, false, false, false),
+            new PropertyInfo('basePriceFactor', 'double', 0.0, false, false, false),
             new PropertyInfo('basePriceQuantity', 'double', 0.0, false, false, false),
             new PropertyInfo('basePriceUnitCode', 'string', '', false, false, false),
             new PropertyInfo('buffer', 'integer', 0, false, false, false),

@@ -126,6 +126,14 @@ class Product extends DataModel
     protected $basePriceDivisor = 0.0;
 
     /**
+     * @var double 
+     * @Serializer\Type("double")
+     * @Serializer\SerializedName("basePriceFactor")
+     * @Serializer\Accessor(getter="getBasePriceFactor",setter="setBasePriceFactor")
+     */
+    protected $basePriceFactor = 0.0;
+
+    /**
      * @var double Optional base price quantity
      * @Serializer\Type("double")
      * @Serializer\SerializedName("basePriceQuantity")
@@ -884,6 +892,23 @@ class Product extends DataModel
     public function getBasePriceDivisor()
     {
         return $this->basePriceDivisor;
+    }
+
+    /**
+     * @param double $basePriceFactor 
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setBasePriceFactor($basePriceFactor)
+    {
+        return $this->setProperty('basePriceFactor', $basePriceFactor, 'double');
+    }
+
+    /**
+     * @return double 
+     */
+    public function getBasePriceFactor()
+    {
+        return $this->basePriceFactor;
     }
 
     /**
