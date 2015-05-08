@@ -30,6 +30,14 @@ class ProductI18n extends DataModel
     protected $productId = null;
 
     /**
+     * @var string 
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("deliveryStatus")
+     * @Serializer\Accessor(getter="getDeliveryStatus",setter="setDeliveryStatus")
+     */
+    protected $deliveryStatus = '';
+
+    /**
      * @var string Optional product description
      * @Serializer\Type("string")
      * @Serializer\SerializedName("description")
@@ -44,6 +52,14 @@ class ProductI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
+
+    /**
+     * @var string 
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("measurementUnitName")
+     * @Serializer\Accessor(getter="getMeasurementUnitName",setter="setMeasurementUnitName")
+     */
+    protected $measurementUnitName = '';
 
     /**
      * @var string 
@@ -86,6 +102,14 @@ class ProductI18n extends DataModel
     protected $titleTag = '';
 
     /**
+     * @var string 
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("unitName")
+     * @Serializer\Accessor(getter="getUnitName",setter="setUnitName")
+     */
+    protected $unitName = '';
+
+    /**
      * @var string Optional path of product URL
      * @Serializer\Type("string")
      * @Serializer\SerializedName("urlPath")
@@ -120,6 +144,23 @@ class ProductI18n extends DataModel
     }
 
     /**
+     * @param string $deliveryStatus 
+     * @return \jtl\Connector\Model\ProductI18n
+     */
+    public function setDeliveryStatus($deliveryStatus)
+    {
+        return $this->setProperty('deliveryStatus', $deliveryStatus, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getDeliveryStatus()
+    {
+        return $this->deliveryStatus;
+    }
+
+    /**
      * @param string $description Optional product description
      * @return \jtl\Connector\Model\ProductI18n
      */
@@ -151,6 +192,23 @@ class ProductI18n extends DataModel
     public function getLanguageISO()
     {
         return $this->languageISO;
+    }
+
+    /**
+     * @param string $measurementUnitName 
+     * @return \jtl\Connector\Model\ProductI18n
+     */
+    public function setMeasurementUnitName($measurementUnitName)
+    {
+        return $this->setProperty('measurementUnitName', $measurementUnitName, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getMeasurementUnitName()
+    {
+        return $this->measurementUnitName;
     }
 
     /**
@@ -236,6 +294,23 @@ class ProductI18n extends DataModel
     public function getTitleTag()
     {
         return $this->titleTag;
+    }
+
+    /**
+     * @param string $unitName 
+     * @return \jtl\Connector\Model\ProductI18n
+     */
+    public function setUnitName($unitName)
+    {
+        return $this->setProperty('unitName', $unitName, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getUnitName()
+    {
+        return $this->unitName;
     }
 
     /**
