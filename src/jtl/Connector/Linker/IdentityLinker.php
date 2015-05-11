@@ -97,8 +97,7 @@ class IdentityLinker
         'Product' => array(
             'id' => self::TYPE_PRODUCT,
             'masterProductId' => self::TYPE_PRODUCT,
-            'manufacturerId' => self::TYPE_MANUFACTURER,
-            'unitId' => self::TYPE_UNIT
+            'manufacturerId' => self::TYPE_MANUFACTURER
         ),
         'ProductSpecialPrice' => array(
             'productId' => self::TYPE_PRODUCT
