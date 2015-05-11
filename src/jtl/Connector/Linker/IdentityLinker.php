@@ -32,6 +32,7 @@ class IdentityLinker
     const TYPE_PRODUCT = 64;
     const TYPE_SPECIFIC = 128;
     const TYPE_SPECIFIC_VALUE = 256;
+    const TYPE_UNIT = 512;
 
     /**
      * Session Database Mapper
@@ -52,7 +53,8 @@ class IdentityLinker
         'Manufacturer' => self::TYPE_MANUFACTURER,
         'Product' => self::TYPE_PRODUCT,
         'Specific' => self::TYPE_SPECIFIC,
-        'SpecificValue' => self::TYPE_SPECIFIC_VALUE
+        'SpecificValue' => self::TYPE_SPECIFIC_VALUE,
+        'Unit' => self::TYPE_UNIT
     );
 
     protected static $mappings = array(
@@ -97,7 +99,8 @@ class IdentityLinker
         'Product' => array(
             'id' => self::TYPE_PRODUCT,
             'masterProductId' => self::TYPE_PRODUCT,
-            'manufacturerId' => self::TYPE_MANUFACTURER
+            'manufacturerId' => self::TYPE_MANUFACTURER,
+            'unitId' => self::TYPE_UNIT
         ),
         'ProductSpecialPrice' => array(
             'productId' => self::TYPE_PRODUCT
@@ -208,6 +211,12 @@ class IdentityLinker
         ),
         'StatusChange' => array(
             'customerOrderId' => self::TYPE_CUSTOMER_ORDER
+        ),
+        'Unit' => array(
+            'id' => self::TYPE_UNIT
+        ),
+        'UnitI18n' => array(
+            'unitId' => self::TYPE_UNIT
         )
     );
 
