@@ -150,6 +150,14 @@ class Product extends DataModel
     protected $basePriceUnitCode = '';
 
     /**
+     * @var string 
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("basePriceUnitName")
+     * @Serializer\Accessor(getter="getBasePriceUnitName",setter="setBasePriceUnitName")
+     */
+    protected $basePriceUnitName = '';
+
+    /**
      * @var integer Optional summary
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("buffer")
@@ -943,6 +951,23 @@ class Product extends DataModel
     public function getBasePriceUnitCode()
     {
         return $this->basePriceUnitCode;
+    }
+
+    /**
+     * @param string $basePriceUnitName 
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setBasePriceUnitName($basePriceUnitName)
+    {
+        return $this->setProperty('basePriceUnitName', $basePriceUnitName, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getBasePriceUnitName()
+    {
+        return $this->basePriceUnitName;
     }
 
     /**

@@ -33,6 +33,7 @@ class Product extends DataType
             new PropertyInfo('basePriceFactor', 'double', 0.0, false, false, false),
             new PropertyInfo('basePriceQuantity', 'double', 0.0, false, false, false),
             new PropertyInfo('basePriceUnitCode', 'string', '', false, false, false),
+            new PropertyInfo('basePriceUnitName', 'string', '', false, false, false),
             new PropertyInfo('buffer', 'integer', 0, false, false, false),
             new PropertyInfo('considerBasePrice', 'boolean', false, false, false, false),
             new PropertyInfo('considerStock', 'boolean', false, false, false, false),
