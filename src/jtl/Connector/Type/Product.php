@@ -18,7 +18,6 @@ class Product extends DataType
     {
         return array(
             new PropertyInfo('basePriceUnitId', 'Identity', null, false, true, false),
-            new PropertyInfo('deliveryStatusId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('manufacturerId', 'Identity', null, false, true, false),
             new PropertyInfo('masterProductId', 'Identity', null, false, true, false),

@@ -30,14 +30,6 @@ class Product extends DataModel
     protected $basePriceUnitId = null;
 
     /**
-     * @var Identity Reference to (current) deliveryStatus
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("deliveryStatusId")
-     * @Serializer\Accessor(getter="getDeliveryStatusId",setter="setDeliveryStatusId")
-     */
-    protected $deliveryStatusId = null;
-
-    /**
      * @var Identity Unique product id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
@@ -656,7 +648,6 @@ class Product extends DataModel
         $this->partsListId = new Identity();
         $this->productTypeId = new Identity();
         $this->manufacturerId = new Identity();
-        $this->deliveryStatusId = new Identity();
         $this->measurementUnitId = new Identity();
         $this->basePriceUnitId = new Identity();
         $this->unitId = new Identity();
@@ -678,24 +669,6 @@ class Product extends DataModel
     public function getBasePriceUnitId()
     {
         return $this->basePriceUnitId;
-    }
-
-    /**
-     * @param Identity $deliveryStatusId Reference to (current) deliveryStatus
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setDeliveryStatusId(Identity $deliveryStatusId)
-    {
-        return $this->setProperty('deliveryStatusId', $deliveryStatusId, 'Identity');
-    }
-
-    /**
-     * @return Identity Reference to (current) deliveryStatus
-     */
-    public function getDeliveryStatusId()
-    {
-        return $this->deliveryStatusId;
     }
 
     /**
