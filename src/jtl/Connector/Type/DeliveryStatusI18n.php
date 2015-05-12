@@ -12,13 +12,14 @@ use \jtl\Connector\Type\PropertyInfo;
  * @access public
  * @package jtl\Connector\Type
  */
-class DeliveryStatus extends DataType
+class DeliveryStatusI18n extends DataType
 {
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('id', 'Identity', null, true, true, false),
-            new PropertyInfo('i18ns', '\jtl\Connector\Model\DeliveryStatusI18n', null, false, false, true),
+            new PropertyInfo('deliveryStatusId', 'Identity', null, false, true, false),
+            new PropertyInfo('languageISO', 'string', '', false, false, false),
+            new PropertyInfo('name', 'string', '', false, false, false),
         );
     }
 

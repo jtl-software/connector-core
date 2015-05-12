@@ -42,16 +42,6 @@ class CustomerOrder extends DataModel
     const STATUS_CANCELLED = 'cancelled';
 
     /**
-     * @var string - Order paid and shipped completely
-     */
-    const STATUS_COMPLETED = 'completed';
-
-    /**
-     * @var string - Initial status for new customerOrder, when customer finished order and order has not yet been paid or fetched
-     */
-    const STATUS_NEW = 'new';
-
-    /**
      * @var string - Order has been shipped partially
      */
     const STATUS_PARTIALLY_SHIPPED = 'partially_shipped';
@@ -60,31 +50,6 @@ class CustomerOrder extends DataModel
      * @var string - Order has been shipped
      */
     const STATUS_SHIPPED = 'shipped';
-
-    /**
-     * @var string - New status, when changes have been made to customerOrder (e.g. item quantity change)
-     */
-    const STATUS_UPDATED = 'updated';
-
-    /**
-     * @var string - Paid order status
-     */
-    const COMBO_STATUS_CANCELLED = 'cancelled';
-
-    /**
-     * @var string - Paid order status
-     */
-    const COMBO_STATUS_PAID = 'paid';
-
-    /**
-     * @var string - Shipped order status
-     */
-    const COMBO_STATUS_SHIPPED = 'shipped';
-
-    /**
-     * @var string - Completed order status
-     */
-    const COMBO_STATUS_COMPLETED = 'completed';
 
     /**
      * @var Identity Optional reference to customer. 

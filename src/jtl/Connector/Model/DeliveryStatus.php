@@ -30,20 +30,12 @@ class DeliveryStatus extends DataModel
     protected $id = null;
 
     /**
-     * @var string Locale
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
+     * @var jtl\Connector\Model\DeliveryStatusI18n[] 
+     * @Serializer\Type("array<jtl\Connector\Model\DeliveryStatusI18n>")
+     * @Serializer\SerializedName("i18ns")
+     * @Serializer\AccessType("reflection")
      */
-    protected $languageISO = '';
-
-    /**
-     * @var string Localized delivery status text
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("name")
-     * @Serializer\Accessor(getter="getName",setter="setName")
-     */
-    protected $name = '';
+    protected $i18ns = array();
 
     /**
      * Constructor
@@ -72,36 +64,39 @@ class DeliveryStatus extends DataModel
     }
 
     /**
-     * @param string $languageISO Locale
+     * @param \jtl\Connector\Model\DeliveryStatusI18n $i18n
      * @return \jtl\Connector\Model\DeliveryStatus
      */
-    public function setLanguageISO($languageISO)
+    public function addI18n(\jtl\Connector\Model\DeliveryStatusI18n $i18n)
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->i18ns[] = $i18n;
+        return $this;
     }
-
+    
     /**
-     * @return string Locale
-     */
-    public function getLanguageISO()
-    {
-        return $this->languageISO;
-    }
-
-    /**
-     * @param string $name Localized delivery status text
+     * @param array $i18ns
      * @return \jtl\Connector\Model\DeliveryStatus
      */
-    public function setName($name)
+    public function setI18ns(array $i18ns)
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->i18ns = $i18ns;
+        return $this;
+    }
+    
+    /**
+     * @return jtl\Connector\Model\DeliveryStatusI18n[]
+     */
+    public function getI18ns()
+    {
+        return $this->i18ns;
     }
 
     /**
-     * @return string Localized delivery status text
+     * @return \jtl\Connector\Model\DeliveryStatus
      */
-    public function getName()
+    public function clearI18ns()
     {
-        return $this->name;
+        $this->i18ns = array();
+        return $this;
     }
 }

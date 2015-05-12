@@ -18,7 +18,6 @@ class TaxRate extends DataType
     {
         return array(
             new PropertyInfo('id', 'Identity', null, false, true, false),
-            new PropertyInfo('priority', 'integer', 0, false, false, false),
             new PropertyInfo('rate', 'double', 0.0, false, false, false),
         );
     }

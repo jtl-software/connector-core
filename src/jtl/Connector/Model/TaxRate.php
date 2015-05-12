@@ -29,14 +29,6 @@ class TaxRate extends DataModel
     protected $id = null;
 
     /**
-     * @var integer 
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("priority")
-     * @Serializer\Accessor(getter="getPriority",setter="setPriority")
-     */
-    protected $priority = 0;
-
-    /**
      * @var double 
      * @Serializer\Type("double")
      * @Serializer\SerializedName("rate")
@@ -68,23 +60,6 @@ class TaxRate extends DataModel
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param integer $priority 
-     * @return \jtl\Connector\Model\TaxRate
-     */
-    public function setPriority($priority)
-    {
-        return $this->setProperty('priority', $priority, 'integer');
-    }
-
-    /**
-     * @return integer 
-     */
-    public function getPriority()
-    {
-        return $this->priority;
     }
 
     /**
