@@ -33,6 +33,7 @@ class Connector extends Singleton implements IEndpointConnector
     protected $eventDispatcher;
     protected $config;
     protected $method;
+    protected $useSuperGlobals = true;
     protected $modelNamespace = 'jtl\Connector\Model';
 
     public function initialize()
@@ -174,6 +175,14 @@ class Connector extends Singleton implements IEndpointConnector
     public function getMethod()
     {
         return $this->method;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getUseSuperGlobals()
+    {
+        return $this->useSuperGlobals;
     }
 
     /**

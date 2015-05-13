@@ -166,11 +166,17 @@ class Request
      *
      * @throws CompressionException
      * @throws HttpException
+     * @param boolean $useSuper
      * @return string|null
      */
-    public static function handle()
+    public static function handle($useSuper = true)
     {
-        $jtlrpc = Request::get();
+        $jtlrpc = null;
+        if ($useSuper) {
+            $jtlrpc = Request::get();
+        } else {
+            parse_str(file_get_contents('php://input'));
+        }
 
         //Logger::write('request: ' . print_r($_REQUEST, 1), Logger::DEBUG, 'http');
 

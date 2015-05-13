@@ -88,10 +88,14 @@ class Application extends CoreApplication
     {
         AnnotationRegistry::registerLoader('class_exists');
 
+        if ($this->connector === null) {
+            throw new ApplicationException('No connector registed');
+        }
+
         // Event Dispatcher
         $this->eventDispatcher = new EventDispatcher();
 
-        $jtlrpc = Request::handle();
+        $jtlrpc = Request::handle($this->connector->getUseSuperGlobals());
         $sessionId = Request::getSession();
         $requestpackets = RequestPacket::build($jtlrpc);
 
@@ -109,10 +113,6 @@ class Application extends CoreApplication
 
         // Start Configuration
         $this->startConfiguration();
-
-        if ($this->connector === null) {
-            throw new ApplicationException('No connector registed');
-        }
 
         // Register Event Dispatcher
         $this->startEventDispatcher();
