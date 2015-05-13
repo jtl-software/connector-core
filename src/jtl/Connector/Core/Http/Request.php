@@ -172,7 +172,7 @@ class Request
     public static function handle($useSuper = true)
     {
         $jtlrpc = null;
-        if ($useSuper) {
+        if ($useSuper || strlen(file_get_contents('php://input')) == 0) {
             $jtlrpc = Request::get();
         } else {
             parse_str(file_get_contents('php://input'));
