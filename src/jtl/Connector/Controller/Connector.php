@@ -17,6 +17,7 @@ use \jtl\Connector\Core\Logger\Logger;
 use \jtl\Connector\Linker\ChecksumLinker;
 use \jtl\Connector\Checksum\IChecksum;
 use \jtl\Connector\Formatter\ExceptionFormatter;
+use \jtl\Connector\Core\Exception\ControllerException;
 
 /**
  * Base Config Controller
@@ -34,9 +35,23 @@ class Connector extends CoreController
     public function init($params = null)
     {
         $ret = new Action();
+        $ret->setHandled(true);
+
         try {
-            $ret->setResult($this->getConfig()->read($params));
-            $ret->setHandled(true);
+            // PHP
+            if (!version_compare(PHP_VERSION, '5.3', '>=')) {
+                throw new ControllerException(sprintf('The connector needs at least PHP version 5.3, %s given', PHP_VERSION));
+            }
+
+            // Sqlite 3
+            if (!extension_loaded('sqlite3') || !class_exists('Sqlite3')) {
+                throw new ControllerException('The connector needs the sqlite3 extension');
+            }
+
+            // Linking garbage collecting
+            Application()->getConnector()->getPrimaryKeyMapper()->gc();
+
+            $ret->setResult(true);
         } catch (\Exception $e) {
             $err = new Error();
             $err->setCode($e->getCode());

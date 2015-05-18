@@ -53,4 +53,11 @@ interface IPrimaryKeyMapper
      * @return boolean
      */
     public function clear();
+
+    /**
+     * Garbage Collect the entire link table
+     *
+     * @return boolean
+     */
+    public function gc();
 }
