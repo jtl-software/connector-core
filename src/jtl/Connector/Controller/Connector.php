@@ -23,7 +23,6 @@ use \jtl\Connector\Core\Exception\ControllerException;
  * Base Config Controller
  *
  * @access public
- * @author David Spickers <david.spickers@jtl-software.de>
  */
 class Connector extends CoreController
 {    

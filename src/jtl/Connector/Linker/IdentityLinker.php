@@ -32,6 +32,7 @@ class IdentityLinker
     const TYPE_PRODUCT = 64;
     const TYPE_SPECIFIC = 128;
     const TYPE_SPECIFIC_VALUE = 256;
+    const TYPE_PAYMENT = 512;
 
     /**
      * Session Database Mapper
@@ -52,7 +53,8 @@ class IdentityLinker
         'Manufacturer' => self::TYPE_MANUFACTURER,
         'Product' => self::TYPE_PRODUCT,
         'Specific' => self::TYPE_SPECIFIC,
-        'SpecificValue' => self::TYPE_SPECIFIC_VALUE
+        'SpecificValue' => self::TYPE_SPECIFIC_VALUE,
+        'Payment' => self::TYPE_PAYMENT
     );
 
     protected static $mappings = array(
@@ -207,6 +209,10 @@ class IdentityLinker
             'specificValueId' => self::TYPE_SPECIFIC_VALUE
         ),
         'StatusChange' => array(
+            'customerOrderId' => self::TYPE_CUSTOMER_ORDER
+        ),
+        'Payment' => array(
+            'id' => self::TYPE_PAYMENT,
             'customerOrderId' => self::TYPE_CUSTOMER_ORDER
         )
     );
