@@ -18,7 +18,7 @@ class Payment extends DataType
     {
         return array(
             new PropertyInfo('customerOrderId', 'Identity', null, false, true, false),
-            new PropertyInfo('id', 'Identity', null, false, true, false),
+            new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('billingInfo', 'string', '', false, false, false),
             new PropertyInfo('creationDate', 'DateTime', null, false, false, false),
             new PropertyInfo('totalSum', 'double', 0.0, false, false, false),
@@ -28,6 +28,6 @@ class Payment extends DataType
 
     public function isMain()
     {
-        return false;
+        return true;
     }
 }
