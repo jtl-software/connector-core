@@ -53,6 +53,14 @@ class Payment extends DataModel
     protected $creationDate = null;
 
     /**
+     * @var string
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("paymentModuleCode")
+     * @Serializer\Accessor(getter="getPaymentModuleCode",setter="setPaymentModuleCode")
+     */
+    protected $paymentModuleCode = '';
+
+    /**
      * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("totalSum")
@@ -146,6 +154,23 @@ class Payment extends DataModel
     public function getCreationDate()
     {
         return $this->creationDate;
+    }
+
+    /**
+     * @param string $paymentModuleCode
+     * @return \jtl\Connector\Model\Payment
+     */
+    public function setPaymentModuleCode($paymentModuleCode)
+    {
+        return $this->setProperty('paymentModuleCode', $paymentModuleCode, 'string');
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaymentModuleCode()
+    {
+        return $this->paymentModuleCode;
     }
 
     /**
