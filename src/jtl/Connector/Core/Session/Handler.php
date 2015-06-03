@@ -86,6 +86,9 @@ abstract class Handler
         session_regenerate_id(true);
         session_start();
 
+        $this->_lifetime = 7200;
+        $this->_sessionId = session_id();
+
         Logger::write(sprintf('Session started with id (%s)', session_id()), Logger::DEBUG, 'session');
     }
     
@@ -123,7 +126,6 @@ abstract class Handler
     public function open($savePath, $sessionName)
     {
         //$this->_lifetime = get_cfg_var("session.gc_maxlifetime");
-        $this->_lifetime = 7200;
 
         Logger::write(sprintf('Open session with savePath (%s) and sessionName (%s)', $savePath, $sessionName), Logger::DEBUG, 'session');
         
@@ -146,8 +148,6 @@ abstract class Handler
     public function read($sessionId)
     {
         $sessionId = $this->_db->escapeString($sessionId);
-        
-        $this->_sessionId = $sessionId;
         
         $rows = $this->_db->query("SELECT sessionData
 					        			FROM session
