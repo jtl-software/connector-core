@@ -8,6 +8,7 @@
 namespace jtl\Connector\Controller;
 
 use \jtl\Connector\Core\Controller\Controller as CoreController;
+use jtl\Connector\Core\System\Check;
 use \jtl\Connector\Result\Action;
 use \jtl\Connector\Core\Rpc\Error;
 use \jtl\Connector\Application\Application;
@@ -37,15 +38,7 @@ class Connector extends CoreController
         $ret->setHandled(true);
 
         try {
-            // PHP
-            if (!version_compare(PHP_VERSION, '5.3', '>=')) {
-                throw new ControllerException(sprintf('The connector needs at least PHP version 5.3, %s given', PHP_VERSION));
-            }
-
-            // Sqlite 3
-            if (!extension_loaded('sqlite3') || !class_exists('Sqlite3')) {
-                throw new ControllerException('The connector needs the sqlite3 extension');
-            }
+            Check::run();
 
             // Linking garbage collecting
             Application()->getConnector()->getPrimaryKeyMapper()->gc();
