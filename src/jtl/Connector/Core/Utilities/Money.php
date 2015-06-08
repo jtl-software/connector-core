@@ -16,7 +16,7 @@ class Money
     {
         $vat = doubleval($vat);
         if ($vat <= 0) {
-            throw new \InvalidArgumentException("param vat ({$vat}) must be larger than 0");
+            return $net;
         }
         
         return $net * ($vat / 100 + 1);
@@ -26,7 +26,7 @@ class Money
     {
         $vat = doubleval($vat);
         if ($vat <= 0) {
-            throw new \InvalidArgumentException("param vat ({$vat}) must be larger than 0");
+            return $gross;
         }
 
         return $gross / ($vat / 100 + 1);
