@@ -14,8 +14,8 @@ class Check
     public static function run()
     {
         // PHP
-        if (!version_compare(PHP_VERSION, '5.3', '>=')) {
-            throw new MissingRequirementException(sprintf('The connector needs at least PHP version 5.3, %s given', PHP_VERSION));
+        if (!version_compare(PHP_VERSION, '5.4', '>=')) {
+            throw new MissingRequirementException(sprintf('The connector needs at least PHP version 5.4, %s given', PHP_VERSION));
         }
 
         // Sqlite 3
