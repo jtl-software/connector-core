@@ -164,7 +164,7 @@ abstract class Producer extends Baseclass implements IProducer
     /**
      * Starts the exporting process.
      *
-     * @param \jtl\Connector\Feature\Exporter\IExporter $export The exporter
+     * @param \jtl\Connector\Feature\Exporter\IExporter $exporter The exporter
      * object, that implements the IExporter interface to be conform to this
      * manager/producer.
      *

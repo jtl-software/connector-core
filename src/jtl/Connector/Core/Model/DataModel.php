@@ -75,6 +75,7 @@ abstract class DataModel extends Model
      * Object Mapping
      *
      * @param boolean $toWawi
+     * @param mixed $obj Object to map
      */
     public function map($toWawi = false, \stdClass $obj = null)
     {

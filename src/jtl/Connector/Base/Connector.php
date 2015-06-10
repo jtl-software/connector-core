@@ -188,7 +188,7 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * Method Setter
      *
-     * @param string $method
+     * @param string $modelNamespace
      * @return \jtl\Connector\Core\Controller\Controller
      */
     public function setModelNamespace($modelNamespace)

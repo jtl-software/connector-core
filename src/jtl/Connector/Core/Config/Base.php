@@ -221,20 +221,20 @@ class Base
      * @param \stdClass $values The key value array that should be written.
      * @return array
      */
-    public function write($obj)
+    public function write($values)
     {
-        if (!is_object($obj)) {
+        if (!is_object($values)) {
             throw new ConfigException('Object required', 100);
         }
-        $vars = SystemTool::get_object_vars($obj);
+        $vars = SystemTool::get_object_vars($values);
         if ($vars === null) {
             throw new ConfigException('Unable to read the object variables', 100);
         }
         if (!array_key_exists('key', $vars) || !array_key_exists('value', $vars)) {
             throw new ConfigException('Your object doesn\'t fit the config schema. You are required to use the parameters "key" and "value".', 100);
         }
-        $key = $obj->key;
-        $value = $obj->value;
+        $key = $values->key;
+        $value = $values->value;
         if (!empty($this->loaders)) {
             foreach ($this->loaders as $loader) {
                 if ($loader->isWriteable()) {

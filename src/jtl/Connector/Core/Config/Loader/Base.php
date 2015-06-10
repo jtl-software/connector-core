@@ -76,6 +76,7 @@ abstract class Base implements ILoader
      * Returns a defined key.
      *
      * @param string $key Should be a key inside of the data array.
+     * @param string $default Default configuration value
      * @return mixed
      */
     public function read($key, $default = null)

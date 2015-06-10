@@ -41,9 +41,9 @@ class Json extends BaseLoader
      *
      * @param string $file The full filename of a JSON config file
      */
-    public function __construct($json_file)
+    public function __construct($file)
     {
-        $this->file = $json_file;
+        $this->file = $file;
     }
 
     /**

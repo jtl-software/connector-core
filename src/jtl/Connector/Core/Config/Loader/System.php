@@ -181,8 +181,6 @@ class System extends BaseLoader
 
     /**
      * Returns the server load.
-     *
-     * @param bool $use_average
      */
     public function setSectionLoad()
     {

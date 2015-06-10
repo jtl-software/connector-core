@@ -62,7 +62,7 @@ class Statistic extends DataModel
     }
     
     /**
-     * @param  string $pending
+     * @param  string $controllerName
      * @return \jtl\Connector\Model\Statistic
      * @throws InvalidArgumentException if the provided argument is not of type 'string'.
      */

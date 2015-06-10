@@ -43,7 +43,9 @@ abstract class Handler
     /**
      * Constructor
      *
-     * @param \jtl\Connector\Core\Database\IDatabase $db
+     * @param  \jtl\Connector\Core\Database\IDatabase $db
+     * @param  $sessionId Connector session ID
+     * @param  $sessionName PHP session Name
      * @throws \jtl\Connector\Core\Exception\SessionException
      */
     public function __construct(IDatabase $db, $sessionId = null, $sessionName = "jtlConnector")

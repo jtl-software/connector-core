@@ -33,12 +33,12 @@ class Json extends BaseImporter
     /**
      * Creates the instance.
      *
-     * @param string $file The full filename of a JSON file that will be read
+     * @param string $json The full filename of a JSON file that will be read
      * inside of the load method.
      */
-    public function __construct($json_file)
+    public function __construct($json)
     {
-        $this->file = $json_file;
+        $this->file = $json;
     }
 
     /**

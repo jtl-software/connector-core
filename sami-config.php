@@ -9,8 +9,7 @@ $iterator = Finder::create()
     ->in($dir = __DIR__ . '/src');
 
 return new Sami($iterator, array(
-    'theme'     => 'default',
-    'title'     => 'JTL-Connector documentation',
-    'build_dir' => __DIR__ . '/docs',
-    'cache_dir' => __DIR__ . '/cache',
+    'title'         => 'JTL-Connector documentation',
+    'build_dir'     => __DIR__ . '/docs',
+    'cache_dir'     => __DIR__ . '/cache',
 ));

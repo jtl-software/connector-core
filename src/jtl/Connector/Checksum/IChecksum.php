@@ -22,7 +22,7 @@ interface IChecksum
     public function getForeignKey();
 
     /**
-     * @param string $endpointId
+     * @param string $endpoint
      * @return self
      */
     public function setEndpoint($endpoint);

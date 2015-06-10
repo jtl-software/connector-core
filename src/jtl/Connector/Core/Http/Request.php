@@ -92,9 +92,9 @@ class Request
     /**
      * Moves an uploaded file to a new location
      *
-     * @param string $name
      * @param string $path
      * @param string $filename
+     * @param string $name
      * @return boolean
      */
     public static function moveFileupload($path, $filename, $name = "jtlrpc")

@@ -72,7 +72,7 @@ class RpcMethod
     /**
      * Action Name Builder
      *
-     * @param string $controller
+     * @param string $action
      * @return string
      */
     public static function buildAction($action)

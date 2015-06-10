@@ -106,7 +106,8 @@ class QueryFilter
     /**
      * Add one Filter
      *
-     * @param string $filter
+     * @param string $key Filter key
+     * @param string $value Filter value
      * @return \jtl\Connector\Core\Model\QueryFilter
      */
     public function addFilter($key, $value)
