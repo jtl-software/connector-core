@@ -1,25 +1,30 @@
 <?php
 /**
- * @copyright 2010-2014 JTL-Software GmbH
+ * @copyright 2010-2015 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Ack
+ * @subpackage Product
  */
 
 namespace jtl\Connector\Model;
 
+use DateTime;
 use JMS\Serializer\Annotation as Serializer;
-use \jtl\Connector\Checksum\IChecksum;
 
 /**
- * Checksum
  *
  * @access public
  * @package jtl\Connector\Model
- * @subpackage Internal
+ * @subpackage Product
+ * 
  * @Serializer\AccessType("public_method")
  */
-class Checksum extends DataModel implements IChecksum
+class Checksum extends DataModel
 {
+    /**
+     * @var int - Checksum used to check variations for change
+     */
+    const TYPE_VARIATION = 1;
+
     /**
      * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -40,7 +45,7 @@ class Checksum extends DataModel implements IChecksum
      * @var boolean 
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("hasChanged")
-     * @Serializer\Accessor(getter="hasChanged",setter="setHasChanged")
+     * @Serializer\Accessor(getter="getHasChanged",setter="setHasChanged")
      */
     protected $hasChanged = false;
 
@@ -53,16 +58,24 @@ class Checksum extends DataModel implements IChecksum
     protected $host = '';
 
     /**
-     * @var int 
-     * @Serializer\Type("integer")
+     * @var ChecksumType 
+     * @Serializer\Type("string")
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
-    protected $type = 0;
+    protected $type = '';
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->foreignKey = new Identity();
+    }
 
     /**
      * @param Identity $foreignKey 
-     * @return \jtl\Connector\Model\ProductChecksum
+     * @return \jtl\Connector\Model\Checksum
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setForeignKey(Identity $foreignKey)
@@ -80,8 +93,7 @@ class Checksum extends DataModel implements IChecksum
 
     /**
      * @param string $endpoint 
-     * @return \jtl\Connector\Model\ProductChecksum
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @return \jtl\Connector\Model\Checksum
      */
     public function setEndpoint($endpoint)
     {
@@ -98,8 +110,7 @@ class Checksum extends DataModel implements IChecksum
 
     /**
      * @param boolean $hasChanged 
-     * @return \jtl\Connector\Model\ProductChecksum
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
+     * @return \jtl\Connector\Model\Checksum
      */
     public function setHasChanged($hasChanged)
     {
@@ -109,15 +120,14 @@ class Checksum extends DataModel implements IChecksum
     /**
      * @return boolean 
      */
-    public function hasChanged()
+    public function getHasChanged()
     {
         return $this->hasChanged;
     }
 
     /**
      * @param string $host 
-     * @return \jtl\Connector\Model\ProductChecksum
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @return \jtl\Connector\Model\Checksum
      */
     public function setHost($host)
     {
@@ -133,17 +143,17 @@ class Checksum extends DataModel implements IChecksum
     }
 
     /**
-     * @param int $type 
-     * @return \jtl\Connector\Model\ProductChecksum
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     * @param ChecksumType $type 
+     * @return \jtl\Connector\Model\Checksum
+     * @throws \InvalidArgumentException if the provided argument is not of type 'ChecksumType'.
      */
-    public function setType($type)
+    public function setType(ChecksumType $type = null)
     {
-        return $this->setProperty('type', $type, 'int');
+        return $this->setProperty('type', $type, 'string');
     }
 
     /**
-     * @return int 
+     * @return string 
      */
     public function getType()
     {

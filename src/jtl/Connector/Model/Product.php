@@ -534,14 +534,6 @@ class Product extends DataModel
     protected $configGroups = array();
 
     /**
-     * @var jtl\Connector\Model\ProductCrossSelling[] 
-     * @Serializer\Type("array<jtl\Connector\Model\ProductCrossSelling>")
-     * @Serializer\SerializedName("crossSellings")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $crossSellings = array();
-
-    /**
      * @var jtl\Connector\Model\CustomerGroupPackagingQuantity[] 
      * @Serializer\Type("array<jtl\Connector\Model\CustomerGroupPackagingQuantity>")
      * @Serializer\SerializedName("customerGroupPackagingQuantities")
@@ -1832,43 +1824,6 @@ class Product extends DataModel
     public function clearConfigGroups()
     {
         $this->configGroups = array();
-        return $this;
-    }
-
-    /**
-     * @param \jtl\Connector\Model\ProductCrossSelling $crossSelling
-     * @return \jtl\Connector\Model\Product
-     */
-    public function addCrossSelling(\jtl\Connector\Model\ProductCrossSelling $crossSelling)
-    {
-        $this->crossSellings[] = $crossSelling;
-        return $this;
-    }
-    
-    /**
-     * @param array $crossSellings
-     * @return \jtl\Connector\Model\Product
-     */
-    public function setCrossSellings(array $crossSellings)
-    {
-        $this->crossSellings = $crossSellings;
-        return $this;
-    }
-    
-    /**
-     * @return jtl\Connector\Model\ProductCrossSelling[]
-     */
-    public function getCrossSellings()
-    {
-        return $this->crossSellings;
-    }
-
-    /**
-     * @return \jtl\Connector\Model\Product
-     */
-    public function clearCrossSellings()
-    {
-        $this->crossSellings = array();
         return $this;
     }
 

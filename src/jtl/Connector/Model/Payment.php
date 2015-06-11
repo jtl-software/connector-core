@@ -15,13 +15,13 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- *
+ * 
  * @Serializer\AccessType("public_method")
  */
 class Payment extends DataModel
 {
     /**
-     * @var Identity
+     * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("customerOrderId")
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
@@ -29,7 +29,7 @@ class Payment extends DataModel
     protected $customerOrderId = null;
 
     /**
-     * @var Identity
+     * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
@@ -37,7 +37,7 @@ class Payment extends DataModel
     protected $id = null;
 
     /**
-     * @var string
+     * @var string 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("billingInfo")
      * @Serializer\Accessor(getter="getBillingInfo",setter="setBillingInfo")
@@ -45,7 +45,7 @@ class Payment extends DataModel
     protected $billingInfo = '';
 
     /**
-     * @var DateTime
+     * @var DateTime 
      * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
@@ -53,7 +53,7 @@ class Payment extends DataModel
     protected $creationDate = null;
 
     /**
-     * @var string
+     * @var string 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("paymentModuleCode")
      * @Serializer\Accessor(getter="getPaymentModuleCode",setter="setPaymentModuleCode")
@@ -61,7 +61,7 @@ class Payment extends DataModel
     protected $paymentModuleCode = '';
 
     /**
-     * @var double
+     * @var double 
      * @Serializer\Type("double")
      * @Serializer\SerializedName("totalSum")
      * @Serializer\Accessor(getter="getTotalSum",setter="setTotalSum")
@@ -69,7 +69,7 @@ class Payment extends DataModel
     protected $totalSum = 0.0;
 
     /**
-     * @var string
+     * @var string 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("transactionId")
      * @Serializer\Accessor(getter="getTransactionId",setter="setTransactionId")
@@ -86,7 +86,7 @@ class Payment extends DataModel
     }
 
     /**
-     * @param Identity $customerOrderId
+     * @param Identity $customerOrderId 
      * @return \jtl\Connector\Model\Payment
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -96,7 +96,7 @@ class Payment extends DataModel
     }
 
     /**
-     * @return Identity
+     * @return Identity 
      */
     public function getCustomerOrderId()
     {
@@ -104,7 +104,7 @@ class Payment extends DataModel
     }
 
     /**
-     * @param Identity $id
+     * @param Identity $id 
      * @return \jtl\Connector\Model\Payment
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -114,7 +114,7 @@ class Payment extends DataModel
     }
 
     /**
-     * @return Identity
+     * @return Identity 
      */
     public function getId()
     {
@@ -122,7 +122,7 @@ class Payment extends DataModel
     }
 
     /**
-     * @param string $billingInfo
+     * @param string $billingInfo 
      * @return \jtl\Connector\Model\Payment
      */
     public function setBillingInfo($billingInfo)
@@ -131,7 +131,7 @@ class Payment extends DataModel
     }
 
     /**
-     * @return string
+     * @return string 
      */
     public function getBillingInfo()
     {
@@ -139,7 +139,7 @@ class Payment extends DataModel
     }
 
     /**
-     * @param DateTime $creationDate
+     * @param DateTime $creationDate 
      * @return \jtl\Connector\Model\Payment
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
@@ -149,7 +149,7 @@ class Payment extends DataModel
     }
 
     /**
-     * @return DateTime
+     * @return DateTime 
      */
     public function getCreationDate()
     {
@@ -157,7 +157,7 @@ class Payment extends DataModel
     }
 
     /**
-     * @param string $paymentModuleCode
+     * @param string $paymentModuleCode 
      * @return \jtl\Connector\Model\Payment
      */
     public function setPaymentModuleCode($paymentModuleCode)
@@ -166,7 +166,7 @@ class Payment extends DataModel
     }
 
     /**
-     * @return string
+     * @return string 
      */
     public function getPaymentModuleCode()
     {
@@ -174,7 +174,7 @@ class Payment extends DataModel
     }
 
     /**
-     * @param double $totalSum
+     * @param double $totalSum 
      * @return \jtl\Connector\Model\Payment
      */
     public function setTotalSum($totalSum)
@@ -183,7 +183,7 @@ class Payment extends DataModel
     }
 
     /**
-     * @return double
+     * @return double 
      */
     public function getTotalSum()
     {
@@ -191,7 +191,7 @@ class Payment extends DataModel
     }
 
     /**
-     * @param string $transactionId
+     * @param string $transactionId 
      * @return \jtl\Connector\Model\Payment
      */
     public function setTransactionId($transactionId)
@@ -200,7 +200,7 @@ class Payment extends DataModel
     }
 
     /**
-     * @return string
+     * @return string 
      */
     public function getTransactionId()
     {
