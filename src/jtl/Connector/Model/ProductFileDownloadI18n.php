@@ -11,7 +11,6 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Localized fileDownload name and  description.
  *
  * @access public
  * @package jtl\Connector\Model
@@ -19,18 +18,10 @@ use JMS\Serializer\Annotation as Serializer;
  * 
  * @Serializer\AccessType("public_method")
  */
-class FileDownloadI18n extends DataModel
+class ProductFileDownloadI18n extends DataModel
 {
     /**
-     * @var Identity Reference to fileDownloadId
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("fileDownloadId")
-     * @Serializer\Accessor(getter="getFileDownloadId",setter="setFileDownloadId")
-     */
-    protected $fileDownloadId = null;
-
-    /**
-     * @var string Optional File download description
+     * @var string 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("description")
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
@@ -38,7 +29,7 @@ class FileDownloadI18n extends DataModel
     protected $description = '';
 
     /**
-     * @var string Locale
+     * @var string 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("languageISO")
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
@@ -46,42 +37,17 @@ class FileDownloadI18n extends DataModel
     protected $languageISO = '';
 
     /**
-     * @var string File download title / name
+     * @var string 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->fileDownloadId = new Identity();
-    }
 
     /**
-     * @param Identity $fileDownloadId Reference to fileDownloadId
-     * @return \jtl\Connector\Model\FileDownloadI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setFileDownloadId(Identity $fileDownloadId)
-    {
-        return $this->setProperty('fileDownloadId', $fileDownloadId, 'Identity');
-    }
-
-    /**
-     * @return Identity Reference to fileDownloadId
-     */
-    public function getFileDownloadId()
-    {
-        return $this->fileDownloadId;
-    }
-
-    /**
-     * @param string $description Optional File download description
-     * @return \jtl\Connector\Model\FileDownloadI18n
+     * @param string $description 
+     * @return \jtl\Connector\Model\ProductFileDownloadI18n
      */
     public function setDescription($description)
     {
@@ -89,7 +55,7 @@ class FileDownloadI18n extends DataModel
     }
 
     /**
-     * @return string Optional File download description
+     * @return string 
      */
     public function getDescription()
     {
@@ -97,8 +63,8 @@ class FileDownloadI18n extends DataModel
     }
 
     /**
-     * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\FileDownloadI18n
+     * @param string $languageISO 
+     * @return \jtl\Connector\Model\ProductFileDownloadI18n
      */
     public function setLanguageISO($languageISO)
     {
@@ -106,7 +72,7 @@ class FileDownloadI18n extends DataModel
     }
 
     /**
-     * @return string Locale
+     * @return string 
      */
     public function getLanguageISO()
     {
@@ -114,8 +80,8 @@ class FileDownloadI18n extends DataModel
     }
 
     /**
-     * @param string $name File download title / name
-     * @return \jtl\Connector\Model\FileDownloadI18n
+     * @param string $name 
+     * @return \jtl\Connector\Model\ProductFileDownloadI18n
      */
     public function setName($name)
     {
@@ -123,7 +89,7 @@ class FileDownloadI18n extends DataModel
     }
 
     /**
-     * @return string File download title / name
+     * @return string 
      */
     public function getName()
     {
