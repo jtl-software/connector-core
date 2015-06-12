@@ -33,6 +33,7 @@ class IdentityLinker
     const TYPE_SPECIFIC = 128;
     const TYPE_SPECIFIC_VALUE = 256;
     const TYPE_PAYMENT = 512;
+    const TYPE_CROSSSELLING = 1024;
 
     /**
      * Session Database Mapper
@@ -54,7 +55,9 @@ class IdentityLinker
         'Product' => self::TYPE_PRODUCT,
         'Specific' => self::TYPE_SPECIFIC,
         'SpecificValue' => self::TYPE_SPECIFIC_VALUE,
-        'Payment' => self::TYPE_PAYMENT
+        'Payment' => self::TYPE_PAYMENT,
+        'CrossSelling' => self::TYPE_CROSSSELLING,
+        'CrossSellingItem' => self::TYPE_CROSSSELLING
     );
 
     protected static $mappings = array(
@@ -214,6 +217,12 @@ class IdentityLinker
         'Payment' => array(
             'id' => self::TYPE_PAYMENT,
             'customerOrderId' => self::TYPE_CUSTOMER_ORDER
+        ),
+        'CrossSelling' => array(
+            'productId' => self::TYPE_PRODUCT
+        ),
+        'CrossSellingItem' => array(
+            'productIds' => self::TYPE_PRODUCT  // List of Product identities
         )
     );
 
@@ -298,9 +307,11 @@ class IdentityLinker
                     foreach ($list as &$entity) {
                         if ($entity instanceof DataModel) {
                             $this->linkModel($entity);
+                        } elseif ($entity instanceof Identity && $this->isType($reflect->getShortName(), $property)) {
+                            $this->linkIdentityList($entity, $reflect->getShortName(), $property, $isDeleted);
                         } else {
                             Logger::write(
-                                sprintf('Property (%s) from model (%s) is not an instance of DataModel', $propertyInfo->getName(), $reflect->getShortName()), 
+                                sprintf('Property (%s) from model (%s) is not an instance of DataModel or Identity', $propertyInfo->getName(), $reflect->getShortName()),
                                 Logger::WARNING, 'linker'
                             );
                         }
@@ -347,6 +358,40 @@ class IdentityLinker
                             $model->{$setter}($identity);
                         }
                     }
+                }
+            }
+        }
+    }
+
+    /**
+     * Linker for identity lists
+     *
+     * @param \jtl\Connector\Model\Identity $identity
+     * @param string $modelName
+     * @param string $property
+     * @param bool $isDeleted
+     * @throws \jtl\Connector\Exception\LinkerException
+     */
+    public function linkIdentityList(Identity &$identity, $modelName, $property, $isDeleted = false)
+    {
+        if (strlen($identity->getEndpoint()) > 0 && $identity->getHost() > 0) {
+            if ($isDeleted) {
+                $this->delete($identity->getEndpoint(), $identity->getHost(), $modelName);
+            } elseif (!$this->exists(null, $identity->getHost(), $modelName, $property, true)) {
+                $this->save($identity->getEndpoint(), $identity->getHost(), $modelName, $property);
+            }
+        } else {
+            if ($identity->getHost() > 0) {
+                if ($isDeleted) {
+                    $this->delete(null, $identity->getHost(), $modelName);
+                } elseif ($this->exists(null, $identity->getHost(), $modelName, $property)) {
+                    $identity->setEndpoint($this->getEndpointId($identity->getHost(), $modelName, $property));
+                }
+            } elseif (strlen($identity->getEndpoint()) > 0) {
+                if ($isDeleted) {
+                    $this->delete($identity->getEndpoint(), null, $modelName);
+                } elseif ($this->exists($identity->getEndpoint(), null, $modelName, $property)) {
+                    $identity->setHost($this->getHostId($identity->getEndpoint(), $modelName, $property));
                 }
             }
         }
