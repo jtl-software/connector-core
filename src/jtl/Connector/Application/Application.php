@@ -49,6 +49,7 @@ use \jtl\Connector\Event\EventHandler;
  */
 class Application extends CoreApplication
 {
+    const PROTOCOL_VERSION = 1;
 
     /**
      * Connected EndpointConnectors
@@ -578,5 +579,13 @@ class Application extends CoreApplication
     public function getSession()
     {
         return $this->session;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProtocolVersion()
+    {
+        return self::PROTOCOL_VERSION;
     }
 }

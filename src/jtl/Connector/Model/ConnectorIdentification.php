@@ -44,6 +44,13 @@ class ConnectorIdentification extends DataModel
      */
     protected $platformVersion = '';
 
+    /**
+     * @var integer
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("protocolVersion")
+     * @Serializer\Accessor(getter="getProtocolVersion",setter="setProtocolVersion")
+     */
+    protected $protocolVersion = '';
 
     /**
      * @param string $endpointVersion 
@@ -80,7 +87,7 @@ class ConnectorIdentification extends DataModel
     }
 
     /**
-     * @param string $platformVersion 
+     * @param string $platformVersion
      * @return \jtl\Connector\Model\ConnectorIdentification
      */
     public function setPlatformVersion($platformVersion)
@@ -89,10 +96,27 @@ class ConnectorIdentification extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getPlatformVersion()
     {
         return $this->platformVersion;
+    }
+
+    /**
+     * @param integer $protocolVersion
+     * @return \jtl\Connector\Model\ConnectorIdentification
+     */
+    public function setProtocolVersion($protocolVersion)
+    {
+        return $this->setProperty('protocolVersion', $protocolVersion, 'integer');
+    }
+
+    /**
+     * @return integer
+     */
+    public function getProtocolVersion()
+    {
+        return $this->protocolVersion;
     }
 }

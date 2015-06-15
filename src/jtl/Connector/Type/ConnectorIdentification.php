@@ -20,6 +20,7 @@ class ConnectorIdentification extends DataType
             new PropertyInfo('endpointVersion', 'string', '', false, false, false),
             new PropertyInfo('platformName', 'string', '', false, false, false),
             new PropertyInfo('platformVersion', 'string', '', false, false, false),
+            new PropertyInfo('protocolVersion', 'integer', '', false, false, false),
         );
     }
 
