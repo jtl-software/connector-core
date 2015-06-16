@@ -21,7 +21,7 @@ class Checksum extends DataType
             new PropertyInfo('endpoint', 'string', '', false, false, false),
             new PropertyInfo('hasChanged', 'boolean', false, false, false, false),
             new PropertyInfo('host', 'string', '', false, false, false),
-            new PropertyInfo('type', 'ChecksumType', '', false, false, false),
+            new PropertyInfo('type', 'integer', '', false, false, false),
         );
     }
 

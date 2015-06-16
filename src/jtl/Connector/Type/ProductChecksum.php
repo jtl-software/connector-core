@@ -21,7 +21,7 @@ class ProductChecksum extends DataType
             new PropertyInfo('endpoint', 'string', '', false, false, false),
             new PropertyInfo('hasChanged', 'boolean', false, false, false, false),
             new PropertyInfo('host', 'string', '', false, false, false),
-            new PropertyInfo('type', 'int', '', false, false, false),
+            new PropertyInfo('type', 'integer', '', false, false, false),
         );
     }
 

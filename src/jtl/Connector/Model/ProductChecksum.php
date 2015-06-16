@@ -59,7 +59,7 @@ class ProductChecksum extends Checksum
     protected $host = '';
 
     /**
-     * @var int 
+     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
@@ -147,17 +147,17 @@ class ProductChecksum extends Checksum
     }
 
     /**
-     * @param int $type 
+     * @param integer $type
      * @return \jtl\Connector\Model\ProductChecksum
-     * @throws \InvalidArgumentException if the provided argument is not of type 'int'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
     public function setType($type)
     {
-        return $this->setProperty('type', $type, 'int');
+        return $this->setProperty('type', $type, 'integer');
     }
 
     /**
-     * @return int 
+     * @return integer
      */
     public function getType()
     {

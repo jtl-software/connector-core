@@ -58,12 +58,12 @@ class Checksum extends DataModel
     protected $host = '';
 
     /**
-     * @var ChecksumType 
-     * @Serializer\Type("string")
+     * @var integer
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
-    protected $type = '';
+    protected $type = 0;
 
     /**
      * Constructor
@@ -143,17 +143,17 @@ class Checksum extends DataModel
     }
 
     /**
-     * @param ChecksumType $type 
+     * @param integer $type
      * @return \jtl\Connector\Model\Checksum
-     * @throws \InvalidArgumentException if the provided argument is not of type 'ChecksumType'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setType(ChecksumType $type = null)
+    public function setType($type)
     {
-        return $this->setProperty('type', $type, 'string');
+        return $this->setProperty('type', $type, 'integer');
     }
 
     /**
-     * @return string 
+     * @return integer
      */
     public function getType()
     {
