@@ -19,7 +19,7 @@ use JMS\Serializer\Annotation as Serializer;
  * 
  * @Serializer\AccessType("public_method")
  */
-class MediaFile extends DataModel
+class ProductMediaFile extends DataModel
 {
     /**
      * @var Identity Unique MediaFile id
@@ -78,8 +78,8 @@ class MediaFile extends DataModel
     protected $url = '';
 
     /**
-     * @var jtl\Connector\Model\MediaFileI18n[] 
-     * @Serializer\Type("array<jtl\Connector\Model\MediaFileI18n>")
+     * @var jtl\Connector\Model\ProductMediaFileI18n[] 
+     * @Serializer\Type("array<jtl\Connector\Model\ProductMediaFileI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
@@ -96,7 +96,7 @@ class MediaFile extends DataModel
 
     /**
      * @param Identity $id Unique MediaFile id
-     * @return \jtl\Connector\Model\MediaFile
+     * @return \jtl\Connector\Model\ProductMediaFile
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
@@ -114,7 +114,7 @@ class MediaFile extends DataModel
 
     /**
      * @param Identity $productId Reference to product
-     * @return \jtl\Connector\Model\MediaFile
+     * @return \jtl\Connector\Model\ProductMediaFile
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId)
@@ -132,7 +132,7 @@ class MediaFile extends DataModel
 
     /**
      * @param string $mediaFileCategory Optional media file category name
-     * @return \jtl\Connector\Model\MediaFile
+     * @return \jtl\Connector\Model\ProductMediaFile
      */
     public function setMediaFileCategory($mediaFileCategory)
     {
@@ -149,7 +149,7 @@ class MediaFile extends DataModel
 
     /**
      * @param string $path File path
-     * @return \jtl\Connector\Model\MediaFile
+     * @return \jtl\Connector\Model\ProductMediaFile
      */
     public function setPath($path)
     {
@@ -166,7 +166,7 @@ class MediaFile extends DataModel
 
     /**
      * @param string $sort Optional sort number
-     * @return \jtl\Connector\Model\MediaFile
+     * @return \jtl\Connector\Model\ProductMediaFile
      */
     public function setSort($sort)
     {
@@ -183,7 +183,7 @@ class MediaFile extends DataModel
 
     /**
      * @param string $type Media file type e.g. 'pdf'
-     * @return \jtl\Connector\Model\MediaFile
+     * @return \jtl\Connector\Model\ProductMediaFile
      */
     public function setType($type)
     {
@@ -200,7 +200,7 @@ class MediaFile extends DataModel
 
     /**
      * @param string $url Complete URL
-     * @return \jtl\Connector\Model\MediaFile
+     * @return \jtl\Connector\Model\ProductMediaFile
      */
     public function setUrl($url)
     {
@@ -216,10 +216,10 @@ class MediaFile extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\MediaFileI18n $i18n
-     * @return \jtl\Connector\Model\MediaFile
+     * @param \jtl\Connector\Model\ProductMediaFileI18n $i18n
+     * @return \jtl\Connector\Model\ProductMediaFile
      */
-    public function addI18n(\jtl\Connector\Model\MediaFileI18n $i18n)
+    public function addI18n(\jtl\Connector\Model\ProductMediaFileI18n $i18n)
     {
         $this->i18ns[] = $i18n;
         return $this;
@@ -227,7 +227,7 @@ class MediaFile extends DataModel
     
     /**
      * @param array $i18ns
-     * @return \jtl\Connector\Model\MediaFile
+     * @return \jtl\Connector\Model\ProductMediaFile
      */
     public function setI18ns(array $i18ns)
     {
@@ -236,7 +236,7 @@ class MediaFile extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\MediaFileI18n[]
+     * @return jtl\Connector\Model\ProductMediaFileI18n[]
      */
     public function getI18ns()
     {
@@ -244,7 +244,7 @@ class MediaFile extends DataModel
     }
 
     /**
-     * @return \jtl\Connector\Model\MediaFile
+     * @return \jtl\Connector\Model\ProductMediaFile
      */
     public function clearI18ns()
     {

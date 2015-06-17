@@ -85,7 +85,7 @@ class Product extends DataType
             new PropertyInfo('fileDownloads', '\jtl\Connector\Model\ProductFileDownload', null, false, false, true),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\ProductI18n', null, false, false, true),
             new PropertyInfo('invisibilities', '\jtl\Connector\Model\ProductInvisibility', null, false, false, true),
-            new PropertyInfo('mediaFiles', '\jtl\Connector\Model\MediaFile', null, false, false, true),
+            new PropertyInfo('mediaFiles', '\jtl\Connector\Model\ProductMediaFile', null, false, false, true),
             new PropertyInfo('partsLists', '\jtl\Connector\Model\ProductPartsList', null, false, false, true),
             new PropertyInfo('prices', '\jtl\Connector\Model\ProductPrice', null, false, false, true),
             new PropertyInfo('specialPrices', '\jtl\Connector\Model\ProductSpecialPrice', null, false, false, true),

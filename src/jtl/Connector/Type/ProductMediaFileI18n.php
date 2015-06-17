@@ -12,12 +12,12 @@ use \jtl\Connector\Type\PropertyInfo;
  * @access public
  * @package jtl\Connector\Type
  */
-class MediaFileI18n extends DataType
+class ProductMediaFileI18n extends DataType
 {
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('mediaFileId', 'Identity', null, true, true, false),
+            new PropertyInfo('productMediaFileId', 'Identity', null, true, true, false),
             new PropertyInfo('description', 'string', '', false, false, false),
             new PropertyInfo('languageISO', 'string', '', false, false, false),
             new PropertyInfo('name', 'string', '', false, false, false),

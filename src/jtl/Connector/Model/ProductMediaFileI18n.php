@@ -19,15 +19,15 @@ use JMS\Serializer\Annotation as Serializer;
  * 
  * @Serializer\AccessType("public_method")
  */
-class MediaFileI18n extends DataModel
+class ProductMediaFileI18n extends DataModel
 {
     /**
      * @var Identity Reference to mediaFile
      * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("mediaFileId")
-     * @Serializer\Accessor(getter="getMediaFileId",setter="setMediaFileId")
+     * @Serializer\SerializedName("productMediaFileId")
+     * @Serializer\Accessor(getter="getProductMediaFileId",setter="setProductMediaFileId")
      */
-    protected $mediaFileId = null;
+    protected $productMediaFileId = null;
 
     /**
      * @var string Locale specific description
@@ -58,30 +58,30 @@ class MediaFileI18n extends DataModel
      */
     public function __construct()
     {
-        $this->mediaFileId = new Identity();
+        $this->productMediaFileId = new Identity();
     }
 
     /**
-     * @param Identity $mediaFileId Reference to mediaFile
-     * @return \jtl\Connector\Model\MediaFileI18n
+     * @param Identity $productMediaFileId Reference to mediaFile
+     * @return \jtl\Connector\Model\ProductMediaFileI18n
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setMediaFileId(Identity $mediaFileId)
+    public function setProductMediaFileId(Identity $productMediaFileId)
     {
-        return $this->setProperty('mediaFileId', $mediaFileId, 'Identity');
+        return $this->setProperty('productMediaFileId', $productMediaFileId, 'Identity');
     }
 
     /**
      * @return Identity Reference to mediaFile
      */
-    public function getMediaFileId()
+    public function getProductMediaFileId()
     {
-        return $this->mediaFileId;
+        return $this->productMediaFileId;
     }
 
     /**
      * @param string $description Locale specific description
-     * @return \jtl\Connector\Model\MediaFileI18n
+     * @return \jtl\Connector\Model\ProductMediaFileI18n
      */
     public function setDescription($description)
     {
@@ -98,7 +98,7 @@ class MediaFileI18n extends DataModel
 
     /**
      * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\MediaFileI18n
+     * @return \jtl\Connector\Model\ProductMediaFileI18n
      */
     public function setLanguageISO($languageISO)
     {
@@ -115,7 +115,7 @@ class MediaFileI18n extends DataModel
 
     /**
      * @param string $name Locale specific name
-     * @return \jtl\Connector\Model\MediaFileI18n
+     * @return \jtl\Connector\Model\ProductMediaFileI18n
      */
     public function setName($name)
     {

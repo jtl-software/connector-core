@@ -566,8 +566,8 @@ class Product extends DataModel
     protected $invisibilities = array();
 
     /**
-     * @var jtl\Connector\Model\MediaFile[] 
-     * @Serializer\Type("array<jtl\Connector\Model\MediaFile>")
+     * @var jtl\Connector\Model\ProductMediaFile[] 
+     * @Serializer\Type("array<jtl\Connector\Model\ProductMediaFile>")
      * @Serializer\SerializedName("mediaFiles")
      * @Serializer\AccessType("reflection")
      */
@@ -1976,10 +1976,10 @@ class Product extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\MediaFile $mediaFile
+     * @param \jtl\Connector\Model\ProductMediaFile $mediaFile
      * @return \jtl\Connector\Model\Product
      */
-    public function addMediaFile(\jtl\Connector\Model\MediaFile $mediaFile)
+    public function addMediaFile(\jtl\Connector\Model\ProductMediaFile $mediaFile)
     {
         $this->mediaFiles[] = $mediaFile;
         return $this;
@@ -1996,7 +1996,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\MediaFile[]
+     * @return jtl\Connector\Model\ProductMediaFile[]
      */
     public function getMediaFiles()
     {
