@@ -22,44 +22,12 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductMediaFileAttr extends DataModel
 {
     /**
-     * @var Identity Unique MediaFileAttr id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-
-    /**
-     * @var Identity Reference to mediaFile
+     * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("productMediaFileId")
      * @Serializer\Accessor(getter="getProductMediaFileId",setter="setProductMediaFileId")
      */
     protected $productMediaFileId = null;
-
-    /**
-     * @var string Attribute name
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("key")
-     * @Serializer\Accessor(getter="getKey",setter="setKey")
-     */
-    protected $key = '';
-
-    /**
-     * @var string Locale
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
-     */
-    protected $languageISO = '';
-
-    /**
-     * @var string Attribute value
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("value")
-     * @Serializer\Accessor(getter="getValue",setter="setValue")
-     */
-    protected $value = '';
 
     /**
      * @var jtl\Connector\Model\ProductMediaFileAttrI18n[] 
@@ -74,30 +42,11 @@ class ProductMediaFileAttr extends DataModel
      */
     public function __construct()
     {
-        $this->id = new Identity();
         $this->productMediaFileId = new Identity();
     }
 
     /**
-     * @param Identity $id Unique MediaFileAttr id
-     * @return \jtl\Connector\Model\ProductMediaFileAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id)
-    {
-        return $this->setProperty('id', $id, 'Identity');
-    }
-
-    /**
-     * @return Identity Unique MediaFileAttr id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param Identity $productMediaFileId Reference to mediaFile
+     * @param Identity $productMediaFileId 
      * @return \jtl\Connector\Model\ProductMediaFileAttr
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -107,62 +56,11 @@ class ProductMediaFileAttr extends DataModel
     }
 
     /**
-     * @return Identity Reference to mediaFile
+     * @return Identity 
      */
     public function getProductMediaFileId()
     {
         return $this->productMediaFileId;
-    }
-
-    /**
-     * @param string $key Attribute name
-     * @return \jtl\Connector\Model\ProductMediaFileAttr
-     */
-    public function setKey($key)
-    {
-        return $this->setProperty('key', $key, 'string');
-    }
-
-    /**
-     * @return string Attribute name
-     */
-    public function getKey()
-    {
-        return $this->key;
-    }
-
-    /**
-     * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\ProductMediaFileAttr
-     */
-    public function setLanguageISO($languageISO)
-    {
-        return $this->setProperty('languageISO', $languageISO, 'string');
-    }
-
-    /**
-     * @return string Locale
-     */
-    public function getLanguageISO()
-    {
-        return $this->languageISO;
-    }
-
-    /**
-     * @param string $value Attribute value
-     * @return \jtl\Connector\Model\ProductMediaFileAttr
-     */
-    public function setValue($value)
-    {
-        return $this->setProperty('value', $value, 'string');
-    }
-
-    /**
-     * @return string Attribute value
-     */
-    public function getValue()
-    {
-        return $this->value;
     }
 
     /**
