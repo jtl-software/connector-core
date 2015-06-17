@@ -24,6 +24,7 @@ class ProductMediaFile extends DataType
             new PropertyInfo('sort', 'string', '', false, false, false),
             new PropertyInfo('type', 'string', '', false, false, false),
             new PropertyInfo('url', 'string', '', false, false, false),
+            new PropertyInfo('attributes', '\jtl\Connector\Model\ProductMediaFileAttr', null, false, false, true),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\ProductMediaFileI18n', null, false, false, true),
         );
     }
