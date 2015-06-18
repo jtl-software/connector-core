@@ -21,14 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductMediaFileAttrI18n extends DataModel
 {
     /**
-     * @var Identity 
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productMediaFileAttrId")
-     * @Serializer\Accessor(getter="getProductMediaFileAttrId",setter="setProductMediaFileAttrId")
-     */
-    protected $productMediaFileAttrId = null;
-
-    /**
      * @var string 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("languageISO")
@@ -52,31 +44,6 @@ class ProductMediaFileAttrI18n extends DataModel
      */
     protected $value = '';
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->productMediaFileAttrId = new Identity();
-    }
-
-    /**
-     * @param Identity $productMediaFileAttrId 
-     * @return \jtl\Connector\Model\ProductMediaFileAttrI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductMediaFileAttrId(Identity $productMediaFileAttrId)
-    {
-        return $this->setProperty('productMediaFileAttrId', $productMediaFileAttrId, 'Identity');
-    }
-
-    /**
-     * @return Identity 
-     */
-    public function getProductMediaFileAttrId()
-    {
-        return $this->productMediaFileAttrId;
-    }
 
     /**
      * @param string $languageISO 
