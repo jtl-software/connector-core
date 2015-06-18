@@ -12,19 +12,16 @@ class PluginLoader
     {
         $dir = Path::combine(CONNECTOR_DIR, 'plugins');
         $finder = new Finder();
-        $finder->directories()->in($dir);
 
-        foreach ($finder as $directory) {
-            $bootstrap = Path::combine($dir, $directory->getRelativePathname(), 'bootstrap.php');
-            if (file_exists($bootstrap)) {
-                include ($bootstrap);
+        $finder->files()->name('bootstrap.php')->in($dir);
+        foreach ($finder as $file) {
+            include ($file->getPathName());
 
-                $class = sprintf('%s_%s', ucfirst($directory->getRelativePathname()), ucfirst('Bootstrap'));
-                if (class_exists($class)) {
-                    $plugin = new $class();
-                    if ($plugin instanceof IPlugin) {
-                        $plugin->registerListener($dispatcher);
-                    }
+            $class = sprintf('\\%s\\Bootstrap', str_replace(DIRECTORY_SEPARATOR, '\\', $file->getRelativePath()));
+            if (class_exists($class)) {
+                $plugin = new $class();
+                if ($plugin instanceof IPlugin) {
+                    $plugin->registerListener($dispatcher);
                 }
             }
         }
