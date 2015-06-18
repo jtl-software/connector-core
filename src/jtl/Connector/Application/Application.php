@@ -36,7 +36,6 @@ use \jtl\Connector\Model\DataModel;
 use \Doctrine\Common\Collections\ArrayCollection;
 use \jtl\Connector\Serializer\JMS\SerializerBuilder;
 use \jtl\Connector\Linker\ChecksumLinker;
-use \jtl\Connector\Model\Product;
 use \Symfony\Component\EventDispatcher\EventDispatcher;
 use \jtl\Connector\Core\IO\Path;
 use \jtl\Connector\Event\EventHandler;
@@ -456,11 +455,16 @@ class Application extends CoreApplication
             throw new SessionException('Session not initialized', -32001);
         }
 
+        $configFile = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
+        if (!file_exists($configFile)) {
+            touch($configFile);
+        }
+
         if (isset($this->config)) {
             $this->config = $this->config;
             $json = $this->config->getLoader('Json');
         } else {
-            $json = new ConfigJson(CONNECTOR_DIR . '/config/config.json');
+            $json = new ConfigJson($configFile);
             $this->config = new Config(array(
               $json,
               new ConfigSystem()
@@ -587,5 +591,13 @@ class Application extends CoreApplication
     public function getProtocolVersion()
     {
         return self::PROTOCOL_VERSION;
+    }
+
+    /**
+     * @return Config
+     */
+    public function getConfig()
+    {
+        return $this->config;
     }
 }
