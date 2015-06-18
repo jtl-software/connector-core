@@ -457,7 +457,7 @@ class Application extends CoreApplication
 
         $configFile = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
         if (!file_exists($configFile)) {
-            touch($configFile);
+            file_put_contents($configFile, '{}');
         }
 
         if (isset($this->config)) {
