@@ -55,11 +55,11 @@ class ProductMediaFile extends DataModel
 
     /**
      * @var string Optional sort number
-     * @Serializer\Type("string")
+     * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = '';
+    protected $sort = 0;
 
     /**
      * @var string Media file type e.g. 'pdf'
@@ -173,16 +173,16 @@ class ProductMediaFile extends DataModel
     }
 
     /**
-     * @param string $sort Optional sort number
+     * @param integer $sort Optional sort number
      * @return \jtl\Connector\Model\ProductMediaFile
      */
     public function setSort($sort)
     {
-        return $this->setProperty('sort', $sort, 'string');
+        return $this->setProperty('sort', $sort, 'integer');
     }
 
     /**
-     * @return string Optional sort number
+     * @return integer Optional sort number
      */
     public function getSort()
     {
