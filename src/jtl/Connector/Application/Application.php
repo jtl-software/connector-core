@@ -121,15 +121,15 @@ class Application extends CoreApplication
         $this->connector->initialize();
 
         if ($this->connector->getPrimaryKeyMapper() === null) {
-            throw new ApplicationException('No primary key mapper registed');
+            throw new ApplicationException('No primary key mapper registered');
         }
 
         if ($this->connector->getTokenLoader() === null) {
-            throw new ApplicationException('No token loader registed');
+            throw new ApplicationException('No token loader registered');
         }
 
         if ($this->connector->getChecksumLoader() === null) {
-            throw new ApplicationException('No checksum loader registed');
+            throw new ApplicationException('No checksum loader registered');
         }
 
         ChecksumLinker::setChecksumLoader($this->connector->getChecksumLoader());
@@ -541,6 +541,9 @@ class Application extends CoreApplication
             }
 
             if ($imagePath !== null) {
+
+                // Todo: seo filename pattern via connector settings
+
                 $image->setFilename($imagePath);
                 $requestpacket->setParams($image);
             } else {
