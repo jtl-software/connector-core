@@ -242,4 +242,9 @@ class Sqlite3 implements IDatabase
     {
         return \Sqlite3::escapeString($query);
     }
+
+    public function getLastInsertRowId()
+    {
+        return $this->db->lastInsertRowID();
+    }
 }
