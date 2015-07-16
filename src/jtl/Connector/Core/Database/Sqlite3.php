@@ -120,6 +120,11 @@ class Sqlite3 implements IDatabase
         
         return null;
     }
+
+    public function fetchSingle($query)
+    {
+        return $this->db->querySingle($query);
+    }
     
     /**
      * Prepares an SQL statement for execution
@@ -138,7 +143,7 @@ class Sqlite3 implements IDatabase
      * @param string $query
      * @return multitype:array |NULL
      */
-    protected function fetch($query)
+    public function fetch($query)
     {
         while (true) {
             $result = @$this->db->query($query);
@@ -180,7 +185,7 @@ class Sqlite3 implements IDatabase
      * @param string $query
      * @return number|boolean
      */
-    protected function insert($query)
+    public function insert($query)
     {
         if ($this->db->exec($query)) {
             return $this->db->lastInsertRowID();
