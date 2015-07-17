@@ -9,6 +9,7 @@ namespace jtl\Connector\Model;
 
 use DateTime;
 use JMS\Serializer\Annotation as Serializer;
+use jtl\Connector\Checksum\IChecksum;
 
 /**
  *
@@ -18,7 +19,7 @@ use JMS\Serializer\Annotation as Serializer;
  * 
  * @Serializer\AccessType("public_method")
  */
-class Checksum extends DataModel
+class Checksum extends DataModel implements IChecksum
 {
     /**
      * @var int - Checksum used to check variations for change
@@ -121,6 +122,14 @@ class Checksum extends DataModel
      * @return boolean 
      */
     public function getHasChanged()
+    {
+        return $this->hasChanged;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function hasChanged()
     {
         return $this->hasChanged;
     }
