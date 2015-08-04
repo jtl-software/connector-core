@@ -515,7 +515,7 @@ class IdentityLinker
         if ($endpointId !== null) {
             $hostId = self::$mapper->getHostId($endpointId, $type);
         } elseif ($hostId !== null) {
-            $endpointId = self::$mapper->getEndpointId($hostId, $type);
+            $endpointId = self::$mapper->getEndpointId($hostId, $type, $this->runtimeInfos['relationType']);
         }
 
         if ($notNull && $endpointId === null) {
@@ -605,7 +605,7 @@ class IdentityLinker
             return $endpointId;
         }
 
-        $endpointId = self::$mapper->getEndpointId($hostId, $type);
+        $endpointId = self::$mapper->getEndpointId($hostId, $type, $this->runtimeInfos['relationType']);
 
         //if ($endpointId !== null) {
             $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_HOST);
