@@ -70,6 +70,14 @@ class DeliveryNote extends DataModel
     protected $items = array();
 
     /**
+     * @var jtl\Connector\Model\DeliveryNoteTrackingList[] 
+     * @Serializer\Type("array<jtl\Connector\Model\DeliveryNoteTrackingList>")
+     * @Serializer\SerializedName("trackingLists")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $trackingLists = array();
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -200,6 +208,43 @@ class DeliveryNote extends DataModel
     public function clearItems()
     {
         $this->items = array();
+        return $this;
+    }
+
+    /**
+     * @param \jtl\Connector\Model\DeliveryNoteTrackingList $trackingList
+     * @return \jtl\Connector\Model\DeliveryNote
+     */
+    public function addTrackingList(\jtl\Connector\Model\DeliveryNoteTrackingList $trackingList)
+    {
+        $this->trackingLists[] = $trackingList;
+        return $this;
+    }
+    
+    /**
+     * @param array $trackingLists
+     * @return \jtl\Connector\Model\DeliveryNote
+     */
+    public function setTrackingLists(array $trackingLists)
+    {
+        $this->trackingLists = $trackingLists;
+        return $this;
+    }
+    
+    /**
+     * @return jtl\Connector\Model\DeliveryNoteTrackingList[]
+     */
+    public function getTrackingLists()
+    {
+        return $this->trackingLists;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\DeliveryNote
+     */
+    public function clearTrackingLists()
+    {
+        $this->trackingLists = array();
         return $this;
     }
 }

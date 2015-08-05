@@ -23,6 +23,7 @@ class DeliveryNote extends DataType
             new PropertyInfo('isFulfillment', 'boolean', false, false, false, false),
             new PropertyInfo('note', 'string', '', false, false, false),
             new PropertyInfo('items', '\jtl\Connector\Model\DeliveryNoteItem', null, false, false, true),
+            new PropertyInfo('trackingLists', '\jtl\Connector\Model\DeliveryNoteTrackingList', null, false, false, true),
         );
     }
 

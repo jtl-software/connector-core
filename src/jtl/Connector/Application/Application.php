@@ -48,7 +48,7 @@ use \jtl\Connector\Event\EventHandler;
  */
 class Application extends CoreApplication
 {
-    const PROTOCOL_VERSION = 1;
+    const PROTOCOL_VERSION = 2;
 
     /**
      * Connected EndpointConnectors
