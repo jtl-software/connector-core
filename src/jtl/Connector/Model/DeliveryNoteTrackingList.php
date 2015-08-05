@@ -29,8 +29,8 @@ class DeliveryNoteTrackingList extends DataModel
     protected $name = '';
 
     /**
-     * @var jtl\Connector\Model\String[] 
-     * @Serializer\Type("array<jtl\Connector\Model\String>")
+     * @var string[]
+     * @Serializer\Type("array<string>")
      * @Serializer\SerializedName("codes")
      * @Serializer\AccessType("reflection")
      */
@@ -55,10 +55,10 @@ class DeliveryNoteTrackingList extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\String $code
+     * @param string $code
      * @return \jtl\Connector\Model\DeliveryNoteTrackingList
      */
-    public function addCode(\jtl\Connector\Model\String $code)
+    public function addCode($code)
     {
         $this->codes[] = $code;
         return $this;
@@ -75,7 +75,7 @@ class DeliveryNoteTrackingList extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\String[]
+     * @return string[]
      */
     public function getCodes()
     {
