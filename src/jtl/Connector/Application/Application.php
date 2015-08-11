@@ -477,14 +477,14 @@ class Application extends CoreApplication
         $root = dirname($_SERVER['SCRIPT_FILENAME']);
 
         if (!isset($values['platform_root'])) { //Shop directory
-            $exts['platform_root'] = realpath($root . '/../../');
+            $exts['platform_root'] = $root . '/../../';
             if (substr($exts['platform_root'], -1) == '/') {
                 $exts['platform_root'] = substr($exts['platform_root'], 0, strlen($exts['platform_root']));
             }
         }
 
         if (!isset($values['connector_root'])) { //Connector directory
-            $exts['connector_root'] = realpath($root . '/../');
+            $exts['connector_root'] = $root . '/../';
             if (substr($exts['connector_root'], -1) == '/') {
                 $exts['connector_root'] = substr($exts['connector_root'], 0, strlen($exts['connector_root']));
             }
@@ -556,7 +556,7 @@ class Application extends CoreApplication
 
                     $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
                     $fileName = pathinfo($path, PATHINFO_BASENAME);
-                    $imagePath = Path::combine(realpath(sys_get_temp_dir()), uniqid() . "_{$fileName}");
+                    $imagePath = Path::combine(sys_get_temp_dir(), uniqid() . "_{$fileName}");
                     file_put_contents($imagePath, $imageData);
 
                     $image->setFilename($imagePath);

@@ -13,7 +13,8 @@ class Path
 
         $path = str_replace('//', '/', implode(DIRECTORY_SEPARATOR, $paths));
 
-        return file_exists($path) ? realpath($path) : $path;
+        //return file_exists($path) ? realpath($path) : $path;
+        return rtrim($path, DIRECTORY_SEPARATOR);
     }
 
     public static function getDirectoryName($path, $real = true)
