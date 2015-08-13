@@ -365,7 +365,7 @@ class Application extends CoreApplication
                         ChecksumLinker::link($param);
 
                         // Event
-                        EventHandler::dispatch($params, $this->eventDispatcher, $method->getAction(), EventHandler::BEFORE);
+                        EventHandler::dispatch($param, $this->eventDispatcher, $method->getAction(), EventHandler::BEFORE);
                     }
                 } else {
                     $identityLinker->linkModel($params);
