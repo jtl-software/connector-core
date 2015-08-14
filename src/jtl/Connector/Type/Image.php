@@ -28,6 +28,6 @@ class Image extends DataType
 
     public function isMain()
     {
-        return false;
+        return true;
     }
 }
