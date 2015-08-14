@@ -34,6 +34,7 @@ class IdentityLinker
     const TYPE_SPECIFIC_VALUE = 256;
     const TYPE_PAYMENT = 512;
     const TYPE_CROSSSELLING = 1024;
+    const TYPE_CROSSSELLING_GROUP = 2048;
 
     /**
      * Session Database Mapper
@@ -57,7 +58,8 @@ class IdentityLinker
         'SpecificValue' => self::TYPE_SPECIFIC_VALUE,
         'Payment' => self::TYPE_PAYMENT,
         'CrossSelling' => self::TYPE_CROSSSELLING,
-        'CrossSellingItem' => self::TYPE_CROSSSELLING
+        'CrossSellingItem' => self::TYPE_CROSSSELLING,
+        'CrossSellingGroup' => self::TYPE_CROSSSELLING_GROUP
     );
 
     protected static $mappings = array(
@@ -147,6 +149,13 @@ class IdentityLinker
             'productId' => self::TYPE_PRODUCT,
             'crossSellingProductId' => self::TYPE_PRODUCT
         ),
+        'CrossSellingItem' => array(
+            'crossSellingGroupId' => self::TYPE_CROSSSELLING_GROUP,
+            'productIds' => self::TYPE_PRODUCT  // List of Product identities
+        ),
+        'CrossSellingGroup' => array(
+            'id' => self::TYPE_CROSSSELLING_GROUP
+        ),
         'PartsList' => array(
             'productId' => self::TYPE_PRODUCT
         ),
@@ -217,12 +226,6 @@ class IdentityLinker
         'Payment' => array(
             'id' => self::TYPE_PAYMENT,
             'customerOrderId' => self::TYPE_CUSTOMER_ORDER
-        ),
-        'CrossSelling' => array(
-            'productId' => self::TYPE_PRODUCT
-        ),
-        'CrossSellingItem' => array(
-            'productIds' => self::TYPE_PRODUCT  // List of Product identities
         )
     );
 
