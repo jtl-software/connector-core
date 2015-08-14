@@ -99,7 +99,10 @@ class Application extends CoreApplication
         $sessionId = Request::getSession();
         $requestpackets = RequestPacket::build($jtlrpc);
 
-        Logger::write(Json::encode($requestpackets->getPublic()), Logger::DEBUG, 'rpc');
+        Logger::write(sprintf('RequestPacket: %s', Json::encode($requestpackets->getPublic())), Logger::DEBUG, 'rpc');
+        if (is_string($requestpackets->getParams())) {
+            Logger::write(sprintf('Params: %s', $requestpackets->getParams()), Logger::DEBUG, 'rpc');
+        }
 
         $rpcmode = is_object($requestpackets) ? Packet::SINGLE_MODE : Packet::BATCH_MODE;
 
