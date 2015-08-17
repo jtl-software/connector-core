@@ -344,10 +344,10 @@ class Product extends DataModel
     /**
      * @var double 
      * @Serializer\Type("double")
-     * @Serializer\SerializedName("minimumQuantitiy")
-     * @Serializer\Accessor(getter="getMinimumQuantitiy",setter="setMinimumQuantitiy")
+     * @Serializer\SerializedName("minimumQuantity")
+     * @Serializer\Accessor(getter="getMinimumQuantity",setter="setMinimumQuantity")
      */
-    protected $minimumQuantitiy = 0.0;
+    protected $minimumQuantity = 0.0;
 
     /**
      * @var DateTime 
@@ -1354,20 +1354,20 @@ class Product extends DataModel
     }
 
     /**
-     * @param double $minimumQuantitiy 
+     * @param double $minimumQuantity
      * @return \jtl\Connector\Model\Product
      */
-    public function setMinimumQuantitiy($minimumQuantitiy)
+    public function setMinimumQuantity($minimumQuantity)
     {
-        return $this->setProperty('minimumQuantitiy', $minimumQuantitiy, 'double');
+        return $this->setProperty('minimumQuantity', $minimumQuantity, 'double');
     }
 
     /**
      * @return double 
      */
-    public function getMinimumQuantitiy()
+    public function getMinimumQuantity()
     {
-        return $this->minimumQuantitiy;
+        return $this->minimumQuantity;
     }
 
     /**

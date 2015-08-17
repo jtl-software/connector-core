@@ -57,7 +57,7 @@ class Product extends DataType
             new PropertyInfo('measurementUnitCode', 'string', '', false, false, false),
             new PropertyInfo('minBestBeforeDate', 'DateTime', null, false, false, false),
             new PropertyInfo('minimumOrderQuantity', 'double', 0.0, false, false, false),
-            new PropertyInfo('minimumQuantitiy', 'double', 0.0, false, false, false),
+            new PropertyInfo('minimumQuantity', 'double', 0.0, false, false, false),
             new PropertyInfo('modified', 'DateTime', null, false, false, false),
             new PropertyInfo('nextAvailableInflowDate', 'DateTime', null, false, false, false),
             new PropertyInfo('nextAvailableInflowQuantity', 'double', 0.0, false, false, false),
