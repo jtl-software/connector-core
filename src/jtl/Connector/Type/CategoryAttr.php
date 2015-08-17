@@ -19,6 +19,7 @@ class CategoryAttr extends DataType
         return array(
             new PropertyInfo('categoryId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('isCustomProperty', 'boolean', false, false, false, false),
             new PropertyInfo('isTranslated', 'boolean', false, false, false, false),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\CategoryAttrI18n', null, false, false, true),
         );

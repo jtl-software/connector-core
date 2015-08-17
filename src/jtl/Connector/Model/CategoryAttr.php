@@ -40,6 +40,14 @@ class CategoryAttr extends DataModel
     /**
      * @var boolean 
      * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("isCustomProperty")
+     * @Serializer\Accessor(getter="getIsCustomProperty",setter="setIsCustomProperty")
+     */
+    protected $isCustomProperty = false;
+
+    /**
+     * @var boolean 
+     * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isTranslated")
      * @Serializer\Accessor(getter="getIsTranslated",setter="setIsTranslated")
      */
@@ -96,6 +104,23 @@ class CategoryAttr extends DataModel
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param boolean $isCustomProperty 
+     * @return \jtl\Connector\Model\CategoryAttr
+     */
+    public function setIsCustomProperty($isCustomProperty)
+    {
+        return $this->setProperty('isCustomProperty', $isCustomProperty, 'boolean');
+    }
+
+    /**
+     * @return boolean 
+     */
+    public function getIsCustomProperty()
+    {
+        return $this->isCustomProperty;
     }
 
     /**

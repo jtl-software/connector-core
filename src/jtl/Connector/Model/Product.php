@@ -326,12 +326,28 @@ class Product extends DataModel
     protected $measurementUnitCode = '';
 
     /**
+     * @var DateTime 
+     * @Serializer\Type("DateTime")
+     * @Serializer\SerializedName("minBestBeforeDate")
+     * @Serializer\Accessor(getter="getMinBestBeforeDate",setter="setMinBestBeforeDate")
+     */
+    protected $minBestBeforeDate = null;
+
+    /**
      * @var double 
      * @Serializer\Type("double")
      * @Serializer\SerializedName("minimumOrderQuantity")
      * @Serializer\Accessor(getter="getMinimumOrderQuantity",setter="setMinimumOrderQuantity")
      */
     protected $minimumOrderQuantity = 0.0;
+
+    /**
+     * @var double 
+     * @Serializer\Type("double")
+     * @Serializer\SerializedName("minimumQuantitiy")
+     * @Serializer\Accessor(getter="getMinimumQuantitiy",setter="setMinimumQuantitiy")
+     */
+    protected $minimumQuantitiy = 0.0;
 
     /**
      * @var DateTime 
@@ -1303,6 +1319,24 @@ class Product extends DataModel
     }
 
     /**
+     * @param DateTime $minBestBeforeDate 
+     * @return \jtl\Connector\Model\Product
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     */
+    public function setMinBestBeforeDate(DateTime $minBestBeforeDate = null)
+    {
+        return $this->setProperty('minBestBeforeDate', $minBestBeforeDate, 'DateTime');
+    }
+
+    /**
+     * @return DateTime 
+     */
+    public function getMinBestBeforeDate()
+    {
+        return $this->minBestBeforeDate;
+    }
+
+    /**
      * @param double $minimumOrderQuantity 
      * @return \jtl\Connector\Model\Product
      */
@@ -1317,6 +1351,23 @@ class Product extends DataModel
     public function getMinimumOrderQuantity()
     {
         return $this->minimumOrderQuantity;
+    }
+
+    /**
+     * @param double $minimumQuantitiy 
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setMinimumQuantitiy($minimumQuantitiy)
+    {
+        return $this->setProperty('minimumQuantitiy', $minimumQuantitiy, 'double');
+    }
+
+    /**
+     * @return double 
+     */
+    public function getMinimumQuantitiy()
+    {
+        return $this->minimumQuantitiy;
     }
 
     /**
