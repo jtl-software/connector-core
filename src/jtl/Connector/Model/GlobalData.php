@@ -93,6 +93,14 @@ class GlobalData extends DataModel
     protected $shippingClasses = array();
 
     /**
+     * @var jtl\Connector\Model\ShippingMethod[] 
+     * @Serializer\Type("array<jtl\Connector\Model\ShippingMethod>")
+     * @Serializer\SerializedName("shippingMethods")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $shippingMethods = array();
+
+    /**
      * @var jtl\Connector\Model\TaxRate[] 
      * @Serializer\Type("array<jtl\Connector\Model\TaxRate>")
      * @Serializer\SerializedName("taxRates")
@@ -447,6 +455,43 @@ class GlobalData extends DataModel
     public function clearShippingClasses()
     {
         $this->shippingClasses = array();
+        return $this;
+    }
+
+    /**
+     * @param \jtl\Connector\Model\ShippingMethod $shippingMethod
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function addShippingMethod(\jtl\Connector\Model\ShippingMethod $shippingMethod)
+    {
+        $this->shippingMethods[] = $shippingMethod;
+        return $this;
+    }
+    
+    /**
+     * @param array $shippingMethods
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function setShippingMethods(array $shippingMethods)
+    {
+        $this->shippingMethods = $shippingMethods;
+        return $this;
+    }
+    
+    /**
+     * @return jtl\Connector\Model\ShippingMethod[]
+     */
+    public function getShippingMethods()
+    {
+        return $this->shippingMethods;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\GlobalData
+     */
+    public function clearShippingMethods()
+    {
+        $this->shippingMethods = array();
         return $this;
     }
 
