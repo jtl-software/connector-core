@@ -66,6 +66,7 @@ class Product extends DataType
             new PropertyInfo('packagingQuantity', 'double', 0.0, false, false, false),
             new PropertyInfo('permitNegativeStock', 'boolean', false, false, false, false),
             new PropertyInfo('productWeight', 'double', 0.0, false, false, false),
+            new PropertyInfo('purchasePrice', 'double', 0.0, false, false, false),
             new PropertyInfo('recommendedRetailPrice', 'double', 0.0, false, false, false),
             new PropertyInfo('serialNumber', 'string', '', false, false, false),
             new PropertyInfo('shippingWeight', 'double', 0.0, false, false, false),

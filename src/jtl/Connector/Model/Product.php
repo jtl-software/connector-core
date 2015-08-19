@@ -414,6 +414,14 @@ class Product extends DataModel
     protected $productWeight = 0.0;
 
     /**
+     * @var double 
+     * @Serializer\Type("double")
+     * @Serializer\SerializedName("purchasePrice")
+     * @Serializer\Accessor(getter="getPurchasePrice",setter="setPurchasePrice")
+     */
+    protected $purchasePrice = 0.0;
+
+    /**
      * @var double Optional recommended retail price (gross) 
      * @Serializer\Type("double")
      * @Serializer\SerializedName("recommendedRetailPrice")
@@ -1354,7 +1362,7 @@ class Product extends DataModel
     }
 
     /**
-     * @param double $minimumQuantity
+     * @param double $minimumQuantity 
      * @return \jtl\Connector\Model\Product
      */
     public function setMinimumQuantity($minimumQuantity)
@@ -1506,6 +1514,23 @@ class Product extends DataModel
     public function getProductWeight()
     {
         return $this->productWeight;
+    }
+
+    /**
+     * @param double $purchasePrice 
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setPurchasePrice($purchasePrice)
+    {
+        return $this->setProperty('purchasePrice', $purchasePrice, 'double');
+    }
+
+    /**
+     * @return double 
+     */
+    public function getPurchasePrice()
+    {
+        return $this->purchasePrice;
     }
 
     /**
