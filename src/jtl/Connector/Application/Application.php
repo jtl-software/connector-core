@@ -38,7 +38,6 @@ use \jtl\Connector\Model\DataModel;
 use \Doctrine\Common\Collections\ArrayCollection;
 use \jtl\Connector\Serializer\JMS\SerializerBuilder;
 use \jtl\Connector\Linker\ChecksumLinker;
-use jtl\Connector\Shopware\Utilities\IdConcatenator;
 use \Symfony\Component\EventDispatcher\EventDispatcher;
 use \jtl\Connector\Core\IO\Path;
 use \jtl\Connector\Event\EventHandler;
@@ -584,7 +583,7 @@ class Application extends CoreApplication
                 for ($i = 0; $i < count($images); $i++) {
                     foreach ($imagePaths as $imagePath) {
                         $infos = pathinfo($imagePath);
-                        list ($hostId, $relationType) = IdConcatenator::unlink($infos['filename']);
+                        list ($hostId, $relationType) = explode('_', $infos['filename']);
                         if ((int)$hostId == $images[$i]->getId()->getHost()
                             && strtolower($relationType) === strtolower($images[$i]->getRelationType())
                         ) {
