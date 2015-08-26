@@ -13,6 +13,7 @@ class Method
     const ACTION_PULL = 'pull';
     const ACTION_PUSH = 'push';
     const ACTION_DELETE = 'delete';
+    const ACTION_STATISTIC = 'statistic';
 
     /**
      * Rcp Method

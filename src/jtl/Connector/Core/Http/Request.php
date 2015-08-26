@@ -160,6 +160,34 @@ class Request
     
         return false;
     }
+
+    /**
+     * @param array $filesnames
+     * @param bool|true $withFolder
+     * @return bool
+     */
+    public static function deleteFileuploads(array $filesnames = array(), $withFolder = true)
+    {
+        if (count($filesnames) > 0) {
+            $folder = null;
+            foreach ($filesnames as $filesname) {
+                if ($folder === null) {
+                    $infos = pathinfo($filesname);
+                    $folder = $infos['dirname'];
+                }
+
+                @unlink($filesname);
+            }
+
+            if ($withFolder && $folder !== null) {
+                @rmdir($folder);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
     
     /**
      * Main HTTP Handler

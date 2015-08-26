@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Application;
 
+use jtl\Connector\Core\Compression\Zip;
+use jtl\Connector\Core\IO\Temp;
 use \jtl\Connector\Core\Serializer\Json;
 use \jtl\Connector\Core\Application\Application as CoreApplication;
 use \jtl\Connector\Core\Exception\RpcException;
@@ -36,9 +38,11 @@ use \jtl\Connector\Model\DataModel;
 use \Doctrine\Common\Collections\ArrayCollection;
 use \jtl\Connector\Serializer\JMS\SerializerBuilder;
 use \jtl\Connector\Linker\ChecksumLinker;
+use jtl\Connector\Shopware\Utilities\IdConcatenator;
 use \Symfony\Component\EventDispatcher\EventDispatcher;
 use \jtl\Connector\Core\IO\Path;
 use \jtl\Connector\Event\EventHandler;
+use Symfony\Component\Finder\Finder;
 
 /**
  * Application Class
@@ -48,7 +52,7 @@ use \jtl\Connector\Event\EventHandler;
  */
 class Application extends CoreApplication
 {
-    const PROTOCOL_VERSION = 2;
+    const PROTOCOL_VERSION = 3;
 
     /**
      * Connected EndpointConnectors
@@ -156,7 +160,9 @@ class Application extends CoreApplication
      * @throws RpcException
      * @return \jtl\Connector\Core\Rpc\ResponsePacket
      */
-    protected function execute(RequestPacket $requestpacket, Config $config, $rpcmode, $imagePath = null)
+    // OLD single Image
+    //protected function execute(RequestPacket $requestpacket, Config $config, $rpcmode, $imagePath = null)
+    protected function execute(RequestPacket $requestpacket, Config $config, $rpcmode, array $imagePaths = array())
     {
         if (!RpcMethod::isMethod($requestpacket->getMethod())) {
             throw new RpcException('Invalid Request', -32600);
@@ -193,15 +199,23 @@ class Application extends CoreApplication
         $this->deserializeRequestParams($requestpacket, $this->connector->getModelNamespace());
 
         // Image push?
-        $this->handleImagePush($requestpacket, $imagePath);
+        // OLD single Image
+        //$this->handleImagePush($requestpacket, $imagePath);
+        $this->handleImagePush($requestpacket, $imagePaths);
 
         $this->connector->setMethod($method);
         if ($this->connector->canHandle()) {
             $this->connector->setConfig($config);
             $actionresult = $this->connector->handle($requestpacket);
-            
+
+            /*
+             * OLD single Image
             if ($requestpacket->getMethod() === 'image.push' && $imagePath !== null) {
                 Request::deleteFileupload($imagePath);
+            }
+            */
+            if ($requestpacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
+                Request::deleteFileuploads($imagePaths);
             }
             
             if ($actionresult instanceof Action) {
@@ -247,8 +261,14 @@ class Application extends CoreApplication
                 throw new RpcException('Internal error', -32603);
             }
         } else {
+            /*
+             * OLD single Image
             if ($requestpacket->getMethod() === 'image.push') {
                 Request::deleteFileupload($imagePath);
+            }
+            */
+            if ($requestpacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
+                Request::deleteFileuploads($imagePaths);
             }
         }
 
@@ -285,16 +305,52 @@ class Application extends CoreApplication
         $this->runModelValidation($requestpacket);
 
         // Image?
+        /*
+         * OLD single Image
         $imagePath = null;
         if ($requestpacket->getMethod() === 'image.push') {
             $imagePath = Request::handleFileupload();
         }
+        */
+        $imagePaths = array();
+        if ($requestpacket->getMethod() === 'image.push') {
+            $zipFile = Request::handleFileupload();
+            $tempDir = Temp::generateDirectory();
+            if ($zipFile !== null && $tempDir !== null) {
+
+                $archive = new Zip();
+                if ($archive->extract($zipFile, $tempDir)) {
+                    $finder = new Finder();
+                    $finder->files()->ignoreDotFiles(true)->in($tempDir);
+                    foreach ($finder as $file) {
+                        $imagePaths[] = $file->getRealpath();
+                    }
+                } else {
+                    @rmdir($tempDir);
+                    @unlink($zipFile);
+
+                    throw new ApplicationException(sprintf('Zip File (%s) count not be extracted', $zipFile));
+                }
+
+                if ($zipFile !== null) {
+                    @unlink($zipFile);
+                }
+            }
+        }
 
         try {
-            $this->execute($requestpacket, $config, $rpcmode, $imagePath);
+            // OLD single Image
+            //$this->execute($requestpacket, $config, $rpcmode, $imagePath);
+            $this->execute($requestpacket, $config, $rpcmode, $imagePaths);
         } catch (RpcException $exc) {
+            /*
+             * OLD single Image
             if ($requestpacket->getMethod() === 'image.push' && $imagePath !== null) {
                 Request::deleteFileupload($imagePath);
+            }
+            */
+            if ($requestpacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
+                Request::deleteFileuploads($imagePaths);
             }
 
             $error = new Error();
@@ -355,7 +411,9 @@ class Application extends CoreApplication
             $serializer = SerializerBuilder::create();
             
             if ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) {
-                $ns = ($method->getAction() === Method::ACTION_PUSH && $method->getController() === 'image') ? $namespace : "ArrayCollection<{$namespace}>";
+                // OLD single Image
+                //$ns = ($method->getAction() === Method::ACTION_PUSH && $method->getController() === 'image') ? $namespace : "ArrayCollection<{$namespace}>";
+                $ns = "ArrayCollection<{$namespace}>";
                 $params = $serializer->deserialize($requestpacket->getParams(), $ns, 'json');
                 
                 $identityLinker = IdentityLinker::getInstance();
@@ -512,9 +570,54 @@ class Application extends CoreApplication
         $loader->load($this->eventDispatcher);
     }
 
-    protected function handleImagePush(RequestPacket &$requestpacket, $imagePath)
+    // OLD single Image
+    //protected function handleImagePush(RequestPacket &$requestpacket, $imagePath)
+    protected function handleImagePush(RequestPacket &$requestpacket, array $imagePaths = array())
     {
         if ($requestpacket->getMethod() === 'image.push') {
+            $images = $requestpacket->getParams();
+            if (!is_array($images)) {
+                throw new ApplicationException('Request params must be valid images');
+            }
+
+            if (count($imagePaths) > 0) {
+                for ($i = 0; $i < count($images); $i++) {
+                    foreach ($imagePaths as $imagePath) {
+                        $infos = pathinfo($imagePath);
+                        list ($hostId, $relationType) = IdConcatenator::unlink($infos['filename']);
+                        if ((int)$hostId == $images[$i]->getId()->getHost()
+                            && strtolower($relationType) === strtolower($images[$i]->getRelationType())
+                        ) {
+                            $images[$i]->setFilename($imagePath);
+                        }
+                    }
+                }
+
+                $requestpacket->setParams($images);
+            } else {
+                for ($i = 0; $i < count($images); $i++) {
+                    if (strlen($images[$i]->getRemoteUrl()) > 0) {
+                        $imageData = file_get_contents($images[$i]->getRemoteUrl());
+                        if ($imageData === false) {
+                            throw new ApplicationException('Could not get any data from url: ' . $images[$i]->getRemoteUrl());
+                        }
+
+                        $path = parse_url($images[$i]->getRemoteUrl(), PHP_URL_PATH);
+                        $fileName = pathinfo($path, PATHINFO_BASENAME);
+                        $imagePath = Path::combine(sys_get_temp_dir(), uniqid() . "_{$fileName}");
+                        file_put_contents($imagePath, $imageData);
+
+                        $images[$i]->setFilename($imagePath);
+                    } else {
+                        throw new ApplicationException('Could not handle fileupload (no file was uploaded via HTTP POST?)');
+                    }
+                }
+
+                $requestpacket->setParams($images);
+            }
+
+            /*
+             * OLD single Image
             $image = $requestpacket->getParams();
             if (!($image instanceof \jtl\Connector\Model\Image)) {
                 throw new ApplicationException('Image push must send a valid image entity');
@@ -545,6 +648,7 @@ class Application extends CoreApplication
                     throw new ApplicationException('Could not handle fileupload (no file was uploaded via HTTP POST?)');
                 }
             }
+            */
         }
     }
 
