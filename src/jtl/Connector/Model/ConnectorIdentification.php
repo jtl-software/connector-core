@@ -53,6 +53,14 @@ class ConnectorIdentification extends DataModel
     protected $protocolVersion = '';
 
     /**
+     * @var ConnectorServerInfo
+     * @Serializer\Type("jtl\Connector\Model\ConnectorServerInfo")
+     * @Serializer\SerializedName("serverInfo")
+     * @Serializer\Accessor(getter="getServerInfo",setter="setServerInfo")
+     */
+    protected $serverInfo = null;
+
+    /**
      * @param string $endpointVersion 
      * @return \jtl\Connector\Model\ConnectorIdentification
      */
@@ -118,5 +126,22 @@ class ConnectorIdentification extends DataModel
     public function getProtocolVersion()
     {
         return $this->protocolVersion;
+    }
+
+    /**
+     * @param ConnectorServerInfo $connectorServerInfo
+     * @return \jtl\Connector\Model\ConnectorIdentification
+     */
+    public function setServerInfo(ConnectorServerInfo $connectorServerInfo)
+    {
+        $this->serverInfo = $connectorServerInfo;
+    }
+
+    /**
+     * @return ConnectorServerInfo
+     */
+    public function getServerInfo()
+    {
+        return $this->serverInfo;
     }
 }
