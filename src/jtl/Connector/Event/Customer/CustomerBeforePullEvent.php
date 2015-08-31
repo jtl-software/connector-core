@@ -2,21 +2,21 @@
 namespace jtl\Connector\Event\Customer;
 
 use \Symfony\Component\EventDispatcher\Event;
-use \jtl\Connector\Core\Model\QueryFilter;
+use \jtl\Connector\Model\Customer;
 
 class CustomerBeforePullEvent extends Event
 {
     const EVENT_NAME = 'customer.before.pull';
 
-    protected $filter;
-    
-    public function __construct(QueryFilter &$filter)
+    protected $customer;
+
+    public function __construct(Customer &$customer)
     {
-        $this->filter = $filter;    
+        $this->customer = $customer;
     }
 
-    public function getFilter()
+    public function getCustomer()
     {
-        return $this->filter;    
+        return $this->customer;
     }
 }

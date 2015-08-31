@@ -6,17 +6,17 @@ use \jtl\Connector\Model\ProductPrice;
 
 class ProductPriceAfterDeleteEvent extends Event
 {
-    const EVENT_NAME = 'productPrice.after.delete';
+    const EVENT_NAME = 'productprice.after.delete';
 
-    protected $productPrice;
-    
-    public function __construct(ProductPrice &$productPrice)
+    protected $productprice;
+
+    public function __construct(ProductPrice &$productprice)
     {
-        $this->productPrice = $productPrice;    
+        $this->productprice = $productprice;
     }
 
     public function getProductPrice()
     {
-        return $this->productPrice;    
+        return $this->productprice;
     }
 }

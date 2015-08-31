@@ -6,17 +6,17 @@ use \jtl\Connector\Model\ProductStockLevel;
 
 class ProductStockLevelBeforeDeleteEvent extends Event
 {
-    const EVENT_NAME = 'productStockLevel.before.delete';
+    const EVENT_NAME = 'productstocklevel.before.delete';
 
-    protected $productStockLevel;
-    
-    public function __construct(ProductStockLevel &$productStockLevel)
+    protected $productstocklevel;
+
+    public function __construct(ProductStockLevel &$productstocklevel)
     {
-        $this->productStockLevel = $productStockLevel;    
+        $this->productstocklevel = $productstocklevel;
     }
 
     public function getProductStockLevel()
     {
-        return $this->productStockLevel;    
+        return $this->productstocklevel;
     }
 }

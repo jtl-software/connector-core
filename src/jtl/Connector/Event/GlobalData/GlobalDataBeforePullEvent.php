@@ -2,21 +2,21 @@
 namespace jtl\Connector\Event\GlobalData;
 
 use \Symfony\Component\EventDispatcher\Event;
-use \jtl\Connector\Core\Model\QueryFilter;
+use \jtl\Connector\Model\GlobalData;
 
 class GlobalDataBeforePullEvent extends Event
 {
-    const EVENT_NAME = 'globalData.before.pull';
+    const EVENT_NAME = 'globaldata.before.pull';
 
-    protected $filter;
-    
-    public function __construct(QueryFilter &$filter)
+    protected $globaldata;
+
+    public function __construct(GlobalData &$globaldata)
     {
-        $this->filter = $filter;    
+        $this->globaldata = $globaldata;
     }
 
-    public function getFilter()
+    public function getGlobalData()
     {
-        return $this->filter;    
+        return $this->globaldata;
     }
 }

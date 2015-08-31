@@ -6,17 +6,17 @@ use \jtl\Connector\Model\GlobalData;
 
 class GlobalDataAfterPushEvent extends Event
 {
-    const EVENT_NAME = 'globalData.after.push';
+    const EVENT_NAME = 'globaldata.after.push';
 
-    protected $globalData;
-    
-    public function __construct(GlobalData &$globalData)
+    protected $globaldata;
+
+    public function __construct(GlobalData &$globaldata)
     {
-        $this->globalData = $globalData;    
+        $this->globaldata = $globaldata;
     }
 
     public function getGlobalData()
     {
-        return $this->globalData;    
+        return $this->globaldata;
     }
 }

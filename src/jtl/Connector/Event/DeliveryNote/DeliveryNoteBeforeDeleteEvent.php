@@ -6,17 +6,17 @@ use \jtl\Connector\Model\DeliveryNote;
 
 class DeliveryNoteBeforeDeleteEvent extends Event
 {
-    const EVENT_NAME = 'deliveryNote.before.delete';
+    const EVENT_NAME = 'deliverynote.before.delete';
 
-    protected $deliveryNote;
-    
-    public function __construct(DeliveryNote &$deliveryNote)
+    protected $deliverynote;
+
+    public function __construct(DeliveryNote &$deliverynote)
     {
-        $this->deliveryNote = $deliveryNote;    
+        $this->deliverynote = $deliverynote;
     }
 
     public function getDeliveryNote()
     {
-        return $this->deliveryNote;    
+        return $this->deliverynote;
     }
 }

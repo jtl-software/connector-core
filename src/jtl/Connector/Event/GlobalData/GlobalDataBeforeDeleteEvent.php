@@ -6,17 +6,17 @@ use \jtl\Connector\Model\GlobalData;
 
 class GlobalDataBeforeDeleteEvent extends Event
 {
-    const EVENT_NAME = 'globalData.before.delete';
+    const EVENT_NAME = 'globaldata.before.delete';
 
-    protected $globalData;
-    
-    public function __construct(GlobalData &$globalData)
+    protected $globaldata;
+
+    public function __construct(GlobalData &$globaldata)
     {
-        $this->globalData = $globalData;    
+        $this->globaldata = $globaldata;
     }
 
     public function getGlobalData()
     {
-        return $this->globalData;    
+        return $this->globaldata;
     }
 }

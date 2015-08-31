@@ -6,17 +6,17 @@ use \jtl\Connector\Model\CustomerOrder;
 
 class CustomerOrderBeforePushEvent extends Event
 {
-    const EVENT_NAME = 'customerOrder.before.push';
+    const EVENT_NAME = 'customerorder.before.push';
 
-    protected $customerOrder;
-    
-    public function __construct(CustomerOrder &$customerOrder)
+    protected $customerorder;
+
+    public function __construct(CustomerOrder &$customerorder)
     {
-        $this->customerOrder = $customerOrder;    
+        $this->customerorder = $customerorder;
     }
 
     public function getCustomerOrder()
     {
-        return $this->customerOrder;    
+        return $this->customerorder;
     }
 }

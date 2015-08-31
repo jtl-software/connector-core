@@ -9,10 +9,10 @@ class PaymentBeforePushEvent extends Event
     const EVENT_NAME = 'payment.before.push';
 
     protected $payment;
-    
+
     public function __construct(Payment &$payment)
     {
-        $this->payment = $payment;    
+        $this->payment = $payment;
     }
 
     public function getPayment()

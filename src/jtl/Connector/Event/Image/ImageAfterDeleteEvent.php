@@ -9,14 +9,14 @@ class ImageAfterDeleteEvent extends Event
     const EVENT_NAME = 'image.after.delete';
 
     protected $image;
-    
+
     public function __construct(Image &$image)
     {
-        $this->image = $image;    
+        $this->image = $image;
     }
 
     public function getImage()
     {
-        return $this->image;    
+        return $this->image;
     }
 }

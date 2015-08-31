@@ -2,21 +2,21 @@
 namespace jtl\Connector\Event\CustomerOrder;
 
 use \Symfony\Component\EventDispatcher\Event;
-use \jtl\Connector\Core\Model\QueryFilter;
+use \jtl\Connector\Model\CustomerOrder;
 
 class CustomerOrderBeforePullEvent extends Event
 {
-    const EVENT_NAME = 'customerOrder.before.pull';
+    const EVENT_NAME = 'customerorder.before.pull';
 
-    protected $filter;
-    
-    public function __construct(QueryFilter &$filter)
+    protected $customerorder;
+
+    public function __construct(CustomerOrder &$customerorder)
     {
-        $this->filter = $filter;    
+        $this->customerorder = $customerorder;
     }
 
-    public function getFilter()
+    public function getCustomerOrder()
     {
-        return $this->filter;    
+        return $this->customerorder;
     }
 }

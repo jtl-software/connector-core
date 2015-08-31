@@ -6,17 +6,17 @@ use \jtl\Connector\Model\CustomerOrder;
 
 class CustomerOrderAfterDeleteEvent extends Event
 {
-    const EVENT_NAME = 'customerOrder.after.delete';
+    const EVENT_NAME = 'customerorder.after.delete';
 
-    protected $customerOrder;
-    
-    public function __construct(CustomerOrder &$customerOrder)
+    protected $customerorder;
+
+    public function __construct(CustomerOrder &$customerorder)
     {
-        $this->customerOrder = $customerOrder;    
+        $this->customerorder = $customerorder;
     }
 
     public function getCustomerOrder()
     {
-        return $this->customerOrder;    
+        return $this->customerorder;
     }
 }

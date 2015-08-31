@@ -2,21 +2,21 @@
 namespace jtl\Connector\Event\Image;
 
 use \Symfony\Component\EventDispatcher\Event;
-use \jtl\Connector\Core\Model\QueryFilter;
+use \jtl\Connector\Model\Image;
 
 class ImageBeforePullEvent extends Event
 {
     const EVENT_NAME = 'image.before.pull';
 
-    protected $filter;
-    
-    public function __construct(QueryFilter &$filter)
+    protected $image;
+
+    public function __construct(Image &$image)
     {
-        $this->filter = $filter;    
+        $this->image = $image;
     }
 
-    public function getFilter()
+    public function getImage()
     {
-        return $this->filter;    
+        return $this->image;
     }
 }

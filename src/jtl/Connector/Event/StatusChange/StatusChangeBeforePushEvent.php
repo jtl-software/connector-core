@@ -6,17 +6,17 @@ use \jtl\Connector\Model\StatusChange;
 
 class StatusChangeBeforePushEvent extends Event
 {
-    const EVENT_NAME = 'statusChange.before.push';
+    const EVENT_NAME = 'statuschange.before.push';
 
-    protected $statusChange;
-    
-    public function __construct(StatusChange &$statusChange)
+    protected $statuschange;
+
+    public function __construct(StatusChange &$statuschange)
     {
-        $this->statusChange = $statusChange;    
+        $this->statuschange = $statuschange;
     }
 
     public function getStatusChange()
     {
-        return $this->statusChange;    
+        return $this->statuschange;
     }
 }

@@ -9,14 +9,14 @@ class ProductAfterPullEvent extends Event
     const EVENT_NAME = 'product.after.pull';
 
     protected $product;
-    
+
     public function __construct(Product &$product)
     {
-        $this->product = $product;    
+        $this->product = $product;
     }
 
     public function getProduct()
     {
-        return $this->product;    
+        return $this->product;
     }
 }

@@ -6,17 +6,17 @@ use \jtl\Connector\Model\DeliveryNote;
 
 class DeliveryNoteAfterPullEvent extends Event
 {
-    const EVENT_NAME = 'deliveryNote.after.pull';
+    const EVENT_NAME = 'deliverynote.after.pull';
 
-    protected $deliveryNote;
-    
-    public function __construct(DeliveryNote &$deliveryNote)
+    protected $deliverynote;
+
+    public function __construct(DeliveryNote &$deliverynote)
     {
-        $this->deliveryNote = $deliveryNote;    
+        $this->deliverynote = $deliverynote;
     }
 
     public function getDeliveryNote()
     {
-        return $this->deliveryNote;    
+        return $this->deliverynote;
     }
 }

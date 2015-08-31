@@ -6,17 +6,17 @@ use \jtl\Connector\Model\DeliveryNote;
 
 class DeliveryNoteAfterDeleteEvent extends Event
 {
-    const EVENT_NAME = 'deliveryNote.after.delete';
+    const EVENT_NAME = 'deliverynote.after.delete';
 
-    protected $deliveryNote;
-    
-    public function __construct(DeliveryNote &$deliveryNote)
+    protected $deliverynote;
+
+    public function __construct(DeliveryNote &$deliverynote)
     {
-        $this->deliveryNote = $deliveryNote;    
+        $this->deliverynote = $deliverynote;
     }
 
     public function getDeliveryNote()
     {
-        return $this->deliveryNote;    
+        return $this->deliverynote;
     }
 }

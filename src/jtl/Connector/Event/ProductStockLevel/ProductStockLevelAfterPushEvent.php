@@ -6,17 +6,17 @@ use \jtl\Connector\Model\ProductStockLevel;
 
 class ProductStockLevelAfterPushEvent extends Event
 {
-    const EVENT_NAME = 'productStockLevel.after.push';
+    const EVENT_NAME = 'productstocklevel.after.push';
 
-    protected $productStockLevel;
-    
-    public function __construct(ProductStockLevel &$productStockLevel)
+    protected $productstocklevel;
+
+    public function __construct(ProductStockLevel &$productstocklevel)
     {
-        $this->productStockLevel = $productStockLevel;    
+        $this->productstocklevel = $productstocklevel;
     }
 
     public function getProductStockLevel()
     {
-        return $this->productStockLevel;    
+        return $this->productstocklevel;
     }
 }

@@ -6,17 +6,17 @@ use \jtl\Connector\Model\StatusChange;
 
 class StatusChangeBeforeDeleteEvent extends Event
 {
-    const EVENT_NAME = 'statusChange.before.delete';
+    const EVENT_NAME = 'statuschange.before.delete';
 
-    protected $statusChange;
-    
-    public function __construct(StatusChange &$statusChange)
+    protected $statuschange;
+
+    public function __construct(StatusChange &$statuschange)
     {
-        $this->statusChange = $statusChange;    
+        $this->statuschange = $statuschange;
     }
 
     public function getStatusChange()
     {
-        return $this->statusChange;    
+        return $this->statuschange;
     }
 }
