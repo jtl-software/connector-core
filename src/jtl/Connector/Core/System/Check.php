@@ -22,5 +22,10 @@ class Check
         if (!extension_loaded('sqlite3') || !class_exists('Sqlite3')) {
             throw new MissingRequirementException('The connector needs the sqlite3 PHP extension');
         }
+
+        // Zip
+        if (!class_exists('ZipArchive')) {
+            throw new MissingRequirementException('Class ZipArchive not found. PHP 5 >= 5.2.0, PECL zip >= 1.1.0 installed?');
+        }
     }
 }
