@@ -50,7 +50,7 @@ class Response
         header('Content-type: application/json', true, 200);
         
         $packets = array();
-        foreach ($responsepackets as $responsepacket) {
+        foreach ($reponsepackets as $responsepacket) {
             $response = $responsepacket->getPublic();
             Logger::write(Json::encode($response), Logger::DEBUG, 'rpc');
 

@@ -11,22 +11,28 @@ class EventHandler
     const BEFORE = 'before';
     const AFTER = 'after';
 
-    public static function dispatch(&$entity, EventDispatcher $dispatcher, $controller, $action, $moment)
+    public static function dispatch(&$entity, EventDispatcher $dispatcher, $action, $moment)
     {
         if ((!($entity instanceof DataModel) && !($entity instanceof QueryFilter)) || strlen(trim($action)) == 0 || strlen(trim($moment)) == 0) {
             return;
         }
 
         $class = ClassName::getFromNS(get_class($entity));
-
-        // Global
-        $globalEvent = self::createGeneralEvent($entity, $class, $controller, $action, $moment);
-        if ($globalEvent !== null) {
-            $dispatcher->dispatch($globalEvent::EVENT_NAME, $globalEvent);
-        }
-
         $event = self::createEvent($entity, $class, $action, $moment);
 
+        if ($event !== null) {
+            $dispatcher->dispatch($event::EVENT_NAME, $event);
+        }
+    }
+
+    public static function dispatchRpc(&$data, EventDispatcher $dispatcher, $controller, $action, $moment)
+    {
+        if (strlen(trim($action)) == 0 || strlen(trim($moment)) == 0) {
+            return;
+        }
+
+        // Rpc Event
+        $event = self::createRpcEvent($data, $controller, $action, $moment);
         if ($event !== null) {
             $dispatcher->dispatch($event::EVENT_NAME, $event);
         }
@@ -43,12 +49,12 @@ class EventHandler
         return null;
     }
 
-    protected static function createGeneralEvent(&$entity, $class, $controller, $action, $moment)
+    protected static function createRpcEvent(&$data, $controller, $action, $moment)
     {
-        $eventClassname = sprintf('\jtl\Connector\Event\General\General%sEvent', ucfirst($moment));
+        $eventClassname = sprintf('\jtl\Connector\Event\Rpc\Rpc%sEvent', ucfirst($moment));
 
         if (class_exists($eventClassname)) {
-            return new $eventClassname($entity, $class, $controller, $action);
+            return new $eventClassname($data, $controller, $action);
         }
 
         return null;

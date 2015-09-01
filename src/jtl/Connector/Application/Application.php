@@ -176,6 +176,10 @@ class Application extends CoreApplication
         $coreconnector = Connector::getInstance();
         $method = RpcMethod::splitMethod($requestpacket->getMethod());
         $coreconnector->setMethod($method);
+
+        // Rpc Event
+        EventHandler::dispatchRpc($requestpacket->getParams(), $this->eventDispatcher, $method->getController(), $method->getAction(), EventHandler::BEFORE);
+
         if ($method->isCore() && $coreconnector->canHandle()) {
             $coreconnector->setConfig($config);
             $actionresult = $coreconnector->handle($requestpacket);
@@ -183,6 +187,7 @@ class Application extends CoreApplication
                 $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
 
                 if ($rpcmode == Packet::SINGLE_MODE) {
+                    $this->triggerRpcAfterEvent($responsepacket->getPublic(), $requestpacket->getMethod());
                     Response::send($responsepacket);
                 } else {
                     return $responsepacket;
@@ -216,7 +221,7 @@ class Application extends CoreApplication
             if ($requestpacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
                 Request::deleteFileuploads($imagePaths);
             }
-            
+
             if ($actionresult instanceof Action) {
                 $exists = true;
                 if ($actionresult->isHandled()) {
@@ -234,8 +239,8 @@ class Application extends CoreApplication
                                 ChecksumLinker::link($model);
 
                                 // Event
-                                EventHandler::dispatch($model, $this->eventDispatcher, $method->getController(), $method->getAction(), EventHandler::AFTER);
-                                
+                                EventHandler::dispatch($model, $this->eventDispatcher, $method->getAction(), EventHandler::AFTER);
+
                                 if ($method->getAction() === Method::ACTION_PULL) {
                                     $results[] = $model->getPublic();
                                 }
@@ -251,6 +256,7 @@ class Application extends CoreApplication
                     $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
 
                     if ($rpcmode == Packet::SINGLE_MODE) {
+                        $this->triggerRpcAfterEvent($responsepacket->getPublic(), $requestpacket->getMethod());
                         Response::send($responsepacket);
                     } else {
                         return $responsepacket;
@@ -356,13 +362,14 @@ class Application extends CoreApplication
 
             $error = new Error();
             $error->setCode($exc->getCode())
-              ->setMessage($exc->getMessage());
+                ->setMessage($exc->getMessage());
 
             $responsepacket = new ResponsePacket();
             $responsepacket->setId($requestpacket->getId())
-              ->setJtlrpc($requestpacket->getJtlrpc())
-              ->setError($error);
+                ->setJtlrpc($requestpacket->getJtlrpc())
+                ->setError($error);
 
+            $this->triggerRpcAfterEvent($responsepacket->getPublic(), $requestpacket->getMethod());
             Response::send($responsepacket);
         }
     }
@@ -387,12 +394,12 @@ class Application extends CoreApplication
             } catch (RpcException $exc) {
                 $error = new Error();
                 $error->setCode($exc->getCode())
-                  ->setMessage($exc->getMessage());
+                    ->setMessage($exc->getMessage());
 
                 $responsepacket = new ResponsePacket();
                 $responsepacket->setId($requestpacket->getId())
-                  ->setJtlrpc($requestpacket->getJtlrpc())
-                  ->setError($error);
+                    ->setJtlrpc($requestpacket->getJtlrpc())
+                    ->setError($error);
 
                 $jtlrpcreponses[] = $responsepacket;
             }
@@ -410,13 +417,13 @@ class Application extends CoreApplication
 
         if (class_exists("\\{$namespace}") && $requestpacket->getParams() !== null) {
             $serializer = SerializerBuilder::create();
-            
+
             if ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) {
                 // OLD single Image
                 //$ns = ($method->getAction() === Method::ACTION_PUSH && $method->getController() === 'image') ? $namespace : "ArrayCollection<{$namespace}>";
                 $ns = "ArrayCollection<{$namespace}>";
                 $params = $serializer->deserialize($requestpacket->getParams(), $ns, 'json');
-                
+
                 $identityLinker = IdentityLinker::getInstance();
                 if (is_array($params)) {
                     // Identity mapping
@@ -427,7 +434,7 @@ class Application extends CoreApplication
                         ChecksumLinker::link($param);
 
                         // Event
-                        EventHandler::dispatch($param, $this->eventDispatcher, $method->getController(), $method->getAction(), EventHandler::BEFORE);
+                        EventHandler::dispatch($param, $this->eventDispatcher, $method->getAction(), EventHandler::BEFORE);
                     }
                 } else {
                     $identityLinker->linkModel($params);
@@ -436,13 +443,13 @@ class Application extends CoreApplication
                     ChecksumLinker::link($params);
 
                     // Event
-                    EventHandler::dispatch($params, $this->eventDispatcher, $method->getController(), $method->getAction(), EventHandler::BEFORE);
+                    EventHandler::dispatch($params, $this->eventDispatcher, $method->getAction(), EventHandler::BEFORE);
                 }
             } else {
                 $params = $serializer->deserialize($requestpacket->getParams(), $namespace, 'json');
 
                 // Event
-                EventHandler::dispatch($params, $this->eventDispatcher, $method->getController(), $method->getAction(), EventHandler::BEFORE);
+                EventHandler::dispatch($params, $this->eventDispatcher, $method->getAction(), EventHandler::BEFORE);
             }
 
             $requestpacket->setParams($params);
@@ -461,9 +468,9 @@ class Application extends CoreApplication
     {
         $responsepacket = new ResponsePacket();
         $responsepacket->setId($requestpacket->getId())
-          ->setJtlrpc($requestpacket->getJtlrpc())
-          ->setResult($actionresult->getResult())
-          ->setError($actionresult->getError());
+            ->setJtlrpc($requestpacket->getJtlrpc())
+            ->setResult($actionresult->getResult())
+            ->setError($actionresult->getError());
 
         $responsepacket->validate();
 
@@ -528,8 +535,8 @@ class Application extends CoreApplication
         } else {
             $json = new ConfigJson($configFile);
             $this->config = new Config(array(
-              $json,
-              new ConfigSystem()
+                $json,
+                new ConfigSystem()
             ));
         }
 
@@ -651,6 +658,12 @@ class Application extends CoreApplication
             }
             */
         }
+    }
+
+    protected function triggerRpcAfterEvent($data, $method)
+    {
+        $method = RpcMethod::splitMethod($method);
+        EventHandler::dispatchRpc($data, $this->eventDispatcher, $method->getController(), $method->getAction(), EventHandler::AFTER);
     }
 
     /**
