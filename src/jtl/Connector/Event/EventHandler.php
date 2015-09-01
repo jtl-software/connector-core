@@ -11,13 +11,20 @@ class EventHandler
     const BEFORE = 'before';
     const AFTER = 'after';
 
-    public static function dispatch(&$entity, EventDispatcher $dispatcher, $action, $moment)
+    public static function dispatch(&$entity, EventDispatcher $dispatcher, $controller, $action, $moment)
     {
         if ((!($entity instanceof DataModel) && !($entity instanceof QueryFilter)) || strlen(trim($action)) == 0 || strlen(trim($moment)) == 0) {
             return;
         }
 
         $class = ClassName::getFromNS(get_class($entity));
+
+        // Global
+        $globalEvent = self::createGeneralEvent($entity, $class, $controller, $action, $moment);
+        if ($globalEvent !== null) {
+            $dispatcher->dispatch($globalEvent::EVENT_NAME, $globalEvent);
+        }
+
         $event = self::createEvent($entity, $class, $action, $moment);
 
         if ($event !== null) {
@@ -31,6 +38,17 @@ class EventHandler
 
         if (class_exists($eventClassname)) {
             return new $eventClassname($entity);
+        }
+
+        return null;
+    }
+
+    protected static function createGeneralEvent(&$entity, $class, $controller, $action, $moment)
+    {
+        $eventClassname = sprintf('\jtl\Connector\Event\General\General%sEvent', ucfirst($moment));
+
+        if (class_exists($eventClassname)) {
+            return new $eventClassname($entity, $class, $controller, $action);
         }
 
         return null;

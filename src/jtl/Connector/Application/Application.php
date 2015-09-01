@@ -234,7 +234,7 @@ class Application extends CoreApplication
                                 ChecksumLinker::link($model);
 
                                 // Event
-                                EventHandler::dispatch($model, $this->eventDispatcher, $method->getAction(), EventHandler::AFTER);
+                                EventHandler::dispatch($model, $this->eventDispatcher, $method->getController(), $method->getAction(), EventHandler::AFTER);
                                 
                                 if ($method->getAction() === Method::ACTION_PULL) {
                                     $results[] = $model->getPublic();
@@ -315,8 +315,8 @@ class Application extends CoreApplication
         if ($requestpacket->getMethod() === 'image.push') {
             $zipFile = Request::handleFileupload();
             $tempDir = Temp::generateDirectory();
-            if ($zipFile !== null && $tempDir !== null) {
 
+            if ($zipFile !== null && $tempDir !== null) {
                 $archive = new Zip();
                 if ($archive->extract($zipFile, $tempDir)) {
                     $finder = new Finder();
@@ -334,6 +334,8 @@ class Application extends CoreApplication
                 if ($zipFile !== null) {
                     @unlink($zipFile);
                 }
+            } else {
+                throw new ApplicationException('Image Zip File missing or temp dir could not be created');
             }
         }
 
@@ -425,7 +427,7 @@ class Application extends CoreApplication
                         ChecksumLinker::link($param);
 
                         // Event
-                        EventHandler::dispatch($param, $this->eventDispatcher, $method->getAction(), EventHandler::BEFORE);
+                        EventHandler::dispatch($param, $this->eventDispatcher, $method->getController(), $method->getAction(), EventHandler::BEFORE);
                     }
                 } else {
                     $identityLinker->linkModel($params);
@@ -434,13 +436,13 @@ class Application extends CoreApplication
                     ChecksumLinker::link($params);
 
                     // Event
-                    EventHandler::dispatch($params, $this->eventDispatcher, $method->getAction(), EventHandler::BEFORE);
+                    EventHandler::dispatch($params, $this->eventDispatcher, $method->getController(), $method->getAction(), EventHandler::BEFORE);
                 }
             } else {
                 $params = $serializer->deserialize($requestpacket->getParams(), $namespace, 'json');
 
                 // Event
-                EventHandler::dispatch($params, $this->eventDispatcher, $method->getAction(), EventHandler::BEFORE);
+                EventHandler::dispatch($params, $this->eventDispatcher, $method->getController(), $method->getAction(), EventHandler::BEFORE);
             }
 
             $requestpacket->setParams($params);
