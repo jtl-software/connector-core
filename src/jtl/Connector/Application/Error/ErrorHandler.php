@@ -91,21 +91,23 @@ class ErrorHandler implements IErrorHandler
         // Shutdown
         $shutdownFunc = function() {
             if (($err = error_get_last())) {
-                ob_clean();
+                if ($err['type'] != E_WARNING && $err['type'] != E_NOTICE) {
+                    ob_clean();
 
-                $error = new Error();
-                $error->setCode($err['type'])
-                    ->setData('Shutdown! File: ' . $err['file'] . ' - Line: ' . $err['line'])
-                    ->setMessage($err['message']);
+                    $error = new Error();
+                    $error->setCode($err['type'])
+                        ->setData('Shutdown! File: ' . $err['file'] . ' - Line: ' . $err['line'])
+                        ->setMessage($err['message']);
 
-                $responsepacket = new ResponsePacket();
-                $responsepacket->setError($error)
-                    ->setId('unknown')
-                    ->setJtlrpc('2.0');
+                    $responsepacket = new ResponsePacket();
+                    $responsepacket->setError($error)
+                        ->setId('unknown')
+                        ->setJtlrpc('2.0');
 
-                $this->triggerRpcAfterEvent($responsepacket->getPublic(), 'unknown.unknown');
+                    $this->triggerRpcAfterEvent($responsepacket->getPublic(), 'unknown.unknown');
 
-                Response::send($responsepacket);
+                    Response::send($responsepacket);
+                }
             }
         };
 
