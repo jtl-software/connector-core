@@ -6,6 +6,8 @@
 
 namespace jtl\Connector\Application;
 
+use jtl\Connector\Application\Error\ErrorHandler;
+use jtl\Connector\Application\Error\IErrorHandler;
 use jtl\Connector\Core\Compression\Zip;
 use jtl\Connector\Core\IO\Temp;
 use \jtl\Connector\Core\Serializer\Json;
@@ -77,9 +79,17 @@ class Application extends CoreApplication
      */
     protected $eventDispatcher;
 
+    /**
+     * @var \jtl\Connector\Application\Error\IErrorHandler
+     */
+    protected $errorHandler;
+
     protected function __construct()
     {
         require_once(dirname(__FILE__) . '/../bootstrap.php');
+
+        // Error Handler
+        $this->setErrorHandler(new ErrorHandler());
     }
 
     /**
@@ -97,6 +107,8 @@ class Application extends CoreApplication
 
         // Event Dispatcher
         $this->eventDispatcher = new EventDispatcher();
+
+        $this->getErrorHandler()->setEventDispatcher($this->eventDispatcher);
 
         $jtlrpc = Request::handle($this->connector->getUseSuperGlobals());
         $sessionId = Request::getSession();
@@ -701,5 +713,23 @@ class Application extends CoreApplication
     public function getConfig()
     {
         return $this->config;
+    }
+
+    /**
+     * @return IErrorHandler
+     */
+    public function getErrorHandler()
+    {
+        return $this->errorHandler;
+    }
+
+    /**
+     * @param IErrorHandler $handler
+     * @return $this
+     */
+    public function setErrorHandler(IErrorHandler $handler)
+    {
+        $this->errorHandler = $handler;
+        return $this;
     }
 }
