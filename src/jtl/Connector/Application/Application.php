@@ -210,6 +210,7 @@ class Application extends CoreApplication
         $this->connector->setMethod($method);
         if ($this->connector->canHandle()) {
             $this->connector->setConfig($config);
+
             $actionresult = $this->connector->handle($requestpacket);
 
             /*
@@ -349,7 +350,7 @@ class Application extends CoreApplication
             // OLD single Image
             //$this->execute($requestpacket, $config, $rpcmode, $imagePath);
             $this->execute($requestpacket, $config, $rpcmode, $imagePaths);
-        } catch (RpcException $exc) {
+        } catch (\Exception $exc) {
             /*
              * OLD single Image
             if ($requestpacket->getMethod() === 'image.push' && $imagePath !== null) {
