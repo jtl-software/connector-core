@@ -190,7 +190,8 @@ class Application extends CoreApplication
         $coreconnector->setMethod($method);
 
         // Rpc Event
-        EventHandler::dispatchRpc($requestpacket->getParams(), $this->eventDispatcher, $method->getController(), $method->getAction(), EventHandler::BEFORE);
+        $data = $requestpacket->getParams();
+        EventHandler::dispatchRpc($data, $this->eventDispatcher, $method->getController(), $method->getAction(), EventHandler::BEFORE);
 
         if ($method->isCore() && $coreconnector->canHandle()) {
             $coreconnector->setConfig($config);
