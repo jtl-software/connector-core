@@ -91,7 +91,15 @@ class ErrorHandler implements IErrorHandler
         // Shutdown
         $shutdownFunc = function() {
             if (($err = error_get_last())) {
-                if ($err['type'] != E_WARNING && $err['type'] != E_NOTICE) {
+                $allowed = array(
+                    E_ERROR,
+                    E_CORE_ERROR,
+                    E_CORE_ERROR,
+                    E_USER_ERROR,
+                    E_RECOVERABLE_ERROR
+                );
+
+                if (in_array($err['type'], $allowed)) {
                     ob_clean();
 
                     $error = new Error();
