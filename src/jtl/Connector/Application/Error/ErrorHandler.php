@@ -68,7 +68,6 @@ class ErrorHandler implements IErrorHandler
                 E_CORE_ERROR => array(Logger::ERROR, 'E_CORE_ERROR'),
                 E_CORE_WARNING => array(Logger::WARNING, 'E_CORE_WARNING'),
                 E_CORE_ERROR => array(Logger::ERROR, 'E_COMPILE_ERROR'),
-                E_CORE_WARNING => array(Logger::WARNING, 'E_COMPILE_WARNING'),
                 E_USER_ERROR => array(Logger::ERROR, 'E_USER_ERROR'),
                 E_USER_WARNING => array(Logger::WARNING, 'E_USER_WARNING'),
                 E_USER_NOTICE => array(Logger::NOTICE, 'E_USER_NOTICE'),
@@ -93,7 +92,6 @@ class ErrorHandler implements IErrorHandler
             if (($err = error_get_last())) {
                 $allowed = array(
                     E_ERROR,
-                    E_CORE_ERROR,
                     E_CORE_ERROR,
                     E_USER_ERROR,
                     E_RECOVERABLE_ERROR
