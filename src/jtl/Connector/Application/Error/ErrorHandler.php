@@ -28,7 +28,31 @@ class ErrorHandler implements IErrorHandler
         ini_set('display_errors', 1);
 
         // Exception
-        $exceptionFunc = function(\Exception $e) {
+        $this->setExceptionHandler($this->getExceptionHandler());
+
+        // Error
+        $this->setErrorHandler($this->getErrorHandler());
+
+        // Shutdown
+        $this->setShutdownHandler($this->getShutdownHandler());
+    }
+
+    protected function triggerRpcAfterEvent($data, $method)
+    {
+        if ($this->eventDispatcher !== null) {
+            $method = RpcMethod::splitMethod($method);
+            EventHandler::dispatchRpc($data, $this->eventDispatcher, $method->getController(), $method->getAction(), EventHandler::AFTER);
+        }
+    }
+
+    public function setExceptionHandler(callable $func)
+    {
+        set_exception_handler($func);
+    }
+
+    public function getExceptionHandler()
+    {
+        return function(\Exception $e) {
             $trace = $e->getTrace();
             if (isset($trace[0]['args'][0])) {
                 $requestpacket = $trace[0]['args'][0];
@@ -55,11 +79,16 @@ class ErrorHandler implements IErrorHandler
             $this->triggerRpcAfterEvent($responsepacket->getPublic(), $method);
             Response::send($responsepacket);
         };
+    }
 
-        $this->setExceptionHandler($exceptionFunc);
+    public function setErrorHandler(callable $func)
+    {
+        set_error_handler($func, E_ALL);
+    }
 
-        // Error
-        $errorFunc = function($errno, $errstr, $errfile, $errline, $errcontext) {
+    public function getErrorHandler()
+    {
+        return function($errno, $errstr, $errfile, $errline, $errcontext) {
             $types = array(
                 E_ERROR => array(Logger::ERROR, 'E_ERROR'),
                 E_WARNING => array(Logger::WARNING, 'E_WARNING'),
@@ -84,11 +113,16 @@ class ErrorHandler implements IErrorHandler
                 Logger::write("File ({$errfile}, {$errline}): {$errstr}", Logger::ERROR, 'global');
             }
         };
+    }
 
-        $this->setErrorHandler($errorFunc);
+    public function setShutdownHandler(callable $func)
+    {
+        register_shutdown_function($func);
+    }
 
-        // Shutdown
-        $shutdownFunc = function() {
+    public function getShutdownHandler()
+    {
+        return function() {
             if (($err = error_get_last())) {
                 $allowed = array(
                     E_ERROR,
@@ -116,31 +150,6 @@ class ErrorHandler implements IErrorHandler
                 }
             }
         };
-
-        $this->setShutdownHandler($shutdownFunc);
-    }
-
-    protected function triggerRpcAfterEvent($data, $method)
-    {
-        if ($this->eventDispatcher !== null) {
-            $method = RpcMethod::splitMethod($method);
-            EventHandler::dispatchRpc($data, $this->eventDispatcher, $method->getController(), $method->getAction(), EventHandler::AFTER);
-        }
-    }
-
-    public function setExceptionHandler(callable $func)
-    {
-        set_exception_handler($func);
-    }
-
-    public function setErrorHandler(callable $func)
-    {
-        set_error_handler($func, E_ALL);
-    }
-
-    public function setShutdownHandler(callable $func)
-    {
-        register_shutdown_function($func);
     }
 
     public function setEventDispatcher(EventDispatcher $dispatcher)
