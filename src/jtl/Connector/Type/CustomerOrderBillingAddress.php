@@ -34,6 +34,7 @@ class CustomerOrderBillingAddress extends DataType
             new PropertyInfo('state', 'string', '', false, false, false),
             new PropertyInfo('street', 'string', '', false, false, false),
             new PropertyInfo('title', 'string', '', false, false, false),
+            new PropertyInfo('vatNumber', 'string', '', false, false, false),
             new PropertyInfo('zipCode', 'string', '', false, false, false),
         );
     }

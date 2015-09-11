@@ -158,6 +158,14 @@ class CustomerOrderBillingAddress extends DataModel
     protected $title = '';
 
     /**
+     * @var string VAT number (german "USt-ID")
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("vatNumber")
+     * @Serializer\Accessor(getter="getVatNumber",setter="setVatNumber")
+     */
+    protected $vatNumber = '';
+
+    /**
      * @var string Zip / postal code
      * @Serializer\Type("string")
      * @Serializer\SerializedName("zipCode")
@@ -463,6 +471,23 @@ class CustomerOrderBillingAddress extends DataModel
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * @param string $vatNumber VAT number (german "USt-ID")
+     * @return \jtl\Connector\Model\CustomerOrderBillingAddress
+     */
+    public function setVatNumber($vatNumber)
+    {
+        return $this->setProperty('vatNumber', $vatNumber, 'string');
+    }
+
+    /**
+     * @return string VAT number (german "USt-ID")
+     */
+    public function getVatNumber()
+    {
+        return $this->vatNumber;
     }
 
     /**
