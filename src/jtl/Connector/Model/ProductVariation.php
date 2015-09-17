@@ -29,7 +29,7 @@ class ProductVariation extends DataModel
      */
     const TYPE_SELECT = 'select';
     /**
-     * @var string -
+     * @var string - boxes showing a text
      */
     const TYPE_TEXTBOX = 'textbox';
     /**
@@ -41,7 +41,7 @@ class ProductVariation extends DataModel
      */
     const TYPE_FREE_TEXT_OBLIGATORY = 'obligatory_freetext';
     /**
-     * @var string -
+     * @var string - boxes showing a color
      */
     const TYPE_IMAGE_SWATCHES = 'image_swatches';
 
