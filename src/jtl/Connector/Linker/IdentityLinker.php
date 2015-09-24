@@ -309,7 +309,7 @@ class IdentityLinker
                     $list = $model->{$getter}();
                     foreach ($list as &$entity) {
                         if ($entity instanceof DataModel) {
-                            $this->linkModel($entity);
+                            $this->linkModel($entity, $isDeleted);
                         } elseif ($entity instanceof Identity && $this->isType($reflect->getShortName(), $property)) {
                             $this->linkIdentityList($entity, $reflect->getShortName(), $property, $isDeleted);
                         } else {
@@ -321,7 +321,7 @@ class IdentityLinker
                     }
                 } elseif ($model->{$getter}() instanceof DataModel) {
                     $entity = $model->{$getter}();
-                    $this->linkModel($entity);
+                    $this->linkModel($entity, $isDeleted);
                 } else {
                     Logger::write(
                         sprintf('Property (%s) from model (%s) is not an array or an instance of DataModel', $propertyInfo->getName(), $reflect->getShortName()),
