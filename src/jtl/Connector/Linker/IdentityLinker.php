@@ -110,6 +110,7 @@ class IdentityLinker
             'productId' => self::TYPE_PRODUCT
         ),
         'ProductSpecific' => array(
+            'id' => self::TYPE_SPECIFIC,
             'productId' => self::TYPE_PRODUCT,
             'specificValueId' => self::TYPE_SPECIFIC_VALUE
         ),
