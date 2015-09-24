@@ -128,7 +128,9 @@ class ErrorHandler implements IErrorHandler
                     E_ERROR,
                     E_CORE_ERROR,
                     E_USER_ERROR,
-                    E_RECOVERABLE_ERROR
+                    E_RECOVERABLE_ERROR,
+                    E_COMPILE_ERROR,
+                    E_PARSE
                 );
 
                 if (in_array($err['type'], $allowed)) {
@@ -138,6 +140,13 @@ class ErrorHandler implements IErrorHandler
                     $error->setCode($err['type'])
                         ->setData('Shutdown! File: ' . $err['file'] . ' - Line: ' . $err['line'])
                         ->setMessage($err['message']);
+
+                    Logger::write(sprintf(
+                        '%s - Type: %s - Message: %s',
+                        $error->getData(),
+                        $err['type'],
+                        $error->getMessage()
+                    ), Logger::ERROR, 'global');
 
                     $responsepacket = new ResponsePacket();
                     $responsepacket->setError($error)
