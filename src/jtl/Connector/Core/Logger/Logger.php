@@ -21,6 +21,17 @@ class Logger extends Monolog
      */
     public static function write($message, $level = self::ERROR, $channel = 'general')
     {
+        $forceWriting = false;
+        if (function_exists('Application') && Application()->getConfig() !== null) {
+            try {
+                $forceWriting = Application()->getConfig()->read('developer_logging');
+            } catch (\Exception $e) { }
+        }
+
+        if (!$forceWriting && $level == Monolog::DEBUG && getenv('APPLICATION_ENV') != 'development') {
+            return null;
+        }
+
         if ($level == Monolog::DEBUG && getenv('APPLICATION_ENV') != 'development') {
             return null;
         }

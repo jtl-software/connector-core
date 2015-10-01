@@ -249,6 +249,8 @@ class Application extends CoreApplication
                             if ($model instanceof DataModel) {
                                 $identityLinker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
 
+                                // @TODO: Specific identity delete
+
                                 // Checksum linking
                                 ChecksumLinker::link($model);
 
