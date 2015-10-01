@@ -19,6 +19,7 @@ class ProductVariationValue extends DataType
         return array(
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('productVariationId', 'Identity', null, false, true, false),
+            new PropertyInfo('ean', 'string', '', false, false, false),
             new PropertyInfo('extraWeight', 'double', 0.0, false, false, false),
             new PropertyInfo('sku', 'string', '', false, false, false),
             new PropertyInfo('sort', 'integer', 0, false, false, false),

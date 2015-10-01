@@ -53,7 +53,7 @@ use Symfony\Component\Finder\Finder;
  */
 class Application extends CoreApplication
 {
-    const PROTOCOL_VERSION = 5;
+    const PROTOCOL_VERSION = 6;
 
     /**
      * Connected EndpointConnectors

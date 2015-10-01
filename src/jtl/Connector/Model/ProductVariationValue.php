@@ -38,6 +38,14 @@ class ProductVariationValue extends DataModel
     protected $productVariationId = null;
 
     /**
+     * @var string 
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("ean")
+     * @Serializer\Accessor(getter="getEan",setter="setEan")
+     */
+    protected $ean = '';
+
+    /**
      * @var double Optional variation extra weight
      * @Serializer\Type("double")
      * @Serializer\SerializedName("extraWeight")
@@ -136,6 +144,23 @@ class ProductVariationValue extends DataModel
     public function getProductVariationId()
     {
         return $this->productVariationId;
+    }
+
+    /**
+     * @param string $ean 
+     * @return \jtl\Connector\Model\ProductVariationValue
+     */
+    public function setEan($ean)
+    {
+        return $this->setProperty('ean', $ean, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getEan()
+    {
+        return $this->ean;
     }
 
     /**
