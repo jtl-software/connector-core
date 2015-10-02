@@ -14,13 +14,12 @@
     "require": {
         "php": ">=5.4.0",
         "monolog/monolog": "~1.11",
-        "jms/serializer": "~0.16",
+        "jms/serializer": "~1.0",
         "doctrine/collections": "1.2.*@dev",
         "symfony/event-dispatcher": "~2.7",
         "symfony/finder": "~2.7"
     },
     "require-dev": {
-        "phpdocumentor/phpdocumentor": "~2.8",
         "evert/phpdoc-md": "~0.1"
     },
     "minimum-stability": "stable",
