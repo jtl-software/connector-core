@@ -23,11 +23,6 @@
         "evert/phpdoc-md": "~0.1"
     },
     "minimum-stability": "stable",
-    "extra": {
-        "branch-alias": {
-          "dev-master": "1.0.x-dev"
-        }
-    },
     "autoload": {
         "psr-0": {
             "jtl\\Connector\\": "src/"
