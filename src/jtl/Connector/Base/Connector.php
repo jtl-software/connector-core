@@ -1,52 +1,256 @@
 <?php
-
 /**
+ *
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Base
  */
-
 namespace jtl\Connector\Base;
 
+use \jtl\Connector\Core\Rpc\RequestPacket;
 use \jtl\Connector\Application\IEndpointConnector;
-use \jtl\Core\Utilities\Singleton;
-use \jtl\Core\Utilities\Config\Config;
-use \jtl\Core\Exception\ConnectorException;
+use \jtl\Connector\Core\Utilities\Singleton;
+use \jtl\Connector\Core\Utilities\RpcMethod;
+use \jtl\Connector\Core\Config\Config;
+use \jtl\Connector\Core\Exception\ConnectorException;
+use \jtl\Connector\Core\Rpc\Method;
+use \jtl\Connector\Mapper\IPrimaryKeyMapper;
+use \jtl\Connector\Authentication\ITokenLoader;
+use \jtl\Connector\Checksum\IChecksumLoader;
+use \Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * Base Connector
- * 
+ *
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-abstract class Connector extends Singleton implements IEndpointConnector
+class Connector extends Singleton implements IEndpointConnector
 {
+    protected $controller;
+    protected $keyMapper;
+    protected $tokenLoader;
+    protected $checksumLoader;
+    protected $eventDispatcher;
+    protected $config;
+    protected $method;
+    protected $useSuperGlobals = true;
+    protected $modelNamespace = 'jtl\Connector\Model';
 
-  protected $config;
-
-  /**
-   * Setter connector config.
-   * 
-   * @param \jtl\Core\Utilities\Config\Config $config
-   */
-  public function setConfig(Config $config)
-  {
-    $this->config = $config;
-  }
-
-  /**
-   * Returns the config.
-   * 
-   * @return object
-   * @throws ConnectorException
-   */
-  public function getConfig()
-  {
-    if (empty($this->config)) {
-      throw new ConnectorException('The connector configuration is not set!');
+    public function initialize()
+    {
+        
     }
-    return $this->config;
-  }
 
+    /**
+     * Setter primary key mapper
+     *
+     * @param \jtl\Connector\Mapper\IPrimaryKeyMapper $mapper
+     * @return \jtl\Connector\Base\Connector
+     */
+    public function setPrimaryKeyMapper(IPrimaryKeyMapper $mapper)
+    {
+        $this->keyMapper = $mapper;
+        return $this;
+    }
+
+    /**
+     * Returns primary key mapper
+     *
+     * @return \jtl\Connector\Authentication\ITokenLoader
+     */
+    public function getPrimaryKeyMapper()
+    {
+        return $this->keyMapper;
+    }
+
+    /**
+     * Setter token loader
+     *
+     * @param \jtl\Connector\Authentication\ITokenLoader $tokenLoader
+     * @return \jtl\Connector\Base\Connector
+     */
+    public function setTokenLoader(ITokenLoader $tokenLoader)
+    {
+        $this->tokenLoader = $tokenLoader;
+        return $this;
+    }
+
+    /**
+     * Returns token loader
+     *
+     * @return \jtl\Connector\Authentication\ITokenLoader
+     */
+    public function getTokenLoader()
+    {
+        return $this->tokenLoader;
+    }
+
+    /**
+     * Setter checksum loader
+     *
+     * @param \jtl\Connector\Checksum\IChecksumLoader $checksumLoader
+     * @return \jtl\Connector\Base\Connector
+     */
+    public function setChecksumLoader(IChecksumLoader $checksumLoader)
+    {
+        $this->checksumLoader = $checksumLoader;
+        return $this;
+    }
+
+    /**
+     * Returns checksum loader
+     *
+     * @return \jtl\Connector\Checksum\IChecksumLoader
+     */
+    public function getChecksumLoader()
+    {
+        return $this->checksumLoader;
+    }
+
+    /**
+     * Setter checksum loader
+     *
+     * @param Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher
+     * @return \jtl\Connector\Base\Connector
+     */
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+        return $this;
+    }
+
+    /**
+     * Returns checksum loader
+     *
+     * @return Symfony\Component\EventDispatcher\EventDispatcher
+     */
+    public function getEventDispatcher()
+    {
+        return $this->eventDispatcher;
+    }
+
+    /**
+     * Setter connector config.
+     *
+     * @param \jtl\Connector\Core\Config\Config $config
+     * @return \jtl\Connector\Base\Connector
+     */
+    public function setConfig(Config $config)
+    {
+        $this->config = $config;
+        return $this;
+    }
+
+    /**
+     * Returns the config.
+     *
+     * @return object
+     * @throws ConnectorException
+     */
+    public function getConfig()
+    {
+        if (empty($this->config)) {
+            throw new ConnectorException('The connector configuration is not set!');
+        }
+        return $this->config;
+    }
+    
+    /**
+     * Method Setter
+     *
+     * @param \jtl\Connector\Core\Rpc\Method $method
+     * @return \jtl\Connector\Core\Controller\Controller
+     */
+    public function setMethod(Method $method)
+    {
+        $this->method = $method;
+        return $this;
+    }
+    
+    /**
+     * Method Getter
+     *
+     * @return \jtl\Connector\Core\Rpc\Method
+     */
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getUseSuperGlobals()
+    {
+        return $this->useSuperGlobals;
+    }
+
+    /**
+     * Method Setter
+     *
+     * @param string $modelNamespace
+     * @return \jtl\Connector\Core\Controller\Controller
+     */
+    public function setModelNamespace($modelNamespace)
+    {
+        if (!is_string($modelNamespace) || $modelNamespace[strlen($modelNamespace) - 1] == '\\' || $modelNamespace[0] == '\\') {
+            throw new \InvalidArgumentException(sprintf('Wrong Namespace (%s) syntax. Example: jtl\Connector\Model', $modelNamespace));
+        }
+
+        $this->modelNamespace = $modelNamespace;
+        return $this;
+    }
+    
+    /**
+     * Method Getter
+     *
+     * @return string
+     */
+    public function getModelNamespace()
+    {
+        return $this->modelNamespace;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     *
+     * @see \jtl\Connector\Application\IEndpointConnector::canHandle()
+     */
+    public function canHandle()
+    {
+        $controller = RpcMethod::buildController($this->getMethod()->getController());
+        
+        $class = "\\jtl\\Connector\\Controller\\{$controller}";
+        if (class_exists($class)) {
+            $this->controller = $class::getInstance();
+            $this->action = $this->getMethod()->getAction();
+        
+            return method_exists($this->controller, $this->action);
+        }
+        
+        return false;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     *
+     * @see \jtl\Connector\Application\IEndpointConnector::handle()
+     */
+    public function handle(RequestPacket $requestpacket)
+    {
+        $this->controller->setConfig($this->getConfig());
+        $this->controller->setMethod($this->getMethod());
+        
+        return $this->controller->{$this->action}($requestpacket->getParams());
+    }
+
+    /**
+     * (non-PHPdoc)
+     *
+     * @see \jtl\Connector\Application\IEndpointConnector::getController()
+     */
+    public function getController()
+    {
+        return $this->controller;
+    }
 }
-
-?>

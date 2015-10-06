@@ -1,21 +1,49 @@
 <?php
-
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Application 
+ * @package jtl\Connector\Application
  */
+
 namespace jtl\Connector\Application;
 
-use \jtl\Core\Application\Application as CoreApplication;
-use \jtl\Core\Exception\RpcException;
-use \jtl\Core\Rpc\Handler;
-use \jtl\Core\Rpc\RequestPacket;
-use \jtl\Core\Rpc\ResponsePacket;
-use \jtl\Core\Http\Response;
-use \jtl\Core\Authentication\Wawi as WawiAuthentication;
-use \jtl\Core\Utilities\Config\Config;
-use \jtl\Core\Utilities\Config\Json as ConfigJson;
+use jtl\Connector\Application\Error\ErrorHandler;
+use jtl\Connector\Application\Error\IErrorHandler;
+use jtl\Connector\Core\Compression\Zip;
+use jtl\Connector\Core\IO\Temp;
+use \jtl\Connector\Core\Serializer\Json;
+use \jtl\Connector\Core\Application\Application as CoreApplication;
+use \jtl\Connector\Core\Exception\RpcException;
+use \jtl\Connector\Core\Exception\SessionException;
+use \jtl\Connector\Core\Exception\ApplicationException;
+use \jtl\Connector\Core\Rpc\Packet;
+use \jtl\Connector\Core\Rpc\RequestPacket;
+use \jtl\Connector\Core\Rpc\ResponsePacket;
+use \jtl\Connector\Core\Rpc\Error;
+use \jtl\Connector\Core\Http\Request;
+use \jtl\Connector\Core\Http\Response;
+use \jtl\Connector\Core\Config\Config;
+use \jtl\Connector\Core\Config\Loader\Json as ConfigJson;
+use \jtl\Connector\Core\Config\Loader\System as ConfigSystem;
 use \jtl\Connector\Result\Action;
+use \jtl\Connector\Core\Validator\Schema;
+use \jtl\Connector\Core\Exception\SchemaException;
+use \jtl\Connector\Core\Validator\ValidationException;
+use \jtl\Connector\Database\Sqlite3;
+use \jtl\Connector\Core\Utilities\RpcMethod;
+use \jtl\Connector\Session\Session;
+use \jtl\Connector\Base\Connector;
+use \jtl\Connector\Core\Logger\Logger;
+use \Doctrine\Common\Annotations\AnnotationRegistry;
+use \jtl\Connector\Core\Rpc\Method;
+use \jtl\Connector\Linker\IdentityLinker;
+use \jtl\Connector\Model\DataModel;
+use \Doctrine\Common\Collections\ArrayCollection;
+use \jtl\Connector\Serializer\JMS\SerializerBuilder;
+use \jtl\Connector\Linker\ChecksumLinker;
+use \Symfony\Component\EventDispatcher\EventDispatcher;
+use \jtl\Connector\Core\IO\Path;
+use \jtl\Connector\Event\EventHandler;
+use Symfony\Component\Finder\Finder;
 
 /**
  * Application Class
@@ -25,87 +53,686 @@ use \jtl\Connector\Result\Action;
  */
 class Application extends CoreApplication
 {
+    const PROTOCOL_VERSION = 6;
 
     /**
-     * List of connected EndpointConnectors
+     * Connected EndpointConnectors
      *
-     * @var multiple: IEndpointConnector
+     * @var IEndpointConnector
      */
-    protected static $_connectors = array();
-    
+    protected $connector = null;
+
+    /**
+     * @var \jtl\connector\Core\Config\Config;
+     */
+    protected $config;
+
+    /**
+     * Global Session
+     *
+     * @var \jtl\Connector\Session\Session
+     */
+    protected $session;
+
+    /**
+     * @var \Symfony\Component\EventDispatcher\EventDispatcher
+     */
+    protected $eventDispatcher;
+
+    /**
+     * @var \jtl\Connector\Application\Error\IErrorHandler
+     */
+    protected $errorHandler;
+
+    protected function __construct()
+    {
+        require_once(dirname(__FILE__) . '/../bootstrap.php');
+
+        // Error Handler
+        $this->setErrorHandler(new ErrorHandler());
+    }
 
     /**
      * (non-PHPdoc)
-     * 
-     * @see \jtl\Core\Application\Application::run()
+     *
+     * @see \jtl\Connector\Core\Application\Application::run()
      */
     public function run()
     {
-        // Rpc Request
-        $requestpacket = new RequestPacket();
-        $requestpacket->prepare();
-        $requestpacket->validate();
-        
-        // Creates the config instance
-        $config = new Config(new ConfigJson(APP_DIR . '/../config/default.json'));
-        
-        foreach (self::$_connectors as $endpointconnector)
-        {
-            if ($endpointconnector->canHandle($requestpacket->getMethod()))
-            {
-                $endpointconnector->setConfig($config);
-                $actionresult = $endpointconnector->handle($requestpacket->getId(), $requestpacket->getMethod(), $requestpacket->getParams());
-                
-                if (get_class($actionresult) == "jtl\\Connector\\Result\\Action")
-                {
-                    if ($actionresult->isHandled())
-                    {
-                        $responsepacket = $this->buildRcpResponse($requestpacket, $actionresult);
-                        Response::send($responsepacket);
-                    }
+        AnnotationRegistry::registerLoader('class_exists');
+
+        if ($this->connector === null) {
+            throw new ApplicationException('No connector registed');
+        }
+
+        // Event Dispatcher
+        $this->eventDispatcher = new EventDispatcher();
+
+        $this->getErrorHandler()->setEventDispatcher($this->eventDispatcher);
+
+        $jtlrpc = Request::handle($this->connector->getUseSuperGlobals());
+        $sessionId = Request::getSession();
+        $requestpackets = RequestPacket::build($jtlrpc);
+
+        Logger::write(sprintf('RequestPacket: %s', Json::encode($requestpackets->getPublic())), Logger::DEBUG, 'rpc');
+        if (is_string($requestpackets->getParams())) {
+            Logger::write(sprintf('Params: %s', $requestpackets->getParams()), Logger::DEBUG, 'rpc');
+        }
+
+        $rpcmode = is_object($requestpackets) ? Packet::SINGLE_MODE : Packet::BATCH_MODE;
+
+        $method = null;
+        if ($rpcmode == Packet::SINGLE_MODE) {
+            $method = $requestpackets->getMethod();
+        }
+
+        // Start Session
+        $this->startSession($sessionId, $method);
+
+        // Start Configuration
+        $this->startConfiguration();
+
+        // Register Event Dispatcher
+        $this->startEventDispatcher();
+
+        // Initialize Endpoint
+        $this->connector->initialize();
+
+        if ($this->connector->getPrimaryKeyMapper() === null) {
+            throw new ApplicationException('No primary key mapper registered');
+        }
+
+        if ($this->connector->getTokenLoader() === null) {
+            throw new ApplicationException('No token loader registered');
+        }
+
+        if ($this->connector->getChecksumLoader() === null) {
+            throw new ApplicationException('No checksum loader registered');
+        }
+
+        ChecksumLinker::setChecksumLoader($this->connector->getChecksumLoader());
+
+        switch ($rpcmode) {
+            case Packet::SINGLE_MODE:
+                $this->runSingle($requestpackets, $this->config, $rpcmode);
+                break;
+            case Packet::BATCH_MODE:
+                $this->runBatch($requestpackets, $this->config, $rpcmode);
+                break;
+        }
+    }
+
+    /**
+     * Execute RPC Method
+     *
+     * @param RequestPacket $requestpacket
+     * @param Config $config
+     * @param integer $rpcmode
+     * @throws RpcException
+     * @return \jtl\Connector\Core\Rpc\ResponsePacket
+     */
+    // OLD single Image
+    //protected function execute(RequestPacket $requestpacket, Config $config, $rpcmode, $imagePath = null)
+    protected function execute(RequestPacket $requestpacket, Config $config, $rpcmode, array $imagePaths = array())
+    {
+        if (!RpcMethod::isMethod($requestpacket->getMethod())) {
+            throw new RpcException('Invalid Request', -32600);
+        }
+
+        $identityLinker = IdentityLinker::getInstance();
+        $identityLinker->setPrimaryKeyMapper($this->connector->getPrimaryKeyMapper());
+
+        ////////////////////
+        // Core Connector //
+        ////////////////////
+        $coreconnector = Connector::getInstance();
+        $method = RpcMethod::splitMethod($requestpacket->getMethod());
+        $coreconnector->setMethod($method);
+
+        // Rpc Event
+        $data = $requestpacket->getParams();
+        EventHandler::dispatchRpc($data, $this->eventDispatcher, $method->getController(), $method->getAction(), EventHandler::BEFORE);
+
+        if ($method->isCore() && $coreconnector->canHandle()) {
+            $coreconnector->setConfig($config);
+            $actionresult = $coreconnector->handle($requestpacket);
+            if ($actionresult->isHandled()) {
+                $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
+
+                if ($rpcmode == Packet::SINGLE_MODE) {
+                    $this->triggerRpcAfterEvent($responsepacket->getPublic(), $requestpacket->getMethod());
+                    Response::send($responsepacket);
+                } else {
+                    return $responsepacket;
                 }
-                else
-                    throw new RpcException("Internal error", -32603);                
             }
         }
-        
-        // Could not be handled
-        throw new RpcException("Method not found", -32601);
+
+        ////////////////////////
+        // Endpoint Connector //
+        ////////////////////////
+        $exists = false;
+
+        $this->deserializeRequestParams($requestpacket, $this->connector->getModelNamespace());
+
+        // Image push?
+        // OLD single Image
+        //$this->handleImagePush($requestpacket, $imagePath);
+        $this->handleImagePush($requestpacket, $imagePaths);
+
+        $this->connector->setMethod($method);
+        if ($this->connector->canHandle()) {
+            $this->connector->setConfig($config);
+
+            $actionresult = $this->connector->handle($requestpacket);
+
+            /*
+             * OLD single Image
+            if ($requestpacket->getMethod() === 'image.push' && $imagePath !== null) {
+                Request::deleteFileupload($imagePath);
+            }
+            */
+            if ($requestpacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
+                Request::deleteFileuploads($imagePaths);
+            }
+
+            if ($actionresult instanceof Action) {
+                $exists = true;
+                if ($actionresult->isHandled()) {
+
+                    if ($actionresult->getError() === null) {
+
+                        // Identity mapping
+                        $results = array();
+                        $models = is_array($actionresult->getResult()) ? $actionresult->getResult() : array($actionresult->getResult());
+                        foreach ($models as $model) {
+                            if ($model instanceof DataModel) {
+                                $identityLinker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
+
+                                // @TODO: Specific identity delete
+
+                                // Checksum linking
+                                ChecksumLinker::link($model);
+
+                                // Event
+                                EventHandler::dispatch($model, $this->eventDispatcher, $method->getAction(), EventHandler::AFTER);
+
+                                if ($method->getAction() === Method::ACTION_PULL) {
+                                    $results[] = $model->getPublic();
+                                }
+                            }
+                        }
+
+                        if ($method->getAction() === Method::ACTION_PULL) {
+                            $actionresult->setResult($results);
+                        }
+                    }
+
+                    // Building response packet
+                    $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
+
+                    if ($rpcmode == Packet::SINGLE_MODE) {
+                        $this->triggerRpcAfterEvent($responsepacket->getPublic(), $requestpacket->getMethod());
+                        Response::send($responsepacket);
+                    } else {
+                        return $responsepacket;
+                    }
+                }
+            } else {
+                throw new RpcException('Internal error', -32603);
+            }
+        } else {
+            /*
+             * OLD single Image
+            if ($requestpacket->getMethod() === 'image.push') {
+                Request::deleteFileupload($imagePath);
+            }
+            */
+            if ($requestpacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
+                Request::deleteFileuploads($imagePaths);
+            }
+        }
+
+        if ($exists) {
+            throw new RpcException('Method could not be handled', -32000);
+        } else {
+            throw new RpcException(
+                sprintf("Method '%s' not found", $requestpacket->getMethod()),
+                -32601
+            );
+        }
     }
-    
 
     /**
      *
-     * @param IEndpointConnector $endpointconnector            
+     * @param IEndpointConnector $endpointconnector
      */
-    public static function register(IEndpointConnector $endpointconnector)
+    public function register(IEndpointConnector $endpointconnector)
     {
-        $classname = get_class($endpointconnector);
-        
-        if (!isset(self::$_connectors[$classname]))
-            self::$_connectors[$classname] = $endpointconnector;
+        $this->connector = $endpointconnector;
     }
-    
-    
+
+    /**
+     * Single Mode
+     *
+     * @param ResponsePacket $requestpacket
+     * @param Config $config
+     * @param integer $rpcmode
+     */
+    protected function runSingle(RequestPacket $requestpacket, Config $config, $rpcmode)
+    {
+        $requestpacket->validate();
+        $this->runActionValidation($requestpacket);
+        $this->runModelValidation($requestpacket);
+
+        // Image?
+        /*
+         * OLD single Image
+        $imagePath = null;
+        if ($requestpacket->getMethod() === 'image.push') {
+            $imagePath = Request::handleFileupload();
+        }
+        */
+        $imagePaths = array();
+        if ($requestpacket->getMethod() === 'image.push') {
+            $zipFile = Request::handleFileupload();
+            $tempDir = Temp::generateDirectory();
+
+            if ($zipFile !== null && $tempDir !== null) {
+                $archive = new Zip();
+                if ($archive->extract($zipFile, $tempDir)) {
+                    $finder = new Finder();
+                    $finder->files()->ignoreDotFiles(true)->in($tempDir);
+                    foreach ($finder as $file) {
+                        $imagePaths[] = $file->getRealpath();
+                    }
+                } else {
+                    @rmdir($tempDir);
+                    @unlink($zipFile);
+
+                    throw new ApplicationException(sprintf('Zip File (%s) count not be extracted', $zipFile));
+                }
+
+                if ($zipFile !== null) {
+                    @unlink($zipFile);
+                }
+            } else {
+                throw new ApplicationException('Image Zip File missing or temp dir could not be created');
+            }
+        }
+
+        try {
+            // OLD single Image
+            //$this->execute($requestpacket, $config, $rpcmode, $imagePath);
+            $this->execute($requestpacket, $config, $rpcmode, $imagePaths);
+        } catch (\Exception $exc) {
+            /*
+             * OLD single Image
+            if ($requestpacket->getMethod() === 'image.push' && $imagePath !== null) {
+                Request::deleteFileupload($imagePath);
+            }
+            */
+            if ($requestpacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
+                Request::deleteFileuploads($imagePaths);
+            }
+
+            $error = new Error();
+            $error->setCode($exc->getCode())
+                ->setMessage($exc->getMessage());
+
+            $responsepacket = new ResponsePacket();
+            $responsepacket->setId($requestpacket->getId())
+                ->setJtlrpc($requestpacket->getJtlrpc())
+                ->setError($error);
+
+            $this->triggerRpcAfterEvent($responsepacket->getPublic(), $requestpacket->getMethod());
+            Response::send($responsepacket);
+        }
+    }
+
+    /**
+     * Batch Mode
+     *
+     * @param array $requestpackets
+     * @param Config $config
+     * @param integer $rpcmode
+     */
+    protected function runBatch(array $requestpackets, Config $config, $rpcmode)
+    {
+        $jtlrpcreponses = array();
+
+        foreach ($requestpackets as $requestpacket) {
+            try {
+                $requestpacket->validate();
+                $this->runActionValidation($requestpacket);
+                $this->runModelValidation($requestpacket);
+                $jtlrpcreponses[] = $this->execute($requestpacket, $config, $rpcmode);
+            } catch (RpcException $exc) {
+                $error = new Error();
+                $error->setCode($exc->getCode())
+                    ->setMessage($exc->getMessage());
+
+                $responsepacket = new ResponsePacket();
+                $responsepacket->setId($requestpacket->getId())
+                    ->setJtlrpc($requestpacket->getJtlrpc())
+                    ->setError($error);
+
+                $jtlrpcreponses[] = $responsepacket;
+            }
+        }
+
+        Response::sendAll($jtlrpcreponses);
+    }
+
+    protected function deserializeRequestParams(RequestPacket &$requestpacket, $modelNamespace)
+    {
+        $method = RpcMethod::splitMethod($requestpacket->getMethod());
+
+        $namespace = ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) ?
+            sprintf('%s\%s', $modelNamespace, RpcMethod::buildController($method->getController())) : 'jtl\Connector\Core\Model\QueryFilter';
+
+        if (class_exists("\\{$namespace}") && $requestpacket->getParams() !== null) {
+            $serializer = SerializerBuilder::create();
+
+            if ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) {
+                // OLD single Image
+                //$ns = ($method->getAction() === Method::ACTION_PUSH && $method->getController() === 'image') ? $namespace : "ArrayCollection<{$namespace}>";
+                $ns = "ArrayCollection<{$namespace}>";
+                $params = $serializer->deserialize($requestpacket->getParams(), $ns, 'json');
+
+                $identityLinker = IdentityLinker::getInstance();
+                if (is_array($params)) {
+                    // Identity mapping
+                    foreach ($params as &$param) {
+                        $identityLinker->linkModel($param);
+
+                        // Checksum linking
+                        ChecksumLinker::link($param);
+
+                        // Event
+                        EventHandler::dispatch($param, $this->eventDispatcher, $method->getAction(), EventHandler::BEFORE);
+                    }
+                } else {
+                    $identityLinker->linkModel($params);
+
+                    // Checksum linking
+                    ChecksumLinker::link($params);
+
+                    // Event
+                    EventHandler::dispatch($params, $this->eventDispatcher, $method->getAction(), EventHandler::BEFORE);
+                }
+            } else {
+                $params = $serializer->deserialize($requestpacket->getParams(), $namespace, 'json');
+
+                // Event
+                EventHandler::dispatch($params, $this->eventDispatcher, $method->getAction(), EventHandler::BEFORE);
+            }
+
+            $requestpacket->setParams($params);
+        }
+    }
+
     /**
      * Build RPC Reponse Packet
-     * 
-     * @param jtl\Core\Rpc\ResponsePacket $requestpacket
-     * @param jtl\Connector\Result\Action $actionresult
-     * @return \jtl\Core\Rpc\ResponsePacket
-     * @throws \jtl\Core\Exception\RpcException
+     *
+     * @param \jtl\Connector\Core\Rpc\ResponsePacket $requestpacket
+     * @param \jtl\Connector\Result\Action $actionresult
+     * @return \jtl\Connector\Core\Rpc\ResponsePacket
+     * @throws \jtl\Connector\Core\Exception\RpcException
      */
-    protected function buildRcpResponse(RequestPacket $requestpacket, Action $actionresult)
+    protected function buildRpcResponse(RequestPacket $requestpacket, Action $actionresult)
     {
         $responsepacket = new ResponsePacket();
         $responsepacket->setId($requestpacket->getId())
-        	->setJtlrpc($requestpacket->getJtlrpc())
-        	->setResult($actionresult->getResult())
-        	->setError($actionresult->getError());
-        
+            ->setJtlrpc($requestpacket->getJtlrpc())
+            ->setResult($actionresult->getResult())
+            ->setError($actionresult->getError());
+
         $responsepacket->validate();
-        
+
         return $responsepacket;
-    } 
+    }
+
+    /**
+     * Validate Action
+     *
+     * @param RequestPacket $requestpacket
+     * @throws SchemaException
+     */
+    protected function runActionValidation(RequestPacket $requestpacket)
+    {
+        $method = RpcMethod::splitMethod($requestpacket->getMethod());
+
+        try {
+            Schema::validateAction(__DIR__ . "/../../../../schema/{$method->getController()}/params/{$method->getAction()}.json", $requestpacket->getParams());
+        } catch (ValidationException $exc) {
+            throw new SchemaException($exc->getMessage());
+        }
+    }
+
+    /**
+     * Validate Model
+     *
+     * @param string $controller
+     * @throws SchemaException
+     */
+    protected function runModelValidation(RequestPacket $requestpacket)
+    {
+        //        $method = RpcMethod::splitMethod($requestpacket->getMethod());
+//
+//        if ($method->getAction() == Method::ACTION_PUSH) {
+//            $controller = str_replace("_", "", $method->getController());
+//
+//            try {
+//                Schema::validateAction(CONNECTOR_DIR . "schema/{$controller}/{$controller}.json", $requestpacket->getParams());
+//            } catch (ValidationException $exc) {
+//                throw new SchemaException($exc->getMessage());
+//            }
+//        }
+    }
+
+    /**
+     * Initialises the connector configuration instance.
+     */
+    protected function startConfiguration()
+    {
+        if (!isset($this->session)) {
+            throw new SessionException('Session not initialized', -32001);
+        }
+
+        $configFile = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
+        if (!file_exists($configFile)) {
+            file_put_contents($configFile, '{}');
+        }
+
+        if (isset($this->config)) {
+            $this->config = $this->config;
+            $json = $this->config->getLoader('Json');
+        } else {
+            $json = new ConfigJson($configFile);
+            $this->config = new Config(array(
+                $json,
+                new ConfigSystem()
+            ));
+        }
+
+        //We need to change the order of the loader
+        $this->config = new Config(array($json, new ConfigSystem()));
+    }
+
+    /**
+     * Starting Session
+     *
+     * @throws \jtl\Connector\Core\Exception\DatabaseException
+     * @throws \jtl\Connector\Core\Exception\SessionException
+     */
+    protected function startSession($sessionId = null, $method)
+    {
+        if ($sessionId === null && $method !== null && $method !== 'core.connector.auth') {
+            throw new SessionException('No session');
+        }
+
+        $dir = Path::combine(CONNECTOR_DIR, 'db');
+        if (!is_dir($dir)) {
+            if (!mkdir($dir)) {
+                throw new ApplicationException('Could not create sqlite database directory');
+            }
+        }
+
+        $sqlite3 = Sqlite3::getInstance();
+        $sqlite3->connect(array('location' => Path::combine($dir, 'connector.s3db')));
+        $sqlite3->check();
+
+        $this->session = new Session($sqlite3, $sessionId);
+    }
+
+    protected function startEventDispatcher()
+    {
+        $this->connector->setEventDispatcher($this->eventDispatcher);
+
+        $loader = new \jtl\Connector\Plugin\PluginLoader();
+        $loader->load($this->eventDispatcher);
+    }
+
+    // OLD single Image
+    //protected function handleImagePush(RequestPacket &$requestpacket, $imagePath)
+    protected function handleImagePush(RequestPacket &$requestpacket, array $imagePaths = array())
+    {
+        if ($requestpacket->getMethod() === 'image.push') {
+            $images = $requestpacket->getParams();
+            if (!is_array($images)) {
+                throw new ApplicationException('Request params must be valid images');
+            }
+
+            if (count($imagePaths) > 0) {
+                for ($i = 0; $i < count($images); $i++) {
+                    foreach ($imagePaths as $imagePath) {
+                        $infos = pathinfo($imagePath);
+                        list ($hostId, $relationType) = explode('_', $infos['filename']);
+                        if ((int)$hostId == $images[$i]->getId()->getHost()
+                            && strtolower($relationType) === strtolower($images[$i]->getRelationType())
+                        ) {
+                            $images[$i]->setFilename($imagePath);
+                        }
+                    }
+                }
+
+                $requestpacket->setParams($images);
+            } else {
+                for ($i = 0; $i < count($images); $i++) {
+                    if (strlen($images[$i]->getRemoteUrl()) > 0) {
+                        $imageData = file_get_contents($images[$i]->getRemoteUrl());
+                        if ($imageData === false) {
+                            throw new ApplicationException('Could not get any data from url: ' . $images[$i]->getRemoteUrl());
+                        }
+
+                        $path = parse_url($images[$i]->getRemoteUrl(), PHP_URL_PATH);
+                        $fileName = pathinfo($path, PATHINFO_BASENAME);
+                        $imagePath = Path::combine(sys_get_temp_dir(), uniqid() . "_{$fileName}");
+                        file_put_contents($imagePath, $imageData);
+
+                        $images[$i]->setFilename($imagePath);
+                    } else {
+                        throw new ApplicationException('Could not handle fileupload (no file was uploaded via HTTP POST?)');
+                    }
+                }
+
+                $requestpacket->setParams($images);
+            }
+
+            /*
+             * OLD single Image
+            $image = $requestpacket->getParams();
+            if (!($image instanceof \jtl\Connector\Model\Image)) {
+                throw new ApplicationException('Image push must send a valid image entity');
+            }
+
+            if ($imagePath !== null) {
+
+                // Todo: seo filename pattern via connector settings
+
+                $image->setFilename($imagePath);
+                $requestpacket->setParams($image);
+            } else {
+                // Image Cloud Storage
+                if (strlen($image->getRemoteUrl()) > 0) {
+                    $imageData = file_get_contents($image->getRemoteUrl());
+                    if ($imageData === false) {
+                        throw new ApplicationException('Could not get any data from url: ' . $image->getRemoteUrl());
+                    }
+
+                    $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
+                    $fileName = pathinfo($path, PATHINFO_BASENAME);
+                    $imagePath = Path::combine(sys_get_temp_dir(), uniqid() . "_{$fileName}");
+                    file_put_contents($imagePath, $imageData);
+
+                    $image->setFilename($imagePath);
+                    $requestpacket->setParams($image);
+                } else {
+                    throw new ApplicationException('Could not handle fileupload (no file was uploaded via HTTP POST?)');
+                }
+            }
+            */
+        }
+    }
+
+    protected function triggerRpcAfterEvent($data, $method)
+    {
+        $method = RpcMethod::splitMethod($method);
+        EventHandler::dispatchRpc($data, $this->eventDispatcher, $method->getController(), $method->getAction(), EventHandler::AFTER);
+    }
+
+    /**
+     * Connector getter
+     *
+     * @return IEndpointConnector
+     */
+    public function getConnector()
+    {
+        return $this->connector;
+    }
+
+    /**
+     * Session getter
+     *
+     * @return IEndpointConnector
+     */
+    public function getSession()
+    {
+        return $this->session;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProtocolVersion()
+    {
+        return self::PROTOCOL_VERSION;
+    }
+
+    /**
+     * @return Config
+     */
+    public function getConfig()
+    {
+        return $this->config;
+    }
+
+    /**
+     * @return IErrorHandler
+     */
+    public function getErrorHandler()
+    {
+        return $this->errorHandler;
+    }
+
+    /**
+     * @param IErrorHandler $handler
+     * @return $this
+     */
+    public function setErrorHandler(IErrorHandler $handler)
+    {
+        $this->errorHandler = $handler;
+        return $this;
+    }
 }
-?>

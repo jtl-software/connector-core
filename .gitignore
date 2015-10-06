@@ -4,7 +4,11 @@ netbeans/**
 .buildpath
 nbproject/**
 vendor/**
-build/**
+build/build/**
+build/coverage/**
+cache/**
 composer.lock
 composer.phar
 update-parents.sh
+db/**
+src/jtl/Connector/Model/AckModelMapping.php

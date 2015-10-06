@@ -1,32 +1,83 @@
 <?php
 /**
+ *
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Application
  */
-
 namespace jtl\Connector\Application;
 
+use \jtl\Connector\Core\Rpc\RequestPacket;
+use \jtl\Connector\Core\Config\Config;
+use \jtl\Connector\Mapper\IPrimaryKeyMapper;
+use \jtl\Connector\Authentication\ITokenLoader;
+use \jtl\Connector\Checksum\IChecksumLoader;
+
 /**
- * 
- * 
+ *
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
 interface IEndpointConnector
 {
     /**
-     * 
-     * @param string $method
+     * Main initialize method
      */
-    public function canHandle($method);
-    
-    
+    public function initialize();
+
     /**
-     * @param integer $id
-     * @param string $method
-     * @param string|array|object $params
-     * @return \jtl\Connector\Result\Action 
+     * Setter primary key mapper
      */
-	public function handle($id, $method, $params = null);
+    public function setPrimaryKeyMapper(IPrimaryKeyMapper $mapper);
+
+    /**
+     * Returns primary key mapper
+     */
+    public function getPrimaryKeyMapper();
+
+    /**
+     * Setter token loader
+     */
+    public function setTokenLoader(ITokenLoader $tokenLoader);
+
+    /**
+     * Returns token loader
+     */
+    public function getTokenLoader();
+
+    /**
+     * Setter checksum loader
+     */
+    public function setChecksumLoader(IChecksumLoader $checksumLoader);
+
+    /**
+     * Returns checksum loader
+     */
+    public function getChecksumLoader();
+
+    /**
+     * Setter connector config
+     */
+    public function setConfig(Config $config);
+
+    /**
+     * Returns the config
+     */
+    public function getConfig();
+
+    /**
+     * Checks whether or not a method can be handled
+     */
+    public function canHandle();
+
+    /**
+     * Controller handle
+     *
+     * @param \jtl\Connector\Core\Rpc\RequestPacket $requestpacket
+     */
+    public function handle(RequestPacket $requestpacket);
+
+    /**
+     * Controller getter
+     */
+    public function getController();
 }
-?>
