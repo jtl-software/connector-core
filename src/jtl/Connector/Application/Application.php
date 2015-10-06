@@ -154,10 +154,10 @@ class Application extends CoreApplication
 
         switch ($rpcmode) {
             case Packet::SINGLE_MODE:
-                $this->runSingle($requestpackets, $this->config, $rpcmode);
+                $this->runSingle($requestpackets, $rpcmode);
                 break;
             case Packet::BATCH_MODE:
-                $this->runBatch($requestpackets, $this->config, $rpcmode);
+                $this->runBatch($requestpackets, $rpcmode);
                 break;
         }
     }
@@ -166,14 +166,13 @@ class Application extends CoreApplication
      * Execute RPC Method
      *
      * @param RequestPacket $requestpacket
-     * @param Config $config
      * @param integer $rpcmode
      * @throws RpcException
      * @return \jtl\Connector\Core\Rpc\ResponsePacket
      */
     // OLD single Image
-    //protected function execute(RequestPacket $requestpacket, Config $config, $rpcmode, $imagePath = null)
-    protected function execute(RequestPacket $requestpacket, Config $config, $rpcmode, array $imagePaths = array())
+    //protected function execute(RequestPacket $requestpacket, $rpcmode, $imagePath = null)
+    protected function execute(RequestPacket $requestpacket, $rpcmode, array $imagePaths = array())
     {
         if (!RpcMethod::isMethod($requestpacket->getMethod())) {
             throw new RpcException('Invalid Request', -32600);
@@ -194,7 +193,6 @@ class Application extends CoreApplication
         EventHandler::dispatchRpc($data, $this->eventDispatcher, $method->getController(), $method->getAction(), EventHandler::BEFORE);
 
         if ($method->isCore() && $coreconnector->canHandle()) {
-            $coreconnector->setConfig($config);
             $actionresult = $coreconnector->handle($requestpacket);
             if ($actionresult->isHandled()) {
                 $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
@@ -222,8 +220,6 @@ class Application extends CoreApplication
 
         $this->connector->setMethod($method);
         if ($this->connector->canHandle()) {
-            $this->connector->setConfig($config);
-
             $actionresult = $this->connector->handle($requestpacket);
 
             /*
@@ -316,10 +312,9 @@ class Application extends CoreApplication
      * Single Mode
      *
      * @param ResponsePacket $requestpacket
-     * @param Config $config
      * @param integer $rpcmode
      */
-    protected function runSingle(RequestPacket $requestpacket, Config $config, $rpcmode)
+    protected function runSingle(RequestPacket $requestpacket, $rpcmode)
     {
         $requestpacket->validate();
         $this->runActionValidation($requestpacket);
@@ -364,7 +359,7 @@ class Application extends CoreApplication
         try {
             // OLD single Image
             //$this->execute($requestpacket, $config, $rpcmode, $imagePath);
-            $this->execute($requestpacket, $config, $rpcmode, $imagePaths);
+            $this->execute($requestpacket, $rpcmode, $imagePaths);
         } catch (\Exception $exc) {
             /*
              * OLD single Image
@@ -394,10 +389,9 @@ class Application extends CoreApplication
      * Batch Mode
      *
      * @param array $requestpackets
-     * @param Config $config
      * @param integer $rpcmode
      */
-    protected function runBatch(array $requestpackets, Config $config, $rpcmode)
+    protected function runBatch(array $requestpackets, $rpcmode)
     {
         $jtlrpcreponses = array();
 
@@ -406,7 +400,7 @@ class Application extends CoreApplication
                 $requestpacket->validate();
                 $this->runActionValidation($requestpacket);
                 $this->runModelValidation($requestpacket);
-                $jtlrpcreponses[] = $this->execute($requestpacket, $config, $rpcmode);
+                $jtlrpcreponses[] = $this->execute($requestpacket, $rpcmode);
             } catch (RpcException $exc) {
                 $error = new Error();
                 $error->setCode($exc->getCode())

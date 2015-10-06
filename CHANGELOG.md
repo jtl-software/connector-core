@@ -1,6 +1,7 @@
-1.0.2 (unreleased)
+2.0.0 (unreleased)
 -----
 - Added initial config "developer_logging" flag
+- Removed base connector get and set config
 
 1.0.1
 -----

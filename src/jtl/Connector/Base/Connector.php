@@ -10,7 +10,6 @@ use \jtl\Connector\Core\Rpc\RequestPacket;
 use \jtl\Connector\Application\IEndpointConnector;
 use \jtl\Connector\Core\Utilities\Singleton;
 use \jtl\Connector\Core\Utilities\RpcMethod;
-use \jtl\Connector\Core\Config\Config;
 use \jtl\Connector\Core\Exception\ConnectorException;
 use \jtl\Connector\Core\Rpc\Method;
 use \jtl\Connector\Mapper\IPrimaryKeyMapper;
@@ -31,7 +30,6 @@ class Connector extends Singleton implements IEndpointConnector
     protected $tokenLoader;
     protected $checksumLoader;
     protected $eventDispatcher;
-    protected $config;
     protected $method;
     protected $useSuperGlobals = true;
     protected $modelNamespace = 'jtl\Connector\Model';
@@ -128,32 +126,6 @@ class Connector extends Singleton implements IEndpointConnector
     {
         return $this->eventDispatcher;
     }
-
-    /**
-     * Setter connector config.
-     *
-     * @param \jtl\Connector\Core\Config\Config $config
-     * @return \jtl\Connector\Base\Connector
-     */
-    public function setConfig(Config $config)
-    {
-        $this->config = $config;
-        return $this;
-    }
-
-    /**
-     * Returns the config.
-     *
-     * @return object
-     * @throws ConnectorException
-     */
-    public function getConfig()
-    {
-        if (empty($this->config)) {
-            throw new ConnectorException('The connector configuration is not set!');
-        }
-        return $this->config;
-    }
     
     /**
      * Method Setter
@@ -238,7 +210,6 @@ class Connector extends Singleton implements IEndpointConnector
      */
     public function handle(RequestPacket $requestpacket)
     {
-        $this->controller->setConfig($this->getConfig());
         $this->controller->setMethod($this->getMethod());
         
         return $this->controller->{$this->action}($requestpacket->getParams());

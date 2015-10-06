@@ -22,7 +22,6 @@ use \jtl\Connector\Core\Model\QueryFilter;
  */
 abstract class Controller extends Singleton implements IController
 {
-    protected $_config;
     protected $_method;
 
     /**
@@ -59,31 +58,6 @@ abstract class Controller extends Singleton implements IController
     public function statistic(QueryFilter $queryFilter)
     {
         throw new NotImplementedException();
-    }
-
-    /**
-     * Setter controller config.
-     *
-     * @param \jtl\Connector\Core\Config\Config $config
-     */
-    public function setConfig(Config $config)
-    {
-        $this->_config = $config;
-        return $this;
-    }
-
-    /**
-     * Returns the config.
-     *
-     * @return object
-     * @throws ControllerException
-     */
-    public function getConfig()
-    {
-        if (empty($this->_config)) {
-            throw new ControllerException('The controller configuration is not set!');
-        }
-        return $this->_config;
     }
     
     /**
