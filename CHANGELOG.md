@@ -1,3 +1,7 @@
+1.0.2 (unreleased)
+-----
+- Added initial config "developer_logging" flag
+
 1.0.1
 -----
 - Changed monolog stream handler to rotate handler

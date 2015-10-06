@@ -542,11 +542,10 @@ class Application extends CoreApplication
 
         $configFile = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
         if (!file_exists($configFile)) {
-            file_put_contents($configFile, '{}');
+            file_put_contents($configFile, json_encode(array('developer_logging' => false), JSON_PRETTY_PRINT));
         }
 
         if (isset($this->config)) {
-            $this->config = $this->config;
             $json = $this->config->getLoader('Json');
         } else {
             $json = new ConfigJson($configFile);
