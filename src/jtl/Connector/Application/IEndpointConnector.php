@@ -55,16 +55,6 @@ interface IEndpointConnector
     public function getChecksumLoader();
 
     /**
-     * Setter connector config
-     */
-    public function setConfig(Config $config);
-
-    /**
-     * Returns the config
-     */
-    public function getConfig();
-
-    /**
      * Checks whether or not a method can be handled
      */
     public function canHandle();
