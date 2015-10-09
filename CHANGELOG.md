@@ -1,3 +1,8 @@
+2.0.1 (unreleased)
+-----
+- Removed class controller helper
+- Changed seo method noDiacritics to replaceDiacritics and makes it public
+
 2.0.0
 -----
 - Added initial config "developer_logging" flag
