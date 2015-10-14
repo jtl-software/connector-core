@@ -158,8 +158,6 @@ class Connector extends CoreController
             return $action;
         }
 
-        //$token = $this->getConfig()->read('auth_token');
-
         // If credentials are not valid, return appropriate response
         if ($token !== $authRequest->getToken()) {
             sleep(2);

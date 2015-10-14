@@ -1,3 +1,9 @@
+2.0.1
+-----
+- Removed class controller helper
+- Changed seo method noDiacritics to replaceDiacritics and makes it public
+- Fixed logger force writing flag
+
 2.0.0
 -----
 - Added initial config "developer_logging" flag

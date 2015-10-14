@@ -33,10 +33,6 @@ class Logger extends Monolog
             return null;
         }
 
-        if ($level == Monolog::DEBUG && getenv('APPLICATION_ENV') != 'development') {
-            return null;
-        }
-
         $path = array(
             CONNECTOR_DIR,
             'logs',
