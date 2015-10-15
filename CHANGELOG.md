@@ -1,3 +1,7 @@
+2.0.2
+-----
+- Use stable version of doctrine/collections
+
 2.0.1
 -----
 - Removed class controller helper
