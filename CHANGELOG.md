@@ -1,6 +1,7 @@
 2.1.0
 -----
 - Changed protocol version to 7 due to product image masterkill sorting
+- Use stable version of doctrine/collections
 
 2.0.1
 -----
