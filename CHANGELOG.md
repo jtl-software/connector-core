@@ -1,3 +1,7 @@
+2.1.0
+-----
+- Changed protocol version to 7 due to product image masterkill sorting
+
 2.0.1
 -----
 - Removed class controller helper
