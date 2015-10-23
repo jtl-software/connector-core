@@ -22,6 +22,14 @@ use JMS\Serializer\Annotation as Serializer;
 class CrossSelling extends DataModel
 {
     /**
+     * @var Identity 
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
+     */
+    protected $id = null;
+
+    /**
      * @var Identity Source product
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("productId")
@@ -42,7 +50,26 @@ class CrossSelling extends DataModel
      */
     public function __construct()
     {
+        $this->id = new Identity();
         $this->productId = new Identity();
+    }
+
+    /**
+     * @param Identity $id 
+     * @return \jtl\Connector\Model\CrossSelling
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setId(Identity $id)
+    {
+        return $this->setProperty('id', $id, 'Identity');
+    }
+
+    /**
+     * @return Identity 
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
