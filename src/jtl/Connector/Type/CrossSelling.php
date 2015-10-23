@@ -17,6 +17,7 @@ class CrossSelling extends DataType
     protected function loadProperties()
     {
         return array(
+            new PropertyInfo('id', 'Identity', null, false, true, false),
             new PropertyInfo('productId', 'Identity', null, false, true, false),
             new PropertyInfo('items', '\jtl\Connector\Model\CrossSellingItem', null, false, false, true),
         );

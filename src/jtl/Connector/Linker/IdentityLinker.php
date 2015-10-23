@@ -147,8 +147,8 @@ class IdentityLinker
             'productId' => self::TYPE_PRODUCT
         ),
         'CrossSelling' => array(
-            'productId' => self::TYPE_PRODUCT,
-            'crossSellingProductId' => self::TYPE_PRODUCT
+            'id' => self::TYPE_CROSSSELLING,
+            'productId' => self::TYPE_PRODUCT
         ),
         'CrossSellingItem' => array(
             'crossSellingGroupId' => self::TYPE_CROSSSELLING_GROUP,
