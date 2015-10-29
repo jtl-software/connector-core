@@ -1,3 +1,7 @@
+2.2.0
+-----
+- Introduce new constant LOG_DIR that controls the log directory used by Monolog
+
 2.1.1
 -----
 - Added id to crossselling entity
