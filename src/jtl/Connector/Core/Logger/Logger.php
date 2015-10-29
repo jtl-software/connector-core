@@ -33,11 +33,19 @@ class Logger extends Monolog
             return null;
         }
 
-        $path = array(
-            CONNECTOR_DIR,
-            'logs',
-            "{$channel}.log"
-        );
+        if (defined('LOG_DIR')) {
+            $path = array(
+                LOG_DIR,
+                "{$channel}.log"
+            );
+        }
+        else {
+            $path = array(
+                CONNECTOR_DIR,
+                'logs',
+                "{$channel}.log"
+            );
+        }
 
         $log = LoggerFactory::get($channel);
         if (!$log->isHandling($level)) {
