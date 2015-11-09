@@ -1,3 +1,7 @@
+2.1.2
+-----
+- Added paypal plus and amazon payments payment types
+
 2.1.1
 -----
 - Added id to crossselling entity
