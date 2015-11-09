@@ -1,6 +1,14 @@
-2.1.2
+2.2.2
 -----
 - Added paypal plus and amazon payments payment types
+
+2.2.1
+-----
+- Improve HHVM compatibility by add @ReadOnly annotation to the core DataModel class
+
+2.2.0
+-----
+- Introduce new constant LOG_DIR that controls the log directory used by Monolog
 
 2.1.1
 -----
