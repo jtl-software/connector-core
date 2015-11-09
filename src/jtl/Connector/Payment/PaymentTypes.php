@@ -10,6 +10,7 @@ class PaymentTypes
 {
     const TYPE_ADYEN = 'pm_adyen';
     const TYPE_ALIPAY = 'pm_alipay';
+    const TYPE_AMAPAY = 'pm_amazon_payments';
     const TYPE_ASIAPAY = 'pm_asiapay';
     const TYPE_ATOS = 'pm_atos';
     const TYPE_AUTHORIZE = 'pm_authorize';
@@ -46,6 +47,7 @@ class PaymentTypes
     const TYPE_PAYMATE = 'pm_paymate';
     const TYPE_PAYMILL = 'pm_paymill';
     const TYPE_PAYPAL_EXPRESS = 'pm_paypal_express';
+    const TYPE_PAYPAL_PLUS = 'pm_paypal_plus';
     const TYPE_PAYONEER = 'pm_payoneer';
     const TYPE_PAYPOINT = 'pm_paypoint';
     const TYPE_PAYSAFECARD = 'pm_paysafecard';

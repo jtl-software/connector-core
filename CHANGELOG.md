@@ -1,3 +1,7 @@
+2.2.2
+-----
+- Added paypal plus and amazon payments payment types
+
 2.2.1
 -----
 - Improve HHVM compatibility by add @ReadOnly annotation to the core DataModel class
