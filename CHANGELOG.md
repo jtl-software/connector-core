@@ -1,3 +1,7 @@
+2.2.3
+-----
+- Added customer order pui property
+
 2.2.2
 -----
 - Added paypal plus and amazon payments payment types

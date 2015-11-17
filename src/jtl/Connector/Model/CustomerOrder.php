@@ -37,11 +37,6 @@ class CustomerOrder extends DataModel
     const PAYMENT_STATUS_UNPAID = 'unpaid';
 
     /**
-     * @var string - New order
-     */
-    const STATUS_NEW = 'new';
-
-    /**
      * @var string - Cancelled by merchant or customer
      */
     const STATUS_CANCELLED = 'cancelled';
@@ -167,6 +162,14 @@ class CustomerOrder extends DataModel
      * @Serializer\Accessor(getter="getPaymentStatus",setter="setPaymentStatus")
      */
     protected $paymentStatus = '';
+
+    /**
+     * @var string 
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("pui")
+     * @Serializer\Accessor(getter="getPui",setter="setPui")
+     */
+    protected $pui = '';
 
     /**
      * @var CustomerOrderShippingAddress Shipping address
@@ -484,6 +487,23 @@ class CustomerOrder extends DataModel
     public function getPaymentStatus()
     {
         return $this->paymentStatus;
+    }
+
+    /**
+     * @param string $pui 
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setPui($pui)
+    {
+        return $this->setProperty('pui', $pui, 'string');
+    }
+
+    /**
+     * @return string 
+     */
+    public function getPui()
+    {
+        return $this->pui;
     }
 
     /**
