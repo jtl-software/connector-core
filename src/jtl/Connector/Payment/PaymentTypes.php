@@ -17,6 +17,7 @@ class PaymentTypes
     const TYPE_BALANCED = 'pm_balanced';
     const TYPE_CASH = 'pm_cash';
     const TYPE_BILLPAY = 'pm_billpay';
+    const TYPE_BILLSAFE = 'pm_billsafe';
     const TYPE_BPAY = 'pm_bpay';
     const TYPE_BRAINTREE = 'pm_braintree';
     const TYPE_CHARGIFY = 'pm_chargify';
