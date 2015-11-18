@@ -1,4 +1,4 @@
-2.2.4 (unreleased)
+2.2.4
 -----
 - Added billsafe to payment types
 
