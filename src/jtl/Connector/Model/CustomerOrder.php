@@ -37,6 +37,11 @@ class CustomerOrder extends DataModel
     const PAYMENT_STATUS_UNPAID = 'unpaid';
 
     /**
+     * @var string - New order
+     */
+    const STATUS_NEW = 'new';
+
+    /**
      * @var string - Cancelled by merchant or customer
      */
     const STATUS_CANCELLED = 'cancelled';
