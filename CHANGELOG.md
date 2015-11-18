@@ -1,3 +1,7 @@
+2.2.4
+-----
+- Added billsafe to payment types
+
 2.2.3
 -----
 - Added customer order pui property
