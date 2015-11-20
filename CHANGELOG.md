@@ -1,3 +1,7 @@
+2.2.5
+-----
+- Fixed ics zip file bug
+
 2.2.4
 -----
 - Added billsafe to payment types

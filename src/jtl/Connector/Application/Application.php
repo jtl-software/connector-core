@@ -328,7 +328,7 @@ class Application extends CoreApplication
             $imagePath = Request::handleFileupload();
         }
         */
-        $imagePaths = array();
+        $imagePaths = [];
         if ($requestpacket->getMethod() === 'image.push') {
             $zipFile = Request::handleFileupload();
             $tempDir = Temp::generateDirectory();
@@ -351,8 +351,6 @@ class Application extends CoreApplication
                 if ($zipFile !== null) {
                     @unlink($zipFile);
                 }
-            } else {
-                throw new ApplicationException('Image Zip File missing or temp dir could not be created');
             }
         }
 
