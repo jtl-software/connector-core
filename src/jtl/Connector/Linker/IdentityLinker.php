@@ -423,6 +423,9 @@ class IdentityLinker
                 case ImageRelationType::TYPE_SPECIFIC:
                     return self::TYPE_SPECIFIC;
                     break;
+                case ImageRelationType::TYPE_SPECIFIC_VALUE:
+                    return self::TYPE_SPECIFIC_VALUE;
+                    break;
                 case ImageRelationType::TYPE_MANUFACTURER:
                     return self::TYPE_MANUFACTURER;
                     break;

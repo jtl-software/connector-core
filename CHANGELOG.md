@@ -1,3 +1,7 @@
+2.2.6 (unreleased)
+-----
+- Added specific value type mapping to the identitylinker
+
 2.2.5
 -----
 - Fixed ics zip file bug
