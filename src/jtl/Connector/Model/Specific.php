@@ -54,7 +54,7 @@ class Specific extends DataModel
     protected $type = '';
 
     /**
-     * @var jtl\Connector\Model\SpecificI18n[] 
+     * @var \jtl\Connector\Model\SpecificI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\SpecificI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -62,7 +62,7 @@ class Specific extends DataModel
     protected $i18ns = array();
 
     /**
-     * @var jtl\Connector\Model\SpecificValue[] 
+     * @var \jtl\Connector\Model\SpecificValue[]
      * @Serializer\Type("array<jtl\Connector\Model\SpecificValue>")
      * @Serializer\SerializedName("values")
      * @Serializer\AccessType("reflection")
@@ -167,7 +167,7 @@ class Specific extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\SpecificI18n[]
+     * @return \jtl\Connector\Model\SpecificI18n[]
      */
     public function getI18ns()
     {
@@ -204,7 +204,7 @@ class Specific extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\SpecificValue[]
+     * @return \jtl\Connector\Model\SpecificValue[]
      */
     public function getValues()
     {

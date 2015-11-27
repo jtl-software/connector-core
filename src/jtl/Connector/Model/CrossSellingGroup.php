@@ -30,7 +30,7 @@ class CrossSellingGroup extends DataModel
     protected $id = null;
 
     /**
-     * @var jtl\Connector\Model\CrossSellingGroupI18n[] 
+     * @var \jtl\Connector\Model\CrossSellingGroupI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\CrossSellingGroupI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -84,7 +84,7 @@ class CrossSellingGroup extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\CrossSellingGroupI18n[]
+     * @return \jtl\Connector\Model\CrossSellingGroupI18n[]
      */
     public function getI18ns()
     {

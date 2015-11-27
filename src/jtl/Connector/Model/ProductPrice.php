@@ -54,7 +54,7 @@ class ProductPrice extends DataModel
     protected $productId = null;
 
     /**
-     * @var jtl\Connector\Model\ProductPriceItem[] 
+     * @var \jtl\Connector\Model\ProductPriceItem[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductPriceItem>")
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
@@ -165,7 +165,7 @@ class ProductPrice extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\ProductPriceItem[]
+     * @return \jtl\Connector\Model\ProductPriceItem[]
      */
     public function getItems()
     {

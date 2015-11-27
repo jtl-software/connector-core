@@ -46,7 +46,7 @@ class Statistic extends DataModel
     /**
      * @param  integer $available
      * @return \jtl\Connector\Model\Statistic
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
     public function setAvailable($available)
     {
@@ -64,7 +64,7 @@ class Statistic extends DataModel
     /**
      * @param  string $controllerName
      * @return \jtl\Connector\Model\Statistic
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setControllerName($controllerName)
     {

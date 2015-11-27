@@ -21,7 +21,7 @@ use JMS\Serializer\Annotation as Serializer;
 class GlobalData extends DataModel
 {
     /**
-     * @var jtl\Connector\Model\ConfigGroup[] 
+     * @var \jtl\Connector\Model\ConfigGroup[]
      * @Serializer\Type("array<jtl\Connector\Model\ConfigGroup>")
      * @Serializer\SerializedName("configGroups")
      * @Serializer\AccessType("reflection")
@@ -29,7 +29,7 @@ class GlobalData extends DataModel
     protected $configGroups = array();
 
     /**
-     * @var jtl\Connector\Model\ConfigItem[] 
+     * @var \jtl\Connector\Model\ConfigItem[]
      * @Serializer\Type("array<jtl\Connector\Model\ConfigItem>")
      * @Serializer\SerializedName("configItems")
      * @Serializer\AccessType("reflection")
@@ -37,7 +37,7 @@ class GlobalData extends DataModel
     protected $configItems = array();
 
     /**
-     * @var jtl\Connector\Model\CrossSellingGroup[] 
+     * @var \jtl\Connector\Model\CrossSellingGroup[]
      * @Serializer\Type("array<jtl\Connector\Model\CrossSellingGroup>")
      * @Serializer\SerializedName("crossSellingGroups")
      * @Serializer\AccessType("reflection")
@@ -45,7 +45,7 @@ class GlobalData extends DataModel
     protected $crossSellingGroups = array();
 
     /**
-     * @var jtl\Connector\Model\Currency[] 
+     * @var \jtl\Connector\Model\Currency[]
      * @Serializer\Type("array<jtl\Connector\Model\Currency>")
      * @Serializer\SerializedName("currencies")
      * @Serializer\AccessType("reflection")
@@ -53,7 +53,7 @@ class GlobalData extends DataModel
     protected $currencies = array();
 
     /**
-     * @var jtl\Connector\Model\CustomerGroup[] 
+     * @var \jtl\Connector\Model\CustomerGroup[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerGroup>")
      * @Serializer\SerializedName("customerGroups")
      * @Serializer\AccessType("reflection")
@@ -61,7 +61,7 @@ class GlobalData extends DataModel
     protected $customerGroups = array();
 
     /**
-     * @var jtl\Connector\Model\Language[] 
+     * @var \jtl\Connector\Model\Language[]
      * @Serializer\Type("array<jtl\Connector\Model\Language>")
      * @Serializer\SerializedName("languages")
      * @Serializer\AccessType("reflection")
@@ -69,7 +69,7 @@ class GlobalData extends DataModel
     protected $languages = array();
 
     /**
-     * @var jtl\Connector\Model\MeasurementUnit[] 
+     * @var \jtl\Connector\Model\MeasurementUnit[]
      * @Serializer\Type("array<jtl\Connector\Model\MeasurementUnit>")
      * @Serializer\SerializedName("measurementUnits")
      * @Serializer\AccessType("reflection")
@@ -77,7 +77,7 @@ class GlobalData extends DataModel
     protected $measurementUnits = array();
 
     /**
-     * @var jtl\Connector\Model\ProductType[] 
+     * @var \jtl\Connector\Model\ProductType[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductType>")
      * @Serializer\SerializedName("productTypes")
      * @Serializer\AccessType("reflection")
@@ -85,7 +85,7 @@ class GlobalData extends DataModel
     protected $productTypes = array();
 
     /**
-     * @var jtl\Connector\Model\ShippingClass[] 
+     * @var \jtl\Connector\Model\ShippingClass[]
      * @Serializer\Type("array<jtl\Connector\Model\ShippingClass>")
      * @Serializer\SerializedName("shippingClasses")
      * @Serializer\AccessType("reflection")
@@ -93,7 +93,7 @@ class GlobalData extends DataModel
     protected $shippingClasses = array();
 
     /**
-     * @var jtl\Connector\Model\ShippingMethod[] 
+     * @var \jtl\Connector\Model\ShippingMethod[]
      * @Serializer\Type("array<jtl\Connector\Model\ShippingMethod>")
      * @Serializer\SerializedName("shippingMethods")
      * @Serializer\AccessType("reflection")
@@ -101,7 +101,7 @@ class GlobalData extends DataModel
     protected $shippingMethods = array();
 
     /**
-     * @var jtl\Connector\Model\TaxRate[] 
+     * @var \jtl\Connector\Model\TaxRate[]
      * @Serializer\Type("array<jtl\Connector\Model\TaxRate>")
      * @Serializer\SerializedName("taxRates")
      * @Serializer\AccessType("reflection")
@@ -109,7 +109,7 @@ class GlobalData extends DataModel
     protected $taxRates = array();
 
     /**
-     * @var jtl\Connector\Model\Unit[] 
+     * @var \jtl\Connector\Model\Unit[]
      * @Serializer\Type("array<jtl\Connector\Model\Unit>")
      * @Serializer\SerializedName("units")
      * @Serializer\AccessType("reflection")
@@ -117,7 +117,7 @@ class GlobalData extends DataModel
     protected $units = array();
 
     /**
-     * @var jtl\Connector\Model\Warehouse[] 
+     * @var \jtl\Connector\Model\Warehouse[]
      * @Serializer\Type("array<jtl\Connector\Model\Warehouse>")
      * @Serializer\SerializedName("warehouses")
      * @Serializer\AccessType("reflection")
@@ -146,7 +146,7 @@ class GlobalData extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\ConfigGroup[]
+     * @return \jtl\Connector\Model\ConfigGroup[]
      */
     public function getConfigGroups()
     {
@@ -183,7 +183,7 @@ class GlobalData extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\ConfigItem[]
+     * @return \jtl\Connector\Model\ConfigItem[]
      */
     public function getConfigItems()
     {
@@ -220,7 +220,7 @@ class GlobalData extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\CrossSellingGroup[]
+     * @return \jtl\Connector\Model\CrossSellingGroup[]
      */
     public function getCrossSellingGroups()
     {
@@ -257,7 +257,7 @@ class GlobalData extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\Currency[]
+     * @return \jtl\Connector\Model\Currency[]
      */
     public function getCurrencies()
     {
@@ -294,7 +294,7 @@ class GlobalData extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\CustomerGroup[]
+     * @return \jtl\Connector\Model\CustomerGroup[]
      */
     public function getCustomerGroups()
     {
@@ -331,7 +331,7 @@ class GlobalData extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\Language[]
+     * @return \jtl\Connector\Model\Language[]
      */
     public function getLanguages()
     {
@@ -368,7 +368,7 @@ class GlobalData extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\MeasurementUnit[]
+     * @return \jtl\Connector\Model\MeasurementUnit[]
      */
     public function getMeasurementUnits()
     {
@@ -405,7 +405,7 @@ class GlobalData extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\ProductType[]
+     * @return \jtl\Connector\Model\ProductType[]
      */
     public function getProductTypes()
     {
@@ -442,7 +442,7 @@ class GlobalData extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\ShippingClass[]
+     * @return \jtl\Connector\Model\ShippingClass[]
      */
     public function getShippingClasses()
     {
@@ -479,7 +479,7 @@ class GlobalData extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\ShippingMethod[]
+     * @return \jtl\Connector\Model\ShippingMethod[]
      */
     public function getShippingMethods()
     {
@@ -516,7 +516,7 @@ class GlobalData extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\TaxRate[]
+     * @return \jtl\Connector\Model\TaxRate[]
      */
     public function getTaxRates()
     {
@@ -553,7 +553,7 @@ class GlobalData extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\Unit[]
+     * @return \jtl\Connector\Model\Unit[]
      */
     public function getUnits()
     {
@@ -590,7 +590,7 @@ class GlobalData extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\Warehouse[]
+     * @return \jtl\Connector\Model\Warehouse[]
      */
     public function getWarehouses()
     {

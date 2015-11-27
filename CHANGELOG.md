@@ -1,6 +1,7 @@
 2.2.6 (unreleased)
 -----
 - Added specific value type mapping to the identitylinker
+- Correct model namespaces in PHPDoc
 
 2.2.5
 -----

@@ -54,7 +54,7 @@ class FileUpload extends DataModel
     protected $isRequired = false;
 
     /**
-     * @var jtl\Connector\Model\FileUploadI18n[] 
+     * @var \jtl\Connector\Model\FileUploadI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\FileUploadI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -161,7 +161,7 @@ class FileUpload extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\FileUploadI18n[]
+     * @return \jtl\Connector\Model\FileUploadI18n[]
      */
     public function getI18ns()
     {
