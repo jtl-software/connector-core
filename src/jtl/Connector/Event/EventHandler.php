@@ -11,14 +11,14 @@ class EventHandler
     const BEFORE = 'before';
     const AFTER = 'after';
 
-    public static function dispatch(&$entity, EventDispatcher $dispatcher, $action, $moment)
+    public static function dispatch(&$entity, EventDispatcher $dispatcher, $action, $moment, $class = null, $isCore = false)
     {
-        if ((!($entity instanceof DataModel) && !($entity instanceof QueryFilter)) || strlen(trim($action)) == 0 || strlen(trim($moment)) == 0) {
+        if (!$isCore && (!($entity instanceof DataModel) && !($entity instanceof QueryFilter)) || strlen(trim($action)) == 0 || strlen(trim($moment)) == 0) {
             return;
         }
 
-        $class = ClassName::getFromNS(get_class($entity));
-        $event = self::createEvent($entity, $class, $action, $moment);
+        $class = ($class !== null) ? $class : ClassName::getFromNS(get_class($entity));
+        $event = self::createEvent($entity, $class, $action, $moment, $isCore);
 
         if ($event !== null) {
             $dispatcher->dispatch($event::EVENT_NAME, $event);
@@ -38,8 +38,13 @@ class EventHandler
         }
     }
 
-    protected static function createEvent(&$entity, $class, $action, $moment)
+    protected static function createEvent(&$entity, $class, $action, $moment, $isCore)
     {
+        if ($isCore) {
+            $moment = sprintf('%s%s', $class, ucfirst($moment));
+            $class = 'Core';
+        }
+
         $eventClassname = sprintf('\jtl\Connector\Event\%s\%s%s%sEvent', $class, $class, ucfirst($moment), ucfirst($action));
 
         if (class_exists($eventClassname)) {

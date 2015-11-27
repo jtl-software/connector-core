@@ -1,6 +1,8 @@
 2.2.6 (unreleased)
 -----
 - Added specific value type mapping to the identitylinker
+- Added connector statistic event
+- Added core connector features event
 
 2.2.5
 -----
