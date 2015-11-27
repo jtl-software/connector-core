@@ -3,6 +3,7 @@
 - Added specific value type mapping to the identitylinker
 - Added connector statistic event
 - Added core connector features event
+- Correct model namespaces in PHPDoc
 
 2.2.5
 -----

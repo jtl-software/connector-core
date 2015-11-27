@@ -38,7 +38,7 @@ class TaxZone extends DataModel
     protected $name = '';
 
     /**
-     * @var jtl\Connector\Model\TaxZoneCountry[] 
+     * @var \jtl\Connector\Model\TaxZoneCountry[]
      * @Serializer\Type("array<jtl\Connector\Model\TaxZoneCountry>")
      * @Serializer\SerializedName("countries")
      * @Serializer\AccessType("reflection")
@@ -99,7 +99,7 @@ class TaxZone extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\TaxZoneCountry[]
+     * @return \jtl\Connector\Model\TaxZoneCountry[]
      */
     public function getCountries()
     {

@@ -53,7 +53,7 @@ class DeliveryNoteItem extends DataModel
     protected $quantity = 0.0;
 
     /**
-     * @var jtl\Connector\Model\DeliveryNoteItemInfo[] 
+     * @var \jtl\Connector\Model\DeliveryNoteItemInfo[]
      * @Serializer\Type("array<jtl\Connector\Model\DeliveryNoteItemInfo>")
      * @Serializer\SerializedName("info")
      * @Serializer\AccessType("reflection")
@@ -162,7 +162,7 @@ class DeliveryNoteItem extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\DeliveryNoteItemInfo[]
+     * @return \jtl\Connector\Model\DeliveryNoteItemInfo[]
      */
     public function getInfo()
     {

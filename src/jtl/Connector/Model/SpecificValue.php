@@ -46,7 +46,7 @@ class SpecificValue extends DataModel
     protected $sort = 0;
 
     /**
-     * @var jtl\Connector\Model\SpecificValueI18n[] 
+     * @var \jtl\Connector\Model\SpecificValueI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\SpecificValueI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -136,7 +136,7 @@ class SpecificValue extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\SpecificValueI18n[]
+     * @return \jtl\Connector\Model\SpecificValueI18n[]
      */
     public function getI18ns()
     {

@@ -125,7 +125,7 @@ class CustomerOrderItem extends DataModel
     protected $vat = 0.0;
 
     /**
-     * @var jtl\Connector\Model\CustomerOrderItemVariation[] 
+     * @var \jtl\Connector\Model\CustomerOrderItemVariation[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderItemVariation>")
      * @Serializer\SerializedName("variations")
      * @Serializer\AccessType("reflection")
@@ -355,7 +355,7 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\CustomerOrderItemVariation[]
+     * @return \jtl\Connector\Model\CustomerOrderItemVariation[]
      */
     public function getVariations()
     {

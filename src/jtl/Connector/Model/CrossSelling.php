@@ -38,7 +38,7 @@ class CrossSelling extends DataModel
     protected $productId = null;
 
     /**
-     * @var jtl\Connector\Model\CrossSellingItem[] Referenced cross-sold products grouped by their crossSellingGroup
+     * @var \jtl\Connector\Model\CrossSellingItem[] Referenced cross-sold products grouped by their crossSellingGroup
      * @Serializer\Type("array<jtl\Connector\Model\CrossSellingItem>")
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
@@ -111,7 +111,7 @@ class CrossSelling extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\CrossSellingItem[]
+     * @return \jtl\Connector\Model\CrossSellingItem[]
      */
     public function getItems()
     {

@@ -225,7 +225,7 @@ class CustomerOrder extends DataModel
     protected $totalSum = 0.0;
 
     /**
-     * @var jtl\Connector\Model\CustomerOrderAttr[] 
+     * @var \jtl\Connector\Model\CustomerOrderAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderAttr>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
@@ -233,7 +233,7 @@ class CustomerOrder extends DataModel
     protected $attributes = array();
 
     /**
-     * @var jtl\Connector\Model\CustomerOrderItem[] 
+     * @var \jtl\Connector\Model\CustomerOrderItem[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderItem>")
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
@@ -296,7 +296,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @return jtl\Connector\Model\CustomerOrderBillingAddress Billing address
+     * @return \jtl\Connector\Model\CustomerOrderBillingAddress Billing address
      */
     public function getBillingAddress()
     {
@@ -453,7 +453,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @return jtl\Connector\Model\CustomerOrderPaymentInfo 
+     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function getPaymentInfo()
     {
@@ -522,7 +522,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @return jtl\Connector\Model\CustomerOrderShippingAddress Shipping address
+     * @return \jtl\Connector\Model\CustomerOrderShippingAddress Shipping address
      */
     public function getShippingAddress()
     {
@@ -636,7 +636,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\CustomerOrderAttr[]
+     * @return \jtl\Connector\Model\CustomerOrderAttr[]
      */
     public function getAttributes()
     {
@@ -673,7 +673,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\CustomerOrderItem[]
+     * @return \jtl\Connector\Model\CustomerOrderItem[]
      */
     public function getItems()
     {

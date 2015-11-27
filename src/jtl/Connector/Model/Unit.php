@@ -30,7 +30,7 @@ class Unit extends DataModel
     protected $id = null;
 
     /**
-     * @var jtl\Connector\Model\UnitI18n[] 
+     * @var \jtl\Connector\Model\UnitI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\UnitI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -84,7 +84,7 @@ class Unit extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\UnitI18n[]
+     * @return \jtl\Connector\Model\UnitI18n[]
      */
     public function getI18ns()
     {

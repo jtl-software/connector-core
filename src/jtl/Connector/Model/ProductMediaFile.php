@@ -78,7 +78,7 @@ class ProductMediaFile extends DataModel
     protected $url = '';
 
     /**
-     * @var jtl\Connector\Model\ProductMediaFileAttr[] 
+     * @var \jtl\Connector\Model\ProductMediaFileAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductMediaFileAttr>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
@@ -86,7 +86,7 @@ class ProductMediaFile extends DataModel
     protected $attributes = array();
 
     /**
-     * @var jtl\Connector\Model\ProductMediaFileI18n[] 
+     * @var \jtl\Connector\Model\ProductMediaFileI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductMediaFileI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -244,7 +244,7 @@ class ProductMediaFile extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\ProductMediaFileAttr[]
+     * @return \jtl\Connector\Model\ProductMediaFileAttr[]
      */
     public function getAttributes()
     {
@@ -281,7 +281,7 @@ class ProductMediaFile extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\ProductMediaFileI18n[]
+     * @return \jtl\Connector\Model\ProductMediaFileI18n[]
      */
     public function getI18ns()
     {

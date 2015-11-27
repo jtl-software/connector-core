@@ -78,7 +78,7 @@ class ConfigGroup extends DataModel
     protected $type = 0;
 
     /**
-     * @var jtl\Connector\Model\ConfigGroupI18n[] 
+     * @var \jtl\Connector\Model\ConfigGroupI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ConfigGroupI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -234,7 +234,7 @@ class ConfigGroup extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\ConfigGroupI18n[]
+     * @return \jtl\Connector\Model\ConfigGroupI18n[]
      */
     public function getI18ns()
     {

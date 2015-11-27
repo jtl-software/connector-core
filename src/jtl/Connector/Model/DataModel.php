@@ -120,7 +120,7 @@ abstract class DataModel extends CoreModel
      *
      * @param \stdClass $object
      * @param array $options
-     * @return jtl\Connector\Model\DataModel
+     * @return \jtl\Connector\Model\DataModel
      */
     public function setOptions(\stdClass $object = null, array $options = null)
     {
