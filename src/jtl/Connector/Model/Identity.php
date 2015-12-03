@@ -60,7 +60,7 @@ class Identity extends Model
      *
      * @param string $endpoint the endpoint
      *
-     * @return jtl\Connector\Model\Identity
+     * @return \jtl\Connector\Model\Identity
      */
     public function setEndpoint($endpoint)
     {
@@ -83,7 +83,7 @@ class Identity extends Model
      *
      * @param int $host the host
      *
-     * @return jtl\Connector\Model\Identity
+     * @return \jtl\Connector\Model\Identity
      */
     public function setHost($host)
     {
@@ -115,7 +115,7 @@ class Identity extends Model
      * Convert from Array
      *
      * @throws \InvalidArgumentException
-     * @return jtl\Connector\Model\Identity
+     * @return \jtl\Connector\Model\Identity
      */
     public static function fromArray(array $data)
     {
@@ -129,7 +129,7 @@ class Identity extends Model
     /**
      * Dynamic Converter
      *
-     * @return jtl\Connector\Model\Identity
+     * @return \jtl\Connector\Model\Identity
      */
     public static function convert($data)
     {

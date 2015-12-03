@@ -54,7 +54,7 @@ class CategoryAttr extends DataModel
     protected $isTranslated = false;
 
     /**
-     * @var jtl\Connector\Model\CategoryAttrI18n[] 
+     * @var \jtl\Connector\Model\CategoryAttrI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryAttrI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -161,7 +161,7 @@ class CategoryAttr extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\CategoryAttrI18n[]
+     * @return \jtl\Connector\Model\CategoryAttrI18n[]
      */
     public function getI18ns()
     {

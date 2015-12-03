@@ -86,7 +86,7 @@ class ProductSpecialPrice extends DataModel
     protected $stockLimit = 0;
 
     /**
-     * @var jtl\Connector\Model\ProductSpecialPriceItem[] 
+     * @var \jtl\Connector\Model\ProductSpecialPriceItem[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductSpecialPriceItem>")
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
@@ -263,7 +263,7 @@ class ProductSpecialPrice extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\ProductSpecialPriceItem[]
+     * @return \jtl\Connector\Model\ProductSpecialPriceItem[]
      */
     public function getItems()
     {

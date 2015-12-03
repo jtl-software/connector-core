@@ -77,7 +77,7 @@ class ProductFileDownload extends DataModel
     protected $sort = 0;
 
     /**
-     * @var jtl\Connector\Model\ProductFileDownloadI18n[] 
+     * @var \jtl\Connector\Model\ProductFileDownloadI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductFileDownloadI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -234,7 +234,7 @@ class ProductFileDownload extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\ProductFileDownloadI18n[]
+     * @return \jtl\Connector\Model\ProductFileDownloadI18n[]
      */
     public function getI18ns()
     {

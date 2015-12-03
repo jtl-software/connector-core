@@ -54,7 +54,7 @@ class CustomerGroup extends DataModel
     protected $isDefault = false;
 
     /**
-     * @var jtl\Connector\Model\CustomerGroupAttr[] 
+     * @var \jtl\Connector\Model\CustomerGroupAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerGroupAttr>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
@@ -62,7 +62,7 @@ class CustomerGroup extends DataModel
     protected $attributes = array();
 
     /**
-     * @var jtl\Connector\Model\CustomerGroupI18n[] 
+     * @var \jtl\Connector\Model\CustomerGroupI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerGroupI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -167,7 +167,7 @@ class CustomerGroup extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\CustomerGroupAttr[]
+     * @return \jtl\Connector\Model\CustomerGroupAttr[]
      */
     public function getAttributes()
     {
@@ -204,7 +204,7 @@ class CustomerGroup extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\CustomerGroupI18n[]
+     * @return \jtl\Connector\Model\CustomerGroupI18n[]
      */
     public function getI18ns()
     {

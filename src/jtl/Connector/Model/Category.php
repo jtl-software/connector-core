@@ -62,7 +62,7 @@ class Category extends DataModel
     protected $sort = 0;
 
     /**
-     * @var jtl\Connector\Model\CategoryAttr[] 
+     * @var \jtl\Connector\Model\CategoryAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryAttr>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
@@ -70,7 +70,7 @@ class Category extends DataModel
     protected $attributes = array();
 
     /**
-     * @var jtl\Connector\Model\CategoryCustomerGroup[] 
+     * @var \jtl\Connector\Model\CategoryCustomerGroup[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryCustomerGroup>")
      * @Serializer\SerializedName("customerGroups")
      * @Serializer\AccessType("reflection")
@@ -78,7 +78,7 @@ class Category extends DataModel
     protected $customerGroups = array();
 
     /**
-     * @var jtl\Connector\Model\CategoryI18n[] 
+     * @var \jtl\Connector\Model\CategoryI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -86,7 +86,7 @@ class Category extends DataModel
     protected $i18ns = array();
 
     /**
-     * @var jtl\Connector\Model\CategoryInvisibility[] 
+     * @var \jtl\Connector\Model\CategoryInvisibility[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryInvisibility>")
      * @Serializer\SerializedName("invisibilities")
      * @Serializer\AccessType("reflection")
@@ -210,7 +210,7 @@ class Category extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\CategoryAttr[]
+     * @return \jtl\Connector\Model\CategoryAttr[]
      */
     public function getAttributes()
     {
@@ -247,7 +247,7 @@ class Category extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\CategoryCustomerGroup[]
+     * @return \jtl\Connector\Model\CategoryCustomerGroup[]
      */
     public function getCustomerGroups()
     {
@@ -284,7 +284,7 @@ class Category extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\CategoryI18n[]
+     * @return \jtl\Connector\Model\CategoryI18n[]
      */
     public function getI18ns()
     {
@@ -321,7 +321,7 @@ class Category extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\CategoryInvisibility[]
+     * @return \jtl\Connector\Model\CategoryInvisibility[]
      */
     public function getInvisibilities()
     {

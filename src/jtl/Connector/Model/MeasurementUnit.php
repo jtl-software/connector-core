@@ -46,7 +46,7 @@ class MeasurementUnit extends DataModel
     protected $displayCode = '';
 
     /**
-     * @var jtl\Connector\Model\MeasurementUnitI18n[] 
+     * @var \jtl\Connector\Model\MeasurementUnitI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\MeasurementUnitI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -134,7 +134,7 @@ class MeasurementUnit extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\MeasurementUnitI18n[]
+     * @return \jtl\Connector\Model\MeasurementUnitI18n[]
      */
     public function getI18ns()
     {

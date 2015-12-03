@@ -62,7 +62,7 @@ class DeliveryNote extends DataModel
     protected $note = '';
 
     /**
-     * @var jtl\Connector\Model\DeliveryNoteItem[] 
+     * @var \jtl\Connector\Model\DeliveryNoteItem[]
      * @Serializer\Type("array<jtl\Connector\Model\DeliveryNoteItem>")
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
@@ -70,7 +70,7 @@ class DeliveryNote extends DataModel
     protected $items = array();
 
     /**
-     * @var jtl\Connector\Model\DeliveryNoteTrackingList[] 
+     * @var \jtl\Connector\Model\DeliveryNoteTrackingList[]
      * @Serializer\Type("array<jtl\Connector\Model\DeliveryNoteTrackingList>")
      * @Serializer\SerializedName("trackingLists")
      * @Serializer\AccessType("reflection")
@@ -195,7 +195,7 @@ class DeliveryNote extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\DeliveryNoteItem[]
+     * @return \jtl\Connector\Model\DeliveryNoteItem[]
      */
     public function getItems()
     {
@@ -232,7 +232,7 @@ class DeliveryNote extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\DeliveryNoteTrackingList[]
+     * @return \jtl\Connector\Model\DeliveryNoteTrackingList[]
      */
     public function getTrackingLists()
     {

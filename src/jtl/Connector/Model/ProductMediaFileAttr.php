@@ -30,7 +30,7 @@ class ProductMediaFileAttr extends DataModel
     protected $productMediaFileId = null;
 
     /**
-     * @var jtl\Connector\Model\ProductMediaFileAttrI18n[] 
+     * @var \jtl\Connector\Model\ProductMediaFileAttrI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductMediaFileAttrI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -84,7 +84,7 @@ class ProductMediaFileAttr extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\ProductMediaFileAttrI18n[]
+     * @return \jtl\Connector\Model\ProductMediaFileAttrI18n[]
      */
     public function getI18ns()
     {

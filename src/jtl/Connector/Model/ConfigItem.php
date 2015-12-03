@@ -142,7 +142,7 @@ class ConfigItem extends DataModel
     protected $type = 0;
 
     /**
-     * @var jtl\Connector\Model\ConfigItemI18n[] 
+     * @var \jtl\Connector\Model\ConfigItemI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ConfigItemI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -150,7 +150,7 @@ class ConfigItem extends DataModel
     protected $i18ns = array();
 
     /**
-     * @var jtl\Connector\Model\ConfigItemPrice[] 
+     * @var \jtl\Connector\Model\ConfigItemPrice[]
      * @Serializer\Type("array<jtl\Connector\Model\ConfigItemPrice>")
      * @Serializer\SerializedName("prices")
      * @Serializer\AccessType("reflection")
@@ -446,7 +446,7 @@ class ConfigItem extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\ConfigItemI18n[]
+     * @return \jtl\Connector\Model\ConfigItemI18n[]
      */
     public function getI18ns()
     {
@@ -483,7 +483,7 @@ class ConfigItem extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\ConfigItemPrice[]
+     * @return \jtl\Connector\Model\ConfigItemPrice[]
      */
     public function getPrices()
     {

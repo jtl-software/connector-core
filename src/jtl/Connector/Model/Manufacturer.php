@@ -62,7 +62,7 @@ class Manufacturer extends DataModel
     protected $websiteUrl = '';
 
     /**
-     * @var jtl\Connector\Model\ManufacturerI18n[] 
+     * @var \jtl\Connector\Model\ManufacturerI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ManufacturerI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -184,7 +184,7 @@ class Manufacturer extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\ManufacturerI18n[]
+     * @return \jtl\Connector\Model\ManufacturerI18n[]
      */
     public function getI18ns()
     {

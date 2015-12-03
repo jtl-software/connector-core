@@ -198,6 +198,12 @@ class Application extends CoreApplication
                 $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
 
                 if ($rpcmode == Packet::SINGLE_MODE) {
+
+                    // Event
+                    $class = ($method->getController() === 'connector') ? 'Connector' : null;
+                    $res = $actionresult->getResult();
+                    EventHandler::dispatch($res, $this->eventDispatcher, $method->getAction(), EventHandler::AFTER, $class, true);
+
                     $this->triggerRpcAfterEvent($responsepacket->getPublic(), $requestpacket->getMethod());
                     Response::send($responsepacket);
                 } else {
@@ -251,7 +257,8 @@ class Application extends CoreApplication
                                 ChecksumLinker::link($model);
 
                                 // Event
-                                EventHandler::dispatch($model, $this->eventDispatcher, $method->getAction(), EventHandler::AFTER);
+                                $class = ($method->getController() === 'connector') ? 'Connector' : null;
+                                EventHandler::dispatch($model, $this->eventDispatcher, $method->getAction(), EventHandler::AFTER, $class);
 
                                 if ($method->getAction() === Method::ACTION_PULL) {
                                     $results[] = $model->getPublic();

@@ -54,7 +54,7 @@ class ProductAttr extends DataModel
     protected $isTranslated = false;
 
     /**
-     * @var jtl\Connector\Model\ProductAttrI18n[] 
+     * @var \jtl\Connector\Model\ProductAttrI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductAttrI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -161,7 +161,7 @@ class ProductAttr extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\ProductAttrI18n[]
+     * @return \jtl\Connector\Model\ProductAttrI18n[]
      */
     public function getI18ns()
     {

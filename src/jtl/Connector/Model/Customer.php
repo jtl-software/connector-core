@@ -262,7 +262,7 @@ class Customer extends DataModel
     protected $zipCode = '';
 
     /**
-     * @var jtl\Connector\Model\CustomerAttr[] 
+     * @var \jtl\Connector\Model\CustomerAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerAttr>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
@@ -813,7 +813,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\CustomerAttr[]
+     * @return \jtl\Connector\Model\CustomerAttr[]
      */
     public function getAttributes()
     {

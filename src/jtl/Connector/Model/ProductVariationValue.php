@@ -78,7 +78,7 @@ class ProductVariationValue extends DataModel
     protected $stockLevel = 0.0;
 
     /**
-     * @var jtl\Connector\Model\ProductVariationValueExtraCharge[] 
+     * @var \jtl\Connector\Model\ProductVariationValueExtraCharge[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValueExtraCharge>")
      * @Serializer\SerializedName("extraCharges")
      * @Serializer\AccessType("reflection")
@@ -86,7 +86,7 @@ class ProductVariationValue extends DataModel
     protected $extraCharges = array();
 
     /**
-     * @var jtl\Connector\Model\ProductVariationValueI18n[] 
+     * @var \jtl\Connector\Model\ProductVariationValueI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValueI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -94,7 +94,7 @@ class ProductVariationValue extends DataModel
     protected $i18ns = array();
 
     /**
-     * @var jtl\Connector\Model\ProductVariationValueInvisibility[] 
+     * @var \jtl\Connector\Model\ProductVariationValueInvisibility[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValueInvisibility>")
      * @Serializer\SerializedName("invisibilities")
      * @Serializer\AccessType("reflection")
@@ -252,7 +252,7 @@ class ProductVariationValue extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\ProductVariationValueExtraCharge[]
+     * @return \jtl\Connector\Model\ProductVariationValueExtraCharge[]
      */
     public function getExtraCharges()
     {
@@ -289,7 +289,7 @@ class ProductVariationValue extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\ProductVariationValueI18n[]
+     * @return \jtl\Connector\Model\ProductVariationValueI18n[]
      */
     public function getI18ns()
     {
@@ -326,7 +326,7 @@ class ProductVariationValue extends DataModel
     }
     
     /**
-     * @return jtl\Connector\Model\ProductVariationValueInvisibility[]
+     * @return \jtl\Connector\Model\ProductVariationValueInvisibility[]
      */
     public function getInvisibilities()
     {
