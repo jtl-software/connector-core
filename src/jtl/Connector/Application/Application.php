@@ -201,7 +201,8 @@ class Application extends CoreApplication
 
                     // Event
                     $class = ($method->getController() === 'connector') ? 'Connector' : null;
-                    EventHandler::dispatch($actionresult->getResult(), $this->eventDispatcher, $method->getAction(), EventHandler::AFTER, $class, true);
+                    $res = $actionresult->getResult();
+                    EventHandler::dispatch($res, $this->eventDispatcher, $method->getAction(), EventHandler::AFTER, $class, true);
 
                     $this->triggerRpcAfterEvent($responsepacket->getPublic(), $requestpacket->getMethod());
                     Response::send($responsepacket);
