@@ -110,11 +110,15 @@ class Request
      */
     public static function stripData($data)
     {
+        /*
         if (get_magic_quotes_gpc()) {
             return stripslashes($data);
         }
         
         return $data;
+        */
+
+        return stripslashes($data);
     }
     
     /**
