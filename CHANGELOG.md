@@ -1,3 +1,7 @@
+2.2.7
+-----
+- Fixed php 7 error handling support
+
 2.2.6
 -----
 - Added specific value type mapping to the identitylinker

@@ -18,7 +18,7 @@ class DeliveryNoteTrackingList extends DataType
     {
         return array(
             new PropertyInfo('name', 'string', '', false, false, false),
-            new PropertyInfo('codes', 'string', null, false, false, true),
+            new PropertyInfo('codes', 'string', null, false, false, false),
         );
     }
 
