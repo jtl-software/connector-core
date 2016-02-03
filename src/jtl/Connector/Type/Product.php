@@ -72,7 +72,7 @@ class Product extends DataType
             new PropertyInfo('shippingWeight', 'double', 0.0, false, false, false),
             new PropertyInfo('sku', 'string', '', false, false, false),
             new PropertyInfo('sort', 'integer', 0, false, false, false),
-            new PropertyInfo('stockLevel', 'ProductStockLevel', null, false, false, true),
+            new PropertyInfo('stockLevel', '\jtl\Connector\Model\ProductStockLevel', null, false, false, true),
             new PropertyInfo('supplierDeliveryTime', 'integer', 0, false, false, false),
             new PropertyInfo('supplierStockLevel', 'double', 0.0, false, false, false),
             new PropertyInfo('taric', 'string', '', false, false, false),
