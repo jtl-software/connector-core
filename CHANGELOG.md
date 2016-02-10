@@ -1,3 +1,7 @@
+2.2.8
+-----
+- Added token validator
+
 2.2.7
 -----
 - Fixed php 7 error handling support

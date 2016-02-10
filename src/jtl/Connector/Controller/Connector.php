@@ -7,6 +7,7 @@
 
 namespace jtl\Connector\Controller;
 
+use jtl\Connector\Authentication\ITokenValidator;
 use \jtl\Connector\Core\Controller\Controller as CoreController;
 use jtl\Connector\Core\System\Check;
 use \jtl\Connector\Result\Action;
@@ -134,16 +135,10 @@ class Connector extends CoreController
      */
     public function auth($params)
     {
-        try {
-            $token = Application()->getConnector()->getTokenLoader()->load();
-        } catch (\Exception $e) {
-            Logger::write(ExceptionFormatter::format($e), Logger::ERROR, 'security');
-            $token = '';
-        }
-
         $action = new Action();
         $action->setHandled(true);
         $authRequest = null;
+        $token = '';
 
         try {
             $serializer = SerializerBuilder::create();
@@ -158,8 +153,28 @@ class Connector extends CoreController
             return $action;
         }
 
+        // EP checks validation?
+        $useEpValidation = false;
+        $isValid = false;
+        if (is_callable([Application()->getConnector(), 'getTokenValidator'])) {
+            $tokenValidator = Application()->getConnector()->getTokenValidator();
+            if ($tokenValidator instanceof ITokenValidator) {
+                $useEpValidation = true;
+                $isValid = $tokenValidator->validate($authRequest);
+            }
+        }
+
+        if (!$useEpValidation) {
+            try {
+                $token = Application()->getConnector()->getTokenLoader()->load();
+            } catch (\Exception $e) {
+                Logger::write(ExceptionFormatter::format($e), Logger::ERROR, 'security');
+                $token = '';
+            }
+        }
+
         // If credentials are not valid, return appropriate response
-        if ($token !== $authRequest->getToken()) {
+        if (($useEpValidation && !$isValid) || (!$useEpValidation && $token !== $authRequest->getToken())) {
             sleep(2);
 
             $error = new Error();
