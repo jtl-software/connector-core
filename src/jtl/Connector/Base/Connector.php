@@ -6,11 +6,11 @@
  */
 namespace jtl\Connector\Base;
 
+use jtl\Connector\Authentication\ITokenValidator;
 use \jtl\Connector\Core\Rpc\RequestPacket;
 use \jtl\Connector\Application\IEndpointConnector;
 use \jtl\Connector\Core\Utilities\Singleton;
 use \jtl\Connector\Core\Utilities\RpcMethod;
-use \jtl\Connector\Core\Exception\ConnectorException;
 use \jtl\Connector\Core\Rpc\Method;
 use \jtl\Connector\Mapper\IPrimaryKeyMapper;
 use \jtl\Connector\Authentication\ITokenLoader;
@@ -28,6 +28,7 @@ class Connector extends Singleton implements IEndpointConnector
     protected $controller;
     protected $keyMapper;
     protected $tokenLoader;
+    protected $tokenValidator;
     protected $checksumLoader;
     protected $eventDispatcher;
     protected $method;
@@ -81,6 +82,26 @@ class Connector extends Singleton implements IEndpointConnector
     public function getTokenLoader()
     {
         return $this->tokenLoader;
+    }
+
+    /**
+     * Setter token validator
+     *
+     * @param \jtl\Connector\Authentication\ITokenValidator $tokenValidator
+     * @return \jtl\Connector\Base\Connector
+     */
+    protected function setTokenValidator(ITokenValidator $tokenValidator)
+    {
+        $this->tokenValidator = $tokenValidator;
+        return $this;
+    }
+
+    /**
+     * @return \jtl\Connector\Authentication\ITokenValidator
+     */
+    public function getTokenValidator()
+    {
+        return $this->tokenValidator;
     }
 
     /**
