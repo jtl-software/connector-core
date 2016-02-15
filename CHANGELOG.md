@@ -1,3 +1,7 @@
+2.2.9
+-----
+- Addded customer order and customer order item gross prices
+
 2.2.8
 -----
 - Added token validator

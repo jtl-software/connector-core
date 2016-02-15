@@ -23,6 +23,7 @@ class CustomerOrderItem extends DataType
             new PropertyInfo('productId', 'Identity', null, false, true, false),
             new PropertyInfo('name', 'string', '', false, false, false),
             new PropertyInfo('price', 'double', 0.0, false, false, false),
+            new PropertyInfo('priceGross', 'double', 0.0, false, false, false),
             new PropertyInfo('quantity', 'double', 0.0, false, false, false),
             new PropertyInfo('sku', 'string', '', false, false, false),
             new PropertyInfo('type', 'string', '', false, false, false),

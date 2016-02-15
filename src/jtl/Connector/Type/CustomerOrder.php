@@ -38,6 +38,7 @@ class CustomerOrder extends DataType
             new PropertyInfo('shippingMethodName', 'string', '', false, false, false),
             new PropertyInfo('status', 'string', '', false, false, false),
             new PropertyInfo('totalSum', 'double', 0.0, false, false, false),
+            new PropertyInfo('totalSumGross', 'double', 0.0, false, false, false),
             new PropertyInfo('attributes', '\jtl\Connector\Model\CustomerOrderAttr', null, false, false, true),
             new PropertyInfo('items', '\jtl\Connector\Model\CustomerOrderItem', null, false, false, true),
         );
