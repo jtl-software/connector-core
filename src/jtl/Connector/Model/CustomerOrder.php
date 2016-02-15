@@ -225,6 +225,14 @@ class CustomerOrder extends DataModel
     protected $totalSum = 0.0;
 
     /**
+     * @var double
+     * @Serializer\Type("double")
+     * @Serializer\SerializedName("totalSumGross")
+     * @Serializer\Accessor(getter="getTotalSumGross",setter="setTotalSumGross")
+     */
+    protected $totalSumGross = 0.0;
+
+    /**
      * @var \jtl\Connector\Model\CustomerOrderAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderAttr>")
      * @Serializer\SerializedName("attributes")
@@ -613,6 +621,23 @@ class CustomerOrder extends DataModel
     public function getTotalSum()
     {
         return $this->totalSum;
+    }
+
+    /**
+     * @param double $totalSumGross
+     * @return \jtl\Connector\Model\CustomerOrder
+     */
+    public function setTotalSumGross($totalSumGross)
+    {
+        return $this->setProperty('totalSumGross', $totalSumGross, 'double');
+    }
+
+    /**
+     * @return double
+     */
+    public function getTotalSumGross()
+    {
+        return $this->totalSumGross;
     }
 
     /**

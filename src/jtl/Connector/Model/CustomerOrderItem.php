@@ -85,6 +85,14 @@ class CustomerOrderItem extends DataModel
     protected $price = 0.0;
 
     /**
+     * @var double Price (gross)
+     * @Serializer\Type("double")
+     * @Serializer\SerializedName("priceGross")
+     * @Serializer\Accessor(getter="getPriceGross",setter="setPriceGross")
+     */
+    protected $priceGross = 0.0;
+
+    /**
      * @var double Quantity purchased
      * @Serializer\Type("double")
      * @Serializer\SerializedName("quantity")
@@ -247,6 +255,23 @@ class CustomerOrderItem extends DataModel
     public function getPrice()
     {
         return $this->price;
+    }
+
+    /**
+     * @param double $priceGross Price (gross)
+     * @return \jtl\Connector\Model\CustomerOrderItem
+     */
+    public function setPriceGross($priceGross)
+    {
+        return $this->setProperty('priceGross', $priceGross, 'double');
+    }
+
+    /**
+     * @return double PriceGross (gross)
+     */
+    public function getPriceGross()
+    {
+        return $this->priceGross;
     }
 
     /**
