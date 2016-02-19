@@ -76,4 +76,6 @@ class PaymentTypes
     const TYPE_SOFORT = 'pm_sofort';
     const TYPE_IPAYMENT = 'pm_ipayment';
     const TYPE_PREPAYMENT = 'pm_prepayment';
+    const TYPE_SKRILL = 'pm_skrill';
+    const TYPE_PAYMORROW = 'pm_paymorrow';
 }

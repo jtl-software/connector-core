@@ -1,3 +1,8 @@
+2.2.10 (unreleased)
+------
+- Added new payment types for skrill and paymorrow
+
+
 2.2.9
 -----
 - Addded customer order and customer order item gross prices
