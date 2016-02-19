@@ -1,4 +1,4 @@
-2.2.10 (unreleased)
+2.2.10
 ------
 - Added new payment types for skrill and paymorrow
 
