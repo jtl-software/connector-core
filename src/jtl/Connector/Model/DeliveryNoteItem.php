@@ -37,6 +37,14 @@ class DeliveryNoteItem extends DataModel
     protected $deliveryNoteId = null;
 
     /**
+     * @var Identity Reference to product
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productId")
+     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
+     */
+    protected $productId = null;
+
+    /**
      * @var Identity 
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
@@ -67,6 +75,7 @@ class DeliveryNoteItem extends DataModel
     {
         $this->id = new Identity();
         $this->deliveryNoteId = new Identity();
+        $this->productId = new Identity();
         $this->customerOrderItemId = new Identity();
     }
 
@@ -104,6 +113,24 @@ class DeliveryNoteItem extends DataModel
     public function getDeliveryNoteId()
     {
         return $this->deliveryNoteId;
+    }
+
+    /**
+     * @param Identity $productId Reference to product
+     * @return \jtl\Connector\Model\CustomerOrderItem
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setProductId(Identity $productId)
+    {
+        return $this->setProperty('productId', $productId, 'Identity');
+    }
+
+    /**
+     * @return Identity Reference to product
+     */
+    public function getProductId()
+    {
+        return $this->productId;
     }
 
     /**

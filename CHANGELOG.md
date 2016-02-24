@@ -1,7 +1,10 @@
+2.2.11 (unreleased)
+------
+- Added productId to delivernoteitem
+
 2.2.10
 ------
 - Added new payment types for skrill and paymorrow
-
 
 2.2.9
 -----
