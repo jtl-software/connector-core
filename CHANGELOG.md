@@ -1,4 +1,4 @@
-2.2.11 (unreleased)
+2.2.11
 ------
 - Added productId to delivernoteitem
 
