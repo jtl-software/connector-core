@@ -119,7 +119,8 @@ class IdentityLinker
             'customerOrderId' => self::TYPE_CUSTOMER_ORDER
         ),
         'DeliveryNoteItem' => array(
-            'deliveryNoteId' => self::TYPE_DELIVERY_NOTE
+            'deliveryNoteId' => self::TYPE_DELIVERY_NOTE,
+            'productId' => self::TYPE_PRODUCT
         ),
         'CategoryInvisibility' => array(
             'categoryId' => self::TYPE_CATEGORY
