@@ -78,4 +78,5 @@ class PaymentTypes
     const TYPE_PREPAYMENT = 'pm_prepayment';
     const TYPE_SKRILL = 'pm_skrill';
     const TYPE_PAYMORROW = 'pm_paymorrow';
+    const TYPE_HEIDELPAY = 'pm_heidelpay';
 }

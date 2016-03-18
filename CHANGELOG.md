@@ -1,3 +1,7 @@
+2.2.12
+------
+- Added heidelpay payment type
+
 2.2.11
 ------
 - Added productId to delivernoteitem
