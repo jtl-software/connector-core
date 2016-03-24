@@ -1,3 +1,7 @@
+2.2.13
+------
+- Added 2 new customer order item types
+
 2.2.12
 ------
 - Added heidelpay payment type

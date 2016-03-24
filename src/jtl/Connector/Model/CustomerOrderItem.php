@@ -37,6 +37,16 @@ class CustomerOrderItem extends DataModel
     const TYPE_SHIPPING = 'shipping';
 
     /**
+     * @var string - Surcharge
+     */
+    const TYPE_SURCHARGE = 'surcharge';
+
+    /**
+     * @var string - Coupon
+     */
+    const TYPE_COUPON = 'coupon';
+
+    /**
      * @var Identity Optional reference to configItemId (if item is part of a configurable item)
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("configItemId")

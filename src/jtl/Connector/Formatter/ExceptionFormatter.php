@@ -8,8 +8,21 @@ namespace jtl\Connector\Formatter;
 
 class ExceptionFormatter
 {
-    public static function format(\Exception $exc)
+    /**
+     * @param \Exception $exc
+     * @param string $message
+     * @return string
+     */
+    public static function format(\Exception $exc, $message = '')
     {
-        return sprintf("Exception '%s' (Code: %s) with message '%s' in %s:%s", get_class($exc), $exc->getCode(), $exc->getMessage(), $exc->getFile(), $exc->getLine());
+        return sprintf(
+            "Exception '%s' (Code: %s) with message '%s' in %s:%s%s",
+            get_class($exc),
+            $exc->getCode(),
+            $exc->getMessage(),
+            $exc->getFile(),
+            $exc->getLine(),
+            (strlen($message) > 0 ? " - additional message: {$message}" : '')
+        );
     }
 }
