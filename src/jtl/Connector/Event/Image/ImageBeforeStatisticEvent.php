@@ -1,22 +1,24 @@
 <?php
 namespace jtl\Connector\Event\Image;
 
-use \Symfony\Component\EventDispatcher\Event;
-use \jtl\Connector\Model\Image;
+use Symfony\Component\EventDispatcher\Event;
+use jtl\Connector\Core\Model\QueryFilter;
+
 
 class ImageBeforeStatisticEvent extends Event
 {
     const EVENT_NAME = 'image.before.statistic';
 
-    protected $image;
+	protected $filter;
 
-    public function __construct(Image &$image)
+    public function __construct(QueryFilter &$filter)
     {
-        $this->image = $image;
+		$this->filter = $filter;
     }
 
-    public function getImage()
+    public function getFilter()
     {
-        return $this->image;
-    }
+        return $this->filter;
+	}
+	
 }

@@ -1,3 +1,9 @@
+2.2.14
+------
+- Added property name to image
+- Added entity ImageI18n
+- Changed and fixed Event parameter
+
 2.2.13
 ------
 - Added 2 new customer order item types

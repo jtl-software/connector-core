@@ -1,22 +1,24 @@
 <?php
 namespace jtl\Connector\Event\StatusChange;
 
-use \Symfony\Component\EventDispatcher\Event;
-use \jtl\Connector\Model\StatusChange;
+use Symfony\Component\EventDispatcher\Event;
+use jtl\Connector\Core\Model\QueryFilter;
+
 
 class StatusChangeBeforeStatisticEvent extends Event
 {
     const EVENT_NAME = 'statuschange.before.statistic';
 
-    protected $statuschange;
+	protected $filter;
 
-    public function __construct(StatusChange &$statuschange)
+    public function __construct(QueryFilter &$filter)
     {
-        $this->statuschange = $statuschange;
+		$this->filter = $filter;
     }
 
-    public function getStatusChange()
+    public function getFilter()
     {
-        return $this->statuschange;
-    }
+        return $this->filter;
+	}
+	
 }

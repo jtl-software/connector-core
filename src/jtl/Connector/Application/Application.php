@@ -426,9 +426,10 @@ class Application extends CoreApplication
     protected function deserializeRequestParams(RequestPacket &$requestpacket, $modelNamespace)
     {
         $method = RpcMethod::splitMethod($requestpacket->getMethod());
+        $modelClass = RpcMethod::buildController($method->getController());
 
         $namespace = ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) ?
-            sprintf('%s\%s', $modelNamespace, RpcMethod::buildController($method->getController())) : 'jtl\Connector\Core\Model\QueryFilter';
+            sprintf('%s\%s', $modelNamespace, $modelClass) : 'jtl\Connector\Core\Model\QueryFilter';
 
         if (class_exists("\\{$namespace}") && $requestpacket->getParams() !== null) {
             $serializer = SerializerBuilder::create();
@@ -464,7 +465,7 @@ class Application extends CoreApplication
                 $params = $serializer->deserialize($requestpacket->getParams(), $namespace, 'json');
 
                 // Event
-                EventHandler::dispatch($params, $this->eventDispatcher, $method->getAction(), EventHandler::BEFORE);
+                EventHandler::dispatch($params, $this->eventDispatcher, $method->getAction(), EventHandler::BEFORE, $modelClass);
             }
 
             $requestpacket->setParams($params);
