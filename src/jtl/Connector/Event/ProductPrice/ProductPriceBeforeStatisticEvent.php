@@ -1,22 +1,24 @@
 <?php
 namespace jtl\Connector\Event\ProductPrice;
 
-use \Symfony\Component\EventDispatcher\Event;
-use \jtl\Connector\Model\ProductPrice;
+use Symfony\Component\EventDispatcher\Event;
+use jtl\Connector\Core\Model\QueryFilter;
+
 
 class ProductPriceBeforeStatisticEvent extends Event
 {
     const EVENT_NAME = 'productprice.before.statistic';
 
-    protected $productprice;
+	protected $filter;
 
-    public function __construct(ProductPrice &$productprice)
+    public function __construct(QueryFilter &$filter)
     {
-        $this->productprice = $productprice;
+		$this->filter = $filter;
     }
 
-    public function getProductPrice()
+    public function getFilter()
     {
-        return $this->productprice;
-    }
+        return $this->filter;
+	}
+	
 }

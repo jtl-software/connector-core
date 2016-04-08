@@ -61,12 +61,28 @@ class Image extends DataModel
     protected $remoteUrl = '';
 
     /**
+     * @var string
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("name")
+     * @Serializer\Accessor(getter="getName",setter="setName")
+     */
+    protected $name = '';
+
+    /**
      * @var integer 
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
+
+    /**
+     * @var \jtl\Connector\Model\ImageI18n[]
+     * @Serializer\Type("array<jtl\Connector\Model\ImageI18n>")
+     * @Serializer\SerializedName("i18ns")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $i18ns = array();
 
     /**
      * Constructor
@@ -165,6 +181,23 @@ class Image extends DataModel
     }
 
     /**
+     * @param string $name
+     * @return \jtl\Connector\Model\Image
+     */
+    public function setName($name)
+    {
+        return $this->setProperty('name', $name, 'string');
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * @param integer $sort 
      * @return \jtl\Connector\Model\Image
      */
@@ -179,5 +212,42 @@ class Image extends DataModel
     public function getSort()
     {
         return $this->sort;
+    }
+
+    /**
+     * @param \jtl\Connector\Model\ImageI18n $i18n
+     * @return \jtl\Connector\Model\Image
+     */
+    public function addI18n(\jtl\Connector\Model\ImageI18n $i18n)
+    {
+        $this->i18ns[] = $i18n;
+        return $this;
+    }
+
+    /**
+     * @param array $i18ns
+     * @return \jtl\Connector\Model\Image
+     */
+    public function setI18ns(array $i18ns)
+    {
+        $this->i18ns = $i18ns;
+        return $this;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\ImageI18n[]
+     */
+    public function getI18ns()
+    {
+        return $this->i18ns;
+    }
+
+    /**
+     * @return \jtl\Connector\Model\Image
+     */
+    public function clearI18ns()
+    {
+        $this->i18ns = array();
+        return $this;
     }
 }

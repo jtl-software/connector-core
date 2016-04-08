@@ -1,22 +1,24 @@
 <?php
 namespace jtl\Connector\Event\Payment;
 
-use \Symfony\Component\EventDispatcher\Event;
-use \jtl\Connector\Model\Payment;
+use Symfony\Component\EventDispatcher\Event;
+use jtl\Connector\Core\Model\QueryFilter;
+
 
 class PaymentBeforeStatisticEvent extends Event
 {
     const EVENT_NAME = 'payment.before.statistic';
 
-    protected $payment;
+	protected $filter;
 
-    public function __construct(Payment &$payment)
+    public function __construct(QueryFilter &$filter)
     {
-        $this->payment = $payment;
+		$this->filter = $filter;
     }
 
-    public function getPayment()
+    public function getFilter()
     {
-        return $this->payment;
-    }
+        return $this->filter;
+	}
+	
 }

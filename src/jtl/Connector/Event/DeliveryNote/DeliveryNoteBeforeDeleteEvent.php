@@ -1,22 +1,24 @@
 <?php
 namespace jtl\Connector\Event\DeliveryNote;
 
-use \Symfony\Component\EventDispatcher\Event;
-use \jtl\Connector\Model\DeliveryNote;
+use Symfony\Component\EventDispatcher\Event;
+use jtl\Connector\Model\DeliveryNote;
+
 
 class DeliveryNoteBeforeDeleteEvent extends Event
 {
     const EVENT_NAME = 'deliverynote.before.delete';
 
-    protected $deliverynote;
+	protected $deliverynote;
 
     public function __construct(DeliveryNote &$deliverynote)
     {
-        $this->deliverynote = $deliverynote;
+		$this->deliverynote = $deliverynote;
     }
 
-    public function getDeliveryNote()
+    public function getDeliverynote()
     {
         return $this->deliverynote;
-    }
+	}
+	
 }

@@ -3,19 +3,20 @@ namespace jtl\Connector\Event\Connector;
 
 use Symfony\Component\EventDispatcher\Event;
 
-class ConnectorAfterStatisticEvent extends Event
+class CoreConnectorAfterFeaturesEvent extends Event
 {
-    const EVENT_NAME = 'connector.statistic';
+    const EVENT_NAME = 'connector.after.statistic';
 
-    protected $statistic;
+	protected $statistics;
 
     public function __construct(array &$statistics)
     {
-        $this->statistic = $statistics;
+		$this->statistics = $statistics;
     }
 
     public function getStatistics()
     {
-        return $this->statistic;
-    }
+        return $this->statistics;
+	}
+	
 }
