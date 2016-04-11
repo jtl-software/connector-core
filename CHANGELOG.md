@@ -1,3 +1,7 @@
+2.2.15
+------
+- Fixed imagei18n type classname
+
 2.2.14
 ------
 - Added property name to image
