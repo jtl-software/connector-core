@@ -12,7 +12,7 @@ use \jtl\Connector\Type\PropertyInfo;
  * @access public
  * @package jtl\Connector\Type
  */
-class Image extends DataType
+class ImageI18n extends DataType
 {
     protected function loadProperties()
     {
