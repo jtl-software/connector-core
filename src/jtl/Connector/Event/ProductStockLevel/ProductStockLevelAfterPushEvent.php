@@ -9,16 +9,16 @@ class ProductStockLevelAfterPushEvent extends Event
 {
     const EVENT_NAME = 'productstocklevel.after.push';
 
-	protected $productstocklevel;
+	protected $productStockLevel;
 
-    public function __construct(ProductStockLevel &$productstocklevel)
+    public function __construct(ProductStockLevel &$productStockLevel)
     {
-		$this->productstocklevel = $productstocklevel;
+		$this->productStockLevel = $productStockLevel;
     }
 
-    public function getProductstocklevel()
+    public function getProductStockLevel()
     {
-        return $this->productstocklevel;
+        return $this->productStockLevel;
 	}
 	
 }

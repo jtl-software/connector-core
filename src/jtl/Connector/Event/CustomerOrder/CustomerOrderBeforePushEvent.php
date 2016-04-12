@@ -9,16 +9,16 @@ class CustomerOrderBeforePushEvent extends Event
 {
     const EVENT_NAME = 'customerorder.before.push';
 
-	protected $customerorder;
+	protected $customerOrder;
 
-    public function __construct(CustomerOrder &$customerorder)
+    public function __construct(CustomerOrder &$customerOrder)
     {
-		$this->customerorder = $customerorder;
+		$this->customerOrder = $customerOrder;
     }
 
-    public function getCustomerorder()
+    public function getCustomerOrder()
     {
-        return $this->customerorder;
+        return $this->customerOrder;
 	}
 	
 }
