@@ -9,16 +9,16 @@ class GlobalDataBeforeDeleteEvent extends Event
 {
     const EVENT_NAME = 'globaldata.before.delete';
 
-	protected $globaldata;
+	protected $globalData;
 
-    public function __construct(GlobalData &$globaldata)
+    public function __construct(GlobalData &$globalData)
     {
-		$this->globaldata = $globaldata;
+		$this->globalData = $globalData;
     }
 
-    public function getGlobaldata()
+    public function getGlobalData()
     {
-        return $this->globaldata;
+        return $this->globalData;
 	}
 	
 }

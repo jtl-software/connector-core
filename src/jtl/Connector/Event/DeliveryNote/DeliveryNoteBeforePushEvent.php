@@ -9,16 +9,16 @@ class DeliveryNoteBeforePushEvent extends Event
 {
     const EVENT_NAME = 'deliverynote.before.push';
 
-	protected $deliverynote;
+	protected $deliveryNote;
 
-    public function __construct(DeliveryNote &$deliverynote)
+    public function __construct(DeliveryNote &$deliveryNote)
     {
-		$this->deliverynote = $deliverynote;
+		$this->deliveryNote = $deliveryNote;
     }
 
-    public function getDeliverynote()
+    public function getDeliveryNote()
     {
-        return $this->deliverynote;
+        return $this->deliveryNote;
 	}
 	
 }

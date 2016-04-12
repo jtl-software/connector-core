@@ -9,16 +9,16 @@ class DeliveryNoteAfterDeleteEvent extends Event
 {
     const EVENT_NAME = 'deliverynote.after.delete';
 
-	protected $deliverynote;
+	protected $deliveryNote;
 
-    public function __construct(DeliveryNote &$deliverynote)
+    public function __construct(DeliveryNote &$deliveryNote)
     {
-		$this->deliverynote = $deliverynote;
+		$this->deliveryNote = $deliveryNote;
     }
 
-    public function getDeliverynote()
+    public function getDeliveryNote()
     {
-        return $this->deliverynote;
+        return $this->deliveryNote;
 	}
 	
 }

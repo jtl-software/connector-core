@@ -9,16 +9,16 @@ class ProductPriceAfterDeleteEvent extends Event
 {
     const EVENT_NAME = 'productprice.after.delete';
 
-	protected $productprice;
+	protected $productPrice;
 
-    public function __construct(ProductPrice &$productprice)
+    public function __construct(ProductPrice &$productPrice)
     {
-		$this->productprice = $productprice;
+		$this->productPrice = $productPrice;
     }
 
-    public function getProductprice()
+    public function getProductPrice()
     {
-        return $this->productprice;
+        return $this->productPrice;
 	}
 	
 }

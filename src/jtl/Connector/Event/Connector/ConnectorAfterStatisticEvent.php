@@ -3,7 +3,7 @@ namespace jtl\Connector\Event\Connector;
 
 use Symfony\Component\EventDispatcher\Event;
 
-class CoreConnectorAfterFeaturesEvent extends Event
+class ConnectorAfterStatisticEvent extends Event
 {
     const EVENT_NAME = 'connector.after.statistic';
 
