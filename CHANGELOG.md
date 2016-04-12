@@ -1,3 +1,7 @@
+2.2.16
+------
+- Fixed event property names
+
 2.2.15
 ------
 - Fixed imagei18n type classname
