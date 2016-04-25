@@ -1,3 +1,7 @@
+2.2.17
+------
+- Added imagei18n to identity linker
+
 2.2.16
 ------
 - Fixed event property names
