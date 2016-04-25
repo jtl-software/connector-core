@@ -203,6 +203,9 @@ class IdentityLinker
             'id' => self::TYPE_IMAGE,
             'foreignKey' => self::TYPE_IMAGE
         ),
+        'ImageI18n' => array(
+            'imageId' => self::TYPE_IMAGE
+        ),
         'CategoryFunctionAttr' => array(
             'categoryId' => self::TYPE_CATEGORY
         ),

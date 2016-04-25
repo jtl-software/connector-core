@@ -85,7 +85,7 @@ abstract class Handler
 
         ini_set('session.save_handler', 'user');
         register_shutdown_function('session_write_close');
-        session_regenerate_id(true);
+        @session_regenerate_id(true);
         session_start();
 
         $this->_lifetime = 7200;
