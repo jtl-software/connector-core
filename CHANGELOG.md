@@ -1,3 +1,8 @@
+2.2.18
+------
+- Changed Monolog to version 1.19.x
+- Added php 7 compatibility
+
 2.2.17
 ------
 - Added imagei18n to identity linker
