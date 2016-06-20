@@ -1,3 +1,7 @@
+2.2.19
+------
+- Downgrading Monolog to version 1.17.2
+
 2.2.18
 ------
 - Changed Monolog to version 1.19.x
