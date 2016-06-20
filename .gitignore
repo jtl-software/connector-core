@@ -2,6 +2,7 @@ netbeans/**
 .settings/**
 .project
 .buildpath
+.idea
 nbproject/**
 vendor/**
 build/build/**
