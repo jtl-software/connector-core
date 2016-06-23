@@ -7,10 +7,8 @@
 namespace jtl\Connector\Core\Logger;
 
 use Monolog\Handler\RotatingFileHandler;
-use Monolog\Logger as Monolog;
-use Monolog\Handler\StreamHandler;
 
-class Logger extends Monolog
+class Logger extends \Monolog\Logger
 {
     /**
      * Adds a log record at an arbitrary level.
@@ -29,7 +27,7 @@ class Logger extends Monolog
             } catch (\Exception $e) { }
         }
 
-        if (!$forceWriting && $level == Monolog::DEBUG && getenv('APPLICATION_ENV') != 'development') {
+        if (!$forceWriting && $level == self::DEBUG && getenv('APPLICATION_ENV') != 'development') {
             return null;
         }
 
@@ -49,11 +47,10 @@ class Logger extends Monolog
 
         $log = LoggerFactory::get($channel);
         if (!$log->isHandling($level)) {
-            //$log->pushHandler(new StreamHandler(implode(DIRECTORY_SEPARATOR, $path), $level));
-            $log->pushHandler(new RotatingFileHandler(implode(DIRECTORY_SEPARATOR, $path), 5, $level));
+            $log->pushHandler(new RotatingFileHandler(implode(DIRECTORY_SEPARATOR, $path)), 5, $level);
         }
 
-        return $log->log($level, $message);
+        return @$log->log($level, $message);
     }
 
     /**
