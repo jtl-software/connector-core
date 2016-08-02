@@ -1,7 +1,10 @@
+2.2.20
+------
+- Changed session lifetime to session.gc_maxlifetime
+
 2.2.19
 ------
 - Downgrading Monolog to version 1.17.2
-- Changed session lifetime to session.gc_maxlifetime
 
 2.2.18
 ------
