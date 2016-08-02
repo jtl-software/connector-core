@@ -92,7 +92,7 @@ abstract class Handler
         
         session_start();
 
-        $this->_lifetime = 7200;
+        $this->_lifetime = ((int) ini_get('session.gc_maxlifetime') > 0) ? (int) ini_get('session.gc_maxlifetime') : 7200;
         $this->_sessionId = session_id();
 
         Logger::write(sprintf('Session started with id (%s)', session_id()), Logger::DEBUG, 'session');
