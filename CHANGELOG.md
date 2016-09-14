@@ -1,5 +1,5 @@
-2.2.21 (unreleased)
--------------------
+2.2.21
+------
 - Added more locales in our language utility
 
 2.2.20
