@@ -42,8 +42,11 @@ class Language
         'sv_SE' => 'sv',    'sw_KE' => 'sw',    'th_TH' => 'th',
         'tr_TR' => 'tr',    'uk_UA' => 'uk',    'vi_VN' => 'vi',
         'zh_CN' => 'zh',    'zh_HK' => 'zh',    'zh_TW' => 'zh',
-        'es_CL' => 'es',    'lo_LA' => 'lo',    'es_VE' => 'es',
-        'en_IE' => 'en',    'af_ZA' => 'af'
+        'es_CL' => 'es',    'es_VE' => 'es',    'de_LU' => 'de',
+        'en_IE' => 'en',    'af_ZA' => 'af',	'de_LI' => 'de',
+		'en_BZ' => 'en', 	'en_CG' => 'en', 	'en_IN' => 'en',
+		'en_JM' => 'en', 	'en_PH' => 'en',    'en_ZA' => 'en',
+        'en_TT' => 'en'
     );
     
     protected static $languages = array(

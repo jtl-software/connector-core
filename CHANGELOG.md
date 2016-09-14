@@ -1,3 +1,7 @@
+2.2.21
+------
+- Added more locales in our language utility
+
 2.2.20
 ------
 - Changed session lifetime to session.gc_maxlifetime
