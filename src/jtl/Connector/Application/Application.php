@@ -237,7 +237,7 @@ class Application extends CoreApplication
             if ($requestpacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
                 Request::deleteFileuploads($imagePaths);
             }
-
+            
             if ($actionresult instanceof Action) {
                 $exists = true;
                 if ($actionresult->isHandled()) {
@@ -247,6 +247,7 @@ class Application extends CoreApplication
                         // Identity mapping
                         $results = array();
                         $models = is_array($actionresult->getResult()) ? $actionresult->getResult() : array($actionresult->getResult());
+                        
                         foreach ($models as $model) {
                             if ($model instanceof DataModel) {
                                 $identityLinker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));

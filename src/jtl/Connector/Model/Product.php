@@ -356,6 +356,14 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getModified",setter="setModified")
      */
     protected $modified = null;
+    
+    /**
+     * @var DateTime
+     * @Serializer\Type("DateTime")
+     * @Serializer\SerializedName("newReleaseDate")
+     * @Serializer\Accessor(getter="getNewReleaseDate",setter="setNewReleaseDate")
+     */
+    protected $newReleaseDate = null;
 
     /**
      * @var DateTime Contains the date of the next available inflow.
@@ -1394,6 +1402,24 @@ class Product extends DataModel
     public function getModified()
     {
         return $this->modified;
+    }
+    
+    /**
+     * @param DateTime $newReleaseDate
+     * @return \jtl\Connector\Model\Product
+     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     */
+    public function setNewReleaseDate(DateTime $newReleaseDate = null)
+    {
+        return $this->setProperty('newReleaseDate', $newReleaseDate, 'DateTime');
+    }
+    
+    /**
+     * @return DateTime
+     */
+    public function getNewReleaseDate()
+    {
+        return $this->newReleaseDate;
     }
 
     /**

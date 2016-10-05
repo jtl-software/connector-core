@@ -1,3 +1,7 @@
+2.2.22
+------
+- Added product property 'newReleaseDate'
+
 2.2.21
 ------
 - Added more locales in our language utility
