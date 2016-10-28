@@ -1,3 +1,7 @@
+2.2.22 (unreleased)
+-------------------
+- Changed position of incoming request packet logging
+
 2.2.22
 ------
 - Added product property 'newReleaseDate'

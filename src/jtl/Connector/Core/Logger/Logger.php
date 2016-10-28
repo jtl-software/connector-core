@@ -27,7 +27,7 @@ class Logger extends \Monolog\Logger
             } catch (\Exception $e) { }
         }
 
-        if (!$forceWriting && $level == self::DEBUG && getenv('APPLICATION_ENV') != 'development') {
+        if (!$forceWriting && $level == self::DEBUG && getenv('APPLICATION_ENV') !== 'development') {
             return null;
         }
 
