@@ -1,6 +1,7 @@
 2.2.22 (unreleased)
 -------------------
 - Changed position of incoming request packet logging
+- Fixed after statistic event parameters
 
 2.2.22
 ------
