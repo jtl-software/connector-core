@@ -1,4 +1,4 @@
-2.2.22 (unreleased)
+2.2.23 (unreleased)
 -------------------
 - Changed position of incoming request packet logging
 - Fixed after statistic event parameters
