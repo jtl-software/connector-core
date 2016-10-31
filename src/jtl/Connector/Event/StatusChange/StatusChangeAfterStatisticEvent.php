@@ -2,23 +2,23 @@
 namespace jtl\Connector\Event\StatusChange;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\StatusChange;
+use jtl\Connector\Model\Statistic;
 
 
 class StatusChangeAfterStatisticEvent extends Event
 {
     const EVENT_NAME = 'statuschange.after.statistic';
 
-	protected $statusChange;
+	protected $statistic;
 
-    public function __construct(StatusChange &$statusChange)
+    public function __construct(Statistic &$statistic)
     {
-		$this->statusChange = $statusChange;
+		$this->statistic = $statistic;
     }
 
-    public function getStatusChange()
+    public function getStatistic()
     {
-        return $this->statusChange;
+        return $this->statistic;
 	}
 	
 }

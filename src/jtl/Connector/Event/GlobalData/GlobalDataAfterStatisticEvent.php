@@ -2,23 +2,23 @@
 namespace jtl\Connector\Event\GlobalData;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\GlobalData;
+use jtl\Connector\Model\Statistic;
 
 
 class GlobalDataAfterStatisticEvent extends Event
 {
     const EVENT_NAME = 'globaldata.after.statistic';
 
-	protected $globalData;
+	protected $statistic;
 
-    public function __construct(GlobalData &$globalData)
+    public function __construct(Statistic &$statistic)
     {
-		$this->globalData = $globalData;
+		$this->statistic = $statistic;
     }
 
-    public function getGlobalData()
+    public function getStatistic()
     {
-        return $this->globalData;
+        return $this->statistic;
 	}
 	
 }

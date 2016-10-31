@@ -1,3 +1,8 @@
+2.2.23
+------
+- Changed position of incoming request packet logging
+- Fixed after statistic event parameters
+
 2.2.22
 ------
 - Added product property 'newReleaseDate'

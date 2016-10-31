@@ -2,23 +2,23 @@
 namespace jtl\Connector\Event\DeliveryNote;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\DeliveryNote;
+use jtl\Connector\Model\Statistic;
 
 
 class DeliveryNoteAfterStatisticEvent extends Event
 {
     const EVENT_NAME = 'deliverynote.after.statistic';
 
-	protected $deliveryNote;
+	protected $statistic;
 
-    public function __construct(DeliveryNote &$deliveryNote)
+    public function __construct(Statistic &$statistic)
     {
-		$this->deliveryNote = $deliveryNote;
+		$this->statistic = $statistic;
     }
 
-    public function getDeliveryNote()
+    public function getStatistic()
     {
-        return $this->deliveryNote;
+        return $this->statistic;
 	}
 	
 }

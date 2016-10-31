@@ -114,11 +114,6 @@ class Application extends CoreApplication
         $sessionId = Request::getSession();
         $requestpackets = RequestPacket::build($jtlrpc);
 
-        Logger::write(sprintf('RequestPacket: %s', Json::encode($requestpackets->getPublic())), Logger::DEBUG, 'rpc');
-        if (is_string($requestpackets->getParams())) {
-            Logger::write(sprintf('Params: %s', $requestpackets->getParams()), Logger::DEBUG, 'rpc');
-        }
-
         $rpcmode = is_object($requestpackets) ? Packet::SINGLE_MODE : Packet::BATCH_MODE;
 
         $method = null;
@@ -131,7 +126,13 @@ class Application extends CoreApplication
 
         // Start Configuration
         $this->startConfiguration();
-
+    
+        // Log incoming request packet (debug only and configuration must be initialized)
+        Logger::write(sprintf('RequestPacket: %s', Json::encode($requestpackets->getPublic())), Logger::DEBUG, 'rpc');
+        if (is_string($requestpackets->getParams())) {
+            Logger::write(sprintf('Params: %s', $requestpackets->getParams()), Logger::DEBUG, 'rpc');
+        }
+        
         // Register Event Dispatcher
         $this->startEventDispatcher();
 
@@ -256,7 +257,7 @@ class Application extends CoreApplication
 
                                 // Checksum linking
                                 ChecksumLinker::link($model);
-
+                                
                                 // Event
                                 $class = ($method->getController() === 'connector') ? 'Connector' : null;
                                 EventHandler::dispatch($model, $this->eventDispatcher, $method->getAction(), EventHandler::AFTER, $class);

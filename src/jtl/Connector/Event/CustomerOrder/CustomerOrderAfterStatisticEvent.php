@@ -2,23 +2,23 @@
 namespace jtl\Connector\Event\CustomerOrder;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\CustomerOrder;
+use jtl\Connector\Model\Statistic;
 
 
 class CustomerOrderAfterStatisticEvent extends Event
 {
     const EVENT_NAME = 'customerorder.after.statistic';
 
-	protected $customerOrder;
+	protected $statistic;
 
-    public function __construct(CustomerOrder &$customerOrder)
+    public function __construct(Statistic &$statistic)
     {
-		$this->customerOrder = $customerOrder;
+		$this->statistic = $statistic;
     }
 
-    public function getCustomerOrder()
+    public function getStatistic()
     {
-        return $this->customerOrder;
+        return $this->statistic;
 	}
 	
 }

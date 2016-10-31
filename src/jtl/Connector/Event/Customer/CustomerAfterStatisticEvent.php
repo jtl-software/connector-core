@@ -2,23 +2,23 @@
 namespace jtl\Connector\Event\Customer;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\Customer;
+use jtl\Connector\Model\Statistic;
 
 
 class CustomerAfterStatisticEvent extends Event
 {
     const EVENT_NAME = 'customer.after.statistic';
 
-	protected $customer;
+	protected $statistic;
 
-    public function __construct(Customer &$customer)
+    public function __construct(Statistic &$statistic)
     {
-		$this->customer = $customer;
+		$this->statistic = $statistic;
     }
 
-    public function getCustomer()
+    public function getStatistic()
     {
-        return $this->customer;
+        return $this->statistic;
 	}
 	
 }

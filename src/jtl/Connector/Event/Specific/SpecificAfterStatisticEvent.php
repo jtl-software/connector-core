@@ -2,23 +2,23 @@
 namespace jtl\Connector\Event\Specific;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\Specific;
+use jtl\Connector\Model\Statistic;
 
 
 class SpecificAfterStatisticEvent extends Event
 {
     const EVENT_NAME = 'specific.after.statistic';
 
-	protected $specific;
+	protected $statistic;
 
-    public function __construct(Specific &$specific)
+    public function __construct(Statistic &$statistic)
     {
-		$this->specific = $specific;
+		$this->statistic = $statistic;
     }
 
-    public function getSpecific()
+    public function getStatistic()
     {
-        return $this->specific;
+        return $this->statistic;
 	}
 	
 }

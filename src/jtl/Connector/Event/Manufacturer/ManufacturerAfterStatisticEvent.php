@@ -2,23 +2,23 @@
 namespace jtl\Connector\Event\Manufacturer;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\Manufacturer;
+use jtl\Connector\Model\Statistic;
 
 
 class ManufacturerAfterStatisticEvent extends Event
 {
     const EVENT_NAME = 'manufacturer.after.statistic';
 
-	protected $manufacturer;
+	protected $statistic;
 
-    public function __construct(Manufacturer &$manufacturer)
+    public function __construct(Statistic &$statistic)
     {
-		$this->manufacturer = $manufacturer;
+		$this->statistic = $statistic;
     }
 
-    public function getManufacturer()
+    public function getStatistic()
     {
-        return $this->manufacturer;
+        return $this->statistic;
 	}
 	
 }
