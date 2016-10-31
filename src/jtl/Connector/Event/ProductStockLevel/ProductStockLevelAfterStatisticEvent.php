@@ -2,23 +2,23 @@
 namespace jtl\Connector\Event\ProductStockLevel;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\ProductStockLevel;
+use jtl\Connector\Model\Statistic;
 
 
 class ProductStockLevelAfterStatisticEvent extends Event
 {
     const EVENT_NAME = 'productstocklevel.after.statistic';
 
-	protected $productStockLevel;
+	protected $statistic;
 
-    public function __construct(ProductStockLevel &$productStockLevel)
+    public function __construct(Statistic &$statistic)
     {
-		$this->productStockLevel = $productStockLevel;
+		$this->statistic = $statistic;
     }
 
-    public function getProductStockLevel()
+    public function getStatistic()
     {
-        return $this->productStockLevel;
+        return $this->statistic;
 	}
 	
 }

@@ -2,23 +2,23 @@
 namespace jtl\Connector\Event\ProductPrice;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\ProductPrice;
+use jtl\Connector\Model\Statistic;
 
 
 class ProductPriceAfterStatisticEvent extends Event
 {
     const EVENT_NAME = 'productprice.after.statistic';
 
-	protected $productPrice;
+	protected $statistic;
 
-    public function __construct(ProductPrice &$productPrice)
+    public function __construct(Statistic &$statistic)
     {
-		$this->productPrice = $productPrice;
+		$this->statistic = $statistic;
     }
 
-    public function getProductPrice()
+    public function getStatistic()
     {
-        return $this->productPrice;
+        return $this->statistic;
 	}
 	
 }

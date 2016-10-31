@@ -257,7 +257,7 @@ class Application extends CoreApplication
 
                                 // Checksum linking
                                 ChecksumLinker::link($model);
-
+                                
                                 // Event
                                 $class = ($method->getController() === 'connector') ? 'Connector' : null;
                                 EventHandler::dispatch($model, $this->eventDispatcher, $method->getAction(), EventHandler::AFTER, $class);

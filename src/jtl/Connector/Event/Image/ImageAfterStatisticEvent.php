@@ -2,23 +2,23 @@
 namespace jtl\Connector\Event\Image;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\Image;
+use jtl\Connector\Model\Statistic;
 
 
 class ImageAfterStatisticEvent extends Event
 {
     const EVENT_NAME = 'image.after.statistic';
 
-	protected $image;
+	protected $statistic;
 
-    public function __construct(Image &$image)
+    public function __construct(Statistic &$statistic)
     {
-		$this->image = $image;
+		$this->statistic = $statistic;
     }
 
-    public function getImage()
+    public function getStatistic()
     {
-        return $this->image;
+        return $this->statistic;
 	}
 	
 }

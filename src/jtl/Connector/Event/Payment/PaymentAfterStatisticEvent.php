@@ -2,23 +2,23 @@
 namespace jtl\Connector\Event\Payment;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\Payment;
+use jtl\Connector\Model\Statistic;
 
 
 class PaymentAfterStatisticEvent extends Event
 {
     const EVENT_NAME = 'payment.after.statistic';
 
-	protected $payment;
+	protected $statistic;
 
-    public function __construct(Payment &$payment)
+    public function __construct(Statistic &$statistic)
     {
-		$this->payment = $payment;
+		$this->statistic = $statistic;
     }
 
-    public function getPayment()
+    public function getStatistic()
     {
-        return $this->payment;
+        return $this->statistic;
 	}
 	
 }

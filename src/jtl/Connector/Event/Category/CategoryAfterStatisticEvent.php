@@ -2,23 +2,23 @@
 namespace jtl\Connector\Event\Category;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\Category;
+use jtl\Connector\Model\Statistic;
 
 
 class CategoryAfterStatisticEvent extends Event
 {
     const EVENT_NAME = 'category.after.statistic';
 
-	protected $category;
+	protected $statistic;
 
-    public function __construct(Category &$category)
+    public function __construct(Statistic &$statistic)
     {
-		$this->category = $category;
+		$this->statistic = $statistic;
     }
 
-    public function getCategory()
+    public function getStatistic()
     {
-        return $this->category;
+        return $this->statistic;
 	}
 	
 }

@@ -2,21 +2,23 @@
 namespace jtl\Connector\Event\Connector;
 
 use Symfony\Component\EventDispatcher\Event;
+use jtl\Connector\Model\Statistic;
+
 
 class ConnectorAfterStatisticEvent extends Event
 {
     const EVENT_NAME = 'connector.after.statistic';
 
-	protected $statistics;
+	protected $statistic;
 
-    public function __construct(array &$statistics)
+    public function __construct(Statistic &$statistic)
     {
-		$this->statistics = $statistics;
+		$this->statistic = $statistic;
     }
 
-    public function getStatistics()
+    public function getStatistic()
     {
-        return $this->statistics;
+        return $this->statistic;
 	}
 	
 }
