@@ -1,3 +1,7 @@
+2.2.24
+------
+- Changed language core utility to intercept empty strings
+
 2.2.23
 ------
 - Changed position of incoming request packet logging

@@ -116,15 +116,15 @@ class Language
     
     public static function convert($short = null, $long = null)
     {
-        if ($short === null && $long === null) {
-            throw new LanguageException("Short and Long cannot be null");
+        if (is_null($short) && is_null($long)) {
+            throw new LanguageException('Short and Long cannot be null');
         }
         
-        if ($short !== null && isset(self::$languages[$short])) {
+        if (!is_null($short) && !empty($short) && isset(self::$languages[$short])) {
             return self::$languages[$short];
         }
         
-        if ($long !== null) {
+        if (!is_null($long) && !empty($long)) {
             $long = strtolower($long);
 
             if (($short = array_search($long, self::$languages)) !== false) {
@@ -137,19 +137,19 @@ class Language
     
     public static function map($locale = null, $country = null, $lang = null, $useLong = true)
     {
-        if ($locale === null && $country === null && $lang === null) {
-            throw new LanguageException("Locale, Country and Language cannot be null");
+        if (is_null($locale) && is_null($country) && is_null($lang)) {
+            throw new LanguageException('Locale, Country and Language cannot be null');
         }
         
-        if ($locale !== null && isset(self::$locales[$locale])) {
+        if (!is_null($locale) && !empty($locale) && isset(self::$locales[$locale])) {
             return $useLong ? self::convert(self::$locales[$locale]) : self::$locales[$locale];
         }
         
-        if ($lang !== null) {
+        if (!is_null($lang)) {
             $country = self::convert(null, $lang);
         }
 
-        if ($country !== null) {
+        if (!is_null($country) && !empty($country)) {
             $country = strtolower($country);
 
             if (($locale = array_search($country, self::$locales)) !== false) {
