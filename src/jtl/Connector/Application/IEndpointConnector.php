@@ -7,7 +7,6 @@
 namespace jtl\Connector\Application;
 
 use \jtl\Connector\Core\Rpc\RequestPacket;
-use \jtl\Connector\Core\Config\Config;
 use \jtl\Connector\Mapper\IPrimaryKeyMapper;
 use \jtl\Connector\Authentication\ITokenLoader;
 use \jtl\Connector\Checksum\IChecksumLoader;
@@ -23,39 +22,43 @@ interface IEndpointConnector
      * Main initialize method
      */
     public function initialize();
-
+    
     /**
-     * Setter primary key mapper
+     * @param IPrimaryKeyMapper $mapper
+     * @return self
      */
     public function setPrimaryKeyMapper(IPrimaryKeyMapper $mapper);
 
     /**
-     * Returns primary key mapper
+     * @return IPrimaryKeyMapper
      */
     public function getPrimaryKeyMapper();
-
+    
     /**
-     * Setter token loader
+     * @param ITokenLoader $tokenLoader
+     * @return self
      */
     public function setTokenLoader(ITokenLoader $tokenLoader);
 
     /**
-     * Returns token loader
+     * @return ITokenLoader
      */
     public function getTokenLoader();
-
+    
     /**
-     * Setter checksum loader
+     * @param IChecksumLoader $checksumLoader
+     * @return self
      */
     public function setChecksumLoader(IChecksumLoader $checksumLoader);
 
     /**
-     * Returns checksum loader
+     * @return IChecksumLoader
      */
     public function getChecksumLoader();
 
     /**
      * Checks whether or not a method can be handled
+     * @return bool
      */
     public function canHandle();
 

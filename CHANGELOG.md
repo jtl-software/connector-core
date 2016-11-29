@@ -1,3 +1,7 @@
+2.2.25 (unreleased)
+-------------------
+- Changed some method comments
+
 2.2.24
 ------
 - Changed language core utility to intercept empty strings
