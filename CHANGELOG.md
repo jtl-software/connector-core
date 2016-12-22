@@ -1,6 +1,7 @@
 2.2.25 (unreleased)
 -------------------
 - Changed some method comments
+- Added Datamodel setIdentity method
 
 2.2.24
 ------
