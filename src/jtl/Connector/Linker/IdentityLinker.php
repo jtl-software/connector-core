@@ -39,13 +39,28 @@ class IdentityLinker
     /**
      * Session Database Mapper
      *
-     * @var \jtl\Connector\Core\Database\IDatabase
+     * @var IPrimaryKeyMapper
      */
     protected static $mapper;
+    
+    /**
+     * @var bool
+     */
     public static $useCache;
+    
+    /**
+     * @var array
+     */
     protected static $cache = array();
+    
+    /**
+     * @var self
+     */
     protected static $instance;
-
+    
+    /**
+     * @var array
+     */
     protected static $types = array(
         'Category' => self::TYPE_CATEGORY,
         'Customer' => self::TYPE_CUSTOMER,
@@ -61,7 +76,10 @@ class IdentityLinker
         'CrossSellingItem' => self::TYPE_CROSSSELLING,
         'CrossSellingGroup' => self::TYPE_CROSSSELLING_GROUP
     );
-
+    
+    /**
+     * @var array
+     */
     protected static $mappings = array(
         'Category' => array(
             'id' => self::TYPE_CATEGORY,
@@ -233,7 +251,10 @@ class IdentityLinker
             'customerOrderId' => self::TYPE_CUSTOMER_ORDER
         )
     );
-
+    
+    /**
+     * @var array
+     */
     protected $runtimeInfos = array();
 
     /**
@@ -277,7 +298,7 @@ class IdentityLinker
     /**
      * Database setter
      *
-     * @param \jtl\Connector\Mapper\IPrimaryKeyMapper $mapper
+     * @param IPrimaryKeyMapper $mapper
      */
     public function setPrimaryKeyMapper(IPrimaryKeyMapper $mapper)
     {
@@ -498,39 +519,40 @@ class IdentityLinker
      * @param integer $hostId
      * @param string $modelName
      * @param string $property
-     * @param boolean $notNull
+     * @param boolean $validate
      * @throws \jtl\Connector\Exception\LinkerException
+     * @return boolean
      */
-    public function exists($endpointId = null, $hostId = null, $modelName, $property, $notNull = false)
+    public function exists($endpointId = null, $hostId = null, $modelName, $property, $validate = false)
     {
-        if ($endpointId === null && $hostId === null) {
-            throw new LinkerException('Both parameters (endpointId, hostId) can not be null');
+        if (!$this->isValidEndpointId($endpointId) && !$this->isValidHostId($hostId)) {
+            throw new LinkerException('Both parameters (endpointId, hostId) are invalid');
         }
 
         $type = $this->getType($modelName, $property);
 
         $id = null;
         $cacheType = null;
-        if ($endpointId !== null) {
+        if ($this->isValidEndpointId($endpointId)) {
             $id = $endpointId;
             $cacheType = self::CACHE_TYPE_ENDPOINT;
-        } elseif ($hostId !== null) {
+        } elseif ($this->isValidHostId($hostId)) {
             $id = $hostId;
             $cacheType = self::CACHE_TYPE_HOST;
         }
 
-        if ($this->checkCache($id, $type, $cacheType, $notNull)) {
+        if ($this->checkCache($id, $type, $cacheType, $validate)) {
             return true;
         }
 
-        if ($endpointId !== null) {
+        if ($this->isValidEndpointId($endpointId)) {
             $hostId = self::$mapper->getHostId($endpointId, $type);
-        } elseif ($hostId !== null) {
+        } elseif ($this->isValidHostId($hostId)) {
             $relationType = isset($this->runtimeInfos['relationType']) ? $this->runtimeInfos['relationType'] : null;
             $endpointId = self::$mapper->getEndpointId($hostId, $type, $relationType);
         }
 
-        if ($notNull && $endpointId === null) {
+        if ($validate && !$this->isValidEndpointId($endpointId)) {
             return false;
         }
 
@@ -540,7 +562,7 @@ class IdentityLinker
             return true;
         //}
 
-        return false;
+        //return false;
     }
 
     /**
@@ -607,6 +629,7 @@ class IdentityLinker
      * @param integer $hostId
      * @param string $modelName
      * @param string $property
+     * @return string
      */
     public function getEndpointId($hostId, $modelName, $property)
     {
@@ -619,14 +642,14 @@ class IdentityLinker
 
         $relationType = isset($this->runtimeInfos['relationType']) ? $this->runtimeInfos['relationType'] : null;
         $endpointId = self::$mapper->getEndpointId($hostId, $type, $relationType);
-
-        //if ($endpointId !== null) {
+        
+        //if (is_string($endpointId) && strlen(trim($endpointId)) > 0) {
             $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_HOST);
 
             return $endpointId;
         //}
 
-        return null;
+        //return '';
     }
 
     /**
@@ -635,6 +658,7 @@ class IdentityLinker
      * @param string $endpointId
      * @param string $modelName
      * @param string $property
+     * @return int
      */
     public function getHostId($endpointId, $modelName, $property)
     {
@@ -647,31 +671,103 @@ class IdentityLinker
 
         $hostId = self::$mapper->getHostId($endpointId, $type);
 
-        //if ($hostId !== null) {
+        //if (is_int($hostId) && $hostId > 0) {
             $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_ENDPOINT);
 
             return $hostId;
         //}
 
-        return null;
+        //return 0;
     }
-
-    protected function checkCache($id, $type, $cacheType, $notNull = false)
+    
+    /**
+     * @param mixed $id
+     * @param int $type
+     * @param string $cacheType
+     * @param bool $validate
+     * @return bool
+     */
+    protected function checkCache($id, $type, $cacheType, $validate = false)
     {
         //return (self::$useCache && array_key_exists($this->buildKey($id, $type, $cacheType), self::$cache));
         //return (self::$useCache && isset(self::$cache[$this->buildKey($id, $type, $cacheType)]));
-        return (self::$useCache && array_key_exists($this->buildKey($id, $type, $cacheType), self::$cache)
-            && (!$notNull || self::$cache[$this->buildKey($id, $type, $cacheType)] !== null));
+        
+        $result = self::$useCache && array_key_exists($this->buildKey($id, $type, $cacheType), self::$cache);
+        /*
+        if (!$validate) {
+            return $result;
+        }
+        */
+    
+        if ($validate && $result) {
+            $data = self::$cache[$this->buildKey($id, $type, $cacheType)];
+            switch ($cacheType) {
+                case self::CACHE_TYPE_ENDPOINT:
+                    $result = $this->isValidHostId($data);
+                    break;
+                case self::CACHE_TYPE_HOST:
+                    $result = $this->isValidEndpointId($data);
+                    break;
+            }
+        }
+        
+        /*
+        $result = (self::$useCache && array_key_exists($this->buildKey($id, $type, $cacheType), self::$cache)
+            && (!$validate || self::$cache[$this->buildKey($id, $type, $cacheType)] !== null));
+        */
+        
+        // Debug
+        Logger::write(sprintf(
+            'Checkcache (id: %s, type: %s, cacheType: %s) with result %s',
+            $id,
+            $type,
+            $cacheType,
+            $result ? 'true' : 'false'
+        ), Logger::DEBUG, 'linker');
+        
+        return $result;
     }
-
+    
+    /**
+     * @param mixed $id
+     * @param int $type
+     * @param string $cacheType
+     * @return bool|mixed
+     */
     protected function loadCache($id, $type, $cacheType)
     {
-        return $this->checkCache($id, $type, $cacheType) ? self::$cache[$this->buildKey($id, $type, $cacheType)] : false;
+        $result = $this->checkCache($id, $type, $cacheType) ? self::$cache[$this->buildKey($id, $type, $cacheType)] : false;
         //return $this->checkCache($id, $type, $cacheType) ? self::$cache[$this->buildKey($id, $type, $cacheType)] : null;
+    
+        // Debug
+        Logger::write(sprintf(
+            'LoadCache (id: %s, type: %s, cacheType: %s) with result %s',
+            $id,
+            $type,
+            $cacheType,
+            $result
+        ), Logger::DEBUG, 'linker');
+        
+        return $result;
     }
-
+    
+    /**
+     * @param mixed $endpointId
+     * @param int $hostId
+     * @param int $type
+     * @param string $cacheType
+     */
     protected function saveCache($endpointId, $hostId, $type, $cacheType)
     {
+        // Debug
+        Logger::write(sprintf(
+            'SaveCache (endpointId: %s, hostId: %s, type: %s, cacheType: %s)',
+            $endpointId,
+            $hostId,
+            $type,
+            $cacheType
+        ), Logger::DEBUG, 'linker');
+        
         if (self::$useCache) {
             switch ($cacheType) {
                 case self::CACHE_TYPE_ENDPOINT:
@@ -683,9 +779,24 @@ class IdentityLinker
             }
         }
     }
-
+    
+    /**
+     * @param mixed $endpointId
+     * @param int $hostId
+     * @param int $type
+     * @param string $cacheType
+     */
     protected function deleteCache($endpointId = null, $hostId = null, $type, $cacheType)
     {
+        // Debug
+        Logger::write(sprintf(
+            'DeleteCache (endpointId: %s, hostId: %s, type: %s, cacheType: %s)',
+            $endpointId,
+            $hostId,
+            $type,
+            $cacheType
+        ), Logger::DEBUG, 'linker');
+        
         if (self::$useCache) {
             switch ($cacheType) {
                 case self::CACHE_TYPE_ENDPOINT:
@@ -697,14 +808,41 @@ class IdentityLinker
             }
         }
     }
-
+    
+    /**
+     * @param mixed $id
+     * @param int $type
+     * @param string $cacheType
+     * @return string
+     */
     protected function buildKey($id, $type, $cacheType)
     {
         return sprintf('%s_%s_%s', $cacheType, $id, $type);
     }
-
+    
+    /**
+     * @return array
+     */
     public static function getCache()
     {
         return self::$cache;
+    }
+    
+    /**
+     * @param mixed $endpointId
+     * @return boolean
+     */
+    public function isValidEndpointId($endpointId)
+    {
+        return !is_null($endpointId) && is_string($endpointId) && strlen(trim($endpointId)) > 0;
+    }
+    
+    /**
+     * @param mixed $hostId
+     * @return boolean
+     */
+    public function isValidHostId($hostId)
+    {
+        return !is_null($hostId) && is_int($hostId) && $hostId > 0;
     }
 }

@@ -114,6 +114,53 @@ abstract class DataModel extends CoreModel
         
         return $object;
     }
+    
+    /**
+     * @param string $propertyName
+     * @param string|null $endpoint
+     * @param int|null $host
+     */
+    public function setIdentity($propertyName, $endpoint = null, $host = null)
+    {
+        foreach ($this->getModelType()->getProperties() as $propertyInfo) {
+            $property = ucfirst($propertyInfo->getName());
+            $getter = 'get' . $property;
+            
+            if ($propertyInfo->isNavigation() && !is_null($this->{$getter}())) {
+                if (is_array($this->{$getter}())) {
+                    $list = $this->{$getter}();
+                    foreach ($list as &$entity) {
+                        if ($entity instanceof self) {
+                            $entity->setIdentity($propertyName, $endpoint, $host);
+                        } elseif ($entity instanceof Identity && $propertyName === $propertyInfo->getName()) {
+                            if (!is_null($endpoint)) {
+                                $entity->setEndpoint($endpoint);
+                            }
+                            
+                            if (!is_null($host)) {
+                                $entity->setHost($host);
+                            }
+                        }
+                    }
+                } elseif ($this->{$getter}() instanceof self) {
+                    /* @var self $entity */
+                    $entity = $this->{$getter}();
+                    $entity->setIdentity($propertyName, $endpoint, $host);
+                }
+            } elseif ($propertyInfo->isIdentity() && $propertyName === $propertyInfo->getName()) {
+                /* @var Identity $identity */
+                $identity = $this->{$getter}();
+                
+                if (!is_null($endpoint)) {
+                    $identity->setEndpoint($endpoint);
+                }
+    
+                if (!is_null($host)) {
+                    $identity->setHost($host);
+                }
+            }
+        }
+    }
 
     /**
      * Sets Properties with matching Array Values

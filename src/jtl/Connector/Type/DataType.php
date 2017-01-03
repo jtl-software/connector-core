@@ -18,18 +18,18 @@ abstract class DataType
 {
     /**
      * List of PropertyInfos
-     * @var \jtl\Connector\Type\PropertyInfo[]
+     * @var PropertyInfo[]
      */
     private $_propertyInfo = null;
 
     /**
      * Returns all the public properties of the current Type.
      *
-     * @return jtl\Connector\Type\PropertyInfo
+     * @return PropertyInfo[]
      */
     public function getProperties()
     {
-        if ($this->_propertyInfo === null) {
+        if (is_null($this->_propertyInfo)) {
             $this->_propertyInfo = $this->loadProperties();
         }
             
@@ -40,7 +40,7 @@ abstract class DataType
      * Searches for the public property with the specified name.
      *
      * @param string $propertyName
-     * @return jtl\Connector\Type\PropertyInfo
+     * @return PropertyInfo
      */
     public function getProperty($propertyName)
     {
@@ -53,6 +53,9 @@ abstract class DataType
         return null;
     }
     
+    /**
+     * @return PropertyInfo[]
+     */
     abstract protected function loadProperties();
     abstract public function isMain();
 }
