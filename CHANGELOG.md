@@ -1,7 +1,8 @@
-2.2.25 (unreleased)
--------------------
+2.2.25
+------
 - Changed some method comments
 - Added Datamodel setIdentity method
+- Identitylinker refactoring
 
 2.2.24
 ------
