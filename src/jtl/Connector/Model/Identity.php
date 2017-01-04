@@ -64,7 +64,7 @@ class Identity extends Model
      */
     public function setEndpoint($endpoint)
     {
-        $this->endpoint = $endpoint;
+        $this->endpoint = (string)$endpoint;
         return $this;
     }
 
