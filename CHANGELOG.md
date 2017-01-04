@@ -1,3 +1,7 @@
+2.3.0
+-----
+- Casting endpoint id on identity model to string
+
 2.2.25
 ------
 - Changed some method comments

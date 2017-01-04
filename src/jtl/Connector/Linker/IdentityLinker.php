@@ -526,7 +526,13 @@ class IdentityLinker
     public function exists($endpointId = null, $hostId = null, $modelName, $property, $validate = false)
     {
         if (!$this->isValidEndpointId($endpointId) && !$this->isValidHostId($hostId)) {
-            throw new LinkerException('Both parameters (endpointId, hostId) are invalid');
+            throw new LinkerException(sprintf(
+                'Both parameters (endpointId = %s, hostId = %s, modelName: %s, property: %s) are invalid.',
+                $endpointId,
+                $hostId,
+                $modelName,
+                $property
+            ));
         }
 
         $type = $this->getType($modelName, $property);
