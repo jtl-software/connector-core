@@ -21,9 +21,9 @@ class Logger extends \Monolog\Logger
     public static function write($message, $level = self::ERROR, $channel = 'general')
     {
         $forceWriting = false;
-        if (function_exists('Application') && Application()->getConfig() !== null) {
+        if (function_exists('Application') && !is_null(Application()->getConfig())) {
             try {
-                $forceWriting = Application()->getConfig()->read('developer_logging');
+                $forceWriting = Application()->getConfig()->get('developer_logging');
             } catch (\Exception $e) { }
         }
 

@@ -10,39 +10,37 @@ use jtl\Connector\Application\Error\ErrorHandler;
 use jtl\Connector\Application\Error\IErrorHandler;
 use jtl\Connector\Core\Compression\Zip;
 use jtl\Connector\Core\IO\Temp;
-use \jtl\Connector\Core\Serializer\Json;
-use \jtl\Connector\Core\Application\Application as CoreApplication;
-use \jtl\Connector\Core\Exception\RpcException;
-use \jtl\Connector\Core\Exception\SessionException;
-use \jtl\Connector\Core\Exception\ApplicationException;
-use \jtl\Connector\Core\Rpc\Packet;
-use \jtl\Connector\Core\Rpc\RequestPacket;
-use \jtl\Connector\Core\Rpc\ResponsePacket;
-use \jtl\Connector\Core\Rpc\Error;
-use \jtl\Connector\Core\Http\Request;
-use \jtl\Connector\Core\Http\Response;
-use \jtl\Connector\Core\Config\Config;
-use \jtl\Connector\Core\Config\Loader\Json as ConfigJson;
-use \jtl\Connector\Core\Config\Loader\System as ConfigSystem;
-use \jtl\Connector\Result\Action;
-use \jtl\Connector\Core\Validator\Schema;
-use \jtl\Connector\Core\Exception\SchemaException;
-use \jtl\Connector\Core\Validator\ValidationException;
-use \jtl\Connector\Database\Sqlite3;
-use \jtl\Connector\Core\Utilities\RpcMethod;
-use \jtl\Connector\Session\Session;
-use \jtl\Connector\Base\Connector;
-use \jtl\Connector\Core\Logger\Logger;
-use \Doctrine\Common\Annotations\AnnotationRegistry;
-use \jtl\Connector\Core\Rpc\Method;
-use \jtl\Connector\Linker\IdentityLinker;
-use \jtl\Connector\Model\DataModel;
-use \Doctrine\Common\Collections\ArrayCollection;
-use \jtl\Connector\Serializer\JMS\SerializerBuilder;
-use \jtl\Connector\Linker\ChecksumLinker;
-use \Symfony\Component\EventDispatcher\EventDispatcher;
-use \jtl\Connector\Core\IO\Path;
-use \jtl\Connector\Event\EventHandler;
+use jtl\Connector\Core\Serializer\Json;
+use jtl\Connector\Core\Application\Application as CoreApplication;
+use jtl\Connector\Core\Exception\RpcException;
+use jtl\Connector\Core\Exception\SessionException;
+use jtl\Connector\Core\Exception\ApplicationException;
+use jtl\Connector\Core\Rpc\Packet;
+use jtl\Connector\Core\Rpc\RequestPacket;
+use jtl\Connector\Core\Rpc\ResponsePacket;
+use jtl\Connector\Core\Rpc\Error;
+use jtl\Connector\Core\Http\Request;
+use jtl\Connector\Core\Http\Response;
+use jtl\Connector\Core\Config\Config;
+use jtl\Connector\Result\Action;
+use jtl\Connector\Core\Validator\Schema;
+use jtl\Connector\Core\Exception\SchemaException;
+use jtl\Connector\Core\Validator\ValidationException;
+use jtl\Connector\Database\Sqlite3;
+use jtl\Connector\Core\Utilities\RpcMethod;
+use jtl\Connector\Session\Session;
+use jtl\Connector\Base\Connector;
+use jtl\Connector\Core\Logger\Logger;
+use Doctrine\Common\Annotations\AnnotationRegistry;
+use jtl\Connector\Core\Rpc\Method;
+use jtl\Connector\Linker\IdentityLinker;
+use jtl\Connector\Model\DataModel;
+use Doctrine\Common\Collections\ArrayCollection;
+use jtl\Connector\Serializer\JMS\SerializerBuilder;
+use jtl\Connector\Linker\ChecksumLinker;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use jtl\Connector\Core\IO\Path;
+use jtl\Connector\Event\EventHandler;
 use Symfony\Component\Finder\Finder;
 
 /**
@@ -63,7 +61,7 @@ class Application extends CoreApplication
     protected $connector = null;
 
     /**
-     * @var \jtl\connector\Core\Config\Config;
+     * @var Config;
      */
     protected $config;
 
@@ -542,6 +540,13 @@ class Application extends CoreApplication
             throw new SessionException('Session not initialized', -32001);
         }
 
+        $this->config = new Config(Path::combine(CONNECTOR_DIR, 'config', 'config.json'));
+    
+        if (!$this->config->has('developer_logging')) {
+            $this->config->set('developer_logging', false);
+        }
+        
+        /*
         $configFile = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
         if (!file_exists($configFile)) {
             file_put_contents($configFile, json_encode(array('developer_logging' => false), JSON_PRETTY_PRINT));
@@ -559,6 +564,7 @@ class Application extends CoreApplication
 
         //We need to change the order of the loader
         $this->config = new Config(array($json, new ConfigSystem()));
+        */
     }
 
     /**
@@ -696,7 +702,7 @@ class Application extends CoreApplication
     /**
      * Session getter
      *
-     * @return IEndpointConnector
+     * @return Session
      */
     public function getSession()
     {

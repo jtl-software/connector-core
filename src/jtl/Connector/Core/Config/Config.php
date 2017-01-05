@@ -7,14 +7,47 @@
 
 namespace jtl\Connector\Core\Config;
 
-use \jtl\Connector\Core\Config\Base as BaseConfig;
-
 /**
  * Config Class
  *
  * @access public
- * @author David Spickers <david.spickers@jtl-software.de>
+ * @author Daniel Böhmer <daniel.boehmer@jtl-software.com>
  */
-class Config extends BaseConfig
+class Config extends \Noodlehaus\Config
 {
+    /**
+     * @var string
+     */
+    protected $path = '';
+    
+    /**
+     * Config constructor.
+     * @param string $path
+     * @throws \InvalidArgumentException
+     */
+    public function __construct($path)
+    {
+        if (!is_string($path) || !file_exists($path)) {
+            throw new \InvalidArgumentException('Parameter path must be a string to an existing file');
+        }
+        
+        parent::__construct($path);
+        
+        $this->path = $path;
+    }
+    
+    /**
+     * Will set data into cache and save to file
+     *
+     * @param string $key
+     * @param mixed $value
+     *
+     * @return bool
+     */
+    public function save($key, $value)
+    {
+        parent::set($key, $value);
+        
+        return file_put_contents($this->path, json_encode($this->all(), JSON_PRETTY_PRINT));
+    }
 }
