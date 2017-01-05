@@ -1,3 +1,7 @@
+2.4.1 (unreleased)
+------------------
+- Added compatibility method to config class
+
 2.4.0
 -----
 - Major config system refactoring

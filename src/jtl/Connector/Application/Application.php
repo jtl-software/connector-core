@@ -539,11 +539,17 @@ class Application extends CoreApplication
         if (!isset($this->session)) {
             throw new SessionException('Session not initialized', -32001);
         }
-
-        $this->config = new Config(Path::combine(CONNECTOR_DIR, 'config', 'config.json'));
+    
+        // Config
+        $config_file = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
+        if (!file_exists($config_file)) {
+            file_put_contents($config_file, json_encode(array('developer_logging' => false), JSON_PRETTY_PRINT));
+        }
+    
+        $this->config = new Config($config_file);
     
         if (!$this->config->has('developer_logging')) {
-            $this->config->set('developer_logging', false);
+            $this->config->save('developer_logging', false);
         }
         
         /*
