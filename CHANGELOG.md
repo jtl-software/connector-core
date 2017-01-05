@@ -1,3 +1,7 @@
+2.4.0
+-----
+- Major config system refactoring
+
 2.3.0
 -----
 - Casting endpoint id on identity model to string

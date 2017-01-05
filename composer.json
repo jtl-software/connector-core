@@ -17,7 +17,8 @@
         "jms/serializer": "~1.0",
         "doctrine/collections": "~1.2",
         "symfony/event-dispatcher": "~2.7",
-        "symfony/finder": "~2.7"
+        "symfony/finder": "~2.7",
+        "hassankhan/config": "^0.10.0"
     },
     "require-dev": {
         "evert/phpdoc-md": "~0.1"

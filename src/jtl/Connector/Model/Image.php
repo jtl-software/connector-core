@@ -147,7 +147,7 @@ class Image extends DataModel
     }
 
     /**
-     * @param ImageRelationType $relationType 
+     * @param string $relationType
      * @return \jtl\Connector\Model\Image
      */
     public function setRelationType($relationType)
