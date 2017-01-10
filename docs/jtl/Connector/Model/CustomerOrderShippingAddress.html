@@ -12,6 +12,9 @@
         <script src="../../../js/bootstrap.min.js"></script>
         <script src="../../../js/typeahead.min.js"></script>
         <script src="../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -70,17 +76,189 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>CustomerOrderShippingAddress</h1>
+        <h1>
+            CustomerOrderShippingAddress
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>CustomerOrderShippingAddress</strong>        extends <a href="../../../jtl/Connector/Model/DataModel.html"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a></p>
+    <strong>CustomerOrderShippingAddress</strong>        extends <a href="../../../jtl/Connector/Model/DataModel.html"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Shipping Address properties of a customer (order)</p>                    </div>
     
     
     
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_fields">
+                                        protected                                        array
+                </td>
+                <td>$fields</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../jtl/Connector/Core/Model/DataModel.html#property_fields"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_isEncrypted">
+                                        protected                                        boolean
+                </td>
+                <td>$isEncrypted</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../jtl/Connector/Model/DataModel.html#property_isEncrypted"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_customerId">
+                                        protected                                        <a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a>
+                </td>
+                <td>$customerId</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_id">
+                                        protected                                        <a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a>
+                </td>
+                <td>$id</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_city">
+                                        protected                                        string
+                </td>
+                <td>$city</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_company">
+                                        protected                                        string
+                </td>
+                <td>$company</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_countryIso">
+                                        protected                                        string
+                </td>
+                <td>$countryIso</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_deliveryInstruction">
+                                        protected                                        string
+                </td>
+                <td>$deliveryInstruction</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_eMail">
+                                        protected                                        string
+                </td>
+                <td>$eMail</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_extraAddressLine">
+                                        protected                                        string
+                </td>
+                <td>$extraAddressLine</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_fax">
+                                        protected                                        string
+                </td>
+                <td>$fax</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_firstName">
+                                        protected                                        string
+                </td>
+                <td>$firstName</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_lastName">
+                                        protected                                        string
+                </td>
+                <td>$lastName</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_mobile">
+                                        protected                                        string
+                </td>
+                <td>$mobile</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_phone">
+                                        protected                                        string
+                </td>
+                <td>$phone</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_salutation">
+                                        protected                                        string
+                </td>
+                <td>$salutation</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_state">
+                                        protected                                        string
+                </td>
+                <td>$state</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_street">
+                                        protected                                        string
+                </td>
+                <td>$street</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_title">
+                                        protected                                        string
+                </td>
+                <td>$title</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_zipCode">
+                                        protected                                        string
+                </td>
+                <td>$zipCode</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+            </table>
+
     
             <h2>Methods</h2>
 
@@ -91,6 +269,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method___construct">__construct</a>()
+        
                                             <p>Constructor</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -100,24 +279,27 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getProperties">getProperties</a>()
+        
                                             <p>Get the Model Properties</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Model/Model.html#method_getProperties"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a></small></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\DataModel">DataModel</abbr>
+                    <a href="../../../jtl/Connector/Core/Model/Model.html"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_setOptions">setOptions</a>(<abbr title="jtl\Connector\Model\stdClass">stdClass</abbr> $object = null, array $options = null)
+                    <a href="#method_setOptions">setOptions</a>(<a target="_blank" href="http://php.net/stdClass">stdClass</a> $object = null, array $options = null)
+        
                                             <p>Sets Properties with matching Array Values</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Model/DataModel.html#method_setOptions"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a></small></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="jtl\Connector\Model\stdClass">stdClass</abbr>
+                    <abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getPublic">getPublic</a>(array $publics = array(&#039;fields&#039;, &#039;isEncrypted&#039;, &#039;identities&#039;, &#039;_type&#039;))
+        
                                             <p>Convert the Model into stdClass Object</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Model/DataModel.html#method_getPublic"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a></small></div>
             </div>
@@ -127,6 +309,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_toJson">toJson</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Model/Model.html#method_toJson"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a></small></div>
@@ -137,6 +320,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getFields">getFields</a>()
+        
                                             <p>Fields Getter</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Model/DataModel.html#method_getFields"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a></small></div>
             </div>
@@ -146,6 +330,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_validate">validate</a>()
+        
                                             <p>Object Validation</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Model/DataModel.html#method_validate"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a></small></div>
             </div>
@@ -155,6 +340,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getField">getField</a>(boolean $toWawi = false, string $key)
+        
                                             <p>Get a Model Member Name</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Model/DataModel.html#method_getField"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a></small></div>
             </div>
@@ -163,7 +349,8 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_map">map</a>(boolean $toWawi = false, <abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr> $obj = null)
+                    <a href="#method_map">map</a>(boolean $toWawi = false, <a target="_blank" href="http://php.net/stdClass">stdClass</a> $obj = null)
+        
                                             <p>Object Mapping</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Model/DataModel.html#method_map"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a></small></div>
             </div>
@@ -173,6 +360,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getModelType">getModelType</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Model/DataModel.html#method_getModelType"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a></small></div>
@@ -183,15 +371,50 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_isEncrypted">isEncrypted</a>()
+        
                                             <p>Encrypted Status</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Model/DataModel.html#method_isEncrypted"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setIdentity">setIdentity</a>(string $propertyName, string|null $endpoint = null, int|null $host = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Model/DataModel.html#method_setIdentity"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setProperty">setProperty</a>($name, $value, $type)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Model/DataModel.html#method_setProperty"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_validateType">validateType</a>($value, $type)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Model/DataModel.html#method_validateType"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a></small></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
                     <a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_setCustomerId">setCustomerId</a>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\Identity">Identity</abbr> $customerId)
+                    <a href="#method_setCustomerId">setCustomerId</a>(<a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a> $customerId)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -202,6 +425,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getCustomerId">getCustomerId</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -211,7 +435,8 @@
                     <a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_setId">setId</a>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\Identity">Identity</abbr> $id)
+                    <a href="#method_setId">setId</a>(<a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a> $id)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -222,6 +447,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getId">getId</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -232,6 +458,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setCity">setCity</a>(string $city)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -242,6 +469,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getCity">getCity</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -252,6 +480,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setCompany">setCompany</a>(string $company)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -262,6 +491,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getCompany">getCompany</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -272,6 +502,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setCountryIso">setCountryIso</a>(string $countryIso)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -282,6 +513,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getCountryIso">getCountryIso</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -292,6 +524,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setDeliveryInstruction">setDeliveryInstruction</a>(string $deliveryInstruction)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -302,6 +535,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getDeliveryInstruction">getDeliveryInstruction</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -312,6 +546,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setEMail">setEMail</a>(string $eMail)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -322,6 +557,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getEMail">getEMail</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -332,6 +568,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setExtraAddressLine">setExtraAddressLine</a>(string $extraAddressLine)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -342,6 +579,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getExtraAddressLine">getExtraAddressLine</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -352,6 +590,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setFax">setFax</a>(string $fax)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -362,6 +601,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getFax">getFax</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -372,6 +612,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setFirstName">setFirstName</a>(string $firstName)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -382,6 +623,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getFirstName">getFirstName</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -392,6 +634,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setLastName">setLastName</a>(string $lastName)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -402,6 +645,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getLastName">getLastName</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -412,6 +656,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setMobile">setMobile</a>(string $mobile)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -422,6 +667,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getMobile">getMobile</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -432,6 +678,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setPhone">setPhone</a>(string $phone)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -442,6 +689,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getPhone">getPhone</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -452,6 +700,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setSalutation">setSalutation</a>(string $salutation)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -462,6 +711,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getSalutation">getSalutation</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -472,6 +722,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setState">setState</a>(string $state)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -482,6 +733,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getState">getState</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -492,6 +744,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setStreet">setStreet</a>(string $street)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -502,6 +755,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getStreet">getStreet</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -512,6 +766,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setTitle">setTitle</a>(string $title)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -522,6 +777,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getTitle">getTitle</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -532,6 +788,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setZipCode">setZipCode</a>(string $zipCode)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -542,6 +799,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getZipCode">getZipCode</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -554,11 +812,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at line 171</div>
+        <div class="location">at         line 171</div>
         <code>                    
-    <strong>__construct</strong>()</code>
+    <strong>__construct</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Constructor</p>                                </div>
                 <div class="tags">
@@ -571,11 +833,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getProperties">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Model/Model.html#method_getProperties"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at line 33</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Model/Model.html#method_getProperties"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at         line 33</div>
         <code>                    <abbr title="jtl\Connector\Core\Model\multitype:">multitype:</abbr>
-    <strong>getProperties</strong>()</code>
+    <strong>getProperties</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Get the Model Properties</p>                                </div>
                 <div class="tags">
@@ -597,11 +863,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setOptions">
-        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_setOptions"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at line 125</div>
-        <code>                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\DataModel">DataModel</abbr>
-    <strong>setOptions</strong>(<abbr title="jtl\Connector\Model\stdClass">stdClass</abbr> $object = null, array $options = null)</code>
+        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_setOptions"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at         line 172</div>
+        <code>                    <a href="../../../jtl/Connector/Core/Model/Model.html"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a>
+    <strong>setOptions</strong>(<a target="_blank" href="http://php.net/stdClass">stdClass</a> $object = null, array $options = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Sets Properties with matching Array Values</p>                                </div>
                 <div class="tags">
@@ -609,16 +879,14 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Model\stdClass">stdClass</abbr></td>
+                <td><a target="_blank" href="http://php.net/stdClass">stdClass</a></td>
                 <td>$object</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>array</td>
                 <td>$options</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -627,9 +895,8 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\DataModel">DataModel</abbr></td>
-            <td>
-</td>
+            <td><a href="../../../jtl/Connector/Core/Model/Model.html"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a></td>
+            <td></td>
         </tr>
     </table>
 
@@ -641,11 +908,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getPublic">
-        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_getPublic"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at line 70</div>
-        <code>                    <abbr title="jtl\Connector\Model\stdClass">stdClass</abbr>
-    <strong>getPublic</strong>(array $publics = array(&#039;fields&#039;, &#039;isEncrypted&#039;, &#039;identities&#039;, &#039;_type&#039;))</code>
+        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_getPublic"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at         line 70</div>
+        <code>                    <abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr>
+    <strong>getPublic</strong>(array $publics = array(&#039;fields&#039;, &#039;isEncrypted&#039;, &#039;identities&#039;, &#039;_type&#039;))
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Convert the Model into stdClass Object</p>                                </div>
                 <div class="tags">
@@ -655,8 +926,7 @@
                     <tr>
                 <td>array</td>
                 <td>$publics</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -665,7 +935,7 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Model\stdClass">stdClass</abbr></td>
+            <td><abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr></td>
             <td>$object</td>
         </tr>
     </table>
@@ -678,11 +948,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_toJson">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Model/Model.html#method_toJson"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at line 115</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Model/Model.html#method_toJson"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at         line 115</div>
         <code>                    
-    <strong>toJson</strong>()</code>
+    <strong>toJson</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
             
@@ -693,11 +967,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getFields">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Model/DataModel.html#method_getFields"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> at line 34</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Model/DataModel.html#method_getFields"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> at         line 35</div>
         <code>                    <abbr title="jtl\Connector\Core\Model\mixed:string">mixed:string</abbr>
-    <strong>getFields</strong>()</code>
+    <strong>getFields</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Fields Getter</p>                                </div>
                 <div class="tags">
@@ -707,8 +985,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><abbr title="jtl\Connector\Core\Model\mixed:string">mixed:string</abbr></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -720,11 +997,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_validate">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Model/DataModel.html#method_validate"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> at line 44</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Model/DataModel.html#method_validate"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> at         line 45</div>
         <code>                    
-    <strong>validate</strong>()</code>
+    <strong>validate</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Object Validation</p>                                </div>
                 <div class="tags">
@@ -735,8 +1016,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../jtl/Connector/Core/Exception/SchemaException.html"><abbr title="jtl\Connector\Core\Exception\SchemaException">SchemaException</abbr></a></td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -747,11 +1027,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getField">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Model/DataModel.html#method_getField"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> at line 58</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Model/DataModel.html#method_getField"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> at         line 59</div>
         <code>                    <abbr title="jtl\Connector\Core\Model\mixed:string">mixed:string</abbr>|NULL
-    <strong>getField</strong>(boolean $toWawi = false, string $key)</code>
+    <strong>getField</strong>(boolean $toWawi = false, string $key)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Get a Model Member Name</p>                                </div>
                 <div class="tags">
@@ -761,14 +1045,12 @@
                     <tr>
                 <td>boolean</td>
                 <td>$toWawi</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>string</td>
                 <td>$key</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -778,8 +1060,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><abbr title="jtl\Connector\Core\Model\mixed:string">mixed:string</abbr>|NULL</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -791,11 +1072,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_map">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Model/DataModel.html#method_map"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> at line 80</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Model/DataModel.html#method_map"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> at         line 81</div>
         <code>                    
-    <strong>map</strong>(boolean $toWawi = false, <abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr> $obj = null)</code>
+    <strong>map</strong>(boolean $toWawi = false, <a target="_blank" href="http://php.net/stdClass">stdClass</a> $obj = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Object Mapping</p>                                </div>
                 <div class="tags">
@@ -805,11 +1090,10 @@
                     <tr>
                 <td>boolean</td>
                 <td>$toWawi</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr></td>
+                <td><a target="_blank" href="http://php.net/stdClass">stdClass</a></td>
                 <td>$obj</td>
                 <td>Object to map</td>
             </tr>
@@ -824,11 +1108,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getModelType">
-        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_getModelType"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at line 42</div>
+        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_getModelType"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at         line 42</div>
         <code>                    <a href="../../../jtl/Connector/Type/DataType.html"><abbr title="jtl\Connector\Type\DataType">DataType</abbr></a>
-    <strong>getModelType</strong>()</code>
+    <strong>getModelType</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -836,8 +1124,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Type/DataType.html"><abbr title="jtl\Connector\Type\DataType">DataType</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -849,11 +1136,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_isEncrypted">
-        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_isEncrypted"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at line 59</div>
+        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_isEncrypted"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at         line 59</div>
         <code>                    boolean
-    <strong>isEncrypted</strong>()</code>
+    <strong>isEncrypted</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Encrypted Status</p>                                </div>
                 <div class="tags">
@@ -863,8 +1154,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -875,18 +1165,134 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_setCustomerId">
-        <div class="location">at line 182</div>
-        <code>                    <a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a>
-    <strong>setCustomerId</strong>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\Identity">Identity</abbr> $customerId)</code>
+                    <h3 id="method_setIdentity">
+        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_setIdentity"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at         line 123</div>
+        <code>                    
+    <strong>setIdentity</strong>(string $propertyName, string|null $endpoint = null, int|null $host = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\Identity">Identity</abbr></td>
+                <td>string</td>
+                <td>$propertyName</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$endpoint</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>int|null</td>
+                <td>$host</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setProperty">
+        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_setProperty"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at         line 179</div>
+        <code>            protected        
+    <strong>setProperty</strong>($name, $value, $type)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$name</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$type</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_validateType">
+        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_validateType"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at         line 190</div>
+        <code>            protected        
+    <strong>validateType</strong>($value, $type)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$type</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setCustomerId">
+        <div class="location">at         line 182</div>
+        <code>                    <a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a>
+    <strong>setCustomerId</strong>(<a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a> $customerId)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a></td>
                 <td>$customerId</td>
                 <td>Reference to customer</td>
             </tr>
@@ -898,8 +1304,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -908,7 +1313,7 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><a target="_blank" href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
                 <td>if the provided argument is not of type 'Identity'.</td>
             </tr>
             </table>
@@ -920,11 +1325,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getCustomerId">
-        <div class="location">at line 190</div>
+        <div class="location">at         line 190</div>
         <code>                    <a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a>
-    <strong>getCustomerId</strong>()</code>
+    <strong>getCustomerId</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -944,17 +1353,21 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setId">
-        <div class="location">at line 200</div>
+        <div class="location">at         line 200</div>
         <code>                    <a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a>
-    <strong>setId</strong>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\Identity">Identity</abbr> $id)</code>
+    <strong>setId</strong>(<a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a> $id)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\Identity">Identity</abbr></td>
+                <td><a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a></td>
                 <td>$id</td>
                 <td>Unique customerOrderShippingAddress id</td>
             </tr>
@@ -966,8 +1379,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -976,7 +1388,7 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><a target="_blank" href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
                 <td>if the provided argument is not of type 'Identity'.</td>
             </tr>
             </table>
@@ -988,11 +1400,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getId">
-        <div class="location">at line 208</div>
+        <div class="location">at         line 208</div>
         <code>                    <a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a>
-    <strong>getId</strong>()</code>
+    <strong>getId</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1012,11 +1428,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setCity">
-        <div class="location">at line 217</div>
+        <div class="location">at         line 217</div>
         <code>                    <a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a>
-    <strong>setCity</strong>(string $city)</code>
+    <strong>setCity</strong>(string $city)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1034,8 +1454,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1047,11 +1466,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getCity">
-        <div class="location">at line 225</div>
+        <div class="location">at         line 225</div>
         <code>                    string
-    <strong>getCity</strong>()</code>
+    <strong>getCity</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1071,11 +1494,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setCompany">
-        <div class="location">at line 234</div>
+        <div class="location">at         line 234</div>
         <code>                    <a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a>
-    <strong>setCompany</strong>(string $company)</code>
+    <strong>setCompany</strong>(string $company)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1093,8 +1520,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1106,11 +1532,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getCompany">
-        <div class="location">at line 242</div>
+        <div class="location">at         line 242</div>
         <code>                    string
-    <strong>getCompany</strong>()</code>
+    <strong>getCompany</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1130,11 +1560,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setCountryIso">
-        <div class="location">at line 251</div>
+        <div class="location">at         line 251</div>
         <code>                    <a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a>
-    <strong>setCountryIso</strong>(string $countryIso)</code>
+    <strong>setCountryIso</strong>(string $countryIso)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1152,8 +1586,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1165,11 +1598,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getCountryIso">
-        <div class="location">at line 259</div>
+        <div class="location">at         line 259</div>
         <code>                    string
-    <strong>getCountryIso</strong>()</code>
+    <strong>getCountryIso</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1189,11 +1626,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setDeliveryInstruction">
-        <div class="location">at line 268</div>
+        <div class="location">at         line 268</div>
         <code>                    <a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a>
-    <strong>setDeliveryInstruction</strong>(string $deliveryInstruction)</code>
+    <strong>setDeliveryInstruction</strong>(string $deliveryInstruction)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1211,8 +1652,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1224,11 +1664,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getDeliveryInstruction">
-        <div class="location">at line 276</div>
+        <div class="location">at         line 276</div>
         <code>                    string
-    <strong>getDeliveryInstruction</strong>()</code>
+    <strong>getDeliveryInstruction</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1248,11 +1692,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setEMail">
-        <div class="location">at line 285</div>
+        <div class="location">at         line 285</div>
         <code>                    <a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a>
-    <strong>setEMail</strong>(string $eMail)</code>
+    <strong>setEMail</strong>(string $eMail)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1270,8 +1718,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1283,11 +1730,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getEMail">
-        <div class="location">at line 293</div>
+        <div class="location">at         line 293</div>
         <code>                    string
-    <strong>getEMail</strong>()</code>
+    <strong>getEMail</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1307,11 +1758,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setExtraAddressLine">
-        <div class="location">at line 302</div>
+        <div class="location">at         line 302</div>
         <code>                    <a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a>
-    <strong>setExtraAddressLine</strong>(string $extraAddressLine)</code>
+    <strong>setExtraAddressLine</strong>(string $extraAddressLine)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1329,8 +1784,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1342,11 +1796,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getExtraAddressLine">
-        <div class="location">at line 310</div>
+        <div class="location">at         line 310</div>
         <code>                    string
-    <strong>getExtraAddressLine</strong>()</code>
+    <strong>getExtraAddressLine</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1366,11 +1824,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setFax">
-        <div class="location">at line 319</div>
+        <div class="location">at         line 319</div>
         <code>                    <a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a>
-    <strong>setFax</strong>(string $fax)</code>
+    <strong>setFax</strong>(string $fax)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1388,8 +1850,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1401,11 +1862,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getFax">
-        <div class="location">at line 327</div>
+        <div class="location">at         line 327</div>
         <code>                    string
-    <strong>getFax</strong>()</code>
+    <strong>getFax</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1425,11 +1890,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setFirstName">
-        <div class="location">at line 336</div>
+        <div class="location">at         line 336</div>
         <code>                    <a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a>
-    <strong>setFirstName</strong>(string $firstName)</code>
+    <strong>setFirstName</strong>(string $firstName)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1447,8 +1916,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1460,11 +1928,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getFirstName">
-        <div class="location">at line 344</div>
+        <div class="location">at         line 344</div>
         <code>                    string
-    <strong>getFirstName</strong>()</code>
+    <strong>getFirstName</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1484,11 +1956,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setLastName">
-        <div class="location">at line 353</div>
+        <div class="location">at         line 353</div>
         <code>                    <a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a>
-    <strong>setLastName</strong>(string $lastName)</code>
+    <strong>setLastName</strong>(string $lastName)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1506,8 +1982,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1519,11 +1994,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getLastName">
-        <div class="location">at line 361</div>
+        <div class="location">at         line 361</div>
         <code>                    string
-    <strong>getLastName</strong>()</code>
+    <strong>getLastName</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1543,11 +2022,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setMobile">
-        <div class="location">at line 370</div>
+        <div class="location">at         line 370</div>
         <code>                    <a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a>
-    <strong>setMobile</strong>(string $mobile)</code>
+    <strong>setMobile</strong>(string $mobile)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1565,8 +2048,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1578,11 +2060,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getMobile">
-        <div class="location">at line 378</div>
+        <div class="location">at         line 378</div>
         <code>                    string
-    <strong>getMobile</strong>()</code>
+    <strong>getMobile</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1602,11 +2088,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setPhone">
-        <div class="location">at line 387</div>
+        <div class="location">at         line 387</div>
         <code>                    <a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a>
-    <strong>setPhone</strong>(string $phone)</code>
+    <strong>setPhone</strong>(string $phone)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1624,8 +2114,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1637,11 +2126,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getPhone">
-        <div class="location">at line 395</div>
+        <div class="location">at         line 395</div>
         <code>                    string
-    <strong>getPhone</strong>()</code>
+    <strong>getPhone</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1661,11 +2154,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setSalutation">
-        <div class="location">at line 404</div>
+        <div class="location">at         line 404</div>
         <code>                    <a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a>
-    <strong>setSalutation</strong>(string $salutation)</code>
+    <strong>setSalutation</strong>(string $salutation)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1683,8 +2180,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1696,11 +2192,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getSalutation">
-        <div class="location">at line 412</div>
+        <div class="location">at         line 412</div>
         <code>                    string
-    <strong>getSalutation</strong>()</code>
+    <strong>getSalutation</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1720,11 +2220,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setState">
-        <div class="location">at line 421</div>
+        <div class="location">at         line 421</div>
         <code>                    <a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a>
-    <strong>setState</strong>(string $state)</code>
+    <strong>setState</strong>(string $state)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1742,8 +2246,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1755,11 +2258,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getState">
-        <div class="location">at line 429</div>
+        <div class="location">at         line 429</div>
         <code>                    string
-    <strong>getState</strong>()</code>
+    <strong>getState</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1779,11 +2286,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setStreet">
-        <div class="location">at line 438</div>
+        <div class="location">at         line 438</div>
         <code>                    <a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a>
-    <strong>setStreet</strong>(string $street)</code>
+    <strong>setStreet</strong>(string $street)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1801,8 +2312,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1814,11 +2324,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getStreet">
-        <div class="location">at line 446</div>
+        <div class="location">at         line 446</div>
         <code>                    string
-    <strong>getStreet</strong>()</code>
+    <strong>getStreet</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1838,11 +2352,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setTitle">
-        <div class="location">at line 455</div>
+        <div class="location">at         line 455</div>
         <code>                    <a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a>
-    <strong>setTitle</strong>(string $title)</code>
+    <strong>setTitle</strong>(string $title)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1860,8 +2378,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1873,11 +2390,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getTitle">
-        <div class="location">at line 463</div>
+        <div class="location">at         line 463</div>
         <code>                    string
-    <strong>getTitle</strong>()</code>
+    <strong>getTitle</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1897,11 +2418,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setZipCode">
-        <div class="location">at line 472</div>
+        <div class="location">at         line 472</div>
         <code>                    <a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a>
-    <strong>setZipCode</strong>(string $zipCode)</code>
+    <strong>setZipCode</strong>(string $zipCode)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1919,8 +2444,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/CustomerOrderShippingAddress.html"><abbr title="jtl\Connector\Model\CustomerOrderShippingAddress">CustomerOrderShippingAddress</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1932,11 +2456,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getZipCode">
-        <div class="location">at line 480</div>
+        <div class="location">at         line 480</div>
         <code>                    string
-    <strong>getZipCode</strong>()</code>
+    <strong>getZipCode</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>

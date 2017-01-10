@@ -12,6 +12,9 @@
         <script src="../../js/bootstrap.min.js"></script>
         <script src="../../js/typeahead.min.js"></script>
         <script src="../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -74,17 +80,18 @@
 
             <h2>Namespaces</h2>
         <div class="namespace-list">
-            <a href="../../jtl/Connector/Event/Category.html">jtl\Connector\Event\Category</a><a href="../../jtl/Connector/Event/Customer.html">jtl\Connector\Event\Customer</a><a href="../../jtl/Connector/Event/CustomerOrder.html">jtl\Connector\Event\CustomerOrder</a><a href="../../jtl/Connector/Event/DeliveryNote.html">jtl\Connector\Event\DeliveryNote</a><a href="../../jtl/Connector/Event/GlobalData.html">jtl\Connector\Event\GlobalData</a><a href="../../jtl/Connector/Event/Image.html">jtl\Connector\Event\Image</a><a href="../../jtl/Connector/Event/Manufacturer.html">jtl\Connector\Event\Manufacturer</a><a href="../../jtl/Connector/Event/Product.html">jtl\Connector\Event\Product</a><a href="../../jtl/Connector/Event/ProductPrice.html">jtl\Connector\Event\ProductPrice</a><a href="../../jtl/Connector/Event/ProductStockLevel.html">jtl\Connector\Event\ProductStockLevel</a><a href="../../jtl/Connector/Event/Specific.html">jtl\Connector\Event\Specific</a><a href="../../jtl/Connector/Event/StatusChange.html">jtl\Connector\Event\StatusChange</a>        </div>
+            <a href="../../jtl/Connector/Event/Category.html">jtl\Connector\Event\Category</a><a href="../../jtl/Connector/Event/Connector.html">jtl\Connector\Event\Connector</a><a href="../../jtl/Connector/Event/Core.html">jtl\Connector\Event\Core</a><a href="../../jtl/Connector/Event/Customer.html">jtl\Connector\Event\Customer</a><a href="../../jtl/Connector/Event/CustomerOrder.html">jtl\Connector\Event\CustomerOrder</a><a href="../../jtl/Connector/Event/DeliveryNote.html">jtl\Connector\Event\DeliveryNote</a><a href="../../jtl/Connector/Event/GlobalData.html">jtl\Connector\Event\GlobalData</a><a href="../../jtl/Connector/Event/Image.html">jtl\Connector\Event\Image</a><a href="../../jtl/Connector/Event/Manufacturer.html">jtl\Connector\Event\Manufacturer</a><a href="../../jtl/Connector/Event/Payment.html">jtl\Connector\Event\Payment</a><a href="../../jtl/Connector/Event/Product.html">jtl\Connector\Event\Product</a><a href="../../jtl/Connector/Event/ProductPrice.html">jtl\Connector\Event\ProductPrice</a><a href="../../jtl/Connector/Event/ProductStockLevel.html">jtl\Connector\Event\ProductStockLevel</a><a href="../../jtl/Connector/Event/Rpc.html">jtl\Connector\Event\Rpc</a><a href="../../jtl/Connector/Event/Specific.html">jtl\Connector\Event\Specific</a><a href="../../jtl/Connector/Event/StatusChange.html">jtl\Connector\Event\StatusChange</a>        </div>
     
             <h2>Classes</h2>
-        <div class="container-fluid underlined">
+        
+    <div class="container-fluid underlined">
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../jtl/Connector/Event/EventHandler.html"><abbr title="jtl\Connector\Event\EventHandler">jtl\Connector\Event\EventHandler</abbr></a>
-                                    </div>
+                                            <a href="../../jtl/Connector/Event/EventHandler.html"><abbr title="jtl\Connector\Event\EventHandler">EventHandler</abbr></a>
+                                            
+                </div>
                 <div class="col-md-6">
                     
-
                 </div>
             </div>
             </div>

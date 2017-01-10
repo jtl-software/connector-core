@@ -12,6 +12,9 @@
         <script src="../../../js/bootstrap.min.js"></script>
         <script src="../../../js/typeahead.min.js"></script>
         <script src="../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -70,17 +76,53 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>Action</h1>
+        <h1>
+            Action
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>Action</strong></p>
+    <strong>Action</strong>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Connector Handle Result</p>                    </div>
     
     
     
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property__isHandled">
+                                        protected                                        bool
+                </td>
+                <td>$_isHandled</td>
+                <td class="last">Status of the processing of an action</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property__result">
+                                        protected                                        mixed
+                </td>
+                <td>$_result</td>
+                <td class="last">Action Result</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property__error">
+                                        protected                                        mixed
+                </td>
+                <td>$_error</td>
+                <td class="last">Action Error</td>
+                <td></td>
+            </tr>
+            </table>
+
     
             <h2>Methods</h2>
 
@@ -91,6 +133,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_isHandled">isHandled</a>()
+        
                                             <p>Getter for $_isHandled</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -100,6 +143,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method___construct">__construct</a>(bool $handled = null, mixed $result = null, mixed $error = null)
+        
                                             <p>Constructor</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -109,6 +153,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setHandled">setHandled</a>(bool $handled)
+        
                                             <p>Setter for $_isHandled</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -118,6 +163,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getResult">getResult</a>()
+        
                                             <p>Getter for $_result</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -127,6 +173,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setResult">setResult</a>(mixed $result)
+        
                                             <p>Setter for $_result</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -136,6 +183,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getError">getError</a>()
+        
                                             <p>Getter for $_error</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -145,6 +193,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setError">setError</a>(mixed $error)
+        
                                             <p>Setter for $_error</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -154,6 +203,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_isError">isError</a>()
+        
                                             <p>Return true if an error occurs otherwise false</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -165,11 +215,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_isHandled">
-        <div class="location">at line 43</div>
+        <div class="location">at         line 43</div>
         <code>                    bool
-    <strong>isHandled</strong>()</code>
+    <strong>isHandled</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Getter for $_isHandled</p>                                </div>
                 <div class="tags">
@@ -179,8 +233,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>bool</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -192,11 +245,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at line 55</div>
+        <div class="location">at         line 55</div>
         <code>                    
-    <strong>__construct</strong>(bool $handled = null, mixed $result = null, mixed $error = null)</code>
+    <strong>__construct</strong>(bool $handled = null, mixed $result = null, mixed $error = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Constructor</p>                                </div>
                 <div class="tags">
@@ -206,20 +263,17 @@
                     <tr>
                 <td>bool</td>
                 <td>$handled</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>mixed</td>
                 <td>$result</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>mixed</td>
                 <td>$error</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -232,11 +286,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setHandled">
-        <div class="location">at line 68</div>
+        <div class="location">at         line 68</div>
         <code>                    <a href="../../../jtl/Connector/Result/Action.html"><abbr title="jtl\Connector\Result\Action">Action</abbr></a>
-    <strong>setHandled</strong>(bool $handled)</code>
+    <strong>setHandled</strong>(bool $handled)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Setter for $_isHandled</p>                                </div>
                 <div class="tags">
@@ -246,8 +304,7 @@
                     <tr>
                 <td>bool</td>
                 <td>$handled</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -257,8 +314,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Result/Action.html"><abbr title="jtl\Connector\Result\Action">Action</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -270,11 +326,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getResult">
-        <div class="location">at line 79</div>
+        <div class="location">at         line 79</div>
         <code>                    mixed
-    <strong>getResult</strong>()</code>
+    <strong>getResult</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Getter for $_result</p>                                </div>
                 <div class="tags">
@@ -284,8 +344,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>mixed</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -297,11 +356,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setResult">
-        <div class="location">at line 90</div>
+        <div class="location">at         line 90</div>
         <code>                    <a href="../../../jtl/Connector/Result/Action.html"><abbr title="jtl\Connector\Result\Action">Action</abbr></a>
-    <strong>setResult</strong>(mixed $result)</code>
+    <strong>setResult</strong>(mixed $result)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Setter for $_result</p>                                </div>
                 <div class="tags">
@@ -311,8 +374,7 @@
                     <tr>
                 <td>mixed</td>
                 <td>$result</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -322,8 +384,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Result/Action.html"><abbr title="jtl\Connector\Result\Action">Action</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -335,11 +396,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getError">
-        <div class="location">at line 101</div>
+        <div class="location">at         line 101</div>
         <code>                    mixed
-    <strong>getError</strong>()</code>
+    <strong>getError</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Getter for $_error</p>                                </div>
                 <div class="tags">
@@ -349,8 +414,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>mixed</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -362,11 +426,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setError">
-        <div class="location">at line 112</div>
+        <div class="location">at         line 112</div>
         <code>                    <a href="../../../jtl/Connector/Result/Action.html"><abbr title="jtl\Connector\Result\Action">Action</abbr></a>
-    <strong>setError</strong>(mixed $error)</code>
+    <strong>setError</strong>(mixed $error)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Setter for $_error</p>                                </div>
                 <div class="tags">
@@ -376,8 +444,7 @@
                     <tr>
                 <td>mixed</td>
                 <td>$error</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -387,8 +454,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Result/Action.html"><abbr title="jtl\Connector\Result\Action">Action</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -400,11 +466,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_isError">
-        <div class="location">at line 123</div>
+        <div class="location">at         line 123</div>
         <code>                    boolean
-    <strong>isError</strong>()</code>
+    <strong>isError</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Return true if an error occurs otherwise false</p>                                </div>
                 <div class="tags">
@@ -414,8 +484,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 

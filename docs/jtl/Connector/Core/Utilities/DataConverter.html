@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,11 +77,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>DataConverter</h1>
+        <h1>
+            DataConverter
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>DataConverter</strong></p>
+    <strong>DataConverter</strong>
+</p>
+
+        
+    
 
     
     
@@ -90,6 +103,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_toObject">toObject</a>(array $values, $forceOwn = false)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -99,7 +113,8 @@
                     static&nbsp;
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_toArray">toArray</a>(<abbr title="jtl\Connector\Core\Utilities\stdClass">stdClass</abbr> $obj, $forceOwn = false)
+                    <a href="#method_toArray">toArray</a>(<a target="_blank" href="http://php.net/stdClass">stdClass</a> $obj, $forceOwn = false)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -112,11 +127,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_toObject">
-        <div class="location">at line 11</div>
+        <div class="location">at         line 11</div>
         <code>        static            
-    <strong>toObject</strong>(array $values, $forceOwn = false)</code>
+    <strong>toObject</strong>(array $values, $forceOwn = false)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -124,14 +143,12 @@
                     <tr>
                 <td>array</td>
                 <td>$values</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td></td>
                 <td>$forceOwn</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -144,26 +161,28 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_toArray">
-        <div class="location">at line 38</div>
+        <div class="location">at         line 38</div>
         <code>        static            
-    <strong>toArray</strong>(<abbr title="jtl\Connector\Core\Utilities\stdClass">stdClass</abbr> $obj, $forceOwn = false)</code>
+    <strong>toArray</strong>(<a target="_blank" href="http://php.net/stdClass">stdClass</a> $obj, $forceOwn = false)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Utilities\stdClass">stdClass</abbr></td>
+                <td><a target="_blank" href="http://php.net/stdClass">stdClass</a></td>
                 <td>$obj</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td></td>
                 <td>$forceOwn</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 

@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,11 +77,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>Money</h1>
+        <h1>
+            Money
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>Money</strong></p>
+    <strong>Money</strong>
+</p>
+
+        
+    
 
     
     
@@ -90,6 +103,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_AsGross">AsGross</a>($net, $vat)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -100,6 +114,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_AsNet">AsNet</a>($gross, $vat)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -112,11 +127,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_AsGross">
-        <div class="location">at line 15</div>
+        <div class="location">at         line 15</div>
         <code>        static            
-    <strong>AsGross</strong>($net, $vat)</code>
+    <strong>AsGross</strong>($net, $vat)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -124,14 +143,12 @@
                     <tr>
                 <td></td>
                 <td>$net</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td></td>
                 <td>$vat</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -144,11 +161,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_AsNet">
-        <div class="location">at line 25</div>
+        <div class="location">at         line 25</div>
         <code>        static            
-    <strong>AsNet</strong>($gross, $vat)</code>
+    <strong>AsNet</strong>($gross, $vat)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -156,14 +177,12 @@
                     <tr>
                 <td></td>
                 <td>$gross</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td></td>
                 <td>$vat</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 

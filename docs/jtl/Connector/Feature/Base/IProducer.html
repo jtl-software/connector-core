@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,11 +77,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>IProducer</h1>
+        <h1>
+            IProducer
+                
+        </h1>
     </div>
 
     <p>    interface
-    <strong>IProducer</strong></p>
+    <strong>IProducer</strong>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Producer interface</p>                    </div>
@@ -91,7 +104,8 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_setManager">setManager</a>(<abbr title="jtl\Connector\Feature\Base\jtl\Connector\Feature\Manager">Manager</abbr> $manager)
+                    <a href="#method_setManager">setManager</a>(<a href="../../../../jtl/Connector/Feature/Manager.html"><abbr title="jtl\Connector\Feature\Manager">Manager</abbr></a> $manager)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -102,6 +116,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getManager">getManager</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -111,7 +126,8 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_import">import</a>(<abbr title="jtl\Connector\Feature\Base\jtl\Connector\Feature\Importer\IImporter">IImporter</abbr> $importer)
+                    <a href="#method_import">import</a>(<a href="../../../../jtl/Connector/Feature/Importer/IImporter.html"><abbr title="jtl\Connector\Feature\Importer\IImporter">IImporter</abbr></a> $importer)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -121,7 +137,8 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_export">export</a>(<abbr title="jtl\Connector\Feature\Base\jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr> $writer)
+                    <a href="#method_export">export</a>(<a href="../../../../jtl/Connector/Feature/Exporter/IExporter.html"><abbr title="jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr></a> $writer)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -131,7 +148,8 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_transform">transform</a>(<abbr title="jtl\Connector\Feature\Base\jtl\Connector\Feature\Importer\IImporter">IImporter</abbr> $from, <abbr title="jtl\Connector\Feature\Base\jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr> $to)
+                    <a href="#method_transform">transform</a>(<a href="../../../../jtl/Connector/Feature/Importer/IImporter.html"><abbr title="jtl\Connector\Feature\Importer\IImporter">IImporter</abbr></a> $from, <a href="../../../../jtl/Connector/Feature/Exporter/IExporter.html"><abbr title="jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr></a> $to)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -144,20 +162,23 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_setManager">
-        <div class="location">at line 22</div>
+        <div class="location">at         line 22</div>
         <code>                    
-    <strong>setManager</strong>(<abbr title="jtl\Connector\Feature\Base\jtl\Connector\Feature\Manager">Manager</abbr> $manager)</code>
+    <strong>setManager</strong>(<a href="../../../../jtl/Connector/Feature/Manager.html"><abbr title="jtl\Connector\Feature\Manager">Manager</abbr></a> $manager)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Feature\Base\jtl\Connector\Feature\Manager">Manager</abbr></td>
+                <td><a href="../../../../jtl/Connector/Feature/Manager.html"><abbr title="jtl\Connector\Feature\Manager">Manager</abbr></a></td>
                 <td>$manager</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -170,11 +191,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getManager">
-        <div class="location">at line 24</div>
+        <div class="location">at         line 24</div>
         <code>                    
-    <strong>getManager</strong>()</code>
+    <strong>getManager</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
             
@@ -185,20 +210,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_import">
-        <div class="location">at line 26</div>
+        <div class="location">at         line 26</div>
         <code>                    
-    <strong>import</strong>(<abbr title="jtl\Connector\Feature\Base\jtl\Connector\Feature\Importer\IImporter">IImporter</abbr> $importer)</code>
+    <strong>import</strong>(<a href="../../../../jtl/Connector/Feature/Importer/IImporter.html"><abbr title="jtl\Connector\Feature\Importer\IImporter">IImporter</abbr></a> $importer)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Feature\Base\jtl\Connector\Feature\Importer\IImporter">IImporter</abbr></td>
+                <td><a href="../../../../jtl/Connector/Feature/Importer/IImporter.html"><abbr title="jtl\Connector\Feature\Importer\IImporter">IImporter</abbr></a></td>
                 <td>$importer</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -211,20 +239,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_export">
-        <div class="location">at line 28</div>
+        <div class="location">at         line 28</div>
         <code>                    
-    <strong>export</strong>(<abbr title="jtl\Connector\Feature\Base\jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr> $writer)</code>
+    <strong>export</strong>(<a href="../../../../jtl/Connector/Feature/Exporter/IExporter.html"><abbr title="jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr></a> $writer)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Feature\Base\jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr></td>
+                <td><a href="../../../../jtl/Connector/Feature/Exporter/IExporter.html"><abbr title="jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr></a></td>
                 <td>$writer</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -237,26 +268,28 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_transform">
-        <div class="location">at line 30</div>
+        <div class="location">at         line 30</div>
         <code>                    
-    <strong>transform</strong>(<abbr title="jtl\Connector\Feature\Base\jtl\Connector\Feature\Importer\IImporter">IImporter</abbr> $from, <abbr title="jtl\Connector\Feature\Base\jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr> $to)</code>
+    <strong>transform</strong>(<a href="../../../../jtl/Connector/Feature/Importer/IImporter.html"><abbr title="jtl\Connector\Feature\Importer\IImporter">IImporter</abbr></a> $from, <a href="../../../../jtl/Connector/Feature/Exporter/IExporter.html"><abbr title="jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr></a> $to)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Feature\Base\jtl\Connector\Feature\Importer\IImporter">IImporter</abbr></td>
+                <td><a href="../../../../jtl/Connector/Feature/Importer/IImporter.html"><abbr title="jtl\Connector\Feature\Importer\IImporter">IImporter</abbr></a></td>
                 <td>$from</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
-                <td><abbr title="jtl\Connector\Feature\Base\jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr></td>
+                <td><a href="../../../../jtl/Connector/Feature/Exporter/IExporter.html"><abbr title="jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr></a></td>
                 <td>$to</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 

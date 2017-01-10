@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,17 +77,45 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>Schema</h1>
+        <h1>
+            Schema
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>Schema</strong></p>
+    <strong>Schema</strong>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Schema Validator</p>                    </div>
     
     
     
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property__schemaexists">
+                    static                    protected                                        mixed
+                </td>
+                <td>$_schemaexists</td>
+                <td class="last">Schema file_exists</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property__jsons">
+                    static                    protected                                        <abbr title="jtl\Connector\Core\Validator\multiple:\jtl\Connector\Core\Validator\Json">Json</abbr>
+                </td>
+                <td>$_jsons</td>
+                <td class="last">Json Schema Classes</td>
+                <td></td>
+            </tr>
+            </table>
+
     
             <h2>Methods</h2>
 
@@ -92,6 +126,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_validateAction">validateAction</a>(string $schemafile, mixed $params)
+        
                                             <p>Action Validation</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -101,6 +136,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_validateModel">validateModel</a>($schemafile, $obj)
+        
                                             <p>Model Validation</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -110,6 +146,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_schemaExists">schemaExists</a>(string $schemafile)
+        
                                             <p>Checks whether a schema file exists</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -119,6 +156,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getJson">getJson</a>(string $schemafile)
+        
                                             <p>Singleton Json Schema Class</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -130,11 +168,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_validateAction">
-        <div class="location">at line 40</div>
+        <div class="location">at         line 40</div>
         <code>        static            
-    <strong>validateAction</strong>(string $schemafile, mixed $params)</code>
+    <strong>validateAction</strong>(string $schemafile, mixed $params)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Action Validation</p>                                </div>
                 <div class="tags">
@@ -144,14 +186,12 @@
                     <tr>
                 <td>string</td>
                 <td>$schemafile</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>mixed</td>
                 <td>$params</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -162,8 +202,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../../jtl/Connector/Core/Validator/ValidationException.html"><abbr title="jtl\Connector\Core\Validator\ValidationException">ValidationException</abbr></a></td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -174,11 +213,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_validateModel">
-        <div class="location">at line 53</div>
+        <div class="location">at         line 53</div>
         <code>        static            
-    <strong>validateModel</strong>($schemafile, $obj)</code>
+    <strong>validateModel</strong>($schemafile, $obj)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Model Validation</p>                                </div>
                 <div class="tags">
@@ -188,14 +231,12 @@
                     <tr>
                 <td></td>
                 <td>$schemafile</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td></td>
                 <td>$obj</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -206,8 +247,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../../jtl/Connector/Core/Exception/SchemaException.html"><abbr title="jtl\Connector\Core\Exception\SchemaException">SchemaException</abbr></a></td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -218,11 +258,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_schemaExists">
-        <div class="location">at line 72</div>
+        <div class="location">at         line 72</div>
         <code>        static            boolean
-    <strong>schemaExists</strong>(string $schemafile)</code>
+    <strong>schemaExists</strong>(string $schemafile)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Checks whether a schema file exists</p>                                </div>
                 <div class="tags">
@@ -232,8 +276,7 @@
                     <tr>
                 <td>string</td>
                 <td>$schemafile</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -243,8 +286,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -256,11 +298,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getJson">
-        <div class="location">at line 87</div>
+        <div class="location">at         line 87</div>
         <code>        static            <a href="../../../../jtl/Connector/Core/Validator/Json.html"><abbr title="jtl\Connector\Core\Validator\Json">Json</abbr></a>
-    <strong>getJson</strong>(string $schemafile)</code>
+    <strong>getJson</strong>(string $schemafile)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Singleton Json Schema Class</p>                                </div>
                 <div class="tags">
@@ -270,8 +316,7 @@
                     <tr>
                 <td>string</td>
                 <td>$schemafile</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -281,8 +326,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../../jtl/Connector/Core/Validator/Json.html"><abbr title="jtl\Connector\Core\Validator\Json">Json</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 

@@ -12,6 +12,9 @@
         <script src="../../../js/bootstrap.min.js"></script>
         <script src="../../../js/typeahead.min.js"></script>
         <script src="../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -70,15 +76,35 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>SessionHelper</h1>
+        <h1>
+            SessionHelper
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>SessionHelper</strong></p>
+    <strong>SessionHelper</strong>
+</p>
+
+        
+    
 
     
     
     
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_namespace">
+                                        protected                                        
+                </td>
+                <td>$namespace</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+            </table>
+
     
             <h2>Methods</h2>
 
@@ -88,7 +114,8 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___construct">__construct</a>(string $namespace = &#039;default&#039;)
+                    <a href="#method___construct">__construct</a>(string $namespace = &quot;default&quot;)
+        
                                             <p>Constructor</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -98,6 +125,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method___set">__set</a>(string $name, mixed $value)
+        
                                             <p>Magic Set</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -107,6 +135,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method___get">__get</a>(string $name)
+        
                                             <p>Magic Get</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -116,6 +145,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method___isset">__isset</a>(string $name)
+        
                                             <p>Magic Isset</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -125,6 +155,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method___unset">__unset</a>(string $name)
+        
                                             <p>Magic Unset</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -136,11 +167,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at line 21</div>
+        <div class="location">at         line 21</div>
         <code>                    
-    <strong>__construct</strong>(string $namespace = &#039;default&#039;)</code>
+    <strong>__construct</strong>(string $namespace = &quot;default&quot;)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Constructor</p>                                </div>
                 <div class="tags">
@@ -150,8 +185,7 @@
                     <tr>
                 <td>string</td>
                 <td>$namespace</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -162,8 +196,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../jtl/Connector/Core/Exception/SessionException.html"><abbr title="jtl\Connector\Core\Exception\SessionException">SessionException</abbr></a></td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -174,11 +207,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method___set">
-        <div class="location">at line 45</div>
+        <div class="location">at         line 45</div>
         <code>                    
-    <strong>__set</strong>(string $name, mixed $value)</code>
+    <strong>__set</strong>(string $name, mixed $value)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Magic Set</p>                                </div>
                 <div class="tags">
@@ -188,14 +225,12 @@
                     <tr>
                 <td>string</td>
                 <td>$name</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>mixed</td>
                 <td>$value</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -206,8 +241,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../jtl/Connector/Core/Exception/SessionException.html"><abbr title="jtl\Connector\Core\Exception\SessionException">SessionException</abbr></a></td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -218,11 +252,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method___get">
-        <div class="location">at line 62</div>
+        <div class="location">at         line 62</div>
         <code>                    NULL
-    <strong>__get</strong>(string $name)</code>
+    <strong>__get</strong>(string $name)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Magic Get</p>                                </div>
                 <div class="tags">
@@ -232,8 +270,7 @@
                     <tr>
                 <td>string</td>
                 <td>$name</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -243,8 +280,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>NULL</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -254,8 +290,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../jtl/Connector/Core/Exception/SessionException.html"><abbr title="jtl\Connector\Core\Exception\SessionException">SessionException</abbr></a></td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -266,11 +301,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method___isset">
-        <div class="location">at line 82</div>
+        <div class="location">at         line 82</div>
         <code>                    
-    <strong>__isset</strong>(string $name)</code>
+    <strong>__isset</strong>(string $name)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Magic Isset</p>                                </div>
                 <div class="tags">
@@ -280,8 +319,7 @@
                     <tr>
                 <td>string</td>
                 <td>$name</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -292,8 +330,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../jtl/Connector/Core/Exception/SessionException.html"><abbr title="jtl\Connector\Core\Exception\SessionException">SessionException</abbr></a></td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -304,11 +341,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method___unset">
-        <div class="location">at line 98</div>
+        <div class="location">at         line 98</div>
         <code>                    
-    <strong>__unset</strong>(string $name)</code>
+    <strong>__unset</strong>(string $name)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Magic Unset</p>                                </div>
                 <div class="tags">
@@ -318,8 +359,7 @@
                     <tr>
                 <td>string</td>
                 <td>$name</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -330,8 +370,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../jtl/Connector/Core/Exception/SessionException.html"><abbr title="jtl\Connector\Core\Exception\SessionException">SessionException</abbr></a></td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 

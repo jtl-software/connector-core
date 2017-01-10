@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,18 +77,62 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>MysqlMapper</h1>
+        <h1>
+            MysqlMapper
+                
+        </h1>
     </div>
 
     <p>    class
     <strong>MysqlMapper</strong>        extends <a href="../../../../jtl/Connector/Core/Utilities/Singleton.html"><abbr title="jtl\Connector\Core\Utilities\Singleton">Singleton</abbr></a>        implements
-        <a href="../../../../jtl/Connector/Core/Mapper/IMapper.html"><abbr title="jtl\Connector\Core\Mapper\IMapper">IMapper</abbr></a></p>
+        <a href="../../../../jtl/Connector/Core/Mapper/IMapper.html"><abbr title="jtl\Connector\Core\Mapper\IMapper">IMapper</abbr></a>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Abstract Mysql Mapper</p>                    </div>
     
     
     
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property__instances">
+                    static                    protected                                        <abbr title="jtl\Connector\Core\Utilities\multiple:">multiple:</abbr>
+                </td>
+                <td>$_instances</td>
+                <td class="last">Array of \jtl\Connector\Core\Utilities\Singleton Objects</td>
+                <td><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Utilities/Singleton.html#property__instances"><abbr title="jtl\Connector\Core\Utilities\Singleton">Singleton</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property__db">
+                                        protected                                        <a href="../../../../jtl/Connector/Core/Database/Mysql.html"><abbr title="jtl\Connector\Core\Database\Mysql">Mysql</abbr></a>
+                </td>
+                <td>$_db</td>
+                <td class="last">Mysql Database</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property__table">
+                                        protected                                        string
+                </td>
+                <td>$_table</td>
+                <td class="last">Mysql Table</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property__primary">
+                                        protected                                        <abbr title="jtl\Connector\Core\Mapper\mixed:string">mixed:string</abbr>|<abbr title="jtl\Connector\Core\Mapper\multiple">multiple</abbr>
+                </td>
+                <td>$_primary</td>
+                <td class="last">Mysql Primary Key</td>
+                <td></td>
+            </tr>
+            </table>
+
     
             <h2>Methods</h2>
 
@@ -93,8 +143,39 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getInstance">getInstance</a>()
+        
                                             <p>Basic Singleton implementation</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Utilities/Singleton.html#method_getInstance"><abbr title="jtl\Connector\Core\Utilities\Singleton">Singleton</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>()
+        
+                                            <p>Constructor</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___clone">__clone</a>()
+        
+                                            <p>Clone Method</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Utilities/Singleton.html#method___clone"><abbr title="jtl\Connector\Core\Utilities\Singleton">Singleton</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_load">load</a>()
+        
+                                            <p>Loader for $<em>table and $</em>primary</p>                </div>
+                <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
@@ -102,6 +183,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_Db">Db</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -112,6 +194,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getTable">getTable</a>()
+        
                                             <p>Get Table Name</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -121,6 +204,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setNames">setNames</a>(string $encoding = &#039;utf8&#039;)
+        
                                             <p>Character Set Support</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -130,6 +214,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setCharset">setCharset</a>(string $encoding = &#039;utf8&#039;)
+        
                                             <p>Name Set Support</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -138,7 +223,8 @@
                     boolean
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_isPrimarySet">isPrimarySet</a>(<abbr title="jtl\Connector\Core\Mapper\stdClass">stdClass</abbr> $object)
+                    <a href="#method_isPrimarySet">isPrimarySet</a>(<a target="_blank" href="http://php.net/stdClass">stdClass</a> $object)
+        
                                             <p>Checks if a Primary Key is set</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -147,7 +233,8 @@
                     <abbr title="jtl\Connector\Core\Mapper\mutiple">mutiple</abbr>|string|null
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_getPrimaryValues">getPrimaryValues</a>(<abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\DataModel">DataModel</abbr> $model)
+                    <a href="#method_getPrimaryValues">getPrimaryValues</a>(<a href="../../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> $model)
+        
                                             <p>Gets Primary Values</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -156,7 +243,8 @@
                     <abbr title="jtl\Connector\Core\Mapper\mutiple">mutiple</abbr>|string|null
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_getPrimaryFields">getPrimaryFields</a>(<abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\DataModel">DataModel</abbr> $model = null, boolean $toWawi = false)
+                    <a href="#method_getPrimaryFields">getPrimaryFields</a>(<a href="../../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> $model = null, boolean $toWawi = false)
+        
                                             <p>Gets Primary Fields</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -165,7 +253,8 @@
                     <abbr title="jtl\Connector\Core\Mapper\multitype:">multitype:</abbr>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_getKeyValues">getKeyValues</a>(<abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\DataModel">DataModel</abbr> $model, boolean $toWawi = false)
+                    <a href="#method_getKeyValues">getKeyValues</a>(<a href="../../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> $model, boolean $toWawi = false)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -176,6 +265,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_whereSql">whereSql</a>(array $kvs = null)
+        
                                             <p>Generation Sql Primary Key Where Statement</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -184,7 +274,8 @@
                     string
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_limitSql">limitSql</a>(<abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr> $filter = null)
+                    <a href="#method_limitSql">limitSql</a>(<a href="../../../../jtl/Connector/Core/Model/QueryFilter.html"><abbr title="jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></a> $filter = null)
+        
                                             <p>Generation Sql Limit Statement</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -193,7 +284,8 @@
                     string
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_orderSql">orderSql</a>(<abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr> $filter = null)
+                    <a href="#method_orderSql">orderSql</a>(<a href="../../../../jtl/Connector/Core/Model/QueryFilter.html"><abbr title="jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></a> $filter = null)
+        
                                             <p>Generation Sql Order Statement</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -205,11 +297,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_getInstance">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Utilities/Singleton.html#method_getInstance"><abbr title="jtl\Connector\Core\Utilities\Singleton">Singleton</abbr></a> at line 29</div>
+        <div class="location">in <a href="../../../../jtl/Connector/Core/Utilities/Singleton.html#method_getInstance"><abbr title="jtl\Connector\Core\Utilities\Singleton">Singleton</abbr></a> at         line 29</div>
         <code>        static            <abbr title="jtl\Connector\Core\Utilities\Singleton:">Singleton:</abbr>
-    <strong>getInstance</strong>()</code>
+    <strong>getInstance</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Basic Singleton implementation</p>                                </div>
                 <div class="tags">
@@ -219,8 +315,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><abbr title="jtl\Connector\Core\Utilities\Singleton:">Singleton:</abbr></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -231,12 +326,79 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_Db">
-        <div class="location">at line 65</div>
-        <code>                    <a href="../../../../jtl/Connector/Core/Database/Mysql.html"><abbr title="jtl\Connector\Core\Database\Mysql">Mysql</abbr></a>
-    <strong>Db</strong>()</code>
+                    <h3 id="method___construct">
+        <div class="location">at         line 47</div>
+        <code>            protected        
+    <strong>__construct</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Constructor</p>                                </div>
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___clone">
+        <div class="location">in <a href="../../../../jtl/Connector/Core/Utilities/Singleton.html#method___clone"><abbr title="jtl\Connector\Core\Utilities\Singleton">Singleton</abbr></a> at         line 49</div>
+        <code>final            protected        
+    <strong>__clone</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Clone Method</p>                                </div>
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_load">
+        <div class="location">at         line 60</div>
+        <code>    abstract        protected        
+    <strong>load</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Loader for $<em>table and $</em>primary</p>                                </div>
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_Db">
+        <div class="location">at         line 65</div>
+        <code>                    <a href="../../../../jtl/Connector/Core/Database/Mysql.html"><abbr title="jtl\Connector\Core\Database\Mysql">Mysql</abbr></a>
+    <strong>Db</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -244,8 +406,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../../jtl/Connector/Core/Database/Mysql.html"><abbr title="jtl\Connector\Core\Database\Mysql">Mysql</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -257,11 +418,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getTable">
-        <div class="location">at line 75</div>
+        <div class="location">at         line 75</div>
         <code>                    string
-    <strong>getTable</strong>()</code>
+    <strong>getTable</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Get Table Name</p>                                </div>
                 <div class="tags">
@@ -271,8 +436,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -284,11 +448,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setNames">
-        <div class="location">at line 85</div>
+        <div class="location">at         line 85</div>
         <code>                    
-    <strong>setNames</strong>(string $encoding = &#039;utf8&#039;)</code>
+    <strong>setNames</strong>(string $encoding = &#039;utf8&#039;)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Character Set Support</p>                                </div>
                 <div class="tags">
@@ -298,8 +466,7 @@
                     <tr>
                 <td>string</td>
                 <td>$encoding</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -312,11 +479,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setCharset">
-        <div class="location">at line 95</div>
+        <div class="location">at         line 95</div>
         <code>                    
-    <strong>setCharset</strong>(string $encoding = &#039;utf8&#039;)</code>
+    <strong>setCharset</strong>(string $encoding = &#039;utf8&#039;)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Name Set Support</p>                                </div>
                 <div class="tags">
@@ -326,8 +497,7 @@
                     <tr>
                 <td>string</td>
                 <td>$encoding</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -340,11 +510,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_isPrimarySet">
-        <div class="location">at line 106</div>
+        <div class="location">at         line 106</div>
         <code>                    boolean
-    <strong>isPrimarySet</strong>(<abbr title="jtl\Connector\Core\Mapper\stdClass">stdClass</abbr> $object)</code>
+    <strong>isPrimarySet</strong>(<a target="_blank" href="http://php.net/stdClass">stdClass</a> $object)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Checks if a Primary Key is set</p>                                </div>
                 <div class="tags">
@@ -352,10 +526,9 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Mapper\stdClass">stdClass</abbr></td>
+                <td><a target="_blank" href="http://php.net/stdClass">stdClass</a></td>
                 <td>$object</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -365,8 +538,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -378,11 +550,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getPrimaryValues">
-        <div class="location">at line 133</div>
+        <div class="location">at         line 133</div>
         <code>                    <abbr title="jtl\Connector\Core\Mapper\mutiple">mutiple</abbr>|string|null
-    <strong>getPrimaryValues</strong>(<abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\DataModel">DataModel</abbr> $model)</code>
+    <strong>getPrimaryValues</strong>(<a href="../../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> $model)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Gets Primary Values</p>                                </div>
                 <div class="tags">
@@ -390,10 +566,9 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\DataModel">DataModel</abbr></td>
+                <td><a href="../../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a></td>
                 <td>$model</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -403,8 +578,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><abbr title="jtl\Connector\Core\Mapper\mutiple">mutiple</abbr>|string|null</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -416,11 +590,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getPrimaryFields">
-        <div class="location">at line 157</div>
+        <div class="location">at         line 157</div>
         <code>                    <abbr title="jtl\Connector\Core\Mapper\mutiple">mutiple</abbr>|string|null
-    <strong>getPrimaryFields</strong>(<abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\DataModel">DataModel</abbr> $model = null, boolean $toWawi = false)</code>
+    <strong>getPrimaryFields</strong>(<a href="../../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> $model = null, boolean $toWawi = false)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Gets Primary Fields</p>                                </div>
                 <div class="tags">
@@ -428,16 +606,14 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\DataModel">DataModel</abbr></td>
+                <td><a href="../../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a></td>
                 <td>$model</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>boolean</td>
                 <td>$toWawi</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -447,8 +623,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><abbr title="jtl\Connector\Core\Mapper\mutiple">mutiple</abbr>|string|null</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -460,26 +635,28 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getKeyValues">
-        <div class="location">at line 192</div>
+        <div class="location">at         line 192</div>
         <code>                    <abbr title="jtl\Connector\Core\Mapper\multitype:">multitype:</abbr>
-    <strong>getKeyValues</strong>(<abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\DataModel">DataModel</abbr> $model, boolean $toWawi = false)</code>
+    <strong>getKeyValues</strong>(<a href="../../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> $model, boolean $toWawi = false)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\DataModel">DataModel</abbr></td>
+                <td><a href="../../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a></td>
                 <td>$model</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>boolean</td>
                 <td>$toWawi</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -501,11 +678,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_whereSql">
-        <div class="location">at line 216</div>
+        <div class="location">at         line 216</div>
         <code>                    string
-    <strong>whereSql</strong>(array $kvs = null)</code>
+    <strong>whereSql</strong>(array $kvs = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Generation Sql Primary Key Where Statement</p>                                </div>
                 <div class="tags">
@@ -515,8 +696,7 @@
                     <tr>
                 <td>array</td>
                 <td>$kvs</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -526,8 +706,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -539,11 +718,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_limitSql">
-        <div class="location">at line 238</div>
+        <div class="location">at         line 238</div>
         <code>                    string
-    <strong>limitSql</strong>(<abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr> $filter = null)</code>
+    <strong>limitSql</strong>(<a href="../../../../jtl/Connector/Core/Model/QueryFilter.html"><abbr title="jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></a> $filter = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Generation Sql Limit Statement</p>                                </div>
                 <div class="tags">
@@ -551,10 +734,9 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></td>
+                <td><a href="../../../../jtl/Connector/Core/Model/QueryFilter.html"><abbr title="jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></a></td>
                 <td>$filter</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -564,8 +746,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -577,11 +758,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_orderSql">
-        <div class="location">at line 254</div>
+        <div class="location">at         line 254</div>
         <code>                    string
-    <strong>orderSql</strong>(<abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr> $filter = null)</code>
+    <strong>orderSql</strong>(<a href="../../../../jtl/Connector/Core/Model/QueryFilter.html"><abbr title="jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></a> $filter = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Generation Sql Order Statement</p>                                </div>
                 <div class="tags">
@@ -589,10 +774,9 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></td>
+                <td><a href="../../../../jtl/Connector/Core/Model/QueryFilter.html"><abbr title="jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></a></td>
                 <td>$filter</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -602,8 +786,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 

@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,11 +77,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>Tool</h1>
+        <h1>
+            Tool
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>Tool</strong></p>
+    <strong>Tool</strong>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Filesystem tool class.</p>                    </div>
@@ -90,8 +103,7 @@
                     static                                                            boolean
                 </td>
                 <td>$test</td>
-                <td class="last">
-</td>
+                <td class="last"></td>
                 <td></td>
             </tr>
                     <tr>
@@ -99,8 +111,7 @@
                     static                                                            boolean
                 </td>
                 <td>$ret_is_file</td>
-                <td class="last">
-</td>
+                <td class="last"></td>
                 <td></td>
             </tr>
                     <tr>
@@ -108,8 +119,7 @@
                     static                                                            boolean
                 </td>
                 <td>$ret_is_writable</td>
-                <td class="last">
-</td>
+                <td class="last"></td>
                 <td></td>
             </tr>
                     <tr>
@@ -140,6 +150,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_file_get_contents">file_get_contents</a>(string $filename, boolean $use_include_path = false, resource $context = null, integer $offset = -1, integer $maxlen = null)
+        
                                             <p>This method is a wrapper for the native file<em>get</em>contents function.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -149,6 +160,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_file_put_contents">file_put_contents</a>(string $filename, mixed $data = null, integer $flags, resource $context = null)
+        
                                             <p>This method is a wrapper for the native file<em>put</em>content function.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -158,6 +170,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_is_file">is_file</a>(string $filename)
+        
                                             <p>This method is a wrapper for the native is_file function.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -167,6 +180,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_is_writable">is_writable</a>(string $file)
+        
                                             <p>This method is a wrapper for the native is_writable function.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -178,11 +192,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_file_get_contents">
-        <div class="location">at line 59</div>
+        <div class="location">at         line 59</div>
         <code>        static            mixed
-    <strong>file_get_contents</strong>(string $filename, boolean $use_include_path = false, resource $context = null, integer $offset = -1, integer $maxlen = null)</code>
+    <strong>file_get_contents</strong>(string $filename, boolean $use_include_path = false, resource $context = null, integer $offset = -1, integer $maxlen = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>This method is a wrapper for the native file<em>get</em>contents function.</p>                                </div>
                 <div class="tags">
@@ -192,32 +210,27 @@
                     <tr>
                 <td>string</td>
                 <td>$filename</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>boolean</td>
                 <td>$use_include_path</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>resource</td>
                 <td>$context</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>integer</td>
                 <td>$offset</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>integer</td>
                 <td>$maxlen</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -227,8 +240,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>mixed</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -249,11 +261,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_file_put_contents">
-        <div class="location">at line 82</div>
+        <div class="location">at         line 82</div>
         <code>        static            mixed
-    <strong>file_put_contents</strong>(string $filename, mixed $data = null, integer $flags, resource $context = null)</code>
+    <strong>file_put_contents</strong>(string $filename, mixed $data = null, integer $flags, resource $context = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>This method is a wrapper for the native file<em>put</em>content function.</p>                                </div>
                 <div class="tags">
@@ -263,26 +279,22 @@
                     <tr>
                 <td>string</td>
                 <td>$filename</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>mixed</td>
                 <td>$data</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>integer</td>
                 <td>$flags</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>resource</td>
                 <td>$context</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -292,8 +304,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>mixed</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -314,11 +325,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_is_file">
-        <div class="location">at line 96</div>
+        <div class="location">at         line 96</div>
         <code>        static            bool
-    <strong>is_file</strong>(string $filename)</code>
+    <strong>is_file</strong>(string $filename)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>This method is a wrapper for the native is_file function.</p>                                </div>
                 <div class="tags">
@@ -328,8 +343,7 @@
                     <tr>
                 <td>string</td>
                 <td>$filename</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -339,8 +353,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>bool</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -352,11 +365,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_is_writable">
-        <div class="location">at line 110</div>
+        <div class="location">at         line 110</div>
         <code>        static            bool
-    <strong>is_writable</strong>(string $file)</code>
+    <strong>is_writable</strong>(string $file)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>This method is a wrapper for the native is_writable function.</p>                                </div>
                 <div class="tags">
@@ -366,8 +383,7 @@
                     <tr>
                 <td>string</td>
                 <td>$file</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -377,8 +393,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>bool</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 

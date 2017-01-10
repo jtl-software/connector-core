@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,12 +77,19 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>Xtea</h1>
+        <h1>
+            Xtea
+                
+        </h1>
     </div>
 
     <p>    class
     <strong>Xtea</strong>        implements
-        <a href="../../../../jtl/Connector/Core/Cryptography/ICryptography.html"><abbr title="jtl\Connector\Core\Cryptography\ICryptography">ICryptography</abbr></a></p>
+        <a href="../../../../jtl/Connector/Core/Cryptography/ICryptography.html"><abbr title="jtl\Connector\Core\Cryptography\ICryptography">ICryptography</abbr></a>
+</p>
+
+        
+    
 
     
     
@@ -85,12 +98,19 @@
 
             <table class="table table-condensed">
                     <tr>
+                <td class="type" id="property_key">
+                                        protected                                        
+                </td>
+                <td>$key</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
                 <td class="type" id="property_cbc">
                                                                                 
                 </td>
                 <td>$cbc</td>
-                <td class="last">
-</td>
+                <td class="last"></td>
                 <td></td>
             </tr>
             </table>
@@ -105,6 +125,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method___construct">__construct</a>($key)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -115,6 +136,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_encrypt">encrypt</a>(string $text)
+        
                                             <p>Encrypt</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -124,6 +146,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_decrypt">decrypt</a>(string $text)
+        
                                             <p>Decrypt</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -133,6 +156,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_benchmark">benchmark</a>($length = 1000)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -143,6 +167,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_check_implementation">check_implementation</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -155,11 +180,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at line 44</div>
+        <div class="location">at         line 44</div>
         <code>                    
-    <strong>__construct</strong>($key)</code>
+    <strong>__construct</strong>($key)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -167,8 +196,7 @@
                     <tr>
                 <td></td>
                 <td>$key</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -181,11 +209,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_encrypt">
-        <div class="location">at line 50</div>
+        <div class="location">at         line 50</div>
         <code>                    
-    <strong>encrypt</strong>(string $text)</code>
+    <strong>encrypt</strong>(string $text)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Encrypt</p>                                </div>
                 <div class="tags">
@@ -195,8 +227,7 @@
                     <tr>
                 <td>string</td>
                 <td>$text</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -209,11 +240,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_decrypt">
-        <div class="location">at line 91</div>
+        <div class="location">at         line 91</div>
         <code>                    
-    <strong>decrypt</strong>(string $text)</code>
+    <strong>decrypt</strong>(string $text)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Decrypt</p>                                </div>
                 <div class="tags">
@@ -223,8 +258,7 @@
                     <tr>
                 <td>string</td>
                 <td>$text</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -237,11 +271,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_benchmark">
-        <div class="location">at line 140</div>
+        <div class="location">at         line 140</div>
         <code>                    
-    <strong>benchmark</strong>($length = 1000)</code>
+    <strong>benchmark</strong>($length = 1000)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -249,8 +287,7 @@
                     <tr>
                 <td></td>
                 <td>$length</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -263,11 +300,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_check_implementation">
-        <div class="location">at line 159</div>
+        <div class="location">at         line 159</div>
         <code>                    
-    <strong>check_implementation</strong>()</code>
+    <strong>check_implementation</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
             

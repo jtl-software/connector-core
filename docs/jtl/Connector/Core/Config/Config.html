@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,49 +77,37 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>Config</h1>
+        <h1>
+            Config
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>Config</strong>        extends <a href="../../../../jtl/Connector/Core/Config/Base.html"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a></p>
+    <strong>Config</strong>        extends <abbr title="Noodlehaus\Config">Config</abbr>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Config Class</p>                    </div>
     
     
-            <h2>Constants</h2>
+    
+            <h2>Properties</h2>
 
             <table class="table table-condensed">
                     <tr>
-                <td>PATTERN_COMBINED</td>
-                <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                <td class="type" id="property_path">
+                                        protected                                        string
                 </td>
-            </tr>
-                    <tr>
-                <td>DELIMITER</td>
-                <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
-                </td>
-            </tr>
-                    <tr>
-                <td>SPACER</td>
-                <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
-                </td>
+                <td>$path</td>
+                <td class="last"></td>
+                <td></td>
             </tr>
             </table>
 
-    
     
             <h2>Methods</h2>
 
@@ -123,108 +117,31 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___construct">__construct</a>(array $loaders)
-                                            <p>Creates the config instance.</p>                </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Config/Base.html#method___construct"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a></small></div>
+                    <a href="#method___construct">__construct</a>(string $path)
+        
+                                            <p>Config constructor.</p>                </div>
+                <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    mixed|null
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___destruct">__destruct</a>()
-                                            <p>Destructor</p>                </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Config/Base.html#method___destruct"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a></small></div>
+                    <a href="#method_read">read</a>(string $key, mixed $default = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    array
+                    bool
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_reads">reads</a>(array $keys)
-                                            <p>Reads multiple/single requests to the configuration.</p>                </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Config/Base.html#method_reads"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    mixed
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_read">read</a>(string $key = null)
-                                            <p>Returns the values of a key, or all datas if the key is not provided.</p>                </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Config/Base.html#method_read"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    mixed
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_readCombine">readCombine</a>(string $key, mixed $default = null, array $loader_data = array())
-                                            <p>Returns the value of a combined key string/index.</p>                </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Config/Base.html#method_readCombine"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    array
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_writes">writes</a>(array $values)
-                                            <p>Writes multiple/single requests to the configuration.</p>                </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Config/Base.html#method_writes"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    array
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_write">write</a>(<a target="_blank" href="http://php.net/stdClass"><abbr title="stdClass">stdClass</abbr></a> $values)
-                                            <p>Writes key/values.</p>                </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Config/Base.html#method_write"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_existsLoaderByName">existsLoaderByName</a>(string $name)
-                                            <p>Checks if a loader is already added.</p>                </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Config/Base.html#method_existsLoaderByName"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    boolean
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_getLoader">getLoader</a>(string $name)
-                                            <p>Returns a loader by name.</p>                </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Config/Base.html#method_getLoader"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_addLoader">addLoader</a>(<abbr title="jtl\Connector\Core\Config\jtl\Connector\Core\Config\Loader\ILoader">ILoader</abbr> $loader)
-                                            <p>Adds a new loader to the class.</p>                </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Config/Base.html#method_addLoader"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    boolean
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_deleteLoader">deleteLoader</a>(string $name)
-                                            <p>Deletes a existing loader.</p>                </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Config/Base.html#method_deleteLoader"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    boolean
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_clearLoader">clearLoader</a>()
-                                            <p>Clears the actual loaders from the instance.</p>                </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Config/Base.html#method_clearLoader"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a></small></div>
+                    <a href="#method_save">save</a>(string $key, mixed $value)
+        
+                                            <p>Will set data into cache and save to file</p>                </div>
+                <div class="col-md-2"></div>
             </div>
             </div>
 
@@ -234,80 +151,39 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Config/Base.html#method___construct"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a> at line 56</div>
+        <div class="location">at         line 28</div>
         <code>                    
-    <strong>__construct</strong>(array $loaders)</code>
+    <strong>__construct</strong>(string $path)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
-                                    <p>Creates the config instance.</p>                                </div>
+                                    <p>Config constructor.</p>                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td>array</td>
-                <td>$loaders</td>
-                <td>A array with loaders that implements the ILoader
-interface.</td>
+                <td>string</td>
+                <td>$path</td>
+                <td></td>
             </tr>
             </table>
 
             
             
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method___destruct">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Config/Base.html#method___destruct"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a> at line 68</div>
-        <code>                    
-    <strong>__destruct</strong>()</code>
-    </h3>
-    <div class="details">
-                    <div class="method-description">
-                                    <p>Destructor</p>                                </div>
-                <div class="tags">
-            
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_reads">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Config/Base.html#method_reads"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a> at line 81</div>
-        <code>                    array
-    <strong>reads</strong>(array $keys)</code>
-    </h3>
-    <div class="details">
-                    <div class="method-description">
-                                    <p>Reads multiple/single requests to the configuration.</p>                                </div>
-                <div class="tags">
-                            <h4>Parameters</h4>
+                            <h4>Exceptions</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td>array</td>
-                <td>$keys</td>
-                <td>An array with stings as entries.</td>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td></td>
             </tr>
             </table>
 
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>array</td>
-            <td>An array with the values from $keys as index-keys.</td>
-        </tr>
-    </table>
-
-            
             
                     </div>
     </div>
@@ -315,13 +191,15 @@ interface.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_read">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Config/Base.html#method_read"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a> at line 122</div>
-        <code>                    mixed
-    <strong>read</strong>(string $key = null)</code>
+        <div class="location">at         line 44</div>
+        <code>                    mixed|null
+    <strong>read</strong>(string $key, mixed $default = null)
+        </code>
     </h3>
     <div class="details">
-                    <div class="method-description">
-                                    <p>Returns the values of a key, or all datas if the key is not provided.</p>                                </div>
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -329,69 +207,12 @@ interface.</td>
                     <tr>
                 <td>string</td>
                 <td>$key</td>
-                <td>The index key of the requested datas.</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>mixed</td>
-            <td>The data value of the index key.</td>
-        </tr>
-    </table>
-
-            
-                            <h4>Exceptions</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td><a href="../../../../jtl/Connector/Core/Exception/ConfigException.html"><abbr title="jtl\Connector\Core\Exception\ConfigException">ConfigException</abbr></a></td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_readCombine">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Config/Base.html#method_readCombine"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a> at line 167</div>
-        <code>                    mixed
-    <strong>readCombine</strong>(string $key, mixed $default = null, array $loader_data = array())</code>
-    </h3>
-    <div class="details">
-                    <div class="method-description">
-                                    <p>Returns the value of a combined key string/index.</p>                    <p>If the index is available in $this->data, there will be recursivly checked
-if the depending keys are available.</p>
-
-<p>Is there no value, $default will be returned.</p>            </div>
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>string</td>
-                <td>$key</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>mixed</td>
                 <td>$default</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>array</td>
-                <td>$loader_data</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -400,9 +221,8 @@ if the depending keys are available.</p>
 
                     <table class="table table-condensed">
         <tr>
-            <td>mixed</td>
-            <td>
-</td>
+            <td>mixed|null</td>
+            <td></td>
         </tr>
     </table>
 
@@ -413,123 +233,31 @@ if the depending keys are available.</p>
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_writes">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Config/Base.html#method_writes"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a> at line 207</div>
-        <code>                    array
-    <strong>writes</strong>(array $values)</code>
+                    <h3 id="method_save">
+        <div class="location">at         line 57</div>
+        <code>                    bool
+    <strong>save</strong>(string $key, mixed $value)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
-                                    <p>Writes multiple/single requests to the configuration.</p>                                </div>
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>array</td>
-                <td>$values</td>
-                <td>An array with index-kex=>key-value as entries.</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>array</td>
-            <td>An array with the values from $keys as index-keys.</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_write">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Config/Base.html#method_write"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a> at line 224</div>
-        <code>                    array
-    <strong>write</strong>(<a target="_blank" href="http://php.net/stdClass"><abbr title="stdClass">stdClass</abbr></a> $values)</code>
-    </h3>
-    <div class="details">
-                    <div class="method-description">
-                                    <p>Writes key/values.</p>                                </div>
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td><a target="_blank" href="http://php.net/stdClass"><abbr title="stdClass">stdClass</abbr></a></td>
-                <td>$values</td>
-                <td>The key value array that should be written.</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>array</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_existsLoaderByName">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Config/Base.html#method_existsLoaderByName"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a> at line 253</div>
-        <code>                    
-    <strong>existsLoaderByName</strong>(string $name)</code>
-    </h3>
-    <div class="details">
-                    <div class="method-description">
-                                    <p>Checks if a loader is already added.</p>                                </div>
+                                    <p>Will set data into cache and save to file</p>                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
                 <td>string</td>
-                <td>$name</td>
-                <td>The loader name.</td>
+                <td>$key</td>
+                <td></td>
             </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_getLoader">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Config/Base.html#method_getLoader"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a> at line 282</div>
-        <code>                    boolean
-    <strong>getLoader</strong>(string $name)</code>
-    </h3>
-    <div class="details">
-                    <div class="method-description">
-                                    <p>Returns a loader by name.</p>                                </div>
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
                     <tr>
-                <td>string</td>
-                <td>$name</td>
-                <td>
-</td>
+                <td>mixed</td>
+                <td>$value</td>
+                <td></td>
             </tr>
             </table>
 
@@ -538,109 +266,8 @@ if the depending keys are available.</p>
 
                     <table class="table table-condensed">
         <tr>
-            <td>boolean</td>
-            <td>| \jtl\Connector\Core\Config\Loader\ILoader</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_addLoader">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Config/Base.html#method_addLoader"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a> at line 295</div>
-        <code>                    
-    <strong>addLoader</strong>(<abbr title="jtl\Connector\Core\Config\jtl\Connector\Core\Config\Loader\ILoader">ILoader</abbr> $loader)</code>
-    </h3>
-    <div class="details">
-                    <div class="method-description">
-                                    <p>Adds a new loader to the class.</p>                                </div>
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td><abbr title="jtl\Connector\Core\Config\jtl\Connector\Core\Config\Loader\ILoader">ILoader</abbr></td>
-                <td>$loader</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_deleteLoader">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Config/Base.html#method_deleteLoader"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a> at line 311</div>
-        <code>                    boolean
-    <strong>deleteLoader</strong>(string $name)</code>
-    </h3>
-    <div class="details">
-                    <div class="method-description">
-                                    <p>Deletes a existing loader.</p>                                </div>
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>string</td>
-                <td>$name</td>
-                <td>The name of the loader that should be deleted.</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>boolean</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-                            <h4>Exceptions</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td><a href="../../../../jtl/Connector/Core/Exception/ConfigException.html"><abbr title="jtl\Connector\Core\Exception\ConfigException">ConfigException</abbr></a></td>
-                <td>If the loader is not present raise exception.</td>
-            </tr>
-            </table>
-
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_clearLoader">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Config/Base.html#method_clearLoader"><abbr title="jtl\Connector\Core\Config\Base">Base</abbr></a> at line 325</div>
-        <code>                    boolean
-    <strong>clearLoader</strong>()</code>
-    </h3>
-    <div class="details">
-                    <div class="method-description">
-                                    <p>Clears the actual loaders from the instance.</p>                                </div>
-                <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>boolean</td>
-            <td>
-</td>
+            <td>bool</td>
+            <td></td>
         </tr>
     </table>
 

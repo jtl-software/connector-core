@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,15 +77,35 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>LoggerFactory</h1>
+        <h1>
+            LoggerFactory
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>LoggerFactory</strong></p>
+    <strong>LoggerFactory</strong>
+</p>
+
+        
+    
 
     
     
     
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_logger">
+                    static                    protected                                        
+                </td>
+                <td>$logger</td>
+                <td class="last">Array of Logger channels</td>
+                <td></td>
+            </tr>
+            </table>
+
     
             <h2>Methods</h2>
 
@@ -90,6 +116,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_create">create</a>(string $channel)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -100,6 +127,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_get">get</a>(string $channel)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -112,11 +140,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_create">
-        <div class="location">at line 20</div>
+        <div class="location">at         line 20</div>
         <code>        static            <abbr title="Monolog\Logger">Logger</abbr>
-    <strong>create</strong>(string $channel)</code>
+    <strong>create</strong>(string $channel)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -134,8 +166,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><abbr title="Monolog\Logger">Logger</abbr></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -147,11 +178,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_get">
-        <div class="location">at line 37</div>
+        <div class="location">at         line 37</div>
         <code>        static            <abbr title="Monolog\Logger">Logger</abbr>
-    <strong>get</strong>(string $channel)</code>
+    <strong>get</strong>(string $channel)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -169,8 +204,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><abbr title="Monolog\Logger">Logger</abbr></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 

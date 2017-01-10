@@ -12,6 +12,9 @@
         <script src="../../../js/bootstrap.min.js"></script>
         <script src="../../../js/typeahead.min.js"></script>
         <script src="../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -75,43 +81,49 @@
 
     
             <h2>Classes</h2>
-        <div class="container-fluid underlined">
+        
+    <div class="container-fluid underlined">
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../../jtl/Connector/Core/Model/AuthRequest.html"><abbr title="jtl\Connector\Core\Model\AuthRequest">jtl\Connector\Core\Model\AuthRequest</abbr></a>
-                                    </div>
+                                            <a href="../../../jtl/Connector/Core/Model/AuthRequest.html"><abbr title="jtl\Connector\Core\Model\AuthRequest">AuthRequest</abbr></a>
+                                            
+                </div>
                 <div class="col-md-6">
                     DataModel Class
                 </div>
             </div>
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../../jtl/Connector/Core/Model/Collection.html"><abbr title="jtl\Connector\Core\Model\Collection">jtl\Connector\Core\Model\Collection</abbr></a>
-                                    </div>
+                                            <a href="../../../jtl/Connector/Core/Model/Collection.html"><abbr title="jtl\Connector\Core\Model\Collection">Collection</abbr></a>
+                                            
+                </div>
                 <div class="col-md-6">
                     Collection Class
                 </div>
             </div>
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">jtl\Connector\Core\Model\DataModel</abbr></a>
-                                    </div>
+                                            <a href="../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a>
+                                            
+                </div>
                 <div class="col-md-6">
                     DataModel Class
                 </div>
             </div>
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../../jtl/Connector/Core/Model/Model.html"><abbr title="jtl\Connector\Core\Model\Model">jtl\Connector\Core\Model\Model</abbr></a>
-                                    </div>
+                                            <a href="../../../jtl/Connector/Core/Model/Model.html"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a>
+                                            
+                </div>
                 <div class="col-md-6">
                     Core Model Class
                 </div>
             </div>
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../../jtl/Connector/Core/Model/QueryFilter.html"><abbr title="jtl\Connector\Core\Model\QueryFilter">jtl\Connector\Core\Model\QueryFilter</abbr></a>
-                                    </div>
+                                            <a href="../../../jtl/Connector/Core/Model/QueryFilter.html"><abbr title="jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></a>
+                                            
+                </div>
                 <div class="col-md-6">
                     Database Query Filter
                 </div>

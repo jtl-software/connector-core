@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,11 +77,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>IMapper</h1>
+        <h1>
+            IMapper
+                
+        </h1>
     </div>
 
     <p>    interface
-    <strong>IMapper</strong></p>
+    <strong>IMapper</strong>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Generic mapper interface</p>                    </div>
@@ -91,7 +104,8 @@
                     boolean
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_save">save</a>(<abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\DataModel">DataModel</abbr> $model)
+                    <a href="#method_save">save</a>(<a href="../../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> $model)
+        
                                             <p>Save</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -100,16 +114,18 @@
                     boolean
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_delete">delete</a>(<abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\DataModel">DataModel</abbr> $model)
+                    <a href="#method_delete">delete</a>(<a href="../../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> $model)
+        
                                             <p>Delete</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <a target="_blank" href="http://php.net/stdClass"><abbr title="stdClass">stdClass</abbr></a>
+                    <a target="_blank" href="http://php.net/stdClass">stdClass</a>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_fetchRow">fetchRow</a>(array $kvs = null)
+        
                                             <p>Fetching a single Row</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -119,6 +135,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_fetchRows">fetchRows</a>(array $kvs = null)
+        
                                             <p>Fetching multiple Rows</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -127,7 +144,8 @@
                     <abbr title="jtl\Connector\Core\Mapper\multiple:">multiple:</abbr>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_fetchAll">fetchAll</a>(<abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr> $filter = null)
+                    <a href="#method_fetchAll">fetchAll</a>(<a href="../../../../jtl/Connector/Core/Model/QueryFilter.html"><abbr title="jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></a> $filter = null)
+        
                                             <p>Fetching multiple Rows</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -136,7 +154,8 @@
                     integer
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_fetchCount">fetchCount</a>(<abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr> $filter = null)
+                    <a href="#method_fetchCount">fetchCount</a>(<a href="../../../../jtl/Connector/Core/Model/QueryFilter.html"><abbr title="jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></a> $filter = null)
+        
                                             <p>Fetching a single count</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -148,11 +167,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_save">
-        <div class="location">at line 24</div>
+        <div class="location">at         line 24</div>
         <code>                    boolean
-    <strong>save</strong>(<abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\DataModel">DataModel</abbr> $model)</code>
+    <strong>save</strong>(<a href="../../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> $model)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Save</p>                                </div>
                 <div class="tags">
@@ -160,10 +183,9 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\DataModel">DataModel</abbr></td>
+                <td><a href="../../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a></td>
                 <td>$model</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -173,8 +195,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -186,11 +207,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_delete">
-        <div class="location">at line 32</div>
+        <div class="location">at         line 32</div>
         <code>                    boolean
-    <strong>delete</strong>(<abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\DataModel">DataModel</abbr> $model)</code>
+    <strong>delete</strong>(<a href="../../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> $model)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Delete</p>                                </div>
                 <div class="tags">
@@ -198,10 +223,9 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\DataModel">DataModel</abbr></td>
+                <td><a href="../../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a></td>
                 <td>$model</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -211,8 +235,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -224,11 +247,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_fetchRow">
-        <div class="location">at line 40</div>
-        <code>                    <a target="_blank" href="http://php.net/stdClass"><abbr title="stdClass">stdClass</abbr></a>
-    <strong>fetchRow</strong>(array $kvs = null)</code>
+        <div class="location">at         line 40</div>
+        <code>                    <a target="_blank" href="http://php.net/stdClass">stdClass</a>
+    <strong>fetchRow</strong>(array $kvs = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Fetching a single Row</p>                                </div>
                 <div class="tags">
@@ -238,8 +265,7 @@
                     <tr>
                 <td>array</td>
                 <td>$kvs</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -248,9 +274,8 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td><a target="_blank" href="http://php.net/stdClass"><abbr title="stdClass">stdClass</abbr></a></td>
-            <td>
-</td>
+            <td><a target="_blank" href="http://php.net/stdClass">stdClass</a></td>
+            <td></td>
         </tr>
     </table>
 
@@ -262,11 +287,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_fetchRows">
-        <div class="location">at line 48</div>
+        <div class="location">at         line 48</div>
         <code>                    <abbr title="jtl\Connector\Core\Mapper\multiple:">multiple:</abbr>
-    <strong>fetchRows</strong>(array $kvs = null)</code>
+    <strong>fetchRows</strong>(array $kvs = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Fetching multiple Rows</p>                                </div>
                 <div class="tags">
@@ -276,8 +305,7 @@
                     <tr>
                 <td>array</td>
                 <td>$kvs</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -299,11 +327,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_fetchAll">
-        <div class="location">at line 56</div>
+        <div class="location">at         line 56</div>
         <code>                    <abbr title="jtl\Connector\Core\Mapper\multiple:">multiple:</abbr>
-    <strong>fetchAll</strong>(<abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr> $filter = null)</code>
+    <strong>fetchAll</strong>(<a href="../../../../jtl/Connector/Core/Model/QueryFilter.html"><abbr title="jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></a> $filter = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Fetching multiple Rows</p>                                </div>
                 <div class="tags">
@@ -311,10 +343,9 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></td>
+                <td><a href="../../../../jtl/Connector/Core/Model/QueryFilter.html"><abbr title="jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></a></td>
                 <td>$filter</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -336,11 +367,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_fetchCount">
-        <div class="location">at line 64</div>
+        <div class="location">at         line 64</div>
         <code>                    integer
-    <strong>fetchCount</strong>(<abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr> $filter = null)</code>
+    <strong>fetchCount</strong>(<a href="../../../../jtl/Connector/Core/Model/QueryFilter.html"><abbr title="jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></a> $filter = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Fetching a single count</p>                                </div>
                 <div class="tags">
@@ -348,10 +383,9 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Mapper\jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></td>
+                <td><a href="../../../../jtl/Connector/Core/Model/QueryFilter.html"><abbr title="jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></a></td>
                 <td>$filter</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -361,8 +395,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>integer</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 

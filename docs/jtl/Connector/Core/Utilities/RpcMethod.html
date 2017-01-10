@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,11 +77,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>RpcMethod</h1>
+        <h1>
+            RpcMethod
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>RpcMethod</strong></p>
+    <strong>RpcMethod</strong>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Rpc Method Utilities</p>                    </div>
@@ -92,6 +105,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_isMethod">isMethod</a>(string $method)
+        
                                             <p>Method validation</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -101,6 +115,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_splitMethod">splitMethod</a>(string $method)
+        
                                             <p>Controller and Action Splitter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -110,6 +125,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_buildController">buildController</a>(string $controller)
+        
                                             <p>Controller Name Builder</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -119,7 +135,18 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_buildAction">buildAction</a>(string $action)
+        
                                             <p>Action Name Builder</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_convert">convert</a>(string $str, bool $isAction = false)
+        
+                                            <p>String converter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
             </div>
@@ -130,11 +157,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_isMethod">
-        <div class="location">at line 25</div>
+        <div class="location">at         line 25</div>
         <code>        static            boolean
-    <strong>isMethod</strong>(string $method)</code>
+    <strong>isMethod</strong>(string $method)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Method validation</p>                                </div>
                 <div class="tags">
@@ -144,8 +175,7 @@
                     <tr>
                 <td>string</td>
                 <td>$method</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -155,8 +185,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -168,11 +197,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_splitMethod">
-        <div class="location">at line 45</div>
+        <div class="location">at         line 45</div>
         <code>        static            <a href="../../../../jtl/Connector/Core/Rpc/Method.html"><abbr title="jtl\Connector\Core\Rpc\Method">Method</abbr></a>
-    <strong>splitMethod</strong>(string $method)</code>
+    <strong>splitMethod</strong>(string $method)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Controller and Action Splitter</p>                                </div>
                 <div class="tags">
@@ -182,8 +215,7 @@
                     <tr>
                 <td>string</td>
                 <td>$method</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -193,8 +225,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../../jtl/Connector/Core/Rpc/Method.html"><abbr title="jtl\Connector\Core\Rpc\Method">Method</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -206,11 +237,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_buildController">
-        <div class="location">at line 67</div>
+        <div class="location">at         line 67</div>
         <code>        static            string
-    <strong>buildController</strong>(string $controller)</code>
+    <strong>buildController</strong>(string $controller)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Controller Name Builder</p>                                </div>
                 <div class="tags">
@@ -220,8 +255,7 @@
                     <tr>
                 <td>string</td>
                 <td>$controller</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -231,8 +265,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -244,11 +277,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_buildAction">
-        <div class="location">at line 78</div>
+        <div class="location">at         line 78</div>
         <code>        static            string
-    <strong>buildAction</strong>(string $action)</code>
+    <strong>buildAction</strong>(string $action)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Action Name Builder</p>                                </div>
                 <div class="tags">
@@ -258,8 +295,7 @@
                     <tr>
                 <td>string</td>
                 <td>$action</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -269,8 +305,52 @@
                     <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_convert">
+        <div class="location">at         line 90</div>
+        <code>        static    protected        string
+    <strong>convert</strong>(string $str, bool $isAction = false)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>String converter</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$str</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$isAction</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
         </tr>
     </table>
 

@@ -12,6 +12,9 @@
         <script src="../../../js/bootstrap.min.js"></script>
         <script src="../../../js/typeahead.min.js"></script>
         <script src="../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -70,17 +76,69 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>Manager</h1>
+        <h1>
+            Manager
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>Manager</strong>        extends <a href="../../../jtl/Connector/Feature/Base/Base.html"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a></p>
+    <strong>Manager</strong>        extends <a href="../../../jtl/Connector/Feature/Base/Base.html"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Manager class for the feature parser of the famous JTL connector.</p>                    </div>
     
     
     
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property__name">
+                                        protected                                        string
+                </td>
+                <td>$_name</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../jtl/Connector/Feature/Base/Base.html#property__name"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property__classes">
+                                        protected                                        
+                </td>
+                <td>$_classes</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../jtl/Connector/Feature/Base/Base.html#property__classes"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property__methods">
+                                        protected                                        array
+                </td>
+                <td>$_methods</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property__parameters">
+                                        protected                                        array
+                </td>
+                <td>$_parameters</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property__producer">
+                                        protected                                        <abbr title="jtl\Connector\Feature\jtl\Connector\Feature\Producer">Producer</abbr>
+                </td>
+                <td>$_producer</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+            </table>
+
     
             <h2>Methods</h2>
 
@@ -91,6 +149,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getName">getName</a>()
+        
                                             <p>Returns the name.</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Feature/Base/Base.html#method_getName"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a></small></div>
             </div>
@@ -100,6 +159,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setName">setName</a>(string $name)
+        
                                             <p>Sets the name.</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Feature/Base/Base.html#method_setName"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a></small></div>
             </div>
@@ -109,6 +169,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getClasses">getClasses</a>()
+        
                                             <p>Returns all declared classes.</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Feature/Base/Base.html#method_getClasses"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a></small></div>
             </div>
@@ -117,7 +178,8 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___construct">__construct</a>(<abbr title="jtl\Connector\Feature\jtl\Connector\Feature\Producer">Producer</abbr> $producer = null)
+                    <a href="#method___construct">__construct</a>(<a href="../../../jtl/Connector/Feature/Producer.html"><abbr title="jtl\Connector\Feature\Producer">Producer</abbr></a> $producer = null)
+        
                                             <p>Constructor.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -126,7 +188,8 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_setProducer">setProducer</a>(<abbr title="jtl\Connector\Feature\jtl\Connector\Feature\Producer">Producer</abbr> $producer)
+                    <a href="#method_setProducer">setProducer</a>(<a href="../../../jtl/Connector/Feature/Producer.html"><abbr title="jtl\Connector\Feature\Producer">Producer</abbr></a> $producer)
+        
                                             <p>Sets the producer, the base class of this converting manager.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -136,6 +199,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getProducer">getProducer</a>()
+        
                                             <p>Returns the Producer.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -145,6 +209,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getParameters">getParameters</a>()
+        
                                             <p>Returns the parameters that will be extraced during the import/export.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -154,6 +219,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_registerParameter">registerParameter</a>(string $name)
+        
                                             <p>Registers a parameter where the producer will looking for during the
 import/export phase.</p>                </div>
                 <div class="col-md-2"></div>
@@ -164,7 +230,18 @@ import/export phase.</p>                </div>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_registerParameters">registerParameters</a>(array $parameters)
+        
                                             <p>Registers multiple parameters.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_existsParameter">existsParameter</a>(string $name)
+        
+                                            <p>Checks if a parameter already exists and returns the result as boolean.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -173,6 +250,7 @@ import/export phase.</p>                </div>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getMethods">getMethods</a>()
+        
                                             <p>Returns the methods that will be extraced during the import/export.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -182,6 +260,7 @@ import/export phase.</p>                </div>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_registerMethod">registerMethod</a>(string $name)
+        
                                             <p>Registers a method by name where the producer will look for during the
 import/export phase.</p>                </div>
                 <div class="col-md-2"></div>
@@ -192,7 +271,28 @@ import/export phase.</p>                </div>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_registerMethods">registerMethods</a>(array $methods)
+        
                                             <p>Registers multiple methods at once.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_existsMethod">existsMethod</a>(string $name)
+        
+                                            <p>Checks if a method already exists and returns the result as boolean.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_checkProducer">checkProducer</a>(string $type = &#039;Import&#039;)
+        
+                                            <p>Will check if the producer exists.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -200,7 +300,8 @@ import/export phase.</p>                </div>
                     array
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_import">import</a>(<abbr title="jtl\Connector\Feature\jtl\Connector\Feature\Importer\IImporter">IImporter</abbr> $importer)
+                    <a href="#method_import">import</a>(<a href="../../../jtl/Connector/Feature/Importer/IImporter.html"><abbr title="jtl\Connector\Feature\Importer\IImporter">IImporter</abbr></a> $importer)
+        
                                             <p>Starts the importing process in the producer.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -209,7 +310,8 @@ import/export phase.</p>                </div>
                     mixed
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_export">export</a>(<abbr title="jtl\Connector\Feature\jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr> $export)
+                    <a href="#method_export">export</a>(<a href="../../../jtl/Connector/Feature/Exporter/IExporter.html"><abbr title="jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr></a> $export)
+        
                                             <p>Starts the exporting process in the producer.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -218,7 +320,8 @@ import/export phase.</p>                </div>
                     mixed
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_transform">transform</a>(<abbr title="jtl\Connector\Feature\jtl\Connector\Feature\Importer\IImporter">IImporter</abbr> $from, <abbr title="jtl\Connector\Feature\jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr> $to)
+                    <a href="#method_transform">transform</a>(<a href="../../../jtl/Connector/Feature/Importer/IImporter.html"><abbr title="jtl\Connector\Feature\Importer\IImporter">IImporter</abbr></a> $from, <a href="../../../jtl/Connector/Feature/Exporter/IExporter.html"><abbr title="jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr></a> $to)
+        
                                             <p>Will do the import and export in one call.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -230,11 +333,15 @@ import/export phase.</p>                </div>
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_getName">
-        <div class="location">in <a href="../../../jtl/Connector/Feature/Base/Base.html#method_getName"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a> at line 30</div>
+        <div class="location">in <a href="../../../jtl/Connector/Feature/Base/Base.html#method_getName"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a> at         line 30</div>
         <code>final                    string
-    <strong>getName</strong>()</code>
+    <strong>getName</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Returns the name.</p>                                </div>
                 <div class="tags">
@@ -244,8 +351,7 @@ import/export phase.</p>                </div>
                     <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -257,11 +363,15 @@ import/export phase.</p>                </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_setName">
-        <div class="location">in <a href="../../../jtl/Connector/Feature/Base/Base.html#method_setName"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a> at line 41</div>
+        <div class="location">in <a href="../../../jtl/Connector/Feature/Base/Base.html#method_setName"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a> at         line 41</div>
         <code>final                    boolean
-    <strong>setName</strong>(string $name)</code>
+    <strong>setName</strong>(string $name)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Sets the name.</p>                                </div>
                 <div class="tags">
@@ -271,8 +381,7 @@ import/export phase.</p>                </div>
                     <tr>
                 <td>string</td>
                 <td>$name</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -282,8 +391,7 @@ import/export phase.</p>                </div>
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -295,11 +403,15 @@ import/export phase.</p>                </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_getClasses">
-        <div class="location">in <a href="../../../jtl/Connector/Feature/Base/Base.html#method_getClasses"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a> at line 57</div>
+        <div class="location">in <a href="../../../jtl/Connector/Feature/Base/Base.html#method_getClasses"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a> at         line 57</div>
         <code>                    array
-    <strong>getClasses</strong>()</code>
+    <strong>getClasses</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Returns all declared classes.</p>                    <p>We need this way, because the autoloader will try to include the class
 file if we use "class_exists" or similar functions.</p>            </div>
@@ -310,8 +422,7 @@ file if we use "class_exists" or similar functions.</p>            </div>
                     <table class="table table-condensed">
         <tr>
             <td>array</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -323,11 +434,15 @@ file if we use "class_exists" or similar functions.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at line 46</div>
+        <div class="location">at         line 46</div>
         <code>                    
-    <strong>__construct</strong>(<abbr title="jtl\Connector\Feature\jtl\Connector\Feature\Producer">Producer</abbr> $producer = null)</code>
+    <strong>__construct</strong>(<a href="../../../jtl/Connector/Feature/Producer.html"><abbr title="jtl\Connector\Feature\Producer">Producer</abbr></a> $producer = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Constructor.</p>                                </div>
                 <div class="tags">
@@ -335,7 +450,7 @@ file if we use "class_exists" or similar functions.</p>            </div>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Feature\jtl\Connector\Feature\Producer">Producer</abbr></td>
+                <td><a href="../../../jtl/Connector/Feature/Producer.html"><abbr title="jtl\Connector\Feature\Producer">Producer</abbr></a></td>
                 <td>$producer</td>
                 <td>The base class instance
 that is required to import and export our feature.</td>
@@ -351,11 +466,15 @@ that is required to import and export our feature.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setProducer">
-        <div class="location">at line 60</div>
+        <div class="location">at         line 60</div>
         <code>                    
-    <strong>setProducer</strong>(<abbr title="jtl\Connector\Feature\jtl\Connector\Feature\Producer">Producer</abbr> $producer)</code>
+    <strong>setProducer</strong>(<a href="../../../jtl/Connector/Feature/Producer.html"><abbr title="jtl\Connector\Feature\Producer">Producer</abbr></a> $producer)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Sets the producer, the base class of this converting manager.</p>                                </div>
                 <div class="tags">
@@ -363,10 +482,9 @@ that is required to import and export our feature.</td>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Feature\jtl\Connector\Feature\Producer">Producer</abbr></td>
+                <td><a href="../../../jtl/Connector/Feature/Producer.html"><abbr title="jtl\Connector\Feature\Producer">Producer</abbr></a></td>
                 <td>$producer</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -379,11 +497,15 @@ that is required to import and export our feature.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getProducer">
-        <div class="location">at line 71</div>
+        <div class="location">at         line 71</div>
         <code>                    <abbr title="jtl\Connector\Feature\jtl\Connector\Feature\Producer">Producer</abbr>
-    <strong>getProducer</strong>()</code>
+    <strong>getProducer</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Returns the Producer.</p>                                </div>
                 <div class="tags">
@@ -393,8 +515,7 @@ that is required to import and export our feature.</td>
                     <table class="table table-condensed">
         <tr>
             <td><abbr title="jtl\Connector\Feature\jtl\Connector\Feature\Producer">Producer</abbr></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -406,11 +527,15 @@ that is required to import and export our feature.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getParameters">
-        <div class="location">at line 81</div>
+        <div class="location">at         line 81</div>
         <code>                    array
-    <strong>getParameters</strong>()</code>
+    <strong>getParameters</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Returns the parameters that will be extraced during the import/export.</p>                                </div>
                 <div class="tags">
@@ -432,11 +557,15 @@ that is required to import and export our feature.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_registerParameter">
-        <div class="location">at line 94</div>
+        <div class="location">at         line 94</div>
         <code>                    
-    <strong>registerParameter</strong>(string $name)</code>
+    <strong>registerParameter</strong>(string $name)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Registers a parameter where the producer will looking for during the
 import/export phase.</p>                                </div>
@@ -470,11 +599,15 @@ notify the caller of his inconsistency.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_registerParameters">
-        <div class="location">at line 108</div>
+        <div class="location">at         line 108</div>
         <code>                    
-    <strong>registerParameters</strong>(array $parameters)</code>
+    <strong>registerParameters</strong>(array $parameters)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Registers multiple parameters.</p>                                </div>
                 <div class="tags">
@@ -505,12 +638,56 @@ notify the caller of his inconsistency.</td>
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_getMethods">
-        <div class="location">at line 131</div>
-        <code>                    array
-    <strong>getMethods</strong>()</code>
+                    <h3 id="method_existsParameter">
+        <div class="location">at         line 121</div>
+        <code>            protected        bool
+    <strong>existsParameter</strong>(string $name)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Checks if a parameter already exists and returns the result as boolean.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>The parameter name.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td>If the parameter already exists TRUE, otherwhise FALSE.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getMethods">
+        <div class="location">at         line 131</div>
+        <code>                    array
+    <strong>getMethods</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Returns the methods that will be extraced during the import/export.</p>                                </div>
                 <div class="tags">
@@ -520,8 +697,7 @@ notify the caller of his inconsistency.</td>
                     <table class="table table-condensed">
         <tr>
             <td>array</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -533,11 +709,15 @@ notify the caller of his inconsistency.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_registerMethod">
-        <div class="location">at line 144</div>
+        <div class="location">at         line 144</div>
         <code>                    
-    <strong>registerMethod</strong>(string $name)</code>
+    <strong>registerMethod</strong>(string $name)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Registers a method by name where the producer will look for during the
 import/export phase.</p>                                </div>
@@ -571,11 +751,15 @@ the caller about his inconsistency.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_registerMethods">
-        <div class="location">at line 158</div>
+        <div class="location">at         line 158</div>
         <code>                    
-    <strong>registerMethods</strong>(array $methods)</code>
+    <strong>registerMethods</strong>(array $methods)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Registers multiple methods at once.</p>                                </div>
                 <div class="tags">
@@ -606,12 +790,99 @@ the caller about his inconsistency.</td>
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_import">
-        <div class="location">at line 202</div>
-        <code>                    array
-    <strong>import</strong>(<abbr title="jtl\Connector\Feature\jtl\Connector\Feature\Importer\IImporter">IImporter</abbr> $importer)</code>
+                    <h3 id="method_existsMethod">
+        <div class="location">at         line 171</div>
+        <code>            protected        bool
+    <strong>existsMethod</strong>(string $name)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Checks if a method already exists and returns the result as boolean.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>The parameter name.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td>If the parameter already exists TRUE, otherwhise FALSE.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_checkProducer">
+        <div class="location">at         line 186</div>
+        <code>            protected        
+    <strong>checkProducer</strong>(string $type = &#039;Import&#039;)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Will check if the producer exists.</p>                    <p>If there is no producer, we need to inform the caller about his
+inconsistency.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$type</td>
+                <td>The type of process, this should usually be 'Import'
+or 'Export'.</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../jtl/Connector/Feature/Exception/Manager.html"><abbr title="jtl\Connector\Feature\Exception\Manager">Manager</abbr></a></td>
+                <td>If there is no producer, we need to inform the
+caller about his inconsistency.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_import">
+        <div class="location">at         line 202</div>
+        <code>                    array
+    <strong>import</strong>(<a href="../../../jtl/Connector/Feature/Importer/IImporter.html"><abbr title="jtl\Connector\Feature\Importer\IImporter">IImporter</abbr></a> $importer)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Starts the importing process in the producer.</p>                                </div>
                 <div class="tags">
@@ -619,7 +890,7 @@ the caller about his inconsistency.</td>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Feature\jtl\Connector\Feature\Importer\IImporter">IImporter</abbr></td>
+                <td><a href="../../../jtl/Connector/Feature/Importer/IImporter.html"><abbr title="jtl\Connector\Feature\Importer\IImporter">IImporter</abbr></a></td>
                 <td>$importer</td>
                 <td>The importer
 object, that implements the IImporter interface to be conform to this
@@ -645,11 +916,15 @@ manager/producer.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_export">
-        <div class="location">at line 217</div>
+        <div class="location">at         line 217</div>
         <code>                    mixed
-    <strong>export</strong>(<abbr title="jtl\Connector\Feature\jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr> $export)</code>
+    <strong>export</strong>(<a href="../../../jtl/Connector/Feature/Exporter/IExporter.html"><abbr title="jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr></a> $export)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Starts the exporting process in the producer.</p>                                </div>
                 <div class="tags">
@@ -657,7 +932,7 @@ manager/producer.</td>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Feature\jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr></td>
+                <td><a href="../../../jtl/Connector/Feature/Exporter/IExporter.html"><abbr title="jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr></a></td>
                 <td>$export</td>
                 <td>The exporter
 object, that implements the IExporter interface to be conform to this
@@ -683,11 +958,15 @@ manager/producer.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_transform">
-        <div class="location">at line 234</div>
+        <div class="location">at         line 234</div>
         <code>                    mixed
-    <strong>transform</strong>(<abbr title="jtl\Connector\Feature\jtl\Connector\Feature\Importer\IImporter">IImporter</abbr> $from, <abbr title="jtl\Connector\Feature\jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr> $to)</code>
+    <strong>transform</strong>(<a href="../../../jtl/Connector/Feature/Importer/IImporter.html"><abbr title="jtl\Connector\Feature\Importer\IImporter">IImporter</abbr></a> $from, <a href="../../../jtl/Connector/Feature/Exporter/IExporter.html"><abbr title="jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr></a> $to)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Will do the import and export in one call.</p>                                </div>
                 <div class="tags">
@@ -695,14 +974,14 @@ manager/producer.</td>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Feature\jtl\Connector\Feature\Importer\IImporter">IImporter</abbr></td>
+                <td><a href="../../../jtl/Connector/Feature/Importer/IImporter.html"><abbr title="jtl\Connector\Feature\Importer\IImporter">IImporter</abbr></a></td>
                 <td>$from</td>
                 <td>The Importer
 object, that implements the IImporter interface to be conform to this
 manager/producer.</td>
             </tr>
                     <tr>
-                <td><abbr title="jtl\Connector\Feature\jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr></td>
+                <td><a href="../../../jtl/Connector/Feature/Exporter/IExporter.html"><abbr title="jtl\Connector\Feature\Exporter\IExporter">IExporter</abbr></a></td>
                 <td>$to</td>
                 <td>The Exporter
 object, that implements the IExporter interface to be conform to this

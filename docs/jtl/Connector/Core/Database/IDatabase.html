@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,11 +77,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>IDatabase</h1>
+        <h1>
+            IDatabase
+                
+        </h1>
     </div>
 
     <p>    interface
-    <strong>IDatabase</strong></p>
+    <strong>IDatabase</strong>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Database Interface</p>                    </div>
@@ -92,6 +105,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_connect">connect</a>(array $options = null)
+        
                                             <p>Connect to Database</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -101,6 +115,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_close">close</a>()
+        
                                             <p>Disconnect from Database</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -110,6 +125,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_query">query</a>($query)
+        
                                             <p>Database Query</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -119,6 +135,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_isConnected">isConnected</a>()
+        
                                             <p>Database connection state</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -128,6 +145,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_escapeString">escapeString</a>($query)
+        
                                             <p>Returns a string that has been properly escaped</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -139,11 +157,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_connect">
-        <div class="location">at line 19</div>
+        <div class="location">at         line 19</div>
         <code>                    
-    <strong>connect</strong>(array $options = null)</code>
+    <strong>connect</strong>(array $options = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Connect to Database</p>                                </div>
                 <div class="tags">
@@ -153,8 +175,7 @@
                     <tr>
                 <td>array</td>
                 <td>$options</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -167,11 +188,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_close">
-        <div class="location">at line 24</div>
+        <div class="location">at         line 24</div>
         <code>                    
-    <strong>close</strong>()</code>
+    <strong>close</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Disconnect from Database</p>                                </div>
                 <div class="tags">
@@ -184,11 +209,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_query">
-        <div class="location">at line 31</div>
+        <div class="location">at         line 31</div>
         <code>                    
-    <strong>query</strong>($query)</code>
+    <strong>query</strong>($query)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Database Query</p>                                </div>
                 <div class="tags">
@@ -198,8 +227,7 @@
                     <tr>
                 <td></td>
                 <td>$query</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -212,11 +240,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_isConnected">
-        <div class="location">at line 38</div>
+        <div class="location">at         line 38</div>
         <code>                    bool
-    <strong>isConnected</strong>()</code>
+    <strong>isConnected</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Database connection state</p>                                </div>
                 <div class="tags">
@@ -238,11 +270,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_escapeString">
-        <div class="location">at line 45</div>
+        <div class="location">at         line 45</div>
         <code>                    string
-    <strong>escapeString</strong>($query)</code>
+    <strong>escapeString</strong>($query)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Returns a string that has been properly escaped</p>                                </div>
                 <div class="tags">
@@ -252,8 +288,7 @@
                     <tr>
                 <td></td>
                 <td>$query</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -263,8 +298,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 

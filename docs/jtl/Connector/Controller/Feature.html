@@ -12,6 +12,9 @@
         <script src="../../../js/bootstrap.min.js"></script>
         <script src="../../../js/typeahead.min.js"></script>
         <script src="../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -70,17 +76,45 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>Feature</h1>
+        <h1>
+            Feature
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>Feature</strong>        extends <a href="../../../jtl/Connector/Core/Controller/Controller.html"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a></p>
+    <strong>Feature</strong>        extends <a href="../../../jtl/Connector/Core/Controller/Controller.html"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Base Features Controller</p>                    </div>
     
     
     
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property__instances">
+                    static                    protected                                        <abbr title="jtl\Connector\Core\Utilities\multiple:">multiple:</abbr>
+                </td>
+                <td>$_instances</td>
+                <td class="last">Array of \jtl\Connector\Core\Utilities\Singleton Objects</td>
+                <td><small>from&nbsp;<a href="../../../jtl/Connector/Core/Utilities/Singleton.html#property__instances"><abbr title="jtl\Connector\Core\Utilities\Singleton">Singleton</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property__method">
+                                        protected                                        
+                </td>
+                <td>$_method</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../jtl/Connector/Core/Controller/Controller.html#property__method"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a></small></td>
+            </tr>
+            </table>
+
     
             <h2>Methods</h2>
 
@@ -91,16 +125,38 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getInstance">getInstance</a>()
+        
                                             <p>Basic Singleton implementation</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Utilities/Singleton.html#method_getInstance"><abbr title="jtl\Connector\Core\Utilities\Singleton">Singleton</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>()
+        
+                                            <p>Basic Constructor</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Utilities/Singleton.html#method___construct"><abbr title="jtl\Connector\Core\Utilities\Singleton">Singleton</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___clone">__clone</a>()
+        
+                                            <p>Clone Method</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Utilities/Singleton.html#method___clone"><abbr title="jtl\Connector\Core\Utilities\Singleton">Singleton</abbr></a></small></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
                     <a href="../../../jtl/Connector/Result/Action.html"><abbr title="jtl\Connector\Result\Action">Action</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_push">push</a>(<abbr title="jtl\Connector\Core\Controller\jtl\Connector\Core\Model\DataModel">DataModel</abbr> $model)
-                                            <p>Insert or update</p>                </div>
+                    <a href="#method_push">push</a>(<a href="../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> $model)
+        
+                                            <p>(non-PHPdoc)</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Controller/Controller.html#method_push"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a></small></div>
             </div>
                     <div class="row">
@@ -109,7 +165,8 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_pull">pull</a>(mixed $params = null)
-                                            <p>Select</p>                </div>
+        
+                                            <p>Returns what this connector is supporting.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -117,8 +174,9 @@
                     <a href="../../../jtl/Connector/Result/Action.html"><abbr title="jtl\Connector\Result\Action">Action</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_delete">delete</a>(<abbr title="jtl\Connector\Core\Controller\jtl\Connector\Core\Model\DataModel">DataModel</abbr> $model)
-                                            <p>Delete</p>                </div>
+                    <a href="#method_delete">delete</a>(<a href="../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> $model)
+        
+                                            <p>(non-PHPdoc)</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Controller/Controller.html#method_delete"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a></small></div>
             </div>
                     <div class="row">
@@ -126,34 +184,18 @@
                     <a href="../../../jtl/Connector/Result/Action.html"><abbr title="jtl\Connector\Result\Action">Action</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_statistic">statistic</a>(<abbr title="jtl\Connector\Core\Controller\jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr> $queryFilter)
-                                            <p>Statistic</p>                </div>
+                    <a href="#method_statistic">statistic</a>(<a href="../../../jtl/Connector/Core/Model/QueryFilter.html"><abbr title="jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></a> $queryFilter)
+        
+                                            <p>(non-PHPdoc)</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Controller/Controller.html#method_statistic"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_setConfig">setConfig</a>(<abbr title="jtl\Connector\Core\Controller\jtl\Connector\Core\Config\Config">Config</abbr> $config)
-                                            <p>Setter controller config.</p>                </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Controller/Controller.html#method_setConfig"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    object
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_getConfig">getConfig</a>()
-                                            <p>Returns the config.</p>                </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Controller/Controller.html#method_getConfig"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a></small></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
                     <a href="../../../jtl/Connector/Core/Controller/Controller.html"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_setMethod">setMethod</a>(<abbr title="jtl\Connector\Core\Controller\jtl\Connector\Core\Rpc\Method">Method</abbr> $method)
+                    <a href="#method_setMethod">setMethod</a>(<a href="../../../jtl/Connector/Core/Rpc/Method.html"><abbr title="jtl\Connector\Core\Rpc\Method">Method</abbr></a> $method)
+        
                                             <p>Method Setter</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Controller/Controller.html#method_setMethod"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a></small></div>
             </div>
@@ -163,6 +205,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getMethod">getMethod</a>()
+        
                                             <p>Method Getter</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Controller/Controller.html#method_getMethod"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a></small></div>
             </div>
@@ -174,11 +217,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_getInstance">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Utilities/Singleton.html#method_getInstance"><abbr title="jtl\Connector\Core\Utilities\Singleton">Singleton</abbr></a> at line 29</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Utilities/Singleton.html#method_getInstance"><abbr title="jtl\Connector\Core\Utilities\Singleton">Singleton</abbr></a> at         line 29</div>
         <code>        static            <abbr title="jtl\Connector\Core\Utilities\Singleton:">Singleton:</abbr>
-    <strong>getInstance</strong>()</code>
+    <strong>getInstance</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Basic Singleton implementation</p>                                </div>
                 <div class="tags">
@@ -188,8 +235,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><abbr title="jtl\Connector\Core\Utilities\Singleton:">Singleton:</abbr></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -200,23 +246,68 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_push">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Controller/Controller.html#method_push"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a> at line 32</div>
-        <code>                    <a href="../../../jtl/Connector/Result/Action.html"><abbr title="jtl\Connector\Result\Action">Action</abbr></a>
-    <strong>push</strong>(<abbr title="jtl\Connector\Core\Controller\jtl\Connector\Core\Model\DataModel">DataModel</abbr> $model)</code>
+                    <h3 id="method___construct">
+        <div class="location">in <a href="../../../jtl/Connector/Core/Utilities/Singleton.html#method___construct"><abbr title="jtl\Connector\Core\Utilities\Singleton">Singleton</abbr></a> at         line 42</div>
+        <code>            protected        
+    <strong>__construct</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
-                                    <p>Insert or update</p>                                </div>
+                                    <p>Basic Constructor</p>                                </div>
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___clone">
+        <div class="location">in <a href="../../../jtl/Connector/Core/Utilities/Singleton.html#method___clone"><abbr title="jtl\Connector\Core\Utilities\Singleton">Singleton</abbr></a> at         line 49</div>
+        <code>final            protected        
+    <strong>__clone</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Clone Method</p>                                </div>
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_push">
+        <div class="location">in <a href="../../../jtl/Connector/Core/Controller/Controller.html#method_push"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a> at         line 31</div>
+        <code>                    <a href="../../../jtl/Connector/Result/Action.html"><abbr title="jtl\Connector\Result\Action">Action</abbr></a>
+    <strong>push</strong>(<a href="../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> $model)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>(non-PHPdoc)</p>                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Controller\jtl\Connector\Core\Model\DataModel">DataModel</abbr></td>
+                <td><a href="../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a></td>
                 <td>$model</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -226,8 +317,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Result/Action.html"><abbr title="jtl\Connector\Result\Action">Action</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -248,13 +338,17 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_pull">
-        <div class="location">at line 33</div>
+        <div class="location">at         line 33</div>
         <code>                    <a href="../../../jtl/Connector/Result/Action.html"><abbr title="jtl\Connector\Result\Action">Action</abbr></a>
-    <strong>pull</strong>(mixed $params = null)</code>
+    <strong>pull</strong>(mixed $params = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
-                                    <p>Select</p>                                </div>
+                                    <p>Returns what this connector is supporting.</p>                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -272,8 +366,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Result/Action.html"><abbr title="jtl\Connector\Result\Action">Action</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -285,22 +378,25 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_delete">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Controller/Controller.html#method_delete"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a> at line 50</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Controller/Controller.html#method_delete"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a> at         line 49</div>
         <code>                    <a href="../../../jtl/Connector/Result/Action.html"><abbr title="jtl\Connector\Result\Action">Action</abbr></a>
-    <strong>delete</strong>(<abbr title="jtl\Connector\Core\Controller\jtl\Connector\Core\Model\DataModel">DataModel</abbr> $model)</code>
+    <strong>delete</strong>(<a href="../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> $model)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
-                                    <p>Delete</p>                                </div>
+                                    <p>(non-PHPdoc)</p>                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Controller\jtl\Connector\Core\Model\DataModel">DataModel</abbr></td>
+                <td><a href="../../../jtl/Connector/Core/Model/DataModel.html"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a></td>
                 <td>$model</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -310,8 +406,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Result/Action.html"><abbr title="jtl\Connector\Result\Action">Action</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -332,22 +427,25 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_statistic">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Controller/Controller.html#method_statistic"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a> at line 59</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Controller/Controller.html#method_statistic"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a> at         line 58</div>
         <code>                    <a href="../../../jtl/Connector/Result/Action.html"><abbr title="jtl\Connector\Result\Action">Action</abbr></a>
-    <strong>statistic</strong>(<abbr title="jtl\Connector\Core\Controller\jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr> $queryFilter)</code>
+    <strong>statistic</strong>(<a href="../../../jtl/Connector/Core/Model/QueryFilter.html"><abbr title="jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></a> $queryFilter)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
-                                    <p>Statistic</p>                                </div>
+                                    <p>(non-PHPdoc)</p>                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Controller\jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></td>
+                <td><a href="../../../jtl/Connector/Core/Model/QueryFilter.html"><abbr title="jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></a></td>
                 <td>$queryFilter</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -357,8 +455,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Result/Action.html"><abbr title="jtl\Connector\Result\Action">Action</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -378,77 +475,16 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_setConfig">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Controller/Controller.html#method_setConfig"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a> at line 69</div>
-        <code>                    
-    <strong>setConfig</strong>(<abbr title="jtl\Connector\Core\Controller\jtl\Connector\Core\Config\Config">Config</abbr> $config)</code>
-    </h3>
-    <div class="details">
-                    <div class="method-description">
-                                    <p>Setter controller config.</p>                                </div>
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td><abbr title="jtl\Connector\Core\Controller\jtl\Connector\Core\Config\Config">Config</abbr></td>
-                <td>$config</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_getConfig">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Controller/Controller.html#method_getConfig"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a> at line 81</div>
-        <code>                    object
-    <strong>getConfig</strong>()</code>
-    </h3>
-    <div class="details">
-                    <div class="method-description">
-                                    <p>Returns the config.</p>                                </div>
-                <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>object</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-                            <h4>Exceptions</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td><a href="../../../jtl/Connector/Core/Exception/ControllerException.html"><abbr title="jtl\Connector\Core\Exception\ControllerException">ControllerException</abbr></a></td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
                     <h3 id="method_setMethod">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Controller/Controller.html#method_setMethod"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a> at line 95</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Controller/Controller.html#method_setMethod"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a> at         line 69</div>
         <code>                    <a href="../../../jtl/Connector/Core/Controller/Controller.html"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a>
-    <strong>setMethod</strong>(<abbr title="jtl\Connector\Core\Controller\jtl\Connector\Core\Rpc\Method">Method</abbr> $method)</code>
+    <strong>setMethod</strong>(<a href="../../../jtl/Connector/Core/Rpc/Method.html"><abbr title="jtl\Connector\Core\Rpc\Method">Method</abbr></a> $method)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Method Setter</p>                                </div>
                 <div class="tags">
@@ -456,10 +492,9 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Controller\jtl\Connector\Core\Rpc\Method">Method</abbr></td>
+                <td><a href="../../../jtl/Connector/Core/Rpc/Method.html"><abbr title="jtl\Connector\Core\Rpc\Method">Method</abbr></a></td>
                 <td>$method</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -469,8 +504,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Core/Controller/Controller.html"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -482,11 +516,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getMethod">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Controller/Controller.html#method_getMethod"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a> at line 106</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Controller/Controller.html#method_getMethod"><abbr title="jtl\Connector\Core\Controller\Controller">Controller</abbr></a> at         line 80</div>
         <code>                    <a href="../../../jtl/Connector/Core/Rpc/Method.html"><abbr title="jtl\Connector\Core\Rpc\Method">Method</abbr></a>
-    <strong>getMethod</strong>()</code>
+    <strong>getMethod</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Method Getter</p>                                </div>
                 <div class="tags">
@@ -496,8 +534,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Core/Rpc/Method.html"><abbr title="jtl\Connector\Core\Rpc\Method">Method</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 

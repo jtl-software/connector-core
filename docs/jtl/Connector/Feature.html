@@ -12,6 +12,9 @@
         <script src="../../js/bootstrap.min.js"></script>
         <script src="../../js/typeahead.min.js"></script>
         <script src="../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -77,22 +83,24 @@
             <a href="../../jtl/Connector/Feature/Base.html">jtl\Connector\Feature\Base</a><a href="../../jtl/Connector/Feature/Exception.html">jtl\Connector\Feature\Exception</a><a href="../../jtl/Connector/Feature/Exporter.html">jtl\Connector\Feature\Exporter</a><a href="../../jtl/Connector/Feature/Feature.html">jtl\Connector\Feature\Feature</a><a href="../../jtl/Connector/Feature/Group.html">jtl\Connector\Feature\Group</a><a href="../../jtl/Connector/Feature/Importer.html">jtl\Connector\Feature\Importer</a><a href="../../jtl/Connector/Feature/Method.html">jtl\Connector\Feature\Method</a>        </div>
     
             <h2>Classes</h2>
-        <div class="container-fluid underlined">
+        
+    <div class="container-fluid underlined">
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../jtl/Connector/Feature/Manager.html"><abbr title="jtl\Connector\Feature\Manager">jtl\Connector\Feature\Manager</abbr></a>
-                                    </div>
+                                            <a href="../../jtl/Connector/Feature/Manager.html"><abbr title="jtl\Connector\Feature\Manager">Manager</abbr></a>
+                                            
+                </div>
                 <div class="col-md-6">
                     Manager class for the feature parser of the famous JTL connector.
                 </div>
             </div>
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../jtl/Connector/Feature/Producer.html"><abbr title="jtl\Connector\Feature\Producer">jtl\Connector\Feature\Producer</abbr></a>
-                                    </div>
+                                            <a href="../../jtl/Connector/Feature/Producer.html"><abbr title="jtl\Connector\Feature\Producer">Producer</abbr></a>
+                                            
+                </div>
                 <div class="col-md-6">
                     
-
                 </div>
             </div>
             </div>

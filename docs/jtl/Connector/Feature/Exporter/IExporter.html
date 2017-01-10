@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,11 +77,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>IExporter</h1>
+        <h1>
+            IExporter
+                
+        </h1>
     </div>
 
     <p>    interface
-    <strong>IExporter</strong></p>
+    <strong>IExporter</strong>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Export interface</p>                    </div>
@@ -92,6 +105,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_export">export</a>(array $array)
+        
                                             <p>Should export the given array into the specified Format.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -103,11 +117,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_export">
-        <div class="location">at line 23</div>
+        <div class="location">at         line 23</div>
         <code>                    
-    <strong>export</strong>(array $array)</code>
+    <strong>export</strong>(array $array)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Should export the given array into the specified Format.</p>                                </div>
                 <div class="tags">

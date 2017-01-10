@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,11 +77,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>ILogger</h1>
+        <h1>
+            ILogger
+                
+        </h1>
     </div>
 
     <p>    interface
-    <strong>ILogger</strong></p>
+    <strong>ILogger</strong>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Abstract logger interface</p>                    </div>
@@ -87,37 +100,29 @@
                     <tr>
                 <td>DEBUG</td>
                 <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
                     <tr>
                 <td>INFO</td>
                 <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
                     <tr>
                 <td>WARNING</td>
                 <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
                     <tr>
                 <td>ERROR</td>
                 <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
             </table>
@@ -133,6 +138,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_log">log</a>($message, $level = ILogger::ERROR, $module = &#039;General&#039;)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -143,6 +149,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getLogEntries">getLogEntries</a>($maxLevel = ILogger::WARNING, $since = null, $module = null)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -153,6 +160,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_clearLog">clearLog</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -165,11 +173,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_log">
-        <div class="location">at line 22</div>
+        <div class="location">at         line 22</div>
         <code>        static            
-    <strong>log</strong>($message, $level = ILogger::ERROR, $module = &#039;General&#039;)</code>
+    <strong>log</strong>($message, $level = ILogger::ERROR, $module = &#039;General&#039;)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -177,20 +189,17 @@
                     <tr>
                 <td></td>
                 <td>$message</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td></td>
                 <td>$level</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td></td>
                 <td>$module</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -203,11 +212,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getLogEntries">
-        <div class="location">at line 23</div>
+        <div class="location">at         line 23</div>
         <code>        static            
-    <strong>getLogEntries</strong>($maxLevel = ILogger::WARNING, $since = null, $module = null)</code>
+    <strong>getLogEntries</strong>($maxLevel = ILogger::WARNING, $since = null, $module = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -215,20 +228,17 @@
                     <tr>
                 <td></td>
                 <td>$maxLevel</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td></td>
                 <td>$since</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td></td>
                 <td>$module</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -241,11 +251,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_clearLog">
-        <div class="location">at line 24</div>
+        <div class="location">at         line 24</div>
         <code>        static            
-    <strong>clearLog</strong>()</code>
+    <strong>clearLog</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
             

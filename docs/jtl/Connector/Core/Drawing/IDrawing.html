@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,11 +77,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>IDrawing</h1>
+        <h1>
+            IDrawing
+                
+        </h1>
     </div>
 
     <p>    interface
-    <strong>IDrawing</strong></p>
+    <strong>IDrawing</strong>
+</p>
+
+        
+    
 
     
     
@@ -90,6 +103,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_resize">resize</a>(int $width, int $height, boolean $useContainer = false, string $backgroundColor = null, int $quality = 80)
+        
                                             <p>Image Resizing</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -99,6 +113,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_watermark">watermark</a>(string $filepath, int $position, int $percent = 30, float $opacity = 1.0, int $padding)
+        
                                             <p>Image Watermarking</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -108,6 +123,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_save">save</a>(string $newFilepath)
+        
                                             <p>Image Saving</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -117,6 +133,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_destroy">destroy</a>()
+        
                                             <p>Image Destroying</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -128,11 +145,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_resize">
-        <div class="location">at line 20</div>
+        <div class="location">at         line 20</div>
         <code>                    
-    <strong>resize</strong>(int $width, int $height, boolean $useContainer = false, string $backgroundColor = null, int $quality = 80)</code>
+    <strong>resize</strong>(int $width, int $height, boolean $useContainer = false, string $backgroundColor = null, int $quality = 80)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Image Resizing</p>                                </div>
                 <div class="tags">
@@ -142,32 +163,27 @@
                     <tr>
                 <td>int</td>
                 <td>$width</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>int</td>
                 <td>$height</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>boolean</td>
                 <td>$useContainer</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>string</td>
                 <td>$backgroundColor</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>int</td>
                 <td>$quality</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -180,11 +196,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_watermark">
-        <div class="location">at line 31</div>
+        <div class="location">at         line 31</div>
         <code>                    
-    <strong>watermark</strong>(string $filepath, int $position, int $percent = 30, float $opacity = 1.0, int $padding)</code>
+    <strong>watermark</strong>(string $filepath, int $position, int $percent = 30, float $opacity = 1.0, int $padding)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Image Watermarking</p>                                </div>
                 <div class="tags">
@@ -194,32 +214,27 @@
                     <tr>
                 <td>string</td>
                 <td>$filepath</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>int</td>
                 <td>$position</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>int</td>
                 <td>$percent</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>float</td>
                 <td>$opacity</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>int</td>
                 <td>$padding</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -232,11 +247,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_save">
-        <div class="location">at line 38</div>
+        <div class="location">at         line 38</div>
         <code>                    
-    <strong>save</strong>(string $newFilepath)</code>
+    <strong>save</strong>(string $newFilepath)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Image Saving</p>                                </div>
                 <div class="tags">
@@ -246,8 +265,7 @@
                     <tr>
                 <td>string</td>
                 <td>$newFilepath</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -260,11 +278,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_destroy">
-        <div class="location">at line 43</div>
+        <div class="location">at         line 43</div>
         <code>                    
-    <strong>destroy</strong>()</code>
+    <strong>destroy</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Image Destroying</p>                                </div>
                 <div class="tags">

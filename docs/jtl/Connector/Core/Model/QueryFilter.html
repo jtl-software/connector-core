@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,11 +77,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>QueryFilter</h1>
+        <h1>
+            QueryFilter
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>QueryFilter</strong></p>
+    <strong>QueryFilter</strong>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Database Query Filter</p>                    </div>
@@ -87,33 +100,48 @@
                     <tr>
                 <td>FILTER_FETCH_CHILDREN</td>
                 <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
                     <tr>
                 <td>FILTER_PARENT_ID</td>
                 <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
                     <tr>
                 <td>FILTER_RELATION_TYPE</td>
                 <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
             </table>
 
     
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_limit">
+                                        protected                                        integer
+                </td>
+                <td>$limit</td>
+                <td class="last">Query item count limitation</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_filters">
+                                        protected                                        <abbr title="jtl\Connector\Core\Model\multiple:">multiple:</abbr>
+                </td>
+                <td>$filters</td>
+                <td class="last">Query item filter (where)</td>
+                <td></td>
+            </tr>
+            </table>
+
     
             <h2>Methods</h2>
 
@@ -124,6 +152,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method___construct">__construct</a>($limit = null)
+        
                                             <p>Constructor</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -133,6 +162,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setLimit">setLimit</a>(integer $limit)
+        
                                             <p>Limit Setter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -142,6 +172,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getLimit">getLimit</a>()
+        
                                             <p>Limit Getter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -151,6 +182,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_isLimit">isLimit</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -161,6 +193,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setFilters">setFilters</a>(array $filters)
+        
                                             <p>Filters Setter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -170,6 +203,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getFilters">getFilters</a>()
+        
                                             <p>Filters Getter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -179,6 +213,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_addFilter">addFilter</a>(string $key, string $value)
+        
                                             <p>Add one Filter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -188,6 +223,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_deleteFilter">deleteFilter</a>(string $key)
+        
                                             <p>Delete one Filter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -197,6 +233,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_isFilter">isFilter</a>(string $key)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -207,6 +244,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getFilter">getFilter</a>(string $key)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -217,6 +255,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_overrideFilter">overrideFilter</a>(string $oldKey, string $newKey, mixed $value = null)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -226,7 +265,8 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_set">set</a>(<abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr> $obj)
+                    <a href="#method_set">set</a>(<a target="_blank" href="http://php.net/stdClass">stdClass</a> $obj)
+        
                                             <p>Setter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -238,11 +278,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at line 45</div>
+        <div class="location">at         line 45</div>
         <code>                    
-    <strong>__construct</strong>($limit = null)</code>
+    <strong>__construct</strong>($limit = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Constructor</p>                                </div>
                 <div class="tags">
@@ -252,8 +296,7 @@
                     <tr>
                 <td></td>
                 <td>$limit</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -266,11 +309,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setLimit">
-        <div class="location">at line 60</div>
+        <div class="location">at         line 60</div>
         <code>                    <abbr title="jtl\Connector\Model\QueryFilter">QueryFilter</abbr>
-    <strong>setLimit</strong>(integer $limit)</code>
+    <strong>setLimit</strong>(integer $limit)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Limit Setter</p>                                </div>
                 <div class="tags">
@@ -280,8 +327,7 @@
                     <tr>
                 <td>integer</td>
                 <td>$limit</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -291,8 +337,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><abbr title="jtl\Connector\Model\QueryFilter">QueryFilter</abbr></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -304,11 +349,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getLimit">
-        <div class="location">at line 71</div>
+        <div class="location">at         line 71</div>
         <code>                    integer
-    <strong>getLimit</strong>()</code>
+    <strong>getLimit</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Limit Getter</p>                                </div>
                 <div class="tags">
@@ -318,8 +367,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>integer</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -331,11 +379,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_isLimit">
-        <div class="location">at line 79</div>
+        <div class="location">at         line 79</div>
         <code>                    bool
-    <strong>isLimit</strong>()</code>
+    <strong>isLimit</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -343,8 +395,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>bool</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -356,11 +407,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setFilters">
-        <div class="location">at line 90</div>
+        <div class="location">at         line 90</div>
         <code>                    <abbr title="jtl\Connector\Model\QueryFilter">QueryFilter</abbr>
-    <strong>setFilters</strong>(array $filters)</code>
+    <strong>setFilters</strong>(array $filters)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Filters Setter</p>                                </div>
                 <div class="tags">
@@ -380,8 +435,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><abbr title="jtl\Connector\Model\QueryFilter">QueryFilter</abbr></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -393,11 +447,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getFilters">
-        <div class="location">at line 101</div>
+        <div class="location">at         line 101</div>
         <code>                    <abbr title="jtl\Connector\Core\Model\multiple:">multiple:</abbr>
-    <strong>getFilters</strong>()</code>
+    <strong>getFilters</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Filters Getter</p>                                </div>
                 <div class="tags">
@@ -419,11 +477,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_addFilter">
-        <div class="location">at line 113</div>
+        <div class="location">at         line 113</div>
         <code>                    <a href="../../../../jtl/Connector/Core/Model/QueryFilter.html"><abbr title="jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></a>
-    <strong>addFilter</strong>(string $key, string $value)</code>
+    <strong>addFilter</strong>(string $key, string $value)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Add one Filter</p>                                </div>
                 <div class="tags">
@@ -448,8 +510,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../../jtl/Connector/Core/Model/QueryFilter.html"><abbr title="jtl\Connector\Core\Model\QueryFilter">QueryFilter</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -461,11 +522,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_deleteFilter">
-        <div class="location">at line 129</div>
+        <div class="location">at         line 129</div>
         <code>                    boolean
-    <strong>deleteFilter</strong>(string $key)</code>
+    <strong>deleteFilter</strong>(string $key)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Delete one Filter</p>                                </div>
                 <div class="tags">
@@ -475,8 +540,7 @@
                     <tr>
                 <td>string</td>
                 <td>$key</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -486,8 +550,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -499,11 +562,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_isFilter">
-        <div class="location">at line 145</div>
+        <div class="location">at         line 145</div>
         <code>                    boolean
-    <strong>isFilter</strong>(string $key)</code>
+    <strong>isFilter</strong>(string $key)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -511,8 +578,7 @@
                     <tr>
                 <td>string</td>
                 <td>$key</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -522,8 +588,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -535,11 +600,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getFilter">
-        <div class="location">at line 155</div>
+        <div class="location">at         line 155</div>
         <code>                    mixed|NULL
-    <strong>getFilter</strong>(string $key)</code>
+    <strong>getFilter</strong>(string $key)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -547,8 +616,7 @@
                     <tr>
                 <td>string</td>
                 <td>$key</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -558,8 +626,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>mixed|NULL</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -571,11 +638,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_overrideFilter">
-        <div class="location">at line 171</div>
+        <div class="location">at         line 171</div>
         <code>                    boolean
-    <strong>overrideFilter</strong>(string $oldKey, string $newKey, mixed $value = null)</code>
+    <strong>overrideFilter</strong>(string $oldKey, string $newKey, mixed $value = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -583,20 +654,17 @@
                     <tr>
                 <td>string</td>
                 <td>$oldKey</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>string</td>
                 <td>$newKey</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>mixed</td>
                 <td>$value</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -606,8 +674,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -619,11 +686,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_set">
-        <div class="location">at line 192</div>
+        <div class="location">at         line 192</div>
         <code>                    
-    <strong>set</strong>(<abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr> $obj)</code>
+    <strong>set</strong>(<a target="_blank" href="http://php.net/stdClass">stdClass</a> $obj)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Setter</p>                                </div>
                 <div class="tags">
@@ -631,10 +702,9 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr></td>
+                <td><a target="_blank" href="http://php.net/stdClass">stdClass</a></td>
                 <td>$obj</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 

@@ -12,6 +12,9 @@
         <script src="../../../js/bootstrap.min.js"></script>
         <script src="../../../js/typeahead.min.js"></script>
         <script src="../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -70,17 +76,77 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>PropertyInfo</h1>
+        <h1>
+            PropertyInfo
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>PropertyInfo</strong></p>
+    <strong>PropertyInfo</strong>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Entity data model</p>                    </div>
     
     
     
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_name">
+                                        protected                                        string
+                </td>
+                <td>$name</td>
+                <td class="last">Property name</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_type">
+                                        protected                                        string
+                </td>
+                <td>$type</td>
+                <td class="last">Property type</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_defaultValue">
+                                        protected                                        string
+                </td>
+                <td>$defaultValue</td>
+                <td class="last">Property default value</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_isPrimary">
+                                        protected                                        boolean
+                </td>
+                <td>$isPrimary</td>
+                <td class="last">Property primary status</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_isIdentity">
+                                        protected                                        boolean
+                </td>
+                <td>$isIdentity</td>
+                <td class="last">Property identity status</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_isNavigation">
+                                        protected                                        boolean
+                </td>
+                <td>$isNavigation</td>
+                <td class="last">Property navigation status</td>
+                <td></td>
+            </tr>
+            </table>
+
     
             <h2>Methods</h2>
 
@@ -91,6 +157,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method___construct">__construct</a>(string $name, string $type, string $defaultValue, boolean $isPrimary, boolean $isIdentity, boolean $isNavigation)
+        
                                             <p>Class Constructor</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -100,6 +167,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getName">getName</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -110,6 +178,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getType">getType</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -120,6 +189,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getDefaultValue">getDefaultValue</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -130,6 +200,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_isPrimary">isPrimary</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -140,6 +211,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_isIdentity">isIdentity</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -150,6 +222,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_isNavigation">isNavigation</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -162,11 +235,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at line 63</div>
+        <div class="location">at         line 63</div>
         <code>                    
-    <strong>__construct</strong>(string $name, string $type, string $defaultValue, boolean $isPrimary, boolean $isIdentity, boolean $isNavigation)</code>
+    <strong>__construct</strong>(string $name, string $type, string $defaultValue, boolean $isPrimary, boolean $isIdentity, boolean $isNavigation)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Class Constructor</p>                                </div>
                 <div class="tags">
@@ -176,38 +253,32 @@
                     <tr>
                 <td>string</td>
                 <td>$name</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>string</td>
                 <td>$type</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>string</td>
                 <td>$defaultValue</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>boolean</td>
                 <td>$isPrimary</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>boolean</td>
                 <td>$isIdentity</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>boolean</td>
                 <td>$isNavigation</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -220,11 +291,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getName">
-        <div class="location">at line 76</div>
+        <div class="location">at         line 76</div>
         <code>                    string
-    <strong>getName</strong>()</code>
+    <strong>getName</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -232,8 +307,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -245,11 +319,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getType">
-        <div class="location">at line 84</div>
+        <div class="location">at         line 84</div>
         <code>                    string
-    <strong>getType</strong>()</code>
+    <strong>getType</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -257,8 +335,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -270,11 +347,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getDefaultValue">
-        <div class="location">at line 92</div>
+        <div class="location">at         line 92</div>
         <code>                    string
-    <strong>getDefaultValue</strong>()</code>
+    <strong>getDefaultValue</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -282,8 +363,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -295,11 +375,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_isPrimary">
-        <div class="location">at line 100</div>
+        <div class="location">at         line 100</div>
         <code>                    boolean
-    <strong>isPrimary</strong>()</code>
+    <strong>isPrimary</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -307,8 +391,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -320,11 +403,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_isIdentity">
-        <div class="location">at line 108</div>
+        <div class="location">at         line 108</div>
         <code>                    boolean
-    <strong>isIdentity</strong>()</code>
+    <strong>isIdentity</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -332,8 +419,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -345,11 +431,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_isNavigation">
-        <div class="location">at line 116</div>
+        <div class="location">at         line 116</div>
         <code>                    boolean
-    <strong>isNavigation</strong>()</code>
+    <strong>isNavigation</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -357,8 +447,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
