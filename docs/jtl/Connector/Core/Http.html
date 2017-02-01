@@ -12,6 +12,9 @@
         <script src="../../../js/bootstrap.min.js"></script>
         <script src="../../../js/typeahead.min.js"></script>
         <script src="../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -75,27 +81,31 @@
 
     
             <h2>Classes</h2>
-        <div class="container-fluid underlined">
+        
+    <div class="container-fluid underlined">
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../../jtl/Connector/Core/Http/Request.html"><abbr title="jtl\Connector\Core\Http\Request">jtl\Connector\Core\Http\Request</abbr></a>
-                                    </div>
+                                            <a href="../../../jtl/Connector/Core/Http/Request.html"><abbr title="jtl\Connector\Core\Http\Request">Request</abbr></a>
+                                            
+                </div>
                 <div class="col-md-6">
                     Http Request Handler
                 </div>
             </div>
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../../jtl/Connector/Core/Http/Response.html"><abbr title="jtl\Connector\Core\Http\Response">jtl\Connector\Core\Http\Response</abbr></a>
-                                    </div>
+                                            <a href="../../../jtl/Connector/Core/Http/Response.html"><abbr title="jtl\Connector\Core\Http\Response">Response</abbr></a>
+                                            
+                </div>
                 <div class="col-md-6">
                     Http Response Handler
                 </div>
             </div>
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../../jtl/Connector/Core/Http/Ssl.html"><abbr title="jtl\Connector\Core\Http\Ssl">jtl\Connector\Core\Http\Ssl</abbr></a>
-                                    </div>
+                                            <a href="../../../jtl/Connector/Core/Http/Ssl.html"><abbr title="jtl\Connector\Core\Http\Ssl">Ssl</abbr></a>
+                                            
+                </div>
                 <div class="col-md-6">
                     Http SSL class that can return specific information.
                 </div>

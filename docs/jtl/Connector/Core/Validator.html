@@ -12,6 +12,9 @@
         <script src="../../../js/bootstrap.min.js"></script>
         <script src="../../../js/typeahead.min.js"></script>
         <script src="../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -75,27 +81,31 @@
 
     
             <h2>Classes</h2>
-        <div class="container-fluid underlined">
+        
+    <div class="container-fluid underlined">
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../../jtl/Connector/Core/Validator/Json.html"><abbr title="jtl\Connector\Core\Validator\Json">jtl\Connector\Core\Validator\Json</abbr></a>
-                                    </div>
+                                            <a href="../../../jtl/Connector/Core/Validator/Json.html"><abbr title="jtl\Connector\Core\Validator\Json">Json</abbr></a>
+                                            
+                </div>
                 <div class="col-md-6">
                     JSON Schema Validator
                 </div>
             </div>
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../../jtl/Connector/Core/Validator/Model.html"><abbr title="jtl\Connector\Core\Validator\Model">jtl\Connector\Core\Validator\Model</abbr></a>
-                                    </div>
+                                            <a href="../../../jtl/Connector/Core/Validator/Model.html"><abbr title="jtl\Connector\Core\Validator\Model">Model</abbr></a>
+                                            
+                </div>
                 <div class="col-md-6">
                     Global Model
                 </div>
             </div>
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../../jtl/Connector/Core/Validator/Schema.html"><abbr title="jtl\Connector\Core\Validator\Schema">jtl\Connector\Core\Validator\Schema</abbr></a>
-                                    </div>
+                                            <a href="../../../jtl/Connector/Core/Validator/Schema.html"><abbr title="jtl\Connector\Core\Validator\Schema">Schema</abbr></a>
+                                            
+                </div>
                 <div class="col-md-6">
                     Schema Validator
                 </div>
@@ -104,23 +114,24 @@
     
     
             <h2>Exceptions</h2>
-        <div class="container-fluid underlined">
+        
+    <div class="container-fluid underlined">
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../../jtl/Connector/Core/Validator/SchemaException.html"><abbr title="jtl\Connector\Core\Validator\SchemaException">jtl\Connector\Core\Validator\SchemaException</abbr></a>
-                                    </div>
+                                            <a href="../../../jtl/Connector/Core/Validator/SchemaException.html"><abbr title="jtl\Connector\Core\Validator\SchemaException">SchemaException</abbr></a>
+                                            
+                </div>
                 <div class="col-md-6">
                     
-
                 </div>
             </div>
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../../jtl/Connector/Core/Validator/ValidationException.html"><abbr title="jtl\Connector\Core\Validator\ValidationException">jtl\Connector\Core\Validator\ValidationException</abbr></a>
-                                    </div>
+                                            <a href="../../../jtl/Connector/Core/Validator/ValidationException.html"><abbr title="jtl\Connector\Core\Validator\ValidationException">ValidationException</abbr></a>
+                                            
+                </div>
                 <div class="col-md-6">
                     
-
                 </div>
             </div>
             </div>

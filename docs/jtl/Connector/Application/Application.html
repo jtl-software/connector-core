@@ -12,6 +12,9 @@
         <script src="../../../js/bootstrap.min.js"></script>
         <script src="../../../js/typeahead.min.js"></script>
         <script src="../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -70,17 +76,89 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>Application</h1>
+        <h1>
+            Application
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>Application</strong>        extends <a href="../../../jtl/Connector/Core/Application/Application.html"><abbr title="jtl\Connector\Core\Application\Application">Application</abbr></a></p>
+    <strong>Application</strong>        extends <a href="../../../jtl/Connector/Core/Application/Application.html"><abbr title="jtl\Connector\Core\Application\Application">Application</abbr></a>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Application Class</p>                    </div>
     
     
+            <h2>Constants</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td>PROTOCOL_VERSION</td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+            </table>
+
     
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property__instances">
+                    static                    protected                                        <abbr title="jtl\Connector\Core\Utilities\multiple:">multiple:</abbr>
+                </td>
+                <td>$_instances</td>
+                <td class="last">Array of \jtl\Connector\Core\Utilities\Singleton Objects</td>
+                <td><small>from&nbsp;<a href="../../../jtl/Connector/Core/Utilities/Singleton.html#property__instances"><abbr title="jtl\Connector\Core\Utilities\Singleton">Singleton</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_connector">
+                                        protected                                        <a href="../../../jtl/Connector/Application/IEndpointConnector.html"><abbr title="jtl\Connector\Application\IEndpointConnector">IEndpointConnector</abbr></a>
+                </td>
+                <td>$connector</td>
+                <td class="last">Connected EndpointConnectors</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_config">
+                                        protected                                        <abbr title="jtl\Connector\Application\Config;">Config;</abbr>
+                </td>
+                <td>$config</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_session">
+                                        protected                                        <a href="../../../jtl/Connector/Session/Session.html"><abbr title="jtl\Connector\Session\Session">Session</abbr></a>
+                </td>
+                <td>$session</td>
+                <td class="last">Global Session</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_eventDispatcher">
+                                        protected                                        <abbr title="Symfony\Component\EventDispatcher\EventDispatcher">EventDispatcher</abbr>
+                </td>
+                <td>$eventDispatcher</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_errorHandler">
+                                        protected                                        <a href="../../../jtl/Connector/Application/Error/IErrorHandler.html"><abbr title="jtl\Connector\Application\Error\IErrorHandler">IErrorHandler</abbr></a>
+                </td>
+                <td>$errorHandler</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+            </table>
+
     
             <h2>Methods</h2>
 
@@ -91,6 +169,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getInstance">getInstance</a>()
+        
                                             <p>Basic Singleton implementation</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Utilities/Singleton.html#method_getInstance"><abbr title="jtl\Connector\Core\Utilities\Singleton">Singleton</abbr></a></small></div>
             </div>
@@ -99,7 +178,38 @@
                     
                 </div>
                 <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>()
+        
+                                            <p>Basic Constructor</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___clone">__clone</a>()
+        
+                                            <p>Clone Method</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Utilities/Singleton.html#method___clone"><abbr title="jtl\Connector\Core\Utilities\Singleton">Singleton</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_run">run</a>()
+        
+                                            <p>(non-PHPdoc)</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_execute">execute</a>(<a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a> $requestpacket, $rpcmode, array $imagePaths = array())
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -109,7 +219,122 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_register">register</a>(<abbr title="jtl\Connector\Application\jtl\Connector\Application\IEndpointConnector">IEndpointConnector</abbr> $endpointconnector)
+                    <a href="#method_register">register</a>(<a href="../../../jtl/Connector/Application/IEndpointConnector.html"><abbr title="jtl\Connector\Application\IEndpointConnector">IEndpointConnector</abbr></a> $endpointconnector)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_runSingle">runSingle</a>(<a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a> $requestpacket, integer $rpcmode)
+        
+                                            <p>Single Mode</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_runBatch">runBatch</a>(array $requestpackets, integer $rpcmode)
+        
+                                            <p>Batch Mode</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_deserializeRequestParams">deserializeRequestParams</a>(<a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a> $requestpacket, $modelNamespace)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../jtl/Connector/Core/Rpc/ResponsePacket.html"><abbr title="jtl\Connector\Core\Rpc\ResponsePacket">ResponsePacket</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_buildRpcResponse">buildRpcResponse</a>(<a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a> $requestpacket, <a href="../../../jtl/Connector/Result/Action.html"><abbr title="jtl\Connector\Result\Action">Action</abbr></a> $actionresult)
+        
+                                            <p>Build RPC Reponse Packet</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_runActionValidation">runActionValidation</a>(<a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a> $requestpacket)
+        
+                                            <p>Validate Action</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_runModelValidation">runModelValidation</a>(<a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a> $requestpacket)
+        
+                                            <p>Validate Model</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_startConfiguration">startConfiguration</a>()
+        
+                                            <p>Initialises the connector configuration instance.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_startSession">startSession</a>($sessionId = null, $method)
+        
+                                            <p>Starting Session</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_startEventDispatcher">startEventDispatcher</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_handleImagePush">handleImagePush</a>(<a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a> $requestpacket, array $imagePaths = array())
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_triggerRpcAfterEvent">triggerRpcAfterEvent</a>($data, $method)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -120,16 +345,62 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getConnector">getConnector</a>()
+        
                                             <p>Connector getter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <a href="../../../jtl/Connector/Application/IEndpointConnector.html"><abbr title="jtl\Connector\Application\IEndpointConnector">IEndpointConnector</abbr></a>
+                    <a href="../../../jtl/Connector/Session/Session.html"><abbr title="jtl\Connector\Session\Session">Session</abbr></a>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getSession">getSession</a>()
+        
                                             <p>Session getter</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getProtocolVersion">getProtocolVersion</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../jtl/Connector/Core/Config/Config.html"><abbr title="jtl\Connector\Core\Config\Config">Config</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getConfig">getConfig</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../jtl/Connector/Application/Error/IErrorHandler.html"><abbr title="jtl\Connector\Application\Error\IErrorHandler">IErrorHandler</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getErrorHandler">getErrorHandler</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="jtl\Connector\Application\$this">$this</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setErrorHandler">setErrorHandler</a>(<a href="../../../jtl/Connector/Application/Error/IErrorHandler.html"><abbr title="jtl\Connector\Application\Error\IErrorHandler">IErrorHandler</abbr></a> $handler)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
                 <div class="col-md-2"></div>
             </div>
             </div>
@@ -140,11 +411,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_getInstance">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Utilities/Singleton.html#method_getInstance"><abbr title="jtl\Connector\Core\Utilities\Singleton">Singleton</abbr></a> at line 29</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Utilities/Singleton.html#method_getInstance"><abbr title="jtl\Connector\Core\Utilities\Singleton">Singleton</abbr></a> at         line 29</div>
         <code>        static            <abbr title="jtl\Connector\Core\Utilities\Singleton:">Singleton:</abbr>
-    <strong>getInstance</strong>()</code>
+    <strong>getInstance</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Basic Singleton implementation</p>                                </div>
                 <div class="tags">
@@ -154,8 +429,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><abbr title="jtl\Connector\Core\Utilities\Singleton:">Singleton:</abbr></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -166,12 +440,60 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_run">
-        <div class="location">at line 87</div>
-        <code>                    
-    <strong>run</strong>()</code>
+                    <h3 id="method___construct">
+        <div class="location">at         line 85</div>
+        <code>            protected        
+    <strong>__construct</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Basic Constructor</p>                                </div>
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___clone">
+        <div class="location">in <a href="../../../jtl/Connector/Core/Utilities/Singleton.html#method___clone"><abbr title="jtl\Connector\Core\Utilities\Singleton">Singleton</abbr></a> at         line 49</div>
+        <code>final            protected        
+    <strong>__clone</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Clone Method</p>                                </div>
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_run">
+        <div class="location">at         line 98</div>
+        <code>                    
+    <strong>run</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>(non-PHPdoc)</p>                                </div>
                 <div class="tags">
             
             
@@ -190,21 +512,460 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_register">
-        <div class="location">at line 266</div>
-        <code>                    
-    <strong>register</strong>(<abbr title="jtl\Connector\Application\jtl\Connector\Application\IEndpointConnector">IEndpointConnector</abbr> $endpointconnector)</code>
+                    <h3 id="method_execute">
+        <div class="location">at         line 174</div>
+        <code>            protected        
+    <strong>execute</strong>(<a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a> $requestpacket, $rpcmode, array $imagePaths = array())
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Application\jtl\Connector\Application\IEndpointConnector">IEndpointConnector</abbr></td>
+                <td><a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a></td>
+                <td>$requestpacket</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$rpcmode</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$imagePaths</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_register">
+        <div class="location">at         line 313</div>
+        <code>                    
+    <strong>register</strong>(<a href="../../../jtl/Connector/Application/IEndpointConnector.html"><abbr title="jtl\Connector\Application\IEndpointConnector">IEndpointConnector</abbr></a> $endpointconnector)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../jtl/Connector/Application/IEndpointConnector.html"><abbr title="jtl\Connector\Application\IEndpointConnector">IEndpointConnector</abbr></a></td>
                 <td>$endpointconnector</td>
-                <td>
-</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_runSingle">
+        <div class="location">at         line 324</div>
+        <code>            protected        
+    <strong>runSingle</strong>(<a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a> $requestpacket, integer $rpcmode)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Single Mode</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a></td>
+                <td>$requestpacket</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$rpcmode</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_runBatch">
+        <div class="location">at         line 401</div>
+        <code>            protected        
+    <strong>runBatch</strong>(array $requestpackets, integer $rpcmode)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Batch Mode</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$requestpackets</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$rpcmode</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_deserializeRequestParams">
+        <div class="location">at         line 428</div>
+        <code>            protected        
+    <strong>deserializeRequestParams</strong>(<a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a> $requestpacket, $modelNamespace)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a></td>
+                <td>$requestpacket</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$modelNamespace</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_buildRpcResponse">
+        <div class="location">at         line 485</div>
+        <code>            protected        <a href="../../../jtl/Connector/Core/Rpc/ResponsePacket.html"><abbr title="jtl\Connector\Core\Rpc\ResponsePacket">ResponsePacket</abbr></a>
+    <strong>buildRpcResponse</strong>(<a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a> $requestpacket, <a href="../../../jtl/Connector/Result/Action.html"><abbr title="jtl\Connector\Result\Action">Action</abbr></a> $actionresult)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Build RPC Reponse Packet</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a></td>
+                <td>$requestpacket</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a href="../../../jtl/Connector/Result/Action.html"><abbr title="jtl\Connector\Result\Action">Action</abbr></a></td>
+                <td>$actionresult</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../jtl/Connector/Core/Rpc/ResponsePacket.html"><abbr title="jtl\Connector\Core\Rpc\ResponsePacket">ResponsePacket</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../jtl/Connector/Core/Exception/RpcException.html"><abbr title="jtl\Connector\Core\Exception\RpcException">RpcException</abbr></a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_runActionValidation">
+        <div class="location">at         line 504</div>
+        <code>            protected        
+    <strong>runActionValidation</strong>(<a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a> $requestpacket)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Validate Action</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a></td>
+                <td>$requestpacket</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../jtl/Connector/Core/Exception/SchemaException.html"><abbr title="jtl\Connector\Core\Exception\SchemaException">SchemaException</abbr></a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_runModelValidation">
+        <div class="location">at         line 521</div>
+        <code>            protected        
+    <strong>runModelValidation</strong>(<a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a> $requestpacket)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Validate Model</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a></td>
+                <td>$requestpacket</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../jtl/Connector/Core/Exception/SchemaException.html"><abbr title="jtl\Connector\Core\Exception\SchemaException">SchemaException</abbr></a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_startConfiguration">
+        <div class="location">at         line 539</div>
+        <code>            protected        
+    <strong>startConfiguration</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Initialises the connector configuration instance.</p>                                </div>
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_startSession">
+        <div class="location">at         line 584</div>
+        <code>            protected        
+    <strong>startSession</strong>($sessionId = null, $method)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Starting Session</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$sessionId</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$method</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../jtl/Connector/Core/Exception/DatabaseException.html"><abbr title="jtl\Connector\Core\Exception\DatabaseException">DatabaseException</abbr></a></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a href="../../../jtl/Connector/Core/Exception/SessionException.html"><abbr title="jtl\Connector\Core\Exception\SessionException">SessionException</abbr></a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_startEventDispatcher">
+        <div class="location">at         line 604</div>
+        <code>            protected        
+    <strong>startEventDispatcher</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_handleImagePush">
+        <div class="location">at         line 614</div>
+        <code>            protected        
+    <strong>handleImagePush</strong>(<a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a> $requestpacket, array $imagePaths = array())
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a></td>
+                <td>$requestpacket</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$imagePaths</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_triggerRpcAfterEvent">
+        <div class="location">at         line 694</div>
+        <code>            protected        
+    <strong>triggerRpcAfterEvent</strong>($data, $method)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$data</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$method</td>
+                <td></td>
             </tr>
             </table>
 
@@ -217,11 +978,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getConnector">
-        <div class="location">at line 568</div>
+        <div class="location">at         line 705</div>
         <code>                    <a href="../../../jtl/Connector/Application/IEndpointConnector.html"><abbr title="jtl\Connector\Application\IEndpointConnector">IEndpointConnector</abbr></a>
-    <strong>getConnector</strong>()</code>
+    <strong>getConnector</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Connector getter</p>                                </div>
                 <div class="tags">
@@ -231,8 +996,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Application/IEndpointConnector.html"><abbr title="jtl\Connector\Application\IEndpointConnector">IEndpointConnector</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -244,11 +1008,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getSession">
-        <div class="location">at line 578</div>
-        <code>                    <a href="../../../jtl/Connector/Application/IEndpointConnector.html"><abbr title="jtl\Connector\Application\IEndpointConnector">IEndpointConnector</abbr></a>
-    <strong>getSession</strong>()</code>
+        <div class="location">at         line 715</div>
+        <code>                    <a href="../../../jtl/Connector/Session/Session.html"><abbr title="jtl\Connector\Session\Session">Session</abbr></a>
+    <strong>getSession</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Session getter</p>                                </div>
                 <div class="tags">
@@ -257,9 +1025,130 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td><a href="../../../jtl/Connector/Application/IEndpointConnector.html"><abbr title="jtl\Connector\Application\IEndpointConnector">IEndpointConnector</abbr></a></td>
-            <td>
-</td>
+            <td><a href="../../../jtl/Connector/Session/Session.html"><abbr title="jtl\Connector\Session\Session">Session</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getProtocolVersion">
+        <div class="location">at         line 723</div>
+        <code>                    int
+    <strong>getProtocolVersion</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>int</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getConfig">
+        <div class="location">at         line 731</div>
+        <code>                    <a href="../../../jtl/Connector/Core/Config/Config.html"><abbr title="jtl\Connector\Core\Config\Config">Config</abbr></a>
+    <strong>getConfig</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../jtl/Connector/Core/Config/Config.html"><abbr title="jtl\Connector\Core\Config\Config">Config</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getErrorHandler">
+        <div class="location">at         line 739</div>
+        <code>                    <a href="../../../jtl/Connector/Application/Error/IErrorHandler.html"><abbr title="jtl\Connector\Application\Error\IErrorHandler">IErrorHandler</abbr></a>
+    <strong>getErrorHandler</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../jtl/Connector/Application/Error/IErrorHandler.html"><abbr title="jtl\Connector\Application\Error\IErrorHandler">IErrorHandler</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setErrorHandler">
+        <div class="location">at         line 748</div>
+        <code>                    <abbr title="jtl\Connector\Application\$this">$this</abbr>
+    <strong>setErrorHandler</strong>(<a href="../../../jtl/Connector/Application/Error/IErrorHandler.html"><abbr title="jtl\Connector\Application\Error\IErrorHandler">IErrorHandler</abbr></a> $handler)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../jtl/Connector/Application/Error/IErrorHandler.html"><abbr title="jtl\Connector\Application\Error\IErrorHandler">IErrorHandler</abbr></a></td>
+                <td>$handler</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="jtl\Connector\Application\$this">$this</abbr></td>
+            <td></td>
         </tr>
     </table>
 

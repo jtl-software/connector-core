@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,11 +77,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>Response</h1>
+        <h1>
+            Response
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>Response</strong></p>
+    <strong>Response</strong>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Http Response Handler</p>                    </div>
@@ -91,7 +104,8 @@
                     static&nbsp;
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_send">send</a>(<abbr title="jtl\Connector\Core\Http\jtl\Connector\Core\Rpc\ResponsePacket">ResponsePacket</abbr> $responsepacket)
+                    <a href="#method_send">send</a>(<a href="../../../../jtl/Connector/Core/Rpc/ResponsePacket.html"><abbr title="jtl\Connector\Core\Rpc\ResponsePacket">ResponsePacket</abbr></a> $responsepacket)
+        
                                             <p>Http Response sender</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -101,6 +115,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_sendAll">sendAll</a>(array $reponsepackets)
+        
                                             <p>Http Response sender</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -112,11 +127,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_send">
-        <div class="location">at line 26</div>
+        <div class="location">at         line 26</div>
         <code>        static            
-    <strong>send</strong>(<abbr title="jtl\Connector\Core\Http\jtl\Connector\Core\Rpc\ResponsePacket">ResponsePacket</abbr> $responsepacket)</code>
+    <strong>send</strong>(<a href="../../../../jtl/Connector/Core/Rpc/ResponsePacket.html"><abbr title="jtl\Connector\Core\Rpc\ResponsePacket">ResponsePacket</abbr></a> $responsepacket)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Http Response sender</p>                                </div>
                 <div class="tags">
@@ -124,10 +143,9 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Http\jtl\Connector\Core\Rpc\ResponsePacket">ResponsePacket</abbr></td>
+                <td><a href="../../../../jtl/Connector/Core/Rpc/ResponsePacket.html"><abbr title="jtl\Connector\Core\Rpc\ResponsePacket">ResponsePacket</abbr></a></td>
                 <td>$responsepacket</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -140,11 +158,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_sendAll">
-        <div class="location">at line 46</div>
+        <div class="location">at         line 46</div>
         <code>        static            
-    <strong>sendAll</strong>(array $reponsepackets)</code>
+    <strong>sendAll</strong>(array $reponsepackets)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Http Response sender</p>                                </div>
                 <div class="tags">
@@ -154,8 +176,7 @@
                     <tr>
                 <td>array</td>
                 <td>$reponsepackets</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 

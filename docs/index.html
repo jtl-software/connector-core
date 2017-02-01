@@ -12,6 +12,9 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/typeahead.min.js"></script>
         <script src="sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -69,6 +75,7 @@
                                                     <li><a href="jtl.html">jtl</a></li>
                                                             <li><a href="jtl/Connector.html">jtl\Connector</a></li>
                                                             <li><a href="jtl/Connector/Application.html">jtl\Connector\Application</a></li>
+                                                            <li><a href="jtl/Connector/Application/Error.html">jtl\Connector\Application\Error</a></li>
                                                             <li><a href="jtl/Connector/Authentication.html">jtl\Connector\Authentication</a></li>
                                                             <li><a href="jtl/Connector/Base.html">jtl\Connector\Base</a></li>
                                                             <li><a href="jtl/Connector/Checksum.html">jtl\Connector\Checksum</a></li>
@@ -79,7 +86,6 @@
                                                             <li><a href="jtl/Connector/Core/Application.html">jtl\Connector\Core\Application</a></li>
                                                             <li><a href="jtl/Connector/Core/Compression.html">jtl\Connector\Core\Compression</a></li>
                                                             <li><a href="jtl/Connector/Core/Config.html">jtl\Connector\Core\Config</a></li>
-                                                            <li><a href="jtl/Connector/Core/Config/Loader.html">jtl\Connector\Core\Config\Loader</a></li>
                                                             <li><a href="jtl/Connector/Core/Controller.html">jtl\Connector\Core\Controller</a></li>
                                                             <li><a href="jtl/Connector/Core/Cryptography.html">jtl\Connector\Core\Cryptography</a></li>
                                                             <li><a href="jtl/Connector/Core/Database.html">jtl\Connector\Core\Database</a></li>
@@ -103,15 +109,19 @@
                                                             <li><a href="jtl/Connector/Drawing.html">jtl\Connector\Drawing</a></li>
                                                             <li><a href="jtl/Connector/Event.html">jtl\Connector\Event</a></li>
                                                             <li><a href="jtl/Connector/Event/Category.html">jtl\Connector\Event\Category</a></li>
+                                                            <li><a href="jtl/Connector/Event/Connector.html">jtl\Connector\Event\Connector</a></li>
+                                                            <li><a href="jtl/Connector/Event/Core.html">jtl\Connector\Event\Core</a></li>
                                                             <li><a href="jtl/Connector/Event/Customer.html">jtl\Connector\Event\Customer</a></li>
                                                             <li><a href="jtl/Connector/Event/CustomerOrder.html">jtl\Connector\Event\CustomerOrder</a></li>
                                                             <li><a href="jtl/Connector/Event/DeliveryNote.html">jtl\Connector\Event\DeliveryNote</a></li>
                                                             <li><a href="jtl/Connector/Event/GlobalData.html">jtl\Connector\Event\GlobalData</a></li>
                                                             <li><a href="jtl/Connector/Event/Image.html">jtl\Connector\Event\Image</a></li>
                                                             <li><a href="jtl/Connector/Event/Manufacturer.html">jtl\Connector\Event\Manufacturer</a></li>
+                                                            <li><a href="jtl/Connector/Event/Payment.html">jtl\Connector\Event\Payment</a></li>
                                                             <li><a href="jtl/Connector/Event/Product.html">jtl\Connector\Event\Product</a></li>
                                                             <li><a href="jtl/Connector/Event/ProductPrice.html">jtl\Connector\Event\ProductPrice</a></li>
                                                             <li><a href="jtl/Connector/Event/ProductStockLevel.html">jtl\Connector\Event\ProductStockLevel</a></li>
+                                                            <li><a href="jtl/Connector/Event/Rpc.html">jtl\Connector\Event\Rpc</a></li>
                                                             <li><a href="jtl/Connector/Event/Specific.html">jtl\Connector\Event\Specific</a></li>
                                                             <li><a href="jtl/Connector/Event/StatusChange.html">jtl\Connector\Event\StatusChange</a></li>
                                                             <li><a href="jtl/Connector/Exception.html">jtl\Connector\Exception</a></li>

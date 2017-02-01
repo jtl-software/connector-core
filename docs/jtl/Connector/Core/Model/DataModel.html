@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,17 +77,37 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>DataModel</h1>
+        <h1>
+            DataModel
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>DataModel</strong>        extends <a href="../../../../jtl/Connector/Core/Model/Model.html"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a></p>
+    <strong>DataModel</strong>        extends <a href="../../../../jtl/Connector/Core/Model/Model.html"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a>
+</p>
+
+        
+    
 
             <div class="description">
             <p>DataModel Class</p>                    </div>
     
     
     
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_fields">
+                                        protected                                        array
+                </td>
+                <td>$fields</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+            </table>
+
     
             <h2>Methods</h2>
 
@@ -91,7 +117,8 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___construct">__construct</a>(<abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr> $object = null)
+                    <a href="#method___construct">__construct</a>(<a target="_blank" href="http://php.net/stdClass">stdClass</a> $object = null)
+        
                                             <p>Constructor</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Model/Model.html#method___construct"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a></small></div>
             </div>
@@ -101,6 +128,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getProperties">getProperties</a>()
+        
                                             <p>Get the Model Properties</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Model/Model.html#method_getProperties"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a></small></div>
             </div>
@@ -109,7 +137,8 @@
                     <a href="../../../../jtl/Connector/Core/Model/Model.html"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_setOptions">setOptions</a>(<abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr> $object = null, array $options = null)
+                    <a href="#method_setOptions">setOptions</a>(<a target="_blank" href="http://php.net/stdClass">stdClass</a> $object = null, array $options = null)
+        
                                             <p>Sets Properties with matching Array Values</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Model/Model.html#method_setOptions"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a></small></div>
             </div>
@@ -119,6 +148,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getPublic">getPublic</a>(array $publics = array(&#039;fields&#039;, &#039;isEncrypted&#039;, &#039;identities&#039;, &#039;_type&#039;))
+        
                                             <p>Convert the Model into stdClass Object</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Model/Model.html#method_getPublic"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a></small></div>
             </div>
@@ -128,6 +158,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_toJson">toJson</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Model/Model.html#method_toJson"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a></small></div>
@@ -138,6 +169,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getFields">getFields</a>()
+        
                                             <p>Fields Getter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -147,6 +179,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_validate">validate</a>()
+        
                                             <p>Object Validation</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -156,6 +189,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getField">getField</a>(boolean $toWawi = false, string $key)
+        
                                             <p>Get a Model Member Name</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -164,7 +198,8 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_map">map</a>(boolean $toWawi = false, <abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr> $obj = null)
+                    <a href="#method_map">map</a>(boolean $toWawi = false, <a target="_blank" href="http://php.net/stdClass">stdClass</a> $obj = null)
+        
                                             <p>Object Mapping</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -176,11 +211,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Model/Model.html#method___construct"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at line 23</div>
+        <div class="location">in <a href="../../../../jtl/Connector/Core/Model/Model.html#method___construct"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at         line 23</div>
         <code>                    
-    <strong>__construct</strong>(<abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr> $object = null)</code>
+    <strong>__construct</strong>(<a target="_blank" href="http://php.net/stdClass">stdClass</a> $object = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Constructor</p>                                </div>
                 <div class="tags">
@@ -188,10 +227,9 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr></td>
+                <td><a target="_blank" href="http://php.net/stdClass">stdClass</a></td>
                 <td>$object</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -204,11 +242,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getProperties">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Model/Model.html#method_getProperties"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at line 33</div>
+        <div class="location">in <a href="../../../../jtl/Connector/Core/Model/Model.html#method_getProperties"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at         line 33</div>
         <code>                    <abbr title="jtl\Connector\Core\Model\multitype:">multitype:</abbr>
-    <strong>getProperties</strong>()</code>
+    <strong>getProperties</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Get the Model Properties</p>                                </div>
                 <div class="tags">
@@ -230,11 +272,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setOptions">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Model/Model.html#method_setOptions"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at line 45</div>
+        <div class="location">in <a href="../../../../jtl/Connector/Core/Model/Model.html#method_setOptions"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at         line 45</div>
         <code>                    <a href="../../../../jtl/Connector/Core/Model/Model.html"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a>
-    <strong>setOptions</strong>(<abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr> $object = null, array $options = null)</code>
+    <strong>setOptions</strong>(<a target="_blank" href="http://php.net/stdClass">stdClass</a> $object = null, array $options = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Sets Properties with matching Array Values</p>                                </div>
                 <div class="tags">
@@ -242,16 +288,14 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr></td>
+                <td><a target="_blank" href="http://php.net/stdClass">stdClass</a></td>
                 <td>$object</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>array</td>
                 <td>$options</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -261,8 +305,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../../jtl/Connector/Core/Model/Model.html"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -274,11 +317,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getPublic">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Model/Model.html#method_getPublic"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at line 82</div>
+        <div class="location">in <a href="../../../../jtl/Connector/Core/Model/Model.html#method_getPublic"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at         line 82</div>
         <code>                    <abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr>
-    <strong>getPublic</strong>(array $publics = array(&#039;fields&#039;, &#039;isEncrypted&#039;, &#039;identities&#039;, &#039;_type&#039;))</code>
+    <strong>getPublic</strong>(array $publics = array(&#039;fields&#039;, &#039;isEncrypted&#039;, &#039;identities&#039;, &#039;_type&#039;))
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Convert the Model into stdClass Object</p>                                </div>
                 <div class="tags">
@@ -288,8 +335,7 @@
                     <tr>
                 <td>array</td>
                 <td>$publics</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -311,11 +357,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_toJson">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Model/Model.html#method_toJson"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at line 115</div>
+        <div class="location">in <a href="../../../../jtl/Connector/Core/Model/Model.html#method_toJson"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at         line 115</div>
         <code>                    
-    <strong>toJson</strong>()</code>
+    <strong>toJson</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
             
@@ -326,11 +376,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getFields">
-        <div class="location">at line 34</div>
+        <div class="location">at         line 35</div>
         <code>                    <abbr title="jtl\Connector\Core\Model\mixed:string">mixed:string</abbr>
-    <strong>getFields</strong>()</code>
+    <strong>getFields</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Fields Getter</p>                                </div>
                 <div class="tags">
@@ -340,8 +394,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><abbr title="jtl\Connector\Core\Model\mixed:string">mixed:string</abbr></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -353,11 +406,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_validate">
-        <div class="location">at line 44</div>
+        <div class="location">at         line 45</div>
         <code>                    
-    <strong>validate</strong>()</code>
+    <strong>validate</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Object Validation</p>                                </div>
                 <div class="tags">
@@ -368,8 +425,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../../jtl/Connector/Core/Exception/SchemaException.html"><abbr title="jtl\Connector\Core\Exception\SchemaException">SchemaException</abbr></a></td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -380,11 +436,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getField">
-        <div class="location">at line 58</div>
+        <div class="location">at         line 59</div>
         <code>                    <abbr title="jtl\Connector\Core\Model\mixed:string">mixed:string</abbr>|NULL
-    <strong>getField</strong>(boolean $toWawi = false, string $key)</code>
+    <strong>getField</strong>(boolean $toWawi = false, string $key)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Get a Model Member Name</p>                                </div>
                 <div class="tags">
@@ -394,14 +454,12 @@
                     <tr>
                 <td>boolean</td>
                 <td>$toWawi</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>string</td>
                 <td>$key</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -411,8 +469,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><abbr title="jtl\Connector\Core\Model\mixed:string">mixed:string</abbr>|NULL</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -424,11 +481,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_map">
-        <div class="location">at line 80</div>
+        <div class="location">at         line 81</div>
         <code>                    
-    <strong>map</strong>(boolean $toWawi = false, <abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr> $obj = null)</code>
+    <strong>map</strong>(boolean $toWawi = false, <a target="_blank" href="http://php.net/stdClass">stdClass</a> $obj = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Object Mapping</p>                                </div>
                 <div class="tags">
@@ -438,11 +499,10 @@
                     <tr>
                 <td>boolean</td>
                 <td>$toWawi</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr></td>
+                <td><a target="_blank" href="http://php.net/stdClass">stdClass</a></td>
                 <td>$obj</td>
                 <td>Object to map</td>
             </tr>

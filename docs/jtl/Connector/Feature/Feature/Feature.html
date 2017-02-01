@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,17 +77,53 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>Feature</h1>
+        <h1>
+            Feature
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>Feature</strong>        extends <a href="../../../../jtl/Connector/Feature/Feature/Base.html"><abbr title="jtl\Connector\Feature\Feature\Base">Base</abbr></a></p>
+    <strong>Feature</strong>        extends <a href="../../../../jtl/Connector/Feature/Feature/Base.html"><abbr title="jtl\Connector\Feature\Feature\Base">Base</abbr></a>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Standard feature class.</p>                    </div>
     
     
     
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property__name">
+                                        protected                                        string
+                </td>
+                <td>$_name</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../../jtl/Connector/Feature/Base/Base.html#property__name"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property__classes">
+                                        protected                                        
+                </td>
+                <td>$_classes</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../../jtl/Connector/Feature/Base/Base.html#property__classes"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property__methods">
+                                        protected                                        array
+                </td>
+                <td>$_methods</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../../jtl/Connector/Feature/Feature/Base.html#property__methods"><abbr title="jtl\Connector\Feature\Feature\Base">Base</abbr></a></small></td>
+            </tr>
+            </table>
+
     
             <h2>Methods</h2>
 
@@ -92,6 +134,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getName">getName</a>()
+        
                                             <p>Returns the name.</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Feature/Base/Base.html#method_getName"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a></small></div>
             </div>
@@ -101,6 +144,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setName">setName</a>(string $name)
+        
                                             <p>Sets the name.</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Feature/Base/Base.html#method_setName"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a></small></div>
             </div>
@@ -110,6 +154,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getClasses">getClasses</a>()
+        
                                             <p>Returns all declared classes.</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Feature/Base/Base.html#method_getClasses"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a></small></div>
             </div>
@@ -118,7 +163,8 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addMethod">addMethod</a>(<abbr title="jtl\Connector\Feature\Feature\jtl\Connector\Feature\Method\IMethod">IMethod</abbr> $method)
+                    <a href="#method_addMethod">addMethod</a>(<a href="../../../../jtl/Connector/Feature/Method/IMethod.html"><abbr title="jtl\Connector\Feature\Method\IMethod">IMethod</abbr></a> $method)
+        
                                             <p>Adds a new method to the feature.</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Feature/Feature/Base.html#method_addMethod"><abbr title="jtl\Connector\Feature\Feature\Base">Base</abbr></a></small></div>
             </div>
@@ -128,6 +174,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_delMethod">delMethod</a>(string $name)
+        
                                             <p>Deletes a method from a feature by name.</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Feature/Feature/Base.html#method_delMethod"><abbr title="jtl\Connector\Feature\Feature\Base">Base</abbr></a></small></div>
             </div>
@@ -137,6 +184,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_existsMethod">existsMethod</a>(string $name)
+        
                                             <p>Returns a boolean if a method exists in the _methods array.</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Feature/Feature/Base.html#method_existsMethod"><abbr title="jtl\Connector\Feature\Feature\Base">Base</abbr></a></small></div>
             </div>
@@ -146,6 +194,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getMethod">getMethod</a>(string $name)
+        
                                             <p>Returns a method of a feature if it exists.</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Feature/Feature/Base.html#method_getMethod"><abbr title="jtl\Connector\Feature\Feature\Base">Base</abbr></a></small></div>
             </div>
@@ -157,11 +206,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_getName">
-        <div class="location">in <a href="../../../../jtl/Connector/Feature/Base/Base.html#method_getName"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a> at line 30</div>
+        <div class="location">in <a href="../../../../jtl/Connector/Feature/Base/Base.html#method_getName"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a> at         line 30</div>
         <code>final                    string
-    <strong>getName</strong>()</code>
+    <strong>getName</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Returns the name.</p>                                </div>
                 <div class="tags">
@@ -171,8 +224,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -184,11 +236,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setName">
-        <div class="location">in <a href="../../../../jtl/Connector/Feature/Base/Base.html#method_setName"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a> at line 41</div>
+        <div class="location">in <a href="../../../../jtl/Connector/Feature/Base/Base.html#method_setName"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a> at         line 41</div>
         <code>final                    boolean
-    <strong>setName</strong>(string $name)</code>
+    <strong>setName</strong>(string $name)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Sets the name.</p>                                </div>
                 <div class="tags">
@@ -198,8 +254,7 @@
                     <tr>
                 <td>string</td>
                 <td>$name</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -209,8 +264,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -222,11 +276,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getClasses">
-        <div class="location">in <a href="../../../../jtl/Connector/Feature/Base/Base.html#method_getClasses"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a> at line 57</div>
+        <div class="location">in <a href="../../../../jtl/Connector/Feature/Base/Base.html#method_getClasses"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a> at         line 57</div>
         <code>                    array
-    <strong>getClasses</strong>()</code>
+    <strong>getClasses</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Returns all declared classes.</p>                    <p>We need this way, because the autoloader will try to include the class
 file if we use "class_exists" or similar functions.</p>            </div>
@@ -237,8 +295,7 @@ file if we use "class_exists" or similar functions.</p>            </div>
                     <table class="table table-condensed">
         <tr>
             <td>array</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -250,11 +307,15 @@ file if we use "class_exists" or similar functions.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_addMethod">
-        <div class="location">in <a href="../../../../jtl/Connector/Feature/Feature/Base.html#method_addMethod"><abbr title="jtl\Connector\Feature\Feature\Base">Base</abbr></a> at line 36</div>
+        <div class="location">in <a href="../../../../jtl/Connector/Feature/Feature/Base.html#method_addMethod"><abbr title="jtl\Connector\Feature\Feature\Base">Base</abbr></a> at         line 36</div>
         <code>                    
-    <strong>addMethod</strong>(<abbr title="jtl\Connector\Feature\Feature\jtl\Connector\Feature\Method\IMethod">IMethod</abbr> $method)</code>
+    <strong>addMethod</strong>(<a href="../../../../jtl/Connector/Feature/Method/IMethod.html"><abbr title="jtl\Connector\Feature\Method\IMethod">IMethod</abbr></a> $method)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Adds a new method to the feature.</p>                                </div>
                 <div class="tags">
@@ -262,7 +323,7 @@ file if we use "class_exists" or similar functions.</p>            </div>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Feature\Feature\jtl\Connector\Feature\Method\IMethod">IMethod</abbr></td>
+                <td><a href="../../../../jtl/Connector/Feature/Method/IMethod.html"><abbr title="jtl\Connector\Feature\Method\IMethod">IMethod</abbr></a></td>
                 <td>$method</td>
                 <td>A method object.</td>
             </tr>
@@ -287,11 +348,15 @@ exception to inform the calling part.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_delMethod">
-        <div class="location">in <a href="../../../../jtl/Connector/Feature/Feature/Base.html#method_delMethod"><abbr title="jtl\Connector\Feature\Feature\Base">Base</abbr></a> at line 51</div>
+        <div class="location">in <a href="../../../../jtl/Connector/Feature/Feature/Base.html#method_delMethod"><abbr title="jtl\Connector\Feature\Feature\Base">Base</abbr></a> at         line 51</div>
         <code>                    
-    <strong>delMethod</strong>(string $name)</code>
+    <strong>delMethod</strong>(string $name)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Deletes a method from a feature by name.</p>                                </div>
                 <div class="tags">
@@ -324,11 +389,15 @@ exception to inform the calling part.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_existsMethod">
-        <div class="location">in <a href="../../../../jtl/Connector/Feature/Feature/Base.html#method_existsMethod"><abbr title="jtl\Connector\Feature\Feature\Base">Base</abbr></a> at line 66</div>
+        <div class="location">in <a href="../../../../jtl/Connector/Feature/Feature/Base.html#method_existsMethod"><abbr title="jtl\Connector\Feature\Feature\Base">Base</abbr></a> at         line 66</div>
         <code>                    boolean
-    <strong>existsMethod</strong>(string $name)</code>
+    <strong>existsMethod</strong>(string $name)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Returns a boolean if a method exists in the _methods array.</p>                                </div>
                 <div class="tags">
@@ -361,11 +430,15 @@ otherwhise FALSE.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getMethod">
-        <div class="location">in <a href="../../../../jtl/Connector/Feature/Feature/Base.html#method_getMethod"><abbr title="jtl\Connector\Feature\Feature\Base">Base</abbr></a> at line 79</div>
+        <div class="location">in <a href="../../../../jtl/Connector/Feature/Feature/Base.html#method_getMethod"><abbr title="jtl\Connector\Feature\Feature\Base">Base</abbr></a> at         line 79</div>
         <code>                    <a href="../../../../jtl/Connector/Feature/Method/IMethod.html"><abbr title="jtl\Connector\Feature\Method\IMethod">IMethod</abbr></a>
-    <strong>getMethod</strong>(string $name)</code>
+    <strong>getMethod</strong>(string $name)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Returns a method of a feature if it exists.</p>                                </div>
                 <div class="tags">

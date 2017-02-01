@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,11 +77,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>Image</h1>
+        <h1>
+            Image
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>Image</strong>        extends <a href="../../../../jtl/Connector/Core/Config/Loader/Base.html"><abbr title="jtl\Connector\Core\Config\Loader\Base">Base</abbr></a></p>
+    <strong>Image</strong>        extends <abbr title="jtl\Connector\Core\Config\Loader\Base">Base</abbr>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Shop3 Imageproperty class.</p>                    </div>
@@ -87,194 +100,108 @@
                     <tr>
                 <td>KEY_TYPE</td>
                 <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
                     <tr>
                 <td>KEY_WIDTH</td>
                 <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
                     <tr>
                 <td>KEY_HEIGHT</td>
                 <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
                     <tr>
                 <td>KEY_CONTAINER</td>
                 <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
                     <tr>
                 <td>KEY_FORMAT</td>
                 <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
                     <tr>
                 <td>KEY_QUALITY</td>
                 <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
                     <tr>
                 <td>KEY_BACKGROUNDCOLOR</td>
                 <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
                     <tr>
                 <td>KEY_GLOBALS</td>
                 <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
                     <tr>
                 <td>KEY_NAME</td>
                 <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
                     <tr>
                 <td>KEY_VALUE</td>
                 <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
             </table>
 
     
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property__required">
+                                        protected                                        
+                </td>
+                <td>$_required</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property__required_globals">
+                                        protected                                        
+                </td>
+                <td>$_required_globals</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+            </table>
+
     
             <h2>Methods</h2>
 
             <div class="container-fluid underlined">
                     <div class="row">
                 <div class="col-md-2 type">
-                    string
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_getName">getName</a>()
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Config/Loader/Base.html#method_getName"><abbr title="jtl\Connector\Core\Config\Loader\Base">Base</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    mixed
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_trigger">trigger</a>(string $name)
-                                            <p>Checks if a method exists in a loader and calls it.</p>                </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Config/Loader/Base.html#method_trigger"><abbr title="jtl\Connector\Core\Config\Loader\Base">Base</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_clear">clear</a>()
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Config/Loader/Base.html#method_clear"><abbr title="jtl\Connector\Core\Config\Loader\Base">Base</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    bool
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_isWriteable">isWriteable</a>()
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Config/Loader/Base.html#method_isWriteable"><abbr title="jtl\Connector\Core\Config\Loader\Base">Base</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    mixed
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_read">read</a>(string $key, string $default = null)
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Config/Loader/Base.html#method_read"><abbr title="jtl\Connector\Core\Config\Loader\Base">Base</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    array
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_reads">reads</a>(array $values = array())
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Config/Loader/Base.html#method_reads"><abbr title="jtl\Connector\Core\Config\Loader\Base">Base</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    boolean
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_write">write</a>(string $key, mixed $value = null)
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Config/Loader/Base.html#method_write"><abbr title="jtl\Connector\Core\Config\Loader\Base">Base</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_writes">writes</a>(array $values = array())
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Config/Loader/Base.html#method_writes"><abbr title="jtl\Connector\Core\Config\Loader\Base">Base</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    mixed
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_retrieveConstants">retrieveConstants</a>(string $prefix, bool $only_keys = true, int $char_len = 3)
-                                            <p>Dynamically returning all class constants supported.</p>                </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Core/Config/Loader/Base.html#method_retrieveConstants"><abbr title="jtl\Connector\Core\Config\Loader\Base">Base</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
                     
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method___construct">__construct</a>(array $images = array())
+        
                                             <p>Contructor.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -284,6 +211,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_addImage">addImage</a>(string $type, integer $width, integer $height, boolean $container, string $format, integer $quality, string $backgroundcolor)
+        
                                             <p>Adds a image to the data array.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -293,6 +221,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_addImages">addImages</a>(array $images)
+        
                                             <p>Adding multiple images at once.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -302,6 +231,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_delImage">delImage</a>(string $type)
+        
                                             <p>Removes a image from the data array by type.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -311,7 +241,18 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_validateImageArray">validateImageArray</a>(array $image)
+        
                                             <p>Validates a image array and throws a exception with the failure.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    Boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_existsImage">existsImage</a>(string $type)
+        
+                                            <p>Checks if a image with that type already exists.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -320,6 +261,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getImages">getImages</a>()
+        
                                             <p>Returns all Images.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -329,6 +271,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_addGlobal">addGlobal</a>(string $name, mixed $value)
+        
                                             <p>Adds a global image property to the class.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -338,6 +281,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_addGlobals">addGlobals</a>(array $globals)
+        
                                             <p>Adding multiple globals at once.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -347,6 +291,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_delGlobal">delGlobal</a>(string $global)
+        
                                             <p>Removes a global from the data array by type.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -356,7 +301,18 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_validateGlobalArray">validateGlobalArray</a>(array $global)
+        
                                             <p>Validates a name array and throws a exception with the failure.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    Boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_existsGlobal">existsGlobal</a>(string $type)
+        
+                                            <p>Checks if a image with that type already exists.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
             </div>
@@ -366,305 +322,16 @@
 
             <div id="method-details">
                     <div class="method-item">
-                    <h3 id="method_getName">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Config/Loader/Base.html#method_getName"><abbr title="jtl\Connector\Core\Config\Loader\Base">Base</abbr></a> at line 36</div>
-        <code>                    string
-    <strong>getName</strong>()</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>string</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_trigger">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Config/Loader/Base.html#method_trigger"><abbr title="jtl\Connector\Core\Config\Loader\Base">Base</abbr></a> at line 47</div>
-        <code>                    mixed
-    <strong>trigger</strong>(string $name)</code>
-    </h3>
-    <div class="details">
-                    <div class="method-description">
-                                    <p>Checks if a method exists in a loader and calls it.</p>                                </div>
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>string</td>
-                <td>$name</td>
-                <td>The name of the method that will be triggered.</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>mixed</td>
-            <td>The return value of the method triggered.</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_clear">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Config/Loader/Base.html#method_clear"><abbr title="jtl\Connector\Core\Config\Loader\Base">Base</abbr></a> at line 59</div>
-        <code>                    
-    <strong>clear</strong>()</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-            
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_isWriteable">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Config/Loader/Base.html#method_isWriteable"><abbr title="jtl\Connector\Core\Config\Loader\Base">Base</abbr></a> at line 70</div>
-        <code>                    bool
-    <strong>isWriteable</strong>()</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>bool</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_read">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Config/Loader/Base.html#method_read"><abbr title="jtl\Connector\Core\Config\Loader\Base">Base</abbr></a> at line 82</div>
-        <code>                    mixed
-    <strong>read</strong>(string $key, string $default = null)</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>string</td>
-                <td>$key</td>
-                <td>Should be a key inside of the data array.</td>
-            </tr>
-                    <tr>
-                <td>string</td>
-                <td>$default</td>
-                <td>Default configuration value</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>mixed</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_reads">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Config/Loader/Base.html#method_reads"><abbr title="jtl\Connector\Core\Config\Loader\Base">Base</abbr></a> at line 98</div>
-        <code>                    array
-    <strong>reads</strong>(array $values = array())</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>array</td>
-                <td>$values</td>
-                <td>The values array</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>array</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_write">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Config/Loader/Base.html#method_write"><abbr title="jtl\Connector\Core\Config\Loader\Base">Base</abbr></a> at line 116</div>
-        <code>                    boolean
-    <strong>write</strong>(string $key, mixed $value = null)</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>string</td>
-                <td>$key</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>mixed</td>
-                <td>$value</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>boolean</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_writes">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Config/Loader/Base.html#method_writes"><abbr title="jtl\Connector\Core\Config\Loader\Base">Base</abbr></a> at line 139</div>
-        <code>                    
-    <strong>writes</strong>(array $values = array())</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>array</td>
-                <td>$values</td>
-                <td>The key/string combination array</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_retrieveConstants">
-        <div class="location">in <a href="../../../../jtl/Connector/Core/Config/Loader/Base.html#method_retrieveConstants"><abbr title="jtl\Connector\Core\Config\Loader\Base">Base</abbr></a> at line 158</div>
-        <code>                    mixed
-    <strong>retrieveConstants</strong>(string $prefix, bool $only_keys = true, int $char_len = 3)</code>
-    </h3>
-    <div class="details">
-                    <div class="method-description">
-                                    <p>Dynamically returning all class constants supported.</p>                                </div>
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>string</td>
-                <td>$prefix</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>bool</td>
-                <td>$only_keys</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>int</td>
-                <td>$char_len</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>mixed</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at line 53</div>
+        <div class="location">at         line 53</div>
         <code>                    
-    <strong>__construct</strong>(array $images = array())</code>
+    <strong>__construct</strong>(array $images = array())
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Contructor.</p>                                </div>
                 <div class="tags">
@@ -674,8 +341,7 @@
                     <tr>
                 <td>array</td>
                 <td>$images</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -688,11 +354,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_addImage">
-        <div class="location">at line 75</div>
+        <div class="location">at         line 75</div>
         <code>                    
-    <strong>addImage</strong>(string $type, integer $width, integer $height, boolean $container, string $format, integer $quality, string $backgroundcolor)</code>
+    <strong>addImage</strong>(string $type, integer $width, integer $height, boolean $container, string $format, integer $quality, string $backgroundcolor)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Adds a image to the data array.</p>                                </div>
                 <div class="tags">
@@ -754,11 +424,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_addImages">
-        <div class="location">at line 99</div>
+        <div class="location">at         line 99</div>
         <code>                    
-    <strong>addImages</strong>(array $images)</code>
+    <strong>addImages</strong>(array $images)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Adding multiple images at once.</p>                                </div>
                 <div class="tags">
@@ -781,11 +455,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_delImage">
-        <div class="location">at line 115</div>
+        <div class="location">at         line 115</div>
         <code>                    
-    <strong>delImage</strong>(string $type)</code>
+    <strong>delImage</strong>(string $type)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Removes a image from the data array by type.</p>                                </div>
                 <div class="tags">
@@ -795,8 +473,7 @@
                     <tr>
                 <td>string</td>
                 <td>$type</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -807,8 +484,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../../jtl/Connector/Core/Exception/ConfigException.html"><abbr title="jtl\Connector\Core\Exception\ConfigException">ConfigException</abbr></a></td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -819,11 +495,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_validateImageArray">
-        <div class="location">at line 129</div>
+        <div class="location">at         line 129</div>
         <code>                    boolean
-    <strong>validateImageArray</strong>(array $image)</code>
+    <strong>validateImageArray</strong>(array $image)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Validates a image array and throws a exception with the failure.</p>                                </div>
                 <div class="tags">
@@ -843,8 +523,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -854,8 +533,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../../jtl/Connector/Core/Exception/ConfigException.html"><abbr title="jtl\Connector\Core\Exception\ConfigException">ConfigException</abbr></a></td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -865,12 +543,56 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_getImages">
-        <div class="location">at line 158</div>
-        <code>                    array
-    <strong>getImages</strong>()</code>
+                    <h3 id="method_existsImage">
+        <div class="location">at         line 148</div>
+        <code>            protected        Boolean
+    <strong>existsImage</strong>(string $type)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Checks if a image with that type already exists.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$type</td>
+                <td>The image type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>Boolean</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getImages">
+        <div class="location">at         line 158</div>
+        <code>                    array
+    <strong>getImages</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Returns all Images.</p>                                </div>
                 <div class="tags">
@@ -880,8 +602,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>array</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -893,11 +614,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_addGlobal">
-        <div class="location">at line 169</div>
+        <div class="location">at         line 169</div>
         <code>                    
-    <strong>addGlobal</strong>(string $name, mixed $value)</code>
+    <strong>addGlobal</strong>(string $name, mixed $value)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Adds a global image property to the class.</p>                                </div>
                 <div class="tags">
@@ -907,14 +632,12 @@
                     <tr>
                 <td>string</td>
                 <td>$name</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>mixed</td>
                 <td>$value</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -927,11 +650,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_addGlobals">
-        <div class="location">at line 185</div>
+        <div class="location">at         line 185</div>
         <code>                    
-    <strong>addGlobals</strong>(array $globals)</code>
+    <strong>addGlobals</strong>(array $globals)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Adding multiple globals at once.</p>                                </div>
                 <div class="tags">
@@ -941,8 +668,7 @@
                     <tr>
                 <td>array</td>
                 <td>$globals</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -955,11 +681,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_delGlobal">
-        <div class="location">at line 199</div>
+        <div class="location">at         line 199</div>
         <code>                    
-    <strong>delGlobal</strong>(string $global)</code>
+    <strong>delGlobal</strong>(string $global)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Removes a global from the data array by type.</p>                                </div>
                 <div class="tags">
@@ -969,8 +699,7 @@
                     <tr>
                 <td>string</td>
                 <td>$global</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -981,8 +710,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../../jtl/Connector/Core/Exception/ConfigException.html"><abbr title="jtl\Connector\Core\Exception\ConfigException">ConfigException</abbr></a></td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -993,11 +721,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_validateGlobalArray">
-        <div class="location">at line 213</div>
+        <div class="location">at         line 213</div>
         <code>                    boolean
-    <strong>validateGlobalArray</strong>(array $global)</code>
+    <strong>validateGlobalArray</strong>(array $global)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Validates a name array and throws a exception with the failure.</p>                                </div>
                 <div class="tags">
@@ -1017,8 +749,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1028,11 +759,50 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../../jtl/Connector/Core/Exception/ConfigException.html"><abbr title="jtl\Connector\Core\Exception\ConfigException">ConfigException</abbr></a></td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_existsGlobal">
+        <div class="location">at         line 232</div>
+        <code>            protected        Boolean
+    <strong>existsGlobal</strong>(string $type)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Checks if a image with that type already exists.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$type</td>
+                <td>The image type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>Boolean</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
             
                     </div>
     </div>

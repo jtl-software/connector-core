@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,11 +77,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>Request</h1>
+        <h1>
+            Request
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>Request</strong></p>
+    <strong>Request</strong>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Http Request Handler</p>                    </div>
@@ -91,7 +104,8 @@
                     static&nbsp;<abbr title="jtl\Connector\Core\Http\Ambiguous">Ambiguous</abbr>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_get">get</a>(string $method = &#039;post&#039;, string $root = &#039;jtlrpc&#039;)
+                    <a href="#method_get">get</a>(string $method = &quot;post&quot;, string $root = &quot;jtlrpc&quot;)
+        
                                             <p>Http Request Getter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -101,6 +115,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getMethod">getMethod</a>()
+        
                                             <p>Returns Http Request method</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -109,7 +124,8 @@
                     static&nbsp;boolean
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_exists">exists</a>(string $method = &#039;post&#039;, string $root = &#039;jtlrpc&#039;)
+                    <a href="#method_exists">exists</a>(string $method = &quot;post&quot;, string $root = &quot;jtlrpc&quot;)
+        
                                             <p>Http Request Check</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -118,7 +134,8 @@
                     static&nbsp;boolean
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_isFileupload">isFileupload</a>(string $name = &#039;jtlrpc&#039;)
+                    <a href="#method_isFileupload">isFileupload</a>(string $name = &quot;jtlrpc&quot;)
+        
                                             <p>Tells whether the file was uploaded via HTTP POST</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -127,7 +144,8 @@
                     static&nbsp;boolean
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_moveFileupload">moveFileupload</a>(string $path, string $filename, string $name = &#039;jtlrpc&#039;)
+                    <a href="#method_moveFileupload">moveFileupload</a>(string $path, string $filename, string $name = &quot;jtlrpc&quot;)
+        
                                             <p>Moves an uploaded file to a new location</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -137,6 +155,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_stripData">stripData</a>(string $data)
+        
                                             <p>Checks get<em>magic</em>quotes_gpc</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -145,7 +164,8 @@
                     static&nbsp;string|NULL
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_handleFileupload">handleFileupload</a>(string $name = &#039;file&#039;)
+                    <a href="#method_handleFileupload">handleFileupload</a>(string $name = &quot;file&quot;)
+        
                                             <p>File Upload Handler</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -155,7 +175,19 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_deleteFileupload">deleteFileupload</a>(string $filename)
+        
                                             <p>Delete File</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_deleteFileuploads">deleteFileuploads</a>(array $filesnames = array(), bool|<abbr title="jtl\Connector\Core\Http\true">true</abbr> $withFolder = true)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -164,6 +196,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_handle">handle</a>(boolean $useSuper = true)
+        
                                             <p>Main HTTP Handler</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -173,6 +206,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getSession">getSession</a>()
+        
                                             <p>Session HTTP Getter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -184,11 +218,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_get">
-        <div class="location">at line 30</div>
+        <div class="location">at         line 31</div>
         <code>        static            <abbr title="jtl\Connector\Core\Http\Ambiguous">Ambiguous</abbr>
-    <strong>get</strong>(string $method = &#039;post&#039;, string $root = &#039;jtlrpc&#039;)</code>
+    <strong>get</strong>(string $method = &quot;post&quot;, string $root = &quot;jtlrpc&quot;)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Http Request Getter</p>                                </div>
                 <div class="tags">
@@ -198,14 +236,12 @@
                     <tr>
                 <td>string</td>
                 <td>$method</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>string</td>
                 <td>$root</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -225,8 +261,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../../jtl/Connector/Core/Exception/HttpException.html"><abbr title="jtl\Connector\Core\Exception\HttpException">HttpException</abbr></a></td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -237,11 +272,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getMethod">
-        <div class="location">at line 53</div>
+        <div class="location">at         line 54</div>
         <code>        static            string
-    <strong>getMethod</strong>()</code>
+    <strong>getMethod</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Returns Http Request method</p>                                </div>
                 <div class="tags">
@@ -251,8 +290,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -264,11 +302,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_exists">
-        <div class="location">at line 65</div>
+        <div class="location">at         line 66</div>
         <code>        static            boolean
-    <strong>exists</strong>(string $method = &#039;post&#039;, string $root = &#039;jtlrpc&#039;)</code>
+    <strong>exists</strong>(string $method = &quot;post&quot;, string $root = &quot;jtlrpc&quot;)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Http Request Check</p>                                </div>
                 <div class="tags">
@@ -278,14 +320,12 @@
                     <tr>
                 <td>string</td>
                 <td>$method</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>string</td>
                 <td>$root</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -295,8 +335,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -308,11 +347,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_isFileupload">
-        <div class="location">at line 87</div>
+        <div class="location">at         line 88</div>
         <code>        static            boolean
-    <strong>isFileupload</strong>(string $name = &#039;jtlrpc&#039;)</code>
+    <strong>isFileupload</strong>(string $name = &quot;jtlrpc&quot;)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Tells whether the file was uploaded via HTTP POST</p>                                </div>
                 <div class="tags">
@@ -322,8 +365,7 @@
                     <tr>
                 <td>string</td>
                 <td>$name</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -333,8 +375,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -346,11 +387,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_moveFileupload">
-        <div class="location">at line 100</div>
+        <div class="location">at         line 101</div>
         <code>        static            boolean
-    <strong>moveFileupload</strong>(string $path, string $filename, string $name = &#039;jtlrpc&#039;)</code>
+    <strong>moveFileupload</strong>(string $path, string $filename, string $name = &quot;jtlrpc&quot;)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Moves an uploaded file to a new location</p>                                </div>
                 <div class="tags">
@@ -360,20 +405,17 @@
                     <tr>
                 <td>string</td>
                 <td>$path</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>string</td>
                 <td>$filename</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>string</td>
                 <td>$name</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -383,8 +425,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -396,11 +437,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_stripData">
-        <div class="location">at line 111</div>
+        <div class="location">at         line 112</div>
         <code>        static            string
-    <strong>stripData</strong>(string $data)</code>
+    <strong>stripData</strong>(string $data)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Checks get<em>magic</em>quotes_gpc</p>                                </div>
                 <div class="tags">
@@ -410,8 +455,7 @@
                     <tr>
                 <td>string</td>
                 <td>$data</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -421,8 +465,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -434,11 +477,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_handleFileupload">
-        <div class="location">at line 127</div>
+        <div class="location">at         line 128</div>
         <code>        static            string|NULL
-    <strong>handleFileupload</strong>(string $name = &#039;file&#039;)</code>
+    <strong>handleFileupload</strong>(string $name = &quot;file&quot;)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>File Upload Handler</p>                                </div>
                 <div class="tags">
@@ -448,8 +495,7 @@
                     <tr>
                 <td>string</td>
                 <td>$name</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -459,8 +505,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string|NULL</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -470,8 +515,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../../jtl/Connector/Core/Exception/HttpException.html"><abbr title="jtl\Connector\Core\Exception\HttpException">HttpException</abbr></a></td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -482,11 +526,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_deleteFileupload">
-        <div class="location">at line 155</div>
+        <div class="location">at         line 156</div>
         <code>        static            
-    <strong>deleteFileupload</strong>(string $filename)</code>
+    <strong>deleteFileupload</strong>(string $filename)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Delete File</p>                                </div>
                 <div class="tags">
@@ -496,8 +544,7 @@
                     <tr>
                 <td>string</td>
                 <td>$filename</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -509,12 +556,59 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_handle">
-        <div class="location">at line 172</div>
-        <code>        static            string|null
-    <strong>handle</strong>(boolean $useSuper = true)</code>
+                    <h3 id="method_deleteFileuploads">
+        <div class="location">at         line 170</div>
+        <code>        static            bool
+    <strong>deleteFileuploads</strong>(array $filesnames = array(), bool|<abbr title="jtl\Connector\Core\Http\true">true</abbr> $withFolder = true)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$filesnames</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>bool|<abbr title="jtl\Connector\Core\Http\true">true</abbr></td>
+                <td>$withFolder</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_handle">
+        <div class="location">at         line 201</div>
+        <code>        static            string|null
+    <strong>handle</strong>(boolean $useSuper = true)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Main HTTP Handler</p>                                </div>
                 <div class="tags">
@@ -524,8 +618,7 @@
                     <tr>
                 <td>boolean</td>
                 <td>$useSuper</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -535,8 +628,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string|null</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -546,13 +638,11 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../../jtl/Connector/Core/Exception/CompressionException.html"><abbr title="jtl\Connector\Core\Exception\CompressionException">CompressionException</abbr></a></td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td><a href="../../../../jtl/Connector/Core/Exception/HttpException.html"><abbr title="jtl\Connector\Core\Exception\HttpException">HttpException</abbr></a></td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -563,11 +653,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getSession">
-        <div class="location">at line 223</div>
+        <div class="location">at         line 252</div>
         <code>        static            string|NULL
-    <strong>getSession</strong>()</code>
+    <strong>getSession</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Session HTTP Getter</p>                                </div>
                 <div class="tags">
@@ -577,8 +671,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string|NULL</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 

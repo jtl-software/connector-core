@@ -12,6 +12,9 @@
         <script src="../../../js/bootstrap.min.js"></script>
         <script src="../../../js/typeahead.min.js"></script>
         <script src="../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -70,17 +76,45 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>Identity</h1>
+        <h1>
+            Identity
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>Identity</strong>        extends <a href="../../../jtl/Connector/Core/Model/Model.html"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a></p>
+    <strong>Identity</strong>        extends <a href="../../../jtl/Connector/Core/Model/Model.html"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Identity</p>                    </div>
     
     
     
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_endpoint">
+                                        protected                                        string
+                </td>
+                <td>$endpoint</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_host">
+                                        protected                                        int
+                </td>
+                <td>$host</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+            </table>
+
     
             <h2>Methods</h2>
 
@@ -91,6 +125,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method___construct">__construct</a>($endpoint = &#039;&#039;, $host)
+        
                                             <p>Constructor</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -100,6 +135,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getProperties">getProperties</a>()
+        
                                             <p>Get the Model Properties</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Model/Model.html#method_getProperties"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a></small></div>
             </div>
@@ -108,17 +144,19 @@
                     <a href="../../../jtl/Connector/Core/Model/Model.html"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_setOptions">setOptions</a>(<abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr> $object = null, array $options = null)
+                    <a href="#method_setOptions">setOptions</a>(<a target="_blank" href="http://php.net/stdClass">stdClass</a> $object = null, array $options = null)
+        
                                             <p>Sets Properties with matching Array Values</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Model/Model.html#method_setOptions"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a></small></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    array
+                    <abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getPublic">getPublic</a>(array $publics = null)
-                                            <p>Convert the Model into stdClass Object</p>                </div>
+        
+                                            <p>Convert the Model into array</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -127,6 +165,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_toJson">toJson</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Model/Model.html#method_toJson"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a></small></div>
@@ -137,15 +176,17 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getEndpoint">getEndpoint</a>()
+        
                                             <p>Gets the value of endpoint.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\Identity">Identity</abbr>
+                    <a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setEndpoint">setEndpoint</a>(string $endpoint)
+        
                                             <p>Sets the value of endpoint.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -155,15 +196,17 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getHost">getHost</a>()
+        
                                             <p>Gets the value of host.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\Identity">Identity</abbr>
+                    <a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setHost">setHost</a>(int $host)
+        
                                             <p>Sets the value of host.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -173,24 +216,27 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_toArray">toArray</a>()
+        
                                             <p>Convert to Array</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    static&nbsp;<abbr title="jtl\Connector\Model\jtl\Connector\Model\Identity">Identity</abbr>
+                    static&nbsp;<a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_fromArray">fromArray</a>(array $data)
+        
                                             <p>Convert from Array</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    static&nbsp;<abbr title="jtl\Connector\Model\jtl\Connector\Model\Identity">Identity</abbr>
+                    static&nbsp;<a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_convert">convert</a>($data)
+        
                                             <p>Dynamic Converter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -202,11 +248,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at line 42</div>
+        <div class="location">at         line 42</div>
         <code>                    
-    <strong>__construct</strong>($endpoint = &#039;&#039;, $host)</code>
+    <strong>__construct</strong>($endpoint = &#039;&#039;, $host)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Constructor</p>                                </div>
                 <div class="tags">
@@ -216,14 +266,12 @@
                     <tr>
                 <td></td>
                 <td>$endpoint</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td></td>
                 <td>$host</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -236,11 +284,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getProperties">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Model/Model.html#method_getProperties"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at line 33</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Model/Model.html#method_getProperties"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at         line 33</div>
         <code>                    <abbr title="jtl\Connector\Core\Model\multitype:">multitype:</abbr>
-    <strong>getProperties</strong>()</code>
+    <strong>getProperties</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Get the Model Properties</p>                                </div>
                 <div class="tags">
@@ -262,11 +314,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setOptions">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Model/Model.html#method_setOptions"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at line 45</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Model/Model.html#method_setOptions"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at         line 45</div>
         <code>                    <a href="../../../jtl/Connector/Core/Model/Model.html"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a>
-    <strong>setOptions</strong>(<abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr> $object = null, array $options = null)</code>
+    <strong>setOptions</strong>(<a target="_blank" href="http://php.net/stdClass">stdClass</a> $object = null, array $options = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Sets Properties with matching Array Values</p>                                </div>
                 <div class="tags">
@@ -274,16 +330,14 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr></td>
+                <td><a target="_blank" href="http://php.net/stdClass">stdClass</a></td>
                 <td>$object</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>array</td>
                 <td>$options</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -293,8 +347,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Core/Model/Model.html"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -306,13 +359,17 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getPublic">
-        <div class="location">at line 109</div>
-        <code>                    array
-    <strong>getPublic</strong>(array $publics = null)</code>
+        <div class="location">at         line 109</div>
+        <code>                    <abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr>
+    <strong>getPublic</strong>(array $publics = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
-                                    <p>Convert the Model into stdClass Object</p>                                </div>
+                                    <p>Convert the Model into array</p>                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -320,8 +377,7 @@
                     <tr>
                 <td>array</td>
                 <td>$publics</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -330,7 +386,7 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td>array</td>
+            <td><abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr></td>
             <td>$object</td>
         </tr>
     </table>
@@ -343,11 +399,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_toJson">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Model/Model.html#method_toJson"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at line 115</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Model/Model.html#method_toJson"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at         line 115</div>
         <code>                    
-    <strong>toJson</strong>()</code>
+    <strong>toJson</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
             
@@ -358,11 +418,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getEndpoint">
-        <div class="location">at line 53</div>
+        <div class="location">at         line 53</div>
         <code>                    string
-    <strong>getEndpoint</strong>()</code>
+    <strong>getEndpoint</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Gets the value of endpoint.</p>                                </div>
                 <div class="tags">
@@ -372,8 +436,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -385,11 +448,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setEndpoint">
-        <div class="location">at line 65</div>
-        <code>                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\Identity">Identity</abbr>
-    <strong>setEndpoint</strong>(string $endpoint)</code>
+        <div class="location">at         line 65</div>
+        <code>                    <a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a>
+    <strong>setEndpoint</strong>(string $endpoint)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Sets the value of endpoint.</p>                                </div>
                 <div class="tags">
@@ -408,9 +475,8 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\Identity">Identity</abbr></td>
-            <td>
-</td>
+            <td><a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a></td>
+            <td></td>
         </tr>
     </table>
 
@@ -422,11 +488,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getHost">
-        <div class="location">at line 76</div>
+        <div class="location">at         line 76</div>
         <code>                    int
-    <strong>getHost</strong>()</code>
+    <strong>getHost</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Gets the value of host.</p>                                </div>
                 <div class="tags">
@@ -436,8 +506,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>int</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -449,11 +518,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setHost">
-        <div class="location">at line 88</div>
-        <code>                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\Identity">Identity</abbr>
-    <strong>setHost</strong>(int $host)</code>
+        <div class="location">at         line 88</div>
+        <code>                    <a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a>
+    <strong>setHost</strong>(int $host)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Sets the value of host.</p>                                </div>
                 <div class="tags">
@@ -472,9 +545,8 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\Identity">Identity</abbr></td>
-            <td>
-</td>
+            <td><a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a></td>
+            <td></td>
         </tr>
     </table>
 
@@ -486,11 +558,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_toArray">
-        <div class="location">at line 99</div>
+        <div class="location">at         line 99</div>
         <code>                    array
-    <strong>toArray</strong>()</code>
+    <strong>toArray</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Convert to Array</p>                                </div>
                 <div class="tags">
@@ -500,8 +576,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>array</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -513,11 +588,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_fromArray">
-        <div class="location">at line 120</div>
-        <code>        static            <abbr title="jtl\Connector\Model\jtl\Connector\Model\Identity">Identity</abbr>
-    <strong>fromArray</strong>(array $data)</code>
+        <div class="location">at         line 120</div>
+        <code>        static            <a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a>
+    <strong>fromArray</strong>(array $data)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Convert from Array</p>                                </div>
                 <div class="tags">
@@ -527,8 +606,7 @@
                     <tr>
                 <td>array</td>
                 <td>$data</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -537,9 +615,8 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\Identity">Identity</abbr></td>
-            <td>
-</td>
+            <td><a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a></td>
+            <td></td>
         </tr>
     </table>
 
@@ -548,9 +625,8 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><a target="_blank" href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
-                <td>
-</td>
+                <td><a target="_blank" href="http://php.net/InvalidArgumentException">InvalidArgumentException</a></td>
+                <td></td>
             </tr>
             </table>
 
@@ -561,11 +637,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_convert">
-        <div class="location">at line 134</div>
-        <code>        static            <abbr title="jtl\Connector\Model\jtl\Connector\Model\Identity">Identity</abbr>
-    <strong>convert</strong>($data)</code>
+        <div class="location">at         line 134</div>
+        <code>        static            <a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a>
+    <strong>convert</strong>($data)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Dynamic Converter</p>                                </div>
                 <div class="tags">
@@ -575,8 +655,7 @@
                     <tr>
                 <td></td>
                 <td>$data</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -585,9 +664,8 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\Identity">Identity</abbr></td>
-            <td>
-</td>
+            <td><a href="../../../jtl/Connector/Model/Identity.html"><abbr title="jtl\Connector\Model\Identity">Identity</abbr></a></td>
+            <td></td>
         </tr>
     </table>
 

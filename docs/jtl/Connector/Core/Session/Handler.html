@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,17 +77,53 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>Handler</h1>
+        <h1>
+            Handler
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>Handler</strong></p>
+    <strong>Handler</strong>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Session Handler</p>                    </div>
     
     
     
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property__db">
+                                        protected                                        <a href="../../../../jtl/Connector/Core/Database/IDatabase.html"><abbr title="jtl\Connector\Core\Database\IDatabase">IDatabase</abbr></a>
+                </td>
+                <td>$_db</td>
+                <td class="last">Session Database Mapper</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property__lifetime">
+                                        protected                                        integer
+                </td>
+                <td>$_lifetime</td>
+                <td class="last">Session GC Lifetime</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property__sessionId">
+                                        protected                                        string
+                </td>
+                <td>$_sessionId</td>
+                <td class="last">Session Id</td>
+                <td></td>
+            </tr>
+            </table>
+
     
             <h2>Methods</h2>
 
@@ -91,7 +133,8 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___construct">__construct</a>(<abbr title="jtl\Connector\Core\Session\jtl\Connector\Core\Database\IDatabase">IDatabase</abbr> $db, $sessionId = null, $sessionName = &#039;jtlConnector&#039;)
+                    <a href="#method___construct">__construct</a>(<a href="../../../../jtl/Connector/Core/Database/IDatabase.html"><abbr title="jtl\Connector\Core\Database\IDatabase">IDatabase</abbr></a> $db, $sessionId = null, $sessionName = &quot;jtlConnector&quot;)
+        
                                             <p>Constructor</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -101,6 +144,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_check">check</a>(string $sessionId)
+        
                                             <p>Checks if Session is Valid</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -110,6 +154,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_open">open</a>($savePath, $sessionName)
+        
                                             <p>Open Session</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -119,6 +164,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_close">close</a>()
+        
                                             <p>Close Sesssion</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -128,6 +174,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_read">read</a>($sessionId)
+        
                                             <p>Read Session</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -137,6 +184,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_write">write</a>($sessionId, $sessionData)
+        
                                             <p>Write Session</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -146,6 +194,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_destroy">destroy</a>($sessionId)
+        
                                             <p>Destroy Session</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -155,6 +204,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_gc">gc</a>($maxLifetime)
+        
                                             <p>Garbage Collector</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -164,6 +214,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getSessionId">getSessionId</a>()
+        
                                             <p>SessionId Getter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -173,6 +224,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getLifetime">getLifetime</a>()
+        
                                             <p>Lifetime Getter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -184,11 +236,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at line 51</div>
+        <div class="location">at         line 51</div>
         <code>                    
-    <strong>__construct</strong>(<abbr title="jtl\Connector\Core\Session\jtl\Connector\Core\Database\IDatabase">IDatabase</abbr> $db, $sessionId = null, $sessionName = &#039;jtlConnector&#039;)</code>
+    <strong>__construct</strong>(<a href="../../../../jtl/Connector/Core/Database/IDatabase.html"><abbr title="jtl\Connector\Core\Database\IDatabase">IDatabase</abbr></a> $db, $sessionId = null, $sessionName = &quot;jtlConnector&quot;)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Constructor</p>                                </div>
                 <div class="tags">
@@ -196,10 +252,9 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Session\jtl\Connector\Core\Database\IDatabase">IDatabase</abbr></td>
+                <td><a href="../../../../jtl/Connector/Core/Database/IDatabase.html"><abbr title="jtl\Connector\Core\Database\IDatabase">IDatabase</abbr></a></td>
                 <td>$db</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td></td>
@@ -220,8 +275,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../../jtl/Connector/Core/Exception/SessionException.html"><abbr title="jtl\Connector\Core\Exception\SessionException">SessionException</abbr></a></td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -232,11 +286,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_check">
-        <div class="location">at line 100</div>
+        <div class="location">at         line 107</div>
         <code>                    boolean
-    <strong>check</strong>(string $sessionId)</code>
+    <strong>check</strong>(string $sessionId)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Checks if Session is Valid</p>                                </div>
                 <div class="tags">
@@ -246,8 +304,7 @@
                     <tr>
                 <td>string</td>
                 <td>$sessionId</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -257,8 +314,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -270,11 +326,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_open">
-        <div class="location">at line 125</div>
+        <div class="location">at         line 132</div>
         <code>                    
-    <strong>open</strong>($savePath, $sessionName)</code>
+    <strong>open</strong>($savePath, $sessionName)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Open Session</p>                                </div>
                 <div class="tags">
@@ -284,14 +344,12 @@
                     <tr>
                 <td></td>
                 <td>$savePath</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td></td>
                 <td>$sessionName</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -304,11 +362,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_close">
-        <div class="location">at line 138</div>
+        <div class="location">at         line 144</div>
         <code>                    
-    <strong>close</strong>()</code>
+    <strong>close</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Close Sesssion</p>                                </div>
                 <div class="tags">
@@ -321,11 +383,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_read">
-        <div class="location">at line 148</div>
+        <div class="location">at         line 154</div>
         <code>                    
-    <strong>read</strong>($sessionId)</code>
+    <strong>read</strong>($sessionId)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Read Session</p>                                </div>
                 <div class="tags">
@@ -335,8 +401,7 @@
                     <tr>
                 <td></td>
                 <td>$sessionId</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -349,11 +414,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_write">
-        <div class="location">at line 174</div>
+        <div class="location">at         line 178</div>
         <code>                    
-    <strong>write</strong>($sessionId, $sessionData)</code>
+    <strong>write</strong>($sessionId, $sessionData)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Write Session</p>                                </div>
                 <div class="tags">
@@ -363,14 +432,12 @@
                     <tr>
                 <td></td>
                 <td>$sessionId</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td></td>
                 <td>$sessionData</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -383,11 +450,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_destroy">
-        <div class="location">at line 213</div>
+        <div class="location">at         line 217</div>
         <code>                    
-    <strong>destroy</strong>($sessionId)</code>
+    <strong>destroy</strong>($sessionId)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Destroy Session</p>                                </div>
                 <div class="tags">
@@ -397,8 +468,7 @@
                     <tr>
                 <td></td>
                 <td>$sessionId</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -411,11 +481,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_gc">
-        <div class="location">at line 225</div>
+        <div class="location">at         line 229</div>
         <code>                    
-    <strong>gc</strong>($maxLifetime)</code>
+    <strong>gc</strong>($maxLifetime)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Garbage Collector</p>                                </div>
                 <div class="tags">
@@ -425,8 +499,7 @@
                     <tr>
                 <td></td>
                 <td>$maxLifetime</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -439,11 +512,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getSessionId">
-        <div class="location">at line 237</div>
+        <div class="location">at         line 241</div>
         <code>                    string
-    <strong>getSessionId</strong>()</code>
+    <strong>getSessionId</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>SessionId Getter</p>                                </div>
                 <div class="tags">
@@ -453,8 +530,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -466,11 +542,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getLifetime">
-        <div class="location">at line 247</div>
+        <div class="location">at         line 251</div>
         <code>                    <abbr title="jtl\Connector\Core\Session\number">number</abbr>
-    <strong>getLifetime</strong>()</code>
+    <strong>getLifetime</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Lifetime Getter</p>                                </div>
                 <div class="tags">
@@ -480,8 +560,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><abbr title="jtl\Connector\Core\Session\number">number</abbr></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 

@@ -12,6 +12,9 @@
         <script src="../../../js/bootstrap.min.js"></script>
         <script src="../../../js/typeahead.min.js"></script>
         <script src="../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -70,11 +76,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>GlobalData</h1>
+        <h1>
+            GlobalData
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>GlobalData</strong>        extends <a href="../../../jtl/Connector/Type/DataType.html"><abbr title="jtl\Connector\Type\DataType">DataType</abbr></a></p>
+    <strong>GlobalData</strong>        extends <a href="../../../jtl/Connector/Type/DataType.html"><abbr title="jtl\Connector\Type\DataType">DataType</abbr></a>
+</p>
+
+        
+    
 
     
     
@@ -85,21 +98,34 @@
             <div class="container-fluid underlined">
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="jtl\Connector\Type\jtl\Connector\Type\PropertyInfo">PropertyInfo</abbr>
+                    <a href="../../../jtl/Connector/Type/PropertyInfo.html"><abbr title="jtl\Connector\Type\PropertyInfo">PropertyInfo</abbr></a>[]
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getProperties">getProperties</a>()
+        
                                             <p>Returns all the public properties of the current Type.</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Type/DataType.html#method_getProperties"><abbr title="jtl\Connector\Type\DataType">DataType</abbr></a></small></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="jtl\Connector\Type\jtl\Connector\Type\PropertyInfo">PropertyInfo</abbr>
+                    <a href="../../../jtl/Connector/Type/PropertyInfo.html"><abbr title="jtl\Connector\Type\PropertyInfo">PropertyInfo</abbr></a>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getProperty">getProperty</a>(string $propertyName)
+        
                                             <p>Searches for the public property with the specified name.</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Type/DataType.html#method_getProperty"><abbr title="jtl\Connector\Type\DataType">DataType</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../jtl/Connector/Type/PropertyInfo.html"><abbr title="jtl\Connector\Type\PropertyInfo">PropertyInfo</abbr></a>[]
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_loadProperties">loadProperties</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
@@ -107,6 +133,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_isMain">isMain</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -119,11 +146,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_getProperties">
-        <div class="location">in <a href="../../../jtl/Connector/Type/DataType.html#method_getProperties"><abbr title="jtl\Connector\Type\DataType">DataType</abbr></a> at line 30</div>
-        <code>                    <abbr title="jtl\Connector\Type\jtl\Connector\Type\PropertyInfo">PropertyInfo</abbr>
-    <strong>getProperties</strong>()</code>
+        <div class="location">in <a href="../../../jtl/Connector/Type/DataType.html#method_getProperties"><abbr title="jtl\Connector\Type\DataType">DataType</abbr></a> at         line 30</div>
+        <code>                    <a href="../../../jtl/Connector/Type/PropertyInfo.html"><abbr title="jtl\Connector\Type\PropertyInfo">PropertyInfo</abbr></a>[]
+    <strong>getProperties</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Returns all the public properties of the current Type.</p>                                </div>
                 <div class="tags">
@@ -132,9 +163,8 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Type\jtl\Connector\Type\PropertyInfo">PropertyInfo</abbr></td>
-            <td>
-</td>
+            <td><a href="../../../jtl/Connector/Type/PropertyInfo.html"><abbr title="jtl\Connector\Type\PropertyInfo">PropertyInfo</abbr></a>[]</td>
+            <td></td>
         </tr>
     </table>
 
@@ -146,11 +176,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getProperty">
-        <div class="location">in <a href="../../../jtl/Connector/Type/DataType.html#method_getProperty"><abbr title="jtl\Connector\Type\DataType">DataType</abbr></a> at line 45</div>
-        <code>                    <abbr title="jtl\Connector\Type\jtl\Connector\Type\PropertyInfo">PropertyInfo</abbr>
-    <strong>getProperty</strong>(string $propertyName)</code>
+        <div class="location">in <a href="../../../jtl/Connector/Type/DataType.html#method_getProperty"><abbr title="jtl\Connector\Type\DataType">DataType</abbr></a> at         line 45</div>
+        <code>                    <a href="../../../jtl/Connector/Type/PropertyInfo.html"><abbr title="jtl\Connector\Type\PropertyInfo">PropertyInfo</abbr></a>
+    <strong>getProperty</strong>(string $propertyName)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Searches for the public property with the specified name.</p>                                </div>
                 <div class="tags">
@@ -160,8 +194,7 @@
                     <tr>
                 <td>string</td>
                 <td>$propertyName</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -170,9 +203,36 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Type\jtl\Connector\Type\PropertyInfo">PropertyInfo</abbr></td>
-            <td>
-</td>
+            <td><a href="../../../jtl/Connector/Type/PropertyInfo.html"><abbr title="jtl\Connector\Type\PropertyInfo">PropertyInfo</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_loadProperties">
+        <div class="location">at         line 17</div>
+        <code>            protected        <a href="../../../jtl/Connector/Type/PropertyInfo.html"><abbr title="jtl\Connector\Type\PropertyInfo">PropertyInfo</abbr></a>[]
+    <strong>loadProperties</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../jtl/Connector/Type/PropertyInfo.html"><abbr title="jtl\Connector\Type\PropertyInfo">PropertyInfo</abbr></a>[]</td>
+            <td></td>
         </tr>
     </table>
 
@@ -184,11 +244,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_isMain">
-        <div class="location">at line 35</div>
+        <div class="location">at         line 36</div>
         <code>                    
-    <strong>isMain</strong>()</code>
+    <strong>isMain</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
             

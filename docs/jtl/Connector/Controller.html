@@ -12,6 +12,9 @@
         <script src="../../js/bootstrap.min.js"></script>
         <script src="../../js/typeahead.min.js"></script>
         <script src="../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -74,35 +80,31 @@
 
     
             <h2>Classes</h2>
-        <div class="container-fluid underlined">
+        
+    <div class="container-fluid underlined">
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../jtl/Connector/Controller/Config.html"><abbr title="jtl\Connector\Controller\Config">jtl\Connector\Controller\Config</abbr></a>
-                                    </div>
+                                            <a href="../../jtl/Connector/Controller/Connector.html"><abbr title="jtl\Connector\Controller\Connector">Connector</abbr></a>
+                                            
+                </div>
                 <div class="col-md-6">
                     Base Config Controller
                 </div>
             </div>
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../jtl/Connector/Controller/Connector.html"><abbr title="jtl\Connector\Controller\Connector">jtl\Connector\Controller\Connector</abbr></a>
-                                    </div>
-                <div class="col-md-6">
-                    Base Config Controller
+                                            <a href="../../jtl/Connector/Controller/Feature.html"><abbr title="jtl\Connector\Controller\Feature">Feature</abbr></a>
+                                            
                 </div>
-            </div>
-                    <div class="row">
-                <div class="col-md-6">
-                                            <a href="../../jtl/Connector/Controller/Feature.html"><abbr title="jtl\Connector\Controller\Feature">jtl\Connector\Controller\Feature</abbr></a>
-                                    </div>
                 <div class="col-md-6">
                     Base Features Controller
                 </div>
             </div>
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../jtl/Connector/Controller/Linker.html"><abbr title="jtl\Connector\Controller\Linker">jtl\Connector\Controller\Linker</abbr></a>
-                                    </div>
+                                            <a href="../../jtl/Connector/Controller/Linker.html"><abbr title="jtl\Connector\Controller\Linker">Linker</abbr></a>
+                                            
+                </div>
                 <div class="col-md-6">
                     Base Linker Controller
                 </div>

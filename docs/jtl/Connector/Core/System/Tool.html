@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,11 +77,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>Tool</h1>
+        <h1>
+            Tool
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>Tool</strong></p>
+    <strong>Tool</strong>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Filesystem tool class.</p>                    </div>
@@ -90,8 +103,7 @@
                     static                                                            boolean
                 </td>
                 <td>$test</td>
-                <td class="last">
-</td>
+                <td class="last"></td>
                 <td></td>
             </tr>
                     <tr>
@@ -99,8 +111,7 @@
                     static                                                            boolean
                 </td>
                 <td>$exception</td>
-                <td class="last">
-</td>
+                <td class="last"></td>
                 <td></td>
             </tr>
                     <tr>
@@ -108,8 +119,7 @@
                     static                                                            boolean
                 </td>
                 <td>$ret_sys_getloadavg</td>
-                <td class="last">
-</td>
+                <td class="last"></td>
                 <td></td>
             </tr>
                     <tr>
@@ -117,8 +127,7 @@
                     static                                                            boolean
                 </td>
                 <td>$ret_sys_win_getloadavg</td>
-                <td class="last">
-</td>
+                <td class="last"></td>
                 <td></td>
             </tr>
                     <tr>
@@ -126,8 +135,7 @@
                     static                                                            mixed
                 </td>
                 <td>$ret_get_object_vars</td>
-                <td class="last">
-</td>
+                <td class="last"></td>
                 <td></td>
             </tr>
             </table>
@@ -142,6 +150,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_sys_getloadavg">sys_getloadavg</a>()
+        
                                             <p>This method will return the average system load for unix based systems.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -151,6 +160,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_sys_win_getloadavg">sys_win_getloadavg</a>()
+        
                                             <p>This method will return the average system load for windows based systems.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -159,7 +169,8 @@
                     static&nbsp;mixed
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_get_object_vars">get_object_vars</a>(<a target="_blank" href="http://php.net/stdClass"><abbr title="stdClass">stdClass</abbr></a> $obj)
+                    <a href="#method_get_object_vars">get_object_vars</a>(<a target="_blank" href="http://php.net/stdClass">stdClass</a> $obj)
+        
                                             <p>Returns object variables from std class.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -171,11 +182,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_sys_getloadavg">
-        <div class="location">at line 50</div>
+        <div class="location">at         line 50</div>
         <code>        static            array
-    <strong>sys_getloadavg</strong>()</code>
+    <strong>sys_getloadavg</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>This method will return the average system load for unix based systems.</p>                                </div>
                 <div class="tags">
@@ -185,8 +200,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>array</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -198,11 +212,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_sys_win_getloadavg">
-        <div class="location">at line 66</div>
+        <div class="location">at         line 66</div>
         <code>        static            array
-    <strong>sys_win_getloadavg</strong>()</code>
+    <strong>sys_win_getloadavg</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>This method will return the average system load for windows based systems.</p>                                </div>
                 <div class="tags">
@@ -212,8 +230,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>array</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -225,11 +242,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_get_object_vars">
-        <div class="location">at line 84</div>
+        <div class="location">at         line 84</div>
         <code>        static            mixed
-    <strong>get_object_vars</strong>(<a target="_blank" href="http://php.net/stdClass"><abbr title="stdClass">stdClass</abbr></a> $obj)</code>
+    <strong>get_object_vars</strong>(<a target="_blank" href="http://php.net/stdClass">stdClass</a> $obj)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Returns object variables from std class.</p>                                </div>
                 <div class="tags">
@@ -237,10 +258,9 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><a target="_blank" href="http://php.net/stdClass"><abbr title="stdClass">stdClass</abbr></a></td>
+                <td><a target="_blank" href="http://php.net/stdClass">stdClass</a></td>
                 <td>$obj</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -250,8 +270,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>mixed</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -260,9 +279,8 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><a target="_blank" href="http://php.net/RuntimeException"><abbr title="RuntimeException">RuntimeException</abbr></a></td>
-                <td>
-</td>
+                <td><a target="_blank" href="http://php.net/RuntimeException">RuntimeException</a></td>
+                <td></td>
             </tr>
             </table>
 

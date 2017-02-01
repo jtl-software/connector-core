@@ -12,6 +12,9 @@
         <script src="../../../js/bootstrap.min.js"></script>
         <script src="../../../js/typeahead.min.js"></script>
         <script src="../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -70,11 +76,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>IEndpointConnector</h1>
+        <h1>
+            IEndpointConnector
+                
+        </h1>
     </div>
 
     <p>    interface
-    <strong>IEndpointConnector</strong></p>
+    <strong>IEndpointConnector</strong>
+</p>
+
+        
+    
 
     
     
@@ -89,87 +102,83 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_initialize">initialize</a>()
+        
                                             <p>Main initialize method</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    <a href="../../../jtl/Connector/Application/IEndpointConnector.html"><abbr title="jtl\Connector\Application\IEndpointConnector">IEndpointConnector</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_setPrimaryKeyMapper">setPrimaryKeyMapper</a>(<abbr title="jtl\Connector\Application\jtl\Connector\Mapper\IPrimaryKeyMapper">IPrimaryKeyMapper</abbr> $mapper)
-                                            <p>Setter primary key mapper</p>                </div>
+                    <a href="#method_setPrimaryKeyMapper">setPrimaryKeyMapper</a>(<a href="../../../jtl/Connector/Mapper/IPrimaryKeyMapper.html"><abbr title="jtl\Connector\Mapper\IPrimaryKeyMapper">IPrimaryKeyMapper</abbr></a> $mapper)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    <a href="../../../jtl/Connector/Mapper/IPrimaryKeyMapper.html"><abbr title="jtl\Connector\Mapper\IPrimaryKeyMapper">IPrimaryKeyMapper</abbr></a>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getPrimaryKeyMapper">getPrimaryKeyMapper</a>()
-                                            <p>Returns primary key mapper</p>                </div>
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    <a href="../../../jtl/Connector/Application/IEndpointConnector.html"><abbr title="jtl\Connector\Application\IEndpointConnector">IEndpointConnector</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_setTokenLoader">setTokenLoader</a>(<abbr title="jtl\Connector\Application\jtl\Connector\Authentication\ITokenLoader">ITokenLoader</abbr> $tokenLoader)
-                                            <p>Setter token loader</p>                </div>
+                    <a href="#method_setTokenLoader">setTokenLoader</a>(<a href="../../../jtl/Connector/Authentication/ITokenLoader.html"><abbr title="jtl\Connector\Authentication\ITokenLoader">ITokenLoader</abbr></a> $tokenLoader)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    <a href="../../../jtl/Connector/Authentication/ITokenLoader.html"><abbr title="jtl\Connector\Authentication\ITokenLoader">ITokenLoader</abbr></a>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getTokenLoader">getTokenLoader</a>()
-                                            <p>Returns token loader</p>                </div>
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    <a href="../../../jtl/Connector/Application/IEndpointConnector.html"><abbr title="jtl\Connector\Application\IEndpointConnector">IEndpointConnector</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_setChecksumLoader">setChecksumLoader</a>(<abbr title="jtl\Connector\Application\jtl\Connector\Checksum\IChecksumLoader">IChecksumLoader</abbr> $checksumLoader)
-                                            <p>Setter checksum loader</p>                </div>
+                    <a href="#method_setChecksumLoader">setChecksumLoader</a>(<a href="../../../jtl/Connector/Checksum/IChecksumLoader.html"><abbr title="jtl\Connector\Checksum\IChecksumLoader">IChecksumLoader</abbr></a> $checksumLoader)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    <a href="../../../jtl/Connector/Checksum/IChecksumLoader.html"><abbr title="jtl\Connector\Checksum\IChecksumLoader">IChecksumLoader</abbr></a>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getChecksumLoader">getChecksumLoader</a>()
-                                            <p>Returns checksum loader</p>                </div>
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_setConfig">setConfig</a>(<abbr title="jtl\Connector\Application\jtl\Connector\Core\Config\Config">Config</abbr> $config)
-                                            <p>Setter connector config</p>                </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_getConfig">getConfig</a>()
-                                            <p>Returns the config</p>                </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    
+                    bool
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_canHandle">canHandle</a>()
+        
                                             <p>Checks whether or not a method can be handled</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -178,7 +187,8 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_handle">handle</a>(<abbr title="jtl\Connector\Application\jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr> $requestpacket)
+                    <a href="#method_handle">handle</a>(<a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a> $requestpacket)
+        
                                             <p>Controller handle</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -188,6 +198,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getController">getController</a>()
+        
                                             <p>Controller getter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -199,11 +210,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_initialize">
-        <div class="location">at line 25</div>
+        <div class="location">at         line 24</div>
         <code>                    
-    <strong>initialize</strong>()</code>
+    <strong>initialize</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Main initialize method</p>                                </div>
                 <div class="tags">
@@ -216,26 +231,36 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setPrimaryKeyMapper">
-        <div class="location">at line 30</div>
-        <code>                    
-    <strong>setPrimaryKeyMapper</strong>(<abbr title="jtl\Connector\Application\jtl\Connector\Mapper\IPrimaryKeyMapper">IPrimaryKeyMapper</abbr> $mapper)</code>
+        <div class="location">at         line 30</div>
+        <code>                    <a href="../../../jtl/Connector/Application/IEndpointConnector.html"><abbr title="jtl\Connector\Application\IEndpointConnector">IEndpointConnector</abbr></a>
+    <strong>setPrimaryKeyMapper</strong>(<a href="../../../jtl/Connector/Mapper/IPrimaryKeyMapper.html"><abbr title="jtl\Connector\Mapper\IPrimaryKeyMapper">IPrimaryKeyMapper</abbr></a> $mapper)
+        </code>
     </h3>
     <div class="details">
-                    <div class="method-description">
-                                    <p>Setter primary key mapper</p>                                </div>
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Application\jtl\Connector\Mapper\IPrimaryKeyMapper">IPrimaryKeyMapper</abbr></td>
+                <td><a href="../../../jtl/Connector/Mapper/IPrimaryKeyMapper.html"><abbr title="jtl\Connector\Mapper\IPrimaryKeyMapper">IPrimaryKeyMapper</abbr></a></td>
                 <td>$mapper</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../jtl/Connector/Application/IEndpointConnector.html"><abbr title="jtl\Connector\Application\IEndpointConnector">IEndpointConnector</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -244,15 +269,26 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getPrimaryKeyMapper">
-        <div class="location">at line 35</div>
-        <code>                    
-    <strong>getPrimaryKeyMapper</strong>()</code>
+        <div class="location">at         line 35</div>
+        <code>                    <a href="../../../jtl/Connector/Mapper/IPrimaryKeyMapper.html"><abbr title="jtl\Connector\Mapper\IPrimaryKeyMapper">IPrimaryKeyMapper</abbr></a>
+    <strong>getPrimaryKeyMapper</strong>()
+        </code>
     </h3>
     <div class="details">
-                    <div class="method-description">
-                                    <p>Returns primary key mapper</p>                                </div>
+            
+    
+
                 <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../jtl/Connector/Mapper/IPrimaryKeyMapper.html"><abbr title="jtl\Connector\Mapper\IPrimaryKeyMapper">IPrimaryKeyMapper</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -261,26 +297,36 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setTokenLoader">
-        <div class="location">at line 40</div>
-        <code>                    
-    <strong>setTokenLoader</strong>(<abbr title="jtl\Connector\Application\jtl\Connector\Authentication\ITokenLoader">ITokenLoader</abbr> $tokenLoader)</code>
+        <div class="location">at         line 41</div>
+        <code>                    <a href="../../../jtl/Connector/Application/IEndpointConnector.html"><abbr title="jtl\Connector\Application\IEndpointConnector">IEndpointConnector</abbr></a>
+    <strong>setTokenLoader</strong>(<a href="../../../jtl/Connector/Authentication/ITokenLoader.html"><abbr title="jtl\Connector\Authentication\ITokenLoader">ITokenLoader</abbr></a> $tokenLoader)
+        </code>
     </h3>
     <div class="details">
-                    <div class="method-description">
-                                    <p>Setter token loader</p>                                </div>
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Application\jtl\Connector\Authentication\ITokenLoader">ITokenLoader</abbr></td>
+                <td><a href="../../../jtl/Connector/Authentication/ITokenLoader.html"><abbr title="jtl\Connector\Authentication\ITokenLoader">ITokenLoader</abbr></a></td>
                 <td>$tokenLoader</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../jtl/Connector/Application/IEndpointConnector.html"><abbr title="jtl\Connector\Application\IEndpointConnector">IEndpointConnector</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -289,15 +335,26 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getTokenLoader">
-        <div class="location">at line 45</div>
-        <code>                    
-    <strong>getTokenLoader</strong>()</code>
+        <div class="location">at         line 46</div>
+        <code>                    <a href="../../../jtl/Connector/Authentication/ITokenLoader.html"><abbr title="jtl\Connector\Authentication\ITokenLoader">ITokenLoader</abbr></a>
+    <strong>getTokenLoader</strong>()
+        </code>
     </h3>
     <div class="details">
-                    <div class="method-description">
-                                    <p>Returns token loader</p>                                </div>
+            
+    
+
                 <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../jtl/Connector/Authentication/ITokenLoader.html"><abbr title="jtl\Connector\Authentication\ITokenLoader">ITokenLoader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -306,26 +363,36 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setChecksumLoader">
-        <div class="location">at line 50</div>
-        <code>                    
-    <strong>setChecksumLoader</strong>(<abbr title="jtl\Connector\Application\jtl\Connector\Checksum\IChecksumLoader">IChecksumLoader</abbr> $checksumLoader)</code>
+        <div class="location">at         line 52</div>
+        <code>                    <a href="../../../jtl/Connector/Application/IEndpointConnector.html"><abbr title="jtl\Connector\Application\IEndpointConnector">IEndpointConnector</abbr></a>
+    <strong>setChecksumLoader</strong>(<a href="../../../jtl/Connector/Checksum/IChecksumLoader.html"><abbr title="jtl\Connector\Checksum\IChecksumLoader">IChecksumLoader</abbr></a> $checksumLoader)
+        </code>
     </h3>
     <div class="details">
-                    <div class="method-description">
-                                    <p>Setter checksum loader</p>                                </div>
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Application\jtl\Connector\Checksum\IChecksumLoader">IChecksumLoader</abbr></td>
+                <td><a href="../../../jtl/Connector/Checksum/IChecksumLoader.html"><abbr title="jtl\Connector\Checksum\IChecksumLoader">IChecksumLoader</abbr></a></td>
                 <td>$checksumLoader</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../jtl/Connector/Application/IEndpointConnector.html"><abbr title="jtl\Connector\Application\IEndpointConnector">IEndpointConnector</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -334,60 +401,26 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getChecksumLoader">
-        <div class="location">at line 55</div>
-        <code>                    
-    <strong>getChecksumLoader</strong>()</code>
+        <div class="location">at         line 57</div>
+        <code>                    <a href="../../../jtl/Connector/Checksum/IChecksumLoader.html"><abbr title="jtl\Connector\Checksum\IChecksumLoader">IChecksumLoader</abbr></a>
+    <strong>getChecksumLoader</strong>()
+        </code>
     </h3>
     <div class="details">
-                    <div class="method-description">
-                                    <p>Returns checksum loader</p>                                </div>
-                <div class="tags">
             
-            
-            
-                    </div>
-    </div>
+    
 
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_setConfig">
-        <div class="location">at line 60</div>
-        <code>                    
-    <strong>setConfig</strong>(<abbr title="jtl\Connector\Application\jtl\Connector\Core\Config\Config">Config</abbr> $config)</code>
-    </h3>
-    <div class="details">
-                    <div class="method-description">
-                                    <p>Setter connector config</p>                                </div>
                 <div class="tags">
-                            <h4>Parameters</h4>
+            
+                            <h4>Return Value</h4>
 
                     <table class="table table-condensed">
-                    <tr>
-                <td><abbr title="jtl\Connector\Application\jtl\Connector\Core\Config\Config">Config</abbr></td>
-                <td>$config</td>
-                <td>
-</td>
-            </tr>
-            </table>
+        <tr>
+            <td><a href="../../../jtl/Connector/Checksum/IChecksumLoader.html"><abbr title="jtl\Connector\Checksum\IChecksumLoader">IChecksumLoader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
 
-            
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_getConfig">
-        <div class="location">at line 65</div>
-        <code>                    
-    <strong>getConfig</strong>()</code>
-    </h3>
-    <div class="details">
-                    <div class="method-description">
-                                    <p>Returns the config</p>                                </div>
-                <div class="tags">
-            
             
             
                     </div>
@@ -396,15 +429,28 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_canHandle">
-        <div class="location">at line 70</div>
-        <code>                    
-    <strong>canHandle</strong>()</code>
+        <div class="location">at         line 63</div>
+        <code>                    bool
+    <strong>canHandle</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Checks whether or not a method can be handled</p>                                </div>
                 <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -413,11 +459,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_handle">
-        <div class="location">at line 77</div>
+        <div class="location">at         line 70</div>
         <code>                    
-    <strong>handle</strong>(<abbr title="jtl\Connector\Application\jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr> $requestpacket)</code>
+    <strong>handle</strong>(<a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a> $requestpacket)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Controller handle</p>                                </div>
                 <div class="tags">
@@ -425,10 +475,9 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Application\jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></td>
+                <td><a href="../../../jtl/Connector/Core/Rpc/RequestPacket.html"><abbr title="jtl\Connector\Core\Rpc\RequestPacket">RequestPacket</abbr></a></td>
                 <td>$requestpacket</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -441,11 +490,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getController">
-        <div class="location">at line 82</div>
+        <div class="location">at         line 75</div>
         <code>                    
-    <strong>getController</strong>()</code>
+    <strong>getController</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Controller getter</p>                                </div>
                 <div class="tags">

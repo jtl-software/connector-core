@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,11 +77,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>Method</h1>
+        <h1>
+            Method
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>Method</strong></p>
+    <strong>Method</strong>
+</p>
+
+        
+    
 
     
     
@@ -85,33 +98,63 @@
                     <tr>
                 <td>ACTION_PULL</td>
                 <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
                     <tr>
                 <td>ACTION_PUSH</td>
                 <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
                     <tr>
                 <td>ACTION_DELETE</td>
                 <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>ACTION_STATISTIC</td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
                 </td>
             </tr>
             </table>
 
     
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_rpcmethod">
+                                        protected                                        string
+                </td>
+                <td>$rpcmethod</td>
+                <td class="last">Rcp Method</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_controller">
+                                        protected                                        string
+                </td>
+                <td>$controller</td>
+                <td class="last">Connector Controller</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_action">
+                                        protected                                        string
+                </td>
+                <td>$action</td>
+                <td class="last">Connector Action</td>
+                <td></td>
+            </tr>
+            </table>
+
     
             <h2>Methods</h2>
 
@@ -122,6 +165,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method___construct">__construct</a>(string $rpcmethod = null, string $controller = null, string $action = null)
+        
                                             <p>Constructor</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -131,6 +175,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getRpcMethod">getRpcMethod</a>()
+        
                                             <p>Rpc Method Getter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -140,6 +185,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getController">getController</a>()
+        
                                             <p>Controller Getter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -149,6 +195,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getAction">getAction</a>()
+        
                                             <p>Action Getter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -158,6 +205,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_isCommit">isCommit</a>()
+        
                                             <p>Commit check</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -167,6 +215,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_isCore">isCore</a>()
+        
                                             <p>Core check</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -176,6 +225,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setRpcMethod">setRpcMethod</a>(string $rpcmethod)
+        
                                             <p>Method Setter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -185,6 +235,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setController">setController</a>(string $controller)
+        
                                             <p>Controller Setter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -194,6 +245,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setAction">setAction</a>(string $action)
+        
                                             <p>Action Setter</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -205,11 +257,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at line 45</div>
+        <div class="location">at         line 46</div>
         <code>                    
-    <strong>__construct</strong>(string $rpcmethod = null, string $controller = null, string $action = null)</code>
+    <strong>__construct</strong>(string $rpcmethod = null, string $controller = null, string $action = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Constructor</p>                                </div>
                 <div class="tags">
@@ -219,20 +275,17 @@
                     <tr>
                 <td>string</td>
                 <td>$rpcmethod</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>string</td>
                 <td>$controller</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>string</td>
                 <td>$action</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -245,11 +298,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getRpcMethod">
-        <div class="location">at line 57</div>
+        <div class="location">at         line 58</div>
         <code>                    string
-    <strong>getRpcMethod</strong>()</code>
+    <strong>getRpcMethod</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Rpc Method Getter</p>                                </div>
                 <div class="tags">
@@ -259,8 +316,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -272,11 +328,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getController">
-        <div class="location">at line 67</div>
+        <div class="location">at         line 68</div>
         <code>                    string
-    <strong>getController</strong>()</code>
+    <strong>getController</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Controller Getter</p>                                </div>
                 <div class="tags">
@@ -286,8 +346,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -299,11 +358,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getAction">
-        <div class="location">at line 77</div>
+        <div class="location">at         line 78</div>
         <code>                    string
-    <strong>getAction</strong>()</code>
+    <strong>getAction</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Action Getter</p>                                </div>
                 <div class="tags">
@@ -313,8 +376,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -326,11 +388,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_isCommit">
-        <div class="location">at line 87</div>
+        <div class="location">at         line 88</div>
         <code>                    boolean
-    <strong>isCommit</strong>()</code>
+    <strong>isCommit</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Commit check</p>                                </div>
                 <div class="tags">
@@ -340,8 +406,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -353,11 +418,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_isCore">
-        <div class="location">at line 97</div>
+        <div class="location">at         line 98</div>
         <code>                    boolean
-    <strong>isCore</strong>()</code>
+    <strong>isCore</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Core check</p>                                </div>
                 <div class="tags">
@@ -367,8 +436,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -380,11 +448,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setRpcMethod">
-        <div class="location">at line 112</div>
+        <div class="location">at         line 113</div>
         <code>                    <a href="../../../../jtl/Connector/Core/Rpc/Method.html"><abbr title="jtl\Connector\Core\Rpc\Method">Method</abbr></a>
-    <strong>setRpcMethod</strong>(string $rpcmethod)</code>
+    <strong>setRpcMethod</strong>(string $rpcmethod)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Method Setter</p>                                </div>
                 <div class="tags">
@@ -394,8 +466,7 @@
                     <tr>
                 <td>string</td>
                 <td>$rpcmethod</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -405,8 +476,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../../jtl/Connector/Core/Rpc/Method.html"><abbr title="jtl\Connector\Core\Rpc\Method">Method</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -418,11 +488,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setController">
-        <div class="location">at line 124</div>
+        <div class="location">at         line 125</div>
         <code>                    <a href="../../../../jtl/Connector/Core/Rpc/Method.html"><abbr title="jtl\Connector\Core\Rpc\Method">Method</abbr></a>
-    <strong>setController</strong>(string $controller)</code>
+    <strong>setController</strong>(string $controller)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Controller Setter</p>                                </div>
                 <div class="tags">
@@ -432,8 +506,7 @@
                     <tr>
                 <td>string</td>
                 <td>$controller</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -443,8 +516,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../../jtl/Connector/Core/Rpc/Method.html"><abbr title="jtl\Connector\Core\Rpc\Method">Method</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -456,11 +528,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setAction">
-        <div class="location">at line 136</div>
+        <div class="location">at         line 137</div>
         <code>                    <a href="../../../../jtl/Connector/Core/Rpc/Method.html"><abbr title="jtl\Connector\Core\Rpc\Method">Method</abbr></a>
-    <strong>setAction</strong>(string $action)</code>
+    <strong>setAction</strong>(string $action)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Action Setter</p>                                </div>
                 <div class="tags">
@@ -470,8 +546,7 @@
                     <tr>
                 <td>string</td>
                 <td>$action</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -481,8 +556,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../../jtl/Connector/Core/Rpc/Method.html"><abbr title="jtl\Connector\Core\Rpc\Method">Method</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 

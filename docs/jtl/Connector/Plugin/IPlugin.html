@@ -12,6 +12,9 @@
         <script src="../../../js/bootstrap.min.js"></script>
         <script src="../../../js/typeahead.min.js"></script>
         <script src="../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -70,11 +76,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>IPlugin</h1>
+        <h1>
+            IPlugin
+                
+        </h1>
     </div>
 
     <p>    interface
-    <strong>IPlugin</strong></p>
+    <strong>IPlugin</strong>
+</p>
+
+        
+    
 
     
     
@@ -88,7 +101,8 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_registerListener">registerListener</a>(<abbr title="jtl\Connector\Plugin\Symfony\Component\EventDispatcher\EventDispatcher">EventDispatcher</abbr> $dispatcher)
+                    <a href="#method_registerListener">registerListener</a>(<abbr title="Symfony\Component\EventDispatcher\EventDispatcher">EventDispatcher</abbr> $dispatcher)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -101,20 +115,23 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_registerListener">
-        <div class="location">at line 8</div>
+        <div class="location">at         line 8</div>
         <code>                    
-    <strong>registerListener</strong>(<abbr title="jtl\Connector\Plugin\Symfony\Component\EventDispatcher\EventDispatcher">EventDispatcher</abbr> $dispatcher)</code>
+    <strong>registerListener</strong>(<abbr title="Symfony\Component\EventDispatcher\EventDispatcher">EventDispatcher</abbr> $dispatcher)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Plugin\Symfony\Component\EventDispatcher\EventDispatcher">EventDispatcher</abbr></td>
+                <td><abbr title="Symfony\Component\EventDispatcher\EventDispatcher">EventDispatcher</abbr></td>
                 <td>$dispatcher</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 

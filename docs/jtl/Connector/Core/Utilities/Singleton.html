@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,17 +77,37 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>Singleton</h1>
+        <h1>
+            Singleton
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>Singleton</strong></p>
+    <strong>Singleton</strong>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Abstract Singleton Class</p>                    </div>
     
     
     
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property__instances">
+                    static                    protected                                        <abbr title="jtl\Connector\Core\Utilities\multiple:">multiple:</abbr>
+                </td>
+                <td>$_instances</td>
+                <td class="last">Array of \jtl\Connector\Core\Utilities\Singleton Objects</td>
+                <td></td>
+            </tr>
+            </table>
+
     
             <h2>Methods</h2>
 
@@ -92,7 +118,28 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getInstance">getInstance</a>()
+        
                                             <p>Basic Singleton implementation</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>()
+        
+                                            <p>Basic Constructor</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___clone">__clone</a>()
+        
+                                            <p>Clone Method</p>                </div>
                 <div class="col-md-2"></div>
             </div>
             </div>
@@ -103,11 +150,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_getInstance">
-        <div class="location">at line 29</div>
+        <div class="location">at         line 29</div>
         <code>        static            <abbr title="jtl\Connector\Core\Utilities\Singleton:">Singleton:</abbr>
-    <strong>getInstance</strong>()</code>
+    <strong>getInstance</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Basic Singleton implementation</p>                                </div>
                 <div class="tags">
@@ -117,11 +168,52 @@
                     <table class="table table-condensed">
         <tr>
             <td><abbr title="jtl\Connector\Core\Utilities\Singleton:">Singleton:</abbr></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at         line 42</div>
+        <code>            protected        
+    <strong>__construct</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Basic Constructor</p>                                </div>
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___clone">
+        <div class="location">at         line 49</div>
+        <code>final            protected        
+    <strong>__clone</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Clone Method</p>                                </div>
+                <div class="tags">
+            
             
             
                     </div>

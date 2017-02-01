@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,11 +77,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>ImageFactory</h1>
+        <h1>
+            ImageFactory
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>ImageFactory</strong></p>
+    <strong>ImageFactory</strong>
+</p>
+
+        
+    
 
     
     
@@ -90,6 +103,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_startNew">startNew</a>(string $filepath)
+        
                                             <p>Starts a new Image object</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -101,11 +115,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_startNew">
-        <div class="location">at line 20</div>
+        <div class="location">at         line 20</div>
         <code>        static            <a href="../../../../jtl/Connector/Core/Drawing/ImageIm.html"><abbr title="jtl\Connector\Core\Drawing\ImageIm">ImageIm</abbr></a>|<a href="../../../../jtl/Connector/Core/Drawing/ImageGd.html"><abbr title="jtl\Connector\Core\Drawing\ImageGd">ImageGd</abbr></a>
-    <strong>startNew</strong>(string $filepath)</code>
+    <strong>startNew</strong>(string $filepath)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Starts a new Image object</p>                                </div>
                 <div class="tags">
@@ -115,8 +133,7 @@
                     <tr>
                 <td>string</td>
                 <td>$filepath</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -126,8 +143,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../../jtl/Connector/Core/Drawing/ImageIm.html"><abbr title="jtl\Connector\Core\Drawing\ImageIm">ImageIm</abbr></a>|<a href="../../../../jtl/Connector/Core/Drawing/ImageGd.html"><abbr title="jtl\Connector\Core\Drawing\ImageGd">ImageGd</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -137,8 +153,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../../jtl/Connector/Core/Exception/DrawingException.html"><abbr title="jtl\Connector\Core\Exception\DrawingException">DrawingException</abbr></a></td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 

@@ -37,6 +37,16 @@ class Config extends \Noodlehaus\Config
     }
     
     /**
+     * @param string $key
+     * @param mixed $default
+     * @return mixed|null
+     */
+    public function read($key, $default = null)
+    {
+        return $this->get($key, $default);
+    }
+    
+    /**
      * Will set data into cache and save to file
      *
      * @param string $key

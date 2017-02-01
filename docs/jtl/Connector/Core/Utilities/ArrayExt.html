@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,11 +77,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>ArrayExt</h1>
+        <h1>
+            ArrayExt
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>ArrayExt</strong></p>
+    <strong>ArrayExt</strong>
+</p>
+
+        
+    
 
     
     
@@ -90,6 +103,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_column">column</a>(array $array = null, mixed $column_key = null, mixed $index_key = null)
+        
                                             <p>Return the values from a single column in the input array</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -101,11 +115,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_column">
-        <div class="location">at line 23</div>
+        <div class="location">at         line 23</div>
         <code>        static            array
-    <strong>column</strong>(array $array = null, mixed $column_key = null, mixed $index_key = null)</code>
+    <strong>column</strong>(array $array = null, mixed $column_key = null, mixed $index_key = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Return the values from a single column in the input array</p>                                </div>
                 <div class="tags">
@@ -135,8 +153,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>array</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 

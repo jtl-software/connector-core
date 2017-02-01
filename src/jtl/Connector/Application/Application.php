@@ -358,6 +358,8 @@ class Application extends CoreApplication
                 if ($zipFile !== null) {
                     @unlink($zipFile);
                 }
+            } else {
+                throw new ApplicationException('Zip file or temp dir  is null');
             }
         }
 
@@ -539,11 +541,17 @@ class Application extends CoreApplication
         if (!isset($this->session)) {
             throw new SessionException('Session not initialized', -32001);
         }
-
-        $this->config = new Config(Path::combine(CONNECTOR_DIR, 'config', 'config.json'));
+    
+        // Config
+        $config_file = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
+        if (!file_exists($config_file)) {
+            file_put_contents($config_file, json_encode(array('developer_logging' => false), JSON_PRETTY_PRINT));
+        }
+    
+        $this->config = new Config($config_file);
     
         if (!$this->config->has('developer_logging')) {
-            $this->config->set('developer_logging', false);
+            $this->config->save('developer_logging', false);
         }
         
         /*
@@ -635,7 +643,7 @@ class Application extends CoreApplication
 
                         $path = parse_url($images[$i]->getRemoteUrl(), PHP_URL_PATH);
                         $fileName = pathinfo($path, PATHINFO_BASENAME);
-                        $imagePath = Path::combine(sys_get_temp_dir(), uniqid() . "_{$fileName}");
+                        $imagePath = Path::combine(Temp::getDirectory(), uniqid() . "_{$fileName}");
                         file_put_contents($imagePath, $imageData);
 
                         $images[$i]->setFilename($imagePath);
@@ -670,7 +678,7 @@ class Application extends CoreApplication
 
                     $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
                     $fileName = pathinfo($path, PATHINFO_BASENAME);
-                    $imagePath = Path::combine(sys_get_temp_dir(), uniqid() . "_{$fileName}");
+                    $imagePath = Path::combine(Temp::getDirectory(), uniqid() . "_{$fileName}");
                     file_put_contents($imagePath, $imageData);
 
                     $image->setFilename($imagePath);

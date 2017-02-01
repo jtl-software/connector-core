@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,11 +77,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>FeatureExist</h1>
+        <h1>
+            FeatureExist
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>FeatureExist</strong>        extends <a target="_blank" href="http://php.net/RuntimeException"><abbr title="RuntimeException">RuntimeException</abbr></a></p>
+    <strong>FeatureExist</strong>        extends <a target="_blank" href="http://php.net/RuntimeException">RuntimeException</a>
+</p>
+
+        
+    
 
             <div class="description">
             <p>If you are adding a new feature to your a feature already exists</p>                    </div>
@@ -92,6 +105,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method___construct">__construct</a>($feature, $code, $previous = null)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -104,11 +118,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at line 18</div>
+        <div class="location">at         line 18</div>
         <code>                    
-    <strong>__construct</strong>($feature, $code, $previous = null)</code>
+    <strong>__construct</strong>($feature, $code, $previous = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -116,20 +134,17 @@
                     <tr>
                 <td></td>
                 <td>$feature</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td></td>
                 <td>$code</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td></td>
                 <td>$previous</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 

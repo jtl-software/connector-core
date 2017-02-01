@@ -12,6 +12,9 @@
         <script src="../../../js/bootstrap.min.js"></script>
         <script src="../../../js/typeahead.min.js"></script>
         <script src="../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -70,15 +76,147 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>GlobalData</h1>
+        <h1>
+            GlobalData
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>GlobalData</strong>        extends <a href="../../../jtl/Connector/Model/DataModel.html"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a></p>
+    <strong>GlobalData</strong>        extends <a href="../../../jtl/Connector/Model/DataModel.html"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a>
+</p>
+
+        
+    
 
     
     
     
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_fields">
+                                        protected                                        array
+                </td>
+                <td>$fields</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../jtl/Connector/Core/Model/DataModel.html#property_fields"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_isEncrypted">
+                                        protected                                        boolean
+                </td>
+                <td>$isEncrypted</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../jtl/Connector/Model/DataModel.html#property_isEncrypted"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_configGroups">
+                                        protected                                        <a href="../../../jtl/Connector/Model/ConfigGroup.html"><abbr title="jtl\Connector\Model\ConfigGroup">ConfigGroup</abbr></a>[]
+                </td>
+                <td>$configGroups</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_configItems">
+                                        protected                                        <a href="../../../jtl/Connector/Model/ConfigItem.html"><abbr title="jtl\Connector\Model\ConfigItem">ConfigItem</abbr></a>[]
+                </td>
+                <td>$configItems</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_crossSellingGroups">
+                                        protected                                        <a href="../../../jtl/Connector/Model/CrossSellingGroup.html"><abbr title="jtl\Connector\Model\CrossSellingGroup">CrossSellingGroup</abbr></a>[]
+                </td>
+                <td>$crossSellingGroups</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_currencies">
+                                        protected                                        <a href="../../../jtl/Connector/Model/Currency.html"><abbr title="jtl\Connector\Model\Currency">Currency</abbr></a>[]
+                </td>
+                <td>$currencies</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_customerGroups">
+                                        protected                                        <a href="../../../jtl/Connector/Model/CustomerGroup.html"><abbr title="jtl\Connector\Model\CustomerGroup">CustomerGroup</abbr></a>[]
+                </td>
+                <td>$customerGroups</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_languages">
+                                        protected                                        <a href="../../../jtl/Connector/Model/Language.html"><abbr title="jtl\Connector\Model\Language">Language</abbr></a>[]
+                </td>
+                <td>$languages</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_measurementUnits">
+                                        protected                                        <a href="../../../jtl/Connector/Model/MeasurementUnit.html"><abbr title="jtl\Connector\Model\MeasurementUnit">MeasurementUnit</abbr></a>[]
+                </td>
+                <td>$measurementUnits</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_productTypes">
+                                        protected                                        <a href="../../../jtl/Connector/Model/ProductType.html"><abbr title="jtl\Connector\Model\ProductType">ProductType</abbr></a>[]
+                </td>
+                <td>$productTypes</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_shippingClasses">
+                                        protected                                        <a href="../../../jtl/Connector/Model/ShippingClass.html"><abbr title="jtl\Connector\Model\ShippingClass">ShippingClass</abbr></a>[]
+                </td>
+                <td>$shippingClasses</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_shippingMethods">
+                                        protected                                        <a href="../../../jtl/Connector/Model/ShippingMethod.html"><abbr title="jtl\Connector\Model\ShippingMethod">ShippingMethod</abbr></a>[]
+                </td>
+                <td>$shippingMethods</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_taxRates">
+                                        protected                                        <a href="../../../jtl/Connector/Model/TaxRate.html"><abbr title="jtl\Connector\Model\TaxRate">TaxRate</abbr></a>[]
+                </td>
+                <td>$taxRates</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_units">
+                                        protected                                        <a href="../../../jtl/Connector/Model/Unit.html"><abbr title="jtl\Connector\Model\Unit">Unit</abbr></a>[]
+                </td>
+                <td>$units</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_warehouses">
+                                        protected                                        <a href="../../../jtl/Connector/Model/Warehouse.html"><abbr title="jtl\Connector\Model\Warehouse">Warehouse</abbr></a>[]
+                </td>
+                <td>$warehouses</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+            </table>
+
     
             <h2>Methods</h2>
 
@@ -88,7 +226,8 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___construct">__construct</a>(<abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr> $object = null)
+                    <a href="#method___construct">__construct</a>(<a target="_blank" href="http://php.net/stdClass">stdClass</a> $object = null)
+        
                                             <p>Constructor</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Model/Model.html#method___construct"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a></small></div>
             </div>
@@ -98,24 +237,27 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getProperties">getProperties</a>()
+        
                                             <p>Get the Model Properties</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Model/Model.html#method_getProperties"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a></small></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\DataModel">DataModel</abbr>
+                    <a href="../../../jtl/Connector/Core/Model/Model.html"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_setOptions">setOptions</a>(<abbr title="jtl\Connector\Model\stdClass">stdClass</abbr> $object = null, array $options = null)
+                    <a href="#method_setOptions">setOptions</a>(<a target="_blank" href="http://php.net/stdClass">stdClass</a> $object = null, array $options = null)
+        
                                             <p>Sets Properties with matching Array Values</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Model/DataModel.html#method_setOptions"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a></small></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="jtl\Connector\Model\stdClass">stdClass</abbr>
+                    <abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getPublic">getPublic</a>(array $publics = array(&#039;fields&#039;, &#039;isEncrypted&#039;, &#039;identities&#039;, &#039;_type&#039;))
+        
                                             <p>Convert the Model into stdClass Object</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Model/DataModel.html#method_getPublic"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a></small></div>
             </div>
@@ -125,6 +267,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_toJson">toJson</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Model/Model.html#method_toJson"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a></small></div>
@@ -135,6 +278,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getFields">getFields</a>()
+        
                                             <p>Fields Getter</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Model/DataModel.html#method_getFields"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a></small></div>
             </div>
@@ -144,6 +288,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_validate">validate</a>()
+        
                                             <p>Object Validation</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Model/DataModel.html#method_validate"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a></small></div>
             </div>
@@ -153,6 +298,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getField">getField</a>(boolean $toWawi = false, string $key)
+        
                                             <p>Get a Model Member Name</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Model/DataModel.html#method_getField"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a></small></div>
             </div>
@@ -161,7 +307,8 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_map">map</a>(boolean $toWawi = false, <abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr> $obj = null)
+                    <a href="#method_map">map</a>(boolean $toWawi = false, <a target="_blank" href="http://php.net/stdClass">stdClass</a> $obj = null)
+        
                                             <p>Object Mapping</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Core/Model/DataModel.html#method_map"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a></small></div>
             </div>
@@ -171,6 +318,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getModelType">getModelType</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Model/DataModel.html#method_getModelType"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a></small></div>
@@ -181,15 +329,50 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_isEncrypted">isEncrypted</a>()
+        
                                             <p>Encrypted Status</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Model/DataModel.html#method_isEncrypted"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setIdentity">setIdentity</a>(string $propertyName, string|null $endpoint = null, int|null $host = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Model/DataModel.html#method_setIdentity"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setProperty">setProperty</a>($name, $value, $type)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Model/DataModel.html#method_setProperty"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_validateType">validateType</a>($value, $type)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../jtl/Connector/Model/DataModel.html#method_validateType"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a></small></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
                     <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addConfigGroup">addConfigGroup</a>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\ConfigGroup">ConfigGroup</abbr> $configGroup)
+                    <a href="#method_addConfigGroup">addConfigGroup</a>(<a href="../../../jtl/Connector/Model/ConfigGroup.html"><abbr title="jtl\Connector\Model\ConfigGroup">ConfigGroup</abbr></a> $configGroup)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -200,16 +383,18 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setConfigGroups">setConfigGroups</a>(array $configGroups)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\ConfigGroup">ConfigGroup</abbr>[]
+                    <a href="../../../jtl/Connector/Model/ConfigGroup.html"><abbr title="jtl\Connector\Model\ConfigGroup">ConfigGroup</abbr></a>[]
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getConfigGroups">getConfigGroups</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -220,6 +405,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_clearConfigGroups">clearConfigGroups</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -229,7 +415,8 @@
                     <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addConfigItem">addConfigItem</a>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\ConfigItem">ConfigItem</abbr> $configItem)
+                    <a href="#method_addConfigItem">addConfigItem</a>(<a href="../../../jtl/Connector/Model/ConfigItem.html"><abbr title="jtl\Connector\Model\ConfigItem">ConfigItem</abbr></a> $configItem)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -240,16 +427,18 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setConfigItems">setConfigItems</a>(array $configItems)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\ConfigItem">ConfigItem</abbr>[]
+                    <a href="../../../jtl/Connector/Model/ConfigItem.html"><abbr title="jtl\Connector\Model\ConfigItem">ConfigItem</abbr></a>[]
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getConfigItems">getConfigItems</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -260,6 +449,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_clearConfigItems">clearConfigItems</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -269,7 +459,8 @@
                     <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addCrossSellingGroup">addCrossSellingGroup</a>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\CrossSellingGroup">CrossSellingGroup</abbr> $crossSellingGroup)
+                    <a href="#method_addCrossSellingGroup">addCrossSellingGroup</a>(<a href="../../../jtl/Connector/Model/CrossSellingGroup.html"><abbr title="jtl\Connector\Model\CrossSellingGroup">CrossSellingGroup</abbr></a> $crossSellingGroup)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -280,16 +471,18 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setCrossSellingGroups">setCrossSellingGroups</a>(array $crossSellingGroups)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\CrossSellingGroup">CrossSellingGroup</abbr>[]
+                    <a href="../../../jtl/Connector/Model/CrossSellingGroup.html"><abbr title="jtl\Connector\Model\CrossSellingGroup">CrossSellingGroup</abbr></a>[]
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getCrossSellingGroups">getCrossSellingGroups</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -300,6 +493,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_clearCrossSellingGroups">clearCrossSellingGroups</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -309,7 +503,8 @@
                     <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addCurrency">addCurrency</a>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\Currency">Currency</abbr> $currency)
+                    <a href="#method_addCurrency">addCurrency</a>(<a href="../../../jtl/Connector/Model/Currency.html"><abbr title="jtl\Connector\Model\Currency">Currency</abbr></a> $currency)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -320,16 +515,18 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setCurrencies">setCurrencies</a>(array $currencies)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\Currency">Currency</abbr>[]
+                    <a href="../../../jtl/Connector/Model/Currency.html"><abbr title="jtl\Connector\Model\Currency">Currency</abbr></a>[]
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getCurrencies">getCurrencies</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -340,6 +537,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_clearCurrencies">clearCurrencies</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -349,7 +547,8 @@
                     <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addCustomerGroup">addCustomerGroup</a>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\CustomerGroup">CustomerGroup</abbr> $customerGroup)
+                    <a href="#method_addCustomerGroup">addCustomerGroup</a>(<a href="../../../jtl/Connector/Model/CustomerGroup.html"><abbr title="jtl\Connector\Model\CustomerGroup">CustomerGroup</abbr></a> $customerGroup)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -360,16 +559,18 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setCustomerGroups">setCustomerGroups</a>(array $customerGroups)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\CustomerGroup">CustomerGroup</abbr>[]
+                    <a href="../../../jtl/Connector/Model/CustomerGroup.html"><abbr title="jtl\Connector\Model\CustomerGroup">CustomerGroup</abbr></a>[]
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getCustomerGroups">getCustomerGroups</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -380,6 +581,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_clearCustomerGroups">clearCustomerGroups</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -389,7 +591,8 @@
                     <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addLanguage">addLanguage</a>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\Language">Language</abbr> $language)
+                    <a href="#method_addLanguage">addLanguage</a>(<a href="../../../jtl/Connector/Model/Language.html"><abbr title="jtl\Connector\Model\Language">Language</abbr></a> $language)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -400,16 +603,18 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setLanguages">setLanguages</a>(array $languages)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\Language">Language</abbr>[]
+                    <a href="../../../jtl/Connector/Model/Language.html"><abbr title="jtl\Connector\Model\Language">Language</abbr></a>[]
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getLanguages">getLanguages</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -420,6 +625,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_clearLanguages">clearLanguages</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -429,7 +635,8 @@
                     <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addMeasurementUnit">addMeasurementUnit</a>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\MeasurementUnit">MeasurementUnit</abbr> $measurementUnit)
+                    <a href="#method_addMeasurementUnit">addMeasurementUnit</a>(<a href="../../../jtl/Connector/Model/MeasurementUnit.html"><abbr title="jtl\Connector\Model\MeasurementUnit">MeasurementUnit</abbr></a> $measurementUnit)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -440,16 +647,18 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setMeasurementUnits">setMeasurementUnits</a>(array $measurementUnits)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\MeasurementUnit">MeasurementUnit</abbr>[]
+                    <a href="../../../jtl/Connector/Model/MeasurementUnit.html"><abbr title="jtl\Connector\Model\MeasurementUnit">MeasurementUnit</abbr></a>[]
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getMeasurementUnits">getMeasurementUnits</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -460,6 +669,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_clearMeasurementUnits">clearMeasurementUnits</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -469,7 +679,8 @@
                     <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addProductType">addProductType</a>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\ProductType">ProductType</abbr> $productType)
+                    <a href="#method_addProductType">addProductType</a>(<a href="../../../jtl/Connector/Model/ProductType.html"><abbr title="jtl\Connector\Model\ProductType">ProductType</abbr></a> $productType)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -480,16 +691,18 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setProductTypes">setProductTypes</a>(array $productTypes)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\ProductType">ProductType</abbr>[]
+                    <a href="../../../jtl/Connector/Model/ProductType.html"><abbr title="jtl\Connector\Model\ProductType">ProductType</abbr></a>[]
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getProductTypes">getProductTypes</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -500,6 +713,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_clearProductTypes">clearProductTypes</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -509,7 +723,8 @@
                     <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addShippingClass">addShippingClass</a>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\ShippingClass">ShippingClass</abbr> $shippingClass)
+                    <a href="#method_addShippingClass">addShippingClass</a>(<a href="../../../jtl/Connector/Model/ShippingClass.html"><abbr title="jtl\Connector\Model\ShippingClass">ShippingClass</abbr></a> $shippingClass)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -520,16 +735,18 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setShippingClasses">setShippingClasses</a>(array $shippingClasses)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\ShippingClass">ShippingClass</abbr>[]
+                    <a href="../../../jtl/Connector/Model/ShippingClass.html"><abbr title="jtl\Connector\Model\ShippingClass">ShippingClass</abbr></a>[]
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getShippingClasses">getShippingClasses</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -540,6 +757,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_clearShippingClasses">clearShippingClasses</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -549,7 +767,52 @@
                     <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addTaxRate">addTaxRate</a>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\TaxRate">TaxRate</abbr> $taxRate)
+                    <a href="#method_addShippingMethod">addShippingMethod</a>(<a href="../../../jtl/Connector/Model/ShippingMethod.html"><abbr title="jtl\Connector\Model\ShippingMethod">ShippingMethod</abbr></a> $shippingMethod)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setShippingMethods">setShippingMethods</a>(array $shippingMethods)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../jtl/Connector/Model/ShippingMethod.html"><abbr title="jtl\Connector\Model\ShippingMethod">ShippingMethod</abbr></a>[]
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getShippingMethods">getShippingMethods</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_clearShippingMethods">clearShippingMethods</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addTaxRate">addTaxRate</a>(<a href="../../../jtl/Connector/Model/TaxRate.html"><abbr title="jtl\Connector\Model\TaxRate">TaxRate</abbr></a> $taxRate)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -560,16 +823,18 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setTaxRates">setTaxRates</a>(array $taxRates)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\TaxRate">TaxRate</abbr>[]
+                    <a href="../../../jtl/Connector/Model/TaxRate.html"><abbr title="jtl\Connector\Model\TaxRate">TaxRate</abbr></a>[]
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getTaxRates">getTaxRates</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -580,6 +845,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_clearTaxRates">clearTaxRates</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -589,7 +855,8 @@
                     <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addUnit">addUnit</a>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\Unit">Unit</abbr> $unit)
+                    <a href="#method_addUnit">addUnit</a>(<a href="../../../jtl/Connector/Model/Unit.html"><abbr title="jtl\Connector\Model\Unit">Unit</abbr></a> $unit)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -600,16 +867,18 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setUnits">setUnits</a>(array $units)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\Unit">Unit</abbr>[]
+                    <a href="../../../jtl/Connector/Model/Unit.html"><abbr title="jtl\Connector\Model\Unit">Unit</abbr></a>[]
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getUnits">getUnits</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -620,6 +889,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_clearUnits">clearUnits</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -629,7 +899,8 @@
                     <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addWarehouse">addWarehouse</a>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\Warehouse">Warehouse</abbr> $warehouse)
+                    <a href="#method_addWarehouse">addWarehouse</a>(<a href="../../../jtl/Connector/Model/Warehouse.html"><abbr title="jtl\Connector\Model\Warehouse">Warehouse</abbr></a> $warehouse)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -640,16 +911,18 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setWarehouses">setWarehouses</a>(array $warehouses)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\Warehouse">Warehouse</abbr>[]
+                    <a href="../../../jtl/Connector/Model/Warehouse.html"><abbr title="jtl\Connector\Model\Warehouse">Warehouse</abbr></a>[]
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getWarehouses">getWarehouses</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -660,6 +933,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_clearWarehouses">clearWarehouses</a>()
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -672,11 +946,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Model/Model.html#method___construct"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at line 23</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Model/Model.html#method___construct"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at         line 23</div>
         <code>                    
-    <strong>__construct</strong>(<abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr> $object = null)</code>
+    <strong>__construct</strong>(<a target="_blank" href="http://php.net/stdClass">stdClass</a> $object = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Constructor</p>                                </div>
                 <div class="tags">
@@ -684,10 +962,9 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr></td>
+                <td><a target="_blank" href="http://php.net/stdClass">stdClass</a></td>
                 <td>$object</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -700,11 +977,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getProperties">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Model/Model.html#method_getProperties"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at line 33</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Model/Model.html#method_getProperties"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at         line 33</div>
         <code>                    <abbr title="jtl\Connector\Core\Model\multitype:">multitype:</abbr>
-    <strong>getProperties</strong>()</code>
+    <strong>getProperties</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Get the Model Properties</p>                                </div>
                 <div class="tags">
@@ -726,11 +1007,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setOptions">
-        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_setOptions"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at line 125</div>
-        <code>                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\DataModel">DataModel</abbr>
-    <strong>setOptions</strong>(<abbr title="jtl\Connector\Model\stdClass">stdClass</abbr> $object = null, array $options = null)</code>
+        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_setOptions"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at         line 172</div>
+        <code>                    <a href="../../../jtl/Connector/Core/Model/Model.html"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a>
+    <strong>setOptions</strong>(<a target="_blank" href="http://php.net/stdClass">stdClass</a> $object = null, array $options = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Sets Properties with matching Array Values</p>                                </div>
                 <div class="tags">
@@ -738,16 +1023,14 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Model\stdClass">stdClass</abbr></td>
+                <td><a target="_blank" href="http://php.net/stdClass">stdClass</a></td>
                 <td>$object</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>array</td>
                 <td>$options</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -756,9 +1039,8 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\DataModel">DataModel</abbr></td>
-            <td>
-</td>
+            <td><a href="../../../jtl/Connector/Core/Model/Model.html"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a></td>
+            <td></td>
         </tr>
     </table>
 
@@ -770,11 +1052,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getPublic">
-        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_getPublic"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at line 70</div>
-        <code>                    <abbr title="jtl\Connector\Model\stdClass">stdClass</abbr>
-    <strong>getPublic</strong>(array $publics = array(&#039;fields&#039;, &#039;isEncrypted&#039;, &#039;identities&#039;, &#039;_type&#039;))</code>
+        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_getPublic"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at         line 70</div>
+        <code>                    <abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr>
+    <strong>getPublic</strong>(array $publics = array(&#039;fields&#039;, &#039;isEncrypted&#039;, &#039;identities&#039;, &#039;_type&#039;))
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Convert the Model into stdClass Object</p>                                </div>
                 <div class="tags">
@@ -784,8 +1070,7 @@
                     <tr>
                 <td>array</td>
                 <td>$publics</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -794,7 +1079,7 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Model\stdClass">stdClass</abbr></td>
+            <td><abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr></td>
             <td>$object</td>
         </tr>
     </table>
@@ -807,11 +1092,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_toJson">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Model/Model.html#method_toJson"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at line 115</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Model/Model.html#method_toJson"><abbr title="jtl\Connector\Core\Model\Model">Model</abbr></a> at         line 115</div>
         <code>                    
-    <strong>toJson</strong>()</code>
+    <strong>toJson</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
             
@@ -822,11 +1111,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getFields">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Model/DataModel.html#method_getFields"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> at line 34</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Model/DataModel.html#method_getFields"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> at         line 35</div>
         <code>                    <abbr title="jtl\Connector\Core\Model\mixed:string">mixed:string</abbr>
-    <strong>getFields</strong>()</code>
+    <strong>getFields</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Fields Getter</p>                                </div>
                 <div class="tags">
@@ -836,8 +1129,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><abbr title="jtl\Connector\Core\Model\mixed:string">mixed:string</abbr></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -849,11 +1141,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_validate">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Model/DataModel.html#method_validate"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> at line 44</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Model/DataModel.html#method_validate"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> at         line 45</div>
         <code>                    
-    <strong>validate</strong>()</code>
+    <strong>validate</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Object Validation</p>                                </div>
                 <div class="tags">
@@ -864,8 +1160,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../jtl/Connector/Core/Exception/SchemaException.html"><abbr title="jtl\Connector\Core\Exception\SchemaException">SchemaException</abbr></a></td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -876,11 +1171,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getField">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Model/DataModel.html#method_getField"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> at line 58</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Model/DataModel.html#method_getField"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> at         line 59</div>
         <code>                    <abbr title="jtl\Connector\Core\Model\mixed:string">mixed:string</abbr>|NULL
-    <strong>getField</strong>(boolean $toWawi = false, string $key)</code>
+    <strong>getField</strong>(boolean $toWawi = false, string $key)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Get a Model Member Name</p>                                </div>
                 <div class="tags">
@@ -890,14 +1189,12 @@
                     <tr>
                 <td>boolean</td>
                 <td>$toWawi</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>string</td>
                 <td>$key</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -907,8 +1204,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><abbr title="jtl\Connector\Core\Model\mixed:string">mixed:string</abbr>|NULL</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -920,11 +1216,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_map">
-        <div class="location">in <a href="../../../jtl/Connector/Core/Model/DataModel.html#method_map"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> at line 80</div>
+        <div class="location">in <a href="../../../jtl/Connector/Core/Model/DataModel.html#method_map"><abbr title="jtl\Connector\Core\Model\DataModel">DataModel</abbr></a> at         line 81</div>
         <code>                    
-    <strong>map</strong>(boolean $toWawi = false, <abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr> $obj = null)</code>
+    <strong>map</strong>(boolean $toWawi = false, <a target="_blank" href="http://php.net/stdClass">stdClass</a> $obj = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Object Mapping</p>                                </div>
                 <div class="tags">
@@ -934,11 +1234,10 @@
                     <tr>
                 <td>boolean</td>
                 <td>$toWawi</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
-                <td><abbr title="jtl\Connector\Core\Model\stdClass">stdClass</abbr></td>
+                <td><a target="_blank" href="http://php.net/stdClass">stdClass</a></td>
                 <td>$obj</td>
                 <td>Object to map</td>
             </tr>
@@ -953,11 +1252,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getModelType">
-        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_getModelType"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at line 42</div>
+        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_getModelType"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at         line 42</div>
         <code>                    <a href="../../../jtl/Connector/Type/DataType.html"><abbr title="jtl\Connector\Type\DataType">DataType</abbr></a>
-    <strong>getModelType</strong>()</code>
+    <strong>getModelType</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -965,8 +1268,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Type/DataType.html"><abbr title="jtl\Connector\Type\DataType">DataType</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -978,11 +1280,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_isEncrypted">
-        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_isEncrypted"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at line 59</div>
+        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_isEncrypted"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at         line 59</div>
         <code>                    boolean
-    <strong>isEncrypted</strong>()</code>
+    <strong>isEncrypted</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Encrypted Status</p>                                </div>
                 <div class="tags">
@@ -992,8 +1298,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1004,21 +1309,136 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_addConfigGroup">
-        <div class="location">at line 124</div>
-        <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>addConfigGroup</strong>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\ConfigGroup">ConfigGroup</abbr> $configGroup)</code>
+                    <h3 id="method_setIdentity">
+        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_setIdentity"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at         line 123</div>
+        <code>                    
+    <strong>setIdentity</strong>(string $propertyName, string|null $endpoint = null, int|null $host = null)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\ConfigGroup">ConfigGroup</abbr></td>
+                <td>string</td>
+                <td>$propertyName</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$endpoint</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>int|null</td>
+                <td>$host</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setProperty">
+        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_setProperty"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at         line 179</div>
+        <code>            protected        
+    <strong>setProperty</strong>($name, $value, $type)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$name</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$type</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_validateType">
+        <div class="location">in <a href="../../../jtl/Connector/Model/DataModel.html#method_validateType"><abbr title="jtl\Connector\Model\DataModel">DataModel</abbr></a> at         line 190</div>
+        <code>            protected        
+    <strong>validateType</strong>($value, $type)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$type</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addConfigGroup">
+        <div class="location">at         line 132</div>
+        <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
+    <strong>addConfigGroup</strong>(<a href="../../../jtl/Connector/Model/ConfigGroup.html"><abbr title="jtl\Connector\Model\ConfigGroup">ConfigGroup</abbr></a> $configGroup)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../jtl/Connector/Model/ConfigGroup.html"><abbr title="jtl\Connector\Model\ConfigGroup">ConfigGroup</abbr></a></td>
                 <td>$configGroup</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1028,8 +1448,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1041,11 +1460,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setConfigGroups">
-        <div class="location">at line 134</div>
+        <div class="location">at         line 142</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>setConfigGroups</strong>(array $configGroups)</code>
+    <strong>setConfigGroups</strong>(array $configGroups)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1053,8 +1476,7 @@
                     <tr>
                 <td>array</td>
                 <td>$configGroups</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1064,8 +1486,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1077,20 +1498,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getConfigGroups">
-        <div class="location">at line 143</div>
-        <code>                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\ConfigGroup">ConfigGroup</abbr>[]
-    <strong>getConfigGroups</strong>()</code>
+        <div class="location">at         line 151</div>
+        <code>                    <a href="../../../jtl/Connector/Model/ConfigGroup.html"><abbr title="jtl\Connector\Model\ConfigGroup">ConfigGroup</abbr></a>[]
+    <strong>getConfigGroups</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\ConfigGroup">ConfigGroup</abbr>[]</td>
-            <td>
-</td>
+            <td><a href="../../../jtl/Connector/Model/ConfigGroup.html"><abbr title="jtl\Connector\Model\ConfigGroup">ConfigGroup</abbr></a>[]</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1102,11 +1526,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_clearConfigGroups">
-        <div class="location">at line 151</div>
+        <div class="location">at         line 159</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>clearConfigGroups</strong>()</code>
+    <strong>clearConfigGroups</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1114,8 +1542,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1127,20 +1554,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_addConfigItem">
-        <div class="location">at line 161</div>
+        <div class="location">at         line 169</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>addConfigItem</strong>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\ConfigItem">ConfigItem</abbr> $configItem)</code>
+    <strong>addConfigItem</strong>(<a href="../../../jtl/Connector/Model/ConfigItem.html"><abbr title="jtl\Connector\Model\ConfigItem">ConfigItem</abbr></a> $configItem)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\ConfigItem">ConfigItem</abbr></td>
+                <td><a href="../../../jtl/Connector/Model/ConfigItem.html"><abbr title="jtl\Connector\Model\ConfigItem">ConfigItem</abbr></a></td>
                 <td>$configItem</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1150,8 +1580,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1163,11 +1592,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setConfigItems">
-        <div class="location">at line 171</div>
+        <div class="location">at         line 179</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>setConfigItems</strong>(array $configItems)</code>
+    <strong>setConfigItems</strong>(array $configItems)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1175,8 +1608,7 @@
                     <tr>
                 <td>array</td>
                 <td>$configItems</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1186,8 +1618,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1199,20 +1630,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getConfigItems">
-        <div class="location">at line 180</div>
-        <code>                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\ConfigItem">ConfigItem</abbr>[]
-    <strong>getConfigItems</strong>()</code>
+        <div class="location">at         line 188</div>
+        <code>                    <a href="../../../jtl/Connector/Model/ConfigItem.html"><abbr title="jtl\Connector\Model\ConfigItem">ConfigItem</abbr></a>[]
+    <strong>getConfigItems</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\ConfigItem">ConfigItem</abbr>[]</td>
-            <td>
-</td>
+            <td><a href="../../../jtl/Connector/Model/ConfigItem.html"><abbr title="jtl\Connector\Model\ConfigItem">ConfigItem</abbr></a>[]</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1224,11 +1658,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_clearConfigItems">
-        <div class="location">at line 188</div>
+        <div class="location">at         line 196</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>clearConfigItems</strong>()</code>
+    <strong>clearConfigItems</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1236,8 +1674,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1249,20 +1686,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_addCrossSellingGroup">
-        <div class="location">at line 198</div>
+        <div class="location">at         line 206</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>addCrossSellingGroup</strong>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\CrossSellingGroup">CrossSellingGroup</abbr> $crossSellingGroup)</code>
+    <strong>addCrossSellingGroup</strong>(<a href="../../../jtl/Connector/Model/CrossSellingGroup.html"><abbr title="jtl\Connector\Model\CrossSellingGroup">CrossSellingGroup</abbr></a> $crossSellingGroup)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\CrossSellingGroup">CrossSellingGroup</abbr></td>
+                <td><a href="../../../jtl/Connector/Model/CrossSellingGroup.html"><abbr title="jtl\Connector\Model\CrossSellingGroup">CrossSellingGroup</abbr></a></td>
                 <td>$crossSellingGroup</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1272,8 +1712,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1285,11 +1724,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setCrossSellingGroups">
-        <div class="location">at line 208</div>
+        <div class="location">at         line 216</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>setCrossSellingGroups</strong>(array $crossSellingGroups)</code>
+    <strong>setCrossSellingGroups</strong>(array $crossSellingGroups)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1297,8 +1740,7 @@
                     <tr>
                 <td>array</td>
                 <td>$crossSellingGroups</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1308,8 +1750,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1321,20 +1762,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getCrossSellingGroups">
-        <div class="location">at line 217</div>
-        <code>                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\CrossSellingGroup">CrossSellingGroup</abbr>[]
-    <strong>getCrossSellingGroups</strong>()</code>
+        <div class="location">at         line 225</div>
+        <code>                    <a href="../../../jtl/Connector/Model/CrossSellingGroup.html"><abbr title="jtl\Connector\Model\CrossSellingGroup">CrossSellingGroup</abbr></a>[]
+    <strong>getCrossSellingGroups</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\CrossSellingGroup">CrossSellingGroup</abbr>[]</td>
-            <td>
-</td>
+            <td><a href="../../../jtl/Connector/Model/CrossSellingGroup.html"><abbr title="jtl\Connector\Model\CrossSellingGroup">CrossSellingGroup</abbr></a>[]</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1346,11 +1790,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_clearCrossSellingGroups">
-        <div class="location">at line 225</div>
+        <div class="location">at         line 233</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>clearCrossSellingGroups</strong>()</code>
+    <strong>clearCrossSellingGroups</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1358,8 +1806,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1371,20 +1818,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_addCurrency">
-        <div class="location">at line 235</div>
+        <div class="location">at         line 243</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>addCurrency</strong>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\Currency">Currency</abbr> $currency)</code>
+    <strong>addCurrency</strong>(<a href="../../../jtl/Connector/Model/Currency.html"><abbr title="jtl\Connector\Model\Currency">Currency</abbr></a> $currency)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\Currency">Currency</abbr></td>
+                <td><a href="../../../jtl/Connector/Model/Currency.html"><abbr title="jtl\Connector\Model\Currency">Currency</abbr></a></td>
                 <td>$currency</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1394,8 +1844,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1407,11 +1856,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setCurrencies">
-        <div class="location">at line 245</div>
+        <div class="location">at         line 253</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>setCurrencies</strong>(array $currencies)</code>
+    <strong>setCurrencies</strong>(array $currencies)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1419,8 +1872,7 @@
                     <tr>
                 <td>array</td>
                 <td>$currencies</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1430,8 +1882,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1443,20 +1894,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getCurrencies">
-        <div class="location">at line 254</div>
-        <code>                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\Currency">Currency</abbr>[]
-    <strong>getCurrencies</strong>()</code>
+        <div class="location">at         line 262</div>
+        <code>                    <a href="../../../jtl/Connector/Model/Currency.html"><abbr title="jtl\Connector\Model\Currency">Currency</abbr></a>[]
+    <strong>getCurrencies</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\Currency">Currency</abbr>[]</td>
-            <td>
-</td>
+            <td><a href="../../../jtl/Connector/Model/Currency.html"><abbr title="jtl\Connector\Model\Currency">Currency</abbr></a>[]</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1468,11 +1922,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_clearCurrencies">
-        <div class="location">at line 262</div>
+        <div class="location">at         line 270</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>clearCurrencies</strong>()</code>
+    <strong>clearCurrencies</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1480,8 +1938,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1493,20 +1950,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_addCustomerGroup">
-        <div class="location">at line 272</div>
+        <div class="location">at         line 280</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>addCustomerGroup</strong>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\CustomerGroup">CustomerGroup</abbr> $customerGroup)</code>
+    <strong>addCustomerGroup</strong>(<a href="../../../jtl/Connector/Model/CustomerGroup.html"><abbr title="jtl\Connector\Model\CustomerGroup">CustomerGroup</abbr></a> $customerGroup)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\CustomerGroup">CustomerGroup</abbr></td>
+                <td><a href="../../../jtl/Connector/Model/CustomerGroup.html"><abbr title="jtl\Connector\Model\CustomerGroup">CustomerGroup</abbr></a></td>
                 <td>$customerGroup</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1516,8 +1976,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1529,11 +1988,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setCustomerGroups">
-        <div class="location">at line 282</div>
+        <div class="location">at         line 290</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>setCustomerGroups</strong>(array $customerGroups)</code>
+    <strong>setCustomerGroups</strong>(array $customerGroups)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1541,8 +2004,7 @@
                     <tr>
                 <td>array</td>
                 <td>$customerGroups</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1552,8 +2014,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1565,20 +2026,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getCustomerGroups">
-        <div class="location">at line 291</div>
-        <code>                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\CustomerGroup">CustomerGroup</abbr>[]
-    <strong>getCustomerGroups</strong>()</code>
+        <div class="location">at         line 299</div>
+        <code>                    <a href="../../../jtl/Connector/Model/CustomerGroup.html"><abbr title="jtl\Connector\Model\CustomerGroup">CustomerGroup</abbr></a>[]
+    <strong>getCustomerGroups</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\CustomerGroup">CustomerGroup</abbr>[]</td>
-            <td>
-</td>
+            <td><a href="../../../jtl/Connector/Model/CustomerGroup.html"><abbr title="jtl\Connector\Model\CustomerGroup">CustomerGroup</abbr></a>[]</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1590,11 +2054,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_clearCustomerGroups">
-        <div class="location">at line 299</div>
+        <div class="location">at         line 307</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>clearCustomerGroups</strong>()</code>
+    <strong>clearCustomerGroups</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1602,8 +2070,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1615,20 +2082,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_addLanguage">
-        <div class="location">at line 309</div>
+        <div class="location">at         line 317</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>addLanguage</strong>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\Language">Language</abbr> $language)</code>
+    <strong>addLanguage</strong>(<a href="../../../jtl/Connector/Model/Language.html"><abbr title="jtl\Connector\Model\Language">Language</abbr></a> $language)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\Language">Language</abbr></td>
+                <td><a href="../../../jtl/Connector/Model/Language.html"><abbr title="jtl\Connector\Model\Language">Language</abbr></a></td>
                 <td>$language</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1638,8 +2108,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1651,11 +2120,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setLanguages">
-        <div class="location">at line 319</div>
+        <div class="location">at         line 327</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>setLanguages</strong>(array $languages)</code>
+    <strong>setLanguages</strong>(array $languages)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1663,8 +2136,7 @@
                     <tr>
                 <td>array</td>
                 <td>$languages</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1674,8 +2146,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1687,20 +2158,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getLanguages">
-        <div class="location">at line 328</div>
-        <code>                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\Language">Language</abbr>[]
-    <strong>getLanguages</strong>()</code>
+        <div class="location">at         line 336</div>
+        <code>                    <a href="../../../jtl/Connector/Model/Language.html"><abbr title="jtl\Connector\Model\Language">Language</abbr></a>[]
+    <strong>getLanguages</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\Language">Language</abbr>[]</td>
-            <td>
-</td>
+            <td><a href="../../../jtl/Connector/Model/Language.html"><abbr title="jtl\Connector\Model\Language">Language</abbr></a>[]</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1712,11 +2186,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_clearLanguages">
-        <div class="location">at line 336</div>
+        <div class="location">at         line 344</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>clearLanguages</strong>()</code>
+    <strong>clearLanguages</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1724,8 +2202,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1737,20 +2214,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_addMeasurementUnit">
-        <div class="location">at line 346</div>
+        <div class="location">at         line 354</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>addMeasurementUnit</strong>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\MeasurementUnit">MeasurementUnit</abbr> $measurementUnit)</code>
+    <strong>addMeasurementUnit</strong>(<a href="../../../jtl/Connector/Model/MeasurementUnit.html"><abbr title="jtl\Connector\Model\MeasurementUnit">MeasurementUnit</abbr></a> $measurementUnit)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\MeasurementUnit">MeasurementUnit</abbr></td>
+                <td><a href="../../../jtl/Connector/Model/MeasurementUnit.html"><abbr title="jtl\Connector\Model\MeasurementUnit">MeasurementUnit</abbr></a></td>
                 <td>$measurementUnit</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1760,8 +2240,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1773,11 +2252,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setMeasurementUnits">
-        <div class="location">at line 356</div>
+        <div class="location">at         line 364</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>setMeasurementUnits</strong>(array $measurementUnits)</code>
+    <strong>setMeasurementUnits</strong>(array $measurementUnits)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1785,8 +2268,7 @@
                     <tr>
                 <td>array</td>
                 <td>$measurementUnits</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1796,8 +2278,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1809,20 +2290,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getMeasurementUnits">
-        <div class="location">at line 365</div>
-        <code>                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\MeasurementUnit">MeasurementUnit</abbr>[]
-    <strong>getMeasurementUnits</strong>()</code>
+        <div class="location">at         line 373</div>
+        <code>                    <a href="../../../jtl/Connector/Model/MeasurementUnit.html"><abbr title="jtl\Connector\Model\MeasurementUnit">MeasurementUnit</abbr></a>[]
+    <strong>getMeasurementUnits</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\MeasurementUnit">MeasurementUnit</abbr>[]</td>
-            <td>
-</td>
+            <td><a href="../../../jtl/Connector/Model/MeasurementUnit.html"><abbr title="jtl\Connector\Model\MeasurementUnit">MeasurementUnit</abbr></a>[]</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1834,11 +2318,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_clearMeasurementUnits">
-        <div class="location">at line 373</div>
+        <div class="location">at         line 381</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>clearMeasurementUnits</strong>()</code>
+    <strong>clearMeasurementUnits</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1846,8 +2334,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1859,20 +2346,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_addProductType">
-        <div class="location">at line 383</div>
+        <div class="location">at         line 391</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>addProductType</strong>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\ProductType">ProductType</abbr> $productType)</code>
+    <strong>addProductType</strong>(<a href="../../../jtl/Connector/Model/ProductType.html"><abbr title="jtl\Connector\Model\ProductType">ProductType</abbr></a> $productType)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\ProductType">ProductType</abbr></td>
+                <td><a href="../../../jtl/Connector/Model/ProductType.html"><abbr title="jtl\Connector\Model\ProductType">ProductType</abbr></a></td>
                 <td>$productType</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1882,8 +2372,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1895,11 +2384,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setProductTypes">
-        <div class="location">at line 393</div>
+        <div class="location">at         line 401</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>setProductTypes</strong>(array $productTypes)</code>
+    <strong>setProductTypes</strong>(array $productTypes)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1907,8 +2400,7 @@
                     <tr>
                 <td>array</td>
                 <td>$productTypes</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1918,8 +2410,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1931,20 +2422,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getProductTypes">
-        <div class="location">at line 402</div>
-        <code>                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\ProductType">ProductType</abbr>[]
-    <strong>getProductTypes</strong>()</code>
+        <div class="location">at         line 410</div>
+        <code>                    <a href="../../../jtl/Connector/Model/ProductType.html"><abbr title="jtl\Connector\Model\ProductType">ProductType</abbr></a>[]
+    <strong>getProductTypes</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\ProductType">ProductType</abbr>[]</td>
-            <td>
-</td>
+            <td><a href="../../../jtl/Connector/Model/ProductType.html"><abbr title="jtl\Connector\Model\ProductType">ProductType</abbr></a>[]</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1956,11 +2450,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_clearProductTypes">
-        <div class="location">at line 410</div>
+        <div class="location">at         line 418</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>clearProductTypes</strong>()</code>
+    <strong>clearProductTypes</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1968,8 +2466,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1981,20 +2478,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_addShippingClass">
-        <div class="location">at line 420</div>
+        <div class="location">at         line 428</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>addShippingClass</strong>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\ShippingClass">ShippingClass</abbr> $shippingClass)</code>
+    <strong>addShippingClass</strong>(<a href="../../../jtl/Connector/Model/ShippingClass.html"><abbr title="jtl\Connector\Model\ShippingClass">ShippingClass</abbr></a> $shippingClass)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\ShippingClass">ShippingClass</abbr></td>
+                <td><a href="../../../jtl/Connector/Model/ShippingClass.html"><abbr title="jtl\Connector\Model\ShippingClass">ShippingClass</abbr></a></td>
                 <td>$shippingClass</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -2004,8 +2504,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -2017,11 +2516,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setShippingClasses">
-        <div class="location">at line 430</div>
+        <div class="location">at         line 438</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>setShippingClasses</strong>(array $shippingClasses)</code>
+    <strong>setShippingClasses</strong>(array $shippingClasses)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -2029,8 +2532,7 @@
                     <tr>
                 <td>array</td>
                 <td>$shippingClasses</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -2040,8 +2542,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -2053,20 +2554,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getShippingClasses">
-        <div class="location">at line 439</div>
-        <code>                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\ShippingClass">ShippingClass</abbr>[]
-    <strong>getShippingClasses</strong>()</code>
+        <div class="location">at         line 447</div>
+        <code>                    <a href="../../../jtl/Connector/Model/ShippingClass.html"><abbr title="jtl\Connector\Model\ShippingClass">ShippingClass</abbr></a>[]
+    <strong>getShippingClasses</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\ShippingClass">ShippingClass</abbr>[]</td>
-            <td>
-</td>
+            <td><a href="../../../jtl/Connector/Model/ShippingClass.html"><abbr title="jtl\Connector\Model\ShippingClass">ShippingClass</abbr></a>[]</td>
+            <td></td>
         </tr>
     </table>
 
@@ -2078,11 +2582,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_clearShippingClasses">
-        <div class="location">at line 447</div>
+        <div class="location">at         line 455</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>clearShippingClasses</strong>()</code>
+    <strong>clearShippingClasses</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -2090,8 +2598,139 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addShippingMethod">
+        <div class="location">at         line 465</div>
+        <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
+    <strong>addShippingMethod</strong>(<a href="../../../jtl/Connector/Model/ShippingMethod.html"><abbr title="jtl\Connector\Model\ShippingMethod">ShippingMethod</abbr></a> $shippingMethod)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../jtl/Connector/Model/ShippingMethod.html"><abbr title="jtl\Connector\Model\ShippingMethod">ShippingMethod</abbr></a></td>
+                <td>$shippingMethod</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setShippingMethods">
+        <div class="location">at         line 475</div>
+        <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
+    <strong>setShippingMethods</strong>(array $shippingMethods)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$shippingMethods</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getShippingMethods">
+        <div class="location">at         line 484</div>
+        <code>                    <a href="../../../jtl/Connector/Model/ShippingMethod.html"><abbr title="jtl\Connector\Model\ShippingMethod">ShippingMethod</abbr></a>[]
+    <strong>getShippingMethods</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../jtl/Connector/Model/ShippingMethod.html"><abbr title="jtl\Connector\Model\ShippingMethod">ShippingMethod</abbr></a>[]</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearShippingMethods">
+        <div class="location">at         line 492</div>
+        <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
+    <strong>clearShippingMethods</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
+            <td></td>
         </tr>
     </table>
 
@@ -2103,20 +2742,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_addTaxRate">
-        <div class="location">at line 457</div>
+        <div class="location">at         line 502</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>addTaxRate</strong>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\TaxRate">TaxRate</abbr> $taxRate)</code>
+    <strong>addTaxRate</strong>(<a href="../../../jtl/Connector/Model/TaxRate.html"><abbr title="jtl\Connector\Model\TaxRate">TaxRate</abbr></a> $taxRate)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\TaxRate">TaxRate</abbr></td>
+                <td><a href="../../../jtl/Connector/Model/TaxRate.html"><abbr title="jtl\Connector\Model\TaxRate">TaxRate</abbr></a></td>
                 <td>$taxRate</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -2126,8 +2768,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -2139,11 +2780,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setTaxRates">
-        <div class="location">at line 467</div>
+        <div class="location">at         line 512</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>setTaxRates</strong>(array $taxRates)</code>
+    <strong>setTaxRates</strong>(array $taxRates)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -2151,8 +2796,7 @@
                     <tr>
                 <td>array</td>
                 <td>$taxRates</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -2162,8 +2806,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -2175,20 +2818,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getTaxRates">
-        <div class="location">at line 476</div>
-        <code>                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\TaxRate">TaxRate</abbr>[]
-    <strong>getTaxRates</strong>()</code>
+        <div class="location">at         line 521</div>
+        <code>                    <a href="../../../jtl/Connector/Model/TaxRate.html"><abbr title="jtl\Connector\Model\TaxRate">TaxRate</abbr></a>[]
+    <strong>getTaxRates</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\TaxRate">TaxRate</abbr>[]</td>
-            <td>
-</td>
+            <td><a href="../../../jtl/Connector/Model/TaxRate.html"><abbr title="jtl\Connector\Model\TaxRate">TaxRate</abbr></a>[]</td>
+            <td></td>
         </tr>
     </table>
 
@@ -2200,11 +2846,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_clearTaxRates">
-        <div class="location">at line 484</div>
+        <div class="location">at         line 529</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>clearTaxRates</strong>()</code>
+    <strong>clearTaxRates</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -2212,8 +2862,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -2225,20 +2874,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_addUnit">
-        <div class="location">at line 494</div>
+        <div class="location">at         line 539</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>addUnit</strong>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\Unit">Unit</abbr> $unit)</code>
+    <strong>addUnit</strong>(<a href="../../../jtl/Connector/Model/Unit.html"><abbr title="jtl\Connector\Model\Unit">Unit</abbr></a> $unit)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\Unit">Unit</abbr></td>
+                <td><a href="../../../jtl/Connector/Model/Unit.html"><abbr title="jtl\Connector\Model\Unit">Unit</abbr></a></td>
                 <td>$unit</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -2248,8 +2900,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -2261,11 +2912,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setUnits">
-        <div class="location">at line 504</div>
+        <div class="location">at         line 549</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>setUnits</strong>(array $units)</code>
+    <strong>setUnits</strong>(array $units)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -2273,8 +2928,7 @@
                     <tr>
                 <td>array</td>
                 <td>$units</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -2284,8 +2938,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -2297,20 +2950,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getUnits">
-        <div class="location">at line 513</div>
-        <code>                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\Unit">Unit</abbr>[]
-    <strong>getUnits</strong>()</code>
+        <div class="location">at         line 558</div>
+        <code>                    <a href="../../../jtl/Connector/Model/Unit.html"><abbr title="jtl\Connector\Model\Unit">Unit</abbr></a>[]
+    <strong>getUnits</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\Unit">Unit</abbr>[]</td>
-            <td>
-</td>
+            <td><a href="../../../jtl/Connector/Model/Unit.html"><abbr title="jtl\Connector\Model\Unit">Unit</abbr></a>[]</td>
+            <td></td>
         </tr>
     </table>
 
@@ -2322,11 +2978,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_clearUnits">
-        <div class="location">at line 521</div>
+        <div class="location">at         line 566</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>clearUnits</strong>()</code>
+    <strong>clearUnits</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -2334,8 +2994,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -2347,20 +3006,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_addWarehouse">
-        <div class="location">at line 531</div>
+        <div class="location">at         line 576</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>addWarehouse</strong>(<abbr title="jtl\Connector\Model\jtl\Connector\Model\Warehouse">Warehouse</abbr> $warehouse)</code>
+    <strong>addWarehouse</strong>(<a href="../../../jtl/Connector/Model/Warehouse.html"><abbr title="jtl\Connector\Model\Warehouse">Warehouse</abbr></a> $warehouse)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\Warehouse">Warehouse</abbr></td>
+                <td><a href="../../../jtl/Connector/Model/Warehouse.html"><abbr title="jtl\Connector\Model\Warehouse">Warehouse</abbr></a></td>
                 <td>$warehouse</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -2370,8 +3032,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -2383,11 +3044,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setWarehouses">
-        <div class="location">at line 541</div>
+        <div class="location">at         line 586</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>setWarehouses</strong>(array $warehouses)</code>
+    <strong>setWarehouses</strong>(array $warehouses)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -2395,8 +3060,7 @@
                     <tr>
                 <td>array</td>
                 <td>$warehouses</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -2406,8 +3070,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -2419,20 +3082,23 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getWarehouses">
-        <div class="location">at line 550</div>
-        <code>                    <abbr title="jtl\Connector\Model\jtl\Connector\Model\Warehouse">Warehouse</abbr>[]
-    <strong>getWarehouses</strong>()</code>
+        <div class="location">at         line 595</div>
+        <code>                    <a href="../../../jtl/Connector/Model/Warehouse.html"><abbr title="jtl\Connector\Model\Warehouse">Warehouse</abbr></a>[]
+    <strong>getWarehouses</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="jtl\Connector\Model\jtl\Connector\Model\Warehouse">Warehouse</abbr>[]</td>
-            <td>
-</td>
+            <td><a href="../../../jtl/Connector/Model/Warehouse.html"><abbr title="jtl\Connector\Model\Warehouse">Warehouse</abbr></a>[]</td>
+            <td></td>
         </tr>
     </table>
 
@@ -2444,11 +3110,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_clearWarehouses">
-        <div class="location">at line 558</div>
+        <div class="location">at         line 603</div>
         <code>                    <a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a>
-    <strong>clearWarehouses</strong>()</code>
+    <strong>clearWarehouses</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
@@ -2456,8 +3126,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><a href="../../../jtl/Connector/Model/GlobalData.html"><abbr title="jtl\Connector\Model\GlobalData">GlobalData</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 

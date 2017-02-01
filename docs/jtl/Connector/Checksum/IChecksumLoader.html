@@ -12,6 +12,9 @@
         <script src="../../../js/bootstrap.min.js"></script>
         <script src="../../../js/typeahead.min.js"></script>
         <script src="../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -70,11 +76,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>IChecksumLoader</h1>
+        <h1>
+            IChecksumLoader
+                
+        </h1>
     </div>
 
     <p>    interface
-    <strong>IChecksumLoader</strong></p>
+    <strong>IChecksumLoader</strong>
+</p>
+
+        
+    
 
     
     
@@ -89,6 +102,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_read">read</a>(string $endpointId, int $type)
+        
                                             <p>Loads the checksum</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -98,6 +112,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_write">write</a>(string $endpointId, int $type, string $checksum)
+        
                                             <p>Loads the checksum</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -107,6 +122,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_delete">delete</a>(string $endpointId, int $type)
+        
                                             <p>Loads the checksum</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -118,11 +134,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_read">
-        <div class="location">at line 18</div>
+        <div class="location">at         line 18</div>
         <code>                    string
-    <strong>read</strong>(string $endpointId, int $type)</code>
+    <strong>read</strong>(string $endpointId, int $type)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Loads the checksum</p>                                </div>
                 <div class="tags">
@@ -132,14 +152,12 @@
                     <tr>
                 <td>string</td>
                 <td>$endpointId</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>int</td>
                 <td>$type</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -149,8 +167,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -162,11 +179,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_write">
-        <div class="location">at line 28</div>
+        <div class="location">at         line 28</div>
         <code>                    boolean
-    <strong>write</strong>(string $endpointId, int $type, string $checksum)</code>
+    <strong>write</strong>(string $endpointId, int $type, string $checksum)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Loads the checksum</p>                                </div>
                 <div class="tags">
@@ -176,20 +197,17 @@
                     <tr>
                 <td>string</td>
                 <td>$endpointId</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>int</td>
                 <td>$type</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>string</td>
                 <td>$checksum</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -199,8 +217,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -212,11 +229,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_delete">
-        <div class="location">at line 37</div>
+        <div class="location">at         line 37</div>
         <code>                    boolean
-    <strong>delete</strong>(string $endpointId, int $type)</code>
+    <strong>delete</strong>(string $endpointId, int $type)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Loads the checksum</p>                                </div>
                 <div class="tags">
@@ -226,14 +247,12 @@
                     <tr>
                 <td>string</td>
                 <td>$endpointId</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>int</td>
                 <td>$type</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -243,8 +262,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 

@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,17 +77,45 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>FinishStep</h1>
+        <h1>
+            FinishStep
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>FinishStep</strong>        extends <a href="../../../../jtl/Connector/Installer/Step/InstallerStep.html"><abbr title="jtl\Connector\Installer\Step\InstallerStep">InstallerStep</abbr></a></p>
+    <strong>FinishStep</strong>        extends <a href="../../../../jtl/Connector/Installer/Step/InstallerStep.html"><abbr title="jtl\Connector\Installer\Step\InstallerStep">InstallerStep</abbr></a>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Description of FinishStep</p>                    </div>
     
     
     
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property__template">
+                                        protected                                        
+                </td>
+                <td>$_template</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property__installer">
+                                        protected                                        <a href="../../../../jtl/Connector/Installer/Installer.html"><abbr title="jtl\Connector\Installer\Installer">Installer</abbr></a>
+                </td>
+                <td>$_installer</td>
+                <td class="last">Installer object</td>
+                <td><small>from&nbsp;<a href="../../../../jtl/Connector/Installer/Step/InstallerStep.html#property__installer"><abbr title="jtl\Connector\Installer\Step\InstallerStep">InstallerStep</abbr></a></small></td>
+            </tr>
+            </table>
+
     
             <h2>Methods</h2>
 
@@ -91,7 +125,28 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___construct">__construct</a>(<abbr title="jtl\Connector\Installer\Step\jtl\Connector\Installer\Installer">Installer</abbr> $installer)
+                    <a href="#method_addParameter">addParameter</a>(string $key, mixed $value)
+        
+                                            <p>Setter method for the template parameters</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Installer/Step/InstallerStep.html#method_addParameter"><abbr title="jtl\Connector\Installer\Step\InstallerStep">InstallerStep</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_deleteParameter">deleteParameter</a>(string $key)
+        
+                                            <p>Delete method for template parameters</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Installer/Step/InstallerStep.html#method_deleteParameter"><abbr title="jtl\Connector\Installer\Step\InstallerStep">InstallerStep</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>(<a href="../../../../jtl/Connector/Installer/Installer.html"><abbr title="jtl\Connector\Installer\Installer">Installer</abbr></a> $installer)
+        
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Installer/Step/InstallerStep.html#method___construct"><abbr title="jtl\Connector\Installer\Step\InstallerStep">InstallerStep</abbr></a></small></div>
@@ -102,6 +157,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_run">run</a>()
+        
                                             <p>Executes the current step</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Installer/Step/InstallerStep.html#method_run"><abbr title="jtl\Connector\Installer\Step\InstallerStep">InstallerStep</abbr></a></small></div>
             </div>
@@ -112,21 +168,91 @@
 
             <div id="method-details">
                     <div class="method-item">
-                    <h3 id="method___construct">
-        <div class="location">in <a href="../../../../jtl/Connector/Installer/Step/InstallerStep.html#method___construct"><abbr title="jtl\Connector\Installer\Step\InstallerStep">InstallerStep</abbr></a> at line 56</div>
-        <code>                    
-    <strong>__construct</strong>(<abbr title="jtl\Connector\Installer\Step\jtl\Connector\Installer\Installer">Installer</abbr> $installer)</code>
+                    <h3 id="method_addParameter">
+        <div class="location">in <a href="../../../../jtl/Connector/Installer/Step/InstallerStep.html#method_addParameter"><abbr title="jtl\Connector\Installer\Step\InstallerStep">InstallerStep</abbr></a> at         line 41</div>
+        <code>            protected        
+    <strong>addParameter</strong>(string $key, mixed $value)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Setter method for the template parameters</p>                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="jtl\Connector\Installer\Step\jtl\Connector\Installer\Installer">Installer</abbr></td>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_deleteParameter">
+        <div class="location">in <a href="../../../../jtl/Connector/Installer/Step/InstallerStep.html#method_deleteParameter"><abbr title="jtl\Connector\Installer\Step\InstallerStep">InstallerStep</abbr></a> at         line 51</div>
+        <code>            protected        
+    <strong>deleteParameter</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Delete method for template parameters</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">in <a href="../../../../jtl/Connector/Installer/Step/InstallerStep.html#method___construct"><abbr title="jtl\Connector\Installer\Step\InstallerStep">InstallerStep</abbr></a> at         line 56</div>
+        <code>                    
+    <strong>__construct</strong>(<a href="../../../../jtl/Connector/Installer/Installer.html"><abbr title="jtl\Connector\Installer\Installer">Installer</abbr></a> $installer)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../../jtl/Connector/Installer/Installer.html"><abbr title="jtl\Connector\Installer\Installer">Installer</abbr></a></td>
                 <td>$installer</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -139,11 +265,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_run">
-        <div class="location">in <a href="../../../../jtl/Connector/Installer/Step/InstallerStep.html#method_run"><abbr title="jtl\Connector\Installer\Step\InstallerStep">InstallerStep</abbr></a> at line 66</div>
+        <div class="location">in <a href="../../../../jtl/Connector/Installer/Step/InstallerStep.html#method_run"><abbr title="jtl\Connector\Installer\Step\InstallerStep">InstallerStep</abbr></a> at         line 66</div>
         <code>                    <abbr title="jtl\Connector\Installer\Step\type">type</abbr>
-    <strong>run</strong>()</code>
+    <strong>run</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Executes the current step</p>                                </div>
                 <div class="tags">
@@ -153,8 +283,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><abbr title="jtl\Connector\Installer\Step\type">type</abbr></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 

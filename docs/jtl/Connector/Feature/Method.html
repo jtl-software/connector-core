@@ -12,6 +12,9 @@
         <script src="../../../js/bootstrap.min.js"></script>
         <script src="../../../js/typeahead.min.js"></script>
         <script src="../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -75,27 +81,31 @@
 
     
             <h2>Classes</h2>
-        <div class="container-fluid underlined">
+        
+    <div class="container-fluid underlined">
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../../jtl/Connector/Feature/Method/Base.html"><abbr title="jtl\Connector\Feature\Method\Base">jtl\Connector\Feature\Method\Base</abbr></a>
-                                    </div>
+                                            <a href="../../../jtl/Connector/Feature/Method/Base.html"><abbr title="jtl\Connector\Feature\Method\Base">Base</abbr></a>
+                                            
+                </div>
                 <div class="col-md-6">
                     Base method class.
                 </div>
             </div>
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../../jtl/Connector/Feature/Method/Pull.html"><abbr title="jtl\Connector\Feature\Method\Pull">jtl\Connector\Feature\Method\Pull</abbr></a>
-                                    </div>
+                                            <a href="../../../jtl/Connector/Feature/Method/Pull.html"><abbr title="jtl\Connector\Feature\Method\Pull">Pull</abbr></a>
+                                            
+                </div>
                 <div class="col-md-6">
                     Pull method.
                 </div>
             </div>
                     <div class="row">
                 <div class="col-md-6">
-                                            <a href="../../../jtl/Connector/Feature/Method/Push.html"><abbr title="jtl\Connector\Feature\Method\Push">jtl\Connector\Feature\Method\Push</abbr></a>
-                                    </div>
+                                            <a href="../../../jtl/Connector/Feature/Method/Push.html"><abbr title="jtl\Connector\Feature\Method\Push">Push</abbr></a>
+                                            
+                </div>
                 <div class="col-md-6">
                     Push method.
                 </div>
@@ -103,11 +113,13 @@
             </div>
     
             <h2>Interfaces</h2>
-        <div class="container-fluid underlined">
+        
+    <div class="container-fluid underlined">
                     <div class="row">
                 <div class="col-md-6">
-                                            <em><a href="../../../jtl/Connector/Feature/Method/IMethod.html"><abbr title="jtl\Connector\Feature\Method\IMethod">jtl\Connector\Feature\Method\IMethod</abbr></a></em>
-                                    </div>
+                                            <em><a href="../../../jtl/Connector/Feature/Method/IMethod.html"><abbr title="jtl\Connector\Feature\Method\IMethod">IMethod</abbr></a></em>
+                                            
+                </div>
                 <div class="col-md-6">
                     Method interface
                 </div>

@@ -12,6 +12,9 @@
         <script src="../../../../js/bootstrap.min.js"></script>
         <script src="../../../../js/typeahead.min.js"></script>
         <script src="../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     
     
     </head>
@@ -20,7 +23,10 @@
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../../../search.html" method="GET">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -71,11 +77,18 @@
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>Push</h1>
+        <h1>
+            Push
+                
+        </h1>
     </div>
 
     <p>    class
-    <strong>Push</strong>        extends <a href="../../../../jtl/Connector/Feature/Method/Base.html"><abbr title="jtl\Connector\Feature\Method\Base">Base</abbr></a></p>
+    <strong>Push</strong>        extends <a href="../../../../jtl/Connector/Feature/Method/Base.html"><abbr title="jtl\Connector\Feature\Method\Base">Base</abbr></a>
+</p>
+
+        
+    
 
             <div class="description">
             <p>Push method.</p>                    </div>
@@ -86,12 +99,27 @@
 
             <table class="table table-condensed">
                     <tr>
+                <td class="type" id="property__name">
+                                        protected                                        
+                </td>
+                <td>$_name</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property__classes">
+                                        protected                                        
+                </td>
+                <td>$_classes</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../../jtl/Connector/Feature/Base/Base.html#property__classes"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a></small></td>
+            </tr>
+                    <tr>
                 <td class="type" id="property_supported">
                                                                                 boolean
                 </td>
                 <td>$supported</td>
-                <td class="last">
-</td>
+                <td class="last"></td>
                 <td><small>from&nbsp;<a href="../../../../jtl/Connector/Feature/Method/Base.html#property_supported"><abbr title="jtl\Connector\Feature\Method\Base">Base</abbr></a></small></td>
             </tr>
                     <tr>
@@ -99,8 +127,7 @@
                                                                                 string
                 </td>
                 <td>$comment</td>
-                <td class="last">
-</td>
+                <td class="last"></td>
                 <td><small>from&nbsp;<a href="../../../../jtl/Connector/Feature/Method/Base.html#property_comment"><abbr title="jtl\Connector\Feature\Method\Base">Base</abbr></a></small></td>
             </tr>
             </table>
@@ -115,6 +142,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getName">getName</a>()
+        
                                             <p>Returns the name.</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Feature/Base/Base.html#method_getName"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a></small></div>
             </div>
@@ -124,6 +152,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_setName">setName</a>(string $name)
+        
                                             <p>Sets the name.</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Feature/Base/Base.html#method_setName"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a></small></div>
             </div>
@@ -133,6 +162,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getClasses">getClasses</a>()
+        
                                             <p>Returns all declared classes.</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Feature/Base/Base.html#method_getClasses"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a></small></div>
             </div>
@@ -142,6 +172,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method___construct">__construct</a>(string $name, boolean $supported = false, string $comment = &#039;&#039;)
+        
                                             <p>Create the instance of your extended method.</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Feature/Method/Base.html#method___construct"><abbr title="jtl\Connector\Feature\Method\Base">Base</abbr></a></small></div>
             </div>
@@ -151,6 +182,7 @@
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_isSupported">isSupported</a>()
+        
                                             <p>Returns if the method is supported.</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../jtl/Connector/Feature/Method/Base.html#method_isSupported"><abbr title="jtl\Connector\Feature\Method\Base">Base</abbr></a></small></div>
             </div>
@@ -162,11 +194,15 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_getName">
-        <div class="location">in <a href="../../../../jtl/Connector/Feature/Base/Base.html#method_getName"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a> at line 30</div>
+        <div class="location">in <a href="../../../../jtl/Connector/Feature/Base/Base.html#method_getName"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a> at         line 30</div>
         <code>final                    string
-    <strong>getName</strong>()</code>
+    <strong>getName</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Returns the name.</p>                                </div>
                 <div class="tags">
@@ -176,8 +212,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -189,11 +224,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setName">
-        <div class="location">in <a href="../../../../jtl/Connector/Feature/Base/Base.html#method_setName"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a> at line 41</div>
+        <div class="location">in <a href="../../../../jtl/Connector/Feature/Base/Base.html#method_setName"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a> at         line 41</div>
         <code>final                    boolean
-    <strong>setName</strong>(string $name)</code>
+    <strong>setName</strong>(string $name)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Sets the name.</p>                                </div>
                 <div class="tags">
@@ -203,8 +242,7 @@
                     <tr>
                 <td>string</td>
                 <td>$name</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -214,8 +252,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -227,11 +264,15 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getClasses">
-        <div class="location">in <a href="../../../../jtl/Connector/Feature/Base/Base.html#method_getClasses"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a> at line 57</div>
+        <div class="location">in <a href="../../../../jtl/Connector/Feature/Base/Base.html#method_getClasses"><abbr title="jtl\Connector\Feature\Base\Base">Base</abbr></a> at         line 57</div>
         <code>                    array
-    <strong>getClasses</strong>()</code>
+    <strong>getClasses</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Returns all declared classes.</p>                    <p>We need this way, because the autoloader will try to include the class
 file if we use "class_exists" or similar functions.</p>            </div>
@@ -242,8 +283,7 @@ file if we use "class_exists" or similar functions.</p>            </div>
                     <table class="table table-condensed">
         <tr>
             <td>array</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -255,11 +295,15 @@ file if we use "class_exists" or similar functions.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">in <a href="../../../../jtl/Connector/Feature/Method/Base.html#method___construct"><abbr title="jtl\Connector\Feature\Method\Base">Base</abbr></a> at line 41</div>
+        <div class="location">in <a href="../../../../jtl/Connector/Feature/Method/Base.html#method___construct"><abbr title="jtl\Connector\Feature\Method\Base">Base</abbr></a> at         line 41</div>
         <code>                    
-    <strong>__construct</strong>(string $name, boolean $supported = false, string $comment = &#039;&#039;)</code>
+    <strong>__construct</strong>(string $name, boolean $supported = false, string $comment = &#039;&#039;)
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Create the instance of your extended method.</p>                                </div>
                 <div class="tags">
@@ -293,11 +337,15 @@ true. Otherwise the supported flag will be false.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_isSupported">
-        <div class="location">in <a href="../../../../jtl/Connector/Feature/Method/Base.html#method_isSupported"><abbr title="jtl\Connector\Feature\Method\Base">Base</abbr></a> at line 53</div>
+        <div class="location">in <a href="../../../../jtl/Connector/Feature/Method/Base.html#method_isSupported"><abbr title="jtl\Connector\Feature\Method\Base">Base</abbr></a> at         line 53</div>
         <code>                    boolean
-    <strong>isSupported</strong>()</code>
+    <strong>isSupported</strong>()
+        </code>
     </h3>
     <div class="details">
+            
+    
+
                     <div class="method-description">
                                     <p>Returns if the method is supported.</p>                                </div>
                 <div class="tags">
@@ -307,8 +355,7 @@ true. Otherwise the supported flag will be false.</td>
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
