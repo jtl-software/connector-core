@@ -13,7 +13,7 @@ class Temp
      */
     public static function generateDirectory()
     {
-        $dir = Path::combine(sys_get_temp_dir(), 'con-' . uniqid());
+        $dir = Path::combine(self::getDirectory(), 'con-' . uniqid());
         if (mkdir($dir)) {
             return $dir;
         }

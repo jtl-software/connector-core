@@ -358,6 +358,8 @@ class Application extends CoreApplication
                 if ($zipFile !== null) {
                     @unlink($zipFile);
                 }
+            } else {
+                throw new ApplicationException('Zip file or temp dir  is null');
             }
         }
 
