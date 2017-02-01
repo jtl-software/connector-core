@@ -1,6 +1,7 @@
 2.4.1 (unreleased)
 ------------------
 - Added compatibility method to config class
+- Added sys_get_temp_dir fallback
 
 2.4.0
 -----

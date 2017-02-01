@@ -9,6 +9,7 @@ namespace jtl\Connector\Core\Http;
 use \jtl\Connector\Core\Compression\Gzip;
 use \jtl\Connector\Core\Exception\CompressionException;
 use \jtl\Connector\Core\Exception\HttpException;
+use jtl\Connector\Core\IO\Temp;
 use \jtl\Connector\Core\Logger\Logger;
 
 /**
@@ -132,7 +133,7 @@ class Request
             if (isset($pathinfo["extension"])) {
                 $extension = $pathinfo["extension"];
                 $filename = uniqid() . ".{$extension}";
-                $path = sys_get_temp_dir() . DIRECTORY_SEPARATOR;
+                $path = Temp::getDirectory() . DIRECTORY_SEPARATOR;
 
                 if (Request::moveFileupload($path, $filename, $name)) {
                     return "{$path}{$filename}";
@@ -213,7 +214,7 @@ class Request
         } elseif (Request::isFileupload()) {
             $filename = uniqid() . ".zip";
             //$path = APP_DIR . '/../tmp/';
-            $path = sys_get_temp_dir();
+            $path = Temp::getDirectory();
             if (Request::moveFileupload($path, $filename)) {
                 $gzip = new Gzip();
         

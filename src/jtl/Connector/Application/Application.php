@@ -641,7 +641,7 @@ class Application extends CoreApplication
 
                         $path = parse_url($images[$i]->getRemoteUrl(), PHP_URL_PATH);
                         $fileName = pathinfo($path, PATHINFO_BASENAME);
-                        $imagePath = Path::combine(sys_get_temp_dir(), uniqid() . "_{$fileName}");
+                        $imagePath = Path::combine(Temp::getDirectory(), uniqid() . "_{$fileName}");
                         file_put_contents($imagePath, $imageData);
 
                         $images[$i]->setFilename($imagePath);
@@ -676,7 +676,7 @@ class Application extends CoreApplication
 
                     $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
                     $fileName = pathinfo($path, PATHINFO_BASENAME);
-                    $imagePath = Path::combine(sys_get_temp_dir(), uniqid() . "_{$fileName}");
+                    $imagePath = Path::combine(Temp::getDirectory(), uniqid() . "_{$fileName}");
                     file_put_contents($imagePath, $imageData);
 
                     $image->setFilename($imagePath);
