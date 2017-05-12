@@ -9,11 +9,11 @@ namespace jtl\Connector\Formatter;
 class ExceptionFormatter
 {
     /**
-     * @param \Exception $exc
+     * @param \Throwable $exc
      * @param string $message
      * @return string
      */
-    public static function format(\Exception $exc, $message = '')
+    public static function format(\Throwable $exc, $message = '')
     {
         return sprintf(
             "Exception '%s' (Code: %s) with message '%s' in %s:%s%s",

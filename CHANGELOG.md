@@ -1,3 +1,7 @@
+2.4.3 (unreleased)
+------------------
+- Fixed exception error handler
+
 2.4.2
 -----
 - Added manufacturer property to product model
