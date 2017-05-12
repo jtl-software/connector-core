@@ -1,3 +1,7 @@
+2.4.2 (unreleased)
+------------------
+- Added manufacturer property to product model
+
 2.4.1
 -----
 - Added compatibility method to config class

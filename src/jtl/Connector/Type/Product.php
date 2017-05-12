@@ -53,6 +53,7 @@ class Product extends DataType
             new PropertyInfo('keywords', 'string', '', false, false, false),
             new PropertyInfo('length', 'double', 0.0, false, false, false),
             new PropertyInfo('manufacturerNumber', 'string', '', false, false, false),
+            new PropertyInfo('manufacturer', '\jtl\Connector\Model\Manufacturer', null, false, false, true),
             new PropertyInfo('measurementQuantity', 'double', 0.0, false, false, false),
             new PropertyInfo('measurementUnitCode', 'string', '', false, false, false),
             new PropertyInfo('minBestBeforeDate', 'DateTime', null, false, false, false),
