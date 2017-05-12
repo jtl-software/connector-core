@@ -1,6 +1,8 @@
 2.4.2 (unreleased)
 ------------------
 - Added manufacturer property to product model
+- Changed exception message in error handler
+- Fixed identity linker is type bug
 
 2.4.1
 -----
