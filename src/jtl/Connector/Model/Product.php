@@ -308,6 +308,14 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getManufacturerNumber",setter="setManufacturerNumber")
      */
     protected $manufacturerNumber = '';
+    
+    /**
+     * @var \jtl\Connector\Model\Manufacturer
+     * @Serializer\Type("jtl\Connector\Model\Manufacturer")
+     * @Serializer\SerializedName("manufacturer")
+     * @Serializer\Accessor(getter="getManufacturer",setter="setManufacturer")
+     */
+    protected $manufacturer = null;
 
     /**
      * @var double Optional measurement quantity
@@ -1298,6 +1306,23 @@ class Product extends DataModel
     public function getManufacturerNumber()
     {
         return $this->manufacturerNumber;
+    }
+    
+    /**
+     * @param string $manufacturer Optional manufacturer
+     * @return \jtl\Connector\Model\Product
+     */
+    public function setManufacturer(Manufacturer $manufacturer = null)
+    {
+        return $this->setProperty('manufacturer', $manufacturer, 'jtl\Connector\Model\Manufacturer');
+    }
+    
+    /**
+     * @return \jtl\Connector\Model\Manufacturer|null Optional manufacturer
+     */
+    public function getManufacturer()
+    {
+        return $this->manufacturer;
     }
 
     /**

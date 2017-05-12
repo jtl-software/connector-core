@@ -490,7 +490,7 @@ class IdentityLinker
     public function isType($modelName, $property = null)
     {
         $modelName = ucfirst($modelName);
-        $property = lcfirst($property);
+        $property = is_string($property) ? lcfirst($property) : $property;
 
         return ($property === null) ? isset(self::$types[$modelName]) : isset(self::$mappings[$modelName][$property]);
     }

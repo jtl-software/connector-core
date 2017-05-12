@@ -14,6 +14,7 @@ use jtl\Connector\Core\Rpc\ResponsePacket;
 use jtl\Connector\Core\Utilities\RpcMethod;
 use jtl\Connector\Event\EventHandler;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use jtl\Connector\Formatter\ExceptionFormatter;
 
 class ErrorHandler implements IErrorHandler
 {
@@ -52,7 +53,7 @@ class ErrorHandler implements IErrorHandler
 
     public function getExceptionHandler()
     {
-        return function($e) {
+        return function(\Exception $e) {
             $trace = $e->getTrace();
             if (isset($trace[0]['args'][0])) {
                 $requestpacket = $trace[0]['args'][0];
@@ -60,7 +61,7 @@ class ErrorHandler implements IErrorHandler
 
             $error = new Error();
             $error->setCode($e->getCode())
-                ->setData("Exception: " . substr(strrchr(get_class($e), "\\"), 1) . " - File: {$e->getFile()} - Line: {$e->getLine()}")
+                ->setData(ExceptionFormatter::format($e))
                 ->setMessage($e->getMessage());
 
             Logger::write($error->getData(), Logger::ERROR, 'global');
