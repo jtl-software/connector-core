@@ -1,5 +1,5 @@
-2.4.3 (unreleased)
-------------------
+2.4.3
+-----
 - Fixed exception error handler
 
 2.4.2
