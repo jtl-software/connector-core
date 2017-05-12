@@ -62,12 +62,12 @@ class Error extends Model
     /**
      * Setter for $code
      *
-     * @param interger $code
+     * @param int $code
      * @return \jtl\Connector\Core\Rpc\Error
      */
     public function setCode($code)
     {
-        $this->code = (int)$code;
+        $this->code = (int) $code;
         return $this;
     }
 
