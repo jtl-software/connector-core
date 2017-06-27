@@ -1,3 +1,7 @@
+2.4.4 (unreleased)
+------------------
+- Fixed minor Checksum Linker bug
+
 2.4.3
 -----
 - Fixed exception error handler
