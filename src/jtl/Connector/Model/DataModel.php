@@ -22,7 +22,7 @@ abstract class DataModel extends CoreModel
 {
     /**
      * @var \jtl\Connector\Type\DataType
-     * @Serializer\type("jtl\Connector\Type\DataType")
+     * @Serializer\Type("jtl\Connector\Type\DataType")
      * @Serializer\AccessType("reflection")
      * @Serializer\Exclude
      */
@@ -30,7 +30,7 @@ abstract class DataModel extends CoreModel
 
     /**
      * @var boolean
-     * @Serializer\type("boolean")
+     * @Serializer\Type("boolean")
      * @Serializer\AccessType("reflection")
      * @Serializer\Exclude
      */

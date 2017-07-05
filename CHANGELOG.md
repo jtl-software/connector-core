@@ -1,6 +1,7 @@
 2.4.4 (unreleased)
 ------------------
 - Fixed minor Checksum Linker bug
+- Fixed Serializer Annotation bug
 
 2.4.3
 -----
