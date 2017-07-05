@@ -21,7 +21,7 @@ abstract class DataModel extends Model
 {
     /**
      * @var array list of strings
-     * @Serializer\type("array<string, string>")
+     * @Serializer\Type("array<string, string>")
      * @Serializer\Exclude
      * @Serializer\ReadOnly
      */

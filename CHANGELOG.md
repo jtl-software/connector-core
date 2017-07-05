@@ -1,3 +1,8 @@
+2.4.4
+-----
+- Fixed minor Checksum Linker bug
+- Fixed Serializer Annotation bug
+
 2.4.3
 -----
 - Fixed exception error handler
