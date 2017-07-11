@@ -1,3 +1,7 @@
+2.4.6 (unreleased)
+------------------
+- Fixed connector server info annotation bug
+
 2.4.5
 -----
 - Added connector core debug and log call

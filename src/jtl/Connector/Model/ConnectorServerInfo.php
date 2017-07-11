@@ -24,7 +24,7 @@ class ConnectorServerInfo extends DataModel
      * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("memoryLimit")
-     * @Serializer\Accessor(getter="getEndpointVersion",setter="setEndpointVersion")
+     * @Serializer\Accessor(getter="getMemoryLimit",setter="setMemoryLimit")
      */
     protected $memoryLimit = 0;
 
@@ -32,7 +32,7 @@ class ConnectorServerInfo extends DataModel
      * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("executionTime")
-     * @Serializer\Accessor(getter="getPlatformName",setter="setPlatformName")
+     * @Serializer\Accessor(getter="getExecutionTime",setter="setExecutionTime")
      */
     protected $executionTime = 0;
 
