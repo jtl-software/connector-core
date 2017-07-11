@@ -6,7 +6,9 @@
 
 namespace jtl\Connector\Core\Logger;
 
+use jtl\Connector\Core\IO\Path;
 use Monolog\Handler\RotatingFileHandler;
+use Monolog\Handler\StreamHandler;
 
 class Logger extends \Monolog\Logger
 {
@@ -47,7 +49,7 @@ class Logger extends \Monolog\Logger
 
         $log = LoggerFactory::get($channel);
         if (!$log->isHandling($level)) {
-            $log->pushHandler(new RotatingFileHandler(implode(DIRECTORY_SEPARATOR, $path)), 5, $level);
+            $log->pushHandler(new RotatingFileHandler(implode(DIRECTORY_SEPARATOR, $path)), 2, $level);
         }
 
         return @$log->log($level, $message);
