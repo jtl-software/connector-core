@@ -1,3 +1,7 @@
+2.4.5
+-----
+- Added connector core debug and log call
+
 2.4.4
 -----
 - Fixed minor Checksum Linker bug

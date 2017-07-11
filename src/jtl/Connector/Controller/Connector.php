@@ -9,17 +9,16 @@ namespace jtl\Connector\Controller;
 
 use jtl\Connector\Authentication\ITokenValidator;
 use \jtl\Connector\Core\Controller\Controller as CoreController;
+use jtl\Connector\Core\IO\Path;
 use jtl\Connector\Core\System\Check;
 use \jtl\Connector\Result\Action;
 use \jtl\Connector\Core\Rpc\Error;
-use \jtl\Connector\Application\Application;
 use \jtl\Connector\Linker\IdentityLinker;
 use \jtl\Connector\Serializer\JMS\SerializerBuilder;
 use \jtl\Connector\Core\Logger\Logger;
 use \jtl\Connector\Linker\ChecksumLinker;
 use \jtl\Connector\Checksum\IChecksum;
 use \jtl\Connector\Formatter\ExceptionFormatter;
-use \jtl\Connector\Core\Exception\ControllerException;
 
 /**
  * Base Config Controller
@@ -64,7 +63,6 @@ class Connector extends CoreController
     {
         $ret = new Action();
         try {
-            //@todo: irgend ne supertolle feature list methode
             $featureData = file_get_contents(CONNECTOR_DIR . '/config/features.json');
             $features = json_decode($featureData);
 
@@ -200,6 +198,80 @@ class Connector extends CoreController
             $action->setError($error);
         }
         
+        return $action;
+    }
+    
+    /**
+     * @return Action
+     */
+    public function debug()
+    {
+        $action = new Action();
+        $action->setHandled(true);
+        
+        try {
+            $path = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
+            $configData = file_get_contents($path);
+            if ($configData === false) {
+                throw new \Exception(sprintf('Cannot read config file %s', $path));
+            }
+            
+            $config = json_decode($configData);
+            
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                throw new \Exception(sprintf('Json config error %s', json_last_error_msg()));
+            }
+    
+            $status = false;
+            if (!isset($config->developer_logging) || !$config->developer_logging) {
+                $status = true;
+            }
+            
+            $config->developer_logging = $status;
+            
+            file_put_contents($path, json_encode($config, JSON_PRETTY_PRINT));
+            
+            $action->setResult($config);
+        } catch (\Exception $e) {
+            $error = new Error();
+            $error->setCode($e->getCode());
+            $error->setMessage($e->getMessage());
+            $action->setError($error);
+        }
+        
+        return $action;
+    }
+    
+    /**
+     * @return Action
+     */
+    public function logs()
+    {
+        $action = new Action();
+        $action->setHandled(true);
+        
+        try {
+            $log = [];
+            foreach (glob(Path::combine(CONNECTOR_DIR, 'logs', '*.log')) as $file) {
+                if (!preg_match('/(global|database){1}.+\.log/', $file)) {
+                    continue;
+                }
+                
+                $lines = array_filter(explode(PHP_EOL, file_get_contents($file)), function ($elem) {
+                    return  !empty(trim($elem));
+                });
+                
+                $log = array_merge($log, $lines);
+            }
+            
+            $action->setResult($log);
+        } catch (\Exception $e) {
+            $error = new Error();
+            $error->setCode($e->getCode());
+            $error->setMessage($e->getMessage());
+            $action->setError($error);
+        }
+    
         return $action;
     }
 }
