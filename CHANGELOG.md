@@ -1,3 +1,8 @@
+2.4.6
+-----
+- Fixed connector server info annotation bug
+- Changed vendor versions to < PHP 7 requirements
+
 2.4.5
 -----
 - Added connector core debug and log call
