@@ -38,6 +38,7 @@ class Customer extends DataType
             new PropertyInfo('languageISO', 'string', '', false, false, false),
             new PropertyInfo('lastName', 'string', '', false, false, false),
             new PropertyInfo('mobile', 'string', '', false, false, false),
+            new PropertyInfo('note', 'string', '', false, false, false),
             new PropertyInfo('origin', 'string', '', false, false, false),
             new PropertyInfo('phone', 'string', '', false, false, false),
             new PropertyInfo('salutation', 'string', '', false, false, false),
