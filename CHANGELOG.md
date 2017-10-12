@@ -1,3 +1,7 @@
+2.4.7
+-----
+- Added customer note
+
 2.4.6
 -----
 - Fixed connector server info annotation bug

@@ -188,6 +188,14 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getMobile",setter="setMobile")
      */
     protected $mobile = '';
+    
+    /**
+     * @var string customer note
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("note")
+     * @Serializer\Accessor(getter="getNote",setter="setNote")
+     */
+    protected $note = '';
 
     /**
      * @var string Customer origin
@@ -637,6 +645,23 @@ class Customer extends DataModel
     public function getMobile()
     {
         return $this->mobile;
+    }
+    
+    /**
+     * @param string $note customer note
+     * @return \jtl\Connector\Model\Customer
+     */
+    public function setNote($note)
+    {
+        return $this->setProperty('note', $note, 'string');
+    }
+    
+    /**
+     * @return string customer note
+     */
+    public function getNote()
+    {
+        return $this->note;
     }
 
     /**

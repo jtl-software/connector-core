@@ -35,7 +35,6 @@ class IdentityLinker
     const TYPE_PAYMENT = 512;
     const TYPE_CROSSSELLING = 1024;
     const TYPE_CROSSSELLING_GROUP = 2048;
-    const TYPE_PRODUCT_ATTR = 4096;
 
     /**
      * Session Database Mapper
@@ -75,8 +74,7 @@ class IdentityLinker
         'Payment' => self::TYPE_PAYMENT,
         'CrossSelling' => self::TYPE_CROSSSELLING,
         'CrossSellingItem' => self::TYPE_CROSSSELLING,
-        'CrossSellingGroup' => self::TYPE_CROSSSELLING_GROUP,
-        'ProductAttr' => self::TYPE_PRODUCT_ATTR
+        'CrossSellingGroup' => self::TYPE_CROSSSELLING_GROUP
     );
     
     /**
