@@ -1,3 +1,7 @@
+2.4.8
+-----
+- Fixed minor syntax bug
+
 2.4.7
 -----
 - Added customer note

@@ -209,7 +209,6 @@ class IdentityLinker
             'productId' => self::TYPE_PRODUCT
         ),
         'ProductAttr' => array(
-            'id' => self::TYPE_PRODUCT_ATTR,
             'productId' => self::TYPE_PRODUCT
         ),
         'ProductStockLevel' => array(
