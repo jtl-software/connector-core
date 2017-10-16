@@ -1,3 +1,7 @@
+2.4.9 (unreleased)
+------------------
+- CO-122 Added new connector finish event
+
 2.4.8
 -----
 - Fixed minor syntax bug
