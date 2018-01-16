@@ -1,6 +1,7 @@
-2.4.9 (unreleased)
-------------------
+2.4.9
+-----
 - CO-122 Added new connector finish event
+- CO-154 Added new CustomerOrderItem note property
 
 2.4.8
 -----
