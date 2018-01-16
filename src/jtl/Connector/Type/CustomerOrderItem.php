@@ -27,6 +27,7 @@ class CustomerOrderItem extends DataType
             new PropertyInfo('quantity', 'double', 0.0, false, false, false),
             new PropertyInfo('sku', 'string', '', false, false, false),
             new PropertyInfo('type', 'string', '', false, false, false),
+            new PropertyInfo('note', 'string', '', false, false, false),
             new PropertyInfo('unique', 'string', '', false, false, false),
             new PropertyInfo('vat', 'double', 0.0, false, false, false),
             new PropertyInfo('variations', '\jtl\Connector\Model\CustomerOrderItemVariation', null, false, false, true),

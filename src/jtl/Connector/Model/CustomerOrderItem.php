@@ -125,6 +125,14 @@ class CustomerOrderItem extends DataModel
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
     protected $type = '';
+    
+    /**
+     * @var string
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("note")
+     * @Serializer\Accessor(getter="getNote",setter="setNote")
+     */
+    protected $note = '';
 
     /**
      * @var string Optional unique Hashsum (if item is part of configurable item
@@ -333,6 +341,23 @@ class CustomerOrderItem extends DataModel
     public function getType()
     {
         return $this->type;
+    }
+    
+    /**
+     * @param string $note
+     * @return \jtl\Connector\Model\CustomerOrderItem
+     */
+    public function setNote($note)
+    {
+        return $this->setProperty('note', $note, 'string');
+    }
+    
+    /**
+     * @return string
+     */
+    public function getNote()
+    {
+        return $this->note;
     }
 
     /**

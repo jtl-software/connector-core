@@ -22,6 +22,7 @@ use jtl\Connector\Core\Rpc\Error;
 use jtl\Connector\Core\Http\Request;
 use jtl\Connector\Core\Http\Response;
 use jtl\Connector\Core\Config\Config;
+use jtl\Connector\Model\BoolResult;
 use jtl\Connector\Result\Action;
 use jtl\Connector\Core\Validator\Schema;
 use jtl\Connector\Core\Exception\SchemaException;
@@ -225,14 +226,9 @@ class Application extends CoreApplication
 
         $this->connector->setMethod($method);
         if ($this->connector->canHandle()) {
+            /** @var Action $actionresult */
             $actionresult = $this->connector->handle($requestpacket);
-
-            /*
-             * OLD single Image
-            if ($requestpacket->getMethod() === 'image.push' && $imagePath !== null) {
-                Request::deleteFileupload($imagePath);
-            }
-            */
+            
             if ($requestpacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
                 Request::deleteFileuploads($imagePaths);
             }
@@ -242,6 +238,11 @@ class Application extends CoreApplication
                 if ($actionresult->isHandled()) {
 
                     if ($actionresult->getError() === null) {
+    
+                        // Convert boolean to BoolResult
+                        if (is_bool($actionresult->getResult())) {
+                            $actionresult->setResult((new BoolResult())->setResult($actionresult->getResult()));
+                        }
 
                         // Identity mapping
                         $results = array();

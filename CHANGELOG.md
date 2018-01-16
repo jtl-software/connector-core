@@ -1,3 +1,8 @@
+2.4.9
+-----
+- CO-122 Added new connector finish event
+- CO-154 Added new CustomerOrderItem note property
+
 2.4.8
 -----
 - Fixed minor syntax bug
