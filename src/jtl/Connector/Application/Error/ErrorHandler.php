@@ -54,7 +54,7 @@ class ErrorHandler implements IErrorHandler
     public function getExceptionHandler()
     {
         return function($e) {
-            if (!is_object($e) || !is_callable($e, 'getTrace')) {
+            if (!($e instanceof \Exception)) {
                 return;
             }
             
