@@ -1,3 +1,7 @@
+2.4.10 (unreleased)
+-------------------
+- Removed php7 only Throwable type hint 
+
 2.4.9
 -----
 - CO-122 Added new connector finish event

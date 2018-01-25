@@ -53,7 +53,11 @@ class ErrorHandler implements IErrorHandler
 
     public function getExceptionHandler()
     {
-        return function(\Throwable $e) {
+        return function($e) {
+            if (!is_object($e) || !is_callable($e, 'getTrace')) {
+                return;
+            }
+            
             $trace = $e->getTrace();
             if (isset($trace[0]['args'][0])) {
                 $requestpacket = $trace[0]['args'][0];
