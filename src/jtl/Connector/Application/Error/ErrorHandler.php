@@ -54,21 +54,19 @@ class ErrorHandler implements IErrorHandler
     public function getExceptionHandler()
     {
         return function($e) {
-            if (!($e instanceof \Exception)) {
-                return;
-            }
-            
-            $trace = $e->getTrace();
-            if (isset($trace[0]['args'][0])) {
-                $requestpacket = $trace[0]['args'][0];
-            }
-
             $error = new Error();
-            $error->setCode($e->getCode())
-                ->setData(ExceptionFormatter::format($e))
-                ->setMessage($e->getMessage());
-
-            Logger::write($error->getData(), Logger::ERROR, 'global');
+            if (self::isThrowable()) {
+                $trace = $e->getTrace();
+                if (isset($trace[0]['args'][0])) {
+                    $requestpacket = $trace[0]['args'][0];
+                }
+    
+                $error->setCode($e->getCode())
+                    ->setData(ExceptionFormatter::format($e))
+                    ->setMessage($e->getMessage());
+    
+                Logger::write($error->getData(), Logger::ERROR, 'global');
+            }
 
             $responsepacket = new ResponsePacket();
             $responsepacket->setError($error)
@@ -165,10 +163,24 @@ class ErrorHandler implements IErrorHandler
             }
         };
     }
-
+    
+    /**
+     * @param EventDispatcher $dispatcher
+     * @return ErrorHandler
+     */
     public function setEventDispatcher(EventDispatcher $dispatcher)
     {
         $this->eventDispatcher = $dispatcher;
         return $this;
+    }
+    
+    /**
+     * @return bool
+     */
+    public static function isThrowable()
+    {
+        return version_compare(phpversion(), '7.0.0', '<') ?
+            ($e instanceof \Exception) :
+            ($e instanceof \Throwable);
     }
 }

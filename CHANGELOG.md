@@ -1,6 +1,6 @@
 2.4.10 (unreleased)
 -------------------
-- Removed php7 only Throwable type hint 
+- Added throwable and exception switching for php version compatibility
 
 2.4.9
 -----

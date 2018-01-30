@@ -521,17 +521,19 @@ class Application extends CoreApplication
      */
     protected function runModelValidation(RequestPacket $requestpacket)
     {
-        //        $method = RpcMethod::splitMethod($requestpacket->getMethod());
-//
-//        if ($method->getAction() == Method::ACTION_PUSH) {
-//            $controller = str_replace("_", "", $method->getController());
-//
-//            try {
-//                Schema::validateAction(CONNECTOR_DIR . "schema/{$controller}/{$controller}.json", $requestpacket->getParams());
-//            } catch (ValidationException $exc) {
-//                throw new SchemaException($exc->getMessage());
-//            }
-//        }
+        /*
+        $method = RpcMethod::splitMethod($requestpacket->getMethod());
+
+        if ($method->getAction() === Method::ACTION_PUSH) {
+            $controller = str_replace('_', '', $method->getController());
+
+            try {
+                Schema::validateAction(CONNECTOR_DIR . "schema/{$controller}/{$controller}.json", $requestpacket->getParams());
+            } catch (ValidationException $exc) {
+                throw new SchemaException($exc->getMessage());
+            }
+        }
+        */
     }
 
     /**
