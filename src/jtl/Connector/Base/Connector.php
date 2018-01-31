@@ -23,7 +23,7 @@ use \Symfony\Component\EventDispatcher\EventDispatcher;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-class Connector extends Singleton implements IEndpointConnector
+abstract class Connector extends Singleton implements IEndpointConnector
 {
     protected $controller;
     protected $keyMapper;

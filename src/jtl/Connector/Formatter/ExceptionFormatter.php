@@ -17,7 +17,7 @@ class ExceptionFormatter
      */
     public static function format($e, $message = '')
     {
-        return ErrorHandler::isThrowable() ? sprintf(
+        return ErrorHandler::isThrowable($e) ? sprintf(
             "Exception '%s' (Code: %s) with message '%s' in %s:%s%s",
             get_class($e),
             $e->getCode(),

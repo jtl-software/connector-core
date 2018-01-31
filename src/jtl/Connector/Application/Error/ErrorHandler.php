@@ -55,7 +55,7 @@ class ErrorHandler implements IErrorHandler
     {
         return function($e) {
             $error = new Error();
-            if (self::isThrowable()) {
+            if (self::isThrowable($e)) {
                 $trace = $e->getTrace();
                 if (isset($trace[0]['args'][0])) {
                     $requestpacket = $trace[0]['args'][0];
@@ -175,9 +175,10 @@ class ErrorHandler implements IErrorHandler
     }
     
     /**
+     * @param mixed $e
      * @return bool
      */
-    public static function isThrowable()
+    public static function isThrowable($e)
     {
         return version_compare(phpversion(), '7.0.0', '<') ?
             ($e instanceof \Exception) :
