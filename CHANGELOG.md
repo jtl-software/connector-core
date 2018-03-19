@@ -1,5 +1,5 @@
-2.4.10 (unreleased)
--------------------
+2.4.10
+------
 - Added throwable and exception switching for php version compatibility
 - Changed monolog/monolog dependency to 1.*
 
