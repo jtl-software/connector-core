@@ -1,3 +1,8 @@
+2.4.10
+------
+- Added throwable and exception switching for php version compatibility
+- Changed monolog/monolog dependency to 1.*
+
 2.4.9
 -----
 - CO-122 Added new connector finish event

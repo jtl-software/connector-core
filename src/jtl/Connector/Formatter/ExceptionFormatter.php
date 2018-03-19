@@ -6,23 +6,25 @@
 
 namespace jtl\Connector\Formatter;
 
+use jtl\Connector\Application\Error\ErrorHandler;
+
 class ExceptionFormatter
 {
     /**
-     * @param \Throwable $exc
+     * @param \Exception|\Throwable $exc
      * @param string $message
      * @return string
      */
-    public static function format(\Throwable $exc, $message = '')
+    public static function format($e, $message = '')
     {
-        return sprintf(
+        return ErrorHandler::isThrowable($e) ? sprintf(
             "Exception '%s' (Code: %s) with message '%s' in %s:%s%s",
-            get_class($exc),
-            $exc->getCode(),
-            $exc->getMessage(),
-            $exc->getFile(),
-            $exc->getLine(),
+            get_class($e),
+            $e->getCode(),
+            $e->getMessage(),
+            $e->getFile(),
+            $e->getLine(),
             (strlen($message) > 0 ? " - additional message: {$message}" : '')
-        );
+        ) : '';
     }
 }

@@ -66,7 +66,7 @@ class Connector extends Singleton implements IEndpointConnector
      * Setter token loader
      *
      * @param \jtl\Connector\Authentication\ITokenLoader $tokenLoader
-     * @return \jtl\Connector\Base\Connector
+     * @return Connector
      */
     public function setTokenLoader(ITokenLoader $tokenLoader)
     {
@@ -88,7 +88,7 @@ class Connector extends Singleton implements IEndpointConnector
      * Setter token validator
      *
      * @param \jtl\Connector\Authentication\ITokenValidator $tokenValidator
-     * @return \jtl\Connector\Base\Connector
+     * @return Connector
      */
     protected function setTokenValidator(ITokenValidator $tokenValidator)
     {
@@ -108,7 +108,7 @@ class Connector extends Singleton implements IEndpointConnector
      * Setter checksum loader
      *
      * @param \jtl\Connector\Checksum\IChecksumLoader $checksumLoader
-     * @return \jtl\Connector\Base\Connector
+     * @return Connector
      */
     public function setChecksumLoader(IChecksumLoader $checksumLoader)
     {
@@ -130,7 +130,7 @@ class Connector extends Singleton implements IEndpointConnector
      * Setter checksum loader
      *
      * @param Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher
-     * @return \jtl\Connector\Base\Connector
+     * @return Connector
      */
     public function setEventDispatcher(EventDispatcher $eventDispatcher)
     {
@@ -152,7 +152,7 @@ class Connector extends Singleton implements IEndpointConnector
      * Method Setter
      *
      * @param \jtl\Connector\Core\Rpc\Method $method
-     * @return \jtl\Connector\Core\Controller\Controller
+     * @return Connector
      */
     public function setMethod(Method $method)
     {
@@ -182,7 +182,7 @@ class Connector extends Singleton implements IEndpointConnector
      * Method Setter
      *
      * @param string $modelNamespace
-     * @return \jtl\Connector\Core\Controller\Controller
+     * @return Connector
      */
     public function setModelNamespace($modelNamespace)
     {
