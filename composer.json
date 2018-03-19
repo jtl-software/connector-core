@@ -4,7 +4,7 @@
     "description": "JTL-Connector protocol library and classes",
     "keywords": ["jtl", "connector", "protocol", "model", "data"],
     "homepage": "http://www.jtl-software.de",
-    "license": "GPL",
+    "license": "LGPL-3.0-or-later",
     "authors": [{
         "name": "JTL Software GmbH",
         "email": "info@jtl-software.de",
