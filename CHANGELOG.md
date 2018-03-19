@@ -1,6 +1,7 @@
 2.4.10 (unreleased)
 -------------------
 - Added throwable and exception switching for php version compatibility
+- Changed monolog/monolog dependency to 1.*
 
 2.4.9
 -----
