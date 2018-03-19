@@ -1,3 +1,7 @@
+2.4.11
+------
+- Added license data (LGPL-3.0-or-later)
+
 2.4.10
 ------
 - Added throwable and exception switching for php version compatibility
