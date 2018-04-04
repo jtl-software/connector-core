@@ -83,7 +83,6 @@ abstract class Handler
             'gc'
         ));
 
-        ini_set('session.save_handler', 'user');
         register_shutdown_function('session_write_close');
 
         if (version_compare(PHP_VERSION, '7.0.0', '<')) {
