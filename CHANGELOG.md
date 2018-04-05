@@ -1,5 +1,5 @@
-2.4.12 (unreleased)
--------------------
+2.4.12
+------
 - CO-200 Remove session.save_handler from php settings
 
 2.4.11
