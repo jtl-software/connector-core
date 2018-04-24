@@ -1,3 +1,7 @@
+2.4.13 (unreleased)
+-------------------
+- CO-209 Added overwrite config and feature dependency
+
 2.4.12
 ------
 - CO-200 Remove session.save_handler from php settings

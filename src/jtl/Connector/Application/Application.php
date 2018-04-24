@@ -65,6 +65,11 @@ class Application extends CoreApplication
      * @var Config;
      */
     protected $config;
+    
+    /**
+     * @var string
+     */
+    protected $featurePath;
 
     /**
      * Global Session
@@ -310,10 +315,13 @@ class Application extends CoreApplication
     /**
      *
      * @param IEndpointConnector $endpointconnector
+     * @return Application
      */
     public function register(IEndpointConnector $endpointconnector)
     {
         $this->connector = $endpointconnector;
+        
+        return $this;
     }
 
     /**
@@ -546,36 +554,18 @@ class Application extends CoreApplication
         }
     
         // Config
-        $config_file = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
-        if (!file_exists($config_file)) {
-            file_put_contents($config_file, json_encode(array('developer_logging' => false), JSON_PRETTY_PRINT));
-        }
+        if (is_null($this->config)) {
+            $config_file = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
+            if (!file_exists($config_file)) {
+                file_put_contents($config_file, json_encode(array('developer_logging' => false), JSON_PRETTY_PRINT));
+            }
     
-        $this->config = new Config($config_file);
+            $this->config = new Config($config_file);
+        }
     
         if (!$this->config->has('developer_logging')) {
             $this->config->save('developer_logging', false);
         }
-        
-        /*
-        $configFile = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
-        if (!file_exists($configFile)) {
-            file_put_contents($configFile, json_encode(array('developer_logging' => false), JSON_PRETTY_PRINT));
-        }
-
-        if (isset($this->config)) {
-            $json = $this->config->getLoader('Json');
-        } else {
-            $json = new ConfigJson($configFile);
-            $this->config = new Config(array(
-                $json,
-                new ConfigSystem()
-            ));
-        }
-
-        //We need to change the order of the loader
-        $this->config = new Config(array($json, new ConfigSystem()));
-        */
     }
 
     /**
@@ -657,40 +647,6 @@ class Application extends CoreApplication
 
                 $requestpacket->setParams($images);
             }
-
-            /*
-             * OLD single Image
-            $image = $requestpacket->getParams();
-            if (!($image instanceof \jtl\Connector\Model\Image)) {
-                throw new ApplicationException('Image push must send a valid image entity');
-            }
-
-            if ($imagePath !== null) {
-
-                // Todo: seo filename pattern via connector settings
-
-                $image->setFilename($imagePath);
-                $requestpacket->setParams($image);
-            } else {
-                // Image Cloud Storage
-                if (strlen($image->getRemoteUrl()) > 0) {
-                    $imageData = file_get_contents($image->getRemoteUrl());
-                    if ($imageData === false) {
-                        throw new ApplicationException('Could not get any data from url: ' . $image->getRemoteUrl());
-                    }
-
-                    $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
-                    $fileName = pathinfo($path, PATHINFO_BASENAME);
-                    $imagePath = Path::combine(Temp::getDirectory(), uniqid() . "_{$fileName}");
-                    file_put_contents($imagePath, $imageData);
-
-                    $image->setFilename($imagePath);
-                    $requestpacket->setParams($image);
-                } else {
-                    throw new ApplicationException('Could not handle fileupload (no file was uploaded via HTTP POST?)');
-                }
-            }
-            */
         }
     }
 
@@ -727,13 +683,47 @@ class Application extends CoreApplication
     {
         return self::PROTOCOL_VERSION;
     }
-
+    
+    /**
+     * @param Config $config
+     * @return Application
+     */
+    public function setConfig(Config $config)
+    {
+        $this->config = $config;
+        
+        return $this;
+    }
+    
     /**
      * @return Config
      */
     public function getConfig()
     {
         return $this->config;
+    }
+    
+    /**
+     * @param string $featurePath
+     * @return Application
+     */
+    public function setFeaturePath($featurePath)
+    {
+        if (!is_string($featurePath) || !file_exists($featurePath)) {
+            throw new \InvalidArgumentException('Param featurePath must be a string and the file must exists');
+        }
+        
+        $this->featurePath = $featurePath;
+        
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getFeaturePath()
+    {
+        return $this->featurePath;
     }
 
     /**
