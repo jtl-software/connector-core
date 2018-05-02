@@ -4,7 +4,6 @@ namespace jtl\Connector\Event\Connector;
 use jtl\Connector\Model\BoolResult;
 use Symfony\Component\EventDispatcher\Event;
 
-
 class ConnectorAfterFinishEvent extends Event
 {
     const EVENT_NAME = 'connector.after.finish';

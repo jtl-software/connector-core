@@ -11,11 +11,14 @@ use jtl\Connector\Core\Exception\MissingRequirementException;
 
 class Check
 {
+    /**
+     * @throws MissingRequirementException
+     */
     public static function run()
     {
         // PHP
-        if (!version_compare(PHP_VERSION, '5.4', '>=')) {
-            throw new MissingRequirementException(sprintf('The connector needs at least PHP version 5.4, %s given', PHP_VERSION));
+        if (!version_compare(PHP_VERSION, '7.1', '>=')) {
+            throw new MissingRequirementException(sprintf('The connector needs at least PHP version 7.1, %s given', PHP_VERSION));
         }
 
         // Sqlite 3

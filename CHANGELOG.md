@@ -1,6 +1,7 @@
-2.4.13 (unreleased)
--------------------
+3.0.0 (unreleased)
+------------------
 - CO-209 Added overwrite config and feature dependency
+- CO-213 Changed php requirement to >= 7.1.3
 
 2.4.12
 ------
