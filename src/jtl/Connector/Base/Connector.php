@@ -129,7 +129,7 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * Setter checksum loader
      *
-     * @param Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher
+     * @param \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher
      * @return Connector
      */
     public function setEventDispatcher(EventDispatcher $eventDispatcher)
@@ -141,7 +141,7 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * Returns checksum loader
      *
-     * @return Symfony\Component\EventDispatcher\EventDispatcher
+     * @return \Symfony\Component\EventDispatcher\EventDispatcher
      */
     public function getEventDispatcher()
     {

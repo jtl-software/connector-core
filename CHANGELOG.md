@@ -1,3 +1,8 @@
+3.0.0
+-----
+- CO-209 Added overwrite config and feature dependency
+- CO-213 Changed php requirement to >= 7.1.3
+
 2.4.12
 ------
 - CO-200 Remove session.save_handler from php settings

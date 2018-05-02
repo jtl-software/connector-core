@@ -12,14 +12,14 @@
         "role": "Founder"
     }],
     "require": {
-        "php": ">=5.4.0",
+        "php": "^7.1.3",
         "monolog/monolog": "1.*",
-        "jms/serializer": "~1.0",
-        "doctrine/annotations": "1.2.7",
-        "doctrine/collections": "1.3",
-        "symfony/event-dispatcher": "~2.7",
-        "symfony/finder": "~2.7",
-        "hassankhan/config": "^0.10.0"
+        "jms/serializer": "^1.11",
+        "doctrine/annotations": "^1.6",
+        "doctrine/collections": "^1.5",
+        "symfony/event-dispatcher": "^4.0.9",
+        "symfony/finder": "^4.0.9",
+        "hassankhan/config": "^1.0.1"
     },
     "require-dev": {
         "evert/phpdoc-md": "~0.1"
