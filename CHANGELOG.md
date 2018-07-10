@@ -1,3 +1,7 @@
+2.4.13
+------
+- Payment types added
+
 2.4.12
 ------
 - CO-200 Remove session.save_handler from php settings
