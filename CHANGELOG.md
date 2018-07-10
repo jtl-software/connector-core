@@ -1,3 +1,7 @@
+3.0.1
+-----
+- Payment types added
+
 3.0.0
 -----
 - CO-209 Added overwrite config and feature dependency
