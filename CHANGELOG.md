@@ -1,3 +1,7 @@
+3.0.2
+-----
+- ShippingClass mappings added
+
 3.0.1
 -----
 - Payment types added

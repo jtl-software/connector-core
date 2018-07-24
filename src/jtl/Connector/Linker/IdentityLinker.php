@@ -35,6 +35,7 @@ class IdentityLinker
     const TYPE_PAYMENT = 512;
     const TYPE_CROSSSELLING = 1024;
     const TYPE_CROSSSELLING_GROUP = 2048;
+    const TYPE_SHIPPING_CLASS = 4096;
 
     /**
      * Session Database Mapper
@@ -74,7 +75,8 @@ class IdentityLinker
         'Payment' => self::TYPE_PAYMENT,
         'CrossSelling' => self::TYPE_CROSSSELLING,
         'CrossSellingItem' => self::TYPE_CROSSSELLING,
-        'CrossSellingGroup' => self::TYPE_CROSSSELLING_GROUP
+        'CrossSellingGroup' => self::TYPE_CROSSSELLING_GROUP,
+        'ShippingClass' => self::TYPE_SHIPPING_CLASS
     );
     
     /**
@@ -213,6 +215,9 @@ class IdentityLinker
         ),
         'ProductStockLevel' => array(
             'productId' => self::TYPE_PRODUCT
+        ),
+        'ShippingClass' => array(
+            'id' => self::TYPE_SHIPPING_CLASS,
         ),
         'Shipment' => array(
             'deliveryNoteId' => self::TYPE_DELIVERY_NOTE
