@@ -1,4 +1,8 @@
 3.0.2
+=====
+- Cross selling events added
+
+3.0.2
 -----
 - ShippingClass mappings added
 
