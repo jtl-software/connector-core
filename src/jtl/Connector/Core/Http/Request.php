@@ -235,12 +235,6 @@ class Request
             } else {
                 throw new HttpException("Could not write file to tmp dir");
             }
-        } else {
-            parse_str(file_get_contents('php://input'));
-
-            //Logger::write('php-input: ' . file_get_contents('php://input'), Logger::DEBUG, 'http');
-
-            return $jtlrpc;
         }
         
         return null;
