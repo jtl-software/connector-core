@@ -13,13 +13,13 @@
     }],
     "require": {
         "php": ">=5.6.4",
-        "jms/serializer": "~1.0",
-        "doctrine/annotations": "1.2.7",
-        "doctrine/collections": "1.3",
-        "symfony/event-dispatcher": "~2.7",
-        "symfony/finder": "~2.7",
-        "hassankhan/config": "^0.10.0",
-        "monolog/monolog": "^1.23"
+        "jms/serializer": "^1.13",
+        "hassankhan/config": "^2.0",
+        "monolog/monolog": "^1.23",
+        "symfony/finder": "^3.4",
+        "symfony/event-dispatcher": "^3.4",
+        "doctrine/collections": "^1.4",
+        "doctrine/annotations": "^1.4"
     },
     "require-dev": {
         "evert/phpdoc-md": "~0.1"
