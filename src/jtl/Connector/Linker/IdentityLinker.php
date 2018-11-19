@@ -3,6 +3,7 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Linker
  */
+
 namespace jtl\Connector\Linker;
 
 use \jtl\Connector\Mapper\IPrimaryKeyMapper;
@@ -36,6 +37,19 @@ class IdentityLinker
     const TYPE_CROSSSELLING = 1024;
     const TYPE_CROSSSELLING_GROUP = 2048;
     const TYPE_SHIPPING_CLASS = 4096;
+    const TYPE_CONFIG_GROUP = 6;
+    const TYPE_CONFIG_ITEM = 10;
+    const TYPE_CURRENCY = 12;
+    const TYPE_CUSTOMER_GROUP = 14;
+    const TYPE_LANGUAGE = 18;
+    const TYPE_UNIT = 20;
+    const TYPE_MEASUREMENT_UNIT = 22;
+    const TYPE_PRODUCT_TYPE = 24;
+    const TYPE_SHIPPING_METHOD = 26;
+    const TYPE_TAX_RATE = 28;
+    const TYPE_WAREHOUSE = 30;
+    const TYPE_CATEGORY_ATTRIBUTE = 34;
+    const TYPE_PRODUCT_ATTRIBUTE = 36;
 
     /**
      * Session Database Mapper
@@ -43,22 +57,22 @@ class IdentityLinker
      * @var IPrimaryKeyMapper
      */
     protected static $mapper;
-    
+
     /**
      * @var bool
      */
     public static $useCache;
-    
+
     /**
      * @var array
      */
     protected static $cache = array();
-    
+
     /**
      * @var self
      */
     protected static $instance;
-    
+
     /**
      * @var array
      */
@@ -76,188 +90,239 @@ class IdentityLinker
         'CrossSelling' => self::TYPE_CROSSSELLING,
         'CrossSellingItem' => self::TYPE_CROSSSELLING,
         'CrossSellingGroup' => self::TYPE_CROSSSELLING_GROUP,
-        'ShippingClass' => self::TYPE_SHIPPING_CLASS
+        'ShippingClass' => self::TYPE_SHIPPING_CLASS,
+        'ShippingMethod' => self::TYPE_SHIPPING_METHOD,
+        'ConfigGroup' => self::TYPE_CONFIG_GROUP,
+        'ConfigItem' => self::TYPE_CONFIG_ITEM,
+        'Currency' => self::TYPE_CURRENCY,
+        'CustomerGroup' => self::TYPE_CUSTOMER_GROUP,
+        'Language' => self::TYPE_LANGUAGE,
+        'Unit' => self::TYPE_UNIT,
+        'MeasurementUnit' => self::TYPE_MEASUREMENT_UNIT,
+        'ProductType' => self::TYPE_PRODUCT_TYPE,
+        'TaxRate' => self::TYPE_TAX_RATE,
+        'Warehouse' => self::TYPE_WAREHOUSE,
+        'CategoryAttr' => self::TYPE_CATEGORY_ATTRIBUTE,
+        'ProductAttr' => self::TYPE_PRODUCT_ATTRIBUTE,
     );
-    
+
     /**
      * @var array
      */
-    protected static $mappings = array(
-        'Category' => array(
+    protected static $mappings = [
+        'Category' => [
             'id' => self::TYPE_CATEGORY,
             'parentCategoryId' => self::TYPE_CATEGORY
-        ),
-        'CategoryI18n' => array(
+        ],
+        'CategoryI18n' => [
             'categoryId' => self::TYPE_CATEGORY
-        ),
-        'ProductPrice' => array(
+        ],
+        'ProductPrice' => [
             'productId' => self::TYPE_PRODUCT
-        ),
-        'Manufacturer' => array(
+        ],
+        'Manufacturer' => [
             'id' => self::TYPE_MANUFACTURER
-        ),
-        'ManufacturerI18n' => array(
+        ],
+        'ManufacturerI18n' => [
             'manufacturerId' => self::TYPE_MANUFACTURER
-        ),
-        'Customer' => array(
-            'id' => self::TYPE_CUSTOMER
-        ),
-        'CustomerAttr' => array(
+        ],
+        'Customer' => [
+            'id' => self::TYPE_CUSTOMER,
+            'customerGroupId' => self::TYPE_CUSTOMER_GROUP,
+        ],
+        'CustomerAttr' => [
             'customerId' => self::TYPE_CUSTOMER
-        ),
-        'CustomerOrder' => array(
+        ],
+        'CustomerOrder' => [
             'id' => self::TYPE_CUSTOMER_ORDER,
-            'customerId' => self::TYPE_CUSTOMER
-        ),
-        'CustomerOrderAttr' => array(
+            'customerId' => self::TYPE_CUSTOMER,
+            'shippingMethodId' => self::TYPE_SHIPPING_METHOD,
+        ],
+        'CustomerOrderAttr' => [
             'customerOrderId' => self::TYPE_CUSTOMER_ORDER
-        ),
-        'CustomerOrderBillingAddress' => array(
+        ],
+        'CustomerOrderBillingAddress' => [
             'customerId' => self::TYPE_CUSTOMER
-        ),
-        'CustomerOrderShippingAddress' => array(
+        ],
+        'CustomerOrderShippingAddress' => [
             'customerId' => self::TYPE_CUSTOMER
-        ),
-        'CustomerOrderPaymentInfo' => array(
+        ],
+        'CustomerOrderPaymentInfo' => [
             'customerOrderId' => self::TYPE_CUSTOMER_ORDER
-        ),
-        'Product' => array(
+        ],
+        'Product' => [
             'id' => self::TYPE_PRODUCT,
             'masterProductId' => self::TYPE_PRODUCT,
             'manufacturerId' => self::TYPE_MANUFACTURER,
-            'shippingClassId' => self::TYPE_SHIPPING_CLASS
-        ),
-        'ProductSpecialPrice' => array(
+            'shippingClassId' => self::TYPE_SHIPPING_CLASS,
+            'unitId' => self::TYPE_UNIT,
+            'measurementUnitId' => self::TYPE_MEASUREMENT_UNIT,
+            'productTypeId' => self::TYPE_PRODUCT_TYPE,
+        ],
+        'ProductSpecialPrice' => [
             'productId' => self::TYPE_PRODUCT
-        ),
-        'ProductSpecific' => array(
+        ],
+        'ProductSpecific' => [
             'id' => self::TYPE_SPECIFIC,
             'productId' => self::TYPE_PRODUCT,
             'specificValueId' => self::TYPE_SPECIFIC_VALUE
-        ),
-        'DeliveryNote' => array(
+        ],
+        'DeliveryNote' => [
             'id' => self::TYPE_DELIVERY_NOTE,
             'customerOrderId' => self::TYPE_CUSTOMER_ORDER
-        ),
-        'DeliveryNoteItem' => array(
+        ],
+        'DeliveryNoteItem' => [
             'deliveryNoteId' => self::TYPE_DELIVERY_NOTE,
             'productId' => self::TYPE_PRODUCT
-        ),
-        'CategoryInvisibility' => array(
+        ],
+        'CategoryInvisibility' => [
             'categoryId' => self::TYPE_CATEGORY
-        ),
-        'CategoryCustomerGroup' => array(
+        ],
+        'CategoryCustomerGroup' => [
             'categoryId' => self::TYPE_CATEGORY
-        ),
-        'CategoryAttr' => array(
+        ],
+        'CategoryAttr' => [
             'categoryId' => self::TYPE_CATEGORY
-        ),
-        'ProductFileDownload' => array(
+        ],
+        'ProductFileDownload' => [
             'productId' => self::TYPE_PRODUCT
-        ),
-        'Product2Category' => array(
+        ],
+        'Product2Category' => [
             'productId' => self::TYPE_PRODUCT,
             'categoryId' => self::TYPE_CATEGORY
-        ),
-        'MediaFile' => array(
+        ],
+        'MediaFile' => [
             'productId' => self::TYPE_PRODUCT
-        ),
-        'ProductConfigGroup' => array(
+        ],
+        'ProductConfigGroup' => [
+            'productId' => self::TYPE_PRODUCT,
+            'configGroupId' => self::TYPE_CONFIG_GROUP,
+        ],
+        'ProductInvisibility' => [
             'productId' => self::TYPE_PRODUCT
-        ),
-        'ProductInvisibility' => array(
-            'productId' => self::TYPE_PRODUCT
-        ),
-        'CrossSelling' => array(
+        ],
+        'CrossSelling' => [
             'id' => self::TYPE_CROSSSELLING,
             'productId' => self::TYPE_PRODUCT
-        ),
-        'CrossSellingItem' => array(
+        ],
+        'CrossSellingItem' => [
             'crossSellingGroupId' => self::TYPE_CROSSSELLING_GROUP,
             'productIds' => self::TYPE_PRODUCT  // List of Product identities
-        ),
-        'CrossSellingGroup' => array(
+        ],
+        'CrossSellingGroup' => [
             'id' => self::TYPE_CROSSSELLING_GROUP
-        ),
-        'PartsList' => array(
+        ],
+        'PartsList' => [
             'productId' => self::TYPE_PRODUCT
-        ),
-        'ProductVariation' => array(
+        ],
+        'ProductVariation' => [
             'productId' => self::TYPE_PRODUCT
-        ),
-        'CustomerOrderItem' => array(
+        ],
+        'CustomerOrderItem' => [
             'productId' => self::TYPE_PRODUCT,
             'customerOrderId' => self::TYPE_CUSTOMER_ORDER
-        ),
-        'ConfigItem' => array(
+        ],
+        'ConfigItem' => [
+            'id' => self::TYPE_CONFIG_ITEM,
+            'configGroupId' => self::TYPE_CONFIG_GROUP,
+            'productId' => self::TYPE_PRODUCT,
+        ],
+        'ProductI18n' => [
             'productId' => self::TYPE_PRODUCT
-        ),
-        'ProductI18n' => array(
+        ],
+        'FileUpload' => [
             'productId' => self::TYPE_PRODUCT
-        ),
-        'ProductFunctionAttr' => array(
+        ],
+        'ProductWarehouseInfo' => [
+            'productId' => self::TYPE_PRODUCT,
+            'warehouseId' => self::TYPE_WAREHOUSE,
+        ],
+        'ProductAttr' => [
+            'id' => self::TYPE_PRODUCT_ATTRIBUTE,
+            'productId' => self::TYPE_PRODUCT,
+        ],
+        'ProductStockLevel' => [
             'productId' => self::TYPE_PRODUCT
-        ),
-        'FileUpload' => array(
-            'productId' => self::TYPE_PRODUCT
-        ),
-        'ProductWarehouseInfo' => array(
-            'productId' => self::TYPE_PRODUCT
-        ),
-        'FileDownloadHistory' => array(
-            'customerId' => self::TYPE_CUSTOMER,
-            'customerOrderId' => self::TYPE_CUSTOMER_ORDER
-        ),
-        'ProductVarCombination' => array(
-            'productId' => self::TYPE_PRODUCT
-        ),
-        'ProductAttr' => array(
-            'productId' => self::TYPE_PRODUCT
-        ),
-        'ProductStockLevel' => array(
-            'productId' => self::TYPE_PRODUCT
-        ),
-        'ShippingClass' => array(
+        ],
+        'ShippingClass' => [
             'id' => self::TYPE_SHIPPING_CLASS,
-        ),
-        'Shipment' => array(
+        ],
+        'Shipment' => [
             'deliveryNoteId' => self::TYPE_DELIVERY_NOTE
-        ),
-        'Image' => array(
+        ],
+        'Image' => [
             'id' => self::TYPE_IMAGE,
             'foreignKey' => self::TYPE_IMAGE
-        ),
-        'ImageI18n' => array(
+        ],
+        'ImageI18n' => [
             'imageId' => self::TYPE_IMAGE
-        ),
-        'CategoryFunctionAttr' => array(
-            'categoryId' => self::TYPE_CATEGORY
-        ),
-        'CustomerOrderBasket' => array(
-            'customerId' => self::TYPE_CUSTOMER
-        ),
-        'Specific' => array(
+        ],
+        'Specific' => [
             'id' => self::TYPE_SPECIFIC
-        ),
-        'SpecificI18n' => array(
+        ],
+        'SpecificI18n' => [
             'specificId' => self::TYPE_SPECIFIC
-        ),
-        'SpecificValue' => array(
+        ],
+        'SpecificValue' => [
             'id' => self::TYPE_SPECIFIC_VALUE,
             'specificId' => self::TYPE_SPECIFIC
-        ),
-        'SpecificValueI18n' => array(
+        ],
+        'SpecificValueI18n' => [
             'specificValueId' => self::TYPE_SPECIFIC_VALUE
-        ),
-        'StatusChange' => array(
+        ],
+        'StatusChange' => [
             'customerOrderId' => self::TYPE_CUSTOMER_ORDER
-        ),
-        'Payment' => array(
+        ],
+        'Payment' => [
             'id' => self::TYPE_PAYMENT,
             'customerOrderId' => self::TYPE_CUSTOMER_ORDER
-        )
-    );
-    
+        ],
+        'ConfigGroup' => [
+            'id' => self::TYPE_CONFIG_GROUP
+        ],
+        'Currency' => [
+            'id' => self::TYPE_CURRENCY,
+        ],
+        'CustomerGroup' => [
+            'id' => self::TYPE_CUSTOMER_GROUP,
+        ],
+        'Language' => [
+            'id' => self::TYPE_LANGUAGE,
+        ],
+        'Unit' => [
+            'id' => self::TYPE_UNIT,
+        ],
+        'UnitI18n' => [
+            'unitId' => self::TYPE_UNIT,
+        ],
+        'MeasurementUnit' => [
+            'id' => self::TYPE_MEASUREMENT_UNIT,
+        ],
+        'MeasurementUnitI18n' => [
+            'measurementUnitId' => self::TYPE_MEASUREMENT_UNIT,
+        ],
+        'ProductType' => [
+            'id' => self::TYPE_PRODUCT_TYPE,
+        ],
+        'ShippingMethod' => [
+            'id' => self::TYPE_SHIPPING_METHOD,
+        ],
+        'TaxRate' => [
+            'id' => self::TYPE_TAX_RATE,
+        ],
+        'Warehouse' => [
+            'id' => self::TYPE_WAREHOUSE,
+        ],
+        'ProductWarehouseInfo' => [
+            'productId' => self::TYPE_PRODUCT,
+            'warehouseId' => self::TYPE_WAREHOUSE,
+        ],
+        'ProductAttr' => [
+            'id' => self::TYPE_PRODUCT_ATTRIBUTE,
+            'productId' => self::TYPE_PRODUCT,
+        ],
+    ];
+
     /**
      * @var array
      */
@@ -276,7 +341,7 @@ class IdentityLinker
         } else {
             self::$instance->useCache($useCache);
         }
-        
+
         return self::$instance;
     }
 
@@ -569,9 +634,9 @@ class IdentityLinker
         }
 
         //if ($endpointId !== null && $hostId !== null) {
-            $this->saveCache($endpointId, $hostId, $type, $cacheType);
+        $this->saveCache($endpointId, $hostId, $type, $cacheType);
 
-            return true;
+        return true;
         //}
 
         //return false;
@@ -648,17 +713,17 @@ class IdentityLinker
         $type = $this->getType($modelName, $property);
 
         if (($endpointId = $this->loadCache($hostId, $type, self::CACHE_TYPE_HOST)) !== false) {
-        //if (($endpointId = $this->loadCache($hostId, $type, self::CACHE_TYPE_HOST)) !== null) {
+            //if (($endpointId = $this->loadCache($hostId, $type, self::CACHE_TYPE_HOST)) !== null) {
             return $endpointId;
         }
 
         $relationType = isset($this->runtimeInfos['relationType']) ? $this->runtimeInfos['relationType'] : null;
         $endpointId = self::$mapper->getEndpointId($hostId, $type, $relationType);
-        
-        //if (is_string($endpointId) && strlen(trim($endpointId)) > 0) {
-            $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_HOST);
 
-            return $endpointId;
+        //if (is_string($endpointId) && strlen(trim($endpointId)) > 0) {
+        $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_HOST);
+
+        return $endpointId;
         //}
 
         //return '';
@@ -677,21 +742,21 @@ class IdentityLinker
         $type = $this->getType($modelName, $property);
 
         if (($hostId = $this->loadCache($endpointId, $type, self::CACHE_TYPE_ENDPOINT)) !== false) {
-        //if (($hostId = $this->loadCache($endpointId, $type, self::CACHE_TYPE_ENDPOINT)) !== null) {
+            //if (($hostId = $this->loadCache($endpointId, $type, self::CACHE_TYPE_ENDPOINT)) !== null) {
             return $hostId;
         }
 
         $hostId = self::$mapper->getHostId($endpointId, $type);
 
         //if (is_int($hostId) && $hostId > 0) {
-            $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_ENDPOINT);
+        $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_ENDPOINT);
 
-            return $hostId;
+        return $hostId;
         //}
 
         //return 0;
     }
-    
+
     /**
      * @param mixed $id
      * @param int $type
@@ -703,14 +768,14 @@ class IdentityLinker
     {
         //return (self::$useCache && array_key_exists($this->buildKey($id, $type, $cacheType), self::$cache));
         //return (self::$useCache && isset(self::$cache[$this->buildKey($id, $type, $cacheType)]));
-        
+
         $result = self::$useCache && array_key_exists($this->buildKey($id, $type, $cacheType), self::$cache);
         /*
         if (!$validate) {
             return $result;
         }
         */
-    
+
         if ($validate && $result) {
             $data = self::$cache[$this->buildKey($id, $type, $cacheType)];
             switch ($cacheType) {
@@ -722,12 +787,12 @@ class IdentityLinker
                     break;
             }
         }
-        
+
         /*
         $result = (self::$useCache && array_key_exists($this->buildKey($id, $type, $cacheType), self::$cache)
             && (!$validate || self::$cache[$this->buildKey($id, $type, $cacheType)] !== null));
         */
-        
+
         // Debug
         Logger::write(sprintf(
             'Checkcache (id: %s, type: %s, cacheType: %s) with result %s',
@@ -736,10 +801,10 @@ class IdentityLinker
             $cacheType,
             $result ? 'true' : 'false'
         ), Logger::DEBUG, 'linker');
-        
+
         return $result;
     }
-    
+
     /**
      * @param mixed $id
      * @param int $type
@@ -750,7 +815,7 @@ class IdentityLinker
     {
         $result = $this->checkCache($id, $type, $cacheType) ? self::$cache[$this->buildKey($id, $type, $cacheType)] : false;
         //return $this->checkCache($id, $type, $cacheType) ? self::$cache[$this->buildKey($id, $type, $cacheType)] : null;
-    
+
         // Debug
         Logger::write(sprintf(
             'LoadCache (id: %s, type: %s, cacheType: %s) with result %s',
@@ -759,10 +824,10 @@ class IdentityLinker
             $cacheType,
             $result
         ), Logger::DEBUG, 'linker');
-        
+
         return $result;
     }
-    
+
     /**
      * @param mixed $endpointId
      * @param int $hostId
@@ -779,7 +844,7 @@ class IdentityLinker
             $type,
             $cacheType
         ), Logger::DEBUG, 'linker');
-        
+
         if (self::$useCache) {
             switch ($cacheType) {
                 case self::CACHE_TYPE_ENDPOINT:
@@ -791,7 +856,7 @@ class IdentityLinker
             }
         }
     }
-    
+
     /**
      * @param mixed $endpointId
      * @param int $hostId
@@ -808,7 +873,7 @@ class IdentityLinker
             $type,
             $cacheType
         ), Logger::DEBUG, 'linker');
-        
+
         if (self::$useCache) {
             switch ($cacheType) {
                 case self::CACHE_TYPE_ENDPOINT:
@@ -820,7 +885,7 @@ class IdentityLinker
             }
         }
     }
-    
+
     /**
      * @param mixed $id
      * @param int $type
@@ -831,7 +896,7 @@ class IdentityLinker
     {
         return sprintf('%s_%s_%s', $cacheType, $id, $type);
     }
-    
+
     /**
      * @return array
      */
@@ -839,7 +904,7 @@ class IdentityLinker
     {
         return self::$cache;
     }
-    
+
     /**
      * @param mixed $endpointId
      * @return boolean
@@ -848,7 +913,7 @@ class IdentityLinker
     {
         return !is_null($endpointId) && is_string($endpointId) && strlen(trim($endpointId)) > 0;
     }
-    
+
     /**
      * @param mixed $hostId
      * @return boolean
