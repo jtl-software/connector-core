@@ -8,6 +8,7 @@ namespace jtl\Connector\Application;
 
 use jtl\Connector\Application\Error\ErrorHandler;
 use jtl\Connector\Application\Error\IErrorHandler;
+use jtl\Connector\Authentication\ITokenValidator;
 use jtl\Connector\Core\Compression\Zip;
 use jtl\Connector\Core\IO\Temp;
 use jtl\Connector\Core\Serializer\Json;
@@ -147,8 +148,13 @@ class Application extends CoreApplication
             throw new ApplicationException('No primary key mapper registered');
         }
 
-        if ($this->connector->getTokenLoader() === null) {
-            throw new ApplicationException('No token loader registered');
+        $tokenValidatorExists = false;
+        if (is_callable([$this->connector, 'getTokenValidator']) && $this->connector->getTokenValidator() instanceof ITokenValidator) {
+            $tokenValidatorExists = true;
+        }
+
+        if (is_null($this->connector->getTokenLoader()) && !$tokenValidatorExists) {
+            throw new ApplicationException('Neither a token loader nor a token validator is registered');
         }
 
         if ($this->connector->getChecksumLoader() === null) {
