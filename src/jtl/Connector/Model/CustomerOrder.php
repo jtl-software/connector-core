@@ -201,6 +201,14 @@ class CustomerOrder extends DataModel
     protected $shippingInfo = '';
 
     /**
+     * @var Identity Optional reference to customer.
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("shippingMethodId")
+     * @Serializer\Accessor(getter="getShippingMethodId",setter="setShippingMethodId")
+     */
+    protected $shippingMethodId = null;
+
+    /**
      * @var string 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("shippingMethodName")
@@ -573,6 +581,25 @@ class CustomerOrder extends DataModel
     }
 
     /**
+     * @param Identity $shippingMethodId Optional reference to customer.
+     * @return \jtl\Connector\Model\CustomerOrder
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setShippingMethodId(Identity $shippingMethodId)
+    {
+        return $this->setProperty('shippingMethodId', $shippingMethodId, 'Identity');
+    }
+
+    /**
+     * @return Identity Optional reference to shipping method.
+     */
+    public function getShippingMethodId()
+    {
+        return $this->shippingMethodId;
+    }
+
+    /**
+     * @deprecated will be removed in 3.1. Use shippingMethodId instead.
      * @param string $shippingMethodName 
      * @return \jtl\Connector\Model\CustomerOrder
      */
@@ -582,6 +609,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
+     * @deprecated will be removed in 3.1. Use shippingMethodId instead.
      * @return string 
      */
     public function getShippingMethodName()
