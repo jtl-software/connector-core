@@ -1,3 +1,16 @@
+2.5.2
+-----
+- Dependencies updated
+- Use variable as second parameter to suppress deprecated warning
+
+2.4.17
+-----
+- Minimum requirements changed to PHP 5.6.4
+
+2.4.16
+-----
+- ShippingClass identity mapping added to product
+
 2.4.15
 -----
 - Cross selling events added
