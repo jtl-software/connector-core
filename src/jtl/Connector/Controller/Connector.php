@@ -96,6 +96,13 @@ class Connector extends CoreController
             $identityLinker = IdentityLinker::getInstance();
 
             foreach ($ack->getIdentities() as $modelName => $identities) {
+                if(!$identityLinker->isType($modelName)) {
+                    Logger::write(sprintf('ACK: Unknown core entity (%s)! Skipping related ack\'s...',
+                        $modelName
+                    ), Logger::WARNING, 'global');
+                    continue;
+                }
+
                 foreach ($identities as $identity) {
                     $identityLinker->save($identity->getEndpoint(), $identity->getHost(), $modelName);
                 }
