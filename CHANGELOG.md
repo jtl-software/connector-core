@@ -1,3 +1,9 @@
+2.6.0
+-----
+- CO-204 Connector linkings extended
+- Skip unknown entity ack's
+- Token loader is not needed in case a token validator is implemented
+
 2.5.2
 -----
 - Dependencies updated
