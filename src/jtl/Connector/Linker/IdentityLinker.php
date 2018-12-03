@@ -3,7 +3,6 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Linker
  */
-
 namespace jtl\Connector\Linker;
 
 use \jtl\Connector\Mapper\IPrimaryKeyMapper;
@@ -50,6 +49,8 @@ class IdentityLinker
     const TYPE_WAREHOUSE = 30;
     const TYPE_CATEGORY_ATTRIBUTE = 34;
     const TYPE_PRODUCT_ATTRIBUTE = 36;
+    const TYPE_PRODUCT_VARIATION = 38;
+    const TYPE_PRODUCT_VARIATION_VALUE = 40;
 
     /**
      * Session Database Mapper
@@ -78,32 +79,34 @@ class IdentityLinker
      */
     protected static $types = array(
         'Category' => self::TYPE_CATEGORY,
+        'CategoryAttr' => self::TYPE_CATEGORY_ATTRIBUTE,
+        'ConfigGroup' => self::TYPE_CONFIG_GROUP,
+        'ConfigItem' => self::TYPE_CONFIG_ITEM,
+        'CrossSelling' => self::TYPE_CROSSSELLING,
+        'CrossSellingGroup' => self::TYPE_CROSSSELLING_GROUP,
+        'CrossSellingItem' => self::TYPE_CROSSSELLING,
+        'Currency' => self::TYPE_CURRENCY,
         'Customer' => self::TYPE_CUSTOMER,
+        'CustomerGroup' => self::TYPE_CUSTOMER_GROUP,
         'CustomerOrder' => self::TYPE_CUSTOMER_ORDER,
         'DeliveryNote' => self::TYPE_DELIVERY_NOTE,
         'Image' => self::TYPE_IMAGE,
+        'Language' => self::TYPE_LANGUAGE,
         'Manufacturer' => self::TYPE_MANUFACTURER,
-        'Product' => self::TYPE_PRODUCT,
-        'Specific' => self::TYPE_SPECIFIC,
-        'SpecificValue' => self::TYPE_SPECIFIC_VALUE,
+        'MeasurementUnit' => self::TYPE_MEASUREMENT_UNIT,
         'Payment' => self::TYPE_PAYMENT,
-        'CrossSelling' => self::TYPE_CROSSSELLING,
-        'CrossSellingItem' => self::TYPE_CROSSSELLING,
-        'CrossSellingGroup' => self::TYPE_CROSSSELLING_GROUP,
+        'Product' => self::TYPE_PRODUCT,
+        'ProductAttr' => self::TYPE_PRODUCT_ATTRIBUTE,
+        'ProductType' => self::TYPE_PRODUCT_TYPE,
+        'ProductVariation' => self::TYPE_PRODUCT_VARIATION,
+        'ProductVariationValue' => self::TYPE_PRODUCT_VARIATION_VALUE,
         'ShippingClass' => self::TYPE_SHIPPING_CLASS,
         'ShippingMethod' => self::TYPE_SHIPPING_METHOD,
-        'ConfigGroup' => self::TYPE_CONFIG_GROUP,
-        'ConfigItem' => self::TYPE_CONFIG_ITEM,
-        'Currency' => self::TYPE_CURRENCY,
-        'CustomerGroup' => self::TYPE_CUSTOMER_GROUP,
-        'Language' => self::TYPE_LANGUAGE,
-        'Unit' => self::TYPE_UNIT,
-        'MeasurementUnit' => self::TYPE_MEASUREMENT_UNIT,
-        'ProductType' => self::TYPE_PRODUCT_TYPE,
+        'Specific' => self::TYPE_SPECIFIC,
+        'SpecificValue' => self::TYPE_SPECIFIC_VALUE,
         'TaxRate' => self::TYPE_TAX_RATE,
+        'Unit' => self::TYPE_UNIT,
         'Warehouse' => self::TYPE_WAREHOUSE,
-        'CategoryAttr' => self::TYPE_CATEGORY_ATTRIBUTE,
-        'ProductAttr' => self::TYPE_PRODUCT_ATTRIBUTE,
     );
 
     /**
@@ -114,17 +117,39 @@ class IdentityLinker
             'id' => self::TYPE_CATEGORY,
             'parentCategoryId' => self::TYPE_CATEGORY
         ],
+        'CategoryAttr' => [
+            'categoryId' => self::TYPE_CATEGORY
+        ],
+        'CategoryCustomerGroup' => [
+            'categoryId' => self::TYPE_CATEGORY
+        ],
         'CategoryI18n' => [
             'categoryId' => self::TYPE_CATEGORY
         ],
-        'ProductPrice' => [
+        'CategoryInvisibility' => [
+            'categoryId' => self::TYPE_CATEGORY
+        ],
+        'ConfigGroup' => [
+            'id' => self::TYPE_CONFIG_GROUP
+        ],
+        'ConfigItem' => [
+            'id' => self::TYPE_CONFIG_ITEM,
+            'configGroupId' => self::TYPE_CONFIG_GROUP,
+            'productId' => self::TYPE_PRODUCT,
+        ],
+        'CrossSelling' => [
+            'id' => self::TYPE_CROSSSELLING,
             'productId' => self::TYPE_PRODUCT
         ],
-        'Manufacturer' => [
-            'id' => self::TYPE_MANUFACTURER
+        'CrossSellingItem' => [
+            'crossSellingGroupId' => self::TYPE_CROSSSELLING_GROUP,
+            'productIds' => self::TYPE_PRODUCT  // List of Product identities
         ],
-        'ManufacturerI18n' => [
-            'manufacturerId' => self::TYPE_MANUFACTURER
+        'CrossSellingGroup' => [
+            'id' => self::TYPE_CROSSSELLING_GROUP
+        ],
+        'Currency' => [
+            'id' => self::TYPE_CURRENCY,
         ],
         'Customer' => [
             'id' => self::TYPE_CUSTOMER,
@@ -132,6 +157,9 @@ class IdentityLinker
         ],
         'CustomerAttr' => [
             'customerId' => self::TYPE_CUSTOMER
+        ],
+        'CustomerGroup' => [
+            'id' => self::TYPE_CUSTOMER_GROUP,
         ],
         'CustomerOrder' => [
             'id' => self::TYPE_CUSTOMER_ORDER,
@@ -150,22 +178,9 @@ class IdentityLinker
         'CustomerOrderPaymentInfo' => [
             'customerOrderId' => self::TYPE_CUSTOMER_ORDER
         ],
-        'Product' => [
-            'id' => self::TYPE_PRODUCT,
-            'masterProductId' => self::TYPE_PRODUCT,
-            'manufacturerId' => self::TYPE_MANUFACTURER,
-            'shippingClassId' => self::TYPE_SHIPPING_CLASS,
-            'unitId' => self::TYPE_UNIT,
-            'measurementUnitId' => self::TYPE_MEASUREMENT_UNIT,
-            'productTypeId' => self::TYPE_PRODUCT_TYPE,
-        ],
-        'ProductSpecialPrice' => [
-            'productId' => self::TYPE_PRODUCT
-        ],
-        'ProductSpecific' => [
-            'id' => self::TYPE_SPECIFIC,
+        'CustomerOrderItem' => [
             'productId' => self::TYPE_PRODUCT,
-            'specificValueId' => self::TYPE_SPECIFIC_VALUE
+            'customerOrderId' => self::TYPE_CUSTOMER_ORDER
         ],
         'DeliveryNote' => [
             'id' => self::TYPE_DELIVERY_NOTE,
@@ -175,80 +190,8 @@ class IdentityLinker
             'deliveryNoteId' => self::TYPE_DELIVERY_NOTE,
             'productId' => self::TYPE_PRODUCT
         ],
-        'CategoryInvisibility' => [
-            'categoryId' => self::TYPE_CATEGORY
-        ],
-        'CategoryCustomerGroup' => [
-            'categoryId' => self::TYPE_CATEGORY
-        ],
-        'CategoryAttr' => [
-            'categoryId' => self::TYPE_CATEGORY
-        ],
-        'ProductFileDownload' => [
-            'productId' => self::TYPE_PRODUCT
-        ],
-        'Product2Category' => [
-            'productId' => self::TYPE_PRODUCT,
-            'categoryId' => self::TYPE_CATEGORY
-        ],
-        'MediaFile' => [
-            'productId' => self::TYPE_PRODUCT
-        ],
-        'ProductConfigGroup' => [
-            'productId' => self::TYPE_PRODUCT,
-            'configGroupId' => self::TYPE_CONFIG_GROUP,
-        ],
-        'ProductInvisibility' => [
-            'productId' => self::TYPE_PRODUCT
-        ],
-        'CrossSelling' => [
-            'id' => self::TYPE_CROSSSELLING,
-            'productId' => self::TYPE_PRODUCT
-        ],
-        'CrossSellingItem' => [
-            'crossSellingGroupId' => self::TYPE_CROSSSELLING_GROUP,
-            'productIds' => self::TYPE_PRODUCT  // List of Product identities
-        ],
-        'CrossSellingGroup' => [
-            'id' => self::TYPE_CROSSSELLING_GROUP
-        ],
-        'PartsList' => [
-            'productId' => self::TYPE_PRODUCT
-        ],
-        'ProductVariation' => [
-            'productId' => self::TYPE_PRODUCT
-        ],
-        'CustomerOrderItem' => [
-            'productId' => self::TYPE_PRODUCT,
-            'customerOrderId' => self::TYPE_CUSTOMER_ORDER
-        ],
-        'ConfigItem' => [
-            'id' => self::TYPE_CONFIG_ITEM,
-            'configGroupId' => self::TYPE_CONFIG_GROUP,
-            'productId' => self::TYPE_PRODUCT,
-        ],
-        'ProductI18n' => [
-            'productId' => self::TYPE_PRODUCT
-        ],
         'FileUpload' => [
             'productId' => self::TYPE_PRODUCT
-        ],
-        'ProductWarehouseInfo' => [
-            'productId' => self::TYPE_PRODUCT,
-            'warehouseId' => self::TYPE_WAREHOUSE,
-        ],
-        'ProductAttr' => [
-            'id' => self::TYPE_PRODUCT_ATTRIBUTE,
-            'productId' => self::TYPE_PRODUCT,
-        ],
-        'ProductStockLevel' => [
-            'productId' => self::TYPE_PRODUCT
-        ],
-        'ShippingClass' => [
-            'id' => self::TYPE_SHIPPING_CLASS,
-        ],
-        'Shipment' => [
-            'deliveryNoteId' => self::TYPE_DELIVERY_NOTE
         ],
         'Image' => [
             'id' => self::TYPE_IMAGE,
@@ -256,6 +199,113 @@ class IdentityLinker
         ],
         'ImageI18n' => [
             'imageId' => self::TYPE_IMAGE
+        ],
+        'Language' => [
+            'id' => self::TYPE_LANGUAGE,
+        ],
+        'Manufacturer' => [
+            'id' => self::TYPE_MANUFACTURER
+        ],
+        'ManufacturerI18n' => [
+            'manufacturerId' => self::TYPE_MANUFACTURER
+        ],
+        'MeasurementUnit' => [
+            'id' => self::TYPE_MEASUREMENT_UNIT,
+        ],
+        'MeasurementUnitI18n' => [
+            'measurementUnitId' => self::TYPE_MEASUREMENT_UNIT,
+        ],
+        'MediaFile' => [
+            'productId' => self::TYPE_PRODUCT
+        ],
+        'PartsList' => [
+            'productId' => self::TYPE_PRODUCT
+        ],
+        'Payment' => [
+            'id' => self::TYPE_PAYMENT,
+            'customerOrderId' => self::TYPE_CUSTOMER_ORDER
+        ],
+        'Product' => [
+            'id' => self::TYPE_PRODUCT,
+            'masterProductId' => self::TYPE_PRODUCT,
+            'manufacturerId' => self::TYPE_MANUFACTURER,
+            'measurementUnitId' => self::TYPE_MEASUREMENT_UNIT,
+            'productTypeId' => self::TYPE_PRODUCT_TYPE,
+            'shippingClassId' => self::TYPE_SHIPPING_CLASS,
+            'unitId' => self::TYPE_UNIT,
+        ],
+        'Product2Category' => [
+            'productId' => self::TYPE_PRODUCT,
+            'categoryId' => self::TYPE_CATEGORY
+        ],
+        'ProductAttr' => [
+            'id' => self::TYPE_PRODUCT_ATTRIBUTE,
+            'productId' => self::TYPE_PRODUCT,
+        ],
+        'ProductConfigGroup' => [
+            'productId' => self::TYPE_PRODUCT,
+            'configGroupId' => self::TYPE_CONFIG_GROUP,
+        ],
+        'ProductFileDownload' => [
+            'productId' => self::TYPE_PRODUCT
+        ],
+        'ProductI18n' => [
+            'productId' => self::TYPE_PRODUCT
+        ],
+        'ProductInvisibility' => [
+            'productId' => self::TYPE_PRODUCT
+        ],
+        'ProductPrice' => [
+            'productId' => self::TYPE_PRODUCT
+        ],
+        'ProductSpecialPrice' => [
+            'productId' => self::TYPE_PRODUCT
+        ],
+        'ProductSpecific' => [
+            'id' => self::TYPE_SPECIFIC,
+            'productId' => self::TYPE_PRODUCT,
+            'specificValueId' => self::TYPE_SPECIFIC_VALUE
+        ],
+        'ProductStockLevel' => [
+            'productId' => self::TYPE_PRODUCT
+        ],
+        'ProductType' => [
+            'id' => self::TYPE_PRODUCT_TYPE,
+        ],
+        'ProductVariation' => [
+            'id' => self::TYPE_PRODUCT_VARIATION,
+            'productId' => self::TYPE_PRODUCT
+        ],
+        'ProductVariationI18n' => [
+            'productVariationId' => self::TYPE_PRODUCT_VARIATION,
+        ],
+        'ProductVariationValue' => [
+            'id' => self::TYPE_PRODUCT_VARIATION_VALUE,
+            'productVariationId' => self::TYPE_PRODUCT_VARIATION,
+        ],
+        'ProductVariationValueI18n' => [
+            'productVariationValueId ' => self::TYPE_PRODUCT_VARIATION_VALUE,
+        ],
+        'ProductVariationValueExtraCharge' => [
+            'customerGroupId' => self::TYPE_CUSTOMER_GROUP,
+            'productVariationValueId ' => self::TYPE_PRODUCT_VARIATION_VALUE,
+        ],
+        'ProductVariationValueInvisibility' => [
+            'customerGroupId' => self::TYPE_CUSTOMER_GROUP,
+            'productVariationValueId ' => self::TYPE_PRODUCT_VARIATION_VALUE,
+        ],
+        'ProductWarehouseInfo' => [
+            'productId' => self::TYPE_PRODUCT,
+            'warehouseId' => self::TYPE_WAREHOUSE,
+        ],
+        'ShippingClass' => [
+            'id' => self::TYPE_SHIPPING_CLASS,
+        ],
+        'ShippingMethod' => [
+            'id' => self::TYPE_SHIPPING_METHOD,
+        ],
+        'Shipment' => [
+            'deliveryNoteId' => self::TYPE_DELIVERY_NOTE
         ],
         'Specific' => [
             'id' => self::TYPE_SPECIFIC
@@ -273,21 +323,8 @@ class IdentityLinker
         'StatusChange' => [
             'customerOrderId' => self::TYPE_CUSTOMER_ORDER
         ],
-        'Payment' => [
-            'id' => self::TYPE_PAYMENT,
-            'customerOrderId' => self::TYPE_CUSTOMER_ORDER
-        ],
-        'ConfigGroup' => [
-            'id' => self::TYPE_CONFIG_GROUP
-        ],
-        'Currency' => [
-            'id' => self::TYPE_CURRENCY,
-        ],
-        'CustomerGroup' => [
-            'id' => self::TYPE_CUSTOMER_GROUP,
-        ],
-        'Language' => [
-            'id' => self::TYPE_LANGUAGE,
+        'TaxRate' => [
+            'id' => self::TYPE_TAX_RATE,
         ],
         'Unit' => [
             'id' => self::TYPE_UNIT,
@@ -295,31 +332,8 @@ class IdentityLinker
         'UnitI18n' => [
             'unitId' => self::TYPE_UNIT,
         ],
-        'MeasurementUnit' => [
-            'id' => self::TYPE_MEASUREMENT_UNIT,
-        ],
-        'MeasurementUnitI18n' => [
-            'measurementUnitId' => self::TYPE_MEASUREMENT_UNIT,
-        ],
-        'ProductType' => [
-            'id' => self::TYPE_PRODUCT_TYPE,
-        ],
-        'ShippingMethod' => [
-            'id' => self::TYPE_SHIPPING_METHOD,
-        ],
-        'TaxRate' => [
-            'id' => self::TYPE_TAX_RATE,
-        ],
         'Warehouse' => [
             'id' => self::TYPE_WAREHOUSE,
-        ],
-        'ProductWarehouseInfo' => [
-            'productId' => self::TYPE_PRODUCT,
-            'warehouseId' => self::TYPE_WAREHOUSE,
-        ],
-        'ProductAttr' => [
-            'id' => self::TYPE_PRODUCT_ATTRIBUTE,
-            'productId' => self::TYPE_PRODUCT,
         ],
     ];
 
