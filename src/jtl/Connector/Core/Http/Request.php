@@ -87,7 +87,7 @@ class Request
      */
     public static function isFileupload($name = "jtlrpc")
     {
-        return is_uploaded_file($_FILES[$name]["tmp_name"]);
+        return isset($_FILES[$name]) && is_uploaded_file($_FILES[$name]["tmp_name"]);
     }
     
     /**
