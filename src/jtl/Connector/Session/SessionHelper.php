@@ -69,8 +69,9 @@ class SessionHelper
         if (isset($_SESSION[$this->namespace][$name])) {
             return $_SESSION[$this->namespace][$name];
         }
-        
-        return null;
+
+        $null = null;
+        return $null;
     }
     
     /**

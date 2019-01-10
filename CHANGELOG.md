@@ -1,5 +1,12 @@
-3.0.2
-=====
+3.1.0
+-----
+- CO-204 Connector linkings extended
+- Skip unknown entity ack's
+- Token loader is not needed in case a token validator is implemented
+- ShippingClass identity mapping added to product
+
+3.0.3
+-----
 - Cross selling events added
 
 3.0.2
