@@ -4,6 +4,7 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Core\Database
  */
+
 namespace jtl\Connector\Core\Database;
 
 use \jtl\Connector\Core\Exception\DatabaseException;
@@ -29,28 +30,28 @@ class Sqlite3 implements IDatabase
      * @var bool
      */
     protected $isConnected = false;
-    
+
     /**
      * Sqlite 3 Database object
      *
-     * @var Sqlite3 | NULL
+     * @var \Sqlite3|null
      */
     protected $db;
-    
+
     /**
      * Path to the SQLite database, or :memory: to use in-memory database.
      *
      * @var string
      */
     public $location;
-    
+
     /**
      * Optional flags used to determine how to open the SQLite database.
      *
      * @var integer
      */
     public $mode;
-    
+
     /**
      * (non-PHPdoc)
      *
@@ -63,21 +64,21 @@ class Sqlite3 implements IDatabase
         if (!is_string($this->location) || strlen($this->location) == 0) {
             throw new DatabaseException('Wrong type or empty location');
         }
-        
+
         if ($this->mode === null) {
             $this->mode = SQLITE3_OPEN_READWRITE | SQLITE3_OPEN_CREATE | self::SQLITE3_OPEN_SHAREDCACHE;
         }
-        
+
         try {
             $this->db = new \Sqlite3($this->location, $this->mode);
             $this->db->busyTimeout(2000);
-            
+
             $this->isConnected = true;
         } catch (\Exception $exc) {
             throw new DatabaseException($exc->getMessage() . ' "' . $this->location . '"');
         }
     }
-    
+
     /**
      * Destructor
      */
@@ -106,7 +107,7 @@ class Sqlite3 implements IDatabase
     public function query($query)
     {
         $command = substr($query, 0, strpos($query, ' '));
-        
+
         switch (strtoupper($command)) {
             case "SELECT":
                 return $this->fetch($query);
@@ -117,7 +118,7 @@ class Sqlite3 implements IDatabase
             case "DELETE":
                 return $this->_exec($query);
         }
-        
+
         return null;
     }
 
@@ -125,18 +126,18 @@ class Sqlite3 implements IDatabase
     {
         return $this->db->querySingle($query);
     }
-    
+
     /**
      * Prepares an SQL statement for execution
      *
      * @param string $query
-     * @return SQLite3Stmt|boolean Returns an SQLite3Stmt object on success or FALSE on failure.
+     * @return \SQLite3Stmt|boolean Returns an SQLite3Stmt object on success or FALSE on failure.
      */
     public function prepare($query)
     {
         return $this->db->prepare($query);
     }
-    
+
     /**
      * Sqlite Select
      *
@@ -152,22 +153,17 @@ class Sqlite3 implements IDatabase
                 while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
                     $rows[] = $row;
                 }
-            
+
                 return $rows;
-            } else {
                 // Check if DB is locked
-                switch ($this->db->lastErrorCode()) {
-                    case 5: // SQLITE_BUSY
-                        continue;
-                    default:
-                        return null;
-                }
+            } elseif ($this->db->lastErrorCode() !== \SQLITE_BUSY) {
+                break;
             }
         };
-        
+
         return null;
     }
-    
+
     /**
      * Sqlite Update or Delete
      *
@@ -178,7 +174,7 @@ class Sqlite3 implements IDatabase
     {
         return $this->db->exec($query);
     }
-    
+
     /**
      * Sqlite Insert
      *
@@ -190,7 +186,7 @@ class Sqlite3 implements IDatabase
         if ($this->db->exec($query)) {
             return $this->db->lastInsertRowID();
         }
-        
+
         return false;
     }
 
@@ -226,14 +222,14 @@ class Sqlite3 implements IDatabase
             if (isset($options["location"]) && is_string($options["location"]) && strlen($options["location"]) > 0) {
                 $this->location = $options["location"];
             }
-            
+
             // Mode
             if (isset($options["mode"]) && is_int($options["mode"])) {
                 $this->mode = $options["mode"];
             }
         }
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see \jtl\Connector\Core\Database\IDatabase::escapeString()
