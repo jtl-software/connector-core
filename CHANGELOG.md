@@ -1,3 +1,7 @@
+3.1.4
+-----
+- Avoid warning in switch statement
+
 3.1.0
 -----
 - CO-204 Connector linkings extended
