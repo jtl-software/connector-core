@@ -12,6 +12,14 @@ use Monolog\Handler\StreamHandler;
 
 class Logger extends \Monolog\Logger
 {
+    const CHANNEL_CHECKSUM = 'checksum';
+    const CHANNEL_DATABASE = 'database';
+    const CHANNEL_ERROR = 'error';
+    const CHANNEL_GLOBAL = 'global';
+    const CHANNEL_LINKER = 'linker';
+    const CHANNEL_RPC = 'rpc';
+    const CHANNEL_SECURITY = 'security';
+
     /**
      * Adds a log record at an arbitrary level.
      *
@@ -20,7 +28,7 @@ class Logger extends \Monolog\Logger
      * @param string $channel The log channel
      * @return Boolean Whether the record has been processed
      */
-    public static function write($message, $level = self::ERROR, $channel = 'general')
+    public static function write($message, $level = self::ERROR, $channel = self::CHANNEL_GLOBAL)
     {
         $forceWriting = false;
         if (function_exists('Application') && !is_null(Application()->getConfig())) {
@@ -47,7 +55,7 @@ class Logger extends \Monolog\Logger
             );
         }
 
-        $log = LoggerFactory::get($channel);
+        $log = self::get($channel);
         if (!$log->isHandling($level)) {
             $log->pushHandler(new RotatingFileHandler(implode(DIRECTORY_SEPARATOR, $path)), 2, $level);
         }
