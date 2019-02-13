@@ -55,7 +55,7 @@ class Logger extends \Monolog\Logger
             );
         }
 
-        $log = self::get($channel);
+        $log = static::get($channel);
         if (!$log->isHandling($level)) {
             $log->pushHandler(new RotatingFileHandler(implode(DIRECTORY_SEPARATOR, $path)), 2, $level);
         }
