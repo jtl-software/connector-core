@@ -1,3 +1,8 @@
+3.1.5
+-----
+- Default logging channel switched to global
+- Logging channel constants defined
+
 3.1.4
 -----
 - Avoid warning in switch statement
