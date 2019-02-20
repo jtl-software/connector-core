@@ -126,11 +126,21 @@ class Application extends CoreApplication
 
         // Start Configuration
         $this->startConfiguration();
-    
+
+        //Mask connector token before logging
+        $reqPacketsObj = $requestpackets->getPublic();
+        if(isset($reqPacketsObj->method) && $reqPacketsObj->method === 'core.connector.auth' && isset($reqPacketsObj->params)) {
+            $params = Json::decode($reqPacketsObj->params, true);
+            if(isset($params['token'])) {
+                $params['token'] = str_repeat('*', strlen($params['token']));
+            }
+            $reqPacketsObj->params = Json::encode($params);
+        }
+
         // Log incoming request packet (debug only and configuration must be initialized)
-        Logger::write(sprintf('RequestPacket: %s', Json::encode($requestpackets->getPublic())), Logger::DEBUG, 'rpc');
-        if (is_string($requestpackets->getParams())) {
-            Logger::write(sprintf('Params: %s', $requestpackets->getParams()), Logger::DEBUG, 'rpc');
+        Logger::write(sprintf('RequestPacket: %s', Json::encode($reqPacketsObj)), Logger::DEBUG, 'rpc');
+        if (isset($reqPacketsObj->params) && !empty($reqPacketsObj->params)) {
+            Logger::write(sprintf('Params: %s', $reqPacketsObj->params), Logger::DEBUG, 'rpc');
         }
         
         // Register Event Dispatcher
