@@ -155,8 +155,8 @@ class Sqlite3 implements IDatabase
                 }
 
                 return $rows;
-                // Check if DB is locked
-            } elseif ($this->db->lastErrorCode() !== \SQLITE_BUSY) {
+                // Check if DB is locked //5 == \SQLITE_BUSY
+            } elseif ($this->db->lastErrorCode() !== 5) {
                 break;
             }
         };
