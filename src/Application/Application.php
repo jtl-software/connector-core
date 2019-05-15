@@ -23,6 +23,7 @@ use jtl\Connector\Core\Rpc\Error;
 use jtl\Connector\Core\Http\Request;
 use jtl\Connector\Core\Http\Response;
 use jtl\Connector\Core\Config\Config;
+use jtl\Connector\Exception\JsonException;
 use jtl\Connector\Model\BoolResult;
 use jtl\Connector\Result\Action;
 use jtl\Connector\Core\Validator\Schema;
@@ -562,36 +563,24 @@ class Application extends CoreApplication
         }
     
         // Config
-        $config_file = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
-        if (!file_exists($config_file)) {
-            file_put_contents($config_file, json_encode(array('developer_logging' => false), JSON_PRETTY_PRINT));
+        if (is_null($this->config)) {
+            $config_file = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
+            if (!file_exists($config_file)) {
+                $json = json_encode(array('developer_logging' => false), JSON_PRETTY_PRINT);
+
+                if (json_last_error() !== JSON_ERROR_NONE) {
+                    throw JsonException::encoding(json_last_error_msg());
+                }
+
+                file_put_contents($config_file, $json);
+            }
+    
+            $this->config = new Config($config_file);
         }
-    
-        $this->config = new Config($config_file);
-    
+
         if (!$this->config->has('developer_logging')) {
             $this->config->save('developer_logging', false);
         }
-        
-        /*
-        $configFile = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
-        if (!file_exists($configFile)) {
-            file_put_contents($configFile, json_encode(array('developer_logging' => false), JSON_PRETTY_PRINT));
-        }
-
-        if (isset($this->config)) {
-            $json = $this->config->getLoader('Json');
-        } else {
-            $json = new ConfigJson($configFile);
-            $this->config = new Config(array(
-                $json,
-                new ConfigSystem()
-            ));
-        }
-
-        //We need to change the order of the loader
-        $this->config = new Config(array($json, new ConfigSystem()));
-        */
     }
 
     /**

@@ -31,7 +31,7 @@ class JsonException extends \RuntimeException
     {
         $msg = sprintf("Error while decoding JSON: %s", $lastErrorMessage);
         if(!is_null($jsonString)) {
-            $msg = sprintf("Error while decoding JSON: %s\r\nString: %s", $lastErrorMessage, $jsonString);
+            $msg = sprintf("Error while decoding JSON: %s" . \PHP_EOL . "String: %s", $lastErrorMessage, $jsonString);
         }
         return new static($msg, static::DECODING_ERROR);
     }
