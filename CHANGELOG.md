@@ -1,3 +1,7 @@
+2.6.8
+-----
+- Exception handling while encode or decode json revised.
+
 2.6.5
 -----
 - Default logging channel switched to global
