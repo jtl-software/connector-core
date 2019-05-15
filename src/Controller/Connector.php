@@ -11,6 +11,7 @@ use jtl\Connector\Authentication\ITokenValidator;
 use \jtl\Connector\Core\Controller\Controller as CoreController;
 use jtl\Connector\Core\IO\Path;
 use jtl\Connector\Core\System\Check;
+use jtl\Connector\Exception\JsonException;
 use \jtl\Connector\Result\Action;
 use \jtl\Connector\Core\Rpc\Error;
 use \jtl\Connector\Linker\IdentityLinker;
@@ -69,6 +70,10 @@ class Connector extends CoreController
             
             $featureData = file_get_contents($path);
             $features = json_decode($featureData);
+
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                throw JsonException::decoding(json_last_error_msg(), $featureData);
+            }
 
             $ret->setResult($features);
             $ret->setHandled(true);
@@ -224,13 +229,12 @@ class Connector extends CoreController
             $path = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
             $configData = file_get_contents($path);
             if ($configData === false) {
-                throw new \Exception(sprintf('Cannot read config file %s', $path));
+                throw new \RuntimeException(sprintf('Cannot read config file %s', $path));
             }
             
             $config = json_decode($configData);
-            
             if (json_last_error() !== JSON_ERROR_NONE) {
-                throw new \Exception(sprintf('Json config error %s', json_last_error_msg()));
+                throw JsonException::decoding(json_last_error_msg());
             }
     
             $status = false;
@@ -239,8 +243,14 @@ class Connector extends CoreController
             }
             
             $config->developer_logging = $status;
-            
-            file_put_contents($path, json_encode($config, JSON_PRETTY_PRINT));
+
+            $json = json_encode($config, JSON_PRETTY_PRINT);
+
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                throw JsonException::encoding(json_last_error_msg());
+            }
+
+            file_put_contents($path, $json);
             
             $action->setResult($config);
         } catch (\Exception $e) {

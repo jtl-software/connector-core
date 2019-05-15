@@ -7,6 +7,8 @@
 
 namespace jtl\Connector\Core\Config;
 
+use jtl\Connector\Exception\JsonException;
+
 /**
  * Config Class
  *
@@ -57,7 +59,12 @@ class Config extends \Noodlehaus\Config
     public function save($key, $value)
     {
         parent::set($key, $value);
-        
-        return file_put_contents($this->path, json_encode($this->all(), JSON_PRETTY_PRINT));
+
+        $json = json_encode($this->all(), JSON_PRETTY_PRINT);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw JsonException::encoding(json_last_error_msg());
+        }
+
+        return file_put_contents($this->path, $json);
     }
 }
