@@ -80,6 +80,12 @@ class Mysql implements IDatabase
     public $name;
 
     /**
+     *  The MySQL port.
+     * @var string
+     */
+    public $port;
+
+    /**
      * Constructor
      */
     private function __construct()
@@ -103,7 +109,7 @@ class Mysql implements IDatabase
     
     public function __wakeup()
     {
-        $this->connect($this->host, $this->user, $this->password, $this->name);
+        $this->connect($this->host, $this->user, $this->password, $this->name, $this->port);
     }
     
     /**
@@ -117,9 +123,9 @@ class Mysql implements IDatabase
         
         // Allow sockets
         if (strpos($this->host, '/') === false) {
-            $this->_db = @new \mysqli($this->host, $this->user, $this->password, $this->name);
+            $this->_db = @new \mysqli($this->host, $this->user, $this->password, $this->name, $this->port);
         } else {
-            $this->_db = @new \mysqli('', $this->user, $this->password, $this->name, null, $this->host);
+            $this->_db = @new \mysqli('', $this->user, $this->password, $this->name, $this->port, $this->host);
         }
 
         if ($this->_db->connect_error !== null) {
@@ -384,6 +390,11 @@ class Mysql implements IDatabase
             // Name
             if (isset($options["name"]) && is_string($options["name"]) && strlen($options["name"]) > 0) {
                 $this->name = $options["name"];
+            }
+
+            // Port
+            if (isset($options["port"]) && is_string($options["port"]) && strlen($options["port"]) > 0) {
+                $this->port = $options["port"];
             }
         }
     }
