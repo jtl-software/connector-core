@@ -633,7 +633,7 @@ class Mysql implements IDatabase
     {
         $this->deleteRow($obj, $table, $key, $value);
         
-        $result = $this->insertRow($obj, $table);
+        $result = $this->insertRow($obj, $table, $ignores);
         
         return $result;
     }
