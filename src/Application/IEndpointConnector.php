@@ -27,40 +27,40 @@ interface IEndpointConnector
      * @param IPrimaryKeyMapper $mapper
      * @return self
      */
-    public function setPrimaryKeyMapper(IPrimaryKeyMapper $mapper);
+    public function setPrimaryKeyMapper(IPrimaryKeyMapper $mapper): IEndpointConnector;
 
     /**
      * @return IPrimaryKeyMapper
      */
-    public function getPrimaryKeyMapper();
+    public function getPrimaryKeyMapper(): IPrimaryKeyMapper;
     
     /**
      * @param ITokenLoader $tokenLoader
      * @return self
      */
-    public function setTokenLoader(ITokenLoader $tokenLoader);
+    public function setTokenLoader(ITokenLoader $tokenLoader): IEndpointConnector;
 
     /**
      * @return ITokenLoader
      */
-    public function getTokenLoader();
+    public function getTokenLoader(): ITokenLoader;
     
     /**
      * @param IChecksumLoader $checksumLoader
      * @return self
      */
-    public function setChecksumLoader(IChecksumLoader $checksumLoader);
+    public function setChecksumLoader(IChecksumLoader $checksumLoader): IEndpointConnector;
 
     /**
      * @return IChecksumLoader
      */
-    public function getChecksumLoader();
+    public function getChecksumLoader(): IChecksumLoader;
 
     /**
      * Checks whether or not a method can be handled
      * @return bool
      */
-    public function canHandle();
+    public function canHandle(): bool;
 
     /**
      * Controller handle

@@ -19,7 +19,7 @@ use jtl\Connector\Formatter\ExceptionFormatter;
 class ErrorHandler implements IErrorHandler
 {
     /**
-     * @var \Symfony\Component\EventDispatcher\EventDispatcher
+     * @var EventDispatcher
      */
     protected $eventDispatcher;
 
@@ -37,20 +37,30 @@ class ErrorHandler implements IErrorHandler
         // Shutdown
         $this->setShutdownHandler($this->getShutdownHandler());
     }
-
-    protected function triggerRpcAfterEvent($data, $method)
+    
+    /**
+     * @param array $data
+     * @param string $method
+     */
+    protected function triggerRpcAfterEvent(array $data, string $method)
     {
         if ($this->eventDispatcher !== null) {
             $method = RpcMethod::splitMethod($method);
             EventHandler::dispatchRpc($data, $this->eventDispatcher, $method->getController(), $method->getAction(), EventHandler::AFTER);
         }
     }
-
-    public function setExceptionHandler(callable $func)
+    
+    /**
+     * @param callable $func
+     */
+    public function setExceptionHandler(callable $func): void
     {
         set_exception_handler($func);
     }
-
+    
+    /**
+     * @return \Closure
+     */
     public function getExceptionHandler()
     {
         return function($e) {
@@ -83,12 +93,18 @@ class ErrorHandler implements IErrorHandler
             Response::send($responsepacket);
         };
     }
-
-    public function setErrorHandler(callable $func)
+    
+    /**
+     * @param callable $func
+     */
+    public function setErrorHandler(callable $func): void
     {
         set_error_handler($func, E_ALL);
     }
-
+    
+    /**
+     * @return \Closure
+     */
     public function getErrorHandler()
     {
         return function($errno, $errstr, $errfile, $errline, $errcontext) {
@@ -117,12 +133,18 @@ class ErrorHandler implements IErrorHandler
             }
         };
     }
-
-    public function setShutdownHandler(callable $func)
+    
+    /**
+     * @param callable $func
+     */
+    public function setShutdownHandler(callable $func): void
     {
         register_shutdown_function($func);
     }
-
+    
+    /**
+     * @return \Closure
+     */
     public function getShutdownHandler()
     {
         return function() {
@@ -168,7 +190,7 @@ class ErrorHandler implements IErrorHandler
      * @param EventDispatcher $dispatcher
      * @return ErrorHandler
      */
-    public function setEventDispatcher(EventDispatcher $dispatcher)
+    public function setEventDispatcher(EventDispatcher $dispatcher): ErrorHandler
     {
         $this->eventDispatcher = $dispatcher;
         return $this;
@@ -178,7 +200,7 @@ class ErrorHandler implements IErrorHandler
      * @param mixed $e
      * @return bool
      */
-    public static function isThrowable($e)
+    public static function isThrowable($e): bool
     {
         return version_compare(phpversion(), '7.0.0', '<') ?
             ($e instanceof \Exception) :
