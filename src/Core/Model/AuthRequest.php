@@ -3,6 +3,7 @@
  * @copyright JTL-Software GmbH
  * @package jtl\Connector\Core\Model
  */
+
 namespace jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
@@ -22,27 +23,27 @@ class AuthRequest extends Model
      * @Serializer\SerializedName("token")
      */
     protected $token = '';
-
+    
     /**
      * Gets the value of token.
      *
      * @return string
      */
-    public function getToken()
+    public function getToken(): string
     {
         return $this->token;
     }
-
+    
     /**
      * Sets the value of token.
      *
      * @param string $token the token
      * @return self
      */
-    protected function setToken($token)
+    protected function setToken(string $token): AuthRequest
     {
         $this->token = $token;
-
+        
         return $this;
     }
 }

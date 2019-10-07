@@ -14,91 +14,153 @@ namespace jtl\Connector\Core\Model;
 class Collection implements \IteratorAggregate, \Countable
 {
     protected $list;
-
-    public function __construct(array $list = array())
+    
+    public function __construct(array $list = [])
     {
         $this->list = $list;
     }
-
-    public function all()
+    
+    /**
+     * @return array
+     */
+    public function all(): array
     {
         return $this->list;
     }
-
-    public function keys()
+    
+    /**
+     * @return array
+     */
+    public function keys(): array
     {
         return array_keys($this->list);
     }
-
-    public function replace(array $list = array())
+    
+    /**
+     * @param array $list
+     */
+    public function replace(array $list = []): void
     {
         $this->list = $list;
     }
-
-    public function add(array $list = array())
+    
+    /**
+     * @param array $list
+     */
+    public function add(array $list = []): void
     {
         $this->list = array_replace($this->list, $list);
     }
-
+    
+    /**
+     * @param $key
+     * @param null $default
+     * @return mixed|null
+     */
     public function get($key, $default = null)
     {
         return array_key_exists($key, $this->list) ? $this->list[$key] : $default;
     }
-
-    public function set($key, $value)
+    
+    /**
+     * @param $key
+     * @param $value
+     */
+    public function set(string $key, $value)
     {
         $this->list[$key] = $value;
     }
     
-    public function append($key, $value)
+    /**
+     * @param $key
+     * @param $value
+     */
+    public function append(string $key, $value): void
     {
         if (!$this->has($key)) {
-            $this->set($key, array());
+            $this->set($key, []);
         }
-
+        
         if (!is_array($this->list[$key])) {
             throw new \InvalidArgumentException(sprintf('Key "%s" is not an array', $key));
         }
-            
+        
         $this->list[$key][] = $value;
     }
-
-    public function has($key)
+    
+    /**
+     * @param $key
+     * @return bool
+     */
+    public function has(string $key): bool
     {
         return array_key_exists($key, $this->list);
     }
-
-    public function remove($key)
+    
+    /**
+     * @param $key
+     */
+    public function remove(string $key): void
     {
         unset($this->list[$key]);
     }
-
-    public function getAlpha($key, $default = '', $deep = false)
+    
+    /**
+     * @param $key
+     * @param string $default
+     * @param bool $deep
+     * @return string|string[]|null
+     */
+    public function getAlpha(string $key, string $default = '', bool $deep = false)
     {
         return preg_replace('/[^[:alpha:]]/', '', $this->get($key, $default, $deep));
     }
-
-    public function getAlnum($key, $default = '', $deep = false)
+    
+    /**
+     * @param $key
+     * @param string $default
+     * @param bool $deep
+     * @return string|string[]|null
+     */
+    public function getAlnum(string $key, string $default = '', bool $deep = false)
     {
         return preg_replace('/[^[:alnum:]]/', '', $this->get($key, $default, $deep));
     }
-
-    public function getDigits($key, $default = '', $deep = false)
+    
+    /**
+     * @param $key
+     * @param string $default
+     * @param bool $deep
+     * @return mixed
+     */
+    public function getDigits(string $key, string $default = '', bool $deep = false)
     {
-        return str_replace(array('-', '+'), '', $this->filter($key, $default, $deep, FILTER_SANITIZE_NUMBER_INT));
+        return str_replace(['-', '+'], '', $this->filter($key, $default, $deep, FILTER_SANITIZE_NUMBER_INT));
     }
-
-    public function getInt($key, $default = 0, $deep = false)
+    
+    /**
+     * @param $key
+     * @param int $default
+     * @param bool $deep
+     * @return int
+     */
+    public function getInt(string $key, int $default = 0, bool $deep = false): int
     {
-        return (int) $this->get($key, $default, $deep);
+        return (int)$this->get($key, $default, $deep);
     }
-
-    public function getIterator()
+    
+    /**
+     * @return \ArrayIterator|\Traversable
+     */
+    public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->list);
     }
-
-    public function count()
+    
+    /**
+     * @return int
+     */
+    public function count(): int
     {
         return count($this->list);
     }

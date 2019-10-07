@@ -22,18 +22,18 @@ class ErrorHandler implements IErrorHandler
      * @var EventDispatcher
      */
     protected $eventDispatcher;
-
+    
     public function __construct()
     {
         error_reporting(E_ALL);
         ini_set('display_errors', 1);
-
+        
         // Exception
         $this->setExceptionHandler($this->getExceptionHandler());
-
+        
         // Error
         $this->setErrorHandler($this->getErrorHandler());
-
+        
         // Shutdown
         $this->setShutdownHandler($this->getShutdownHandler());
     }
@@ -46,7 +46,8 @@ class ErrorHandler implements IErrorHandler
     {
         if ($this->eventDispatcher !== null) {
             $method = RpcMethod::splitMethod($method);
-            EventHandler::dispatchRpc($data, $this->eventDispatcher, $method->getController(), $method->getAction(), EventHandler::AFTER);
+            EventHandler::dispatchRpc($data, $this->eventDispatcher, $method->getController(), $method->getAction(),
+                EventHandler::AFTER);
         }
     }
     
@@ -63,32 +64,32 @@ class ErrorHandler implements IErrorHandler
      */
     public function getExceptionHandler()
     {
-        return function($e) {
+        return function ($e) {
             $error = new Error();
             if (self::isThrowable($e)) {
                 $trace = $e->getTrace();
                 if (isset($trace[0]['args'][0])) {
                     $requestpacket = $trace[0]['args'][0];
                 }
-    
+                
                 $error->setCode($e->getCode())
                     ->setData(ExceptionFormatter::format($e))
                     ->setMessage($e->getMessage());
-    
+                
                 Logger::write($error->getData(), Logger::ERROR, 'global');
             }
-
+            
             $responsepacket = new ResponsePacket();
             $responsepacket->setError($error)
                 ->setId('unknown')
                 ->setJtlrpc('2.0');
-
+            
             $method = 'unknown.unknown';
             if (isset($requestpacket) && $requestpacket !== null && is_object($requestpacket) && $requestpacket instanceof RequestPacket) {
                 $responsepacket->setId($requestpacket->getId());
                 $method = $requestpacket->getMethod();
             }
-
+            
             $this->triggerRpcAfterEvent($responsepacket->getPublic(), $method);
             Response::send($responsepacket);
         };
@@ -107,24 +108,24 @@ class ErrorHandler implements IErrorHandler
      */
     public function getErrorHandler()
     {
-        return function($errno, $errstr, $errfile, $errline, $errcontext) {
-            $types = array(
-                E_ERROR => array(Logger::ERROR, 'E_ERROR'),
-                E_WARNING => array(Logger::WARNING, 'E_WARNING'),
-                E_PARSE => array(Logger::WARNING, 'E_PARSE'),
-                E_NOTICE => array(Logger::NOTICE, 'E_NOTICE'),
-                E_CORE_ERROR => array(Logger::ERROR, 'E_CORE_ERROR'),
-                E_CORE_WARNING => array(Logger::WARNING, 'E_CORE_WARNING'),
-                E_CORE_ERROR => array(Logger::ERROR, 'E_COMPILE_ERROR'),
-                E_USER_ERROR => array(Logger::ERROR, 'E_USER_ERROR'),
-                E_USER_WARNING => array(Logger::WARNING, 'E_USER_WARNING'),
-                E_USER_NOTICE => array(Logger::NOTICE, 'E_USER_NOTICE'),
-                E_STRICT => array(Logger::NOTICE, 'E_STRICT'),
-                E_RECOVERABLE_ERROR => array(Logger::ERROR, 'E_RECOVERABLE_ERROR'),
-                E_DEPRECATED => array(Logger::INFO, 'E_DEPRECATED'),
-                E_USER_DEPRECATED => array(Logger::INFO, 'E_USER_DEPRECATED')
-            );
-
+        return function ($errno, $errstr, $errfile, $errline, $errcontext) {
+            $types = [
+                E_ERROR             => [Logger::ERROR, 'E_ERROR'],
+                E_WARNING           => [Logger::WARNING, 'E_WARNING'],
+                E_PARSE             => [Logger::WARNING, 'E_PARSE'],
+                E_NOTICE            => [Logger::NOTICE, 'E_NOTICE'],
+                E_CORE_ERROR        => [Logger::ERROR, 'E_CORE_ERROR'],
+                E_CORE_WARNING      => [Logger::WARNING, 'E_CORE_WARNING'],
+                E_CORE_ERROR        => [Logger::ERROR, 'E_COMPILE_ERROR'],
+                E_USER_ERROR        => [Logger::ERROR, 'E_USER_ERROR'],
+                E_USER_WARNING      => [Logger::WARNING, 'E_USER_WARNING'],
+                E_USER_NOTICE       => [Logger::NOTICE, 'E_USER_NOTICE'],
+                E_STRICT            => [Logger::NOTICE, 'E_STRICT'],
+                E_RECOVERABLE_ERROR => [Logger::ERROR, 'E_RECOVERABLE_ERROR'],
+                E_DEPRECATED        => [Logger::INFO, 'E_DEPRECATED'],
+                E_USER_DEPRECATED   => [Logger::INFO, 'E_USER_DEPRECATED'],
+            ];
+            
             if (isset($types[$errno])) {
                 $err = "(" . $types[$errno][1] . ") File ({$errfile}, {$errline}): {$errstr}";
                 Logger::write($err, $types[$errno][0], 'global');
@@ -147,39 +148,39 @@ class ErrorHandler implements IErrorHandler
      */
     public function getShutdownHandler()
     {
-        return function() {
+        return function () {
             if (($err = error_get_last())) {
-                $allowed = array(
+                $allowed = [
                     E_ERROR,
                     E_CORE_ERROR,
                     E_USER_ERROR,
                     E_RECOVERABLE_ERROR,
                     E_COMPILE_ERROR,
-                    E_PARSE
-                );
-
+                    E_PARSE,
+                ];
+                
                 if (in_array($err['type'], $allowed)) {
                     ob_clean();
-
+                    
                     $error = new Error();
                     $error->setCode($err['type'])
                         ->setData('Shutdown! File: ' . $err['file'] . ' - Line: ' . $err['line'])
                         ->setMessage($err['message']);
-
+                    
                     Logger::write(sprintf(
                         '%s - Type: %s - Message: %s',
                         $error->getData(),
                         $err['type'],
                         $error->getMessage()
                     ), Logger::ERROR, 'global');
-
+                    
                     $responsepacket = new ResponsePacket();
                     $responsepacket->setError($error)
                         ->setId('unknown')
                         ->setJtlrpc('2.0');
-
+                    
                     $this->triggerRpcAfterEvent($responsepacket->getPublic(), 'unknown.unknown');
-
+                    
                     Response::send($responsepacket);
                 }
             }
@@ -193,6 +194,7 @@ class ErrorHandler implements IErrorHandler
     public function setEventDispatcher(EventDispatcher $dispatcher): ErrorHandler
     {
         $this->eventDispatcher = $dispatcher;
+        
         return $this;
     }
     
