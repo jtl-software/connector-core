@@ -10,55 +10,49 @@ interface IPrimaryKeyMapper
     /**
      * Host ID getter
      *
-     * @param string $endpointId
      * @param integer $type
+     * @param string $endpointId
      * @return integer|null
      */
-    public function getHostId($endpointId, $type);
+    public function getHostId($type, $endpointId);
 
     /**
      * Endpoint ID getter
      *
-     * @param integer $hostId
      * @param integer $type
+     * @param integer $hostId
      * @param string $relationType
      * @return string|null
      */
-    public function getEndpointId($hostId, $type, $relationType = null);
+    public function getEndpointId($type, $hostId, $relationType = null);
 
     /**
      * Save link to database
      *
+     * @param integer $type
      * @param string $endpointId
      * @param integer $hostId
-     * @param integer $type
      * @return boolean
      */
-    public function save($endpointId, $hostId, $type);
+    public function save($type, $endpointId, $hostId);
     
     //public function update($endpointId = null, $hostId = null, $type);
 
     /**
      * Delete link from database
      *
+     * @param integer $type
      * @param string $endpointId
      * @param integer $hostId
-     * @param integer $type
      * @return boolean
      */
-    public function delete($endpointId = null, $hostId = null, $type);
-
+    public function delete($type, $endpointId = null, $hostId = null);
+    
     /**
      * Clears the entire link table
      *
+     * @param null $type
      * @return boolean
      */
-    public function clear();
-
-    /**
-     * Garbage Collect the entire link table
-     *
-     * @return boolean
-     */
-    public function gc();
+    public function clear($type = null);
 }
