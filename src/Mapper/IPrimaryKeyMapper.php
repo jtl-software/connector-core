@@ -35,8 +35,6 @@ interface IPrimaryKeyMapper
      * @return boolean
      */
     public function save($type, $endpointId, $hostId);
-    
-    //public function update($endpointId = null, $hostId = null, $type);
 
     /**
      * Delete link from database
