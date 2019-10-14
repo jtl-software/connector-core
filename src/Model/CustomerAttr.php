@@ -16,19 +16,18 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class CustomerAttr extends DataModel
 {
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("customerId")
      * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
      */
     protected $customerId = null;
-
+    
     /**
      * @var string Attribute key
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class CustomerAttr extends DataModel
      * @Serializer\Accessor(getter="getKey",setter="setKey")
      */
     protected $key = '';
-
+    
     /**
      * @var string Attribute value
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class CustomerAttr extends DataModel
      * @Serializer\Accessor(getter="getValue",setter="setValue")
      */
     protected $value = '';
-
+    
     /**
      * Constructor
      */
@@ -52,34 +51,38 @@ class CustomerAttr extends DataModel
     {
         $this->customerId = new Identity();
     }
-
+    
     /**
-     * @param Identity $customerId 
+     * @param Identity $customerId
      * @return \jtl\Connector\Model\CustomerAttr
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerId(Identity $customerId)
     {
-        return $this->setProperty('customerId', $customerId, 'Identity');
+        $this->customerId = $customerId;
+        
+        return $this;
     }
-
+    
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getCustomerId()
     {
         return $this->customerId;
     }
-
+    
     /**
      * @param string $key Attribute key
      * @return \jtl\Connector\Model\CustomerAttr
      */
     public function setKey($key)
     {
-        return $this->setProperty('key', $key, 'string');
+        $this->key = $key;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Attribute key
      */
@@ -87,16 +90,18 @@ class CustomerAttr extends DataModel
     {
         return $this->key;
     }
-
+    
     /**
      * @param string $value Attribute value
      * @return \jtl\Connector\Model\CustomerAttr
      */
     public function setValue($value)
     {
-        return $this->setProperty('value', $value, 'string');
+        $this->value = $value;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Attribute value
      */

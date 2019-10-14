@@ -11,49 +11,49 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class DeliveryNoteTrackingList extends DataModel
 {
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * @var string[]
      * @Serializer\Type("array<string>")
      * @Serializer\SerializedName("codes")
      * @Serializer\AccessType("reflection")
      */
-    protected $codes = array();
-
-
+    protected $codes = [];
+    
+    
     /**
-     * @param string $name 
+     * @param string $name
      * @return \jtl\Connector\Model\DeliveryNoteTrackingList
      */
     public function setName($name)
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
     public function getName()
     {
         return $this->name;
     }
-
+    
     /**
      * @param string $code
      * @return \jtl\Connector\Model\DeliveryNoteTrackingList
@@ -61,6 +61,7 @@ class DeliveryNoteTrackingList extends DataModel
     public function addCode($code)
     {
         $this->codes[] = $code;
+        
         return $this;
     }
     
@@ -71,6 +72,7 @@ class DeliveryNoteTrackingList extends DataModel
     public function setCodes(array $codes)
     {
         $this->codes = $codes;
+        
         return $this;
     }
     
@@ -81,13 +83,14 @@ class DeliveryNoteTrackingList extends DataModel
     {
         return $this->codes;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\DeliveryNoteTrackingList
      */
     public function clearCodes()
     {
-        $this->codes = array();
+        $this->codes = [];
+        
         return $this;
     }
 }

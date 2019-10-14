@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class Unit extends DataModel
@@ -28,15 +27,15 @@ class Unit extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var \jtl\Connector\Model\UnitI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\UnitI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
-
+    protected $i18ns = [];
+    
     /**
      * Constructor
      */
@@ -44,7 +43,7 @@ class Unit extends DataModel
     {
         $this->id = new Identity();
     }
-
+    
     /**
      * @param Identity $id Unit id
      * @return \jtl\Connector\Model\Unit
@@ -52,9 +51,11 @@ class Unit extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unit id
      */
@@ -62,7 +63,7 @@ class Unit extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\UnitI18n $i18n
      * @return \jtl\Connector\Model\Unit
@@ -70,6 +71,7 @@ class Unit extends DataModel
     public function addI18n(\jtl\Connector\Model\UnitI18n $i18n)
     {
         $this->i18ns[] = $i18n;
+        
         return $this;
     }
     
@@ -80,6 +82,7 @@ class Unit extends DataModel
     public function setI18ns(array $i18ns)
     {
         $this->i18ns = $i18ns;
+        
         return $this;
     }
     
@@ -90,13 +93,14 @@ class Unit extends DataModel
     {
         return $this->i18ns;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\Unit
      */
     public function clearI18ns()
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
+        
         return $this;
     }
 }

@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class Language extends DataModel
@@ -28,7 +27,7 @@ class Language extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var boolean Flag default language for frontend. Exact 1 language must be marked as default.
      * @Serializer\Type("boolean")
@@ -36,15 +35,15 @@ class Language extends DataModel
      * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
      */
     protected $isDefault = false;
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("languageISO")
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
      * @var string English term
      * @Serializer\Type("string")
@@ -52,7 +51,7 @@ class Language extends DataModel
      * @Serializer\Accessor(getter="getNameEnglish",setter="setNameEnglish")
      */
     protected $nameEnglish = '';
-
+    
     /**
      * @var string German term
      * @Serializer\Type("string")
@@ -60,7 +59,7 @@ class Language extends DataModel
      * @Serializer\Accessor(getter="getNameGerman",setter="setNameGerman")
      */
     protected $nameGerman = '';
-
+    
     /**
      * Constructor
      */
@@ -68,7 +67,7 @@ class Language extends DataModel
     {
         $this->id = new Identity();
     }
-
+    
     /**
      * @param Identity $id Unique language id
      * @return \jtl\Connector\Model\Language
@@ -76,9 +75,11 @@ class Language extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique language id
      */
@@ -86,16 +87,18 @@ class Language extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param boolean $isDefault Flag default language for frontend. Exact 1 language must be marked as default.
      * @return \jtl\Connector\Model\Language
      */
     public function setIsDefault($isDefault)
     {
-        return $this->setProperty('isDefault', $isDefault, 'boolean');
+        $this->isDefault = $isDefault;
+        
+        return $this;
     }
-
+    
     /**
      * @return boolean Flag default language for frontend. Exact 1 language must be marked as default.
      */
@@ -103,33 +106,37 @@ class Language extends DataModel
     {
         return $this->isDefault;
     }
-
+    
     /**
-     * @param string $languageISO 
+     * @param string $languageISO
      * @return \jtl\Connector\Model\Language
      */
     public function setLanguageISO($languageISO)
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
     public function getLanguageISO()
     {
         return $this->languageISO;
     }
-
+    
     /**
      * @param string $nameEnglish English term
      * @return \jtl\Connector\Model\Language
      */
     public function setNameEnglish($nameEnglish)
     {
-        return $this->setProperty('nameEnglish', $nameEnglish, 'string');
+        $this->nameEnglish = $nameEnglish;
+        
+        return $this;
     }
-
+    
     /**
      * @return string English term
      */
@@ -137,16 +144,18 @@ class Language extends DataModel
     {
         return $this->nameEnglish;
     }
-
+    
     /**
      * @param string $nameGerman German term
      * @return \jtl\Connector\Model\Language
      */
     public function setNameGerman($nameGerman)
     {
-        return $this->setProperty('nameGerman', $nameGerman, 'string');
+        $this->nameGerman = $nameGerman;
+        
+        return $this;
     }
-
+    
     /**
      * @return string German term
      */

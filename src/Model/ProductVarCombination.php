@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductVarCombination extends DataModel
@@ -28,7 +27,7 @@ class ProductVarCombination extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-
+    
     /**
      * @var Identity Reference to productVariation
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class ProductVarCombination extends DataModel
      * @Serializer\Accessor(getter="getProductVariationId",setter="setProductVariationId")
      */
     protected $productVariationId = null;
-
+    
     /**
      * @var Identity Reference to productVariationValue
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -44,7 +43,7 @@ class ProductVarCombination extends DataModel
      * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
      */
     protected $productVariationValueId = null;
-
+    
     /**
      * Constructor
      */
@@ -54,7 +53,7 @@ class ProductVarCombination extends DataModel
         $this->productVariationId = new Identity();
         $this->productVariationValueId = new Identity();
     }
-
+    
     /**
      * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductVarCombination
@@ -62,9 +61,11 @@ class ProductVarCombination extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        $this->productId = $productId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to product
      */
@@ -72,7 +73,7 @@ class ProductVarCombination extends DataModel
     {
         return $this->productId;
     }
-
+    
     /**
      * @param Identity $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\ProductVarCombination
@@ -80,9 +81,11 @@ class ProductVarCombination extends DataModel
      */
     public function setProductVariationId(Identity $productVariationId)
     {
-        return $this->setProperty('productVariationId', $productVariationId, 'Identity');
+        $this->productVariationId = $productVariationId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to productVariation
      */
@@ -90,7 +93,7 @@ class ProductVarCombination extends DataModel
     {
         return $this->productVariationId;
     }
-
+    
     /**
      * @param Identity $productVariationValueId Reference to productVariationValue
      * @return \jtl\Connector\Model\ProductVarCombination
@@ -98,9 +101,11 @@ class ProductVarCombination extends DataModel
      */
     public function setProductVariationValueId(Identity $productVariationValueId)
     {
-        return $this->setProperty('productVariationValueId', $productVariationValueId, 'Identity');
+        $this->productVariationValueId = $productVariationValueId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to productVariationValue
      */

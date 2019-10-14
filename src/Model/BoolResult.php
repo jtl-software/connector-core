@@ -39,6 +39,8 @@ class BoolResult extends DataModel
      */
     public function setResult(bool $result): DataModel
     {
-        return $this->setProperty('result', $result, 'boolean');
+        $this->result = $result;
+        
+        return $this;
     }
 }

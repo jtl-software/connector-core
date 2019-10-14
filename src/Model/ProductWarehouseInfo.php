@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductWarehouseInfo extends DataModel
@@ -28,15 +27,15 @@ class ProductWarehouseInfo extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-
+    
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("warehouseId")
      * @Serializer\Accessor(getter="getwarehouseId",setter="setwarehouseId")
      */
     protected $warehouseId = null;
-
+    
     /**
      * @var double Optional product inflow quantity for specified warehouse
      * @Serializer\Type("double")
@@ -44,15 +43,15 @@ class ProductWarehouseInfo extends DataModel
      * @Serializer\Accessor(getter="getInflowQuantity",setter="setInflowQuantity")
      */
     protected $inflowQuantity = 0.0;
-
+    
     /**
-     * @var double 
+     * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("stockLevel")
      * @Serializer\Accessor(getter="getstockLevel",setter="setstockLevel")
      */
     protected $stockLevel = 0.0;
-
+    
     /**
      * Constructor
      */
@@ -61,7 +60,7 @@ class ProductWarehouseInfo extends DataModel
         $this->productId = new Identity();
         $this->warehouseId = new Identity();
     }
-
+    
     /**
      * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductWarehouseInfo
@@ -69,9 +68,11 @@ class ProductWarehouseInfo extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        $this->productId = $productId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to product
      */
@@ -79,34 +80,38 @@ class ProductWarehouseInfo extends DataModel
     {
         return $this->productId;
     }
-
+    
     /**
-     * @param Identity $warehouseId 
+     * @param Identity $warehouseId
      * @return \jtl\Connector\Model\ProductWarehouseInfo
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setwarehouseId(Identity $warehouseId)
     {
-        return $this->setProperty('warehouseId', $warehouseId, 'Identity');
+        $this->warehouseId = $warehouseId;
+        
+        return $this;
     }
-
+    
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getwarehouseId()
     {
         return $this->warehouseId;
     }
-
+    
     /**
      * @param double $inflowQuantity Optional product inflow quantity for specified warehouse
      * @return \jtl\Connector\Model\ProductWarehouseInfo
      */
     public function setInflowQuantity($inflowQuantity)
     {
-        return $this->setProperty('inflowQuantity', $inflowQuantity, 'double');
+        $this->inflowQuantity = $inflowQuantity;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Optional product inflow quantity for specified warehouse
      */
@@ -114,18 +119,20 @@ class ProductWarehouseInfo extends DataModel
     {
         return $this->inflowQuantity;
     }
-
+    
     /**
-     * @param double $stockLevel 
+     * @param double $stockLevel
      * @return \jtl\Connector\Model\ProductWarehouseInfo
      */
     public function setstockLevel($stockLevel)
     {
-        return $this->setProperty('stockLevel', $stockLevel, 'double');
+        $this->stockLevel = $stockLevel;
+        
+        return $this;
     }
-
+    
     /**
-     * @return double 
+     * @return double
      */
     public function getstockLevel()
     {

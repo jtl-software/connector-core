@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class Warehouse extends DataModel
@@ -28,7 +27,7 @@ class Warehouse extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var string Warehouse name
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class Warehouse extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * Constructor
      */
@@ -44,7 +43,7 @@ class Warehouse extends DataModel
     {
         $this->id = new Identity();
     }
-
+    
     /**
      * @param Identity $id Unique warehouse id
      * @return \jtl\Connector\Model\Warehouse
@@ -52,9 +51,11 @@ class Warehouse extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique warehouse id
      */
@@ -62,16 +63,18 @@ class Warehouse extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param string $name Warehouse name
      * @return \jtl\Connector\Model\Warehouse
      */
     public function setName($name)
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Warehouse name
      */

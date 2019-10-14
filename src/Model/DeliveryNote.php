@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class DeliveryNote extends DataModel
@@ -28,7 +27,7 @@ class DeliveryNote extends DataModel
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
      */
     protected $customerOrderId = null;
-
+    
     /**
      * @var Identity Unique deliveryNote id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class DeliveryNote extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var DateTime Creation date
      * @Serializer\Type("DateTime")
@@ -44,7 +43,7 @@ class DeliveryNote extends DataModel
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
     protected $creationDate = null;
-
+    
     /**
      * @var boolean Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      * @Serializer\Type("boolean")
@@ -52,7 +51,7 @@ class DeliveryNote extends DataModel
      * @Serializer\Accessor(getter="getIsFulfillment",setter="setIsFulfillment")
      */
     protected $isFulfillment = false;
-
+    
     /**
      * @var string Optional text note
      * @Serializer\Type("string")
@@ -60,23 +59,23 @@ class DeliveryNote extends DataModel
      * @Serializer\Accessor(getter="getNote",setter="setNote")
      */
     protected $note = '';
-
+    
     /**
      * @var \jtl\Connector\Model\DeliveryNoteItem[]
      * @Serializer\Type("array<jtl\Connector\Model\DeliveryNoteItem>")
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
      */
-    protected $items = array();
-
+    protected $items = [];
+    
     /**
      * @var \jtl\Connector\Model\DeliveryNoteTrackingList[]
      * @Serializer\Type("array<jtl\Connector\Model\DeliveryNoteTrackingList>")
      * @Serializer\SerializedName("trackingLists")
      * @Serializer\AccessType("reflection")
      */
-    protected $trackingLists = array();
-
+    protected $trackingLists = [];
+    
     /**
      * Constructor
      */
@@ -85,7 +84,7 @@ class DeliveryNote extends DataModel
         $this->id = new Identity();
         $this->customerOrderId = new Identity();
     }
-
+    
     /**
      * @param Identity $customerOrderId Reference to customerOrder
      * @return \jtl\Connector\Model\DeliveryNote
@@ -93,9 +92,11 @@ class DeliveryNote extends DataModel
      */
     public function setCustomerOrderId(Identity $customerOrderId)
     {
-        return $this->setProperty('customerOrderId', $customerOrderId, 'Identity');
+        $this->customerOrderId = $customerOrderId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to customerOrder
      */
@@ -103,7 +104,7 @@ class DeliveryNote extends DataModel
     {
         return $this->customerOrderId;
     }
-
+    
     /**
      * @param Identity $id Unique deliveryNote id
      * @return \jtl\Connector\Model\DeliveryNote
@@ -111,9 +112,11 @@ class DeliveryNote extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique deliveryNote id
      */
@@ -121,7 +124,7 @@ class DeliveryNote extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param DateTime $creationDate Creation date
      * @return \jtl\Connector\Model\DeliveryNote
@@ -129,9 +132,11 @@ class DeliveryNote extends DataModel
      */
     public function setCreationDate(DateTime $creationDate = null)
     {
-        return $this->setProperty('creationDate', $creationDate, 'DateTime');
+        $this->creationDate = $creationDate;
+        
+        return $this;
     }
-
+    
     /**
      * @return DateTime Creation date
      */
@@ -139,16 +144,18 @@ class DeliveryNote extends DataModel
     {
         return $this->creationDate;
     }
-
+    
     /**
      * @param boolean $isFulfillment Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      * @return \jtl\Connector\Model\DeliveryNote
      */
     public function setIsFulfillment($isFulfillment)
     {
-        return $this->setProperty('isFulfillment', $isFulfillment, 'boolean');
+        $this->isFulfillment = $isFulfillment;
+        
+        return $this;
     }
-
+    
     /**
      * @return boolean Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      */
@@ -156,16 +163,18 @@ class DeliveryNote extends DataModel
     {
         return $this->isFulfillment;
     }
-
+    
     /**
      * @param string $note Optional text note
      * @return \jtl\Connector\Model\DeliveryNote
      */
     public function setNote($note)
     {
-        return $this->setProperty('note', $note, 'string');
+        $this->note = $note;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional text note
      */
@@ -173,7 +182,7 @@ class DeliveryNote extends DataModel
     {
         return $this->note;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\DeliveryNoteItem $item
      * @return \jtl\Connector\Model\DeliveryNote
@@ -181,6 +190,7 @@ class DeliveryNote extends DataModel
     public function addItem(\jtl\Connector\Model\DeliveryNoteItem $item)
     {
         $this->items[] = $item;
+        
         return $this;
     }
     
@@ -191,6 +201,7 @@ class DeliveryNote extends DataModel
     public function setItems(array $items)
     {
         $this->items = $items;
+        
         return $this;
     }
     
@@ -201,16 +212,17 @@ class DeliveryNote extends DataModel
     {
         return $this->items;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\DeliveryNote
      */
     public function clearItems()
     {
-        $this->items = array();
+        $this->items = [];
+        
         return $this;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\DeliveryNoteTrackingList $trackingList
      * @return \jtl\Connector\Model\DeliveryNote
@@ -218,6 +230,7 @@ class DeliveryNote extends DataModel
     public function addTrackingList(\jtl\Connector\Model\DeliveryNoteTrackingList $trackingList)
     {
         $this->trackingLists[] = $trackingList;
+        
         return $this;
     }
     
@@ -228,6 +241,7 @@ class DeliveryNote extends DataModel
     public function setTrackingLists(array $trackingLists)
     {
         $this->trackingLists = $trackingLists;
+        
         return $this;
     }
     
@@ -238,13 +252,14 @@ class DeliveryNote extends DataModel
     {
         return $this->trackingLists;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\DeliveryNote
      */
     public function clearTrackingLists()
     {
-        $this->trackingLists = array();
+        $this->trackingLists = [];
+        
         return $this;
     }
 }

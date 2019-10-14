@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class CustomerGroupAttr extends DataModel
@@ -28,7 +27,7 @@ class CustomerGroupAttr extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-
+    
     /**
      * @var Identity Unique customerGroupAttr id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class CustomerGroupAttr extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var string Attribute key
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class CustomerGroupAttr extends DataModel
      * @Serializer\Accessor(getter="getKey",setter="setKey")
      */
     protected $key = '';
-
+    
     /**
      * @var string Attribute value
      * @Serializer\Type("string")
@@ -52,7 +51,7 @@ class CustomerGroupAttr extends DataModel
      * @Serializer\Accessor(getter="getValue",setter="setValue")
      */
     protected $value = '';
-
+    
     /**
      * Constructor
      */
@@ -61,7 +60,7 @@ class CustomerGroupAttr extends DataModel
         $this->customerGroupId = new Identity();
         $this->id = new Identity();
     }
-
+    
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\CustomerGroupAttr
@@ -69,9 +68,11 @@ class CustomerGroupAttr extends DataModel
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        $this->customerGroupId = $customerGroupId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to customerGroup
      */
@@ -79,7 +80,7 @@ class CustomerGroupAttr extends DataModel
     {
         return $this->customerGroupId;
     }
-
+    
     /**
      * @param Identity $id Unique customerGroupAttr id
      * @return \jtl\Connector\Model\CustomerGroupAttr
@@ -87,9 +88,11 @@ class CustomerGroupAttr extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique customerGroupAttr id
      */
@@ -97,16 +100,18 @@ class CustomerGroupAttr extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param string $key Attribute key
      * @return \jtl\Connector\Model\CustomerGroupAttr
      */
     public function setKey($key)
     {
-        return $this->setProperty('key', $key, 'string');
+        $this->key = $key;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Attribute key
      */
@@ -114,16 +119,18 @@ class CustomerGroupAttr extends DataModel
     {
         return $this->key;
     }
-
+    
     /**
      * @param string $value Attribute value
      * @return \jtl\Connector\Model\CustomerGroupAttr
      */
     public function setValue($value)
     {
-        return $this->setProperty('value', $value, 'string');
+        $this->value = $value;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Attribute value
      */

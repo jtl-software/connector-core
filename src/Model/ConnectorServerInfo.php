@@ -11,11 +11,9 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- *
  * @Serializer\AccessType("public_method")
  */
 class ConnectorServerInfo extends DataModel
@@ -27,7 +25,7 @@ class ConnectorServerInfo extends DataModel
      * @Serializer\Accessor(getter="getMemoryLimit",setter="setMemoryLimit")
      */
     protected $memoryLimit = 0;
-
+    
     /**
      * @var integer
      * @Serializer\Type("integer")
@@ -35,7 +33,7 @@ class ConnectorServerInfo extends DataModel
      * @Serializer\Accessor(getter="getExecutionTime",setter="setExecutionTime")
      */
     protected $executionTime = 0;
-
+    
     /**
      * @var integer
      * @Serializer\Type("integer")
@@ -43,7 +41,7 @@ class ConnectorServerInfo extends DataModel
      * @Serializer\Accessor(getter="getPostMaxSize",setter="setPostMaxSize")
      */
     protected $postMaxSize = 0;
-
+    
     /**
      * @var integer
      * @Serializer\Type("integer")
@@ -51,7 +49,7 @@ class ConnectorServerInfo extends DataModel
      * @Serializer\Accessor(getter="getUploadMaxFilesize",setter="setUploadMaxFilesize")
      */
     protected $uploadMaxFilesize = 0;
-
+    
     /**
      * @return integer
      */
@@ -59,16 +57,18 @@ class ConnectorServerInfo extends DataModel
     {
         return $this->memoryLimit;
     }
-
+    
     /**
      * @param integer $memoryLimit
      * @return \jtl\Connector\Model\ConnectorServerInfo
      */
     public function setMemoryLimit($memoryLimit)
     {
-        return $this->setProperty('memoryLimit', $memoryLimit, 'integer');
+        $this->memoryLimit = $memoryLimit;
+        
+        return $this;
     }
-
+    
     /**
      * @return int
      */
@@ -76,16 +76,18 @@ class ConnectorServerInfo extends DataModel
     {
         return $this->executionTime;
     }
-
+    
     /**
      * @param integer $executionTime
      * @return \jtl\Connector\Model\ConnectorServerInfo
      */
     public function setExecutionTime($executionTime)
     {
-        return $this->setProperty('executionTime', $executionTime, 'integer');
+        $this->executionTime = $executionTime;
+        
+        return $this;
     }
-
+    
     /**
      * @return int
      */
@@ -93,16 +95,18 @@ class ConnectorServerInfo extends DataModel
     {
         return $this->postMaxSize;
     }
-
+    
     /**
      * @param integer $postMaxSize
      * @return \jtl\Connector\Model\ConnectorServerInfo
      */
     public function setPostMaxSize($postMaxSize)
     {
-        return $this->setProperty('postMaxSize', $postMaxSize, 'integer');
+        $this->postMaxSize = $postMaxSize;
+        
+        return $this;
     }
-
+    
     /**
      * @return int
      */
@@ -110,13 +114,15 @@ class ConnectorServerInfo extends DataModel
     {
         return $this->uploadMaxFilesize;
     }
-
+    
     /**
      * @param integer $uploadMaxFilesize
      * @return \jtl\Connector\Model\ConnectorServerInfo
      */
     public function setUploadMaxFilesize($uploadMaxFilesize)
     {
-        return $this->setProperty('uploadMaxFilesize', $uploadMaxFilesize, 'integer');
+        $this->uploadMaxFilesize = $uploadMaxFilesize;
+        
+        return $this;
     }
 }

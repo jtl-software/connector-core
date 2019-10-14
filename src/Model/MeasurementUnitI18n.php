@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class MeasurementUnitI18n extends DataModel
@@ -28,7 +27,7 @@ class MeasurementUnitI18n extends DataModel
      * @Serializer\Accessor(getter="getMeasurementUnitId",setter="setMeasurementUnitId")
      */
     protected $measurementUnitId = null;
-
+    
     /**
      * @var string Locale
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class MeasurementUnitI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
      * @var string Localized Name
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class MeasurementUnitI18n extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * Constructor
      */
@@ -52,7 +51,7 @@ class MeasurementUnitI18n extends DataModel
     {
         $this->measurementUnitId = new Identity();
     }
-
+    
     /**
      * @param Identity $measurementUnitId Reference to measurementUnitId
      * @return \jtl\Connector\Model\MeasurementUnitI18n
@@ -60,9 +59,11 @@ class MeasurementUnitI18n extends DataModel
      */
     public function setMeasurementUnitId(Identity $measurementUnitId)
     {
-        return $this->setProperty('measurementUnitId', $measurementUnitId, 'Identity');
+        $this->measurementUnitId = $measurementUnitId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to measurementUnitId
      */
@@ -70,16 +71,18 @@ class MeasurementUnitI18n extends DataModel
     {
         return $this->measurementUnitId;
     }
-
+    
     /**
      * @param string $languageISO Locale
      * @return \jtl\Connector\Model\MeasurementUnitI18n
      */
     public function setLanguageISO($languageISO)
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Locale
      */
@@ -87,16 +90,18 @@ class MeasurementUnitI18n extends DataModel
     {
         return $this->languageISO;
     }
-
+    
     /**
      * @param string $name Localized Name
      * @return \jtl\Connector\Model\MeasurementUnitI18n
      */
     public function setName($name)
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Localized Name
      */

@@ -11,12 +11,11 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Product variation value model. Each product defines its own variations and variation values. 
+ * Product variation value model. Each product defines its own variations and variation values.
  *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductVariationValue extends DataModel
@@ -28,7 +27,7 @@ class ProductVariationValue extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var Identity Reference to productVariation
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,15 +35,15 @@ class ProductVariationValue extends DataModel
      * @Serializer\Accessor(getter="getProductVariationId",setter="setProductVariationId")
      */
     protected $productVariationId = null;
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("ean")
      * @Serializer\Accessor(getter="getEan",setter="setEan")
      */
     protected $ean = '';
-
+    
     /**
      * @var double Optional variation extra weight
      * @Serializer\Type("double")
@@ -52,7 +51,7 @@ class ProductVariationValue extends DataModel
      * @Serializer\Accessor(getter="getExtraWeight",setter="setExtraWeight")
      */
     protected $extraWeight = 0.0;
-
+    
     /**
      * @var string Optional Stock Keeping Unit
      * @Serializer\Type("string")
@@ -60,7 +59,7 @@ class ProductVariationValue extends DataModel
      * @Serializer\Accessor(getter="getSku",setter="setSku")
      */
     protected $sku = '';
-
+    
     /**
      * @var integer Optional sort number
      * @Serializer\Type("integer")
@@ -68,7 +67,7 @@ class ProductVariationValue extends DataModel
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
-
+    
     /**
      * @var double Optional stock level
      * @Serializer\Type("double")
@@ -76,31 +75,31 @@ class ProductVariationValue extends DataModel
      * @Serializer\Accessor(getter="getStockLevel",setter="setStockLevel")
      */
     protected $stockLevel = 0.0;
-
+    
     /**
      * @var \jtl\Connector\Model\ProductVariationValueExtraCharge[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValueExtraCharge>")
      * @Serializer\SerializedName("extraCharges")
      * @Serializer\AccessType("reflection")
      */
-    protected $extraCharges = array();
-
+    protected $extraCharges = [];
+    
     /**
      * @var \jtl\Connector\Model\ProductVariationValueI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValueI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
-
+    protected $i18ns = [];
+    
     /**
      * @var \jtl\Connector\Model\ProductVariationValueInvisibility[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValueInvisibility>")
      * @Serializer\SerializedName("invisibilities")
      * @Serializer\AccessType("reflection")
      */
-    protected $invisibilities = array();
-
+    protected $invisibilities = [];
+    
     /**
      * Constructor
      */
@@ -109,7 +108,7 @@ class ProductVariationValue extends DataModel
         $this->id = new Identity();
         $this->productVariationId = new Identity();
     }
-
+    
     /**
      * @param Identity $id Unique productVariationValue id
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -117,9 +116,11 @@ class ProductVariationValue extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique productVariationValue id
      */
@@ -127,7 +128,7 @@ class ProductVariationValue extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param Identity $productVariationId Reference to productVariation
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -135,9 +136,11 @@ class ProductVariationValue extends DataModel
      */
     public function setProductVariationId(Identity $productVariationId)
     {
-        return $this->setProperty('productVariationId', $productVariationId, 'Identity');
+        $this->productVariationId = $productVariationId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to productVariation
      */
@@ -145,33 +148,37 @@ class ProductVariationValue extends DataModel
     {
         return $this->productVariationId;
     }
-
+    
     /**
-     * @param string $ean 
+     * @param string $ean
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setEan($ean)
     {
-        return $this->setProperty('ean', $ean, 'string');
+        $this->ean = $ean;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
     public function getEan()
     {
         return $this->ean;
     }
-
+    
     /**
      * @param double $extraWeight Optional variation extra weight
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setExtraWeight($extraWeight)
     {
-        return $this->setProperty('extraWeight', $extraWeight, 'double');
+        $this->extraWeight = $extraWeight;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Optional variation extra weight
      */
@@ -179,16 +186,18 @@ class ProductVariationValue extends DataModel
     {
         return $this->extraWeight;
     }
-
+    
     /**
      * @param string $sku Optional Stock Keeping Unit
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setSku($sku)
     {
-        return $this->setProperty('sku', $sku, 'string');
+        $this->sku = $sku;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional Stock Keeping Unit
      */
@@ -196,16 +205,18 @@ class ProductVariationValue extends DataModel
     {
         return $this->sku;
     }
-
+    
     /**
      * @param integer $sort Optional sort number
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setSort($sort)
     {
-        return $this->setProperty('sort', $sort, 'integer');
+        $this->sort = $sort;
+        
+        return $this;
     }
-
+    
     /**
      * @return integer Optional sort number
      */
@@ -213,16 +224,18 @@ class ProductVariationValue extends DataModel
     {
         return $this->sort;
     }
-
+    
     /**
      * @param double $stockLevel Optional stock level
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setStockLevel($stockLevel)
     {
-        return $this->setProperty('stockLevel', $stockLevel, 'double');
+        $this->stockLevel = $stockLevel;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Optional stock level
      */
@@ -230,7 +243,7 @@ class ProductVariationValue extends DataModel
     {
         return $this->stockLevel;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\ProductVariationValueExtraCharge $extraCharge
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -238,6 +251,7 @@ class ProductVariationValue extends DataModel
     public function addExtraCharge(\jtl\Connector\Model\ProductVariationValueExtraCharge $extraCharge)
     {
         $this->extraCharges[] = $extraCharge;
+        
         return $this;
     }
     
@@ -248,6 +262,7 @@ class ProductVariationValue extends DataModel
     public function setExtraCharges(array $extraCharges)
     {
         $this->extraCharges = $extraCharges;
+        
         return $this;
     }
     
@@ -258,16 +273,17 @@ class ProductVariationValue extends DataModel
     {
         return $this->extraCharges;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function clearExtraCharges()
     {
-        $this->extraCharges = array();
+        $this->extraCharges = [];
+        
         return $this;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\ProductVariationValueI18n $i18n
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -275,6 +291,7 @@ class ProductVariationValue extends DataModel
     public function addI18n(\jtl\Connector\Model\ProductVariationValueI18n $i18n)
     {
         $this->i18ns[] = $i18n;
+        
         return $this;
     }
     
@@ -285,6 +302,7 @@ class ProductVariationValue extends DataModel
     public function setI18ns(array $i18ns)
     {
         $this->i18ns = $i18ns;
+        
         return $this;
     }
     
@@ -295,16 +313,17 @@ class ProductVariationValue extends DataModel
     {
         return $this->i18ns;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function clearI18ns()
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
+        
         return $this;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\ProductVariationValueInvisibility $invisibility
      * @return \jtl\Connector\Model\ProductVariationValue
@@ -312,6 +331,7 @@ class ProductVariationValue extends DataModel
     public function addInvisibility(\jtl\Connector\Model\ProductVariationValueInvisibility $invisibility)
     {
         $this->invisibilities[] = $invisibility;
+        
         return $this;
     }
     
@@ -322,6 +342,7 @@ class ProductVariationValue extends DataModel
     public function setInvisibilities(array $invisibilities)
     {
         $this->invisibilities = $invisibilities;
+        
         return $this;
     }
     
@@ -332,13 +353,14 @@ class ProductVariationValue extends DataModel
     {
         return $this->invisibilities;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function clearInvisibilities()
     {
-        $this->invisibilities = array();
+        $this->invisibilities = [];
+        
         return $this;
     }
 }

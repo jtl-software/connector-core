@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductVariationValueInvisibility extends DataModel
@@ -28,7 +27,7 @@ class ProductVariationValueInvisibility extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-
+    
     /**
      * @var Identity Reference to productVariationValue to hide from customerGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class ProductVariationValueInvisibility extends DataModel
      * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
      */
     protected $productVariationValueId = null;
-
+    
     /**
      * Constructor
      */
@@ -45,7 +44,7 @@ class ProductVariationValueInvisibility extends DataModel
         $this->customerGroupId = new Identity();
         $this->productVariationValueId = new Identity();
     }
-
+    
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ProductVariationValueInvisibility
@@ -53,9 +52,11 @@ class ProductVariationValueInvisibility extends DataModel
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        $this->customerGroupId = $customerGroupId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to customerGroup
      */
@@ -63,7 +64,7 @@ class ProductVariationValueInvisibility extends DataModel
     {
         return $this->customerGroupId;
     }
-
+    
     /**
      * @param Identity $productVariationValueId Reference to productVariationValue to hide from customerGroup
      * @return \jtl\Connector\Model\ProductVariationValueInvisibility
@@ -71,9 +72,11 @@ class ProductVariationValueInvisibility extends DataModel
      */
     public function setProductVariationValueId(Identity $productVariationValueId)
     {
-        return $this->setProperty('productVariationValueId', $productVariationValueId, 'Identity');
+        $this->productVariationValueId = $productVariationValueId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to productVariationValue to hide from customerGroup
      */

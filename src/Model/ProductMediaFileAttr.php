@@ -16,27 +16,26 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductMediaFileAttr extends DataModel
 {
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("productMediaFileId")
      * @Serializer\Accessor(getter="getProductMediaFileId",setter="setProductMediaFileId")
      */
     protected $productMediaFileId = null;
-
+    
     /**
      * @var \jtl\Connector\Model\ProductMediaFileAttrI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductMediaFileAttrI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
-
+    protected $i18ns = [];
+    
     /**
      * Constructor
      */
@@ -44,25 +43,27 @@ class ProductMediaFileAttr extends DataModel
     {
         $this->productMediaFileId = new Identity();
     }
-
+    
     /**
-     * @param Identity $productMediaFileId 
+     * @param Identity $productMediaFileId
      * @return \jtl\Connector\Model\ProductMediaFileAttr
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductMediaFileId(Identity $productMediaFileId)
     {
-        return $this->setProperty('productMediaFileId', $productMediaFileId, 'Identity');
+        $this->productMediaFileId = $productMediaFileId;
+        
+        return $this;
     }
-
+    
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getProductMediaFileId()
     {
         return $this->productMediaFileId;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\ProductMediaFileAttrI18n $i18n
      * @return \jtl\Connector\Model\ProductMediaFileAttr
@@ -70,6 +71,7 @@ class ProductMediaFileAttr extends DataModel
     public function addI18n(\jtl\Connector\Model\ProductMediaFileAttrI18n $i18n)
     {
         $this->i18ns[] = $i18n;
+        
         return $this;
     }
     
@@ -80,6 +82,7 @@ class ProductMediaFileAttr extends DataModel
     public function setI18ns(array $i18ns)
     {
         $this->i18ns = $i18ns;
+        
         return $this;
     }
     
@@ -90,13 +93,14 @@ class ProductMediaFileAttr extends DataModel
     {
         return $this->i18ns;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\ProductMediaFileAttr
      */
     public function clearI18ns()
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
+        
         return $this;
     }
 }

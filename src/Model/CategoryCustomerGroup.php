@@ -60,7 +60,9 @@ class CategoryCustomerGroup extends DataModel
      */
     public function setCategoryId(Identity $categoryId): CategoryCustomerGroup
     {
-        return $this->setProperty('categoryId', $categoryId, 'Identity');
+        $this->categoryId = $categoryId;
+        
+        return $this;
     }
     
     /**
@@ -78,7 +80,9 @@ class CategoryCustomerGroup extends DataModel
      */
     public function setCustomerGroupId(Identity $customerGroupId): CategoryCustomerGroup
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        $this->customerGroupId = $customerGroupId;
+        
+        return $this;
     }
     
     /**
@@ -95,7 +99,9 @@ class CategoryCustomerGroup extends DataModel
      */
     public function setDiscount(float $discount): CategoryCustomerGroup
     {
-        return $this->setProperty('discount', $discount, 'double');
+        $this->discount = $discount;
+        
+        return $this;
     }
     
     /**

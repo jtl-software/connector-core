@@ -11,31 +11,29 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductStockLevel extends DataModel
 {
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-
+    
     /**
-     * @var double 
+     * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("stockLevel")
      * @Serializer\Accessor(getter="getStockLevel",setter="setStockLevel")
      */
     protected $stockLevel = 0.0;
-
+    
     /**
      * Constructor
      */
@@ -43,36 +41,40 @@ class ProductStockLevel extends DataModel
     {
         $this->productId = new Identity();
     }
-
+    
     /**
-     * @param Identity $productId 
+     * @param Identity $productId
      * @return \jtl\Connector\Model\ProductStockLevel
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        $this->productId = $productId;
+        
+        return $this;
     }
-
+    
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getProductId()
     {
         return $this->productId;
     }
-
+    
     /**
-     * @param double $stockLevel 
+     * @param double $stockLevel
      * @return \jtl\Connector\Model\ProductStockLevel
      */
     public function setStockLevel($stockLevel)
     {
-        return $this->setProperty('stockLevel', $stockLevel, 'double');
+        $this->stockLevel = $stockLevel;
+        
+        return $this;
     }
-
+    
     /**
-     * @return double 
+     * @return double
      */
     public function getStockLevel()
     {

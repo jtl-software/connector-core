@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductInvisibility extends DataModel
@@ -28,7 +27,7 @@ class ProductInvisibility extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-
+    
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class ProductInvisibility extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-
+    
     /**
      * Constructor
      */
@@ -45,7 +44,7 @@ class ProductInvisibility extends DataModel
         $this->customerGroupId = new Identity();
         $this->productId = new Identity();
     }
-
+    
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ProductInvisibility
@@ -53,9 +52,11 @@ class ProductInvisibility extends DataModel
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        $this->customerGroupId = $customerGroupId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to customerGroup
      */
@@ -63,7 +64,7 @@ class ProductInvisibility extends DataModel
     {
         return $this->customerGroupId;
     }
-
+    
     /**
      * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductInvisibility
@@ -71,9 +72,11 @@ class ProductInvisibility extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        $this->productId = $productId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to product
      */

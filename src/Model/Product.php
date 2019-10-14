@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class Product extends DataModel
@@ -28,7 +27,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getBasePriceUnitId",setter="setBasePriceUnitId")
      */
     protected $basePriceUnitId = null;
-
+    
     /**
      * @var Identity Unique product id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var Identity Reference to manufacturer
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -44,7 +43,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getManufacturerId",setter="setManufacturerId")
      */
     protected $manufacturerId = null;
-
+    
     /**
      * @var Identity Reference to master product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -52,7 +51,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getMasterProductId",setter="setMasterProductId")
      */
     protected $masterProductId = null;
-
+    
     /**
      * @var Identity Optional reference to measurement unit id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -60,7 +59,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getMeasurementUnitId",setter="setMeasurementUnitId")
      */
     protected $measurementUnitId = null;
-
+    
     /**
      * @var Identity Optional reference to partsList
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -68,7 +67,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getPartsListId",setter="setPartsListId")
      */
     protected $partsListId = null;
-
+    
     /**
      * @var Identity Optional reference to productType
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -76,7 +75,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getProductTypeId",setter="setProductTypeId")
      */
     protected $productTypeId = null;
-
+    
     /**
      * @var Identity Reference to shippingClass
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -84,7 +83,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getShippingClassId",setter="setShippingClassId")
      */
     protected $shippingClassId = null;
-
+    
     /**
      * @var Identity Reference to unit
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -92,7 +91,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getUnitId",setter="setUnitId")
      */
     protected $unitId = null;
-
+    
     /**
      * @var string Optional Amazon Standard Identification Number
      * @Serializer\Type("string")
@@ -100,15 +99,15 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getAsin",setter="setAsin")
      */
     protected $asin = '';
-
+    
     /**
-     * @var DateTime Optional available from date. Specify a date, upon when product can be purchased. 
+     * @var DateTime Optional available from date. Specify a date, upon when product can be purchased.
      * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("availableFrom")
      * @Serializer\Accessor(getter="getAvailableFrom",setter="setAvailableFrom")
      */
     protected $availableFrom = null;
-
+    
     /**
      * @var double Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
      * @Serializer\Type("double")
@@ -116,15 +115,15 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getBasePriceDivisor",setter="setBasePriceDivisor")
      */
     protected $basePriceDivisor = 0.0;
-
+    
     /**
-     * @var double 
+     * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("basePriceFactor")
      * @Serializer\Accessor(getter="getBasePriceFactor",setter="setBasePriceFactor")
      */
     protected $basePriceFactor = 0.0;
-
+    
     /**
      * @var double Optional base price quantity
      * @Serializer\Type("double")
@@ -132,23 +131,23 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getBasePriceQuantity",setter="setBasePriceQuantity")
      */
     protected $basePriceQuantity = 0.0;
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("basePriceUnitCode")
      * @Serializer\Accessor(getter="getBasePriceUnitCode",setter="setBasePriceUnitCode")
      */
     protected $basePriceUnitCode = '';
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("basePriceUnitName")
      * @Serializer\Accessor(getter="getBasePriceUnitName",setter="setBasePriceUnitName")
      */
     protected $basePriceUnitName = '';
-
+    
     /**
      * @var boolean Optional: Set to true to display base price / unit pricing measure
      * @Serializer\Type("boolean")
@@ -156,7 +155,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getConsiderBasePrice",setter="setConsiderBasePrice")
      */
     protected $considerBasePrice = false;
-
+    
     /**
      * @var boolean Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
      * @Serializer\Type("boolean")
@@ -164,15 +163,15 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getConsiderStock",setter="setConsiderStock")
      */
     protected $considerStock = false;
-
+    
     /**
-     * @var boolean Optional: Consider stock levels of productVariations. Same as considerStock but for variations. 
+     * @var boolean Optional: Consider stock levels of productVariations. Same as considerStock but for variations.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("considerVariationStock")
      * @Serializer\Accessor(getter="getConsiderVariationStock",setter="setConsiderVariationStock")
      */
     protected $considerVariationStock = false;
-
+    
     /**
      * @var DateTime Creation date
      * @Serializer\Type("DateTime")
@@ -180,7 +179,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
     protected $creationDate = null;
-
+    
     /**
      * @var string Optional European Article Number (EAN)
      * @Serializer\Type("string")
@@ -188,7 +187,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getEan",setter="setEan")
      */
     protected $ean = '';
-
+    
     /**
      * @var string Optional Ebay product ID
      * @Serializer\Type("string")
@@ -196,7 +195,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getEpid",setter="setEpid")
      */
     protected $epid = '';
-
+    
     /**
      * @var string Optional Hazard identifier, encodes general hazard class und subdivision
      * @Serializer\Type("string")
@@ -204,7 +203,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getHazardIdNumber",setter="setHazardIdNumber")
      */
     protected $hazardIdNumber = '';
-
+    
     /**
      * @var double Optional product height
      * @Serializer\Type("double")
@@ -212,31 +211,31 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getHeight",setter="setHeight")
      */
     protected $height = 0.0;
-
+    
     /**
-     * @var boolean 
+     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isActive")
      * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
      */
     protected $isActive = false;
-
+    
     /**
-     * @var boolean 
+     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isBatch")
      * @Serializer\Accessor(getter="getIsBatch",setter="setIsBatch")
      */
     protected $isBatch = false;
-
+    
     /**
-     * @var boolean 
+     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isBestBefore")
      * @Serializer\Accessor(getter="getIsBestBefore",setter="setIsBestBefore")
      */
     protected $isBestBefore = false;
-
+    
     /**
      * @var string Optional International Standard Book Number
      * @Serializer\Type("string")
@@ -244,7 +243,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getIsbn",setter="setIsbn")
      */
     protected $isbn = '';
-
+    
     /**
      * @var boolean Optional: Set to true to allow non-integer quantites for purchase
      * @Serializer\Type("boolean")
@@ -252,7 +251,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getIsDivisible",setter="setIsDivisible")
      */
     protected $isDivisible = false;
-
+    
     /**
      * @var boolean Optional flag if product is master product
      * @Serializer\Type("boolean")
@@ -260,7 +259,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getIsMasterProduct",setter="setIsMasterProduct")
      */
     protected $isMasterProduct = false;
-
+    
     /**
      * @var boolean Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
      * @Serializer\Type("boolean")
@@ -268,15 +267,15 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getisNewProduct",setter="setisNewProduct")
      */
     protected $isNewProduct = false;
-
+    
     /**
-     * @var boolean 
+     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isSerialNumber")
      * @Serializer\Accessor(getter="getIsSerialNumber",setter="setIsSerialNumber")
      */
     protected $isSerialNumber = false;
-
+    
     /**
      * @var boolean Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
      * @Serializer\Type("boolean")
@@ -284,7 +283,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getIsTopProduct",setter="setIsTopProduct")
      */
     protected $isTopProduct = false;
-
+    
     /**
      * @var string Optional internal keywords and synonyms for product
      * @Serializer\Type("string")
@@ -292,7 +291,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getKeywords",setter="setKeywords")
      */
     protected $keywords = '';
-
+    
     /**
      * @var double Optional product length
      * @Serializer\Type("double")
@@ -300,7 +299,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getLength",setter="setLength")
      */
     protected $length = 0.0;
-
+    
     /**
      * @var string Optional manufacturer number
      * @Serializer\Type("string")
@@ -316,7 +315,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getManufacturer",setter="setManufacturer")
      */
     protected $manufacturer = null;
-
+    
     /**
      * @var double Optional measurement quantity
      * @Serializer\Type("double")
@@ -324,41 +323,41 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getMeasurementQuantity",setter="setMeasurementQuantity")
      */
     protected $measurementQuantity = 0.0;
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("measurementUnitCode")
      * @Serializer\Accessor(getter="getMeasurementUnitCode",setter="setMeasurementUnitCode")
      */
     protected $measurementUnitCode = '';
-
+    
     /**
-     * @var DateTime 
+     * @var DateTime
      * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("minBestBeforeDate")
      * @Serializer\Accessor(getter="getMinBestBeforeDate",setter="setMinBestBeforeDate")
      */
     protected $minBestBeforeDate = null;
-
+    
     /**
-     * @var double 
+     * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("minimumOrderQuantity")
      * @Serializer\Accessor(getter="getMinimumOrderQuantity",setter="setMinimumOrderQuantity")
      */
     protected $minimumOrderQuantity = 0.0;
-
+    
     /**
-     * @var double 
+     * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("minimumQuantity")
      * @Serializer\Accessor(getter="getMinimumQuantity",setter="setMinimumQuantity")
      */
     protected $minimumQuantity = 0.0;
-
+    
     /**
-     * @var DateTime 
+     * @var DateTime
      * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("modified")
      * @Serializer\Accessor(getter="getModified",setter="setModified")
@@ -372,7 +371,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getNewReleaseDate",setter="setNewReleaseDate")
      */
     protected $newReleaseDate = null;
-
+    
     /**
      * @var DateTime Contains the date of the next available inflow.
      * @Serializer\Type("DateTime")
@@ -380,7 +379,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getNextAvailableInflowDate",setter="setNextAvailableInflowDate")
      */
     protected $nextAvailableInflowDate = null;
-
+    
     /**
      * @var double Contains the quantity of the next available inflow.
      * @Serializer\Type("double")
@@ -388,7 +387,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getNextAvailableInflowQuantity",setter="setNextAvailableInflowQuantity")
      */
     protected $nextAvailableInflowQuantity = 0.0;
-
+    
     /**
      * @var string Optional internal product note
      * @Serializer\Type("string")
@@ -396,7 +395,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getNote",setter="setNote")
      */
     protected $note = '';
-
+    
     /**
      * @var string Optional Origin country
      * @Serializer\Type("string")
@@ -404,7 +403,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getOriginCountry",setter="setOriginCountry")
      */
     protected $originCountry = '';
-
+    
     /**
      * @var double Optional: Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      * @Serializer\Type("double")
@@ -412,15 +411,15 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getPackagingQuantity",setter="setPackagingQuantity")
      */
     protected $packagingQuantity = 0.0;
-
+    
     /**
-     * @var boolean Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true. 
+     * @var boolean Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("permitNegativeStock")
      * @Serializer\Accessor(getter="getPermitNegativeStock",setter="setPermitNegativeStock")
      */
     protected $permitNegativeStock = false;
-
+    
     /**
      * @var double Productweight exclusive packaging
      * @Serializer\Type("double")
@@ -428,23 +427,23 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getProductWeight",setter="setProductWeight")
      */
     protected $productWeight = 0.0;
-
+    
     /**
-     * @var double 
+     * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("purchasePrice")
      * @Serializer\Accessor(getter="getPurchasePrice",setter="setPurchasePrice")
      */
     protected $purchasePrice = 0.0;
-
+    
     /**
-     * @var double Optional recommended retail price (gross) 
+     * @var double Optional recommended retail price (gross)
      * @Serializer\Type("double")
      * @Serializer\SerializedName("recommendedRetailPrice")
      * @Serializer\Accessor(getter="getRecommendedRetailPrice",setter="setRecommendedRetailPrice")
      */
     protected $recommendedRetailPrice = 0.0;
-
+    
     /**
      * @var string Optional serial number
      * @Serializer\Type("string")
@@ -452,7 +451,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getSerialNumber",setter="setSerialNumber")
      */
     protected $serialNumber = '';
-
+    
     /**
      * @var double Productweight inclusive packaging
      * @Serializer\Type("double")
@@ -460,7 +459,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getShippingWeight",setter="setShippingWeight")
      */
     protected $shippingWeight = 0.0;
-
+    
     /**
      * @var string Optional stock keeping unit identifier
      * @Serializer\Type("string")
@@ -468,7 +467,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getSku",setter="setSku")
      */
     protected $sku = '';
-
+    
     /**
      * @var integer Optional sort number for product sorting in lists
      * @Serializer\Type("integer")
@@ -476,31 +475,31 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
-
+    
     /**
-     * @var ProductStockLevel 
+     * @var ProductStockLevel
      * @Serializer\Type("jtl\Connector\Model\ProductStockLevel")
      * @Serializer\SerializedName("stockLevel")
      * @Serializer\Accessor(getter="getStockLevel",setter="setStockLevel")
      */
     protected $stockLevel = null;
-
+    
     /**
-     * @var integer 
+     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("supplierDeliveryTime")
      * @Serializer\Accessor(getter="getSupplierDeliveryTime",setter="setSupplierDeliveryTime")
      */
     protected $supplierDeliveryTime = 0;
-
+    
     /**
-     * @var double 
+     * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("supplierStockLevel")
      * @Serializer\Accessor(getter="getSupplierStockLevel",setter="setSupplierStockLevel")
      */
     protected $supplierStockLevel = 0.0;
-
+    
     /**
      * @var string Optional TARIC
      * @Serializer\Type("string")
@@ -508,7 +507,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getTaric",setter="setTaric")
      */
     protected $taric = '';
-
+    
     /**
      * @var string Optional UN number, used to define hazardous properties
      * @Serializer\Type("string")
@@ -516,7 +515,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getUnNumber",setter="setUnNumber")
      */
     protected $unNumber = '';
-
+    
     /**
      * @var string Optional Universal Product Code
      * @Serializer\Type("string")
@@ -524,15 +523,15 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getUpc",setter="setUpc")
      */
     protected $upc = '';
-
+    
     /**
-     * @var double 
+     * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("vat")
      * @Serializer\Accessor(getter="getVat",setter="setVat")
      */
     protected $vat = 0.0;
-
+    
     /**
      * @var double Optional product width
      * @Serializer\Type("double")
@@ -540,135 +539,135 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getWidth",setter="setWidth")
      */
     protected $width = 0.0;
-
+    
     /**
      * @var \jtl\Connector\Model\ProductAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductAttr>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
-    protected $attributes = array();
-
+    protected $attributes = [];
+    
     /**
      * @var \jtl\Connector\Model\Product2Category[]
      * @Serializer\Type("array<jtl\Connector\Model\Product2Category>")
      * @Serializer\SerializedName("categories")
      * @Serializer\AccessType("reflection")
      */
-    protected $categories = array();
-
+    protected $categories = [];
+    
     /**
      * @var \jtl\Connector\Model\ProductChecksum[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductChecksum>")
      * @Serializer\SerializedName("checksums")
      * @Serializer\AccessType("reflection")
      */
-    protected $checksums = array();
-
+    protected $checksums = [];
+    
     /**
      * @var \jtl\Connector\Model\ProductConfigGroup[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductConfigGroup>")
      * @Serializer\SerializedName("configGroups")
      * @Serializer\AccessType("reflection")
      */
-    protected $configGroups = array();
-
+    protected $configGroups = [];
+    
     /**
      * @var \jtl\Connector\Model\CustomerGroupPackagingQuantity[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerGroupPackagingQuantity>")
      * @Serializer\SerializedName("customerGroupPackagingQuantities")
      * @Serializer\AccessType("reflection")
      */
-    protected $customerGroupPackagingQuantities = array();
-
+    protected $customerGroupPackagingQuantities = [];
+    
     /**
      * @var \jtl\Connector\Model\ProductFileDownload[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductFileDownload>")
      * @Serializer\SerializedName("fileDownloads")
      * @Serializer\AccessType("reflection")
      */
-    protected $fileDownloads = array();
-
+    protected $fileDownloads = [];
+    
     /**
      * @var \jtl\Connector\Model\ProductI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
-
+    protected $i18ns = [];
+    
     /**
      * @var \jtl\Connector\Model\ProductInvisibility[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductInvisibility>")
      * @Serializer\SerializedName("invisibilities")
      * @Serializer\AccessType("reflection")
      */
-    protected $invisibilities = array();
-
+    protected $invisibilities = [];
+    
     /**
      * @var \jtl\Connector\Model\ProductMediaFile[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductMediaFile>")
      * @Serializer\SerializedName("mediaFiles")
      * @Serializer\AccessType("reflection")
      */
-    protected $mediaFiles = array();
-
+    protected $mediaFiles = [];
+    
     /**
      * @var \jtl\Connector\Model\ProductPartsList[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductPartsList>")
      * @Serializer\SerializedName("partsLists")
      * @Serializer\AccessType("reflection")
      */
-    protected $partsLists = array();
-
+    protected $partsLists = [];
+    
     /**
      * @var \jtl\Connector\Model\ProductPrice[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductPrice>")
      * @Serializer\SerializedName("prices")
      * @Serializer\AccessType("reflection")
      */
-    protected $prices = array();
-
+    protected $prices = [];
+    
     /**
      * @var \jtl\Connector\Model\ProductSpecialPrice[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductSpecialPrice>")
      * @Serializer\SerializedName("specialPrices")
      * @Serializer\AccessType("reflection")
      */
-    protected $specialPrices = array();
-
+    protected $specialPrices = [];
+    
     /**
      * @var \jtl\Connector\Model\ProductSpecific[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductSpecific>")
      * @Serializer\SerializedName("specifics")
      * @Serializer\AccessType("reflection")
      */
-    protected $specifics = array();
-
+    protected $specifics = [];
+    
     /**
      * @var \jtl\Connector\Model\ProductVarCombination[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVarCombination>")
      * @Serializer\SerializedName("varCombinations")
      * @Serializer\AccessType("reflection")
      */
-    protected $varCombinations = array();
-
+    protected $varCombinations = [];
+    
     /**
      * @var \jtl\Connector\Model\ProductVariation[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariation>")
      * @Serializer\SerializedName("variations")
      * @Serializer\AccessType("reflection")
      */
-    protected $variations = array();
-
+    protected $variations = [];
+    
     /**
      * @var \jtl\Connector\Model\ProductWarehouseInfo[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductWarehouseInfo>")
      * @Serializer\SerializedName("warehouseInfo")
      * @Serializer\AccessType("reflection")
      */
-    protected $warehouseInfo = array();
-
+    protected $warehouseInfo = [];
+    
     /**
      * Constructor
      */
@@ -684,7 +683,7 @@ class Product extends DataModel
         $this->basePriceUnitId = new Identity();
         $this->unitId = new Identity();
     }
-
+    
     /**
      * @param Identity $basePriceUnitId Optional reference to basePriceUnit
      * @return \jtl\Connector\Model\Product
@@ -692,9 +691,11 @@ class Product extends DataModel
      */
     public function setBasePriceUnitId(Identity $basePriceUnitId)
     {
-        return $this->setProperty('basePriceUnitId', $basePriceUnitId, 'Identity');
+        $this->basePriceUnitId = $basePriceUnitId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Optional reference to basePriceUnit
      */
@@ -702,7 +703,7 @@ class Product extends DataModel
     {
         return $this->basePriceUnitId;
     }
-
+    
     /**
      * @param Identity $id Unique product id
      * @return \jtl\Connector\Model\Product
@@ -710,9 +711,11 @@ class Product extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique product id
      */
@@ -720,7 +723,7 @@ class Product extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param Identity $manufacturerId Reference to manufacturer
      * @return \jtl\Connector\Model\Product
@@ -728,9 +731,11 @@ class Product extends DataModel
      */
     public function setManufacturerId(Identity $manufacturerId)
     {
-        return $this->setProperty('manufacturerId', $manufacturerId, 'Identity');
+        $this->manufacturerId = $manufacturerId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to manufacturer
      */
@@ -738,7 +743,7 @@ class Product extends DataModel
     {
         return $this->manufacturerId;
     }
-
+    
     /**
      * @param Identity $masterProductId Reference to master product
      * @return \jtl\Connector\Model\Product
@@ -746,9 +751,11 @@ class Product extends DataModel
      */
     public function setMasterProductId(Identity $masterProductId)
     {
-        return $this->setProperty('masterProductId', $masterProductId, 'Identity');
+        $this->masterProductId = $masterProductId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to master product
      */
@@ -756,7 +763,7 @@ class Product extends DataModel
     {
         return $this->masterProductId;
     }
-
+    
     /**
      * @param Identity $measurementUnitId Optional reference to measurement unit id
      * @return \jtl\Connector\Model\Product
@@ -764,9 +771,11 @@ class Product extends DataModel
      */
     public function setMeasurementUnitId(Identity $measurementUnitId)
     {
-        return $this->setProperty('measurementUnitId', $measurementUnitId, 'Identity');
+        $this->measurementUnitId = $measurementUnitId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Optional reference to measurement unit id
      */
@@ -774,7 +783,7 @@ class Product extends DataModel
     {
         return $this->measurementUnitId;
     }
-
+    
     /**
      * @param Identity $partsListId Optional reference to partsList
      * @return \jtl\Connector\Model\Product
@@ -782,9 +791,11 @@ class Product extends DataModel
      */
     public function setPartsListId(Identity $partsListId)
     {
-        return $this->setProperty('partsListId', $partsListId, 'Identity');
+        $this->partsListId = $partsListId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Optional reference to partsList
      */
@@ -792,7 +803,7 @@ class Product extends DataModel
     {
         return $this->partsListId;
     }
-
+    
     /**
      * @param Identity $productTypeId Optional reference to productType
      * @return \jtl\Connector\Model\Product
@@ -800,9 +811,11 @@ class Product extends DataModel
      */
     public function setProductTypeId(Identity $productTypeId)
     {
-        return $this->setProperty('productTypeId', $productTypeId, 'Identity');
+        $this->productTypeId = $productTypeId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Optional reference to productType
      */
@@ -810,7 +823,7 @@ class Product extends DataModel
     {
         return $this->productTypeId;
     }
-
+    
     /**
      * @param Identity $shippingClassId Reference to shippingClass
      * @return \jtl\Connector\Model\Product
@@ -818,9 +831,11 @@ class Product extends DataModel
      */
     public function setShippingClassId(Identity $shippingClassId)
     {
-        return $this->setProperty('shippingClassId', $shippingClassId, 'Identity');
+        $this->shippingClassId = $shippingClassId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to shippingClass
      */
@@ -828,7 +843,7 @@ class Product extends DataModel
     {
         return $this->shippingClassId;
     }
-
+    
     /**
      * @param Identity $unitId Reference to unit
      * @return \jtl\Connector\Model\Product
@@ -836,9 +851,11 @@ class Product extends DataModel
      */
     public function setUnitId(Identity $unitId)
     {
-        return $this->setProperty('unitId', $unitId, 'Identity');
+        $this->unitId = $unitId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to unit
      */
@@ -846,16 +863,18 @@ class Product extends DataModel
     {
         return $this->unitId;
     }
-
+    
     /**
      * @param string $asin Optional Amazon Standard Identification Number
      * @return \jtl\Connector\Model\Product
      */
     public function setAsin($asin)
     {
-        return $this->setProperty('asin', $asin, 'string');
+        $this->asin = $asin;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional Amazon Standard Identification Number
      */
@@ -863,34 +882,38 @@ class Product extends DataModel
     {
         return $this->asin;
     }
-
+    
     /**
-     * @param DateTime $availableFrom Optional available from date. Specify a date, upon when product can be purchased. 
+     * @param DateTime $availableFrom Optional available from date. Specify a date, upon when product can be purchased.
      * @return \jtl\Connector\Model\Product
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
     public function setAvailableFrom(DateTime $availableFrom = null)
     {
-        return $this->setProperty('availableFrom', $availableFrom, 'DateTime');
+        $this->availableFrom = $availableFrom;
+        
+        return $this;
     }
-
+    
     /**
-     * @return DateTime Optional available from date. Specify a date, upon when product can be purchased. 
+     * @return DateTime Optional available from date. Specify a date, upon when product can be purchased.
      */
     public function getAvailableFrom()
     {
         return $this->availableFrom;
     }
-
+    
     /**
      * @param double $basePriceDivisor Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
      * @return \jtl\Connector\Model\Product
      */
     public function setBasePriceDivisor($basePriceDivisor)
     {
-        return $this->setProperty('basePriceDivisor', $basePriceDivisor, 'double');
+        $this->basePriceDivisor = $basePriceDivisor;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
      */
@@ -898,33 +921,37 @@ class Product extends DataModel
     {
         return $this->basePriceDivisor;
     }
-
+    
     /**
-     * @param double $basePriceFactor 
+     * @param double $basePriceFactor
      * @return \jtl\Connector\Model\Product
      */
     public function setBasePriceFactor($basePriceFactor)
     {
-        return $this->setProperty('basePriceFactor', $basePriceFactor, 'double');
+        $this->basePriceFactor = $basePriceFactor;
+        
+        return $this;
     }
-
+    
     /**
-     * @return double 
+     * @return double
      */
     public function getBasePriceFactor()
     {
         return $this->basePriceFactor;
     }
-
+    
     /**
      * @param double $basePriceQuantity Optional base price quantity
      * @return \jtl\Connector\Model\Product
      */
     public function setBasePriceQuantity($basePriceQuantity)
     {
-        return $this->setProperty('basePriceQuantity', $basePriceQuantity, 'double');
+        $this->basePriceQuantity = $basePriceQuantity;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Optional base price quantity
      */
@@ -932,50 +959,56 @@ class Product extends DataModel
     {
         return $this->basePriceQuantity;
     }
-
+    
     /**
-     * @param string $basePriceUnitCode 
+     * @param string $basePriceUnitCode
      * @return \jtl\Connector\Model\Product
      */
     public function setBasePriceUnitCode($basePriceUnitCode)
     {
-        return $this->setProperty('basePriceUnitCode', $basePriceUnitCode, 'string');
+        $this->basePriceUnitCode = $basePriceUnitCode;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
     public function getBasePriceUnitCode()
     {
         return $this->basePriceUnitCode;
     }
-
+    
     /**
-     * @param string $basePriceUnitName 
+     * @param string $basePriceUnitName
      * @return \jtl\Connector\Model\Product
      */
     public function setBasePriceUnitName($basePriceUnitName)
     {
-        return $this->setProperty('basePriceUnitName', $basePriceUnitName, 'string');
+        $this->basePriceUnitName = $basePriceUnitName;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
     public function getBasePriceUnitName()
     {
         return $this->basePriceUnitName;
     }
-
+    
     /**
      * @param boolean $considerBasePrice Optional: Set to true to display base price / unit pricing measure
      * @return \jtl\Connector\Model\Product
      */
     public function setConsiderBasePrice($considerBasePrice)
     {
-        return $this->setProperty('considerBasePrice', $considerBasePrice, 'boolean');
+        $this->considerBasePrice = $considerBasePrice;
+        
+        return $this;
     }
-
+    
     /**
      * @return boolean Optional: Set to true to display base price / unit pricing measure
      */
@@ -983,16 +1016,18 @@ class Product extends DataModel
     {
         return $this->considerBasePrice;
     }
-
+    
     /**
      * @param boolean $considerStock Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
      * @return \jtl\Connector\Model\Product
      */
     public function setConsiderStock($considerStock)
     {
-        return $this->setProperty('considerStock', $considerStock, 'boolean');
+        $this->considerStock = $considerStock;
+        
+        return $this;
     }
-
+    
     /**
      * @return boolean Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
      */
@@ -1000,24 +1035,26 @@ class Product extends DataModel
     {
         return $this->considerStock;
     }
-
+    
     /**
-     * @param boolean $considerVariationStock Optional: Consider stock levels of productVariations. Same as considerStock but for variations. 
+     * @param boolean $considerVariationStock Optional: Consider stock levels of productVariations. Same as considerStock but for variations.
      * @return \jtl\Connector\Model\Product
      */
     public function setConsiderVariationStock($considerVariationStock)
     {
-        return $this->setProperty('considerVariationStock', $considerVariationStock, 'boolean');
+        $this->considerVariationStock = $considerVariationStock;
+        
+        return $this;
     }
-
+    
     /**
-     * @return boolean Optional: Consider stock levels of productVariations. Same as considerStock but for variations. 
+     * @return boolean Optional: Consider stock levels of productVariations. Same as considerStock but for variations.
      */
     public function getConsiderVariationStock()
     {
         return $this->considerVariationStock;
     }
-
+    
     /**
      * @param DateTime $creationDate Creation date
      * @return \jtl\Connector\Model\Product
@@ -1025,9 +1062,11 @@ class Product extends DataModel
      */
     public function setCreationDate(DateTime $creationDate = null)
     {
-        return $this->setProperty('creationDate', $creationDate, 'DateTime');
+        $this->creationDate = $creationDate;
+        
+        return $this;
     }
-
+    
     /**
      * @return DateTime Creation date
      */
@@ -1035,16 +1074,18 @@ class Product extends DataModel
     {
         return $this->creationDate;
     }
-
+    
     /**
      * @param string $ean Optional European Article Number (EAN)
      * @return \jtl\Connector\Model\Product
      */
     public function setEan($ean)
     {
-        return $this->setProperty('ean', $ean, 'string');
+        $this->ean = $ean;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional European Article Number (EAN)
      */
@@ -1052,16 +1093,18 @@ class Product extends DataModel
     {
         return $this->ean;
     }
-
+    
     /**
      * @param string $epid Optional Ebay product ID
      * @return \jtl\Connector\Model\Product
      */
     public function setEpid($epid)
     {
-        return $this->setProperty('epid', $epid, 'string');
+        $this->epid = $epid;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional Ebay product ID
      */
@@ -1069,16 +1112,18 @@ class Product extends DataModel
     {
         return $this->epid;
     }
-
+    
     /**
      * @param string $hazardIdNumber Optional Hazard identifier, encodes general hazard class und subdivision
      * @return \jtl\Connector\Model\Product
      */
     public function setHazardIdNumber($hazardIdNumber)
     {
-        return $this->setProperty('hazardIdNumber', $hazardIdNumber, 'string');
+        $this->hazardIdNumber = $hazardIdNumber;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional Hazard identifier, encodes general hazard class und subdivision
      */
@@ -1086,16 +1131,18 @@ class Product extends DataModel
     {
         return $this->hazardIdNumber;
     }
-
+    
     /**
      * @param double $height Optional product height
      * @return \jtl\Connector\Model\Product
      */
     public function setHeight($height)
     {
-        return $this->setProperty('height', $height, 'double');
+        $this->height = $height;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Optional product height
      */
@@ -1103,67 +1150,75 @@ class Product extends DataModel
     {
         return $this->height;
     }
-
+    
     /**
-     * @param boolean $isActive 
+     * @param boolean $isActive
      * @return \jtl\Connector\Model\Product
      */
     public function setIsActive($isActive)
     {
-        return $this->setProperty('isActive', $isActive, 'boolean');
+        $this->isActive = $isActive;
+        
+        return $this;
     }
-
+    
     /**
-     * @return boolean 
+     * @return boolean
      */
     public function getIsActive()
     {
         return $this->isActive;
     }
-
+    
     /**
-     * @param boolean $isBatch 
+     * @param boolean $isBatch
      * @return \jtl\Connector\Model\Product
      */
     public function setIsBatch($isBatch)
     {
-        return $this->setProperty('isBatch', $isBatch, 'boolean');
+        $this->isBatch = $isBatch;
+        
+        return $this;
     }
-
+    
     /**
-     * @return boolean 
+     * @return boolean
      */
     public function getIsBatch()
     {
         return $this->isBatch;
     }
-
+    
     /**
-     * @param boolean $isBestBefore 
+     * @param boolean $isBestBefore
      * @return \jtl\Connector\Model\Product
      */
     public function setIsBestBefore($isBestBefore)
     {
-        return $this->setProperty('isBestBefore', $isBestBefore, 'boolean');
+        $this->isBestBefore = $isBestBefore;
+        
+        return $this;
     }
-
+    
     /**
-     * @return boolean 
+     * @return boolean
      */
     public function getIsBestBefore()
     {
         return $this->isBestBefore;
     }
-
+    
     /**
      * @param string $isbn Optional International Standard Book Number
      * @return \jtl\Connector\Model\Product
      */
     public function setIsbn($isbn)
     {
-        return $this->setProperty('isbn', $isbn, 'string');
+        $this->isbn = $isbn;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional International Standard Book Number
      */
@@ -1171,16 +1226,18 @@ class Product extends DataModel
     {
         return $this->isbn;
     }
-
+    
     /**
      * @param boolean $isDivisible Optional: Set to true to allow non-integer quantites for purchase
      * @return \jtl\Connector\Model\Product
      */
     public function setIsDivisible($isDivisible)
     {
-        return $this->setProperty('isDivisible', $isDivisible, 'boolean');
+        $this->isDivisible = $isDivisible;
+        
+        return $this;
     }
-
+    
     /**
      * @return boolean Optional: Set to true to allow non-integer quantites for purchase
      */
@@ -1188,16 +1245,18 @@ class Product extends DataModel
     {
         return $this->isDivisible;
     }
-
+    
     /**
      * @param boolean $isMasterProduct Optional flag if product is master product
      * @return \jtl\Connector\Model\Product
      */
     public function setIsMasterProduct($isMasterProduct)
     {
-        return $this->setProperty('isMasterProduct', $isMasterProduct, 'boolean');
+        $this->isMasterProduct = $isMasterProduct;
+        
+        return $this;
     }
-
+    
     /**
      * @return boolean Optional flag if product is master product
      */
@@ -1205,16 +1264,18 @@ class Product extends DataModel
     {
         return $this->isMasterProduct;
     }
-
+    
     /**
      * @param boolean $isNewProduct Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
      * @return \jtl\Connector\Model\Product
      */
     public function setisNewProduct($isNewProduct)
     {
-        return $this->setProperty('isNewProduct', $isNewProduct, 'boolean');
+        $this->isNewProduct = $isNewProduct;
+        
+        return $this;
     }
-
+    
     /**
      * @return boolean Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
      */
@@ -1222,33 +1283,37 @@ class Product extends DataModel
     {
         return $this->isNewProduct;
     }
-
+    
     /**
-     * @param boolean $isSerialNumber 
+     * @param boolean $isSerialNumber
      * @return \jtl\Connector\Model\Product
      */
     public function setIsSerialNumber($isSerialNumber)
     {
-        return $this->setProperty('isSerialNumber', $isSerialNumber, 'boolean');
+        $this->isSerialNumber = $isSerialNumber;
+        
+        return $this;
     }
-
+    
     /**
-     * @return boolean 
+     * @return boolean
      */
     public function getIsSerialNumber()
     {
         return $this->isSerialNumber;
     }
-
+    
     /**
      * @param boolean $isTopProduct Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
      * @return \jtl\Connector\Model\Product
      */
     public function setIsTopProduct($isTopProduct)
     {
-        return $this->setProperty('isTopProduct', $isTopProduct, 'boolean');
+        $this->isTopProduct = $isTopProduct;
+        
+        return $this;
     }
-
+    
     /**
      * @return boolean Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
      */
@@ -1256,16 +1321,18 @@ class Product extends DataModel
     {
         return $this->isTopProduct;
     }
-
+    
     /**
      * @param string $keywords Optional internal keywords and synonyms for product
      * @return \jtl\Connector\Model\Product
      */
     public function setKeywords($keywords)
     {
-        return $this->setProperty('keywords', $keywords, 'string');
+        $this->keywords = $keywords;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional internal keywords and synonyms for product
      */
@@ -1273,16 +1340,18 @@ class Product extends DataModel
     {
         return $this->keywords;
     }
-
+    
     /**
      * @param double $length Optional product length
      * @return \jtl\Connector\Model\Product
      */
     public function setLength($length)
     {
-        return $this->setProperty('length', $length, 'double');
+        $this->length = $length;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Optional product length
      */
@@ -1290,16 +1359,18 @@ class Product extends DataModel
     {
         return $this->length;
     }
-
+    
     /**
      * @param string $manufacturerNumber Optional manufacturer number
      * @return \jtl\Connector\Model\Product
      */
     public function setManufacturerNumber($manufacturerNumber)
     {
-        return $this->setProperty('manufacturerNumber', $manufacturerNumber, 'string');
+        $this->manufacturerNumber = $manufacturerNumber;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional manufacturer number
      */
@@ -1314,7 +1385,9 @@ class Product extends DataModel
      */
     public function setManufacturer(Manufacturer $manufacturer = null)
     {
-        return $this->setProperty('manufacturer', $manufacturer, 'jtl\Connector\Model\Manufacturer');
+        $this->manufacturer = $manufacturer;
+        
+        return $this;
     }
     
     /**
@@ -1324,16 +1397,18 @@ class Product extends DataModel
     {
         return $this->manufacturer;
     }
-
+    
     /**
      * @param double $measurementQuantity Optional measurement quantity
      * @return \jtl\Connector\Model\Product
      */
     public function setMeasurementQuantity($measurementQuantity)
     {
-        return $this->setProperty('measurementQuantity', $measurementQuantity, 'double');
+        $this->measurementQuantity = $measurementQuantity;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Optional measurement quantity
      */
@@ -1341,88 +1416,98 @@ class Product extends DataModel
     {
         return $this->measurementQuantity;
     }
-
+    
     /**
-     * @param string $measurementUnitCode 
+     * @param string $measurementUnitCode
      * @return \jtl\Connector\Model\Product
      */
     public function setMeasurementUnitCode($measurementUnitCode)
     {
-        return $this->setProperty('measurementUnitCode', $measurementUnitCode, 'string');
+        $this->measurementUnitCode = $measurementUnitCode;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
     public function getMeasurementUnitCode()
     {
         return $this->measurementUnitCode;
     }
-
+    
     /**
-     * @param DateTime $minBestBeforeDate 
+     * @param DateTime $minBestBeforeDate
      * @return \jtl\Connector\Model\Product
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
     public function setMinBestBeforeDate(DateTime $minBestBeforeDate = null)
     {
-        return $this->setProperty('minBestBeforeDate', $minBestBeforeDate, 'DateTime');
+        $this->minBestBeforeDate = $minBestBeforeDate;
+        
+        return $this;
     }
-
+    
     /**
-     * @return DateTime 
+     * @return DateTime
      */
     public function getMinBestBeforeDate()
     {
         return $this->minBestBeforeDate;
     }
-
+    
     /**
-     * @param double $minimumOrderQuantity 
+     * @param double $minimumOrderQuantity
      * @return \jtl\Connector\Model\Product
      */
     public function setMinimumOrderQuantity($minimumOrderQuantity)
     {
-        return $this->setProperty('minimumOrderQuantity', $minimumOrderQuantity, 'double');
+        $this->minimumOrderQuantity = $minimumOrderQuantity;
+        
+        return $this;
     }
-
+    
     /**
-     * @return double 
+     * @return double
      */
     public function getMinimumOrderQuantity()
     {
         return $this->minimumOrderQuantity;
     }
-
+    
     /**
-     * @param double $minimumQuantity 
+     * @param double $minimumQuantity
      * @return \jtl\Connector\Model\Product
      */
     public function setMinimumQuantity($minimumQuantity)
     {
-        return $this->setProperty('minimumQuantity', $minimumQuantity, 'double');
+        $this->minimumQuantity = $minimumQuantity;
+        
+        return $this;
     }
-
+    
     /**
-     * @return double 
+     * @return double
      */
     public function getMinimumQuantity()
     {
         return $this->minimumQuantity;
     }
-
+    
     /**
-     * @param DateTime $modified 
+     * @param DateTime $modified
      * @return \jtl\Connector\Model\Product
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
     public function setModified(DateTime $modified = null)
     {
-        return $this->setProperty('modified', $modified, 'DateTime');
+        $this->modified = $modified;
+        
+        return $this;
     }
-
+    
     /**
-     * @return DateTime 
+     * @return DateTime
      */
     public function getModified()
     {
@@ -1436,7 +1521,9 @@ class Product extends DataModel
      */
     public function setNewReleaseDate(DateTime $newReleaseDate = null)
     {
-        return $this->setProperty('newReleaseDate', $newReleaseDate, 'DateTime');
+        $this->newReleaseDate = $newReleaseDate;
+        
+        return $this;
     }
     
     /**
@@ -1446,7 +1533,7 @@ class Product extends DataModel
     {
         return $this->newReleaseDate;
     }
-
+    
     /**
      * @param DateTime $nextAvailableInflowDate Contains the date of the next available inflow.
      * @return \jtl\Connector\Model\Product
@@ -1454,9 +1541,11 @@ class Product extends DataModel
      */
     public function setNextAvailableInflowDate(DateTime $nextAvailableInflowDate = null)
     {
-        return $this->setProperty('nextAvailableInflowDate', $nextAvailableInflowDate, 'DateTime');
+        $this->nextAvailableInflowDate = $nextAvailableInflowDate;
+        
+        return $this;
     }
-
+    
     /**
      * @return DateTime Contains the date of the next available inflow.
      */
@@ -1464,16 +1553,18 @@ class Product extends DataModel
     {
         return $this->nextAvailableInflowDate;
     }
-
+    
     /**
      * @param double $nextAvailableInflowQuantity Contains the quantity of the next available inflow.
      * @return \jtl\Connector\Model\Product
      */
     public function setNextAvailableInflowQuantity($nextAvailableInflowQuantity)
     {
-        return $this->setProperty('nextAvailableInflowQuantity', $nextAvailableInflowQuantity, 'double');
+        $this->nextAvailableInflowQuantity = $nextAvailableInflowQuantity;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Contains the quantity of the next available inflow.
      */
@@ -1481,16 +1572,18 @@ class Product extends DataModel
     {
         return $this->nextAvailableInflowQuantity;
     }
-
+    
     /**
      * @param string $note Optional internal product note
      * @return \jtl\Connector\Model\Product
      */
     public function setNote($note)
     {
-        return $this->setProperty('note', $note, 'string');
+        $this->note = $note;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional internal product note
      */
@@ -1498,16 +1591,18 @@ class Product extends DataModel
     {
         return $this->note;
     }
-
+    
     /**
      * @param string $originCountry Optional Origin country
      * @return \jtl\Connector\Model\Product
      */
     public function setOriginCountry($originCountry)
     {
-        return $this->setProperty('originCountry', $originCountry, 'string');
+        $this->originCountry = $originCountry;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional Origin country
      */
@@ -1515,16 +1610,18 @@ class Product extends DataModel
     {
         return $this->originCountry;
     }
-
+    
     /**
      * @param double $packagingQuantity Optional: Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      * @return \jtl\Connector\Model\Product
      */
     public function setPackagingQuantity($packagingQuantity)
     {
-        return $this->setProperty('packagingQuantity', $packagingQuantity, 'double');
+        $this->packagingQuantity = $packagingQuantity;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Optional: Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      */
@@ -1532,33 +1629,37 @@ class Product extends DataModel
     {
         return $this->packagingQuantity;
     }
-
+    
     /**
-     * @param boolean $permitNegativeStock Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true. 
+     * @param boolean $permitNegativeStock Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true.
      * @return \jtl\Connector\Model\Product
      */
     public function setPermitNegativeStock($permitNegativeStock)
     {
-        return $this->setProperty('permitNegativeStock', $permitNegativeStock, 'boolean');
+        $this->permitNegativeStock = $permitNegativeStock;
+        
+        return $this;
     }
-
+    
     /**
-     * @return boolean Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true. 
+     * @return boolean Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true.
      */
     public function getPermitNegativeStock()
     {
         return $this->permitNegativeStock;
     }
-
+    
     /**
      * @param double $productWeight Productweight exclusive packaging
      * @return \jtl\Connector\Model\Product
      */
     public function setProductWeight($productWeight)
     {
-        return $this->setProperty('productWeight', $productWeight, 'double');
+        $this->productWeight = $productWeight;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Productweight exclusive packaging
      */
@@ -1566,50 +1667,56 @@ class Product extends DataModel
     {
         return $this->productWeight;
     }
-
+    
     /**
-     * @param double $purchasePrice 
+     * @param double $purchasePrice
      * @return \jtl\Connector\Model\Product
      */
     public function setPurchasePrice($purchasePrice)
     {
-        return $this->setProperty('purchasePrice', $purchasePrice, 'double');
+        $this->purchasePrice = $purchasePrice;
+        
+        return $this;
     }
-
+    
     /**
-     * @return double 
+     * @return double
      */
     public function getPurchasePrice()
     {
         return $this->purchasePrice;
     }
-
+    
     /**
-     * @param double $recommendedRetailPrice Optional recommended retail price (gross) 
+     * @param double $recommendedRetailPrice Optional recommended retail price (gross)
      * @return \jtl\Connector\Model\Product
      */
     public function setRecommendedRetailPrice($recommendedRetailPrice)
     {
-        return $this->setProperty('recommendedRetailPrice', $recommendedRetailPrice, 'double');
+        $this->recommendedRetailPrice = $recommendedRetailPrice;
+        
+        return $this;
     }
-
+    
     /**
-     * @return double Optional recommended retail price (gross) 
+     * @return double Optional recommended retail price (gross)
      */
     public function getRecommendedRetailPrice()
     {
         return $this->recommendedRetailPrice;
     }
-
+    
     /**
      * @param string $serialNumber Optional serial number
      * @return \jtl\Connector\Model\Product
      */
     public function setSerialNumber($serialNumber)
     {
-        return $this->setProperty('serialNumber', $serialNumber, 'string');
+        $this->serialNumber = $serialNumber;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional serial number
      */
@@ -1617,16 +1724,18 @@ class Product extends DataModel
     {
         return $this->serialNumber;
     }
-
+    
     /**
      * @param double $shippingWeight Productweight inclusive packaging
      * @return \jtl\Connector\Model\Product
      */
     public function setShippingWeight($shippingWeight)
     {
-        return $this->setProperty('shippingWeight', $shippingWeight, 'double');
+        $this->shippingWeight = $shippingWeight;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Productweight inclusive packaging
      */
@@ -1634,16 +1743,18 @@ class Product extends DataModel
     {
         return $this->shippingWeight;
     }
-
+    
     /**
      * @param string $sku Optional stock keeping unit identifier
      * @return \jtl\Connector\Model\Product
      */
     public function setSku($sku)
     {
-        return $this->setProperty('sku', $sku, 'string');
+        $this->sku = $sku;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional stock keeping unit identifier
      */
@@ -1651,16 +1762,18 @@ class Product extends DataModel
     {
         return $this->sku;
     }
-
+    
     /**
      * @param integer $sort Optional sort number for product sorting in lists
      * @return \jtl\Connector\Model\Product
      */
     public function setSort($sort)
     {
-        return $this->setProperty('sort', $sort, 'integer');
+        $this->sort = $sort;
+        
+        return $this;
     }
-
+    
     /**
      * @return integer Optional sort number for product sorting in lists
      */
@@ -1668,17 +1781,19 @@ class Product extends DataModel
     {
         return $this->sort;
     }
-
+    
     /**
-     * @param ProductStockLevel $stockLevel 
+     * @param ProductStockLevel $stockLevel
      * @return \jtl\Connector\Model\Product
      * @throws \InvalidArgumentException if the provided argument is not of type 'ProductStockLevel'.
      */
     public function setStockLevel(ProductStockLevel $stockLevel = null)
     {
-        return $this->setProperty('stockLevel', $stockLevel, 'jtl\Connector\Model\ProductStockLevel');
+        $this->stockLevel = $stockLevel;
+        
+        return $this;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\ProductStockLevel
      */
@@ -1686,50 +1801,56 @@ class Product extends DataModel
     {
         return $this->stockLevel;
     }
-
+    
     /**
-     * @param integer $supplierDeliveryTime 
+     * @param integer $supplierDeliveryTime
      * @return \jtl\Connector\Model\Product
      */
     public function setSupplierDeliveryTime($supplierDeliveryTime)
     {
-        return $this->setProperty('supplierDeliveryTime', $supplierDeliveryTime, 'integer');
+        $this->supplierDeliveryTime = $supplierDeliveryTime;
+        
+        return $this;
     }
-
+    
     /**
-     * @return integer 
+     * @return integer
      */
     public function getSupplierDeliveryTime()
     {
         return $this->supplierDeliveryTime;
     }
-
+    
     /**
-     * @param double $supplierStockLevel 
+     * @param double $supplierStockLevel
      * @return \jtl\Connector\Model\Product
      */
     public function setSupplierStockLevel($supplierStockLevel)
     {
-        return $this->setProperty('supplierStockLevel', $supplierStockLevel, 'double');
+        $this->supplierStockLevel = $supplierStockLevel;
+        
+        return $this;
     }
-
+    
     /**
-     * @return double 
+     * @return double
      */
     public function getSupplierStockLevel()
     {
         return $this->supplierStockLevel;
     }
-
+    
     /**
      * @param string $taric Optional TARIC
      * @return \jtl\Connector\Model\Product
      */
     public function setTaric($taric)
     {
-        return $this->setProperty('taric', $taric, 'string');
+        $this->taric = $taric;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional TARIC
      */
@@ -1737,16 +1858,18 @@ class Product extends DataModel
     {
         return $this->taric;
     }
-
+    
     /**
      * @param string $unNumber Optional UN number, used to define hazardous properties
      * @return \jtl\Connector\Model\Product
      */
     public function setUnNumber($unNumber)
     {
-        return $this->setProperty('unNumber', $unNumber, 'string');
+        $this->unNumber = $unNumber;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional UN number, used to define hazardous properties
      */
@@ -1754,16 +1877,18 @@ class Product extends DataModel
     {
         return $this->unNumber;
     }
-
+    
     /**
      * @param string $upc Optional Universal Product Code
      * @return \jtl\Connector\Model\Product
      */
     public function setUpc($upc)
     {
-        return $this->setProperty('upc', $upc, 'string');
+        $this->upc = $upc;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional Universal Product Code
      */
@@ -1771,33 +1896,37 @@ class Product extends DataModel
     {
         return $this->upc;
     }
-
+    
     /**
-     * @param double $vat 
+     * @param double $vat
      * @return \jtl\Connector\Model\Product
      */
     public function setVat($vat)
     {
-        return $this->setProperty('vat', $vat, 'double');
+        $this->vat = $vat;
+        
+        return $this;
     }
-
+    
     /**
-     * @return double 
+     * @return double
      */
     public function getVat()
     {
         return $this->vat;
     }
-
+    
     /**
      * @param double $width Optional product width
      * @return \jtl\Connector\Model\Product
      */
     public function setWidth($width)
     {
-        return $this->setProperty('width', $width, 'double');
+        $this->width = $width;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Optional product width
      */
@@ -1805,7 +1934,7 @@ class Product extends DataModel
     {
         return $this->width;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\ProductAttr $attribute
      * @return \jtl\Connector\Model\Product
@@ -1813,6 +1942,7 @@ class Product extends DataModel
     public function addAttribute(\jtl\Connector\Model\ProductAttr $attribute)
     {
         $this->attributes[] = $attribute;
+        
         return $this;
     }
     
@@ -1823,6 +1953,7 @@ class Product extends DataModel
     public function setAttributes(array $attributes)
     {
         $this->attributes = $attributes;
+        
         return $this;
     }
     
@@ -1833,16 +1964,17 @@ class Product extends DataModel
     {
         return $this->attributes;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\Product
      */
     public function clearAttributes()
     {
-        $this->attributes = array();
+        $this->attributes = [];
+        
         return $this;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\Product2Category $category
      * @return \jtl\Connector\Model\Product
@@ -1850,6 +1982,7 @@ class Product extends DataModel
     public function addCategory(\jtl\Connector\Model\Product2Category $category)
     {
         $this->categories[] = $category;
+        
         return $this;
     }
     
@@ -1860,6 +1993,7 @@ class Product extends DataModel
     public function setCategories(array $categories)
     {
         $this->categories = $categories;
+        
         return $this;
     }
     
@@ -1870,16 +2004,17 @@ class Product extends DataModel
     {
         return $this->categories;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\Product
      */
     public function clearCategories()
     {
-        $this->categories = array();
+        $this->categories = [];
+        
         return $this;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\ProductChecksum $checksum
      * @return \jtl\Connector\Model\Product
@@ -1887,6 +2022,7 @@ class Product extends DataModel
     public function addChecksum(\jtl\Connector\Model\ProductChecksum $checksum)
     {
         $this->checksums[] = $checksum;
+        
         return $this;
     }
     
@@ -1897,6 +2033,7 @@ class Product extends DataModel
     public function setChecksums(array $checksums)
     {
         $this->checksums = $checksums;
+        
         return $this;
     }
     
@@ -1907,16 +2044,17 @@ class Product extends DataModel
     {
         return $this->checksums;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\Product
      */
     public function clearChecksums()
     {
-        $this->checksums = array();
+        $this->checksums = [];
+        
         return $this;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\ProductConfigGroup $configGroup
      * @return \jtl\Connector\Model\Product
@@ -1924,6 +2062,7 @@ class Product extends DataModel
     public function addConfigGroup(\jtl\Connector\Model\ProductConfigGroup $configGroup)
     {
         $this->configGroups[] = $configGroup;
+        
         return $this;
     }
     
@@ -1934,6 +2073,7 @@ class Product extends DataModel
     public function setConfigGroups(array $configGroups)
     {
         $this->configGroups = $configGroups;
+        
         return $this;
     }
     
@@ -1944,23 +2084,26 @@ class Product extends DataModel
     {
         return $this->configGroups;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\Product
      */
     public function clearConfigGroups()
     {
-        $this->configGroups = array();
+        $this->configGroups = [];
+        
         return $this;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\CustomerGroupPackagingQuantity $customerGroupPackagingQuantity
      * @return \jtl\Connector\Model\Product
      */
-    public function addCustomerGroupPackagingQuantity(\jtl\Connector\Model\CustomerGroupPackagingQuantity $customerGroupPackagingQuantity)
-    {
+    public function addCustomerGroupPackagingQuantity(
+        \jtl\Connector\Model\CustomerGroupPackagingQuantity $customerGroupPackagingQuantity
+    ) {
         $this->customerGroupPackagingQuantities[] = $customerGroupPackagingQuantity;
+        
         return $this;
     }
     
@@ -1971,6 +2114,7 @@ class Product extends DataModel
     public function setCustomerGroupPackagingQuantities(array $customerGroupPackagingQuantities)
     {
         $this->customerGroupPackagingQuantities = $customerGroupPackagingQuantities;
+        
         return $this;
     }
     
@@ -1981,16 +2125,17 @@ class Product extends DataModel
     {
         return $this->customerGroupPackagingQuantities;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\Product
      */
     public function clearCustomerGroupPackagingQuantities()
     {
-        $this->customerGroupPackagingQuantities = array();
+        $this->customerGroupPackagingQuantities = [];
+        
         return $this;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\ProductFileDownload $fileDownload
      * @return \jtl\Connector\Model\Product
@@ -1998,6 +2143,7 @@ class Product extends DataModel
     public function addFileDownload(\jtl\Connector\Model\ProductFileDownload $fileDownload)
     {
         $this->fileDownloads[] = $fileDownload;
+        
         return $this;
     }
     
@@ -2008,6 +2154,7 @@ class Product extends DataModel
     public function setFileDownloads(array $fileDownloads)
     {
         $this->fileDownloads = $fileDownloads;
+        
         return $this;
     }
     
@@ -2018,16 +2165,17 @@ class Product extends DataModel
     {
         return $this->fileDownloads;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\Product
      */
     public function clearFileDownloads()
     {
-        $this->fileDownloads = array();
+        $this->fileDownloads = [];
+        
         return $this;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\ProductI18n $i18n
      * @return \jtl\Connector\Model\Product
@@ -2035,6 +2183,7 @@ class Product extends DataModel
     public function addI18n(\jtl\Connector\Model\ProductI18n $i18n)
     {
         $this->i18ns[] = $i18n;
+        
         return $this;
     }
     
@@ -2045,6 +2194,7 @@ class Product extends DataModel
     public function setI18ns(array $i18ns)
     {
         $this->i18ns = $i18ns;
+        
         return $this;
     }
     
@@ -2055,16 +2205,17 @@ class Product extends DataModel
     {
         return $this->i18ns;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\Product
      */
     public function clearI18ns()
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
+        
         return $this;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\ProductInvisibility $invisibility
      * @return \jtl\Connector\Model\Product
@@ -2072,6 +2223,7 @@ class Product extends DataModel
     public function addInvisibility(\jtl\Connector\Model\ProductInvisibility $invisibility)
     {
         $this->invisibilities[] = $invisibility;
+        
         return $this;
     }
     
@@ -2082,6 +2234,7 @@ class Product extends DataModel
     public function setInvisibilities(array $invisibilities)
     {
         $this->invisibilities = $invisibilities;
+        
         return $this;
     }
     
@@ -2092,16 +2245,17 @@ class Product extends DataModel
     {
         return $this->invisibilities;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\Product
      */
     public function clearInvisibilities()
     {
-        $this->invisibilities = array();
+        $this->invisibilities = [];
+        
         return $this;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\ProductMediaFile $mediaFile
      * @return \jtl\Connector\Model\Product
@@ -2109,6 +2263,7 @@ class Product extends DataModel
     public function addMediaFile(\jtl\Connector\Model\ProductMediaFile $mediaFile)
     {
         $this->mediaFiles[] = $mediaFile;
+        
         return $this;
     }
     
@@ -2119,6 +2274,7 @@ class Product extends DataModel
     public function setMediaFiles(array $mediaFiles)
     {
         $this->mediaFiles = $mediaFiles;
+        
         return $this;
     }
     
@@ -2129,16 +2285,17 @@ class Product extends DataModel
     {
         return $this->mediaFiles;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\Product
      */
     public function clearMediaFiles()
     {
-        $this->mediaFiles = array();
+        $this->mediaFiles = [];
+        
         return $this;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\ProductPartsList $partsList
      * @return \jtl\Connector\Model\Product
@@ -2146,6 +2303,7 @@ class Product extends DataModel
     public function addPartsList(\jtl\Connector\Model\ProductPartsList $partsList)
     {
         $this->partsLists[] = $partsList;
+        
         return $this;
     }
     
@@ -2156,6 +2314,7 @@ class Product extends DataModel
     public function setPartsLists(array $partsLists)
     {
         $this->partsLists = $partsLists;
+        
         return $this;
     }
     
@@ -2166,16 +2325,17 @@ class Product extends DataModel
     {
         return $this->partsLists;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\Product
      */
     public function clearPartsLists()
     {
-        $this->partsLists = array();
+        $this->partsLists = [];
+        
         return $this;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\ProductPrice $price
      * @return \jtl\Connector\Model\Product
@@ -2183,6 +2343,7 @@ class Product extends DataModel
     public function addPrice(\jtl\Connector\Model\ProductPrice $price)
     {
         $this->prices[] = $price;
+        
         return $this;
     }
     
@@ -2193,6 +2354,7 @@ class Product extends DataModel
     public function setPrices(array $prices)
     {
         $this->prices = $prices;
+        
         return $this;
     }
     
@@ -2203,16 +2365,17 @@ class Product extends DataModel
     {
         return $this->prices;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\Product
      */
     public function clearPrices()
     {
-        $this->prices = array();
+        $this->prices = [];
+        
         return $this;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\ProductSpecialPrice $specialPrice
      * @return \jtl\Connector\Model\Product
@@ -2220,6 +2383,7 @@ class Product extends DataModel
     public function addSpecialPrice(\jtl\Connector\Model\ProductSpecialPrice $specialPrice)
     {
         $this->specialPrices[] = $specialPrice;
+        
         return $this;
     }
     
@@ -2230,6 +2394,7 @@ class Product extends DataModel
     public function setSpecialPrices(array $specialPrices)
     {
         $this->specialPrices = $specialPrices;
+        
         return $this;
     }
     
@@ -2240,16 +2405,17 @@ class Product extends DataModel
     {
         return $this->specialPrices;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\Product
      */
     public function clearSpecialPrices()
     {
-        $this->specialPrices = array();
+        $this->specialPrices = [];
+        
         return $this;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\ProductSpecific $specific
      * @return \jtl\Connector\Model\Product
@@ -2257,6 +2423,7 @@ class Product extends DataModel
     public function addSpecific(\jtl\Connector\Model\ProductSpecific $specific)
     {
         $this->specifics[] = $specific;
+        
         return $this;
     }
     
@@ -2267,6 +2434,7 @@ class Product extends DataModel
     public function setSpecifics(array $specifics)
     {
         $this->specifics = $specifics;
+        
         return $this;
     }
     
@@ -2277,16 +2445,17 @@ class Product extends DataModel
     {
         return $this->specifics;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\Product
      */
     public function clearSpecifics()
     {
-        $this->specifics = array();
+        $this->specifics = [];
+        
         return $this;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\ProductVarCombination $varCombination
      * @return \jtl\Connector\Model\Product
@@ -2294,6 +2463,7 @@ class Product extends DataModel
     public function addVarCombination(\jtl\Connector\Model\ProductVarCombination $varCombination)
     {
         $this->varCombinations[] = $varCombination;
+        
         return $this;
     }
     
@@ -2304,6 +2474,7 @@ class Product extends DataModel
     public function setVarCombinations(array $varCombinations)
     {
         $this->varCombinations = $varCombinations;
+        
         return $this;
     }
     
@@ -2314,16 +2485,17 @@ class Product extends DataModel
     {
         return $this->varCombinations;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\Product
      */
     public function clearVarCombinations()
     {
-        $this->varCombinations = array();
+        $this->varCombinations = [];
+        
         return $this;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\ProductVariation $variation
      * @return \jtl\Connector\Model\Product
@@ -2331,6 +2503,7 @@ class Product extends DataModel
     public function addVariation(\jtl\Connector\Model\ProductVariation $variation)
     {
         $this->variations[] = $variation;
+        
         return $this;
     }
     
@@ -2341,6 +2514,7 @@ class Product extends DataModel
     public function setVariations(array $variations)
     {
         $this->variations = $variations;
+        
         return $this;
     }
     
@@ -2351,16 +2525,17 @@ class Product extends DataModel
     {
         return $this->variations;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\Product
      */
     public function clearVariations()
     {
-        $this->variations = array();
+        $this->variations = [];
+        
         return $this;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\ProductWarehouseInfo $warehouseInfo
      * @return \jtl\Connector\Model\Product
@@ -2368,6 +2543,7 @@ class Product extends DataModel
     public function addWarehouseInfo(\jtl\Connector\Model\ProductWarehouseInfo $warehouseInfo)
     {
         $this->warehouseInfo[] = $warehouseInfo;
+        
         return $this;
     }
     
@@ -2378,6 +2554,7 @@ class Product extends DataModel
     public function setWarehouseInfo(array $warehouseInfo)
     {
         $this->warehouseInfo = $warehouseInfo;
+        
         return $this;
     }
     
@@ -2388,13 +2565,14 @@ class Product extends DataModel
     {
         return $this->warehouseInfo;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\Product
      */
     public function clearWarehouseInfo()
     {
-        $this->warehouseInfo = array();
+        $this->warehouseInfo = [];
+        
         return $this;
     }
 }

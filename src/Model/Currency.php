@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class Currency extends DataModel
@@ -28,7 +27,7 @@ class Currency extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var string Optional delimiter char for cent, default=",". Ignore this flag if you have the correct user locale preference.
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class Currency extends DataModel
      * @Serializer\Accessor(getter="getDelimiterCent",setter="setDelimiterCent")
      */
     protected $delimiterCent = '';
-
+    
     /**
      * @var string Optional delimiter char for thousand. Default=".". Ignore this flag if you have the correct user locale preference.
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class Currency extends DataModel
      * @Serializer\Accessor(getter="getDelimiterThousand",setter="setDelimiterThousand")
      */
     protected $delimiterThousand = '';
-
+    
     /**
      * @var double Optional conversion factor to default currency. Default is 1 (equals default currency)
      * @Serializer\Type("double")
@@ -52,31 +51,31 @@ class Currency extends DataModel
      * @Serializer\Accessor(getter="getFactor",setter="setFactor")
      */
     protected $factor = 0.0;
-
+    
     /**
-     * @var boolean Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference. 
+     * @var boolean Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("hasCurrencySignBeforeValue")
      * @Serializer\Accessor(getter="getHasCurrencySignBeforeValue",setter="setHasCurrencySignBeforeValue")
      */
     protected $hasCurrencySignBeforeValue = false;
-
+    
     /**
-     * @var boolean Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default. 
+     * @var boolean Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isDefault")
      * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
      */
     protected $isDefault = false;
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("iso")
      * @Serializer\Accessor(getter="getIso",setter="setIso")
      */
     protected $iso = '';
-
+    
     /**
      * @var string Currency name
      * @Serializer\Type("string")
@@ -84,7 +83,7 @@ class Currency extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * @var string Optional HTML name e.g. "&euro;"
      * @Serializer\Type("string")
@@ -92,7 +91,7 @@ class Currency extends DataModel
      * @Serializer\Accessor(getter="getNameHtml",setter="setNameHtml")
      */
     protected $nameHtml = '';
-
+    
     /**
      * Constructor
      */
@@ -100,7 +99,7 @@ class Currency extends DataModel
     {
         $this->id = new Identity();
     }
-
+    
     /**
      * @param Identity $id Unique currency id
      * @return \jtl\Connector\Model\Currency
@@ -108,9 +107,11 @@ class Currency extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique currency id
      */
@@ -118,16 +119,18 @@ class Currency extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param string $delimiterCent Optional delimiter char for cent, default=",". Ignore this flag if you have the correct user locale preference.
      * @return \jtl\Connector\Model\Currency
      */
     public function setDelimiterCent($delimiterCent)
     {
-        return $this->setProperty('delimiterCent', $delimiterCent, 'string');
+        $this->delimiterCent = $delimiterCent;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional delimiter char for cent, default=",". Ignore this flag if you have the correct user locale preference.
      */
@@ -135,16 +138,18 @@ class Currency extends DataModel
     {
         return $this->delimiterCent;
     }
-
+    
     /**
      * @param string $delimiterThousand Optional delimiter char for thousand. Default=".". Ignore this flag if you have the correct user locale preference.
      * @return \jtl\Connector\Model\Currency
      */
     public function setDelimiterThousand($delimiterThousand)
     {
-        return $this->setProperty('delimiterThousand', $delimiterThousand, 'string');
+        $this->delimiterThousand = $delimiterThousand;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional delimiter char for thousand. Default=".". Ignore this flag if you have the correct user locale preference.
      */
@@ -152,16 +157,18 @@ class Currency extends DataModel
     {
         return $this->delimiterThousand;
     }
-
+    
     /**
      * @param double $factor Optional conversion factor to default currency. Default is 1 (equals default currency)
      * @return \jtl\Connector\Model\Currency
      */
     public function setFactor($factor)
     {
-        return $this->setProperty('factor', $factor, 'double');
+        $this->factor = $factor;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Optional conversion factor to default currency. Default is 1 (equals default currency)
      */
@@ -169,67 +176,75 @@ class Currency extends DataModel
     {
         return $this->factor;
     }
-
+    
     /**
-     * @param boolean $hasCurrencySignBeforeValue Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference. 
+     * @param boolean $hasCurrencySignBeforeValue Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference.
      * @return \jtl\Connector\Model\Currency
      */
     public function setHasCurrencySignBeforeValue($hasCurrencySignBeforeValue)
     {
-        return $this->setProperty('hasCurrencySignBeforeValue', $hasCurrencySignBeforeValue, 'boolean');
+        $this->hasCurrencySignBeforeValue = $hasCurrencySignBeforeValue;
+        
+        return $this;
     }
-
+    
     /**
-     * @return boolean Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference. 
+     * @return boolean Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference.
      */
     public function getHasCurrencySignBeforeValue()
     {
         return $this->hasCurrencySignBeforeValue;
     }
-
+    
     /**
-     * @param boolean $isDefault Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default. 
+     * @param boolean $isDefault Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default.
      * @return \jtl\Connector\Model\Currency
      */
     public function setIsDefault($isDefault)
     {
-        return $this->setProperty('isDefault', $isDefault, 'boolean');
+        $this->isDefault = $isDefault;
+        
+        return $this;
     }
-
+    
     /**
-     * @return boolean Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default. 
+     * @return boolean Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default.
      */
     public function getIsDefault()
     {
         return $this->isDefault;
     }
-
+    
     /**
-     * @param string $iso 
+     * @param string $iso
      * @return \jtl\Connector\Model\Currency
      */
     public function setIso($iso)
     {
-        return $this->setProperty('iso', $iso, 'string');
+        $this->iso = $iso;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
     public function getIso()
     {
         return $this->iso;
     }
-
+    
     /**
      * @param string $name Currency name
      * @return \jtl\Connector\Model\Currency
      */
     public function setName($name)
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Currency name
      */
@@ -237,16 +252,18 @@ class Currency extends DataModel
     {
         return $this->name;
     }
-
+    
     /**
      * @param string $nameHtml Optional HTML name e.g. "&euro;"
      * @return \jtl\Connector\Model\Currency
      */
     public function setNameHtml($nameHtml)
     {
-        return $this->setProperty('nameHtml', $nameHtml, 'string');
+        $this->nameHtml = $nameHtml;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional HTML name e.g. "&euro;"
      */

@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class TaxZone extends DataModel
@@ -28,7 +27,7 @@ class TaxZone extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var string Optional tax zone name e.g. "EU Zone"
      * @Serializer\Type("string")
@@ -36,15 +35,15 @@ class TaxZone extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * @var \jtl\Connector\Model\TaxZoneCountry[]
      * @Serializer\Type("array<jtl\Connector\Model\TaxZoneCountry>")
      * @Serializer\SerializedName("countries")
      * @Serializer\AccessType("reflection")
      */
-    protected $countries = array();
-
+    protected $countries = [];
+    
     /**
      * Constructor
      */
@@ -52,7 +51,7 @@ class TaxZone extends DataModel
     {
         $this->id = new Identity();
     }
-
+    
     /**
      * @param Identity $id Unique taxZone id
      * @return \jtl\Connector\Model\TaxZone
@@ -60,9 +59,11 @@ class TaxZone extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique taxZone id
      */
@@ -70,16 +71,18 @@ class TaxZone extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param string $name Optional tax zone name e.g. "EU Zone"
      * @return \jtl\Connector\Model\TaxZone
      */
     public function setName($name)
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional tax zone name e.g. "EU Zone"
      */
@@ -87,7 +90,7 @@ class TaxZone extends DataModel
     {
         return $this->name;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\TaxZoneCountry $country
      * @return \jtl\Connector\Model\TaxZone
@@ -95,6 +98,7 @@ class TaxZone extends DataModel
     public function addCountry(\jtl\Connector\Model\TaxZoneCountry $country)
     {
         $this->countries[] = $country;
+        
         return $this;
     }
     
@@ -105,13 +109,14 @@ class TaxZone extends DataModel
     {
         return $this->countries;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\TaxZone
      */
     public function clearCountries()
     {
-        $this->countries = array();
+        $this->countries = [];
+        
         return $this;
     }
 }

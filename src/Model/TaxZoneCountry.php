@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class TaxZoneCountry extends DataModel
@@ -28,7 +27,7 @@ class TaxZoneCountry extends DataModel
      * @Serializer\Accessor(getter="getTaxZoneId",setter="setTaxZoneId")
      */
     protected $taxZoneId = null;
-
+    
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class TaxZoneCountry extends DataModel
      * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
      */
     protected $countryIso = '';
-
+    
     /**
      * Constructor
      */
@@ -44,7 +43,7 @@ class TaxZoneCountry extends DataModel
     {
         $this->taxZoneId = new Identity();
     }
-
+    
     /**
      * @param Identity $taxZoneId Reference to taxZone
      * @return \jtl\Connector\Model\TaxZoneCountry
@@ -52,9 +51,11 @@ class TaxZoneCountry extends DataModel
      */
     public function setTaxZoneId(Identity $taxZoneId)
     {
-        return $this->setProperty('taxZoneId', $taxZoneId, 'Identity');
+        $this->taxZoneId = $taxZoneId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to taxZone
      */
@@ -62,16 +63,18 @@ class TaxZoneCountry extends DataModel
     {
         return $this->taxZoneId;
     }
-
+    
     /**
      * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
      * @return \jtl\Connector\Model\TaxZoneCountry
      */
     public function setCountryIso($countryIso)
     {
-        return $this->setProperty('countryIso', $countryIso, 'string');
+        $this->countryIso = $countryIso;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Country ISO 3166-2 (2 letter Uppercase)
      */

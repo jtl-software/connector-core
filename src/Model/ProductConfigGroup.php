@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductConfigGroup extends DataModel
@@ -28,7 +27,7 @@ class ProductConfigGroup extends DataModel
      * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
      */
     protected $configGroupId = null;
-
+    
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class ProductConfigGroup extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-
+    
     /**
      * @var integer Optional sort number
      * @Serializer\Type("integer")
@@ -44,7 +43,7 @@ class ProductConfigGroup extends DataModel
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
-
+    
     /**
      * Constructor
      */
@@ -53,7 +52,7 @@ class ProductConfigGroup extends DataModel
         $this->productId = new Identity();
         $this->configGroupId = new Identity();
     }
-
+    
     /**
      * @param Identity $configGroupId Reference to configGroup
      * @return \jtl\Connector\Model\ProductConfigGroup
@@ -61,9 +60,11 @@ class ProductConfigGroup extends DataModel
      */
     public function setConfigGroupId(Identity $configGroupId)
     {
-        return $this->setProperty('configGroupId', $configGroupId, 'Identity');
+        $this->configGroupId = $configGroupId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to configGroup
      */
@@ -71,7 +72,7 @@ class ProductConfigGroup extends DataModel
     {
         return $this->configGroupId;
     }
-
+    
     /**
      * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductConfigGroup
@@ -79,9 +80,11 @@ class ProductConfigGroup extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        $this->productId = $productId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to product
      */
@@ -89,16 +92,18 @@ class ProductConfigGroup extends DataModel
     {
         return $this->productId;
     }
-
+    
     /**
      * @param integer $sort Optional sort number
      * @return \jtl\Connector\Model\ProductConfigGroup
      */
     public function setSort($sort)
     {
-        return $this->setProperty('sort', $sort, 'integer');
+        $this->sort = $sort;
+        
+        return $this;
     }
-
+    
     /**
      * @return integer Optional sort number
      */

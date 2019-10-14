@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class Product2Category extends DataModel
@@ -28,7 +27,7 @@ class Product2Category extends DataModel
      * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
      */
     protected $categoryId = null;
-
+    
     /**
      * @var Identity Unique product2Category id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class Product2Category extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -44,7 +43,7 @@ class Product2Category extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-
+    
     /**
      * Constructor
      */
@@ -54,7 +53,7 @@ class Product2Category extends DataModel
         $this->productId = new Identity();
         $this->categoryId = new Identity();
     }
-
+    
     /**
      * @param Identity $categoryId Reference to category
      * @return \jtl\Connector\Model\Product2Category
@@ -62,9 +61,11 @@ class Product2Category extends DataModel
      */
     public function setCategoryId(Identity $categoryId)
     {
-        return $this->setProperty('categoryId', $categoryId, 'Identity');
+        $this->categoryId = $categoryId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to category
      */
@@ -72,7 +73,7 @@ class Product2Category extends DataModel
     {
         return $this->categoryId;
     }
-
+    
     /**
      * @param Identity $id Unique product2Category id
      * @return \jtl\Connector\Model\Product2Category
@@ -80,9 +81,11 @@ class Product2Category extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique product2Category id
      */
@@ -90,7 +93,7 @@ class Product2Category extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\Product2Category
@@ -98,9 +101,11 @@ class Product2Category extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        $this->productId = $productId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to product
      */

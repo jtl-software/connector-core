@@ -12,11 +12,9 @@ use JMS\Serializer\Annotation as Serializer;
 use \jtl\Connector\Model\Identity;
 
 /**
- *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductChecksum extends Checksum
@@ -25,39 +23,39 @@ class ProductChecksum extends Checksum
      * @var int - Checksum used to check variations for change
      */
     const TYPE_VARIATION = 1;
-
+    
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("foreignKey")
      * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
      */
     protected $foreignKey = null;
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("endpoint")
      * @Serializer\Accessor(getter="getEndpoint",setter="setEndpoint")
      */
     protected $endpoint = '';
-
+    
     /**
-     * @var boolean 
+     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("hasChanged")
      * @Serializer\Accessor(getter="hasChanged",setter="setHasChanged")
      */
     protected $hasChanged = false;
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("host")
      * @Serializer\Accessor(getter="getHost",setter="setHost")
      */
     protected $host = '';
-
+    
     /**
      * @var integer
      * @Serializer\Type("integer")
@@ -65,87 +63,95 @@ class ProductChecksum extends Checksum
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
     protected $type = self::TYPE_VARIATION;
-
+    
     /**
-     * @param Identity $foreignKey 
+     * @param Identity $foreignKey
      * @return \jtl\Connector\Model\ProductChecksum
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setForeignKey(Identity $foreignKey)
     {
-        return $this->setProperty('foreignKey', $foreignKey, 'Identity');
+        $this->foreignKey = $foreignKey;
+        
+        return $this;
     }
-
+    
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getForeignKey()
     {
         return $this->foreignKey;
     }
-
+    
     /**
-     * @param string $endpoint 
+     * @param string $endpoint
      * @return \jtl\Connector\Model\ProductChecksum
      * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setEndpoint($endpoint)
     {
-        return $this->setProperty('endpoint', $endpoint, 'string');
+        $this->endpoint = $endpoint;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
     public function getEndpoint()
     {
         return $this->endpoint;
     }
-
+    
     /**
-     * @param boolean $hasChanged 
+     * @param boolean $hasChanged
      * @return \jtl\Connector\Model\ProductChecksum
      * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
     public function setHasChanged($hasChanged)
     {
-        return $this->setProperty('hasChanged', $hasChanged, 'boolean');
+        $this->hasChanged = $hasChanged;
+        
+        return $this;
     }
-
+    
     /**
-     * @return boolean 
+     * @return boolean
      */
     public function hasChanged()
     {
         return $this->hasChanged;
     }
-
+    
     /**
-     * @return boolean 
+     * @return boolean
      */
     public function getHasChanged()
     {
         return $this->hasChanged;
     }
-
+    
     /**
-     * @param string $host 
+     * @param string $host
      * @return \jtl\Connector\Model\ProductChecksum
      * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setHost($host)
     {
-        return $this->setProperty('host', $host, 'string');
+        $this->host = $host;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
     public function getHost()
     {
         return $this->host;
     }
-
+    
     /**
      * @param integer $type
      * @return \jtl\Connector\Model\ProductChecksum
@@ -153,9 +159,11 @@ class ProductChecksum extends Checksum
      */
     public function setType($type)
     {
-        return $this->setProperty('type', $type, 'integer');
+        $this->type = $type;
+        
+        return $this;
     }
-
+    
     /**
      * @return integer
      */

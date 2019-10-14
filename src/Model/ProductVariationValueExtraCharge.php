@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductVariationValueExtraCharge extends DataModel
@@ -28,7 +27,7 @@ class ProductVariationValueExtraCharge extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-
+    
     /**
      * @var Identity Reference to productVariationValue
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class ProductVariationValueExtraCharge extends DataModel
      * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
      */
     protected $productVariationValueId = null;
-
+    
     /**
      * @var double Extra charge (net)
      * @Serializer\Type("double")
@@ -44,7 +43,7 @@ class ProductVariationValueExtraCharge extends DataModel
      * @Serializer\Accessor(getter="getExtraChargeNet",setter="setExtraChargeNet")
      */
     protected $extraChargeNet = 0.0;
-
+    
     /**
      * Constructor
      */
@@ -53,7 +52,7 @@ class ProductVariationValueExtraCharge extends DataModel
         $this->customerGroupId = new Identity();
         $this->productVariationValueId = new Identity();
     }
-
+    
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
@@ -61,9 +60,11 @@ class ProductVariationValueExtraCharge extends DataModel
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        $this->customerGroupId = $customerGroupId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to customerGroup
      */
@@ -71,7 +72,7 @@ class ProductVariationValueExtraCharge extends DataModel
     {
         return $this->customerGroupId;
     }
-
+    
     /**
      * @param Identity $productVariationValueId Reference to productVariationValue
      * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
@@ -79,9 +80,11 @@ class ProductVariationValueExtraCharge extends DataModel
      */
     public function setProductVariationValueId(Identity $productVariationValueId)
     {
-        return $this->setProperty('productVariationValueId', $productVariationValueId, 'Identity');
+        $this->productVariationValueId = $productVariationValueId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to productVariationValue
      */
@@ -89,16 +92,18 @@ class ProductVariationValueExtraCharge extends DataModel
     {
         return $this->productVariationValueId;
     }
-
+    
     /**
      * @param double $extraChargeNet Extra charge (net)
      * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
      */
     public function setExtraChargeNet($extraChargeNet)
     {
-        return $this->setProperty('extraChargeNet', $extraChargeNet, 'double');
+        $this->extraChargeNet = $extraChargeNet;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Extra charge (net)
      */

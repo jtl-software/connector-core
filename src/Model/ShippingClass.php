@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ShippingClass extends DataModel
@@ -28,7 +27,7 @@ class ShippingClass extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var string Optional (internal) Shipping class name
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class ShippingClass extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * Constructor
      */
@@ -44,7 +43,7 @@ class ShippingClass extends DataModel
     {
         $this->id = new Identity();
     }
-
+    
     /**
      * @param Identity $id Unique shippingClass id
      * @return \jtl\Connector\Model\ShippingClass
@@ -52,9 +51,11 @@ class ShippingClass extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique shippingClass id
      */
@@ -62,16 +63,18 @@ class ShippingClass extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param string $name Optional (internal) Shipping class name
      * @return \jtl\Connector\Model\ShippingClass
      */
     public function setName($name)
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional (internal) Shipping class name
      */

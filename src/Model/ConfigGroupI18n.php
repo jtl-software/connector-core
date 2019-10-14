@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ConfigGroupI18n extends DataModel
@@ -28,7 +27,7 @@ class ConfigGroupI18n extends DataModel
      * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
      */
     protected $configGroupId = null;
-
+    
     /**
      * @var string Optional description (HTML)
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class ConfigGroupI18n extends DataModel
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
-
+    
     /**
      * @var string Locale
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class ConfigGroupI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
      * @var string Config group name
      * @Serializer\Type("string")
@@ -52,7 +51,7 @@ class ConfigGroupI18n extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * Constructor
      */
@@ -60,7 +59,7 @@ class ConfigGroupI18n extends DataModel
     {
         $this->configGroupId = new Identity();
     }
-
+    
     /**
      * @param Identity $configGroupId Reference to configGroup
      * @return \jtl\Connector\Model\ConfigGroupI18n
@@ -68,9 +67,11 @@ class ConfigGroupI18n extends DataModel
      */
     public function setConfigGroupId(Identity $configGroupId)
     {
-        return $this->setProperty('configGroupId', $configGroupId, 'Identity');
+        $this->configGroupId = $configGroupId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to configGroup
      */
@@ -78,16 +79,18 @@ class ConfigGroupI18n extends DataModel
     {
         return $this->configGroupId;
     }
-
+    
     /**
      * @param string $description Optional description (HTML)
      * @return \jtl\Connector\Model\ConfigGroupI18n
      */
     public function setDescription($description)
     {
-        return $this->setProperty('description', $description, 'string');
+        $this->description = $description;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional description (HTML)
      */
@@ -95,16 +98,18 @@ class ConfigGroupI18n extends DataModel
     {
         return $this->description;
     }
-
+    
     /**
      * @param string $languageISO Locale
      * @return \jtl\Connector\Model\ConfigGroupI18n
      */
     public function setLanguageISO($languageISO)
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Locale
      */
@@ -112,16 +117,18 @@ class ConfigGroupI18n extends DataModel
     {
         return $this->languageISO;
     }
-
+    
     /**
      * @param string $name Config group name
      * @return \jtl\Connector\Model\ConfigGroupI18n
      */
     public function setName($name)
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Config group name
      */

@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ManufacturerI18n extends DataModel
@@ -28,7 +27,7 @@ class ManufacturerI18n extends DataModel
      * @Serializer\Accessor(getter="getManufacturerId",setter="setManufacturerId")
      */
     protected $manufacturerId = null;
-
+    
     /**
      * @var string Optional manufacturer description (HTML)
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class ManufacturerI18n extends DataModel
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
-
+    
     /**
      * @var string Locale
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class ManufacturerI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
      * @var string Optional meta description tag value
      * @Serializer\Type("string")
@@ -52,7 +51,7 @@ class ManufacturerI18n extends DataModel
      * @Serializer\Accessor(getter="getMetaDescription",setter="setMetaDescription")
      */
     protected $metaDescription = '';
-
+    
     /**
      * @var string Optional meta keywords tag value
      * @Serializer\Type("string")
@@ -60,7 +59,7 @@ class ManufacturerI18n extends DataModel
      * @Serializer\Accessor(getter="getMetaKeywords",setter="setMetaKeywords")
      */
     protected $metaKeywords = '';
-
+    
     /**
      * @var string Optional title tag value
      * @Serializer\Type("string")
@@ -68,7 +67,7 @@ class ManufacturerI18n extends DataModel
      * @Serializer\Accessor(getter="getTitleTag",setter="setTitleTag")
      */
     protected $titleTag = '';
-
+    
     /**
      * Constructor
      */
@@ -76,7 +75,7 @@ class ManufacturerI18n extends DataModel
     {
         $this->manufacturerId = new Identity();
     }
-
+    
     /**
      * @param Identity $manufacturerId Reference to manufacturer
      * @return \jtl\Connector\Model\ManufacturerI18n
@@ -84,9 +83,11 @@ class ManufacturerI18n extends DataModel
      */
     public function setManufacturerId(Identity $manufacturerId)
     {
-        return $this->setProperty('manufacturerId', $manufacturerId, 'Identity');
+        $this->manufacturerId = $manufacturerId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to manufacturer
      */
@@ -94,16 +95,18 @@ class ManufacturerI18n extends DataModel
     {
         return $this->manufacturerId;
     }
-
+    
     /**
      * @param string $description Optional manufacturer description (HTML)
      * @return \jtl\Connector\Model\ManufacturerI18n
      */
     public function setDescription($description)
     {
-        return $this->setProperty('description', $description, 'string');
+        $this->description = $description;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional manufacturer description (HTML)
      */
@@ -111,16 +114,18 @@ class ManufacturerI18n extends DataModel
     {
         return $this->description;
     }
-
+    
     /**
      * @param string $languageISO Locale
      * @return \jtl\Connector\Model\ManufacturerI18n
      */
     public function setLanguageISO($languageISO)
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Locale
      */
@@ -128,16 +133,18 @@ class ManufacturerI18n extends DataModel
     {
         return $this->languageISO;
     }
-
+    
     /**
      * @param string $metaDescription Optional meta description tag value
      * @return \jtl\Connector\Model\ManufacturerI18n
      */
     public function setMetaDescription($metaDescription)
     {
-        return $this->setProperty('metaDescription', $metaDescription, 'string');
+        $this->metaDescription = $metaDescription;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional meta description tag value
      */
@@ -145,16 +152,18 @@ class ManufacturerI18n extends DataModel
     {
         return $this->metaDescription;
     }
-
+    
     /**
      * @param string $metaKeywords Optional meta keywords tag value
      * @return \jtl\Connector\Model\ManufacturerI18n
      */
     public function setMetaKeywords($metaKeywords)
     {
-        return $this->setProperty('metaKeywords', $metaKeywords, 'string');
+        $this->metaKeywords = $metaKeywords;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional meta keywords tag value
      */
@@ -162,16 +171,18 @@ class ManufacturerI18n extends DataModel
     {
         return $this->metaKeywords;
     }
-
+    
     /**
      * @param string $titleTag Optional title tag value
      * @return \jtl\Connector\Model\ManufacturerI18n
      */
     public function setTitleTag($titleTag)
     {
-        return $this->setProperty('titleTag', $titleTag, 'string');
+        $this->titleTag = $titleTag;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional title tag value
      */

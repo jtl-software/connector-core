@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class SpecificValueI18n extends DataModel
@@ -28,7 +27,7 @@ class SpecificValueI18n extends DataModel
      * @Serializer\Accessor(getter="getSpecificValueId",setter="setSpecificValueId")
      */
     protected $specificValueId = null;
-
+    
     /**
      * @var string Optional localized description
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class SpecificValueI18n extends DataModel
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
-
+    
     /**
      * @var string locale
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class SpecificValueI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
      * @var string Optional localized meta description value
      * @Serializer\Type("string")
@@ -52,7 +51,7 @@ class SpecificValueI18n extends DataModel
      * @Serializer\Accessor(getter="getMetaDescription",setter="setMetaDescription")
      */
     protected $metaDescription = '';
-
+    
     /**
      * @var string Optional localized meta keywords value
      * @Serializer\Type("string")
@@ -60,7 +59,7 @@ class SpecificValueI18n extends DataModel
      * @Serializer\Accessor(getter="getMetaKeywords",setter="setMetaKeywords")
      */
     protected $metaKeywords = '';
-
+    
     /**
      * @var string Optional localized title tag value
      * @Serializer\Type("string")
@@ -68,7 +67,7 @@ class SpecificValueI18n extends DataModel
      * @Serializer\Accessor(getter="getTitleTag",setter="setTitleTag")
      */
     protected $titleTag = '';
-
+    
     /**
      * @var string Optional localized URL path
      * @Serializer\Type("string")
@@ -76,7 +75,7 @@ class SpecificValueI18n extends DataModel
      * @Serializer\Accessor(getter="getUrlPath",setter="setUrlPath")
      */
     protected $urlPath = '';
-
+    
     /**
      * @var string Localized value
      * @Serializer\Type("string")
@@ -84,7 +83,7 @@ class SpecificValueI18n extends DataModel
      * @Serializer\Accessor(getter="getValue",setter="setValue")
      */
     protected $value = '';
-
+    
     /**
      * Constructor
      */
@@ -92,7 +91,7 @@ class SpecificValueI18n extends DataModel
     {
         $this->specificValueId = new Identity();
     }
-
+    
     /**
      * @param Identity $specificValueId Reference to specificValue
      * @return \jtl\Connector\Model\SpecificValueI18n
@@ -100,9 +99,11 @@ class SpecificValueI18n extends DataModel
      */
     public function setSpecificValueId(Identity $specificValueId)
     {
-        return $this->setProperty('specificValueId', $specificValueId, 'Identity');
+        $this->specificValueId = $specificValueId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to specificValue
      */
@@ -110,16 +111,18 @@ class SpecificValueI18n extends DataModel
     {
         return $this->specificValueId;
     }
-
+    
     /**
      * @param string $description Optional localized description
      * @return \jtl\Connector\Model\SpecificValueI18n
      */
     public function setDescription($description)
     {
-        return $this->setProperty('description', $description, 'string');
+        $this->description = $description;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional localized description
      */
@@ -127,16 +130,18 @@ class SpecificValueI18n extends DataModel
     {
         return $this->description;
     }
-
+    
     /**
      * @param string $languageISO locale
      * @return \jtl\Connector\Model\SpecificValueI18n
      */
     public function setLanguageISO($languageISO)
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
      * @return string locale
      */
@@ -144,16 +149,18 @@ class SpecificValueI18n extends DataModel
     {
         return $this->languageISO;
     }
-
+    
     /**
      * @param string $metaDescription Optional localized meta description value
      * @return \jtl\Connector\Model\SpecificValueI18n
      */
     public function setMetaDescription($metaDescription)
     {
-        return $this->setProperty('metaDescription', $metaDescription, 'string');
+        $this->metaDescription = $metaDescription;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional localized meta description value
      */
@@ -161,16 +168,18 @@ class SpecificValueI18n extends DataModel
     {
         return $this->metaDescription;
     }
-
+    
     /**
      * @param string $metaKeywords Optional localized meta keywords value
      * @return \jtl\Connector\Model\SpecificValueI18n
      */
     public function setMetaKeywords($metaKeywords)
     {
-        return $this->setProperty('metaKeywords', $metaKeywords, 'string');
+        $this->metaKeywords = $metaKeywords;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional localized meta keywords value
      */
@@ -178,16 +187,18 @@ class SpecificValueI18n extends DataModel
     {
         return $this->metaKeywords;
     }
-
+    
     /**
      * @param string $titleTag Optional localized title tag value
      * @return \jtl\Connector\Model\SpecificValueI18n
      */
     public function setTitleTag($titleTag)
     {
-        return $this->setProperty('titleTag', $titleTag, 'string');
+        $this->titleTag = $titleTag;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional localized title tag value
      */
@@ -195,16 +206,18 @@ class SpecificValueI18n extends DataModel
     {
         return $this->titleTag;
     }
-
+    
     /**
      * @param string $urlPath Optional localized URL path
      * @return \jtl\Connector\Model\SpecificValueI18n
      */
     public function setUrlPath($urlPath)
     {
-        return $this->setProperty('urlPath', $urlPath, 'string');
+        $this->urlPath = $urlPath;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional localized URL path
      */
@@ -212,16 +225,18 @@ class SpecificValueI18n extends DataModel
     {
         return $this->urlPath;
     }
-
+    
     /**
      * @param string $value Localized value
      * @return \jtl\Connector\Model\SpecificValueI18n
      */
     public function setValue($value)
     {
-        return $this->setProperty('value', $value, 'string');
+        $this->value = $value;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Localized value
      */

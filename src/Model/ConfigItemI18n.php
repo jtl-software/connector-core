@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ConfigItemI18n extends DataModel
@@ -28,7 +27,7 @@ class ConfigItemI18n extends DataModel
      * @Serializer\Accessor(getter="getConfigItemId",setter="setConfigItemId")
      */
     protected $configItemId = null;
-
+    
     /**
      * @var string Description (html). Will be ignored, if inheritProductName==true
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class ConfigItemI18n extends DataModel
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
-
+    
     /**
      * @var string Locale
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class ConfigItemI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
      * @var string Config item name. Will be ignored if inheritProductName==true
      * @Serializer\Type("string")
@@ -52,7 +51,7 @@ class ConfigItemI18n extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * Constructor
      */
@@ -60,7 +59,7 @@ class ConfigItemI18n extends DataModel
     {
         $this->configItemId = new Identity();
     }
-
+    
     /**
      * @param Identity $configItemId Reference to configItem
      * @return \jtl\Connector\Model\ConfigItemI18n
@@ -68,9 +67,11 @@ class ConfigItemI18n extends DataModel
      */
     public function setConfigItemId(Identity $configItemId)
     {
-        return $this->setProperty('configItemId', $configItemId, 'Identity');
+        $this->configItemId = $configItemId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to configItem
      */
@@ -78,16 +79,18 @@ class ConfigItemI18n extends DataModel
     {
         return $this->configItemId;
     }
-
+    
     /**
      * @param string $description Description (html). Will be ignored, if inheritProductName==true
      * @return \jtl\Connector\Model\ConfigItemI18n
      */
     public function setDescription($description)
     {
-        return $this->setProperty('description', $description, 'string');
+        $this->description = $description;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Description (html). Will be ignored, if inheritProductName==true
      */
@@ -95,16 +98,18 @@ class ConfigItemI18n extends DataModel
     {
         return $this->description;
     }
-
+    
     /**
      * @param string $languageISO Locale
      * @return \jtl\Connector\Model\ConfigItemI18n
      */
     public function setLanguageISO($languageISO)
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Locale
      */
@@ -112,16 +117,18 @@ class ConfigItemI18n extends DataModel
     {
         return $this->languageISO;
     }
-
+    
     /**
      * @param string $name Config item name. Will be ignored if inheritProductName==true
      * @return \jtl\Connector\Model\ConfigItemI18n
      */
     public function setName($name)
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Config item name. Will be ignored if inheritProductName==true
      */

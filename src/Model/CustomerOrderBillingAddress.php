@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class CustomerOrderBillingAddress extends DataModel
@@ -28,7 +27,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
      */
     protected $customerId = null;
-
+    
     /**
      * @var Identity Unique customerOrderBillingAddress id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var string City
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getCity",setter="setCity")
      */
     protected $city = '';
-
+    
     /**
      * @var string Company name
      * @Serializer\Type("string")
@@ -52,7 +51,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getCompany",setter="setCompany")
      */
     protected $company = '';
-
+    
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
      * @Serializer\Type("string")
@@ -60,7 +59,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
      */
     protected $countryIso = '';
-
+    
     /**
      * @var string Delivery instruction e.g. 'John Doe'
      * @Serializer\Type("string")
@@ -68,7 +67,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getDeliveryInstruction",setter="setDeliveryInstruction")
      */
     protected $deliveryInstruction = '';
-
+    
     /**
      * @var string E-Mail address
      * @Serializer\Type("string")
@@ -76,7 +75,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getEMail",setter="setEMail")
      */
     protected $eMail = '';
-
+    
     /**
      * @var string Extra address line e.g. 'Apartment 2.5'
      * @Serializer\Type("string")
@@ -84,7 +83,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getExtraAddressLine",setter="setExtraAddressLine")
      */
     protected $extraAddressLine = '';
-
+    
     /**
      * @var string Fax number
      * @Serializer\Type("string")
@@ -92,7 +91,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getFax",setter="setFax")
      */
     protected $fax = '';
-
+    
     /**
      * @var string First name
      * @Serializer\Type("string")
@@ -100,7 +99,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getFirstName",setter="setFirstName")
      */
     protected $firstName = '';
-
+    
     /**
      * @var string Last name
      * @Serializer\Type("string")
@@ -108,7 +107,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getLastName",setter="setLastName")
      */
     protected $lastName = '';
-
+    
     /**
      * @var string Mobile phone number
      * @Serializer\Type("string")
@@ -116,7 +115,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getMobile",setter="setMobile")
      */
     protected $mobile = '';
-
+    
     /**
      * @var string Phone number
      * @Serializer\Type("string")
@@ -124,7 +123,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getPhone",setter="setPhone")
      */
     protected $phone = '';
-
+    
     /**
      * @var string Salutation (german: 'Anrede')
      * @Serializer\Type("string")
@@ -132,7 +131,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getSalutation",setter="setSalutation")
      */
     protected $salutation = '';
-
+    
     /**
      * @var string State
      * @Serializer\Type("string")
@@ -140,7 +139,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getState",setter="setState")
      */
     protected $state = '';
-
+    
     /**
      * @var string Street + street number
      * @Serializer\Type("string")
@@ -148,7 +147,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getStreet",setter="setStreet")
      */
     protected $street = '';
-
+    
     /**
      * @var string Title (e.g. 'Prof. Dr.')
      * @Serializer\Type("string")
@@ -156,7 +155,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getTitle",setter="setTitle")
      */
     protected $title = '';
-
+    
     /**
      * @var string VAT number (german "USt-ID")
      * @Serializer\Type("string")
@@ -164,7 +163,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getVatNumber",setter="setVatNumber")
      */
     protected $vatNumber = '';
-
+    
     /**
      * @var string Zip / postal code
      * @Serializer\Type("string")
@@ -172,7 +171,7 @@ class CustomerOrderBillingAddress extends DataModel
      * @Serializer\Accessor(getter="getZipCode",setter="setZipCode")
      */
     protected $zipCode = '';
-
+    
     /**
      * Constructor
      */
@@ -181,7 +180,7 @@ class CustomerOrderBillingAddress extends DataModel
         $this->id = new Identity();
         $this->customerId = new Identity();
     }
-
+    
     /**
      * @param Identity $customerId Reference to customer
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
@@ -189,9 +188,11 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function setCustomerId(Identity $customerId)
     {
-        return $this->setProperty('customerId', $customerId, 'Identity');
+        $this->customerId = $customerId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to customer
      */
@@ -199,7 +200,7 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->customerId;
     }
-
+    
     /**
      * @param Identity $id Unique customerOrderBillingAddress id
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
@@ -207,9 +208,11 @@ class CustomerOrderBillingAddress extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique customerOrderBillingAddress id
      */
@@ -217,16 +220,18 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param string $city City
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setCity($city)
     {
-        return $this->setProperty('city', $city, 'string');
+        $this->city = $city;
+        
+        return $this;
     }
-
+    
     /**
      * @return string City
      */
@@ -234,16 +239,18 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->city;
     }
-
+    
     /**
      * @param string $company Company name
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setCompany($company)
     {
-        return $this->setProperty('company', $company, 'string');
+        $this->company = $company;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Company name
      */
@@ -251,16 +258,18 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->company;
     }
-
+    
     /**
      * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setCountryIso($countryIso)
     {
-        return $this->setProperty('countryIso', $countryIso, 'string');
+        $this->countryIso = $countryIso;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Country ISO 3166-2 (2 letter Uppercase)
      */
@@ -268,16 +277,18 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->countryIso;
     }
-
+    
     /**
      * @param string $deliveryInstruction Delivery instruction e.g. 'John Doe'
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setDeliveryInstruction($deliveryInstruction)
     {
-        return $this->setProperty('deliveryInstruction', $deliveryInstruction, 'string');
+        $this->deliveryInstruction = $deliveryInstruction;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Delivery instruction e.g. 'John Doe'
      */
@@ -285,16 +296,18 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->deliveryInstruction;
     }
-
+    
     /**
      * @param string $eMail E-Mail address
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setEMail($eMail)
     {
-        return $this->setProperty('eMail', $eMail, 'string');
+        $this->eMail = $eMail;
+        
+        return $this;
     }
-
+    
     /**
      * @return string E-Mail address
      */
@@ -302,16 +315,18 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->eMail;
     }
-
+    
     /**
      * @param string $extraAddressLine Extra address line e.g. 'Apartment 2.5'
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setExtraAddressLine($extraAddressLine)
     {
-        return $this->setProperty('extraAddressLine', $extraAddressLine, 'string');
+        $this->extraAddressLine = $extraAddressLine;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Extra address line e.g. 'Apartment 2.5'
      */
@@ -319,16 +334,18 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->extraAddressLine;
     }
-
+    
     /**
      * @param string $fax Fax number
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setFax($fax)
     {
-        return $this->setProperty('fax', $fax, 'string');
+        $this->fax = $fax;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Fax number
      */
@@ -336,16 +353,18 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->fax;
     }
-
+    
     /**
      * @param string $firstName First name
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setFirstName($firstName)
     {
-        return $this->setProperty('firstName', $firstName, 'string');
+        $this->firstName = $firstName;
+        
+        return $this;
     }
-
+    
     /**
      * @return string First name
      */
@@ -353,16 +372,18 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->firstName;
     }
-
+    
     /**
      * @param string $lastName Last name
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setLastName($lastName)
     {
-        return $this->setProperty('lastName', $lastName, 'string');
+        $this->lastName = $lastName;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Last name
      */
@@ -370,16 +391,18 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->lastName;
     }
-
+    
     /**
      * @param string $mobile Mobile phone number
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setMobile($mobile)
     {
-        return $this->setProperty('mobile', $mobile, 'string');
+        $this->mobile = $mobile;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Mobile phone number
      */
@@ -387,16 +410,18 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->mobile;
     }
-
+    
     /**
      * @param string $phone Phone number
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setPhone($phone)
     {
-        return $this->setProperty('phone', $phone, 'string');
+        $this->phone = $phone;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Phone number
      */
@@ -404,16 +429,18 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->phone;
     }
-
+    
     /**
      * @param string $salutation Salutation (german: 'Anrede')
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setSalutation($salutation)
     {
-        return $this->setProperty('salutation', $salutation, 'string');
+        $this->salutation = $salutation;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Salutation (german: 'Anrede')
      */
@@ -421,16 +448,18 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->salutation;
     }
-
+    
     /**
      * @param string $state State
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setState($state)
     {
-        return $this->setProperty('state', $state, 'string');
+        $this->state = $state;
+        
+        return $this;
     }
-
+    
     /**
      * @return string State
      */
@@ -438,16 +467,18 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->state;
     }
-
+    
     /**
      * @param string $street Street + street number
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setStreet($street)
     {
-        return $this->setProperty('street', $street, 'string');
+        $this->street = $street;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Street + street number
      */
@@ -455,16 +486,18 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->street;
     }
-
+    
     /**
      * @param string $title Title (e.g. 'Prof. Dr.')
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setTitle($title)
     {
-        return $this->setProperty('title', $title, 'string');
+        $this->title = $title;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Title (e.g. 'Prof. Dr.')
      */
@@ -472,16 +505,18 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->title;
     }
-
+    
     /**
      * @param string $vatNumber VAT number (german "USt-ID")
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setVatNumber($vatNumber)
     {
-        return $this->setProperty('vatNumber', $vatNumber, 'string');
+        $this->vatNumber = $vatNumber;
+        
+        return $this;
     }
-
+    
     /**
      * @return string VAT number (german "USt-ID")
      */
@@ -489,16 +524,18 @@ class CustomerOrderBillingAddress extends DataModel
     {
         return $this->vatNumber;
     }
-
+    
     /**
      * @param string $zipCode Zip / postal code
      * @return \jtl\Connector\Model\CustomerOrderBillingAddress
      */
     public function setZipCode($zipCode)
     {
-        return $this->setProperty('zipCode', $zipCode, 'string');
+        $this->zipCode = $zipCode;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Zip / postal code
      */

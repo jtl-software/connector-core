@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class CustomerGroupI18n extends DataModel
@@ -28,7 +27,7 @@ class CustomerGroupI18n extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-
+    
     /**
      * @var string Locale
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class CustomerGroupI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
      * @var string Localized customer group name
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class CustomerGroupI18n extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * Constructor
      */
@@ -52,7 +51,7 @@ class CustomerGroupI18n extends DataModel
     {
         $this->customerGroupId = new Identity();
     }
-
+    
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      * @return \jtl\Connector\Model\CustomerGroupI18n
@@ -60,9 +59,11 @@ class CustomerGroupI18n extends DataModel
      */
     public function setCustomerGroupId(Identity $customerGroupId)
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        $this->customerGroupId = $customerGroupId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to customerGroup
      */
@@ -70,16 +71,18 @@ class CustomerGroupI18n extends DataModel
     {
         return $this->customerGroupId;
     }
-
+    
     /**
      * @param string $languageISO Locale
      * @return \jtl\Connector\Model\CustomerGroupI18n
      */
     public function setLanguageISO($languageISO)
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Locale
      */
@@ -87,16 +90,18 @@ class CustomerGroupI18n extends DataModel
     {
         return $this->languageISO;
     }
-
+    
     /**
      * @param string $name Localized customer group name
      * @return \jtl\Connector\Model\CustomerGroupI18n
      */
     public function setName($name)
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Localized customer group name
      */

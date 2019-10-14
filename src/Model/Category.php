@@ -108,7 +108,9 @@ class Category extends DataModel
      */
     public function setId(Identity $id): Category
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
     
     /**
@@ -126,7 +128,9 @@ class Category extends DataModel
      */
     public function setParentCategoryId(Identity $parentCategoryId): Category
     {
-        return $this->setProperty('parentCategoryId', $parentCategoryId, 'Identity');
+        $this->parentCategoryId = $parentCategoryId;
+        
+        return $this;
     }
     
     /**
@@ -143,7 +147,9 @@ class Category extends DataModel
      */
     public function setIsActive(bool $isActive): Category
     {
-        return $this->setProperty('isActive', $isActive, 'boolean');
+        $this->isActive = $isActive;
+        
+        return $this;
     }
     
     /**
@@ -160,7 +166,9 @@ class Category extends DataModel
      */
     public function setLevel(int $level): Category
     {
-        return $this->setProperty('level', $level, 'integer');
+        $this->level = $level;
+        
+        return $this;
     }
     
     /**
@@ -177,7 +185,9 @@ class Category extends DataModel
      */
     public function setSort(int $sort): Category
     {
-        return $this->setProperty('sort', $sort, 'integer');
+        $this->sort = $sort;
+        
+        return $this;
     }
     
     /**

@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class CrossSellingItem extends DataModel
@@ -28,15 +27,15 @@ class CrossSellingItem extends DataModel
      * @Serializer\Accessor(getter="getCrossSellingGroupId",setter="setCrossSellingGroupId")
      */
     protected $crossSellingGroupId = null;
-
+    
     /**
      * @var \jtl\Connector\Model\Identity[] Referenced target product ID
      * @Serializer\Type("array<jtl\Connector\Model\Identity>")
      * @Serializer\SerializedName("productIds")
      * @Serializer\AccessType("reflection")
      */
-    protected $productIds = array();
-
+    protected $productIds = [];
+    
     /**
      * Constructor
      */
@@ -44,7 +43,7 @@ class CrossSellingItem extends DataModel
     {
         $this->crossSellingGroupId = new Identity();
     }
-
+    
     /**
      * @param Identity $crossSellingGroupId Reference to crossSellingGroup
      * @return \jtl\Connector\Model\CrossSellingItem
@@ -52,9 +51,11 @@ class CrossSellingItem extends DataModel
      */
     public function setCrossSellingGroupId(Identity $crossSellingGroupId)
     {
-        return $this->setProperty('crossSellingGroupId', $crossSellingGroupId, 'Identity');
+        $this->crossSellingGroupId = $crossSellingGroupId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to crossSellingGroup
      */
@@ -62,7 +63,7 @@ class CrossSellingItem extends DataModel
     {
         return $this->crossSellingGroupId;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\Identity $productId
      * @return \jtl\Connector\Model\CrossSellingItem
@@ -70,6 +71,7 @@ class CrossSellingItem extends DataModel
     public function addProductId(\jtl\Connector\Model\Identity $productId)
     {
         $this->productIds[] = $productId;
+        
         return $this;
     }
     
@@ -80,6 +82,7 @@ class CrossSellingItem extends DataModel
     public function setProductIds(array $productIds)
     {
         $this->productIds = $productIds;
+        
         return $this;
     }
     
@@ -90,13 +93,14 @@ class CrossSellingItem extends DataModel
     {
         return $this->productIds;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\CrossSellingItem
      */
     public function clearProductIds()
     {
-        $this->productIds = array();
+        $this->productIds = [];
+        
         return $this;
     }
 }

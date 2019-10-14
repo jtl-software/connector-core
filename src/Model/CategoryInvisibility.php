@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class CategoryInvisibility extends DataModel
@@ -28,7 +27,7 @@ class CategoryInvisibility extends DataModel
      * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
      */
     protected $categoryId = null;
-
+    
     /**
      * @var Identity Reference to customerGroup that is not allowed to view categoryId
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class CategoryInvisibility extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-
+    
     /**
      * Constructor
      */
@@ -45,7 +44,7 @@ class CategoryInvisibility extends DataModel
         $this->customerGroupId = new Identity();
         $this->categoryId = new Identity();
     }
-
+    
     /**
      * @param Identity $categoryId Reference to category to hide from customerGroupId
      * @return \jtl\Connector\Model\CategoryInvisibility
@@ -53,9 +52,11 @@ class CategoryInvisibility extends DataModel
      */
     public function setCategoryId(Identity $categoryId): CategoryInvisibility
     {
-        return $this->setProperty('categoryId', $categoryId, 'Identity');
+        $this->categoryId = $categoryId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to category to hide from customerGroupId
      */
@@ -63,7 +64,7 @@ class CategoryInvisibility extends DataModel
     {
         return $this->categoryId;
     }
-
+    
     /**
      * @param Identity $customerGroupId Reference to customerGroup that is not allowed to view categoryId
      * @return \jtl\Connector\Model\CategoryInvisibility
@@ -71,9 +72,11 @@ class CategoryInvisibility extends DataModel
      */
     public function setCustomerGroupId(Identity $customerGroupId): CategoryInvisibility
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        $this->customerGroupId = $customerGroupId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to customerGroup that is not allowed to view categoryId
      */

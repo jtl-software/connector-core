@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class MeasurementUnit extends DataModel
@@ -28,7 +27,7 @@ class MeasurementUnit extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var string Optional UCUM-Code, see  http://unitsofmeasure.org/
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class MeasurementUnit extends DataModel
      * @Serializer\Accessor(getter="getCode",setter="setCode")
      */
     protected $code = '';
-
+    
     /**
      * @var string Synonym e.g. 'ml'
      * @Serializer\Type("string")
@@ -44,15 +43,15 @@ class MeasurementUnit extends DataModel
      * @Serializer\Accessor(getter="getDisplayCode",setter="setDisplayCode")
      */
     protected $displayCode = '';
-
+    
     /**
      * @var \jtl\Connector\Model\MeasurementUnitI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\MeasurementUnitI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
-
+    protected $i18ns = [];
+    
     /**
      * Constructor
      */
@@ -60,7 +59,7 @@ class MeasurementUnit extends DataModel
     {
         $this->id = new Identity();
     }
-
+    
     /**
      * @param Identity $id Unit id
      * @return \jtl\Connector\Model\MeasurementUnit
@@ -68,9 +67,11 @@ class MeasurementUnit extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unit id
      */
@@ -78,16 +79,18 @@ class MeasurementUnit extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param string $code Optional UCUM-Code, see  http://unitsofmeasure.org/
      * @return \jtl\Connector\Model\MeasurementUnit
      */
     public function setCode($code)
     {
-        return $this->setProperty('code', $code, 'string');
+        $this->code = $code;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional UCUM-Code, see  http://unitsofmeasure.org/
      */
@@ -95,16 +98,18 @@ class MeasurementUnit extends DataModel
     {
         return $this->code;
     }
-
+    
     /**
      * @param string $displayCode Synonym e.g. 'ml'
      * @return \jtl\Connector\Model\MeasurementUnit
      */
     public function setDisplayCode($displayCode)
     {
-        return $this->setProperty('displayCode', $displayCode, 'string');
+        $this->displayCode = $displayCode;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Synonym e.g. 'ml'
      */
@@ -112,7 +117,7 @@ class MeasurementUnit extends DataModel
     {
         return $this->displayCode;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\MeasurementUnitI18n $i18n
      * @return \jtl\Connector\Model\MeasurementUnit
@@ -120,6 +125,7 @@ class MeasurementUnit extends DataModel
     public function addI18n(\jtl\Connector\Model\MeasurementUnitI18n $i18n)
     {
         $this->i18ns[] = $i18n;
+        
         return $this;
     }
     
@@ -130,6 +136,7 @@ class MeasurementUnit extends DataModel
     public function setI18ns(array $i18ns)
     {
         $this->i18ns = $i18ns;
+        
         return $this;
     }
     
@@ -140,13 +147,14 @@ class MeasurementUnit extends DataModel
     {
         return $this->i18ns;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\MeasurementUnit
      */
     public function clearI18ns()
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
+        
         return $this;
     }
 }

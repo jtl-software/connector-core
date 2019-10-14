@@ -99,7 +99,9 @@ class CategoryI18n extends DataModel
      */
     public function setCategoryId(Identity $categoryId): Identity
     {
-        return $this->setProperty('categoryId', $categoryId, 'Identity');
+        $this->categoryId = $categoryId;
+        
+        return $this;
     }
     
     /**
@@ -116,7 +118,9 @@ class CategoryI18n extends DataModel
      */
     public function setDescription(string $description): CategoryI18n
     {
-        return $this->setProperty('description', $description, 'string');
+        $this->description = $description;
+        
+        return $this;
     }
     
     /**
@@ -133,7 +137,9 @@ class CategoryI18n extends DataModel
      */
     public function setLanguageISO($languageISO): CategoryI18n
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
     
     /**
@@ -150,7 +156,9 @@ class CategoryI18n extends DataModel
      */
     public function setMetaDescription(string $metaDescription): CategoryI18n
     {
-        return $this->setProperty('metaDescription', $metaDescription, 'string');
+        $this->metaDescription = $metaDescription;
+        
+        return $this;
     }
     
     /**
@@ -167,7 +175,9 @@ class CategoryI18n extends DataModel
      */
     public function setMetaKeywords(string $metaKeywords): CategoryI18n
     {
-        return $this->setProperty('metaKeywords', $metaKeywords, 'string');
+        $this->metaKeywords = $metaKeywords;
+        
+        return $this;
     }
     
     /**
@@ -184,7 +194,9 @@ class CategoryI18n extends DataModel
      */
     public function setName(string $name): CategoryI18n
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
     
     /**
@@ -201,7 +213,9 @@ class CategoryI18n extends DataModel
      */
     public function setTitleTag(string $titleTag): CategoryI18n
     {
-        return $this->setProperty('titleTag', $titleTag, 'string');
+        $this->titleTag = $titleTag;
+        
+        return $this;
     }
     
     /**
@@ -218,7 +232,9 @@ class CategoryI18n extends DataModel
      */
     public function setUrlPath(string $urlPath): CategoryI18n
     {
-        return $this->setProperty('urlPath', $urlPath, 'string');
+        $this->urlPath = $urlPath;
+        
+        return $this;
     }
     
     /**

@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class Shipment extends DataModel
@@ -28,7 +27,7 @@ class Shipment extends DataModel
      * @Serializer\Accessor(getter="getDeliveryNoteId",setter="setDeliveryNoteId")
      */
     protected $deliveryNoteId = null;
-
+    
     /**
      * @var Identity Unique shipment id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class Shipment extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var string Carrier name
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class Shipment extends DataModel
      * @Serializer\Accessor(getter="getCarrierName",setter="setCarrierName")
      */
     protected $carrierName = '';
-
+    
     /**
      * @var DateTime Creation date
      * @Serializer\Type("DateTime")
@@ -52,7 +51,7 @@ class Shipment extends DataModel
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
     protected $creationDate = null;
-
+    
     /**
      * @var string Optional Identcode
      * @Serializer\Type("string")
@@ -60,7 +59,7 @@ class Shipment extends DataModel
      * @Serializer\Accessor(getter="getIdentCode",setter="setIdentCode")
      */
     protected $identCode = '';
-
+    
     /**
      * @var string Optional shipment note
      * @Serializer\Type("string")
@@ -68,15 +67,15 @@ class Shipment extends DataModel
      * @Serializer\Accessor(getter="getNote",setter="setNote")
      */
     protected $note = '';
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("trackingUrl")
      * @Serializer\Accessor(getter="getTrackingUrl",setter="setTrackingUrl")
      */
     protected $trackingUrl = '';
-
+    
     /**
      * Constructor
      */
@@ -85,7 +84,7 @@ class Shipment extends DataModel
         $this->id = new Identity();
         $this->deliveryNoteId = new Identity();
     }
-
+    
     /**
      * @param Identity $deliveryNoteId Reference to deliveryNote
      * @return \jtl\Connector\Model\Shipment
@@ -93,9 +92,11 @@ class Shipment extends DataModel
      */
     public function setDeliveryNoteId(Identity $deliveryNoteId)
     {
-        return $this->setProperty('deliveryNoteId', $deliveryNoteId, 'Identity');
+        $this->deliveryNoteId = $deliveryNoteId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to deliveryNote
      */
@@ -103,7 +104,7 @@ class Shipment extends DataModel
     {
         return $this->deliveryNoteId;
     }
-
+    
     /**
      * @param Identity $id Unique shipment id
      * @return \jtl\Connector\Model\Shipment
@@ -111,9 +112,11 @@ class Shipment extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique shipment id
      */
@@ -121,16 +124,18 @@ class Shipment extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param string $carrierName Carrier name
      * @return \jtl\Connector\Model\Shipment
      */
     public function setCarrierName($carrierName)
     {
-        return $this->setProperty('carrierName', $carrierName, 'string');
+        $this->carrierName = $carrierName;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Carrier name
      */
@@ -138,7 +143,7 @@ class Shipment extends DataModel
     {
         return $this->carrierName;
     }
-
+    
     /**
      * @param DateTime $creationDate Creation date
      * @return \jtl\Connector\Model\Shipment
@@ -146,9 +151,11 @@ class Shipment extends DataModel
      */
     public function setCreationDate(DateTime $creationDate = null)
     {
-        return $this->setProperty('creationDate', $creationDate, 'DateTime');
+        $this->creationDate = $creationDate;
+        
+        return $this;
     }
-
+    
     /**
      * @return DateTime Creation date
      */
@@ -156,16 +163,18 @@ class Shipment extends DataModel
     {
         return $this->creationDate;
     }
-
+    
     /**
      * @param string $identCode Optional Identcode
      * @return \jtl\Connector\Model\Shipment
      */
     public function setIdentCode($identCode)
     {
-        return $this->setProperty('identCode', $identCode, 'string');
+        $this->identCode = $identCode;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional Identcode
      */
@@ -173,16 +182,18 @@ class Shipment extends DataModel
     {
         return $this->identCode;
     }
-
+    
     /**
      * @param string $note Optional shipment note
      * @return \jtl\Connector\Model\Shipment
      */
     public function setNote($note)
     {
-        return $this->setProperty('note', $note, 'string');
+        $this->note = $note;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional shipment note
      */
@@ -190,18 +201,20 @@ class Shipment extends DataModel
     {
         return $this->note;
     }
-
+    
     /**
-     * @param string $trackingUrl 
+     * @param string $trackingUrl
      * @return \jtl\Connector\Model\Shipment
      */
     public function setTrackingUrl($trackingUrl)
     {
-        return $this->setProperty('trackingUrl', $trackingUrl, 'string');
+        $this->trackingUrl = $trackingUrl;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
     public function getTrackingUrl()
     {

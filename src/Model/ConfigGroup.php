@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ConfigGroup extends DataModel
@@ -28,7 +27,7 @@ class ConfigGroup extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var string Optional internal comment to differantiate config groups by comment name
      * @Serializer\Type("string")
@@ -36,15 +35,15 @@ class ConfigGroup extends DataModel
      * @Serializer\Accessor(getter="getComment",setter="setComment")
      */
     protected $comment = '';
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("imagePath")
      * @Serializer\Accessor(getter="getImagePath",setter="setImagePath")
      */
     protected $imagePath = '';
-
+    
     /**
      * @var integer Optional maximum number allowed selections. Default 0 for no maximum limitation.
      * @Serializer\Type("integer")
@@ -52,15 +51,15 @@ class ConfigGroup extends DataModel
      * @Serializer\Accessor(getter="getMaximumSelection",setter="setMaximumSelection")
      */
     protected $maximumSelection = 0;
-
+    
     /**
-     * @var integer Optional minimum number required selections. Default 0 for no minimum requirement. 
+     * @var integer Optional minimum number required selections. Default 0 for no minimum requirement.
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("minimumSelection")
      * @Serializer\Accessor(getter="getMinimumSelection",setter="setMinimumSelection")
      */
     protected $minimumSelection = 0;
-
+    
     /**
      * @var integer Optional sort order number
      * @Serializer\Type("integer")
@@ -68,7 +67,7 @@ class ConfigGroup extends DataModel
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
-
+    
     /**
      * @var integer Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      * @Serializer\Type("integer")
@@ -76,15 +75,15 @@ class ConfigGroup extends DataModel
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
     protected $type = 0;
-
+    
     /**
      * @var \jtl\Connector\Model\ConfigGroupI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ConfigGroupI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
-
+    protected $i18ns = [];
+    
     /**
      * Constructor
      */
@@ -92,7 +91,7 @@ class ConfigGroup extends DataModel
     {
         $this->id = new Identity();
     }
-
+    
     /**
      * @param Identity $id Unique configGroup id
      * @return \jtl\Connector\Model\ConfigGroup
@@ -100,9 +99,11 @@ class ConfigGroup extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique configGroup id
      */
@@ -110,16 +111,18 @@ class ConfigGroup extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param string $comment Optional internal comment to differantiate config groups by comment name
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function setComment($comment)
     {
-        return $this->setProperty('comment', $comment, 'string');
+        $this->comment = $comment;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional internal comment to differantiate config groups by comment name
      */
@@ -127,33 +130,37 @@ class ConfigGroup extends DataModel
     {
         return $this->comment;
     }
-
+    
     /**
-     * @param string $imagePath 
+     * @param string $imagePath
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function setImagePath($imagePath)
     {
-        return $this->setProperty('imagePath', $imagePath, 'string');
+        $this->imagePath = $imagePath;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
     public function getImagePath()
     {
         return $this->imagePath;
     }
-
+    
     /**
      * @param integer $maximumSelection Optional maximum number allowed selections. Default 0 for no maximum limitation.
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function setMaximumSelection($maximumSelection)
     {
-        return $this->setProperty('maximumSelection', $maximumSelection, 'integer');
+        $this->maximumSelection = $maximumSelection;
+        
+        return $this;
     }
-
+    
     /**
      * @return integer Optional maximum number allowed selections. Default 0 for no maximum limitation.
      */
@@ -161,33 +168,37 @@ class ConfigGroup extends DataModel
     {
         return $this->maximumSelection;
     }
-
+    
     /**
-     * @param integer $minimumSelection Optional minimum number required selections. Default 0 for no minimum requirement. 
+     * @param integer $minimumSelection Optional minimum number required selections. Default 0 for no minimum requirement.
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function setMinimumSelection($minimumSelection)
     {
-        return $this->setProperty('minimumSelection', $minimumSelection, 'integer');
+        $this->minimumSelection = $minimumSelection;
+        
+        return $this;
     }
-
+    
     /**
-     * @return integer Optional minimum number required selections. Default 0 for no minimum requirement. 
+     * @return integer Optional minimum number required selections. Default 0 for no minimum requirement.
      */
     public function getMinimumSelection()
     {
         return $this->minimumSelection;
     }
-
+    
     /**
      * @param integer $sort Optional sort order number
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function setSort($sort)
     {
-        return $this->setProperty('sort', $sort, 'integer');
+        $this->sort = $sort;
+        
+        return $this;
     }
-
+    
     /**
      * @return integer Optional sort order number
      */
@@ -195,16 +206,18 @@ class ConfigGroup extends DataModel
     {
         return $this->sort;
     }
-
+    
     /**
      * @param integer $type Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function setType($type)
     {
-        return $this->setProperty('type', $type, 'integer');
+        $this->type = $type;
+        
+        return $this;
     }
-
+    
     /**
      * @return integer Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      */
@@ -212,7 +225,7 @@ class ConfigGroup extends DataModel
     {
         return $this->type;
     }
-
+    
     /**
      * @param \jtl\Connector\Model\ConfigGroupI18n $i18n
      * @return \jtl\Connector\Model\ConfigGroup
@@ -220,6 +233,7 @@ class ConfigGroup extends DataModel
     public function addI18n(\jtl\Connector\Model\ConfigGroupI18n $i18n)
     {
         $this->i18ns[] = $i18n;
+        
         return $this;
     }
     
@@ -230,6 +244,7 @@ class ConfigGroup extends DataModel
     public function setI18ns(array $i18ns)
     {
         $this->i18ns = $i18ns;
+        
         return $this;
     }
     
@@ -240,13 +255,14 @@ class ConfigGroup extends DataModel
     {
         return $this->i18ns;
     }
-
+    
     /**
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function clearI18ns()
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
+        
         return $this;
     }
 }

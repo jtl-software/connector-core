@@ -11,39 +11,37 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ConnectorIdentification extends DataModel
 {
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("endpointVersion")
      * @Serializer\Accessor(getter="getEndpointVersion",setter="setEndpointVersion")
      */
     protected $endpointVersion = '';
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("platformName")
      * @Serializer\Accessor(getter="getPlatformName",setter="setPlatformName")
      */
     protected $platformName = '';
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("platformVersion")
      * @Serializer\Accessor(getter="getPlatformVersion",setter="setPlatformVersion")
      */
     protected $platformVersion = '';
-
+    
     /**
      * @var integer
      * @Serializer\Type("integer")
@@ -51,7 +49,7 @@ class ConnectorIdentification extends DataModel
      * @Serializer\Accessor(getter="getProtocolVersion",setter="setProtocolVersion")
      */
     protected $protocolVersion = '';
-
+    
     /**
      * @var ConnectorServerInfo
      * @Serializer\Type("jtl\Connector\Model\ConnectorServerInfo")
@@ -59,50 +57,56 @@ class ConnectorIdentification extends DataModel
      * @Serializer\Accessor(getter="getServerInfo",setter="setServerInfo")
      */
     protected $serverInfo = null;
-
+    
     /**
-     * @param string $endpointVersion 
+     * @param string $endpointVersion
      * @return \jtl\Connector\Model\ConnectorIdentification
      */
     public function setEndpointVersion($endpointVersion)
     {
-        return $this->setProperty('endpointVersion', $endpointVersion, 'string');
+        $this->endpointVersion = $endpointVersion;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
     public function getEndpointVersion()
     {
         return $this->endpointVersion;
     }
-
+    
     /**
-     * @param string $platformName 
+     * @param string $platformName
      * @return \jtl\Connector\Model\ConnectorIdentification
      */
     public function setPlatformName($platformName)
     {
-        return $this->setProperty('platformName', $platformName, 'string');
+        $this->platformName = $platformName;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
     public function getPlatformName()
     {
         return $this->platformName;
     }
-
+    
     /**
      * @param string $platformVersion
      * @return \jtl\Connector\Model\ConnectorIdentification
      */
     public function setPlatformVersion($platformVersion)
     {
-        return $this->setProperty('platformVersion', $platformVersion, 'string');
+        $this->platformVersion = $platformVersion;
+        
+        return $this;
     }
-
+    
     /**
      * @return string
      */
@@ -110,16 +114,18 @@ class ConnectorIdentification extends DataModel
     {
         return $this->platformVersion;
     }
-
+    
     /**
      * @param integer $protocolVersion
      * @return \jtl\Connector\Model\ConnectorIdentification
      */
     public function setProtocolVersion($protocolVersion)
     {
-        return $this->setProperty('protocolVersion', $protocolVersion, 'integer');
+        $this->protocolVersion = $protocolVersion;
+        
+        return $this;
     }
-
+    
     /**
      * @return integer
      */
@@ -127,7 +133,7 @@ class ConnectorIdentification extends DataModel
     {
         return $this->protocolVersion;
     }
-
+    
     /**
      * @param ConnectorServerInfo $connectorServerInfo
      * @return \jtl\Connector\Model\ConnectorIdentification
@@ -136,7 +142,7 @@ class ConnectorIdentification extends DataModel
     {
         $this->serverInfo = $connectorServerInfo;
     }
-
+    
     /**
      * @return ConnectorServerInfo
      */

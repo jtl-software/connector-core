@@ -11,12 +11,11 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Product to specificValue Assignment. Product specifics are used to assign characteristic product attributes like color or  size... When different products have common specifics, products are similar. 
+ * Product to specificValue Assignment. Product specifics are used to assign characteristic product attributes like color or  size... When different products have common specifics, products are similar.
  *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductSpecific extends DataModel
@@ -28,7 +27,7 @@ class ProductSpecific extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class ProductSpecific extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-
+    
     /**
      * @var Identity Reference to specificValue
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -44,7 +43,7 @@ class ProductSpecific extends DataModel
      * @Serializer\Accessor(getter="getSpecificValueId",setter="setSpecificValueId")
      */
     protected $specificValueId = null;
-
+    
     /**
      * Constructor
      */
@@ -54,7 +53,7 @@ class ProductSpecific extends DataModel
         $this->specificValueId = new Identity();
         $this->productId = new Identity();
     }
-
+    
     /**
      * @param Identity $id Unique productSpecific id
      * @return \jtl\Connector\Model\ProductSpecific
@@ -62,9 +61,11 @@ class ProductSpecific extends DataModel
      */
     public function setId(Identity $id)
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique productSpecific id
      */
@@ -72,7 +73,7 @@ class ProductSpecific extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param Identity $productId Reference to product
      * @return \jtl\Connector\Model\ProductSpecific
@@ -80,9 +81,11 @@ class ProductSpecific extends DataModel
      */
     public function setProductId(Identity $productId)
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        $this->productId = $productId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to product
      */
@@ -90,7 +93,7 @@ class ProductSpecific extends DataModel
     {
         return $this->productId;
     }
-
+    
     /**
      * @param Identity $specificValueId Reference to specificValue
      * @return \jtl\Connector\Model\ProductSpecific
@@ -98,9 +101,11 @@ class ProductSpecific extends DataModel
      */
     public function setSpecificValueId(Identity $specificValueId)
     {
-        return $this->setProperty('specificValueId', $specificValueId, 'Identity');
+        $this->specificValueId = $specificValueId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to specificValue
      */

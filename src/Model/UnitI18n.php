@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class UnitI18n extends DataModel
@@ -28,7 +27,7 @@ class UnitI18n extends DataModel
      * @Serializer\Accessor(getter="getUnitId",setter="setUnitId")
      */
     protected $unitId = null;
-
+    
     /**
      * @var string Locale
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class UnitI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
      * @var string Localized unit name
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class UnitI18n extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * Constructor
      */
@@ -52,7 +51,7 @@ class UnitI18n extends DataModel
     {
         $this->unitId = new Identity();
     }
-
+    
     /**
      * @param Identity $unitId Unit id
      * @return \jtl\Connector\Model\UnitI18n
@@ -60,9 +59,11 @@ class UnitI18n extends DataModel
      */
     public function setUnitId(Identity $unitId)
     {
-        return $this->setProperty('unitId', $unitId, 'Identity');
+        $this->unitId = $unitId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unit id
      */
@@ -70,16 +71,18 @@ class UnitI18n extends DataModel
     {
         return $this->unitId;
     }
-
+    
     /**
      * @param string $languageISO Locale
      * @return \jtl\Connector\Model\UnitI18n
      */
     public function setLanguageISO($languageISO)
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Locale
      */
@@ -87,16 +90,18 @@ class UnitI18n extends DataModel
     {
         return $this->languageISO;
     }
-
+    
     /**
      * @param string $name Localized unit name
      * @return \jtl\Connector\Model\UnitI18n
      */
     public function setName($name)
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Localized unit name
      */

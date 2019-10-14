@@ -76,7 +76,9 @@ class CategoryAttr extends DataModel
      */
     public function setCategoryId(Identity $categoryId): CategoryAttr
     {
-        return $this->setProperty('categoryId', $categoryId, 'Identity');
+        $this->categoryId = $categoryId;
+        
+        return $this;
     }
     
     /**
@@ -94,7 +96,9 @@ class CategoryAttr extends DataModel
      */
     public function setId(Identity $id): CategoryAttr
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
     
     /**
@@ -111,7 +115,9 @@ class CategoryAttr extends DataModel
      */
     public function setIsCustomProperty(bool $isCustomProperty): CategoryAttr
     {
-        return $this->setProperty('isCustomProperty', $isCustomProperty, 'boolean');
+        $this->isCustomProperty = $isCustomProperty;
+        
+        return $this;
     }
     
     /**
@@ -128,7 +134,9 @@ class CategoryAttr extends DataModel
      */
     public function setIsTranslated(bool $isTranslated): CategoryAttr
     {
-        return $this->setProperty('isTranslated', $isTranslated, 'boolean');
+        $this->isTranslated = $isTranslated;
+        
+        return $this;
     }
     
     /**

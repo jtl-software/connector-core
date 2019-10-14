@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class SpecificI18n extends DataModel
@@ -28,7 +27,7 @@ class SpecificI18n extends DataModel
      * @Serializer\Accessor(getter="getSpecificId",setter="setSpecificId")
      */
     protected $specificId = null;
-
+    
     /**
      * @var string Locale
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class SpecificI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
      * @var string Localized name
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class SpecificI18n extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * Constructor
      */
@@ -52,7 +51,7 @@ class SpecificI18n extends DataModel
     {
         $this->specificId = new Identity();
     }
-
+    
     /**
      * @param Identity $specificId Reference to specific
      * @return \jtl\Connector\Model\SpecificI18n
@@ -60,9 +59,11 @@ class SpecificI18n extends DataModel
      */
     public function setSpecificId(Identity $specificId)
     {
-        return $this->setProperty('specificId', $specificId, 'Identity');
+        $this->specificId = $specificId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to specific
      */
@@ -70,16 +71,18 @@ class SpecificI18n extends DataModel
     {
         return $this->specificId;
     }
-
+    
     /**
      * @param string $languageISO Locale
      * @return \jtl\Connector\Model\SpecificI18n
      */
     public function setLanguageISO($languageISO)
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Locale
      */
@@ -87,16 +90,18 @@ class SpecificI18n extends DataModel
     {
         return $this->languageISO;
     }
-
+    
     /**
      * @param string $name Localized name
      * @return \jtl\Connector\Model\SpecificI18n
      */
     public function setName($name)
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Localized name
      */

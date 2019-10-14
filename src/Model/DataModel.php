@@ -2,7 +2,7 @@
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Internal 
+ * @subpackage Internal
  */
 
 namespace jtl\Connector\Model;
@@ -27,7 +27,7 @@ abstract class DataModel extends CoreModel
      * @Serializer\Exclude
      */
     private $_type = null;
-
+    
     /**
      * @var boolean
      * @Serializer\Type("boolean")
@@ -35,7 +35,7 @@ abstract class DataModel extends CoreModel
      * @Serializer\Exclude
      */
     protected $isEncrypted = false;
-
+    
     /**
      * @return \jtl\Connector\Type\DataType
      */
@@ -44,35 +44,35 @@ abstract class DataModel extends CoreModel
         if ($this->_type === null) {
             $reflect = new \ReflectionClass($this);
             $class = '\\jtl\\Connector\\Type\\' . $reflect->getShortName();
-
+            
             $this->_type = new $class;
         }
-
+        
         return $this->_type;
     }
-
+    
     /**
      * Encrypted Status
-     * 
+     *
      * @return boolean
      */
     public function isEncrypted()
     {
         return $this->isEncrypted;
     }
-
+    
     /**
      * Convert the Model into stdClass Object
      *
      * @param array $publics
      * @return stdClass $object
      */
-    public function getPublic(array $publics = array('fields', 'isEncrypted', 'identities', '_type'))
+    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', '_type'])
     {
         $object = new \stdClass();
-
+        
         $recursive = function (array $subElems, array $publics) use (&$recursive) {
-            $arr = array();
+            $arr = [];
             foreach ($subElems as $subElem) {
                 if ($subElem instanceof DataModel) {
                     $arr[] = $subElem->getPublic($publics);
@@ -86,16 +86,16 @@ abstract class DataModel extends CoreModel
                     $arr[] = $subElem;
                 }
             }
-
+            
             return $arr;
         };
-
+        
         $members = array_keys(get_object_vars($this));
         if (is_array($members) && count($members) > 0) {
             foreach ($members as $member) {
                 $property = ucfirst($member);
                 $getter = 'get' . $property;
-
+                
                 if (!in_array($member, $publics)) {
                     if ($this->{$getter}() instanceof DataModel) {
                         $object->{$member} = $this->{$getter}()->getPublic($publics);
@@ -154,14 +154,14 @@ abstract class DataModel extends CoreModel
                 if (!is_null($endpoint)) {
                     $identity->setEndpoint($endpoint);
                 }
-    
+                
                 if (!is_null($host)) {
                     $identity->setHost($host);
                 }
             }
         }
     }
-
+    
     /**
      * Sets Properties with matching Array Values
      *
@@ -172,29 +172,29 @@ abstract class DataModel extends CoreModel
     public function setOptions(\stdClass $object = null, array $options = null)
     {
         parent::setOptions($object, $options);
-
+        
         return $this;
     }
-
+    
     protected function setProperty($name, $value, $type)
     {
         if (!$this->validateType($value, $type)) {
-            throw new \InvalidArgumentException(sprintf("%s (%s): expected type '%s', given value '%s'.", $name, get_class($this), $type, gettype($value)));
+            throw new \InvalidArgumentException(sprintf("%s (%s): expected type '%s', given value '%s'.", $name,
+                get_class($this), $type, gettype($value)));
         }
-
+        
         $this->{$name} = $value;
         
         return $this;
     }
-
+    
     protected function validateType($value, $type)
     {
         if ($value === null) {
             return true;
         }
-
-        switch ($type)
-        {
+        
+        switch ($type) {
             case 'boolean':
             case 'bool':
                 return is_bool($value);
@@ -216,7 +216,7 @@ abstract class DataModel extends CoreModel
                 if (is_object($value)) {
                     return is_null($value) || is_subclass_of($value, 'jtl\Connector\Model\DataModel');
                 }
-
+                
                 throw new \InvalidArgumentException(sprintf("type '%s' validator not found", $type));
         }
     }

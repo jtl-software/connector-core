@@ -65,7 +65,9 @@ class CategoryAttrI18n extends DataModel
      */
     public function setCategoryAttrId(Identity $categoryAttrId): CategoryAttrI18n
     {
-        return $this->setProperty('categoryAttrId', $categoryAttrId, 'Identity');
+        $this->categoryAttrId = $categoryAttrId;
+        
+        return $this;
     }
     
     /**
@@ -82,7 +84,9 @@ class CategoryAttrI18n extends DataModel
      */
     public function setLanguageISO($languageISO): CategoryAttrI18n
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
     
     /**
@@ -99,7 +103,9 @@ class CategoryAttrI18n extends DataModel
      */
     public function setName($name): CategoryAttrI18n
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
     
     /**
@@ -116,7 +122,9 @@ class CategoryAttrI18n extends DataModel
      */
     public function setValue(string $value): CategoryAttrI18n
     {
-        return $this->setProperty('value', $value, 'string');
+        $this->value = $value;
+        
+        return $this;
     }
     
     /**
