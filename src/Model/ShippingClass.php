@@ -58,7 +58,7 @@ class ShippingClass extends DataModel
     /**
      * @return Identity Unique shippingClass id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

@@ -90,7 +90,7 @@ class Manufacturer extends DataModel
     /**
      * @return Identity Unique manufacturer id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

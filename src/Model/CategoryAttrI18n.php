@@ -11,47 +11,45 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class CategoryAttrI18n extends DataModel
 {
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("categoryAttrId")
      * @Serializer\Accessor(getter="getCategoryAttrId",setter="setCategoryAttrId")
      */
     protected $categoryAttrId = null;
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("languageISO")
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("value")
      * @Serializer\Accessor(getter="getValue",setter="setValue")
      */
     protected $value = '';
-
+    
     /**
      * Constructor
      */
@@ -59,72 +57,72 @@ class CategoryAttrI18n extends DataModel
     {
         $this->categoryAttrId = new Identity();
     }
-
+    
     /**
-     * @param Identity $categoryAttrId 
+     * @param Identity $categoryAttrId
      * @return \jtl\Connector\Model\CategoryAttrI18n
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCategoryAttrId(Identity $categoryAttrId)
+    public function setCategoryAttrId(Identity $categoryAttrId): CategoryAttrI18n
     {
         return $this->setProperty('categoryAttrId', $categoryAttrId, 'Identity');
     }
-
+    
     /**
-     * @return Identity 
+     * @return Identity
      */
-    public function getCategoryAttrId()
+    public function getCategoryAttrId(): Identity
     {
         return $this->categoryAttrId;
     }
-
+    
     /**
-     * @param string $languageISO 
+     * @param string $languageISO
      * @return \jtl\Connector\Model\CategoryAttrI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO($languageISO): CategoryAttrI18n
     {
         return $this->setProperty('languageISO', $languageISO, 'string');
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
-
+    
     /**
-     * @param string $name 
+     * @param string $name
      * @return \jtl\Connector\Model\CategoryAttrI18n
      */
-    public function setName($name)
+    public function setName($name): CategoryAttrI18n
     {
         return $this->setProperty('name', $name, 'string');
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
-
+    
     /**
-     * @param string $value 
+     * @param string $value
      * @return \jtl\Connector\Model\CategoryAttrI18n
      */
-    public function setValue($value)
+    public function setValue(string $value): CategoryAttrI18n
     {
         return $this->setProperty('value', $value, 'string');
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
-    public function getValue()
+    public function getValue(): string
     {
         return $this->value;
     }

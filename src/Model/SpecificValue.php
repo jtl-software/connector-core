@@ -75,7 +75,7 @@ class SpecificValue extends DataModel
     /**
      * @return Identity Unique specificValue id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

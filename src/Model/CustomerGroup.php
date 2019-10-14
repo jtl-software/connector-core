@@ -90,7 +90,7 @@ class CustomerGroup extends DataModel
     /**
      * @return Identity Unique customerGroup id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

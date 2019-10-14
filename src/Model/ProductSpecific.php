@@ -68,7 +68,7 @@ class ProductSpecific extends DataModel
     /**
      * @return Identity Unique productSpecific id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

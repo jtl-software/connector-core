@@ -93,7 +93,7 @@ class CustomerGroupAttr extends DataModel
     /**
      * @return Identity Unique customerGroupAttr id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

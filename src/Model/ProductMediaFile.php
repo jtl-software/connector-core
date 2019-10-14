@@ -115,7 +115,7 @@ class ProductMediaFile extends DataModel
     /**
      * @return Identity Unique MediaFile id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

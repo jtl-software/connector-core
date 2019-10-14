@@ -66,7 +66,7 @@ class TaxClass extends DataModel
     /**
      * @return Identity Unique taxClass id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

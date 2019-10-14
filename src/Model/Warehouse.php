@@ -58,7 +58,7 @@ class Warehouse extends DataModel
     /**
      * @return Identity Unique warehouse id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

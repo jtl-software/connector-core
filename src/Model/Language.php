@@ -82,7 +82,7 @@ class Language extends DataModel
     /**
      * @return Identity Unique language id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

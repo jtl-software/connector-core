@@ -66,7 +66,7 @@ class TaxZone extends DataModel
     /**
      * @return Identity Unique taxZone id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

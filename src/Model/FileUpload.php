@@ -83,7 +83,7 @@ class FileUpload extends DataModel
     /**
      * @return Identity Unique fileUpload id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

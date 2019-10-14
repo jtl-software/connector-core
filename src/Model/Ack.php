@@ -9,6 +9,7 @@ namespace jtl\Connector\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 use \Doctrine\Common\Collections\ArrayCollection;
+use jtl\Connector\Checksum\IChecksum;
 
 /**
  * Ack
@@ -27,61 +28,64 @@ class Ack extends DataModel
      * @Serializer\Accessor(getter="getIdentities",setter="setIdentities")
      */
     protected $identities = null;
-
+    
     /**
-     * @var Checksum[] 
+     * @var Checksum[]
      * @Serializer\Type("array<jtl\Connector\Model\Checksum>")
      * @Serializer\SerializedName("checksums")
      * @Serializer\AccessType("reflection")
      */
-    protected $checksums = array();
-
+    protected $checksums = [];
+    
     /**
      * Identities getter
      *
-     * @return \Doctrine\Common\Collections\ArrayCollection
+     * @return Identity
      */
     public function getIdentities()
     {
         return $this->identities;
     }
-
+    
     /**
      * Identities getter
      *
-     * @param \Doctrine\Common\Collections\ArrayCollection $identities
-     * @return \jtl\Connector\Model\Ack
+     * @param ArrayCollection $identities
+     * @return Ack
      */
-    public function setIdentities(ArrayCollection $identities)
+    public function setIdentities(ArrayCollection $identities): Ack
     {
         $this->identities = $identities;
-        return $this;
-    }
-
-    /**
-     * @param Checksum $checksum
-     * @return \jtl\Connector\Model\Ack
-     */
-    public function addChecksum(Checksum $checksum)
-    {
-        $this->checksums[] = $checksum;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Checksum\IChecksum[]
+     * @param Checksum $checksum
+     * @return Ack
      */
-    public function getChecksums()
+    public function addChecksum(Checksum $checksum): Ack
+    {
+        $this->checksums[] = $checksum;
+        
+        return $this;
+    }
+    
+    /**
+     * @return IChecksum[]
+     */
+    public function getChecksums(): array
     {
         return $this->checksums;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Ack
+     * @return Ack
      */
-    public function clearChecksums()
+    public function clearChecksums(): Ack
     {
-        $this->checksums = array();
+        $this->checksums = [];
+        
         return $this;
     }
 }

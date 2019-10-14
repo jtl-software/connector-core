@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class Category extends DataModel
@@ -28,7 +27,7 @@ class Category extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var Identity Optional reference to parent category id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,23 +35,23 @@ class Category extends DataModel
      * @Serializer\Accessor(getter="getParentCategoryId",setter="setParentCategoryId")
      */
     protected $parentCategoryId = null;
-
+    
     /**
-     * @var boolean 
+     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isActive")
      * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
      */
     protected $isActive = false;
-
+    
     /**
-     * @var integer 
+     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("level")
      * @Serializer\Accessor(getter="getLevel",setter="setLevel")
      */
     protected $level = 0;
-
+    
     /**
      * @var integer Optional sort order number
      * @Serializer\Type("integer")
@@ -60,39 +59,39 @@ class Category extends DataModel
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
-
+    
     /**
-     * @var \jtl\Connector\Model\CategoryAttr[]
+     * @var CategoryAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryAttr>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
-    protected $attributes = array();
-
+    protected $attributes = [];
+    
     /**
-     * @var \jtl\Connector\Model\CategoryCustomerGroup[]
+     * @var CategoryCustomerGroup[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryCustomerGroup>")
      * @Serializer\SerializedName("customerGroups")
      * @Serializer\AccessType("reflection")
      */
-    protected $customerGroups = array();
-
+    protected $customerGroups = [];
+    
     /**
-     * @var \jtl\Connector\Model\CategoryI18n[]
+     * @var CategoryI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
-
+    protected $i18ns = [];
+    
     /**
-     * @var \jtl\Connector\Model\CategoryInvisibility[]
+     * @var CategoryInvisibility[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryInvisibility>")
      * @Serializer\SerializedName("invisibilities")
      * @Serializer\AccessType("reflection")
      */
-    protected $invisibilities = array();
-
+    protected $invisibilities = [];
+    
     /**
      * Constructor
      */
@@ -101,35 +100,35 @@ class Category extends DataModel
         $this->id = new Identity();
         $this->parentCategoryId = new Identity();
     }
-
+    
     /**
      * @param Identity $id Unique category id
-     * @return \jtl\Connector\Model\Category
+     * @return Category
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): Category
     {
         return $this->setProperty('id', $id, 'Identity');
     }
-
+    
     /**
      * @return Identity Unique category id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }
-
+    
     /**
      * @param Identity $parentCategoryId Optional reference to parent category id
-     * @return \jtl\Connector\Model\Category
+     * @return Category
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setParentCategoryId(Identity $parentCategoryId)
+    public function setParentCategoryId(Identity $parentCategoryId): Category
     {
         return $this->setProperty('parentCategoryId', $parentCategoryId, 'Identity');
     }
-
+    
     /**
      * @return Identity Optional reference to parent category id
      */
@@ -137,203 +136,215 @@ class Category extends DataModel
     {
         return $this->parentCategoryId;
     }
-
+    
     /**
-     * @param boolean $isActive 
-     * @return \jtl\Connector\Model\Category
+     * @param boolean $isActive
+     * @return Category
      */
-    public function setIsActive($isActive)
+    public function setIsActive(bool $isActive): Category
     {
         return $this->setProperty('isActive', $isActive, 'boolean');
     }
-
+    
     /**
-     * @return boolean 
+     * @return boolean
      */
-    public function getIsActive()
+    public function getIsActive(): bool
     {
         return $this->isActive;
     }
-
+    
     /**
-     * @param integer $level 
-     * @return \jtl\Connector\Model\Category
+     * @param integer $level
+     * @return Category
      */
-    public function setLevel($level)
+    public function setLevel(int $level): Category
     {
         return $this->setProperty('level', $level, 'integer');
     }
-
+    
     /**
-     * @return integer 
+     * @return integer
      */
-    public function getLevel()
+    public function getLevel(): int
     {
         return $this->level;
     }
-
+    
     /**
      * @param integer $sort Optional sort order number
-     * @return \jtl\Connector\Model\Category
+     * @return Category
      */
-    public function setSort($sort)
+    public function setSort(int $sort): Category
     {
         return $this->setProperty('sort', $sort, 'integer');
     }
-
+    
     /**
      * @return integer Optional sort order number
      */
-    public function getSort()
+    public function getSort(): int
     {
         return $this->sort;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\CategoryAttr $attribute
-     * @return \jtl\Connector\Model\Category
+     * @param CategoryAttr $attribute
+     * @return Category
      */
-    public function addAttribute(\jtl\Connector\Model\CategoryAttr $attribute)
+    public function addAttribute(CategoryAttr $attribute): Category
     {
         $this->attributes[] = $attribute;
+        
         return $this;
     }
     
     /**
      * @param array $attributes
-     * @return \jtl\Connector\Model\Category
+     * @return Category
      */
-    public function setAttributes(array $attributes)
+    public function setAttributes(array $attributes): Category
     {
         $this->attributes = $attributes;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\CategoryAttr[]
+     * @return CategoryAttr[]
      */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         return $this->attributes;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Category
+     * @return Category
      */
-    public function clearAttributes()
+    public function clearAttributes(): Category
     {
-        $this->attributes = array();
+        $this->attributes = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\CategoryCustomerGroup $customerGroup
-     * @return \jtl\Connector\Model\Category
+     * @param CategoryCustomerGroup $customerGroup
+     * @return Category
      */
-    public function addCustomerGroup(\jtl\Connector\Model\CategoryCustomerGroup $customerGroup)
+    public function addCustomerGroup(CategoryCustomerGroup $customerGroup): Category
     {
         $this->customerGroups[] = $customerGroup;
+        
         return $this;
     }
     
     /**
      * @param array $customerGroups
-     * @return \jtl\Connector\Model\Category
+     * @return Category
      */
-    public function setCustomerGroups(array $customerGroups)
+    public function setCustomerGroups(array $customerGroups): Category
     {
         $this->customerGroups = $customerGroups;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\CategoryCustomerGroup[]
+     * @return CategoryCustomerGroup[]
      */
-    public function getCustomerGroups()
+    public function getCustomerGroups(): array
     {
         return $this->customerGroups;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Category
+     * @return Category
      */
-    public function clearCustomerGroups()
+    public function clearCustomerGroups(): Category
     {
-        $this->customerGroups = array();
+        $this->customerGroups = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\CategoryI18n $i18n
-     * @return \jtl\Connector\Model\Category
+     * @param CategoryI18n $i18n
+     * @return Category
      */
-    public function addI18n(\jtl\Connector\Model\CategoryI18n $i18n)
+    public function addI18n(CategoryI18n $i18n): Category
     {
         $this->i18ns[] = $i18n;
+        
         return $this;
     }
     
     /**
      * @param array $i18ns
-     * @return \jtl\Connector\Model\Category
+     * @return Category
      */
-    public function setI18ns(array $i18ns)
+    public function setI18ns(array $i18ns): Category
     {
         $this->i18ns = $i18ns;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\CategoryI18n[]
+     * @return CategoryI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Category
+     * @return Category
      */
-    public function clearI18ns()
+    public function clearI18ns(): Category
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\CategoryInvisibility $invisibility
-     * @return \jtl\Connector\Model\Category
+     * @param CategoryInvisibility $invisibility
+     * @return Category
      */
-    public function addInvisibility(\jtl\Connector\Model\CategoryInvisibility $invisibility)
+    public function addInvisibility(CategoryInvisibility $invisibility): Category
     {
         $this->invisibilities[] = $invisibility;
+        
         return $this;
     }
     
     /**
      * @param array $invisibilities
-     * @return \jtl\Connector\Model\Category
+     * @return Category
      */
-    public function setInvisibilities(array $invisibilities)
+    public function setInvisibilities(array $invisibilities): Category
     {
         $this->invisibilities = $invisibilities;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\CategoryInvisibility[]
+     * @return CategoryInvisibility[]
      */
-    public function getInvisibilities()
+    public function getInvisibilities(): array
     {
         return $this->invisibilities;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Category
+     * @return Category
      */
-    public function clearInvisibilities()
+    public function clearInvisibilities(): Category
     {
-        $this->invisibilities = array();
+        $this->invisibilities = [];
+        
         return $this;
     }
 }

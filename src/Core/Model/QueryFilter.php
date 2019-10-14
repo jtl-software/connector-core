@@ -170,7 +170,7 @@ class QueryFilter
      * @param mixed $value
      * @return boolean
      */
-    public function overrideFilter(string $oldKey, string  $newKey, $value = null): bool
+    public function overrideFilter(string $oldKey, string $newKey, $value = null): bool
     {
         if ($this->isFilter($oldKey)) {
             if ($value === null) {

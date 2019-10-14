@@ -205,7 +205,7 @@ class CustomerOrderShippingAddress extends DataModel
     /**
      * @return Identity Unique customerOrderShippingAddress id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

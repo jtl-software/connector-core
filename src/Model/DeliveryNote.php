@@ -117,7 +117,7 @@ class DeliveryNote extends DataModel
     /**
      * @return Identity Unique deliveryNote id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

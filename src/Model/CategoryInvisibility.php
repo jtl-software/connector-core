@@ -51,7 +51,7 @@ class CategoryInvisibility extends DataModel
      * @return \jtl\Connector\Model\CategoryInvisibility
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCategoryId(Identity $categoryId)
+    public function setCategoryId(Identity $categoryId): CategoryInvisibility
     {
         return $this->setProperty('categoryId', $categoryId, 'Identity');
     }
@@ -59,7 +59,7 @@ class CategoryInvisibility extends DataModel
     /**
      * @return Identity Reference to category to hide from customerGroupId
      */
-    public function getCategoryId()
+    public function getCategoryId(): Identity
     {
         return $this->categoryId;
     }
@@ -69,7 +69,7 @@ class CategoryInvisibility extends DataModel
      * @return \jtl\Connector\Model\CategoryInvisibility
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerGroupId(Identity $customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId): CategoryInvisibility
     {
         return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
     }
@@ -77,7 +77,7 @@ class CategoryInvisibility extends DataModel
     /**
      * @return Identity Reference to customerGroup that is not allowed to view categoryId
      */
-    public function getCustomerGroupId()
+    public function getCustomerGroupId(): Identity
     {
         return $this->customerGroupId;
     }

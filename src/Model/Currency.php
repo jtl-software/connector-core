@@ -114,7 +114,7 @@ class Currency extends DataModel
     /**
      * @return Identity Unique currency id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

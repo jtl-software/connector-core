@@ -716,7 +716,7 @@ class Product extends DataModel
     /**
      * @return Identity Unique product id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }
