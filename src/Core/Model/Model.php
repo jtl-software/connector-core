@@ -3,9 +3,11 @@
  * @copyright JTL-Software GmbH
  * @package jtl\Connector\Core\Model
  */
+
 namespace jtl\Connector\Core\Model;
 
 use JMS\Serializer\SerializationContext;
+use PhpOption\Option;
 
 /**
  * Core Model Class
@@ -24,17 +26,17 @@ abstract class Model
     {
         $this->setOptions($object);
     }
-
+    
     /**
      * Get the Model Properties
      *
-     * @return multitype: string
+     * @return array : string
      */
-    public function getProperties()
+    public function getProperties(): array
     {
         return array_keys(get_object_vars($this));
     }
-
+    
     /**
      * Sets Properties with matching Array Values
      *
@@ -42,7 +44,7 @@ abstract class Model
      * @param array $options
      * @return \jtl\Connector\Core\Model\Model
      */
-    public function setOptions(\stdClass $object = null, array $options = null)
+    public function setOptions(\stdClass $object = null, array $options = null): Model
     {
         if ($object !== null && is_object($object)) {
             $members = array_keys(get_object_vars($object));
@@ -50,8 +52,8 @@ abstract class Model
                 foreach ($members as $member) {
                     $property = ucfirst($member);
                     $setter = 'set' . $property;
-
-                    if (is_callable(array($this, $setter))) {
+                    
+                    if (is_callable([$this, $setter])) {
                         $this->{$setter}($object->{$member});
                     }
                 }
@@ -62,8 +64,8 @@ abstract class Model
                 if ($value !== null) {
                     $property = ucfirst($key);
                     $setter = 'set' . $property;
-
-                    if (is_callable(array($this, $setter))) {
+                    
+                    if (is_callable([$this, $setter])) {
                         $this->{$setter}($value);
                     }
                 }
@@ -72,30 +74,30 @@ abstract class Model
         
         return $this;
     }
-
+    
     /**
      * Convert the Model into stdClass Object
      *
      * @param array $publics
-     * @return stdClass $object
+     * @return \stdClass $object
      */
-    public function getPublic(array $publics = array('fields', 'isEncrypted', 'identities', '_type'))
+    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', '_type']): \stdClass
     {
         $object = new \stdClass();
         
         $members = array_keys(get_object_vars($this));
         if (is_array($members) && count($members) > 0) {
             if ($publics === null) {
-                $publics = array();
+                $publics = [];
             }
-
+            
             foreach ($members as $member) {
                 if (!in_array($member, $publics)) {
                     $memberpub = $member;
                     if ($member[0] == "_") {
                         $memberpub = substr($member, 1);
                     }
-
+                    
                     if (is_array($this->{$member})) {
                         foreach (array_keys($this->{$member}) as $key) {
                             if ($this->{$member}[$key] instanceof self) {
@@ -111,10 +113,11 @@ abstract class Model
         
         return $object;
     }
-
-    public function toJson()
+    
+    public function toJson(): Option
     {
         $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
+        
         return $serializer->serialize($this, 'json', SerializationContext::create()->setSerializeNull(true));
     }
 }

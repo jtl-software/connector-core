@@ -67,7 +67,7 @@ class CrossSelling extends DataModel
     /**
      * @return Identity 
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

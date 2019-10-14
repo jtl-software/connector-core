@@ -218,7 +218,7 @@ class CustomerOrderItem extends DataModel
     /**
      * @return Identity Unique customerOrderItem id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

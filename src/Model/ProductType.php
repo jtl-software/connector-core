@@ -58,7 +58,7 @@ class ProductType extends DataModel
     /**
      * @return Identity Unique productType id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

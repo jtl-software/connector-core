@@ -67,7 +67,7 @@ class ProductPartsList extends DataModel
     /**
      * @return Identity Unique PartsList id, referenced by product.PartsListId
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

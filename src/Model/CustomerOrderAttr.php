@@ -93,7 +93,7 @@ class CustomerOrderAttr extends DataModel
     /**
      * @return Identity Unique customerOrderAttr id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

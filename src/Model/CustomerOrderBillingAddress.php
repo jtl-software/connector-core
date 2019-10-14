@@ -213,7 +213,7 @@ class CustomerOrderBillingAddress extends DataModel
     /**
      * @return Identity Unique customerOrderBillingAddress id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

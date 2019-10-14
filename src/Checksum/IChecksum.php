@@ -15,53 +15,53 @@ interface IChecksum
      * @return self
      */
     public function setForeignKey(Identity $foreignKey);
-
+    
     /**
      * @return Identity
      */
-    public function getForeignKey();
-
+    public function getForeignKey(): Identity;
+    
     /**
      * @param string $endpoint
      * @return self
      */
-    public function setEndpoint($endpoint);
-
+    public function setEndpoint(string $endpoint);
+    
     /**
      * @return string
      */
-    public function getEndpoint();
-
+    public function getEndpoint(): string;
+    
     /**
      * @param string $host
      * @return self
      */
-    public function setHost($host);
-
+    public function setHost(string $host);
+    
     /**
      * @return string
      */
-    public function getHost();
-
+    public function getHost(): string;
+    
     /**
      * @param int $type
      * @return self
      */
-    public function setType($type);
-
+    public function setType(int $type);
+    
     /**
      * @return int
      */
-    public function getType();
-
+    public function getType(): int;
+    
     /**
      * @param boolean $hasChanged
      * @return self
      */
-    public function setHasChanged($hasChanged);
-
+    public function setHasChanged(bool $hasChanged);
+    
     /**
      * @return boolean
      */
-    public function hasChanged();
+    public function hasChanged(): bool;
 }

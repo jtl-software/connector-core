@@ -121,7 +121,7 @@ class ProductPrice extends DataModel
     /**
      * @return Identity Unique ProductPrice id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

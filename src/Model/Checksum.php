@@ -76,10 +76,10 @@ class Checksum extends DataModel implements IChecksum
 
     /**
      * @param Identity $foreignKey 
-     * @return \jtl\Connector\Model\Checksum
+     * @return Checksum
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setForeignKey(Identity $foreignKey)
+    public function setForeignKey(Identity $foreignKey): Checksum
     {
         return $this->setProperty('foreignKey', $foreignKey, 'Identity');
     }
@@ -87,16 +87,16 @@ class Checksum extends DataModel implements IChecksum
     /**
      * @return Identity 
      */
-    public function getForeignKey()
+    public function getForeignKey(): Identity
     {
         return $this->foreignKey;
     }
 
     /**
      * @param string $endpoint 
-     * @return \jtl\Connector\Model\Checksum
+     * @return Checksum
      */
-    public function setEndpoint($endpoint)
+    public function setEndpoint(string $endpoint): Checksum
     {
         return $this->setProperty('endpoint', $endpoint, 'string');
     }
@@ -104,16 +104,16 @@ class Checksum extends DataModel implements IChecksum
     /**
      * @return string 
      */
-    public function getEndpoint()
+    public function getEndpoint(): string
     {
         return $this->endpoint;
     }
 
     /**
      * @param boolean $hasChanged 
-     * @return \jtl\Connector\Model\Checksum
+     * @return Checksum
      */
-    public function setHasChanged($hasChanged)
+    public function setHasChanged(bool $hasChanged): Checksum
     {
         return $this->setProperty('hasChanged', $hasChanged, 'boolean');
     }
@@ -121,7 +121,7 @@ class Checksum extends DataModel implements IChecksum
     /**
      * @return boolean 
      */
-    public function getHasChanged()
+    public function getHasChanged(): bool
     {
         return $this->hasChanged;
     }
@@ -129,16 +129,16 @@ class Checksum extends DataModel implements IChecksum
     /**
      * @return boolean
      */
-    public function hasChanged()
+    public function hasChanged(): bool
     {
         return $this->hasChanged;
     }
 
     /**
      * @param string $host 
-     * @return \jtl\Connector\Model\Checksum
+     * @return Checksum
      */
-    public function setHost($host)
+    public function setHost(string $host): Checksum
     {
         return $this->setProperty('host', $host, 'string');
     }
@@ -146,17 +146,17 @@ class Checksum extends DataModel implements IChecksum
     /**
      * @return string 
      */
-    public function getHost()
+    public function getHost(): string
     {
         return $this->host;
     }
 
     /**
      * @param integer $type
-     * @return \jtl\Connector\Model\Checksum
+     * @return Checksum
      * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setType($type)
+    public function setType(int $type): Checksum
     {
         return $this->setProperty('type', $type, 'integer');
     }
@@ -164,7 +164,7 @@ class Checksum extends DataModel implements IChecksum
     /**
      * @return integer
      */
-    public function getType()
+    public function getType(): int
     {
         return $this->type;
     }

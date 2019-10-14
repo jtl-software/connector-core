@@ -86,7 +86,7 @@ class Product2Category extends DataModel
     /**
      * @return Identity Unique product2Category id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

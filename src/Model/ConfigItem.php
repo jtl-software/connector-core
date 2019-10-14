@@ -198,7 +198,7 @@ class ConfigItem extends DataModel
     /**
      * @return Identity Unique configItem id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

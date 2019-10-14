@@ -123,7 +123,7 @@ class ProductVariationValue extends DataModel
     /**
      * @return Identity Unique productVariationValue id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

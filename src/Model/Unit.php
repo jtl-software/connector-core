@@ -58,7 +58,7 @@ class Unit extends DataModel
     /**
      * @return Identity Unit id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }

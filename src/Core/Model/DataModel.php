@@ -3,6 +3,7 @@
  * @copyright JTL-Software GmbH
  * @package jtl\Connector\Core\Model
  */
+
 namespace jtl\Connector\Core\Model;
 
 use \jtl\Connector\Core\Validator\Schema;
@@ -25,24 +26,24 @@ abstract class DataModel extends Model
      * @Serializer\Exclude
      * @Serializer\ReadOnly
      */
-    protected $fields = array();
-
+    protected $fields = [];
+    
     /**
      * Fields Getter
      *
      * @return mixed:string
      */
-    public function getFields()
+    public function getFields(): array
     {
         return $this->fields;
     }
-
+    
     /**
      * Object Validation
      *
      * @throws \jtl\Connector\Core\Exception\SchemaException
      */
-    public function validate()
+    public function validate(): void
     {
         $class = ClassName::getFromNS(strtolower(get_called_class()));
         
@@ -56,7 +57,7 @@ abstract class DataModel extends Model
      * @param string $key
      * @return mixed:string|NULL
      */
-    public function getField($toWawi = false, $key)
+    public function getField(bool $toWawi = false, string $key): string
     {
         if ($this->fields !== null && is_array($this->fields)) {
             $fields = $this->fields;
@@ -68,17 +69,18 @@ abstract class DataModel extends Model
                 return $fields[$key];
             }
         }
-            
+        
         return null;
     }
-
+    
     /**
      * Object Mapping
      *
      * @param boolean $toWawi
      * @param mixed $obj Object to map
+     * @throws NotImplementedException
      */
-    public function map($toWawi = false, \stdClass $obj = null)
+    public function map(bool $toWawi = false, \stdClass $obj = null): void
     {
         throw new NotImplementedException;
     }

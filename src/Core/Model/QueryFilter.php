@@ -20,7 +20,7 @@ class QueryFilter
     const FILTER_FETCH_CHILDREN = 'fetchChildren';
     const FILTER_PARENT_ID = 'parentId';
     const FILTER_RELATION_TYPE = 'relationType';
-
+    
     /**
      * Query item count limitation
      *
@@ -41,10 +41,12 @@ class QueryFilter
     
     /**
      * Constructor
+     *
+     * @param null $limit
      */
     public function __construct($limit = null)
     {
-        $this->filters = array();
+        $this->filters = [];
         
         if ($limit !== null) {
             $this->limit = $limit;
@@ -55,11 +57,12 @@ class QueryFilter
      * Limit Setter
      *
      * @param integer $limit
-     * @return \jtl\Connector\Model\QueryFilter
+     * @return QueryFilter
      */
-    public function setLimit($limit)
+    public function setLimit(int $limit): QueryFilter
     {
         $this->limit = (int)$limit;
+        
         return $this;
     }
     
@@ -68,15 +71,15 @@ class QueryFilter
      *
      * @return integer
      */
-    public function getLimit()
+    public function getLimit(): int
     {
         return $this->limit;
     }
-
+    
     /**
      * @return bool
      */
-    public function isLimit()
+    public function isLimit(): bool
     {
         return ($this->limit !== null && $this->limit > 0);
     }
@@ -84,21 +87,22 @@ class QueryFilter
     /**
      * Filters Setter
      *
-     * @param multiple: string $filters
-     * @return \jtl\Connector\Model\QueryFilter
+     * @param array $filters
+     * @return QueryFilter
      */
-    public function setFilters(array $filters)
+    public function setFilters(array $filters): QueryFilter
     {
         $this->filters = $filters;
+        
         return $this;
     }
     
     /**
      * Filters Getter
      *
-     * @return multiple: string
+     * @return array: string
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return $this->filters;
     }
@@ -110,13 +114,14 @@ class QueryFilter
      * @param string $value Filter value
      * @return \jtl\Connector\Core\Model\QueryFilter
      */
-    public function addFilter($key, $value)
+    public function addFilter(string $key, $value): QueryFilter
     {
         if ($this->filters === null) {
-            $this->filters = array();
+            $this->filters = [];
         }
         
         $this->filters[$key] = $value;
+        
         return $this;
     }
     
@@ -126,7 +131,7 @@ class QueryFilter
      * @param string $key
      * @return boolean
      */
-    public function deleteFilter($key)
+    public function deleteFilter(string $key): bool
     {
         if ($this->isFilter($key)) {
             unset($this->filters[$key]);
@@ -138,21 +143,19 @@ class QueryFilter
     }
     
     /**
-     *
      * @param string $key
      * @return boolean
      */
-    public function isFilter($key)
+    public function isFilter(string $key): bool
     {
         return isset($this->filters[$key]);
     }
     
     /**
-     *
      * @param string $key
      * @return mixed|NULL
      */
-    public function getFilter($key)
+    public function getFilter(string $key)
     {
         if ($this->isFilter($key)) {
             return $this->filters[$key];
@@ -162,13 +165,12 @@ class QueryFilter
     }
     
     /**
-     *
      * @param string $oldKey
      * @param string $newKey
      * @param mixed $value
      * @return boolean
      */
-    public function overrideFilter($oldKey, $newKey, $value = null)
+    public function overrideFilter(string $oldKey, string $newKey, $value = null): bool
     {
         if ($this->isFilter($oldKey)) {
             if ($value === null) {
@@ -189,12 +191,12 @@ class QueryFilter
      *
      * @param \stdClass $obj
      */
-    public function set(\stdClass $obj)
+    public function set(\stdClass $obj): void
     {
         if (!is_object($obj)) {
             return;
         }
-
+        
         if (isset($obj->limit)) {
             $this->setLimit($obj->limit);
         }

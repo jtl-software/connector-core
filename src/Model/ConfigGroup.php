@@ -106,7 +106,7 @@ class ConfigGroup extends DataModel
     /**
      * @return Identity Unique configGroup id
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }
