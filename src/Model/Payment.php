@@ -8,6 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -85,10 +86,10 @@ class Payment extends DataModel
     
     /**
      * @param Identity $customerOrderId
-     * @return \jtl\Connector\Model\Payment
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Payment
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerOrderId(Identity $customerOrderId)
+    public function setCustomerOrderId(Identity $customerOrderId): Payment
     {
         $this->customerOrderId = $customerOrderId;
         
@@ -98,17 +99,17 @@ class Payment extends DataModel
     /**
      * @return Identity
      */
-    public function getCustomerOrderId()
+    public function getCustomerOrderId(): Identity
     {
         return $this->customerOrderId;
     }
     
     /**
      * @param Identity $id
-     * @return \jtl\Connector\Model\Payment
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Payment
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): Payment
     {
         $this->id = $id;
         
@@ -125,9 +126,9 @@ class Payment extends DataModel
     
     /**
      * @param string $billingInfo
-     * @return \jtl\Connector\Model\Payment
+     * @return Payment
      */
-    public function setBillingInfo($billingInfo)
+    public function setBillingInfo(string $billingInfo): Payment
     {
         $this->billingInfo = $billingInfo;
         
@@ -137,17 +138,17 @@ class Payment extends DataModel
     /**
      * @return string
      */
-    public function getBillingInfo()
+    public function getBillingInfo(): string
     {
         return $this->billingInfo;
     }
     
     /**
      * @param DateTime $creationDate
-     * @return \jtl\Connector\Model\Payment
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     * @return Payment
+     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreationDate(DateTime $creationDate = null)
+    public function setCreationDate(DateTime $creationDate = null): Payment
     {
         $this->creationDate = $creationDate;
         
@@ -157,16 +158,16 @@ class Payment extends DataModel
     /**
      * @return DateTime
      */
-    public function getCreationDate()
+    public function getCreationDate(): DateTime
     {
         return $this->creationDate;
     }
     
     /**
      * @param string $paymentModuleCode
-     * @return \jtl\Connector\Model\Payment
+     * @return Payment
      */
-    public function setPaymentModuleCode($paymentModuleCode)
+    public function setPaymentModuleCode(string $paymentModuleCode): Payment
     {
         $this->paymentModuleCode = $paymentModuleCode;
         
@@ -176,16 +177,16 @@ class Payment extends DataModel
     /**
      * @return string
      */
-    public function getPaymentModuleCode()
+    public function getPaymentModuleCode(): string
     {
         return $this->paymentModuleCode;
     }
     
     /**
      * @param double $totalSum
-     * @return \jtl\Connector\Model\Payment
+     * @return Payment
      */
-    public function setTotalSum($totalSum)
+    public function setTotalSum(float $totalSum): Payment
     {
         $this->totalSum = $totalSum;
         
@@ -195,16 +196,16 @@ class Payment extends DataModel
     /**
      * @return double
      */
-    public function getTotalSum()
+    public function getTotalSum(): float
     {
         return $this->totalSum;
     }
     
     /**
      * @param string $transactionId
-     * @return \jtl\Connector\Model\Payment
+     * @return Payment
      */
-    public function setTransactionId($transactionId)
+    public function setTransactionId(string $transactionId): Payment
     {
         $this->transactionId = $transactionId;
         
@@ -212,9 +213,9 @@ class Payment extends DataModel
     }
     
     /**
-     * @return string
+     * @return Identity
      */
-    public function getTransactionId()
+    public function getTransactionId(): string
     {
         return $this->transactionId;
     }

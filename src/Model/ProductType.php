@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -46,10 +46,10 @@ class ProductType extends DataModel
     
     /**
      * @param Identity $id Unique productType id
-     * @return \jtl\Connector\Model\ProductType
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductType
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): ProductType
     {
         $this->id = $id;
         
@@ -66,9 +66,9 @@ class ProductType extends DataModel
     
     /**
      * @param string $name Optional (internal) product type name
-     * @return \jtl\Connector\Model\ProductType
+     * @return ProductType
      */
-    public function setName($name)
+    public function setName(string $name): ProductType
     {
         $this->name = $name;
         
@@ -78,7 +78,7 @@ class ProductType extends DataModel
     /**
      * @return string Optional (internal) product type name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

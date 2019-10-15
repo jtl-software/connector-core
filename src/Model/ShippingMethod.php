@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -44,10 +44,10 @@ class ShippingMethod extends DataModel
     
     /**
      * @param Identity $id
-     * @return \jtl\Connector\Model\ShippingMethod
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ShippingMethod
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): ShippingMethod
     {
         $this->id = $id;
         
@@ -64,9 +64,9 @@ class ShippingMethod extends DataModel
     
     /**
      * @param string $name
-     * @return \jtl\Connector\Model\ShippingMethod
+     * @return ShippingMethod
      */
-    public function setName($name)
+    public function setName(string $name): ShippingMethod
     {
         $this->name = $name;
         
@@ -76,7 +76,7 @@ class ShippingMethod extends DataModel
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -75,7 +75,7 @@ class Image extends DataModel
     protected $sort = 0;
     
     /**
-     * @var \jtl\Connector\Model\ImageI18n[]
+     * @var ImageI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ImageI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -93,10 +93,10 @@ class Image extends DataModel
     
     /**
      * @param Identity $foreignKey
-     * @return \jtl\Connector\Model\Image
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Image
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setForeignKey(Identity $foreignKey)
+    public function setForeignKey(Identity $foreignKey): Image
     {
         $this->foreignKey = $foreignKey;
         
@@ -106,17 +106,17 @@ class Image extends DataModel
     /**
      * @return Identity
      */
-    public function getForeignKey()
+    public function getForeignKey(): Identity
     {
         return $this->foreignKey;
     }
     
     /**
      * @param Identity $id
-     * @return \jtl\Connector\Model\Image
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Image
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): Image
     {
         $this->id = $id;
         
@@ -133,9 +133,9 @@ class Image extends DataModel
     
     /**
      * @param string $filename
-     * @return \jtl\Connector\Model\Image
+     * @return Image
      */
-    public function setFilename($filename)
+    public function setFilename(string $filename): Image
     {
         $this->filename = $filename;
         
@@ -145,16 +145,16 @@ class Image extends DataModel
     /**
      * @return string
      */
-    public function getFilename()
+    public function getFilename(): string
     {
         return $this->filename;
     }
     
     /**
      * @param string $relationType
-     * @return \jtl\Connector\Model\Image
+     * @return Image
      */
-    public function setRelationType($relationType)
+    public function setRelationType(string $relationType): Image
     {
         $this->relationType = $relationType;
         
@@ -164,16 +164,16 @@ class Image extends DataModel
     /**
      * @return string
      */
-    public function getRelationType()
+    public function getRelationType(): string
     {
         return $this->relationType;
     }
     
     /**
      * @param string $remoteUrl
-     * @return \jtl\Connector\Model\Image
+     * @return Image
      */
-    public function setRemoteUrl($remoteUrl)
+    public function setRemoteUrl(string $remoteUrl): Image
     {
         $this->remoteUrl = $remoteUrl;
         
@@ -183,16 +183,16 @@ class Image extends DataModel
     /**
      * @return string
      */
-    public function getRemoteUrl()
+    public function getRemoteUrl(): string
     {
         return $this->remoteUrl;
     }
     
     /**
      * @param string $name
-     * @return \jtl\Connector\Model\Image
+     * @return Image
      */
-    public function setName($name)
+    public function setName(string $name): Image
     {
         $this->name = $name;
         
@@ -202,16 +202,16 @@ class Image extends DataModel
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
     
     /**
      * @param integer $sort
-     * @return \jtl\Connector\Model\Image
+     * @return Image
      */
-    public function setSort($sort)
+    public function setSort(int $sort): Image
     {
         $this->sort = $sort;
         
@@ -221,16 +221,16 @@ class Image extends DataModel
     /**
      * @return integer
      */
-    public function getSort()
+    public function getSort(): int
     {
         return $this->sort;
     }
     
     /**
-     * @param \jtl\Connector\Model\ImageI18n $i18n
-     * @return \jtl\Connector\Model\Image
+     * @param ImageI18n $i18n
+     * @return Image
      */
-    public function addI18n(\jtl\Connector\Model\ImageI18n $i18n)
+    public function addI18n(ImageI18n $i18n): Image
     {
         $this->i18ns[] = $i18n;
         
@@ -239,9 +239,9 @@ class Image extends DataModel
     
     /**
      * @param array $i18ns
-     * @return \jtl\Connector\Model\Image
+     * @return Image
      */
-    public function setI18ns(array $i18ns)
+    public function setI18ns(array $i18ns): Image
     {
         $this->i18ns = $i18ns;
         
@@ -249,17 +249,17 @@ class Image extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ImageI18n[]
+     * @return ImageI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
     
     /**
-     * @return \jtl\Connector\Model\Image
+     * @return Image
      */
-    public function clearI18ns()
+    public function clearI18ns(): Image
     {
         $this->i18ns = [];
         

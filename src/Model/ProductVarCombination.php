@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -56,10 +56,10 @@ class ProductVarCombination extends DataModel
     
     /**
      * @param Identity $productId Reference to product
-     * @return \jtl\Connector\Model\ProductVarCombination
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductVarCombination
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): ProductVarCombination
     {
         $this->productId = $productId;
         
@@ -69,17 +69,17 @@ class ProductVarCombination extends DataModel
     /**
      * @return Identity Reference to product
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
     
     /**
      * @param Identity $productVariationId Reference to productVariation
-     * @return \jtl\Connector\Model\ProductVarCombination
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductVarCombination
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductVariationId(Identity $productVariationId)
+    public function setProductVariationId(Identity $productVariationId): ProductVarCombination
     {
         $this->productVariationId = $productVariationId;
         
@@ -89,17 +89,17 @@ class ProductVarCombination extends DataModel
     /**
      * @return Identity Reference to productVariation
      */
-    public function getProductVariationId()
+    public function getProductVariationId(): Identity
     {
         return $this->productVariationId;
     }
     
     /**
      * @param Identity $productVariationValueId Reference to productVariationValue
-     * @return \jtl\Connector\Model\ProductVarCombination
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductVarCombination
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductVariationValueId(Identity $productVariationValueId)
+    public function setProductVariationValueId(Identity $productVariationValueId): ProductVarCombination
     {
         $this->productVariationValueId = $productVariationValueId;
         
@@ -109,7 +109,7 @@ class ProductVarCombination extends DataModel
     /**
      * @return Identity Reference to productVariationValue
      */
-    public function getProductVariationValueId()
+    public function getProductVariationValueId(): Identity
     {
         return $this->productVariationValueId;
     }

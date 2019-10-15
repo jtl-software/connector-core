@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -47,10 +47,10 @@ class ProductInvisibility extends DataModel
     
     /**
      * @param Identity $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\ProductInvisibility
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductInvisibility
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerGroupId(Identity $customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId): ProductInvisibility
     {
         $this->customerGroupId = $customerGroupId;
         
@@ -60,17 +60,17 @@ class ProductInvisibility extends DataModel
     /**
      * @return Identity Reference to customerGroup
      */
-    public function getCustomerGroupId()
+    public function getCustomerGroupId(): Identity
     {
         return $this->customerGroupId;
     }
     
     /**
      * @param Identity $productId Reference to product
-     * @return \jtl\Connector\Model\ProductInvisibility
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductInvisibility
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): ProductInvisibility
     {
         $this->productId = $productId;
         
@@ -80,7 +80,7 @@ class ProductInvisibility extends DataModel
     /**
      * @return Identity Reference to product
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }

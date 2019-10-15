@@ -7,9 +7,8 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
-use \jtl\Connector\Model\Identity;
 
 /**
  * @access public
@@ -66,10 +65,10 @@ class ProductChecksum extends Checksum
     
     /**
      * @param Identity $foreignKey
-     * @return \jtl\Connector\Model\ProductChecksum
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductChecksum
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setForeignKey(Identity $foreignKey)
+    public function setForeignKey(Identity $foreignKey): ProductChecksum
     {
         $this->foreignKey = $foreignKey;
         
@@ -79,17 +78,17 @@ class ProductChecksum extends Checksum
     /**
      * @return Identity
      */
-    public function getForeignKey()
+    public function getForeignKey(): Identity
     {
         return $this->foreignKey;
     }
     
     /**
      * @param string $endpoint
-     * @return \jtl\Connector\Model\ProductChecksum
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @return ProductChecksum
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setEndpoint($endpoint)
+    public function setEndpoint(string $endpoint): ProductChecksum
     {
         $this->endpoint = $endpoint;
         
@@ -99,17 +98,17 @@ class ProductChecksum extends Checksum
     /**
      * @return string
      */
-    public function getEndpoint()
+    public function getEndpoint(): string
     {
         return $this->endpoint;
     }
     
     /**
      * @param boolean $hasChanged
-     * @return \jtl\Connector\Model\ProductChecksum
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
+     * @return ProductChecksum
+     * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setHasChanged($hasChanged)
+    public function setHasChanged(bool $hasChanged): ProductChecksum
     {
         $this->hasChanged = $hasChanged;
         
@@ -119,7 +118,7 @@ class ProductChecksum extends Checksum
     /**
      * @return boolean
      */
-    public function hasChanged()
+    public function hasChanged(): bool
     {
         return $this->hasChanged;
     }
@@ -127,17 +126,17 @@ class ProductChecksum extends Checksum
     /**
      * @return boolean
      */
-    public function getHasChanged()
+    public function getHasChanged(): bool
     {
         return $this->hasChanged;
     }
     
     /**
      * @param string $host
-     * @return \jtl\Connector\Model\ProductChecksum
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @return ProductChecksum
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setHost($host)
+    public function setHost(string $host): ProductChecksum
     {
         $this->host = $host;
         
@@ -147,17 +146,17 @@ class ProductChecksum extends Checksum
     /**
      * @return string
      */
-    public function getHost()
+    public function getHost(): string
     {
         return $this->host;
     }
     
     /**
      * @param integer $type
-     * @return \jtl\Connector\Model\ProductChecksum
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
+     * @return ProductChecksum
+     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setType($type)
+    public function setType(int $type): ProductChecksum
     {
         $this->type = $type;
         
@@ -167,7 +166,7 @@ class ProductChecksum extends Checksum
     /**
      * @return integer
      */
-    public function getType()
+    public function getType(): int
     {
         return $this->type;
     }

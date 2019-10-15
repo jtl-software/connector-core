@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -54,10 +54,10 @@ class CustomerGroupI18n extends DataModel
     
     /**
      * @param Identity $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\CustomerGroupI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CustomerGroupI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerGroupId(Identity $customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId): CustomerGroupI18n
     {
         $this->customerGroupId = $customerGroupId;
         
@@ -67,16 +67,16 @@ class CustomerGroupI18n extends DataModel
     /**
      * @return Identity Reference to customerGroup
      */
-    public function getCustomerGroupId()
+    public function getCustomerGroupId(): Identity
     {
         return $this->customerGroupId;
     }
     
     /**
      * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\CustomerGroupI18n
+     * @return CustomerGroupI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): CustomerGroupI18n
     {
         $this->languageISO = $languageISO;
         
@@ -86,16 +86,16 @@ class CustomerGroupI18n extends DataModel
     /**
      * @return string Locale
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
     
     /**
      * @param string $name Localized customer group name
-     * @return \jtl\Connector\Model\CustomerGroupI18n
+     * @return CustomerGroupI18n
      */
-    public function setName($name)
+    public function setName(string $name): CustomerGroupI18n
     {
         $this->name = $name;
         
@@ -105,7 +105,7 @@ class CustomerGroupI18n extends DataModel
     /**
      * @return string Localized customer group name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

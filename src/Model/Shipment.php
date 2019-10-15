@@ -8,6 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -87,10 +88,10 @@ class Shipment extends DataModel
     
     /**
      * @param Identity $deliveryNoteId Reference to deliveryNote
-     * @return \jtl\Connector\Model\Shipment
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Shipment
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setDeliveryNoteId(Identity $deliveryNoteId)
+    public function setDeliveryNoteId(Identity $deliveryNoteId): Shipment
     {
         $this->deliveryNoteId = $deliveryNoteId;
         
@@ -100,17 +101,17 @@ class Shipment extends DataModel
     /**
      * @return Identity Reference to deliveryNote
      */
-    public function getDeliveryNoteId()
+    public function getDeliveryNoteId(): Identity
     {
         return $this->deliveryNoteId;
     }
     
     /**
      * @param Identity $id Unique shipment id
-     * @return \jtl\Connector\Model\Shipment
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Shipment
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): Shipment
     {
         $this->id = $id;
         
@@ -127,9 +128,9 @@ class Shipment extends DataModel
     
     /**
      * @param string $carrierName Carrier name
-     * @return \jtl\Connector\Model\Shipment
+     * @return Shipment
      */
-    public function setCarrierName($carrierName)
+    public function setCarrierName(string $carrierName): Shipment
     {
         $this->carrierName = $carrierName;
         
@@ -139,17 +140,17 @@ class Shipment extends DataModel
     /**
      * @return string Carrier name
      */
-    public function getCarrierName()
+    public function getCarrierName(): string
     {
         return $this->carrierName;
     }
     
     /**
      * @param DateTime $creationDate Creation date
-     * @return \jtl\Connector\Model\Shipment
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     * @return Shipment
+     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreationDate(DateTime $creationDate = null)
+    public function setCreationDate(DateTime $creationDate = null): Shipment
     {
         $this->creationDate = $creationDate;
         
@@ -159,16 +160,16 @@ class Shipment extends DataModel
     /**
      * @return DateTime Creation date
      */
-    public function getCreationDate()
+    public function getCreationDate(): DateTime
     {
         return $this->creationDate;
     }
     
     /**
      * @param string $identCode Optional Identcode
-     * @return \jtl\Connector\Model\Shipment
+     * @return Shipment
      */
-    public function setIdentCode($identCode)
+    public function setIdentCode(string $identCode): Shipment
     {
         $this->identCode = $identCode;
         
@@ -178,16 +179,16 @@ class Shipment extends DataModel
     /**
      * @return string Optional Identcode
      */
-    public function getIdentCode()
+    public function getIdentCode(): string
     {
         return $this->identCode;
     }
     
     /**
      * @param string $note Optional shipment note
-     * @return \jtl\Connector\Model\Shipment
+     * @return Shipment
      */
-    public function setNote($note)
+    public function setNote(string $note): Shipment
     {
         $this->note = $note;
         
@@ -197,16 +198,16 @@ class Shipment extends DataModel
     /**
      * @return string Optional shipment note
      */
-    public function getNote()
+    public function getNote(): string
     {
         return $this->note;
     }
     
     /**
      * @param string $trackingUrl
-     * @return \jtl\Connector\Model\Shipment
+     * @return Shipment
      */
-    public function setTrackingUrl($trackingUrl)
+    public function setTrackingUrl(string $trackingUrl): Shipment
     {
         $this->trackingUrl = $trackingUrl;
         
@@ -216,7 +217,7 @@ class Shipment extends DataModel
     /**
      * @return string
      */
-    public function getTrackingUrl()
+    public function getTrackingUrl(): string
     {
         return $this->trackingUrl;
     }

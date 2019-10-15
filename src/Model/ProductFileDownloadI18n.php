@@ -7,7 +7,6 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -45,9 +44,9 @@ class ProductFileDownloadI18n extends DataModel
     
     /**
      * @param string $description
-     * @return \jtl\Connector\Model\ProductFileDownloadI18n
+     * @return ProductFileDownloadI18n
      */
-    public function setDescription($description)
+    public function setDescription(string $description): ProductFileDownloadI18n
     {
         $this->description = $description;
         
@@ -57,16 +56,16 @@ class ProductFileDownloadI18n extends DataModel
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
     
     /**
      * @param string $languageISO
-     * @return \jtl\Connector\Model\ProductFileDownloadI18n
+     * @return ProductFileDownloadI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): ProductFileDownloadI18n
     {
         $this->languageISO = $languageISO;
         
@@ -76,16 +75,16 @@ class ProductFileDownloadI18n extends DataModel
     /**
      * @return string
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
     
     /**
      * @param string $name
-     * @return \jtl\Connector\Model\ProductFileDownloadI18n
+     * @return ProductFileDownloadI18n
      */
-    public function setName($name)
+    public function setName(string $name): ProductFileDownloadI18n
     {
         $this->name = $name;
         
@@ -95,7 +94,7 @@ class ProductFileDownloadI18n extends DataModel
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

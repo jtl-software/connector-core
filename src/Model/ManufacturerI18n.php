@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -78,10 +78,10 @@ class ManufacturerI18n extends DataModel
     
     /**
      * @param Identity $manufacturerId Reference to manufacturer
-     * @return \jtl\Connector\Model\ManufacturerI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ManufacturerI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setManufacturerId(Identity $manufacturerId)
+    public function setManufacturerId(Identity $manufacturerId): ManufacturerI18n
     {
         $this->manufacturerId = $manufacturerId;
         
@@ -91,16 +91,16 @@ class ManufacturerI18n extends DataModel
     /**
      * @return Identity Reference to manufacturer
      */
-    public function getManufacturerId()
+    public function getManufacturerId(): Identity
     {
         return $this->manufacturerId;
     }
     
     /**
      * @param string $description Optional manufacturer description (HTML)
-     * @return \jtl\Connector\Model\ManufacturerI18n
+     * @return ManufacturerI18n
      */
-    public function setDescription($description)
+    public function setDescription(string $description): ManufacturerI18n
     {
         $this->description = $description;
         
@@ -110,16 +110,16 @@ class ManufacturerI18n extends DataModel
     /**
      * @return string Optional manufacturer description (HTML)
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
     
     /**
      * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\ManufacturerI18n
+     * @return ManufacturerI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): ManufacturerI18n
     {
         $this->languageISO = $languageISO;
         
@@ -129,16 +129,16 @@ class ManufacturerI18n extends DataModel
     /**
      * @return string Locale
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
     
     /**
      * @param string $metaDescription Optional meta description tag value
-     * @return \jtl\Connector\Model\ManufacturerI18n
+     * @return ManufacturerI18n
      */
-    public function setMetaDescription($metaDescription)
+    public function setMetaDescription(string $metaDescription): ManufacturerI18n
     {
         $this->metaDescription = $metaDescription;
         
@@ -148,16 +148,16 @@ class ManufacturerI18n extends DataModel
     /**
      * @return string Optional meta description tag value
      */
-    public function getMetaDescription()
+    public function getMetaDescription(): string
     {
         return $this->metaDescription;
     }
     
     /**
      * @param string $metaKeywords Optional meta keywords tag value
-     * @return \jtl\Connector\Model\ManufacturerI18n
+     * @return ManufacturerI18n
      */
-    public function setMetaKeywords($metaKeywords)
+    public function setMetaKeywords(string $metaKeywords): ManufacturerI18n
     {
         $this->metaKeywords = $metaKeywords;
         
@@ -167,16 +167,16 @@ class ManufacturerI18n extends DataModel
     /**
      * @return string Optional meta keywords tag value
      */
-    public function getMetaKeywords()
+    public function getMetaKeywords(): string
     {
         return $this->metaKeywords;
     }
     
     /**
      * @param string $titleTag Optional title tag value
-     * @return \jtl\Connector\Model\ManufacturerI18n
+     * @return ManufacturerI18n
      */
-    public function setTitleTag($titleTag)
+    public function setTitleTag(string $titleTag): ManufacturerI18n
     {
         $this->titleTag = $titleTag;
         
@@ -186,7 +186,7 @@ class ManufacturerI18n extends DataModel
     /**
      * @return string Optional title tag value
      */
-    public function getTitleTag()
+    public function getTitleTag(): string
     {
         return $this->titleTag;
     }

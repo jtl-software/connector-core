@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -54,10 +54,10 @@ class TaxClass extends DataModel
     
     /**
      * @param Identity $id Unique taxClass id
-     * @return \jtl\Connector\Model\TaxClass
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return TaxClass
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): TaxClass
     {
         $this->id = $id;
         
@@ -74,10 +74,9 @@ class TaxClass extends DataModel
     
     /**
      * @param boolean $isDefault Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default.
-     * @return \jtl\Connector\Model\TaxClass
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
+     * @return TaxClass
      */
-    public function setIsDefault(boolean $isDefault)
+    public function setIsDefault(bool $isDefault): TaxClass
     {
         $this->isDefault = $isDefault;
         
@@ -87,16 +86,16 @@ class TaxClass extends DataModel
     /**
      * @return boolean Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default.
      */
-    public function getIsDefault()
+    public function getIsDefault(): bool
     {
         return $this->isDefault;
     }
     
     /**
      * @param string $name Optional tax class name
-     * @return \jtl\Connector\Model\TaxClass
+     * @return TaxClass
      */
-    public function setName($name)
+    public function setName(string $name): TaxClass
     {
         $this->name = $name;
         
@@ -106,7 +105,7 @@ class TaxClass extends DataModel
     /**
      * @return string Optional tax class name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

@@ -7,7 +7,6 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -94,10 +93,9 @@ class CategoryI18n extends DataModel
     
     /**
      * @param Identity $categoryId Reference to category
-     * @return \jtl\Connector\Model\CategoryI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CategoryI18n
      */
-    public function setCategoryId(Identity $categoryId): Identity
+    public function setCategoryId(Identity $categoryId): CategoryI18n
     {
         $this->categoryId = $categoryId;
         
@@ -114,7 +112,7 @@ class CategoryI18n extends DataModel
     
     /**
      * @param string $description Optional localized Long Description
-     * @return \jtl\Connector\Model\CategoryI18n
+     * @return CategoryI18n
      */
     public function setDescription(string $description): CategoryI18n
     {
@@ -133,10 +131,11 @@ class CategoryI18n extends DataModel
     
     /**
      * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\CategoryI18n
+     * @return CategoryI18n
      */
-    public function setLanguageISO($languageISO): CategoryI18n
-    {
+    public function setLanguageISO(
+        string $languageISO
+    ): CategoryI18n {
         $this->languageISO = $languageISO;
         
         return $this;
@@ -152,7 +151,7 @@ class CategoryI18n extends DataModel
     
     /**
      * @param string $metaDescription Optional localized  short description used for meta tag description
-     * @return \jtl\Connector\Model\CategoryI18n
+     * @return CategoryI18n
      */
     public function setMetaDescription(string $metaDescription): CategoryI18n
     {
@@ -171,7 +170,7 @@ class CategoryI18n extends DataModel
     
     /**
      * @param string $metaKeywords Optional localized meta tag keywords value
-     * @return \jtl\Connector\Model\CategoryI18n
+     * @return CategoryI18n
      */
     public function setMetaKeywords(string $metaKeywords): CategoryI18n
     {
@@ -190,7 +189,7 @@ class CategoryI18n extends DataModel
     
     /**
      * @param string $name Localized category name
-     * @return \jtl\Connector\Model\CategoryI18n
+     * @return CategoryI18n
      */
     public function setName(string $name): CategoryI18n
     {
@@ -209,7 +208,7 @@ class CategoryI18n extends DataModel
     
     /**
      * @param string $titleTag Optional localized title tag value
-     * @return \jtl\Connector\Model\CategoryI18n
+     * @return CategoryI18n
      */
     public function setTitleTag(string $titleTag): CategoryI18n
     {
@@ -228,7 +227,7 @@ class CategoryI18n extends DataModel
     
     /**
      * @param string $urlPath Optional localized category URL
-     * @return \jtl\Connector\Model\CategoryI18n
+     * @return CategoryI18n
      */
     public function setUrlPath(string $urlPath): CategoryI18n
     {

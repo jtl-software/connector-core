@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -102,10 +102,10 @@ class Currency extends DataModel
     
     /**
      * @param Identity $id Unique currency id
-     * @return \jtl\Connector\Model\Currency
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Currency
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): Currency
     {
         $this->id = $id;
         
@@ -122,9 +122,9 @@ class Currency extends DataModel
     
     /**
      * @param string $delimiterCent Optional delimiter char for cent, default=",". Ignore this flag if you have the correct user locale preference.
-     * @return \jtl\Connector\Model\Currency
+     * @return Currency
      */
-    public function setDelimiterCent($delimiterCent)
+    public function setDelimiterCent(string $delimiterCent): Currency
     {
         $this->delimiterCent = $delimiterCent;
         
@@ -134,16 +134,16 @@ class Currency extends DataModel
     /**
      * @return string Optional delimiter char for cent, default=",". Ignore this flag if you have the correct user locale preference.
      */
-    public function getDelimiterCent()
+    public function getDelimiterCent(): string
     {
         return $this->delimiterCent;
     }
     
     /**
      * @param string $delimiterThousand Optional delimiter char for thousand. Default=".". Ignore this flag if you have the correct user locale preference.
-     * @return \jtl\Connector\Model\Currency
+     * @return Currency
      */
-    public function setDelimiterThousand($delimiterThousand)
+    public function setDelimiterThousand(string $delimiterThousand): Currency
     {
         $this->delimiterThousand = $delimiterThousand;
         
@@ -153,16 +153,16 @@ class Currency extends DataModel
     /**
      * @return string Optional delimiter char for thousand. Default=".". Ignore this flag if you have the correct user locale preference.
      */
-    public function getDelimiterThousand()
+    public function getDelimiterThousand(): string
     {
         return $this->delimiterThousand;
     }
     
     /**
      * @param double $factor Optional conversion factor to default currency. Default is 1 (equals default currency)
-     * @return \jtl\Connector\Model\Currency
+     * @return Currency
      */
-    public function setFactor($factor)
+    public function setFactor(float $factor): Currency
     {
         $this->factor = $factor;
         
@@ -172,16 +172,16 @@ class Currency extends DataModel
     /**
      * @return double Optional conversion factor to default currency. Default is 1 (equals default currency)
      */
-    public function getFactor()
+    public function getFactor(): float
     {
         return $this->factor;
     }
     
     /**
      * @param boolean $hasCurrencySignBeforeValue Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference.
-     * @return \jtl\Connector\Model\Currency
+     * @return Currency
      */
-    public function setHasCurrencySignBeforeValue($hasCurrencySignBeforeValue)
+    public function setHasCurrencySignBeforeValue(bool $hasCurrencySignBeforeValue): Currency
     {
         $this->hasCurrencySignBeforeValue = $hasCurrencySignBeforeValue;
         
@@ -191,16 +191,16 @@ class Currency extends DataModel
     /**
      * @return boolean Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference.
      */
-    public function getHasCurrencySignBeforeValue()
+    public function getHasCurrencySignBeforeValue(): bool
     {
         return $this->hasCurrencySignBeforeValue;
     }
     
     /**
      * @param boolean $isDefault Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default.
-     * @return \jtl\Connector\Model\Currency
+     * @return Currency
      */
-    public function setIsDefault($isDefault)
+    public function setIsDefault(bool $isDefault): Currency
     {
         $this->isDefault = $isDefault;
         
@@ -210,16 +210,16 @@ class Currency extends DataModel
     /**
      * @return boolean Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default.
      */
-    public function getIsDefault()
+    public function getIsDefault(): bool
     {
         return $this->isDefault;
     }
     
     /**
      * @param string $iso
-     * @return \jtl\Connector\Model\Currency
+     * @return Currency
      */
-    public function setIso($iso)
+    public function setIso(string $iso): Currency
     {
         $this->iso = $iso;
         
@@ -229,16 +229,16 @@ class Currency extends DataModel
     /**
      * @return string
      */
-    public function getIso()
+    public function getIso(): string
     {
         return $this->iso;
     }
     
     /**
      * @param string $name Currency name
-     * @return \jtl\Connector\Model\Currency
+     * @return Currency
      */
-    public function setName($name)
+    public function setName(string $name): Currency
     {
         $this->name = $name;
         
@@ -248,16 +248,16 @@ class Currency extends DataModel
     /**
      * @return string Currency name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
     
     /**
      * @param string $nameHtml Optional HTML name e.g. "&euro;"
-     * @return \jtl\Connector\Model\Currency
+     * @return Currency
      */
-    public function setNameHtml($nameHtml)
+    public function setNameHtml(string $nameHtml): Currency
     {
         $this->nameHtml = $nameHtml;
         
@@ -267,7 +267,7 @@ class Currency extends DataModel
     /**
      * @return string Optional HTML name e.g. "&euro;"
      */
-    public function getNameHtml()
+    public function getNameHtml(): string
     {
         return $this->nameHtml;
     }

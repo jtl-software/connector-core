@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -135,10 +135,10 @@ class CustomerOrderPaymentInfo extends DataModel
     
     /**
      * @param Identity $customerOrderId Reference to customerOrder
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CustomerOrderPaymentInfo
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerOrderId(Identity $customerOrderId)
+    public function setCustomerOrderId(Identity $customerOrderId): CustomerOrderPaymentInfo
     {
         $this->customerOrderId = $customerOrderId;
         
@@ -148,17 +148,17 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @return Identity Reference to customerOrder
      */
-    public function getCustomerOrderId()
+    public function getCustomerOrderId(): Identity
     {
         return $this->customerOrderId;
     }
     
     /**
      * @param Identity $id Unique customerOrderPaymentInfo id
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CustomerOrderPaymentInfo
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): CustomerOrderPaymentInfo
     {
         $this->id = $id;
         
@@ -175,9 +175,9 @@ class CustomerOrderPaymentInfo extends DataModel
     
     /**
      * @param string $accountHolder Bank account holder name
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     * @return CustomerOrderPaymentInfo
      */
-    public function setAccountHolder($accountHolder)
+    public function setAccountHolder(string $accountHolder): CustomerOrderPaymentInfo
     {
         $this->accountHolder = $accountHolder;
         
@@ -187,16 +187,16 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @return string Bank account holder name
      */
-    public function getAccountHolder()
+    public function getAccountHolder(): string
     {
         return $this->accountHolder;
     }
     
     /**
      * @param string $accountNumber Bank account number (deprecated in DE since SEPA)
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     * @return CustomerOrderPaymentInfo
      */
-    public function setAccountNumber($accountNumber)
+    public function setAccountNumber(string $accountNumber): CustomerOrderPaymentInfo
     {
         $this->accountNumber = $accountNumber;
         
@@ -206,16 +206,16 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @return string Bank account number (deprecated in DE since SEPA)
      */
-    public function getAccountNumber()
+    public function getAccountNumber(): string
     {
         return $this->accountNumber;
     }
     
     /**
      * @param string $bankCode Bank code (deprecated in DE since SEPA)
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     * @return CustomerOrderPaymentInfo
      */
-    public function setBankCode($bankCode)
+    public function setBankCode(string $bankCode): CustomerOrderPaymentInfo
     {
         $this->bankCode = $bankCode;
         
@@ -225,16 +225,16 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @return string Bank code (deprecated in DE since SEPA)
      */
-    public function getBankCode()
+    public function getBankCode(): string
     {
         return $this->bankCode;
     }
     
     /**
      * @param string $bankName Bank name
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     * @return CustomerOrderPaymentInfo
      */
-    public function setBankName($bankName)
+    public function setBankName(string $bankName): CustomerOrderPaymentInfo
     {
         $this->bankName = $bankName;
         
@@ -244,16 +244,16 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @return string Bank name
      */
-    public function getBankName()
+    public function getBankName(): string
     {
         return $this->bankName;
     }
     
     /**
      * @param string $bic Bank Identifier Code (BIC)
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     * @return CustomerOrderPaymentInfo
      */
-    public function setBic($bic)
+    public function setBic(string $bic): CustomerOrderPaymentInfo
     {
         $this->bic = $bic;
         
@@ -263,16 +263,16 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @return string Bank Identifier Code (BIC)
      */
-    public function getBic()
+    public function getBic(): string
     {
         return $this->bic;
     }
     
     /**
      * @param string $creditCardExpiration Credit card expiration date
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     * @return CustomerOrderPaymentInfo
      */
-    public function setCreditCardExpiration($creditCardExpiration)
+    public function setCreditCardExpiration(string $creditCardExpiration): CustomerOrderPaymentInfo
     {
         $this->creditCardExpiration = $creditCardExpiration;
         
@@ -282,16 +282,16 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @return string Credit card expiration date
      */
-    public function getCreditCardExpiration()
+    public function getCreditCardExpiration(): string
     {
         return $this->creditCardExpiration;
     }
     
     /**
      * @param string $creditCardHolder
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     * @return CustomerOrderPaymentInfo
      */
-    public function setCreditCardHolder($creditCardHolder)
+    public function setCreditCardHolder(string $creditCardHolder): CustomerOrderPaymentInfo
     {
         $this->creditCardHolder = $creditCardHolder;
         
@@ -301,16 +301,16 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @return string
      */
-    public function getCreditCardHolder()
+    public function getCreditCardHolder(): string
     {
         return $this->creditCardHolder;
     }
     
     /**
      * @param string $creditCardNumber Credit card number
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     * @return CustomerOrderPaymentInfo
      */
-    public function setCreditCardNumber($creditCardNumber)
+    public function setCreditCardNumber(string $creditCardNumber): CustomerOrderPaymentInfo
     {
         $this->creditCardNumber = $creditCardNumber;
         
@@ -320,16 +320,16 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @return string Credit card number
      */
-    public function getCreditCardNumber()
+    public function getCreditCardNumber(): string
     {
         return $this->creditCardNumber;
     }
     
     /**
      * @param string $creditCardType Credit card type (e.g. "visa")
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     * @return CustomerOrderPaymentInfo
      */
-    public function setCreditCardType($creditCardType)
+    public function setCreditCardType(string $creditCardType): CustomerOrderPaymentInfo
     {
         $this->creditCardType = $creditCardType;
         
@@ -339,16 +339,16 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @return string Credit card type (e.g. "visa")
      */
-    public function getCreditCardType()
+    public function getCreditCardType(): string
     {
         return $this->creditCardType;
     }
     
     /**
      * @param string $creditCardVerificationNumber Credit card verification number
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     * @return CustomerOrderPaymentInfo
      */
-    public function setCreditCardVerificationNumber($creditCardVerificationNumber)
+    public function setCreditCardVerificationNumber(string $creditCardVerificationNumber): CustomerOrderPaymentInfo
     {
         $this->creditCardVerificationNumber = $creditCardVerificationNumber;
         
@@ -358,16 +358,16 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @return string Credit card verification number
      */
-    public function getCreditCardVerificationNumber()
+    public function getCreditCardVerificationNumber(): string
     {
         return $this->creditCardVerificationNumber;
     }
     
     /**
      * @param string $iban International Bank Account Number (IBAN)
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     * @return CustomerOrderPaymentInfo
      */
-    public function setIban($iban)
+    public function setIban(string $iban): CustomerOrderPaymentInfo
     {
         $this->iban = $iban;
         
@@ -377,7 +377,7 @@ class CustomerOrderPaymentInfo extends DataModel
     /**
      * @return string International Bank Account Number (IBAN)
      */
-    public function getIban()
+    public function getIban(): string
     {
         return $this->iban;
     }

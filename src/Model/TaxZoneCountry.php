@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -46,10 +46,10 @@ class TaxZoneCountry extends DataModel
     
     /**
      * @param Identity $taxZoneId Reference to taxZone
-     * @return \jtl\Connector\Model\TaxZoneCountry
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return TaxZoneCountry
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setTaxZoneId(Identity $taxZoneId)
+    public function setTaxZoneId(Identity $taxZoneId): TaxZoneCountry
     {
         $this->taxZoneId = $taxZoneId;
         
@@ -59,16 +59,16 @@ class TaxZoneCountry extends DataModel
     /**
      * @return Identity Reference to taxZone
      */
-    public function getTaxZoneId()
+    public function getTaxZoneId(): Identity
     {
         return $this->taxZoneId;
     }
     
     /**
      * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
-     * @return \jtl\Connector\Model\TaxZoneCountry
+     * @return TaxZoneCountry
      */
-    public function setCountryIso($countryIso)
+    public function setCountryIso(string $countryIso): TaxZoneCountry
     {
         $this->countryIso = $countryIso;
         
@@ -78,7 +78,7 @@ class TaxZoneCountry extends DataModel
     /**
      * @return string Country ISO 3166-2 (2 letter Uppercase)
      */
-    public function getCountryIso()
+    public function getCountryIso(): string
     {
         return $this->countryIso;
     }

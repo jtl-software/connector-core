@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -45,7 +45,7 @@ class SpecificValue extends DataModel
     protected $sort = 0;
     
     /**
-     * @var \jtl\Connector\Model\SpecificValueI18n[]
+     * @var SpecificValueI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\SpecificValueI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -63,10 +63,10 @@ class SpecificValue extends DataModel
     
     /**
      * @param Identity $id Unique specificValue id
-     * @return \jtl\Connector\Model\SpecificValue
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return SpecificValue
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): SpecificValue
     {
         $this->id = $id;
         
@@ -83,10 +83,10 @@ class SpecificValue extends DataModel
     
     /**
      * @param Identity $specificId Reference to specificId
-     * @return \jtl\Connector\Model\SpecificValue
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return SpecificValue
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setSpecificId(Identity $specificId)
+    public function setSpecificId(Identity $specificId): SpecificValue
     {
         $this->specificId = $specificId;
         
@@ -96,16 +96,16 @@ class SpecificValue extends DataModel
     /**
      * @return Identity Reference to specificId
      */
-    public function getSpecificId()
+    public function getSpecificId(): Identity
     {
         return $this->specificId;
     }
     
     /**
      * @param integer $sort Optional sort number
-     * @return \jtl\Connector\Model\SpecificValue
+     * @return SpecificValue
      */
-    public function setSort($sort)
+    public function setSort(int $sort): SpecificValue
     {
         $this->sort = $sort;
         
@@ -115,16 +115,16 @@ class SpecificValue extends DataModel
     /**
      * @return integer Optional sort number
      */
-    public function getSort()
+    public function getSort(): int
     {
         return $this->sort;
     }
     
     /**
-     * @param \jtl\Connector\Model\SpecificValueI18n $i18n
-     * @return \jtl\Connector\Model\SpecificValue
+     * @param SpecificValueI18n $i18n
+     * @return SpecificValue
      */
-    public function addI18n(\jtl\Connector\Model\SpecificValueI18n $i18n)
+    public function addI18n(SpecificValueI18n $i18n): SpecificValue
     {
         $this->i18ns[] = $i18n;
         
@@ -133,9 +133,9 @@ class SpecificValue extends DataModel
     
     /**
      * @param array $i18ns
-     * @return \jtl\Connector\Model\SpecificValue
+     * @return SpecificValue
      */
-    public function setI18ns(array $i18ns)
+    public function setI18ns(array $i18ns): SpecificValue
     {
         $this->i18ns = $i18ns;
         
@@ -143,17 +143,17 @@ class SpecificValue extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\SpecificValueI18n[]
+     * @return SpecificValueI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
     
     /**
-     * @return \jtl\Connector\Model\SpecificValue
+     * @return SpecificValue
      */
-    public function clearI18ns()
+    public function clearI18ns(): SpecificValue
     {
         $this->i18ns = [];
         

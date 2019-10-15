@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -150,7 +150,7 @@ class CustomerOrderItem extends DataModel
     protected $vat = 0.0;
     
     /**
-     * @var \jtl\Connector\Model\CustomerOrderItemVariation[]
+     * @var CustomerOrderItemVariation[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderItemVariation>")
      * @Serializer\SerializedName("variations")
      * @Serializer\AccessType("reflection")
@@ -170,10 +170,10 @@ class CustomerOrderItem extends DataModel
     
     /**
      * @param Identity $configItemId Optional reference to configItemId (if item is part of a configurable item)
-     * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CustomerOrderItem
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setConfigItemId(Identity $configItemId)
+    public function setConfigItemId(Identity $configItemId): CustomerOrderItem
     {
         $this->configItemId = $configItemId;
         
@@ -183,17 +183,17 @@ class CustomerOrderItem extends DataModel
     /**
      * @return Identity Optional reference to configItemId (if item is part of a configurable item)
      */
-    public function getConfigItemId()
+    public function getConfigItemId(): Identity
     {
         return $this->configItemId;
     }
     
     /**
      * @param Identity $customerOrderId Reference to customerOrder
-     * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CustomerOrderItem
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerOrderId(Identity $customerOrderId)
+    public function setCustomerOrderId(Identity $customerOrderId): CustomerOrderItem
     {
         $this->customerOrderId = $customerOrderId;
         
@@ -203,17 +203,17 @@ class CustomerOrderItem extends DataModel
     /**
      * @return Identity Reference to customerOrder
      */
-    public function getCustomerOrderId()
+    public function getCustomerOrderId(): Identity
     {
         return $this->customerOrderId;
     }
     
     /**
      * @param Identity $id Unique customerOrderItem id
-     * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CustomerOrderItem
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): CustomerOrderItem
     {
         $this->id = $id;
         
@@ -230,10 +230,10 @@ class CustomerOrderItem extends DataModel
     
     /**
      * @param Identity $productId Reference to product
-     * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CustomerOrderItem
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): CustomerOrderItem
     {
         $this->productId = $productId;
         
@@ -243,16 +243,16 @@ class CustomerOrderItem extends DataModel
     /**
      * @return Identity Reference to product
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
     
     /**
      * @param string $name Order item name
-     * @return \jtl\Connector\Model\CustomerOrderItem
+     * @return CustomerOrderItem
      */
-    public function setName($name)
+    public function setName(string $name): CustomerOrderItem
     {
         $this->name = $name;
         
@@ -262,16 +262,16 @@ class CustomerOrderItem extends DataModel
     /**
      * @return string Order item name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
     
     /**
      * @param double $price Price (net)
-     * @return \jtl\Connector\Model\CustomerOrderItem
+     * @return CustomerOrderItem
      */
-    public function setPrice($price)
+    public function setPrice(float $price): CustomerOrderItem
     {
         $this->price = $price;
         
@@ -281,16 +281,16 @@ class CustomerOrderItem extends DataModel
     /**
      * @return double Price (net)
      */
-    public function getPrice()
+    public function getPrice(): float
     {
         return $this->price;
     }
     
     /**
      * @param double $priceGross Price (gross)
-     * @return \jtl\Connector\Model\CustomerOrderItem
+     * @return CustomerOrderItem
      */
-    public function setPriceGross($priceGross)
+    public function setPriceGross(float $priceGross): CustomerOrderItem
     {
         $this->priceGross = $priceGross;
         
@@ -300,16 +300,16 @@ class CustomerOrderItem extends DataModel
     /**
      * @return double PriceGross (gross)
      */
-    public function getPriceGross()
+    public function getPriceGross(): float
     {
         return $this->priceGross;
     }
     
     /**
      * @param double $quantity Quantity purchased
-     * @return \jtl\Connector\Model\CustomerOrderItem
+     * @return CustomerOrderItem
      */
-    public function setQuantity($quantity)
+    public function setQuantity(float $quantity): CustomerOrderItem
     {
         $this->quantity = $quantity;
         
@@ -319,16 +319,16 @@ class CustomerOrderItem extends DataModel
     /**
      * @return double Quantity purchased
      */
-    public function getQuantity()
+    public function getQuantity(): float
     {
         return $this->quantity;
     }
     
     /**
      * @param string $sku Stock keeping Unit (unique item identifier)
-     * @return \jtl\Connector\Model\CustomerOrderItem
+     * @return CustomerOrderItem
      */
-    public function setSku($sku)
+    public function setSku(string $sku): CustomerOrderItem
     {
         $this->sku = $sku;
         
@@ -338,16 +338,16 @@ class CustomerOrderItem extends DataModel
     /**
      * @return string Stock keeping Unit (unique item identifier)
      */
-    public function getSku()
+    public function getSku(): string
     {
         return $this->sku;
     }
     
     /**
      * @param string $type
-     * @return \jtl\Connector\Model\CustomerOrderItem
+     * @return CustomerOrderItem
      */
-    public function setType($type)
+    public function setType(string $type): CustomerOrderItem
     {
         $this->type = $type;
         
@@ -357,16 +357,16 @@ class CustomerOrderItem extends DataModel
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
     
     /**
      * @param string $note
-     * @return \jtl\Connector\Model\CustomerOrderItem
+     * @return CustomerOrderItem
      */
-    public function setNote($note)
+    public function setNote(string $note): CustomerOrderItem
     {
         $this->note = $note;
         
@@ -376,16 +376,16 @@ class CustomerOrderItem extends DataModel
     /**
      * @return string
      */
-    public function getNote()
+    public function getNote(): string
     {
         return $this->note;
     }
     
     /**
      * @param string $unique Optional unique Hashsum (if item is part of configurable item
-     * @return \jtl\Connector\Model\CustomerOrderItem
+     * @return CustomerOrderItem
      */
-    public function setUnique($unique)
+    public function setUnique(string $unique): CustomerOrderItem
     {
         $this->unique = $unique;
         
@@ -395,16 +395,16 @@ class CustomerOrderItem extends DataModel
     /**
      * @return string Optional unique Hashsum (if item is part of configurable item
      */
-    public function getUnique()
+    public function getUnique(): string
     {
         return $this->unique;
     }
     
     /**
      * @param double $vat Value added tax
-     * @return \jtl\Connector\Model\CustomerOrderItem
+     * @return CustomerOrderItem
      */
-    public function setVat($vat)
+    public function setVat(float $vat): CustomerOrderItem
     {
         $this->vat = $vat;
         
@@ -414,16 +414,16 @@ class CustomerOrderItem extends DataModel
     /**
      * @return double Value added tax
      */
-    public function getVat()
+    public function getVat(): float
     {
         return $this->vat;
     }
     
     /**
-     * @param \jtl\Connector\Model\CustomerOrderItemVariation $variation
-     * @return \jtl\Connector\Model\CustomerOrderItem
+     * @param CustomerOrderItemVariation $variation
+     * @return CustomerOrderItem
      */
-    public function addVariation(\jtl\Connector\Model\CustomerOrderItemVariation $variation)
+    public function addVariation(CustomerOrderItemVariation $variation): CustomerOrderItem
     {
         $this->variations[] = $variation;
         
@@ -432,9 +432,9 @@ class CustomerOrderItem extends DataModel
     
     /**
      * @param array $variations
-     * @return \jtl\Connector\Model\CustomerOrderItem
+     * @return CustomerOrderItem
      */
-    public function setVariations(array $variations)
+    public function setVariations(array $variations): CustomerOrderItem
     {
         $this->variations = $variations;
         
@@ -442,17 +442,17 @@ class CustomerOrderItem extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\CustomerOrderItemVariation[]
+     * @return CustomerOrderItemVariation[]
      */
-    public function getVariations()
+    public function getVariations(): array
     {
         return $this->variations;
     }
     
     /**
-     * @return \jtl\Connector\Model\CustomerOrderItem
+     * @return CustomerOrderItem
      */
-    public function clearVariations()
+    public function clearVariations(): CustomerOrderItem
     {
         $this->variations = [];
         

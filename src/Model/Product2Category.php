@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -56,10 +56,10 @@ class Product2Category extends DataModel
     
     /**
      * @param Identity $categoryId Reference to category
-     * @return \jtl\Connector\Model\Product2Category
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Product2Category
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCategoryId(Identity $categoryId)
+    public function setCategoryId(Identity $categoryId): Product2Category
     {
         $this->categoryId = $categoryId;
         
@@ -69,17 +69,17 @@ class Product2Category extends DataModel
     /**
      * @return Identity Reference to category
      */
-    public function getCategoryId()
+    public function getCategoryId(): Identity
     {
         return $this->categoryId;
     }
     
     /**
      * @param Identity $id Unique product2Category id
-     * @return \jtl\Connector\Model\Product2Category
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Product2Category
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): Product2Category
     {
         $this->id = $id;
         
@@ -96,10 +96,10 @@ class Product2Category extends DataModel
     
     /**
      * @param Identity $productId Reference to product
-     * @return \jtl\Connector\Model\Product2Category
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Product2Category
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): Product2Category
     {
         $this->productId = $productId;
         
@@ -109,7 +109,7 @@ class Product2Category extends DataModel
     /**
      * @return Identity Reference to product
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }

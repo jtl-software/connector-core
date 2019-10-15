@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -55,10 +55,10 @@ class ProductVariationValueExtraCharge extends DataModel
     
     /**
      * @param Identity $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductVariationValueExtraCharge
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerGroupId(Identity $customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId): ProductVariationValueExtraCharge
     {
         $this->customerGroupId = $customerGroupId;
         
@@ -68,17 +68,17 @@ class ProductVariationValueExtraCharge extends DataModel
     /**
      * @return Identity Reference to customerGroup
      */
-    public function getCustomerGroupId()
+    public function getCustomerGroupId(): Identity
     {
         return $this->customerGroupId;
     }
     
     /**
      * @param Identity $productVariationValueId Reference to productVariationValue
-     * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductVariationValueExtraCharge
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductVariationValueId(Identity $productVariationValueId)
+    public function setProductVariationValueId(Identity $productVariationValueId): ProductVariationValueExtraCharge
     {
         $this->productVariationValueId = $productVariationValueId;
         
@@ -88,16 +88,16 @@ class ProductVariationValueExtraCharge extends DataModel
     /**
      * @return Identity Reference to productVariationValue
      */
-    public function getProductVariationValueId()
+    public function getProductVariationValueId(): Identity
     {
         return $this->productVariationValueId;
     }
     
     /**
      * @param double $extraChargeNet Extra charge (net)
-     * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
+     * @return ProductVariationValueExtraCharge
      */
-    public function setExtraChargeNet($extraChargeNet)
+    public function setExtraChargeNet(float $extraChargeNet): ProductVariationValueExtraCharge
     {
         $this->extraChargeNet = $extraChargeNet;
         
@@ -107,7 +107,7 @@ class ProductVariationValueExtraCharge extends DataModel
     /**
      * @return double Extra charge (net)
      */
-    public function getExtraChargeNet()
+    public function getExtraChargeNet(): float
     {
         return $this->extraChargeNet;
     }

@@ -7,6 +7,8 @@
 
 namespace jtl\Connector\Model;
 
+use Exception;
+use InvalidArgumentException;
 use \jtl\Connector\Core\Model\Model;
 use JMS\Serializer\Annotation as Serializer;
 
@@ -38,6 +40,9 @@ class Identity extends Model
     
     /**
      * Constructor
+     *
+     * @param string $endpoint
+     * @param int $host
      */
     public function __construct($endpoint = '', $host = 0)
     {
@@ -50,7 +55,7 @@ class Identity extends Model
      *
      * @return string
      */
-    public function getEndpoint()
+    public function getEndpoint(): string
     {
         return $this->endpoint;
     }
@@ -59,9 +64,9 @@ class Identity extends Model
      * Sets the value of endpoint.
      *
      * @param string $endpoint the endpoint
-     * @return \jtl\Connector\Model\Identity
+     * @return Identity
      */
-    public function setEndpoint($endpoint)
+    public function setEndpoint(string $endpoint): Identity
     {
         $this->endpoint = (string)$endpoint;
         
@@ -73,7 +78,7 @@ class Identity extends Model
      *
      * @return int
      */
-    public function getHost()
+    public function getHost(): int
     {
         return $this->host;
     }
@@ -82,9 +87,9 @@ class Identity extends Model
      * Sets the value of host.
      *
      * @param int $host the host
-     * @return \jtl\Connector\Model\Identity
+     * @return Identity
      */
-    public function setHost($host)
+    public function setHost(int $host): Identity
     {
         $this->host = (int)$host;
         
@@ -96,7 +101,7 @@ class Identity extends Model
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [$this->endpoint, $this->host];
     }
@@ -104,9 +109,10 @@ class Identity extends Model
     /**
      * Convert the Model into array
      *
+     * @param array $publics
      * @return array
      */
-    public function getPublic(array $publics = null)
+    public function getPublic(array $publics = []): array
     {
         return $this->toArray();
     }
@@ -114,13 +120,13 @@ class Identity extends Model
     /**
      * Convert from Array
      *
-     * @return \jtl\Connector\Model\Identity
-     * @throws \InvalidArgumentException
+     * @param array $data
+     * @return Identity
      */
     public static function fromArray(array $data)
     {
         if ($data === null || count($data) != 2 || !array_key_exists(0, $data) || !array_key_exists(1, $data)) {
-            throw new \InvalidArgumentException('The data parameter can not be null and must contain two values');
+            throw new InvalidArgumentException('The data parameter can not be null and must contain two values');
         }
         
         return new self($data[0], $data[1]);
@@ -129,7 +135,8 @@ class Identity extends Model
     /**
      * Dynamic Converter
      *
-     * @return \jtl\Connector\Model\Identity
+     * @param $data
+     * @return Identity
      */
     public static function convert($data)
     {
@@ -148,7 +155,7 @@ class Identity extends Model
         
         try {
             return self::fromArray($data);
-        } catch (\Exception $exc) {
+        } catch (Exception $exc) {
             return new self;
         }
     }

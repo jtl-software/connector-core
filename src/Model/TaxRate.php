@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -44,10 +44,10 @@ class TaxRate extends DataModel
     
     /**
      * @param Identity $id
-     * @return \jtl\Connector\Model\TaxRate
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return TaxRate
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): TaxRate
     {
         $this->id = $id;
         
@@ -64,9 +64,9 @@ class TaxRate extends DataModel
     
     /**
      * @param double $rate
-     * @return \jtl\Connector\Model\TaxRate
+     * @return TaxRate
      */
-    public function setRate($rate)
+    public function setRate(float $rate): TaxRate
     {
         $this->rate = $rate;
         
@@ -76,7 +76,7 @@ class TaxRate extends DataModel
     /**
      * @return double
      */
-    public function getRate()
+    public function getRate(): float
     {
         return $this->rate;
     }

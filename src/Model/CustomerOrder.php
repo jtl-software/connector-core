@@ -8,6 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -240,7 +241,7 @@ class CustomerOrder extends DataModel
     protected $totalSumGross = 0.0;
     
     /**
-     * @var \jtl\Connector\Model\CustomerOrderAttr[]
+     * @var CustomerOrderAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderAttr>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
@@ -248,7 +249,7 @@ class CustomerOrder extends DataModel
     protected $attributes = [];
     
     /**
-     * @var \jtl\Connector\Model\CustomerOrderItem[]
+     * @var CustomerOrderItem[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderItem>")
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
@@ -266,10 +267,10 @@ class CustomerOrder extends DataModel
     
     /**
      * @param Identity $customerId Optional reference to customer.
-     * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CustomerOrder
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerId(Identity $customerId)
+    public function setCustomerId(Identity $customerId): CustomerOrder
     {
         $this->customerId = $customerId;
         
@@ -279,17 +280,17 @@ class CustomerOrder extends DataModel
     /**
      * @return Identity Optional reference to customer.
      */
-    public function getCustomerId()
+    public function getCustomerId(): Identity
     {
         return $this->customerId;
     }
     
     /**
      * @param Identity $id Unique customerOrder id
-     * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CustomerOrder
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): CustomerOrder
     {
         $this->id = $id;
         
@@ -306,10 +307,10 @@ class CustomerOrder extends DataModel
     
     /**
      * @param CustomerOrderBillingAddress $billingAddress Billing address
-     * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'CustomerOrderBillingAddress'.
+     * @return CustomerOrder
+     * @throws InvalidArgumentException if the provided argument is not of type 'CustomerOrderBillingAddress'.
      */
-    public function setBillingAddress(CustomerOrderBillingAddress $billingAddress = null)
+    public function setBillingAddress(CustomerOrderBillingAddress $billingAddress = null): CustomerOrder
     {
         $this->billingAddress = $billingAddress;
         
@@ -317,18 +318,18 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\CustomerOrderBillingAddress Billing address
+     * @return CustomerOrderBillingAddress Billing address
      */
-    public function getBillingAddress()
+    public function getBillingAddress(): CustomerOrderBillingAddress
     {
         return $this->billingAddress;
     }
     
     /**
      * @param string $carrierName
-     * @return \jtl\Connector\Model\CustomerOrder
+     * @return CustomerOrder
      */
-    public function setCarrierName($carrierName)
+    public function setCarrierName(string $carrierName): CustomerOrder
     {
         $this->carrierName = $carrierName;
         
@@ -338,17 +339,17 @@ class CustomerOrder extends DataModel
     /**
      * @return string
      */
-    public function getCarrierName()
+    public function getCarrierName(): string
     {
         return $this->carrierName;
     }
     
     /**
      * @param DateTime $creationDate Date of creation
-     * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     * @return CustomerOrder
+     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreationDate(DateTime $creationDate = null)
+    public function setCreationDate(DateTime $creationDate = null): CustomerOrder
     {
         $this->creationDate = $creationDate;
         
@@ -358,16 +359,16 @@ class CustomerOrder extends DataModel
     /**
      * @return DateTime Date of creation
      */
-    public function getCreationDate()
+    public function getCreationDate(): DateTime
     {
         return $this->creationDate;
     }
     
     /**
      * @param string $currencyIso
-     * @return \jtl\Connector\Model\CustomerOrder
+     * @return CustomerOrder
      */
-    public function setCurrencyIso($currencyIso)
+    public function setCurrencyIso(string $currencyIso): CustomerOrder
     {
         $this->currencyIso = $currencyIso;
         
@@ -377,17 +378,17 @@ class CustomerOrder extends DataModel
     /**
      * @return string
      */
-    public function getCurrencyIso()
+    public function getCurrencyIso(): string
     {
         return $this->currencyIso;
     }
     
     /**
      * @param DateTime $estimatedDeliveryDate
-     * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     * @return CustomerOrder
+     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setEstimatedDeliveryDate(DateTime $estimatedDeliveryDate = null)
+    public function setEstimatedDeliveryDate(DateTime $estimatedDeliveryDate = null): CustomerOrder
     {
         $this->estimatedDeliveryDate = $estimatedDeliveryDate;
         
@@ -397,16 +398,16 @@ class CustomerOrder extends DataModel
     /**
      * @return DateTime
      */
-    public function getEstimatedDeliveryDate()
+    public function getEstimatedDeliveryDate(): DateTime
     {
         return $this->estimatedDeliveryDate;
     }
     
     /**
      * @param string $languageISO Locale set when customerOrder was finished. Important for further E-Mail message and notification localization.
-     * @return \jtl\Connector\Model\CustomerOrder
+     * @return CustomerOrder
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): CustomerOrder
     {
         $this->languageISO = $languageISO;
         
@@ -416,16 +417,16 @@ class CustomerOrder extends DataModel
     /**
      * @return string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization.
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
     
     /**
      * @param string $note
-     * @return \jtl\Connector\Model\CustomerOrder
+     * @return CustomerOrder
      */
-    public function setNote($note)
+    public function setNote(string $note): CustomerOrder
     {
         $this->note = $note;
         
@@ -435,16 +436,16 @@ class CustomerOrder extends DataModel
     /**
      * @return string
      */
-    public function getNote()
+    public function getNote(): string
     {
         return $this->note;
     }
     
     /**
      * @param string $orderNumber Optional order number (usually set by ERP System later)
-     * @return \jtl\Connector\Model\CustomerOrder
+     * @return CustomerOrder
      */
-    public function setOrderNumber($orderNumber)
+    public function setOrderNumber(string $orderNumber): CustomerOrder
     {
         $this->orderNumber = $orderNumber;
         
@@ -454,17 +455,17 @@ class CustomerOrder extends DataModel
     /**
      * @return string Optional order number (usually set by ERP System later)
      */
-    public function getOrderNumber()
+    public function getOrderNumber(): string
     {
         return $this->orderNumber;
     }
     
     /**
      * @param DateTime $paymentDate Payment date
-     * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     * @return CustomerOrder
+     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setPaymentDate(DateTime $paymentDate = null)
+    public function setPaymentDate(DateTime $paymentDate = null): CustomerOrder
     {
         $this->paymentDate = $paymentDate;
         
@@ -474,17 +475,17 @@ class CustomerOrder extends DataModel
     /**
      * @return DateTime Payment date
      */
-    public function getPaymentDate()
+    public function getPaymentDate(): DateTime
     {
         return $this->paymentDate;
     }
     
     /**
      * @param CustomerOrderPaymentInfo $paymentInfo
-     * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'CustomerOrderPaymentInfo'.
+     * @return CustomerOrder
+     * @throws InvalidArgumentException if the provided argument is not of type 'CustomerOrderPaymentInfo'.
      */
-    public function setPaymentInfo(CustomerOrderPaymentInfo $paymentInfo = null)
+    public function setPaymentInfo(CustomerOrderPaymentInfo $paymentInfo = null): CustomerOrder
     {
         $this->paymentInfo = $paymentInfo;
         
@@ -492,18 +493,18 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
+     * @return CustomerOrderPaymentInfo
      */
-    public function getPaymentInfo()
+    public function getPaymentInfo(): CustomerOrderPaymentInfo
     {
         return $this->paymentInfo;
     }
     
     /**
      * @param string $paymentModuleCode
-     * @return \jtl\Connector\Model\CustomerOrder
+     * @return CustomerOrder
      */
-    public function setPaymentModuleCode($paymentModuleCode)
+    public function setPaymentModuleCode(string $paymentModuleCode): CustomerOrder
     {
         $this->paymentModuleCode = $paymentModuleCode;
         
@@ -513,16 +514,16 @@ class CustomerOrder extends DataModel
     /**
      * @return string
      */
-    public function getPaymentModuleCode()
+    public function getPaymentModuleCode(): string
     {
         return $this->paymentModuleCode;
     }
     
     /**
      * @param string $paymentStatus
-     * @return \jtl\Connector\Model\CustomerOrder
+     * @return CustomerOrder
      */
-    public function setPaymentStatus($paymentStatus)
+    public function setPaymentStatus(string $paymentStatus): CustomerOrder
     {
         $this->paymentStatus = $paymentStatus;
         
@@ -532,16 +533,16 @@ class CustomerOrder extends DataModel
     /**
      * @return string
      */
-    public function getPaymentStatus()
+    public function getPaymentStatus(): string
     {
         return $this->paymentStatus;
     }
     
     /**
      * @param string $pui
-     * @return \jtl\Connector\Model\CustomerOrder
+     * @return CustomerOrder
      */
-    public function setPui($pui)
+    public function setPui(string $pui): CustomerOrder
     {
         $this->pui = $pui;
         
@@ -551,17 +552,17 @@ class CustomerOrder extends DataModel
     /**
      * @return string
      */
-    public function getPui()
+    public function getPui(): string
     {
         return $this->pui;
     }
     
     /**
      * @param CustomerOrderShippingAddress $shippingAddress Shipping address
-     * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'CustomerOrderShippingAddress'.
+     * @return CustomerOrder
+     * @throws InvalidArgumentException if the provided argument is not of type 'CustomerOrderShippingAddress'.
      */
-    public function setShippingAddress(CustomerOrderShippingAddress $shippingAddress = null)
+    public function setShippingAddress(CustomerOrderShippingAddress $shippingAddress = null): CustomerOrder
     {
         $this->shippingAddress = $shippingAddress;
         
@@ -569,19 +570,19 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\CustomerOrderShippingAddress Shipping address
+     * @return CustomerOrderShippingAddress Shipping address
      */
-    public function getShippingAddress()
+    public function getShippingAddress(): CustomerOrderShippingAddress
     {
         return $this->shippingAddress;
     }
     
     /**
      * @param DateTime $shippingDate Shipping date
-     * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     * @return CustomerOrder
+     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setShippingDate(DateTime $shippingDate = null)
+    public function setShippingDate(DateTime $shippingDate = null): CustomerOrder
     {
         $this->shippingDate = $shippingDate;
         
@@ -591,16 +592,16 @@ class CustomerOrder extends DataModel
     /**
      * @return DateTime Shipping date
      */
-    public function getShippingDate()
+    public function getShippingDate(): DateTime
     {
         return $this->shippingDate;
     }
     
     /**
      * @param string $shippingInfo Additional shipping info
-     * @return \jtl\Connector\Model\CustomerOrder
+     * @return CustomerOrder
      */
-    public function setShippingInfo($shippingInfo)
+    public function setShippingInfo(string $shippingInfo): CustomerOrder
     {
         $this->shippingInfo = $shippingInfo;
         
@@ -610,17 +611,17 @@ class CustomerOrder extends DataModel
     /**
      * @return string Additional shipping info
      */
-    public function getShippingInfo()
+    public function getShippingInfo(): string
     {
         return $this->shippingInfo;
     }
     
     /**
      * @param Identity $shippingMethodId Optional reference to customer.
-     * @return \jtl\Connector\Model\CustomerOrder
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CustomerOrder
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setShippingMethodId(Identity $shippingMethodId)
+    public function setShippingMethodId(Identity $shippingMethodId): CustomerOrder
     {
         $this->shippingMethodId = $shippingMethodId;
         
@@ -630,17 +631,17 @@ class CustomerOrder extends DataModel
     /**
      * @return Identity Optional reference to shipping method.
      */
-    public function getShippingMethodId()
+    public function getShippingMethodId(): Identity
     {
         return $this->shippingMethodId;
     }
     
     /**
      * @param string $shippingMethodName
-     * @return \jtl\Connector\Model\CustomerOrder
+     * @return CustomerOrder
      * @deprecated will be removed in 3.1. Use shippingMethodId instead.
      */
-    public function setShippingMethodName($shippingMethodName)
+    public function setShippingMethodName(string $shippingMethodName): CustomerOrder
     {
         $this->shippingMethodName = $shippingMethodName;
         
@@ -651,16 +652,16 @@ class CustomerOrder extends DataModel
      * @return string
      * @deprecated will be removed in 3.1. Use shippingMethodId instead.
      */
-    public function getShippingMethodName()
+    public function getShippingMethodName(): string
     {
         return $this->shippingMethodName;
     }
     
     /**
      * @param string $status Shipping status
-     * @return \jtl\Connector\Model\CustomerOrder
+     * @return CustomerOrder
      */
-    public function setStatus($status)
+    public function setStatus(string $status): CustomerOrder
     {
         $this->status = $status;
         
@@ -670,16 +671,16 @@ class CustomerOrder extends DataModel
     /**
      * @return string Shipping status
      */
-    public function getStatus()
+    public function getStatus(): string
     {
         return $this->status;
     }
     
     /**
      * @param double $totalSum
-     * @return \jtl\Connector\Model\CustomerOrder
+     * @return CustomerOrder
      */
-    public function setTotalSum($totalSum)
+    public function setTotalSum(float $totalSum): CustomerOrder
     {
         $this->totalSum = $totalSum;
         
@@ -689,16 +690,16 @@ class CustomerOrder extends DataModel
     /**
      * @return double
      */
-    public function getTotalSum()
+    public function getTotalSum(): float
     {
         return $this->totalSum;
     }
     
     /**
      * @param double $totalSumGross
-     * @return \jtl\Connector\Model\CustomerOrder
+     * @return CustomerOrder
      */
-    public function setTotalSumGross($totalSumGross)
+    public function setTotalSumGross(float $totalSumGross): CustomerOrder
     {
         $this->totalSumGross = $totalSumGross;
         
@@ -708,16 +709,16 @@ class CustomerOrder extends DataModel
     /**
      * @return double
      */
-    public function getTotalSumGross()
+    public function getTotalSumGross(): float
     {
         return $this->totalSumGross;
     }
     
     /**
-     * @param \jtl\Connector\Model\CustomerOrderAttr $attribute
-     * @return \jtl\Connector\Model\CustomerOrder
+     * @param CustomerOrderAttr $attribute
+     * @return CustomerOrder
      */
-    public function addAttribute(\jtl\Connector\Model\CustomerOrderAttr $attribute)
+    public function addAttribute(CustomerOrderAttr $attribute): CustomerOrder
     {
         $this->attributes[] = $attribute;
         
@@ -726,9 +727,9 @@ class CustomerOrder extends DataModel
     
     /**
      * @param array $attributes
-     * @return \jtl\Connector\Model\CustomerOrder
+     * @return CustomerOrder
      */
-    public function setAttributes(array $attributes)
+    public function setAttributes(array $attributes): CustomerOrder
     {
         $this->attributes = $attributes;
         
@@ -736,17 +737,17 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\CustomerOrderAttr[]
+     * @return CustomerOrderAttr[]
      */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         return $this->attributes;
     }
     
     /**
-     * @return \jtl\Connector\Model\CustomerOrder
+     * @return CustomerOrder
      */
-    public function clearAttributes()
+    public function clearAttributes(): CustomerOrder
     {
         $this->attributes = [];
         
@@ -754,10 +755,10 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param \jtl\Connector\Model\CustomerOrderItem $item
-     * @return \jtl\Connector\Model\CustomerOrder
+     * @param CustomerOrderItem $item
+     * @return CustomerOrder
      */
-    public function addItem(\jtl\Connector\Model\CustomerOrderItem $item)
+    public function addItem(CustomerOrderItem $item): CustomerOrder
     {
         $this->items[] = $item;
         
@@ -766,9 +767,9 @@ class CustomerOrder extends DataModel
     
     /**
      * @param array $items
-     * @return \jtl\Connector\Model\CustomerOrder
+     * @return CustomerOrder
      */
-    public function setItems(array $items)
+    public function setItems(array $items): CustomerOrder
     {
         $this->items = $items;
         
@@ -776,17 +777,17 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\CustomerOrderItem[]
+     * @return CustomerOrderItem[]
      */
-    public function getItems()
+    public function getItems(): array
     {
         return $this->items;
     }
     
     /**
-     * @return \jtl\Connector\Model\CustomerOrder
+     * @return CustomerOrder
      */
-    public function clearItems()
+    public function clearItems(): CustomerOrder
     {
         $this->items = [];
         

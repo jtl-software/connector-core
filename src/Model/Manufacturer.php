@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -61,7 +61,7 @@ class Manufacturer extends DataModel
     protected $websiteUrl = '';
     
     /**
-     * @var \jtl\Connector\Model\ManufacturerI18n[]
+     * @var ManufacturerI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ManufacturerI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -78,10 +78,10 @@ class Manufacturer extends DataModel
     
     /**
      * @param Identity $id Unique manufacturer id
-     * @return \jtl\Connector\Model\Manufacturer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Manufacturer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): Manufacturer
     {
         $this->id = $id;
         
@@ -98,9 +98,9 @@ class Manufacturer extends DataModel
     
     /**
      * @param string $name Manufacturer (brand) name
-     * @return \jtl\Connector\Model\Manufacturer
+     * @return Manufacturer
      */
-    public function setName($name)
+    public function setName(string $name): Manufacturer
     {
         $this->name = $name;
         
@@ -110,16 +110,16 @@ class Manufacturer extends DataModel
     /**
      * @return string Manufacturer (brand) name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
     
     /**
      * @param integer $sort Optional sort number
-     * @return \jtl\Connector\Model\Manufacturer
+     * @return Manufacturer
      */
-    public function setSort($sort)
+    public function setSort(int $sort): Manufacturer
     {
         $this->sort = $sort;
         
@@ -129,16 +129,16 @@ class Manufacturer extends DataModel
     /**
      * @return integer Optional sort number
      */
-    public function getSort()
+    public function getSort(): int
     {
         return $this->sort;
     }
     
     /**
      * @param string $urlPath Optional url path e.g. 'Products-manufactured-by-X'
-     * @return \jtl\Connector\Model\Manufacturer
+     * @return Manufacturer
      */
-    public function setUrlPath($urlPath)
+    public function setUrlPath(string $urlPath): Manufacturer
     {
         $this->urlPath = $urlPath;
         
@@ -148,16 +148,16 @@ class Manufacturer extends DataModel
     /**
      * @return string Optional url path e.g. 'Products-manufactured-by-X'
      */
-    public function getUrlPath()
+    public function getUrlPath(): string
     {
         return $this->urlPath;
     }
     
     /**
      * @param string $websiteUrl Optional manufacturer website URL
-     * @return \jtl\Connector\Model\Manufacturer
+     * @return Manufacturer
      */
-    public function setWebsiteUrl($websiteUrl)
+    public function setWebsiteUrl(string $websiteUrl): Manufacturer
     {
         $this->websiteUrl = $websiteUrl;
         
@@ -167,16 +167,16 @@ class Manufacturer extends DataModel
     /**
      * @return string Optional manufacturer website URL
      */
-    public function getWebsiteUrl()
+    public function getWebsiteUrl(): string
     {
         return $this->websiteUrl;
     }
     
     /**
-     * @param \jtl\Connector\Model\ManufacturerI18n $i18n
-     * @return \jtl\Connector\Model\Manufacturer
+     * @param ManufacturerI18n $i18n
+     * @return Manufacturer
      */
-    public function addI18n(\jtl\Connector\Model\ManufacturerI18n $i18n)
+    public function addI18n(ManufacturerI18n $i18n): Manufacturer
     {
         $this->i18ns[] = $i18n;
         
@@ -185,9 +185,9 @@ class Manufacturer extends DataModel
     
     /**
      * @param array $i18ns
-     * @return \jtl\Connector\Model\Manufacturer
+     * @return Manufacturer
      */
-    public function setI18ns(array $i18ns)
+    public function setI18ns(array $i18ns): Manufacturer
     {
         $this->i18ns = $i18ns;
         
@@ -195,17 +195,17 @@ class Manufacturer extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ManufacturerI18n[]
+     * @return ManufacturerI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
     
     /**
-     * @return \jtl\Connector\Model\Manufacturer
+     * @return Manufacturer
      */
-    public function clearI18ns()
+    public function clearI18ns(): Manufacturer
     {
         $this->i18ns = [];
         

@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -70,10 +70,10 @@ class Language extends DataModel
     
     /**
      * @param Identity $id Unique language id
-     * @return \jtl\Connector\Model\Language
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Language
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): Language
     {
         $this->id = $id;
         
@@ -90,9 +90,9 @@ class Language extends DataModel
     
     /**
      * @param boolean $isDefault Flag default language for frontend. Exact 1 language must be marked as default.
-     * @return \jtl\Connector\Model\Language
+     * @return Language
      */
-    public function setIsDefault($isDefault)
+    public function setIsDefault(bool $isDefault): Language
     {
         $this->isDefault = $isDefault;
         
@@ -102,16 +102,16 @@ class Language extends DataModel
     /**
      * @return boolean Flag default language for frontend. Exact 1 language must be marked as default.
      */
-    public function getIsDefault()
+    public function getIsDefault(): bool
     {
         return $this->isDefault;
     }
     
     /**
      * @param string $languageISO
-     * @return \jtl\Connector\Model\Language
+     * @return Language
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): Language
     {
         $this->languageISO = $languageISO;
         
@@ -121,16 +121,16 @@ class Language extends DataModel
     /**
      * @return string
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
     
     /**
      * @param string $nameEnglish English term
-     * @return \jtl\Connector\Model\Language
+     * @return Language
      */
-    public function setNameEnglish($nameEnglish)
+    public function setNameEnglish(string $nameEnglish): Language
     {
         $this->nameEnglish = $nameEnglish;
         
@@ -140,16 +140,16 @@ class Language extends DataModel
     /**
      * @return string English term
      */
-    public function getNameEnglish()
+    public function getNameEnglish(): string
     {
         return $this->nameEnglish;
     }
     
     /**
      * @param string $nameGerman German term
-     * @return \jtl\Connector\Model\Language
+     * @return Language
      */
-    public function setNameGerman($nameGerman)
+    public function setNameGerman(string $nameGerman): Language
     {
         $this->nameGerman = $nameGerman;
         
@@ -159,7 +159,7 @@ class Language extends DataModel
     /**
      * @return string German term
      */
-    public function getNameGerman()
+    public function getNameGerman(): string
     {
         return $this->nameGerman;
     }

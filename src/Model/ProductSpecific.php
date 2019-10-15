@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -56,10 +56,10 @@ class ProductSpecific extends DataModel
     
     /**
      * @param Identity $id Unique productSpecific id
-     * @return \jtl\Connector\Model\ProductSpecific
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductSpecific
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): ProductSpecific
     {
         $this->id = $id;
         
@@ -76,10 +76,10 @@ class ProductSpecific extends DataModel
     
     /**
      * @param Identity $productId Reference to product
-     * @return \jtl\Connector\Model\ProductSpecific
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductSpecific
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): ProductSpecific
     {
         $this->productId = $productId;
         
@@ -89,17 +89,17 @@ class ProductSpecific extends DataModel
     /**
      * @return Identity Reference to product
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
     
     /**
      * @param Identity $specificValueId Reference to specificValue
-     * @return \jtl\Connector\Model\ProductSpecific
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductSpecific
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setSpecificValueId(Identity $specificValueId)
+    public function setSpecificValueId(Identity $specificValueId): ProductSpecific
     {
         $this->specificValueId = $specificValueId;
         
@@ -109,7 +109,7 @@ class ProductSpecific extends DataModel
     /**
      * @return Identity Reference to specificValue
      */
-    public function getSpecificValueId()
+    public function getSpecificValueId(): Identity
     {
         return $this->specificValueId;
     }

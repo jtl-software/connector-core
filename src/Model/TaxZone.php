@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -37,7 +37,7 @@ class TaxZone extends DataModel
     protected $name = '';
     
     /**
-     * @var \jtl\Connector\Model\TaxZoneCountry[]
+     * @var TaxZoneCountry[]
      * @Serializer\Type("array<jtl\Connector\Model\TaxZoneCountry>")
      * @Serializer\SerializedName("countries")
      * @Serializer\AccessType("reflection")
@@ -54,10 +54,10 @@ class TaxZone extends DataModel
     
     /**
      * @param Identity $id Unique taxZone id
-     * @return \jtl\Connector\Model\TaxZone
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return TaxZone
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): TaxZone
     {
         $this->id = $id;
         
@@ -74,9 +74,9 @@ class TaxZone extends DataModel
     
     /**
      * @param string $name Optional tax zone name e.g. "EU Zone"
-     * @return \jtl\Connector\Model\TaxZone
+     * @return TaxZone
      */
-    public function setName($name)
+    public function setName(string $name): TaxZone
     {
         $this->name = $name;
         
@@ -86,16 +86,16 @@ class TaxZone extends DataModel
     /**
      * @return string Optional tax zone name e.g. "EU Zone"
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
     
     /**
-     * @param \jtl\Connector\Model\TaxZoneCountry $country
-     * @return \jtl\Connector\Model\TaxZone
+     * @param TaxZoneCountry $country
+     * @return TaxZone
      */
-    public function addCountry(\jtl\Connector\Model\TaxZoneCountry $country)
+    public function addCountry(TaxZoneCountry $country): TaxZone
     {
         $this->countries[] = $country;
         
@@ -103,17 +103,17 @@ class TaxZone extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\TaxZoneCountry[]
+     * @return TaxZoneCountry[]
      */
-    public function getCountries()
+    public function getCountries(): array
     {
         return $this->countries;
     }
     
     /**
-     * @return \jtl\Connector\Model\TaxZone
+     * @return TaxZone
      */
-    public function clearCountries()
+    public function clearCountries(): TaxZone
     {
         $this->countries = [];
         

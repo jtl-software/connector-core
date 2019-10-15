@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -53,7 +53,7 @@ class ProductAttr extends DataModel
     protected $isTranslated = false;
     
     /**
-     * @var \jtl\Connector\Model\ProductAttrI18n[]
+     * @var ProductAttrI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductAttrI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -71,10 +71,10 @@ class ProductAttr extends DataModel
     
     /**
      * @param Identity $id
-     * @return \jtl\Connector\Model\ProductAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): ProductAttr
     {
         $this->id = $id;
         
@@ -91,10 +91,10 @@ class ProductAttr extends DataModel
     
     /**
      * @param Identity $productId
-     * @return \jtl\Connector\Model\ProductAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): ProductAttr
     {
         $this->productId = $productId;
         
@@ -104,16 +104,16 @@ class ProductAttr extends DataModel
     /**
      * @return Identity
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
     
     /**
      * @param boolean $isCustomProperty
-     * @return \jtl\Connector\Model\ProductAttr
+     * @return ProductAttr
      */
-    public function setIsCustomProperty($isCustomProperty)
+    public function setIsCustomProperty(bool $isCustomProperty): ProductAttr
     {
         $this->isCustomProperty = $isCustomProperty;
         
@@ -123,16 +123,16 @@ class ProductAttr extends DataModel
     /**
      * @return boolean
      */
-    public function getIsCustomProperty()
+    public function getIsCustomProperty(): bool
     {
         return $this->isCustomProperty;
     }
     
     /**
      * @param boolean $isTranslated
-     * @return \jtl\Connector\Model\ProductAttr
+     * @return ProductAttr
      */
-    public function setIsTranslated($isTranslated)
+    public function setIsTranslated(bool $isTranslated): ProductAttr
     {
         $this->isTranslated = $isTranslated;
         
@@ -142,16 +142,16 @@ class ProductAttr extends DataModel
     /**
      * @return boolean
      */
-    public function getIsTranslated()
+    public function getIsTranslated(): bool
     {
         return $this->isTranslated;
     }
     
     /**
-     * @param \jtl\Connector\Model\ProductAttrI18n $i18n
-     * @return \jtl\Connector\Model\ProductAttr
+     * @param ProductAttrI18n $i18n
+     * @return ProductAttr
      */
-    public function addI18n(\jtl\Connector\Model\ProductAttrI18n $i18n)
+    public function addI18n(ProductAttrI18n $i18n): ProductAttr
     {
         $this->i18ns[] = $i18n;
         
@@ -160,9 +160,9 @@ class ProductAttr extends DataModel
     
     /**
      * @param array $i18ns
-     * @return \jtl\Connector\Model\ProductAttr
+     * @return ProductAttr
      */
-    public function setI18ns(array $i18ns)
+    public function setI18ns(array $i18ns): ProductAttr
     {
         $this->i18ns = $i18ns;
         
@@ -170,17 +170,17 @@ class ProductAttr extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductAttrI18n[]
+     * @return ProductAttrI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductAttr
+     * @return ProductAttr
      */
-    public function clearI18ns()
+    public function clearI18ns(): ProductAttr
     {
         $this->i18ns = [];
         

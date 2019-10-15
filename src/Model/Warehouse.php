@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -46,10 +46,10 @@ class Warehouse extends DataModel
     
     /**
      * @param Identity $id Unique warehouse id
-     * @return \jtl\Connector\Model\Warehouse
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Warehouse
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): Warehouse
     {
         $this->id = $id;
         
@@ -66,9 +66,9 @@ class Warehouse extends DataModel
     
     /**
      * @param string $name Warehouse name
-     * @return \jtl\Connector\Model\Warehouse
+     * @return Warehouse
      */
-    public function setName($name)
+    public function setName(string $name): Warehouse
     {
         $this->name = $name;
         
@@ -78,7 +78,7 @@ class Warehouse extends DataModel
     /**
      * @return string Warehouse name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

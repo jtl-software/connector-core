@@ -7,7 +7,6 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -45,9 +44,9 @@ class ProductMediaFileAttrI18n extends DataModel
     
     /**
      * @param string $languageISO
-     * @return \jtl\Connector\Model\ProductMediaFileAttrI18n
+     * @return ProductMediaFileAttrI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): ProductMediaFileAttrI18n
     {
         $this->languageISO = $languageISO;
         
@@ -57,16 +56,16 @@ class ProductMediaFileAttrI18n extends DataModel
     /**
      * @return string
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
     
     /**
      * @param string $name
-     * @return \jtl\Connector\Model\ProductMediaFileAttrI18n
+     * @return ProductMediaFileAttrI18n
      */
-    public function setName($name)
+    public function setName(string $name): ProductMediaFileAttrI18n
     {
         $this->name = $name;
         
@@ -76,16 +75,16 @@ class ProductMediaFileAttrI18n extends DataModel
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
     
     /**
      * @param string $value
-     * @return \jtl\Connector\Model\ProductMediaFileAttrI18n
+     * @return ProductMediaFileAttrI18n
      */
-    public function setValue($value)
+    public function setValue(string $value): ProductMediaFileAttrI18n
     {
         $this->value = $value;
         
@@ -95,7 +94,7 @@ class ProductMediaFileAttrI18n extends DataModel
     /**
      * @return string
      */
-    public function getValue()
+    public function getValue(): string
     {
         return $this->value;
     }

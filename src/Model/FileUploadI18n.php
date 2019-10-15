@@ -7,7 +7,6 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -53,9 +52,9 @@ class FileUploadI18n extends DataModel
     
     /**
      * @param string $description
-     * @return \jtl\Connector\Model\FileUploadI18n
+     * @return FileUploadI18n
      */
-    public function setDescription($description)
+    public function setDescription(string $description): FileUploadI18n
     {
         $this->description = $description;
         
@@ -65,16 +64,16 @@ class FileUploadI18n extends DataModel
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
     
     /**
      * @param integer $fileUploadId
-     * @return \jtl\Connector\Model\FileUploadI18n
+     * @return FileUploadI18n
      */
-    public function setFileUploadId($fileUploadId)
+    public function setFileUploadId(int $fileUploadId): FileUploadI18n
     {
         $this->fileUploadId = $fileUploadId;
         
@@ -82,18 +81,18 @@ class FileUploadI18n extends DataModel
     }
     
     /**
-     * @return integer
+     * @return int
      */
-    public function getFileUploadId()
+    public function getFileUploadId(): int
     {
         return $this->fileUploadId;
     }
     
     /**
      * @param string $languageISO
-     * @return \jtl\Connector\Model\FileUploadI18n
+     * @return FileUploadI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): FileUploadI18n
     {
         $this->languageISO = $languageISO;
         
@@ -103,16 +102,16 @@ class FileUploadI18n extends DataModel
     /**
      * @return string
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
     
     /**
      * @param string $name
-     * @return \jtl\Connector\Model\FileUploadI18n
+     * @return FileUploadI18n
      */
-    public function setName($name)
+    public function setName(string $name): FileUploadI18n
     {
         $this->name = $name;
         
@@ -122,7 +121,7 @@ class FileUploadI18n extends DataModel
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

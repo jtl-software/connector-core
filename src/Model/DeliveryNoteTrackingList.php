@@ -7,7 +7,6 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -37,9 +36,9 @@ class DeliveryNoteTrackingList extends DataModel
     
     /**
      * @param string $name
-     * @return \jtl\Connector\Model\DeliveryNoteTrackingList
+     * @return DeliveryNoteTrackingList
      */
-    public function setName($name)
+    public function setName(string $name): DeliveryNoteTrackingList
     {
         $this->name = $name;
         
@@ -49,16 +48,16 @@ class DeliveryNoteTrackingList extends DataModel
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
     
     /**
      * @param string $code
-     * @return \jtl\Connector\Model\DeliveryNoteTrackingList
+     * @return DeliveryNoteTrackingList
      */
-    public function addCode($code)
+    public function ddCode(string $code): DeliveryNoteTrackingList
     {
         $this->codes[] = $code;
         
@@ -67,9 +66,9 @@ class DeliveryNoteTrackingList extends DataModel
     
     /**
      * @param array $codes
-     * @return \jtl\Connector\Model\DeliveryNoteTrackingList
+     * @return DeliveryNoteTrackingList
      */
-    public function setCodes(array $codes)
+    public function setCodes(array $codes): DeliveryNoteTrackingList
     {
         $this->codes = $codes;
         
@@ -79,15 +78,15 @@ class DeliveryNoteTrackingList extends DataModel
     /**
      * @return string[]
      */
-    public function getCodes()
+    public function getCodes(): array
     {
         return $this->codes;
     }
     
     /**
-     * @return \jtl\Connector\Model\DeliveryNoteTrackingList
+     * @return DeliveryNoteTrackingList
      */
-    public function clearCodes()
+    public function clearCodes(): DeliveryNoteTrackingList
     {
         $this->codes = [];
         

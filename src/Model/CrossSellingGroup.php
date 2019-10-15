@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -29,7 +29,7 @@ class CrossSellingGroup extends DataModel
     protected $id = null;
     
     /**
-     * @var \jtl\Connector\Model\CrossSellingGroupI18n[]
+     * @var CrossSellingGroupI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\CrossSellingGroupI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -46,10 +46,10 @@ class CrossSellingGroup extends DataModel
     
     /**
      * @param Identity $id
-     * @return \jtl\Connector\Model\CrossSellingGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CrossSellingGroup
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): CrossSellingGroup
     {
         $this->id = $id;
         
@@ -65,10 +65,10 @@ class CrossSellingGroup extends DataModel
     }
     
     /**
-     * @param \jtl\Connector\Model\CrossSellingGroupI18n $i18n
-     * @return \jtl\Connector\Model\CrossSellingGroup
+     * @param CrossSellingGroupI18n $i18n
+     * @return CrossSellingGroup
      */
-    public function addI18n(\jtl\Connector\Model\CrossSellingGroupI18n $i18n)
+    public function addI18n(CrossSellingGroupI18n $i18n): CrossSellingGroup
     {
         $this->i18ns[] = $i18n;
         
@@ -76,10 +76,10 @@ class CrossSellingGroup extends DataModel
     }
     
     /**
-     * @param array $i18ns
-     * @return \jtl\Connector\Model\CrossSellingGroup
+     * @param CrossSellingGroupI18n ...$i18ns
+     * @return CrossSellingGroup
      */
-    public function setI18ns(array $i18ns)
+    public function setI18ns(CrossSellingGroupI18n ...$i18ns): CrossSellingGroup
     {
         $this->i18ns = $i18ns;
         
@@ -87,17 +87,17 @@ class CrossSellingGroup extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\CrossSellingGroupI18n[]
+     * @return CrossSellingGroupI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
     
     /**
-     * @return \jtl\Connector\Model\CrossSellingGroup
+     * @return CrossSellingGroup
      */
-    public function clearI18ns()
+    public function clearI18ns(): CrossSellingGroup
     {
         $this->i18ns = [];
         

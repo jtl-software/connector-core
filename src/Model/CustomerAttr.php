@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -54,10 +54,10 @@ class CustomerAttr extends DataModel
     
     /**
      * @param Identity $customerId
-     * @return \jtl\Connector\Model\CustomerAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CustomerAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerId(Identity $customerId)
+    public function setCustomerId(Identity $customerId): CustomerAttr
     {
         $this->customerId = $customerId;
         
@@ -67,16 +67,16 @@ class CustomerAttr extends DataModel
     /**
      * @return Identity
      */
-    public function getCustomerId()
+    public function getCustomerId(): Identity
     {
         return $this->customerId;
     }
     
     /**
      * @param string $key Attribute key
-     * @return \jtl\Connector\Model\CustomerAttr
+     * @return CustomerAttr
      */
-    public function setKey($key)
+    public function setKey(string $key): CustomerAttr
     {
         $this->key = $key;
         
@@ -86,16 +86,16 @@ class CustomerAttr extends DataModel
     /**
      * @return string Attribute key
      */
-    public function getKey()
+    public function getKey(): string
     {
         return $this->key;
     }
     
     /**
      * @param string $value Attribute value
-     * @return \jtl\Connector\Model\CustomerAttr
+     * @return CustomerAttr
      */
-    public function setValue($value)
+    public function setValue(string $value): CustomerAttr
     {
         $this->value = $value;
         
@@ -105,7 +105,7 @@ class CustomerAttr extends DataModel
     /**
      * @return string Attribute value
      */
-    public function getValue()
+    public function getValue(): string
     {
         return $this->value;
     }

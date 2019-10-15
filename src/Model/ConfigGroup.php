@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -77,7 +77,7 @@ class ConfigGroup extends DataModel
     protected $type = 0;
     
     /**
-     * @var \jtl\Connector\Model\ConfigGroupI18n[]
+     * @var ConfigGroupI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ConfigGroupI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -94,10 +94,10 @@ class ConfigGroup extends DataModel
     
     /**
      * @param Identity $id Unique configGroup id
-     * @return \jtl\Connector\Model\ConfigGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ConfigGroup
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): ConfigGroup
     {
         $this->id = $id;
         
@@ -114,9 +114,9 @@ class ConfigGroup extends DataModel
     
     /**
      * @param string $comment Optional internal comment to differantiate config groups by comment name
-     * @return \jtl\Connector\Model\ConfigGroup
+     * @return ConfigGroup
      */
-    public function setComment($comment)
+    public function setComment(string $comment): ConfigGroup
     {
         $this->comment = $comment;
         
@@ -126,16 +126,16 @@ class ConfigGroup extends DataModel
     /**
      * @return string Optional internal comment to differantiate config groups by comment name
      */
-    public function getComment()
+    public function getComment(): string
     {
         return $this->comment;
     }
     
     /**
      * @param string $imagePath
-     * @return \jtl\Connector\Model\ConfigGroup
+     * @return ConfigGroup
      */
-    public function setImagePath($imagePath)
+    public function setImagePath(string $imagePath): ConfigGroup
     {
         $this->imagePath = $imagePath;
         
@@ -145,16 +145,16 @@ class ConfigGroup extends DataModel
     /**
      * @return string
      */
-    public function getImagePath()
+    public function getImagePath(): string
     {
         return $this->imagePath;
     }
     
     /**
      * @param integer $maximumSelection Optional maximum number allowed selections. Default 0 for no maximum limitation.
-     * @return \jtl\Connector\Model\ConfigGroup
+     * @return ConfigGroup
      */
-    public function setMaximumSelection($maximumSelection)
+    public function setMaximumSelection(int $maximumSelection): ConfigGroup
     {
         $this->maximumSelection = $maximumSelection;
         
@@ -164,16 +164,16 @@ class ConfigGroup extends DataModel
     /**
      * @return integer Optional maximum number allowed selections. Default 0 for no maximum limitation.
      */
-    public function getMaximumSelection()
+    public function getMaximumSelection(): int
     {
         return $this->maximumSelection;
     }
     
     /**
      * @param integer $minimumSelection Optional minimum number required selections. Default 0 for no minimum requirement.
-     * @return \jtl\Connector\Model\ConfigGroup
+     * @return ConfigGroup
      */
-    public function setMinimumSelection($minimumSelection)
+    public function setMinimumSelection(int $minimumSelection): ConfigGroup
     {
         $this->minimumSelection = $minimumSelection;
         
@@ -183,16 +183,16 @@ class ConfigGroup extends DataModel
     /**
      * @return integer Optional minimum number required selections. Default 0 for no minimum requirement.
      */
-    public function getMinimumSelection()
+    public function getMinimumSelection(): int
     {
         return $this->minimumSelection;
     }
     
     /**
      * @param integer $sort Optional sort order number
-     * @return \jtl\Connector\Model\ConfigGroup
+     * @return ConfigGroup
      */
-    public function setSort($sort)
+    public function setSort(int $sort): ConfigGroup
     {
         $this->sort = $sort;
         
@@ -202,16 +202,16 @@ class ConfigGroup extends DataModel
     /**
      * @return integer Optional sort order number
      */
-    public function getSort()
+    public function getSort(): int
     {
         return $this->sort;
     }
     
     /**
      * @param integer $type Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
-     * @return \jtl\Connector\Model\ConfigGroup
+     * @return ConfigGroup
      */
-    public function setType($type)
+    public function setType(int $type): ConfigGroup
     {
         $this->type = $type;
         
@@ -221,16 +221,16 @@ class ConfigGroup extends DataModel
     /**
      * @return integer Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      */
-    public function getType()
+    public function getType(): int
     {
         return $this->type;
     }
     
     /**
-     * @param \jtl\Connector\Model\ConfigGroupI18n $i18n
-     * @return \jtl\Connector\Model\ConfigGroup
+     * @param ConfigGroupI18n $i18n
+     * @return ConfigGroup
      */
-    public function addI18n(\jtl\Connector\Model\ConfigGroupI18n $i18n)
+    public function addI18n(ConfigGroupI18n $i18n): ConfigGroup
     {
         $this->i18ns[] = $i18n;
         
@@ -238,10 +238,10 @@ class ConfigGroup extends DataModel
     }
     
     /**
-     * @param array $i18ns
-     * @return \jtl\Connector\Model\ConfigGroup
+     * @param ConfigGroupI18n ...$i18ns
+     * @return ConfigGroup
      */
-    public function setI18ns(array $i18ns)
+    public function setI18ns(ConfigGroupI18n ...$i18ns): ConfigGroup
     {
         $this->i18ns = $i18ns;
         
@@ -249,17 +249,17 @@ class ConfigGroup extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ConfigGroupI18n[]
+     * @return ConfigGroupI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
     
     /**
-     * @return \jtl\Connector\Model\ConfigGroup
+     * @return ConfigGroup
      */
-    public function clearI18ns()
+    public function clearI18ns(): ConfigGroup
     {
         $this->i18ns = [];
         

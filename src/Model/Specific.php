@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -53,7 +53,7 @@ class Specific extends DataModel
     protected $type = '';
     
     /**
-     * @var \jtl\Connector\Model\SpecificI18n[]
+     * @var SpecificI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\SpecificI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -61,7 +61,7 @@ class Specific extends DataModel
     protected $i18ns = [];
     
     /**
-     * @var \jtl\Connector\Model\SpecificValue[]
+     * @var SpecificValue[]
      * @Serializer\Type("array<jtl\Connector\Model\SpecificValue>")
      * @Serializer\SerializedName("values")
      * @Serializer\AccessType("reflection")
@@ -78,10 +78,10 @@ class Specific extends DataModel
     
     /**
      * @param Identity $id Unique specific id
-     * @return \jtl\Connector\Model\Specific
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Specific
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): Specific
     {
         $this->id = $id;
         
@@ -98,9 +98,9 @@ class Specific extends DataModel
     
     /**
      * @param boolean $isGlobal Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
-     * @return \jtl\Connector\Model\Specific
+     * @return Specific
      */
-    public function setIsGlobal($isGlobal)
+    public function setIsGlobal(bool $isGlobal): Specific
     {
         $this->isGlobal = $isGlobal;
         
@@ -110,16 +110,16 @@ class Specific extends DataModel
     /**
      * @return boolean Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      */
-    public function getIsGlobal()
+    public function getIsGlobal(): bool
     {
         return $this->isGlobal;
     }
     
     /**
      * @param integer $sort Optional sort number
-     * @return \jtl\Connector\Model\Specific
+     * @return Specific
      */
-    public function setSort($sort)
+    public function setSort(int $sort): Specific
     {
         $this->sort = $sort;
         
@@ -129,16 +129,16 @@ class Specific extends DataModel
     /**
      * @return integer Optional sort number
      */
-    public function getSort()
+    public function getSort(): int
     {
         return $this->sort;
     }
     
     /**
      * @param string $type Specific type (radio, dropdown, image...)
-     * @return \jtl\Connector\Model\Specific
+     * @return Specific
      */
-    public function setType($type)
+    public function setType(string $type): Specific
     {
         $this->type = $type;
         
@@ -148,16 +148,16 @@ class Specific extends DataModel
     /**
      * @return string Specific type (radio, dropdown, image...)
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
     
     /**
-     * @param \jtl\Connector\Model\SpecificI18n $i18n
-     * @return \jtl\Connector\Model\Specific
+     * @param SpecificI18n $i18n
+     * @return Specific
      */
-    public function addI18n(\jtl\Connector\Model\SpecificI18n $i18n)
+    public function addI18n(SpecificI18n $i18n): Specific
     {
         $this->i18ns[] = $i18n;
         
@@ -166,9 +166,9 @@ class Specific extends DataModel
     
     /**
      * @param array $i18ns
-     * @return \jtl\Connector\Model\Specific
+     * @return Specific
      */
-    public function setI18ns(array $i18ns)
+    public function setI18ns(array $i18ns): Specific
     {
         $this->i18ns = $i18ns;
         
@@ -176,17 +176,17 @@ class Specific extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\SpecificI18n[]
+     * @return SpecificI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
     
     /**
-     * @return \jtl\Connector\Model\Specific
+     * @return Specific
      */
-    public function clearI18ns()
+    public function clearI18ns(): Specific
     {
         $this->i18ns = [];
         
@@ -194,10 +194,10 @@ class Specific extends DataModel
     }
     
     /**
-     * @param \jtl\Connector\Model\SpecificValue $value
-     * @return \jtl\Connector\Model\Specific
+     * @param SpecificValue $value
+     * @return Specific
      */
-    public function addValue(\jtl\Connector\Model\SpecificValue $value)
+    public function addValue(SpecificValue $value): Specific
     {
         $this->values[] = $value;
         
@@ -206,9 +206,9 @@ class Specific extends DataModel
     
     /**
      * @param array $values
-     * @return \jtl\Connector\Model\Specific
+     * @return Specific
      */
-    public function setValues(array $values)
+    public function setValues(array $values): Specific
     {
         $this->values = $values;
         
@@ -216,17 +216,17 @@ class Specific extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\SpecificValue[]
+     * @return SpecificValue[]
      */
-    public function getValues()
+    public function getValues(): array
     {
         return $this->values;
     }
     
     /**
-     * @return \jtl\Connector\Model\Specific
+     * @return Specific
      */
-    public function clearValues()
+    public function clearValues(): Specific
     {
         $this->values = [];
         

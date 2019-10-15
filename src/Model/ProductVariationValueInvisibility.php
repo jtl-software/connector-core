@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -47,10 +47,10 @@ class ProductVariationValueInvisibility extends DataModel
     
     /**
      * @param Identity $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\ProductVariationValueInvisibility
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductVariationValueInvisibility
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerGroupId(Identity $customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId): ProductVariationValueInvisibility
     {
         $this->customerGroupId = $customerGroupId;
         
@@ -60,17 +60,17 @@ class ProductVariationValueInvisibility extends DataModel
     /**
      * @return Identity Reference to customerGroup
      */
-    public function getCustomerGroupId()
+    public function getCustomerGroupId(): Identity
     {
         return $this->customerGroupId;
     }
     
     /**
      * @param Identity $productVariationValueId Reference to productVariationValue to hide from customerGroup
-     * @return \jtl\Connector\Model\ProductVariationValueInvisibility
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductVariationValueInvisibility
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductVariationValueId(Identity $productVariationValueId)
+    public function setProductVariationValueId(Identity $productVariationValueId): ProductVariationValueInvisibility
     {
         $this->productVariationValueId = $productVariationValueId;
         
@@ -80,7 +80,7 @@ class ProductVariationValueInvisibility extends DataModel
     /**
      * @return Identity Reference to productVariationValue to hide from customerGroup
      */
-    public function getProductVariationValueId()
+    public function getProductVariationValueId(): Identity
     {
         return $this->productVariationValueId;
     }

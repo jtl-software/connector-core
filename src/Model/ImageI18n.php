@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -61,10 +61,10 @@ class ImageI18n extends DataModel
     
     /**
      * @param Identity $id
-     * @return \jtl\Connector\Model\ImageI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ImageI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): ImageI18n
     {
         $this->id = $id;
         
@@ -81,10 +81,10 @@ class ImageI18n extends DataModel
     
     /**
      * @param Identity $imageId
-     * @return \jtl\Connector\Model\ImageI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ImageI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setImageId(Identity $imageId)
+    public function setImageId(Identity $imageId): ImageI18n
     {
         $this->imageId = $imageId;
         
@@ -94,16 +94,16 @@ class ImageI18n extends DataModel
     /**
      * @return Identity
      */
-    public function getImageId()
+    public function getImageId(): Identity
     {
         return $this->imageId;
     }
     
     /**
      * @param string $altText
-     * @return \jtl\Connector\Model\ImageI18n
+     * @return ImageI18n
      */
-    public function setAltText($altText)
+    public function setAltText(string $altText): ImageI18n
     {
         $this->altText = $altText;
         
@@ -113,16 +113,16 @@ class ImageI18n extends DataModel
     /**
      * @return string
      */
-    public function getAltText()
+    public function getAltText(): string
     {
         return $this->altText;
     }
     
     /**
      * @param string $languageISO
-     * @return \jtl\Connector\Model\ImageI18n
+     * @return ImageI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): ImageI18n
     {
         $this->languageISO = $languageISO;
         
@@ -132,7 +132,7 @@ class ImageI18n extends DataModel
     /**
      * @return string
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }

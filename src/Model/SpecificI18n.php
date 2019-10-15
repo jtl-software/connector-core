@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -54,10 +54,10 @@ class SpecificI18n extends DataModel
     
     /**
      * @param Identity $specificId Reference to specific
-     * @return \jtl\Connector\Model\SpecificI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return SpecificI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setSpecificId(Identity $specificId)
+    public function setSpecificId(Identity $specificId): SpecificI18n
     {
         $this->specificId = $specificId;
         
@@ -67,16 +67,16 @@ class SpecificI18n extends DataModel
     /**
      * @return Identity Reference to specific
      */
-    public function getSpecificId()
+    public function getSpecificId(): Identity
     {
         return $this->specificId;
     }
     
     /**
      * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\SpecificI18n
+     * @return SpecificI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): SpecificI18n
     {
         $this->languageISO = $languageISO;
         
@@ -86,16 +86,16 @@ class SpecificI18n extends DataModel
     /**
      * @return string Locale
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
     
     /**
      * @param string $name Localized name
-     * @return \jtl\Connector\Model\SpecificI18n
+     * @return SpecificI18n
      */
-    public function setName($name)
+    public function setName(string $name): SpecificI18n
     {
         $this->name = $name;
         
@@ -105,7 +105,7 @@ class SpecificI18n extends DataModel
     /**
      * @return string Localized name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

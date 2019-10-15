@@ -8,6 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -53,9 +54,9 @@ class DeliveryNoteItemInfo extends DataModel
     
     /**
      * @param string $batch
-     * @return \jtl\Connector\Model\DeliveryNoteItemInfo
+     * @return DeliveryNoteItemInfo
      */
-    public function setBatch($batch)
+    public function setBatch(string $batch): DeliveryNoteItemInfo
     {
         $this->batch = $batch;
         
@@ -65,17 +66,17 @@ class DeliveryNoteItemInfo extends DataModel
     /**
      * @return string
      */
-    public function getBatch()
+    public function getBatch(): string
     {
         return $this->batch;
     }
     
     /**
      * @param DateTime $bestBefore
-     * @return \jtl\Connector\Model\DeliveryNoteItemInfo
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     * @return DeliveryNoteItemInfo
+     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setBestBefore(DateTime $bestBefore = null)
+    public function setBestBefore(DateTime $bestBefore = null): DeliveryNoteItemInfo
     {
         $this->bestBefore = $bestBefore;
         
@@ -85,16 +86,16 @@ class DeliveryNoteItemInfo extends DataModel
     /**
      * @return DateTime
      */
-    public function getBestBefore()
+    public function getBestBefore(): DateTime
     {
         return $this->bestBefore;
     }
     
     /**
      * @param double $quantity
-     * @return \jtl\Connector\Model\DeliveryNoteItemInfo
+     * @return DeliveryNoteItemInfo
      */
-    public function setQuantity($quantity)
+    public function setQuantity(float $quantity): DeliveryNoteItemInfo
     {
         $this->quantity = $quantity;
         
@@ -104,16 +105,16 @@ class DeliveryNoteItemInfo extends DataModel
     /**
      * @return double
      */
-    public function getQuantity()
+    public function getQuantity(): float
     {
         return $this->quantity;
     }
     
     /**
      * @param integer $warehouseId
-     * @return \jtl\Connector\Model\DeliveryNoteItemInfo
+     * @return DeliveryNoteItemInfo
      */
-    public function setWarehouseId($warehouseId)
+    public function setWarehouseId(int $warehouseId): DeliveryNoteItemInfo
     {
         $this->warehouseId = $warehouseId;
         
@@ -121,9 +122,9 @@ class DeliveryNoteItemInfo extends DataModel
     }
     
     /**
-     * @return integer
+     * @return int
      */
-    public function getWarehouseId()
+    public function getWarehouseId(): int
     {
         return $this->warehouseId;
     }

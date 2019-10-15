@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -63,10 +63,10 @@ class ProductWarehouseInfo extends DataModel
     
     /**
      * @param Identity $productId Reference to product
-     * @return \jtl\Connector\Model\ProductWarehouseInfo
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductWarehouseInfo
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): ProductWarehouseInfo
     {
         $this->productId = $productId;
         
@@ -76,17 +76,17 @@ class ProductWarehouseInfo extends DataModel
     /**
      * @return Identity Reference to product
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
     
     /**
      * @param Identity $warehouseId
-     * @return \jtl\Connector\Model\ProductWarehouseInfo
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductWarehouseInfo
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setwarehouseId(Identity $warehouseId)
+    public function setWarehouseId(Identity $warehouseId): ProductWarehouseInfo
     {
         $this->warehouseId = $warehouseId;
         
@@ -96,16 +96,16 @@ class ProductWarehouseInfo extends DataModel
     /**
      * @return Identity
      */
-    public function getwarehouseId()
+    public function getWarehouseId(): Identity
     {
         return $this->warehouseId;
     }
     
     /**
      * @param double $inflowQuantity Optional product inflow quantity for specified warehouse
-     * @return \jtl\Connector\Model\ProductWarehouseInfo
+     * @return ProductWarehouseInfo
      */
-    public function setInflowQuantity($inflowQuantity)
+    public function setInflowQuantity(float $inflowQuantity): ProductWarehouseInfo
     {
         $this->inflowQuantity = $inflowQuantity;
         
@@ -115,16 +115,16 @@ class ProductWarehouseInfo extends DataModel
     /**
      * @return double Optional product inflow quantity for specified warehouse
      */
-    public function getInflowQuantity()
+    public function getInflowQuantity(): float
     {
         return $this->inflowQuantity;
     }
     
     /**
      * @param double $stockLevel
-     * @return \jtl\Connector\Model\ProductWarehouseInfo
+     * @return ProductWarehouseInfo
      */
-    public function setstockLevel($stockLevel)
+    public function setStockLevel(float $stockLevel): ProductWarehouseInfo
     {
         $this->stockLevel = $stockLevel;
         
@@ -134,7 +134,7 @@ class ProductWarehouseInfo extends DataModel
     /**
      * @return double
      */
-    public function getstockLevel()
+    public function getStockLevel(): float
     {
         return $this->stockLevel;
     }

@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -45,7 +45,7 @@ class MeasurementUnit extends DataModel
     protected $displayCode = '';
     
     /**
-     * @var \jtl\Connector\Model\MeasurementUnitI18n[]
+     * @var MeasurementUnitI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\MeasurementUnitI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -62,10 +62,10 @@ class MeasurementUnit extends DataModel
     
     /**
      * @param Identity $id Unit id
-     * @return \jtl\Connector\Model\MeasurementUnit
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return MeasurementUnit
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): MeasurementUnit
     {
         $this->id = $id;
         
@@ -82,9 +82,9 @@ class MeasurementUnit extends DataModel
     
     /**
      * @param string $code Optional UCUM-Code, see  http://unitsofmeasure.org/
-     * @return \jtl\Connector\Model\MeasurementUnit
+     * @return MeasurementUnit
      */
-    public function setCode($code)
+    public function setCode(string $code): MeasurementUnit
     {
         $this->code = $code;
         
@@ -94,16 +94,16 @@ class MeasurementUnit extends DataModel
     /**
      * @return string Optional UCUM-Code, see  http://unitsofmeasure.org/
      */
-    public function getCode()
+    public function getCode(): string
     {
         return $this->code;
     }
     
     /**
      * @param string $displayCode Synonym e.g. 'ml'
-     * @return \jtl\Connector\Model\MeasurementUnit
+     * @return MeasurementUnit
      */
-    public function setDisplayCode($displayCode)
+    public function setDisplayCode(string $displayCode): MeasurementUnit
     {
         $this->displayCode = $displayCode;
         
@@ -113,16 +113,16 @@ class MeasurementUnit extends DataModel
     /**
      * @return string Synonym e.g. 'ml'
      */
-    public function getDisplayCode()
+    public function getDisplayCode(): string
     {
         return $this->displayCode;
     }
     
     /**
-     * @param \jtl\Connector\Model\MeasurementUnitI18n $i18n
-     * @return \jtl\Connector\Model\MeasurementUnit
+     * @param MeasurementUnitI18n $i18n
+     * @return MeasurementUnit
      */
-    public function addI18n(\jtl\Connector\Model\MeasurementUnitI18n $i18n)
+    public function addI18n(MeasurementUnitI18n $i18n): MeasurementUnit
     {
         $this->i18ns[] = $i18n;
         
@@ -131,9 +131,9 @@ class MeasurementUnit extends DataModel
     
     /**
      * @param array $i18ns
-     * @return \jtl\Connector\Model\MeasurementUnit
+     * @return MeasurementUnit
      */
-    public function setI18ns(array $i18ns)
+    public function setI18ns(array $i18ns): MeasurementUnit
     {
         $this->i18ns = $i18ns;
         
@@ -141,17 +141,17 @@ class MeasurementUnit extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\MeasurementUnitI18n[]
+     * @return MeasurementUnitI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
     
     /**
-     * @return \jtl\Connector\Model\MeasurementUnit
+     * @return MeasurementUnit
      */
-    public function clearI18ns()
+    public function clearI18ns(): MeasurementUnit
     {
         $this->i18ns = [];
         

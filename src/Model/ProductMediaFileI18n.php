@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -62,10 +62,10 @@ class ProductMediaFileI18n extends DataModel
     
     /**
      * @param Identity $productMediaFileId Reference to mediaFile
-     * @return \jtl\Connector\Model\ProductMediaFileI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductMediaFileI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductMediaFileId(Identity $productMediaFileId)
+    public function setProductMediaFileId(Identity $productMediaFileId): ProductMediaFileI18n
     {
         $this->productMediaFileId = $productMediaFileId;
         
@@ -75,16 +75,16 @@ class ProductMediaFileI18n extends DataModel
     /**
      * @return Identity Reference to mediaFile
      */
-    public function getProductMediaFileId()
+    public function getProductMediaFileId(): Identity
     {
         return $this->productMediaFileId;
     }
     
     /**
      * @param string $description Locale specific description
-     * @return \jtl\Connector\Model\ProductMediaFileI18n
+     * @return ProductMediaFileI18n
      */
-    public function setDescription($description)
+    public function setDescription(string $description): ProductMediaFileI18n
     {
         $this->description = $description;
         
@@ -94,16 +94,16 @@ class ProductMediaFileI18n extends DataModel
     /**
      * @return string Locale specific description
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
     
     /**
      * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\ProductMediaFileI18n
+     * @return ProductMediaFileI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): ProductMediaFileI18n
     {
         $this->languageISO = $languageISO;
         
@@ -113,16 +113,16 @@ class ProductMediaFileI18n extends DataModel
     /**
      * @return string Locale
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
     
     /**
      * @param string $name Locale specific name
-     * @return \jtl\Connector\Model\ProductMediaFileI18n
+     * @return ProductMediaFileI18n
      */
-    public function setName($name)
+    public function setName(string $name): ProductMediaFileI18n
     {
         $this->name = $name;
         
@@ -132,7 +132,7 @@ class ProductMediaFileI18n extends DataModel
     /**
      * @return string Locale specific name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

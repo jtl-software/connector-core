@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -53,7 +53,7 @@ class FileUpload extends DataModel
     protected $isRequired = false;
     
     /**
-     * @var \jtl\Connector\Model\FileUploadI18n[]
+     * @var FileUploadI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\FileUploadI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -71,10 +71,10 @@ class FileUpload extends DataModel
     
     /**
      * @param Identity $id Unique fileUpload id
-     * @return \jtl\Connector\Model\FileUpload
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return FileUpload
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): FileUpload
     {
         $this->id = $id;
         
@@ -91,10 +91,10 @@ class FileUpload extends DataModel
     
     /**
      * @param Identity $productId Reference to product
-     * @return \jtl\Connector\Model\FileUpload
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return FileUpload
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): FileUpload
     {
         $this->productId = $productId;
         
@@ -104,16 +104,16 @@ class FileUpload extends DataModel
     /**
      * @return Identity Reference to product
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
     
     /**
      * @param string $fileType
-     * @return \jtl\Connector\Model\FileUpload
+     * @return FileUpload
      */
-    public function setFileType($fileType)
+    public function setFileType(string $fileType): FileUpload
     {
         $this->fileType = $fileType;
         
@@ -123,16 +123,16 @@ class FileUpload extends DataModel
     /**
      * @return string
      */
-    public function getFileType()
+    public function getFileType(): string
     {
         return $this->fileType;
     }
     
     /**
      * @param boolean $isRequired
-     * @return \jtl\Connector\Model\FileUpload
+     * @return FileUpload
      */
-    public function setIsRequired($isRequired)
+    public function setIsRequired(bool $isRequired): FileUpload
     {
         $this->isRequired = $isRequired;
         
@@ -142,16 +142,16 @@ class FileUpload extends DataModel
     /**
      * @return boolean
      */
-    public function getIsRequired()
+    public function getIsRequired(): bool
     {
         return $this->isRequired;
     }
     
     /**
-     * @param \jtl\Connector\Model\FileUploadI18n $i18n
-     * @return \jtl\Connector\Model\FileUpload
+     * @param FileUploadI18n $i18n
+     * @return FileUpload
      */
-    public function addI18n(\jtl\Connector\Model\FileUploadI18n $i18n)
+    public function addI18n(FileUploadI18n $i18n): FileUpload
     {
         $this->i18ns[] = $i18n;
         
@@ -160,9 +160,9 @@ class FileUpload extends DataModel
     
     /**
      * @param array $i18ns
-     * @return \jtl\Connector\Model\FileUpload
+     * @return FileUpload
      */
-    public function setI18ns(array $i18ns)
+    public function setI18ns(array $i18ns): FileUpload
     {
         $this->i18ns = $i18ns;
         
@@ -170,17 +170,17 @@ class FileUpload extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\FileUploadI18n[]
+     * @return FileUploadI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
     
     /**
-     * @return \jtl\Connector\Model\FileUpload
+     * @return FileUpload
      */
-    public function clearI18ns()
+    public function clearI18ns(): FileUpload
     {
         $this->i18ns = [];
         

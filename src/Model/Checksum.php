@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 use jtl\Connector\Checksum\IChecksum;
 
@@ -75,9 +75,9 @@ class Checksum extends DataModel implements IChecksum
     /**
      * @param Identity $foreignKey
      * @return Checksum
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setForeignKey(Identity $foreignKey): Checksum
+    public function setForeignKey(Identity $foreignKey)
     {
         $this->foreignKey = $foreignKey;
         
@@ -96,7 +96,7 @@ class Checksum extends DataModel implements IChecksum
      * @param string $endpoint
      * @return Checksum
      */
-    public function setEndpoint(string $endpoint): Checksum
+    public function setEndpoint(string $endpoint)
     {
         $this->endpoint = $endpoint;
         
@@ -115,7 +115,7 @@ class Checksum extends DataModel implements IChecksum
      * @param boolean $hasChanged
      * @return Checksum
      */
-    public function setHasChanged(bool $hasChanged): Checksum
+    public function setHasChanged(bool $hasChanged)
     {
         $this->hasChanged = $hasChanged;
         
@@ -142,7 +142,7 @@ class Checksum extends DataModel implements IChecksum
      * @param string $host
      * @return Checksum
      */
-    public function setHost(string $host): Checksum
+    public function setHost(string $host)
     {
         $this->host = $host;
         
@@ -160,9 +160,9 @@ class Checksum extends DataModel implements IChecksum
     /**
      * @param integer $type
      * @return Checksum
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setType(int $type): Checksum
+    public function setType(int $type)
     {
         $this->type = $type;
         

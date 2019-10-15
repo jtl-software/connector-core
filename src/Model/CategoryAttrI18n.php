@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -60,8 +60,8 @@ class CategoryAttrI18n extends DataModel
     
     /**
      * @param Identity $categoryAttrId
-     * @return \jtl\Connector\Model\CategoryAttrI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CategoryAttrI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCategoryAttrId(Identity $categoryAttrId): CategoryAttrI18n
     {
@@ -80,9 +80,9 @@ class CategoryAttrI18n extends DataModel
     
     /**
      * @param string $languageISO
-     * @return \jtl\Connector\Model\CategoryAttrI18n
+     * @return CategoryAttrI18n
      */
-    public function setLanguageISO($languageISO): CategoryAttrI18n
+    public function setLanguageISO(string $languageISO): CategoryAttrI18n
     {
         $this->languageISO = $languageISO;
         
@@ -99,10 +99,11 @@ class CategoryAttrI18n extends DataModel
     
     /**
      * @param string $name
-     * @return \jtl\Connector\Model\CategoryAttrI18n
+     * @return CategoryAttrI18n
      */
-    public function setName($name): CategoryAttrI18n
-    {
+    public function setName(
+        string $name
+    ): CategoryAttrI18n {
         $this->name = $name;
         
         return $this;
@@ -118,7 +119,7 @@ class CategoryAttrI18n extends DataModel
     
     /**
      * @param string $value
-     * @return \jtl\Connector\Model\CategoryAttrI18n
+     * @return CategoryAttrI18n
      */
     public function setValue(string $value): CategoryAttrI18n
     {

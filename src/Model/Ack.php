@@ -42,7 +42,7 @@ class Ack extends DataModel
      *
      * @return Identity
      */
-    public function getIdentities()
+    public function getIdentities(): Identity
     {
         return $this->identities;
     }

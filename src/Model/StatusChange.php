@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -52,10 +52,10 @@ class StatusChange extends DataModel
     
     /**
      * @param Identity $customerOrderId
-     * @return \jtl\Connector\Model\StatusChange
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return StatusChange
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerOrderId(Identity $customerOrderId)
+    public function setCustomerOrderId(Identity $customerOrderId): StatusChange
     {
         $this->customerOrderId = $customerOrderId;
         
@@ -65,17 +65,17 @@ class StatusChange extends DataModel
     /**
      * @return Identity
      */
-    public function getCustomerOrderId()
+    public function getCustomerOrderId(): Identity
     {
         return $this->customerOrderId;
     }
     
     /**
      * @param string $orderStatus
-     * @return \jtl\Connector\Model\StatusChange
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @return StatusChange
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setOrderStatus($orderStatus)
+    public function setOrderStatus(string $orderStatus): StatusChange
     {
         $this->orderStatus = $orderStatus;
         
@@ -85,17 +85,17 @@ class StatusChange extends DataModel
     /**
      * @return string
      */
-    public function getOrderStatus()
+    public function getOrderStatus(): string
     {
         return $this->orderStatus;
     }
     
     /**
      * @param string $paymentStatus
-     * @return \jtl\Connector\Model\StatusChange
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @return StatusChange
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setPaymentStatus($paymentStatus)
+    public function setPaymentStatus(string $paymentStatus): StatusChange
     {
         $this->paymentStatus = $paymentStatus;
         
@@ -105,7 +105,7 @@ class StatusChange extends DataModel
     /**
      * @return string
      */
-    public function getPaymentStatus()
+    public function getPaymentStatus(): string
     {
         return $this->paymentStatus;
     }

@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -47,8 +47,8 @@ class CategoryInvisibility extends DataModel
     
     /**
      * @param Identity $categoryId Reference to category to hide from customerGroupId
-     * @return \jtl\Connector\Model\CategoryInvisibility
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CategoryInvisibility
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCategoryId(Identity $categoryId): CategoryInvisibility
     {
@@ -67,8 +67,8 @@ class CategoryInvisibility extends DataModel
     
     /**
      * @param Identity $customerGroupId Reference to customerGroup that is not allowed to view categoryId
-     * @return \jtl\Connector\Model\CategoryInvisibility
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CategoryInvisibility
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerGroupId(Identity $customerGroupId): CategoryInvisibility
     {

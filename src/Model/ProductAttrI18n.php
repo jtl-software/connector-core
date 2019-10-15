@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -60,10 +60,10 @@ class ProductAttrI18n extends DataModel
     
     /**
      * @param Identity $productAttrId
-     * @return \jtl\Connector\Model\ProductAttrI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductAttrI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductAttrId(Identity $productAttrId)
+    public function setProductAttrId(Identity $productAttrId): ProductAttrI18n
     {
         $this->productAttrId = $productAttrId;
         
@@ -73,16 +73,16 @@ class ProductAttrI18n extends DataModel
     /**
      * @return Identity
      */
-    public function getProductAttrId()
+    public function getProductAttrId(): Identity
     {
         return $this->productAttrId;
     }
     
     /**
      * @param string $languageISO
-     * @return \jtl\Connector\Model\ProductAttrI18n
+     * @return ProductAttrI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): ProductAttrI18n
     {
         $this->languageISO = $languageISO;
         
@@ -92,16 +92,16 @@ class ProductAttrI18n extends DataModel
     /**
      * @return string
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
     
     /**
      * @param string $name
-     * @return \jtl\Connector\Model\ProductAttrI18n
+     * @return ProductAttrI18n
      */
-    public function setName($name)
+    public function setName(string $name): ProductAttrI18n
     {
         $this->name = $name;
         
@@ -111,16 +111,16 @@ class ProductAttrI18n extends DataModel
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
     
     /**
      * @param string $value
-     * @return \jtl\Connector\Model\ProductAttrI18n
+     * @return ProductAttrI18n
      */
-    public function setValue($value)
+    public function setValue(string $value): ProductAttrI18n
     {
         $this->value = $value;
         
@@ -130,7 +130,7 @@ class ProductAttrI18n extends DataModel
     /**
      * @return string
      */
-    public function getValue()
+    public function getValue(): string
     {
         return $this->value;
     }

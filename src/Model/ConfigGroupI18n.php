@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -62,10 +62,10 @@ class ConfigGroupI18n extends DataModel
     
     /**
      * @param Identity $configGroupId Reference to configGroup
-     * @return \jtl\Connector\Model\ConfigGroupI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ConfigGroupI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setConfigGroupId(Identity $configGroupId)
+    public function setConfigGroupId(Identity $configGroupId): ConfigGroupI18n
     {
         $this->configGroupId = $configGroupId;
         
@@ -75,16 +75,16 @@ class ConfigGroupI18n extends DataModel
     /**
      * @return Identity Reference to configGroup
      */
-    public function getConfigGroupId()
+    public function getConfigGroupId(): Identity
     {
         return $this->configGroupId;
     }
     
     /**
      * @param string $description Optional description (HTML)
-     * @return \jtl\Connector\Model\ConfigGroupI18n
+     * @return ConfigGroupI18n
      */
-    public function setDescription($description)
+    public function setDescription(string $description): string
     {
         $this->description = $description;
         
@@ -94,17 +94,18 @@ class ConfigGroupI18n extends DataModel
     /**
      * @return string Optional description (HTML)
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
     
     /**
      * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\ConfigGroupI18n
+     * @return ConfigGroupI18n
      */
-    public function setLanguageISO($languageISO)
-    {
+    public function setLanguageISO(
+        string $languageISO
+    ): string {
         $this->languageISO = $languageISO;
         
         return $this;
@@ -113,16 +114,16 @@ class ConfigGroupI18n extends DataModel
     /**
      * @return string Locale
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
     
     /**
      * @param string $name Config group name
-     * @return \jtl\Connector\Model\ConfigGroupI18n
+     * @return ConfigGroupI18n
      */
-    public function setName($name)
+    public function setName(string $name): string
     {
         $this->name = $name;
         
@@ -132,7 +133,7 @@ class ConfigGroupI18n extends DataModel
     /**
      * @return string Config group name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

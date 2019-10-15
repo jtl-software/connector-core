@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -60,10 +60,10 @@ class CrossSellingGroupI18n extends DataModel
     
     /**
      * @param Identity $crossSellingGroupId
-     * @return \jtl\Connector\Model\CrossSellingGroupI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CrossSellingGroupI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCrossSellingGroupId(Identity $crossSellingGroupId)
+    public function setCrossSellingGroupId(Identity $crossSellingGroupId): CrossSellingGroupI18n
     {
         $this->crossSellingGroupId = $crossSellingGroupId;
         
@@ -73,16 +73,16 @@ class CrossSellingGroupI18n extends DataModel
     /**
      * @return Identity
      */
-    public function getCrossSellingGroupId()
+    public function getCrossSellingGroupId(): Identity
     {
         return $this->crossSellingGroupId;
     }
     
     /**
      * @param string $description Optional localized description
-     * @return \jtl\Connector\Model\CrossSellingGroupI18n
+     * @return CrossSellingGroupI18n
      */
-    public function setDescription($description)
+    public function setDescription(string $description): CrossSellingGroupI18n
     {
         $this->description = $description;
         
@@ -92,16 +92,16 @@ class CrossSellingGroupI18n extends DataModel
     /**
      * @return string Optional localized description
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
     
     /**
      * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\CrossSellingGroupI18n
+     * @return CrossSellingGroupI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): CrossSellingGroupI18n
     {
         $this->languageISO = $languageISO;
         
@@ -111,16 +111,16 @@ class CrossSellingGroupI18n extends DataModel
     /**
      * @return string Locale
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
     
     /**
      * @param string $name Localized name
-     * @return \jtl\Connector\Model\CrossSellingGroupI18n
+     * @return CrossSellingGroupI18n
      */
-    public function setName($name)
+    public function setName(string $name): CrossSellingGroupI18n
     {
         $this->name = $name;
         
@@ -130,7 +130,7 @@ class CrossSellingGroupI18n extends DataModel
     /**
      * @return string Localized name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

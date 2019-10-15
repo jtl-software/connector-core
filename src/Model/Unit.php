@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -29,7 +29,7 @@ class Unit extends DataModel
     protected $id = null;
     
     /**
-     * @var \jtl\Connector\Model\UnitI18n[]
+     * @var UnitI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\UnitI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -46,10 +46,10 @@ class Unit extends DataModel
     
     /**
      * @param Identity $id Unit id
-     * @return \jtl\Connector\Model\Unit
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Unit
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): Unit
     {
         $this->id = $id;
         
@@ -65,10 +65,10 @@ class Unit extends DataModel
     }
     
     /**
-     * @param \jtl\Connector\Model\UnitI18n $i18n
-     * @return \jtl\Connector\Model\Unit
+     * @param UnitI18n $i18n
+     * @return Unit
      */
-    public function addI18n(\jtl\Connector\Model\UnitI18n $i18n)
+    public function addI18n(UnitI18n $i18n): Unit
     {
         $this->i18ns[] = $i18n;
         
@@ -77,9 +77,9 @@ class Unit extends DataModel
     
     /**
      * @param array $i18ns
-     * @return \jtl\Connector\Model\Unit
+     * @return Unit
      */
-    public function setI18ns(array $i18ns)
+    public function setI18ns(array $i18ns): Unit
     {
         $this->i18ns = $i18ns;
         
@@ -87,17 +87,17 @@ class Unit extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\UnitI18n[]
+     * @return UnitI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
     
     /**
-     * @return \jtl\Connector\Model\Unit
+     * @return Unit
      */
-    public function clearI18ns()
+    public function clearI18ns(): Unit
     {
         $this->i18ns = [];
         

@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -54,10 +54,10 @@ class UnitI18n extends DataModel
     
     /**
      * @param Identity $unitId Unit id
-     * @return \jtl\Connector\Model\UnitI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return UnitI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setUnitId(Identity $unitId)
+    public function setUnitId(Identity $unitId): UnitI18n
     {
         $this->unitId = $unitId;
         
@@ -67,16 +67,16 @@ class UnitI18n extends DataModel
     /**
      * @return Identity Unit id
      */
-    public function getUnitId()
+    public function getUnitId(): Identity
     {
         return $this->unitId;
     }
     
     /**
      * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\UnitI18n
+     * @return UnitI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): UnitI18n
     {
         $this->languageISO = $languageISO;
         
@@ -86,16 +86,16 @@ class UnitI18n extends DataModel
     /**
      * @return string Locale
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
     
     /**
      * @param string $name Localized unit name
-     * @return \jtl\Connector\Model\UnitI18n
+     * @return UnitI18n
      */
-    public function setName($name)
+    public function setName(string $name): UnitI18n
     {
         $this->name = $name;
         
@@ -105,7 +105,7 @@ class UnitI18n extends DataModel
     /**
      * @return string Localized unit name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

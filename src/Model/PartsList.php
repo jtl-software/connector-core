@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -55,10 +55,10 @@ class PartsList extends DataModel
     
     /**
      * @param Identity $id Unique PartsList id, referenced by product.PartsListId
-     * @return \jtl\Connector\Model\PartsList
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return PartsList
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): PartsList
     {
         $this->id = $id;
         
@@ -75,10 +75,10 @@ class PartsList extends DataModel
     
     /**
      * @param Identity $productId Reference to a component / product
-     * @return \jtl\Connector\Model\PartsList
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return PartsList
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): PartsList
     {
         $this->productId = $productId;
         
@@ -88,16 +88,16 @@ class PartsList extends DataModel
     /**
      * @return Identity Reference to a component / product
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
     
     /**
      * @param double $quantity Component quantity
-     * @return \jtl\Connector\Model\PartsList
+     * @return PartsList
      */
-    public function setQuantity($quantity)
+    public function setQuantity(float $quantity): PartsList
     {
         $this->quantity = $quantity;
         
@@ -107,7 +107,7 @@ class PartsList extends DataModel
     /**
      * @return double Component quantity
      */
-    public function getQuantity()
+    public function getQuantity(): float
     {
         return $this->quantity;
     }

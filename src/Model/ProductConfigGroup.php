@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -55,10 +55,10 @@ class ProductConfigGroup extends DataModel
     
     /**
      * @param Identity $configGroupId Reference to configGroup
-     * @return \jtl\Connector\Model\ProductConfigGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductConfigGroup
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setConfigGroupId(Identity $configGroupId)
+    public function setConfigGroupId(Identity $configGroupId): ProductConfigGroup
     {
         $this->configGroupId = $configGroupId;
         
@@ -68,17 +68,17 @@ class ProductConfigGroup extends DataModel
     /**
      * @return Identity Reference to configGroup
      */
-    public function getConfigGroupId()
+    public function getConfigGroupId(): Identity
     {
         return $this->configGroupId;
     }
     
     /**
      * @param Identity $productId Reference to product
-     * @return \jtl\Connector\Model\ProductConfigGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductConfigGroup
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): ProductConfigGroup
     {
         $this->productId = $productId;
         
@@ -88,16 +88,16 @@ class ProductConfigGroup extends DataModel
     /**
      * @return Identity Reference to product
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
     
     /**
      * @param integer $sort Optional sort number
-     * @return \jtl\Connector\Model\ProductConfigGroup
+     * @return ProductConfigGroup
      */
-    public function setSort($sort)
+    public function setSort(int $sort): ProductConfigGroup
     {
         $this->sort = $sort;
         
@@ -107,7 +107,7 @@ class ProductConfigGroup extends DataModel
     /**
      * @return integer Optional sort number
      */
-    public function getSort()
+    public function getSort(): int
     {
         return $this->sort;
     }

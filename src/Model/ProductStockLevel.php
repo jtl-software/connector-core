@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -44,10 +44,10 @@ class ProductStockLevel extends DataModel
     
     /**
      * @param Identity $productId
-     * @return \jtl\Connector\Model\ProductStockLevel
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductStockLevel
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): ProductStockLevel
     {
         $this->productId = $productId;
         
@@ -57,16 +57,16 @@ class ProductStockLevel extends DataModel
     /**
      * @return Identity
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
     
     /**
      * @param double $stockLevel
-     * @return \jtl\Connector\Model\ProductStockLevel
+     * @return ProductStockLevel
      */
-    public function setStockLevel($stockLevel)
+    public function setStockLevel(float $stockLevel): ProductStockLevel
     {
         $this->stockLevel = $stockLevel;
         
@@ -76,7 +76,7 @@ class ProductStockLevel extends DataModel
     /**
      * @return double
      */
-    public function getStockLevel()
+    public function getStockLevel(): float
     {
         return $this->stockLevel;
     }

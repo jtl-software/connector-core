@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -54,10 +54,10 @@ class MeasurementUnitI18n extends DataModel
     
     /**
      * @param Identity $measurementUnitId Reference to measurementUnitId
-     * @return \jtl\Connector\Model\MeasurementUnitI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return MeasurementUnitI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setMeasurementUnitId(Identity $measurementUnitId)
+    public function setMeasurementUnitId(Identity $measurementUnitId): MeasurementUnitI18n
     {
         $this->measurementUnitId = $measurementUnitId;
         
@@ -67,16 +67,16 @@ class MeasurementUnitI18n extends DataModel
     /**
      * @return Identity Reference to measurementUnitId
      */
-    public function getMeasurementUnitId()
+    public function getMeasurementUnitId(): Identity
     {
         return $this->measurementUnitId;
     }
     
     /**
      * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\MeasurementUnitI18n
+     * @return MeasurementUnitI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): MeasurementUnitI18n
     {
         $this->languageISO = $languageISO;
         
@@ -86,16 +86,16 @@ class MeasurementUnitI18n extends DataModel
     /**
      * @return string Locale
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
     
     /**
      * @param string $name Localized Name
-     * @return \jtl\Connector\Model\MeasurementUnitI18n
+     * @return MeasurementUnitI18n
      */
-    public function setName($name)
+    public function setName(string $name): MeasurementUnitI18n
     {
         $this->name = $name;
         
@@ -105,7 +105,7 @@ class MeasurementUnitI18n extends DataModel
     /**
      * @return string Localized Name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

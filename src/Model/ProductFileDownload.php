@@ -8,6 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -75,7 +76,7 @@ class ProductFileDownload extends DataModel
     protected $sort = 0;
     
     /**
-     * @var \jtl\Connector\Model\ProductFileDownloadI18n[]
+     * @var ProductFileDownloadI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductFileDownloadI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -92,10 +93,10 @@ class ProductFileDownload extends DataModel
     
     /**
      * @param Identity $productId
-     * @return \jtl\Connector\Model\ProductFileDownload
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductFileDownload
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): ProductFileDownload
     {
         $this->productId = $productId;
         
@@ -105,17 +106,17 @@ class ProductFileDownload extends DataModel
     /**
      * @return Identity
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
     
     /**
      * @param DateTime $creationDate
-     * @return \jtl\Connector\Model\ProductFileDownload
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     * @return ProductFileDownload
+     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreationDate(DateTime $creationDate = null)
+    public function setCreationDate(DateTime $creationDate = null): ProductFileDownload
     {
         $this->creationDate = $creationDate;
         
@@ -125,16 +126,16 @@ class ProductFileDownload extends DataModel
     /**
      * @return DateTime
      */
-    public function getCreationDate()
+    public function getCreationDate(): DateTime
     {
         return $this->creationDate;
     }
     
     /**
      * @param integer $maxDays
-     * @return \jtl\Connector\Model\ProductFileDownload
+     * @return ProductFileDownload
      */
-    public function setMaxDays($maxDays)
+    public function setMaxDays(int $maxDays): ProductFileDownload
     {
         $this->maxDays = $maxDays;
         
@@ -144,16 +145,16 @@ class ProductFileDownload extends DataModel
     /**
      * @return integer
      */
-    public function getMaxDays()
+    public function getMaxDays(): int
     {
         return $this->maxDays;
     }
     
     /**
      * @param integer $maxDownloads
-     * @return \jtl\Connector\Model\ProductFileDownload
+     * @return ProductFileDownload
      */
-    public function setMaxDownloads($maxDownloads)
+    public function setMaxDownloads(int $maxDownloads): ProductFileDownload
     {
         $this->maxDownloads = $maxDownloads;
         
@@ -163,16 +164,16 @@ class ProductFileDownload extends DataModel
     /**
      * @return integer
      */
-    public function getMaxDownloads()
+    public function getMaxDownloads(): int
     {
         return $this->maxDownloads;
     }
     
     /**
      * @param string $path
-     * @return \jtl\Connector\Model\ProductFileDownload
+     * @return ProductFileDownload
      */
-    public function setPath($path)
+    public function setPath(string $path): ProductFileDownload
     {
         $this->path = $path;
         
@@ -182,16 +183,16 @@ class ProductFileDownload extends DataModel
     /**
      * @return string
      */
-    public function getPath()
+    public function getPath(): string
     {
         return $this->path;
     }
     
     /**
      * @param string $previewPath
-     * @return \jtl\Connector\Model\ProductFileDownload
+     * @return ProductFileDownload
      */
-    public function setPreviewPath($previewPath)
+    public function setPreviewPath(string $previewPath): ProductFileDownload
     {
         $this->previewPath = $previewPath;
         
@@ -201,16 +202,16 @@ class ProductFileDownload extends DataModel
     /**
      * @return string
      */
-    public function getPreviewPath()
+    public function getPreviewPath(): string
     {
         return $this->previewPath;
     }
     
     /**
      * @param integer $sort
-     * @return \jtl\Connector\Model\ProductFileDownload
+     * @return ProductFileDownload
      */
-    public function setSort($sort)
+    public function setSort(int $sort): ProductFileDownload
     {
         $this->sort = $sort;
         
@@ -220,16 +221,16 @@ class ProductFileDownload extends DataModel
     /**
      * @return integer
      */
-    public function getSort()
+    public function getSort(): int
     {
         return $this->sort;
     }
     
     /**
-     * @param \jtl\Connector\Model\ProductFileDownloadI18n $i18n
-     * @return \jtl\Connector\Model\ProductFileDownload
+     * @param ProductFileDownloadI18n $i18n
+     * @return ProductFileDownload
      */
-    public function addI18n(\jtl\Connector\Model\ProductFileDownloadI18n $i18n)
+    public function addI18n(ProductFileDownloadI18n $i18n): ProductFileDownload
     {
         $this->i18ns[] = $i18n;
         
@@ -238,9 +239,9 @@ class ProductFileDownload extends DataModel
     
     /**
      * @param array $i18ns
-     * @return \jtl\Connector\Model\ProductFileDownload
+     * @return ProductFileDownload
      */
-    public function setI18ns(array $i18ns)
+    public function setI18ns(array $i18ns): ProductFileDownload
     {
         $this->i18ns = $i18ns;
         
@@ -248,17 +249,17 @@ class ProductFileDownload extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductFileDownloadI18n[]
+     * @return ProductFileDownloadI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductFileDownload
+     * @return ProductFileDownload
      */
-    public function clearI18ns()
+    public function clearI18ns(): ProductFileDownload
     {
         $this->i18ns = [];
         

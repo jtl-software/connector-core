@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -55,10 +55,10 @@ class ProductSpecialPriceItem extends DataModel
     
     /**
      * @param Identity $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\ProductSpecialPriceItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductSpecialPriceItem
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerGroupId(Identity $customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId): ProductSpecialPriceItem
     {
         $this->customerGroupId = $customerGroupId;
         
@@ -68,17 +68,17 @@ class ProductSpecialPriceItem extends DataModel
     /**
      * @return Identity Reference to customerGroup
      */
-    public function getCustomerGroupId()
+    public function getCustomerGroupId(): Identity
     {
         return $this->customerGroupId;
     }
     
     /**
      * @param Identity $productSpecialPriceId Reference to productSpecialPrice
-     * @return \jtl\Connector\Model\ProductSpecialPriceItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductSpecialPriceItem
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductSpecialPriceId(Identity $productSpecialPriceId)
+    public function setProductSpecialPriceId(Identity $productSpecialPriceId): ProductSpecialPriceItem
     {
         $this->productSpecialPriceId = $productSpecialPriceId;
         
@@ -88,16 +88,16 @@ class ProductSpecialPriceItem extends DataModel
     /**
      * @return Identity Reference to productSpecialPrice
      */
-    public function getProductSpecialPriceId()
+    public function getProductSpecialPriceId(): Identity
     {
         return $this->productSpecialPriceId;
     }
     
     /**
      * @param double $priceNet net price value
-     * @return \jtl\Connector\Model\ProductSpecialPriceItem
+     * @return ProductSpecialPriceItem
      */
-    public function setPriceNet($priceNet)
+    public function setPriceNet(float $priceNet): ProductSpecialPriceItem
     {
         $this->priceNet = $priceNet;
         
@@ -107,7 +107,7 @@ class ProductSpecialPriceItem extends DataModel
     /**
      * @return double net price value
      */
-    public function getPriceNet()
+    public function getPriceNet(): float
     {
         return $this->priceNet;
     }

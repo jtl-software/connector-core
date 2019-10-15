@@ -44,7 +44,7 @@ abstract class Model
      * @param array $options
      * @return \jtl\Connector\Core\Model\Model
      */
-    public function setOptions(\stdClass $object = null, array $options = null): Model
+    public function setOptions(\stdClass $object = null, array $options = null)
     {
         if ($object !== null && is_object($object)) {
             $members = array_keys(get_object_vars($object));
@@ -81,7 +81,7 @@ abstract class Model
      * @param array $publics
      * @return \stdClass $object
      */
-    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', '_type']): \stdClass
+    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', '_type'])
     {
         $object = new \stdClass();
         

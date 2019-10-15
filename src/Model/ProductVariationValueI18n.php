@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -54,10 +54,10 @@ class ProductVariationValueI18n extends DataModel
     
     /**
      * @param Identity $productVariationValueId Reference to productVariationValue
-     * @return \jtl\Connector\Model\ProductVariationValueI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductVariationValueI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductVariationValueId(Identity $productVariationValueId)
+    public function setProductVariationValueId(Identity $productVariationValueId): ProductVariationValueI18n
     {
         $this->productVariationValueId = $productVariationValueId;
         
@@ -67,16 +67,16 @@ class ProductVariationValueI18n extends DataModel
     /**
      * @return Identity Reference to productVariationValue
      */
-    public function getProductVariationValueId()
+    public function getProductVariationValueId(): Identity
     {
         return $this->productVariationValueId;
     }
     
     /**
      * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\ProductVariationValueI18n
+     * @return ProductVariationValueI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): ProductVariationValueI18n
     {
         $this->languageISO = $languageISO;
         
@@ -86,16 +86,16 @@ class ProductVariationValueI18n extends DataModel
     /**
      * @return string Locale
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
     
     /**
      * @param string $name Locale specific variationValue name
-     * @return \jtl\Connector\Model\ProductVariationValueI18n
+     * @return ProductVariationValueI18n
      */
-    public function setName($name)
+    public function setName(string $name): ProductVariationValueI18n
     {
         $this->name = $name;
         
@@ -105,7 +105,7 @@ class ProductVariationValueI18n extends DataModel
     /**
      * @return string Locale specific variationValue name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

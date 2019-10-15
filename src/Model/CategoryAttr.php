@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -71,8 +71,8 @@ class CategoryAttr extends DataModel
     
     /**
      * @param Identity $categoryId Reference to category
-     * @return \jtl\Connector\Model\CategoryAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CategoryAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCategoryId(Identity $categoryId): CategoryAttr
     {
@@ -91,8 +91,8 @@ class CategoryAttr extends DataModel
     
     /**
      * @param Identity $id
-     * @return \jtl\Connector\Model\CategoryAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CategoryAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id): CategoryAttr
     {
@@ -111,7 +111,7 @@ class CategoryAttr extends DataModel
     
     /**
      * @param boolean $isCustomProperty
-     * @return \jtl\Connector\Model\CategoryAttr
+     * @return CategoryAttr
      */
     public function setIsCustomProperty(bool $isCustomProperty): CategoryAttr
     {
@@ -130,7 +130,7 @@ class CategoryAttr extends DataModel
     
     /**
      * @param boolean $isTranslated
-     * @return \jtl\Connector\Model\CategoryAttr
+     * @return CategoryAttr
      */
     public function setIsTranslated(bool $isTranslated): CategoryAttr
     {
@@ -149,7 +149,7 @@ class CategoryAttr extends DataModel
     
     /**
      * @param CategoryAttrI18n $i18n
-     * @return \jtl\Connector\Model\CategoryAttr
+     * @return CategoryAttr
      */
     public function addI18n(CategoryAttrI18n $i18n): CategoryAttr
     {
@@ -159,10 +159,10 @@ class CategoryAttr extends DataModel
     }
     
     /**
-     * @param array $i18ns
-     * @return \jtl\Connector\Model\CategoryAttr
+     * @param CategoryI18n ...$i18ns
+     * @return CategoryAttr
      */
-    public function setI18ns(array $i18ns): CategoryAttr
+    public function setI18ns(CategoryI18n ...$i18ns): CategoryAttr
     {
         $this->i18ns = $i18ns;
         
@@ -178,7 +178,7 @@ class CategoryAttr extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\CategoryAttr
+     * @return CategoryAttr
      */
     public function clearI18ns(): CategoryAttr
     {

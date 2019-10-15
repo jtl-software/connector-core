@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -126,10 +126,10 @@ class ProductI18n extends DataModel
     
     /**
      * @param Identity $productId Reference to product
-     * @return \jtl\Connector\Model\ProductI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): ProductI18n
     {
         $this->productId = $productId;
         
@@ -139,16 +139,16 @@ class ProductI18n extends DataModel
     /**
      * @return Identity Reference to product
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
     
     /**
      * @param string $deliveryStatus
-     * @return \jtl\Connector\Model\ProductI18n
+     * @return ProductI18n
      */
-    public function setDeliveryStatus($deliveryStatus)
+    public function setDeliveryStatus(string $deliveryStatus): ProductI18n
     {
         $this->deliveryStatus = $deliveryStatus;
         
@@ -158,16 +158,16 @@ class ProductI18n extends DataModel
     /**
      * @return string
      */
-    public function getDeliveryStatus()
+    public function getDeliveryStatus(): string
     {
         return $this->deliveryStatus;
     }
     
     /**
      * @param string $description Optional product description
-     * @return \jtl\Connector\Model\ProductI18n
+     * @return ProductI18n
      */
-    public function setDescription($description)
+    public function setDescription(string $description): ProductI18n
     {
         $this->description = $description;
         
@@ -177,16 +177,16 @@ class ProductI18n extends DataModel
     /**
      * @return string Optional product description
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
     
     /**
      * @param string $languageISO locale
-     * @return \jtl\Connector\Model\ProductI18n
+     * @return ProductI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): ProductI18n
     {
         $this->languageISO = $languageISO;
         
@@ -196,16 +196,16 @@ class ProductI18n extends DataModel
     /**
      * @return string locale
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
     
     /**
      * @param string $measurementUnitName
-     * @return \jtl\Connector\Model\ProductI18n
+     * @return ProductI18n
      */
-    public function setMeasurementUnitName($measurementUnitName)
+    public function setMeasurementUnitName(string $measurementUnitName): ProductI18n
     {
         $this->measurementUnitName = $measurementUnitName;
         
@@ -215,16 +215,16 @@ class ProductI18n extends DataModel
     /**
      * @return string
      */
-    public function getMeasurementUnitName()
+    public function getMeasurementUnitName(): string
     {
         return $this->measurementUnitName;
     }
     
     /**
      * @param string $metaDescription
-     * @return \jtl\Connector\Model\ProductI18n
+     * @return ProductI18n
      */
-    public function setMetaDescription($metaDescription)
+    public function setMetaDescription(string $metaDescription): ProductI18n
     {
         $this->metaDescription = $metaDescription;
         
@@ -234,16 +234,16 @@ class ProductI18n extends DataModel
     /**
      * @return string
      */
-    public function getMetaDescription()
+    public function getMetaDescription(): string
     {
         return $this->metaDescription;
     }
     
     /**
      * @param string $metaKeywords
-     * @return \jtl\Connector\Model\ProductI18n
+     * @return ProductI18n
      */
-    public function setMetaKeywords($metaKeywords)
+    public function setMetaKeywords(string $metaKeywords): ProductI18n
     {
         $this->metaKeywords = $metaKeywords;
         
@@ -253,16 +253,16 @@ class ProductI18n extends DataModel
     /**
      * @return string
      */
-    public function getMetaKeywords()
+    public function getMetaKeywords(): string
     {
         return $this->metaKeywords;
     }
     
     /**
      * @param string $name Product name / title
-     * @return \jtl\Connector\Model\ProductI18n
+     * @return ProductI18n
      */
-    public function setName($name)
+    public function setName(string $name): ProductI18n
     {
         $this->name = $name;
         
@@ -272,16 +272,16 @@ class ProductI18n extends DataModel
     /**
      * @return string Product name / title
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
     
     /**
      * @param string $shortDescription Optional product shortdescription
-     * @return \jtl\Connector\Model\ProductI18n
+     * @return ProductI18n
      */
-    public function setShortDescription($shortDescription)
+    public function setShortDescription(string $shortDescription): ProductI18n
     {
         $this->shortDescription = $shortDescription;
         
@@ -291,16 +291,16 @@ class ProductI18n extends DataModel
     /**
      * @return string Optional product shortdescription
      */
-    public function getShortDescription()
+    public function getShortDescription(): string
     {
         return $this->shortDescription;
     }
     
     /**
      * @param string $titleTag
-     * @return \jtl\Connector\Model\ProductI18n
+     * @return ProductI18n
      */
-    public function setTitleTag($titleTag)
+    public function setTitleTag(string $titleTag): ProductI18n
     {
         $this->titleTag = $titleTag;
         
@@ -310,16 +310,16 @@ class ProductI18n extends DataModel
     /**
      * @return string
      */
-    public function getTitleTag()
+    public function getTitleTag(): string
     {
         return $this->titleTag;
     }
     
     /**
      * @param string $unitName
-     * @return \jtl\Connector\Model\ProductI18n
+     * @return ProductI18n
      */
-    public function setUnitName($unitName)
+    public function setUnitName(string $unitName): ProductI18n
     {
         $this->unitName = $unitName;
         
@@ -329,16 +329,16 @@ class ProductI18n extends DataModel
     /**
      * @return string
      */
-    public function getUnitName()
+    public function getUnitName(): string
     {
         return $this->unitName;
     }
     
     /**
      * @param string $urlPath Optional path of product URL
-     * @return \jtl\Connector\Model\ProductI18n
+     * @return ProductI18n
      */
-    public function setUrlPath($urlPath)
+    public function setUrlPath(string $urlPath): ProductI18n
     {
         $this->urlPath = $urlPath;
         
@@ -348,7 +348,7 @@ class ProductI18n extends DataModel
     /**
      * @return string Optional path of product URL
      */
-    public function getUrlPath()
+    public function getUrlPath(): string
     {
         return $this->urlPath;
     }

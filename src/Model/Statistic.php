@@ -7,6 +7,9 @@
 
 namespace jtl\Connector\Model;
 
+use InvalidArgumentException;
+use stdClass;
+
 /**
  * Statistic Model
  *
@@ -28,9 +31,11 @@ class Statistic extends DataModel
     
     /**
      * (non-PHPdoc)
+     * @param bool $toWawi
+     * @param stdClass|null $obj
      * @see \jtl\Connector\Core\Model\DataModel::map()
      */
-    public function map($toWawi = false, \stdClass $obj = null)
+    public function map(bool $toWawi = false, stdClass $obj = null): void
     {
     
     }
@@ -38,17 +43,17 @@ class Statistic extends DataModel
     /**
      * @return integer
      */
-    public function getAvailable()
+    public function getAvailable(): int
     {
         return $this->available;
     }
     
     /**
      * @param integer $available
-     * @return \jtl\Connector\Model\Statistic
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
+     * @return Statistic
+     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setAvailable($available)
+    public function setAvailable(int $available): Statistic
     {
         $this->available = $available;
         
@@ -58,17 +63,17 @@ class Statistic extends DataModel
     /**
      * @return string
      */
-    public function getControllerName()
+    public function getControllerName(): string
     {
         return $this->controllerName;
     }
     
     /**
      * @param string $controllerName
-     * @return \jtl\Connector\Model\Statistic
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @return Statistic
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setControllerName($controllerName)
+    public function setControllerName(string $controllerName): Statistic
     {
         $this->controllerName = $controllerName;
         

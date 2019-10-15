@@ -7,7 +7,6 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -53,16 +52,16 @@ class ConnectorServerInfo extends DataModel
     /**
      * @return integer
      */
-    public function getMemoryLimit()
+    public function getMemoryLimit(): int
     {
         return $this->memoryLimit;
     }
     
     /**
      * @param integer $memoryLimit
-     * @return \jtl\Connector\Model\ConnectorServerInfo
+     * @return ConnectorServerInfo
      */
-    public function setMemoryLimit($memoryLimit)
+    public function setMemoryLimit(int $memoryLimit): ConnectorServerInfo
     {
         $this->memoryLimit = $memoryLimit;
         
@@ -72,16 +71,16 @@ class ConnectorServerInfo extends DataModel
     /**
      * @return int
      */
-    public function getExecutionTime()
+    public function getExecutionTime(): int
     {
         return $this->executionTime;
     }
     
     /**
      * @param integer $executionTime
-     * @return \jtl\Connector\Model\ConnectorServerInfo
+     * @return ConnectorServerInfo
      */
-    public function setExecutionTime($executionTime)
+    public function setExecutionTime(int $executionTime): ConnectorServerInfo
     {
         $this->executionTime = $executionTime;
         
@@ -91,16 +90,16 @@ class ConnectorServerInfo extends DataModel
     /**
      * @return int
      */
-    public function getPostMaxSize()
+    public function getPostMaxSize(): int
     {
         return $this->postMaxSize;
     }
     
     /**
      * @param integer $postMaxSize
-     * @return \jtl\Connector\Model\ConnectorServerInfo
+     * @return ConnectorServerInfo
      */
-    public function setPostMaxSize($postMaxSize)
+    public function setPostMaxSize(int $postMaxSize): ConnectorServerInfo
     {
         $this->postMaxSize = $postMaxSize;
         
@@ -110,16 +109,16 @@ class ConnectorServerInfo extends DataModel
     /**
      * @return int
      */
-    public function getUploadMaxFilesize()
+    public function getUploadMaxFilesize(): int
     {
         return $this->uploadMaxFilesize;
     }
     
     /**
      * @param integer $uploadMaxFilesize
-     * @return \jtl\Connector\Model\ConnectorServerInfo
+     * @return ConnectorServerInfo
      */
-    public function setUploadMaxFilesize($uploadMaxFilesize)
+    public function setUploadMaxFilesize(int $uploadMaxFilesize): ConnectorServerInfo
     {
         $this->uploadMaxFilesize = $uploadMaxFilesize;
         

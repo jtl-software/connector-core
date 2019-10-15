@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -54,10 +54,10 @@ class ProductPriceItem extends DataModel
     
     /**
      * @param Identity $productPriceId Reference to ProductPrice
-     * @return \jtl\Connector\Model\ProductPriceItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductPriceItem
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductPriceId(Identity $productPriceId)
+    public function setProductPriceId(Identity $productPriceId): ProductPriceItem
     {
         $this->productPriceId = $productPriceId;
         
@@ -67,16 +67,16 @@ class ProductPriceItem extends DataModel
     /**
      * @return Identity Reference to ProductPrice
      */
-    public function getProductPriceId()
+    public function getProductPriceId(): Identity
     {
         return $this->productPriceId;
     }
     
     /**
      * @param double $netPrice Price value (net)
-     * @return \jtl\Connector\Model\ProductPriceItem
+     * @return ProductPriceItem
      */
-    public function setNetPrice($netPrice)
+    public function setNetPrice(float $netPrice): ProductPriceItem
     {
         $this->netPrice = $netPrice;
         
@@ -86,16 +86,16 @@ class ProductPriceItem extends DataModel
     /**
      * @return double Price value (net)
      */
-    public function getNetPrice()
+    public function getNetPrice(): float
     {
         return $this->netPrice;
     }
     
     /**
      * @param integer $quantity Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items.
-     * @return \jtl\Connector\Model\ProductPriceItem
+     * @return ProductPriceItem
      */
-    public function setQuantity($quantity)
+    public function setQuantity(int $quantity): ProductPriceItem
     {
         $this->quantity = $quantity;
         
@@ -103,9 +103,9 @@ class ProductPriceItem extends DataModel
     }
     
     /**
-     * @return integer Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items.
+     * @return float Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items.
      */
-    public function getQuantity()
+    public function getQuantity(): float
     {
         return $this->quantity;
     }

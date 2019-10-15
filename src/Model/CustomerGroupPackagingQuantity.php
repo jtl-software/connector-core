@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -63,10 +63,10 @@ class CustomerGroupPackagingQuantity extends DataModel
     
     /**
      * @param Identity $customerGroupId Reference to customergroup.
-     * @return \jtl\Connector\Model\CustomerGroupPackagingQuantity
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CustomerGroupPackagingQuantity
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerGroupId(Identity $customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId): CustomerGroupPackagingQuantity
     {
         $this->customerGroupId = $customerGroupId;
         
@@ -76,17 +76,17 @@ class CustomerGroupPackagingQuantity extends DataModel
     /**
      * @return Identity Reference to customergroup.
      */
-    public function getCustomerGroupId()
+    public function getCustomerGroupId(): Identity
     {
         return $this->customerGroupId;
     }
     
     /**
      * @param Identity $productId Reference to product.
-     * @return \jtl\Connector\Model\CustomerGroupPackagingQuantity
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CustomerGroupPackagingQuantity
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): CustomerGroupPackagingQuantity
     {
         $this->productId = $productId;
         
@@ -96,16 +96,16 @@ class CustomerGroupPackagingQuantity extends DataModel
     /**
      * @return Identity Reference to product.
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
     
     /**
      * @param double $minimumOrderQuantity Contains the minimum quantity for a customergroup.
-     * @return \jtl\Connector\Model\CustomerGroupPackagingQuantity
+     * @return CustomerGroupPackagingQuantity
      */
-    public function setMinimumOrderQuantity($minimumOrderQuantity)
+    public function setMinimumOrderQuantity(float $minimumOrderQuantity): CustomerGroupPackagingQuantity
     {
         $this->minimumOrderQuantity = $minimumOrderQuantity;
         
@@ -115,16 +115,16 @@ class CustomerGroupPackagingQuantity extends DataModel
     /**
      * @return double Contains the minimum quantity for a customergroup.
      */
-    public function getMinimumOrderQuantity()
+    public function getMinimumOrderQuantity(): float
     {
         return $this->minimumOrderQuantity;
     }
     
     /**
      * @param double $packagingQuantity Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
-     * @return \jtl\Connector\Model\CustomerGroupPackagingQuantity
+     * @return CustomerGroupPackagingQuantity
      */
-    public function setPackagingQuantity($packagingQuantity)
+    public function setPackagingQuantity(float $packagingQuantity): CustomerGroupPackagingQuantity
     {
         $this->packagingQuantity = $packagingQuantity;
         
@@ -134,7 +134,7 @@ class CustomerGroupPackagingQuantity extends DataModel
     /**
      * @return double Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      */
-    public function getPackagingQuantity()
+    public function getPackagingQuantity(): float
     {
         return $this->packagingQuantity;
     }

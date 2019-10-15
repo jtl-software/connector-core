@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -37,7 +37,7 @@ class CrossSelling extends DataModel
     protected $productId = null;
     
     /**
-     * @var \jtl\Connector\Model\CrossSellingItem[] Referenced cross-sold products grouped by their crossSellingGroup
+     * @var CrossSellingItem[] Referenced cross-sold products grouped by their crossSellingGroup
      * @Serializer\Type("array<jtl\Connector\Model\CrossSellingItem>")
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
@@ -55,10 +55,10 @@ class CrossSelling extends DataModel
     
     /**
      * @param Identity $id
-     * @return \jtl\Connector\Model\CrossSelling
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CrossSelling
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): CrossSelling
     {
         $this->id = $id;
         
@@ -75,10 +75,10 @@ class CrossSelling extends DataModel
     
     /**
      * @param Identity $productId Source product
-     * @return \jtl\Connector\Model\CrossSelling
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CrossSelling
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): CrossSelling
     {
         $this->productId = $productId;
         
@@ -88,16 +88,16 @@ class CrossSelling extends DataModel
     /**
      * @return Identity Source product
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
     
     /**
-     * @param \jtl\Connector\Model\CrossSellingItem $item
-     * @return \jtl\Connector\Model\CrossSelling
+     * @param CrossSellingItem $item
+     * @return CrossSelling
      */
-    public function addItem(\jtl\Connector\Model\CrossSellingItem $item)
+    public function addItem(CrossSellingItem $item): CrossSelling
     {
         $this->items[] = $item;
         
@@ -105,10 +105,10 @@ class CrossSelling extends DataModel
     }
     
     /**
-     * @param array $items
-     * @return \jtl\Connector\Model\CrossSelling
+     * @param CrossSellingItem ...$items
+     * @return CrossSelling
      */
-    public function setItems(array $items)
+    public function setItems(CrossSellingItem ...$items): CrossSelling
     {
         $this->items = $items;
         
@@ -116,17 +116,17 @@ class CrossSelling extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\CrossSellingItem[]
+     * @return CrossSellingItem[]
      */
-    public function getItems()
+    public function getItems(): array
     {
         return $this->items;
     }
     
     /**
-     * @return \jtl\Connector\Model\CrossSelling
+     * @return CrossSelling
      */
-    public function clearItems()
+    public function clearItems(): CrossSelling
     {
         $this->items = [];
         

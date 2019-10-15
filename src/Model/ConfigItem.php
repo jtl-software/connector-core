@@ -7,7 +7,6 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -141,7 +140,7 @@ class ConfigItem extends DataModel
     protected $type = 0;
     
     /**
-     * @var \jtl\Connector\Model\ConfigItemI18n[]
+     * @var ConfigItemI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ConfigItemI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -149,7 +148,7 @@ class ConfigItem extends DataModel
     protected $i18ns = [];
     
     /**
-     * @var \jtl\Connector\Model\ConfigItemPrice[]
+     * @var ConfigItemPrice[]
      * @Serializer\Type("array<jtl\Connector\Model\ConfigItemPrice>")
      * @Serializer\SerializedName("prices")
      * @Serializer\AccessType("reflection")
@@ -168,10 +167,9 @@ class ConfigItem extends DataModel
     
     /**
      * @param Identity $configGroupId Reference to configGroup
-     * @return \jtl\Connector\Model\ConfigItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ConfigItem
      */
-    public function setConfigGroupId(Identity $configGroupId)
+    public function setConfigGroupId(Identity $configGroupId): ConfigItem
     {
         $this->configGroupId = $configGroupId;
         
@@ -181,17 +179,16 @@ class ConfigItem extends DataModel
     /**
      * @return Identity Reference to configGroup
      */
-    public function getConfigGroupId()
+    public function getConfigGroupId(): Identity
     {
         return $this->configGroupId;
     }
     
     /**
      * @param Identity $id Unique configItem id
-     * @return \jtl\Connector\Model\ConfigItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ConfigItem
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): ConfigItem
     {
         $this->id = $id;
         
@@ -208,10 +205,9 @@ class ConfigItem extends DataModel
     
     /**
      * @param Identity $productId Optional reference to product
-     * @return \jtl\Connector\Model\ConfigItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ConfigItem
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): ConfigItem
     {
         $this->productId = $productId;
         
@@ -221,16 +217,16 @@ class ConfigItem extends DataModel
     /**
      * @return Identity Optional reference to product
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
     
     /**
      * @param integer $ignoreMultiplier Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
-     * @return \jtl\Connector\Model\ConfigItem
+     * @return ConfigItem
      */
-    public function setIgnoreMultiplier($ignoreMultiplier)
+    public function setIgnoreMultiplier(int $ignoreMultiplier): ConfigItem
     {
         $this->ignoreMultiplier = $ignoreMultiplier;
         
@@ -240,16 +236,16 @@ class ConfigItem extends DataModel
     /**
      * @return integer Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
      */
-    public function getIgnoreMultiplier()
+    public function getIgnoreMultiplier(): int
     {
         return $this->ignoreMultiplier;
     }
     
     /**
      * @param boolean $inheritProductName Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored.
-     * @return \jtl\Connector\Model\ConfigItem
+     * @return ConfigItem
      */
-    public function setInheritProductName($inheritProductName)
+    public function setInheritProductName(bool $inheritProductName): ConfigItem
     {
         $this->inheritProductName = $inheritProductName;
         
@@ -259,16 +255,16 @@ class ConfigItem extends DataModel
     /**
      * @return boolean Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored.
      */
-    public function getInheritProductName()
+    public function getInheritProductName(): bool
     {
         return $this->inheritProductName;
     }
     
     /**
      * @param boolean $inheritProductPrice Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price.
-     * @return \jtl\Connector\Model\ConfigItem
+     * @return ConfigItem
      */
-    public function setInheritProductPrice($inheritProductPrice)
+    public function setInheritProductPrice(bool $inheritProductPrice): ConfigItem
     {
         $this->inheritProductPrice = $inheritProductPrice;
         
@@ -278,16 +274,16 @@ class ConfigItem extends DataModel
     /**
      * @return boolean Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price.
      */
-    public function getInheritProductPrice()
+    public function getInheritProductPrice(): bool
     {
         return $this->inheritProductPrice;
     }
     
     /**
      * @param double $initialQuantity Optional initial / predefined quantity. Default is one (1) quantity piece.
-     * @return \jtl\Connector\Model\ConfigItem
+     * @return ConfigItem
      */
-    public function setInitialQuantity($initialQuantity)
+    public function setInitialQuantity(float $initialQuantity): ConfigItem
     {
         $this->initialQuantity = $initialQuantity;
         
@@ -297,16 +293,16 @@ class ConfigItem extends DataModel
     /**
      * @return double Optional initial / predefined quantity. Default is one (1) quantity piece.
      */
-    public function getInitialQuantity()
+    public function getInitialQuantity(): float
     {
         return $this->initialQuantity;
     }
     
     /**
      * @param boolean $isPreSelected Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
-     * @return \jtl\Connector\Model\ConfigItem
+     * @return ConfigItem
      */
-    public function setIsPreSelected($isPreSelected)
+    public function setIsPreSelected(bool $isPreSelected): ConfigItem
     {
         $this->isPreSelected = $isPreSelected;
         
@@ -316,16 +312,16 @@ class ConfigItem extends DataModel
     /**
      * @return boolean Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
      */
-    public function getIsPreSelected()
+    public function getIsPreSelected(): bool
     {
         return $this->isPreSelected;
     }
     
     /**
      * @param boolean $isRecommended Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted.
-     * @return \jtl\Connector\Model\ConfigItem
+     * @return ConfigItem
      */
-    public function setIsRecommended($isRecommended)
+    public function setIsRecommended(bool $isRecommended): ConfigItem
     {
         $this->isRecommended = $isRecommended;
         
@@ -335,16 +331,16 @@ class ConfigItem extends DataModel
     /**
      * @return boolean Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted.
      */
-    public function getIsRecommended()
+    public function getIsRecommended(): bool
     {
         return $this->isRecommended;
     }
     
     /**
      * @param double $maxQuantity Maximum allowed quantity. Default 0 for no maximum limit.
-     * @return \jtl\Connector\Model\ConfigItem
+     * @return ConfigItem
      */
-    public function setMaxQuantity($maxQuantity)
+    public function setMaxQuantity(float $maxQuantity): ConfigItem
     {
         $this->maxQuantity = $maxQuantity;
         
@@ -354,16 +350,16 @@ class ConfigItem extends DataModel
     /**
      * @return double Maximum allowed quantity. Default 0 for no maximum limit.
      */
-    public function getMaxQuantity()
+    public function getMaxQuantity(): float
     {
         return $this->maxQuantity;
     }
     
     /**
      * @param double $minQuantity Optional minimum quantity required to add configItem. Default 0 for no minimum quantity.
-     * @return \jtl\Connector\Model\ConfigItem
+     * @return ConfigItem
      */
-    public function setMinQuantity($minQuantity)
+    public function setMinQuantity(float $minQuantity): ConfigItem
     {
         $this->minQuantity = $minQuantity;
         
@@ -373,16 +369,16 @@ class ConfigItem extends DataModel
     /**
      * @return double Optional minimum quantity required to add configItem. Default 0 for no minimum quantity.
      */
-    public function getMinQuantity()
+    public function getMinQuantity(): float
     {
         return $this->minQuantity;
     }
     
     /**
      * @param boolean $showDiscount Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
-     * @return \jtl\Connector\Model\ConfigItem
+     * @return ConfigItem
      */
-    public function setShowDiscount($showDiscount)
+    public function setShowDiscount(bool $showDiscount): ConfigItem
     {
         $this->showDiscount = $showDiscount;
         
@@ -392,16 +388,16 @@ class ConfigItem extends DataModel
     /**
      * @return boolean Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
      */
-    public function getShowDiscount()
+    public function getShowDiscount(): bool
     {
         return $this->showDiscount;
     }
     
     /**
      * @param boolean $showSurcharge Optional: Show surcharge compared to productId price.
-     * @return \jtl\Connector\Model\ConfigItem
+     * @return ConfigItem
      */
-    public function setShowSurcharge($showSurcharge)
+    public function setShowSurcharge(bool $showSurcharge): ConfigItem
     {
         $this->showSurcharge = $showSurcharge;
         
@@ -411,16 +407,16 @@ class ConfigItem extends DataModel
     /**
      * @return boolean Optional: Show surcharge compared to productId price.
      */
-    public function getShowSurcharge()
+    public function getShowSurcharge(): bool
     {
         return $this->showSurcharge;
     }
     
     /**
      * @param integer $sort Optional sort order number
-     * @return \jtl\Connector\Model\ConfigItem
+     * @return ConfigItem
      */
-    public function setSort($sort)
+    public function setSort(int $sort): ConfigItem
     {
         $this->sort = $sort;
         
@@ -430,16 +426,16 @@ class ConfigItem extends DataModel
     /**
      * @return integer Optional sort order number
      */
-    public function getSort()
+    public function getSort(): int
     {
         return $this->sort;
     }
     
     /**
      * @param integer $type Config item type. 0: Product, 1: Special
-     * @return \jtl\Connector\Model\ConfigItem
+     * @return ConfigItem
      */
-    public function setType($type)
+    public function setType(int $type): ConfigItem
     {
         $this->type = $type;
         
@@ -449,16 +445,16 @@ class ConfigItem extends DataModel
     /**
      * @return integer Config item type. 0: Product, 1: Special
      */
-    public function getType()
+    public function getType(): int
     {
         return $this->type;
     }
     
     /**
-     * @param \jtl\Connector\Model\ConfigItemI18n $i18n
-     * @return \jtl\Connector\Model\ConfigItem
+     * @param ConfigItemI18n $i18n
+     * @return ConfigItem
      */
-    public function addI18n(\jtl\Connector\Model\ConfigItemI18n $i18n)
+    public function addI18n(ConfigItemI18n $i18n): ConfigItem
     {
         $this->i18ns[] = $i18n;
         
@@ -466,10 +462,10 @@ class ConfigItem extends DataModel
     }
     
     /**
-     * @param array $i18ns
-     * @return \jtl\Connector\Model\ConfigItem
+     * @param ConfigItemI18n ...$i18ns
+     * @return ConfigItem
      */
-    public function setI18ns(array $i18ns)
+    public function setI18ns(ConfigItemI18n ...$i18ns): ConfigItem
     {
         $this->i18ns = $i18ns;
         
@@ -477,17 +473,17 @@ class ConfigItem extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ConfigItemI18n[]
+     * @return ConfigItemI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
     
     /**
-     * @return \jtl\Connector\Model\ConfigItem
+     * @return ConfigItem
      */
-    public function clearI18ns()
+    public function clearI18ns(): ConfigItem
     {
         $this->i18ns = [];
         
@@ -495,10 +491,10 @@ class ConfigItem extends DataModel
     }
     
     /**
-     * @param \jtl\Connector\Model\ConfigItemPrice $price
-     * @return \jtl\Connector\Model\ConfigItem
+     * @param ConfigItemPrice $price
+     * @return ConfigItem
      */
-    public function addPrice(\jtl\Connector\Model\ConfigItemPrice $price)
+    public function addPrice(ConfigItemPrice $price): ConfigItem
     {
         $this->prices[] = $price;
         
@@ -506,10 +502,10 @@ class ConfigItem extends DataModel
     }
     
     /**
-     * @param array $prices
-     * @return \jtl\Connector\Model\ConfigItem
+     * @param ConfigItemPrice ...$prices
+     * @return ConfigItem
      */
-    public function setPrices(array $prices)
+    public function setPrices(ConfigItemPrice ...$prices): ConfigItem
     {
         $this->prices = $prices;
         
@@ -517,17 +513,17 @@ class ConfigItem extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ConfigItemPrice[]
+     * @return ConfigItemPrice[]
      */
-    public function getPrices()
+    public function getPrices(): array
     {
         return $this->prices;
     }
     
     /**
-     * @return \jtl\Connector\Model\ConfigItem
+     * @return ConfigItem
      */
-    public function clearPrices()
+    public function clearPrices(): ConfigItem
     {
         $this->prices = [];
         

@@ -7,7 +7,6 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -60,9 +59,9 @@ class ConnectorIdentification extends DataModel
     
     /**
      * @param string $endpointVersion
-     * @return \jtl\Connector\Model\ConnectorIdentification
+     * @return ConnectorIdentification
      */
-    public function setEndpointVersion($endpointVersion)
+    public function setEndpointVersion(string $endpointVersion): ConnectorIdentification
     {
         $this->endpointVersion = $endpointVersion;
         
@@ -72,16 +71,16 @@ class ConnectorIdentification extends DataModel
     /**
      * @return string
      */
-    public function getEndpointVersion()
+    public function getEndpointVersion(): string
     {
         return $this->endpointVersion;
     }
     
     /**
      * @param string $platformName
-     * @return \jtl\Connector\Model\ConnectorIdentification
+     * @return ConnectorIdentification
      */
-    public function setPlatformName($platformName)
+    public function setPlatformName(string $platformName): ConnectorIdentification
     {
         $this->platformName = $platformName;
         
@@ -91,16 +90,16 @@ class ConnectorIdentification extends DataModel
     /**
      * @return string
      */
-    public function getPlatformName()
+    public function getPlatformName(): string
     {
         return $this->platformName;
     }
     
     /**
      * @param string $platformVersion
-     * @return \jtl\Connector\Model\ConnectorIdentification
+     * @return ConnectorIdentification
      */
-    public function setPlatformVersion($platformVersion)
+    public function setPlatformVersion(string $platformVersion): ConnectorIdentification
     {
         $this->platformVersion = $platformVersion;
         
@@ -110,16 +109,16 @@ class ConnectorIdentification extends DataModel
     /**
      * @return string
      */
-    public function getPlatformVersion()
+    public function getPlatformVersion(): string
     {
         return $this->platformVersion;
     }
     
     /**
      * @param integer $protocolVersion
-     * @return \jtl\Connector\Model\ConnectorIdentification
+     * @return ConnectorIdentification
      */
-    public function setProtocolVersion($protocolVersion)
+    public function setProtocolVersion(int $protocolVersion): ConnectorIdentification
     {
         $this->protocolVersion = $protocolVersion;
         
@@ -129,24 +128,26 @@ class ConnectorIdentification extends DataModel
     /**
      * @return integer
      */
-    public function getProtocolVersion()
+    public function getProtocolVersion(): int
     {
         return $this->protocolVersion;
     }
     
     /**
      * @param ConnectorServerInfo $connectorServerInfo
-     * @return \jtl\Connector\Model\ConnectorIdentification
+     * @return ConnectorIdentification
      */
-    public function setServerInfo(ConnectorServerInfo $connectorServerInfo)
+    public function setServerInfo(ConnectorServerInfo $connectorServerInfo): ConnectorIdentification
     {
         $this->serverInfo = $connectorServerInfo;
+        
+        return $this;
     }
     
     /**
      * @return ConnectorServerInfo
      */
-    public function getServerInfo()
+    public function getServerInfo(): ConnectorServerInfo
     {
         return $this->serverInfo;
     }

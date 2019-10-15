@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -62,10 +62,10 @@ class ConfigItemI18n extends DataModel
     
     /**
      * @param Identity $configItemId Reference to configItem
-     * @return \jtl\Connector\Model\ConfigItemI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ConfigItemI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setConfigItemId(Identity $configItemId)
+    public function setConfigItemId(Identity $configItemId): ConfigItemI18n
     {
         $this->configItemId = $configItemId;
         
@@ -75,16 +75,16 @@ class ConfigItemI18n extends DataModel
     /**
      * @return Identity Reference to configItem
      */
-    public function getConfigItemId()
+    public function getConfigItemId(): Identity
     {
         return $this->configItemId;
     }
     
     /**
      * @param string $description Description (html). Will be ignored, if inheritProductName==true
-     * @return \jtl\Connector\Model\ConfigItemI18n
+     * @return ConfigItemI18n
      */
-    public function setDescription($description)
+    public function setDescription(string $description): ConfigItemI18n
     {
         $this->description = $description;
         
@@ -94,17 +94,18 @@ class ConfigItemI18n extends DataModel
     /**
      * @return string Description (html). Will be ignored, if inheritProductName==true
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
     
     /**
      * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\ConfigItemI18n
+     * @return ConfigItemI18n
      */
-    public function setLanguageISO($languageISO)
-    {
+    public function setLanguageISO(
+        string $languageISO
+    ): ConfigItemI18n {
         $this->languageISO = $languageISO;
         
         return $this;
@@ -113,16 +114,16 @@ class ConfigItemI18n extends DataModel
     /**
      * @return string Locale
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
     
     /**
      * @param string $name Config item name. Will be ignored if inheritProductName==true
-     * @return \jtl\Connector\Model\ConfigItemI18n
+     * @return ConfigItemI18n
      */
-    public function setName($name)
+    public function setName(string $name): ConfigItemI18n
     {
         $this->name = $name;
         
@@ -132,7 +133,7 @@ class ConfigItemI18n extends DataModel
     /**
      * @return string Config item name. Will be ignored if inheritProductName==true
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -63,10 +63,10 @@ class CustomerGroupAttr extends DataModel
     
     /**
      * @param Identity $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\CustomerGroupAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CustomerGroupAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerGroupId(Identity $customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId): CustomerGroupAttr
     {
         $this->customerGroupId = $customerGroupId;
         
@@ -76,17 +76,17 @@ class CustomerGroupAttr extends DataModel
     /**
      * @return Identity Reference to customerGroup
      */
-    public function getCustomerGroupId()
+    public function getCustomerGroupId(): Identity
     {
         return $this->customerGroupId;
     }
     
     /**
      * @param Identity $id Unique customerGroupAttr id
-     * @return \jtl\Connector\Model\CustomerGroupAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CustomerGroupAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): CustomerGroupAttr
     {
         $this->id = $id;
         
@@ -103,9 +103,9 @@ class CustomerGroupAttr extends DataModel
     
     /**
      * @param string $key Attribute key
-     * @return \jtl\Connector\Model\CustomerGroupAttr
+     * @return CustomerGroupAttr
      */
-    public function setKey($key)
+    public function setKey(string $key): CustomerGroupAttr
     {
         $this->key = $key;
         
@@ -115,16 +115,16 @@ class CustomerGroupAttr extends DataModel
     /**
      * @return string Attribute key
      */
-    public function getKey()
+    public function getKey(): string
     {
         return $this->key;
     }
     
     /**
      * @param string $value Attribute value
-     * @return \jtl\Connector\Model\CustomerGroupAttr
+     * @return CustomerGroupAttr
      */
-    public function setValue($value)
+    public function setValue(string $value): CustomerGroupAttr
     {
         $this->value = $value;
         
@@ -134,7 +134,7 @@ class CustomerGroupAttr extends DataModel
     /**
      * @return string Attribute value
      */
-    public function getValue()
+    public function getValue(): string
     {
         return $this->value;
     }
