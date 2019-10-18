@@ -668,7 +668,10 @@ class IdentityLinker
      */
     public function save($endpointId, $hostId, $modelName, $property = null)
     {
+
         $type = $this->getType($modelName, $property);
+        $realModel = $this->getModelName($type);
+        $this->delete($endpointId, $hostId, $realModel);
 
         $result = self::$mapper->save($endpointId, $hostId, $type);
         if ($result) {
