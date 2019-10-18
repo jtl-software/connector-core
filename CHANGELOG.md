@@ -1,3 +1,7 @@
+2.6.9
+-----
+- Delete old Linking before saving the new on 
+
 2.6.8
 -----
 - Exception handling while encode or decode json revised.
