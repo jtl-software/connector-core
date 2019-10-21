@@ -171,20 +171,6 @@ abstract class DataModel extends CoreModel
         }
     }
     
-    /**
-     * Sets Properties with matching Array Values
-     *
-     * @param stdClass $object
-     * @param array $options
-     * @return DataModel
-     */
-    public function setOptions(stdClass $object = null, array $options = null)
-    {
-        parent::setOptions($object, $options);
-        
-        return $this;
-    }
-    
     protected function setProperty($name, $value, $type)
     {
         if (!$this->validateType($value, $type)) {

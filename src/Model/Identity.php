@@ -105,14 +105,14 @@ class Identity extends Model
     {
         return [$this->endpoint, $this->host];
     }
-    
+
     /**
      * Convert the Model into array
      *
      * @param array $publics
      * @return array
      */
-    public function getPublic(array $publics = []): array
+    public function getPublic(array $publics = []): \stdClass
     {
         return $this->toArray();
     }
