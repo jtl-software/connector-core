@@ -112,11 +112,11 @@ class ProductFileDownload extends DataModel
     }
     
     /**
-     * @param DateTime $creationDate
+     * @param \DateTimeInterface $creationDate
      * @return ProductFileDownload
      * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreationDate(DateTime $creationDate = null): ProductFileDownload
+    public function setCreationDate(\DateTimeInterface $creationDate = null): ProductFileDownload
     {
         $this->creationDate = $creationDate;
         
@@ -126,7 +126,7 @@ class ProductFileDownload extends DataModel
     /**
      * @return DateTime
      */
-    public function getCreationDate(): ?DateTime
+    public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creationDate;
     }

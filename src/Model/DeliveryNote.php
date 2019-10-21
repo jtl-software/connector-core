@@ -127,11 +127,11 @@ class DeliveryNote extends DataModel
     }
     
     /**
-     * @param DateTime $creationDate Creation date
+     * @param \DateTimeInterface $creationDate Creation date
      * @return DeliveryNote
      * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreationDate(DateTime $creationDate = null): DeliveryNote
+    public function setCreationDate(\DateTimeInterface $creationDate = null): DeliveryNote
     {
         $this->creationDate = $creationDate;
         
@@ -141,7 +141,7 @@ class DeliveryNote extends DataModel
     /**
      * @return DateTime Creation date
      */
-    public function getCreationDate(): ?DateTime
+    public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creationDate;
     }

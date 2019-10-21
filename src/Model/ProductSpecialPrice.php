@@ -143,11 +143,11 @@ class ProductSpecialPrice extends DataModel
     }
     
     /**
-     * @param DateTime $activeFromDate Optional: Activate special price from date
+     * @param \DateTimeInterface $activeFromDate Optional: Activate special price from date
      * @return ProductSpecialPrice
      * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setActiveFromDate(DateTime $activeFromDate = null): ProductSpecialPrice
+    public function setActiveFromDate(\DateTimeInterface $activeFromDate = null): ProductSpecialPrice
     {
         $this->activeFromDate = $activeFromDate;
         
@@ -157,17 +157,17 @@ class ProductSpecialPrice extends DataModel
     /**
      * @return DateTime Optional: Activate special price from date
      */
-    public function getActiveFromDate(): ?DateTime
+    public function getActiveFromDate(): ?\DateTimeInterface
     {
         return $this->activeFromDate;
     }
     
     /**
-     * @param DateTime $activeUntilDate Optional: Special price active until date
+     * @param \DateTimeInterface $activeUntilDate Optional: Special price active until date
      * @return ProductSpecialPrice
      * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setActiveUntilDate(DateTime $activeUntilDate = null): ProductSpecialPrice
+    public function setActiveUntilDate(\DateTimeInterface $activeUntilDate = null): ProductSpecialPrice
     {
         $this->activeUntilDate = $activeUntilDate;
         
@@ -177,7 +177,7 @@ class ProductSpecialPrice extends DataModel
     /**
      * @return DateTime Optional: Special price active until date
      */
-    public function getActiveUntilDate(): ?DateTime
+    public function getActiveUntilDate(): ?\DateTimeInterface
     {
         return $this->activeUntilDate;
     }

@@ -345,11 +345,11 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param DateTime $creationDate Date of creation
+     * @param \DateTimeInterface $creationDate Date of creation
      * @return CustomerOrder
      * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreationDate(DateTime $creationDate = null): CustomerOrder
+    public function setCreationDate(\DateTimeInterface $creationDate = null): CustomerOrder
     {
         $this->creationDate = $creationDate;
         
@@ -359,7 +359,7 @@ class CustomerOrder extends DataModel
     /**
      * @return DateTime Date of creation
      */
-    public function getCreationDate(): ?DateTime
+    public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creationDate;
     }
@@ -384,11 +384,11 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param DateTime $estimatedDeliveryDate
+     * @param \DateTimeInterface $estimatedDeliveryDate
      * @return CustomerOrder
      * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setEstimatedDeliveryDate(DateTime $estimatedDeliveryDate = null): CustomerOrder
+    public function setEstimatedDeliveryDate(\DateTimeInterface $estimatedDeliveryDate = null): CustomerOrder
     {
         $this->estimatedDeliveryDate = $estimatedDeliveryDate;
         
@@ -398,7 +398,7 @@ class CustomerOrder extends DataModel
     /**
      * @return DateTime
      */
-    public function getEstimatedDeliveryDate(): ?DateTime
+    public function getEstimatedDeliveryDate(): ?\DateTimeInterface
     {
         return $this->estimatedDeliveryDate;
     }
@@ -461,11 +461,11 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param DateTime $paymentDate Payment date
+     * @param \DateTimeInterface $paymentDate Payment date
      * @return CustomerOrder
      * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setPaymentDate(DateTime $paymentDate = null): CustomerOrder
+    public function setPaymentDate(\DateTimeInterface $paymentDate = null): CustomerOrder
     {
         $this->paymentDate = $paymentDate;
         
@@ -475,7 +475,7 @@ class CustomerOrder extends DataModel
     /**
      * @return DateTime Payment date
      */
-    public function getPaymentDate(): ?DateTime
+    public function getPaymentDate(): ?\DateTimeInterface
     {
         return $this->paymentDate;
     }
@@ -578,11 +578,11 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param DateTime $shippingDate Shipping date
+     * @param \DateTimeInterface $shippingDate Shipping date
      * @return CustomerOrder
      * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setShippingDate(DateTime $shippingDate = null): CustomerOrder
+    public function setShippingDate(\DateTimeInterface $shippingDate = null): CustomerOrder
     {
         $this->shippingDate = $shippingDate;
         
@@ -592,7 +592,7 @@ class CustomerOrder extends DataModel
     /**
      * @return DateTime Shipping date
      */
-    public function getShippingDate(): ?DateTime
+    public function getShippingDate(): ?\DateTimeInterface
     {
         return $this->shippingDate;
     }

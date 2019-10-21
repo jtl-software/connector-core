@@ -144,11 +144,11 @@ class Payment extends DataModel
     }
     
     /**
-     * @param DateTime $creationDate
+     * @param \DateTimeInterface $creationDate
      * @return Payment
      * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreationDate(DateTime $creationDate = null): Payment
+    public function setCreationDate(\DateTimeInterface $creationDate = null): Payment
     {
         $this->creationDate = $creationDate;
         
@@ -158,7 +158,7 @@ class Payment extends DataModel
     /**
      * @return DateTime
      */
-    public function getCreationDate(): ?DateTime
+    public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creationDate;
     }

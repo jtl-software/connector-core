@@ -346,11 +346,11 @@ class Customer extends DataModel
     }
     
     /**
-     * @param DateTime $birthday Date of birth
+     * @param \DateTimeInterface $birthday Date of birth
      * @return Customer
      * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setBirthday(DateTime $birthday = null): Customer
+    public function setBirthday(\DateTimeInterface $birthday = null): Customer
     {
         $this->birthday = $birthday;
         
@@ -360,7 +360,7 @@ class Customer extends DataModel
     /**
      * @return DateTime Date of birth
      */
-    public function getBirthday(): ?DateTime
+    public function getBirthday(): ?\DateTimeInterface
     {
         return $this->birthday;
     }
@@ -423,11 +423,11 @@ class Customer extends DataModel
     }
     
     /**
-     * @param DateTime $creationDate
+     * @param \DateTimeInterface $creationDate
      * @return Customer
      * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreationDate(DateTime $creationDate = null): Customer
+    public function setCreationDate(\DateTimeInterface $creationDate = null): Customer
     {
         $this->creationDate = $creationDate;
         
@@ -437,7 +437,7 @@ class Customer extends DataModel
     /**
      * @return DateTime
      */
-    public function getCreationDate(): ?DateTime
+    public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creationDate;
     }

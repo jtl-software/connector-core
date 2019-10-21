@@ -885,11 +885,11 @@ class Product extends DataModel
     }
     
     /**
-     * @param DateTime $availableFrom Optional available from date. Specify a date, upon when product can be purchased.
+     * @param \DateTimeInterface $availableFrom Optional available from date. Specify a date, upon when product can be purchased.
      * @return Product
      * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setAvailableFrom(DateTime $availableFrom = null): Product
+    public function setAvailableFrom(\DateTimeInterface $availableFrom = null): Product
     {
         $this->availableFrom = $availableFrom;
         
@@ -899,7 +899,7 @@ class Product extends DataModel
     /**
      * @return DateTime Optional available from date. Specify a date, upon when product can be purchased.
      */
-    public function getAvailableFrom(): ?DateTime
+    public function getAvailableFrom(): ?\DateTimeInterface
     {
         return $this->availableFrom;
     }
@@ -1057,11 +1057,11 @@ class Product extends DataModel
     }
     
     /**
-     * @param DateTime $creationDate Creation date
+     * @param \DateTimeInterface $creationDate Creation date
      * @return Product
      * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreationDate(DateTime $creationDate = null): Product
+    public function setCreationDate(\DateTimeInterface $creationDate = null): Product
     {
         $this->creationDate = $creationDate;
         
@@ -1071,7 +1071,7 @@ class Product extends DataModel
     /**
      * @return DateTime Creation date
      */
-    public function getCreationDate(): ?DateTime
+    public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creationDate;
     }
@@ -1438,11 +1438,11 @@ class Product extends DataModel
     }
     
     /**
-     * @param DateTime $minBestBeforeDate
+     * @param \DateTimeInterface $minBestBeforeDate
      * @return Product
      * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setMinBestBeforeDate(DateTime $minBestBeforeDate = null): Product
+    public function setMinBestBeforeDate(\DateTimeInterface $minBestBeforeDate = null): Product
     {
         $this->minBestBeforeDate = $minBestBeforeDate;
         
@@ -1452,7 +1452,7 @@ class Product extends DataModel
     /**
      * @return DateTime
      */
-    public function getMinBestBeforeDate(): ?DateTime
+    public function getMinBestBeforeDate(): ?\DateTimeInterface
     {
         return $this->minBestBeforeDate;
     }
@@ -1496,11 +1496,11 @@ class Product extends DataModel
     }
     
     /**
-     * @param DateTime $modified
+     * @param \DateTimeInterface $modified
      * @return Product
      * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setModified(DateTime $modified = null): Product
+    public function setModified(\DateTimeInterface $modified = null): Product
     {
         $this->modified = $modified;
         
@@ -1510,17 +1510,17 @@ class Product extends DataModel
     /**
      * @return DateTime
      */
-    public function getModified(): ?DateTime
+    public function getModified(): ?\DateTimeInterface
     {
         return $this->modified;
     }
     
     /**
-     * @param DateTime $newReleaseDate
+     * @param \DateTimeInterface $newReleaseDate
      * @return Product
      * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setNewReleaseDate(DateTime $newReleaseDate = null): Product
+    public function setNewReleaseDate(\DateTimeInterface $newReleaseDate = null): Product
     {
         $this->newReleaseDate = $newReleaseDate;
         
@@ -1530,17 +1530,17 @@ class Product extends DataModel
     /**
      * @return DateTime
      */
-    public function getNewReleaseDate(): ?DateTime
+    public function getNewReleaseDate(): ?\DateTimeInterface
     {
         return $this->newReleaseDate;
     }
     
     /**
-     * @param DateTime $nextAvailableInflowDate Contains the date of the next available inflow.
+     * @param \DateTimeInterface $nextAvailableInflowDate Contains the date of the next available inflow.
      * @return Product
      * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setNextAvailableInflowDate(DateTime $nextAvailableInflowDate = null): Product
+    public function setNextAvailableInflowDate(\DateTimeInterface $nextAvailableInflowDate = null): Product
     {
         $this->nextAvailableInflowDate = $nextAvailableInflowDate;
         
@@ -1550,7 +1550,7 @@ class Product extends DataModel
     /**
      * @return DateTime Contains the date of the next available inflow.
      */
-    public function getNextAvailableInflowDate(): ?DateTime
+    public function getNextAvailableInflowDate(): ?\DateTimeInterface
     {
         return $this->nextAvailableInflowDate;
     }

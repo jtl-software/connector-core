@@ -72,11 +72,11 @@ class DeliveryNoteItemInfo extends DataModel
     }
     
     /**
-     * @param DateTime $bestBefore
+     * @param \DateTimeInterface $bestBefore
      * @return DeliveryNoteItemInfo
      * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setBestBefore(DateTime $bestBefore = null): DeliveryNoteItemInfo
+    public function setBestBefore(\DateTimeInterface $bestBefore = null): DeliveryNoteItemInfo
     {
         $this->bestBefore = $bestBefore;
         
@@ -86,7 +86,7 @@ class DeliveryNoteItemInfo extends DataModel
     /**
      * @return DateTime
      */
-    public function getBestBefore(): ?DateTime
+    public function getBestBefore(): ?\DateTimeInterface
     {
         return $this->bestBefore;
     }
