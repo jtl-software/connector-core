@@ -25,7 +25,7 @@ final class SqliteSession implements \SessionHandlerInterface
      */
     private $_lifetime;
     
-    public function __construct(IDatabase $db, string $sessionId = null, string $sessionName = "jtlConnector")
+    public function __construct()
     {
         $dir = Path::combine(CONNECTOR_DIR, 'db');
         if (!is_dir($dir)) {

@@ -23,14 +23,12 @@ use jtl\Connector\Core\Rpc\Error;
 use jtl\Connector\Core\Http\Request;
 use jtl\Connector\Core\Http\Response;
 use jtl\Connector\Core\Config\Config;
-use jtl\Connector\Core\Session\AbstractSessionHandler;
 use jtl\Connector\Exception\JsonException;
 use jtl\Connector\Model\BoolResult;
 use jtl\Connector\Result\Action;
 use jtl\Connector\Core\Validator\Schema;
 use jtl\Connector\Core\Exception\SchemaException;
 use jtl\Connector\Core\Validator\ValidationException;
-use jtl\Connector\Database\Sqlite3;
 use jtl\Connector\Core\Utilities\RpcMethod;
 use jtl\Connector\Base\Connector;
 use jtl\Connector\Core\Logger\Logger;
@@ -627,7 +625,7 @@ class Application extends CoreApplication
     
         session_name($sessionName);
         if ($sessionId !== null) {
-            if ($this->check($sessionId)) {
+            if ($this->getSessionHandler()->check($sessionId)) {
                 session_id($sessionId);
             } else {
                 throw new SessionException("Session is invalid", -32000);
@@ -637,8 +635,6 @@ class Application extends CoreApplication
         session_set_save_handler($this->getSessionHandler());
     
         session_start();
-    
-        
     
         Logger::write(sprintf('Session started with id (%s)', session_id()), Logger::DEBUG, 'session');
     }
@@ -704,40 +700,6 @@ class Application extends CoreApplication
                 
                 $requestpacket->setParams($images);
             }
-            
-            /*
-             * OLD single Image
-            $image = $requestpacket->getParams();
-            if (!($image instanceof \jtl\Connector\Model\Image)) {
-                throw new ApplicationException('Image push must send a valid image entity');
-            }
-
-            if ($imagePath !== null) {
-
-                // Todo: seo filename pattern via connector settings
-
-                $image->setFilename($imagePath);
-                $requestpacket->setParams($image);
-            } else {
-                // Image Cloud Storage
-                if (strlen($image->getRemoteUrl()) > 0) {
-                    $imageData = file_get_contents($image->getRemoteUrl());
-                    if ($imageData === false) {
-                        throw new ApplicationException('Could not get any data from url: ' . $image->getRemoteUrl());
-                    }
-
-                    $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
-                    $fileName = pathinfo($path, PATHINFO_BASENAME);
-                    $imagePath = Path::combine(Temp::getDirectory(), uniqid() . "_{$fileName}");
-                    file_put_contents($imagePath, $imageData);
-
-                    $image->setFilename($imagePath);
-                    $requestpacket->setParams($image);
-                } else {
-                    throw new ApplicationException('Could not handle fileupload (no file was uploaded via HTTP POST?)');
-                }
-            }
-            */
         }
     }
     
@@ -780,7 +742,7 @@ class Application extends CoreApplication
      */
     public function setSessionHandler(\SessionHandlerInterface $sessionHandler): \SessionHandlerInterface
     {
-        return $this->sessionHandler;
+        return $this->$sessionHandler;
     }
     
     /**
