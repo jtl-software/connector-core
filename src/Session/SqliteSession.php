@@ -23,7 +23,9 @@ final class SqliteSession implements \SessionHandlerInterface
     /**
      * @var int
      */
-    private $_lifetime;
+    private $lifetime;
+    /** @var \jtl\Connector\Core\Database\Sqlite3 */
+    private $db;
     
     public function __construct()
     {
@@ -34,12 +36,13 @@ final class SqliteSession implements \SessionHandlerInterface
             }
         }
     
-        $this->_lifetime = ((int) ini_get('session.gc_maxlifetime') > 0) ? (int) ini_get('session.gc_maxlifetime') : 7200;
-        $this->_sessionId = session_id();
+        $this->lifetime = ((int) ini_get('session.gc_maxlifetime') > 0) ? (int) ini_get('session.gc_maxlifetime') : 7200;
         
         $sqlite3 = Sqlite3::getInstance();
         $sqlite3->connect(['location' => Path::combine($dir, 'connector.s3db')]);
         $sqlite3->check();
+        
+        $this->db = $sqlite3;
     }
     
     /**
@@ -50,9 +53,9 @@ final class SqliteSession implements \SessionHandlerInterface
      */
     public function check(string $sessionId)
     {
-        $sessionId = $this->_db->escapeString($sessionId);
+        $sessionId = $this->db->escapeString($sessionId);
         
-        $rows = $this->_db->query("SELECT sessionData
+        $rows = $this->db->query("SELECT sessionData
                                         FROM session
                                         WHERE sessionId = '{$sessionId}'
                                             AND sessionExpires >= " . time());
@@ -81,7 +84,7 @@ final class SqliteSession implements \SessionHandlerInterface
     {
         Logger::write(sprintf('Open session with savePath (%s) and sessionName (%s)', $savePath, $sessionName), Logger::DEBUG, 'session');
         
-        return $this->_db->isConnected();
+        return $this->db->isConnected();
     }
     
     /**
@@ -102,9 +105,9 @@ final class SqliteSession implements \SessionHandlerInterface
      */
     public function read($sessionId)
     {
-        $sessionId = $this->_db->escapeString($sessionId);
+        $sessionId = $this->db->escapeString($sessionId);
         
-        $rows = $this->_db->query("SELECT sessionData
+        $rows = $this->db->query("SELECT sessionData
 					        			FROM session
 					        			WHERE sessionId = '{$sessionId}'
                                             AND sessionExpires >= " . time());
@@ -130,18 +133,18 @@ final class SqliteSession implements \SessionHandlerInterface
      */
     public function write($sessionId, $sessionData)
     {
-        $sessionId = $this->_db->escapeString($sessionId);
+        $sessionId = $this->db->escapeString($sessionId);
         $sessionData = base64_encode($sessionData);
-        $newExpire = time() + $this->_lifetime;
+        $newExpire = time() + $this->lifetime;
         
-        $rows = $this->_db->query("SELECT sessionData
+        $rows = $this->db->query("SELECT sessionData
 									FROM session
 								    WHERE sessionId = '{$sessionId}'");
         
         Logger::write(sprintf('Write session with id (%s)', $sessionId), Logger::DEBUG, 'session');
         
         if ($rows !== null && isset($rows[0])) {
-            $stmt = $this->_db->prepare("UPDATE session SET sessionData=:data WHERE sessionId=:sessionid");
+            $stmt = $this->db->prepare("UPDATE session SET sessionData=:data WHERE sessionId=:sessionid");
             $stmt->bindValue(":data", $sessionData, SQLITE3_TEXT);
             $stmt->bindValue(":sessionid", $sessionId, SQLITE3_TEXT);
             
@@ -150,7 +153,7 @@ final class SqliteSession implements \SessionHandlerInterface
                 return true;
             }
         } else {
-            $stmt = $this->_db->prepare("INSERT INTO session (sessionId, sessionExpires, sessionData) VALUES(:sessionid, :expire, :data)");
+            $stmt = $this->db->prepare("INSERT INTO session (sessionId, sessionExpires, sessionData) VALUES(:sessionid, :expire, :data)");
             $stmt->bindValue(":sessionid", $sessionId, SQLITE3_TEXT);
             $stmt->bindValue(":expire", $newExpire, SQLITE3_INTEGER);
             $stmt->bindValue(":data", $sessionData, SQLITE3_TEXT);
@@ -168,25 +171,27 @@ final class SqliteSession implements \SessionHandlerInterface
      * Destroy Session
      *
      * @param $sessionId
+     * @return bool|\jtl\Connector\Core\Database\multitype|number|null
      */
     public function destroy($sessionId)
     {
-        $sessionId = $this->_db->escapeString($sessionId);
+        $sessionId = $this->db->escapeString($sessionId);
         
         Logger::write(sprintf('Destroy session with id (%s)', $sessionId), Logger::DEBUG, 'session');
         
-        return $this->_db->query("DELETE FROM session WHERE sessionId = '{$sessionId}'");
+        return $this->db->query("DELETE FROM session WHERE sessionId = '{$sessionId}'");
     }
     
     /**
      * Garbage Collector
      *
      * @param $maxLifetime
+     * @return bool|\jtl\Connector\Core\Database\multitype|number|null
      */
     public function gc($maxLifetime)
     {
         Logger::write(sprintf('GC session with maxLifetime (%s)', $maxLifetime), Logger::DEBUG, 'session');
         
-        return $this->_db->query("DELETE FROM session WHERE sessionExpires < " . time());
+        return $this->db->query("DELETE FROM session WHERE sessionExpires < " . time());
     }
 }
