@@ -3,7 +3,6 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Mapper
  */
-
 namespace jtl\Connector\Mapper;
 
 interface IPrimaryKeyMapper
@@ -11,55 +10,47 @@ interface IPrimaryKeyMapper
     /**
      * Host ID getter
      *
-     * @param string $endpointId
      * @param integer $type
+     * @param string $endpointId
      * @return integer|null
      */
-    public function getHostId(string $endpointId, int $type): int;
-    
+    public function getHostId(int $type, string $endpointId): ?int;
+
     /**
      * Endpoint ID getter
      *
-     * @param integer $hostId
      * @param integer $type
+     * @param integer $hostId
      * @param string $relationType
      * @return string|null
      */
-    public function getEndpointId(int $hostId, int $type, string $relationType = null): string;
-    
+    public function getEndpointId(int $type, int $hostId, string $relationType = null): ?string;
+
     /**
      * Save link to database
      *
+     * @param integer $type
      * @param string $endpointId
      * @param integer $hostId
-     * @param integer $type
      * @return boolean
      */
-    public function save(string $endpointId, int $hostId, int $type): bool;
-    
-    //public function update($endpointId = null, $hostId = null, $type);
-    
+    public function save(int $type, string $endpointId, int $hostId): bool;
+
     /**
      * Delete link from database
      *
+     * @param integer $type
      * @param string $endpointId
      * @param integer $hostId
-     * @param integer $type
      * @return boolean
      */
-    public function delete(string $endpointId = null, int $hostId = null, int $type): bool;
+    public function delete(int $type, string $endpointId = null, int $hostId = null): bool;
     
     /**
      * Clears the entire link table
      *
+     * @param integer|null $type
      * @return boolean
      */
-    public function clear(): bool;
-    
-    /**
-     * Garbage Collect the entire link table
-     *
-     * @return boolean
-     */
-    public function gc(): bool;
+    public function clear(int $type = null): bool;
 }
