@@ -14,7 +14,7 @@ interface IPrimaryKeyMapper
      * @param string $endpointId
      * @return integer|null
      */
-    public function getHostId($type, $endpointId);
+    public function getHostId(int $type, string $endpointId): ?int;
 
     /**
      * Endpoint ID getter
@@ -24,7 +24,7 @@ interface IPrimaryKeyMapper
      * @param string $relationType
      * @return string|null
      */
-    public function getEndpointId($type, $hostId, $relationType = null);
+    public function getEndpointId(int $type, int $hostId, string $relationType = null): ?string;
 
     /**
      * Save link to database
@@ -34,7 +34,7 @@ interface IPrimaryKeyMapper
      * @param integer $hostId
      * @return boolean
      */
-    public function save($type, $endpointId, $hostId);
+    public function save(int $type, string $endpointId, int $hostId): bool;
 
     /**
      * Delete link from database
@@ -44,13 +44,13 @@ interface IPrimaryKeyMapper
      * @param integer $hostId
      * @return boolean
      */
-    public function delete($type, $endpointId = null, $hostId = null);
+    public function delete(int $type, string $endpointId = null, int $hostId = null): bool;
     
     /**
      * Clears the entire link table
      *
-     * @param null $type
+     * @param integer|null $type
      * @return boolean
      */
-    public function clear($type = null);
+    public function clear(int $type = null): bool;
 }
