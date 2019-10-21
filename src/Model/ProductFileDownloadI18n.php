@@ -7,91 +7,94 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductFileDownloadI18n extends DataModel
 {
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("description")
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("languageISO")
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
-
+    
+    
     /**
-     * @param string $description 
-     * @return \jtl\Connector\Model\ProductFileDownloadI18n
+     * @param string $description
+     * @return ProductFileDownloadI18n
      */
-    public function setDescription($description)
+    public function setDescription(string $description): ProductFileDownloadI18n
     {
-        return $this->setProperty('description', $description, 'string');
+        $this->description = $description;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
-
+    
     /**
-     * @param string $languageISO 
-     * @return \jtl\Connector\Model\ProductFileDownloadI18n
+     * @param string $languageISO
+     * @return ProductFileDownloadI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): ProductFileDownloadI18n
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
-
+    
     /**
-     * @param string $name 
-     * @return \jtl\Connector\Model\ProductFileDownloadI18n
+     * @param string $name
+     * @return ProductFileDownloadI18n
      */
-    public function setName($name)
+    public function setName(string $name): ProductFileDownloadI18n
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

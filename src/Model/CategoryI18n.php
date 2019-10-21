@@ -7,7 +7,6 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -94,12 +93,13 @@ class CategoryI18n extends DataModel
     
     /**
      * @param Identity $categoryId Reference to category
-     * @return \jtl\Connector\Model\CategoryI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CategoryI18n
      */
-    public function setCategoryId(Identity $categoryId): Identity
+    public function setCategoryId(Identity $categoryId): CategoryI18n
     {
-        return $this->setProperty('categoryId', $categoryId, 'Identity');
+        $this->categoryId = $categoryId;
+        
+        return $this;
     }
     
     /**
@@ -112,11 +112,13 @@ class CategoryI18n extends DataModel
     
     /**
      * @param string $description Optional localized Long Description
-     * @return \jtl\Connector\Model\CategoryI18n
+     * @return CategoryI18n
      */
     public function setDescription(string $description): CategoryI18n
     {
-        return $this->setProperty('description', $description, 'string');
+        $this->description = $description;
+        
+        return $this;
     }
     
     /**
@@ -129,11 +131,14 @@ class CategoryI18n extends DataModel
     
     /**
      * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\CategoryI18n
+     * @return CategoryI18n
      */
-    public function setLanguageISO($languageISO): CategoryI18n
-    {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+    public function setLanguageISO(
+        string $languageISO
+    ): CategoryI18n {
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
     
     /**
@@ -146,11 +151,13 @@ class CategoryI18n extends DataModel
     
     /**
      * @param string $metaDescription Optional localized  short description used for meta tag description
-     * @return \jtl\Connector\Model\CategoryI18n
+     * @return CategoryI18n
      */
     public function setMetaDescription(string $metaDescription): CategoryI18n
     {
-        return $this->setProperty('metaDescription', $metaDescription, 'string');
+        $this->metaDescription = $metaDescription;
+        
+        return $this;
     }
     
     /**
@@ -163,11 +170,13 @@ class CategoryI18n extends DataModel
     
     /**
      * @param string $metaKeywords Optional localized meta tag keywords value
-     * @return \jtl\Connector\Model\CategoryI18n
+     * @return CategoryI18n
      */
     public function setMetaKeywords(string $metaKeywords): CategoryI18n
     {
-        return $this->setProperty('metaKeywords', $metaKeywords, 'string');
+        $this->metaKeywords = $metaKeywords;
+        
+        return $this;
     }
     
     /**
@@ -180,11 +189,13 @@ class CategoryI18n extends DataModel
     
     /**
      * @param string $name Localized category name
-     * @return \jtl\Connector\Model\CategoryI18n
+     * @return CategoryI18n
      */
     public function setName(string $name): CategoryI18n
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
     
     /**
@@ -197,11 +208,13 @@ class CategoryI18n extends DataModel
     
     /**
      * @param string $titleTag Optional localized title tag value
-     * @return \jtl\Connector\Model\CategoryI18n
+     * @return CategoryI18n
      */
     public function setTitleTag(string $titleTag): CategoryI18n
     {
-        return $this->setProperty('titleTag', $titleTag, 'string');
+        $this->titleTag = $titleTag;
+        
+        return $this;
     }
     
     /**
@@ -214,11 +227,13 @@ class CategoryI18n extends DataModel
     
     /**
      * @param string $urlPath Optional localized category URL
-     * @return \jtl\Connector\Model\CategoryI18n
+     * @return CategoryI18n
      */
     public function setUrlPath(string $urlPath): CategoryI18n
     {
-        return $this->setProperty('urlPath', $urlPath, 'string');
+        $this->urlPath = $urlPath;
+        
+        return $this;
     }
     
     /**

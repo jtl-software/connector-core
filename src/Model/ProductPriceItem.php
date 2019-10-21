@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductPriceItem extends DataModel
@@ -28,7 +27,7 @@ class ProductPriceItem extends DataModel
      * @Serializer\Accessor(getter="getProductPriceId",setter="setProductPriceId")
      */
     protected $productPriceId = null;
-
+    
     /**
      * @var double Price value (net)
      * @Serializer\Type("double")
@@ -36,15 +35,15 @@ class ProductPriceItem extends DataModel
      * @Serializer\Accessor(getter="getNetPrice",setter="setNetPrice")
      */
     protected $netPrice = 0.0;
-
+    
     /**
-     * @var integer Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
+     * @var integer Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items.
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("quantity")
      * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
      */
     protected $quantity = 0;
-
+    
     /**
      * Constructor
      */
@@ -52,55 +51,61 @@ class ProductPriceItem extends DataModel
     {
         $this->productPriceId = new Identity();
     }
-
+    
     /**
      * @param Identity $productPriceId Reference to ProductPrice
-     * @return \jtl\Connector\Model\ProductPriceItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductPriceItem
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductPriceId(Identity $productPriceId)
+    public function setProductPriceId(Identity $productPriceId): ProductPriceItem
     {
-        return $this->setProperty('productPriceId', $productPriceId, 'Identity');
+        $this->productPriceId = $productPriceId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to ProductPrice
      */
-    public function getProductPriceId()
+    public function getProductPriceId(): Identity
     {
         return $this->productPriceId;
     }
-
+    
     /**
      * @param double $netPrice Price value (net)
-     * @return \jtl\Connector\Model\ProductPriceItem
+     * @return ProductPriceItem
      */
-    public function setNetPrice($netPrice)
+    public function setNetPrice(float $netPrice): ProductPriceItem
     {
-        return $this->setProperty('netPrice', $netPrice, 'double');
+        $this->netPrice = $netPrice;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Price value (net)
      */
-    public function getNetPrice()
+    public function getNetPrice(): float
     {
         return $this->netPrice;
     }
-
+    
     /**
-     * @param integer $quantity Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
-     * @return \jtl\Connector\Model\ProductPriceItem
+     * @param integer $quantity Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items.
+     * @return ProductPriceItem
      */
-    public function setQuantity($quantity)
+    public function setQuantity(int $quantity): ProductPriceItem
     {
-        return $this->setProperty('quantity', $quantity, 'integer');
+        $this->quantity = $quantity;
+        
+        return $this;
     }
-
+    
     /**
-     * @return integer Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
+     * @return float Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items.
      */
-    public function getQuantity()
+    public function getQuantity(): float
     {
         return $this->quantity;
     }

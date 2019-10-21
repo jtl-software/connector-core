@@ -7,16 +7,15 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Specific value properties to define a new specificValue with a sort number. 
+ * Specific value properties to define a new specificValue with a sort number.
  *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class SpecificValue extends DataModel
@@ -28,7 +27,7 @@ class SpecificValue extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var Identity Reference to specificId
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class SpecificValue extends DataModel
      * @Serializer\Accessor(getter="getSpecificId",setter="setSpecificId")
      */
     protected $specificId = null;
-
+    
     /**
      * @var integer Optional sort number
      * @Serializer\Type("integer")
@@ -44,15 +43,15 @@ class SpecificValue extends DataModel
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
-
+    
     /**
-     * @var \jtl\Connector\Model\SpecificValueI18n[]
+     * @var SpecificValueI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\SpecificValueI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
-
+    protected $i18ns = [];
+    
     /**
      * Constructor
      */
@@ -61,17 +60,19 @@ class SpecificValue extends DataModel
         $this->id = new Identity();
         $this->specificId = new Identity();
     }
-
+    
     /**
      * @param Identity $id Unique specificValue id
-     * @return \jtl\Connector\Model\SpecificValue
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return SpecificValue
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): SpecificValue
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique specificValue id
      */
@@ -79,76 +80,83 @@ class SpecificValue extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param Identity $specificId Reference to specificId
-     * @return \jtl\Connector\Model\SpecificValue
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return SpecificValue
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setSpecificId(Identity $specificId)
+    public function setSpecificId(Identity $specificId): SpecificValue
     {
-        return $this->setProperty('specificId', $specificId, 'Identity');
+        $this->specificId = $specificId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to specificId
      */
-    public function getSpecificId()
+    public function getSpecificId(): Identity
     {
         return $this->specificId;
     }
-
+    
     /**
      * @param integer $sort Optional sort number
-     * @return \jtl\Connector\Model\SpecificValue
+     * @return SpecificValue
      */
-    public function setSort($sort)
+    public function setSort(int $sort): SpecificValue
     {
-        return $this->setProperty('sort', $sort, 'integer');
+        $this->sort = $sort;
+        
+        return $this;
     }
-
+    
     /**
      * @return integer Optional sort number
      */
-    public function getSort()
+    public function getSort(): int
     {
         return $this->sort;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\SpecificValueI18n $i18n
-     * @return \jtl\Connector\Model\SpecificValue
+     * @param SpecificValueI18n $i18n
+     * @return SpecificValue
      */
-    public function addI18n(\jtl\Connector\Model\SpecificValueI18n $i18n)
+    public function addI18n(SpecificValueI18n $i18n): SpecificValue
     {
         $this->i18ns[] = $i18n;
+        
         return $this;
     }
     
     /**
      * @param array $i18ns
-     * @return \jtl\Connector\Model\SpecificValue
+     * @return SpecificValue
      */
-    public function setI18ns(array $i18ns)
+    public function setI18ns(array $i18ns): SpecificValue
     {
         $this->i18ns = $i18ns;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\SpecificValueI18n[]
+     * @return SpecificValueI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\SpecificValue
+     * @return SpecificValue
      */
-    public function clearI18ns()
+    public function clearI18ns(): SpecificValue
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
+        
         return $this;
     }
 }

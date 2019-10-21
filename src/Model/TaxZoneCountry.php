@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class TaxZoneCountry extends DataModel
@@ -28,7 +27,7 @@ class TaxZoneCountry extends DataModel
      * @Serializer\Accessor(getter="getTaxZoneId",setter="setTaxZoneId")
      */
     protected $taxZoneId = null;
-
+    
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class TaxZoneCountry extends DataModel
      * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
      */
     protected $countryIso = '';
-
+    
     /**
      * Constructor
      */
@@ -44,38 +43,42 @@ class TaxZoneCountry extends DataModel
     {
         $this->taxZoneId = new Identity();
     }
-
+    
     /**
      * @param Identity $taxZoneId Reference to taxZone
-     * @return \jtl\Connector\Model\TaxZoneCountry
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return TaxZoneCountry
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setTaxZoneId(Identity $taxZoneId)
+    public function setTaxZoneId(Identity $taxZoneId): TaxZoneCountry
     {
-        return $this->setProperty('taxZoneId', $taxZoneId, 'Identity');
+        $this->taxZoneId = $taxZoneId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to taxZone
      */
-    public function getTaxZoneId()
+    public function getTaxZoneId(): Identity
     {
         return $this->taxZoneId;
     }
-
+    
     /**
      * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
-     * @return \jtl\Connector\Model\TaxZoneCountry
+     * @return TaxZoneCountry
      */
-    public function setCountryIso($countryIso)
+    public function setCountryIso(string $countryIso): TaxZoneCountry
     {
-        return $this->setProperty('countryIso', $countryIso, 'string');
+        $this->countryIso = $countryIso;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Country ISO 3166-2 (2 letter Uppercase)
      */
-    public function getCountryIso()
+    public function getCountryIso(): string
     {
         return $this->countryIso;
     }

@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductVariationValueExtraCharge extends DataModel
@@ -28,7 +27,7 @@ class ProductVariationValueExtraCharge extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-
+    
     /**
      * @var Identity Reference to productVariationValue
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class ProductVariationValueExtraCharge extends DataModel
      * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
      */
     protected $productVariationValueId = null;
-
+    
     /**
      * @var double Extra charge (net)
      * @Serializer\Type("double")
@@ -44,7 +43,7 @@ class ProductVariationValueExtraCharge extends DataModel
      * @Serializer\Accessor(getter="getExtraChargeNet",setter="setExtraChargeNet")
      */
     protected $extraChargeNet = 0.0;
-
+    
     /**
      * Constructor
      */
@@ -53,56 +52,62 @@ class ProductVariationValueExtraCharge extends DataModel
         $this->customerGroupId = new Identity();
         $this->productVariationValueId = new Identity();
     }
-
+    
     /**
      * @param Identity $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductVariationValueExtraCharge
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerGroupId(Identity $customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId): ProductVariationValueExtraCharge
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        $this->customerGroupId = $customerGroupId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to customerGroup
      */
-    public function getCustomerGroupId()
+    public function getCustomerGroupId(): Identity
     {
         return $this->customerGroupId;
     }
-
+    
     /**
      * @param Identity $productVariationValueId Reference to productVariationValue
-     * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductVariationValueExtraCharge
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductVariationValueId(Identity $productVariationValueId)
+    public function setProductVariationValueId(Identity $productVariationValueId): ProductVariationValueExtraCharge
     {
-        return $this->setProperty('productVariationValueId', $productVariationValueId, 'Identity');
+        $this->productVariationValueId = $productVariationValueId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to productVariationValue
      */
-    public function getProductVariationValueId()
+    public function getProductVariationValueId(): Identity
     {
         return $this->productVariationValueId;
     }
-
+    
     /**
      * @param double $extraChargeNet Extra charge (net)
-     * @return \jtl\Connector\Model\ProductVariationValueExtraCharge
+     * @return ProductVariationValueExtraCharge
      */
-    public function setExtraChargeNet($extraChargeNet)
+    public function setExtraChargeNet(float $extraChargeNet): ProductVariationValueExtraCharge
     {
-        return $this->setProperty('extraChargeNet', $extraChargeNet, 'double');
+        $this->extraChargeNet = $extraChargeNet;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Extra charge (net)
      */
-    public function getExtraChargeNet()
+    public function getExtraChargeNet(): float
     {
         return $this->extraChargeNet;
     }

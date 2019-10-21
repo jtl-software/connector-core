@@ -7,16 +7,13 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
-use \jtl\Connector\Model\Identity;
 
 /**
- *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductChecksum extends Checksum
@@ -25,39 +22,39 @@ class ProductChecksum extends Checksum
      * @var int - Checksum used to check variations for change
      */
     const TYPE_VARIATION = 1;
-
+    
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("foreignKey")
      * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
      */
     protected $foreignKey = null;
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("endpoint")
      * @Serializer\Accessor(getter="getEndpoint",setter="setEndpoint")
      */
     protected $endpoint = '';
-
+    
     /**
-     * @var boolean 
+     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("hasChanged")
      * @Serializer\Accessor(getter="hasChanged",setter="setHasChanged")
      */
     protected $hasChanged = false;
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("host")
      * @Serializer\Accessor(getter="getHost",setter="setHost")
      */
     protected $host = '';
-
+    
     /**
      * @var integer
      * @Serializer\Type("integer")
@@ -65,101 +62,111 @@ class ProductChecksum extends Checksum
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
     protected $type = self::TYPE_VARIATION;
-
+    
     /**
-     * @param Identity $foreignKey 
-     * @return \jtl\Connector\Model\ProductChecksum
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @param Identity $foreignKey
+     * @return ProductChecksum
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setForeignKey(Identity $foreignKey)
+    public function setForeignKey(Identity $foreignKey): ProductChecksum
     {
-        return $this->setProperty('foreignKey', $foreignKey, 'Identity');
+        $this->foreignKey = $foreignKey;
+        
+        return $this;
     }
-
+    
     /**
-     * @return Identity 
+     * @return Identity
      */
-    public function getForeignKey()
+    public function getForeignKey(): Identity
     {
         return $this->foreignKey;
     }
-
+    
     /**
-     * @param string $endpoint 
-     * @return \jtl\Connector\Model\ProductChecksum
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @param string $endpoint
+     * @return ProductChecksum
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setEndpoint($endpoint)
+    public function setEndpoint(string $endpoint): ProductChecksum
     {
-        return $this->setProperty('endpoint', $endpoint, 'string');
+        $this->endpoint = $endpoint;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
-    public function getEndpoint()
+    public function getEndpoint(): string
     {
         return $this->endpoint;
     }
-
+    
     /**
-     * @param boolean $hasChanged 
-     * @return \jtl\Connector\Model\ProductChecksum
-     * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
+     * @param boolean $hasChanged
+     * @return ProductChecksum
+     * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setHasChanged($hasChanged)
+    public function setHasChanged(bool $hasChanged): ProductChecksum
     {
-        return $this->setProperty('hasChanged', $hasChanged, 'boolean');
+        $this->hasChanged = $hasChanged;
+        
+        return $this;
     }
-
+    
     /**
-     * @return boolean 
+     * @return boolean
      */
-    public function hasChanged()
-    {
-        return $this->hasChanged;
-    }
-
-    /**
-     * @return boolean 
-     */
-    public function getHasChanged()
+    public function hasChanged(): bool
     {
         return $this->hasChanged;
     }
-
+    
     /**
-     * @param string $host 
-     * @return \jtl\Connector\Model\ProductChecksum
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @return boolean
      */
-    public function setHost($host)
+    public function getHasChanged(): bool
     {
-        return $this->setProperty('host', $host, 'string');
+        return $this->hasChanged;
     }
-
+    
     /**
-     * @return string 
+     * @param string $host
+     * @return ProductChecksum
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function getHost()
+    public function setHost(string $host): ProductChecksum
+    {
+        $this->host = $host;
+        
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getHost(): string
     {
         return $this->host;
     }
-
+    
     /**
      * @param integer $type
-     * @return \jtl\Connector\Model\ProductChecksum
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
+     * @return ProductChecksum
+     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setType($type)
+    public function setType(int $type): ProductChecksum
     {
-        return $this->setProperty('type', $type, 'integer');
+        $this->type = $type;
+        
+        return $this;
     }
-
+    
     /**
      * @return integer
      */
-    public function getType()
+    public function getType(): int
     {
         return $this->type;
     }

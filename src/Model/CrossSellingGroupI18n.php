@@ -7,27 +7,25 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class CrossSellingGroupI18n extends DataModel
 {
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("crossSellingGroupId")
      * @Serializer\Accessor(getter="getCrossSellingGroupId",setter="setCrossSellingGroupId")
      */
     protected $crossSellingGroupId = null;
-
+    
     /**
      * @var string Optional localized description
      * @Serializer\Type("string")
@@ -35,7 +33,7 @@ class CrossSellingGroupI18n extends DataModel
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
-
+    
     /**
      * @var string Locale
      * @Serializer\Type("string")
@@ -43,7 +41,7 @@ class CrossSellingGroupI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
      * @var string Localized name
      * @Serializer\Type("string")
@@ -51,7 +49,7 @@ class CrossSellingGroupI18n extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * Constructor
      */
@@ -59,72 +57,80 @@ class CrossSellingGroupI18n extends DataModel
     {
         $this->crossSellingGroupId = new Identity();
     }
-
+    
     /**
-     * @param Identity $crossSellingGroupId 
-     * @return \jtl\Connector\Model\CrossSellingGroupI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @param Identity $crossSellingGroupId
+     * @return CrossSellingGroupI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCrossSellingGroupId(Identity $crossSellingGroupId)
+    public function setCrossSellingGroupId(Identity $crossSellingGroupId): CrossSellingGroupI18n
     {
-        return $this->setProperty('crossSellingGroupId', $crossSellingGroupId, 'Identity');
+        $this->crossSellingGroupId = $crossSellingGroupId;
+        
+        return $this;
     }
-
+    
     /**
-     * @return Identity 
+     * @return Identity
      */
-    public function getCrossSellingGroupId()
+    public function getCrossSellingGroupId(): Identity
     {
         return $this->crossSellingGroupId;
     }
-
+    
     /**
      * @param string $description Optional localized description
-     * @return \jtl\Connector\Model\CrossSellingGroupI18n
+     * @return CrossSellingGroupI18n
      */
-    public function setDescription($description)
+    public function setDescription(string $description): CrossSellingGroupI18n
     {
-        return $this->setProperty('description', $description, 'string');
+        $this->description = $description;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional localized description
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
-
+    
     /**
      * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\CrossSellingGroupI18n
+     * @return CrossSellingGroupI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): CrossSellingGroupI18n
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Locale
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
-
+    
     /**
      * @param string $name Localized name
-     * @return \jtl\Connector\Model\CrossSellingGroupI18n
+     * @return CrossSellingGroupI18n
      */
-    public function setName($name)
+    public function setName(string $name): CrossSellingGroupI18n
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Localized name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

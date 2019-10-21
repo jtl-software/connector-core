@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ConfigGroupI18n extends DataModel
@@ -28,7 +27,7 @@ class ConfigGroupI18n extends DataModel
      * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
      */
     protected $configGroupId = null;
-
+    
     /**
      * @var string Optional description (HTML)
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class ConfigGroupI18n extends DataModel
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
-
+    
     /**
      * @var string Locale
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class ConfigGroupI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
      * @var string Config group name
      * @Serializer\Type("string")
@@ -52,7 +51,7 @@ class ConfigGroupI18n extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * Constructor
      */
@@ -60,72 +59,81 @@ class ConfigGroupI18n extends DataModel
     {
         $this->configGroupId = new Identity();
     }
-
+    
     /**
      * @param Identity $configGroupId Reference to configGroup
-     * @return \jtl\Connector\Model\ConfigGroupI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ConfigGroupI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setConfigGroupId(Identity $configGroupId)
+    public function setConfigGroupId(Identity $configGroupId): ConfigGroupI18n
     {
-        return $this->setProperty('configGroupId', $configGroupId, 'Identity');
+        $this->configGroupId = $configGroupId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to configGroup
      */
-    public function getConfigGroupId()
+    public function getConfigGroupId(): Identity
     {
         return $this->configGroupId;
     }
-
+    
     /**
      * @param string $description Optional description (HTML)
-     * @return \jtl\Connector\Model\ConfigGroupI18n
+     * @return ConfigGroupI18n
      */
-    public function setDescription($description)
+    public function setDescription(string $description): string
     {
-        return $this->setProperty('description', $description, 'string');
+        $this->description = $description;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional description (HTML)
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
-
+    
     /**
      * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\ConfigGroupI18n
+     * @return ConfigGroupI18n
      */
-    public function setLanguageISO($languageISO)
-    {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+    public function setLanguageISO(
+        string $languageISO
+    ): string {
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Locale
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
-
+    
     /**
      * @param string $name Config group name
-     * @return \jtl\Connector\Model\ConfigGroupI18n
+     * @return ConfigGroupI18n
      */
-    public function setName($name)
+    public function setName(string $name): string
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Config group name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

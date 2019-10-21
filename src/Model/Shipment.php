@@ -8,6 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +17,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class Shipment extends DataModel
@@ -28,7 +28,7 @@ class Shipment extends DataModel
      * @Serializer\Accessor(getter="getDeliveryNoteId",setter="setDeliveryNoteId")
      */
     protected $deliveryNoteId = null;
-
+    
     /**
      * @var Identity Unique shipment id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +36,7 @@ class Shipment extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var string Carrier name
      * @Serializer\Type("string")
@@ -44,7 +44,7 @@ class Shipment extends DataModel
      * @Serializer\Accessor(getter="getCarrierName",setter="setCarrierName")
      */
     protected $carrierName = '';
-
+    
     /**
      * @var DateTime Creation date
      * @Serializer\Type("DateTime")
@@ -52,7 +52,7 @@ class Shipment extends DataModel
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
     protected $creationDate = null;
-
+    
     /**
      * @var string Optional Identcode
      * @Serializer\Type("string")
@@ -60,7 +60,7 @@ class Shipment extends DataModel
      * @Serializer\Accessor(getter="getIdentCode",setter="setIdentCode")
      */
     protected $identCode = '';
-
+    
     /**
      * @var string Optional shipment note
      * @Serializer\Type("string")
@@ -68,15 +68,15 @@ class Shipment extends DataModel
      * @Serializer\Accessor(getter="getNote",setter="setNote")
      */
     protected $note = '';
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("trackingUrl")
      * @Serializer\Accessor(getter="getTrackingUrl",setter="setTrackingUrl")
      */
     protected $trackingUrl = '';
-
+    
     /**
      * Constructor
      */
@@ -85,35 +85,39 @@ class Shipment extends DataModel
         $this->id = new Identity();
         $this->deliveryNoteId = new Identity();
     }
-
+    
     /**
      * @param Identity $deliveryNoteId Reference to deliveryNote
-     * @return \jtl\Connector\Model\Shipment
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Shipment
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setDeliveryNoteId(Identity $deliveryNoteId)
+    public function setDeliveryNoteId(Identity $deliveryNoteId): Shipment
     {
-        return $this->setProperty('deliveryNoteId', $deliveryNoteId, 'Identity');
+        $this->deliveryNoteId = $deliveryNoteId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to deliveryNote
      */
-    public function getDeliveryNoteId()
+    public function getDeliveryNoteId(): Identity
     {
         return $this->deliveryNoteId;
     }
-
+    
     /**
      * @param Identity $id Unique shipment id
-     * @return \jtl\Connector\Model\Shipment
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Shipment
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): Shipment
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique shipment id
      */
@@ -121,89 +125,99 @@ class Shipment extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param string $carrierName Carrier name
-     * @return \jtl\Connector\Model\Shipment
+     * @return Shipment
      */
-    public function setCarrierName($carrierName)
+    public function setCarrierName(string $carrierName): Shipment
     {
-        return $this->setProperty('carrierName', $carrierName, 'string');
+        $this->carrierName = $carrierName;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Carrier name
      */
-    public function getCarrierName()
+    public function getCarrierName(): string
     {
         return $this->carrierName;
     }
-
+    
     /**
-     * @param DateTime $creationDate Creation date
-     * @return \jtl\Connector\Model\Shipment
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     * @param \DateTimeInterface $creationDate Creation date
+     * @return Shipment
+     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreationDate(DateTime $creationDate = null)
+    public function setCreationDate(\DateTimeInterface $creationDate = null): Shipment
     {
-        return $this->setProperty('creationDate', $creationDate, 'DateTime');
+        $this->creationDate = $creationDate;
+        
+        return $this;
     }
-
+    
     /**
      * @return DateTime Creation date
      */
-    public function getCreationDate()
+    public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creationDate;
     }
-
+    
     /**
      * @param string $identCode Optional Identcode
-     * @return \jtl\Connector\Model\Shipment
+     * @return Shipment
      */
-    public function setIdentCode($identCode)
+    public function setIdentCode(string $identCode): Shipment
     {
-        return $this->setProperty('identCode', $identCode, 'string');
+        $this->identCode = $identCode;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional Identcode
      */
-    public function getIdentCode()
+    public function getIdentCode(): string
     {
         return $this->identCode;
     }
-
+    
     /**
      * @param string $note Optional shipment note
-     * @return \jtl\Connector\Model\Shipment
+     * @return Shipment
      */
-    public function setNote($note)
+    public function setNote(string $note): Shipment
     {
-        return $this->setProperty('note', $note, 'string');
+        $this->note = $note;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional shipment note
      */
-    public function getNote()
+    public function getNote(): string
     {
         return $this->note;
     }
-
+    
     /**
-     * @param string $trackingUrl 
-     * @return \jtl\Connector\Model\Shipment
+     * @param string $trackingUrl
+     * @return Shipment
      */
-    public function setTrackingUrl($trackingUrl)
+    public function setTrackingUrl(string $trackingUrl): Shipment
     {
-        return $this->setProperty('trackingUrl', $trackingUrl, 'string');
+        $this->trackingUrl = $trackingUrl;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
-    public function getTrackingUrl()
+    public function getTrackingUrl(): string
     {
         return $this->trackingUrl;
     }

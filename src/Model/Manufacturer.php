@@ -7,16 +7,15 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Manufacturer / brand properties. 
+ * Manufacturer / brand properties.
  *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class Manufacturer extends DataModel
@@ -28,7 +27,7 @@ class Manufacturer extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var string Manufacturer (brand) name
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class Manufacturer extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * @var integer Optional sort number
      * @Serializer\Type("integer")
@@ -44,7 +43,7 @@ class Manufacturer extends DataModel
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
-
+    
     /**
      * @var string Optional url path e.g. 'Products-manufactured-by-X'
      * @Serializer\Type("string")
@@ -52,7 +51,7 @@ class Manufacturer extends DataModel
      * @Serializer\Accessor(getter="getUrlPath",setter="setUrlPath")
      */
     protected $urlPath = '';
-
+    
     /**
      * @var string Optional manufacturer website URL
      * @Serializer\Type("string")
@@ -60,15 +59,15 @@ class Manufacturer extends DataModel
      * @Serializer\Accessor(getter="getWebsiteUrl",setter="setWebsiteUrl")
      */
     protected $websiteUrl = '';
-
+    
     /**
-     * @var \jtl\Connector\Model\ManufacturerI18n[]
+     * @var ManufacturerI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ManufacturerI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
-
+    protected $i18ns = [];
+    
     /**
      * Constructor
      */
@@ -76,17 +75,19 @@ class Manufacturer extends DataModel
     {
         $this->id = new Identity();
     }
-
+    
     /**
      * @param Identity $id Unique manufacturer id
-     * @return \jtl\Connector\Model\Manufacturer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Manufacturer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): Manufacturer
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique manufacturer id
      */
@@ -94,109 +95,120 @@ class Manufacturer extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param string $name Manufacturer (brand) name
-     * @return \jtl\Connector\Model\Manufacturer
+     * @return Manufacturer
      */
-    public function setName($name)
+    public function setName(string $name): Manufacturer
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Manufacturer (brand) name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
-
+    
     /**
      * @param integer $sort Optional sort number
-     * @return \jtl\Connector\Model\Manufacturer
+     * @return Manufacturer
      */
-    public function setSort($sort)
+    public function setSort(int $sort): Manufacturer
     {
-        return $this->setProperty('sort', $sort, 'integer');
+        $this->sort = $sort;
+        
+        return $this;
     }
-
+    
     /**
      * @return integer Optional sort number
      */
-    public function getSort()
+    public function getSort(): int
     {
         return $this->sort;
     }
-
+    
     /**
      * @param string $urlPath Optional url path e.g. 'Products-manufactured-by-X'
-     * @return \jtl\Connector\Model\Manufacturer
+     * @return Manufacturer
      */
-    public function setUrlPath($urlPath)
+    public function setUrlPath(string $urlPath): Manufacturer
     {
-        return $this->setProperty('urlPath', $urlPath, 'string');
+        $this->urlPath = $urlPath;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional url path e.g. 'Products-manufactured-by-X'
      */
-    public function getUrlPath()
+    public function getUrlPath(): string
     {
         return $this->urlPath;
     }
-
+    
     /**
      * @param string $websiteUrl Optional manufacturer website URL
-     * @return \jtl\Connector\Model\Manufacturer
+     * @return Manufacturer
      */
-    public function setWebsiteUrl($websiteUrl)
+    public function setWebsiteUrl(string $websiteUrl): Manufacturer
     {
-        return $this->setProperty('websiteUrl', $websiteUrl, 'string');
+        $this->websiteUrl = $websiteUrl;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional manufacturer website URL
      */
-    public function getWebsiteUrl()
+    public function getWebsiteUrl(): string
     {
         return $this->websiteUrl;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ManufacturerI18n $i18n
-     * @return \jtl\Connector\Model\Manufacturer
+     * @param ManufacturerI18n $i18n
+     * @return Manufacturer
      */
-    public function addI18n(\jtl\Connector\Model\ManufacturerI18n $i18n)
+    public function addI18n(ManufacturerI18n $i18n): Manufacturer
     {
         $this->i18ns[] = $i18n;
+        
         return $this;
     }
     
     /**
      * @param array $i18ns
-     * @return \jtl\Connector\Model\Manufacturer
+     * @return Manufacturer
      */
-    public function setI18ns(array $i18ns)
+    public function setI18ns(array $i18ns): Manufacturer
     {
         $this->i18ns = $i18ns;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ManufacturerI18n[]
+     * @return ManufacturerI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Manufacturer
+     * @return Manufacturer
      */
-    public function clearI18ns()
+    public function clearI18ns(): Manufacturer
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
+        
         return $this;
     }
 }

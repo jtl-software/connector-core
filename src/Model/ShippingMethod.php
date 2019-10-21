@@ -7,35 +7,33 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ShippingMethod extends DataModel
 {
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * Constructor
      */
@@ -43,38 +41,42 @@ class ShippingMethod extends DataModel
     {
         $this->id = new Identity();
     }
-
+    
     /**
-     * @param Identity $id 
-     * @return \jtl\Connector\Model\ShippingMethod
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @param Identity $id
+     * @return ShippingMethod
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): ShippingMethod
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getId(): Identity
     {
         return $this->id;
     }
-
+    
     /**
-     * @param string $name 
-     * @return \jtl\Connector\Model\ShippingMethod
+     * @param string $name
+     * @return ShippingMethod
      */
-    public function setName($name)
+    public function setName(string $name): ShippingMethod
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

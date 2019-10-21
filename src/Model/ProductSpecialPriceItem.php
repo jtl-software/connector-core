@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductSpecialPriceItem extends DataModel
@@ -28,7 +27,7 @@ class ProductSpecialPriceItem extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-
+    
     /**
      * @var Identity Reference to productSpecialPrice
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class ProductSpecialPriceItem extends DataModel
      * @Serializer\Accessor(getter="getProductSpecialPriceId",setter="setProductSpecialPriceId")
      */
     protected $productSpecialPriceId = null;
-
+    
     /**
      * @var double net price value
      * @Serializer\Type("double")
@@ -44,7 +43,7 @@ class ProductSpecialPriceItem extends DataModel
      * @Serializer\Accessor(getter="getPriceNet",setter="setPriceNet")
      */
     protected $priceNet = 0.0;
-
+    
     /**
      * Constructor
      */
@@ -53,56 +52,62 @@ class ProductSpecialPriceItem extends DataModel
         $this->customerGroupId = new Identity();
         $this->productSpecialPriceId = new Identity();
     }
-
+    
     /**
      * @param Identity $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\ProductSpecialPriceItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductSpecialPriceItem
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerGroupId(Identity $customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId): ProductSpecialPriceItem
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        $this->customerGroupId = $customerGroupId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to customerGroup
      */
-    public function getCustomerGroupId()
+    public function getCustomerGroupId(): Identity
     {
         return $this->customerGroupId;
     }
-
+    
     /**
      * @param Identity $productSpecialPriceId Reference to productSpecialPrice
-     * @return \jtl\Connector\Model\ProductSpecialPriceItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductSpecialPriceItem
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductSpecialPriceId(Identity $productSpecialPriceId)
+    public function setProductSpecialPriceId(Identity $productSpecialPriceId): ProductSpecialPriceItem
     {
-        return $this->setProperty('productSpecialPriceId', $productSpecialPriceId, 'Identity');
+        $this->productSpecialPriceId = $productSpecialPriceId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to productSpecialPrice
      */
-    public function getProductSpecialPriceId()
+    public function getProductSpecialPriceId(): Identity
     {
         return $this->productSpecialPriceId;
     }
-
+    
     /**
      * @param double $priceNet net price value
-     * @return \jtl\Connector\Model\ProductSpecialPriceItem
+     * @return ProductSpecialPriceItem
      */
-    public function setPriceNet($priceNet)
+    public function setPriceNet(float $priceNet): ProductSpecialPriceItem
     {
-        return $this->setProperty('priceNet', $priceNet, 'double');
+        $this->priceNet = $priceNet;
+        
+        return $this;
     }
-
+    
     /**
      * @return double net price value
      */
-    public function getPriceNet()
+    public function getPriceNet(): float
     {
         return $this->priceNet;
     }

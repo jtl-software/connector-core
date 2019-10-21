@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class MeasurementUnitI18n extends DataModel
@@ -28,7 +27,7 @@ class MeasurementUnitI18n extends DataModel
      * @Serializer\Accessor(getter="getMeasurementUnitId",setter="setMeasurementUnitId")
      */
     protected $measurementUnitId = null;
-
+    
     /**
      * @var string Locale
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class MeasurementUnitI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
      * @var string Localized Name
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class MeasurementUnitI18n extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * Constructor
      */
@@ -52,55 +51,61 @@ class MeasurementUnitI18n extends DataModel
     {
         $this->measurementUnitId = new Identity();
     }
-
+    
     /**
      * @param Identity $measurementUnitId Reference to measurementUnitId
-     * @return \jtl\Connector\Model\MeasurementUnitI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return MeasurementUnitI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setMeasurementUnitId(Identity $measurementUnitId)
+    public function setMeasurementUnitId(Identity $measurementUnitId): MeasurementUnitI18n
     {
-        return $this->setProperty('measurementUnitId', $measurementUnitId, 'Identity');
+        $this->measurementUnitId = $measurementUnitId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to measurementUnitId
      */
-    public function getMeasurementUnitId()
+    public function getMeasurementUnitId(): Identity
     {
         return $this->measurementUnitId;
     }
-
+    
     /**
      * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\MeasurementUnitI18n
+     * @return MeasurementUnitI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): MeasurementUnitI18n
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Locale
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
-
+    
     /**
      * @param string $name Localized Name
-     * @return \jtl\Connector\Model\MeasurementUnitI18n
+     * @return MeasurementUnitI18n
      */
-    public function setName($name)
+    public function setName(string $name): MeasurementUnitI18n
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Localized Name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

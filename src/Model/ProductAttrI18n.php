@@ -7,51 +7,49 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductAttrI18n extends DataModel
 {
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("productAttrId")
      * @Serializer\Accessor(getter="getProductAttrId",setter="setProductAttrId")
      */
     protected $productAttrId = null;
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("languageISO")
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("value")
      * @Serializer\Accessor(getter="getValue",setter="setValue")
      */
     protected $value = '';
-
+    
     /**
      * Constructor
      */
@@ -59,72 +57,80 @@ class ProductAttrI18n extends DataModel
     {
         $this->productAttrId = new Identity();
     }
-
+    
     /**
-     * @param Identity $productAttrId 
-     * @return \jtl\Connector\Model\ProductAttrI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @param Identity $productAttrId
+     * @return ProductAttrI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductAttrId(Identity $productAttrId)
+    public function setProductAttrId(Identity $productAttrId): ProductAttrI18n
     {
-        return $this->setProperty('productAttrId', $productAttrId, 'Identity');
+        $this->productAttrId = $productAttrId;
+        
+        return $this;
     }
-
+    
     /**
-     * @return Identity 
+     * @return Identity
      */
-    public function getProductAttrId()
+    public function getProductAttrId(): Identity
     {
         return $this->productAttrId;
     }
-
+    
     /**
-     * @param string $languageISO 
-     * @return \jtl\Connector\Model\ProductAttrI18n
+     * @param string $languageISO
+     * @return ProductAttrI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): ProductAttrI18n
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
-
+    
     /**
-     * @param string $name 
-     * @return \jtl\Connector\Model\ProductAttrI18n
+     * @param string $name
+     * @return ProductAttrI18n
      */
-    public function setName($name)
+    public function setName(string $name): ProductAttrI18n
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
-
+    
     /**
-     * @param string $value 
-     * @return \jtl\Connector\Model\ProductAttrI18n
+     * @param string $value
+     * @return ProductAttrI18n
      */
-    public function setValue($value)
+    public function setValue(string $value): ProductAttrI18n
     {
-        return $this->setProperty('value', $value, 'string');
+        $this->value = $value;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
-    public function getValue()
+    public function getValue(): string
     {
         return $this->value;
     }

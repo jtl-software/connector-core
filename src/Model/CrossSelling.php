@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,19 +16,18 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class CrossSelling extends DataModel
 {
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var Identity Source product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,15 +35,15 @@ class CrossSelling extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-
+    
     /**
-     * @var \jtl\Connector\Model\CrossSellingItem[] Referenced cross-sold products grouped by their crossSellingGroup
+     * @var CrossSellingItem[] Referenced cross-sold products grouped by their crossSellingGroup
      * @Serializer\Type("array<jtl\Connector\Model\CrossSellingItem>")
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
      */
-    protected $items = array();
-
+    protected $items = [];
+    
     /**
      * Constructor
      */
@@ -53,77 +52,84 @@ class CrossSelling extends DataModel
         $this->id = new Identity();
         $this->productId = new Identity();
     }
-
+    
     /**
-     * @param Identity $id 
-     * @return \jtl\Connector\Model\CrossSelling
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @param Identity $id
+     * @return CrossSelling
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): CrossSelling
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getId(): Identity
     {
         return $this->id;
     }
-
+    
     /**
      * @param Identity $productId Source product
-     * @return \jtl\Connector\Model\CrossSelling
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CrossSelling
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): CrossSelling
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        $this->productId = $productId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Source product
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\CrossSellingItem $item
-     * @return \jtl\Connector\Model\CrossSelling
+     * @param CrossSellingItem $item
+     * @return CrossSelling
      */
-    public function addItem(\jtl\Connector\Model\CrossSellingItem $item)
+    public function addItem(CrossSellingItem $item): CrossSelling
     {
         $this->items[] = $item;
+        
         return $this;
     }
     
     /**
-     * @param array $items
-     * @return \jtl\Connector\Model\CrossSelling
+     * @param CrossSellingItem ...$items
+     * @return CrossSelling
      */
-    public function setItems(array $items)
+    public function setItems(CrossSellingItem ...$items): CrossSelling
     {
         $this->items = $items;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\CrossSellingItem[]
+     * @return CrossSellingItem[]
      */
-    public function getItems()
+    public function getItems(): array
     {
         return $this->items;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\CrossSelling
+     * @return CrossSelling
      */
-    public function clearItems()
+    public function clearItems(): CrossSelling
     {
-        $this->items = array();
+        $this->items = [];
+        
         return $this;
     }
 }

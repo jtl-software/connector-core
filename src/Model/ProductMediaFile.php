@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductMediaFile extends DataModel
@@ -28,7 +27,7 @@ class ProductMediaFile extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class ProductMediaFile extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-
+    
     /**
      * @var string Optional media file category name
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class ProductMediaFile extends DataModel
      * @Serializer\Accessor(getter="getMediaFileCategory",setter="setMediaFileCategory")
      */
     protected $mediaFileCategory = '';
-
+    
     /**
      * @var string File path
      * @Serializer\Type("string")
@@ -52,7 +51,7 @@ class ProductMediaFile extends DataModel
      * @Serializer\Accessor(getter="getPath",setter="setPath")
      */
     protected $path = '';
-
+    
     /**
      * @var string Optional sort number
      * @Serializer\Type("integer")
@@ -60,7 +59,7 @@ class ProductMediaFile extends DataModel
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
-
+    
     /**
      * @var string Media file type e.g. 'pdf'
      * @Serializer\Type("string")
@@ -68,7 +67,7 @@ class ProductMediaFile extends DataModel
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
     protected $type = '';
-
+    
     /**
      * @var string Complete URL
      * @Serializer\Type("string")
@@ -76,23 +75,23 @@ class ProductMediaFile extends DataModel
      * @Serializer\Accessor(getter="getUrl",setter="setUrl")
      */
     protected $url = '';
-
+    
     /**
-     * @var \jtl\Connector\Model\ProductMediaFileAttr[]
+     * @var ProductMediaFileAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductMediaFileAttr>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
-    protected $attributes = array();
-
+    protected $attributes = [];
+    
     /**
-     * @var \jtl\Connector\Model\ProductMediaFileI18n[]
+     * @var ProductMediaFileI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductMediaFileI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
-
+    protected $i18ns = [];
+    
     /**
      * Constructor
      */
@@ -101,17 +100,19 @@ class ProductMediaFile extends DataModel
         $this->id = new Identity();
         $this->productId = new Identity();
     }
-
+    
     /**
      * @param Identity $id Unique MediaFile id
-     * @return \jtl\Connector\Model\ProductMediaFile
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductMediaFile
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): ProductMediaFile
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique MediaFile id
      */
@@ -119,181 +120,199 @@ class ProductMediaFile extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param Identity $productId Reference to product
-     * @return \jtl\Connector\Model\ProductMediaFile
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductMediaFile
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): ProductMediaFile
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        $this->productId = $productId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to product
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
-
+    
     /**
      * @param string $mediaFileCategory Optional media file category name
-     * @return \jtl\Connector\Model\ProductMediaFile
+     * @return ProductMediaFile
      */
-    public function setMediaFileCategory($mediaFileCategory)
+    public function setMediaFileCategory(string $mediaFileCategory): ProductMediaFile
     {
-        return $this->setProperty('mediaFileCategory', $mediaFileCategory, 'string');
+        $this->mediaFileCategory = $mediaFileCategory;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional media file category name
      */
-    public function getMediaFileCategory()
+    public function getMediaFileCategory(): string
     {
         return $this->mediaFileCategory;
     }
-
+    
     /**
      * @param string $path File path
-     * @return \jtl\Connector\Model\ProductMediaFile
+     * @return ProductMediaFile
      */
-    public function setPath($path)
+    public function setPath(string $path): ProductMediaFile
     {
-        return $this->setProperty('path', $path, 'string');
+        $this->path = $path;
+        
+        return $this;
     }
-
+    
     /**
      * @return string File path
      */
-    public function getPath()
+    public function getPath(): string
     {
         return $this->path;
     }
-
+    
     /**
      * @param integer $sort Optional sort number
-     * @return \jtl\Connector\Model\ProductMediaFile
+     * @return ProductMediaFile
      */
-    public function setSort($sort)
+    public function setSort(int $sort): ProductMediaFile
     {
-        return $this->setProperty('sort', $sort, 'integer');
+        $this->sort = $sort;
+        
+        return $this;
     }
-
+    
     /**
      * @return integer Optional sort number
      */
-    public function getSort()
+    public function getSort(): int
     {
         return $this->sort;
     }
-
+    
     /**
      * @param string $type Media file type e.g. 'pdf'
-     * @return \jtl\Connector\Model\ProductMediaFile
+     * @return ProductMediaFile
      */
-    public function setType($type)
+    public function setType(string $type): ProductMediaFile
     {
-        return $this->setProperty('type', $type, 'string');
+        $this->type = $type;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Media file type e.g. 'pdf'
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
-
+    
     /**
      * @param string $url Complete URL
-     * @return \jtl\Connector\Model\ProductMediaFile
+     * @return ProductMediaFile
      */
-    public function setUrl($url)
+    public function setUrl(string $url): ProductMediaFile
     {
-        return $this->setProperty('url', $url, 'string');
+        $this->url = $url;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Complete URL
      */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->url;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ProductMediaFileAttr $attribute
-     * @return \jtl\Connector\Model\ProductMediaFile
+     * @param ProductMediaFileAttr $attribute
+     * @return ProductMediaFile
      */
-    public function addAttribute(\jtl\Connector\Model\ProductMediaFileAttr $attribute)
+    public function addAttribute(ProductMediaFileAttr $attribute): ProductMediaFile
     {
         $this->attributes[] = $attribute;
+        
         return $this;
     }
     
     /**
      * @param array $attributes
-     * @return \jtl\Connector\Model\ProductMediaFile
+     * @return ProductMediaFile
      */
-    public function setAttributes(array $attributes)
+    public function setAttributes(array $attributes): ProductMediaFile
     {
         $this->attributes = $attributes;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductMediaFileAttr[]
+     * @return ProductMediaFileAttr[]
      */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         return $this->attributes;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\ProductMediaFile
+     * @return ProductMediaFile
      */
-    public function clearAttributes()
+    public function clearAttributes(): ProductMediaFile
     {
-        $this->attributes = array();
+        $this->attributes = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ProductMediaFileI18n $i18n
-     * @return \jtl\Connector\Model\ProductMediaFile
+     * @param ProductMediaFileI18n $i18n
+     * @return ProductMediaFile
      */
-    public function addI18n(\jtl\Connector\Model\ProductMediaFileI18n $i18n)
+    public function addI18n(ProductMediaFileI18n $i18n): ProductMediaFile
     {
         $this->i18ns[] = $i18n;
+        
         return $this;
     }
     
     /**
      * @param array $i18ns
-     * @return \jtl\Connector\Model\ProductMediaFile
+     * @return ProductMediaFile
      */
-    public function setI18ns(array $i18ns)
+    public function setI18ns(array $i18ns): ProductMediaFile
     {
         $this->i18ns = $i18ns;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductMediaFileI18n[]
+     * @return ProductMediaFileI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\ProductMediaFile
+     * @return ProductMediaFile
      */
-    public function clearI18ns()
+    public function clearI18ns(): ProductMediaFile
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
+        
         return $this;
     }
 }

@@ -2,13 +2,19 @@
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Internal 
+ * @subpackage Internal
  */
 
 namespace jtl\Connector\Model;
 
+use DateTime;
+use InvalidArgumentException;
 use \jtl\Connector\Core\Model\DataModel as CoreModel;
 use JMS\Serializer\Annotation as Serializer;
+use jtl\Connector\Type\DataType;
+use ReflectionClass;
+use ReflectionException;
+use stdClass;
 
 /**
  * Entity data model
@@ -21,13 +27,13 @@ use JMS\Serializer\Annotation as Serializer;
 abstract class DataModel extends CoreModel
 {
     /**
-     * @var \jtl\Connector\Type\DataType
+     * @var DataType
      * @Serializer\Type("jtl\Connector\Type\DataType")
      * @Serializer\AccessType("reflection")
      * @Serializer\Exclude
      */
     private $_type = null;
-
+    
     /**
      * @var boolean
      * @Serializer\Type("boolean")
@@ -35,74 +41,75 @@ abstract class DataModel extends CoreModel
      * @Serializer\Exclude
      */
     protected $isEncrypted = false;
-
+    
     /**
-     * @return \jtl\Connector\Type\DataType
+     * @return DataType
+     * @throws ReflectionException
      */
-    public function getModelType()
+    public function getModelType(): DataType
     {
         if ($this->_type === null) {
-            $reflect = new \ReflectionClass($this);
+            $reflect = new ReflectionClass($this);
             $class = '\\jtl\\Connector\\Type\\' . $reflect->getShortName();
-
+            
             $this->_type = new $class;
         }
-
+        
         return $this->_type;
     }
-
+    
     /**
      * Encrypted Status
-     * 
+     *
      * @return boolean
      */
-    public function isEncrypted()
+    public function isEncrypted(): bool
     {
         return $this->isEncrypted;
     }
-
+    
     /**
      * Convert the Model into stdClass Object
      *
      * @param array $publics
      * @return stdClass $object
      */
-    public function getPublic(array $publics = array('fields', 'isEncrypted', 'identities', '_type'))
+    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', '_type']): stdClass
     {
-        $object = new \stdClass();
-
+        $object = new stdClass();
+        
         $recursive = function (array $subElems, array $publics) use (&$recursive) {
-            $arr = array();
+            $arr = [];
             foreach ($subElems as $subElem) {
                 if ($subElem instanceof DataModel) {
                     $arr[] = $subElem->getPublic($publics);
                 } elseif ($subElem instanceof Identity) {
                     $arr[] = $subElem->toArray();
-                } elseif ($subElem instanceof \DateTime) {
-                    $arr[] = $subElem->format(\DateTime::ISO8601);
+                } elseif ($subElem instanceof DateTime) {
+                    $arr[] = $subElem->format(DateTime::ISO8601);
                 } elseif (is_array($subElem)) {
                     $arr[] = $recursive($subElem, $publics);
                 } else {
                     $arr[] = $subElem;
                 }
             }
-
+            
             return $arr;
         };
-
+        
         $members = array_keys(get_object_vars($this));
         if (is_array($members) && count($members) > 0) {
             foreach ($members as $member) {
                 $property = ucfirst($member);
                 $getter = 'get' . $property;
-
+                
                 if (!in_array($member, $publics)) {
                     if ($this->{$getter}() instanceof DataModel) {
                         $object->{$member} = $this->{$getter}()->getPublic($publics);
                     } elseif ($this->{$getter}() instanceof Identity) {
                         $object->{$member} = $this->{$getter}()->toArray();
-                    } elseif ($this->{$getter}() instanceof \DateTime) {
-                        $object->{$member} = $this->{$getter}()->format(\DateTime::ISO8601);
+                    } elseif ($this->{$getter}() instanceof DateTime) {
+                        $object->{$member} = $this->{$getter}()->format(DateTime::ISO8601);
                     } elseif (is_array($this->{$member})) {
                         $object->{$member} = $recursive($this->{$member}, $publics);
                     } else {
@@ -119,8 +126,10 @@ abstract class DataModel extends CoreModel
      * @param string $propertyName
      * @param string|null $endpoint
      * @param int|null $host
+     * @return DataModel
+     * @throws ReflectionException
      */
-    public function setIdentity($propertyName, $endpoint = null, $host = null)
+    public function setIdentity(string $propertyName, string $endpoint = null, int $host = null): DataModel
     {
         foreach ($this->getModelType()->getProperties() as $propertyInfo) {
             $property = ucfirst($propertyInfo->getName());
@@ -154,47 +163,47 @@ abstract class DataModel extends CoreModel
                 if (!is_null($endpoint)) {
                     $identity->setEndpoint($endpoint);
                 }
-    
+                
                 if (!is_null($host)) {
                     $identity->setHost($host);
                 }
             }
         }
     }
-
+    
     /**
      * Sets Properties with matching Array Values
      *
-     * @param \stdClass $object
+     * @param stdClass $object
      * @param array $options
-     * @return \jtl\Connector\Model\DataModel
+     * @return DataModel
      */
-    public function setOptions(\stdClass $object = null, array $options = null)
+    public function setOptions(stdClass $object = null, array $options = null)
     {
         parent::setOptions($object, $options);
-
+        
         return $this;
     }
-
+    
     protected function setProperty($name, $value, $type)
     {
         if (!$this->validateType($value, $type)) {
-            throw new \InvalidArgumentException(sprintf("%s (%s): expected type '%s', given value '%s'.", $name, get_class($this), $type, gettype($value)));
+            throw new InvalidArgumentException(sprintf("%s (%s): expected type '%s', given value '%s'.", $name,
+                get_class($this), $type, gettype($value)));
         }
-
+        
         $this->{$name} = $value;
         
         return $this;
     }
-
+    
     protected function validateType($value, $type)
     {
         if ($value === null) {
             return true;
         }
-
-        switch ($type)
-        {
+        
+        switch ($type) {
             case 'boolean':
             case 'bool':
                 return is_bool($value);
@@ -211,13 +220,13 @@ abstract class DataModel extends CoreModel
             case 'Identity':
                 return ($value instanceof Identity);
             case 'DateTime':
-                return ($value instanceof \DateTime);
+                return ($value instanceof DateTime);
             default:
                 if (is_object($value)) {
                     return is_null($value) || is_subclass_of($value, 'jtl\Connector\Model\DataModel');
                 }
-
-                throw new \InvalidArgumentException(sprintf("type '%s' validator not found", $type));
+                
+                throw new InvalidArgumentException(sprintf("type '%s' validator not found", $type));
         }
     }
 }

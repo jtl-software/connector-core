@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class CustomerOrderShippingAddress extends DataModel
@@ -28,7 +27,7 @@ class CustomerOrderShippingAddress extends DataModel
      * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
      */
     protected $customerId = null;
-
+    
     /**
      * @var Identity Unique customerOrderShippingAddress id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class CustomerOrderShippingAddress extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var string City
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class CustomerOrderShippingAddress extends DataModel
      * @Serializer\Accessor(getter="getCity",setter="setCity")
      */
     protected $city = '';
-
+    
     /**
      * @var string Company name
      * @Serializer\Type("string")
@@ -52,7 +51,7 @@ class CustomerOrderShippingAddress extends DataModel
      * @Serializer\Accessor(getter="getCompany",setter="setCompany")
      */
     protected $company = '';
-
+    
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
      * @Serializer\Type("string")
@@ -60,7 +59,7 @@ class CustomerOrderShippingAddress extends DataModel
      * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
      */
     protected $countryIso = '';
-
+    
     /**
      * @var string Delivery instruction e.g. "c/o John Doe"
      * @Serializer\Type("string")
@@ -68,7 +67,7 @@ class CustomerOrderShippingAddress extends DataModel
      * @Serializer\Accessor(getter="getDeliveryInstruction",setter="setDeliveryInstruction")
      */
     protected $deliveryInstruction = '';
-
+    
     /**
      * @var string E-Mail address
      * @Serializer\Type("string")
@@ -76,7 +75,7 @@ class CustomerOrderShippingAddress extends DataModel
      * @Serializer\Accessor(getter="getEMail",setter="setEMail")
      */
     protected $eMail = '';
-
+    
     /**
      * @var string Extra address line e.g. 'Apartment 2.5'
      * @Serializer\Type("string")
@@ -84,7 +83,7 @@ class CustomerOrderShippingAddress extends DataModel
      * @Serializer\Accessor(getter="getExtraAddressLine",setter="setExtraAddressLine")
      */
     protected $extraAddressLine = '';
-
+    
     /**
      * @var string Fax number
      * @Serializer\Type("string")
@@ -92,7 +91,7 @@ class CustomerOrderShippingAddress extends DataModel
      * @Serializer\Accessor(getter="getFax",setter="setFax")
      */
     protected $fax = '';
-
+    
     /**
      * @var string First name
      * @Serializer\Type("string")
@@ -100,7 +99,7 @@ class CustomerOrderShippingAddress extends DataModel
      * @Serializer\Accessor(getter="getFirstName",setter="setFirstName")
      */
     protected $firstName = '';
-
+    
     /**
      * @var string Last name
      * @Serializer\Type("string")
@@ -108,7 +107,7 @@ class CustomerOrderShippingAddress extends DataModel
      * @Serializer\Accessor(getter="getLastName",setter="setLastName")
      */
     protected $lastName = '';
-
+    
     /**
      * @var string Mobile phone number
      * @Serializer\Type("string")
@@ -116,7 +115,7 @@ class CustomerOrderShippingAddress extends DataModel
      * @Serializer\Accessor(getter="getMobile",setter="setMobile")
      */
     protected $mobile = '';
-
+    
     /**
      * @var string Phone number
      * @Serializer\Type("string")
@@ -124,7 +123,7 @@ class CustomerOrderShippingAddress extends DataModel
      * @Serializer\Accessor(getter="getPhone",setter="setPhone")
      */
     protected $phone = '';
-
+    
     /**
      * @var string Salutation e.g. 'Mr.'
      * @Serializer\Type("string")
@@ -132,7 +131,7 @@ class CustomerOrderShippingAddress extends DataModel
      * @Serializer\Accessor(getter="getSalutation",setter="setSalutation")
      */
     protected $salutation = '';
-
+    
     /**
      * @var string State
      * @Serializer\Type("string")
@@ -140,7 +139,7 @@ class CustomerOrderShippingAddress extends DataModel
      * @Serializer\Accessor(getter="getState",setter="setState")
      */
     protected $state = '';
-
+    
     /**
      * @var string Street + streetnumber
      * @Serializer\Type("string")
@@ -148,7 +147,7 @@ class CustomerOrderShippingAddress extends DataModel
      * @Serializer\Accessor(getter="getStreet",setter="setStreet")
      */
     protected $street = '';
-
+    
     /**
      * @var string Title e.g. ("Prof. Dr.")
      * @Serializer\Type("string")
@@ -156,7 +155,7 @@ class CustomerOrderShippingAddress extends DataModel
      * @Serializer\Accessor(getter="getTitle",setter="setTitle")
      */
     protected $title = '';
-
+    
     /**
      * @var string Zip / postal code
      * @Serializer\Type("string")
@@ -164,7 +163,7 @@ class CustomerOrderShippingAddress extends DataModel
      * @Serializer\Accessor(getter="getZipCode",setter="setZipCode")
      */
     protected $zipCode = '';
-
+    
     /**
      * Constructor
      */
@@ -173,35 +172,39 @@ class CustomerOrderShippingAddress extends DataModel
         $this->id = new Identity();
         $this->customerId = new Identity();
     }
-
+    
     /**
      * @param Identity $customerId Reference to customer
-     * @return \jtl\Connector\Model\CustomerOrderShippingAddress
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CustomerOrderShippingAddress
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerId(Identity $customerId)
+    public function setCustomerId(Identity $customerId): CustomerOrderShippingAddress
     {
-        return $this->setProperty('customerId', $customerId, 'Identity');
+        $this->customerId = $customerId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to customer
      */
-    public function getCustomerId()
+    public function getCustomerId(): Identity
     {
         return $this->customerId;
     }
-
+    
     /**
      * @param Identity $id Unique customerOrderShippingAddress id
-     * @return \jtl\Connector\Model\CustomerOrderShippingAddress
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CustomerOrderShippingAddress
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): CustomerOrderShippingAddress
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique customerOrderShippingAddress id
      */
@@ -209,275 +212,307 @@ class CustomerOrderShippingAddress extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param string $city City
-     * @return \jtl\Connector\Model\CustomerOrderShippingAddress
+     * @return CustomerOrderShippingAddress
      */
-    public function setCity($city)
+    public function setCity(string $city): CustomerOrderShippingAddress
     {
-        return $this->setProperty('city', $city, 'string');
+        $this->city = $city;
+        
+        return $this;
     }
-
+    
     /**
      * @return string City
      */
-    public function getCity()
+    public function getCity(): string
     {
         return $this->city;
     }
-
+    
     /**
      * @param string $company Company name
-     * @return \jtl\Connector\Model\CustomerOrderShippingAddress
+     * @return CustomerOrderShippingAddress
      */
-    public function setCompany($company)
+    public function setCompany(string $company): CustomerOrderShippingAddress
     {
-        return $this->setProperty('company', $company, 'string');
+        $this->company = $company;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Company name
      */
-    public function getCompany()
+    public function getCompany(): string
     {
         return $this->company;
     }
-
+    
     /**
      * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
-     * @return \jtl\Connector\Model\CustomerOrderShippingAddress
+     * @return CustomerOrderShippingAddress
      */
-    public function setCountryIso($countryIso)
+    public function setCountryIso(string $countryIso): CustomerOrderShippingAddress
     {
-        return $this->setProperty('countryIso', $countryIso, 'string');
+        $this->countryIso = $countryIso;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Country ISO 3166-2 (2 letter Uppercase)
      */
-    public function getCountryIso()
+    public function getCountryIso(): string
     {
         return $this->countryIso;
     }
-
+    
     /**
      * @param string $deliveryInstruction Delivery instruction e.g. "c/o John Doe"
-     * @return \jtl\Connector\Model\CustomerOrderShippingAddress
+     * @return CustomerOrderShippingAddress
      */
-    public function setDeliveryInstruction($deliveryInstruction)
+    public function setDeliveryInstruction(string $deliveryInstruction): CustomerOrderShippingAddress
     {
-        return $this->setProperty('deliveryInstruction', $deliveryInstruction, 'string');
+        $this->deliveryInstruction = $deliveryInstruction;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Delivery instruction e.g. "c/o John Doe"
      */
-    public function getDeliveryInstruction()
+    public function getDeliveryInstruction(): string
     {
         return $this->deliveryInstruction;
     }
-
+    
     /**
      * @param string $eMail E-Mail address
-     * @return \jtl\Connector\Model\CustomerOrderShippingAddress
+     * @return CustomerOrderShippingAddress
      */
-    public function setEMail($eMail)
+    public function setEMail(string $eMail): CustomerOrderShippingAddress
     {
-        return $this->setProperty('eMail', $eMail, 'string');
+        $this->eMail = $eMail;
+        
+        return $this;
     }
-
+    
     /**
      * @return string E-Mail address
      */
-    public function getEMail()
+    public function getEMail(): string
     {
         return $this->eMail;
     }
-
+    
     /**
      * @param string $extraAddressLine Extra address line e.g. 'Apartment 2.5'
-     * @return \jtl\Connector\Model\CustomerOrderShippingAddress
+     * @return CustomerOrderShippingAddress
      */
-    public function setExtraAddressLine($extraAddressLine)
+    public function setExtraAddressLine(string $extraAddressLine): CustomerOrderShippingAddress
     {
-        return $this->setProperty('extraAddressLine', $extraAddressLine, 'string');
+        $this->extraAddressLine = $extraAddressLine;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Extra address line e.g. 'Apartment 2.5'
      */
-    public function getExtraAddressLine()
+    public function getExtraAddressLine(): string
     {
         return $this->extraAddressLine;
     }
-
+    
     /**
      * @param string $fax Fax number
-     * @return \jtl\Connector\Model\CustomerOrderShippingAddress
+     * @return CustomerOrderShippingAddress
      */
-    public function setFax($fax)
+    public function setFax(string $fax): CustomerOrderShippingAddress
     {
-        return $this->setProperty('fax', $fax, 'string');
+        $this->fax = $fax;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Fax number
      */
-    public function getFax()
+    public function getFax(): string
     {
         return $this->fax;
     }
-
+    
     /**
      * @param string $firstName First name
-     * @return \jtl\Connector\Model\CustomerOrderShippingAddress
+     * @return CustomerOrderShippingAddress
      */
-    public function setFirstName($firstName)
+    public function setFirstName(string $firstName): CustomerOrderShippingAddress
     {
-        return $this->setProperty('firstName', $firstName, 'string');
+        $this->firstName = $firstName;
+        
+        return $this;
     }
-
+    
     /**
      * @return string First name
      */
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
-
+    
     /**
      * @param string $lastName Last name
-     * @return \jtl\Connector\Model\CustomerOrderShippingAddress
+     * @return CustomerOrderShippingAddress
      */
-    public function setLastName($lastName)
+    public function setLastName(string $lastName): CustomerOrderShippingAddress
     {
-        return $this->setProperty('lastName', $lastName, 'string');
+        $this->lastName = $lastName;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Last name
      */
-    public function getLastName()
+    public function getLastName(): string
     {
         return $this->lastName;
     }
-
+    
     /**
      * @param string $mobile Mobile phone number
-     * @return \jtl\Connector\Model\CustomerOrderShippingAddress
+     * @return CustomerOrderShippingAddress
      */
-    public function setMobile($mobile)
+    public function setMobile(string $mobile): CustomerOrderShippingAddress
     {
-        return $this->setProperty('mobile', $mobile, 'string');
+        $this->mobile = $mobile;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Mobile phone number
      */
-    public function getMobile()
+    public function getMobile(): string
     {
         return $this->mobile;
     }
-
+    
     /**
      * @param string $phone Phone number
-     * @return \jtl\Connector\Model\CustomerOrderShippingAddress
+     * @return CustomerOrderShippingAddress
      */
-    public function setPhone($phone)
+    public function setPhone(string $phone): CustomerOrderShippingAddress
     {
-        return $this->setProperty('phone', $phone, 'string');
+        $this->phone = $phone;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Phone number
      */
-    public function getPhone()
+    public function getPhone(): string
     {
         return $this->phone;
     }
-
+    
     /**
      * @param string $salutation Salutation e.g. 'Mr.'
-     * @return \jtl\Connector\Model\CustomerOrderShippingAddress
+     * @return CustomerOrderShippingAddress
      */
-    public function setSalutation($salutation)
+    public function setSalutation(string $salutation): CustomerOrderShippingAddress
     {
-        return $this->setProperty('salutation', $salutation, 'string');
+        $this->salutation = $salutation;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Salutation e.g. 'Mr.'
      */
-    public function getSalutation()
+    public function getSalutation(): string
     {
         return $this->salutation;
     }
-
+    
     /**
      * @param string $state State
-     * @return \jtl\Connector\Model\CustomerOrderShippingAddress
+     * @return CustomerOrderShippingAddress
      */
-    public function setState($state)
+    public function setState(string $state): CustomerOrderShippingAddress
     {
-        return $this->setProperty('state', $state, 'string');
+        $this->state = $state;
+        
+        return $this;
     }
-
+    
     /**
      * @return string State
      */
-    public function getState()
+    public function getState(): string
     {
         return $this->state;
     }
-
+    
     /**
      * @param string $street Street + streetnumber
-     * @return \jtl\Connector\Model\CustomerOrderShippingAddress
+     * @return CustomerOrderShippingAddress
      */
-    public function setStreet($street)
+    public function setStreet(string $street): CustomerOrderShippingAddress
     {
-        return $this->setProperty('street', $street, 'string');
+        $this->street = $street;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Street + streetnumber
      */
-    public function getStreet()
+    public function getStreet(): string
     {
         return $this->street;
     }
-
+    
     /**
      * @param string $title Title e.g. ("Prof. Dr.")
-     * @return \jtl\Connector\Model\CustomerOrderShippingAddress
+     * @return CustomerOrderShippingAddress
      */
-    public function setTitle($title)
+    public function setTitle(string $title): CustomerOrderShippingAddress
     {
-        return $this->setProperty('title', $title, 'string');
+        $this->title = $title;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Title e.g. ("Prof. Dr.")
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
-
+    
     /**
      * @param string $zipCode Zip / postal code
-     * @return \jtl\Connector\Model\CustomerOrderShippingAddress
+     * @return CustomerOrderShippingAddress
      */
-    public function setZipCode($zipCode)
+    public function setZipCode(string $zipCode): CustomerOrderShippingAddress
     {
-        return $this->setProperty('zipCode', $zipCode, 'string');
+        $this->zipCode = $zipCode;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Zip / postal code
      */
-    public function getZipCode()
+    public function getZipCode(): string
     {
         return $this->zipCode;
     }

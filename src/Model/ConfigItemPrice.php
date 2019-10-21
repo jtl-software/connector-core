@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ConfigItemPrice extends DataModel
@@ -28,7 +27,7 @@ class ConfigItemPrice extends DataModel
      * @Serializer\Accessor(getter="getConfigItemId",setter="setConfigItemId")
      */
     protected $configItemId = null;
-
+    
     /**
      * @var Identity Reference to customerGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class ConfigItemPrice extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-
+    
     /**
      * @var double Net price or percental value to add/deduct to/from product price (depending on type). Positive value means surcharge, negative value means discount. Also see configItem.vat for value added tax.
      * @Serializer\Type("double")
@@ -44,7 +43,7 @@ class ConfigItemPrice extends DataModel
      * @Serializer\Accessor(getter="getPrice",setter="setPrice")
      */
     protected $price = 0.0;
-
+    
     /**
      * @var integer Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
      * @Serializer\Type("integer")
@@ -52,7 +51,7 @@ class ConfigItemPrice extends DataModel
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
     protected $type = 0;
-
+    
     /**
      * Constructor
      */
@@ -61,73 +60,81 @@ class ConfigItemPrice extends DataModel
         $this->customerGroupId = new Identity();
         $this->configItemId = new Identity();
     }
-
+    
     /**
      * @param Identity $configItemId Reference to configItem
-     * @return \jtl\Connector\Model\ConfigItemPrice
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ConfigItemPrice
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setConfigItemId(Identity $configItemId)
+    public function setConfigItemId(Identity $configItemId): ConfigItemPrice
     {
-        return $this->setProperty('configItemId', $configItemId, 'Identity');
+        $this->configItemId = $configItemId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to configItem
      */
-    public function getConfigItemId()
+    public function getConfigItemId(): Identity
     {
         return $this->configItemId;
     }
-
+    
     /**
      * @param Identity $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\ConfigItemPrice
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ConfigItemPrice
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerGroupId(Identity $customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId): ConfigItemPrice
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        $this->customerGroupId = $customerGroupId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to customerGroup
      */
-    public function getCustomerGroupId()
+    public function getCustomerGroupId(): Identity
     {
         return $this->customerGroupId;
     }
-
+    
     /**
      * @param double $price Net price or percental value to add/deduct to/from product price (depending on type). Positive value means surcharge, negative value means discount. Also see configItem.vat for value added tax.
-     * @return \jtl\Connector\Model\ConfigItemPrice
+     * @return ConfigItemPrice
      */
-    public function setPrice($price)
+    public function setPrice(float $price): ConfigItemPrice
     {
-        return $this->setProperty('price', $price, 'double');
+        $this->price = $price;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Net price or percental value to add/deduct to/from product price (depending on type). Positive value means surcharge, negative value means discount. Also see configItem.vat for value added tax.
      */
-    public function getPrice()
+    public function getPrice(): float
     {
         return $this->price;
     }
-
+    
     /**
      * @param integer $type Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
-     * @return \jtl\Connector\Model\ConfigItemPrice
+     * @return ConfigItemPrice
      */
-    public function setType($type)
+    public function setType(int $type): ConfigItemPrice
     {
-        return $this->setProperty('type', $type, 'integer');
+        $this->type = $type;
+        
+        return $this;
     }
-
+    
     /**
      * @return integer Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
      */
-    public function getType()
+    public function getType(): int
     {
         return $this->type;
     }

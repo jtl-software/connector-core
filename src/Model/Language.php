@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class Language extends DataModel
@@ -28,7 +27,7 @@ class Language extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var boolean Flag default language for frontend. Exact 1 language must be marked as default.
      * @Serializer\Type("boolean")
@@ -36,15 +35,15 @@ class Language extends DataModel
      * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
      */
     protected $isDefault = false;
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("languageISO")
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
      * @var string English term
      * @Serializer\Type("string")
@@ -52,7 +51,7 @@ class Language extends DataModel
      * @Serializer\Accessor(getter="getNameEnglish",setter="setNameEnglish")
      */
     protected $nameEnglish = '';
-
+    
     /**
      * @var string German term
      * @Serializer\Type("string")
@@ -60,7 +59,7 @@ class Language extends DataModel
      * @Serializer\Accessor(getter="getNameGerman",setter="setNameGerman")
      */
     protected $nameGerman = '';
-
+    
     /**
      * Constructor
      */
@@ -68,17 +67,19 @@ class Language extends DataModel
     {
         $this->id = new Identity();
     }
-
+    
     /**
      * @param Identity $id Unique language id
-     * @return \jtl\Connector\Model\Language
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Language
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): Language
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique language id
      */
@@ -86,71 +87,79 @@ class Language extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param boolean $isDefault Flag default language for frontend. Exact 1 language must be marked as default.
-     * @return \jtl\Connector\Model\Language
+     * @return Language
      */
-    public function setIsDefault($isDefault)
+    public function setIsDefault(bool $isDefault): Language
     {
-        return $this->setProperty('isDefault', $isDefault, 'boolean');
+        $this->isDefault = $isDefault;
+        
+        return $this;
     }
-
+    
     /**
      * @return boolean Flag default language for frontend. Exact 1 language must be marked as default.
      */
-    public function getIsDefault()
+    public function getIsDefault(): bool
     {
         return $this->isDefault;
     }
-
+    
     /**
-     * @param string $languageISO 
-     * @return \jtl\Connector\Model\Language
+     * @param string $languageISO
+     * @return Language
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): Language
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
-
+    
     /**
      * @param string $nameEnglish English term
-     * @return \jtl\Connector\Model\Language
+     * @return Language
      */
-    public function setNameEnglish($nameEnglish)
+    public function setNameEnglish(string $nameEnglish): Language
     {
-        return $this->setProperty('nameEnglish', $nameEnglish, 'string');
+        $this->nameEnglish = $nameEnglish;
+        
+        return $this;
     }
-
+    
     /**
      * @return string English term
      */
-    public function getNameEnglish()
+    public function getNameEnglish(): string
     {
         return $this->nameEnglish;
     }
-
+    
     /**
      * @param string $nameGerman German term
-     * @return \jtl\Connector\Model\Language
+     * @return Language
      */
-    public function setNameGerman($nameGerman)
+    public function setNameGerman(string $nameGerman): Language
     {
-        return $this->setProperty('nameGerman', $nameGerman, 'string');
+        $this->nameGerman = $nameGerman;
+        
+        return $this;
     }
-
+    
     /**
      * @return string German term
      */
-    public function getNameGerman()
+    public function getNameGerman(): string
     {
         return $this->nameGerman;
     }

@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,27 +16,26 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductMediaFileAttr extends DataModel
 {
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("productMediaFileId")
      * @Serializer\Accessor(getter="getProductMediaFileId",setter="setProductMediaFileId")
      */
     protected $productMediaFileId = null;
-
+    
     /**
-     * @var \jtl\Connector\Model\ProductMediaFileAttrI18n[]
+     * @var ProductMediaFileAttrI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductMediaFileAttrI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
-
+    protected $i18ns = [];
+    
     /**
      * Constructor
      */
@@ -44,59 +43,64 @@ class ProductMediaFileAttr extends DataModel
     {
         $this->productMediaFileId = new Identity();
     }
-
+    
     /**
-     * @param Identity $productMediaFileId 
-     * @return \jtl\Connector\Model\ProductMediaFileAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @param Identity $productMediaFileId
+     * @return ProductMediaFileAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductMediaFileId(Identity $productMediaFileId)
+    public function setProductMediaFileId(Identity $productMediaFileId): ProductMediaFileAttr
     {
-        return $this->setProperty('productMediaFileId', $productMediaFileId, 'Identity');
+        $this->productMediaFileId = $productMediaFileId;
+        
+        return $this;
     }
-
+    
     /**
-     * @return Identity 
+     * @return Identity
      */
-    public function getProductMediaFileId()
+    public function getProductMediaFileId(): Identity
     {
         return $this->productMediaFileId;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ProductMediaFileAttrI18n $i18n
-     * @return \jtl\Connector\Model\ProductMediaFileAttr
+     * @param ProductMediaFileAttrI18n $i18n
+     * @return ProductMediaFileAttr
      */
-    public function addI18n(\jtl\Connector\Model\ProductMediaFileAttrI18n $i18n)
+    public function addI18n(ProductMediaFileAttrI18n $i18n): ProductMediaFileAttr
     {
         $this->i18ns[] = $i18n;
+        
         return $this;
     }
     
     /**
      * @param array $i18ns
-     * @return \jtl\Connector\Model\ProductMediaFileAttr
+     * @return ProductMediaFileAttr
      */
-    public function setI18ns(array $i18ns)
+    public function setI18ns(array $i18ns): ProductMediaFileAttr
     {
         $this->i18ns = $i18ns;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductMediaFileAttrI18n[]
+     * @return ProductMediaFileAttrI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\ProductMediaFileAttr
+     * @return ProductMediaFileAttr
      */
-    public function clearI18ns()
+    public function clearI18ns(): ProductMediaFileAttr
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
+        
         return $this;
     }
 }

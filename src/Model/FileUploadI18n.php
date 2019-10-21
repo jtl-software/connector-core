@@ -7,116 +7,121 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class FileUploadI18n extends DataModel
 {
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("description")
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
-
+    
     /**
-     * @var integer 
+     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("fileUploadId")
      * @Serializer\Accessor(getter="getFileUploadId",setter="setFileUploadId")
      */
     protected $fileUploadId = 0;
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("languageISO")
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
-
+    
+    
     /**
-     * @param string $description 
-     * @return \jtl\Connector\Model\FileUploadI18n
+     * @param string $description
+     * @return FileUploadI18n
      */
-    public function setDescription($description)
+    public function setDescription(string $description): FileUploadI18n
     {
-        return $this->setProperty('description', $description, 'string');
+        $this->description = $description;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
-
+    
     /**
-     * @param integer $fileUploadId 
-     * @return \jtl\Connector\Model\FileUploadI18n
+     * @param integer $fileUploadId
+     * @return FileUploadI18n
      */
-    public function setFileUploadId($fileUploadId)
+    public function setFileUploadId(int $fileUploadId): FileUploadI18n
     {
-        return $this->setProperty('fileUploadId', $fileUploadId, 'integer');
+        $this->fileUploadId = $fileUploadId;
+        
+        return $this;
     }
-
+    
     /**
-     * @return integer 
+     * @return int
      */
-    public function getFileUploadId()
+    public function getFileUploadId(): int
     {
         return $this->fileUploadId;
     }
-
+    
     /**
-     * @param string $languageISO 
-     * @return \jtl\Connector\Model\FileUploadI18n
+     * @param string $languageISO
+     * @return FileUploadI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): FileUploadI18n
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
-
+    
     /**
-     * @param string $name 
-     * @return \jtl\Connector\Model\FileUploadI18n
+     * @param string $name
+     * @return FileUploadI18n
      */
-    public function setName($name)
+    public function setName(string $name): FileUploadI18n
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

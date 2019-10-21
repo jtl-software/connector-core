@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductVariationValueI18n extends DataModel
@@ -28,7 +27,7 @@ class ProductVariationValueI18n extends DataModel
      * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
      */
     protected $productVariationValueId = null;
-
+    
     /**
      * @var string Locale
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class ProductVariationValueI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
      * @var string Locale specific variationValue name
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class ProductVariationValueI18n extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * Constructor
      */
@@ -52,55 +51,61 @@ class ProductVariationValueI18n extends DataModel
     {
         $this->productVariationValueId = new Identity();
     }
-
+    
     /**
      * @param Identity $productVariationValueId Reference to productVariationValue
-     * @return \jtl\Connector\Model\ProductVariationValueI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductVariationValueI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductVariationValueId(Identity $productVariationValueId)
+    public function setProductVariationValueId(Identity $productVariationValueId): ProductVariationValueI18n
     {
-        return $this->setProperty('productVariationValueId', $productVariationValueId, 'Identity');
+        $this->productVariationValueId = $productVariationValueId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to productVariationValue
      */
-    public function getProductVariationValueId()
+    public function getProductVariationValueId(): Identity
     {
         return $this->productVariationValueId;
     }
-
+    
     /**
      * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\ProductVariationValueI18n
+     * @return ProductVariationValueI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): ProductVariationValueI18n
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Locale
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
-
+    
     /**
      * @param string $name Locale specific variationValue name
-     * @return \jtl\Connector\Model\ProductVariationValueI18n
+     * @return ProductVariationValueI18n
      */
-    public function setName($name)
+    public function setName(string $name): ProductVariationValueI18n
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Locale specific variationValue name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

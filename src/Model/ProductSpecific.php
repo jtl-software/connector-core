@@ -7,16 +7,15 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Product to specificValue Assignment. Product specifics are used to assign characteristic product attributes like color or  size... When different products have common specifics, products are similar. 
+ * Product to specificValue Assignment. Product specifics are used to assign characteristic product attributes like color or  size... When different products have common specifics, products are similar.
  *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductSpecific extends DataModel
@@ -28,7 +27,7 @@ class ProductSpecific extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class ProductSpecific extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-
+    
     /**
      * @var Identity Reference to specificValue
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -44,7 +43,7 @@ class ProductSpecific extends DataModel
      * @Serializer\Accessor(getter="getSpecificValueId",setter="setSpecificValueId")
      */
     protected $specificValueId = null;
-
+    
     /**
      * Constructor
      */
@@ -54,17 +53,19 @@ class ProductSpecific extends DataModel
         $this->specificValueId = new Identity();
         $this->productId = new Identity();
     }
-
+    
     /**
      * @param Identity $id Unique productSpecific id
-     * @return \jtl\Connector\Model\ProductSpecific
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductSpecific
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): ProductSpecific
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique productSpecific id
      */
@@ -72,39 +73,43 @@ class ProductSpecific extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param Identity $productId Reference to product
-     * @return \jtl\Connector\Model\ProductSpecific
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductSpecific
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): ProductSpecific
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        $this->productId = $productId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to product
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
-
+    
     /**
      * @param Identity $specificValueId Reference to specificValue
-     * @return \jtl\Connector\Model\ProductSpecific
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductSpecific
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setSpecificValueId(Identity $specificValueId)
+    public function setSpecificValueId(Identity $specificValueId): ProductSpecific
     {
-        return $this->setProperty('specificValueId', $specificValueId, 'Identity');
+        $this->specificValueId = $specificValueId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to specificValue
      */
-    public function getSpecificValueId()
+    public function getSpecificValueId(): Identity
     {
         return $this->specificValueId;
     }

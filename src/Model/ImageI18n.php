@@ -7,15 +7,13 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- *
  * @Serializer\AccessType("public_method")
  */
 class ImageI18n extends DataModel
@@ -27,7 +25,7 @@ class ImageI18n extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -35,7 +33,7 @@ class ImageI18n extends DataModel
      * @Serializer\Accessor(getter="getImageId",setter="setImageId")
      */
     protected $imageId = null;
-
+    
     /**
      * @var string
      * @Serializer\Type("string")
@@ -43,7 +41,7 @@ class ImageI18n extends DataModel
      * @Serializer\Accessor(getter="getAltText",setter="setAltText")
      */
     protected $altText = '';
-
+    
     /**
      * @var string
      * @Serializer\Type("string")
@@ -51,7 +49,7 @@ class ImageI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
      * Constructor
      */
@@ -60,17 +58,19 @@ class ImageI18n extends DataModel
         $this->id = new Identity();
         $this->imageId = new Identity();
     }
-
+    
     /**
      * @param Identity $id
-     * @return \jtl\Connector\Model\ImageI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ImageI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): ImageI18n
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity
      */
@@ -78,55 +78,61 @@ class ImageI18n extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param Identity $imageId
-     * @return \jtl\Connector\Model\ImageI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ImageI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setImageId(Identity $imageId)
+    public function setImageId(Identity $imageId): ImageI18n
     {
-        return $this->setProperty('imageId', $imageId, 'Identity');
+        $this->imageId = $imageId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity
      */
-    public function getImageId()
+    public function getImageId(): Identity
     {
         return $this->imageId;
     }
-
+    
     /**
      * @param string $altText
-     * @return \jtl\Connector\Model\ImageI18n
+     * @return ImageI18n
      */
-    public function setAltText($altText)
+    public function setAltText(string $altText): ImageI18n
     {
-        return $this->setProperty('altText', $altText, 'string');
+        $this->altText = $altText;
+        
+        return $this;
     }
-
+    
     /**
      * @return string
      */
-    public function getAltText()
+    public function getAltText(): string
     {
         return $this->altText;
     }
-
+    
     /**
      * @param string $languageISO
-     * @return \jtl\Connector\Model\ImageI18n
+     * @return ImageI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): ImageI18n
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
      * @return string
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }

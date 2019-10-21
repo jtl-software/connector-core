@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -104,11 +104,13 @@ class Category extends DataModel
     /**
      * @param Identity $id Unique category id
      * @return Category
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id): Category
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
     
     /**
@@ -122,17 +124,19 @@ class Category extends DataModel
     /**
      * @param Identity $parentCategoryId Optional reference to parent category id
      * @return Category
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setParentCategoryId(Identity $parentCategoryId): Category
     {
-        return $this->setProperty('parentCategoryId', $parentCategoryId, 'Identity');
+        $this->parentCategoryId = $parentCategoryId;
+        
+        return $this;
     }
     
     /**
      * @return Identity Optional reference to parent category id
      */
-    public function getParentCategoryId()
+    public function getParentCategoryId(): Identity
     {
         return $this->parentCategoryId;
     }
@@ -143,7 +147,9 @@ class Category extends DataModel
      */
     public function setIsActive(bool $isActive): Category
     {
-        return $this->setProperty('isActive', $isActive, 'boolean');
+        $this->isActive = $isActive;
+        
+        return $this;
     }
     
     /**
@@ -160,7 +166,9 @@ class Category extends DataModel
      */
     public function setLevel(int $level): Category
     {
-        return $this->setProperty('level', $level, 'integer');
+        $this->level = $level;
+        
+        return $this;
     }
     
     /**
@@ -177,7 +185,9 @@ class Category extends DataModel
      */
     public function setSort(int $sort): Category
     {
-        return $this->setProperty('sort', $sort, 'integer');
+        $this->sort = $sort;
+        
+        return $this;
     }
     
     /**
@@ -200,10 +210,10 @@ class Category extends DataModel
     }
     
     /**
-     * @param array $attributes
+     * @param CategoryAttr ...$attributes
      * @return Category
      */
-    public function setAttributes(array $attributes): Category
+    public function setAttributes(CategoryAttr ...$attributes): Category
     {
         $this->attributes = $attributes;
         
@@ -240,10 +250,10 @@ class Category extends DataModel
     }
     
     /**
-     * @param array $customerGroups
+     * @param CategoryCustomerGroup ...$customerGroups
      * @return Category
      */
-    public function setCustomerGroups(array $customerGroups): Category
+    public function setCustomerGroups(CategoryCustomerGroup ...$customerGroups): Category
     {
         $this->customerGroups = $customerGroups;
         
@@ -280,10 +290,10 @@ class Category extends DataModel
     }
     
     /**
-     * @param array $i18ns
+     * @param CategoryI18n ...$i18ns
      * @return Category
      */
-    public function setI18ns(array $i18ns): Category
+    public function setI18ns(CategoryI18n ...$i18ns): Category
     {
         $this->i18ns = $i18ns;
         
@@ -320,10 +330,10 @@ class Category extends DataModel
     }
     
     /**
-     * @param array $invisibilities
+     * @param CategoryInvisibility ...$invisibilities
      * @return Category
      */
-    public function setInvisibilities(array $invisibilities): Category
+    public function setInvisibilities(CategoryInvisibility ...$invisibilities): Category
     {
         $this->invisibilities = $invisibilities;
         

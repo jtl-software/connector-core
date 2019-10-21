@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class Product2Category extends DataModel
@@ -28,7 +27,7 @@ class Product2Category extends DataModel
      * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
      */
     protected $categoryId = null;
-
+    
     /**
      * @var Identity Unique product2Category id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class Product2Category extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -44,7 +43,7 @@ class Product2Category extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-
+    
     /**
      * Constructor
      */
@@ -54,35 +53,39 @@ class Product2Category extends DataModel
         $this->productId = new Identity();
         $this->categoryId = new Identity();
     }
-
+    
     /**
      * @param Identity $categoryId Reference to category
-     * @return \jtl\Connector\Model\Product2Category
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Product2Category
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCategoryId(Identity $categoryId)
+    public function setCategoryId(Identity $categoryId): Product2Category
     {
-        return $this->setProperty('categoryId', $categoryId, 'Identity');
+        $this->categoryId = $categoryId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to category
      */
-    public function getCategoryId()
+    public function getCategoryId(): Identity
     {
         return $this->categoryId;
     }
-
+    
     /**
      * @param Identity $id Unique product2Category id
-     * @return \jtl\Connector\Model\Product2Category
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Product2Category
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): Product2Category
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique product2Category id
      */
@@ -90,21 +93,23 @@ class Product2Category extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param Identity $productId Reference to product
-     * @return \jtl\Connector\Model\Product2Category
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Product2Category
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): Product2Category
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        $this->productId = $productId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to product
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }

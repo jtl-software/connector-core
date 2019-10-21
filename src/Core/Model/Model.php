@@ -42,7 +42,7 @@ abstract class Model
      *
      * @param \stdClass $object
      * @param array $options
-     * @return \jtl\Connector\Core\Model\Model
+     * @return Model
      */
     public function setOptions(\stdClass $object = null, array $options = null): Model
     {
