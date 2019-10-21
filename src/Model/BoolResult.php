@@ -8,7 +8,6 @@
 namespace jtl\Connector\Model;
 
 use JMS\Serializer\Annotation as Serializer;
-use \Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * BoolResult
@@ -39,6 +38,8 @@ class BoolResult extends DataModel
      */
     public function setResult(bool $result): DataModel
     {
-        return $this->setProperty('result', $result, 'boolean');
+        $this->result = $result;
+        
+        return $this;
     }
 }

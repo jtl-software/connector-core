@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class CustomerGroup extends DataModel
@@ -28,7 +27,7 @@ class CustomerGroup extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var boolean Optional: Show net prices default instead of gross prices
      * @Serializer\Type("boolean")
@@ -36,15 +35,15 @@ class CustomerGroup extends DataModel
      * @Serializer\Accessor(getter="getApplyNetPrice",setter="setApplyNetPrice")
      */
     protected $applyNetPrice = false;
-
+    
     /**
-     * @var double Optional percentual discount on all products. Negative Value means surcharge. 
+     * @var double Optional percentual discount on all products. Negative Value means surcharge.
      * @Serializer\Type("double")
      * @Serializer\SerializedName("discount")
      * @Serializer\Accessor(getter="getDiscount",setter="setDiscount")
      */
     protected $discount = 0.0;
-
+    
     /**
      * @var boolean Optional: Flag default customer group
      * @Serializer\Type("boolean")
@@ -52,23 +51,23 @@ class CustomerGroup extends DataModel
      * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
      */
     protected $isDefault = false;
-
+    
     /**
-     * @var \jtl\Connector\Model\CustomerGroupAttr[]
+     * @var CustomerGroupAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerGroupAttr>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
-    protected $attributes = array();
-
+    protected $attributes = [];
+    
     /**
-     * @var \jtl\Connector\Model\CustomerGroupI18n[]
+     * @var CustomerGroupI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerGroupI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
-
+    protected $i18ns = [];
+    
     /**
      * Constructor
      */
@@ -76,17 +75,19 @@ class CustomerGroup extends DataModel
     {
         $this->id = new Identity();
     }
-
+    
     /**
      * @param Identity $id Unique customerGroup id
-     * @return \jtl\Connector\Model\CustomerGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CustomerGroup
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): CustomerGroup
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique customerGroup id
      */
@@ -94,129 +95,141 @@ class CustomerGroup extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param boolean $applyNetPrice Optional: Show net prices default instead of gross prices
-     * @return \jtl\Connector\Model\CustomerGroup
+     * @return CustomerGroup
      */
-    public function setApplyNetPrice($applyNetPrice)
+    public function setApplyNetPrice(bool $applyNetPrice): CustomerGroup
     {
-        return $this->setProperty('applyNetPrice', $applyNetPrice, 'boolean');
+        $this->applyNetPrice = $applyNetPrice;
+        
+        return $this;
     }
-
+    
     /**
      * @return boolean Optional: Show net prices default instead of gross prices
      */
-    public function getApplyNetPrice()
+    public function getApplyNetPrice(): bool
     {
         return $this->applyNetPrice;
     }
-
+    
     /**
-     * @param double $discount Optional percentual discount on all products. Negative Value means surcharge. 
-     * @return \jtl\Connector\Model\CustomerGroup
+     * @param double $discount Optional percentual discount on all products. Negative Value means surcharge.
+     * @return CustomerGroup
      */
-    public function setDiscount($discount)
+    public function setDiscount(float $discount): CustomerGroup
     {
-        return $this->setProperty('discount', $discount, 'double');
+        $this->discount = $discount;
+        
+        return $this;
     }
-
+    
     /**
-     * @return double Optional percentual discount on all products. Negative Value means surcharge. 
+     * @return double Optional percentual discount on all products. Negative Value means surcharge.
      */
-    public function getDiscount()
+    public function getDiscount(): float
     {
         return $this->discount;
     }
-
+    
     /**
      * @param boolean $isDefault Optional: Flag default customer group
-     * @return \jtl\Connector\Model\CustomerGroup
+     * @return CustomerGroup
      */
-    public function setIsDefault($isDefault)
+    public function setIsDefault(bool $isDefault): CustomerGroup
     {
-        return $this->setProperty('isDefault', $isDefault, 'boolean');
+        $this->isDefault = $isDefault;
+        
+        return $this;
     }
-
+    
     /**
      * @return boolean Optional: Flag default customer group
      */
-    public function getIsDefault()
+    public function getIsDefault(): bool
     {
         return $this->isDefault;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\CustomerGroupAttr $attribute
-     * @return \jtl\Connector\Model\CustomerGroup
+     * @param CustomerGroupAttr $attribute
+     * @return CustomerGroup
      */
-    public function addAttribute(\jtl\Connector\Model\CustomerGroupAttr $attribute)
+    public function addAttribute(CustomerGroupAttr $attribute): CustomerGroup
     {
         $this->attributes[] = $attribute;
+        
         return $this;
     }
     
     /**
      * @param array $attributes
-     * @return \jtl\Connector\Model\CustomerGroup
+     * @return CustomerGroup
      */
-    public function setAttributes(array $attributes)
+    public function setAttributes(array $attributes): CustomerGroup
     {
         $this->attributes = $attributes;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\CustomerGroupAttr[]
+     * @return CustomerGroupAttr[]
      */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         return $this->attributes;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\CustomerGroup
+     * @return CustomerGroup
      */
-    public function clearAttributes()
+    public function clearAttributes(): CustomerGroup
     {
-        $this->attributes = array();
+        $this->attributes = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\CustomerGroupI18n $i18n
-     * @return \jtl\Connector\Model\CustomerGroup
+     * @param CustomerGroupI18n $i18n
+     * @return CustomerGroup
      */
-    public function addI18n(\jtl\Connector\Model\CustomerGroupI18n $i18n)
+    public function addI18n(CustomerGroupI18n $i18n): CustomerGroup
     {
         $this->i18ns[] = $i18n;
+        
         return $this;
     }
     
     /**
      * @param array $i18ns
-     * @return \jtl\Connector\Model\CustomerGroup
+     * @return CustomerGroup
      */
-    public function setI18ns(array $i18ns)
+    public function setI18ns(array $i18ns): CustomerGroup
     {
         $this->i18ns = $i18ns;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\CustomerGroupI18n[]
+     * @return CustomerGroupI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\CustomerGroup
+     * @return CustomerGroup
      */
-    public function clearI18ns()
+    public function clearI18ns(): CustomerGroup
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
+        
         return $this;
     }
 }

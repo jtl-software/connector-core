@@ -7,602 +7,638 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class GlobalData extends DataModel
 {
     /**
-     * @var \jtl\Connector\Model\ConfigGroup[]
+     * @var ConfigGroup[]
      * @Serializer\Type("array<jtl\Connector\Model\ConfigGroup>")
      * @Serializer\SerializedName("configGroups")
      * @Serializer\AccessType("reflection")
      */
-    protected $configGroups = array();
-
+    protected $configGroups = [];
+    
     /**
-     * @var \jtl\Connector\Model\ConfigItem[]
+     * @var ConfigItem[]
      * @Serializer\Type("array<jtl\Connector\Model\ConfigItem>")
      * @Serializer\SerializedName("configItems")
      * @Serializer\AccessType("reflection")
      */
-    protected $configItems = array();
-
+    protected $configItems = [];
+    
     /**
-     * @var \jtl\Connector\Model\CrossSellingGroup[]
+     * @var CrossSellingGroup[]
      * @Serializer\Type("array<jtl\Connector\Model\CrossSellingGroup>")
      * @Serializer\SerializedName("crossSellingGroups")
      * @Serializer\AccessType("reflection")
      */
-    protected $crossSellingGroups = array();
-
+    protected $crossSellingGroups = [];
+    
     /**
-     * @var \jtl\Connector\Model\Currency[]
+     * @var Currency[]
      * @Serializer\Type("array<jtl\Connector\Model\Currency>")
      * @Serializer\SerializedName("currencies")
      * @Serializer\AccessType("reflection")
      */
-    protected $currencies = array();
-
+    protected $currencies = [];
+    
     /**
-     * @var \jtl\Connector\Model\CustomerGroup[]
+     * @var CustomerGroup[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerGroup>")
      * @Serializer\SerializedName("customerGroups")
      * @Serializer\AccessType("reflection")
      */
-    protected $customerGroups = array();
-
+    protected $customerGroups = [];
+    
     /**
-     * @var \jtl\Connector\Model\Language[]
+     * @var Language[]
      * @Serializer\Type("array<jtl\Connector\Model\Language>")
      * @Serializer\SerializedName("languages")
      * @Serializer\AccessType("reflection")
      */
-    protected $languages = array();
-
+    protected $languages = [];
+    
     /**
-     * @var \jtl\Connector\Model\MeasurementUnit[]
+     * @var MeasurementUnit[]
      * @Serializer\Type("array<jtl\Connector\Model\MeasurementUnit>")
      * @Serializer\SerializedName("measurementUnits")
      * @Serializer\AccessType("reflection")
      */
-    protected $measurementUnits = array();
-
+    protected $measurementUnits = [];
+    
     /**
-     * @var \jtl\Connector\Model\ProductType[]
+     * @var ProductType[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductType>")
      * @Serializer\SerializedName("productTypes")
      * @Serializer\AccessType("reflection")
      */
-    protected $productTypes = array();
-
+    protected $productTypes = [];
+    
     /**
-     * @var \jtl\Connector\Model\ShippingClass[]
+     * @var ShippingClass[]
      * @Serializer\Type("array<jtl\Connector\Model\ShippingClass>")
      * @Serializer\SerializedName("shippingClasses")
      * @Serializer\AccessType("reflection")
      */
-    protected $shippingClasses = array();
-
+    protected $shippingClasses = [];
+    
     /**
-     * @var \jtl\Connector\Model\ShippingMethod[]
+     * @var ShippingMethod[]
      * @Serializer\Type("array<jtl\Connector\Model\ShippingMethod>")
      * @Serializer\SerializedName("shippingMethods")
      * @Serializer\AccessType("reflection")
      */
-    protected $shippingMethods = array();
-
+    protected $shippingMethods = [];
+    
     /**
-     * @var \jtl\Connector\Model\TaxRate[]
+     * @var TaxRate[]
      * @Serializer\Type("array<jtl\Connector\Model\TaxRate>")
      * @Serializer\SerializedName("taxRates")
      * @Serializer\AccessType("reflection")
      */
-    protected $taxRates = array();
-
+    protected $taxRates = [];
+    
     /**
-     * @var \jtl\Connector\Model\Unit[]
+     * @var Unit[]
      * @Serializer\Type("array<jtl\Connector\Model\Unit>")
      * @Serializer\SerializedName("units")
      * @Serializer\AccessType("reflection")
      */
-    protected $units = array();
-
+    protected $units = [];
+    
     /**
-     * @var \jtl\Connector\Model\Warehouse[]
+     * @var Warehouse[]
      * @Serializer\Type("array<jtl\Connector\Model\Warehouse>")
      * @Serializer\SerializedName("warehouses")
      * @Serializer\AccessType("reflection")
      */
-    protected $warehouses = array();
-
-
+    protected $warehouses = [];
+    
+    
     /**
-     * @param \jtl\Connector\Model\ConfigGroup $configGroup
-     * @return \jtl\Connector\Model\GlobalData
+     * @param ConfigGroup $configGroup
+     * @return GlobalData
      */
-    public function addConfigGroup(\jtl\Connector\Model\ConfigGroup $configGroup)
+    public function addConfigGroup(ConfigGroup $configGroup): GlobalData
     {
         $this->configGroups[] = $configGroup;
+        
         return $this;
     }
     
     /**
      * @param array $configGroups
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function setConfigGroups(array $configGroups)
+    public function setConfigGroups(array $configGroups): GlobalData
     {
         $this->configGroups = $configGroups;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ConfigGroup[]
+     * @return ConfigGroup[]
      */
-    public function getConfigGroups()
+    public function getConfigGroups(): array
     {
         return $this->configGroups;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function clearConfigGroups()
+    public function clearConfigGroups(): GlobalData
     {
-        $this->configGroups = array();
+        $this->configGroups = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ConfigItem $configItem
-     * @return \jtl\Connector\Model\GlobalData
+     * @param ConfigItem $configItem
+     * @return GlobalData
      */
-    public function addConfigItem(\jtl\Connector\Model\ConfigItem $configItem)
+    public function addConfigItem(ConfigItem $configItem): GlobalData
     {
         $this->configItems[] = $configItem;
+        
         return $this;
     }
     
     /**
      * @param array $configItems
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function setConfigItems(array $configItems)
+    public function setConfigItems(array $configItems): GlobalData
     {
         $this->configItems = $configItems;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ConfigItem[]
+     * @return ConfigItem[]
      */
-    public function getConfigItems()
+    public function getConfigItems(): array
     {
         return $this->configItems;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function clearConfigItems()
+    public function clearConfigItems(): GlobalData
     {
-        $this->configItems = array();
+        $this->configItems = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\CrossSellingGroup $crossSellingGroup
-     * @return \jtl\Connector\Model\GlobalData
+     * @param CrossSellingGroup $crossSellingGroup
+     * @return GlobalData
      */
-    public function addCrossSellingGroup(\jtl\Connector\Model\CrossSellingGroup $crossSellingGroup)
+    public function addCrossSellingGroup(CrossSellingGroup $crossSellingGroup): GlobalData
     {
         $this->crossSellingGroups[] = $crossSellingGroup;
+        
         return $this;
     }
     
     /**
      * @param array $crossSellingGroups
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function setCrossSellingGroups(array $crossSellingGroups)
+    public function setCrossSellingGroups(array $crossSellingGroups): GlobalData
     {
         $this->crossSellingGroups = $crossSellingGroups;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\CrossSellingGroup[]
+     * @return CrossSellingGroup[]
      */
-    public function getCrossSellingGroups()
+    public function getCrossSellingGroups(): array
     {
         return $this->crossSellingGroups;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function clearCrossSellingGroups()
+    public function clearCrossSellingGroups(): GlobalData
     {
-        $this->crossSellingGroups = array();
+        $this->crossSellingGroups = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\Currency $currency
-     * @return \jtl\Connector\Model\GlobalData
+     * @param Currency $currency
+     * @return GlobalData
      */
-    public function addCurrency(\jtl\Connector\Model\Currency $currency)
+    public function addCurrency(Currency $currency): GlobalData
     {
         $this->currencies[] = $currency;
+        
         return $this;
     }
     
     /**
      * @param array $currencies
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function setCurrencies(array $currencies)
+    public function setCurrencies(array $currencies): GlobalData
     {
         $this->currencies = $currencies;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\Currency[]
+     * @return Currency[]
      */
-    public function getCurrencies()
+    public function getCurrencies(): array
     {
         return $this->currencies;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function clearCurrencies()
+    public function clearCurrencies(): GlobalData
     {
-        $this->currencies = array();
+        $this->currencies = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\CustomerGroup $customerGroup
-     * @return \jtl\Connector\Model\GlobalData
+     * @param CustomerGroup $customerGroup
+     * @return GlobalData
      */
-    public function addCustomerGroup(\jtl\Connector\Model\CustomerGroup $customerGroup)
+    public function addCustomerGroup(CustomerGroup $customerGroup): GlobalData
     {
         $this->customerGroups[] = $customerGroup;
+        
         return $this;
     }
     
     /**
      * @param array $customerGroups
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function setCustomerGroups(array $customerGroups)
+    public function setCustomerGroups(array $customerGroups): GlobalData
     {
         $this->customerGroups = $customerGroups;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\CustomerGroup[]
+     * @return CustomerGroup[]
      */
-    public function getCustomerGroups()
+    public function getCustomerGroups(): array
     {
         return $this->customerGroups;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function clearCustomerGroups()
+    public function clearCustomerGroups(): GlobalData
     {
-        $this->customerGroups = array();
+        $this->customerGroups = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\Language $language
-     * @return \jtl\Connector\Model\GlobalData
+     * @param Language $language
+     * @return GlobalData
      */
-    public function addLanguage(\jtl\Connector\Model\Language $language)
+    public function addLanguage(Language $language): GlobalData
     {
         $this->languages[] = $language;
+        
         return $this;
     }
     
     /**
      * @param array $languages
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function setLanguages(array $languages)
+    public function setLanguages(array $languages): GlobalData
     {
         $this->languages = $languages;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\Language[]
+     * @return Language[]
      */
-    public function getLanguages()
+    public function getLanguages(): array
     {
         return $this->languages;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function clearLanguages()
+    public function clearLanguages(): GlobalData
     {
-        $this->languages = array();
+        $this->languages = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\MeasurementUnit $measurementUnit
-     * @return \jtl\Connector\Model\GlobalData
+     * @param MeasurementUnit $measurementUnit
+     * @return GlobalData
      */
-    public function addMeasurementUnit(\jtl\Connector\Model\MeasurementUnit $measurementUnit)
+    public function addMeasurementUnit(MeasurementUnit $measurementUnit): GlobalData
     {
         $this->measurementUnits[] = $measurementUnit;
+        
         return $this;
     }
     
     /**
      * @param array $measurementUnits
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function setMeasurementUnits(array $measurementUnits)
+    public function setMeasurementUnits(array $measurementUnits): GlobalData
     {
         $this->measurementUnits = $measurementUnits;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\MeasurementUnit[]
+     * @return MeasurementUnit[]
      */
-    public function getMeasurementUnits()
+    public function getMeasurementUnits(): array
     {
         return $this->measurementUnits;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function clearMeasurementUnits()
+    public function clearMeasurementUnits(): GlobalData
     {
-        $this->measurementUnits = array();
+        $this->measurementUnits = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ProductType $productType
-     * @return \jtl\Connector\Model\GlobalData
+     * @param ProductType $productType
+     * @return GlobalData
      */
-    public function addProductType(\jtl\Connector\Model\ProductType $productType)
+    public function addProductType(ProductType $productType): GlobalData
     {
         $this->productTypes[] = $productType;
+        
         return $this;
     }
     
     /**
      * @param array $productTypes
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function setProductTypes(array $productTypes)
+    public function setProductTypes(array $productTypes): GlobalData
     {
         $this->productTypes = $productTypes;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductType[]
+     * @return ProductType[]
      */
-    public function getProductTypes()
+    public function getProductTypes(): array
     {
         return $this->productTypes;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function clearProductTypes()
+    public function clearProductTypes(): GlobalData
     {
-        $this->productTypes = array();
+        $this->productTypes = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ShippingClass $shippingClass
-     * @return \jtl\Connector\Model\GlobalData
+     * @param ShippingClass $shippingClass
+     * @return GlobalData
      */
-    public function addShippingClass(\jtl\Connector\Model\ShippingClass $shippingClass)
+    public function addShippingClass(ShippingClass $shippingClass): GlobalData
     {
         $this->shippingClasses[] = $shippingClass;
+        
         return $this;
     }
     
     /**
      * @param array $shippingClasses
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function setShippingClasses(array $shippingClasses)
+    public function setShippingClasses(array $shippingClasses): GlobalData
     {
         $this->shippingClasses = $shippingClasses;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ShippingClass[]
+     * @return ShippingClass[]
      */
-    public function getShippingClasses()
+    public function getShippingClasses(): array
     {
         return $this->shippingClasses;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function clearShippingClasses()
+    public function clearShippingClasses(): GlobalData
     {
-        $this->shippingClasses = array();
+        $this->shippingClasses = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ShippingMethod $shippingMethod
-     * @return \jtl\Connector\Model\GlobalData
+     * @param ShippingMethod $shippingMethod
+     * @return GlobalData
      */
-    public function addShippingMethod(\jtl\Connector\Model\ShippingMethod $shippingMethod)
+    public function addShippingMethod(ShippingMethod $shippingMethod): GlobalData
     {
         $this->shippingMethods[] = $shippingMethod;
+        
         return $this;
     }
     
     /**
      * @param array $shippingMethods
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function setShippingMethods(array $shippingMethods)
+    public function setShippingMethods(array $shippingMethods): GlobalData
     {
         $this->shippingMethods = $shippingMethods;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ShippingMethod[]
+     * @return ShippingMethod[]
      */
-    public function getShippingMethods()
+    public function getShippingMethods(): array
     {
         return $this->shippingMethods;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function clearShippingMethods()
+    public function clearShippingMethods(): GlobalData
     {
-        $this->shippingMethods = array();
+        $this->shippingMethods = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\TaxRate $taxRate
-     * @return \jtl\Connector\Model\GlobalData
+     * @param TaxRate $taxRate
+     * @return GlobalData
      */
-    public function addTaxRate(\jtl\Connector\Model\TaxRate $taxRate)
+    public function addTaxRate(TaxRate $taxRate): GlobalData
     {
         $this->taxRates[] = $taxRate;
+        
         return $this;
     }
     
     /**
      * @param array $taxRates
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function setTaxRates(array $taxRates)
+    public function setTaxRates(array $taxRates): GlobalData
     {
         $this->taxRates = $taxRates;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\TaxRate[]
+     * @return TaxRate[]
      */
-    public function getTaxRates()
+    public function getTaxRates(): array
     {
         return $this->taxRates;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function clearTaxRates()
+    public function clearTaxRates(): GlobalData
     {
-        $this->taxRates = array();
+        $this->taxRates = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\Unit $unit
-     * @return \jtl\Connector\Model\GlobalData
+     * @param Unit $unit
+     * @return GlobalData
      */
-    public function addUnit(\jtl\Connector\Model\Unit $unit)
+    public function addUnit(Unit $unit): GlobalData
     {
         $this->units[] = $unit;
+        
         return $this;
     }
     
     /**
      * @param array $units
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function setUnits(array $units)
+    public function setUnits(array $units): GlobalData
     {
         $this->units = $units;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\Unit[]
+     * @return Unit[]
      */
-    public function getUnits()
+    public function getUnits(): array
     {
         return $this->units;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function clearUnits()
+    public function clearUnits(): GlobalData
     {
-        $this->units = array();
+        $this->units = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\Warehouse $warehouse
-     * @return \jtl\Connector\Model\GlobalData
+     * @param Warehouse $warehouse
+     * @return GlobalData
      */
-    public function addWarehouse(\jtl\Connector\Model\Warehouse $warehouse)
+    public function addWarehouse(Warehouse $warehouse): GlobalData
     {
         $this->warehouses[] = $warehouse;
+        
         return $this;
     }
     
     /**
      * @param array $warehouses
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function setWarehouses(array $warehouses)
+    public function setWarehouses(array $warehouses): GlobalData
     {
         $this->warehouses = $warehouses;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\Warehouse[]
+     * @return Warehouse[]
      */
-    public function getWarehouses()
+    public function getWarehouses(): array
     {
         return $this->warehouses;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\GlobalData
+     * @return GlobalData
      */
-    public function clearWarehouses()
+    public function clearWarehouses(): GlobalData
     {
-        $this->warehouses = array();
+        $this->warehouses = [];
+        
         return $this;
     }
 }

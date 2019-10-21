@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class TaxZone extends DataModel
@@ -28,7 +27,7 @@ class TaxZone extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var string Optional tax zone name e.g. "EU Zone"
      * @Serializer\Type("string")
@@ -36,15 +35,15 @@ class TaxZone extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
-     * @var \jtl\Connector\Model\TaxZoneCountry[]
+     * @var TaxZoneCountry[]
      * @Serializer\Type("array<jtl\Connector\Model\TaxZoneCountry>")
      * @Serializer\SerializedName("countries")
      * @Serializer\AccessType("reflection")
      */
-    protected $countries = array();
-
+    protected $countries = [];
+    
     /**
      * Constructor
      */
@@ -52,17 +51,19 @@ class TaxZone extends DataModel
     {
         $this->id = new Identity();
     }
-
+    
     /**
      * @param Identity $id Unique taxZone id
-     * @return \jtl\Connector\Model\TaxZone
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return TaxZone
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): TaxZone
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique taxZone id
      */
@@ -70,48 +71,52 @@ class TaxZone extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param string $name Optional tax zone name e.g. "EU Zone"
-     * @return \jtl\Connector\Model\TaxZone
+     * @return TaxZone
      */
-    public function setName($name)
+    public function setName(string $name): TaxZone
     {
-        return $this->setProperty('name', $name, 'string');
-    }
-
-    /**
-     * @return string Optional tax zone name e.g. "EU Zone"
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param \jtl\Connector\Model\TaxZoneCountry $country
-     * @return \jtl\Connector\Model\TaxZone
-     */
-    public function addCountry(\jtl\Connector\Model\TaxZoneCountry $country)
-    {
-        $this->countries[] = $country;
+        $this->name = $name;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\TaxZoneCountry[]
+     * @return string Optional tax zone name e.g. "EU Zone"
      */
-    public function getCountries()
+    public function getName(): string
+    {
+        return $this->name;
+    }
+    
+    /**
+     * @param TaxZoneCountry $country
+     * @return TaxZone
+     */
+    public function addCountry(TaxZoneCountry $country): TaxZone
+    {
+        $this->countries[] = $country;
+        
+        return $this;
+    }
+    
+    /**
+     * @return TaxZoneCountry[]
+     */
+    public function getCountries(): array
     {
         return $this->countries;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\TaxZone
+     * @return TaxZone
      */
-    public function clearCountries()
+    public function clearCountries(): TaxZone
     {
-        $this->countries = array();
+        $this->countries = [];
+        
         return $this;
     }
 }

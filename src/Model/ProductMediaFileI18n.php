@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductMediaFileI18n extends DataModel
@@ -28,7 +27,7 @@ class ProductMediaFileI18n extends DataModel
      * @Serializer\Accessor(getter="getProductMediaFileId",setter="setProductMediaFileId")
      */
     protected $productMediaFileId = null;
-
+    
     /**
      * @var string Locale specific description
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class ProductMediaFileI18n extends DataModel
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
-
+    
     /**
      * @var string Locale
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class ProductMediaFileI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
      * @var string Locale specific name
      * @Serializer\Type("string")
@@ -52,7 +51,7 @@ class ProductMediaFileI18n extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * Constructor
      */
@@ -60,72 +59,80 @@ class ProductMediaFileI18n extends DataModel
     {
         $this->productMediaFileId = new Identity();
     }
-
+    
     /**
      * @param Identity $productMediaFileId Reference to mediaFile
-     * @return \jtl\Connector\Model\ProductMediaFileI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductMediaFileI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductMediaFileId(Identity $productMediaFileId)
+    public function setProductMediaFileId(Identity $productMediaFileId): ProductMediaFileI18n
     {
-        return $this->setProperty('productMediaFileId', $productMediaFileId, 'Identity');
+        $this->productMediaFileId = $productMediaFileId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to mediaFile
      */
-    public function getProductMediaFileId()
+    public function getProductMediaFileId(): Identity
     {
         return $this->productMediaFileId;
     }
-
+    
     /**
      * @param string $description Locale specific description
-     * @return \jtl\Connector\Model\ProductMediaFileI18n
+     * @return ProductMediaFileI18n
      */
-    public function setDescription($description)
+    public function setDescription(string $description): ProductMediaFileI18n
     {
-        return $this->setProperty('description', $description, 'string');
+        $this->description = $description;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Locale specific description
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
-
+    
     /**
      * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\ProductMediaFileI18n
+     * @return ProductMediaFileI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): ProductMediaFileI18n
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Locale
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
-
+    
     /**
      * @param string $name Locale specific name
-     * @return \jtl\Connector\Model\ProductMediaFileI18n
+     * @return ProductMediaFileI18n
      */
-    public function setName($name)
+    public function setName(string $name): ProductMediaFileI18n
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Locale specific name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

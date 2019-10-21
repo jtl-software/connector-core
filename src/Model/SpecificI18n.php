@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class SpecificI18n extends DataModel
@@ -28,7 +27,7 @@ class SpecificI18n extends DataModel
      * @Serializer\Accessor(getter="getSpecificId",setter="setSpecificId")
      */
     protected $specificId = null;
-
+    
     /**
      * @var string Locale
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class SpecificI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
      * @var string Localized name
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class SpecificI18n extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * Constructor
      */
@@ -52,55 +51,61 @@ class SpecificI18n extends DataModel
     {
         $this->specificId = new Identity();
     }
-
+    
     /**
      * @param Identity $specificId Reference to specific
-     * @return \jtl\Connector\Model\SpecificI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return SpecificI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setSpecificId(Identity $specificId)
+    public function setSpecificId(Identity $specificId): SpecificI18n
     {
-        return $this->setProperty('specificId', $specificId, 'Identity');
+        $this->specificId = $specificId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to specific
      */
-    public function getSpecificId()
+    public function getSpecificId(): Identity
     {
         return $this->specificId;
     }
-
+    
     /**
      * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\SpecificI18n
+     * @return SpecificI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): SpecificI18n
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Locale
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
-
+    
     /**
      * @param string $name Localized name
-     * @return \jtl\Connector\Model\SpecificI18n
+     * @return SpecificI18n
      */
-    public function setName($name)
+    public function setName(string $name): SpecificI18n
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Localized name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

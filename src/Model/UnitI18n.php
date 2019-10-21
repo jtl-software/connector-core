@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class UnitI18n extends DataModel
@@ -28,7 +27,7 @@ class UnitI18n extends DataModel
      * @Serializer\Accessor(getter="getUnitId",setter="setUnitId")
      */
     protected $unitId = null;
-
+    
     /**
      * @var string Locale
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class UnitI18n extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
      * @var string Localized unit name
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class UnitI18n extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * Constructor
      */
@@ -52,55 +51,61 @@ class UnitI18n extends DataModel
     {
         $this->unitId = new Identity();
     }
-
+    
     /**
      * @param Identity $unitId Unit id
-     * @return \jtl\Connector\Model\UnitI18n
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return UnitI18n
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setUnitId(Identity $unitId)
+    public function setUnitId(Identity $unitId): UnitI18n
     {
-        return $this->setProperty('unitId', $unitId, 'Identity');
+        $this->unitId = $unitId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unit id
      */
-    public function getUnitId()
+    public function getUnitId(): Identity
     {
         return $this->unitId;
     }
-
+    
     /**
      * @param string $languageISO Locale
-     * @return \jtl\Connector\Model\UnitI18n
+     * @return UnitI18n
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): UnitI18n
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Locale
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
-
+    
     /**
      * @param string $name Localized unit name
-     * @return \jtl\Connector\Model\UnitI18n
+     * @return UnitI18n
      */
-    public function setName($name)
+    public function setName(string $name): UnitI18n
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Localized unit name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

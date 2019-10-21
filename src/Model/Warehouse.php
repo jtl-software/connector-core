@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class Warehouse extends DataModel
@@ -28,7 +27,7 @@ class Warehouse extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var string Warehouse name
      * @Serializer\Type("string")
@@ -36,7 +35,7 @@ class Warehouse extends DataModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * Constructor
      */
@@ -44,17 +43,19 @@ class Warehouse extends DataModel
     {
         $this->id = new Identity();
     }
-
+    
     /**
      * @param Identity $id Unique warehouse id
-     * @return \jtl\Connector\Model\Warehouse
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Warehouse
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): Warehouse
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique warehouse id
      */
@@ -62,20 +63,22 @@ class Warehouse extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param string $name Warehouse name
-     * @return \jtl\Connector\Model\Warehouse
+     * @return Warehouse
      */
-    public function setName($name)
+    public function setName(string $name): Warehouse
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Warehouse name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

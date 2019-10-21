@@ -6,10 +6,12 @@
 
 namespace jtl\Connector\Application;
 
+use jtl\Connector\Core\Controller\IController;
 use \jtl\Connector\Core\Rpc\RequestPacket;
 use \jtl\Connector\Mapper\IPrimaryKeyMapper;
 use \jtl\Connector\Authentication\ITokenLoader;
 use \jtl\Connector\Checksum\IChecksumLoader;
+use jtl\Connector\Result\Action;
 
 /**
  * @access public
@@ -67,10 +69,10 @@ interface IEndpointConnector
      *
      * @param \jtl\Connector\Core\Rpc\RequestPacket $requestpacket
      */
-    public function handle(RequestPacket $requestpacket);
+    public function handle(RequestPacket $requestpacket): Action;
     
     /**
      * Controller getter
      */
-    public function getController();
+    public function getController(): IController;
 }

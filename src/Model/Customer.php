@@ -8,6 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +17,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class Customer extends DataModel
@@ -28,7 +28,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-
+    
     /**
      * @var Identity Unique customer id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,15 +36,15 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
-     * @var double 
+     * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("accountCredit")
      * @Serializer\Accessor(getter="getAccountCredit",setter="setAccountCredit")
      */
     protected $accountCredit = 0.0;
-
+    
     /**
      * @var DateTime Date of birth
      * @Serializer\Type("DateTime")
@@ -52,7 +52,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getBirthday",setter="setBirthday")
      */
     protected $birthday = null;
-
+    
     /**
      * @var string City
      * @Serializer\Type("string")
@@ -60,7 +60,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getCity",setter="setCity")
      */
     protected $city = '';
-
+    
     /**
      * @var string Company name
      * @Serializer\Type("string")
@@ -68,7 +68,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getCompany",setter="setCompany")
      */
     protected $company = '';
-
+    
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
      * @Serializer\Type("string")
@@ -76,15 +76,15 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
      */
     protected $countryIso = '';
-
+    
     /**
-     * @var DateTime 
+     * @var DateTime
      * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
     protected $creationDate = null;
-
+    
     /**
      * @var string Optional customer number set by JTL-Wawi ERP software
      * @Serializer\Type("string")
@@ -92,7 +92,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getCustomerNumber",setter="setCustomerNumber")
      */
     protected $customerNumber = '';
-
+    
     /**
      * @var string Delivery instruction e.g. "c/o John Doe"
      * @Serializer\Type("string")
@@ -100,7 +100,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getDeliveryInstruction",setter="setDeliveryInstruction")
      */
     protected $deliveryInstruction = '';
-
+    
     /**
      * @var double Percentage discount for customer on all prices
      * @Serializer\Type("double")
@@ -108,7 +108,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getDiscount",setter="setDiscount")
      */
     protected $discount = 0.0;
-
+    
     /**
      * @var string E-Mail address
      * @Serializer\Type("string")
@@ -116,7 +116,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getEMail",setter="setEMail")
      */
     protected $eMail = '';
-
+    
     /**
      * @var string Extra address line e.g. "Apartment 2.5"
      * @Serializer\Type("string")
@@ -124,7 +124,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getExtraAddressLine",setter="setExtraAddressLine")
      */
     protected $extraAddressLine = '';
-
+    
     /**
      * @var string Fax number
      * @Serializer\Type("string")
@@ -132,7 +132,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getFax",setter="setFax")
      */
     protected $fax = '';
-
+    
     /**
      * @var string First name
      * @Serializer\Type("string")
@@ -140,15 +140,15 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getFirstName",setter="setFirstName")
      */
     protected $firstName = '';
-
+    
     /**
-     * @var boolean 
+     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("hasCustomerAccount")
      * @Serializer\Accessor(getter="getHasCustomerAccount",setter="setHasCustomerAccount")
      */
     protected $hasCustomerAccount = false;
-
+    
     /**
      * @var boolean Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
      * @Serializer\Type("boolean")
@@ -156,15 +156,15 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getHasNewsletterSubscription",setter="setHasNewsletterSubscription")
      */
     protected $hasNewsletterSubscription = false;
-
+    
     /**
-     * @var boolean Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
+     * @var boolean Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isActive")
      * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
      */
     protected $isActive = false;
-
+    
     /**
      * @var string User locale preference
      * @Serializer\Type("string")
@@ -172,7 +172,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
      */
     protected $languageISO = '';
-
+    
     /**
      * @var string Last name
      * @Serializer\Type("string")
@@ -180,7 +180,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getLastName",setter="setLastName")
      */
     protected $lastName = '';
-
+    
     /**
      * @var string Mobile phone number
      * @Serializer\Type("string")
@@ -196,7 +196,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getNote",setter="setNote")
      */
     protected $note = '';
-
+    
     /**
      * @var string Customer origin
      * @Serializer\Type("string")
@@ -204,7 +204,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getOrigin",setter="setOrigin")
      */
     protected $origin = '';
-
+    
     /**
      * @var string Phone number
      * @Serializer\Type("string")
@@ -212,7 +212,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getPhone",setter="setPhone")
      */
     protected $phone = '';
-
+    
     /**
      * @var string Salutation (german: "Anrede")
      * @Serializer\Type("string")
@@ -220,7 +220,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getSalutation",setter="setSalutation")
      */
     protected $salutation = '';
-
+    
     /**
      * @var string State
      * @Serializer\Type("string")
@@ -228,7 +228,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getState",setter="setState")
      */
     protected $state = '';
-
+    
     /**
      * @var string Street name
      * @Serializer\Type("string")
@@ -236,7 +236,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getStreet",setter="setStreet")
      */
     protected $street = '';
-
+    
     /**
      * @var string Title, e.g. "Prof. Dr."
      * @Serializer\Type("string")
@@ -244,7 +244,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getTitle",setter="setTitle")
      */
     protected $title = '';
-
+    
     /**
      * @var string VAT number (german "USt-ID")
      * @Serializer\Type("string")
@@ -252,7 +252,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getVatNumber",setter="setVatNumber")
      */
     protected $vatNumber = '';
-
+    
     /**
      * @var string WWW address
      * @Serializer\Type("string")
@@ -260,7 +260,7 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getWebsiteUrl",setter="setWebsiteUrl")
      */
     protected $websiteUrl = '';
-
+    
     /**
      * @var string ZIP / postal code
      * @Serializer\Type("string")
@@ -268,15 +268,15 @@ class Customer extends DataModel
      * @Serializer\Accessor(getter="getZipCode",setter="setZipCode")
      */
     protected $zipCode = '';
-
+    
     /**
-     * @var \jtl\Connector\Model\CustomerAttr[]
+     * @var CustomerAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerAttr>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
-    protected $attributes = array();
-
+    protected $attributes = [];
+    
     /**
      * Constructor
      */
@@ -285,35 +285,39 @@ class Customer extends DataModel
         $this->customerGroupId = new Identity();
         $this->id = new Identity();
     }
-
+    
     /**
      * @param Identity $customerGroupId References a customer group
-     * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerGroupId(Identity $customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId): Customer
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        $this->customerGroupId = $customerGroupId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity References a customer group
      */
-    public function getCustomerGroupId()
+    public function getCustomerGroupId(): Identity
     {
         return $this->customerGroupId;
     }
-
+    
     /**
      * @param Identity $id Unique customer id
-     * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): Customer
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique customer id
      */
@@ -321,536 +325,597 @@ class Customer extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
-     * @param double $accountCredit 
-     * @return \jtl\Connector\Model\Customer
+     * @param double $accountCredit
+     * @return Customer
      */
-    public function setAccountCredit($accountCredit)
+    public function setAccountCredit(float $accountCredit): Customer
     {
-        return $this->setProperty('accountCredit', $accountCredit, 'double');
+        $this->accountCredit = $accountCredit;
+        
+        return $this;
     }
-
+    
     /**
-     * @return double 
+     * @return double
      */
-    public function getAccountCredit()
+    public function getAccountCredit(): float
     {
         return $this->accountCredit;
     }
-
+    
     /**
-     * @param DateTime $birthday Date of birth
-     * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     * @param \DateTimeInterface $birthday Date of birth
+     * @return Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setBirthday(DateTime $birthday = null)
+    public function setBirthday(\DateTimeInterface $birthday = null): Customer
     {
-        return $this->setProperty('birthday', $birthday, 'DateTime');
+        $this->birthday = $birthday;
+        
+        return $this;
     }
-
+    
     /**
      * @return DateTime Date of birth
      */
-    public function getBirthday()
+    public function getBirthday(): ?\DateTimeInterface
     {
         return $this->birthday;
     }
-
+    
     /**
      * @param string $city City
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setCity($city)
+    public function setCity(string $city): Customer
     {
-        return $this->setProperty('city', $city, 'string');
+        $this->city = $city;
+        
+        return $this;
     }
-
+    
     /**
      * @return string City
      */
-    public function getCity()
+    public function getCity(): string
     {
         return $this->city;
     }
-
+    
     /**
      * @param string $company Company name
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setCompany($company)
+    public function setCompany(string $company): Customer
     {
-        return $this->setProperty('company', $company, 'string');
+        $this->company = $company;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Company name
      */
-    public function getCompany()
+    public function getCompany(): string
     {
         return $this->company;
     }
-
+    
     /**
      * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setCountryIso($countryIso)
+    public function setCountryIso(string $countryIso): Customer
     {
-        return $this->setProperty('countryIso', $countryIso, 'string');
+        $this->countryIso = $countryIso;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Country ISO 3166-2 (2 letter Uppercase)
      */
-    public function getCountryIso()
+    public function getCountryIso(): string
     {
         return $this->countryIso;
     }
-
+    
     /**
-     * @param DateTime $creationDate 
-     * @return \jtl\Connector\Model\Customer
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     * @param \DateTimeInterface $creationDate
+     * @return Customer
+     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreationDate(DateTime $creationDate = null)
+    public function setCreationDate(\DateTimeInterface $creationDate = null): Customer
     {
-        return $this->setProperty('creationDate', $creationDate, 'DateTime');
+        $this->creationDate = $creationDate;
+        
+        return $this;
     }
-
+    
     /**
-     * @return DateTime 
+     * @return DateTime
      */
-    public function getCreationDate()
+    public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creationDate;
     }
-
+    
     /**
      * @param string $customerNumber Optional customer number set by JTL-Wawi ERP software
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setCustomerNumber($customerNumber)
+    public function setCustomerNumber(string $customerNumber): Customer
     {
-        return $this->setProperty('customerNumber', $customerNumber, 'string');
+        $this->customerNumber = $customerNumber;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional customer number set by JTL-Wawi ERP software
      */
-    public function getCustomerNumber()
+    public function getCustomerNumber(): string
     {
         return $this->customerNumber;
     }
-
+    
     /**
      * @param string $deliveryInstruction Delivery instruction e.g. "c/o John Doe"
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setDeliveryInstruction($deliveryInstruction)
+    public function setDeliveryInstruction(string $deliveryInstruction): Customer
     {
-        return $this->setProperty('deliveryInstruction', $deliveryInstruction, 'string');
+        $this->deliveryInstruction = $deliveryInstruction;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Delivery instruction e.g. "c/o John Doe"
      */
-    public function getDeliveryInstruction()
+    public function getDeliveryInstruction(): string
     {
         return $this->deliveryInstruction;
     }
-
+    
     /**
      * @param double $discount Percentage discount for customer on all prices
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setDiscount($discount)
+    public function setDiscount(float $discount): Customer
     {
-        return $this->setProperty('discount', $discount, 'double');
+        $this->discount = $discount;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Percentage discount for customer on all prices
      */
-    public function getDiscount()
+    public function getDiscount(): float
     {
         return $this->discount;
     }
-
+    
     /**
      * @param string $eMail E-Mail address
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setEMail($eMail)
+    public function setEMail(string $eMail): Customer
     {
-        return $this->setProperty('eMail', $eMail, 'string');
+        $this->eMail = $eMail;
+        
+        return $this;
     }
-
+    
     /**
      * @return string E-Mail address
      */
-    public function getEMail()
+    public function getEMail(): string
     {
         return $this->eMail;
     }
-
+    
     /**
      * @param string $extraAddressLine Extra address line e.g. "Apartment 2.5"
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setExtraAddressLine($extraAddressLine)
+    public function setExtraAddressLine(string $extraAddressLine): Customer
     {
-        return $this->setProperty('extraAddressLine', $extraAddressLine, 'string');
+        $this->extraAddressLine = $extraAddressLine;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Extra address line e.g. "Apartment 2.5"
      */
-    public function getExtraAddressLine()
+    public function getExtraAddressLine(): string
     {
         return $this->extraAddressLine;
     }
-
+    
     /**
      * @param string $fax Fax number
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setFax($fax)
+    public function setFax(string $fax): Customer
     {
-        return $this->setProperty('fax', $fax, 'string');
+        $this->fax = $fax;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Fax number
      */
-    public function getFax()
+    public function getFax(): string
     {
         return $this->fax;
     }
-
+    
     /**
      * @param string $firstName First name
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setFirstName($firstName)
+    public function setFirstName(string $firstName): Customer
     {
-        return $this->setProperty('firstName', $firstName, 'string');
+        $this->firstName = $firstName;
+        
+        return $this;
     }
-
+    
     /**
      * @return string First name
      */
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
-
+    
     /**
-     * @param boolean $hasCustomerAccount 
-     * @return \jtl\Connector\Model\Customer
+     * @param boolean $hasCustomerAccount
+     * @return Customer
      */
-    public function setHasCustomerAccount($hasCustomerAccount)
+    public function setHasCustomerAccount(bool $hasCustomerAccount): Customer
     {
-        return $this->setProperty('hasCustomerAccount', $hasCustomerAccount, 'boolean');
+        $this->hasCustomerAccount = $hasCustomerAccount;
+        
+        return $this;
     }
-
+    
     /**
-     * @return boolean 
+     * @return boolean
      */
-    public function getHasCustomerAccount()
+    public function getHasCustomerAccount(): bool
     {
         return $this->hasCustomerAccount;
     }
-
+    
     /**
      * @param boolean $hasNewsletterSubscription Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setHasNewsletterSubscription($hasNewsletterSubscription)
+    public function setHasNewsletterSubscription(bool $hasNewsletterSubscription): Customer
     {
-        return $this->setProperty('hasNewsletterSubscription', $hasNewsletterSubscription, 'boolean');
+        $this->hasNewsletterSubscription = $hasNewsletterSubscription;
+        
+        return $this;
     }
-
+    
     /**
      * @return boolean Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
      */
-    public function getHasNewsletterSubscription()
+    public function getHasNewsletterSubscription(): bool
     {
         return $this->hasNewsletterSubscription;
     }
-
+    
     /**
-     * @param boolean $isActive Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
-     * @return \jtl\Connector\Model\Customer
+     * @param boolean $isActive Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password.
+     * @return Customer
      */
-    public function setIsActive($isActive)
+    public function setIsActive(bool $isActive): Customer
     {
-        return $this->setProperty('isActive', $isActive, 'boolean');
+        $this->isActive = $isActive;
+        
+        return $this;
     }
-
+    
     /**
-     * @return boolean Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
+     * @return boolean Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password.
      */
-    public function getIsActive()
+    public function getIsActive(): bool
     {
         return $this->isActive;
     }
-
+    
     /**
      * @param string $languageISO User locale preference
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setLanguageISO($languageISO)
+    public function setLanguageISO(string $languageISO): Customer
     {
-        return $this->setProperty('languageISO', $languageISO, 'string');
+        $this->languageISO = $languageISO;
+        
+        return $this;
     }
-
+    
     /**
      * @return string User locale preference
      */
-    public function getLanguageISO()
+    public function getLanguageISO(): string
     {
         return $this->languageISO;
     }
-
+    
     /**
      * @param string $lastName Last name
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setLastName($lastName)
+    public function setLastName(string $lastName): Customer
     {
-        return $this->setProperty('lastName', $lastName, 'string');
+        $this->lastName = $lastName;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Last name
      */
-    public function getLastName()
+    public function getLastName(): string
     {
         return $this->lastName;
     }
-
+    
     /**
      * @param string $mobile Mobile phone number
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setMobile($mobile)
+    public function setMobile(string $mobile): Customer
     {
-        return $this->setProperty('mobile', $mobile, 'string');
+        $this->mobile = $mobile;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Mobile phone number
      */
-    public function getMobile()
+    public function getMobile(): string
     {
         return $this->mobile;
     }
     
     /**
      * @param string $note customer note
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setNote($note)
+    public function setNote(string $note): Customer
     {
-        return $this->setProperty('note', $note, 'string');
+        $this->note = $note;
+        
+        return $this;
     }
     
     /**
      * @return string customer note
      */
-    public function getNote()
+    public function getNote(): string
     {
         return $this->note;
     }
-
+    
     /**
      * @param string $origin Customer origin
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setOrigin($origin)
+    public function setOrigin(string $origin): Customer
     {
-        return $this->setProperty('origin', $origin, 'string');
+        $this->origin = $origin;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Customer origin
      */
-    public function getOrigin()
+    public function getOrigin(): string
     {
         return $this->origin;
     }
-
+    
     /**
      * @param string $phone Phone number
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setPhone($phone)
+    public function setPhone(string $phone): Customer
     {
-        return $this->setProperty('phone', $phone, 'string');
+        $this->phone = $phone;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Phone number
      */
-    public function getPhone()
+    public function getPhone(): string
     {
         return $this->phone;
     }
-
+    
     /**
      * @param string $salutation Salutation (german: "Anrede")
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setSalutation($salutation)
+    public function setSalutation(string $salutation): Customer
     {
-        return $this->setProperty('salutation', $salutation, 'string');
+        $this->salutation = $salutation;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Salutation (german: "Anrede")
      */
-    public function getSalutation()
+    public function getSalutation(): string
     {
         return $this->salutation;
     }
-
+    
     /**
      * @param string $state State
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setState($state)
+    public function setState(string $state): Customer
     {
-        return $this->setProperty('state', $state, 'string');
+        $this->state = $state;
+        
+        return $this;
     }
-
+    
     /**
      * @return string State
      */
-    public function getState()
+    public function getState(): string
     {
         return $this->state;
     }
-
+    
     /**
      * @param string $street Street name
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setStreet($street)
+    public function setStreet(string $street): Customer
     {
-        return $this->setProperty('street', $street, 'string');
+        $this->street = $street;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Street name
      */
-    public function getStreet()
+    public function getStreet(): string
     {
         return $this->street;
     }
-
+    
     /**
      * @param string $title Title, e.g. "Prof. Dr."
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setTitle($title)
+    public function setTitle(string $title): Customer
     {
-        return $this->setProperty('title', $title, 'string');
+        $this->title = $title;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Title, e.g. "Prof. Dr."
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
-
+    
     /**
      * @param string $vatNumber VAT number (german "USt-ID")
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setVatNumber($vatNumber)
+    public function setVatNumber(string $vatNumber): Customer
     {
-        return $this->setProperty('vatNumber', $vatNumber, 'string');
+        $this->vatNumber = $vatNumber;
+        
+        return $this;
     }
-
+    
     /**
      * @return string VAT number (german "USt-ID")
      */
-    public function getVatNumber()
+    public function getVatNumber(): string
     {
         return $this->vatNumber;
     }
-
+    
     /**
      * @param string $websiteUrl WWW address
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setWebsiteUrl($websiteUrl)
+    public function setWebsiteUrl(string $websiteUrl): Customer
     {
-        return $this->setProperty('websiteUrl', $websiteUrl, 'string');
+        $this->websiteUrl = $websiteUrl;
+        
+        return $this;
     }
-
+    
     /**
      * @return string WWW address
      */
-    public function getWebsiteUrl()
+    public function getWebsiteUrl(): string
     {
         return $this->websiteUrl;
     }
-
+    
     /**
      * @param string $zipCode ZIP / postal code
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setZipCode($zipCode)
+    public function setZipCode(string $zipCode): Customer
     {
-        return $this->setProperty('zipCode', $zipCode, 'string');
+        $this->zipCode = $zipCode;
+        
+        return $this;
     }
-
+    
     /**
      * @return string ZIP / postal code
      */
-    public function getZipCode()
+    public function getZipCode(): string
     {
         return $this->zipCode;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\CustomerAttr $attribute
-     * @return \jtl\Connector\Model\Customer
+     * @param CustomerAttr $attribute
+     * @return Customer
      */
-    public function addAttribute(\jtl\Connector\Model\CustomerAttr $attribute)
+    public function addAttribute(CustomerAttr $attribute): Customer
     {
         $this->attributes[] = $attribute;
+        
         return $this;
     }
     
     /**
      * @param array $attributes
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function setAttributes(array $attributes)
+    public function setAttributes(array $attributes): Customer
     {
         $this->attributes = $attributes;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\CustomerAttr[]
+     * @return CustomerAttr[]
      */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         return $this->attributes;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Customer
+     * @return Customer
      */
-    public function clearAttributes()
+    public function clearAttributes(): Customer
     {
-        $this->attributes = array();
+        $this->attributes = [];
+        
         return $this;
     }
 }

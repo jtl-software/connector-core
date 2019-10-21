@@ -7,87 +7,89 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class DeliveryNoteTrackingList extends DataModel
 {
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
+    
     /**
      * @var string[]
      * @Serializer\Type("array<string>")
      * @Serializer\SerializedName("codes")
      * @Serializer\AccessType("reflection")
      */
-    protected $codes = array();
-
-
+    protected $codes = [];
+    
+    
     /**
-     * @param string $name 
-     * @return \jtl\Connector\Model\DeliveryNoteTrackingList
+     * @param string $name
+     * @return DeliveryNoteTrackingList
      */
-    public function setName($name)
+    public function setName(string $name): DeliveryNoteTrackingList
     {
-        return $this->setProperty('name', $name, 'string');
+        $this->name = $name;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
-
+    
     /**
      * @param string $code
-     * @return \jtl\Connector\Model\DeliveryNoteTrackingList
+     * @return DeliveryNoteTrackingList
      */
-    public function addCode($code)
+    public function addCode(string $code): DeliveryNoteTrackingList
     {
         $this->codes[] = $code;
+        
         return $this;
     }
     
     /**
      * @param array $codes
-     * @return \jtl\Connector\Model\DeliveryNoteTrackingList
+     * @return DeliveryNoteTrackingList
      */
-    public function setCodes(array $codes)
+    public function setCodes(array $codes): DeliveryNoteTrackingList
     {
         $this->codes = $codes;
+        
         return $this;
     }
     
     /**
      * @return string[]
      */
-    public function getCodes()
+    public function getCodes(): array
     {
         return $this->codes;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\DeliveryNoteTrackingList
+     * @return DeliveryNoteTrackingList
      */
-    public function clearCodes()
+    public function clearCodes(): DeliveryNoteTrackingList
     {
-        $this->codes = array();
+        $this->codes = [];
+        
         return $this;
     }
 }

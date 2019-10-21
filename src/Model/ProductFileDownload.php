@@ -8,82 +8,81 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductFileDownload extends DataModel
 {
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-
+    
     /**
-     * @var DateTime 
+     * @var DateTime
      * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
     protected $creationDate = null;
-
+    
     /**
-     * @var integer 
+     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("maxDays")
      * @Serializer\Accessor(getter="getMaxDays",setter="setMaxDays")
      */
     protected $maxDays = 0;
-
+    
     /**
-     * @var integer 
+     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("maxDownloads")
      * @Serializer\Accessor(getter="getMaxDownloads",setter="setMaxDownloads")
      */
     protected $maxDownloads = 0;
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("path")
      * @Serializer\Accessor(getter="getPath",setter="setPath")
      */
     protected $path = '';
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("previewPath")
      * @Serializer\Accessor(getter="getPreviewPath",setter="setPreviewPath")
      */
     protected $previewPath = '';
-
+    
     /**
-     * @var integer 
+     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
-
+    
     /**
-     * @var \jtl\Connector\Model\ProductFileDownloadI18n[]
+     * @var ProductFileDownloadI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductFileDownloadI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
-
+    protected $i18ns = [];
+    
     /**
      * Constructor
      */
@@ -91,162 +90,179 @@ class ProductFileDownload extends DataModel
     {
         $this->productId = new Identity();
     }
-
+    
     /**
-     * @param Identity $productId 
-     * @return \jtl\Connector\Model\ProductFileDownload
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @param Identity $productId
+     * @return ProductFileDownload
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): ProductFileDownload
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        $this->productId = $productId;
+        
+        return $this;
     }
-
+    
     /**
-     * @return Identity 
+     * @return Identity
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
-
+    
     /**
-     * @param DateTime $creationDate 
-     * @return \jtl\Connector\Model\ProductFileDownload
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     * @param \DateTimeInterface $creationDate
+     * @return ProductFileDownload
+     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreationDate(DateTime $creationDate = null)
+    public function setCreationDate(\DateTimeInterface $creationDate = null): ProductFileDownload
     {
-        return $this->setProperty('creationDate', $creationDate, 'DateTime');
+        $this->creationDate = $creationDate;
+        
+        return $this;
     }
-
+    
     /**
-     * @return DateTime 
+     * @return DateTime
      */
-    public function getCreationDate()
+    public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creationDate;
     }
-
+    
     /**
-     * @param integer $maxDays 
-     * @return \jtl\Connector\Model\ProductFileDownload
+     * @param integer $maxDays
+     * @return ProductFileDownload
      */
-    public function setMaxDays($maxDays)
+    public function setMaxDays(int $maxDays): ProductFileDownload
     {
-        return $this->setProperty('maxDays', $maxDays, 'integer');
+        $this->maxDays = $maxDays;
+        
+        return $this;
     }
-
+    
     /**
-     * @return integer 
+     * @return integer
      */
-    public function getMaxDays()
+    public function getMaxDays(): int
     {
         return $this->maxDays;
     }
-
+    
     /**
-     * @param integer $maxDownloads 
-     * @return \jtl\Connector\Model\ProductFileDownload
+     * @param integer $maxDownloads
+     * @return ProductFileDownload
      */
-    public function setMaxDownloads($maxDownloads)
+    public function setMaxDownloads(int $maxDownloads): ProductFileDownload
     {
-        return $this->setProperty('maxDownloads', $maxDownloads, 'integer');
+        $this->maxDownloads = $maxDownloads;
+        
+        return $this;
     }
-
+    
     /**
-     * @return integer 
+     * @return integer
      */
-    public function getMaxDownloads()
+    public function getMaxDownloads(): int
     {
         return $this->maxDownloads;
     }
-
+    
     /**
-     * @param string $path 
-     * @return \jtl\Connector\Model\ProductFileDownload
+     * @param string $path
+     * @return ProductFileDownload
      */
-    public function setPath($path)
+    public function setPath(string $path): ProductFileDownload
     {
-        return $this->setProperty('path', $path, 'string');
+        $this->path = $path;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
-    public function getPath()
+    public function getPath(): string
     {
         return $this->path;
     }
-
+    
     /**
-     * @param string $previewPath 
-     * @return \jtl\Connector\Model\ProductFileDownload
+     * @param string $previewPath
+     * @return ProductFileDownload
      */
-    public function setPreviewPath($previewPath)
+    public function setPreviewPath(string $previewPath): ProductFileDownload
     {
-        return $this->setProperty('previewPath', $previewPath, 'string');
+        $this->previewPath = $previewPath;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
-    public function getPreviewPath()
+    public function getPreviewPath(): string
     {
         return $this->previewPath;
     }
-
+    
     /**
-     * @param integer $sort 
-     * @return \jtl\Connector\Model\ProductFileDownload
+     * @param integer $sort
+     * @return ProductFileDownload
      */
-    public function setSort($sort)
+    public function setSort(int $sort): ProductFileDownload
     {
-        return $this->setProperty('sort', $sort, 'integer');
+        $this->sort = $sort;
+        
+        return $this;
     }
-
+    
     /**
-     * @return integer 
+     * @return integer
      */
-    public function getSort()
+    public function getSort(): int
     {
         return $this->sort;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ProductFileDownloadI18n $i18n
-     * @return \jtl\Connector\Model\ProductFileDownload
+     * @param ProductFileDownloadI18n $i18n
+     * @return ProductFileDownload
      */
-    public function addI18n(\jtl\Connector\Model\ProductFileDownloadI18n $i18n)
+    public function addI18n(ProductFileDownloadI18n $i18n): ProductFileDownload
     {
         $this->i18ns[] = $i18n;
+        
         return $this;
     }
     
     /**
      * @param array $i18ns
-     * @return \jtl\Connector\Model\ProductFileDownload
+     * @return ProductFileDownload
      */
-    public function setI18ns(array $i18ns)
+    public function setI18ns(array $i18ns): ProductFileDownload
     {
         $this->i18ns = $i18ns;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductFileDownloadI18n[]
+     * @return ProductFileDownloadI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\ProductFileDownload
+     * @return ProductFileDownload
      */
-    public function clearI18ns()
+    public function clearI18ns(): ProductFileDownload
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
+        
         return $this;
     }
 }

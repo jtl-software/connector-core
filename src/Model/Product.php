@@ -8,6 +8,7 @@
 namespace jtl\Connector\Model;
 
 use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +17,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class Product extends DataModel
@@ -28,7 +28,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getBasePriceUnitId",setter="setBasePriceUnitId")
      */
     protected $basePriceUnitId = null;
-
+    
     /**
      * @var Identity Unique product id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +36,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var Identity Reference to manufacturer
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -44,7 +44,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getManufacturerId",setter="setManufacturerId")
      */
     protected $manufacturerId = null;
-
+    
     /**
      * @var Identity Reference to master product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -52,7 +52,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getMasterProductId",setter="setMasterProductId")
      */
     protected $masterProductId = null;
-
+    
     /**
      * @var Identity Optional reference to measurement unit id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -60,7 +60,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getMeasurementUnitId",setter="setMeasurementUnitId")
      */
     protected $measurementUnitId = null;
-
+    
     /**
      * @var Identity Optional reference to partsList
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -68,7 +68,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getPartsListId",setter="setPartsListId")
      */
     protected $partsListId = null;
-
+    
     /**
      * @var Identity Optional reference to productType
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -76,7 +76,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getProductTypeId",setter="setProductTypeId")
      */
     protected $productTypeId = null;
-
+    
     /**
      * @var Identity Reference to shippingClass
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -84,7 +84,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getShippingClassId",setter="setShippingClassId")
      */
     protected $shippingClassId = null;
-
+    
     /**
      * @var Identity Reference to unit
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -92,7 +92,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getUnitId",setter="setUnitId")
      */
     protected $unitId = null;
-
+    
     /**
      * @var string Optional Amazon Standard Identification Number
      * @Serializer\Type("string")
@@ -100,15 +100,15 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getAsin",setter="setAsin")
      */
     protected $asin = '';
-
+    
     /**
-     * @var DateTime Optional available from date. Specify a date, upon when product can be purchased. 
+     * @var DateTime Optional available from date. Specify a date, upon when product can be purchased.
      * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("availableFrom")
      * @Serializer\Accessor(getter="getAvailableFrom",setter="setAvailableFrom")
      */
     protected $availableFrom = null;
-
+    
     /**
      * @var double Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
      * @Serializer\Type("double")
@@ -116,15 +116,15 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getBasePriceDivisor",setter="setBasePriceDivisor")
      */
     protected $basePriceDivisor = 0.0;
-
+    
     /**
-     * @var double 
+     * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("basePriceFactor")
      * @Serializer\Accessor(getter="getBasePriceFactor",setter="setBasePriceFactor")
      */
     protected $basePriceFactor = 0.0;
-
+    
     /**
      * @var double Optional base price quantity
      * @Serializer\Type("double")
@@ -132,23 +132,23 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getBasePriceQuantity",setter="setBasePriceQuantity")
      */
     protected $basePriceQuantity = 0.0;
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("basePriceUnitCode")
      * @Serializer\Accessor(getter="getBasePriceUnitCode",setter="setBasePriceUnitCode")
      */
     protected $basePriceUnitCode = '';
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("basePriceUnitName")
      * @Serializer\Accessor(getter="getBasePriceUnitName",setter="setBasePriceUnitName")
      */
     protected $basePriceUnitName = '';
-
+    
     /**
      * @var boolean Optional: Set to true to display base price / unit pricing measure
      * @Serializer\Type("boolean")
@@ -156,7 +156,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getConsiderBasePrice",setter="setConsiderBasePrice")
      */
     protected $considerBasePrice = false;
-
+    
     /**
      * @var boolean Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
      * @Serializer\Type("boolean")
@@ -164,15 +164,15 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getConsiderStock",setter="setConsiderStock")
      */
     protected $considerStock = false;
-
+    
     /**
-     * @var boolean Optional: Consider stock levels of productVariations. Same as considerStock but for variations. 
+     * @var boolean Optional: Consider stock levels of productVariations. Same as considerStock but for variations.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("considerVariationStock")
      * @Serializer\Accessor(getter="getConsiderVariationStock",setter="setConsiderVariationStock")
      */
     protected $considerVariationStock = false;
-
+    
     /**
      * @var DateTime Creation date
      * @Serializer\Type("DateTime")
@@ -180,7 +180,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
     protected $creationDate = null;
-
+    
     /**
      * @var string Optional European Article Number (EAN)
      * @Serializer\Type("string")
@@ -188,7 +188,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getEan",setter="setEan")
      */
     protected $ean = '';
-
+    
     /**
      * @var string Optional Ebay product ID
      * @Serializer\Type("string")
@@ -196,7 +196,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getEpid",setter="setEpid")
      */
     protected $epid = '';
-
+    
     /**
      * @var string Optional Hazard identifier, encodes general hazard class und subdivision
      * @Serializer\Type("string")
@@ -204,7 +204,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getHazardIdNumber",setter="setHazardIdNumber")
      */
     protected $hazardIdNumber = '';
-
+    
     /**
      * @var double Optional product height
      * @Serializer\Type("double")
@@ -212,31 +212,31 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getHeight",setter="setHeight")
      */
     protected $height = 0.0;
-
+    
     /**
-     * @var boolean 
+     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isActive")
      * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
      */
     protected $isActive = false;
-
+    
     /**
-     * @var boolean 
+     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isBatch")
      * @Serializer\Accessor(getter="getIsBatch",setter="setIsBatch")
      */
     protected $isBatch = false;
-
+    
     /**
-     * @var boolean 
+     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isBestBefore")
      * @Serializer\Accessor(getter="getIsBestBefore",setter="setIsBestBefore")
      */
     protected $isBestBefore = false;
-
+    
     /**
      * @var string Optional International Standard Book Number
      * @Serializer\Type("string")
@@ -244,7 +244,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getIsbn",setter="setIsbn")
      */
     protected $isbn = '';
-
+    
     /**
      * @var boolean Optional: Set to true to allow non-integer quantites for purchase
      * @Serializer\Type("boolean")
@@ -252,7 +252,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getIsDivisible",setter="setIsDivisible")
      */
     protected $isDivisible = false;
-
+    
     /**
      * @var boolean Optional flag if product is master product
      * @Serializer\Type("boolean")
@@ -260,7 +260,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getIsMasterProduct",setter="setIsMasterProduct")
      */
     protected $isMasterProduct = false;
-
+    
     /**
      * @var boolean Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
      * @Serializer\Type("boolean")
@@ -268,15 +268,15 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getisNewProduct",setter="setisNewProduct")
      */
     protected $isNewProduct = false;
-
+    
     /**
-     * @var boolean 
+     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isSerialNumber")
      * @Serializer\Accessor(getter="getIsSerialNumber",setter="setIsSerialNumber")
      */
     protected $isSerialNumber = false;
-
+    
     /**
      * @var boolean Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
      * @Serializer\Type("boolean")
@@ -284,7 +284,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getIsTopProduct",setter="setIsTopProduct")
      */
     protected $isTopProduct = false;
-
+    
     /**
      * @var string Optional internal keywords and synonyms for product
      * @Serializer\Type("string")
@@ -292,7 +292,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getKeywords",setter="setKeywords")
      */
     protected $keywords = '';
-
+    
     /**
      * @var double Optional product length
      * @Serializer\Type("double")
@@ -300,7 +300,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getLength",setter="setLength")
      */
     protected $length = 0.0;
-
+    
     /**
      * @var string Optional manufacturer number
      * @Serializer\Type("string")
@@ -310,13 +310,13 @@ class Product extends DataModel
     protected $manufacturerNumber = '';
     
     /**
-     * @var \jtl\Connector\Model\Manufacturer
+     * @var Manufacturer
      * @Serializer\Type("jtl\Connector\Model\Manufacturer")
      * @Serializer\SerializedName("manufacturer")
      * @Serializer\Accessor(getter="getManufacturer",setter="setManufacturer")
      */
     protected $manufacturer = null;
-
+    
     /**
      * @var double Optional measurement quantity
      * @Serializer\Type("double")
@@ -324,41 +324,41 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getMeasurementQuantity",setter="setMeasurementQuantity")
      */
     protected $measurementQuantity = 0.0;
-
+    
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("measurementUnitCode")
      * @Serializer\Accessor(getter="getMeasurementUnitCode",setter="setMeasurementUnitCode")
      */
     protected $measurementUnitCode = '';
-
+    
     /**
-     * @var DateTime 
+     * @var DateTime
      * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("minBestBeforeDate")
      * @Serializer\Accessor(getter="getMinBestBeforeDate",setter="setMinBestBeforeDate")
      */
     protected $minBestBeforeDate = null;
-
+    
     /**
-     * @var double 
+     * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("minimumOrderQuantity")
      * @Serializer\Accessor(getter="getMinimumOrderQuantity",setter="setMinimumOrderQuantity")
      */
     protected $minimumOrderQuantity = 0.0;
-
+    
     /**
-     * @var double 
+     * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("minimumQuantity")
      * @Serializer\Accessor(getter="getMinimumQuantity",setter="setMinimumQuantity")
      */
     protected $minimumQuantity = 0.0;
-
+    
     /**
-     * @var DateTime 
+     * @var DateTime
      * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("modified")
      * @Serializer\Accessor(getter="getModified",setter="setModified")
@@ -372,7 +372,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getNewReleaseDate",setter="setNewReleaseDate")
      */
     protected $newReleaseDate = null;
-
+    
     /**
      * @var DateTime Contains the date of the next available inflow.
      * @Serializer\Type("DateTime")
@@ -380,7 +380,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getNextAvailableInflowDate",setter="setNextAvailableInflowDate")
      */
     protected $nextAvailableInflowDate = null;
-
+    
     /**
      * @var double Contains the quantity of the next available inflow.
      * @Serializer\Type("double")
@@ -388,7 +388,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getNextAvailableInflowQuantity",setter="setNextAvailableInflowQuantity")
      */
     protected $nextAvailableInflowQuantity = 0.0;
-
+    
     /**
      * @var string Optional internal product note
      * @Serializer\Type("string")
@@ -396,7 +396,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getNote",setter="setNote")
      */
     protected $note = '';
-
+    
     /**
      * @var string Optional Origin country
      * @Serializer\Type("string")
@@ -404,7 +404,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getOriginCountry",setter="setOriginCountry")
      */
     protected $originCountry = '';
-
+    
     /**
      * @var double Optional: Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      * @Serializer\Type("double")
@@ -412,15 +412,15 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getPackagingQuantity",setter="setPackagingQuantity")
      */
     protected $packagingQuantity = 0.0;
-
+    
     /**
-     * @var boolean Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true. 
+     * @var boolean Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("permitNegativeStock")
      * @Serializer\Accessor(getter="getPermitNegativeStock",setter="setPermitNegativeStock")
      */
     protected $permitNegativeStock = false;
-
+    
     /**
      * @var double Productweight exclusive packaging
      * @Serializer\Type("double")
@@ -428,23 +428,23 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getProductWeight",setter="setProductWeight")
      */
     protected $productWeight = 0.0;
-
+    
     /**
-     * @var double 
+     * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("purchasePrice")
      * @Serializer\Accessor(getter="getPurchasePrice",setter="setPurchasePrice")
      */
     protected $purchasePrice = 0.0;
-
+    
     /**
-     * @var double Optional recommended retail price (gross) 
+     * @var double Optional recommended retail price (gross)
      * @Serializer\Type("double")
      * @Serializer\SerializedName("recommendedRetailPrice")
      * @Serializer\Accessor(getter="getRecommendedRetailPrice",setter="setRecommendedRetailPrice")
      */
     protected $recommendedRetailPrice = 0.0;
-
+    
     /**
      * @var string Optional serial number
      * @Serializer\Type("string")
@@ -452,7 +452,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getSerialNumber",setter="setSerialNumber")
      */
     protected $serialNumber = '';
-
+    
     /**
      * @var double Productweight inclusive packaging
      * @Serializer\Type("double")
@@ -460,7 +460,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getShippingWeight",setter="setShippingWeight")
      */
     protected $shippingWeight = 0.0;
-
+    
     /**
      * @var string Optional stock keeping unit identifier
      * @Serializer\Type("string")
@@ -468,7 +468,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getSku",setter="setSku")
      */
     protected $sku = '';
-
+    
     /**
      * @var integer Optional sort number for product sorting in lists
      * @Serializer\Type("integer")
@@ -476,31 +476,31 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
-
+    
     /**
-     * @var ProductStockLevel 
+     * @var ProductStockLevel
      * @Serializer\Type("jtl\Connector\Model\ProductStockLevel")
      * @Serializer\SerializedName("stockLevel")
      * @Serializer\Accessor(getter="getStockLevel",setter="setStockLevel")
      */
     protected $stockLevel = null;
-
+    
     /**
-     * @var integer 
+     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("supplierDeliveryTime")
      * @Serializer\Accessor(getter="getSupplierDeliveryTime",setter="setSupplierDeliveryTime")
      */
     protected $supplierDeliveryTime = 0;
-
+    
     /**
-     * @var double 
+     * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("supplierStockLevel")
      * @Serializer\Accessor(getter="getSupplierStockLevel",setter="setSupplierStockLevel")
      */
     protected $supplierStockLevel = 0.0;
-
+    
     /**
      * @var string Optional TARIC
      * @Serializer\Type("string")
@@ -508,7 +508,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getTaric",setter="setTaric")
      */
     protected $taric = '';
-
+    
     /**
      * @var string Optional UN number, used to define hazardous properties
      * @Serializer\Type("string")
@@ -516,7 +516,7 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getUnNumber",setter="setUnNumber")
      */
     protected $unNumber = '';
-
+    
     /**
      * @var string Optional Universal Product Code
      * @Serializer\Type("string")
@@ -524,15 +524,15 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getUpc",setter="setUpc")
      */
     protected $upc = '';
-
+    
     /**
-     * @var double 
+     * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("vat")
      * @Serializer\Accessor(getter="getVat",setter="setVat")
      */
     protected $vat = 0.0;
-
+    
     /**
      * @var double Optional product width
      * @Serializer\Type("double")
@@ -540,135 +540,135 @@ class Product extends DataModel
      * @Serializer\Accessor(getter="getWidth",setter="setWidth")
      */
     protected $width = 0.0;
-
+    
     /**
-     * @var \jtl\Connector\Model\ProductAttr[]
+     * @var ProductAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductAttr>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
-    protected $attributes = array();
-
+    protected $attributes = [];
+    
     /**
-     * @var \jtl\Connector\Model\Product2Category[]
+     * @var Product2Category[]
      * @Serializer\Type("array<jtl\Connector\Model\Product2Category>")
      * @Serializer\SerializedName("categories")
      * @Serializer\AccessType("reflection")
      */
-    protected $categories = array();
-
+    protected $categories = [];
+    
     /**
-     * @var \jtl\Connector\Model\ProductChecksum[]
+     * @var ProductChecksum[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductChecksum>")
      * @Serializer\SerializedName("checksums")
      * @Serializer\AccessType("reflection")
      */
-    protected $checksums = array();
-
+    protected $checksums = [];
+    
     /**
-     * @var \jtl\Connector\Model\ProductConfigGroup[]
+     * @var ProductConfigGroup[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductConfigGroup>")
      * @Serializer\SerializedName("configGroups")
      * @Serializer\AccessType("reflection")
      */
-    protected $configGroups = array();
-
+    protected $configGroups = [];
+    
     /**
-     * @var \jtl\Connector\Model\CustomerGroupPackagingQuantity[]
+     * @var CustomerGroupPackagingQuantity[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerGroupPackagingQuantity>")
      * @Serializer\SerializedName("customerGroupPackagingQuantities")
      * @Serializer\AccessType("reflection")
      */
-    protected $customerGroupPackagingQuantities = array();
-
+    protected $customerGroupPackagingQuantities = [];
+    
     /**
-     * @var \jtl\Connector\Model\ProductFileDownload[]
+     * @var ProductFileDownload[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductFileDownload>")
      * @Serializer\SerializedName("fileDownloads")
      * @Serializer\AccessType("reflection")
      */
-    protected $fileDownloads = array();
-
+    protected $fileDownloads = [];
+    
     /**
-     * @var \jtl\Connector\Model\ProductI18n[]
+     * @var ProductI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
-
+    protected $i18ns = [];
+    
     /**
-     * @var \jtl\Connector\Model\ProductInvisibility[]
+     * @var ProductInvisibility[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductInvisibility>")
      * @Serializer\SerializedName("invisibilities")
      * @Serializer\AccessType("reflection")
      */
-    protected $invisibilities = array();
-
+    protected $invisibilities = [];
+    
     /**
-     * @var \jtl\Connector\Model\ProductMediaFile[]
+     * @var ProductMediaFile[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductMediaFile>")
      * @Serializer\SerializedName("mediaFiles")
      * @Serializer\AccessType("reflection")
      */
-    protected $mediaFiles = array();
-
+    protected $mediaFiles = [];
+    
     /**
-     * @var \jtl\Connector\Model\ProductPartsList[]
+     * @var ProductPartsList[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductPartsList>")
      * @Serializer\SerializedName("partsLists")
      * @Serializer\AccessType("reflection")
      */
-    protected $partsLists = array();
-
+    protected $partsLists = [];
+    
     /**
-     * @var \jtl\Connector\Model\ProductPrice[]
+     * @var ProductPrice[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductPrice>")
      * @Serializer\SerializedName("prices")
      * @Serializer\AccessType("reflection")
      */
-    protected $prices = array();
-
+    protected $prices = [];
+    
     /**
-     * @var \jtl\Connector\Model\ProductSpecialPrice[]
+     * @var ProductSpecialPrice[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductSpecialPrice>")
      * @Serializer\SerializedName("specialPrices")
      * @Serializer\AccessType("reflection")
      */
-    protected $specialPrices = array();
-
+    protected $specialPrices = [];
+    
     /**
-     * @var \jtl\Connector\Model\ProductSpecific[]
+     * @var ProductSpecific[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductSpecific>")
      * @Serializer\SerializedName("specifics")
      * @Serializer\AccessType("reflection")
      */
-    protected $specifics = array();
-
+    protected $specifics = [];
+    
     /**
-     * @var \jtl\Connector\Model\ProductVarCombination[]
+     * @var ProductVarCombination[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVarCombination>")
      * @Serializer\SerializedName("varCombinations")
      * @Serializer\AccessType("reflection")
      */
-    protected $varCombinations = array();
-
+    protected $varCombinations = [];
+    
     /**
-     * @var \jtl\Connector\Model\ProductVariation[]
+     * @var ProductVariation[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariation>")
      * @Serializer\SerializedName("variations")
      * @Serializer\AccessType("reflection")
      */
-    protected $variations = array();
-
+    protected $variations = [];
+    
     /**
-     * @var \jtl\Connector\Model\ProductWarehouseInfo[]
+     * @var ProductWarehouseInfo[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductWarehouseInfo>")
      * @Serializer\SerializedName("warehouseInfo")
      * @Serializer\AccessType("reflection")
      */
-    protected $warehouseInfo = array();
-
+    protected $warehouseInfo = [];
+    
     /**
      * Constructor
      */
@@ -684,35 +684,39 @@ class Product extends DataModel
         $this->basePriceUnitId = new Identity();
         $this->unitId = new Identity();
     }
-
+    
     /**
      * @param Identity $basePriceUnitId Optional reference to basePriceUnit
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Product
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setBasePriceUnitId(Identity $basePriceUnitId)
+    public function setBasePriceUnitId(Identity $basePriceUnitId): Product
     {
-        return $this->setProperty('basePriceUnitId', $basePriceUnitId, 'Identity');
+        $this->basePriceUnitId = $basePriceUnitId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Optional reference to basePriceUnit
      */
-    public function getBasePriceUnitId()
+    public function getBasePriceUnitId(): Identity
     {
         return $this->basePriceUnitId;
     }
-
+    
     /**
      * @param Identity $id Unique product id
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Product
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): Product
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique product id
      */
@@ -720,1681 +724,1856 @@ class Product extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param Identity $manufacturerId Reference to manufacturer
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Product
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setManufacturerId(Identity $manufacturerId)
+    public function setManufacturerId(Identity $manufacturerId): Product
     {
-        return $this->setProperty('manufacturerId', $manufacturerId, 'Identity');
+        $this->manufacturerId = $manufacturerId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to manufacturer
      */
-    public function getManufacturerId()
+    public function getManufacturerId(): Identity
     {
         return $this->manufacturerId;
     }
-
+    
     /**
      * @param Identity $masterProductId Reference to master product
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Product
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setMasterProductId(Identity $masterProductId)
+    public function setMasterProductId(Identity $masterProductId): Product
     {
-        return $this->setProperty('masterProductId', $masterProductId, 'Identity');
+        $this->masterProductId = $masterProductId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to master product
      */
-    public function getMasterProductId()
+    public function getMasterProductId(): Identity
     {
         return $this->masterProductId;
     }
-
+    
     /**
      * @param Identity $measurementUnitId Optional reference to measurement unit id
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Product
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setMeasurementUnitId(Identity $measurementUnitId)
+    public function setMeasurementUnitId(Identity $measurementUnitId): Product
     {
-        return $this->setProperty('measurementUnitId', $measurementUnitId, 'Identity');
+        $this->measurementUnitId = $measurementUnitId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Optional reference to measurement unit id
      */
-    public function getMeasurementUnitId()
+    public function getMeasurementUnitId(): Identity
     {
         return $this->measurementUnitId;
     }
-
+    
     /**
      * @param Identity $partsListId Optional reference to partsList
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Product
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setPartsListId(Identity $partsListId)
+    public function setPartsListId(Identity $partsListId): Product
     {
-        return $this->setProperty('partsListId', $partsListId, 'Identity');
+        $this->partsListId = $partsListId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Optional reference to partsList
      */
-    public function getPartsListId()
+    public function getPartsListId(): Identity
     {
         return $this->partsListId;
     }
-
+    
     /**
      * @param Identity $productTypeId Optional reference to productType
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Product
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductTypeId(Identity $productTypeId)
+    public function setProductTypeId(Identity $productTypeId): Product
     {
-        return $this->setProperty('productTypeId', $productTypeId, 'Identity');
+        $this->productTypeId = $productTypeId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Optional reference to productType
      */
-    public function getProductTypeId()
+    public function getProductTypeId(): Identity
     {
         return $this->productTypeId;
     }
-
+    
     /**
      * @param Identity $shippingClassId Reference to shippingClass
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Product
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setShippingClassId(Identity $shippingClassId)
+    public function setShippingClassId(Identity $shippingClassId): Product
     {
-        return $this->setProperty('shippingClassId', $shippingClassId, 'Identity');
+        $this->shippingClassId = $shippingClassId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to shippingClass
      */
-    public function getShippingClassId()
+    public function getShippingClassId(): Identity
     {
         return $this->shippingClassId;
     }
-
+    
     /**
      * @param Identity $unitId Reference to unit
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Product
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setUnitId(Identity $unitId)
+    public function setUnitId(Identity $unitId): Product
     {
-        return $this->setProperty('unitId', $unitId, 'Identity');
+        $this->unitId = $unitId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to unit
      */
-    public function getUnitId()
+    public function getUnitId(): Identity
     {
         return $this->unitId;
     }
-
+    
     /**
      * @param string $asin Optional Amazon Standard Identification Number
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setAsin($asin)
+    public function setAsin(string $asin): Product
     {
-        return $this->setProperty('asin', $asin, 'string');
+        $this->asin = $asin;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional Amazon Standard Identification Number
      */
-    public function getAsin()
+    public function getAsin(): string
     {
         return $this->asin;
     }
-
+    
     /**
-     * @param DateTime $availableFrom Optional available from date. Specify a date, upon when product can be purchased. 
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     * @param \DateTimeInterface $availableFrom Optional available from date. Specify a date, upon when product can be purchased.
+     * @return Product
+     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setAvailableFrom(DateTime $availableFrom = null)
+    public function setAvailableFrom(\DateTimeInterface $availableFrom = null): Product
     {
-        return $this->setProperty('availableFrom', $availableFrom, 'DateTime');
+        $this->availableFrom = $availableFrom;
+        
+        return $this;
     }
-
+    
     /**
-     * @return DateTime Optional available from date. Specify a date, upon when product can be purchased. 
+     * @return DateTime Optional available from date. Specify a date, upon when product can be purchased.
      */
-    public function getAvailableFrom()
+    public function getAvailableFrom(): ?\DateTimeInterface
     {
         return $this->availableFrom;
     }
-
+    
     /**
      * @param double $basePriceDivisor Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setBasePriceDivisor($basePriceDivisor)
+    public function setBasePriceDivisor(float $basePriceDivisor): Product
     {
-        return $this->setProperty('basePriceDivisor', $basePriceDivisor, 'double');
+        $this->basePriceDivisor = $basePriceDivisor;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
      */
-    public function getBasePriceDivisor()
+    public function getBasePriceDivisor(): float
     {
         return $this->basePriceDivisor;
     }
-
+    
     /**
-     * @param double $basePriceFactor 
-     * @return \jtl\Connector\Model\Product
+     * @param double $basePriceFactor
+     * @return Product
      */
-    public function setBasePriceFactor($basePriceFactor)
+    public function setBasePriceFactor(float $basePriceFactor): Product
     {
-        return $this->setProperty('basePriceFactor', $basePriceFactor, 'double');
+        $this->basePriceFactor = $basePriceFactor;
+        
+        return $this;
     }
-
+    
     /**
-     * @return double 
+     * @return double
      */
-    public function getBasePriceFactor()
+    public function getBasePriceFactor(): float
     {
         return $this->basePriceFactor;
     }
-
+    
     /**
      * @param double $basePriceQuantity Optional base price quantity
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setBasePriceQuantity($basePriceQuantity)
+    public function setBasePriceQuantity(float $basePriceQuantity): Product
     {
-        return $this->setProperty('basePriceQuantity', $basePriceQuantity, 'double');
+        $this->basePriceQuantity = $basePriceQuantity;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Optional base price quantity
      */
-    public function getBasePriceQuantity()
+    public function getBasePriceQuantity(): float
     {
         return $this->basePriceQuantity;
     }
-
+    
     /**
-     * @param string $basePriceUnitCode 
-     * @return \jtl\Connector\Model\Product
+     * @param string $basePriceUnitCode
+     * @return Product
      */
-    public function setBasePriceUnitCode($basePriceUnitCode)
+    public function setBasePriceUnitCode(string $basePriceUnitCode): Product
     {
-        return $this->setProperty('basePriceUnitCode', $basePriceUnitCode, 'string');
+        $this->basePriceUnitCode = $basePriceUnitCode;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
-    public function getBasePriceUnitCode()
+    public function getBasePriceUnitCode(): string
     {
         return $this->basePriceUnitCode;
     }
-
+    
     /**
-     * @param string $basePriceUnitName 
-     * @return \jtl\Connector\Model\Product
+     * @param string $basePriceUnitName
+     * @return Product
      */
-    public function setBasePriceUnitName($basePriceUnitName)
+    public function setBasePriceUnitName(string $basePriceUnitName): Product
     {
-        return $this->setProperty('basePriceUnitName', $basePriceUnitName, 'string');
+        $this->basePriceUnitName = $basePriceUnitName;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string 
+     * @return string
      */
-    public function getBasePriceUnitName()
+    public function getBasePriceUnitName(): string
     {
         return $this->basePriceUnitName;
     }
-
+    
     /**
      * @param boolean $considerBasePrice Optional: Set to true to display base price / unit pricing measure
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setConsiderBasePrice($considerBasePrice)
+    public function setConsiderBasePrice(bool $considerBasePrice): Product
     {
-        return $this->setProperty('considerBasePrice', $considerBasePrice, 'boolean');
+        $this->considerBasePrice = $considerBasePrice;
+        
+        return $this;
     }
-
+    
     /**
      * @return boolean Optional: Set to true to display base price / unit pricing measure
      */
-    public function getConsiderBasePrice()
+    public function getConsiderBasePrice(): bool
     {
         return $this->considerBasePrice;
     }
-
+    
     /**
      * @param boolean $considerStock Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setConsiderStock($considerStock)
+    public function setConsiderStock(bool $considerStock): Product
     {
-        return $this->setProperty('considerStock', $considerStock, 'boolean');
+        $this->considerStock = $considerStock;
+        
+        return $this;
     }
-
+    
     /**
      * @return boolean Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
      */
-    public function getConsiderStock()
+    public function getConsiderStock(): bool
     {
         return $this->considerStock;
     }
-
+    
     /**
-     * @param boolean $considerVariationStock Optional: Consider stock levels of productVariations. Same as considerStock but for variations. 
-     * @return \jtl\Connector\Model\Product
+     * @param boolean $considerVariationStock Optional: Consider stock levels of productVariations. Same as considerStock but for variations.
+     * @return Product
      */
-    public function setConsiderVariationStock($considerVariationStock)
+    public function setConsiderVariationStock(bool $considerVariationStock): Product
     {
-        return $this->setProperty('considerVariationStock', $considerVariationStock, 'boolean');
+        $this->considerVariationStock = $considerVariationStock;
+        
+        return $this;
     }
-
+    
     /**
-     * @return boolean Optional: Consider stock levels of productVariations. Same as considerStock but for variations. 
+     * @return boolean Optional: Consider stock levels of productVariations. Same as considerStock but for variations.
      */
-    public function getConsiderVariationStock()
+    public function getConsiderVariationStock(): bool
     {
         return $this->considerVariationStock;
     }
-
+    
     /**
-     * @param DateTime $creationDate Creation date
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     * @param \DateTimeInterface $creationDate Creation date
+     * @return Product
+     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setCreationDate(DateTime $creationDate = null)
+    public function setCreationDate(\DateTimeInterface $creationDate = null): Product
     {
-        return $this->setProperty('creationDate', $creationDate, 'DateTime');
+        $this->creationDate = $creationDate;
+        
+        return $this;
     }
-
+    
     /**
      * @return DateTime Creation date
      */
-    public function getCreationDate()
+    public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creationDate;
     }
-
+    
     /**
      * @param string $ean Optional European Article Number (EAN)
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setEan($ean)
+    public function setEan(string $ean): Product
     {
-        return $this->setProperty('ean', $ean, 'string');
+        $this->ean = $ean;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional European Article Number (EAN)
      */
-    public function getEan()
+    public function getEan(): string
     {
         return $this->ean;
     }
-
+    
     /**
      * @param string $epid Optional Ebay product ID
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setEpid($epid)
+    public function setEpid(string $epid): Product
     {
-        return $this->setProperty('epid', $epid, 'string');
+        $this->epid = $epid;
+        
+        return $this;
     }
-
+    
     /**
-     * @return string Optional Ebay product ID
+     * @return Identity Optional Ebay product ID
      */
-    public function getEpid()
+    public function getEpId(): string
     {
         return $this->epid;
     }
-
+    
     /**
      * @param string $hazardIdNumber Optional Hazard identifier, encodes general hazard class und subdivision
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setHazardIdNumber($hazardIdNumber)
+    public function setHazardIdNumber(string $hazardIdNumber): Product
     {
-        return $this->setProperty('hazardIdNumber', $hazardIdNumber, 'string');
+        $this->hazardIdNumber = $hazardIdNumber;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional Hazard identifier, encodes general hazard class und subdivision
      */
-    public function getHazardIdNumber()
+    public function getHazardIdNumber(): string
     {
         return $this->hazardIdNumber;
     }
-
+    
     /**
      * @param double $height Optional product height
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setHeight($height)
+    public function setHeight(float $height): Product
     {
-        return $this->setProperty('height', $height, 'double');
+        $this->height = $height;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Optional product height
      */
-    public function getHeight()
+    public function getHeight(): float
     {
         return $this->height;
     }
-
+    
     /**
-     * @param boolean $isActive 
-     * @return \jtl\Connector\Model\Product
+     * @param boolean $isActive
+     * @return Product
      */
-    public function setIsActive($isActive)
+    public function setIsActive(bool $isActive): Product
     {
-        return $this->setProperty('isActive', $isActive, 'boolean');
+        $this->isActive = $isActive;
+        
+        return $this;
     }
-
+    
     /**
-     * @return boolean 
+     * @return boolean
      */
-    public function getIsActive()
+    public function getIsActive(): bool
     {
         return $this->isActive;
     }
-
+    
     /**
-     * @param boolean $isBatch 
-     * @return \jtl\Connector\Model\Product
+     * @param boolean $isBatch
+     * @return Product
      */
-    public function setIsBatch($isBatch)
+    public function setIsBatch(bool $isBatch): Product
     {
-        return $this->setProperty('isBatch', $isBatch, 'boolean');
+        $this->isBatch = $isBatch;
+        
+        return $this;
     }
-
+    
     /**
-     * @return boolean 
+     * @return boolean
      */
-    public function getIsBatch()
+    public function getIsBatch(): bool
     {
         return $this->isBatch;
     }
-
+    
     /**
-     * @param boolean $isBestBefore 
-     * @return \jtl\Connector\Model\Product
+     * @param boolean $isBestBefore
+     * @return Product
      */
-    public function setIsBestBefore($isBestBefore)
+    public function setIsBestBefore(bool $isBestBefore): Product
     {
-        return $this->setProperty('isBestBefore', $isBestBefore, 'boolean');
+        $this->isBestBefore = $isBestBefore;
+        
+        return $this;
     }
-
+    
     /**
-     * @return boolean 
+     * @return boolean
      */
-    public function getIsBestBefore()
+    public function getIsBestBefore(): bool
     {
         return $this->isBestBefore;
     }
-
+    
     /**
      * @param string $isbn Optional International Standard Book Number
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setIsbn($isbn)
+    public function setIsbn(string $isbn): Product
     {
-        return $this->setProperty('isbn', $isbn, 'string');
+        $this->isbn = $isbn;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional International Standard Book Number
      */
-    public function getIsbn()
+    public function getIsbn(): string
     {
         return $this->isbn;
     }
-
+    
     /**
      * @param boolean $isDivisible Optional: Set to true to allow non-integer quantites for purchase
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setIsDivisible($isDivisible)
+    public function setIsDivisible(bool $isDivisible): Product
     {
-        return $this->setProperty('isDivisible', $isDivisible, 'boolean');
+        $this->isDivisible = $isDivisible;
+        
+        return $this;
     }
-
+    
     /**
      * @return boolean Optional: Set to true to allow non-integer quantites for purchase
      */
-    public function getIsDivisible()
+    public function getIsDivisible(): bool
     {
         return $this->isDivisible;
     }
-
+    
     /**
      * @param boolean $isMasterProduct Optional flag if product is master product
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setIsMasterProduct($isMasterProduct)
+    public function setIsMasterProduct(bool $isMasterProduct): Product
     {
-        return $this->setProperty('isMasterProduct', $isMasterProduct, 'boolean');
+        $this->isMasterProduct = $isMasterProduct;
+        
+        return $this;
     }
-
+    
     /**
      * @return boolean Optional flag if product is master product
      */
-    public function getIsMasterProduct()
+    public function getIsMasterProduct(): bool
     {
         return $this->isMasterProduct;
     }
-
+    
     /**
      * @param boolean $isNewProduct Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setisNewProduct($isNewProduct)
+    public function isNewProduct(bool $isNewProduct): Product
     {
-        return $this->setProperty('isNewProduct', $isNewProduct, 'boolean');
+        $this->isNewProduct = $isNewProduct;
+        
+        return $this;
     }
-
+    
     /**
      * @return boolean Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
      */
-    public function getisNewProduct()
+    public function getIsNewProduct(): bool
     {
         return $this->isNewProduct;
     }
-
+    
     /**
-     * @param boolean $isSerialNumber 
-     * @return \jtl\Connector\Model\Product
+     * @param boolean $isSerialNumber
+     * @return Product
      */
-    public function setIsSerialNumber($isSerialNumber)
+    public function setIsSerialNumber(bool $isSerialNumber): Product
     {
-        return $this->setProperty('isSerialNumber', $isSerialNumber, 'boolean');
+        $this->isSerialNumber = $isSerialNumber;
+        
+        return $this;
     }
-
+    
     /**
-     * @return boolean 
+     * @return boolean
      */
-    public function getIsSerialNumber()
+    public function getIsSerialNumber(): bool
     {
         return $this->isSerialNumber;
     }
-
+    
     /**
      * @param boolean $isTopProduct Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setIsTopProduct($isTopProduct)
+    public function setIsTopProduct(bool $isTopProduct): Product
     {
-        return $this->setProperty('isTopProduct', $isTopProduct, 'boolean');
+        $this->isTopProduct = $isTopProduct;
+        
+        return $this;
     }
-
+    
     /**
      * @return boolean Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
      */
-    public function getIsTopProduct()
+    public function getIsTopProduct(): bool
     {
         return $this->isTopProduct;
     }
-
+    
     /**
      * @param string $keywords Optional internal keywords and synonyms for product
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setKeywords($keywords)
+    public function setKeywords(string $keywords): Product
     {
-        return $this->setProperty('keywords', $keywords, 'string');
+        $this->keywords = $keywords;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional internal keywords and synonyms for product
      */
-    public function getKeywords()
+    public function getKeywords(): string
     {
         return $this->keywords;
     }
-
+    
     /**
      * @param double $length Optional product length
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setLength($length)
+    public function setLength(float $length): Product
     {
-        return $this->setProperty('length', $length, 'double');
+        $this->length = $length;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Optional product length
      */
-    public function getLength()
+    public function getLength(): float
     {
         return $this->length;
     }
-
+    
     /**
      * @param string $manufacturerNumber Optional manufacturer number
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setManufacturerNumber($manufacturerNumber)
+    public function setManufacturerNumber(string $manufacturerNumber): Product
     {
-        return $this->setProperty('manufacturerNumber', $manufacturerNumber, 'string');
+        $this->manufacturerNumber = $manufacturerNumber;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional manufacturer number
      */
-    public function getManufacturerNumber()
+    public function getManufacturerNumber(): string
     {
         return $this->manufacturerNumber;
     }
     
     /**
-     * @param string $manufacturer Optional manufacturer
-     * @return \jtl\Connector\Model\Product
+     * @param Manufacturer $manufacturer Optional manufacturer
+     * @return Product
      */
-    public function setManufacturer(Manufacturer $manufacturer = null)
+    public function setManufacturer(Manufacturer $manufacturer = null): Product
     {
-        return $this->setProperty('manufacturer', $manufacturer, 'jtl\Connector\Model\Manufacturer');
+        $this->manufacturer = $manufacturer;
+        
+        return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\Manufacturer|null Optional manufacturer
+     * @return Manufacturer|null Optional manufacturer
      */
-    public function getManufacturer()
+    public function getManufacturer(): Manufacturer
     {
         return $this->manufacturer;
     }
-
+    
     /**
      * @param double $measurementQuantity Optional measurement quantity
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setMeasurementQuantity($measurementQuantity)
+    public function setMeasurementQuantity(float $measurementQuantity): Product
     {
-        return $this->setProperty('measurementQuantity', $measurementQuantity, 'double');
-    }
-
-    /**
-     * @return double Optional measurement quantity
-     */
-    public function getMeasurementQuantity()
-    {
-        return $this->measurementQuantity;
-    }
-
-    /**
-     * @param string $measurementUnitCode 
-     * @return \jtl\Connector\Model\Product
-     */
-    public function setMeasurementUnitCode($measurementUnitCode)
-    {
-        return $this->setProperty('measurementUnitCode', $measurementUnitCode, 'string');
-    }
-
-    /**
-     * @return string 
-     */
-    public function getMeasurementUnitCode()
-    {
-        return $this->measurementUnitCode;
-    }
-
-    /**
-     * @param DateTime $minBestBeforeDate 
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
-     */
-    public function setMinBestBeforeDate(DateTime $minBestBeforeDate = null)
-    {
-        return $this->setProperty('minBestBeforeDate', $minBestBeforeDate, 'DateTime');
-    }
-
-    /**
-     * @return DateTime 
-     */
-    public function getMinBestBeforeDate()
-    {
-        return $this->minBestBeforeDate;
-    }
-
-    /**
-     * @param double $minimumOrderQuantity 
-     * @return \jtl\Connector\Model\Product
-     */
-    public function setMinimumOrderQuantity($minimumOrderQuantity)
-    {
-        return $this->setProperty('minimumOrderQuantity', $minimumOrderQuantity, 'double');
-    }
-
-    /**
-     * @return double 
-     */
-    public function getMinimumOrderQuantity()
-    {
-        return $this->minimumOrderQuantity;
-    }
-
-    /**
-     * @param double $minimumQuantity 
-     * @return \jtl\Connector\Model\Product
-     */
-    public function setMinimumQuantity($minimumQuantity)
-    {
-        return $this->setProperty('minimumQuantity', $minimumQuantity, 'double');
-    }
-
-    /**
-     * @return double 
-     */
-    public function getMinimumQuantity()
-    {
-        return $this->minimumQuantity;
-    }
-
-    /**
-     * @param DateTime $modified 
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
-     */
-    public function setModified(DateTime $modified = null)
-    {
-        return $this->setProperty('modified', $modified, 'DateTime');
-    }
-
-    /**
-     * @return DateTime 
-     */
-    public function getModified()
-    {
-        return $this->modified;
+        $this->measurementQuantity = $measurementQuantity;
+        
+        return $this;
     }
     
     /**
-     * @param DateTime $newReleaseDate
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     * @return double Optional measurement quantity
      */
-    public function setNewReleaseDate(DateTime $newReleaseDate = null)
+    public function getMeasurementQuantity(): float
     {
-        return $this->setProperty('newReleaseDate', $newReleaseDate, 'DateTime');
+        return $this->measurementQuantity;
+    }
+    
+    /**
+     * @param string $measurementUnitCode
+     * @return Product
+     */
+    public function setMeasurementUnitCode(string $measurementUnitCode): Product
+    {
+        $this->measurementUnitCode = $measurementUnitCode;
+        
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getMeasurementUnitCode(): string
+    {
+        return $this->measurementUnitCode;
+    }
+    
+    /**
+     * @param \DateTimeInterface $minBestBeforeDate
+     * @return Product
+     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     */
+    public function setMinBestBeforeDate(\DateTimeInterface $minBestBeforeDate = null): Product
+    {
+        $this->minBestBeforeDate = $minBestBeforeDate;
+        
+        return $this;
     }
     
     /**
      * @return DateTime
      */
-    public function getNewReleaseDate()
+    public function getMinBestBeforeDate(): ?\DateTimeInterface
+    {
+        return $this->minBestBeforeDate;
+    }
+    
+    /**
+     * @param double $minimumOrderQuantity
+     * @return Product
+     */
+    public function setMinimumOrderQuantity(float $minimumOrderQuantity): Product
+    {
+        $this->minimumOrderQuantity = $minimumOrderQuantity;
+        
+        return $this;
+    }
+    
+    /**
+     * @return double
+     */
+    public function getMinimumOrderQuantity(): float
+    {
+        return $this->minimumOrderQuantity;
+    }
+    
+    /**
+     * @param double $minimumQuantity
+     * @return Product
+     */
+    public function setMinimumQuantity(float $minimumQuantity): Product
+    {
+        $this->minimumQuantity = $minimumQuantity;
+        
+        return $this;
+    }
+    
+    /**
+     * @return double
+     */
+    public function getMinimumQuantity(): float
+    {
+        return $this->minimumQuantity;
+    }
+    
+    /**
+     * @param \DateTimeInterface $modified
+     * @return Product
+     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     */
+    public function setModified(\DateTimeInterface $modified = null): Product
+    {
+        $this->modified = $modified;
+        
+        return $this;
+    }
+    
+    /**
+     * @return DateTime
+     */
+    public function getModified(): ?\DateTimeInterface
+    {
+        return $this->modified;
+    }
+    
+    /**
+     * @param \DateTimeInterface $newReleaseDate
+     * @return Product
+     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     */
+    public function setNewReleaseDate(\DateTimeInterface $newReleaseDate = null): Product
+    {
+        $this->newReleaseDate = $newReleaseDate;
+        
+        return $this;
+    }
+    
+    /**
+     * @return DateTime
+     */
+    public function getNewReleaseDate(): ?\DateTimeInterface
     {
         return $this->newReleaseDate;
     }
-
+    
     /**
-     * @param DateTime $nextAvailableInflowDate Contains the date of the next available inflow.
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
+     * @param \DateTimeInterface $nextAvailableInflowDate Contains the date of the next available inflow.
+     * @return Product
+     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
-    public function setNextAvailableInflowDate(DateTime $nextAvailableInflowDate = null)
+    public function setNextAvailableInflowDate(\DateTimeInterface $nextAvailableInflowDate = null): Product
     {
-        return $this->setProperty('nextAvailableInflowDate', $nextAvailableInflowDate, 'DateTime');
+        $this->nextAvailableInflowDate = $nextAvailableInflowDate;
+        
+        return $this;
     }
-
+    
     /**
      * @return DateTime Contains the date of the next available inflow.
      */
-    public function getNextAvailableInflowDate()
+    public function getNextAvailableInflowDate(): ?\DateTimeInterface
     {
         return $this->nextAvailableInflowDate;
     }
-
+    
     /**
      * @param double $nextAvailableInflowQuantity Contains the quantity of the next available inflow.
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setNextAvailableInflowQuantity($nextAvailableInflowQuantity)
+    public function setNextAvailableInflowQuantity(float $nextAvailableInflowQuantity): Product
     {
-        return $this->setProperty('nextAvailableInflowQuantity', $nextAvailableInflowQuantity, 'double');
+        $this->nextAvailableInflowQuantity = $nextAvailableInflowQuantity;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Contains the quantity of the next available inflow.
      */
-    public function getNextAvailableInflowQuantity()
+    public function getNextAvailableInflowQuantity(): float
     {
         return $this->nextAvailableInflowQuantity;
     }
-
+    
     /**
      * @param string $note Optional internal product note
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setNote($note)
+    public function setNote(string $note): Product
     {
-        return $this->setProperty('note', $note, 'string');
+        $this->note = $note;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional internal product note
      */
-    public function getNote()
+    public function getNote(): string
     {
         return $this->note;
     }
-
+    
     /**
      * @param string $originCountry Optional Origin country
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setOriginCountry($originCountry)
+    public function setOriginCountry(string $originCountry): Product
     {
-        return $this->setProperty('originCountry', $originCountry, 'string');
+        $this->originCountry = $originCountry;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional Origin country
      */
-    public function getOriginCountry()
+    public function getOriginCountry(): string
     {
         return $this->originCountry;
     }
-
+    
     /**
      * @param double $packagingQuantity Optional: Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setPackagingQuantity($packagingQuantity)
+    public function setPackagingQuantity(float $packagingQuantity): Product
     {
-        return $this->setProperty('packagingQuantity', $packagingQuantity, 'double');
+        $this->packagingQuantity = $packagingQuantity;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Optional: Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      */
-    public function getPackagingQuantity()
+    public function getPackagingQuantity(): float
     {
         return $this->packagingQuantity;
     }
-
+    
     /**
-     * @param boolean $permitNegativeStock Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true. 
-     * @return \jtl\Connector\Model\Product
+     * @param boolean $permitNegativeStock Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true.
+     * @return Product
      */
-    public function setPermitNegativeStock($permitNegativeStock)
+    public function setPermitNegativeStock(bool $permitNegativeStock): Product
     {
-        return $this->setProperty('permitNegativeStock', $permitNegativeStock, 'boolean');
+        $this->permitNegativeStock = $permitNegativeStock;
+        
+        return $this;
     }
-
+    
     /**
-     * @return boolean Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true. 
+     * @return boolean Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true.
      */
-    public function getPermitNegativeStock()
+    public function getPermitNegativeStock(): bool
     {
         return $this->permitNegativeStock;
     }
-
+    
     /**
      * @param double $productWeight Productweight exclusive packaging
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setProductWeight($productWeight)
+    public function setProductWeight(float $productWeight): Product
     {
-        return $this->setProperty('productWeight', $productWeight, 'double');
+        $this->productWeight = $productWeight;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Productweight exclusive packaging
      */
-    public function getProductWeight()
+    public function getProductWeight(): float
     {
         return $this->productWeight;
     }
-
+    
     /**
-     * @param double $purchasePrice 
-     * @return \jtl\Connector\Model\Product
+     * @param double $purchasePrice
+     * @return Product
      */
-    public function setPurchasePrice($purchasePrice)
+    public function setPurchasePrice(float $purchasePrice): Product
     {
-        return $this->setProperty('purchasePrice', $purchasePrice, 'double');
+        $this->purchasePrice = $purchasePrice;
+        
+        return $this;
     }
-
+    
     /**
-     * @return double 
+     * @return double
      */
-    public function getPurchasePrice()
+    public function getPurchasePrice(): float
     {
         return $this->purchasePrice;
     }
-
+    
     /**
-     * @param double $recommendedRetailPrice Optional recommended retail price (gross) 
-     * @return \jtl\Connector\Model\Product
+     * @param double $recommendedRetailPrice Optional recommended retail price (gross)
+     * @return Product
      */
-    public function setRecommendedRetailPrice($recommendedRetailPrice)
+    public function setRecommendedRetailPrice(float $recommendedRetailPrice): Product
     {
-        return $this->setProperty('recommendedRetailPrice', $recommendedRetailPrice, 'double');
+        $this->recommendedRetailPrice = $recommendedRetailPrice;
+        
+        return $this;
     }
-
+    
     /**
-     * @return double Optional recommended retail price (gross) 
+     * @return double Optional recommended retail price (gross)
      */
-    public function getRecommendedRetailPrice()
+    public function getRecommendedRetailPrice(): float
     {
         return $this->recommendedRetailPrice;
     }
-
+    
     /**
      * @param string $serialNumber Optional serial number
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setSerialNumber($serialNumber)
+    public function setSerialNumber(string $serialNumber): Product
     {
-        return $this->setProperty('serialNumber', $serialNumber, 'string');
+        $this->serialNumber = $serialNumber;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional serial number
      */
-    public function getSerialNumber()
+    public function getSerialNumber(): string
     {
         return $this->serialNumber;
     }
-
+    
     /**
      * @param double $shippingWeight Productweight inclusive packaging
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setShippingWeight($shippingWeight)
+    public function setShippingWeight(float $shippingWeight): Product
     {
-        return $this->setProperty('shippingWeight', $shippingWeight, 'double');
+        $this->shippingWeight = $shippingWeight;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Productweight inclusive packaging
      */
-    public function getShippingWeight()
+    public function getShippingWeight(): float
     {
         return $this->shippingWeight;
     }
-
+    
     /**
      * @param string $sku Optional stock keeping unit identifier
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setSku($sku)
+    public function setSku(string $sku): Product
     {
-        return $this->setProperty('sku', $sku, 'string');
+        $this->sku = $sku;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional stock keeping unit identifier
      */
-    public function getSku()
+    public function getSku(): string
     {
         return $this->sku;
     }
-
+    
     /**
      * @param integer $sort Optional sort number for product sorting in lists
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setSort($sort)
+    public function setSort(int $sort): Product
     {
-        return $this->setProperty('sort', $sort, 'integer');
+        $this->sort = $sort;
+        
+        return $this;
     }
-
+    
     /**
      * @return integer Optional sort number for product sorting in lists
      */
-    public function getSort()
+    public function getSort(): int
     {
         return $this->sort;
     }
-
+    
     /**
-     * @param ProductStockLevel $stockLevel 
-     * @return \jtl\Connector\Model\Product
-     * @throws \InvalidArgumentException if the provided argument is not of type 'ProductStockLevel'.
+     * @param ProductStockLevel $stockLevel
+     * @return Product
+     * @throws InvalidArgumentException if the provided argument is not of type 'ProductStockLevel'.
      */
-    public function setStockLevel(ProductStockLevel $stockLevel = null)
+    public function setStockLevel(ProductStockLevel $stockLevel = null): Product
     {
-        return $this->setProperty('stockLevel', $stockLevel, 'jtl\Connector\Model\ProductStockLevel');
+        $this->stockLevel = $stockLevel;
+        
+        return $this;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\ProductStockLevel
+     * @return ProductStockLevel
      */
-    public function getStockLevel()
+    public function getStockLevel(): ProductStockLevel
     {
         return $this->stockLevel;
     }
-
+    
     /**
-     * @param integer $supplierDeliveryTime 
-     * @return \jtl\Connector\Model\Product
+     * @param integer $supplierDeliveryTime
+     * @return Product
      */
-    public function setSupplierDeliveryTime($supplierDeliveryTime)
+    public function setSupplierDeliveryTime(int $supplierDeliveryTime): Product
     {
-        return $this->setProperty('supplierDeliveryTime', $supplierDeliveryTime, 'integer');
+        $this->supplierDeliveryTime = $supplierDeliveryTime;
+        
+        return $this;
     }
-
+    
     /**
-     * @return integer 
+     * @return integer
      */
-    public function getSupplierDeliveryTime()
+    public function getSupplierDeliveryTime(): int
     {
         return $this->supplierDeliveryTime;
     }
-
+    
     /**
-     * @param double $supplierStockLevel 
-     * @return \jtl\Connector\Model\Product
+     * @param double $supplierStockLevel
+     * @return Product
      */
-    public function setSupplierStockLevel($supplierStockLevel)
+    public function setSupplierStockLevel(float $supplierStockLevel): Product
     {
-        return $this->setProperty('supplierStockLevel', $supplierStockLevel, 'double');
+        $this->supplierStockLevel = $supplierStockLevel;
+        
+        return $this;
     }
-
+    
     /**
-     * @return double 
+     * @return double
      */
-    public function getSupplierStockLevel()
+    public function getSupplierStockLevel(): float
     {
         return $this->supplierStockLevel;
     }
-
+    
     /**
      * @param string $taric Optional TARIC
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setTaric($taric)
+    public function setTaric(string $taric): Product
     {
-        return $this->setProperty('taric', $taric, 'string');
+        $this->taric = $taric;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional TARIC
      */
-    public function getTaric()
+    public function getTaric(): string
     {
         return $this->taric;
     }
-
+    
     /**
      * @param string $unNumber Optional UN number, used to define hazardous properties
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setUnNumber($unNumber)
+    public function setUnNumber(string $unNumber): Product
     {
-        return $this->setProperty('unNumber', $unNumber, 'string');
+        $this->unNumber = $unNumber;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional UN number, used to define hazardous properties
      */
-    public function getUnNumber()
+    public function getUnNumber(): string
     {
         return $this->unNumber;
     }
-
+    
     /**
      * @param string $upc Optional Universal Product Code
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setUpc($upc)
+    public function setUpc(string $upc): Product
     {
-        return $this->setProperty('upc', $upc, 'string');
+        $this->upc = $upc;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Optional Universal Product Code
      */
-    public function getUpc()
+    public function getUpc(): string
     {
         return $this->upc;
     }
-
+    
     /**
-     * @param double $vat 
-     * @return \jtl\Connector\Model\Product
+     * @param double $vat
+     * @return Product
      */
-    public function setVat($vat)
+    public function setVat(float $vat): Product
     {
-        return $this->setProperty('vat', $vat, 'double');
+        $this->vat = $vat;
+        
+        return $this;
     }
-
+    
     /**
-     * @return double 
+     * @return string
      */
-    public function getVat()
+    public function getVat(): string
     {
         return $this->vat;
     }
-
+    
     /**
      * @param double $width Optional product width
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setWidth($width)
+    public function setWidth(float $width): Product
     {
-        return $this->setProperty('width', $width, 'double');
+        $this->width = $width;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Optional product width
      */
-    public function getWidth()
+    public function getWidth(): float
     {
         return $this->width;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ProductAttr $attribute
-     * @return \jtl\Connector\Model\Product
+     * @param ProductAttr $attribute
+     * @return Product
      */
-    public function addAttribute(\jtl\Connector\Model\ProductAttr $attribute)
+    public function addAttribute(ProductAttr $attribute): Product
     {
         $this->attributes[] = $attribute;
+        
         return $this;
     }
     
     /**
      * @param array $attributes
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setAttributes(array $attributes)
+    public function setAttributes(array $attributes): Product
     {
         $this->attributes = $attributes;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductAttr[]
+     * @return ProductAttr[]
      */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         return $this->attributes;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function clearAttributes()
+    public function clearAttributes(): Product
     {
-        $this->attributes = array();
+        $this->attributes = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\Product2Category $category
-     * @return \jtl\Connector\Model\Product
+     * @param Product2Category $category
+     * @return Product
      */
-    public function addCategory(\jtl\Connector\Model\Product2Category $category)
+    public function addCategory(Product2Category $category): Product
     {
         $this->categories[] = $category;
+        
         return $this;
     }
     
     /**
      * @param array $categories
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setCategories(array $categories)
+    public function setCategories(array $categories): Product
     {
         $this->categories = $categories;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\Product2Category[]
+     * @return Product2Category[]
      */
-    public function getCategories()
+    public function getCategories(): array
     {
         return $this->categories;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function clearCategories()
+    public function clearCategories(): Product
     {
-        $this->categories = array();
+        $this->categories = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ProductChecksum $checksum
-     * @return \jtl\Connector\Model\Product
+     * @param ProductChecksum $checksum
+     * @return Product
      */
-    public function addChecksum(\jtl\Connector\Model\ProductChecksum $checksum)
+    public function addChecksum(ProductChecksum $checksum): Product
     {
         $this->checksums[] = $checksum;
+        
         return $this;
     }
     
     /**
      * @param array $checksums
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setChecksums(array $checksums)
+    public function setChecksums(array $checksums): Product
     {
         $this->checksums = $checksums;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductChecksum[]
+     * @return ProductChecksum[]
      */
-    public function getChecksums()
+    public function getChecksums(): array
     {
         return $this->checksums;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function clearChecksums()
+    public function clearChecksums(): Product
     {
-        $this->checksums = array();
+        $this->checksums = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ProductConfigGroup $configGroup
-     * @return \jtl\Connector\Model\Product
+     * @param ProductConfigGroup $configGroup
+     * @return Product
      */
-    public function addConfigGroup(\jtl\Connector\Model\ProductConfigGroup $configGroup)
+    public function addConfigGroup(ProductConfigGroup $configGroup): Product
     {
         $this->configGroups[] = $configGroup;
+        
         return $this;
     }
     
     /**
      * @param array $configGroups
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setConfigGroups(array $configGroups)
+    public function setConfigGroups(array $configGroups): Product
     {
         $this->configGroups = $configGroups;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductConfigGroup[]
+     * @return ProductConfigGroup[]
      */
-    public function getConfigGroups()
+    public function getConfigGroups(): array
     {
         return $this->configGroups;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function clearConfigGroups()
+    public function clearConfigGroups(): Product
     {
-        $this->configGroups = array();
+        $this->configGroups = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\CustomerGroupPackagingQuantity $customerGroupPackagingQuantity
-     * @return \jtl\Connector\Model\Product
+     * @param CustomerGroupPackagingQuantity $customerGroupPackagingQuantity
+     * @return Product
      */
-    public function addCustomerGroupPackagingQuantity(\jtl\Connector\Model\CustomerGroupPackagingQuantity $customerGroupPackagingQuantity)
-    {
+    public function addCustomerGroupPackagingQuantity(
+        CustomerGroupPackagingQuantity $customerGroupPackagingQuantity
+    ) {
         $this->customerGroupPackagingQuantities[] = $customerGroupPackagingQuantity;
+        
         return $this;
     }
     
     /**
      * @param array $customerGroupPackagingQuantities
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setCustomerGroupPackagingQuantities(array $customerGroupPackagingQuantities)
+    public function setCustomerGroupPackagingQuantities(array $customerGroupPackagingQuantities): Product
     {
         $this->customerGroupPackagingQuantities = $customerGroupPackagingQuantities;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\CustomerGroupPackagingQuantity[]
+     * @return CustomerGroupPackagingQuantity[]
      */
-    public function getCustomerGroupPackagingQuantities()
+    public function getCustomerGroupPackagingQuantities(): array
     {
         return $this->customerGroupPackagingQuantities;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function clearCustomerGroupPackagingQuantities()
+    public function clearCustomerGroupPackagingQuantities(): Product
     {
-        $this->customerGroupPackagingQuantities = array();
+        $this->customerGroupPackagingQuantities = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ProductFileDownload $fileDownload
-     * @return \jtl\Connector\Model\Product
+     * @param ProductFileDownload $fileDownload
+     * @return Product
      */
-    public function addFileDownload(\jtl\Connector\Model\ProductFileDownload $fileDownload)
+    public function addFileDownload(ProductFileDownload $fileDownload): Product
     {
         $this->fileDownloads[] = $fileDownload;
+        
         return $this;
     }
     
     /**
      * @param array $fileDownloads
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setFileDownloads(array $fileDownloads)
+    public function setFileDownloads(array $fileDownloads): Product
     {
         $this->fileDownloads = $fileDownloads;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductFileDownload[]
+     * @return ProductFileDownload[]
      */
-    public function getFileDownloads()
+    public function getFileDownloads(): array
     {
         return $this->fileDownloads;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function clearFileDownloads()
+    public function clearFileDownloads(): Product
     {
-        $this->fileDownloads = array();
+        $this->fileDownloads = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ProductI18n $i18n
-     * @return \jtl\Connector\Model\Product
+     * @param ProductI18n $i18n
+     * @return Product
      */
-    public function addI18n(\jtl\Connector\Model\ProductI18n $i18n)
+    public function addI18n(ProductI18n $i18n): Product
     {
         $this->i18ns[] = $i18n;
+        
         return $this;
     }
     
     /**
      * @param array $i18ns
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setI18ns(array $i18ns)
+    public function setI18ns(array $i18ns): Product
     {
         $this->i18ns = $i18ns;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductI18n[]
+     * @return ProductI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function clearI18ns()
+    public function clearI18ns(): Product
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ProductInvisibility $invisibility
-     * @return \jtl\Connector\Model\Product
+     * @param ProductInvisibility $invisibility
+     * @return Product
      */
-    public function addInvisibility(\jtl\Connector\Model\ProductInvisibility $invisibility)
+    public function addInvisibility(ProductInvisibility $invisibility): Product
     {
         $this->invisibilities[] = $invisibility;
+        
         return $this;
     }
     
     /**
      * @param array $invisibilities
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setInvisibilities(array $invisibilities)
+    public function setInvisibilities(array $invisibilities): Product
     {
         $this->invisibilities = $invisibilities;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductInvisibility[]
+     * @return ProductInvisibility[]
      */
-    public function getInvisibilities()
+    public function getInvisibilities(): array
     {
         return $this->invisibilities;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function clearInvisibilities()
+    public function clearInvisibilities(): Product
     {
-        $this->invisibilities = array();
+        $this->invisibilities = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ProductMediaFile $mediaFile
-     * @return \jtl\Connector\Model\Product
+     * @param ProductMediaFile $mediaFile
+     * @return Product
      */
-    public function addMediaFile(\jtl\Connector\Model\ProductMediaFile $mediaFile)
+    public function addMediaFile(ProductMediaFile $mediaFile): Product
     {
         $this->mediaFiles[] = $mediaFile;
+        
         return $this;
     }
     
     /**
      * @param array $mediaFiles
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setMediaFiles(array $mediaFiles)
+    public function setMediaFiles(array $mediaFiles): Product
     {
         $this->mediaFiles = $mediaFiles;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductMediaFile[]
+     * @return ProductMediaFile[]
      */
-    public function getMediaFiles()
+    public function getMediaFiles(): array
     {
         return $this->mediaFiles;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function clearMediaFiles()
+    public function clearMediaFiles(): Product
     {
-        $this->mediaFiles = array();
+        $this->mediaFiles = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ProductPartsList $partsList
-     * @return \jtl\Connector\Model\Product
+     * @param ProductPartsList $partsList
+     * @return Product
      */
-    public function addPartsList(\jtl\Connector\Model\ProductPartsList $partsList)
+    public function addPartsList(ProductPartsList $partsList): Product
     {
         $this->partsLists[] = $partsList;
+        
         return $this;
     }
     
     /**
      * @param array $partsLists
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setPartsLists(array $partsLists)
+    public function setPartsLists(array $partsLists): Product
     {
         $this->partsLists = $partsLists;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductPartsList[]
+     * @return ProductPartsList[]
      */
-    public function getPartsLists()
+    public function getPartsLists(): array
     {
         return $this->partsLists;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function clearPartsLists()
+    public function clearPartsLists(): Product
     {
-        $this->partsLists = array();
+        $this->partsLists = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ProductPrice $price
-     * @return \jtl\Connector\Model\Product
+     * @param ProductPrice $price
+     * @return Product
      */
-    public function addPrice(\jtl\Connector\Model\ProductPrice $price)
+    public function addPrice(ProductPrice $price): Product
     {
         $this->prices[] = $price;
+        
         return $this;
     }
     
     /**
      * @param array $prices
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setPrices(array $prices)
+    public function setPrices(array $prices): Product
     {
         $this->prices = $prices;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductPrice[]
+     * @return ProductPrice[]
      */
-    public function getPrices()
+    public function getPrices(): array
     {
         return $this->prices;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function clearPrices()
+    public function clearPrices(): Product
     {
-        $this->prices = array();
+        $this->prices = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ProductSpecialPrice $specialPrice
-     * @return \jtl\Connector\Model\Product
+     * @param ProductSpecialPrice $specialPrice
+     * @return Product
      */
-    public function addSpecialPrice(\jtl\Connector\Model\ProductSpecialPrice $specialPrice)
+    public function addSpecialPrice(ProductSpecialPrice $specialPrice): Product
     {
         $this->specialPrices[] = $specialPrice;
+        
         return $this;
     }
     
     /**
      * @param array $specialPrices
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setSpecialPrices(array $specialPrices)
+    public function setSpecialPrices(array $specialPrices): Product
     {
         $this->specialPrices = $specialPrices;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductSpecialPrice[]
+     * @return ProductSpecialPrice[]
      */
-    public function getSpecialPrices()
+    public function getSpecialPrices(): array
     {
         return $this->specialPrices;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function clearSpecialPrices()
+    public function clearSpecialPrices(): Product
     {
-        $this->specialPrices = array();
+        $this->specialPrices = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ProductSpecific $specific
-     * @return \jtl\Connector\Model\Product
+     * @param ProductSpecific $specific
+     * @return Product
      */
-    public function addSpecific(\jtl\Connector\Model\ProductSpecific $specific)
+    public function addSpecific(ProductSpecific $specific): Product
     {
         $this->specifics[] = $specific;
+        
         return $this;
     }
     
     /**
      * @param array $specifics
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setSpecifics(array $specifics)
+    public function setSpecifics(array $specifics): Product
     {
         $this->specifics = $specifics;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductSpecific[]
+     * @return ProductSpecific[]
      */
-    public function getSpecifics()
+    public function getSpecifics(): array
     {
         return $this->specifics;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function clearSpecifics()
+    public function clearSpecifics(): Product
     {
-        $this->specifics = array();
+        $this->specifics = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ProductVarCombination $varCombination
-     * @return \jtl\Connector\Model\Product
+     * @param ProductVarCombination $varCombination
+     * @return Product
      */
-    public function addVarCombination(\jtl\Connector\Model\ProductVarCombination $varCombination)
+    public function addVarCombination(ProductVarCombination $varCombination): Product
     {
         $this->varCombinations[] = $varCombination;
+        
         return $this;
     }
     
     /**
      * @param array $varCombinations
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setVarCombinations(array $varCombinations)
+    public function setVarCombinations(array $varCombinations): Product
     {
         $this->varCombinations = $varCombinations;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductVarCombination[]
+     * @return ProductVarCombination[]
      */
-    public function getVarCombinations()
+    public function getVarCombinations(): array
     {
         return $this->varCombinations;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function clearVarCombinations()
+    public function clearVarCombinations(): Product
     {
-        $this->varCombinations = array();
+        $this->varCombinations = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ProductVariation $variation
-     * @return \jtl\Connector\Model\Product
+     * @param ProductVariation $variation
+     * @return Product
      */
-    public function addVariation(\jtl\Connector\Model\ProductVariation $variation)
+    public function addVariation(ProductVariation $variation): Product
     {
         $this->variations[] = $variation;
+        
         return $this;
     }
     
     /**
      * @param array $variations
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setVariations(array $variations)
+    public function setVariations(array $variations): Product
     {
         $this->variations = $variations;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductVariation[]
+     * @return ProductVariation[]
      */
-    public function getVariations()
+    public function getVariations(): array
     {
         return $this->variations;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function clearVariations()
+    public function clearVariations(): Product
     {
-        $this->variations = array();
+        $this->variations = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\ProductWarehouseInfo $warehouseInfo
-     * @return \jtl\Connector\Model\Product
+     * @param ProductWarehouseInfo $warehouseInfo
+     * @return Product
      */
-    public function addWarehouseInfo(\jtl\Connector\Model\ProductWarehouseInfo $warehouseInfo)
+    public function addWarehouseInfo(ProductWarehouseInfo $warehouseInfo): Product
     {
         $this->warehouseInfo[] = $warehouseInfo;
+        
         return $this;
     }
     
     /**
      * @param array $warehouseInfo
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function setWarehouseInfo(array $warehouseInfo)
+    public function setWarehouseInfo(array $warehouseInfo): Product
     {
         $this->warehouseInfo = $warehouseInfo;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductWarehouseInfo[]
+     * @return ProductWarehouseInfo[]
      */
-    public function getWarehouseInfo()
+    public function getWarehouseInfo(): array
     {
         return $this->warehouseInfo;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Product
+     * @return Product
      */
-    public function clearWarehouseInfo()
+    public function clearWarehouseInfo(): Product
     {
-        $this->warehouseInfo = array();
+        $this->warehouseInfo = [];
+        
         return $this;
     }
 }

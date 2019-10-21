@@ -2,10 +2,13 @@
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Internal 
+ * @subpackage Internal
  */
 
 namespace jtl\Connector\Model;
+
+use InvalidArgumentException;
+use stdClass;
 
 /**
  * Statistic Model
@@ -20,54 +23,60 @@ class Statistic extends DataModel
      * @type int
      */
     protected $available = 0;
-
+    
     /**
      * @type string
      */
     protected $controllerName = '';
-
+    
     /**
      * (non-PHPdoc)
+     * @param bool $toWawi
+     * @param stdClass|null $obj
      * @see \jtl\Connector\Core\Model\DataModel::map()
-     */ 
-    public function map($toWawi = false, \stdClass $obj = null)
+     */
+    public function map(bool $toWawi = false, stdClass $obj = null): void
     {
     
     }
-
+    
     /**
      * @return integer
      */
-    public function getAvailable()
+    public function getAvailable(): int
     {
         return $this->available;
     }
     
     /**
-     * @param  integer $available
-     * @return \jtl\Connector\Model\Statistic
-     * @throws \InvalidArgumentException if the provided argument is not of type 'integer'.
+     * @param integer $available
+     * @return Statistic
+     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
      */
-    public function setAvailable($available)
+    public function setAvailable(int $available): Statistic
     {
-        return $this->setProperty('available', $available, 'integer');
+        $this->available = $available;
+        
+        return $this;
     }
-
+    
     /**
      * @return string
      */
-    public function getControllerName()
+    public function getControllerName(): string
     {
         return $this->controllerName;
     }
     
     /**
-     * @param  string $controllerName
-     * @return \jtl\Connector\Model\Statistic
-     * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
+     * @param string $controllerName
+     * @return Statistic
+     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
      */
-    public function setControllerName($controllerName)
+    public function setControllerName(string $controllerName): Statistic
     {
-        return $this->setProperty('controllerName', $controllerName, 'string');
+        $this->controllerName = $controllerName;
+        
+        return $this;
     }
 }

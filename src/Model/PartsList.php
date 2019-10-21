@@ -7,16 +7,15 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Define set articles / parts lists. 
+ * Define set articles / parts lists.
  *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class PartsList extends DataModel
@@ -28,7 +27,7 @@ class PartsList extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var Identity Reference to a component / product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class PartsList extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-
+    
     /**
      * @var double Component quantity
      * @Serializer\Type("double")
@@ -44,7 +43,7 @@ class PartsList extends DataModel
      * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
      */
     protected $quantity = 0.0;
-
+    
     /**
      * Constructor
      */
@@ -53,17 +52,19 @@ class PartsList extends DataModel
         $this->id = new Identity();
         $this->productId = new Identity();
     }
-
+    
     /**
      * @param Identity $id Unique PartsList id, referenced by product.PartsListId
-     * @return \jtl\Connector\Model\PartsList
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return PartsList
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): PartsList
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique PartsList id, referenced by product.PartsListId
      */
@@ -71,38 +72,42 @@ class PartsList extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param Identity $productId Reference to a component / product
-     * @return \jtl\Connector\Model\PartsList
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return PartsList
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): PartsList
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        $this->productId = $productId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to a component / product
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
-
+    
     /**
      * @param double $quantity Component quantity
-     * @return \jtl\Connector\Model\PartsList
+     * @return PartsList
      */
-    public function setQuantity($quantity)
+    public function setQuantity(float $quantity): PartsList
     {
-        return $this->setProperty('quantity', $quantity, 'double');
+        $this->quantity = $quantity;
+        
+        return $this;
     }
-
+    
     /**
      * @return double Component quantity
      */
-    public function getQuantity()
+    public function getQuantity(): float
     {
         return $this->quantity;
     }

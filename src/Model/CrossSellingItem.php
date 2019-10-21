@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class CrossSellingItem extends DataModel
@@ -28,15 +27,15 @@ class CrossSellingItem extends DataModel
      * @Serializer\Accessor(getter="getCrossSellingGroupId",setter="setCrossSellingGroupId")
      */
     protected $crossSellingGroupId = null;
-
+    
     /**
-     * @var \jtl\Connector\Model\Identity[] Referenced target product ID
+     * @var Identity[] Referenced target product ID
      * @Serializer\Type("array<jtl\Connector\Model\Identity>")
      * @Serializer\SerializedName("productIds")
      * @Serializer\AccessType("reflection")
      */
-    protected $productIds = array();
-
+    protected $productIds = [];
+    
     /**
      * Constructor
      */
@@ -44,59 +43,64 @@ class CrossSellingItem extends DataModel
     {
         $this->crossSellingGroupId = new Identity();
     }
-
+    
     /**
      * @param Identity $crossSellingGroupId Reference to crossSellingGroup
-     * @return \jtl\Connector\Model\CrossSellingItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CrossSellingItem
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCrossSellingGroupId(Identity $crossSellingGroupId)
+    public function setCrossSellingGroupId(Identity $crossSellingGroupId): CrossSellingItem
     {
-        return $this->setProperty('crossSellingGroupId', $crossSellingGroupId, 'Identity');
+        $this->crossSellingGroupId = $crossSellingGroupId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to crossSellingGroup
      */
-    public function getCrossSellingGroupId()
+    public function getCrossSellingGroupId(): Identity
     {
         return $this->crossSellingGroupId;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\Identity $productId
-     * @return \jtl\Connector\Model\CrossSellingItem
+     * @param Identity $productId
+     * @return CrossSellingItem
      */
-    public function addProductId(\jtl\Connector\Model\Identity $productId)
+    public function addProductId(Identity $productId): CrossSellingItem
     {
         $this->productIds[] = $productId;
+        
         return $this;
     }
     
     /**
      * @param array $productIds
-     * @return \jtl\Connector\Model\CrossSellingItem
+     * @return CrossSellingItem
      */
-    public function setProductIds(array $productIds)
+    public function setProductIds(array $productIds): CrossSellingItem
     {
         $this->productIds = $productIds;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\Identity[]
+     * @return Identity[]
      */
-    public function getProductIds()
+    public function getProductIds(): array
     {
         return $this->productIds;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\CrossSellingItem
+     * @return CrossSellingItem
      */
-    public function clearProductIds()
+    public function clearProductIds(): CrossSellingItem
     {
-        $this->productIds = array();
+        $this->productIds = [];
+        
         return $this;
     }
 }

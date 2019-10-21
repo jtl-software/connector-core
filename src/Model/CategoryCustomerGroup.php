@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -55,12 +55,14 @@ class CategoryCustomerGroup extends DataModel
     
     /**
      * @param Identity $categoryId Reference to category
-     * @return \jtl\Connector\Model\CategoryCustomerGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CategoryCustomerGroup
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCategoryId(Identity $categoryId): CategoryCustomerGroup
     {
-        return $this->setProperty('categoryId', $categoryId, 'Identity');
+        $this->categoryId = $categoryId;
+        
+        return $this;
     }
     
     /**
@@ -73,12 +75,14 @@ class CategoryCustomerGroup extends DataModel
     
     /**
      * @param Identity $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\CategoryCustomerGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CategoryCustomerGroup
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerGroupId(Identity $customerGroupId): CategoryCustomerGroup
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        $this->customerGroupId = $customerGroupId;
+        
+        return $this;
     }
     
     /**
@@ -91,11 +95,13 @@ class CategoryCustomerGroup extends DataModel
     
     /**
      * @param double $discount Optional discount on products in specified categoryId for  customerGroupId
-     * @return \jtl\Connector\Model\CategoryCustomerGroup
+     * @return CategoryCustomerGroup
      */
     public function setDiscount(float $discount): CategoryCustomerGroup
     {
-        return $this->setProperty('discount', $discount, 'double');
+        $this->discount = $discount;
+        
+        return $this;
     }
     
     /**

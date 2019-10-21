@@ -7,16 +7,15 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Specific is defined as a characteristic product attribute Like "color". Specifics can be used for after-search-filtering. 
+ * Specific is defined as a characteristic product attribute Like "color". Specifics can be used for after-search-filtering.
  *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class Specific extends DataModel
@@ -28,7 +27,7 @@ class Specific extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var boolean Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      * @Serializer\Type("boolean")
@@ -36,7 +35,7 @@ class Specific extends DataModel
      * @Serializer\Accessor(getter="getIsGlobal",setter="setIsGlobal")
      */
     protected $isGlobal = false;
-
+    
     /**
      * @var integer Optional sort number
      * @Serializer\Type("integer")
@@ -44,7 +43,7 @@ class Specific extends DataModel
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
-
+    
     /**
      * @var string Specific type (radio, dropdown, image...)
      * @Serializer\Type("string")
@@ -52,23 +51,23 @@ class Specific extends DataModel
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
     protected $type = '';
-
+    
     /**
-     * @var \jtl\Connector\Model\SpecificI18n[]
+     * @var SpecificI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\SpecificI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
-
+    protected $i18ns = [];
+    
     /**
-     * @var \jtl\Connector\Model\SpecificValue[]
+     * @var SpecificValue[]
      * @Serializer\Type("array<jtl\Connector\Model\SpecificValue>")
      * @Serializer\SerializedName("values")
      * @Serializer\AccessType("reflection")
      */
-    protected $values = array();
-
+    protected $values = [];
+    
     /**
      * Constructor
      */
@@ -76,17 +75,19 @@ class Specific extends DataModel
     {
         $this->id = new Identity();
     }
-
+    
     /**
      * @param Identity $id Unique specific id
-     * @return \jtl\Connector\Model\Specific
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return Specific
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): Specific
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique specific id
      */
@@ -94,129 +95,141 @@ class Specific extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param boolean $isGlobal Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
-     * @return \jtl\Connector\Model\Specific
+     * @return Specific
      */
-    public function setIsGlobal($isGlobal)
+    public function setIsGlobal(bool $isGlobal): Specific
     {
-        return $this->setProperty('isGlobal', $isGlobal, 'boolean');
+        $this->isGlobal = $isGlobal;
+        
+        return $this;
     }
-
+    
     /**
      * @return boolean Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      */
-    public function getIsGlobal()
+    public function getIsGlobal(): bool
     {
         return $this->isGlobal;
     }
-
+    
     /**
      * @param integer $sort Optional sort number
-     * @return \jtl\Connector\Model\Specific
+     * @return Specific
      */
-    public function setSort($sort)
+    public function setSort(int $sort): Specific
     {
-        return $this->setProperty('sort', $sort, 'integer');
+        $this->sort = $sort;
+        
+        return $this;
     }
-
+    
     /**
      * @return integer Optional sort number
      */
-    public function getSort()
+    public function getSort(): int
     {
         return $this->sort;
     }
-
+    
     /**
      * @param string $type Specific type (radio, dropdown, image...)
-     * @return \jtl\Connector\Model\Specific
+     * @return Specific
      */
-    public function setType($type)
+    public function setType(string $type): Specific
     {
-        return $this->setProperty('type', $type, 'string');
+        $this->type = $type;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Specific type (radio, dropdown, image...)
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\SpecificI18n $i18n
-     * @return \jtl\Connector\Model\Specific
+     * @param SpecificI18n $i18n
+     * @return Specific
      */
-    public function addI18n(\jtl\Connector\Model\SpecificI18n $i18n)
+    public function addI18n(SpecificI18n $i18n): Specific
     {
         $this->i18ns[] = $i18n;
+        
         return $this;
     }
     
     /**
      * @param array $i18ns
-     * @return \jtl\Connector\Model\Specific
+     * @return Specific
      */
-    public function setI18ns(array $i18ns)
+    public function setI18ns(array $i18ns): Specific
     {
         $this->i18ns = $i18ns;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\SpecificI18n[]
+     * @return SpecificI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Specific
+     * @return Specific
      */
-    public function clearI18ns()
+    public function clearI18ns(): Specific
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
+        
         return $this;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\SpecificValue $value
-     * @return \jtl\Connector\Model\Specific
+     * @param SpecificValue $value
+     * @return Specific
      */
-    public function addValue(\jtl\Connector\Model\SpecificValue $value)
+    public function addValue(SpecificValue $value): Specific
     {
         $this->values[] = $value;
+        
         return $this;
     }
     
     /**
      * @param array $values
-     * @return \jtl\Connector\Model\Specific
+     * @return Specific
      */
-    public function setValues(array $values)
+    public function setValues(array $values): Specific
     {
         $this->values = $values;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\SpecificValue[]
+     * @return SpecificValue[]
      */
-    public function getValues()
+    public function getValues(): array
     {
         return $this->values;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\Specific
+     * @return Specific
      */
-    public function clearValues()
+    public function clearValues(): Specific
     {
-        $this->values = array();
+        $this->values = [];
+        
         return $this;
     }
 }

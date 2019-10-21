@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductVariationValueInvisibility extends DataModel
@@ -28,7 +27,7 @@ class ProductVariationValueInvisibility extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-
+    
     /**
      * @var Identity Reference to productVariationValue to hide from customerGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class ProductVariationValueInvisibility extends DataModel
      * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
      */
     protected $productVariationValueId = null;
-
+    
     /**
      * Constructor
      */
@@ -45,39 +44,43 @@ class ProductVariationValueInvisibility extends DataModel
         $this->customerGroupId = new Identity();
         $this->productVariationValueId = new Identity();
     }
-
+    
     /**
      * @param Identity $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\ProductVariationValueInvisibility
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductVariationValueInvisibility
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerGroupId(Identity $customerGroupId)
+    public function setCustomerGroupId(Identity $customerGroupId): ProductVariationValueInvisibility
     {
-        return $this->setProperty('customerGroupId', $customerGroupId, 'Identity');
+        $this->customerGroupId = $customerGroupId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to customerGroup
      */
-    public function getCustomerGroupId()
+    public function getCustomerGroupId(): Identity
     {
         return $this->customerGroupId;
     }
-
+    
     /**
      * @param Identity $productVariationValueId Reference to productVariationValue to hide from customerGroup
-     * @return \jtl\Connector\Model\ProductVariationValueInvisibility
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductVariationValueInvisibility
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductVariationValueId(Identity $productVariationValueId)
+    public function setProductVariationValueId(Identity $productVariationValueId): ProductVariationValueInvisibility
     {
-        return $this->setProperty('productVariationValueId', $productVariationValueId, 'Identity');
+        $this->productVariationValueId = $productVariationValueId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to productVariationValue to hide from customerGroup
      */
-    public function getProductVariationValueId()
+    public function getProductVariationValueId(): Identity
     {
         return $this->productVariationValueId;
     }

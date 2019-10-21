@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductVarCombination extends DataModel
@@ -28,7 +27,7 @@ class ProductVarCombination extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-
+    
     /**
      * @var Identity Reference to productVariation
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class ProductVarCombination extends DataModel
      * @Serializer\Accessor(getter="getProductVariationId",setter="setProductVariationId")
      */
     protected $productVariationId = null;
-
+    
     /**
      * @var Identity Reference to productVariationValue
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -44,7 +43,7 @@ class ProductVarCombination extends DataModel
      * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
      */
     protected $productVariationValueId = null;
-
+    
     /**
      * Constructor
      */
@@ -54,57 +53,63 @@ class ProductVarCombination extends DataModel
         $this->productVariationId = new Identity();
         $this->productVariationValueId = new Identity();
     }
-
+    
     /**
      * @param Identity $productId Reference to product
-     * @return \jtl\Connector\Model\ProductVarCombination
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductVarCombination
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): ProductVarCombination
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        $this->productId = $productId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to product
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
-
+    
     /**
      * @param Identity $productVariationId Reference to productVariation
-     * @return \jtl\Connector\Model\ProductVarCombination
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductVarCombination
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductVariationId(Identity $productVariationId)
+    public function setProductVariationId(Identity $productVariationId): ProductVarCombination
     {
-        return $this->setProperty('productVariationId', $productVariationId, 'Identity');
+        $this->productVariationId = $productVariationId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to productVariation
      */
-    public function getProductVariationId()
+    public function getProductVariationId(): Identity
     {
         return $this->productVariationId;
     }
-
+    
     /**
      * @param Identity $productVariationValueId Reference to productVariationValue
-     * @return \jtl\Connector\Model\ProductVarCombination
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductVarCombination
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductVariationValueId(Identity $productVariationValueId)
+    public function setProductVariationValueId(Identity $productVariationValueId): ProductVarCombination
     {
-        return $this->setProperty('productVariationValueId', $productVariationValueId, 'Identity');
+        $this->productVariationValueId = $productVariationValueId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to productVariationValue
      */
-    public function getProductVariationValueId()
+    public function getProductVariationValueId(): Identity
     {
         return $this->productVariationValueId;
     }

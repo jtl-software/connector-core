@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class ProductConfigGroup extends DataModel
@@ -28,7 +27,7 @@ class ProductConfigGroup extends DataModel
      * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
      */
     protected $configGroupId = null;
-
+    
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class ProductConfigGroup extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-
+    
     /**
      * @var integer Optional sort number
      * @Serializer\Type("integer")
@@ -44,7 +43,7 @@ class ProductConfigGroup extends DataModel
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
-
+    
     /**
      * Constructor
      */
@@ -53,56 +52,62 @@ class ProductConfigGroup extends DataModel
         $this->productId = new Identity();
         $this->configGroupId = new Identity();
     }
-
+    
     /**
      * @param Identity $configGroupId Reference to configGroup
-     * @return \jtl\Connector\Model\ProductConfigGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductConfigGroup
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setConfigGroupId(Identity $configGroupId)
+    public function setConfigGroupId(Identity $configGroupId): ProductConfigGroup
     {
-        return $this->setProperty('configGroupId', $configGroupId, 'Identity');
+        $this->configGroupId = $configGroupId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to configGroup
      */
-    public function getConfigGroupId()
+    public function getConfigGroupId(): Identity
     {
         return $this->configGroupId;
     }
-
+    
     /**
      * @param Identity $productId Reference to product
-     * @return \jtl\Connector\Model\ProductConfigGroup
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductConfigGroup
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): ProductConfigGroup
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        $this->productId = $productId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to product
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
-
+    
     /**
      * @param integer $sort Optional sort number
-     * @return \jtl\Connector\Model\ProductConfigGroup
+     * @return ProductConfigGroup
      */
-    public function setSort($sort)
+    public function setSort(int $sort): ProductConfigGroup
     {
-        return $this->setProperty('sort', $sort, 'integer');
+        $this->sort = $sort;
+        
+        return $this;
     }
-
+    
     /**
      * @return integer Optional sort number
      */
-    public function getSort()
+    public function getSort(): int
     {
         return $this->sort;
     }

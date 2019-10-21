@@ -7,7 +7,7 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class CustomerOrderAttr extends DataModel
@@ -28,7 +27,7 @@ class CustomerOrderAttr extends DataModel
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
      */
     protected $customerOrderId = null;
-
+    
     /**
      * @var Identity Unique customerOrderAttr id
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -36,7 +35,7 @@ class CustomerOrderAttr extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
      * @var string Attribute key name
      * @Serializer\Type("string")
@@ -44,7 +43,7 @@ class CustomerOrderAttr extends DataModel
      * @Serializer\Accessor(getter="getKey",setter="setKey")
      */
     protected $key = '';
-
+    
     /**
      * @var string Attribute value
      * @Serializer\Type("string")
@@ -52,7 +51,7 @@ class CustomerOrderAttr extends DataModel
      * @Serializer\Accessor(getter="getValue",setter="setValue")
      */
     protected $value = '';
-
+    
     /**
      * Constructor
      */
@@ -61,35 +60,39 @@ class CustomerOrderAttr extends DataModel
         $this->id = new Identity();
         $this->customerOrderId = new Identity();
     }
-
+    
     /**
      * @param Identity $customerOrderId Reference to customerOrder
-     * @return \jtl\Connector\Model\CustomerOrderAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CustomerOrderAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerOrderId(Identity $customerOrderId)
+    public function setCustomerOrderId(Identity $customerOrderId): CustomerOrderAttr
     {
-        return $this->setProperty('customerOrderId', $customerOrderId, 'Identity');
+        $this->customerOrderId = $customerOrderId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to customerOrder
      */
-    public function getCustomerOrderId()
+    public function getCustomerOrderId(): Identity
     {
         return $this->customerOrderId;
     }
-
+    
     /**
      * @param Identity $id Unique customerOrderAttr id
-     * @return \jtl\Connector\Model\CustomerOrderAttr
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return CustomerOrderAttr
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): CustomerOrderAttr
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Unique customerOrderAttr id
      */
@@ -97,37 +100,41 @@ class CustomerOrderAttr extends DataModel
     {
         return $this->id;
     }
-
+    
     /**
      * @param string $key Attribute key name
-     * @return \jtl\Connector\Model\CustomerOrderAttr
+     * @return CustomerOrderAttr
      */
-    public function setKey($key)
+    public function setKey(string $key): CustomerOrderAttr
     {
-        return $this->setProperty('key', $key, 'string');
+        $this->key = $key;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Attribute key name
      */
-    public function getKey()
+    public function getKey(): string
     {
         return $this->key;
     }
-
+    
     /**
      * @param string $value Attribute value
-     * @return \jtl\Connector\Model\CustomerOrderAttr
+     * @return CustomerOrderAttr
      */
-    public function setValue($value)
+    public function setValue(string $value): CustomerOrderAttr
     {
-        return $this->setProperty('value', $value, 'string');
+        $this->value = $value;
+        
+        return $this;
     }
-
+    
     /**
      * @return string Attribute value
      */
-    public function getValue()
+    public function getValue(): string
     {
         return $this->value;
     }

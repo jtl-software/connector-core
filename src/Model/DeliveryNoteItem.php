@@ -7,35 +7,33 @@
 
 namespace jtl\Connector\Model;
 
-use DateTime;
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
  * @Serializer\AccessType("public_method")
  */
 class DeliveryNoteItem extends DataModel
 {
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("customerOrderItemId")
      * @Serializer\Accessor(getter="getCustomerOrderItemId",setter="setCustomerOrderItemId")
      */
     protected $customerOrderItemId = null;
-
+    
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("deliveryNoteId")
      * @Serializer\Accessor(getter="getDeliveryNoteId",setter="setDeliveryNoteId")
      */
     protected $deliveryNoteId = null;
-
+    
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -43,31 +41,31 @@ class DeliveryNoteItem extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-
+    
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-
+    
     /**
-     * @var double 
+     * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("quantity")
      * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
      */
     protected $quantity = 0.0;
-
+    
     /**
-     * @var \jtl\Connector\Model\DeliveryNoteItemInfo[]
+     * @var DeliveryNoteItemInfo[]
      * @Serializer\Type("array<jtl\Connector\Model\DeliveryNoteItemInfo>")
      * @Serializer\SerializedName("info")
      * @Serializer\AccessType("reflection")
      */
-    protected $info = array();
-
+    protected $info = [];
+    
     /**
      * Constructor
      */
@@ -78,130 +76,142 @@ class DeliveryNoteItem extends DataModel
         $this->productId = new Identity();
         $this->customerOrderItemId = new Identity();
     }
-
+    
     /**
-     * @param Identity $customerOrderItemId 
-     * @return \jtl\Connector\Model\DeliveryNoteItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @param Identity $customerOrderItemId
+     * @return DeliveryNoteItem
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setCustomerOrderItemId(Identity $customerOrderItemId)
+    public function setCustomerOrderItemId(Identity $customerOrderItemId): DeliveryNoteItem
     {
-        return $this->setProperty('customerOrderItemId', $customerOrderItemId, 'Identity');
+        $this->customerOrderItemId = $customerOrderItemId;
+        
+        return $this;
     }
-
+    
     /**
-     * @return Identity 
+     * @return Identity
      */
-    public function getCustomerOrderItemId()
+    public function getCustomerOrderItemId(): Identity
     {
         return $this->customerOrderItemId;
     }
-
+    
     /**
-     * @param Identity $deliveryNoteId 
-     * @return \jtl\Connector\Model\DeliveryNoteItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @param Identity $deliveryNoteId
+     * @return DeliveryNoteItem
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setDeliveryNoteId(Identity $deliveryNoteId)
+    public function setDeliveryNoteId(Identity $deliveryNoteId): DeliveryNoteItem
     {
-        return $this->setProperty('deliveryNoteId', $deliveryNoteId, 'Identity');
+        $this->deliveryNoteId = $deliveryNoteId;
+        
+        return $this;
     }
-
+    
     /**
-     * @return Identity 
+     * @return Identity
      */
-    public function getDeliveryNoteId()
+    public function getDeliveryNoteId(): Identity
     {
         return $this->deliveryNoteId;
     }
-
+    
     /**
      * @param Identity $productId Reference to product
-     * @return \jtl\Connector\Model\CustomerOrderItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return DeliveryNoteItem
      */
-    public function setProductId(Identity $productId)
+    public function setProductId(Identity $productId): DeliveryNoteItem
     {
-        return $this->setProperty('productId', $productId, 'Identity');
+        $this->productId = $productId;
+        
+        return $this;
     }
-
+    
     /**
      * @return Identity Reference to product
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }
-
+    
     /**
-     * @param Identity $id 
-     * @return \jtl\Connector\Model\DeliveryNoteItem
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @param Identity $id
+     * @return DeliveryNoteItem
+     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): DeliveryNoteItem
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        
+        return $this;
     }
-
+    
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getId(): Identity
     {
         return $this->id;
     }
-
+    
     /**
-     * @param double $quantity 
-     * @return \jtl\Connector\Model\DeliveryNoteItem
+     * @param double $quantity
+     * @return DeliveryNoteItem
      */
-    public function setQuantity($quantity)
+    public function setQuantity(float $quantity): DeliveryNoteItem
     {
-        return $this->setProperty('quantity', $quantity, 'double');
+        $this->quantity = $quantity;
+        
+        return $this;
     }
-
+    
     /**
-     * @return double 
+     * @return double
      */
-    public function getQuantity()
+    public function getQuantity(): float
     {
         return $this->quantity;
     }
-
+    
     /**
-     * @param \jtl\Connector\Model\DeliveryNoteItemInfo $info
-     * @return \jtl\Connector\Model\DeliveryNoteItem
+     * @param DeliveryNoteItemInfo $info
+     * @return DeliveryNoteItem
      */
-    public function addInfo(\jtl\Connector\Model\DeliveryNoteItemInfo $info)
+    public function addInfo(DeliveryNoteItemInfo $info): DeliveryNoteItem
     {
         $this->info[] = $info;
+        
         return $this;
     }
     
     /**
      * @param array $info
-     * @return \jtl\Connector\Model\DeliveryNoteItem
+     * @return DeliveryNoteItem
      */
-    public function setInfo(array $info)
+    public function setInfo(array $info): DeliveryNoteItem
     {
         $this->info = $info;
+        
         return $this;
     }
     
     /**
-     * @return \jtl\Connector\Model\DeliveryNoteItemInfo[]
+     * @return DeliveryNoteItemInfo[]
      */
-    public function getInfo()
+    public function getInfo(): array
     {
         return $this->info;
     }
-
+    
     /**
-     * @return \jtl\Connector\Model\DeliveryNoteItem
+     * @return DeliveryNoteItem
      */
-    public function clearInfo()
+    public function clearInfo(): DeliveryNoteItem
     {
-        $this->info = array();
+        $this->info = [];
+        
         return $this;
     }
 }
