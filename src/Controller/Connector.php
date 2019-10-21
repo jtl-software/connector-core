@@ -197,10 +197,10 @@ class Connector extends CoreController
             return $action;
         }
 
-        if (Application()->getSession() !== null) {
+        if (Application()->getSessionHandler() !== null) {
             $session = new \stdClass();
-            $session->sessionId = Application()->getSession()->getSessionId();
-            $session->lifetime = Application()->getSession()->getLifetime();
+            $session->sessionId = Application()->getSessionHandler()->getSessionId();
+            $session->lifetime = Application()->getSessionHandler()->getLifetime();
             
             $action->setResult($session);
         } else {

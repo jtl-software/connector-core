@@ -23,6 +23,7 @@ use jtl\Connector\Core\Rpc\Error;
 use jtl\Connector\Core\Http\Request;
 use jtl\Connector\Core\Http\Response;
 use jtl\Connector\Core\Config\Config;
+use jtl\Connector\Core\Session\AbstractSessionHandler;
 use jtl\Connector\Exception\JsonException;
 use jtl\Connector\Model\BoolResult;
 use jtl\Connector\Result\Action;
@@ -31,16 +32,15 @@ use jtl\Connector\Core\Exception\SchemaException;
 use jtl\Connector\Core\Validator\ValidationException;
 use jtl\Connector\Database\Sqlite3;
 use jtl\Connector\Core\Utilities\RpcMethod;
-use jtl\Connector\Session\Session;
 use jtl\Connector\Base\Connector;
 use jtl\Connector\Core\Logger\Logger;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use jtl\Connector\Core\Rpc\Method;
 use jtl\Connector\Linker\IdentityLinker;
 use jtl\Connector\Model\DataModel;
-use Doctrine\Common\Collections\ArrayCollection;
 use jtl\Connector\Serializer\JMS\SerializerBuilder;
 use jtl\Connector\Linker\ChecksumLinker;
+use jtl\Connector\Session\SqliteSession;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use jtl\Connector\Core\IO\Path;
 use jtl\Connector\Event\EventHandler;
@@ -71,9 +71,9 @@ class Application extends CoreApplication
     /**
      * Global Session
      *
-     * @var \jtl\Connector\Session\Session
+     * @var \SessionHandlerInterface
      */
-    protected $session;
+    protected $sessionHandler;
     
     /**
      * @var \Symfony\Component\EventDispatcher\EventDispatcher
@@ -111,7 +111,6 @@ class Application extends CoreApplication
         $this->getErrorHandler()->setEventDispatcher($this->eventDispatcher);
         
         $jtlrpc = Request::handle($this->connector->getUseSuperGlobals());
-        $sessionId = Request::getSession();
         $requestpackets = RequestPacket::build($jtlrpc);
         
         $rpcmode = is_object($requestpackets) ? Packet::SINGLE_MODE : Packet::BATCH_MODE;
@@ -122,7 +121,7 @@ class Application extends CoreApplication
         }
         
         // Start Session
-        $this->startSession($sessionId, $method);
+        $this->startSession($method);
         
         // Start Configuration
         $this->startConfiguration();
@@ -577,7 +576,7 @@ class Application extends CoreApplication
      */
     protected function startConfiguration(): void
     {
-        if (!isset($this->session)) {
+        if (!isset($this->sessionHandler)) {
             throw new SessionException('Session not initialized', -32001);
         }
         
@@ -611,24 +610,37 @@ class Application extends CoreApplication
      * @throws SessionException
      * @throws \jtl\Connector\Core\Exception\DatabaseException
      */
-    protected function startSession($sessionId = null, string $method): void
+    protected function startSession(string $method): void
     {
-        if ($sessionId === null && $method !== null && $method !== 'core.connector.auth') {
+        if (Request::getSession() === null && $method !== null && $method !== 'core.connector.auth') {
             throw new SessionException('No session');
         }
         
-        $dir = Path::combine(CONNECTOR_DIR, 'db');
-        if (!is_dir($dir)) {
-            if (!mkdir($dir)) {
-                throw new ApplicationException('Could not create sqlite database directory');
+        if ($this->getSessionHandler() === null) {
+            $this->setSessionHandler(new SqliteSession());
+        }
+    
+        $sessionId = Request::getSession();
+        $sessionName = 'JtlConnector';
+        
+        ini_set("session.gc_probability", 25);
+    
+        session_name($sessionName);
+        if ($sessionId !== null) {
+            if ($this->check($sessionId)) {
+                session_id($sessionId);
+            } else {
+                throw new SessionException("Session is invalid", -32000);
             }
         }
+    
+        session_set_save_handler($this->getSessionHandler());
+    
+        session_start();
+    
         
-        $sqlite3 = Sqlite3::getInstance();
-        $sqlite3->connect(['location' => Path::combine($dir, 'connector.s3db')]);
-        $sqlite3->check();
-        
-        $this->session = new Session($sqlite3, $sessionId);
+    
+        Logger::write(sprintf('Session started with id (%s)', session_id()), Logger::DEBUG, 'session');
     }
     
     /**
@@ -753,11 +765,22 @@ class Application extends CoreApplication
     /**
      * Session getter
      *
-     * @return Session
+     * @return \SessionHandlerInterface
      */
-    public function getSession(): Session
+    public function getSessionHandler(): \SessionHandlerInterface
     {
-        return $this->session;
+        return $this->sessionHandler;
+    }
+    
+    /**
+     * Session getter
+     *
+     * @param \SessionHandlerInterface $sessionHandler
+     * @return \SessionHandlerInterface
+     */
+    public function setSessionHandler(\SessionHandlerInterface $sessionHandler): \SessionHandlerInterface
+    {
+        return $this->sessionHandler;
     }
     
     /**
