@@ -113,11 +113,4 @@ abstract class Model
         
         return $object;
     }
-    
-    public function toJson(): Option
-    {
-        $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
-        
-        return $serializer->serialize($this, 'json', SerializationContext::create()->setSerializeNull(true));
-    }
 }
