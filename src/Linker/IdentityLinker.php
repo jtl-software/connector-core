@@ -637,10 +637,10 @@ class IdentityLinker
         }
 
         if ($this->isValidEndpointId($endpointId)) {
-            $hostId = self::$mapper->getHostId($endpointId, $type);
+            $hostId = self::$mapper->getHostId($type, $endpointId);
         } elseif ($this->isValidHostId($hostId)) {
             $relationType = isset($this->runtimeInfos['relationType']) ? $this->runtimeInfos['relationType'] : null;
-            $endpointId = self::$mapper->getEndpointId($hostId, $type, $relationType);
+            $endpointId = self::$mapper->getEndpointId($type, $hostId, $relationType);
         }
 
         if ($validate && !$this->isValidEndpointId($endpointId)) {
@@ -670,7 +670,7 @@ class IdentityLinker
     {
         $type = $this->getType($modelName, $property);
 
-        $result = self::$mapper->save($endpointId, $hostId, $type);
+        $result = self::$mapper->save($type, $endpointId, $hostId);
         if ($result) {
             $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_ENDPOINT);
             $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_HOST);
@@ -693,7 +693,7 @@ class IdentityLinker
     {
         $type = $this->getType($modelName);
 
-        $result = self::$mapper->delete($endpointId, $hostId, $type);
+        $result = self::$mapper->delete($type, $endpointId, $hostId);
         if ($result) {
             $this->deleteCache($endpointId, null, $type, self::CACHE_TYPE_ENDPOINT);
             $this->deleteCache(null, $hostId, $type, self::CACHE_TYPE_HOST);
@@ -732,7 +732,7 @@ class IdentityLinker
         }
 
         $relationType = isset($this->runtimeInfos['relationType']) ? $this->runtimeInfos['relationType'] : null;
-        $endpointId = self::$mapper->getEndpointId($hostId, $type, $relationType);
+        $endpointId = self::$mapper->getEndpointId($type, $hostId, $relationType);
 
         //if (is_string($endpointId) && strlen(trim($endpointId)) > 0) {
         $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_HOST);
@@ -760,7 +760,7 @@ class IdentityLinker
             return $hostId;
         }
 
-        $hostId = self::$mapper->getHostId($endpointId, $type);
+        $hostId = self::$mapper->getHostId($type, $endpointId);
 
         //if (is_int($hostId) && $hostId > 0) {
         $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_ENDPOINT);
