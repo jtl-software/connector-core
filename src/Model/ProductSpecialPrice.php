@@ -157,7 +157,7 @@ class ProductSpecialPrice extends DataModel
     /**
      * @return DateTime Optional: Activate special price from date
      */
-    public function getActiveFromDate(): DateTime
+    public function getActiveFromDate(): ?DateTime
     {
         return $this->activeFromDate;
     }
@@ -177,7 +177,7 @@ class ProductSpecialPrice extends DataModel
     /**
      * @return DateTime Optional: Special price active until date
      */
-    public function getActiveUntilDate(): DateTime
+    public function getActiveUntilDate(): ?DateTime
     {
         return $this->activeUntilDate;
     }

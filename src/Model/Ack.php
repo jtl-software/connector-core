@@ -22,7 +22,7 @@ use jtl\Connector\Checksum\IChecksum;
 class Ack extends DataModel
 {
     /**
-     * @var Identity list
+     * @var ArrayCollection list
      * @Serializer\Type("ArrayCollection<string, ArrayCollection<jtl\Connector\Model\Identity>>")
      * @Serializer\SerializedName("identities")
      * @Serializer\Accessor(getter="getIdentities",setter="setIdentities")
@@ -40,9 +40,9 @@ class Ack extends DataModel
     /**
      * Identities getter
      *
-     * @return Identity
+     * @return ArrayCollection
      */
-    public function getIdentities(): Identity
+    public function getIdentities(): ArrayCollection
     {
         return $this->identities;
     }

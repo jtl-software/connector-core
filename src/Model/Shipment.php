@@ -160,7 +160,7 @@ class Shipment extends DataModel
     /**
      * @return DateTime Creation date
      */
-    public function getCreationDate(): DateTime
+    public function getCreationDate(): ?DateTime
     {
         return $this->creationDate;
     }

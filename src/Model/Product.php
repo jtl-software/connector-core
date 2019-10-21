@@ -899,7 +899,7 @@ class Product extends DataModel
     /**
      * @return DateTime Optional available from date. Specify a date, upon when product can be purchased.
      */
-    public function getAvailableFrom(): DateTime
+    public function getAvailableFrom(): ?DateTime
     {
         return $this->availableFrom;
     }
@@ -1071,7 +1071,7 @@ class Product extends DataModel
     /**
      * @return DateTime Creation date
      */
-    public function getCreationDate(): DateTime
+    public function getCreationDate(): ?DateTime
     {
         return $this->creationDate;
     }
@@ -1452,7 +1452,7 @@ class Product extends DataModel
     /**
      * @return DateTime
      */
-    public function getMinBestBeforeDate(): DateTime
+    public function getMinBestBeforeDate(): ?DateTime
     {
         return $this->minBestBeforeDate;
     }
@@ -1510,7 +1510,7 @@ class Product extends DataModel
     /**
      * @return DateTime
      */
-    public function getModified(): DateTime
+    public function getModified(): ?DateTime
     {
         return $this->modified;
     }
@@ -1530,7 +1530,7 @@ class Product extends DataModel
     /**
      * @return DateTime
      */
-    public function getNewReleaseDate(): DateTime
+    public function getNewReleaseDate(): ?DateTime
     {
         return $this->newReleaseDate;
     }
@@ -1550,7 +1550,7 @@ class Product extends DataModel
     /**
      * @return DateTime Contains the date of the next available inflow.
      */
-    public function getNextAvailableInflowDate(): DateTime
+    public function getNextAvailableInflowDate(): ?DateTime
     {
         return $this->nextAvailableInflowDate;
     }

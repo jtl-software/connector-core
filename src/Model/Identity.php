@@ -68,7 +68,7 @@ class Identity extends Model
      */
     public function setEndpoint(string $endpoint): Identity
     {
-        $this->endpoint = (string)$endpoint;
+        $this->endpoint = $endpoint;
         
         return $this;
     }
@@ -91,7 +91,7 @@ class Identity extends Model
      */
     public function setHost(int $host): Identity
     {
-        $this->host = (int)$host;
+        $this->host = $host;
         
         return $this;
     }

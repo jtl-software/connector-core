@@ -57,7 +57,7 @@ class DeliveryNoteTrackingList extends DataModel
      * @param string $code
      * @return DeliveryNoteTrackingList
      */
-    public function ddCode(string $code): DeliveryNoteTrackingList
+    public function addCode(string $code): DeliveryNoteTrackingList
     {
         $this->codes[] = $code;
         

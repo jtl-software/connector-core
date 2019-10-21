@@ -86,7 +86,7 @@ class DeliveryNoteItemInfo extends DataModel
     /**
      * @return DateTime
      */
-    public function getBestBefore(): DateTime
+    public function getBestBefore(): ?DateTime
     {
         return $this->bestBefore;
     }

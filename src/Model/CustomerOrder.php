@@ -359,7 +359,7 @@ class CustomerOrder extends DataModel
     /**
      * @return DateTime Date of creation
      */
-    public function getCreationDate(): DateTime
+    public function getCreationDate(): ?DateTime
     {
         return $this->creationDate;
     }
@@ -398,7 +398,7 @@ class CustomerOrder extends DataModel
     /**
      * @return DateTime
      */
-    public function getEstimatedDeliveryDate(): DateTime
+    public function getEstimatedDeliveryDate(): ?DateTime
     {
         return $this->estimatedDeliveryDate;
     }
@@ -475,7 +475,7 @@ class CustomerOrder extends DataModel
     /**
      * @return DateTime Payment date
      */
-    public function getPaymentDate(): DateTime
+    public function getPaymentDate(): ?DateTime
     {
         return $this->paymentDate;
     }
@@ -592,7 +592,7 @@ class CustomerOrder extends DataModel
     /**
      * @return DateTime Shipping date
      */
-    public function getShippingDate(): DateTime
+    public function getShippingDate(): ?DateTime
     {
         return $this->shippingDate;
     }

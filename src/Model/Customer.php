@@ -360,7 +360,7 @@ class Customer extends DataModel
     /**
      * @return DateTime Date of birth
      */
-    public function getBirthday(): DateTime
+    public function getBirthday(): ?DateTime
     {
         return $this->birthday;
     }
@@ -437,7 +437,7 @@ class Customer extends DataModel
     /**
      * @return DateTime
      */
-    public function getCreationDate(): DateTime
+    public function getCreationDate(): ?DateTime
     {
         return $this->creationDate;
     }

@@ -158,7 +158,7 @@ class Payment extends DataModel
     /**
      * @return DateTime
      */
-    public function getCreationDate(): DateTime
+    public function getCreationDate(): ?DateTime
     {
         return $this->creationDate;
     }
