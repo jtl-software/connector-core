@@ -65,7 +65,7 @@ abstract class DataModel extends Model
      * @param mixed $obj Object to map
      * @throws NotImplementedException
      */
-    public function map(bool $toWawi = false, \stdClass $obj = null): void
+    public function map(bool $toWawi = false, \stdClass $obj = null)
     {
         throw new NotImplementedException;
     }
