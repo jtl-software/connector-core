@@ -632,10 +632,10 @@ class Application extends CoreApplication
     }
     
     /**
-     * @param $data
-     * @param $method
+     * @param \stdClass $data
+     * @param string $method
      */
-    protected function triggerRpcAfterEvent(array $data, string $method): void
+    protected function triggerRpcAfterEvent(\stdClass $data, string $method): void
     {
         $method = RpcMethod::splitMethod($method);
         EventHandler::dispatchRpc($data, $this->eventDispatcher, $method->getController(), $method->getAction(),
