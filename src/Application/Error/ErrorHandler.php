@@ -39,10 +39,10 @@ class ErrorHandler implements IErrorHandler
     }
     
     /**
-     * @param array $data
+     * @param \stdClass $data
      * @param string $method
      */
-    protected function triggerRpcAfterEvent(array $data, string $method)
+    protected function triggerRpcAfterEvent(\stdClass $data, string $method)
     {
         if ($this->eventDispatcher !== null) {
             $method = RpcMethod::splitMethod($method);
