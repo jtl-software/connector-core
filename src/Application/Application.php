@@ -647,7 +647,7 @@ class Application extends CoreApplication
      *
      * @return IEndpointConnector
      */
-    public function getConnector(): IEndpointConnector
+    public function getConnector(): ?IEndpointConnector
     {
         return $this->connector;
     }
@@ -657,7 +657,7 @@ class Application extends CoreApplication
      *
      * @return Session
      */
-    public function getSession(): Session
+    public function getSession(): ?Session
     {
         return $this->session;
     }
@@ -673,7 +673,7 @@ class Application extends CoreApplication
     /**
      * @return Config
      */
-    public function getConfig(): Config
+    public function getConfig(): ?Config
     {
         return $this->config;
     }
@@ -681,7 +681,7 @@ class Application extends CoreApplication
     /**
      * @return IErrorHandler
      */
-    public function getErrorHandler(): IErrorHandler
+    public function getErrorHandler(): ?IErrorHandler
     {
         return $this->errorHandler;
     }
