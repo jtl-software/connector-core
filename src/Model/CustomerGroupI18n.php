@@ -9,6 +9,7 @@ namespace jtl\Connector\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
+use jtl\Connector\Model\Common\I18n;
 
 /**
  * Localized customer group name.
@@ -18,7 +19,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CustomerGroupI18n extends DataModel
+class CustomerGroupI18n extends I18n
 {
     /**
      * @var Identity Reference to customerGroup
@@ -27,15 +28,7 @@ class CustomerGroupI18n extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-    
-    /**
-     * @var string Locale
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
-     */
-    protected $languageISO = '';
-    
+
     /**
      * @var string Localized customer group name
      * @Serializer\Type("string")
@@ -71,26 +64,7 @@ class CustomerGroupI18n extends DataModel
     {
         return $this->customerGroupId;
     }
-    
-    /**
-     * @param string $languageISO Locale
-     * @return CustomerGroupI18n
-     */
-    public function setLanguageISO(string $languageISO): CustomerGroupI18n
-    {
-        $this->languageISO = $languageISO;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string Locale
-     */
-    public function getLanguageISO(): string
-    {
-        return $this->languageISO;
-    }
-    
+
     /**
      * @param string $name Localized customer group name
      * @return CustomerGroupI18n

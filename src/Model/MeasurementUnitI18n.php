@@ -27,15 +27,7 @@ class MeasurementUnitI18n extends DataModel
      * @Serializer\Accessor(getter="getMeasurementUnitId",setter="setMeasurementUnitId")
      */
     protected $measurementUnitId = null;
-    
-    /**
-     * @var string Locale
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
-     */
-    protected $languageISO = '';
-    
+
     /**
      * @var string Localized Name
      * @Serializer\Type("string")
@@ -71,26 +63,7 @@ class MeasurementUnitI18n extends DataModel
     {
         return $this->measurementUnitId;
     }
-    
-    /**
-     * @param string $languageISO Locale
-     * @return MeasurementUnitI18n
-     */
-    public function setLanguageISO(string $languageISO): MeasurementUnitI18n
-    {
-        $this->languageISO = $languageISO;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string Locale
-     */
-    public function getLanguageISO(): string
-    {
-        return $this->languageISO;
-    }
-    
+
     /**
      * @param string $name Localized Name
      * @return MeasurementUnitI18n

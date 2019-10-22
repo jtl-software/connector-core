@@ -9,6 +9,7 @@ namespace jtl\Connector\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
+use jtl\Connector\Model\Common\Attribute as CommonAttribute;
 
 /**
  * Localized product attribute.
@@ -18,16 +19,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductAttr extends DataModel
+class ProductAttr extends CommonAttribute
 {
-    /**
-     * @var Identity
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-    
     /**
      * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -35,23 +28,7 @@ class ProductAttr extends DataModel
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-    
-    /**
-     * @var boolean
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isCustomProperty")
-     * @Serializer\Accessor(getter="getIsCustomProperty",setter="setIsCustomProperty")
-     */
-    protected $isCustomProperty = false;
-    
-    /**
-     * @var boolean
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isTranslated")
-     * @Serializer\Accessor(getter="getIsTranslated",setter="setIsTranslated")
-     */
-    protected $isTranslated = false;
-    
+
     /**
      * @var ProductAttrI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductAttrI18n>")
@@ -59,36 +36,16 @@ class ProductAttr extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = [];
-    
+
     /**
-     * Constructor
+     * ProductAttr constructor.
      */
     public function __construct()
     {
-        $this->id = new Identity();
+        parent::__construct();
         $this->productId = new Identity();
     }
-    
-    /**
-     * @param Identity $id
-     * @return ProductAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): ProductAttr
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
-    
+
     /**
      * @param Identity $productId
      * @return ProductAttr
@@ -108,45 +65,7 @@ class ProductAttr extends DataModel
     {
         return $this->productId;
     }
-    
-    /**
-     * @param boolean $isCustomProperty
-     * @return ProductAttr
-     */
-    public function setIsCustomProperty(bool $isCustomProperty): ProductAttr
-    {
-        $this->isCustomProperty = $isCustomProperty;
-        
-        return $this;
-    }
-    
-    /**
-     * @return boolean
-     */
-    public function getIsCustomProperty(): bool
-    {
-        return $this->isCustomProperty;
-    }
-    
-    /**
-     * @param boolean $isTranslated
-     * @return ProductAttr
-     */
-    public function setIsTranslated(bool $isTranslated): ProductAttr
-    {
-        $this->isTranslated = $isTranslated;
-        
-        return $this;
-    }
-    
-    /**
-     * @return boolean
-     */
-    public function getIsTranslated(): bool
-    {
-        return $this->isTranslated;
-    }
-    
+
     /**
      * @param ProductAttrI18n $i18n
      * @return ProductAttr

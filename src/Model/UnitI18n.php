@@ -9,6 +9,7 @@ namespace jtl\Connector\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
+use jtl\Connector\Model\Common\I18n;
 
 /**
  * Localized Unit Name
@@ -18,7 +19,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class UnitI18n extends DataModel
+class UnitI18n extends I18n
 {
     /**
      * @var Identity Unit id
@@ -27,15 +28,7 @@ class UnitI18n extends DataModel
      * @Serializer\Accessor(getter="getUnitId",setter="setUnitId")
      */
     protected $unitId = null;
-    
-    /**
-     * @var string Locale
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
-     */
-    protected $languageISO = '';
-    
+
     /**
      * @var string Localized unit name
      * @Serializer\Type("string")
@@ -71,26 +64,7 @@ class UnitI18n extends DataModel
     {
         return $this->unitId;
     }
-    
-    /**
-     * @param string $languageISO Locale
-     * @return UnitI18n
-     */
-    public function setLanguageISO(string $languageISO): UnitI18n
-    {
-        $this->languageISO = $languageISO;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string Locale
-     */
-    public function getLanguageISO(): string
-    {
-        return $this->languageISO;
-    }
-    
+
     /**
      * @param string $name Localized unit name
      * @return UnitI18n

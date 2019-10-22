@@ -9,6 +9,7 @@ namespace jtl\Connector\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
+use jtl\Connector\Model\Common\I18n;
 
 /**
  * locale specifig productVariationValue name.
@@ -18,7 +19,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductVariationValueI18n extends DataModel
+class ProductVariationValueI18n extends I18n
 {
     /**
      * @var Identity Reference to productVariationValue
@@ -27,15 +28,7 @@ class ProductVariationValueI18n extends DataModel
      * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
      */
     protected $productVariationValueId = null;
-    
-    /**
-     * @var string Locale
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
-     */
-    protected $languageISO = '';
-    
+
     /**
      * @var string Locale specific variationValue name
      * @Serializer\Type("string")
@@ -71,26 +64,7 @@ class ProductVariationValueI18n extends DataModel
     {
         return $this->productVariationValueId;
     }
-    
-    /**
-     * @param string $languageISO Locale
-     * @return ProductVariationValueI18n
-     */
-    public function setLanguageISO(string $languageISO): ProductVariationValueI18n
-    {
-        $this->languageISO = $languageISO;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string Locale
-     */
-    public function getLanguageISO(): string
-    {
-        return $this->languageISO;
-    }
-    
+
     /**
      * @param string $name Locale specific variationValue name
      * @return ProductVariationValueI18n

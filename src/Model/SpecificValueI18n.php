@@ -9,6 +9,7 @@ namespace jtl\Connector\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
+use jtl\Connector\Model\Common\I18n;
 
 /**
  * Localized specific value text.
@@ -18,7 +19,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class SpecificValueI18n extends DataModel
+class SpecificValueI18n extends I18n
 {
     /**
      * @var Identity Reference to specificValue
@@ -35,15 +36,7 @@ class SpecificValueI18n extends DataModel
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
-    
-    /**
-     * @var string locale
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
-     */
-    protected $languageISO = '';
-    
+
     /**
      * @var string Optional localized meta description value
      * @Serializer\Type("string")
@@ -130,26 +123,7 @@ class SpecificValueI18n extends DataModel
     {
         return $this->description;
     }
-    
-    /**
-     * @param string $languageISO locale
-     * @return SpecificValueI18n
-     */
-    public function setLanguageISO(string $languageISO): SpecificValueI18n
-    {
-        $this->languageISO = $languageISO;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string locale
-     */
-    public function getLanguageISO(): string
-    {
-        return $this->languageISO;
-    }
-    
+
     /**
      * @param string $metaDescription Optional localized meta description value
      * @return SpecificValueI18n

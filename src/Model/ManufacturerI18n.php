@@ -35,15 +35,7 @@ class ManufacturerI18n extends DataModel
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
-    
-    /**
-     * @var string Locale
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
-     */
-    protected $languageISO = '';
-    
+
     /**
      * @var string Optional meta description tag value
      * @Serializer\Type("string")
@@ -113,25 +105,6 @@ class ManufacturerI18n extends DataModel
     public function getDescription(): string
     {
         return $this->description;
-    }
-    
-    /**
-     * @param string $languageISO Locale
-     * @return ManufacturerI18n
-     */
-    public function setLanguageISO(string $languageISO): ManufacturerI18n
-    {
-        $this->languageISO = $languageISO;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string Locale
-     */
-    public function getLanguageISO(): string
-    {
-        return $this->languageISO;
     }
     
     /**

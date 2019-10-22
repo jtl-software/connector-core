@@ -8,6 +8,7 @@
 namespace jtl\Connector\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use jtl\Connector\Model\Common\I18n;
 
 /**
  * @access public
@@ -15,16 +16,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductMediaFileAttrI18n extends DataModel
+class ProductMediaFileAttrI18n extends I18n
 {
-    /**
-     * @var string
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
-     */
-    protected $languageISO = '';
-    
     /**
      * @var string
      * @Serializer\Type("string")
@@ -40,27 +33,7 @@ class ProductMediaFileAttrI18n extends DataModel
      * @Serializer\Accessor(getter="getValue",setter="setValue")
      */
     protected $value = '';
-    
-    
-    /**
-     * @param string $languageISO
-     * @return ProductMediaFileAttrI18n
-     */
-    public function setLanguageISO(string $languageISO): ProductMediaFileAttrI18n
-    {
-        $this->languageISO = $languageISO;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getLanguageISO(): string
-    {
-        return $this->languageISO;
-    }
-    
+
     /**
      * @param string $name
      * @return ProductMediaFileAttrI18n

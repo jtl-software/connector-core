@@ -9,6 +9,7 @@ namespace jtl\Connector\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
+use jtl\Connector\Model\Customer\Attribute;
 
 /**
  * Monolingual customer group attribute.
@@ -18,7 +19,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CustomerGroupAttr extends DataModel
+class CustomerGroupAttr extends Attribute
 {
     /**
      * @var Identity Reference to customerGroup
@@ -35,23 +36,7 @@ class CustomerGroupAttr extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-    
-    /**
-     * @var string Attribute key
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("key")
-     * @Serializer\Accessor(getter="getKey",setter="setKey")
-     */
-    protected $key = '';
-    
-    /**
-     * @var string Attribute value
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("value")
-     * @Serializer\Accessor(getter="getValue",setter="setValue")
-     */
-    protected $value = '';
-    
+
     /**
      * Constructor
      */
@@ -100,42 +85,5 @@ class CustomerGroupAttr extends DataModel
     {
         return $this->id;
     }
-    
-    /**
-     * @param string $key Attribute key
-     * @return CustomerGroupAttr
-     */
-    public function setKey(string $key): CustomerGroupAttr
-    {
-        $this->key = $key;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string Attribute key
-     */
-    public function getKey(): string
-    {
-        return $this->key;
-    }
-    
-    /**
-     * @param string $value Attribute value
-     * @return CustomerGroupAttr
-     */
-    public function setValue(string $value): CustomerGroupAttr
-    {
-        $this->value = $value;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string Attribute value
-     */
-    public function getValue(): string
-    {
-        return $this->value;
-    }
+
 }

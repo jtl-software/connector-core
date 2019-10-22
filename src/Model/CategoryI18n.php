@@ -8,6 +8,7 @@
 namespace jtl\Connector\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use jtl\Connector\Model\Common\I18n;
 
 /**
  * Localized category properties. localeName, categoryId and a localized name must be set.
@@ -17,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CategoryI18n extends DataModel
+class CategoryI18n extends I18n
 {
     /**
      * @var Identity Reference to category
@@ -34,15 +35,7 @@ class CategoryI18n extends DataModel
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
-    
-    /**
-     * @var string Locale
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
-     */
-    protected $languageISO = '';
-    
+
     /**
      * @var string Optional localized  short description used for meta tag description
      * @Serializer\Type("string")
@@ -127,26 +120,6 @@ class CategoryI18n extends DataModel
     public function getDescription(): string
     {
         return $this->description;
-    }
-    
-    /**
-     * @param string $languageISO Locale
-     * @return CategoryI18n
-     */
-    public function setLanguageISO(
-        string $languageISO
-    ): CategoryI18n {
-        $this->languageISO = $languageISO;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string Locale
-     */
-    public function getLanguageISO(): string
-    {
-        return $this->languageISO;
     }
     
     /**

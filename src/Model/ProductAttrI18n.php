@@ -9,6 +9,7 @@ namespace jtl\Connector\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
+use jtl\Connector\Model\Common\I18n;
 
 /**
  * @access public
@@ -16,7 +17,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductAttrI18n extends DataModel
+class ProductAttrI18n extends I18n
 {
     /**
      * @var Identity
@@ -25,15 +26,7 @@ class ProductAttrI18n extends DataModel
      * @Serializer\Accessor(getter="getProductAttrId",setter="setProductAttrId")
      */
     protected $productAttrId = null;
-    
-    /**
-     * @var string
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
-     */
-    protected $languageISO = '';
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -77,26 +70,7 @@ class ProductAttrI18n extends DataModel
     {
         return $this->productAttrId;
     }
-    
-    /**
-     * @param string $languageISO
-     * @return ProductAttrI18n
-     */
-    public function setLanguageISO(string $languageISO): ProductAttrI18n
-    {
-        $this->languageISO = $languageISO;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getLanguageISO(): string
-    {
-        return $this->languageISO;
-    }
-    
+
     /**
      * @param string $name
      * @return ProductAttrI18n
