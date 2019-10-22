@@ -147,7 +147,7 @@ class ConnectorIdentification extends DataModel
     /**
      * @return ConnectorServerInfo
      */
-    public function getServerInfo(): ConnectorServerInfo
+    public function getServerInfo(): ?ConnectorServerInfo
     {
         return $this->serverInfo;
     }
