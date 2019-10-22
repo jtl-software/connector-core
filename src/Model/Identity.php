@@ -114,7 +114,7 @@ class Identity extends Model
      */
     public function getPublic(array $publics = []): \stdClass
     {
-        return $this->toArray();
+        return (object) $this->toArray();
     }
     
     /**
