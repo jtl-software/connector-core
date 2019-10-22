@@ -113,7 +113,7 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * @return \jtl\Connector\Authentication\ITokenValidator
      */
-    public function getTokenValidator(): ITokenValidator
+    public function getTokenValidator(): ?ITokenValidator
     {
         return $this->tokenValidator;
     }
