@@ -730,7 +730,7 @@ class IdentityLinker
     {
         $type = $this->getType($modelName, $property);
 
-        if (($endpointId = $this->loadCache($hostId, $type, self::CACHE_TYPE_HOST)) !== false) {
+        if (($endpointId = $this->loadCache($hostId, $type, self::CACHE_TYPE_HOST)) !== null) {
             return $endpointId;
         }
 
@@ -755,7 +755,7 @@ class IdentityLinker
     {
         $type = $this->getType($modelName, $property);
 
-        if (($hostId = $this->loadCache($endpointId, $type, self::CACHE_TYPE_ENDPOINT)) !== false) {
+        if (($hostId = $this->loadCache($endpointId, $type, self::CACHE_TYPE_ENDPOINT)) !== null) {
             return $hostId;
         }
 
@@ -824,8 +824,7 @@ class IdentityLinker
      */
     protected function loadCache($id, $type, $cacheType)
     {
-        $result = $this->checkCache($id, $type, $cacheType) ? self::$cache[$this->buildKey($id, $type, $cacheType)] : false;
-        //return $this->checkCache($id, $type, $cacheType) ? self::$cache[$this->buildKey($id, $type, $cacheType)] : null;
+        $result = $this->checkCache($id, $type, $cacheType) ? self::$cache[$this->buildKey($id, $type, $cacheType)] : null;
 
         // Debug
         Logger::write(sprintf(
