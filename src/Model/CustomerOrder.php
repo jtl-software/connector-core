@@ -640,7 +640,6 @@ class CustomerOrder extends DataModel
     /**
      * @param string $shippingMethodName
      * @return CustomerOrder
-     * @deprecated will be removed in 3.1. Use shippingMethodId instead.
      */
     public function setShippingMethodName(string $shippingMethodName): CustomerOrder
     {
@@ -651,7 +650,6 @@ class CustomerOrder extends DataModel
     
     /**
      * @return string
-     * @deprecated will be removed in 3.1. Use shippingMethodId instead.
      */
     public function getShippingMethodName(): string
     {
