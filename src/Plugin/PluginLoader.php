@@ -1,10 +1,9 @@
 <?php
 namespace jtl\Connector\Plugin;
 
-use \jtl\Connector\Core\IO\Path;
-use \Symfony\Component\Finder\Finder;
-use \jtl\Connector\Plugin\IPlugin;
-use \Symfony\Component\EventDispatcher\EventDispatcher;
+use jtl\Connector\IO\Path;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class PluginLoader
 {

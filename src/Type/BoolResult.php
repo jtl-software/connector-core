@@ -6,7 +6,6 @@
 
 namespace jtl\Connector\Type;
 
-use jtl\Connector\Type\PropertyInfo;
 
 /**
  * @access public

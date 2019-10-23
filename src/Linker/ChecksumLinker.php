@@ -5,10 +5,10 @@
  */
 namespace jtl\Connector\Linker;
 
-use \jtl\Connector\Checksum\IChecksumLoader;
-use \jtl\Connector\Checksum\IChecksum;
-use \jtl\Connector\Core\Model\Model;
-use \jtl\Connector\Core\Logger\Logger;
+use jtl\Connector\Checksum\IChecksumLoader;
+use jtl\Connector\Checksum\IChecksum;
+use jtl\Connector\Model\Model;
+use jtl\Connector\Logger\Logger;
 
 /**
  * Identity Connector Linker
@@ -26,7 +26,7 @@ class ChecksumLinker
     }
 
     /**
-     * @param \jtl\Connector\Core\Model\Model $model
+     * @param \jtl\Connector\Model\Model $model
      * @param int $type
      */
     public static function link(Model &$model, $type = null)
@@ -79,7 +79,7 @@ class ChecksumLinker
     }
 
     /**
-     * @param \jtl\Connector\Core\Model\Model $model
+     * @param \jtl\Connector\Model\Model $model
      * @param int $type
      * @return \jtl\Connector\Checksum\IChecksum
      */
@@ -97,7 +97,7 @@ class ChecksumLinker
     }
 
     /**
-     * @param \jtl\Connector\Core\Model\Model $model
+     * @param \jtl\Connector\Model\Model $model
      * @param string $endpoint
      * @param int $type
      * @return \jtl\Connector\Checksum\IChecksum
@@ -116,7 +116,7 @@ class ChecksumLinker
     }
 
     /**
-     * @param \jtl\Connector\Core\Model\Model $model
+     * @param \jtl\Connector\Model\Model $model
      * @param int $host
      * @param int $type
      * @return \jtl\Connector\Checksum\IChecksum

@@ -3,11 +3,10 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Application
  */
-
 namespace jtl\Connector\Application;
 
-use jtl\Connector\Core\Controller\IController;
-use \jtl\Connector\Core\Rpc\RequestPacket;
+use jtl\Connector\Controller\IController;
+use \jtl\Connector\Rpc\RequestPacket;
 use \jtl\Connector\Mapper\IPrimaryKeyMapper;
 use \jtl\Connector\Authentication\ITokenLoader;
 use \jtl\Connector\Checksum\IChecksumLoader;
@@ -67,7 +66,7 @@ interface IEndpointConnector
     /**
      * Controller handle
      *
-     * @param \jtl\Connector\Core\Rpc\RequestPacket $requestpacket
+     * @param \jtl\Connector\Rpc\RequestPacket $requestpacket
      */
     public function handle(RequestPacket $requestpacket): Action;
     

@@ -2,7 +2,7 @@
 namespace jtl\Connector\Event\GlobalData;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Core\Model\QueryFilter;
+use jtl\Connector\Model\QueryFilter;
 
 
 class GlobalDataBeforePullEvent extends Event
