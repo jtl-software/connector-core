@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductMediaFileI18n extends DataModel
+class ProductMediaFileI18n extends AbstractI18n
 {
     /**
      * @var Identity Reference to mediaFile
@@ -35,15 +35,7 @@ class ProductMediaFileI18n extends DataModel
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
-    
-    /**
-     * @var string Locale
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
-     */
-    protected $languageISO = '';
-    
+
     /**
      * @var string Locale specific name
      * @Serializer\Type("string")
@@ -98,26 +90,7 @@ class ProductMediaFileI18n extends DataModel
     {
         return $this->description;
     }
-    
-    /**
-     * @param string $languageISO Locale
-     * @return ProductMediaFileI18n
-     */
-    public function setLanguageISO(string $languageISO): ProductMediaFileI18n
-    {
-        $this->languageISO = $languageISO;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string Locale
-     */
-    public function getLanguageISO(): string
-    {
-        return $this->languageISO;
-    }
-    
+
     /**
      * @param string $name Locale specific name
      * @return ProductMediaFileI18n

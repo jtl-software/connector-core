@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ImageI18n extends DataModel
+class ImageI18n extends AbstractI18n
 {
     /**
      * @var Identity
@@ -41,15 +41,7 @@ class ImageI18n extends DataModel
      * @Serializer\Accessor(getter="getAltText",setter="setAltText")
      */
     protected $altText = '';
-    
-    /**
-     * @var string
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
-     */
-    protected $languageISO = '';
-    
+
     /**
      * Constructor
      */
@@ -117,23 +109,5 @@ class ImageI18n extends DataModel
     {
         return $this->altText;
     }
-    
-    /**
-     * @param string $languageISO
-     * @return ImageI18n
-     */
-    public function setLanguageISO(string $languageISO): ImageI18n
-    {
-        $this->languageISO = $languageISO;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getLanguageISO(): string
-    {
-        return $this->languageISO;
-    }
+
 }

@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CategoryAttrI18n extends DataModel
+class CategoryAttrI18n extends AbstractI18n
 {
     /**
      * @var Identity
@@ -25,15 +25,7 @@ class CategoryAttrI18n extends DataModel
      * @Serializer\Accessor(getter="getCategoryAttrId",setter="setCategoryAttrId")
      */
     protected $categoryAttrId = null;
-    
-    /**
-     * @var string
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
-     */
-    protected $languageISO = '';
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -77,26 +69,7 @@ class CategoryAttrI18n extends DataModel
     {
         return $this->categoryAttrId;
     }
-    
-    /**
-     * @param string $languageISO
-     * @return CategoryAttrI18n
-     */
-    public function setLanguageISO(string $languageISO): CategoryAttrI18n
-    {
-        $this->languageISO = $languageISO;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getLanguageISO(): string
-    {
-        return $this->languageISO;
-    }
-    
+
     /**
      * @param string $name
      * @return CategoryAttrI18n

@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ConfigGroupI18n extends DataModel
+class ConfigGroupI18n extends AbstractI18n
 {
     /**
      * @var Identity Reference to configGroup
@@ -35,15 +35,7 @@ class ConfigGroupI18n extends DataModel
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
-    
-    /**
-     * @var string Locale
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
-     */
-    protected $languageISO = '';
-    
+
     /**
      * @var string Config group name
      * @Serializer\Type("string")
@@ -98,27 +90,7 @@ class ConfigGroupI18n extends DataModel
     {
         return $this->description;
     }
-    
-    /**
-     * @param string $languageISO Locale
-     * @return ConfigGroupI18n
-     */
-    public function setLanguageISO(
-        string $languageISO
-    ): string {
-        $this->languageISO = $languageISO;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string Locale
-     */
-    public function getLanguageISO(): string
-    {
-        return $this->languageISO;
-    }
-    
+
     /**
      * @param string $name Config group name
      * @return ConfigGroupI18n

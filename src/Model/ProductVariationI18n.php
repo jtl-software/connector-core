@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductVariationI18n extends DataModel
+class ProductVariationI18n extends AbstractI18n
 {
     /**
      * @var Identity Reference to productVariation
@@ -27,15 +27,7 @@ class ProductVariationI18n extends DataModel
      * @Serializer\Accessor(getter="getProductVariationId",setter="setProductVariationId")
      */
     protected $productVariationId = null;
-    
-    /**
-     * @var string Locale
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
-     */
-    protected $languageISO = '';
-    
+
     /**
      * @var string Locale specific variation name
      * @Serializer\Type("string")
@@ -71,26 +63,7 @@ class ProductVariationI18n extends DataModel
     {
         return $this->productVariationId;
     }
-    
-    /**
-     * @param string $languageISO Locale
-     * @return ProductVariationI18n
-     */
-    public function setLanguageISO(string $languageISO): ProductVariationI18n
-    {
-        $this->languageISO = $languageISO;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string Locale
-     */
-    public function getLanguageISO(): string
-    {
-        return $this->languageISO;
-    }
-    
+
     /**
      * @param string $name Locale specific variation name
      * @return ProductVariationI18n

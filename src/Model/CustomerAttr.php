@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CustomerAttr extends DataModel
+class CustomerAttr extends AbstractKeyValueAttribute
 {
     /**
      * @var Identity
@@ -27,23 +27,7 @@ class CustomerAttr extends DataModel
      * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
      */
     protected $customerId = null;
-    
-    /**
-     * @var string Attribute key
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("key")
-     * @Serializer\Accessor(getter="getKey",setter="setKey")
-     */
-    protected $key = '';
-    
-    /**
-     * @var string Attribute value
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("value")
-     * @Serializer\Accessor(getter="getValue",setter="setValue")
-     */
-    protected $value = '';
-    
+
     /**
      * Constructor
      */
@@ -71,42 +55,5 @@ class CustomerAttr extends DataModel
     {
         return $this->customerId;
     }
-    
-    /**
-     * @param string $key Attribute key
-     * @return CustomerAttr
-     */
-    public function setKey(string $key): CustomerAttr
-    {
-        $this->key = $key;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string Attribute key
-     */
-    public function getKey(): string
-    {
-        return $this->key;
-    }
-    
-    /**
-     * @param string $value Attribute value
-     * @return CustomerAttr
-     */
-    public function setValue(string $value): CustomerAttr
-    {
-        $this->value = $value;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string Attribute value
-     */
-    public function getValue(): string
-    {
-        return $this->value;
-    }
+
 }

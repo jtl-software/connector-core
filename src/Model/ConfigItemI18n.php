@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ConfigItemI18n extends DataModel
+class ConfigItemI18n extends AbstractI18n
 {
     /**
      * @var Identity Reference to configItem
@@ -35,15 +35,7 @@ class ConfigItemI18n extends DataModel
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
-    
-    /**
-     * @var string Locale
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
-     */
-    protected $languageISO = '';
-    
+
     /**
      * @var string Config item name. Will be ignored if inheritProductName==true
      * @Serializer\Type("string")
@@ -98,27 +90,7 @@ class ConfigItemI18n extends DataModel
     {
         return $this->description;
     }
-    
-    /**
-     * @param string $languageISO Locale
-     * @return ConfigItemI18n
-     */
-    public function setLanguageISO(
-        string $languageISO
-    ): ConfigItemI18n {
-        $this->languageISO = $languageISO;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string Locale
-     */
-    public function getLanguageISO(): string
-    {
-        return $this->languageISO;
-    }
-    
+
     /**
      * @param string $name Config item name. Will be ignored if inheritProductName==true
      * @return ConfigItemI18n

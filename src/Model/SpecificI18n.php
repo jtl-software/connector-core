@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class SpecificI18n extends DataModel
+class SpecificI18n extends AbstractI18n
 {
     /**
      * @var Identity Reference to specific
@@ -27,15 +27,7 @@ class SpecificI18n extends DataModel
      * @Serializer\Accessor(getter="getSpecificId",setter="setSpecificId")
      */
     protected $specificId = null;
-    
-    /**
-     * @var string Locale
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
-     */
-    protected $languageISO = '';
-    
+
     /**
      * @var string Localized name
      * @Serializer\Type("string")
@@ -71,26 +63,7 @@ class SpecificI18n extends DataModel
     {
         return $this->specificId;
     }
-    
-    /**
-     * @param string $languageISO Locale
-     * @return SpecificI18n
-     */
-    public function setLanguageISO(string $languageISO): SpecificI18n
-    {
-        $this->languageISO = $languageISO;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string Locale
-     */
-    public function getLanguageISO(): string
-    {
-        return $this->languageISO;
-    }
-    
+
     /**
      * @param string $name Localized name
      * @return SpecificI18n

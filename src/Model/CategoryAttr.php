@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CategoryAttr extends DataModel
+class CategoryAttr extends AbstractI18nAttribute
 {
     /**
      * @var Identity Reference to category
@@ -27,31 +27,7 @@ class CategoryAttr extends DataModel
      * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
      */
     protected $categoryId = null;
-    
-    /**
-     * @var Identity
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-    
-    /**
-     * @var boolean
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isCustomProperty")
-     * @Serializer\Accessor(getter="getIsCustomProperty",setter="setIsCustomProperty")
-     */
-    protected $isCustomProperty = false;
-    
-    /**
-     * @var boolean
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isTranslated")
-     * @Serializer\Accessor(getter="getIsTranslated",setter="setIsTranslated")
-     */
-    protected $isTranslated = false;
-    
+
     /**
      * @var CategoryAttrI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryAttrI18n>")
@@ -65,7 +41,7 @@ class CategoryAttr extends DataModel
      */
     public function __construct()
     {
-        $this->id = new Identity();
+        parent::__construct();
         $this->categoryId = new Identity();
     }
     
@@ -88,65 +64,7 @@ class CategoryAttr extends DataModel
     {
         return $this->categoryId;
     }
-    
-    /**
-     * @param Identity $id
-     * @return CategoryAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): CategoryAttr
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
-    
-    /**
-     * @param boolean $isCustomProperty
-     * @return CategoryAttr
-     */
-    public function setIsCustomProperty(bool $isCustomProperty): CategoryAttr
-    {
-        $this->isCustomProperty = $isCustomProperty;
-        
-        return $this;
-    }
-    
-    /**
-     * @return boolean
-     */
-    public function getIsCustomProperty(): bool
-    {
-        return $this->isCustomProperty;
-    }
-    
-    /**
-     * @param boolean $isTranslated
-     * @return CategoryAttr
-     */
-    public function setIsTranslated(bool $isTranslated): CategoryAttr
-    {
-        $this->isTranslated = $isTranslated;
-        
-        return $this;
-    }
-    
-    /**
-     * @return boolean
-     */
-    public function getIsTranslated(): bool
-    {
-        return $this->isTranslated;
-    }
-    
+
     /**
      * @param CategoryAttrI18n $i18n
      * @return CategoryAttr
