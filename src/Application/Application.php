@@ -602,24 +602,22 @@ class Application extends CoreApplication
     /**
      * Starting Session
      *
-     * @param null $sessionId
-     * @param $method
+     * @param string $method
      * @throws ApplicationException
      * @throws SessionException
-     * @throws \jtl\Connector\Core\Exception\DatabaseException
      */
     protected function startSession(string $method): void
     {
-        if (Request::getSession() === null && $method !== null && $method !== 'core.connector.auth') {
+        $sessionId = Request::getSession();
+        $sessionName = 'JtlConnector';
+        
+        if ($sessionId === null && $method !== null && $method !== 'core.connector.auth') {
             throw new SessionException('No session');
         }
         
         if ($this->getSessionHandler() === null) {
             $this->setSessionHandler(new SqliteSession());
         }
-    
-        $sessionId = Request::getSession();
-        $sessionName = 'JtlConnector';
         
         ini_set("session.gc_probability", 25);
     

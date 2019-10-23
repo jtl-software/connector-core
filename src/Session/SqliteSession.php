@@ -10,7 +10,7 @@ use jtl\Connector\Core\Database\IDatabase;
 use jtl\Connector\Core\Exception\ApplicationException;
 use jtl\Connector\Core\IO\Path;
 use jtl\Connector\Core\Logger\Logger;
-use jtl\Connector\Database\Sqlite3;
+use jtl\Connector\Core\Database\Sqlite3;
 
 /**
  * Session Class
@@ -24,7 +24,7 @@ final class SqliteSession implements \SessionHandlerInterface
      * @var int
      */
     private $lifetime;
-    /** @var \jtl\Connector\Core\Database\Sqlite3 */
+    /** @var Sqlite3 */
     private $db;
     
     public function __construct()
@@ -38,11 +38,33 @@ final class SqliteSession implements \SessionHandlerInterface
     
         $this->lifetime = ((int) ini_get('session.gc_maxlifetime') > 0) ? (int) ini_get('session.gc_maxlifetime') : 7200;
         
-        $sqlite3 = Sqlite3::getInstance();
+        $sqlite3 = new Sqlite3();
         $sqlite3->connect(['location' => Path::combine($dir, 'connector.s3db')]);
-        $sqlite3->check();
-        
         $this->db = $sqlite3;
+        
+        $this->initializeTables();
+    }
+    
+    protected function initializeTables(): void
+    {
+        $results = $this->db->fetch("SELECT name FROM sqlite_master WHERE type='table' AND name='session'");
+    
+        if (!is_array($results) || count($results) == 0) {
+            $this->db->exec('
+                CREATE TABLE [session] (
+                    [sessionId] VARCHAR(255)  UNIQUE NOT NULL,
+                    [sessionExpires] INTEGER  NOT NULL,
+                    [sessionData] BLOB  NULL
+                )
+            ');
+        
+            $this->db->exec('
+                CREATE INDEX [sessionIndex] ON [session](
+                    [sessionId]  ASC,
+                    [sessionExpires]  ASC
+                )
+            ');
+        }
     }
     
     /**
