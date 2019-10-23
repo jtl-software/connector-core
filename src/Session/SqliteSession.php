@@ -6,7 +6,6 @@
 
 namespace jtl\Connector\Session;
 
-use jtl\Connector\Core\Database\IDatabase;
 use jtl\Connector\Core\Exception\ApplicationException;
 use jtl\Connector\Core\IO\Path;
 use jtl\Connector\Core\Logger\Logger;
@@ -45,6 +44,9 @@ final class SqliteSession implements \SessionHandlerInterface
         $this->initializeTables();
     }
     
+    /**
+     * @return void
+     */
     protected function initializeTables(): void
     {
         $results = $this->db->fetch("SELECT name FROM sqlite_master WHERE type='table' AND name='session'");

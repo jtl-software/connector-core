@@ -614,7 +614,7 @@ class Application extends CoreApplication
         $sessionId = Request::getSession();
         $sessionName = 'JtlConnector';
         
-        if ($sessionId === null && $method !== null && $method !== 'core.connector.auth') {
+        if ($sessionId === null && $method !== 'core.connector.auth') {
             throw new SessionException('No session');
         }
         
