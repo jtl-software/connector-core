@@ -3,15 +3,14 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Linker
  */
-
 namespace jtl\Connector\Linker;
 
-use \jtl\Connector\Mapper\IPrimaryKeyMapper;
-use \jtl\Connector\Model\DataModel;
-use \jtl\Connector\Exception\LinkerException;
-use \jtl\Connector\Model\Identity;
-use \jtl\Connector\Core\Logger\Logger;
-use \jtl\Connector\Drawing\ImageRelationType;
+use jtl\Connector\Mapper\IPrimaryKeyMapper;
+use jtl\Connector\Model\DataModel;
+use jtl\Connector\Exception\LinkerException;
+use jtl\Connector\Model\Identity;
+use jtl\Connector\Logger\Logger;
+use jtl\Connector\Drawing\ImageRelationType;
 
 /**
  * Identity Connector Linker

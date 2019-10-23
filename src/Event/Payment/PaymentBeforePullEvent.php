@@ -2,7 +2,7 @@
 namespace jtl\Connector\Event\Payment;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Core\Model\QueryFilter;
+use jtl\Connector\Model\QueryFilter;
 
 
 class PaymentBeforePullEvent extends Event

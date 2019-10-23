@@ -1,10 +1,10 @@
 <?php
 namespace jtl\Connector\Event;
 
-use \Symfony\Component\EventDispatcher\EventDispatcher;
-use \jtl\Connector\Model\DataModel;
-use \jtl\Connector\Core\Model\QueryFilter;
-use \jtl\Connector\Core\Utilities\ClassName;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use jtl\Connector\Model\DataModel;
+use jtl\Connector\Model\QueryFilter;
+use jtl\Connector\Utilities\ClassName;
 
 class EventHandler
 {

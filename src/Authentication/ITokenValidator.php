@@ -6,7 +6,7 @@
 
 namespace jtl\Connector\Authentication;
 
-use jtl\Connector\Core\Model\AuthRequest;
+use jtl\Connector\Model\AuthRequest;
 
 interface ITokenValidator
 {

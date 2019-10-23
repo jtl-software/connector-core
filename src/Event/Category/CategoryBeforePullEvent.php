@@ -2,7 +2,7 @@
 namespace jtl\Connector\Event\Category;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Core\Model\QueryFilter;
+use jtl\Connector\Model\QueryFilter;
 
 
 class CategoryBeforePullEvent extends Event

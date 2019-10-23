@@ -2,7 +2,7 @@
 namespace jtl\Connector\Event\ProductPrice;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Core\Model\QueryFilter;
+use jtl\Connector\Model\QueryFilter;
 
 
 class ProductPriceBeforePullEvent extends Event

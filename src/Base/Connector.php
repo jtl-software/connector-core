@@ -7,17 +7,17 @@
 namespace jtl\Connector\Base;
 
 use jtl\Connector\Authentication\ITokenValidator;
-use jtl\Connector\Core\Controller\IController;
-use \jtl\Connector\Core\Rpc\RequestPacket;
-use \jtl\Connector\Application\IEndpointConnector;
-use \jtl\Connector\Core\Utilities\Singleton;
-use \jtl\Connector\Core\Utilities\RpcMethod;
-use \jtl\Connector\Core\Rpc\Method;
-use \jtl\Connector\Mapper\IPrimaryKeyMapper;
-use \jtl\Connector\Authentication\ITokenLoader;
-use \jtl\Connector\Checksum\IChecksumLoader;
+use jtl\Connector\Controller\IController;
+use jtl\Connector\Rpc\RequestPacket;
+use jtl\Connector\Application\IEndpointConnector;
+use jtl\Connector\Utilities\Singleton;
+use jtl\Connector\Utilities\RpcMethod;
+use jtl\Connector\Rpc\Method;
+use jtl\Connector\Mapper\IPrimaryKeyMapper;
+use jtl\Connector\Authentication\ITokenLoader;
+use jtl\Connector\Checksum\IChecksumLoader;
 use jtl\Connector\Result\Action;
-use \Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * Base Connector
@@ -165,7 +165,7 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * Method Setter
      *
-     * @param \jtl\Connector\Core\Rpc\Method $method
+     * @param \jtl\Connector\Rpc\Method $method
      * @return Connector
      */
     public function setMethod(Method $method): IEndpointConnector
@@ -178,7 +178,7 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * Method Getter
      *
-     * @return \jtl\Connector\Core\Rpc\Method
+     * @return \jtl\Connector\Rpc\Method
      */
     public function getMethod(): Method
     {

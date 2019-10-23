@@ -26,13 +26,13 @@ class IdentityHandler implements SubscribingHandlerInterface
             array(
                 'direction' => GraphNavigator::DIRECTION_DESERIALIZATION,
                 'format' => 'json',
-                'type' => 'jtl\Connector\Model\Identity',
+                'type' => Identity::class,
                 'method' => 'deserializeIdentity',
             ),
             array(
                 'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
                 'format' => 'json',
-                'type' => 'jtl\Connector\Model\Identity',
+                'type' => Identity::class,
                 'method' => 'serializeIdentity',
             )
         );

@@ -8,37 +8,36 @@ namespace jtl\Connector\Application;
 use jtl\Connector\Application\Error\ErrorHandler;
 use jtl\Connector\Application\Error\IErrorHandler;
 use jtl\Connector\Authentication\ITokenValidator;
-use jtl\Connector\Core\Compression\Zip;
-use jtl\Connector\Core\IO\Temp;
-use jtl\Connector\Core\Serializer\Json;
-use jtl\Connector\Core\Application\Application as CoreApplication;
-use jtl\Connector\Core\Exception\RpcException;
-use jtl\Connector\Core\Exception\SessionException;
-use jtl\Connector\Core\Exception\ApplicationException;
-use jtl\Connector\Core\Rpc\Packet;
-use jtl\Connector\Core\Rpc\RequestPacket;
-use jtl\Connector\Core\Rpc\ResponsePacket;
-use jtl\Connector\Core\Rpc\Error;
-use jtl\Connector\Core\Http\Request;
-use jtl\Connector\Core\Http\Response;
-use jtl\Connector\Core\Config\Config;
+use jtl\Connector\Compression\Zip;
+use jtl\Connector\IO\Temp;
+use jtl\Connector\Serializer\Json;
+use jtl\Connector\Exception\RpcException;
+use jtl\Connector\Exception\SessionException;
+use jtl\Connector\Exception\ApplicationException;
+use jtl\Connector\Rpc\Packet;
+use jtl\Connector\Rpc\RequestPacket;
+use jtl\Connector\Rpc\ResponsePacket;
+use jtl\Connector\Rpc\Error;
+use jtl\Connector\Http\Request;
+use jtl\Connector\Http\Response;
+use jtl\Connector\Config\Config;
 use jtl\Connector\Exception\JsonException;
 use jtl\Connector\Model\BoolResult;
 use jtl\Connector\Result\Action;
 use jtl\Connector\Database\Sqlite3;
-use jtl\Connector\Core\Utilities\RpcMethod;
+use jtl\Connector\Utilities\RpcMethod;
 use jtl\Connector\Session\Session;
 use jtl\Connector\Base\Connector;
-use jtl\Connector\Core\Logger\Logger;
+use jtl\Connector\Logger\Logger;
 use Doctrine\Common\Annotations\AnnotationRegistry;
-use jtl\Connector\Core\Rpc\Method;
+use jtl\Connector\Rpc\Method;
 use jtl\Connector\Linker\IdentityLinker;
 use jtl\Connector\Model\DataModel;
 use Doctrine\Common\Collections\ArrayCollection;
 use jtl\Connector\Serializer\JMS\SerializerBuilder;
 use jtl\Connector\Linker\ChecksumLinker;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use jtl\Connector\Core\IO\Path;
+use jtl\Connector\IO\Path;
 use jtl\Connector\Event\EventHandler;
 use Symfony\Component\Finder\Finder;
 
@@ -48,7 +47,7 @@ use Symfony\Component\Finder\Finder;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-class Application extends CoreApplication
+class Application implements IApplication
 {
     const PROTOCOL_VERSION = 7;
     
@@ -91,7 +90,7 @@ class Application extends CoreApplication
     
     /**
      * (non-PHPdoc)
-     * @see \jtl\Connector\Core\Application\Application::run()
+     * @see \jtl\Connector\Application\Application::run()
      */
     public function run(): void
     {
@@ -337,8 +336,8 @@ class Application extends CoreApplication
      * @param int $rpcmode
      * @throws ApplicationException
      * @throws RpcException
-     * @throws \jtl\Connector\Core\Exception\CompressionException
-     * @throws \jtl\Connector\Core\Exception\HttpException
+     * @throws \jtl\Connector\Exception\CompressionException
+     * @throws \jtl\Connector\Exception\HttpException
      */
     protected function runSingle(RequestPacket $requestpacket, int $rpcmode): void
     {
@@ -444,7 +443,7 @@ class Application extends CoreApplication
         $modelClass = RpcMethod::buildController($method->getController());
         
         $namespace = ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) ?
-            sprintf('%s\%s', $modelNamespace, $modelClass) : 'jtl\Connector\Core\Model\QueryFilter';
+            sprintf('%s\%s', $modelNamespace, $modelClass) : 'jtl\Connector\Model\QueryFilter';
         
         if (class_exists("\\{$namespace}") && $requestpacket->getParams() !== null) {
             $serializer = SerializerBuilder::create();
@@ -547,7 +546,7 @@ class Application extends CoreApplication
      * @param $method
      * @throws ApplicationException
      * @throws SessionException
-     * @throws \jtl\Connector\Core\Exception\DatabaseException
+     * @throws \jtl\Connector\Exception\DatabaseException
      */
     protected function startSession($sessionId = null, string $method): void
     {

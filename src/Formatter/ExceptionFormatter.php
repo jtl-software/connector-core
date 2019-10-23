@@ -3,7 +3,6 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Formatter
  */
-
 namespace jtl\Connector\Formatter;
 
 use jtl\Connector\Application\Error\ErrorHandler;

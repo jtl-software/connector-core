@@ -2,7 +2,7 @@
 namespace jtl\Connector\Event\StatusChange;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Core\Model\QueryFilter;
+use jtl\Connector\Model\QueryFilter;
 
 
 class StatusChangeBeforeStatisticEvent extends Event
