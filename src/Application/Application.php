@@ -3,7 +3,6 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Application
  */
-
 namespace jtl\Connector\Application;
 
 use jtl\Connector\Application\Error\ErrorHandler;
@@ -26,9 +25,6 @@ use jtl\Connector\Core\Config\Config;
 use jtl\Connector\Exception\JsonException;
 use jtl\Connector\Model\BoolResult;
 use jtl\Connector\Result\Action;
-use jtl\Connector\Core\Validator\Schema;
-use jtl\Connector\Core\Exception\SchemaException;
-use jtl\Connector\Core\Validator\ValidationException;
 use jtl\Connector\Database\Sqlite3;
 use jtl\Connector\Core\Utilities\RpcMethod;
 use jtl\Connector\Session\Session;
@@ -335,32 +331,19 @@ class Application extends CoreApplication
     {
         $this->connector = $endpointconnector;
     }
-    
+
     /**
-     * Single Mode
-     *
      * @param RequestPacket $requestpacket
-     * @param integer $rpcmode
+     * @param int $rpcmode
      * @throws ApplicationException
      * @throws RpcException
-     * @throws SchemaException
      * @throws \jtl\Connector\Core\Exception\CompressionException
      * @throws \jtl\Connector\Core\Exception\HttpException
      */
     protected function runSingle(RequestPacket $requestpacket, int $rpcmode): void
     {
         $requestpacket->validate();
-        $this->runActionValidation($requestpacket);
-        $this->runModelValidation($requestpacket);
-        
-        // Image?
-        /*
-         * OLD single Image
-        $imagePath = null;
-        if ($requestpacket->getMethod() === 'image.push') {
-            $imagePath = Request::handleFileupload();
-        }
-        */
+
         $imagePaths = [];
         if ($requestpacket->getMethod() === 'image.push') {
             $zipFile = Request::handleFileupload();
@@ -417,14 +400,11 @@ class Application extends CoreApplication
             Response::send($responsepacket);
         }
     }
-    
+
     /**
-     * Batch Mode
-     *
      * @param array $requestpackets
-     * @param integer $rpcmode
+     * @param int $rpcmode
      * @throws ApplicationException
-     * @throws SchemaException
      * @throws \jtl\Connector\Exception\LinkerException
      */
     protected function runBatch(array $requestpackets, int $rpcmode): void
@@ -434,8 +414,6 @@ class Application extends CoreApplication
         foreach ($requestpackets as $requestpacket) {
             try {
                 $requestpacket->validate();
-                $this->runActionValidation($requestpacket);
-                $this->runModelValidation($requestpacket);
                 $jtlrpcreponses[] = $this->execute($requestpacket, $rpcmode);
             } catch (RpcException $exc) {
                 $error = new Error();
@@ -531,47 +509,7 @@ class Application extends CoreApplication
         
         return $responsepacket;
     }
-    
-    /**
-     * Validate Action
-     *
-     * @param RequestPacket $requestpacket
-     * @throws SchemaException
-     */
-    protected function runActionValidation(RequestPacket $requestpacket): void
-    {
-        $method = RpcMethod::splitMethod($requestpacket->getMethod());
-        
-        try {
-            Schema::validateAction(__DIR__ . "/../../../../schema/{$method->getController()}/params/{$method->getAction()}.json",
-                $requestpacket->getParams());
-        } catch (ValidationException $exc) {
-            throw new SchemaException($exc->getMessage());
-        }
-    }
-    
-    /**
-     * Validate Model
-     *
-     * @param RequestPacket $requestpacket
-     */
-    protected function runModelValidation(RequestPacket $requestpacket): void
-    {
-        /*
-        $method = RpcMethod::splitMethod($requestpacket->getMethod());
 
-        if ($method->getAction() === Method::ACTION_PUSH) {
-            $controller = str_replace('_', '', $method->getController());
-
-            try {
-                Schema::validateAction(CONNECTOR_DIR . "schema/{$controller}/{$controller}.json", $requestpacket->getParams());
-            } catch (ValidationException $exc) {
-                throw new SchemaException($exc->getMessage());
-            }
-        }
-        */
-    }
-    
     /**
      * Initialises the connector configuration instance.
      */
@@ -641,9 +579,7 @@ class Application extends CoreApplication
         $loader = new \jtl\Connector\Plugin\PluginLoader();
         $loader->load($this->eventDispatcher);
     }
-    
-    // OLD single Image
-    //protected function handleImagePush(RequestPacket &$requestpacket, $imagePath)
+
     /**
      * @param RequestPacket $requestpacket
      * @param array $imagePaths
@@ -692,40 +628,6 @@ class Application extends CoreApplication
                 
                 $requestpacket->setParams($images);
             }
-
-            /*
-             * OLD single Image
-            $image = $requestpacket->getParams();
-            if (!($image instanceof \jtl\Connector\Model\Image)) {
-                throw new ApplicationException('Image push must send a valid image entity');
-            }
-
-            if ($imagePath !== null) {
-
-                // Todo: seo filename pattern via connector settings
-
-                $image->setFilename($imagePath);
-                $requestpacket->setParams($image);
-            } else {
-                // Image Cloud Storage
-                if (strlen($image->getRemoteUrl()) > 0) {
-                    $imageData = file_get_contents($image->getRemoteUrl());
-                    if ($imageData === false) {
-                        throw new ApplicationException('Could not get any data from url: ' . $image->getRemoteUrl());
-                    }
-
-                    $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
-                    $fileName = pathinfo($path, PATHINFO_BASENAME);
-                    $imagePath = Path::combine(Temp::getDirectory(), uniqid() . "_{$fileName}");
-                    file_put_contents($imagePath, $imageData);
-
-                    $image->setFilename($imagePath);
-                    $requestpacket->setParams($image);
-                } else {
-                    throw new ApplicationException('Could not handle fileupload (no file was uploaded via HTTP POST?)');
-                }
-            }
-            */
         }
     }
     

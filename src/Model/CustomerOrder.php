@@ -263,6 +263,7 @@ class CustomerOrder extends DataModel
     {
         $this->id = new Identity();
         $this->customerId = new Identity();
+        $this->shippingMethodId = new Identity();
     }
     
     /**
@@ -320,7 +321,7 @@ class CustomerOrder extends DataModel
     /**
      * @return CustomerOrderBillingAddress Billing address
      */
-    public function getBillingAddress(): CustomerOrderBillingAddress
+    public function getBillingAddress(): ?CustomerOrderBillingAddress
     {
         return $this->billingAddress;
     }
@@ -495,7 +496,7 @@ class CustomerOrder extends DataModel
     /**
      * @return CustomerOrderPaymentInfo
      */
-    public function getPaymentInfo(): CustomerOrderPaymentInfo
+    public function getPaymentInfo(): ?CustomerOrderPaymentInfo
     {
         return $this->paymentInfo;
     }
@@ -572,7 +573,7 @@ class CustomerOrder extends DataModel
     /**
      * @return CustomerOrderShippingAddress Shipping address
      */
-    public function getShippingAddress(): CustomerOrderShippingAddress
+    public function getShippingAddress(): ?CustomerOrderShippingAddress
     {
         return $this->shippingAddress;
     }

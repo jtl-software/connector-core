@@ -3,11 +3,8 @@
  * @copyright JTL-Software GmbH
  * @package jtl\Connector\Core\Model
  */
-
 namespace jtl\Connector\Core\Model;
 
-use \jtl\Connector\Core\Validator\Schema;
-use \jtl\Connector\Core\Utilities\ClassName;
 use \jtl\Connector\Core\Exception\NotImplementedException;
 use JMS\Serializer\Annotation as Serializer;
 
@@ -37,19 +34,7 @@ abstract class DataModel extends Model
     {
         return $this->fields;
     }
-    
-    /**
-     * Object Validation
-     *
-     * @throws \jtl\Connector\Core\Exception\SchemaException
-     */
-    public function validate(): void
-    {
-        $class = ClassName::getFromNS(strtolower(get_called_class()));
-        
-        Schema::validateModel(CONNECTOR_DIR . "schema/{$class}/{$class}.json", $this->getPublic());
-    }
-    
+
     /**
      * Get a Model Member Name
      *
@@ -80,7 +65,7 @@ abstract class DataModel extends Model
      * @param mixed $obj Object to map
      * @throws NotImplementedException
      */
-    public function map(bool $toWawi = false, \stdClass $obj = null): void
+    public function map(bool $toWawi = false, \stdClass $obj = null)
     {
         throw new NotImplementedException;
     }

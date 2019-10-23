@@ -35,7 +35,7 @@ class Statistic extends DataModel
      * @param stdClass|null $obj
      * @see \jtl\Connector\Core\Model\DataModel::map()
      */
-    public function map(bool $toWawi = false, stdClass $obj = null): void
+    public function map(bool $toWawi = false, stdClass $obj = null)
     {
     
     }

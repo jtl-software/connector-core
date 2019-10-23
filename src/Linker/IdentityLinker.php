@@ -3,6 +3,7 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Linker
  */
+
 namespace jtl\Connector\Linker;
 
 use \jtl\Connector\Mapper\IPrimaryKeyMapper;
@@ -516,8 +517,8 @@ class IdentityLinker
      *
      * @param string $modelName
      * @param string $property
-     * @throws \jtl\Connector\Exception\LinkerException
      * @return int
+     * @throws \jtl\Connector\Exception\LinkerException
      */
     public function getType($modelName, $property = null)
     {
@@ -584,8 +585,8 @@ class IdentityLinker
      * Model name getter
      *
      * @param int $type
-     * @throws \jtl\Connector\Exception\LinkerException
      * @return string
+     * @throws \jtl\Connector\Exception\LinkerException
      */
     public function getModelName($type)
     {
@@ -605,8 +606,8 @@ class IdentityLinker
      * @param string $modelName
      * @param string $property
      * @param boolean $validate
-     * @throws \jtl\Connector\Exception\LinkerException
      * @return boolean
+     * @throws \jtl\Connector\Exception\LinkerException
      */
     public function exists($endpointId = null, $hostId = null, $modelName, $property, $validate = false)
     {
@@ -729,21 +730,17 @@ class IdentityLinker
     {
         $type = $this->getType($modelName, $property);
 
-        if (($endpointId = $this->loadCache($hostId, $type, self::CACHE_TYPE_HOST)) !== false) {
-            //if (($endpointId = $this->loadCache($hostId, $type, self::CACHE_TYPE_HOST)) !== null) {
+        if (($endpointId = $this->loadCache($hostId, $type, self::CACHE_TYPE_HOST)) !== null) {
             return $endpointId;
         }
 
         $relationType = isset($this->runtimeInfos['relationType']) ? $this->runtimeInfos['relationType'] : null;
-        $endpointId = self::$mapper->getEndpointId($type, $hostId, $relationType);
+        $endpointId = (string)self::$mapper->getEndpointId($type, $hostId, $relationType);
 
-        //if (is_string($endpointId) && strlen(trim($endpointId)) > 0) {
-        $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_HOST);
-
+        if (strlen(trim($endpointId)) > 0) {
+            $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_HOST);
+        }
         return $endpointId;
-        //}
-
-        //return '';
     }
 
     /**
@@ -758,20 +755,17 @@ class IdentityLinker
     {
         $type = $this->getType($modelName, $property);
 
-        if (($hostId = $this->loadCache($endpointId, $type, self::CACHE_TYPE_ENDPOINT)) !== false) {
-            //if (($hostId = $this->loadCache($endpointId, $type, self::CACHE_TYPE_ENDPOINT)) !== null) {
+        if (($hostId = $this->loadCache($endpointId, $type, self::CACHE_TYPE_ENDPOINT)) !== null) {
             return $hostId;
         }
 
-        $hostId = self::$mapper->getHostId($type, $endpointId);
+        $hostId = (int)self::$mapper->getHostId($type, $endpointId);
 
-        //if (is_int($hostId) && $hostId > 0) {
-        $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_ENDPOINT);
+        if ($hostId > 0) {
+            $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_ENDPOINT);
+        }
 
         return $hostId;
-        //}
-
-        //return 0;
     }
 
     /**
@@ -830,8 +824,7 @@ class IdentityLinker
      */
     protected function loadCache($id, $type, $cacheType)
     {
-        $result = $this->checkCache($id, $type, $cacheType) ? self::$cache[$this->buildKey($id, $type, $cacheType)] : false;
-        //return $this->checkCache($id, $type, $cacheType) ? self::$cache[$this->buildKey($id, $type, $cacheType)] : null;
+        $result = $this->checkCache($id, $type, $cacheType) ? self::$cache[$this->buildKey($id, $type, $cacheType)] : null;
 
         // Debug
         Logger::write(sprintf(
