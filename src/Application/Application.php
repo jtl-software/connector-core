@@ -662,7 +662,7 @@ class Application extends Singleton implements IApplication
      *
      * @return \SessionHandlerInterface
      */
-    public function getSessionHandler(): \SessionHandlerInterface
+    public function getSessionHandler(): ?\SessionHandlerInterface
     {
         return $this->sessionHandler;
     }
