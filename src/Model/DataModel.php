@@ -68,7 +68,7 @@ abstract class DataModel extends Model
      * @param string $key
      * @return mixed:string|NULL
      */
-    public function getField(bool $toWawi = false, string $key): string
+    public function getField(bool $toWawi = false, string $key): ?string
     {
         if ($this->fields !== null && is_array($this->fields)) {
             $fields = $this->fields;
@@ -213,7 +213,7 @@ abstract class DataModel extends Model
         }
     }
     
-    protected function setProperty($name, $value, $type)
+    protected function setProperty($name, $value, $type): DataModel
     {
         if (!$this->validateType($value, $type)) {
             throw new InvalidArgumentException(sprintf("%s (%s): expected type '%s', given value '%s'.", $name,

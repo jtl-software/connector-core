@@ -36,6 +36,7 @@ use jtl\Connector\Model\DataModel;
 use Doctrine\Common\Collections\ArrayCollection;
 use jtl\Connector\Serializer\JMS\SerializerBuilder;
 use jtl\Connector\Linker\ChecksumLinker;
+use jtl\Connector\Utilities\Singleton;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use jtl\Connector\IO\Path;
 use jtl\Connector\Event\EventHandler;
@@ -47,7 +48,7 @@ use Symfony\Component\Finder\Finder;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-class Application implements IApplication
+class Application extends Singleton implements IApplication
 {
     const PROTOCOL_VERSION = 7;
     
