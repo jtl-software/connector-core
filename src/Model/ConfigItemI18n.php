@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ConfigItemI18n extends AbstractI18
+class ConfigItemI18n extends AbstractI18n
 {
     /**
      * @var Identity Reference to configItem

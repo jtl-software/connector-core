@@ -19,7 +19,7 @@ use jtl\Connector\Model\Customer\Attribute;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CustomerGroupAttr extends Attribute
+class CustomerGroupAttr extends AbstractKeyValueAttribute
 {
     /**
      * @var Identity Reference to customerGroup
