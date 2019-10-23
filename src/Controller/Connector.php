@@ -40,9 +40,6 @@ class Connector extends AbstractController
         try {
             Check::run();
 
-            // Linking garbage collecting
-            Application()->getConnector()->getPrimaryKeyMapper()->gc();
-
             $ret->setResult(true);
         } catch (\Exception $e) {
             $err = new Error();
