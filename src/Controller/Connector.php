@@ -8,25 +8,24 @@
 namespace jtl\Connector\Controller;
 
 use jtl\Connector\Authentication\ITokenValidator;
-use \jtl\Connector\Core\Controller\Controller as CoreController;
-use jtl\Connector\Core\IO\Path;
-use jtl\Connector\Core\System\Check;
+use jtl\Connector\IO\Path;
+use jtl\Connector\System\Check;
 use jtl\Connector\Exception\JsonException;
-use \jtl\Connector\Result\Action;
-use \jtl\Connector\Core\Rpc\Error;
-use \jtl\Connector\Linker\IdentityLinker;
-use \jtl\Connector\Serializer\JMS\SerializerBuilder;
-use \jtl\Connector\Core\Logger\Logger;
-use \jtl\Connector\Linker\ChecksumLinker;
-use \jtl\Connector\Checksum\IChecksum;
-use \jtl\Connector\Formatter\ExceptionFormatter;
+use jtl\Connector\Result\Action;
+use jtl\Connector\Rpc\Error;
+use jtl\Connector\Linker\IdentityLinker;
+use jtl\Connector\Serializer\JMS\SerializerBuilder;
+use jtl\Connector\Logger\Logger;
+use jtl\Connector\Linker\ChecksumLinker;
+use jtl\Connector\Checksum\IChecksum;
+use jtl\Connector\Formatter\ExceptionFormatter;
 
 /**
  * Base Config Controller
  *
  * @access public
  */
-class Connector extends CoreController
+class Connector extends AbstractController
 {    
     /**
      * Initialize the connector.
@@ -153,7 +152,7 @@ class Connector extends CoreController
         try {
             $serializer = SerializerBuilder::create();
 
-            $authRequest = $serializer->deserialize($params, "jtl\Connector\Core\Model\AuthRequest", 'json');
+            $authRequest = $serializer->deserialize($params, "jtl\Connector\Model\AuthRequest", 'json');
         } catch (\Exception $e) {
             $err = new Error();
             $err->setCode($e->getCode());

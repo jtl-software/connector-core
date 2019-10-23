@@ -9,7 +9,7 @@ namespace jtl\Connector\Model;
 
 use Exception;
 use InvalidArgumentException;
-use \jtl\Connector\Core\Model\Model;
+use \jtl\Connector\Model\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**

@@ -9,8 +9,9 @@ namespace jtl\Connector\Model;
 
 use DateTime;
 use InvalidArgumentException;
-use \jtl\Connector\Core\Model\DataModel as CoreModel;
+use jtl\Connector\Exception\NotImplementedException;
 use JMS\Serializer\Annotation as Serializer;
+use jtl\Connector\Model\Model;
 use jtl\Connector\Type\DataType;
 use ReflectionClass;
 use ReflectionException;
@@ -24,7 +25,7 @@ use stdClass;
  * @subpackage Internal
  * @Serializer\AccessType("public_method")
  */
-abstract class DataModel extends CoreModel
+abstract class DataModel extends Model
 {
     /**
      * @var DataType
@@ -41,6 +42,47 @@ abstract class DataModel extends CoreModel
      * @Serializer\Exclude
      */
     protected $isEncrypted = false;
+
+    /**
+     * @var array list of strings
+     * @Serializer\Type("array<string, string>")
+     * @Serializer\Exclude
+     * @Serializer\ReadOnly
+     */
+    protected $fields = [];
+
+    /**
+     * Fields Getter
+     *
+     * @return mixed:string
+     */
+    public function getFields(): array
+    {
+        return $this->fields;
+    }
+
+    /**
+     * Get a Model Member Name
+     *
+     * @param boolean $toWawi
+     * @param string $key
+     * @return mixed:string|NULL
+     */
+    public function getField(bool $toWawi = false, string $key): ?string
+    {
+        if ($this->fields !== null && is_array($this->fields)) {
+            $fields = $this->fields;
+            if (!$toWawi) {
+                $fields = array_flip($fields);
+            }
+
+            if (is_array($fields) && isset($fields[$key])) {
+                return $fields[$key];
+            }
+        }
+
+        return null;
+    }
     
     /**
      * @return DataType
@@ -171,7 +213,7 @@ abstract class DataModel extends CoreModel
         }
     }
     
-    protected function setProperty($name, $value, $type)
+    protected function setProperty($name, $value, $type): DataModel
     {
         if (!$this->validateType($value, $type)) {
             throw new InvalidArgumentException(sprintf("%s (%s): expected type '%s', given value '%s'.", $name,
@@ -214,5 +256,18 @@ abstract class DataModel extends CoreModel
                 
                 throw new InvalidArgumentException(sprintf("type '%s' validator not found", $type));
         }
+    }
+
+
+    /**
+     * Object Mapping
+     *
+     * @param boolean $toWawi
+     * @param mixed $obj Object to map
+     * @throws NotImplementedException
+     */
+    public function map(bool $toWawi = false, \stdClass $obj = null)
+    {
+        throw new NotImplementedException;
     }
 }

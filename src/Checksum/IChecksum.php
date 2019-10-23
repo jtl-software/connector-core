@@ -6,7 +6,7 @@
 
 namespace jtl\Connector\Checksum;
 
-use \jtl\Connector\Model\Identity;
+use jtl\Connector\Model\Identity;
 
 interface IChecksum
 {

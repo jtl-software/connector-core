@@ -6,12 +6,12 @@
 
 namespace jtl\Connector\Application\Error;
 
-use jtl\Connector\Core\Http\Response;
-use jtl\Connector\Core\Logger\Logger;
-use jtl\Connector\Core\Rpc\Error;
-use jtl\Connector\Core\Rpc\RequestPacket;
-use jtl\Connector\Core\Rpc\ResponsePacket;
-use jtl\Connector\Core\Utilities\RpcMethod;
+use jtl\Connector\Http\Response;
+use jtl\Connector\Logger\Logger;
+use jtl\Connector\Rpc\Error;
+use jtl\Connector\Rpc\RequestPacket;
+use jtl\Connector\Rpc\ResponsePacket;
+use jtl\Connector\Utilities\RpcMethod;
 use jtl\Connector\Event\EventHandler;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use jtl\Connector\Formatter\ExceptionFormatter;

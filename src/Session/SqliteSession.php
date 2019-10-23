@@ -3,13 +3,12 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Session
  */
-
 namespace jtl\Connector\Session;
 
-use jtl\Connector\Core\Exception\ApplicationException;
-use jtl\Connector\Core\IO\Path;
-use jtl\Connector\Core\Logger\Logger;
-use jtl\Connector\Core\Database\Sqlite3;
+use jtl\Connector\Exception\ApplicationException;
+use jtl\Connector\IO\Path;
+use jtl\Connector\Logger\Logger;
+use jtl\Connector\Database\Sqlite3;
 
 /**
  * Session Class
@@ -195,7 +194,7 @@ final class SqliteSession implements \SessionHandlerInterface
      * Destroy Session
      *
      * @param $sessionId
-     * @return bool|\jtl\Connector\Core\Database\multitype|number|null
+     * @return bool|\jtl\Connector\Database\multitype|number|null
      */
     public function destroy($sessionId)
     {
@@ -210,7 +209,7 @@ final class SqliteSession implements \SessionHandlerInterface
      * Garbage Collector
      *
      * @param $maxLifetime
-     * @return bool|\jtl\Connector\Core\Database\multitype|number|null
+     * @return bool|\jtl\Connector\Database\multitype|number|null
      */
     public function gc($maxLifetime)
     {
