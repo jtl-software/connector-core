@@ -1270,7 +1270,7 @@ class Product extends DataModel
      * @param boolean $isNewProduct Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
      * @return Product
      */
-    public function isNewProduct(bool $isNewProduct): Product
+    public function setIsNewProduct(bool $isNewProduct): Product
     {
         $this->isNewProduct = $isNewProduct;
         
