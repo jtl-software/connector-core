@@ -1394,7 +1394,7 @@ class Product extends DataModel
     /**
      * @return Manufacturer|null Optional manufacturer
      */
-    public function getManufacturer(): Manufacturer
+    public function getManufacturer(): ?Manufacturer
     {
         return $this->manufacturer;
     }
