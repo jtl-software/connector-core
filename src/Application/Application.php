@@ -10,6 +10,8 @@ use jtl\Connector\Application\Error\ErrorHandler;
 use jtl\Connector\Application\Error\IErrorHandler;
 use jtl\Connector\Authentication\ITokenValidator;
 use jtl\Connector\Core\Compression\Zip;
+use jtl\Connector\Core\Exception\CompressionException;
+use jtl\Connector\Core\Exception\HttpException;
 use jtl\Connector\Core\IO\Temp;
 use jtl\Connector\Core\Serializer\Json;
 use jtl\Connector\Core\Application\Application as CoreApplication;
@@ -24,6 +26,7 @@ use jtl\Connector\Core\Http\Request;
 use jtl\Connector\Core\Http\Response;
 use jtl\Connector\Core\Config\Config;
 use jtl\Connector\Exception\JsonException;
+use jtl\Connector\Exception\LinkerException;
 use jtl\Connector\Model\BoolResult;
 use jtl\Connector\Result\Action;
 use jtl\Connector\Core\Validator\Schema;
@@ -185,7 +188,7 @@ class Application extends CoreApplication
      * @return ResponsePacket
      * @throws ApplicationException
      * @throws RpcException
-     * @throws \jtl\Connector\Exception\LinkerException
+     * @throws LinkerException
      */
     protected function execute(RequestPacket $requestpacket, int $rpcmode, array $imagePaths = []): ResponsePacket
     {
@@ -341,8 +344,8 @@ class Application extends CoreApplication
      * @throws ApplicationException
      * @throws RpcException
      * @throws SchemaException
-     * @throws \jtl\Connector\Core\Exception\CompressionException
-     * @throws \jtl\Connector\Core\Exception\HttpException
+     * @throws CompressionException
+     * @throws HttpException
      */
     protected function runSingle(RequestPacket $requestpacket, int $rpcmode): void
     {
@@ -422,7 +425,7 @@ class Application extends CoreApplication
      * @param integer $rpcmode
      * @throws ApplicationException
      * @throws SchemaException
-     * @throws \jtl\Connector\Exception\LinkerException
+     * @throws LinkerException
      */
     protected function runBatch(array $requestpackets, int $rpcmode): void
     {
@@ -455,7 +458,7 @@ class Application extends CoreApplication
      * @param RequestPacket $requestpacket
      * @param string $modelNamespace
      * @return void
-     * @throws \jtl\Connector\Exception\LinkerException
+     * @throws LinkerException
      */
     protected function deserializeRequestParams(RequestPacket &$requestpacket, string $modelNamespace): void
     {
