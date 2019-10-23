@@ -38,7 +38,8 @@ class CategoryAttrI18n extends AbstractI18n
      * @param string $name
      * @return CategoryAttrI18n
      */
-    public function setName(string $name): CategoryAttrI18n {
+    public function setName(string $name): CategoryAttrI18n
+    {
         $this->name = $name;
         
         return $this;
