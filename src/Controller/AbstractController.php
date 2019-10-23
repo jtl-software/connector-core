@@ -10,6 +10,7 @@ use jtl\Connector\Exception\NotImplementedException;
 use jtl\Connector\Rpc\Method;
 use jtl\Connector\Model\DataModel;
 use jtl\Connector\Model\QueryFilter;
+use jtl\Connector\Utilities\Singleton;
 
 /**
  * Base Controller Class
@@ -17,7 +18,7 @@ use jtl\Connector\Model\QueryFilter;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-abstract class AbstractController implements IController
+abstract class AbstractController extends Singleton implements IController
 {
     protected $_method;
 
