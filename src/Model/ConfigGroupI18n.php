@@ -21,14 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ConfigGroupI18n extends AbstractI18n
 {
     /**
-     * @var Identity Reference to configGroup
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("configGroupId")
-     * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
-     */
-    protected $configGroupId = null;
-    
-    /**
      * @var string Optional description (HTML)
      * @Serializer\Type("string")
      * @Serializer\SerializedName("description")
@@ -43,35 +35,7 @@ class ConfigGroupI18n extends AbstractI18n
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->configGroupId = new Identity();
-    }
-    
-    /**
-     * @param Identity $configGroupId Reference to configGroup
-     * @return ConfigGroupI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setConfigGroupId(Identity $configGroupId): ConfigGroupI18n
-    {
-        $this->configGroupId = $configGroupId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to configGroup
-     */
-    public function getConfigGroupId(): Identity
-    {
-        return $this->configGroupId;
-    }
-    
+
     /**
      * @param string $description Optional description (HTML)
      * @return ConfigGroupI18n

@@ -54,14 +54,6 @@ class CustomerOrderItem extends DataModel
     protected $configItemId = null;
     
     /**
-     * @var Identity Reference to customerOrder
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("customerOrderId")
-     * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
-     */
-    protected $customerOrderId = null;
-    
-    /**
      * @var Identity Unique customerOrderItem id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
@@ -164,7 +156,6 @@ class CustomerOrderItem extends DataModel
     {
         $this->id = new Identity();
         $this->productId = new Identity();
-        $this->customerOrderId = new Identity();
         $this->configItemId = new Identity();
     }
     
@@ -187,27 +178,7 @@ class CustomerOrderItem extends DataModel
     {
         return $this->configItemId;
     }
-    
-    /**
-     * @param Identity $customerOrderId Reference to customerOrder
-     * @return CustomerOrderItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCustomerOrderId(Identity $customerOrderId): CustomerOrderItem
-    {
-        $this->customerOrderId = $customerOrderId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to customerOrder
-     */
-    public function getCustomerOrderId(): Identity
-    {
-        return $this->customerOrderId;
-    }
-    
+
     /**
      * @param Identity $id Unique customerOrderItem id
      * @return CustomerOrderItem
@@ -429,12 +400,12 @@ class CustomerOrderItem extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $variations
+     * @param CustomerOrderItemVariation ...$variations
      * @return CustomerOrderItem
      */
-    public function setVariations(array $variations): CustomerOrderItem
+    public function setVariations(CustomerOrderItemVariation ...$variations): CustomerOrderItem
     {
         $this->variations = $variations;
         

@@ -132,12 +132,12 @@ class GlobalData extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $configGroups
+     * @param ConfigGroup ...$configGroups
      * @return GlobalData
      */
-    public function setConfigGroups(array $configGroups): GlobalData
+    public function setConfigGroups(ConfigGroup ...$configGroups): GlobalData
     {
         $this->configGroups = $configGroups;
         
@@ -172,12 +172,12 @@ class GlobalData extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $configItems
+     * @param ConfigItem ...$configItems
      * @return GlobalData
      */
-    public function setConfigItems(array $configItems): GlobalData
+    public function setConfigItems(ConfigItem ...$configItems): GlobalData
     {
         $this->configItems = $configItems;
         
@@ -212,12 +212,12 @@ class GlobalData extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $crossSellingGroups
+     * @param CrossSellingGroup ...$crossSellingGroups
      * @return GlobalData
      */
-    public function setCrossSellingGroups(array $crossSellingGroups): GlobalData
+    public function setCrossSellingGroups(CrossSellingGroup ...$crossSellingGroups): GlobalData
     {
         $this->crossSellingGroups = $crossSellingGroups;
         
@@ -252,12 +252,12 @@ class GlobalData extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $currencies
+     * @param Currency ...$currencies
      * @return GlobalData
      */
-    public function setCurrencies(array $currencies): GlobalData
+    public function setCurrencies(Currency ...$currencies): GlobalData
     {
         $this->currencies = $currencies;
         
@@ -292,12 +292,12 @@ class GlobalData extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $customerGroups
+     * @param CustomerGroup ...$customerGroups
      * @return GlobalData
      */
-    public function setCustomerGroups(array $customerGroups): GlobalData
+    public function setCustomerGroups(CustomerGroup ...$customerGroups): GlobalData
     {
         $this->customerGroups = $customerGroups;
         
@@ -332,12 +332,12 @@ class GlobalData extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $languages
+     * @param Language ...$languages
      * @return GlobalData
      */
-    public function setLanguages(array $languages): GlobalData
+    public function setLanguages(Language ...$languages): GlobalData
     {
         $this->languages = $languages;
         
@@ -372,12 +372,12 @@ class GlobalData extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $measurementUnits
+     * @param MeasurementUnit ...$measurementUnits
      * @return GlobalData
      */
-    public function setMeasurementUnits(array $measurementUnits): GlobalData
+    public function setMeasurementUnits(MeasurementUnit ...$measurementUnits): GlobalData
     {
         $this->measurementUnits = $measurementUnits;
         
@@ -412,12 +412,12 @@ class GlobalData extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $productTypes
+     * @param ProductType ...$productTypes
      * @return GlobalData
      */
-    public function setProductTypes(array $productTypes): GlobalData
+    public function setProductTypes(ProductType ...$productTypes): GlobalData
     {
         $this->productTypes = $productTypes;
         
@@ -452,12 +452,12 @@ class GlobalData extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $shippingClasses
+     * @param ShippingClass ...$shippingClasses
      * @return GlobalData
      */
-    public function setShippingClasses(array $shippingClasses): GlobalData
+    public function setShippingClasses(ShippingClass ...$shippingClasses): GlobalData
     {
         $this->shippingClasses = $shippingClasses;
         
@@ -492,12 +492,12 @@ class GlobalData extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $shippingMethods
+     * @param ShippingMethod ...$shippingMethods
      * @return GlobalData
      */
-    public function setShippingMethods(array $shippingMethods): GlobalData
+    public function setShippingMethods(ShippingMethod ...$shippingMethods): GlobalData
     {
         $this->shippingMethods = $shippingMethods;
         
@@ -532,12 +532,12 @@ class GlobalData extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $taxRates
+     * @param TaxRate ...$taxRates
      * @return GlobalData
      */
-    public function setTaxRates(array $taxRates): GlobalData
+    public function setTaxRates(TaxRate ...$taxRates): GlobalData
     {
         $this->taxRates = $taxRates;
         
@@ -572,12 +572,12 @@ class GlobalData extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $units
+     * @param Unit ...$units
      * @return GlobalData
      */
-    public function setUnits(array $units): GlobalData
+    public function setUnits(Unit ...$units): GlobalData
     {
         $this->units = $units;
         
@@ -612,12 +612,12 @@ class GlobalData extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $warehouses
+     * @param Warehouse ...$warehouses
      * @return GlobalData
      */
-    public function setWarehouses(array $warehouses): GlobalData
+    public function setWarehouses(Warehouse ...$warehouses): GlobalData
     {
         $this->warehouses = $warehouses;
         

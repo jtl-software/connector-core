@@ -21,14 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductI18n extends AbstractI18n
 {
     /**
-     * @var Identity Reference to product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
-    protected $productId = null;
-    
-    /**
      * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("deliveryStatus")
@@ -107,35 +99,7 @@ class ProductI18n extends AbstractI18n
      * @Serializer\Accessor(getter="getUrlPath",setter="setUrlPath")
      */
     protected $urlPath = '';
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->productId = new Identity();
-    }
-    
-    /**
-     * @param Identity $productId Reference to product
-     * @return ProductI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductId(Identity $productId): ProductI18n
-    {
-        $this->productId = $productId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to product
-     */
-    public function getProductId(): Identity
-    {
-        return $this->productId;
-    }
-    
+
     /**
      * @param string $deliveryStatus
      * @return ProductI18n

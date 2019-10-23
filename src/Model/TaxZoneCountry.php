@@ -21,49 +21,13 @@ use JMS\Serializer\Annotation as Serializer;
 class TaxZoneCountry extends DataModel
 {
     /**
-     * @var Identity Reference to taxZone
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("taxZoneId")
-     * @Serializer\Accessor(getter="getTaxZoneId",setter="setTaxZoneId")
-     */
-    protected $taxZoneId = null;
-    
-    /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
      * @Serializer\Type("string")
      * @Serializer\SerializedName("countryIso")
      * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
      */
     protected $countryIso = '';
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->taxZoneId = new Identity();
-    }
-    
-    /**
-     * @param Identity $taxZoneId Reference to taxZone
-     * @return TaxZoneCountry
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setTaxZoneId(Identity $taxZoneId): TaxZoneCountry
-    {
-        $this->taxZoneId = $taxZoneId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to taxZone
-     */
-    public function getTaxZoneId(): Identity
-    {
-        return $this->taxZoneId;
-    }
-    
+
     /**
      * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
      * @return TaxZoneCountry

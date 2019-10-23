@@ -27,15 +27,7 @@ class ProductSpecialPriceItem extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-    
-    /**
-     * @var Identity Reference to productSpecialPrice
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productSpecialPriceId")
-     * @Serializer\Accessor(getter="getProductSpecialPriceId",setter="setProductSpecialPriceId")
-     */
-    protected $productSpecialPriceId = null;
-    
+
     /**
      * @var double net price value
      * @Serializer\Type("double")
@@ -50,7 +42,6 @@ class ProductSpecialPriceItem extends DataModel
     public function __construct()
     {
         $this->customerGroupId = new Identity();
-        $this->productSpecialPriceId = new Identity();
     }
     
     /**
@@ -72,27 +63,7 @@ class ProductSpecialPriceItem extends DataModel
     {
         return $this->customerGroupId;
     }
-    
-    /**
-     * @param Identity $productSpecialPriceId Reference to productSpecialPrice
-     * @return ProductSpecialPriceItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductSpecialPriceId(Identity $productSpecialPriceId): ProductSpecialPriceItem
-    {
-        $this->productSpecialPriceId = $productSpecialPriceId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to productSpecialPrice
-     */
-    public function getProductSpecialPriceId(): Identity
-    {
-        return $this->productSpecialPriceId;
-    }
-    
+
     /**
      * @param double $priceNet net price value
      * @return ProductSpecialPriceItem

@@ -25,15 +25,7 @@ class DeliveryNoteItem extends DataModel
      * @Serializer\Accessor(getter="getCustomerOrderItemId",setter="setCustomerOrderItemId")
      */
     protected $customerOrderItemId = null;
-    
-    /**
-     * @var Identity
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("deliveryNoteId")
-     * @Serializer\Accessor(getter="getDeliveryNoteId",setter="setDeliveryNoteId")
-     */
-    protected $deliveryNoteId = null;
-    
+
     /**
      * @var Identity Reference to product
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -72,7 +64,6 @@ class DeliveryNoteItem extends DataModel
     public function __construct()
     {
         $this->id = new Identity();
-        $this->deliveryNoteId = new Identity();
         $this->productId = new Identity();
         $this->customerOrderItemId = new Identity();
     }
@@ -95,26 +86,6 @@ class DeliveryNoteItem extends DataModel
     public function getCustomerOrderItemId(): Identity
     {
         return $this->customerOrderItemId;
-    }
-    
-    /**
-     * @param Identity $deliveryNoteId
-     * @return DeliveryNoteItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setDeliveryNoteId(Identity $deliveryNoteId): DeliveryNoteItem
-    {
-        $this->deliveryNoteId = $deliveryNoteId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity
-     */
-    public function getDeliveryNoteId(): Identity
-    {
-        return $this->deliveryNoteId;
     }
     
     /**
@@ -185,12 +156,12 @@ class DeliveryNoteItem extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $info
+     * @param DeliveryNoteItemInfo ...$info
      * @return DeliveryNoteItem
      */
-    public function setInfo(array $info): DeliveryNoteItem
+    public function setInfo(DeliveryNoteItemInfo ...$info): DeliveryNoteItem
     {
         $this->info = $info;
         

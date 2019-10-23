@@ -27,15 +27,7 @@ class ProductVariationValueExtraCharge extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-    
-    /**
-     * @var Identity Reference to productVariationValue
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productVariationValueId")
-     * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
-     */
-    protected $productVariationValueId = null;
-    
+
     /**
      * @var double Extra charge (net)
      * @Serializer\Type("double")
@@ -50,7 +42,6 @@ class ProductVariationValueExtraCharge extends DataModel
     public function __construct()
     {
         $this->customerGroupId = new Identity();
-        $this->productVariationValueId = new Identity();
     }
     
     /**
@@ -72,27 +63,7 @@ class ProductVariationValueExtraCharge extends DataModel
     {
         return $this->customerGroupId;
     }
-    
-    /**
-     * @param Identity $productVariationValueId Reference to productVariationValue
-     * @return ProductVariationValueExtraCharge
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductVariationValueId(Identity $productVariationValueId): ProductVariationValueExtraCharge
-    {
-        $this->productVariationValueId = $productVariationValueId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to productVariationValue
-     */
-    public function getProductVariationValueId(): Identity
-    {
-        return $this->productVariationValueId;
-    }
-    
+
     /**
      * @param double $extraChargeNet Extra charge (net)
      * @return ProductVariationValueExtraCharge

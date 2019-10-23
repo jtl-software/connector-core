@@ -725,12 +725,12 @@ class CustomerOrder extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $attributes
+     * @param CustomerOrderAttr ...$attributes
      * @return CustomerOrder
      */
-    public function setAttributes(array $attributes): CustomerOrder
+    public function setAttributes(CustomerOrderAttr ...$attributes): CustomerOrder
     {
         $this->attributes = $attributes;
         
@@ -765,12 +765,12 @@ class CustomerOrder extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $items
+     * @param CustomerOrderItem ...$items
      * @return CustomerOrder
      */
-    public function setItems(array $items): CustomerOrder
+    public function setItems(CustomerOrderItem ...$items): CustomerOrder
     {
         $this->items = $items;
         

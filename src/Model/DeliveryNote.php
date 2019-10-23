@@ -194,12 +194,12 @@ class DeliveryNote extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $items
+     * @param DeliveryNoteItem ...$items
      * @return DeliveryNote
      */
-    public function setItems(array $items): DeliveryNote
+    public function setItems(DeliveryNoteItem ...$items): DeliveryNote
     {
         $this->items = $items;
         
@@ -234,12 +234,12 @@ class DeliveryNote extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $trackingLists
+     * @param DeliveryNoteTrackingList ...$trackingLists
      * @return DeliveryNote
      */
-    public function setTrackingLists(array $trackingLists): DeliveryNote
+    public function setTrackingLists(DeliveryNoteTrackingList ...$trackingLists): DeliveryNote
     {
         $this->trackingLists = $trackingLists;
         

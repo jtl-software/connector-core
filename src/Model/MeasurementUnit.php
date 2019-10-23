@@ -128,12 +128,12 @@ class MeasurementUnit extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $i18ns
+     * @param MeasurementUnitI18n $i18ns
      * @return MeasurementUnit
      */
-    public function setI18ns(array $i18ns): MeasurementUnit
+    public function setI18ns(MeasurementUnitI18n $i18ns): MeasurementUnit
     {
         $this->i18ns = $i18ns;
         

@@ -74,12 +74,12 @@ class Unit extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $i18ns
+     * @param UnitI18n ...$i18ns
      * @return Unit
      */
-    public function setI18ns(array $i18ns): Unit
+    public function setI18ns(UnitI18n ...$i18ns): Unit
     {
         $this->i18ns = $i18ns;
         

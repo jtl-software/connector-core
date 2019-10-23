@@ -21,14 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ConfigItemPrice extends DataModel
 {
     /**
-     * @var Identity Reference to configItem
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("configItemId")
-     * @Serializer\Accessor(getter="getConfigItemId",setter="setConfigItemId")
-     */
-    protected $configItemId = null;
-    
-    /**
      * @var Identity Reference to customerGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("customerGroupId")
@@ -58,29 +50,8 @@ class ConfigItemPrice extends DataModel
     public function __construct()
     {
         $this->customerGroupId = new Identity();
-        $this->configItemId = new Identity();
     }
-    
-    /**
-     * @param Identity $configItemId Reference to configItem
-     * @return ConfigItemPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setConfigItemId(Identity $configItemId): ConfigItemPrice
-    {
-        $this->configItemId = $configItemId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to configItem
-     */
-    public function getConfigItemId(): Identity
-    {
-        return $this->configItemId;
-    }
-    
+
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      * @return ConfigItemPrice

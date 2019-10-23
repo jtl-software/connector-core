@@ -27,15 +27,7 @@ class ProductMediaFile extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-    
-    /**
-     * @var Identity Reference to product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
-    protected $productId = null;
-    
+
     /**
      * @var string Optional media file category name
      * @Serializer\Type("string")
@@ -98,7 +90,6 @@ class ProductMediaFile extends DataModel
     public function __construct()
     {
         $this->id = new Identity();
-        $this->productId = new Identity();
     }
     
     /**
@@ -120,27 +111,7 @@ class ProductMediaFile extends DataModel
     {
         return $this->id;
     }
-    
-    /**
-     * @param Identity $productId Reference to product
-     * @return ProductMediaFile
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductId(Identity $productId): ProductMediaFile
-    {
-        $this->productId = $productId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to product
-     */
-    public function getProductId(): Identity
-    {
-        return $this->productId;
-    }
-    
+
     /**
      * @param string $mediaFileCategory Optional media file category name
      * @return ProductMediaFile
@@ -246,12 +217,12 @@ class ProductMediaFile extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $attributes
+     * @param ProductMediaFileAttr ...$attributes
      * @return ProductMediaFile
      */
-    public function setAttributes(array $attributes): ProductMediaFile
+    public function setAttributes(ProductMediaFileAttr ...$attributes): ProductMediaFile
     {
         $this->attributes = $attributes;
         
@@ -286,12 +257,12 @@ class ProductMediaFile extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $i18ns
+     * @param ProductMediaFileI18n ...$i18ns
      * @return ProductMediaFile
      */
-    public function setI18ns(array $i18ns): ProductMediaFile
+    public function setI18ns(ProductMediaFileI18n ...$i18ns): ProductMediaFile
     {
         $this->i18ns = $i18ns;
         

@@ -27,7 +27,7 @@ class StatusChange extends DataModel
     protected $customerOrderId = null;
     
     /**
-     * @var OrderStatus
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("orderStatus")
      * @Serializer\Accessor(getter="getOrderStatus",setter="setOrderStatus")
@@ -35,7 +35,7 @@ class StatusChange extends DataModel
     protected $orderStatus = '';
     
     /**
-     * @var PaymentStatus
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("paymentStatus")
      * @Serializer\Accessor(getter="getPaymentStatus",setter="setPaymentStatus")

@@ -163,12 +163,12 @@ class CustomerGroup extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $attributes
+     * @param CustomerGroupAttr $attributes
      * @return CustomerGroup
      */
-    public function setAttributes(array $attributes): CustomerGroup
+    public function setAttributes(CustomerGroupAttr $attributes): CustomerGroup
     {
         $this->attributes = $attributes;
         
@@ -203,12 +203,12 @@ class CustomerGroup extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $i18ns
+     * @param CustomerGroupI18n ...$i18ns
      * @return CustomerGroup
      */
-    public function setI18ns(array $i18ns): CustomerGroup
+    public function setI18ns(CustomerGroupI18n ...$i18ns): CustomerGroup
     {
         $this->i18ns = $i18ns;
         

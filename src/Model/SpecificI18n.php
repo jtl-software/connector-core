@@ -21,48 +21,12 @@ use JMS\Serializer\Annotation as Serializer;
 class SpecificI18n extends AbstractI18n
 {
     /**
-     * @var Identity Reference to specific
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("specificId")
-     * @Serializer\Accessor(getter="getSpecificId",setter="setSpecificId")
-     */
-    protected $specificId = null;
-
-    /**
      * @var string Localized name
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->specificId = new Identity();
-    }
-    
-    /**
-     * @param Identity $specificId Reference to specific
-     * @return SpecificI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setSpecificId(Identity $specificId): SpecificI18n
-    {
-        $this->specificId = $specificId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to specific
-     */
-    public function getSpecificId(): Identity
-    {
-        return $this->specificId;
-    }
 
     /**
      * @param string $name Localized name

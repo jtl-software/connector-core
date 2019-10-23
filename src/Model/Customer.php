@@ -889,12 +889,12 @@ class Customer extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $attributes
+     * @param CustomerAttr ...$attributes
      * @return Customer
      */
-    public function setAttributes(array $attributes): Customer
+    public function setAttributes(CustomerAttr ...$attributes): Customer
     {
         $this->attributes = $attributes;
         

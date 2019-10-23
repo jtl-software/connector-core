@@ -21,14 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerOrderAttr extends AbstractKeyValueAttribute
 {
     /**
-     * @var Identity Reference to customerOrder
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("customerOrderId")
-     * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
-     */
-    protected $customerOrderId = null;
-    
-    /**
      * @var Identity Unique customerOrderAttr id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
@@ -42,29 +34,8 @@ class CustomerOrderAttr extends AbstractKeyValueAttribute
     public function __construct()
     {
         $this->id = new Identity();
-        $this->customerOrderId = new Identity();
     }
-    
-    /**
-     * @param Identity $customerOrderId Reference to customerOrder
-     * @return CustomerOrderAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCustomerOrderId(Identity $customerOrderId): CustomerOrderAttr
-    {
-        $this->customerOrderId = $customerOrderId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to customerOrder
-     */
-    public function getCustomerOrderId(): Identity
-    {
-        return $this->customerOrderId;
-    }
-    
+
     /**
      * @param Identity $id Unique customerOrderAttr id
      * @return CustomerOrderAttr

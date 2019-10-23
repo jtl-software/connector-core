@@ -46,8 +46,8 @@ class Identity extends Model
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
-        $this->endpoint = (string)$endpoint;
-        $this->host = (int)$host;
+        $this->endpoint = $endpoint;
+        $this->host     = $host;
     }
     
     /**

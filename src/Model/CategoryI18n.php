@@ -20,14 +20,6 @@ use JMS\Serializer\Annotation as Serializer;
 class CategoryI18n extends AbstractI18n
 {
     /**
-     * @var Identity Reference to category
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("categoryId")
-     * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
-     */
-    protected $categoryId = null;
-    
-    /**
      * @var string Optional localized Long Description
      * @Serializer\Type("string")
      * @Serializer\SerializedName("description")
@@ -74,34 +66,7 @@ class CategoryI18n extends AbstractI18n
      * @Serializer\Accessor(getter="getUrlPath",setter="setUrlPath")
      */
     protected $urlPath = '';
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->categoryId = new Identity();
-    }
-    
-    /**
-     * @param Identity $categoryId Reference to category
-     * @return CategoryI18n
-     */
-    public function setCategoryId(Identity $categoryId): CategoryI18n
-    {
-        $this->categoryId = $categoryId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to category
-     */
-    public function getCategoryId(): Identity
-    {
-        return $this->categoryId;
-    }
-    
+
     /**
      * @param string $description Optional localized Long Description
      * @return CategoryI18n

@@ -1946,12 +1946,12 @@ class Product extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $attributes
+     * @param ProductAttr ...$attributes
      * @return Product
      */
-    public function setAttributes(array $attributes): Product
+    public function setAttributes(ProductAttr ...$attributes): Product
     {
         $this->attributes = $attributes;
         
@@ -1986,12 +1986,12 @@ class Product extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $categories
+     * @param Product2Category ...$categories
      * @return Product
      */
-    public function setCategories(array $categories): Product
+    public function setCategories(Product2Category ...$categories): Product
     {
         $this->categories = $categories;
         
@@ -2026,12 +2026,12 @@ class Product extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $checksums
+     * @param ProductChecksum ...$checksums
      * @return Product
      */
-    public function setChecksums(array $checksums): Product
+    public function setChecksums(ProductChecksum ...$checksums): Product
     {
         $this->checksums = $checksums;
         
@@ -2066,12 +2066,12 @@ class Product extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $configGroups
+     * @param ProductConfigGroup ...$configGroups
      * @return Product
      */
-    public function setConfigGroups(array $configGroups): Product
+    public function setConfigGroups(ProductConfigGroup ...$configGroups): Product
     {
         $this->configGroups = $configGroups;
         
@@ -2112,7 +2112,8 @@ class Product extends DataModel
      * @param array $customerGroupPackagingQuantities
      * @return Product
      */
-    public function setCustomerGroupPackagingQuantities(array $customerGroupPackagingQuantities): Product
+    public function setCustomerGroupPackagingQuantities(
+        CustomerGroupPackagingQuantity ...$customerGroupPackagingQuantities): Product
     {
         $this->customerGroupPackagingQuantities = $customerGroupPackagingQuantities;
         
@@ -2147,12 +2148,12 @@ class Product extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $fileDownloads
+     * @param ProductFileDownload ...$fileDownloads
      * @return Product
      */
-    public function setFileDownloads(array $fileDownloads): Product
+    public function setFileDownloads(ProductFileDownload ...$fileDownloads): Product
     {
         $this->fileDownloads = $fileDownloads;
         
@@ -2187,12 +2188,12 @@ class Product extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $i18ns
+     * @param ProductI18n ...$i18ns
      * @return Product
      */
-    public function setI18ns(array $i18ns): Product
+    public function setI18ns(ProductI18n ...$i18ns): Product
     {
         $this->i18ns = $i18ns;
         
@@ -2227,12 +2228,12 @@ class Product extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $invisibilities
+     * @param ProductInvisibility ...$invisibilities
      * @return Product
      */
-    public function setInvisibilities(array $invisibilities): Product
+    public function setInvisibilities(ProductInvisibility ...$invisibilities): Product
     {
         $this->invisibilities = $invisibilities;
         
@@ -2267,12 +2268,12 @@ class Product extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $mediaFiles
+     * @param ProductMediaFile ...$mediaFiles
      * @return Product
      */
-    public function setMediaFiles(array $mediaFiles): Product
+    public function setMediaFiles(ProductMediaFile ...$mediaFiles): Product
     {
         $this->mediaFiles = $mediaFiles;
         
@@ -2307,12 +2308,12 @@ class Product extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $partsLists
+     * @param ProductPartsList ...$partsLists
      * @return Product
      */
-    public function setPartsLists(array $partsLists): Product
+    public function setPartsLists(ProductPartsList ...$partsLists): Product
     {
         $this->partsLists = $partsLists;
         
@@ -2347,12 +2348,12 @@ class Product extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $prices
+     * @param ProductPrice ...$prices
      * @return Product
      */
-    public function setPrices(array $prices): Product
+    public function setPrices(ProductPrice ...$prices): Product
     {
         $this->prices = $prices;
         
@@ -2387,12 +2388,12 @@ class Product extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $specialPrices
+     * @param ProductSpecialPrice ...$specialPrices
      * @return Product
      */
-    public function setSpecialPrices(array $specialPrices): Product
+    public function setSpecialPrices(ProductSpecialPrice ...$specialPrices): Product
     {
         $this->specialPrices = $specialPrices;
         
@@ -2427,12 +2428,12 @@ class Product extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $specifics
+     * @param ProductSpecific ...$specifics
      * @return Product
      */
-    public function setSpecifics(array $specifics): Product
+    public function setSpecifics(ProductSpecific ...$specifics): Product
     {
         $this->specifics = $specifics;
         
@@ -2467,12 +2468,12 @@ class Product extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $varCombinations
+     * @param ProductVarCombination ...$varCombinations
      * @return Product
      */
-    public function setVarCombinations(array $varCombinations): Product
+    public function setVarCombinations(ProductVarCombination ...$varCombinations): Product
     {
         $this->varCombinations = $varCombinations;
         
@@ -2507,12 +2508,12 @@ class Product extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $variations
+     * @param ProductVariation ...$variations
      * @return Product
      */
-    public function setVariations(array $variations): Product
+    public function setVariations(ProductVariation ...$variations): Product
     {
         $this->variations = $variations;
         
@@ -2547,12 +2548,12 @@ class Product extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $warehouseInfo
+     * @param ProductWarehouseInfo ...$warehouseInfo
      * @return Product
      */
-    public function setWarehouseInfo(array $warehouseInfo): Product
+    public function setWarehouseInfo(ProductWarehouseInfo ...$warehouseInfo): Product
     {
         $this->warehouseInfo = $warehouseInfo;
         

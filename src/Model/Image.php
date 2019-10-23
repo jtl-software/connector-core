@@ -236,12 +236,12 @@ class Image extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $i18ns
+     * @param ImageI18n ...$i18ns
      * @return Image
      */
-    public function setI18ns(array $i18ns): Image
+    public function setI18ns(ImageI18n ...$i18ns): Image
     {
         $this->i18ns = $i18ns;
         

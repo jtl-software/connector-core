@@ -27,22 +27,13 @@ class ProductVariationValueInvisibility extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-    
-    /**
-     * @var Identity Reference to productVariationValue to hide from customerGroup
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productVariationValueId")
-     * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
-     */
-    protected $productVariationValueId = null;
-    
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->customerGroupId = new Identity();
-        $this->productVariationValueId = new Identity();
     }
     
     /**
@@ -63,25 +54,5 @@ class ProductVariationValueInvisibility extends DataModel
     public function getCustomerGroupId(): Identity
     {
         return $this->customerGroupId;
-    }
-    
-    /**
-     * @param Identity $productVariationValueId Reference to productVariationValue to hide from customerGroup
-     * @return ProductVariationValueInvisibility
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductVariationValueId(Identity $productVariationValueId): ProductVariationValueInvisibility
-    {
-        $this->productVariationValueId = $productVariationValueId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to productVariationValue to hide from customerGroup
-     */
-    public function getProductVariationValueId(): Identity
-    {
-        return $this->productVariationValueId;
     }
 }

@@ -27,15 +27,7 @@ class ProductConfigGroup extends DataModel
      * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
      */
     protected $configGroupId = null;
-    
-    /**
-     * @var Identity Reference to product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
-    protected $productId = null;
-    
+
     /**
      * @var integer Optional sort number
      * @Serializer\Type("integer")
@@ -49,10 +41,9 @@ class ProductConfigGroup extends DataModel
      */
     public function __construct()
     {
-        $this->productId = new Identity();
         $this->configGroupId = new Identity();
     }
-    
+
     /**
      * @param Identity $configGroupId Reference to configGroup
      * @return ProductConfigGroup
@@ -61,10 +52,10 @@ class ProductConfigGroup extends DataModel
     public function setConfigGroupId(Identity $configGroupId): ProductConfigGroup
     {
         $this->configGroupId = $configGroupId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity Reference to configGroup
      */
@@ -72,27 +63,7 @@ class ProductConfigGroup extends DataModel
     {
         return $this->configGroupId;
     }
-    
-    /**
-     * @param Identity $productId Reference to product
-     * @return ProductConfigGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductId(Identity $productId): ProductConfigGroup
-    {
-        $this->productId = $productId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to product
-     */
-    public function getProductId(): Identity
-    {
-        return $this->productId;
-    }
-    
+
     /**
      * @param integer $sort Optional sort number
      * @return ProductConfigGroup

@@ -157,12 +157,12 @@ class FileUpload extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $i18ns
+     * @param FileUploadI18n ...$i18ns
      * @return FileUpload
      */
-    public function setI18ns(array $i18ns): FileUpload
+    public function setI18ns(FileUploadI18n ...$i18ns): FileUpload
     {
         $this->i18ns = $i18ns;
         

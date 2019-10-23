@@ -21,49 +21,13 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductMediaFileAttr extends DataModel
 {
     /**
-     * @var Identity
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productMediaFileId")
-     * @Serializer\Accessor(getter="getProductMediaFileId",setter="setProductMediaFileId")
-     */
-    protected $productMediaFileId = null;
-    
-    /**
      * @var ProductMediaFileAttrI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductMediaFileAttrI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = [];
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->productMediaFileId = new Identity();
-    }
-    
-    /**
-     * @param Identity $productMediaFileId
-     * @return ProductMediaFileAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductMediaFileId(Identity $productMediaFileId): ProductMediaFileAttr
-    {
-        $this->productMediaFileId = $productMediaFileId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity
-     */
-    public function getProductMediaFileId(): Identity
-    {
-        return $this->productMediaFileId;
-    }
-    
+
     /**
      * @param ProductMediaFileAttrI18n $i18n
      * @return ProductMediaFileAttr
@@ -74,12 +38,12 @@ class ProductMediaFileAttr extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $i18ns
+     * @param ProductMediaFileAttrI18n ...$i18ns
      * @return ProductMediaFileAttr
      */
-    public function setI18ns(array $i18ns): ProductMediaFileAttr
+    public function setI18ns(ProductMediaFileAttrI18n ...$i18ns): ProductMediaFileAttr
     {
         $this->i18ns = $i18ns;
         

@@ -21,14 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductPriceItem extends DataModel
 {
     /**
-     * @var Identity Reference to ProductPrice
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productPriceId")
-     * @Serializer\Accessor(getter="getProductPriceId",setter="setProductPriceId")
-     */
-    protected $productPriceId = null;
-    
-    /**
      * @var double Price value (net)
      * @Serializer\Type("double")
      * @Serializer\SerializedName("netPrice")
@@ -43,35 +35,7 @@ class ProductPriceItem extends DataModel
      * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
      */
     protected $quantity = 0;
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->productPriceId = new Identity();
-    }
-    
-    /**
-     * @param Identity $productPriceId Reference to ProductPrice
-     * @return ProductPriceItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductPriceId(Identity $productPriceId): ProductPriceItem
-    {
-        $this->productPriceId = $productPriceId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to ProductPrice
-     */
-    public function getProductPriceId(): Identity
-    {
-        return $this->productPriceId;
-    }
-    
+
     /**
      * @param double $netPrice Price value (net)
      * @return ProductPriceItem

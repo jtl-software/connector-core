@@ -21,48 +21,12 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerGroupI18n extends AbstractI18n
 {
     /**
-     * @var Identity Reference to customerGroup
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("customerGroupId")
-     * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
-     */
-    protected $customerGroupId = null;
-
-    /**
      * @var string Localized customer group name
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->customerGroupId = new Identity();
-    }
-    
-    /**
-     * @param Identity $customerGroupId Reference to customerGroup
-     * @return CustomerGroupI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCustomerGroupId(Identity $customerGroupId): CustomerGroupI18n
-    {
-        $this->customerGroupId = $customerGroupId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to customerGroup
-     */
-    public function getCustomerGroupId(): Identity
-    {
-        return $this->customerGroupId;
-    }
 
     /**
      * @param string $name Localized customer group name

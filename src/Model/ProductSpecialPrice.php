@@ -28,15 +28,7 @@ class ProductSpecialPrice extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-    
-    /**
-     * @var Identity Reference to product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
-    protected $productId = null;
-    
+
     /**
      * @var DateTime Optional: Activate special price from date
      * @Serializer\Type("DateTime")
@@ -99,7 +91,6 @@ class ProductSpecialPrice extends DataModel
     public function __construct()
     {
         $this->id = new Identity();
-        $this->productId = new Identity();
     }
     
     /**
@@ -121,27 +112,7 @@ class ProductSpecialPrice extends DataModel
     {
         return $this->id;
     }
-    
-    /**
-     * @param Identity $productId Reference to product
-     * @return ProductSpecialPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductId(Identity $productId): ProductSpecialPrice
-    {
-        $this->productId = $productId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to product
-     */
-    public function getProductId(): Identity
-    {
-        return $this->productId;
-    }
-    
+
     /**
      * @param \DateTimeInterface $activeFromDate Optional: Activate special price from date
      * @return ProductSpecialPrice
@@ -268,12 +239,12 @@ class ProductSpecialPrice extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $items
+     * @param ProductSpecialPriceItem ...$items
      * @return ProductSpecialPrice
      */
-    public function setItems(array $items): ProductSpecialPrice
+    public function setItems(ProductSpecialPriceItem ...$items): ProductSpecialPrice
     {
         $this->items = $items;
         

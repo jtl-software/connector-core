@@ -54,14 +54,6 @@ class ProductVariation extends DataModel
     protected $id = null;
     
     /**
-     * @var Identity Reference to product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
-    protected $productId = null;
-    
-    /**
      * @var integer Optional sort number
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
@@ -107,7 +99,6 @@ class ProductVariation extends DataModel
     public function __construct()
     {
         $this->id = new Identity();
-        $this->productId = new Identity();
     }
     
     /**
@@ -129,27 +120,7 @@ class ProductVariation extends DataModel
     {
         return $this->id;
     }
-    
-    /**
-     * @param Identity $productId Reference to product
-     * @return ProductVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductId(Identity $productId): ProductVariation
-    {
-        $this->productId = $productId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to product
-     */
-    public function getProductId(): Identity
-    {
-        return $this->productId;
-    }
-    
+
     /**
      * @param integer $sort Optional sort number
      * @return ProductVariation
@@ -198,12 +169,12 @@ class ProductVariation extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $i18ns
+     * @param ProductVariationI18n ...$i18ns
      * @return ProductVariation
      */
-    public function setI18ns(array $i18ns): ProductVariation
+    public function setI18ns(ProductVariationI18n ...$i18ns): ProductVariation
     {
         $this->i18ns = $i18ns;
         
@@ -238,12 +209,12 @@ class ProductVariation extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $invisibilities
+     * @param ProductVariationInvisibility ...$invisibilities
      * @return ProductVariation
      */
-    public function setInvisibilities(array $invisibilities): ProductVariation
+    public function setInvisibilities(ProductVariationInvisibility ...$invisibilities): ProductVariation
     {
         $this->invisibilities = $invisibilities;
         
@@ -278,12 +249,12 @@ class ProductVariation extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $values
+     * @param ProductVariationValue ...$values
      * @return ProductVariation
      */
-    public function setValues(array $values): ProductVariation
+    public function setValues(ProductVariationValue ...$values): ProductVariation
     {
         $this->values = $values;
         

@@ -21,14 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ManufacturerI18n extends AbstractI18n
 {
     /**
-     * @var Identity Reference to manufacturer
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("manufacturerId")
-     * @Serializer\Accessor(getter="getManufacturerId",setter="setManufacturerId")
-     */
-    protected $manufacturerId = null;
-    
-    /**
      * @var string Optional manufacturer description (HTML)
      * @Serializer\Type("string")
      * @Serializer\SerializedName("description")
@@ -59,35 +51,7 @@ class ManufacturerI18n extends AbstractI18n
      * @Serializer\Accessor(getter="getTitleTag",setter="setTitleTag")
      */
     protected $titleTag = '';
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->manufacturerId = new Identity();
-    }
-    
-    /**
-     * @param Identity $manufacturerId Reference to manufacturer
-     * @return ManufacturerI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setManufacturerId(Identity $manufacturerId): ManufacturerI18n
-    {
-        $this->manufacturerId = $manufacturerId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to manufacturer
-     */
-    public function getManufacturerId(): Identity
-    {
-        return $this->manufacturerId;
-    }
-    
+
     /**
      * @param string $description Optional manufacturer description (HTML)
      * @return ManufacturerI18n

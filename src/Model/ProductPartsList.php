@@ -27,15 +27,7 @@ class ProductPartsList extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-    
-    /**
-     * @var Identity Reference to a component / product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
-    protected $productId = null;
-    
+
     /**
      * @var double Component quantity
      * @Serializer\Type("double")
@@ -50,7 +42,6 @@ class ProductPartsList extends DataModel
     public function __construct()
     {
         $this->id = new Identity();
-        $this->productId = new Identity();
     }
     
     /**
@@ -72,27 +63,7 @@ class ProductPartsList extends DataModel
     {
         return $this->id;
     }
-    
-    /**
-     * @param Identity $productId Reference to a component / product
-     * @return ProductPartsList
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductId(Identity $productId): ProductPartsList
-    {
-        $this->productId = $productId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to a component / product
-     */
-    public function getProductId(): Identity
-    {
-        return $this->productId;
-    }
-    
+
     /**
      * @param double $quantity Component quantity
      * @return ProductPartsList

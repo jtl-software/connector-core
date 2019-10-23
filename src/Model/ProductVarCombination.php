@@ -21,14 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductVarCombination extends DataModel
 {
     /**
-     * @var Identity Reference to product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
-    protected $productId = null;
-    
-    /**
      * @var Identity Reference to productVariation
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("productVariationId")
@@ -49,31 +41,10 @@ class ProductVarCombination extends DataModel
      */
     public function __construct()
     {
-        $this->productId = new Identity();
         $this->productVariationId = new Identity();
         $this->productVariationValueId = new Identity();
     }
-    
-    /**
-     * @param Identity $productId Reference to product
-     * @return ProductVarCombination
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductId(Identity $productId): ProductVarCombination
-    {
-        $this->productId = $productId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to product
-     */
-    public function getProductId(): Identity
-    {
-        return $this->productId;
-    }
-    
+
     /**
      * @param Identity $productVariationId Reference to productVariation
      * @return ProductVarCombination

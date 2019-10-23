@@ -43,15 +43,7 @@ class ProductPrice extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-    
-    /**
-     * @var Identity Reference to product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
-    protected $productId = null;
-    
+
     /**
      * @var ProductPriceItem[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductPriceItem>")
@@ -67,7 +59,6 @@ class ProductPrice extends DataModel
     {
         $this->customerGroupId = new Identity();
         $this->id = new Identity();
-        $this->productId = new Identity();
         $this->customerId = new Identity();
     }
     
@@ -130,27 +121,7 @@ class ProductPrice extends DataModel
     {
         return $this->id;
     }
-    
-    /**
-     * @param Identity $productId Reference to product
-     * @return ProductPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductId(Identity $productId): ProductPrice
-    {
-        $this->productId = $productId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to product
-     */
-    public function getProductId(): Identity
-    {
-        return $this->productId;
-    }
-    
+
     /**
      * @param ProductPriceItem $item
      * @return ProductPrice
@@ -161,12 +132,12 @@ class ProductPrice extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $items
+     * @param ProductPriceItem ...$items
      * @return ProductPrice
      */
-    public function setItems(array $items): ProductPrice
+    public function setItems(ProductPriceItem ...$items): ProductPrice
     {
         $this->items = $items;
         

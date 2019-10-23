@@ -21,14 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
 class CategoryAttr extends AbstractI18nAttribute
 {
     /**
-     * @var Identity Reference to category
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("categoryId")
-     * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
-     */
-    protected $categoryId = null;
-
-    /**
      * @var CategoryAttrI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\CategoryAttrI18n>")
      * @Serializer\SerializedName("i18ns")
@@ -42,27 +34,6 @@ class CategoryAttr extends AbstractI18nAttribute
     public function __construct()
     {
         parent::__construct();
-        $this->categoryId = new Identity();
-    }
-    
-    /**
-     * @param Identity $categoryId Reference to category
-     * @return CategoryAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCategoryId(Identity $categoryId): CategoryAttr
-    {
-        $this->categoryId = $categoryId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to category
-     */
-    public function getCategoryId(): Identity
-    {
-        return $this->categoryId;
     }
 
     /**

@@ -21,14 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerOrderItemVariation extends DataModel
 {
     /**
-     * @var Identity Reference to customerOrderItem
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("customerOrderItemId")
-     * @Serializer\Accessor(getter="getCustomerOrderItemId",setter="setCustomerOrderItemId")
-     */
-    protected $customerOrderItemId = null;
-    
-    /**
      * @var Identity Unique customerOrderItemVariation id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
@@ -91,30 +83,9 @@ class CustomerOrderItemVariation extends DataModel
     {
         $this->id = new Identity();
         $this->productVariationValueId = new Identity();
-        $this->customerOrderItemId = new Identity();
         $this->productVariationId = new Identity();
     }
-    
-    /**
-     * @param Identity $customerOrderItemId Reference to customerOrderItem
-     * @return CustomerOrderItemVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCustomerOrderItemId(Identity $customerOrderItemId): CustomerOrderItemVariation
-    {
-        $this->customerOrderItemId = $customerOrderItemId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to customerOrderItem
-     */
-    public function getCustomerOrderItemId(): Identity
-    {
-        return $this->customerOrderItemId;
-    }
-    
+
     /**
      * @param Identity $id Unique customerOrderItemVariation id
      * @return CustomerOrderItemVariation

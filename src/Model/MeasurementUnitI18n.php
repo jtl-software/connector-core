@@ -21,14 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
 class MeasurementUnitI18n extends AbstractI18n
 {
     /**
-     * @var Identity Reference to measurementUnitId
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("measurementUnitId")
-     * @Serializer\Accessor(getter="getMeasurementUnitId",setter="setMeasurementUnitId")
-     */
-    protected $measurementUnitId = null;
-
-    /**
      * @var string Localized Name
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
@@ -36,34 +28,6 @@ class MeasurementUnitI18n extends AbstractI18n
      */
     protected $name = '';
     
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->measurementUnitId = new Identity();
-    }
-    
-    /**
-     * @param Identity $measurementUnitId Reference to measurementUnitId
-     * @return MeasurementUnitI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setMeasurementUnitId(Identity $measurementUnitId): MeasurementUnitI18n
-    {
-        $this->measurementUnitId = $measurementUnitId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to measurementUnitId
-     */
-    public function getMeasurementUnitId(): Identity
-    {
-        return $this->measurementUnitId;
-    }
-
     /**
      * @param string $name Localized Name
      * @return MeasurementUnitI18n

@@ -27,15 +27,7 @@ class ProductSpecific extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-    
-    /**
-     * @var Identity Reference to product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
-    protected $productId = null;
-    
+
     /**
      * @var Identity Reference to specificValue
      * @Serializer\Type("jtl\Connector\Model\Identity")
@@ -50,7 +42,6 @@ class ProductSpecific extends DataModel
     public function __construct()
     {
         $this->id = new Identity();
-        $this->productId = new Identity();
         $this->specificValueId = new Identity();
     }
     
@@ -73,27 +64,7 @@ class ProductSpecific extends DataModel
     {
         return $this->id;
     }
-    
-    /**
-     * @param Identity $productId Reference to product
-     * @return ProductSpecific
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductId(Identity $productId): ProductSpecific
-    {
-        $this->productId = $productId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to product
-     */
-    public function getProductId(): Identity
-    {
-        return $this->productId;
-    }
-    
+
     /**
      * @param Identity $specificValueId Reference to specificValue
      * @return ProductSpecific

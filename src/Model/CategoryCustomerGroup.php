@@ -21,14 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
 class CategoryCustomerGroup extends DataModel
 {
     /**
-     * @var Identity Reference to category
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("categoryId")
-     * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
-     */
-    protected $categoryId = null;
-    
-    /**
      * @var Identity Reference to customerGroup
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("customerGroupId")
@@ -50,29 +42,8 @@ class CategoryCustomerGroup extends DataModel
     public function __construct()
     {
         $this->customerGroupId = new Identity();
-        $this->categoryId = new Identity();
     }
-    
-    /**
-     * @param Identity $categoryId Reference to category
-     * @return CategoryCustomerGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCategoryId(Identity $categoryId): CategoryCustomerGroup
-    {
-        $this->categoryId = $categoryId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to category
-     */
-    public function getCategoryId(): Identity
-    {
-        return $this->categoryId;
-    }
-    
+
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      * @return CategoryCustomerGroup

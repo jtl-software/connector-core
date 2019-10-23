@@ -163,12 +163,12 @@ class Specific extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $i18ns
+     * @param SpecificI18n $i18ns
      * @return Specific
      */
-    public function setI18ns(array $i18ns): Specific
+    public function setI18ns(SpecificI18n $i18ns): Specific
     {
         $this->i18ns = $i18ns;
         
@@ -203,12 +203,12 @@ class Specific extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $values
+     * @param SpecificValue $values
      * @return Specific
      */
-    public function setValues(array $values): Specific
+    public function setValues(SpecificValue $values): Specific
     {
         $this->values = $values;
         

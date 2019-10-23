@@ -27,15 +27,7 @@ class SpecificValue extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-    
-    /**
-     * @var Identity Reference to specificId
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("specificId")
-     * @Serializer\Accessor(getter="getSpecificId",setter="setSpecificId")
-     */
-    protected $specificId = null;
-    
+
     /**
      * @var integer Optional sort number
      * @Serializer\Type("integer")
@@ -58,7 +50,6 @@ class SpecificValue extends DataModel
     public function __construct()
     {
         $this->id = new Identity();
-        $this->specificId = new Identity();
     }
     
     /**
@@ -80,27 +71,7 @@ class SpecificValue extends DataModel
     {
         return $this->id;
     }
-    
-    /**
-     * @param Identity $specificId Reference to specificId
-     * @return SpecificValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setSpecificId(Identity $specificId): SpecificValue
-    {
-        $this->specificId = $specificId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to specificId
-     */
-    public function getSpecificId(): Identity
-    {
-        return $this->specificId;
-    }
-    
+
     /**
      * @param integer $sort Optional sort number
      * @return SpecificValue
@@ -130,12 +101,12 @@ class SpecificValue extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $i18ns
+     * @param SpecificValueI18n ...$i18ns
      * @return SpecificValue
      */
-    public function setI18ns(array $i18ns): SpecificValue
+    public function setI18ns(SpecificValueI18n ...$i18ns): SpecificValue
     {
         $this->i18ns = $i18ns;
         

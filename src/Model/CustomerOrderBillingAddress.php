@@ -21,14 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerOrderBillingAddress extends DataModel
 {
     /**
-     * @var Identity Reference to customer
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("customerId")
-     * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
-     */
-    protected $customerId = null;
-    
-    /**
      * @var Identity Unique customerOrderBillingAddress id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
@@ -178,29 +170,8 @@ class CustomerOrderBillingAddress extends DataModel
     public function __construct()
     {
         $this->id = new Identity();
-        $this->customerId = new Identity();
     }
-    
-    /**
-     * @param Identity $customerId Reference to customer
-     * @return CustomerOrderBillingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCustomerId(Identity $customerId): CustomerOrderBillingAddress
-    {
-        $this->customerId = $customerId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to customer
-     */
-    public function getCustomerId(): Identity
-    {
-        return $this->customerId;
-    }
-    
+
     /**
      * @param Identity $id Unique customerOrderBillingAddress id
      * @return CustomerOrderBillingAddress

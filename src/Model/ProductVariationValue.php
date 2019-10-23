@@ -254,12 +254,12 @@ class ProductVariationValue extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $extraCharges
+     * @param ProductVariationValueExtraCharge $extraCharges
      * @return ProductVariationValue
      */
-    public function setExtraCharges(array $extraCharges): ProductVariationValue
+    public function setExtraCharges(ProductVariationValueExtraCharge $extraCharges): ProductVariationValue
     {
         $this->extraCharges = $extraCharges;
         
@@ -294,12 +294,12 @@ class ProductVariationValue extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $i18ns
+     * @param ProductVariationValueI18n ...$i18ns
      * @return ProductVariationValue
      */
-    public function setI18ns(array $i18ns): ProductVariationValue
+    public function setI18ns(ProductVariationValueI18n ...$i18ns): ProductVariationValue
     {
         $this->i18ns = $i18ns;
         
@@ -334,12 +334,12 @@ class ProductVariationValue extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $invisibilities
+     * @param ProductVariationValueInvisibility $invisibilities
      * @return ProductVariationValue
      */
-    public function setInvisibilities(array $invisibilities): ProductVariationValue
+    public function setInvisibilities(ProductVariationValueInvisibility $invisibilities): ProductVariationValue
     {
         $this->invisibilities = $invisibilities;
         

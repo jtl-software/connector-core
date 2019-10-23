@@ -22,14 +22,6 @@ use jtl\Connector\Model\Customer\Attribute;
 class CustomerGroupAttr extends AbstractKeyValueAttribute
 {
     /**
-     * @var Identity Reference to customerGroup
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("customerGroupId")
-     * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
-     */
-    protected $customerGroupId = null;
-    
-    /**
      * @var Identity Unique customerGroupAttr id
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
@@ -42,30 +34,9 @@ class CustomerGroupAttr extends AbstractKeyValueAttribute
      */
     public function __construct()
     {
-        $this->customerGroupId = new Identity();
         $this->id = new Identity();
     }
-    
-    /**
-     * @param Identity $customerGroupId Reference to customerGroup
-     * @return CustomerGroupAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCustomerGroupId(Identity $customerGroupId): CustomerGroupAttr
-    {
-        $this->customerGroupId = $customerGroupId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to customerGroup
-     */
-    public function getCustomerGroupId(): Identity
-    {
-        return $this->customerGroupId;
-    }
-    
+
     /**
      * @param Identity $id Unique customerGroupAttr id
      * @return CustomerGroupAttr

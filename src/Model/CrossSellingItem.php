@@ -74,12 +74,12 @@ class CrossSellingItem extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $productIds
+     * @param Identity ...$productIds
      * @return CrossSellingItem
      */
-    public function setProductIds(array $productIds): CrossSellingItem
+    public function setProductIds(Identity ...$productIds): CrossSellingItem
     {
         $this->productIds = $productIds;
         

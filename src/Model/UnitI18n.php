@@ -21,48 +21,12 @@ use JMS\Serializer\Annotation as Serializer;
 class UnitI18n extends AbstractI18n
 {
     /**
-     * @var Identity Unit id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("unitId")
-     * @Serializer\Accessor(getter="getUnitId",setter="setUnitId")
-     */
-    protected $unitId = null;
-
-    /**
      * @var string Localized unit name
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->unitId = new Identity();
-    }
-    
-    /**
-     * @param Identity $unitId Unit id
-     * @return UnitI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setUnitId(Identity $unitId): UnitI18n
-    {
-        $this->unitId = $unitId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unit id
-     */
-    public function getUnitId(): Identity
-    {
-        return $this->unitId;
-    }
 
     /**
      * @param string $name Localized unit name

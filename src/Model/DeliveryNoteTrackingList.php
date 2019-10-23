@@ -63,12 +63,12 @@ class DeliveryNoteTrackingList extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $codes
+     * @param string ...$codes
      * @return DeliveryNoteTrackingList
      */
-    public function setCodes(array $codes): DeliveryNoteTrackingList
+    public function setCodes(string ...$codes): DeliveryNoteTrackingList
     {
         $this->codes = $codes;
         

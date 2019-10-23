@@ -8,6 +8,7 @@ namespace jtl\Connector\Core\Model;
 
 use JMS\Serializer\SerializationContext;
 use PhpOption\Option;
+use stdClass;
 
 /**
  * Core Model Class
@@ -20,9 +21,9 @@ abstract class Model
     /**
      * Constructor
      *
-     * @param \stdClass $object
+     * @param stdClass $object
      */
-    public function __construct(\stdClass $object = null)
+    public function __construct(stdClass $object = null)
     {
         $this->setOptions($object);
     }
@@ -40,11 +41,11 @@ abstract class Model
     /**
      * Sets Properties with matching Array Values
      *
-     * @param \stdClass $object
+     * @param stdClass $object
      * @param array $options
      * @return Model
      */
-    public function setOptions(\stdClass $object = null, array $options = null): Model
+    public function setOptions(stdClass $object = null, array $options = null): Model
     {
         if ($object !== null && is_object($object)) {
             $members = array_keys(get_object_vars($object));
@@ -79,11 +80,11 @@ abstract class Model
      * Convert the Model into stdClass Object
      *
      * @param array $publics
-     * @return \stdClass $object
+     * @return stdClass $object
      */
-    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', '_type']): \stdClass
+    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', '_type']): stdClass
     {
-        $object = new \stdClass();
+        $object = new stdClass();
         
         $members = array_keys(get_object_vars($this));
         if (is_array($members) && count($members) > 0) {

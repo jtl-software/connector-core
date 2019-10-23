@@ -21,14 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductMediaFileI18n extends AbstractI18n
 {
     /**
-     * @var Identity Reference to mediaFile
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productMediaFileId")
-     * @Serializer\Accessor(getter="getProductMediaFileId",setter="setProductMediaFileId")
-     */
-    protected $productMediaFileId = null;
-    
-    /**
      * @var string Locale specific description
      * @Serializer\Type("string")
      * @Serializer\SerializedName("description")
@@ -43,35 +35,7 @@ class ProductMediaFileI18n extends AbstractI18n
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->productMediaFileId = new Identity();
-    }
-    
-    /**
-     * @param Identity $productMediaFileId Reference to mediaFile
-     * @return ProductMediaFileI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductMediaFileId(Identity $productMediaFileId): ProductMediaFileI18n
-    {
-        $this->productMediaFileId = $productMediaFileId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to mediaFile
-     */
-    public function getProductMediaFileId(): Identity
-    {
-        return $this->productMediaFileId;
-    }
-    
+
     /**
      * @param string $description Locale specific description
      * @return ProductMediaFileI18n

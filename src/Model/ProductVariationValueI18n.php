@@ -21,48 +21,12 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductVariationValueI18n extends AbstractI18n
 {
     /**
-     * @var Identity Reference to productVariationValue
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productVariationValueId")
-     * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
-     */
-    protected $productVariationValueId = null;
-
-    /**
      * @var string Locale specific variationValue name
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->productVariationValueId = new Identity();
-    }
-    
-    /**
-     * @param Identity $productVariationValueId Reference to productVariationValue
-     * @return ProductVariationValueI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductVariationValueId(Identity $productVariationValueId): ProductVariationValueI18n
-    {
-        $this->productVariationValueId = $productVariationValueId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to productVariationValue
-     */
-    public function getProductVariationValueId(): Identity
-    {
-        return $this->productVariationValueId;
-    }
 
     /**
      * @param string $name Locale specific variationValue name

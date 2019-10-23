@@ -21,14 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductAttr extends AbstractI18nAttribute
 {
     /**
-     * @var Identity
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
-    protected $productId = null;
-
-    /**
      * @var ProductAttrI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductAttrI18n>")
      * @Serializer\SerializedName("i18ns")
@@ -42,27 +34,6 @@ class ProductAttr extends AbstractI18nAttribute
     public function __construct()
     {
         parent::__construct();
-        $this->productId = new Identity();
-    }
-
-    /**
-     * @param Identity $productId
-     * @return ProductAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductId(Identity $productId): ProductAttr
-    {
-        $this->productId = $productId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity
-     */
-    public function getProductId(): Identity
-    {
-        return $this->productId;
     }
 
     /**
@@ -75,12 +46,12 @@ class ProductAttr extends AbstractI18nAttribute
         
         return $this;
     }
-    
+
     /**
-     * @param array $i18ns
+     * @param ProductAttrI18n ...$i18ns
      * @return ProductAttr
      */
-    public function setI18ns(array $i18ns): ProductAttr
+    public function setI18ns(ProductAttrI18n ...$i18ns): ProductAttr
     {
         $this->i18ns = $i18ns;
         

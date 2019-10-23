@@ -19,14 +19,6 @@ use JMS\Serializer\Annotation as Serializer;
 class CrossSellingGroupI18n extends AbstractI18n
 {
     /**
-     * @var Identity
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("crossSellingGroupId")
-     * @Serializer\Accessor(getter="getCrossSellingGroupId",setter="setCrossSellingGroupId")
-     */
-    protected $crossSellingGroupId = null;
-    
-    /**
      * @var string Optional localized description
      * @Serializer\Type("string")
      * @Serializer\SerializedName("description")
@@ -41,35 +33,7 @@ class CrossSellingGroupI18n extends AbstractI18n
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->crossSellingGroupId = new Identity();
-    }
-    
-    /**
-     * @param Identity $crossSellingGroupId
-     * @return CrossSellingGroupI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setCrossSellingGroupId(Identity $crossSellingGroupId): CrossSellingGroupI18n
-    {
-        $this->crossSellingGroupId = $crossSellingGroupId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity
-     */
-    public function getCrossSellingGroupId(): Identity
-    {
-        return $this->crossSellingGroupId;
-    }
-    
+
     /**
      * @param string $description Optional localized description
      * @return CrossSellingGroupI18n

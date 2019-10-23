@@ -182,12 +182,12 @@ class Manufacturer extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $i18ns
+     * @param ManufacturerI18n ...$i18ns
      * @return Manufacturer
      */
-    public function setI18ns(array $i18ns): Manufacturer
+    public function setI18ns(ManufacturerI18n ...$i18ns): Manufacturer
     {
         $this->i18ns = $i18ns;
         

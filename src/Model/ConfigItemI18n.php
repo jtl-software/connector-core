@@ -21,14 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ConfigItemI18n extends AbstractI18n
 {
     /**
-     * @var Identity Reference to configItem
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("configItemId")
-     * @Serializer\Accessor(getter="getConfigItemId",setter="setConfigItemId")
-     */
-    protected $configItemId = null;
-    
-    /**
      * @var string Description (html). Will be ignored, if inheritProductName==true
      * @Serializer\Type("string")
      * @Serializer\SerializedName("description")
@@ -43,35 +35,7 @@ class ConfigItemI18n extends AbstractI18n
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->configItemId = new Identity();
-    }
-    
-    /**
-     * @param Identity $configItemId Reference to configItem
-     * @return ConfigItemI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setConfigItemId(Identity $configItemId): ConfigItemI18n
-    {
-        $this->configItemId = $configItemId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to configItem
-     */
-    public function getConfigItemId(): Identity
-    {
-        return $this->configItemId;
-    }
-    
+
     /**
      * @param string $description Description (html). Will be ignored, if inheritProductName==true
      * @return ConfigItemI18n

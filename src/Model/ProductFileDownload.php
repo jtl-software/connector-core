@@ -20,14 +20,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductFileDownload extends DataModel
 {
     /**
-     * @var Identity
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
-    protected $productId = null;
-    
-    /**
      * @var DateTime
      * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("creationDate")
@@ -82,35 +74,7 @@ class ProductFileDownload extends DataModel
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = [];
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->productId = new Identity();
-    }
-    
-    /**
-     * @param Identity $productId
-     * @return ProductFileDownload
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductId(Identity $productId): ProductFileDownload
-    {
-        $this->productId = $productId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity
-     */
-    public function getProductId(): Identity
-    {
-        return $this->productId;
-    }
-    
+
     /**
      * @param \DateTimeInterface $creationDate
      * @return ProductFileDownload
@@ -236,12 +200,12 @@ class ProductFileDownload extends DataModel
         
         return $this;
     }
-    
+
     /**
-     * @param array $i18ns
+     * @param ProductFileDownloadI18n ...$i18ns
      * @return ProductFileDownload
      */
-    public function setI18ns(array $i18ns): ProductFileDownload
+    public function setI18ns(ProductFileDownloadI18n ...$i18ns): ProductFileDownload
     {
         $this->i18ns = $i18ns;
         
