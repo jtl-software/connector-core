@@ -4,18 +4,15 @@
  * @copyright 2010-2019 JTL-Software GmbH
  */
 
-
-namespace jtl\Connector\Model\Common;
-
-use jtl\Connector\Model\DataModel;
+namespace jtl\Connector\Model;
 
 /**
- * Class I18n
+ * Class AbstractI18n
  * @access public
  * @package jtl\Connector\Model\Common
  * @Serializer\AccessType("public_method")
  */
-abstract class I18n extends DataModel
+abstract class AbstractI18n extends DataModel
 {
     /**
      * @var string
@@ -35,9 +32,9 @@ abstract class I18n extends DataModel
 
     /**
      * @param string $languageISO
-     * @return I18n
+     * @return AbstractI18n
      */
-    public function setLanguageISO(string $languageISO): I18n
+    public function setLanguageISO(string $languageISO): AbstractI18n
     {
         $this->languageISO = $languageISO;
 

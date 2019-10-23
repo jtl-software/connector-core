@@ -8,7 +8,6 @@
 namespace jtl\Connector\Model;
 
 use JMS\Serializer\Annotation as Serializer;
-use jtl\Connector\Model\Common\I18n;
 
 /**
  * Localized category properties. localeName, categoryId and a localized name must be set.
@@ -18,7 +17,7 @@ use jtl\Connector\Model\Common\I18n;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CategoryI18n extends I18n
+class CategoryI18n extends AbstractI18n
 {
     /**
      * @var Identity Reference to category

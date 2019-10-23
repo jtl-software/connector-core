@@ -9,7 +9,6 @@ namespace jtl\Connector\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
-use jtl\Connector\Model\Common\I18n;
 
 /**
  * Locale specific product variation properties.
@@ -19,7 +18,7 @@ use jtl\Connector\Model\Common\I18n;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductVariationI18n extends I18n
+class ProductVariationI18n extends AbstractI18n
 {
     /**
      * @var Identity Reference to productVariation

@@ -9,7 +9,6 @@ namespace jtl\Connector\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
-use jtl\Connector\Model\Customer\Attribute as CustomerAttribute;
 
 /**
  * Monolingual attribute for a customerorder.
@@ -19,7 +18,7 @@ use jtl\Connector\Model\Customer\Attribute as CustomerAttribute;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CustomerOrderAttr extends CustomerAttribute
+class CustomerOrderAttr extends AbstractKeyValueAttribute
 {
     /**
      * @var Identity Reference to customerOrder

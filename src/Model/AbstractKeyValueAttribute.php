@@ -4,17 +4,15 @@
  * @copyright 2010-2019 JTL-Software GmbH
  */
 
-namespace jtl\Connector\Model\Customer;
-
-use jtl\Connector\Model\DataModel;
+namespace jtl\Connector\Model;
 
 /**
- * Class Attribute
+ * Class AbstractKeyValueAttribute
  * @access public
  * @package jtl\Connector\Model\Customer
  * @Serializer\AccessType("public_method")
  */
-abstract class Attribute extends DataModel
+abstract class AbstractKeyValueAttribute extends DataModel
 {
     /**
      * @var string Attribute value
@@ -42,9 +40,9 @@ abstract class Attribute extends DataModel
 
     /**
      * @param string $value Attribute value
-     * @return Attribute
+     * @return AbstractKeyValueAttribute
      */
-    public function setValue(string $value): Attribute
+    public function setValue(string $value): AbstractKeyValueAttribute
     {
         $this->value = $value;
 
@@ -61,9 +59,9 @@ abstract class Attribute extends DataModel
 
     /**
      * @param string $key Attribute key
-     * @return Attribute
+     * @return AbstractKeyValueAttribute
      */
-    public function setKey(string $key): Attribute
+    public function setKey(string $key): AbstractKeyValueAttribute
     {
         $this->key = $key;
 

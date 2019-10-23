@@ -9,7 +9,6 @@ namespace jtl\Connector\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
-use jtl\Connector\Model\Common\I18n;
 
 /**
  * @access public
@@ -17,7 +16,7 @@ use jtl\Connector\Model\Common\I18n;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CrossSellingGroupI18n extends I18n
+class CrossSellingGroupI18n extends AbstractI18n
 {
     /**
      * @var Identity

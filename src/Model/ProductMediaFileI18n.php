@@ -9,7 +9,6 @@ namespace jtl\Connector\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
-use jtl\Connector\Model\Common\I18n;
 
 /**
  * Locale specific mediafile name + description.
@@ -19,7 +18,7 @@ use jtl\Connector\Model\Common\I18n;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductMediaFileI18n extends I18n
+class ProductMediaFileI18n extends AbstractI18n
 {
     /**
      * @var Identity Reference to mediaFile

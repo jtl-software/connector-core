@@ -9,7 +9,6 @@ namespace jtl\Connector\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
-use jtl\Connector\Model\Common\I18n;
 
 /**
  * Localized config item name and description.
@@ -19,7 +18,7 @@ use jtl\Connector\Model\Common\I18n;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ConfigItemI18n extends I18n
+class ConfigItemI18n extends AbstractI18
 {
     /**
      * @var Identity Reference to configItem

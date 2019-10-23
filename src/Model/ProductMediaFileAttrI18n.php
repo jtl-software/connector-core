@@ -8,7 +8,6 @@
 namespace jtl\Connector\Model;
 
 use JMS\Serializer\Annotation as Serializer;
-use jtl\Connector\Model\Common\I18n;
 
 /**
  * @access public
@@ -16,7 +15,7 @@ use jtl\Connector\Model\Common\I18n;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductMediaFileAttrI18n extends I18n
+class ProductMediaFileAttrI18n extends AbstractI18n
 {
     /**
      * @var string

@@ -9,7 +9,6 @@ namespace jtl\Connector\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
-use jtl\Connector\Model\Common\Attribute as CommonAttribute;
 
 /**
  * Localized product attribute.
@@ -19,7 +18,7 @@ use jtl\Connector\Model\Common\Attribute as CommonAttribute;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductAttr extends CommonAttribute
+class ProductAttr extends AbstractI18nAttribute
 {
     /**
      * @var Identity

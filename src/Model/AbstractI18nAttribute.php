@@ -4,19 +4,16 @@
  * @copyright 2010-2019 JTL-Software GmbH
  */
 
-namespace jtl\Connector\Model\Common;
-
-use jtl\Connector\Model\DataModel;
-use jtl\Connector\Model\Identity;
+namespace jtl\Connector\Model;
 
 /**
- * Attribute class
+ * AbstractI18nAttribute class
  *
  * @access public
  * @package jtl\Connector\Model\Common
  * @Serializer\AccessType("public_method")
  */
-abstract class Attribute extends DataModel
+abstract class AbstractI18nAttribute extends DataModel
 {
     /**
      * @var boolean
@@ -43,7 +40,7 @@ abstract class Attribute extends DataModel
     protected $id = null;
 
     /**
-     * Attribute constructor.
+     * AbstractI18nAttribute constructor.
      */
     public function __construct()
     {
@@ -52,9 +49,9 @@ abstract class Attribute extends DataModel
 
     /**
      * @param Identity $id
-     * @return Attribute
+     * @return AbstractI18nAttribute
      */
-    public function setId(Identity $id): Attribute
+    public function setId(Identity $id): AbstractI18nAttribute
     {
         $this->id = $id;
 
@@ -71,9 +68,9 @@ abstract class Attribute extends DataModel
 
     /**
      * @param bool $isTranslated
-     * @return Attribute
+     * @return AbstractI18nAttribute
      */
-    public function setIsTranslated(bool $isTranslated): Attribute
+    public function setIsTranslated(bool $isTranslated): AbstractI18nAttribute
     {
         $this->isTranslated = $isTranslated;
 
@@ -90,9 +87,9 @@ abstract class Attribute extends DataModel
 
     /**
      * @param bool $isCustomProperty
-     * @return Attribute
+     * @return AbstractI18nAttribute
      */
-    public function setIsCustomProperty(bool $isCustomProperty): Attribute
+    public function setIsCustomProperty(bool $isCustomProperty): AbstractI18nAttribute
     {
         $this->isCustomProperty = $isCustomProperty;
 
