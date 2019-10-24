@@ -35,22 +35,13 @@ class Product2Category extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-    
-    /**
-     * @var Identity Reference to product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
-    protected $productId = null;
-    
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->id = new Identity();
-        $this->productId = new Identity();
         $this->categoryId = new Identity();
     }
     
@@ -92,25 +83,5 @@ class Product2Category extends DataModel
     public function getId(): Identity
     {
         return $this->id;
-    }
-    
-    /**
-     * @param Identity $productId Reference to product
-     * @return Product2Category
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductId(Identity $productId): Product2Category
-    {
-        $this->productId = $productId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to product
-     */
-    public function getProductId(): Identity
-    {
-        return $this->productId;
     }
 }

@@ -150,9 +150,6 @@ class IdentityLinker
             'customerId' => self::TYPE_CUSTOMER,
             'shippingMethodId' => self::TYPE_SHIPPING_METHOD
         ],
-        'CustomerOrderPaymentInfo' => [
-            'customerOrderId' => self::TYPE_CUSTOMER_ORDER
-        ],
         'CustomerOrderItem' => [
             'productId' => self::TYPE_PRODUCT
         ],
@@ -193,7 +190,6 @@ class IdentityLinker
             'unitId' => self::TYPE_UNIT,
         ],
         'Product2Category' => [
-            'productId' => self::TYPE_PRODUCT,
             'categoryId' => self::TYPE_CATEGORY
         ],
         'ProductAttr' => [
