@@ -542,8 +542,8 @@ class Product extends DataModel
     protected $width = 0.0;
     
     /**
-     * @var ProductAttr[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductAttr>")
+     * @var I18nAttribute[]
+     * @Serializer\Type("array<jtl\Connector\Model\I18nAttribute>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
@@ -1937,10 +1937,10 @@ class Product extends DataModel
     }
     
     /**
-     * @param ProductAttr $attribute
+     * @param I18nAttribute $attribute
      * @return Product
      */
-    public function addAttribute(ProductAttr $attribute): Product
+    public function addAttribute(I18nAttribute $attribute): Product
     {
         $this->attributes[] = $attribute;
         
@@ -1948,10 +1948,10 @@ class Product extends DataModel
     }
 
     /**
-     * @param ProductAttr ...$attributes
+     * @param I18nAttribute ...$attributes
      * @return Product
      */
-    public function setAttributes(ProductAttr ...$attributes): Product
+    public function setAttributes(I18nAttribute ...$attributes): Product
     {
         $this->attributes = $attributes;
         
@@ -1959,7 +1959,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return ProductAttr[]
+     * @return I18nAttribute[]
      */
     public function getAttributes(): array
     {

@@ -8,13 +8,13 @@ namespace jtl\Connector\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * AbstractI18nAttribute class
+ * I18nAttribute class
  *
  * @access public
  * @package jtl\Connector\Model\Common
  * @Serializer\AccessType("public_method")
  */
-abstract class AbstractI18nAttribute extends DataModel
+class I18nAttribute extends DataModel
 {
     /**
      * @var boolean
@@ -48,7 +48,7 @@ abstract class AbstractI18nAttribute extends DataModel
     protected $i18ns = [];
 
     /**
-     * AbstractI18nAttribute constructor.
+     * I18nAttribute constructor.
      */
     public function __construct()
     {
@@ -57,9 +57,9 @@ abstract class AbstractI18nAttribute extends DataModel
 
     /**
      * @param Identity $id
-     * @return AbstractI18nAttribute
+     * @return I18nAttribute
      */
-    public function setId(Identity $id): AbstractI18nAttribute
+    public function setId(Identity $id): I18nAttribute
     {
         $this->id = $id;
 
@@ -76,9 +76,9 @@ abstract class AbstractI18nAttribute extends DataModel
 
     /**
      * @param bool $isTranslated
-     * @return AbstractI18nAttribute
+     * @return I18nAttribute
      */
-    public function setIsTranslated(bool $isTranslated): AbstractI18nAttribute
+    public function setIsTranslated(bool $isTranslated): I18nAttribute
     {
         $this->isTranslated = $isTranslated;
 
@@ -95,9 +95,9 @@ abstract class AbstractI18nAttribute extends DataModel
 
     /**
      * @param bool $isCustomProperty
-     * @return AbstractI18nAttribute
+     * @return I18nAttribute
      */
-    public function setIsCustomProperty(bool $isCustomProperty): AbstractI18nAttribute
+    public function setIsCustomProperty(bool $isCustomProperty): I18nAttribute
     {
         $this->isCustomProperty = $isCustomProperty;
 
@@ -122,9 +122,9 @@ abstract class AbstractI18nAttribute extends DataModel
 
     /**
      * @param AbstractI18n $i18n
-     * @return AbstractI18nAttribute
+     * @return I18nAttribute
      */
-    public function addI18n(AbstractI18n $i18n): AbstractI18nAttribute
+    public function addI18n(AbstractI18n $i18n): I18nAttribute
     {
         $this->i18ns[] = $i18n;
 
@@ -132,9 +132,9 @@ abstract class AbstractI18nAttribute extends DataModel
     }
 
     /**
-     * @return AbstractI18nAttribute
+     * @return I18nAttribute
      */
-    public function clearI18ns(): AbstractI18nAttribute
+    public function clearI18ns(): I18nAttribute
     {
         $this->i18ns = [];
 
@@ -143,9 +143,9 @@ abstract class AbstractI18nAttribute extends DataModel
 
     /**
      * @param AbstractI18n ...$i18ns
-     * @return AbstractI18nAttribute
+     * @return I18nAttribute
      */
-    public function setI18ns(AbstractI18n ...$i18ns): AbstractI18nAttribute
+    public function setI18ns(AbstractI18n ...$i18ns): I18nAttribute
     {
         $this->i18ns = $i18ns;
 

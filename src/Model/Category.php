@@ -61,8 +61,8 @@ class Category extends DataModel
     protected $sort = 0;
     
     /**
-     * @var CategoryAttr[]
-     * @Serializer\Type("array<jtl\Connector\Model\CategoryAttr>")
+     * @var I18nAttribute[]
+     * @Serializer\Type("array<jtl\Connector\Model\I18nAttribute>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
@@ -199,10 +199,10 @@ class Category extends DataModel
     }
     
     /**
-     * @param CategoryAttr $attribute
+     * @param I18nAttribute $attribute
      * @return Category
      */
-    public function addAttribute(CategoryAttr $attribute): Category
+    public function addAttribute(I18nAttribute $attribute): Category
     {
         $this->attributes[] = $attribute;
         
@@ -210,10 +210,10 @@ class Category extends DataModel
     }
     
     /**
-     * @param CategoryAttr ...$attributes
+     * @param I18nAttribute ...$attributes
      * @return Category
      */
-    public function setAttributes(CategoryAttr ...$attributes): Category
+    public function setAttributes(I18nAttribute ...$attributes): Category
     {
         $this->attributes = $attributes;
         
@@ -221,7 +221,7 @@ class Category extends DataModel
     }
     
     /**
-     * @return CategoryAttr[]
+     * @return I18nAttribute[]
      */
     public function getAttributes(): array
     {
