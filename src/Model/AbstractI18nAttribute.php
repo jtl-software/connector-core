@@ -39,6 +39,13 @@ abstract class AbstractI18nAttribute extends DataModel
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
+    /**
+     * @var AbstractI18n[]
+     * @Serializer\Type("array<jtl\Connector\Model\AbstractI18n>")
+     * @Serializer\SerializedName("i18ns")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $i18ns = [];
 
     /**
      * AbstractI18nAttribute constructor.
@@ -103,6 +110,46 @@ abstract class AbstractI18nAttribute extends DataModel
     public function getIsCustomProperty(): bool
     {
         return $this->isCustomProperty;
+    }
+
+    /**
+     * @return AbstractI18n[]
+     */
+    public function getI18ns(): array
+    {
+        return $this->i18ns;
+    }
+
+    /**
+     * @param AbstractI18n $i18n
+     * @return AbstractI18nAttribute
+     */
+    public function addI18n(AbstractI18n $i18n): AbstractI18nAttribute
+    {
+        $this->i18ns[] = $i18n;
+
+        return $this;
+    }
+
+    /**
+     * @return AbstractI18nAttribute
+     */
+    public function clearI18ns(): AbstractI18nAttribute
+    {
+        $this->i18ns = [];
+
+        return $this;
+    }
+
+    /**
+     * @param AbstractI18n ...$i18ns
+     * @return AbstractI18nAttribute
+     */
+    public function setI18ns(AbstractI18n ...$i18ns): AbstractI18nAttribute
+    {
+        $this->i18ns = $i18ns;
+
+        return $this;
     }
 
 }
