@@ -270,8 +270,8 @@ class Customer extends DataModel
     protected $zipCode = '';
     
     /**
-     * @var CustomerAttr[]
-     * @Serializer\Type("array<jtl\Connector\Model\CustomerAttr>")
+     * @var KeyValueAttribute[]
+     * @Serializer\Type("array<jtl\Connector\Model\KeyValueAttribute>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
@@ -880,10 +880,10 @@ class Customer extends DataModel
     }
     
     /**
-     * @param CustomerAttr $attribute
+     * @param KeyValueAttribute $attribute
      * @return Customer
      */
-    public function addAttribute(CustomerAttr $attribute): Customer
+    public function addAttribute(KeyValueAttribute $attribute): Customer
     {
         $this->attributes[] = $attribute;
         
@@ -891,10 +891,10 @@ class Customer extends DataModel
     }
 
     /**
-     * @param CustomerAttr ...$attributes
+     * @param KeyValueAttribute ...$attributes
      * @return Customer
      */
-    public function setAttributes(CustomerAttr ...$attributes): Customer
+    public function setAttributes(KeyValueAttribute ...$attributes): Customer
     {
         $this->attributes = $attributes;
         
@@ -902,7 +902,7 @@ class Customer extends DataModel
     }
     
     /**
-     * @return CustomerAttr[]
+     * @return KeyValueAttribute[]
      */
     public function getAttributes(): array
     {

@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CustomerOrderAttr extends AbstractKeyValueAttribute
+class CustomerOrderAttr extends KeyValueAttribute
 {
     /**
      * @var Identity Unique customerOrderAttr id

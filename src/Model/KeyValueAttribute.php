@@ -8,12 +8,12 @@ namespace jtl\Connector\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Class AbstractKeyValueAttribute
+ * Class KeyValueAttribute
  * @access public
  * @package jtl\Connector\Model\Customer
  * @Serializer\AccessType("public_method")
  */
-abstract class AbstractKeyValueAttribute extends DataModel
+class KeyValueAttribute extends DataModel
 {
     /**
      * @var string Attribute value
@@ -41,9 +41,9 @@ abstract class AbstractKeyValueAttribute extends DataModel
 
     /**
      * @param string $value Attribute value
-     * @return AbstractKeyValueAttribute
+     * @return KeyValueAttribute
      */
-    public function setValue(string $value): AbstractKeyValueAttribute
+    public function setValue(string $value): KeyValueAttribute
     {
         $this->value = $value;
 
@@ -60,9 +60,9 @@ abstract class AbstractKeyValueAttribute extends DataModel
 
     /**
      * @param string $key Attribute key
-     * @return AbstractKeyValueAttribute
+     * @return KeyValueAttribute
      */
-    public function setKey(string $key): AbstractKeyValueAttribute
+    public function setKey(string $key): KeyValueAttribute
     {
         $this->key = $key;
 
