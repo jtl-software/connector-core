@@ -256,10 +256,10 @@ class ProductVariationValue extends DataModel
     }
 
     /**
-     * @param ProductVariationValueExtraCharge $extraCharges
+     * @param ProductVariationValueExtraCharge ...$extraCharges
      * @return ProductVariationValue
      */
-    public function setExtraCharges(ProductVariationValueExtraCharge $extraCharges): ProductVariationValue
+    public function setExtraCharges(ProductVariationValueExtraCharge ...$extraCharges): ProductVariationValue
     {
         $this->extraCharges = $extraCharges;
         

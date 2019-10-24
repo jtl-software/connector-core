@@ -165,10 +165,10 @@ class CustomerGroup extends DataModel
     }
 
     /**
-     * @param CustomerGroupAttr $attributes
+     * @param CustomerGroupAttr ...$attributes
      * @return CustomerGroup
      */
-    public function setAttributes(CustomerGroupAttr $attributes): CustomerGroup
+    public function setAttributes(CustomerGroupAttr ...$attributes): CustomerGroup
     {
         $this->attributes = $attributes;
         
