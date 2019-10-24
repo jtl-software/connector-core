@@ -1,12 +1,12 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Compression
+ * @package Jtl\Connector\Core\Compression
  */
-namespace jtl\Connector\Compression;
+namespace Jtl\Connector\Core\Compression;
 
-use jtl\Connector\Exception\CompressionException;
-use jtl\Connector\Exception\NotImplementedException;
+use Jtl\Connector\Core\Exception\CompressionException;
+use Jtl\Connector\Core\Exception\NotImplementedException;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 /**

@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Ack
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 
@@ -13,7 +13,7 @@ use JMS\Serializer\Annotation as Serializer;
  * BoolResult
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Internal
  * @Serializer\AccessType("public_method")
  */

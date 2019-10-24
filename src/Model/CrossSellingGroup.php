@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  * Localized cross selling group. Can hold several crossSelling items that are linked for cross selling purposes.
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -22,7 +22,7 @@ class CrossSellingGroup extends DataModel
 {
     /**
      * @var Identity
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
@@ -30,7 +30,7 @@ class CrossSellingGroup extends DataModel
     
     /**
      * @var CrossSellingGroupI18n[]
-     * @Serializer\Type("array<jtl\Connector\Model\CrossSellingGroupI18n>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\CrossSellingGroupI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */

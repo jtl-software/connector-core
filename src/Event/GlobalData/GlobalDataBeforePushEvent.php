@@ -1,8 +1,8 @@
 <?php
-namespace jtl\Connector\Event\GlobalData;
+namespace Jtl\Connector\Core\Event\GlobalData;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\GlobalData;
+use Jtl\Connector\Core\Model\GlobalData;
 
 
 class GlobalDataBeforePushEvent extends Event

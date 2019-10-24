@@ -1,8 +1,8 @@
 <?php
-namespace jtl\Connector\Event\CrossSelling;
+namespace Jtl\Connector\Core\Event\CrossSelling;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\QueryFilter;
+use Jtl\Connector\Core\Model\QueryFilter;
 
 
 class CrossSellingBeforePullEvent extends Event

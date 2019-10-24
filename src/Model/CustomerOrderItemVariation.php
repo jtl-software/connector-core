@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  * customer order item variation
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -22,7 +22,7 @@ class CustomerOrderItemVariation extends DataModel
 {
     /**
      * @var Identity Reference to customerOrderItem
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerOrderItemId")
      * @Serializer\Accessor(getter="getCustomerOrderItemId",setter="setCustomerOrderItemId")
      */
@@ -30,7 +30,7 @@ class CustomerOrderItemVariation extends DataModel
     
     /**
      * @var Identity Unique customerOrderItemVariation id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
@@ -38,7 +38,7 @@ class CustomerOrderItemVariation extends DataModel
     
     /**
      * @var Identity Reference to productVariation
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productVariationId")
      * @Serializer\Accessor(getter="getProductVariationId",setter="setProductVariationId")
      */
@@ -46,7 +46,7 @@ class CustomerOrderItemVariation extends DataModel
     
     /**
      * @var Identity Reference to productVariationValue
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productVariationValueId")
      * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
      */

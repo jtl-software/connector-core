@@ -1,8 +1,8 @@
 <?php
-namespace jtl\Connector\Event\CustomerOrder;
+namespace Jtl\Connector\Core\Event\CustomerOrder;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\QueryFilter;
+use Jtl\Connector\Core\Model\QueryFilter;
 
 
 class CustomerOrderBeforeStatisticEvent extends Event

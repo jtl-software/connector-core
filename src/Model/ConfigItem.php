@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 
@@ -13,7 +13,7 @@ use JMS\Serializer\Annotation as Serializer;
  * A config Item that is displayed in a config Group. Config item can reference to a specific productId to inherit price, name and description.
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -21,7 +21,7 @@ class ConfigItem extends DataModel
 {
     /**
      * @var Identity Reference to configGroup
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("configGroupId")
      * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
      */
@@ -29,7 +29,7 @@ class ConfigItem extends DataModel
     
     /**
      * @var Identity Unique configItem id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
@@ -37,7 +37,7 @@ class ConfigItem extends DataModel
     
     /**
      * @var Identity Optional reference to product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
@@ -141,7 +141,7 @@ class ConfigItem extends DataModel
     
     /**
      * @var ConfigItemI18n[]
-     * @Serializer\Type("array<jtl\Connector\Model\ConfigItemI18n>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ConfigItemI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
@@ -149,7 +149,7 @@ class ConfigItem extends DataModel
     
     /**
      * @var ConfigItemPrice[]
-     * @Serializer\Type("array<jtl\Connector\Model\ConfigItemPrice>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ConfigItemPrice>")
      * @Serializer\SerializedName("prices")
      * @Serializer\AccessType("reflection")
      */

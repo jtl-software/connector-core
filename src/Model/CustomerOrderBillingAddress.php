@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  * Billing address of a customer (order)
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -22,7 +22,7 @@ class CustomerOrderBillingAddress extends DataModel
 {
     /**
      * @var Identity Reference to customer
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerId")
      * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
      */
@@ -30,7 +30,7 @@ class CustomerOrderBillingAddress extends DataModel
     
     /**
      * @var Identity Unique customerOrderBillingAddress id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */

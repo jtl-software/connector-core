@@ -1,18 +1,18 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Internal
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use DateTime;
 use InvalidArgumentException;
-use jtl\Connector\Exception\NotImplementedException;
+use Jtl\Connector\Core\Exception\NotImplementedException;
 use JMS\Serializer\Annotation as Serializer;
-use jtl\Connector\Model\Model;
-use jtl\Connector\Type\DataType;
+use Jtl\Connector\Core\Model\Model;
+use Jtl\Connector\Core\Type\DataType;
 use ReflectionClass;
 use ReflectionException;
 use stdClass;
@@ -21,7 +21,7 @@ use stdClass;
  * Entity data model
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Internal
  * @Serializer\AccessType("public_method")
  */
@@ -29,7 +29,7 @@ abstract class DataModel extends Model
 {
     /**
      * @var DataType
-     * @Serializer\Type("jtl\Connector\Type\DataType")
+     * @Serializer\Type("Jtl\Connector\Core\Type\DataType")
      * @Serializer\AccessType("reflection")
      * @Serializer\Exclude
      */
@@ -251,7 +251,7 @@ abstract class DataModel extends Model
                 return ($value instanceof DateTime);
             default:
                 if (is_object($value)) {
-                    return is_null($value) || is_subclass_of($value, 'jtl\Connector\Model\DataModel');
+                    return is_null($value) || is_subclass_of($value, 'Jtl\Connector\Core\Model\DataModel');
                 }
                 
                 throw new InvalidArgumentException(sprintf("type '%s' validator not found", $type));

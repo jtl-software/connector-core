@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  * Localized product attribute.
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -22,7 +22,7 @@ class ProductAttr extends AbstractI18nAttribute
 {
     /**
      * @var Identity
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
@@ -30,7 +30,7 @@ class ProductAttr extends AbstractI18nAttribute
 
     /**
      * @var ProductAttrI18n[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductAttrI18n>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductAttrI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */

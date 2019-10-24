@@ -1,8 +1,8 @@
 <?php
-namespace jtl\Connector\Event\ProductStockLevel;
+namespace Jtl\Connector\Core\Event\ProductStockLevel;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\ProductStockLevel;
+use Jtl\Connector\Core\Model\ProductStockLevel;
 
 
 class ProductStockLevelAfterPushEvent extends Event

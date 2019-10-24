@@ -1,12 +1,12 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Rpc
+ * @package Jtl\Connector\Core\Rpc
  */
 
-namespace jtl\Connector\Rpc;
+namespace Jtl\Connector\Core\Rpc;
 
-use jtl\Connector\Utilities\RpcMethod;
+use Jtl\Connector\Core\Utilities\RpcMethod;
 
 class Method
 {
@@ -108,7 +108,7 @@ class Method
      * Method Setter
      *
      * @param string $rpcmethod
-     * @return \jtl\Connector\Rpc\Method
+     * @return \Jtl\Connector\Core\Rpc\Method
      */
     public function setRpcMethod($rpcmethod)
     {
@@ -120,7 +120,7 @@ class Method
      * Controller Setter
      *
      * @param string $controller
-     * @return \jtl\Connector\Rpc\Method
+     * @return \Jtl\Connector\Core\Rpc\Method
      */
     public function setController($controller)
     {
@@ -132,7 +132,7 @@ class Method
      * Action Setter
      *
      * @param string $action
-     * @return \jtl\Connector\Rpc\Method
+     * @return \Jtl\Connector\Core\Rpc\Method
      */
     public function setAction($action)
     {

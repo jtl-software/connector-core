@@ -1,16 +1,16 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  */
 
-namespace jtl\Connector\Type;
+namespace Jtl\Connector\Core\Type;
 
 /**
  * Entity data model
  *
  * @access public
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 class PropertyInfo
 {

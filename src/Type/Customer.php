@@ -1,16 +1,16 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 
-namespace jtl\Connector\Type;
+namespace Jtl\Connector\Core\Type;
 
-use \jtl\Connector\Type\PropertyInfo;
+use \Jtl\Connector\Core\Type\PropertyInfo;
 
 /**
  * @access public
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 class Customer extends DataType
 {
@@ -48,7 +48,7 @@ class Customer extends DataType
             new PropertyInfo('vatNumber', 'string', '', false, false, false),
             new PropertyInfo('websiteUrl', 'string', '', false, false, false),
             new PropertyInfo('zipCode', 'string', '', false, false, false),
-            new PropertyInfo('attributes', '\jtl\Connector\Model\CustomerAttr', null, false, false, true),
+            new PropertyInfo('attributes', '\Jtl\Connector\Core\Model\CustomerAttr', null, false, false, true),
         );
     }
 

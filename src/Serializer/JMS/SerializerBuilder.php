@@ -1,9 +1,9 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Serializer\Handler
+ * @package Jtl\Connector\Core\Serializer\Handler
  */
-namespace jtl\Connector\Serializer\JMS;
+namespace Jtl\Connector\Core\Serializer\JMS;
 
 class SerializerBuilder
 {
@@ -12,7 +12,7 @@ class SerializerBuilder
         return \JMS\Serializer\SerializerBuilder::create()
                 ->addDefaultHandlers()
                 ->configureHandlers(function (\JMS\Serializer\Handler\HandlerRegistry $registry) {
-                    $registry->registerSubscribingHandler(new \jtl\Connector\Serializer\Handler\IdentityHandler());
+                    $registry->registerSubscribingHandler(new \Jtl\Connector\Core\Serializer\Handler\IdentityHandler());
                 })
                 ->build();
     }

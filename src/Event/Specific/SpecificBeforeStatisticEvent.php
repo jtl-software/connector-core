@@ -1,8 +1,8 @@
 <?php
-namespace jtl\Connector\Event\Specific;
+namespace Jtl\Connector\Core\Event\Specific;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\QueryFilter;
+use Jtl\Connector\Core\Model\QueryFilter;
 
 
 class SpecificBeforeStatisticEvent extends Event

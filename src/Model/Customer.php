@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use DateTime;
 use InvalidArgumentException;
@@ -15,7 +15,7 @@ use JMS\Serializer\Annotation as Serializer;
  * Customer address data and preference properties.
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -23,7 +23,7 @@ class Customer extends DataModel
 {
     /**
      * @var Identity References a customer group
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
@@ -31,7 +31,7 @@ class Customer extends DataModel
     
     /**
      * @var Identity Unique customer id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
@@ -271,7 +271,7 @@ class Customer extends DataModel
     
     /**
      * @var CustomerAttr[]
-     * @Serializer\Type("array<jtl\Connector\Model\CustomerAttr>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\CustomerAttr>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */

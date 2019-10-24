@@ -1,8 +1,8 @@
 <?php
-namespace jtl\Connector\Event\ProductPrice;
+namespace Jtl\Connector\Core\Event\ProductPrice;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\QueryFilter;
+use Jtl\Connector\Core\Model\QueryFilter;
 
 
 class ProductPriceBeforePullEvent extends Event

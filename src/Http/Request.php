@@ -1,14 +1,14 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Http
+ * @package Jtl\Connector\Core\Http
  */
-namespace jtl\Connector\Http;
+namespace Jtl\Connector\Core\Http;
 
-use jtl\Connector\Compression\Gzip;
-use jtl\Connector\Exception\CompressionException;
-use jtl\Connector\Exception\HttpException;
-use jtl\Connector\IO\Temp;
+use Jtl\Connector\Core\Compression\Gzip;
+use Jtl\Connector\Core\Exception\CompressionException;
+use Jtl\Connector\Core\Exception\HttpException;
+use Jtl\Connector\Core\IO\Temp;
 
 /**
  * Http Request Handler
@@ -24,7 +24,7 @@ class Request
      * @param string $method
      * @param string $root
      * @return Ambiguous <NULL, string>
-     * @throws \jtl\Connector\Exception\HttpException
+     * @throws \Jtl\Connector\Core\Exception\HttpException
      */
     public static function get($method = "post", $root = "jtlrpc")
     {

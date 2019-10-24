@@ -3,7 +3,7 @@
  * @author    Patryk Gorol <patryk.gorol@jtl-software.com>
  * @copyright 2010-2019 JTL-Software GmbH
  */
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 
@@ -11,7 +11,7 @@ use JMS\Serializer\Annotation as Serializer;
  * AbstractI18nAttribute class
  *
  * @access public
- * @package jtl\Connector\Model\Common
+ * @package Jtl\Connector\Core\Model\Common
  * @Serializer\AccessType("public_method")
  */
 abstract class AbstractI18nAttribute extends DataModel
@@ -34,7 +34,7 @@ abstract class AbstractI18nAttribute extends DataModel
 
     /**
      * @var Identity
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */

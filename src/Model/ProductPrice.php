@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  * Product price properties.
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -22,7 +22,7 @@ class ProductPrice extends DataModel
 {
     /**
      * @var Identity Reference to customerGroup
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
@@ -30,7 +30,7 @@ class ProductPrice extends DataModel
     
     /**
      * @var Identity Reference to customer
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerId")
      * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
      */
@@ -38,7 +38,7 @@ class ProductPrice extends DataModel
     
     /**
      * @var Identity Unique ProductPrice id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
@@ -46,7 +46,7 @@ class ProductPrice extends DataModel
     
     /**
      * @var Identity Reference to product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
@@ -54,7 +54,7 @@ class ProductPrice extends DataModel
     
     /**
      * @var ProductPriceItem[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductPriceItem>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductPriceItem>")
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
      */

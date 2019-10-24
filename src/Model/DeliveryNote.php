@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use DateTime;
 use InvalidArgumentException;
@@ -15,7 +15,7 @@ use JMS\Serializer\Annotation as Serializer;
  * A delivery note created for shipment.
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -23,7 +23,7 @@ class DeliveryNote extends DataModel
 {
     /**
      * @var Identity Reference to customerOrder
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerOrderId")
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
      */
@@ -31,7 +31,7 @@ class DeliveryNote extends DataModel
     
     /**
      * @var Identity Unique deliveryNote id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
@@ -63,7 +63,7 @@ class DeliveryNote extends DataModel
     
     /**
      * @var DeliveryNoteItem[]
-     * @Serializer\Type("array<jtl\Connector\Model\DeliveryNoteItem>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\DeliveryNoteItem>")
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
      */
@@ -71,7 +71,7 @@ class DeliveryNote extends DataModel
     
     /**
      * @var DeliveryNoteTrackingList[]
-     * @Serializer\Type("array<jtl\Connector\Model\DeliveryNoteTrackingList>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\DeliveryNoteTrackingList>")
      * @Serializer\SerializedName("trackingLists")
      * @Serializer\AccessType("reflection")
      */

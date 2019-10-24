@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  * ProductVariation Model. Each product defines its own variations, that means  variations are not global  in contrast to specifics.
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -47,7 +47,7 @@ class ProductVariation extends DataModel
     
     /**
      * @var Identity Unique productVariation id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
@@ -55,7 +55,7 @@ class ProductVariation extends DataModel
     
     /**
      * @var Identity Reference to product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
@@ -79,7 +79,7 @@ class ProductVariation extends DataModel
     
     /**
      * @var ProductVariationI18n[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductVariationI18n>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductVariationI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
@@ -87,7 +87,7 @@ class ProductVariation extends DataModel
     
     /**
      * @var ProductVariationInvisibility[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductVariationInvisibility>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductVariationInvisibility>")
      * @Serializer\SerializedName("invisibilities")
      * @Serializer\AccessType("reflection")
      */
@@ -95,7 +95,7 @@ class ProductVariation extends DataModel
     
     /**
      * @var ProductVariationValue[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductVariationValue>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductVariationValue>")
      * @Serializer\SerializedName("values")
      * @Serializer\AccessType("reflection")
      */

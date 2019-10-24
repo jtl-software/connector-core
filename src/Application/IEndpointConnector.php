@@ -1,16 +1,16 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Application
+ * @package Jtl\Connector\Core\Application
  */
-namespace jtl\Connector\Application;
+namespace Jtl\Connector\Core\Application;
 
-use jtl\Connector\Controller\IController;
-use \jtl\Connector\Rpc\RequestPacket;
-use \jtl\Connector\Mapper\IPrimaryKeyMapper;
-use \jtl\Connector\Authentication\ITokenLoader;
-use \jtl\Connector\Checksum\IChecksumLoader;
-use jtl\Connector\Result\Action;
+use Jtl\Connector\Core\Controller\IController;
+use \Jtl\Connector\Core\Rpc\RequestPacket;
+use \Jtl\Connector\Core\Mapper\IPrimaryKeyMapper;
+use \Jtl\Connector\Core\Authentication\ITokenLoader;
+use \Jtl\Connector\Core\Checksum\IChecksumLoader;
+use Jtl\Connector\Core\Result\Action;
 
 /**
  * @access public
@@ -66,7 +66,7 @@ interface IEndpointConnector
     /**
      * Controller handle
      *
-     * @param \jtl\Connector\Rpc\RequestPacket $requestpacket
+     * @param \Jtl\Connector\Core\Rpc\RequestPacket $requestpacket
      */
     public function handle(RequestPacket $requestpacket): Action;
     

@@ -3,10 +3,10 @@
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\System
+ * @package Jtl\Connector\Core\System
  */
 
-namespace jtl\Connector\System;
+namespace Jtl\Connector\Core\System;
 
 /**
  * Filesystem tool class.

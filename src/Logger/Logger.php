@@ -1,9 +1,9 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector
+ * @package Jtl\Connector\Core
  */
-namespace jtl\Connector\Logger;
+namespace Jtl\Connector\Core\Logger;
 
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;

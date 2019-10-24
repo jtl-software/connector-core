@@ -1,8 +1,8 @@
 <?php
-use \jtl\Connector\Application\Application;
+use \Jtl\Connector\Core\Application\Application;
 
 /**
- * @return \jtl\Connector\Application\Application
+ * @return \Jtl\Connector\Core\Application\Application
  */
 function Application()
 {

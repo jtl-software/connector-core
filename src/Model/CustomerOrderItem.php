@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  * Order item in customer order.
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -47,7 +47,7 @@ class CustomerOrderItem extends DataModel
     
     /**
      * @var Identity Optional reference to configItemId (if item is part of a configurable item)
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("configItemId")
      * @Serializer\Accessor(getter="getConfigItemId",setter="setConfigItemId")
      */
@@ -55,7 +55,7 @@ class CustomerOrderItem extends DataModel
     
     /**
      * @var Identity Reference to customerOrder
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerOrderId")
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
      */
@@ -63,7 +63,7 @@ class CustomerOrderItem extends DataModel
     
     /**
      * @var Identity Unique customerOrderItem id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
@@ -71,7 +71,7 @@ class CustomerOrderItem extends DataModel
     
     /**
      * @var Identity Reference to product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
@@ -151,7 +151,7 @@ class CustomerOrderItem extends DataModel
     
     /**
      * @var CustomerOrderItemVariation[]
-     * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderItemVariation>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\CustomerOrderItemVariation>")
      * @Serializer\SerializedName("variations")
      * @Serializer\AccessType("reflection")
      */

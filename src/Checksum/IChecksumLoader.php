@@ -1,10 +1,10 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Application
+ * @package Jtl\Connector\Core\Application
  */
 
-namespace jtl\Connector\Checksum;
+namespace Jtl\Connector\Core\Checksum;
 
 interface IChecksumLoader
 {

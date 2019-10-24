@@ -1,16 +1,16 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Serializer\Handler
+ * @package Jtl\Connector\Core\Serializer\Handler
  */
-namespace jtl\Connector\Serializer\Handler;
+namespace Jtl\Connector\Core\Serializer\Handler;
 
 use JMS\Serializer\Handler\SubscribingHandlerInterface;
 use JMS\Serializer\GraphNavigator;
 use JMS\Serializer\JsonDeserializationVisitor;
 use JMS\Serializer\Context;
-use jtl\Connector\Rpc\JsonString;
-use jtl\Connector\Serializer\Json;
+use Jtl\Connector\Core\Rpc\JsonString;
+use Jtl\Connector\Core\Serializer\Json;
 
 /**
  * JMS JsonString Subscribing Handler

@@ -1,16 +1,16 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 
-namespace jtl\Connector\Type;
+namespace Jtl\Connector\Core\Type;
 
-use \jtl\Connector\Type\PropertyInfo;
+use \Jtl\Connector\Core\Type\PropertyInfo;
 
 /**
  * @access public
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 class ConfigItem extends DataType
 {
@@ -32,8 +32,8 @@ class ConfigItem extends DataType
             new PropertyInfo('showSurcharge', 'boolean', false, false, false, false),
             new PropertyInfo('sort', 'integer', 0, false, false, false),
             new PropertyInfo('type', 'integer', 0, false, false, false),
-            new PropertyInfo('i18ns', '\jtl\Connector\Model\ConfigItemI18n', null, false, false, true),
-            new PropertyInfo('prices', '\jtl\Connector\Model\ConfigItemPrice', null, false, false, true),
+            new PropertyInfo('i18ns', '\Jtl\Connector\Core\Model\ConfigItemI18n', null, false, false, true),
+            new PropertyInfo('prices', '\Jtl\Connector\Core\Model\ConfigItemPrice', null, false, false, true),
         );
     }
 

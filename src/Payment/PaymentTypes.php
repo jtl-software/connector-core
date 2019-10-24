@@ -1,9 +1,9 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Payment
+ * @package Jtl\Connector\Core\Payment
  */
-namespace jtl\Connector\Payment;
+namespace Jtl\Connector\Core\Payment;
 
 class PaymentTypes
 {

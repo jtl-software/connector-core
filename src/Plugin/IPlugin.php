@@ -1,5 +1,5 @@
 <?php
-namespace jtl\Connector\Plugin;
+namespace Jtl\Connector\Core\Plugin;
 
 use Symfony\Component\EventDispatcher\EventDispatcher;
 

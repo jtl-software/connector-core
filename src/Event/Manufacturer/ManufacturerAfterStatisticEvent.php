@@ -1,8 +1,8 @@
 <?php
-namespace jtl\Connector\Event\Manufacturer;
+namespace Jtl\Connector\Core\Event\Manufacturer;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\Statistic;
+use Jtl\Connector\Core\Model\Statistic;
 
 
 class ManufacturerAfterStatisticEvent extends Event

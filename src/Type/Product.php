@@ -1,16 +1,16 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 
-namespace jtl\Connector\Type;
+namespace Jtl\Connector\Core\Type;
 
-use \jtl\Connector\Type\PropertyInfo;
+use \Jtl\Connector\Core\Type\PropertyInfo;
 
 /**
  * @access public
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 class Product extends DataType
 {
@@ -53,7 +53,7 @@ class Product extends DataType
             new PropertyInfo('keywords', 'string', '', false, false, false),
             new PropertyInfo('length', 'double', 0.0, false, false, false),
             new PropertyInfo('manufacturerNumber', 'string', '', false, false, false),
-            new PropertyInfo('manufacturer', '\jtl\Connector\Model\Manufacturer', null, false, false, true),
+            new PropertyInfo('manufacturer', '\Jtl\Connector\Core\Model\Manufacturer', null, false, false, true),
             new PropertyInfo('measurementQuantity', 'double', 0.0, false, false, false),
             new PropertyInfo('measurementUnitCode', 'string', '', false, false, false),
             new PropertyInfo('minBestBeforeDate', 'DateTime', null, false, false, false),
@@ -74,7 +74,7 @@ class Product extends DataType
             new PropertyInfo('shippingWeight', 'double', 0.0, false, false, false),
             new PropertyInfo('sku', 'string', '', false, false, false),
             new PropertyInfo('sort', 'integer', 0, false, false, false),
-            new PropertyInfo('stockLevel', '\jtl\Connector\Model\ProductStockLevel', null, false, false, true),
+            new PropertyInfo('stockLevel', '\Jtl\Connector\Core\Model\ProductStockLevel', null, false, false, true),
             new PropertyInfo('supplierDeliveryTime', 'integer', 0, false, false, false),
             new PropertyInfo('supplierStockLevel', 'double', 0.0, false, false, false),
             new PropertyInfo('taric', 'string', '', false, false, false),
@@ -82,22 +82,22 @@ class Product extends DataType
             new PropertyInfo('upc', 'string', '', false, false, false),
             new PropertyInfo('vat', 'double', 0.0, false, false, false),
             new PropertyInfo('width', 'double', 0.0, false, false, false),
-            new PropertyInfo('attributes', '\jtl\Connector\Model\ProductAttr', null, false, false, true),
-            new PropertyInfo('categories', '\jtl\Connector\Model\Product2Category', null, false, false, true),
-            new PropertyInfo('checksums', '\jtl\Connector\Model\ProductChecksum', null, false, false, true),
-            new PropertyInfo('configGroups', '\jtl\Connector\Model\ProductConfigGroup', null, false, false, true),
-            new PropertyInfo('customerGroupPackagingQuantities', '\jtl\Connector\Model\CustomerGroupPackagingQuantity', null, false, false, true),
-            new PropertyInfo('fileDownloads', '\jtl\Connector\Model\ProductFileDownload', null, false, false, true),
-            new PropertyInfo('i18ns', '\jtl\Connector\Model\ProductI18n', null, false, false, true),
-            new PropertyInfo('invisibilities', '\jtl\Connector\Model\ProductInvisibility', null, false, false, true),
-            new PropertyInfo('mediaFiles', '\jtl\Connector\Model\ProductMediaFile', null, false, false, true),
-            new PropertyInfo('partsLists', '\jtl\Connector\Model\ProductPartsList', null, false, false, true),
-            new PropertyInfo('prices', '\jtl\Connector\Model\ProductPrice', null, false, false, true),
-            new PropertyInfo('specialPrices', '\jtl\Connector\Model\ProductSpecialPrice', null, false, false, true),
-            new PropertyInfo('specifics', '\jtl\Connector\Model\ProductSpecific', null, false, false, true),
-            new PropertyInfo('varCombinations', '\jtl\Connector\Model\ProductVarCombination', null, false, false, true),
-            new PropertyInfo('variations', '\jtl\Connector\Model\ProductVariation', null, false, false, true),
-            new PropertyInfo('warehouseInfo', '\jtl\Connector\Model\ProductWarehouseInfo', null, false, false, true),
+            new PropertyInfo('attributes', '\Jtl\Connector\Core\Model\ProductAttr', null, false, false, true),
+            new PropertyInfo('categories', '\Jtl\Connector\Core\Model\Product2Category', null, false, false, true),
+            new PropertyInfo('checksums', '\Jtl\Connector\Core\Model\ProductChecksum', null, false, false, true),
+            new PropertyInfo('configGroups', '\Jtl\Connector\Core\Model\ProductConfigGroup', null, false, false, true),
+            new PropertyInfo('customerGroupPackagingQuantities', '\Jtl\Connector\Core\Model\CustomerGroupPackagingQuantity', null, false, false, true),
+            new PropertyInfo('fileDownloads', '\Jtl\Connector\Core\Model\ProductFileDownload', null, false, false, true),
+            new PropertyInfo('i18ns', '\Jtl\Connector\Core\Model\ProductI18n', null, false, false, true),
+            new PropertyInfo('invisibilities', '\Jtl\Connector\Core\Model\ProductInvisibility', null, false, false, true),
+            new PropertyInfo('mediaFiles', '\Jtl\Connector\Core\Model\ProductMediaFile', null, false, false, true),
+            new PropertyInfo('partsLists', '\Jtl\Connector\Core\Model\ProductPartsList', null, false, false, true),
+            new PropertyInfo('prices', '\Jtl\Connector\Core\Model\ProductPrice', null, false, false, true),
+            new PropertyInfo('specialPrices', '\Jtl\Connector\Core\Model\ProductSpecialPrice', null, false, false, true),
+            new PropertyInfo('specifics', '\Jtl\Connector\Core\Model\ProductSpecific', null, false, false, true),
+            new PropertyInfo('varCombinations', '\Jtl\Connector\Core\Model\ProductVarCombination', null, false, false, true),
+            new PropertyInfo('variations', '\Jtl\Connector\Core\Model\ProductVariation', null, false, false, true),
+            new PropertyInfo('warehouseInfo', '\Jtl\Connector\Core\Model\ProductWarehouseInfo', null, false, false, true),
         );
     }
 

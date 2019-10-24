@@ -1,16 +1,16 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 
-namespace jtl\Connector\Type;
+namespace Jtl\Connector\Core\Type;
 
-use \jtl\Connector\Type\PropertyInfo;
+use \Jtl\Connector\Core\Type\PropertyInfo;
 
 /**
  * @access public
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 class ConnectorIdentification extends DataType
 {
@@ -21,7 +21,7 @@ class ConnectorIdentification extends DataType
             new PropertyInfo('platformName', 'string', '', false, false, false),
             new PropertyInfo('platformVersion', 'string', '', false, false, false),
             new PropertyInfo('protocolVersion', 'integer', '', false, false, false),
-            new PropertyInfo('serverInfo', '\jtl\Connector\Model\CrossSellingItem', null, false, false, false),
+            new PropertyInfo('serverInfo', '\Jtl\Connector\Core\Model\CrossSellingItem', null, false, false, false),
         );
     }
 

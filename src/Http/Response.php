@@ -2,13 +2,13 @@
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Http
+ * @package Jtl\Connector\Core\Http
  */
-namespace jtl\Connector\Http;
+namespace Jtl\Connector\Core\Http;
 
-use jtl\Connector\Rpc\ResponsePacket;
-use jtl\Connector\Serializer\Json;
-use jtl\Connector\Logger\Logger;
+use Jtl\Connector\Core\Rpc\ResponsePacket;
+use Jtl\Connector\Core\Serializer\Json;
+use Jtl\Connector\Core\Logger\Logger;
 
 /**
  * Http Response Handler

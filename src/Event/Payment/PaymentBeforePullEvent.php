@@ -1,8 +1,8 @@
 <?php
-namespace jtl\Connector\Event\Payment;
+namespace Jtl\Connector\Core\Event\Payment;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\QueryFilter;
+use Jtl\Connector\Core\Model\QueryFilter;
 
 
 class PaymentBeforePullEvent extends Event

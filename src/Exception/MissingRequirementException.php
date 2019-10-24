@@ -1,9 +1,9 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Exception
+ * @package Jtl\Connector\Core\Exception
  */
-namespace jtl\Connector\Exception;
+namespace Jtl\Connector\Core\Exception;
 
 class MissingRequirementException extends \Exception
 {

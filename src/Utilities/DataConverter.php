@@ -1,10 +1,10 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Utilities
+ * @package Jtl\Connector\Core\Core\Utilities
  */
 
-namespace jtl\Connector\Utilities;
+namespace Jtl\Connector\Core\Core\Utilities;
 
 final class DataConverter
 {
@@ -59,6 +59,3 @@ final class DataConverter
             }
             
             return $arr;
-        }
-    }
-}

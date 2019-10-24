@@ -1,8 +1,8 @@
 <?php
-namespace jtl\Connector\Event\Product;
+namespace Jtl\Connector\Core\Event\Product;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\Product;
+use Jtl\Connector\Core\Model\Product;
 
 
 class ProductAfterPushEvent extends Event

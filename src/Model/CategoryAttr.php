@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  * Localized category attribute
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -22,7 +22,7 @@ class CategoryAttr extends AbstractI18nAttribute
 {
     /**
      * @var Identity Reference to category
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("categoryId")
      * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
      */
@@ -30,7 +30,7 @@ class CategoryAttr extends AbstractI18nAttribute
 
     /**
      * @var CategoryAttrI18n[]
-     * @Serializer\Type("array<jtl\Connector\Model\CategoryAttrI18n>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\CategoryAttrI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */

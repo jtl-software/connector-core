@@ -1,9 +1,9 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Compression
+ * @package Jtl\Connector\Core\Compression
  */
-namespace jtl\Connector\IO;
+namespace Jtl\Connector\Core\IO;
 
 class Temp
 {

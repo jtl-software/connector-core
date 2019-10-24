@@ -1,16 +1,16 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Linker
+ * @package Jtl\Connector\Core\Linker
  */
-namespace jtl\Connector\Linker;
+namespace Jtl\Connector\Core\Linker;
 
-use jtl\Connector\Mapper\IPrimaryKeyMapper;
-use jtl\Connector\Model\DataModel;
-use jtl\Connector\Exception\LinkerException;
-use jtl\Connector\Model\Identity;
-use jtl\Connector\Logger\Logger;
-use jtl\Connector\Drawing\ImageRelationType;
+use Jtl\Connector\Core\Mapper\IPrimaryKeyMapper;
+use Jtl\Connector\Core\Model\DataModel;
+use Jtl\Connector\Core\Exception\LinkerException;
+use Jtl\Connector\Core\Model\Identity;
+use Jtl\Connector\Core\Logger\Logger;
+use Jtl\Connector\Core\Drawing\ImageRelationType;
 
 /**
  * Identity Connector Linker
@@ -346,7 +346,7 @@ class IdentityLinker
      * Singleton
      *
      * @param boolean $useCache
-     * @return \jtl\Connector\Linker\IdentityLinker
+     * @return \Jtl\Connector\Core\Linker\IdentityLinker
      */
     public static function getInstance($useCache = true)
     {
@@ -373,7 +373,7 @@ class IdentityLinker
      * Constructor
      *
      * @param boolean $useCache
-     * @return \jtl\Connector\Linker\IdentityLinker
+     * @return \Jtl\Connector\Core\Linker\IdentityLinker
      */
     public function useCache($useCache)
     {
@@ -393,9 +393,9 @@ class IdentityLinker
     /**
      * Database setter
      *
-     * @param \jtl\Connector\Model\DataModel $model
+     * @param \Jtl\Connector\Core\Model\DataModel $model
      * @param bool $isDeleted
-     * @throws \jtl\Connector\Exception\LinkerException
+     * @throws \Jtl\Connector\Core\Exception\LinkerException
      */
     public function linkModel(DataModel &$model, $isDeleted = false)
     {
@@ -480,11 +480,11 @@ class IdentityLinker
     /**
      * Linker for identity lists
      *
-     * @param \jtl\Connector\Model\Identity $identity
+     * @param \Jtl\Connector\Core\Model\Identity $identity
      * @param string $modelName
      * @param string $property
      * @param bool $isDeleted
-     * @throws \jtl\Connector\Exception\LinkerException
+     * @throws \Jtl\Connector\Core\Exception\LinkerException
      */
     public function linkIdentityList(Identity &$identity, $modelName, $property, $isDeleted = false)
     {
@@ -517,7 +517,7 @@ class IdentityLinker
      * @param string $modelName
      * @param string $property
      * @return int
-     * @throws \jtl\Connector\Exception\LinkerException
+     * @throws \Jtl\Connector\Core\Exception\LinkerException
      */
     public function getType($modelName, $property = null)
     {
@@ -585,7 +585,7 @@ class IdentityLinker
      *
      * @param int $type
      * @return string
-     * @throws \jtl\Connector\Exception\LinkerException
+     * @throws \Jtl\Connector\Core\Exception\LinkerException
      */
     public function getModelName($type)
     {
@@ -606,7 +606,7 @@ class IdentityLinker
      * @param string $property
      * @param boolean $validate
      * @return boolean
-     * @throws \jtl\Connector\Exception\LinkerException
+     * @throws \Jtl\Connector\Core\Exception\LinkerException
      */
     public function exists($endpointId = null, $hostId = null, $modelName, $property, $validate = false)
     {
@@ -664,7 +664,7 @@ class IdentityLinker
      * @param string $modelName
      * @param string $property
      * @return boolean
-     * @throws \jtl\Connector\Exception\LinkerException
+     * @throws \Jtl\Connector\Core\Exception\LinkerException
      */
     public function save($endpointId, $hostId, $modelName, $property = null)
     {

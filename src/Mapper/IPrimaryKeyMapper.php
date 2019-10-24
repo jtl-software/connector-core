@@ -1,9 +1,9 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Mapper
+ * @package Jtl\Connector\Core\Mapper
  */
-namespace jtl\Connector\Mapper;
+namespace Jtl\Connector\Core\Mapper;
 
 interface IPrimaryKeyMapper
 {

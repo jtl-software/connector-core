@@ -1,12 +1,12 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Controller
+ * @package Jtl\Connector\Core\Controller
  */
-namespace jtl\Connector\Controller;
+namespace Jtl\Connector\Core\Controller;
 
-use jtl\Connector\Model\QueryFilter;
-use jtl\Connector\Model\DataModel;
+use Jtl\Connector\Core\Model\QueryFilter;
+use Jtl\Connector\Core\Model\DataModel;
 
 /**
  * Controller Interface
@@ -16,32 +16,32 @@ interface IController
     /**
      * Insert or update
      *
-     * @param \jtl\Connector\Model\DataModel $model
-     * @return \jtl\Connector\Result\Action
+     * @param \Jtl\Connector\Core\Model\DataModel $model
+     * @return \Jtl\Connector\Core\Result\Action
      */
     public function push(DataModel $model);
     
     /**
      * Select
      *
-     * @param \jtl\Connector\Model\QueryFilter $queryFilter
-     * @return \jtl\Connector\Result\Action
+     * @param \Jtl\Connector\Core\Model\QueryFilter $queryFilter
+     * @return \Jtl\Connector\Core\Result\Action
      */
     public function pull(QueryFilter $queryFilter);
 
     /**
      * Delete
      *
-     * @param \jtl\Connector\Model\DataModel $model
-     * @return \jtl\Connector\Result\Action
+     * @param \Jtl\Connector\Core\Model\DataModel $model
+     * @return \Jtl\Connector\Core\Result\Action
      */
     public function delete(DataModel $model);
 
     /**
      * Statistic
      *
-     * @param \jtl\Connector\Model\QueryFilter $queryFilter
-     * @return \jtl\Connector\Result\Action
+     * @param \Jtl\Connector\Core\Model\QueryFilter $queryFilter
+     * @return \Jtl\Connector\Core\Result\Action
      */
     public function statistic(QueryFilter $queryFilter);
 }

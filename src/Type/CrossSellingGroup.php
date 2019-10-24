@@ -1,16 +1,16 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 
-namespace jtl\Connector\Type;
+namespace Jtl\Connector\Core\Type;
 
-use \jtl\Connector\Type\PropertyInfo;
+use \Jtl\Connector\Core\Type\PropertyInfo;
 
 /**
  * @access public
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 class CrossSellingGroup extends DataType
 {
@@ -18,7 +18,7 @@ class CrossSellingGroup extends DataType
     {
         return array(
             new PropertyInfo('id', 'Identity', null, false, true, false),
-            new PropertyInfo('i18ns', '\jtl\Connector\Model\CrossSellingGroupI18n', null, false, false, true),
+            new PropertyInfo('i18ns', '\Jtl\Connector\Core\Model\CrossSellingGroupI18n', null, false, false, true),
         );
     }
 

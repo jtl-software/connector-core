@@ -1,8 +1,8 @@
 <?php
-namespace jtl\Connector\Event\DeliveryNote;
+namespace Jtl\Connector\Core\Event\DeliveryNote;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\QueryFilter;
+use Jtl\Connector\Core\Model\QueryFilter;
 
 
 class DeliveryNoteBeforePullEvent extends Event

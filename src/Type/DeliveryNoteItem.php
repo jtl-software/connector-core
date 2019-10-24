@@ -1,16 +1,16 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 
-namespace jtl\Connector\Type;
+namespace Jtl\Connector\Core\Type;
 
-use \jtl\Connector\Type\PropertyInfo;
+use \Jtl\Connector\Core\Type\PropertyInfo;
 
 /**
  * @access public
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 class DeliveryNoteItem extends DataType
 {
@@ -22,7 +22,7 @@ class DeliveryNoteItem extends DataType
             new PropertyInfo('productId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('quantity', 'double', 0.0, false, false, false),
-            new PropertyInfo('info', '\jtl\Connector\Model\DeliveryNoteItemInfo', null, false, false, true),
+            new PropertyInfo('info', '\Jtl\Connector\Core\Model\DeliveryNoteItemInfo', null, false, false, true),
         );
     }
 

@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  * Media file model.
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -22,7 +22,7 @@ class ProductMediaFile extends DataModel
 {
     /**
      * @var Identity Unique MediaFile id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
@@ -30,7 +30,7 @@ class ProductMediaFile extends DataModel
     
     /**
      * @var Identity Reference to product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
@@ -78,7 +78,7 @@ class ProductMediaFile extends DataModel
     
     /**
      * @var ProductMediaFileAttr[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductMediaFileAttr>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductMediaFileAttr>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
@@ -86,7 +86,7 @@ class ProductMediaFile extends DataModel
     
     /**
      * @var ProductMediaFileI18n[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductMediaFileI18n>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductMediaFileI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */

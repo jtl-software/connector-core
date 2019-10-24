@@ -2,12 +2,12 @@
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\System
+ * @package Jtl\Connector\Core\Core\System
  */
 
-namespace jtl\Connector\System;
+namespace Jtl\Connector\Core\Core\System;
 
-use jtl\Connector\Exception\MissingRequirementException;
+use Jtl\Connector\Core\Core\Exception\MissingRequirementException;
 
 class Check
 {
@@ -26,6 +26,3 @@ class Check
         // Zip
         if (!class_exists('ZipArchive')) {
             throw new MissingRequirementException('Class ZipArchive not found. PHP 5 >= 5.2.0, PECL zip >= 1.1.0 installed?');
-        }
-    }
-}

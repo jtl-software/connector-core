@@ -1,17 +1,17 @@
 <?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -51,7 +51,7 @@ class ConnectorIdentification extends DataModel
     
     /**
      * @var ConnectorServerInfo
-     * @Serializer\Type("jtl\Connector\Model\ConnectorServerInfo")
+     * @Serializer\Type("Jtl\Connector\Core\Model\ConnectorServerInfo")
      * @Serializer\SerializedName("serverInfo")
      * @Serializer\Accessor(getter="getServerInfo",setter="setServerInfo")
      */

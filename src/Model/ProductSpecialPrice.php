@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use DateTime;
 use InvalidArgumentException;
@@ -15,7 +15,7 @@ use JMS\Serializer\Annotation as Serializer;
  * Special product price properties to specify date and stock limits.
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -23,7 +23,7 @@ class ProductSpecialPrice extends DataModel
 {
     /**
      * @var Identity Unique productSpecialPrice id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
@@ -31,7 +31,7 @@ class ProductSpecialPrice extends DataModel
     
     /**
      * @var Identity Reference to product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
@@ -87,7 +87,7 @@ class ProductSpecialPrice extends DataModel
     
     /**
      * @var ProductSpecialPriceItem[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductSpecialPriceItem>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductSpecialPriceItem>")
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
      */

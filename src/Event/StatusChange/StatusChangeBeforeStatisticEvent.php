@@ -1,8 +1,8 @@
 <?php
-namespace jtl\Connector\Event\StatusChange;
+namespace Jtl\Connector\Core\Event\StatusChange;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\QueryFilter;
+use Jtl\Connector\Core\Model\QueryFilter;
 
 
 class StatusChangeBeforeStatisticEvent extends Event

@@ -1,8 +1,8 @@
 <?php
-namespace jtl\Connector\Event\Payment;
+namespace Jtl\Connector\Core\Event\Payment;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\Payment;
+use Jtl\Connector\Core\Model\Payment;
 
 
 class PaymentAfterDeleteEvent extends Event
