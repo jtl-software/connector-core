@@ -3,8 +3,9 @@
  * @author    Patryk Gorol <patryk.gorol@jtl-software.com>
  * @copyright 2010-2019 JTL-Software GmbH
  */
-
 namespace jtl\Connector\Model;
+
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class AbstractKeyValueAttribute
