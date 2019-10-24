@@ -43,7 +43,7 @@ class Image extends DataModel
     protected $filename = '';
     
     /**
-     * @var ImageRelationType
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("relationType")
      * @Serializer\Accessor(getter="getRelationType",setter="setRelationType")

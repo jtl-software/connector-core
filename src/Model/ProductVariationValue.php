@@ -29,14 +29,6 @@ class ProductVariationValue extends DataModel
     protected $id = null;
     
     /**
-     * @var Identity Reference to productVariation
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productVariationId")
-     * @Serializer\Accessor(getter="getProductVariationId",setter="setProductVariationId")
-     */
-    protected $productVariationId = null;
-    
-    /**
      * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("ean")
