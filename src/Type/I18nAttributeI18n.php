@@ -12,7 +12,7 @@ use \Jtl\Connector\Core\Type\PropertyInfo;
  * @access public
  * @package Jtl\Connector\Core\Type
  */
-class ProductAttrI18n extends DataType
+class I18nAttributeI18n extends DataType
 {
     protected function loadProperties()
     {

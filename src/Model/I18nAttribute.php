@@ -40,8 +40,8 @@ class I18nAttribute extends DataModel
      */
     protected $id = null;
     /**
-     * @var AbstractI18n[]
-     * @Serializer\Type("array<jtl\Connector\Model\AbstractI18n>")
+     * @var I18nAttributeI18n[]
+     * @Serializer\Type("array<jtl\Connector\Model\I18nAttributeI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
@@ -113,7 +113,7 @@ class I18nAttribute extends DataModel
     }
 
     /**
-     * @return AbstractI18n[]
+     * @return I18nAttributeI18n[]
      */
     public function getI18ns(): array
     {
@@ -121,10 +121,10 @@ class I18nAttribute extends DataModel
     }
 
     /**
-     * @param AbstractI18n $i18n
+     * @param I18nAttributeI18n $i18n
      * @return I18nAttribute
      */
-    public function addI18n(AbstractI18n $i18n): I18nAttribute
+    public function addI18n(I18nAttributeI18n $i18n): I18nAttribute
     {
         $this->i18ns[] = $i18n;
 
@@ -142,10 +142,10 @@ class I18nAttribute extends DataModel
     }
 
     /**
-     * @param AbstractI18n ...$i18ns
+     * @param I18nAttributeI18n ...$i18ns
      * @return I18nAttribute
      */
-    public function setI18ns(AbstractI18n ...$i18ns): I18nAttribute
+    public function setI18ns(I18nAttributeI18n ...$i18ns): I18nAttribute
     {
         $this->i18ns = $i18ns;
 

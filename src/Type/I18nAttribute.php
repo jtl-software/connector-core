@@ -21,7 +21,7 @@ class I18nAttribute extends DataType
             new PropertyInfo('isTranslated','bool',false,false,false,false),
             new PropertyInfo('isCustomProperty','bool',false,false,false,false),
             new PropertyInfo('id','jtl\Connector\Model\Identity',null,true,true,false),
-            new PropertyInfo('i18ns','jtl\Connector\Model\AbstractI18n',null,false,false,true),
+            new PropertyInfo('i18ns','jtl\Connector\Model\I18nAttributeI18n',null,false,false,true),
         ];
     }
 
