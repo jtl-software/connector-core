@@ -5,9 +5,9 @@
  * @package jtl\Connector\Core\System
  */
 
-namespace jtl\Connector\Core\System;
+namespace Jtl\Connector\Core\System;
 
-use jtl\Connector\Core\Exception\MissingRequirementException;
+use Jtl\Connector\Core\Exception\MissingRequirementException;
 
 class Check
 {

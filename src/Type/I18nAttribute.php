@@ -4,7 +4,7 @@
  * @copyright 2010-2019 JTL-Software GmbH
  */
 
-namespace jtl\Connector\Type;
+namespace Jtl\Connector\Core\Type;
 
 /**
  * Class I18nAttribute

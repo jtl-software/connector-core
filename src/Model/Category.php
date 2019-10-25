@@ -62,7 +62,7 @@ class Category extends DataModel
     
     /**
      * @var I18nAttribute[]
-     * @Serializer\Type("array<jtl\Connector\Core\Model\I18nAttribute>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\I18nAttribute>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */

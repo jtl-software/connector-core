@@ -21,14 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
 class SpecificI18n extends AbstractI18n
 {
     /**
-     * @var Identity Reference to specific
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("specificId")
-     * @Serializer\Accessor(getter="getSpecificId",setter="setSpecificId")
-     */
-    protected $specificId = null;
-
-    /**
      * @var string Localized name
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
