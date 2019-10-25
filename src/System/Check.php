@@ -26,3 +26,6 @@ class Check
         // Zip
         if (!class_exists('ZipArchive')) {
             throw new MissingRequirementException('Class ZipArchive not found. PHP 5 >= 5.2.0, PECL zip >= 1.1.0 installed?');
+        }
+    }
+}
