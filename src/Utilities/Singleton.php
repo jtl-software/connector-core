@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Core\Utilities
+ * @package Jtl\Connector\Core\Utilities
  */
 
 namespace Jtl\Connector\Core\Utilities;

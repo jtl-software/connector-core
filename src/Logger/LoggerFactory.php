@@ -1,10 +1,10 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Core
+ * @package Jtl\Connector\Core
  */
 
-namespace jtl\Connector\Core\Logger;
+namespace Jtl\Connector\Core\Logger;
 
 class LoggerFactory
 {

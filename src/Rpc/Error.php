@@ -2,7 +2,7 @@
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Core\Rpc
+ * @package Jtl\Connector\Core\Rpc
  */
 
 namespace Jtl\Connector\Core\Rpc;
