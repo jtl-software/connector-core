@@ -18,8 +18,7 @@ class ProductPartsList extends DataType
     {
         return array(
             new PropertyInfo('id', 'Identity', null, true, true, false),
-            new PropertyInfo('productId', 'Identity', null, true, true, false),
-            new PropertyInfo('quantity', 'double', 0.0, false, false, false),
+            new PropertyInfo('quantity', 'double', 0.0, false, false, false)
         );
     }
 

@@ -17,7 +17,6 @@ class ProductMediaFileAttrI18n extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('languageISO', 'string', '', false, false, false),
             new PropertyInfo('name', 'string', '', false, false, false),
             new PropertyInfo('value', 'string', '', false, false, false),
         );

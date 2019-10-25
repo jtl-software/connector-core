@@ -18,7 +18,6 @@ class ProductVariationValueExtraCharge extends DataType
     {
         return array(
             new PropertyInfo('customerGroupId', 'Identity', null, true, true, false),
-            new PropertyInfo('productVariationValueId', 'Identity', null, true, true, false),
             new PropertyInfo('extraChargeNet', 'double', 0.0, false, false, false),
         );
     }

@@ -17,7 +17,6 @@ class CustomerOrderPaymentInfo extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('customerOrderId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('accountHolder', 'string', '', false, false, false),
             new PropertyInfo('accountNumber', 'string', '', false, false, false),

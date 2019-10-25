@@ -17,7 +17,6 @@ class CustomerOrderItemVariation extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('customerOrderItemId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('productVariationId', 'Identity', null, false, true, false),
             new PropertyInfo('productVariationValueId', 'Identity', null, false, true, false),

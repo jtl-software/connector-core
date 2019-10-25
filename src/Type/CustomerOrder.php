@@ -24,7 +24,6 @@ class CustomerOrder extends DataType
             new PropertyInfo('creationDate', 'DateTime', null, false, false, false),
             new PropertyInfo('currencyIso', 'string', '', false, false, false),
             new PropertyInfo('estimatedDeliveryDate', 'DateTime', null, false, false, false),
-            new PropertyInfo('languageISO', 'string', '', false, false, false),
             new PropertyInfo('note', 'string', '', false, false, false),
             new PropertyInfo('orderNumber', 'string', '', false, false, false),
             new PropertyInfo('paymentDate', 'DateTime', null, false, false, false),

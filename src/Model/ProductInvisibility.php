@@ -27,22 +27,13 @@ class ProductInvisibility extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-    
-    /**
-     * @var Identity Reference to product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
-    protected $productId = null;
-    
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->customerGroupId = new Identity();
-        $this->productId = new Identity();
     }
     
     /**
@@ -63,25 +54,5 @@ class ProductInvisibility extends DataModel
     public function getCustomerGroupId(): Identity
     {
         return $this->customerGroupId;
-    }
-    
-    /**
-     * @param Identity $productId Reference to product
-     * @return ProductInvisibility
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductId(Identity $productId): ProductInvisibility
-    {
-        $this->productId = $productId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to product
-     */
-    public function getProductId(): Identity
-    {
-        return $this->productId;
     }
 }

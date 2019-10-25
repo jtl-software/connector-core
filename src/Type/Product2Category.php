@@ -18,8 +18,7 @@ class Product2Category extends DataType
     {
         return array(
             new PropertyInfo('categoryId', 'Identity', null, false, true, false),
-            new PropertyInfo('id', 'Identity', null, true, true, false),
-            new PropertyInfo('productId', 'Identity', null, false, true, false),
+            new PropertyInfo('id', 'Identity', null, true, true, false)
         );
     }
 

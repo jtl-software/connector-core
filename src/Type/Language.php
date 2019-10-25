@@ -19,7 +19,6 @@ class Language extends DataType
         return array(
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('isDefault', 'boolean', false, false, false, false),
-            new PropertyInfo('languageISO', 'string', '', false, false, false),
             new PropertyInfo('nameEnglish', 'string', '', false, false, false),
             new PropertyInfo('nameGerman', 'string', '', false, false, false),
         );

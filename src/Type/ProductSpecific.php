@@ -18,8 +18,7 @@ class ProductSpecific extends DataType
     {
         return array(
             new PropertyInfo('id', 'Identity', null, false, true, false),
-            new PropertyInfo('productId', 'Identity', null, true, true, false),
-            new PropertyInfo('specificValueId', 'Identity', null, true, true, false),
+            new PropertyInfo('specificValueId', 'Identity', null, true, true, false)
         );
     }
 

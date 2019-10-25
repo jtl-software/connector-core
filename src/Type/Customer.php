@@ -35,7 +35,6 @@ class Customer extends DataType
             new PropertyInfo('hasCustomerAccount', 'boolean', false, false, false, false),
             new PropertyInfo('hasNewsletterSubscription', 'boolean', false, false, false, false),
             new PropertyInfo('isActive', 'boolean', false, false, false, false),
-            new PropertyInfo('languageISO', 'string', '', false, false, false),
             new PropertyInfo('lastName', 'string', '', false, false, false),
             new PropertyInfo('mobile', 'string', '', false, false, false),
             new PropertyInfo('note', 'string', '', false, false, false),
@@ -48,7 +47,7 @@ class Customer extends DataType
             new PropertyInfo('vatNumber', 'string', '', false, false, false),
             new PropertyInfo('websiteUrl', 'string', '', false, false, false),
             new PropertyInfo('zipCode', 'string', '', false, false, false),
-            new PropertyInfo('attributes', '\jtl\Connector\Model\CustomerAttr', null, false, false, true),
+            new PropertyInfo('attributes', '\jtl\Connector\Model\KeyValueAttribute', null, false, false, true),
         );
     }
 

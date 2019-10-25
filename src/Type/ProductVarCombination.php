@@ -17,7 +17,6 @@ class ProductVarCombination extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('productId', 'Identity', null, true, true, false),
             new PropertyInfo('productVariationId', 'Identity', null, true, true, false),
             new PropertyInfo('productVariationValueId', 'Identity', null, false, true, false),
         );

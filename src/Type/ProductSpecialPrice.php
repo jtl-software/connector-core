@@ -18,14 +18,13 @@ class ProductSpecialPrice extends DataType
     {
         return array(
             new PropertyInfo('id', 'Identity', null, true, true, false),
-            new PropertyInfo('productId', 'Identity', null, false, true, false),
             new PropertyInfo('activeFromDate', 'DateTime', null, false, false, false),
             new PropertyInfo('activeUntilDate', 'DateTime', null, false, false, false),
             new PropertyInfo('considerDateLimit', 'boolean', false, false, false, false),
             new PropertyInfo('considerStockLimit', 'boolean', false, false, false, false),
             new PropertyInfo('isActive', 'boolean', false, false, false, false),
             new PropertyInfo('stockLimit', 'integer', 0, false, false, false),
-            new PropertyInfo('items', '\jtl\Connector\Model\ProductSpecialPriceItem', null, false, false, true),
+            new PropertyInfo('items', '\jtl\Connector\Model\ProductSpecialPriceItem', null, false, false, true)
         );
     }
 

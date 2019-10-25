@@ -6,7 +6,7 @@
 
 namespace jtl\Connector\Type;
 
-use \jtl\Connector\Type\PropertyInfo;
+use jtl\Connector\Type\PropertyInfo;
 
 /**
  * @access public
@@ -16,10 +16,15 @@ class ProductFileDownload extends DataType
 {
     protected function loadProperties()
     {
-        return array(
-            new PropertyInfo('fileDownloadId', 'Identity', null, true, true, false),
-            new PropertyInfo('productId', 'Identity', null, true, true, false),
-        );
+        return [
+            new PropertyInfo('creationDate', 'DateTime', null, false, false, false),
+            new PropertyInfo('maxDays', 'int', null, false, false, false),
+            new PropertyInfo('maxDownloads', 'int', null, false, false, false),
+            new PropertyInfo('path', 'string', null, false, false, false),
+            new PropertyInfo('previewPath', 'string', null, false, false, false),
+            new PropertyInfo('sort', 'int', null, false, false, false),
+            new PropertyInfo('i18ns', '\jtl\Connector\Model\ProductFileDownloadI18n', null, false, false, true)
+        ];
     }
 
     public function isMain()

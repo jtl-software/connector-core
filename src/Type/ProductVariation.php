@@ -18,7 +18,6 @@ class ProductVariation extends DataType
     {
         return array(
             new PropertyInfo('id', 'Identity', null, true, true, false),
-            new PropertyInfo('productId', 'Identity', null, false, true, false),
             new PropertyInfo('sort', 'integer', 0, false, false, false),
             new PropertyInfo('type', 'string', '', false, false, false),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\ProductVariationI18n', null, false, false, true),

@@ -17,10 +17,8 @@ class ProductI18n extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('productId', 'Identity', null, true, true, false),
             new PropertyInfo('deliveryStatus', 'string', '', false, false, false),
             new PropertyInfo('description', 'string', '', false, false, false),
-            new PropertyInfo('languageISO', 'string', '', false, false, false),
             new PropertyInfo('measurementUnitName', 'string', '', false, false, false),
             new PropertyInfo('metaDescription', 'string', '', false, false, false),
             new PropertyInfo('metaKeywords', 'string', '', false, false, false),

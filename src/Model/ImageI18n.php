@@ -25,15 +25,7 @@ class ImageI18n extends AbstractI18n
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-    
-    /**
-     * @var Identity
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("imageId")
-     * @Serializer\Accessor(getter="getImageId",setter="setImageId")
-     */
-    protected $imageId = null;
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -48,7 +40,6 @@ class ImageI18n extends AbstractI18n
     public function __construct()
     {
         $this->id = new Identity();
-        $this->imageId = new Identity();
     }
     
     /**
@@ -70,27 +61,7 @@ class ImageI18n extends AbstractI18n
     {
         return $this->id;
     }
-    
-    /**
-     * @param Identity $imageId
-     * @return ImageI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setImageId(Identity $imageId): ImageI18n
-    {
-        $this->imageId = $imageId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity
-     */
-    public function getImageId(): Identity
-    {
-        return $this->imageId;
-    }
-    
+
     /**
      * @param string $altText
      * @return ImageI18n

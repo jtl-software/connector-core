@@ -17,10 +17,8 @@ class ConfigItemI18n extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('configItemId', 'Identity', null, true, true, false),
             new PropertyInfo('description', 'string', '', false, false, false),
-            new PropertyInfo('languageISO', 'string', '', false, false, false),
-            new PropertyInfo('name', 'string', '', false, false, false),
+            new PropertyInfo('name', 'string', '', false, false, false)
         );
     }
 

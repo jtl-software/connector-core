@@ -27,15 +27,7 @@ class CustomerGroupPackagingQuantity extends DataModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-    
-    /**
-     * @var Identity Reference to product.
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
-    protected $productId = null;
-    
+
     /**
      * @var double Contains the minimum quantity for a customergroup.
      * @Serializer\Type("double")
@@ -58,7 +50,6 @@ class CustomerGroupPackagingQuantity extends DataModel
     public function __construct()
     {
         $this->customerGroupId = new Identity();
-        $this->productId = new Identity();
     }
     
     /**
@@ -80,27 +71,7 @@ class CustomerGroupPackagingQuantity extends DataModel
     {
         return $this->customerGroupId;
     }
-    
-    /**
-     * @param Identity $productId Reference to product.
-     * @return CustomerGroupPackagingQuantity
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductId(Identity $productId): CustomerGroupPackagingQuantity
-    {
-        $this->productId = $productId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to product.
-     */
-    public function getProductId(): Identity
-    {
-        return $this->productId;
-    }
-    
+
     /**
      * @param double $minimumOrderQuantity Contains the minimum quantity for a customergroup.
      * @return CustomerGroupPackagingQuantity

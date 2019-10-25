@@ -18,9 +18,7 @@ class ImageI18n extends DataType
     {
         return array(
             new PropertyInfo('id', 'Identity', null, true, true, false),
-            new PropertyInfo('imageId', 'Identity', null, false, true, false),
             new PropertyInfo('altText', 'string', '', false, false, false),
-            new PropertyInfo('languageISO', 'string', '', false, false, false),
         );
     }
     

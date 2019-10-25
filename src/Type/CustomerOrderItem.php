@@ -18,7 +18,6 @@ class CustomerOrderItem extends DataType
     {
         return array(
             new PropertyInfo('configItemId', 'Identity', null, false, true, false),
-            new PropertyInfo('customerOrderId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('productId', 'Identity', null, false, true, false),
             new PropertyInfo('name', 'string', '', false, false, false),

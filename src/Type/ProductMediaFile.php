@@ -18,7 +18,6 @@ class ProductMediaFile extends DataType
     {
         return array(
             new PropertyInfo('id', 'Identity', null, true, true, false),
-            new PropertyInfo('productId', 'Identity', null, false, true, false),
             new PropertyInfo('mediaFileCategory', 'string', '', false, false, false),
             new PropertyInfo('path', 'string', '', false, false, false),
             new PropertyInfo('sort', 'integer', '', false, false, false),
