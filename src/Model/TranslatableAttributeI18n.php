@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class I18nAttributeI18n extends AbstractI18n
+class TranslatableAttributeI18n extends AbstractI18n
 {
     /**
      * @var string
@@ -36,9 +36,9 @@ class I18nAttributeI18n extends AbstractI18n
 
     /**
      * @param string $name
-     * @return I18nAttributeI18n
+     * @return TranslatableAttributeI18n
      */
-    public function setName(string $name): I18nAttributeI18n
+    public function setName(string $name): TranslatableAttributeI18n
     {
         $this->name = $name;
         
@@ -55,9 +55,9 @@ class I18nAttributeI18n extends AbstractI18n
     
     /**
      * @param string $value
-     * @return I18nAttributeI18n
+     * @return TranslatableAttributeI18n
      */
-    public function setValue(string $value): I18nAttributeI18n
+    public function setValue(string $value): TranslatableAttributeI18n
     {
         $this->value = $value;
         

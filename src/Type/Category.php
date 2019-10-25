@@ -20,7 +20,7 @@ class Category extends DataType
             new PropertyInfo('isActive', 'boolean', false, false, false, false),
             new PropertyInfo('level', 'integer', 0, false, false, false),
             new PropertyInfo('sort', 'integer', 0, false, false, false),
-            new PropertyInfo('attributes', '\Jtl\Connector\Model\I18nAttribute', null, false, false, true),
+            new PropertyInfo('attributes', '\Jtl\Connector\Model\TranslatableAttribute', null, false, false, true),
             new PropertyInfo('customerGroups', '\Jtl\Connector\Model\CategoryCustomerGroup', null, false, false, true),
             new PropertyInfo('i18ns', '\Jtl\Connector\Model\CategoryI18n', null, false, false, true),
             new PropertyInfo('invisibilities', '\Jtl\Connector\Model\CategoryInvisibility', null, false, false, true),

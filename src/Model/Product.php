@@ -542,8 +542,8 @@ class Product extends DataModel
     protected $width = 0.0;
     
     /**
-     * @var I18nAttribute[]
-     * @Serializer\Type("array<jtl\Connector\Model\I18nAttribute>")
+     * @var TranslatableAttribute[]
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\TranslatableAttribute>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
@@ -1937,10 +1937,10 @@ class Product extends DataModel
     }
     
     /**
-     * @param I18nAttribute $attribute
+     * @param TranslatableAttribute $attribute
      * @return Product
      */
-    public function addAttribute(I18nAttribute $attribute): Product
+    public function addAttribute(TranslatableAttribute $attribute): Product
     {
         $this->attributes[] = $attribute;
         
@@ -1948,10 +1948,10 @@ class Product extends DataModel
     }
 
     /**
-     * @param I18nAttribute ...$attributes
+     * @param TranslatableAttribute ...$attributes
      * @return Product
      */
-    public function setAttributes(I18nAttribute ...$attributes): Product
+    public function setAttributes(TranslatableAttribute ...$attributes): Product
     {
         $this->attributes = $attributes;
         
@@ -1959,7 +1959,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return I18nAttribute[]
+     * @return TranslatableAttribute[]
      */
     public function getAttributes(): array
     {

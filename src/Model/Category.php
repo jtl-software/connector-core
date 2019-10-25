@@ -61,8 +61,8 @@ class Category extends DataModel
     protected $sort = 0;
     
     /**
-     * @var I18nAttribute[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\I18nAttribute>")
+     * @var TranslatableAttribute[]
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\TranslatableAttribute>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
@@ -199,10 +199,10 @@ class Category extends DataModel
     }
     
     /**
-     * @param I18nAttribute $attribute
+     * @param TranslatableAttribute $attribute
      * @return Category
      */
-    public function addAttribute(I18nAttribute $attribute): Category
+    public function addAttribute(TranslatableAttribute $attribute): Category
     {
         $this->attributes[] = $attribute;
         
@@ -210,10 +210,10 @@ class Category extends DataModel
     }
     
     /**
-     * @param I18nAttribute ...$attributes
+     * @param TranslatableAttribute ...$attributes
      * @return Category
      */
-    public function setAttributes(I18nAttribute ...$attributes): Category
+    public function setAttributes(TranslatableAttribute ...$attributes): Category
     {
         $this->attributes = $attributes;
         
@@ -221,7 +221,7 @@ class Category extends DataModel
     }
     
     /**
-     * @return I18nAttribute[]
+     * @return TranslatableAttribute[]
      */
     public function getAttributes(): array
     {

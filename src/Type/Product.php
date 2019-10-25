@@ -82,7 +82,7 @@ class Product extends DataType
             new PropertyInfo('upc', 'string', '', false, false, false),
             new PropertyInfo('vat', 'double', 0.0, false, false, false),
             new PropertyInfo('width', 'double', 0.0, false, false, false),
-            new PropertyInfo('attributes', '\Jtl\Connector\Core\Model\I18nAttribute', null, false, false, true),
+            new PropertyInfo('attributes', '\Jtl\Connector\Core\Model\TranslatableAttribute', null, false, false, true),
             new PropertyInfo('categories', '\Jtl\Connector\Core\Model\Product2Category', null, false, false, true),
             new PropertyInfo('checksums', '\Jtl\Connector\Core\Model\ProductChecksum', null, false, false, true),
             new PropertyInfo('configGroups', '\Jtl\Connector\Core\Model\ProductConfigGroup', null, false, false, true),

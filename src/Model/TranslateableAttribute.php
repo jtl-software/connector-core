@@ -8,13 +8,13 @@ namespace Jtl\Connector\Core\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * I18nAttribute class
+ * TranslatableAttribute class
  *
  * @access public
- * @package Jtl\Connector\Core\Model\I18nAttribute
+ * @package Jtl\Connector\Core\Model\TranslatableAttribute
  * @Serializer\AccessType("public_method")
  */
-class I18nAttribute extends DataModel
+class TranslatableAttribute extends DataModel
 {
     /**
      * @var boolean
@@ -40,15 +40,15 @@ class I18nAttribute extends DataModel
      */
     protected $id = null;
     /**
-     * @var I18nAttributeI18n[]
-     * @Serializer\Type("array<jtl\Connector\Model\I18nAttributeI18n>")
+     * @var TranslatableAttributeI18n[]
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\TranslatableAttributeI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = [];
 
     /**
-     * I18nAttribute constructor.
+     * TranslatableAttribute constructor.
      */
     public function __construct()
     {
@@ -57,9 +57,9 @@ class I18nAttribute extends DataModel
 
     /**
      * @param Identity $id
-     * @return I18nAttribute
+     * @return TranslatableAttribute
      */
-    public function setId(Identity $id): I18nAttribute
+    public function setId(Identity $id): TranslatableAttribute
     {
         $this->id = $id;
 
@@ -76,9 +76,9 @@ class I18nAttribute extends DataModel
 
     /**
      * @param bool $isTranslated
-     * @return I18nAttribute
+     * @return TranslatableAttribute
      */
-    public function setIsTranslated(bool $isTranslated): I18nAttribute
+    public function setIsTranslated(bool $isTranslated): TranslatableAttribute
     {
         $this->isTranslated = $isTranslated;
 
@@ -95,9 +95,9 @@ class I18nAttribute extends DataModel
 
     /**
      * @param bool $isCustomProperty
-     * @return I18nAttribute
+     * @return TranslatableAttribute
      */
-    public function setIsCustomProperty(bool $isCustomProperty): I18nAttribute
+    public function setIsCustomProperty(bool $isCustomProperty): TranslatableAttribute
     {
         $this->isCustomProperty = $isCustomProperty;
 
@@ -113,7 +113,7 @@ class I18nAttribute extends DataModel
     }
 
     /**
-     * @return I18nAttributeI18n[]
+     * @return TranslatableAttributeI18n[]
      */
     public function getI18ns(): array
     {
@@ -121,10 +121,10 @@ class I18nAttribute extends DataModel
     }
 
     /**
-     * @param I18nAttributeI18n $i18n
-     * @return I18nAttribute
+     * @param TranslatableAttributeI18n $i18n
+     * @return TranslatableAttribute
      */
-    public function addI18n(I18nAttributeI18n $i18n): I18nAttribute
+    public function addI18n(TranslatableAttributeI18n $i18n): TranslatableAttribute
     {
         $this->i18ns[] = $i18n;
 
@@ -132,9 +132,9 @@ class I18nAttribute extends DataModel
     }
 
     /**
-     * @return I18nAttribute
+     * @return TranslatableAttribute
      */
-    public function clearI18ns(): I18nAttribute
+    public function clearI18ns(): TranslatableAttribute
     {
         $this->i18ns = [];
 
@@ -142,10 +142,10 @@ class I18nAttribute extends DataModel
     }
 
     /**
-     * @param I18nAttributeI18n ...$i18ns
-     * @return I18nAttribute
+     * @param TranslatableAttributeI18n ...$i18ns
+     * @return TranslatableAttribute
      */
-    public function setI18ns(I18nAttributeI18n ...$i18ns): I18nAttribute
+    public function setI18ns(TranslatableAttributeI18n ...$i18ns): TranslatableAttribute
     {
         $this->i18ns = $i18ns;
 
