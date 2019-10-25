@@ -22,7 +22,7 @@ class Manufacturer extends DataType
             new PropertyInfo('sort', 'integer', 0, false, false, false),
             new PropertyInfo('urlPath', 'string', '', false, false, false),
             new PropertyInfo('websiteUrl', 'string', '', false, false, false),
-            new PropertyInfo('i18ns', '\Jtl\Connector\Core\Model\ManufacturerI18n', null, false, false, true),
+            new PropertyInfo('i18ns', 'Jtl\Connector\Core\Model\ManufacturerI18n', null, false, false, true),
         );
     }
 

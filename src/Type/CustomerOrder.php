@@ -19,7 +19,7 @@ class CustomerOrder extends DataType
         return array(
             new PropertyInfo('customerId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
-            new PropertyInfo('billingAddress', '\Jtl\Connector\Core\Model\CustomerOrderBillingAddress', null, false, false, true),
+            new PropertyInfo('billingAddress', 'Jtl\Connector\Core\Model\CustomerOrderBillingAddress', null, false, false, true),
             new PropertyInfo('carrierName', 'string', '', false, false, false),
             new PropertyInfo('creationDate', 'DateTime', null, false, false, false),
             new PropertyInfo('currencyIso', 'string', '', false, false, false),
@@ -27,11 +27,11 @@ class CustomerOrder extends DataType
             new PropertyInfo('note', 'string', '', false, false, false),
             new PropertyInfo('orderNumber', 'string', '', false, false, false),
             new PropertyInfo('paymentDate', 'DateTime', null, false, false, false),
-            new PropertyInfo('paymentInfo', '\Jtl\Connector\Core\Model\CustomerOrderPaymentInfo', null, false, false, true),
+            new PropertyInfo('paymentInfo', 'Jtl\Connector\Core\Model\CustomerOrderPaymentInfo', null, false, false, true),
             new PropertyInfo('paymentModuleCode', 'string', '', false, false, false),
             new PropertyInfo('paymentStatus', 'string', '', false, false, false),
             new PropertyInfo('pui', 'string', '', false, false, false),
-            new PropertyInfo('shippingAddress', '\Jtl\Connector\Core\Model\CustomerOrderShippingAddress', null, false, false, true),
+            new PropertyInfo('shippingAddress', 'Jtl\Connector\Core\Model\CustomerOrderShippingAddress', null, false, false, true),
             new PropertyInfo('shippingDate', 'DateTime', null, false, false, false),
             new PropertyInfo('shippingInfo', 'string', '', false, false, false),
             new PropertyInfo('shippingMethodId', 'Identity', null, false, true, false),
@@ -39,8 +39,8 @@ class CustomerOrder extends DataType
             new PropertyInfo('status', 'string', '', false, false, false),
             new PropertyInfo('totalSum', 'double', 0.0, false, false, false),
             new PropertyInfo('totalSumGross', 'double', 0.0, false, false, false),
-            new PropertyInfo('attributes', '\Jtl\Connector\Core\Model\CustomerOrderAttr', null, false, false, true),
-            new PropertyInfo('items', '\Jtl\Connector\Core\Model\CustomerOrderItem', null, false, false, true),
+            new PropertyInfo('attributes', 'Jtl\Connector\Core\Model\CustomerOrderAttr', null, false, false, true),
+            new PropertyInfo('items', 'Jtl\Connector\Core\Model\CustomerOrderItem', null, false, false, true),
         );
     }
 

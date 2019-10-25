@@ -18,7 +18,7 @@ class CrossSellingItem extends DataType
     {
         return array(
             new PropertyInfo('crossSellingGroupId', 'Identity', null, false, true, false),
-            new PropertyInfo('productIds', '\Jtl\Connector\Core\Model\Identity', null, false, false, true),
+            new PropertyInfo('productIds', 'Jtl\Connector\Core\Model\Identity', null, false, false, true),
         );
     }
 

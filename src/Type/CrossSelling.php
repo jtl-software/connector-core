@@ -19,7 +19,7 @@ class CrossSelling extends DataType
         return array(
             new PropertyInfo('id', 'Identity', null, false, true, false),
             new PropertyInfo('productId', 'Identity', null, false, true, false),
-            new PropertyInfo('items', '\Jtl\Connector\Core\Model\CrossSellingItem', null, false, false, true),
+            new PropertyInfo('items', 'Jtl\Connector\Core\Model\CrossSellingItem', null, false, false, true),
         );
     }
 

@@ -18,7 +18,7 @@ class Unit extends DataType
     {
         return array(
             new PropertyInfo('id', 'Identity', null, true, true, false),
-            new PropertyInfo('i18ns', '\Jtl\Connector\Core\Model\UnitI18n', null, false, false, true),
+            new PropertyInfo('i18ns', 'Jtl\Connector\Core\Model\UnitI18n', null, false, false, true),
         );
     }
 

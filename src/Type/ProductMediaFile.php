@@ -23,8 +23,8 @@ class ProductMediaFile extends DataType
             new PropertyInfo('sort', 'integer', '', false, false, false),
             new PropertyInfo('type', 'string', '', false, false, false),
             new PropertyInfo('url', 'string', '', false, false, false),
-            new PropertyInfo('attributes', '\Jtl\Connector\Core\Model\ProductMediaFileAttr', null, false, false, true),
-            new PropertyInfo('i18ns', '\Jtl\Connector\Core\Model\ProductMediaFileI18n', null, false, false, true),
+            new PropertyInfo('attributes', 'Jtl\Connector\Core\Model\ProductMediaFileAttr', null, false, false, true),
+            new PropertyInfo('i18ns', 'Jtl\Connector\Core\Model\ProductMediaFileI18n', null, false, false, true),
         );
     }
 

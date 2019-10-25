@@ -22,8 +22,8 @@ class DeliveryNote extends DataType
             new PropertyInfo('creationDate', 'DateTime', null, false, false, false),
             new PropertyInfo('isFulfillment', 'boolean', false, false, false, false),
             new PropertyInfo('note', 'string', '', false, false, false),
-            new PropertyInfo('items', '\Jtl\Connector\Core\Model\DeliveryNoteItem', null, false, false, true),
-            new PropertyInfo('trackingLists', '\Jtl\Connector\Core\Model\DeliveryNoteTrackingList', null, false, false, true),
+            new PropertyInfo('items', 'Jtl\Connector\Core\Model\DeliveryNoteItem', null, false, false, true),
+            new PropertyInfo('trackingLists', 'Jtl\Connector\Core\Model\DeliveryNoteTrackingList', null, false, false, true),
         );
     }
 

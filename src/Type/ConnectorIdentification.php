@@ -21,7 +21,7 @@ class ConnectorIdentification extends DataType
             new PropertyInfo('platformName', 'string', '', false, false, false),
             new PropertyInfo('platformVersion', 'string', '', false, false, false),
             new PropertyInfo('protocolVersion', 'integer', '', false, false, false),
-            new PropertyInfo('serverInfo', '\Jtl\Connector\Core\Model\CrossSellingItem', null, false, false, false),
+            new PropertyInfo('serverInfo', 'Jtl\Connector\Core\Model\CrossSellingItem', null, false, false, false),
         );
     }
 

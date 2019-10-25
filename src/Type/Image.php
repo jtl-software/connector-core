@@ -24,7 +24,7 @@ class Image extends DataType
             new PropertyInfo('remoteUrl', 'string', '', false, false, false),
             new PropertyInfo('name', 'string', '', false, false, false),
             new PropertyInfo('sort', 'integer', 0, false, false, false),
-            new PropertyInfo('i18ns', '\Jtl\Connector\Core\Model\ImageI18n', null, false, false, true),
+            new PropertyInfo('i18ns', 'Jtl\Connector\Core\Model\ImageI18n', null, false, false, true),
         );
     }
 

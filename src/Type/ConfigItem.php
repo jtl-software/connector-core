@@ -32,8 +32,8 @@ class ConfigItem extends DataType
             new PropertyInfo('showSurcharge', 'boolean', false, false, false, false),
             new PropertyInfo('sort', 'integer', 0, false, false, false),
             new PropertyInfo('type', 'integer', 0, false, false, false),
-            new PropertyInfo('i18ns', '\Jtl\Connector\Core\Model\ConfigItemI18n', null, false, false, true),
-            new PropertyInfo('prices', '\Jtl\Connector\Core\Model\ConfigItemPrice', null, false, false, true),
+            new PropertyInfo('i18ns', 'Jtl\Connector\Core\Model\ConfigItemI18n', null, false, false, true),
+            new PropertyInfo('prices', 'Jtl\Connector\Core\Model\ConfigItemPrice', null, false, false, true),
         );
     }
 

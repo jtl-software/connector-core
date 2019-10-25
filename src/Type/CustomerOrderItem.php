@@ -29,7 +29,7 @@ class CustomerOrderItem extends DataType
             new PropertyInfo('note', 'string', '', false, false, false),
             new PropertyInfo('unique', 'string', '', false, false, false),
             new PropertyInfo('vat', 'double', 0.0, false, false, false),
-            new PropertyInfo('variations', '\Jtl\Connector\Core\Model\CustomerOrderItemVariation', null, false, false, true),
+            new PropertyInfo('variations', 'Jtl\Connector\Core\Model\CustomerOrderItemVariation', null, false, false, true),
         );
     }
 

@@ -19,7 +19,7 @@ class TaxZone extends DataType
         return array(
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('name', 'string', '', false, false, false),
-            new PropertyInfo('countries', '\Jtl\Connector\Core\Model\TaxZoneCountry', null, false, false, true),
+            new PropertyInfo('countries', 'Jtl\Connector\Core\Model\TaxZoneCountry', null, false, false, true),
         );
     }
 

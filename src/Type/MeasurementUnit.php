@@ -20,7 +20,7 @@ class MeasurementUnit extends DataType
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('code', 'string', '', false, false, false),
             new PropertyInfo('displayCode', 'string', '', false, false, false),
-            new PropertyInfo('i18ns', '\Jtl\Connector\Core\Model\MeasurementUnitI18n', null, false, false, true),
+            new PropertyInfo('i18ns', 'Jtl\Connector\Core\Model\MeasurementUnitI18n', null, false, false, true),
         );
     }
 

@@ -18,7 +18,7 @@ class CrossSellingGroup extends DataType
     {
         return array(
             new PropertyInfo('id', 'Identity', null, false, true, false),
-            new PropertyInfo('i18ns', '\Jtl\Connector\Core\Model\CrossSellingGroupI18n', null, false, false, true),
+            new PropertyInfo('i18ns', 'Jtl\Connector\Core\Model\CrossSellingGroupI18n', null, false, false, true),
         );
     }
 
