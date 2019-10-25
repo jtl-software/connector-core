@@ -39,7 +39,7 @@ class CustomerOrder extends DataType
             new PropertyInfo('status', 'string', '', false, false, false),
             new PropertyInfo('totalSum', 'double', 0.0, false, false, false),
             new PropertyInfo('totalSumGross', 'double', 0.0, false, false, false),
-            new PropertyInfo('attributes', 'Jtl\Connector\Core\Model\CustomerOrderAttr', null, false, false, true),
+            new PropertyInfo('attributes', 'Jtl\Connector\Core\Model\KeyValueAttribute', null, false, false, true),
             new PropertyInfo('items', 'Jtl\Connector\Core\Model\CustomerOrderItem', null, false, false, true),
         );
     }

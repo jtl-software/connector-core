@@ -120,27 +120,7 @@ class ProductVariationValue extends DataModel
     {
         return $this->id;
     }
-    
-    /**
-     * @param Identity $productVariationId Reference to productVariation
-     * @return ProductVariationValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductVariationId(Identity $productVariationId): ProductVariationValue
-    {
-        $this->productVariationId = $productVariationId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to productVariation
-     */
-    public function getProductVariationId(): Identity
-    {
-        return $this->productVariationId;
-    }
-    
+
     /**
      * @param string $ean
      * @return ProductVariationValue

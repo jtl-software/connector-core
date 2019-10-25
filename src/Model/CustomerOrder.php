@@ -241,8 +241,8 @@ class CustomerOrder extends DataModel
     protected $totalSumGross = 0.0;
     
     /**
-     * @var CustomerOrderAttr[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\CustomerOrderAttr>")
+     * @var KeyValueAttribute[]
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\KeyValueAttribute>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
@@ -714,10 +714,10 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @param CustomerOrderAttr $attribute
+     * @param KeyValueAttribute $attribute
      * @return CustomerOrder
      */
-    public function addAttribute(CustomerOrderAttr $attribute): CustomerOrder
+    public function addAttribute(KeyValueAttribute $attribute): CustomerOrder
     {
         $this->attributes[] = $attribute;
         
@@ -725,10 +725,10 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param CustomerOrderAttr ...$attributes
+     * @param KeyValueAttribute ...$attributes
      * @return CustomerOrder
      */
-    public function setAttributes(CustomerOrderAttr ...$attributes): CustomerOrder
+    public function setAttributes(KeyValueAttribute ...$attributes): CustomerOrder
     {
         $this->attributes = $attributes;
         
@@ -736,7 +736,7 @@ class CustomerOrder extends DataModel
     }
     
     /**
-     * @return CustomerOrderAttr[]
+     * @return KeyValueAttribute[]
      */
     public function getAttributes(): array
     {
