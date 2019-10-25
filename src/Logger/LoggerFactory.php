@@ -40,3 +40,6 @@ class LoggerFactory
             return static::$logger[$channel];
         } else {
             return static::create($channel);
+        }
+    }
+}
