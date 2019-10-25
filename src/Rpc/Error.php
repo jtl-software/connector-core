@@ -2,12 +2,12 @@
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Core\Rpc
+ * @package jtl\Connector\Core\Rpc
  */
-namespace Jtl\Connector\Core\Core\Rpc;
+namespace jtl\Connector\Core\Rpc;
 
-use Jtl\Connector\Core\Core\Model\Model;
-use Jtl\Connector\Core\Core\Exception\RpcException;
+use jtl\Connector\Core\Model\Model;
+use jtl\Connector\Core\Exception\RpcException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -63,7 +63,7 @@ class Error extends Model
      * Setter for $code
      *
      * @param int $code
-     * @return \Jtl\Connector\Core\Core\Rpc\Error
+     * @return \jtl\Connector\Core\Rpc\Error
      */
     public function setCode($code)
     {
@@ -85,7 +85,7 @@ class Error extends Model
      * Setter for $message
      *
      * @param string $message
-     * @return \Jtl\Connector\Core\Core\Rpc\Error
+     * @return \jtl\Connector\Core\Rpc\Error
      */
     public function setMessage($message)
     {
@@ -108,7 +108,7 @@ class Error extends Model
      *
      * @param
      *            integer | string | array | object $data
-     * @return \Jtl\Connector\Core\Core\Rpc\Error
+     * @return \jtl\Connector\Core\Rpc\Error
      */
     public function setData($data)
     {
