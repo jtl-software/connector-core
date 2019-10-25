@@ -4,6 +4,7 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Core\Rpc
  */
+
 namespace jtl\Connector\Core\Rpc;
 
 use jtl\Connector\Core\Model\Model;
@@ -27,7 +28,7 @@ class Error extends Model
      * @Serializer\Type("integer")
      */
     public $code;
-    
+
     /**
      * A String providing a short description of the error.
      *
@@ -37,7 +38,7 @@ class Error extends Model
      * @Serializer\Type("string")
      */
     public $message;
-    
+
     /**
      * A Primitive or Structured value that contains additional information
      * about the error.
@@ -67,7 +68,7 @@ class Error extends Model
      */
     public function setCode($code)
     {
-        $this->code = (int) $code;
+        $this->code = (int)$code;
         return $this;
     }
 
@@ -124,18 +125,21 @@ class Error extends Model
     final public function validate()
     {
         $isValid = true;
-        
+
         // A Number that indicates the error type that occurred. This MUST be an
         // integer.
         if ($this->getCode() === null) {
             $isValid = false;
         }
-            
-            // A String providing a short description of the error. The message
+
+        // A String providing a short description of the error. The message
         // SHOULD be limited to a concise single sentence.
         if ($this->getMessage() === null || strlen($this->getMessage()) == 0) {
             $isValid = false;
         }
-        
+
         if (!$isValid) {
-            throw new RpcException("Parse 
+            throw new RpcException("Parse error", -32701);
+        }
+    }
+}

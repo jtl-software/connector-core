@@ -46,4 +46,7 @@ abstract class Singleton
     /**
      * Clone Method
      */
-    final protected function
+    final protected function __clone()
+    {
+    }
+}

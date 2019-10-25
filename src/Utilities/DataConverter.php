@@ -24,10 +24,10 @@ final class DataConverter
                             $obj->$key = $value;
                         }
                     }
-                    
+
                     return $obj;
                 };
-                
+
                 $obj = $toObject($values, $obj);
             }
 
@@ -51,11 +51,14 @@ final class DataConverter
                             $arr[$key] = $var;
                         }
                     }
-                    
+
                     return $arr;
                 };
-                
+
                 $arr = $toArray(get_object_vars($obj), $arr);
             }
-            
+
             return $arr;
+        }
+    }
+}
