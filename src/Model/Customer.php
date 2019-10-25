@@ -271,7 +271,7 @@ class Customer extends DataModel
     
     /**
      * @var KeyValueAttribute[]
-     * @Serializer\Type("array<Jtl\Connector\Model\KeyValueAttribute>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\KeyValueAttribute>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
