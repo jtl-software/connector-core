@@ -19,6 +19,7 @@ class ProductFileDownloadI18n extends DataType
         return array(
             new PropertyInfo('description', 'string', '', false, false, false),
             new PropertyInfo('name', 'string', '', false, false, false),
+            new PropertyInfo('languageISO', 'string', '', false, false, false)
         );
     }
 

@@ -17,7 +17,8 @@ class ProductVariationValueI18n extends DataType
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('name', 'string', '', false, false, false)
+            new PropertyInfo('name', 'string', '', false, false, false),
+            new PropertyInfo('languageISO', 'string', '', false, false, false)
         );
     }
 

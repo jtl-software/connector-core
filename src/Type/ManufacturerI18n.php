@@ -21,6 +21,7 @@ class ManufacturerI18n extends DataType
             new PropertyInfo('metaDescription', 'string', '', false, false, false),
             new PropertyInfo('metaKeywords', 'string', '', false, false, false),
             new PropertyInfo('titleTag', 'string', '', false, false, false),
+            new PropertyInfo('languageISO', 'string', '', false, false, false)
         );
     }
 

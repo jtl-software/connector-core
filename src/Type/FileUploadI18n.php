@@ -20,6 +20,7 @@ class FileUploadI18n extends DataType
             new PropertyInfo('description', 'string', '', false, false, false),
             new PropertyInfo('fileUploadId', 'integer', 0, false, false, false),
             new PropertyInfo('name', 'string', '', false, false, false),
+            new PropertyInfo('languageISO', 'string', '', false, false, false)
         );
     }
 

@@ -19,7 +19,7 @@ class CustomerGroupPackagingQuantity extends DataType
         return array(
             new PropertyInfo('customerGroupId', 'Identity', null, false, true, false),
             new PropertyInfo('minimumOrderQuantity', 'double', 0.0, false, false, false),
-            new PropertyInfo('packagingQuantity', 'double', 0.0, false, false, false),
+            new PropertyInfo('packagingQuantity', 'double', 0.0, false, false, false)
         );
     }
 

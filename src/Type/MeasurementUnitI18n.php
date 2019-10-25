@@ -18,6 +18,7 @@ class MeasurementUnitI18n extends DataType
     {
         return array(
             new PropertyInfo('name', 'string', '', false, false, false),
+            new PropertyInfo('languageISO', 'string', '', false, false, false)
         );
     }
 
