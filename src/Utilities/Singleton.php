@@ -1,10 +1,10 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Core\Utilities
+ * @package Jtl\Connector\Core\Utilities
  */
 
-namespace jtl\Connector\Core\Utilities;
+namespace Jtl\Connector\Core\Utilities;
 
 /**
  * Abstract Singleton Class
@@ -15,16 +15,16 @@ namespace jtl\Connector\Core\Utilities;
 abstract class Singleton
 {
     /**
-     * Array of \jtl\Connector\Core\Utilities\Singleton Objects
+     * Array of \Jtl\Connector\Core\Utilities\Singleton Objects
      *
-     * @var multiple: \jtl\Connector\Core\Utilities\Singleton
+     * @var multiple: \Jtl\Connector\Core\Utilities\Singleton
      */
     protected static $_instances = array();
 
     /**
      * Basic Singleton implementation
      *
-     * @return \jtl\Connector\Core\Utilities\Singleton:
+     * @return \Jtl\Connector\Core\Utilities\Singleton:
      */
     public static function getInstance()
     {

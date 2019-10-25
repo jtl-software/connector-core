@@ -2,12 +2,12 @@
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Core\System
+ * @package Jtl\Connector\Core\System
  */
 
-namespace jtl\Connector\Core\System;
+namespace Jtl\Connector\Core\System;
 
-use jtl\Connector\Core\Exception\MissingRequirementException;
+use Jtl\Connector\Core\Exception\MissingRequirementException;
 
 class Check
 {
