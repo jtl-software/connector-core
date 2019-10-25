@@ -1,14 +1,17 @@
 <?php
 /**
- * @author    Patryk Gorol <patryk.gorol@jtl-software.com>
- * @copyright 2010-2019 JTL-Software GmbH
+ * @copyright 2010-2014 JTL-Software GmbH
+ * @package Jtl\Connector\Core\Type
  */
 
-namespace jtl\Connector\Type;
+namespace Jtl\Connector\Core\Type;
+
+use \Jtl\Connector\Core\Type\PropertyInfo;
 
 /**
  * Class KeyValueAttribute
- * @package jtl\Connector\Type
+ * @access public
+ * @package Jtl\Connector\Core\Type
  */
 class KeyValueAttribute extends DataType
 {

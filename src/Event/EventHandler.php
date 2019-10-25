@@ -1,10 +1,10 @@
 <?php
-namespace jtl\Connector\Event;
+namespace Jtl\Connector\Core\Event;
 
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use jtl\Connector\Model\DataModel;
-use jtl\Connector\Model\QueryFilter;
-use jtl\Connector\Utilities\ClassName;
+use Jtl\Connector\Core\Model\DataModel;
+use Jtl\Connector\Core\Model\QueryFilter;
+use Jtl\Connector\Core\Utilities\ClassName;
 
 class EventHandler
 {
@@ -45,7 +45,7 @@ class EventHandler
             $class = 'Core';
         }
 
-        $eventClassname = sprintf('\jtl\Connector\Event\%s\%s%s%sEvent', $class, $class, ucfirst($moment), ucfirst($action));
+        $eventClassname = sprintf('\Jtl\Connector\Core\Event\%s\%s%s%sEvent', $class, $class, ucfirst($moment), ucfirst($action));
 
         if (class_exists($eventClassname)) {
             return new $eventClassname($entity);
@@ -56,7 +56,7 @@ class EventHandler
 
     protected static function createRpcEvent(&$data, $controller, $action, $moment)
     {
-        $eventClassname = sprintf('\jtl\Connector\Event\Rpc\Rpc%sEvent', ucfirst($moment));
+        $eventClassname = sprintf('\Jtl\Connector\Core\Event\Rpc\Rpc%sEvent', ucfirst($moment));
 
         if (class_exists($eventClassname)) {
             return new $eventClassname($data, $controller, $action);

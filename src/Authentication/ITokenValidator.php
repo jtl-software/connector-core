@@ -1,12 +1,12 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Application
+ * @package Jtl\Connector\Core\Application
  */
 
-namespace jtl\Connector\Authentication;
+namespace Jtl\Connector\Core\Authentication;
 
-use jtl\Connector\Model\AuthRequest;
+use Jtl\Connector\Core\Model\AuthRequest;
 
 interface ITokenValidator
 {

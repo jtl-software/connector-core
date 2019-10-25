@@ -1,22 +1,22 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Internal
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use Exception;
 use InvalidArgumentException;
-use \jtl\Connector\Model\Model;
+use \Jtl\Connector\Core\Model\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Identity
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Internal
  * @Serializer\AccessType("public_method")
  */

@@ -2,11 +2,11 @@
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Rpc
+ * @package Jtl\Connector\Core\Rpc
  */
-namespace jtl\Connector\Rpc;
+namespace Jtl\Connector\Core\Rpc;
 
-use jtl\Connector\Exception\RpcException;
+use Jtl\Connector\Core\Exception\RpcException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -32,8 +32,8 @@ class ResponsePacket extends Packet
      * no error triggered during invocation.
      * The value for this member MUST be an Object as defined in section 5.1.
      *
-     * @var \jtl\Connector\Rpc\Error
-     * @Serializer\Type("jtl\Connector\Rpc\Error")
+     * @var \Jtl\Connector\Core\Rpc\Error
+     * @Serializer\Type("Jtl\Connector\Core\Rpc\Error")
      */
     protected $error;
 
@@ -51,7 +51,7 @@ class ResponsePacket extends Packet
      * Setter for $result
      *
      * @param integer | array | string | NULL $result
-     * @return \jtl\Connector\Rpc\Packet
+     * @return \Jtl\Connector\Core\Rpc\Packet
      */
     public function setResult($result)
     {
@@ -62,7 +62,7 @@ class ResponsePacket extends Packet
     /**
      * Getter for $error
      *
-     * @return \jtl\Connector\Rpc\Error
+     * @return \Jtl\Connector\Core\Rpc\Error
      */
     public function getError()
     {
@@ -72,8 +72,8 @@ class ResponsePacket extends Packet
     /**
      * Setter for $error
      *
-     * @param \jtl\Connector\Rpc\Error $error
-     * @return \jtl\Connector\Rpc\Packet
+     * @param \Jtl\Connector\Core\Rpc\Error $error
+     * @return \Jtl\Connector\Core\Rpc\Packet
      */
     public function setError(Error $error = null)
     {

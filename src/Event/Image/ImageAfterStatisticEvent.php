@@ -1,8 +1,8 @@
 <?php
-namespace jtl\Connector\Event\Image;
+namespace Jtl\Connector\Core\Event\Image;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\Statistic;
+use Jtl\Connector\Core\Model\Statistic;
 
 
 class ImageAfterStatisticEvent extends Event

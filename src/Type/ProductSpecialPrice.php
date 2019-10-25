@@ -1,16 +1,16 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 
-namespace jtl\Connector\Type;
+namespace Jtl\Connector\Core\Type;
 
-use \jtl\Connector\Type\PropertyInfo;
+use \Jtl\Connector\Core\Type\PropertyInfo;
 
 /**
  * @access public
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 class ProductSpecialPrice extends DataType
 {
@@ -24,7 +24,7 @@ class ProductSpecialPrice extends DataType
             new PropertyInfo('considerStockLimit', 'boolean', false, false, false, false),
             new PropertyInfo('isActive', 'boolean', false, false, false, false),
             new PropertyInfo('stockLimit', 'integer', 0, false, false, false),
-            new PropertyInfo('items', '\jtl\Connector\Model\ProductSpecialPriceItem', null, false, false, true)
+            new PropertyInfo('items', '\Jtl\Connector\Core\Model\ProductSpecialPriceItem', null, false, false, true),
         );
     }
 

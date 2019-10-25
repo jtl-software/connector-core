@@ -1,9 +1,9 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Rpc
+ * @package Jtl\Connector\Core\Rpc
  */
-namespace jtl\Connector\Rpc;
+namespace Jtl\Connector\Core\Rpc;
 
 use JMS\Serializer\Annotation as Serializer;
 

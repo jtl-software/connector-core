@@ -1,17 +1,17 @@
 <?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -19,7 +19,7 @@ class GlobalData extends DataModel
 {
     /**
      * @var ConfigGroup[]
-     * @Serializer\Type("array<jtl\Connector\Model\ConfigGroup>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ConfigGroup>")
      * @Serializer\SerializedName("configGroups")
      * @Serializer\AccessType("reflection")
      */
@@ -27,7 +27,7 @@ class GlobalData extends DataModel
     
     /**
      * @var ConfigItem[]
-     * @Serializer\Type("array<jtl\Connector\Model\ConfigItem>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ConfigItem>")
      * @Serializer\SerializedName("configItems")
      * @Serializer\AccessType("reflection")
      */
@@ -35,7 +35,7 @@ class GlobalData extends DataModel
     
     /**
      * @var CrossSellingGroup[]
-     * @Serializer\Type("array<jtl\Connector\Model\CrossSellingGroup>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\CrossSellingGroup>")
      * @Serializer\SerializedName("crossSellingGroups")
      * @Serializer\AccessType("reflection")
      */
@@ -43,7 +43,7 @@ class GlobalData extends DataModel
     
     /**
      * @var Currency[]
-     * @Serializer\Type("array<jtl\Connector\Model\Currency>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\Currency>")
      * @Serializer\SerializedName("currencies")
      * @Serializer\AccessType("reflection")
      */
@@ -51,7 +51,7 @@ class GlobalData extends DataModel
     
     /**
      * @var CustomerGroup[]
-     * @Serializer\Type("array<jtl\Connector\Model\CustomerGroup>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\CustomerGroup>")
      * @Serializer\SerializedName("customerGroups")
      * @Serializer\AccessType("reflection")
      */
@@ -59,7 +59,7 @@ class GlobalData extends DataModel
     
     /**
      * @var Language[]
-     * @Serializer\Type("array<jtl\Connector\Model\Language>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\Language>")
      * @Serializer\SerializedName("languages")
      * @Serializer\AccessType("reflection")
      */
@@ -67,7 +67,7 @@ class GlobalData extends DataModel
     
     /**
      * @var MeasurementUnit[]
-     * @Serializer\Type("array<jtl\Connector\Model\MeasurementUnit>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\MeasurementUnit>")
      * @Serializer\SerializedName("measurementUnits")
      * @Serializer\AccessType("reflection")
      */
@@ -75,7 +75,7 @@ class GlobalData extends DataModel
     
     /**
      * @var ProductType[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductType>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductType>")
      * @Serializer\SerializedName("productTypes")
      * @Serializer\AccessType("reflection")
      */
@@ -83,7 +83,7 @@ class GlobalData extends DataModel
     
     /**
      * @var ShippingClass[]
-     * @Serializer\Type("array<jtl\Connector\Model\ShippingClass>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ShippingClass>")
      * @Serializer\SerializedName("shippingClasses")
      * @Serializer\AccessType("reflection")
      */
@@ -91,7 +91,7 @@ class GlobalData extends DataModel
     
     /**
      * @var ShippingMethod[]
-     * @Serializer\Type("array<jtl\Connector\Model\ShippingMethod>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ShippingMethod>")
      * @Serializer\SerializedName("shippingMethods")
      * @Serializer\AccessType("reflection")
      */
@@ -99,7 +99,7 @@ class GlobalData extends DataModel
     
     /**
      * @var TaxRate[]
-     * @Serializer\Type("array<jtl\Connector\Model\TaxRate>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\TaxRate>")
      * @Serializer\SerializedName("taxRates")
      * @Serializer\AccessType("reflection")
      */
@@ -107,7 +107,7 @@ class GlobalData extends DataModel
     
     /**
      * @var Unit[]
-     * @Serializer\Type("array<jtl\Connector\Model\Unit>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\Unit>")
      * @Serializer\SerializedName("units")
      * @Serializer\AccessType("reflection")
      */
@@ -115,7 +115,7 @@ class GlobalData extends DataModel
     
     /**
      * @var Warehouse[]
-     * @Serializer\Type("array<jtl\Connector\Model\Warehouse>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\Warehouse>")
      * @Serializer\SerializedName("warehouses")
      * @Serializer\AccessType("reflection")
      */

@@ -2,12 +2,12 @@
 
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Config
+ * @package Jtl\Connector\Core\Config
  */
 
-namespace jtl\Connector\Config;
+namespace Jtl\Connector\Core\Config;
 
-use jtl\Connector\Exception\JsonException;
+use Jtl\Connector\Core\Exception\JsonException;
 
 /**
  * Config Class

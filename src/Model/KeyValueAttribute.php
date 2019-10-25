@@ -3,14 +3,14 @@
  * @author    Patryk Gorol <patryk.gorol@jtl-software.com>
  * @copyright 2010-2019 JTL-Software GmbH
  */
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class KeyValueAttribute
  * @access public
- * @package jtl\Connector\Model\Customer
+ * @package Jtl\Connector\Core\Model\Customer
  * @Serializer\AccessType("public_method")
  */
 class KeyValueAttribute extends DataModel

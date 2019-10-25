@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use DateTime;
 use InvalidArgumentException;
@@ -15,7 +15,7 @@ use JMS\Serializer\Annotation as Serializer;
  * Customer order properties.
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -58,7 +58,7 @@ class CustomerOrder extends DataModel
     
     /**
      * @var Identity Optional reference to customer.
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerId")
      * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
      */
@@ -66,7 +66,7 @@ class CustomerOrder extends DataModel
     
     /**
      * @var Identity Unique customerOrder id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
@@ -74,7 +74,7 @@ class CustomerOrder extends DataModel
     
     /**
      * @var CustomerOrderBillingAddress Billing address
-     * @Serializer\Type("jtl\Connector\Model\CustomerOrderBillingAddress")
+     * @Serializer\Type("Jtl\Connector\Core\Model\CustomerOrderBillingAddress")
      * @Serializer\SerializedName("billingAddress")
      * @Serializer\Accessor(getter="getBillingAddress",setter="setBillingAddress")
      */
@@ -146,7 +146,7 @@ class CustomerOrder extends DataModel
     
     /**
      * @var CustomerOrderPaymentInfo
-     * @Serializer\Type("jtl\Connector\Model\CustomerOrderPaymentInfo")
+     * @Serializer\Type("Jtl\Connector\Core\Model\CustomerOrderPaymentInfo")
      * @Serializer\SerializedName("paymentInfo")
      * @Serializer\Accessor(getter="getPaymentInfo",setter="setPaymentInfo")
      */
@@ -178,7 +178,7 @@ class CustomerOrder extends DataModel
     
     /**
      * @var CustomerOrderShippingAddress Shipping address
-     * @Serializer\Type("jtl\Connector\Model\CustomerOrderShippingAddress")
+     * @Serializer\Type("Jtl\Connector\Core\Model\CustomerOrderShippingAddress")
      * @Serializer\SerializedName("shippingAddress")
      * @Serializer\Accessor(getter="getShippingAddress",setter="setShippingAddress")
      */
@@ -202,7 +202,7 @@ class CustomerOrder extends DataModel
     
     /**
      * @var Identity Optional reference to customer.
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("shippingMethodId")
      * @Serializer\Accessor(getter="getShippingMethodId",setter="setShippingMethodId")
      */
@@ -242,7 +242,7 @@ class CustomerOrder extends DataModel
     
     /**
      * @var CustomerOrderAttr[]
-     * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderAttr>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\CustomerOrderAttr>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
@@ -250,7 +250,7 @@ class CustomerOrder extends DataModel
     
     /**
      * @var CustomerOrderItem[]
-     * @Serializer\Type("array<jtl\Connector\Model\CustomerOrderItem>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\CustomerOrderItem>")
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
      */

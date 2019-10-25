@@ -1,16 +1,16 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 
-namespace jtl\Connector\Type;
+namespace Jtl\Connector\Core\Type;
 
-use jtl\Connector\Type\PropertyInfo;
+use \Jtl\Connector\Core\Type\PropertyInfo;
 
 /**
  * @access public
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 class ProductFileDownload extends DataType
 {
@@ -23,7 +23,7 @@ class ProductFileDownload extends DataType
             new PropertyInfo('path', 'string', null, false, false, false),
             new PropertyInfo('previewPath', 'string', null, false, false, false),
             new PropertyInfo('sort', 'int', null, false, false, false),
-            new PropertyInfo('i18ns', '\jtl\Connector\Model\ProductFileDownloadI18n', null, false, false, true)
+            new PropertyInfo('i18ns', '\Jtl\Connector\Core\Model\ProductFileDownloadI18n', null, false, false, true)
         ];
     }
 

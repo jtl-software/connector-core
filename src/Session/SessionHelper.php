@@ -1,12 +1,12 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Session
+ * @package Jtl\Connector\Core\Session
  */
 
-namespace jtl\Connector\Session;
+namespace Jtl\Connector\Core\Session;
 
-use \jtl\Connector\Exception\SessionException;
+use \Jtl\Connector\Core\Exception\SessionException;
 
 class SessionHelper
 {
@@ -16,7 +16,7 @@ class SessionHelper
      * Constructor
      *
      * @param string $namespace
-     * @throws \jtl\Connector\Exception\SessionException
+     * @throws \Jtl\Connector\Core\Exception\SessionException
      */
     public function __construct($namespace = "default")
     {
@@ -40,7 +40,7 @@ class SessionHelper
      *
      * @param string $name
      * @param mixed $value
-     * @throws \jtl\Connector\Exception\SessionException
+     * @throws \Jtl\Connector\Core\Exception\SessionException
      */
     public function __set($name, $value)
     {
@@ -56,7 +56,7 @@ class SessionHelper
      * Magic Get
      *
      * @param string $name
-     * @throws \jtl\Connector\Exception\SessionException
+     * @throws \Jtl\Connector\Core\Exception\SessionException
      * @return NULL
      */
     public function & __get($name)
@@ -78,7 +78,7 @@ class SessionHelper
      * Magic Isset
      *
      * @param string $name
-     * @throws \jtl\Connector\Exception\SessionException
+     * @throws \Jtl\Connector\Core\Exception\SessionException
      */
     public function __isset($name)
     {
@@ -94,7 +94,7 @@ class SessionHelper
     /**
      * Magic Unset
      * @param string $name
-     * @throws \jtl\Connector\Exception\SessionException
+     * @throws \Jtl\Connector\Core\Exception\SessionException
      */
     public function __unset($name)
     {

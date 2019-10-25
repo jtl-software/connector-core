@@ -2,13 +2,13 @@
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Application
+ * @package Jtl\Connector\Core\Application
  */
-namespace jtl\Connector\Controller;
+namespace Jtl\Connector\Core\Controller;
 
-use \jtl\Connector\Result\Action;
-use \jtl\Connector\Rpc\Error;
-use \jtl\Connector\Linker\IdentityLinker;
+use \Jtl\Connector\Core\Result\Action;
+use \Jtl\Connector\Core\Rpc\Error;
+use \Jtl\Connector\Core\Linker\IdentityLinker;
 
 /**
  * Base Linker Controller

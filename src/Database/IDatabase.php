@@ -2,9 +2,9 @@
 /**
  *
  * @copyright 2010-2012 JTL-Software GmbH
- * @package jtl\Connector\Database
+ * @package Jtl\Connector\Core\Database
  */
-namespace jtl\Connector\Database;
+namespace Jtl\Connector\Core\Database;
 
 /**
  * Database Interface

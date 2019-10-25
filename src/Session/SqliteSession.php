@@ -1,14 +1,14 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Session
+ * @package Jtl\Connector\Core\Session
  */
-namespace jtl\Connector\Session;
+namespace Jtl\Connector\Core\Session;
 
-use jtl\Connector\Exception\ApplicationException;
-use jtl\Connector\IO\Path;
-use jtl\Connector\Logger\Logger;
-use jtl\Connector\Database\Sqlite3;
+use Jtl\Connector\Core\Exception\ApplicationException;
+use Jtl\Connector\Core\IO\Path;
+use Jtl\Connector\Core\Logger\Logger;
+use Jtl\Connector\Core\Database\Sqlite3;
 
 /**
  * Session Class
@@ -194,7 +194,7 @@ final class SqliteSession implements \SessionHandlerInterface
      * Destroy Session
      *
      * @param $sessionId
-     * @return bool|\jtl\Connector\Database\multitype|number|null
+     * @return bool|\Jtl\Connector\Core\Database\multitype|number|null
      */
     public function destroy($sessionId)
     {
@@ -209,7 +209,7 @@ final class SqliteSession implements \SessionHandlerInterface
      * Garbage Collector
      *
      * @param $maxLifetime
-     * @return bool|\jtl\Connector\Database\multitype|number|null
+     * @return bool|\Jtl\Connector\Core\Database\multitype|number|null
      */
     public function gc($maxLifetime)
     {

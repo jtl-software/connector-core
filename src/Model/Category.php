@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  * A category with sort number, link to parent category and level
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -22,7 +22,7 @@ class Category extends DataModel
 {
     /**
      * @var Identity Unique category id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
@@ -30,7 +30,7 @@ class Category extends DataModel
     
     /**
      * @var Identity Optional reference to parent category id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("parentCategoryId")
      * @Serializer\Accessor(getter="getParentCategoryId",setter="setParentCategoryId")
      */
@@ -62,7 +62,7 @@ class Category extends DataModel
     
     /**
      * @var I18nAttribute[]
-     * @Serializer\Type("array<jtl\Connector\Model\I18nAttribute>")
+     * @Serializer\Type("array<jtl\Connector\Core\Model\I18nAttribute>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
@@ -70,7 +70,7 @@ class Category extends DataModel
     
     /**
      * @var CategoryCustomerGroup[]
-     * @Serializer\Type("array<jtl\Connector\Model\CategoryCustomerGroup>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\CategoryCustomerGroup>")
      * @Serializer\SerializedName("customerGroups")
      * @Serializer\AccessType("reflection")
      */
@@ -78,7 +78,7 @@ class Category extends DataModel
     
     /**
      * @var CategoryI18n[]
-     * @Serializer\Type("array<jtl\Connector\Model\CategoryI18n>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\CategoryI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
@@ -86,7 +86,7 @@ class Category extends DataModel
     
     /**
      * @var CategoryInvisibility[]
-     * @Serializer\Type("array<jtl\Connector\Model\CategoryInvisibility>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\CategoryInvisibility>")
      * @Serializer\SerializedName("invisibilities")
      * @Serializer\AccessType("reflection")
      */

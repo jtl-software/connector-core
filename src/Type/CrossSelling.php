@@ -1,16 +1,16 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 
-namespace jtl\Connector\Type;
+namespace Jtl\Connector\Core\Type;
 
-use \jtl\Connector\Type\PropertyInfo;
+use \Jtl\Connector\Core\Type\PropertyInfo;
 
 /**
  * @access public
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 class CrossSelling extends DataType
 {
@@ -19,7 +19,7 @@ class CrossSelling extends DataType
         return array(
             new PropertyInfo('id', 'Identity', null, false, true, false),
             new PropertyInfo('productId', 'Identity', null, false, true, false),
-            new PropertyInfo('items', '\jtl\Connector\Model\CrossSellingItem', null, false, false, true),
+            new PropertyInfo('items', '\Jtl\Connector\Core\Model\CrossSellingItem', null, false, false, true),
         );
     }
 

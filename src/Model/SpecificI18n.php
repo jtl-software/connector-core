@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
@@ -14,12 +14,20 @@ use JMS\Serializer\Annotation as Serializer;
  * Localized name for specific.
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
 class SpecificI18n extends AbstractI18n
 {
+    /**
+     * @var Identity Reference to specific
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
+     * @Serializer\SerializedName("specificId")
+     * @Serializer\Accessor(getter="getSpecificId",setter="setSpecificId")
+     */
+    protected $specificId = null;
+
     /**
      * @var string Localized name
      * @Serializer\Type("string")

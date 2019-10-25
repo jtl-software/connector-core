@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use DateTime;
 use InvalidArgumentException;
@@ -15,7 +15,7 @@ use JMS\Serializer\Annotation as Serializer;
  * Product properties.
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -23,7 +23,7 @@ class Product extends DataModel
 {
     /**
      * @var Identity Optional reference to basePriceUnit
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("basePriceUnitId")
      * @Serializer\Accessor(getter="getBasePriceUnitId",setter="setBasePriceUnitId")
      */
@@ -31,7 +31,7 @@ class Product extends DataModel
     
     /**
      * @var Identity Unique product id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
@@ -39,7 +39,7 @@ class Product extends DataModel
     
     /**
      * @var Identity Reference to manufacturer
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("manufacturerId")
      * @Serializer\Accessor(getter="getManufacturerId",setter="setManufacturerId")
      */
@@ -47,7 +47,7 @@ class Product extends DataModel
     
     /**
      * @var Identity Reference to master product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("masterProductId")
      * @Serializer\Accessor(getter="getMasterProductId",setter="setMasterProductId")
      */
@@ -55,7 +55,7 @@ class Product extends DataModel
     
     /**
      * @var Identity Optional reference to measurement unit id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("measurementUnitId")
      * @Serializer\Accessor(getter="getMeasurementUnitId",setter="setMeasurementUnitId")
      */
@@ -63,7 +63,7 @@ class Product extends DataModel
     
     /**
      * @var Identity Optional reference to partsList
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("partsListId")
      * @Serializer\Accessor(getter="getPartsListId",setter="setPartsListId")
      */
@@ -71,7 +71,7 @@ class Product extends DataModel
     
     /**
      * @var Identity Optional reference to productType
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productTypeId")
      * @Serializer\Accessor(getter="getProductTypeId",setter="setProductTypeId")
      */
@@ -79,7 +79,7 @@ class Product extends DataModel
     
     /**
      * @var Identity Reference to shippingClass
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("shippingClassId")
      * @Serializer\Accessor(getter="getShippingClassId",setter="setShippingClassId")
      */
@@ -87,7 +87,7 @@ class Product extends DataModel
     
     /**
      * @var Identity Reference to unit
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("unitId")
      * @Serializer\Accessor(getter="getUnitId",setter="setUnitId")
      */
@@ -311,7 +311,7 @@ class Product extends DataModel
     
     /**
      * @var Manufacturer
-     * @Serializer\Type("jtl\Connector\Model\Manufacturer")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Manufacturer")
      * @Serializer\SerializedName("manufacturer")
      * @Serializer\Accessor(getter="getManufacturer",setter="setManufacturer")
      */
@@ -479,7 +479,7 @@ class Product extends DataModel
     
     /**
      * @var ProductStockLevel
-     * @Serializer\Type("jtl\Connector\Model\ProductStockLevel")
+     * @Serializer\Type("Jtl\Connector\Core\Model\ProductStockLevel")
      * @Serializer\SerializedName("stockLevel")
      * @Serializer\Accessor(getter="getStockLevel",setter="setStockLevel")
      */
@@ -551,7 +551,7 @@ class Product extends DataModel
     
     /**
      * @var Product2Category[]
-     * @Serializer\Type("array<jtl\Connector\Model\Product2Category>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\Product2Category>")
      * @Serializer\SerializedName("categories")
      * @Serializer\AccessType("reflection")
      */
@@ -559,7 +559,7 @@ class Product extends DataModel
     
     /**
      * @var ProductChecksum[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductChecksum>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductChecksum>")
      * @Serializer\SerializedName("checksums")
      * @Serializer\AccessType("reflection")
      */
@@ -567,7 +567,7 @@ class Product extends DataModel
     
     /**
      * @var ProductConfigGroup[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductConfigGroup>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductConfigGroup>")
      * @Serializer\SerializedName("configGroups")
      * @Serializer\AccessType("reflection")
      */
@@ -575,7 +575,7 @@ class Product extends DataModel
     
     /**
      * @var CustomerGroupPackagingQuantity[]
-     * @Serializer\Type("array<jtl\Connector\Model\CustomerGroupPackagingQuantity>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\CustomerGroupPackagingQuantity>")
      * @Serializer\SerializedName("customerGroupPackagingQuantities")
      * @Serializer\AccessType("reflection")
      */
@@ -583,7 +583,7 @@ class Product extends DataModel
     
     /**
      * @var ProductFileDownload[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductFileDownload>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductFileDownload>")
      * @Serializer\SerializedName("fileDownloads")
      * @Serializer\AccessType("reflection")
      */
@@ -591,7 +591,7 @@ class Product extends DataModel
     
     /**
      * @var ProductI18n[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductI18n>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
@@ -599,7 +599,7 @@ class Product extends DataModel
     
     /**
      * @var ProductInvisibility[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductInvisibility>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductInvisibility>")
      * @Serializer\SerializedName("invisibilities")
      * @Serializer\AccessType("reflection")
      */
@@ -607,7 +607,7 @@ class Product extends DataModel
     
     /**
      * @var ProductMediaFile[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductMediaFile>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductMediaFile>")
      * @Serializer\SerializedName("mediaFiles")
      * @Serializer\AccessType("reflection")
      */
@@ -615,7 +615,7 @@ class Product extends DataModel
     
     /**
      * @var ProductPartsList[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductPartsList>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductPartsList>")
      * @Serializer\SerializedName("partsLists")
      * @Serializer\AccessType("reflection")
      */
@@ -623,7 +623,7 @@ class Product extends DataModel
     
     /**
      * @var ProductPrice[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductPrice>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductPrice>")
      * @Serializer\SerializedName("prices")
      * @Serializer\AccessType("reflection")
      */
@@ -631,7 +631,7 @@ class Product extends DataModel
     
     /**
      * @var ProductSpecialPrice[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductSpecialPrice>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductSpecialPrice>")
      * @Serializer\SerializedName("specialPrices")
      * @Serializer\AccessType("reflection")
      */
@@ -639,7 +639,7 @@ class Product extends DataModel
     
     /**
      * @var ProductSpecific[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductSpecific>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductSpecific>")
      * @Serializer\SerializedName("specifics")
      * @Serializer\AccessType("reflection")
      */
@@ -647,7 +647,7 @@ class Product extends DataModel
     
     /**
      * @var ProductVarCombination[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductVarCombination>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductVarCombination>")
      * @Serializer\SerializedName("varCombinations")
      * @Serializer\AccessType("reflection")
      */
@@ -655,7 +655,7 @@ class Product extends DataModel
     
     /**
      * @var ProductVariation[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductVariation>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductVariation>")
      * @Serializer\SerializedName("variations")
      * @Serializer\AccessType("reflection")
      */
@@ -663,7 +663,7 @@ class Product extends DataModel
     
     /**
      * @var ProductWarehouseInfo[]
-     * @Serializer\Type("array<jtl\Connector\Model\ProductWarehouseInfo>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductWarehouseInfo>")
      * @Serializer\SerializedName("warehouseInfo")
      * @Serializer\AccessType("reflection")
      */

@@ -1,5 +1,5 @@
 <?php
-namespace jtl\Connector\IO;
+namespace Jtl\Connector\Core\IO;
 
 class Path
 {

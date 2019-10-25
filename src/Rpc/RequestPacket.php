@@ -1,14 +1,14 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Rpc
+ * @package Jtl\Connector\Core\Rpc
  */
-namespace jtl\Connector\Rpc;
+namespace Jtl\Connector\Core\Rpc;
 
 use JMS\Serializer\Annotation as Serializer;
-use jtl\Connector\Exception\RpcException;
-use jtl\Connector\Logger\Logger;
-use jtl\Connector\Formatter\ExceptionFormatter;
+use Jtl\Connector\Core\Exception\RpcException;
+use Jtl\Connector\Core\Logger\Logger;
+use Jtl\Connector\Core\Formatter\ExceptionFormatter;
 
 /**
  * Rpc Request Packet
@@ -36,7 +36,7 @@ class RequestPacket extends Packet
      * This member MAY be omitted.
      *
      * @var array | object
-     * @Serializer\Type("jtl\Connector\Rpc\JsonString")
+     * @Serializer\Type("Jtl\Connector\Core\Rpc\JsonString")
      */
     protected $params;
 
@@ -54,7 +54,7 @@ class RequestPacket extends Packet
      * Setter for $method
      *
      * @param string $method
-     * @return \jtl\Connector\Rpc\Packet
+     * @return \Jtl\Connector\Core\Rpc\Packet
      */
     public function setMethod($method)
     {
@@ -76,7 +76,7 @@ class RequestPacket extends Packet
      * Setter for $params
      *
      * @param array | object $params
-     * @return \jtl\Connector\Rpc\Packet
+     * @return \Jtl\Connector\Core\Rpc\Packet
      */
     public function setParams($params)
     {
@@ -119,7 +119,7 @@ class RequestPacket extends Packet
      *
      * @param string $jtlrpc
      * @throws RpcException
-     * @return \jtl\Connector\Rpc\RequestPacket|multitype:\jtl\Connector\Rpc\RequestPacket
+     * @return \Jtl\Connector\Core\Rpc\RequestPacket|multitype:\Jtl\Connector\Core\Rpc\RequestPacket
      */
     public static function build($jtlrpc)
     {
@@ -128,11 +128,11 @@ class RequestPacket extends Packet
                 $serializer = \JMS\Serializer\SerializerBuilder::create()
                     ->addDefaultHandlers()
                     ->configureHandlers(function (\JMS\Serializer\Handler\HandlerRegistry $registry) {
-                        $registry->registerSubscribingHandler(new \jtl\Connector\Serializer\Handler\JsonStringHandler());
+                        $registry->registerSubscribingHandler(new \Jtl\Connector\Core\Serializer\Handler\JsonStringHandler());
                     })
                     ->build();
 
-                return $serializer->deserialize($jtlrpc, 'jtl\Connector\Rpc\RequestPacket', 'json');
+                return $serializer->deserialize($jtlrpc, 'Jtl\Connector\Core\Rpc\RequestPacket', 'json');
                 
                 /*
                 $data = Json::decode($jtlrpc);

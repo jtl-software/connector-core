@@ -1,8 +1,8 @@
 <?php
-namespace jtl\Connector\Event\CustomerOrder;
+namespace Jtl\Connector\Core\Event\CustomerOrder;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\CustomerOrder;
+use Jtl\Connector\Core\Model\CustomerOrder;
 
 
 class CustomerOrderBeforeDeleteEvent extends Event

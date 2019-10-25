@@ -1,8 +1,8 @@
 <?php
-namespace jtl\Connector\Event\Image;
+namespace Jtl\Connector\Core\Event\Image;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\Image;
+use Jtl\Connector\Core\Model\Image;
 
 
 class ImageAfterDeleteEvent extends Event

@@ -3,14 +3,14 @@
  * @author    Patryk Gorol <patryk.gorol@jtl-software.com>
  * @copyright 2010-2019 JTL-Software GmbH
  */
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class AbstractI18n
  * @access public
- * @package jtl\Connector\Model\Common
+ * @package Jtl\Connector\Core\Model\Common
  * @Serializer\AccessType("public_method")
  */
 abstract class AbstractI18n extends DataModel

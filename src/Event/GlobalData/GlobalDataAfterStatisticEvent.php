@@ -1,8 +1,8 @@
 <?php
-namespace jtl\Connector\Event\GlobalData;
+namespace Jtl\Connector\Core\Event\GlobalData;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\Statistic;
+use Jtl\Connector\Core\Model\Statistic;
 
 
 class GlobalDataAfterStatisticEvent extends Event

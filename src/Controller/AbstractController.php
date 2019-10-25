@@ -1,16 +1,16 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Controller
+ * @package Jtl\Connector\Core\Controller
  */
 
-namespace jtl\Connector\Controller;
+namespace Jtl\Connector\Core\Controller;
 
-use jtl\Connector\Exception\NotImplementedException;
-use jtl\Connector\Rpc\Method;
-use jtl\Connector\Model\DataModel;
-use jtl\Connector\Model\QueryFilter;
-use jtl\Connector\Utilities\Singleton;
+use Jtl\Connector\Core\Exception\NotImplementedException;
+use Jtl\Connector\Core\Rpc\Method;
+use Jtl\Connector\Core\Model\DataModel;
+use Jtl\Connector\Core\Model\QueryFilter;
+use Jtl\Connector\Core\Utilities\Singleton;
 
 /**
  * Base Controller Class
@@ -24,7 +24,7 @@ abstract class AbstractController extends Singleton implements IController
 
     /**
      * (non-PHPdoc)
-     * @see \jtl\Connector\Controller\IController::push()
+     * @see \Jtl\Connector\Core\Controller\IController::push()
      */
     public function push(DataModel $model)
     {
@@ -33,7 +33,7 @@ abstract class AbstractController extends Singleton implements IController
     
     /**
      * (non-PHPdoc)
-     * @see \jtl\Connector\Controller\IController::pull()
+     * @see \Jtl\Connector\Core\Controller\IController::pull()
      */
     public function pull(QueryFilter $queryFilter)
     {
@@ -42,7 +42,7 @@ abstract class AbstractController extends Singleton implements IController
 
     /**
      * (non-PHPdoc)
-     * @see \jtl\Connector\Controller\IController::delete()
+     * @see \Jtl\Connector\Core\Controller\IController::delete()
      */
     public function delete(DataModel $model)
     {
@@ -51,7 +51,7 @@ abstract class AbstractController extends Singleton implements IController
 
     /**
      * (non-PHPdoc)
-     * @see \jtl\Connector\Controller\IController::statistic()
+     * @see \Jtl\Connector\Core\Controller\IController::statistic()
      */
     public function statistic(QueryFilter $queryFilter)
     {
@@ -61,8 +61,8 @@ abstract class AbstractController extends Singleton implements IController
     /**
      * Method Setter
      *
-     * @param \jtl\Connector\Rpc\Method $method
-     * @return \jtl\Connector\Controller\AbstractController
+     * @param \Jtl\Connector\Core\Rpc\Method $method
+     * @return \Jtl\Connector\Core\Controller\AbstractController
      */
     public function setMethod(Method $method)
     {
@@ -73,7 +73,7 @@ abstract class AbstractController extends Singleton implements IController
     /**
      * Method Getter
      *
-     * @return \jtl\Connector\Rpc\Method
+     * @return \Jtl\Connector\Core\Rpc\Method
      */
     public function getMethod()
     {

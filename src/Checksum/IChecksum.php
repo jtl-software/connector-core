@@ -1,12 +1,12 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Application
+ * @package Jtl\Connector\Core\Application
  */
 
-namespace jtl\Connector\Checksum;
+namespace Jtl\Connector\Core\Checksum;
 
-use jtl\Connector\Model\Identity;
+use Jtl\Connector\Core\Model\Identity;
 
 interface IChecksum
 {

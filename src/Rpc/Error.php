@@ -2,12 +2,12 @@
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Rpc
+ * @package jtl\Connector\Core\Rpc
  */
-namespace jtl\Connector\Rpc;
+namespace jtl\Connector\Core\Rpc;
 
-use jtl\Connector\Model\Model;
-use jtl\Connector\Exception\RpcException;
+use jtl\Connector\Core\Model\Model;
+use jtl\Connector\Core\Exception\RpcException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -63,7 +63,7 @@ class Error extends Model
      * Setter for $code
      *
      * @param int $code
-     * @return \jtl\Connector\Rpc\Error
+     * @return \jtl\Connector\Core\Rpc\Error
      */
     public function setCode($code)
     {
@@ -85,7 +85,7 @@ class Error extends Model
      * Setter for $message
      *
      * @param string $message
-     * @return \jtl\Connector\Rpc\Error
+     * @return \jtl\Connector\Core\Rpc\Error
      */
     public function setMessage($message)
     {
@@ -108,7 +108,7 @@ class Error extends Model
      *
      * @param
      *            integer | string | array | object $data
-     * @return \jtl\Connector\Rpc\Error
+     * @return \jtl\Connector\Core\Rpc\Error
      */
     public function setData($data)
     {
@@ -138,7 +138,4 @@ class Error extends Model
         }
         
         if (!$isValid) {
-            throw new RpcException("Parse error", -32701);
-        }
-    }
-}
+            throw new RpcException("Parse 

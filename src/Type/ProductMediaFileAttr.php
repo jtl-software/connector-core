@@ -1,23 +1,23 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 
-namespace jtl\Connector\Type;
+namespace Jtl\Connector\Core\Type;
 
-use \jtl\Connector\Type\PropertyInfo;
+use \Jtl\Connector\Core\Type\PropertyInfo;
 
 /**
  * @access public
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 class ProductMediaFileAttr extends DataType
 {
     protected function loadProperties()
     {
         return array(
-            new PropertyInfo('i18ns', '\jtl\Connector\Model\ProductMediaFileAttrI18n', null, false, false, true),
+            new PropertyInfo('i18ns', '\Jtl\Connector\Model\ProductMediaFileAttrI18n', null, false, false, true),
         );
     }
 

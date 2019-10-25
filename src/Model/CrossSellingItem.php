@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  * Specify cross-sold products that are in a common crossSellingGroup.
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -22,7 +22,7 @@ class CrossSellingItem extends DataModel
 {
     /**
      * @var Identity Reference to crossSellingGroup
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("crossSellingGroupId")
      * @Serializer\Accessor(getter="getCrossSellingGroupId",setter="setCrossSellingGroupId")
      */
@@ -30,7 +30,7 @@ class CrossSellingItem extends DataModel
     
     /**
      * @var Identity[] Referenced target product ID
-     * @Serializer\Type("array<jtl\Connector\Model\Identity>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\Identity>")
      * @Serializer\SerializedName("productIds")
      * @Serializer\AccessType("reflection")
      */

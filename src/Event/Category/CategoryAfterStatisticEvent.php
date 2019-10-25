@@ -1,8 +1,8 @@
 <?php
-namespace jtl\Connector\Event\Category;
+namespace Jtl\Connector\Core\Event\Category;
 
 use Symfony\Component\EventDispatcher\Event;
-use jtl\Connector\Model\Statistic;
+use Jtl\Connector\Core\Model\Statistic;
 
 
 class CategoryAfterStatisticEvent extends Event

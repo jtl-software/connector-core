@@ -1,7 +1,7 @@
 <?php
-namespace jtl\Connector\Plugin;
+namespace Jtl\Connector\Core\Plugin;
 
-use jtl\Connector\IO\Path;
+use Jtl\Connector\Core\IO\Path;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 

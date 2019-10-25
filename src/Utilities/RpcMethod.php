@@ -1,12 +1,12 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Utilities
+ * @package Jtl\Connector\Core\Utilities
  */
 
-namespace jtl\Connector\Utilities;
+namespace Jtl\Connector\Core\Utilities;
 
-use \jtl\Connector\Rpc\Method;
+use \Jtl\Connector\Core\Rpc\Method;
 
 /**
  * Rpc Method Utilities
@@ -40,7 +40,7 @@ class RpcMethod
      * Controller and Action Splitter
      *
      * @param string $method
-     * @return \jtl\Connector\Rpc\Method
+     * @return \Jtl\Connector\Core\Rpc\Method
      */
     public static function splitMethod($method)
     {

@@ -1,16 +1,16 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 
-namespace jtl\Connector\Type;
+namespace Jtl\Connector\Core\Type;
 
-use \jtl\Connector\Type\PropertyInfo;
+use \Jtl\Connector\Core\Type\PropertyInfo;
 
 /**
  * @access public
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 class CustomerGroup extends DataType
 {
@@ -21,8 +21,8 @@ class CustomerGroup extends DataType
             new PropertyInfo('applyNetPrice', 'boolean', false, false, false, false),
             new PropertyInfo('discount', 'double', 0.0, false, false, false),
             new PropertyInfo('isDefault', 'boolean', false, false, false, false),
-            new PropertyInfo('attributes', '\jtl\Connector\Model\CustomerGroupAttr', null, false, false, true),
-            new PropertyInfo('i18ns', '\jtl\Connector\Model\CustomerGroupI18n', null, false, false, true),
+            new PropertyInfo('attributes', '\Jtl\Connector\Core\Model\CustomerGroupAttr', null, false, false, true),
+            new PropertyInfo('i18ns', '\Jtl\Connector\Core\Model\CustomerGroupI18n', null, false, false, true),
         );
     }
 

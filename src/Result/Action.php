@@ -2,9 +2,9 @@
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Result
+ * @package Jtl\Connector\Core\Result
  */
-namespace jtl\Connector\Result;
+namespace Jtl\Connector\Core\Result;
 
 /**
  * Connector Handle Result
@@ -63,7 +63,7 @@ class Action
      * Setter for $_isHandled
      *
      * @param bool $handled
-     * @return \jtl\Connector\Result\Action
+     * @return \Jtl\Connector\Core\Result\Action
      */
     public function setHandled($handled)
     {
@@ -85,7 +85,7 @@ class Action
      * Setter for $_result
      *
      * @param mixed $result
-     * @return \jtl\Connector\Result\Action
+     * @return \Jtl\Connector\Core\Result\Action
      */
     public function setResult($result)
     {
@@ -107,7 +107,7 @@ class Action
      * Setter for $_error
      *
      * @param mixed $error
-     * @return \jtl\Connector\Result\Action
+     * @return \Jtl\Connector\Core\Result\Action
      */
     public function setError($error)
     {

@@ -1,47 +1,47 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Application
+ * @package Jtl\Connector\Core\Application
  */
-namespace jtl\Connector\Application;
+namespace Jtl\Connector\Core\Application;
 
-use jtl\Connector\Application\Error\ErrorHandler;
-use jtl\Connector\Application\Error\IErrorHandler;
-use jtl\Connector\Authentication\ITokenValidator;
-use jtl\Connector\Compression\Zip;
-use jtl\Connector\Exception\CompressionException;
-use jtl\Connector\Exception\HttpException;
-use jtl\Connector\IO\Temp;
-use jtl\Connector\Serializer\Json;
-use jtl\Connector\Exception\RpcException;
-use jtl\Connector\Exception\SessionException;
-use jtl\Connector\Exception\ApplicationException;
-use jtl\Connector\Rpc\Packet;
-use jtl\Connector\Rpc\RequestPacket;
-use jtl\Connector\Rpc\ResponsePacket;
-use jtl\Connector\Rpc\Error;
-use jtl\Connector\Http\Request;
-use jtl\Connector\Http\Response;
-use jtl\Connector\Config\Config;
-use jtl\Connector\Exception\JsonException;
-use jtl\Connector\Exception\LinkerException;
-use jtl\Connector\Model\BoolResult;
-use jtl\Connector\Result\Action;
-use jtl\Connector\Utilities\RpcMethod;
-use jtl\Connector\Session\Session;
-use jtl\Connector\Base\Connector;
-use jtl\Connector\Logger\Logger;
+use Jtl\Connector\Core\Application\Error\ErrorHandler;
+use Jtl\Connector\Core\Application\Error\IErrorHandler;
+use Jtl\Connector\Core\Authentication\ITokenValidator;
+use Jtl\Connector\Core\Compression\Zip;
+use Jtl\Connector\Core\Exception\CompressionException;
+use Jtl\Connector\Core\Exception\HttpException;
+use Jtl\Connector\Core\IO\Temp;
+use Jtl\Connector\Core\Serializer\Json;
+use Jtl\Connector\Core\Exception\RpcException;
+use Jtl\Connector\Core\Exception\SessionException;
+use Jtl\Connector\Core\Exception\ApplicationException;
+use Jtl\Connector\Core\Rpc\Packet;
+use Jtl\Connector\Core\Rpc\RequestPacket;
+use Jtl\Connector\Core\Rpc\ResponsePacket;
+use Jtl\Connector\Core\Rpc\Error;
+use Jtl\Connector\Core\Http\Request;
+use Jtl\Connector\Core\Http\Response;
+use Jtl\Connector\Core\Config\Config;
+use Jtl\Connector\Core\Exception\JsonException;
+use Jtl\Connector\Core\Exception\LinkerException;
+use Jtl\Connector\Core\Model\BoolResult;
+use Jtl\Connector\Core\Result\Action;
+use Jtl\Connector\Core\Utilities\RpcMethod;
+use Jtl\Connector\Core\Session\Session;
+use Jtl\Connector\Core\Base\Connector;
+use Jtl\Connector\Core\Logger\Logger;
 use Doctrine\Common\Annotations\AnnotationRegistry;
-use jtl\Connector\Rpc\Method;
-use jtl\Connector\Linker\IdentityLinker;
-use jtl\Connector\Model\DataModel;
-use jtl\Connector\Serializer\JMS\SerializerBuilder;
-use jtl\Connector\Linker\ChecksumLinker;
-use jtl\Connector\Session\SqliteSession;
-use jtl\Connector\Utilities\Singleton;
+use Jtl\Connector\Core\Rpc\Method;
+use Jtl\Connector\Core\Linker\IdentityLinker;
+use Jtl\Connector\Core\Model\DataModel;
+use Jtl\Connector\Core\Serializer\JMS\SerializerBuilder;
+use Jtl\Connector\Core\Linker\ChecksumLinker;
+use Jtl\Connector\Core\Session\SqliteSession;
+use Jtl\Connector\Core\Utilities\Singleton;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use jtl\Connector\IO\Path;
-use jtl\Connector\Event\EventHandler;
+use Jtl\Connector\Core\IO\Path;
+use Jtl\Connector\Core\Event\EventHandler;
 use Symfony\Component\Finder\Finder;
 
 /**
@@ -79,7 +79,7 @@ class Application extends Singleton implements IApplication
     protected $eventDispatcher;
     
     /**
-     * @var \jtl\Connector\Application\Error\IErrorHandler
+     * @var \Jtl\Connector\Core\Application\Error\IErrorHandler
      */
     protected $errorHandler;
     
@@ -93,7 +93,7 @@ class Application extends Singleton implements IApplication
     
     /**
      * (non-PHPdoc)
-     * @see \jtl\Connector\Application\Application::run()
+     * @see \Jtl\Connector\Core\Application\Application::run()
      */
     public function run(): void
     {
@@ -445,7 +445,7 @@ class Application extends Singleton implements IApplication
         $modelClass = RpcMethod::buildController($method->getController());
         
         $namespace = ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) ?
-            sprintf('%s\%s', $modelNamespace, $modelClass) : 'jtl\Connector\Model\QueryFilter';
+            sprintf('%s\%s', $modelNamespace, $modelClass) : 'Jtl\Connector\Core\Model\QueryFilter';
         
         if (class_exists("\\{$namespace}") && $requestpacket->getParams() !== null) {
             $serializer = SerializerBuilder::create();
@@ -581,7 +581,7 @@ class Application extends Singleton implements IApplication
     {
         $this->connector->setEventDispatcher($this->eventDispatcher);
         
-        $loader = new \jtl\Connector\Plugin\PluginLoader();
+        $loader = new \Jtl\Connector\Core\Plugin\PluginLoader();
         $loader->load($this->eventDispatcher);
     }
 

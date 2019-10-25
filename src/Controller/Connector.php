@@ -2,23 +2,23 @@
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Application
+ * @package Jtl\Connector\Core\Application
  */
 
-namespace jtl\Connector\Controller;
+namespace Jtl\Connector\Core\Controller;
 
-use jtl\Connector\Authentication\ITokenValidator;
-use jtl\Connector\IO\Path;
-use jtl\Connector\System\Check;
-use jtl\Connector\Exception\JsonException;
-use jtl\Connector\Result\Action;
-use jtl\Connector\Rpc\Error;
-use jtl\Connector\Linker\IdentityLinker;
-use jtl\Connector\Serializer\JMS\SerializerBuilder;
-use jtl\Connector\Logger\Logger;
-use jtl\Connector\Linker\ChecksumLinker;
-use jtl\Connector\Checksum\IChecksum;
-use jtl\Connector\Formatter\ExceptionFormatter;
+use Jtl\Connector\Core\Authentication\ITokenValidator;
+use Jtl\Connector\Core\IO\Path;
+use Jtl\Connector\Core\System\Check;
+use Jtl\Connector\Core\Exception\JsonException;
+use Jtl\Connector\Core\Result\Action;
+use Jtl\Connector\Core\Rpc\Error;
+use Jtl\Connector\Core\Linker\IdentityLinker;
+use Jtl\Connector\Core\Serializer\JMS\SerializerBuilder;
+use Jtl\Connector\Core\Logger\Logger;
+use Jtl\Connector\Core\Linker\ChecksumLinker;
+use Jtl\Connector\Core\Checksum\IChecksum;
+use Jtl\Connector\Core\Formatter\ExceptionFormatter;
 
 /**
  * Base Config Controller
@@ -92,7 +92,7 @@ class Connector extends AbstractController
         try {
             $serializer = SerializerBuilder::create();
 
-            $ack = $serializer->deserialize($params, "jtl\Connector\Model\Ack", 'json');
+            $ack = $serializer->deserialize($params, "Jtl\Connector\Core\Model\Ack", 'json');
 
             $identityLinker = IdentityLinker::getInstance();
 
@@ -137,7 +137,7 @@ class Connector extends AbstractController
      * Returns the connector auth action
      *
      * @param mixed $params
-     * @return \jtl\Connector\Result\Action
+     * @return \Jtl\Connector\Core\Result\Action
      */
     public function auth($params)
     {
@@ -149,7 +149,7 @@ class Connector extends AbstractController
         try {
             $serializer = SerializerBuilder::create();
 
-            $authRequest = $serializer->deserialize($params, "jtl\Connector\Model\AuthRequest", 'json');
+            $authRequest = $serializer->deserialize($params, "Jtl\Connector\Core\Model\AuthRequest", 'json');
         } catch (\Exception $e) {
             $err = new Error();
             $err->setCode($e->getCode());

@@ -1,20 +1,20 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Application
+ * @package Jtl\Connector\Core\Application
  */
 
-namespace jtl\Connector\Application\Error;
+namespace Jtl\Connector\Core\Application\Error;
 
-use jtl\Connector\Http\Response;
-use jtl\Connector\Logger\Logger;
-use jtl\Connector\Rpc\Error;
-use jtl\Connector\Rpc\RequestPacket;
-use jtl\Connector\Rpc\ResponsePacket;
-use jtl\Connector\Utilities\RpcMethod;
-use jtl\Connector\Event\EventHandler;
+use Jtl\Connector\Core\Http\Response;
+use Jtl\Connector\Core\Logger\Logger;
+use Jtl\Connector\Core\Rpc\Error;
+use Jtl\Connector\Core\Rpc\RequestPacket;
+use Jtl\Connector\Core\Rpc\ResponsePacket;
+use Jtl\Connector\Core\Utilities\RpcMethod;
+use Jtl\Connector\Core\Event\EventHandler;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use jtl\Connector\Formatter\ExceptionFormatter;
+use Jtl\Connector\Core\Formatter\ExceptionFormatter;
 
 class ErrorHandler implements IErrorHandler
 {

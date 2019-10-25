@@ -1,10 +1,10 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 
@@ -12,7 +12,7 @@ use JMS\Serializer\Annotation as Serializer;
  * Database Query Filter
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @Serializer\AccessType("public_method")
  */
 class QueryFilter
@@ -112,7 +112,7 @@ class QueryFilter
      *
      * @param string $key Filter key
      * @param string $value Filter value
-     * @return \jtl\Connector\Model\QueryFilter
+     * @return \Jtl\Connector\Core\Model\QueryFilter
      */
     public function addFilter(string $key, $value): QueryFilter
     {

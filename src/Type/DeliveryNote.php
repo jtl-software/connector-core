@@ -1,16 +1,16 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 
-namespace jtl\Connector\Type;
+namespace Jtl\Connector\Core\Type;
 
-use \jtl\Connector\Type\PropertyInfo;
+use \Jtl\Connector\Core\Type\PropertyInfo;
 
 /**
  * @access public
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 class DeliveryNote extends DataType
 {
@@ -22,8 +22,8 @@ class DeliveryNote extends DataType
             new PropertyInfo('creationDate', 'DateTime', null, false, false, false),
             new PropertyInfo('isFulfillment', 'boolean', false, false, false, false),
             new PropertyInfo('note', 'string', '', false, false, false),
-            new PropertyInfo('items', '\jtl\Connector\Model\DeliveryNoteItem', null, false, false, true),
-            new PropertyInfo('trackingLists', '\jtl\Connector\Model\DeliveryNoteTrackingList', null, false, false, true),
+            new PropertyInfo('items', '\Jtl\Connector\Core\Model\DeliveryNoteItem', null, false, false, true),
+            new PropertyInfo('trackingLists', '\Jtl\Connector\Core\Model\DeliveryNoteTrackingList', null, false, false, true),
         );
     }
 

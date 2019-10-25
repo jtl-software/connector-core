@@ -1,7 +1,7 @@
 <?php
-namespace jtl\Connector\Event\Connector;
+namespace Jtl\Connector\Core\Event\Connector;
 
-use jtl\Connector\Model\BoolResult;
+use Jtl\Connector\Core\Model\BoolResult;
 use Symfony\Component\EventDispatcher\Event;
 
 

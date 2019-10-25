@@ -1,12 +1,12 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Formatter
+ * @package Jtl\Connector\Core\Formatter
  */
 
-namespace jtl\Connector\Formatter;
+namespace Jtl\Connector\Core\Formatter;
 
-use \jtl\Connector\Result\Mysql;
+use \Jtl\Connector\Core\Result\Mysql;
 
 class MysqlResultFormatter
 {

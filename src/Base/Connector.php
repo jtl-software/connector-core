@@ -1,22 +1,22 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Base
+ * @package Jtl\Connector\Core\Base
  */
 
-namespace jtl\Connector\Base;
+namespace Jtl\Connector\Core\Base;
 
-use jtl\Connector\Authentication\ITokenValidator;
-use jtl\Connector\Controller\IController;
-use jtl\Connector\Rpc\RequestPacket;
-use jtl\Connector\Application\IEndpointConnector;
-use jtl\Connector\Utilities\Singleton;
-use jtl\Connector\Utilities\RpcMethod;
-use jtl\Connector\Rpc\Method;
-use jtl\Connector\Mapper\IPrimaryKeyMapper;
-use jtl\Connector\Authentication\ITokenLoader;
-use jtl\Connector\Checksum\IChecksumLoader;
-use jtl\Connector\Result\Action;
+use Jtl\Connector\Core\Authentication\ITokenValidator;
+use Jtl\Connector\Core\Controller\IController;
+use Jtl\Connector\Core\Rpc\RequestPacket;
+use Jtl\Connector\Core\Application\IEndpointConnector;
+use Jtl\Connector\Core\Utilities\Singleton;
+use Jtl\Connector\Core\Utilities\RpcMethod;
+use Jtl\Connector\Core\Rpc\Method;
+use Jtl\Connector\Core\Mapper\IPrimaryKeyMapper;
+use Jtl\Connector\Core\Authentication\ITokenLoader;
+use Jtl\Connector\Core\Checksum\IChecksumLoader;
+use Jtl\Connector\Core\Result\Action;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
@@ -44,7 +44,7 @@ class Connector extends Singleton implements IEndpointConnector
     /** @var bool */
     protected $useSuperGlobals = true;
     /** @var string */
-    protected $modelNamespace = 'jtl\Connector\Model';
+    protected $modelNamespace = 'Jtl\Connector\Core\Model';
     
     public function initialize()
     {
@@ -54,8 +54,8 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * Setter primary key mapper
      *
-     * @param \jtl\Connector\Mapper\IPrimaryKeyMapper $mapper
-     * @return \jtl\Connector\Base\Connector
+     * @param \Jtl\Connector\Core\Mapper\IPrimaryKeyMapper $mapper
+     * @return \Jtl\Connector\Core\Base\Connector
      */
     public function setPrimaryKeyMapper(IPrimaryKeyMapper $mapper): IEndpointConnector
     {
@@ -67,7 +67,7 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * Returns primary key mapper
      *
-     * @return \jtl\Connector\Authentication\ITokenLoader
+     * @return \Jtl\Connector\Core\Authentication\ITokenLoader
      */
     public function getPrimaryKeyMapper(): IPrimaryKeyMapper
     {
@@ -77,7 +77,7 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * Setter token loader
      *
-     * @param \jtl\Connector\Authentication\ITokenLoader $tokenLoader
+     * @param \Jtl\Connector\Core\Authentication\ITokenLoader $tokenLoader
      * @return Connector
      */
     public function setTokenLoader(ITokenLoader $tokenLoader): IEndpointConnector
@@ -90,7 +90,7 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * Returns token loader
      *
-     * @return \jtl\Connector\Authentication\ITokenLoader
+     * @return \Jtl\Connector\Core\Authentication\ITokenLoader
      */
     public function getTokenLoader(): ITokenLoader
     {
@@ -100,7 +100,7 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * Setter token validator
      *
-     * @param \jtl\Connector\Authentication\ITokenValidator $tokenValidator
+     * @param \Jtl\Connector\Core\Authentication\ITokenValidator $tokenValidator
      * @return Connector
      */
     protected function setTokenValidator(ITokenValidator $tokenValidator): IEndpointConnector
@@ -111,7 +111,7 @@ class Connector extends Singleton implements IEndpointConnector
     }
     
     /**
-     * @return \jtl\Connector\Authentication\ITokenValidator
+     * @return \Jtl\Connector\Core\Authentication\ITokenValidator
      */
     public function getTokenValidator(): ?ITokenValidator
     {
@@ -121,7 +121,7 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * Setter checksum loader
      *
-     * @param \jtl\Connector\Checksum\IChecksumLoader $checksumLoader
+     * @param \Jtl\Connector\Core\Checksum\IChecksumLoader $checksumLoader
      * @return Connector
      */
     public function setChecksumLoader(IChecksumLoader $checksumLoader): IEndpointConnector
@@ -134,7 +134,7 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * Returns checksum loader
      *
-     * @return \jtl\Connector\Checksum\IChecksumLoader
+     * @return \Jtl\Connector\Core\Checksum\IChecksumLoader
      */
     public function getChecksumLoader(): IChecksumLoader
     {
@@ -165,7 +165,7 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * Method Setter
      *
-     * @param \jtl\Connector\Rpc\Method $method
+     * @param \Jtl\Connector\Core\Rpc\Method $method
      * @return Connector
      */
     public function setMethod(Method $method): IEndpointConnector
@@ -178,7 +178,7 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * Method Getter
      *
-     * @return \jtl\Connector\Rpc\Method
+     * @return \Jtl\Connector\Core\Rpc\Method
      */
     public function getMethod(): Method
     {
@@ -202,7 +202,7 @@ class Connector extends Singleton implements IEndpointConnector
     public function setModelNamespace(string $modelNamespace): IEndpointConnector
     {
         if (!is_string($modelNamespace) || $modelNamespace[strlen($modelNamespace) - 1] == '\\' || $modelNamespace[0] == '\\') {
-            throw new \InvalidArgumentException(sprintf('Wrong Namespace (%s) syntax. Example: jtl\Connector\Model',
+            throw new \InvalidArgumentException(sprintf('Wrong Namespace (%s) syntax. Example: Jtl\Connector\Core\Model',
                 $modelNamespace));
         }
         
@@ -223,7 +223,7 @@ class Connector extends Singleton implements IEndpointConnector
     
     /**
      * (non-PHPdoc)
-     * @see \jtl\Connector\Application\IEndpointConnector::canHandle()
+     * @see \Jtl\Connector\Core\Application\IEndpointConnector::canHandle()
      */
     public function canHandle(): bool
     {
@@ -243,7 +243,7 @@ class Connector extends Singleton implements IEndpointConnector
     /**
      * @param RequestPacket $requestpacket
      * @return Action
-     * @see \jtl\Connector\Application\IEndpointConnector::handle()
+     * @see \Jtl\Connector\Core\Application\IEndpointConnector::handle()
      */
     public function handle(RequestPacket $requestpacket): Action
     {
@@ -253,7 +253,7 @@ class Connector extends Singleton implements IEndpointConnector
     }
     
     /**
-     * @see \jtl\Connector\Application\IEndpointConnector::getController()
+     * @see \Jtl\Connector\Core\Application\IEndpointConnector::getController()
      */
     public function getController(): IController
     {

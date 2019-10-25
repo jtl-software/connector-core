@@ -1,18 +1,18 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  */
 
-namespace jtl\Connector\Type;
+namespace Jtl\Connector\Core\Type;
 
-use jtl\Connector\Type\PropertyInfo;
+use Jtl\Connector\Core\Type\PropertyInfo;
 
 /**
  * Entity data model
  *
  * @access public
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 abstract class DataType
 {

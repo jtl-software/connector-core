@@ -5,7 +5,7 @@
  *
  * Created at 15.05.2019 09:06
  */
-namespace jtl\Connector\Exception;
+namespace Jtl\Connector\Core\Exception;
 
 
 class JsonException extends \RuntimeException

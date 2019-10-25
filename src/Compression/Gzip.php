@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Compression
+ * @package Jtl\Connector\Core\Compression
  */
-namespace jtl\Connector\Compression;
+namespace Jtl\Connector\Core\Compression;
 
-use jtl\Connector\Exception\CompressionException;
+use Jtl\Connector\Core\Exception\CompressionException;
 
 /**
  * Gzip Compression
@@ -17,8 +17,8 @@ class Gzip implements ICompression
 {
     /**
      * (non-PHPdoc)
-     * @see \jtl\Connector\Compression\ICompression::read()
-     * @throws \jtl\Connector\Exception\CompressionException
+     * @see \Jtl\Connector\Core\Compression\ICompression::read()
+     * @throws \Jtl\Connector\Core\Exception\CompressionException
      */
     public function read($file)
     {
@@ -53,7 +53,7 @@ class Gzip implements ICompression
     
     /**
      * (non-PHPdoc)
-     * @see \jtl\Connector\Compression\ICompression::write()
+     * @see \Jtl\Connector\Core\Compression\ICompression::write()
      */
     public function write($filename, $content)
     {

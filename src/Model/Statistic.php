@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Internal
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
 use stdClass;
@@ -14,7 +14,7 @@ use stdClass;
  * Statistic Model
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Internal
  */
 class Statistic extends DataModel
@@ -33,7 +33,7 @@ class Statistic extends DataModel
      * (non-PHPdoc)
      * @param bool $toWawi
      * @param stdClass|null $obj
-     * @see \jtl\Connector\Model\DataModel::map()
+     * @see \Jtl\Connector\Core\Model\DataModel::map()
      */
     public function map(bool $toWawi = false, stdClass $obj = null)
     {

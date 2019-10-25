@@ -1,11 +1,11 @@
 <?php
 /**
  * @copyright 2010-2015 JTL-Software GmbH
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
-namespace jtl\Connector\Model;
+namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  * Specific is defined as a characteristic product attribute Like "color". Specifics can be used for after-search-filtering.
  *
  * @access public
- * @package jtl\Connector\Model
+ * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -22,7 +22,7 @@ class Specific extends DataModel
 {
     /**
      * @var Identity Unique specific id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
@@ -54,7 +54,7 @@ class Specific extends DataModel
     
     /**
      * @var SpecificI18n[]
-     * @Serializer\Type("array<jtl\Connector\Model\SpecificI18n>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\SpecificI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
@@ -62,7 +62,7 @@ class Specific extends DataModel
     
     /**
      * @var SpecificValue[]
-     * @Serializer\Type("array<jtl\Connector\Model\SpecificValue>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\SpecificValue>")
      * @Serializer\SerializedName("values")
      * @Serializer\AccessType("reflection")
      */

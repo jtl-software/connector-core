@@ -1,14 +1,14 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Linker
+ * @package Jtl\Connector\Core\Linker
  */
-namespace jtl\Connector\Linker;
+namespace Jtl\Connector\Core\Linker;
 
-use jtl\Connector\Checksum\IChecksumLoader;
-use jtl\Connector\Checksum\IChecksum;
-use jtl\Connector\Model\Model;
-use jtl\Connector\Logger\Logger;
+use Jtl\Connector\Core\Checksum\IChecksumLoader;
+use Jtl\Connector\Core\Checksum\IChecksum;
+use Jtl\Connector\Core\Model\Model;
+use Jtl\Connector\Core\Logger\Logger;
 
 /**
  * Identity Connector Linker
@@ -26,7 +26,7 @@ class ChecksumLinker
     }
 
     /**
-     * @param \jtl\Connector\Model\Model $model
+     * @param \Jtl\Connector\Core\Model\Model $model
      * @param int $type
      */
     public static function link(Model &$model, $type = null)
@@ -63,7 +63,7 @@ class ChecksumLinker
     }
 
     /**
-     * @param \jtl\Connector\Checksum\IChecksum $checksum
+     * @param \Jtl\Connector\Core\Checksum\IChecksum $checksum
      * @return boolean
      */
     public static function save(IChecksum $checksum)
@@ -79,9 +79,9 @@ class ChecksumLinker
     }
 
     /**
-     * @param \jtl\Connector\Model\Model $model
+     * @param \Jtl\Connector\Core\Model\Model $model
      * @param int $type
-     * @return \jtl\Connector\Checksum\IChecksum
+     * @return \Jtl\Connector\Core\Checksum\IChecksum
      */
     public static function find(Model $model, $type)
     {
@@ -97,10 +97,10 @@ class ChecksumLinker
     }
 
     /**
-     * @param \jtl\Connector\Model\Model $model
+     * @param \Jtl\Connector\Core\Model\Model $model
      * @param string $endpoint
      * @param int $type
-     * @return \jtl\Connector\Checksum\IChecksum
+     * @return \Jtl\Connector\Core\Checksum\IChecksum
      */
     public static function findByEndpoint(Model $model, $endpoint, $type)
     {
@@ -116,10 +116,10 @@ class ChecksumLinker
     }
 
     /**
-     * @param \jtl\Connector\Model\Model $model
+     * @param \Jtl\Connector\Core\Model\Model $model
      * @param int $host
      * @param int $type
-     * @return \jtl\Connector\Checksum\IChecksum
+     * @return \Jtl\Connector\Core\Checksum\IChecksum
      */
     public static function findByHost(Model $model, $host, $type)
     {

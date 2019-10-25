@@ -2,11 +2,11 @@
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
- * @package jtl\Connector\Rpc
+ * @package Jtl\Connector\Core\Rpc
  */
-namespace jtl\Connector\Rpc;
+namespace Jtl\Connector\Core\Rpc;
 
-use \jtl\Connector\Model\Model;
+use \Jtl\Connector\Core\Model\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -69,7 +69,7 @@ abstract class Packet extends Model
      * Setter for $jtlrpc
      *
      * @param string $jtlrpc
-     * @return \jtl\Connector\Rpc\Packet
+     * @return \Jtl\Connector\Core\Rpc\Packet
      */
     public function setJtlrpc($jtlrpc)
     {
@@ -91,7 +91,7 @@ abstract class Packet extends Model
      * Setter for $id
      *
      * @param string | number | NULL $id
-     * @return \jtl\Connector\Rpc\Packet
+     * @return \Jtl\Connector\Core\Rpc\Packet
      */
     public function setId($id)
     {

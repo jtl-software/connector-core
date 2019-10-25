@@ -1,16 +1,16 @@
 <?php
 /**
  * @copyright 2010-2014 JTL-Software GmbH
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 
-namespace jtl\Connector\Type;
+namespace Jtl\Connector\Core\Type;
 
-use \jtl\Connector\Type\PropertyInfo;
+use \Jtl\Connector\Core\Type\PropertyInfo;
 
 /**
  * @access public
- * @package jtl\Connector\Type
+ * @package Jtl\Connector\Core\Type
  */
 class ProductVariationValue extends DataType
 {
@@ -23,9 +23,9 @@ class ProductVariationValue extends DataType
             new PropertyInfo('sku', 'string', '', false, false, false),
             new PropertyInfo('sort', 'integer', 0, false, false, false),
             new PropertyInfo('stockLevel', 'double', 0.0, false, false, false),
-            new PropertyInfo('extraCharges', '\jtl\Connector\Model\ProductVariationValueExtraCharge', null, false, false, true),
-            new PropertyInfo('i18ns', '\jtl\Connector\Model\ProductVariationValueI18n', null, false, false, true),
-            new PropertyInfo('invisibilities', '\jtl\Connector\Model\ProductVariationValueInvisibility', null, false, false, true),
+            new PropertyInfo('extraCharges', '\Jtl\Connector\Core\Model\ProductVariationValueExtraCharge', null, false, false, true),
+            new PropertyInfo('i18ns', '\Jtl\Connector\Core\Model\ProductVariationValueI18n', null, false, false, true),
+            new PropertyInfo('invisibilities', '\Jtl\Connector\Core\Model\ProductVariationValueInvisibility', null, false, false, true),
         );
     }
 
