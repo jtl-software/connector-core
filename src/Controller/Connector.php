@@ -7,6 +7,7 @@
 
 namespace Jtl\Connector\Core\Controller;
 
+use Jtl\Connector\Core\Application\Error\ErrorCodesInterface;
 use Jtl\Connector\Core\IO\Path;
 use Jtl\Connector\Core\System\Check;
 use Jtl\Connector\Core\Exception\JsonException;
@@ -176,7 +177,7 @@ class Connector extends AbstractController
             $action->setResult($session);
         } else {
             $error = new Error();
-            $error->setCode(789)
+            $error->setCode(ErrorCodesInterface::UNDEFINED_SESSION_HANDLER_ERROR)
                 ->setMessage("Could not get any Session");
             $action->setError($error);
         }
@@ -271,11 +272,11 @@ class Connector extends AbstractController
     protected function unauthorizedAccessError(Action $action,string $accessToken) : Action
     {
         $error = new Error();
-        $error->setCode(790);
+        $error->setCode(ErrorCodesInterface::AUTHENTICATION_ERROR);
         $error->setMessage("Could not authenticate access to the connector");
         $action->setError($error);
 
-        Logger::write(sprintf("Unauthorized access with token (%s) from ip (%s)", $accessToken, $_SERVER['REMOTE_ADDR']), Logger::INFO, 'security');
+        Logger::write(sprintf("Unauthorized access with token (%s) from ip (%s)", $accessToken, $_SERVER['REMOTE_ADDR']), Logger::WARNING, 'security');
 
         return $action;
     }

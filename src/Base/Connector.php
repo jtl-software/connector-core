@@ -25,7 +25,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-class Connector extends Singleton implements IEndpointConnector, ChecksumInterface
+class Connector extends Singleton implements IEndpointConnector
 {
     /** @var IController */
     protected $controller;
@@ -41,10 +41,6 @@ class Connector extends Singleton implements IEndpointConnector, ChecksumInterfa
     protected $useSuperGlobals = true;
     /** @var string */
     protected $modelNamespace = 'Jtl\Connector\Core\Model';
-    /**
-     * @var IChecksumLoader
-     */
-    protected $checksumLoader;
     
     public function initialize()
     {
@@ -211,23 +207,4 @@ class Connector extends Singleton implements IEndpointConnector, ChecksumInterfa
     {
         return $this->controller;
     }
-
-    /**
-     * @param IChecksumLoader $checksumLoader
-     * @return IChecksumLoader
-     */
-    public function setChecksumLoader(IChecksumLoader $checksumLoader): IChecksumLoader
-    {
-        $this->checksumLoader = $checksumLoader;
-    }
-
-    /**
-     * @return IChecksumLoader|null
-     */
-    public function getChecksumLoader(): ?IChecksumLoader
-    {
-        return $this->checksumLoader;
-    }
-
-
 }

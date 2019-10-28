@@ -18,7 +18,7 @@ interface ChecksumInterface
     public function setChecksumLoader(IChecksumLoader $checksumLoader): IChecksumLoader;
 
     /**
-     * @return IChecksumLoader|null
+     * @return IChecksumLoader
      */
-    public function getChecksumLoader(): ?IChecksumLoader;
+    public function getChecksumLoader(): IChecksumLoader;
 }

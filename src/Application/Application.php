@@ -13,6 +13,7 @@ use Jtl\Connector\Core\Compression\Zip;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\HttpException;
 use Jtl\Connector\Core\IO\Temp;
+use Jtl\Connector\Core\Model\Model;
 use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Exception\SessionException;
@@ -271,7 +272,7 @@ class Application extends Singleton implements IApplication
                                 // @TODO: Specific identity delete
                                 
                                 // Checksum linking
-                                ChecksumLinker::link($model);
+                                $this->linkChecksum($model);
                                 
                                 // Event
                                 $class = ($method->getController() === 'connector') ? 'Connector' : null;
@@ -462,7 +463,7 @@ class Application extends Singleton implements IApplication
                         $identityLinker->linkModel($param);
                         
                         // Checksum linking
-                        ChecksumLinker::link($param);
+                        $this->linkChecksum($param);
                         
                         // Event
                         EventHandler::dispatch($param, $this->eventDispatcher, $method->getAction(),
@@ -472,7 +473,7 @@ class Application extends Singleton implements IApplication
                     $identityLinker->linkModel($params);
                     
                     // Checksum linking
-                    ChecksumLinker::link($params);
+                    $this->linkChecksum($params);
                     
                     // Event
                     EventHandler::dispatch($params, $this->eventDispatcher, $method->getAction(), EventHandler::BEFORE);
@@ -644,6 +645,16 @@ class Application extends Singleton implements IApplication
         $method = RpcMethod::splitMethod($method);
         EventHandler::dispatchRpc($data, $this->eventDispatcher, $method->getController(), $method->getAction(),
             EventHandler::AFTER);
+    }
+
+    /**
+     * @param Model $model
+     */
+    protected function linkChecksum(Model $model) : void
+    {
+        if ($this->connector->getChecksumLoader() instanceof IChecksumLoader) {
+            ChecksumLinker::link($model);
+        }
     }
     
     /**
