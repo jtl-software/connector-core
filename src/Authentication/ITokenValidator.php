@@ -6,13 +6,11 @@
 
 namespace Jtl\Connector\Core\Authentication;
 
-use Jtl\Connector\Core\Model\AuthRequest;
-
 interface ITokenValidator
 {
     /**
-     * @param AuthRequest $request
-     * @return boolean
+     * @param string $token
+     * @return bool
      */
-    public function validate(AuthRequest $request);
+    public function validate(string $token): bool;
 }

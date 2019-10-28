@@ -5,11 +5,10 @@
  */
 namespace Jtl\Connector\Core\Application;
 
+use Jtl\Connector\Core\Authentication\ITokenValidator;
 use Jtl\Connector\Core\Controller\IController;
 use \Jtl\Connector\Core\Rpc\RequestPacket;
 use \Jtl\Connector\Core\Mapper\IPrimaryKeyMapper;
-use \Jtl\Connector\Core\Authentication\ITokenLoader;
-use \Jtl\Connector\Core\Checksum\IChecksumLoader;
 use Jtl\Connector\Core\Result\Action;
 
 /**
@@ -35,28 +34,6 @@ interface IEndpointConnector
     public function getPrimaryKeyMapper(): IPrimaryKeyMapper;
     
     /**
-     * @param ITokenLoader $tokenLoader
-     * @return self
-     */
-    public function setTokenLoader(ITokenLoader $tokenLoader): IEndpointConnector;
-    
-    /**
-     * @return ITokenLoader
-     */
-    public function getTokenLoader(): ITokenLoader;
-    
-    /**
-     * @param IChecksumLoader $checksumLoader
-     * @return self
-     */
-    public function setChecksumLoader(IChecksumLoader $checksumLoader): IEndpointConnector;
-    
-    /**
-     * @return IChecksumLoader
-     */
-    public function getChecksumLoader(): IChecksumLoader;
-    
-    /**
      * Checks whether or not a method can be handled
      *
      * @return bool
@@ -74,4 +51,15 @@ interface IEndpointConnector
      * Controller getter
      */
     public function getController(): IController;
+
+    /**
+     * @param ITokenValidator $tokenValidator
+     * @return IEndpointConnector
+     */
+    public function setTokenValidator(ITokenValidator $tokenValidator): IEndpointConnector;
+
+    /**
+     * @return ITokenValidator
+     */
+    public function getTokenValidator(): ITokenValidator;
 }

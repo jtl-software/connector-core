@@ -8,6 +8,7 @@ namespace Jtl\Connector\Core\Application;
 use Jtl\Connector\Core\Application\Error\ErrorHandler;
 use Jtl\Connector\Core\Application\Error\IErrorHandler;
 use Jtl\Connector\Core\Authentication\ITokenValidator;
+use Jtl\Connector\Core\Checksum\IChecksumLoader;
 use Jtl\Connector\Core\Compression\Zip;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\HttpException;
@@ -158,16 +159,14 @@ class Application extends Singleton implements IApplication
             $tokenValidatorExists = true;
         }
         
-        if (is_null($this->connector->getTokenLoader()) && !$tokenValidatorExists) {
-            throw new ApplicationException('Neither a token loader nor a token validator is registered');
+        if (!$tokenValidatorExists) {
+            throw new ApplicationException('Token validator is not registered');
         }
         
-        if ($this->connector->getChecksumLoader() === null) {
-            throw new ApplicationException('No checksum loader registered');
+        if ($this->connector->getChecksumLoader() instanceof IChecksumLoader) {
+            ChecksumLinker::setChecksumLoader($this->connector->getChecksumLoader());
         }
-        
-        ChecksumLinker::setChecksumLoader($this->connector->getChecksumLoader());
-        
+
         switch ($rpcmode) {
             case Packet::SINGLE_MODE:
                 $this->runSingle($requestpackets, $rpcmode);

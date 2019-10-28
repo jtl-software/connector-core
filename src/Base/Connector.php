@@ -7,6 +7,8 @@
 namespace Jtl\Connector\Core\Base;
 
 use Jtl\Connector\Core\Authentication\ITokenValidator;
+use Jtl\Connector\Core\Checksum\ChecksumInterface;
+use Jtl\Connector\Core\Checksum\IChecksumLoader;
 use Jtl\Connector\Core\Controller\IController;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Application\IEndpointConnector;
@@ -14,8 +16,6 @@ use Jtl\Connector\Core\Utilities\Singleton;
 use Jtl\Connector\Core\Utilities\RpcMethod;
 use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Mapper\IPrimaryKeyMapper;
-use Jtl\Connector\Core\Authentication\ITokenLoader;
-use Jtl\Connector\Core\Checksum\IChecksumLoader;
 use Jtl\Connector\Core\Result\Action;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
@@ -25,18 +25,14 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-class Connector extends Singleton implements IEndpointConnector
+class Connector extends Singleton implements IEndpointConnector, ChecksumInterface
 {
     /** @var IController */
     protected $controller;
     /** @var IPrimaryKeyMapper */
     protected $keyMapper;
-    /** @var ITokenLoader */
-    protected $tokenLoader;
     /** @var ITokenValidator */
     protected $tokenValidator;
-    /** @var IChecksumLoader */
-    protected $checksumLoader;
     /** @var EventDispatcher */
     protected $eventDispatcher;
     /** @var Method */
@@ -45,6 +41,10 @@ class Connector extends Singleton implements IEndpointConnector
     protected $useSuperGlobals = true;
     /** @var string */
     protected $modelNamespace = 'Jtl\Connector\Core\Model';
+    /**
+     * @var IChecksumLoader
+     */
+    protected $checksumLoader;
     
     public function initialize()
     {
@@ -63,47 +63,24 @@ class Connector extends Singleton implements IEndpointConnector
         
         return $this;
     }
-    
+
     /**
      * Returns primary key mapper
      *
-     * @return \Jtl\Connector\Core\Authentication\ITokenLoader
+     * @return IPrimaryKeyMapper
      */
     public function getPrimaryKeyMapper(): IPrimaryKeyMapper
     {
         return $this->keyMapper;
     }
-    
-    /**
-     * Setter token loader
-     *
-     * @param \Jtl\Connector\Core\Authentication\ITokenLoader $tokenLoader
-     * @return Connector
-     */
-    public function setTokenLoader(ITokenLoader $tokenLoader): IEndpointConnector
-    {
-        $this->tokenLoader = $tokenLoader;
-        
-        return $this;
-    }
-    
-    /**
-     * Returns token loader
-     *
-     * @return \Jtl\Connector\Core\Authentication\ITokenLoader
-     */
-    public function getTokenLoader(): ITokenLoader
-    {
-        return $this->tokenLoader;
-    }
-    
+
     /**
      * Setter token validator
      *
-     * @param \Jtl\Connector\Core\Authentication\ITokenValidator $tokenValidator
+     * @param ITokenValidator $tokenValidator
      * @return Connector
      */
-    protected function setTokenValidator(ITokenValidator $tokenValidator): IEndpointConnector
+    public function setTokenValidator(ITokenValidator $tokenValidator): IEndpointConnector
     {
         $this->tokenValidator = $tokenValidator;
         
@@ -111,41 +88,16 @@ class Connector extends Singleton implements IEndpointConnector
     }
     
     /**
-     * @return \Jtl\Connector\Core\Authentication\ITokenValidator
+     * @return ITokenValidator
      */
-    public function getTokenValidator(): ?ITokenValidator
+    public function getTokenValidator(): ITokenValidator
     {
         return $this->tokenValidator;
     }
-    
+
     /**
-     * Setter checksum loader
-     *
-     * @param \Jtl\Connector\Core\Checksum\IChecksumLoader $checksumLoader
-     * @return Connector
-     */
-    public function setChecksumLoader(IChecksumLoader $checksumLoader): IEndpointConnector
-    {
-        $this->checksumLoader = $checksumLoader;
-        
-        return $this;
-    }
-    
-    /**
-     * Returns checksum loader
-     *
-     * @return \Jtl\Connector\Core\Checksum\IChecksumLoader
-     */
-    public function getChecksumLoader(): IChecksumLoader
-    {
-        return $this->checksumLoader;
-    }
-    
-    /**
-     * Setter checksum loader
-     *
-     * @param Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher
-     * @return Connector
+     * @param EventDispatcher $eventDispatcher
+     * @return IEndpointConnector
      */
     public function setEventDispatcher(EventDispatcher $eventDispatcher): IEndpointConnector
     {
@@ -259,4 +211,23 @@ class Connector extends Singleton implements IEndpointConnector
     {
         return $this->controller;
     }
+
+    /**
+     * @param IChecksumLoader $checksumLoader
+     * @return IChecksumLoader
+     */
+    public function setChecksumLoader(IChecksumLoader $checksumLoader): IChecksumLoader
+    {
+        $this->checksumLoader = $checksumLoader;
+    }
+
+    /**
+     * @return IChecksumLoader|null
+     */
+    public function getChecksumLoader(): ?IChecksumLoader
+    {
+        return $this->checksumLoader;
+    }
+
+
 }
