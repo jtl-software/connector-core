@@ -164,7 +164,7 @@ class Application extends Singleton implements IApplication
             throw new ApplicationException('Token validator is not registered');
         }
         
-        if ($this->connector->getChecksumLoader() instanceof IChecksumLoader) {
+        if (is_subclass_of($this->connector,IChecksumLoader::class)) {
             ChecksumLinker::setChecksumLoader($this->connector->getChecksumLoader());
         }
 
@@ -652,7 +652,7 @@ class Application extends Singleton implements IApplication
      */
     protected function linkChecksum(Model $model) : void
     {
-        if ($this->connector->getChecksumLoader() instanceof IChecksumLoader) {
+        if (is_subclass_of($this->connector,IChecksumLoader::class)) {
             ChecksumLinker::link($model);
         }
     }
