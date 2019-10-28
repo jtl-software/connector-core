@@ -189,6 +189,12 @@ class IdentityLinker
             'shippingClassId' => self::TYPE_SHIPPING_CLASS,
             'unitId' => self::TYPE_UNIT,
         ],
+        'ProductPrice' => [
+            'productId' => self::TYPE_PRODUCT
+        ],
+        'ProductStockLevel' => [
+            'productId' => self::TYPE_PRODUCT
+        ],
         'Product2Category' => [
             'categoryId' => self::TYPE_CATEGORY
         ],
