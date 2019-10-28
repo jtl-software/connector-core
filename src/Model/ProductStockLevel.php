@@ -19,12 +19,48 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductStockLevel extends DataModel
 {
     /**
+     * @var Identity
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("productId")
+     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
+     */
+    protected $productId = null;
+
+    /**
      * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("stockLevel")
      * @Serializer\Accessor(getter="getStockLevel",setter="setStockLevel")
      */
     protected $stockLevel = 0.0;
+
+    /**
+     * ProductStockLevel constructor.
+     * @param Identity $productId
+     */
+    public function __construct()
+    {
+        $this->productId = new Identity();
+    }
+
+    /**
+     * @param Identity $productId
+     * @return \jtl\Connector\Model\ProductStockLevel
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     */
+    public function setProductId(Identity $productId): ProductStockLevel
+    {
+        $this->productId = $productId;
+        return $this;
+    }
+
+    /**
+     * @return Identity
+     */
+    public function getProductId()
+    {
+        return $this->productId;
+    }
 
     /**
      * @param double $stockLevel
