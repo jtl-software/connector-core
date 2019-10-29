@@ -1798,7 +1798,7 @@ class Product extends DataModel
     /**
      * @return ProductStockLevel
      */
-    public function getStockLevel(): ProductStockLevel
+    public function getStockLevel(): ?ProductStockLevel
     {
         return $this->stockLevel;
     }

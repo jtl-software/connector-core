@@ -3,6 +3,7 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Application
  */
+
 namespace Jtl\Connector\Core\Application;
 
 use Jtl\Connector\Core\Application\Error\ErrorHandler;
@@ -53,44 +54,44 @@ use Symfony\Component\Finder\Finder;
 class Application extends Singleton implements IApplication
 {
     const PROTOCOL_VERSION = 7;
-    
+
     /**
      * Connected EndpointConnectors
      *
      * @var IEndpointConnector
      */
     protected $connector = null;
-    
+
     /**
      * @var Config;
      */
     protected $config;
-    
+
     /**
      * Global Session
      *
      * @var \SessionHandlerInterface
      */
     protected $sessionHandler;
-    
+
     /**
      * @var \Symfony\Component\EventDispatcher\EventDispatcher
      */
     protected $eventDispatcher;
-    
+
     /**
      * @var \Jtl\Connector\Core\Application\Error\IErrorHandler
      */
     protected $errorHandler;
-    
+
     protected function __construct()
     {
         require_once(dirname(__FILE__) . '/../bootstrap.php');
-        
+
         // Error Handler
         $this->setErrorHandler(new ErrorHandler());
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see \Jtl\Connector\Core\Application\Application::run()
@@ -98,32 +99,32 @@ class Application extends Singleton implements IApplication
     public function run(): void
     {
         AnnotationRegistry::registerLoader('class_exists');
-        
+
         if ($this->connector === null) {
             throw new ApplicationException('No connector registed');
         }
-        
+
         // Event Dispatcher
         $this->eventDispatcher = new EventDispatcher();
-        
+
         $this->getErrorHandler()->setEventDispatcher($this->eventDispatcher);
-        
+
         $jtlrpc = Request::handle($this->connector->getUseSuperGlobals());
         $requestpackets = RequestPacket::build($jtlrpc);
-        
+
         $rpcmode = is_object($requestpackets) ? Packet::SINGLE_MODE : Packet::BATCH_MODE;
-        
+
         $method = null;
         if ($rpcmode == Packet::SINGLE_MODE) {
             $method = $requestpackets->getMethod();
         }
-        
+
         // Start Session
         $this->startSession($method);
-        
+
         // Start Configuration
         $this->startConfiguration();
-        
+
         //Mask connector token before logging
         $reqPacketsObj = $requestpackets->getPublic();
         if (isset($reqPacketsObj->method) && $reqPacketsObj->method === 'core.connector.auth' && isset($reqPacketsObj->params)) {
@@ -133,23 +134,23 @@ class Application extends Singleton implements IApplication
             }
             $reqPacketsObj->params = Json::encode($params);
         }
-        
+
         // Log incoming request packet (debug only and configuration must be initialized)
         Logger::write(sprintf('RequestPacket: %s', Json::encode($reqPacketsObj)), Logger::DEBUG, 'rpc');
         if (isset($reqPacketsObj->params) && !empty($reqPacketsObj->params)) {
             Logger::write(sprintf('Params: %s', $reqPacketsObj->params), Logger::DEBUG, 'rpc');
         }
-        
+
         // Register Event Dispatcher
         $this->startEventDispatcher();
-        
+
         // Initialize Endpoint
         $this->connector->initialize();
-        
+
         if ($this->connector->getPrimaryKeyMapper() === null) {
             throw new ApplicationException('No primary key mapper registered');
         }
-        
+
         $tokenValidatorExists = false;
         if (is_callable([
                 $this->connector,
@@ -157,17 +158,17 @@ class Application extends Singleton implements IApplication
             ]) && $this->connector->getTokenValidator() instanceof ITokenValidator) {
             $tokenValidatorExists = true;
         }
-        
+
         if (is_null($this->connector->getTokenLoader()) && !$tokenValidatorExists) {
             throw new ApplicationException('Neither a token loader nor a token validator is registered');
         }
-        
+
         if ($this->connector->getChecksumLoader() === null) {
             throw new ApplicationException('No checksum loader registered');
         }
-        
+
         ChecksumLinker::setChecksumLoader($this->connector->getChecksumLoader());
-        
+
         switch ($rpcmode) {
             case Packet::SINGLE_MODE:
                 $this->runSingle($requestpackets, $rpcmode);
@@ -177,7 +178,7 @@ class Application extends Singleton implements IApplication
                 break;
         }
     }
-    
+
     /**
      * @param RequestPacket $requestpacket
      * @param int $rpcmode
@@ -192,35 +193,35 @@ class Application extends Singleton implements IApplication
         if (!RpcMethod::isMethod($requestpacket->getMethod())) {
             throw new RpcException('Invalid Request', -32600);
         }
-        
+
         $identityLinker = IdentityLinker::getInstance();
         $identityLinker->setPrimaryKeyMapper($this->connector->getPrimaryKeyMapper());
-        
+
         ////////////////////
         // Core Connector //
         ////////////////////
         $coreconnector = Connector::getInstance();
         $method = RpcMethod::splitMethod($requestpacket->getMethod());
         $coreconnector->setMethod($method);
-        
+
         // Rpc Event
         $data = $requestpacket->getParams();
         EventHandler::dispatchRpc($data, $this->eventDispatcher, $method->getController(), $method->getAction(),
             EventHandler::BEFORE);
-        
+
         if ($method->isCore() && $coreconnector->canHandle()) {
             $actionresult = $coreconnector->handle($requestpacket);
             if ($actionresult->isHandled()) {
                 $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
-                
+
                 if ($rpcmode == Packet::SINGLE_MODE) {
-                    
+
                     // Event
                     $class = ($method->getController() === 'connector') ? 'Connector' : null;
                     $res = $actionresult->getResult();
                     EventHandler::dispatch($res, $this->eventDispatcher, $method->getAction(), EventHandler::AFTER,
                         $class, true);
-                    
+
                     $this->triggerRpcAfterEvent($responsepacket->getPublic(), $requestpacket->getMethod());
                     Response::send($responsepacket);
                 } else {
@@ -228,71 +229,71 @@ class Application extends Singleton implements IApplication
                 }
             }
         }
-        
+
         ////////////////////////
         // Endpoint Connector //
         ////////////////////////
         $exists = false;
-        
+
         $this->deserializeRequestParams($requestpacket, $this->connector->getModelNamespace());
-        
+
         // Image push?
         // OLD single Image
         //$this->handleImagePush($requestpacket, $imagePath);
         $this->handleImagePush($requestpacket, $imagePaths);
-        
+
         $this->connector->setMethod($method);
         if ($this->connector->canHandle()) {
             /** @var Action $actionresult */
             $actionresult = $this->connector->handle($requestpacket);
-            
+
             if ($requestpacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
                 Request::deleteFileuploads($imagePaths);
             }
-            
+
             if ($actionresult instanceof Action) {
                 $exists = true;
                 if ($actionresult->isHandled()) {
-                    
+
                     if ($actionresult->getError() === null) {
-                        
+
                         // Convert boolean to BoolResult
                         if (is_bool($actionresult->getResult())) {
                             $actionresult->setResult((new BoolResult())->setResult($actionresult->getResult()));
                         }
-                        
+
                         // Identity mapping
                         $results = [];
                         $models = is_array($actionresult->getResult()) ? $actionresult->getResult() : [$actionresult->getResult()];
-                        
+
                         foreach ($models as $model) {
                             if ($model instanceof DataModel) {
                                 $identityLinker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
-                                
+
                                 // @TODO: Specific identity delete
-                                
+
                                 // Checksum linking
                                 ChecksumLinker::link($model);
-                                
+
                                 // Event
                                 $class = ($method->getController() === 'connector') ? 'Connector' : null;
                                 EventHandler::dispatch($model, $this->eventDispatcher, $method->getAction(),
                                     EventHandler::AFTER, $class);
-                                
+
                                 if ($method->getAction() === Method::ACTION_PULL) {
                                     $results[] = $model->getPublic();
                                 }
                             }
                         }
-                        
+
                         if ($method->getAction() === Method::ACTION_PULL) {
                             $actionresult->setResult($results);
                         }
                     }
-                    
+
                     // Building response packet
                     $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
-                    
+
                     if ($rpcmode == Packet::SINGLE_MODE) {
                         $this->triggerRpcAfterEvent($responsepacket->getPublic(), $requestpacket->getMethod());
                         Response::send($responsepacket);
@@ -314,7 +315,7 @@ class Application extends Singleton implements IApplication
                 Request::deleteFileuploads($imagePaths);
             }
         }
-        
+
         if ($exists) {
             throw new RpcException('Method could not be handled', -32000);
         } else {
@@ -324,7 +325,7 @@ class Application extends Singleton implements IApplication
             );
         }
     }
-    
+
     /**
      * @param IEndpointConnector $endpointconnector
      */
@@ -349,7 +350,7 @@ class Application extends Singleton implements IApplication
         if ($requestpacket->getMethod() === 'image.push') {
             $zipFile = Request::handleFileupload();
             $tempDir = Temp::generateDirectory();
-            
+
             if ($zipFile !== null && $tempDir !== null) {
                 $archive = new Zip();
                 if ($archive->extract($zipFile, $tempDir)) {
@@ -361,10 +362,10 @@ class Application extends Singleton implements IApplication
                 } else {
                     @rmdir($tempDir);
                     @unlink($zipFile);
-                    
+
                     throw new ApplicationException(sprintf('Zip File (%s) count not be extracted', $zipFile));
                 }
-                
+
                 if ($zipFile !== null) {
                     @unlink($zipFile);
                 }
@@ -372,7 +373,7 @@ class Application extends Singleton implements IApplication
                 throw new ApplicationException('Zip file or temp dir  is null');
             }
         }
-        
+
         try {
             // OLD single Image
             //$this->execute($requestpacket, $config, $rpcmode, $imagePath);
@@ -387,16 +388,16 @@ class Application extends Singleton implements IApplication
             if ($requestpacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
                 Request::deleteFileuploads($imagePaths);
             }
-            
+
             $error = new Error();
             $error->setCode($exc->getCode())
                 ->setMessage($exc->getMessage());
-            
+
             $responsepacket = new ResponsePacket();
             $responsepacket->setId($requestpacket->getId())
                 ->setJtlrpc($requestpacket->getJtlrpc())
                 ->setError($error);
-            
+
             $this->triggerRpcAfterEvent($responsepacket->getPublic(), $requestpacket->getMethod());
             Response::send($responsepacket);
         }
@@ -411,7 +412,7 @@ class Application extends Singleton implements IApplication
     protected function runBatch(array $requestpackets, int $rpcmode): void
     {
         $jtlrpcreponses = [];
-        
+
         foreach ($requestpackets as $requestpacket) {
             try {
                 $requestpacket->validate();
@@ -420,19 +421,19 @@ class Application extends Singleton implements IApplication
                 $error = new Error();
                 $error->setCode($exc->getCode())
                     ->setMessage($exc->getMessage());
-                
+
                 $responsepacket = new ResponsePacket();
                 $responsepacket->setId($requestpacket->getId())
                     ->setJtlrpc($requestpacket->getJtlrpc())
                     ->setError($error);
-                
+
                 $jtlrpcreponses[] = $responsepacket;
             }
         }
-        
+
         Response::sendAll($jtlrpcreponses);
     }
-    
+
     /**
      * @param RequestPacket $requestpacket
      * @param string $modelNamespace
@@ -443,53 +444,40 @@ class Application extends Singleton implements IApplication
     {
         $method = RpcMethod::splitMethod($requestpacket->getMethod());
         $modelClass = RpcMethod::buildController($method->getController());
-        
+
         $namespace = ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) ?
             sprintf('%s\%s', $modelNamespace, $modelClass) : 'Jtl\Connector\Core\Model\QueryFilter';
-        
+
         if (class_exists("\\{$namespace}") && $requestpacket->getParams() !== null) {
             $serializer = SerializerBuilder::create();
-            
+
             if ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) {
-                // OLD single Image
-                //$ns = ($method->getAction() === Method::ACTION_PUSH && $method->getController() === 'image') ? $namespace : "ArrayCollection<{$namespace}>";
-                $ns = "ArrayCollection<{$namespace}>";
+                $ns = "array<{$namespace}>";
                 $params = $serializer->deserialize($requestpacket->getParams(), $ns, 'json');
-                
                 $identityLinker = IdentityLinker::getInstance();
-                if (is_array($params)) {
-                    // Identity mapping
-                    foreach ($params as &$param) {
-                        $identityLinker->linkModel($param);
-                        
-                        // Checksum linking
-                        ChecksumLinker::link($param);
-                        
-                        // Event
-                        EventHandler::dispatch($param, $this->eventDispatcher, $method->getAction(),
-                            EventHandler::BEFORE);
-                    }
-                } else {
-                    $identityLinker->linkModel($params);
-                    
+                // Identity mapping
+                foreach ($params as &$param) {
+                    $identityLinker->linkModel($param);
+
                     // Checksum linking
-                    ChecksumLinker::link($params);
-                    
+                    ChecksumLinker::link($param);
+
                     // Event
-                    EventHandler::dispatch($params, $this->eventDispatcher, $method->getAction(), EventHandler::BEFORE);
+                    EventHandler::dispatch($param, $this->eventDispatcher, $method->getAction(),
+                        EventHandler::BEFORE);
                 }
             } else {
                 $params = $serializer->deserialize($requestpacket->getParams(), $namespace, 'json');
-                
+
                 // Event
                 EventHandler::dispatch($params, $this->eventDispatcher, $method->getAction(), EventHandler::BEFORE,
                     $modelClass);
             }
-            
+
             $requestpacket->setParams($params);
         }
     }
-    
+
     /**
      * Build RPC Reponse Packet
      *
@@ -505,9 +493,9 @@ class Application extends Singleton implements IApplication
             ->setJtlrpc($requestpacket->getJtlrpc())
             ->setResult($actionresult->getResult())
             ->setError($actionresult->getError());
-        
+
         $responsepacket->validate();
-        
+
         return $responsepacket;
     }
 
@@ -519,23 +507,23 @@ class Application extends Singleton implements IApplication
         if (!isset($this->sessionHandler)) {
             throw new SessionException('Session not initialized', -32001);
         }
-        
+
         // Config
         if (is_null($this->config)) {
             $config_file = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
             if (!file_exists($config_file)) {
                 $json = json_encode(['developer_logging' => false], JSON_PRETTY_PRINT);
-                
+
                 if (json_last_error() !== JSON_ERROR_NONE) {
                     throw JsonException::encoding(json_last_error_msg());
                 }
-                
+
                 file_put_contents($config_file, $json);
             }
-            
+
             $this->config = new Config($config_file);
         }
-        
+
         if (!$this->config->has('developer_logging')) {
             $this->config->save('developer_logging', false);
         }
@@ -550,17 +538,17 @@ class Application extends Singleton implements IApplication
     {
         $sessionId = Request::getSession();
         $sessionName = 'JtlConnector';
-        
+
         if ($sessionId === null && $method !== 'core.connector.auth') {
             throw new SessionException('No session');
         }
-        
+
         if ($this->getSessionHandler() === null) {
             $this->setSessionHandler(new SqliteSession());
         }
-        
+
         ini_set("session.gc_probability", 25);
-    
+
         session_name($sessionName);
         if ($sessionId !== null) {
             if ($this->getSessionHandler()->check($sessionId)) {
@@ -569,18 +557,18 @@ class Application extends Singleton implements IApplication
                 throw new SessionException("Session is invalid", -32000);
             }
         }
-    
+
         session_set_save_handler($this->getSessionHandler());
-    
+
         session_start();
-    
+
         Logger::write(sprintf('Session started with id (%s)', session_id()), Logger::DEBUG, 'session');
     }
-    
+
     protected function startEventDispatcher(): void
     {
         $this->connector->setEventDispatcher($this->eventDispatcher);
-        
+
         $loader = new \Jtl\Connector\Core\Plugin\PluginLoader();
         $loader->load($this->eventDispatcher);
     }
@@ -597,7 +585,7 @@ class Application extends Singleton implements IApplication
             if (!is_array($images)) {
                 throw new ApplicationException('Request params must be valid images');
             }
-            
+
             if (count($imagePaths) > 0) {
                 for ($i = 0; $i < count($images); $i++) {
                     foreach ($imagePaths as $imagePath) {
@@ -610,7 +598,7 @@ class Application extends Singleton implements IApplication
                         }
                     }
                 }
-                
+
                 $requestpacket->setParams($images);
             } else {
                 for ($i = 0; $i < count($images); $i++) {
@@ -619,23 +607,23 @@ class Application extends Singleton implements IApplication
                         if ($imageData === false) {
                             throw new ApplicationException('Could not get any data from url: ' . $images[$i]->getRemoteUrl());
                         }
-                        
+
                         $path = parse_url($images[$i]->getRemoteUrl(), PHP_URL_PATH);
                         $fileName = pathinfo($path, PATHINFO_BASENAME);
                         $imagePath = Path::combine(Temp::getDirectory(), uniqid() . "_{$fileName}");
                         file_put_contents($imagePath, $imageData);
-                        
+
                         $images[$i]->setFilename($imagePath);
                     } else {
                         throw new ApplicationException('Could not handle fileupload (no file was uploaded via HTTP POST?)');
                     }
                 }
-                
+
                 $requestpacket->setParams($images);
             }
         }
     }
-    
+
     /**
      * @param \stdClass $data
      * @param string $method
@@ -646,7 +634,7 @@ class Application extends Singleton implements IApplication
         EventHandler::dispatchRpc($data, $this->eventDispatcher, $method->getController(), $method->getAction(),
             EventHandler::AFTER);
     }
-    
+
     /**
      * Connector getter
      *
@@ -656,7 +644,7 @@ class Application extends Singleton implements IApplication
     {
         return $this->connector;
     }
-    
+
     /**
      * Session getter
      *
@@ -666,7 +654,7 @@ class Application extends Singleton implements IApplication
     {
         return $this->sessionHandler;
     }
-    
+
     /**
      * Session getter
      *
@@ -678,7 +666,7 @@ class Application extends Singleton implements IApplication
         $this->sessionHandler = $sessionHandler;
         return $this;
     }
-    
+
     /**
      * @return int
      */
@@ -686,7 +674,7 @@ class Application extends Singleton implements IApplication
     {
         return self::PROTOCOL_VERSION;
     }
-    
+
     /**
      * @return Config
      */
@@ -694,7 +682,7 @@ class Application extends Singleton implements IApplication
     {
         return $this->config;
     }
-    
+
     /**
      * @return IErrorHandler
      */
@@ -702,7 +690,7 @@ class Application extends Singleton implements IApplication
     {
         return $this->errorHandler;
     }
-    
+
     /**
      * @param IErrorHandler $handler
      * @return $this
@@ -710,7 +698,7 @@ class Application extends Singleton implements IApplication
     public function setErrorHandler(IErrorHandler $handler): Application
     {
         $this->errorHandler = $handler;
-        
+
         return $this;
     }
 }

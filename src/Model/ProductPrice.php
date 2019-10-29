@@ -74,12 +74,10 @@ class ProductPrice extends DataModel
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      * @return ProductPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerGroupId(Identity $customerGroupId): ProductPrice
     {
         $this->customerGroupId = $customerGroupId;
-        
         return $this;
     }
     
@@ -94,12 +92,10 @@ class ProductPrice extends DataModel
     /**
      * @param Identity $customerId Reference to customer
      * @return ProductPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerId(Identity $customerId): ProductPrice
     {
         $this->customerId = $customerId;
-        
         return $this;
     }
     
@@ -114,7 +110,6 @@ class ProductPrice extends DataModel
     /**
      * @param Identity $id Unique ProductPrice id
      * @return ProductPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id): ProductPrice
     {
@@ -133,8 +128,7 @@ class ProductPrice extends DataModel
 
     /**
      * @param Identity $productId Reference to product
-     * @return \Jtl\Connector\Core\Model\ProductPrice
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductPrice
      */
     public function setProductId(Identity $productId): ProductPrice
     {
@@ -144,7 +138,7 @@ class ProductPrice extends DataModel
     /**
      * @return Identity Reference to product
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }

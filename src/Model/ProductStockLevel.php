@@ -57,7 +57,7 @@ class ProductStockLevel extends DataModel
     /**
      * @return Identity
      */
-    public function getProductId()
+    public function getProductId(): Identity
     {
         return $this->productId;
     }

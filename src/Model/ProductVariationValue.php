@@ -98,7 +98,6 @@ class ProductVariationValue extends DataModel
     public function __construct()
     {
         $this->id = new Identity();
-        $this->productVariationId = new Identity();
     }
     
     /**
