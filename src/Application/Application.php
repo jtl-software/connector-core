@@ -8,7 +8,7 @@ namespace Jtl\Connector\Core\Application;
 use Jtl\Connector\Core\Application\Error\ErrorHandler;
 use Jtl\Connector\Core\Application\Error\IErrorHandler;
 use Jtl\Connector\Core\Authentication\ITokenValidator;
-use Jtl\Connector\Core\Checksum\IChecksumLoader;
+use Jtl\Connector\Core\Checksum\ChecksumInterface;
 use Jtl\Connector\Core\Compression\Zip;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\HttpException;
@@ -164,7 +164,7 @@ class Application extends Singleton implements IApplication
             throw new ApplicationException('Token validator is not registered');
         }
         
-        if (is_subclass_of($this->connector,IChecksumLoader::class)) {
+        if ($this->connector instanceof ChecksumInterface) {
             ChecksumLinker::setChecksumLoader($this->connector->getChecksumLoader());
         }
 
@@ -652,7 +652,7 @@ class Application extends Singleton implements IApplication
      */
     protected function linkChecksum(Model $model) : void
     {
-        if (is_subclass_of($this->connector,IChecksumLoader::class)) {
+        if ($this->connector instanceof ChecksumInterface) {
             ChecksumLinker::link($model);
         }
     }

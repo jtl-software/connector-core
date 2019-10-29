@@ -9,6 +9,7 @@ namespace Jtl\Connector\Core\Controller;
 
 use Jtl\Connector\Core\Application\Error\ErrorCodesInterface;
 use Jtl\Connector\Core\IO\Path;
+use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\System\Check;
 use Jtl\Connector\Core\Exception\JsonException;
 use Jtl\Connector\Core\Result\Action;
@@ -18,7 +19,6 @@ use Jtl\Connector\Core\Serializer\JMS\SerializerBuilder;
 use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Checksum\IChecksum;
-use Jtl\Connector\Core\Formatter\ExceptionFormatter;
 
 /**
  * Base Config Controller
@@ -146,7 +146,7 @@ class Connector extends AbstractController
 
         try {
 
-            $decodedParams = json_decode($params);
+            $decodedParams = Json::decode($params);
 
             if(!isset($decodedParams->token)){
                 throw new \Exception("Token parameter is missing.");
