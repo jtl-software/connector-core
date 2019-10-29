@@ -20,7 +20,7 @@ class ProductStockLevel extends DataModel
 {
     /**
      * @var Identity
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
@@ -45,7 +45,7 @@ class ProductStockLevel extends DataModel
 
     /**
      * @param Identity $productId
-     * @return \jtl\Connector\Model\ProductStockLevel
+     * @return \Jtl\Connector\Core\Model\ProductStockLevel
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId): ProductStockLevel

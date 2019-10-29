@@ -46,7 +46,7 @@ class ProductPrice extends DataModel
 
     /**
      * @var Identity Reference to product
-     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
@@ -133,7 +133,7 @@ class ProductPrice extends DataModel
 
     /**
      * @param Identity $productId Reference to product
-     * @return \jtl\Connector\Model\ProductPrice
+     * @return \Jtl\Connector\Core\Model\ProductPrice
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId): ProductPrice
