@@ -8,11 +8,10 @@
 namespace Jtl\Connector\Core\Controller;
 
 use Jtl\Connector\Core\Application\Error\ErrorCodesInterface;
-use Jtl\Connector\Core\Connector\ChecksumInterface;
 use Jtl\Connector\Core\IO\Path;
+use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\System\Check;
-use Jtl\Connector\Core\Exception\JsonException;
 use Jtl\Connector\Core\Result\Action;
 use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Linker\IdentityLinker;
@@ -62,11 +61,7 @@ class Connector extends AbstractController
         $ret = new Action();
         try {
             $featureData = file_get_contents(CONNECTOR_DIR . '/config/features.json');
-            $features = json_decode($featureData);
-
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                throw JsonException::decoding(json_last_error_msg(), $featureData);
-            }
+            $features = Json::decode($featureData);
 
             $ret->setResult($features);
             $ret->setHandled(true);
@@ -93,16 +88,14 @@ class Connector extends AbstractController
 
         try {
             $serializer = SerializerBuilder::create();
-
-            $ack = $serializer->deserialize($params, "Jtl\Connector\Core\Model\Ack", 'json');
-
+            $ack = $serializer->deserialize($params, Ack::class, 'json');
             $identityLinker = IdentityLinker::getInstance();
 
             foreach ($ack->getIdentities() as $modelName => $identities) {
                 if (!$identityLinker->isType($modelName)) {
                     Logger::write(sprintf('ACK: Unknown core entity (%s)! Skipping related ack\'s...',
                         $modelName
-                    ), Logger::WARNING, 'global');
+                    ), Logger::WARNING);
                     continue;
                 }
 
@@ -111,7 +104,7 @@ class Connector extends AbstractController
                 }
             }
 
-            if ($this->application->getConnector() instanceof ChecksumInterface) {
+            if (ChecksumLinker::checksumLoaderExists()) {
                 // Checksum linking
                 foreach ($ack->getChecksums() as $checksum) {
                     if ($checksum instanceof IChecksum) {
@@ -120,7 +113,7 @@ class Connector extends AbstractController
                                 $checksum->getForeignKey()->getEndpoint(),
                                 $checksum->getForeignKey()->getHost(),
                                 $checksum->getType()
-                            ), Logger::WARNING, 'checksum');
+                            ), Logger::WARNING, Logger::CHANNEL_CHECKSUM);
                         }
                     }
                 }
@@ -204,10 +197,7 @@ class Connector extends AbstractController
                 throw new \RuntimeException(sprintf('Cannot read config file %s', $path));
             }
 
-            $config = json_decode($configData);
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                throw JsonException::decoding(json_last_error_msg());
-            }
+            $config = Json::decode($configData);
 
             $status = false;
             if (!isset($config->developer_logging) || !$config->developer_logging) {
@@ -216,12 +206,7 @@ class Connector extends AbstractController
 
             $config->developer_logging = $status;
 
-            $json = json_encode($config, JSON_PRETTY_PRINT);
-
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                throw JsonException::encoding(json_last_error_msg());
-            }
-
+            $json = Json::encode($config, JSON_PRETTY_PRINT);
             file_put_contents($path, $json);
 
             $action->setResult($config);
@@ -280,7 +265,7 @@ class Connector extends AbstractController
         $error->setMessage("Could not authenticate access to the connector");
         $action->setError($error);
 
-        Logger::write(sprintf("Unauthorized access with token (%s) from ip (%s)", $accessToken, $_SERVER['REMOTE_ADDR']), Logger::WARNING, 'security');
+        Logger::write(sprintf("Unauthorized access with token (%s) from ip (%s)", $accessToken, $_SERVER['REMOTE_ADDR']), Logger::WARNING, Logger::CHANNEL_SECURITY);
 
         return $action;
     }
