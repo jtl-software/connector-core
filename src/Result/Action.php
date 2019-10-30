@@ -19,30 +19,28 @@ class Action
      *
      * @var bool
      */
-    protected $_isHandled;
+    protected $handled = false;
     
     /**
      * Action Result
      *
      * @var mixed
      */
-    protected $_result;
+    protected $result;
     
     /**
      * Action Error
      *
      * @var mixed
      */
-    protected $_error;
+    protected $error;
 
     /**
-     * Getter for $_isHandled
-     *
      * @return bool
      */
-    public function isHandled()
+    public function isHandled(): bool
     {
-        return $this->_isHandled;
+        return $this->handled;
     }
 
     /**
@@ -52,66 +50,58 @@ class Action
      * @param mixed $result
      * @param mixed $error
      */
-    public function __construct($handled = null, $result = null, $error = null)
+    public function __construct($handled = false, $result = null, $error = null)
     {
-        $this->_isHandled = $handled;
-        $this->_result = $result;
-        $this->_error = $error;
+        $this->handled = $handled;
+        $this->result = $result;
+        $this->error = $error;
     }
 
     /**
-     * Setter for $_isHandled
-     *
      * @param bool $handled
-     * @return \Jtl\Connector\Core\Result\Action
+     * @return Action
      */
-    public function setHandled($handled)
+    public function setHandled(bool $handled): Action
     {
-        $this->_isHandled = (bool)$handled;
+        $this->handled = $handled;
         return $this;
     }
 
     /**
-     * Getter for $_result
-     *
      * @return mixed
      */
     public function getResult()
     {
-        return $this->_result;
+        return $this->result;
     }
 
     /**
-     * Setter for $_result
-     *
      * @param mixed $result
-     * @return \Jtl\Connector\Core\Result\Action
+     * @return Action
      */
-    public function setResult($result)
+    public function setResult($result): Action
     {
-        $this->_result = $result;
+        $this->result = $result;
         return $this;
     }
 
     /**
-     * Getter for $_error
-     *
      * @return mixed
      */
     public function getError()
     {
-        return $this->_error;
+        return $this->error;
     }
 
     /**
      * Setter for $_error
      *
      * @param mixed $error
-     * @return \Jtl\Connector\Core\Result\Action
+     * @return Action
      */
-    public function setError($error)
+    public function setError($error): Action
     {
-        $this->_error = $error;
+        $this->error = $error;
         return $this;
     }
 
@@ -120,8 +110,8 @@ class Action
      *
      * @return boolean
      */
-    public function isError()
+    public function isError(): bool
     {
-        return ($this->_error !== null);
+        return ($this->error !== null);
     }
 }

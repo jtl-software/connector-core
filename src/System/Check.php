@@ -7,6 +7,7 @@
 
 namespace Jtl\Connector\Core\System;
 
+use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Exception\MissingRequirementException;
 
 class Check
@@ -14,8 +15,8 @@ class Check
     public static function run()
     {
         // PHP
-        if (!version_compare(PHP_VERSION, '5.4', '>=')) {
-            throw new MissingRequirementException(sprintf('The connector needs at least PHP version 5.4, %s given', PHP_VERSION));
+        if (!version_compare(PHP_VERSION, Application::MIN_PHP_VERSION, '>=')) {
+            throw new MissingRequirementException(sprintf('The connector needs at least PHP version %s, %s given',Application::MIN_PHP_VERSION, PHP_VERSION));
         }
 
         // Sqlite 3
