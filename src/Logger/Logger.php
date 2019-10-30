@@ -27,7 +27,7 @@ class Logger extends \Monolog\Logger
      */
     public static function write(string $message, int $level = self::ERROR, string $channel = self::CHANNEL_GLOBAL): bool
     {
-        if ($level === self::DEBUG && getenv(Application::ENV_VAR_DEBUG_LOGGING) !== true) {
+        if ($level === self::DEBUG && getenv(Application::ENV_VAR_DEBUG_LOGGING) !== 'true') {
             return false;
         }
 

@@ -89,7 +89,7 @@ class Application implements IApplication
      * Application constructor.
      * @param IEndpointConnector $connector
      */
-    protected function __construct(IEndpointConnector $connector)
+    public function __construct(IEndpointConnector $connector)
     {
         $this->connector = $connector;
         $this->setErrorHandler(new ErrorHandler());
