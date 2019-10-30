@@ -6,6 +6,7 @@
 
 namespace Jtl\Connector\Core\Base;
 
+use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Authentication\ITokenValidator;
 use Jtl\Connector\Core\Checksum\ChecksumInterface;
 use Jtl\Connector\Core\Checksum\IChecksumLoader;
@@ -25,12 +26,12 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-class Connector extends Singleton implements IEndpointConnector
+class Connector implements IEndpointConnector
 {
     /** @var IController */
     protected $controller;
     /** @var IPrimaryKeyMapper */
-    protected $keyMapper;
+    protected $primaryKeyMapper;
     /** @var ITokenValidator */
     protected $tokenValidator;
     /** @var EventDispatcher */
@@ -41,23 +42,22 @@ class Connector extends Singleton implements IEndpointConnector
     protected $useSuperGlobals = true;
     /** @var string */
     protected $modelNamespace = 'Jtl\Connector\Core\Model';
-    
+
+    /**
+     * Connector constructor.
+     * @param IPrimaryKeyMapper $primar
+     * @param ITokenValidator $tokenValidator
+     */
+    public function __construct(IPrimaryKeyMapper $primaryKeyMapper, ITokenValidator $tokenValidator)
+    {
+        $this->primaryKeyMapper = $primaryKeyMapper;
+        $this->tokenValidator = $tokenValidator;
+    }
+
+
     public function initialize()
     {
         
-    }
-    
-    /**
-     * Setter primary key mapper
-     *
-     * @param \Jtl\Connector\Core\Mapper\IPrimaryKeyMapper $mapper
-     * @return \Jtl\Connector\Core\Base\Connector
-     */
-    public function setPrimaryKeyMapper(IPrimaryKeyMapper $mapper): IEndpointConnector
-    {
-        $this->keyMapper = $mapper;
-        
-        return $this;
     }
 
     /**
@@ -67,22 +67,9 @@ class Connector extends Singleton implements IEndpointConnector
      */
     public function getPrimaryKeyMapper(): IPrimaryKeyMapper
     {
-        return $this->keyMapper;
+        return $this->primaryKeyMapper;
     }
 
-    /**
-     * Setter token validator
-     *
-     * @param ITokenValidator $tokenValidator
-     * @return Connector
-     */
-    public function setTokenValidator(ITokenValidator $tokenValidator): IEndpointConnector
-    {
-        $this->tokenValidator = $tokenValidator;
-        
-        return $this;
-    }
-    
     /**
      * @return ITokenValidator
      */
@@ -173,13 +160,13 @@ class Connector extends Singleton implements IEndpointConnector
      * (non-PHPdoc)
      * @see \Jtl\Connector\Core\Application\IEndpointConnector::canHandle()
      */
-    public function canHandle(): bool
+    public function canHandle(Application $application): bool
     {
         $controller = RpcMethod::buildController($this->getMethod()->getController());
         
         $class = "\\Jtl\\Connector\\Core\\Controller\\{$controller}";
         if (class_exists($class)) {
-            $this->controller = $class::getInstance();
+            $this->controller = new $class($application);
             $this->action = $this->getMethod()->getAction();
             
             return method_exists($this->controller, $this->action);

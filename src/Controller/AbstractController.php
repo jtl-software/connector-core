@@ -6,11 +6,11 @@
 
 namespace Jtl\Connector\Core\Controller;
 
+use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Exception\NotImplementedException;
 use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Model\DataModel;
 use Jtl\Connector\Core\Model\QueryFilter;
-use Jtl\Connector\Core\Utilities\Singleton;
 
 /**
  * Base Controller Class
@@ -18,9 +18,23 @@ use Jtl\Connector\Core\Utilities\Singleton;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-abstract class AbstractController extends Singleton implements IController
+abstract class AbstractController implements IController
 {
-    protected $_method;
+    /**
+     * @var Application
+     */
+    protected $application;
+
+    protected $method;
+
+    /**
+     * AbstractController constructor.
+     * @param Application $application
+     */
+    public function __construct(Application $application)
+    {
+        $this->application = $application;
+    }
 
     /**
      * (non-PHPdoc)
@@ -66,7 +80,7 @@ abstract class AbstractController extends Singleton implements IController
      */
     public function setMethod(Method $method)
     {
-        $this->_method = $method;
+        $this->method = $method;
         return $this;
     }
     
@@ -77,6 +91,6 @@ abstract class AbstractController extends Singleton implements IController
      */
     public function getMethod()
     {
-        return $this->_method;
+        return $this->method;
     }
 }

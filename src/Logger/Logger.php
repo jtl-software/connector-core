@@ -5,6 +5,7 @@
  */
 namespace Jtl\Connector\Core\Logger;
 
+use Jtl\Connector\Core\Application\Application;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
 
@@ -19,24 +20,15 @@ class Logger extends \Monolog\Logger
     const CHANNEL_SECURITY = 'security';
 
     /**
-     * Adds a log record at an arbitrary level.
-     *
-     * @param mixed $message The log message
-     * @param mixed $level The log level
-     * @param string $channel The log channel
-     * @return Boolean Whether the record has been processed
+     * @param string $message
+     * @param integer $level
+     * @param string $channel
+     * @return boolean
      */
-    public static function write($message, $level = self::ERROR, $channel = self::CHANNEL_GLOBAL)
+    public static function write(string $message, int $level = self::ERROR, string $channel = self::CHANNEL_GLOBAL): bool
     {
-        $forceWriting = false;
-        if (function_exists('Application') && !is_null(Application()->getConfig())) {
-            try {
-                $forceWriting = Application()->getConfig()->get('developer_logging');
-            } catch (\Exception $e) { }
-        }
-
-        if (!$forceWriting && $level == self::DEBUG && getenv('APPLICATION_ENV') !== 'development') {
-            return null;
+        if ($level === self::DEBUG && getenv(Application::ENV_VAR_DEBUG_LOGGING) !== true) {
+            return false;
         }
 
         if (defined('LOG_DIR')) {
@@ -67,7 +59,7 @@ class Logger extends \Monolog\Logger
      * @param string $channel The log channel
      * @return \Monolog\Logger
      */
-    public static function getLogger($channel)
+    public static function getLogger($channel): \Monolog\Logger
     {
         return LoggerFactory::get($channel);
     }

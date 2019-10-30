@@ -23,27 +23,19 @@ interface IEndpointConnector
     public function initialize();
     
     /**
-     * @param IPrimaryKeyMapper $mapper
-     * @return self
-     */
-    public function setPrimaryKeyMapper(IPrimaryKeyMapper $mapper): IEndpointConnector;
-    
-    /**
      * @return IPrimaryKeyMapper
      */
     public function getPrimaryKeyMapper(): IPrimaryKeyMapper;
-    
+
     /**
-     * Checks whether or not a method can be handled
-     *
-     * @return bool
+     * @param Application $application
+     * @return boolean
      */
-    public function canHandle(): bool;
-    
+    public function canHandle(Application $application): bool;
+
     /**
-     * Controller handle
-     *
-     * @param \Jtl\Connector\Core\Rpc\RequestPacket $requestpacket
+     * @param RequestPacket $requestpacket
+     * @return Action
      */
     public function handle(RequestPacket $requestpacket): Action;
     
@@ -51,12 +43,6 @@ interface IEndpointConnector
      * Controller getter
      */
     public function getController(): IController;
-
-    /**
-     * @param ITokenValidator $tokenValidator
-     * @return IEndpointConnector
-     */
-    public function setTokenValidator(ITokenValidator $tokenValidator): IEndpointConnector;
 
     /**
      * @return ITokenValidator

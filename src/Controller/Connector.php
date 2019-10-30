@@ -163,13 +163,13 @@ class Connector extends AbstractController
             return $action;
         }
 
-        $tokenValidator = Application()->getConnector()->getTokenValidator();
+        $tokenValidator = $this->application->getConnector()->getTokenValidator();
 
         if($tokenValidator->validate($accessToken) === false){
             return $this->unauthorizedAccessError($action,$accessToken);
         }
 
-        if (Application()->getSessionHandler() !== null) {
+        if ($this->application->getSessionHandler() !== null) {
             $session = new \stdClass();
             $session->sessionId = session_id();
             $session->lifetime = (int) ini_get('session.gc_maxlifetime');

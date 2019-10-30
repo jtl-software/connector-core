@@ -7,7 +7,6 @@ namespace Jtl\Connector\Core\Application;
 
 use Jtl\Connector\Core\Application\Error\ErrorHandler;
 use Jtl\Connector\Core\Application\Error\IErrorHandler;
-use Jtl\Connector\Core\Authentication\ITokenValidator;
 use Jtl\Connector\Core\Checksum\ChecksumInterface;
 use Jtl\Connector\Core\Compression\Zip;
 use Jtl\Connector\Core\Exception\CompressionException;
@@ -40,7 +39,6 @@ use Jtl\Connector\Core\Model\DataModel;
 use Jtl\Connector\Core\Serializer\JMS\SerializerBuilder;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Session\SqliteSession;
-use Jtl\Connector\Core\Utilities\Singleton;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Jtl\Connector\Core\IO\Path;
 use Jtl\Connector\Core\Event\EventHandler;
@@ -52,9 +50,11 @@ use Symfony\Component\Finder\Finder;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-class Application extends Singleton implements IApplication
+class Application implements IApplication
 {
     const PROTOCOL_VERSION = 7;
+
+    const ENV_VAR_DEBUG_LOGGING = 'DEBUG_LOGGING';
     
     /**
      * Connected EndpointConnectors
@@ -76,20 +76,22 @@ class Application extends Singleton implements IApplication
     protected $sessionHandler;
     
     /**
-     * @var \Symfony\Component\EventDispatcher\EventDispatcher
+     * @var EventDispatcher
      */
     protected $eventDispatcher;
     
     /**
-     * @var \Jtl\Connector\Core\Application\Error\IErrorHandler
+     * @var IErrorHandler
      */
     protected $errorHandler;
-    
-    protected function __construct()
+
+    /**
+     * Application constructor.
+     * @param IEndpointConnector $connector
+     */
+    protected function __construct(IEndpointConnector $connector)
     {
-        require_once(dirname(__FILE__) . '/../bootstrap.php');
-        
-        // Error Handler
+        $this->connector = $connector;
         $this->setErrorHandler(new ErrorHandler());
     }
     
@@ -147,18 +149,6 @@ class Application extends Singleton implements IApplication
         
         // Initialize Endpoint
         $this->connector->initialize();
-
-        try {
-            $this->connector->getPrimaryKeyMapper();
-        } catch (\Throwable $ex) {
-            throw new ApplicationException('No primary key mapper registered');
-        }
-
-        try {
-            $this->connector->getTokenValidator();
-        } catch (\Throwable $ex) {
-            throw new ApplicationException('Token validator is not registered');
-        }
         
         if ($this->connector instanceof ChecksumInterface) {
             ChecksumLinker::setChecksumLoader($this->connector->getChecksumLoader());
@@ -195,7 +185,7 @@ class Application extends Singleton implements IApplication
         ////////////////////
         // Core Connector //
         ////////////////////
-        $coreconnector = Connector::getInstance();
+        $coreconnector = new Connector($this->connector->getPrimaryKeyMapper(), $this->connector->getTokenValidator());
         $method = RpcMethod::splitMethod($requestpacket->getMethod());
         $coreconnector->setMethod($method);
         
@@ -204,7 +194,7 @@ class Application extends Singleton implements IApplication
         EventHandler::dispatchRpc($data, $this->eventDispatcher, $method->getController(), $method->getAction(),
             EventHandler::BEFORE);
         
-        if ($method->isCore() && $coreconnector->canHandle()) {
+        if ($method->isCore() && $coreconnector->canHandle($this)) {
             $actionresult = $coreconnector->handle($requestpacket);
             if ($actionresult->isHandled()) {
                 $responsepacket = $this->buildRpcResponse($requestpacket, $actionresult);
@@ -238,7 +228,7 @@ class Application extends Singleton implements IApplication
         $this->handleImagePush($requestpacket, $imagePaths);
         
         $this->connector->setMethod($method);
-        if ($this->connector->canHandle()) {
+        if ($this->connector->canHandle($this)) {
             /** @var Action $actionresult */
             $actionresult = $this->connector->handle($requestpacket);
             
@@ -535,6 +525,9 @@ class Application extends Singleton implements IApplication
         if (!$this->config->has('developer_logging')) {
             $this->config->save('developer_logging', false);
         }
+
+        $debugLogging = $this->config->get('developer_logging') ? 'true' : 'false';
+        putenv(sprintf('%s=%s', self::ENV_VAR_DEBUG_LOGGING, $debugLogging));
     }
 
     /**
