@@ -18,15 +18,29 @@ use Jtl\Connector\Core\Logger\Logger;
  */
 class ChecksumLinker
 {
+    /**
+     * @var IChecksumLoader
+     */
     protected static $loader;
 
+    /**
+     * @param IChecksumLoader $loader
+     */
     public static function setChecksumLoader(IChecksumLoader $loader)
     {
         self::$loader = $loader;
     }
 
     /**
-     * @param \Jtl\Connector\Core\Model\Model $model
+     * @return boolean
+     */
+    public static function checksumLoaderExists(): bool
+    {
+        return self::$loader instanceof IChecksumLoader;
+    }
+
+    /**
+     * @param Model $model
      * @param int $type
      */
     public static function link(Model &$model, $type = null)
@@ -63,10 +77,10 @@ class ChecksumLinker
     }
 
     /**
-     * @param \Jtl\Connector\Core\Checksum\IChecksum $checksum
+     * @param IChecksum $checksum
      * @return boolean
      */
-    public static function save(IChecksum $checksum)
+    public static function save(IChecksum $checksum): bool
     {
         if (strlen($checksum->getForeignKey()->getEndpoint()) > 0 && $checksum->getForeignKey()->getHost()) {
             self::$loader->delete($checksum->getForeignKey()->getEndpoint(), $checksum->getType());
@@ -79,11 +93,11 @@ class ChecksumLinker
     }
 
     /**
-     * @param \Jtl\Connector\Core\Model\Model $model
+     * @param Model $model
      * @param int $type
-     * @return \Jtl\Connector\Core\Checksum\IChecksum
+     * @return IChecksum
      */
-    public static function find(Model $model, $type)
+    public static function find(Model $model, $type): ?IChecksum
     {
         if (method_exists($model, 'getChecksums')) {
             foreach ($model->getChecksums() as $checksum) {
@@ -97,12 +111,12 @@ class ChecksumLinker
     }
 
     /**
-     * @param \Jtl\Connector\Core\Model\Model $model
+     * @param Model $model
      * @param string $endpoint
      * @param int $type
-     * @return \Jtl\Connector\Core\Checksum\IChecksum
+     * @return IChecksum
      */
-    public static function findByEndpoint(Model $model, $endpoint, $type)
+    public static function findByEndpoint(Model $model, $endpoint, $type): ?IChecksum
     {
         if (method_exists($model, 'getChecksums')) {
             foreach ($model->getChecksums() as $checksum) {
@@ -116,12 +130,12 @@ class ChecksumLinker
     }
 
     /**
-     * @param \Jtl\Connector\Core\Model\Model $model
+     * @param Model $model
      * @param int $host
      * @param int $type
-     * @return \Jtl\Connector\Core\Checksum\IChecksum
+     * @return IChecksum
      */
-    public static function findByHost(Model $model, $host, $type)
+    public static function findByHost(Model $model, $host, $type): ?IChecksum
     {
         if (method_exists($model, 'getChecksums')) {
             foreach ($model->getChecksums() as $checksum) {
