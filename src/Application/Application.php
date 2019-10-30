@@ -147,20 +147,16 @@ class Application extends Singleton implements IApplication
         
         // Initialize Endpoint
         $this->connector->initialize();
-        
-        if ($this->connector->getPrimaryKeyMapper() === null) {
+
+        try {
+            $this->connector->getPrimaryKeyMapper();
+        } catch (\Throwable $ex) {
             throw new ApplicationException('No primary key mapper registered');
         }
-        
-        $tokenValidatorExists = false;
-        if (is_callable([
-                $this->connector,
-                'getTokenValidator',
-            ]) && $this->connector->getTokenValidator() instanceof ITokenValidator) {
-            $tokenValidatorExists = true;
-        }
-        
-        if (!$tokenValidatorExists) {
+
+        try {
+            $this->connector->getTokenValidator();
+        } catch (\Throwable $ex) {
             throw new ApplicationException('Token validator is not registered');
         }
         
