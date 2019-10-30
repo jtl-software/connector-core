@@ -3,13 +3,13 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Application
  */
-
 namespace Jtl\Connector\Core\Application;
 
 use Jtl\Connector\Core\Application\Error\ErrorHandler;
 use Jtl\Connector\Core\Application\Error\IErrorHandler;
-use Jtl\Connector\Core\Checksum\ChecksumInterface;
+use Jtl\Connector\Core\Connector\ChecksumInterface;
 use Jtl\Connector\Core\Compression\Zip;
+use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\HttpException;
 use Jtl\Connector\Core\IO\Temp;
@@ -31,7 +31,7 @@ use Jtl\Connector\Core\Model\BoolResult;
 use Jtl\Connector\Core\Result\Action;
 use Jtl\Connector\Core\Utilities\RpcMethod;
 use Jtl\Connector\Core\Session\Session;
-use Jtl\Connector\Core\Base\Connector;
+use Jtl\Connector\Core\Connector\BaseConnector;
 use Jtl\Connector\Core\Logger\Logger;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Jtl\Connector\Core\Rpc\Method;
@@ -59,7 +59,7 @@ class Application implements IApplication
     /**
      * Connected EndpointConnectors
      *
-     * @var IEndpointConnector
+     * @var ConnectorInterface
      */
     protected $connector = null;
 
@@ -87,9 +87,9 @@ class Application implements IApplication
 
     /**
      * Application constructor.
-     * @param IEndpointConnector $connector
+     * @param ConnectorInterface $connector
      */
-    public function __construct(IEndpointConnector $connector)
+    public function __construct(ConnectorInterface $connector)
     {
         $this->connector = $connector;
         $this->setErrorHandler(new ErrorHandler());
@@ -185,7 +185,7 @@ class Application implements IApplication
         ////////////////////
         // Core Connector //
         ////////////////////
-        $coreconnector = new Connector($this->connector->getPrimaryKeyMapper(), $this->connector->getTokenValidator());
+        $coreconnector = new BaseConnector($this->connector->getPrimaryKeyMapper(), $this->connector->getTokenValidator());
         $method = RpcMethod::splitMethod($requestpacket->getMethod());
         $coreconnector->setMethod($method);
 
@@ -283,7 +283,7 @@ class Application implements IApplication
                 throw new RpcException('Internal error', -32603);
             }
         } elseif ($requestpacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
-                Request::deleteFileuploads($imagePaths);
+            Request::deleteFileuploads($imagePaths);
         }
 
         if ($exists) {
@@ -596,7 +596,7 @@ class Application implements IApplication
     /**
      * @param Model $model
      */
-    protected function linkChecksum(Model $model) : void
+    protected function linkChecksum(Model $model): void
     {
         if ($this->connector instanceof ChecksumInterface) {
             ChecksumLinker::link($model);
@@ -606,9 +606,9 @@ class Application implements IApplication
     /**
      * Connector getter
      *
-     * @return IEndpointConnector
+     * @return ConnectorInterface
      */
-    public function getConnector(): ?IEndpointConnector
+    public function getConnector(): ?ConnectorInterface
     {
         return $this->connector;
     }

@@ -3,17 +3,12 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Base
  */
-
-namespace Jtl\Connector\Core\Base;
+namespace Jtl\Connector\Core\Connector;
 
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Authentication\ITokenValidator;
-use Jtl\Connector\Core\Checksum\ChecksumInterface;
-use Jtl\Connector\Core\Checksum\IChecksumLoader;
 use Jtl\Connector\Core\Controller\IController;
 use Jtl\Connector\Core\Rpc\RequestPacket;
-use Jtl\Connector\Core\Application\IEndpointConnector;
-use Jtl\Connector\Core\Utilities\Singleton;
 use Jtl\Connector\Core\Utilities\RpcMethod;
 use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Mapper\IPrimaryKeyMapper;
@@ -26,7 +21,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-class Connector implements IEndpointConnector
+class BaseConnector implements ConnectorInterface
 {
     /** @var IController */
     protected $controller;
@@ -80,9 +75,9 @@ class Connector implements IEndpointConnector
 
     /**
      * @param EventDispatcher $eventDispatcher
-     * @return IEndpointConnector
+     * @return ConnectorInterface
      */
-    public function setEventDispatcher(EventDispatcher $eventDispatcher): IEndpointConnector
+    public function setEventDispatcher(EventDispatcher $eventDispatcher): ConnectorInterface
     {
         $this->eventDispatcher = $eventDispatcher;
         
@@ -101,9 +96,9 @@ class Connector implements IEndpointConnector
      * Method Setter
      *
      * @param \Jtl\Connector\Core\Rpc\Method $method
-     * @return Connector
+     * @return BaseConnector
      */
-    public function setMethod(Method $method): IEndpointConnector
+    public function setMethod(Method $method): ConnectorInterface
     {
         $this->method = $method;
         
@@ -132,9 +127,9 @@ class Connector implements IEndpointConnector
      * Method Setter
      *
      * @param string $modelNamespace
-     * @return Connector
+     * @return BaseConnector
      */
-    public function setModelNamespace(string $modelNamespace): IEndpointConnector
+    public function setModelNamespace(string $modelNamespace): ConnectorInterface
     {
         if (!is_string($modelNamespace) || $modelNamespace[strlen($modelNamespace) - 1] == '\\' || $modelNamespace[0] == '\\') {
             throw new \InvalidArgumentException(sprintf('Wrong Namespace (%s) syntax. Example: Jtl\Connector\Core\Model',
@@ -158,7 +153,7 @@ class Connector implements IEndpointConnector
     
     /**
      * (non-PHPdoc)
-     * @see \Jtl\Connector\Core\Application\IEndpointConnector::canHandle()
+     * @see \Jtl\Connector\Core\Application\ConnectorInterface::canHandle()
      */
     public function canHandle(Application $application): bool
     {
@@ -178,7 +173,7 @@ class Connector implements IEndpointConnector
     /**
      * @param RequestPacket $requestpacket
      * @return Action
-     * @see \Jtl\Connector\Core\Application\IEndpointConnector::handle()
+     * @see \Jtl\Connector\Core\Application\ConnectorInterface::handle()
      */
     public function handle(RequestPacket $requestpacket): Action
     {
@@ -188,7 +183,7 @@ class Connector implements IEndpointConnector
     }
     
     /**
-     * @see \Jtl\Connector\Core\Application\IEndpointConnector::getController()
+     * @see \Jtl\Connector\Core\Application\ConnectorInterface::getController()
      */
     public function getController(): IController
     {

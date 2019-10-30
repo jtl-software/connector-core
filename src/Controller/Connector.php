@@ -8,6 +8,7 @@
 namespace Jtl\Connector\Core\Controller;
 
 use Jtl\Connector\Core\Application\Error\ErrorCodesInterface;
+use Jtl\Connector\Core\Connector\ChecksumInterface;
 use Jtl\Connector\Core\IO\Path;
 use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\System\Check;
@@ -26,11 +27,12 @@ use Jtl\Connector\Core\Checksum\IChecksum;
  * @access public
  */
 class Connector extends AbstractController
-{    
+{
     /**
      * Initialize the connector.
      *
      * @param mixed $params Can be empty or not defined and a string.
+     * @return Action
      */
     public function init($params = null)
     {
@@ -50,11 +52,10 @@ class Connector extends AbstractController
 
         return $ret;
     }
-    
+
     /**
-     * Returns the connector features.
-     *
-     * @param mixed $params Can be empty or not defined and a string.
+     * @param null $params
+     * @return Action
      */
     public function features($params = null)
     {
@@ -83,6 +84,7 @@ class Connector extends AbstractController
      * Ack Identity Mappings
      *
      * @param mixed $params empty or ack json string.
+     * @return Action
      */
     public function ack($params = null)
     {
@@ -97,7 +99,7 @@ class Connector extends AbstractController
             $identityLinker = IdentityLinker::getInstance();
 
             foreach ($ack->getIdentities() as $modelName => $identities) {
-                if(!$identityLinker->isType($modelName)) {
+                if (!$identityLinker->isType($modelName)) {
                     Logger::write(sprintf('ACK: Unknown core entity (%s)! Skipping related ack\'s...',
                         $modelName
                     ), Logger::WARNING, 'global');
@@ -109,20 +111,22 @@ class Connector extends AbstractController
                 }
             }
 
-            // Checksum linking
-            foreach ($ack->getChecksums() as $checksum) {
-                if ($checksum instanceof IChecksum) {
-                    if (!ChecksumLinker::save($checksum)) {
-                        Logger::write(sprintf('Could not save checksum for endpoint (%s), host (%s) and type (%s)',
-                            $checksum->getForeignKey()->getEndpoint(), 
-                            $checksum->getForeignKey()->getHost(),
-                            $checksum->getType()
-                        ), Logger::WARNING, 'checksum');
+            if ($this->application->getConnector() instanceof ChecksumInterface) {
+                // Checksum linking
+                foreach ($ack->getChecksums() as $checksum) {
+                    if ($checksum instanceof IChecksum) {
+                        if (!ChecksumLinker::save($checksum)) {
+                            Logger::write(sprintf('Could not save checksum for endpoint (%s), host (%s) and type (%s)',
+                                $checksum->getForeignKey()->getEndpoint(),
+                                $checksum->getForeignKey()->getHost(),
+                                $checksum->getType()
+                            ), Logger::WARNING, 'checksum');
+                        }
                     }
                 }
             }
 
-            $ret->setResult(true);            
+            $ret->setResult(true);
         } catch (\Exception $e) {
             $err = new Error();
             $err->setCode($e->getCode());
@@ -148,7 +152,7 @@ class Connector extends AbstractController
 
             $decodedParams = Json::decode($params);
 
-            if(!isset($decodedParams->token)){
+            if (!isset($decodedParams->token)) {
                 throw new \Exception("Token parameter is missing.");
             }
 
@@ -165,15 +169,15 @@ class Connector extends AbstractController
 
         $tokenValidator = $this->application->getConnector()->getTokenValidator();
 
-        if($tokenValidator->validate($accessToken) === false){
-            return $this->unauthorizedAccessError($action,$accessToken);
+        if ($tokenValidator->validate($accessToken) === false) {
+            return $this->unauthorizedAccessError($action, $accessToken);
         }
 
         if ($this->application->getSessionHandler() !== null) {
             $session = new \stdClass();
             $session->sessionId = session_id();
-            $session->lifetime = (int) ini_get('session.gc_maxlifetime');
-            
+            $session->lifetime = (int)ini_get('session.gc_maxlifetime');
+
             $action->setResult($session);
         } else {
             $error = new Error();
@@ -181,10 +185,10 @@ class Connector extends AbstractController
                 ->setMessage("Could not get any Session");
             $action->setError($error);
         }
-        
+
         return $action;
     }
-    
+
     /**
      * @return Action
      */
@@ -192,24 +196,24 @@ class Connector extends AbstractController
     {
         $action = new Action();
         $action->setHandled(true);
-        
+
         try {
             $path = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
             $configData = file_get_contents($path);
             if ($configData === false) {
                 throw new \RuntimeException(sprintf('Cannot read config file %s', $path));
             }
-            
+
             $config = json_decode($configData);
             if (json_last_error() !== JSON_ERROR_NONE) {
                 throw JsonException::decoding(json_last_error_msg());
             }
-    
+
             $status = false;
             if (!isset($config->developer_logging) || !$config->developer_logging) {
                 $status = true;
             }
-            
+
             $config->developer_logging = $status;
 
             $json = json_encode($config, JSON_PRETTY_PRINT);
@@ -219,7 +223,7 @@ class Connector extends AbstractController
             }
 
             file_put_contents($path, $json);
-            
+
             $action->setResult($config);
         } catch (\Exception $e) {
             $error = new Error();
@@ -227,10 +231,10 @@ class Connector extends AbstractController
             $error->setMessage($e->getMessage());
             $action->setError($error);
         }
-        
+
         return $action;
     }
-    
+
     /**
      * @return Action
      */
@@ -238,21 +242,21 @@ class Connector extends AbstractController
     {
         $action = new Action();
         $action->setHandled(true);
-        
+
         try {
             $log = [];
             foreach (glob(Path::combine(CONNECTOR_DIR, 'logs', '*.log')) as $file) {
                 if (!preg_match('/(global|database){1}.+\.log/', $file)) {
                     continue;
                 }
-                
+
                 $lines = array_filter(explode(PHP_EOL, file_get_contents($file)), function ($elem) {
-                    return  !empty(trim($elem));
+                    return !empty(trim($elem));
                 });
-                
+
                 $log = array_merge($log, $lines);
             }
-            
+
             $action->setResult($log);
         } catch (\Exception $e) {
             $error = new Error();
@@ -260,7 +264,7 @@ class Connector extends AbstractController
             $error->setMessage($e->getMessage());
             $action->setError($error);
         }
-    
+
         return $action;
     }
 
@@ -269,7 +273,7 @@ class Connector extends AbstractController
      * @param string $accessToken
      * @return Action
      */
-    protected function unauthorizedAccessError(Action $action,string $accessToken) : Action
+    protected function unauthorizedAccessError(Action $action, string $accessToken): Action
     {
         $error = new Error();
         $error->setCode(ErrorCodesInterface::AUTHENTICATION_ERROR);

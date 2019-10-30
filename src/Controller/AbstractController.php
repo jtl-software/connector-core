@@ -25,6 +25,9 @@ abstract class AbstractController implements IController
      */
     protected $application;
 
+    /**
+     * @var Method
+     */
     protected $method;
 
     /**
@@ -75,8 +78,8 @@ abstract class AbstractController implements IController
     /**
      * Method Setter
      *
-     * @param \Jtl\Connector\Core\Rpc\Method $method
-     * @return \Jtl\Connector\Core\Controller\AbstractController
+     * @param Method $method
+     * @return AbstractController
      */
     public function setMethod(Method $method)
     {
@@ -87,9 +90,9 @@ abstract class AbstractController implements IController
     /**
      * Method Getter
      *
-     * @return \Jtl\Connector\Core\Rpc\Method
+     * @return Method
      */
-    public function getMethod()
+    public function getMethod(): Method
     {
         return $this->method;
     }
