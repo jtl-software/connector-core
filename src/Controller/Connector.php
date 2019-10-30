@@ -7,8 +7,9 @@
 
 namespace Jtl\Connector\Core\Controller;
 
-use Jtl\Connector\Core\Authentication\ITokenValidator;
+use Jtl\Connector\Core\Application\Error\ErrorCodesInterface;
 use Jtl\Connector\Core\IO\Path;
+use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\System\Check;
 use Jtl\Connector\Core\Exception\JsonException;
 use Jtl\Connector\Core\Result\Action;
@@ -18,7 +19,6 @@ use Jtl\Connector\Core\Serializer\JMS\SerializerBuilder;
 use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Checksum\IChecksum;
-use Jtl\Connector\Core\Formatter\ExceptionFormatter;
 
 /**
  * Base Config Controller
@@ -137,19 +137,23 @@ class Connector extends AbstractController
      * Returns the connector auth action
      *
      * @param mixed $params
-     * @return \Jtl\Connector\Core\Result\Action
+     * @return Action
      */
     public function auth($params)
     {
         $action = new Action();
         $action->setHandled(true);
-        $authRequest = null;
-        $token = '';
 
         try {
-            $serializer = SerializerBuilder::create();
 
-            $authRequest = $serializer->deserialize($params, "Jtl\Connector\Core\Model\AuthRequest", 'json');
+            $decodedParams = Json::decode($params);
+
+            if(!isset($decodedParams->token)){
+                throw new \Exception("Token parameter is missing.");
+            }
+
+            $accessToken = $decodedParams->token;
+
         } catch (\Exception $e) {
             $err = new Error();
             $err->setCode($e->getCode());
@@ -159,41 +163,13 @@ class Connector extends AbstractController
             return $action;
         }
 
-        // EP checks validation?
-        $useEpValidation = false;
-        $isValid = false;
-        if (is_callable([Application()->getConnector(), 'getTokenValidator'])) {
-            $tokenValidator = Application()->getConnector()->getTokenValidator();
-            if ($tokenValidator instanceof ITokenValidator) {
-                $useEpValidation = true;
-                $isValid = $tokenValidator->validate($authRequest);
-            }
+        $tokenValidator = $this->application->getConnector()->getTokenValidator();
+
+        if($tokenValidator->validate($accessToken) === false){
+            return $this->unauthorizedAccessError($action,$accessToken);
         }
 
-        if (!$useEpValidation) {
-            try {
-                $token = Application()->getConnector()->getTokenLoader()->load();
-            } catch (\Exception $e) {
-                Logger::write(ExceptionFormatter::format($e), Logger::ERROR, 'security');
-                $token = '';
-            }
-        }
-
-        // If credentials are not valid, return appropriate response
-        if (($useEpValidation && !$isValid) || (!$useEpValidation && $token !== $authRequest->getToken())) {
-            sleep(2);
-
-            $error = new Error();
-            $error->setCode(790);
-            $error->setMessage("Could not authenticate access to the connector");
-            $action->setError($error);
-
-            Logger::write(sprintf("Unauthorized access with token (%s) from ip (%s)", $authRequest->getToken(), $_SERVER['REMOTE_ADDR']), Logger::INFO, 'security');
-
-            return $action;
-        }
-
-        if (Application()->getSessionHandler() !== null) {
+        if ($this->application->getSessionHandler() !== null) {
             $session = new \stdClass();
             $session->sessionId = session_id();
             $session->lifetime = (int) ini_get('session.gc_maxlifetime');
@@ -201,7 +177,7 @@ class Connector extends AbstractController
             $action->setResult($session);
         } else {
             $error = new Error();
-            $error->setCode(789)
+            $error->setCode(ErrorCodesInterface::UNDEFINED_SESSION_HANDLER_ERROR)
                 ->setMessage("Could not get any Session");
             $action->setError($error);
         }
@@ -285,6 +261,23 @@ class Connector extends AbstractController
             $action->setError($error);
         }
     
+        return $action;
+    }
+
+    /**
+     * @param Action $action
+     * @param string $accessToken
+     * @return Action
+     */
+    protected function unauthorizedAccessError(Action $action,string $accessToken) : Action
+    {
+        $error = new Error();
+        $error->setCode(ErrorCodesInterface::AUTHENTICATION_ERROR);
+        $error->setMessage("Could not authenticate access to the connector");
+        $action->setError($error);
+
+        Logger::write(sprintf("Unauthorized access with token (%s) from ip (%s)", $accessToken, $_SERVER['REMOTE_ADDR']), Logger::WARNING, 'security');
+
         return $action;
     }
 }
