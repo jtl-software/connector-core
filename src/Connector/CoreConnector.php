@@ -7,6 +7,7 @@ namespace Jtl\Connector\Core\Connector;
 
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Authentication\ITokenValidator;
+use Jtl\Connector\Core\Controller\AbstractController;
 use Jtl\Connector\Core\Controller\IController;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Utilities\RpcMethod;
@@ -21,7 +22,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-class BaseConnector implements ConnectorInterface
+class CoreConnector implements ConnectorInterface
 {
     /** @var IController */
     protected $controller;
@@ -96,7 +97,7 @@ class BaseConnector implements ConnectorInterface
      * Method Setter
      *
      * @param \Jtl\Connector\Core\Rpc\Method $method
-     * @return BaseConnector
+     * @return CoreConnector
      */
     public function setMethod(Method $method): ConnectorInterface
     {
@@ -127,7 +128,7 @@ class BaseConnector implements ConnectorInterface
      * Method Setter
      *
      * @param string $modelNamespace
-     * @return BaseConnector
+     * @return CoreConnector
      */
     public function setModelNamespace(string $modelNamespace): ConnectorInterface
     {
@@ -185,7 +186,7 @@ class BaseConnector implements ConnectorInterface
     /**
      * @see \Jtl\Connector\Core\Application\ConnectorInterface::getController()
      */
-    public function getController(): IController
+    public function getController(): AbstractController
     {
         return $this->controller;
     }

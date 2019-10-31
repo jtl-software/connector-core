@@ -28,22 +28,6 @@ interface ConnectorInterface
      */
     public function getPrimaryKeyMapper(): IPrimaryKeyMapper;
 
-    /**
-     * @param Application $application
-     * @return boolean
-     */
-    public function canHandle(Application $application): bool;
-
-    /**
-     * @param RequestPacket $requestpacket
-     * @return Action
-     */
-    public function handle(RequestPacket $requestpacket): Action;
-    
-    /**
-     * Controller getter
-     */
-    public function getController(): IController;
 
     /**
      * @return ITokenValidator

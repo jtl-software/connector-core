@@ -160,7 +160,7 @@ class Connector extends AbstractController
             return $action;
         }
 
-        $tokenValidator = $this->application->getConnector()->getTokenValidator();
+        $tokenValidator = $this->application->getEndpointConnector()->getTokenValidator();
 
         if ($tokenValidator->validate($accessToken) === false) {
             return $this->unauthorizedAccessError($action, $accessToken);

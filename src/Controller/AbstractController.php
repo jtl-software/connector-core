@@ -7,10 +7,6 @@
 namespace Jtl\Connector\Core\Controller;
 
 use Jtl\Connector\Core\Application\Application;
-use Jtl\Connector\Core\Exception\NotImplementedException;
-use Jtl\Connector\Core\Rpc\Method;
-use Jtl\Connector\Core\Model\DataModel;
-use Jtl\Connector\Core\Model\QueryFilter;
 
 /**
  * Base Controller Class
@@ -18,17 +14,12 @@ use Jtl\Connector\Core\Model\QueryFilter;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-abstract class AbstractController implements IController
+abstract class AbstractController
 {
     /**
      * @var Application
      */
     protected $application;
-
-    /**
-     * @var Method
-     */
-    protected $method;
 
     /**
      * AbstractController constructor.
@@ -37,63 +28,5 @@ abstract class AbstractController implements IController
     public function __construct(Application $application)
     {
         $this->application = $application;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see \Jtl\Connector\Core\Controller\IController::push()
-     */
-    public function push(DataModel $model)
-    {
-        throw new NotImplementedException();
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \Jtl\Connector\Core\Controller\IController::pull()
-     */
-    public function pull(QueryFilter $queryFilter)
-    {
-        throw new NotImplementedException();
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see \Jtl\Connector\Core\Controller\IController::delete()
-     */
-    public function delete(DataModel $model)
-    {
-        throw new NotImplementedException();
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see \Jtl\Connector\Core\Controller\IController::statistic()
-     */
-    public function statistic(QueryFilter $queryFilter)
-    {
-        throw new NotImplementedException();
-    }
-    
-    /**
-     * Method Setter
-     *
-     * @param Method $method
-     * @return AbstractController
-     */
-    public function setMethod(Method $method)
-    {
-        $this->method = $method;
-        return $this;
-    }
-    
-    /**
-     * Method Getter
-     *
-     * @return Method
-     */
-    public function getMethod(): Method
-    {
-        return $this->method;
     }
 }

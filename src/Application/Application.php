@@ -32,7 +32,7 @@ use Jtl\Connector\Core\Model\BoolResult;
 use Jtl\Connector\Core\Result\Action;
 use Jtl\Connector\Core\Utilities\RpcMethod;
 use Jtl\Connector\Core\Session\Session;
-use Jtl\Connector\Core\Connector\BaseConnector;
+use Jtl\Connector\Core\Connector\CoreConnector;
 use Jtl\Connector\Core\Logger\Logger;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Jtl\Connector\Core\Rpc\Method;
@@ -62,7 +62,7 @@ class Application implements IApplication
      *
      * @var ConnectorInterface
      */
-    protected $connector = null;
+    protected $endpointConnector = null;
 
     /**
      * @var Config;
@@ -88,11 +88,11 @@ class Application implements IApplication
 
     /**
      * Application constructor.
-     * @param ConnectorInterface $connector
+     * @param ConnectorInterface $endpointConnector
      */
-    public function __construct(ConnectorInterface $connector)
+    public function __construct(ConnectorInterface $endpointConnector)
     {
-        $this->connector = $connector;
+        $this->endpointConnector = $endpointConnector;
         $this->setErrorHandler(new ErrorHandler());
     }
 
@@ -109,7 +109,7 @@ class Application implements IApplication
 
         $this->getErrorHandler()->setEventDispatcher($this->eventDispatcher);
 
-        $jtlrpc = Request::handle($this->connector->getUseSuperGlobals());
+        $jtlrpc = Request::handle($this->endpointConnector->getUseSuperGlobals());
         $requestPackets = RequestPacket::build($jtlrpc);
 
         $rpcmode = is_object($requestPackets) ? Packet::SINGLE_MODE : Packet::BATCH_MODE;
@@ -143,10 +143,10 @@ class Application implements IApplication
         $this->startEventDispatcher();
 
         // Initialize Endpoint
-        $this->connector->initialize();
+        $this->endpointConnector->initialize();
 
-        if ($this->connector instanceof ChecksumInterface) {
-            ChecksumLinker::setChecksumLoader($this->connector->getChecksumLoader());
+        if ($this->endpointConnector instanceof ChecksumInterface) {
+            ChecksumLinker::setChecksumLoader($this->endpointConnector->getChecksumLoader());
         }
 
         $this->runSingle($requestPackets);
@@ -167,12 +167,12 @@ class Application implements IApplication
         }
 
         $identityLinker = IdentityLinker::getInstance();
-        $identityLinker->setPrimaryKeyMapper($this->connector->getPrimaryKeyMapper());
+        $identityLinker->setPrimaryKeyMapper($this->endpointConnector->getPrimaryKeyMapper());
 
         ////////////////////
         // Core Connector //
         ////////////////////
-        $coreConnector = new BaseConnector($this->connector->getPrimaryKeyMapper(), $this->connector->getTokenValidator());
+        $coreConnector = new CoreConnector($this->endpointConnector->getPrimaryKeyMapper(), $this->endpointConnector->getTokenValidator());
         $method = RpcMethod::splitMethod($requestPacket->getMethod());
         $coreConnector->setMethod($method);
 
@@ -460,7 +460,7 @@ class Application implements IApplication
 
     protected function startEventDispatcher(): void
     {
-        $this->connector->setEventDispatcher($this->eventDispatcher);
+        $this->endpointConnector->setEventDispatcher($this->eventDispatcher);
 
         $loader = new \Jtl\Connector\Core\Plugin\PluginLoader();
         $loader->load($this->eventDispatcher);
@@ -543,9 +543,9 @@ class Application implements IApplication
      *
      * @return ConnectorInterface
      */
-    public function getConnector(): ?ConnectorInterface
+    public function getEndpointConnector(): ?ConnectorInterface
     {
-        return $this->connector;
+        return $this->endpointConnector;
     }
 
     /**
