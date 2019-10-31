@@ -15,13 +15,6 @@ namespace Jtl\Connector\Core\Result;
 class Action
 {
     /**
-     * Status of the processing of an action
-     *
-     * @var bool
-     */
-    protected $handled = false;
-    
-    /**
      * Action Result
      *
      * @var mixed
@@ -36,35 +29,15 @@ class Action
     protected $error;
 
     /**
-     * @return bool
-     */
-    public function isHandled(): bool
-    {
-        return $this->handled;
-    }
-
-    /**
      * Constructor
      *
-     * @param bool $handled
      * @param mixed $result
      * @param mixed $error
      */
-    public function __construct($handled = false, $result = null, $error = null)
+    public function __construct($result = null, $error = null)
     {
-        $this->handled = $handled;
         $this->result = $result;
         $this->error = $error;
-    }
-
-    /**
-     * @param bool $handled
-     * @return Action
-     */
-    public function setHandled(bool $handled): Action
-    {
-        $this->handled = $handled;
-        return $this;
     }
 
     /**

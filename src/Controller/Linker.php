@@ -21,7 +21,6 @@ class Linker extends AbstractController
     public function clear()
     {
         $action = new Action();
-        $action->setHandled(true);
 
         try {
             $identityLinker = IdentityLinker::getInstance();

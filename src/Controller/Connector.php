@@ -36,7 +36,6 @@ class Connector extends AbstractController
     public function init($params = null)
     {
         $ret = new Action();
-        $ret->setHandled(true);
 
         try {
             Check::run();
@@ -64,7 +63,6 @@ class Connector extends AbstractController
             $features = Json::decode($featureData);
 
             $ret->setResult($features);
-            $ret->setHandled(true);
         } catch (\Exception $e) {
             $err = new Error();
             $err->setCode($e->getCode());
@@ -84,7 +82,6 @@ class Connector extends AbstractController
     public function ack($params = null)
     {
         $ret = new Action();
-        $ret->setHandled(true);
 
         try {
             $serializer = SerializerBuilder::create();
@@ -139,7 +136,6 @@ class Connector extends AbstractController
     public function auth($params)
     {
         $action = new Action();
-        $action->setHandled(true);
 
         try {
 
@@ -188,7 +184,6 @@ class Connector extends AbstractController
     public function debug()
     {
         $action = new Action();
-        $action->setHandled(true);
 
         try {
             $path = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
@@ -226,7 +221,6 @@ class Connector extends AbstractController
     public function logs()
     {
         $action = new Action();
-        $action->setHandled(true);
 
         try {
             $log = [];
