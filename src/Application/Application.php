@@ -104,10 +104,6 @@ class Application implements IApplication
     {
         AnnotationRegistry::registerLoader('class_exists');
 
-        if ($this->connector === null) {
-            throw new ApplicationException('No connector registed');
-        }
-
         // Event Dispatcher
         $this->eventDispatcher = new EventDispatcher();
 
@@ -202,7 +198,6 @@ class Application implements IApplication
         ////////////////////////
         // Endpoint Connector //
         ////////////////////////
-        $exists = false;
 
         $this->deserializeRequestParams($requestPacket, $this->connector->getModelNamespace());
 
@@ -218,7 +213,6 @@ class Application implements IApplication
             }
 
             if ($actionResult instanceof Action) {
-                $exists = true;
                 if ($actionResult->getError() === null) {
 
                     // Convert boolean to BoolResult
@@ -254,6 +248,8 @@ class Application implements IApplication
                 // Building response packet
                 $responsePacket = $this->buildRpcResponse($requestPacket, $actionResult);
                 $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
+                Response::send($responsePacket);
+
             } else {
                 throw new RpcException('Internal error', -32603);
             }
@@ -261,14 +257,10 @@ class Application implements IApplication
             Request::deleteFileuploads($imagePaths);
         }
 
-        if ($exists) {
-            throw new RpcException('Method could not be handled', -32000);
-        } else {
-            throw new RpcException(
-                sprintf("Method '%s' not found", $requestPacket->getMethod()),
-                -32601
-            );
-        }
+        throw new RpcException(
+            sprintf("Method '%s' not found", $requestPacket->getMethod()),
+            -32601
+        );
     }
 
     /**
