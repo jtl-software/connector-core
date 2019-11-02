@@ -151,5 +151,4 @@ class TranslatableAttribute extends DataModel
 
         return $this;
     }
-
 }

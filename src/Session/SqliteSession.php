@@ -140,7 +140,7 @@ final class SqliteSession implements \SessionHandlerInterface
         if ($rows !== null && isset($rows[0])) {
             $row = $rows[0];
             if (isset($row["sessionData"]) && strlen($row["sessionData"]) > 0) {
-                return base64_decode($row["sessionData"]);
+                return base64_decode($row["sessionData"], true);
             }
         }
         

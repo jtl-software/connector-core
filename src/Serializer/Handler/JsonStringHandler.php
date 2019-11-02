@@ -22,14 +22,14 @@ class JsonStringHandler implements SubscribingHandlerInterface
 {
     public static function getSubscribingMethods()
     {
-        return array(
-            array(
+        return [
+            [
                 'direction' => GraphNavigator::DIRECTION_DESERIALIZATION,
                 'format' => 'json',
                 'type' => JsonString::class,
                 'method' => 'deserializeJsonString',
-            ),
-        );
+            ],
+        ];
     }
 
     public function deserializeJsonString(JsonDeserializationVisitor $visitor, $params, array $type, Context $context)

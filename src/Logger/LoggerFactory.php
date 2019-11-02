@@ -20,7 +20,7 @@ class LoggerFactory
     public static function create($channel)
     {
         if (static::$logger === null) {
-            static::$logger = array();
+            static::$logger = [];
         }
 
         if (!isset(static::$logger[$channel])) {

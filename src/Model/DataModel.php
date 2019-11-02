@@ -145,7 +145,7 @@ abstract class DataModel extends Model
                 $property = ucfirst($member);
                 $getter = 'get' . $property;
                 
-                if (!in_array($member, $publics)) {
+                if (!in_array($member, $publics, true)) {
                     if ($this->{$getter}() instanceof DataModel) {
                         $object->{$member} = $this->{$getter}()->getPublic($publics);
                     } elseif ($this->{$getter}() instanceof Identity) {
@@ -216,8 +216,13 @@ abstract class DataModel extends Model
     protected function setProperty($name, $value, $type): DataModel
     {
         if (!$this->validateType($value, $type)) {
-            throw new InvalidArgumentException(sprintf("%s (%s): expected type '%s', given value '%s'.", $name,
-                get_class($this), $type, gettype($value)));
+            throw new InvalidArgumentException(sprintf(
+                "%s (%s): expected type '%s', given value '%s'.",
+                $name,
+                get_class($this),
+                $type,
+                gettype($value)
+            ));
         }
         
         $this->{$name} = $value;

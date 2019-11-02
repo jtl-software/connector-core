@@ -16,9 +16,9 @@ class ProductMediaFileAttr extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('i18ns', 'Jtl\Connector\Model\ProductMediaFileAttrI18n', null, false, false, true),
-        );
+        ];
     }
 
     public function isMain()

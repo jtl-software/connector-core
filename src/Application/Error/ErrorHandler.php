@@ -46,8 +46,13 @@ class ErrorHandler implements IErrorHandler
     {
         if ($this->eventDispatcher !== null) {
             $method = RpcMethod::splitMethod($method);
-            EventHandler::dispatchRpc($data, $this->eventDispatcher, $method->getController(), $method->getAction(),
-                EventHandler::AFTER);
+            EventHandler::dispatchRpc(
+                $data,
+                $this->eventDispatcher,
+                $method->getController(),
+                $method->getAction(),
+                EventHandler::AFTER
+            );
         }
     }
     
@@ -159,7 +164,7 @@ class ErrorHandler implements IErrorHandler
                     E_PARSE,
                 ];
                 
-                if (in_array($err['type'], $allowed)) {
+                if (in_array($err['type'], $allowed, true)) {
                     ob_clean();
                     
                     $error = new Error();

@@ -14,7 +14,7 @@ class Category extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('parentCategoryId', 'Identity', null, false, true, false),
             new PropertyInfo('isActive', 'boolean', false, false, false, false),
@@ -24,7 +24,7 @@ class Category extends DataType
             new PropertyInfo('customerGroups', 'Jtl\Connector\Model\CategoryCustomerGroup', null, false, false, true),
             new PropertyInfo('i18ns', 'Jtl\Connector\Model\CategoryI18n', null, false, false, true),
             new PropertyInfo('invisibilities', 'Jtl\Connector\Model\CategoryInvisibility', null, false, false, true),
-        );
+        ];
     }
 
     public function isMain()

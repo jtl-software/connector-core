@@ -18,10 +18,10 @@ class TranslatableAttribute extends DataType
     protected function loadProperties()
     {
         return [
-            new PropertyInfo('isTranslated','bool',false,false,false,false),
-            new PropertyInfo('isCustomProperty','bool',false,false,false,false),
-            new PropertyInfo('id','Jtl\Connector\Core\Model\Identity',null,true,true,false),
-            new PropertyInfo('i18ns','Jtl\Connector\Core\Model\TranslatableAttributeI18n',null,false,false,true),
+            new PropertyInfo('isTranslated', 'bool', false, false, false, false),
+            new PropertyInfo('isCustomProperty', 'bool', false, false, false, false),
+            new PropertyInfo('id', 'Jtl\Connector\Core\Model\Identity', null, true, true, false),
+            new PropertyInfo('i18ns', 'Jtl\Connector\Core\Model\TranslatableAttributeI18n', null, false, false, true),
         ];
     }
 
@@ -32,5 +32,4 @@ class TranslatableAttribute extends DataType
     {
         return false;
     }
-
 }

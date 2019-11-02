@@ -14,7 +14,7 @@ class PluginLoader
 
         $finder->files()->name('bootstrap.php')->in($dir);
         foreach ($finder as $file) {
-            include ($file->getPathName());
+            include($file->getPathName());
 
             $class = sprintf('\\%s\\Bootstrap', str_replace(DIRECTORY_SEPARATOR, '\\', $file->getRelativePath()));
             if (class_exists($class)) {

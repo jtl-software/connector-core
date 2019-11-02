@@ -1,15 +1,4 @@
-netbeans/**
-.settings/**
-.project
-.buildpath
 .idea
-nbproject/**
-vendor/**
-build/build/**
-build/coverage/**
-cache/**
+vendor
 composer.lock
-composer.phar
-update-parents.sh
-db/**
-src/jtl/Connector/Model/AckModelMapping.php
+.php_cs.cache

@@ -35,8 +35,8 @@ class NullValuesListener implements EventSubscriberInterface
      */
     public function onPreDeserialize(PreDeserializeEvent $event)
     {
-        if(is_array($eventData = $event->getData())) {
-            $event->setData(array_filter($eventData,function($value){
+        if (is_array($eventData = $event->getData())) {
+            $event->setData(array_filter($eventData, function ($value) {
                 return $value !== null;
             }));
         }

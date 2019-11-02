@@ -219,7 +219,8 @@ class ProductVariationValue extends DataModel
      * @param ProductVariationValueExtraCharge $extraCharge
      * @return ProductVariationValue
      */
-    public function addExtraCharge(ProductVariationValueExtraCharge $extraCharge
+    public function addExtraCharge(
+        ProductVariationValueExtraCharge $extraCharge
     ): ProductVariationValue {
         $this->extraCharges[] = $extraCharge;
         
@@ -299,7 +300,8 @@ class ProductVariationValue extends DataModel
      * @param ProductVariationValueInvisibility $invisibility
      * @return ProductVariationValue
      */
-    public function addInvisibility(ProductVariationValueInvisibility $invisibility
+    public function addInvisibility(
+        ProductVariationValueInvisibility $invisibility
     ): ProductVariationValue {
         $this->invisibilities[] = $invisibility;
         

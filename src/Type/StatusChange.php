@@ -16,11 +16,11 @@ class StatusChange extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('customerOrderId', 'Identity', null, false, true, false),
             new PropertyInfo('orderStatus', 'OrderStatus', '', false, false, false),
             new PropertyInfo('paymentStatus', 'PaymentStatus', '', false, false, false),
-        );
+        ];
     }
 
     public function isMain()

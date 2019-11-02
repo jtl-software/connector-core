@@ -16,10 +16,10 @@ class ProductVarCombination extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('productVariationId', 'Identity', null, true, true, false),
             new PropertyInfo('productVariationValueId', 'Identity', null, false, true, false),
-        );
+        ];
     }
 
     public function isMain()

@@ -148,8 +148,10 @@ class Identity extends Model
             return new self($data);
         }
         
-        if ($data === null || (is_array($data) && (count($data) != 2 || !array_key_exists(0,
-                        $data) || !array_key_exists(1, $data)))) {
+        if ($data === null || (is_array($data) && (count($data) != 2 || !array_key_exists(
+            0,
+            $data
+        ) || !array_key_exists(1, $data)))) {
             return new self;
         }
         

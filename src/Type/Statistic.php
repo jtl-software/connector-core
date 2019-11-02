@@ -16,10 +16,10 @@ class Statistic extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('available', 'integer', null, false, false, false),
             new PropertyInfo('controllerName', 'string', false, false, false, false)
-        );
+        ];
     }
 
     public function isMain()

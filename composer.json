@@ -27,5 +27,8 @@
         "psr-4": {
             "Jtl\\Connector\\Core\\": "src/"
         }
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.15"
     }
 }

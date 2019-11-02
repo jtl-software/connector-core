@@ -101,7 +101,8 @@ class Connector extends AbstractController
 
             foreach ($ack->getIdentities() as $modelName => $identities) {
                 if (!$identityLinker->isType($modelName)) {
-                    Logger::write(sprintf('ACK: Unknown core entity (%s)! Skipping related ack\'s...',
+                    Logger::write(sprintf(
+                        'ACK: Unknown core entity (%s)! Skipping related ack\'s...',
                         $modelName
                     ), Logger::WARNING);
                     continue;
@@ -117,7 +118,8 @@ class Connector extends AbstractController
                 foreach ($ack->getChecksums() as $checksum) {
                     if ($checksum instanceof IChecksum) {
                         if (!ChecksumLinker::save($checksum)) {
-                            Logger::write(sprintf('Could not save checksum for endpoint (%s), host (%s) and type (%s)',
+                            Logger::write(sprintf(
+                                'Could not save checksum for endpoint (%s), host (%s) and type (%s)',
                                 $checksum->getForeignKey()->getEndpoint(),
                                 $checksum->getForeignKey()->getHost(),
                                 $checksum->getType()
@@ -149,7 +151,6 @@ class Connector extends AbstractController
         $action = new Action();
 
         try {
-
             $decodedParams = Json::decode($params);
 
             if (!isset($decodedParams->token)) {
@@ -157,7 +158,6 @@ class Connector extends AbstractController
             }
 
             $accessToken = $decodedParams->token;
-
         } catch (\Exception $e) {
             $err = new Error();
             $err->setCode($e->getCode());

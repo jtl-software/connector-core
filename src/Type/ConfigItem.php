@@ -16,7 +16,7 @@ class ConfigItem extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('configGroupId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('productId', 'Identity', null, false, true, false),
@@ -34,7 +34,7 @@ class ConfigItem extends DataType
             new PropertyInfo('type', 'integer', 0, false, false, false),
             new PropertyInfo('i18ns', 'Jtl\Connector\Core\Model\ConfigItemI18n', null, false, false, true),
             new PropertyInfo('prices', 'Jtl\Connector\Core\Model\ConfigItemPrice', null, false, false, true),
-        );
+        ];
     }
 
     public function isMain()

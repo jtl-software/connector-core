@@ -16,7 +16,7 @@ class CustomerOrderItemVariation extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('productVariationId', 'Identity', null, false, true, false),
             new PropertyInfo('productVariationValueId', 'Identity', null, false, true, false),
@@ -24,7 +24,7 @@ class CustomerOrderItemVariation extends DataType
             new PropertyInfo('productVariationName', 'string', '', false, false, false),
             new PropertyInfo('surcharge', 'double', 0.0, false, false, false),
             new PropertyInfo('valueName', 'string', '', false, false, false),
-        );
+        ];
     }
 
     public function isMain()

@@ -16,11 +16,11 @@ class ConfigItemPrice extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('customerGroupId', 'Identity', null, true, true, false),
             new PropertyInfo('price', 'double', 0.0, false, false, false),
             new PropertyInfo('type', 'integer', 0, false, false, false)
-        );
+        ];
     }
 
     public function isMain()

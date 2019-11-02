@@ -16,7 +16,7 @@ class CustomerOrderShippingAddress extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('customerId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('city', 'string', '', false, false, false),
@@ -35,7 +35,7 @@ class CustomerOrderShippingAddress extends DataType
             new PropertyInfo('street', 'string', '', false, false, false),
             new PropertyInfo('title', 'string', '', false, false, false),
             new PropertyInfo('zipCode', 'string', '', false, false, false),
-        );
+        ];
     }
 
     public function isMain()

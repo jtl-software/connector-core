@@ -6,7 +6,6 @@
 
 namespace Jtl\Connector\Core\Serializer;
 
-
 use JMS\Serializer\Construction\ObjectConstructorInterface;
 use JMS\Serializer\DeserializationContext as Context;
 use JMS\Serializer\Metadata\ClassMetadata;

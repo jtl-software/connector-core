@@ -30,12 +30,12 @@ class Tool
     /**
      * @var boolean
      */
-    static public $ret_sys_getloadavg = array('0.01', '0.02', '0.01');
+    public static $ret_sys_getloadavg = ['0.01', '0.02', '0.01'];
 
     /**
      * @var boolean
      */
-    static public $ret_sys_win_getloadavg = array('0.01', '0.02', '0.01');
+    public static $ret_sys_win_getloadavg = ['0.01', '0.02', '0.01'];
     
     /**
      * @var mixed

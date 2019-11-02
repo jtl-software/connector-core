@@ -16,7 +16,7 @@ class Currency extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('delimiterCent', 'string', '', false, false, false),
             new PropertyInfo('delimiterThousand', 'string', '', false, false, false),
@@ -26,7 +26,7 @@ class Currency extends DataType
             new PropertyInfo('iso', 'string', '', false, false, false),
             new PropertyInfo('name', 'string', '', false, false, false),
             new PropertyInfo('nameHtml', 'string', '', false, false, false),
-        );
+        ];
     }
 
     public function isMain()

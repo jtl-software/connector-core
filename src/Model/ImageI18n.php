@@ -80,5 +80,4 @@ class ImageI18n extends AbstractI18n
     {
         return $this->altText;
     }
-
 }

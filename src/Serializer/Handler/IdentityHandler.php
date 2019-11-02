@@ -22,20 +22,20 @@ class IdentityHandler implements SubscribingHandlerInterface
 {
     public static function getSubscribingMethods()
     {
-        return array(
-            array(
+        return [
+            [
                 'direction' => GraphNavigator::DIRECTION_DESERIALIZATION,
                 'format' => 'json',
                 'type' => Identity::class,
                 'method' => 'deserializeIdentity',
-            ),
-            array(
+            ],
+            [
                 'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
                 'format' => 'json',
                 'type' => Identity::class,
                 'method' => 'serializeIdentity',
-            )
-        );
+            ]
+        ];
     }
 
     public function deserializeIdentity(JsonDeserializationVisitor $visitor, array $identity, array $type, Context $context)
@@ -45,6 +45,6 @@ class IdentityHandler implements SubscribingHandlerInterface
 
     public function serializeIdentity(JsonSerializationVisitor $visitor, Identity $identity, array $type, Context $context)
     {
-        return array($identity->getEndpoint(), $identity->getHost());
+        return [$identity->getEndpoint(), $identity->getHost()];
     }
 }

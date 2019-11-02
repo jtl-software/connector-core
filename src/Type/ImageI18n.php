@@ -16,11 +16,11 @@ class ImageI18n extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('altText', 'string', '', false, false, false),
             new PropertyInfo('languageISO', 'string', '', false, false, false)
-        );
+        ];
     }
     
     public function isMain()

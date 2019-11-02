@@ -37,7 +37,6 @@ class Statistic extends DataModel
      */
     public function map(bool $toWawi = false, stdClass $obj = null)
     {
-    
     }
     
     /**

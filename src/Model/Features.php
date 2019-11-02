@@ -96,7 +96,7 @@ class Features extends Model
      */
     public function getFlag(string $name): FeatureFlag
     {
-        if($this->hasFlag($name)) {
+        if ($this->hasFlag($name)) {
             return $this->flags[$name];
         }
     }

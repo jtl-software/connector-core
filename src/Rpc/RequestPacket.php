@@ -136,25 +136,25 @@ class RequestPacket extends Packet
                 
                 /*
                 $data = Json::decode($jtlrpc);
-    
+
                 // Single Mode
                 if (is_object($data)) {
                     $requestpacket = new RequestPacket();
                     $requestpacket->setOptions($data);
-    
+
                     return $requestpacket;
                 }
-    
+
                 // Batch Mode
                 elseif (is_array($data)) {
                     $requestpackets = array();
                     foreach ($data as $packet) {
                         $requestpacket = new RequestPacket();
                         $requestpacket->setOptions($packet);
-                        
+
                         $requestpackets[] = $requestpacket;
                     }
-    
+
                     return $requestpackets;
                 }
                 else {

@@ -93,7 +93,7 @@ abstract class Model
             }
             
             foreach ($members as $member) {
-                if (!in_array($member, $publics)) {
+                if (!in_array($member, $publics, true)) {
                     $memberpub = $member;
                     if ($member[0] == "_") {
                         $memberpub = substr($member, 1);

@@ -16,10 +16,10 @@ class ProductVariationValueExtraCharge extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('customerGroupId', 'Identity', null, true, true, false),
             new PropertyInfo('extraChargeNet', 'double', 0.0, false, false, false),
-        );
+        ];
     }
 
     public function isMain()

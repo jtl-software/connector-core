@@ -13,9 +13,9 @@ class Language
     const CACHE_KEY_CONVERT = 'c';
     const CACHE_KEY_MAP = 'm';
 
-    protected static $cache = array();
+    protected static $cache = [];
 
-    protected static $locales = array(
+    protected static $locales = [
         'ar_DZ' => 'ar',    'ar_EG' => 'ar',    'ar_KW' => 'ar',
         'ar_MA' => 'ar',    'ar_SA' => 'ar',    'az_AZ' => 'az',
         'be_BY' => 'be',    'bg_BG' => 'bg',    'bn_BD' => 'bn',
@@ -44,12 +44,12 @@ class Language
         'zh_CN' => 'zh',    'zh_HK' => 'zh',    'zh_TW' => 'zh',
         'es_CL' => 'es',    'es_VE' => 'es',    'de_LU' => 'de',
         'en_IE' => 'en',    'af_ZA' => 'af',	'de_LI' => 'de',
-		'en_BZ' => 'en', 	'en_CG' => 'en', 	'en_IN' => 'en',
-		'en_JM' => 'en', 	'en_PH' => 'en',    'en_ZA' => 'en',
+        'en_BZ' => 'en', 	'en_CG' => 'en', 	'en_IN' => 'en',
+        'en_JM' => 'en', 	'en_PH' => 'en',    'en_ZA' => 'en',
         'en_TT' => 'en'
-    );
+    ];
     
-    protected static $languages = array(
+    protected static $languages = [
         'ab' => 'abk',    'aa' => 'aar',    'af' => 'afr',
         'ak' => 'aka',    'sq' => 'alb',    'am' => 'amh',
         'ar' => 'ara',    'an' => 'arg',    'hy' => 'arm',
@@ -112,7 +112,7 @@ class Language
         'wo' => 'wol',    'fy' => 'fry',    'xh' => 'xho',
         'yi' => 'yid',    'yo' => 'yor',    'za' => 'zha',
         'zu' => 'zul'
-    );
+    ];
     
     public static function convert($short = null, $long = null)
     {
@@ -127,7 +127,7 @@ class Language
         if (!is_null($long) && !empty($long)) {
             $long = strtolower($long);
 
-            if (($short = array_search($long, self::$languages)) !== false) {
+            if (($short = array_search($long, self::$languages, true)) !== false) {
                 return $short;
             }
         }
@@ -152,7 +152,7 @@ class Language
         if (!is_null($country) && !empty($country)) {
             $country = strtolower($country);
 
-            if (($locale = array_search($country, self::$locales)) !== false) {
+            if (($locale = array_search($country, self::$locales, true)) !== false) {
                 return $locale;
             }
         }

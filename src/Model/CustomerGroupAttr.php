@@ -56,5 +56,4 @@ class CustomerGroupAttr extends KeyValueAttribute
     {
         return $this->id;
     }
-
 }

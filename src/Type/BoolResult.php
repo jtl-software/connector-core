@@ -6,7 +6,6 @@
 
 namespace Jtl\Connector\Core\Type;
 
-
 /**
  * @access public
  * @package Jtl\Connector\Core\Type
@@ -15,9 +14,9 @@ class BoolResult extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('result', 'boolean', false, false, false, false)
-        );
+        ];
     }
     
     public function isMain()

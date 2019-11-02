@@ -4,7 +4,6 @@ namespace Jtl\Connector\Core\Event\Connector;
 use Jtl\Connector\Core\Model\BoolResult;
 use Symfony\Contracts\EventDispatcher\Event;
 
-
 class ConnectorAfterFinishEvent extends Event
 {
     const EVENT_NAME = 'connector.after.finish';
@@ -23,5 +22,4 @@ class ConnectorAfterFinishEvent extends Event
     {
         return $this->boolResult;
     }
-    
 }

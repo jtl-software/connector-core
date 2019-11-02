@@ -32,17 +32,16 @@ class Logger extends \Monolog\Logger
         }
 
         if (defined('LOG_DIR')) {
-            $path = array(
+            $path = [
                 LOG_DIR,
                 "{$channel}.log"
-            );
-        }
-        else {
-            $path = array(
+            ];
+        } else {
+            $path = [
                 CONNECTOR_DIR,
                 'logs',
                 "{$channel}.log"
-            );
+            ];
         }
         
         $log = self::getLogger($channel);

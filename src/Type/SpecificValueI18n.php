@@ -16,7 +16,7 @@ class SpecificValueI18n extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('description', 'string', '', false, false, false),
             new PropertyInfo('metaDescription', 'string', '', false, false, false),
             new PropertyInfo('metaKeywords', 'string', '', false, false, false),
@@ -24,7 +24,7 @@ class SpecificValueI18n extends DataType
             new PropertyInfo('urlPath', 'string', '', false, false, false),
             new PropertyInfo('value', 'string', '', false, false, false),
             new PropertyInfo('languageISO', 'string', '', false, false, false)
-        );
+        ];
     }
 
     public function isMain()

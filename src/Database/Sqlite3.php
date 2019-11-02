@@ -148,13 +148,13 @@ class Sqlite3 implements IDatabase
         while (true) {
             $result = @$this->db->query($query);
             if ($result instanceof \SQLite3Result) {
-                $rows = array();
+                $rows = [];
                 while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
                     $rows[] = $row;
                 }
 
                 return $rows;
-                // Check if DB is locked //5 == \SQLITE_BUSY
+            // Check if DB is locked //5 == \SQLITE_BUSY
             } elseif ($this->db->lastErrorCode() !== 5) {
                 break;
             }

@@ -2113,8 +2113,8 @@ class Product extends DataModel
      * @return Product
      */
     public function setCustomerGroupPackagingQuantities(
-        CustomerGroupPackagingQuantity ...$customerGroupPackagingQuantities): Product
-    {
+        CustomerGroupPackagingQuantity ...$customerGroupPackagingQuantities
+    ): Product {
         $this->customerGroupPackagingQuantities = $customerGroupPackagingQuantities;
         
         return $this;

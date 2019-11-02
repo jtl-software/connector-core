@@ -16,9 +16,9 @@ class CategoryInvisibility extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('customerGroupId', 'Identity', null, true, true, false)
-        );
+        ];
     }
 
     public function isMain()

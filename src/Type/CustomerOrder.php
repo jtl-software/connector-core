@@ -16,7 +16,7 @@ class CustomerOrder extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('customerId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('billingAddress', 'Jtl\Connector\Core\Model\CustomerOrderBillingAddress', null, false, false, true),
@@ -41,7 +41,7 @@ class CustomerOrder extends DataType
             new PropertyInfo('totalSumGross', 'double', 0.0, false, false, false),
             new PropertyInfo('attributes', 'Jtl\Connector\Core\Model\KeyValueAttribute', null, false, false, true),
             new PropertyInfo('items', 'Jtl\Connector\Core\Model\CustomerOrderItem', null, false, false, true),
-        );
+        ];
     }
 
     public function isMain()

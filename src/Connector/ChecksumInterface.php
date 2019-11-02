@@ -6,6 +6,7 @@
 namespace Jtl\Connector\Core\Connector;
 
 use Jtl\Connector\Core\Checksum\IChecksumLoader;
+
 /**
  * Interface ChecksumInterface
  * @package Jtl\Connector\Core\Checksum

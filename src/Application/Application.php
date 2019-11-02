@@ -181,8 +181,13 @@ class Application implements IApplication
 
         // Rpc Event
         $data = $requestPacket->getParams();
-        EventHandler::dispatchRpc($data, $this->eventDispatcher, $method->getController(), $method->getAction(),
-            EventHandler::BEFORE);
+        EventHandler::dispatchRpc(
+            $data,
+            $this->eventDispatcher,
+            $method->getController(),
+            $method->getAction(),
+            EventHandler::BEFORE
+        );
 
         if ($method->isCore() && $coreConnector->canHandle($this)) {
             $actionResult = $coreConnector->handle($requestPacket);
@@ -191,8 +196,14 @@ class Application implements IApplication
             // Event
             $class = ($method->getController() === 'connector') ? 'Connector' : null;
             $result = $actionResult->getResult();
-            EventHandler::dispatch($result, $this->eventDispatcher, $method->getAction(), EventHandler::AFTER,
-                $class, true);
+            EventHandler::dispatch(
+                $result,
+                $this->eventDispatcher,
+                $method->getAction(),
+                EventHandler::AFTER,
+                $class,
+                true
+            );
 
             $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
             Response::send($responsePacket);
@@ -202,7 +213,7 @@ class Application implements IApplication
         // Endpoint Connector //
         ////////////////////////
         $modelNamespace = 'Jtl\Connector\Core\Model';
-        if($this->connector instanceof ModelInterface) {
+        if ($this->connector instanceof ModelInterface) {
             $modelNamespace = $this->connector->getModelNamespace();
         }
 
@@ -238,8 +249,13 @@ class Application implements IApplication
 
                             // Event
                             $class = ($method->getController() === 'connector') ? 'Connector' : null;
-                            EventHandler::dispatch($model, $this->eventDispatcher, $method->getAction(),
-                                EventHandler::AFTER, $class);
+                            EventHandler::dispatch(
+                                $model,
+                                $this->eventDispatcher,
+                                $method->getAction(),
+                                EventHandler::AFTER,
+                                $class
+                            );
 
                             if ($method->getAction() === Method::ACTION_PULL) {
                                 $results[] = $model->getPublic();
@@ -256,7 +272,6 @@ class Application implements IApplication
                 $responsePacket = $this->buildRpcResponse($requestPacket, $actionResult);
                 $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
                 Response::send($responsePacket);
-
             } else {
                 throw new RpcException('Internal error', -32603);
             }
@@ -360,15 +375,24 @@ class Application implements IApplication
                     $this->linkChecksum($param);
 
                     // Event
-                    EventHandler::dispatch($param, $this->eventDispatcher, $method->getAction(),
-                        EventHandler::BEFORE);
+                    EventHandler::dispatch(
+                        $param,
+                        $this->eventDispatcher,
+                        $method->getAction(),
+                        EventHandler::BEFORE
+                    );
                 }
             } else {
                 $params = $serializer->deserialize($requestpacket->getParams(), $namespace, 'json');
 
                 // Event
-                EventHandler::dispatch($params, $this->eventDispatcher, $method->getAction(), EventHandler::BEFORE,
-                    $modelClass);
+                EventHandler::dispatch(
+                    $params,
+                    $this->eventDispatcher,
+                    $method->getAction(),
+                    EventHandler::BEFORE,
+                    $modelClass
+                );
             }
 
             $requestpacket->setParams($params);
@@ -490,7 +514,7 @@ class Application implements IApplication
                 for ($i = 0; $i < count($images); $i++) {
                     foreach ($imagePaths as $imagePath) {
                         $infos = pathinfo($imagePath);
-                        list ($hostId, $relationType) = explode('_', $infos['filename']);
+                        list($hostId, $relationType) = explode('_', $infos['filename']);
                         if ((int)$hostId == $images[$i]->getId()->getHost()
                             && strtolower($relationType) === strtolower($images[$i]->getRelationType())
                         ) {
@@ -531,8 +555,13 @@ class Application implements IApplication
     protected function triggerRpcAfterEvent(\stdClass $data, string $method): void
     {
         $method = RpcMethod::splitMethod($method);
-        EventHandler::dispatchRpc($data, $this->eventDispatcher, $method->getController(), $method->getAction(),
-            EventHandler::AFTER);
+        EventHandler::dispatchRpc(
+            $data,
+            $this->eventDispatcher,
+            $method->getController(),
+            $method->getAction(),
+            EventHandler::AFTER
+        );
     }
 
     /**

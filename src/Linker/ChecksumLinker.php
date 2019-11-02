@@ -49,7 +49,6 @@ class ChecksumLinker
             $checksums = $model->getChecksums();
             foreach ($checksums as &$checksum) {
                 if ($checksum instanceof IChecksum && ($type === null || $checksum->getType() == $type)) {
-
                     Logger::write(sprintf('Checksum linking type (%s)...', $type), Logger::DEBUG, 'checksum');
 
                     if ($model->getId()->getEndpoint() !== null && strlen($model->getId()->getEndpoint()) > 0) {
@@ -104,7 +103,7 @@ class ChecksumLinker
                 if ($checksum instanceof IChecksum && $checksum->getType() == $type) {
                     return $checksum;
                 }
-            }   
+            }
         }
 
         return null;

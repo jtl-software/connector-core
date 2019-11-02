@@ -4,21 +4,19 @@ namespace Jtl\Connector\Core\Event\Specific;
 use Symfony\Contracts\EventDispatcher\Event;
 use Jtl\Connector\Core\Model\Specific;
 
-
 class SpecificBeforeDeleteEvent extends Event
 {
     const EVENT_NAME = 'specific.before.delete';
 
-	protected $specific;
+    protected $specific;
 
     public function __construct(Specific &$specific)
     {
-		$this->specific = $specific;
+        $this->specific = $specific;
     }
 
     public function getSpecific()
     {
         return $this->specific;
-	}
-	
+    }
 }

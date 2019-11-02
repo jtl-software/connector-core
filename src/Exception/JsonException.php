@@ -7,7 +7,6 @@
  */
 namespace Jtl\Connector\Core\Exception;
 
-
 class JsonException extends \RuntimeException
 {
     const ENCODING_ERROR = 10;
@@ -30,7 +29,7 @@ class JsonException extends \RuntimeException
     public static function decoding($lastErrorMessage, $jsonString = null)
     {
         $msg = sprintf("Error while decoding JSON: %s", $lastErrorMessage);
-        if(!is_null($jsonString)) {
+        if (!is_null($jsonString)) {
             $msg = sprintf("Error while decoding JSON: %s" . \PHP_EOL . "String: %s", $lastErrorMessage, $jsonString);
         }
         return new static($msg, static::DECODING_ERROR);

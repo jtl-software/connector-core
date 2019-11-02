@@ -19,7 +19,7 @@ class SerializerBuilder
         return \JMS\Serializer\SerializerBuilder::create()
                 ->addDefaultHandlers()
                 ->setObjectConstructor(new ObjectConstructor())
-                ->configureListeners(function (EventDispatcher $dispatcher){
+                ->configureListeners(function (EventDispatcher $dispatcher) {
                     $dispatcher->addSubscriber(new NullValuesListener());
                 })
                 ->configureHandlers(function (HandlerRegistry $registry) {

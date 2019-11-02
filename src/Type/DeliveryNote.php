@@ -16,7 +16,7 @@ class DeliveryNote extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('customerOrderId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('creationDate', 'DateTime', null, false, false, false),
@@ -24,7 +24,7 @@ class DeliveryNote extends DataType
             new PropertyInfo('note', 'string', '', false, false, false),
             new PropertyInfo('items', 'Jtl\Connector\Core\Model\DeliveryNoteItem', null, false, false, true),
             new PropertyInfo('trackingLists', 'Jtl\Connector\Core\Model\DeliveryNoteTrackingList', null, false, false, true),
-        );
+        ];
     }
 
     public function isMain()

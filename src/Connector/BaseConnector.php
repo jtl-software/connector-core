@@ -72,7 +72,6 @@ class BaseConnector implements ConnectorInterface
 
     public function initialize()
     {
-        
     }
 
     /**
