@@ -23,20 +23,40 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  */
 class BaseConnector implements ConnectorInterface
 {
-    /** @var IController */
+    /**
+     * @var IController
+     */
     protected $controller;
-    /** @var IPrimaryKeyMapper */
+
+    /**
+     * @var IPrimaryKeyMapper
+     */
     protected $primaryKeyMapper;
-    /** @var ITokenValidator */
+
+    /**
+     * @var ITokenValidator
+     */
     protected $tokenValidator;
-    /** @var EventDispatcher */
+
+    /**
+     * @var EventDispatcher
+     */
     protected $eventDispatcher;
-    /** @var Method */
+
+    /**
+     * @var Method
+     */
     protected $method;
-    /** @var bool */
+
+    /**
+     * @var bool
+     */
     protected $useSuperGlobals = true;
-    /** @var string */
-    protected $modelNamespace = 'Jtl\Connector\Core\Model';
+
+    /**
+     * @var string
+     */
+    protected $controllerNamespace = 'Jtl\Connector\Core\Controller';
 
     /**
      * Connector constructor.
@@ -122,35 +142,15 @@ class BaseConnector implements ConnectorInterface
     {
         return $this->useSuperGlobals;
     }
-    
+
     /**
-     * Method Setter
-     *
-     * @param string $modelNamespace
-     * @return BaseConnector
-     */
-    public function setModelNamespace(string $modelNamespace): ConnectorInterface
-    {
-        if (!is_string($modelNamespace) || $modelNamespace[strlen($modelNamespace) - 1] == '\\' || $modelNamespace[0] == '\\') {
-            throw new \InvalidArgumentException(sprintf('Wrong Namespace (%s) syntax. Example: Jtl\Connector\Core\Model',
-                $modelNamespace));
-        }
-        
-        $this->modelNamespace = $modelNamespace;
-        
-        return $this;
-    }
-    
-    /**
-     * Method Getter
-     *
      * @return string
      */
-    public function getModelNamespace(): string
+    public function getControllerNamespace(): string
     {
-        return $this->modelNamespace;
+        return $this->controllerNamespace;
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see \Jtl\Connector\Core\Application\ConnectorInterface::canHandle()
@@ -158,8 +158,7 @@ class BaseConnector implements ConnectorInterface
     public function canHandle(Application $application): bool
     {
         $controller = RpcMethod::buildController($this->getMethod()->getController());
-        
-        $class = "\\Jtl\\Connector\\Core\\Controller\\{$controller}";
+        $class = sprintf('%s\%s', $this->getControllerNamespace(), $controller);
         if (class_exists($class)) {
             $this->controller = new $class($application);
             $this->action = $this->getMethod()->getAction();

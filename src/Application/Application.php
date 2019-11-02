@@ -11,10 +11,13 @@ use Jtl\Connector\Core\Application\Error\IErrorHandler;
 use Jtl\Connector\Core\Connector\ChecksumInterface;
 use Jtl\Connector\Core\Compression\Zip;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
+use Jtl\Connector\Core\Connector\ModelInterface;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\HttpException;
 use Jtl\Connector\Core\IO\Temp;
 use Jtl\Connector\Core\Model\Model;
+use Jtl\Connector\Core\Model\QueryFilter;
+use Jtl\Connector\Core\Plugin\PluginLoader;
 use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Exception\SessionException;
@@ -198,8 +201,12 @@ class Application implements IApplication
         ////////////////////////
         // Endpoint Connector //
         ////////////////////////
+        $modelNamespace = 'Jtl\Connector\Core\Model';
+        if($this->connector instanceof ModelInterface) {
+            $modelNamespace = $this->connector->getModelNamespace();
+        }
 
-        $this->deserializeRequestParams($requestPacket, $this->connector->getModelNamespace());
+        $this->deserializeRequestParams($requestPacket, $modelNamespace);
 
         $this->handleImagePush($requestPacket, $imagePaths);
 
@@ -335,14 +342,14 @@ class Application implements IApplication
         $modelClass = RpcMethod::buildController($method->getController());
 
         $namespace = ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) ?
-            sprintf('%s\%s', $modelNamespace, $modelClass) : 'Jtl\Connector\Core\Model\QueryFilter';
+            sprintf('%s\%s', $modelNamespace, $modelClass) : QueryFilter::class;
 
-        if (class_exists("\\{$namespace}") && $requestpacket->getParams() !== null) {
+        if (class_exists($namespace) && $requestpacket->getParams() !== null) {
             $serializer = SerializerBuilder::create();
 
             if ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) {
-                $ns = "array<{$namespace}>";
-                $params = $serializer->deserialize($requestpacket->getParams(), $ns, 'json');
+                $type = sprintf("array<%s>", $namespace);
+                $params = $serializer->deserialize($requestpacket->getParams(), $type, 'json');
                 $identityLinker = IdentityLinker::getInstance();
 
                 // Identity mapping
@@ -462,7 +469,7 @@ class Application implements IApplication
     {
         $this->connector->setEventDispatcher($this->eventDispatcher);
 
-        $loader = new \Jtl\Connector\Core\Plugin\PluginLoader();
+        $loader = new PluginLoader();
         $loader->load($this->eventDispatcher);
     }
 

@@ -49,4 +49,9 @@ interface ConnectorInterface
      * @return ITokenValidator
      */
     public function getTokenValidator(): ITokenValidator;
+
+    /**
+     * @return string
+     */
+    public function getControllerNamespace(): string;
 }
