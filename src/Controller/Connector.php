@@ -10,6 +10,7 @@ namespace Jtl\Connector\Core\Controller;
 use Jtl\Connector\Core\Application\Error\ErrorCodesInterface;
 use Jtl\Connector\Core\IO\Path;
 use Jtl\Connector\Core\Model\Ack;
+use Jtl\Connector\Core\Model\Features;
 use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\System\Check;
 use Jtl\Connector\Core\Result\Action;
@@ -57,20 +58,30 @@ class Connector extends AbstractController
      */
     public function features($params = null)
     {
-        $ret = new Action();
+        $action = new Action();
         try {
             $featureData = file_get_contents(CONNECTOR_DIR . '/config/features.json');
-            $features = Json::decode($featureData);
+            $features = Json::decode($featureData, true);
 
-            $ret->setResult($features);
+            $entities = [];
+            if (isset($features['entities']) && is_array($features['entities'])) {
+                $entities = $features['entities'];
+            }
+
+            $flags = [];
+            if (isset($features['flags']) && is_array($features['flags'])) {
+                $flags = $features['flags'];
+            }
+
+            $action->setResult(Features::create($entities, $flags));
         } catch (\Exception $e) {
             $err = new Error();
             $err->setCode($e->getCode());
             $err->setMessage($e->getMessage());
-            $ret->setError($err);
+            $action->setError($err);
         }
 
-        return $ret;
+        return $action;
     }
 
     /**

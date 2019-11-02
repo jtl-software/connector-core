@@ -21,7 +21,7 @@ class EventHandler
         $event = self::createEvent($entity, $class, $action, $moment, $isCore);
 
         if ($event !== null) {
-            $dispatcher->dispatch($event::EVENT_NAME, $event);
+            $dispatcher->dispatch($event, $event::EVENT_NAME);
         }
     }
 
@@ -34,17 +34,12 @@ class EventHandler
         // Rpc Event
         $event = self::createRpcEvent($data, $controller, $action, $moment);
         if ($event !== null) {
-            $dispatcher->dispatch($event::EVENT_NAME, $event);
+            $dispatcher->dispatch($event, $event::EVENT_NAME);
         }
     }
 
     protected static function createEvent(&$entity, $class, $action, $moment, $isCore)
     {
-        if ($isCore) {
-            $moment = sprintf('%s%s', $class, ucfirst($moment));
-            $class = 'Core';
-        }
-
         $eventClassname = sprintf('\Jtl\Connector\Core\Event\%s\%s%s%sEvent', $class, $class, ucfirst($moment), ucfirst($action));
 
         if (class_exists($eventClassname)) {

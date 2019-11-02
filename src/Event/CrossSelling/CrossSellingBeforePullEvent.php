@@ -1,7 +1,7 @@
 <?php
 namespace Jtl\Connector\Core\Event\CrossSelling;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use Jtl\Connector\Core\Model\QueryFilter;
 
 
