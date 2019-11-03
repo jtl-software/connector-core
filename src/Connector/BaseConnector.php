@@ -110,30 +110,7 @@ class BaseConnector implements ConnectorInterface
     {
         return $this->eventDispatcher;
     }
-    
-    /**
-     * Method Setter
-     *
-     * @param \Jtl\Connector\Core\Rpc\Method $method
-     * @return BaseConnector
-     */
-    public function setMethod(Method $method): ConnectorInterface
-    {
-        $this->method = $method;
-        
-        return $this;
-    }
-    
-    /**
-     * Method Getter
-     *
-     * @return \Jtl\Connector\Core\Rpc\Method
-     */
-    public function getMethod(): Method
-    {
-        return $this->method;
-    }
-    
+
     /**
      * @return boolean
      */
@@ -154,13 +131,13 @@ class BaseConnector implements ConnectorInterface
      * (non-PHPdoc)
      * @see \Jtl\Connector\Core\Application\ConnectorInterface::canHandle()
      */
-    public function canHandle(Application $application): bool
+    public function canHandle(Method $method, Application $application): bool
     {
-        $controller = RpcMethod::buildController($this->getMethod()->getController());
+        $controller = RpcMethod::buildController($method->getController());
         $class = sprintf('%s\%s', $this->getControllerNamespace(), $controller);
         if (class_exists($class)) {
             $this->controller = new $class($application);
-            $this->action = $this->getMethod()->getAction();
+            $this->action = $method->getAction();
             
             return method_exists($this->controller, $this->action);
         }
@@ -169,15 +146,13 @@ class BaseConnector implements ConnectorInterface
     }
     
     /**
-     * @param RequestPacket $requestpacket
+     * @param RequestPacket $requestPacket
      * @return Action
      * @see \Jtl\Connector\Core\Application\ConnectorInterface::handle()
      */
-    public function handle(RequestPacket $requestpacket): Action
+    public function handle(RequestPacket $requestPacket): Action
     {
-        $this->controller->setMethod($this->getMethod());
-        
-        return $this->controller->{$this->action}($requestpacket->getParams());
+        return $this->controller->{$this->action}($requestPacket->getParams());
     }
     
     /**

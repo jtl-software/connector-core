@@ -26,11 +26,6 @@ abstract class AbstractController implements IController
     protected $application;
 
     /**
-     * @var Method
-     */
-    protected $method;
-
-    /**
      * AbstractController constructor.
      * @param Application $application
      */
@@ -73,27 +68,5 @@ abstract class AbstractController implements IController
     public function statistic(QueryFilter $queryFilter)
     {
         throw new NotImplementedException();
-    }
-    
-    /**
-     * Method Setter
-     *
-     * @param Method $method
-     * @return AbstractController
-     */
-    public function setMethod(Method $method)
-    {
-        $this->method = $method;
-        return $this;
-    }
-    
-    /**
-     * Method Getter
-     *
-     * @return Method
-     */
-    public function getMethod(): Method
-    {
-        return $this->method;
     }
 }

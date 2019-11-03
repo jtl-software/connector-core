@@ -39,13 +39,13 @@ class Method
     /**
      * Constructor
      *
-     * @param string $rpcmethod
+     * @param string $rpcMethod
      * @param string $controller
      * @param string $action
      */
-    public function __construct($rpcmethod = null, $controller = null, $action = null)
+    public function __construct($rpcMethod = null, $controller = null, $action = null)
     {
-        $this->rpcmethod = $rpcmethod;
+        $this->rpcmethod = $rpcMethod;
         $this->controller = $controller;
         $this->action = $action;
     }

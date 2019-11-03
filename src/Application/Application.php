@@ -65,7 +65,7 @@ class Application implements IApplication
      *
      * @var ConnectorInterface
      */
-    protected $connector = null;
+    protected $connector;
 
     /**
      * @var Config;
@@ -114,9 +114,6 @@ class Application implements IApplication
 
         $jtlrpc = Request::handle($this->connector->getUseSuperGlobals());
         $requestPackets = RequestPacket::build($jtlrpc);
-
-        $rpcmode = is_object($requestPackets) ? Packet::SINGLE_MODE : Packet::BATCH_MODE;
-
 
         $method = $requestPackets->getMethod();
 
@@ -175,9 +172,7 @@ class Application implements IApplication
         ////////////////////
         // Core Connector //
         ////////////////////
-        $coreConnector = new BaseConnector($this->connector->getPrimaryKeyMapper(), $this->connector->getTokenValidator());
         $method = RpcMethod::splitMethod($requestPacket->getMethod());
-        $coreConnector->setMethod($method);
 
         // Rpc Event
         $data = $requestPacket->getParams();
@@ -189,94 +184,95 @@ class Application implements IApplication
             EventHandler::BEFORE
         );
 
-        if ($method->isCore() && $coreConnector->canHandle($this)) {
-            $actionResult = $coreConnector->handle($requestPacket);
-            $responsePacket = $this->buildRpcResponse($requestPacket, $actionResult);
+        if ($method->isCore()) {
+            $coreConnector = new BaseConnector($this->connector->getPrimaryKeyMapper(), $this->connector->getTokenValidator());
+            if ($coreConnector->canHandle($method, $this)) {
+                $actionResult = $coreConnector->handle($requestPacket);
+                $responsePacket = $this->buildRpcResponse($requestPacket, $actionResult);
 
-            // Event
-            $class = ($method->getController() === 'connector') ? 'Connector' : null;
-            $result = $actionResult->getResult();
-            EventHandler::dispatch(
-                $result,
-                $this->eventDispatcher,
-                $method->getAction(),
-                EventHandler::AFTER,
-                $class,
-                true
-            );
+                // Event
+                $class = ($method->getController() === 'connector') ? 'Connector' : null;
+                $result = $actionResult->getResult();
+                EventHandler::dispatch(
+                    $result,
+                    $this->eventDispatcher,
+                    $method->getAction(),
+                    EventHandler::AFTER,
+                    $class,
+                    true
+                );
 
-            $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
-            Response::send($responsePacket);
-        }
-
-        ////////////////////////
-        // Endpoint Connector //
-        ////////////////////////
-        $modelNamespace = 'Jtl\Connector\Core\Model';
-        if ($this->connector instanceof ModelInterface) {
-            $modelNamespace = $this->connector->getModelNamespace();
-        }
-
-        $this->deserializeRequestParams($requestPacket, $modelNamespace);
-
-        $this->handleImagePush($requestPacket, $imagePaths);
-
-        $this->connector->setMethod($method);
-        if ($this->connector->canHandle($this)) {
-            /** @var Action $actionResult */
-            $actionResult = $this->connector->handle($requestPacket);
-
-            if ($requestPacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
-                Request::deleteFileuploads($imagePaths);
+                $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
+                Response::send($responsePacket);
+            }
+        } else {
+            ////////////////////////
+            // Endpoint Connector //
+            ////////////////////////
+            $modelNamespace = 'Jtl\Connector\Core\Model';
+            if ($this->connector instanceof ModelInterface) {
+                $modelNamespace = $this->connector->getModelNamespace();
             }
 
-            if ($actionResult instanceof Action) {
-                if ($actionResult->getError() === null) {
+            $this->deserializeRequestParams($requestPacket, $modelNamespace);
+            $this->handleImagePush($requestPacket, $imagePaths);
 
-                    // Convert boolean to BoolResult
-                    if (is_bool($actionResult->getResult())) {
-                        $actionResult->setResult((new BoolResult())->setResult($actionResult->getResult()));
-                    }
+            if ($this->connector->canHandle($method, $this)) {
+                /** @var Action $actionResult */
+                $actionResult = $this->connector->handle($requestPacket);
 
-                    // Identity mapping
-                    $results = [];
-                    $models = is_array($actionResult->getResult()) ? $actionResult->getResult() : [$actionResult->getResult()];
+                if ($requestPacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
+                    Request::deleteFileuploads($imagePaths);
+                }
 
-                    foreach ($models as $model) {
-                        if ($model instanceof DataModel) {
-                            $identityLinker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
-                            $this->linkChecksum($model);
+                if ($actionResult instanceof Action) {
+                    if ($actionResult->getError() === null) {
 
-                            // Event
-                            $class = ($method->getController() === 'connector') ? 'Connector' : null;
-                            EventHandler::dispatch(
-                                $model,
-                                $this->eventDispatcher,
-                                $method->getAction(),
-                                EventHandler::AFTER,
-                                $class
-                            );
+                        // Convert boolean to BoolResult
+                        if (is_bool($actionResult->getResult())) {
+                            $actionResult->setResult((new BoolResult())->setResult($actionResult->getResult()));
+                        }
 
-                            if ($method->getAction() === Method::ACTION_PULL) {
-                                $results[] = $model->getPublic();
+                        // Identity mapping
+                        $results = [];
+                        $models = is_array($actionResult->getResult()) ? $actionResult->getResult() : [$actionResult->getResult()];
+
+                        foreach ($models as $model) {
+                            if ($model instanceof DataModel) {
+                                $identityLinker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
+                                $this->linkChecksum($model);
+
+                                // Event
+                                $class = ($method->getController() === 'connector') ? 'Connector' : null;
+                                EventHandler::dispatch(
+                                    $model,
+                                    $this->eventDispatcher,
+                                    $method->getAction(),
+                                    EventHandler::AFTER,
+                                    $class
+                                );
+
+                                if ($method->getAction() === Method::ACTION_PULL) {
+                                    $results[] = $model->getPublic();
+                                }
                             }
+                        }
+
+                        if ($method->getAction() === Method::ACTION_PULL) {
+                            $actionResult->setResult($results);
                         }
                     }
 
-                    if ($method->getAction() === Method::ACTION_PULL) {
-                        $actionResult->setResult($results);
-                    }
+                    // Building response packet
+                    $responsePacket = $this->buildRpcResponse($requestPacket, $actionResult);
+                    $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
+                    Response::send($responsePacket);
+                } else {
+                    throw new RpcException('Internal error', -32603);
                 }
-
-                // Building response packet
-                $responsePacket = $this->buildRpcResponse($requestPacket, $actionResult);
-                $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
-                Response::send($responsePacket);
-            } else {
-                throw new RpcException('Internal error', -32603);
+            } elseif ($requestPacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
+                Request::deleteFileuploads($imagePaths);
             }
-        } elseif ($requestPacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
-            Request::deleteFileuploads($imagePaths);
         }
 
         throw new RpcException(
@@ -346,25 +342,25 @@ class Application implements IApplication
     }
 
     /**
-     * @param RequestPacket $requestpacket
+     * @param RequestPacket $requestPacket
      * @param string $modelNamespace
      * @return void
      * @throws LinkerException
      */
-    protected function deserializeRequestParams(RequestPacket &$requestpacket, string $modelNamespace): void
+    protected function deserializeRequestParams(RequestPacket &$requestPacket, string $modelNamespace): void
     {
-        $method = RpcMethod::splitMethod($requestpacket->getMethod());
+        $method = RpcMethod::splitMethod($requestPacket->getMethod());
         $modelClass = RpcMethod::buildController($method->getController());
 
         $namespace = ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) ?
             sprintf('%s\%s', $modelNamespace, $modelClass) : QueryFilter::class;
 
-        if (class_exists($namespace) && $requestpacket->getParams() !== null) {
+        if (class_exists($namespace) && $requestPacket->getParams() !== null) {
             $serializer = SerializerBuilder::create();
 
             if ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) {
                 $type = sprintf("array<%s>", $namespace);
-                $params = $serializer->deserialize($requestpacket->getParams(), $type, 'json');
+                $params = $serializer->deserialize($requestPacket->getParams(), $type, 'json');
                 $identityLinker = IdentityLinker::getInstance();
 
                 // Identity mapping
@@ -383,7 +379,7 @@ class Application implements IApplication
                     );
                 }
             } else {
-                $params = $serializer->deserialize($requestpacket->getParams(), $namespace, 'json');
+                $params = $serializer->deserialize($requestPacket->getParams(), $namespace, 'json');
 
                 // Event
                 EventHandler::dispatch(
@@ -395,29 +391,29 @@ class Application implements IApplication
                 );
             }
 
-            $requestpacket->setParams($params);
+            $requestPacket->setParams($params);
         }
     }
 
     /**
      * Build RPC Reponse Packet
      *
-     * @param RequestPacket $requestpacket
-     * @param Action $actionresult
+     * @param RequestPacket $requestPacket
+     * @param Action $result
      * @return ResponsePacket
      * @throws RpcException
      */
-    protected function buildRpcResponse(RequestPacket $requestpacket, Action $actionresult): ResponsePacket
+    protected function buildRpcResponse(RequestPacket $requestPacket, Action $result): ResponsePacket
     {
-        $responsepacket = new ResponsePacket();
-        $responsepacket->setId($requestpacket->getId())
-            ->setJtlrpc($requestpacket->getJtlrpc())
-            ->setResult($actionresult->getResult())
-            ->setError($actionresult->getError());
+        $responsePacket = new ResponsePacket();
+        $responsePacket->setId($requestPacket->getId())
+            ->setJtlrpc($requestPacket->getJtlrpc())
+            ->setResult($result->getResult())
+            ->setError($result->getError());
 
-        $responsepacket->validate();
+        $responsePacket->validate();
 
-        return $responsepacket;
+        return $responsePacket;
     }
 
     /**
@@ -431,18 +427,18 @@ class Application implements IApplication
 
         // Config
         if (is_null($this->config)) {
-            $config_file = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
-            if (!file_exists($config_file)) {
+            $configFile = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
+            if (!file_exists($configFile)) {
                 $json = json_encode(['developer_logging' => false], JSON_PRETTY_PRINT);
 
                 if (json_last_error() !== JSON_ERROR_NONE) {
                     throw JsonException::encoding(json_last_error_msg());
                 }
 
-                file_put_contents($config_file, $json);
+                file_put_contents($configFile, $json);
             }
 
-            $this->config = new Config($config_file);
+            $this->config = new Config($configFile);
         }
 
         if (!$this->config->has('developer_logging')) {
