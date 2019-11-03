@@ -35,7 +35,7 @@ use Jtl\Connector\Core\Model\BoolResult;
 use Jtl\Connector\Core\Result\Action;
 use Jtl\Connector\Core\Utilities\RpcMethod;
 use Jtl\Connector\Core\Session\Session;
-use Jtl\Connector\Core\Connector\BaseConnector;
+use Jtl\Connector\Core\Connector\CoreConnector;
 use Jtl\Connector\Core\Logger\Logger;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Jtl\Connector\Core\Rpc\Method;
@@ -65,7 +65,7 @@ class Application implements IApplication
      *
      * @var ConnectorInterface
      */
-    protected $connector;
+    protected $endpointConnector = null;
 
     /**
      * @var Config;
@@ -91,11 +91,11 @@ class Application implements IApplication
 
     /**
      * Application constructor.
-     * @param ConnectorInterface $connector
+     * @param ConnectorInterface $endpointConnector
      */
-    public function __construct(ConnectorInterface $connector)
+    public function __construct(ConnectorInterface $endpointConnector)
     {
-        $this->connector = $connector;
+        $this->endpointConnector = $endpointConnector;
         $this->setErrorHandler(new ErrorHandler());
     }
 
@@ -112,7 +112,7 @@ class Application implements IApplication
 
         $this->getErrorHandler()->setEventDispatcher($this->eventDispatcher);
 
-        $jtlrpc = Request::handle($this->connector->getUseSuperGlobals());
+        $jtlrpc = Request::handle($this->endpointConnector->getUseSuperGlobals());
         $requestPackets = RequestPacket::build($jtlrpc);
 
         $method = $requestPackets->getMethod();
@@ -143,10 +143,10 @@ class Application implements IApplication
         $this->startEventDispatcher();
 
         // Initialize Endpoint
-        $this->connector->initialize();
+        $this->endpointConnector->initialize();
 
-        if ($this->connector instanceof ChecksumInterface) {
-            ChecksumLinker::setChecksumLoader($this->connector->getChecksumLoader());
+        if ($this->endpointConnector instanceof ChecksumInterface) {
+            ChecksumLinker::setChecksumLoader($this->endpointConnector->getChecksumLoader());
         }
 
         $this->runSingle($requestPackets);
@@ -167,7 +167,7 @@ class Application implements IApplication
         }
 
         $identityLinker = IdentityLinker::getInstance();
-        $identityLinker->setPrimaryKeyMapper($this->connector->getPrimaryKeyMapper());
+        $identityLinker->setPrimaryKeyMapper($this->endpointConnector->getPrimaryKeyMapper());
 
         ////////////////////
         // Core Connector //
@@ -185,7 +185,7 @@ class Application implements IApplication
         );
 
         if ($method->isCore()) {
-            $coreConnector = new BaseConnector($this->connector->getPrimaryKeyMapper(), $this->connector->getTokenValidator());
+            $coreConnector = new CoreConnector($this->endpointConnector->getPrimaryKeyMapper(), $this->endpointConnector->getTokenValidator());
             if ($coreConnector->canHandle($method, $this)) {
                 $actionResult = $coreConnector->handle($requestPacket);
                 $responsePacket = $this->buildRpcResponse($requestPacket, $actionResult);
@@ -210,16 +210,16 @@ class Application implements IApplication
             // Endpoint Connector //
             ////////////////////////
             $modelNamespace = 'Jtl\Connector\Core\Model';
-            if ($this->connector instanceof ModelInterface) {
-                $modelNamespace = $this->connector->getModelNamespace();
+            if ($this->endpointConnector instanceof ModelInterface) {
+                $modelNamespace = $this->endpointConnector->getModelNamespace();
             }
 
             $this->deserializeRequestParams($requestPacket, $modelNamespace);
             $this->handleImagePush($requestPacket, $imagePaths);
 
-            if ($this->connector->canHandle($method, $this)) {
+            if ($this->endpointConnector->canHandle($method, $this)) {
                 /** @var Action $actionResult */
-                $actionResult = $this->connector->handle($requestPacket);
+                $actionResult = $this->endpointConnector->handle($requestPacket);
 
                 if ($requestPacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
                     Request::deleteFileuploads($imagePaths);
@@ -487,7 +487,7 @@ class Application implements IApplication
 
     protected function startEventDispatcher(): void
     {
-        $this->connector->setEventDispatcher($this->eventDispatcher);
+        $this->endpointConnector->setEventDispatcher($this->eventDispatcher);
 
         $loader = new PluginLoader();
         $loader->load($this->eventDispatcher);
@@ -575,9 +575,9 @@ class Application implements IApplication
      *
      * @return ConnectorInterface
      */
-    public function getConnector(): ?ConnectorInterface
+    public function getEndpointConnector(): ?ConnectorInterface
     {
-        return $this->connector;
+        return $this->endpointConnector;
     }
 
     /**

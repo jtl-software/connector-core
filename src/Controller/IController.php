@@ -13,35 +13,4 @@ use Jtl\Connector\Core\Model\DataModel;
  */
 interface IController
 {
-    /**
-     * Insert or update
-     *
-     * @param \Jtl\Connector\Core\Model\DataModel $model
-     * @return \Jtl\Connector\Core\Result\Action
-     */
-    public function push(DataModel $model);
-    
-    /**
-     * Select
-     *
-     * @param \Jtl\Connector\Core\Model\QueryFilter $queryFilter
-     * @return \Jtl\Connector\Core\Result\Action
-     */
-    public function pull(QueryFilter $queryFilter);
-
-    /**
-     * Delete
-     *
-     * @param \Jtl\Connector\Core\Model\DataModel $model
-     * @return \Jtl\Connector\Core\Result\Action
-     */
-    public function delete(DataModel $model);
-
-    /**
-     * Statistic
-     *
-     * @param \Jtl\Connector\Core\Model\QueryFilter $queryFilter
-     * @return \Jtl\Connector\Core\Result\Action
-     */
-    public function statistic(QueryFilter $queryFilter);
 }

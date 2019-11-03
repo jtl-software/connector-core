@@ -1,0 +1,20 @@
+<?php
+/**
+ * @copyright 2010-2019 JTL-Software GmbH
+ * @package Jtl\Connector\Core\Application
+ */
+
+namespace Jtl\Connector\Core\Controller;
+
+use Jtl\Connector\Core\Model\DataModel;
+
+interface DeleteInterface
+{
+    /**
+     * Delete
+     *
+     * @param DataModel $model
+     * @return DataModel
+     */
+    public function delete(DataModel $model): DataModel;
+}

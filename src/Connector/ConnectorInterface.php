@@ -41,11 +41,6 @@ interface ConnectorInterface
      * @return Action
      */
     public function handle(RequestPacket $requestPacket): Action;
-    
-    /**
-     * Controller getter
-     */
-    public function getController(): IController;
 
     /**
      * @return ITokenValidator
