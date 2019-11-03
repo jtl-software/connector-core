@@ -3,10 +3,7 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Rpc
  */
-
 namespace Jtl\Connector\Core\Rpc;
-
-use Jtl\Connector\Core\Utilities\RpcMethod;
 
 class Method
 {
@@ -20,7 +17,7 @@ class Method
      *
      * @var string
      */
-    protected $rpcmethod;
+    protected $rpcMethod;
     
     /**
      * Connector Controller
@@ -45,7 +42,7 @@ class Method
      */
     public function __construct($rpcMethod = null, $controller = null, $action = null)
     {
-        $this->rpcmethod = $rpcMethod;
+        $this->rpcMethod = $rpcMethod;
         $this->controller = $controller;
         $this->action = $action;
     }
@@ -57,7 +54,7 @@ class Method
      */
     public function getRpcMethod()
     {
-        return $this->rpcmethod;
+        return $this->rpcMethod;
     }
 
     /**
@@ -107,12 +104,12 @@ class Method
     /**
      * Method Setter
      *
-     * @param string $rpcmethod
-     * @return \Jtl\Connector\Core\Rpc\Method
+     * @param string $rpcMethod
+     * @return Method
      */
-    public function setRpcMethod($rpcmethod)
+    public function setRpcMethod($rpcMethod)
     {
-        $this->rpcmethod = $rpcmethod;
+        $this->rpcMethod = $rpcMethod;
         return $this;
     }
 
@@ -120,7 +117,7 @@ class Method
      * Controller Setter
      *
      * @param string $controller
-     * @return \Jtl\Connector\Core\Rpc\Method
+     * @return Method
      */
     public function setController($controller)
     {
@@ -132,7 +129,7 @@ class Method
      * Action Setter
      *
      * @param string $action
-     * @return \Jtl\Connector\Core\Rpc\Method
+     * @return Method
      */
     public function setAction($action)
     {
