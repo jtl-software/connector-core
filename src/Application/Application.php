@@ -15,6 +15,7 @@ use Jtl\Connector\Core\Connector\ModelInterface;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\HttpException;
 use Jtl\Connector\Core\IO\Temp;
+use Jtl\Connector\Core\Model\Image;
 use Jtl\Connector\Core\Model\Model;
 use Jtl\Connector\Core\Model\QueryFilter;
 use Jtl\Connector\Core\Plugin\PluginLoader;
@@ -90,6 +91,11 @@ class Application implements IApplication
     protected $errorHandler;
 
     /**
+     * @var string[]
+     */
+    protected $imagesToDelete = [];
+
+    /**
      * Application constructor.
      * @param ConnectorInterface $endpointConnector
      */
@@ -112,55 +118,76 @@ class Application implements IApplication
 
         $this->getErrorHandler()->setEventDispatcher($this->eventDispatcher);
 
-        $jtlrpc = Request::handle();
-        $requestPackets = RequestPacket::build($jtlrpc);
+        try {
+            $jtlrpc = Request::handle();
+            $requestPacket = RequestPacket::build($jtlrpc);
 
-        $method = $requestPackets->getMethod();
+            $method = $requestPacket->getMethod();
 
-        // Start Session
-        $this->startSession($method);
+            // Start Session
+            $this->startSession($method);
 
-        // Start Configuration
-        $this->startConfiguration();
+            // Start Configuration
+            $this->startConfiguration();
 
-        //Mask connector token before logging
-        $reqPacketsObj = $requestPackets->getPublic();
-        if (isset($reqPacketsObj->method) && $reqPacketsObj->method === 'core.connector.auth' && isset($reqPacketsObj->params)) {
-            $params = Json::decode($reqPacketsObj->params, true);
-            if (isset($params['token'])) {
-                $params['token'] = str_repeat('*', strlen($params['token']));
+            //Mask connector token before logging
+            $reqPacketsObj = $requestPacket->getPublic();
+            if (isset($reqPacketsObj->method) && $reqPacketsObj->method === 'core.connector.auth' && isset($reqPacketsObj->params)) {
+                $params = Json::decode($reqPacketsObj->params, true);
+                if (isset($params['token'])) {
+                    $params['token'] = str_repeat('*', strlen($params['token']));
+                }
+                $reqPacketsObj->params = Json::encode($params);
             }
-            $reqPacketsObj->params = Json::encode($params);
+
+            // Log incoming request packet (debug only and configuration must be initialized)
+            Logger::write(sprintf('RequestPacket: %s', Json::encode($reqPacketsObj)), Logger::DEBUG, 'rpc');
+            if (isset($reqPacketsObj->params) && !empty($reqPacketsObj->params)) {
+                Logger::write(sprintf('Params: %s', $reqPacketsObj->params), Logger::DEBUG, 'rpc');
+            }
+
+            // Register Event Dispatcher
+            $this->startEventDispatcher();
+
+            // Initialize Endpoint
+            $this->endpointConnector->initialize();
+
+            if ($this->endpointConnector instanceof ChecksumInterface) {
+                ChecksumLinker::setChecksumLoader($this->endpointConnector->getChecksumLoader());
+            }
+
+            $requestPacket->validate();
+            $this->execute($requestPacket);
+        } catch (\Throwable $ex) {
+            $error = new Error();
+            $error->setCode($ex->getCode())
+                ->setMessage($ex->getMessage());
+
+            $responsePacket = new ResponsePacket();
+            $responsePacket->setId($requestPacket->getId())
+                ->setJtlrpc($requestPacket->getJtlrpc())
+                ->setError($error);
+
+            $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
+            Response::send($responsePacket);
+        } finally {
+            if (count($this->imagesToDelete) > 0) {
+                Request::deleteFileuploads($this->imagesToDelete);
+                $this->imagesToDelete = [];
+            }
         }
-
-        // Log incoming request packet (debug only and configuration must be initialized)
-        Logger::write(sprintf('RequestPacket: %s', Json::encode($reqPacketsObj)), Logger::DEBUG, 'rpc');
-        if (isset($reqPacketsObj->params) && !empty($reqPacketsObj->params)) {
-            Logger::write(sprintf('Params: %s', $reqPacketsObj->params), Logger::DEBUG, 'rpc');
-        }
-
-        // Register Event Dispatcher
-        $this->startEventDispatcher();
-
-        // Initialize Endpoint
-        $this->endpointConnector->initialize();
-
-        if ($this->endpointConnector instanceof ChecksumInterface) {
-            ChecksumLinker::setChecksumLoader($this->endpointConnector->getChecksumLoader());
-        }
-
-        $this->runSingle($requestPackets);
     }
 
     /**
      * @param RequestPacket $requestPacket
-     * @param array $imagePaths
      * @return ResponsePacket
      * @throws ApplicationException
-     * @throws RpcException
+     * @throws CompressionException
+     * @throws HttpException
      * @throws LinkerException
+     * @throws RpcException
      */
-    protected function execute(RequestPacket $requestPacket, array $imagePaths = []): ResponsePacket
+    protected function execute(RequestPacket $requestPacket): ResponsePacket
     {
         if (!RpcMethod::isMethod($requestPacket->getMethod())) {
             throw new RpcException('Invalid Request', -32600);
@@ -215,15 +242,11 @@ class Application implements IApplication
             }
 
             $this->deserializeRequestParams($requestPacket, $modelNamespace);
-            $this->handleImagePush($requestPacket, $imagePaths);
+            $this->handleImagePush($requestPacket);
 
             if ($this->endpointConnector->canHandle($method, $this)) {
                 /** @var Action $actionResult */
                 $actionResult = $this->endpointConnector->handle($requestPacket);
-
-                if ($requestPacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
-                    Request::deleteFileuploads($imagePaths);
-                }
 
                 if ($actionResult instanceof Action) {
                     if ($actionResult->getError() === null) {
@@ -270,8 +293,6 @@ class Application implements IApplication
                 } else {
                     throw new RpcException('Internal error', -32603);
                 }
-            } elseif ($requestPacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
-                Request::deleteFileuploads($imagePaths);
             }
         }
 
@@ -279,66 +300,6 @@ class Application implements IApplication
             sprintf("Method '%s' not found", $requestPacket->getMethod()),
             -32601
         );
-    }
-
-    /**
-     * @param RequestPacket $requestPacket
-     * @throws ApplicationException
-     * @throws RpcException
-     * @throws CompressionException
-     * @throws HttpException
-     */
-    protected function runSingle(RequestPacket $requestPacket): void
-    {
-        $requestPacket->validate();
-
-        $imagePaths = [];
-        if ($requestPacket->getMethod() === 'image.push') {
-            $zipFile = Request::handleFileupload();
-            $tempDir = Temp::generateDirectory();
-
-            if ($zipFile !== null && $tempDir !== null) {
-                $archive = new Zip();
-                if ($archive->extract($zipFile, $tempDir)) {
-                    $finder = new Finder();
-                    $finder->files()->ignoreDotFiles(true)->in($tempDir);
-                    foreach ($finder as $file) {
-                        $imagePaths[] = $file->getRealpath();
-                    }
-                } else {
-                    @rmdir($tempDir);
-                    @unlink($zipFile);
-
-                    throw new ApplicationException(sprintf('Zip File (%s) count not be extracted', $zipFile));
-                }
-
-                if ($zipFile !== null) {
-                    @unlink($zipFile);
-                }
-            } else {
-                throw new ApplicationException('Zip file or temp dir  is null');
-            }
-        }
-
-        try {
-            $this->execute($requestPacket, $imagePaths);
-        } catch (\Exception $exc) {
-            if ($requestPacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
-                Request::deleteFileuploads($imagePaths);
-            }
-
-            $error = new Error();
-            $error->setCode($exc->getCode())
-                ->setMessage($exc->getMessage());
-
-            $responsePacket = new ResponsePacket();
-            $responsePacket->setId($requestPacket->getId())
-                ->setJtlrpc($requestPacket->getJtlrpc())
-                ->setError($error);
-
-            $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
-            Response::send($responsePacket);
-        }
     }
 
     /**
@@ -494,53 +455,72 @@ class Application implements IApplication
     }
 
     /**
-     * @param RequestPacket $requestpacket
-     * @param array $imagePaths
+     * @param RequestPacket $requestPacket
      * @throws ApplicationException
+     * @throws CompressionException
+     * @throws HttpException
      */
-    protected function handleImagePush(RequestPacket &$requestpacket, array $imagePaths = []): void
+    protected function handleImagePush(RequestPacket &$requestPacket): void
     {
-        if ($requestpacket->getMethod() === 'image.push') {
-            $images = $requestpacket->getParams();
+        if ($requestPacket->getMethod() === 'image.push') {
+            $imagePaths = [];
+            $zipFile = Request::handleFileupload();
+            $tempDir = Temp::generateDirectory();
+            if ($zipFile !== null && $tempDir !== null) {
+                $archive = new Zip();
+                if ($archive->extract($zipFile, $tempDir)) {
+                    $finder = new Finder();
+                    $finder->files()->ignoreDotFiles(true)->in($tempDir);
+                    foreach ($finder as $file) {
+                        $imagePaths[] = $this->imagesToDelete[] = $file->getRealpath();
+                    }
+                } else {
+                    @rmdir($tempDir);
+                    @unlink($zipFile);
+
+                    throw new ApplicationException(sprintf('Zip File (%s) could not be extracted', $zipFile));
+                }
+
+                if ($zipFile !== null) {
+                    @unlink($zipFile);
+                }
+            } else {
+                throw new ApplicationException('Zip file or temp dir  is null');
+            }
+
+            $images = $requestPacket->getParams();
             if (!is_array($images)) {
                 throw new ApplicationException('Request params must be valid images');
             }
 
-            if (count($imagePaths) > 0) {
-                for ($i = 0; $i < count($images); $i++) {
+            /** @var Image $image */
+            foreach ($images as $image) {
+                if (!empty($image->getRemoteUrl())) {
+                    $imageData = file_get_contents($image->getRemoteUrl());
+                    if ($imageData === false) {
+                        throw new ApplicationException('Could not get any data from url: ' . $images->getRemoteUrl());
+                    }
+
+                    $path = parse_url($images->getRemoteUrl(), PHP_URL_PATH);
+                    $fileName = pathinfo($path, PATHINFO_BASENAME);
+                    $imagePath = sprintf('%s/%s_%s', Temp::getDirectory(), uniqid(), $fileName);
+                    file_put_contents($imagePath, $imageData);
+                    $image->setFilename($imagePath);
+                } else {
                     foreach ($imagePaths as $imagePath) {
                         $infos = pathinfo($imagePath);
                         list($hostId, $relationType) = explode('_', $infos['filename']);
-                        if ((int)$hostId == $images[$i]->getId()->getHost()
-                            && strtolower($relationType) === strtolower($images[$i]->getRelationType())
+                        if ((int)$hostId == $image->getId()->getHost()
+                            && strtolower($relationType) === strtolower($image->getRelationType())
                         ) {
-                            $images[$i]->setFilename($imagePath);
+                            $image->setFilename($imagePath);
+                            break;
                         }
                     }
                 }
-
-                $requestpacket->setParams($images);
-            } else {
-                for ($i = 0; $i < count($images); $i++) {
-                    if (strlen($images[$i]->getRemoteUrl()) > 0) {
-                        $imageData = file_get_contents($images[$i]->getRemoteUrl());
-                        if ($imageData === false) {
-                            throw new ApplicationException('Could not get any data from url: ' . $images[$i]->getRemoteUrl());
-                        }
-
-                        $path = parse_url($images[$i]->getRemoteUrl(), PHP_URL_PATH);
-                        $fileName = pathinfo($path, PATHINFO_BASENAME);
-                        $imagePath = Path::combine(Temp::getDirectory(), uniqid() . "_{$fileName}");
-                        file_put_contents($imagePath, $imageData);
-
-                        $images[$i]->setFilename($imagePath);
-                    } else {
-                        throw new ApplicationException('Could not handle fileupload (no file was uploaded via HTTP POST?)');
-                    }
-                }
-
-                $requestpacket->setParams($images);
             }
+
+            $requestPacket->setParams($images);
         }
     }
 
