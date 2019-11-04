@@ -28,5 +28,10 @@ abstract class AbstractController
     public function __construct(Application $application)
     {
         $this->application = $application;
+        $this->init();
+    }
+
+    protected function init()
+    {
     }
 }
