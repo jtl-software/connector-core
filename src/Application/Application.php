@@ -8,6 +8,7 @@ namespace Jtl\Connector\Core\Application;
 
 use Jtl\Connector\Core\Application\Error\ErrorHandler;
 use Jtl\Connector\Core\Application\Error\IErrorHandler;
+use Jtl\Connector\Core\Connector\BeforeHandleInterface;
 use Jtl\Connector\Core\Connector\ChecksumInterface;
 use Jtl\Connector\Core\Compression\Zip;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
@@ -22,7 +23,6 @@ use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Exception\SessionException;
 use Jtl\Connector\Core\Exception\ApplicationException;
-use Jtl\Connector\Core\Rpc\Packet;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Rpc\Error;
@@ -31,10 +31,8 @@ use Jtl\Connector\Core\Http\Response;
 use Jtl\Connector\Core\Config\Config;
 use Jtl\Connector\Core\Exception\JsonException;
 use Jtl\Connector\Core\Exception\LinkerException;
-use Jtl\Connector\Core\Model\BoolResult;
 use Jtl\Connector\Core\Result\Action;
 use Jtl\Connector\Core\Utilities\RpcMethod;
-use Jtl\Connector\Core\Session\Session;
 use Jtl\Connector\Core\Connector\CoreConnector;
 use Jtl\Connector\Core\Logger\Logger;
 use Doctrine\Common\Annotations\AnnotationRegistry;
@@ -106,6 +104,10 @@ class Application implements IApplication
     public function run(): void
     {
         AnnotationRegistry::registerLoader('class_exists');
+
+        if (!defined('CONNECTOR_DIR')) {
+            throw new \Exception('Constant CONNECTOR_DIR is not defined.');
+        }
 
         // Event Dispatcher
         $this->eventDispatcher = new EventDispatcher();
@@ -183,16 +185,21 @@ class Application implements IApplication
 
         if ($method->isCore()) {
             $connector = new CoreConnector($this->endpointConnector->getPrimaryKeyMapper(), $this->endpointConnector->getTokenValidator());
-        }else{
+        } else {
             $connector = $this->getEndpointConnector();
+        }
+
+        if ($connector instanceof BeforeHandleInterface) {
+            $connector->beforeHandle($requestPacket);
         }
 
         $actionResult = $connector->handle($requestPacket, $this);
 
-        if($method->isCore()===false){
+
+        if ($method->isCore() === false) {
             $modelNamespace = 'Jtl\Connector\Core\Model';
-            if ($this->endpointConnector instanceof ModelInterface) {
-                $modelNamespace = $this->endpointConnector->getModelNamespace();
+            if ($connector instanceof ModelInterface) {
+                $modelNamespace = $connector->getModelNamespace();
             }
 
             $this->deserializeRequestParams($requestPacket, $modelNamespace);
@@ -200,36 +207,34 @@ class Application implements IApplication
 
             Request::deleteFileuploads($imagePaths);
 
-            if ($actionResult instanceof Action) {
-                if ($actionResult->getError() === null) {
+            if ($actionResult->getError() === null) {
 
-                    // Identity mapping
-                    $results = [];
-                    $models = is_array($actionResult->getResult()) ? $actionResult->getResult() : [$actionResult->getResult()];
+                // Identity mapping
+                $results = [];
+                $models = is_array($actionResult->getResult()) ? $actionResult->getResult() : [$actionResult->getResult()];
 
-                    foreach ($models as $model) {
-                        if ($model instanceof DataModel) {
-                            $identityLinker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
-                            $this->linkChecksum($model);
+                foreach ($models as $model) {
+                    if ($model instanceof DataModel) {
+                        $identityLinker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
+                        $this->linkChecksum($model);
 
-                            // Event
-                            EventHandler::dispatch(
-                                $model,
-                                $this->eventDispatcher,
-                                $method->getAction(),
-                                EventHandler::AFTER,
-                                ($method->getController() === 'connector') ? 'Connector' : null
-                            );
+                        // Event
+                        EventHandler::dispatch(
+                            $model,
+                            $this->eventDispatcher,
+                            $method->getAction(),
+                            EventHandler::AFTER,
+                            ($method->getController() === 'connector') ? 'Connector' : null
+                        );
 
-                            if ($method->getAction() === Method::ACTION_PULL) {
-                                $results[] = $model->getPublic();
-                            }
+                        if ($method->getAction() === Method::ACTION_PULL) {
+                            $results[] = $model->getPublic();
                         }
                     }
+                }
 
-                    if ($method->getAction() === Method::ACTION_PULL) {
-                        $actionResult->setResult($results);
-                    }
+                if ($method->getAction() === Method::ACTION_PULL) {
+                    $actionResult->setResult($results);
                 }
             }
         }

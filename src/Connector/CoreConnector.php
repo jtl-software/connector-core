@@ -6,13 +6,10 @@
 namespace Jtl\Connector\Core\Connector;
 
 use Jtl\Connector\Core\Application\Application;
-use Jtl\Connector\Core\Application\Error\ErrorCodesInterface;
 use Jtl\Connector\Core\Authentication\ITokenValidator;
-use Jtl\Connector\Core\Controller\IController;
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Utilities\RpcMethod;
-use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Mapper\IPrimaryKeyMapper;
 use Jtl\Connector\Core\Result\Action;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -39,11 +36,6 @@ class CoreConnector implements ConnectorInterface
      * @var EventDispatcher
      */
     protected $eventDispatcher;
-
-    /**
-     * @var Method
-     */
-    protected $method;
 
     /**
      * @var string
@@ -121,7 +113,7 @@ class CoreConnector implements ConnectorInterface
     {
         $rpcMethod = RpcMethod::splitMethod($requestPacket->getMethod());
 
-        $controllerName = sprintf('%s\%s', $this->getControllerNamespace(), RpcMethod::buildController($rpcMethod));
+        $controllerName = sprintf('%s\%s', $this->getControllerNamespace(), RpcMethod::buildController($rpcMethod->getController()));
         $actionName = $rpcMethod->getAction();
 
         $controller = new $controllerName($application);
