@@ -8,6 +8,7 @@ namespace Jtl\Connector\Core\Application;
 
 use Jtl\Connector\Core\Application\Error\ErrorHandler;
 use Jtl\Connector\Core\Application\Error\IErrorHandler;
+use Jtl\Connector\Core\Connector\BeforeHandleInterface;
 use Jtl\Connector\Core\Connector\ChecksumInterface;
 use Jtl\Connector\Core\Compression\Zip;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
@@ -23,7 +24,6 @@ use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Exception\SessionException;
 use Jtl\Connector\Core\Exception\ApplicationException;
-use Jtl\Connector\Core\Rpc\Packet;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Rpc\Error;
@@ -32,10 +32,8 @@ use Jtl\Connector\Core\Http\Response;
 use Jtl\Connector\Core\Config\Config;
 use Jtl\Connector\Core\Exception\JsonException;
 use Jtl\Connector\Core\Exception\LinkerException;
-use Jtl\Connector\Core\Model\BoolResult;
 use Jtl\Connector\Core\Result\Action;
 use Jtl\Connector\Core\Utilities\RpcMethod;
-use Jtl\Connector\Core\Session\Session;
 use Jtl\Connector\Core\Connector\CoreConnector;
 use Jtl\Connector\Core\Logger\Logger;
 use Doctrine\Common\Annotations\AnnotationRegistry;
@@ -112,6 +110,10 @@ class Application implements IApplication
     public function run(): void
     {
         AnnotationRegistry::registerLoader('class_exists');
+
+        if (!defined('CONNECTOR_DIR')) {
+            throw new \Exception('Constant CONNECTOR_DIR is not defined.');
+        }
 
         // Event Dispatcher
         $this->eventDispatcher = new EventDispatcher();
@@ -196,9 +198,6 @@ class Application implements IApplication
         $identityLinker = IdentityLinker::getInstance();
         $identityLinker->setPrimaryKeyMapper($this->endpointConnector->getPrimaryKeyMapper());
 
-        ////////////////////
-        // Core Connector //
-        ////////////////////
         $method = RpcMethod::splitMethod($requestPacket->getMethod());
 
         // Rpc Event
@@ -212,94 +211,73 @@ class Application implements IApplication
         );
 
         if ($method->isCore()) {
-            $coreConnector = new CoreConnector($this->endpointConnector->getPrimaryKeyMapper(), $this->endpointConnector->getTokenValidator());
-            if ($coreConnector->canHandle($method, $this)) {
-                $actionResult = $coreConnector->handle($requestPacket);
-                $responsePacket = $this->buildRpcResponse($requestPacket, $actionResult);
-
-                // Event
-                $class = ($method->getController() === 'connector') ? 'Connector' : null;
-                $result = $actionResult->getResult();
-                EventHandler::dispatch(
-                    $result,
-                    $this->eventDispatcher,
-                    $method->getAction(),
-                    EventHandler::AFTER,
-                    $class,
-                    true
-                );
-
-                $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
-                Response::send($responsePacket);
-            }
+            $connector = new CoreConnector($this->endpointConnector->getPrimaryKeyMapper(), $this->endpointConnector->getTokenValidator());
         } else {
-            ////////////////////////
-            // Endpoint Connector //
-            ////////////////////////
+            $connector = $this->getEndpointConnector();
+        }
+
+        if ($connector instanceof BeforeHandleInterface) {
+            $connector->beforeHandle($requestPacket);
+        }
+
+        $actionResult = $connector->handle($requestPacket, $this);
+
+
+        if ($method->isCore() === false) {
             $modelNamespace = 'Jtl\Connector\Core\Model';
-            if ($this->endpointConnector instanceof ModelInterface) {
-                $modelNamespace = $this->endpointConnector->getModelNamespace();
+            if ($connector instanceof ModelInterface) {
+                $modelNamespace = $connector->getModelNamespace();
             }
 
             $this->deserializeRequestParams($requestPacket, $modelNamespace);
             $this->handleImagePush($requestPacket);
 
-            if ($this->endpointConnector->canHandle($method, $this)) {
-                /** @var Action $actionResult */
-                $actionResult = $this->endpointConnector->handle($requestPacket);
+            if ($actionResult->getError() === null) {
 
-                if ($actionResult instanceof Action) {
-                    if ($actionResult->getError() === null) {
+                // Identity mapping
+                $results = [];
+                $models = is_array($actionResult->getResult()) ? $actionResult->getResult() : [$actionResult->getResult()];
 
-                        // Convert boolean to BoolResult
-                        if (is_bool($actionResult->getResult())) {
-                            $actionResult->setResult((new BoolResult())->setResult($actionResult->getResult()));
-                        }
+                foreach ($models as $model) {
+                    if ($model instanceof DataModel) {
+                        $identityLinker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
+                        $this->linkChecksum($model);
 
-                        // Identity mapping
-                        $results = [];
-                        $models = is_array($actionResult->getResult()) ? $actionResult->getResult() : [$actionResult->getResult()];
-
-                        foreach ($models as $model) {
-                            if ($model instanceof DataModel) {
-                                $identityLinker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
-                                $this->linkChecksum($model);
-
-                                // Event
-                                $class = ($method->getController() === 'connector') ? 'Connector' : null;
-                                EventHandler::dispatch(
-                                    $model,
-                                    $this->eventDispatcher,
-                                    $method->getAction(),
-                                    EventHandler::AFTER,
-                                    $class
-                                );
-
-                                if ($method->getAction() === Method::ACTION_PULL) {
-                                    $results[] = $model->getPublic();
-                                }
-                            }
-                        }
+                        // Event
+                        EventHandler::dispatch(
+                            $model,
+                            $this->eventDispatcher,
+                            $method->getAction(),
+                            EventHandler::AFTER,
+                            ($method->getController() === 'connector') ? 'Connector' : null
+                        );
 
                         if ($method->getAction() === Method::ACTION_PULL) {
-                            $actionResult->setResult($results);
+                            $results[] = $model->getPublic();
                         }
                     }
+                }
 
-                    // Building response packet
-                    $responsePacket = $this->buildRpcResponse($requestPacket, $actionResult);
-                    $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
-                    Response::send($responsePacket);
-                } else {
-                    throw new RpcException('Internal error', -32603);
+                if ($method->getAction() === Method::ACTION_PULL) {
+                    $actionResult->setResult($results);
                 }
             }
         }
 
-        throw new RpcException(
-            sprintf("Method '%s' not found", $requestPacket->getMethod()),
-            -32601
+        $responsePacket = $this->buildRpcResponse($requestPacket, $actionResult);
+
+        EventHandler::dispatch(
+            $actionResult->getResult(),
+            $this->eventDispatcher,
+            $method->getAction(),
+            EventHandler::AFTER,
+            ($method->getController() === 'connector') ? 'Connector' : null,
+            $method->isCore()
         );
+
+        $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
+
+        return $responsePacket;
     }
 
     /**
@@ -519,8 +497,6 @@ class Application implements IApplication
                     }
                 }
             }
-
-            $requestPacket->setParams($images);
         }
     }
 
