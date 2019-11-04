@@ -28,7 +28,7 @@ class QueryFilter
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("limit")
      */
-    protected $limit;
+    protected $limit = 100;
     
     /**
      * Query item filter (where)
@@ -37,20 +37,17 @@ class QueryFilter
      * @Serializer\Type("array<string, string>")
      * @Serializer\SerializedName("filters")
      */
-    protected $filters;
+    protected $filters = [];
     
     /**
      * Constructor
      *
-     * @param null $limit
+     * @param integer $limit
      */
-    public function __construct($limit = null)
+    public function __construct($limit = 100)
     {
         $this->filters = [];
-        
-        if ($limit !== null) {
-            $this->limit = $limit;
-        }
+        $this->limit = $limit;
     }
     
     /**
@@ -61,7 +58,7 @@ class QueryFilter
      */
     public function setLimit(int $limit): QueryFilter
     {
-        $this->limit = (int)$limit;
+        $this->limit = $limit;
         
         return $this;
     }
@@ -75,15 +72,7 @@ class QueryFilter
     {
         return $this->limit;
     }
-    
-    /**
-     * @return bool
-     */
-    public function isLimit(): bool
-    {
-        return ($this->limit !== null && $this->limit > 0);
-    }
-    
+
     /**
      * Filters Setter
      *
@@ -116,12 +105,7 @@ class QueryFilter
      */
     public function addFilter(string $key, $value): QueryFilter
     {
-        if ($this->filters === null) {
-            $this->filters = [];
-        }
-        
         $this->filters[$key] = $value;
-        
         return $this;
     }
     
@@ -162,6 +146,11 @@ class QueryFilter
         }
         
         return null;
+    }
+
+    public function resetFilters()
+    {
+        $this->filters = [];
     }
     
     /**
