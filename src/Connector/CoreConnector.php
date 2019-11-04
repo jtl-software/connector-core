@@ -124,44 +124,13 @@ class CoreConnector implements ConnectorInterface
         $controllerName = sprintf('%s\%s', $this->getControllerNamespace(), RpcMethod::buildController($rpcMethod));
         $actionName = $rpcMethod->getAction();
 
-        $this->validateRequest($controllerName,$actionName);
-
         $controller = new $controllerName($application);
 
         $action = new Action();
-        try {
-            $result = $controller->{$actionName}($requestPacket->getParams());
-            $action->setResult($result);
-        } catch(\Exception $exception){
-            $action->setError($exception->getMessage());
-        }
+
+        $result = $controller->{$actionName}($requestPacket->getParams());
+        $action->setResult($result);
 
         return $action;
     }
-
-    /**
-     * @param $controllerName
-     * @param $actionName
-     * @return bool
-     * @throws RpcException
-     */
-    private function validateRequest($controllerName,$actionName) : bool
-    {
-        if(class_exists($controllerName) === false){
-            throw new RpcException(
-                sprintf("Controller '%s' does not exists.", $controllerName),
-                ErrorCodesInterface::CONTROLLER_DOES_NOT_EXISTS
-            );
-        }
-
-        if(is_callable([$controllerName, $actionName]) === false){
-            throw new RpcException(
-                sprintf("Action '%s' not found in controller '%s'", $actionName, $controllerName),
-                ErrorCodesInterface::ACTION_NOT_FOUND_IN_CONTROLLER
-            );
-        }
-
-        return true;
-    }
-
 }

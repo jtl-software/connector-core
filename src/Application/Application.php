@@ -247,7 +247,7 @@ class Application implements IApplication
 
         $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
 
-        Response::send($responsePacket);
+        return $responsePacket;
     }
 
     /**
@@ -290,7 +290,7 @@ class Application implements IApplication
         }
 
         try {
-            $this->execute($requestPacket, $imagePaths);
+            $responsePacket = $this->execute($requestPacket, $imagePaths);
         } catch (\Exception $exc) {
             if ($requestPacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
                 Request::deleteFileuploads($imagePaths);
@@ -306,8 +306,9 @@ class Application implements IApplication
                 ->setError($error);
 
             $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
-            Response::send($responsePacket);
         }
+
+        Response::send($responsePacket);
     }
 
     /**
