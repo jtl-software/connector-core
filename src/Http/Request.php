@@ -193,21 +193,11 @@ class Request
      *
      * @throws CompressionException
      * @throws HttpException
-     * @param boolean $useSuper
      * @return string|null
      */
-    public static function handle($useSuper = true)
+    public static function handle()
     {
-        $jtlrpc = null;
-        if ($useSuper || strlen(file_get_contents('php://input')) == 0) {
-            $jtlrpc = Request::get();
-        } else {
-            $result = [];
-            parse_str(file_get_contents('php://input'), $result);
-            $jtlrpc = !empty($result['jtlrpc']) ? $result['jtlrpc'] : null;
-        }
-
-        //Logger::write('request: ' . print_r($_REQUEST, 1), Logger::DEBUG, 'http');
+       $jtlrpc = Request::get();
 
         if ($jtlrpc !== null) {
             return Request::stripData($jtlrpc);

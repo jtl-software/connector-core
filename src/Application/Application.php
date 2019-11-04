@@ -112,7 +112,7 @@ class Application implements IApplication
 
         $this->getErrorHandler()->setEventDispatcher($this->eventDispatcher);
 
-        $jtlrpc = Request::handle($this->endpointConnector->getUseSuperGlobals());
+        $jtlrpc = Request::handle();
         $requestPackets = RequestPacket::build($jtlrpc);
 
         $method = $requestPackets->getMethod();
