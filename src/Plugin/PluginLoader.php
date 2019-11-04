@@ -7,12 +7,15 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class PluginLoader
 {
+    /**
+     * @param EventDispatcher $dispatcher
+     */
     public function load(EventDispatcher $dispatcher)
     {
         $dir = Path::combine(CONNECTOR_DIR, 'plugins');
         $finder = new Finder();
 
-        $finder->files()->name('bootstrap.php')->in($dir);
+        $finder->files()->name('/(b|B)ootstrap.php/')->in($dir);
         foreach ($finder as $file) {
             include($file->getPathName());
 
