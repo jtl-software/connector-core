@@ -169,9 +169,6 @@ class Application implements IApplication
         $identityLinker = IdentityLinker::getInstance();
         $identityLinker->setPrimaryKeyMapper($this->endpointConnector->getPrimaryKeyMapper());
 
-        ////////////////////
-        // Core Connector //
-        ////////////////////
         $method = RpcMethod::splitMethod($requestPacket->getMethod());
 
         // Rpc Event
@@ -185,30 +182,14 @@ class Application implements IApplication
         );
 
         if ($method->isCore()) {
-            $coreConnector = new CoreConnector($this->endpointConnector->getPrimaryKeyMapper(), $this->endpointConnector->getTokenValidator());
-            if ($coreConnector->canHandle($method, $this)) {
-                $actionResult = $coreConnector->handle($requestPacket);
-                $responsePacket = $this->buildRpcResponse($requestPacket, $actionResult);
+            $connector = new CoreConnector($this->endpointConnector->getPrimaryKeyMapper(), $this->endpointConnector->getTokenValidator());
+        }else{
+            $connector = $this->getEndpointConnector();
+        }
 
-                // Event
-                $class = ($method->getController() === 'connector') ? 'Connector' : null;
-                $result = $actionResult->getResult();
-                EventHandler::dispatch(
-                    $result,
-                    $this->eventDispatcher,
-                    $method->getAction(),
-                    EventHandler::AFTER,
-                    $class,
-                    true
-                );
+        $actionResult = $connector->handle($requestPacket, $this);
 
-                $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
-                Response::send($responsePacket);
-            }
-        } else {
-            ////////////////////////
-            // Endpoint Connector //
-            ////////////////////////
+        if($method->isCore()===false){
             $modelNamespace = 'Jtl\Connector\Core\Model';
             if ($this->endpointConnector instanceof ModelInterface) {
                 $modelNamespace = $this->endpointConnector->getModelNamespace();
@@ -217,68 +198,56 @@ class Application implements IApplication
             $this->deserializeRequestParams($requestPacket, $modelNamespace);
             $this->handleImagePush($requestPacket, $imagePaths);
 
-            if ($this->endpointConnector->canHandle($method, $this)) {
-                /** @var Action $actionResult */
-                $actionResult = $this->endpointConnector->handle($requestPacket);
+            Request::deleteFileuploads($imagePaths);
 
-                if ($requestPacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
-                    Request::deleteFileuploads($imagePaths);
-                }
+            if ($actionResult instanceof Action) {
+                if ($actionResult->getError() === null) {
 
-                if ($actionResult instanceof Action) {
-                    if ($actionResult->getError() === null) {
+                    // Identity mapping
+                    $results = [];
+                    $models = is_array($actionResult->getResult()) ? $actionResult->getResult() : [$actionResult->getResult()];
 
-                        // Convert boolean to BoolResult
-                        if (is_bool($actionResult->getResult())) {
-                            $actionResult->setResult((new BoolResult())->setResult($actionResult->getResult()));
-                        }
+                    foreach ($models as $model) {
+                        if ($model instanceof DataModel) {
+                            $identityLinker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
+                            $this->linkChecksum($model);
 
-                        // Identity mapping
-                        $results = [];
-                        $models = is_array($actionResult->getResult()) ? $actionResult->getResult() : [$actionResult->getResult()];
+                            // Event
+                            EventHandler::dispatch(
+                                $model,
+                                $this->eventDispatcher,
+                                $method->getAction(),
+                                EventHandler::AFTER,
+                                ($method->getController() === 'connector') ? 'Connector' : null
+                            );
 
-                        foreach ($models as $model) {
-                            if ($model instanceof DataModel) {
-                                $identityLinker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
-                                $this->linkChecksum($model);
-
-                                // Event
-                                $class = ($method->getController() === 'connector') ? 'Connector' : null;
-                                EventHandler::dispatch(
-                                    $model,
-                                    $this->eventDispatcher,
-                                    $method->getAction(),
-                                    EventHandler::AFTER,
-                                    $class
-                                );
-
-                                if ($method->getAction() === Method::ACTION_PULL) {
-                                    $results[] = $model->getPublic();
-                                }
+                            if ($method->getAction() === Method::ACTION_PULL) {
+                                $results[] = $model->getPublic();
                             }
-                        }
-
-                        if ($method->getAction() === Method::ACTION_PULL) {
-                            $actionResult->setResult($results);
                         }
                     }
 
-                    // Building response packet
-                    $responsePacket = $this->buildRpcResponse($requestPacket, $actionResult);
-                    $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
-                    Response::send($responsePacket);
-                } else {
-                    throw new RpcException('Internal error', -32603);
+                    if ($method->getAction() === Method::ACTION_PULL) {
+                        $actionResult->setResult($results);
+                    }
                 }
-            } elseif ($requestPacket->getMethod() === 'image.push' && count($imagePaths) > 0) {
-                Request::deleteFileuploads($imagePaths);
             }
         }
 
-        throw new RpcException(
-            sprintf("Method '%s' not found", $requestPacket->getMethod()),
-            -32601
+        $responsePacket = $this->buildRpcResponse($requestPacket, $actionResult);
+
+        EventHandler::dispatch(
+            $actionResult->getResult(),
+            $this->eventDispatcher,
+            $method->getAction(),
+            EventHandler::AFTER,
+            ($method->getController() === 'connector') ? 'Connector' : null,
+            $method->isCore()
         );
+
+        $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
+
+        Response::send($responsePacket);
     }
 
     /**

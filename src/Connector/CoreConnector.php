@@ -6,9 +6,10 @@
 namespace Jtl\Connector\Core\Connector;
 
 use Jtl\Connector\Core\Application\Application;
+use Jtl\Connector\Core\Application\Error\ErrorCodesInterface;
 use Jtl\Connector\Core\Authentication\ITokenValidator;
-use Jtl\Connector\Core\Controller\AbstractController;
 use Jtl\Connector\Core\Controller\IController;
+use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Utilities\RpcMethod;
 use Jtl\Connector\Core\Rpc\Method;
@@ -24,11 +25,6 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  */
 class CoreConnector implements ConnectorInterface
 {
-    /**
-     * @var IController
-     */
-    protected $controller;
-
     /**
      * @var IPrimaryKeyMapper
      */
@@ -50,18 +46,13 @@ class CoreConnector implements ConnectorInterface
     protected $method;
 
     /**
-     * @var bool
-     */
-    protected $useSuperGlobals = true;
-
-    /**
      * @var string
      */
     protected $controllerNamespace = 'Jtl\Connector\Core\Controller';
 
     /**
-     * Connector constructor.
-     * @param IPrimaryKeyMapper $primar
+     * CoreConnector constructor.
+     * @param IPrimaryKeyMapper $primaryKeyMapper
      * @param ITokenValidator $tokenValidator
      */
     public function __construct(IPrimaryKeyMapper $primaryKeyMapper, ITokenValidator $tokenValidator)
@@ -113,14 +104,6 @@ class CoreConnector implements ConnectorInterface
     }
 
     /**
-     * @return boolean
-     */
-    public function getUseSuperGlobals(): bool
-    {
-        return $this->useSuperGlobals;
-    }
-
-    /**
      * @return string
      */
     public function getControllerNamespace(): string
@@ -129,38 +112,56 @@ class CoreConnector implements ConnectorInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jtl\Connector\Core\Application\ConnectorInterface::canHandle()
-     */
-    public function canHandle(Method $method, Application $application): bool
-    {
-        $controller = RpcMethod::buildController($method->getController());
-        $class = sprintf('%s\%s', $this->getControllerNamespace(), $controller);
-        if (class_exists($class)) {
-            $this->controller = new $class($application);
-            $this->action = $method->getAction();
-            
-            return method_exists($this->controller, $this->action);
-        }
-        
-        return false;
-    }
-    
-    /**
      * @param RequestPacket $requestPacket
+     * @param Application $application
      * @return Action
-     * @see \Jtl\Connector\Core\Application\ConnectorInterface::handle()
+     * @throws RpcException
      */
-    public function handle(RequestPacket $requestPacket): Action
+    public function handle(RequestPacket $requestPacket, Application $application): Action
     {
-        return $this->controller->{$this->action}($requestPacket->getParams());
+        $rpcMethod = RpcMethod::splitMethod($requestPacket->getMethod());
+
+        $controllerName = sprintf('%s\%s', $this->getControllerNamespace(), RpcMethod::buildController($rpcMethod));
+        $actionName = $rpcMethod->getAction();
+
+        $this->validateRequest($controllerName,$actionName);
+
+        $controller = new $controllerName($application);
+
+        $action = new Action();
+        try {
+            $result = $controller->{$actionName}($requestPacket->getParams());
+            $action->setResult($result);
+        } catch(\Exception $exception){
+            $action->setError($exception->getMessage());
+        }
+
+        return $action;
     }
-    
+
     /**
-     * @see \Jtl\Connector\Core\Application\ConnectorInterface::getController()
+     * @param $controllerName
+     * @param $actionName
+     * @return bool
+     * @throws RpcException
      */
-    public function getController(): AbstractController
+    private function validateRequest($controllerName,$actionName) : bool
     {
-        return $this->controller;
+        if(class_exists($controllerName) === false){
+            throw new RpcException(
+                sprintf("Controller '%s' does not exists.", $controllerName),
+                ErrorCodesInterface::CONTROLLER_DOES_NOT_EXISTS
+            );
+        }
+
+        if(is_callable([$controllerName, $actionName]) === false){
+            throw new RpcException(
+                sprintf("Action '%s' not found in controller '%s'", $actionName, $controllerName),
+                ErrorCodesInterface::ACTION_NOT_FOUND_IN_CONTROLLER
+            );
+        }
+
+        return true;
     }
+
 }

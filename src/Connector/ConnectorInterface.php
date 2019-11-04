@@ -6,8 +6,6 @@
 namespace Jtl\Connector\Core\Connector;
 
 use Jtl\Connector\Core\Authentication\ITokenValidator;
-use Jtl\Connector\Core\Controller\IController;
-use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Mapper\IPrimaryKeyMapper;
 use Jtl\Connector\Core\Result\Action;
@@ -30,17 +28,11 @@ interface ConnectorInterface
     public function getPrimaryKeyMapper(): IPrimaryKeyMapper;
 
     /**
-     * @param Method $method
-     * @param Application $application
-     * @return boolean
-     */
-    public function canHandle(Method $method, Application $application): bool;
-
-    /**
      * @param RequestPacket $requestPacket
+     * @param Application $application
      * @return Action
      */
-    public function handle(RequestPacket $requestPacket): Action;
+    public function handle(RequestPacket $requestPacket, Application $application): Action;
 
     /**
      * @return ITokenValidator
