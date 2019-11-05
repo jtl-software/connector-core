@@ -95,6 +95,12 @@ class CoreConnector implements ConnectorInterface
 
         $controller = new $controllerName($application);
 
-        return $controller->{$actionName}($requestPacket->getParams());
+        $result = $controller->{$actionName}($requestPacket->getParams());
+
+        if(!$result instanceof Action) {
+            $result = (new Action())->setResult($result);
+        }
+
+        return $result;
     }
 }

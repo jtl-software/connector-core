@@ -12,6 +12,6 @@ namespace Jtl\Connector\Core\Application\Error;
  */
 interface ErrorCodesInterface
 {
-    const UNDEFINED_SESSION_HANDLER_ERROR = 789;
+    const SESSION_ERROR = 789;
     const AUTHENTICATION_ERROR = 790;
 }

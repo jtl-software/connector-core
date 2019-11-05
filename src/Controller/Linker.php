@@ -4,6 +4,7 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Application
  */
+
 namespace Jtl\Connector\Core\Controller;
 
 use \Jtl\Connector\Core\Result\Action;
@@ -20,19 +21,7 @@ class Linker extends AbstractController
 {
     public function clear()
     {
-        $action = new Action();
-
-        try {
-            $identityLinker = IdentityLinker::getInstance();
-
-            $action->setResult($identityLinker->clear());
-        } catch (\Exception $e) {
-            $err = new Error();
-            $err->setCode($e->getCode());
-            $err->setMessage($e->getMessage());
-            $action->setError($err);
-        }
-
-        return $action;
+        $identityLinker = IdentityLinker::getInstance();
+        return $identityLinker->clear();
     }
 }

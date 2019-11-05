@@ -225,13 +225,11 @@ class Application implements IApplication
             $this->handleImagePush($requestPacket);
         }
 
-
         if ($connector instanceof BeforeHandleInterface) {
             $connector->beforeHandle($requestPacket);
         }
 
         $actionResult = $connector->handle($requestPacket, $this);
-
 
         if ($method->isCore() === false) {
 

@@ -8,13 +8,15 @@
 namespace Jtl\Connector\Core\Controller;
 
 use Jtl\Connector\Core\Application\Error\ErrorCodesInterface;
+use Jtl\Connector\Core\Exception\ApplicationException;
+use Jtl\Connector\Core\Exception\LinkerException;
+use Jtl\Connector\Core\Exception\MissingRequirementException;
 use Jtl\Connector\Core\IO\Path;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Features;
 use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\System\Check;
 use Jtl\Connector\Core\Result\Action;
-use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Linker\IdentityLinker;
 use Jtl\Connector\Core\Serializer\JMS\SerializerBuilder;
 use Jtl\Connector\Core\Logger\Logger;
@@ -29,148 +31,102 @@ use Jtl\Connector\Core\Checksum\IChecksum;
 class Connector extends AbstractController
 {
     /**
-     * Initialize the connector.
-     *
-     * @param mixed $params Can be empty or not defined and a string.
-     * @return Action
+     * @param null $params
+     * @return bool
+     * @throws MissingRequirementException
      */
     public function init($params = null)
     {
-        $ret = new Action();
-
-        try {
-            Check::run();
-
-            $ret->setResult(true);
-        } catch (\Exception $e) {
-            $err = new Error();
-            $err->setCode($e->getCode());
-            $err->setMessage($e->getMessage());
-            $ret->setError($err);
-        }
-
-        return $ret;
+        Check::run();
+        return true;
     }
 
     /**
      * @param null $params
-     * @return Action
+     * @return Features
      */
     public function features($params = null)
     {
-        $action = new Action();
-        try {
-            $featureData = file_get_contents(CONNECTOR_DIR . '/config/features.json');
-            $features = Json::decode($featureData, true);
+        $featureData = file_get_contents(CONNECTOR_DIR . '/config/features.json');
+        $features = Json::decode($featureData, true);
 
-            $entities = [];
-            if (isset($features['entities']) && is_array($features['entities'])) {
-                $entities = $features['entities'];
-            }
-
-            $flags = [];
-            if (isset($features['flags']) && is_array($features['flags'])) {
-                $flags = $features['flags'];
-            }
-
-            $action->setResult(Features::create($entities, $flags));
-        } catch (\Exception $e) {
-            $err = new Error();
-            $err->setCode($e->getCode());
-            $err->setMessage($e->getMessage());
-            $action->setError($err);
+        $entities = [];
+        if (isset($features['entities']) && is_array($features['entities'])) {
+            $entities = $features['entities'];
         }
 
-        return $action;
+        $flags = [];
+        if (isset($features['flags']) && is_array($features['flags'])) {
+            $flags = $features['flags'];
+        }
+
+        return Features::create($entities, $flags);
     }
 
     /**
-     * Ack Identity Mappings
-     *
-     * @param mixed $params empty or ack json string.
-     * @return Action
+     * @param null $params
+     * @return bool
+     * @throws LinkerException
      */
     public function ack($params = null)
     {
-        $ret = new Action();
+        $serializer = SerializerBuilder::create();
+        $ack = $serializer->deserialize($params, Ack::class, 'json');
+        $identityLinker = IdentityLinker::getInstance();
 
-        try {
-            $serializer = SerializerBuilder::create();
-            $ack = $serializer->deserialize($params, Ack::class, 'json');
-            $identityLinker = IdentityLinker::getInstance();
-
-            foreach ($ack->getIdentities() as $modelName => $identities) {
-                if (!$identityLinker->isType($modelName)) {
-                    Logger::write(sprintf(
-                        'ACK: Unknown core entity (%s)! Skipping related ack\'s...',
-                        $modelName
-                    ), Logger::WARNING);
-                    continue;
-                }
-
-                foreach ($identities as $identity) {
-                    $identityLinker->save($identity->getEndpoint(), $identity->getHost(), $modelName);
-                }
+        foreach ($ack->getIdentities() as $modelName => $identities) {
+            if (!$identityLinker->isType($modelName)) {
+                Logger::write(sprintf(
+                    'ACK: Unknown core entity (%s)! Skipping related ack\'s...',
+                    $modelName
+                ), Logger::WARNING);
+                continue;
             }
 
-            if (ChecksumLinker::checksumLoaderExists()) {
-                // Checksum linking
-                foreach ($ack->getChecksums() as $checksum) {
-                    if ($checksum instanceof IChecksum) {
-                        if (!ChecksumLinker::save($checksum)) {
-                            Logger::write(sprintf(
-                                'Could not save checksum for endpoint (%s), host (%s) and type (%s)',
-                                $checksum->getForeignKey()->getEndpoint(),
-                                $checksum->getForeignKey()->getHost(),
-                                $checksum->getType()
-                            ), Logger::WARNING, Logger::CHANNEL_CHECKSUM);
-                        }
+            foreach ($identities as $identity) {
+                $identityLinker->save($identity->getEndpoint(), $identity->getHost(), $modelName);
+            }
+        }
+
+        if (ChecksumLinker::checksumLoaderExists()) {
+            // Checksum linking
+            foreach ($ack->getChecksums() as $checksum) {
+                if ($checksum instanceof IChecksum) {
+                    if (!ChecksumLinker::save($checksum)) {
+                        Logger::write(sprintf(
+                            'Could not save checksum for endpoint (%s), host (%s) and type (%s)',
+                            $checksum->getForeignKey()->getEndpoint(),
+                            $checksum->getForeignKey()->getHost(),
+                            $checksum->getType()
+                        ), Logger::WARNING, Logger::CHANNEL_CHECKSUM);
                     }
                 }
             }
-
-            $ret->setResult(true);
-        } catch (\Exception $e) {
-            $err = new Error();
-            $err->setCode($e->getCode());
-            $err->setMessage($e->getMessage());
-            $ret->setError($err);
         }
 
-        return $ret;
+        return true;
     }
 
     /**
-     * Returns the connector auth action
-     *
-     * @param mixed $params
-     * @return Action
+     * @param $params
+     * @return bool|\stdClass
+     * @throws \Exception
      */
     public function auth($params)
     {
-        $action = new Action();
+        $decodedParams = Json::decode($params);
 
-        try {
-            $decodedParams = Json::decode($params);
-
-            if (!isset($decodedParams->token)) {
-                throw new \Exception("Token parameter is missing.");
-            }
-
-            $accessToken = $decodedParams->token;
-        } catch (\Exception $e) {
-            $err = new Error();
-            $err->setCode($e->getCode());
-            $err->setMessage($e->getMessage());
-            $action->setError($err);
-
-            return $action;
+        if (!isset($decodedParams->token)) {
+            throw new \Exception("Token parameter is missing.");
         }
 
+        $accessToken = $decodedParams->token;
         $tokenValidator = $this->application->getEndpointConnector()->getTokenValidator();
 
         if ($tokenValidator->validate($accessToken) === false) {
-            return $this->unauthorizedAccessError($action, $accessToken);
+            //return $this->unauthorizedAccessError($action, $accessToken);
+            Logger::write(sprintf("Unauthorized access with token (%s) from ip (%s)", $accessToken, $_SERVER['REMOTE_ADDR']), Logger::WARNING, Logger::CHANNEL_SECURITY);
+            return false;
         }
 
         if ($this->application->getSessionHandler() !== null) {
@@ -178,15 +134,12 @@ class Connector extends AbstractController
             $session->sessionId = session_id();
             $session->lifetime = (int)ini_get('session.gc_maxlifetime');
 
-            $action->setResult($session);
-        } else {
-            $error = new Error();
-            $error->setCode(ErrorCodesInterface::UNDEFINED_SESSION_HANDLER_ERROR)
-                ->setMessage("Could not get any Session");
-            $action->setError($error);
+            return $session;
         }
 
-        return $action;
+        $errorMessage = 'Could not get any Session';
+        Logger::write($errorMessage, Logger::ERROR, Logger::CHANNEL_GLOBAL);
+        throw new ApplicationException($errorMessage, ErrorCodesInterface::SESSION_ERROR);
     }
 
     /**
@@ -194,36 +147,25 @@ class Connector extends AbstractController
      */
     public function debug()
     {
-        $action = new Action();
-
-        try {
-            $path = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
-            $configData = file_get_contents($path);
-            if ($configData === false) {
-                throw new \RuntimeException(sprintf('Cannot read config file %s', $path));
-            }
-
-            $config = Json::decode($configData);
-
-            $status = false;
-            if (!isset($config->developer_logging) || !$config->developer_logging) {
-                $status = true;
-            }
-
-            $config->developer_logging = $status;
-
-            $json = Json::encode($config, JSON_PRETTY_PRINT);
-            file_put_contents($path, $json);
-
-            $action->setResult($config);
-        } catch (\Exception $e) {
-            $error = new Error();
-            $error->setCode($e->getCode());
-            $error->setMessage($e->getMessage());
-            $action->setError($error);
+        $path = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
+        $configData = file_get_contents($path);
+        if ($configData === false) {
+            throw new \RuntimeException(sprintf('Cannot read config file %s', $path));
         }
 
-        return $action;
+        $config = Json::decode($configData);
+
+        $status = false;
+        if (!isset($config->developer_logging) || !$config->developer_logging) {
+            $status = true;
+        }
+
+        $config->developer_logging = $status;
+
+        $json = Json::encode($config, JSON_PRETTY_PRINT);
+        file_put_contents($path, $json);
+
+        return $config;
     }
 
     /**
@@ -231,47 +173,20 @@ class Connector extends AbstractController
      */
     public function logs()
     {
-        $action = new Action();
-
-        try {
-            $log = [];
-            foreach (glob(Path::combine(CONNECTOR_DIR, 'logs', '*.log')) as $file) {
-                if (!preg_match('/(global|database){1}.+\.log/', $file)) {
-                    continue;
-                }
-
-                $lines = array_filter(explode(PHP_EOL, file_get_contents($file)), function ($elem) {
-                    return !empty(trim($elem));
-                });
-
-                $log = array_merge($log, $lines);
+        $log = [];
+        foreach (glob(Path::combine(CONNECTOR_DIR, 'logs', '*.log')) as $file) {
+            if (!preg_match('/(global|database){1}.+\.log/', $file)) {
+                continue;
             }
 
-            $action->setResult($log);
-        } catch (\Exception $e) {
-            $error = new Error();
-            $error->setCode($e->getCode());
-            $error->setMessage($e->getMessage());
-            $action->setError($error);
+            $lines = array_filter(explode(PHP_EOL, file_get_contents($file)), function ($elem) {
+                return !empty(trim($elem));
+            });
+
+            $log = array_merge($log, $lines);
         }
 
-        return $action;
-    }
+        return $log;
 
-    /**
-     * @param Action $action
-     * @param string $accessToken
-     * @return Action
-     */
-    protected function unauthorizedAccessError(Action $action, string $accessToken): Action
-    {
-        $error = new Error();
-        $error->setCode(ErrorCodesInterface::AUTHENTICATION_ERROR);
-        $error->setMessage("Could not authenticate access to the connector");
-        $action->setError($error);
-
-        Logger::write(sprintf("Unauthorized access with token (%s) from ip (%s)", $accessToken, $_SERVER['REMOTE_ADDR']), Logger::WARNING, Logger::CHANNEL_SECURITY);
-
-        return $action;
     }
 }
