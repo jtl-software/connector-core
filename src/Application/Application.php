@@ -472,10 +472,10 @@ class Application implements IApplication
                 if (!empty($image->getRemoteUrl())) {
                     $imageData = file_get_contents($image->getRemoteUrl());
                     if ($imageData === false) {
-                        throw new ApplicationException('Could not get any data from url: ' . $images->getRemoteUrl());
+                        throw new ApplicationException('Could not get any data from url: ' . $image->getRemoteUrl());
                     }
 
-                    $path = parse_url($images->getRemoteUrl(), PHP_URL_PATH);
+                    $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
                     $fileName = pathinfo($path, PATHINFO_BASENAME);
                     $imagePath = sprintf('%s/%s_%s', Temp::getDirectory(), uniqid(), $fileName);
                     file_put_contents($imagePath, $imageData);
