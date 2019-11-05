@@ -101,6 +101,9 @@ class Application implements IApplication
     {
         $this->endpointConnector = $endpointConnector;
         $this->setErrorHandler(new ErrorHandler());
+
+        $this->eventDispatcher = new EventDispatcher();
+        $this->getErrorHandler()->setEventDispatcher($this->eventDispatcher);
     }
 
     /**
@@ -114,11 +117,6 @@ class Application implements IApplication
         if (!defined('CONNECTOR_DIR')) {
             throw new \Exception('Constant CONNECTOR_DIR is not defined.');
         }
-
-        // Event Dispatcher
-        $this->eventDispatcher = new EventDispatcher();
-
-        $this->getErrorHandler()->setEventDispatcher($this->eventDispatcher);
 
         try {
             $jtlrpc = Request::handle();
@@ -159,7 +157,7 @@ class Application implements IApplication
             }
 
             $requestPacket->validate();
-            $this->execute($requestPacket);
+            $responsePacket = $this->execute($requestPacket);
         } catch (\Throwable $ex) {
             $error = new Error();
             $error->setCode($ex->getCode())
@@ -170,13 +168,14 @@ class Application implements IApplication
                 ->setJtlrpc($requestPacket->getJtlrpc())
                 ->setError($error);
 
-            $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
-            Response::send($responsePacket);
         } finally {
             if (count($this->imagesToDelete) > 0) {
                 Request::deleteFileuploads($this->imagesToDelete);
                 $this->imagesToDelete = [];
             }
+
+            $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
+            Response::send($responsePacket);
         }
     }
 
@@ -216,6 +215,14 @@ class Application implements IApplication
             $connector = $this->getEndpointConnector();
         }
 
+        $modelNamespace = 'Jtl\Connector\Core\Model';
+        if ($connector instanceof ModelInterface) {
+            $modelNamespace = $connector->getModelNamespace();
+        }
+        $this->deserializeRequestParams($requestPacket, $modelNamespace);
+        $this->handleImagePush($requestPacket);
+
+
         if ($connector instanceof BeforeHandleInterface) {
             $connector->beforeHandle($requestPacket);
         }
@@ -224,13 +231,6 @@ class Application implements IApplication
 
 
         if ($method->isCore() === false) {
-            $modelNamespace = 'Jtl\Connector\Core\Model';
-            if ($connector instanceof ModelInterface) {
-                $modelNamespace = $connector->getModelNamespace();
-            }
-
-            $this->deserializeRequestParams($requestPacket, $modelNamespace);
-            $this->handleImagePush($requestPacket);
 
             if ($actionResult->getError() === null) {
 
@@ -274,8 +274,6 @@ class Application implements IApplication
             ($method->getController() === 'connector') ? 'Connector' : null,
             $method->isCore()
         );
-
-        $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
 
         return $responsePacket;
     }
@@ -426,8 +424,6 @@ class Application implements IApplication
 
     protected function startEventDispatcher(): void
     {
-        $this->endpointConnector->setEventDispatcher($this->eventDispatcher);
-
         $loader = new PluginLoader();
         $loader->load($this->eventDispatcher);
     }

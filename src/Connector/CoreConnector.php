@@ -3,6 +3,7 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Base
  */
+
 namespace Jtl\Connector\Core\Connector;
 
 use Jtl\Connector\Core\Application\Application;
@@ -31,11 +32,6 @@ class CoreConnector implements ConnectorInterface
      * @var ITokenValidator
      */
     protected $tokenValidator;
-
-    /**
-     * @var EventDispatcher
-     */
-    protected $eventDispatcher;
 
     /**
      * @var string
@@ -74,25 +70,6 @@ class CoreConnector implements ConnectorInterface
     public function getTokenValidator(): ITokenValidator
     {
         return $this->tokenValidator;
-    }
-
-    /**
-     * @param EventDispatcher $eventDispatcher
-     * @return ConnectorInterface
-     */
-    public function setEventDispatcher(EventDispatcher $eventDispatcher): ConnectorInterface
-    {
-        $this->eventDispatcher = $eventDispatcher;
-        
-        return $this;
-    }
-    
-    /**
-     * @return EventDispatcher
-     */
-    public function getEventDispatcher(): EventDispatcher
-    {
-        return $this->eventDispatcher;
     }
 
     /**
