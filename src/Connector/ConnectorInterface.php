@@ -20,7 +20,7 @@ interface ConnectorInterface
     /**
      * Main initialize method
      */
-    public function initialize();
+    public function initialize(Application $application);
     
     /**
      * @return IPrimaryKeyMapper

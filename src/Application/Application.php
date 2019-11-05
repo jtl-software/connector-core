@@ -150,7 +150,7 @@ class Application implements IApplication
             $this->startEventDispatcher();
 
             // Initialize Endpoint
-            $this->endpointConnector->initialize();
+            $this->endpointConnector->initialize($this);
 
             if ($this->endpointConnector instanceof ChecksumInterface) {
                 ChecksumLinker::setChecksumLoader($this->endpointConnector->getChecksumLoader());
@@ -219,8 +219,11 @@ class Application implements IApplication
         if ($connector instanceof ModelInterface) {
             $modelNamespace = $connector->getModelNamespace();
         }
-        $this->deserializeRequestParams($requestPacket, $modelNamespace);
-        $this->handleImagePush($requestPacket);
+
+        if(!$method->isCore()) {
+            $this->deserializeRequestParams($requestPacket, $modelNamespace);
+            $this->handleImagePush($requestPacket);
+        }
 
 
         if ($connector instanceof BeforeHandleInterface) {
@@ -587,5 +590,13 @@ class Application implements IApplication
         $this->errorHandler = $handler;
 
         return $this;
+    }
+
+    /**
+     * @return EventDispatcher
+     */
+    public function getEventDispatcher(): EventDispatcher
+    {
+        return $this->eventDispatcher;
     }
 }

@@ -50,7 +50,7 @@ class CoreConnector implements ConnectorInterface
     }
 
 
-    public function initialize()
+    public function initialize(Application $application)
     {
     }
 
@@ -95,11 +95,6 @@ class CoreConnector implements ConnectorInterface
 
         $controller = new $controllerName($application);
 
-        $action = new Action();
-
-        $result = $controller->{$actionName}($requestPacket->getParams());
-        $action->setResult($result);
-
-        return $action;
+        return $controller->{$actionName}($requestPacket->getParams());
     }
 }
