@@ -8,11 +8,13 @@ namespace Jtl\Connector\Core\Application;
 
 use Jtl\Connector\Core\Application\Error\ErrorHandler;
 use Jtl\Connector\Core\Application\Error\IErrorHandler;
-use Jtl\Connector\Core\Connector\BeforeHandleInterface;
 use Jtl\Connector\Core\Connector\ChecksumInterface;
 use Jtl\Connector\Core\Compression\Zip;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
+use Jtl\Connector\Core\Connector\HandleRequestInterface;
 use Jtl\Connector\Core\Connector\ModelInterface;
+use Jtl\Connector\Core\Event\Request\RequestAfterHandleEvent;
+use Jtl\Connector\Core\Event\Request\RequestBeforeHandleEvent;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\HttpException;
 use Jtl\Connector\Core\IO\Temp;
@@ -43,6 +45,7 @@ use Jtl\Connector\Core\Model\DataModel;
 use Jtl\Connector\Core\Serializer\JMS\SerializerBuilder;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Session\SqliteSession;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Jtl\Connector\Core\IO\Path;
 use Jtl\Connector\Core\Event\EventHandler;
@@ -89,6 +92,11 @@ class Application implements IApplication
     protected $errorHandler;
 
     /**
+     * @var ContainerBuilder
+     */
+    protected $container;
+
+    /**
      * @var string[]
      */
     protected $imagesToDelete = [];
@@ -104,6 +112,9 @@ class Application implements IApplication
 
         $this->eventDispatcher = new EventDispatcher();
         $this->getErrorHandler()->setEventDispatcher($this->eventDispatcher);
+
+        $this->container = new ContainerBuilder();
+        $this->container->set('application', $this);
     }
 
     /**
@@ -180,6 +191,15 @@ class Application implements IApplication
     }
 
     /**
+     * @param string $controller
+     * @param object $instance
+     */
+    public function registerController(string $controller, object $instance): void
+    {
+        $this->container->set($controller, $instance);
+    }
+
+    /**
      * @param RequestPacket $requestPacket
      * @return ResponsePacket
      * @throws ApplicationException
@@ -225,11 +245,17 @@ class Application implements IApplication
             $this->handleImagePush($requestPacket);
         }
 
-        if ($connector instanceof BeforeHandleInterface) {
-            $connector->beforeHandle($requestPacket);
-        }
+        $controller = $method->getController();
+        $action = $method->getAction();
+        $params = $requestPacket->getParams();
 
-        $actionResult = $connector->handle($requestPacket, $this);
+        $this->eventDispatcher->dispatch(new RequestBeforeHandleEvent($controller, $action, $params), RequestBeforeHandleEvent::EVENT_NAME);
+        if($connector instanceof HandleRequestInterface) {
+            $actionResult = $connector->handle($this, $controller, $action, ...$params);
+        } else {
+            $actionResult = $this->handleRequest($controller, $action, ...$params);
+        }
+        $this->eventDispatcher->dispatch(new RequestAfterHandleEvent($controller, $action, $actionResult), RequestAfterHandleEvent::EVENT_NAME);
 
         if ($method->isCore() === false) {
 
@@ -331,6 +357,47 @@ class Application implements IApplication
 
             $requestPacket->setParams($params);
         }
+    }
+
+    /**
+     * @param string $controller
+     * @param string $action
+     * @param DataModel ...$params
+     * @return Action
+     * @throws ApplicationException
+     */
+    public function handleRequest(string $controller, string $action, DataModel ...$params): Action
+    {
+        if(!$this->container->has($controller)) {
+            $controllerClass = $this->endpointConnector->getControllerNamespace() . '\\' . $controller;
+            if(!class_exists($controllerClass)) {
+                throw new ApplicationException(sprintf('Controller class %s does not exist!', $controllerClass));
+            }
+
+            $this->container->register($controller, $controllerClass);
+        }
+
+        $controllerObject = $this->container->get($controller);
+
+        $result = [];
+        switch ($action) {
+            case Method::ACTION_PUSH:
+            case Method::ACTION_DELETE:
+                foreach($params as $model) {
+                    $result[] = $controllerObject->$action($model);
+                }
+                break;
+
+            default:
+                $result = $controllerObject->$action($params);
+                break;
+        }
+
+        if(!$result instanceof Action) {
+            $result = (new Action())->setResult($result);
+        }
+
+        return $result;
     }
 
     /**

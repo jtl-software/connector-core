@@ -20,7 +20,8 @@
         "symfony/event-dispatcher": "^3.0||^4.0",
         "doctrine/collections": "^1.4",
         "doctrine/annotations": "^1.4",
-        "ext-sqlite3": "*"
+        "ext-sqlite3": "*",
+        "symfony/dependency-injection": "^4.3"
     },
     "minimum-stability": "stable",
     "autoload": {

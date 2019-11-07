@@ -9,6 +9,7 @@ namespace Jtl\Connector\Core\Connector;
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Authentication\ITokenValidator;
 use Jtl\Connector\Core\Exception\RpcException;
+use Jtl\Connector\Core\Model\DataModel;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Utilities\RpcMethod;
 use Jtl\Connector\Core\Mapper\IPrimaryKeyMapper;
@@ -21,7 +22,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-class CoreConnector implements ConnectorInterface
+class CoreConnector implements ConnectorInterface, HandleRequestInterface
 {
     /**
      * @var IPrimaryKeyMapper
@@ -81,22 +82,18 @@ class CoreConnector implements ConnectorInterface
     }
 
     /**
-     * @param RequestPacket $requestPacket
      * @param Application $application
+     * @param string $controller
+     * @param string $action
+     * @param DataModel ...$params
      * @return Action
-     * @throws RpcException
      */
-    public function handle(RequestPacket $requestPacket, Application $application): Action
+    public function handle(Application $application, string $controller, string $action, DataModel ...$params): Action
     {
-        $rpcMethod = RpcMethod::splitMethod($requestPacket->getMethod());
-
-        $controllerName = sprintf('%s\%s', $this->getControllerNamespace(), RpcMethod::buildController($rpcMethod->getController()));
-        $actionName = $rpcMethod->getAction();
-
+        $controllerName = sprintf('%s\%s', $this->getControllerNamespace(), $controller);
         $controller = new $controllerName($application);
 
-        $result = $controller->{$actionName}($requestPacket->getParams());
-
+        $result = $controller->{$action}($params);
         if(!$result instanceof Action) {
             $result = (new Action())->setResult($result);
         }
