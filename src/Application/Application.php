@@ -13,8 +13,8 @@ use Jtl\Connector\Core\Compression\Zip;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Connector\HandleRequestInterface;
 use Jtl\Connector\Core\Connector\ModelInterface;
-use Jtl\Connector\Core\Event\Request\RequestAfterHandleEvent;
-use Jtl\Connector\Core\Event\Request\RequestBeforeHandleEvent;
+use Jtl\Connector\Core\Event\Handle\ResponseAfterHandleEvent;
+use Jtl\Connector\Core\Event\Handle\RequestBeforeHandleEvent;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\HttpException;
 use Jtl\Connector\Core\IO\Temp;
@@ -29,8 +29,8 @@ use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Rpc\Error;
-use Jtl\Connector\Core\Http\Request;
-use Jtl\Connector\Core\Http\Response;
+use Jtl\Connector\Core\Http\Request as HttpRequest;
+use Jtl\Connector\Core\Http\Response as HttpResponse;
 use Jtl\Connector\Core\Config\Config;
 use Jtl\Connector\Core\Exception\JsonException;
 use Jtl\Connector\Core\Exception\LinkerException;
@@ -130,7 +130,7 @@ class Application implements IApplication
         }
 
         try {
-            $jtlrpc = Request::handle();
+            $jtlrpc = HttpRequest::handle();
             $requestPacket = RequestPacket::build($jtlrpc);
 
             $method = $requestPacket->getMethod();
@@ -181,12 +181,12 @@ class Application implements IApplication
 
         } finally {
             if (count($this->imagesToDelete) > 0) {
-                Request::deleteFileuploads($this->imagesToDelete);
+                HttpRequest::deleteFileuploads($this->imagesToDelete);
                 $this->imagesToDelete = [];
             }
 
             $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
-            Response::send($responsePacket);
+            HttpResponse::send($responsePacket);
         }
     }
 
@@ -240,61 +240,56 @@ class Application implements IApplication
             $modelNamespace = $connector->getModelNamespace();
         }
 
-        if(!$method->isCore()) {
-            $this->deserializeRequestParams($requestPacket, $modelNamespace);
-            $this->handleImagePush($requestPacket);
-        }
-
-        $controller = $method->getController();
-        $action = $method->getAction();
-        $params = $requestPacket->getParams();
-
-        $this->eventDispatcher->dispatch(new RequestBeforeHandleEvent($controller, $action, $params), RequestBeforeHandleEvent::EVENT_NAME);
-        if($connector instanceof HandleRequestInterface) {
-            $actionResult = $connector->handle($this, $controller, $action, ...$params);
-        } else {
-            $actionResult = $this->handleRequest($controller, $action, ...$params);
-        }
-        $this->eventDispatcher->dispatch(new RequestAfterHandleEvent($controller, $action, $actionResult), RequestAfterHandleEvent::EVENT_NAME);
-
-        if ($method->isCore() === false) {
-
-            if ($actionResult->getError() === null) {
-
-                // Identity mapping
-                $results = [];
-                $models = is_array($actionResult->getResult()) ? $actionResult->getResult() : [$actionResult->getResult()];
-
-                foreach ($models as $model) {
-                    if ($model instanceof DataModel) {
-                        $identityLinker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
-                        $this->linkChecksum($model);
-
-                        // Event
-                        EventHandler::dispatch(
-                            $model,
-                            $this->eventDispatcher,
-                            $method->getAction(),
-                            EventHandler::AFTER,
-                            ($method->getController() === 'connector') ? 'Connector' : null
-                        );
-
-                        if ($method->getAction() === Method::ACTION_PULL) {
-                            $results[] = $model->getPublic();
-                        }
-                    }
-                }
-
-                if ($method->getAction() === Method::ACTION_PULL) {
-                    $actionResult->setResult($results);
-                }
+        $request = Request::create(RpcMethod::buildController($method->getController()), $method->getAction(), []);
+        if (!$method->isCore()) {
+            $request = $this->createHandleRequest($requestPacket, $modelNamespace);
+            if (strtolower($request->getController()) === 'image' && $request->getAction() === Method::ACTION_PUSH) {
+                $this->handleImagePush(...$request->getParams());
             }
         }
 
-        $responsePacket = $this->buildRpcResponse($requestPacket, $actionResult);
+        $this->eventDispatcher->dispatch(new RequestBeforeHandleEvent($request), RequestBeforeHandleEvent::getEventName());
+        if ($connector instanceof HandleRequestInterface) {
+            $response = $connector->handle($this, $request);
+        } else {
+            $response = $this->handleRequest($request);
+        }
+        $this->eventDispatcher->dispatch(new ResponseAfterHandleEvent($request->getController(), $request->getAction(), $response), ResponseAfterHandleEvent::getEventName());
+
+        if ($method->isCore() === false) {
+            // Identity mapping
+            $results = [];
+            $models = is_array($response->getResult()) ? $response->getResult() : [$response->getResult()];
+
+            foreach ($models as $model) {
+                if ($model instanceof DataModel) {
+                    $identityLinker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
+                    $this->linkChecksum($model);
+
+                    // Event
+                    EventHandler::dispatch(
+                        $model,
+                        $this->eventDispatcher,
+                        $method->getAction(),
+                        EventHandler::AFTER,
+                        ($method->getController() === 'connector') ? 'Connector' : null
+                    );
+
+                    if ($method->getAction() === Method::ACTION_PULL) {
+                        $results[] = $model->getPublic();
+                    }
+                }
+            }
+
+            if ($method->getAction() === Method::ACTION_PULL) {
+                $response->setResult($results);
+            }
+        }
+
+        $responsePacket = $this->buildRpcResponse($requestPacket, $response);
 
         EventHandler::dispatch(
-            $actionResult->getResult(),
+            $response->getResult(),
             $this->eventDispatcher,
             $method->getAction(),
             EventHandler::AFTER,
@@ -308,69 +303,75 @@ class Application implements IApplication
     /**
      * @param RequestPacket $requestPacket
      * @param string $modelNamespace
-     * @return void
+     * @return Request
      * @throws LinkerException
      */
-    protected function deserializeRequestParams(RequestPacket &$requestPacket, string $modelNamespace): void
+    protected function createHandleRequest(RequestPacket $requestPacket, string $modelNamespace): Request
     {
         $method = RpcMethod::splitMethod($requestPacket->getMethod());
-        $modelClass = RpcMethod::buildController($method->getController());
 
-        $namespace = ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) ?
-            sprintf('%s\%s', $modelNamespace, $modelClass) : QueryFilter::class;
+        $controller = RpcMethod::buildController($method->getController());
+        $action = $method->getAction();
+        $serializedParams = $requestPacket->getParams() ?? '';
+        $params = [];
 
-        if (class_exists($namespace) && $requestPacket->getParams() !== null) {
+        $type = $className = QueryFilter::class;
+        if (in_array($action, [Method::ACTION_PUSH, Method::ACTION_DELETE])) {
+            $className = sprintf('%s\%s', $modelNamespace, $controller);
+            $type = sprintf("array<%s>", $className);
+        }
+
+        if (class_exists($className)) {
             $serializer = SerializerBuilder::create();
-
-            if ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) {
-                $type = sprintf("array<%s>", $namespace);
-                $params = $serializer->deserialize($requestPacket->getParams(), $type, 'json');
+            $params = $serializer->deserialize($serializedParams, $type, 'json');
+            if (in_array($action, [Method::ACTION_PUSH, Method::ACTION_DELETE])) {
                 $identityLinker = IdentityLinker::getInstance();
 
                 // Identity mapping
                 foreach ($params as &$param) {
                     $identityLinker->linkModel($param);
-
                     // Checksum linking
                     $this->linkChecksum($param);
-
                     // Event
                     EventHandler::dispatch(
                         $param,
                         $this->eventDispatcher,
-                        $method->getAction(),
+                        $action,
                         EventHandler::BEFORE
                     );
                 }
             } else {
-                $params = $serializer->deserialize($requestPacket->getParams(), $namespace, 'json');
-
+                $params = [$params];
                 // Event
                 EventHandler::dispatch(
                     $params,
                     $this->eventDispatcher,
-                    $method->getAction(),
+                    $action,
                     EventHandler::BEFORE,
-                    $modelClass
+                    $controller
                 );
             }
-
-            $requestPacket->setParams($params);
         }
+
+        return Request::create($controller, $action, $params);
     }
 
     /**
      * @param string $controller
      * @param string $action
-     * @param DataModel ...$params
-     * @return Action
+     * @param $params
+     * @return Response
      * @throws ApplicationException
      */
-    public function handleRequest(string $controller, string $action, DataModel ...$params): Action
+    public function handleRequest(Request $request): Response
     {
-        if(!$this->container->has($controller)) {
+        $controller = $request->getController();
+        $action = $request->getAction();
+        $params = $request->getParams();
+
+        if (!$this->container->has($controller)) {
             $controllerClass = $this->endpointConnector->getControllerNamespace() . '\\' . $controller;
-            if(!class_exists($controllerClass)) {
+            if (!class_exists($controllerClass)) {
                 throw new ApplicationException(sprintf('Controller class %s does not exist!', $controllerClass));
             }
 
@@ -383,39 +384,36 @@ class Application implements IApplication
         switch ($action) {
             case Method::ACTION_PUSH:
             case Method::ACTION_DELETE:
-                foreach($params as $model) {
+                foreach ($params as $model) {
                     $result[] = $controllerObject->$action($model);
                 }
                 break;
 
             default:
-                $result = $controllerObject->$action($params);
+                $param = count($params) > 0 ? reset($params) : null;
+                $result = $controllerObject->$action($param);
                 break;
         }
 
-        if(!$result instanceof Action) {
-            $result = (new Action())->setResult($result);
+        if (!$result instanceof Response) {
+            $result = Response::create($result);
         }
 
         return $result;
     }
 
     /**
-     * Build RPC Reponse Packet
-     *
      * @param RequestPacket $requestPacket
-     * @param Action $result
+     * @param Response $response
      * @return ResponsePacket
      * @throws RpcException
      */
-    protected function buildRpcResponse(RequestPacket $requestPacket, Action $result): ResponsePacket
+    protected function buildRpcResponse(RequestPacket $requestPacket, Response $response): ResponsePacket
     {
         $responsePacket = new ResponsePacket();
         $responsePacket->setId($requestPacket->getId())
             ->setJtlrpc($requestPacket->getJtlrpc())
-            ->setResult($result->getResult())
-            ->setError($result->getError());
-
+            ->setResult($response->getResult());
         $responsePacket->validate();
 
         return $responsePacket;
@@ -461,7 +459,7 @@ class Application implements IApplication
      */
     protected function startSession(string $method): void
     {
-        $sessionId = Request::getSession();
+        $sessionId = HttpRequest::getSession();
         $sessionName = 'JtlConnector';
 
         if ($sessionId === null && $method !== 'core.connector.auth') {
@@ -497,67 +495,59 @@ class Application implements IApplication
     }
 
     /**
-     * @param RequestPacket $requestPacket
+     * @param Image ...$images
      * @throws ApplicationException
      * @throws CompressionException
      * @throws HttpException
      */
-    protected function handleImagePush(RequestPacket &$requestPacket): void
+    protected function handleImagePush(Image ...$images): void
     {
-        if ($requestPacket->getMethod() === 'image.push') {
-            $imagePaths = [];
-            $zipFile = Request::handleFileupload();
-            $tempDir = Temp::generateDirectory();
-            if ($zipFile !== null && $tempDir !== null) {
-                $archive = new Zip();
-                if ($archive->extract($zipFile, $tempDir)) {
-                    $finder = new Finder();
-                    $finder->files()->ignoreDotFiles(true)->in($tempDir);
-                    foreach ($finder as $file) {
-                        $imagePaths[] = $this->imagesToDelete[] = $file->getRealpath();
-                    }
-                } else {
-                    @rmdir($tempDir);
-                    @unlink($zipFile);
-
-                    throw new ApplicationException(sprintf('Zip File (%s) could not be extracted', $zipFile));
-                }
-
-                if ($zipFile !== null) {
-                    @unlink($zipFile);
+        $imagePaths = [];
+        $zipFile = HttpRequest::handleFileupload();
+        $tempDir = Temp::generateDirectory();
+        if ($zipFile !== null && $tempDir !== null) {
+            $archive = new Zip();
+            if ($archive->extract($zipFile, $tempDir)) {
+                $finder = new Finder();
+                $finder->files()->ignoreDotFiles(true)->in($tempDir);
+                foreach ($finder as $file) {
+                    $imagePaths[] = $this->imagesToDelete[] = $file->getRealpath();
                 }
             } else {
-                throw new ApplicationException('Zip file or temp dir  is null');
+                @rmdir($tempDir);
+                @unlink($zipFile);
+
+                throw new ApplicationException(sprintf('Zip File (%s) could not be extracted', $zipFile));
             }
 
-            $images = $requestPacket->getParams();
-            if (!is_array($images)) {
-                throw new ApplicationException('Request params must be valid images');
+            if ($zipFile !== null) {
+                @unlink($zipFile);
             }
+        } else {
+            throw new ApplicationException('Zip file or temp dir  is null');
+        }
 
-            /** @var Image $image */
-            foreach ($images as $image) {
-                if (!empty($image->getRemoteUrl())) {
-                    $imageData = file_get_contents($image->getRemoteUrl());
-                    if ($imageData === false) {
-                        throw new ApplicationException('Could not get any data from url: ' . $image->getRemoteUrl());
-                    }
+        foreach ($images as $image) {
+            if (!empty($image->getRemoteUrl())) {
+                $imageData = file_get_contents($image->getRemoteUrl());
+                if ($imageData === false) {
+                    throw new ApplicationException('Could not get any data from url: ' . $image->getRemoteUrl());
+                }
 
-                    $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
-                    $fileName = pathinfo($path, PATHINFO_BASENAME);
-                    $imagePath = sprintf('%s/%s_%s', Temp::getDirectory(), uniqid(), $fileName);
-                    file_put_contents($imagePath, $imageData);
-                    $image->setFilename($imagePath);
-                } else {
-                    foreach ($imagePaths as $imagePath) {
-                        $infos = pathinfo($imagePath);
-                        list($hostId, $relationType) = explode('_', $infos['filename']);
-                        if ((int)$hostId == $image->getId()->getHost()
-                            && strtolower($relationType) === strtolower($image->getRelationType())
-                        ) {
-                            $image->setFilename($imagePath);
-                            break;
-                        }
+                $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
+                $fileName = pathinfo($path, PATHINFO_BASENAME);
+                $imagePath = sprintf('%s/%s_%s', Temp::getDirectory(), uniqid(), $fileName);
+                file_put_contents($imagePath, $imageData);
+                $image->setFilename($imagePath);
+            } else {
+                foreach ($imagePaths as $imagePath) {
+                    $infos = pathinfo($imagePath);
+                    list($hostId, $relationType) = explode('_', $infos['filename']);
+                    if ((int)$hostId == $image->getId()->getHost()
+                        && strtolower($relationType) === strtolower($image->getRelationType())
+                    ) {
+                        $image->setFilename($imagePath);
+                        break;
                     }
                 }
             }

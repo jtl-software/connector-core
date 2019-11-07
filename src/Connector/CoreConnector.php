@@ -7,6 +7,8 @@
 namespace Jtl\Connector\Core\Connector;
 
 use Jtl\Connector\Core\Application\Application;
+use Jtl\Connector\Core\Application\Request;
+use Jtl\Connector\Core\Application\Response;
 use Jtl\Connector\Core\Authentication\ITokenValidator;
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Model\DataModel;
@@ -83,19 +85,18 @@ class CoreConnector implements ConnectorInterface, HandleRequestInterface
 
     /**
      * @param Application $application
-     * @param string $controller
-     * @param string $action
-     * @param DataModel ...$params
-     * @return Action
+     * @param Request $request
+     * @return Response
      */
-    public function handle(Application $application, string $controller, string $action, DataModel ...$params): Action
+    public function handle(Application $application, Request $request): Response
     {
-        $controllerName = sprintf('%s\%s', $this->getControllerNamespace(), $controller);
-        $controller = new $controllerName($application);
+        $ControllerClass = sprintf('%s\%s', $this->getControllerNamespace(), $request->getController());
+        $controllerObject = new $ControllerClass($application);
 
-        $result = $controller->{$action}($params);
-        if(!$result instanceof Action) {
-            $result = (new Action())->setResult($result);
+        $param = count($request->getParams()) > 0 ? reset($params): null;
+        $result = $controllerObject->{$request->getAction()}($param);
+        if(!$result instanceof Response) {
+            $result = Response::create($result);
         }
 
         return $result;

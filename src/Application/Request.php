@@ -1,31 +1,30 @@
 <?php
-namespace Jtl\Connector\Core\Event\Request;
+namespace Jtl\Connector\Core\Application;
 
-use Jtl\Connector\Core\Model\DataModel;
-use Symfony\Contracts\EventDispatcher\Event;
-
-class RequestBeforeHandleEvent extends Event
+class Request
 {
-    const EVENT_NAME = 'request.before.handle';
-
     /**
      * @var string
      */
     protected $controller;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $action;
 
-    /** @var DataModel[] */
+    /**
+     * @var mixed[]
+     */
     protected $params = [];
 
     /**
-     * RequestBeforeHandleEvent constructor.
+     * Request constructor.
      * @param string $controller
      * @param string $action
-     * @param DataModel ...$params
+     * @param mixed[] $params
      */
-    public function __construct(string $controller, string $action, DataModel ...$params)
+    public function __construct(string $controller, string $action, array $params)
     {
         $this->controller = $controller;
         $this->action = $action;
@@ -49,10 +48,21 @@ class RequestBeforeHandleEvent extends Event
     }
 
     /**
-     * @return DataModel[]
+     * @return mixed[]
      */
     public function getParams(): array
     {
         return $this->params;
+    }
+
+    /**
+     * @param string $controller
+     * @param string $action
+     * @param mixed[] $params
+     * @return Request
+     */
+    public static function create(string $controller, string $action, array $params): Request
+    {
+        return new static($controller, $action, $params);
     }
 }

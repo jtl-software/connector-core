@@ -18,29 +18,13 @@ use JMS\Serializer\Annotation as Serializer;
 abstract class Packet extends Model
 {
     /**
-     * Single Mode
-     *
-     * @var integer
-     * @Serializer\Type("integer")
-     */
-    const SINGLE_MODE = 1;
-    
-    /**
-     * Batch Mode
-     *
-     * @var integer
-     * @Serializer\Type("integer")
-     */
-    const BATCH_MODE = 2;
-    
-    /**
      * A String specifying the version of the JSON-RPC protocol.
      * MUST be exactly "2.0".
      *
      * @var string
      * @Serializer\Type("string")
      */
-    protected $jtlrpc;
+    protected $jtlrpc = '';
     
     /**
      * An identifier established by the Client that MUST contain a String,
@@ -53,14 +37,14 @@ abstract class Packet extends Model
      * @var string | NULL
      * @Serializer\Type("string")
      */
-    protected $id;
+    protected $id = '';
 
     /**
      * Getter for $jtlrpc
      *
      * @return string
      */
-    public function getJtlrpc()
+    public function getJtlrpc(): string
     {
         return $this->jtlrpc;
     }
@@ -69,9 +53,9 @@ abstract class Packet extends Model
      * Setter for $jtlrpc
      *
      * @param string $jtlrpc
-     * @return \Jtl\Connector\Core\Rpc\Packet
+     * @return Packet
      */
-    public function setJtlrpc($jtlrpc)
+    public function setJtlrpc(string $jtlrpc): Packet
     {
         $this->jtlrpc = $jtlrpc;
         return $this;
@@ -82,7 +66,7 @@ abstract class Packet extends Model
      *
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -90,10 +74,10 @@ abstract class Packet extends Model
     /**
      * Setter for $id
      *
-     * @param string | number | NULL $id
-     * @return \Jtl\Connector\Core\Rpc\Packet
+     * @param string $id
+     * @return Packet
      */
-    public function setId($id)
+    public function setId(string $id): Packet
     {
         $this->id = $id;
         return $this;

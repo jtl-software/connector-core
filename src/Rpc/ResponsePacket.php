@@ -32,7 +32,7 @@ class ResponsePacket extends Packet
      * no error triggered during invocation.
      * The value for this member MUST be an Object as defined in section 5.1.
      *
-     * @var \Jtl\Connector\Core\Rpc\Error
+     * @var Error
      * @Serializer\Type("Jtl\Connector\Core\Rpc\Error")
      */
     protected $error;
@@ -51,9 +51,9 @@ class ResponsePacket extends Packet
      * Setter for $result
      *
      * @param integer | array | string | NULL $result
-     * @return \Jtl\Connector\Core\Rpc\Packet
+     * @return Packet
      */
-    public function setResult($result)
+    public function setResult($result): ResponsePacket
     {
         $this->result = $result;
         return $this;
@@ -62,9 +62,9 @@ class ResponsePacket extends Packet
     /**
      * Getter for $error
      *
-     * @return \Jtl\Connector\Core\Rpc\Error
+     * @return Error
      */
-    public function getError()
+    public function getError(): ?Error
     {
         return $this->error;
     }
@@ -72,10 +72,10 @@ class ResponsePacket extends Packet
     /**
      * Setter for $error
      *
-     * @param \Jtl\Connector\Core\Rpc\Error $error
-     * @return \Jtl\Connector\Core\Rpc\Packet
+     * @param Error $error
+     * @return Packet
      */
-    public function setError(Error $error = null)
+    public function setError(Error $error): ResponsePacket
     {
         $this->error = $error;
         return $this;

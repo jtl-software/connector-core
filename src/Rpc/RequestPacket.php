@@ -38,14 +38,14 @@ class RequestPacket extends Packet
      * @var array | object
      * @Serializer\Type("Jtl\Connector\Core\Rpc\JsonString")
      */
-    protected $params;
+    protected $params = null;
 
     /**
      * Getter for $method
      *
      * @return string
      */
-    public function getMethod()
+    public function getMethod(): string
     {
         return $this->method;
     }
@@ -54,9 +54,9 @@ class RequestPacket extends Packet
      * Setter for $method
      *
      * @param string $method
-     * @return \Jtl\Connector\Core\Rpc\Packet
+     * @return Packet
      */
-    public function setMethod($method)
+    public function setMethod(string $method)
     {
         $this->method = $method;
         return $this;
@@ -65,20 +65,18 @@ class RequestPacket extends Packet
     /**
      * Getter for $params
      *
-     * @return mixed
+     * @return null|string
      */
-    public function getParams()
+    public function getParams(): ?string
     {
         return $this->params;
     }
 
     /**
-     * Setter for $params
-     *
-     * @param array | object $params
-     * @return \Jtl\Connector\Core\Rpc\Packet
+     * @param string $params
+     * @return RequestPacket
      */
-    public function setParams($params)
+    public function setParams(string $params): RequestPacket
     {
         $this->params = $params;
         return $this;
@@ -119,7 +117,7 @@ class RequestPacket extends Packet
      *
      * @param string $jtlrpc
      * @throws RpcException
-     * @return \Jtl\Connector\Core\Rpc\RequestPacket|multitype:\Jtl\Connector\Core\Rpc\RequestPacket
+     * @return RequestPacket|multitype:\Jtl\Connector\Core\Rpc\RequestPacket
      */
     public static function build($jtlrpc)
     {
@@ -133,34 +131,7 @@ class RequestPacket extends Packet
                     ->build();
 
                 return $serializer->deserialize($jtlrpc, 'Jtl\Connector\Core\Rpc\RequestPacket', 'json');
-                
-                /*
-                $data = Json::decode($jtlrpc);
 
-                // Single Mode
-                if (is_object($data)) {
-                    $requestpacket = new RequestPacket();
-                    $requestpacket->setOptions($data);
-
-                    return $requestpacket;
-                }
-
-                // Batch Mode
-                elseif (is_array($data)) {
-                    $requestpackets = array();
-                    foreach ($data as $packet) {
-                        $requestpacket = new RequestPacket();
-                        $requestpacket->setOptions($packet);
-
-                        $requestpackets[] = $requestpacket;
-                    }
-
-                    return $requestpackets;
-                }
-                else {
-                    throw new RpcException("Invalid Request", -32600);
-                }
-                */
             } catch (RpcException $exc) {
                 Logger::write(ExceptionFormatter::format($exc), Logger::ERROR, 'global');
 
