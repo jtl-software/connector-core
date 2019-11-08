@@ -1,3 +1,7 @@
+2.6.10
+-----
+- Removed infinity loop in session class to avoid warning
+
 2.6.9
 -----
 - Delete old Linking before saving the new on 
