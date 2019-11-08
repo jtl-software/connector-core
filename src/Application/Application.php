@@ -62,6 +62,7 @@ class Application implements IApplication
     const PROTOCOL_VERSION = 7;
     const MIN_PHP_VERSION = '7.1';
     const ENV_VAR_DEBUG_LOGGING = 'DEBUG_LOGGING';
+
     /**
      * Connected EndpointConnectors
      *
@@ -132,6 +133,7 @@ class Application implements IApplication
         try {
             $jtlrpc = HttpRequest::handle();
             $requestPacket = RequestPacket::build($jtlrpc);
+            $requestPacket->validate();
 
             $method = $requestPacket->getMethod();
 
@@ -167,7 +169,6 @@ class Application implements IApplication
                 ChecksumLinker::setChecksumLoader($this->endpointConnector->getChecksumLoader());
             }
 
-            $requestPacket->validate();
             $responsePacket = $this->execute($requestPacket);
         } catch (\Throwable $ex) {
             $error = new Error();

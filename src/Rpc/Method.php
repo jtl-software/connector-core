@@ -17,21 +17,21 @@ class Method
      *
      * @var string
      */
-    protected $rpcMethod;
+    protected $rpcMethod = '';
     
     /**
      * Connector Controller
      *
      * @var string
      */
-    protected $controller;
+    protected $controller = '';
     
     /**
      * Connector Action
      *
      * @var string
      */
-    protected $action;
+    protected $action = '';
     
     /**
      * Constructor
@@ -40,7 +40,7 @@ class Method
      * @param string $controller
      * @param string $action
      */
-    public function __construct($rpcMethod = null, $controller = null, $action = null)
+    public function __construct($rpcMethod = '', $controller = '', $action = '')
     {
         $this->rpcMethod = $rpcMethod;
         $this->controller = $controller;
@@ -52,7 +52,7 @@ class Method
      *
      * @return string
      */
-    public function getRpcMethod()
+    public function getRpcMethod(): string
     {
         return $this->rpcMethod;
     }
@@ -62,7 +62,7 @@ class Method
      *
      * @return string
      */
-    public function getController()
+    public function getController(): string
     {
         return $this->controller;
     }
@@ -72,27 +72,17 @@ class Method
      *
      * @return string
      */
-    public function getAction()
+    public function getAction(): string
     {
         return $this->action;
     }
-    
-    /**
-     * Commit check
-     *
-     * @return boolean
-     */
-    public function isCommit()
-    {
-        return ($this->action !== null && $this->action == "commit");
-    }
-    
+
     /**
      * Core check
      *
      * @return boolean
      */
-    public function isCore()
+    public function isCore(): bool
     {
         if ($this->getRpcMethod() !== false && strpos($this->getRpcMethod(), "core.") !== false) {
             return true;
@@ -107,7 +97,7 @@ class Method
      * @param string $rpcMethod
      * @return Method
      */
-    public function setRpcMethod($rpcMethod)
+    public function setRpcMethod($rpcMethod): Method
     {
         $this->rpcMethod = $rpcMethod;
         return $this;
@@ -119,7 +109,7 @@ class Method
      * @param string $controller
      * @return Method
      */
-    public function setController($controller)
+    public function setController($controller): Method
     {
         $this->controller = $controller;
         return $this;
@@ -131,7 +121,7 @@ class Method
      * @param string $action
      * @return Method
      */
-    public function setAction($action)
+    public function setAction($action): Method
     {
         $this->action = $action;
         return $this;

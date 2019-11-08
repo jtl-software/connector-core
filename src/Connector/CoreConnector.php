@@ -93,7 +93,7 @@ class CoreConnector implements ConnectorInterface, HandleRequestInterface
         $ControllerClass = sprintf('%s\%s', $this->getControllerNamespace(), $request->getController());
         $controllerObject = new $ControllerClass($application);
 
-        $param = count($request->getParams()) > 0 ? reset($params): null;
+        $param = count($request->getParams()) > 0 ? reset($request->getParams()): null;
         $result = $controllerObject->{$request->getAction()}($param);
         if(!$result instanceof Response) {
             $result = Response::create($result);

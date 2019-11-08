@@ -28,8 +28,8 @@ class RequestPacket extends Packet
      * @var string
      * @Serializer\Type("string")
      */
-    protected $method;
-    
+    protected $method = '';
+
     /**
      * A Structured value that holds the parameter values to be used during the
      * invocation of the method.
@@ -90,28 +90,28 @@ class RequestPacket extends Packet
     final public function validate()
     {
         $isValid = true;
-        
+
         // JSON-RPC protocol
-        if ($this->getJtlrpc() === null || $this->getJtlrpc() != "2.0") {
+        if ($this->getJtlrpc() != "2.0") {
             $isValid = false;
         }
-        
+
         // A String containing the name of the method to be invoked
-        if ($this->getMethod() === null || strlen($this->getMethod()) == 0) {
+        if ($this->getMethod() === '') {
             $isValid = false;
         }
-        
+
         // An identifier established by the Client that MUST contain a
         // String, Number, or NULL value if included
-        if ($this->getId() === null || strlen($this->getId()) == 0) {
+        if ($this->getId() === '') {
             $isValid = false;
         }
-        
+
         if (!$isValid) {
             throw new RpcException("Parse error", -32700);
         }
     }
-    
+
     /**
      * Build RequestPacket
      *
@@ -122,25 +122,16 @@ class RequestPacket extends Packet
     public static function build($jtlrpc)
     {
         if ($jtlrpc !== null) {
-            try {
-                $serializer = \JMS\Serializer\SerializerBuilder::create()
-                    ->addDefaultHandlers()
-                    ->configureHandlers(function (\JMS\Serializer\Handler\HandlerRegistry $registry) {
-                        $registry->registerSubscribingHandler(new \Jtl\Connector\Core\Serializer\Handler\JsonStringHandler());
-                    })
-                    ->build();
+            $serializer = \JMS\Serializer\SerializerBuilder::create()
+                ->addDefaultHandlers()
+                ->configureHandlers(function (\JMS\Serializer\Handler\HandlerRegistry $registry) {
+                    $registry->registerSubscribingHandler(new \Jtl\Connector\Core\Serializer\Handler\JsonStringHandler());
+                })
+                ->build();
 
-                return $serializer->deserialize($jtlrpc, 'Jtl\Connector\Core\Rpc\RequestPacket', 'json');
-
-            } catch (RpcException $exc) {
-                Logger::write(ExceptionFormatter::format($exc), Logger::ERROR, 'global');
-
-                throw $exc;
-            } catch (\Exception $exc) {
-                throw new RpcException("Parse error", -32700);
-            }
+            return $serializer->deserialize($jtlrpc, 'Jtl\Connector\Core\Rpc\RequestPacket', 'json');
         } else {
-            throw new RpcException("Invalid Request", -32600);
+            return (new static())->setMethod('undefined.undefined');
         }
     }
 }
