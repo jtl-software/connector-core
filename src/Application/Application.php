@@ -13,6 +13,7 @@ use Jtl\Connector\Core\Compression\Zip;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Connector\HandleRequestInterface;
 use Jtl\Connector\Core\Connector\ModelInterface;
+use Jtl\Connector\Core\Controller\TransactionalInterface;
 use Jtl\Connector\Core\Event\Handle\ResponseAfterHandleEvent;
 use Jtl\Connector\Core\Event\Handle\RequestBeforeHandleEvent;
 use Jtl\Connector\Core\Exception\CompressionException;
@@ -34,7 +35,6 @@ use Jtl\Connector\Core\Http\Response as HttpResponse;
 use Jtl\Connector\Core\Config\Config;
 use Jtl\Connector\Core\Exception\JsonException;
 use Jtl\Connector\Core\Exception\LinkerException;
-use Jtl\Connector\Core\Result\Action;
 use Jtl\Connector\Core\Utilities\RpcMethod;
 use Jtl\Connector\Core\Connector\CoreConnector;
 use Jtl\Connector\Core\Logger\Logger;
@@ -382,18 +382,37 @@ class Application implements IApplication
         $controllerObject = $this->container->get($controller);
 
         $result = [];
-        switch ($action) {
-            case Method::ACTION_PUSH:
-            case Method::ACTION_DELETE:
-                foreach ($params as $model) {
-                    $result[] = $controllerObject->$action($model);
-                }
-                break;
+        try {
+            switch ($action) {
+                case Method::ACTION_PUSH:
+                case Method::ACTION_DELETE:
+                    try {
+                        if ($controllerObject instanceof TransactionalInterface) {
+                            $controllerObject->beginTransaction();
+                        }
 
-            default:
-                $param = count($params) > 0 ? reset($params) : null;
-                $result = $controllerObject->$action($param);
-                break;
+                        foreach ($params as $model) {
+                            $result[] = $controllerObject->$action($model);
+                        }
+
+                        if ($controllerObject instanceof TransactionalInterface) {
+                            $controllerObject->commit();
+                        }
+                    } catch (\Throwable $ex) {
+                        if ($controllerObject instanceof TransactionalInterface) {
+                            $controllerObject->rollback();
+                        }
+                        throw $ex;
+                    }
+                    break;
+
+                default:
+                    $param = count($params) > 0 ? reset($params) : null;
+                    $result = $controllerObject->$action($param);
+                    break;
+            }
+        } catch (\Throwable $ex) {
+
         }
 
         if (!$result instanceof Response) {
