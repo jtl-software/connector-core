@@ -55,8 +55,8 @@ class Sqlite3 implements IDatabase
     /**
      * (non-PHPdoc)
      *
-     * @see \jtl\Connector\Core\Database\IDatabase::connect()
      * @throws \jtl\Connector\Core\Exception\DatabaseException
+     * @see \jtl\Connector\Core\Database\IDatabase::connect()
      */
     public function connect(array $options = null)
     {
@@ -146,20 +146,15 @@ class Sqlite3 implements IDatabase
      */
     public function fetch($query)
     {
-        while (true) {
-            $result = @$this->db->query($query);
-            if ($result instanceof \SQLite3Result) {
-                $rows = array();
-                while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-                    $rows[] = $row;
-                }
-
-                return $rows;
-                // Check if DB is locked //5 == \SQLITE_BUSY
-            } elseif ($this->db->lastErrorCode() !== 5) {
-                break;
+        $result = @$this->db->query($query);
+        if ($result instanceof \SQLite3Result) {
+            $rows = array();
+            while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+                $rows[] = $row;
             }
-        };
+
+            return $rows;
+        }
 
         return null;
     }
