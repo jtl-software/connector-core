@@ -9,7 +9,7 @@ namespace Jtl\Connector\Core\Model;
 
 use Exception;
 use InvalidArgumentException;
-use \Jtl\Connector\Core\Model\Model;
+use Jtl\Connector\Core\Model\AbstractModel;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -20,7 +20,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Internal
  * @Serializer\AccessType("public_method")
  */
-class Identity extends Model
+class Identity extends AbstractModel
 {
     /**
      * @var string

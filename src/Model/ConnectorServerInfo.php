@@ -15,7 +15,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ConnectorServerInfo extends DataModel
+class ConnectorServerInfo extends AbstractDataModel
 {
     /**
      * @var integer

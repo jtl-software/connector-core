@@ -11,7 +11,7 @@ namespace Jtl\Connector\Core\Database;
  *
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-interface IDatabase
+interface DatabaseInterface
 {
     /**
      * Connect to Database

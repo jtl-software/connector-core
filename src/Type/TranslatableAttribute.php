@@ -10,7 +10,7 @@ namespace Jtl\Connector\Core\Type;
  * Class TranslatableAttribute
  * @package Jtl\Connector\Core\Type
  */
-class TranslatableAttribute extends DataType
+class TranslatableAttribute extends AbstractDataType
 {
     /**
      * @return array|PropertyInfo[]

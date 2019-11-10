@@ -14,7 +14,7 @@ use Jtl\Connector\Core\Exception\DatabaseException;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-class Sqlite3 implements IDatabase
+class Sqlite3 implements DatabaseInterface
 {
     /**
      * Sqlite 3 sharedcache value
@@ -54,8 +54,8 @@ class Sqlite3 implements IDatabase
     /**
      * (non-PHPdoc)
      *
-     * @see \Jtl\Connector\Core\Database\IDatabase::connect()
-     * @throws \Jtl\Connector\Core\Exception\DatabaseException
+     * @throws Jtl\Connector\Core\Exception\DatabaseException
+     *@see Jtl\Connector\Core\Database\DatabaseInterface::connect()
      */
     public function connect(array $options = null)
     {
@@ -91,7 +91,7 @@ class Sqlite3 implements IDatabase
     /**
      * (non-PHPdoc)
      *
-     * @see \Jtl\Connector\Core\Database\IDatabase::close()
+     * @see Jtl\Connector\Core\Database\DatabaseInterface::close()
      */
     public function close()
     {
@@ -101,7 +101,7 @@ class Sqlite3 implements IDatabase
     /**
      * (non-PHPdoc)
      *
-     * @see \Jtl\Connector\Core\Database\IDatabase::query()
+     * @see Jtl\Connector\Core\Database\DatabaseInterface::query()
      */
     public function query($query)
     {
@@ -202,7 +202,7 @@ class Sqlite3 implements IDatabase
     /**
      * (non-PHPdoc)
      *
-     * @see \Jtl\Connector\Core\Database\IDatabase::isConnected()
+     * @see Jtl\Connector\Core\Database\DatabaseInterface::isConnected()
      */
     public function isConnected()
     {
@@ -231,7 +231,7 @@ class Sqlite3 implements IDatabase
 
     /**
      * (non-PHPdoc)
-     * @see \Jtl\Connector\Core\Database\IDatabase::escapeString()
+     * @see Jtl\Connector\Core\Database\DatabaseInterface::escapeString()
      */
     public function escapeString($query)
     {

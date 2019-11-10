@@ -6,15 +6,15 @@
 
 namespace Jtl\Connector\Core\Controller;
 
-use Jtl\Connector\Core\Model\DataModel;
+use Jtl\Connector\Core\Model\AbstractDataModel;
 
 interface DeleteInterface
 {
     /**
      * Delete
      *
-     * @param DataModel $model
-     * @return DataModel
+     * @param AbstractDataModel $model
+     * @return AbstractDataModel
      */
-    public function delete(DataModel $model): DataModel;
+    public function delete(AbstractDataModel $model): AbstractDataModel;
 }

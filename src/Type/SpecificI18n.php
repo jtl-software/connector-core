@@ -10,7 +10,7 @@ namespace Jtl\Connector\Core\Type;
  * @access public
  * @package Jtl\Connector\Core\Type
  */
-class SpecificI18n extends DataType
+class SpecificI18n extends AbstractDataType
 {
     protected function loadProperties()
     {

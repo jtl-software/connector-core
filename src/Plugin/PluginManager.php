@@ -5,12 +5,12 @@ use Jtl\Connector\Core\IO\Path;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class PluginLoader
+class PluginManager
 {
     /**
      * @param EventDispatcher $dispatcher
      */
-    public function load(EventDispatcher $dispatcher)
+    public static function loadPlugins(EventDispatcher $dispatcher)
     {
         $dir = Path::combine(CONNECTOR_DIR, 'plugins');
         $finder = new Finder();
@@ -22,7 +22,7 @@ class PluginLoader
             $class = sprintf('\\%s\\Bootstrap', str_replace(DIRECTORY_SEPARATOR, '\\', $file->getRelativePath()));
             if (class_exists($class)) {
                 $plugin = new $class();
-                if ($plugin instanceof IPlugin) {
+                if ($plugin instanceof PluginInterface) {
                     $plugin->registerListener($dispatcher);
                 }
             }

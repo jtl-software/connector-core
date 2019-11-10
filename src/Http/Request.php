@@ -24,7 +24,7 @@ class Request
      * @param string $method
      * @param string $root
      * @return Ambiguous <NULL, string>
-     * @throws \Jtl\Connector\Core\Exception\HttpException
+     * @throws Jtl\Connector\Core\Exception\HttpException
      */
     public static function get($method = "post", $root = "jtlrpc")
     {

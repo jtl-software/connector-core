@@ -3,45 +3,47 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Compression
  */
+
 namespace Jtl\Connector\Core\IO;
 
 class Temp
 {
     /**
-     * @return null|string
+     * @return string
+     * @throws \Exception
      */
-    public static function generateDirectory()
+    public static function createDirectory(): string
     {
         $dir = Path::combine(self::getDirectory(), 'con-' . uniqid());
         if (mkdir($dir)) {
             return $dir;
         }
 
-        return null;
+        throw new \Exception(sprintf('Could not create temp dir \'%s\'', $dir));
     }
-    
+
     /**
      * @return string
      * @throws \Exception
      */
-    public static function getDirectory()
+    public static function getDirectory(): string
     {
         $dir = sys_get_temp_dir();
         if (!is_writeable($dir)) {
             if (!defined('CONNECTOR_DIR')) {
                 throw new \Exception('Constant CONNECTOR_DIR is not defined');
             }
-            
+
             $dir = Path::combine(CONNECTOR_DIR, 'tmp');
         }
-    
+
         if (!is_writeable($dir)) {
             throw new \Exception(sprintf(
-                'Default temp directory and fallback directory \'%s\' is not writeable',
+                'System temp dir and fallback dir \'%s\' are not writeable',
                 $dir
             ));
         }
-        
+
         return $dir;
     }
 }

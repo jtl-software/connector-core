@@ -6,7 +6,7 @@
 
 namespace Jtl\Connector\Core\Controller;
 
-use Jtl\Connector\Core\Model\DataModel;
+use Jtl\Connector\Core\Model\AbstractDataModel;
 use Jtl\Connector\Core\Model\QueryFilter;
 
 interface PullInterface
@@ -15,7 +15,7 @@ interface PullInterface
      * Select
      *
      * @param QueryFilter $queryFilter
-     * @return DataModel[]
+     * @return AbstractDataModel[]
      */
     public function pull(QueryFilter $queryFilter): array;
 }

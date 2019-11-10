@@ -194,7 +194,7 @@ final class SqliteSession implements \SessionHandlerInterface
      * Destroy Session
      *
      * @param $sessionId
-     * @return bool|\Jtl\Connector\Core\Database\multitype|number|null
+     * @return bool|Jtl\Connector\Core\Database\multitype|number|null
      */
     public function destroy($sessionId)
     {
@@ -209,7 +209,7 @@ final class SqliteSession implements \SessionHandlerInterface
      * Garbage Collector
      *
      * @param $maxLifetime
-     * @return bool|\Jtl\Connector\Core\Database\multitype|number|null
+     * @return bool|Jtl\Connector\Core\Database\multitype|number|null
      */
     public function gc($maxLifetime)
     {

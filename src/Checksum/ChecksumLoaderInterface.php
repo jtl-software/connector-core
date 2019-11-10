@@ -6,7 +6,7 @@
 
 namespace Jtl\Connector\Core\Checksum;
 
-interface IChecksumLoader
+interface ChecksumLoaderInterface
 {
     /**
      * Loads the checksum

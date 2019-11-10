@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductVariation extends DataModel
+class ProductVariation extends AbstractDataModel
 {
     /**
      * @var string - Multiple values displayed as radio buttons.

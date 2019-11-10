@@ -13,7 +13,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @package Jtl\Connector\Core\Model\Customer
  * @Serializer\AccessType("public_method")
  */
-class KeyValueAttribute extends DataModel
+class KeyValueAttribute extends AbstractDataModel
 {
     /**
      * @var string Attribute value

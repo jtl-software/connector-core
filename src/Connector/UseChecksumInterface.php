@@ -5,16 +5,16 @@
  */
 namespace Jtl\Connector\Core\Connector;
 
-use Jtl\Connector\Core\Checksum\IChecksumLoader;
+use Jtl\Connector\Core\Checksum\ChecksumLoaderInterface;
 
 /**
  * Interface ChecksumInterface
  * @package Jtl\Connector\Core\Checksum
  */
-interface ChecksumInterface
+interface UseChecksumInterface
 {
     /**
-     * @return IChecksumLoader
+     * @return ChecksumLoaderInterface
      */
-    public function getChecksumLoader(): IChecksumLoader;
+    public function getChecksumLoader(): ChecksumLoaderInterface;
 }

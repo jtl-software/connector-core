@@ -5,7 +5,7 @@
  */
 namespace Jtl\Connector\Core\Mapper;
 
-interface IPrimaryKeyMapper
+interface PrimaryKeyMapperInterface
 {
     /**
      * Host ID getter

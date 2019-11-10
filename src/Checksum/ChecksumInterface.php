@@ -8,7 +8,7 @@ namespace Jtl\Connector\Core\Checksum;
 
 use Jtl\Connector\Core\Model\Identity;
 
-interface IChecksum
+interface ChecksumInterface
 {
     /**
      * @param Identity $foreignKey

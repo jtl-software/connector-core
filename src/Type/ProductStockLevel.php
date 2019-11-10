@@ -9,7 +9,7 @@ namespace Jtl\Connector\Core\Type;
  * @access public
  * @package Jtl\Connector\Core\Type
  */
-class ProductStockLevel extends DataType
+class ProductStockLevel extends AbstractDataType
 {
     protected function loadProperties()
     {

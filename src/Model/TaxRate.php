@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class TaxRate extends DataModel
+class TaxRate extends AbstractDataModel
 {
     /**
      * @var Identity

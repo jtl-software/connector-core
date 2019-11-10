@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductPriceItem extends DataModel
+class ProductPriceItem extends AbstractDataModel
 {
     /**
      * @var double Price value (net)

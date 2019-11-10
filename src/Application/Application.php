@@ -7,8 +7,8 @@
 namespace Jtl\Connector\Core\Application;
 
 use Jtl\Connector\Core\Application\Error\ErrorHandler;
-use Jtl\Connector\Core\Application\Error\IErrorHandler;
-use Jtl\Connector\Core\Connector\ChecksumInterface;
+use Jtl\Connector\Core\Application\Error\ErrorHandlerInterface;
+use Jtl\Connector\Core\Connector\UseChecksumInterface;
 use Jtl\Connector\Core\Compression\Zip;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Connector\HandleRequestInterface;
@@ -20,9 +20,9 @@ use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\HttpException;
 use Jtl\Connector\Core\IO\Temp;
 use Jtl\Connector\Core\Model\Image;
-use Jtl\Connector\Core\Model\Model;
+use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Model\QueryFilter;
-use Jtl\Connector\Core\Plugin\PluginLoader;
+use Jtl\Connector\Core\Plugin\PluginManager;
 use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Exception\SessionException;
@@ -41,8 +41,8 @@ use Jtl\Connector\Core\Logger\Logger;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Linker\IdentityLinker;
-use Jtl\Connector\Core\Model\DataModel;
-use Jtl\Connector\Core\Serializer\JMS\SerializerBuilder;
+use Jtl\Connector\Core\Model\AbstractDataModel;
+use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Session\SqliteSession;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -57,7 +57,7 @@ use Symfony\Component\Finder\Finder;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-class Application implements IApplication
+class Application implements ApplicationInterface
 {
     const PROTOCOL_VERSION = 7;
     const MIN_PHP_VERSION = '7.1';
@@ -88,7 +88,7 @@ class Application implements IApplication
     protected $eventDispatcher;
 
     /**
-     * @var IErrorHandler
+     * @var ErrorHandlerInterface
      */
     protected $errorHandler;
 
@@ -120,7 +120,7 @@ class Application implements IApplication
 
     /**
      * (non-PHPdoc)
-     * @see \Jtl\Connector\Core\Application\Application::run()
+     * @see Jtl\Connector\Core\Application\Application::run()
      */
     public function run(): void
     {
@@ -159,13 +159,13 @@ class Application implements IApplication
                 Logger::write(sprintf('Params: %s', $reqPacketsObj->params), Logger::DEBUG, 'rpc');
             }
 
-            // Register Event Dispatcher
-            $this->startEventDispatcher();
+            /** Load connector plugins */
+            PluginManager::loadPlugins($this->eventDispatcher);
 
             // Initialize Endpoint
             $this->endpointConnector->initialize($this);
 
-            if ($this->endpointConnector instanceof ChecksumInterface) {
+            if ($this->endpointConnector instanceof UseChecksumInterface) {
                 ChecksumLinker::setChecksumLoader($this->endpointConnector->getChecksumLoader());
             }
 
@@ -241,7 +241,7 @@ class Application implements IApplication
             $modelNamespace = $connector->getModelNamespace();
         }
 
-        $request = Request::create(RpcMethod::buildController($method->getController()), $method->getAction(), []);
+        $request = Request::create(RpcMethod::buildController($method->getController()), $method->getAction(), [$requestPacket->getParams()]);
         if (!$method->isCore()) {
             $request = $this->createHandleRequest($requestPacket, $modelNamespace);
             if (strtolower($request->getController()) === 'image' && $request->getAction() === Method::ACTION_PUSH) {
@@ -263,7 +263,7 @@ class Application implements IApplication
             $models = is_array($response->getResult()) ? $response->getResult() : [$response->getResult()];
 
             foreach ($models as $model) {
-                if ($model instanceof DataModel) {
+                if ($model instanceof AbstractDataModel) {
                     $identityLinker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
                     $this->linkChecksum($model);
 
@@ -508,12 +508,6 @@ class Application implements IApplication
         Logger::write(sprintf('Session started with id (%s)', session_id()), Logger::DEBUG, 'session');
     }
 
-    protected function startEventDispatcher(): void
-    {
-        $loader = new PluginLoader();
-        $loader->load($this->eventDispatcher);
-    }
-
     /**
      * @param Image ...$images
      * @throws ApplicationException
@@ -524,7 +518,7 @@ class Application implements IApplication
     {
         $imagePaths = [];
         $zipFile = HttpRequest::handleFileupload();
-        $tempDir = Temp::generateDirectory();
+        $tempDir = Temp::createDirectory();
         if ($zipFile !== null && $tempDir !== null) {
             $archive = new Zip();
             if ($archive->extract($zipFile, $tempDir)) {
@@ -591,9 +585,9 @@ class Application implements IApplication
     }
 
     /**
-     * @param Model $model
+     * @param AbstractModel $model
      */
-    protected function linkChecksum(Model $model): void
+    protected function linkChecksum(AbstractModel $model): void
     {
         if (ChecksumLinker::checksumLoaderExists()) {
             ChecksumLinker::link($model);
@@ -649,18 +643,18 @@ class Application implements IApplication
     }
 
     /**
-     * @return IErrorHandler
+     * @return ErrorHandlerInterface
      */
-    public function getErrorHandler(): ?IErrorHandler
+    public function getErrorHandler(): ?ErrorHandlerInterface
     {
         return $this->errorHandler;
     }
 
     /**
-     * @param IErrorHandler $handler
+     * @param ErrorHandlerInterface $handler
      * @return $this
      */
-    public function setErrorHandler(IErrorHandler $handler): Application
+    public function setErrorHandler(ErrorHandlerInterface $handler): Application
     {
         $this->errorHandler = $handler;
 

@@ -10,7 +10,7 @@ namespace Jtl\Connector\Core\Type;
  * @access public
  * @package Jtl\Connector\Core\Type
  */
-class BoolResult extends DataType
+class BoolResult extends AbstractDataType
 {
     protected function loadProperties()
     {

@@ -5,8 +5,8 @@
  */
 namespace Jtl\Connector\Core\Connector;
 
-use Jtl\Connector\Core\Authentication\ITokenValidator;
-use Jtl\Connector\Core\Mapper\IPrimaryKeyMapper;
+use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
+use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Application\Application;
 
 /**
@@ -21,14 +21,14 @@ interface ConnectorInterface
     public function initialize(Application $application);
     
     /**
-     * @return IPrimaryKeyMapper
+     * @return PrimaryKeyMapperInterface
      */
-    public function getPrimaryKeyMapper(): IPrimaryKeyMapper;
+    public function getPrimaryKeyMapper(): PrimaryKeyMapperInterface;
 
     /**
-     * @return ITokenValidator
+     * @return TokenValidatorInterface
      */
-    public function getTokenValidator(): ITokenValidator;
+    public function getTokenValidator(): TokenValidatorInterface;
 
     /**
      * @return string

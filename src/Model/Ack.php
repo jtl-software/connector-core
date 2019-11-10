@@ -9,7 +9,7 @@ namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 use \Doctrine\Common\Collections\ArrayCollection;
-use Jtl\Connector\Core\Checksum\IChecksum;
+use Jtl\Connector\Core\Checksum\ChecksumInterface;
 
 /**
  * Ack
@@ -19,7 +19,7 @@ use Jtl\Connector\Core\Checksum\IChecksum;
  * @subpackage Internal
  * @Serializer\AccessType("public_method")
  */
-class Ack extends DataModel
+class Ack extends AbstractDataModel
 {
     /**
      * @var ArrayCollection list
@@ -30,7 +30,7 @@ class Ack extends DataModel
     protected $identities = null;
     
     /**
-     * @var Checksum[]
+     * @var ChecksumInterface[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\Checksum>")
      * @Serializer\SerializedName("checksums")
      * @Serializer\AccessType("reflection")
@@ -61,10 +61,10 @@ class Ack extends DataModel
     }
     
     /**
-     * @param Checksum $checksum
+     * @param ChecksumInterface $checksum
      * @return Ack
      */
-    public function addChecksum(Checksum $checksum): Ack
+    public function addChecksum(ChecksumInterface $checksum): Ack
     {
         $this->checksums[] = $checksum;
         
@@ -72,7 +72,7 @@ class Ack extends DataModel
     }
     
     /**
-     * @return IChecksum[]
+     * @return ChecksumInterface[]
      */
     public function getChecksums(): array
     {

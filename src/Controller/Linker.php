@@ -7,9 +7,7 @@
 
 namespace Jtl\Connector\Core\Controller;
 
-use \Jtl\Connector\Core\Result\Action;
-use \Jtl\Connector\Core\Rpc\Error;
-use \Jtl\Connector\Core\Linker\IdentityLinker;
+use Jtl\Connector\Core\Linker\IdentityLinker;
 
 /**
  * Base Linker Controller

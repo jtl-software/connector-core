@@ -6,7 +6,7 @@
 
 namespace Jtl\Connector\Core\Formatter;
 
-use \Jtl\Connector\Core\Result\Mysql;
+use Jtl\Connector\Core\Result\Mysql;
 
 class MysqlResultFormatter
 {

@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CategoryInvisibility extends DataModel
+class CategoryInvisibility extends AbstractDataModel
 {
     /**
      * @var Identity Reference to customerGroup that is not allowed to view categoryId

@@ -16,12 +16,11 @@ use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Features;
 use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\System\Check;
-use Jtl\Connector\Core\Result\Action;
 use Jtl\Connector\Core\Linker\IdentityLinker;
-use Jtl\Connector\Core\Serializer\JMS\SerializerBuilder;
+use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
-use Jtl\Connector\Core\Checksum\IChecksum;
+use Jtl\Connector\Core\Checksum\ChecksumInterface;
 
 /**
  * Base Config Controller
@@ -64,8 +63,8 @@ class Connector extends AbstractController
     }
 
     /**
-     * @param null $params
-     * @return bool
+     * @param string|null $params
+     * @return boolean
      * @throws LinkerException
      */
     public function ack($params = null)
@@ -91,7 +90,7 @@ class Connector extends AbstractController
         if (ChecksumLinker::checksumLoaderExists()) {
             // Checksum linking
             foreach ($ack->getChecksums() as $checksum) {
-                if ($checksum instanceof IChecksum) {
+                if ($checksum instanceof ChecksumInterface) {
                     if (!ChecksumLinker::save($checksum)) {
                         Logger::write(sprintf(
                             'Could not save checksum for endpoint (%s), host (%s) and type (%s)',
@@ -108,9 +107,9 @@ class Connector extends AbstractController
     }
 
     /**
-     * @param $params
+     * @param string $params
      * @return bool|\stdClass
-     * @throws \Exception
+     * @throws ApplicationException
      */
     public function auth($params)
     {
@@ -143,7 +142,7 @@ class Connector extends AbstractController
     }
 
     /**
-     * @return Action
+     * @return mixed
      */
     public function debug()
     {
@@ -169,7 +168,7 @@ class Connector extends AbstractController
     }
 
     /**
-     * @return Action
+     * @return array
      */
     public function logs()
     {

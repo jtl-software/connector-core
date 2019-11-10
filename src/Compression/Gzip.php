@@ -17,8 +17,8 @@ class Gzip implements ICompression
 {
     /**
      * (non-PHPdoc)
-     * @see \Jtl\Connector\Core\Compression\ICompression::read()
-     * @throws \Jtl\Connector\Core\Exception\CompressionException
+     * @see Jtl\Connector\Core\Compression\ICompression::read()
+     * @throws Jtl\Connector\Core\Exception\CompressionException
      */
     public function read($file)
     {
@@ -53,7 +53,7 @@ class Gzip implements ICompression
     
     /**
      * (non-PHPdoc)
-     * @see \Jtl\Connector\Core\Compression\ICompression::write()
+     * @see Jtl\Connector\Core\Compression\ICompression::write()
      */
     public function write($filename, $content)
     {

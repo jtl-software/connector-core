@@ -9,7 +9,7 @@ namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
-use Jtl\Connector\Core\Checksum\IChecksum;
+use Jtl\Connector\Core\Checksum\ChecksumInterface;
 
 /**
  * @access public
@@ -17,7 +17,7 @@ use Jtl\Connector\Core\Checksum\IChecksum;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Checksum extends DataModel implements IChecksum
+class ChecksumInterface extends AbstractDataModel implements ChecksumInterface
 {
     /**
      * @var int - Checksum used to check variations for change
@@ -74,7 +74,7 @@ class Checksum extends DataModel implements IChecksum
     
     /**
      * @param Identity $foreignKey
-     * @return Checksum
+     * @return ChecksumInterface
      * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setForeignKey(Identity $foreignKey)
@@ -94,7 +94,7 @@ class Checksum extends DataModel implements IChecksum
     
     /**
      * @param string $endpoint
-     * @return Checksum
+     * @return ChecksumInterface
      */
     public function setEndpoint(string $endpoint)
     {
@@ -113,7 +113,7 @@ class Checksum extends DataModel implements IChecksum
     
     /**
      * @param boolean $hasChanged
-     * @return Checksum
+     * @return ChecksumInterface
      */
     public function setHasChanged(bool $hasChanged)
     {
@@ -140,7 +140,7 @@ class Checksum extends DataModel implements IChecksum
     
     /**
      * @param string $host
-     * @return Checksum
+     * @return ChecksumInterface
      */
     public function setHost(string $host)
     {
@@ -159,7 +159,7 @@ class Checksum extends DataModel implements IChecksum
     
     /**
      * @param integer $type
-     * @return Checksum
+     * @return ChecksumInterface
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
      */
     public function setType(int $type)

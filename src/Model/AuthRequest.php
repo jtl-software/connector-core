@@ -15,7 +15,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  * @Serializer\ExclusionPolicy("none");
  */
-class AuthRequest extends Model
+class AuthRequest extends AbstractModel
 {
     /**
      * @var string

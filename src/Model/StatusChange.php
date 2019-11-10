@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class StatusChange extends DataModel
+class StatusChange extends AbstractDataModel
 {
     /**
      * @var Identity

@@ -3,10 +3,8 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
  */
-
 namespace Jtl\Connector\Core\Type;
 
-use Jtl\Connector\Core\Type\PropertyInfo;
 
 /**
  * Entity data model
@@ -14,7 +12,7 @@ use Jtl\Connector\Core\Type\PropertyInfo;
  * @access public
  * @package Jtl\Connector\Core\Type
  */
-abstract class DataType
+abstract class AbstractDataType
 {
     /**
      * List of PropertyInfos

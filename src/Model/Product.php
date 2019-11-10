@@ -19,7 +19,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Product extends DataModel
+class Product extends AbstractDataModel
 {
     /**
      * @var Identity Optional reference to basePriceUnit

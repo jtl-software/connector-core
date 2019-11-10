@@ -6,7 +6,7 @@
 
 namespace Jtl\Connector\Core\Utilities;
 
-use \Jtl\Connector\Core\Rpc\Method;
+use Jtl\Connector\Core\Rpc\Method;
 
 /**
  * Rpc Method Utilities
@@ -40,7 +40,7 @@ class RpcMethod
      * Controller and Action Splitter
      *
      * @param string $method
-     * @return \Jtl\Connector\Core\Rpc\Method
+     * @return Jtl\Connector\Core\Rpc\Method
      */
     public static function splitMethod($method)
     {

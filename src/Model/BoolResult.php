@@ -17,7 +17,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Internal
  * @Serializer\AccessType("public_method")
  */
-class BoolResult extends DataModel
+class BoolResult extends AbstractDataModel
 {
     /**
      * @var bool
@@ -36,7 +36,7 @@ class BoolResult extends DataModel
      * @param bool $result
      * @return BoolResult
      */
-    public function setResult(bool $result): DataModel
+    public function setResult(bool $result): AbstractDataModel
     {
         $this->result = $result;
         

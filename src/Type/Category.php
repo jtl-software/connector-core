@@ -10,7 +10,7 @@ namespace Jtl\Connector\Core\Type;
  * @access public
  * @package Jtl\Connector\Core\Type
  */
-class Category extends DataType
+class Category extends AbstractDataType
 {
     protected function loadProperties()
     {

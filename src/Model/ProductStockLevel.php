@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductStockLevel extends DataModel
+class ProductStockLevel extends AbstractDataModel
 {
     /**
      * @var Identity
@@ -45,7 +45,7 @@ class ProductStockLevel extends DataModel
 
     /**
      * @param Identity $productId
-     * @return \Jtl\Connector\Core\Model\ProductStockLevel
+     * @return Jtl\Connector\Core\Model\ProductStockLevel
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId): ProductStockLevel

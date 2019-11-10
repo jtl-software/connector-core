@@ -6,13 +6,13 @@
 
 namespace Jtl\Connector\Core\Type;
 
-use \Jtl\Connector\Core\Type\PropertyInfo;
+use Jtl\Connector\Core\Type\PropertyInfo;
 
 /**
  * @access public
  * @package Jtl\Connector\Core\Type
  */
-class Payment extends DataType
+class Payment extends AbstractDataType
 {
     protected function loadProperties()
     {

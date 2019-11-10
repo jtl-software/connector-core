@@ -3,20 +3,13 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Base
  */
-
 namespace Jtl\Connector\Core\Connector;
 
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Application\Request;
 use Jtl\Connector\Core\Application\Response;
-use Jtl\Connector\Core\Authentication\ITokenValidator;
-use Jtl\Connector\Core\Exception\RpcException;
-use Jtl\Connector\Core\Model\DataModel;
-use Jtl\Connector\Core\Rpc\RequestPacket;
-use Jtl\Connector\Core\Utilities\RpcMethod;
-use Jtl\Connector\Core\Mapper\IPrimaryKeyMapper;
-use Jtl\Connector\Core\Result\Action;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
+use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 
 /**
  * Base Connector
@@ -27,12 +20,12 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 class CoreConnector implements ConnectorInterface, HandleRequestInterface
 {
     /**
-     * @var IPrimaryKeyMapper
+     * @var PrimaryKeyMapperInterface
      */
     protected $primaryKeyMapper;
 
     /**
-     * @var ITokenValidator
+     * @var TokenValidatorInterface
      */
     protected $tokenValidator;
 
@@ -43,10 +36,10 @@ class CoreConnector implements ConnectorInterface, HandleRequestInterface
 
     /**
      * CoreConnector constructor.
-     * @param IPrimaryKeyMapper $primaryKeyMapper
-     * @param ITokenValidator $tokenValidator
+     * @param PrimaryKeyMapperInterface $primaryKeyMapper
+     * @param TokenValidatorInterface $tokenValidator
      */
-    public function __construct(IPrimaryKeyMapper $primaryKeyMapper, ITokenValidator $tokenValidator)
+    public function __construct(PrimaryKeyMapperInterface $primaryKeyMapper, TokenValidatorInterface $tokenValidator)
     {
         $this->primaryKeyMapper = $primaryKeyMapper;
         $this->tokenValidator = $tokenValidator;
@@ -60,17 +53,17 @@ class CoreConnector implements ConnectorInterface, HandleRequestInterface
     /**
      * Returns primary key mapper
      *
-     * @return IPrimaryKeyMapper
+     * @return PrimaryKeyMapperInterface
      */
-    public function getPrimaryKeyMapper(): IPrimaryKeyMapper
+    public function getPrimaryKeyMapper(): PrimaryKeyMapperInterface
     {
         return $this->primaryKeyMapper;
     }
 
     /**
-     * @return ITokenValidator
+     * @return TokenValidatorInterface
      */
-    public function getTokenValidator(): ITokenValidator
+    public function getTokenValidator(): TokenValidatorInterface
     {
         return $this->tokenValidator;
     }

@@ -16,7 +16,7 @@ use stdClass;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-abstract class Model
+abstract class AbstractModel
 {
     /**
      * Constructor
@@ -43,9 +43,9 @@ abstract class Model
      *
      * @param stdClass $object
      * @param array $options
-     * @return Model
+     * @return AbstractModel
      */
-    public function setOptions(stdClass $object = null, array $options = null): Model
+    public function setOptions(stdClass $object = null, array $options = null): AbstractModel
     {
         if ($object !== null && is_object($object)) {
             $members = array_keys(get_object_vars($object));

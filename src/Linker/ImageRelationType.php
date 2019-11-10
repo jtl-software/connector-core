@@ -1,10 +1,10 @@
 <?php
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Drawing
+ * @package Jtl\Connector\Core\Linker
  */
 
-namespace Jtl\Connector\Core\Drawing;
+namespace Jtl\Connector\Core\Linker;
 
 class ImageRelationType
 {

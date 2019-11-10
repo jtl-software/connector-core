@@ -6,7 +6,7 @@
 
 namespace Jtl\Connector\Core\Authentication;
 
-interface ITokenValidator
+interface TokenValidatorInterface
 {
     /**
      * @param string $token

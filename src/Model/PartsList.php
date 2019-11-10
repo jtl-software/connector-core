@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class PartsList extends DataModel
+class PartsList extends AbstractDataModel
 {
     /**
      * @var Identity Unique PartsList id, referenced by product.PartsListId

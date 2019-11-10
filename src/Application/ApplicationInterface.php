@@ -6,7 +6,7 @@
  */
 namespace Jtl\Connector\Core\Application;
 
-interface IApplication
+interface ApplicationInterface
 {
     public function run();
 }

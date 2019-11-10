@@ -6,7 +6,7 @@
 
 namespace Jtl\Connector\Core\Utilities;
 
-use \Jtl\Connector\Core\Exception\CountryException;
+use Jtl\Connector\Core\Exception\CountryException;
 
 class Country
 {

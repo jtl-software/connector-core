@@ -14,7 +14,7 @@ use Jtl\Connector\Core\Exception\JsonException;
  * @access public
  * @author Andreas Jütten <andy@jtl-software.de>
  */
-class Json implements ISerializer
+class Json
 {
     public static function encode($object, $pretty = false)
     {

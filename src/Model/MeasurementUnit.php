@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class MeasurementUnit extends DataModel
+class MeasurementUnit extends AbstractDataModel
 {
     /**
      * @var Identity Unit id

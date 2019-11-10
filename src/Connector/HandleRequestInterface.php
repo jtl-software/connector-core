@@ -4,9 +4,6 @@ namespace Jtl\Connector\Core\Connector;
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Application\Request;
 use Jtl\Connector\Core\Application\Response;
-use Jtl\Connector\Core\Model\DataModel;
-use Jtl\Connector\Core\Result\Action;
-use Jtl\Connector\Core\Rpc\RequestPacket;
 
 interface HandleRequestInterface
 {

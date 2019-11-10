@@ -6,7 +6,7 @@
 
 namespace Jtl\Connector\Core\Utilities;
 
-use \Jtl\Connector\Core\Exception\LanguageException;
+use Jtl\Connector\Core\Exception\LanguageException;
 
 class Language
 {

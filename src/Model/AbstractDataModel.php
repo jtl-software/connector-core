@@ -11,8 +11,8 @@ use DateTime;
 use InvalidArgumentException;
 use Jtl\Connector\Core\Exception\NotImplementedException;
 use JMS\Serializer\Annotation as Serializer;
-use Jtl\Connector\Core\Model\Model;
-use Jtl\Connector\Core\Type\DataType;
+use Jtl\Connector\Core\Model\AbstractModel;
+use Jtl\Connector\Core\Type\AbstractDataType;
 use ReflectionClass;
 use ReflectionException;
 use stdClass;
@@ -25,10 +25,10 @@ use stdClass;
  * @subpackage Internal
  * @Serializer\AccessType("public_method")
  */
-abstract class DataModel extends Model
+abstract class AbstractDataModel extends AbstractModel
 {
     /**
-     * @var DataType
+     * @var AbstractDataType
      * @Serializer\Type("Jtl\Connector\Core\Type\DataType")
      * @Serializer\AccessType("reflection")
      * @Serializer\Exclude
@@ -85,10 +85,10 @@ abstract class DataModel extends Model
     }
     
     /**
-     * @return DataType
+     * @return AbstractDataType
      * @throws ReflectionException
      */
-    public function getModelType(): DataType
+    public function getModelType(): AbstractDataType
     {
         if ($this->_type === null) {
             $reflect = new ReflectionClass($this);
@@ -123,7 +123,7 @@ abstract class DataModel extends Model
         $recursive = function (array $subElems, array $publics) use (&$recursive) {
             $arr = [];
             foreach ($subElems as $subElem) {
-                if ($subElem instanceof DataModel) {
+                if ($subElem instanceof AbstractDataModel) {
                     $arr[] = $subElem->getPublic($publics);
                 } elseif ($subElem instanceof Identity) {
                     $arr[] = $subElem->toArray();
@@ -146,7 +146,7 @@ abstract class DataModel extends Model
                 $getter = 'get' . $property;
                 
                 if (!in_array($member, $publics, true)) {
-                    if ($this->{$getter}() instanceof DataModel) {
+                    if ($this->{$getter}() instanceof AbstractDataModel) {
                         $object->{$member} = $this->{$getter}()->getPublic($publics);
                     } elseif ($this->{$getter}() instanceof Identity) {
                         $object->{$member} = $this->{$getter}()->toArray();
@@ -168,10 +168,10 @@ abstract class DataModel extends Model
      * @param string $propertyName
      * @param string|null $endpoint
      * @param int|null $host
-     * @return DataModel
+     * @return AbstractDataModel
      * @throws ReflectionException
      */
-    public function setIdentity(string $propertyName, string $endpoint = null, int $host = null): DataModel
+    public function setIdentity(string $propertyName, string $endpoint = null, int $host = null): AbstractDataModel
     {
         foreach ($this->getModelType()->getProperties() as $propertyInfo) {
             $property = ucfirst($propertyInfo->getName());
@@ -213,7 +213,7 @@ abstract class DataModel extends Model
         }
     }
     
-    protected function setProperty($name, $value, $type): DataModel
+    protected function setProperty($name, $value, $type): AbstractDataModel
     {
         if (!$this->validateType($value, $type)) {
             throw new InvalidArgumentException(sprintf(
@@ -256,7 +256,7 @@ abstract class DataModel extends Model
                 return ($value instanceof DateTime);
             default:
                 if (is_object($value)) {
-                    return is_null($value) || is_subclass_of($value, 'Jtl\Connector\Core\Model\DataModel');
+                    return is_null($value) || is_subclass_of($value, 'Jtl\Connector\Core\Model\AbstractDataModel');
                 }
                 
                 throw new InvalidArgumentException(sprintf("type '%s' validator not found", $type));

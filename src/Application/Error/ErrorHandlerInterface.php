@@ -8,7 +8,7 @@ namespace Jtl\Connector\Core\Application\Error;
 
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-interface IErrorHandler
+interface ErrorHandlerInterface
 {
     /**
      * @param callable $func

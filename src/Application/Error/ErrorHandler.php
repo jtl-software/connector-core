@@ -16,7 +16,7 @@ use Jtl\Connector\Core\Event\EventHandler;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Jtl\Connector\Core\Formatter\ExceptionFormatter;
 
-class ErrorHandler implements IErrorHandler
+class ErrorHandler implements ErrorHandlerInterface
 {
     /**
      * @var EventDispatcher

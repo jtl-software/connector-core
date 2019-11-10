@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class TaxZoneCountry extends DataModel
+class TaxZoneCountry extends AbstractDataModel
 {
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)

@@ -2,7 +2,7 @@
 namespace Jtl\Connector\Core\Event;
 
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Jtl\Connector\Core\Model\DataModel;
+use Jtl\Connector\Core\Model\AbstractDataModel;
 use Jtl\Connector\Core\Model\QueryFilter;
 use Jtl\Connector\Core\Utilities\ClassName;
 use Symfony\Contracts\EventDispatcher\Event;
@@ -22,7 +22,7 @@ class EventHandler
      */
     public static function dispatch(&$entity, EventDispatcher $dispatcher, string $action, string $moment, string $class = null, bool $isCore = false)
     {
-        if (!$isCore && (!($entity instanceof DataModel) && !($entity instanceof QueryFilter)) || strlen(trim($action)) == 0 || strlen(trim($moment)) == 0) {
+        if (!$isCore && (!($entity instanceof AbstractDataModel) && !($entity instanceof QueryFilter)) || strlen(trim($action)) == 0 || strlen(trim($moment)) == 0) {
             return;
         }
 
@@ -68,7 +68,7 @@ class EventHandler
      */
     protected static function createEvent(&$entity, string $class, string $action, string $moment, bool $isCore): ?Event
     {
-        $eventClassname = sprintf('\Jtl\Connector\Core\Event\%s\%s%s%sEvent', $class, $class, ucfirst($moment), ucfirst($action));
+        $eventClassname = sprintf('Jtl\Connector\Core\Event\%s\%s%s%sEvent', $class, $class, ucfirst($moment), ucfirst($action));
 
         if (class_exists($eventClassname)) {
             return new $eventClassname($entity);
@@ -86,7 +86,7 @@ class EventHandler
      */
     protected static function createRpcEvent(&$data, string $controller, string $action, string $moment): ?Event
     {
-        $eventClassname = sprintf('\Jtl\Connector\Core\Event\Rpc\Rpc%sEvent', ucfirst($moment));
+        $eventClassname = sprintf('Jtl\Connector\Core\Event\Rpc\Rpc%sEvent', ucfirst($moment));
 
         if (class_exists($eventClassname)) {
             return new $eventClassname($data, $controller, $action);

@@ -15,7 +15,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class GlobalData extends DataModel
+class GlobalData extends AbstractDataModel
 {
     /**
      * @var ConfigGroup[]

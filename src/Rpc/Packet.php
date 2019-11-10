@@ -6,7 +6,7 @@
  */
 namespace Jtl\Connector\Core\Rpc;
 
-use \Jtl\Connector\Core\Model\Model;
+use Jtl\Connector\Core\Model\AbstractModel;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -15,7 +15,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-abstract class Packet extends Model
+abstract class Packet extends AbstractModel
 {
     /**
      * A String specifying the version of the JSON-RPC protocol.

@@ -7,7 +7,7 @@
 
 namespace Jtl\Connector\Core\Rpc;
 
-use Jtl\Connector\Core\Model\Model;
+use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Exception\RpcException;
 use JMS\Serializer\Annotation as Serializer;
 
@@ -17,7 +17,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-class Error extends Model
+class Error extends AbstractModel
 {
     /**
      * A Number that indicates the error type that occurred.
@@ -64,7 +64,7 @@ class Error extends Model
      * Setter for $code
      *
      * @param int $code
-     * @return \Jtl\Connector\Core\Rpc\Error
+     * @return Jtl\Connector\Core\Rpc\Error
      */
     public function setCode($code)
     {
@@ -86,7 +86,7 @@ class Error extends Model
      * Setter for $message
      *
      * @param string $message
-     * @return \Jtl\Connector\Core\Rpc\Error
+     * @return Jtl\Connector\Core\Rpc\Error
      */
     public function setMessage($message)
     {
@@ -109,7 +109,7 @@ class Error extends Model
      *
      * @param
      *            integer | string | array | object $data
-     * @return \Jtl\Connector\Core\Rpc\Error
+     * @return Jtl\Connector\Core\Rpc\Error
      */
     public function setData($data)
     {

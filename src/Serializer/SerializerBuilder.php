@@ -3,7 +3,7 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Serializer\Handler
  */
-namespace Jtl\Connector\Core\Serializer\JMS;
+namespace Jtl\Connector\Core\Serializer;
 
 use JMS\Serializer\EventDispatcher\EventDispatcher;
 use JMS\Serializer\Handler\HandlerRegistry;

@@ -6,9 +6,10 @@
 namespace Jtl\Connector\Core\Rpc;
 
 use JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Handler\HandlerRegistry;
+use JMS\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Exception\RpcException;
-use Jtl\Connector\Core\Logger\Logger;
-use Jtl\Connector\Core\Formatter\ExceptionFormatter;
+use Jtl\Connector\Core\Serializer\Handler\JsonStringHandler;
 
 /**
  * Rpc Request Packet
@@ -56,7 +57,7 @@ class RequestPacket extends Packet
      * @param string $method
      * @return Packet
      */
-    public function setMethod(string $method)
+    public function setMethod(string $method): RequestPacket
     {
         $this->method = $method;
         return $this;
@@ -117,19 +118,19 @@ class RequestPacket extends Packet
      *
      * @param string $jtlrpc
      * @throws RpcException
-     * @return RequestPacket|multitype:\Jtl\Connector\Core\Rpc\RequestPacket
+     * @return RequestPacket|multitype:Jtl\Connector\Core\Rpc\RequestPacket
      */
-    public static function build($jtlrpc)
+    public static function build($jtlrpc): RequestPacket
     {
         if ($jtlrpc !== null) {
-            $serializer = \JMS\Serializer\SerializerBuilder::create()
+            $serializer = SerializerBuilder::create()
                 ->addDefaultHandlers()
-                ->configureHandlers(function (\JMS\Serializer\Handler\HandlerRegistry $registry) {
-                    $registry->registerSubscribingHandler(new \Jtl\Connector\Core\Serializer\Handler\JsonStringHandler());
+                ->configureHandlers(function (HandlerRegistry $registry) {
+                    $registry->registerSubscribingHandler(new JsonStringHandler());
                 })
                 ->build();
 
-            return $serializer->deserialize($jtlrpc, 'Jtl\Connector\Core\Rpc\RequestPacket', 'json');
+            return $serializer->deserialize($jtlrpc, RequestPacket::class, 'json');
         } else {
             return (new static())->setMethod('undefined.undefined');
         }

@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CrossSellingItem extends DataModel
+class CrossSellingItem extends AbstractDataModel
 {
     /**
      * @var Identity Reference to crossSellingGroup

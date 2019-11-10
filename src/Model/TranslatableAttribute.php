@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @package Jtl\Connector\Core\Model\TranslatableAttribute
  * @Serializer\AccessType("public_method")
  */
-class TranslatableAttribute extends DataModel
+class TranslatableAttribute extends AbstractDataModel
 {
     /**
      * @var boolean

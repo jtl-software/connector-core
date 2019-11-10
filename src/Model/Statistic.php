@@ -17,7 +17,7 @@ use stdClass;
  * @package Jtl\Connector\Core\Model
  * @subpackage Internal
  */
-class Statistic extends DataModel
+class Statistic extends AbstractDataModel
 {
     /**
      * @type int
@@ -33,7 +33,7 @@ class Statistic extends DataModel
      * (non-PHPdoc)
      * @param bool $toWawi
      * @param stdClass|null $obj
-     * @see \Jtl\Connector\Core\Model\DataModel::map()
+     * @see Jtl\Connector\Core\Model\AbstractDataModel::map()
      */
     public function map(bool $toWawi = false, stdClass $obj = null)
     {
