@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductChecksum extends ChecksumInterface
+class ProductChecksum extends Checksum
 {
     /**
      * @var int - Checksum used to check variations for change

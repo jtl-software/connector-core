@@ -12,7 +12,7 @@ use Jtl\Connector\Core\Type\PropertyInfo;
  * @access public
  * @package Jtl\Connector\Core\Type
  */
-class ProductTypeAbstract extends AbstractDataType
+class ProductType extends AbstractDataType
 {
     protected function loadProperties()
     {

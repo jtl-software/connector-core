@@ -30,7 +30,7 @@ class Ack extends AbstractDataModel
     protected $identities = null;
     
     /**
-     * @var ChecksumInterface[]
+     * @var Checksum[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\Checksum>")
      * @Serializer\SerializedName("checksums")
      * @Serializer\AccessType("reflection")
@@ -61,7 +61,7 @@ class Ack extends AbstractDataModel
     }
     
     /**
-     * @param ChecksumInterface $checksum
+     * @param Checksum $checksum
      * @return Ack
      */
     public function addChecksum(ChecksumInterface $checksum): Ack
@@ -72,7 +72,7 @@ class Ack extends AbstractDataModel
     }
     
     /**
-     * @return ChecksumInterface[]
+     * @return Checksum[]
      */
     public function getChecksums(): array
     {

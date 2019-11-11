@@ -17,7 +17,7 @@ use Jtl\Connector\Core\Checksum\ChecksumInterface;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ChecksumInterface extends AbstractDataModel implements ChecksumInterface
+class Checksum extends AbstractDataModel implements ChecksumInterface
 {
     /**
      * @var int - Checksum used to check variations for change
@@ -74,7 +74,7 @@ class ChecksumInterface extends AbstractDataModel implements ChecksumInterface
     
     /**
      * @param Identity $foreignKey
-     * @return ChecksumInterface
+     * @return Checksum
      * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setForeignKey(Identity $foreignKey)
@@ -94,7 +94,7 @@ class ChecksumInterface extends AbstractDataModel implements ChecksumInterface
     
     /**
      * @param string $endpoint
-     * @return ChecksumInterface
+     * @return Checksum
      */
     public function setEndpoint(string $endpoint)
     {
@@ -113,7 +113,7 @@ class ChecksumInterface extends AbstractDataModel implements ChecksumInterface
     
     /**
      * @param boolean $hasChanged
-     * @return ChecksumInterface
+     * @return Checksum
      */
     public function setHasChanged(bool $hasChanged)
     {
@@ -140,7 +140,7 @@ class ChecksumInterface extends AbstractDataModel implements ChecksumInterface
     
     /**
      * @param string $host
-     * @return ChecksumInterface
+     * @return Checksum
      */
     public function setHost(string $host)
     {
@@ -159,7 +159,7 @@ class ChecksumInterface extends AbstractDataModel implements ChecksumInterface
     
     /**
      * @param integer $type
-     * @return ChecksumInterface
+     * @return Checksum
      * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
      */
     public function setType(int $type)
