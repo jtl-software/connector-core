@@ -6,6 +6,8 @@
 
 namespace Jtl\Connector\Core\Application;
 
+use DI\Container;
+use DI\ContainerBuilder;
 use Jtl\Connector\Core\Application\Error\ErrorHandler;
 use Jtl\Connector\Core\Application\Error\ErrorHandlerInterface;
 use Jtl\Connector\Core\Connector\UseChecksumInterface;
@@ -45,7 +47,6 @@ use Jtl\Connector\Core\Model\AbstractDataModel;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Session\SqliteSession;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Jtl\Connector\Core\IO\Path;
 use Jtl\Connector\Core\Event\EventHandler;
@@ -93,7 +94,7 @@ class Application implements ApplicationInterface
     protected $errorHandler;
 
     /**
-     * @var ContainerBuilder
+     * @var Container
      */
     protected $container;
 
@@ -105,6 +106,7 @@ class Application implements ApplicationInterface
     /**
      * Application constructor.
      * @param ConnectorInterface $endpointConnector
+     * @throws \Exception
      */
     public function __construct(ConnectorInterface $endpointConnector)
     {
@@ -114,8 +116,9 @@ class Application implements ApplicationInterface
         $this->eventDispatcher = new EventDispatcher();
         $this->getErrorHandler()->setEventDispatcher($this->eventDispatcher);
 
-        $this->container = new ContainerBuilder();
-        $this->container->set('application', $this);
+        $containerBuilder = new ContainerBuilder();
+        $this->container = $containerBuilder->build();
+        $this->container->set(Application::class, $this);
     }
 
     /**
@@ -195,9 +198,10 @@ class Application implements ApplicationInterface
      * @param string $controller
      * @param object $instance
      */
-    public function registerController(string $controller, object $instance): void
+    public function registerController(string $name, object $instance): Application
     {
-        $this->container->set($controller, $instance);
+        $this->container->set($name, $instance);
+        return $this;
     }
 
     /**
@@ -208,6 +212,8 @@ class Application implements ApplicationInterface
      * @throws HttpException
      * @throws LinkerException
      * @throws RpcException
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
      */
     protected function execute(RequestPacket $requestPacket): ResponsePacket
     {
@@ -358,11 +364,11 @@ class Application implements ApplicationInterface
     }
 
     /**
-     * @param string $controller
-     * @param string $action
-     * @param $params
+     * @param Request $request
      * @return Response
      * @throws ApplicationException
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
      */
     public function handleRequest(Request $request): Response
     {
@@ -370,13 +376,13 @@ class Application implements ApplicationInterface
         $action = $request->getAction();
         $params = $request->getParams();
 
-        if (!$this->container->has($controller)) {
-            $controllerClass = $this->endpointConnector->getControllerNamespace() . '\\' . $controller;
-            if (!class_exists($controllerClass)) {
-                throw new ApplicationException(sprintf('Controller class %s does not exist!', $controllerClass));
-            }
+        $controllerClass = $this->endpointConnector->getControllerNamespace() . '\\' . $controller;
+        if (!class_exists($controllerClass)) {
+            throw new ApplicationException(sprintf('Controller class %s does not exist!', $controllerClass));
+        }
 
-            $this->container->register($controller, $controllerClass);
+        if(!$this->container->has($controller)) {
+            $this->container->set($controller, $this->container->get($controllerClass));
         }
 
         $controllerObject = $this->container->get($controller);
@@ -667,5 +673,13 @@ class Application implements ApplicationInterface
     public function getEventDispatcher(): EventDispatcher
     {
         return $this->eventDispatcher;
+    }
+
+    /**
+     * @return Container
+     */
+    public function getContainer(): Container
+    {
+        return $this->container;
     }
 }
