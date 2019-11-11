@@ -4,6 +4,7 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Database
  */
+
 namespace Jtl\Connector\Core\Database;
 
 use Jtl\Connector\Core\Exception\DatabaseException;
@@ -55,7 +56,7 @@ class Sqlite3 implements DatabaseInterface
      * (non-PHPdoc)
      *
      * @throws Jtl\Connector\Core\Exception\DatabaseException
-     *@see Jtl\Connector\Core\Database\DatabaseInterface::connect()
+     * @see Jtl\Connector\Core\Database\DatabaseInterface::connect()
      */
     public function connect(array $options = null)
     {
@@ -145,20 +146,15 @@ class Sqlite3 implements DatabaseInterface
      */
     public function fetch($query)
     {
-        while (true) {
-            $result = @$this->db->query($query);
-            if ($result instanceof \SQLite3Result) {
-                $rows = [];
-                while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-                    $rows[] = $row;
-                }
-
-                return $rows;
-            // Check if DB is locked //5 == \SQLITE_BUSY
-            } elseif ($this->db->lastErrorCode() !== 5) {
-                break;
+        $result = @$this->db->query($query);
+        if ($result instanceof \SQLite3Result) {
+            $rows = [];
+            while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+                $rows[] = $row;
             }
-        };
+
+            return $rows;
+        }
 
         return null;
     }
