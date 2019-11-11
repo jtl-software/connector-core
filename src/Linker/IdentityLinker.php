@@ -5,6 +5,7 @@
  */
 namespace Jtl\Connector\Core\Linker;
 
+use Jtl\Connector\Core\Definition\RelationType;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\AbstractDataModel;
 use Jtl\Connector\Core\Exception\LinkerException;
@@ -266,7 +267,7 @@ class IdentityLinker
      * @param boolean $useCache
      * @return Jtl\Connector\Core\Linker\IdentityLinker
      */
-    public static function getInstance($useCache = true)
+    public static function getInstance($useCache = true): IdentityLinker
     {
         if (self::$instance === null) {
             self::$instance = new self($useCache);
@@ -439,24 +440,27 @@ class IdentityLinker
      * @return int
      * @throws Jtl\Connector\Core\Exception\LinkerException
      */
-    public function getType($modelName, $property = null)
+    public function getType($modelName, $property = null, $relationType = null)
     {
+        if(is_null($relationType) && isset($this->runtimeInfos['relationType'])) {
+            $relationType = $this->runtimeInfos['relationType'];
+        }
         // Work around
-        if ($modelName === 'Image' && $property === 'ForeignKey' && isset($this->runtimeInfos['relationType'])) {
-            switch ($this->runtimeInfos['relationType']) {
-                case ImageRelationType::TYPE_PRODUCT:
+        if ($modelName === 'Image' && $property === 'ForeignKey' && !is_null($relationType)) {
+            switch ($relationType) {
+                case RelationType::PRODUCT:
                     return self::TYPE_PRODUCT;
                     break;
-                case ImageRelationType::TYPE_CATEGORY:
+                case RelationType::CATEGORY:
                     return self::TYPE_CATEGORY;
                     break;
-                case ImageRelationType::TYPE_SPECIFIC:
+                case RelationType::SPECIFIC:
                     return self::TYPE_SPECIFIC;
                     break;
-                case ImageRelationType::TYPE_SPECIFIC_VALUE:
+                case RelationType::SPECIFIC_VALUE:
                     return self::TYPE_SPECIFIC_VALUE;
                     break;
-                case ImageRelationType::TYPE_MANUFACTURER:
+                case RelationType::MANUFACTURER:
                     return self::TYPE_MANUFACTURER;
                     break;
             }
