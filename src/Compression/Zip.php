@@ -13,7 +13,7 @@ use Symfony\Component\Finder\Exception\AccessDeniedException;
  * Zip
  *
  * @access public
- * @author Daniel B�hmer <daniel.boehmer@jtl-software.de>
+ * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
 class Zip
 {
@@ -25,7 +25,7 @@ class Zip
      * @throws \FileNotFoundException
      * @throws \InvalidArgumentException
      */
-    public function extract($sourceFile, $targetFolder)
+    public function extract(string $sourceFile, string $targetFolder): bool
     {
         if (!class_exists('ZipArchive')) {
             throw new CompressionException('Class ZipArchive not found. PHP 5 >= 5.2.0, PECL zip >= 1.1.0 installed?');
@@ -48,10 +48,5 @@ class Zip
         }
 
         return false;
-    }
-
-    public function zip($sourceFolder, $targetFile)
-    {
-        throw new NotImplementedException();
     }
 }

@@ -13,14 +13,14 @@ use Jtl\Connector\Core\Exception\CompressionException;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-class Gzip implements ICompression
+class Gzip
 {
     /**
-     * (non-PHPdoc)
-     * @see Jtl\Connector\Core\Compression\ICompression::read()
-     * @throws Jtl\Connector\Core\Exception\CompressionException
+     * @param string $file
+     * @return string
+     * @throws CompressionException
      */
-    public function read($file)
+    public function read(string $file): string
     {
         if (file_exists($file)) {
             $fp = fopen($file, "rb");
@@ -33,13 +33,6 @@ class Gzip implements ICompression
                 fclose($fp);
                 $gz = gzopen($file, "rb");
                 $content = gzread($gz, $gzsize);
-                /*
-                while (!gzeof($gz)) {
-                    $content += gzgets($gz, 4096);
-                    flush();
-                    ob_flush();
-                }
-                */
                 gzclose($gz);
                 
                 return $content;
@@ -50,12 +43,14 @@ class Gzip implements ICompression
             throw new CompressionException("File not exists");
         }
     }
-    
+
     /**
-     * (non-PHPdoc)
-     * @see Jtl\Connector\Core\Compression\ICompression::write()
+     * @param string $filename
+     * @param string $content
+     * @return bool
      */
-    public function write($filename, $content)
+    public function write(string $filename, string $content): bool
     {
+        return false;
     }
 }

@@ -11,20 +11,22 @@ namespace Jtl\Connector\Core\Compression;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de> *
  */
-interface ICompression
+interface CompressionInterface
 {
     /**
      * Read content from compressed file
      *
      * @param string $file
+     * @return string
      */
-    public function read($file);
+    public function read(string $file): string;
     
     /**
      * Write compressed content to file
      *
      * @param string $file
      * @param string $content
+     * @return bool
      */
-    public function write($file, $content);
+    public function write(string $file, string $content): bool;
 }
