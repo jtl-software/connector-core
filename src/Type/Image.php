@@ -17,8 +17,8 @@ class Image extends AbstractDataType
     protected function loadProperties()
     {
         return [
-            new PropertyInfo('foreignKey', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
+            new PropertyInfo('foreignKey', 'Identity', null, false, true, false),
             new PropertyInfo('filename', 'string', '', false, false, false),
             new PropertyInfo('relationType', 'ImageRelationType', '', false, false, false),
             new PropertyInfo('remoteUrl', 'string', '', false, false, false),

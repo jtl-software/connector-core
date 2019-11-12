@@ -92,7 +92,7 @@ abstract class AbstractDataModel extends AbstractModel
     {
         if ($this->_type === null) {
             $reflect = new ReflectionClass($this);
-            $class = '\\Jtl\\Connector\\Core\\Type\\' . $reflect->getShortName();
+            $class = 'Jtl\\Connector\\Core\\Type\\' . $reflect->getShortName();
             
             $this->_type = new $class;
         }

@@ -167,6 +167,10 @@ class IdentityLinker
             'id' => self::TYPE_IMAGE,
             'foreignKey' => self::TYPE_IMAGE
         ],
+        'ProductImage' => [
+            'id' => self::TYPE_IMAGE,
+            'foreignKey' => self::TYPE_PRODUCT
+        ],
         'Language' => [
             'id' => self::TYPE_LANGUAGE
         ],
