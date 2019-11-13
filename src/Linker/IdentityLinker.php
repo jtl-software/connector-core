@@ -5,7 +5,7 @@
  */
 namespace Jtl\Connector\Core\Linker;
 
-use Jtl\Connector\Core\Definition\RelationType;
+use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\AbstractDataModel;
 use Jtl\Connector\Core\Exception\LinkerException;
@@ -23,315 +23,53 @@ class IdentityLinker
     const CACHE_TYPE_HOST = 'h';
     const CACHE_TYPE_ENDPOINT = 'e';
 
-    const TYPE_CATEGORY = 1;
-    const TYPE_CUSTOMER = 2;
-    const TYPE_CUSTOMER_ORDER = 4;
-    const TYPE_DELIVERY_NOTE = 8;
-    const TYPE_IMAGE = 16;
-    const TYPE_MANUFACTURER = 32;
-    const TYPE_PRODUCT = 64;
-    const TYPE_SPECIFIC = 128;
-    const TYPE_SPECIFIC_VALUE = 256;
-    const TYPE_PAYMENT = 512;
-    const TYPE_CROSSSELLING = 1024;
-    const TYPE_CROSSSELLING_GROUP = 2048;
-    const TYPE_SHIPPING_CLASS = 4096;
-    const TYPE_CONFIG_GROUP = 6;
-    const TYPE_CONFIG_ITEM = 10;
-    const TYPE_CURRENCY = 12;
-    const TYPE_CUSTOMER_GROUP = 14;
-    const TYPE_LANGUAGE = 18;
-    const TYPE_UNIT = 20;
-    const TYPE_MEASUREMENT_UNIT = 22;
-    const TYPE_PRODUCT_TYPE = 24;
-    const TYPE_SHIPPING_METHOD = 26;
-    const TYPE_TAX_RATE = 28;
-    const TYPE_WAREHOUSE = 30;
-    const TYPE_CATEGORY_ATTRIBUTE = 34;
-    const TYPE_PRODUCT_ATTRIBUTE = 36;
-    const TYPE_PRODUCT_VARIATION = 38;
-    const TYPE_PRODUCT_VARIATION_VALUE = 40;
-
     /**
      * Session Database Mapper
      *
      * @var PrimaryKeyMapperInterface
      */
-    protected static $mapper;
+    protected $mapper;
 
     /**
      * @var bool
      */
-    public static $useCache;
+    protected $useCache = true;
 
     /**
      * @var array
      */
-    protected static $cache = [];
+    protected $cache = [];
 
     /**
-     * @var self
-     */
-    protected static $instance;
-
-    /**
-     * @var array
-     */
-    protected static $types = [
-        'Category' => self::TYPE_CATEGORY,
-        'CategoryAttr' => self::TYPE_CATEGORY_ATTRIBUTE,
-        'ConfigGroup' => self::TYPE_CONFIG_GROUP,
-        'ConfigItem' => self::TYPE_CONFIG_ITEM,
-        'CrossSelling' => self::TYPE_CROSSSELLING,
-        'CrossSellingGroup' => self::TYPE_CROSSSELLING_GROUP,
-        'CrossSellingItem' => self::TYPE_CROSSSELLING,
-        'Currency' => self::TYPE_CURRENCY,
-        'Customer' => self::TYPE_CUSTOMER,
-        'CustomerGroup' => self::TYPE_CUSTOMER_GROUP,
-        'CustomerOrder' => self::TYPE_CUSTOMER_ORDER,
-        'DeliveryNote' => self::TYPE_DELIVERY_NOTE,
-        'Image' => self::TYPE_IMAGE,
-        'Language' => self::TYPE_LANGUAGE,
-        'Manufacturer' => self::TYPE_MANUFACTURER,
-        'MeasurementUnit' => self::TYPE_MEASUREMENT_UNIT,
-        'Payment' => self::TYPE_PAYMENT,
-        'Product' => self::TYPE_PRODUCT,
-        'ProductAttr' => self::TYPE_PRODUCT_ATTRIBUTE,
-        'ProductType' => self::TYPE_PRODUCT_TYPE,
-        'ProductVariation' => self::TYPE_PRODUCT_VARIATION,
-        'ProductVariationValue' => self::TYPE_PRODUCT_VARIATION_VALUE,
-        'ShippingClass' => self::TYPE_SHIPPING_CLASS,
-        'ShippingMethod' => self::TYPE_SHIPPING_METHOD,
-        'Specific' => self::TYPE_SPECIFIC,
-        'SpecificValue' => self::TYPE_SPECIFIC_VALUE,
-        'TaxRate' => self::TYPE_TAX_RATE,
-        'Unit' => self::TYPE_UNIT,
-        'Warehouse' => self::TYPE_WAREHOUSE,
-    ];
-
-    /**
-     * @var array
-     */
-    protected static $mappings = [
-        'Category' => [
-            'id' => self::TYPE_CATEGORY,
-            'parentCategoryId' => self::TYPE_CATEGORY
-        ],
-        'ConfigGroup' => [
-            'id' => self::TYPE_CONFIG_GROUP
-        ],
-        'ConfigItem' => [
-            'id' => self::TYPE_CONFIG_ITEM,
-            'productId' => self::TYPE_PRODUCT,
-        ],
-        'CrossSelling' => [
-            'id' => self::TYPE_CROSSSELLING,
-            'productId' => self::TYPE_PRODUCT
-        ],
-        'CrossSellingItem' => [
-            'crossSellingGroupId' => self::TYPE_CROSSSELLING_GROUP,
-            'productIds' => self::TYPE_PRODUCT  // List of Product identities
-        ],
-        'CrossSellingGroup' => [
-            'id' => self::TYPE_CROSSSELLING_GROUP
-        ],
-        'Currency' => [
-            'id' => self::TYPE_CURRENCY,
-        ],
-        'Customer' => [
-            'id' => self::TYPE_CUSTOMER,
-            'customerGroupId' => self::TYPE_CUSTOMER_GROUP
-        ],
-        'CustomerGroup' => [
-            'id' => self::TYPE_CUSTOMER_GROUP,
-        ],
-        'CustomerOrder' => [
-            'id' => self::TYPE_CUSTOMER_ORDER,
-            'customerId' => self::TYPE_CUSTOMER,
-            'shippingMethodId' => self::TYPE_SHIPPING_METHOD
-        ],
-        'CustomerOrderItem' => [
-            'productId' => self::TYPE_PRODUCT
-        ],
-        'DeliveryNote' => [
-            'id' => self::TYPE_DELIVERY_NOTE,
-            'customerOrderId' => self::TYPE_CUSTOMER_ORDER
-        ],
-        'DeliveryNoteItem' => [
-            'productId' => self::TYPE_PRODUCT
-        ],
-        'FileUpload' => [
-            'productId' => self::TYPE_PRODUCT
-        ],
-        'Image' => [
-            'id' => self::TYPE_IMAGE,
-            'foreignKey' => self::TYPE_IMAGE
-        ],
-        'ProductImage' => [
-            'id' => self::TYPE_IMAGE,
-            'foreignKey' => self::TYPE_PRODUCT
-        ],
-        'Language' => [
-            'id' => self::TYPE_LANGUAGE
-        ],
-        'Manufacturer' => [
-            'id' => self::TYPE_MANUFACTURER
-        ],
-        'MeasurementUnit' => [
-            'id' => self::TYPE_MEASUREMENT_UNIT
-        ],
-        'Payment' => [
-            'id' => self::TYPE_PAYMENT,
-            'customerOrderId' => self::TYPE_CUSTOMER_ORDER
-        ],
-        'Product' => [
-            'id' => self::TYPE_PRODUCT,
-            'masterProductId' => self::TYPE_PRODUCT,
-            'manufacturerId' => self::TYPE_MANUFACTURER,
-            'measurementUnitId' => self::TYPE_MEASUREMENT_UNIT,
-            'productTypeId' => self::TYPE_PRODUCT_TYPE,
-            'shippingClassId' => self::TYPE_SHIPPING_CLASS,
-            'unitId' => self::TYPE_UNIT,
-        ],
-        'ProductPrice' => [
-            'productId' => self::TYPE_PRODUCT
-        ],
-        'ProductStockLevel' => [
-            'productId' => self::TYPE_PRODUCT
-        ],
-        'Product2Category' => [
-            'categoryId' => self::TYPE_CATEGORY
-        ],
-        'ProductAttr' => [
-            'id' => self::TYPE_PRODUCT_ATTRIBUTE
-        ],
-        'ProductConfigGroup' => [
-            'configGroupId' => self::TYPE_CONFIG_GROUP
-        ],
-        'ProductSpecific' => [
-            'id' => self::TYPE_SPECIFIC,
-            'specificValueId' => self::TYPE_SPECIFIC_VALUE
-        ],
-        'ProductType' => [
-            'id' => self::TYPE_PRODUCT_TYPE
-        ],
-        'ProductVariation' => [
-            'id' => self::TYPE_PRODUCT_VARIATION
-        ],
-        'ProductVariationValue' => [
-            'id' => self::TYPE_PRODUCT_VARIATION_VALUE
-        ],
-        'ProductVariationValueExtraCharge' => [
-            'customerGroupId' => self::TYPE_CUSTOMER_GROUP
-        ],
-        'ProductVariationValueInvisibility' => [
-            'customerGroupId' => self::TYPE_CUSTOMER_GROUP
-        ],
-        'ProductWarehouseInfo' => [
-            'productId' => self::TYPE_PRODUCT,
-            'warehouseId' => self::TYPE_WAREHOUSE,
-        ],
-        'ShippingClass' => [
-            'id' => self::TYPE_SHIPPING_CLASS,
-        ],
-        'ShippingMethod' => [
-            'id' => self::TYPE_SHIPPING_METHOD,
-        ],
-        'Shipment' => [
-            'deliveryNoteId' => self::TYPE_DELIVERY_NOTE
-        ],
-        'Specific' => [
-            'id' => self::TYPE_SPECIFIC
-        ],
-        'SpecificValue' => [
-            'id' => self::TYPE_SPECIFIC_VALUE
-        ],
-        'StatusChange' => [
-            'customerOrderId' => self::TYPE_CUSTOMER_ORDER
-        ],
-        'TaxRate' => [
-            'id' => self::TYPE_TAX_RATE,
-        ],
-        'Unit' => [
-            'id' => self::TYPE_UNIT,
-        ],
-        'Warehouse' => [
-            'id' => self::TYPE_WAREHOUSE,
-        ],
-    ];
-
-    /**
-     * @var array
-     */
-    protected $runtimeInfos = [];
-
-    /**
-     * Singleton
-     *
-     * @param boolean $useCache
-     * @return Jtl\Connector\Core\Linker\IdentityLinker
-     */
-    public static function getInstance($useCache = true): IdentityLinker
-    {
-        if (self::$instance === null) {
-            self::$instance = new self($useCache);
-        } else {
-            self::$instance->useCache($useCache);
-        }
-
-        return self::$instance;
-    }
-
-    /**
-     * Constructor
-     *
-     * @param boolean $useCache
-     */
-    protected function __construct($useCache = true)
-    {
-        self::$useCache = (bool)$useCache;
-    }
-
-    /**
-     * Constructor
-     *
-     * @param boolean $useCache
-     * @return Jtl\Connector\Core\Linker\IdentityLinker
-     */
-    public function useCache($useCache)
-    {
-        self::$useCache = (bool)$useCache;
-    }
-
-    /**
-     * Database setter
-     *
+     * IdentityLinker constructor.
      * @param PrimaryKeyMapperInterface $mapper
      */
-    public function setPrimaryKeyMapper(PrimaryKeyMapperInterface $mapper)
+    public function __construct(PrimaryKeyMapperInterface $mapper)
     {
-        self::$mapper = $mapper;
+        $this->mapper = $mapper;
     }
 
     /**
-     * Database setter
+     * Constructor
      *
-     * @param Jtl\Connector\Core\Model\AbstractDataModel $model
-     * @param bool $isDeleted
-     * @throws Jtl\Connector\Core\Exception\LinkerException
+     * @param boolean $useCache
+     * @return IdentityLinker
      */
-    public function linkModel(AbstractDataModel &$model, $isDeleted = false)
+    public function setUseCache(bool $useCache)
+    {
+        $this->useCache = $useCache;
+        return $this;
+    }
+
+    /**
+     * @param AbstractDataModel $model
+     * @param bool $isDeleted
+     * @throws LinkerException
+     * @throws \ReflectionException
+     */
+    public function linkModel(AbstractDataModel $model, $isDeleted = false): void
     {
         $reflect = new \ReflectionClass($model);
-
-        // Image work around
-        if (isset($this->runtimeInfos['relationType'])) {
-            unset($this->runtimeInfos['relationType']);
-        }
-
-        if ($reflect->getShortName() === 'Image' && method_exists($model, 'getRelationType')) {
-            $this->runtimeInfos['relationType'] = $model->getRelationType();
-        }
 
         foreach ($model->getModelType()->getProperties() as $propertyInfo) {
             $property = ucfirst($propertyInfo->getName());
@@ -344,7 +82,7 @@ class IdentityLinker
                     foreach ($list as &$entity) {
                         if ($entity instanceof AbstractDataModel) {
                             $this->linkModel($entity, $isDeleted);
-                        } elseif ($entity instanceof Identity && $this->isType($reflect->getShortName(), $property)) {
+                        } elseif ($entity instanceof Identity && Model::isIdentityProperty($reflect->getShortName(), $property)) {
                             $this->linkIdentityList($entity, $reflect->getShortName(), $property, $isDeleted);
                         } else {
                             Logger::write(
@@ -364,7 +102,7 @@ class IdentityLinker
                         'linker'
                     );
                 }
-            } elseif ($propertyInfo->isIdentity() && $this->isType($reflect->getShortName(), $property)) {
+            } elseif ($propertyInfo->isIdentity() && Model::isIdentityProperty($reflect->getShortName(), $property)) {
                 $identity = $model->{$getter}();
 
                 if (!($identity instanceof Identity)) {
@@ -373,8 +111,8 @@ class IdentityLinker
 
                 if (strlen($identity->getEndpoint()) > 0 && $identity->getHost() > 0) {
                     if ($isDeleted) {
-                        $this->delete($identity->getEndpoint(), $identity->getHost(), $reflect->getShortName());
-                    } elseif (!$this->exists(null, $identity->getHost(), $reflect->getShortName(), $property, true)) {
+                        $this->delete($reflect->getShortName(), $identity->getEndpoint(), $identity->getHost());
+                    } elseif (!$this->exists($reflect->getShortName(), $property, null, $identity->getHost(), true)) {
                         $this->save($identity->getEndpoint(), $identity->getHost(), $reflect->getShortName(), $property);
                     }
 
@@ -382,17 +120,17 @@ class IdentityLinker
                 } else {
                     if ($identity->getHost() > 0) {
                         if ($isDeleted) {
-                            $this->delete(null, $identity->getHost(), $reflect->getShortName());
-                        } elseif ($this->exists(null, $identity->getHost(), $reflect->getShortName(), $property)) {
-                            $identity->setEndpoint($this->getEndpointId($identity->getHost(), $reflect->getShortName(), $property));
+                            $this->delete($reflect->getShortName(), null, $identity->getHost());
+                        } elseif ($this->exists($reflect->getShortName(), $property, null, $identity->getHost())) {
+                            $identity->setEndpoint($this->getEndpointId($reflect->getShortName(), $property, $identity->getHost()));
 
                             $model->{$setter}($identity);
                         }
                     } elseif (strlen($identity->getEndpoint()) > 0) {
                         if ($isDeleted) {
-                            $this->delete($identity->getEndpoint(), null, $reflect->getShortName());
-                        } elseif ($this->exists($identity->getEndpoint(), null, $reflect->getShortName(), $property)) {
-                            $identity->setHost($this->getHostId($identity->getEndpoint(), $reflect->getShortName(), $property));
+                            $this->delete($reflect->getShortName(), $identity->getEndpoint(), null);
+                        } elseif ($this->exists($reflect->getShortName(), $property, $identity->getEndpoint(), null)) {
+                            $identity->setHost($this->getHostId($reflect->getShortName(), $property, $identity->getEndpoint()));
 
                             $model->{$setter}($identity);
                         }
@@ -403,126 +141,35 @@ class IdentityLinker
     }
 
     /**
-     * Linker for identity lists
-     *
-     * @param Jtl\Connector\Core\Model\Identity $identity
+     * @param Identity $identity
      * @param string $modelName
      * @param string $property
      * @param bool $isDeleted
-     * @throws Jtl\Connector\Core\Exception\LinkerException
+     * @throws LinkerException
      */
-    public function linkIdentityList(Identity &$identity, $modelName, $property, $isDeleted = false)
+    public function linkIdentityList(Identity $identity, string $modelName, string $property, bool $isDeleted = false): void
     {
         if (strlen($identity->getEndpoint()) > 0 && $identity->getHost() > 0) {
             if ($isDeleted) {
-                $this->delete($identity->getEndpoint(), $identity->getHost(), $modelName);
-            } elseif (!$this->exists(null, $identity->getHost(), $modelName, $property, true)) {
+                $this->delete($modelName, $identity->getEndpoint(), $identity->getHost());
+            } elseif (!$this->exists($modelName, $property, null, $identity->getHost(), true)) {
                 $this->save($identity->getEndpoint(), $identity->getHost(), $modelName, $property);
             }
         } else {
             if ($identity->getHost() > 0) {
                 if ($isDeleted) {
-                    $this->delete(null, $identity->getHost(), $modelName);
-                } elseif ($this->exists(null, $identity->getHost(), $modelName, $property)) {
-                    $identity->setEndpoint($this->getEndpointId($identity->getHost(), $modelName, $property));
+                    $this->delete($modelName, null, $identity->getHost());
+                } elseif ($this->exists($modelName, $property, null, $identity->getHost())) {
+                    $identity->setEndpoint($this->getEndpointId($modelName, $property, $identity->getHost()));
                 }
             } elseif (strlen($identity->getEndpoint()) > 0) {
                 if ($isDeleted) {
-                    $this->delete($identity->getEndpoint(), null, $modelName);
-                } elseif ($this->exists($identity->getEndpoint(), null, $modelName, $property)) {
-                    $identity->setHost($this->getHostId($identity->getEndpoint(), $modelName, $property));
+                    $this->delete($modelName, $identity->getEndpoint(), null);
+                } elseif ($this->exists($modelName, $property, $identity->getEndpoint(), null)) {
+                    $identity->setHost($this->getHostId($modelName, $property, $identity->getEndpoint()));
                 }
             }
         }
-    }
-
-    /**
-     * Type id getter
-     *
-     * @param string $modelName
-     * @param string $property
-     * @return int
-     * @throws Jtl\Connector\Core\Exception\LinkerException
-     */
-    public function getType($modelName, $property = null, $relationType = null)
-    {
-        if(is_null($relationType) && isset($this->runtimeInfos['relationType'])) {
-            $relationType = $this->runtimeInfos['relationType'];
-        }
-        // Work around
-        if ($modelName === 'Image' && $property === 'ForeignKey' && !is_null($relationType)) {
-            switch ($relationType) {
-                case RelationType::PRODUCT:
-                    return self::TYPE_PRODUCT;
-                    break;
-                case RelationType::CATEGORY:
-                    return self::TYPE_CATEGORY;
-                    break;
-                case RelationType::SPECIFIC:
-                    return self::TYPE_SPECIFIC;
-                    break;
-                case RelationType::SPECIFIC_VALUE:
-                    return self::TYPE_SPECIFIC_VALUE;
-                    break;
-                case RelationType::MANUFACTURER:
-                    return self::TYPE_MANUFACTURER;
-                    break;
-            }
-        }
-
-        $modelName = ucfirst($modelName);
-
-        if ($property === null) {
-            if (!isset(self::$types[$modelName])) {
-                throw new LinkerException(sprintf('Type for model (%s) not found', $modelName));
-            }
-
-            return self::$types[$modelName];
-        }
-
-        $property = lcfirst($property);
-
-        if (!isset(self::$mappings[$modelName])) {
-            throw new LinkerException(sprintf('Type for model (%s) not found', $modelName));
-        }
-
-        if (!isset(self::$mappings[$modelName][$property])) {
-            throw new LinkerException(sprintf('Type for model (%s) and property (%s) not found', $modelName, $property));
-        }
-
-        return self::$mappings[$modelName][$property];
-    }
-
-    /**
-     * Type id getter
-     *
-     * @param string $modelName
-     * @param string $property
-     * @return boolean
-     */
-    public function isType($modelName, $property = null)
-    {
-        $modelName = ucfirst($modelName);
-        $property = is_string($property) ? lcfirst($property) : $property;
-
-        return ($property === null) ? isset(self::$types[$modelName]) : isset(self::$mappings[$modelName][$property]);
-    }
-
-    /**
-     * Model name getter
-     *
-     * @param int $type
-     * @return string
-     * @throws Jtl\Connector\Core\Exception\LinkerException
-     */
-    public function getModelName($type)
-    {
-        $modelName = array_search($type, self::$types, true);
-        if ($modelName === false) {
-            throw new LinkerException(sprintf('Model for type (%s) not found', $type));
-        }
-
-        return $modelName;
     }
 
     /**
@@ -534,9 +181,9 @@ class IdentityLinker
      * @param string $property
      * @param boolean $validate
      * @return boolean
-     * @throws Jtl\Connector\Core\Exception\LinkerException
+     * @throws LinkerException
      */
-    public function exists($endpointId = null, $hostId = null, $modelName, $property, $validate = false)
+    public function exists(string $modelName, string $property, string $endpointId = null, int $hostId = null, bool $validate = false): bool
     {
         if (!$this->isValidEndpointId($endpointId) && !$this->isValidHostId($hostId)) {
             throw new LinkerException(sprintf(
@@ -548,7 +195,7 @@ class IdentityLinker
             ));
         }
 
-        $type = $this->getType($modelName, $property);
+        $type = Model::getPropertyIdentityType($modelName, $property);
 
         $id = null;
         $cacheType = null;
@@ -565,42 +212,34 @@ class IdentityLinker
         }
 
         if ($this->isValidEndpointId($endpointId)) {
-            $hostId = self::$mapper->getHostId($type, $endpointId);
+            $hostId = $this->mapper->getHostId($type, $endpointId);
         } elseif ($this->isValidHostId($hostId)) {
-            $relationType = isset($this->runtimeInfos['relationType']) ? $this->runtimeInfos['relationType'] : null;
-            $endpointId = self::$mapper->getEndpointId($type, $hostId, $relationType);
+            $endpointId = $this->mapper->getEndpointId($type, $hostId);
         }
 
         if ($validate && !$this->isValidEndpointId($endpointId)) {
             return false;
         }
 
-        //if ($endpointId !== null && $hostId !== null) {
         $this->saveCache($endpointId, $hostId, $type, $cacheType);
 
         return true;
-        //}
-
-        //return false;
     }
 
     /**
-     * Save link to database
-     *
      * @param string $endpointId
-     * @param integer $hostId
+     * @param int $hostId
      * @param string $modelName
-     * @param string $property
-     * @return boolean
-     * @throws Jtl\Connector\Core\Exception\LinkerException
+     * @param string|null $property
+     * @return bool
      */
-    public function save($endpointId, $hostId, $modelName, $property = null)
+    public function save(string $endpointId, int $hostId, string $modelName, string $property = null): bool
     {
-        $type = $this->getType($modelName, $property);
-        $realModel = $this->getModelName($type);
-        $this->delete($endpointId, $hostId, $realModel);
+        $type = is_null($property) ? Model::getIdentityType($modelName) : Model::getPropertyIdentityType($modelName, $property);
+        $relatedModel = Model::getModelByType($type);
+        $this->delete($relatedModel, $endpointId, $hostId);
 
-        $result = self::$mapper->save($type, $endpointId, $hostId);
+        $result = $this->mapper->save($type, $endpointId, $hostId);
         if ($result) {
             $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_ENDPOINT);
             $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_HOST);
@@ -612,21 +251,19 @@ class IdentityLinker
     }
 
     /**
-     * Delete link from database
-     *
-     * @param string $endpointId
-     * @param integer $hostId
      * @param string $modelName
+     * @param string|null $endpointId
+     * @param int|null $hostId
      * @return boolean
      */
-    public function delete($endpointId = null, $hostId = null, $modelName)
+    public function delete(string $modelName, string $endpointId = null, int $hostId = null): bool
     {
-        $type = $this->getType($modelName);
+        $type = Model::getIdentityType($modelName);
 
-        $result = self::$mapper->delete($type, $endpointId, $hostId);
+        $result = $this->mapper->delete($type, $endpointId, $hostId);
         if ($result) {
-            $this->deleteCache($endpointId, null, $type, self::CACHE_TYPE_ENDPOINT);
-            $this->deleteCache(null, $hostId, $type, self::CACHE_TYPE_HOST);
+            $this->deleteCache($type, self::CACHE_TYPE_ENDPOINT, $endpointId, null);
+            $this->deleteCache($type, self::CACHE_TYPE_HOST, null, $hostId);
 
             return true;
         }
@@ -636,56 +273,51 @@ class IdentityLinker
 
     /**
      * Clears the entire link table
-     *
+     * @param integer $type
      * @return boolean
      */
-    public function clear()
+    public function clear(int $type = null): bool
     {
-        return self::$mapper->clear();
+        return $this->mapper->clear($type);
     }
 
     /**
-     * Endpoint ID getter
-     *
-     * @param integer $hostId
      * @param string $modelName
      * @param string $property
+     * @param int $hostId
      * @return string
      */
-    public function getEndpointId($hostId, $modelName, $property)
+    public function getEndpointId(string $modelName, string $property, int $hostId): string
     {
-        $type = $this->getType($modelName, $property);
-
+        $type = Model::getPropertyIdentityType($modelName, $property);
         if (($endpointId = $this->loadCache($hostId, $type, self::CACHE_TYPE_HOST)) !== null) {
             return $endpointId;
         }
 
-        $relationType = isset($this->runtimeInfos['relationType']) ? $this->runtimeInfos['relationType'] : null;
-        $endpointId = (string)self::$mapper->getEndpointId($type, $hostId, $relationType);
+        $endpointId = (string)$this->mapper->getEndpointId($type, $hostId);
 
         if (strlen(trim($endpointId)) > 0) {
             $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_HOST);
         }
+
         return $endpointId;
     }
 
     /**
-     * Host ID getter
-     *
-     * @param string $endpointId
      * @param string $modelName
      * @param string $property
-     * @return int
+     * @param string $endpointId
+     * @return bool|int|mixed
      */
-    public function getHostId($endpointId, $modelName, $property)
+    public function getHostId(string $modelName, string $property, string $endpointId): int
     {
-        $type = $this->getType($modelName, $property);
+        $type = Model::getPropertyIdentityType($modelName, $property);
 
         if (($hostId = $this->loadCache($endpointId, $type, self::CACHE_TYPE_ENDPOINT)) !== null) {
             return $hostId;
         }
 
-        $hostId = (int)self::$mapper->getHostId($type, $endpointId);
+        $hostId = (int)$this->mapper->getHostId($type, $endpointId);
 
         if ($hostId > 0) {
             $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_ENDPOINT);
@@ -701,20 +333,12 @@ class IdentityLinker
      * @param bool $validate
      * @return bool
      */
-    protected function checkCache($id, $type, $cacheType, $validate = false)
+    protected function checkCache($id, int $type, string $cacheType, bool $validate = false): bool
     {
-        //return (self::$useCache && array_key_exists($this->buildKey($id, $type, $cacheType), self::$cache));
-        //return (self::$useCache && isset(self::$cache[$this->buildKey($id, $type, $cacheType)]));
-
-        $result = self::$useCache && array_key_exists($this->buildKey($id, $type, $cacheType), self::$cache);
-        /*
-        if (!$validate) {
-            return $result;
-        }
-        */
+        $result = $this->useCache && array_key_exists($this->buildKey($id, $type, $cacheType), $this->cache);
 
         if ($validate && $result) {
-            $data = self::$cache[$this->buildKey($id, $type, $cacheType)];
+            $data = $this->cache[$this->buildKey($id, $type, $cacheType)];
             switch ($cacheType) {
                 case self::CACHE_TYPE_ENDPOINT:
                     $result = $this->isValidHostId($data);
@@ -724,11 +348,6 @@ class IdentityLinker
                     break;
             }
         }
-
-        /*
-        $result = (self::$useCache && array_key_exists($this->buildKey($id, $type, $cacheType), self::$cache)
-            && (!$validate || self::$cache[$this->buildKey($id, $type, $cacheType)] !== null));
-        */
 
         // Debug
         Logger::write(sprintf(
@@ -746,11 +365,11 @@ class IdentityLinker
      * @param mixed $id
      * @param int $type
      * @param string $cacheType
-     * @return bool|mixed
+     * @return mixed
      */
-    protected function loadCache($id, $type, $cacheType)
+    protected function loadCache($id, int $type, string $cacheType)
     {
-        $result = $this->checkCache($id, $type, $cacheType) ? self::$cache[$this->buildKey($id, $type, $cacheType)] : null;
+        $result = $this->checkCache($id, $type, $cacheType) ? $this->cache[$this->buildKey($id, $type, $cacheType)] : null;
 
         // Debug
         Logger::write(sprintf(
@@ -770,7 +389,7 @@ class IdentityLinker
      * @param int $type
      * @param string $cacheType
      */
-    protected function saveCache($endpointId, $hostId, $type, $cacheType)
+    protected function saveCache(string $endpointId, int $hostId, int $type, string $cacheType)
     {
         // Debug
         Logger::write(sprintf(
@@ -781,25 +400,25 @@ class IdentityLinker
             $cacheType
         ), Logger::DEBUG, 'linker');
 
-        if (self::$useCache) {
+        if ($this->useCache) {
             switch ($cacheType) {
                 case self::CACHE_TYPE_ENDPOINT:
-                    self::$cache[$this->buildKey($endpointId, $type, $cacheType)] = $hostId;
+                    $this->cache[$this->buildKey($endpointId, $type, $cacheType)] = $hostId;
                     break;
                 case self::CACHE_TYPE_HOST:
-                    self::$cache[$this->buildKey($hostId, $type, $cacheType)] = $endpointId;
+                    $this->cache[$this->buildKey($hostId, $type, $cacheType)] = $endpointId;
                     break;
             }
         }
     }
 
     /**
-     * @param mixed $endpointId
-     * @param int $hostId
      * @param int $type
      * @param string $cacheType
+     * @param string|null $endpointId
+     * @param int|null $hostId
      */
-    protected function deleteCache($endpointId = null, $hostId = null, $type, $cacheType)
+    protected function deleteCache(int $type, string $cacheType, string $endpointId = null, int $hostId = null)
     {
         // Debug
         Logger::write(sprintf(
@@ -810,13 +429,13 @@ class IdentityLinker
             $cacheType
         ), Logger::DEBUG, 'linker');
 
-        if (self::$useCache) {
+        if ($this->useCache) {
             switch ($cacheType) {
                 case self::CACHE_TYPE_ENDPOINT:
-                    unset(self::$cache[$this->buildKey($endpointId, $type, $cacheType)]);
+                    unset($this->cache[$this->buildKey($endpointId, $type, $cacheType)]);
                     break;
                 case self::CACHE_TYPE_HOST:
-                    unset(self::$cache[$this->buildKey($hostId, $type, $cacheType)]);
+                    unset($this->cache[$this->buildKey($hostId, $type, $cacheType)]);
                     break;
             }
         }
@@ -828,7 +447,7 @@ class IdentityLinker
      * @param string $cacheType
      * @return string
      */
-    protected function buildKey($id, $type, $cacheType)
+    protected function buildKey($id, int $type, string $cacheType): string
     {
         return sprintf('%s_%s_%s', $cacheType, $id, $type);
     }
@@ -836,26 +455,26 @@ class IdentityLinker
     /**
      * @return array
      */
-    public static function getCache()
+    public function getCache(): array
     {
-        return self::$cache;
+        return $this->cache;
     }
 
     /**
      * @param mixed $endpointId
      * @return boolean
      */
-    public function isValidEndpointId($endpointId)
+    public function isValidEndpointId(?string $endpointId): bool
     {
-        return !is_null($endpointId) && is_string($endpointId) && strlen(trim($endpointId)) > 0;
+        return !is_null($endpointId) && strlen(trim($endpointId)) > 0;
     }
 
     /**
      * @param mixed $hostId
      * @return boolean
      */
-    public function isValidHostId($hostId)
+    public function isValidHostId(?int $hostId): bool
     {
-        return !is_null($hostId) && is_int($hostId) && $hostId > 0;
+        return !is_null($hostId) && $hostId > 0;
     }
 }

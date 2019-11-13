@@ -6,7 +6,7 @@
 namespace Jtl\Connector\Core\Definition;
 
 
-final class Relation
+final class RelationType
 {
     const PRODUCT = 'product';
     const CATEGORY = 'category';
@@ -20,20 +20,20 @@ final class Relation
      * @var string[]
      */
     protected static $mappings = [
-        self::PRODUCT => IdentityType::TYPE_PRODUCT,
-        self::CATEGORY => IdentityType::TYPE_CATEGORY,
-        self::PRODUCT_VARIATION_VALUE => IdentityType::TYPE_PRODUCT_VARIATION_VALUE,
-        self::SPECIFIC => IdentityType::TYPE_SPECIFIC,
-        self::SPECIFIC_VALUE => IdentityType::TYPE_SPECIFIC_VALUE,
-        self::MANUFACTURER => IdentityType::TYPE_MANUFACTURER,
-        self::CONFIG_GROUP => IdentityType::TYPE_CONFIG_GROUP,
+        self::PRODUCT => IdentityType::PRODUCT,
+        self::CATEGORY => IdentityType::CATEGORY,
+        self::PRODUCT_VARIATION_VALUE => IdentityType::PRODUCT_VARIATION_VALUE,
+        self::SPECIFIC => IdentityType::SPECIFIC,
+        self::SPECIFIC_VALUE => IdentityType::SPECIFIC_VALUE,
+        self::MANUFACTURER => IdentityType::MANUFACTURER,
+        self::CONFIG_GROUP => IdentityType::CONFIG_GROUP,
     ];
 
     /**
      * @param string $relationType
      * @return boolean
      */
-    public static function canMapToIdentity(string $relationType): bool
+    public static function hasIdentityType(string $relationType): bool
     {
         return isset(self::$mappings[$relationType]);
     }
@@ -42,15 +42,15 @@ final class Relation
      * @param string $relationType
      * @return int|null
      */
-    public static function mapToIdentity(string $relationType): int
+    public static function getIdentityType(string $relationType): int
     {
-        return self::canMapToIdentity($relationType) ? self::$mappings[$relationType] : null;
+        return self::hasIdentityType($relationType) ? self::$mappings[$relationType] : null;
     }
 
     /**
      * @return string[]
      */
-    public static function getRelations(): array
+    public static function getRelationTypes(): array
     {
         return array_keys(self::$mappings);
     }
@@ -59,8 +59,8 @@ final class Relation
      * @param string $relationType
      * @return bool
      */
-    public static function isRelation(string $relationType): bool
+    public static function isRelationType(string $relationType): bool
     {
-        return in_array($relationType, self::getRelations());
+        return in_array($relationType, self::getRelationTypes());
     }
 }

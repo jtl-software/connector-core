@@ -21,10 +21,9 @@ interface PrimaryKeyMapperInterface
      *
      * @param integer $type
      * @param integer $hostId
-     * @param string $relationType
      * @return string|null
      */
-    public function getEndpointId(int $type, int $hostId, string $relationType = null): ?string;
+    public function getEndpointId(int $type, int $hostId): ?string;
 
     /**
      * Save link to database

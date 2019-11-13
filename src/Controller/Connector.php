@@ -8,6 +8,7 @@
 namespace Jtl\Connector\Core\Controller;
 
 use Jtl\Connector\Core\Application\Error\ErrorCodesInterface;
+use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\Exception\MissingRequirementException;
@@ -71,10 +72,8 @@ class Connector extends AbstractController
     {
         $serializer = SerializerBuilder::create();
         $ack = $serializer->deserialize($params, Ack::class, 'json');
-        $identityLinker = IdentityLinker::getInstance();
-
         foreach ($ack->getIdentities() as $modelName => $identities) {
-            if (!$identityLinker->isType($modelName)) {
+            if (!Model::isModel($modelName)) {
                 Logger::write(sprintf(
                     'ACK: Unknown core entity (%s)! Skipping related ack\'s...',
                     $modelName
@@ -83,7 +82,7 @@ class Connector extends AbstractController
             }
 
             foreach ($identities as $identity) {
-                $identityLinker->save($identity->getEndpoint(), $identity->getHost(), $modelName);
+                $this->application->getLinker()->save($identity->getEndpoint(), $identity->getHost(), $modelName);
             }
         }
 

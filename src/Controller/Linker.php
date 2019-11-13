@@ -17,9 +17,13 @@ use Jtl\Connector\Core\Linker\IdentityLinker;
  */
 class Linker extends AbstractController
 {
-    public function clear()
+    /**
+     * @param null $params
+     * @return bool
+     */
+    public function clear($params = null)
     {
-        $identityLinker = IdentityLinker::getInstance();
-        return $identityLinker->clear();
+        //TODO: set type in clear method
+        return $this->application->getLinker()->clear();
     }
 }

@@ -21,7 +21,7 @@ use Jtl\Connector\Core\Event\Handle\RequestBeforeHandleEvent;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\HttpException;
 use Jtl\Connector\Core\IO\Temp;
-use Jtl\Connector\Core\Model\Image;
+use Jtl\Connector\Core\Model\AbstractImage;
 use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Model\QueryFilter;
 use Jtl\Connector\Core\Plugin\PluginManager;
@@ -87,6 +87,11 @@ class Application implements ApplicationInterface
      * @var EventDispatcher
      */
     protected $eventDispatcher;
+
+    /**
+     * @var IdentityLinker
+     */
+    protected $linker;
 
     /**
      * @var ErrorHandlerInterface
@@ -162,15 +167,17 @@ class Application implements ApplicationInterface
                 Logger::write(sprintf('Params: %s', $reqPacketsObj->params), Logger::DEBUG, 'rpc');
             }
 
+            $this->linker = new IdentityLinker($this->endpointConnector->getPrimaryKeyMapper());
+
             /** Load connector plugins */
             PluginManager::loadPlugins($this->eventDispatcher);
-
-            // Initialize Endpoint
-            $this->endpointConnector->initialize($this);
 
             if ($this->endpointConnector instanceof UseChecksumInterface) {
                 ChecksumLinker::setChecksumLoader($this->endpointConnector->getChecksumLoader());
             }
+
+            // Initialize Endpoint
+            $this->endpointConnector->initialize($this);
 
             $responsePacket = $this->execute($requestPacket);
         } catch (\Throwable $ex) {
@@ -195,8 +202,9 @@ class Application implements ApplicationInterface
     }
 
     /**
-     * @param string $controller
+     * @param string $name
      * @param object $instance
+     * @return Application
      */
     public function registerController(string $name, object $instance): Application
     {
@@ -212,17 +220,13 @@ class Application implements ApplicationInterface
      * @throws HttpException
      * @throws LinkerException
      * @throws RpcException
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
+     * @throws \ReflectionException
      */
     protected function execute(RequestPacket $requestPacket): ResponsePacket
     {
         if (!RpcMethod::isMethod($requestPacket->getMethod())) {
             throw new RpcException('Invalid Request', -32600);
         }
-
-        $identityLinker = IdentityLinker::getInstance();
-        $identityLinker->setPrimaryKeyMapper($this->endpointConnector->getPrimaryKeyMapper());
 
         $method = RpcMethod::splitMethod($requestPacket->getMethod());
 
@@ -270,7 +274,7 @@ class Application implements ApplicationInterface
 
             foreach ($models as $model) {
                 if ($model instanceof AbstractDataModel) {
-                    $identityLinker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
+                    $this->linker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
                     $this->linkChecksum($model);
 
                     // Event
@@ -312,6 +316,7 @@ class Application implements ApplicationInterface
      * @param string $modelNamespace
      * @return Request
      * @throws LinkerException
+     * @throws \ReflectionException
      */
     protected function createHandleRequest(RequestPacket $requestPacket, string $modelNamespace): Request
     {
@@ -332,11 +337,9 @@ class Application implements ApplicationInterface
             $serializer = SerializerBuilder::create();
             $params = $serializer->deserialize($serializedParams, $type, 'json');
             if (in_array($action, [Method::ACTION_PUSH, Method::ACTION_DELETE])) {
-                $identityLinker = IdentityLinker::getInstance();
-
                 // Identity mapping
                 foreach ($params as &$param) {
-                    $identityLinker->linkModel($param);
+                    $this->linker->linkModel($param);
                     // Checksum linking
                     $this->linkChecksum($param);
                     // Event
@@ -515,12 +518,12 @@ class Application implements ApplicationInterface
     }
 
     /**
-     * @param Image ...$images
+     * @param AbstractImage ...$images
      * @throws ApplicationException
      * @throws CompressionException
      * @throws HttpException
      */
-    protected function handleImagePush(Image ...$images): void
+    protected function handleImagePush(AbstractImage ...$images): void
     {
         $imagePaths = [];
         $zipFile = HttpRequest::handleFileupload();
@@ -681,5 +684,13 @@ class Application implements ApplicationInterface
     public function getContainer(): Container
     {
         return $this->container;
+    }
+
+    /**
+     * @return IdentityLinker
+     */
+    public function getLinker(): IdentityLinker
+    {
+        return $this->linker;
     }
 }
