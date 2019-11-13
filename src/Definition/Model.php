@@ -1,7 +1,7 @@
 <?php
 namespace Jtl\Connector\Core\Definition;
 
-final class Model
+final class ModelName
 {
     const CATEGORY = 'Category';
     const CATEGORY_ATTRIBUTE = 'CategoryAttr';
@@ -16,6 +16,13 @@ final class Model
     const CUSTOMER_ORDER = 'CustomerOrder';
     const DELIVERY_NOTE = 'DeliveryNote';
     const IMAGE = 'Image';
+    const PRODUCT_IMAGE = 'ProductImage';
+    const CATEGORY_IMAGE = 'CategoryImage';
+    const PRODUCT_VARIATION_VALUE_IMAGE = 'ProductVariationValueImage';
+    const SPECIFIC_IMAGE = 'SpecificImage';
+    const SPECIFIC_VALUE_IMAGE = 'SpecificValueImage';
+    const MANUFACTURER_IMAGE = 'ManufacturerImage';
+    const CONFIG_GROUP_IMAGE = 'ConfigGroupImage';
     const LANGUAGE = 'Language';
     const MANUFACTURER = 'Manufacturer';
     const MEASUREMENT_UNIT = 'MeasurementUnit';
@@ -33,7 +40,7 @@ final class Model
     const UNIT = 'Unit';
     const WAREHOUSE = 'Warehouse';
 
-    protected static $typeMappings = [
+    protected static $mappings = [
         self::CATEGORY => IdentityType::TYPE_CATEGORY,
         self::CATEGORY_ATTRIBUTE => IdentityType::TYPE_CATEGORY_ATTRIBUTE,
         self::CONFIG_GROUP => IdentityType::TYPE_CONFIG_GROUP,
@@ -47,6 +54,13 @@ final class Model
         self::CUSTOMER_ORDER => IdentityType::TYPE_CUSTOMER_ORDER,
         self::DELIVERY_NOTE => IdentityType::TYPE_DELIVERY_NOTE,
         self::IMAGE => IdentityType::TYPE_IMAGE,
+        self::PRODUCT_IMAGE => IdentityType::TYPE_IMAGE,
+        self::CATEGORY_IMAGE => IdentityType::TYPE_IMAGE,
+        self::PRODUCT_VARIATION_VALUE_IMAGE => IdentityType::TYPE_IMAGE,
+        self::SPECIFIC_IMAGE => IdentityType::TYPE_IMAGE,
+        self::SPECIFIC_VALUE_IMAGE => IdentityType::TYPE_IMAGE,
+        self::MANUFACTURER_IMAGE => IdentityType::TYPE_IMAGE,
+        self::CONFIG_GROUP_IMAGE => IdentityType::TYPE_IMAGE,
         self::LANGUAGE => IdentityType::TYPE_LANGUAGE,
         self::MANUFACTURER => IdentityType::TYPE_MANUFACTURER,
         self::MEASUREMENT_UNIT => IdentityType::TYPE_MEASUREMENT_UNIT,
@@ -69,34 +83,34 @@ final class Model
      * @param string $modelName
      * @return boolean
      */
-    public static function canMapToIdentityType(string $modelName): bool
+    public static function hasIdentityType(string $modelName): bool
     {
-        return isset(self::$typeMappings[$modelName]);
+        return isset(self::$mappings[$modelName]);
     }
 
     /**
      * @param string $modelName
      * @return string
      */
-    public static function mapToIdentityType(string $modelName): string
+    public static function getIdentityType(string $modelName): string
     {
-        return self::canMapToIdentityType($modelName) ? self::$typeMappings[$modelName] : null;
+        return self::hasIdentityType($modelName) ? self::$mappings[$modelName] : null;
     }
 
     /**
      * @return string[]
      */
-    public static function getModels(): array
+    public static function getModelNames(): array
     {
-        return array_keys(self::$typeMappings);
+        return array_keys(self::$mappings);
     }
 
     /**
      * @param string $modelName
      * @return boolean
      */
-    public static function isModel(string $modelName): bool
+    public static function isModelName(string $modelName): bool
     {
-        return in_array($modelName, self::getModels());
+        return in_array($modelName, self::getModelNames());
     }
 }

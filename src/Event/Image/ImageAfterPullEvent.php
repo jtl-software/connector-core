@@ -2,7 +2,7 @@
 namespace Jtl\Connector\Core\Event\Image;
 
 use Symfony\Contracts\EventDispatcher\Event;
-use Jtl\Connector\Core\Model\Image;
+use Jtl\Connector\Core\Model\AbstractImage;
 
 class ImageAfterPullEvent extends Event
 {
@@ -10,12 +10,12 @@ class ImageAfterPullEvent extends Event
 
     protected $image;
 
-    public function __construct(Image &$image)
+    public function __construct(AbstractImage $image)
     {
         $this->image = $image;
     }
 
-    public function getImage()
+    public function getImage(): AbstractImage
     {
         return $this->image;
     }

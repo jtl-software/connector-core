@@ -1,11 +1,10 @@
 <?php
-
 namespace Jtl\Connector\Core\Serializer\Handler;
 
 use JMS\Serializer\Context;
 use JMS\Serializer\GraphNavigator;
 use JMS\Serializer\Handler\SubscribingHandlerInterface;
-use JMS\Serializer\JsonSerializationVisitor;
+use JMS\Serializer\JsonDeserializationVisitor;
 use Jtl\Connector\Core\Model\Image;
 
 class ImageHandler implements SubscribingHandlerInterface
@@ -22,7 +21,7 @@ class ImageHandler implements SubscribingHandlerInterface
         ];
     }
 
-    public function deserializeImage(JsonSerializationVisitor $visitor, array $image, array $type, Context $context)
+    public function deserializeImage(JsonDeserializationVisitor $visitor, array $image, array $type, Context $context)
     {
         if (!isset($image['relationType'])) {
             throw new \Exception('Relation type missing');

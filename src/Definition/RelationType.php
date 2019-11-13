@@ -6,7 +6,7 @@
 namespace Jtl\Connector\Core\Definition;
 
 
-final class RelationType
+final class Relation
 {
     const PRODUCT = 'product';
     const CATEGORY = 'category';
@@ -19,7 +19,7 @@ final class RelationType
     /**
      * @var string[]
      */
-    protected static $typeMappings = [
+    protected static $mappings = [
         self::PRODUCT => IdentityType::TYPE_PRODUCT,
         self::CATEGORY => IdentityType::TYPE_CATEGORY,
         self::PRODUCT_VARIATION_VALUE => IdentityType::TYPE_PRODUCT_VARIATION_VALUE,
@@ -33,34 +33,34 @@ final class RelationType
      * @param string $relationType
      * @return boolean
      */
-    public static function canMapToIdentityType(string $relationType): bool
+    public static function canMapToIdentity(string $relationType): bool
     {
-        return isset(self::$typeMappings[$relationType]);
+        return isset(self::$mappings[$relationType]);
     }
 
     /**
      * @param string $relationType
      * @return int|null
      */
-    public static function mapToIdentityType(string $relationType): int
+    public static function mapToIdentity(string $relationType): int
     {
-        return self::canMapToIdentityType($relationType) ? self::$typeMappings[$relationType] : null;
+        return self::canMapToIdentity($relationType) ? self::$mappings[$relationType] : null;
     }
 
     /**
      * @return string[]
      */
-    public static function getRelationTypes(): array
+    public static function getRelations(): array
     {
-        return array_keys(self::$typeMappings);
+        return array_keys(self::$mappings);
     }
 
     /**
      * @param string $relationType
      * @return bool
      */
-    public static function isRelationType(string $relationType): bool
+    public static function isRelation(string $relationType): bool
     {
-        return in_array($relationType, self::getRelationTypes());
+        return in_array($relationType, self::getRelations());
     }
 }

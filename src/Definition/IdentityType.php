@@ -1,7 +1,7 @@
 <?php
 namespace Jtl\Connector\Core\Definition;
 
-class IdentityType
+class Identity
 {
     const TYPE_CATEGORY = 1;
     const TYPE_CUSTOMER = 2;
