@@ -73,16 +73,17 @@ class Connector extends AbstractController
         /** @var Ack $ack */
         $ack = $serializer->deserialize($params, Ack::class, 'json');
         foreach ($ack->getIdentities() as $modelName => $identities) {
-            if (!Model::isModel($modelName)) {
+            $normalizedName = Model::normalizeName($modelName);
+            if (!Model::isModel($normalizedName)) {
                 Logger::write(sprintf(
                     'ACK: Unknown core entity (%s)! Skipping related ack\'s...',
-                    $modelName
+                    $normalizedName
                 ), Logger::WARNING);
                 continue;
             }
 
             foreach ($identities as $identity) {
-                $this->application->getLinker()->save($identity->getEndpoint(), $identity->getHost(), $modelName);
+                $this->application->getLinker()->save($identity->getEndpoint(), $identity->getHost(), $normalizedName);
             }
         }
 

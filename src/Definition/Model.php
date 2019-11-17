@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Definition;
 
 use Jtl\Connector\Core\Exception\DefinitionException;
@@ -327,12 +328,12 @@ final class Model
      */
     public static function getModelByType(int $type): string
     {
-        if(!IdentityType::isType($type)) {
+        if (!IdentityType::isType($type)) {
             throw DefinitionException::unknownIdentityType($type);
         }
 
         $type = array_search($type, self::$mappings, true);
-        if($type === false) {
+        if ($type === false) {
             throw DefinitionException::identityTypeMappingNotExists($type);
         }
         return $type;
@@ -353,5 +354,18 @@ final class Model
     public static function isModel(string $modelName): bool
     {
         return in_array($modelName, self::getModels());
+    }
+
+    /**
+     * @param string $modelName
+     * @return string
+     */
+    public static function normalizeName(string $modelName): string
+    {
+        $parts = explode('_', $modelName);
+        foreach ($parts as $i => $part) {
+            $parts[$i] = ucfirst($part);
+        }
+        return implode('', $parts);
     }
 }
