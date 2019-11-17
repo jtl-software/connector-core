@@ -11,7 +11,6 @@ use DateTime;
 use InvalidArgumentException;
 use Jtl\Connector\Core\Exception\NotImplementedException;
 use JMS\Serializer\Annotation as Serializer;
-use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Type\AbstractDataType;
 use ReflectionClass;
 use ReflectionException;
@@ -34,7 +33,7 @@ abstract class AbstractDataModel extends AbstractModel
      * @Serializer\Exclude
      */
     private $type = null;
-    
+
     /**
      * @var boolean
      * @Serializer\Type("boolean")
@@ -83,23 +82,31 @@ abstract class AbstractDataModel extends AbstractModel
 
         return null;
     }
-    
+
     /**
      * @return AbstractDataType
      * @throws ReflectionException
      */
     public function getModelType(): AbstractDataType
     {
+        $coreModelNamespace = 'Jtl\\Connector\\Core\\Model';
         if ($this->type === null) {
             $reflect = new ReflectionClass($this);
+            if($reflect->getNamespaceName() !== $coreModelNamespace) {
+                while($reflect = $reflect->getParentClass()) {
+                    if($reflect->getNamespaceName() === $coreModelNamespace) {
+                        break;
+                    }
+                }
+            }
+
             $class = 'Jtl\\Connector\\Core\\Type\\' . $reflect->getShortName();
-            
             $this->type = new $class;
         }
-        
+
         return $this->type;
     }
-    
+
     /**
      * Encrypted Status
      *
@@ -109,7 +116,7 @@ abstract class AbstractDataModel extends AbstractModel
     {
         return $this->isEncrypted;
     }
-    
+
     /**
      * Convert the Model into stdClass Object
      *
@@ -119,7 +126,7 @@ abstract class AbstractDataModel extends AbstractModel
     public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', 'type']): stdClass
     {
         $object = new stdClass();
-        
+
         $recursive = function (array $subElems, array $publics) use (&$recursive) {
             $arr = [];
             foreach ($subElems as $subElem) {
@@ -135,16 +142,16 @@ abstract class AbstractDataModel extends AbstractModel
                     $arr[] = $subElem;
                 }
             }
-            
+
             return $arr;
         };
-        
+
         $members = array_keys(get_object_vars($this));
         if (is_array($members) && count($members) > 0) {
             foreach ($members as $member) {
                 $property = ucfirst($member);
                 $getter = 'get' . $property;
-                
+
                 if (!in_array($member, $publics, true)) {
                     if ($this->{$getter}() instanceof AbstractDataModel) {
                         $object->{$member} = $this->{$getter}()->getPublic($publics);
@@ -160,10 +167,10 @@ abstract class AbstractDataModel extends AbstractModel
                 }
             }
         }
-        
+
         return $object;
     }
-    
+
     /**
      * @param string $propertyName
      * @param string|null $endpoint
@@ -176,7 +183,7 @@ abstract class AbstractDataModel extends AbstractModel
         foreach ($this->getModelType()->getProperties() as $propertyInfo) {
             $property = ucfirst($propertyInfo->getName());
             $getter = 'get' . $property;
-            
+
             if ($propertyInfo->isNavigation() && !is_null($this->{$getter}())) {
                 if (is_array($this->{$getter}())) {
                     $list = $this->{$getter}();
@@ -187,7 +194,7 @@ abstract class AbstractDataModel extends AbstractModel
                             if (!is_null($endpoint)) {
                                 $entity->setEndpoint($endpoint);
                             }
-                            
+
                             if (!is_null($host)) {
                                 $entity->setHost($host);
                             }
@@ -201,18 +208,18 @@ abstract class AbstractDataModel extends AbstractModel
             } elseif ($propertyInfo->isIdentity() && $propertyName === $propertyInfo->getName()) {
                 /* @var Identity $identity */
                 $identity = $this->{$getter}();
-                
+
                 if (!is_null($endpoint)) {
                     $identity->setEndpoint($endpoint);
                 }
-                
+
                 if (!is_null($host)) {
                     $identity->setHost($host);
                 }
             }
         }
     }
-    
+
     protected function setProperty($name, $value, $type): AbstractDataModel
     {
         if (!$this->validateType($value, $type)) {
@@ -224,18 +231,18 @@ abstract class AbstractDataModel extends AbstractModel
                 gettype($value)
             ));
         }
-        
+
         $this->{$name} = $value;
-        
+
         return $this;
     }
-    
+
     protected function validateType($value, $type): bool
     {
         if ($value === null) {
             return true;
         }
-        
+
         switch ($type) {
             case 'boolean':
             case 'bool':
@@ -258,7 +265,7 @@ abstract class AbstractDataModel extends AbstractModel
                 if (is_object($value)) {
                     return is_null($value) || is_subclass_of($value, 'Jtl\Connector\Core\Model\AbstractDataModel');
                 }
-                
+
                 throw new InvalidArgumentException(sprintf("type '%s' validator not found", $type));
         }
     }
