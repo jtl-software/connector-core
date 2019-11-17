@@ -16,9 +16,11 @@ use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Connector\HandleRequestInterface;
 use Jtl\Connector\Core\Connector\ModelInterface;
 use Jtl\Connector\Core\Controller\TransactionalInterface;
+use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Event\Handle\ResponseAfterHandleEvent;
 use Jtl\Connector\Core\Event\Handle\RequestBeforeHandleEvent;
 use Jtl\Connector\Core\Exception\CompressionException;
+use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\HttpException;
 use Jtl\Connector\Core\IO\Temp;
 use Jtl\Connector\Core\Model\AbstractImage;
@@ -205,9 +207,14 @@ class Application implements ApplicationInterface
      * @param string $name
      * @param object $instance
      * @return Application
+     * @throws DefinitionException
      */
     public function registerController(string $name, object $instance): Application
     {
+        if(!Model::isModel($name)) {
+            throw DefinitionException::unknownModel($name);
+        }
+
         $this->container->set($name, $instance);
         return $this;
     }
@@ -220,6 +227,8 @@ class Application implements ApplicationInterface
      * @throws HttpException
      * @throws LinkerException
      * @throws RpcException
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
      * @throws \ReflectionException
      */
     protected function execute(RequestPacket $requestPacket): ResponsePacket
@@ -338,7 +347,7 @@ class Application implements ApplicationInterface
             $params = $serializer->deserialize($serializedParams, $type, 'json');
             if (in_array($action, [Method::ACTION_PUSH, Method::ACTION_DELETE])) {
                 // Identity mapping
-                foreach ($params as &$param) {
+                foreach ($params as $param) {
                     $this->linker->linkModel($param);
                     // Checksum linking
                     $this->linkChecksum($param);

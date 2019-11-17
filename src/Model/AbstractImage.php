@@ -90,7 +90,7 @@ abstract class AbstractImage extends AbstractDataModel
     /**
      * @param Identity $foreignKey
      * @return Image
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setForeignKey(Identity $foreignKey): AbstractImage
     {
@@ -110,7 +110,7 @@ abstract class AbstractImage extends AbstractDataModel
     /**
      * @param Identity $id
      * @return Image
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id): AbstractImage
     {

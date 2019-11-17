@@ -17,7 +17,6 @@ use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Features;
 use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\System\Check;
-use Jtl\Connector\Core\Linker\IdentityLinker;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
@@ -71,6 +70,7 @@ class Connector extends AbstractController
     public function ack($params = null)
     {
         $serializer = SerializerBuilder::create();
+        /** @var Ack $ack */
         $ack = $serializer->deserialize($params, Ack::class, 'json');
         foreach ($ack->getIdentities() as $modelName => $identities) {
             if (!Model::isModel($modelName)) {

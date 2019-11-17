@@ -33,7 +33,7 @@ abstract class AbstractDataModel extends AbstractModel
      * @Serializer\AccessType("reflection")
      * @Serializer\Exclude
      */
-    private $_type = null;
+    private $type = null;
     
     /**
      * @var boolean
@@ -90,14 +90,14 @@ abstract class AbstractDataModel extends AbstractModel
      */
     public function getModelType(): AbstractDataType
     {
-        if ($this->_type === null) {
+        if ($this->type === null) {
             $reflect = new ReflectionClass($this);
             $class = 'Jtl\\Connector\\Core\\Type\\' . $reflect->getShortName();
             
-            $this->_type = new $class;
+            $this->type = new $class;
         }
         
-        return $this->_type;
+        return $this->type;
     }
     
     /**
@@ -230,7 +230,7 @@ abstract class AbstractDataModel extends AbstractModel
         return $this;
     }
     
-    protected function validateType($value, $type)
+    protected function validateType($value, $type): bool
     {
         if ($value === null) {
             return true;

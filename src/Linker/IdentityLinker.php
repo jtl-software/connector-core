@@ -6,6 +6,7 @@
 namespace Jtl\Connector\Core\Linker;
 
 use Jtl\Connector\Core\Definition\Model;
+use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\AbstractDataModel;
 use Jtl\Connector\Core\Exception\LinkerException;
@@ -63,7 +64,8 @@ class IdentityLinker
 
     /**
      * @param AbstractDataModel $model
-     * @param bool $isDeleted
+     * @param boolean $isDeleted
+     * @throws DefinitionException
      * @throws LinkerException
      * @throws \ReflectionException
      */
@@ -112,7 +114,7 @@ class IdentityLinker
                 if (strlen($identity->getEndpoint()) > 0 && $identity->getHost() > 0) {
                     if ($isDeleted) {
                         $this->delete($reflect->getShortName(), $identity->getEndpoint(), $identity->getHost());
-                    } elseif (!$this->exists($reflect->getShortName(), $property, null, $identity->getHost(), true)) {
+                    } elseif (!$this->propertyHostIdExists($reflect->getShortName(), $property, $identity->getHost(), true)) {
                         $this->save($identity->getEndpoint(), $identity->getHost(), $reflect->getShortName(), $property);
                     }
 
@@ -121,7 +123,7 @@ class IdentityLinker
                     if ($identity->getHost() > 0) {
                         if ($isDeleted) {
                             $this->delete($reflect->getShortName(), null, $identity->getHost());
-                        } elseif ($this->exists($reflect->getShortName(), $property, null, $identity->getHost())) {
+                        } elseif ($this->propertyHostIdExists($reflect->getShortName(), $property, $identity->getHost())) {
                             $identity->setEndpoint($this->getEndpointId($reflect->getShortName(), $property, $identity->getHost()));
 
                             $model->{$setter}($identity);
@@ -129,7 +131,7 @@ class IdentityLinker
                     } elseif (strlen($identity->getEndpoint()) > 0) {
                         if ($isDeleted) {
                             $this->delete($reflect->getShortName(), $identity->getEndpoint(), null);
-                        } elseif ($this->exists($reflect->getShortName(), $property, $identity->getEndpoint(), null)) {
+                        } elseif ($this->propertyEndpointIdExists($reflect->getShortName(), $property, $identity->getEndpoint())) {
                             $identity->setHost($this->getHostId($reflect->getShortName(), $property, $identity->getEndpoint()));
 
                             $model->{$setter}($identity);
@@ -144,7 +146,8 @@ class IdentityLinker
      * @param Identity $identity
      * @param string $modelName
      * @param string $property
-     * @param bool $isDeleted
+     * @param boolean $isDeleted
+     * @throws DefinitionException
      * @throws LinkerException
      */
     public function linkIdentityList(Identity $identity, string $modelName, string $property, bool $isDeleted = false): void
@@ -152,20 +155,20 @@ class IdentityLinker
         if (strlen($identity->getEndpoint()) > 0 && $identity->getHost() > 0) {
             if ($isDeleted) {
                 $this->delete($modelName, $identity->getEndpoint(), $identity->getHost());
-            } elseif (!$this->exists($modelName, $property, null, $identity->getHost(), true)) {
+            } elseif (!$this->propertyHostIdExists($modelName, $property, $identity->getHost(), true)) {
                 $this->save($identity->getEndpoint(), $identity->getHost(), $modelName, $property);
             }
         } else {
             if ($identity->getHost() > 0) {
                 if ($isDeleted) {
                     $this->delete($modelName, null, $identity->getHost());
-                } elseif ($this->exists($modelName, $property, null, $identity->getHost())) {
+                } elseif ($this->propertyHostIdExists($modelName, $property, $identity->getHost())) {
                     $identity->setEndpoint($this->getEndpointId($modelName, $property, $identity->getHost()));
                 }
             } elseif (strlen($identity->getEndpoint()) > 0) {
                 if ($isDeleted) {
                     $this->delete($modelName, $identity->getEndpoint(), null);
-                } elseif ($this->exists($modelName, $property, $identity->getEndpoint(), null)) {
+                } elseif ($this->propertyEndpointIdExists($modelName, $property, $identity->getEndpoint())) {
                     $identity->setHost($this->getHostId($modelName, $property, $identity->getEndpoint()));
                 }
             }
@@ -173,22 +176,19 @@ class IdentityLinker
     }
 
     /**
-     * Checks if link exists
-     *
-     * @param string $endpointId
-     * @param integer $hostId
      * @param string $modelName
      * @param string $property
+     * @param integer $hostId
      * @param boolean $validate
      * @return boolean
+     * @throws DefinitionException
      * @throws LinkerException
      */
-    public function exists(string $modelName, string $property, string $endpointId = null, int $hostId = null, bool $validate = false): bool
+    public function propertyHostIdExists(string $modelName, string $property, int $hostId, bool $validate = false): bool
     {
-        if (!$this->isValidEndpointId($endpointId) && !$this->isValidHostId($hostId)) {
+        if (!$this->isValidHostId($hostId)) {
             throw new LinkerException(sprintf(
-                'Both parameters (endpointId = %s, hostId = %s, modelName: %s, property: %s) are invalid.',
-                $endpointId,
+                'HostId (%s) => (modelName: %s, property: %s) is invalid.',
                 $hostId,
                 $modelName,
                 $property
@@ -196,42 +196,102 @@ class IdentityLinker
         }
 
         $type = Model::getPropertyIdentityType($modelName, $property);
+        $modelName = Model::getModelByType($type);
+        return $this->hostIdExists($modelName, $hostId, $validate);
+    }
 
-        $id = null;
-        $cacheType = null;
-        if ($this->isValidEndpointId($endpointId)) {
-            $id = $endpointId;
-            $cacheType = self::CACHE_TYPE_ENDPOINT;
-        } elseif ($this->isValidHostId($hostId)) {
-            $id = $hostId;
-            $cacheType = self::CACHE_TYPE_HOST;
+    /**
+     * @param string $modelName
+     * @param integer $hostId
+     * @param boolean $validate
+     * @return boolean
+     * @throws DefinitionException
+     * @throws LinkerException
+     */
+    public function hostIdExists(string $modelName, int $hostId, bool $validate = false): bool
+    {
+        if (!$this->isValidHostId($hostId)) {
+            throw new LinkerException(sprintf(
+                'HostId (%s) => (modelName: %s) is invalid.',
+                $hostId,
+                $modelName
+            ));
         }
 
-        if ($this->checkCache($id, $type, $cacheType, $validate)) {
-            return true;
-        }
-
-        if ($this->isValidEndpointId($endpointId)) {
-            $hostId = $this->mapper->getHostId($type, $endpointId);
-        } elseif ($this->isValidHostId($hostId)) {
+        $type = Model::getIdentityType($modelName);
+        if (!$this->checkCache($hostId, $type, self::CACHE_TYPE_HOST, $validate)) {
             $endpointId = $this->mapper->getEndpointId($type, $hostId);
+            if ($validate && !$this->isValidEndpointId($endpointId)) {
+                return false;
+            }
+            $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_HOST);
         }
 
-        if ($validate && !$this->isValidEndpointId($endpointId)) {
-            return false;
+        return true;
+    }
+
+    /**
+     * @param string $modelName
+     * @param string $property
+     * @param integer $endpointId
+     * @param boolean $validate
+     * @return boolean
+     * @throws LinkerException
+     * @throws DefinitionException
+     */
+    public function propertyEndpointIdExists(string $modelName, string $property, int $endpointId, bool $validate = false): bool
+    {
+        if (!$this->isValidEndpointId($endpointId)) {
+            throw new LinkerException(sprintf(
+                'EndpointId (%s) => (modelName: %s, property: %s) is invalid.',
+                $endpointId,
+                $modelName,
+                $property
+            ));
         }
 
-        $this->saveCache($endpointId, $hostId, $type, $cacheType);
+        $type = Model::getPropertyIdentityType($modelName, $property);
+        $modelName = Model::getModelByType($type);
+        return $this->endpointIdExists($modelName, $endpointId, $validate);
+    }
+
+    /**
+     * @param string $modelName
+     * @param string $endpointId
+     * @param boolean $validate
+     * @return boolean
+     * @throws LinkerException
+     * @throws DefinitionException
+     */
+    public function endpointIdExists(string $modelName, string $endpointId, bool $validate = false): bool
+    {
+        if (!$this->isValidEndpointId($endpointId)) {
+            throw new LinkerException(sprintf(
+                'EndpointId (%s) => (modelName: %s) is invalid.',
+                $endpointId,
+                $modelName
+            ));
+        }
+
+        $type = Model::getIdentityType($modelName);
+        if (!$this->checkCache($endpointId, $type, self::CACHE_TYPE_ENDPOINT, $validate)) {
+            $hostId = $this->mapper->getHostId($type, $endpointId);
+            if($validate && !$this->isValidHostId($hostId)) {
+                return false;
+            }
+            $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_ENDPOINT);
+        }
 
         return true;
     }
 
     /**
      * @param string $endpointId
-     * @param int $hostId
+     * @param integer $hostId
      * @param string $modelName
      * @param string|null $property
-     * @return bool
+     * @return boolean
+     * @throws DefinitionException
      */
     public function save(string $endpointId, int $hostId, string $modelName, string $property = null): bool
     {
@@ -253,8 +313,9 @@ class IdentityLinker
     /**
      * @param string $modelName
      * @param string|null $endpointId
-     * @param int|null $hostId
+     * @param integer|null $hostId
      * @return boolean
+     * @throws DefinitionException
      */
     public function delete(string $modelName, string $endpointId = null, int $hostId = null): bool
     {
@@ -284,8 +345,9 @@ class IdentityLinker
     /**
      * @param string $modelName
      * @param string $property
-     * @param int $hostId
+     * @param integer $hostId
      * @return string
+     * @throws DefinitionException
      */
     public function getEndpointId(string $modelName, string $property, int $hostId): string
     {
@@ -307,7 +369,8 @@ class IdentityLinker
      * @param string $modelName
      * @param string $property
      * @param string $endpointId
-     * @return bool|int|mixed
+     * @return integer
+     * @throws DefinitionException
      */
     public function getHostId(string $modelName, string $property, string $endpointId): int
     {
@@ -328,10 +391,10 @@ class IdentityLinker
 
     /**
      * @param mixed $id
-     * @param int $type
+     * @param integer $type
      * @param string $cacheType
-     * @param bool $validate
-     * @return bool
+     * @param boolean $validate
+     * @return boolean
      */
     protected function checkCache($id, int $type, string $cacheType, bool $validate = false): bool
     {
