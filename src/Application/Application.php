@@ -324,6 +324,7 @@ class Application implements ApplicationInterface
      * @param RequestPacket $requestPacket
      * @param string $modelNamespace
      * @return Request
+     * @throws DefinitionException
      * @throws LinkerException
      * @throws \ReflectionException
      */
@@ -333,7 +334,7 @@ class Application implements ApplicationInterface
 
         $controller = RpcMethod::buildController($method->getController());
         $action = $method->getAction();
-        $serializedParams = $requestPacket->getParams() ?? '';
+        $serializedParams = $requestPacket->getParams();
         $params = [];
 
         $type = $className = QueryFilter::class;
@@ -344,7 +345,14 @@ class Application implements ApplicationInterface
 
         if (class_exists($className)) {
             $serializer = SerializerBuilder::create();
-            $params = $serializer->deserialize($serializedParams, $type, 'json');
+            if(is_string($serializedParams) && strlen($serializedParams) > 0) {
+                $params = $serializer->deserialize($serializedParams, $type, 'json');
+            }
+
+            if(!is_array($params)) {
+                $params = [$params];
+            }
+
             if (in_array($action, [Method::ACTION_PUSH, Method::ACTION_DELETE])) {
                 // Identity mapping
                 foreach ($params as $param) {
@@ -360,7 +368,6 @@ class Application implements ApplicationInterface
                     );
                 }
             } else {
-                $params = [$params];
                 // Event
                 EventHandler::dispatch(
                     $params,
