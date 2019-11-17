@@ -83,7 +83,7 @@ class IdentityType
     /**
      * @return array
      */
-    public static function getIdentityTypes(): array
+    public static function getTypes(): array
     {
         return self::$types;
     }
@@ -92,7 +92,7 @@ class IdentityType
      * @param int $type
      * @return boolean
      */
-    public static function isIdentityType(int $type): bool
+    public static function isType(int $type): bool
     {
         return in_array($type, self::$types);
     }
