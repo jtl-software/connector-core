@@ -116,7 +116,7 @@ abstract class AbstractDataModel extends AbstractModel
      * @param array $publics
      * @return stdClass $object
      */
-    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', '_type']): stdClass
+    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', 'type']): stdClass
     {
         $object = new stdClass();
         
