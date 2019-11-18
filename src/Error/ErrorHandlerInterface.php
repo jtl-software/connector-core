@@ -4,7 +4,7 @@
  * @package Jtl\Connector\Core\Application
  */
 
-namespace Jtl\Connector\Core\Application\Error;
+namespace Jtl\Connector\Core\Error;
 
 use Symfony\Component\EventDispatcher\EventDispatcher;
 

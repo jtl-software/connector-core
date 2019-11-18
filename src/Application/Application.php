@@ -8,8 +8,8 @@ namespace Jtl\Connector\Core\Application;
 
 use DI\Container;
 use DI\ContainerBuilder;
-use Jtl\Connector\Core\Application\Error\ErrorHandler;
-use Jtl\Connector\Core\Application\Error\ErrorHandlerInterface;
+use Jtl\Connector\Core\Error\ErrorHandler;
+use Jtl\Connector\Core\Error\ErrorHandlerInterface;
 use Jtl\Connector\Core\Connector\UseChecksumInterface;
 use Jtl\Connector\Core\Compression\Zip;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
@@ -204,18 +204,18 @@ class Application implements ApplicationInterface
     }
 
     /**
-     * @param string $name
+     * @param string $modelName
      * @param object $instance
      * @return Application
      * @throws DefinitionException
      */
-    public function registerController(string $name, object $instance): Application
+    public function registerController(string $modelName, object $instance): Application
     {
-        if(!Model::isModel($name)) {
-            throw DefinitionException::unknownModel($name);
+        if(!Model::isModel($modelName)) {
+            throw DefinitionException::unknownModel($modelName);
         }
 
-        $this->container->set($name, $instance);
+        $this->container->set($modelName, $instance);
         return $this;
     }
 

@@ -7,9 +7,10 @@
 
 namespace Jtl\Connector\Core\Controller;
 
-use Jtl\Connector\Core\Application\Error\ErrorCodesInterface;
+use Jtl\Connector\Core\Definition\ErrorCode;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\ApplicationException;
+use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\Exception\MissingRequirementException;
 use Jtl\Connector\Core\IO\Path;
@@ -63,9 +64,9 @@ class Connector extends AbstractController
     }
 
     /**
-     * @param string|null $params
-     * @return boolean
-     * @throws LinkerException
+     * @param null $params
+     * @return bool
+     * @throws DefinitionException
      */
     public function ack($params = null)
     {
@@ -138,7 +139,7 @@ class Connector extends AbstractController
 
         $errorMessage = 'Could not get any Session';
         Logger::write($errorMessage, Logger::ERROR, Logger::CHANNEL_GLOBAL);
-        throw new ApplicationException($errorMessage, ErrorCodesInterface::SESSION_ERROR);
+        throw new ApplicationException($errorMessage, ErrorCode::SESSION_ERROR);
     }
 
     /**

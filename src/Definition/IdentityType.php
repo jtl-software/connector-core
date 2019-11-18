@@ -39,61 +39,29 @@ class IdentityType
     const SPECIFIC_VALUE_IMAGE = 52;
     const CONFIG_GROUP_IMAGE = 54;
 
-    /**
-     * @var string[]
-     */
-    protected static $types = [
-        self::CATEGORY,
-        self::CUSTOMER,
-        self::CUSTOMER_ORDER,
-        self::DELIVERY_NOTE,
-        self::IMAGE,
-        self::MANUFACTURER,
-        self::PRODUCT,
-        self::SPECIFIC,
-        self::SPECIFIC_VALUE,
-        self::PAYMENT,
-        self::CROSSSELLING,
-        self::CROSSSELLING_GROUP,
-        self::SHIPPING_CLASS,
-        self::CONFIG_GROUP,
-        self::CONFIG_ITEM,
-        self::CURRENCY,
-        self::CUSTOMER_GROUP,
-        self::LANGUAGE,
-        self::UNIT,
-        self::MEASUREMENT_UNIT,
-        self::PRODUCT_TYPE,
-        self::SHIPPING_METHOD,
-        self::TAX_RATE,
-        self::WAREHOUSE,
-        self::CATEGORY_ATTRIBUTE,
-        self::PRODUCT_ATTRIBUTE,
-        self::PRODUCT_VARIATION,
-        self::PRODUCT_VARIATION_VALUE,
-        self::PRODUCT_IMAGE,
-        self::CATEGORY_IMAGE,
-        self::MANUFACTURER_IMAGE,
-        self::PRODUCT_VARIATION_VALUE_IMAGE,
-        self::SPECIFIC_IMAGE,
-        self::SPECIFIC_VALUE_IMAGE,
-        self::CONFIG_GROUP_IMAGE,
-    ];
+    protected static $types = null;
 
     /**
-     * @return array
+     * @return integer[]
+     * @throws \ReflectionException
      */
     public static function getTypes(): array
     {
-        return self::$types;
+        if(is_null(static::$types)) {
+            $reflection = new \ReflectionClass(static::class);
+            static::$types = $reflection->getConstants();
+        }
+
+        return static::$types;
     }
 
     /**
-     * @param int $type
+     * @param integer $type
      * @return boolean
+     * @throws \ReflectionException
      */
     public static function isType(int $type): bool
     {
-        return in_array($type, self::$types);
+        return in_array($type, self::getTypes());
     }
 }
