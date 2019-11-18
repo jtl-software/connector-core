@@ -29,11 +29,22 @@ class JsonStringHandler implements SubscribingHandlerInterface
                 'type' => JsonString::class,
                 'method' => 'deserializeJsonString',
             ],
+            [
+                'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
+                'format' => 'json',
+                'type' => JsonString::class,
+                'method' => 'serializeJsonString',
+            ],
         ];
     }
 
     public function deserializeJsonString(JsonDeserializationVisitor $visitor, $params, array $type, Context $context)
     {
         return Json::encode($params);
+    }
+
+    public function serializeJsonString(JsonDeserializationVisitor $visitor, $params, array $type, Context $context)
+    {
+        return Json::decode($params);
     }
 }

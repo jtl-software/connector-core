@@ -4,10 +4,14 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Rpc
  */
+
 namespace Jtl\Connector\Core\Rpc;
 
+use JMS\Serializer\Handler\HandlerRegistry;
+use JMS\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Exception\RpcException;
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Serializer\Handler\JsonStringHandler;
 
 /**
  * Rpc Response Packet
@@ -26,7 +30,7 @@ class ResponsePacket extends Packet
      * @var integer | array | string | NULL
      */
     protected $result;
-    
+
     /**
      * This member is REQUIRED on error This member MUST NOT exist if there was
      * no error triggered during invocation.
@@ -89,36 +93,52 @@ class ResponsePacket extends Packet
     final public function validate()
     {
         $isValid = true;
-        
+
         // JSON-RPC protocol
         if ($this->getJtlrpc() === null || $this->getJtlrpc() != "2.0") {
             $isValid = false;
         }
-        
+
         // This member MUST NOT exist if there was an error invoking the method.
         //if ($this->getResult() !== null && $this->getError() !== null) {
         //$isValid = false;
         //}
-        
+
         // This member MUST NOT exist if there was no error triggered during
         // invocation.
         if ($this->getResult() === null && $this->getError() === null) {
             $isValid = false;
         }
-        
+
         if ($this->getError() !== null) {
             $error = $this->getError();
             $error->validate();
         }
-        
+
         // An identifier established by the Client that MUST contain a String,
         // Number, or NULL value if included
         if ($this->getId() === null || strlen($this->getId()) == 0) {
             $isValid = false;
         }
-        
+
         if (!$isValid) {
             throw new RpcException("Parse error", -32700);
         }
+    }
+
+
+    /**
+     * @return string
+     */
+    public function build()
+    {
+        $serializer = SerializerBuilder::create()
+            ->addDefaultHandlers()
+            ->configureHandlers(function (HandlerRegistry $registry) {
+                $registry->registerSubscribingHandler(new JsonStringHandler());
+            })
+            ->build();
+
+        return $serializer->serialize($this, 'json');
     }
 }
