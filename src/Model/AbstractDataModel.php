@@ -28,11 +28,11 @@ abstract class AbstractDataModel extends AbstractModel
 {
     /**
      * @var AbstractDataType
-     * @Serializer\Type("Jtl\Connector\Core\Type\DataType")
+     * @Serializer\Type("Jtl\Connector\Core\Type\AbstractDataType")
      * @Serializer\AccessType("reflection")
      * @Serializer\Exclude
      */
-    private $type = null;
+    private $modelType = null;
 
     /**
      * @var boolean
@@ -90,7 +90,7 @@ abstract class AbstractDataModel extends AbstractModel
     public function getModelType(): AbstractDataType
     {
         $coreModelNamespace = 'Jtl\\Connector\\Core\\Model';
-        if ($this->type === null) {
+        if ($this->modelType === null) {
             $reflect = new ReflectionClass($this);
             if($reflect->getNamespaceName() !== $coreModelNamespace) {
                 while($reflect = $reflect->getParentClass()) {
@@ -101,10 +101,10 @@ abstract class AbstractDataModel extends AbstractModel
             }
 
             $class = 'Jtl\\Connector\\Core\\Type\\' . $reflect->getShortName();
-            $this->type = new $class;
+            $this->modelType = new $class;
         }
 
-        return $this->type;
+        return $this->modelType;
     }
 
     /**
@@ -123,7 +123,7 @@ abstract class AbstractDataModel extends AbstractModel
      * @param array $publics
      * @return stdClass $object
      */
-    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', 'type']): stdClass
+    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', 'modelType']): stdClass
     {
         $object = new stdClass();
 
