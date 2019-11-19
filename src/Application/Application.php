@@ -198,7 +198,7 @@ class Application implements ApplicationInterface
                 $this->imagesToDelete = [];
             }
 
-            $jsonResponse = $responsePacket->build();
+            $jsonResponse = $responsePacket->serialize();
 
             $this->triggerRpcAfterEvent($jsonResponse, $requestPacket->getMethod());
             HttpResponse::send($jsonResponse);

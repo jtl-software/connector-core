@@ -39,10 +39,10 @@ class ErrorHandler implements ErrorHandlerInterface
     }
 
     /**
-     * @param \stdClass $data
+     * @param $data
      * @param string $method
      */
-    protected function triggerRpcAfterEvent(\stdClass $data, string $method)
+    protected function triggerRpcAfterEvent($data, string $method)
     {
         if ($this->eventDispatcher !== null) {
             $method = RpcMethod::splitMethod($method);
@@ -82,19 +82,20 @@ class ErrorHandler implements ErrorHandlerInterface
 
             Logger::write($error->getData(), Logger::ERROR, 'global');
 
-            $responsepacket = new ResponsePacket();
-            $responsepacket->setError($error)
+            $responsePacket = new ResponsePacket();
+            $responsePacket->setError($error)
                 ->setId('unknown')
                 ->setJtlrpc('2.0');
 
             $method = 'unknown.unknown';
             if (isset($requestpacket) && $requestpacket !== null && is_object($requestpacket) && $requestpacket instanceof RequestPacket) {
-                $responsepacket->setId($requestpacket->getId());
+                $responsePacket->setId($requestpacket->getId());
                 $method = $requestpacket->getMethod();
             }
 
-            $this->triggerRpcAfterEvent($responsepacket->getPublic(), $method);
-            Response::send($responsepacket);
+            $this->triggerRpcAfterEvent($responsePacket, $method);
+
+            Response::send($responsePacket->serialize());
         };
     }
 
@@ -177,14 +178,14 @@ class ErrorHandler implements ErrorHandlerInterface
                         $error->getMessage()
                     ), Logger::ERROR, 'global');
 
-                    $responsepacket = new ResponsePacket();
-                    $responsepacket->setError($error)
+                    $responsePacket = new ResponsePacket();
+                    $responsePacket->setError($error)
                         ->setId('unknown')
                         ->setJtlrpc('2.0');
 
-                    $this->triggerRpcAfterEvent($responsepacket->getPublic(), 'unknown.unknown');
+                    $this->triggerRpcAfterEvent($responsePacket, 'unknown.unknown');
 
-                    Response::send($responsepacket);
+                    Response::send($responsePacket->serialize());
                 }
             }
         };
