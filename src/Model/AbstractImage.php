@@ -89,6 +89,9 @@ abstract class AbstractImage extends AbstractDataModel
         $this->id = new Identity();
     }
 
+    /**
+     * @return string
+     */
     public abstract function getRelationType(): string;
 
     /**
