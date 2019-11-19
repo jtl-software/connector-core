@@ -4,14 +4,12 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Rpc
  */
-
 namespace Jtl\Connector\Core\Rpc;
 
-use JMS\Serializer\Handler\HandlerRegistry;
-use JMS\Serializer\SerializerBuilder;
-use Jtl\Connector\Core\Exception\RpcException;
 use JMS\Serializer\Annotation as Serializer;
-use Jtl\Connector\Core\Serializer\Handler\ProductHandler;
+use JMS\Serializer\SerializationContext;
+use Jtl\Connector\Core\Exception\RpcException;
+use Jtl\Connector\Core\Serializer\SerializerBuilder
 
 /**
  * Rpc Response Packet
@@ -131,8 +129,8 @@ class ResponsePacket extends Packet
      */
     public function serialize(): string
     {
-        $serializer = \Jtl\Connector\Core\Serializer\SerializerBuilder::getInstance();
-
-        return $serializer->serialize($this, 'json');
+        $serializer = SerializerBuilder::getInstance();
+        $context = (new SerializationContext())->setSerializeNull(true);
+        return $serializer->serialize($this, 'json', $context);
     }
 }

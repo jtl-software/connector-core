@@ -9,6 +9,8 @@ namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
 use stdClass;
+use JMS\Serializer\Annotation as Serializer;
+
 
 /**
  * Statistic Model
@@ -20,25 +22,21 @@ use stdClass;
 class Statistic extends AbstractDataModel
 {
     /**
-     * @type int
+     * @var int
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("available")
+     * @Serializer\Accessor(getter="getAvailable",setter="setAvailable")
      */
     protected $available = 0;
-    
+
     /**
-     * @type string
+     * @var string
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("controllerName")
+     * @Serializer\Accessor(getter="getControllerName",setter="setControllerName")
      */
     protected $controllerName = '';
-    
-    /**
-     * (non-PHPdoc)
-     * @param bool $toWawi
-     * @param stdClass|null $obj
-     * @see Jtl\Connector\Core\Model\AbstractDataModel::map()
-     */
-    public function map(bool $toWawi = false, stdClass $obj = null)
-    {
-    }
-    
+
     /**
      * @return integer
      */
@@ -75,7 +73,6 @@ class Statistic extends AbstractDataModel
     public function setControllerName(string $controllerName): Statistic
     {
         $this->controllerName = $controllerName;
-        
         return $this;
     }
 }
