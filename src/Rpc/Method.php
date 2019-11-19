@@ -11,6 +11,8 @@ class Method
     const ACTION_PUSH = 'push';
     const ACTION_DELETE = 'delete';
     const ACTION_STATISTIC = 'statistic';
+    const ACTION_AUTH = 'auth';
+    const ACTION_ACK = 'ack';
 
     /**
      * Rcp Method

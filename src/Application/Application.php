@@ -25,6 +25,7 @@ use Jtl\Connector\Core\Exception\HttpException;
 use Jtl\Connector\Core\IO\Temp;
 use Jtl\Connector\Core\Model\AbstractImage;
 use Jtl\Connector\Core\Model\AbstractModel;
+use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\QueryFilter;
 use Jtl\Connector\Core\Plugin\PluginManager;
 use Jtl\Connector\Core\Serializer\Json;
@@ -226,6 +227,7 @@ class Application implements ApplicationInterface
      * @return ResponsePacket
      * @throws ApplicationException
      * @throws CompressionException
+     * @throws DefinitionException
      * @throws HttpException
      * @throws LinkerException
      * @throws RpcException
@@ -262,9 +264,9 @@ class Application implements ApplicationInterface
             $modelNamespace = $connector->getModelNamespace();
         }
 
-        $request = Request::create(RpcMethod::buildController($method->getController()), $method->getAction(), [$requestPacket->getParams()]);
+        $request = $this->createHandleRequest($requestPacket, $modelNamespace);
+
         if (!$method->isCore()) {
-            $request = $this->createHandleRequest($requestPacket, $modelNamespace);
             if (strtolower($request->getController()) === 'image' && $request->getAction() === Method::ACTION_PUSH) {
                 $this->handleImagePush(...$request->getParams());
             }
@@ -339,10 +341,21 @@ class Application implements ApplicationInterface
         $serializedParams = $requestPacket->getParams();
         $params = [];
 
-        $type = $className = QueryFilter::class;
-        if (in_array($action, [Method::ACTION_PUSH, Method::ACTION_DELETE])) {
-            $className = sprintf('%s\%s', $modelNamespace, $controller);
-            $type = sprintf("array<%s>", $className);
+        switch($action){
+            case Method::ACTION_AUTH:
+                $className = false;
+                $params = [$requestPacket->getParams()];
+                break;
+            case Method::ACTION_ACK:
+                $type = $className = Ack::class;
+                break;
+            case Method::ACTION_PUSH:
+            case Method::ACTION_DELETE:
+                $className = sprintf('%s\%s', $modelNamespace, $controller);
+                $type = sprintf("array<%s>", $className);
+                break;
+            default:
+                $type = $className = QueryFilter::class;
         }
 
         if (class_exists($className)) {
