@@ -344,7 +344,7 @@ class Application implements ApplicationInterface
         if (in_array($action, [Method::ACTION_PUSH, Method::ACTION_DELETE])) {
             $className = sprintf('%s\%s', $modelNamespace, $controller);
             if($controller === Model::IMAGE) {
-                $className = sprintf('%s\%s', $modelNamespace, AbstractImage::class);
+                $className = AbstractImage::class;
             }
             $type = sprintf("array<%s>", $className);
         }
