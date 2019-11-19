@@ -11,7 +11,7 @@ use JMS\Serializer\Handler\HandlerRegistry;
 use JMS\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Exception\RpcException;
 use JMS\Serializer\Annotation as Serializer;
-use Jtl\Connector\Core\Serializer\Handler\JsonStringHandler;
+use Jtl\Connector\Core\Serializer\Handler\ProductHandler;
 
 /**
  * Rpc Response Packet
@@ -135,7 +135,7 @@ class ResponsePacket extends Packet
         $serializer = SerializerBuilder::create()
             ->addDefaultHandlers()
             ->configureHandlers(function (HandlerRegistry $registry) {
-                $registry->registerSubscribingHandler(new JsonStringHandler());
+                $registry->registerSubscribingHandler(new ProductHandler());
             })
             ->build();
 

@@ -198,7 +198,7 @@ class Application implements ApplicationInterface
                 $this->imagesToDelete = [];
             }
 
-            $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
+            $this->triggerRpcAfterEvent($responsePacket, $requestPacket->getMethod());
             HttpResponse::send($responsePacket);
         }
     }
@@ -296,7 +296,7 @@ class Application implements ApplicationInterface
                     );
 
                     if ($method->getAction() === Method::ACTION_PULL) {
-                        $results[] = $model->getPublic();
+                        $results[] = $model;
                     }
                 }
             }
@@ -594,10 +594,10 @@ class Application implements ApplicationInterface
     }
 
     /**
-     * @param \stdClass $data
+     * @param $data
      * @param string $method
      */
-    protected function triggerRpcAfterEvent(\stdClass $data, string $method): void
+    protected function triggerRpcAfterEvent($data, string $method): void
     {
         $method = RpcMethod::splitMethod($method);
         EventHandler::dispatchRpc(

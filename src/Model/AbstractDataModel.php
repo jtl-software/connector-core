@@ -92,9 +92,9 @@ abstract class AbstractDataModel extends AbstractModel
         $coreModelNamespace = 'Jtl\\Connector\\Core\\Model';
         if ($this->type === null) {
             $reflect = new ReflectionClass($this);
-            if($reflect->getNamespaceName() !== $coreModelNamespace) {
-                while($reflect = $reflect->getParentClass()) {
-                    if($reflect->getNamespaceName() === $coreModelNamespace) {
+            if ($reflect->getNamespaceName() !== $coreModelNamespace) {
+                while ($reflect = $reflect->getParentClass()) {
+                    if ($reflect->getNamespaceName() === $coreModelNamespace) {
                         break;
                     }
                 }
