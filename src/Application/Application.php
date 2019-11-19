@@ -408,12 +408,11 @@ class Application implements ApplicationInterface
         $action = $request->getAction();
         $params = $request->getParams();
 
-        $controllerClass = $connector->getControllerNamespace() . '\\' . $controller;
-        if (!class_exists($controllerClass)) {
-            throw new ApplicationException(sprintf('Controller class %s does not exist!', $controllerClass));
-        }
-
         if (!$this->container->has($controller)) {
+            $controllerClass = $connector->getControllerNamespace() . '\\' . $controller;
+            if (!class_exists($controllerClass)) {
+                throw new ApplicationException(sprintf('Controller class %s does not exist!', $controllerClass));
+            }
             $this->container->set($controller, $this->container->get($controllerClass));
         }
 
