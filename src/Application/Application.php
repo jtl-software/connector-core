@@ -346,7 +346,7 @@ class Application implements ApplicationInterface
         }
 
         if (class_exists($className)) {
-            $serializer = SerializerBuilder::create();
+            $serializer = SerializerBuilder::getInstance();
             if(is_string($serializedParams) && strlen($serializedParams) > 0) {
                 $params = $serializer->deserialize($serializedParams, $type, 'json');
             }

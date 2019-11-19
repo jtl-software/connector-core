@@ -70,7 +70,7 @@ class Connector extends AbstractController
      */
     public function ack($params = null)
     {
-        $serializer = SerializerBuilder::create();
+        $serializer = SerializerBuilder::getInstance();
         /** @var Ack $ack */
         $ack = $serializer->deserialize($params, Ack::class, 'json');
         foreach ($ack->getIdentities() as $modelName => $identities) {

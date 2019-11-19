@@ -126,18 +126,12 @@ class ResponsePacket extends Packet
         }
     }
 
-
     /**
      * @return string
      */
-    public function build()
+    public function serialize(): string
     {
-        $serializer = SerializerBuilder::create()
-            ->addDefaultHandlers()
-            ->configureHandlers(function (HandlerRegistry $registry) {
-                $registry->registerSubscribingHandler(new ProductHandler());
-            })
-            ->build();
+        $serializer = \Jtl\Connector\Core\Serializer\SerializerBuilder::getInstance();
 
         return $serializer->serialize($this, 'json');
     }
