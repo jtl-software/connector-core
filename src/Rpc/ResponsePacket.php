@@ -9,7 +9,7 @@ namespace Jtl\Connector\Core\Rpc;
 use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\SerializationContext;
 use Jtl\Connector\Core\Exception\RpcException;
-use Jtl\Connector\Core\Serializer\SerializerBuilder
+use Jtl\Connector\Core\Serializer\SerializerBuilder;
 
 /**
  * Rpc Response Packet
