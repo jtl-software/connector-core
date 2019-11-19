@@ -4,6 +4,7 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Http
  */
+
 namespace Jtl\Connector\Core\Http;
 
 use Jtl\Connector\Core\Rpc\ResponsePacket;
@@ -19,46 +20,21 @@ use Jtl\Connector\Core\Logger\Logger;
 class Response
 {
     /**
+     *
      * Http Response sender
      *
-     * @param ResponsePacket $responsepacket
+     * @param string $jsonResponse
      */
-    public static function send(ResponsePacket $responsepacket)
+    public static function send(string $jsonResponse)
     {
-        $jsonResponse = Json::encode($responsepacket->getPublic());
-
         Logger::write($jsonResponse, Logger::DEBUG, 'rpc');
 
         header('Cache-Control: no-cache, must-revalidate');
         header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
         header('Content-type: application/json', true, 200);
-        
-        echo $jsonResponse;
-        
-        exit();
-    }
-    
-    /**
-     * Http Response sender
-     *
-     * @param array $reponsepackets
-     */
-    public static function sendAll(array $reponsepackets)
-    {
-        header('Cache-Control: no-cache, must-revalidate');
-        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-        header('Content-type: application/json', true, 200);
-        
-        $packets = [];
-        foreach ($reponsepackets as $responsepacket) {
-            $response = $responsepacket->getPublic();
-            Logger::write(Json::encode($response), Logger::DEBUG, 'rpc');
 
-            $packets[] = $responsepacket->getPublic();
-        }
-        
-        echo Json::encode($packets);
-        
+        echo $jsonResponse;
+
         exit();
     }
 }

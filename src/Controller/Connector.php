@@ -63,15 +63,12 @@ class Connector extends AbstractController
     }
 
     /**
-     * @param null $params
+     * @param Ack $ack
      * @return bool
      * @throws DefinitionException
      */
-    public function ack($params = null)
+    public function ack(Ack $ack): bool
     {
-        $serializer = SerializerBuilder::create();
-        /** @var Ack $ack */
-        $ack = $serializer->deserialize($params, Ack::class, 'json');
         foreach ($ack->getIdentities() as $modelName => $identities) {
             $normalizedName = Model::normalizeName($modelName);
             if (!Model::isModel($normalizedName)) {

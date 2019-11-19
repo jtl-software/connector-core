@@ -28,7 +28,7 @@ class JsonStringHandler implements SubscribingHandlerInterface
                 'format' => 'json',
                 'type' => JsonString::class,
                 'method' => 'deserializeJsonString',
-            ],
+            ]
         ];
     }
 

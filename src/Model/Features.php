@@ -165,7 +165,11 @@ class Features extends AbstractModel
         return $data;
     }
 
-    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', '_type']): stdClass
+    /**
+     * @param string[] $publics
+     * @return stdClass
+     */
+    public function getPublic(array $publics = []): stdClass
     {
         return (object)$this->toArray();
     }

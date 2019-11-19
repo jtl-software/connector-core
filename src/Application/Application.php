@@ -27,6 +27,7 @@ use Jtl\Connector\Core\Exception\HttpException;
 use Jtl\Connector\Core\IO\Temp;
 use Jtl\Connector\Core\Model\AbstractImage;
 use Jtl\Connector\Core\Model\AbstractModel;
+use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\QueryFilter;
 use Jtl\Connector\Core\Plugin\PluginManager;
 use Jtl\Connector\Core\Serializer\Json;
@@ -200,8 +201,10 @@ class Application implements ApplicationInterface
                 $this->imagesToDelete = [];
             }
 
-            $this->triggerRpcAfterEvent($responsePacket->getPublic(), $requestPacket->getMethod());
-            HttpResponse::send($responsePacket);
+            $jsonResponse = $responsePacket->serialize();
+
+            $this->triggerRpcAfterEvent($jsonResponse, $requestPacket->getMethod());
+            HttpResponse::send($jsonResponse);
         }
     }
 
@@ -213,7 +216,7 @@ class Application implements ApplicationInterface
      */
     public function registerController(string $modelName, object $instance): Application
     {
-        if(!Model::isModel($modelName)) {
+        if (!Model::isModel($modelName)) {
             throw DefinitionException::unknownModel($modelName);
         }
 
@@ -263,9 +266,9 @@ class Application implements ApplicationInterface
             $modelNamespace = $connector->getModelNamespace();
         }
 
-        $request = Request::create(RpcMethod::buildController($method->getController()), $method->getAction(), [$requestPacket->getParams()]);
+        $request = $this->createHandleRequest($requestPacket, $modelNamespace);
+
         if (!$method->isCore()) {
-            $request = $this->createHandleRequest($requestPacket, $modelNamespace);
             if (strtolower($request->getController()) === 'image' && $request->getAction() === Method::ACTION_PUSH) {
                 $this->handleImagePush(...$request->getParams());
             }
@@ -275,7 +278,7 @@ class Application implements ApplicationInterface
         if ($connector instanceof HandleRequestInterface) {
             $response = $connector->handle($this, $request);
         } else {
-            $response = $this->handleRequest($request);
+            $response = $this->handleRequest($request, $connector);
         }
         $this->eventDispatcher->dispatch(new ResponseAfterHandleEvent($request->getController(), $request->getAction(), $response), ResponseAfterHandleEvent::getEventName());
 
@@ -299,7 +302,7 @@ class Application implements ApplicationInterface
                     );
 
                     if ($method->getAction() === Method::ACTION_PULL) {
-                        $results[] = $model->getPublic();
+                        $results[] = $model;
                     }
                 }
             }
@@ -339,48 +342,51 @@ class Application implements ApplicationInterface
         $action = $method->getAction();
         $serializedParams = $requestPacket->getParams();
         $params = [];
+        $className = null;
 
-        $type = $className = QueryFilter::class;
-        if (in_array($action, [Method::ACTION_PUSH, Method::ACTION_DELETE])) {
-            $className = sprintf('%s\%s', $modelNamespace, $controller);
-            if($controller === Model::IMAGE) {
-                $className = AbstractImage::class;
-            }
-            $type = sprintf("array<%s>", $className);
+        switch ($action) {
+            case Method::ACTION_AUTH:
+                $params = [$requestPacket->getParams()];
+                break;
+            case Method::ACTION_ACK:
+                $type = $className = Ack::class;
+                break;
+            case Method::ACTION_PUSH:
+            case Method::ACTION_DELETE:
+                $className = sprintf('%s\%s', $modelNamespace, $controller);
+                if ($controller === Model::IMAGE) {
+                    $className = AbstractImage::class;
+                }
+                $type = sprintf("array<%s>", $className);
+                break;
+            default:
+                $type = $className = QueryFilter::class;
         }
 
         if (class_exists($className)) {
-            $serializer = SerializerBuilder::create();
-            if(is_string($serializedParams) && strlen($serializedParams) > 0) {
+            $serializer = SerializerBuilder::getInstance();
+            if (is_string($serializedParams) && strlen($serializedParams) > 0) {
                 $params = $serializer->deserialize($serializedParams, $type, 'json');
             }
 
-            if(!is_array($params)) {
+            if (!is_array($params)) {
                 $params = [$params];
             }
 
-            if (in_array($action, [Method::ACTION_PUSH, Method::ACTION_DELETE])) {
-                // Identity mapping
-                foreach ($params as $param) {
+            // Identity mapping
+            foreach ($params as $param) {
+                if (in_array($action, [Method::ACTION_PUSH, Method::ACTION_DELETE])) {
                     $this->linker->linkModel($param);
                     // Checksum linking
                     $this->linkChecksum($param);
-                    // Event
-                    EventHandler::dispatch(
-                        $param,
-                        $this->eventDispatcher,
-                        $action,
-                        EventHandler::BEFORE
-                    );
                 }
-            } else {
+
                 // Event
                 EventHandler::dispatch(
-                    $params,
+                    $param,
                     $this->eventDispatcher,
                     $action,
-                    EventHandler::BEFORE,
-                    $controller
+                    EventHandler::BEFORE
                 );
             }
         }
@@ -390,23 +396,24 @@ class Application implements ApplicationInterface
 
     /**
      * @param Request $request
+     * @param ConnectorInterface $connector
      * @return Response
      * @throws ApplicationException
      * @throws DependencyException
      * @throws NotFoundException
      */
-    public function handleRequest(Request $request): Response
+    public function handleRequest(Request $request, ConnectorInterface $connector): Response
     {
         $controller = $request->getController();
         $action = $request->getAction();
         $params = $request->getParams();
 
-        $controllerClass = $this->endpointConnector->getControllerNamespace() . '\\' . $controller;
+        $controllerClass = $connector->getControllerNamespace() . '\\' . $controller;
         if (!class_exists($controllerClass)) {
             throw new ApplicationException(sprintf('Controller class %s does not exist!', $controllerClass));
         }
 
-        if(!$this->container->has($controller)) {
+        if (!$this->container->has($controller)) {
             $this->container->set($controller, $this->container->get($controllerClass));
         }
 
@@ -600,10 +607,10 @@ class Application implements ApplicationInterface
     }
 
     /**
-     * @param \stdClass $data
+     * @param $data
      * @param string $method
      */
-    protected function triggerRpcAfterEvent(\stdClass $data, string $method): void
+    protected function triggerRpcAfterEvent($data, string $method): void
     {
         $method = RpcMethod::splitMethod($method);
         EventHandler::dispatchRpc(
