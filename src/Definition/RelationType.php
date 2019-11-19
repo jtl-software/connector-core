@@ -8,25 +8,25 @@ namespace Jtl\Connector\Core\Definition;
 
 final class RelationType
 {
-    const PRODUCT = 'product';
     const CATEGORY = 'category';
+    const CONFIG_GROUP = 'configGroup';
+    const MANUFACTURER = 'manufacturer';
+    const PRODUCT = 'product';
     const PRODUCT_VARIATION_VALUE = 'productVariationValue';
     const SPECIFIC = 'specific';
     const SPECIFIC_VALUE = 'specificValue';
-    const MANUFACTURER = 'manufacturer';
-    const CONFIG_GROUP = 'configGroup';
 
     /**
      * @var string[]
      */
     protected static $mappings = [
-        self::PRODUCT => IdentityType::PRODUCT,
         self::CATEGORY => IdentityType::CATEGORY,
+        self::CONFIG_GROUP => IdentityType::CONFIG_GROUP,
+        self::MANUFACTURER => IdentityType::MANUFACTURER,
+        self::PRODUCT => IdentityType::PRODUCT,
         self::PRODUCT_VARIATION_VALUE => IdentityType::PRODUCT_VARIATION_VALUE,
         self::SPECIFIC => IdentityType::SPECIFIC,
         self::SPECIFIC_VALUE => IdentityType::SPECIFIC_VALUE,
-        self::MANUFACTURER => IdentityType::MANUFACTURER,
-        self::CONFIG_GROUP => IdentityType::CONFIG_GROUP,
     ];
 
     /**

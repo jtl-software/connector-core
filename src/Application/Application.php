@@ -8,6 +8,8 @@ namespace Jtl\Connector\Core\Application;
 
 use DI\Container;
 use DI\ContainerBuilder;
+use DI\DependencyException;
+use DI\NotFoundException;
 use Jtl\Connector\Core\Error\ErrorHandler;
 use Jtl\Connector\Core\Error\ErrorHandlerInterface;
 use Jtl\Connector\Core\Connector\UseChecksumInterface;
@@ -224,11 +226,12 @@ class Application implements ApplicationInterface
      * @return ResponsePacket
      * @throws ApplicationException
      * @throws CompressionException
+     * @throws DefinitionException
      * @throws HttpException
      * @throws LinkerException
      * @throws RpcException
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
+     * @throws DependencyException
+     * @throws NotFoundException
      * @throws \ReflectionException
      */
     protected function execute(RequestPacket $requestPacket): ResponsePacket
@@ -340,6 +343,9 @@ class Application implements ApplicationInterface
         $type = $className = QueryFilter::class;
         if (in_array($action, [Method::ACTION_PUSH, Method::ACTION_DELETE])) {
             $className = sprintf('%s\%s', $modelNamespace, $controller);
+            if($controller === Model::IMAGE) {
+                $className = sprintf('%s\%s', $modelNamespace, AbstractImage::class);
+            }
             $type = sprintf("array<%s>", $className);
         }
 
@@ -386,8 +392,8 @@ class Application implements ApplicationInterface
      * @param Request $request
      * @return Response
      * @throws ApplicationException
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
+     * @throws DependencyException
+     * @throws NotFoundException
      */
     public function handleRequest(Request $request): Response
     {

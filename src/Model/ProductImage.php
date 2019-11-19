@@ -3,18 +3,13 @@ namespace Jtl\Connector\Core\Model;
 
 use Jtl\Connector\Core\Definition\RelationType;
 
-class ProductImage extends Image
+class ProductImage extends AbstractImage
 {
     /**
-     * CategoryImage constructor.
+     * @return string
      */
-    public function __construct()
+    public function getRelationType(): string
     {
-        $this->relationType = RelationType::PRODUCT;
-    }
-
-    public function setRelationType(string $relationType): Image
-    {
-        return $this;
+        return RelationType::PRODUCT;
     }
 }

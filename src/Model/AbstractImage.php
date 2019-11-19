@@ -6,10 +6,22 @@ namespace Jtl\Connector\Core\Model;
  * @package Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
+ * @Serializer\Discriminator(
+ *     field = "relationType",
+ *     disabled = false,
+ *     map = {
+ *       "category": "Jtl\Connector\Core\Model\CategoryImage",
+ *       "configGroup": "Jtl\Connector\Core\Model\ConfigGroupImage",
+ *       "manufacturer": "Jtl\Connector\Core\Model\ManufacturerImage",
+ *       "product": "Jtl\Connector\Core\Model\ProductImage",
+ *       "productVariationValue": "Jtl\Connector\Core\Model\ProductVariationValueImage",
+ *       "specific": "Jtl\Connector\Core\Model\SpecificImage",
+ *       "specificValue": "Jtl\Connector\Core\Model\SpecificValueImage"
+ *     }
+ * )
  */
 abstract class AbstractImage extends AbstractDataModel
 {
-
     /**
      * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
@@ -33,14 +45,6 @@ abstract class AbstractImage extends AbstractDataModel
      * @Serializer\Accessor(getter="getFilename",setter="setFilename")
      */
     protected $filename = '';
-
-    /**
-     * @var string
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("relationType")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $relationType = '';
 
     /**
      * @var string
@@ -81,15 +85,13 @@ abstract class AbstractImage extends AbstractDataModel
     {
         $this->foreignKey = new Identity();
         $this->id = new Identity();
-
-        $this->relationType = $this->getRelationType();
     }
 
     public abstract function getRelationType(): string;
 
     /**
      * @param Identity $foreignKey
-     * @return Image
+     * @return AbstractImage
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setForeignKey(Identity $foreignKey): AbstractImage
@@ -109,7 +111,7 @@ abstract class AbstractImage extends AbstractDataModel
 
     /**
      * @param Identity $id
-     * @return Image
+     * @return AbstractImage
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id): AbstractImage
@@ -129,7 +131,7 @@ abstract class AbstractImage extends AbstractDataModel
 
     /**
      * @param string $filename
-     * @return Image
+     * @return AbstractImage
      */
     public function setFilename(string $filename): AbstractImage
     {
@@ -148,7 +150,7 @@ abstract class AbstractImage extends AbstractDataModel
 
     /**
      * @param string $remoteUrl
-     * @return Image
+     * @return AbstractImage
      */
     public function setRemoteUrl(string $remoteUrl): AbstractImage
     {
@@ -167,7 +169,7 @@ abstract class AbstractImage extends AbstractDataModel
 
     /**
      * @param string $name
-     * @return Image
+     * @return AbstractImage
      */
     public function setName(string $name): AbstractImage
     {
@@ -186,7 +188,7 @@ abstract class AbstractImage extends AbstractDataModel
 
     /**
      * @param integer $sort
-     * @return Image
+     * @return AbstractImage
      */
     public function setSort(int $sort): AbstractImage
     {
@@ -205,7 +207,7 @@ abstract class AbstractImage extends AbstractDataModel
 
     /**
      * @param ImageI18n $i18n
-     * @return Image
+     * @return AbstractImage
      */
     public function addI18n(ImageI18n $i18n): AbstractImage
     {
@@ -216,7 +218,7 @@ abstract class AbstractImage extends AbstractDataModel
 
     /**
      * @param ImageI18n ...$i18ns
-     * @return Image
+     * @return AbstractImage
      */
     public function setI18ns(ImageI18n ...$i18ns): AbstractImage
     {
@@ -226,7 +228,7 @@ abstract class AbstractImage extends AbstractDataModel
     }
 
     /**
-     * @return ImageI18n[]
+     * @return AbstractImageI18n[]
      */
     public function getI18ns(): array
     {
@@ -234,7 +236,7 @@ abstract class AbstractImage extends AbstractDataModel
     }
 
     /**
-     * @return Image
+     * @return AbstractImage
      */
     public function clearI18ns(): AbstractImage
     {

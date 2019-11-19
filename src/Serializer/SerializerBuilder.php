@@ -26,7 +26,6 @@ class SerializerBuilder
                 ->configureHandlers(function (HandlerRegistry $registry) {
                     $registry->registerSubscribingHandler(new IdentityHandler());
                     $registry->registerSubscribingHandler(new FeaturesHandler());
-                    $registry->registerSubscribingHandler(new ImageHandler());
                 })
                 ->build();
     }
