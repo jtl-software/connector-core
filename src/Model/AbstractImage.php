@@ -1,6 +1,8 @@
 <?php
 namespace Jtl\Connector\Core\Model;
 
+use stdClass;
+
 /**
  * @access public
  * @package Jtl\Connector\Core\Model
@@ -243,5 +245,16 @@ abstract class AbstractImage extends AbstractDataModel
         $this->i18ns = [];
 
         return $this;
+    }
+
+    /**
+     * @param string[] $publics
+     * @return stdClass
+     */
+    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', 'modelType']): stdClass
+    {
+        $object = parent::getPublic($publics);
+        $object->relationType = $this->getRelationType();
+        return $object;
     }
 }
