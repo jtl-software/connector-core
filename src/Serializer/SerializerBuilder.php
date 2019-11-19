@@ -7,17 +7,36 @@ namespace Jtl\Connector\Core\Serializer;
 
 use JMS\Serializer\EventDispatcher\EventDispatcher;
 use JMS\Serializer\Handler\HandlerRegistry;
+use JMS\Serializer\Serializer;
+use JMS\Serializer\SerializerInterface;
 use Jtl\Connector\Core\Serializer\Handler\FeaturesHandler;
 use Jtl\Connector\Core\Serializer\Handler\ImageHandler;
+use Jtl\Connector\Core\Serializer\Handler\ProductHandler;
 use Jtl\Connector\Core\Serializer\Listener\NullValuesListener;
 use Jtl\Connector\Core\Serializer\Handler\IdentityHandler;
 use Jtl\Connector\Core\Serializer\ObjectConstructor;
 
 class SerializerBuilder
 {
-    public static function create()
+    /**
+     * @var SerializerInterface
+     */
+    protected static $instance;
+
+    /**
+     * SerializerBuilder constructor.
+     */
+    private function __construct()
     {
-        return \JMS\Serializer\SerializerBuilder::create()
+    }
+
+    /**
+     * @return SerializerInterface
+     */
+    public static function getInstance()
+    {
+        if(is_null(self::$instance)) {
+            self::$instance = \JMS\Serializer\SerializerBuilder::create()
                 ->addDefaultHandlers()
                 ->setObjectConstructor(new ObjectConstructor())
                 ->configureListeners(function (EventDispatcher $dispatcher) {
@@ -27,7 +46,11 @@ class SerializerBuilder
                     $registry->registerSubscribingHandler(new IdentityHandler());
                     $registry->registerSubscribingHandler(new FeaturesHandler());
                     $registry->registerSubscribingHandler(new ImageHandler());
+                    $registry->registerSubscribingHandler(new ProductHandler());
                 })
                 ->build();
+        }
+
+        return self::$instance;
     }
 }

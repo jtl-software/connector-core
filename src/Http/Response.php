@@ -26,7 +26,7 @@ class Response
      */
     public static function send(ResponsePacket $responsePacket)
     {
-        $jsonResponse = $responsePacket->build();
+        $jsonResponse = $responsePacket->serialize();
 
         Logger::write($jsonResponse, Logger::DEBUG, 'rpc');
 
