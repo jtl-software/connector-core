@@ -20,14 +20,13 @@ use Jtl\Connector\Core\Logger\Logger;
 class Response
 {
     /**
+     *
      * Http Response sender
      *
-     * @param ResponsePacket $responsePacket
+     * @param string $jsonResponse
      */
-    public static function send(ResponsePacket $responsePacket)
+    public static function send(string $jsonResponse)
     {
-        $jsonResponse = $responsePacket->build();
-
         Logger::write($jsonResponse, Logger::DEBUG, 'rpc');
 
         header('Cache-Control: no-cache, must-revalidate');

@@ -145,32 +145,6 @@ class Features extends AbstractModel
     }
 
     /**
-     * @return array
-     */
-    public function toArray()
-    {
-        $data = [
-            'entities' => [],
-            'flags' => [],
-        ];
-
-        foreach ($this->entities as $entity) {
-            $data['entities'][$entity->getName()] = $entity->toArray();
-        }
-
-        foreach ($this->flags as $flag) {
-            $data['flags'][$flag->getName()] = $flag->isActive();
-        }
-
-        return $data;
-    }
-
-    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', '_type']): stdClass
-    {
-        return (object)$this->toArray();
-    }
-
-    /**
      * @param FeatureEntity[] $entities
      * @param FeatureFlag[] $flags
      * @return Features
