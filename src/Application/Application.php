@@ -214,7 +214,7 @@ class Application implements ApplicationInterface
      */
     public function registerController(string $modelName, object $instance): Application
     {
-        if(!Model::isModel($modelName)) {
+        if (!Model::isModel($modelName)) {
             throw DefinitionException::unknownModel($modelName);
         }
 
@@ -276,7 +276,7 @@ class Application implements ApplicationInterface
         if ($connector instanceof HandleRequestInterface) {
             $response = $connector->handle($this, $request);
         } else {
-            $response = $this->handleRequest($request);
+            $response = $this->handleRequest($request, $connector);
         }
         $this->eventDispatcher->dispatch(new ResponseAfterHandleEvent($request->getController(), $request->getAction(), $response), ResponseAfterHandleEvent::getEventName());
 
@@ -341,7 +341,7 @@ class Application implements ApplicationInterface
         $serializedParams = $requestPacket->getParams();
         $params = [];
 
-        switch($action){
+        switch ($action) {
             case Method::ACTION_AUTH:
                 $className = false;
                 $params = [$requestPacket->getParams()];
@@ -360,36 +360,28 @@ class Application implements ApplicationInterface
 
         if (class_exists($className)) {
             $serializer = SerializerBuilder::getInstance();
-            if(is_string($serializedParams) && strlen($serializedParams) > 0) {
+            if (is_string($serializedParams) && strlen($serializedParams) > 0) {
                 $params = $serializer->deserialize($serializedParams, $type, 'json');
             }
 
-            if(!is_array($params)) {
+            if (!is_array($params)) {
                 $params = [$params];
             }
 
-            if (in_array($action, [Method::ACTION_PUSH, Method::ACTION_DELETE])) {
-                // Identity mapping
-                foreach ($params as $param) {
+            // Identity mapping
+            foreach ($params as $param) {
+                if (in_array($action, [Method::ACTION_PUSH, Method::ACTION_DELETE])) {
                     $this->linker->linkModel($param);
                     // Checksum linking
                     $this->linkChecksum($param);
-                    // Event
-                    EventHandler::dispatch(
-                        $param,
-                        $this->eventDispatcher,
-                        $action,
-                        EventHandler::BEFORE
-                    );
                 }
-            } else {
+
                 // Event
                 EventHandler::dispatch(
-                    $params,
+                    $param,
                     $this->eventDispatcher,
                     $action,
-                    EventHandler::BEFORE,
-                    $controller
+                    EventHandler::BEFORE
                 );
             }
         }
@@ -399,23 +391,24 @@ class Application implements ApplicationInterface
 
     /**
      * @param Request $request
+     * @param ConnectorInterface $connector
      * @return Response
      * @throws ApplicationException
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
      */
-    public function handleRequest(Request $request): Response
+    public function handleRequest(Request $request, ConnectorInterface $connector): Response
     {
         $controller = $request->getController();
         $action = $request->getAction();
         $params = $request->getParams();
 
-        $controllerClass = $this->endpointConnector->getControllerNamespace() . '\\' . $controller;
+        $controllerClass = $connector->getControllerNamespace() . '\\' . $controller;
         if (!class_exists($controllerClass)) {
             throw new ApplicationException(sprintf('Controller class %s does not exist!', $controllerClass));
         }
 
-        if(!$this->container->has($controller)) {
+        if (!$this->container->has($controller)) {
             $this->container->set($controller, $this->container->get($controllerClass));
         }
 
