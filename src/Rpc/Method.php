@@ -13,6 +13,9 @@ class Method
     const ACTION_STATISTIC = 'statistic';
     const ACTION_AUTH = 'auth';
     const ACTION_ACK = 'ack';
+    const ACTION_CLEAR = 'clear';
+    const ACTION_FINISH = 'finish';
+    const ACTION_IDENTIFY = 'identify';
 
     /**
      * Rcp Method
