@@ -1,3 +1,7 @@
+2.6.11
+------
+- Added locale irish in Ireland
+
 2.6.10
 -----
 - Removed infinity loop in session class to avoid warning
