@@ -1,6 +1,7 @@
 <?php
 namespace Jtl\Connector\Core\Model;
 
+use JMS\Serializer\Annotation as Serializer;
 use stdClass;
 
 /**
