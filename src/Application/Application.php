@@ -28,6 +28,7 @@ use Jtl\Connector\Core\IO\Temp;
 use Jtl\Connector\Core\Model\AbstractImage;
 use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Model\Ack;
+use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\QueryFilter;
 use Jtl\Connector\Core\Plugin\PluginManager;
 use Jtl\Connector\Core\Serializer\Json;
@@ -346,7 +347,7 @@ class Application implements ApplicationInterface
 
         switch ($action) {
             case Method::ACTION_AUTH:
-                $params = [$requestPacket->getParams()];
+                $type = $className = Authentication::class;
                 break;
             case Method::ACTION_ACK:
                 $type = $className = Ack::class;

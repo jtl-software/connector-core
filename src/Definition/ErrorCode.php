@@ -8,5 +8,5 @@ namespace Jtl\Connector\Core\Definition;
 final class ErrorCode
 {
     const SESSION_ERROR = 789;
-    const AUTHENTICATION_ERROR = 790;
+    const AUTHENTICATION_FAILED = 790;
 }
