@@ -1,0 +1,36 @@
+<?php
+namespace Jtl\Connector\Core\Model;
+
+use JMS\Serializer\Annotation as Serializer;
+
+/**
+ * @Serializer\AccessType("public_method")
+ */
+class Authentication extends AbstractDataModel
+{
+    /**
+     * @var string
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("token")
+     * @Serializer\Accessor(getter="getToken",setter="setToken")
+     */
+    protected $token = '';
+    
+    /**
+     * @return string
+     */
+    public function getToken(): string
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param string $token
+     * @return Authentication
+     */
+    public function setToken(string $token): Authentication
+    {
+        $this->token = $token;
+        return $this;
+    }
+}

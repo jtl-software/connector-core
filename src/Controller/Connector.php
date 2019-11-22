@@ -4,17 +4,21 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Application
  */
+
 namespace Jtl\Connector\Core\Controller;
 
 use Jtl\Connector\Core\Definition\ErrorCode;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\ApplicationException;
+use Jtl\Connector\Core\Exception\AuthenticationException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\Exception\MissingRequirementException;
 use Jtl\Connector\Core\IO\Path;
 use Jtl\Connector\Core\Model\Ack;
+use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\Features;
+use Jtl\Connector\Core\Model\Session;
 use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\System\Check;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
@@ -104,38 +108,34 @@ class Connector extends AbstractController
     }
 
     /**
-     * @param string $params
-     * @return bool|\stdClass
+     * @param Authentication $auth
+     * @return Session
      * @throws ApplicationException
+     * @throws AuthenticationException
      */
-    public function auth($params)
+    public function auth(Authentication $auth)
     {
-        $decodedParams = Json::decode($params);
-
-        if (!isset($decodedParams->token)) {
-            throw new \Exception("Token parameter is missing.");
+        if (empty($auth->getToken())) {
+            throw AuthenticationException::tokenMissing();
         }
 
-        $accessToken = $decodedParams->token;
         $tokenValidator = $this->application->getEndpointConnector()->getTokenValidator();
-
-        if ($tokenValidator->validate($accessToken) === false) {
-            //return $this->unauthorizedAccessError($action, $accessToken);
-            Logger::write(sprintf("Unauthorized access with token (%s) from ip (%s)", $accessToken, $_SERVER['REMOTE_ADDR']), Logger::WARNING, Logger::CHANNEL_SECURITY);
-            return false;
+        if ($tokenValidator->validate($auth->getToken()) === false) {
+            Logger::write(sprintf("Unauthorized access with token (%s) from ip (%s)", $auth->getToken(), $_SERVER['REMOTE_ADDR']), Logger::WARNING, Logger::CHANNEL_SECURITY);
+            throw AuthenticationException::failed();
         }
 
-        if ($this->application->getSessionHandler() !== null) {
-            $session = new \stdClass();
-            $session->sessionId = session_id();
-            $session->lifetime = (int)ini_get('session.gc_maxlifetime');
+        if ($this->application->getSessionHandler() === null) {
+            $errorMessage = 'Could not get any Session';
+            Logger::write($errorMessage, Logger::ERROR, Logger::CHANNEL_GLOBAL);
+            throw new ApplicationException($errorMessage, ErrorCode::SESSION_ERROR);
 
-            return $session;
         }
 
-        $errorMessage = 'Could not get any Session';
-        Logger::write($errorMessage, Logger::ERROR, Logger::CHANNEL_GLOBAL);
-        throw new ApplicationException($errorMessage, ErrorCode::SESSION_ERROR);
+        return (new Session())
+            ->setSessionId(session_id())
+            ->setLifetime((int)ini_get('session.gc_maxlifetime'))
+        ;
     }
 
     /**
