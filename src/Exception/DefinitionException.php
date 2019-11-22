@@ -8,6 +8,7 @@ class DefinitionException extends \Exception
     const UNKNOWN_MODEL = 30;
     const IDENTITY_TYPE_MAPPING_NOT_EXISTS = 40;
     const UNKNOWN_IDENTITY_TYPE = 50;
+    const UNKNOWN_CONTROLLER = 60;
 
     /**
      * @param string $model
@@ -58,5 +59,15 @@ class DefinitionException extends \Exception
     {
         $msg = sprintf('Model (%s) does not exist', $model);
         return new static($msg, self::UNKNOWN_MODEL);
+    }
+
+    /**
+     * @param string $controller
+     * @return DefinitionException
+     */
+    public static function unknownController(string $controller): DefinitionException
+    {
+        $msg = sprintf('Controller (%s) does not exist', $controller);
+        return new static($msg, self::UNKNOWN_CONTROLLER);
     }
 }

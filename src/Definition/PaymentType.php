@@ -92,4 +92,28 @@ final class PaymentType
     const WEPAY = 'pm_wepay';
     const WIRECARD = 'pm_wirecard';
     const WORLDPAY = 'pm_worldpay';
+
+    /**
+     * @return integer[]
+     * @throws \ReflectionException
+     */
+    public static function getTypes(): array
+    {
+        if(is_null(static::$types)) {
+            $reflection = new \ReflectionClass(static::class);
+            static::$types = $reflection->getConstants();
+        }
+
+        return static::$types;
+    }
+
+    /**
+     * @param integer $type
+     * @return boolean
+     * @throws \ReflectionException
+     */
+    public static function isType(int $type): bool
+    {
+        return in_array($type, self::getTypes());
+    }
 }
