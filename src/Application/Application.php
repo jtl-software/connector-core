@@ -10,6 +10,8 @@ use DI\Container;
 use DI\ContainerBuilder;
 use DI\DependencyException;
 use DI\NotFoundException;
+use Doctrine\Common\Annotations\AnnotationRegistry;
+use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Error\ErrorHandler;
 use Jtl\Connector\Core\Error\ErrorHandlerInterface;
 use Jtl\Connector\Core\Connector\UseChecksumInterface;
@@ -46,16 +48,15 @@ use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\Utilities\RpcMethod;
 use Jtl\Connector\Core\Connector\CoreConnector;
 use Jtl\Connector\Core\Logger\Logger;
-use Doctrine\Common\Annotations\AnnotationRegistry;
 use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Linker\IdentityLinker;
 use Jtl\Connector\Core\Model\AbstractDataModel;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Session\SqliteSession;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Jtl\Connector\Core\IO\Path;
 use Jtl\Connector\Core\Event\EventHandler;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Finder\Finder;
 
 /**
@@ -210,18 +211,19 @@ class Application implements ApplicationInterface
     }
 
     /**
-     * @param string $modelName
+     * @param string $controllerName
      * @param object $instance
      * @return Application
      * @throws DefinitionException
+     * @throws \ReflectionException
      */
-    public function registerController(string $modelName, object $instance): Application
+    public function registerController(string $controllerName, object $instance): Application
     {
-        if (!Model::isModel($modelName)) {
-            throw DefinitionException::unknownModel($modelName);
+        if (!Controller::isController($controllerName)) {
+            throw DefinitionException::unknownController($controllerName);
         }
 
-        $this->container->set($modelName, $instance);
+        $this->container->set($controllerName, $instance);
         return $this;
     }
 

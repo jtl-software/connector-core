@@ -23,6 +23,7 @@ final class Model
     const DELIVERY_NOTE = 'DeliveryNote';
     const DELIVERY_NOTE_ITEM = 'DeliveryNoteItem';
     const FILE_UPLOAD = 'FileUpload';
+    const GLOBAL_DATA = 'GlobalData';
     const IMAGE = 'Image';
     const LANGUAGE = 'Language';
     const MANUFACTURER = 'Manufacturer';
@@ -325,6 +326,7 @@ final class Model
      * @param integer $type
      * @return string
      * @throws DefinitionException
+     * @throws \ReflectionException
      */
     public static function getModelByType(int $type): string
     {
