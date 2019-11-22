@@ -246,6 +246,7 @@ class Application implements ApplicationInterface
             throw new RpcException('Invalid Request', -32600);
         }
 
+        /** @var Method $method */
         $method = RpcMethod::splitMethod($requestPacket->getMethod());
 
         // Rpc Event
@@ -287,9 +288,7 @@ class Application implements ApplicationInterface
 
         if ($method->isCore() === false) {
             // Identity mapping
-            $results = [];
             $models = is_array($response->getResult()) ? $response->getResult() : [$response->getResult()];
-
             foreach ($models as $model) {
                 if ($model instanceof AbstractDataModel) {
                     $this->linker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
@@ -303,15 +302,7 @@ class Application implements ApplicationInterface
                         EventHandler::AFTER,
                         ($method->getController() === 'connector') ? 'Connector' : null
                     );
-
-                    if ($method->getAction() === Method::ACTION_PULL) {
-                        $results[] = $model;
-                    }
                 }
-            }
-
-            if ($method->getAction() === Method::ACTION_PULL) {
-                $response->setResult($results);
             }
         }
 
