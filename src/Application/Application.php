@@ -64,7 +64,7 @@ use Symfony\Component\Finder\Finder;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-class Application implements ApplicationInterface
+class Application
 {
     const PROTOCOL_VERSION = 7;
     const MIN_PHP_VERSION = '7.2';
