@@ -7,16 +7,6 @@ namespace Jtl\Connector\Core\Rpc;
 
 class Method
 {
-    const ACTION_PULL = 'pull';
-    const ACTION_PUSH = 'push';
-    const ACTION_DELETE = 'delete';
-    const ACTION_STATISTIC = 'statistic';
-    const ACTION_AUTH = 'auth';
-    const ACTION_ACK = 'ack';
-    const ACTION_CLEAR = 'clear';
-    const ACTION_FINISH = 'finish';
-    const ACTION_IDENTIFY = 'identify';
-
     /**
      * Rcp Method
      *

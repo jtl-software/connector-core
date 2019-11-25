@@ -1,9 +1,4 @@
 <?php
-/**
- * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Application
- */
-
 namespace Jtl\Connector\Core\Application;
 
 use DI\Container;
@@ -22,7 +17,7 @@ use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Connector\HandleRequestInterface;
 use Jtl\Connector\Core\Connector\ModelInterface;
 use Jtl\Connector\Core\Controller\TransactionalInterface;
-use Jtl\Connector\Core\Definition\Model;
+use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Event\Handle\ResponseAfterHandleEvent;
 use Jtl\Connector\Core\Event\Handle\RequestBeforeHandleEvent;
 use Jtl\Connector\Core\Exception\CompressionException;
@@ -46,6 +41,7 @@ use Jtl\Connector\Core\Http\Request as HttpRequest;
 use Jtl\Connector\Core\Http\Response as HttpResponse;
 use Jtl\Connector\Core\Config\FileConfig;
 use Jtl\Connector\Core\Exception\LinkerException;
+use Jtl\Connector\Core\Subscriber\RequestBeforeHandleSubscriber;
 use Jtl\Connector\Core\Utilities\RpcMethod;
 use Jtl\Connector\Core\Connector\CoreConnector;
 use Jtl\Connector\Core\Logger\Logger;
@@ -127,6 +123,7 @@ class Application implements ApplicationInterface
 
         $this->eventDispatcher = new EventDispatcher();
         $this->getErrorHandler()->setEventDispatcher($this->eventDispatcher);
+        $this->eventDispatcher->addSubscriber(new RequestBeforeHandleSubscriber());
 
         $containerBuilder = new ContainerBuilder();
         $this->container = $containerBuilder->build();
@@ -273,7 +270,7 @@ class Application implements ApplicationInterface
         $request = $this->createHandleRequest($requestPacket, $modelNamespace);
 
         if (!$method->isCore()) {
-            if (strtolower($request->getController()) === 'image' && $request->getAction() === Method::ACTION_PUSH) {
+            if (strtolower($request->getController()) === 'image' && $request->getAction() === Action::PUSH) {
                 $this->handleImagePush(...$request->getParams());
             }
         }
@@ -291,7 +288,7 @@ class Application implements ApplicationInterface
             $models = is_array($response->getResult()) ? $response->getResult() : [$response->getResult()];
             foreach ($models as $model) {
                 if ($model instanceof AbstractDataModel) {
-                    $this->linker->linkModel($model, ($method->getAction() === Method::ACTION_DELETE));
+                    $this->linker->linkModel($model, ($method->getAction() === Action::DELETE));
                     $this->linkChecksum($model);
 
                     // Event
@@ -331,24 +328,22 @@ class Application implements ApplicationInterface
     protected function createHandleRequest(RequestPacket $requestPacket, string $modelNamespace): Request
     {
         $method = RpcMethod::splitMethod($requestPacket->getMethod());
-
         $controller = RpcMethod::buildController($method->getController());
         $action = $method->getAction();
-        $serializedParams = $requestPacket->getParams();
         $params = [];
         $className = null;
 
         switch ($action) {
-            case Method::ACTION_AUTH:
+            case Action::AUTH:
                 $type = $className = Authentication::class;
                 break;
-            case Method::ACTION_ACK:
+            case Action::ACK:
                 $type = $className = Ack::class;
                 break;
-            case Method::ACTION_PUSH:
-            case Method::ACTION_DELETE:
+            case Action::PUSH:
+            case Action::DELETE:
                 $className = sprintf('%s\%s', $modelNamespace, $controller);
-                if ($controller === Model::IMAGE) {
+                if ($controller === Controller::IMAGE) {
                     $className = AbstractImage::class;
                 }
                 $type = sprintf("array<%s>", $className);
@@ -359,6 +354,7 @@ class Application implements ApplicationInterface
 
         if (class_exists($className)) {
             $serializer = SerializerBuilder::getInstance();
+            $serializedParams = $requestPacket->getParams();
             if (is_string($serializedParams) && strlen($serializedParams) > 0) {
                 $params = $serializer->deserialize($serializedParams, $type, 'json');
             }
@@ -369,7 +365,7 @@ class Application implements ApplicationInterface
 
             // Identity mapping
             foreach ($params as $param) {
-                if (in_array($action, [Method::ACTION_PUSH, Method::ACTION_DELETE])) {
+                if (in_array($action, [Action::PUSH, Action::DELETE])) {
                     $this->linker->linkModel($param);
                     // Checksum linking
                     $this->linkChecksum($param);
@@ -415,8 +411,8 @@ class Application implements ApplicationInterface
         $result = [];
         try {
             switch ($action) {
-                case Method::ACTION_PUSH:
-                case Method::ACTION_DELETE:
+                case Action::PUSH:
+                case Action::DELETE:
                     try {
                         if ($controllerObject instanceof TransactionalInterface) {
                             $controllerObject->beginTransaction();

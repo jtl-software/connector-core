@@ -19,7 +19,6 @@ final class Controller
     const SPECIFIC = 'Specific';
     const STATUS_CHANGE = 'StatusChange';
 
-
     /**
      * @return integer[]
      * @throws \ReflectionException

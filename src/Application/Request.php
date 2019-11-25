@@ -56,6 +56,15 @@ class Request
     }
 
     /**
+     * @param mixed[] $params
+     * @return Request
+     */
+    public function setParams(array $params): Request
+    {
+        $this->params = $params;
+    }
+
+    /**
      * @param string $controller
      * @param string $action
      * @param mixed[] $params

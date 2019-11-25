@@ -24,7 +24,6 @@ class ObjectTypesSubscriber implements EventSubscriberInterface
 
     /**
      * @param PreSerializeEvent $event
-     * @throws \ReflectionException
      */
     public function onPreSerialize(PreSerializeEvent $event)
     {
