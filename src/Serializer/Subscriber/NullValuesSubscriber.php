@@ -4,7 +4,7 @@
  * @package Jtl\Connector\Core\Application
  */
 
-namespace Jtl\Connector\Core\Serializer\Listener;
+namespace Jtl\Connector\Core\Serializer\Subscriber;
 
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\PreDeserializeEvent;
@@ -13,7 +13,7 @@ use JMS\Serializer\EventDispatcher\PreDeserializeEvent;
  * Class PreDeserializeEvent
  * @package Jtl\Connector\Core\Serializer\Event
  */
-class NullValuesListener implements EventSubscriberInterface
+class NullValuesSubscriber implements EventSubscriberInterface
 {
     /**
      * @return array

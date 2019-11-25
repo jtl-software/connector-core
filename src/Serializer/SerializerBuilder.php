@@ -7,14 +7,11 @@ namespace Jtl\Connector\Core\Serializer;
 
 use JMS\Serializer\EventDispatcher\EventDispatcher;
 use JMS\Serializer\Handler\HandlerRegistry;
-use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializerInterface;
-use Jtl\Connector\Core\Serializer\Handler\FeaturesHandler;
-use Jtl\Connector\Core\Serializer\Handler\ImageHandler;
 use Jtl\Connector\Core\Serializer\Handler\ProductHandler;
-use Jtl\Connector\Core\Serializer\Listener\NullValuesListener;
+use Jtl\Connector\Core\Serializer\Subscriber\NullValuesSubscriber;
 use Jtl\Connector\Core\Serializer\Handler\IdentityHandler;
-use Jtl\Connector\Core\Serializer\ObjectConstructor;
+use Jtl\Connector\Core\Serializer\Subscriber\ObjectTypesSubscriber;
 
 class SerializerBuilder
 {
@@ -40,7 +37,8 @@ class SerializerBuilder
                 ->addDefaultHandlers()
                 ->setObjectConstructor(new ObjectConstructor())
                 ->configureListeners(function (EventDispatcher $dispatcher) {
-                    $dispatcher->addSubscriber(new NullValuesListener());
+                    $dispatcher->addSubscriber(new NullValuesSubscriber());
+                    $dispatcher->addSubscriber(new ObjectTypesSubscriber());
                 })
                 ->configureHandlers(function (HandlerRegistry $registry) {
                     $registry->registerSubscribingHandler(new IdentityHandler());
