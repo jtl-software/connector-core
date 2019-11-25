@@ -80,7 +80,7 @@ class ErrorHandler implements ErrorHandlerInterface
                 ->setData(ExceptionFormatter::format($e))
                 ->setMessage($e->getMessage());
 
-            Logger::write($error->getData(), Logger::ERROR, 'global');
+            Logger::write($error->getData(), Logger::ERROR);
 
             $responsePacket = new ResponsePacket();
             $responsePacket->setError($error)
@@ -132,9 +132,9 @@ class ErrorHandler implements ErrorHandlerInterface
 
             if (isset($types[$errno])) {
                 $err = "(" . $types[$errno][1] . ") File ({$errfile}, {$errline}): {$errstr}";
-                Logger::write($err, $types[$errno][0], 'global');
+                Logger::write($err, $types[$errno][0]);
             } else {
-                Logger::write("File ({$errfile}, {$errline}): {$errstr}", Logger::ERROR, 'global');
+                Logger::write("File ({$errfile}, {$errline}): {$errstr}", Logger::ERROR);
             }
         };
     }
@@ -176,7 +176,7 @@ class ErrorHandler implements ErrorHandlerInterface
                         $error->getData(),
                         $err['type'],
                         $error->getMessage()
-                    ), Logger::ERROR, 'global');
+                    ), Logger::ERROR);
 
                     $responsePacket = new ResponsePacket();
                     $responsePacket->setError($error)

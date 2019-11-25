@@ -4,10 +4,8 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Config
  */
-
 namespace Jtl\Connector\Core\Config;
 
-use Jtl\Connector\Core\Exception\JsonException;
 use Noodlehaus\Config;
 
 /**
@@ -23,6 +21,9 @@ class FileConfig implements ConfigInterface
      */
     protected $filePath = '';
 
+    /**
+     * @var Config
+     */
     protected $fileConfig;
 
     /**
@@ -40,35 +41,24 @@ class FileConfig implements ConfigInterface
         $this->fileConfig = new Config($filePath);
     }
 
-
+    /**
+     * @param string $name
+     * @param null $default
+     * @return mixed|null
+     */
     public function get(string $name, $default = null)
     {
         return $this->fileConfig->get($name, $default);
     }
 
+    /**
+     * @param string $name
+     * @param mixed $value
+     * @return mixed|void
+     */
     public function set(string $name, $value)
     {
         $this->fileConfig->set($name, $value);
         $this->fileConfig->toFile($this->filePath);
-    }
-    
-    /**
-     * @param string $key
-     * @param mixed $default
-     * @return mixed|null
-     */
-    public function read($key, $default = null)
-    {
-        return $this->get($key, $default);
-    }
-
-    /**
-     * @param string $key
-     * @param mixed $value
-     */
-    public function save(string $key, $value)
-    {
-        parent::set($key, $value);
-        parent::toFile($this->filePath);
     }
 }

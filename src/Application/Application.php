@@ -86,11 +86,6 @@ class Application implements ApplicationInterface
     protected $config;
 
     /**
-     * @var EnvConfig
-     */
-    protected $envConfig;
-
-    /**
      * Global Session
      *
      * @var \SessionHandlerInterface
@@ -176,9 +171,9 @@ class Application implements ApplicationInterface
             }
 
             // Log incoming request packet (debug only and configuration must be initialized)
-            Logger::write(sprintf('RequestPacket: %s', Json::encode($reqPacketsObj)), Logger::DEBUG, 'rpc');
+            Logger::write(sprintf('RequestPacket: %s', Json::encode($reqPacketsObj)), Logger::DEBUG, Logger::CHANNEL_RPC);
             if (isset($reqPacketsObj->params) && !empty($reqPacketsObj->params)) {
-                Logger::write(sprintf('Params: %s', $reqPacketsObj->params), Logger::DEBUG, 'rpc');
+                Logger::write(sprintf('Params: %s', $reqPacketsObj->params), Logger::DEBUG, Logger::CHANNEL_RPC);
             }
 
             $this->linker = new IdentityLinker($this->endpointConnector->getPrimaryKeyMapper());
@@ -487,14 +482,12 @@ class Application implements ApplicationInterface
         }
 
         $configFile = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
-        $this->config = new FileConfig($configFile);
-        $this->envConfig = new EnvConfig();
-        if (is_null($this->config->get(ConfigOption::LOG_LEVEL, null))) {
-            $this->config->save(ConfigOption::LOG_LEVEL, false);
+        if (!file_exists($configFile)) {
+            file_put_contents($configFile, Json::encode([ConfigOption::LOG_LEVEL => Logger::LEVEL_ERROR], true));
         }
-
-        $logLevel = $this->config->get(ConfigOption::LOG_LEVEL, false);
-        $this->envConfig->set(ConfigOption::LOG_LEVEL, $logLevel);
+        $this->config = new FileConfig($configFile);
+        $logLevel = $this->config->get(ConfigOption::LOG_LEVEL, Logger::LEVEL_ERROR);
+        EnvConfig::getInstance()->set(ConfigOption::LOG_LEVEL, $logLevel);
     }
 
     /**
