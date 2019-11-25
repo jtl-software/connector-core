@@ -70,8 +70,7 @@ use Symfony\Component\Finder\Finder;
 class Application implements ApplicationInterface
 {
     const PROTOCOL_VERSION = 7;
-    const MIN_PHP_VERSION = '7.1';
-    const ENV_VAR_DEBUG_LOGGING = 'DEBUG_LOGGING';
+    const MIN_PHP_VERSION = '7.2';
 
     /**
      * Connected EndpointConnectors
@@ -483,10 +482,10 @@ class Application implements ApplicationInterface
 
         $configFile = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
         if (!file_exists($configFile)) {
-            file_put_contents($configFile, Json::encode([ConfigOption::LOG_LEVEL => Logger::LEVEL_ERROR], true));
+            file_put_contents($configFile, Json::encode([ConfigOption::LOG_LEVEL => Logger::INFO], true));
         }
         $this->config = new FileConfig($configFile);
-        $logLevel = $this->config->get(ConfigOption::LOG_LEVEL, Logger::LEVEL_ERROR);
+        $logLevel = $this->config->get(ConfigOption::LOG_LEVEL, Logger::INFO);
         EnvConfig::getInstance()->set(ConfigOption::LOG_LEVEL, $logLevel);
     }
 

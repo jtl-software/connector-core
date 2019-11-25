@@ -1,5 +1,4 @@
 <?php
-
 namespace Jtl\Connector\Core\Config;
 
 

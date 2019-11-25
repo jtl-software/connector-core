@@ -12,7 +12,7 @@ use Jtl\Connector\Core\IO\Path;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger as MonoLogger;
 
-class Logger extends MonoLogger
+class Logger
 {
     const CHANNEL_CHECKSUM = 'checksum';
     const CHANNEL_DATABASE = 'database';
@@ -42,8 +42,8 @@ class Logger extends MonoLogger
     {
         $envConfig = EnvConfig::getInstance();
 
-        $logLevelOption = $envConfig->get(ConfigOption::LOG_LEVEL, self::LEVEL_ERROR);
-        $logLevel = MonoLogger::ERROR;
+        $logLevelOption = $envConfig->get(ConfigOption::LOG_LEVEL, self::INFO);
+        $logLevel = MonoLogger::INFO;
         if(isset(self::$logLevelMappings[$logLevelOption])) {
             $logLevel = self::$logLevelMappings[$logLevelOption];
         }

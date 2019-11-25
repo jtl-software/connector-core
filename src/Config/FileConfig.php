@@ -24,7 +24,7 @@ class FileConfig implements ConfigInterface
     /**
      * @var Config
      */
-    protected $fileConfig;
+    protected $config;
 
     /**
      * Config constructor.
@@ -38,7 +38,7 @@ class FileConfig implements ConfigInterface
         }
 
         $this->filePath = $filePath;
-        $this->fileConfig = new Config($filePath);
+        $this->config = new Config($filePath);
     }
 
     /**
@@ -48,7 +48,7 @@ class FileConfig implements ConfigInterface
      */
     public function get(string $name, $default = null)
     {
-        return $this->fileConfig->get($name, $default);
+        return $this->config->get($name, $default);
     }
 
     /**
@@ -58,7 +58,7 @@ class FileConfig implements ConfigInterface
      */
     public function set(string $name, $value)
     {
-        $this->fileConfig->set($name, $value);
-        $this->fileConfig->toFile($this->filePath);
+        $this->config->set($name, $value);
+        $this->config->toFile($this->filePath);
     }
 }

@@ -1,7 +1,6 @@
 <?php
 namespace Jtl\Connector\Core\Config;
 
-
 use Jtl\Connector\Core\Definition\ConfigOption;
 
 class EnvConfig implements ConfigInterface
