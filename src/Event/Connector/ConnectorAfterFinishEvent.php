@@ -1,7 +1,6 @@
 <?php
 namespace Jtl\Connector\Core\Event\Connector;
 
-use Jtl\Connector\Core\Model\BoolResult;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class ConnectorAfterFinishEvent extends Event
@@ -9,17 +8,17 @@ class ConnectorAfterFinishEvent extends Event
     const EVENT_NAME = 'connector.after.finish';
     
     /**
-     * @var BoolResult
+     * @var bool
      */
-    protected $boolResult;
+    protected $result;
     
-    public function __construct(BoolResult &$boolResult)
+    public function __construct(bool &$result)
     {
-        $this->boolResult = $boolResult;
+        $this->result = &$result;
     }
     
-    public function getBoolResult()
+    public function getResult()
     {
-        return $this->boolResult;
+        return $this->result;
     }
 }

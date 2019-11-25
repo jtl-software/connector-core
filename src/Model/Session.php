@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @package Jtl\Connector\Core\Model
  * @Serializer\AccessType("public_method")
  */
-class Session extends AbstractDataModel
+class Session extends AbstractModel
 {
     /**
      * @var string

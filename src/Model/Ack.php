@@ -19,7 +19,7 @@ use Jtl\Connector\Core\Checksum\ChecksumInterface;
  * @subpackage Internal
  * @Serializer\AccessType("public_method")
  */
-class Ack extends AbstractDataModel
+class Ack extends AbstractModel
 {
     /**
      * @var ArrayCollection list

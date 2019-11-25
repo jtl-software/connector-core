@@ -6,7 +6,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @Serializer\AccessType("public_method")
  */
-class Authentication extends AbstractDataModel
+class Authentication extends AbstractModel
 {
     /**
      * @var string
