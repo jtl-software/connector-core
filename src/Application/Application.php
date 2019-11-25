@@ -11,6 +11,8 @@ use DI\ContainerBuilder;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Doctrine\Common\Annotations\AnnotationRegistry;
+use Jtl\Connector\Core\Config\EnvConfig;
+use Jtl\Connector\Core\Definition\ConfigOption;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Error\ErrorHandler;
 use Jtl\Connector\Core\Error\ErrorHandlerInterface;
@@ -42,8 +44,7 @@ use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Http\Request as HttpRequest;
 use Jtl\Connector\Core\Http\Response as HttpResponse;
-use Jtl\Connector\Core\Config\Config;
-use Jtl\Connector\Core\Exception\JsonException;
+use Jtl\Connector\Core\Config\FileConfig;
 use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\Utilities\RpcMethod;
 use Jtl\Connector\Core\Connector\CoreConnector;
@@ -68,8 +69,7 @@ use Symfony\Component\Finder\Finder;
 class Application implements ApplicationInterface
 {
     const PROTOCOL_VERSION = 7;
-    const MIN_PHP_VERSION = '7.1';
-    const ENV_VAR_DEBUG_LOGGING = 'DEBUG_LOGGING';
+    const MIN_PHP_VERSION = '7.2';
 
     /**
      * Connected EndpointConnectors
@@ -79,7 +79,7 @@ class Application implements ApplicationInterface
     protected $endpointConnector = null;
 
     /**
-     * @var Config;
+     * @var FileConfig;
      */
     protected $config;
 
@@ -169,9 +169,9 @@ class Application implements ApplicationInterface
             }
 
             // Log incoming request packet (debug only and configuration must be initialized)
-            Logger::write(sprintf('RequestPacket: %s', Json::encode($reqPacketsObj)), Logger::DEBUG, 'rpc');
+            Logger::write(sprintf('Request packet: %s', Json::encode($reqPacketsObj)), Logger::DEBUG, Logger::CHANNEL_RPC);
             if (isset($reqPacketsObj->params) && !empty($reqPacketsObj->params)) {
-                Logger::write(sprintf('Params: %s', $reqPacketsObj->params), Logger::DEBUG, 'rpc');
+                Logger::write(sprintf('Params: %s', $reqPacketsObj->params), Logger::DEBUG, Logger::CHANNEL_RPC);
             }
 
             $this->linker = new IdentityLinker($this->endpointConnector->getPrimaryKeyMapper());
@@ -243,7 +243,7 @@ class Application implements ApplicationInterface
     protected function execute(RequestPacket $requestPacket): ResponsePacket
     {
         if (!RpcMethod::isMethod($requestPacket->getMethod())) {
-            throw new RpcException('Invalid Request', -32600);
+            throw new RpcException('Invalid request', -32600);
         }
 
         /** @var Method $method */
@@ -479,28 +479,13 @@ class Application implements ApplicationInterface
             throw new SessionException('Session not initialized', -32001);
         }
 
-        // Config
-        if (is_null($this->config)) {
-            $configFile = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
-            if (!file_exists($configFile)) {
-                $json = json_encode(['developer_logging' => false], JSON_PRETTY_PRINT);
-
-                if (json_last_error() !== JSON_ERROR_NONE) {
-                    throw JsonException::encoding(json_last_error_msg());
-                }
-
-                file_put_contents($configFile, $json);
-            }
-
-            $this->config = new Config($configFile);
+        $configFile = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
+        if (!file_exists($configFile)) {
+            file_put_contents($configFile, Json::encode([ConfigOption::LOG_LEVEL => Logger::INFO], true));
         }
-
-        if (!$this->config->has('developer_logging')) {
-            $this->config->save('developer_logging', false);
-        }
-
-        $debugLogging = $this->config->get('developer_logging') ? 'true' : 'false';
-        putenv(sprintf('%s=%s', self::ENV_VAR_DEBUG_LOGGING, $debugLogging));
+        $this->config = new FileConfig($configFile);
+        $logLevel = $this->config->get(ConfigOption::LOG_LEVEL, Logger::INFO);
+        EnvConfig::getInstance()->set(ConfigOption::LOG_LEVEL, $logLevel);
     }
 
     /**
@@ -536,7 +521,7 @@ class Application implements ApplicationInterface
 
         session_start();
 
-        Logger::write(sprintf('Session started with id (%s)', session_id()), Logger::DEBUG, 'session');
+        Logger::write(sprintf('Session started with id (%s)', session_id()), Logger::DEBUG, Logger::CHANNEL_SESSION);
     }
 
     /**
@@ -562,21 +547,21 @@ class Application implements ApplicationInterface
                 @rmdir($tempDir);
                 @unlink($zipFile);
 
-                throw new ApplicationException(sprintf('Zip File (%s) could not be extracted', $zipFile));
+                throw new ApplicationException(sprintf('Zip file (%s) could not be extracted', $zipFile));
             }
 
             if ($zipFile !== null) {
                 @unlink($zipFile);
             }
         } else {
-            throw new ApplicationException('Zip file or temp dir  is null');
+            throw new ApplicationException('Zip file or temp dir is null');
         }
 
         foreach ($images as $image) {
             if (!empty($image->getRemoteUrl())) {
                 $imageData = file_get_contents($image->getRemoteUrl());
                 if ($imageData === false) {
-                    throw new ApplicationException('Could not get any data from url: ' . $image->getRemoteUrl());
+                    throw new ApplicationException(sprintf('Could not get any data from url: %s', $image->getRemoteUrl()));
                 }
 
                 $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
@@ -666,9 +651,9 @@ class Application implements ApplicationInterface
     }
 
     /**
-     * @return Config
+     * @return FileConfig
      */
-    public function getConfig(): ?Config
+    public function getConfig(): ?FileConfig
     {
         return $this->config;
     }

@@ -121,13 +121,13 @@ class Connector extends AbstractController
 
         $tokenValidator = $this->application->getEndpointConnector()->getTokenValidator();
         if ($tokenValidator->validate($auth->getToken()) === false) {
-            Logger::write(sprintf("Unauthorized access with token (%s) from ip (%s)", $auth->getToken(), $_SERVER['REMOTE_ADDR']), Logger::WARNING, Logger::CHANNEL_SECURITY);
+            Logger::write(sprintf("Unauthorized access with token (%s) from ip (%s)", $auth->getToken(), $_SERVER['REMOTE_ADDR']), Logger::WARNING);
             throw AuthenticationException::failed();
         }
 
         if ($this->application->getSessionHandler() === null) {
             $errorMessage = 'Could not get any Session';
-            Logger::write($errorMessage, Logger::ERROR, Logger::CHANNEL_GLOBAL);
+            Logger::write($errorMessage, Logger::ERROR);
             throw new ApplicationException($errorMessage, ErrorCode::SESSION_ERROR);
 
         }

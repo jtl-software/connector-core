@@ -27,7 +27,7 @@ class Response
      */
     public static function send(string $jsonResponse)
     {
-        Logger::write($jsonResponse, Logger::DEBUG, 'rpc');
+        Logger::write($jsonResponse, Logger::DEBUG, Logger::CHANNEL_RPC);
 
         header('Cache-Control: no-cache, must-revalidate');
         header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');

@@ -49,25 +49,25 @@ class ChecksumLinker
             $checksums = $model->getChecksums();
             foreach ($checksums as &$checksum) {
                 if ($checksum instanceof ChecksumInterface && ($type === null || $checksum->getType() == $type)) {
-                    Logger::write(sprintf('Checksum linking type (%s)...', $type), Logger::DEBUG, 'checksum');
+                    Logger::write(sprintf('Checksum linking type (%s)...', $type), Logger::DEBUG, Logger::CHANNEL_CHECKSUM);
 
                     if ($model->getId()->getEndpoint() !== null && strlen($model->getId()->getEndpoint()) > 0) {
                         $checksum->setEndpoint(self::$loader->read($model->getId()->getEndpoint(), $checksum->getType()));
 
                         if ($checksum->getEndpoint() !== null && strlen($checksum->getEndpoint()) > 0) {
                             if (($checksum->getEndpoint() !== $checksum->getHost())) {
-                                Logger::write(sprintf('Changed Checksum for endpoint (%s) type (%s)', $model->getId()->getEndpoint(), $type), Logger::DEBUG, 'checksum');
+                                Logger::write(sprintf('Changed checksum for endpoint (%s) type (%s)', $model->getId()->getEndpoint(), $type), Logger::DEBUG, Logger::CHANNEL_CHECKSUM);
                                 $checksum->setHasChanged(true);
                                 self::$loader->delete($model->getId()->getEndpoint(), $checksum->getType());
                                 self::$loader->write($model->getId()->getEndpoint(), $checksum->getType(), $checksum->getHost());
                             }
                         } else {
-                            Logger::write(sprintf('Write new Checksum for endpoint (%s) type (%s)', $model->getId()->getEndpoint(), $type), Logger::DEBUG, 'checksum');
+                            Logger::write(sprintf('Write new checksum for endpoint (%s) type (%s)', $model->getId()->getEndpoint(), $type), Logger::DEBUG, Logger::CHANNEL_CHECKSUM);
                             $checksum->setHasChanged(true);
                             self::$loader->write($model->getId()->getEndpoint(), $checksum->getType(), $checksum->getHost());
                         }
                     } else {
-                        Logger::write(sprintf('New Checksum with empty endpoint type (%s)', $model->getId()->getEndpoint(), $type), Logger::DEBUG, 'checksum');
+                        Logger::write(sprintf('New checksum with empty endpoint type (%s)', $model->getId()->getEndpoint(), $type), Logger::DEBUG, Logger::CHANNEL_CHECKSUM);
                         $checksum->setHasChanged(true);
                     }
                 }

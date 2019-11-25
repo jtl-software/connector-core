@@ -24,7 +24,6 @@ final class Model
     const DELIVERY_NOTE_ITEM = 'DeliveryNoteItem';
     const FILE_UPLOAD = 'FileUpload';
     const GLOBAL_DATA = 'GlobalData';
-    const IMAGE = 'Image';
     const LANGUAGE = 'Language';
     const MANUFACTURER = 'Manufacturer';
     const MANUFACTURER_IMAGE = 'ManufacturerImage';

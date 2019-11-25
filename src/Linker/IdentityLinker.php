@@ -90,7 +90,7 @@ class IdentityLinker
                             Logger::write(
                                 sprintf('Property (%s) from model (%s) is not an instance of DataModel or Identity', $propertyInfo->getName(), $reflect->getShortName()),
                                 Logger::WARNING,
-                                'linker'
+                                Logger::CHANNEL_LINKER
                             );
                         }
                     }
@@ -101,7 +101,7 @@ class IdentityLinker
                     Logger::write(
                         sprintf('Property (%s) from model (%s) is not an array or an instance of DataModel', $propertyInfo->getName(), $reflect->getShortName()),
                         Logger::WARNING,
-                        'linker'
+                        Logger::CHANNEL_LINKER
                     );
                 }
             } elseif ($propertyInfo->isIdentity() && Model::isIdentityProperty($reflect->getShortName(), $property)) {
@@ -419,7 +419,7 @@ class IdentityLinker
             $type,
             $cacheType,
             $result ? 'true' : 'false'
-        ), Logger::DEBUG, 'linker');
+        ), Logger::DEBUG, Logger::CHANNEL_LINKER);
 
         return $result;
     }
@@ -441,7 +441,7 @@ class IdentityLinker
             $type,
             $cacheType,
             $result
-        ), Logger::DEBUG, 'linker');
+        ), Logger::DEBUG, Logger::CHANNEL_LINKER);
 
         return $result;
     }
@@ -461,7 +461,7 @@ class IdentityLinker
             $hostId,
             $type,
             $cacheType
-        ), Logger::DEBUG, 'linker');
+        ), Logger::DEBUG, Logger::CHANNEL_LINKER);
 
         if ($this->useCache) {
             switch ($cacheType) {
@@ -490,7 +490,7 @@ class IdentityLinker
             $hostId,
             $type,
             $cacheType
-        ), Logger::DEBUG, 'linker');
+        ), Logger::DEBUG, Logger::CHANNEL_LINKER);
 
         if ($this->useCache) {
             switch ($cacheType) {

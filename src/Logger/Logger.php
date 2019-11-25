@@ -3,62 +3,67 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core
  */
+
 namespace Jtl\Connector\Core\Logger;
 
-use Jtl\Connector\Core\Application\Application;
+use Jtl\Connector\Core\Config\EnvConfig;
+use Jtl\Connector\Core\Definition\ConfigOption;
+use Jtl\Connector\Core\IO\Path;
 use Monolog\Handler\RotatingFileHandler;
-use Monolog\Handler\StreamHandler;
+use Monolog\Logger as MonoLogger;
 
-class Logger extends \Monolog\Logger
+class Logger
 {
     const CHANNEL_CHECKSUM = 'checksum';
-    const CHANNEL_DATABASE = 'database';
-    const CHANNEL_ERROR = 'error';
     const CHANNEL_GLOBAL = 'global';
     const CHANNEL_LINKER = 'linker';
     const CHANNEL_RPC = 'rpc';
-    const CHANNEL_SECURITY = 'security';
+    const CHANNEL_SESSION = 'session';
+
+    const INFO = 'info';
+    const WARNING = 'warning';
+    const DEBUG = 'debug';
+    const ERROR = 'error';
+
+    protected static $logLevelMappings = [
+        self::INFO => MonoLogger::INFO,
+        self::WARNING => MonoLogger::WARNING,
+        self::ERROR => MonoLogger::ERROR,
+        self::DEBUG => MonoLogger::DEBUG,
+    ];
 
     /**
      * @param string $message
-     * @param integer $level
+     * @param string $level
      * @param string $channel
      * @return boolean
      */
-    public static function write(string $message, int $level = self::ERROR, string $channel = self::CHANNEL_GLOBAL): bool
+    public static function write(string $message, string $level = self::INFO, string $channel = self::CHANNEL_GLOBAL): bool
     {
-        if ($level === self::DEBUG && getenv(Application::ENV_VAR_DEBUG_LOGGING) !== 'true') {
-            return false;
+        $envConfig = EnvConfig::getInstance();
+
+        $logLevelOption = $envConfig->get(ConfigOption::LOG_LEVEL, self::INFO);
+        $logLevel = MonoLogger::INFO;
+        if(isset(self::$logLevelMappings[$logLevelOption])) {
+            $logLevel = self::$logLevelMappings[$logLevelOption];
         }
 
-        if (defined('LOG_DIR')) {
-            $path = [
-                LOG_DIR,
-                "{$channel}.log"
-            ];
-        } else {
-            $path = [
-                CONNECTOR_DIR,
-                'logs',
-                "{$channel}.log"
-            ];
-        }
-        
         $log = self::getLogger($channel);
-        if (!$log->isHandling($level)) {
-            $log->pushHandler(new RotatingFileHandler(implode(DIRECTORY_SEPARATOR, $path)), 2, $level);
+        if (!$log->isHandling($logLevel)) {
+            $path = Path::combine(CONNECTOR_DIR, 'logs', sprintf('%s.log', $channel));
+            $log->pushHandler(new RotatingFileHandler($path, 2, $logLevel));
         }
 
-        return @$log->log($level, $message);
+        return $log->log($level, $message);
     }
 
     /**
      * Gets the current logger
      *
      * @param string $channel The log channel
-     * @return \Monolog\Logger
+     * @return MonoLogger
      */
-    public static function getLogger($channel): \Monolog\Logger
+    public static function getLogger($channel): MonoLogger
     {
         return LoggerFactory::get($channel);
     }
