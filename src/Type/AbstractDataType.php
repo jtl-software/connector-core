@@ -18,7 +18,7 @@ abstract class AbstractDataType
      * List of PropertyInfos
      * @var PropertyInfo[]
      */
-    private $_propertyInfo = null;
+    private $propertyInfo = null;
 
     /**
      * Returns all the public properties of the current Type.
@@ -27,11 +27,11 @@ abstract class AbstractDataType
      */
     public function getProperties()
     {
-        if (is_null($this->_propertyInfo)) {
-            $this->_propertyInfo = $this->loadProperties();
+        if (is_null($this->propertyInfo)) {
+            $this->propertyInfo = $this->loadProperties();
         }
             
-        return $this->_propertyInfo;
+        return $this->propertyInfo;
     }
     
     /**

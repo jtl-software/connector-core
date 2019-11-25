@@ -12,7 +12,7 @@ use Jtl\Connector\Core\Type\PropertyInfo;
  * @access public
  * @package Jtl\Connector\Core\Type
  */
-class Image extends AbstractDataType
+abstract class AbstractImageType extends AbstractDataType
 {
     protected function loadProperties()
     {
@@ -20,7 +20,7 @@ class Image extends AbstractDataType
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('foreignKey', 'Identity', null, false, true, false),
             new PropertyInfo('filename', 'string', '', false, false, false),
-            new PropertyInfo('relationType', 'ImageRelationType', '', false, false, false),
+            new PropertyInfo('relationType', 'string', '', false, false, false),
             new PropertyInfo('remoteUrl', 'string', '', false, false, false),
             new PropertyInfo('name', 'string', '', false, false, false),
             new PropertyInfo('sort', 'integer', 0, false, false, false),

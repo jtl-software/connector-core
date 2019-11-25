@@ -1,7 +1,7 @@
 <?php
 namespace Jtl\Connector\Core\Type;
 
-class ManufacturerImage extends Image
+class ManufacturerImage extends AbstractImageType
 {
 
 }

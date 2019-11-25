@@ -1,7 +1,7 @@
 <?php
 namespace Jtl\Connector\Core\Type;
 
-class SpecificValueImage extends Image
+class SpecificValueImage extends AbstractImageType
 {
 
 }
