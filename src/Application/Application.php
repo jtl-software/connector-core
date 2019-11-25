@@ -45,7 +45,6 @@ use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Http\Request as HttpRequest;
 use Jtl\Connector\Core\Http\Response as HttpResponse;
 use Jtl\Connector\Core\Config\FileConfig;
-use Jtl\Connector\Core\Exception\JsonException;
 use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\Utilities\RpcMethod;
 use Jtl\Connector\Core\Connector\CoreConnector;
@@ -170,7 +169,7 @@ class Application implements ApplicationInterface
             }
 
             // Log incoming request packet (debug only and configuration must be initialized)
-            Logger::write(sprintf('RequestPacket: %s', Json::encode($reqPacketsObj)), Logger::DEBUG, Logger::CHANNEL_RPC);
+            Logger::write(sprintf('Request packet: %s', Json::encode($reqPacketsObj)), Logger::DEBUG, Logger::CHANNEL_RPC);
             if (isset($reqPacketsObj->params) && !empty($reqPacketsObj->params)) {
                 Logger::write(sprintf('Params: %s', $reqPacketsObj->params), Logger::DEBUG, Logger::CHANNEL_RPC);
             }
@@ -244,7 +243,7 @@ class Application implements ApplicationInterface
     protected function execute(RequestPacket $requestPacket): ResponsePacket
     {
         if (!RpcMethod::isMethod($requestPacket->getMethod())) {
-            throw new RpcException('Invalid Request', -32600);
+            throw new RpcException('Invalid request', -32600);
         }
 
         /** @var Method $method */
@@ -522,7 +521,7 @@ class Application implements ApplicationInterface
 
         session_start();
 
-        Logger::write(sprintf('Session started with id (%s)', session_id()), Logger::DEBUG, 'session');
+        Logger::write(sprintf('Session started with id (%s)', session_id()), Logger::DEBUG, Logger::CHANNEL_SESSION);
     }
 
     /**
@@ -548,21 +547,21 @@ class Application implements ApplicationInterface
                 @rmdir($tempDir);
                 @unlink($zipFile);
 
-                throw new ApplicationException(sprintf('Zip File (%s) could not be extracted', $zipFile));
+                throw new ApplicationException(sprintf('Zip file (%s) could not be extracted', $zipFile));
             }
 
             if ($zipFile !== null) {
                 @unlink($zipFile);
             }
         } else {
-            throw new ApplicationException('Zip file or temp dir  is null');
+            throw new ApplicationException('Zip file or temp dir is null');
         }
 
         foreach ($images as $image) {
             if (!empty($image->getRemoteUrl())) {
                 $imageData = file_get_contents($image->getRemoteUrl());
                 if ($imageData === false) {
-                    throw new ApplicationException('Could not get any data from url: ' . $image->getRemoteUrl());
+                    throw new ApplicationException(sprintf('Could not get any data from url: %s', $image->getRemoteUrl()));
                 }
 
                 $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);

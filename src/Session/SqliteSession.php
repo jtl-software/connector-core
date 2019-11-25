@@ -83,15 +83,15 @@ final class SqliteSession implements \SessionHandlerInterface
                                         WHERE sessionId = '{$sessionId}'
                                             AND sessionExpires >= " . time());
         
-        Logger::write(sprintf('Check session with id (%s) and time (%s) ...', $sessionId, time()), Logger::DEBUG, 'session');
+        Logger::write(sprintf('Check session with id (%s) and time (%s) ...', $sessionId, time()), Logger::DEBUG, Logger::CHANNEL_SESSION);
         
         if ($rows !== null && isset($rows[0])) {
-            Logger::write('Session is valid', Logger::DEBUG, 'session');
+            Logger::write('Session is valid', Logger::DEBUG, Logger::CHANNEL_SESSION);
             
             return true;
         }
         
-        Logger::write('Session is invalid', Logger::DEBUG, 'session');
+        Logger::write('Session is invalid', Logger::DEBUG, Logger::CHANNEL_SESSION);
         
         return false;
     }
@@ -105,7 +105,7 @@ final class SqliteSession implements \SessionHandlerInterface
      */
     public function open($savePath, $sessionName)
     {
-        Logger::write(sprintf('Open session with savePath (%s) and sessionName (%s)', $savePath, $sessionName), Logger::DEBUG, 'session');
+        Logger::write(sprintf('Open session with save path (%s) and session name (%s)', $savePath, $sessionName), Logger::DEBUG, Logger::CHANNEL_SESSION);
         
         return $this->db->isConnected();
     }
@@ -115,7 +115,7 @@ final class SqliteSession implements \SessionHandlerInterface
      */
     public function close()
     {
-        Logger::write('Close session', Logger::DEBUG, 'session');
+        Logger::write('Close session', Logger::DEBUG, Logger::CHANNEL_SESSION);
         
         return true;
     }
@@ -135,7 +135,7 @@ final class SqliteSession implements \SessionHandlerInterface
 					        			WHERE sessionId = '{$sessionId}'
                                             AND sessionExpires >= " . time());
         
-        Logger::write(sprintf('Read session with id (%s)', $sessionId), Logger::DEBUG, 'session');
+        Logger::write(sprintf('Read session with id (%s)', $sessionId), Logger::DEBUG, Logger::CHANNEL_SESSION);
         
         if ($rows !== null && isset($rows[0])) {
             $row = $rows[0];
@@ -164,7 +164,7 @@ final class SqliteSession implements \SessionHandlerInterface
 									FROM session
 								    WHERE sessionId = '{$sessionId}'");
         
-        Logger::write(sprintf('Write session with id (%s)', $sessionId), Logger::DEBUG, 'session');
+        Logger::write(sprintf('Write session with id (%s)', $sessionId), Logger::DEBUG, Logger::CHANNEL_SESSION);
         
         if ($rows !== null && isset($rows[0])) {
             $stmt = $this->db->prepare("UPDATE session SET sessionData=:data WHERE sessionId=:sessionid");
@@ -200,7 +200,7 @@ final class SqliteSession implements \SessionHandlerInterface
     {
         $sessionId = $this->db->escapeString($sessionId);
         
-        Logger::write(sprintf('Destroy session with id (%s)', $sessionId), Logger::DEBUG, 'session');
+        Logger::write(sprintf('Destroy session with id (%s)', $sessionId), Logger::DEBUG, Logger::CHANNEL_SESSION);
         
         return $this->db->query("DELETE FROM session WHERE sessionId = '{$sessionId}'");
     }
@@ -213,7 +213,7 @@ final class SqliteSession implements \SessionHandlerInterface
      */
     public function gc($maxLifetime)
     {
-        Logger::write(sprintf('GC session with maxLifetime (%s)', $maxLifetime), Logger::DEBUG, 'session');
+        Logger::write(sprintf('Garbage collection for session with maximum lifetime (%s)', $maxLifetime), Logger::DEBUG, Logger::CHANNEL_SESSION);
         
         return $this->db->query("DELETE FROM session WHERE sessionExpires < " . time());
     }

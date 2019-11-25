@@ -15,10 +15,10 @@ use Monolog\Logger as MonoLogger;
 class Logger
 {
     const CHANNEL_CHECKSUM = 'checksum';
-    const CHANNEL_DATABASE = 'database';
     const CHANNEL_GLOBAL = 'global';
     const CHANNEL_LINKER = 'linker';
     const CHANNEL_RPC = 'rpc';
+    const CHANNEL_SESSION = 'session';
 
     const INFO = 'info';
     const WARNING = 'warning';
