@@ -11,6 +11,8 @@ use DI\ContainerBuilder;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Doctrine\Common\Annotations\AnnotationRegistry;
+use Jtl\Connector\Core\Config\EnvConfig;
+use Jtl\Connector\Core\Definition\ConfigOption;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Error\ErrorHandler;
 use Jtl\Connector\Core\Error\ErrorHandlerInterface;
@@ -42,7 +44,7 @@ use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Http\Request as HttpRequest;
 use Jtl\Connector\Core\Http\Response as HttpResponse;
-use Jtl\Connector\Core\Config\Config;
+use Jtl\Connector\Core\Config\FileConfig;
 use Jtl\Connector\Core\Exception\JsonException;
 use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\Utilities\RpcMethod;
@@ -79,9 +81,14 @@ class Application implements ApplicationInterface
     protected $endpointConnector = null;
 
     /**
-     * @var Config;
+     * @var FileConfig;
      */
     protected $config;
+
+    /**
+     * @var EnvConfig
+     */
+    protected $envConfig;
 
     /**
      * Global Session
@@ -479,28 +486,15 @@ class Application implements ApplicationInterface
             throw new SessionException('Session not initialized', -32001);
         }
 
-        // Config
-        if (is_null($this->config)) {
-            $configFile = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
-            if (!file_exists($configFile)) {
-                $json = json_encode(['developer_logging' => false], JSON_PRETTY_PRINT);
-
-                if (json_last_error() !== JSON_ERROR_NONE) {
-                    throw JsonException::encoding(json_last_error_msg());
-                }
-
-                file_put_contents($configFile, $json);
-            }
-
-            $this->config = new Config($configFile);
+        $configFile = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
+        $this->config = new FileConfig($configFile);
+        $this->envConfig = new EnvConfig();
+        if (is_null($this->config->get(ConfigOption::LOG_LEVEL, null))) {
+            $this->config->save(ConfigOption::LOG_LEVEL, false);
         }
 
-        if (!$this->config->has('developer_logging')) {
-            $this->config->save('developer_logging', false);
-        }
-
-        $debugLogging = $this->config->get('developer_logging') ? 'true' : 'false';
-        putenv(sprintf('%s=%s', self::ENV_VAR_DEBUG_LOGGING, $debugLogging));
+        $logLevel = $this->config->get(ConfigOption::LOG_LEVEL, false);
+        $this->envConfig->set(ConfigOption::LOG_LEVEL, $logLevel);
     }
 
     /**
@@ -666,9 +660,9 @@ class Application implements ApplicationInterface
     }
 
     /**
-     * @return Config
+     * @return FileConfig
      */
-    public function getConfig(): ?Config
+    public function getConfig(): ?FileConfig
     {
         return $this->config;
     }
