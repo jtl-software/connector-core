@@ -70,7 +70,6 @@ final class Model
         self::CUSTOMER_GROUP => IdentityType::CUSTOMER_GROUP,
         self::CUSTOMER_ORDER => IdentityType::CUSTOMER_ORDER,
         self::DELIVERY_NOTE => IdentityType::DELIVERY_NOTE,
-        self::IMAGE => IdentityType::IMAGE,
         self::LANGUAGE => IdentityType::LANGUAGE,
         self::MANUFACTURER => IdentityType::MANUFACTURER,
         self::MANUFACTURER_IMAGE => IdentityType::MANUFACTURER_IMAGE,
@@ -144,10 +143,6 @@ final class Model
         ],
         self::FILE_UPLOAD => [
             'productId' => IdentityType::PRODUCT
-        ],
-        self::IMAGE => [
-            'id' => IdentityType::IMAGE,
-            'foreignKey' => IdentityType::IMAGE
         ],
         self::PRODUCT_IMAGE => [
             'id' => IdentityType::PRODUCT_IMAGE,
