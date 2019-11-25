@@ -10,6 +10,7 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 use Jtl\Connector\Core\Config\EnvConfig;
 use Jtl\Connector\Core\Definition\ConfigOption;
 use Jtl\Connector\Core\Definition\Controller;
+use Jtl\Connector\Core\Definition\ErrorCode;
 use Jtl\Connector\Core\Error\ErrorHandler;
 use Jtl\Connector\Core\Error\ErrorHandlerInterface;
 use Jtl\Connector\Core\Connector\UseChecksumInterface;
@@ -241,7 +242,7 @@ class Application implements ApplicationInterface
     protected function execute(RequestPacket $requestPacket): ResponsePacket
     {
         if (!RpcMethod::isMethod($requestPacket->getMethod())) {
-            throw new RpcException('Invalid request', -32600);
+            throw new RpcException('Invalid request', ErrorCode::INVALID_REQUEST);
         }
 
         /** @var Method $method */

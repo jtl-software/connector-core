@@ -8,6 +8,7 @@ namespace Jtl\Connector\Core\Rpc;
 use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\Handler\HandlerRegistry;
 use JMS\Serializer\SerializerBuilder;
+use Jtl\Connector\Core\Definition\ErrorCode;
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Serializer\Handler\JsonStringHandler;
 
@@ -109,7 +110,7 @@ class RequestPacket extends Packet
         }
 
         if (!$isValid) {
-            throw new RpcException("Parse error", -32700);
+            throw new RpcException("Parse error", ErrorCode::PARSE_ERROR);
         }
     }
 
