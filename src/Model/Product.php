@@ -2583,7 +2583,7 @@ class Product extends AbstractDataModel
      * @param array $publics
      * @return stdClass
      */
-    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', 'type']): stdClass
+    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', 'modelType']): stdClass
     {
         $return = parent::getPublic($publics);
 
