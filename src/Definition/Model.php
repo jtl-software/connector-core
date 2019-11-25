@@ -272,10 +272,10 @@ final class Model
 
     /**
      * @param string $modelName
-     * @return string
+     * @return integer
      * @throws DefinitionException
      */
-    public static function getIdentityType(string $modelName): string
+    public static function getIdentityType(string $modelName): int
     {
         if (!self::isModel($modelName)) {
             throw DefinitionException::unknownModel($modelName);
