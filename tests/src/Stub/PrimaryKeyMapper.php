@@ -1,5 +1,4 @@
 <?php
-
 namespace Jtl\Connector\Test\Stub;
 
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;

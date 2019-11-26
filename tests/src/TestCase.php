@@ -1,5 +1,4 @@
 <?php
-
 namespace Jtl\Connector\Test;
 
 use Jtl\Connector\Core\Logger\Logger;

@@ -1,9 +1,8 @@
 <?php
-
 namespace Jtl\Connector\Test;
 
-use PHPUnit\DbUnit\DataSet\YamlDataSet;
-use PHPUnit\DbUnit\TestCaseTrait;
+use Jtl\Connector\Test\Assertions\TableContains;
+use Jtl\Connector\Test\Assertions\TableIsEmpty;
 
 /**
  * Class DatabaseTestCase
@@ -32,10 +31,20 @@ abstract class DatabaseTestCase extends TestCase
 
     /**
      * @param string $tableName
-     * @return array
+     * @param array $params
+     * @param string $message
      */
-    public function fetchAll($tableName = 'mapping'): array
+    public function assertDatabaseHas(string $tableName, array $params, string $message = "")
     {
-        return $this->getConnection()->query(sprintf('SELECT * FROM %s', $tableName))->fetchAll(\PDO::FETCH_OBJ);
+        self::assertThat(['table' => $tableName, 'params' => $params], new TableContains($this->getConnection()), $message);
+    }
+
+    /**
+     * @param string $tableName
+     * @param string $message
+     */
+    public function assertTableIsEmpty(string $tableName,string $message = "")
+    {
+        self::assertThat($tableName, new TableIsEmpty($this->getConnection()), $message);
     }
 }
