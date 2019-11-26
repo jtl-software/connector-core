@@ -11,51 +11,31 @@ use PHPUnit\DbUnit\TestCaseTrait;
  */
 abstract class DatabaseTestCase extends TestCase
 {
-    use TestCaseTrait;
-
-    /**
-     * @var null
-     */
-    static private $pdo = null;
-
     /**
      * @var null
      */
     private $connection = null;
 
     /**
-     * @return \PHPUnit\DbUnit\Database\DefaultConnection|null
+     * @return \PDO
      */
-    final public function getConnection()
+    final public function getConnection(): \PDO
     {
         if ($this->connection === null) {
-            if (self::$pdo == null) {
-                self::$pdo = new \PDO('sqlite::memory:');
-                self::$pdo->exec("CREATE TABLE mapping (endpoint VARCHAR(255), host INTEGER, type INTEGER);");
-            }
-            $this->connection = $this->createDefaultDBConnection(self::$pdo, ':memory:');
+            $this->connection = new \PDO('sqlite::memory:');
+            $this->connection->exec("CREATE TABLE mapping (endpoint VARCHAR(255), host INTEGER, type INTEGER);");
+            $this->connection->exec("INSERT INTO mapping (endpoint, host, type) VALUES ('1', 1, 1)");
         }
 
         return $this->connection;
     }
 
     /**
-     * @return YamlDataSet
-     */
-    public function getDataSet()
-    {
-        $dataset = new YamlDataSet(TEST_DIR . 'fixtures' . DIRECTORY_SEPARATOR . 'identity_linker.yaml');
-
-        return $dataset;
-    }
-
-    /**
-     * @param $tableName
+     * @param string $tableName
      * @return array
      */
-    public function fetchAll($tableName)
+    public function fetchAll($tableName = 'mapping'): array
     {
-        return $this->getConnection()->getConnection()->query(sprintf('SELECT * FROM %s', $tableName))->fetchAll(\PDO::FETCH_OBJ);
+        return $this->getConnection()->query(sprintf('SELECT * FROM %s', $tableName))->fetchAll(\PDO::FETCH_OBJ);
     }
-
 }

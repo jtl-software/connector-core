@@ -40,7 +40,7 @@ class IdentityLinkerTest extends DatabaseTestCase
      */
     protected function createPrimaryKeyMapper(): PrimaryKeyMapperInterface
     {
-        return new PrimaryKeyMapper($this->getConnection()->getConnection());
+        return new PrimaryKeyMapper($this->getConnection());
     }
 
     /**
