@@ -49,4 +49,13 @@ abstract class DatabaseTestCase extends TestCase
         return $dataset;
     }
 
+    /**
+     * @param $tableName
+     * @return array
+     */
+    public function fetchAll($tableName)
+    {
+        return $this->getConnection()->getConnection()->query(sprintf('SELECT * FROM %s', $tableName))->fetchAll(\PDO::FETCH_OBJ);
+    }
+
 }

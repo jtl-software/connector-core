@@ -136,6 +136,12 @@ class IdentityLinkerTest extends DatabaseTestCase
 
         $deleteCache->invoke($linker, $type, $cacheType, $endpointId, $hostId);
         $this->assertEmpty($linker->getCache());
+
+        $saveCache->invoke($linker, null, $hostId, $type, IdentityLinker::CACHE_TYPE_HOST);
+        $this->assertCount(1, $linker->getCache());
+
+        $saveCache->invoke($linker, $endpointId, null, $type,  IdentityLinker::CACHE_TYPE_ENDPOINT);
+        $this->assertCount(2, $linker->getCache());
     }
 
     /**
@@ -172,6 +178,20 @@ class IdentityLinkerTest extends DatabaseTestCase
         $this->expectExceptionObject(DefinitionException::unknownIdentityProperty($modelName, $property));
 
         $linker->getEndpointId($modelName, $property, '30');
+    }
+
+    /**
+     *
+     */
+    public function testIdentityClear()
+    {
+        $linker = $this->createLinker(false);
+
+        $linker->clear();
+
+        $result = $this->fetchAll('mapping');
+
+        $this->assertEmpty($result);
     }
 
     /**
@@ -288,8 +308,21 @@ class IdentityLinkerTest extends DatabaseTestCase
 
         $returnedHostId = $linker->getHostId(Model::PRODUCT_VARIATION, 'id', $endpointId);
         $this->assertSame($expectedHostId, $returnedHostId);
-    }
 
+        $linker->clear();
+
+        $endpointId = $this->createEndpointId();
+
+        $product = new Product();
+        $productVariation = new ProductVariation();
+        $productVariation->setId(new Identity($endpointId));
+        $product->addVariation($productVariation);
+
+        $linker->linkModel($product);
+
+        $returnedEndpointId = $linker->getEndpointId(Model::PRODUCT_VARIATION, 'id', $expectedHostId);
+        $this->assertSame($endpointId, $returnedEndpointId);
+    }
 
     /**
      *
@@ -326,6 +359,4 @@ class IdentityLinkerTest extends DatabaseTestCase
 
         \Mockery::close();
     }
-
-
 }

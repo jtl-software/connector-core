@@ -234,13 +234,14 @@ class IdentityLinker
     /**
      * @param string $modelName
      * @param string $property
-     * @param integer $endpointId
-     * @param boolean $validate
-     * @return boolean
-     * @throws LinkerException
+     * @param string $endpointId
+     * @param bool $validate
+     * @return bool
      * @throws DefinitionException
+     * @throws LinkerException
+     * @throws \ReflectionException
      */
-    public function propertyEndpointIdExists(string $modelName, string $property, int $endpointId, bool $validate = false): bool
+    public function propertyEndpointIdExists(string $modelName, string $property, string $endpointId, bool $validate = false): bool
     {
         if (!$this->isValidEndpointId($endpointId)) {
             throw new LinkerException(sprintf(
@@ -453,7 +454,7 @@ class IdentityLinker
      * @param int $type
      * @param string $cacheType
      */
-    protected function saveCache(string $endpointId, int $hostId, int $type, string $cacheType)
+    protected function saveCache(?string $endpointId, ?int $hostId, int $type, string $cacheType)
     {
         // Debug
         Logger::write(sprintf(
