@@ -43,7 +43,7 @@ abstract class DatabaseTestCase extends TestCase
      * @param string $tableName
      * @param string $message
      */
-    public function assertTableIsEmpty(string $tableName,string $message = "")
+    public function assertTableIsEmpty(string $tableName, string $message = "")
     {
         self::assertThat($tableName, new TableIsEmpty($this->getConnection()), $message);
     }

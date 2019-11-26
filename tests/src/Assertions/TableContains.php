@@ -13,7 +13,7 @@ class TableContains extends AbstractDatabase
      */
     public function matches($other): bool
     {
-        return $this->rowCount($other['params'],$other['table']) === 1 ? true : false;
+        return $this->rowCount($other['params'],$other['table']) > 0 ? true : false;
     }
 
     /**

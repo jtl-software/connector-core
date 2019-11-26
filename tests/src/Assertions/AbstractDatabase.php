@@ -1,6 +1,7 @@
 <?php
 namespace Jtl\Connector\Test\Assertions;
 
+use PDO;
 use PHPUnit\Framework\Constraint\Constraint;
 
 /**
@@ -10,17 +11,17 @@ use PHPUnit\Framework\Constraint\Constraint;
 abstract class AbstractDatabase extends Constraint
 {
     /**
-     * @var \PDO
+     * @var PDO
      */
-    protected static $pdo;
+    protected $pdo;
 
     /**
      * DatabaseAssertion constructor.
      * @param \PDO $pdo
      */
-    public function __construct(\PDO $pdo)
+    public function __construct(PDO $pdo)
     {
-        self::$pdo = $pdo;
+        $this->pdo = $pdo;
     }
 
     /**
@@ -29,7 +30,7 @@ abstract class AbstractDatabase extends Constraint
      */
     public function fetchAll($tableName = 'mapping'): array
     {
-        return self::$pdo->query(sprintf('SELECT * FROM %s', $tableName))->fetchAll(\PDO::FETCH_OBJ);
+        return $this->pdo->query(sprintf('SELECT * FROM %s', $tableName))->fetchAll(PDO::FETCH_OBJ);
     }
 
     /**
@@ -39,18 +40,24 @@ abstract class AbstractDatabase extends Constraint
      */
     public function rowCount(array $params, $tableName = 'mapping'): int
     {
+        $where = "";
         $columns = [];
         $values = [];
-        foreach ($params as $column => $value) {
-            $values[] = $value;
-            $columns[] = sprintf("%s = ?", $column);
+
+        if (count($params) > 0) {
+            foreach ($params as $column => $value) {
+                $values[] = $value;
+                $columns[] = sprintf("%s = ?", $column);
+            }
+
+            $where = sprintf('WHERE %s', join(" AND ", $columns));
         }
 
-        $select = sprintf('SELECT * FROM %s WHERE %s', $tableName, join("AND ", $columns));
+        $select = sprintf('SELECT COUNT(*) FROM %s %s', $tableName, $where);
 
-        $stmt = self::$pdo->prepare($select);
-        $stmt->execute(array_values($params));
+        $stmt = $this->pdo->prepare($select);
+        $stmt->execute($values);
 
-        return $stmt->rowCount();
+        return (int)$stmt->fetchColumn();
     }
 }

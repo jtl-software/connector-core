@@ -1,7 +1,10 @@
 <?php
 namespace Jtl\Connector\Test\Assertions;
 
-
+/**
+ * Class TableIsEmpty
+ * @package Jtl\Connector\Test\Assertions
+ */
 class TableIsEmpty extends AbstractDatabase
 {
     /**
@@ -10,7 +13,7 @@ class TableIsEmpty extends AbstractDatabase
      */
     public function matches($tableName): bool
     {
-        return empty($this->fetchAll($tableName)) ? true : false;
+        return $this->rowCount([], $tableName) === 0 ? true : false;
     }
 
     /**

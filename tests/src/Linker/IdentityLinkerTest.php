@@ -187,6 +187,12 @@ class IdentityLinkerTest extends DatabaseTestCase
     {
         $linker = $this->createLinker(false);
 
+        $this->assertDatabaseHas('mapping', [
+            'endpoint' => '1',
+            'host' => 1,
+            'type' => Model::getIdentityType(Model::CATEGORY)
+        ]);
+
         $linker->clear();
 
         $this->assertTableIsEmpty('mapping');
@@ -259,10 +265,10 @@ class IdentityLinkerTest extends DatabaseTestCase
 
         $linker->linkModel($product);
 
-        $this->assertDatabaseHas('mapping',[
+        $this->assertDatabaseHas('mapping', [
             'endpoint' => $endpointId,
             'host' => $expectedHostId,
-            'type' => Model::PRODUCT
+            'type' => Model::getIdentityType(Model::PRODUCT)
         ]);
 
         $returnedHostId = $linker->getHostId(Model::PRODUCT, 'id', $endpointId);
@@ -323,11 +329,6 @@ class IdentityLinkerTest extends DatabaseTestCase
         $product->addVariation($productVariation);
 
         $linker->linkModel($product);
-
-        $this->assertDatabaseHas('mapping',[
-            'endpoint' => $endpointId,
-            'type' => Model::PRODUCT_VARIATION
-        ]);
 
         $returnedEndpointId = $linker->getEndpointId(Model::PRODUCT_VARIATION, 'id', $expectedHostId);
         $this->assertSame($endpointId, $returnedEndpointId);
