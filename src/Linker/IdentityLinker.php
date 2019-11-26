@@ -3,6 +3,7 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Linker
  */
+
 namespace Jtl\Connector\Core\Linker;
 
 use Jtl\Connector\Core\Definition\Model;
@@ -84,7 +85,7 @@ class IdentityLinker
                     foreach ($list as &$entity) {
                         if ($entity instanceof AbstractDataModel) {
                             $this->linkModel($entity, $isDeleted);
-                        } elseif ($entity instanceof Identity && Model::isIdentityProperty($reflect->getShortName(), $property)) {
+                        } elseif ($entity instanceof Identity && Model::isIdentityProperty($reflect->getShortName(), $propertyInfo->getName())) {
                             $this->linkIdentityList($entity, $reflect->getShortName(), $property, $isDeleted);
                         } else {
                             Logger::write(
@@ -104,7 +105,7 @@ class IdentityLinker
                         Logger::CHANNEL_LINKER
                     );
                 }
-            } elseif ($propertyInfo->isIdentity() && Model::isIdentityProperty($reflect->getShortName(), $property)) {
+            } elseif ($propertyInfo->isIdentity() && Model::isIdentityProperty($reflect->getShortName(), $propertyInfo->getName())) {
                 $identity = $model->{$getter}();
 
                 if (!($identity instanceof Identity)) {
@@ -114,8 +115,8 @@ class IdentityLinker
                 if (strlen($identity->getEndpoint()) > 0 && $identity->getHost() > 0) {
                     if ($isDeleted) {
                         $this->delete($reflect->getShortName(), $identity->getEndpoint(), $identity->getHost());
-                    } elseif (!$this->propertyHostIdExists($reflect->getShortName(), $property, $identity->getHost(), true)) {
-                        $this->save($identity->getEndpoint(), $identity->getHost(), $reflect->getShortName(), $property);
+                    } elseif (!$this->propertyHostIdExists($reflect->getShortName(), $propertyInfo->getName(), $identity->getHost(), true)) {
+                        $this->save($identity->getEndpoint(), $identity->getHost(), $reflect->getShortName(), $propertyInfo->getName());
                     }
 
                     continue;
@@ -123,16 +124,16 @@ class IdentityLinker
                     if ($identity->getHost() > 0) {
                         if ($isDeleted) {
                             $this->delete($reflect->getShortName(), null, $identity->getHost());
-                        } elseif ($this->propertyHostIdExists($reflect->getShortName(), $property, $identity->getHost())) {
-                            $identity->setEndpoint($this->getEndpointId($reflect->getShortName(), $property, $identity->getHost()));
+                        } elseif ($this->propertyHostIdExists($reflect->getShortName(), $propertyInfo->getName(), $identity->getHost())) {
+                            $identity->setEndpoint($this->getEndpointId($reflect->getShortName(), $propertyInfo->getName(), $identity->getHost()));
 
                             $model->{$setter}($identity);
                         }
                     } elseif (strlen($identity->getEndpoint()) > 0) {
                         if ($isDeleted) {
                             $this->delete($reflect->getShortName(), $identity->getEndpoint(), null);
-                        } elseif ($this->propertyEndpointIdExists($reflect->getShortName(), $property, $identity->getEndpoint())) {
-                            $identity->setHost($this->getHostId($reflect->getShortName(), $property, $identity->getEndpoint()));
+                        } elseif ($this->propertyEndpointIdExists($reflect->getShortName(), $propertyInfo->getName(), $identity->getEndpoint())) {
+                            $identity->setHost($this->getHostId($reflect->getShortName(), $propertyInfo->getName(), $identity->getEndpoint()));
 
                             $model->{$setter}($identity);
                         }
@@ -276,7 +277,7 @@ class IdentityLinker
         $type = Model::getIdentityType($modelName);
         if (!$this->checkCache($endpointId, $type, self::CACHE_TYPE_ENDPOINT, $validate)) {
             $hostId = $this->mapper->getHostId($type, $endpointId);
-            if($validate && !$this->isValidHostId($hostId)) {
+            if ($validate && !$this->isValidHostId($hostId)) {
                 return false;
             }
             $this->saveCache($endpointId, $hostId, $type, self::CACHE_TYPE_ENDPOINT);
