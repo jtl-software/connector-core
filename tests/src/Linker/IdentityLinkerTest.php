@@ -10,6 +10,7 @@ use Jtl\Connector\Core\Model\Category;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\ProductVariation;
+use Jtl\Connector\Core\Model\ProductWarehouseInfo;
 use Jtl\Connector\Test\DatabaseTestCase;
 use Jtl\Connector\Test\Stub\PrimaryKeyMapper;
 
@@ -195,7 +196,7 @@ class IdentityLinkerTest extends DatabaseTestCase
 
         $linker->clear();
 
-        $this->assertTableIsEmpty('mapping');
+        $this->assertDatabaseTableIsEmpty('mapping');
     }
 
     /**
@@ -213,6 +214,12 @@ class IdentityLinkerTest extends DatabaseTestCase
 
         $saveResult = $linker->save($endpointId, $hostId, $modelName, $property);
         $this->assertTrue($saveResult);
+
+        $this->assertDatabaseHas('mapping', [
+            'host' => $hostId,
+            'endpoint' => $endpointId,
+            'type' => $identityType
+        ]);
 
         $reflection = new \ReflectionClass($linker);
         $checkCache = $reflection->getMethod('checkCache');
@@ -243,6 +250,12 @@ class IdentityLinkerTest extends DatabaseTestCase
         $deleteResult = $linker->delete($modelName, $endpointId, $hostId);
         $this->assertTrue($deleteResult);
 
+        $this->assertDatabaseMissing('mapping', [
+            'host' => $hostId,
+            'endpoint' => $endpointId,
+            'type' => $identityType
+        ]);
+
         $cacheExists = $checkCache->invoke($linker, $endpointId, $identityType, IdentityLinker::CACHE_TYPE_ENDPOINT);
         $this->assertFalse($cacheExists);
 
@@ -271,11 +284,11 @@ class IdentityLinkerTest extends DatabaseTestCase
             'type' => Model::getIdentityType(Model::PRODUCT)
         ]);
 
-        $returnedHostId = $linker->getHostId(Model::PRODUCT, 'id', $endpointId);
-        $this->assertSame($expectedHostId, $returnedHostId);
+        $hostId = $linker->getHostId(Model::PRODUCT, 'id', $endpointId);
+        $this->assertSame($expectedHostId, $hostId);
 
-        $isEndpointIdExists = $linker->endpointIdExists(Model::PRODUCT, $endpointId);
-        $this->assertTrue($isEndpointIdExists);
+        $endpointIdExists = $linker->endpointIdExists(Model::PRODUCT, $endpointId);
+        $this->assertTrue($endpointIdExists);
 
         $hostIdExists = $linker->hostIdExists(Model::PRODUCT, $expectedHostId);
         $this->assertTrue($hostIdExists);
@@ -297,6 +310,12 @@ class IdentityLinkerTest extends DatabaseTestCase
 
         $returnedHostId = $linker->getHostId(Model::CATEGORY, 'id', $endpointId);
         $this->assertSame(0, $returnedHostId);
+
+        $this->assertDatabaseMissing('mapping', [
+            'endpoint' => $endpointId,
+            'host' => $expectedHostId,
+            'type' => Model::getIdentityType(Model::CATEGORY)
+        ]);
     }
 
     /**
@@ -310,28 +329,14 @@ class IdentityLinkerTest extends DatabaseTestCase
         $endpointId = $this->createEndpointId();
 
         $product = new Product();
-        $productVariation = new ProductVariation();
-        $productVariation->setId(new Identity($endpointId, $expectedHostId));
-        $product->addVariation($productVariation);
+        $productVariation = new ProductWarehouseInfo();
+        $productVariation->setWarehouseId(new Identity($endpointId,$expectedHostId));
+        $product->addWarehouseInfo($productVariation);
 
         $linker->linkModel($product);
 
-        $returnedHostId = $linker->getHostId(Model::PRODUCT_VARIATION, 'id', $endpointId);
+        $returnedHostId = $linker->getHostId(Model::PRODUCT_WAREHOUSE_INFO, 'warehouseId', $endpointId);
         $this->assertSame($expectedHostId, $returnedHostId);
-
-        $linker->clear();
-
-        $endpointId = $this->createEndpointId();
-
-        $product = new Product();
-        $productVariation = new ProductVariation();
-        $productVariation->setId(new Identity($endpointId));
-        $product->addVariation($productVariation);
-
-        $linker->linkModel($product);
-
-        $returnedEndpointId = $linker->getEndpointId(Model::PRODUCT_VARIATION, 'id', $expectedHostId);
-        $this->assertSame($endpointId, $returnedEndpointId);
     }
 
     /**

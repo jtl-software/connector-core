@@ -71,7 +71,6 @@ final class Model
         self::CUSTOMER_GROUP => IdentityType::CUSTOMER_GROUP,
         self::CUSTOMER_ORDER => IdentityType::CUSTOMER_ORDER,
         self::DELIVERY_NOTE => IdentityType::DELIVERY_NOTE,
-        self::IMAGE => IdentityType::IMAGE,
         self::LANGUAGE => IdentityType::LANGUAGE,
         self::MANUFACTURER => IdentityType::MANUFACTURER,
         self::MANUFACTURER_IMAGE => IdentityType::MANUFACTURER_IMAGE,
@@ -84,6 +83,7 @@ final class Model
         self::PRODUCT_VARIATION => IdentityType::PRODUCT_VARIATION,
         self::PRODUCT_VARIATION_VALUE => IdentityType::PRODUCT_VARIATION_VALUE,
         self::PRODUCT_VARIATION_VALUE_IMAGE => IdentityType::PRODUCT_VARIATION_VALUE_IMAGE,
+        self::PRODUCT_WAREHOUSE_INFO => IdentityType::PRODUCT_WAREHOUSE_INFO,
         self::SHIPPING_CLASS => IdentityType::SHIPPING_CLASS,
         self::SHIPPING_METHOD => IdentityType::SHIPPING_METHOD,
         self::SPECIFIC => IdentityType::SPECIFIC,
@@ -145,10 +145,6 @@ final class Model
         ],
         self::FILE_UPLOAD => [
             'productId' => IdentityType::PRODUCT
-        ],
-        self::IMAGE => [
-            'id' => IdentityType::IMAGE,
-            'foreignKey' => IdentityType::IMAGE
         ],
         self::PRODUCT_IMAGE => [
             'id' => IdentityType::PRODUCT_IMAGE,

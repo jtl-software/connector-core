@@ -21,6 +21,6 @@ class TableIsEmpty extends AbstractDatabase
      */
     public function toString(): string
     {
-        return "Database table is empty";
+        return "database table is empty";
     }
 }

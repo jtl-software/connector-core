@@ -2,10 +2,10 @@
 namespace Jtl\Connector\Test\Assertions;
 
 /**
- * Class DatabaseTableContain
+ * Class TableDoesNotContains
  * @package Jtl\Connector\Test\Assertions
  */
-class TableContains extends AbstractDatabase
+class TableDoesNotContains extends AbstractDatabase
 {
     /**
      * @param mixed $other
@@ -13,7 +13,7 @@ class TableContains extends AbstractDatabase
      */
     public function matches($other): bool
     {
-        return $this->rowCount($other['params'],$other['table']) > 0 ? true : false;
+        return $this->rowCount($other['params'],$other['table']) === 0 ? true : false;
     }
 
     /**
@@ -21,6 +21,6 @@ class TableContains extends AbstractDatabase
      */
     public function toString(): string
     {
-        return "database table contain row";
+        return "database table does not contain row";
     }
 }
