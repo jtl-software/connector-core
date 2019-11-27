@@ -15,7 +15,7 @@ final class Action
     const IDENTIFY = 'identify';
 
     /**
-     * @var string[]null
+     * @var string[]|null
      */
     protected static $actions = null;
 

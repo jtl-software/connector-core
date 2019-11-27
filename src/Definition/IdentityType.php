@@ -7,7 +7,6 @@ class IdentityType
     const CUSTOMER = 2;
     const CUSTOMER_ORDER = 4;
     const DELIVERY_NOTE = 8;
-    const IMAGE = 16;
     const MANUFACTURER = 32;
     const PRODUCT = 64;
     const SPECIFIC = 128;

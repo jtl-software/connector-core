@@ -38,7 +38,7 @@ final class Controller
      * @return boolean
      * @throws \ReflectionException
      */
-    public static function isController(int $controllerName): bool
+    public static function isController(string $controllerName): bool
     {
         return in_array($controllerName, self::getControllers());
     }

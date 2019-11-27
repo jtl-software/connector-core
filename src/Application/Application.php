@@ -44,7 +44,7 @@ use Jtl\Connector\Core\Http\Response as HttpResponse;
 use Jtl\Connector\Core\Config\FileConfig;
 use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\Subscriber\RequestBeforeHandleSubscriber;
-use Jtl\Connector\Core\Utilities\RpcMethod;
+use Jtl\Connector\Core\Definition\RpcMethod;
 use Jtl\Connector\Core\Connector\CoreConnector;
 use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Rpc\Method;
@@ -159,7 +159,7 @@ class Application
 
             //Mask connector token before logging
             $reqPacketsObj = $requestPacket->getPublic();
-            if (isset($reqPacketsObj->method) && $reqPacketsObj->method === 'core.connector.auth' && isset($reqPacketsObj->params)) {
+            if (isset($reqPacketsObj->method) && $reqPacketsObj->method === RpcMethod::AUTH && isset($reqPacketsObj->params)) {
                 $params = Json::decode($reqPacketsObj->params, true);
                 if (isset($params['token'])) {
                     $params['token'] = str_repeat('*', strlen($params['token']));
@@ -232,12 +232,13 @@ class Application
      * @throws ApplicationException
      * @throws CompressionException
      * @throws DefinitionException
+     * @throws DependencyException
      * @throws HttpException
      * @throws LinkerException
-     * @throws RpcException
-     * @throws DependencyException
      * @throws NotFoundException
+     * @throws RpcException
      * @throws \ReflectionException
+     * @throws \Throwable
      */
     protected function execute(RequestPacket $requestPacket): ResponsePacket
     {
@@ -270,9 +271,8 @@ class Application
         }
 
         $request = $this->createHandleRequest($requestPacket, $modelNamespace);
-
         if (!$method->isCore()) {
-            if (strtolower($request->getController()) === 'image' && $request->getAction() === Action::PUSH) {
+            if ($request->getController() === Controller::IMAGE && $request->getAction() === Action::PUSH) {
                 $this->handleImagePush(...$request->getParams());
             }
         }
@@ -393,6 +393,7 @@ class Application
      * @throws ApplicationException
      * @throws DependencyException
      * @throws NotFoundException
+     * @throws \Throwable
      */
     public function handleRequest(Request $request, ConnectorInterface $connector): Response
     {
@@ -492,7 +493,7 @@ class Application
         $sessionId = HttpRequest::getSession();
         $sessionName = 'JtlConnector';
 
-        if ($sessionId === null && $method !== 'core.connector.auth') {
+        if ($sessionId === null && $method !== RpcMethod::AUTH) {
             throw new SessionException('No session');
         }
 

@@ -11,7 +11,7 @@ use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
-use Jtl\Connector\Core\Utilities\RpcMethod;
+use Jtl\Connector\Core\Definition\RpcMethod;
 use Jtl\Connector\Core\Event\EventHandler;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Jtl\Connector\Core\Formatter\ExceptionFormatter;

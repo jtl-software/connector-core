@@ -3,11 +3,9 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Utilities
  */
-
-namespace Jtl\Connector\Core\Utilities;
+namespace Jtl\Connector\Core\Definition;
 
 use Jtl\Connector\Core\Rpc\Method;
-
 /**
  * Rpc Method Utilities
  *
@@ -16,13 +14,18 @@ use Jtl\Connector\Core\Rpc\Method;
  */
 class RpcMethod
 {
+    const ACK = 'core.connector.ack';
+    const AUTH = 'core.connector.auth';
+    const FEATURES = 'core.connector.features';
+    const IDENTIFY = 'connector.identify';
+    const FINISH = 'connector.finish';
+    const CLEAR = 'core.linker.clear';
+
     /**
-     * Method validation
-     *
      * @param string $method
      * @return boolean
      */
-    public static function isMethod($method)
+    public static function isMethod(string $method): bool
     {
         $pregcore = "";
         if (strpos($method, "core.") !== false) {
@@ -35,14 +38,14 @@ class RpcMethod
         
         return false;
     }
-    
+
     /**
      * Controller and Action Splitter
      *
      * @param string $method
-     * @return Jtl\Connector\Core\Rpc\Method
+     * @return Method
      */
-    public static function splitMethod($method)
+    public static function splitMethod(string $method): Method
     {
         $methodObj = new Method($method);
         
@@ -64,7 +67,7 @@ class RpcMethod
      * @param string $controller
      * @return string
      */
-    public static function buildController($controller)
+    public static function buildController(string $controller): string
     {
         return self::convert($controller);
     }
@@ -75,7 +78,7 @@ class RpcMethod
      * @param string $action
      * @return string
      */
-    public static function buildAction($action)
+    public static function buildAction(string $action): string
     {
         return self::convert($action, true);
     }
@@ -87,7 +90,7 @@ class RpcMethod
      * @param bool $isAction
      * @return string
      */
-    protected static function convert($str, $isAction = false)
+    protected static function convert(string $str, bool $isAction = false): string
     {
         $pos = strpos($str, '_');
         if ($pos !== false) {
