@@ -11,37 +11,41 @@ use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\ProductVariation;
 use Jtl\Connector\Core\Model\ProductWarehouseInfo;
-use Jtl\Connector\Test\DatabaseTestCase;
-use Jtl\Connector\Test\Stub\PrimaryKeyMapper;
+use Jtl\Connector\Test\TestCase;
 
 /**
  * Class IdentityLinkerTest
  * @package Jtl\Connector\Core\Linker
  */
-class IdentityLinkerTest extends DatabaseTestCase
+class IdentityLinkerTest extends TestCase
 {
     /**
-     * @param bool $clearMapper
+     * @param $mockedPrimaryKeyMapper
      * @return IdentityLinker
      */
-    protected function createLinker($clearMapper = true)
+    protected function createLinker($mockedPrimaryKeyMapper = null)
     {
-        /** @var $primaryKeyMapper PrimaryKeyMapperInterface */
-        $primaryKeyMapper = $this->createPrimaryKeyMapper();
-
-        if ($clearMapper) {
-            $primaryKeyMapper->clear();
+        if ($mockedPrimaryKeyMapper === null) {
+            $mockedPrimaryKeyMapper = $this->createPrimaryKeyMapperMock();
         }
-
-        return new IdentityLinker($primaryKeyMapper);
+        return new IdentityLinker($mockedPrimaryKeyMapper);
     }
 
     /**
-     * @return PrimaryKeyMapperInterface
+     * @param array $hostId
+     * @param array $endpointId
+     * @return PrimaryKeyMapperInterface|\Mockery\LegacyMockInterface|\Mockery\MockInterface
      */
-    protected function createPrimaryKeyMapper(): PrimaryKeyMapperInterface
+    public function createPrimaryKeyMapperMock($hostId = [1], $endpointId = ["1"])
     {
-        return new PrimaryKeyMapper($this->getConnection());
+        $primaryKeyMapper = \Mockery::mock(PrimaryKeyMapperInterface::class);
+        $primaryKeyMapper->shouldReceive('save')->andReturnTrue();
+        $primaryKeyMapper->shouldReceive('delete')->andReturnTrue();
+        $primaryKeyMapper->shouldReceive('clear')->andReturnTrue();
+        $primaryKeyMapper->shouldReceive('getHostId')->andReturn(...$hostId);
+        $primaryKeyMapper->shouldReceive('getEndpointId')->andReturn(...$endpointId);
+
+        return $primaryKeyMapper;
     }
 
     /**
@@ -53,6 +57,7 @@ class IdentityLinkerTest extends DatabaseTestCase
     public function testHostIdValidator($hostId, $shouldBeValid)
     {
         $isValid = $this->createLinker()->isValidHostId($hostId);
+
         $this->assertEquals($shouldBeValid, $isValid);
     }
 
@@ -100,7 +105,6 @@ class IdentityLinkerTest extends DatabaseTestCase
     public function testCache()
     {
         $linker = $this->createLinker();
-        $linker->setUseCache(true);
 
         $reflection = new \ReflectionClass($linker);
 
@@ -150,7 +154,7 @@ class IdentityLinkerTest extends DatabaseTestCase
      */
     public function testHostIdResolver()
     {
-        $linker = $this->createLinker(false);
+        $linker = $this->createLinker();
 
         $hostId = $linker->getHostId(Model::CATEGORY, 'id', '1');
 
@@ -168,7 +172,7 @@ class IdentityLinkerTest extends DatabaseTestCase
      */
     public function testEndpointIdResolver()
     {
-        $linker = $this->createLinker(false);
+        $linker = $this->createLinker();
 
         $endpointId = $linker->getEndpointId(Model::CATEGORY, 'id', 1);
 
@@ -186,17 +190,10 @@ class IdentityLinkerTest extends DatabaseTestCase
      */
     public function testIdentityClear()
     {
-        $linker = $this->createLinker(false);
+        $linker = $this->createLinker();
 
-        $this->assertDatabaseHas('mapping', [
-            'endpoint' => '1',
-            'host' => 1,
-            'type' => Model::getIdentityType(Model::CATEGORY)
-        ]);
-
-        $linker->clear();
-
-        $this->assertDatabaseTableIsEmpty('mapping');
+        $clearResult = $linker->clear();
+        $this->assertTrue($clearResult);;
     }
 
     /**
@@ -204,22 +201,16 @@ class IdentityLinkerTest extends DatabaseTestCase
      */
     public function testIdentitySave()
     {
-        $linker = $this->createLinker();
-
         $endpointId = $this->createEndpointId();
         $hostId = $this->createHostId();
         $modelName = Model::CATEGORY;
         $property = 'parentCategoryId';
         $identityType = Model::getIdentityType($modelName);
 
+        $linker = $this->createLinker();
+
         $saveResult = $linker->save($endpointId, $hostId, $modelName, $property);
         $this->assertTrue($saveResult);
-
-        $this->assertDatabaseHas('mapping', [
-            'host' => $hostId,
-            'endpoint' => $endpointId,
-            'type' => $identityType
-        ]);
 
         $reflection = new \ReflectionClass($linker);
         $checkCache = $reflection->getMethod('checkCache');
@@ -234,12 +225,14 @@ class IdentityLinkerTest extends DatabaseTestCase
      */
     public function testIdentityDelete()
     {
-        $linker = $this->createLinker();
         $endpointId = $this->createEndpointId();
         $hostId = $this->createHostId();
         $modelName = Model::CATEGORY;
         $property = 'id';
         $identityType = Model::getIdentityType($modelName);
+
+        $primaryKeyMapper = $this->createPrimaryKeyMapperMock([0]);
+        $linker = $this->createLinker($primaryKeyMapper);
 
         $reflection = new \ReflectionClass($linker);
         $checkCache = $reflection->getMethod('checkCache');
@@ -250,17 +243,11 @@ class IdentityLinkerTest extends DatabaseTestCase
         $deleteResult = $linker->delete($modelName, $endpointId, $hostId);
         $this->assertTrue($deleteResult);
 
-        $this->assertDatabaseMissing('mapping', [
-            'host' => $hostId,
-            'endpoint' => $endpointId,
-            'type' => $identityType
-        ]);
-
         $cacheExists = $checkCache->invoke($linker, $endpointId, $identityType, IdentityLinker::CACHE_TYPE_ENDPOINT);
         $this->assertFalse($cacheExists);
 
-        $returnedEndpointId = $linker->endpointIdExists(Model::CATEGORY, $property, $hostId);
-        $this->assertFalse($returnedEndpointId);
+        $endpointIdExists = $linker->endpointIdExists(Model::CATEGORY, $endpointId);
+        $this->assertFalse($endpointIdExists);
     }
 
     /**
@@ -268,21 +255,16 @@ class IdentityLinkerTest extends DatabaseTestCase
      */
     public function testLinkModel()
     {
-        $linker = $this->createLinker();
-
         $expectedHostId = $this->createHostId();
         $endpointId = $this->createEndpointId();
+
+        $primaryKeyMapper = $this->createPrimaryKeyMapperMock([$expectedHostId], [$endpointId]);
+        $linker = $this->createLinker($primaryKeyMapper);
 
         $product = new Product();
         $product->setId(new Identity($endpointId, $expectedHostId));
 
         $linker->linkModel($product);
-
-        $this->assertDatabaseHas('mapping', [
-            'endpoint' => $endpointId,
-            'host' => $expectedHostId,
-            'type' => Model::getIdentityType(Model::PRODUCT)
-        ]);
 
         $hostId = $linker->getHostId(Model::PRODUCT, 'id', $endpointId);
         $this->assertSame($expectedHostId, $hostId);
@@ -299,7 +281,8 @@ class IdentityLinkerTest extends DatabaseTestCase
      */
     public function testUnlinkModel()
     {
-        $linker = $this->createLinker();
+        $primaryKeyMapper = $this->createPrimaryKeyMapperMock([0]);
+        $linker = $this->createLinker($primaryKeyMapper);
 
         $expectedHostId = $this->createHostId();
         $endpointId = $this->createEndpointId();
@@ -310,12 +293,6 @@ class IdentityLinkerTest extends DatabaseTestCase
 
         $returnedHostId = $linker->getHostId(Model::CATEGORY, 'id', $endpointId);
         $this->assertSame(0, $returnedHostId);
-
-        $this->assertDatabaseMissing('mapping', [
-            'endpoint' => $endpointId,
-            'host' => $expectedHostId,
-            'type' => Model::getIdentityType(Model::CATEGORY)
-        ]);
     }
 
     /**
@@ -323,14 +300,16 @@ class IdentityLinkerTest extends DatabaseTestCase
      */
     public function testLinkCollection()
     {
-        $linker = $this->createLinker();
-
         $expectedHostId = $this->createHostId();
         $endpointId = $this->createEndpointId();
 
+        $primaryKeyMapper = $this->createPrimaryKeyMapperMock([$expectedHostId], [$endpointId]);
+
+        $linker = $this->createLinker($primaryKeyMapper);
+
         $product = new Product();
         $productVariation = new ProductWarehouseInfo();
-        $productVariation->setWarehouseId(new Identity($endpointId,$expectedHostId));
+        $productVariation->setWarehouseId(new Identity($endpointId, $expectedHostId));
         $product->addWarehouseInfo($productVariation);
 
         $linker->linkModel($product);
@@ -344,10 +323,11 @@ class IdentityLinkerTest extends DatabaseTestCase
      */
     public function testUnlinkCollection()
     {
-        $linker = $this->createLinker();
-
         $expectedHostId = $this->createHostId();
         $endpointId = $this->createEndpointId();
+
+        $primaryKeyMapper = $this->createPrimaryKeyMapperMock([$expectedHostId, null], [$endpointId, null]);
+        $linker = $this->createLinker($primaryKeyMapper);
 
         $product = new Product();
         $productVariation = new ProductVariation();
@@ -361,7 +341,7 @@ class IdentityLinkerTest extends DatabaseTestCase
 
         $linker->linkModel($product, true);
 
-        $isHostIdExists = $linker->hostIdExists(Model::PRODUCT_VARIATION, $expectedHostId, true);
+        $isHostIdExists = $linker->hostIdExists(Model::PRODUCT_VARIATION, $expectedHostId);
         $this->assertFalse($isHostIdExists);
     }
 
