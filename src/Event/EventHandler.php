@@ -13,12 +13,13 @@ class EventHandler
     const AFTER = 'after';
 
     /**
-     * @param mixed $entity
+     * @param $entity
      * @param EventDispatcher $dispatcher
      * @param string $action
      * @param string $moment
      * @param string|null $class
      * @param bool $isCore
+     * @throws \ReflectionException
      */
     public static function dispatch(&$entity, EventDispatcher $dispatcher, string $action, string $moment, string $class = null, bool $isCore = false)
     {
@@ -30,7 +31,7 @@ class EventHandler
             $class = 'Core';
         }
 
-        $class = ($class !== null) ? $class : ClassName::getFromNS(get_class($entity));
+        $class = ($class !== null) ? $class : (new \ReflectionClass($entity))->getShortName();
         $event = self::createEvent($entity, $class, $action, $moment, $isCore);
 
         if ($event !== null) {

@@ -57,6 +57,7 @@ use Jtl\Connector\Core\IO\Path;
 use Jtl\Connector\Core\Event\EventHandler;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Finder\Finder;
+use Jtl\Connector\Core\Utilities\Str;
 
 /**
  * Application Class
@@ -330,7 +331,7 @@ class Application
     protected function createHandleRequest(RequestPacket $requestPacket, string $modelNamespace): Request
     {
         $method = RpcMethod::splitMethod($requestPacket->getMethod());
-        $controller = RpcMethod::buildController($method->getController());
+        $controller = Str::toPascalCase($method->getController());
         $action = $method->getAction();
         $params = [];
         $className = null;

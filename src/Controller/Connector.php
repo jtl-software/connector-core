@@ -12,7 +12,6 @@ use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\AuthenticationException;
 use Jtl\Connector\Core\Exception\DefinitionException;
-use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\Exception\MissingRequirementException;
 use Jtl\Connector\Core\IO\Path;
 use Jtl\Connector\Core\Model\Ack;
@@ -21,10 +20,10 @@ use Jtl\Connector\Core\Model\Features;
 use Jtl\Connector\Core\Model\Session;
 use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\System\Check;
-use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Checksum\ChecksumInterface;
+use Jtl\Connector\Core\Utilities\Str;
 
 /**
  * Base Config Controller
@@ -74,7 +73,7 @@ class Connector extends AbstractController
     public function ack(Ack $ack): bool
     {
         foreach ($ack->getIdentities() as $modelName => $identities) {
-            $normalizedName = Model::normalizeName($modelName);
+            $normalizedName = Str::toPascalCase($modelName);
             if (!Model::isModel($normalizedName)) {
                 Logger::write(sprintf(
                     'ACK: Unknown core entity (%s)! Skipping related ack\'s...',

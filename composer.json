@@ -21,7 +21,8 @@
         "doctrine/collections": "^1.4",
         "doctrine/annotations": "^1.4",
         "ext-sqlite3": "*",
-        "php-di/php-di": "^6.0"
+        "php-di/php-di": "^6.0",
+        "nabil1337/case-helper": "^0.1.0"
     },
     "minimum-stability": "stable",
     "autoload": {

@@ -350,17 +350,4 @@ final class Model
     {
         return in_array($modelName, self::getModels());
     }
-
-    /**
-     * @param string $modelName
-     * @return string
-     */
-    public static function normalizeName(string $modelName): string
-    {
-        $parts = explode('_', $modelName);
-        foreach ($parts as $i => $part) {
-            $parts[$i] = ucfirst($part);
-        }
-        return implode('', $parts);
-    }
 }

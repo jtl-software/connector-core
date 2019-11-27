@@ -12,7 +12,7 @@ use Jtl\Connector\Core\Rpc\Method;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-class RpcMethod
+final class RpcMethod
 {
     const ACK = 'core.connector.ack';
     const AUTH = 'core.connector.auth';
@@ -22,17 +22,17 @@ class RpcMethod
     const CLEAR = 'core.linker.clear';
 
     /**
-     * @param string $method
+     * @param string $methodName
      * @return boolean
      */
-    public static function isMethod(string $method): bool
+    public static function isMethod(string $methodName): bool
     {
         $pregcore = "";
-        if (strpos($method, "core.") !== false) {
+        if (strpos($methodName, "core.") !== false) {
             $pregcore = "core.";
         }
         
-        if (preg_match("/{$pregcore}[a-z0-9]{3,}[.]{1}[a-z0-9]{3,}/", $method) === 1) {
+        if (preg_match("/{$pregcore}[a-z0-9]{3,}[.]{1}[a-z0-9]{3,}/", $methodName) === 1) {
             return true;
         }
         
@@ -59,50 +59,5 @@ class RpcMethod
             ->setAction($action);
         
         return $methodObj;
-    }
-    
-    /**
-     * Controller Name Builder
-     *
-     * @param string $controller
-     * @return string
-     */
-    public static function buildController(string $controller): string
-    {
-        return self::convert($controller);
-    }
-
-    /**
-     * Action Name Builder
-     *
-     * @param string $action
-     * @return string
-     */
-    public static function buildAction(string $action): string
-    {
-        return self::convert($action, true);
-    }
-
-    /**
-     * String converter
-     *
-     * @param string $str
-     * @param bool $isAction
-     * @return string
-     */
-    protected static function convert(string $str, bool $isAction = false): string
-    {
-        $pos = strpos($str, '_');
-        if ($pos !== false) {
-            $parts = explode('_', $str);
-            $str = '';
-            foreach ($parts as $i => $part) {
-                $str .= ($i == 0 && $isAction) ? $part : ucfirst($part);
-            }
-            
-            return $str;
-        } else {
-            return $isAction ? $str : ucfirst($str);
-        }
     }
 }
