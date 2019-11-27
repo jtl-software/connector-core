@@ -11,10 +11,10 @@ use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
-use Jtl\Connector\Core\Definition\RpcMethod;
 use Jtl\Connector\Core\Event\EventHandler;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Jtl\Connector\Core\Formatter\ExceptionFormatter;
+use Jtl\Connector\Core\Rpc\Method;
 
 class ErrorHandler implements ErrorHandlerInterface
 {
@@ -42,10 +42,10 @@ class ErrorHandler implements ErrorHandlerInterface
      * @param $data
      * @param string $method
      */
-    protected function triggerRpcAfterEvent($data, string $method)
+    protected function triggerRpcAfterEvent($data, string $rpcMethod)
     {
         if ($this->eventDispatcher !== null) {
-            $method = RpcMethod::splitMethod($method);
+            $method = Method::createFromRpcMethod($rpcMethod);
             EventHandler::dispatchRpc(
                 $data,
                 $this->eventDispatcher,

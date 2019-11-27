@@ -38,26 +38,4 @@ final class RpcMethod
         
         return false;
     }
-
-    /**
-     * Controller and Action Splitter
-     *
-     * @param string $method
-     * @return Method
-     */
-    public static function splitMethod(string $method): Method
-    {
-        $methodObj = new Method($method);
-        
-        if (strpos($method, "core.") !== false) {
-            list($core, $controller, $action) = explode(".", $method);
-        } else {
-            list($controller, $action) = explode(".", $method);
-        }
-        
-        $methodObj->setController($controller)
-            ->setAction($action);
-        
-        return $methodObj;
-    }
 }

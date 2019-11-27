@@ -5,6 +5,8 @@
  */
 namespace Jtl\Connector\Core\Rpc;
 
+use Jtl\Connector\Core\Utilities\Str;
+
 class Method
 {
     /**
@@ -35,7 +37,7 @@ class Method
      * @param string $controller
      * @param string $action
      */
-    public function __construct($rpcMethod = '', $controller = '', $action = '')
+    public function __construct(string $rpcMethod, string $controller, string $action)
     {
         $this->rpcMethod = $rpcMethod;
         $this->controller = $controller;
@@ -79,46 +81,20 @@ class Method
      */
     public function isCore(): bool
     {
-        if ($this->getRpcMethod() !== false && strpos($this->getRpcMethod(), "core.") !== false) {
-            return true;
-        }
-        
-        return false;
+        return strpos($this->getRpcMethod(), "core.") !== false;
     }
 
     /**
-     * Method Setter
-     *
      * @param string $rpcMethod
      * @return Method
+     * @throws \Exception
      */
-    public function setRpcMethod($rpcMethod): Method
+    public static function createFromRpcMethod(string $rpcMethod): Method
     {
-        $this->rpcMethod = $rpcMethod;
-        return $this;
-    }
-
-    /**
-     * Controller Setter
-     *
-     * @param string $controller
-     * @return Method
-     */
-    public function setController($controller): Method
-    {
-        $this->controller = $controller;
-        return $this;
-    }
-
-    /**
-     * Action Setter
-     *
-     * @param string $action
-     * @return Method
-     */
-    public function setAction($action): Method
-    {
-        $this->action = $action;
-        return $this;
+        $splitted = explode('.', $rpcMethod);
+        $offset = count($splitted) === 3 ? 1 : 0;
+        $controller = Str::toPascalCase($splitted[0 + $offset]);
+        $action = Str::toCamelCase($splitted[1 + $offset]);
+        return new static($rpcMethod, $controller, $action);
     }
 }

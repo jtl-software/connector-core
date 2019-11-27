@@ -150,14 +150,6 @@ class Application
             $requestPacket = RequestPacket::build($jtlrpc);
             $requestPacket->validate();
 
-            $method = $requestPacket->getMethod();
-
-            // Start Session
-            $this->startSession($method);
-
-            // Start Configuration
-            $this->startConfiguration();
-
             //Mask connector token before logging
             $reqPacketsObj = $requestPacket->getPublic();
             if (isset($reqPacketsObj->method) && $reqPacketsObj->method === RpcMethod::AUTH && isset($reqPacketsObj->params)) {
@@ -173,6 +165,14 @@ class Application
             if (isset($reqPacketsObj->params) && !empty($reqPacketsObj->params)) {
                 Logger::write(sprintf('Params: %s', $reqPacketsObj->params), Logger::DEBUG, Logger::CHANNEL_RPC);
             }
+
+            $method = $requestPacket->getMethod();
+
+            // Start Session
+            $this->startSession($method);
+
+            // Start Configuration
+            $this->startConfiguration();
 
             $this->linker = new IdentityLinker($this->endpointConnector->getPrimaryKeyMapper());
 
@@ -248,7 +248,7 @@ class Application
         }
 
         /** @var Method $method */
-        $method = RpcMethod::splitMethod($requestPacket->getMethod());
+        $method = Method::createFromRpcMethod($requestPacket->getMethod());
 
         // Rpc Event
         $data = $requestPacket->getParams();
@@ -300,7 +300,7 @@ class Application
                         $this->eventDispatcher,
                         $method->getAction(),
                         EventHandler::AFTER,
-                        ($method->getController() === 'connector') ? 'Connector' : null
+                        ($method->getController() === Controller::CONNECTOR) ? Controller::CONNECTOR : null
                     );
                 }
             }
@@ -313,7 +313,7 @@ class Application
             $this->eventDispatcher,
             $method->getAction(),
             EventHandler::AFTER,
-            ($method->getController() === 'connector') ? 'Connector' : null,
+            ($method->getController() === Controller::CONNECTOR) ? Controller::CONNECTOR : null,
             $method->isCore()
         );
 
@@ -330,8 +330,8 @@ class Application
      */
     protected function createHandleRequest(RequestPacket $requestPacket, string $modelNamespace): Request
     {
-        $method = RpcMethod::splitMethod($requestPacket->getMethod());
-        $controller = Str::toPascalCase($method->getController());
+        $method = Method::createFromRpcMethod($requestPacket->getMethod());
+        $controller = $method->getController();
         $action = $method->getAction();
         $params = [];
         $className = null;
@@ -472,7 +472,7 @@ class Application
     protected function startConfiguration(): void
     {
         if (!isset($this->sessionHandler)) {
-            throw new SessionException('Session not initialized', -32001);
+            throw new SessionException('Session not initialized', ErrorCode::UNINITIALIZED_SESSION);
         }
 
         $configFile = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
@@ -582,11 +582,12 @@ class Application
 
     /**
      * @param $data
-     * @param string $method
+     * @param string $rpcMethod
+     * @throws \Exception
      */
-    protected function triggerRpcAfterEvent($data, string $method): void
+    protected function triggerRpcAfterEvent($data, string $rpcMethod): void
     {
-        $method = RpcMethod::splitMethod($method);
+        $method = Method::createFromRpcMethod($rpcMethod);
         EventHandler::dispatchRpc(
             $data,
             $this->eventDispatcher,
