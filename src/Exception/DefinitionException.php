@@ -9,6 +9,8 @@ class DefinitionException extends \Exception
     const IDENTITY_TYPE_MAPPING_NOT_EXISTS = 40;
     const UNKNOWN_IDENTITY_TYPE = 50;
     const UNKNOWN_CONTROLLER = 60;
+    const UNKNOWN_CONFIG_OPTION = 70;
+    const DEFAULT_VALUE_NOT_EXISTS = 80;
 
     /**
      * @param string $model
@@ -69,5 +71,25 @@ class DefinitionException extends \Exception
     {
         $msg = sprintf('Controller (%s) does not exist', $controller);
         return new static($msg, self::UNKNOWN_CONTROLLER);
+    }
+
+    /**
+     * @param string $option
+     * @return DefinitionException
+     */
+    public static function unknownConfigOption(string $option): DefinitionException
+    {
+        $msg = sprintf('Unknown config option (%s)', $option);
+        return new static($msg, self::UNKNOWN_CONFIG_OPTION);
+    }
+
+    /**
+     * @param string $option
+     * @return DefinitionException
+     */
+    public static function defaultValueNotExists(string $option): DefinitionException
+    {
+        $msg = sprintf('Default value for config option (%s) does not exist', $option);
+        return new static($msg, self::DEFAULT_VALUE_NOT_EXISTS);
     }
 }
