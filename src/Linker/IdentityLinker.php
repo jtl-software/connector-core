@@ -147,16 +147,17 @@ class IdentityLinker
      * @param Identity $identity
      * @param string $modelName
      * @param string $property
-     * @param boolean $isDeleted
+     * @param bool $isDeleted
      * @throws DefinitionException
      * @throws LinkerException
+     * @throws \ReflectionException
      */
     public function linkIdentityList(Identity $identity, string $modelName, string $property, bool $isDeleted = false): void
     {
         if (strlen($identity->getEndpoint()) > 0 && $identity->getHost() > 0) {
             if ($isDeleted) {
                 $this->delete($modelName, $identity->getEndpoint(), $identity->getHost());
-            } elseif (!$this->propertyHostIdExists($modelName, $property, $identity->getHost(), true)) {
+            } elseif (!$this->propertyHostIdExists($modelName, $property, $identity->getHost())) {
                 $this->save($identity->getEndpoint(), $identity->getHost(), $modelName, $property);
             }
         } else {
@@ -168,7 +169,7 @@ class IdentityLinker
                 }
             } elseif (strlen($identity->getEndpoint()) > 0) {
                 if ($isDeleted) {
-                    $this->delete($modelName, $identity->getEndpoint(), null);
+                    $this->delete($modelName, $identity->getEndpoint());
                 } elseif ($this->propertyEndpointIdExists($modelName, $property, $identity->getEndpoint())) {
                     $identity->setHost($this->getHostId($modelName, $property, $identity->getEndpoint()));
                 }
@@ -286,11 +287,12 @@ class IdentityLinker
 
     /**
      * @param string $endpointId
-     * @param integer $hostId
+     * @param int $hostId
      * @param string $modelName
      * @param string|null $property
-     * @return boolean
+     * @return bool
      * @throws DefinitionException
+     * @throws \ReflectionException
      */
     public function save(string $endpointId, int $hostId, string $modelName, string $property = null): bool
     {
