@@ -82,6 +82,7 @@ final class Model
         self::PRODUCT_VARIATION => IdentityType::PRODUCT_VARIATION,
         self::PRODUCT_VARIATION_VALUE => IdentityType::PRODUCT_VARIATION_VALUE,
         self::PRODUCT_VARIATION_VALUE_IMAGE => IdentityType::PRODUCT_VARIATION_VALUE_IMAGE,
+        self::PRODUCT_WAREHOUSE_INFO => IdentityType::PRODUCT_WAREHOUSE_INFO,
         self::SHIPPING_CLASS => IdentityType::SHIPPING_CLASS,
         self::SHIPPING_METHOD => IdentityType::SHIPPING_METHOD,
         self::SPECIFIC => IdentityType::SPECIFIC,
