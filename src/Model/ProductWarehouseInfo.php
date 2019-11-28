@@ -21,14 +21,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductWarehouseInfo extends AbstractDataModel
 {
     /**
-     * @var Identity Reference to product
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
-    protected $productId = null;
-    
-    /**
      * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("warehouseId")
@@ -57,30 +49,9 @@ class ProductWarehouseInfo extends AbstractDataModel
      */
     public function __construct()
     {
-        $this->productId = new Identity();
         $this->warehouseId = new Identity();
     }
-    
-    /**
-     * @param Identity $productId Reference to product
-     * @return ProductWarehouseInfo
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setProductId(Identity $productId): ProductWarehouseInfo
-    {
-        $this->productId = $productId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Reference to product
-     */
-    public function getProductId(): Identity
-    {
-        return $this->productId;
-    }
-    
+
     /**
      * @param Identity $warehouseId
      * @return ProductWarehouseInfo

@@ -438,7 +438,7 @@ class IdentityLinker
      * @param int $type
      * @param string $cacheType
      */
-    protected function saveCache(?string $endpointId, ?int $hostId, int $type, string $cacheType)
+    protected function saveCache(string $endpointId, int $hostId, int $type, string $cacheType)
     {
         // Debug
         Logger::write(sprintf(

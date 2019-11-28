@@ -11,6 +11,7 @@ use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\ProductVariation;
 use Jtl\Connector\Core\Model\ProductWarehouseInfo;
+use Jtl\Connector\Core\Model\ShippingClass;
 use Jtl\Connector\Test\TestCase;
 
 /**
@@ -141,12 +142,6 @@ class IdentityLinkerTest extends TestCase
 
         $deleteCache->invoke($linker, $type, $cacheType, $endpointId, $hostId);
         $this->assertEmpty($linker->getCache());
-
-        $saveCache->invoke($linker, null, $hostId, $type, IdentityLinker::CACHE_TYPE_HOST);
-        $this->assertCount(1, $linker->getCache());
-
-        $saveCache->invoke($linker, $endpointId, null, $type, IdentityLinker::CACHE_TYPE_ENDPOINT);
-        $this->assertCount(2, $linker->getCache());
     }
 
     /**
@@ -255,24 +250,33 @@ class IdentityLinkerTest extends TestCase
      */
     public function testLinkModel()
     {
-        $expectedHostId = $this->createHostId();
-        $endpointId = $this->createEndpointId();
+        $productHostId = $this->createHostId();
+        $productEndpointId = $this->createEndpointId();
 
-        $primaryKeyMapper = $this->createPrimaryKeyMapperMock([$expectedHostId], [$endpointId]);
+        $shippingClassHostId = $this->createHostId();
+        $shippingClassEndpointId = $this->createEndpointId();
+
+        $primaryKeyMapper = $this->createPrimaryKeyMapperMock([$productHostId,$shippingClassHostId], [$productEndpointId,$shippingClassEndpointId]);
         $linker = $this->createLinker($primaryKeyMapper);
 
         $product = new Product();
-        $product->setId(new Identity($endpointId, $expectedHostId));
+        $product->setId(new Identity($productEndpointId, $productHostId));
+
+        $shippingClass = new ShippingClass();
+        $shippingClass->setId(new Identity($shippingClassEndpointId,$shippingClassHostId));
 
         $linker->linkModel($product);
 
-        $hostId = $linker->getHostId(Model::PRODUCT, 'id', $endpointId);
-        $this->assertSame($expectedHostId, $hostId);
+        $hostId = $linker->getHostId(Model::PRODUCT, 'id', $productEndpointId);
+        $this->assertSame($productHostId, $hostId);
 
-        $endpointIdExists = $linker->endpointIdExists(Model::PRODUCT, $endpointId);
+        $endpointId = $linker->getEndpointId(Model::PRODUCT, 'id', $productHostId);
+        $this->assertSame($productEndpointId, $endpointId);
+
+        $endpointIdExists = $linker->endpointIdExists(Model::PRODUCT, $productEndpointId);
         $this->assertTrue($endpointIdExists);
 
-        $hostIdExists = $linker->hostIdExists(Model::PRODUCT, $expectedHostId);
+        $hostIdExists = $linker->hostIdExists(Model::PRODUCT, $productHostId);
         $this->assertTrue($hostIdExists);
     }
 
