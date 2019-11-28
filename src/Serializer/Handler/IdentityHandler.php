@@ -5,8 +5,8 @@
  */
 namespace Jtl\Connector\Core\Serializer\Handler;
 
+use JMS\Serializer\GraphNavigatorInterface;
 use JMS\Serializer\Handler\SubscribingHandlerInterface;
-use JMS\Serializer\GraphNavigator;
 use JMS\Serializer\JsonSerializationVisitor;
 use JMS\Serializer\JsonDeserializationVisitor;
 use JMS\Serializer\Context;
@@ -24,13 +24,13 @@ class IdentityHandler implements SubscribingHandlerInterface
     {
         return [
             [
-                'direction' => GraphNavigator::DIRECTION_DESERIALIZATION,
+                'direction' => GraphNavigatorInterface::DIRECTION_DESERIALIZATION,
                 'format' => 'json',
                 'type' => Identity::class,
                 'method' => 'deserializeIdentity',
             ],
             [
-                'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
+                'direction' => GraphNavigatorInterface::DIRECTION_SERIALIZATION,
                 'format' => 'json',
                 'type' => Identity::class,
                 'method' => 'serializeIdentity',

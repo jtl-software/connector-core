@@ -3,7 +3,7 @@
 namespace Jtl\Connector\Core\Serializer\Handler;
 
 use JMS\Serializer\Context;
-use JMS\Serializer\GraphNavigator;
+use JMS\Serializer\GraphNavigatorInterface;
 use JMS\Serializer\Handler\SubscribingHandlerInterface;
 use JMS\Serializer\JsonSerializationVisitor;
 use Jtl\Connector\Core\Model\Features;
@@ -14,7 +14,7 @@ class FeaturesHandler implements SubscribingHandlerInterface
     {
         return [
             [
-                'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
+                'direction' => GraphNavigatorInterface::DIRECTION_SERIALIZATION,
                 'format' => 'json',
                 'type' => Features::class,
                 'method' => 'serializeFeaturesToJson',

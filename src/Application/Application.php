@@ -1,5 +1,4 @@
 <?php
-
 namespace Jtl\Connector\Core\Application;
 
 use DI\Container;
@@ -57,7 +56,6 @@ use Jtl\Connector\Core\IO\Path;
 use Jtl\Connector\Core\Event\EventHandler;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Finder\Finder;
-use Jtl\Connector\Core\Utilities\Str;
 
 /**
  * Application Class
@@ -166,10 +164,10 @@ class Application
                 Logger::write(sprintf('Params: %s', $reqPacketsObj->params), Logger::DEBUG, Logger::CHANNEL_RPC);
             }
 
-            $method = $requestPacket->getMethod();
+            $method = Method::createFromRequestPacket($requestPacket);
 
             // Start Session
-            $this->startSession($method);
+            $this->startSession($requestPacket->getMethod());
 
             // Start Configuration
             $this->startConfiguration();
@@ -186,7 +184,7 @@ class Application
             // Initialize Endpoint
             $this->endpointConnector->initialize($this);
 
-            $responsePacket = $this->execute($requestPacket);
+            $responsePacket = $this->execute($requestPacket, $method);
         } catch (\Throwable $ex) {
             $error = new Error();
             $error->setCode($ex->getCode())
@@ -205,7 +203,7 @@ class Application
 
             $jsonResponse = $responsePacket->serialize();
 
-            $this->triggerRpcAfterEvent($jsonResponse, $requestPacket->getMethod());
+            $this->triggerRpcAfterEvent($jsonResponse, $method);
             HttpResponse::send($jsonResponse);
         }
     }
@@ -229,6 +227,7 @@ class Application
 
     /**
      * @param RequestPacket $requestPacket
+     * @param Method $method
      * @return ResponsePacket
      * @throws ApplicationException
      * @throws CompressionException
@@ -241,14 +240,11 @@ class Application
      * @throws \ReflectionException
      * @throws \Throwable
      */
-    protected function execute(RequestPacket $requestPacket): ResponsePacket
+    protected function execute(RequestPacket $requestPacket, Method $method): ResponsePacket
     {
         if (!RpcMethod::isMethod($requestPacket->getMethod())) {
             throw new RpcException('Invalid request', ErrorCode::INVALID_REQUEST);
         }
-
-        /** @var Method $method */
-        $method = Method::createFromRpcMethod($requestPacket->getMethod());
 
         // Rpc Event
         $data = $requestPacket->getParams();
@@ -271,7 +267,7 @@ class Application
             $modelNamespace = $connector->getModelNamespace();
         }
 
-        $request = $this->createHandleRequest($requestPacket, $modelNamespace);
+        $request = $this->createHandleRequest($requestPacket, $method, $modelNamespace);
         if (!$method->isCore()) {
             if ($request->getController() === Controller::IMAGE && $request->getAction() === Action::PUSH) {
                 $this->handleImagePush(...$request->getParams());
@@ -322,15 +318,15 @@ class Application
 
     /**
      * @param RequestPacket $requestPacket
+     * @param Method $mehod
      * @param string $modelNamespace
      * @return Request
      * @throws DefinitionException
      * @throws LinkerException
      * @throws \ReflectionException
      */
-    protected function createHandleRequest(RequestPacket $requestPacket, string $modelNamespace): Request
+    protected function createHandleRequest(RequestPacket $requestPacket, Method $method, string $modelNamespace): Request
     {
-        $method = Method::createFromRpcMethod($requestPacket->getMethod());
         $controller = $method->getController();
         $action = $method->getAction();
         $params = [];
@@ -485,16 +481,16 @@ class Application
     }
 
     /**
-     * @param string $method
+     * @param string $rpcMethod
      * @throws ApplicationException
      * @throws SessionException
      */
-    protected function startSession(string $method): void
+    protected function startSession(string $rpcMethod): void
     {
         $sessionId = HttpRequest::getSession();
         $sessionName = 'JtlConnector';
 
-        if ($sessionId === null && $method !== RpcMethod::AUTH) {
+        if ($sessionId === null && $rpcMethod !== RpcMethod::AUTH) {
             throw new SessionException('No session');
         }
 
@@ -581,15 +577,14 @@ class Application
     }
 
     /**
-     * @param $data
+     * @param $jsonString
      * @param string $rpcMethod
      * @throws \Exception
      */
-    protected function triggerRpcAfterEvent($data, string $rpcMethod): void
+    protected function triggerRpcAfterEvent(string $jsonString, Method $method): void
     {
-        $method = Method::createFromRpcMethod($rpcMethod);
         EventHandler::dispatchRpc(
-            $data,
+            $jsonString,
             $this->eventDispatcher,
             $method->getController(),
             $method->getAction(),

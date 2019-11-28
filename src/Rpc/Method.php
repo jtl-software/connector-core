@@ -97,4 +97,14 @@ class Method
         $action = Str::toCamelCase($splitted[1 + $offset]);
         return new static($rpcMethod, $controller, $action);
     }
+
+    /**
+     * @param RequestPacket $packet
+     * @return Method
+     * @throws \Exception
+     */
+    public function createFromRequestPacket(RequestPacket $packet): Method
+    {
+        return static::createFromRpcMethod($packet->getMethod());
+    }
 }

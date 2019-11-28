@@ -5,8 +5,8 @@
  */
 namespace Jtl\Connector\Core\Serializer\Handler;
 
+use JMS\Serializer\GraphNavigatorInterface;
 use JMS\Serializer\Handler\SubscribingHandlerInterface;
-use JMS\Serializer\GraphNavigator;
 use JMS\Serializer\JsonDeserializationVisitor;
 use JMS\Serializer\Context;
 use Jtl\Connector\Core\Rpc\JsonString;
@@ -24,7 +24,7 @@ class JsonStringHandler implements SubscribingHandlerInterface
     {
         return [
             [
-                'direction' => GraphNavigator::DIRECTION_DESERIALIZATION,
+                'direction' => GraphNavigatorInterface::DIRECTION_DESERIALIZATION,
                 'format' => 'json',
                 'type' => JsonString::class,
                 'method' => 'deserializeJsonString',

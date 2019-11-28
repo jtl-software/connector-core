@@ -40,7 +40,8 @@ class ErrorHandler implements ErrorHandlerInterface
 
     /**
      * @param $data
-     * @param string $method
+     * @param string $rpcMethod
+     * @throws \Exception
      */
     protected function triggerRpcAfterEvent($data, string $rpcMethod)
     {
