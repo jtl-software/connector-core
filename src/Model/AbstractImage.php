@@ -23,7 +23,7 @@ use stdClass;
  *     }
  * )
  */
-abstract class AbstractImage extends AbstractDataModel
+abstract class AbstractImage extends AbstractDataModel implements IdentityInterface
 {
     /**
      * @var Identity

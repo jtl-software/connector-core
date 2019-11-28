@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ShippingMethod extends AbstractDataModel
+class ShippingMethod extends AbstractDataModel implements IdentityInterface
 {
     /**
      * @var Identity

@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class FileUpload extends AbstractDataModel
+class FileUpload extends AbstractDataModel implements IdentityInterface
 {
     /**
      * @var Identity Unique fileUpload id

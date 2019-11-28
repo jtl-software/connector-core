@@ -29,6 +29,8 @@ use Jtl\Connector\Core\Model\AbstractImage;
 use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
+use Jtl\Connector\Core\Model\IdentityInterface;
+use Jtl\Connector\Core\Model\ModelIdentificationInterface;
 use Jtl\Connector\Core\Model\QueryFilter;
 use Jtl\Connector\Core\Plugin\PluginManager;
 use Jtl\Connector\Core\Serializer\Json;
@@ -427,6 +429,27 @@ class Application
                     if ($controllerObject instanceof TransactionalInterface) {
                         $controllerObject->rollback();
                     }
+
+                    $message = [
+                        sprintf('Controller = %s', $controller),
+                        sprintf('Action = %s', $action),
+                    ];
+
+                    if($model instanceof IdentityInterface) {
+                        $message[] = sprintf('Wawi PK = %s', $model->getId());
+                    }
+
+                    if($model instanceof ModelIdentificationInterface) {
+                        $message[] = $model->getIdentificationString();
+                    }
+
+                    $message[] = $ex->getMessage();
+                    $reflectionClass = new \ReflectionClass($ex);
+                    $reflectionProperty = $reflectionClass->getProperty('message');
+                    $reflectionProperty->setAccessible(true);
+                    $reflectionProperty->setValue($ex, implode(' | ', $message));
+                    $reflectionProperty->setAccessible(false);
+
                     throw $ex;
                 }
                 break;

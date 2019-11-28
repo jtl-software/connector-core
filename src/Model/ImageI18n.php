@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ImageI18n extends AbstractI18n
+class ImageI18n extends AbstractI18n implements IdentityInterface
 {
     /**
      * @var Identity

@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Category extends AbstractDataModel
+class Category extends AbstractDataModel implements IdentityInterface
 {
     /**
      * @var Identity Unique category id
@@ -100,7 +100,7 @@ class Category extends AbstractDataModel
         $this->id = new Identity();
         $this->parentCategoryId = new Identity();
     }
-    
+
     /**
      * @param Identity $id Unique category id
      * @return Category
