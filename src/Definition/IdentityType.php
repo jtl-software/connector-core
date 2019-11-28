@@ -47,7 +47,7 @@ class IdentityType
      */
     public static function getTypes(): array
     {
-        if(is_null(static::$types)) {
+        if (is_null(static::$types)) {
             $reflection = new \ReflectionClass(static::class);
             static::$types = $reflection->getConstants();
         }
@@ -62,6 +62,6 @@ class IdentityType
      */
     public static function isType(int $type): bool
     {
-        return in_array($type, self::getTypes());
+        return in_array($type, self::getTypes(), true);
     }
 }

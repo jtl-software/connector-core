@@ -36,7 +36,7 @@ final class Action
      */
     public static function getActions(): array
     {
-        if(is_null(static::$actions)) {
+        if (is_null(static::$actions)) {
             $reflection = new \ReflectionClass(static::class);
             static::$actions = $reflection->getConstants();
         }
@@ -51,7 +51,7 @@ final class Action
      */
     public static function isAction(string $actionName): bool
     {
-        return in_array($actionName, self::getActions());
+        return in_array($actionName, self::getActions(), true);
     }
 
     /**
@@ -60,6 +60,6 @@ final class Action
      */
     public static function isCoreAction(string $actionName): bool
     {
-        return in_array($actionName, self::$coreActions);
+        return in_array($actionName, self::$coreActions, true);
     }
 }

@@ -11,7 +11,6 @@ use InvalidArgumentException;
 use stdClass;
 use JMS\Serializer\Annotation as Serializer;
 
-
 /**
  * Statistic Model
  *

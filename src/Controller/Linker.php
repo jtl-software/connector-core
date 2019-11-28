@@ -6,7 +6,6 @@
  */
 namespace Jtl\Connector\Core\Controller;
 
-
 /**
  * Base Linker Controller
  *

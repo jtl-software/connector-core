@@ -5,5 +5,5 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 abstract class AbstractEvent extends Event
 {
-    public abstract static function getEventName(): string;
+    abstract public static function getEventName(): string;
 }

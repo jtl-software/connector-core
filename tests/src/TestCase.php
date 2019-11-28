@@ -37,6 +37,4 @@ class TestCase extends \PHPUnit\Framework\TestCase
     {
         return sprintf("%s_%s", 't', $this->createHostId());
     }
-
-
 }

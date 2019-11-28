@@ -75,5 +75,4 @@ class CoreConnector implements ConnectorInterface
     {
         return $this->controllerNamespace;
     }
-
 }

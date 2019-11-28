@@ -93,7 +93,7 @@ abstract class AbstractImage extends AbstractDataModel
     /**
      * @return string
      */
-    public abstract function getRelationType(): string;
+    abstract public function getRelationType(): string;
 
     /**
      * @param Identity $foreignKey

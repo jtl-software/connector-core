@@ -197,7 +197,7 @@ class Request
      */
     public static function handle()
     {
-       $jtlrpc = Request::get();
+        $jtlrpc = Request::get();
 
         if ($jtlrpc !== null) {
             return Request::stripData($jtlrpc);

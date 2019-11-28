@@ -128,7 +128,6 @@ class Connector extends AbstractController
             $errorMessage = 'Could not get any Session';
             Logger::write($errorMessage, Logger::ERROR);
             throw new ApplicationException($errorMessage, ErrorCode::SESSION_ERROR);
-
         }
 
         return (new Session())
@@ -182,6 +181,5 @@ class Connector extends AbstractController
         }
 
         return $log;
-
     }
 }

@@ -19,7 +19,7 @@ class EnvConfig implements ConfigInterface
      */
     public static function getInstance(): EnvConfig
     {
-        if(is_null(self::$instance)) {
+        if (is_null(self::$instance)) {
             self::$instance = new self();
         }
 

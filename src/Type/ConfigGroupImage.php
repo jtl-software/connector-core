@@ -3,5 +3,4 @@ namespace Jtl\Connector\Core\Type;
 
 class ConfigGroupImage extends AbstractImageType
 {
-
 }

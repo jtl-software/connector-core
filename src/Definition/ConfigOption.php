@@ -32,7 +32,7 @@ class ConfigOption
      */
     public static function isOption(string $option): bool
     {
-        return in_array($option, static::getOptions());
+        return in_array($option, static::getOptions(), true);
     }
 
     /**
@@ -46,5 +46,4 @@ class ConfigOption
         }
         return self::TYPE_STRING;
     }
-
 }

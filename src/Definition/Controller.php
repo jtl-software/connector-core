@@ -25,7 +25,7 @@ final class Controller
      */
     public static function getControllers(): array
     {
-        if(is_null(static::$types)) {
+        if (is_null(static::$types)) {
             $reflection = new \ReflectionClass(static::class);
             static::$types = $reflection->getConstants();
         }
@@ -40,6 +40,6 @@ final class Controller
      */
     public static function isController(string $controllerName): bool
     {
-        return in_array($controllerName, self::getControllers());
+        return in_array($controllerName, self::getControllers(), true);
     }
 }

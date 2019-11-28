@@ -349,6 +349,6 @@ final class Model
      */
     public static function isModel(string $modelName): bool
     {
-        return in_array($modelName, self::getModels());
+        return in_array($modelName, self::getModels(), true);
     }
 }

@@ -15,7 +15,7 @@ class Path
 
         $root = substr($pathParts[0], 0, 1) === '/' ? '/' : '';
 
-        $pathParts = array_map(function(string $part) {
+        $pathParts = array_map(function (string $part) {
             return trim(trim($part), '\\/');
         }, $pathParts);
 

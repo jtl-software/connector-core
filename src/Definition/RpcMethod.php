@@ -6,6 +6,7 @@
 namespace Jtl\Connector\Core\Definition;
 
 use Jtl\Connector\Core\Rpc\Method;
+
 /**
  * Rpc Method Utilities
  *

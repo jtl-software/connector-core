@@ -194,7 +194,6 @@ class Application
             $responsePacket->setId($requestPacket->getId())
                 ->setJtlrpc($requestPacket->getJtlrpc())
                 ->setError($error);
-
         } finally {
             if (count($this->imagesToDelete) > 0) {
                 HttpRequest::deleteFileuploads($this->imagesToDelete);
@@ -364,7 +363,7 @@ class Application
 
             // Identity mapping
             foreach ($params as $param) {
-                if (in_array($action, [Action::PUSH, Action::DELETE])) {
+                if (in_array($action, [Action::PUSH, Action::DELETE], true)) {
                     $this->linker->linkModel($param);
                     // Checksum linking
                     $this->linkChecksum($param);

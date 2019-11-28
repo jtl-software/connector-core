@@ -188,7 +188,8 @@ class IdentityLinkerTest extends TestCase
         $linker = $this->createLinker();
 
         $clearResult = $linker->clear();
-        $this->assertTrue($clearResult);;
+        $this->assertTrue($clearResult);
+        ;
     }
 
     /**
@@ -263,7 +264,7 @@ class IdentityLinkerTest extends TestCase
         $product->setId(new Identity($productEndpointId, $productHostId));
 
         $shippingClass = new ShippingClass();
-        $shippingClass->setId(new Identity($shippingClassEndpointId,$shippingClassHostId));
+        $shippingClass->setId(new Identity($shippingClassEndpointId, $shippingClassHostId));
 
         $linker->linkModel($product);
 

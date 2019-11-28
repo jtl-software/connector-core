@@ -32,7 +32,7 @@ class SerializerBuilder
      */
     public static function getInstance()
     {
-        if(is_null(self::$instance)) {
+        if (is_null(self::$instance)) {
             self::$instance = \JMS\Serializer\SerializerBuilder::create()
                 ->addDefaultHandlers()
                 ->setObjectConstructor(new ObjectConstructor())

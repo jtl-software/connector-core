@@ -27,7 +27,7 @@ class EventHandler
             return;
         }
 
-        if($isCore) {
+        if ($isCore) {
             $class = 'Core';
         }
 

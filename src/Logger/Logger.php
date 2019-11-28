@@ -44,7 +44,7 @@ class Logger
 
         $logLevelOption = $envConfig->get(ConfigOption::LOG_LEVEL, self::INFO);
         $logLevel = MonoLogger::INFO;
-        if(isset(self::$logLevelMappings[$logLevelOption])) {
+        if (isset(self::$logLevelMappings[$logLevelOption])) {
             $logLevel = self::$logLevelMappings[$logLevelOption];
         }
 

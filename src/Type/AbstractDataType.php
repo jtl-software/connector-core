@@ -5,7 +5,6 @@
  */
 namespace Jtl\Connector\Core\Type;
 
-
 /**
  * Entity data model
  *

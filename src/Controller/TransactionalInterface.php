@@ -1,7 +1,6 @@
 <?php
 namespace Jtl\Connector\Core\Controller;
 
-
 interface TransactionalInterface
 {
     public function beginTransaction(): bool;

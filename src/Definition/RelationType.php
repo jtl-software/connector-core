@@ -5,7 +5,6 @@
  */
 namespace Jtl\Connector\Core\Definition;
 
-
 final class RelationType
 {
     const CATEGORY = 'category';
@@ -61,6 +60,6 @@ final class RelationType
      */
     public static function isRelationType(string $relationType): bool
     {
-        return in_array($relationType, self::getRelationTypes());
+        return in_array($relationType, self::getRelationTypes(), true);
     }
 }

@@ -4,7 +4,6 @@ namespace Jtl\Connector\Core\Event\Handle;
 use Jtl\Connector\Core\Application\Request;
 use Jtl\Connector\Core\Event\AbstractEvent;
 
-
 class RequestBeforeHandleEvent extends AbstractEvent
 {
     const EVENT_NAME = 'request.before.handle';
