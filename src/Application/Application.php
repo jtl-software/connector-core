@@ -432,25 +432,7 @@ class Application
                         $controllerObject->rollback();
                     }
 
-                    $messages = [
-                        sprintf('Controller = %s', $controller),
-                        sprintf('Action = %s', $action),
-                    ];
-
-                    if($model instanceof IdentityInterface) {
-                        $messages[] = sprintf('Wawi PK = %s', $model->getId()->getHost());
-                    }
-
-                    if($model instanceof IdentificationInterface) {
-                        $messages = +$model->getIdentificationStrings();
-                    }
-
-                    $messages[] = $ex->getMessage();
-                    $reflectionClass = new \ReflectionClass($ex);
-                    $reflectionProperty = $reflectionClass->getProperty('message');
-                    $reflectionProperty->setAccessible(true);
-                    $reflectionProperty->setValue($ex, implode(' | ', $messages));
-                    $reflectionProperty->setAccessible(false);
+                    $this->extendExceptionMessageWithIdentifiers($ex, $model, $controller, $action);
 
                     throw $ex;
                 }
@@ -625,6 +607,36 @@ class Application
         if (ChecksumLinker::checksumLoaderExists()) {
             ChecksumLinker::link($model);
         }
+    }
+
+    /**
+     * @param \Throwable $ex
+     * @param AbstractDataModel $model
+     * @param string $controller
+     * @param string $action
+     * @throws \ReflectionException
+     */
+    protected function extendExceptionMessageWithIdentifiers(\Throwable $ex, AbstractDataModel $model, string $controller, string $action)
+    {
+        $messages = [
+            sprintf('Controller = %s', $controller),
+            sprintf('Action = %s', $action),
+        ];
+
+        if($model instanceof IdentityInterface) {
+            $messages[] = sprintf('Wawi PK = %s', $model->getId()->getHost());
+        }
+
+        if($model instanceof IdentificationInterface) {
+            $messages = +$model->getIdentificationStrings();
+        }
+
+        $messages[] = $ex->getMessage();
+        $reflectionClass = new \ReflectionClass($ex);
+        $reflectionProperty = $reflectionClass->getProperty('message');
+        $reflectionProperty->setAccessible(true);
+        $reflectionProperty->setValue($ex, implode(' | ', $messages));
+        $reflectionProperty->setAccessible(false);
     }
 
     /**
