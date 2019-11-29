@@ -4,6 +4,7 @@ namespace Jtl\Connector\Core\Subscriber;
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Event\Handle\RequestBeforeHandleEvent;
+use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\ProductPrice;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -33,7 +34,15 @@ class RequestBeforeHandleSubscriber implements EventSubscriberInterface
 
             /** @var ProductPrice $price */
             foreach ($prices as $price) {
-                $resortedPrices[$price->getProductId()->getHost()][] = $price;
+
+                $hostId = $price->getProductId()->getHost();
+
+                if (!isset($resortedPrices[$hostId])) {
+                    $resortedPrices[$hostId] = new Product();
+                    $resortedPrices[$hostId]->setId($price->getProductId());
+                }
+
+                $resortedPrices[$hostId]->addPrice($price);
             }
 
             $request->setParams(array_values($resortedPrices));

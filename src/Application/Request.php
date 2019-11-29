@@ -62,6 +62,7 @@ class Request
     public function setParams(array $params): Request
     {
         $this->params = $params;
+        return $this;
     }
 
     /**

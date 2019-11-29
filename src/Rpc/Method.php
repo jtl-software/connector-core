@@ -103,7 +103,7 @@ class Method
      * @return Method
      * @throws \Exception
      */
-    public function createFromRequestPacket(RequestPacket $packet): Method
+    public static function createFromRequestPacket(RequestPacket $packet): Method
     {
         return static::createFromRpcMethod($packet->getMethod());
     }
