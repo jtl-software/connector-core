@@ -6,6 +6,7 @@
  */
 namespace Jtl\Connector\Core\Config;
 
+use Jtl\Connector\Core\Exception\ConfigException;
 use Noodlehaus\Config;
 
 /**
@@ -45,9 +46,14 @@ class FileConfig extends Config
      * @param string $key
      * @param mixed $value
      * @return mixed|void
+     * @throws ConfigException
      */
     public function set($key, $value)
     {
+        if(empty($key)) {
+            throw ConfigException::keyIsEmpty();
+        }
+
         parent::set($key, $value);
         parent::toFile($this->filePath);
     }
