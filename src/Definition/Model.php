@@ -69,6 +69,7 @@ final class Model
         self::CUSTOMER => IdentityType::CUSTOMER,
         self::CUSTOMER_GROUP => IdentityType::CUSTOMER_GROUP,
         self::CUSTOMER_ORDER => IdentityType::CUSTOMER_ORDER,
+        self::CUSTOMER_ORDER_ITEM => IdentityType::CUSTOMER_ORDER_ITEM,
         self::DELIVERY_NOTE => IdentityType::DELIVERY_NOTE,
         self::LANGUAGE => IdentityType::LANGUAGE,
         self::MANUFACTURER => IdentityType::MANUFACTURER,

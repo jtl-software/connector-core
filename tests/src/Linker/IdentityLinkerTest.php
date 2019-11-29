@@ -257,7 +257,7 @@ class IdentityLinkerTest extends TestCase
         $shippingClassHostId = $this->createHostId();
         $shippingClassEndpointId = $this->createEndpointId();
 
-        $primaryKeyMapper = $this->createPrimaryKeyMapperMock([$productHostId,$shippingClassHostId], [$productEndpointId,$shippingClassEndpointId]);
+        $primaryKeyMapper = $this->createPrimaryKeyMapperMock([$productHostId, $shippingClassHostId], [$productEndpointId, $shippingClassEndpointId]);
         $linker = $this->createLinker($primaryKeyMapper);
 
         $product = new Product();
@@ -348,6 +348,34 @@ class IdentityLinkerTest extends TestCase
 
         $isHostIdExists = $linker->hostIdExists(Model::PRODUCT_VARIATION, $expectedHostId);
         $this->assertFalse($isHostIdExists);
+    }
+
+    /**
+     *
+     */
+    public function testLinkIdentityList()
+    {
+        $expectedHostId = $this->createHostId();
+        $expectedEndpointId = $this->createEndpointId();
+        $modelName = Model::CONFIG_GROUP;
+
+        $primaryKeyMapper = $this->createPrimaryKeyMapperMock([$expectedHostId,0]);
+        $linker = $this->createLinker($primaryKeyMapper);
+
+        $identity = new Identity($expectedEndpointId);
+
+        $linker->linkIdentityList($identity, $modelName,'id');
+
+        $this->assertEquals($expectedHostId,$identity->getHost());
+        $hostId = $linker->getHostId($modelName,'id',$expectedEndpointId);
+        $this->assertEquals($hostId,$expectedHostId);
+
+        $linker->linkIdentityList($identity, $modelName,'id',true);
+        $hostId = $linker->getHostId($modelName,'id',$expectedEndpointId);
+        $this->assertNotEquals($expectedHostId,$hostId);
+
+        $endpointId = $linker->getEndpointId($modelName,'id',$expectedHostId);
+        $this->assertNotEquals($expectedEndpointId,$endpointId);
     }
 
     /**

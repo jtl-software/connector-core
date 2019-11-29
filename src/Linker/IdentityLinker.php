@@ -86,7 +86,7 @@ class IdentityLinker
                         if ($entity instanceof AbstractDataModel) {
                             $this->linkModel($entity, $isDeleted);
                         } elseif ($entity instanceof Identity && Model::isIdentityProperty($reflect->getShortName(), $propertyInfo->getName())) {
-                            $this->linkIdentityList($entity, $reflect->getShortName(), $property, $isDeleted);
+                            $this->linkIdentityList($entity, $reflect->getShortName(), $propertyInfo->getName(), $isDeleted);
                         } else {
                             Logger::write(
                                 sprintf('Property (%s) from model (%s) is not an instance of DataModel or Identity', $propertyInfo->getName(), $reflect->getShortName()),
