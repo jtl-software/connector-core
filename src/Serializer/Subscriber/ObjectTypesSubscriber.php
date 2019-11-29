@@ -7,6 +7,7 @@ use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\EventDispatcher\PreSerializeEvent;
 use JMS\Serializer\Metadata\StaticPropertyMetadata;
 use Jtl\Connector\Core\Definition\Controller;
+use Jtl\Connector\Core\Exception\SerializerException;
 use Jtl\Connector\Core\Model\AbstractImage;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Identity;
@@ -65,7 +66,7 @@ class ObjectTypesSubscriber implements EventSubscriberInterface
 
     /**
      * @param ObjectEvent $event
-     * @throws \Exception
+     * @throws SerializerException
      */
     public function onPostDeserialize(ObjectEvent $event)
     {
@@ -79,7 +80,7 @@ class ObjectTypesSubscriber implements EventSubscriberInterface
                 foreach ($identities[$imageIndex] as $identity) {
                     $splittedEndpoint = explode('#=#', $identity->getEndpoint());
                     if (count($splittedEndpoint) !== 2) {
-                        continue;
+                        throw SerializerException::wrongEndpointFormat($identity->getEndpoint());
                     }
                     $newIndex = Str::toCamelCase($splittedEndpoint[0]) . 'Image';
                     $identity->setEndpoint($splittedEndpoint[1]);
