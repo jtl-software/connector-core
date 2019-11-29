@@ -9,6 +9,8 @@ namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Config\EnvConfig;
+use Jtl\Connector\Core\Definition\ConfigOption;
 
 /**
  * A category with sort number, link to parent category and level
@@ -18,7 +20,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Category extends AbstractDataModel implements IdentityInterface
+class Category extends AbstractDataModel implements IdentityInterface, IdentificationInterface
 {
     /**
      * @var Identity Unique category id
@@ -99,6 +101,30 @@ class Category extends AbstractDataModel implements IdentityInterface
     {
         $this->id = new Identity();
         $this->parentCategoryId = new Identity();
+    }
+
+    public function getIdentificationStrings(): array
+    {
+        $mainLanguage = EnvConfig::getInstance()->get(ConfigOption::MAIN_LANGUAGE, ConfigOption::getDefaultValue(ConfigOption::MAIN_LANGUAGE));
+
+        $strings = [];
+        if($this->getParentCategoryId()->getHost() > 0) {
+            $strings[] = sprintf('Parent Wawi PK = %s', $this->getParentCategoryId()->getHost());
+        }
+
+        $name = '';
+        foreach($this->getI18ns() as $i18n) {
+            $name = $i18n->getName();
+            if($mainLanguage = $i18n->getLanguageISO()) {
+                break;
+            }
+        }
+
+        if(!empty($name)) {
+            $strings[] = sprintf('Name = %s', $name);
+        }
+
+        return $strings;
     }
 
     /**

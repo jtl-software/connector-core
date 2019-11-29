@@ -30,7 +30,7 @@ use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\IdentityInterface;
-use Jtl\Connector\Core\Model\ModelIdentificationInterface;
+use Jtl\Connector\Core\Model\IdentificationInterface;
 use Jtl\Connector\Core\Model\QueryFilter;
 use Jtl\Connector\Core\Plugin\PluginManager;
 use Jtl\Connector\Core\Serializer\Json;
@@ -188,6 +188,8 @@ class Application
 
             $responsePacket = $this->execute($requestPacket, $method);
         } catch (\Throwable $ex) {
+            Logger::write($ex->getMessage(), Logger::ERROR);
+            Logger::write($ex->getTraceAsString(), Logger::DEBUG);
             $error = new Error();
             $error->setCode($ex->getCode())
                 ->setMessage($ex->getMessage());
@@ -430,24 +432,24 @@ class Application
                         $controllerObject->rollback();
                     }
 
-                    $message = [
+                    $messages = [
                         sprintf('Controller = %s', $controller),
                         sprintf('Action = %s', $action),
                     ];
 
                     if($model instanceof IdentityInterface) {
-                        $message[] = sprintf('Wawi PK = %s', $model->getId());
+                        $messages[] = sprintf('Wawi PK = %s', $model->getId()->getHost());
                     }
 
-                    if($model instanceof ModelIdentificationInterface) {
-                        $message[] = $model->getIdentificationString();
+                    if($model instanceof IdentificationInterface) {
+                        $messages = +$model->getIdentificationStrings();
                     }
 
-                    $message[] = $ex->getMessage();
+                    $messages[] = $ex->getMessage();
                     $reflectionClass = new \ReflectionClass($ex);
                     $reflectionProperty = $reflectionClass->getProperty('message');
                     $reflectionProperty->setAccessible(true);
-                    $reflectionProperty->setValue($ex, implode(' | ', $message));
+                    $reflectionProperty->setValue($ex, implode(' | ', $messages));
                     $reflectionProperty->setAccessible(false);
 
                     throw $ex;

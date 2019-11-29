@@ -23,7 +23,7 @@ use stdClass;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Product extends AbstractDataModel  implements IdentityInterface, ModelIdentificationInterface
+class Product extends AbstractDataModel  implements IdentityInterface, IdentificationInterface
 {
     /**
      * @var Identity Optional reference to basePriceUnit
@@ -690,21 +690,32 @@ class Product extends AbstractDataModel  implements IdentityInterface, ModelIden
     }
 
     /**
-     * @return string
+     * @return array
      * @throws DefinitionException
      */
-    public function getIdentificationString(): string
+    public function getIdentificationStrings(): array
     {
         $mainLanguage = EnvConfig::getInstance()->get(ConfigOption::MAIN_LANGUAGE, ConfigOption::getDefaultValue(ConfigOption::MAIN_LANGUAGE));
 
-        $name = '';
-        foreach($this->getI18ns() as $i18n) {
-            $name = $i18n->getName();
-            if($mainLanguage === $i18n->getLanguageISO()) {
-                break;
-            }}
+        $strings = [];
 
-        return sprintf('sku = %s, name = %s', $this->sku, $name);
+        if(!empty($this->sku)) {
+            $strings[] = sprintf('SKU = %s', $this->sku);
+        }
+
+        $name = '';
+        foreach ($this->getI18ns() as $i18n) {
+            $name = $i18n->getName();
+            if ($mainLanguage === $i18n->getLanguageISO()) {
+                break;
+            }
+        }
+
+        if(!empty($name)) {
+            $strings[] = sprintf('Name = %s', $name);
+        }
+
+        return $strings;
     }
 
     /**
