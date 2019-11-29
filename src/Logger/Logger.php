@@ -40,9 +40,9 @@ class Logger
      */
     public static function write(string $message, string $level = self::INFO, string $channel = self::CHANNEL_GLOBAL): bool
     {
-        $envConfig = RuntimeConfig::getInstance();
+        $runtimeConfig = RuntimeConfig::getInstance();
 
-        $logLevelOption = $envConfig->get(ConfigOption::LOG_LEVEL, self::INFO);
+        $logLevelOption = $runtimeConfig->get(ConfigOption::LOG_LEVEL, self::INFO);
         $logLevel = MonoLogger::INFO;
         if (isset(self::$logLevelMappings[$logLevelOption])) {
             $logLevel = self::$logLevelMappings[$logLevelOption];
