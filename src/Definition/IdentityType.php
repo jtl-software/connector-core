@@ -38,6 +38,10 @@ class IdentityType
     const SPECIFIC_VALUE_IMAGE = 52;
     const CONFIG_GROUP_IMAGE = 54;
     const PRODUCT_WAREHOUSE_INFO = 56;
+    const PRODUCT_STOCK_LEVEL = 58;
+    const PRODUCT_TO_CATEGORY = 60;
+    const PRODUCT_PRICE = 62;
+    const PRODUCT_SPECIFIC = 64;
 
     protected static $types = null;
 
