@@ -416,6 +416,7 @@ class Application
             case Action::PUSH:
             case Action::DELETE:
                 try {
+                    $model = null;
                     if ($controllerObject instanceof TransactionalInterface) {
                         $controllerObject->beginTransaction();
                     }
@@ -616,7 +617,7 @@ class Application
      * @param string $action
      * @throws \ReflectionException
      */
-    protected function extendExceptionMessageWithIdentifiers(\Throwable $ex, AbstractDataModel $model, string $controller, string $action)
+    protected function extendExceptionMessageWithIdentifiers(\Throwable $ex, ?object $model, string $controller, string $action)
     {
         $messages = [
             sprintf('Controller = %s', $controller),
