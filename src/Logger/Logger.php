@@ -6,7 +6,7 @@
 
 namespace Jtl\Connector\Core\Logger;
 
-use Jtl\Connector\Core\Config\EnvConfig;
+use Jtl\Connector\Core\Config\RuntimeConfig;
 use Jtl\Connector\Core\Definition\ConfigOption;
 use Jtl\Connector\Core\IO\Path;
 use Monolog\Handler\RotatingFileHandler;
@@ -40,7 +40,7 @@ class Logger
      */
     public static function write(string $message, string $level = self::INFO, string $channel = self::CHANNEL_GLOBAL): bool
     {
-        $envConfig = EnvConfig::getInstance();
+        $envConfig = RuntimeConfig::getInstance();
 
         $logLevelOption = $envConfig->get(ConfigOption::LOG_LEVEL, self::INFO);
         $logLevel = MonoLogger::INFO;

@@ -9,7 +9,7 @@ namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
-use Jtl\Connector\Core\Config\EnvConfig;
+use Jtl\Connector\Core\Config\RuntimeConfig;
 use Jtl\Connector\Core\Definition\ConfigOption;
 
 /**
@@ -105,7 +105,7 @@ class Category extends AbstractDataModel implements IdentityInterface, Identific
 
     public function getIdentificationStrings(): array
     {
-        $mainLanguage = EnvConfig::getInstance()->get(ConfigOption::MAIN_LANGUAGE, ConfigOption::getDefaultValue(ConfigOption::MAIN_LANGUAGE));
+        $mainLanguage = RuntimeConfig::getInstance()->get(ConfigOption::MAIN_LANGUAGE, ConfigOption::getDefaultValue(ConfigOption::MAIN_LANGUAGE));
 
         $strings = [];
         if($this->getParentCategoryId()->getHost() > 0) {
