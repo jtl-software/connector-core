@@ -6,7 +6,7 @@ use DI\ContainerBuilder;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Doctrine\Common\Annotations\AnnotationRegistry;
-use Jtl\Connector\Core\Config\EnvConfig;
+use Jtl\Connector\Core\Config\RuntimeConfig;
 use Jtl\Connector\Core\Definition\ConfigOption;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\ErrorCode;
@@ -501,8 +501,9 @@ class Application
         }
         $this->config = new FileConfig($configFile);
         $logLevel = $this->config->get(ConfigOption::LOG_LEVEL, Logger::INFO);
+        RuntimeConfig::getInstance()->set(ConfigOption::LOG_LEVEL, $logLevel);
         $mainLanguage = $this->config->get(ConfigOption::MAIN_LANGUAGE, ConfigOption::getDefaultValue(ConfigOption::MAIN_LANGUAGE));
-        EnvConfig::getInstance()->set(ConfigOption::LOG_LEVEL, $logLevel);
+        RuntimeConfig::getInstance()->set(ConfigOption::MAIN_LANGUAGE, $mainLanguage);
     }
 
     /**

@@ -14,7 +14,7 @@ use Noodlehaus\Config;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.com>
  */
-class FileConfig implements ConfigInterface
+class FileConfig extends Config
 {
     /**
      * @var string
@@ -38,27 +38,17 @@ class FileConfig implements ConfigInterface
         }
 
         $this->filePath = $filePath;
-        $this->config = new Config($filePath);
+        parent::__construct($filePath);
     }
 
     /**
-     * @param string $name
-     * @param null $default
-     * @return mixed|null
-     */
-    public function get(string $name, $default = null)
-    {
-        return $this->config->get($name, $default);
-    }
-
-    /**
-     * @param string $name
+     * @param string $key
      * @param mixed $value
      * @return mixed|void
      */
-    public function set(string $name, $value)
+    public function set($key, $value)
     {
-        $this->config->set($name, $value);
-        $this->config->toFile($this->filePath);
+        parent::set($key, $value);
+        parent::toFile($this->filePath);
     }
 }
