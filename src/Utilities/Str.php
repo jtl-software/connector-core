@@ -12,7 +12,7 @@ class Str
      */
     public static function toCamelCase(string $string): string
     {
-        return CaseHelperFactory::make(CaseHelperFactory::INPUT_TYPE_SNAKE_CASE)->toCamelCase($string);
+        return lcfirst(CaseHelperFactory::make(CaseHelperFactory::INPUT_TYPE_SNAKE_CASE)->toCamelCase($string));
     }
 
     /**
