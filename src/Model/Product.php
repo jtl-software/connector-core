@@ -10,6 +10,9 @@ namespace Jtl\Connector\Core\Model;
 use DateTime;
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Config\EnvConfig;
+use Jtl\Connector\Core\Definition\ConfigOption;
+use Jtl\Connector\Core\Exception\DefinitionException;
 use stdClass;
 
 /**
@@ -20,7 +23,7 @@ use stdClass;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Product extends AbstractDataModel
+class Product extends AbstractDataModel  implements IdentityInterface, IdentificationInterface
 {
     /**
      * @var Identity Optional reference to basePriceUnit
@@ -685,7 +688,36 @@ class Product extends AbstractDataModel
         $this->basePriceUnitId = new Identity();
         $this->unitId = new Identity();
     }
-    
+
+    /**
+     * @return array
+     * @throws DefinitionException
+     */
+    public function getIdentificationStrings(): array
+    {
+        $mainLanguage = EnvConfig::getInstance()->get(ConfigOption::MAIN_LANGUAGE, ConfigOption::getDefaultValue(ConfigOption::MAIN_LANGUAGE));
+
+        $strings = [];
+
+        if(!empty($this->sku)) {
+            $strings[] = sprintf('SKU = %s', $this->sku);
+        }
+
+        $name = '';
+        foreach ($this->getI18ns() as $i18n) {
+            $name = $i18n->getName();
+            if ($mainLanguage === $i18n->getLanguageISO()) {
+                break;
+            }
+        }
+
+        if(!empty($name)) {
+            $strings[] = sprintf('Name = %s', $name);
+        }
+
+        return $strings;
+    }
+
     /**
      * @param Identity $basePriceUnitId Optional reference to basePriceUnit
      * @return Product

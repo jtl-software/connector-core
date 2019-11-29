@@ -19,7 +19,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CustomerOrder extends AbstractDataModel
+class CustomerOrder extends AbstractDataModel implements IdentityInterface
 {
     /**
      * @var string - Status when payment is completed

@@ -17,7 +17,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Payment extends AbstractDataModel
+class Payment extends AbstractDataModel implements IdentityInterface
 {
     /**
      * @var Identity

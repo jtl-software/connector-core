@@ -19,7 +19,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class DeliveryNote extends AbstractDataModel
+class DeliveryNote extends AbstractDataModel implements IdentityInterface
 {
     /**
      * @var Identity Reference to customerOrder

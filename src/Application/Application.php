@@ -29,6 +29,8 @@ use Jtl\Connector\Core\Model\AbstractImage;
 use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
+use Jtl\Connector\Core\Model\IdentityInterface;
+use Jtl\Connector\Core\Model\IdentificationInterface;
 use Jtl\Connector\Core\Model\QueryFilter;
 use Jtl\Connector\Core\Plugin\PluginManager;
 use Jtl\Connector\Core\Serializer\Json;
@@ -186,6 +188,8 @@ class Application
 
             $responsePacket = $this->execute($requestPacket, $method);
         } catch (\Throwable $ex) {
+            Logger::write($ex->getMessage(), Logger::ERROR);
+            Logger::write($ex->getTraceAsString(), Logger::DEBUG);
             $error = new Error();
             $error->setCode($ex->getCode())
                 ->setMessage($ex->getMessage());
@@ -412,6 +416,7 @@ class Application
             case Action::PUSH:
             case Action::DELETE:
                 try {
+                    $model = null;
                     if ($controllerObject instanceof TransactionalInterface) {
                         $controllerObject->beginTransaction();
                     }
@@ -427,6 +432,9 @@ class Application
                     if ($controllerObject instanceof TransactionalInterface) {
                         $controllerObject->rollback();
                     }
+
+                    $this->extendExceptionMessageWithIdentifiers($ex, $model, $controller, $action);
+
                     throw $ex;
                 }
                 break;
@@ -472,10 +480,11 @@ class Application
 
         $configFile = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
         if (!file_exists($configFile)) {
-            file_put_contents($configFile, Json::encode([ConfigOption::LOG_LEVEL => Logger::INFO], true));
+            file_put_contents($configFile, Json::encode(ConfigOption::getDefaultValues(), true));
         }
         $this->config = new FileConfig($configFile);
         $logLevel = $this->config->get(ConfigOption::LOG_LEVEL, Logger::INFO);
+        $mainLanguage = $this->config->get(ConfigOption::MAIN_LANGUAGE, ConfigOption::getDefaultValue(ConfigOption::MAIN_LANGUAGE));
         EnvConfig::getInstance()->set(ConfigOption::LOG_LEVEL, $logLevel);
     }
 
@@ -599,6 +608,36 @@ class Application
         if (ChecksumLinker::checksumLoaderExists()) {
             ChecksumLinker::link($model);
         }
+    }
+
+    /**
+     * @param \Throwable $ex
+     * @param AbstractDataModel $model
+     * @param string $controller
+     * @param string $action
+     * @throws \ReflectionException
+     */
+    protected function extendExceptionMessageWithIdentifiers(\Throwable $ex, ?object $model, string $controller, string $action)
+    {
+        $messages = [
+            sprintf('Controller = %s', $controller),
+            sprintf('Action = %s', $action),
+        ];
+
+        if($model instanceof IdentityInterface) {
+            $messages[] = sprintf('Wawi PK = %s', $model->getId()->getHost());
+        }
+
+        if($model instanceof IdentificationInterface) {
+            $messages = +$model->getIdentificationStrings();
+        }
+
+        $messages[] = $ex->getMessage();
+        $reflectionClass = new \ReflectionClass($ex);
+        $reflectionProperty = $reflectionClass->getProperty('message');
+        $reflectionProperty->setAccessible(true);
+        $reflectionProperty->setValue($ex, implode(' | ', $messages));
+        $reflectionProperty->setAccessible(false);
     }
 
     /**

@@ -19,7 +19,7 @@ use Jtl\Connector\Core\Model\Customer\Attribute;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CustomerGroupAttr extends KeyValueAttribute
+class CustomerGroupAttr extends KeyValueAttribute implements IdentityInterface
 {
     /**
      * @var Identity Unique customerGroupAttr id

@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Language extends AbstractDataModel
+class Language extends AbstractDataModel implements IdentityInterface
 {
     /**
      * @var Identity Unique language id

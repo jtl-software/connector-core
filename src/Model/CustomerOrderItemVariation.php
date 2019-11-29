@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CustomerOrderItemVariation extends AbstractDataModel
+class CustomerOrderItemVariation extends AbstractDataModel implements IdentityInterface
 {
     /**
      * @var Identity Unique customerOrderItemVariation id
