@@ -41,8 +41,8 @@ class IdentityType
     const PRODUCT_STOCK_LEVEL = 58;
     const PRODUCT_TO_CATEGORY = 60;
     const PRODUCT_PRICE = 62;
-    const PRODUCT_SPECIFIC = 64;
-    const CUSTOMER_ORDER_ITEM = 66;
+    const PRODUCT_SPECIFIC = 66;
+    const CUSTOMER_ORDER_ITEM = 68;
 
     protected static $types = null;
 
