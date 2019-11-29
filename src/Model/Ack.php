@@ -23,11 +23,11 @@ class Ack extends AbstractModel
 {
     /**
      * @var ArrayCollection list
-     * @Serializer\Type("ArrayCollection<string, ArrayCollection<Jtl\Connector\Core\Model\Identity>>")
+     * @Serializer\Type("array<string, array<Jtl\Connector\Core\Model\Identity>>")
      * @Serializer\SerializedName("identities")
      * @Serializer\Accessor(getter="getIdentities",setter="setIdentities")
      */
-    protected $identities = null;
+    protected $identities = [];
     
     /**
      * @var Checksum[]
@@ -40,9 +40,9 @@ class Ack extends AbstractModel
     /**
      * Identities getter
      *
-     * @return ArrayCollection
+     * @return Identity[]
      */
-    public function getIdentities(): ?ArrayCollection
+    public function getIdentities(): array
     {
         return $this->identities;
     }
@@ -50,10 +50,10 @@ class Ack extends AbstractModel
     /**
      * Identities getter
      *
-     * @param ArrayCollection $identities
+     * @param Identity[] $identities
      * @return Ack
      */
-    public function setIdentities(ArrayCollection $identities): Ack
+    public function setIdentities(array $identities): Ack
     {
         $this->identities = $identities;
         
