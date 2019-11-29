@@ -497,10 +497,11 @@ class Application
 
         $configFile = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
         if (!file_exists($configFile)) {
-            file_put_contents($configFile, Json::encode([ConfigOption::LOG_LEVEL => Logger::INFO], true));
+            file_put_contents($configFile, Json::encode(ConfigOption::getDefaultValues(), true));
         }
         $this->config = new FileConfig($configFile);
         $logLevel = $this->config->get(ConfigOption::LOG_LEVEL, Logger::INFO);
+        $mainLanguage = $this->config->get(ConfigOption::MAIN_LANGUAGE, ConfigOption::getDefaultValue(ConfigOption::MAIN_LANGUAGE));
         EnvConfig::getInstance()->set(ConfigOption::LOG_LEVEL, $logLevel);
     }
 
