@@ -64,23 +64,29 @@ class Logger
      */
     public static function writeException(\Throwable $exception, string $level = self::ERROR, string $channel = self::CHANNEL_GLOBAL)
     {
-        self::write(self::createExceptionInfos($exception), $level, $channel);
+        self::write(self::createExceptionInfos($exception, false), $level, $channel);
         self::write($exception->getMessage(), $level, $channel);
         self::write($exception->getTraceAsString(), self::DEBUG, $channel);
     }
 
     /**
      * @param \Throwable $exception
-     * @param string $additionalMessage
+     * @param bool $maskFilePath
+     * @param string|null $additionalMessage
      * @return string
      */
-    public static function createExceptionInfos(\Throwable $exception, string $additionalMessage = null): string
+    public static function createExceptionInfos(\Throwable $exception, bool $maskFilePath, string $additionalMessage = null): string
     {
+        $file = $exception->getFile();
+        if($maskFilePath) {
+            $file = sprintf('...%s', substr($file, strlen(CONNECTOR_DIR)));
+        }
+
         $infos = sprintf(
             "%s (Code: %s) in %s:%s",
             get_class($exception),
             $exception->getCode(),
-            $exception->getFile(),
+            $file,
             $exception->getLine()
         );
 

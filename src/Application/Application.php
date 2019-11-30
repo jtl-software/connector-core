@@ -139,7 +139,10 @@ class Application
             $jtlrpc = HttpRequest::handle();
             $requestPacket = RequestPacket::build($jtlrpc);
             $method = Method::createFromRequestPacket($requestPacket);
-            $requestPacket->validate();
+
+            if (!$requestPacket->isValid() || !RpcMethod::isMethod($requestPacket->getMethod())) {
+                throw new RpcException("Invalid request", ErrorCode::INVALID_REQUEST);
+            }
 
             //Mask connector token before logging
             $reqPacketsObj = $requestPacket->getPublic();
@@ -175,17 +178,19 @@ class Application
             $responsePacket = $this->execute($requestPacket, $method);
         } catch (\Throwable $ex) {
             Logger::writeException($ex);
-            $error = new Error();
-            $error
-                ->setData(Logger::createExceptionInfos($ex))
+
+            $error = (new Error())
                 ->setCode($ex->getCode())
                 ->setMessage($ex->getMessage())
+                ->setData(Logger::createExceptionInfos($ex, true))
             ;
 
-            $responsePacket = new ResponsePacket();
-            $responsePacket->setId($requestPacket->getId())
+            $responsePacket = (new ResponsePacket())
+                ->setId($requestPacket->getId())
                 ->setJtlrpc($requestPacket->getJtlrpc())
-                ->setError($error);
+                ->setError($error)
+            ;
+
         } finally {
             if (count($this->imagesToDelete) > 0) {
                 HttpRequest::deleteFileuploads($this->imagesToDelete);
@@ -233,10 +238,6 @@ class Application
      */
     protected function execute(RequestPacket $requestPacket, Method $method): ResponsePacket
     {
-        if (!RpcMethod::isMethod($requestPacket->getMethod())) {
-            throw new RpcException('Invalid request', ErrorCode::INVALID_REQUEST);
-        }
-
         // Rpc Event
         $data = $requestPacket->getParams();
         EventHandler::dispatchRpc(
@@ -492,7 +493,7 @@ class Application
         $sessionName = 'JtlConnector';
 
         if ($sessionId === null && $rpcMethod !== RpcMethod::AUTH) {
-            throw new SessionException('No session');
+            throw new SessionException('No session', ErrorCode::NO_SESSION);
         }
 
         if ($this->getSessionHandler() === null) {
@@ -506,7 +507,7 @@ class Application
             if ($this->getSessionHandler()->check($sessionId)) {
                 session_id($sessionId);
             } else {
-                throw new SessionException("Session is invalid", -32000);
+                throw new SessionException("Session is invalid", ErrorCode::INVALID_SESSION);
             }
         }
 

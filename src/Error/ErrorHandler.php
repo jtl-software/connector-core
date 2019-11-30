@@ -56,18 +56,19 @@ class ErrorHandler extends AbstractErrorHandler
      */
     public function getExceptionHandler(): callable
     {
-        return function (\Throwable $e) {
-            $error = new Error();
-            $trace = $e->getTrace();
+        return function (\Throwable $ex) {
+            $trace = $ex->getTrace();
+            $requestPacket = null;
             if (isset($trace[0]['args'][0])) {
-                $requestpacket = $trace[0]['args'][0];
+                $requestPacket = $trace[0]['args'][0];
             }
 
-            $error->setCode($e->getCode())
-                ->setData(Logger::createExceptionInfos($e))
-                ->setMessage($e->getMessage());
+            $error = (new Error())
+                ->setCode($ex->getCode())
+                ->setData(Logger::createExceptionInfos($ex, true))
+                ->setMessage($ex->getMessage());
 
-            Logger::writeException($e);
+            Logger::writeException($ex);
 
             $responsePacket = new ResponsePacket();
             $responsePacket->setError($error)
@@ -75,9 +76,9 @@ class ErrorHandler extends AbstractErrorHandler
                 ->setJtlrpc('2.0');
 
             $rpcMethod = 'unknown.unknown';
-            if (isset($requestpacket) && $requestpacket !== null && is_object($requestpacket) && $requestpacket instanceof RequestPacket) {
-                $responsePacket->setId($requestpacket->getId());
-                $rpcMethod = $requestpacket->getMethod();
+            if ($requestPacket !== null && is_object($requestPacket) && $requestPacket instanceof RequestPacket) {
+                $responsePacket->setId($requestPacket->getId());
+                $rpcMethod = $requestPacket->getMethod();
             }
 
             $serializedResponse = $responsePacket->serialize();
