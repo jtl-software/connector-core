@@ -27,7 +27,7 @@ class Error extends AbstractModel
      * @var integer
      * @Serializer\Type("integer")
      */
-    public $code;
+    public $code = 0;
 
     /**
      * A String providing a short description of the error.
@@ -37,7 +37,7 @@ class Error extends AbstractModel
      * @var string
      * @Serializer\Type("string")
      */
-    public $message;
+    public $message = '';
 
     /**
      * A Primitive or Structured value that contains additional information
@@ -46,16 +46,16 @@ class Error extends AbstractModel
      * This may be omitted. The value of this member is defined by the Server
      * (e.g. detailed error information, nested errors etc.).
      *
-     * @var integer | string | array | object
+     * @var mixed
      */
-    public $data;
+    public $data = null;
 
     /**
      * Getter for $code
      *
      * @return integer
      */
-    public function getCode()
+    public function getCode(): int
     {
         return $this->code;
     }
@@ -64,11 +64,11 @@ class Error extends AbstractModel
      * Setter for $code
      *
      * @param int $code
-     * @return Jtl\Connector\Core\Rpc\Error
+     * @return Error
      */
-    public function setCode($code)
+    public function setCode(int $code): Error
     {
-        $this->code = (int)$code;
+        $this->code = $code;
         return $this;
     }
 
@@ -77,7 +77,7 @@ class Error extends AbstractModel
      *
      * @return string
      */
-    public function getMessage()
+    public function getMessage(): string
     {
         return $this->message;
     }
@@ -86,9 +86,9 @@ class Error extends AbstractModel
      * Setter for $message
      *
      * @param string $message
-     * @return Jtl\Connector\Core\Rpc\Error
+     * @return Error
      */
-    public function setMessage($message)
+    public function setMessage($message): Error
     {
         $this->message = $message;
         return $this;
@@ -97,7 +97,7 @@ class Error extends AbstractModel
     /**
      * Getter for $data
      *
-     * @return integer | string | array | object
+     * @return mixed
      */
     public function getData()
     {
@@ -107,11 +107,10 @@ class Error extends AbstractModel
     /**
      * Setter for $data
      *
-     * @param
-     *            integer | string | array | object $data
-     * @return Jtl\Connector\Core\Rpc\Error
+     * @param mixed $data
+     * @return Error
      */
-    public function setData($data)
+    public function setData($data): Error
     {
         $this->data = $data;
         return $this;

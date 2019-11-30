@@ -26,7 +26,7 @@ class ResponsePacket extends Packet
      * The value of this member is determined by the method invoked on the
      * Server.
      *
-     * @var integer | array | string | NULL
+     * @var mixed
      */
     protected $result;
 
@@ -35,15 +35,13 @@ class ResponsePacket extends Packet
      * no error triggered during invocation.
      * The value for this member MUST be an Object as defined in section 5.1.
      *
-     * @var Error
+     * @var Error|null
      * @Serializer\Type("Jtl\Connector\Core\Rpc\Error")
      */
-    protected $error;
+    protected $error = null;
 
     /**
-     * Getter for $result
-     *
-     * @return integer | array | string | NULL
+     * @return mixed
      */
     public function getResult()
     {
@@ -51,10 +49,8 @@ class ResponsePacket extends Packet
     }
 
     /**
-     * Setter for $result
-     *
-     * @param integer | array | string | NULL $result
-     * @return Packet
+     * @param mixed $result
+     * @return ResponsePacket
      */
     public function setResult($result): ResponsePacket
     {
@@ -63,8 +59,6 @@ class ResponsePacket extends Packet
     }
 
     /**
-     * Getter for $error
-     *
      * @return Error
      */
     public function getError(): ?Error
@@ -73,10 +67,8 @@ class ResponsePacket extends Packet
     }
 
     /**
-     * Setter for $error
-     *
      * @param Error $error
-     * @return Packet
+     * @return ResponsePacket
      */
     public function setError(Error $error): ResponsePacket
     {
@@ -85,8 +77,6 @@ class ResponsePacket extends Packet
     }
 
     /**
-     * Validates a Rpc Response Packet
-     *
      * @throws RpcException
      */
     final public function validate()

@@ -1,9 +1,4 @@
 <?php
-/**
- *
- * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Rpc
- */
 namespace Jtl\Connector\Core\Rpc;
 
 use Jtl\Connector\Core\Model\AbstractModel;
@@ -27,14 +22,7 @@ abstract class Packet extends AbstractModel
     protected $jtlrpc = '';
     
     /**
-     * An identifier established by the Client that MUST contain a String,
-     * Number, or NULL value if included.
-     *
-     * If it is not included it is assumed to be a notification. The value
-     * SHOULD normally not be Null [1] and Numbers SHOULD NOT contain fractional
-     * parts
-     *
-     * @var string | NULL
+     * @var string
      * @Serializer\Type("string")
      */
     protected $id = '';

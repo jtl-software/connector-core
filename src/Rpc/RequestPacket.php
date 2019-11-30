@@ -1,8 +1,4 @@
 <?php
-/**
- * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Rpc
- */
 namespace Jtl\Connector\Core\Rpc;
 
 use JMS\Serializer\Annotation as Serializer;
@@ -29,8 +25,10 @@ class RequestPacket extends Packet
      *
      * @var string
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("method")
+     * @Serializer\Accessor(getter="getMethod",setter="setMethod")
      */
-    protected $method = '';
+    protected $method = 'undefined.undefined';
 
     /**
      * A Structured value that holds the parameter values to be used during the
@@ -39,12 +37,12 @@ class RequestPacket extends Packet
      *
      * @var array | object
      * @Serializer\Type("Jtl\Connector\Core\Rpc\JsonString")
+     * @Serializer\SerializedName("method")
+     * @Serializer\Accessor(getter="getMethod",setter="setMethod")
      */
     protected $params = null;
 
     /**
-     * Getter for $method
-     *
      * @return string
      */
     public function getMethod(): string
@@ -53,10 +51,8 @@ class RequestPacket extends Packet
     }
 
     /**
-     * Setter for $method
-     *
      * @param string $method
-     * @return Packet
+     * @return RequestPacket
      */
     public function setMethod(string $method): RequestPacket
     {
@@ -65,8 +61,6 @@ class RequestPacket extends Packet
     }
 
     /**
-     * Getter for $params
-     *
      * @return null|string
      */
     public function getParams(): ?string
@@ -85,8 +79,6 @@ class RequestPacket extends Packet
     }
 
     /**
-     * Validates a Rpc Request Packet
-     *
      * @throws RpcException
      */
     final public function validate()
@@ -115,13 +107,10 @@ class RequestPacket extends Packet
     }
 
     /**
-     * Build RequestPacket
-     *
-     * @param string $jtlrpc
-     * @throws RpcException
-     * @return RequestPacket|multitype:Jtl\Connector\Core\Rpc\RequestPacket
+     * @param string|null $jtlrpc
+     * @return RequestPacket
      */
-    public static function build($jtlrpc): RequestPacket
+    public static function build(?string $jtlrpc): RequestPacket
     {
         if ($jtlrpc !== null) {
             $serializer = SerializerBuilder::create()

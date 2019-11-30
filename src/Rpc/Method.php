@@ -45,8 +45,6 @@ class Method
     }
     
     /**
-     * Rpc Method Getter
-     *
      * @return string
      */
     public function getRpcMethod(): string
@@ -55,8 +53,6 @@ class Method
     }
 
     /**
-     * Controller Getter
-     *
      * @return string
      */
     public function getController(): string
@@ -65,8 +61,6 @@ class Method
     }
 
     /**
-     * Action Getter
-     *
      * @return string
      */
     public function getAction(): string
@@ -75,8 +69,6 @@ class Method
     }
 
     /**
-     * Core check
-     *
      * @return boolean
      */
     public function isCore(): bool
