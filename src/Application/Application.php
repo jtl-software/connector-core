@@ -12,7 +12,7 @@ use Jtl\Connector\Core\Definition\ConfigOption;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\ErrorCode;
 use Jtl\Connector\Core\Error\ErrorHandler;
-use Jtl\Connector\Core\Error\ErrorHandlerInterface;
+use Jtl\Connector\Core\Error\AbstractErrorHandler;
 use Jtl\Connector\Core\Connector\UseChecksumInterface;
 use Jtl\Connector\Core\Compression\Zip;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
@@ -92,7 +92,7 @@ class Application
     protected $linker;
 
     /**
-     * @var ErrorHandlerInterface
+     * @var AbstractErrorHandler
      */
     protected $errorHandler;
 
@@ -114,12 +114,8 @@ class Application
     public function __construct(ConnectorInterface $endpointConnector)
     {
         $this->endpointConnector = $endpointConnector;
-        $this->setErrorHandler(new ErrorHandler());
-
         $this->eventDispatcher = new EventDispatcher();
-        $this->getErrorHandler()->setEventDispatcher($this->eventDispatcher);
-        $this->eventDispatcher->addSubscriber(new RequestBeforeHandleSubscriber());
-
+        $this->errorHandler = new ErrorHandler($this->eventDispatcher);
         $containerBuilder = new ContainerBuilder();
         $this->container = $containerBuilder->build();
         $this->container->set(Application::class, $this);
@@ -130,16 +126,23 @@ class Application
      */
     public function run(): void
     {
-        AnnotationRegistry::registerLoader('class_exists');
-
         if (!defined('CONNECTOR_DIR')) {
             throw new \Exception('Constant CONNECTOR_DIR is not defined.');
         }
 
+        AnnotationRegistry::registerLoader('class_exists');
+        $this->startConfiguration();
+        $this->eventDispatcher->addSubscriber(new RequestBeforeHandleSubscriber());
+        $this->errorHandler->register();
+
         try {
             $jtlrpc = HttpRequest::handle();
             $requestPacket = RequestPacket::build($jtlrpc);
-            $requestPacket->validate();
+            $method = Method::createFromRequestPacket($requestPacket);
+
+            if (!$requestPacket->isValid() || !RpcMethod::isMethod($requestPacket->getMethod())) {
+                throw new RpcException("Invalid request", ErrorCode::INVALID_REQUEST);
+            }
 
             //Mask connector token before logging
             $reqPacketsObj = $requestPacket->getPublic();
@@ -157,13 +160,8 @@ class Application
                 Logger::write(sprintf('Params: %s', $reqPacketsObj->params), Logger::DEBUG, Logger::CHANNEL_RPC);
             }
 
-            $method = Method::createFromRequestPacket($requestPacket);
-
             // Start Session
             $this->startSession($requestPacket->getMethod());
-
-            // Start Configuration
-            $this->startConfiguration();
 
             $this->linker = new IdentityLinker($this->endpointConnector->getPrimaryKeyMapper());
 
@@ -179,16 +177,20 @@ class Application
 
             $responsePacket = $this->execute($requestPacket, $method);
         } catch (\Throwable $ex) {
-            Logger::write($ex->getMessage(), Logger::ERROR);
-            Logger::write($ex->getTraceAsString(), Logger::DEBUG);
-            $error = new Error();
-            $error->setCode($ex->getCode())
-                ->setMessage($ex->getMessage());
+            Logger::writeException($ex);
 
-            $responsePacket = new ResponsePacket();
-            $responsePacket->setId($requestPacket->getId())
+            $error = (new Error())
+                ->setCode($ex->getCode())
+                ->setMessage($ex->getMessage())
+                ->setData(Logger::createExceptionInfos($ex, true))
+            ;
+
+            $responsePacket = (new ResponsePacket())
+                ->setId($requestPacket->getId())
                 ->setJtlrpc($requestPacket->getJtlrpc())
-                ->setError($error);
+                ->setError($error)
+            ;
+
         } finally {
             if (count($this->imagesToDelete) > 0) {
                 HttpRequest::deleteFileuploads($this->imagesToDelete);
@@ -236,10 +238,6 @@ class Application
      */
     protected function execute(RequestPacket $requestPacket, Method $method): ResponsePacket
     {
-        if (!RpcMethod::isMethod($requestPacket->getMethod())) {
-            throw new RpcException('Invalid request', ErrorCode::INVALID_REQUEST);
-        }
-
         // Rpc Event
         $data = $requestPacket->getParams();
         EventHandler::dispatchRpc(
@@ -473,10 +471,6 @@ class Application
      */
     protected function startConfiguration(): void
     {
-        if (!isset($this->sessionHandler)) {
-            throw new SessionException('Session not initialized', ErrorCode::UNINITIALIZED_SESSION);
-        }
-
         $configFile = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
         if (!file_exists($configFile)) {
             file_put_contents($configFile, Json::encode(ConfigOption::getDefaultValues(), true));
@@ -499,7 +493,7 @@ class Application
         $sessionName = 'JtlConnector';
 
         if ($sessionId === null && $rpcMethod !== RpcMethod::AUTH) {
-            throw new SessionException('No session');
+            throw new SessionException('No session', ErrorCode::NO_SESSION);
         }
 
         if ($this->getSessionHandler() === null) {
@@ -513,7 +507,7 @@ class Application
             if ($this->getSessionHandler()->check($sessionId)) {
                 session_id($sessionId);
             } else {
-                throw new SessionException("Session is invalid", -32000);
+                throw new SessionException("Session is invalid", ErrorCode::INVALID_SESSION);
             }
         }
 
@@ -689,18 +683,18 @@ class Application
     }
 
     /**
-     * @return ErrorHandlerInterface
+     * @return AbstractErrorHandler
      */
-    public function getErrorHandler(): ?ErrorHandlerInterface
+    public function getErrorHandler(): ?AbstractErrorHandler
     {
         return $this->errorHandler;
     }
 
     /**
-     * @param ErrorHandlerInterface $handler
+     * @param AbstractErrorHandler $handler
      * @return $this
      */
-    public function setErrorHandler(ErrorHandlerInterface $handler): Application
+    public function setErrorHandler(AbstractErrorHandler $handler): Application
     {
         $this->errorHandler = $handler;
 

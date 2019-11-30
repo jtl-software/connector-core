@@ -16,39 +16,33 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 use Jtl\Connector\Core\Formatter\ExceptionFormatter;
 use Jtl\Connector\Core\Rpc\Method;
 
-class ErrorHandler implements ErrorHandlerInterface
+class ErrorHandler extends AbstractErrorHandler
 {
     /**
      * @var EventDispatcher
      */
     protected $eventDispatcher;
 
-    public function __construct()
+    /**
+     * ErrorHandler constructor.
+     * @param EventDispatcher $dispatcher
+     */
+    public function __construct(EventDispatcher $dispatcher)
     {
-        error_reporting(E_ALL);
-        ini_set('display_errors', 1);
-
-        // Exception
-        $this->setExceptionHandler($this->getExceptionHandler());
-
-        // Error
-        $this->setErrorHandler($this->getErrorHandler());
-
-        // Shutdown
-        $this->setShutdownHandler($this->getShutdownHandler());
+        $this->eventDispatcher = $dispatcher;
     }
 
     /**
-     * @param $data
+     * @param string $jsonString
      * @param string $rpcMethod
      * @throws \Exception
      */
-    protected function triggerRpcAfterEvent($data, string $rpcMethod)
+    protected function triggerRpcAfterEvent(string $jsonString, string $rpcMethod)
     {
         if ($this->eventDispatcher !== null) {
             $method = Method::createFromRpcMethod($rpcMethod);
             EventHandler::dispatchRpc(
-                $data,
+                $jsonString,
                 $this->eventDispatcher,
                 $method->getController(),
                 $method->getAction(),
@@ -58,60 +52,45 @@ class ErrorHandler implements ErrorHandlerInterface
     }
 
     /**
-     * @param callable $func
+     * @return callable
      */
-    public function setExceptionHandler(callable $func): void
+    public function getExceptionHandler(): callable
     {
-        set_exception_handler($func);
-    }
-
-    /**
-     * @return \Closure
-     */
-    public function getExceptionHandler()
-    {
-        return function (\Throwable $e) {
-            $error = new Error();
-            $trace = $e->getTrace();
+        return function (\Throwable $ex) {
+            $trace = $ex->getTrace();
+            $requestPacket = null;
             if (isset($trace[0]['args'][0])) {
-                $requestpacket = $trace[0]['args'][0];
+                $requestPacket = $trace[0]['args'][0];
             }
 
-            $error->setCode($e->getCode())
-                ->setData(ExceptionFormatter::format($e))
-                ->setMessage($e->getMessage());
+            $error = (new Error())
+                ->setCode($ex->getCode())
+                ->setData(Logger::createExceptionInfos($ex, true))
+                ->setMessage($ex->getMessage());
 
-            Logger::write($error->getData(), Logger::ERROR);
+            Logger::writeException($ex);
 
             $responsePacket = new ResponsePacket();
             $responsePacket->setError($error)
                 ->setId('unknown')
                 ->setJtlrpc('2.0');
 
-            $method = 'unknown.unknown';
-            if (isset($requestpacket) && $requestpacket !== null && is_object($requestpacket) && $requestpacket instanceof RequestPacket) {
-                $responsePacket->setId($requestpacket->getId());
-                $method = $requestpacket->getMethod();
+            $rpcMethod = 'unknown.unknown';
+            if ($requestPacket !== null && is_object($requestPacket) && $requestPacket instanceof RequestPacket) {
+                $responsePacket->setId($requestPacket->getId());
+                $rpcMethod = $requestPacket->getMethod();
             }
 
-            $this->triggerRpcAfterEvent($responsePacket, $method);
-
-            Response::send($responsePacket->serialize());
+            $serializedResponse = $responsePacket->serialize();
+            $this->triggerRpcAfterEvent($serializedResponse, $rpcMethod);
+            Response::send($serializedResponse);
         };
     }
 
     /**
-     * @param callable $func
+     * @return callable
      */
-    public function setErrorHandler(callable $func): void
-    {
-        set_error_handler($func, E_ALL);
-    }
-
-    /**
-     * @return \Closure
-     */
-    public function getErrorHandler()
+    public function getErrorHandler(): callable
     {
         return function ($errno, $errstr, $errfile, $errline, $errcontext) {
             $types = [
@@ -141,17 +120,9 @@ class ErrorHandler implements ErrorHandlerInterface
     }
 
     /**
-     * @param callable $func
-     */
-    public function setShutdownHandler(callable $func): void
-    {
-        register_shutdown_function($func);
-    }
-
-    /**
      * @return \Closure
      */
-    public function getShutdownHandler()
+    public function getShutdownHandler(): callable
     {
         return function () {
             if (($err = error_get_last())) {
@@ -184,22 +155,11 @@ class ErrorHandler implements ErrorHandlerInterface
                         ->setId('unknown')
                         ->setJtlrpc('2.0');
 
-                    $this->triggerRpcAfterEvent($responsePacket, 'unknown.unknown');
-
-                    Response::send($responsePacket->serialize());
+                    $serializedResponse = $responsePacket->serialize();
+                    $this->triggerRpcAfterEvent($serializedResponse, 'unknown.unknown');
+                    Response::send($serializedResponse);
                 }
             }
         };
-    }
-
-    /**
-     * @param EventDispatcher $dispatcher
-     * @return ErrorHandler
-     */
-    public function setEventDispatcher(EventDispatcher $dispatcher): ErrorHandler
-    {
-        $this->eventDispatcher = $dispatcher;
-
-        return $this;
     }
 }

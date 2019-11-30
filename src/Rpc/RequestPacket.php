@@ -79,9 +79,9 @@ class RequestPacket extends Packet
     }
 
     /**
-     * @throws RpcException
+     * @return boolean
      */
-    final public function validate()
+    final public function isValid(): bool
     {
         $isValid = true;
 
@@ -101,9 +101,7 @@ class RequestPacket extends Packet
             $isValid = false;
         }
 
-        if (!$isValid) {
-            throw new RpcException("Parse error", ErrorCode::PARSE_ERROR);
-        }
+        return $isValid;
     }
 
     /**

@@ -127,59 +127,12 @@ class Connector extends AbstractController
         if ($this->application->getSessionHandler() === null) {
             $errorMessage = 'Could not get any Session';
             Logger::write($errorMessage, Logger::ERROR);
-            throw new ApplicationException($errorMessage, ErrorCode::SESSION_ERROR);
+            throw new ApplicationException($errorMessage, ErrorCode::NO_SESSION);
         }
 
         return (new Session())
             ->setSessionId(session_id())
             ->setLifetime((int)ini_get('session.gc_maxlifetime'))
         ;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function debug()
-    {
-        $path = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
-        $configData = file_get_contents($path);
-        if ($configData === false) {
-            throw new \RuntimeException(sprintf('Cannot read config file %s', $path));
-        }
-
-        $config = Json::decode($configData);
-
-        $status = false;
-        if (!isset($config->developer_logging) || !$config->developer_logging) {
-            $status = true;
-        }
-
-        $config->developer_logging = $status;
-
-        $json = Json::encode($config, JSON_PRETTY_PRINT);
-        file_put_contents($path, $json);
-
-        return $config;
-    }
-
-    /**
-     * @return array
-     */
-    public function logs()
-    {
-        $log = [];
-        foreach (glob(Path::combine(CONNECTOR_DIR, 'logs', '*.log')) as $file) {
-            if (!preg_match('/(global|database){1}.+\.log/', $file)) {
-                continue;
-            }
-
-            $lines = array_filter(explode(PHP_EOL, file_get_contents($file)), function ($elem) {
-                return !empty(trim($elem));
-            });
-
-            $log = array_merge($log, $lines);
-        }
-
-        return $log;
     }
 }
