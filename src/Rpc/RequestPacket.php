@@ -3,10 +3,9 @@ namespace Jtl\Connector\Core\Rpc;
 
 use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\Handler\HandlerRegistry;
-use JMS\Serializer\SerializerBuilder;
+use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Definition\ErrorCode;
 use Jtl\Connector\Core\Exception\RpcException;
-use Jtl\Connector\Core\Serializer\Handler\JsonStringHandler;
 
 /**
  * Rpc Request Packet
@@ -35,12 +34,12 @@ class RequestPacket extends Packet
      * invocation of the method.
      * This member MAY be omitted.
      *
-     * @var array | object
-     * @Serializer\Type("Jtl\Connector\Core\Rpc\JsonString")
-     * @Serializer\SerializedName("method")
-     * @Serializer\Accessor(getter="getMethod",setter="setMethod")
+     * @var mixed[]
+     * @Serializer\Type("array")
+     * @Serializer\SerializedName("params")
+     * @Serializer\Accessor(getter="getParams",setter="setParams")
      */
-    protected $params = null;
+    protected $params = [];
 
     /**
      * @return string
@@ -61,18 +60,18 @@ class RequestPacket extends Packet
     }
 
     /**
-     * @return null|string
+     * @return mixed[]
      */
-    public function getParams(): ?string
+    public function getParams(): array
     {
         return $this->params;
     }
 
     /**
-     * @param string $params
+     * @param mixed[] $params
      * @return RequestPacket
      */
-    public function setParams(string $params): RequestPacket
+    public function setParams(array $params): RequestPacket
     {
         $this->params = $params;
         return $this;
@@ -111,12 +110,7 @@ class RequestPacket extends Packet
     public static function build(?string $jtlrpc): RequestPacket
     {
         if ($jtlrpc !== null) {
-            $serializer = SerializerBuilder::create()
-                ->configureHandlers(function (HandlerRegistry $registry) {
-                    $registry->registerSubscribingHandler(new JsonStringHandler());
-                })
-                ->build();
-
+            $serializer = SerializerBuilder::getInstance()->build();
             return $serializer->deserialize($jtlrpc, RequestPacket::class, 'json');
         } else {
             return (new static())->setMethod('undefined.undefined');

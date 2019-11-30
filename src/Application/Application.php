@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Application;
 
 use DI\Container;
@@ -6,6 +7,7 @@ use DI\ContainerBuilder;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Doctrine\Common\Annotations\AnnotationRegistry;
+use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Config\RuntimeConfig;
 use Jtl\Connector\Core\Controller\StatisticInterface;
 use Jtl\Connector\Core\Definition\ConfigOption;
@@ -116,9 +118,9 @@ class Application
         $this->endpointConnector = $endpointConnector;
         $this->eventDispatcher = new EventDispatcher();
         $this->errorHandler = new ErrorHandler($this->eventDispatcher);
-        $containerBuilder = new ContainerBuilder();
-        $this->container = $containerBuilder->build();
+        $this->container = (new ContainerBuilder())->build();
         $this->container->set(Application::class, $this);
+        $this->linker = new IdentityLinker($this->endpointConnector->getPrimaryKeyMapper());
     }
 
     /**
@@ -144,35 +146,24 @@ class Application
                 throw new RpcException("Invalid request", ErrorCode::INVALID_REQUEST);
             }
 
-            //Mask connector token before logging
-            $reqPacketsObj = $requestPacket->getPublic();
-            if (isset($reqPacketsObj->method) && $reqPacketsObj->method === RpcMethod::AUTH && isset($reqPacketsObj->params)) {
-                $params = Json::decode($reqPacketsObj->params, true);
-                if (isset($params['token'])) {
-                    $params['token'] = str_repeat('*', strlen($params['token']));
-                }
-                $reqPacketsObj->params = Json::encode($params);
+            $logJtlrpc = $jtlrpc;
+            if ($requestPacket->getMethod() === RpcMethod::AUTH) {
+                $pattern = '/\"token\":\s?\"(.*)\"/';
+                $replacement = '"token": "******************"';
+                $logJtlrpc = preg_replace($pattern, $replacement, $logJtlrpc);
             }
 
             // Log incoming request packet (debug only and configuration must be initialized)
-            Logger::write(sprintf('Request packet: %s', Json::encode($reqPacketsObj)), Logger::DEBUG, Logger::CHANNEL_RPC);
-            if (isset($reqPacketsObj->params) && !empty($reqPacketsObj->params)) {
-                Logger::write(sprintf('Params: %s', $reqPacketsObj->params), Logger::DEBUG, Logger::CHANNEL_RPC);
+            Logger::write(sprintf('Request packet: %s', $logJtlrpc), Logger::DEBUG, Logger::CHANNEL_RPC);
+            if ($requestPacket->getMethod() !== RpcMethod::AUTH && !empty($requestPacket->getParams())) {
+                Logger::write(sprintf('Params: %s', Json::encode($requestPacket->getParams())), Logger::DEBUG, Logger::CHANNEL_RPC);
             }
 
-            // Start Session
             $this->startSession($requestPacket->getMethod());
-
-            $this->linker = new IdentityLinker($this->endpointConnector->getPrimaryKeyMapper());
-
-            /** Load connector plugins */
             PluginManager::loadPlugins($this->eventDispatcher);
-
             if ($this->endpointConnector instanceof UseChecksumInterface) {
                 ChecksumLinker::setChecksumLoader($this->endpointConnector->getChecksumLoader());
             }
-
-            // Initialize Endpoint
             $this->endpointConnector->initialize($this);
 
             $responsePacket = $this->execute($requestPacket, $method);
@@ -182,14 +173,12 @@ class Application
             $error = (new Error())
                 ->setCode($ex->getCode())
                 ->setMessage($ex->getMessage())
-                ->setData(Logger::createExceptionInfos($ex, true))
-            ;
+                ->setData(Logger::createExceptionInfos($ex, true));
 
             $responsePacket = (new ResponsePacket())
                 ->setId($requestPacket->getId())
                 ->setJtlrpc($requestPacket->getJtlrpc())
-                ->setError($error)
-            ;
+                ->setError($error);
 
         } finally {
             if (count($this->imagesToDelete) > 0) {
@@ -198,8 +187,7 @@ class Application
             }
 
             $jsonResponse = $responsePacket->serialize();
-
-            $this->triggerRpcAfterEvent($jsonResponse, $method);
+            $this->triggerRpcAfterEvent($jsonResponse, $method->getController(), $method->getAction());
             HttpResponse::send($jsonResponse);
         }
     }
@@ -321,8 +309,6 @@ class Application
     {
         $controller = $method->getController();
         $action = $method->getAction();
-        $params = [];
-        $className = null;
 
         switch ($action) {
             case Action::AUTH:
@@ -343,33 +329,29 @@ class Application
                 $type = $className = QueryFilter::class;
         }
 
-        if (class_exists($className)) {
-            $serializer = SerializerBuilder::getInstance()->build();
-            $serializedParams = $requestPacket->getParams();
-            if (is_string($serializedParams) && strlen($serializedParams) > 0) {
-                $params = $serializer->deserialize($serializedParams, $type, 'json');
+        /** @var Serializer $serializer */
+        $serializer = SerializerBuilder::getInstance()->build();
+        $params = $serializer->fromArray($requestPacket->getParams(), $type);
+
+        if (!is_array($params)) {
+            $params = [$params];
+        }
+
+        // Identity mapping
+        foreach ($params as $param) {
+            if (in_array($action, [Action::PUSH, Action::DELETE], true)) {
+                $this->linker->linkModel($param);
+                // Checksum linking
+                $this->linkChecksum($param);
             }
 
-            if (!is_array($params)) {
-                $params = [$params];
-            }
-
-            // Identity mapping
-            foreach ($params as $param) {
-                if (in_array($action, [Action::PUSH, Action::DELETE], true)) {
-                    $this->linker->linkModel($param);
-                    // Checksum linking
-                    $this->linkChecksum($param);
-                }
-
-                // Event
-                EventHandler::dispatch(
-                    $param,
-                    $this->eventDispatcher,
-                    $action,
-                    EventHandler::BEFORE
-                );
-            }
+            // Event
+            EventHandler::dispatch(
+                $param,
+                $this->eventDispatcher,
+                $action,
+                EventHandler::BEFORE
+            );
         }
 
         return Request::create($controller, $action, $params);
@@ -435,11 +417,10 @@ class Application
                 break;
         }
 
-        if($action === Action::STATISTIC && $controllerObject instanceof StatisticInterface) {
+        if ($action === Action::STATISTIC && $controllerObject instanceof StatisticInterface) {
             $result = (new Statistic())
                 ->setControllerName($controller)
-                ->setAvailable($result)
-            ;
+                ->setAvailable($result);
         }
 
         if (!$result instanceof Response) {
@@ -579,17 +560,17 @@ class Application
     }
 
     /**
-     * @param $jsonString
-     * @param string $rpcMethod
-     * @throws \Exception
+     * @param string $jsonString
+     * @param string $controller
+     * @param string $action
      */
-    protected function triggerRpcAfterEvent(string $jsonString, Method $method): void
+    protected function triggerRpcAfterEvent(string $jsonString, string $controller, string $action): void
     {
         EventHandler::dispatchRpc(
             $jsonString,
             $this->eventDispatcher,
-            $method->getController(),
-            $method->getAction(),
+            $controller,
+            $action,
             EventHandler::AFTER
         );
     }
@@ -618,12 +599,12 @@ class Application
             sprintf('Action = %s', $action),
         ];
 
-        if($model instanceof IdentityInterface) {
+        if ($model instanceof IdentityInterface && $model->getId()->getHost() > 0) {
             $messages[] = sprintf('Wawi PK = %s', $model->getId()->getHost());
         }
 
-        if($model instanceof IdentificationInterface) {
-            $messages = +$model->getIdentificationStrings();
+        if ($model instanceof IdentificationInterface) {
+            $messages += $model->getIdentificationStrings();
         }
 
         $messages[] = $ex->getMessage();
@@ -685,7 +666,7 @@ class Application
     /**
      * @return AbstractErrorHandler
      */
-    public function getErrorHandler(): ?AbstractErrorHandler
+    public function getErrorHandler(): AbstractErrorHandler
     {
         return $this->errorHandler;
     }
