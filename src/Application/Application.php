@@ -12,7 +12,7 @@ use Jtl\Connector\Core\Definition\ConfigOption;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\ErrorCode;
 use Jtl\Connector\Core\Error\ErrorHandler;
-use Jtl\Connector\Core\Error\ErrorHandlerInterface;
+use Jtl\Connector\Core\Error\AbstractErrorHandler;
 use Jtl\Connector\Core\Connector\UseChecksumInterface;
 use Jtl\Connector\Core\Compression\Zip;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
@@ -92,7 +92,7 @@ class Application
     protected $linker;
 
     /**
-     * @var ErrorHandlerInterface
+     * @var AbstractErrorHandler
      */
     protected $errorHandler;
 
@@ -114,10 +114,8 @@ class Application
     public function __construct(ConnectorInterface $endpointConnector)
     {
         $this->endpointConnector = $endpointConnector;
-
         $this->eventDispatcher = new EventDispatcher();
-        $this->eventDispatcher->addSubscriber(new RequestBeforeHandleSubscriber());
-
+        $this->errorHandler = new ErrorHandler($this->eventDispatcher);
         $containerBuilder = new ContainerBuilder();
         $this->container = $containerBuilder->build();
         $this->container->set(Application::class, $this);
@@ -134,9 +132,8 @@ class Application
 
         AnnotationRegistry::registerLoader('class_exists');
         $this->startConfiguration();
-        $this->setErrorHandler(new ErrorHandler());
-        $this->getErrorHandler()->setEventDispatcher($this->eventDispatcher);
         $this->eventDispatcher->addSubscriber(new RequestBeforeHandleSubscriber());
+        $this->errorHandler->register();
 
         try {
             $jtlrpc = HttpRequest::handle();
@@ -683,18 +680,18 @@ class Application
     }
 
     /**
-     * @return ErrorHandlerInterface
+     * @return AbstractErrorHandler
      */
-    public function getErrorHandler(): ?ErrorHandlerInterface
+    public function getErrorHandler(): ?AbstractErrorHandler
     {
         return $this->errorHandler;
     }
 
     /**
-     * @param ErrorHandlerInterface $handler
+     * @param AbstractErrorHandler $handler
      * @return $this
      */
-    public function setErrorHandler(ErrorHandlerInterface $handler): Application
+    public function setErrorHandler(AbstractErrorHandler $handler): Application
     {
         $this->errorHandler = $handler;
 
