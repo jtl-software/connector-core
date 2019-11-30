@@ -114,10 +114,8 @@ class Application
     public function __construct(ConnectorInterface $endpointConnector)
     {
         $this->endpointConnector = $endpointConnector;
-        $this->setErrorHandler(new ErrorHandler());
 
         $this->eventDispatcher = new EventDispatcher();
-        $this->getErrorHandler()->setEventDispatcher($this->eventDispatcher);
         $this->eventDispatcher->addSubscriber(new RequestBeforeHandleSubscriber());
 
         $containerBuilder = new ContainerBuilder();
@@ -136,7 +134,6 @@ class Application
 
         AnnotationRegistry::registerLoader('class_exists');
         $this->startConfiguration();
-
         $this->setErrorHandler(new ErrorHandler());
         $this->getErrorHandler()->setEventDispatcher($this->eventDispatcher);
         $this->eventDispatcher->addSubscriber(new RequestBeforeHandleSubscriber());
@@ -474,10 +471,6 @@ class Application
      */
     protected function startConfiguration(): void
     {
-        if (!isset($this->sessionHandler)) {
-            throw new SessionException('Session not initialized', ErrorCode::UNINITIALIZED_SESSION);
-        }
-
         $configFile = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
         if (!file_exists($configFile)) {
             file_put_contents($configFile, Json::encode(ConfigOption::getDefaultValues(), true));
