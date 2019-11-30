@@ -174,11 +174,13 @@ class Application
 
             $responsePacket = $this->execute($requestPacket, $method);
         } catch (\Throwable $ex) {
-            Logger::write($ex->getMessage(), Logger::ERROR);
-            Logger::write($ex->getTraceAsString(), Logger::DEBUG);
+            Logger::writeException($ex);
             $error = new Error();
-            $error->setCode($ex->getCode())
-                ->setMessage($ex->getMessage());
+            $error
+                ->setData(Logger::createExceptionInfos($ex))
+                ->setCode($ex->getCode())
+                ->setMessage($ex->getMessage())
+            ;
 
             $responsePacket = new ResponsePacket();
             $responsePacket->setId($requestPacket->getId())

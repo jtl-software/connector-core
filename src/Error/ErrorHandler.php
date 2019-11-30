@@ -64,10 +64,10 @@ class ErrorHandler extends AbstractErrorHandler
             }
 
             $error->setCode($e->getCode())
-                ->setData(ExceptionFormatter::format($e))
+                ->setData(Logger::createExceptionInfos($e))
                 ->setMessage($e->getMessage());
 
-            Logger::write($error->getData(), Logger::ERROR);
+            Logger::writeException($e);
 
             $responsePacket = new ResponsePacket();
             $responsePacket->setError($error)

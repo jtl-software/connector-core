@@ -58,6 +58,40 @@ class Logger
     }
 
     /**
+     * @param \Throwable $exception
+     * @param string $level
+     * @param string $channel
+     */
+    public static function writeException(\Throwable $exception, string $level = self::ERROR, string $channel = self::CHANNEL_GLOBAL)
+    {
+        self::write(self::createExceptionInfos($exception), $level, $channel);
+        self::write($exception->getMessage(), $level, $channel);
+        self::write($exception->getTraceAsString(), self::DEBUG, $channel);
+    }
+
+    /**
+     * @param \Throwable $exception
+     * @param string $additionalMessage
+     * @return string
+     */
+    public static function createExceptionInfos(\Throwable $exception, string $additionalMessage = null): string
+    {
+        $infos = sprintf(
+            "%s (Code: %s) in %s:%s",
+            get_class($exception),
+            $exception->getCode(),
+            $exception->getFile(),
+            $exception->getLine()
+        );
+
+        if(is_string($additionalMessage)) {
+            $infos .= sprintf(' - %s', $additionalMessage);
+        }
+
+        return $infos;
+    }
+
+    /**
      * Gets the current logger
      *
      * @param string $channel The log channel
