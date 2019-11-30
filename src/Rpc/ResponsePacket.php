@@ -130,7 +130,7 @@ class ResponsePacket extends Packet
      */
     public function serialize(): string
     {
-        $serializer = SerializerBuilder::getInstance();
+        $serializer = SerializerBuilder::getInstance()->build();
         $context = (new SerializationContext())->setSerializeNull(true);
         return $serializer->serialize($this, 'json', $context);
     }

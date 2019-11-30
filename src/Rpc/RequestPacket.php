@@ -125,7 +125,6 @@ class RequestPacket extends Packet
     {
         if ($jtlrpc !== null) {
             $serializer = SerializerBuilder::create()
-                ->addDefaultHandlers()
                 ->configureHandlers(function (HandlerRegistry $registry) {
                     $registry->registerSubscribingHandler(new JsonStringHandler());
                 })

@@ -7,7 +7,7 @@ namespace Jtl\Connector\Core\Serializer;
 
 use JMS\Serializer\EventDispatcher\EventDispatcher;
 use JMS\Serializer\Handler\HandlerRegistry;
-use JMS\Serializer\SerializerInterface;
+use JMS\Serializer\SerializerBuilder as JmsBuilder;
 use Jtl\Connector\Core\Serializer\Handler\ProductHandler;
 use Jtl\Connector\Core\Serializer\Subscriber\NullValuesSubscriber;
 use Jtl\Connector\Core\Serializer\Handler\IdentityHandler;
@@ -16,7 +16,7 @@ use Jtl\Connector\Core\Serializer\Subscriber\ObjectTypesSubscriber;
 class SerializerBuilder
 {
     /**
-     * @var SerializerInterface
+     * @var JmsBuilder
      */
     protected static $instance;
 
@@ -28,9 +28,9 @@ class SerializerBuilder
     }
 
     /**
-     * @return SerializerInterface
+     * @return JmsBuilder
      */
-    public static function getInstance()
+    public static function getInstance(): JmsBuilder
     {
         if (is_null(self::$instance)) {
             self::$instance = \JMS\Serializer\SerializerBuilder::create()
@@ -43,8 +43,7 @@ class SerializerBuilder
                 ->configureHandlers(function (HandlerRegistry $registry) {
                     $registry->registerSubscribingHandler(new IdentityHandler());
                     $registry->registerSubscribingHandler(new ProductHandler());
-                })
-                ->build();
+                });
         }
 
         return self::$instance;

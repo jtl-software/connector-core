@@ -61,20 +61,12 @@ use Jtl\Connector\Core\Event\EventHandler;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Finder\Finder;
 
-/**
- * Application Class
- *
- * @access public
- * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
- */
 class Application
 {
     const PROTOCOL_VERSION = 7;
     const MIN_PHP_VERSION = '7.2';
 
     /**
-     * Connected EndpointConnectors
-     *
      * @var ConnectorInterface
      */
     protected $endpointConnector = null;
@@ -85,8 +77,6 @@ class Application
     protected $config;
 
     /**
-     * Global Session
-     *
      * @var \SessionHandlerInterface
      */
     protected $sessionHandler;
@@ -136,8 +126,7 @@ class Application
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Jtl\Connector\Core\Application\Application::run()
+     * @throws \Exception
      */
     public function run(): void
     {
@@ -323,7 +312,7 @@ class Application
 
     /**
      * @param RequestPacket $requestPacket
-     * @param Method $mehod
+     * @param Method $method
      * @param string $modelNamespace
      * @return Request
      * @throws DefinitionException
@@ -357,7 +346,7 @@ class Application
         }
 
         if (class_exists($className)) {
-            $serializer = SerializerBuilder::getInstance();
+            $serializer = SerializerBuilder::getInstance()->build();
             $serializedParams = $requestPacket->getParams();
             if (is_string($serializedParams) && strlen($serializedParams) > 0) {
                 $params = $serializer->deserialize($serializedParams, $type, 'json');
@@ -395,6 +384,7 @@ class Application
      * @throws ApplicationException
      * @throws DependencyException
      * @throws NotFoundException
+     * @throws \ReflectionException
      * @throws \Throwable
      */
     public function handleRequest(Request $request, ConnectorInterface $connector): Response
@@ -622,7 +612,7 @@ class Application
 
     /**
      * @param \Throwable $ex
-     * @param AbstractDataModel $model
+     * @param object|null $model
      * @param string $controller
      * @param string $action
      * @throws \ReflectionException
