@@ -7,6 +7,7 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Jtl\Connector\Core\Config\RuntimeConfig;
+use Jtl\Connector\Core\Controller\StatisticInterface;
 use Jtl\Connector\Core\Definition\ConfigOption;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\ErrorCode;
@@ -32,6 +33,7 @@ use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\IdentityInterface;
 use Jtl\Connector\Core\Model\IdentificationInterface;
 use Jtl\Connector\Core\Model\QueryFilter;
+use Jtl\Connector\Core\Model\Statistic;
 use Jtl\Connector\Core\Plugin\PluginManager;
 use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\Exception\RpcException;
@@ -443,6 +445,13 @@ class Application
                 $param = count($params) > 0 ? reset($params) : null;
                 $result = $controllerObject->$action($param);
                 break;
+        }
+
+        if($action === Action::STATISTIC && $controllerObject instanceof StatisticInterface) {
+            $result = (new Statistic())
+                ->setControllerName($controller)
+                ->setAvailable($result)
+            ;
         }
 
         if (!$result instanceof Response) {
