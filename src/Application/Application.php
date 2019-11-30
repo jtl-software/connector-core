@@ -130,15 +130,21 @@ class Application
      */
     public function run(): void
     {
-        AnnotationRegistry::registerLoader('class_exists');
-
         if (!defined('CONNECTOR_DIR')) {
             throw new \Exception('Constant CONNECTOR_DIR is not defined.');
         }
 
+        AnnotationRegistry::registerLoader('class_exists');
+        $this->startConfiguration();
+
+        $this->setErrorHandler(new ErrorHandler());
+        $this->getErrorHandler()->setEventDispatcher($this->eventDispatcher);
+        $this->eventDispatcher->addSubscriber(new RequestBeforeHandleSubscriber());
+
         try {
             $jtlrpc = HttpRequest::handle();
             $requestPacket = RequestPacket::build($jtlrpc);
+            $method = Method::createFromRequestPacket($requestPacket);
             $requestPacket->validate();
 
             //Mask connector token before logging
@@ -157,13 +163,8 @@ class Application
                 Logger::write(sprintf('Params: %s', $reqPacketsObj->params), Logger::DEBUG, Logger::CHANNEL_RPC);
             }
 
-            $method = Method::createFromRequestPacket($requestPacket);
-
             // Start Session
             $this->startSession($requestPacket->getMethod());
-
-            // Start Configuration
-            $this->startConfiguration();
 
             $this->linker = new IdentityLinker($this->endpointConnector->getPrimaryKeyMapper());
 

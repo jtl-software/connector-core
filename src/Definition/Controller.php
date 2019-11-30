@@ -20,17 +20,22 @@ final class Controller
     const STATUS_CHANGE = 'StatusChange';
 
     /**
+     * @var string[]|null
+     */
+    protected static $controllers = null;
+
+    /**
      * @return integer[]
      * @throws \ReflectionException
      */
     public static function getControllers(): array
     {
-        if (is_null(static::$types)) {
+        if (is_null(static::$controllers)) {
             $reflection = new \ReflectionClass(static::class);
-            static::$types = $reflection->getConstants();
+            static::$controllers = $reflection->getConstants();
         }
 
-        return static::$types;
+        return static::$controllers;
     }
 
     /**
