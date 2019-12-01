@@ -3,10 +3,11 @@ namespace Jtl\Connector\Core\Rpc;
 
 use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\Handler\HandlerRegistry;
+use JMS\Serializer\SerializationContext;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Definition\ErrorCode;
 use Jtl\Connector\Core\Exception\RpcException;
-
+use JMS\Serializer\Serializer as JmsSerializer;
 /**
  * Rpc Request Packet
  *
@@ -105,12 +106,16 @@ class RequestPacket extends Packet
 
     /**
      * @param string|null $jtlrpc
+     * @param JmsSerializer $serializer
      * @return RequestPacket
      */
-    public static function build(?string $jtlrpc): RequestPacket
+    public static function create(?string $jtlrpc, JmsSerializer $serializer = null): RequestPacket
     {
-        if ($jtlrpc !== null) {
+        if(is_null($serializer)) {
             $serializer = SerializerBuilder::getInstance()->build();
+        }
+
+        if ($jtlrpc !== null) {
             return $serializer->deserialize($jtlrpc, RequestPacket::class, 'json');
         } else {
             return (new static())->setMethod('undefined.undefined');

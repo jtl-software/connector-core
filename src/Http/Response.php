@@ -23,10 +23,11 @@ class Response
      *
      * Http Response sender
      *
-     * @param string $jsonResponse
+     * @param string $response
      */
-    public static function send(string $jsonResponse)
+    public static function send(array $response)
     {
+        $jsonResponse = Json::encode($response);
         Logger::write($jsonResponse, Logger::DEBUG, Logger::CHANNEL_RPC);
 
         header('Cache-Control: no-cache, must-revalidate');

@@ -46,7 +46,7 @@ class EventHandler
      * @param string $action
      * @param string $moment
      */
-    public static function dispatchRpc(&$data, EventDispatcher $dispatcher, string $controller, string $action, string $moment): void
+    public static function dispatchRpc(array &$data, EventDispatcher $dispatcher, string $controller, string $action, string $moment): void
     {
         if (strlen(trim($action)) == 0 || strlen(trim($moment)) == 0) {
             return;

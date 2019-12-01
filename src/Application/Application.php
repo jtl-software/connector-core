@@ -104,6 +104,11 @@ class Application
     protected $container;
 
     /**
+     * @var Serializer
+     */
+    protected $serializer;
+
+    /**
      * @var string[]
      */
     protected $imagesToDelete = [];
@@ -117,10 +122,11 @@ class Application
     {
         $this->endpointConnector = $endpointConnector;
         $this->eventDispatcher = new EventDispatcher();
-        $this->errorHandler = new ErrorHandler($this->eventDispatcher);
+        $this->errorHandler = new ErrorHandler($this);
         $this->container = (new ContainerBuilder())->build();
         $this->container->set(Application::class, $this);
         $this->linker = new IdentityLinker($this->endpointConnector->getPrimaryKeyMapper());
+        $this->serializer = SerializerBuilder::getInstance()->build();
     }
 
     /**
@@ -139,7 +145,7 @@ class Application
 
         try {
             $jtlrpc = HttpRequest::handle();
-            $requestPacket = RequestPacket::build($jtlrpc);
+            $requestPacket = RequestPacket::create($jtlrpc, $this->serializer);
             $method = Method::createFromRequestPacket($requestPacket);
 
             if (!$requestPacket->isValid() || !RpcMethod::isMethod($requestPacket->getMethod())) {
@@ -166,6 +172,14 @@ class Application
             }
             $this->endpointConnector->initialize($this);
 
+            EventHandler::dispatchRpc(
+                Json::decode((string)$jtlrpc, true),
+                $this->eventDispatcher,
+                $method->getController(),
+                $method->getAction(),
+                EventHandler::BEFORE
+            );
+
             $responsePacket = $this->execute($requestPacket, $method);
         } catch (\Throwable $ex) {
             Logger::writeException($ex);
@@ -186,9 +200,9 @@ class Application
                 $this->imagesToDelete = [];
             }
 
-            $jsonResponse = $responsePacket->serialize();
-            $this->triggerRpcAfterEvent($jsonResponse, $method->getController(), $method->getAction());
-            HttpResponse::send($jsonResponse);
+            $arrayResponse = $responsePacket->toArray($this->serializer);
+            $this->triggerRpcAfterEvent($arrayResponse, $method->getController(), $method->getAction());
+            HttpResponse::send($arrayResponse);
         }
     }
 
@@ -226,16 +240,6 @@ class Application
      */
     protected function execute(RequestPacket $requestPacket, Method $method): ResponsePacket
     {
-        // Rpc Event
-        $data = $requestPacket->getParams();
-        EventHandler::dispatchRpc(
-            $data,
-            $this->eventDispatcher,
-            $method->getController(),
-            $method->getAction(),
-            EventHandler::BEFORE
-        );
-
         if ($method->isCore()) {
             $connector = new CoreConnector($this->endpointConnector->getPrimaryKeyMapper(), $this->endpointConnector->getTokenValidator());
         } else {
@@ -560,14 +564,14 @@ class Application
     }
 
     /**
-     * @param string $jsonString
+     * @param string $arrayResponse
      * @param string $controller
      * @param string $action
      */
-    protected function triggerRpcAfterEvent(string $jsonString, string $controller, string $action): void
+    protected function triggerRpcAfterEvent(array $arrayResponse, string $controller, string $action): void
     {
         EventHandler::dispatchRpc(
-            $jsonString,
+            $arrayResponse,
             $this->eventDispatcher,
             $controller,
             $action,
@@ -704,5 +708,13 @@ class Application
     public function getLinker(): IdentityLinker
     {
         return $this->linker;
+    }
+
+    /**
+     * @return Serializer
+     */
+    public function getSerializer(): Serializer
+    {
+        return $this->serializer;
     }
 }

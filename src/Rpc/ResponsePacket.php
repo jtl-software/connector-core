@@ -11,6 +11,7 @@ use JMS\Serializer\SerializationContext;
 use Jtl\Connector\Core\Definition\ErrorCode;
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
+use JMS\Serializer\Serializer as JmsSerializer;
 
 /**
  * Rpc Response Packet
@@ -113,15 +114,5 @@ class ResponsePacket extends Packet
         if (!$isValid) {
             throw new RpcException("Parse error", ErrorCode::PARSE_ERROR);
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function serialize(): string
-    {
-        $serializer = SerializerBuilder::getInstance()->build();
-        $context = (new SerializationContext())->setSerializeNull(true);
-        return $serializer->serialize($this, 'json', $context);
     }
 }

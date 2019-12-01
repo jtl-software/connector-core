@@ -1,8 +1,11 @@
 <?php
 namespace Jtl\Connector\Core\Rpc;
 
+use JMS\Serializer\SerializationContext;
+use JMS\Serializer\Serializer as JmsSerializer;
 use Jtl\Connector\Core\Model\AbstractModel;
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Serializer\SerializerBuilder;
 
 /**
  * Rpc Packet
@@ -69,5 +72,20 @@ abstract class Packet extends AbstractModel
     {
         $this->id = $id;
         return $this;
+    }
+
+
+    /**
+     * @param JmsSerializer|null $serializer
+     * @return mixed[]
+     */
+    public function toArray(JmsSerializer $serializer = null): array
+    {
+        if(is_null($serializer)) {
+            $serializer = SerializerBuilder::getInstance()->build();
+        }
+
+        $context = (new SerializationContext())->setSerializeNull(true);
+        return $serializer->toArray($this, $context);
     }
 }
