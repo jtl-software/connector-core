@@ -8,6 +8,7 @@ namespace Jtl\Connector\Core\Serializer;
 use JMS\Serializer\EventDispatcher\EventDispatcher;
 use JMS\Serializer\Handler\HandlerRegistry;
 use JMS\Serializer\SerializerBuilder as JmsBuilder;
+use Jtl\Connector\Core\Serializer\Handler\FeaturesHandler;
 use Jtl\Connector\Core\Serializer\Handler\ProductHandler;
 use Jtl\Connector\Core\Serializer\Subscriber\NullValuesSubscriber;
 use Jtl\Connector\Core\Serializer\Handler\IdentityHandler;
@@ -43,6 +44,7 @@ class SerializerBuilder
                 ->configureHandlers(function (HandlerRegistry $registry) {
                     $registry->registerSubscribingHandler(new IdentityHandler());
                     $registry->registerSubscribingHandler(new ProductHandler());
+                    $registry->registerSubscribingHandler(new FeaturesHandler());
                 });
         }
 
