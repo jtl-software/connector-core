@@ -81,7 +81,7 @@ class RequestPacket extends Packet
     /**
      * @return boolean
      */
-    final public function isValid(): bool
+    public function isValid(): bool
     {
         $isValid = true;
 
@@ -109,7 +109,7 @@ class RequestPacket extends Packet
      * @param JmsSerializer $serializer
      * @return RequestPacket
      */
-    public static function create(?string $jtlrpc, JmsSerializer $serializer = null): RequestPacket
+    public static function createFromJtlrpc(?string $jtlrpc, JmsSerializer $serializer = null): RequestPacket
     {
         if(is_null($serializer)) {
             $serializer = SerializerBuilder::getInstance()->build();

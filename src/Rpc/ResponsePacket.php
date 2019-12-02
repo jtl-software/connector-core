@@ -6,11 +6,7 @@
  */
 namespace Jtl\Connector\Core\Rpc;
 
-use JMS\Serializer\Annotation as Serializer;
-use JMS\Serializer\SerializationContext;
-use Jtl\Connector\Core\Definition\ErrorCode;
 use Jtl\Connector\Core\Exception\RpcException;
-use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use JMS\Serializer\Serializer as JmsSerializer;
 
 /**
@@ -78,9 +74,10 @@ class ResponsePacket extends Packet
     }
 
     /**
+     * @return boolean
      * @throws RpcException
      */
-    final public function validate()
+    public function isValid(): bool
     {
         $isValid = true;
 
@@ -111,8 +108,6 @@ class ResponsePacket extends Packet
             $isValid = false;
         }
 
-        if (!$isValid) {
-            throw new RpcException("Parse error", ErrorCode::PARSE_ERROR);
-        }
+        return $isValid;
     }
 }

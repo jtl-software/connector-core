@@ -145,7 +145,7 @@ class Application
 
         try {
             $jtlrpc = HttpRequest::handle();
-            $requestPacket = RequestPacket::create($jtlrpc, $this->serializer);
+            $requestPacket = RequestPacket::createFromJtlrpc($jtlrpc, $this->serializer);
             $method = Method::createFromRequestPacket($requestPacket);
 
             if (!$requestPacket->isValid() || !RpcMethod::isMethod($requestPacket->getMethod())) {
@@ -191,7 +191,6 @@ class Application
 
             $responsePacket = (new ResponsePacket())
                 ->setId($requestPacket->getId())
-                ->setJtlrpc($requestPacket->getJtlrpc())
                 ->setError($error);
 
         } finally {
@@ -444,9 +443,11 @@ class Application
     {
         $responsePacket = new ResponsePacket();
         $responsePacket->setId($requestPacket->getId())
-            ->setJtlrpc($requestPacket->getJtlrpc())
             ->setResult($response->getResult());
-        $responsePacket->validate();
+
+        if(!$responsePacket->isValid()) {
+            throw new RpcException("Parse error", ErrorCode::PARSE_ERROR);
+        }
 
         return $responsePacket;
     }

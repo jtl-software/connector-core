@@ -1,10 +1,10 @@
 <?php
 namespace Jtl\Connector\Core\Rpc;
 
+use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer as JmsSerializer;
 use Jtl\Connector\Core\Model\AbstractModel;
-use JMS\Serializer\Annotation as Serializer;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 
 /**
@@ -22,13 +22,18 @@ abstract class Packet extends AbstractModel
      * @var string
      * @Serializer\Type("string")
      */
-    protected $jtlrpc = '';
+    protected $jtlrpc = '2.0';
     
     /**
      * @var string
      * @Serializer\Type("string")
      */
     protected $id = '';
+
+    /**
+     * @return boolean
+     */
+    abstract public function isValid(): bool;
 
     /**
      * Getter for $jtlrpc
