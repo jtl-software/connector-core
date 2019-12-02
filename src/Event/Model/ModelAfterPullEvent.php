@@ -1,15 +1,16 @@
 <?php
-
 namespace Jtl\Connector\Core\Event\Model;
 
-use Jtl\Connector\Core\Event\AbstractEvent;
+use Jtl\Connector\Core\Event\EventInterface;
 use Jtl\Connector\Core\Model\AbstractDataModel;
+use Symfony\Contracts\EventDispatcher\Event;
+use Jtl\Connector\Core\Model\QueryFilter;
 
 /**
- * Class AfterModelPushEvent
+ * Class AfterPullEvent
  * @package Jtl\Connector\Core\Event
  */
-class PushEvent extends AbstractEvent
+class ModelAfterPullEvent extends Event implements EventInterface
 {
     /**
      * @var AbstractDataModel
@@ -17,35 +18,20 @@ class PushEvent extends AbstractEvent
     protected $model;
 
     /**
-     * @var string(before|after)
-     */
-    protected $moment;
-
-    /**
-     * PushEvent constructor.
+     * ModelAfterPullEvent constructor.
      * @param AbstractDataModel $model
-     * @param $moment
      */
-    public function __construct(AbstractDataModel $model, $moment)
+    public function __construct(AbstractDataModel $model)
     {
         $this->model = $model;
-        $this->moment = $moment;
     }
 
     /**
      * @return AbstractDataModel
      */
-    public function getModel(): AbstractDataModel
+    public function getModel()
     {
         return $this->model;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMoment()
-    {
-        return $this->moment;
     }
 
     /**
@@ -56,7 +42,7 @@ class PushEvent extends AbstractEvent
     {
         $modelName = (new \ReflectionClass($this->getModel()))->getShortName();
 
-        return sprintf("%s.%s.push", strtolower($modelName), $this->getMoment());
+        return sprintf("%s.after.pull", strtolower($modelName));
     }
 
 }

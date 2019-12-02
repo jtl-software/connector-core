@@ -2,9 +2,10 @@
 namespace Jtl\Connector\Core\Event\Handle;
 
 use Jtl\Connector\Core\Application\Request;
-use Jtl\Connector\Core\Event\AbstractEvent;
+use Jtl\Connector\Core\Event\EventInterface;
+use Symfony\Contracts\EventDispatcher\Event;
 
-class RequestBeforeHandleEvent extends AbstractEvent
+class RequestBeforeHandleEvent extends Event implements EventInterface
 {
     const EVENT_NAME = 'request.before.handle';
 

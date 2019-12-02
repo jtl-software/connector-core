@@ -1,11 +1,11 @@
 <?php
 namespace Jtl\Connector\Core\Event\Core;
 
-use Jtl\Connector\Core\Event\AbstractEvent;
-use Jtl\Connector\Core\Model\Features;
+use Jtl\Connector\Core\Event\EventInterface;
 use Symfony\Contracts\EventDispatcher\Event;
+use Jtl\Connector\Core\Model\Features;
 
-class CoreAfterFeaturesEvent extends AbstractEvent
+class CoreAfterFeaturesEvent extends Event implements EventInterface
 {
     const EVENT_NAME = 'core.connector.features';
 

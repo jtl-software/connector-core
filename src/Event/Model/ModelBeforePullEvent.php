@@ -1,16 +1,15 @@
 <?php
-
 namespace Jtl\Connector\Core\Event\Model;
 
-use Jtl\Connector\Core\Event\AbstractEvent;
-use Jtl\Connector\Core\Model\AbstractDataModel;
+use Jtl\Connector\Core\Event\EventInterface;
+use Symfony\Contracts\EventDispatcher\Event;
 use Jtl\Connector\Core\Model\QueryFilter;
 
 /**
- * Class StatisticEvent
+ * Class PullEvent
  * @package Jtl\Connector\Core\Event
  */
-class StatisticEvent extends AbstractEvent
+class ModelBeforePullEvent extends Event implements EventInterface
 {
     /**
      * @var QueryFilter
@@ -18,19 +17,12 @@ class StatisticEvent extends AbstractEvent
     protected $model;
 
     /**
-     * @var string(before|after)
-     */
-    protected $moment;
-
-    /**
-     * StatisticEvent constructor.
+     * BeforePullEvent constructor.
      * @param QueryFilter $model
-     * @param $moment
      */
-    public function __construct(QueryFilter $model, $moment)
+    public function __construct(QueryFilter $model)
     {
         $this->model = $model;
-        $this->moment = $moment;
     }
 
     /**
@@ -42,14 +34,6 @@ class StatisticEvent extends AbstractEvent
     }
 
     /**
-     * @return mixed
-     */
-    public function getMoment()
-    {
-        return $this->moment;
-    }
-
-    /**
      * @return string
      * @throws \ReflectionException
      */
@@ -57,7 +41,7 @@ class StatisticEvent extends AbstractEvent
     {
         $modelName = (new \ReflectionClass($this->getModel()))->getShortName();
 
-        return sprintf("%s.%s.statistic", strtolower($modelName), $this->getMoment());
+        return sprintf("%s.before.pull", strtolower($modelName));
     }
 
 }

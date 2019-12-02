@@ -2,16 +2,15 @@
 
 namespace Jtl\Connector\Core\Event\Model;
 
-use Jtl\Connector\Core\Event\AbstractEvent;
-use Jtl\Connector\Core\Model\AbstractDataModel;
 use Jtl\Connector\Core\Model\QueryFilter;
-use MongoDB\Driver\Query;
+use Jtl\Connector\Core\Event\EventInterface;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * Class PullEvent
+ * Class StatisticEvent
  * @package Jtl\Connector\Core\Event
  */
-class PullEvent extends AbstractEvent
+class ModelBeforeStatisticEvent extends Event implements EventInterface
 {
     /**
      * @var QueryFilter
@@ -19,19 +18,12 @@ class PullEvent extends AbstractEvent
     protected $model;
 
     /**
-     * @var string(before|after)
-     */
-    protected $moment;
-
-    /**
-     * PullEvent constructor.
+     * BeforeStatisticEvent constructor.
      * @param QueryFilter $model
-     * @param $moment
      */
-    public function __construct(QueryFilter $model, $moment)
+    public function __construct(QueryFilter $model)
     {
         $this->model = $model;
-        $this->moment = $moment;
     }
 
     /**
@@ -43,14 +35,6 @@ class PullEvent extends AbstractEvent
     }
 
     /**
-     * @return mixed
-     */
-    public function getMoment()
-    {
-        return $this->moment;
-    }
-
-    /**
      * @return string
      * @throws \ReflectionException
      */
@@ -58,7 +42,7 @@ class PullEvent extends AbstractEvent
     {
         $modelName = (new \ReflectionClass($this->getModel()))->getShortName();
 
-        return sprintf("%s.%s.pull", strtolower($modelName), $this->getMoment());
+        return sprintf("%s.before.statistic", strtolower($modelName));
     }
 
 }

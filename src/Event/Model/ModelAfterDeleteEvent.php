@@ -1,35 +1,28 @@
 <?php
-
 namespace Jtl\Connector\Core\Event\Model;
 
-use Jtl\Connector\Core\Event\AbstractEvent;
+use Jtl\Connector\Core\Event\EventInterface;
+use Symfony\Contracts\EventDispatcher\Event;
 use Jtl\Connector\Core\Model\AbstractDataModel;
 
 /**
- * Class DeleteEvent
+ * Class AfterDeleteEvent
  * @package Jtl\Connector\Core\Event
  */
-class DeleteEvent extends AbstractEvent
+class ModelAfterDeleteEvent extends Event implements EventInterface
 {
     /**
-     * @var
+     * @var AbstractDataModel
      */
     protected $model;
 
     /**
-     * @var string(before|after)
+     * ModelAfterDeleteEvent constructor.
+     * @param AbstractDataModel $model
      */
-    protected $moment;
-
-    /**
-     * DeleteEvent constructor.
-     * @param $model
-     * @param $moment
-     */
-    public function __construct($model, $moment)
+    public function __construct(AbstractDataModel $model)
     {
         $this->model = $model;
-        $this->moment = $moment;
     }
 
     /**
@@ -41,14 +34,6 @@ class DeleteEvent extends AbstractEvent
     }
 
     /**
-     * @return mixed
-     */
-    public function getMoment()
-    {
-        return $this->moment;
-    }
-
-    /**
      * @return string
      * @throws \ReflectionException
      */
@@ -56,7 +41,7 @@ class DeleteEvent extends AbstractEvent
     {
         $modelName = (new \ReflectionClass($this->getModel()))->getShortName();
 
-        return sprintf("%s.%s.delete", strtolower($modelName), $this->getMoment());
+        return sprintf("%s.after.delete", strtolower($modelName));
     }
 
 }

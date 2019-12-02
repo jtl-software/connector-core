@@ -1,9 +1,10 @@
 <?php
 namespace Jtl\Connector\Core\Event\Connector;
 
-use Jtl\Connector\Core\Event\AbstractEvent;
+use Jtl\Connector\Core\Event\EventInterface;
+use Symfony\Contracts\EventDispatcher\Event;
 
-class ConnectorAfterFinishEvent extends AbstractEvent
+class ConnectorAfterFinishEvent extends Event implements EventInterface
 {
     const EVENT_NAME = 'connector.after.finish';
     

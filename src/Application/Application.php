@@ -24,6 +24,7 @@ use Jtl\Connector\Core\Connector\ModelInterface;
 use Jtl\Connector\Core\Controller\TransactionalInterface;
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Event\AbstractEvent;
+use Jtl\Connector\Core\Event\EventInterface;
 use Jtl\Connector\Core\Event\Handle\ResponseAfterHandleEvent;
 use Jtl\Connector\Core\Event\Handle\RequestBeforeHandleEvent;
 use Jtl\Connector\Core\Event\Rpc\RpcAfterEvent;
@@ -565,34 +566,34 @@ class Application
      */
     protected function triggerEvent($eventData, Method $method, string $moment): void
     {
-        $eventClassname = null;
-
-        $moment = strtolower($moment);
+        $eventClass = null;
 
         if ($eventData instanceof AbstractDataModel || $eventData instanceof QueryFilter) {
-            $eventClassname = sprintf('Jtl\Connector\Core\Event\Model\%sEvent', ucfirst($method->getAction()));
-        } else {
-            $eventClass = null;
-
-            if ($method->getController() === Controller::CONNECTOR) {
-                $eventClass = Controller::CONNECTOR;
-            } elseif ($method->isCore()) {
-                $eventClass = "Core";
-            }
-
-            $eventClassname = sprintf('Jtl\Connector\Core\Event\%s\%s%s%sEvent', $eventClass, $eventClass, Event::AFTER,
-                $method->getAction());
+            $eventClass = "Model";
+        } elseif ($method->getController() === Controller::CONNECTOR) {
+            $eventClass = Controller::CONNECTOR;
+        } elseif ($method->isCore()) {
+            $eventClass = "Core";
         }
 
-        if (class_exists($eventClassname) && class_implements($eventClassname, AbstractEvent::class)) {
+        if ($method->isCore() &&
+            (($eventData instanceof AbstractDataModel) && ($eventData instanceof QueryFilter)) ||
+            strlen(trim($method->getAction())) != 0 || strlen(trim($moment)) != 0) {
 
-            if($eventData instanceof Response){
-                $eventData = $eventData->getResult();
+
+            $eventClassname = sprintf('Jtl\Connector\Core\Event\%s\%s%s%sEvent', $eventClass, $eventClass,
+                ucfirst($moment),
+                ucfirst($method->getAction()));
+
+            if (class_exists($eventClassname) && in_array(EventInterface::class, class_implements($eventClassname))) {
+
+                if ($eventData instanceof Response) {
+                    $eventData = $eventData->getResult();
+                }
+
+                $event = new $eventClassname($eventData);
+                $this->eventDispatcher->dispatch($event, $event->getEventName());
             }
-
-            /** @var $event AbstractEvent */
-            $event = new $eventClassname($eventData, $moment);
-            $this->eventDispatcher->dispatch($event, $event->getEventName());
         }
     }
 
