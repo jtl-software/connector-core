@@ -177,8 +177,9 @@ class Application
             }
             $this->endpointConnector->initialize($this);
 
-            $event = new RpcBeforeEvent(Json::decode((string)$jtlrpc, true),$method->getController(),$method->getAction());
-            $this->eventDispatcher->dispatch($event,$event->getEventName());
+            $event = new RpcBeforeEvent(Json::decode((string)$jtlrpc, true), $method->getController(),
+                $method->getAction());
+            $this->eventDispatcher->dispatch($event, $event->getEventName());
 
             $responsePacket = $this->execute($requestPacket, $method);
         } catch (\Throwable $ex) {
@@ -201,8 +202,8 @@ class Application
 
             $arrayResponse = $responsePacket->toArray($this->serializer);
 
-            $event = new RpcAfterEvent($arrayResponse,$method->getController(),$method->getAction());
-            $this->eventDispatcher->dispatch($event,$event->getEventName());
+            $event = new RpcAfterEvent($arrayResponse, $method->getController(), $method->getAction());
+            $this->eventDispatcher->dispatch($event, $event->getEventName());
 
             HttpResponse::send($arrayResponse);
         }
@@ -262,7 +263,7 @@ class Application
         }
 
         $event = new RequestBeforeHandleEvent($request);
-        $this->eventDispatcher->dispatch($event,$event->getEventName());
+        $this->eventDispatcher->dispatch($event, $event->getEventName());
 
         if ($connector instanceof HandleRequestInterface) {
             $response = $connector->handle($this, $request);
@@ -271,7 +272,7 @@ class Application
         }
 
         $event = new ResponseAfterHandleEvent($request->getController(), $request->getAction(), $response);
-        $this->eventDispatcher->dispatch($event,$event->getEventName());
+        $this->eventDispatcher->dispatch($event, $event->getEventName());
 
         if ($method->isCore() === false) {
             // Identity mapping
@@ -281,21 +282,14 @@ class Application
                     $this->linker->linkModel($model, ($method->getAction() === Action::DELETE));
                     $this->linkChecksum($model);
 
-                    $this->triggerModelEvent($model, $method, Event::AFTER);
+                    $this->triggerEvent($model, $method, Event::AFTER);
                 }
             }
         }
 
         $responsePacket = $this->buildRpcResponse($requestPacket, $response);
 
-        EventHandler::dispatch(
-            $response->getResult(),
-            $this->eventDispatcher,
-            $method->getAction(),
-            EventHandler::AFTER,
-            ($method->getController() === Controller::CONNECTOR) ? Controller::CONNECTOR : null,
-            $method->isCore()
-        );
+        $this->triggerEvent($response->getResult(), $method, Event::AFTER);
 
         return $responsePacket;
     }
@@ -309,8 +303,11 @@ class Application
      * @throws LinkerException
      * @throws \ReflectionException
      */
-    protected function createHandleRequest(RequestPacket $requestPacket, Method $method, string $modelNamespace): Request
-    {
+    protected function createHandleRequest(
+        RequestPacket $requestPacket,
+        Method $method,
+        string $modelNamespace
+    ): Request {
         $controller = $method->getController();
         $action = $method->getAction();
 
@@ -349,7 +346,7 @@ class Application
                 $this->linkChecksum($param);
             }
 
-            $this->triggerModelEvent($param, $method, Event::BEFORE);
+            $this->triggerEvent($param, $method, Event::BEFORE);
         }
 
         return Request::create($controller, $action, $params);
@@ -459,7 +456,8 @@ class Application
         $this->config = new FileConfig($configFile);
         $logLevel = $this->config->get(ConfigOption::LOG_LEVEL, Logger::INFO);
         RuntimeConfig::getInstance()->set(ConfigOption::LOG_LEVEL, $logLevel);
-        $mainLanguage = $this->config->get(ConfigOption::MAIN_LANGUAGE, ConfigOption::getDefaultValue(ConfigOption::MAIN_LANGUAGE));
+        $mainLanguage = $this->config->get(ConfigOption::MAIN_LANGUAGE,
+            ConfigOption::getDefaultValue(ConfigOption::MAIN_LANGUAGE));
         RuntimeConfig::getInstance()->set(ConfigOption::MAIN_LANGUAGE, $mainLanguage);
     }
 
@@ -536,7 +534,8 @@ class Application
             if (!empty($image->getRemoteUrl())) {
                 $imageData = file_get_contents($image->getRemoteUrl());
                 if ($imageData === false) {
-                    throw new ApplicationException(sprintf('Could not get any data from url: %s', $image->getRemoteUrl()));
+                    throw new ApplicationException(sprintf('Could not get any data from url: %s',
+                        $image->getRemoteUrl()));
                 }
 
                 $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
@@ -564,7 +563,7 @@ class Application
      * @param Method $method
      * @param string $moment
      */
-    protected function triggerModelEvent($eventData, Method $method, string $moment): void
+    protected function triggerEvent($eventData, Method $method, string $moment): void
     {
         $eventClassname = null;
 
@@ -572,9 +571,24 @@ class Application
 
         if ($eventData instanceof AbstractDataModel || $eventData instanceof QueryFilter) {
             $eventClassname = sprintf('Jtl\Connector\Core\Event\Model\%sEvent', ucfirst($method->getAction()));
+        } else {
+            $eventClass = null;
+
+            if ($method->getController() === Controller::CONNECTOR) {
+                $eventClass = Controller::CONNECTOR;
+            } elseif ($method->isCore()) {
+                $eventClass = "Core";
+            }
+
+            $eventClassname = sprintf('Jtl\Connector\Core\Event\%s\%s%s%sEvent', $eventClass, $eventClass, Event::AFTER,
+                $method->getAction());
         }
 
-        if (class_exists($eventClassname)) {
+        if (class_exists($eventClassname) && class_implements($eventClassname, AbstractEvent::class)) {
+
+            if($eventData instanceof Response){
+                $eventData = $eventData->getResult();
+            }
 
             /** @var $event AbstractEvent */
             $event = new $eventClassname($eventData, $moment);
@@ -599,8 +613,12 @@ class Application
      * @param string $action
      * @throws \ReflectionException
      */
-    protected function extendExceptionMessageWithIdentifiers(\Throwable $ex, ?object $model, string $controller, string $action)
-    {
+    protected function extendExceptionMessageWithIdentifiers(
+        \Throwable $ex,
+        ?object $model,
+        string $controller,
+        string $action
+    ) {
         $messages = [
             sprintf('Controller = %s', $controller),
             sprintf('Action = %s', $action),
