@@ -61,7 +61,7 @@ class ResponseAfterHandleEvent extends AbstractEvent
     /**
      * @return string
      */
-    public static function getEventName(): string
+    public function getEventName(): string
     {
         return static::EVENT_NAME;
     }

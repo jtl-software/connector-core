@@ -1,9 +1,10 @@
 <?php
 namespace Jtl\Connector\Core\Event\Rpc;
 
-use Symfony\Contracts\EventDispatcher\Event;
+use Jtl\Connector\Core\Event\AbstractEvent;
 
-class RpcAfterEvent extends Event
+
+class RpcAfterEvent extends AbstractEvent
 {
     const EVENT_NAME = 'rpc.after';
 
@@ -31,5 +32,10 @@ class RpcAfterEvent extends Event
     public function getAction()
     {
         return $this->action;
+    }
+
+    public function getEventName(): string
+    {
+        return self::EVENT_NAME;
     }
 }

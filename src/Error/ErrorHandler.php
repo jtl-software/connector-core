@@ -7,6 +7,7 @@
 namespace Jtl\Connector\Core\Error;
 
 use Jtl\Connector\Core\Application\Application;
+use Jtl\Connector\Core\Event\Rpc\RpcAfterEvent;
 use Jtl\Connector\Core\Http\Response;
 use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Rpc\Error;
@@ -34,20 +35,16 @@ class ErrorHandler extends AbstractErrorHandler
     }
 
     /**
-     * @param string $response
+     * @param array $response
      * @param string $rpcMethod
      * @throws \Exception
      */
     protected function triggerRpcAfterEvent(array $response, string $rpcMethod)
     {
         $method = Method::createFromRpcMethod($rpcMethod);
-        EventHandler::dispatchRpc(
-            $response,
-            $this->application->getEventDispatcher(),
-            $method->getController(),
-            $method->getAction(),
-            EventHandler::AFTER
-        );
+
+        $event = new RpcAfterEvent($response,$method->getController(),$method->getAction());
+        $this->application->getEventDispatcher()->dispatch($event,$event->getEventName());
     }
 
     /**

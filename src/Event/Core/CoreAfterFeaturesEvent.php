@@ -1,10 +1,11 @@
 <?php
 namespace Jtl\Connector\Core\Event\Core;
 
+use Jtl\Connector\Core\Event\AbstractEvent;
 use Jtl\Connector\Core\Model\Features;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class CoreAfterFeaturesEvent extends Event
+class CoreAfterFeaturesEvent extends AbstractEvent
 {
     const EVENT_NAME = 'core.connector.features';
 
@@ -28,5 +29,13 @@ class CoreAfterFeaturesEvent extends Event
     public function getFeatures(): Features
     {
         return $this->features;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEventName(): string
+    {
+        return self::EVENT_NAME;
     }
 }
