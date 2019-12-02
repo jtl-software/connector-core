@@ -7,7 +7,7 @@
 namespace Jtl\Connector\Core\Rpc;
 
 use Jtl\Connector\Core\Exception\RpcException;
-use JMS\Serializer\Serializer as JmsSerializer;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Rpc Response Packet
