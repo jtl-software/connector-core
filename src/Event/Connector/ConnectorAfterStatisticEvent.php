@@ -1,10 +1,11 @@
 <?php
 namespace Jtl\Connector\Core\Event\Connector;
 
-use Symfony\Contracts\EventDispatcher\Event;
 use Jtl\Connector\Core\Model\Statistic;
+use Jtl\Connector\Core\Event\EventInterface;
+use Symfony\Contracts\EventDispatcher\Event;
 
-class ConnectorAfterStatisticEvent extends Event
+class ConnectorAfterStatisticEvent extends Event implements EventInterface
 {
     const EVENT_NAME = 'connector.after.statistic';
 
@@ -18,5 +19,10 @@ class ConnectorAfterStatisticEvent extends Event
     public function getStatistic()
     {
         return $this->statistic;
+    }
+
+    public function getEventName(): string
+    {
+        return self::EVENT_NAME;
     }
 }

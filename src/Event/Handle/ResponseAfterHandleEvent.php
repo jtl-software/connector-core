@@ -2,9 +2,10 @@
 namespace Jtl\Connector\Core\Event\Handle;
 
 use Jtl\Connector\Core\Application\Response;
-use Jtl\Connector\Core\Event\AbstractEvent;
+use Jtl\Connector\Core\Event\EventInterface;
+use Symfony\Contracts\EventDispatcher\Event;
 
-class ResponseAfterHandleEvent extends AbstractEvent
+class ResponseAfterHandleEvent extends Event implements EventInterface
 {
     const EVENT_NAME = 'response.after.handle';
 
@@ -61,7 +62,7 @@ class ResponseAfterHandleEvent extends AbstractEvent
     /**
      * @return string
      */
-    public static function getEventName(): string
+    public function getEventName(): string
     {
         return static::EVENT_NAME;
     }

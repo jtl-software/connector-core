@@ -13,6 +13,7 @@ use Jtl\Connector\Core\Controller\StatisticInterface;
 use Jtl\Connector\Core\Definition\ConfigOption;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\ErrorCode;
+use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Error\ErrorHandler;
 use Jtl\Connector\Core\Error\AbstractErrorHandler;
 use Jtl\Connector\Core\Connector\UseChecksumInterface;
@@ -22,8 +23,10 @@ use Jtl\Connector\Core\Connector\HandleRequestInterface;
 use Jtl\Connector\Core\Connector\ModelInterface;
 use Jtl\Connector\Core\Controller\TransactionalInterface;
 use Jtl\Connector\Core\Definition\Action;
+use Jtl\Connector\Core\Event\EventInterface;
 use Jtl\Connector\Core\Event\Handle\ResponseAfterHandleEvent;
 use Jtl\Connector\Core\Event\Handle\RequestBeforeHandleEvent;
+use Jtl\Connector\Core\Event\Rpc\RpcEvent;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\HttpException;
@@ -162,7 +165,8 @@ class Application
             // Log incoming request packet (debug only and configuration must be initialized)
             Logger::write(sprintf('Request packet: %s', $logJtlrpc), Logger::DEBUG, Logger::CHANNEL_RPC);
             if ($requestPacket->getMethod() !== RpcMethod::AUTH && !empty($requestPacket->getParams())) {
-                Logger::write(sprintf('Params: %s', Json::encode($requestPacket->getParams())), Logger::DEBUG, Logger::CHANNEL_RPC);
+                Logger::write(sprintf('Params: %s', Json::encode($requestPacket->getParams())), Logger::DEBUG,
+                    Logger::CHANNEL_RPC);
             }
 
             $this->startSession($requestPacket->getMethod());
@@ -172,13 +176,9 @@ class Application
             }
             $this->endpointConnector->initialize($this);
 
-            EventHandler::dispatchRpc(
-                Json::decode((string)$jtlrpc, true),
-                $this->eventDispatcher,
-                $method->getController(),
-                $method->getAction(),
-                EventHandler::BEFORE
-            );
+            $event = new RpcEvent(Json::decode((string)$jtlrpc, true), $method->getController(),
+                $method->getAction(), Event::BEFORE);
+            $this->eventDispatcher->dispatch($event, $event->getEventName());
 
             $responsePacket = $this->execute($requestPacket, $method);
         } catch (\Throwable $ex) {
@@ -200,7 +200,10 @@ class Application
             }
 
             $arrayResponse = $responsePacket->toArray($this->serializer);
-            $this->triggerRpcAfterEvent($arrayResponse, $method->getController(), $method->getAction());
+
+            $event = new RpcEvent($arrayResponse, $method->getController(), $method->getAction(), Event::AFTER);
+            $this->eventDispatcher->dispatch($event, $event->getEventName());
+
             HttpResponse::send($arrayResponse);
         }
     }
@@ -240,7 +243,8 @@ class Application
     protected function execute(RequestPacket $requestPacket, Method $method): ResponsePacket
     {
         if ($method->isCore()) {
-            $connector = new CoreConnector($this->endpointConnector->getPrimaryKeyMapper(), $this->endpointConnector->getTokenValidator());
+            $connector = new CoreConnector($this->endpointConnector->getPrimaryKeyMapper(),
+                $this->endpointConnector->getTokenValidator());
         } else {
             $connector = $this->getEndpointConnector();
         }
@@ -257,13 +261,17 @@ class Application
             }
         }
 
-        $this->eventDispatcher->dispatch(new RequestBeforeHandleEvent($request), RequestBeforeHandleEvent::getEventName());
+        $event = new RequestBeforeHandleEvent($request);
+        $this->eventDispatcher->dispatch($event, $event->getEventName());
+
         if ($connector instanceof HandleRequestInterface) {
             $response = $connector->handle($this, $request);
         } else {
             $response = $this->handleRequest($request, $connector);
         }
-        $this->eventDispatcher->dispatch(new ResponseAfterHandleEvent($request->getController(), $request->getAction(), $response), ResponseAfterHandleEvent::getEventName());
+
+        $event = new ResponseAfterHandleEvent($request->getController(), $request->getAction(), $response);
+        $this->eventDispatcher->dispatch($event, $event->getEventName());
 
         if ($method->isCore() === false) {
             // Identity mapping
@@ -273,28 +281,14 @@ class Application
                     $this->linker->linkModel($model, ($method->getAction() === Action::DELETE));
                     $this->linkChecksum($model);
 
-                    // Event
-                    EventHandler::dispatch(
-                        $model,
-                        $this->eventDispatcher,
-                        $method->getAction(),
-                        EventHandler::AFTER,
-                        ($method->getController() === Controller::CONNECTOR) ? Controller::CONNECTOR : null
-                    );
+                    $this->triggerEvent($model, $method, Event::AFTER);
                 }
             }
         }
 
         $responsePacket = $this->buildRpcResponse($requestPacket, $response);
 
-        EventHandler::dispatch(
-            $response->getResult(),
-            $this->eventDispatcher,
-            $method->getAction(),
-            EventHandler::AFTER,
-            ($method->getController() === Controller::CONNECTOR) ? Controller::CONNECTOR : null,
-            $method->isCore()
-        );
+        $this->triggerEvent($response->getResult(), $method, Event::AFTER);
 
         return $responsePacket;
     }
@@ -308,8 +302,11 @@ class Application
      * @throws LinkerException
      * @throws \ReflectionException
      */
-    protected function createHandleRequest(RequestPacket $requestPacket, Method $method, string $modelNamespace): Request
-    {
+    protected function createHandleRequest(
+        RequestPacket $requestPacket,
+        Method $method,
+        string $modelNamespace
+    ): Request {
         $controller = $method->getController();
         $action = $method->getAction();
 
@@ -348,13 +345,7 @@ class Application
                 $this->linkChecksum($param);
             }
 
-            // Event
-            EventHandler::dispatch(
-                $param,
-                $this->eventDispatcher,
-                $action,
-                EventHandler::BEFORE
-            );
+            $this->triggerEvent($param, $method, Event::BEFORE);
         }
 
         return Request::create($controller, $action, $params);
@@ -445,7 +436,7 @@ class Application
         $responsePacket->setId($requestPacket->getId())
             ->setResult($response->getResult());
 
-        if(!$responsePacket->isValid()) {
+        if (!$responsePacket->isValid()) {
             throw new RpcException("Parse error", ErrorCode::PARSE_ERROR);
         }
 
@@ -464,7 +455,8 @@ class Application
         $this->config = new FileConfig($configFile);
         $logLevel = $this->config->get(ConfigOption::LOG_LEVEL, Logger::INFO);
         RuntimeConfig::getInstance()->set(ConfigOption::LOG_LEVEL, $logLevel);
-        $mainLanguage = $this->config->get(ConfigOption::MAIN_LANGUAGE, ConfigOption::getDefaultValue(ConfigOption::MAIN_LANGUAGE));
+        $mainLanguage = $this->config->get(ConfigOption::MAIN_LANGUAGE,
+            ConfigOption::getDefaultValue(ConfigOption::MAIN_LANGUAGE));
         RuntimeConfig::getInstance()->set(ConfigOption::MAIN_LANGUAGE, $mainLanguage);
     }
 
@@ -541,7 +533,8 @@ class Application
             if (!empty($image->getRemoteUrl())) {
                 $imageData = file_get_contents($image->getRemoteUrl());
                 if ($imageData === false) {
-                    throw new ApplicationException(sprintf('Could not get any data from url: %s', $image->getRemoteUrl()));
+                    throw new ApplicationException(sprintf('Could not get any data from url: %s',
+                        $image->getRemoteUrl()));
                 }
 
                 $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
@@ -565,19 +558,38 @@ class Application
     }
 
     /**
-     * @param string $arrayResponse
-     * @param string $controller
-     * @param string $action
+     * @param $eventData
+     * @param Method $method
+     * @param string $moment
      */
-    protected function triggerRpcAfterEvent(array $arrayResponse, string $controller, string $action): void
+    protected function triggerEvent($eventData, Method $method, string $moment): void
     {
-        EventHandler::dispatchRpc(
-            $arrayResponse,
-            $this->eventDispatcher,
-            $controller,
-            $action,
-            EventHandler::AFTER
-        );
+        $eventClass = null;
+
+        if ($eventData instanceof AbstractDataModel || $eventData instanceof QueryFilter) {
+            $eventClass = "Model";
+        } elseif ($method->getController() === Controller::CONNECTOR) {
+            $eventClass = Controller::CONNECTOR;
+        } elseif ($method->isCore()) {
+            $eventClass = "Core";
+        }
+
+        if ($method->isCore() && (($eventData instanceof AbstractDataModel) && ($eventData instanceof QueryFilter))) {
+
+            $eventClassname = sprintf('Jtl\Connector\Core\Event\%s\%s%s%sEvent', $eventClass, $eventClass,
+                ucfirst($moment),
+                ucfirst($method->getAction()));
+
+            if (class_exists($eventClassname) && in_array(EventInterface::class, class_implements($eventClassname))) {
+
+                if ($eventData instanceof Response) {
+                    $eventData = $eventData->getResult();
+                }
+
+                $event = new $eventClassname($eventData);
+                $this->eventDispatcher->dispatch($event, $event->getEventName());
+            }
+        }
     }
 
     /**
@@ -597,8 +609,12 @@ class Application
      * @param string $action
      * @throws \ReflectionException
      */
-    protected function extendExceptionMessageWithIdentifiers(\Throwable $ex, ?object $model, string $controller, string $action)
-    {
+    protected function extendExceptionMessageWithIdentifiers(
+        \Throwable $ex,
+        ?object $model,
+        string $controller,
+        string $action
+    ) {
         $messages = [
             sprintf('Controller = %s', $controller),
             sprintf('Action = %s', $action),
