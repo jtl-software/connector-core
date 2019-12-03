@@ -1,8 +1,6 @@
 <?php
-
 namespace Jtl\Connector\Core\Event\Model;
 
-use Jtl\Connector\Core\Model\QueryFilter;
 use Jtl\Connector\Core\Event\EventInterface;
 use Jtl\Connector\Core\Model\Statistic;
 use Symfony\Contracts\EventDispatcher\Event;

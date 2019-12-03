@@ -23,12 +23,10 @@ use Jtl\Connector\Core\Connector\HandleRequestInterface;
 use Jtl\Connector\Core\Connector\ModelInterface;
 use Jtl\Connector\Core\Controller\TransactionalInterface;
 use Jtl\Connector\Core\Definition\Action;
-use Jtl\Connector\Core\Event\AbstractEvent;
 use Jtl\Connector\Core\Event\EventInterface;
 use Jtl\Connector\Core\Event\Handle\ResponseAfterHandleEvent;
 use Jtl\Connector\Core\Event\Handle\RequestBeforeHandleEvent;
-use Jtl\Connector\Core\Event\Rpc\RpcAfterEvent;
-use Jtl\Connector\Core\Event\Rpc\RpcBeforeEvent;
+use Jtl\Connector\Core\Event\Rpc\RpcEvent;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\HttpException;
@@ -178,8 +176,8 @@ class Application
             }
             $this->endpointConnector->initialize($this);
 
-            $event = new RpcBeforeEvent(Json::decode((string)$jtlrpc, true), $method->getController(),
-                $method->getAction());
+            $event = new RpcEvent(Json::decode((string)$jtlrpc, true), $method->getController(),
+                $method->getAction(), Event::BEFORE);
             $this->eventDispatcher->dispatch($event, $event->getEventName());
 
             $responsePacket = $this->execute($requestPacket, $method);
@@ -203,7 +201,7 @@ class Application
 
             $arrayResponse = $responsePacket->toArray($this->serializer);
 
-            $event = new RpcAfterEvent($arrayResponse, $method->getController(), $method->getAction());
+            $event = new RpcEvent($arrayResponse, $method->getController(), $method->getAction(), Event::AFTER);
             $this->eventDispatcher->dispatch($event, $event->getEventName());
 
             HttpResponse::send($arrayResponse);
@@ -576,10 +574,7 @@ class Application
             $eventClass = "Core";
         }
 
-        if ($method->isCore() &&
-            (($eventData instanceof AbstractDataModel) && ($eventData instanceof QueryFilter)) ||
-            strlen(trim($method->getAction())) != 0 || strlen(trim($moment)) != 0) {
-
+        if ($method->isCore() && (($eventData instanceof AbstractDataModel) && ($eventData instanceof QueryFilter))) {
 
             $eventClassname = sprintf('Jtl\Connector\Core\Event\%s\%s%s%sEvent', $eventClass, $eventClass,
                 ucfirst($moment),
