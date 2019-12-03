@@ -4,14 +4,40 @@ namespace Jtl\Connector\Core\Event\Rpc;
 use Jtl\Connector\Core\Event\EventInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
+/**
+ * Class RpcEvent
+ * @package Jtl\Connector\Core\Event\Rpc
+ */
 class RpcEvent extends Event implements EventInterface
 {
+    /**
+     * @var array
+     */
     protected $data;
+
+    /**
+     * @var string
+     */
     protected $controller;
+
+    /**
+     * @var string
+     */
     protected $action;
+
+    /**
+     * @var string
+     */
     protected $moment;
 
-    public function __construct(&$data, $controller, $action, $moment)
+    /**
+     * RpcEvent constructor.
+     * @param array $data
+     * @param string $controller
+     * @param string $action
+     * @param string $moment
+     */
+    public function __construct(array &$data, string $controller, string $action, string $moment)
     {
         $this->data = $data;
         $this->controller = $controller;
@@ -19,26 +45,41 @@ class RpcEvent extends Event implements EventInterface
         $this->moment = $moment;
     }
 
-    public function getData()
+    /**
+     * @return array
+     */
+    public function getData(): array
     {
         return $this->data;
     }
 
-    public function getController()
+    /**
+     * @return string
+     */
+    public function getController(): string
     {
         return $this->controller;
     }
 
-    public function getAction()
+    /**
+     * @return string
+     */
+    public function getAction(): string
     {
         return $this->action;
     }
 
-    public function getMoment()
+    /**
+     * @return string
+     */
+    public function getMoment(): string
     {
         return $this->moment;
     }
 
+    /**
+     * @return string
+     */
     public function getEventName(): string
     {
         return sprintf('rpc.%s', $this->getMoment());
