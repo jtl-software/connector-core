@@ -147,7 +147,7 @@ class Application
         $this->errorHandler->register();
 
         try {
-            $jtlrpc = HttpRequest::handle();
+            $jtlrpc = HttpRequest::getJtlrpc();
             $requestPacket = RequestPacket::createFromJtlrpc($jtlrpc, $this->serializer);
             $method = Method::createFromRequestPacket($requestPacket);
 
@@ -306,7 +306,8 @@ class Application
         RequestPacket $requestPacket,
         Method $method,
         string $modelNamespace
-    ): Request {
+    ): Request
+    {
         $controller = $method->getController();
         $action = $method->getAction();
 
@@ -614,7 +615,8 @@ class Application
         ?object $model,
         string $controller,
         string $action
-    ) {
+    )
+    {
         $messages = [
             sprintf('Controller = %s', $controller),
             sprintf('Action = %s', $action),

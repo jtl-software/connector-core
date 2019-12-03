@@ -175,7 +175,7 @@ class Request
      *
      * @return string|null
      */
-    public static function handle(): ?string
+    public static function getJtlrpc(): ?string
     {
         $result = [];
         parse_str(file_get_contents('php://input'), $result);

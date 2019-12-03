@@ -3,18 +3,17 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Application
  */
-
 namespace Jtl\Connector\Core\Error;
 
 use Jtl\Connector\Core\Application\Application;
-use Jtl\Connector\Core\Event\Rpc\RpcAfterEvent;
+use Jtl\Connector\Core\Definition\Event;
+use Jtl\Connector\Core\Event\Rpc\RpcEvent;
 use Jtl\Connector\Core\Http\Response;
 use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Event\EventHandler;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Jtl\Connector\Core\Formatter\ExceptionFormatter;
 use Jtl\Connector\Core\Rpc\Method;
 
@@ -43,7 +42,7 @@ class ErrorHandler extends AbstractErrorHandler
     {
         $method = Method::createFromRpcMethod($rpcMethod);
 
-        $event = new RpcAfterEvent($response,$method->getController(),$method->getAction());
+        $event = new RpcEvent($response,$method->getController(),$method->getAction(), Event::AFTER);
         $this->application->getEventDispatcher()->dispatch($event,$event->getEventName());
     }
 
