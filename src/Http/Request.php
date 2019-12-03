@@ -39,7 +39,7 @@ class Request
                 throw new HttpException("Unknown method ({$method})");
         }
     }
-    
+
     /**
      * Returns Http Request method
      *
@@ -49,7 +49,7 @@ class Request
     {
         return strtoupper($_SERVER['REQUEST_METHOD']);
     }
-    
+
     /**
      * Http Request Check
      *
@@ -69,10 +69,10 @@ class Request
             case "files":
                 return isset($_FILES[$root]);
         }
-        
+
         return false;
     }
-    
+
     /**
      * Tells whether the file was uploaded via HTTP POST
      *
@@ -83,7 +83,7 @@ class Request
     {
         return isset($_FILES[$name]) && is_uploaded_file($_FILES[$name]["tmp_name"]);
     }
-    
+
     /**
      * Moves an uploaded file to a new location
      *
@@ -96,7 +96,7 @@ class Request
     {
         return move_uploaded_file($_FILES[$name]["tmp_name"], $path . $filename);
     }
-    
+
     /**
      * File Upload Handler
      *
@@ -108,7 +108,7 @@ class Request
     {
         if (Request::isFileupload($name)) {
             $pathinfo = pathinfo($_FILES[$name]["name"]);
-            
+
             if (isset($pathinfo["extension"])) {
                 $extension = $pathinfo["extension"];
                 $filename = uniqid() . ".{$extension}";
@@ -123,7 +123,7 @@ class Request
                 throw new HttpException("Could not determine the file extension");
             }
         }
-        
+
         return null;
     }
 
@@ -138,7 +138,7 @@ class Request
         if ($filename !== null) {
             return @unlink($filename);
         }
-    
+
         return false;
     }
 
@@ -179,7 +179,7 @@ class Request
     {
         $result = [];
         parse_str(file_get_contents('php://input'), $result);
-        $jtlrpc = !empty($result['jtlrpc']) ? $result['jtlrpc'] : null;
+        $jtlrpc = !empty($result['jtlrpc']) ? $result['jtlrpc'] : self::get('post', 'jtlrpc');
 
         return $jtlrpc;
     }
@@ -194,11 +194,11 @@ class Request
     {
         $method = 'request';
         $root = 'jtlauth';
-        
+
         if (self::exists($method, $root)) {
             return self::get($method, $root);
         }
-        
+
         return null;
     }
 }
