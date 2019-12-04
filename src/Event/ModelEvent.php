@@ -6,7 +6,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class ModelAfterActionEvent
- * @package Jtl\Connector\Core\Event\Model
+ * @package Jtl\Connector\Core\Event
  */
 class ModelEvent extends Event
 {

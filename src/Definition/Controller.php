@@ -19,6 +19,8 @@ final class Controller
     const SPECIFIC = 'Specific';
     const STATUS_CHANGE = 'StatusChange';
 
+    const LINKER = 'Linker';
+
     /**
      * @var string[]|null
      */

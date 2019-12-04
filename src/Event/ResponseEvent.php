@@ -7,47 +7,17 @@ use Symfony\Contracts\EventDispatcher\Event;
 class ResponseEvent extends Event
 {
     /**
-     * @var string
-     */
-    protected $controller;
-
-    /**
-     * @var string
-     */
-    protected $action;
-
-    /**
      * @var Response
      */
     protected $response = [];
 
     /**
-     * ResponseAfterHandleEvent constructor.
-     * @param string $controller
-     * @param string $action
+     * ResponseEvent constructor.
      * @param Response $response
      */
-    public function __construct(string $controller, string $action, Response $response)
+    public function __construct(Response $response)
     {
         $this->response = $response;
-        $this->controller = $controller;
-        $this->action = $action;
-    }
-
-    /**
-     * @return string
-     */
-    public function getController(): string
-    {
-        return $this->controller;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAction(): string
-    {
-        return $this->action;
     }
 
     /**

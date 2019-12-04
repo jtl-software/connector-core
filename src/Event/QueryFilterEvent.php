@@ -6,7 +6,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class ModelBeforeQueryFilterEvent
- * @package Jtl\Connector\Core\Event\Model
+ * @package Jtl\Connector\Core\Event
  */
 class QueryFilterEvent extends Event
 {

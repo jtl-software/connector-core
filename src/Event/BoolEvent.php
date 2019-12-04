@@ -1,7 +1,6 @@
 <?php
-namespace Jtl\Connector\Core\Event\Connector;
+namespace Jtl\Connector\Core\Event;
 
-use Jtl\Connector\Core\Event\EventInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class BoolEvent extends Event
@@ -10,14 +9,31 @@ class BoolEvent extends Event
      * @var bool
      */
     protected $result;
-    
+
+    /**
+     * BoolEvent constructor.
+     * @param boolean $result
+     */
     public function __construct(bool &$result)
     {
         $this->result = &$result;
     }
-    
-    public function getResult()
+
+    /**
+     * @return boolean
+     */
+    public function getResult(): bool
     {
         return $this->result;
+    }
+
+    /**
+     * @param boolean $result
+     * @return BoolEvent
+     */
+    public function setResult(bool $result): BoolEvent
+    {
+        $this->result = $result;
+        return $this;
     }
 }

@@ -40,8 +40,7 @@ class ErrorHandler extends AbstractErrorHandler
     protected function triggerRpcAfterEvent(array $response, string $rpcMethod)
     {
         $method = Method::createFromRpcMethod($rpcMethod);
-
-        $event = new RpcEvent($response, $method->getController(), $method->getAction(), Event::AFTER);
+        $event = new RpcEvent($response, $method->getController(), $method->getAction());
         $this->application->getEventDispatcher()->dispatch($event, Event::createRpcEventName(Event::AFTER));
     }
 
