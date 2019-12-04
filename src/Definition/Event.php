@@ -10,8 +10,8 @@ final class Event
     const BEFORE = 'before';
     const AFTER = 'after';
 
-    const REQUEST_BEFORE_HANDLE_EVENT_NAME = 'request.before.handle';
-    const REQUEST_AFTER_HANDLE_EVENT_NAME = 'response.after.handle';
+    const REQUEST_BEFORE_HANDLE = 'request.before.handle';
+    const RESPONSE_AFTER_HANDLE = 'response.after.handle';
 
     /**
      * @param string $controllerName

@@ -23,8 +23,8 @@ use Jtl\Connector\Core\Connector\HandleRequestInterface;
 use Jtl\Connector\Core\Connector\ModelInterface;
 use Jtl\Connector\Core\Controller\TransactionalInterface;
 use Jtl\Connector\Core\Definition\Action;
-use Jtl\Connector\Core\Event\ResponseAfterHandleEvent;
-use Jtl\Connector\Core\Event\RequestBeforeHandleEvent;
+use Jtl\Connector\Core\Event\ResponseEvent;
+use Jtl\Connector\Core\Event\RequestEvent;
 use Jtl\Connector\Core\Event\ModelEvent;
 use Jtl\Connector\Core\Event\QueryFilterEvent;
 use Jtl\Connector\Core\Event\RpcEvent;
@@ -261,8 +261,8 @@ class Application
             }
         }
 
-        $event = new RequestBeforeHandleEvent($request);
-        $this->eventDispatcher->dispatch($event, Event::REQUEST_BEFORE_HANDLE_EVENT_NAME);
+        $event = new RequestEvent($request);
+        $this->eventDispatcher->dispatch($event, Event::REQUEST_BEFORE_HANDLE);
 
         if ($connector instanceof HandleRequestInterface) {
             $response = $connector->handle($this, $request);
@@ -270,8 +270,8 @@ class Application
             $response = $this->handleRequest($request, $connector);
         }
 
-        $event = new ResponseAfterHandleEvent($request->getController(), $request->getAction(), $response);
-        $this->eventDispatcher->dispatch($event, Event::REQUEST_AFTER_HANDLE_EVENT_NAME);
+        $event = new ResponseEvent($request->getController(), $request->getAction(), $response);
+        $this->eventDispatcher->dispatch($event, Event::RESPONSE_AFTER_HANDLE);
 
         if ($method->isCore() === false) {
             // Identity mapping

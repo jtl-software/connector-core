@@ -4,7 +4,7 @@ namespace Jtl\Connector\Core\Event;
 use Jtl\Connector\Core\Application\Response;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class ResponseAfterHandleEvent extends Event
+class ResponseEvent extends Event
 {
     /**
      * @var string

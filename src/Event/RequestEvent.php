@@ -4,7 +4,7 @@ namespace Jtl\Connector\Core\Event;
 use Jtl\Connector\Core\Application\Request;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class RequestBeforeHandleEvent extends Event
+class RequestEvent extends Event
 {
     /**
      * @var Request
