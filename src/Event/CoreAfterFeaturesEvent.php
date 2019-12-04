@@ -1,7 +1,6 @@
 <?php
 namespace Jtl\Connector\Core\Event\Core;
 
-use Jtl\Connector\Core\Event\EventInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 use Jtl\Connector\Core\Model\Features;
 

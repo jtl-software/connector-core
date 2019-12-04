@@ -1,15 +1,14 @@
 <?php
-namespace Jtl\Connector\Core\Event\Model;
+namespace Jtl\Connector\Core\Event;
 
-use Jtl\Connector\Core\Event\EventInterface;
-use Symfony\Contracts\EventDispatcher\Event;
 use Jtl\Connector\Core\Model\AbstractDataModel;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * Class DeleteEvent
- * @package Jtl\Connector\Core\Event
+ * Class ModelAfterActionEvent
+ * @package Jtl\Connector\Core\Event\Model
  */
-class ModelBeforeDeleteEvent extends Event
+class ModelEvent extends Event
 {
     /**
      * @var AbstractDataModel
@@ -17,7 +16,7 @@ class ModelBeforeDeleteEvent extends Event
     protected $model;
 
     /**
-     * ModelBeforeDeleteEvent constructor.
+     * ModelAfterActionEvent constructor.
      * @param AbstractDataModel $model
      */
     public function __construct(AbstractDataModel $model)
@@ -32,4 +31,6 @@ class ModelBeforeDeleteEvent extends Event
     {
         return $this->model;
     }
+
+
 }

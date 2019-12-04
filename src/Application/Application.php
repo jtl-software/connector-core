@@ -23,14 +23,11 @@ use Jtl\Connector\Core\Connector\HandleRequestInterface;
 use Jtl\Connector\Core\Connector\ModelInterface;
 use Jtl\Connector\Core\Controller\TransactionalInterface;
 use Jtl\Connector\Core\Definition\Action;
-use Jtl\Connector\Core\Event\EventInterface;
-use Jtl\Connector\Core\Event\Handle\ResponseAfterHandleEvent;
-use Jtl\Connector\Core\Event\Handle\RequestBeforeHandleEvent;
-use Jtl\Connector\Core\Event\Model\ModelAfterActionEvent;
-use Jtl\Connector\Core\Event\Model\ModelBeforeDeleteEvent;
-use Jtl\Connector\Core\Event\Model\ModelBeforePushEvent;
-use Jtl\Connector\Core\Event\Model\ModelBeforeQueryFilterEvent;
-use Jtl\Connector\Core\Event\Rpc\RpcEvent;
+use Jtl\Connector\Core\Event\ResponseAfterHandleEvent;
+use Jtl\Connector\Core\Event\RequestBeforeHandleEvent;
+use Jtl\Connector\Core\Event\ModelEvent;
+use Jtl\Connector\Core\Event\QueryFilterEvent;
+use Jtl\Connector\Core\Event\RpcEvent;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\HttpException;
@@ -66,7 +63,6 @@ use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Session\SqliteSession;
 use Jtl\Connector\Core\IO\Path;
-use Jtl\Connector\Core\Event\EventHandler;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Finder\Finder;
 
@@ -266,7 +262,7 @@ class Application
         }
 
         $event = new RequestBeforeHandleEvent($request);
-        $this->eventDispatcher->dispatch($event, $event::EVENT_NAME);
+        $this->eventDispatcher->dispatch($event, Event::REQUEST_BEFORE_HANDLE_EVENT_NAME);
 
         if ($connector instanceof HandleRequestInterface) {
             $response = $connector->handle($this, $request);
@@ -275,7 +271,7 @@ class Application
         }
 
         $event = new ResponseAfterHandleEvent($request->getController(), $request->getAction(), $response);
-        $this->eventDispatcher->dispatch($event, $event::EVENT_NAME);
+        $this->eventDispatcher->dispatch($event, Event::REQUEST_AFTER_HANDLE_EVENT_NAME);
 
         if ($method->isCore() === false) {
             // Identity mapping
@@ -285,7 +281,7 @@ class Application
                     $this->linker->linkModel($model, ($method->getAction() === Action::DELETE));
                     $this->linkChecksum($model);
 
-                    $event = new ModelAfterActionEvent($model);
+                    $event = new ModelEvent($model);
                     $this->eventDispatcher->dispatch($event,
                         Event::createEventName($method->getController(), $method->getAction(), Event::AFTER));
                 }
@@ -345,25 +341,25 @@ class Application
 
         // Identity mapping
         foreach ($params as $param) {
-            if (in_array($action, [Action::PUSH, Action::DELETE], true)) {
-                $this->linker->linkModel($param);
-                // Checksum linking
-                $this->linkChecksum($param);
-            }
 
             $event = null;
+
             switch ($action) {
                 case Action::PUSH:
-                    $event = new ModelBeforePushEvent($param);
-                    break;
                 case Action::DELETE:
-                    $event = new ModelBeforeDeleteEvent($param);
+
+                    $this->linker->linkModel($param);
+
+                    $this->linkChecksum($param);
+
+                    $event = new ModelEvent($param);
                     break;
                 case Action::PULL:
                 case Action::STATISTIC:
-                    $event = new ModelBeforeQueryFilterEvent($param);
+                    $event = new QueryFilterEvent($param);
                     break;
             }
+
             if (!is_null($event)) {
                 $this->eventDispatcher->dispatch($event, Event::createEventName($controller, $action, Event::BEFORE));
             }
@@ -593,7 +589,7 @@ class Application
             $eventName = Event::createCoreEventName($method->getController(), $method->getAction(), $moment);
         }
 
-        $eventClassname = sprintf('Jtl\Connector\Core\Event\%s\%s%s%sEvent', $eventClass, $eventClass,
+        $eventClassname = sprintf('Jtl\Connector\Core\Event\%s%s%sEvent', $eventClass,
             ucfirst($moment),
             ucfirst($method->getAction()));
 
@@ -604,7 +600,7 @@ class Application
             }
 
             $event = new $eventClassname($eventData);
-            $this->eventDispatcher->dispatch($event,$eventName);
+            $this->eventDispatcher->dispatch($event, $eventName);
         }
     }
 

@@ -1,14 +1,11 @@
 <?php
-namespace Jtl\Connector\Core\Event\Handle;
+namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Application\Response;
-use Jtl\Connector\Core\Event\EventInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class ResponseAfterHandleEvent extends Event
 {
-    const EVENT_NAME = 'response.after.handle';
-
     /**
      * @var string
      */
@@ -33,6 +30,8 @@ class ResponseAfterHandleEvent extends Event
     public function __construct(string $controller, string $action, Response $response)
     {
         $this->response = $response;
+        $this->controller = $controller;
+        $this->action = $action;
     }
 
     /**

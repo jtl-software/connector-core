@@ -1,7 +1,6 @@
 <?php
-namespace Jtl\Connector\Core\Event\Rpc;
+namespace Jtl\Connector\Core\Event;
 
-use Jtl\Connector\Core\Event\EventInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
