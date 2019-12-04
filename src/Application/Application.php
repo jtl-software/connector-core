@@ -26,6 +26,10 @@ use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Event\EventInterface;
 use Jtl\Connector\Core\Event\Handle\ResponseAfterHandleEvent;
 use Jtl\Connector\Core\Event\Handle\RequestBeforeHandleEvent;
+use Jtl\Connector\Core\Event\Model\ModelAfterActionEvent;
+use Jtl\Connector\Core\Event\Model\ModelBeforeDeleteEvent;
+use Jtl\Connector\Core\Event\Model\ModelBeforePushEvent;
+use Jtl\Connector\Core\Event\Model\ModelBeforeQueryFilterEvent;
 use Jtl\Connector\Core\Event\Rpc\RpcEvent;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\DefinitionException;
@@ -176,9 +180,9 @@ class Application
             }
             $this->endpointConnector->initialize($this);
 
-            $event = new RpcEvent(Json::decode((string)$jtlrpc, true), $method->getController(),
-                $method->getAction(), Event::BEFORE);
-            $this->eventDispatcher->dispatch($event, $event->getEventName());
+            $event = new RpcEvent(Json::decode((string)$jtlrpc, true), $method->getController(), $method->getAction(),
+                Event::BEFORE);
+            $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::BEFORE));
 
             $responsePacket = $this->execute($requestPacket, $method);
         } catch (\Throwable $ex) {
@@ -202,7 +206,7 @@ class Application
             $arrayResponse = $responsePacket->toArray($this->serializer);
 
             $event = new RpcEvent($arrayResponse, $method->getController(), $method->getAction(), Event::AFTER);
-            $this->eventDispatcher->dispatch($event, $event->getEventName());
+            $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::AFTER));
 
             HttpResponse::send($arrayResponse);
         }
@@ -262,7 +266,7 @@ class Application
         }
 
         $event = new RequestBeforeHandleEvent($request);
-        $this->eventDispatcher->dispatch($event, $event->getEventName());
+        $this->eventDispatcher->dispatch($event, $event::EVENT_NAME);
 
         if ($connector instanceof HandleRequestInterface) {
             $response = $connector->handle($this, $request);
@@ -271,7 +275,7 @@ class Application
         }
 
         $event = new ResponseAfterHandleEvent($request->getController(), $request->getAction(), $response);
-        $this->eventDispatcher->dispatch($event, $event->getEventName());
+        $this->eventDispatcher->dispatch($event, $event::EVENT_NAME);
 
         if ($method->isCore() === false) {
             // Identity mapping
@@ -281,7 +285,9 @@ class Application
                     $this->linker->linkModel($model, ($method->getAction() === Action::DELETE));
                     $this->linkChecksum($model);
 
-                    $this->triggerEvent($model, $method, Event::AFTER);
+                    $event = new ModelAfterActionEvent($model);
+                    $this->eventDispatcher->dispatch($event,
+                        Event::createEventName($method->getController(), $method->getAction(), Event::AFTER));
                 }
             }
         }
@@ -345,7 +351,22 @@ class Application
                 $this->linkChecksum($param);
             }
 
-            $this->triggerEvent($param, $method, Event::BEFORE);
+            $event = null;
+            switch ($action) {
+                case Action::PUSH:
+                    $event = new ModelBeforePushEvent($param);
+                    break;
+                case Action::DELETE:
+                    $event = new ModelBeforeDeleteEvent($param);
+                    break;
+                case Action::PULL:
+                case Action::STATISTIC:
+                    $event = new ModelBeforeQueryFilterEvent($param);
+                    break;
+            }
+            if (!is_null($event)) {
+                $this->eventDispatcher->dispatch($event, Event::createEventName($controller, $action, Event::BEFORE));
+            }
         }
 
         return Request::create($controller, $action, $params);
@@ -564,31 +585,26 @@ class Application
      */
     protected function triggerEvent($eventData, Method $method, string $moment): void
     {
-        $eventClass = null;
+        $eventClass = $method->getController();
+        $eventName = Event::createEventName($method->getController(), $method->getAction(), $moment);
 
-        if ($eventData instanceof AbstractDataModel || $eventData instanceof QueryFilter) {
-            $eventClass = "Model";
-        } elseif ($method->getController() === Controller::CONNECTOR) {
-            $eventClass = Controller::CONNECTOR;
-        } elseif ($method->isCore()) {
+        if ($method->isCore()) {
             $eventClass = "Core";
+            $eventName = Event::createCoreEventName($method->getController(), $method->getAction(), $moment);
         }
 
-        if ($method->isCore() && (($eventData instanceof AbstractDataModel) && ($eventData instanceof QueryFilter))) {
+        $eventClassname = sprintf('Jtl\Connector\Core\Event\%s\%s%s%sEvent', $eventClass, $eventClass,
+            ucfirst($moment),
+            ucfirst($method->getAction()));
 
-            $eventClassname = sprintf('Jtl\Connector\Core\Event\%s\%s%s%sEvent', $eventClass, $eventClass,
-                ucfirst($moment),
-                ucfirst($method->getAction()));
+        if (class_exists($eventClassname)) {
 
-            if (class_exists($eventClassname) && in_array(EventInterface::class, class_implements($eventClassname))) {
-
-                if ($eventData instanceof Response) {
-                    $eventData = $eventData->getResult();
-                }
-
-                $event = new $eventClassname($eventData);
-                $this->eventDispatcher->dispatch($event, $event->getEventName());
+            if ($eventData instanceof Response) {
+                $eventData = $eventData->getResult();
             }
+
+            $event = new $eventClassname($eventData);
+            $this->eventDispatcher->dispatch($event,$eventName);
         }
     }
 

@@ -2,14 +2,13 @@
 namespace Jtl\Connector\Core\Event\Model;
 
 use Jtl\Connector\Core\Model\AbstractDataModel;
-use Jtl\Connector\Core\Event\EventInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * Class AfterPushEvent
- * @package Jtl\Connector\Core\Event
+ * Class ModelAfterActionEvent
+ * @package Jtl\Connector\Core\Event\Model
  */
-class ModelAfterPushEvent extends Event implements EventInterface
+class ModelAfterActionEvent extends Event
 {
     /**
      * @var AbstractDataModel
@@ -17,7 +16,7 @@ class ModelAfterPushEvent extends Event implements EventInterface
     protected $model;
 
     /**
-     * ModelAfterPushEvent constructor.
+     * ModelAfterActionEvent constructor.
      * @param AbstractDataModel $model
      */
     public function __construct(AbstractDataModel $model)
@@ -33,15 +32,5 @@ class ModelAfterPushEvent extends Event implements EventInterface
         return $this->model;
     }
 
-    /**
-     * @return string
-     * @throws \ReflectionException
-     */
-    public function getEventName(): string
-    {
-        $modelName = (new \ReflectionClass($this->getModel()))->getShortName();
-
-        return sprintf("%s.after.push", strtolower($modelName));
-    }
 
 }

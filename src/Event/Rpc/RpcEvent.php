@@ -8,7 +8,7 @@ use Symfony\Contracts\EventDispatcher\Event;
  * Class RpcEvent
  * @package Jtl\Connector\Core\Event\Rpc
  */
-class RpcEvent extends Event implements EventInterface
+class RpcEvent extends Event
 {
     /**
      * @var array
@@ -75,13 +75,5 @@ class RpcEvent extends Event implements EventInterface
     public function getMoment(): string
     {
         return $this->moment;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEventName(): string
-    {
-        return sprintf('rpc.%s', $this->getMoment());
     }
 }

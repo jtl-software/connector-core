@@ -5,10 +5,8 @@ use Jtl\Connector\Core\Event\EventInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 use Jtl\Connector\Core\Model\Features;
 
-class CoreAfterFeaturesEvent extends Event implements EventInterface
+class CoreAfterFeaturesEvent extends Event
 {
-    const EVENT_NAME = 'core.connector.features';
-
     /**
      * @var Features
      */
@@ -29,13 +27,5 @@ class CoreAfterFeaturesEvent extends Event implements EventInterface
     public function getFeatures(): Features
     {
         return $this->features;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEventName(): string
-    {
-        return self::EVENT_NAME;
     }
 }

@@ -5,7 +5,7 @@ use Jtl\Connector\Core\Application\Request;
 use Jtl\Connector\Core\Event\EventInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class RequestBeforeHandleEvent extends Event implements EventInterface
+class RequestBeforeHandleEvent extends Event
 {
     const EVENT_NAME = 'request.before.handle';
 
@@ -29,13 +29,5 @@ class RequestBeforeHandleEvent extends Event implements EventInterface
     public function getRequest(): Request
     {
         return $this->request;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEventName(): string
-    {
-        return static::EVENT_NAME;
     }
 }

@@ -9,7 +9,7 @@ use Jtl\Connector\Core\Model\AbstractDataModel;
  * Class DeleteEvent
  * @package Jtl\Connector\Core\Event
  */
-class ModelBeforeDeleteEvent extends Event implements EventInterface
+class ModelBeforeDeleteEvent extends Event
 {
     /**
      * @var AbstractDataModel
@@ -32,16 +32,4 @@ class ModelBeforeDeleteEvent extends Event implements EventInterface
     {
         return $this->model;
     }
-
-    /**
-     * @return string
-     * @throws \ReflectionException
-     */
-    public function getEventName(): string
-    {
-        $modelName = (new \ReflectionClass($this->getModel()))->getShortName();
-
-        return sprintf("%s.before.delete", strtolower($modelName));
-    }
-
 }

@@ -16,7 +16,7 @@ class RequestBeforeHandleSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            RequestBeforeHandleEvent::getEventName() => [
+            RequestBeforeHandleEvent::EVENT_NAME => [
                 ['handleProductPriceRequest', 0]
             ]
         ];

@@ -5,7 +5,7 @@ use Jtl\Connector\Core\Application\Response;
 use Jtl\Connector\Core\Event\EventInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class ResponseAfterHandleEvent extends Event implements EventInterface
+class ResponseAfterHandleEvent extends Event
 {
     const EVENT_NAME = 'response.after.handle';
 
@@ -57,13 +57,5 @@ class ResponseAfterHandleEvent extends Event implements EventInterface
     public function getResponse(): Response
     {
         return $this->response;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEventName(): string
-    {
-        return static::EVENT_NAME;
     }
 }

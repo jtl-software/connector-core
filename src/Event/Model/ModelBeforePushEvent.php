@@ -9,7 +9,7 @@ use Symfony\Contracts\EventDispatcher\Event;
  * Class AfterModelPushEvent
  * @package Jtl\Connector\Core\Event
  */
-class ModelBeforePushEvent extends Event implements EventInterface
+class ModelBeforePushEvent extends Event
 {
     /**
      * @var AbstractDataModel
@@ -32,16 +32,4 @@ class ModelBeforePushEvent extends Event implements EventInterface
     {
         return $this->model;
     }
-
-    /**
-     * @return string
-     * @throws \ReflectionException
-     */
-    public function getEventName(): string
-    {
-        $modelName = (new \ReflectionClass($this->getModel()))->getShortName();
-
-        return sprintf("%s.before.push", strtolower($modelName));
-    }
-
 }
