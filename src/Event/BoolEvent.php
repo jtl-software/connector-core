@@ -4,7 +4,7 @@ namespace Jtl\Connector\Core\Event\Connector;
 use Jtl\Connector\Core\Event\EventInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class ConnectorAfterFinishEvent extends Event
+class BoolEvent extends Event
 {
     /**
      * @var bool

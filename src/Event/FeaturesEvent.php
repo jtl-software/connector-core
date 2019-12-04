@@ -4,7 +4,7 @@ namespace Jtl\Connector\Core\Event\Core;
 use Symfony\Contracts\EventDispatcher\Event;
 use Jtl\Connector\Core\Model\Features;
 
-class CoreAfterFeaturesEvent extends Event
+class FeaturesEvent extends Event
 {
     /**
      * @var Features

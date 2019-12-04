@@ -23,6 +23,8 @@ use Jtl\Connector\Core\Connector\HandleRequestInterface;
 use Jtl\Connector\Core\Connector\ModelInterface;
 use Jtl\Connector\Core\Controller\TransactionalInterface;
 use Jtl\Connector\Core\Definition\Action;
+use Jtl\Connector\Core\Event\Connector\BoolEvent;
+use Jtl\Connector\Core\Event\Core\FeaturesEvent;
 use Jtl\Connector\Core\Event\ResponseEvent;
 use Jtl\Connector\Core\Event\RequestEvent;
 use Jtl\Connector\Core\Event\ModelEvent;
@@ -273,24 +275,44 @@ class Application
         $event = new ResponseEvent($request->getController(), $request->getAction(), $response);
         $this->eventDispatcher->dispatch($event, Event::RESPONSE_AFTER_HANDLE);
 
-        if ($method->isCore() === false) {
-            // Identity mapping
-            $models = is_array($response->getResult()) ? $response->getResult() : [$response->getResult()];
-            foreach ($models as $model) {
-                if ($model instanceof AbstractDataModel) {
-                    $this->linker->linkModel($model, ($method->getAction() === Action::DELETE));
-                    $this->linkChecksum($model);
+        $eventName = null;
+        if (Action::isAction($method->getAction())) {
+            $eventName = Event::createEventName($method->getController(), $method->getAction(), Event::AFTER);
+        } elseif (Action::isCoreAction($method->getAction())) {
+            $eventName = Event::createCoreEventName($method->getController(), $method->getController(), Event::AFTER);
+        }
 
-                    $event = new ModelEvent($model);
-                    $this->eventDispatcher->dispatch($event,
-                        Event::createEventName($method->getController(), $method->getAction(), Event::AFTER));
-                }
+        // Identity mapping
+        $resultData = is_array($response->getResult()) ? $response->getResult() : [$response->getResult()];
+        foreach ($resultData as $result) {
+            if ($result instanceof AbstractDataModel) {
+                $this->linker->linkModel($result, ($method->getAction() === Action::DELETE));
+                $this->linkChecksum($result);
+            }
+
+            $eventArg = null;
+            switch ($method->getAction()) {
+                case Action::PUSH:
+                case Action::PULL:
+                case Action::DELETE:
+                case Action::STATISTIC:
+                    $eventArg = new ModelEvent($result);
+                    break;
+                case Action::CLEAR:
+                case Action::FINISH:
+                    $eventArg = new BoolEvent($result);
+                    break;
+                case Action::FEATURES:
+                    $eventArg = new FeaturesEvent($result);
+                    break;
+            }
+
+            if (!is_null($eventName) && !is_null($eventArg)) {
+                $this->eventDispatcher->dispatch($eventArg, $eventName);
             }
         }
 
         $responsePacket = $this->buildRpcResponse($requestPacket, $response);
-
-        $this->triggerEvent($response->getResult(), $method, Event::AFTER);
 
         return $responsePacket;
     }
@@ -308,7 +330,8 @@ class Application
         RequestPacket $requestPacket,
         Method $method,
         string $modelNamespace
-    ): Request {
+    ): Request
+    {
         $controller = $method->getController();
         $action = $method->getAction();
 
@@ -575,36 +598,6 @@ class Application
     }
 
     /**
-     * @param $eventData
-     * @param Method $method
-     * @param string $moment
-     */
-    protected function triggerEvent($eventData, Method $method, string $moment): void
-    {
-        $eventClass = $method->getController();
-        $eventName = Event::createEventName($method->getController(), $method->getAction(), $moment);
-
-        if ($method->isCore()) {
-            $eventClass = "Core";
-            $eventName = Event::createCoreEventName($method->getController(), $method->getAction(), $moment);
-        }
-
-        $eventClassname = sprintf('Jtl\Connector\Core\Event\%s%s%sEvent', $eventClass,
-            ucfirst($moment),
-            ucfirst($method->getAction()));
-
-        if (class_exists($eventClassname)) {
-
-            if ($eventData instanceof Response) {
-                $eventData = $eventData->getResult();
-            }
-
-            $event = new $eventClassname($eventData);
-            $this->eventDispatcher->dispatch($event, $eventName);
-        }
-    }
-
-    /**
      * @param AbstractModel $model
      */
     protected function linkChecksum(AbstractModel $model): void
@@ -626,7 +619,8 @@ class Application
         ?object $model,
         string $controller,
         string $action
-    ) {
+    )
+    {
         $messages = [
             sprintf('Controller = %s', $controller),
             sprintf('Action = %s', $action),

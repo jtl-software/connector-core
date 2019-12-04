@@ -41,8 +41,8 @@ class ErrorHandler extends AbstractErrorHandler
     {
         $method = Method::createFromRpcMethod($rpcMethod);
 
-        $event = new RpcEvent($response,$method->getController(),$method->getAction(),Event::AFTER);
-        $this->application->getEventDispatcher()->dispatch($event,Event::createRpcEventName(Event::AFTER));
+        $event = new RpcEvent($response, $method->getController(), $method->getAction(), Event::AFTER);
+        $this->application->getEventDispatcher()->dispatch($event, Event::createRpcEventName(Event::AFTER));
     }
 
     /**
