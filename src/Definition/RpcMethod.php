@@ -17,10 +17,10 @@ final class RpcMethod
 {
     const ACK = 'core.connector.ack';
     const AUTH = 'core.connector.auth';
+    const CLEAR = 'core.linker.clear';
     const FEATURES = 'core.connector.features';
     const IDENTIFY = 'connector.identify';
     const FINISH = 'connector.finish';
-    const CLEAR = 'core.linker.clear';
 
     /**
      * @param string $methodName

@@ -23,10 +23,14 @@ use Jtl\Connector\Core\Connector\HandleRequestInterface;
 use Jtl\Connector\Core\Connector\ModelInterface;
 use Jtl\Connector\Core\Controller\TransactionalInterface;
 use Jtl\Connector\Core\Definition\Action;
-use Jtl\Connector\Core\Event\EventInterface;
-use Jtl\Connector\Core\Event\Handle\ResponseAfterHandleEvent;
-use Jtl\Connector\Core\Event\Handle\RequestBeforeHandleEvent;
-use Jtl\Connector\Core\Event\Rpc\RpcEvent;
+use Jtl\Connector\Core\Event\BoolEvent;
+use Jtl\Connector\Core\Event\FeaturesEvent;
+use Jtl\Connector\Core\Event\ResponseEvent;
+use Jtl\Connector\Core\Event\RequestEvent;
+use Jtl\Connector\Core\Event\ModelEvent;
+use Jtl\Connector\Core\Event\QueryFilterEvent;
+use Jtl\Connector\Core\Event\RpcEvent;
+use Jtl\Connector\Core\Event\StatisticEvent;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\HttpException;
@@ -51,7 +55,7 @@ use Jtl\Connector\Core\Http\Request as HttpRequest;
 use Jtl\Connector\Core\Http\Response as HttpResponse;
 use Jtl\Connector\Core\Config\FileConfig;
 use Jtl\Connector\Core\Exception\LinkerException;
-use Jtl\Connector\Core\Subscriber\RequestBeforeHandleSubscriber;
+use Jtl\Connector\Core\Subscriber\PrepareProductPricesSubscriber;
 use Jtl\Connector\Core\Definition\RpcMethod;
 use Jtl\Connector\Core\Connector\CoreConnector;
 use Jtl\Connector\Core\Logger\Logger;
@@ -62,7 +66,6 @@ use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Session\SqliteSession;
 use Jtl\Connector\Core\IO\Path;
-use Jtl\Connector\Core\Event\EventHandler;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Finder\Finder;
 
@@ -143,7 +146,7 @@ class Application
 
         AnnotationRegistry::registerLoader('class_exists');
         $this->startConfiguration();
-        $this->eventDispatcher->addSubscriber(new RequestBeforeHandleSubscriber());
+        $this->eventDispatcher->addSubscriber(new PrepareProductPricesSubscriber());
         $this->errorHandler->register();
 
         try {
@@ -176,9 +179,8 @@ class Application
             }
             $this->endpointConnector->initialize($this);
 
-            $event = new RpcEvent(Json::decode((string)$jtlrpc, true), $method->getController(),
-                $method->getAction(), Event::BEFORE);
-            $this->eventDispatcher->dispatch($event, $event->getEventName());
+            $event = new RpcEvent(Json::decode((string)$jtlrpc, true), $method->getController(), $method->getAction());
+            $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::BEFORE));
 
             $responsePacket = $this->execute($requestPacket, $method);
         } catch (\Throwable $ex) {
@@ -201,8 +203,8 @@ class Application
 
             $arrayResponse = $responsePacket->toArray($this->serializer);
 
-            $event = new RpcEvent($arrayResponse, $method->getController(), $method->getAction(), Event::AFTER);
-            $this->eventDispatcher->dispatch($event, $event->getEventName());
+            $event = new RpcEvent($arrayResponse, $method->getController(), $method->getAction());
+            $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::AFTER));
 
             HttpResponse::send($arrayResponse);
         }
@@ -249,20 +251,19 @@ class Application
             $connector = $this->getEndpointConnector();
         }
 
-        $modelNamespace = 'Jtl\Connector\Core\Model';
+        $modelNamespace = 'Jtl\\Connector\\Core\\Model';
         if ($connector instanceof ModelInterface) {
             $modelNamespace = $connector->getModelNamespace();
         }
 
         $request = $this->createHandleRequest($requestPacket, $method, $modelNamespace);
-        if (!$method->isCore()) {
-            if ($request->getController() === Controller::IMAGE && $request->getAction() === Action::PUSH) {
-                $this->handleImagePush(...$request->getParams());
-            }
+        if ($request->getController() === Controller::IMAGE && $request->getAction() === Action::PUSH) {
+            $this->handleImagePush(...$request->getParams());
         }
 
-        $event = new RequestBeforeHandleEvent($request);
-        $this->eventDispatcher->dispatch($event, $event->getEventName());
+        $this->eventDispatcher->dispatch(
+            new RequestEvent($request),
+            Event::createHandleEventName($request->getController(), $request->getAction(), Event::BEFORE));
 
         if ($connector instanceof HandleRequestInterface) {
             $response = $connector->handle($this, $request);
@@ -270,27 +271,53 @@ class Application
             $response = $this->handleRequest($request, $connector);
         }
 
-        $event = new ResponseAfterHandleEvent($request->getController(), $request->getAction(), $response);
-        $this->eventDispatcher->dispatch($event, $event->getEventName());
+        $this->eventDispatcher->dispatch(
+            new ResponseEvent($response),
+            Event::createHandleEventName($request->getController(), $request->getAction(), Event::AFTER)
+        );
 
-        if ($method->isCore() === false) {
-            // Identity mapping
-            $models = is_array($response->getResult()) ? $response->getResult() : [$response->getResult()];
-            foreach ($models as $model) {
-                if ($model instanceof AbstractDataModel) {
-                    $this->linker->linkModel($model, ($method->getAction() === Action::DELETE));
-                    $this->linkChecksum($model);
+        $eventName = null;
+        if (Action::isAction($request->getAction())) {
+            $eventName = Event::createEventName($request->getController(), $request->getAction(), Event::AFTER);
+        } elseif (Action::isCoreAction($request->getAction())) {
+            $eventName = Event::createCoreEventName($request->getController(), $request->getAction(), Event::AFTER);
+        }
 
-                    $this->triggerEvent($model, $method, Event::AFTER);
-                }
+        $eventArgClass = $this->createModelEventClassName($request->getController());
+
+        // Identity mapping
+        $resultData = is_array($response->getResult()) ? $response->getResult() : [$response->getResult()];
+        foreach ($resultData as $result) {
+            if ($result instanceof AbstractDataModel) {
+                $this->linker->linkModel($result, ($request->getAction() === Action::DELETE));
+                $this->linkChecksum($result);
+            }
+
+            $eventArg = null;
+            switch ($request->getAction()) {
+                case Action::PUSH:
+                case Action::PULL:
+                case Action::DELETE:
+                    $eventArg = new $eventArgClass($result);
+                    break;
+                case Action::STATISTIC:
+                    $eventArg = new StatisticEvent($result);
+                    break;
+                case Action::CLEAR:
+                case Action::FINISH:
+                    $eventArg = new BoolEvent($result);
+                    break;
+                case Action::FEATURES:
+                    $eventArg = new FeaturesEvent($result);
+                    break;
+            }
+
+            if (!is_null($eventName) && !is_null($eventArg)) {
+                $this->eventDispatcher->dispatch($eventArg, $eventName);
             }
         }
 
-        $responsePacket = $this->buildRpcResponse($requestPacket, $response);
-
-        $this->triggerEvent($response->getResult(), $method, Event::AFTER);
-
-        return $responsePacket;
+        return $this->buildRpcResponse($requestPacket, $response);
     }
 
     /**
@@ -338,15 +365,27 @@ class Application
             $params = [$params];
         }
 
+        $eventArgClass = $this->createModelEventClassName($controller);
+
         // Identity mapping
         foreach ($params as $param) {
-            if (in_array($action, [Action::PUSH, Action::DELETE], true)) {
-                $this->linker->linkModel($param);
-                // Checksum linking
-                $this->linkChecksum($param);
+            $eventArg = null;
+            switch ($action) {
+                case Action::PUSH:
+                case Action::DELETE:
+                    $this->linker->linkModel($param);
+                    $this->linkChecksum($param);
+                    $eventArg = new $eventArgClass($param);
+                    break;
+                case Action::PULL:
+                case Action::STATISTIC:
+                    $eventArg = new QueryFilterEvent($param);
+                    break;
             }
 
-            $this->triggerEvent($param, $method, Event::BEFORE);
+            if (!is_null($eventArg)) {
+                $this->eventDispatcher->dispatch($eventArg, Event::createEventName($controller, $action, Event::BEFORE));
+            }
         }
 
         return Request::create($controller, $action, $params);
@@ -559,41 +598,6 @@ class Application
     }
 
     /**
-     * @param $eventData
-     * @param Method $method
-     * @param string $moment
-     */
-    protected function triggerEvent($eventData, Method $method, string $moment): void
-    {
-        $eventClass = null;
-
-        if ($eventData instanceof AbstractDataModel || $eventData instanceof QueryFilter) {
-            $eventClass = "Model";
-        } elseif ($method->getController() === Controller::CONNECTOR) {
-            $eventClass = Controller::CONNECTOR;
-        } elseif ($method->isCore()) {
-            $eventClass = "Core";
-        }
-
-        if ($method->isCore() && (($eventData instanceof AbstractDataModel) && ($eventData instanceof QueryFilter))) {
-
-            $eventClassname = sprintf('Jtl\Connector\Core\Event\%s\%s%s%sEvent', $eventClass, $eventClass,
-                ucfirst($moment),
-                ucfirst($method->getAction()));
-
-            if (class_exists($eventClassname) && in_array(EventInterface::class, class_implements($eventClassname))) {
-
-                if ($eventData instanceof Response) {
-                    $eventData = $eventData->getResult();
-                }
-
-                $event = new $eventClassname($eventData);
-                $this->eventDispatcher->dispatch($event, $event->getEventName());
-            }
-        }
-    }
-
-    /**
      * @param AbstractModel $model
      */
     protected function linkChecksum(AbstractModel $model): void
@@ -636,6 +640,19 @@ class Application
         $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($ex, implode(' | ', $messages));
         $reflectionProperty->setAccessible(false);
+    }
+
+    /**
+     * @param string $controllerName
+     * @return string
+     */
+    protected function createModelEventClassName(string $controllerName): string
+    {
+        $eventArgClass = sprintf('Jtl\\Connector\\Core\\Event\\%sEvent', $controllerName);
+        if (!class_exists($eventArgClass)) {
+            $eventArgClass = ModelEvent::class;
+        }
+        return $eventArgClass;
     }
 
     /**
