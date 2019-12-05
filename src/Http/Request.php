@@ -5,8 +5,6 @@
  */
 namespace Jtl\Connector\Core\Http;
 
-use Jtl\Connector\Core\Compression\Gzip;
-use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\HttpException;
 use Jtl\Connector\Core\IO\Temp;
 
@@ -23,27 +21,25 @@ class Request
      *
      * @param string $method
      * @param string $root
-     * @return Ambiguous <NULL, string>
-     * @throws Jtl\Connector\Core\Exception\HttpException
+     * @return mixed|string|null
+     * @throws HttpException
      */
     public static function get($method = "post", $root = "jtlrpc")
     {
         switch (strtolower($method)) {
             case "post":
-                return isset($_POST[$root]) ? self::stripData($_POST[$root]) : null;
+                return isset($_POST[$root]) ? $_POST[$root] : null;
             case "get":
-                return isset($_GET[$root]) ? self::stripData($_GET[$root]) : null;
+                return isset($_GET[$root]) ? $_GET[$root] : null;
             case "request":
-                return isset($_REQUEST[$root]) ? self::stripData($_REQUEST[$root]) : null;
+                return isset($_REQUEST[$root]) ? $_REQUEST[$root] : null;
             case "files":
                 return isset($_FILES[$root]) ? $_FILES[$root] : null;
             default:
                 throw new HttpException("Unknown method ({$method})");
         }
-        
-        return null;
     }
-    
+
     /**
      * Returns Http Request method
      *
@@ -53,7 +49,7 @@ class Request
     {
         return strtoupper($_SERVER['REQUEST_METHOD']);
     }
-    
+
     /**
      * Http Request Check
      *
@@ -73,10 +69,10 @@ class Request
             case "files":
                 return isset($_FILES[$root]);
         }
-        
+
         return false;
     }
-    
+
     /**
      * Tells whether the file was uploaded via HTTP POST
      *
@@ -87,7 +83,7 @@ class Request
     {
         return isset($_FILES[$name]) && is_uploaded_file($_FILES[$name]["tmp_name"]);
     }
-    
+
     /**
      * Moves an uploaded file to a new location
      *
@@ -100,22 +96,7 @@ class Request
     {
         return move_uploaded_file($_FILES[$name]["tmp_name"], $path . $filename);
     }
-    
-    /**
-     * Checks get_magic_quotes_gpc
-     *
-     * @param string $data
-     * @return string
-     */
-    public static function stripData($data)
-    {
-        if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) {
-            return stripslashes($data);
-        }
-        
-        return $data;
-    }
-    
+
     /**
      * File Upload Handler
      *
@@ -127,7 +108,7 @@ class Request
     {
         if (Request::isFileupload($name)) {
             $pathinfo = pathinfo($_FILES[$name]["name"]);
-            
+
             if (isset($pathinfo["extension"])) {
                 $extension = $pathinfo["extension"];
                 $filename = uniqid() . ".{$extension}";
@@ -142,21 +123,22 @@ class Request
                 throw new HttpException("Could not determine the file extension");
             }
         }
-        
+
         return null;
     }
-    
+
     /**
      * Delete File
      *
-     * @param string $filename
+     * @param $filename
+     * @return bool
      */
     public static function deleteFileupload($filename)
     {
         if ($filename !== null) {
             return @unlink($filename);
         }
-    
+
         return false;
     }
 
@@ -187,61 +169,36 @@ class Request
 
         return false;
     }
-    
+
     /**
      * Main HTTP Handler
      *
-     * @throws CompressionException
-     * @throws HttpException
      * @return string|null
      */
-    public static function handle()
+    public static function getJtlrpc(): ?string
     {
-        $jtlrpc = Request::get();
+        $result = [];
+        parse_str(file_get_contents('php://input'), $result);
+        $jtlrpc = !empty($result['jtlrpc']) ? $result['jtlrpc'] : self::get('post', 'jtlrpc');
 
-        if ($jtlrpc !== null) {
-            return Request::stripData($jtlrpc);
-        } elseif (Request::isFileupload()) {
-            $filename = uniqid() . ".zip";
-            //$path = APP_DIR . '/../tmp/';
-            $path = Temp::getDirectory();
-            if (Request::moveFileupload($path, $filename)) {
-                $gzip = new Gzip();
-        
-                try {
-                    $data = $gzip->read($path . $filename);
-                    $jtlrpc = Request::stripData($data);
-        
-                    unlink($path . $filename);
-        
-                    return $jtlrpc;
-                } catch (CompressionException $exc) {
-                    unlink($path . $filename);
-                    
-                    throw $exc;
-                }
-            } else {
-                throw new HttpException("Could not write file to tmp dir");
-            }
-        }
-        
-        return null;
+        return $jtlrpc;
     }
-    
+
     /**
      * Session HTTP Getter
      *
-     * @return string|NULL
+     * @return mixed|string|null
+     * @throws HttpException
      */
     public static function getSession()
     {
         $method = 'request';
         $root = 'jtlauth';
-        
+
         if (self::exists($method, $root)) {
             return self::get($method, $root);
         }
-        
+
         return null;
     }
 }

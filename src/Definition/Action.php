@@ -11,8 +11,10 @@ final class Action
     const AUTH = 'auth';
     const ACK = 'ack';
     const CLEAR = 'clear';
+    const FEATURES = 'features';
     const FINISH = 'finish';
     const IDENTIFY = 'identify';
+    const INIT = 'init';
 
     /**
      * @var string[]|null
@@ -26,8 +28,10 @@ final class Action
         self::AUTH,
         self::ACK,
         self::CLEAR,
+        self::FEATURES,
         self::FINISH,
         self::IDENTIFY,
+        self::INIT,
     ];
 
     /**

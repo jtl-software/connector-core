@@ -43,7 +43,6 @@ class SerializerBuilder
                 })
                 ->configureHandlers(function (HandlerRegistry $registry) {
                     $registry->registerSubscribingHandler(new IdentityHandler());
-                    $registry->registerSubscribingHandler(new ProductHandler());
                     $registry->registerSubscribingHandler(new FeaturesHandler());
                 });
         }

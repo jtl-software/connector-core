@@ -250,15 +250,4 @@ abstract class AbstractImage extends AbstractDataModel implements IdentityInterf
 
         return $this;
     }
-
-    /**
-     * @param string[] $publics
-     * @return stdClass
-     */
-    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', 'modelType']): stdClass
-    {
-        $object = parent::getPublic($publics);
-        $object->relationType = $this->getRelationType();
-        return $object;
-    }
 }

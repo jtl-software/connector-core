@@ -12,6 +12,8 @@ use Jtl\Connector\Core\Model\AbstractImage;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Model\Product;
+use Jtl\Connector\Core\Model\TranslatableAttribute;
+use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
 use Jtl\Connector\Core\Utilities\Str;
 
 class ObjectTypesSubscriber implements EventSubscriberInterface
@@ -58,9 +60,29 @@ class ObjectTypesSubscriber implements EventSubscriberInterface
     {
         $object = $event->getObject();
         if ($object instanceof AbstractImage) {
-            $id = $object->getId();
-            $serializedId = [sprintf('%s#=#%s', $object->getRelationType(), $id->getEndpoint()), $id->getHost()];
+            $id = clone $object->getId();
+            $id->setEndpoint(sprintf('%s#=#%s', $object->getRelationType(), $id->getEndpoint()));
+            $serializedId = $id->toArray();
             $event->getVisitor()->visitProperty(new StaticPropertyMetadata('', 'id', $serializedId), $serializedId);
+        } elseif ($object instanceof TranslatableAttributeI18n) {
+            $product = null;
+            /** @var \SplObjectStorage $visitingSet */
+            $visitingSet = $event->getContext()->getVisitingSet();
+            foreach ($visitingSet as $index => $element) {
+                if ($element instanceof Product) {
+                    $product = $element;
+                    break;
+                }
+            }
+
+            if (!is_null($product)) {
+                $visitingSet->offsetSet($product);
+                $visitingSet->next();
+                /** @var TranslatableAttribute $attribute */
+                $attribute = $visitingSet->current();
+                $productAttrId = $attribute->getId()->toArray();
+                $event->getVisitor()->visitProperty(new StaticPropertyMetadata('', 'productAttrId', $productAttrId), $productAttrId);
+            }
         }
     }
 

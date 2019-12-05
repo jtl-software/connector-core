@@ -11,6 +11,8 @@ class DefinitionException extends \Exception
     const UNKNOWN_CONTROLLER = 60;
     const UNKNOWN_CONFIG_OPTION = 70;
     const DEFAULT_VALUE_NOT_EXISTS = 80;
+    const UNKNOWN_ACTION = 90;
+    const UNKNOWN_MOMENT = 100;
 
     /**
      * @param string $model
@@ -91,5 +93,25 @@ class DefinitionException extends \Exception
     {
         $msg = sprintf('Default value for config option (%s) does not exist', $option);
         return new static($msg, self::DEFAULT_VALUE_NOT_EXISTS);
+    }
+
+    /**
+     * @param string $action
+     * @return DefinitionException
+     */
+    public static function unknownAction(string $action): DefinitionException
+    {
+        $msg = sprintf('Unknown action (%s)', $action);
+        return new static($msg, self::UNKNOWN_ACTION);
+    }
+
+    /**
+     * @param string $moment
+     * @return DefinitionException
+     */
+    public static function unknownMoment(string $moment): DefinitionException
+    {
+        $msg = sprintf('Unknown moment (%s)', $moment);
+        return new static($msg, self::UNKNOWN_MOMENT);
     }
 }

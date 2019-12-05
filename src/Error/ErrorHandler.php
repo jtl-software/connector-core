@@ -3,18 +3,16 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Application
  */
-
 namespace Jtl\Connector\Core\Error;
 
 use Jtl\Connector\Core\Application\Application;
+use Jtl\Connector\Core\Definition\Event;
+use Jtl\Connector\Core\Event\RpcEvent;
 use Jtl\Connector\Core\Http\Response;
 use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
-use Jtl\Connector\Core\Event\EventHandler;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Jtl\Connector\Core\Formatter\ExceptionFormatter;
 use Jtl\Connector\Core\Rpc\Method;
 
 class ErrorHandler extends AbstractErrorHandler
@@ -34,20 +32,15 @@ class ErrorHandler extends AbstractErrorHandler
     }
 
     /**
-     * @param string $response
+     * @param array $response
      * @param string $rpcMethod
      * @throws \Exception
      */
     protected function triggerRpcAfterEvent(array $response, string $rpcMethod)
     {
         $method = Method::createFromRpcMethod($rpcMethod);
-        EventHandler::dispatchRpc(
-            $response,
-            $this->application->getEventDispatcher(),
-            $method->getController(),
-            $method->getAction(),
-            EventHandler::AFTER
-        );
+        $event = new RpcEvent($response, $method->getController(), $method->getAction());
+        $this->application->getEventDispatcher()->dispatch($event, Event::createRpcEventName(Event::AFTER));
     }
 
     /**
