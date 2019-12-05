@@ -3,29 +3,31 @@ namespace Jtl\Connector\Core\Subscriber;
 
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
-use Jtl\Connector\Core\Event\Handle\RequestBeforeHandleEvent;
+use Jtl\Connector\Core\Definition\Event;
+use Jtl\Connector\Core\Event\RequestEvent;
 use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\ProductPrice;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class RequestBeforeHandleSubscriber implements EventSubscriberInterface
+class PrepareProductPricesSubscriber implements EventSubscriberInterface
 {
     /**
      * @return array
+     * @throws \Exception
      */
     public static function getSubscribedEvents()
     {
         return [
-            RequestBeforeHandleEvent::getEventName() => [
-                ['handleProductPriceRequest', 0]
+            Event::createHandleEventName(Controller::PRODUCT_PRICE, Action::PUSH, Event::BEFORE) => [
+                ['prepareProductPrices', 255]
             ]
         ];
     }
 
     /**
-     * @param RequestBeforeHandleEvent $event
+     * @param RequestEvent $event
      */
-    public function handleProductPriceRequest(RequestBeforeHandleEvent $event)
+    public function prepareProductPrices(RequestEvent $event)
     {
         $request = $event->getRequest();
         if ($request->getController() === Controller::PRODUCT_PRICE && $request->getAction() === Action::PUSH) {
