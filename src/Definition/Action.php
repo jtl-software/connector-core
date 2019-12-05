@@ -14,6 +14,7 @@ final class Action
     const FEATURES = 'features';
     const FINISH = 'finish';
     const IDENTIFY = 'identify';
+    const INIT = 'init';
 
     /**
      * @var string[]|null
@@ -30,6 +31,7 @@ final class Action
         self::FEATURES,
         self::FINISH,
         self::IDENTIFY,
+        self::INIT,
     ];
 
     /**

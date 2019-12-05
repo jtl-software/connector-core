@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Serializer\Subscriber;
 
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
@@ -64,10 +65,18 @@ class ObjectTypesSubscriber implements EventSubscriberInterface
             $serializedId = $id->toArray();
             $event->getVisitor()->visitProperty(new StaticPropertyMetadata('', 'id', $serializedId), $serializedId);
         } elseif ($object instanceof TranslatableAttributeI18n) {
+            $product = null;
+            /** @var \SplObjectStorage $visitingSet */
             $visitingSet = $event->getContext()->getVisitingSet();
-            $visitingSet->rewind();
-            $root = $visitingSet->current();
-            if ($root instanceof Product) {
+            foreach ($visitingSet as $index => $element) {
+                if ($element instanceof Product) {
+                    $product = $element;
+                    break;
+                }
+            }
+
+            if (!is_null($product)) {
+                $visitingSet->offsetSet($product);
                 $visitingSet->next();
                 /** @var TranslatableAttribute $attribute */
                 $attribute = $visitingSet->current();
