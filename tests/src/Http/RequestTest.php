@@ -17,12 +17,12 @@ class RequestTest extends TestCase
      */
     public function testJtlRpcIsPresentOnHandleResult()
     {
-        $expected = [
+        $expected = json_encode([
             'jtlrpc' => '2.0'
-        ];
+        ]);
         $_POST['jtlrpc'] = $expected;
 
-        $result = Request::handle();
+        $result = Request::getJtlrpc();
 
         $this->assertSame($expected, $result);
     }
@@ -33,7 +33,7 @@ class RequestTest extends TestCase
      */
     public function testJtlRpcIsMissingOnHandleRequest()
     {
-        $result = Request::handle();
+        $result = Request::getJtlrpc();
         $this->assertNull($result);
     }
 
