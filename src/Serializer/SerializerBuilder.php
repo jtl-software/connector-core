@@ -10,6 +10,7 @@ use JMS\Serializer\Handler\HandlerRegistry;
 use JMS\Serializer\SerializerBuilder as JmsBuilder;
 use Jtl\Connector\Core\Serializer\Handler\FeaturesHandler;
 use Jtl\Connector\Core\Serializer\Handler\ProductHandler;
+use Jtl\Connector\Core\Serializer\Subscriber\LanguageIsoSubscriber;
 use Jtl\Connector\Core\Serializer\Subscriber\NullValuesSubscriber;
 use Jtl\Connector\Core\Serializer\Handler\IdentityHandler;
 use Jtl\Connector\Core\Serializer\Subscriber\ObjectTypesSubscriber;
@@ -40,6 +41,7 @@ class SerializerBuilder
                 ->configureListeners(function (EventDispatcher $dispatcher) {
                     $dispatcher->addSubscriber(new NullValuesSubscriber());
                     $dispatcher->addSubscriber(new ObjectTypesSubscriber());
+                    $dispatcher->addSubscriber(new LanguageIsoSubscriber());
                 })
                 ->configureHandlers(function (HandlerRegistry $registry) {
                     $registry->registerSubscribingHandler(new IdentityHandler());

@@ -39,10 +39,10 @@ class Language extends AbstractDataModel implements IdentityInterface
     /**
      * @var string
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
+     * @Serializer\SerializedName("languageIso")
+     * @Serializer\Accessor(getter="getLanguageIso",setter="setLanguageIso")
      */
-    protected $languageISO = '';
+    protected $languageIso = '';
     
     /**
      * @var string English term
@@ -108,12 +108,12 @@ class Language extends AbstractDataModel implements IdentityInterface
     }
     
     /**
-     * @param string $languageISO
+     * @param string $languageIso
      * @return Language
      */
-    public function setLanguageISO(string $languageISO): Language
+    public function setLanguageIso(string $languageIso): Language
     {
-        $this->languageISO = $languageISO;
+        $this->languageIso = $languageIso;
         
         return $this;
     }
@@ -121,9 +121,9 @@ class Language extends AbstractDataModel implements IdentityInterface
     /**
      * @return string
      */
-    public function getLanguageISO(): string
+    public function getLanguageIso(): string
     {
-        return $this->languageISO;
+        return $this->languageIso;
     }
     
     /**

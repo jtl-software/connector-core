@@ -49,7 +49,7 @@ final class Event
      */
     public static function createCoreEventName(string $controllerName, string $actionName, string $moment): string
     {
-        return 'core.' . self::createEventName($controllerName, $moment, $actionName);
+        return 'core.' . self::createEventName($controllerName, $actionName, $moment);
     }
 
     /**

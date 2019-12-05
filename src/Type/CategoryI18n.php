@@ -23,7 +23,7 @@ class CategoryI18n extends AbstractDataType
             new PropertyInfo('name', 'string', '', false, false, false),
             new PropertyInfo('titleTag', 'string', '', false, false, false),
             new PropertyInfo('urlPath', 'string', '', false, false, false),
-            new PropertyInfo('languageISO', 'string', '', false, false, false)
+            new PropertyInfo('languageIso', 'string', '', false, false, false)
         ];
     }
 
