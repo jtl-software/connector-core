@@ -166,15 +166,6 @@ class Features extends AbstractModel
     }
 
     /**
-     * @param string[] $publics
-     * @return stdClass
-     */
-    public function getPublic(array $publics = []): stdClass
-    {
-        return (object)$this->toArray();
-    }
-
-    /**
      * @param FeatureEntity[] $entities
      * @param FeatureFlag[] $flags
      * @return Features

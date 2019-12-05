@@ -118,60 +118,6 @@ abstract class AbstractDataModel extends AbstractModel
     }
 
     /**
-     * Convert the Model into stdClass Object
-     *
-     * @param array $publics
-     * @return stdClass $object
-     */
-    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', 'modelType']): stdClass
-    {
-        $object = new stdClass();
-
-        $recursive = function (array $subElems, array $publics) use (&$recursive) {
-            $arr = [];
-            foreach ($subElems as $subElem) {
-                if ($subElem instanceof AbstractDataModel) {
-                    $arr[] = $subElem->getPublic($publics);
-                } elseif ($subElem instanceof Identity) {
-                    $arr[] = $subElem->toArray();
-                } elseif ($subElem instanceof DateTime) {
-                    $arr[] = $subElem->format(DateTime::ISO8601);
-                } elseif (is_array($subElem)) {
-                    $arr[] = $recursive($subElem, $publics);
-                } else {
-                    $arr[] = $subElem;
-                }
-            }
-
-            return $arr;
-        };
-
-        $members = array_keys(get_object_vars($this));
-        if (is_array($members) && count($members) > 0) {
-            foreach ($members as $member) {
-                $property = ucfirst($member);
-                $getter = 'get' . $property;
-
-                if (!in_array($member, $publics, true)) {
-                    if ($this->{$getter}() instanceof AbstractDataModel) {
-                        $object->{$member} = $this->{$getter}()->getPublic($publics);
-                    } elseif ($this->{$getter}() instanceof Identity) {
-                        $object->{$member} = $this->{$getter}()->toArray();
-                    } elseif ($this->{$getter}() instanceof DateTime) {
-                        $object->{$member} = $this->{$getter}()->format(DateTime::ISO8601);
-                    } elseif (is_array($this->{$member})) {
-                        $object->{$member} = $recursive($this->{$member}, $publics);
-                    } else {
-                        $object->{$member} = $this->{$member};
-                    }
-                }
-            }
-        }
-
-        return $object;
-    }
-
-    /**
      * @param string $propertyName
      * @param string|null $endpoint
      * @param int|null $host

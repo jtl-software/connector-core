@@ -107,17 +107,6 @@ class Identity extends AbstractModel
     }
 
     /**
-     * Convert the Model into array
-     *
-     * @param array $publics
-     * @return array
-     */
-    public function getPublic(array $publics = []): \stdClass
-    {
-        return (object) $this->toArray();
-    }
-    
-    /**
      * Convert from Array
      *
      * @param array $data
@@ -130,35 +119,5 @@ class Identity extends AbstractModel
         }
         
         return new self($data[0], $data[1]);
-    }
-    
-    /**
-     * Dynamic Converter
-     *
-     * @param $data
-     * @return Identity
-     */
-    public static function convert($data)
-    {
-        if ($data instanceof self) {
-            return $data;
-        }
-        
-        if (!is_array($data) && $data !== null) {
-            return new self($data);
-        }
-        
-        if ($data === null || (is_array($data) && (count($data) != 2 || !array_key_exists(
-            0,
-            $data
-        ) || !array_key_exists(1, $data)))) {
-            return new self;
-        }
-        
-        try {
-            return self::fromArray($data);
-        } catch (Exception $exc) {
-            return new self;
-        }
     }
 }

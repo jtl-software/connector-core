@@ -2610,21 +2610,4 @@ class Product extends AbstractDataModel  implements IdentityInterface, Identific
         
         return $this;
     }
-
-    /**
-     * @param array $publics
-     * @return stdClass
-     */
-    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', 'modelType']): stdClass
-    {
-        $return = parent::getPublic($publics);
-
-        foreach ($this->getAttributes() as $i=> $attribute) {
-            foreach ($attribute->getI18ns() as $j=> $i18nAttribute) {
-                $return->attributes[$i]->i18ns[$j]->productAttrId = $attribute->getId()->toArray();
-            }
-        }
-
-        return $return;
-    }
 }
