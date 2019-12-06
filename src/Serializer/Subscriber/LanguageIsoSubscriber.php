@@ -57,6 +57,7 @@ class LanguageIsoSubscriber implements EventSubscriberInterface
         if(is_array($data) && isset($data['languageISO']) && !isset($data['languageIso'])) {
             $language = $this->languages->findByCode2b($data['languageISO']);
             $data['languageIso'] = $language->code1();
+            $event->setData($data);
         }
     }
 }
