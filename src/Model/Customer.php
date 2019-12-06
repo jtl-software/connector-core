@@ -168,10 +168,10 @@ class Customer extends AbstractDataModel implements IdentityInterface
     /**
      * @var string User locale preference
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
+     * @Serializer\SerializedName("languageIso")
+     * @Serializer\Accessor(getter="getLanguageIso",setter="setLanguageIso")
      */
-    protected $languageISO = '';
+    protected $languageIso = '';
     
     /**
      * @var string Last name
@@ -633,12 +633,12 @@ class Customer extends AbstractDataModel implements IdentityInterface
     }
     
     /**
-     * @param string $languageISO User locale preference
+     * @param string $languageIso User locale preference
      * @return Customer
      */
-    public function setLanguageISO(string $languageISO): Customer
+    public function setLanguageIso(string $languageIso): Customer
     {
-        $this->languageISO = $languageISO;
+        $this->languageIso = $languageIso;
         
         return $this;
     }
@@ -646,9 +646,9 @@ class Customer extends AbstractDataModel implements IdentityInterface
     /**
      * @return string User locale preference
      */
-    public function getLanguageISO(): string
+    public function getLanguageIso(): string
     {
-        return $this->languageISO;
+        return $this->languageIso;
     }
     
     /**

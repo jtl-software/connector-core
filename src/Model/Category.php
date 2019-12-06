@@ -115,7 +115,7 @@ class Category extends AbstractDataModel implements IdentityInterface, Identific
         $name = '';
         foreach($this->getI18ns() as $i18n) {
             $name = $i18n->getName();
-            if($mainLanguage === $i18n->getLanguageISO()) {
+            if($mainLanguage === $i18n->getLanguageIso()) {
                 break;
             }
         }

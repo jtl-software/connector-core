@@ -21,7 +21,7 @@ class ManufacturerI18n extends AbstractDataType
             new PropertyInfo('metaDescription', 'string', '', false, false, false),
             new PropertyInfo('metaKeywords', 'string', '', false, false, false),
             new PropertyInfo('titleTag', 'string', '', false, false, false),
-            new PropertyInfo('languageISO', 'string', '', false, false, false)
+            new PropertyInfo('languageIso', 'string', '', false, false, false)
         ];
     }
 

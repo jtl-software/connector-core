@@ -115,10 +115,10 @@ class CustomerOrder extends AbstractDataModel implements IdentityInterface
     /**
      * @var string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization.
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
+     * @Serializer\SerializedName("languageIso")
+     * @Serializer\Accessor(getter="getLanguageIso",setter="setLanguageIso")
      */
-    protected $languageISO = '';
+    protected $languageIso = '';
     
     /**
      * @var string
@@ -405,12 +405,12 @@ class CustomerOrder extends AbstractDataModel implements IdentityInterface
     }
     
     /**
-     * @param string $languageISO Locale set when customerOrder was finished. Important for further E-Mail message and notification localization.
+     * @param string $languageIso Locale set when customerOrder was finished. Important for further E-Mail message and notification localization.
      * @return CustomerOrder
      */
-    public function setLanguageISO(string $languageISO): CustomerOrder
+    public function setLanguageIso(string $languageIso): CustomerOrder
     {
-        $this->languageISO = $languageISO;
+        $this->languageIso = $languageIso;
         
         return $this;
     }
@@ -418,9 +418,9 @@ class CustomerOrder extends AbstractDataModel implements IdentityInterface
     /**
      * @return string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization.
      */
-    public function getLanguageISO(): string
+    public function getLanguageIso(): string
     {
-        return $this->languageISO;
+        return $this->languageIso;
     }
     
     /**

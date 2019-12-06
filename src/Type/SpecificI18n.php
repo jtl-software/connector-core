@@ -16,7 +16,7 @@ class SpecificI18n extends AbstractDataType
     {
         return [
             new PropertyInfo('name', 'string', '', false, false, false),
-            new PropertyInfo('languageISO', 'string', '', false, false, false)
+            new PropertyInfo('languageIso', 'string', '', false, false, false)
         ];
     }
 

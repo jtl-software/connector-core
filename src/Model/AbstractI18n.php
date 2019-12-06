@@ -18,26 +18,26 @@ abstract class AbstractI18n extends AbstractDataModel
     /**
      * @var string
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageISO")
-     * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
+     * @Serializer\SerializedName("languageIso")
+     * @Serializer\Accessor(getter="getLanguageIso",setter="setLanguageIso")
      */
-    protected $languageISO = '';
+    protected $languageIso = '';
 
     /**
      * @return string
      */
-    public function getLanguageISO(): string
+    public function getLanguageIso(): string
     {
-        return $this->languageISO;
+        return $this->languageIso;
     }
 
     /**
-     * @param string $languageISO
+     * @param string $languageIso
      * @return AbstractI18n
      */
-    public function setLanguageISO(string $languageISO): AbstractI18n
+    public function setLanguageIso(string $languageIso): AbstractI18n
     {
-        $this->languageISO = $languageISO;
+        $this->languageIso = $languageIso;
 
         return $this;
     }
