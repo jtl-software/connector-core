@@ -23,7 +23,7 @@ class SpecificValueI18n extends AbstractDataType
             new PropertyInfo('titleTag', 'string', '', false, false, false),
             new PropertyInfo('urlPath', 'string', '', false, false, false),
             new PropertyInfo('value', 'string', '', false, false, false),
-            new PropertyInfo('languageISO', 'string', '', false, false, false)
+            new PropertyInfo('languageIso', 'string', '', false, false, false)
         ];
     }
 

@@ -19,7 +19,7 @@ class ImageI18n extends AbstractDataType
         return [
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('altText', 'string', '', false, false, false),
-            new PropertyInfo('languageISO', 'string', '', false, false, false)
+            new PropertyInfo('languageIso', 'string', '', false, false, false)
         ];
     }
     
