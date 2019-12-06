@@ -1,5 +1,5 @@
 <?php
-namespace Jtl\Connector\Test\Serializer;
+namespace Jtl\Connector\Test\Serializer\Subscriber;
 
 use Jtl\Connector\Core\Model\AbstractDataModel;
 use Jtl\Connector\Core\Model\Category;
