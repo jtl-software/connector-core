@@ -277,10 +277,10 @@ class Application
         );
 
         $eventName = null;
-        if (Action::isAction($request->getAction())) {
-            $eventName = Event::createEventName($request->getController(), $request->getAction(), Event::AFTER);
-        } elseif (Action::isCoreAction($request->getAction())) {
+        if (Action::isCoreAction($request->getAction())) {
             $eventName = Event::createCoreEventName($request->getController(), $request->getAction(), Event::AFTER);
+        } elseif (Action::isAction($request->getAction())) {
+            $eventName = Event::createEventName($request->getController(), $request->getAction(), Event::AFTER);
         }
 
         $eventArgClass = $this->createModelEventClassName($request->getController());
@@ -631,7 +631,7 @@ class Application
         }
 
         if ($model instanceof IdentificationInterface) {
-            $messages += $model->getIdentificationStrings();
+            $messages = array_merge($messages, $model->getIdentificationStrings());
         }
 
         $messages[] = $ex->getMessage();
