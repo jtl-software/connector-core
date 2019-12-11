@@ -38,7 +38,7 @@ class Logger
      * @param string $channel
      * @return boolean
      */
-    public static function write(string $message, string $level = self::INFO, string $channel = self::CHANNEL_GLOBAL): bool
+    public static function write(string $message, string $level = self::INFO, string $channel = self::CHANNEL_GLOBAL): void
     {
         $runtimeConfig = RuntimeConfig::getInstance();
 
@@ -54,7 +54,7 @@ class Logger
             $log->pushHandler(new RotatingFileHandler($path, 2, $logLevel));
         }
 
-        return $log->log($level, $message);
+        $log->log($level, $message);
     }
 
     /**

@@ -245,8 +245,10 @@ class Application
     protected function execute(RequestPacket $requestPacket, Method $method): ResponsePacket
     {
         if ($method->isCore()) {
-            $connector = new CoreConnector($this->endpointConnector->getPrimaryKeyMapper(),
-                $this->endpointConnector->getTokenValidator());
+            $connector = new CoreConnector(
+                $this->endpointConnector->getPrimaryKeyMapper(),
+                $this->endpointConnector->getTokenValidator()
+            );
         } else {
             $connector = $this->getEndpointConnector();
         }
@@ -263,7 +265,8 @@ class Application
 
         $this->eventDispatcher->dispatch(
             new RequestEvent($request),
-            Event::createHandleEventName($request->getController(), $request->getAction(), Event::BEFORE));
+            Event::createHandleEventName($request->getController(), $request->getAction(), Event::BEFORE)
+        );
 
         if ($connector instanceof HandleRequestInterface) {
             $response = $connector->handle($this, $request);
