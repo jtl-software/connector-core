@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Language extends AbstractDataModel implements IdentityInterface
+class Language extends AbstractI18n implements IdentityInterface
 {
     /**
      * @var Identity Unique language id
@@ -35,15 +35,7 @@ class Language extends AbstractDataModel implements IdentityInterface
      * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
      */
     protected $isDefault = false;
-    
-    /**
-     * @var string
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageIso")
-     * @Serializer\Accessor(getter="getLanguageIso",setter="setLanguageIso")
-     */
-    protected $languageIso = '';
-    
+
     /**
      * @var string English term
      * @Serializer\Type("string")
@@ -106,26 +98,7 @@ class Language extends AbstractDataModel implements IdentityInterface
     {
         return $this->isDefault;
     }
-    
-    /**
-     * @param string $languageIso
-     * @return Language
-     */
-    public function setLanguageIso(string $languageIso): Language
-    {
-        $this->languageIso = $languageIso;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getLanguageIso(): string
-    {
-        return $this->languageIso;
-    }
-    
+
     /**
      * @param string $nameEnglish English term
      * @return Language
