@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Definition;
 
 use Jtl\Connector\Core\Exception\DefinitionException;
@@ -54,6 +55,11 @@ final class Model
     const TAX_RATE = 'TaxRate';
     const UNIT = 'Unit';
     const WAREHOUSE = 'Warehouse';
+
+    /**
+     * @var null|string[]
+     */
+    protected static $models = null;
 
     protected static $mappings = [
         self::CATEGORY => IdentityType::CATEGORY,
@@ -280,6 +286,7 @@ final class Model
      * @param string $modelName
      * @return integer
      * @throws DefinitionException
+     * @throws \ReflectionException
      */
     public static function getIdentityType(string $modelName): int
     {
@@ -308,6 +315,7 @@ final class Model
      * @param string $propertyName
      * @return integer
      * @throws DefinitionException
+     * @throws \ReflectionException
      */
     public static function getPropertyIdentityType(string $modelName, string $propertyName): int
     {
@@ -342,15 +350,20 @@ final class Model
 
     /**
      * @return string[]
+     * @throws \ReflectionException
      */
     public static function getModels(): array
     {
-        return array_keys(self::$mappings);
+        if (is_null(self::$models)) {
+            self::$models = (new \ReflectionClass(self::class))->getConstants();
+        }
+        return self::$models;
     }
 
     /**
      * @param string $modelName
      * @return boolean
+     * @throws \ReflectionException
      */
     public static function isModel(string $modelName): bool
     {

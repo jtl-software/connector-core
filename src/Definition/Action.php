@@ -40,12 +40,11 @@ final class Action
      */
     public static function getActions(): array
     {
-        if (is_null(static::$actions)) {
-            $reflection = new \ReflectionClass(static::class);
-            static::$actions = $reflection->getConstants();
+        if (is_null(self::$actions)) {
+            self::$actions = (new \ReflectionClass(self::class))->getConstants();
         }
 
-        return static::$actions;
+        return self::$actions;
     }
 
     /**
