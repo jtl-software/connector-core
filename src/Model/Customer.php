@@ -19,7 +19,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Customer extends AbstractDataModel implements IdentityInterface
+class Customer extends AbstractI18n implements IdentityInterface
 {
     /**
      * @var Identity References a customer group
@@ -164,15 +164,7 @@ class Customer extends AbstractDataModel implements IdentityInterface
      * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
      */
     protected $isActive = false;
-    
-    /**
-     * @var string User locale preference
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageIso")
-     * @Serializer\Accessor(getter="getLanguageIso",setter="setLanguageIso")
-     */
-    protected $languageIso = '';
-    
+
     /**
      * @var string Last name
      * @Serializer\Type("string")
@@ -631,26 +623,7 @@ class Customer extends AbstractDataModel implements IdentityInterface
     {
         return $this->isActive;
     }
-    
-    /**
-     * @param string $languageIso User locale preference
-     * @return Customer
-     */
-    public function setLanguageIso(string $languageIso): Customer
-    {
-        $this->languageIso = $languageIso;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string User locale preference
-     */
-    public function getLanguageIso(): string
-    {
-        return $this->languageIso;
-    }
-    
+
     /**
      * @param string $lastName Last name
      * @return Customer
