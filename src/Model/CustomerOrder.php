@@ -19,7 +19,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CustomerOrder extends AbstractDataModel implements IdentityInterface
+class CustomerOrder extends AbstractI18n implements IdentityInterface
 {
     /**
      * @var string - Status when payment is completed
@@ -111,15 +111,7 @@ class CustomerOrder extends AbstractDataModel implements IdentityInterface
      * @Serializer\Accessor(getter="getEstimatedDeliveryDate",setter="setEstimatedDeliveryDate")
      */
     protected $estimatedDeliveryDate = null;
-    
-    /**
-     * @var string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization.
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageIso")
-     * @Serializer\Accessor(getter="getLanguageIso",setter="setLanguageIso")
-     */
-    protected $languageIso = '';
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -403,26 +395,7 @@ class CustomerOrder extends AbstractDataModel implements IdentityInterface
     {
         return $this->estimatedDeliveryDate;
     }
-    
-    /**
-     * @param string $languageIso Locale set when customerOrder was finished. Important for further E-Mail message and notification localization.
-     * @return CustomerOrder
-     */
-    public function setLanguageIso(string $languageIso): CustomerOrder
-    {
-        $this->languageIso = $languageIso;
-        
-        return $this;
-    }
-    
-    /**
-     * @return string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization.
-     */
-    public function getLanguageIso(): string
-    {
-        return $this->languageIso;
-    }
-    
+
     /**
      * @param string $note
      * @return CustomerOrder

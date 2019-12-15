@@ -245,8 +245,10 @@ class Application
     protected function execute(RequestPacket $requestPacket, Method $method): ResponsePacket
     {
         if ($method->isCore()) {
-            $connector = new CoreConnector($this->endpointConnector->getPrimaryKeyMapper(),
-                $this->endpointConnector->getTokenValidator());
+            $connector = new CoreConnector(
+                $this->endpointConnector->getPrimaryKeyMapper(),
+                $this->endpointConnector->getTokenValidator()
+            );
         } else {
             $connector = $this->getEndpointConnector();
         }
@@ -263,7 +265,8 @@ class Application
 
         $this->eventDispatcher->dispatch(
             new RequestEvent($request),
-            Event::createHandleEventName($request->getController(), $request->getAction(), Event::BEFORE));
+            Event::createHandleEventName($request->getController(), $request->getAction(), Event::BEFORE)
+        );
 
         if ($connector instanceof HandleRequestInterface) {
             $response = $connector->handle($this, $request);
@@ -277,10 +280,10 @@ class Application
         );
 
         $eventName = null;
-        if (Action::isAction($request->getAction())) {
-            $eventName = Event::createEventName($request->getController(), $request->getAction(), Event::AFTER);
-        } elseif (Action::isCoreAction($request->getAction())) {
+        if (Action::isCoreAction($request->getAction())) {
             $eventName = Event::createCoreEventName($request->getController(), $request->getAction(), Event::AFTER);
+        } elseif (Action::isAction($request->getAction())) {
+            $eventName = Event::createEventName($request->getController(), $request->getAction(), Event::AFTER);
         }
 
         $eventArgClass = $this->createModelEventClassName($request->getController());
@@ -631,7 +634,7 @@ class Application
         }
 
         if ($model instanceof IdentificationInterface) {
-            $messages += $model->getIdentificationStrings();
+            $messages = array_merge($messages, $model->getIdentificationStrings());
         }
 
         $messages[] = $ex->getMessage();
