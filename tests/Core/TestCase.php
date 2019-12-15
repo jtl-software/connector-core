@@ -1,7 +1,8 @@
 <?php
-namespace Jtl\Connector\Test;
+namespace Jtl\Connector\Test\Core;
 
 use Jtl\Connector\Core\Logger\Logger;
+use Jtl\Connector\Core\Model\Identity;
 
 /**
  * Class TestCase
@@ -16,8 +17,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
     {
         \Mockery::mock(Logger::class, 'LoggerStub')
             ->shouldReceive('write')
-            ->withAnyArgs()
-            ->andReturnTrue();
+            ->withAnyArgs();
     }
 
     /**
@@ -36,5 +36,14 @@ class TestCase extends \PHPUnit\Framework\TestCase
     protected function createEndpointId(): string
     {
         return sprintf("%s_%s", 't', $this->createHostId());
+    }
+
+    /**
+     * @return Identity
+     * @throws \Exception
+     */
+    protected function createIdentity(): Identity
+    {
+        return new Identity($this->createEndpointId(), $this->createHostId());
     }
 }

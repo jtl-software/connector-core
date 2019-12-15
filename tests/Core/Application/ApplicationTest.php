@@ -1,6 +1,6 @@
 <?php
 
-namespace Jtl\Connector\Test\Application;
+namespace Jtl\Connector\Test\Core\Application;
 
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Application\Request;
@@ -20,7 +20,9 @@ use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Category;
 use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\QueryFilter;
-use Jtl\Connector\Test\TestCase;
+use Jtl\Connector\Test\Core\TestCase;
+use Jtl\Connector\Test\Stub\Controller\TransactionalControllerStub;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 
 /**
  * Class ApplicationTest
@@ -28,6 +30,7 @@ use Jtl\Connector\Test\TestCase;
  */
 class ApplicationTest extends TestCase
 {
+    use MockeryPHPUnitIntegration;
 
     /**
      * @return ConnectorInterface|\Mockery\LegacyMockInterface|\Mockery\MockInterface
@@ -60,63 +63,11 @@ class ApplicationTest extends TestCase
 
     /**
      * @param bool $commitThrowsException
+     * @return TransactionalControllerStub
      */
-    public function createTransactionalController($commitThrowsException = false)
+    public function createTransactionalController($commitThrowsException = false): TransactionalControllerStub
     {
-        return new class($commitThrowsException) implements DeleteInterface, StatisticInterface, PullInterface, PushInterface, TransactionalInterface
-        {
-            public $beginTransactionCalled = 0;
-            public $commitCalled = 0;
-            public $rollbackCalled = 0;
-
-            public function __construct($commitThrowsException)
-            {
-                $this->commitThrowsException = $commitThrowsException;
-            }
-
-            public function statistic(QueryFilter $queryFilter): int
-            {
-                return 150;
-            }
-
-            public function delete(AbstractDataModel $model): AbstractDataModel
-            {
-                return $model;
-            }
-
-            public function pull(QueryFilter $queryFilter): array
-            {
-                return [1, 2, 3];
-            }
-
-            public function push(AbstractDataModel $model): AbstractDataModel
-            {
-                return $model;
-            }
-
-            public function beginTransaction(): bool
-            {
-                $this->beginTransactionCalled++;
-                return true;
-            }
-
-            public function commit(): bool
-            {
-                $this->commitCalled++;
-
-                if ($this->commitThrowsException) {
-                    throw new \Exception("Error in transaction");
-                }
-
-                return true;
-            }
-
-            public function rollback(): bool
-            {
-                $this->rollbackCalled++;
-                return true;
-            }
-        };
+        return new TransactionalControllerStub($commitThrowsException);
     }
 
     /**
@@ -124,7 +75,7 @@ class ApplicationTest extends TestCase
      * @return Application
      * @throws \Exception
      */
-    protected function createApplication(ConnectorInterface $connector)
+    protected function createApplication(ConnectorInterface $connector): Application
     {
         return new Application($connector);
     }
@@ -212,7 +163,9 @@ class ApplicationTest extends TestCase
 
         $controller = $this->createTransactionalController();
 
-        $application->getContainer()->set(Controller::CATEGORY, $controller);
+        $spy = \Mockery::spy($controller);
+
+        $application->getContainer()->set(Controller::CATEGORY, $spy);
 
         $category = new Category();
 
@@ -222,9 +175,17 @@ class ApplicationTest extends TestCase
 
         $this->assertCount(1, $result->getResult());
 
-        $this->assertSame(1, $controller->beginTransactionCalled);
-        $this->assertSame(1, $controller->commitCalled);
-        $this->assertSame(0, $controller->rollbackCalled);
+        $spy->shouldHaveReceived('delete')
+            ->with($category)
+            ->once();
+
+        $spy->shouldHaveReceived('beginTransaction')
+            ->once();
+
+        $spy->shouldHaveReceived('commit')
+            ->once();
+
+        $spy->shouldNotReceive('rollback');
     }
 
     /**
@@ -240,21 +201,30 @@ class ApplicationTest extends TestCase
 
         $controller = $this->createTransactionalController(true);
 
-        $application->getContainer()->set(Controller::CATEGORY, $controller);
+        $spy = \Mockery::spy($controller);
+
+        $application->getContainer()->set(Controller::CATEGORY, $spy);
 
         $category = new Category();
 
         $request = Request::create(Controller::CATEGORY, Action::DELETE, [$category]);
 
-        $this->expectException(\Exception::class);
-
         try {
             $application->handleRequest($request, $application->getEndpointConnector());
-        } finally {
-            $this->assertSame(1, $controller->beginTransactionCalled);
-            $this->assertSame(1, $controller->commitCalled);
-            $this->assertSame(1, $controller->rollbackCalled);
-        }
+        } catch(\Exception $e){}
+
+        $spy->shouldHaveReceived('beginTransaction')
+            ->once();
+
+        $spy->shouldHaveReceived('delete')
+            ->with($category)
+            ->once();
+
+        $spy->shouldHaveReceived('commit')
+            ->once();
+
+        $spy->shouldHaveReceived('rollback')
+            ->once();
     }
 
     /**

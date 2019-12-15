@@ -9,7 +9,7 @@ use Jtl\Connector\Core\Model\TranslatableAttribute;
 use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
-use Jtl\Connector\Test\TestCase;
+use Jtl\Connector\Test\Core\TestCase;
 
 /**
  * Class ObjectTypesSubscriberTest

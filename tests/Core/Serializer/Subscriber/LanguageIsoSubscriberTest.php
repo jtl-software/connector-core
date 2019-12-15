@@ -1,5 +1,4 @@
 <?php
-
 namespace Jtl\Connector\Test\Serializer\Subscriber;
 
 use Jtl\Connector\Core\Model\AbstractI18n;
@@ -9,7 +8,7 @@ use Jtl\Connector\Core\Model\ImageI18n;
 use Jtl\Connector\Core\Model\ProductI18n;
 use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
-use Jtl\Connector\Test\TestCase;
+use Jtl\Connector\Test\Core\TestCase;
 
 /**
  * Class LanguageIsoSubscriberTest

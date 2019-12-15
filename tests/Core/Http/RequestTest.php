@@ -1,9 +1,8 @@
 <?php
-
-namespace Jtl\Connector\Test\Http;
+namespace Jtl\Connector\Test\Core\Http;
 
 use Jtl\Connector\Core\Http\Request;
-use Jtl\Connector\Test\TestCase;
+use Jtl\Connector\Test\Core\TestCase;
 
 /**
  * Class RequestTest

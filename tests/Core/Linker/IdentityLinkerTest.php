@@ -1,5 +1,5 @@
 <?php
-namespace Jtl\Connector\Test\Linker;
+namespace Jtl\Connector\Test\Core\Linker;
 
 use Jtl\Connector\Core\Definition\IdentityType;
 use Jtl\Connector\Core\Definition\Model;
@@ -12,7 +12,7 @@ use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\ProductVariation;
 use Jtl\Connector\Core\Model\ProductWarehouseInfo;
 use Jtl\Connector\Core\Model\ShippingClass;
-use Jtl\Connector\Test\TestCase;
+use Jtl\Connector\Test\Core\TestCase;
 
 /**
  * Class IdentityLinkerTest
