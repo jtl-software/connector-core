@@ -14,6 +14,7 @@ use Jtl\Connector\Core\Definition\ConfigOption;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\ErrorCode;
 use Jtl\Connector\Core\Definition\Event;
+use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Error\ErrorHandler;
 use Jtl\Connector\Core\Error\AbstractErrorHandler;
 use Jtl\Connector\Core\Connector\UseChecksumInterface;
@@ -253,7 +254,7 @@ class Application
             $connector = $this->getEndpointConnector();
         }
 
-        $modelNamespace = 'Jtl\\Connector\\Core\\Model';
+        $modelNamespace = Model::MODEL_NAMESPACE;
         if ($connector instanceof ModelInterface) {
             $modelNamespace = $connector->getModelNamespace();
         }
@@ -291,11 +292,6 @@ class Application
         // Identity mapping
         $resultData = is_array($response->getResult()) ? $response->getResult() : [$response->getResult()];
         foreach ($resultData as $result) {
-            if ($result instanceof AbstractDataModel) {
-                $this->linker->linkModel($result, ($request->getAction() === Action::DELETE));
-                $this->linkChecksum($result);
-            }
-
             $eventArg = null;
             switch ($request->getAction()) {
                 case Action::PUSH:
@@ -426,16 +422,21 @@ class Application
             case Action::DELETE:
                 try {
                     $model = null;
-                    if ($controllerObject instanceof TransactionalInterface) {
-                        $controllerObject->beginTransaction();
-                    }
-
                     foreach ($params as $model) {
-                        $result[] = $controllerObject->$action($model);
-                    }
+                        if ($controllerObject instanceof TransactionalInterface) {
+                            $controllerObject->beginTransaction();
+                        }
 
-                    if ($controllerObject instanceof TransactionalInterface) {
-                        $controllerObject->commit();
+                        $dataModel = $controllerObject->$action($model);
+                        if ($dataModel instanceof AbstractDataModel) {
+                            $this->linker->linkModel($dataModel, ($request->getAction() === Action::DELETE));
+                            $this->linkChecksum($dataModel);
+                        }
+                        $result[] = $dataModel;
+
+                        if ($controllerObject instanceof TransactionalInterface) {
+                            $controllerObject->commit();
+                        }
                     }
                 } catch (\Throwable $ex) {
                     if ($controllerObject instanceof TransactionalInterface) {
