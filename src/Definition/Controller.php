@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Definition;
 
 final class Controller
@@ -32,12 +33,11 @@ final class Controller
      */
     public static function getControllers(): array
     {
-        if (is_null(static::$controllers)) {
-            $reflection = new \ReflectionClass(static::class);
-            static::$controllers = $reflection->getConstants();
+        if (is_null(self::$controllers)) {
+            self::$controllers = (new \ReflectionClass(self::class))->getConstants();
         }
 
-        return static::$controllers;
+        return self::$controllers;
     }
 
     /**

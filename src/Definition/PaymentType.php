@@ -94,17 +94,21 @@ final class PaymentType
     const WORLDPAY = 'pm_worldpay';
 
     /**
+     * @var null|string[]
+     */
+    protected static $types = null;
+
+    /**
      * @return integer[]
      * @throws \ReflectionException
      */
     public static function getTypes(): array
     {
-        if (is_null(static::$types)) {
-            $reflection = new \ReflectionClass(static::class);
-            static::$types = $reflection->getConstants();
+        if (is_null(self::$types)) {
+            self::$types = (new \ReflectionClass(self::class))->getConstants();
         }
 
-        return static::$types;
+        return self::$types;
     }
 
     /**
