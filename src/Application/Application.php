@@ -292,6 +292,16 @@ class Application
         // Identity mapping
         $resultData = is_array($response->getResult()) ? $response->getResult() : [$response->getResult()];
         foreach ($resultData as $result) {
+
+            if ($connector instanceof HandleRequestInterface ||
+                in_array($request->getAction(), [Action::PUSH, Action::DELETE]) === false)
+            {
+                if ($result instanceof AbstractDataModel) {
+                    $this->linker->linkModel($result, ($request->getAction() === Action::DELETE));
+                    $this->linkChecksum($result);
+                }
+            }
+
             $eventArg = null;
             switch ($request->getAction()) {
                 case Action::PUSH:
