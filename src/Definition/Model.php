@@ -241,7 +241,6 @@ final class Model
             'customerGroupId' => IdentityType::CUSTOMER_GROUP
         ],
         self::PRODUCT_WAREHOUSE_INFO => [
-            'productId' => IdentityType::PRODUCT,
             'warehouseId' => IdentityType::WAREHOUSE,
         ],
         self::SHIPPING_CLASS => [
