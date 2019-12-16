@@ -1,25 +1,26 @@
 <?php
-/**
- * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Serializer\Handler
- */
 namespace Jtl\Connector\Core\Serializer\Handler;
 
+use JMS\Serializer\Context;
 use JMS\Serializer\GraphNavigatorInterface;
 use JMS\Serializer\Handler\SubscribingHandlerInterface;
 use JMS\Serializer\JsonSerializationVisitor;
 use JMS\Serializer\JsonDeserializationVisitor;
-use JMS\Serializer\Context;
+use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Model\Identity;
+use Jtl\Connector\Core\Exception\DefinitionException;
+use ReflectionException;
 
-/**
- * JMS Identity Subscribing Handler
- *
- * @access public
- * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
- */
 class IdentityHandler implements SubscribingHandlerInterface
 {
+    /**
+     * @var Identity[]
+     */
+    protected $identities;
+
+    /**
+     * @return string[]
+     */
     public static function getSubscribingMethods()
     {
         return [
@@ -38,11 +39,40 @@ class IdentityHandler implements SubscribingHandlerInterface
         ];
     }
 
+    /**
+     * @param JsonDeserializationVisitor $visitor
+     * @param array $identity
+     * @param array $type
+     * @param Context $context
+     * @return Identity
+     * @throws DefinitionException
+     * @throws ReflectionException
+     */
     public function deserializeIdentity(JsonDeserializationVisitor $visitor, array $identity, array $type, Context $context)
     {
-        return new Identity($identity[0], $identity[1]);
+        $identityObject = new Identity($identity[0], $identity[1]);
+        if ($identity[1] > 0) {
+            $modelName = (new \ReflectionClass($visitor->getCurrentObject()))->getShortName();
+            $currentPath = $context->getCurrentPath();
+            $propertyName = end($currentPath);
+            if (Model::isIdentityProperty($modelName, $propertyName)) {
+                $identityType = Model::getPropertyIdentityType($modelName, $propertyName);
+                if (!isset($this->identities[$identityType][$identity[1]])) {
+                    $this->identities[$identityType][$identity[1]] = $identityObject;
+                }
+                $identityObject = $this->identities[$identityType][$identity[1]];
+            }
+        }
+        return $identityObject;
     }
 
+    /**
+     * @param JsonSerializationVisitor $visitor
+     * @param Identity $identity
+     * @param array $type
+     * @param Context $context
+     * @return mixed[]
+     */
     public function serializeIdentity(JsonSerializationVisitor $visitor, Identity $identity, array $type, Context $context)
     {
         return [$identity->getEndpoint(), $identity->getHost()];

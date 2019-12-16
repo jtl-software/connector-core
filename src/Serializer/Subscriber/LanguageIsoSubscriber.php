@@ -10,6 +10,9 @@ use Jtl\Connector\Core\Model\AbstractI18n;
 
 class LanguageIsoSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @var Languages
+     */
     protected $languages;
 
     /**
@@ -20,6 +23,9 @@ class LanguageIsoSubscriber implements EventSubscriberInterface
         $this->languages = new Languages();
     }
 
+    /**
+     * @return array
+     */
     public static function getSubscribedEvents()
     {
         return [
