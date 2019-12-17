@@ -5,11 +5,8 @@ abstract class AbstractErrorHandler
 {
     public function register(): void
     {
-        error_reporting(E_ALL);
-        //ini_set('display_errors', 1);
-
         set_exception_handler($this->getExceptionHandler());
-        set_error_handler($this->getErrorHandler(), E_ALL);
+        set_error_handler($this->getErrorHandler());
         register_shutdown_function($this->getShutdownHandler());
     }
 
