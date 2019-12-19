@@ -6,6 +6,8 @@ use Jtl\Connector\Core\Exception\DefinitionException;
 
 final class Model
 {
+    const MODEL_NAMESPACE = 'Jtl\\Connector\\Core\\Model';
+
     const CATEGORY = 'Category';
     const CATEGORY_ATTRIBUTE = 'CategoryAttr';
     const CATEGORY_IMAGE = 'CategoryImage';
