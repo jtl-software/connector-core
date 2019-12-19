@@ -42,10 +42,15 @@ class IdentityHandlerTest extends TestCase
 
         $identityHandler = new IdentityHandler();
 
-        $result = $identityHandler->deserializeIdentity(new JsonDeserializationVisitor(), [$endpointId, $hostId], [],
+        $identity = new Identity($endpointId, $hostId);
+
+        $visitor = new JsonDeserializationVisitor();
+        $visitor->setCurrentObject($identity);
+
+        $result = $identityHandler->deserializeIdentity($visitor, [$endpointId, $hostId], [],
             new DeserializationContext());
 
-        $this->assertEquals($result, new Identity($endpointId, $hostId));
+        $this->assertEquals($result, $identity);
     }
 
     /**
@@ -56,10 +61,15 @@ class IdentityHandlerTest extends TestCase
      */
     public function testDeserializeEntityMultipleMethod(IdentityHandler $identityHandler, array $identityArray)
     {
-        $result = $identityHandler->deserializeIdentity(new JsonDeserializationVisitor(), $identityArray, [],
+        $identity = new Identity($identityArray[0], $identityArray[1]);
+
+        $visitor = new JsonDeserializationVisitor();
+        $visitor->setCurrentObject($identity);
+
+        $result = $identityHandler->deserializeIdentity($visitor, $identityArray, [],
             new DeserializationContext());
 
-        $this->assertEquals(new Identity($identityArray[0], $identityArray[1]), $result);
+        $this->assertEquals($identity, $result);
     }
 
     /**
