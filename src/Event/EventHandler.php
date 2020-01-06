@@ -21,7 +21,7 @@ class EventHandler
         $event = self::createEvent($entity, $class, $action, $moment, $isCore);
 
         if ($event !== null) {
-            $dispatcher->dispatch($event::EVENT_NAME, $event);
+            $dispatcher->dispatch($event, $event::EVENT_NAME);
         }
     }
 
@@ -34,7 +34,7 @@ class EventHandler
         // Rpc Event
         $event = self::createRpcEvent($data, $controller, $action, $moment);
         if ($event !== null) {
-            $dispatcher->dispatch($event::EVENT_NAME, $event);
+            $dispatcher->dispatch($event, $event::EVENT_NAME);
         }
     }
 

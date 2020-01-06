@@ -38,7 +38,6 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 use jtl\Connector\Core\Rpc\Method;
 use jtl\Connector\Linker\IdentityLinker;
 use jtl\Connector\Model\DataModel;
-use Doctrine\Common\Collections\ArrayCollection;
 use jtl\Connector\Serializer\JMS\SerializerBuilder;
 use jtl\Connector\Linker\ChecksumLinker;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -457,7 +456,7 @@ class Application extends CoreApplication
             if ($method->getAction() === Method::ACTION_PUSH || $method->getAction() === Method::ACTION_DELETE) {
                 // OLD single Image
                 //$ns = ($method->getAction() === Method::ACTION_PUSH && $method->getController() === 'image') ? $namespace : "ArrayCollection<{$namespace}>";
-                $ns = "ArrayCollection<{$namespace}>";
+                $ns = "array<{$namespace}>";
                 $params = $serializer->deserialize($requestpacket->getParams(), $ns, 'json');
 
                 $identityLinker = IdentityLinker::getInstance();
