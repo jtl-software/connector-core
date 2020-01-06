@@ -1,5 +1,14 @@
+2.7.0
+-----
+- Removed log level and display errors calls in error handler
+- Removed deprecated get_magic_quotes_gpc call
+- Switched order in dispatch (symfony event) calls to prevent deprecated messages
+- Updated composer dependencies to establish symfony 5 compatiblity
+- Changed doctrine array collection to array
+- Updated minimum PHP Version to 7.1.3
+
 2.6.11
-------
+-----
 - Added locale irish in Ireland
 
 2.6.10
