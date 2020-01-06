@@ -25,9 +25,6 @@ class ErrorHandler implements IErrorHandler
 
     public function __construct()
     {
-        error_reporting(E_ALL);
-        ini_set('display_errors', 1);
-
         // Exception
         $this->setExceptionHandler($this->getExceptionHandler());
 
@@ -65,7 +62,7 @@ class ErrorHandler implements IErrorHandler
                     ->setData(ExceptionFormatter::format($e))
                     ->setMessage($e->getMessage());
     
-                Logger::write($error->getData(), Logger::ERROR, 'global');
+                Logger::write($error->getData(), Logger::ERROR, Logger::CHANNEL_GLOBAL);
             }
 
             $responsepacket = new ResponsePacket();
@@ -86,7 +83,7 @@ class ErrorHandler implements IErrorHandler
 
     public function setErrorHandler(callable $func)
     {
-        set_error_handler($func, E_ALL);
+        set_error_handler($func);
     }
 
     public function getErrorHandler()
@@ -99,7 +96,7 @@ class ErrorHandler implements IErrorHandler
                 E_NOTICE => array(Logger::NOTICE, 'E_NOTICE'),
                 E_CORE_ERROR => array(Logger::ERROR, 'E_CORE_ERROR'),
                 E_CORE_WARNING => array(Logger::WARNING, 'E_CORE_WARNING'),
-                E_CORE_ERROR => array(Logger::ERROR, 'E_COMPILE_ERROR'),
+                E_COMPILE_ERROR => array(Logger::ERROR, 'E_COMPILE_ERROR'),
                 E_USER_ERROR => array(Logger::ERROR, 'E_USER_ERROR'),
                 E_USER_WARNING => array(Logger::WARNING, 'E_USER_WARNING'),
                 E_USER_NOTICE => array(Logger::NOTICE, 'E_USER_NOTICE'),
@@ -111,9 +108,9 @@ class ErrorHandler implements IErrorHandler
 
             if (isset($types[$errno])) {
                 $err = "(" . $types[$errno][1] . ") File ({$errfile}, {$errline}): {$errstr}";
-                Logger::write($err, $types[$errno][0], 'global');
+                Logger::write($err, $types[$errno][0], Logger::CHANNEL_GLOBAL);
             } else {
-                Logger::write("File ({$errfile}, {$errline}): {$errstr}", Logger::ERROR, 'global');
+                Logger::write("File ({$errfile}, {$errline}): {$errstr}", Logger::ERROR, Logger::CHANNEL_GLOBAL);
             }
         };
     }

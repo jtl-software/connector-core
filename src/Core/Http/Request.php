@@ -111,11 +111,7 @@ class Request
      */
     public static function stripData($data)
     {
-        if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) {
-            return stripslashes($data);
-        }
-        
-        return $data;
+        return stripslashes($data);
     }
     
     /**

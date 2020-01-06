@@ -8,7 +8,6 @@
 namespace jtl\Connector\Model;
 
 use JMS\Serializer\Annotation as Serializer;
-use \Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * BoolResult
