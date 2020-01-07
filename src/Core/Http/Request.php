@@ -32,11 +32,11 @@ class Request
     {
         switch (strtolower($method)) {
             case "post":
-                return isset($_POST[$root]) ? self::stripData($_POST[$root]) : null;
+                return isset($_POST[$root]) ? $_POST[$root] : null;
             case "get":
-                return isset($_GET[$root]) ? self::stripData($_GET[$root]) : null;
+                return isset($_GET[$root]) ? $_GET[$root] : null;
             case "request":
-                return isset($_REQUEST[$root]) ? self::stripData($_REQUEST[$root]) : null;
+                return isset($_REQUEST[$root]) ? $_REQUEST[$root] : null;
             case "files":
                 return isset($_FILES[$root]) ? $_FILES[$root] : null;
             default:
@@ -102,18 +102,7 @@ class Request
     {
         return move_uploaded_file($_FILES[$name]["tmp_name"], $path . $filename);
     }
-    
-    /**
-     * Checks get_magic_quotes_gpc
-     *
-     * @param string $data
-     * @return string
-     */
-    public static function stripData($data)
-    {
-        return stripslashes($data);
-    }
-    
+
     /**
      * File Upload Handler
      *
@@ -208,7 +197,7 @@ class Request
         //Logger::write('request: ' . print_r($_REQUEST, 1), Logger::DEBUG, 'http');
 
         if ($jtlrpc !== null) {
-            return Request::stripData($jtlrpc);
+            return $jtlrpc;
         } elseif (Request::isFileupload()) {
             $filename = uniqid() . ".zip";
             //$path = APP_DIR . '/../tmp/';
@@ -217,8 +206,7 @@ class Request
                 $gzip = new Gzip();
         
                 try {
-                    $data = $gzip->read($path . $filename);
-                    $jtlrpc = Request::stripData($data);
+                    $jtlrpc = $gzip->read($path . $filename);
         
                     unlink($path . $filename);
         
