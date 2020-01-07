@@ -7,13 +7,11 @@
 
 namespace Jtl\Connector\Core\Controller;
 
-use Jtl\Connector\Core\Definition\ErrorCode;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\AuthenticationException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\MissingRequirementException;
-use Jtl\Connector\Core\IO\Path;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\Features;
@@ -49,7 +47,7 @@ class Connector extends AbstractController
      */
     public function features($params = null)
     {
-        $featureData = file_get_contents(CONNECTOR_DIR . '/config/features.json');
+        $featureData = $this->getFeatures();
         $features = Json::decode($featureData, true);
 
         $entities = [];
@@ -66,9 +64,18 @@ class Connector extends AbstractController
     }
 
     /**
+     * @return false|string
+     */
+    protected function getFeatures()
+    {
+        return file_get_contents(CONNECTOR_DIR . '/config/features.json');
+    }
+
+    /**
      * @param Ack $ack
      * @return bool
      * @throws DefinitionException
+     * @throws \ReflectionException
      */
     public function ack(Ack $ack): bool
     {
@@ -125,9 +132,8 @@ class Connector extends AbstractController
         }
 
         if ($this->application->getSessionHandler() === null) {
-            $errorMessage = 'Could not get any Session';
-            Logger::write($errorMessage, Logger::ERROR);
-            throw new ApplicationException($errorMessage, ErrorCode::NO_SESSION);
+            Logger::write('Could not get any Session', Logger::ERROR);
+            throw ApplicationException::noSession();
         }
 
         return (new Session())

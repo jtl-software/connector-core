@@ -6,6 +6,8 @@
  */
 namespace Jtl\Connector\Core\Exception;
 
+use Jtl\Connector\Core\Definition\ErrorCode;
+
 /**
  * Application Exception Class
  *
@@ -14,4 +16,12 @@ namespace Jtl\Connector\Core\Exception;
  */
 class ApplicationException extends \Exception
 {
+    /**
+     * @return ApplicationException
+     */
+    public static function noSession(): ApplicationException
+    {
+        return new static('Could not get any Session', ErrorCode::NO_SESSION);
+    }
+
 }
