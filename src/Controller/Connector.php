@@ -47,7 +47,7 @@ class Connector extends AbstractController
      */
     public function features($params = null)
     {
-        $featureData = $this->getFeatures();
+        $featureData = $this->readFeaturesData();
         $features = Json::decode($featureData, true);
 
         $entities = [];
@@ -66,7 +66,7 @@ class Connector extends AbstractController
     /**
      * @return false|string
      */
-    protected function getFeatures()
+    protected function readFeaturesData()
     {
         return file_get_contents(CONNECTOR_DIR . '/config/features.json');
     }
