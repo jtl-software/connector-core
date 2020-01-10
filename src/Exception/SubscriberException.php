@@ -10,10 +10,16 @@ class SubscriberException extends \Exception
     const INVALID_MODEL_TYPE = 10;
 
     /**
+     * @param string $expectedModelClass
+     * @param string $givenModelClass
      * @return SubscriberException
      */
-    public static function invalidModelTypeInArray(): SubscriberException
+    public static function invalidModelTypeInArray(
+        string $expectedModelClass,
+        string $givenModelClass
+    ): SubscriberException
     {
-        return new self("Invalid model type in array", self::INVALID_MODEL_TYPE);
+        return new self(sprintf("Invalid model type in array. Expected %s object but %s given", $expectedModelClass,
+            $givenModelClass), self::INVALID_MODEL_TYPE);
     }
 }

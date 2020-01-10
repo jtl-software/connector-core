@@ -7,7 +7,6 @@ use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Event\RequestEvent;
 use Jtl\Connector\Core\Exception\SubscriberException;
 use Jtl\Connector\Core\Model\Category;
-use Jtl\Connector\Core\Model\CrossSellingGroup;
 use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\ProductPrice;
 use Jtl\Connector\Core\Model\ProductPriceItem;
@@ -93,12 +92,13 @@ class PrepareProductPricesSubscriberTest extends TestCase
     /**
      * @dataProvider dataProviderProductPriceParams
      *
-     * @param array $params
-     * @throws \Jtl\Connector\Core\Exception\SubscriberException
+     * @param $params
+     * @param $expected
+     * @throws SubscriberException
      */
-    public function testPrepareProductPricesIgnoreParamsOthersThanProductPrice(array $params)
+    public function testPrepareProductPricesThrowsExceptionWhenInvalidModelIsInArray($params,$expected)
     {
-        $this->expectExceptionObject(SubscriberException::invalidModelTypeInArray());
+        $this->expectExceptionObject(SubscriberException::invalidModelTypeInArray($expected[0],$expected[1]));
 
         $subscriber = new PrepareProductPricesSubscriber();
 
@@ -116,11 +116,24 @@ class PrepareProductPricesSubscriberTest extends TestCase
     {
         return [
             [
-                [$price = (new ProductPrice())->setProductId($id = $this->createIdentity()),  (new Category())->setId($this->createIdentity())],
+                [
+                    (new ProductPrice())->setProductId($this->createIdentity()),
+                    (new Category())->setId($this->createIdentity())
+                ],
+                [ProductPrice::class, Category::class]
             ],
             [
-                [new CrossSellingGroup(),new Product()],
+                [10, new Product()],
+                [ProductPrice::class, 'variable']
             ],
+            [
+                [[]],
+                [ProductPrice::class, 'variable']
+            ],
+            [
+                [new \stdClass()],
+                [ProductPrice::class, \stdClass::class]
+            ]
         ];
     }
 
