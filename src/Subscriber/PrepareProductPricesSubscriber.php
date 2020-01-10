@@ -5,6 +5,7 @@ use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Event\RequestEvent;
+use Jtl\Connector\Core\Exception\SubscriberException;
 use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\ProductPrice;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -26,6 +27,7 @@ class PrepareProductPricesSubscriber implements EventSubscriberInterface
 
     /**
      * @param RequestEvent $event
+     * @throws SubscriberException
      */
     public function prepareProductPrices(RequestEvent $event)
     {
@@ -36,6 +38,11 @@ class PrepareProductPricesSubscriber implements EventSubscriberInterface
 
             /** @var ProductPrice $price */
             foreach ($prices as $price) {
+
+                if ($price instanceof ProductPrice === false) {
+                    throw SubscriberException::invalidModelTypeInArray(ProductPrice::class,
+                        is_object($price) ? get_class($price) : 'variable');
+                }
 
                 $hostId = $price->getProductId()->getHost();
 
