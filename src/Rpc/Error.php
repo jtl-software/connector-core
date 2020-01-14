@@ -138,7 +138,7 @@ class Error extends AbstractModel
         }
 
         if (!$isValid) {
-            throw new RpcException("Parse error", -32701);
+            throw RpcException::parseError();
         }
     }
 }

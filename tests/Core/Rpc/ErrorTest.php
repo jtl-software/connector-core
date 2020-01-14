@@ -1,0 +1,52 @@
+<?php
+namespace Jtl\Connector\Test\Core\Rpc;
+
+use Jtl\Connector\Core\Exception\RpcException;
+use Jtl\Connector\Core\Rpc\Error;
+use Jtl\Connector\Test\Core\TestCase;
+
+/**
+ * Class ErrorTest
+ * @package Jtl\Connector\Test\Core\Rpc
+ */
+class ErrorTest extends TestCase
+{
+    /**
+     * @throws RpcException
+     */
+    public function testValidateThrowExceptionWhenCodeIsNull()
+    {
+        $this->expectExceptionObject(RpcException::parseError());
+
+        $error = new Error();
+        $error->validate();
+    }
+
+    /**
+     * @throws RpcException
+     */
+    public function testValidateThrowExceptionWhenMessageIsNotSet()
+    {
+        $this->expectExceptionObject(RpcException::parseError());
+
+        $error = new Error();
+        $error->setCode(100);
+        $error->setMessage("");
+        $error->setData([]);
+        $error->validate();
+    }
+
+    /**
+     * @throws RpcException
+     */
+    public function testValidateCorrect()
+    {
+        $error = new Error();
+        $error->setCode(101);
+        $error->setMessage("Error messasge");
+        $error->setData([]);
+        $return = $error->validate();
+
+        $this->assertNull($return);
+    }
+}

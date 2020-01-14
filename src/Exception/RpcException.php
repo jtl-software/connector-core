@@ -14,4 +14,13 @@ namespace Jtl\Connector\Core\Exception;
  */
 class RpcException extends \Exception
 {
+    const PARSE_ERROR = -32701;
+
+    /**
+     * @return RpcException
+     */
+    public static function parseError(): RpcException
+    {
+        return new self("Parse error", self::PARSE_ERROR);
+    }
 }
