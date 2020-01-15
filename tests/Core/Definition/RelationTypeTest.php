@@ -3,6 +3,7 @@ namespace Jtl\Connector\Test\Core\Definition;
 
 use Jtl\Connector\Core\Definition\IdentityType;
 use Jtl\Connector\Core\Definition\RelationType;
+use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Test\Core\TestCase;
 
 /**
@@ -46,11 +47,20 @@ class RelationTypeTest extends TestCase
      *
      * @param $relationType
      * @param $expectedValue
+     * @throws DefinitionException
+     * @throws \ReflectionException
      */
     public function testGetIdentityType($relationType, $expectedValue)
     {
+        if ($expectedValue instanceof DefinitionException) {
+            $this->expectExceptionObject($expectedValue);
+        }
+
         $identityType = RelationType::getIdentityType($relationType);
-        $this->assertSame($identityType, $expectedValue);
+
+        if ($expectedValue instanceof DefinitionException === false) {
+            $this->assertSame($identityType, $expectedValue);
+        }
     }
 
     /**
@@ -61,7 +71,7 @@ class RelationTypeTest extends TestCase
         return [
             [RelationType::CATEGORY, IdentityType::CATEGORY],
             [RelationType::PRODUCT_VARIATION_VALUE, IdentityType::PRODUCT_VARIATION_VALUE],
-            ['', null],
+            ['foo', DefinitionException::unknownIdentityTypeMapping('foo')],
         ];
     }
 
