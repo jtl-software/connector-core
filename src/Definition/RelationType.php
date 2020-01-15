@@ -5,6 +5,8 @@
  */
 namespace Jtl\Connector\Core\Definition;
 
+use Jtl\Connector\Core\Exception\DefinitionException;
+
 final class RelationType
 {
     const CATEGORY = 'category';
@@ -39,11 +41,17 @@ final class RelationType
 
     /**
      * @param string $relationType
-     * @return int|null
+     * @return int
+     * @throws DefinitionException
+     * @throws \ReflectionException
      */
     public static function getIdentityType(string $relationType): int
     {
-        return self::hasIdentityType($relationType) ? self::$mappings[$relationType] : null;
+        if (self::hasIdentityType($relationType) && IdentityType::isType($type = self::$mappings[$relationType])) {
+            return $type;
+        }
+
+        throw DefinitionException::unknownIdentityTypeMapping($relationType);
     }
 
     /**

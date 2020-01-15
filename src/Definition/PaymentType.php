@@ -112,11 +112,11 @@ final class PaymentType
     }
 
     /**
-     * @param integer $type
+     * @param string $type
      * @return boolean
      * @throws \ReflectionException
      */
-    public static function isType(int $type): bool
+    public static function isType(string $type): bool
     {
         return in_array($type, self::getTypes(), true);
     }

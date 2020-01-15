@@ -90,7 +90,7 @@ class PrepareProductPricesSubscriberTest extends TestCase
     }
 
     /**
-     * @dataProvider dataProviderProductPriceParams
+     * @dataProvider productPriceParamsDataProvider
      *
      * @param $params
      * @param $expected
@@ -112,7 +112,7 @@ class PrepareProductPricesSubscriberTest extends TestCase
      * @return array
      * @throws \Exception
      */
-    public function dataProviderProductPriceParams(): array
+    public function productPriceParamsDataProvider(): array
     {
         return [
             [

@@ -13,6 +13,7 @@ class DefinitionException extends \Exception
     const DEFAULT_VALUE_NOT_EXISTS = 80;
     const UNKNOWN_ACTION = 90;
     const UNKNOWN_MOMENT = 100;
+    const UNKNOWN_IDENTITY_TYPE_MAPPING = 110;
 
     /**
      * @param string $model
@@ -113,5 +114,15 @@ class DefinitionException extends \Exception
     {
         $msg = sprintf('Unknown moment (%s)', $moment);
         return new static($msg, self::UNKNOWN_MOMENT);
+    }
+
+    /**
+     * @param string $relationType
+     * @return DefinitionException
+     */
+    public static function unknownIdentityTypeMapping(string $relationType): DefinitionException
+    {
+        $msg = sprintf('Unknown identity type mapping (%s)', $relationType);
+        return new static($msg, self::UNKNOWN_IDENTITY_TYPE_MAPPING);
     }
 }
