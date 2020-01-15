@@ -46,4 +46,22 @@ class TestCase extends \PHPUnit\Framework\TestCase
     {
         return new Identity($this->createEndpointId(), $this->createHostId());
     }
+
+    /**
+     * @param string $className
+     * @return array
+     * @throws \ReflectionException
+     */
+    protected function getCorrectConstantsTestCases(string $className): array
+    {
+        $reflection = new \ReflectionClass($className);
+        $constants = array_values($reflection->getConstants());
+
+        $testCases = [];
+        foreach ($constants as $constant) {
+            $testCases[] = [$constant, true];
+        }
+
+        return $testCases;
+    }
 }

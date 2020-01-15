@@ -41,7 +41,7 @@ final class RelationType
      * @param string $relationType
      * @return int|null
      */
-    public static function getIdentityType(string $relationType): int
+    public static function getIdentityType(string $relationType): ?int
     {
         return self::hasIdentityType($relationType) ? self::$mappings[$relationType] : null;
     }
