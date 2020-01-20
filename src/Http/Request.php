@@ -36,7 +36,7 @@ class Request
             case "files":
                 return isset($_FILES[$root]) ? $_FILES[$root] : null;
             default:
-                throw new HttpException("Unknown method ({$method})");
+                throw HttpException::unknownMethod($method);
         }
     }
 
@@ -79,7 +79,7 @@ class Request
      * @param string $name
      * @return boolean
      */
-    public static function isFileupload($name = "jtlrpc")
+    public static function isFileUpload($name = "jtlrpc")
     {
         return isset($_FILES[$name]) && is_uploaded_file($_FILES[$name]["tmp_name"]);
     }
@@ -92,7 +92,7 @@ class Request
      * @param string $name
      * @return boolean
      */
-    public static function moveFileupload($path, $filename, $name = "jtlrpc")
+    public static function moveFileUpload($path, $filename, $name = "jtlrpc")
     {
         return move_uploaded_file($_FILES[$name]["tmp_name"], $path . $filename);
     }
@@ -104,17 +104,17 @@ class Request
      * @throws HttpException
      * @return string|NULL
      */
-    public static function handleFileupload($name = "file")
+    public static function handleFileUpload($name = "file")
     {
-        if (Request::isFileupload($name)) {
-            $pathinfo = pathinfo($_FILES[$name]["name"]);
+        if (Request::isFileUpload($name)) {
+            $pathInfo = pathinfo($_FILES[$name]["name"]);
 
-            if (isset($pathinfo["extension"])) {
-                $extension = $pathinfo["extension"];
+            if (isset($pathInfo["extension"])) {
+                $extension = $pathInfo["extension"];
                 $filename = uniqid() . ".{$extension}";
                 $path = Temp::getDirectory() . DIRECTORY_SEPARATOR;
 
-                if (Request::moveFileupload($path, $filename, $name)) {
+                if (Request::moveFileUpload($path, $filename, $name)) {
                     return "{$path}{$filename}";
                 } else {
                     throw new HttpException("Could not write file to tmp dir");
@@ -133,7 +133,7 @@ class Request
      * @param $filename
      * @return bool
      */
-    public static function deleteFileupload($filename)
+    public static function deleteFileUpload($filename)
     {
         if ($filename !== null) {
             return @unlink($filename);
@@ -143,21 +143,21 @@ class Request
     }
 
     /**
-     * @param array $filesnames
+     * @param array $fileNames
      * @param bool|true $withFolder
      * @return bool
      */
-    public static function deleteFileuploads(array $filesnames = [], $withFolder = true)
+    public static function deleteFileUploads(array $fileNames = [], $withFolder = true)
     {
-        if (count($filesnames) > 0) {
+        if (count($fileNames) > 0) {
             $folder = null;
-            foreach ($filesnames as $filesname) {
+            foreach ($fileNames as $fileName) {
                 if ($folder === null) {
-                    $infos = pathinfo($filesname);
+                    $infos = pathinfo($fileName);
                     $folder = $infos['dirname'];
                 }
 
-                @unlink($filesname);
+                @unlink($fileName);
             }
 
             if ($withFolder && $folder !== null) {
@@ -174,6 +174,7 @@ class Request
      * Main HTTP Handler
      *
      * @return string|null
+     * @throws HttpException
      */
     public static function getJtlrpc(): ?string
     {

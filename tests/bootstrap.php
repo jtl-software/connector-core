@@ -6,6 +6,6 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . '../vendor/autoload.php';
 
 AnnotationRegistry::registerLoader('class_exists');
 
-define('CONNECTOR_DIR', __DIR__ . DIRECTORY_SEPARATOR);
+define('CONNECTOR_DIR', dirname(__DIR__));
 
-define('TEST_DIR', __DIR__ . DIRECTORY_SEPARATOR);
+define('TEST_DIR', dirname(__DIR__) . '/tests');
