@@ -9,12 +9,17 @@ namespace Jtl\Connector\Core\IO;
 class Temp
 {
     /**
+     * @param array|null $path
      * @return string
      * @throws \Exception
      */
-    public static function createDirectory(): string
+    public static function createDirectory(array $path = null): string
     {
-        $dir = Path::combine(self::getDirectory(), 'con-' . uniqid());
+        if (is_null($path)) {
+            $path = [self::getDirectory(), 'con-' . uniqid()];
+        }
+
+        $dir = Path::combine(...$path);
         if (mkdir($dir)) {
             return $dir;
         }
