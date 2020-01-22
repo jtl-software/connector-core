@@ -38,7 +38,7 @@ class TempTest extends TestCase
      */
     public function testCreateDirectoryWithDifferentName()
     {
-        $dir = Temp::createDirectory([Temp::getDirectory(), 'foo-bar-' . uniqid()]);
+        $dir = Temp::createDirectory(...[Temp::getDirectory(), 'foo-bar-' . uniqid()]);
 
         $this->assertDirectoryExists($dir);
 
