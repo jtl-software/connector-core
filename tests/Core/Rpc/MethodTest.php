@@ -52,7 +52,7 @@ class MethodTest extends TestCase
         return [
             ['product.pull', 'Product', 'pull', false],
             ['core.connector.auth', 'Connector', 'auth', true],
-            [' category. pull', ' category', ' pull', false],
+            [' category. pull', ' Category', ' pull', false],
             ['.', '', '', false],
             ['..', '', '', false]
         ];

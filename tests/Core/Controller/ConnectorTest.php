@@ -1,5 +1,5 @@
 <?php
-namespace Jtl\Connector\Test\Controller;
+namespace Jtl\Connector\Test\Core\Controller;
 
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
@@ -47,7 +47,7 @@ class ConnectorTest extends TestCase
 
         $jsonFeatures = json_encode(["entities" => ["Category" => ["push" => true]]]);
 
-        $connector->shouldReceive('getFeatures')->andReturn($jsonFeatures);
+        $connector->shouldReceive('readFeaturesData')->andReturn($jsonFeatures);
 
         $features = $connector->features();
 

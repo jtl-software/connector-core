@@ -1,5 +1,5 @@
 <?php
-namespace Jtl\Connector\Test\Controller;
+namespace Jtl\Connector\Test\Core\Controller;
 
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Controller\Linker;
