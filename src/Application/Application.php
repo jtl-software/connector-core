@@ -198,7 +198,7 @@ class Application
 
         } finally {
             if (count($this->imagesToDelete) > 0) {
-                HttpRequest::deleteFileuploads($this->imagesToDelete);
+                HttpRequest::deleteFileUploads($this->imagesToDelete);
                 $this->imagesToDelete = [];
             }
 
@@ -559,7 +559,7 @@ class Application
     protected function handleImagePush(AbstractImage ...$images): void
     {
         $imagePaths = [];
-        $zipFile = HttpRequest::handleFileupload();
+        $zipFile = HttpRequest::handleFileUpload();
         $tempDir = Temp::createDirectory();
         if ($zipFile !== null && $tempDir !== null) {
             $archive = new Zip();
