@@ -1,7 +1,7 @@
 <?php
 namespace Jtl\Connector\Core\Utilities;
 
-use CaseHelper\CaseHelperFactory;
+use Jawira\CaseConverter\Convert;
 
 class Str
 {
@@ -12,7 +12,7 @@ class Str
      */
     public static function toCamelCase(string $string): string
     {
-        return lcfirst(CaseHelperFactory::make(CaseHelperFactory::INPUT_TYPE_SNAKE_CASE)->toCamelCase($string));
+        return (new Convert($string))->fromSnake()->toCamel();
     }
 
     /**
@@ -22,7 +22,7 @@ class Str
      */
     public static function toPascalCase(string $string): string
     {
-        return CaseHelperFactory::make(CaseHelperFactory::INPUT_TYPE_SNAKE_CASE)->toPascalCase($string);
+        return (new Convert($string))->fromSnake()->toPascal();
     }
 
     /**
@@ -32,6 +32,6 @@ class Str
      */
     public static function toSnakeCase(string $string): string
     {
-        return CaseHelperFactory::make(CaseHelperFactory::INPUT_TYPE_CAMEL_CASE)->toSnakeCase($string);
+        return (new Convert($string))->fromPascal()->toSnake();
     }
 }

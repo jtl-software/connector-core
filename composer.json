@@ -4,7 +4,7 @@
     "description": "JTL-Connector protocol library and classes",
     "keywords": ["jtl", "connector", "protocol", "model", "data"],
     "homepage": "http://www.jtl-software.de",
-    "license": "LGPL-3.0-or-later",
+    "license": "MIT",
     "authors": [{
         "name": "JTL Software GmbH",
         "email": "info@jtl-software.de",
@@ -16,14 +16,14 @@
         "jms/serializer": "^3.3",
         "hassankhan/config": "^2.0",
         "monolog/monolog": "^2.0",
-        "symfony/finder": "^3.0||^4.0",
-        "symfony/event-dispatcher": "^3.0||^4.0",
+        "symfony/finder": "*",
+        "symfony/event-dispatcher": "*",
         "doctrine/collections": "^1.4",
         "doctrine/annotations": "^1.4",
         "ext-sqlite3": "*",
         "php-di/php-di": "^6.0",
-        "nabil1337/case-helper": "^0.1.0",
-        "gmo/iso-639": "^1.0"
+        "gmo/iso-639": "^1.0",
+        "jawira/case-converter": "^3.4"
     },
     "autoload": {
         "psr-4": {
