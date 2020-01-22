@@ -3,6 +3,7 @@ namespace Jtl\Connector\Test\Core;
 
 use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Model\Identity;
+use Jtl\Connector\Test\Stub\Logger\LoggerStub;
 
 /**
  * Class TestCase
@@ -15,7 +16,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
      */
     protected function setUp(): void
     {
-        \Mockery::mock(Logger::class, 'LoggerStub')
+        \Mockery::namedMock(Logger::class, LoggerStub::class)
             ->shouldReceive('write')
             ->withAnyArgs();
     }
