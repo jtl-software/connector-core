@@ -32,8 +32,8 @@ class StrTest extends TestCase
             ['camel_case', 'camelCase'],
             [false, ''],
             ['', ''],
-            ['_snake_case_', 'snakeCase_'],
-            ['snake__case', 'snake_Case'],
+            ['_snake_case_', 'snakeCase'],
+            ['snake__case', 'snakeCase'],
             [12345, '12345'],
             ['    ', '    '],
             ['sna\\ke', 'sna\\ke']
@@ -61,11 +61,11 @@ class StrTest extends TestCase
             ['camel_case', 'CamelCase'],
             [false, ''],
             ['', ''],
-            ['_snake_case_', 'SnakeCase_'],
-            ['snake__case', 'Snake_Case'],
+            ['_snake_case_', 'SnakeCase'],
+            ['snake__case', 'SnakeCase'],
             [12345, '12345'],
             ['    ', '    '],
-            ['sna\\ke', 'Sna\\ke']
+            ['sna\\ke', 'Sna\\Ke']
         ];
     }
 
@@ -92,7 +92,7 @@ class StrTest extends TestCase
             ['', ''],
             ['_snake_case_', '_snake_case_'],
             ['snake__case', 'snake__case'],
-            [12345, '1_2_3_4_5'],
+            [12345, '12345'],
             ['    ', '    '],
             ['sna\\ke', 'sna\\ke']
         ];
