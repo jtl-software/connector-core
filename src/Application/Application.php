@@ -416,15 +416,17 @@ class Application
         $action = $request->getAction();
         $params = $request->getParams();
 
-        if (!$this->container->has($controller)) {
-            $controllerClass = $connector->getControllerNamespace() . '\\' . $controller;
+        $controllerName = sprintf("%sController", $controller);
+
+        if (!$this->container->has($controllerName)) {
+            $controllerClass = $connector->getControllerNamespace() . '\\' . $controllerName;
             if (!class_exists($controllerClass)) {
                 throw new ApplicationException(sprintf('Controller class %s does not exist!', $controllerClass));
             }
-            $this->container->set($controller, $this->container->get($controllerClass));
+            $this->container->set($controllerName, $this->container->get($controllerClass));
         }
 
-        $controllerObject = $this->container->get($controller);
+        $controllerObject = $this->container->get($controllerName);
 
         $result = [];
         switch ($action) {
@@ -453,7 +455,7 @@ class Application
                         $controllerObject->rollback();
                     }
 
-                    $this->extendExceptionMessageWithIdentifiers($ex, $model, $controller, $action);
+                    $this->extendExceptionMessageWithIdentifiers($ex, $model, $controllerName, $action);
 
                     throw $ex;
                 }
@@ -467,7 +469,7 @@ class Application
 
         if ($action === Action::STATISTIC && $controllerObject instanceof StatisticInterface) {
             $result = (new Statistic())
-                ->setControllerName($controller)
+                ->setControllerName($controllerName)
                 ->setAvailable($result);
         }
 
