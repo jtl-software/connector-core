@@ -3,9 +3,10 @@ namespace Jtl\Connector\Test\Core\Controller;
 
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
-use Jtl\Connector\Core\Controller\Connector;
+use Jtl\Connector\Core\Controller\ConnectorController;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\AuthenticationException;
+use Jtl\Connector\Core\Exception\MissingRequirementException;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\Features;
@@ -22,16 +23,16 @@ class ConnectorTest extends TestCase
     use MockeryPHPUnitIntegration;
 
     /**
-     * @return Connector
+     * @return ConnectorController
      */
-    protected function createConnectorController(): Connector
+    protected function createConnectorController(): ConnectorController
     {
         $application = \Mockery::mock(Application::class);
-        return new Connector($application);
+        return new ConnectorController($application);
     }
 
     /**
-     * @throws \Jtl\Connector\Core\Exception\MissingRequirementException
+     * @throws MissingRequirementException
      */
     public function testInit()
     {
@@ -43,7 +44,7 @@ class ConnectorTest extends TestCase
      */
     public function testFeatures()
     {
-        $connector = \Mockery::mock(Connector::class)->shouldAllowMockingProtectedMethods()->makePartial();
+        $connector = \Mockery::mock(ConnectorController::class)->shouldAllowMockingProtectedMethods()->makePartial();
 
         $jsonFeatures = json_encode(["entities" => ["Category" => ["push" => true]]]);
 
@@ -73,7 +74,7 @@ class ConnectorTest extends TestCase
         $application = \Mockery::mock(Application::class);
         $application->shouldReceive('getLinker->save')->times(3)->andReturnTrue();
 
-        $connector = new Connector($application);
+        $connector = new ConnectorController($application);
 
         $ack = new Ack();
         $ack->setIdentities([
@@ -125,7 +126,7 @@ class ConnectorTest extends TestCase
             };
         });
 
-        $connector = new Connector($application);
+        $connector = new ConnectorController($application);
 
         $auth = new Authentication();
         $auth->setToken(md5(time()));
@@ -153,7 +154,7 @@ class ConnectorTest extends TestCase
 
         $application->shouldReceive('getSessionHandler')->andReturnNull();
 
-        $connector = new Connector($application);
+        $connector = new ConnectorController($application);
 
         $auth = new Authentication();
         $auth->setToken(md5(time()));
@@ -181,7 +182,7 @@ class ConnectorTest extends TestCase
             return \Mockery::mock(\SessionHandlerInterface::class);
         });
 
-        $connector = new Connector($application);
+        $connector = new ConnectorController($application);
 
         $auth = new Authentication();
         $auth->setToken(md5(time()));

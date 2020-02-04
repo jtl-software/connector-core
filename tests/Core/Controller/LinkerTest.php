@@ -2,7 +2,7 @@
 namespace Jtl\Connector\Test\Core\Controller;
 
 use Jtl\Connector\Core\Application\Application;
-use Jtl\Connector\Core\Controller\Linker;
+use Jtl\Connector\Core\Controller\LinkerController;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,7 +19,7 @@ class LinkerTest extends TestCase
         $application = \Mockery::mock(Application::class);
         $application->shouldReceive('getLinker->clear')->andReturnTrue();
 
-        $linker = new Linker($application);
+        $linker = new LinkerController($application);
 
         $response = $linker->clear(['foo']);
         $this->assertTrue($response);
@@ -33,7 +33,7 @@ class LinkerTest extends TestCase
         $application = \Mockery::mock(Application::class);
         $application->shouldReceive('getLinker->clear')->andReturnFalse();
 
-        $linker = new Linker($application);
+        $linker = new LinkerController($application);
 
         $response = $linker->clear(true);
         $this->assertFalse($response);

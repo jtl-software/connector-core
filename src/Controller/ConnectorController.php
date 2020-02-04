@@ -28,7 +28,7 @@ use Jtl\Connector\Core\Utilities\Str;
  *
  * @access public
  */
-class Connector extends AbstractController
+class ConnectorController extends AbstractController
 {
     /**
      * @param null $params

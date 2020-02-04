@@ -33,9 +33,10 @@ class ApplicationTest extends TestCase
     use MockeryPHPUnitIntegration;
 
     /**
+     * @param string $controllerNamespace
      * @return ConnectorInterface|\Mockery\LegacyMockInterface|\Mockery\MockInterface
      */
-    public function createConnector()
+    public function createConnector($controllerNamespace = "")
     {
         $tokenValidator = \Mockery::mock(TokenValidatorInterface::class);
         $tokenValidator->shouldReceive('validate')->andReturnTrue();
@@ -44,7 +45,7 @@ class ApplicationTest extends TestCase
 
         $endpointConnector = \Mockery::mock(ConnectorInterface::class);
         $endpointConnector->shouldReceive('initialize');
-        $endpointConnector->shouldReceive('getControllerNamespace')->andReturn("");
+        $endpointConnector->shouldReceive('getControllerNamespace')->andReturn($controllerNamespace);
         $endpointConnector->shouldReceive('getTokenValidator')->andReturn($tokenValidator);
         $endpointConnector->shouldReceive('getPrimaryKeyMapper')->andReturn($primaryKeyMapper);
 
@@ -186,6 +187,29 @@ class ApplicationTest extends TestCase
             ->once();
 
         $spy->shouldNotReceive('rollback');
+    }
+
+
+    /**
+     * @throws ApplicationException
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
+     * @throws \ReflectionException
+     * @throws \Throwable
+     */
+    public function testHandleRequestControllerClassNeedToBeInitialized()
+    {
+        $application = $this->createApplication($this->createConnector(
+            "Jtl\Connector\Core\Controller"
+        ));
+
+        $ack = new Ack();
+
+        $request = Request::create(Controller::CONNECTOR, Action::ACK, [$ack]);
+
+        $response = $application->handleRequest($request, $application->getEndpointConnector());
+
+        $this->assertTrue($response->getResult());
     }
 
     /**

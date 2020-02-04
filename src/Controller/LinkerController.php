@@ -12,7 +12,7 @@ namespace Jtl\Connector\Core\Controller;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.com>
  */
-class Linker extends AbstractController
+class LinkerController extends AbstractController
 {
     /**
      * @param null $params
