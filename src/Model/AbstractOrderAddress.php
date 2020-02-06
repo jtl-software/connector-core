@@ -1,0 +1,455 @@
+<?php
+namespace Jtl\Connector\Core\Model;
+
+abstract class AbstractOrderAddress extends AbstractDataModel implements IdentityInterface
+{
+    /**
+     * @var Identity
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Accessor(getter="getId",setter="setId")
+     */
+    protected $id = null;
+
+    /**
+     * @var string City
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("city")
+     * @Serializer\Accessor(getter="getCity",setter="setCity")
+     */
+    protected $city = '';
+
+    /**
+     * @var string Company name
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("company")
+     * @Serializer\Accessor(getter="getCompany",setter="setCompany")
+     */
+    protected $company = '';
+
+    /**
+     * @var string Country ISO 3166-2 (2 letter Uppercase)
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("countryIso")
+     * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
+     */
+    protected $countryIso = '';
+
+    /**
+     * @var string Delivery instruction e.g. "c/o John Doe"
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("deliveryInstruction")
+     * @Serializer\Accessor(getter="getDeliveryInstruction",setter="setDeliveryInstruction")
+     */
+    protected $deliveryInstruction = '';
+
+    /**
+     * @var string E-Mail address
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("eMail")
+     * @Serializer\Accessor(getter="getEMail",setter="setEMail")
+     */
+    protected $eMail = '';
+
+    /**
+     * @var string Extra address line e.g. 'Apartment 2.5'
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("extraAddressLine")
+     * @Serializer\Accessor(getter="getExtraAddressLine",setter="setExtraAddressLine")
+     */
+    protected $extraAddressLine = '';
+
+    /**
+     * @var string Fax number
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("fax")
+     * @Serializer\Accessor(getter="getFax",setter="setFax")
+     */
+    protected $fax = '';
+
+    /**
+     * @var string First name
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("firstName")
+     * @Serializer\Accessor(getter="getFirstName",setter="setFirstName")
+     */
+    protected $firstName = '';
+
+    /**
+     * @var string Last name
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("lastName")
+     * @Serializer\Accessor(getter="getLastName",setter="setLastName")
+     */
+    protected $lastName = '';
+
+    /**
+     * @var string Mobile phone number
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("mobile")
+     * @Serializer\Accessor(getter="getMobile",setter="setMobile")
+     */
+    protected $mobile = '';
+
+    /**
+     * @var string Phone number
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("phone")
+     * @Serializer\Accessor(getter="getPhone",setter="setPhone")
+     */
+    protected $phone = '';
+
+    /**
+     * @var string Salutation e.g. 'Mr.'
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("salutation")
+     * @Serializer\Accessor(getter="getSalutation",setter="setSalutation")
+     */
+    protected $salutation = '';
+
+    /**
+     * @var string State
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("state")
+     * @Serializer\Accessor(getter="getState",setter="setState")
+     */
+    protected $state = '';
+
+    /**
+     * @var string Street + streetnumber
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("street")
+     * @Serializer\Accessor(getter="getStreet",setter="setStreet")
+     */
+    protected $street = '';
+
+    /**
+     * @var string Title e.g. ("Prof. Dr.")
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("title")
+     * @Serializer\Accessor(getter="getTitle",setter="setTitle")
+     */
+    protected $title = '';
+
+    /**
+     * @var string Zip / postal code
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("zipCode")
+     * @Serializer\Accessor(getter="getZipCode",setter="setZipCode")
+     */
+    protected $zipCode = '';
+
+    /**
+     * AbstractOrderAddress constructor.
+     */
+    public function __construct()
+    {
+        $this->id = new Identity();
+    }
+
+    /**
+     * @param Identity $id
+     * @return $this
+     */
+    public function setId(Identity $id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return Identity
+     */
+    public function getId(): Identity
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param string $city
+     * @return $this
+     */
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCity(): string
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param string $company Company name
+     * @return $this
+     */
+    public function setCompany(string $company): self
+    {
+        $this->company = $company;
+        return $this;
+    }
+
+    /**
+     * @return string Company name
+     */
+    public function getCompany(): string
+    {
+        return $this->company;
+    }
+
+    /**
+     * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
+     * @return $this
+     */
+    public function setCountryIso(string $countryIso): self
+    {
+        $this->countryIso = $countryIso;
+        return $this;
+    }
+
+    /**
+     * @return string Country ISO 3166-2 (2 letter Uppercase)
+     */
+    public function getCountryIso(): string
+    {
+        return $this->countryIso;
+    }
+
+    /**
+     * @param string $deliveryInstruction Delivery instruction e.g. "c/o John Doe"
+     * @return $this
+     */
+    public function setDeliveryInstruction(string $deliveryInstruction): self
+    {
+        $this->deliveryInstruction = $deliveryInstruction;
+        return $this;
+    }
+
+    /**
+     * @return string Delivery instruction e.g. "c/o John Doe"
+     */
+    public function getDeliveryInstruction(): string
+    {
+        return $this->deliveryInstruction;
+    }
+
+    /**
+     * @param string $eMail E-Mail address
+     * @return self
+     */
+    public function setEMail(string $eMail): self
+    {
+        $this->eMail = $eMail;
+        return $this;
+    }
+
+    /**
+     * @return string E-Mail address
+     */
+    public function getEMail(): string
+    {
+        return $this->eMail;
+    }
+
+    /**
+     * @param string $extraAddressLine Extra address line e.g. 'Apartment 2.5'
+     * @return self
+     */
+    public function setExtraAddressLine(string $extraAddressLine): self
+    {
+        $this->extraAddressLine = $extraAddressLine;
+        return $this;
+    }
+
+    /**
+     * @return string Extra address line e.g. 'Apartment 2.5'
+     */
+    public function getExtraAddressLine(): string
+    {
+        return $this->extraAddressLine;
+    }
+
+    /**
+     * @param string $fax Fax number
+     * @return self
+     */
+    public function setFax(string $fax): self
+    {
+        $this->fax = $fax;
+        return $this;
+    }
+
+    /**
+     * @return string Fax number
+     */
+    public function getFax(): string
+    {
+        return $this->fax;
+    }
+
+    /**
+     * @param string $firstName First name
+     * @return self
+     */
+    public function setFirstName(string $firstName): self
+    {
+        $this->firstName = $firstName;
+        return $this;
+    }
+
+    /**
+     * @return string First name
+     */
+    public function getFirstName(): string
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param string $lastName Last name
+     * @return self
+     */
+    public function setLastName(string $lastName): self
+    {
+        $this->lastName = $lastName;
+        return $this;
+    }
+
+    /**
+     * @return string Last name
+     */
+    public function getLastName(): string
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param string $mobile Mobile phone number
+     * @return self
+     */
+    public function setMobile(string $mobile): self
+    {
+        $this->mobile = $mobile;
+        return $this;
+    }
+
+    /**
+     * @return string Mobile phone number
+     */
+    public function getMobile(): string
+    {
+        return $this->mobile;
+    }
+
+    /**
+     * @param string $phone Phone number
+     * @return self
+     */
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
+        return $this;
+    }
+
+    /**
+     * @return string Phone number
+     */
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string $salutation Salutation e.g. 'Mr.'
+     * @return self
+     */
+    public function setSalutation(string $salutation): self
+    {
+        $this->salutation = $salutation;
+        return $this;
+    }
+
+    /**
+     * @return string Salutation e.g. 'Mr.'
+     */
+    public function getSalutation(): string
+    {
+        return $this->salutation;
+    }
+
+    /**
+     * @param string $state State
+     * @return self
+     */
+    public function setState(string $state): self
+    {
+        $this->state = $state;
+        return $this;
+    }
+
+    /**
+     * @return string State
+     */
+    public function getState(): string
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param string $street Street + streetnumber
+     * @return self
+     */
+    public function setStreet(string $street): self
+    {
+        $this->street = $street;
+        return $this;
+    }
+
+    /**
+     * @return string Street + streetnumber
+     */
+    public function getStreet(): string
+    {
+        return $this->street;
+    }
+
+    /**
+     * @param string $title Title e.g. ("Prof. Dr.")
+     * @return self
+     */
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * @return string Title e.g. ("Prof. Dr.")
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $zipCode Zip / postal code
+     * @return self
+     */
+    public function setZipCode(string $zipCode): self
+    {
+        $this->zipCode = $zipCode;
+        return $this;
+    }
+
+    /**
+     * @return string Zip / postal code
+     */
+    public function getZipCode(): string
+    {
+        return $this->zipCode;
+    }
+}
