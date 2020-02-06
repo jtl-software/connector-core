@@ -33,9 +33,9 @@ abstract class AbstractI18n extends AbstractDataModel
 
     /**
      * @param string $languageIso
-     * @return AbstractI18n
+     * @return $this
      */
-    public function setLanguageIso(string $languageIso): AbstractI18n
+    public function setLanguageIso(string $languageIso): self
     {
         $this->languageIso = $languageIso;
 

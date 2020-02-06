@@ -97,10 +97,10 @@ abstract class AbstractImage extends AbstractDataModel implements IdentityInterf
 
     /**
      * @param Identity $foreignKey
-     * @return AbstractImage
+     * @return $this
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setForeignKey(Identity $foreignKey): AbstractImage
+    public function setForeignKey(Identity $foreignKey): self
     {
         $this->foreignKey = $foreignKey;
 
@@ -117,10 +117,10 @@ abstract class AbstractImage extends AbstractDataModel implements IdentityInterf
 
     /**
      * @param Identity $id
-     * @return AbstractImage
+     * @return $this
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id): AbstractImage
+    public function setId(Identity $id): self
     {
         $this->id = $id;
 
@@ -137,9 +137,9 @@ abstract class AbstractImage extends AbstractDataModel implements IdentityInterf
 
     /**
      * @param string $filename
-     * @return AbstractImage
+     * @return $this
      */
-    public function setFilename(string $filename): AbstractImage
+    public function setFilename(string $filename): self
     {
         $this->filename = $filename;
 
@@ -156,9 +156,9 @@ abstract class AbstractImage extends AbstractDataModel implements IdentityInterf
 
     /**
      * @param string $remoteUrl
-     * @return AbstractImage
+     * @return $this
      */
-    public function setRemoteUrl(string $remoteUrl): AbstractImage
+    public function setRemoteUrl(string $remoteUrl): self
     {
         $this->remoteUrl = $remoteUrl;
 
@@ -175,9 +175,9 @@ abstract class AbstractImage extends AbstractDataModel implements IdentityInterf
 
     /**
      * @param string $name
-     * @return AbstractImage
+     * @return $this
      */
-    public function setName(string $name): AbstractImage
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -194,9 +194,9 @@ abstract class AbstractImage extends AbstractDataModel implements IdentityInterf
 
     /**
      * @param integer $sort
-     * @return AbstractImage
+     * @return $this
      */
-    public function setSort(int $sort): AbstractImage
+    public function setSort(int $sort): self
     {
         $this->sort = $sort;
 
@@ -213,9 +213,9 @@ abstract class AbstractImage extends AbstractDataModel implements IdentityInterf
 
     /**
      * @param ImageI18n $i18n
-     * @return AbstractImage
+     * @return $this
      */
-    public function addI18n(ImageI18n $i18n): AbstractImage
+    public function addI18n(ImageI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
 
@@ -224,9 +224,9 @@ abstract class AbstractImage extends AbstractDataModel implements IdentityInterf
 
     /**
      * @param ImageI18n ...$i18ns
-     * @return AbstractImage
+     * @return $this
      */
-    public function setI18ns(ImageI18n ...$i18ns): AbstractImage
+    public function setI18ns(ImageI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
 
@@ -234,7 +234,7 @@ abstract class AbstractImage extends AbstractDataModel implements IdentityInterf
     }
 
     /**
-     * @return AbstractImageI18n[]
+     * @return ImageI18n[]
      */
     public function getI18ns(): array
     {
@@ -242,9 +242,9 @@ abstract class AbstractImage extends AbstractDataModel implements IdentityInterf
     }
 
     /**
-     * @return AbstractImage
+     * @return $this
      */
-    public function clearI18ns(): AbstractImage
+    public function clearI18ns(): self
     {
         $this->i18ns = [];
 
