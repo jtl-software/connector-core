@@ -22,7 +22,7 @@ class CustomerFactory extends ModelFactory
      * @return array
      * @throws \Exception
      */
-    protected function createParams(array $override = []): array
+    public function makeOneArray(array $override = []): array
     {
         $faker = self::getFaker();
 

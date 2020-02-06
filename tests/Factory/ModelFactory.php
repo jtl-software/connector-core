@@ -37,7 +37,6 @@ abstract class ModelFactory
         return $faker;
     }
 
-
     /**
      * @param int $quantity
      * @param array $override
@@ -51,19 +50,42 @@ abstract class ModelFactory
         $serializer = SerializerBuilder::getInstance()->build();
 
         for ($i = 0; $i < $quantity; $i++) {
-            $model = $serializer->fromArray($this->createParams($override), $this->getModelClass());
+            $model = $serializer->fromArray($this->makeOneArray($override), $this->getModelClass());
             $models[] = $model;
         }
 
         return $models;
     }
 
+    /**
+     * @param int $quantity
+     * @param array $override
+     * @return array
+     */
+    public function makeArray(int $quantity, array $override = []): array
+    {
+        $models = [];
+        for ($i = 0; $i < $quantity; $i++) {
+            $models[] = $this->makeOneArray($override);
+        }
+        return $models;
+    }
+
+    /**
+     * @param array $override
+     * @return array
+     * @throws \Exception
+     */
+    public function makeOne(array $override = [])
+    {
+        return $this->make(1, $override)[0];
+    }
 
     /**
      * @return array
      * @throws \Exception
      */
-    public function identity()
+    protected function identity()
     {
         $endpointId = sprintf("%s_%s", 't', random_int(1, PHP_INT_MAX));
         $hostId = random_int(1, PHP_INT_MAX);
@@ -82,7 +104,7 @@ abstract class ModelFactory
      * @param string $to
      * @return string
      */
-    public function dateBetween(string $from, string $to = 'now'): string
+    protected function dateBetween(string $from, string $to = 'now'): string
     {
         return self::getFaker()->dateTimeBetween($from, $to)->format(\DateTime::ATOM);
     }
@@ -91,7 +113,7 @@ abstract class ModelFactory
      * @param array $override
      * @return array
      */
-    abstract protected function createParams(array $override = []): array;
+    abstract protected function makeOneArray(array $override = []): array;
 
     /**
      * @return string
