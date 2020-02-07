@@ -18,16 +18,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ShippingClass extends AbstractDataModel implements IdentityInterface
+class ShippingClass extends AbstractIdentity
 {
-    /**
-     * @var Identity Unique shippingClass id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-    
     /**
      * @var string Optional (internal) Shipping class name
      * @Serializer\Type("string")
@@ -35,35 +27,7 @@ class ShippingClass extends AbstractDataModel implements IdentityInterface
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->id = new Identity();
-    }
-    
-    /**
-     * @param Identity $id Unique shippingClass id
-     * @return ShippingClass
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): ShippingClass
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique shippingClass id
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
-    
+
     /**
      * @param string $name Optional (internal) Shipping class name
      * @return ShippingClass

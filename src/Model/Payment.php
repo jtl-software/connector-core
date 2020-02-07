@@ -17,7 +17,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Payment extends AbstractDataModel implements IdentityInterface
+class Payment extends AbstractIdentity
 {
     /**
      * @var Identity
@@ -26,15 +26,7 @@ class Payment extends AbstractDataModel implements IdentityInterface
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
      */
     protected $customerOrderId = null;
-    
-    /**
-     * @var Identity
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -80,7 +72,7 @@ class Payment extends AbstractDataModel implements IdentityInterface
      */
     public function __construct()
     {
-        $this->id = new Identity();
+        parent::__construct();
         $this->customerOrderId = new Identity();
     }
     
@@ -103,27 +95,7 @@ class Payment extends AbstractDataModel implements IdentityInterface
     {
         return $this->customerOrderId;
     }
-    
-    /**
-     * @param Identity $id
-     * @return Payment
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): Payment
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
-    
+
     /**
      * @param string $billingInfo
      * @return Payment

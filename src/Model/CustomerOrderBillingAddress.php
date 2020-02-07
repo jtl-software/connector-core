@@ -18,16 +18,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CustomerOrderBillingAddress extends AbstractDataModel implements IdentityInterface
+class CustomerOrderBillingAddress extends AbstractIdentity
 {
-    /**
-     * @var Identity Unique customerOrderBillingAddress id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-    
     /**
      * @var string City
      * @Serializer\Type("string")
@@ -163,35 +155,7 @@ class CustomerOrderBillingAddress extends AbstractDataModel implements IdentityI
      * @Serializer\Accessor(getter="getZipCode",setter="setZipCode")
      */
     protected $zipCode = '';
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->id = new Identity();
-    }
 
-    /**
-     * @param Identity $id Unique customerOrderBillingAddress id
-     * @return CustomerOrderBillingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): CustomerOrderBillingAddress
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique customerOrderBillingAddress id
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
-    
     /**
      * @param string $city City
      * @return CustomerOrderBillingAddress

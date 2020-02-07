@@ -18,16 +18,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CustomerGroup extends AbstractDataModel implements IdentityInterface
+class CustomerGroup extends AbstractIdentity
 {
-    /**
-     * @var Identity Unique customerGroup id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-    
     /**
      * @var boolean Optional: Show net prices default instead of gross prices
      * @Serializer\Type("boolean")
@@ -67,35 +59,7 @@ class CustomerGroup extends AbstractDataModel implements IdentityInterface
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = [];
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->id = new Identity();
-    }
-    
-    /**
-     * @param Identity $id Unique customerGroup id
-     * @return CustomerGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): CustomerGroup
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique customerGroup id
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
-    
+
     /**
      * @param boolean $applyNetPrice Optional: Show net prices default instead of gross prices
      * @return CustomerGroup

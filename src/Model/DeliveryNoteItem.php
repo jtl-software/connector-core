@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class DeliveryNoteItem extends AbstractDataModel implements IdentityInterface
+class DeliveryNoteItem extends AbstractIdentity
 {
     /**
      * @var Identity
@@ -33,15 +33,7 @@ class DeliveryNoteItem extends AbstractDataModel implements IdentityInterface
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-    
-    /**
-     * @var Identity
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-    
+
     /**
      * @var double
      * @Serializer\Type("double")
@@ -63,7 +55,7 @@ class DeliveryNoteItem extends AbstractDataModel implements IdentityInterface
      */
     public function __construct()
     {
-        $this->id = new Identity();
+        parent::__construct();
         $this->productId = new Identity();
         $this->customerOrderItemId = new Identity();
     }
@@ -106,27 +98,7 @@ class DeliveryNoteItem extends AbstractDataModel implements IdentityInterface
     {
         return $this->productId;
     }
-    
-    /**
-     * @param Identity $id
-     * @return DeliveryNoteItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): DeliveryNoteItem
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
-    
+
     /**
      * @param double $quantity
      * @return DeliveryNoteItem

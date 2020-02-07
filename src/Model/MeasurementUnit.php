@@ -18,16 +18,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class MeasurementUnit extends AbstractDataModel implements IdentityInterface
+class MeasurementUnit extends AbstractIdentity
 {
-    /**
-     * @var Identity Unit id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-    
     /**
      * @var string Optional UCUM-Code, see  http://unitsofmeasure.org/
      * @Serializer\Type("string")
@@ -51,35 +43,7 @@ class MeasurementUnit extends AbstractDataModel implements IdentityInterface
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = [];
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->id = new Identity();
-    }
-    
-    /**
-     * @param Identity $id Unit id
-     * @return MeasurementUnit
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): MeasurementUnit
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unit id
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
-    
+
     /**
      * @param string $code Optional UCUM-Code, see  http://unitsofmeasure.org/
      * @return MeasurementUnit

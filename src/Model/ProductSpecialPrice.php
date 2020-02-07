@@ -19,16 +19,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductSpecialPrice extends AbstractDataModel implements IdentityInterface
+class ProductSpecialPrice extends AbstractIdentity
 {
-    /**
-     * @var Identity Unique productSpecialPrice id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-
     /**
      * @var DateTime Optional: Activate special price from date
      * @Serializer\Type("DateTime")
@@ -84,34 +76,6 @@ class ProductSpecialPrice extends AbstractDataModel implements IdentityInterface
      * @Serializer\AccessType("reflection")
      */
     protected $items = [];
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->id = new Identity();
-    }
-    
-    /**
-     * @param Identity $id Unique productSpecialPrice id
-     * @return ProductSpecialPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): ProductSpecialPrice
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique productSpecialPrice id
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
 
     /**
      * @param \DateTimeInterface $activeFromDate Optional: Activate special price from date

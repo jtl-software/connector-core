@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Product2Category extends AbstractDataModel implements IdentityInterface
+class Product2Category extends AbstractIdentity
 {
     /**
      * @var Identity Reference to category
@@ -27,21 +27,13 @@ class Product2Category extends AbstractDataModel implements IdentityInterface
      * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
      */
     protected $categoryId = null;
-    
-    /**
-     * @var Identity Unique product2Category id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->id = new Identity();
+        parent::__construct();
         $this->categoryId = new Identity();
     }
     
@@ -63,25 +55,5 @@ class Product2Category extends AbstractDataModel implements IdentityInterface
     public function getCategoryId(): Identity
     {
         return $this->categoryId;
-    }
-    
-    /**
-     * @param Identity $id Unique product2Category id
-     * @return Product2Category
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): Product2Category
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique product2Category id
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
     }
 }

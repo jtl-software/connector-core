@@ -20,16 +20,8 @@ use Jtl\Connector\Core\Definition\ConfigOption;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Category extends AbstractDataModel implements IdentityInterface, IdentificationInterface
+class Category extends AbstractIdentity implements IdentificationInterface
 {
-    /**
-     * @var Identity Unique category id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-    
     /**
      * @var Identity Optional reference to parent category id
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
@@ -99,7 +91,7 @@ class Category extends AbstractDataModel implements IdentityInterface, Identific
      */
     public function __construct()
     {
-        $this->id = new Identity();
+        parent::__construct();
         $this->parentCategoryId = new Identity();
     }
 

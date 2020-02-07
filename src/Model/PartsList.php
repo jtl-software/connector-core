@@ -18,16 +18,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class PartsList extends AbstractDataModel implements IdentityInterface
+class PartsList extends AbstractIdentity
 {
-    /**
-     * @var Identity Unique PartsList id, referenced by product.PartsListId
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-    
     /**
      * @var Identity Reference to a component / product
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
@@ -49,30 +41,10 @@ class PartsList extends AbstractDataModel implements IdentityInterface
      */
     public function __construct()
     {
-        $this->id = new Identity();
+        parent::__construct();
         $this->productId = new Identity();
     }
-    
-    /**
-     * @param Identity $id Unique PartsList id, referenced by product.PartsListId
-     * @return PartsList
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): PartsList
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique PartsList id, referenced by product.PartsListId
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
-    
+
     /**
      * @param Identity $productId Reference to a component / product
      * @return PartsList

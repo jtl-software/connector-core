@@ -18,16 +18,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CustomerOrderItemVariation extends AbstractDataModel implements IdentityInterface
+class CustomerOrderItemVariation extends AbstractIdentity
 {
-    /**
-     * @var Identity Unique customerOrderItemVariation id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-    
     /**
      * @var Identity Reference to productVariation
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
@@ -81,31 +73,11 @@ class CustomerOrderItemVariation extends AbstractDataModel implements IdentityIn
      */
     public function __construct()
     {
-        $this->id = new Identity();
+        parent::__construct();
         $this->productVariationValueId = new Identity();
         $this->productVariationId = new Identity();
     }
 
-    /**
-     * @param Identity $id Unique customerOrderItemVariation id
-     * @return CustomerOrderItemVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): CustomerOrderItemVariation
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique customerOrderItemVariation id
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
-    
     /**
      * @param Identity $productVariationId Reference to productVariation
      * @return CustomerOrderItemVariation

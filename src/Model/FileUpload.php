@@ -18,16 +18,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class FileUpload extends AbstractDataModel implements IdentityInterface
+class FileUpload extends AbstractIdentity
 {
-    /**
-     * @var Identity Unique fileUpload id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-    
     /**
      * @var Identity Reference to product
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
@@ -65,30 +57,10 @@ class FileUpload extends AbstractDataModel implements IdentityInterface
      */
     public function __construct()
     {
-        $this->id = new Identity();
+        parent::__construct();
         $this->productId = new Identity();
     }
-    
-    /**
-     * @param Identity $id Unique fileUpload id
-     * @return FileUpload
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): FileUpload
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique fileUpload id
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
-    
+
     /**
      * @param Identity $productId Reference to product
      * @return FileUpload

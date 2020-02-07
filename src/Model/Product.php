@@ -23,7 +23,7 @@ use stdClass;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Product extends AbstractDataModel  implements IdentityInterface, IdentificationInterface
+class Product extends AbstractIdentity implements IdentificationInterface
 {
     /**
      * @var Identity Optional reference to basePriceUnit
@@ -32,15 +32,7 @@ class Product extends AbstractDataModel  implements IdentityInterface, Identific
      * @Serializer\Accessor(getter="getBasePriceUnitId",setter="setBasePriceUnitId")
      */
     protected $basePriceUnitId = null;
-    
-    /**
-     * @var Identity Unique product id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-    
+
     /**
      * @var Identity Reference to manufacturer
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
@@ -678,7 +670,7 @@ class Product extends AbstractDataModel  implements IdentityInterface, Identific
      */
     public function __construct()
     {
-        $this->id = new Identity();
+        parent::__construct();
         $this->shippingClassId = new Identity();
         $this->masterProductId = new Identity();
         $this->partsListId = new Identity();
@@ -737,27 +729,7 @@ class Product extends AbstractDataModel  implements IdentityInterface, Identific
     {
         return $this->basePriceUnitId;
     }
-    
-    /**
-     * @param Identity $id Unique product id
-     * @return Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): Product
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique product id
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
-    
+
     /**
      * @param Identity $manufacturerId Reference to manufacturer
      * @return Product

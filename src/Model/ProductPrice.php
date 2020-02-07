@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductPrice extends AbstractDataModel implements IdentityInterface
+class ProductPrice extends AbstractIdentity
 {
     /**
      * @var Identity Reference to customerGroup
@@ -35,14 +35,6 @@ class ProductPrice extends AbstractDataModel implements IdentityInterface
      * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
      */
     protected $customerId = null;
-    
-    /**
-     * @var Identity Unique ProductPrice id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
 
     /**
      * @var Identity Reference to product
@@ -65,8 +57,8 @@ class ProductPrice extends AbstractDataModel implements IdentityInterface
      */
     public function __construct()
     {
+        parent::__construct();
         $this->customerGroupId = new Identity();
-        $this->id = new Identity();
         $this->productId = new Identity();
         $this->customerId = new Identity();
     }
@@ -105,25 +97,6 @@ class ProductPrice extends AbstractDataModel implements IdentityInterface
     public function getCustomerId(): Identity
     {
         return $this->customerId;
-    }
-    
-    /**
-     * @param Identity $id Unique ProductPrice id
-     * @return ProductPrice
-     */
-    public function setId(Identity $id): ProductPrice
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique ProductPrice id
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
     }
 
     /**

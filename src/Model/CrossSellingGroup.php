@@ -18,16 +18,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CrossSellingGroup extends AbstractDataModel implements IdentityInterface
+class CrossSellingGroup extends AbstractIdentity
 {
-    /**
-     * @var Identity
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-    
     /**
      * @var CrossSellingGroupI18n[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\CrossSellingGroupI18n>")
@@ -35,35 +27,7 @@ class CrossSellingGroup extends AbstractDataModel implements IdentityInterface
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = [];
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->id = new Identity();
-    }
-    
-    /**
-     * @param Identity $id
-     * @return CrossSellingGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): CrossSellingGroup
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
-    
+
     /**
      * @param CrossSellingGroupI18n $i18n
      * @return CrossSellingGroup

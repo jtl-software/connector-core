@@ -6,8 +6,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use stdClass;
-
 class Features extends AbstractModel
 {
     /**

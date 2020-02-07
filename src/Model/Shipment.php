@@ -19,7 +19,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Shipment extends AbstractDataModel
+class Shipment extends AbstractIdentity
 {
     /**
      * @var Identity Reference to deliveryNote
@@ -28,15 +28,7 @@ class Shipment extends AbstractDataModel
      * @Serializer\Accessor(getter="getDeliveryNoteId",setter="setDeliveryNoteId")
      */
     protected $deliveryNoteId = null;
-    
-    /**
-     * @var Identity Unique shipment id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-    
+
     /**
      * @var string Carrier name
      * @Serializer\Type("string")
@@ -82,7 +74,7 @@ class Shipment extends AbstractDataModel
      */
     public function __construct()
     {
-        $this->id = new Identity();
+        parent::__construct();
         $this->deliveryNoteId = new Identity();
     }
     
@@ -105,27 +97,7 @@ class Shipment extends AbstractDataModel
     {
         return $this->deliveryNoteId;
     }
-    
-    /**
-     * @param Identity $id Unique shipment id
-     * @return Shipment
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): Shipment
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique shipment id
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
-    
+
     /**
      * @param string $carrierName Carrier name
      * @return Shipment

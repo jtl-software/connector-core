@@ -18,16 +18,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class SpecificValue extends AbstractDataModel implements IdentityInterface
+class SpecificValue extends AbstractIdentity
 {
-    /**
-     * @var Identity Unique specificValue id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-
     /**
      * @var integer Optional sort number
      * @Serializer\Type("integer")
@@ -43,34 +35,6 @@ class SpecificValue extends AbstractDataModel implements IdentityInterface
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = [];
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->id = new Identity();
-    }
-    
-    /**
-     * @param Identity $id Unique specificValue id
-     * @return SpecificValue
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): SpecificValue
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique specificValue id
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
 
     /**
      * @param integer $sort Optional sort number

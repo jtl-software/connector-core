@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CustomerOrderShippingAddress extends AbstractDataModel implements IdentityInterface
+class CustomerOrderShippingAddress extends AbstractIdentity
 {
     /**
      * @var Identity Reference to customer
@@ -27,15 +27,7 @@ class CustomerOrderShippingAddress extends AbstractDataModel implements Identity
      * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
      */
     protected $customerId = null;
-    
-    /**
-     * @var Identity Unique customerOrderShippingAddress id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-    
+
     /**
      * @var string City
      * @Serializer\Type("string")
@@ -169,7 +161,7 @@ class CustomerOrderShippingAddress extends AbstractDataModel implements Identity
      */
     public function __construct()
     {
-        $this->id = new Identity();
+        parent::__construct();
         $this->customerId = new Identity();
     }
     
@@ -192,27 +184,7 @@ class CustomerOrderShippingAddress extends AbstractDataModel implements Identity
     {
         return $this->customerId;
     }
-    
-    /**
-     * @param Identity $id Unique customerOrderShippingAddress id
-     * @return CustomerOrderShippingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): CustomerOrderShippingAddress
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique customerOrderShippingAddress id
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
-    
+
     /**
      * @param string $city City
      * @return CustomerOrderShippingAddress

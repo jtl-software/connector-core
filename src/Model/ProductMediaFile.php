@@ -18,15 +18,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductMediaFile extends AbstractDataModel implements IdentityInterface
+class ProductMediaFile extends AbstractIdentity
 {
-    /**
-     * @var Identity Unique MediaFile id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
 
     /**
      * @var string Optional media file category name
@@ -83,34 +76,6 @@ class ProductMediaFile extends AbstractDataModel implements IdentityInterface
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = [];
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->id = new Identity();
-    }
-    
-    /**
-     * @param Identity $id Unique MediaFile id
-     * @return ProductMediaFile
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): ProductMediaFile
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique MediaFile id
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
 
     /**
      * @param string $mediaFileCategory Optional media file category name

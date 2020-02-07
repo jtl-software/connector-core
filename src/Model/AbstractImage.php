@@ -23,7 +23,7 @@ use stdClass;
  *     }
  * )
  */
-abstract class AbstractImage extends AbstractDataModel implements IdentityInterface
+abstract class AbstractImage extends AbstractIdentity
 {
     /**
      * @var Identity
@@ -32,14 +32,6 @@ abstract class AbstractImage extends AbstractDataModel implements IdentityInterf
      * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
      */
     protected $foreignKey = null;
-
-    /**
-     * @var Identity
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
 
     /**
      * @var string
@@ -86,8 +78,8 @@ abstract class AbstractImage extends AbstractDataModel implements IdentityInterf
      */
     public function __construct()
     {
+        parent::__construct();
         $this->foreignKey = new Identity();
-        $this->id = new Identity();
     }
 
     /**
@@ -113,26 +105,6 @@ abstract class AbstractImage extends AbstractDataModel implements IdentityInterf
     public function getForeignKey(): Identity
     {
         return $this->foreignKey;
-    }
-
-    /**
-     * @param Identity $id
-     * @return $this
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): self
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * @return Identity
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
     }
 
     /**

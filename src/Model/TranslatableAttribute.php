@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @package Jtl\Connector\Core\Model\TranslatableAttribute
  * @Serializer\AccessType("public_method")
  */
-class TranslatableAttribute extends AbstractDataModel implements IdentityInterface
+class TranslatableAttribute extends AbstractIdentity
 {
     /**
      * @var boolean
@@ -33,46 +33,12 @@ class TranslatableAttribute extends AbstractDataModel implements IdentityInterfa
     protected $isCustomProperty = false;
 
     /**
-     * @var Identity
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-    /**
      * @var TranslatableAttributeI18n[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\TranslatableAttributeI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = [];
-
-    /**
-     * TranslatableAttribute constructor.
-     */
-    public function __construct()
-    {
-        $this->id = new Identity();
-    }
-
-    /**
-     * @param Identity $id
-     * @return TranslatableAttribute
-     */
-    public function setId(Identity $id): TranslatableAttribute
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * @return Identity
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
 
     /**
      * @param bool $isTranslated

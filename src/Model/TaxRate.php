@@ -16,16 +16,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class TaxRate extends AbstractDataModel implements IdentityInterface
+class TaxRate extends AbstractIdentity
 {
-    /**
-     * @var Identity
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-    
     /**
      * @var double
      * @Serializer\Type("double")
@@ -33,35 +25,7 @@ class TaxRate extends AbstractDataModel implements IdentityInterface
      * @Serializer\Accessor(getter="getRate",setter="setRate")
      */
     protected $rate = 0.0;
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->id = new Identity();
-    }
-    
-    /**
-     * @param Identity $id
-     * @return TaxRate
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): TaxRate
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
-    
+
     /**
      * @param double $rate
      * @return TaxRate

@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductVariation extends AbstractDataModel implements IdentityInterface
+class ProductVariation extends AbstractIdentity
 {
     /**
      * @var string - Multiple values displayed as radio buttons.
@@ -44,14 +44,6 @@ class ProductVariation extends AbstractDataModel implements IdentityInterface
      * @var string - boxes showing a color
      */
     const TYPE_IMAGE_SWATCHES = 'image_swatches';
-    
-    /**
-     * @var Identity Unique productVariation id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
 
     /**
      * @var integer Optional sort number
@@ -92,34 +84,6 @@ class ProductVariation extends AbstractDataModel implements IdentityInterface
      * @Serializer\AccessType("reflection")
      */
     protected $values = [];
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->id = new Identity();
-    }
-    
-    /**
-     * @param Identity $id Unique productVariation id
-     * @return ProductVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): ProductVariation
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique productVariation id
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
 
     /**
      * @param integer $sort Optional sort number

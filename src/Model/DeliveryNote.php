@@ -19,7 +19,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class DeliveryNote extends AbstractDataModel implements IdentityInterface
+class DeliveryNote extends AbstractIdentity
 {
     /**
      * @var Identity Reference to customerOrder
@@ -28,15 +28,7 @@ class DeliveryNote extends AbstractDataModel implements IdentityInterface
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
      */
     protected $customerOrderId = null;
-    
-    /**
-     * @var Identity Unique deliveryNote id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-    
+
     /**
      * @var DateTime Creation date
      * @Serializer\Type("DateTime")
@@ -82,7 +74,7 @@ class DeliveryNote extends AbstractDataModel implements IdentityInterface
      */
     public function __construct()
     {
-        $this->id = new Identity();
+        parent::__construct();
         $this->customerOrderId = new Identity();
     }
     
@@ -105,27 +97,7 @@ class DeliveryNote extends AbstractDataModel implements IdentityInterface
     {
         return $this->customerOrderId;
     }
-    
-    /**
-     * @param Identity $id Unique deliveryNote id
-     * @return DeliveryNote
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): DeliveryNote
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique deliveryNote id
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
-    
+
     /**
      * @param \DateTimeInterface $creationDate Creation date
      * @return DeliveryNote

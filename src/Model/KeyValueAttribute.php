@@ -16,14 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
 class KeyValueAttribute extends AbstractDataModel
 {
     /**
-     * @var string Attribute value
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("value")
-     * @Serializer\Accessor(getter="getValue",setter="setValue")
-     */
-    protected $value = '';
-
-    /**
      * @var string Attribute key
      * @Serializer\Type("string")
      * @Serializer\SerializedName("key")
@@ -32,23 +24,12 @@ class KeyValueAttribute extends AbstractDataModel
     protected $key = '';
 
     /**
-     * @return string Attribute value
+     * @var string Attribute value
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("value")
+     * @Serializer\Accessor(getter="getValue",setter="setValue")
      */
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-
-    /**
-     * @param string $value Attribute value
-     * @return KeyValueAttribute
-     */
-    public function setValue(string $value): KeyValueAttribute
-    {
-        $this->value = $value;
-
-        return $this;
-    }
+    protected $value = '';
 
     /**
      * @return string Attribute key
@@ -65,6 +46,25 @@ class KeyValueAttribute extends AbstractDataModel
     public function setKey(string $key): KeyValueAttribute
     {
         $this->key = $key;
+
+        return $this;
+    }
+
+    /**
+     * @return string Attribute value
+     */
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+
+    /**
+     * @param string $value Attribute value
+     * @return KeyValueAttribute
+     */
+    public function setValue(string $value): KeyValueAttribute
+    {
+        $this->value = $value;
 
         return $this;
     }

@@ -17,7 +17,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ConfigItem extends AbstractDataModel implements IdentityInterface
+class ConfigItem extends AbstractIdentity
 {
     /**
      * @var Identity Reference to configGroup
@@ -26,15 +26,7 @@ class ConfigItem extends AbstractDataModel implements IdentityInterface
      * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
      */
     protected $configGroupId = null;
-    
-    /**
-     * @var Identity Unique configItem id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
-    
+
     /**
      * @var Identity Optional reference to product
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
@@ -160,7 +152,7 @@ class ConfigItem extends AbstractDataModel implements IdentityInterface
      */
     public function __construct()
     {
-        $this->id = new Identity();
+        parent::__construct();
         $this->configGroupId = new Identity();
         $this->productId = new Identity();
     }
@@ -183,26 +175,7 @@ class ConfigItem extends AbstractDataModel implements IdentityInterface
     {
         return $this->configGroupId;
     }
-    
-    /**
-     * @param Identity $id Unique configItem id
-     * @return ConfigItem
-     */
-    public function setId(Identity $id): ConfigItem
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique configItem id
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
-    
+
     /**
      * @param Identity $productId Optional reference to product
      * @return ConfigItem
