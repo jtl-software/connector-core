@@ -1,12 +1,12 @@
 <?php
-namespace Jtl\Connector\Test\Core\Rpc;
+namespace Jtl\Connector\Core\Tests\Rpc;
 
 use Jtl\Connector\Core\Rpc\Packet;
-use Jtl\Connector\Test\Core\TestCase;
+use Jtl\Connector\Core\Tests\TestCase;
 
 /**
  * Class PacketTest
- * @package Jtl\Connector\Test\Core\Rpc
+ * @package Jtl\Connector\Core\Tests\Rpc
  */
 class PacketTest extends TestCase
 {

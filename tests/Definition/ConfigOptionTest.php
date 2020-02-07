@@ -1,9 +1,9 @@
 <?php
-namespace Jtl\Connector\Test\Core\Definition;
+namespace Jtl\Connector\Core\Tests\Definition;
 
 use Jtl\Connector\Core\Definition\ConfigOption;
 use Jtl\Connector\Core\Exception\DefinitionException;
-use Jtl\Connector\Test\Core\TestCase;
+use Jtl\Connector\Core\Tests\TestCase;
 
 class ConfigOptionTest extends TestCase
 {

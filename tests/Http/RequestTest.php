@@ -1,9 +1,9 @@
 <?php
-namespace Jtl\Connector\Test\Core\Http;
+namespace Jtl\Connector\Core\Tests\Http;
 
 use Jtl\Connector\Core\Exception\HttpException;
 use Jtl\Connector\Core\Http\Request;
-use Jtl\Connector\Test\Core\TestCase;
+use Jtl\Connector\Core\Tests\TestCase;
 use org\bovigo\vfs\vfsStream;
 
 /**

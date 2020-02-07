@@ -1,12 +1,12 @@
 <?php
-namespace Jtl\Connector\Test\Core\Utilities;
+namespace Jtl\Connector\Core\Tests\Utilities;
 
 use Jtl\Connector\Core\Utilities\Str;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class StrTest
- * @package Jtl\Connector\Test\Core\Utilities
+ * @package Jtl\Connector\Core\Tests\Utilities
  */
 class StrTest extends TestCase
 {

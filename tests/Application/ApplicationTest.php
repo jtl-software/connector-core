@@ -1,27 +1,22 @@
 <?php
 
-namespace Jtl\Connector\Test\Core\Application;
+namespace Jtl\Connector\Core\Tests\Application;
 
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Application\Request;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
-use Jtl\Connector\Core\Controller\DeleteInterface;
-use Jtl\Connector\Core\Controller\PullInterface;
 use Jtl\Connector\Core\Controller\PushInterface;
-use Jtl\Connector\Core\Controller\StatisticInterface;
-use Jtl\Connector\Core\Controller\TransactionalInterface;
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
-use Jtl\Connector\Core\Model\AbstractDataModel;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Category;
 use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\QueryFilter;
-use Jtl\Connector\Test\Core\TestCase;
-use Jtl\Connector\Test\Stub\Controller\TransactionalControllerStub;
+use Jtl\Connector\Core\Tests\TestCase;
+use Jtl\Connector\Core\Tests\Stub\Controller\TransactionalControllerStub;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 
 /**

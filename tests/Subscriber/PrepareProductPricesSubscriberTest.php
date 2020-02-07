@@ -1,5 +1,5 @@
 <?php
-namespace Jtl\Connector\Test\Core\Subscriber;
+namespace Jtl\Connector\Core\Tests\Subscriber;
 
 use Jtl\Connector\Core\Application\Request;
 use Jtl\Connector\Core\Definition\Action;
@@ -11,11 +11,11 @@ use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\ProductPrice;
 use Jtl\Connector\Core\Model\ProductPriceItem;
 use Jtl\Connector\Core\Subscriber\PrepareProductPricesSubscriber;
-use Jtl\Connector\Test\Core\TestCase;
+use Jtl\Connector\Core\Tests\TestCase;
 
 /**
  * Class PrepareProductPricesSubscriberTest
- * @package Jtl\Connector\Test\Core\Subscriber
+ * @package Jtl\Connector\Core\Tests\Subscriber
  */
 class PrepareProductPricesSubscriberTest extends TestCase
 {

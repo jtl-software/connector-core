@@ -1,11 +1,11 @@
 <?php
-namespace Jtl\Connector\Test\Factory\Faker;
+namespace Jtl\Connector\Core\Tests\Factory\Faker;
 
 use Faker\Provider\Base;
 
 /**
  * Class VatProvider
- * @package Jtl\Connector\Test\Factory\Faker
+ * @package Jtl\Connector\Core\Tests\Factory\Faker
  */
 class VatProvider extends Base
 {

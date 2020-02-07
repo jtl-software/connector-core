@@ -120,26 +120,6 @@ class Category extends AbstractIdentity implements IdentificationInterface
     }
 
     /**
-     * @param Identity $id Unique category id
-     * @return Category
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
-     */
-    public function setId(Identity $id): Category
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity Unique category id
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
-    
-    /**
      * @param Identity $parentCategoryId Optional reference to parent category id
      * @return Category
      * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.

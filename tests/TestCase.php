@@ -1,13 +1,13 @@
 <?php
-namespace Jtl\Connector\Test\Core;
+namespace Jtl\Connector\Core\Tests;
 
 use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Model\Identity;
-use Jtl\Connector\Test\Stub\Logger\LoggerStub;
+use Jtl\Connector\Core\Tests\Stub\Logger\LoggerStub;
 
 /**
  * Class TestCase
- * @package Jtl\Connector\Test
+ * @package Jtl\Connector\Core\Tests
  */
 class TestCase extends \PHPUnit\Framework\TestCase
 {

@@ -1,13 +1,13 @@
 <?php
-namespace Jtl\Connector\Test\Factory;
+namespace Jtl\Connector\Core\Tests\Factory;
 
 use Faker\Factory;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
-use Jtl\Connector\Test\Factory\Faker\VatProvider;
+use Jtl\Connector\Core\Tests\Factory\Faker\VatProvider;
 
 /**
  * Class ModelFactory
- * @package Jtl\Connector\Test\Factory
+ * @package Jtl\Connector\Core\Tests\Factory
  */
 abstract class ModelFactory
 {

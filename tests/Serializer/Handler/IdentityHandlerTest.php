@@ -1,5 +1,5 @@
 <?php
-namespace Jtl\Connector\Test\Core\Serializer\Handler;
+namespace Jtl\Connector\Core\Tests\Serializer\Handler;
 
 use JMS\Serializer\DeserializationContext;
 use JMS\Serializer\JsonDeserializationVisitor;
@@ -7,11 +7,11 @@ use JMS\Serializer\JsonSerializationVisitor;
 use JMS\Serializer\SerializationContext;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Serializer\Handler\IdentityHandler;
-use Jtl\Connector\Test\Core\TestCase;
+use Jtl\Connector\Core\Tests\TestCase;
 
 /**
  * Class IdentityHandlerTest
- * @package Jtl\Connector\Test\Core\Serializer\Handler
+ * @package Jtl\Connector\Core\Tests\Serializer\Handler
  */
 class IdentityHandlerTest extends TestCase
 {

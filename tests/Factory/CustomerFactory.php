@@ -1,11 +1,11 @@
 <?php
-namespace Jtl\Connector\Test\Factory;
+namespace Jtl\Connector\Core\Tests\Factory;
 
 use Jtl\Connector\Core\Model\Customer;
 
 /**
  * Class CustomerFactory
- * @package Jtl\Connector\Test\Factory
+ * @package Jtl\Connector\Core\Tests\Factory
  */
 class CustomerFactory extends ModelFactory
 {

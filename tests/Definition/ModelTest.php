@@ -1,5 +1,5 @@
 <?php
-namespace Jtl\Connector\Test\Core\Definition;
+namespace Jtl\Connector\Core\Tests\Definition;
 
 use Jtl\Connector\Core\Definition\IdentityType;
 use Jtl\Connector\Core\Definition\Model;
@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Class ModelTest
- * @package Jtl\Connector\Test\Core\Definition
+ * @package Jtl\Connector\Core\Tests\Definition
  */
 class ModelTest extends TestCase
 {

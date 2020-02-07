@@ -1,12 +1,12 @@
 <?php
-namespace Jtl\Connector\Test\Core\Config;
+namespace Jtl\Connector\Core\Tests\Config;
 
 use Jtl\Connector\Core\Config\RuntimeConfig;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class RuntimeConfigTest
- * @package Jtl\Connector\Test\Core\Config
+ * @package Jtl\Connector\Core\Tests\Config
  */
 class RuntimeConfigTest extends TestCase
 {

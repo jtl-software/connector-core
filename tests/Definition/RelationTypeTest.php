@@ -1,14 +1,14 @@
 <?php
-namespace Jtl\Connector\Test\Core\Definition;
+namespace Jtl\Connector\Core\Tests\Definition;
 
 use Jtl\Connector\Core\Definition\IdentityType;
 use Jtl\Connector\Core\Definition\RelationType;
 use Jtl\Connector\Core\Exception\DefinitionException;
-use Jtl\Connector\Test\Core\TestCase;
+use Jtl\Connector\Core\Tests\TestCase;
 
 /**
  * Class RelationTypeTest
- * @package Jtl\Connector\Test\Core\Definition
+ * @package Jtl\Connector\Core\Tests\Definition
  */
 class RelationTypeTest extends TestCase
 {

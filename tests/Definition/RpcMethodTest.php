@@ -1,12 +1,12 @@
 <?php
-namespace Jtl\Connector\Test\Core\Definition;
+namespace Jtl\Connector\Core\Tests\Definition;
 
 use Jtl\Connector\Core\Definition\RpcMethod;
-use Jtl\Connector\Test\Core\TestCase;
+use Jtl\Connector\Core\Tests\TestCase;
 
 /**
  * Class RpcMethodTest
- * @package Jtl\Connector\Test\Core\Definition
+ * @package Jtl\Connector\Core\Tests\Definition
  */
 class RpcMethodTest extends TestCase
 {

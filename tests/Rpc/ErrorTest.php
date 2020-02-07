@@ -1,13 +1,13 @@
 <?php
-namespace Jtl\Connector\Test\Core\Rpc;
+namespace Jtl\Connector\Core\Tests\Rpc;
 
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Rpc\Error;
-use Jtl\Connector\Test\Core\TestCase;
+use Jtl\Connector\Core\Tests\TestCase;
 
 /**
  * Class ErrorTest
- * @package Jtl\Connector\Test\Core\Rpc
+ * @package Jtl\Connector\Core\Tests\Rpc
  */
 class ErrorTest extends TestCase
 {

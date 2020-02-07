@@ -1,12 +1,12 @@
 <?php
-namespace Jtl\Connector\Test\Core\Definition;
+namespace Jtl\Connector\Core\Tests\Definition;
 
 use Jtl\Connector\Core\Definition\Action;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class ActionTest
- * @package Jtl\Connector\Test\Core\Definition
+ * @package Jtl\Connector\Core\Tests\Definition
  */
 class ActionTest extends TestCase
 {

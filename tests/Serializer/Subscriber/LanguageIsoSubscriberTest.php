@@ -1,5 +1,5 @@
 <?php
-namespace Jtl\Connector\Test\Serializer\Subscriber;
+namespace Jtl\Connector\Core\Tests\Serializer\Subscriber;
 
 use Jtl\Connector\Core\Model\AbstractI18n;
 use Jtl\Connector\Core\Model\CategoryI18n;
@@ -8,11 +8,11 @@ use Jtl\Connector\Core\Model\ImageI18n;
 use Jtl\Connector\Core\Model\ProductI18n;
 use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
-use Jtl\Connector\Test\Core\TestCase;
+use Jtl\Connector\Core\Tests\TestCase;
 
 /**
  * Class LanguageIsoSubscriberTest
- * @package Jtl\Connector\Test\Serializer\Subscriber
+ * @package Jtl\Connector\Core\Tests\Serializer\Subscriber
  */
 class LanguageIsoSubscriberTest extends TestCase
 {
