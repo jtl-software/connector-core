@@ -8,9 +8,9 @@
 namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
-use JMS\Serializer\Annotation as Serializer;
 use Jtl\Connector\Core\Config\RuntimeConfig;
 use Jtl\Connector\Core\Definition\ConfigOption;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * A category with sort number, link to parent category and level
