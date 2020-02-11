@@ -1,6 +1,6 @@
 <?php
 
-namespace Jtl\Connector\Core\Tests\Application;
+namespace Jtl\Connector\Core\Test\Application;
 
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Application\Request;
@@ -15,8 +15,8 @@ use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Category;
 use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\QueryFilter;
-use Jtl\Connector\Core\Tests\TestCase;
-use Jtl\Connector\Core\Tests\Stub\Controller\TransactionalControllerStub;
+use Jtl\Connector\Core\Test\TestCase;
+use Jtl\Connector\Core\Test\Stub\Controller\TransactionalControllerStub;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 
 /**

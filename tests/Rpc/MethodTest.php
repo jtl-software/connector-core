@@ -1,14 +1,14 @@
 <?php
-namespace Jtl\Connector\Core\Tests\Rpc;
+namespace Jtl\Connector\Core\Test\Rpc;
 
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Rpc\Method;
-use Jtl\Connector\Core\Tests\TestCase;
+use Jtl\Connector\Core\Test\TestCase;
 
 /**
  * Class MethodTest
- * @package Jtl\Connector\Core\Tests\Rpc
+ * @package Jtl\Connector\Core\Test\Rpc
  */
 class MethodTest extends TestCase
 {

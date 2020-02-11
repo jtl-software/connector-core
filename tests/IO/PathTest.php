@@ -1,12 +1,12 @@
 <?php
-namespace Jtl\Connector\Core\Tests\IO;
+namespace Jtl\Connector\Core\Test\IO;
 
 use Jtl\Connector\Core\IO\Path;
-use Jtl\Connector\Core\Tests\TestCase;
+use Jtl\Connector\Core\Test\TestCase;
 
 /**
  * Class PathTest
- * @package Jtl\Connector\Core\Tests\IO
+ * @package Jtl\Connector\Core\Test\IO
  */
 class PathTest extends TestCase
 {

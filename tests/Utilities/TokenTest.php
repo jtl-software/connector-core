@@ -1,12 +1,12 @@
 <?php
-namespace Jtl\Connector\Core\Tests\Utilities;
+namespace Jtl\Connector\Core\Test\Utilities;
 
 use Jtl\Connector\Core\Utilities\Token;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class TokenTest
- * @package Jtl\Connector\Core\Tests\Utilities
+ * @package Jtl\Connector\Core\Test\Utilities
  */
 class TokenTest extends TestCase
 {

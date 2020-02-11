@@ -1,11 +1,11 @@
 <?php
-namespace Jtl\Connector\Core\Tests\Stub\Logger;
+namespace Jtl\Connector\Core\Test\Stub\Logger;
 
 use Monolog\Logger as MonoLogger;
 
 /**
  * Class LoggerStub
- * @package Jtl\Connector\Core\Tests\Stub\Logger
+ * @package Jtl\Connector\Core\Test\Stub\Logger
  */
 class LoggerStub
 {

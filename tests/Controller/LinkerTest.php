@@ -1,5 +1,5 @@
 <?php
-namespace Jtl\Connector\Core\Tests\Controller;
+namespace Jtl\Connector\Core\Test\Controller;
 
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Controller\LinkerController;
@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Class LinkerTest
- * @package Jtl\Connector\Core\Tests\Controller
+ * @package Jtl\Connector\Core\Test\Controller
  */
 class LinkerTest extends TestCase
 {

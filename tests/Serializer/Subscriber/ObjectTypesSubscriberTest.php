@@ -1,5 +1,5 @@
 <?php
-namespace Jtl\Connector\Core\Tests\Serializer\Subscriber;
+namespace Jtl\Connector\Core\Test\Serializer\Subscriber;
 
 use Jtl\Connector\Core\Model\AbstractDataModel;
 use Jtl\Connector\Core\Model\Category;
@@ -9,7 +9,7 @@ use Jtl\Connector\Core\Model\TranslatableAttribute;
 use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
-use Jtl\Connector\Core\Tests\TestCase;
+use Jtl\Connector\Core\Test\TestCase;
 
 /**
  * Class ObjectTypesSubscriberTest

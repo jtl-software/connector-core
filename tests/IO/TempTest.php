@@ -1,12 +1,12 @@
 <?php
-namespace Jtl\Connector\Core\Tests\IO;
+namespace Jtl\Connector\Core\Test\IO;
 
 use Jtl\Connector\Core\IO\Temp;
-use Jtl\Connector\Core\Tests\TestCase;
+use Jtl\Connector\Core\Test\TestCase;
 
 /**
  * Class TempTest
- * @package Jtl\Connector\Core\Tests\IO
+ * @package Jtl\Connector\Core\Test\IO
  */
 class TempTest extends TestCase
 {

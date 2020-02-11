@@ -1,14 +1,14 @@
 <?php
-namespace Jtl\Connector\Core\Tests\Rpc;
+namespace Jtl\Connector\Core\Test\Rpc;
 
 use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
-use Jtl\Connector\Core\Tests\TestCase;
+use Jtl\Connector\Core\Test\TestCase;
 
 /**
  * Class ResponsePacketTest
- * @package Jtl\Connector\Core\Tests\Rpc
+ * @package Jtl\Connector\Core\Test\Rpc
  */
 class ResponsePacketTest extends TestCase
 {

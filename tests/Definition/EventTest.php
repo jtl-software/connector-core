@@ -1,15 +1,15 @@
 <?php
-namespace Jtl\Connector\Core\Tests\Definition;
+namespace Jtl\Connector\Core\Test\Definition;
 
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Exception\DefinitionException;
-use Jtl\Connector\Core\Tests\TestCase;
+use Jtl\Connector\Core\Test\TestCase;
 
 /**
  * Class EventTest
- * @package Jtl\Connector\Core\Tests\Definition
+ * @package Jtl\Connector\Core\Test\Definition
  */
 class EventTest extends TestCase
 {

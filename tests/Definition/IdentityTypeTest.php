@@ -1,12 +1,12 @@
 <?php
-namespace Jtl\Connector\Core\Tests\Definition;
+namespace Jtl\Connector\Core\Test\Definition;
 
 use Jtl\Connector\Core\Definition\IdentityType;
-use Jtl\Connector\Core\Tests\TestCase;
+use Jtl\Connector\Core\Test\TestCase;
 
 /**
  * Class IdentityTypeTest
- * @package Jtl\Connector\Core\Tests\Definition
+ * @package Jtl\Connector\Core\Test\Definition
  */
 class IdentityTypeTest extends TestCase
 {

@@ -1,8 +1,8 @@
 <?php
-namespace Jtl\Connector\Core\Tests\Definition;
+namespace Jtl\Connector\Core\Test\Definition;
 
 use Jtl\Connector\Core\Definition\Controller;
-use Jtl\Connector\Core\Tests\TestCase;
+use Jtl\Connector\Core\Test\TestCase;
 
 class ControllerTest extends TestCase
 {

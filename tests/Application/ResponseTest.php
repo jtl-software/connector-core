@@ -1,14 +1,14 @@
 <?php
 
-namespace Jtl\Connector\Core\Tests\Application;
+namespace Jtl\Connector\Core\Test\Application;
 
 use Jtl\Connector\Core\Application\Response;
 use Jtl\Connector\Core\Model\Identity;
-use Jtl\Connector\Core\Tests\TestCase;
+use Jtl\Connector\Core\Test\TestCase;
 
 /**
  * Class ResponseTest
- * @package Jtl\Connector\Core\Tests\Application
+ * @package Jtl\Connector\Core\Test\Application
  */
 class ResponseTest extends TestCase
 {

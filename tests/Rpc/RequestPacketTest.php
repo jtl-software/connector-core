@@ -1,13 +1,13 @@
 <?php
-namespace Jtl\Connector\Core\Tests\Rpc;
+namespace Jtl\Connector\Core\Test\Rpc;
 
 use JMS\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Rpc\RequestPacket;
-use Jtl\Connector\Core\Tests\TestCase;
+use Jtl\Connector\Core\Test\TestCase;
 
 /**
  * Class RequestPacketTest
- * @package Jtl\Connector\Core\Tests\Rpc
+ * @package Jtl\Connector\Core\Test\Rpc
  */
 class RequestPacketTest extends TestCase
 {

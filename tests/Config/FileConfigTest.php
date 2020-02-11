@@ -1,13 +1,13 @@
 <?php
-namespace Jtl\Connector\Core\Tests\Config;
+namespace Jtl\Connector\Core\Test\Config;
 
 use Jtl\Connector\Core\Config\FileConfig;
 use Jtl\Connector\Core\Exception\ConfigException;
-use Jtl\Connector\Core\Tests\TestCase;
+use Jtl\Connector\Core\Test\TestCase;
 
 /**
  * Class FileConfig
- * @package Jtl\Connector\Core\Tests\Config
+ * @package Jtl\Connector\Core\Test\Config
  */
 class FileConfigTest extends TestCase
 {

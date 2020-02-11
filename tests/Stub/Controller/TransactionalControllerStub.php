@@ -1,5 +1,5 @@
 <?php
-namespace Jtl\Connector\Core\Tests\Stub\Controller;
+namespace Jtl\Connector\Core\Test\Stub\Controller;
 
 use Jtl\Connector\Core\Controller\DeleteInterface;
 use Jtl\Connector\Core\Controller\PullInterface;
@@ -11,7 +11,7 @@ use Jtl\Connector\Core\Model\QueryFilter;
 
 /**
  * Class TransactionalController
- * @package Jtl\Connector\Core\Tests\Stub\Controller
+ * @package Jtl\Connector\Core\Test\Stub\Controller
  */
 class TransactionalControllerStub implements DeleteInterface, StatisticInterface, PullInterface, PushInterface, TransactionalInterface
 {

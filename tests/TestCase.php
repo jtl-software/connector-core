@@ -1,9 +1,9 @@
 <?php
-namespace Jtl\Connector\Core\Tests;
+namespace Jtl\Connector\Core\Test;
 
 use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Model\Identity;
-use Jtl\Connector\Core\Tests\Stub\Logger\LoggerStub;
+use Jtl\Connector\Core\Test\Stub\Logger\LoggerStub;
 
 /**
  * Class TestCase

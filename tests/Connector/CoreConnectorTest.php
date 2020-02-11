@@ -1,15 +1,15 @@
 <?php
-namespace Jtl\Connector\Core\Tests\Connector;
+namespace Jtl\Connector\Core\Test\Connector;
 
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
 use Jtl\Connector\Core\Connector\CoreConnector;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
-use Jtl\Connector\Core\Tests\TestCase;
+use Jtl\Connector\Core\Test\TestCase;
 
 /**
  * Class CoreConnectorTest
- * @package Jtl\Connector\Core\Tests\Connector
+ * @package Jtl\Connector\Core\Test\Connector
  */
 class CoreConnectorTest extends TestCase
 {

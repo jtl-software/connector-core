@@ -1,5 +1,5 @@
 <?php
-namespace Jtl\Connector\Core\Tests\Controller;
+namespace Jtl\Connector\Core\Test\Controller;
 
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
@@ -11,12 +11,12 @@ use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\Features;
 use Jtl\Connector\Core\Model\Session;
-use Jtl\Connector\Core\Tests\TestCase;
+use Jtl\Connector\Core\Test\TestCase;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 
 /**
  * Class ConnectorTest
- * @package Jtl\Connector\Core\Tests\Controller
+ * @package Jtl\Connector\Core\Test\Controller
  */
 class ConnectorTest extends TestCase
 {

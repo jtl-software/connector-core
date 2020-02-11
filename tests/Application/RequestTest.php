@@ -1,12 +1,12 @@
 <?php
-namespace Jtl\Connector\Core\Tests\Application;
+namespace Jtl\Connector\Core\Test\Application;
 
 use Jtl\Connector\Core\Application\Request;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class RequestTest
- * @package Jtl\Connector\Core\Tests\Application
+ * @package Jtl\Connector\Core\Test\Application
  */
 class RequestTest extends TestCase
 {
