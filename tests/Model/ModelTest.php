@@ -2,7 +2,7 @@
 namespace Jtl\Connector\Core\Tests\Model;
 
 use Jtl\Connector\Core\Definition\Model;
-use Jtl\Connector\Core\Tests\TestCase;
+use Jtl\Connector\Core\Test\TestCase;
 
 class ModelTest extends TestCase
 {
@@ -26,6 +26,7 @@ class ModelTest extends TestCase
             'I18nInterface',
             'FeatureEntity',
             'FeatureFlag',
+            'AbstractOrderAddress',
         ];
 
         foreach ($models as $model) {
