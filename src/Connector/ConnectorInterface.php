@@ -34,4 +34,19 @@ interface ConnectorInterface
      * @return string
      */
     public function getControllerNamespace(): string;
+
+    /**
+     * @return string
+     */
+    public function getEndpointVersion(): string;
+
+    /**
+     * @return string
+     */
+    public function getPlatformVersion(): string;
+
+    /**
+     * @return string
+     */
+    public function getPlatformName(): string;
 }

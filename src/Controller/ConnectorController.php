@@ -7,6 +7,8 @@
 
 namespace Jtl\Connector\Core\Controller;
 
+use Jtl\Connector\Core\Application\Application;
+use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\AuthenticationException;
@@ -14,6 +16,8 @@ use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\MissingRequirementException;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
+use Jtl\Connector\Core\Model\ConnectorIdentification;
+use Jtl\Connector\Core\Model\ConnectorServerInfo;
 use Jtl\Connector\Core\Model\Features;
 use Jtl\Connector\Core\Model\Session;
 use Jtl\Connector\Core\Serializer\Json;
@@ -140,5 +144,53 @@ class ConnectorController extends AbstractController
             ->setSessionId(session_id())
             ->setLifetime((int)ini_get('session.gc_maxlifetime'))
         ;
+    }
+
+    /**
+     * @param ConnectorInterface $endpointConnector
+     * @return ConnectorIdentification
+     */
+    public function identify(ConnectorInterface $endpointConnector): ConnectorIdentification
+    {
+        $returnBytes = function ($data): int {
+            $data = trim($data);
+            $len = strlen($data);
+            $value = substr($data, 0, $len - 1);
+            $unit = strtolower(substr($data, $len - 1));
+            switch ($unit) {
+                case 'g':
+                    $value *= 1024;
+                    break;
+                case 'k':
+                    $value /= 1024;
+                    break;
+            }
+            return (int)round($value);
+        };
+
+        $serverInfo = new ConnectorServerInfo();
+        $serverInfo
+            ->setMemoryLimit($returnBytes(ini_get('memory_limit')))
+            ->setExecutionTime((int)ini_get('max_execution_time'))
+            ->setPostMaxSize($returnBytes(ini_get('post_max_size')))
+            ->setUploadMaxFilesize($returnBytes(ini_get('upload_max_filesize')));
+
+        $connector = new ConnectorIdentification();
+        $connector
+            ->setEndpointVersion($endpointConnector->getEndpointVersion())
+            ->setPlatformName($endpointConnector->getPlatformName())
+            ->setPlatformVersion($endpointConnector->getPlatformVersion())
+            ->setProtocolVersion(Application::PROTOCOL_VERSION)
+            ->setServerInfo($serverInfo);
+
+        return $connector;
+    }
+
+    /**
+     * @return bool
+     */
+    public function finish(): bool
+    {
+        return true;
     }
 }

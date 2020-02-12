@@ -3,6 +3,7 @@ namespace Jtl\Connector\Core\Test\Controller;
 
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
+use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Controller\ConnectorController;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\AuthenticationException;
@@ -191,6 +192,29 @@ class ConnectorTest extends TestCase
 
         $this->assertInstanceOf(Session::class,$session);
         $this->assertNotEmpty($session->getLifetime());
+    }
+
+    /**
+     *
+     */
+    public function testIdentify()
+    {
+        $endpointVersion = "1.0";
+        $platformName = "ConnectorPlatform";
+        $platformVersion = "0.1";
+
+        $endpointConnector = \Mockery::mock(ConnectorInterface::class);
+        $endpointConnector->shouldReceive('getEndpointVersion')->andReturn($endpointVersion);
+        $endpointConnector->shouldReceive('getPlatformVersion')->andReturn($platformVersion);
+        $endpointConnector->shouldReceive('getPlatformName')->andReturn($platformName);
+
+        $controller = $this->createConnectorController();
+        $connectorIdentification = $controller->identify($endpointConnector);
+
+        $this->assertSame($endpointVersion, $connectorIdentification->getEndpointVersion());
+        $this->assertSame($platformName, $connectorIdentification->getPlatformName());
+        $this->assertSame($platformVersion, $connectorIdentification->getPlatformVersion());
+        $this->assertSame(Application::PROTOCOL_VERSION, $connectorIdentification->getProtocolVersion());
     }
 
     /**

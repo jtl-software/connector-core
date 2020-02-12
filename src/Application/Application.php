@@ -245,7 +245,7 @@ class Application
      */
     protected function execute(RequestPacket $requestPacket, Method $method): ResponsePacket
     {
-        if ($method->isCore()) {
+        if ($method->isCore() || $method->getController() === Controller::CONNECTOR) {
             $connector = new CoreConnector(
                 $this->endpointConnector->getPrimaryKeyMapper(),
                 $this->endpointConnector->getTokenValidator()
@@ -458,7 +458,9 @@ class Application
                     throw $ex;
                 }
                 break;
-
+            case Action::IDENTIFY:
+                $result = $controllerObject->$action($this->getEndpointConnector());
+                break;
             default:
                 $param = count($params) > 0 ? reset($params) : null;
                 $result = $controllerObject->$action($param);
