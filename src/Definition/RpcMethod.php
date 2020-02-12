@@ -26,7 +26,7 @@ final class RpcMethod
     protected static $mappedMethods = [
         self::IDENTIFY => 'core.connector.identify',
         self::FINISH => 'core.connector.finish',
-        self::CLEAR => 'core.connector.linkerClear',
+        self::CLEAR => 'core.connector.clear',
     ];
 
     /**

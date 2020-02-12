@@ -154,9 +154,7 @@ class Application
             $jtlrpc = HttpRequest::getJtlrpc();
             $requestPacket = RequestPacket::createFromJtlrpc($jtlrpc, $this->serializer);
 
-            $requestPacket->setMethod(RpcMethod::mapMethod($requestPacket->getMethod()));
-
-            $method = Method::createFromRequestPacket($requestPacket);
+            $method = Method::createFromRpcMethod(RpcMethod::mapMethod($requestPacket->getMethod()));
 
             if (!$requestPacket->isValid() || !RpcMethod::isMethod($requestPacket->getMethod())) {
                 throw new RpcException("Invalid request", ErrorCode::INVALID_REQUEST);

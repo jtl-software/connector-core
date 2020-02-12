@@ -168,15 +168,13 @@ class ConnectorController extends AbstractController
             return (int)round($value);
         };
 
-        $serverInfo = new ConnectorServerInfo();
-        $serverInfo
+        $serverInfo = (new ConnectorServerInfo())
             ->setMemoryLimit($returnBytes(ini_get('memory_limit')))
             ->setExecutionTime((int)ini_get('max_execution_time'))
             ->setPostMaxSize($returnBytes(ini_get('post_max_size')))
             ->setUploadMaxFilesize($returnBytes(ini_get('upload_max_filesize')));
 
-        $connector = new ConnectorIdentification();
-        $connector
+        $connector = (new ConnectorIdentification())
             ->setEndpointVersion($endpointConnector->getEndpointVersion())
             ->setPlatformName($endpointConnector->getPlatformName())
             ->setPlatformVersion($endpointConnector->getPlatformVersion())

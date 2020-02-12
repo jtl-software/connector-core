@@ -63,7 +63,7 @@ class RpcMethodTest extends TestCase
     public function mapMethodDataProvider()
     {
         return [
-            [RpcMethod::CLEAR, 'core.connector.linkerClear'],
+            [RpcMethod::CLEAR, 'core.connector.clear'],
             [RpcMethod::IDENTIFY, 'core.connector.identify'],
             [RpcMethod::FINISH, 'core.connector.finish'],
             [RpcMethod::AUTH, RpcMethod::AUTH],
