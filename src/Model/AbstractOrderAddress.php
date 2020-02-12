@@ -1,16 +1,10 @@
 <?php
 namespace Jtl\Connector\Core\Model;
 
-abstract class AbstractOrderAddress extends AbstractDataModel implements IdentityInterface
-{
-    /**
-     * @var Identity
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
-    protected $id = null;
+use JMS\Serializer\Annotation as Serializer;
 
+abstract class AbstractOrderAddress extends AbstractIdentity
+{
     /**
      * @var string City
      * @Serializer\Type("string")
@@ -138,32 +132,6 @@ abstract class AbstractOrderAddress extends AbstractDataModel implements Identit
      * @Serializer\Accessor(getter="getZipCode",setter="setZipCode")
      */
     protected $zipCode = '';
-
-    /**
-     * AbstractOrderAddress constructor.
-     */
-    public function __construct()
-    {
-        $this->id = new Identity();
-    }
-
-    /**
-     * @param Identity $id
-     * @return $this
-     */
-    public function setId(Identity $id): self
-    {
-        $this->id = $id;
-        return $this;
-    }
-
-    /**
-     * @return Identity
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
 
     /**
      * @param string $city
