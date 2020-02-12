@@ -153,6 +153,9 @@ class Application
         try {
             $jtlrpc = HttpRequest::getJtlrpc();
             $requestPacket = RequestPacket::createFromJtlrpc($jtlrpc, $this->serializer);
+
+            $requestPacket->setMethod(RpcMethod::mapMethod($requestPacket->getMethod()));
+
             $method = Method::createFromRequestPacket($requestPacket);
 
             if (!$requestPacket->isValid() || !RpcMethod::isMethod($requestPacket->getMethod())) {
@@ -245,7 +248,7 @@ class Application
      */
     protected function execute(RequestPacket $requestPacket, Method $method): ResponsePacket
     {
-        if ($method->isCore() || $method->getController() === Controller::CONNECTOR) {
+        if ($method->isCore()) {
             $connector = new CoreConnector(
                 $this->endpointConnector->getPrimaryKeyMapper(),
                 $this->endpointConnector->getTokenValidator()

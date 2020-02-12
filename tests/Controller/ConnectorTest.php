@@ -220,11 +220,37 @@ class ConnectorTest extends TestCase
     /**
      *
      */
+    public function testClearSuccess()
+    {
+        $application = \Mockery::mock(Application::class);
+        $application->shouldReceive('getLinker->clear')->andReturnTrue();
+
+        $linker = new ConnectorController($application);
+
+        $response = $linker->clear(['foo']);
+        $this->assertTrue($response);
+    }
+
+    /**
+     *
+     */
+    public function testClearFailure()
+    {
+        $application = \Mockery::mock(Application::class);
+        $application->shouldReceive('getLinker->clear')->andReturnFalse();
+
+        $linker = new ConnectorController($application);
+
+        $response = $linker->clear(true);
+        $this->assertFalse($response);
+    }
+
+    /**
+     *
+     */
     protected function tearDown(): void
     {
         parent::tearDown();
         \Mockery::close();
     }
-
-
 }

@@ -45,7 +45,9 @@ class CoreConnector implements ConnectorInterface
         $this->tokenValidator = $tokenValidator;
     }
 
-
+    /**
+     * @param Application $application
+     */
     public function initialize(Application $application)
     {
     }
@@ -74,5 +76,29 @@ class CoreConnector implements ConnectorInterface
     public function getControllerNamespace(): string
     {
         return $this->controllerNamespace;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEndpointVersion(): string
+    {
+        return "";
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlatformVersion(): string
+    {
+        return "";
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlatformName(): string
+    {
+        return "";
     }
 }

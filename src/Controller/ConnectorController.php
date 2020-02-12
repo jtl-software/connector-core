@@ -193,4 +193,14 @@ class ConnectorController extends AbstractController
     {
         return true;
     }
+
+    /**
+     * @param null $params
+     * @return bool
+     */
+    public function clear($params = null)
+    {
+        //TODO: set type in clear method
+        return $this->application->getLinker()->clear();
+    }
 }
