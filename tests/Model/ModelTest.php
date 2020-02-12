@@ -1,7 +1,9 @@
 <?php
 namespace Jtl\Connector\Core\Tests\Model;
 
+use JMS\Serializer\SerializationContext;
 use Jtl\Connector\Core\Definition\Model;
+use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Test\TestCase;
 
 class ModelTest extends TestCase
@@ -29,6 +31,8 @@ class ModelTest extends TestCase
             'AbstractOrderAddress',
         ];
 
+        $serializer = SerializerBuilder::getInstance()->build();
+
         foreach ($models as $model) {
 
             $fileInfo = new \SplFileInfo($model);
@@ -41,6 +45,9 @@ class ModelTest extends TestCase
             $fullModelClassName = sprintf("%s\\%s", Model::MODEL_NAMESPACE, $modelName);
 
             $obj = new $fullModelClassName();
+
+            $context = (new SerializationContext())->setSerializeNull(true);
+            $serializer->toArray($obj, $context);
         }
     }
 }

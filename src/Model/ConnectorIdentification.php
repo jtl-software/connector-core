@@ -47,7 +47,7 @@ class ConnectorIdentification extends AbstractDataModel
      * @Serializer\SerializedName("protocolVersion")
      * @Serializer\Accessor(getter="getProtocolVersion",setter="setProtocolVersion")
      */
-    protected $protocolVersion = '';
+    protected $protocolVersion = 0;
     
     /**
      * @var ConnectorServerInfo
