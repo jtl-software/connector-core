@@ -67,13 +67,15 @@ class CustomerOrderItemVariation extends AbstractIdentity
      * @Serializer\Accessor(getter="getValueName",setter="setValueName")
      */
     protected $valueName = '';
-    
+
     /**
-     * Constructor
+     * Constructor.
+     * @param string $endpoint
+     * @param int $host
      */
-    public function __construct()
+    public function __construct(string $endpoint = '', int $host = 0)
     {
-        parent::__construct();
+        parent::__construct($endpoint, $host);
         $this->productVariationValueId = new Identity();
         $this->productVariationId = new Identity();
     }

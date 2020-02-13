@@ -68,13 +68,15 @@ class Shipment extends AbstractIdentity
      * @Serializer\Accessor(getter="getTrackingUrl",setter="setTrackingUrl")
      */
     protected $trackingUrl = '';
-    
+
     /**
-     * Constructor
+     * Constructor.
+     * @param string $endpoint
+     * @param int $host
      */
-    public function __construct()
+    public function __construct(string $endpoint = '', int $host = 0)
     {
-        parent::__construct();
+        parent::__construct($endpoint, $host);
         $this->deliveryNoteId = new Identity();
     }
     

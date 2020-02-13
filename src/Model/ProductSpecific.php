@@ -27,13 +27,15 @@ class ProductSpecific extends AbstractIdentity
      * @Serializer\Accessor(getter="getSpecificValueId",setter="setSpecificValueId")
      */
     protected $specificValueId = null;
-    
+
     /**
-     * Constructor
+     * Constructor.
+     * @param string $endpoint
+     * @param int $host
      */
-    public function __construct()
+    public function __construct(string $endpoint = '', int $host = 0)
     {
-        parent::__construct();
+        parent::__construct($endpoint, $host);
         $this->specificValueId = new Identity();
     }
 

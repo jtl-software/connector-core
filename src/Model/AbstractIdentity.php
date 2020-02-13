@@ -14,11 +14,13 @@ abstract class AbstractIdentity extends AbstractDataModel implements IdentityInt
     protected $id = null;
 
     /**
-     * Constructor
+     * AbstractIdentity constructor.
+     * @param string $endpoint
+     * @param int $host
      */
-    public function __construct()
+    public function __construct(string $endpoint = '', int $host = 0)
     {
-        $this->id = new Identity();
+        $this->id = new Identity($endpoint, $host);
     }
 
     /**

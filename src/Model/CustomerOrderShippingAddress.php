@@ -29,15 +29,6 @@ class CustomerOrderShippingAddress extends AbstractOrderAddress
     protected $customerId = null;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->customerId = new Identity();
-    }
-    
-    /**
      * @param Identity $customerId Reference to customer
      * @return CustomerOrderShippingAddress
      * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.

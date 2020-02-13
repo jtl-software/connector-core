@@ -49,13 +49,15 @@ class DeliveryNoteItem extends AbstractIdentity
      * @Serializer\AccessType("reflection")
      */
     protected $info = [];
-    
+
     /**
-     * Constructor
+     * Constructor.
+     * @param string $endpoint
+     * @param int $host
      */
-    public function __construct()
+    public function __construct(string $endpoint = '', int $host = 0)
     {
-        parent::__construct();
+        parent::__construct($endpoint, $host);
         $this->productId = new Identity();
         $this->customerOrderItemId = new Identity();
     }

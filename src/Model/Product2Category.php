@@ -29,11 +29,13 @@ class Product2Category extends AbstractIdentity
     protected $categoryId = null;
 
     /**
-     * Constructor
+     * Constructor.
+     * @param string $endpoint
+     * @param int $host
      */
-    public function __construct()
+    public function __construct(string $endpoint = '', int $host = 0)
     {
-        parent::__construct();
+        parent::__construct($endpoint, $host);
         $this->categoryId = new Identity();
     }
     
