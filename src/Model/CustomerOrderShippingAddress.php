@@ -28,6 +28,13 @@ class CustomerOrderShippingAddress extends AbstractOrderAddress
      */
     protected $customerId = null;
 
+    public function __construct(string $endpoint = '', int $host = 0)
+    {
+        parent::__construct($endpoint, $host);
+        $this->customerId = new Identity();
+    }
+
+
     /**
      * @param Identity $customerId Reference to customer
      * @return CustomerOrderShippingAddress
